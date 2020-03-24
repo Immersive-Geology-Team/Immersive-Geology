@@ -90,7 +90,27 @@ repositories {
         name 'DVS1 Maven FS'
         url 'https://dvs1.progwml6.com/files/maven'
     }
-    repositories {//Curseforge maven, in case some other maven goes offline and for mods that don't have a maven
+
+    maven { // CraftTweaker
+        name 'jared maven'
+        url 'https://maven.blamejared.com/'
+    }
+
+    maven { // ModMaven, there is a bunch of stuff on there
+        name 'ModMaven'
+        url "https://modmaven.k-4u.nl/"
+    }
+
+    maven { // Albedo Lights
+        url 'https://repo.elytradev.com/'
+    }
+
+    maven { // CTM
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+
+    repositories {//Curseforge maven, in case some other maven goes offline
         maven {
             name = "CurseForge"
             url = "https://minecraft.curseforge.com/api/maven/"
@@ -100,9 +120,8 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
-    compile "blusunrize:ImmersiveEngineering:0.14-93-+"
+    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:0.14-93-+")
     runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11")
-    runtimeOnly fg.deobf("nbtedit:NBTEdit:0.8.2")
     compileOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11:api")
     //testImplementation('junit:junit:4.13')
 }
