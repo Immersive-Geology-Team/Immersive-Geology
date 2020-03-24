@@ -1,12 +1,18 @@
 package immersivegeology;
 
+import immersivegeology.client.ClientProxy;
+import immersivegeology.common.CommonProxy;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @Mod(ImmersiveGeology.MODID)
 public class ImmersiveGeology 
@@ -15,6 +21,15 @@ public class ImmersiveGeology
 	public static final String MODNAME = "Immersive Geology";
 	public static final String VERSION = "${version}";
 	public static final String NETWORK_VERSION = "1";
+	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(),
+			() -> () -> new CommonProxy());
+	
+	public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
+			.named(new ResourceLocation(MODID, "main"))
+			.networkProtocolVersion(() -> NETWORK_VERSION)
+			.serverAcceptedVersions(NETWORK_VERSION::equals)
+			.clientAcceptedVersions(NETWORK_VERSION::equals)
+			.simpleChannel();
 	
 	public ImmersiveGeology()
 	{
@@ -30,17 +45,17 @@ public class ImmersiveGeology
 	public void setup(FMLCommonSetupEvent event)
 	{
 		//Previously in PREINIT
+		proxy.preInit();
 		
-		
-		
+		proxy.preInitEnd();
 		//Previously in INIT
+		proxy.init();
 		
-		
-		
+		proxy.initEnd();
 		//Previously in POSTINIT
+		proxy.postInit();
 		
-		
-		
+		proxy.postInitEnd();
 	}
 
 	public void loadComplete(FMLLoadCompleteEvent event)
@@ -50,7 +65,7 @@ public class ImmersiveGeology
 
 	public void serverStarting(FMLServerStartingEvent event)
 	{
-		
+		proxy.serverStarting();
 	}
 
 	public void serverStarted(FMLServerStartedEvent event)
