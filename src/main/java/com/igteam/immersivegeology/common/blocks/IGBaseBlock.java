@@ -175,7 +175,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 		return this;
 	}
 
-     //TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to want to map
+	//TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to want to map
     @Override
     public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos)
     {
