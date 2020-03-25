@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
 import com.igteam.immersivegeology.api.materials.Material;
+import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
 /**
@@ -22,9 +23,16 @@ public abstract class MaterialMetalBase extends Material
 			case STORAGE:
 			case SHEETMETAL:
 			case DUST_BLOCK:
+			case FLUIDS:
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public MaterialTypes getMaterialType()
+	{
+		return MaterialTypes.METAL;
 	}
 
 	@Override

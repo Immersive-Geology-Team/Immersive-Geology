@@ -3,6 +3,7 @@ package com.igteam.immersivegeology;
 import com.igteam.immersivegeology.client.ClientProxy;
 import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 
@@ -29,7 +31,7 @@ public class ImmersiveGeology
 	public static final String NETWORK_VERSION = "1";
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(),
 			() -> () -> new CommonProxy());
-	
+
 	public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
 			.named(new ResourceLocation(MODID, "main"))
 			.networkProtocolVersion(() -> NETWORK_VERSION)
@@ -39,6 +41,7 @@ public class ImmersiveGeology
 	
 	public ImmersiveGeology()
 	{
+		IGLogger.logger = LogManager.getLogger(MODID);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 
@@ -56,12 +59,12 @@ public class ImmersiveGeology
 		//Previously in INIT
 		proxy.init();
 		IGContent.init();
-		
+
 		proxy.initEnd();
 		//Previously in POSTINIT
 		proxy.postInit();
 		IGContent.postInit();
-		
+
 		proxy.postInitEnd();
 	}
 

@@ -136,6 +136,7 @@ public class IGContent
 		registeredIGTiles.add(tile);
 	}
 
+	//TODO: Absolutely needed TODO
     /* TODO
     public static void addConfiguredWorldgen(Block state, String name, OreConfig config)
     {
