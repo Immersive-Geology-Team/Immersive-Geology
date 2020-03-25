@@ -175,12 +175,12 @@ public class IGBaseBlock extends Block implements IIGBlock
 		return this;
 	}
 
-    /* //TODO See what this is supposed to do, getAmbientOcclusionLightValue doesn't appear to be an actual existing function
+     //TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to want to map
     @Override
-    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader world, BlockPos pos)
+    public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos)
     {
-        return notNormalBlock?1: super.getAmbientOcclusionLightValue(state, world, pos);
-    } */
+        return notNormalBlock?1: super.func_220080_a(state, world, pos);
+    }
 
 	@Override
 	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_)
