@@ -1,17 +1,24 @@
 package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Set;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
+ * This class represent a single material (both compound and single chemical element one).
+ * Extend it or its children classes like MaterialMetalBase or MaterialStoneBase and then register
+ * them in the MaterialRegistry class.
+ * <p>
+ * Materials can have blocks and items, all of which are provided by Immersive Geology.
  */
 public abstract class Material
 {
-
 	/**
 	 * @return material name
 	 */
@@ -20,46 +27,162 @@ public abstract class Material
 	/**
 	 * @return material mod ID
 	 */
+	@Nonnull
 	public String getModID()
 	{
 		return ImmersiveGeology.MODID;
 	}
 
-	public abstract boolean isFromPeriodicTable();
+	/**
+	 * @return whether is made of any real-word materials
+	 */
+	public boolean isFromPeriodicTable()
+	{
+		return getElements().size() > 0;
+	}
 
-	public abstract PeriodicTableElement getElement();
+	/**
+	 * @return the chemical elements this material is composed of
+	 */
+	public abstract Set<ElementProportion> getElements();
 
+	/**
+	 * @return rarity - like common, uncommon, rare, epic, etc.
+	 */
+	@Nonnull
 	public abstract Rarity getRarity();
 
+	@Nonnull
+	public abstract MaterialTypes getMaterialType();
+
+	//Temperature properties
+
+	/**
+	 * @param state the state the material should be in
+	 *              There are 3 states:
+	 *              GAS - temperature is material's boiling
+	 *              LIQUID - temperature is material's melting point
+	 *              SOLID - temperature is material's solidified temperature (default for most)
+	 * @return default temperature of the state in Kelvin
+	 */
+	public float getTemperatureFromState(@Nonnull MaterialState state)
+	{
+		switch(state)
+		{
+			//Can be any number, 0 celsius as default
+			case SOLID:
+				return 237.15f;
+			case LIQUID:
+				return getBoilingPoint();
+		}
+		//Gas
+		return getMeltingPoint();
+	}
+
+	/**
+	 * @param temperature of the material in Kelvin
+	 * @return the state the material should be in,
+	 * as described in {@link #getTemperatureFromState(MaterialState state)}
+	 */
+	public MaterialState getStateFromTemperature(float temperature)
+	{
+		if(temperature >= getBoilingPoint())
+			return MaterialState.GAS;
+		else if(temperature >= getMeltingPoint())
+			return MaterialState.LIQUID;
+		else
+			return MaterialState.SOLID;
+	}
+
+	/**
+	 * @return the boiling point of the material (in kelvin)
+	 */
+	public abstract float getBoilingPoint();
+
+	/**
+	 * @return the melting point of the material (in kelvin)
+	 */
+	public abstract float getMeltingPoint();
+
+	/**
+	 * @return material default color (used as a fallback)
+	 * if you want color to change with temperature use {@link #getColor(float temperature)}
+	 */
+	public abstract int getColor();
+
+
+	/**
+	 * @return material default color (used as a fallback) when in certain temperature
+	 * the same as normal as default
+	 */
+	public int getColor(float temperature)
+	{
+		return getColor();
+	}
+
 	//Block Properties
+
+	/**
+	 * @return block hardness
+	 */
 	public abstract float getHardness();
 
+	/**
+	 * @return block mining speed
+	 */
 	public abstract float getMiningResistance();
 
+	/**
+	 * @return resistance against explosions
+	 */
 	public abstract float getBlastResistance();
 
+	/**
+	 * @return how dense is the block compared to vanilla stone (stone=1)
+	 */
 	public abstract float getDensity();
 
-	public abstract int getBlockMiningLevel();
+	/**
+	 * @return tool level needed to mine material's blocks
+	 */
+	public abstract int getBlockHarvestLevel();
 
+	/**
+	 * @return a block material (like Material.IRON)
+	 */
 	public abstract net.minecraft.block.material.Material getBlockMaterial();
 
+	/**
+	 * @param useType the subtype checked (iterates trough all)
+	 * @return if has this subtype
+	 */
 	public boolean hasSubtype(MaterialUseType useType)
 	{
 		return true;
 	}
 
+	/**
+	 * @param useType the subtype checked (iterates trough all)
+	 * @return a path to the texture
+	 */
 	@Nullable
 	public ResourceLocation getSpecialSubtypeTexture(MaterialUseType useType)
 	{
 		return null;
 	}
 
+	/**
+	 * @return how many uses do tools made of this material have
+	 */
+
 	//Item Properites
-	public abstract float getDurability();
 
-	public abstract float getMiningSpeed();
-
-	public abstract int getItemMiningLevel();
+	/**
+	 *
+	 * @return the tool tier / material, look at {@link net.minecraft.item.ItemTier}
+	 */
+	//TODO: Add material tools
+	//@Nullable
+	//public abstract IItemTier getToolTier();
 
 }

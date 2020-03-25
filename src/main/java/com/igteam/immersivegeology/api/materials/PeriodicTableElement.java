@@ -1,13 +1,16 @@
 package com.igteam.immersivegeology.api.materials;
 
+import net.minecraft.util.IStringSerializable;
+
 /**
  * Created by Pabilo8 on 25-03-2020.
+ * This enum contains all the elements of the periodic table
  */
-public enum PeriodicTableElement
+public enum PeriodicTableElement implements IStringSerializable
 {
 	COPPER("Cuprum", "Cu", 0xde8518);
 
-	String englishName, latinName, symbol;
+	String latinName, symbol;
 	int color;
 
 	PeriodicTableElement(String latinName, String symbol, int color)
@@ -15,5 +18,33 @@ public enum PeriodicTableElement
 		this.latinName = latinName;
 		this.symbol = symbol;
 		this.color = color;
+	}
+
+	//For translation purposes
+	@Override
+	public String getName()
+	{
+		return toString().toLowerCase();
+	}
+
+	/**
+	 * This is a class representing a chemical element inside an equation (like H2 in H2O)
+	 * With quantity being 2, and the element being Hydrogen
+	 */
+	public static class ElementProportion
+	{
+		PeriodicTableElement element;
+		int quantity = 1;
+
+		public ElementProportion(PeriodicTableElement element, int quantity)
+		{
+			this.element = element;
+			this.quantity = quantity;
+		}
+
+		public ElementProportion(PeriodicTableElement element)
+		{
+			this.element = element;
+		}
 	}
 }

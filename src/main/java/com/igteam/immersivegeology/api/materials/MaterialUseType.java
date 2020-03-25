@@ -8,6 +8,7 @@ public enum MaterialUseType
 	//Mineral items
 	ROCK,
 
+	//Metal items
 	INGOT,
 	PLATE,
 	DUST,
@@ -15,6 +16,13 @@ public enum MaterialUseType
 	ROD,
 	GEAR,
 	WIRE,
+
+	//Tool System, Experimental / Not sure
+	PICKAXE,
+	SHOVEL,
+	HOE,
+	AXE,
+	BROADSWORD,
 
 	//Blocks
 
@@ -40,4 +48,7 @@ public enum MaterialUseType
 	NORMAL_BRICKS,
 	ROAD_BRICKS,
 	PILLAR,
+
+	//Fluids
+	FLUIDS
 }

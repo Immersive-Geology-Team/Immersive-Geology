@@ -4,7 +4,7 @@ public class CommonProxy
 {
 	public void preInit()
 	{
-		
+		IGMaterials.addMetals();
 	}
 	
 	public void preInitEnd()
