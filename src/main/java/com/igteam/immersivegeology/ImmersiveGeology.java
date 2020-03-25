@@ -2,6 +2,11 @@ package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.ClientProxy;
 import com.igteam.immersivegeology.common.CommonProxy;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
@@ -13,6 +18,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+
+import javax.annotation.Nonnull;
 
 @Mod(ImmersiveGeology.MODID)
 public class ImmersiveGeology 
@@ -71,5 +78,15 @@ public class ImmersiveGeology
 	{
 		
 	}
+
+	public static ItemGroup itemGroup = new ItemGroup(MODID)
+	{
+		@Override
+		@Nonnull
+		public ItemStack createIcon()
+		{
+			return new ItemStack(Blocks.IRON_ORE); //TODO add proper tab icon
+		}
+	};
 
 }
