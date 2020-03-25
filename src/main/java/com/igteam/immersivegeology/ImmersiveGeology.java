@@ -2,6 +2,7 @@ package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.ClientProxy;
 import com.igteam.immersivegeology.common.CommonProxy;
+import com.igteam.immersivegeology.common.IGContent;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -54,10 +55,12 @@ public class ImmersiveGeology
 		proxy.preInitEnd();
 		//Previously in INIT
 		proxy.init();
+		IGContent.init();
 		
 		proxy.initEnd();
 		//Previously in POSTINIT
 		proxy.postInit();
+		IGContent.postInit();
 		
 		proxy.postInitEnd();
 	}
