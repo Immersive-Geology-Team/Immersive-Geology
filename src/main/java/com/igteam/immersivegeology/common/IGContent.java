@@ -1,8 +1,6 @@
 package com.igteam.immersivegeology.common;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.common.blocks.IEBlocks;
-import blusunrize.immersiveengineering.common.items.IEItems;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -41,6 +39,8 @@ public class IGContent
 		{
 			MaterialMetalBase material = m.metal;
 
+			boolean hasBasic = false;
+
 			Block storage = null;
 			Block sheetmetal = null;
 			Item nugget = null;
@@ -65,55 +65,43 @@ public class IGContent
 
 				if(ieMetal!=null)
 				{
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
-						storage = IEBlocks.Metals.storage.get(ieMetal);
-					if(IEBlocks.Metals.sheetmetal.containsKey(ieMetal))
-						sheetmetal = IEBlocks.Metals.sheetmetal.get(ieMetal);
-
-					if(IEItems.Metals.ingots.containsKey(ieMetal))
-						ingot = IEItems.Metals.ingots.get(ieMetal);
-					if(IEItems.Metals.nuggets.containsKey(ieMetal))
-						nugget = IEItems.Metals.nuggets.get(ieMetal);
-					if(IEItems.Metals.plates.containsKey(ieMetal))
-						plate = IEItems.Metals.plates.get(ieMetal);
-					if(IEItems.Metals.dusts.containsKey(ieMetal))
-						dust = IEItems.Metals.dusts.get(ieMetal);
+					hasBasic = true;
 				}
 			}
 
-			if(storage==null)
+			if(!hasBasic)
 			{
 				storage = new IGStorageBlock(material);
 				addSlabFor((IGBaseBlock)storage);
 			}
-			if(sheetmetal==null)
+			if(!hasBasic)
 			{
 				sheetmetal = new IGSheetmetalBlock(material);
 				addSlabFor((IGBaseBlock)sheetmetal);
 			}
 
-			if(ingot==null&&material.hasSubtype(MaterialUseType.INGOT))
+			if(!hasBasic&&material.hasSubtype(MaterialUseType.INGOT))
 				ingot = new IGMaterialItem(material, MaterialUseType.INGOT);
 
-			if(nugget==null&&material.hasSubtype(MaterialUseType.NUGGET))
+			if(!hasBasic&&material.hasSubtype(MaterialUseType.NUGGET))
 				nugget = new IGMaterialItem(material, MaterialUseType.NUGGET);
 
-			if(plate==null&&material.hasSubtype(MaterialUseType.PLATE))
+			if(!hasBasic&&material.hasSubtype(MaterialUseType.PLATE))
 				plate = new IGMaterialItem(material, MaterialUseType.PLATE);
 
-			if(dust==null&&material.hasSubtype(MaterialUseType.DUST))
+			if(!hasBasic&&material.hasSubtype(MaterialUseType.DUST))
 				dust = new IGMaterialItem(material, MaterialUseType.DUST);
 
-			if(rod==null&&material.hasSubtype(MaterialUseType.ROD))
+			if(material.hasSubtype(MaterialUseType.ROD))
 				rod = new IGMaterialItem(material, MaterialUseType.ROD);
 
-			if(gear==null&&material.hasSubtype(MaterialUseType.GEAR))
+			if(material.hasSubtype(MaterialUseType.GEAR))
 				gear = new IGMaterialItem(material, MaterialUseType.GEAR);
 
-			if(tiny_dust==null&&material.hasSubtype(MaterialUseType.TINY_DUST))
+			if(material.hasSubtype(MaterialUseType.TINY_DUST))
 				tiny_dust = new IGMaterialItem(material, MaterialUseType.TINY_DUST);
 
-			if(wire==null&&material.hasSubtype(MaterialUseType.WIRE))
+			if(material.hasSubtype(MaterialUseType.WIRE))
 				wire = new IGMaterialItem(material, MaterialUseType.WIRE);
 
 		}
