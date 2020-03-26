@@ -2,23 +2,59 @@ package com.igteam.immersivegeology.common.blocks;
 
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
 import com.igteam.immersivegeology.common.materials.MaterialMetalCopper;
-import net.minecraft.util.IStringSerializable;
 
-public enum EnumMetals implements IStringSerializable
-{
-	Copper(new MaterialMetalCopper());
+public enum EnumMetals {
 
-	public final MaterialMetalBase metal;
+    Copper(new MaterialMetalCopper(), Type.IE_PURE);
 
-	EnumMetals(MaterialMetalBase metal)
-	{
-		this.metal = metal;
-	}
+    public final MaterialMetalBase metal;
+    private final Type type;
 
-	@Override
-	public String getName()
-	{
-		return toString().toLowerCase();
-	}
+    EnumMetals(MaterialMetalBase metal, Type t)
+    {
+        this.type = t;
+        this.metal = metal;
+    }
+
+    EnumMetals(MaterialMetalBase metal)
+    {
+        this.metal = metal;
+        this.type = Type.IG_PURE;
+    }
+
+    public String getName()
+    {
+        return this.toString().toLowerCase();
+    }
+
+    public boolean isVanillaMetal()
+    {
+        return type==Type.VANILLA;
+    }
+
+    public boolean isIGMetal()
+    {
+        return type==Type.IG_PURE || type==Type.IG_ALLOY;
+    }
+
+    public boolean isPureIGMetal()
+    {
+        return type==Type.IG_PURE;
+    }
+
+    public boolean isAlloyIGMetal()
+    {
+        return type==Type.IG_ALLOY;
+    }
+
+    private enum Type
+    {
+        VANILLA,
+        IE_PURE,
+        IE_ALLOY,
+        IG_PURE,
+        IG_ALLOY
+    }
+
 
 }
