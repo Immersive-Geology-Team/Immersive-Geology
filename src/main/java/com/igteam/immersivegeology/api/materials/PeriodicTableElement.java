@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.api.materials;
 
 import net.minecraft.util.IStringSerializable;
 
+import java.util.Locale;
+
 /**
  * Created by Pabilo8 on 25-03-2020.
  * This enum contains all the elements of the periodic table
@@ -24,7 +26,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	@Override
 	public String getName()
 	{
-		return toString().toLowerCase();
+		return toString().toLowerCase(Locale.ENGLISH);
 	}
 
 	/**

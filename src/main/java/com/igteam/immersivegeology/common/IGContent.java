@@ -2,7 +2,7 @@ package com.igteam.immersivegeology.common;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.common.blocks.IEBlocks;
-import blusunrize.immersiveengineering.common.items.IEItems.Metals;
+import blusunrize.immersiveengineering.common.items.IEItems;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -50,13 +50,14 @@ public class IGContent
 			Item rod = null;
 			Item gear = null;
 			Item tiny_dust = null;
+			Item wire = null;
 
 			if(m.metal.getModID().equals(ImmersiveEngineering.MODID))
 			{
 				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
 				try
 				{
-					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase());
+					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
 				} catch(IllegalArgumentException e)
 				{
 					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again..."));
@@ -66,17 +67,17 @@ public class IGContent
 				{
 					if(IEBlocks.Metals.storage.containsKey(ieMetal))
 						storage = IEBlocks.Metals.storage.get(ieMetal);
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
+					if(IEBlocks.Metals.sheetmetal.containsKey(ieMetal))
 						sheetmetal = IEBlocks.Metals.sheetmetal.get(ieMetal);
 
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
-						ingot = Metals.ingots.get(ieMetal);
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
-						nugget = Metals.nuggets.get(ieMetal);
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
-						plate = Metals.plates.get(ieMetal);
-					if(IEBlocks.Metals.storage.containsKey(ieMetal))
-						dust = Metals.dusts.get(ieMetal);
+					if(IEItems.Metals.ingots.containsKey(ieMetal))
+						ingot = IEItems.Metals.ingots.get(ieMetal);
+					if(IEItems.Metals.nuggets.containsKey(ieMetal))
+						nugget = IEItems.Metals.nuggets.get(ieMetal);
+					if(IEItems.Metals.plates.containsKey(ieMetal))
+						plate = IEItems.Metals.plates.get(ieMetal);
+					if(IEItems.Metals.dusts.containsKey(ieMetal))
+						dust = IEItems.Metals.dusts.get(ieMetal);
 				}
 			}
 
@@ -112,6 +113,9 @@ public class IGContent
 			if(tiny_dust==null&&material.hasSubtype(MaterialUseType.TINY_DUST))
 				tiny_dust = new IGMaterialItem(material, MaterialUseType.TINY_DUST);
 
+			if(wire==null&&material.hasSubtype(MaterialUseType.WIRE))
+				wire = new IGMaterialItem(material, MaterialUseType.WIRE);
+
 		}
 
 	}
@@ -119,17 +123,19 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
-		checkNonNullNames(registeredIGBlocks);
+		//checkNonNullNames(registeredIGBlocks);
 		for(Block block : registeredIGBlocks)
-			event.getRegistry().register(block);
+			if(block!=null)
+				event.getRegistry().register(block);
 	}
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		checkNonNullNames(registeredIGItems);
+		//checkNonNullNames(registeredIGItems);
 		for(Item item : registeredIGItems)
-			event.getRegistry().register(item);
+			if(item!=null)
+				event.getRegistry().register(item);
 		registerOres();
 	}
 

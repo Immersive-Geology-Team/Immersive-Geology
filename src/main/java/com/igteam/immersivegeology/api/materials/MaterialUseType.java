@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.api.materials;
 
 import net.minecraft.util.IStringSerializable;
 
+import java.util.Locale;
+
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
@@ -58,6 +60,6 @@ public enum MaterialUseType implements IStringSerializable
 	@Override
 	public String getName()
 	{
-		return this.toString().toLowerCase();
+		return this.toString().toLowerCase(Locale.ENGLISH);
 	}
 }
