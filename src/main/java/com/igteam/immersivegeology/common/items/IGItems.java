@@ -1,5 +1,11 @@
 package com.igteam.immersivegeology.common.items;
 
+import com.igteam.immersivegeology.common.blocks.EnumMetals;
+import net.minecraft.item.Item;
+
+import java.util.EnumMap;
+import java.util.Map;
+
 public final class IGItems
 {
 	private IGItems()
@@ -8,11 +14,11 @@ public final class IGItems
 
 	public static final class Metals
 	{
-        /*public static Map<EnumMetals, Item> ingots = new EnumMap<>(EnumMetals.class);
+        public static Map<EnumMetals, Item> ingots = new EnumMap<>(EnumMetals.class);
         public static Map<EnumMetals, Item> nuggets = new EnumMap<>(EnumMetals.class);
         public static Map<EnumMetals, Item> dusts = new EnumMap<>(EnumMetals.class);
         public static Map<EnumMetals, Item> tiny_dusts = new EnumMap<>(EnumMetals.class);
-        public static Map<EnumMetals, Item> plates = new EnumMap<>(EnumMetals.class);*/
+        public static Map<EnumMetals, Item> plates = new EnumMap<>(EnumMetals.class);
 	}
 
 	public static final class Minerals

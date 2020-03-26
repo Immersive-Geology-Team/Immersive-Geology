@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology.common;
 
-import com.igteam.immersivegeology.api.materials.MaterialRegistry;
+import blusunrize.immersiveengineering.common.IEContent;
+import blusunrize.immersiveengineering.common.blocks.IEBlocks;
+import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersivegeology.common.blocks.*;
-import com.igteam.immersivegeology.common.event.MaterialRegistryEvent;
-import com.igteam.immersivegeology.common.util.IGLogger;
+import com.igteam.immersivegeology.common.items.IGBaseItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -30,16 +32,135 @@ public class IGContent
 	public static void modConstruction()
 	{
 
-	}
-
-	@SubscribeEvent
-	public void registerMaterials(MaterialRegistryEvent event)
-	{
-		IGLogger.info("registering materials");
-		for(EnumMetals metal : EnumMetals.values())
+		Block.Properties storageProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(5, 10);
+		Block.Properties sheetmetalProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(3, 10);
+		for(EnumMetals m : EnumMetals.values())
 		{
-			MaterialRegistry.addMaterial(metal.metal);
+			String name = m.getName();
+			Block storage;
+			Block sheetmetal;
+			Item nugget;
+			Item ingot;
+			Item plate;
+			Item dust;
+			Item tiny_dust = new IGBaseItem("tiny_dust_"+name);
+
+			if(m.isIGMetal())
+			{
+				storage = new IGBaseBlock("storage_"+name, storageProperties, IGBlockItem.class);
+				sheetmetal = (IGBaseBlock)new IGBaseBlock("sheetmetal_"+name, sheetmetalProperties, IGBlockItem.class);
+				addSlabFor((IGBaseBlock)sheetmetal);
+				nugget = new IGBaseItem("nugget_"+name);
+				ingot = new IGBaseItem("ingot_"+name);
+				plate = new IGBaseItem("plate_"+name);
+				dust = new IGBaseItem("dust_"+name);
+				addSlabFor((IGBaseBlock)storage);
+			}
+			else
+			{
+				Enum COPPER = blusunrize.immersiveengineering.common.blocks.EnumMetals.COPPER;
+				Enum ALUMINUM = blusunrize.immersiveengineering.common.blocks.EnumMetals.ALUMINUM;
+				Enum LEAD = blusunrize.immersiveengineering.common.blocks.EnumMetals.LEAD;
+				Enum SILVER = blusunrize.immersiveengineering.common.blocks.EnumMetals.SILVER;
+				Enum NICKEL = blusunrize.immersiveengineering.common.blocks.EnumMetals.NICKEL;
+				Enum URANIUM = blusunrize.immersiveengineering.common.blocks.EnumMetals.URANIUM;
+				Enum CONSTANTAN = blusunrize.immersiveengineering.common.blocks.EnumMetals.CONSTANTAN;
+				Enum ELECTRUM = blusunrize.immersiveengineering.common.blocks.EnumMetals.ELECTRUM;
+				Enum STEEL = blusunrize.immersiveengineering.common.blocks.EnumMetals.STEEL;
+				Enum IRON = blusunrize.immersiveengineering.common.blocks.EnumMetals.IRON;
+				Enum GOLD = blusunrize.immersiveengineering.common.blocks.EnumMetals.GOLD;
+				switch (name) {
+					case "copper":
+						storage = IEBlocks.Metals.storage.get(COPPER);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(COPPER);
+						nugget = IEItems.Metals.nuggets.get(COPPER);
+						plate = IEItems.Metals.plates.get(COPPER);
+						dust = IEItems.Metals.dusts.get(COPPER);
+						break;
+					case "aluminum":
+						storage = IEBlocks.Metals.storage.get(ALUMINUM);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(ALUMINUM);
+						nugget = IEItems.Metals.nuggets.get(ALUMINUM);
+						plate = IEItems.Metals.plates.get(ALUMINUM);
+						dust = IEItems.Metals.dusts.get(ALUMINUM);
+
+						break;
+					case "lead":
+						storage = IEBlocks.Metals.storage.get(LEAD);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(LEAD);
+						nugget = IEItems.Metals.nuggets.get(LEAD);
+						plate = IEItems.Metals.plates.get(LEAD);
+						dust = IEItems.Metals.dusts.get(LEAD);
+
+						break;
+					case "silver":
+						storage = IEBlocks.Metals.storage.get(SILVER);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(SILVER);
+						nugget = IEItems.Metals.nuggets.get(SILVER);
+						plate = IEItems.Metals.plates.get(SILVER);
+						dust = IEItems.Metals.dusts.get(SILVER);
+
+						break;
+					case "nickel":
+						storage = IEBlocks.Metals.storage.get(NICKEL);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(NICKEL);
+						nugget = IEItems.Metals.nuggets.get(NICKEL);
+						plate = IEItems.Metals.plates.get(NICKEL);
+						dust = IEItems.Metals.dusts.get(NICKEL);
+
+						break;
+					case "uranium":
+						storage = IEBlocks.Metals.storage.get(URANIUM);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(URANIUM);
+						nugget = IEItems.Metals.nuggets.get(URANIUM);
+						plate = IEItems.Metals.plates.get(URANIUM);
+						dust = IEItems.Metals.dusts.get(URANIUM);
+
+						break;
+					case "constantan":
+						storage = IEBlocks.Metals.storage.get(CONSTANTAN);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(CONSTANTAN);
+						nugget = IEItems.Metals.nuggets.get(CONSTANTAN);
+						plate = IEItems.Metals.plates.get(CONSTANTAN);
+						dust = IEItems.Metals.dusts.get(CONSTANTAN);
+
+						break;
+					case "electrum":
+						storage = IEBlocks.Metals.storage.get(ELECTRUM);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(ELECTRUM);
+						nugget = IEItems.Metals.nuggets.get(ELECTRUM);
+						plate = IEItems.Metals.plates.get(ELECTRUM);
+						dust = IEItems.Metals.dusts.get(ELECTRUM);
+
+						break;
+					case "steel":
+						storage = IEBlocks.Metals.storage.get(STEEL);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(STEEL);
+						nugget = IEItems.Metals.nuggets.get(STEEL);
+						plate = IEItems.Metals.plates.get(STEEL);
+						dust = IEItems.Metals.dusts.get(STEEL);
+
+						break;
+					case "iron":
+						storage = IEBlocks.Metals.storage.get(IRON);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(IRON);
+						nugget = IEItems.Metals.nuggets.get(IRON);
+						plate = IEItems.Metals.plates.get(IRON);
+						dust = IEItems.Metals.dusts.get(IRON);
+
+						break;
+					case "gold":
+						storage = IEBlocks.Metals.storage.get(GOLD);
+						sheetmetal = IEBlocks.Metals.sheetmetal.get(GOLD);
+						nugget = IEItems.Metals.nuggets.get(GOLD);
+						plate = IEItems.Metals.plates.get(GOLD);
+						dust = IEItems.Metals.dusts.get(GOLD);
+
+						break;
+				}
+			}
 		}
+
 	}
 
 	@SubscribeEvent

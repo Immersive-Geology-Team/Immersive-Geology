@@ -48,7 +48,7 @@ public class ImmersiveGeology
 
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
-
+		IGContent.modConstruction();
 	}
 
 	@SubscribeEvent
