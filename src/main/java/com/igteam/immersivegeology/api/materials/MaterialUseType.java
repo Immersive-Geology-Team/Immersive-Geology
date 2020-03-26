@@ -58,6 +58,6 @@ public enum MaterialUseType implements IStringSerializable
 	@Override
 	public String getName()
 	{
-		return this.getName().toLowerCase();
+		return this.toString().toLowerCase();
 	}
 }
