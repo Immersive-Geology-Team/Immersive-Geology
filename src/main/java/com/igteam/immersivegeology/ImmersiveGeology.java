@@ -24,22 +24,29 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 
 @Mod(ImmersiveGeology.MODID)
-public class ImmersiveGeology 
+public class ImmersiveGeology
 {
 	public static final String MODID = "immersivegeology";
 	public static final String MODNAME = "Immersive Geology";
 	public static final String VERSION = "${version}";
 	public static final String NETWORK_VERSION = "1";
-	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(),
-			() -> () -> new CommonProxy());
-
 	public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
 			.named(new ResourceLocation(MODID, "main"))
 			.networkProtocolVersion(() -> NETWORK_VERSION)
 			.serverAcceptedVersions(NETWORK_VERSION::equals)
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
-	
+	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+	public static ItemGroup itemGroup = new ItemGroup(MODID)
+	{
+		@Override
+		@Nonnull
+		public ItemStack createIcon()
+		{
+			return new ItemStack(Blocks.IRON_ORE); //TODO add proper tab icon
+		}
+	};
+
 	public ImmersiveGeology()
 	{
 		IGLogger.logger = LogManager.getLogger(MODID);
@@ -56,7 +63,7 @@ public class ImmersiveGeology
 	{
 		//Previously in PREINIT
 		proxy.preInit();
-		
+
 		proxy.preInitEnd();
 		//Previously in INIT
 		proxy.init();
@@ -87,15 +94,5 @@ public class ImmersiveGeology
 	{
 
 	}
-
-	public static ItemGroup itemGroup = new ItemGroup(MODID)
-	{
-		@Override
-		@Nonnull
-		public ItemStack createIcon()
-		{
-			return new ItemStack(Blocks.IRON_ORE); //TODO add proper tab icon
-		}
-	};
 
 }

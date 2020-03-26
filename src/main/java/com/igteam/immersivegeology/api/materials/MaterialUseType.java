@@ -1,9 +1,11 @@
 package com.igteam.immersivegeology.api.materials;
 
+import net.minecraft.util.IStringSerializable;
+
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
-public enum MaterialUseType
+public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
 	ROCK,
@@ -14,6 +16,7 @@ public enum MaterialUseType
 	DUST,
 	TINY_DUST,
 	ROD,
+	NUGGET,
 	GEAR,
 	WIRE,
 
@@ -50,5 +53,11 @@ public enum MaterialUseType
 	PILLAR,
 
 	//Fluids
-	FLUIDS
+	FLUIDS;
+
+	@Override
+	public String getName()
+	{
+		return this.getName().toLowerCase();
+	}
 }

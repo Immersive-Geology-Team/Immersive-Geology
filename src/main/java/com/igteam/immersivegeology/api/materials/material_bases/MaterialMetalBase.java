@@ -9,6 +9,8 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
  */
 public abstract class MaterialMetalBase extends Material
 {
+	public abstract EnumMetalType getMetalType();
+
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -39,5 +41,11 @@ public abstract class MaterialMetalBase extends Material
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return net.minecraft.block.material.Material.IRON;
+	}
+
+	public enum EnumMetalType
+	{
+		METAL,
+		ALLOY
 	}
 }

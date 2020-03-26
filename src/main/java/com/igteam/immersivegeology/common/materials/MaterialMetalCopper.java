@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology.common.materials;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
 import net.minecraft.item.Rarity;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +20,13 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	public String getName()
 	{
 		return "copper";
+	}
+
+	@Nonnull
+	@Override
+	public String getModID()
+	{
+		return ImmersiveEngineering.MODID;
 	}
 
 	@Override
@@ -83,6 +92,12 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	public int getBlockHarvestLevel()
 	{
 		return 1;
+	}
+
+	@Override
+	public EnumMetalType getMetalType()
+	{
+		return EnumMetalType.METAL;
 	}
 
 
