@@ -49,7 +49,6 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	@Override
 	public int getColor(int temperature)
 	{
-		//TODO: add gradient function in Utils
 		return 0xe39919;
 	}
 

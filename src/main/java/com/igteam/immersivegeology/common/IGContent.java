@@ -1,9 +1,8 @@
 package com.igteam.immersivegeology.common;
 
-import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
-import com.igteam.immersivegeology.common.blocks.IGBlockItem;
-import com.igteam.immersivegeology.common.blocks.IGBlocks;
-import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.api.materials.MaterialRegistry;
+import com.igteam.immersivegeology.common.blocks.*;
+import com.igteam.immersivegeology.common.event.MaterialRegistryEvent;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -30,6 +29,15 @@ public class IGContent
 	public static void modConstruction()
 	{
 
+	}
+
+	@SubscribeEvent
+	public void registerMaterials(MaterialRegistryEvent event)
+	{
+		for(EnumMetals metal : EnumMetals.values())
+		{
+			MaterialRegistry.addMaterial(metal.metal);
+		}
 	}
 
 	@SubscribeEvent

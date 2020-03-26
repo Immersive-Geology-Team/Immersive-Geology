@@ -22,7 +22,10 @@ public abstract class Material
 	/**
 	 * @return material name
 	 */
-	public abstract String getName();
+	public String getName()
+	{
+		return "missingno";
+	}
 
 	/**
 	 * @return material mod ID

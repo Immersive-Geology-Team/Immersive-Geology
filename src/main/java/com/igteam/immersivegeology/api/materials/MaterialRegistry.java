@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.api.materials;
 
+import net.minecraft.util.IStringSerializable;
+
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +19,12 @@ public class MaterialRegistry
 	{
 		Optional<Material> material = materials.stream().filter(mat -> mat.getName().equals(name)).findAny();
 		return material.orElse(null);
+	}
+
+	@Nullable
+	public static Material getMaterialByEnumName(IStringSerializable serializable)
+	{
+		return getMaterialByName(serializable.getName());
 	}
 
 	public static void addMaterial(Material material)
