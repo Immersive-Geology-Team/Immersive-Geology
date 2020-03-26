@@ -34,3 +34,4 @@ libs/
 *.project
 *.classpath
 .settings/
+*.launch
