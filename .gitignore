@@ -29,6 +29,7 @@ eclipse/
 run/
 bin/
 libs/
+build/
 .gradle/
 .idea/
 *.project
