@@ -8,14 +8,14 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum PeriodicTableElement implements IStringSerializable
 {
-	COPPER("Cuprum", "Cu", 0xde8518);
+	COPPER("Cu", 0xde8518);
 
 	String latinName, symbol;
+	//the color of the this chemical element, not the metals made of it
 	int color;
 
-	PeriodicTableElement(String latinName, String symbol, int color)
+	PeriodicTableElement(String symbol, int color)
 	{
-		this.latinName = latinName;
 		this.symbol = symbol;
 		this.color = color;
 	}

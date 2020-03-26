@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.api.materials;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 /**
@@ -21,5 +22,15 @@ public class MaterialRegistry
 	public static void addMaterial(Material material)
 	{
 		materials.add(material);
+	}
+
+	public static void removeMaterialByName(String name)
+	{
+		materials.removeIf(material -> material.getName().equals(name));
+	}
+
+	public static Iterator<Material> iterate()
+	{
+		return materials.iterator();
 	}
 }

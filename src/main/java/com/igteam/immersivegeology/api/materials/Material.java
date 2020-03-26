@@ -97,28 +97,18 @@ public abstract class Material
 	/**
 	 * @return the boiling point of the material (in kelvin)
 	 */
-	public abstract float getBoilingPoint();
+	public abstract int getBoilingPoint();
 
 	/**
 	 * @return the melting point of the material (in kelvin)
 	 */
-	public abstract float getMeltingPoint();
-
-	/**
-	 * @return material default color (used as a fallback)
-	 * if you want color to change with temperature use {@link #getColor(float temperature)}
-	 */
-	public abstract int getColor();
-
+	public abstract int getMeltingPoint();
 
 	/**
 	 * @return material default color (used as a fallback) when in certain temperature
 	 * the same as normal as default
 	 */
-	public int getColor(float temperature)
-	{
-		return getColor();
-	}
+	public abstract int getColor(int temperature);
 
 	//Block Properties
 

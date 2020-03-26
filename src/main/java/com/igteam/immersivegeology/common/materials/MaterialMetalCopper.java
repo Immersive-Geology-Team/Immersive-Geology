@@ -35,20 +35,21 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	}
 
 	@Override
-	public float getBoilingPoint()
+	public int getBoilingPoint()
 	{
-		return 2835f;
+		return 2835;
 	}
 
 	@Override
-	public float getMeltingPoint()
+	public int getMeltingPoint()
 	{
-		return 1357.77f;
+		return 1357;
 	}
 
 	@Override
-	public int getColor()
+	public int getColor(int temperature)
 	{
+		//TODO: add gradient function in Utils
 		return 0xe39919;
 	}
 
