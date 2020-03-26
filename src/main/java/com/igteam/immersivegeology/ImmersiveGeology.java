@@ -9,6 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -49,7 +50,8 @@ public class ImmersiveGeology
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
 
 	}
-	
+
+	@SubscribeEvent
 	public void setup(FMLCommonSetupEvent event)
 	{
 		//Previously in PREINIT
@@ -68,19 +70,22 @@ public class ImmersiveGeology
 		proxy.postInitEnd();
 	}
 
+	@SubscribeEvent
 	public void loadComplete(FMLLoadCompleteEvent event)
 	{
-		
+
 	}
 
+	@SubscribeEvent
 	public void serverStarting(FMLServerStartingEvent event)
 	{
 		proxy.serverStarting();
 	}
 
+	@SubscribeEvent
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		
+
 	}
 
 	public static ItemGroup itemGroup = new ItemGroup(MODID)

@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common;
 import com.igteam.immersivegeology.api.materials.MaterialRegistry;
 import com.igteam.immersivegeology.common.blocks.*;
 import com.igteam.immersivegeology.common.event.MaterialRegistryEvent;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -34,6 +35,7 @@ public class IGContent
 	@SubscribeEvent
 	public void registerMaterials(MaterialRegistryEvent event)
 	{
+		IGLogger.info("registering materials");
 		for(EnumMetals metal : EnumMetals.values())
 		{
 			MaterialRegistry.addMaterial(metal.metal);
