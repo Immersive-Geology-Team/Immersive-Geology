@@ -1,12 +1,12 @@
 package com.igteam.immersivegeology.common;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.common.items.IEItems.Metals;
 import blusunrize.immersiveengineering.common.util.IELogger;
+import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
+import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.common.blocks.*;
-import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
-import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
@@ -18,8 +18,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.Map.Entry;
 
 import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
 
@@ -31,28 +33,36 @@ public class IGContent
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 
+	public static HashMap<MaterialUseType, IGMaterialItem> materialSubItemCache = new HashMap<>();
+
 	public static void modConstruction()
 	{
-		//Block.Properties storageProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(5, 10);
-		//Block.Properties sheetmetalProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(3, 10);
-		for(EnumMetals m : EnumMetals.values())
+
+		Block storage = null;
+		Block sheetmetal = null;
+
+		for(MaterialUseType m : MaterialUseType.values())
 		{
-			MaterialMetalBase material = m.metal;
+			if(m.getCategory()==UseCategory.RESOURCE_ITEM)
+				addItemForType(m, m.createItem());
+			//TODO: adding blocks/tools to the cache
+		}
 
-			boolean hasBasic = false;
+		//TODO: blocks
 
-			Block storage = null;
-			Block sheetmetal = null;
-			Item nugget = null;
-			Item ingot = null;
-			Item plate = null;
-			Item dust = null;
-			Item rod = null;
-			Item gear = null;
-			Item tiny_dust = null;
-			Item wire = null;
+		for(EnumMaterials m : EnumMaterials.values())
+		{
+			Material material = m.material;
 
-			if(m.metal.getModID().equals(ImmersiveEngineering.MODID))
+			//Item, blocks here
+			for(Entry<MaterialUseType, IGMaterialItem> materialItem : materialSubItemCache.entrySet())
+			{
+				if(material.hasSubtype(materialItem.getKey()))
+					materialItem.getValue().addAllowedMaterial(material);
+			}
+
+			//If IE already contains the metal
+			if(m.material.getModID().equals(ImmersiveEngineering.MODID))
 			{
 				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
 				try
@@ -60,49 +70,30 @@ public class IGContent
 					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
 				} catch(IllegalArgumentException e)
 				{
-					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again..."));
+					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again...", m));
 				}
 
 				if(ieMetal!=null)
 				{
-					hasBasic = true;
+					IGMaterialItem ingot = getItemForType(MaterialUseType.INGOT);
+					IGMaterialItem plate = getItemForType(MaterialUseType.PLATE);
+					IGMaterialItem dust = getItemForType(MaterialUseType.DUST);
+					IGMaterialItem nugget = getItemForType(MaterialUseType.NUGGET);
+
+					//In case someone else breaks our registry
+					//Which won't happen, but why not have this
+
+					if(ingot!=null)
+						ingot.addReplacementItem(material, Metals.ingots.get(ieMetal));
+					if(plate!=null)
+						plate.addReplacementItem(material, Metals.plates.get(ieMetal));
+					if(dust!=null)
+						dust.addReplacementItem(material, Metals.dusts.get(ieMetal));
+					if(nugget!=null)
+						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
 				}
 			}
 
-			if(!hasBasic)
-			{
-				storage = new IGStorageBlock(material);
-				addSlabFor((IGBaseBlock)storage);
-			}
-			if(!hasBasic)
-			{
-				sheetmetal = new IGSheetmetalBlock(material);
-				addSlabFor((IGBaseBlock)sheetmetal);
-			}
-
-			if(!hasBasic&&material.hasSubtype(MaterialUseType.INGOT))
-				ingot = new IGMaterialItem(material, MaterialUseType.INGOT);
-
-			if(!hasBasic&&material.hasSubtype(MaterialUseType.NUGGET))
-				nugget = new IGMaterialItem(material, MaterialUseType.NUGGET);
-
-			if(!hasBasic&&material.hasSubtype(MaterialUseType.PLATE))
-				plate = new IGMaterialItem(material, MaterialUseType.PLATE);
-
-			if(!hasBasic&&material.hasSubtype(MaterialUseType.DUST))
-				dust = new IGMaterialItem(material, MaterialUseType.DUST);
-
-			if(material.hasSubtype(MaterialUseType.ROD))
-				rod = new IGMaterialItem(material, MaterialUseType.ROD);
-
-			if(material.hasSubtype(MaterialUseType.GEAR))
-				gear = new IGMaterialItem(material, MaterialUseType.GEAR);
-
-			if(material.hasSubtype(MaterialUseType.TINY_DUST))
-				tiny_dust = new IGMaterialItem(material, MaterialUseType.TINY_DUST);
-
-			if(material.hasSubtype(MaterialUseType.WIRE))
-				wire = new IGMaterialItem(material, MaterialUseType.WIRE);
 
 		}
 
@@ -212,6 +203,17 @@ public class IGContent
 			throw new RuntimeException(e);
 		}
 		registeredIGTiles.add(tile);
+	}
+
+	public static void addItemForType(MaterialUseType type, IGMaterialItem item)
+	{
+		materialSubItemCache.putIfAbsent(type, item);
+	}
+
+	@Nullable
+	public static IGMaterialItem getItemForType(MaterialUseType type)
+	{
+		return materialSubItemCache.get(type);
 	}
 
 	//TODO: Absolutely needed TODO

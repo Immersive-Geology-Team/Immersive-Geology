@@ -151,7 +151,7 @@ public abstract class Material
 	 */
 	public boolean hasSubtype(MaterialUseType useType)
 	{
-		return true;
+		return false;
 	}
 
 	/**

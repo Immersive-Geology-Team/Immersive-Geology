@@ -15,4 +15,6 @@ public class IGMaterialBlock extends IGBaseBlock
 	{
 		super(material.getName()+"_"+type.getName(), blockProps, IGBlockItem.class, additionalProperties);
 	}
+
+
 }

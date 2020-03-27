@@ -3,5 +3,17 @@
   "language.code": "en_us",
   "language.region": "United States",
   "itemGroup.immersivegeology": "Immersive Geology",
-  "immersivegeology.config.title": ""
+  "immersivegeology.config.title": "",
+  "item.immersivegeology.ingot.name": "%s Ingot",
+  "item.immersivegeology.plate.name": "%s Plate",
+  "item.immersivegeology.dust.name": "%s Dust",
+  "item.immersivegeology.nugget.name": "%s Nugget",
+  "item.immersivegeology.rod.name": "%s Rod",
+  "item.immersivegeology.gear.name": "%s Gear",
+  "item.immersivegeology.wire.name": "%s Wire",
+  "item.immersivegeology.tiny_dust.name": "%s Tiny Dust",
+  "block.immersivegeology.storage.name": "%s Block",
+  "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
+  "material.immersiveengineering.copper.name": "Copper",
+  "material.immersivegeology.tungsten.name": "Tungsten"
 }

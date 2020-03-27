@@ -38,6 +38,16 @@ public enum PeriodicTableElement implements IStringSerializable
 		PeriodicTableElement element;
 		int quantity = 1;
 
+		public PeriodicTableElement getElement()
+		{
+			return element;
+		}
+
+		public int getQuantity()
+		{
+			return quantity;
+		}
+
 		public ElementProportion(PeriodicTableElement element, int quantity)
 		{
 			this.element = element;
