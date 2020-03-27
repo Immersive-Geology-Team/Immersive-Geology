@@ -1,0 +1,39 @@
+package com.igteam.immersivegeology.common.blocks;
+
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
+import com.igteam.immersivegeology.common.materials.metals.*;
+
+public enum EnumMetals {
+
+    Copper(new MaterialMetalCopper(), Type.IE_PURE),
+    Aluminum(new MaterialMetalAluminum(), Type.IE_PURE),
+    Iron(new MaterialMetalIron(), Type.VANILLA)
+    /*, TODO add all Materials
+    Lead(new MaterialMetalLead(), Type.IE_PURE),
+    Silver(new MaterialMetalSilver(), Type.IE_PURE),
+    Nickel(new MaterialMetalNickel(), Type.IE_PURE),
+    Uranium(new MaterialMetalUranium(), Type.IE_PURE),
+    Constantan(new MaterialMetalConstantan(), Type.IE_ALLOY),
+    Electrum(new MaterialMetalElectrum(), Type.IE_ALLOY),
+    Steel(new MaterialMetalSteel(), Type.IE_ALLOY),
+    Gold(new MaterialMetalGold(), Type.VANILLA) */
+    ;
+
+    public final MaterialMetalBase metal;
+
+    private final Type type;
+
+    EnumMetals(MaterialMetalBase metal, Type t)
+    {
+        this.metal = metal;
+        this.type = t;
+    }
+
+    private enum Type {
+        VANILLA,
+        IE_PURE,
+        IE_ALLOY,
+        IG_PURE,
+        IG_ALLOY
+    }
+}
