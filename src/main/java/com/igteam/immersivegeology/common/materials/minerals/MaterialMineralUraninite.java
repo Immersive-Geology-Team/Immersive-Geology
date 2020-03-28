@@ -1,25 +1,22 @@
 package com.igteam.immersivegeology.common.materials.minerals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase;
 import net.minecraft.item.Rarity;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MaterialBaseHematite extends MaterialMineralBase
+public class MaterialMineralUraninite extends MaterialMineralBase
 {
     @Override
     public String getName()
     {
-        return "hematite";
+        return "uraninite";
     }
 
-    @Nonnull
     @Override
     public String getModID()
     {
@@ -30,36 +27,36 @@ public class MaterialBaseHematite extends MaterialMineralBase
     public Set<PeriodicTableElement.ElementProportion> getElements()
     {
         return new HashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON, 2),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 3)
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.URANIUM, 3),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 8)
         ));
     }
 
     @Override
     public Rarity getRarity()
     {
-        return Rarity.COMMON;
+        return Rarity.UNCOMMON;
     }
 
     @Override
     public int getBoilingPoint()
     {
-        return 2896;
+        return 4404;
     }
 
     @Override
     public int getMeltingPoint() {
-        return 1838;
+        return 3138;
     }
 
     @Override
     public EnumMineralType getMineralType() {
-        return null;
+        return EnumMineralType.MINERAL;
     }
 
     @Override
     public int getColor(int temperature) {
-        return 0x887c7d;
+        return 0xB2BEB5;
     }
 
     @Override
