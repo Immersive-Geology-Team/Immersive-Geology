@@ -24,9 +24,11 @@ public class IGMaterialResourceItem extends IGMaterialItem
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		StringBuilder builder = new StringBuilder();
-		getMaterialFromNBT(stack).getElements().forEach(elementProportion -> builder.append(elementProportion.getElement().getName()).append(elementProportion.getQuantity()));
-		tooltip.add(new StringTextComponent(builder.toString()));
+		StringTextComponent text = new StringTextComponent("");
+		getMaterialFromNBT(stack).getElements().forEach(elementProportion -> text
+				.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
+				.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
+		tooltip.add(text);
 	}
 
 

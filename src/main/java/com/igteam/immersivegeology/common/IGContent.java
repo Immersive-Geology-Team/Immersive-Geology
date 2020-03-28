@@ -1,8 +1,5 @@
 package com.igteam.immersivegeology.common;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.common.items.IEItems.Metals;
-import blusunrize.immersiveengineering.common.util.IELogger;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
@@ -139,7 +136,8 @@ public class IGContent
 	public static void postInit()
 	{
 		//Moved, because of IE items not being registered when constructing our mod
-		for(EnumMaterials m : EnumMaterials.values())
+		//Removed, because of favoring our own material system
+		/*for(EnumMaterials m : EnumMaterials.values())
 		{
 			Material material = m.material;
 
@@ -175,7 +173,7 @@ public class IGContent
 						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
 				}
 			}
-		}
+		}*/
 
 	}
 
