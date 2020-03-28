@@ -9,18 +9,18 @@ Immersive Geology aims to make mining in minecraft more realistic, by using real
 <br />
 Content that Immersive Geology will implement
 ------------
-**Metals and their corrosponding ores:**
+**Some of the new ores and the corrasponding items that will be added:**
   
   * Tungsten
-  * Sodium
-  * Potassium
-  * Calcium
-  * Manganese
+  * Titanium
   * Silicon
   * Tin
   * Platinum
-  * Zirconium
-  * Vanadium
-  * Titanium
-  * Chromium
-  * Lithium
+
+*Some ores may require advanced machines to process*
+
+### Mod Authors and Contributor ###
+[Pabilo8](https://www.curseforge.com/members/pabilo8)
+[CrimsonDragonRider](https://www.curseforge.com/members/crimsondragonrider)
+[jstocke12](https://www.curseforge.com/members/jstocke12)
+[Muddykats](https://www.curseforge.com/members/muddykats)
