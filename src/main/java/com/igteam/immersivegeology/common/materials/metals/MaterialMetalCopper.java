@@ -52,7 +52,7 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	@Override
 	public int getMeltingPoint()
 	{
-		return 1357;
+		return 1358;
 	}
 
 	@Override

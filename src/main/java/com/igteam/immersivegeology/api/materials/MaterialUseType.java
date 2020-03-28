@@ -14,7 +14,8 @@ import java.util.function.Function;
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
-	ROCK(),
+	ROCK,
+	CHUNK,
 
 	//Metal items
 	INGOT,

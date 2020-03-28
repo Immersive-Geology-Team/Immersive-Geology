@@ -18,7 +18,8 @@ public enum PeriodicTableElement implements IStringSerializable
 	LEAD("Pb", "444f53"),
 	NICKEL("Ni", "b3c1b3"),
 	SILVER("Ag", "e7e7f7"),
-	URANIUM("U", "759068");
+	URANIUM("U", "759068"),
+	OXYGEN("O", "ffffff");
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
