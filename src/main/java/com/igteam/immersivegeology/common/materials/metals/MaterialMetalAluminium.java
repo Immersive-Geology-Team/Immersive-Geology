@@ -14,12 +14,12 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 27-03-2020.
  */
-public class MaterialMetalAluminum extends MaterialMetalBase
+public class MaterialMetalAluminium extends MaterialMetalBase
 {
 	@Override
 	public String getName()
 	{
-		return "aluminum";
+		return "aluminium";
 	}
 
 	@Nonnull
@@ -33,7 +33,7 @@ public class MaterialMetalAluminum extends MaterialMetalBase
 	public Set<ElementProportion> getElements()
 	{
 		return new HashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.ALUMINUM)
+				new ElementProportion(PeriodicTableElement.ALUMINIUM)
 		));
 	}
 

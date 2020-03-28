@@ -11,7 +11,7 @@ import java.util.Locale;
 public enum PeriodicTableElement implements IStringSerializable
 {
 	//TODO: recolour elements
-	ALUMINUM("Al", 0xffffff),
+	ALUMINIUM("Al", 0xffffff),
 	COPPER("Cu", 0xde8518),
 	GOLD("Au", 0xffffff),
 	IRON("Fe", 0xffffff),
