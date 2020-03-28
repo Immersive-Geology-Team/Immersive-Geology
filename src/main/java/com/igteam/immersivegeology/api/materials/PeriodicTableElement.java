@@ -19,6 +19,8 @@ public enum PeriodicTableElement implements IStringSerializable
 	NICKEL("Ni", "b3c1b3"),
 	SILVER("Ag", "e7e7f7"),
 	URANIUM("U", "759068"),
+	TUNGSTEN("W", "96989e"),
+	MANGANESE("Mn", "2d3844"),
 	OXYGEN("O", "ffffff");
 
 	String symbol;
