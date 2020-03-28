@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.materials.stones;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
@@ -13,20 +14,20 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 27-03-2020.
  */
-public class MaterialStoneRhyolite extends MaterialStoneBase
+public class MaterialStoneBasalt extends MaterialStoneBase
 {
 	//Rhyolite is the default minecraft stone, renamed
 	@Override
 	public String getName()
 	{
-		return "rhyolite";
+		return "basalt";
 	}
 
 	@Nonnull
 	@Override
 	public String getModID()
 	{
-		return "minecraft";
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.UNCOMMON;
 	}
 
 	//Based on https://www.tulane.edu/~sanelson/eens1110/igneous.htm
@@ -50,20 +51,20 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public int getBoilingPoint()
 	{
-		return 900+273+300;
+		return 1100+273+300;
 	}
 
 	//An average value
 	@Override
 	public int getMeltingPoint()
 	{
-		return 900+273;
+		return 1100+273;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x7a7974;
+		return 0x281f1f;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

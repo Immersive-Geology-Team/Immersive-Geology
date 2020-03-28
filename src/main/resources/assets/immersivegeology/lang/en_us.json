@@ -12,6 +12,8 @@
   "item.immersivegeology.gear.name": "%s Gear",
   "item.immersivegeology.wire.name": "%s Wire",
   "item.immersivegeology.tiny_dust.name": "%s Tiny Dust",
+  "item.immersivegeology.rock.name": "%s Rock Chunk",
+
   "block.immersivegeology.storage.name": "%s Block",
   "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
   "material.minecraft.nickel.name": "Gold",
@@ -22,6 +24,12 @@
   "material.immersiveengineering.nickel.name": "Nickel",
   "material.immersiveengineering.silver.name": "Silver",
   "material.immersiveengineering.uranium.name": "Uranium",
-
-  "material.immersivegeology.tungsten.name": "Tungsten"
+  "material.immersivegeology.tungsten.name": "Tungsten",
+  "material.immersivegeology.limestone.name": "Limestone",
+  "material.immersivegeology.basalt.name": "Basalt",
+  "material.minecraft.granite.name": "Granite",
+  "material.minecraft.diorite.name": "Diorite",
+  "material.minecraft.andesite.name": "Andesite",
+  "material.minecraft.endstone.name": "Endstone",
+  "material.minecraft.netherrack.name": "Netherrack"
 }

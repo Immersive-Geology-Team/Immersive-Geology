@@ -13,13 +13,13 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 27-03-2020.
  */
-public class MaterialStoneRhyolite extends MaterialStoneBase
+public class MaterialStoneAndesite extends MaterialStoneBase
 {
 	//Rhyolite is the default minecraft stone, renamed
 	@Override
 	public String getName()
 	{
-		return "rhyolite";
+		return "diorite";
 	}
 
 	@Nonnull
@@ -50,20 +50,20 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public int getBoilingPoint()
 	{
-		return 900+273+300;
+		return 1100+273+300;
 	}
 
 	//An average value
 	@Override
 	public int getMeltingPoint()
 	{
-		return 900+273;
+		return 1100+273;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x7a7974;
+		return 0x7b7b7b;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

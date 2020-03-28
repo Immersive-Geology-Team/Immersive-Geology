@@ -4,7 +4,7 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.metals.*;
-import com.igteam.immersivegeology.common.materials.stones.MaterialStoneRhyolite;
+import com.igteam.immersivegeology.common.materials.stones.*;
 
 import java.util.stream.Stream;
 
@@ -27,7 +27,17 @@ public enum EnumMaterials
     Steel(new MaterialMetalSteel()) */
 
 	//Stones
-	Rhyolite(new MaterialStoneRhyolite());
+	//TODO: add chemical formulas for the stones
+	Rhyolite(new MaterialStoneRhyolite()),
+	Diorite(new MaterialStoneDiorite()),
+	Andesite(new MaterialStoneAndesite()),
+	Granite(new MaterialStoneGranite()),
+
+	Netherrack(new MaterialStoneNetherrack()),
+	Endstone(new MaterialStoneEndstone()),
+
+	Basalt(new MaterialStoneBasalt()),
+	Limestone(new MaterialStoneLimestone());
 
 	public final Material material;
 

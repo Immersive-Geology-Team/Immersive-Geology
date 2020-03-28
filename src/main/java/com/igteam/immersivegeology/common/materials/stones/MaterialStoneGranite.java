@@ -13,13 +13,13 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 27-03-2020.
  */
-public class MaterialStoneRhyolite extends MaterialStoneBase
+public class MaterialStoneGranite extends MaterialStoneBase
 {
 	//Rhyolite is the default minecraft stone, renamed
 	@Override
 	public String getName()
 	{
-		return "rhyolite";
+		return "granite";
 	}
 
 	@Nonnull
@@ -40,7 +40,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.RARE;
 	}
 
 	//Based on https://www.tulane.edu/~sanelson/eens1110/igneous.htm
@@ -63,7 +63,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x7a7974;
+		return 0xffd5db;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

@@ -13,13 +13,13 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 27-03-2020.
  */
-public class MaterialStoneRhyolite extends MaterialStoneBase
+public class MaterialStoneNetherrack extends MaterialStoneBase
 {
 	//Rhyolite is the default minecraft stone, renamed
 	@Override
 	public String getName()
 	{
-		return "rhyolite";
+		return "netherrack";
 	}
 
 	@Nonnull
@@ -40,63 +40,58 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.UNCOMMON;
 	}
 
-	//Based on https://www.tulane.edu/~sanelson/eens1110/igneous.htm
-	//A bit based on https://en.wikipedia.org/wiki/Magma#Temperature
-
-	//A totally arbitrary value
 	@Override
 	public int getBoilingPoint()
 	{
-		return 900+273+300;
+		return 2000+273+400;
 	}
 
-	//An average value
 	@Override
 	public int getMeltingPoint()
 	{
-		return 900+273;
+		return 2000+273;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x7a7974;
+		return 0x4e1e25;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
 	@Override
 	public float getHardness()
 	{
-		return 1.5F;
+		return 0.4F;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 6.0F;
+		return 0.4F;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		return 6f;
+		return 0.4F;
 	}
 
 	//Copied from Immersive Intelligence (steel has i think 1.65, leaves 0.35)
 	@Override
 	public float getDensity()
 	{
-		return 1;
+		return 0.85f;
 	}
 
 	//Stone pickaxe level
 	@Override
 	public int getBlockHarvestLevel()
 	{
-		return 0;
+		return 1;
 	}
 
 	@Override
