@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.metals.*;
+import com.igteam.immersivegeology.common.materials.stones.MaterialStoneRhyolite;
 
 import java.util.stream.Stream;
 
@@ -11,6 +12,7 @@ public enum EnumMaterials
 {
 
 	Empty(new MaterialEmpty()),
+	//Metals
 	Aluminum(new MaterialMetalAluminium()),
 	Copper(new MaterialMetalCopper()),
 	Gold(new MaterialMetalGold()),
@@ -18,11 +20,14 @@ public enum EnumMaterials
 	Lead(new MaterialMetalLead()),
 	Nickel(new MaterialMetalNickel()),
 	Silver(new MaterialMetalSilver()),
-	Uranium(new MaterialMetalUranium());
+	Uranium(new MaterialMetalUranium()),
     /*, TODO add all Materials
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
     Steel(new MaterialMetalSteel()) */
+
+	//Stones
+	Rhyolite(new MaterialStoneRhyolite());
 
 	public final Material material;
 
