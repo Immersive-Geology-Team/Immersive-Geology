@@ -23,7 +23,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	MANGANESE("Mn", "2d3844"),
 	THORIUM("Th", "b2beb5"),
 	TIN("Sn", "d3d4d5"),
-	OXYGEN("O", "ffffff");
+	OXYGEN("O", "8F8FFF");
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
