@@ -5,7 +5,6 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
-import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
@@ -60,7 +59,6 @@ public class IGMaterialItem extends IGBaseItem
 	public Material getMaterialFromNBT(ItemStack stack)
 	{
 		String matName = ItemNBTHelper.getString(stack, "material");
-		IGLogger.info(matName);
 		return allowedMaterials.getOrDefault(matName, EnumMaterials.Empty.material);
 	}
 
