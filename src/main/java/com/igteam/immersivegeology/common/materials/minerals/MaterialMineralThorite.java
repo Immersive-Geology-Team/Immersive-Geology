@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MaterialMineralUraninite extends MaterialMineralBase
+public class MaterialMineralThorite extends MaterialMineralBase
 {
     @Override
     public String getName()
     {
-        return "uraninite";
+        return "thorite";
     }
 
     @Override
@@ -27,7 +27,7 @@ public class MaterialMineralUraninite extends MaterialMineralBase
     public Set<PeriodicTableElement.ElementProportion> getElements()
     {
         return new HashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.URANIUM),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.THORIUM),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
         ));
     }
@@ -35,18 +35,18 @@ public class MaterialMineralUraninite extends MaterialMineralBase
     @Override
     public Rarity getRarity()
     {
-        return Rarity.UNCOMMON;
+        return Rarity.RARE;
     }
 
     @Override
     public int getBoilingPoint()
     {
-        return 4404;
+        return 4673;
     }
 
     @Override
     public int getMeltingPoint() {
-        return 3138;
+        return 3663;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class MaterialMineralUraninite extends MaterialMineralBase
 
     @Override
     public int getColor(int temperature) {
-        return 0xB2BEB5;
+        return 0xc68f39;
     }
 
     @Override

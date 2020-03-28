@@ -21,6 +21,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	URANIUM("U", "759068"),
 	TUNGSTEN("W", "96989e"),
 	MANGANESE("Mn", "2d3844"),
+	THORIUM("Th", "b2beb5"),
 	OXYGEN("O", "ffffff");
 
 	String symbol;
