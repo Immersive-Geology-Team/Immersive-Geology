@@ -7,16 +7,16 @@ public enum EnumMetals {
 
     Copper(new MaterialMetalCopper(), Type.IE_PURE),
     Aluminum(new MaterialMetalAluminum(), Type.IE_PURE),
-    Iron(new MaterialMetalIron(), Type.VANILLA)
-    /*, TODO add all Materials
-    Lead(new MaterialMetalLead(), Type.IE_PURE),
+    Iron(new MaterialMetalIron(), Type.VANILLA),
     Silver(new MaterialMetalSilver(), Type.IE_PURE),
     Nickel(new MaterialMetalNickel(), Type.IE_PURE),
     Uranium(new MaterialMetalUranium(), Type.IE_PURE),
+    Lead(new MaterialMetalLead(), Type.IE_PURE),
+    Gold(new MaterialMetalGold(), Type.VANILLA)
+    /*, TODO add all Materials
     Constantan(new MaterialMetalConstantan(), Type.IE_ALLOY),
     Electrum(new MaterialMetalElectrum(), Type.IE_ALLOY),
-    Steel(new MaterialMetalSteel(), Type.IE_ALLOY),
-    Gold(new MaterialMetalGold(), Type.VANILLA) */
+    Steel(new MaterialMetalSteel(), Type.IE_ALLOY) */
     ;
 
     public final MaterialMetalBase metal;
