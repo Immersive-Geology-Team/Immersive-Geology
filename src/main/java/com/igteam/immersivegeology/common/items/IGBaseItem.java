@@ -1,9 +1,11 @@
 package com.igteam.immersivegeology.common.items;
 
+import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.IGContent;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -14,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
@@ -90,6 +94,12 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem
 	public boolean hasCustomProperties()
 	{
 		return true;//TODO does always returning true break anything?
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public FontRenderer getFontRenderer(ItemStack stack)
+	{
+		return ClientProxy.itemFont;
 	}
 
     /* //TODO add obj renderer?
