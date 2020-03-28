@@ -57,7 +57,7 @@ public class MaterialMineralHübnerite extends MaterialMineralBase
 
     @Override
     public int getColor(int temperature) {
-        return 0xa7d8de;
+        return 0x582721;
     }
 
     @Override
