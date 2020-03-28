@@ -58,7 +58,7 @@ public class MaterialMetalGold extends MaterialMetalBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xe39919;
+		return 0xFFD700;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

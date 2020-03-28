@@ -19,7 +19,7 @@ public class MaterialMetalAluminium extends MaterialMetalBase
 	@Override
 	public String getName()
 	{
-		return "aluminium";
+		return "aluminum";
 	}
 
 	@Nonnull
@@ -58,7 +58,7 @@ public class MaterialMetalAluminium extends MaterialMetalBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xe39919;
+		return 0xd0d5db;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
