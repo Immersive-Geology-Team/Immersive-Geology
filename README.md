@@ -5,10 +5,12 @@ Immersive Geology Code Repository
 > Immersive Geology requires Immersive Engineering for the approrite Minecraft Version <br />
 
 Immersive Geology aims to make mining in minecraft more realistic, by using realworld processes as a refrence.<br />
-**This mod is in development and not all features have been implemented**<br />
 <br />
-Content that Immersive Geology will implement
-------------
+**This mod is in development and not all features have been implemented**
+<br />
+
+ Content that Immersive Geology will implement
+ ------------
 **Some of the new ores and the corrasponding items that will be added:**
   
   * Tungsten
