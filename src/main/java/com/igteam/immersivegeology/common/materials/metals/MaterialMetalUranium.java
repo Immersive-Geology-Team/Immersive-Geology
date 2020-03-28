@@ -58,7 +58,7 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x536d3c;
+		return 0x759068;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
