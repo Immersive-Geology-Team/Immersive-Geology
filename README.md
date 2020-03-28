@@ -20,7 +20,7 @@ Content that Immersive Geology will implement
 *Some ores may require advanced machines to process*
 
 ### Mod Authors and Contributor ###
-[Pabilo8](https://www.curseforge.com/members/pabilo8)
-[CrimsonDragonRider](https://www.curseforge.com/members/crimsondragonrider)
-[jstocke12](https://www.curseforge.com/members/jstocke12)
-[Muddykats](https://www.curseforge.com/members/muddykats)
+[Pabilo8](https://www.curseforge.com/members/pabilo8)<br />
+[CrimsonDragonRider](https://www.curseforge.com/members/crimsondragonrider)<br />
+[jstocke12](https://www.curseforge.com/members/jstocke12)<br />
+[Muddykats](https://www.curseforge.com/members/muddykats)<br />
