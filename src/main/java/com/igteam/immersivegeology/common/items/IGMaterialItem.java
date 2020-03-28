@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
@@ -12,9 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -23,7 +22,7 @@ import java.util.Locale;
 public class IGMaterialItem extends IGBaseItem
 {
 	public MaterialUseType subtype;
-	List<Material> allowedMaterials = new ArrayList<>();
+	HashMap<String, Material> allowedMaterials = new HashMap<>();
 	HashMap<Material, Item> replacementItems = new HashMap<>();
 
 	public IGMaterialItem(MaterialUseType type)
@@ -60,20 +59,14 @@ public class IGMaterialItem extends IGBaseItem
 
 	public Material getMaterialFromNBT(ItemStack stack)
 	{
-		try
-		{
-			return EnumMaterials.valueOf(ItemNBTHelper.getString(stack, "material")).material;
-		} catch(IllegalArgumentException e)
-		{
-			//When item has no material or the material doesn't exist
-			return EnumMaterials.Empty.material;
-		}
-
+		String matName = ItemNBTHelper.getString(stack, "material");
+		IGLogger.info(matName);
+		return allowedMaterials.getOrDefault(matName, EnumMaterials.Empty.material);
 	}
 
 	public void addAllowedMaterial(Material material)
 	{
-		allowedMaterials.add(material);
+		allowedMaterials.put(material.getName(), material);
 	}
 
 	public void addReplacementItem(Material material, Item item)
@@ -83,7 +76,7 @@ public class IGMaterialItem extends IGBaseItem
 
 	public Item getReplacementItem(Material material)
 	{
-		return replacementItems.getOrDefault(material, allowedMaterials.contains(material)?this: Items.AIR);
+		return replacementItems.getOrDefault(material, allowedMaterials.containsValue(material)?this: Items.AIR);
 	}
 
 	@Override
@@ -91,11 +84,17 @@ public class IGMaterialItem extends IGBaseItem
 	{
 		if(this.isInGroup(group))
 		{
-			for(Material material : allowedMaterials)
+			for(Material material : allowedMaterials.values())
 			{
-				CompoundNBT tag = new CompoundNBT();
-				tag.putString("material", material.getName());
-				items.add(new ItemStack(this, 1, tag));
+				if(!replacementItems.containsKey(material))
+				{
+					CompoundNBT tag = new CompoundNBT();
+					ItemStack stack = new ItemStack(this);
+					ItemNBTHelper.putString(stack, "material", material.getName());
+					items.add(stack);
+				}
+				else
+					items.add(new ItemStack(getReplacementItem(material)));
 			}
 		}
 	}
