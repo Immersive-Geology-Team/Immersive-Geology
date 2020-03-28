@@ -82,7 +82,7 @@ public class IGMaterialItem extends IGBaseItem
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items)
 	{
-		if(this.isInGroup(group))
+		if(this.isInGroup(group)||group.equals(ItemGroup.SEARCH))
 		{
 			for(Material material : allowedMaterials.values())
 			{
@@ -93,7 +93,7 @@ public class IGMaterialItem extends IGBaseItem
 					ItemNBTHelper.putString(stack, "material", material.getName());
 					items.add(stack);
 				}
-				else
+				else if(!group.equals(ItemGroup.SEARCH))
 					items.add(new ItemStack(getReplacementItem(material)));
 			}
 		}

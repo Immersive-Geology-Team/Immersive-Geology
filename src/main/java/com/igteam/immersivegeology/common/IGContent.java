@@ -60,41 +60,6 @@ public class IGContent
 				if(material.hasSubtype(materialItem.getKey()))
 					materialItem.getValue().addAllowedMaterial(material);
 			}
-
-			//If IE already contains the metal
-			if(m.material.getModID().equals(ImmersiveEngineering.MODID))
-			{
-				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
-				try
-				{
-					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
-				} catch(IllegalArgumentException e)
-				{
-					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again...", m));
-				}
-
-				if(ieMetal!=null)
-				{
-					IGMaterialItem ingot = getItemForType(MaterialUseType.INGOT);
-					IGMaterialItem plate = getItemForType(MaterialUseType.PLATE);
-					IGMaterialItem dust = getItemForType(MaterialUseType.DUST);
-					IGMaterialItem nugget = getItemForType(MaterialUseType.NUGGET);
-
-					//In case someone else breaks our registry
-					//Which won't happen, but why not have this
-
-					if(ingot!=null)
-						ingot.addReplacementItem(material, Metals.ingots.get(ieMetal));
-					if(plate!=null)
-						plate.addReplacementItem(material, Metals.plates.get(ieMetal));
-					if(dust!=null)
-						dust.addReplacementItem(material, Metals.dusts.get(ieMetal));
-					if(nugget!=null)
-						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
-				}
-			}
-
-
 		}
 
 	}
@@ -173,6 +138,44 @@ public class IGContent
 
 	public static void postInit()
 	{
+		//Moved, because of IE items not being registered when constructing our mod
+		for(EnumMaterials m : EnumMaterials.values())
+		{
+			Material material = m.material;
+
+			//If IE already contains the metal
+			if(m.material.getModID().equals(ImmersiveEngineering.MODID))
+			{
+				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
+				try
+				{
+					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
+				} catch(IllegalArgumentException e)
+				{
+					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again...", m));
+				}
+
+				if(ieMetal!=null)
+				{
+					IGMaterialItem ingot = getItemForType(MaterialUseType.INGOT);
+					IGMaterialItem plate = getItemForType(MaterialUseType.PLATE);
+					IGMaterialItem dust = getItemForType(MaterialUseType.DUST);
+					IGMaterialItem nugget = getItemForType(MaterialUseType.NUGGET);
+
+					//In case someone else breaks our registry
+					//Which won't happen, but why not have this
+
+					if(ingot!=null)
+						ingot.addReplacementItem(material, Metals.ingots.get(ieMetal));
+					if(plate!=null)
+						plate.addReplacementItem(material, Metals.plates.get(ieMetal));
+					if(dust!=null)
+						dust.addReplacementItem(material, Metals.dusts.get(ieMetal));
+					if(nugget!=null)
+						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
+				}
+			}
+		}
 
 	}
 
