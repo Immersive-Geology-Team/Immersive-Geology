@@ -10,7 +10,15 @@ import java.util.Locale;
  */
 public enum PeriodicTableElement implements IStringSerializable
 {
-	COPPER("Cu", 0xde8518);
+	//TODO: recolour elements
+	ALUMINUM("Al", 0xffffff),
+	COPPER("Cu", 0xde8518),
+	GOLD("Au", 0xffffff),
+	IRON("Fe", 0xffffff),
+	LEAD("Pb", 0xffffff),
+	NICKEL("Ni", 0xffffff),
+	SILVER("Ag", 0xffffff),
+	URANIUM("U", 0xffffff);
 
 	String latinName, symbol;
 	//the color of the this chemical element, not the metals made of it
