@@ -22,6 +22,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	TUNGSTEN("W", "96989e"),
 	MANGANESE("Mn", "2d3844"),
 	THORIUM("Th", "b2beb5"),
+	TIN("Sn", "d3d4d5"),
 	OXYGEN("O", "ffffff");
 
 	String symbol;
