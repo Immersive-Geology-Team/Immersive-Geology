@@ -11,7 +11,23 @@ import java.util.Locale;
 public enum PeriodicTableElement implements IStringSerializable
 {
 	//TODO: recolour elements
+	HYDROGEN("H", "ffffff"),
+	HELIUM("He", "d0d4d3"),
+	LITHIUM("Li", "d5d5d7"),
+	BERYLLIUM("Be", "708090"),
+	BORON("B", "000000"),
+	CARBON("C", "36454f"),
+	NITROGEN("N", "ffffff"),
+	OXYGEN("O", "8F8FFF"),
+	FLUORINE("F", "daa520"),
+	NEON("Ne", "ff073a"),
+	SODIUM("Na", "0000FF"),
+	MAGNESIUM("Mg", "E9EEEB"),
 	ALUMINIUM("Al", "d0d5db"),
+	SILICON("Si", "9599a5"),
+	PHOSPHORUS("P", "a5cfc7"),
+	SULFUR("S", "f2ec44"),
+	CHLORINE("Cl", "cfffd2"),
 	COPPER("Cu", "de8518"),
 	GOLD("Au", "ffd700"),
 	IRON("Fe", "d8dada"),
@@ -22,8 +38,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	TUNGSTEN("W", "96989e"),
 	MANGANESE("Mn", "2d3844"),
 	THORIUM("Th", "b2beb5"),
-	TIN("Sn", "d3d4d5"),
-	OXYGEN("O", "8F8FFF");
+	TIN("Sn", "d3d4d5");
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
