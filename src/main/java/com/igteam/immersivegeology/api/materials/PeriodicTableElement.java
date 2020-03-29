@@ -48,13 +48,28 @@ public enum PeriodicTableElement implements IStringSerializable
 	BROMINE("Br", "a13d2d"),
 	KRYPTON("Kr", "b8c0c3"),
 	RUBIDIUM("Rb", "c5b9b4"),
+	STRONTIUM("Sr", "D1C5BC"),
+	YTTRIUM("Y", "2E5090"),
+	ZIRCONIUM("Zr", "eaeded"),
+	NIOBIUM("Nb", "f0f7ff"),
+	MOLYBDENUM("Mo", "aaa9ad"),
+	TECHNETIUM("Tc", "8c969d"),
+	RUTHENIUM("Ru", "C9CBC8"),
+	RHODIUM("Rh", "E2E7E1"),
+	PALLADIUM("PD", "CED0DD"),
+	SILVER("Ag", "e7e7f7"),
+	CADMIUM("Cd", "e30022"),
+	INDIUM("In", "565f6b"),
+	TIN("Sn", "d3d4d5"),
+	ANTIMONY("Sb", "4b4e4c"),
+	TELLURIUM("Te", "aaa9ad"),
+	IODINE("I", "301934"),
+	XENON("Xe", "14397f"),
 	GOLD("Au", "ffd700"),
 	LEAD("Pb", "444f53"),
-	SILVER("Ag", "e7e7f7"),
 	URANIUM("U", "759068"),
 	TUNGSTEN("W", "96989e"),
-	THORIUM("Th", "b2beb5"),
-	TIN("Sn", "d3d4d5");
+	THORIUM("Th", "b2beb5");
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
