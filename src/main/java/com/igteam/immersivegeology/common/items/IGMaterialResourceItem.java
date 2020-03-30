@@ -1,11 +1,15 @@
 package com.igteam.immersivegeology.common.items;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.sun.jna.platform.KeyboardUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
  */
 public class IGMaterialResourceItem extends IGMaterialItem
 {
+
 	public IGMaterialResourceItem(MaterialUseType type)
 	{
 		super(type);
@@ -25,10 +30,17 @@ public class IGMaterialResourceItem extends IGMaterialItem
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		StringTextComponent text = new StringTextComponent("");
-		getMaterialFromNBT(stack).getElements().forEach(elementProportion -> text
-				.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
-				.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
-		tooltip.add(text);
+		if (hasShiftDown() || Minecraft.getInstance().gameSettings.advancedItemTooltips)
+		{
+			getMaterialFromNBT(stack).getElements().forEach(elementProportion -> text
+					.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
+					.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
+			tooltip.add(text);
+		}
+	}
+
+	public static boolean hasShiftDown() {
+		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340) || InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
 	}
 
 
