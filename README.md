@@ -4,7 +4,7 @@ Immersive Geology Code Repository
 > Immersive Geology is a mod for Minecraft Versions 1.14<br />
 > Immersive Geology requires Immersive Engineering for the approrite Minecraft Version <br />
 
-Immersive Geology aims to make mining in minecraft more realistic, by using realworld processes as a refrence.<br />
+Immersive Geology aims to make mining in minecraft more realistic, by using realworld processes as a reference.<br />
 <br />
 **This mod is in development and not all features have been implemented**
 <br />
