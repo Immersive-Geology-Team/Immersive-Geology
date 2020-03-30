@@ -4,6 +4,9 @@ import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.FontRenderer;
@@ -25,19 +28,20 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class IGBlockItem extends BlockItem
+public class IGBlockItem extends BlockItem implements IGSubGroup
 {
 	private int burnTime;
-
-	public IGBlockItem(Block b, Item.Properties props)
+	protected ItemSubGroup subGroup;
+	public IGBlockItem(Block b, Item.Properties props, ItemSubGroup sub)
 	{
 		super(b, props);
+		this.subGroup = sub;
 	}
 
 	public IGBlockItem(Block b)
 	{
-		this(b, new Item.Properties().group(ImmersiveGeology.itemGroup));
-		setRegistryName(b.getRegistryName());
+		this(b, new Item.Properties().group(ImmersiveGeology.IGgroup), ItemSubGroup.misc);
+		setRegistryName(b.getRegistryName()); 
 	}
 
 	@Override
@@ -114,7 +118,7 @@ public class IGBlockItem extends BlockItem
 	{
 		public BlockItemIENoInventory(Block b, Properties props)
 		{
-			super(b, props);
+			super(b, props, ItemSubGroup.misc);
 		}
 
 		@Nullable
@@ -129,5 +133,11 @@ public class IGBlockItem extends BlockItem
 			}
 			return ret;
 		}
+	}
+
+	@Override
+	public ItemSubGroup getSubGroup() {
+		// TODO Auto-generated method stub
+		return subGroup;
 	}
 }
