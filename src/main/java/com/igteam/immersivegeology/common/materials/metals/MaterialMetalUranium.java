@@ -40,7 +40,7 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.UNCOMMON;
 	}
 
 	@Override

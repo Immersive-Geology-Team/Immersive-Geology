@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -12,66 +12,63 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Pabilo8 on 25-03-2020.
+ * Created by Crimson on 31-03-2020.
  */
-public class MaterialMetalCopper extends MaterialMetalBase
+public class MaterialMetalManganese extends MaterialMetalBase
 {
 	@Override
 	public String getName()
 	{
-		return "copper";
+		return "manganese";
 	}
 
 	@Nonnull
 	@Override
 	public String getModID()
 	{
-		return ImmersiveEngineering.MODID;
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
 	public Set<ElementProportion> getElements()
 	{
 		return new HashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.COPPER)
+				new ElementProportion(PeriodicTableElement.MANGANESE)
 		));
 	}
 
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.UNCOMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		return 2835;
+		return 2334;
 	}
 
 	@Override
-	public int getMeltingPoint()
-	{
-		return 1358;
-	}
+	public int getMeltingPoint() { return 1519; }
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xe39919;
+		return 0xc4aead;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
 	@Override
 	public float getHardness()
 	{
-		return 5.0F;
+		return 10.0F;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 10.0F;
+		return 12.0F;
 	}
 
 	@Override
@@ -84,14 +81,14 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	@Override
 	public float getDensity()
 	{
-		return 1.25f;
+		return 1.2f;
 	}
 
 	//Stone pickaxe level
 	@Override
 	public int getBlockHarvestLevel()
 	{
-		return 1;
+		return 2;
 	}
 
 	@Override

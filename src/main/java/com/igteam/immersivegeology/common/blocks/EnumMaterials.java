@@ -18,7 +18,15 @@ public enum EnumMaterials
 	Lead(new MaterialMetalLead()),
 	Nickel(new MaterialMetalNickel()),
 	Silver(new MaterialMetalSilver()),
-	Uranium(new MaterialMetalUranium());
+	Uranium(new MaterialMetalUranium()),
+	Manganese(new MaterialMetalManganese()),
+	Tin(new MaterialMetalTin()),
+	Chromium(new MaterialMetalChromium()),
+	Vanadium(new MaterialMetalVanadium()),
+	Titanium(new MaterialMetalTitanium()),
+	Zirconium(new MaterialMetalZirconium()),
+	Platinum(new MaterialMetalPlatinum()),
+	Tungsten(new MaterialMetalTungsten());
     /*, TODO add all Materials
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
