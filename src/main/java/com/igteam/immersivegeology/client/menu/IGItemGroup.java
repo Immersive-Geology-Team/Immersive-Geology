@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.client.menu;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 

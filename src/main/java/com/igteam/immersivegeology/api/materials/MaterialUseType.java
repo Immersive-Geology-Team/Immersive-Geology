@@ -17,11 +17,11 @@ public enum MaterialUseType implements IStringSerializable
 	ROCK(ItemSubGroup.raw),
 
 	//Metal items
-	INGOT(ItemSubGroup.raw),
-	PLATE(ItemSubGroup.processed),
-	DUST(ItemSubGroup.misc),
-	TINY_DUST(ItemSubGroup.misc),
-	ROD(ItemSubGroup.machines),
+	INGOT(ItemSubGroup.processed),
+	PLATE(ItemSubGroup.raw),
+	DUST(ItemSubGroup.raw),
+	TINY_DUST(ItemSubGroup.raw),
+	ROD(ItemSubGroup.processed),
 	NUGGET(ItemSubGroup.processed),
 	GEAR(ItemSubGroup.processed),
 	WIRE(ItemSubGroup.processed),
