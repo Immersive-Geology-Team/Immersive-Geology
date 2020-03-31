@@ -1,6 +1,8 @@
 package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.ClientProxy;
+import com.igteam.immersivegeology.client.menu.IGItemGroup;
+import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.util.IGLogger;
@@ -12,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
@@ -37,19 +40,12 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static ItemGroup itemGroup = new ItemGroup(MODID)
-	{
-		@Override
-		@Nonnull
-		public ItemStack createIcon()
-		{
-			return new ItemStack(Blocks.IRON_ORE); //TODO add proper tab icon
-		}
-	};
+	public static IGItemGroup IGgroup = new IGItemGroup(MODID);
 
 	public ImmersiveGeology()
 	{
 		IGLogger.logger = LogManager.getLogger(MODID);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 
@@ -58,6 +54,12 @@ public class ImmersiveGeology
 		IGContent.modConstruction();
 	}
 
+	@SubscribeEvent
+	public void clientSetup(FMLClientSetupEvent event)
+	{
+		MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler()); 
+	}
+	
 	@SubscribeEvent
 	public void setup(FMLCommonSetupEvent event)
 	{

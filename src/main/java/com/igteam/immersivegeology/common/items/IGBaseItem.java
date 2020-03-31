@@ -4,6 +4,8 @@ import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,12 +25,14 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem
+public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, IGSubGroup
 {
 	public String itemName;
 	private int burnTime = -1;
 	private boolean isHidden = false;
 
+	protected ItemSubGroup subGroup;
+	
 	public IGBaseItem(String name)
 	{
 		this(name, new Properties());
@@ -36,10 +40,10 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem
 
 	public IGBaseItem(String name, Properties props)
 	{
-		super(props.group(ImmersiveGeology.itemGroup));
-		this.itemName = name;
-		setRegistryName(ImmersiveGeology.MODID, name);
+		super(props.group(ImmersiveGeology.IGgroup));
 		IGContent.registeredIGItems.add(this);
+		setRegistryName(ImmersiveGeology.MODID, name);
+		this.itemName = name;
 	}
 
 	public IGBaseItem setBurnTime(int burnTime)
@@ -100,6 +104,12 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem
 	public FontRenderer getFontRenderer(ItemStack stack)
 	{
 		return ClientProxy.itemFont;
+	}
+
+	@Override
+	public ItemSubGroup getSubGroup() {
+		// TODO Auto-generated method stub
+		return subGroup;
 	}
 
     /* //TODO add obj renderer?

@@ -61,7 +61,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 			try
 			{
 				Item item = itemBlock.getConstructor(Block.class, Item.Properties.class)
-						.newInstance(this, new Item.Properties().group(ImmersiveGeology.itemGroup));
+						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IGgroup));
 				item.setRegistryName(registryName);
 				IGContent.registeredIGItems.add(item);
 			} catch(Exception e)

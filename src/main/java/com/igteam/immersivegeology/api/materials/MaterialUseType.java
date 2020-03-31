@@ -7,24 +7,25 @@ import net.minecraft.util.IStringSerializable;
 
 import java.util.Locale;
 import java.util.function.Function;
-
+import com.igteam.immersivegeology.client.menu.helper.*;
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
-	ROCK(),
+	ROCK(ItemSubGroup.raw),
+	CHUNK(ItemSubGroup.raw),
 
 	//Metal items
-	INGOT,
-	PLATE,
-	DUST,
-	TINY_DUST,
-	ROD,
-	NUGGET,
-	GEAR,
-	WIRE,
+	INGOT(ItemSubGroup.processed),
+	PLATE(ItemSubGroup.processed),
+	DUST(ItemSubGroup.processed),
+	TINY_DUST(ItemSubGroup.processed),
+	ROD(ItemSubGroup.processed),
+	NUGGET(ItemSubGroup.processed),
+	GEAR(ItemSubGroup.processed),
+	WIRE(ItemSubGroup.processed),
 
 	//Tool System, Experimental / Not sure
 	PICKAXE(UseCategory.TOOL),
@@ -36,45 +37,58 @@ public enum MaterialUseType implements IStringSerializable
 	//Blocks
 
 	//Metals
-	STORAGE(UseCategory.BLOCK),
-	SHEETMETAL(UseCategory.BLOCK),
-	DUST_BLOCK(UseCategory.BLOCK),
+	STORAGE(UseCategory.BLOCK,ItemSubGroup.processed),
+	SHEETMETAL(UseCategory.BLOCK,ItemSubGroup.processed),
+	DUST_BLOCK(UseCategory.BLOCK,ItemSubGroup.processed),
 
 	//Minerals / metals
-	POOR_ORE(UseCategory.BLOCK),
-	NORMAL_ORE(UseCategory.BLOCK),
-	RICH_ORE(UseCategory.BLOCK),
+	POOR_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
+	NORMAL_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
+	RICH_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
 
 	//Stones
-	DIRT(UseCategory.BLOCK),
-	GRAVEL(UseCategory.BLOCK),
-	SAND(UseCategory.BLOCK),
-	COBBLESTONE(UseCategory.BLOCK),
-	SMOOTH_STONE(UseCategory.BLOCK),
+	DIRT(UseCategory.BLOCK,ItemSubGroup.raw),
+	GRAVEL(UseCategory.BLOCK,ItemSubGroup.raw),
+	SAND(UseCategory.BLOCK,ItemSubGroup.raw),
+	COBBLESTONE(UseCategory.BLOCK,ItemSubGroup.raw),
+	SMOOTH_STONE(UseCategory.BLOCK,ItemSubGroup.raw),
 
-	POLISHED_STONE(UseCategory.BLOCK),
-	SMALL_BRICKS(UseCategory.BLOCK),
-	NORMAL_BRICKS(UseCategory.BLOCK),
-	ROAD_BRICKS(UseCategory.BLOCK),
-	PILLAR(UseCategory.BLOCK),
+	POLISHED_STONE(UseCategory.BLOCK,ItemSubGroup.processed),
+	SMALL_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),
+	NORMAL_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),
+	ROAD_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),
+	PILLAR(UseCategory.BLOCK,ItemSubGroup.processed),
 
 	//Fluids
-	FLUIDS(UseCategory.BLOCK);
-
+	FLUIDS(UseCategory.BLOCK,ItemSubGroup.misc);
+	
+	ItemSubGroup subGroup;
 	UseCategory category;
 	//Add item, block function - the default values are a resource item and a resource block
 	Function<MaterialUseType, IGMaterialItem> itemFunction = (materialUseType) -> new IGMaterialResourceItem(this);
 	//TODO: add blocks
 	Function<MaterialUseType, IGMaterialBlock> blockFunction = (materialUseType) -> null;
 
+	MaterialUseType(ItemSubGroup group){
+		this.category = UseCategory.RESOURCE_ITEM;
+		this.subGroup = group;
+	}
+	
 	MaterialUseType()
 	{
 		this.category = UseCategory.RESOURCE_ITEM;
+		this.subGroup = ItemSubGroup.raw;
 	}
 
 	MaterialUseType(UseCategory category)
 	{
 		this.category = category;
+	}
+	
+	MaterialUseType(UseCategory category, ItemSubGroup sub)
+	{
+		this.category = category;
+		this.subGroup = sub;
 	}
 
 	//Use, when the material will return a non-standard item or block
@@ -111,5 +125,10 @@ public enum MaterialUseType implements IStringSerializable
 		ITEM,
 		//Will be used for blocks
 		BLOCK
+	}
+
+	public ItemSubGroup getSubGroup() {
+		// TODO Auto-generated method stub
+		return subGroup;
 	}
 }
