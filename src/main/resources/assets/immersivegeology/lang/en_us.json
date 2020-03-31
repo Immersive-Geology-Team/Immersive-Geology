@@ -15,13 +15,5 @@
   "block.immersivegeology.storage.name": "%s Block",
   "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
   "material.minecraft.nickel.name": "Nickel",
-  "material.minecraft.gold.name": "Gold",
-  "material.minecraft.iron.name": "Iron",
-  "material.immersiveengineering.aluminum.name": "Aluminium",
-  "material.immersiveengineering.copper.name": "Copper",
-  "material.immersiveengineering.lead.name": "Lead",
-  "material.immersiveengineering.nickel.name": "Nickel",
-  "material.immersiveengineering.silver.name": "Silver",
-  "material.immersiveengineering.uranium.name": "Uranium",
-  "material.immersivegeology.tungsten.name": "Tungsten"
+  "material.minecraft.gold.name": "Gold"
 }
