@@ -45,9 +45,9 @@ public enum MaterialUseType implements IStringSerializable
 	DUST_BLOCK(UseCategory.BLOCK,Material.SAND,ItemSubGroup.processed),
 
 	//Minerals / metals
-	POOR_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
-	NORMAL_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
-	RICH_ORE(UseCategory.BLOCK,ItemSubGroup.raw),
+	POOR_ORE(UseCategory.MATERIAL_BLOCK,Material.IRON,ItemSubGroup.raw),
+	NORMAL_ORE(UseCategory.MATERIAL_BLOCK,Material.IRON,ItemSubGroup.raw),
+	RICH_ORE(UseCategory.MATERIAL_BLOCK,Material.IRON,ItemSubGroup.raw),
 
 	//Stones
 	DIRT(UseCategory.BLOCK,Material.ROCK,ItemSubGroup.raw),
@@ -65,9 +65,9 @@ public enum MaterialUseType implements IStringSerializable
 	//Fluids
 	FLUIDS(UseCategory.BLOCK,ItemSubGroup.misc);
 	
-	Material blockMaterial;
-	ItemSubGroup subGroup;
-	UseCategory category;
+	private Material blockMaterial;
+	private ItemSubGroup subGroup;
+	private UseCategory category;
 	//Add item, block function - the default values are a resource item and a resource block
 	Function<MaterialUseType, IGMaterialItem> itemFunction = (materialUseType) -> new IGMaterialResourceItem(this);
 	//TODO: add blocks
@@ -102,13 +102,13 @@ public enum MaterialUseType implements IStringSerializable
 		this.blockMaterial = mat;
 	}
 
-	//Use, when the material will return a non-standard item or block
-	MaterialUseType(UseCategory category, Function<MaterialUseType, IGMaterialItem> supplier_i, Function<MaterialUseType, IGMaterialBlock> supplier_b)
-	{
-		this.category = category;
-		this.itemFunction = supplier_i;
-		this.materialBlockFunction = supplier_b;
-	}
+//	//Use, when the material will return a non-standard item or block
+//	MaterialUseType(UseCategory category, Function<MaterialUseType, IGMaterialItem> supplier_i, Function<MaterialUseType, IGMaterialBlock> supplier_b)
+//	{
+//		this.category = category;
+//		this.itemFunction = supplier_i;
+//		this.materialBlockFunction = supplier_b;
+//	}
 
 	public UseCategory getCategory()
 	{

@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "immersivegeology:block/stone/rich_ore" }
+    }
+}

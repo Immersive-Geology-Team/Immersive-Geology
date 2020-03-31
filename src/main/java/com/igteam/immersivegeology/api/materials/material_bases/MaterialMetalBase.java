@@ -23,6 +23,9 @@ public abstract class MaterialMetalBase extends Material
 			case ROD:
 			case GEAR:
 			case STORAGE:
+			case POOR_ORE:
+			case NORMAL_ORE:
+			case RICH_ORE:
 			case SHEETMETAL:
 			case DUST_BLOCK:
 			case FLUIDS:

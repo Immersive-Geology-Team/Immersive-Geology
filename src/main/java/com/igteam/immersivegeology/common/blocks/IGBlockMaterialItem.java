@@ -27,7 +27,7 @@ public class IGBlockMaterialItem extends IGBlockItem {
 	HashMap<String, Material> allowedMaterials = new HashMap<>();
 	HashMap<Material, Item> replacementItems = new HashMap<>();
 	public IGBlockMaterialItem(Block b, Properties props, ItemSubGroup sub, MaterialUseType subtype) {
-		super(b, props, sub, subtype);
+		super(b, props.group(ImmersiveGeology.IGgroup), sub, subtype);
 		this.setRegistryName(b.getRegistryName());
 	}
 	

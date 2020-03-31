@@ -15,6 +15,9 @@
   "item.immersivegeology.tiny_dust.name": "%s Tiny Dust",
   "block.immersivegeology.storage.name": "%s Block",
   "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
+  "block.immersivegeology.poor_ore.name": "Poor %s Ore",
+  "block.immersivegeology.rich_ore.name": "Rich %s Ore",
+  "block.immersivegeology.normal_ore.name": "%s Ore",
 
   "material.minecraft.gold.name": "Gold",
   "material.minecraft.iron.name": "Iron",

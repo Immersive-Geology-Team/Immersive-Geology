@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "immersivegeology:block/stone/poor_ore" }
+    }
+}

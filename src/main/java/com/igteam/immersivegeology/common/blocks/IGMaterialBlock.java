@@ -25,13 +25,16 @@ import net.minecraft.world.IBlockReader;
 public class IGMaterialBlock extends IGBaseBlock
 {
 	
-	IGBlockMaterialItem itemBlockMat;
+	private IGBlockMaterialItem itemBlockMat;
+	
 	public IGMaterialBlock(MaterialUseType m) {
 		super(m.getName(),Properties.create((m.getMaterial() == null ? net.minecraft.block.material.Material.ROCK : m.getMaterial())),m.getSubGroup());
+		
 		if(m.getCategory() == UseCategory.MATERIAL_BLOCK) {
 			this.itemBlockMat = new IGBlockMaterialItem(this, new net.minecraft.item.Item.Properties().group(ImmersiveGeology.IGgroup),m.getSubGroup(),m);
 			this.itemBlock = itemBlockMat;
 		}
+		
 	}
 
 	public IGBlockMaterialItem getItemBlockMaterial() {
