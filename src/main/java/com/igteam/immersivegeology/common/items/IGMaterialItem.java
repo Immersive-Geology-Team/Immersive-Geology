@@ -28,6 +28,7 @@ public class IGMaterialItem extends IGBaseItem
 	{
 		super(type.getName());
 		this.subtype = type;
+		this.subGroup = type.getSubGroup();
 	}
 
 	@Override

@@ -1,8 +1,11 @@
 package com.igteam.immersivegeology.common.items;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.sun.jna.platform.KeyboardUtils;
 import net.minecraft.client.Minecraft;
+import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.ItemStack;
@@ -17,7 +20,7 @@ import java.util.List;
 /**
  * Created by Pabilo8 on 27-03-2020.
  */
-public class IGMaterialResourceItem extends IGMaterialItem
+public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 {
 
 	public IGMaterialResourceItem(MaterialUseType type)
