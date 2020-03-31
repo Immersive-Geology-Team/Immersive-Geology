@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -12,79 +12,79 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by JStocke12 on 27-03-2020.
+ * Created by Crimson on 31-03-2020.
  */
-public class MaterialMetalUranium extends MaterialMetalBase
+public class MaterialMetalTin extends MaterialMetalBase
 {
 	@Override
 	public String getName()
 	{
-		return "uranium";
+		return "tin";
 	}
 
 	@Nonnull
 	@Override
 	public String getModID()
 	{
-		return ImmersiveEngineering.MODID;
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
 	public Set<ElementProportion> getElements()
 	{
 		return new HashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.URANIUM)
+				new ElementProportion(PeriodicTableElement.TIN)
 		));
 	}
 
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.UNCOMMON;
+		return Rarity.COMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		return 4404;
+		return 2875;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		return 1405;
+		return 505;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x759068;
+		return 0xd3d4d5;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
 	@Override
 	public float getHardness()
 	{
-		return 5.0F;
+		return 1.0F;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 10.0F;
+		return 2.0F;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		return 6;
+		return 1;
 	}
 
 	//Copied from Immersive Intelligence (steel has i think 1.65, leaves 0.35)
 	@Override
 	public float getDensity()
 	{
-		return 1.25f;
+		return 0.6f;
 	}
 
 	//Stone pickaxe level

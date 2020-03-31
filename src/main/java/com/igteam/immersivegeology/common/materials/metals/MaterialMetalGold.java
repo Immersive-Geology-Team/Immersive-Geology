@@ -40,7 +40,7 @@ public class MaterialMetalGold extends MaterialMetalBase
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.COMMON;
+		return Rarity.UNCOMMON;
 	}
 
 	@Override

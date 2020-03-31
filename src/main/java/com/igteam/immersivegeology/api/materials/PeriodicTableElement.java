@@ -35,7 +35,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	TITANIUM("Ti", "878681"),
 	VANADIUM("V", "aaa9ad"),
 	CHROMIUM("Cr", "c6c8c9"),
-	MANGANESE("Mn", "2d3844"),
+	MANGANESE("Mn", "c4aead"),
 	IRON("Fe", "d8dada"),
 	COBALT("Co", "0047ab"),
 	NICKEL("Ni", "b3c1b3"),

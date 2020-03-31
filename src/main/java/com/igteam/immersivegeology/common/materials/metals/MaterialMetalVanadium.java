@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -12,28 +12,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by JStocke12 on 27-03-2020.
+ * Created by Crimson on 31-03-2020.
  */
-public class MaterialMetalUranium extends MaterialMetalBase
+public class MaterialMetalVanadium extends MaterialMetalBase
 {
 	@Override
 	public String getName()
 	{
-		return "uranium";
+		return "vanadium";
 	}
 
 	@Nonnull
 	@Override
 	public String getModID()
 	{
-		return ImmersiveEngineering.MODID;
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
 	public Set<ElementProportion> getElements()
 	{
 		return new HashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.URANIUM)
+				new ElementProportion(PeriodicTableElement.VANADIUM)
 		));
 	}
 
@@ -46,32 +46,26 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	@Override
 	public int getBoilingPoint()
 	{
-		return 4404;
+		return 3680;
 	}
 
 	@Override
-	public int getMeltingPoint()
-	{
-		return 1405;
-	}
+	public int getMeltingPoint() { return 2183; }
 
 	@Override
-	public int getColor(int temperature)
-	{
-		return 0x759068;
-	}
+	public int getColor(int temperature) { return 0xaaa9ad; }
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
 	@Override
 	public float getHardness()
 	{
-		return 5.0F;
+		return 3.0F;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 10.0F;
+		return 6.0F;
 	}
 
 	@Override
@@ -84,14 +78,14 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	@Override
 	public float getDensity()
 	{
-		return 1.25f;
+		return 1.1f;
 	}
 
 	//Stone pickaxe level
 	@Override
 	public int getBlockHarvestLevel()
 	{
-		return 1;
+		return 2;
 	}
 
 	@Override
