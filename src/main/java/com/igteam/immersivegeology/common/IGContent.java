@@ -31,6 +31,8 @@ public class IGContent
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 
 	public static HashMap<MaterialUseType, IGMaterialItem> materialSubItemCache = new HashMap<>();
+	public static HashMap<MaterialUseType, IGBlockMaterialItem> materialSubBlockItemCache = new HashMap<>();
+	public static HashMap<MaterialUseType, IGBaseBlock> materialSubBlockCache = new HashMap<>();
 
 	public static void modConstruction()
 	{
@@ -44,9 +46,17 @@ public class IGContent
 				addItemForType(m, m.createItem());
 			//TODO: adding blocks/tools to the cache
 		}
-
-		//TODO: blocks
-
+		
+		for(MaterialUseType m : MaterialUseType.values())
+		{
+			if(m.getCategory()==UseCategory.BLOCK) {
+				addBlockForType(m, m.createBlock());
+			} else if(m.getCategory()==UseCategory.MATERIAL_BLOCK) {
+				addBlockForType(m, m.createMaterialBlock());
+			}
+			//TODO: adding blocks/tools to the cache
+		}
+		
 		for(EnumMaterials m : EnumMaterials.values())
 		{
 			Material material = m.material;
@@ -57,8 +67,18 @@ public class IGContent
 				if(material.hasSubtype(materialItem.getKey()))
 					materialItem.getValue().addAllowedMaterial(material);
 			}
+			
+			for(Entry<MaterialUseType, IGBlockMaterialItem> materialItem : materialSubBlockItemCache.entrySet())
+			{
+				if(material.hasSubtype(materialItem.getKey()))
+					materialItem.getValue().addAllowedMaterial(material);
+			}
 		}
+	}
 
+	private static void addBlockForType(MaterialUseType m, IGBaseBlock createBlock) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@SubscribeEvent
@@ -69,7 +89,21 @@ public class IGContent
 			if(block!=null)
 				event.getRegistry().register(block);
 	}
+	
+	@SubscribeEvent
+	public static void registerBlockItems(RegistryEvent.Register<Item> event)
+	{
+		//checkNonNullNames(registeredIGItems);
+		for(Block b : registeredIGBlocks) {
+			if(b!=null) {
+				if (b instanceof IIGBlock) {
+				event.getRegistry().register(((IIGBlock) b).getItemBlock());
+				}
+			}
+		}
+	}
 
+	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -206,11 +240,19 @@ public class IGContent
 		registeredIGTiles.add(tile);
 	}
 
+
+	private static void addBlockForType(MaterialUseType m, IGMaterialBlock b) {
+		if(m.getCategory() == UseCategory.MATERIAL_BLOCK) {
+			materialSubBlockItemCache.putIfAbsent(m, b.getItemBlockMaterial());
+		}
+		materialSubBlockCache.putIfAbsent(m, b);
+	}
+	
 	public static void addItemForType(MaterialUseType type, IGMaterialItem item)
 	{
 		materialSubItemCache.putIfAbsent(type, item);
 	}
-
+	
 	@Nullable
 	public static IGMaterialItem getItemForType(MaterialUseType type)
 	{

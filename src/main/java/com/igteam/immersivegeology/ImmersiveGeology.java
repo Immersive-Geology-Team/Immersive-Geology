@@ -1,14 +1,14 @@
 package com.igteam.immersivegeology;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.igteam.immersivegeology.client.ClientProxy;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.util.IGLogger;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,9 +22,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import org.apache.logging.log4j.LogManager;
-
-import javax.annotation.Nonnull;
 
 @Mod(ImmersiveGeology.MODID)
 public class ImmersiveGeology
@@ -40,7 +37,7 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static IGItemGroup IGgroup = new IGItemGroup(MODID);
+	public static final IGItemGroup IGgroup = new IGItemGroup(MODID);
 
 	public ImmersiveGeology()
 	{

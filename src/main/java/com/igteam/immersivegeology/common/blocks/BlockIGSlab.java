@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +17,8 @@ import net.minecraft.world.IWorldReader;
 public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implements IIGBlock
 {
 	private final T base;
-
+	public Item itemBlock = null;
+	
 	public BlockIGSlab(String name, Properties props, Class<? extends BlockItem> itemBlock, T base)
 	{
 		super(props);
@@ -24,15 +26,6 @@ public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implement
 		setRegistryName(registryName);
 
 		IGContent.registeredIGBlocks.add(this);
-		try
-		{
-			IGContent.registeredIGItems.add(itemBlock.getConstructor(Block.class)
-					.newInstance(this));
-		} catch(Exception e)
-		{
-			//TODO e.printStackTrace();
-			throw new RuntimeException(e);
-		}
 		this.base = base;
 	}
 
@@ -101,5 +94,11 @@ public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implement
 	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
 		return base.isNormalCube(state, worldIn, pos);
+	}
+
+	@Override
+	public Item getItemBlock() {
+		// TODO Auto-generated method stub
+		return itemBlock;
 	}
 }
