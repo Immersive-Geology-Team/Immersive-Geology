@@ -74,16 +74,21 @@ public class CreativeMenuHandler {
 				ItemSubGroup currentGroup = ItemSubGroup.values()[iteration];
 				
 				CreativeMenuButton button = new CreativeMenuButton(gui.getContainer(), currentGroup, i + 166 + 7, j + 46 + (23 * iteration), (onPress) -> {
-					gui.getContainer().itemList.clear();
 					
 					IGItemGroup.updateSubGroup(currentGroup);
 					
 					gui.getContainer().inventorySlots.forEach((slot) -> {
-							if(slot.getSlotIndex() > 9) {
+							if(gui.getContainer().itemList.size() > 45) {
+								if(slot.getSlotIndex() > 9) {
+									(slot).putStack(ItemStack.EMPTY);
+								}
+							} else {
 								(slot).putStack(ItemStack.EMPTY);
 							}
 						});
-					 
+					
+					gui.getContainer().itemList.clear();
+					
 					gui.getContainer().itemList.addAll(IGItemGroup.getCurrentList());
 					for(int k = 0; k < gui.getContainer().itemList.size(); k++) {
 						
