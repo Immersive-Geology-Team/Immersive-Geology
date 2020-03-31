@@ -57,6 +57,10 @@ public enum PeriodicTableElement implements IStringSerializable
 		return toString().toLowerCase(Locale.ENGLISH);
 	}
 
+	public boolean isReal() {
+		return isReal;
+	}
+
 	/**
 	 * This is a class representing a chemical element inside an equation (like H2 in H2O)
 	 * With quantity being 2, and the element being Hydrogen
