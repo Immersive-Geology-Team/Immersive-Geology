@@ -23,6 +23,8 @@ public enum PeriodicTableElement implements IStringSerializable
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
 	String color;
+	//For any elements that aren't real
+	boolean isReal;
 
 	public String getSymbol()
 	{
@@ -34,10 +36,18 @@ public enum PeriodicTableElement implements IStringSerializable
 		return color;
 	}
 
+	PeriodicTableElement(String symbol, String color, boolean isReal)
+	{
+		this.symbol = symbol;
+		this.color = color;
+		this.isReal = isReal;
+	}
+
 	PeriodicTableElement(String symbol, String color)
 	{
 		this.symbol = symbol;
 		this.color = color;
+		this.isReal = true;
 	}
 
 	//For translation purposes
