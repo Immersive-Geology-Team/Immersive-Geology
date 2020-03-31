@@ -59,9 +59,11 @@ public class IGBaseBlock extends Block implements IIGBlock
 		setRegistryName(registryName);
 
 		IGContent.registeredIGBlocks.add(this);
+		
 		if(itemBlock == null) {
 			itemBlock = new IGBlockItem(this, new net.minecraft.item.Item.Properties().group(ImmersiveGeology.IGgroup),group,null).setRegistryName(getRegistryName());
 		}
+		
 		lightOpacity = 15;
 	}
 

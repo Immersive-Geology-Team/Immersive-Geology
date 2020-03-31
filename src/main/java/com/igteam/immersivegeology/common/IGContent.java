@@ -49,9 +49,7 @@ public class IGContent
 		
 		for(MaterialUseType m : MaterialUseType.values())
 		{
-			if(m.getCategory()==UseCategory.BLOCK) {
-				addBlockForType(m, m.createBlock());
-			} else if(m.getCategory()==UseCategory.MATERIAL_BLOCK) {
+			if(m.getCategory()==UseCategory.BLOCK || m.getCategory()==UseCategory.MATERIAL_BLOCK) {
 				addBlockForType(m, m.createMaterialBlock());
 			}
 			//TODO: adding blocks/tools to the cache
@@ -74,11 +72,6 @@ public class IGContent
 					materialItem.getValue().addAllowedMaterial(material);
 			}
 		}
-	}
-
-	private static void addBlockForType(MaterialUseType m, IGBaseBlock createBlock) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@SubscribeEvent

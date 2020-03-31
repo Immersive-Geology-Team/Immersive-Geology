@@ -71,7 +71,6 @@ public enum MaterialUseType implements IStringSerializable
 	Function<MaterialUseType, IGMaterialItem> itemFunction = (materialUseType) -> new IGMaterialResourceItem(this);
 	//TODO: add blocks
 	Function<MaterialUseType, IGMaterialBlock> materialBlockFunction = (materialUseType) -> new IGMaterialBlock(this);
-	Function<MaterialUseType, IGBaseBlock> blockFunction = (materialUseType) -> new IGBaseBlock(this);
 	
 	MaterialUseType(ItemSubGroup group){
 		this.category = UseCategory.RESOURCE_ITEM;
@@ -120,18 +119,13 @@ public enum MaterialUseType implements IStringSerializable
 	{
 		return this.toString().toLowerCase(Locale.ENGLISH);
 	}
-
+ 
 	public IGMaterialItem createItem()
 	{
 		return itemFunction.apply(this);
 	}
 	
 	public IGMaterialBlock createMaterialBlock()
-	{
-		return materialBlockFunction.apply(this);
-	}
-	
-	public IGBaseBlock createBlock()
 	{
 		return materialBlockFunction.apply(this);
 	}

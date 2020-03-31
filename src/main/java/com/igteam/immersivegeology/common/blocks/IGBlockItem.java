@@ -48,7 +48,7 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 	protected ItemSubGroup subGroup;
 	public IGBlockItem(Block b, Item.Properties props, ItemSubGroup sub, MaterialUseType subtype)
 	{
-		super(b, props);
+		super(b, props.group(ImmersiveGeology.IGgroup));
 		this.subGroup = sub;
 		this.subtype = subtype;
 	}
