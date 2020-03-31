@@ -58,7 +58,7 @@ public class MaterialMetalNickel extends MaterialMetalBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xe39919;
+		return 0xb3c1b3;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

@@ -74,7 +74,7 @@ public abstract class Material
 		{
 			//Can be any number, 0 celsius as default
 			case SOLID:
-				return 237.15f;
+				return 273.15f;
 			case LIQUID:
 				return getBoilingPoint();
 		}
@@ -151,7 +151,7 @@ public abstract class Material
 	 */
 	public boolean hasSubtype(MaterialUseType useType)
 	{
-		return true;
+		return false;
 	}
 
 	/**
