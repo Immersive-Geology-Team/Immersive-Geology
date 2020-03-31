@@ -5,6 +5,7 @@ package com.igteam.immersivegeology.api.materials;
  */
 public enum MaterialTypes
 {
+	FLUID,
 	METAL,
 	MINERAL,
 	STONE

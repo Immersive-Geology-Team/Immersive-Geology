@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.blocks;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
+import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 
@@ -31,6 +32,7 @@ public enum EnumMaterials
 	Uranium(new MaterialMetalUranium()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
+
 	//Minerals
 	Casserite(new MaterialMineralCassiterite()),
 	Chalcopyrite(new MaterialMineralChalcopyrite()),
@@ -46,7 +48,10 @@ public enum EnumMaterials
 	Pyrolusite(new MaterialMineralPyrolusite()),
 	RockSalt(new MaterialMineralRockSalt()),
 	Thorite(new MaterialMineralThorianite()),
-	Uranite(new MaterialMineralUraninite());
+	Uranite(new MaterialMineralUraninite()),
+
+	//Fluids
+	Water(new MaterialFluidWater());
     /*, TODO add all Materials
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
