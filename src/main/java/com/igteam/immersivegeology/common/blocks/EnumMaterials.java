@@ -4,29 +4,49 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.metals.*;
+import com.igteam.immersivegeology.common.materials.minerals.*;
 
 import java.util.stream.Stream;
 
 public enum EnumMaterials
 {
 
+	//Empty
 	Empty(new MaterialEmpty()),
+
+	//Metals
 	Aluminum(new MaterialMetalAluminium()),
+	Chromium(new MaterialMetalChromium()),
 	Copper(new MaterialMetalCopper()),
 	Gold(new MaterialMetalGold()),
 	Iron(new MaterialMetalIron()),
 	Lead(new MaterialMetalLead()),
-	Nickel(new MaterialMetalNickel()),
-	Silver(new MaterialMetalSilver()),
-	Uranium(new MaterialMetalUranium()),
 	Manganese(new MaterialMetalManganese()),
-	Tin(new MaterialMetalTin()),
-	Chromium(new MaterialMetalChromium()),
-	Vanadium(new MaterialMetalVanadium()),
-	Titanium(new MaterialMetalTitanium()),
-	Zirconium(new MaterialMetalZirconium()),
+	Nickel(new MaterialMetalNickel()),
 	Platinum(new MaterialMetalPlatinum()),
-	Tungsten(new MaterialMetalTungsten());
+	Silver(new MaterialMetalSilver()),
+	Tin(new MaterialMetalTin()),
+	Titanium(new MaterialMetalTitanium()),
+	Tungsten(new MaterialMetalTungsten()),
+	Uranium(new MaterialMetalUranium()),
+	Vanadium(new MaterialMetalVanadium()),
+	Zirconium(new MaterialMetalZirconium()),
+	//Minerals
+	Casserite(new MaterialMineralCassiterite()),
+	Chalcopyrite(new MaterialMineralChalcopyrite()),
+	Chromite(new MaterialMineralChromite()),
+	Cryolite(new MaterialMineralCryolite()),
+	Ferberite(new MaterialMineralFerberite()),
+	Fluorite(new MaterialMineralFluorite()),
+	Gypsum(new MaterialMineralGypsum()),
+	Hematite(new MaterialMineralHematite()),
+	Hubnerite(new MaterialMineralHubnerite()),
+	Limestone(new MaterialMineralLimestone()),
+	Magnetite(new MaterialMineralMagnetite()),
+	Pyrolusite(new MaterialMineralPyrolusite()),
+	RockSalt(new MaterialMineralRockSalt()),
+	Thorite(new MaterialMineralThorianite()),
+	Uranite(new MaterialMineralUraninite());
     /*, TODO add all Materials
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
@@ -34,9 +54,9 @@ public enum EnumMaterials
 
 	public final Material material;
 
-	EnumMaterials(Material metal)
+	EnumMaterials(Material material)
 	{
-		this.material = metal;
+		this.material = material;
 	}
 
 	public static Stream<EnumMaterials> filterMetals()

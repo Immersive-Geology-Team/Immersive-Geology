@@ -9,12 +9,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MaterialMineralThorite extends MaterialMineralBase
+/**
+ * Created by JStocke12 on 31-03-2020
+ */
+public class MaterialMineralPyrolusite extends MaterialMineralBase
 {
     @Override
     public String getName()
     {
-        return "thorite";
+        return "pyrolusite";
     }
 
     @Override
@@ -27,7 +30,7 @@ public class MaterialMineralThorite extends MaterialMineralBase
     public Set<PeriodicTableElement.ElementProportion> getElements()
     {
         return new HashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.THORIUM),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.MANGANESE),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
         ));
     }
