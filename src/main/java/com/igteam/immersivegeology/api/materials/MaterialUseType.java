@@ -15,7 +15,6 @@ public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
 	ROCK(ItemSubGroup.raw),
-	CHUNK(ItemSubGroup.raw),
 
 	//Metal items
 	INGOT,
