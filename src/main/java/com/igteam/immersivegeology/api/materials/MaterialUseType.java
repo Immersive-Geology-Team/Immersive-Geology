@@ -17,7 +17,7 @@ public enum MaterialUseType implements IStringSerializable
 	ROCK(ItemSubGroup.raw),
 
 	//Metal items
-	INGOT(ItemSubGroup.raw),
+	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
 	DUST(ItemSubGroup.processed),
 	TINY_DUST(ItemSubGroup.processed),
