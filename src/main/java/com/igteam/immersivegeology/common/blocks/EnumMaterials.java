@@ -15,7 +15,7 @@ public enum EnumMaterials
 	Empty(new MaterialEmpty()),
 
 	//Metals
-	Aluminum(new MaterialMetalAluminium()),
+	Aluminium(new MaterialMetalAluminium()),
 	Chromium(new MaterialMetalChromium()),
 	Copper(new MaterialMetalCopper()),
 	Gold(new MaterialMetalGold()),
