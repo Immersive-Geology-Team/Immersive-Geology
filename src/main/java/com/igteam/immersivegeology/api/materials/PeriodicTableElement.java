@@ -10,7 +10,7 @@ import java.util.Locale;
  */
 public enum PeriodicTableElement implements IStringSerializable
 {
-	//TODO: recolour elements
+	//Real elements
 	HYDROGEN("H", "ffffff"),
 	HELIUM("He", "d0d4d3"),
 	LITHIUM("Li", "d5d5d7"),
@@ -65,11 +65,42 @@ public enum PeriodicTableElement implements IStringSerializable
 	TELLURIUM("Te", "aaa9ad"),
 	IODINE("I", "301934"),
 	XENON("Xe", "14397f"),
-	GOLD("Au", "ffd700"),
-	LEAD("Pb", "444f53"),
-	URANIUM("U", "759068"),
+	CESIUM("Cs", "e6be8a"),
+	BARIUM("Ba", "8eff9f"),
+	LANTHANUM("La", "#bac4c8"),
+	CERIUM("Ce", "D1DBDD"),
+	PRASEODYMIUM("Pr", "98fb98"),
+	NEODYMIUM("Nd", "aaa9ad"),
+	PROMETHIUM("Pm", "8C897E"),
+	SAMARIUM("Sm", "aaa9ad"),
+	EUROPIUM("Eu", "aaa9ad"),
+	GADOLINIUM("Gd", "aaa9ad"),
+	TERBIUM("Tb", "8C897E"),
+	DYSPROSIUM("Dy", "e7e7f7"),
+	HOLMIUM("Ho", "A79B8B"),
+	ERBIUM("Er", "aaa9ad"),
+	THULIUM("Tm", "8C897E"),
+	YTTERBIUM("Yb", "aaa9ad"),
+	LUTETIUM("Lu", "aaa9ad"),
+	HAFNIUM("Hf", "e7e7f7"),
+	TANTALUM("Ta", "878681"),
 	TUNGSTEN("W", "96989e"),
+	RHENIUM("Re", "aaa9ad"),
+	OSMIUM("OS", "9090A3"),
+	IRIDIUM("Ir", "e0e2dd"),
+	PLATINUM("Pt", "e5e4e2"),
+	GOLD("Au", "ffd700"),
+	MERCURY("Hg", "d5d2d1"),
+	THALLIUM("Tl", "58f898"),
+	LEAD("Pb", "444f53"),
+	BISMUTH("Bi", "c4aead"),
+	POLONIUM("Po", "9E8C53"),
+	ASTATINE("At", "616D37"),
+	RADON("Rn", "ef1010"),
+	URANIUM("U", "759068"),
 	THORIUM("Th", "b2beb5");
+
+	//Non-real Elements
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
