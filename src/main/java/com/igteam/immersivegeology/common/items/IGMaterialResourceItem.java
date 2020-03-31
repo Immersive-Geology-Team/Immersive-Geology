@@ -44,6 +44,4 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 	public static boolean hasShiftDown() {
 		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340) || InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
 	}
-
-
 }
