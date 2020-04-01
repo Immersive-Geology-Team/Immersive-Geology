@@ -32,6 +32,10 @@ public enum EnumMaterials
 	Uranium(new MaterialMetalUranium()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
+	/* TODO add alloys
+    Constantan(new MaterialMetalConstantan()),
+    Electrum(new MaterialMetalElectrum()),
+    Steel(new MaterialMetalSteel()), */
 
 	//Minerals
 	Casserite(new MaterialMineralCassiterite()),
@@ -48,14 +52,10 @@ public enum EnumMaterials
 	Pyrolusite(new MaterialMineralPyrolusite()),
 	RockSalt(new MaterialMineralRockSalt()),
 	Thorite(new MaterialMineralThorianite()),
-	Uranite(new MaterialMineralUraninite()),
+	Uraninite(new MaterialMineralUraninite()),
 
 	//Fluids
 	Water(new MaterialFluidWater());
-    /*, TODO add all Materials
-    Constantan(new MaterialMetalConstantan()),
-    Electrum(new MaterialMetalElectrum()),
-    Steel(new MaterialMetalSteel()) */
 
 	public final Material material;
 
