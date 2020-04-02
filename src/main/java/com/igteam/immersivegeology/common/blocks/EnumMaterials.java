@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.blocks;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
+import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
@@ -32,6 +33,13 @@ public enum EnumMaterials
 	Uranium(new MaterialMetalUranium()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
+	/* TODO add alloys
+    Constantan(new MaterialMetalConstantan()),
+    Electrum(new MaterialMetalElectrum()),
+    Steel(new MaterialMetalSteel()), */
+
+	//Crystals
+	Quartz(new MaterialCrystalQuartz()),
 
 	//Minerals
 	Casserite(new MaterialMineralCassiterite()),
@@ -48,14 +56,10 @@ public enum EnumMaterials
 	Pyrolusite(new MaterialMineralPyrolusite()),
 	RockSalt(new MaterialMineralRockSalt()),
 	Thorite(new MaterialMineralThorianite()),
-	Uranite(new MaterialMineralUraninite()),
+	Uraninite(new MaterialMineralUraninite()),
 
 	//Fluids
 	Water(new MaterialFluidWater());
-    /*, TODO add all Materials
-    Constantan(new MaterialMetalConstantan()),
-    Electrum(new MaterialMetalElectrum()),
-    Steel(new MaterialMetalSteel()) */
 
 	public final Material material;
 

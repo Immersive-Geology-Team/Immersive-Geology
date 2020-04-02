@@ -128,9 +128,12 @@ public enum PeriodicTableElement implements IStringSerializable
 	MOSCOVIUM("Mc", "aaa9ad"),
 	LIVERMORIUM("Lv", "aaa9ad"),
 	TENNESSINE("Ts", "aaa9ad"),
-	OGANESSON("Og", "aaa9ad");
+	OGANESSON("Og", "aaa9ad"),
 
-	//Non-real Elements
+	//Non-real Elements (use three letters for non real to keep them separate)
+	REDIUM("Red", "d43c2c", false),
+	LUXUM("Lux", "FFBC5E", false),
+	SOULITE("Sou", "49362A", false);
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it
@@ -170,7 +173,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	}
 
 	public boolean isReal() {
-		return isReal;
+		return this.isReal;
 	}
 
 	/**

@@ -15,9 +15,13 @@
   "item.immersivegeology.tiny_dust.name": "%s Tiny Dust",
   "block.immersivegeology.storage.name": "%s Block",
   "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
+  "item.immersivegeology.crystal.name": "%s Crystal",
+  "item.immersivegeology.raw_crystal.name": "Raw %s Crystal",
+  "item.immersivegeology.chunk.name": "%s Chunk",
 
   "material.minecraft.gold.name": "Gold",
   "material.minecraft.iron.name": "Iron",
+  "material.minecraft.quartz.name": "Quartz",
 
   "material.immersiveengineering.aluminum.name": "Aluminium",
   "material.immersiveengineering.copper.name": "Copper",
@@ -33,6 +37,21 @@
   "material.immersivegeology.tin.name": "Tin",
   "material.immersivegeology.zirconium.name": "Zirconium",
   "material.immersivegeology.vanadium.name": "Vanadium",
-  "material.immersivegeology.platinum.name": "Platinum"
+  "material.immersivegeology.platinum.name": "Platinum",
+  "material.immersivegeology.magnetite.name": "Magnetite",
+  "material.immersivegeology.rocksalt.name": "Rock Salt",
+  "material.immersivegeology.hubnerite.name": "Hübnerite",
+  "material.immersivegeology.hematite.name": "Hematite",
+  "material.immersivegeology.cassiterite.name": "Cassiterite",
+  "material.immersivegeology.gypsum.name": "Gypsum",
+  "material.immersivegeology.uraninite.name": "Uraninite",
+  "material.immersivegeology.pyrolusite.name": "Pyrolusite",
+  "material.immersivegeology.limestone.name": "Limestone",
+  "material.immersivegeology.cryolite.name": "Cryolite",
+  "material.immersivegeology.fluorite.name": "Fluorite",
+  "material.immersivegeology.chromite.name": "Chromite",
+  "material.immersivegeology.chalcopyrite.name": "Chalcopyrite",
+  "material.immersivegeology.ferberite.name": "Ferberite",
+  "material.immersivegeology.thorite.name": "Thorite"
 }
 

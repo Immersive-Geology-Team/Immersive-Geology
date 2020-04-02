@@ -14,7 +14,7 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
     @Override
     public String getName()
     {
-        return "hübnerite";
+        return "hubnerite";
     }
 
     @Override

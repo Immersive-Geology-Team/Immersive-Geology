@@ -20,9 +20,10 @@ public abstract class MaterialFluidBase extends Material
         return net.minecraft.block.material.Material.WATER;
     }
 
-    public enum EnumMetalType
+    public enum EnumFluidType
     {
         FLUID,
-        SOLUTION
+        SOLUTION,
+        GAS
     }
 }
