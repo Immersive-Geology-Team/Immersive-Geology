@@ -21,14 +21,15 @@ import java.util.Locale;
 public class IGMaterialItem extends IGBaseItem
 {
 	public MaterialUseType subtype;
-	HashMap<String, Material> allowedMaterials = new HashMap<>();
-	HashMap<Material, Item> replacementItems = new HashMap<>();
-
-	public IGMaterialItem(MaterialUseType type)
+	public Material material;
+	
+	
+	public IGMaterialItem(MaterialUseType type, Material material)
 	{
 		super(type.getName());
 		this.subtype = type;
 		this.subGroup = type.getSubGroup();
+		this.material = material;
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class IGMaterialItem extends IGBaseItem
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
 		return getMaterialFromNBT(stack).getColor(0);
-	}
+	} 
 
 	@Override
 	public ITextComponent getDisplayName(ItemStack stack)
@@ -59,43 +60,9 @@ public class IGMaterialItem extends IGBaseItem
 
 	public Material getMaterialFromNBT(ItemStack stack)
 	{
-		String matName = ItemNBTHelper.getString(stack, "material");
-		return allowedMaterials.getOrDefault(matName, EnumMaterials.Empty.material);
+		return material;
 	}
-
-	public void addAllowedMaterial(Material material)
-	{
-		allowedMaterials.put(material.getName(), material);
-	}
-
-	public void addReplacementItem(Material material, Item item)
-	{
-		replacementItems.put(material, item);
-	}
-
-	public Item getReplacementItem(Material material)
-	{
-		return replacementItems.getOrDefault(material, allowedMaterials.containsValue(material)?this: Items.AIR);
-	}
-
-	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items)
-	{
-		if(this.isInGroup(group)||group.equals(ItemGroup.SEARCH))
-		{
-			for(Material material : allowedMaterials.values())
-			{
-				if(!replacementItems.containsKey(material))
-				{
-					CompoundNBT tag = new CompoundNBT();
-					ItemStack stack = new ItemStack(this);
-					ItemNBTHelper.putString(stack, "material", material.getName());
-					items.add(stack);
-				}
-				else if(!group.equals(ItemGroup.SEARCH))
-					items.add(new ItemStack(getReplacementItem(material)));
-			}
-		}
-	}
-
+	
+	
+	
 }

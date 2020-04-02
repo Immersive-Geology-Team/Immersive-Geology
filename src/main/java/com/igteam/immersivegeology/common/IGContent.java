@@ -5,6 +5,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.common.blocks.*;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
+import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.util.ResourceSorter;
+
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -29,47 +32,23 @@ public class IGContent
 	public static List<Item> registeredIGItems = new ArrayList<>();
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
-
-	public static HashMap<MaterialUseType, IGMaterialItem> materialSubItemCache = new HashMap<>();
-	public static HashMap<MaterialUseType, IGBlockMaterialItem> materialSubBlockItemCache = new HashMap<>();
-	public static HashMap<MaterialUseType, IGBaseBlock> materialSubBlockCache = new HashMap<>();
-
+	
 	public static void modConstruction()
 	{
-
-		Block storage = null;
-		Block sheetmetal = null;
-
-		for(MaterialUseType m : MaterialUseType.values())
+		//Item, blocks here
+		// cycle through item Types
+		for(MaterialUseType materialItem : MaterialUseType.values())
 		{
-			if(m.getCategory()==UseCategory.RESOURCE_ITEM)
-				addItemForType(m, m.createItem());
-			//TODO: adding blocks/tools to the cache
-		}
-		
-		for(MaterialUseType m : MaterialUseType.values())
-		{
-			if(m.getCategory()==UseCategory.BLOCK || m.getCategory()==UseCategory.MATERIAL_BLOCK) {
-				addBlockForType(m, m.createMaterialBlock());
-			}
-			//TODO: adding blocks/tools to the cache
-		}
-		
-		for(EnumMaterials m : EnumMaterials.values())
-		{
-			Material material = m.material;
-
-			//Item, blocks here
-			for(Entry<MaterialUseType, IGMaterialItem> materialItem : materialSubItemCache.entrySet())
+			//cycle through materials
+			for(EnumMaterials m : EnumMaterials.values())
 			{
-				if(material.hasSubtype(materialItem.getKey()))
-					materialItem.getValue().addAllowedMaterial(material);
-			}
-			
-			for(Entry<MaterialUseType, IGBlockMaterialItem> materialItem : materialSubBlockItemCache.entrySet())
-			{
-				if(material.hasSubtype(materialItem.getKey()))
-					materialItem.getValue().addAllowedMaterial(material);
+				Material material = m.material;
+				//check if that material is allowed to make this item type.
+				if(material.hasSubtype(materialItem)) {
+					//check if this type is an ITEM not a BLOCK type.
+					if(materialItem.getCategory() != UseCategory.BLOCK && materialItem.getCategory() != UseCategory.MATERIAL_BLOCK)
+						registeredIGItems.add(new IGMaterialResourceItem(material, materialItem)); 
+				}
 			}
 		}
 	}
@@ -162,45 +141,6 @@ public class IGContent
 
 	public static void postInit()
 	{
-		//Moved, because of IE items not being registered when constructing our mod
-		//Removed, because of favoring our own material system
-		/*for(EnumMaterials m : EnumMaterials.values())
-		{
-			Material material = m.material;
-
-			//If IE already contains the metal
-			if(m.material.getModID().equals(ImmersiveEngineering.MODID))
-			{
-				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
-				try
-				{
-					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
-				} catch(IllegalArgumentException e)
-				{
-					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again...", m));
-				}
-
-				if(ieMetal!=null)
-				{
-					IGMaterialItem ingot = getItemForType(MaterialUseType.INGOT);
-					IGMaterialItem plate = getItemForType(MaterialUseType.PLATE);
-					IGMaterialItem dust = getItemForType(MaterialUseType.DUST);
-					IGMaterialItem nugget = getItemForType(MaterialUseType.NUGGET);
-
-					//In case someone else breaks our registry
-					//Which won't happen, but why not have this
-
-					if(ingot!=null)
-						ingot.addReplacementItem(material, Metals.ingots.get(ieMetal));
-					if(plate!=null)
-						plate.addReplacementItem(material, Metals.plates.get(ieMetal));
-					if(dust!=null)
-						dust.addReplacementItem(material, Metals.dusts.get(ieMetal));
-					if(nugget!=null)
-						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
-				}
-			}
-		}*/
 
 	}
 
@@ -232,36 +172,4 @@ public class IGContent
 		}
 		registeredIGTiles.add(tile);
 	}
-
-
-	private static void addBlockForType(MaterialUseType m, IGMaterialBlock b) {
-		if(m.getCategory() == UseCategory.MATERIAL_BLOCK) {
-			materialSubBlockItemCache.putIfAbsent(m, b.getItemBlockMaterial());
-		}
-		materialSubBlockCache.putIfAbsent(m, b);
-	}
-	
-	public static void addItemForType(MaterialUseType type, IGMaterialItem item)
-	{
-		materialSubItemCache.putIfAbsent(type, item);
-	}
-	
-	@Nullable
-	public static IGMaterialItem getItemForType(MaterialUseType type)
-	{
-		return materialSubItemCache.get(type);
-	}
-
-	//TODO: Absolutely needed TODO
-    /* TODO
-    public static void addConfiguredWorldgen(Block state, String name, OreConfig config)
-    {
-        if(config!=null&&config.veinSize.get() > 0)
-            IGWorldGen.addOreGen(name, state.getDefaultState(), config.veinSize.get(),
-                    config.minY.get(),
-                    config.maxY.get(),
-                    config.veinsPerChunk.get(),
-                    config.spawnChance.get());
-    } */
-
 }

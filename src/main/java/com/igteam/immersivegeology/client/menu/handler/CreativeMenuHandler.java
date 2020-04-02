@@ -1,11 +1,14 @@
 package com.igteam.immersivegeology.client.menu.handler;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersivegeology.common.util.ResourceSorter;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
@@ -17,8 +20,11 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,19 +63,20 @@ public class CreativeMenuHandler {
 			}
 		}
 	}
-
+	
 	@SubscribeEvent
 	public void initializeGuiEvent(InitGuiEvent.Post event) {
 		Screen screen = event.getGui();
 		if (screen instanceof CreativeScreen) {
 			CreativeScreen gui = (CreativeScreen) screen;
-
+			
+			
 			int i = (int) (gui.getGuiLeft() - Math.floor(136 * 1.425));
 			int j = (gui.height - 195) / 2;
 
 			for (int iteration = 0; iteration < ItemSubGroup.values().length; iteration++) {
 				ItemSubGroup currentGroup = ItemSubGroup.values()[iteration];
-
+ 
 				CreativeMenuButton button = new CreativeMenuButton(gui.getContainer(), currentGroup, i + 166 + 7,
 						j + 46 + (23 * iteration), (onPress) -> {
 
@@ -83,8 +90,12 @@ public class CreativeMenuHandler {
 								}
 							});
 
-							ImmersiveGeology.IGgroup.fill(gui.getContainer().itemList);
 
+							ImmersiveGeology.IGgroup.fill(gui.getContainer().itemList);
+							
+							Collections.sort(gui.getContainer().itemList, new ResourceSorter());
+							
+							
 							int slotIteration = 0;
 							for (int l = 0; l < gui.getContainer().inventorySlots.size(); l++) {
 								Slot slot = gui.getContainer().inventorySlots.get(l);

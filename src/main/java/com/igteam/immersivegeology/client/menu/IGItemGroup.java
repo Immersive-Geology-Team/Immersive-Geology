@@ -1,9 +1,12 @@
 package com.igteam.immersivegeology.client.menu;
 
+import java.util.Collections;
+
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersivegeology.common.util.ResourceSorter;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -35,9 +38,11 @@ public class IGItemGroup extends ItemGroup {
 	public static ItemSubGroup getCurrentSubGroup() {
 		return selectedSubGroup;
 	}
+	
 	/**
     * Fills {@code items} with all items that are in this group.
     */
+	
 	@Override
     @OnlyIn(Dist.CLIENT)
     public void fill(NonNullList<ItemStack> items) {
@@ -49,6 +54,7 @@ public class IGItemGroup extends ItemGroup {
 				}
 			}
 		}
+		Collections.sort(items, new ResourceSorter());
     }
 
 	public static NonNullList<ItemStack> getCurrentList() {

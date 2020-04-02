@@ -68,11 +68,7 @@ public enum MaterialUseType implements IStringSerializable
 	private Material blockMaterial;
 	private ItemSubGroup subGroup;
 	private UseCategory category;
-	//Add item, block function - the default values are a resource item and a resource block
-	Function<MaterialUseType, IGMaterialItem> itemFunction = (materialUseType) -> new IGMaterialResourceItem(this);
-	//TODO: add blocks
-	Function<MaterialUseType, IGMaterialBlock> materialBlockFunction = (materialUseType) -> new IGMaterialBlock(this);
-	
+
 	MaterialUseType(ItemSubGroup group){
 		this.category = UseCategory.RESOURCE_ITEM;
 		this.subGroup = group;
@@ -102,14 +98,6 @@ public enum MaterialUseType implements IStringSerializable
 		this.blockMaterial = mat;
 	}
 
-//	//Use, when the material will return a non-standard item or block
-//	MaterialUseType(UseCategory category, Function<MaterialUseType, IGMaterialItem> supplier_i, Function<MaterialUseType, IGMaterialBlock> supplier_b)
-//	{
-//		this.category = category;
-//		this.itemFunction = supplier_i;
-//		this.materialBlockFunction = supplier_b;
-//	}
-
 	public UseCategory getCategory()
 	{
 		return category;
@@ -119,16 +107,6 @@ public enum MaterialUseType implements IStringSerializable
 	public String getName()
 	{
 		return this.toString().toLowerCase(Locale.ENGLISH);
-	}
- 
-	public IGMaterialItem createItem()
-	{
-		return itemFunction.apply(this);
-	}
-	
-	public IGMaterialBlock createMaterialBlock()
-	{
-		return materialBlockFunction.apply(this);
 	}
 
 	public enum UseCategory

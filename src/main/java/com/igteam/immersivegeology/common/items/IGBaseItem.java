@@ -41,9 +41,9 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	public IGBaseItem(String name, Properties props)
 	{
 		super(props.group(ImmersiveGeology.IGgroup));
-		IGContent.registeredIGItems.add(this);
-		setRegistryName(ImmersiveGeology.MODID, name);
-		this.itemName = name;
+		if(itemName == null) {
+			itemName = name;
+		}
 	}
 
 	public IGBaseItem setBurnTime(int burnTime)
