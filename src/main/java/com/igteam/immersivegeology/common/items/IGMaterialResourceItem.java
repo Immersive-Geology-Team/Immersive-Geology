@@ -1,26 +1,19 @@
 package com.igteam.immersivegeology.common.items;
 
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.sun.jna.platform.KeyboardUtils;
-import net.minecraft.client.Minecraft;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
-import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.util.IGItemGrabber;
 import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
-
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.FakePlayerFactory;
 
 import javax.annotation.Nullable;
-
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,13 +28,9 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 		
 		//add this item to the item grabber, that way we can refrence this later.
 		IGItemGrabber.inputNewItem(key, material, this);
-		
-		ItemJsonGenerator generate = new ItemJsonGenerator();
-		try {
-			generate.generateDefaultItem("item_"+ key.getName() + "_" + material.getName(), key.getName(), material.getMaterialType().toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		ItemJsonGenerator.INSTANCE.generateDefaultItem(material, key);
+
 	}
 
 	@Override

@@ -3,11 +3,11 @@ package com.igteam.immersivegeology.common;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
-import com.igteam.immersivegeology.common.blocks.*;
-import com.igteam.immersivegeology.common.items.IGMaterialItem;
+import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
+import com.igteam.immersivegeology.common.blocks.EnumMaterials;
+import com.igteam.immersivegeology.common.blocks.IGBlockItem;
+import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
-import com.igteam.immersivegeology.common.util.ResourceSorter;
-
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -18,10 +18,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
 
@@ -114,7 +112,6 @@ public class IGContent
 				IGBlockItem.class,
 				b
 		);
-		IGBlocks.toSlab.put(b, ret);
 		return ret;
 	}
 
