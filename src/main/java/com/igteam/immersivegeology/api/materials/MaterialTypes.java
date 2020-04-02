@@ -8,5 +8,6 @@ public enum MaterialTypes
 	FLUID,
 	METAL,
 	MINERAL,
-	STONE
+	STONE,
+	CRYSTAL
 }

@@ -17,7 +17,7 @@ public enum MaterialUseType implements IStringSerializable
 	ROCK(ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
 
-	//Metal items
+	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
 	DUST(ItemSubGroup.processed),
@@ -26,6 +26,8 @@ public enum MaterialUseType implements IStringSerializable
 	NUGGET(ItemSubGroup.processed),
 	GEAR(ItemSubGroup.processed),
 	WIRE(ItemSubGroup.processed),
+	RAW_CRYSTAL(ItemSubGroup.raw),
+	CRYSTAL(ItemSubGroup.processed),
 
 	//Tool System, Experimental / Not sure
 	PICKAXE(UseCategory.TOOL),
@@ -53,6 +55,7 @@ public enum MaterialUseType implements IStringSerializable
 	COBBLESTONE(UseCategory.BLOCK,ItemSubGroup.raw),
 	SMOOTH_STONE(UseCategory.BLOCK,ItemSubGroup.raw),
 
+	ROUGH_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),
 	POLISHED_STONE(UseCategory.BLOCK,ItemSubGroup.processed),
 	SMALL_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),
 	NORMAL_BRICKS(UseCategory.BLOCK,ItemSubGroup.processed),

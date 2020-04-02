@@ -17,7 +17,7 @@ public class MaterialMineralRockSalt extends MaterialMineralBase
 	@Override
 	public String getName()
 	{
-		return "rock salt";
+		return "rocksalt";
 	}
 
 	@Override

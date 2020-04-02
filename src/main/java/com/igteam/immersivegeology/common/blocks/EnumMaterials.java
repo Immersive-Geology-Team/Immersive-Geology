@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.blocks;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
+import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
@@ -36,6 +37,9 @@ public enum EnumMaterials
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
     Steel(new MaterialMetalSteel()), */
+
+	//Crystals
+	Quartz(new MaterialCrystalQuartz()),
 
 	//Minerals
 	Casserite(new MaterialMineralCassiterite()),
