@@ -35,6 +35,7 @@ public enum MaterialUseType implements IStringSerializable
 	HOE(UseCategory.TOOL),
 	AXE(UseCategory.TOOL),
 	BROADSWORD(UseCategory.TOOL),
+	BUCKET(UseCategory.TOOL),
 
 	//Blocks
 
@@ -63,7 +64,7 @@ public enum MaterialUseType implements IStringSerializable
 	PILLAR(UseCategory.BLOCK,ItemSubGroup.processed),
 
 	//Fluids
-	FLUIDS(UseCategory.BLOCK,ItemSubGroup.misc);
+	FLUIDSOURCE(UseCategory.BLOCK,ItemSubGroup.misc);
 	
 	ItemSubGroup subGroup;
 	UseCategory category;

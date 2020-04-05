@@ -34,7 +34,7 @@ public abstract class MaterialMetalBase extends Material
 				return hasSheetmetal();
 			case DUST_BLOCK:
 				return hasDustBlock();
-			case FLUIDS:
+			case FLUIDSOURCE:
 				return true;
 		}
 		return false;
