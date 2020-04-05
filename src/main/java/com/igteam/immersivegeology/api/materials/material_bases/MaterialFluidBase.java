@@ -12,9 +12,11 @@ import java.util.Set;
  */
 public abstract class MaterialFluidBase extends Material
 {
+    public abstract EnumFluidType getFluidType();
+
     public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
 
-    public abstract int getConcentration();
+    public abstract float getConcentration();
 
     @Override
     public boolean hasSubtype(MaterialUseType useType) {
