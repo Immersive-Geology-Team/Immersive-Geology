@@ -3,12 +3,19 @@ package com.igteam.immersivegeology.api.materials.material_bases;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
+
+import java.util.Set;
 
 /**
  * Created by JStocke12 on 31-03-2020.
  */
 public abstract class MaterialFluidBase extends Material
 {
+    public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
+
+    public abstract int getConcentration();
+
     @Override
     public boolean hasSubtype(MaterialUseType useType) {
         switch (useType) {
