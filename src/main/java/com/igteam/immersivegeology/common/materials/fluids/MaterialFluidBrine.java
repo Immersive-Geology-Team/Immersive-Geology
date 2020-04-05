@@ -14,12 +14,12 @@ import java.util.Set;
 /**
  * Created by JStocke12 on 31-03-2020
  */
-public class MaterialFluidWater extends MaterialFluidBase
+public class MaterialFluidBrine extends MaterialFluidBase
 {
 	@Override
 	public String getName()
 	{
-		return "water";
+		return "brine";
 	}
 
 	@Override
@@ -45,17 +45,20 @@ public class MaterialFluidWater extends MaterialFluidBase
 
 	@Override
 	public EnumFluidType getFluidType() {
-		return EnumFluidType.FLUID;
+		return EnumFluidType.SOLUTION;
 	}
 
 	@Override
 	public Set<ElementProportion> getSoluteElements() {
-		return null;
+		return new HashSet<>(Arrays.asList(
+				new ElementProportion(PeriodicTableElement.SODIUM),
+				new ElementProportion(PeriodicTableElement.CHLORINE)
+		));
 	}
 
 	@Override
 	public float getConcentration() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class MaterialFluidWater extends MaterialFluidBase
 	@Override
 	public int getMeltingPoint()
 	{
-		return 273;
+		return 269;
 	}
 
 	@Override
