@@ -4,35 +4,46 @@
  */
 
 package com.igteam.immersivegeology.common.util;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.materials.Material;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
+
 
 public class JsonGenerator {
 	
+	public static JsonGenerator INSTANCE = new JsonGenerator();
 	
+	public void generateDefaultItem(Material material, MaterialUseType type)
+	{
+		generateDefaultItem("item_"+type.getName()+"_"+material.getName(), material.getMaterialType().toString(), type.getName());
+	}
+
 	//NOTE: this generate runs at start up, minecraft looks for item and block models BEFORE this runs, 
 	//which means you need to start minecraft up to generate the json, then close and start minecraft again to see it in game.
-	public void generateDefaultItem(String registryName, String itemType, String itemBaseType) throws IOException {
-		File file = new File("../src/main/resources/assets/immersivegeology/models/item/" + registryName + ".json");
-		if(!file.exists()) {
-			JsonWriter jsonWriter = new JsonWriter(new FileWriter(file)); 
-			jsonWriter.setIndent(" "); //this makes it more readable for humans!
-			jsonWriter.beginObject();
-				jsonWriter.name("parent").value("immersiveengineering:item/ie_item_base");
-				jsonWriter.name("textures");
+	public void generateDefaultItem(String registryName, String itemType, String itemBaseType)
+	{
+		try
+		{
+			File file = new File("../src/main/resources/assets/immersivegeology/models/item/"+registryName+".json");
+			if(!file.exists())
+			{
+				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
+				jsonWriter.setIndent(" "); //this makes it more readable for humans!
 				jsonWriter.beginObject();
-					jsonWriter.name("layer0");
-					jsonWriter.value("immersivegeology:item/greyscale/" + itemBaseType.toLowerCase() +"/" + itemType.toLowerCase());
+				jsonWriter.name("parent").value("immersivegeology:item/base/"+itemBaseType);
 				jsonWriter.endObject();
-			jsonWriter.endObject();
-		    jsonWriter.close();
+				jsonWriter.close();
+			}
+		} catch(IOException e)
+		{
+
 		}
+
 	}
 	
 	public void generateDefaultBlock(String registryName) throws IOException {
@@ -45,8 +56,7 @@ public class JsonGenerator {
 				jsonWriter.beginObject();
 					jsonWriter.name("");
 					jsonWriter.beginObject();
-						jsonWriter.name("model");
-						jsonWriter.value(ImmersiveGeology.MODID +":block/" + registryName);
+						jsonWriter.name("model").value(ImmersiveGeology.MODID +":block/" + registryName);
 					jsonWriter.endObject();
 				jsonWriter.endObject();
 			jsonWriter.endObject();

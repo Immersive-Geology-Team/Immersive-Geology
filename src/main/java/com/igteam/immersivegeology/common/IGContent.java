@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBlockItem;
+import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
 import net.minecraft.block.Block;
@@ -47,7 +48,7 @@ public class IGContent
 					if(materialItem.getCategory() != UseCategory.BLOCK && materialItem.getCategory() != UseCategory.MATERIAL_BLOCK) {
 						registeredIGItems.add(new IGMaterialResourceItem(material, materialItem)); 
 					} else if (materialItem.getCategory() == UseCategory.MATERIAL_BLOCK) {
-						registeredIGBlocks.add(new IGMaterialBlock(materialItem));
+						//registeredIGBlocks.add(new IGMaterialBlock(materialItem));
 					}
 				}
 			}
