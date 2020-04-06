@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.util.IGItemGrabber;
-import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
+import com.igteam.immersivegeology.common.util.JsonGenerator;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
@@ -36,7 +36,7 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 		//add this item to the item grabber, that way we can refrence this later.
 		IGItemGrabber.inputNewItem(key, material, this);
 		
-		ItemJsonGenerator generate = new ItemJsonGenerator();
+		JsonGenerator generate = new JsonGenerator();
 		try {
 			generate.generateDefaultItem("item_"+ key.getName() + "_" + material.getName(), key.getName(), material.getMaterialType().toString());
 		} catch (IOException e) {

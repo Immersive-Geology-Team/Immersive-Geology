@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology.common.blocks;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
+import com.igteam.immersivegeology.common.util.JsonGenerator;
 import com.igteam.immersivegeology.api.materials.Material;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import net.minecraft.block.BlockState;
@@ -35,6 +37,15 @@ public class IGMaterialBlock extends IGBaseBlock
 			this.itemBlock = itemBlockMat;
 		}
 		
+		//TODO set this up to work with a common model.
+		JsonGenerator gen = new JsonGenerator();
+		
+		try {
+			gen.generateDefaultBlock(m.getName());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public IGBlockMaterialItem getItemBlockMaterial() {

@@ -46,8 +46,11 @@ public class IGContent
 				//check if that material is allowed to make this item type.
 				if(material.hasSubtype(materialItem)) {
 					//check if this type is an ITEM not a BLOCK type.
-					if(materialItem.getCategory() != UseCategory.BLOCK && materialItem.getCategory() != UseCategory.MATERIAL_BLOCK)
+					if(materialItem.getCategory() != UseCategory.BLOCK && materialItem.getCategory() != UseCategory.MATERIAL_BLOCK) {
 						registeredIGItems.add(new IGMaterialResourceItem(material, materialItem)); 
+					} else if (materialItem.getCategory() == UseCategory.MATERIAL_BLOCK) {
+						registeredIGBlocks.add(new IGMaterialBlock(materialItem));
+					}
 				}
 			}
 		}

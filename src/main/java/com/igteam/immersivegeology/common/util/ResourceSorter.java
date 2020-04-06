@@ -14,9 +14,7 @@ public class ResourceSorter implements Comparator<ItemStack> {
     	String otherOneHalf = namePartOne.substring(0,namePartOne.indexOf(" "));
     	
     	namePartOne = onehalf + otherOneHalf;
-    	//namePartOne = namePartOne.substring(namePartOne.indexOf("_"), namePartOne.length());
-    	//namePartOne = namePartOne.substring(namePartOne.indexOf("_") + 1, namePartOne.lastIndexOf("_"));
-       
+
     	String namePartTwo = o2.getItem().getDisplayName(o2).getString();
     	String twohalf = namePartTwo.substring(namePartTwo.indexOf(" "));
     	String otherTwoHalf = namePartTwo.substring(0,namePartTwo.indexOf(" "));
