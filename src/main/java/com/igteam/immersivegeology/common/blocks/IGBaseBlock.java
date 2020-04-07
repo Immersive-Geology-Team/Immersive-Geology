@@ -4,12 +4,10 @@ import blusunrize.immersiveengineering.common.items.HammerItem;
 import blusunrize.immersiveengineering.common.items.WirecutterItem;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -48,7 +46,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 	protected boolean canCutterHarvest;
 	protected boolean notNormalBlock;
 
-	public IGBaseBlock(String name, Block.Properties blockProps, ItemSubGroup group, IProperty... additionalProperties)
+	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock, ItemSubGroup group, IProperty... additionalProperties)
 	{
 		super(setTempProperties(blockProps, additionalProperties));
 		this.name = name;
@@ -58,17 +56,20 @@ public class IGBaseBlock extends Block implements IIGBlock
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
 
-		IGContent.registeredIGBlocks.add(this);
-		
-		if(itemBlock == null) {
-			itemBlock = new IGBlockItem(this, new net.minecraft.item.Item.Properties().group(ImmersiveGeology.IGgroup),group,null).setRegistryName(getRegistryName());
+		if(itemBlock!=null)
+		{
+			try
+			{
+				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class,ItemSubGroup.class)
+						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP),group);
+				this.itemBlock.setRegistryName(registryName);
+				IGContent.registeredIGItems.add(this.itemBlock);
+			} catch(Exception e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
-		
 		lightOpacity = 15;
-	}
-
-	public IGBaseBlock(MaterialUseType m) {
-		this(m.getName(),Block.Properties.create((m.getMaterial() == null ? net.minecraft.block.material.Material.ROCK : m.getMaterial())),m.getSubGroup());
 	}
 
 	//TODO do we still need this hackyness?
@@ -311,7 +312,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 		public IELadderBlock(String name, Block.Properties material,
 							 Class<? extends IGBlockItem> itemBlock, IProperty... additionalProperties)
 		{
-			super(name, material, ItemSubGroup.misc, additionalProperties);
+			super(name, material, IGBlockItem.class, ItemSubGroup.misc, additionalProperties);
 		}
 
 		@Override
@@ -323,7 +324,6 @@ public class IGBaseBlock extends Block implements IIGBlock
 
 	@Override
 	public Item getItemBlock() {
-		// TODO Auto-generated method stub
 		return itemBlock;
 	}
 }

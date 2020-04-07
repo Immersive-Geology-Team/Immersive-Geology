@@ -9,10 +9,9 @@ import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
  */
 public class IGSheetmetalBlock extends IGMaterialBlock
 {
-	//TODO revise this, make sure properties are correct!
 	public IGSheetmetalBlock(Material material)
 	{
-		super(MaterialUseType.SHEETMETAL);
+		super(material,MaterialUseType.SHEETMETAL);
 	}
 
 	//Hardness * 0.6

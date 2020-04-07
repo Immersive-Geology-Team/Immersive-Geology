@@ -4,27 +4,17 @@ import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.api.materials.Material;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersivegeology.common.IGContent;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
@@ -35,22 +25,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class IGBlockItem extends BlockItem implements IGSubGroup
 {
 
-	MaterialUseType subtype;
-	private int burnTime;
 	protected ItemSubGroup subGroup;
-	public IGBlockItem(Block b, Item.Properties props, ItemSubGroup sub, MaterialUseType subtype)
+	private int burnTime;
+
+	public IGBlockItem(Block b, Item.Properties props, ItemSubGroup sub)
 	{
-		super(b, props.group(ImmersiveGeology.IGgroup));
+		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP));
 		this.subGroup = sub;
-		this.subtype = subtype;
 	}
 
 	@Override
@@ -123,11 +109,18 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 			return super.placeBlock(context, newState);
 	}
 
+	@Override
+	public ItemSubGroup getSubGroup()
+	{
+		// TODO Auto-generated method stub
+		return subGroup;
+	}
+
 	public static class BlockItemIENoInventory extends IGBlockItem
 	{
 		public BlockItemIENoInventory(Block b, Properties props)
 		{
-			super(b, props, ItemSubGroup.misc, null);
+			super(b, props, ItemSubGroup.misc);
 		}
 
 		@Nullable
@@ -142,11 +135,5 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 			}
 			return ret;
 		}
-	}
-	
-	@Override
-	public ItemSubGroup getSubGroup() {
-		// TODO Auto-generated method stub
-		return subGroup;
 	}
 }

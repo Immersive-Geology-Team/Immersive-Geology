@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.client.menu.handler;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,11 +19,8 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,7 +38,7 @@ public class CreativeMenuHandler {
 		if (screen instanceof CreativeScreen) {
 			CreativeScreen gui = (CreativeScreen) screen;
 			int i = (int) (gui.getGuiLeft() - Math.floor(136 * 1.425));
-			if (gui.getSelectedTabIndex() == ImmersiveGeology.IGgroup.getIndex()) {
+			if (gui.getSelectedTabIndex() == ImmersiveGeology.IG_ITEM_GROUP.getIndex()) {
 				if (!subGroupButtons.isEmpty()) {
 					subGroupButtons.forEach((button) -> {
 						button.active = true;
@@ -91,7 +87,7 @@ public class CreativeMenuHandler {
 							});
 
 
-							ImmersiveGeology.IGgroup.fill(gui.getContainer().itemList);
+							ImmersiveGeology.IG_ITEM_GROUP.fill(gui.getContainer().itemList);
 							
 							Collections.sort(gui.getContainer().itemList, new ResourceSorter());
 							

@@ -37,7 +37,9 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static final IGItemGroup IGgroup = new IGItemGroup(MODID);
+	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
+
+	public static final boolean GENERATE_MODELS=true;
 
 	public ImmersiveGeology()
 	{

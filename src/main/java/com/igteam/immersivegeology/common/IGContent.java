@@ -6,7 +6,6 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBlockItem;
-import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
 import net.minecraft.block.Block;
@@ -45,10 +44,15 @@ public class IGContent
 				//check if that material is allowed to make this item type.
 				if(material.hasSubtype(materialItem)) {
 					//check if this type is an ITEM not a BLOCK type.
-					if(materialItem.getCategory() != UseCategory.BLOCK && materialItem.getCategory() != UseCategory.MATERIAL_BLOCK) {
-						registeredIGItems.add(new IGMaterialResourceItem(material, materialItem)); 
-					} else if (materialItem.getCategory() == UseCategory.MATERIAL_BLOCK) {
-						//registeredIGBlocks.add(new IGMaterialBlock(materialItem));
+
+					switch(materialItem.getCategory())
+					{
+						case RESOURCE_ITEM:
+							registeredIGItems.add(materialItem.getItem(material));
+							break;
+						case RESOURCE_BLOCK:
+							registeredIGBlocks.add(materialItem.getBlock(material));
+							break;
 					}
 				}
 			}

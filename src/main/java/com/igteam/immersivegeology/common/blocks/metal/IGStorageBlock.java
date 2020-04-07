@@ -10,10 +10,9 @@ import net.minecraft.block.Block;
  */
 public class IGStorageBlock extends IGMaterialBlock
 {
-	//TODO revise this, make sure properties are correct!
 	public IGStorageBlock(Material material)
 	{
-		super(MaterialUseType.STORAGE);
+		super(material,MaterialUseType.STORAGE);
 	}
 
 	//No changes to stats

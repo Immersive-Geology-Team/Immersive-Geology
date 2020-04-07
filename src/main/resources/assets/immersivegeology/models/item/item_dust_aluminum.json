@@ -1,6 +1,3 @@
 {
- "parent": "immersiveengineering:item/ie_item_base",
- "textures": {
-  "layer0": "immersivegeology:item/greyscale/metal/dust"
- }
+ "parent": "immersivegeology:item/base/dust"
 }

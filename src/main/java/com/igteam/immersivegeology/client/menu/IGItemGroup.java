@@ -3,7 +3,6 @@ package com.igteam.immersivegeology.client.menu;
 import java.util.Collections;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.util.ResourceSorter;
@@ -63,7 +62,7 @@ public class IGItemGroup extends ItemGroup {
 			if(item instanceof IGSubGroup) {
 				IGSubGroup itm = (IGSubGroup)item;
 				if(itm.getSubGroup() == selectedSubGroup) {
-					item.fillItemGroup(ImmersiveGeology.IGgroup, list);
+					item.fillItemGroup(ImmersiveGeology.IG_ITEM_GROUP, list);
 				}
 			}
 		}
