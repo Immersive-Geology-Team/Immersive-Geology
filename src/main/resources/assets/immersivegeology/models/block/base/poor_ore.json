@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "immersivegeology:block/greyscale/stone/rich_ore"
+    }
+}

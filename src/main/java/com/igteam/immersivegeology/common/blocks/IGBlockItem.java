@@ -6,7 +6,6 @@ import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.FontRenderer;
@@ -30,18 +29,14 @@ import java.util.List;
 
 public class IGBlockItem extends BlockItem implements IGSubGroup
 {
-	private int burnTime;
+
 	protected ItemSubGroup subGroup;
+	private int burnTime;
+
 	public IGBlockItem(Block b, Item.Properties props, ItemSubGroup sub)
 	{
-		super(b, props);
+		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP));
 		this.subGroup = sub;
-	}
-
-	public IGBlockItem(Block b)
-	{
-		this(b, new Item.Properties().group(ImmersiveGeology.IGgroup), ItemSubGroup.misc);
-		setRegistryName(b.getRegistryName()); 
 	}
 
 	@Override
@@ -114,6 +109,13 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 			return super.placeBlock(context, newState);
 	}
 
+	@Override
+	public ItemSubGroup getSubGroup()
+	{
+		// TODO Auto-generated method stub
+		return subGroup;
+	}
+
 	public static class BlockItemIENoInventory extends IGBlockItem
 	{
 		public BlockItemIENoInventory(Block b, Properties props)
@@ -133,11 +135,5 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 			}
 			return ret;
 		}
-	}
-
-	@Override
-	public ItemSubGroup getSubGroup() {
-		// TODO Auto-generated method stub
-		return subGroup;
 	}
 }

@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -100,8 +101,7 @@ public class MaterialMetalUranium extends MaterialMetalBase
 		return EnumMetalType.METAL;
 	}
 
-
-	/*@Nullable
+/*@Nullable
 	@Override
 	public IItemTier getToolTier()
 	{

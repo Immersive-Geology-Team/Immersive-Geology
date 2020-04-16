@@ -6,7 +6,6 @@ import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersivegeology.common.IGContent;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -40,10 +39,10 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 
 	public IGBaseItem(String name, Properties props)
 	{
-		super(props.group(ImmersiveGeology.IGgroup));
-		IGContent.registeredIGItems.add(this);
-		setRegistryName(ImmersiveGeology.MODID, name);
-		this.itemName = name;
+		super(props.group(ImmersiveGeology.IG_ITEM_GROUP));
+		if(itemName == null) {
+			itemName = name;
+		}
 	}
 
 	public IGBaseItem setBurnTime(int burnTime)
