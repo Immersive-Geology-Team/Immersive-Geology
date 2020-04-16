@@ -2,13 +2,10 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBlockItem;
-import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
-import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -154,7 +151,7 @@ public class IGContent
 	{
 		String s = tile.getSimpleName();
 		s = s.substring(0, s.indexOf("TileEntity")).toLowerCase(Locale.ENGLISH);
-		Set<Block> validSet = new HashSet<>(Arrays.asList(valid));
+		Set<Block> validSet = new LinkedHashSet<>(Arrays.asList(valid));
 		TileEntityType<T> type = new TileEntityType<>(() -> {
 			try
 			{

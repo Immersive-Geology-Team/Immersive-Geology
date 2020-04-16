@@ -8,8 +8,7 @@ import com.igteam.immersivegeology.api.materials.material_bases.MaterialFluidBas
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by JStocke12 on 31-03-2020
@@ -29,9 +28,9 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Arrays.asList(
 				new ElementProportion(PeriodicTableElement.OXYGEN),
 				new ElementProportion(PeriodicTableElement.HYDROGEN, 2)
 		));
@@ -49,7 +48,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public Set<ElementProportion> getSoluteElements() {
+	public LinkedHashSet<ElementProportion> getSoluteElements()
+	{
 		return null;
 	}
 

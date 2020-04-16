@@ -96,13 +96,6 @@ public enum MaterialUseType implements IStringSerializable
 	private ItemSubGroup subGroup;
 	private UseCategory category;
 
-	ItemSubGroup subGroup;
-	UseCategory category;
-	//Add item, block function - the default values are a resource item and a resource block
-	Function<MaterialUseType, IGMaterialItem> itemFunction = (materialUseType) -> new IGMaterialResourceItem(this);
-	//TODO: add blocks
-	Function<MaterialUseType, IGMaterialBlock> blockFunction = (materialUseType) -> null;
-
 	MaterialUseType()
 	{
 		this.category = UseCategory.RESOURCE_ITEM;

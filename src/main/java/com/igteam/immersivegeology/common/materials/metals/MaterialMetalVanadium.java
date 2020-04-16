@@ -8,8 +8,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by Crimson on 31-03-2020.
@@ -30,9 +29,9 @@ public class MaterialMetalVanadium extends MaterialMetalBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Arrays.asList(
 				new ElementProportion(PeriodicTableElement.VANADIUM)
 		));
 	}

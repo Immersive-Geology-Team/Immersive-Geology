@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -8,8 +7,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -30,9 +28,9 @@ public class MaterialMetalGold extends MaterialMetalBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Arrays.asList(
 				new ElementProportion(PeriodicTableElement.GOLD)
 		));
 	}

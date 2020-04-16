@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -9,8 +8,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by JStocke12 on 27-03-2020.
@@ -31,9 +29,9 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Arrays.asList(
 				new ElementProportion(PeriodicTableElement.URANIUM)
 		));
 	}

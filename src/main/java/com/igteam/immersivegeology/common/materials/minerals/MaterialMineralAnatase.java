@@ -2,12 +2,12 @@ package com.igteam.immersivegeology.common.materials.minerals;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
+import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by JStocke12 on 31-03-2020
@@ -27,9 +27,9 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	}
 
 	@Override
-	public Set<PeriodicTableElement.ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(
+		return new LinkedHashSet<>(
 				Arrays.asList(
 						new PeriodicTableElement.ElementProportion(PeriodicTableElement.TITANIUM),
 						new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
@@ -44,7 +44,8 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 

@@ -1,15 +1,13 @@
 package com.igteam.immersivegeology.common.materials.crystals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
+import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialCrystalBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 public class MaterialCrystalQuartz extends MaterialCrystalBase
 {
@@ -27,8 +25,9 @@ public class MaterialCrystalQuartz extends MaterialCrystalBase
     }
 
     @Override
-    public Set<PeriodicTableElement.ElementProportion> getElements() {
-        return new HashSet<>(Arrays.asList(
+	public LinkedHashSet<ElementProportion> getElements()
+	{
+		return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
         ));

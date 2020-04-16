@@ -23,7 +23,7 @@ public abstract class MaterialFluidBase extends Material
         switch (useType) {
             case BUCKET:
                 return hasBucket();
-            case FLUIDSOURCE:
+			case FLUIDS:
                 return hasFluidBlock();
         }
         return false;

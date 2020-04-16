@@ -92,7 +92,7 @@ repositories {
         url 'https://dvs1.progwml6.com/files/maven'
     }
 
-    maven { // CraftTweaker
+    maven { // CraftTweaker && IE
         name 'jared maven'
         url 'https://maven.blamejared.com/'
     }
