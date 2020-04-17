@@ -12,7 +12,6 @@ public final class IGBlocks
 	{
 	}
 
-	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 
 	public static final class StoneDecoration
 	{

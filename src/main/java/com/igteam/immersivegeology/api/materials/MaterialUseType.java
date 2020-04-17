@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
@@ -8,6 +9,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
@@ -58,8 +60,11 @@ public enum MaterialUseType implements IStringSerializable
 				@Override
 				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 				{
-					return new IGSheetmetalBlock(material);
+					IGBaseBlock sheetmetal = new IGSheetmetalBlock(material);
+					IGContent.addSlabFor(sheetmetal);
+					return sheetmetal;
 				}
+
 			},
 	DUST_BLOCK(UseCategory.RESOURCE_BLOCK, Material.SAND, ItemSubGroup.processed)
 			{

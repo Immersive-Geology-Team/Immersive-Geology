@@ -2,11 +2,9 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
-import com.igteam.immersivegeology.common.blocks.EnumMaterials;
-import com.igteam.immersivegeology.common.blocks.IGBlockItem;
-import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.common.blocks.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -28,6 +26,7 @@ public class IGContent
 	public static List<Item> registeredIGItems = new ArrayList<>();
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
+	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 	
 	public static void modConstruction()
 	{
@@ -50,6 +49,7 @@ public class IGContent
 							break;
 						case RESOURCE_BLOCK:
 							registeredIGBlocks.add(materialItem.getBlock(material));
+
 							break;
 					}
 				}
@@ -110,7 +110,7 @@ public class IGContent
 			event.getRegistry().register(fluid);
 	}
 
-	private static <T extends Block & IIGBlock> BlockIGSlab addSlabFor(T b)
+	public static <T extends Block & IIGBlock> BlockIGSlab addSlabFor(T b)
 	{
 		BlockIGSlab<T> ret = new BlockIGSlab<>(
 				"slab_"+b.getRegistryName().getPath(),
@@ -118,6 +118,7 @@ public class IGContent
 				IGBlockItem.class,
 				b
 		);
+		toSlab.put(b, ret);
 		return ret;
 	}
 
