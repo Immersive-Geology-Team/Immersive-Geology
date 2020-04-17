@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -26,6 +25,7 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 
 	public MaterialUseType subtype=MaterialUseType.STORAGE;
 	public Material material=EnumMaterials.Empty.material;
+	public boolean isSlab = false;
 
 	public IGBlockMaterialItem(Block b, Properties props, ItemSubGroup sub) {
 		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP), sub);
@@ -34,8 +34,9 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 	@Override
 	public ITextComponent getDisplayName(ItemStack stack)
 	{
-		String matName = I18n.format("material."+material.getModID()+"."+material.getName()+".name");
-		return new TranslationTextComponent("block."+ImmersiveGeology.MODID+"."+ subtype.getName().toLowerCase(Locale.ENGLISH)+".name", matName);
+		TranslationTextComponent matName = new TranslationTextComponent("material."+material.getModID()+"."+material.getName()+".name");
+		TranslationTextComponent typeName = new TranslationTextComponent("block."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", matName);
+		return isSlab?new TranslationTextComponent("block."+ImmersiveGeology.MODID+".slab.name", typeName): typeName;
 	}
 
 	@Override

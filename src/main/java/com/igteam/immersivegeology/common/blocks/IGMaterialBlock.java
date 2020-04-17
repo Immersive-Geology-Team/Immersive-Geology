@@ -21,7 +21,12 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 
 	public IGMaterialBlock(Material material, MaterialUseType type)
 	{
-		super("block_"+type.getName()+"_"+material.getName(), Properties.create((type.getMaterial()==null?net.minecraft.block.material.Material.ROCK: type.getMaterial())), IGBlockMaterialItem.class, type.getSubGroup());
+		this(material, type, "");
+	}
+
+	public IGMaterialBlock(Material material, MaterialUseType type, String sub)
+	{
+		super(sub+"block_"+type.getName()+"_"+material.getName(), Properties.create((type.getMaterial()==null?net.minecraft.block.material.Material.ROCK: type.getMaterial())), IGBlockMaterialItem.class, type.getSubGroup());
 		this.material = material;
 		this.type = type;
 		if(itemBlock instanceof IGBlockMaterialItem)

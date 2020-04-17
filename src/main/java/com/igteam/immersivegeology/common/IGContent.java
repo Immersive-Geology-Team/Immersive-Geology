@@ -2,7 +2,10 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.*;
+import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
+import com.igteam.immersivegeology.common.blocks.EnumMaterials;
+import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
@@ -110,13 +113,15 @@ public class IGContent
 			event.getRegistry().register(fluid);
 	}
 
-	public static <T extends Block & IIGBlock> BlockIGSlab addSlabFor(T b)
+	//Changed due to blocks being registered later on
+	public static <T extends IGBaseBlock & IIGBlock> BlockIGSlab addMaterialSlabFor(T b)
 	{
-		BlockIGSlab<T> ret = new BlockIGSlab<>(
-				"slab_"+b.getRegistryName().getPath(),
+		BlockIGSlab<T> ret = new BlockIGSlab<T>(
+				"slab_"+b.name,
 				Block.Properties.from(b),
-				IGBlockItem.class,
-				b
+				b.itemBlock.getClass(),
+				b,
+				b.itemSubGroup
 		);
 		toSlab.put(b, ret);
 		return ret;

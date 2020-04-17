@@ -2,14 +2,15 @@ package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
+import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
@@ -23,7 +24,6 @@ public enum MaterialUseType implements IStringSerializable
 	//Mineral items
 	ROCK(ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
-
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
@@ -52,7 +52,13 @@ public enum MaterialUseType implements IStringSerializable
 				@Override
 				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 				{
-					return new IGStorageBlock(material);
+					IGStorageBlock storage = new IGStorageBlock(material);
+					BlockIGSlab slab = IGContent.addMaterialSlabFor(storage);
+					((IGBlockMaterialItem)slab.itemBlock).material = material;
+					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
+					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
+					IGContent.registeredIGBlocks.add(slab);
+					return storage;
 				}
 			},
 	SHEETMETAL(UseCategory.RESOURCE_BLOCK, Material.IRON, ItemSubGroup.processed)
@@ -61,7 +67,11 @@ public enum MaterialUseType implements IStringSerializable
 				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 				{
 					IGBaseBlock sheetmetal = new IGSheetmetalBlock(material);
-					IGContent.addSlabFor(sheetmetal);
+					BlockIGSlab slab = IGContent.addMaterialSlabFor(sheetmetal);
+					((IGBlockMaterialItem)slab.itemBlock).material = material;
+					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
+					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
+					IGContent.registeredIGBlocks.add(slab);
 					return sheetmetal;
 				}
 

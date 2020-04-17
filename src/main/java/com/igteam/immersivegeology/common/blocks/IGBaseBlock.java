@@ -33,7 +33,7 @@ import java.util.List;
 public class IGBaseBlock extends Block implements IIGBlock
 {
 	protected static IProperty[] tempProperties;
-	public Item itemBlock = null;
+	public BlockItem itemBlock = null;
 	public final String name;
 	public final IProperty[] additionalProperties;
 	boolean isHidden;
@@ -45,6 +45,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 	protected boolean canHammerHarvest;
 	protected boolean canCutterHarvest;
 	protected boolean notNormalBlock;
+	public ItemSubGroup itemSubGroup = ItemSubGroup.misc;
 
 	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock, ItemSubGroup group, IProperty... additionalProperties)
 	{
@@ -60,6 +61,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 		{
 			try
 			{
+				this.itemSubGroup = group;
 				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class,ItemSubGroup.class)
 						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP),group);
 				this.itemBlock.setRegistryName(registryName);

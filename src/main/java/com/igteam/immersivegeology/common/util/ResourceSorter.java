@@ -1,27 +1,23 @@
 package com.igteam.immersivegeology.common.util;
 
-import java.util.Comparator;
-
 import net.minecraft.item.ItemStack;
 
-public class ResourceSorter implements Comparator<ItemStack> {
-    @Override
-    public int compare(ItemStack o1, ItemStack o2) {
-    	
-    	String namePartOne = o1.getItem().getDisplayName(o1).getString();
-    	
-    	String onehalf = namePartOne.substring(namePartOne.indexOf(" "));
-    	String otherOneHalf = namePartOne.substring(0,namePartOne.indexOf(" "));
-    	
-    	namePartOne = onehalf + otherOneHalf;
+import java.util.Comparator;
+import java.util.Objects;
 
-    	String namePartTwo = o2.getItem().getDisplayName(o2).getString();
-    	String twohalf = namePartTwo.substring(namePartTwo.indexOf(" "));
-    	String otherTwoHalf = namePartTwo.substring(0,namePartTwo.indexOf(" "));
-    	
-    	namePartTwo = twohalf + otherTwoHalf;
-    	
-    	System.out.println(namePartOne);
+public class ResourceSorter implements Comparator<ItemStack> {
+	@Override
+    public int compare(ItemStack o1, ItemStack o2) {
+
+		String namePartOne = "pierwszy", namePartTwo = "drugi";
+		try
+		{
+			namePartOne = Objects.requireNonNull(o1.getItem().getRegistryName()).getPath();
+			namePartTwo = Objects.requireNonNull(o2.getItem().getRegistryName()).getPath();
+		} catch(NullPointerException e)
+		{
+			IGLogger.info("An item has no name or is registered wrongly! Forge, how have you even accepted such item?");
+		}
     	
         return namePartOne.compareTo(namePartTwo);
     }
