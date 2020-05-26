@@ -31,16 +31,15 @@ public class WorldEventHandler {
 	private boolean worldDone = false;
 	private int seed;
 
-	public static HashMap<Biome, BiomeLayerData> data;
-	
-	
+	public static WorldLayerData data;
+
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onWorldLoad(WorldEvent.Load event) {
 		if (EffectiveSide.get() == LogicalSide.SERVER) {
 			if (0 == event.getWorld().getDimension().getType().getId()) {
 				if (!worldDone) {
 					worldDone = true;
-					data = WorldLayerData.INSTANCE.worldLayerData; //TODO for some reason blocks passed through this end up null
+					data = new WorldLayerData(); // TODO for some reason blocks passed through this end up null
 				}
 			}
 		}
@@ -68,59 +67,53 @@ public class WorldEventHandler {
 		}
 	}
 
-	public static double median(double[] m) {
-		int middle = m.length / 2;
-		if (m.length % 2 == 1) {
-			return m[middle];
-		} else {
-			return (m[middle - 1] + m[middle]) / 2.0;
-		}
-	}
-
 	private void replaceStone(IChunk chunk) {
 
 		int xPos = chunk.getPos().x * 16;
 		int zPos = chunk.getPos().z * 16;
-		
-		
+
 		for (ChunkSection storage : chunk.getSections()) {
 			if (storage != null && !storage.isEmpty()) {
 				int yPos = storage.getYLocation();
 
 				Biome biome = chunk.getBiome(new BlockPos(8, 8, 8));
-				for (int x = 0; x < 16; x++) {
-					for (int z = 0; z < 16; z++) {
-						for (int y = 0; y < 16; ++y) {
+				IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
+						EnumMaterials.Rock_Limestone.material);
 
-							float trueY = (yPos + y);
+				for (BiomeLayerData b : data.worldLayerData) {
+					if (b.getLbiome() == biome) {
+						int lc = b.getLayerCount();
+						int totalHeight = 256;
+						for (int l = lc; l > 0; l--) {
+							for (int x = 0; x < 16; x++) {
+								for (int z = 0; z < 16; z++) {
+									for (int y = 0; y < 16; ++y) {
 
-							Block oldBlock = storage.getBlockState(x, y, z).getBlock();
-							IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
-									EnumMaterials.Rock_Limestone.material);
-							
+										float trueY = (yPos + y);
 
-							if (data.get(biome) != null) {
-								int lc = data.get(biome).getLayerCount();
-								int totalHeight = 256;
-								for (int l = lc; l > 0; l--) {
-									if (trueY < (totalHeight * l) / lc) {
-										System.out.println(data.get(biome).getLayerBlock(l).toString());
+										if (trueY < (totalHeight * l) / lc) { //while it does 'work' it just replaces all blocks, checking for 'stone' doesn't stop it...
+											replaceBlock = b.getLayerBlock(l);
 
-										replaceBlock = data.get(biome).getLayerBlock(l);
+											Block oldBlock = storage.getBlockState(x, y, z).getBlock();
+
+											// setting the block in here isn't super efficient, but it works.
+											int nh = (int) replaceBlock.getDefaultHardness();
+
+											nh = (int) (12 - (Math.pow(Math.E, 2.6) * Math.log(trueY / 135)));
+
+
+											if (oldBlock == Blocks.STONE) {
+												storage.setBlockState(x, y, z,
+														replaceBlock.getDefaultState()
+																.with(IGBaseBlock.NATURAL, Boolean.valueOf(true))
+																.with(IGBaseBlock.HARDNESS,
+																		Integer.valueOf(
+																				(int) Math.min(256, Math.max(0, nh)))),
+														true);
+											}
+										}
 									}
 								}
-							}
-
-							int nh = (int) replaceBlock.getDefaultHardness();
-
-							nh = (int) (12 - (Math.pow(Math.E, 2.6) * Math.log(trueY / 135)));
-
-							if (oldBlock == Blocks.STONE) {
-								storage.setBlockState(x, y, z,
-										replaceBlock.getDefaultState().with(IGBaseBlock.NATURAL, Boolean.valueOf(true))
-												.with(IGBaseBlock.HARDNESS,
-														Integer.valueOf((int) Math.min(256, Math.max(0, nh)))),
-										true);
 							}
 
 						}

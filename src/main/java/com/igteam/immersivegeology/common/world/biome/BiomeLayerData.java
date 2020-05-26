@@ -13,8 +13,8 @@ import net.minecraft.world.biome.Biome;
 
 public class BiomeLayerData {
 
-	private HashMap<Integer, IGBaseBlock> layerMap = new HashMap<Integer, IGBaseBlock>();
-	private HashMap<Integer, LayerOre> layerOreMap = new HashMap<Integer, LayerOre>();
+	private ArrayList<IGBaseBlock> layerMap = new ArrayList<IGBaseBlock>();
+	private ArrayList<LayerOre> layerOreMap = new ArrayList<LayerOre>();
 
 	private Biome lbiome;
 	private float baseHardnessMod;
@@ -24,19 +24,20 @@ public class BiomeLayerData {
 		this.baseHardnessMod = baseHardnessMod;
 	}
 	
-	public List<IGBaseBlock> getLayers(){
-		return layerMap.values().stream().collect(Collectors.toList());
+	public ArrayList<IGBaseBlock> getLayers(){
+		return layerMap;
 	}
 
-	public void addLayer(int layerID, IGBaseBlock layerBlock) {
-		layerMap.put(layerID, layerBlock);
+	public void addLayer(IGBaseBlock layerBlock) {
+		layerMap.add(layerBlock);
 	}
 
-	public void addLayerOre(int layerID, int rarity, int veinSize, IGBaseBlock ore) {
-		layerOreMap.put(layerID, new LayerOre(rarity, veinSize, ore));
+	public void addLayerOre(int rarity, int veinSize, IGBaseBlock ore) {
+		layerOreMap.add(new LayerOre(rarity, veinSize, ore));
 	}
 
 	public IGBaseBlock getLayerBlock(int layerID) {
+		layerID--;
 		return layerMap.get(layerID);
 	}
 
