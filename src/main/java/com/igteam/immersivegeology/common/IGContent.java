@@ -6,6 +6,10 @@ import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
+import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
@@ -25,14 +29,21 @@ import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IGContent
 {
-	public static List<Block> registeredIGBlocks = new ArrayList<>();
+	public static Map<String, IGBaseBlock> registeredIGBlocks = new HashMap<String, IGBaseBlock>();
+	public static Map<String, Block> registeredIGSlabBlocks = new HashMap<String, Block>();
 	public static List<Item> registeredIGItems = new ArrayList<>();
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 	
+	public static WorldTypeImmersive worldType;
+	
 	public static void modConstruction()
 	{
+		
+		//setup worldtype
+		worldType = new WorldTypeImmersive();
+		
 		//Item, blocks here
 		// cycle through item Types
 		for(MaterialUseType materialItem : MaterialUseType.values())
@@ -51,9 +62,9 @@ public class IGContent
 							registeredIGItems.add(materialItem.getItem(material));
 							break;
 						case RESOURCE_BLOCK:
-							registeredIGBlocks.add(materialItem.getBlock(material));
-
-							break;
+						case BLOCK:
+							registeredIGBlocks.put(materialItem.getName() + "_" + material.getName(),materialItem.getBlock(material));
+						break;
 					}
 				}
 			}
@@ -64,7 +75,7 @@ public class IGContent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		//checkNonNullNames(registeredIGBlocks);
-		for(Block block : registeredIGBlocks)
+		for(Block block : registeredIGBlocks.values())
 			if(block!=null)
 				event.getRegistry().register(block);
 	}
@@ -73,7 +84,16 @@ public class IGContent
 	public static void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
 		//checkNonNullNames(registeredIGItems);
-		for(Block b : registeredIGBlocks) {
+		for(Block b : registeredIGBlocks.values()) {
+			if(b!=null) {
+				if (b instanceof IIGBlock) {
+				event.getRegistry().register(((IIGBlock) b).getItemBlock());
+				}
+			}
+		}
+		
+		//slabs only!
+		for(Block b : registeredIGSlabBlocks.values()) {
 			if(b!=null) {
 				if (b instanceof IIGBlock) {
 				event.getRegistry().register(((IIGBlock) b).getItemBlock());

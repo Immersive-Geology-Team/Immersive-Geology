@@ -22,7 +22,7 @@ import java.util.Locale;
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
-	ROCK(ItemSubGroup.raw),
+	ROCK(UseCategory.BLOCK, ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
@@ -57,7 +57,7 @@ public enum MaterialUseType implements IStringSerializable
 					((IGBlockMaterialItem)slab.itemBlock).material = material;
 					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
 					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
-					IGContent.registeredIGBlocks.add(slab);
+					//IGContent.registeredIGBlocks.add(slab);
 					return storage;
 				}
 			},
@@ -71,7 +71,7 @@ public enum MaterialUseType implements IStringSerializable
 					((IGBlockMaterialItem)slab.itemBlock).material = material;
 					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
 					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
-					IGContent.registeredIGBlocks.add(slab);
+					//IGContent.registeredIGBlocks.put("",slab);
 					return sheetmetal;
 				}
 

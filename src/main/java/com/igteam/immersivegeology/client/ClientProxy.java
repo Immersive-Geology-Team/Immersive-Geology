@@ -43,7 +43,7 @@ public class ClientProxy extends CommonProxy
 		for(Item item : IGContent.registeredIGItems)
 			if(item instanceof IEItemInterfaces.IColouredItem&&((IEItemInterfaces.IColouredItem)item).hasCustomItemColours())
 				mc().getItemColors().register(IEDefaultColourHandlers.INSTANCE, item);
-		for(Block block : IGContent.registeredIGBlocks)
+		for(Block block : IGContent.registeredIGBlocks.values())
 			if(block instanceof IEBlockInterfaces.IColouredBlock&&((IEBlockInterfaces.IColouredBlock)block).hasCustomBlockColours())
 				mc().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
 	}

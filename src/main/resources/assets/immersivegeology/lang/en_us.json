@@ -4,6 +4,7 @@
   "language.region": "United States",
   "itemGroup.immersivegeology": "Immersive Geology",
   "immersivegeology.config.title": "",
+  "generator.immersive": "Immersive",
 
   "item.immersivegeology.ingot.name": "%s Ingot",
   "item.immersivegeology.plate.name": "%s Plate",

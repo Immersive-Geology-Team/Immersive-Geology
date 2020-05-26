@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuar
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
+import com.igteam.immersivegeology.common.materials.rocks.*;
 
 import java.util.stream.Stream;
 
@@ -16,6 +17,12 @@ public enum EnumMaterials
 	//Empty
 	Empty(new MaterialEmpty()),
 
+	//Rocks
+	Rock_Limestone(new MaterialLimestone()),
+	Rock_Basalt(new MaterialBasalt()),
+	Rock_Andesite(new MaterialAndesite()),
+	Rock_Dolerite(new MaterialDolerite()),
+	
 	//Metals
 	Aluminium(new MaterialMetalAluminium()),
 	Chromium(new MaterialMetalChromium()),

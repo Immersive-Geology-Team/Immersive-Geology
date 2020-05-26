@@ -14,7 +14,6 @@ public class IGItemGrabber {
 
 	@Nonnull
 	public static HashMap<String, Item> IGItemMap = new HashMap<String, Item>();
-	
 
 	public static void inputNewItem(MaterialUseType type, Material mat, Item item) {
 		IGItemMap.put(type.getName() + "_" + mat.getName(), item);
@@ -22,14 +21,11 @@ public class IGItemGrabber {
 	
 	@Nonnull
 	public static Item getIGItem(MaterialUseType type, Material mat) {
-
 		return IGItemMap.get(type.getName() + "_" + mat.getName());
-		
 	}
 
 	public static Item getIGItem(MaterialUseType type, PeriodicTableElement gold) {
 		// TODO Auto-generated method stub
 		return IGItemMap.get(type.getName() + "_" + gold.getName());
 	}
-	
 }

@@ -29,7 +29,7 @@ public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implement
 		super(props);
 		ResourceLocation registryName = new ResourceLocation(ImmersiveGeology.MODID, name);
 		setRegistryName(registryName);
-		IGContent.registeredIGBlocks.add(this);
+		IGContent.registeredIGSlabBlocks.put("slab_"+name,this);
 		this.base = base;
 		this.hasCustomColor = base instanceof IColouredBlock&&((IColouredBlock)base).hasCustomBlockColours();
 

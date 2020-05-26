@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.util;
 import com.google.gson.stream.JsonWriter;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialRockBase.EnumRockType;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +18,11 @@ public class BlockstateGenerator
 	public static void generateDefaultBlock(Material material, MaterialUseType type)
 	{
 		generateDefaultBlock("block_"+type.getName()+"_"+material.getName(), material.getMaterialType().toString(), type.getName());
+	}
+	
+	public static void generateDefaultBlock(Material material, MaterialUseType type, EnumRockType rockType)
+	{
+		generateDefaultBlock("block_"+type.getName()+"_"+material.getName(), material.getMaterialType().toString(), type.getName() + "_" + rockType.getName());
 	}
 
 	//NOTE: this generate runs at start up, minecraft looks for item and block models BEFORE this runs, 
