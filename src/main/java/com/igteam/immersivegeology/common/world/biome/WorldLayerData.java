@@ -1,13 +1,11 @@
 package com.igteam.immersivegeology.common.world.biome;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
 public class WorldLayerData {
@@ -20,7 +18,6 @@ public class WorldLayerData {
 	public BiomeLayerData ocean = new BiomeLayerData(Biomes.OCEAN, 2.5f);
 	
 	public WorldLayerData() {
-		
 		forest.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rock_Andesite.material));
 		forest.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rock_Basalt.material));
 		forest.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Rock_Dolerite.material));

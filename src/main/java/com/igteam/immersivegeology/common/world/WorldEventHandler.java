@@ -76,22 +76,22 @@ public class WorldEventHandler {
 			if (storage != null && !storage.isEmpty()) {
 				int yPos = storage.getYLocation();
 
-				Biome biome = chunk.getBiome(new BlockPos(8, 8, 8));
 				IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
 						EnumMaterials.Rock_Limestone.material);
 
 				for (BiomeLayerData b : data.worldLayerData) {
-					if (b.getLbiome() == biome) {
-						int lc = b.getLayerCount();
-						int totalHeight = 256;
-						for (int l = lc; l > 0; l--) {
-							for (int x = 0; x < 16; x++) {
-								for (int z = 0; z < 16; z++) {
-									for (int y = 0; y < 16; ++y) {
 
-										float trueY = (yPos + y);
-
-										if (trueY < (totalHeight * l) / lc) { //while it does 'work' it just replaces all blocks, checking for 'stone' doesn't stop it...
+					for (int x = 0; x < 16; x++) {
+						for (int z = 0; z < 16; z++) {
+							for (int y = 0; y < 16; ++y) {
+								Biome biome = chunk.getBiome(new BlockPos(x, y, z));
+								float trueY = (yPos + y);
+								if (b.getLbiome() == biome) {
+									int lc = b.getLayerCount();
+									for (int l = lc; l > 0; l--) {
+										int totalHeight = 256;
+										if ((trueY < (totalHeight * l) / lc) && (trueY >= (((totalHeight * l) / lc)
+												- ((totalHeight * l) / lc) / l))) {
 											replaceBlock = b.getLayerBlock(l);
 
 											Block oldBlock = storage.getBlockState(x, y, z).getBlock();
@@ -100,7 +100,6 @@ public class WorldEventHandler {
 											int nh = (int) replaceBlock.getDefaultHardness();
 
 											nh = (int) (12 - (Math.pow(Math.E, 2.6) * Math.log(trueY / 135)));
-
 
 											if (oldBlock == Blocks.STONE) {
 												storage.setBlockState(x, y, z,
