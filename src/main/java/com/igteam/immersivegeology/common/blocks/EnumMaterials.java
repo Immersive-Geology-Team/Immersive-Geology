@@ -15,12 +15,6 @@ public enum EnumMaterials
 
 	//Empty
 	Empty(new MaterialEmpty()),
-
-	//Rocks
-	Rock_Limestone(new MaterialLimestone()),
-	Rock_Basalt(new MaterialBasalt()),
-	Rock_Andesite(new MaterialAndesite()),
-	Rock_Dolerite(new MaterialDolerite()),
 	
 	//Metals
 	Aluminium(new MaterialMetalAluminium()),
@@ -60,7 +54,6 @@ public enum EnumMaterials
 	Gypsum(new MaterialMineralGypsum()),
 	Hematite(new MaterialMineralHematite()),
 	Hubnerite(new MaterialMineralHubnerite()),
-	Limestone(new MaterialMineralLimestone()),
 	Magnetite(new MaterialMineralMagnetite()),
 	Pyrolusite(new MaterialMineralPyrolusite()),
 	RockSalt(new MaterialMineralRockSalt()),
@@ -68,7 +61,7 @@ public enum EnumMaterials
 	Uraninite(new MaterialMineralUraninite()),
 
 	//Fluids
-	Water(new MaterialFluidWater());
+	Water(new MaterialFluidWater()),
 
 	//Stones
 	//TODO: add chemical formulas for the stones
@@ -76,10 +69,8 @@ public enum EnumMaterials
 	Diorite(new MaterialStoneDiorite()),
 	Andesite(new MaterialStoneAndesite()),
 	Granite(new MaterialStoneGranite()),
-
 	Netherrack(new MaterialStoneNetherrack()),
 	Endstone(new MaterialStoneEndstone()),
-
 	Basalt(new MaterialStoneBasalt()),
 	Limestone(new MaterialStoneLimestone());
 

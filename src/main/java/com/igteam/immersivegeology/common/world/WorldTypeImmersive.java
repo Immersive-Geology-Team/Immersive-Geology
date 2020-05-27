@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -17,12 +18,10 @@ public class WorldTypeImmersive extends WorldType {
 
 	@Override
 	public ChunkGenerator<?> createChunkGenerator(World world) {
-		OverworldGenSettings overworldGenSettings = new OverworldGenSettings();
-		OverworldBiomeProviderSettings biomeProviderSettings = new OverworldBiomeProviderSettings();
-		biomeProviderSettings.setWorldInfo(world.getWorldInfo());
-		biomeProviderSettings.setGeneratorSettings(overworldGenSettings);
+		ImmersiveGenerationSettings overworldGenSettings = new ImmersiveGenerationSettings();
+		overworldGenSettings.setWorldInfo(world.getWorldInfo());
 
-		return new ChunkGeneratorImmersiveOverworld(world, new ImmersiveBiomeProvider(biomeProviderSettings),
+		return new ChunkGeneratorImmersiveOverworld(world, new ImmersiveBiomeProvider(overworldGenSettings),
 				overworldGenSettings);
 	}
-}
+}	

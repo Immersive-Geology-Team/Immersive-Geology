@@ -1,15 +1,15 @@
 package com.igteam.immersivegeology.common.util;
 
-import com.google.gson.stream.JsonWriter;
-import com.igteam.immersivegeology.api.materials.Material;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialRockBase.EnumRockType;
+import static com.igteam.immersivegeology.ImmersiveGeology.GENERATE_MODELS;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static com.igteam.immersivegeology.ImmersiveGeology.GENERATE_MODELS;
+import com.google.gson.stream.JsonWriter;
+import com.igteam.immersivegeology.api.materials.Material;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
 
 public class BlockstateGenerator
 {
@@ -20,7 +20,7 @@ public class BlockstateGenerator
 		generateDefaultBlock("block_"+type.getName()+"_"+material.getName(), material.getMaterialType().toString(), type.getName());
 	}
 	
-	public static void generateDefaultBlock(Material material, MaterialUseType type, EnumRockType rockType)
+	public static void generateDefaultBlock(Material material, MaterialUseType type, EnumStoneType rockType)
 	{
 		generateDefaultBlock("block_"+type.getName()+"_"+material.getName(), material.getMaterialType().toString(), type.getName() + "_" + rockType.getName());
 	}
@@ -32,7 +32,7 @@ public class BlockstateGenerator
 		if(!GENERATE_MODELS)
 			return;
 		try
-		{
+		{ 
 			File file = new File("../src/main/resources/assets/immersivegeology/blockstates/"+registryName+".json");
 			if(!file.exists())
 			{

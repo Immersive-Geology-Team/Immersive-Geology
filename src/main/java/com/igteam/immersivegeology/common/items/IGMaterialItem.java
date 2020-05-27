@@ -25,6 +25,7 @@ public class IGMaterialItem extends IGBaseItem
 		this.subtype = type;
 		this.subGroup = type.getSubGroup();
 		this.material = material;
+		
 	}
 
 	@Override

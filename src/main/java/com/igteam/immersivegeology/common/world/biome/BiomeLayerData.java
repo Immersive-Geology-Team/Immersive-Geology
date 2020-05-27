@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.world.biome;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +39,7 @@ public class BiomeLayerData {
 	}
 
 	public IGBaseBlock getLayerBlock(int layerID) {
-		layerID--;
-		return layerMap.get(layerID);
+		return layerMap.get(layerID - 1);
 	}
 
 	public LayerOre getLayerOre(int layerID) {
@@ -52,6 +52,10 @@ public class BiomeLayerData {
 
 	public float getBaseHardnessMod() {
 		return baseHardnessMod;
+	}
+	
+	public void settleLayers() {
+		Collections.reverse(layerMap);
 	}
 
 	public class LayerOre {

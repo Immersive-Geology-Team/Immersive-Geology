@@ -14,12 +14,12 @@ public class RockData {
 	}
 	
 	public Block getBlock(int x, int z) {
-		return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rock_Basalt.material);
+		return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
 	}
 
 	public Material getRock(int x, int z) {
 		// TODO Auto-generated method stub
-		return EnumMaterials.Rock_Basalt.material;
+		return EnumMaterials.Rhyolite.material;
 	}
 	
 }

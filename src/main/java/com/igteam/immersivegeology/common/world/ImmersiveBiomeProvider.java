@@ -1,114 +1,141 @@
 package com.igteam.immersivegeology.common.world;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.collect.Sets;
+import com.igteam.immersivegeology.common.world.biome.BiomeFactory;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGBiomes;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.util.IGLayerUtil;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.OverworldBiomeProvider;
-import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
-import net.minecraft.world.gen.OverworldGenSettings;
+import net.minecraft.world.gen.area.IAreaFactory;
+import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.layer.Layer;
-import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.storage.WorldInfo;
 
+@ParametersAreNonnullByDefault
 public class ImmersiveBiomeProvider extends BiomeProvider {
-	 private final Layer genBiomes;
-	   private final Layer biomeFactoryLayer;
-	   private final Biome[] biomes = new Biome[]{Biomes.OCEAN, Biomes.PLAINS, Biomes.DESERT, Biomes.MOUNTAINS, Biomes.FOREST, Biomes.TAIGA, Biomes.SWAMP, Biomes.RIVER, Biomes.FROZEN_OCEAN, Biomes.FROZEN_RIVER, Biomes.SNOWY_TUNDRA, Biomes.SNOWY_MOUNTAINS, Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.BEACH, Biomes.DESERT_HILLS, Biomes.WOODED_HILLS, Biomes.TAIGA_HILLS, Biomes.MOUNTAIN_EDGE, Biomes.JUNGLE, Biomes.JUNGLE_HILLS, Biomes.JUNGLE_EDGE, Biomes.DEEP_OCEAN, Biomes.STONE_SHORE, Biomes.SNOWY_BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.DARK_FOREST, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.WOODED_MOUNTAINS, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.BADLANDS, Biomes.WOODED_BADLANDS_PLATEAU, Biomes.BADLANDS_PLATEAU, Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.SUNFLOWER_PLAINS, Biomes.DESERT_LAKES, Biomes.GRAVELLY_MOUNTAINS, Biomes.FLOWER_FOREST, Biomes.TAIGA_MOUNTAINS, Biomes.SWAMP_HILLS, Biomes.ICE_SPIKES, Biomes.MODIFIED_JUNGLE, Biomes.MODIFIED_JUNGLE_EDGE, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.DARK_FOREST_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.MODIFIED_GRAVELLY_MOUNTAINS, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU, Biomes.ERODED_BADLANDS, Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, Biomes.MODIFIED_BADLANDS_PLATEAU};
+    /**
+     * Before the final Voronoi Zoom - In OverworldBiomeProvider this is genBiomes
+     */
+    private final BiomeFactory biomeFactory;
+    /**
+     * After the final Voronoi Zoom - In OverworldBiomeProvider this is biomeFactoryLayer
+     */
+    private final BiomeFactory biomeFactoryActual;
 
-	   public ImmersiveBiomeProvider(OverworldBiomeProviderSettings settingsProvider) {
-	      WorldInfo worldinfo = settingsProvider.getWorldInfo();
-	      OverworldGenSettings overworldgensettings = settingsProvider.getGeneratorSettings();
-	      Layer[] alayer = LayerUtil.buildOverworldProcedure(worldinfo.getSeed(), worldinfo.getGenerator(), overworldgensettings);
-	      this.genBiomes = alayer[0];
-	      this.biomeFactoryLayer = alayer[1];
-	   }
+    private Biome[] biomes = IGBiomes.getBiomes().toArray(new Biome[0]);
 
-	   /**
-	    * Gets the biome from the provided coordinates
-	    */
-	   public Biome getBiome(int x, int y) {
-	      return this.biomeFactoryLayer.func_215738_a(x, y);
-	   }
+    public ImmersiveBiomeProvider(ImmersiveGenerationSettings settings)
+    {
+        WorldInfo worldInfo = settings.getWorldInfo();
+        List<IAreaFactory<LazyArea>> areaFactory = IGLayerUtil.createOverworldBiomeLayer(worldInfo.getSeed(), settings);
 
-	   public Biome func_222366_b(int p_222366_1_, int p_222366_2_) {
-	      return this.genBiomes.func_215738_a(p_222366_1_, p_222366_2_);
-	   }
+        this.biomeFactory = new BiomeFactory(areaFactory.get(0));
+        this.biomeFactoryActual = new BiomeFactory(areaFactory.get(1));
 
-	   public Biome[] getBiomes(int x, int z, int width, int length, boolean cacheFlag) {
-	      return this.biomeFactoryLayer.generateBiomes(x, z, width, length);
-	   }
+        // todo: create temperature / rainfall layers, and use them to generate biome permutations
+    }
 
-	   public Set<Biome> getBiomesInSquare(int centerX, int centerZ, int sideLength) {
-	      int i = centerX - sideLength >> 2;
-	      int j = centerZ - sideLength >> 2;
-	      int k = centerX + sideLength >> 2;
-	      int l = centerZ + sideLength >> 2;
-	      int i1 = k - i + 1;
-	      int j1 = l - j + 1;
-	      Set<Biome> set = Sets.newHashSet();
-	      Collections.addAll(set, this.genBiomes.generateBiomes(i, j, i1, j1));
-	      return set;
-	   }
+    /**
+     * Gets the biome from the provided coordinates
+     *
+     * @param x The x coordinate to get the biome from.
+     * @param z The z coordinate to get the biome from.
+     */
+    @Override
+    @Nonnull
+    public Biome getBiome(int x, int z)
+    {
+        return biomeFactoryActual.getBiome(x, z);
+    }
 
-	   @Nullable
-	   public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random) {
-	      int i = x - range >> 2;
-	      int j = z - range >> 2;
-	      int k = x + range >> 2;
-	      int l = z + range >> 2;
-	      int i1 = k - i + 1;
-	      int j1 = l - j + 1;
-	      Biome[] abiome = this.genBiomes.generateBiomes(i, j, i1, j1);
-	      BlockPos blockpos = null;
-	      int k1 = 0;
+    @Override
+    @Nonnull
+    public IGBiome[] getBiomes(int x, int z, int width, int length, boolean cacheFlag)
+    {
+        return biomeFactoryActual.getBiomes(x, z, width, length);
+    }
 
-	      for(int l1 = 0; l1 < i1 * j1; ++l1) {
-	         int i2 = i + l1 % i1 << 2;
-	         int j2 = j + l1 / i1 << 2;
-	         if (biomes.contains(abiome[l1])) {
-	            if (blockpos == null || random.nextInt(k1 + 1) == 0) {
-	               blockpos = new BlockPos(i2, 0, j2);
-	            }
+    @Override
+    @Nonnull
+    public Set<Biome> getBiomesInSquare(int centerX, int centerZ, int sideLength)
+    {
+        Set<Biome> set = new HashSet<>();
+        int startX = centerX - sideLength >> 2;
+        int startZ = centerZ - sideLength >> 2;
+        Collections.addAll(set, biomeFactory.getBiomes(startX, startZ, (centerX + sideLength >> 2) - startX + 1, (centerZ + sideLength >> 2) - startZ + 1));
+        return set;
+    }
 
-	            ++k1;
-	         }
-	      }
+    @Nullable
+    @Override
+    public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random)
+    {
+        int startX = x - range >> 2;
+        int startZ = z - range >> 2;
+        int width = (x + range >> 2) - startX + 1;
+        int height = (z + range >> 2) - startZ + 1;
+        Biome[] biomeInArea = biomeFactory.getBiomes(startX, startZ, width, height);
+        BlockPos blockpos = null;
 
-	      return blockpos;
-	   }
+        int counter = 0;
+        for (int i = 0; i < width * height; ++i)
+        {
+            int xPos = startX + i % width << 2;
+            int zPos = startZ + i / width << 2;
+            if (biomes.contains(biomeInArea[i]))
+            {
+                if (blockpos == null || random.nextInt(counter + 1) == 0)
+                {
+                    blockpos = new BlockPos(xPos, 0, zPos);
+                }
+                ++counter;
+            }
+        }
 
-	   public boolean hasStructure(Structure<?> structureIn) {
-	      return this.hasStructureCache.computeIfAbsent(structureIn, (p_205006_1_) -> {
-	         for(Biome biome : this.biomes) {
-	            if (biome.hasStructure(p_205006_1_)) {
-	               return true;
-	            }
-	         }
+        return blockpos;
+    }
 
-	         return false;
-	      });
-	   }
+    @Override
+    public boolean hasStructure(Structure<?> structureIn)
+    {
+        return this.hasStructureCache.computeIfAbsent(structureIn, structure -> {
+            for (Biome biome : this.biomes)
+            {
+                if (biome.hasStructure(structure))
+                {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
 
-	   public Set<BlockState> getSurfaceBlocks() {
-	      if (this.topBlocksCache.isEmpty()) {
-	         for(Biome biome : this.biomes) {
-	            this.topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
-	         }
-	      }
-
-	      return this.topBlocksCache;
-	   }
+    @Override
+    @Nonnull
+    public Set<BlockState> getSurfaceBlocks()
+    {
+        if (this.topBlocksCache.isEmpty())
+        {
+            for (Biome biome : this.biomes)
+            {
+                this.topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
+            }
+        }
+        return this.topBlocksCache;
+    }
 
 }

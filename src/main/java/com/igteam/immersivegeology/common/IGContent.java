@@ -1,14 +1,39 @@
 package com.igteam.immersivegeology.common;
 
+import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
-import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+import com.igteam.immersivegeology.common.world.biome.BadlandsBiome;
+import com.igteam.immersivegeology.common.world.biome.CanyonsBiome;
+import com.igteam.immersivegeology.common.world.biome.HillsBiome;
+import com.igteam.immersivegeology.common.world.biome.LakeBiome;
+import com.igteam.immersivegeology.common.world.biome.LowlandsBiome;
+import com.igteam.immersivegeology.common.world.biome.MountainsBiome;
+import com.igteam.immersivegeology.common.world.biome.OceanBiome;
+import com.igteam.immersivegeology.common.world.biome.PlainsBiome;
+import com.igteam.immersivegeology.common.world.biome.RiverBiome;
+import com.igteam.immersivegeology.common.world.biome.ShoreBiome;
+import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
@@ -16,15 +41,13 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.lang.reflect.Field;
-import java.util.*;
-
-import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IGContent
@@ -71,11 +94,26 @@ public class IGContent
 		}
 	}
 
+
+
+	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
+	{
+		int numNull = 0;
+		for(T b : coll)
+			if(b.getRegistryName()==null)
+			{
+				++numNull;
+			}
+		if(numNull > 0)
+			System.exit(1);
+	}
+
+	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		//checkNonNullNames(registeredIGBlocks);
-		for(Block block : registeredIGBlocks.values())
+		for(Block block : IGContent.registeredIGBlocks.values())
 			if(block!=null)
 				event.getRegistry().register(block);
 	}
@@ -93,7 +131,7 @@ public class IGContent
 		}
 		
 		//slabs only!
-		for(Block b : registeredIGSlabBlocks.values()) {
+		for(Block b : IGContent.registeredIGSlabBlocks.values()) {
 			if(b!=null) {
 				if (b instanceof IIGBlock) {
 				event.getRegistry().register(((IIGBlock) b).getItemBlock());
@@ -103,6 +141,7 @@ public class IGContent
 	}
 
 	
+	//We have client registry in client proxy for colors (this is so it doesn't give duplicate registry warnings)
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -110,21 +149,10 @@ public class IGContent
 		for(Item item : registeredIGItems)
 			if(item!=null)
 				event.getRegistry().register(item);
-		registerOres();
+		//TODO oredict may need to move
+		IGContent.registerOres();
 	}
-
-	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
-	{
-		int numNull = 0;
-		for(T b : coll)
-			if(b.getRegistryName()==null)
-			{
-				++numNull;
-			}
-		if(numNull > 0)
-			System.exit(1);
-	}
-
+	
 	@SubscribeEvent
 	public static void registerFluids(RegistryEvent.Register<Fluid> event)
 	{
@@ -172,6 +200,53 @@ public class IGContent
 	{
 
 	}
+	
+	@SubscribeEvent
+    public static void registerChunkGeneratorTypes(RegistryEvent.Register<ChunkGeneratorType<?, ?>> event)
+    {
+        event.getRegistry().registerAll(
+            new ChunkGeneratorType<>(ChunkGeneratorImmersiveOverworld::new, false, ImmersiveGenerationSettings::new).setRegistryName("overworld")
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerBiomeProviderTypes(RegistryEvent.Register<BiomeProviderType<?, ?>> event)
+    {
+        event.getRegistry().registerAll(
+            new BiomeProviderType<>(ImmersiveBiomeProvider::new, ImmersiveGenerationSettings::new).setRegistryName("overworld")
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerBiomes(RegistryEvent.Register<Biome> event)
+    {
+        event.getRegistry().registerAll(
+            new OceanBiome(false).setRegistryName("ocean"),
+            new OceanBiome(true).setRegistryName("deep_ocean"),
+            new OceanBiome(true).setRegistryName("deep_ocean_ridge"),
+
+            new PlainsBiome(-4, 10).setRegistryName("plains"),
+            new LowlandsBiome().setRegistryName("lowlands"),
+            new HillsBiome(16).setRegistryName("hills"),
+            new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
+
+            new HillsBiome(28).setRegistryName("rolling_hills"),
+            new BadlandsBiome().setRegistryName("badlands"),
+            new PlainsBiome(20, 30).setRegistryName("plateau"),
+            new MountainsBiome(48, 28, false).setRegistryName("old_mountains"),
+
+            new MountainsBiome(48, 56, false).setRegistryName("mountains"),
+            new MountainsBiome(30, 64, true).setRegistryName("flooded_mountains"),
+            new CanyonsBiome(-7, 26).setRegistryName("canyons"),
+
+            new ShoreBiome(false).setRegistryName("shore"),
+            new ShoreBiome(true).setRegistryName("stone_shore"),
+
+            new MountainsBiome(36, 34, false).setRegistryName("mountains_edge"),
+            new LakeBiome().setRegistryName("lake"),
+            new RiverBiome().setRegistryName("river")
+        );
+    }
 
 	public static <T extends TileEntity> void registerTile(Class<T> tile, RegistryEvent.Register<TileEntityType<?>> event, Block... valid)
 	{

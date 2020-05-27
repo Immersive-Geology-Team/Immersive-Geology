@@ -1,16 +1,17 @@
 package com.igteam.immersivegeology.common.blocks;
 
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
+import javax.annotation.Nullable;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialRockBase;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
+
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by Pabilo8 on 26-03-2020.
@@ -40,14 +41,16 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 		}
 
 		if(type.equals(MaterialUseType.ROCK)) {
-			if(material instanceof MaterialRockBase) {
-				MaterialRockBase rockMat = (MaterialRockBase) material;
-				BlockstateGenerator.generateDefaultBlock(material, type, rockMat.getRockType());
+			if(material instanceof MaterialStoneBase) {
+				MaterialStoneBase rockMat = (MaterialStoneBase) material;
+				BlockstateGenerator.generateDefaultBlock(material, type, rockMat.getStoneType());
+				ItemJsonGenerator.generateDefaultBlockItem(material, type, rockMat.getStoneType());
 			}
 		} else {
 			BlockstateGenerator.generateDefaultBlock(material, type);
+			ItemJsonGenerator.generateDefaultBlockItem(material, type);
 		}
-		ItemJsonGenerator.generateBlockItem(material, type);
+		
 	}
 
 	@Override

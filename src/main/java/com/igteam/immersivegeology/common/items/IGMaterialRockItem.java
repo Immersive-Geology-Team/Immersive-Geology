@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.items;
 
+import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
 /**
@@ -8,9 +9,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public class IGMaterialRockItem extends IGMaterialResourceItem
 {
 
-	public IGMaterialRockItem(MaterialUseType type)
+	public IGMaterialRockItem(Material mat, MaterialUseType type)
 	{
-		super(type);
+		super(mat, type);
 	}
 
 	/*

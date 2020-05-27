@@ -58,7 +58,7 @@ public class WorldEventHandler {
 			if (!WorldChunkChecker.hasAlreadyBeenIGfied(event.getChunk())) {
 				IChunk chunk = event.getChunk();
 
-				this.replaceStone(chunk);
+				//this.replaceStone(chunk);
 
 				((Chunk) chunk).setModified(true);
 				((Chunk) chunk).markDirty();
@@ -77,10 +77,9 @@ public class WorldEventHandler {
 				int yPos = storage.getYLocation();
 
 				IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
-						EnumMaterials.Rock_Limestone.material);
+						EnumMaterials.Rhyolite.material);
 
 				for (BiomeLayerData b : data.worldLayerData) {
-
 					for (int x = 0; x < 16; x++) {
 						for (int z = 0; z < 16; z++) {
 							for (int y = 0; y < 16; ++y) {
@@ -114,12 +113,10 @@ public class WorldEventHandler {
 									}
 								}
 							}
-
 						}
 					}
 				}
 			}
 		}
 	}
-
 }

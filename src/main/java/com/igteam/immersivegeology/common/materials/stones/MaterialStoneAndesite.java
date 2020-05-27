@@ -8,6 +8,7 @@ import net.minecraft.item.Rarity;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -19,7 +20,7 @@ public class MaterialStoneAndesite extends MaterialStoneBase
 	@Override
 	public String getName()
 	{
-		return "diorite";
+		return "andesite";
 	}
 
 	@Nonnull
@@ -30,13 +31,13 @@ public class MaterialStoneAndesite extends MaterialStoneBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Arrays.asList(
 				new ElementProportion(PeriodicTableElement.ALUMINIUM)
 		));
 	}
-
+	
 	@Override
 	public Rarity getRarity()
 	{

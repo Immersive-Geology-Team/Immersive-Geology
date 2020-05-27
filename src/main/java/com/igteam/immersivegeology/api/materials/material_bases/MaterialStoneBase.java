@@ -32,6 +32,7 @@ public abstract class MaterialStoneBase extends Material
 			case NORMAL_BRICKS:
 			case ROAD_BRICKS:
 			case PILLAR:
+			case CHUNK:
 				return true;
 		}
 		return false;
@@ -54,6 +55,11 @@ public abstract class MaterialStoneBase extends Material
 		IGNEOUS_INTRUSIVE,
 		IGNEOUS_EXTRUSIVE,
 		METAMORPHIC,
-		SEDIMENTARY
+		SEDIMENTARY;
+
+		public String getName() {
+			// TODO Auto-generated method stub
+			return toString().toLowerCase();
+		}
 	}
 }

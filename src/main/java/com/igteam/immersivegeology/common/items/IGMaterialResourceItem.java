@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.common.items;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
 import com.igteam.immersivegeology.common.util.IGItemGrabber;
 import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
@@ -28,8 +29,14 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 		
 		//add this item to the item grabber, that way we can refrence this later.
 		IGItemGrabber.inputNewItem(key, material, this);
-
-		ItemJsonGenerator.generateDefaultItem(material, key);
+		if(key.equals(MaterialUseType.ROCK)) {
+			if(material instanceof MaterialStoneBase) {
+				MaterialStoneBase rockMat = (MaterialStoneBase) material;
+				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
+			}
+		} else {
+			ItemJsonGenerator.generateDefaultItem(material, key);
+		}
 
 	}
 

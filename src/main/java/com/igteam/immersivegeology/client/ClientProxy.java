@@ -39,7 +39,6 @@ public class ClientProxy extends CommonProxy
 	public void init()
 	{
 		super.init();
-
 		for(Item item : IGContent.registeredIGItems)
 			if(item instanceof IEItemInterfaces.IColouredItem&&((IEItemInterfaces.IColouredItem)item).hasCustomItemColours())
 				mc().getItemColors().register(IEDefaultColourHandlers.INSTANCE, item);

@@ -32,7 +32,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	        int localX = x & 15;
 	        int localZ = z & 15;
 
-	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rock_Basalt.material);
+	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
 	        BlockState stateUnder = config.getUnder().get(data, localX, localZ);
 	        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
