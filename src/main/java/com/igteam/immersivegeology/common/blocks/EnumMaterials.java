@@ -6,9 +6,8 @@ import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
+import com.igteam.immersivegeology.common.materials.stones.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
-import com.igteam.immersivegeology.common.materials.rocks.*;
-
 import java.util.stream.Stream;
 
 public enum EnumMaterials
@@ -34,13 +33,16 @@ public enum EnumMaterials
 	Nickel(new MaterialMetalNickel()),
 	Platinum(new MaterialMetalPlatinum()),
 	Silver(new MaterialMetalSilver()),
+	Uranium(new MaterialMetalUranium()),
+    /*, TODO add all Materials
+=======
 	Tin(new MaterialMetalTin()),
 	Titanium(new MaterialMetalTitanium()),
 	Tungsten(new MaterialMetalTungsten()),
-	Uranium(new MaterialMetalUranium()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
 	/* TODO add alloys
+
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
     Steel(new MaterialMetalSteel()), */
@@ -67,6 +69,19 @@ public enum EnumMaterials
 
 	//Fluids
 	Water(new MaterialFluidWater());
+
+	//Stones
+	//TODO: add chemical formulas for the stones
+	Rhyolite(new MaterialStoneRhyolite()),
+	Diorite(new MaterialStoneDiorite()),
+	Andesite(new MaterialStoneAndesite()),
+	Granite(new MaterialStoneGranite()),
+
+	Netherrack(new MaterialStoneNetherrack()),
+	Endstone(new MaterialStoneEndstone()),
+
+	Basalt(new MaterialStoneBasalt()),
+	Limestone(new MaterialStoneLimestone());
 
 	public final Material material;
 
