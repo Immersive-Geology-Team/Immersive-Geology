@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.common;
 
+import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+
 public class CommonProxy
 {
 	public void preInit()
@@ -14,7 +16,7 @@ public class CommonProxy
 
 	public void init()
 	{
-
+		
 	}
 
 	public void initEnd()

@@ -17,14 +17,23 @@ public abstract class MaterialMetalBase extends Material
 		switch(useType)
 		{
 			case INGOT:
+				return hasIngot();
 			case PLATE:
+				return hasPlate();
 			case DUST:
+				return hasDust();
 			case TINY_DUST:
+				return hasTinyDust();
 			case ROD:
+				return hasRod();
 			case GEAR:
+				return hasGear();
 			case STORAGE:
+				return hasStorageBlock();
 			case SHEETMETAL:
+				return hasSheetmetal();
 			case DUST_BLOCK:
+				return hasDustBlock();
 			case FLUIDS:
 				return true;
 		}
@@ -48,4 +57,14 @@ public abstract class MaterialMetalBase extends Material
 		METAL,
 		ALLOY
 	}
+
+	public boolean hasIngot() { return true; };
+	public boolean hasPlate() { return true; };
+	public boolean hasRod() { return true; };
+	public boolean hasGear() { return true; };
+	public boolean hasSheetmetal() { return true; };
+	public boolean hasDust() { return true; };
+	public boolean hasTinyDust() { return true; };
+	public boolean hasStorageBlock() { return true; };
+	public boolean hasDustBlock() { return true; };
 }

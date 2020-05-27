@@ -7,8 +7,7 @@ import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementPro
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -30,9 +29,9 @@ public class MaterialEmpty extends Material
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>();
+		return new LinkedHashSet<>();
 	}
 
 	@Override

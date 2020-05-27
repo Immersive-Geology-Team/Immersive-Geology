@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -47,7 +47,7 @@ public abstract class Material
 	/**
 	 * @return the chemical elements this material is composed of
 	 */
-	public abstract Set<ElementProportion> getElements();
+	public abstract LinkedHashSet<ElementProportion> getElements();
 
 	/**
 	 * @return rarity - like common, uncommon, rare, epic, etc.

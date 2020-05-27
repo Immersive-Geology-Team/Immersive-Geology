@@ -1,17 +1,22 @@
 package com.igteam.immersivegeology;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.igteam.immersivegeology.client.ClientProxy;
+import com.igteam.immersivegeology.client.menu.IGItemGroup;
+import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.util.IGLogger;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import com.igteam.immersivegeology.common.world.WorldEventHandler;
+import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
@@ -19,9 +24,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import org.apache.logging.log4j.LogManager;
-
-import javax.annotation.Nonnull;
 
 @Mod(ImmersiveGeology.MODID)
 public class ImmersiveGeology
@@ -37,27 +39,31 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static ItemGroup itemGroup = new ItemGroup(MODID)
-	{
-		@Override
-		@Nonnull
-		public ItemStack createIcon()
-		{
-			return new ItemStack(Blocks.IRON_ORE); //TODO add proper tab icon
-		}
-	};
+	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
+
+	public static final boolean GENERATE_MODELS=true;
 
 	public ImmersiveGeology()
 	{
 		IGLogger.logger = LogManager.getLogger(MODID);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
-
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(WorldChunkChecker::preInit);
+        MinecraftForge.EVENT_BUS.register(new WorldChunkChecker());
+		
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		IGContent.modConstruction();
 	}
 
+	@SubscribeEvent
+	public void clientSetup(FMLClientSetupEvent event)
+	{
+		MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler()); 
+	}
+	
 	@SubscribeEvent
 	public void setup(FMLCommonSetupEvent event)
 	{

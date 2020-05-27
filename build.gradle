@@ -73,6 +73,7 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
 
             args '--mod', 'immersivegeology', '--all', '--output', file('src/generated/resources/')
 
@@ -91,7 +92,7 @@ repositories {
         url 'https://dvs1.progwml6.com/files/maven'
     }
 
-    maven { // CraftTweaker
+    maven { // CraftTweaker && IE
         name 'jared maven'
         url 'https://maven.blamejared.com/'
     }
@@ -120,7 +121,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
-    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:0.14-93-+")
+    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:0.14-94-+")
     runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11")
     compileOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11:api")
     //testImplementation('junit:junit:4.13')

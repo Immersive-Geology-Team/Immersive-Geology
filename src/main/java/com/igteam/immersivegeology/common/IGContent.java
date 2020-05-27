@@ -2,10 +2,16 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
-import com.igteam.immersivegeology.common.blocks.*;
-import com.igteam.immersivegeology.common.items.IGMaterialItem;
+import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
+import com.igteam.immersivegeology.common.blocks.EnumMaterials;
+import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
+import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -15,61 +21,88 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static com.igteam.immersivegeology.ImmersiveGeology.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IGContent
 {
-	public static List<Block> registeredIGBlocks = new ArrayList<>();
+	public static Map<String, IGBaseBlock> registeredIGBlocks = new HashMap<String, IGBaseBlock>();
+	public static Map<String, Block> registeredIGSlabBlocks = new HashMap<String, Block>();
 	public static List<Item> registeredIGItems = new ArrayList<>();
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
-
-	public static HashMap<MaterialUseType, IGMaterialItem> materialSubItemCache = new HashMap<>();
-
+	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
+	
+	public static WorldTypeImmersive worldType;
+	
 	public static void modConstruction()
 	{
-
-		Block storage = null;
-		Block sheetmetal = null;
-
-		for(MaterialUseType m : MaterialUseType.values())
+		
+		//setup worldtype
+		worldType = new WorldTypeImmersive();
+		
+		//Item, blocks here
+		// cycle through item Types
+		for(MaterialUseType materialItem : MaterialUseType.values())
 		{
-			if(m.getCategory()==UseCategory.RESOURCE_ITEM)
-				addItemForType(m, m.createItem());
-			//TODO: adding blocks/tools to the cache
-		}
-
-		//TODO: blocks
-
-		for(EnumMaterials m : EnumMaterials.values())
-		{
-			Material material = m.material;
-
-			//Item, blocks here
-			for(Entry<MaterialUseType, IGMaterialItem> materialItem : materialSubItemCache.entrySet())
+			//cycle through materials
+			for(EnumMaterials m : EnumMaterials.values())
 			{
-				if(material.hasSubtype(materialItem.getKey()))
-					materialItem.getValue().addAllowedMaterial(material);
+				Material material = m.material;
+				//check if that material is allowed to make this item type.
+				if(material.hasSubtype(materialItem)) {
+					//check if this type is an ITEM not a BLOCK type.
+
+					switch(materialItem.getCategory())
+					{
+						case RESOURCE_ITEM:
+							registeredIGItems.add(materialItem.getItem(material));
+							break;
+						case RESOURCE_BLOCK:
+						case BLOCK:
+							registeredIGBlocks.put(materialItem.getName() + "_" + material.getName(),materialItem.getBlock(material));
+						break;
+					}
+				}
 			}
 		}
-
 	}
 
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		//checkNonNullNames(registeredIGBlocks);
-		for(Block block : registeredIGBlocks)
+		for(Block block : registeredIGBlocks.values())
 			if(block!=null)
 				event.getRegistry().register(block);
 	}
+	
+	@SubscribeEvent
+	public static void registerBlockItems(RegistryEvent.Register<Item> event)
+	{
+		//checkNonNullNames(registeredIGItems);
+		for(Block b : registeredIGBlocks.values()) {
+			if(b!=null) {
+				if (b instanceof IIGBlock) {
+				event.getRegistry().register(((IIGBlock) b).getItemBlock());
+				}
+			}
+		}
+		
+		//slabs only!
+		for(Block b : registeredIGSlabBlocks.values()) {
+			if(b!=null) {
+				if (b instanceof IIGBlock) {
+				event.getRegistry().register(((IIGBlock) b).getItemBlock());
+				}
+			}
+		}
+	}
 
+	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -100,15 +133,17 @@ public class IGContent
 			event.getRegistry().register(fluid);
 	}
 
-	private static <T extends Block & IIGBlock> BlockIGSlab addSlabFor(T b)
+	//Changed due to blocks being registered later on
+	public static <T extends IGBaseBlock & IIGBlock> BlockIGSlab addMaterialSlabFor(T b)
 	{
-		BlockIGSlab<T> ret = new BlockIGSlab<>(
-				"slab_"+b.getRegistryName().getPath(),
+		BlockIGSlab<T> ret = new BlockIGSlab<T>(
+				"slab_"+b.name,
 				Block.Properties.from(b),
-				IGBlockItem.class,
-				b
+				b.itemBlock.getClass(),
+				b,
+				b.itemSubGroup
 		);
-		IGBlocks.toSlab.put(b, ret);
+		toSlab.put(b, ret);
 		return ret;
 	}
 
@@ -135,45 +170,6 @@ public class IGContent
 
 	public static void postInit()
 	{
-		//Moved, because of IE items not being registered when constructing our mod
-		//Removed, because of favoring our own material system
-		/*for(EnumMaterials m : EnumMaterials.values())
-		{
-			Material material = m.material;
-
-			//If IE already contains the metal
-			if(m.material.getModID().equals(ImmersiveEngineering.MODID))
-			{
-				blusunrize.immersiveengineering.common.blocks.EnumMetals ieMetal = null;
-				try
-				{
-					ieMetal = blusunrize.immersiveengineering.common.blocks.EnumMetals.valueOf(material.getName().toUpperCase(Locale.ENGLISH));
-				} catch(IllegalArgumentException e)
-				{
-					IELogger.warn(String.format("Someone thinks that %s is an IE metal, let him think again...", m));
-				}
-
-				if(ieMetal!=null)
-				{
-					IGMaterialItem ingot = getItemForType(MaterialUseType.INGOT);
-					IGMaterialItem plate = getItemForType(MaterialUseType.PLATE);
-					IGMaterialItem dust = getItemForType(MaterialUseType.DUST);
-					IGMaterialItem nugget = getItemForType(MaterialUseType.NUGGET);
-
-					//In case someone else breaks our registry
-					//Which won't happen, but why not have this
-
-					if(ingot!=null)
-						ingot.addReplacementItem(material, Metals.ingots.get(ieMetal));
-					if(plate!=null)
-						plate.addReplacementItem(material, Metals.plates.get(ieMetal));
-					if(dust!=null)
-						dust.addReplacementItem(material, Metals.dusts.get(ieMetal));
-					if(nugget!=null)
-						nugget.addReplacementItem(material, Metals.nuggets.get(ieMetal));
-				}
-			}
-		}*/
 
 	}
 
@@ -181,7 +177,7 @@ public class IGContent
 	{
 		String s = tile.getSimpleName();
 		s = s.substring(0, s.indexOf("TileEntity")).toLowerCase(Locale.ENGLISH);
-		Set<Block> validSet = new HashSet<>(Arrays.asList(valid));
+		Set<Block> validSet = new LinkedHashSet<>(Arrays.asList(valid));
 		TileEntityType<T> type = new TileEntityType<>(() -> {
 			try
 			{
@@ -205,28 +201,4 @@ public class IGContent
 		}
 		registeredIGTiles.add(tile);
 	}
-
-	public static void addItemForType(MaterialUseType type, IGMaterialItem item)
-	{
-		materialSubItemCache.putIfAbsent(type, item);
-	}
-
-	@Nullable
-	public static IGMaterialItem getItemForType(MaterialUseType type)
-	{
-		return materialSubItemCache.get(type);
-	}
-
-	//TODO: Absolutely needed TODO
-    /* TODO
-    public static void addConfiguredWorldgen(Block state, String name, OreConfig config)
-    {
-        if(config!=null&&config.veinSize.get() > 0)
-            IGWorldGen.addOreGen(name, state.getDefaultState(), config.veinSize.get(),
-                    config.minY.get(),
-                    config.maxY.get(),
-                    config.veinsPerChunk.get(),
-                    config.spawnChance.get());
-    } */
-
 }

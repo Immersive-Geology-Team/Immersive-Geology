@@ -7,9 +7,8 @@ import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBas
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 
 /**
  * Created by JStocke12 on 27-03-2020.
@@ -30,9 +29,9 @@ public class MaterialMetalLead extends MaterialMetalBase
 	}
 
 	@Override
-	public Set<ElementProportion> getElements()
+	public LinkedHashSet<ElementProportion> getElements()
 	{
-		return new HashSet<>(Arrays.asList(
+		return new LinkedHashSet<>(Collections.singletonList(
 				new ElementProportion(PeriodicTableElement.LEAD)
 		));
 	}
