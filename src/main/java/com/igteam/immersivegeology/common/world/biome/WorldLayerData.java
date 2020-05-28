@@ -13,9 +13,9 @@ public class WorldLayerData {
 	public ArrayList<BiomeLayerData> worldLayerData = new ArrayList<BiomeLayerData>();
 
 	public BiomeLayerData forest = new BiomeLayerData(Biomes.FOREST, 1.5f);
-	public BiomeLayerData plains = new BiomeLayerData(Biomes.PLAINS, 1.5f);
+	public BiomeLayerData plains = new BiomeLayerData(IGBiomes.PLAINS, 1.5f);
 	public BiomeLayerData birch_forest = new BiomeLayerData(Biomes.BIRCH_FOREST, 1.5f);
-	public BiomeLayerData ocean = new BiomeLayerData(Biomes.OCEAN, 2.5f);
+	public BiomeLayerData ocean = new BiomeLayerData(IGBiomes.OCEAN, 2.5f);
 	
 	public WorldLayerData() {
 		forest.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));

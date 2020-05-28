@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/rock/rock_igneous",
-        "particle": "immersivegeology:block/greyscale/rock/rock_igneous" 
+        "all": "immersivegeology:block/greyscale/rock/rock_igneous_extrusive",
+        "particle": "immersivegeology:block/greyscale/rock/rock_igneous_extrusive" 
     }
 }

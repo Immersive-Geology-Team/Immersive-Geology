@@ -66,12 +66,12 @@ public class ImmersiveLayerUtil {
 	      iareafactory = AddMushroomIslandLayer.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
 	      iareafactory = DeepOceanLayer.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
 	      iareafactory = repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
-	      int i = 4;
+	      int i = 2;
 	      int j = i;
-	      if (settings != null) {
-	         i = settings.getBiomeSize();
-	         j = settings.getRiverSize();
-	      }
+//	      if (settings != null) {
+//	         i = settings.getBiomeSize();
+//	         j = settings.getRiverSize();
+//	      }
 	      
 	      i = getModdedBiomeSize(worldTypeIn, i);
 

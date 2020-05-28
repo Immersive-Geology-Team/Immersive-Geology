@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
@@ -64,7 +65,6 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 		IGBiomes.getBiomes().forEach(biome -> biomeNoiseMap.put(biome, biome.createNoiseLayer(biomeNoiseSeed)));
 
 		this.biomeProvider = (ImmersiveBiomeProvider) provider;
-
 	}
 
 	@Override
@@ -218,15 +218,16 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 									
 									
 									// setting the block in here isn't super efficient,
-									float nh =  replaceBlock.getDefaultHardness();
-									System.out.println("Hardness? " + String.valueOf(nh));
-									System.out.println("Y? " + String.valueOf(y));
-									// TODO always >= 256? but it works CURRENTLY due to y level
-									nh = (float) (12 - (Math.pow(Math.E, 2.6) * Math.log(y / 135)));
+									double nh =  replaceBlock.getDefaultHardness();
 									
+									System.out.println("y = " + String.valueOf(y));
+									System.out.println("log math = " + String.valueOf(Math.log(Math.max(1,y) / 135)));
+									// TODO always >= 256? but it works CURRENTLY due to y level
+									nh =  (12 - (Math.pow(Math.E, 2.6) * Math.log(Math.max(1,y) / 135))); //puts out infinity for some reason (it shouldn't!)
+									System.out.println("nh = " + String.valueOf(nh));
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
 											.with(IGBaseBlock.NATURAL, Boolean.valueOf(true)).with(IGBaseBlock.HARDNESS,
-													Integer.valueOf((int) Math.min(256, Math.max(0, nh)))),
+													Integer.valueOf((int) Math.min(256, Math.max(1, nh)))),
 											true);
 
 								}
@@ -245,9 +246,8 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 								// setting the block in here isn't super efficient, but it works.
 								float nh = replaceBlock.getDefaultHardness();
 
-								nh =  (float) (12 - (Math.pow(Math.E, 2.6) * Math.log(y / 135)));
-								System.out.println("Hardness? " + String.valueOf(nh));
-								System.out.println("Y? " + String.valueOf(y));
+								nh =  (float) (12 - (Math.pow(Math.E, 2.6) * Math.log(Math.max(1,y) / 135))); //puts out infinity for some reason (it shouldn't!)
+								
 								chunk.setBlockState(pos,
 										replaceBlock.getDefaultState().with(IGBaseBlock.NATURAL, Boolean.valueOf(true))
 												.with(IGBaseBlock.HARDNESS,
@@ -272,34 +272,30 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 		chunk.func_217303_b(Heightmap.Type.OCEAN_FLOOR_WG);
 		chunk.func_217303_b(Heightmap.Type.WORLD_SURFACE_WG);
 	}
-
+	
 	@Override
 	public void generateSurface(IChunk chunk) {
-		ChunkPos chunkpos = chunk.getPos();
-		int i = chunkpos.x;
-		int j = chunkpos.z;
-		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
-		sharedseedrandom.setBaseChunkSeed(i, j);
-		ChunkPos chunkpos1 = chunk.getPos();
-		int k = chunkpos1.getXStart();
-		int l = chunkpos1.getZStart();
-		double d0 = 0.0625D;
-		Biome[] abiome = chunk.getBiomes();
-
-		for (int i1 = 0; i1 < 16; ++i1) {
-			for (int j1 = 0; j1 < 16; ++j1) {
-				int k1 = k + i1;
-				int l1 = l + j1;
-				int i2 = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-				double d1 = this.surfaceDepthNoise.func_215460_a((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D,
-						(double) i1 * 0.0625D);
-				abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, chunk, k1, l1, i2, d1,
-						this.getSettings().getDefaultBlock(), this.getSettings().getDefaultFluid(), this.getSeaLevel(),
-						this.world.getSeed());
+		
+		ChunkPos chunkPos = chunk.getPos();
+		SharedSeedRandom random = new SharedSeedRandom();
+		random.setBaseChunkSeed(chunkPos.x, chunkPos.z);
+		
+		Biome[] biomes = chunk.getBiomes();
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		
+		for(int x = 0; x < 16; x++) {
+			for(int z = 0; z < 16; z++) {
+				float temperature = 5;
+				float rainfall = 200;
+				float noise = 0;
+				int topYLevel = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, x, z) + 1;
+				
+				((IGBiome) biomes[x + 16 * z]).getIGSurfaceBuilder().buildSurface(random, chunk, chunkPos.getXStart() + x, chunkPos.getZStart() + z, topYLevel + 1, temperature, rainfall, noise);
 			}
 		}
-
-		makeBedrock(chunk, sharedseedrandom);
+		
+		
+		makeBedrock(chunk, random);
 	}
 
 	public static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();

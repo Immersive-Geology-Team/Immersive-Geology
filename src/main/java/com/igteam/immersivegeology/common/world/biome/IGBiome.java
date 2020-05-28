@@ -26,7 +26,7 @@ public abstract class IGBiome extends Biome {
     public abstract INoise2D createNoiseLayer(long seed);
 
     @Nonnull
-    public ISurfaceBuilder getTFCSurfaceBuilder()
+    public ISurfaceBuilder getIGSurfaceBuilder()
     {
         return ISurfaceBuilder.DEFAULT;
     }

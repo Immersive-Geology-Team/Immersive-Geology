@@ -30,17 +30,17 @@ public class CompositeSurfaceBuilder implements ISurfaceBuilder
     }
 
     @Override
-    public void buildSurface(Random random, IChunk chunkIn, RockData data, int x, int z, int startHeight, float temperature, float rainfall, float noise)
+    public void buildSurface(Random random, IChunk chunkIn, int x, int z, int startHeight, float temperature, float rainfall, float noise)
     {
         for (int i = 0; i < thresholds.length; i++)
         {
             float value = useRainfall ? rainfall : temperature;
             if (value < thresholds[i])
             {
-                builders[i].buildSurface(random, chunkIn, data, x, z, startHeight, temperature, rainfall, noise);
+                builders[i].buildSurface(random, chunkIn, x, z, startHeight, temperature, rainfall, noise);
                 return;
             }
         }
-        otherwise.buildSurface(random, chunkIn, data, x, z, startHeight, temperature, rainfall, noise);
+        otherwise.buildSurface(random, chunkIn, x, z, startHeight, temperature, rainfall, noise);
     }
 }

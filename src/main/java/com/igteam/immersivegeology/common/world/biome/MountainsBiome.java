@@ -30,10 +30,9 @@ public class MountainsBiome extends IGBiome
     public INoise2D createNoiseLayer(long seed)
     {
         // Power scaled noise, looks like mountains over large area
-        final INoise2D mountainNoise = new SimplexNoise2D(seed).octaves(6).spread(0.14f).map(x -> 2.67f * (float) Math.pow(0.5f * (x + 1), 3.2f) - 0.8f);
+        final INoise2D mountainNoise = new SimplexNoise2D(seed).ridged().octaves(8).spread(0.14f).map(x -> 2.67f * (float) Math.pow(0.5f * (x + 1), 3.2f) - 0.8f);
+        
         return (x, z) -> SEA_LEVEL + baseHeight + scaleHeight * mountainNoise.noise(x, z);
     }
-
-
 
 }

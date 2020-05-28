@@ -26,14 +26,14 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	    }
 
 	    @Override
-	    public void buildSurface(Random random, IChunk chunkIn, RockData data, int x, int z, int startHeight, float temperature, float rainfall, float noise)
+	    public void buildSurface(Random random, IChunk chunkIn, int x, int z, int startHeight, float temperature, float rainfall, float noise)
 	    {
 	        int surfaceFlag = -1;
 	        int localX = x & 15;
 	        int localZ = z & 15;
-
-	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
-	        BlockState stateUnder = config.getUnder().get(data, localX, localZ);
+	        
+	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material);
+	        BlockState stateUnder = config.getUnder().get(localX, localZ);
 	        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 	        for (int y = startHeight; y >= 0 && surfaceFlag != 0; y--)
@@ -55,14 +55,14 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                        surfaceFlag = getSoilLayers(y, random);
 	                        if (surfaceFlag > 0)
 	                        {
-	                            stateUnder = config.getUnder().get(data, localX, localZ);
-	                            chunkIn.setBlockState(pos, config.getTop().get(data, localX, localZ), false);
+	                            stateUnder = config.getUnder().get(localX, localZ);
+	                            chunkIn.setBlockState(pos, config.getTop().get(localX, localZ), false);
 	                        }
 	                    }
 	                    else
 	                    {
 	                        surfaceFlag = 1;
-	                        stateUnder = config.getUnderWater().get(data, localX, localZ);
+	                        stateUnder = config.getUnderWater().get(localX, localZ);
 	                        chunkIn.setBlockState(pos, stateUnder, false);
 	                    }
 	                }

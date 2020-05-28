@@ -1,18 +1,19 @@
 package com.igteam.immersivegeology.common.blocks;
 
+import java.util.stream.Stream;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
-import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
-import com.igteam.immersivegeology.common.materials.metals.*;
-import com.igteam.immersivegeology.common.materials.stones.*;
+import com.igteam.immersivegeology.common.materials.fluids.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
-import java.util.stream.Stream;
+import com.igteam.immersivegeology.common.materials.stones.*;
+import com.igteam.immersivegeology.common.materials.metals.*;
 
 public enum EnumMaterials
 {
-
+ 
 	//Empty
 	Empty(new MaterialEmpty()),
 	
@@ -72,6 +73,7 @@ public enum EnumMaterials
 	Netherrack(new MaterialStoneNetherrack()),
 	Endstone(new MaterialStoneEndstone()),
 	Basalt(new MaterialStoneBasalt()),
+	Marble(new MaterialStoneMarble()),	
 	Limestone(new MaterialStoneLimestone());
 
 	public final Material material;

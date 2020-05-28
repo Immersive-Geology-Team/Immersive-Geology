@@ -8,8 +8,15 @@ import java.util.function.Supplier;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.layer.AddIslandLayer;
+import com.igteam.immersivegeology.common.world.layer.AddLakeLayer;
+import com.igteam.immersivegeology.common.world.layer.BiomeLayer;
+import com.igteam.immersivegeology.common.world.layer.ElevationLayer;
 import com.igteam.immersivegeology.common.world.layer.IslandLayer;
+import com.igteam.immersivegeology.common.world.layer.OceanLayer;
 import com.igteam.immersivegeology.common.world.layer.RemoveOceanLayer;
+import com.igteam.immersivegeology.common.world.layer.RiverLayer;
+import com.igteam.immersivegeology.common.world.layer.ShoreLayer;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
@@ -17,13 +24,8 @@ import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
-import net.minecraft.world.gen.layer.AddIslandLayer;
-import net.minecraft.world.gen.layer.BiomeLayer;
 import net.minecraft.world.gen.layer.EdgeBiomeLayer;
 import net.minecraft.world.gen.layer.MixRiverLayer;
-import net.minecraft.world.gen.layer.OceanLayer;
-import net.minecraft.world.gen.layer.RiverLayer;
-import net.minecraft.world.gen.layer.ShoreLayer;
 import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
@@ -31,6 +33,11 @@ import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
+
+/*
+ * Author: alcatrazEscapee, TerraFirmaCraft
+ * Modified for use in Immersive Geology by Muddykat
+ */
 public class IGLayerUtil {
 	private static int id = 0;
 
@@ -69,14 +76,14 @@ public class IGLayerUtil {
 
 		mainLayer = ZoomLayer.FUZZY.apply(contextFactory.apply(1001L), mainLayer);
 
-		//mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1002L), mainLayer);
+		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1002L), mainLayer);
 
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1003L), mainLayer);
 
-		// = AddIslandLayer.NORMAL.apply(contextFactory.apply(1004L), mainLayer);
+		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1004L), mainLayer);
 
 		for (int i = 0; i < 2; i++) {
-			//mainLayer = AddIslandLayer.HEAVY.apply(contextFactory.apply(1005L + 2 * i), mainLayer);
+			mainLayer = AddIslandLayer.HEAVY.apply(contextFactory.apply(1005L + 2 * i), mainLayer);
 
 			mainLayer = SmoothLayer.INSTANCE.apply(contextFactory.apply(1006L + 2 * i), mainLayer);
 
@@ -107,21 +114,21 @@ public class IGLayerUtil {
 
 		layerCount = 0;
 
-		//mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1011L), mainLayer);
+		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1011L), mainLayer);
 
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1012L), mainLayer);
 
-		//mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
+		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
 
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
 
 		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1015L), mainLayer);
 
-		//mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
+		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
 
 		mainLayer = EdgeBiomeLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
 
-		//mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
+		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
 
 		for (int i = 0; i < settings.getBiomeZoomLevel(); i++) {
 			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), mainLayer);
@@ -187,11 +194,11 @@ public class IGLayerUtil {
 		return newFactory;
 	}
 
-	static boolean isShoreCompatible(int value) {
+	public static boolean isShoreCompatible(int value) {
 		return value != LOWLANDS && value != LOW_CANYONS && value != CANYONS;
 	}
 
-	static boolean isLakeCompatible(int value) {
+	public static boolean isLakeCompatible(int value) {
 		return isLow(value) || value == CANYONS || value == ROLLING_HILLS;
 	}
 
@@ -203,7 +210,7 @@ public class IGLayerUtil {
 		return value == OCEAN;
 	}
 
-	static boolean isMountains(int value) {
+	public static boolean isMountains(int value) {
 		return value == MOUNTAINS || value == FLOODED_MOUNTAINS || value == MOUNTAINS_EDGE || value == OLD_MOUNTAINS;
 	}
 

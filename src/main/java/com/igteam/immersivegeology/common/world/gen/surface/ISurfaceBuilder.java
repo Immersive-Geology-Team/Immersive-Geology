@@ -15,5 +15,5 @@ public interface ISurfaceBuilder {
 	
 	ISurfaceBuilder DEFAULT = new CompositeSurfaceBuilder(75f, 125f, new DefaultSurfaceBuilder(SAND_SAND_GRAVEL, 4), new DefaultSurfaceBuilder(SAND_SAND_GRAVEL, 4), new DefaultSurfaceBuilder(SAND_SAND_GRAVEL, 4), true);
 	
-	void buildSurface(Random random, IChunk chunkIn, RockData data, int x, int z, int startHeight, float temperature, float rainfall, float noise);
+	void buildSurface(Random random, IChunk chunkIn, int x, int z, int startHeight, float temperature, float rainfall, float noise);
 }

@@ -14,7 +14,7 @@ public class LowlandsBiome extends IGBiome
 
        // TFCDefaultBiomeFeatures.addCarvers(this);
     }
-
+ 
     @Nonnull
     @Override
     public INoise2D createNoiseLayer(long seed)
