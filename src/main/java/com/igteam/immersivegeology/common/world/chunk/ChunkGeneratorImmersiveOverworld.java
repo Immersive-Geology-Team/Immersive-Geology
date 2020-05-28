@@ -219,15 +219,14 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 									
 									// setting the block in here isn't super efficient,
 									double nh =  replaceBlock.getDefaultHardness();
-									
-									System.out.println("y = " + String.valueOf(y));
-									System.out.println("log math = " + String.valueOf(Math.log(Math.max(1,y) / 135)));
+
+									double max = Math.max(1, y);
+									double log = Math.log(max / 512d);
 									// TODO always >= 256? but it works CURRENTLY due to y level
-									nh =  (12 - (Math.pow(Math.E, 2.6) * Math.log(Math.max(1,y) / 135))); //puts out infinity for some reason (it shouldn't!)
-									System.out.println("nh = " + String.valueOf(nh));
+									nh = -(Math.pow(Math.E, 3.6) * log - 25);
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
-											.with(IGBaseBlock.NATURAL, Boolean.valueOf(true)).with(IGBaseBlock.HARDNESS,
-													Integer.valueOf((int) Math.min(256, Math.max(1, nh)))),
+											.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
+													 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
 											true);
 
 								}
@@ -243,15 +242,18 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 							if ((y < (totHeight * l) / lc)
 									&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 								replaceBlock = b.getLayerBlock(l);
-								// setting the block in here isn't super efficient, but it works.
-								float nh = replaceBlock.getDefaultHardness();
 
-								nh =  (float) (12 - (Math.pow(Math.E, 2.6) * Math.log(Math.max(1,y) / 135))); //puts out infinity for some reason (it shouldn't!)
-								
-								chunk.setBlockState(pos,
-										replaceBlock.getDefaultState().with(IGBaseBlock.NATURAL, Boolean.valueOf(true))
-												.with(IGBaseBlock.HARDNESS,
-														Integer.valueOf((int) Math.min(256, Math.max(0, nh)))),
+
+
+								// setting the block in here isn't super efficient,
+								double nh =  replaceBlock.getDefaultHardness();
+
+								double max = Math.max(1, y);
+								double log = Math.log(max / 512d);
+								nh = -(Math.pow(Math.E, 3.6) * log) - 25;
+								chunk.setBlockState(pos, replaceBlock.getDefaultState()
+												.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
+												Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
 										true);
 
 							}
