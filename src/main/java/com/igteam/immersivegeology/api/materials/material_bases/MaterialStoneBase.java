@@ -22,9 +22,7 @@ public abstract class MaterialStoneBase extends Material
 			case POOR_ORE:
 			case NORMAL_ORE:
 			case RICH_ORE:
-			case DIRT:
 			case GRAVEL:
-			case SAND:
 			case COBBLESTONE:
 			case SMOOTH_STONE:
 			case POLISHED_STONE:

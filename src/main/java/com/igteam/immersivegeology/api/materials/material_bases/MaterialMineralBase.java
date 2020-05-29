@@ -13,7 +13,6 @@ public abstract class MaterialMineralBase extends Material
     {
         switch(useType)
         {
-            case CHUNK:
             case DUST:
             case TINY_DUST:
                 return true;
