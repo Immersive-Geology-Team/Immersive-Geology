@@ -4,10 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
+import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
 
@@ -19,6 +20,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;

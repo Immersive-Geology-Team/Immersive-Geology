@@ -17,9 +17,9 @@ import java.util.Set;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
-import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.biome.BadlandsBiome;
@@ -87,6 +87,8 @@ public class IGContent
 						case RESOURCE_BLOCK:
 						case BLOCK:
 							registeredIGBlocks.put(materialItem.getName() + "_" + material.getName(),materialItem.getBlock(material));
+						break;
+						default:
 						break;
 					}
 				}

@@ -6,15 +6,16 @@ import javax.annotation.Nonnull;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
+import net.minecraftforge.event.terraingen.BiomeEvent.GetWaterColor;
+
 public class LowlandsBiome extends IGBiome
 {
     public LowlandsBiome()
     {
         super(new Builder().category(Category.PLAINS));
-
        // TFCDefaultBiomeFeatures.addCarvers(this);
     }
- 
+    
     @Nonnull
     @Override
     public INoise2D createNoiseLayer(long seed)

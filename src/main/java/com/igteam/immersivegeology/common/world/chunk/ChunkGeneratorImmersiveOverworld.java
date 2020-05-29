@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Random;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.EnumMaterials;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
@@ -222,7 +222,7 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 
 									double max = Math.max(1, y);
 									double log = Math.log(max / 512d);
-									// TODO always >= 256? but it works CURRENTLY due to y level
+								
 									nh = -(Math.pow(Math.E, 3.6) * log - 25);
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
 											.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
@@ -242,8 +242,6 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 							if ((y < (totHeight * l) / lc)
 									&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 								replaceBlock = b.getLayerBlock(l);
-
-
 
 								// setting the block in here isn't super efficient,
 								double nh =  replaceBlock.getDefaultHardness();

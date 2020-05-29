@@ -3,6 +3,8 @@ package com.igteam.immersivegeology.api.materials.material_bases;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.MaterialUseType.UseCategory;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -24,18 +26,20 @@ public abstract class MaterialStoneBase extends Material
 			case RICH_ORE:
 			case GRAVEL:
 			case COBBLESTONE:
-			case SMOOTH_STONE:
 			case POLISHED_STONE:
 			case SMALL_BRICKS:
 			case NORMAL_BRICKS:
 			case ROAD_BRICKS:
+			case ROUGH_BRICKS:
 			case PILLAR:
+			case COLUMN:
+			case TILES:
 			case CHUNK:
 				return true;
 		}
 		return false;
 	}
-
+	
 	@Override
 	public MaterialTypes getMaterialType()
 	{

@@ -11,7 +11,7 @@ public class ImmersiveSurfaceBuilderConfig {
 
     public ImmersiveSurfaceBuilderConfig(ISurfacePart top, ISurfacePart under, ISurfacePart underWater)
     {
-        this(top, under, underWater, ISurfaceBuilder.ROCK);
+        this(top, under, underWater, ISurfaceBuilder.CLAY);
     }
 
     public ImmersiveSurfaceBuilderConfig(ISurfacePart top, ISurfacePart under, ISurfacePart underWater, ISurfacePart deepUnder)

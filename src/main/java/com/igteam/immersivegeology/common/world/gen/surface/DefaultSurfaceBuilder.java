@@ -3,7 +3,8 @@ package com.igteam.immersivegeology.common.world.gen.surface;
 import java.util.Random;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.EnumMaterials;
+import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
 import com.igteam.immersivegeology.common.world.gen.surface.util.RockData;
@@ -45,7 +46,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                // Air, so continue downwards and wait for surface to appear
 	                surfaceFlag = -1;
 	            }
-	            else if (stateAt.getBlock() == defaultBlock.getBlock())
+	            else if (stateAt.getBlock() instanceof IGBaseBlock)//== defaultBlock.getBlock())
 	            {
 	                if (surfaceFlag == -1)
 	                {

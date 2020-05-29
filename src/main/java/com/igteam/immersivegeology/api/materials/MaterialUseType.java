@@ -95,7 +95,6 @@ public enum MaterialUseType implements IStringSerializable
 	GRAVEL(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
 	SAND(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
 	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
-	SMOOTH_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
 
 	ROUGH_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	POLISHED_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
@@ -103,7 +102,9 @@ public enum MaterialUseType implements IStringSerializable
 	NORMAL_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	ROAD_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	PILLAR(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-
+	COLUMN(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
+	TILES(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
+	
 	//Fluids
 	FLUIDS(UseCategory.BLOCK, ItemSubGroup.misc);
 

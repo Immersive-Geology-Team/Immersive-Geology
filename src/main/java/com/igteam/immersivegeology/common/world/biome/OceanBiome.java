@@ -21,6 +21,7 @@ public class OceanBiome extends IGBiome {
         {
             this.depthMin = SEA_LEVEL - 80;
             this.depthMax = SEA_LEVEL - 75;
+            
         }
         else
         {

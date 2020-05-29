@@ -1,10 +1,9 @@
-package com.igteam.immersivegeology.common.blocks;
+package com.igteam.immersivegeology.common.materials;
 
 import java.util.stream.Stream;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
-import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
 import com.igteam.immersivegeology.common.materials.fluids.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
@@ -74,8 +73,9 @@ public enum EnumMaterials
 	Endstone(new MaterialStoneEndstone()),
 	Basalt(new MaterialStoneBasalt()),
 	Marble(new MaterialStoneMarble()),	
-	Limestone(new MaterialStoneLimestone());
-
+	Limestone(new MaterialStoneLimestone()),
+	Pegmatite(new MaterialStonePegmatite());
+	
 	public final Material material;
 
 	EnumMaterials(Material material)
