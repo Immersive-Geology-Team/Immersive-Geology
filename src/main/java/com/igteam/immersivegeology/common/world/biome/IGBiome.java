@@ -13,14 +13,22 @@ public abstract class IGBiome extends Biome {
 
 	//TODO may want to add salt and fresh water distinction
 	
-	protected IGBiome(Builder builder) {
+	protected IGBiome(Builder builder, int waterColor, int waterFogColor, RainType type, float temperature, float downfall) {
 		 super(builder
-		            .depth(0).scale(0).waterColor(4159204).waterFogColor(329011).precipitation(RainType.RAIN).temperature(1.0f).downfall(1.0f)
+		            .depth(0).scale(0).waterColor(waterColor).waterFogColor(waterFogColor).precipitation(type).temperature(temperature).downfall(downfall)
 		            // Unused for now, may be used by variant biomes
 		            .parent(null)
 		            // Unused as we do a much more complex surface builder
 		            .surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.NOPE, SurfaceBuilder.AIR_CONFIG)));
 		 
+	}
+	protected IGBiome(Builder builder) {
+		 super(builder
+		            .depth(0).scale(0).waterColor(0x456CBE).waterFogColor(0x3A5B82).precipitation(RainType.RAIN).temperature(1.0f).downfall(1.0f)
+		            // Unused for now, may be used by variant biomes
+		            .parent(null)
+		            // Unused as we do a much more complex surface builder
+		            .surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.NOPE, SurfaceBuilder.AIR_CONFIG)));
 	}
 	
 	@Nonnull

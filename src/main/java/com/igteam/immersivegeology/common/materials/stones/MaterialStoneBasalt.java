@@ -65,7 +65,7 @@ public class MaterialStoneBasalt extends MaterialStoneBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x281f1f;
+		return 0x3C3A56;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

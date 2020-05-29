@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
@@ -164,7 +165,7 @@ public class IGContent
 	}
 
 	//Changed due to blocks being registered later on
-	public static <T extends IGBaseBlock & IIGBlock> BlockIGSlab addMaterialSlabFor(T b)
+	public static <T extends IGMaterialBlock & IIGBlock> BlockIGSlab addMaterialSlabFor(T b)
 	{
 		BlockIGSlab<T> ret = new BlockIGSlab<T>(
 				"slab_"+b.name,

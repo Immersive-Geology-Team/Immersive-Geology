@@ -1,26 +1,26 @@
 package com.igteam.immersivegeology.common.world;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
-import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraftforge.event.terraingen.BiomeEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -47,9 +47,22 @@ public class WorldEventHandler {
 		}
 	}
 
+	
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public void onRenderFog(EntityViewRenderEvent.FogDensity event) {
+		if (event.getInfo().getFluidState().isTagged(FluidTags.WATER)) {
+			GlStateManager.fogMode(GlStateManager.FogMode.EXP);
+			event.setDensity(4);
+			event.getFogRenderer().applyFog(true);
+			event.setCanceled(true);
+		}
+	}
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onChunkPopulate(ChunkEvent.Load event) {
 
+		
 		if (!worldDone || event.getWorld() == null || event.getChunk() == null)
 			return;
 

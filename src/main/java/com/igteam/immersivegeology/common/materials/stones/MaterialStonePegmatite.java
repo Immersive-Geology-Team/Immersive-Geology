@@ -61,7 +61,7 @@ public class MaterialStonePegmatite extends MaterialStoneBase {
 	@Override
 	public int getColor(int temperature) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0xA78D5C;
 	}
 
 	@Override

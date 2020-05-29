@@ -18,8 +18,8 @@ import net.minecraft.world.IBlockReader;
  */
 public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 {
-	private Material material;
-	private MaterialUseType type;
+	protected Material material;
+	protected MaterialUseType type;
 
 	public IGMaterialBlock(Material material, MaterialUseType type)
 	{

@@ -2,8 +2,11 @@ package com.igteam.immersivegeology.common.blocks;
 
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
+import com.igteam.immersivegeology.common.util.BlockstateGenerator;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
@@ -18,7 +21,7 @@ import net.minecraft.world.IWorldReader;
 
 import javax.annotation.Nullable;
 
-public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implements IIGBlock, IColouredBlock
+public class BlockIGSlab<T extends IGMaterialBlock & IIGBlock> extends SlabBlock implements IIGBlock, IColouredBlock
 {
 	private final T base;
 	public IGBlockItem itemBlock = null;
@@ -32,7 +35,9 @@ public class BlockIGSlab<T extends Block & IIGBlock> extends SlabBlock implement
 		IGContent.registeredIGSlabBlocks.put("slab_"+name,this);
 		this.base = base;
 		this.hasCustomColor = base instanceof IColouredBlock&&((IColouredBlock)base).hasCustomBlockColours();
-
+		
+		BlockstateGenerator.generateDefaultSlabBlock(this.base.material, this.base.type);
+		
 		if(itemBlock!=null)
 		{
 			try

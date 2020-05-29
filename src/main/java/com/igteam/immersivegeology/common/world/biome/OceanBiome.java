@@ -15,7 +15,7 @@ public class OceanBiome extends IGBiome {
     
     public OceanBiome(boolean isDeep)
     {
-        super(new Builder().category(Category.OCEAN));
+        super(new Builder().category(Category.OCEAN), 0x4E7280, isDeep ? 0x00050F : 0x0A192D, RainType.RAIN, isDeep ? 10f : 15f, 2f);
 
         if (isDeep)
         {

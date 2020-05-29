@@ -11,6 +11,8 @@ import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.util.BlockstateGenerator;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
@@ -66,7 +68,7 @@ public enum MaterialUseType implements IStringSerializable
 				@Override
 				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 				{
-					IGBaseBlock sheetmetal = new IGSheetmetalBlock(material);
+					IGMaterialBlock sheetmetal = new IGSheetmetalBlock(material);
 					BlockIGSlab slab = IGContent.addMaterialSlabFor(sheetmetal);
 					((IGBlockMaterialItem)slab.itemBlock).material = material;
 					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
@@ -94,7 +96,20 @@ public enum MaterialUseType implements IStringSerializable
 	DIRT(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
 	GRAVEL(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
 	SAND(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
-	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
+	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw){
+		@Override
+		public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGMaterialBlock cobble = new IGMaterialBlock(material, MaterialUseType.COBBLESTONE);
+			
+			BlockIGSlab slab = IGContent.addMaterialSlabFor(cobble);
+			((IGBlockMaterialItem)slab.itemBlock).material = material;
+			((IGBlockMaterialItem)slab.itemBlock).subtype = this;
+			((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
+			//IGContent.registeredIGBlocks.add(slab);
+			return cobble;
+		}
+	},
 
 	ROUGH_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	POLISHED_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
