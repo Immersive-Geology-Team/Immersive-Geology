@@ -38,19 +38,21 @@
   "block.immersivegeology.rich_ore.name": "Rich %s Ore",
   "block.immersivegeology.normal_ore.name": "%s Ore",
 
+  "material.immersivegeology.marble.name": "Marble",
+  "material.immersivegeology.pegamite.name": "Pegamite",
+  "material.immersivegeology.rhyolite.name": "Rhyolite",
   "material.immersivegeology.basalt.name": "Basalt",
+
   "material.minecraft.granite.name": "Granite",
   "material.minecraft.diorite.name": "Diorite",
   "material.minecraft.andesite.name": "Andesite",
   "material.minecraft.endstone.name": "Endstone",
   "material.minecraft.netherrack.name": "Netherrack",
-  "material.minecraft.marble.name": "Marble",
-  "material.minecraft.pegamite.name": "Pegamite",
-  "material.minecraft.rhyolite.name": "Rhyolite",
 
   "material.minecraft.gold.name": "Gold",
   "material.minecraft.iron.name": "Iron",
   "material.minecraft.quartz.name": "Quartz",
+
   "material.immersiveengineering.aluminum.name": "Aluminium",
   "material.immersiveengineering.copper.name": "Copper",
   "material.immersiveengineering.lead.name": "Lead",
