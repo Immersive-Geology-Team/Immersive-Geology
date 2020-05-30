@@ -64,7 +64,7 @@ public class MaterialStoneDiorite extends MaterialStoneBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xcecece;
+		return 0xE0E0E0;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

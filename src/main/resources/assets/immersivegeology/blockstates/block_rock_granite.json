@@ -1,7 +1,7 @@
 {
  "variants": {
   "": {
-   "model": "immersivegeology:block/base/rock_igneous_extrusive"
+   "model": "immersivegeology:block/base/rock_igneous_intrusive"
   }
  }
 }

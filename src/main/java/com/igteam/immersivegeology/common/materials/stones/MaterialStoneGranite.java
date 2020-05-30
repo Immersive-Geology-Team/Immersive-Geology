@@ -103,7 +103,7 @@ public class MaterialStoneGranite extends MaterialStoneBase
 	@Override
 	public EnumStoneType getStoneType()
 	{
-		return EnumStoneType.IGNEOUS_EXTRUSIVE;
+		return EnumStoneType.IGNEOUS_INTRUSIVE;
 	}
 
 
