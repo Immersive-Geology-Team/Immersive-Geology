@@ -1,7 +1,9 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
@@ -18,7 +20,7 @@ public class CanyonsBiome  extends IGBiome
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
 
-      //  TFCDefaultBiomeFeatures.addCarvers(this);
+        IGDefaultBiomeFeatures.addCarvers(this);
     }
 
     @Nonnull

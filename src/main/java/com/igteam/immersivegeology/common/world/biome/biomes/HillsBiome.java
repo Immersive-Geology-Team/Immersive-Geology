@@ -1,7 +1,9 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
@@ -16,7 +18,7 @@ public class HillsBiome extends IGBiome
         super(new Builder().category(Category.PLAINS));
         this.height = height;
 
-      //  TFCDefaultBiomeFeatures.addCarvers(this);
+        IGDefaultBiomeFeatures.addCarvers(this);
     }
 
     @Nonnull

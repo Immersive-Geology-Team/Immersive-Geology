@@ -1,9 +1,9 @@
-package com.igteam.immersivegeology.common.world.layer;
+package com.igteam.immersivegeology.common.world.layer.layers;
 
 import java.util.function.IntPredicate;
 
 import com.google.common.base.Predicate;
-import com.igteam.immersivegeology.common.world.util.IGLayerUtil;
+import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
 
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;

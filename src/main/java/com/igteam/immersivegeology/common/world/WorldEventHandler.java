@@ -4,9 +4,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
-import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
-import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
+import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
+import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;
@@ -52,9 +52,8 @@ public class WorldEventHandler {
 	@SubscribeEvent
 	public void onRenderFog(EntityViewRenderEvent.FogDensity event) {
 		if (event.getInfo().getFluidState().isTagged(FluidTags.WATER)) {
-			GlStateManager.fogMode(GlStateManager.FogMode.EXP);
-			event.setDensity(4);
-			event.getFogRenderer().applyFog(true);
+			GlStateManager.fogMode(GlStateManager.FogMode.LINEAR);
+			event.setDensity(0.5f);
 			event.setCanceled(true);
 		}
 	}

@@ -9,11 +9,12 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
-import com.igteam.immersivegeology.common.world.biome.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
-import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
+import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
@@ -30,6 +31,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.NoiseChunkGenerator;
@@ -50,7 +52,10 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 			}
 		}
 	});
+	
+	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
+	
 	public ChunkGeneratorImmersiveOverworld(IWorld world, BiomeProvider provider,
 			ImmersiveGenerationSettings settings) {
 		super(world, provider, 4, 8, 256, settings, false);
@@ -65,8 +70,24 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 		IGBiomes.getBiomes().forEach(biome -> biomeNoiseMap.put(biome, biome.createNoiseLayer(biomeNoiseSeed)));
 
 		this.biomeProvider = (ImmersiveBiomeProvider) provider;
+		
+		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
 	}
 
+	
+	@Override
+    public void carve(IChunk chunkIn, GenerationStage.Carving stage)
+    {
+        if (stage == GenerationStage.Carving.AIR)
+        {
+            // First, run worley cave carver
+            worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4);
+        }
+
+        // Fire other world carvers
+        super.carve(chunkIn, stage);
+    }
+	
 	@Override
 	public int getGroundHeight() {
 		return getSeaLevel() + 1;

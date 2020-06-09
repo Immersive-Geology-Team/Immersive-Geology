@@ -1,7 +1,9 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
@@ -16,6 +18,8 @@ public class PlainsBiome extends IGBiome
         super(new Builder().category(Category.PLAINS));
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
+        
+        IGDefaultBiomeFeatures.addCarvers(this);
     }
 
     @Nonnull

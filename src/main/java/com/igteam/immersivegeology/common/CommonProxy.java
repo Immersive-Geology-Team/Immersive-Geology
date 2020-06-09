@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common;
 
-import com.igteam.immersivegeology.common.world.biome.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 
 public class CommonProxy
 {

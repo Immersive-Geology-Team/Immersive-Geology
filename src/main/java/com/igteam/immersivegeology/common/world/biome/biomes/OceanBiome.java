@@ -1,27 +1,25 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
 
 import javax.annotation.Nonnull;
 
-import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
-
-import net.minecraft.block.BlockState;
 
 public class OceanBiome extends IGBiome {
     private final float depthMin, depthMax;
     
     public OceanBiome(boolean isDeep)
     {
-        super(new Builder().category(Category.OCEAN), 0x4E7280, isDeep ? 0x00050F : 0x0A192D, RainType.RAIN, isDeep ? 10f : 15f, 2f);
+        super(new Builder().category(Category.OCEAN), 0x4E7280, isDeep ? 0x324E72 : 0x04770A5, RainType.RAIN, isDeep ? 10f : 15f, 2f);
 
         if (isDeep)
         {
             this.depthMin = SEA_LEVEL - 80;
-            this.depthMax = SEA_LEVEL - 75;
-            
+            this.depthMax = SEA_LEVEL - 75;            
         }
         else
         {
@@ -29,7 +27,7 @@ public class OceanBiome extends IGBiome {
             this.depthMax = SEA_LEVEL - 25;
         }
 
-        //TFCDefaultBiomeFeatures.addOceanCarvers(this);
+        IGDefaultBiomeFeatures.addOceanCarvers(this);
     }
 
     @Nonnull

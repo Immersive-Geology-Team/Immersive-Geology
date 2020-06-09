@@ -11,7 +11,10 @@ public class BiomeFactory {
 
 	    public static IGBiome getBiome(int id)
 	    {
-	        return (IGBiome) ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getValue(id);
+	    	Biome biome = ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getValue(id);
+	    	
+	    	return (IGBiome) biome;
+	    	
 	    }
 
 	    public IGBiome[] getBiomes(int startX, int startZ, int xSize, int zSize)

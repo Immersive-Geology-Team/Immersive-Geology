@@ -1,6 +1,8 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 
@@ -16,8 +18,7 @@ public class ShoreBiome extends IGBiome
     {
         super(new Biome.Builder().category(Category.BEACH));
         this.isStone = isStone;
-
-       // TFCDefaultBiomeFeatures.addCarvers(this);
+        IGDefaultBiomeFeatures.addCarvers(this);
     }
 
     @Nonnull

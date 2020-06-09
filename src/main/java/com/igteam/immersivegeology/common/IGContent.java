@@ -23,16 +23,16 @@ import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
-import com.igteam.immersivegeology.common.world.biome.BadlandsBiome;
-import com.igteam.immersivegeology.common.world.biome.CanyonsBiome;
-import com.igteam.immersivegeology.common.world.biome.HillsBiome;
-import com.igteam.immersivegeology.common.world.biome.LakeBiome;
-import com.igteam.immersivegeology.common.world.biome.LowlandsBiome;
-import com.igteam.immersivegeology.common.world.biome.MountainsBiome;
-import com.igteam.immersivegeology.common.world.biome.OceanBiome;
-import com.igteam.immersivegeology.common.world.biome.PlainsBiome;
-import com.igteam.immersivegeology.common.world.biome.RiverBiome;
-import com.igteam.immersivegeology.common.world.biome.ShoreBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.BadlandsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.CanyonsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.HillsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.LakeBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.LowlandsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.OceanBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.PlainsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.RiverBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.ShoreBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 
@@ -227,7 +227,8 @@ public class IGContent
             new OceanBiome(false).setRegistryName("ocean"),
             new OceanBiome(true).setRegistryName("deep_ocean"),
             new OceanBiome(true).setRegistryName("deep_ocean_ridge"),
-
+            new OceanBiome(true).setRegistryName("ocean_edge"),
+            
             new PlainsBiome(-4, 10).setRegistryName("plains"),
             new LowlandsBiome().setRegistryName("lowlands"),
             new HillsBiome(16).setRegistryName("hills"),

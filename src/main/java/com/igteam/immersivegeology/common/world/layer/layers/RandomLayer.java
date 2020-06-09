@@ -1,4 +1,4 @@
-package com.igteam.immersivegeology.common.world.util;
+package com.igteam.immersivegeology.common.world.layer.layers;
 
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;

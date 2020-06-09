@@ -16,8 +16,10 @@ import net.minecraftforge.registries.ObjectHolder;
 public class IGBiomes {
 	// Aquatic biomes
     public static final IGBiome OCEAN = Helpers.getNull(); // Ocean biome found near continents.
-    public static final IGBiome DEEP_OCEAN = Helpers.getNull(); 
+    public static final IGBiome OCEAN_EDGE = Helpers.getNull(); 
+    public static final IGBiome DEEP_OCEAN = Helpers.getNull();
     public static final IGBiome DEEP_OCEAN_RIDGE = Helpers.getNull();
+    //public static final IGBiome DEEP_OCEAN_VOLCANIC = Helpers.getNull();
 	
     //low height biomes
     public static final IGBiome PLAINS = Helpers.getNull(); 
@@ -43,7 +45,7 @@ public class IGBiomes {
     
     private static final LazyLoadBase<Set<IGBiome>> BIOMES = new LazyLoadBase<>(() -> {
         Set<IGBiome> values = new HashSet<>();
-        for (IGBiome biome : Arrays.asList(OCEAN, DEEP_OCEAN, DEEP_OCEAN_RIDGE, PLAINS, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, RIVER))
+        for (IGBiome biome : Arrays.asList(OCEAN, OCEAN_EDGE, DEEP_OCEAN, DEEP_OCEAN_RIDGE, PLAINS, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, RIVER))
         {
             if (biome == null)
             {

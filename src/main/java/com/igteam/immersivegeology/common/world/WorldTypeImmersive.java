@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSe
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.OverworldBiomeProvider;
 import net.minecraft.world.biome.provider.SingleBiomeProvider;
@@ -31,7 +32,7 @@ public class WorldTypeImmersive extends WorldType {
 				overworldGenSettings);
 		} else {
 			NetherGenSettings netherGenSettings = new NetherGenSettings();
-			SingleBiomeProviderSettings netherSettings = new SingleBiomeProviderSettings();
+			SingleBiomeProviderSettings netherSettings = new SingleBiomeProviderSettings().setBiome(Biomes.NETHER);
 			BiomeProvider biomeProvider = new SingleBiomeProvider(netherSettings);
 			return new NetherChunkGenerator(world, biomeProvider, netherGenSettings);
 		}

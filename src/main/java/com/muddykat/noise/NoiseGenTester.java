@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
-import com.igteam.immersivegeology.common.world.biome.OceanBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.OceanBiome;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 public class NoiseGenTester {

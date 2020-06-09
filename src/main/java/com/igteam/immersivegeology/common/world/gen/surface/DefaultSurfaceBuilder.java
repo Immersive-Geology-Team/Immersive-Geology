@@ -50,7 +50,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	            {
 	                if (surfaceFlag == -1)
 	                {
-	                    if (y >= SEA_LEVEL)
+	                    if (y >= (SEA_LEVEL - 1))
 	                    {
 	                        // Above water, just hit surface
 	                        surfaceFlag = getSoilLayers(y, random);

@@ -12,7 +12,6 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 public abstract class IGBiome extends Biome {
 
 	//TODO may want to add salt and fresh water distinction
-	
 	protected IGBiome(Builder builder, int waterColor, int waterFogColor, RainType type, float temperature, float downfall) {
 		 super(builder
 		            .depth(0).scale(0).waterColor(waterColor).waterFogColor(waterFogColor).precipitation(type).temperature(temperature).downfall(downfall)

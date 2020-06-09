@@ -1,10 +1,11 @@
-package com.igteam.immersivegeology.common.world.layer;
+package com.igteam.immersivegeology.common.world.layer.layers;
+
+import static com.igteam.immersivegeology.common.world.layer.IGLayerUtil.*;
+
+import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
 
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
-import static com.igteam.immersivegeology.common.world.util.IGLayerUtil.*;
-
-import com.igteam.immersivegeology.common.world.util.IGLayerUtil;
 
 public enum BiomeLayer implements IC0Transformer {
 	INSTANCE;
@@ -21,7 +22,7 @@ public enum BiomeLayer implements IC0Transformer {
 			} else {
 				return DEEP_OCEAN;
 			}
-		} else if (value == PLAINS) {
+		}  else if (value == PLAINS) {
 			return LOW_BIOMES[context.random(LOW_BIOMES.length)];
 		} else if (value == IGLayerUtil.HILLS) {
 			return MID_BIOMES[context.random(MID_BIOMES.length)];

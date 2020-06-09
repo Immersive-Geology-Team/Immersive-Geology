@@ -1,7 +1,9 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
@@ -13,7 +15,7 @@ public class BadlandsBiome extends IGBiome
     {
         super(new IGBiome.Builder().category(Category.MESA));
 
-        //TFCDefaultBiomeFeatures.addCarvers(this);
+        IGDefaultBiomeFeatures.addCarvers(this);
     }
 
     @Nonnull

@@ -1,4 +1,4 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.layer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

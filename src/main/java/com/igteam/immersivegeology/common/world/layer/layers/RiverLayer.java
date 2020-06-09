@@ -1,10 +1,10 @@
-package com.igteam.immersivegeology.common.world.layer;
+package com.igteam.immersivegeology.common.world.layer.layers;
+
+import static com.igteam.immersivegeology.common.world.layer.IGLayerUtil.OCEAN;
+import static com.igteam.immersivegeology.common.world.layer.IGLayerUtil.RIVER;
 
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;
-
-import static com.igteam.immersivegeology.common.world.util.IGLayerUtil.RIVER;
-import static com.igteam.immersivegeology.common.world.util.IGLayerUtil.OCEAN;
 
 public enum RiverLayer implements ICastleTransformer
 {

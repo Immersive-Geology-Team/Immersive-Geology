@@ -14,7 +14,7 @@ import com.igteam.immersivegeology.common.world.biome.BiomeFactory;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
-import com.igteam.immersivegeology.common.world.util.IGLayerUtil;
+import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

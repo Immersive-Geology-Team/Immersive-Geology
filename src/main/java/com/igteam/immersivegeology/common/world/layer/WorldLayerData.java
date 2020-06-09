@@ -1,10 +1,11 @@
-package com.igteam.immersivegeology.common.world.biome;
+package com.igteam.immersivegeology.common.world.layer;
 
 import java.util.ArrayList;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 
 import net.minecraft.world.biome.Biomes;
 

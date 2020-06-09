@@ -1,6 +1,6 @@
-package com.igteam.immersivegeology.common.world.layer;
+package com.igteam.immersivegeology.common.world.layer.layers;
 
-import com.igteam.immersivegeology.common.world.util.IGLayerUtil;
+import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
 
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;

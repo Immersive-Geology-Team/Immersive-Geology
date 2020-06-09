@@ -1,4 +1,4 @@
-package com.igteam.immersivegeology.common.world.util;
+package com.igteam.immersivegeology.common.world.layer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,15 +8,18 @@ import java.util.function.Supplier;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
-import com.igteam.immersivegeology.common.world.layer.AddIslandLayer;
-import com.igteam.immersivegeology.common.world.layer.AddLakeLayer;
-import com.igteam.immersivegeology.common.world.layer.BiomeLayer;
-import com.igteam.immersivegeology.common.world.layer.ElevationLayer;
-import com.igteam.immersivegeology.common.world.layer.IslandLayer;
-import com.igteam.immersivegeology.common.world.layer.OceanLayer;
-import com.igteam.immersivegeology.common.world.layer.RemoveOceanLayer;
-import com.igteam.immersivegeology.common.world.layer.RiverLayer;
-import com.igteam.immersivegeology.common.world.layer.ShoreLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.AddIslandLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.AddLakeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.BiomeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.EdgeBiomeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.ElevationLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.IslandLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.MixRiverLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.OceanLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.RandomLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.RemoveOceanLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.RiverLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.ShoreLayer;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
@@ -24,8 +27,6 @@ import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
-import net.minecraft.world.gen.layer.EdgeBiomeLayer;
-import net.minecraft.world.gen.layer.MixRiverLayer;
 import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
@@ -39,11 +40,12 @@ import net.minecraftforge.registries.ForgeRegistry;
  * Modified for use in Immersive Geology by Muddykat
  */
 public class IGLayerUtil {
-	private static int id = 0;
-
+	
 	/* Biomes */
 	public static final int OCEAN = getId(IGBiomes.OCEAN);
+	//public static final int DEEP_OCEAN_VOLCANIC = getId(IGBiomes.DEEP_OCEAN_VOLCANIC);
 	public static final int DEEP_OCEAN = getId(IGBiomes.DEEP_OCEAN);
+	public static final int OCEAN_EDGE = getId(IGBiomes.OCEAN_EDGE);
 	public static final int DEEP_OCEAN_RIDGE = getId(IGBiomes.DEEP_OCEAN_RIDGE);
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
 	public static final int HILLS = getId(IGBiomes.HILLS);
@@ -90,7 +92,6 @@ public class IGLayerUtil {
 		}
 
 		// Oceans and Continents => Elevation Mapping
-
 		layerCount = 0;
 
 		mainLayer = ElevationLayer.INSTANCE.apply(contextFactory.apply(1009L), mainLayer);
@@ -203,10 +204,10 @@ public class IGLayerUtil {
 	}
 
 	public static boolean isOcean(int value) {
-		return value == OCEAN || value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE;
+		return value == OCEAN || value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE || value == OCEAN_EDGE;
 	}
 
-	static boolean isShallowOcean(int value) {
+	public static boolean isShallowOcean(int value) {
 		return value == OCEAN;
 	}
 
@@ -214,12 +215,17 @@ public class IGLayerUtil {
 		return value == MOUNTAINS || value == FLOODED_MOUNTAINS || value == MOUNTAINS_EDGE || value == OLD_MOUNTAINS;
 	}
 
-	static boolean isLow(int value) {
+	public static boolean isLow(int value) {
 		return value == PLAINS || value == HILLS || value == LOW_CANYONS || value == LOWLANDS;
 	}
 
 	private static int getId(Biome biome) {
 		// todo: once finished with testing, inline this method
 		return ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES).getID(biome);
+	}
+
+	public static boolean isDeepOcean(int value) {
+		// TODO Auto-generated method stub
+		return value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE;
 	}
 }
