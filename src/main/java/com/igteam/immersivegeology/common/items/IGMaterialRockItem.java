@@ -9,9 +9,10 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public class IGMaterialRockItem extends IGMaterialResourceItem
 {
 
-	public IGMaterialRockItem(Material mat, MaterialUseType type)
+	public IGMaterialRockItem(Material mat, MaterialUseType type, Material... minerals)
 	{
 		super(mat, type);
+
 	}
 
 	/*

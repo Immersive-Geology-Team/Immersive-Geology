@@ -181,7 +181,7 @@ public enum MaterialUseType implements IStringSerializable
 	//Default to resource, allows for using custom classes
 	public IGBaseItem getItem(com.igteam.immersivegeology.api.materials.Material material)
 	{
-		return new IGMaterialResourceItem(material, this);
+		return new IGMaterialResourceItem(material,this);
 	}
 
 	//Default to resource, allows for using custom classes
@@ -192,6 +192,8 @@ public enum MaterialUseType implements IStringSerializable
 
 	public enum UseCategory
 	{
+		//Used for chunks
+		CHUNK_ITEM,
 		//Used for ingots, plates, etc.
 		RESOURCE_ITEM,
 		//Will be used for tools

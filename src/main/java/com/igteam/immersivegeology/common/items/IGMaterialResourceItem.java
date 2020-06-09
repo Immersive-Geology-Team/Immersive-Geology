@@ -34,6 +34,8 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 				MaterialStoneBase rockMat = (MaterialStoneBase) material;
 				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
 			}
+		} else if(key.equals(MaterialUseType.CHUNK)) {
+			ItemJsonGenerator.generateDefaultItem(material, key);
 		} else {
 			ItemJsonGenerator.generateDefaultItem(material, key);
 		}
@@ -52,6 +54,11 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 					.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
 			tooltip.add(text);
 		}
+	}
+
+	public void addChunkVein(Material mineral)
+	{
+
 	}
 
 	public static boolean hasShiftDown() {

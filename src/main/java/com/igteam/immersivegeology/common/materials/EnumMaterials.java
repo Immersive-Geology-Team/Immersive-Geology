@@ -74,7 +74,7 @@ public enum EnumMaterials
 	Basalt(new MaterialStoneBasalt()),
 	Marble(new MaterialStoneMarble()),	
 	Limestone(new MaterialStoneLimestone()),
-	Pegmatite(new MaterialStonePegmatite());
+	Pegamite(new MaterialStonePegamite());
 	
 	public final Material material;
 

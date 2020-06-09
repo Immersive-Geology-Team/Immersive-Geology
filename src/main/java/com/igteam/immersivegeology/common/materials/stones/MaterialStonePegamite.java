@@ -12,7 +12,7 @@ import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBas
 
 import net.minecraft.item.Rarity;
 
-public class MaterialStonePegmatite extends MaterialStoneBase {
+public class MaterialStonePegamite extends MaterialStoneBase {
 
 	@Override
 	public String getName()
@@ -73,19 +73,19 @@ public class MaterialStonePegmatite extends MaterialStoneBase {
 	@Override
 	public float getMiningResistance() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1.5f;
 	}
 
 	@Override
 	public float getBlastResistance() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 6f;
 	}
 
 	@Override
 	public float getDensity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
