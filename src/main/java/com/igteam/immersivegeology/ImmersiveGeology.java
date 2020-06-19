@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import com.igteam.immersivegeology.common.world.WorldEventHandler;
+import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
 import com.igteam.immersivegeology.server.ServerProxy;
 
@@ -45,9 +46,12 @@ public class ImmersiveGeology
 	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
 
 	public static final boolean GENERATE_MODELS=true;
-
+	
 	public ImmersiveGeology()
 	{
+		//setup world type
+		worldType = new WorldTypeImmersive();
+		//setup logger
 		IGLogger.logger = LogManager.getLogger(MODID);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
@@ -60,7 +64,15 @@ public class ImmersiveGeology
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		IGContent.modConstruction();
 	}
-
+	
+	private final WorldTypeImmersive worldType;
+	private static ImmersiveGeology INSTANCE;
+	
+	public static WorldTypeImmersive getWorldType()
+    { 
+        return INSTANCE.worldType;
+    }
+	
 	@SubscribeEvent
 	public void clientSetup(FMLClientSetupEvent event)
 	{
@@ -72,6 +84,8 @@ public class ImmersiveGeology
 	@SubscribeEvent
 	public void commonSetup(FMLCommonSetupEvent event)
 	{
+		
+		
 		//Previously in PREINIT
 		proxy.preInit();
 

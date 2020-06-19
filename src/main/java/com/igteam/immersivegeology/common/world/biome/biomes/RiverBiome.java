@@ -8,11 +8,13 @@ import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
+import net.minecraft.world.biome.Biome.RainType;
+
 public class RiverBiome extends IGBiome
 {
     public RiverBiome()
     {
-        super(new Builder().category(Category.RIVER));
+        super(new Builder().category(Category.RIVER).precipitation(RainType.RAIN).downfall(0.55f).temperature(0.45f),0.45f,0.55f);
     }
 
     @Nonnull

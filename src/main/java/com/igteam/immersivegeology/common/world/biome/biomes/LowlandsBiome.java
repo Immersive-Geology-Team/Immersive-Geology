@@ -8,13 +8,14 @@ import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
+import net.minecraft.world.biome.Biome.RainType;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetWaterColor;
 
 public class LowlandsBiome extends IGBiome
 {
     public LowlandsBiome()
     {
-        super(new Builder().category(Category.PLAINS));
+        super(new Builder().category(Category.PLAINS).precipitation(RainType.RAIN).downfall(0.65f).temperature(0.4f),.4f,.65f);
         IGDefaultBiomeFeatures.addCarvers(this);
     }
     

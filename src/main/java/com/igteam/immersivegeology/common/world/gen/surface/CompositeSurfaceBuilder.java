@@ -2,8 +2,6 @@ package com.igteam.immersivegeology.common.world.gen.surface;
 
 import java.util.Random;
 
-import com.igteam.immersivegeology.common.world.gen.surface.util.RockData;
-
 import net.minecraft.world.chunk.IChunk;
 
 public class CompositeSurfaceBuilder implements ISurfaceBuilder

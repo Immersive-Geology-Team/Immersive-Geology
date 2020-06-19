@@ -11,18 +11,17 @@ import net.minecraft.world.biome.Biome.RainType;
 
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
 
-public class CanyonsBiome  extends IGBiome
+public class DesertBiome extends IGBiome
 {
     private final float minHeight;
     private final float maxHeight;
 
-    public CanyonsBiome(float minHeight, float maxHeight)
+    public DesertBiome(float minHeight, float maxHeight)
     {
-        super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.05f).temperature(0.75f), 0.75f, 0.05f);
-
+        super(new Builder().category(Category.DESERT).precipitation(RainType.RAIN).downfall(0f).temperature(0.95f),0.95f,0f);
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
-
+        
         IGDefaultBiomeFeatures.addCarvers(this);
     }
 
@@ -30,8 +29,6 @@ public class CanyonsBiome  extends IGBiome
     @Override
     public INoise2D createNoiseLayer(long seed)
     {
-        final INoise2D warpX = new SimplexNoise2D(seed).octaves(4).spread(0.1f).scaled(-30, 30);
-        final INoise2D warpZ = new SimplexNoise2D(seed + 1).octaves(4).spread(0.1f).scaled(-30, 30);
-        return new SimplexNoise2D(seed).octaves(4).spread(0.2f).warped(warpX, warpZ).map(x -> x > 0.4 ? x - 0.8f : -x).scaled(-0.4f, 0.8f, SEA_LEVEL + minHeight, SEA_LEVEL + maxHeight).spread(0.3f);
+    	return new SimplexNoise2D(seed).octaves(4).spread(0.06f).scaled(SEA_LEVEL + minHeight, SEA_LEVEL + maxHeight);
     }
 }

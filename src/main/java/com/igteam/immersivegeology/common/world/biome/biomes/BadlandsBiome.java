@@ -13,7 +13,7 @@ public class BadlandsBiome extends IGBiome
 {
     public BadlandsBiome()
     {
-        super(new IGBiome.Builder().category(Category.MESA));
+        super(new IGBiome.Builder().category(Category.MESA).precipitation(RainType.RAIN).downfall(0.01f).temperature(0.85f), 0.85f, 0.01f);
 
         IGDefaultBiomeFeatures.addCarvers(this);
     }

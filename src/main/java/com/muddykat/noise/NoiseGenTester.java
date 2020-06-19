@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.biomes.OceanBiome;
+import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 public class NoiseGenTester {
@@ -50,7 +51,7 @@ public class NoiseGenTester {
 	        double jStart=0;
 	        double jEnd=500;
 	        long seed = 1020;
-	        SimplexNoise2D noise = new SimplexNoise2D(seed);
+	        OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 	        double[][] result=new double[1000][1000];
 
 	        for(int i=0;i<1000;i++){
@@ -58,7 +59,7 @@ public class NoiseGenTester {
 	                int xp=(int)(iStart+i*((iEnd-iStart)/1000));
 	                int yp=(int)(jStart+j*((jEnd-jStart)/1000));
 	                
-	                result[i][j]=0.5*(1+noise.noise(xp, yp));
+	                result[i][j]=0.5*(1+noise.eval(xp, yp));
 	            } 
 	        }
 

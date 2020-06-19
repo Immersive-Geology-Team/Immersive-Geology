@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.materials.stones;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
@@ -27,7 +28,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Override
 	public String getModID()
 	{
-		return "minecraft";
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override

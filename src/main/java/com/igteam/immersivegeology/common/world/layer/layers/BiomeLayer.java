@@ -10,9 +10,14 @@ import net.minecraft.world.gen.layer.traits.IC0Transformer;
 public enum BiomeLayer implements IC0Transformer {
 	INSTANCE;
 
-	public static final int[] LOW_BIOMES = new int[] { PLAINS, HILLS, LOW_CANYONS, LOWLANDS, HILLS };
-	public static final int[] MID_BIOMES = new int[] { ROLLING_HILLS, OLD_MOUNTAINS, BADLANDS, HILLS, PLAINS };
-	public static final int[] HIGH_BIOMES = new int[] { PLATEAU, BADLANDS, MOUNTAINS, FLOODED_MOUNTAINS };
+	//never meets a high biome
+	public static final int[] LOW_BIOMES = new int[]  { PLAINS, HILLS, LOW_CANYONS, LOWLANDS, HILLS };
+	
+	//can meet either a low or a high biome
+	public static final int[] MID_BIOMES = new int[]  { ROLLING_HILLS, OLD_MOUNTAINS, BADLANDS, HILLS, PLAINS };
+	
+	//never meets a low biome
+	public static final int[] HIGH_BIOMES = new int[] { DESERT, PLATEAU, BADLANDS, MOUNTAINS, FLOODED_MOUNTAINS };
 
 	@Override
 	public int apply(INoiseRandom context, int value) {

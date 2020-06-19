@@ -6,6 +6,9 @@ import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
+
+import net.minecraft.world.biome.Biome.RainType;
+
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
 
 public class PlainsBiome extends IGBiome
@@ -15,7 +18,7 @@ public class PlainsBiome extends IGBiome
 
     public PlainsBiome(float minHeight, float maxHeight)
     {
-        super(new Builder().category(Category.PLAINS));
+        super(new Builder().category(Category.PLAINS).precipitation(RainType.RAIN).downfall(0.4f).temperature(0.65f),0.65f,0.4f);
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
         

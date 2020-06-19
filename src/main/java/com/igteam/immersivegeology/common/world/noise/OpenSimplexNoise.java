@@ -738,7 +738,7 @@ public class OpenSimplexNoise {
 		return (float) (value / NORM_CONSTANT_3D);
 	}
 
-//4D OpenSimplex Noise.
+    //4D OpenSimplex Noise.
 	public double eval(double x, double y, double z, double w) {
 
 		// Place input coordinates on simplectic honeycomb.

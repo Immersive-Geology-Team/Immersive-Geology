@@ -6,8 +6,11 @@ import javax.annotation.Nonnull;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
+import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
+
+import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public class OceanBiome extends IGBiome {
     private final float depthMin, depthMax;
@@ -30,6 +33,11 @@ public class OceanBiome extends IGBiome {
         IGDefaultBiomeFeatures.addOceanCarvers(this);
     }
 
+    @Override
+    public ISurfaceBuilder getIGSurfaceBuilder() {
+    	// TODO Auto-generated method stub
+    	return ISurfaceBuilder.OCEAN;
+    }
     @Nonnull
     @Override
     public INoise2D createNoiseLayer(long seed)

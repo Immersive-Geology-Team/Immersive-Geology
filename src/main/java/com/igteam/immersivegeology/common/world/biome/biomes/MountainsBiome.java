@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.world.biome.Biome.RainType;
 
 public class MountainsBiome extends IGBiome
 {
@@ -18,7 +19,7 @@ public class MountainsBiome extends IGBiome
 
     public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains)
     {
-        super(new Builder().category(Category.EXTREME_HILLS));
+        super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f),0.35f,0.6f);
 
         this.baseHeight = baseHeight;
         this.scaleHeight = scaleHeight;

@@ -17,12 +17,12 @@ import net.minecraft.world.chunk.IChunk;
 
 public class WorleyCaveCarver {
 	// number of vertical samples to take, noise sampled every 4 blocks, then interpolated
-	private static final int SAMPLE_HEIGHT = 28;
+	private static final int SAMPLE_HEIGHT = 26;
 	// depth to fill the lower levers with a liquid
 	private static int LIQUID_DEPTH_MAX = 11;
 	private static int LIQUID_DEPTH_MIN = 0;
-	private static final float NOISE_THRESHOLD = 0.4f;
-	private static final float HEIGHT_FADE_THRESHOLD = 96;
+	private static final float NOISE_THRESHOLD = 0.5f;
+	private static final float HEIGHT_FADE_THRESHOLD = 70;
 	
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -119,7 +119,7 @@ public class WorleyCaveCarver {
                                     pos.setPos(chunkX + x0, yPos, chunkZ + z0);
                                     
                                    
-
+                                    LIQUID_DEPTH_MAX = 11;
                                     replacementAir = AIR;
                                     if(chunkIn.getBiome(pos) == OCEAN) {
                                     	replacementLiquid = WATER;
@@ -142,7 +142,6 @@ public class WorleyCaveCarver {
                                     		replacementLiquid = Blocks.MAGMA_BLOCK.getDefaultState();                        
                                     	}
                                     }
-                                    
                                     
                                     BlockState replacementState = (yPos <= LIQUID_DEPTH_MAX) ? (yPos >= LIQUID_DEPTH_MIN ? replacementLiquid : replacementAir) : replacementAir;
                          

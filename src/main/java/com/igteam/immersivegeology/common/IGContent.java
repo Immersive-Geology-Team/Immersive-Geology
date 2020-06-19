@@ -14,6 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
@@ -60,14 +61,9 @@ public class IGContent
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 	
-	public static WorldTypeImmersive worldType;
 	
 	public static void modConstruction()
 	{
-		
-		//setup worldtype
-		worldType = new WorldTypeImmersive();
-		
 		//Item, blocks here
 		// cycle through item Types
 		for(MaterialUseType materialItem : MaterialUseType.values())
@@ -204,54 +200,6 @@ public class IGContent
 
 	}
 	
-	@SubscribeEvent
-    public static void registerChunkGeneratorTypes(RegistryEvent.Register<ChunkGeneratorType<?, ?>> event)
-    {
-        event.getRegistry().registerAll(
-            new ChunkGeneratorType<>(ChunkGeneratorImmersiveOverworld::new, false, ImmersiveGenerationSettings::new).setRegistryName("overworld")
-        );
-    }
-
-    @SubscribeEvent
-    public static void registerBiomeProviderTypes(RegistryEvent.Register<BiomeProviderType<?, ?>> event)
-    {
-        event.getRegistry().registerAll(
-            new BiomeProviderType<>(ImmersiveBiomeProvider::new, ImmersiveGenerationSettings::new).setRegistryName("overworld")
-        );
-    }
-
-    @SubscribeEvent
-    public static void registerBiomes(RegistryEvent.Register<Biome> event)
-    {
-        event.getRegistry().registerAll(
-            new OceanBiome(false).setRegistryName("ocean"),
-            new OceanBiome(true).setRegistryName("deep_ocean"),
-            new OceanBiome(true).setRegistryName("deep_ocean_ridge"),
-            new OceanBiome(true).setRegistryName("ocean_edge"),
-            
-            new PlainsBiome(-4, 10).setRegistryName("plains"),
-            new LowlandsBiome().setRegistryName("lowlands"),
-            new HillsBiome(16).setRegistryName("hills"),
-            new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
-
-            new HillsBiome(28).setRegistryName("rolling_hills"),
-            new BadlandsBiome().setRegistryName("badlands"),
-            new PlainsBiome(20, 30).setRegistryName("plateau"),
-            new MountainsBiome(48, 28, false).setRegistryName("old_mountains"),
-
-            new MountainsBiome(48, 56, false).setRegistryName("mountains"),
-            new MountainsBiome(30, 64, true).setRegistryName("flooded_mountains"),
-            new CanyonsBiome(-7, 26).setRegistryName("canyons"),
-
-            new ShoreBiome(false).setRegistryName("shore"),
-            new ShoreBiome(true).setRegistryName("stone_shore"),
-
-            new MountainsBiome(36, 34, false).setRegistryName("mountains_edge"),
-            new LakeBiome().setRegistryName("lake"),
-            new RiverBiome().setRegistryName("river")
-        );
-    }
-
 	public static <T extends TileEntity> void registerTile(Class<T> tile, RegistryEvent.Register<TileEntityType<?>> event, Block... valid)
 	{
 		String s = tile.getSimpleName();

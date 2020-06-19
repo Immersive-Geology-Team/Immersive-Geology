@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.layers.AddIslandLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.AddLakeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.AddOasisLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.BiomeLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.EdgeBiomeLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.ElevationLayer;
@@ -48,6 +49,8 @@ public class IGLayerUtil {
 	public static final int OCEAN_EDGE = getId(IGBiomes.OCEAN_EDGE);
 	public static final int DEEP_OCEAN_RIDGE = getId(IGBiomes.DEEP_OCEAN_RIDGE);
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
+	public static final int DESERT = getId(IGBiomes.DESERT);
+	public static final int OASIS = getId(IGBiomes.OASIS);
 	public static final int HILLS = getId(IGBiomes.HILLS);
 	public static final int LOWLANDS = getId(IGBiomes.LOWLANDS);
 	public static final int LOW_CANYONS = getId(IGBiomes.LOW_CANYONS);
@@ -131,6 +134,8 @@ public class IGLayerUtil {
 
 		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
 
+		mainLayer = AddOasisLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
+		
 		for (int i = 0; i < settings.getBiomeZoomLevel(); i++) {
 			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), mainLayer);
 		}
@@ -202,13 +207,17 @@ public class IGLayerUtil {
 	public static boolean isLakeCompatible(int value) {
 		return isLow(value) || value == CANYONS || value == ROLLING_HILLS;
 	}
+	
+	public static boolean isOasisCompatible(int value) {
+		return value == DESERT;
+	}
 
 	public static boolean isOcean(int value) {
 		return value == OCEAN || value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE || value == OCEAN_EDGE;
 	}
 
 	public static boolean isShallowOcean(int value) {
-		return value == OCEAN;
+		return value == OCEAN && value != DEEP_OCEAN;
 	}
 
 	public static boolean isMountains(int value) {

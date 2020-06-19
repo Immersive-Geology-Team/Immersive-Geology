@@ -12,11 +12,11 @@ import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import net.minecraft.world.biome.Biome.RainType;
 
 
-public class LakeBiome extends IGBiome
+public class OasisBiome extends IGBiome
 {
-    public LakeBiome()
+    public OasisBiome()
     {
-        super(new Builder().category(Category.RIVER).precipitation(RainType.RAIN).downfall(0.65f).temperature(0.45f),.45f,.65f);
+        super(new Builder().category(Category.RIVER).precipitation(RainType.RAIN).downfall(0.05f).temperature(0.91f),.91f,.05f);
 
         IGDefaultBiomeFeatures.addCarvers(this);
     }
@@ -25,6 +25,6 @@ public class LakeBiome extends IGBiome
     @Override
     public INoise2D createNoiseLayer(long seed)
     {
-        return new SimplexNoise2D(seed).octaves(4).spread(0.2f).scaled(SEA_LEVEL - 8, SEA_LEVEL - 3);
+        return new SimplexNoise2D(seed).octaves(4).spread(0.2f).scaled(SEA_LEVEL - 5, SEA_LEVEL + 2);
     }
 }

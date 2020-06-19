@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.ProbabilityConfig;
 public class IGDefaultBiomeFeatures {
 	public static void addCarvers(Biome biomeIn)
     {
-     biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(WorldCarver.CANYON, new ProbabilityConfig(0.02F)));
+		biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(WorldCarver.CANYON, new ProbabilityConfig(0.02F)));
     }
 
     public static void addOceanCarvers(Biome biomeIn)

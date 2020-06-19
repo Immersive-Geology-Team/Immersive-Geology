@@ -7,7 +7,7 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
-import com.igteam.immersivegeology.common.world.gen.surface.util.RockData;
+import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,7 +34,12 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	        int localZ = z & 15;
 	        
 	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material);
-	        BlockState stateUnder = config.getUnder().get(localX, localZ);
+	        
+	        SurfaceData surface = new SurfaceData(chunkIn);
+	        
+	        BlockState stateUnder = config.getUnder().get(surface, localX, localZ);
+	        BlockState stateUnderWater = config.getUnderWater().get(surface, localX, localZ);
+	        BlockState topBlock = config.getTop().get(surface, localX, localZ);
 	        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 	        for (int y = startHeight; y >= 0 && surfaceFlag != 0; y--)
@@ -56,15 +61,13 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                        surfaceFlag = getSoilLayers(y, random);
 	                        if (surfaceFlag > 0)
 	                        {
-	                            stateUnder = config.getUnder().get(localX, localZ);
-	                            chunkIn.setBlockState(pos, config.getTop().get(localX, localZ), false);
+	                            chunkIn.setBlockState(pos, topBlock, false);
 	                        }
 	                    }
 	                    else
 	                    {
 	                        surfaceFlag = 1;
-	                        stateUnder = config.getUnderWater().get(localX, localZ);
-	                        chunkIn.setBlockState(pos, stateUnder, false);
+	                        chunkIn.setBlockState(pos, stateUnderWater, false);
 	                    }
 	                }
 	                else if (surfaceFlag > 0)
