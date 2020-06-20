@@ -72,6 +72,7 @@ public enum EnumMaterials
 	Netherrack(new MaterialStoneNetherrack()),
 	Endstone(new MaterialStoneEndstone()),
 	Basalt(new MaterialStoneBasalt()),
+	Gabbros(new MaterialStoneGabbros()),
 	Marble(new MaterialStoneMarble()),	
 	Limestone(new MaterialStoneLimestone()),
 	Pegamite(new MaterialStonePegamite());

@@ -25,8 +25,7 @@ public interface ISurfaceBuilder {
 	
 	ISurfaceBuilder DEFAULT = new DefaultSurfaceBuilder(GRASS_DIRT_GRAVEL_ROCK, 4);
 
-	ISurfaceBuilder OCEAN = new DefaultSurfaceBuilder(ROCK_ROCK_ROCK, 3);
-	
+	ISurfaceBuilder OCEAN = new DefaultSurfaceBuilder(ROCK_ROCK_ROCK, 2);
 	
 	void buildSurface(Random random, IChunk chunkIn, int x, int z, int startHeight, float temperature, float rainfall, float noise);
 }

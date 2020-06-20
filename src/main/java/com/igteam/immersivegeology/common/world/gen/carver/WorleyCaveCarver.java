@@ -21,8 +21,8 @@ public class WorleyCaveCarver {
 	// depth to fill the lower levers with a liquid
 	private static int LIQUID_DEPTH_MAX = 11;
 	private static int LIQUID_DEPTH_MIN = 0;
-	private static final float NOISE_THRESHOLD = 0.5f;
-	private static final float HEIGHT_FADE_THRESHOLD = 70;
+	private static final float NOISE_THRESHOLD = 0.4f;
+	private static final float HEIGHT_FADE_THRESHOLD = 72;
 	
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -33,7 +33,7 @@ public class WorleyCaveCarver {
 	private static final IGBiome OCEAN = IGBiomes.OCEAN;
 	private static final IGBiome OCEAN_DEEP = IGBiomes.DEEP_OCEAN;
 	private static final IGBiome OCEAN_EDGE = IGBiomes.OCEAN_EDGE;
-	//private static final IGBiome DEEP_OCEAN_VOLCANIC = IGBiomes.DEEP_OCEAN_VOLCANIC;
+	private static final IGBiome OCEAN_DEEP_VOLCANIC = IGBiomes.DEEP_OCEAN_VOLCANIC;
 	
 	// size of the cave intrest points!
 	private static final float FEATURE_SIZE = 24;
@@ -132,8 +132,13 @@ public class WorleyCaveCarver {
                                     	LIQUID_DEPTH_MAX = 78;
                                     	replacementAir = WATER;
                                     }
-                                    
                                     if(chunkIn.getBiome(pos) == OCEAN_DEEP) {
+                                    	LIQUID_DEPTH_MAX = 14;
+                                    	replacementLiquid = WATER;
+                                    	replacementAir = WATER;
+                                    }
+                                    
+                                    if(chunkIn.getBiome(pos) == OCEAN_DEEP_VOLCANIC) {
                                     	LIQUID_DEPTH_MAX = 14; // from 0 - 14 lava will fill
                                     	replacementLiquid = LAVA;
                                     	replacementAir = WATER; // from 14 to NOISE_THRESHOLD water will cut

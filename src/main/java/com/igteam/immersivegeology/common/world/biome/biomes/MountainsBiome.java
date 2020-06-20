@@ -19,7 +19,7 @@ public class MountainsBiome extends IGBiome
 
     public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains)
     {
-        super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f),0.35f,0.6f);
+        super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f),0.35f,(isOceanMountains) ? 0.85f : 0.6f);
 
         this.baseHeight = baseHeight;
         this.scaleHeight = scaleHeight;

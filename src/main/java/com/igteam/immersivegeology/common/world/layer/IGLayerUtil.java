@@ -44,10 +44,9 @@ public class IGLayerUtil {
 	
 	/* Biomes */
 	public static final int OCEAN = getId(IGBiomes.OCEAN);
-	//public static final int DEEP_OCEAN_VOLCANIC = getId(IGBiomes.DEEP_OCEAN_VOLCANIC);
 	public static final int DEEP_OCEAN = getId(IGBiomes.DEEP_OCEAN);
 	public static final int OCEAN_EDGE = getId(IGBiomes.OCEAN_EDGE);
-	public static final int DEEP_OCEAN_RIDGE = getId(IGBiomes.DEEP_OCEAN_RIDGE);
+	public static final int DEEP_OCEAN_VOLCANIC = getId(IGBiomes.DEEP_OCEAN_VOLCANIC);
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
 	public static final int DESERT = getId(IGBiomes.DESERT);
 	public static final int OASIS = getId(IGBiomes.OASIS);
@@ -213,7 +212,7 @@ public class IGLayerUtil {
 	}
 
 	public static boolean isOcean(int value) {
-		return value == OCEAN || value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE || value == OCEAN_EDGE;
+		return value == OCEAN || value == DEEP_OCEAN || value == DEEP_OCEAN_VOLCANIC || value == OCEAN_EDGE;
 	}
 
 	public static boolean isShallowOcean(int value) {
@@ -235,6 +234,6 @@ public class IGLayerUtil {
 
 	public static boolean isDeepOcean(int value) {
 		// TODO Auto-generated method stub
-		return value == DEEP_OCEAN || value == DEEP_OCEAN_RIDGE;
+		return value == DEEP_OCEAN || value == DEEP_OCEAN_VOLCANIC;
 	}
 }

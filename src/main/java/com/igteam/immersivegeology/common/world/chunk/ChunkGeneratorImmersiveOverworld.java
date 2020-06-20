@@ -228,6 +228,7 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 						pos.setPos(chunkX + x, y, chunkZ + z);
 						Biome biome = chunk.getBiome(new BlockPos(x, y, z));
 						if (b.getLbiome() == biome) {
+							
 							noGen = false;
 							int lc = b.getLayerCount();
 							for (int l = lc; l > 0; l--) {
@@ -262,7 +263,7 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 							int totHeight = 256;
 							if ((y < (totHeight * l) / lc)
 									&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
-								replaceBlock = b.getLayerBlock(l);
+								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material); 
 
 								// setting the block in here isn't super efficient,
 								double nh =  replaceBlock.getDefaultHardness();

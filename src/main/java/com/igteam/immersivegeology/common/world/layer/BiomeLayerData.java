@@ -39,7 +39,7 @@ public class BiomeLayerData {
 	}
 
 	public IGBaseBlock getLayerBlock(int layerID) {
-		return layerMap.get(layerID - 1);
+		return layerMap.get(layerID - 1); //take one off the input id as we need to start at 0!
 	}
 
 	public LayerOre getLayerOre(int layerID) {

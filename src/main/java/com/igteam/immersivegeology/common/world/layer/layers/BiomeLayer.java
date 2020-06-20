@@ -23,7 +23,7 @@ public enum BiomeLayer implements IC0Transformer {
 	public int apply(INoiseRandom context, int value) {
 		if (value == DEEP_OCEAN) {
 			if (context.random(8) == 0) {
-				return DEEP_OCEAN_RIDGE;
+				return DEEP_OCEAN_VOLCANIC;
 			} else {
 				return DEEP_OCEAN;
 			}

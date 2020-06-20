@@ -18,11 +18,11 @@ public enum OceanLayer implements ICastleTransformer
             {
                 return IGLayerUtil.OCEAN;
             }
-            else if (north == IGLayerUtil.DEEP_OCEAN_RIDGE || west == IGLayerUtil.DEEP_OCEAN_RIDGE || south == IGLayerUtil.DEEP_OCEAN_RIDGE || east == IGLayerUtil.DEEP_OCEAN_RIDGE)
+            else if (north == IGLayerUtil.DEEP_OCEAN_VOLCANIC || west == IGLayerUtil.DEEP_OCEAN_VOLCANIC || south == IGLayerUtil.DEEP_OCEAN_VOLCANIC || east == IGLayerUtil.DEEP_OCEAN_VOLCANIC)
             {
                 if (context.random(3) == 0)
                 {
-                    return IGLayerUtil.DEEP_OCEAN_RIDGE;
+                    return IGLayerUtil.DEEP_OCEAN_VOLCANIC;
                 }
             }
         }

@@ -52,7 +52,7 @@ public final class WorldGenRegistryEvents {
         event.getRegistry().registerAll(
             new OceanBiome(false).setRegistryName("ocean"),
             new OceanBiome(true).setRegistryName("deep_ocean"),
-            new OceanBiome(true).setRegistryName("deep_ocean_ridge"),
+            new OceanBiome(true).setRegistryName("deep_ocean_volcanic"),
             new OceanBiome(true).setRegistryName("ocean_edge"),
             
             new PlainsBiome(-4, 10).setRegistryName("plains"),

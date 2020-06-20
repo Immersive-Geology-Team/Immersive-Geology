@@ -11,47 +11,50 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 
 public interface ISurfacePart {
-	
-	
+
 	@Nonnull
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart grass() {
 		// TODO use x z and a dirt data to find the correct dirt types for biomes!
 		return (data, x, z) -> data.getGrassBlock(x, z);
 	}
-	
+
 	@Nonnull
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart dirt() {
 		// TODO use x z and a dirt data to find the correct dirt types for biomes!
 		return (data, x, z) -> data.getDirtBlock(x, z);
 	}
-	
+
 	@Nonnull
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart sand() {
 		// TODO use x z and a dirt data to find the correct dirt types for biomes!
 		return (data, x, z) -> Blocks.SAND.getDefaultState();
 	}
 
 	@Nonnull
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart gravel() {
 		// TODO use x z and a dirt data to find the correct dirt types for biomes!
 		return (data, x, z) -> Blocks.GRAVEL.getDefaultState();
 	}
-	
+
 	@Nonnull
-    @SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart clay() {
 		// TODO use x z and a dirt data to find the correct dirt types for biomes!
 		return (data, x, z) -> Blocks.CLAY.getDefaultState();
 	}
-	
-	BlockState get(SurfaceData data, int x, int z);
 
+	@Nonnull
+	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart rock() {
 		// TODO Auto-generated method stub
-		return (data, x, y) -> IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material).getDefaultState();
+		return (data, x, y) -> IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material)
+				.getDefaultState();
 	}
-}  
+
+	BlockState get(SurfaceData data, int x, int z);
+
+}

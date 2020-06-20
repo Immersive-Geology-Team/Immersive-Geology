@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 
-public interface IGSurfaceBlock {
+public interface IIGSurfaceBlock {
 
 	
 	public static BlockState getGrassState(float temp, float rain){
@@ -18,7 +18,7 @@ public interface IGSurfaceBlock {
 			return (biome instanceof OasisBiome) ? Blocks.RED_SAND.getDefaultState() : Blocks.SAND.getDefaultState();
 		} else if(temp < 0.9 && temp > 0.7) {
 			if(rain > 0.8) {
-				return Blocks.PODZOL.getDefaultState();
+				return Blocks.PODZOL.getDefaultState(); //flooded mountains are usually found here
 			} else {
 				return Blocks.TERRACOTTA.getDefaultState();
 			}
@@ -40,6 +40,4 @@ public interface IGSurfaceBlock {
 			return Blocks.DIRT.getDefaultState();
 		}
 	}
-	
-	
 }

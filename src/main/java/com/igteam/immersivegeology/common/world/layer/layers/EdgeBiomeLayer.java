@@ -41,13 +41,11 @@ public enum EdgeBiomeLayer implements ICastleTransformer {
 	        		return IGLayerUtil.OCEAN_EDGE;
 	        	}
 	        }
-	        else if (center == IGLayerUtil.DEEP_OCEAN_RIDGE)
+	        else if (center == IGLayerUtil.DEEP_OCEAN_VOLCANIC)
 	        {
-	            // No inverse, as we can't replace ocean with anything at this point
 	            if (matcher.test(i -> i == IGLayerUtil.OCEAN))
 	            {
 	            	return IGLayerUtil.DEEP_OCEAN;
-	            	
 	            }
 	        }
 	        // Inverses of above conditions

@@ -17,7 +17,6 @@ public class OasisBiome extends IGBiome
     public OasisBiome()
     {
         super(new Builder().category(Category.RIVER).precipitation(RainType.RAIN).downfall(0.05f).temperature(0.91f),.91f,.05f);
-
         IGDefaultBiomeFeatures.addCarvers(this);
     }
 

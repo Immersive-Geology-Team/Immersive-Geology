@@ -34,7 +34,7 @@ public enum ShoreLayer implements ICastleTransformer
                 return IGLayerUtil.SHORE;
             }
         }
-        else if (center == IGLayerUtil.DEEP_OCEAN || center == IGLayerUtil.DEEP_OCEAN_RIDGE)
+        else if (center == IGLayerUtil.DEEP_OCEAN || center == IGLayerUtil.DEEP_OCEAN_VOLCANIC)
         {
             if (matcher.test(i -> i == IGLayerUtil.OCEAN))
             {
