@@ -1,34 +1,37 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
-import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
-import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
+import com.igteam.immersivegeology.common.network.ChunkDataPacket;
+import com.igteam.immersivegeology.common.network.PacketHandler;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
+import com.igteam.immersivegeology.common.world.climate.ClimateIG;
 import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
-import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.profiler.IProfiler;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkSection;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class WorldEventHandler {
 
@@ -49,6 +52,57 @@ public class WorldEventHandler {
 		}
 	}
 	
+    @SubscribeEvent
+    public static void onChunkWatchWatch(ChunkWatchEvent.Watch event)
+    {
+        ChunkPos pos = event.getPos();
+        if (pos != null)
+        {
+            ChunkData.get(event.getWorld().getChunk(pos.asBlockPos())).ifPresent(data -> {
+                // Update server side climate cache
+                ClimateIG.update(pos, data.getRegionalTemp(), data.getRainfall());
+
+                // Update client side data
+                PacketHandler.get().send(PacketDistributor.PLAYER.with(event::getPlayer), new ChunkDataPacket(pos.x, pos.z, data));
+            });
+        }
+    }
+	
+	@SubscribeEvent
+	public void onGameRender(RenderGameOverlayEvent.Post event) {
+		Minecraft mc = Minecraft.getInstance();
+		IProfiler profiler = mc.getProfiler();
+		ItemStack main = mc.player.getHeldItemMainhand();
+		ItemStack offhand = mc.player.getHeldItemOffhand();
+		
+		RayTraceResult pos = mc.objectMouseOver;
+		
+		if(pos != null) {
+			BlockPos bpos = pos.getType() == RayTraceResult.Type.BLOCK ? ((BlockRayTraceResult) pos).getPos() : null;
+			BlockState state = bpos != null ? mc.world.getBlockState(bpos) : null;
+			Block block = state == null ? null : state.getBlock();
+			TileEntity tile = bpos != null ? mc.world.getTileEntity(bpos) : null;
+			
+			if(event.getType() == ElementType.ALL) {
+				profiler.startSection("ig-debug-info");
+				int w = mc.mainWindow.getScaledWidth();
+				int h = mc.mainWindow.getScaledHeight();
+				ChunkPos cpos = new ChunkPos(mc.player.chunkCoordX, mc.player.chunkCoordZ);
+				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world);
+				if(chunkDataProvider != null) {
+					mc.fontRenderer.drawStringWithShadow("Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()), w / 2 + 30, h / 2 + 10, 0xFFAA00);
+					mc.fontRenderer.drawStringWithShadow("Average Temp: " + String.valueOf(chunkDataProvider.get(cpos).getAvgTemp()), w / 2 + 30, h / 2 + 20, 0xFFAA00);
+					mc.fontRenderer.drawStringWithShadow("Regional Rainfall: " + String.valueOf(chunkDataProvider.get(cpos).getRainfall()), w / 2 + 30, h / 2 + 30, 0xFFAA00);
+				}
+				profiler.endSection();
+			}
+		}
+	}
+	
+	
+	/*
+	 * TODO Better Water fog for deep sea
+	 * 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onRenderFog(EntityViewRenderEvent.FogDensity event) {
@@ -58,7 +112,11 @@ public class WorldEventHandler {
 			event.setCanceled(true);
 		}
 	}
-
+	*/
+	
+	/*
+	 * Part of old stone replace method
+	 * 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onChunkPopulate(ChunkEvent.Load event) {
 
@@ -81,7 +139,33 @@ public class WorldEventHandler {
 			}
 		}
 	}
+    */
+	
+    @SubscribeEvent
+    public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event)
+    {
+        World world = event.getObject().getWorld();
+        if (world.getWorldType() == ImmersiveGeology.getWorldType())
+        {
+            // Add the rock data to the chunk capability, for long term storage
+            ChunkData data;
+            ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(world);
+            if (chunkDataProvider != null)
+            {
+                data = chunkDataProvider.get(event.getObject());
+            }
+            else
+            {
+                data = new ChunkData();
+            }
 
+            event.addCapability(ChunkDataCapability.KEY, data);
+        }
+    }
+	
+	/*
+	 * Old Layer Method
+	 * 
 	private void replaceStone(IChunk chunk) {
 
 		int xPos = chunk.getPos().x * 16;
@@ -134,4 +218,5 @@ public class WorldEventHandler {
 			}
 		}
 	}
+	*/
 }

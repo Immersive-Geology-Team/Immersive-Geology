@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
+
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
@@ -22,6 +25,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -31,8 +35,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.Heightmap.Type;
 import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
@@ -41,7 +47,7 @@ import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 
-public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<ImmersiveGenerationSettings> {
+public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGenerationSettings> {
 
 	public static WorldLayerData data;
 
@@ -55,15 +61,16 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 	
 	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
+	private final ChunkDataProvider chunkDataProvider;
 	
 	public ChunkGeneratorImmersiveOverworld(IWorld world, BiomeProvider provider,
 			ImmersiveGenerationSettings settings) {
-		super(world, provider, 4, 8, 256, settings, false);
+		super(world, provider, settings);
 		boolean usePerlin = true;
-		this.surfaceDepthNoise = (INoiseGenerator) (usePerlin ? new PerlinNoiseGenerator(this.randomSeed, 4)
-				: new OctavesNoiseGenerator(this.randomSeed, 4));
-		data = new WorldLayerData();
 		Random seedGenerator = new Random(world.getSeed());
+		this.surfaceDepthNoise = (INoiseGenerator) (usePerlin ? new PerlinNoiseGenerator(seedGenerator, 4)
+				: new OctavesNoiseGenerator(seedGenerator, 4));
+		data = new WorldLayerData();
 		final long biomeNoiseSeed = seedGenerator.nextLong();
 
 		this.biomeNoiseMap = new HashMap<>();
@@ -72,6 +79,8 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 		this.biomeProvider = (ImmersiveBiomeProvider) provider;
 		
 		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
+		
+		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
 
 	
@@ -303,12 +312,13 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 		random.setBaseChunkSeed(chunkPos.x, chunkPos.z);
 		
 		Biome[] biomes = chunk.getBiomes();
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+				
+		//TODO Get this to work with the chunk data provider to allow the game to change it's temp
+		float temperature = chunkDataProvider.getOrCreate(chunkPos).getRegionalTemp();
+		float rainfall = chunkDataProvider.getOrCreate(chunkPos).getRainfall();
 		
 		for(int x = 0; x < 16; x++) {
 			for(int z = 0; z < 16; z++) {
-				float temperature = 5;
-				float rainfall = 200;
 				float noise = 0;
 				int topYLevel = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, x, z) + 1;
 				
@@ -316,13 +326,12 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 			}
 		}
 		
-		
 		makeBedrock(chunk, random);
 	}
 
 	public static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-
-	@Override
+	
+	
 	public void makeBedrock(IChunk chunk, Random random) {
 		// should not reference ImersiveGenerationSettings directly, should use
 		// getSettings()
@@ -342,22 +351,16 @@ public class ChunkGeneratorImmersiveOverworld extends NoiseChunkGenerator<Immers
 			}
 		}
 	}
-
+	
+    @Nonnull
+    public ChunkDataProvider getChunkDataProvider()
+    {
+        return chunkDataProvider;
+    }
+    
 	@Override
-	protected double[] func_222549_a(int p_222549_1_, int p_222549_2_) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected double func_222545_a(double p_222545_1_, double p_222545_3_, int p_222545_5_) {
+	public int func_222529_a(int p_222529_1_, int p_222529_2_, Type p_222529_3_) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	protected void func_222548_a(double[] p_222548_1_, int p_222548_2_, int p_222548_3_) {
-		// TODO Auto-generated method stub
-
 	}
 }

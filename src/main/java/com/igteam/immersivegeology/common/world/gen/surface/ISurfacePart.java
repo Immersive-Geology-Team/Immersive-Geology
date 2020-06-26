@@ -15,46 +15,40 @@ public interface ISurfacePart {
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart grass() {
-		// TODO use x z and a dirt data to find the correct dirt types for biomes!
-		return (data, x, z) -> data.getGrassBlock(x, z);
+		return (data, x, z, rainfall, temp) -> data.getGrassBlock(x, z, rainfall, temp);
 	}
 
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart dirt() {
-		// TODO use x z and a dirt data to find the correct dirt types for biomes!
-		return (data, x, z) -> data.getDirtBlock(x, z);
+		return (data, x, z, rainfall, temp) -> data.getDirtBlock(x, z);
 	}
-
+ 
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart sand() {
-		// TODO use x z and a dirt data to find the correct dirt types for biomes!
-		return (data, x, z) -> Blocks.SAND.getDefaultState();
+		return (data, x, z, rainfall, temp) -> Blocks.SAND.getDefaultState();
 	}
 
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart gravel() {
-		// TODO use x z and a dirt data to find the correct dirt types for biomes!
-		return (data, x, z) -> Blocks.GRAVEL.getDefaultState();
+		return (data, x, z, rainfall, temp) -> Blocks.GRAVEL.getDefaultState();
 	}
 
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart clay() {
-		// TODO use x z and a dirt data to find the correct dirt types for biomes!
-		return (data, x, z) -> Blocks.CLAY.getDefaultState();
+		return (data, x, z, rainfall, temp) -> Blocks.CLAY.getDefaultState();
 	}
 
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart rock() {
-		// TODO Auto-generated method stub
-		return (data, x, y) -> IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material)
+		return (data, x, y, rainfall, temp) -> IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material)
 				.getDefaultState();
 	}
 
-	BlockState get(SurfaceData data, int x, int z);
+	BlockState get(SurfaceData data, int x, int z, float rainfall, float temp);
 
 }

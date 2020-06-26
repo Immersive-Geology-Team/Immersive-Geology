@@ -14,7 +14,7 @@ import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 public class NoiseGenTester {
 	 public static void greyWriteImage(double[][] data){
-	        //this takes and array of doubles between 0 and 1 and generates a grey scale image from them
+	        //this takes an array of doubles between 0 and 1 and generates a grey scale image from them
 
 	        BufferedImage image = new BufferedImage(data.length,data[0].length, BufferedImage.TYPE_INT_RGB);
 

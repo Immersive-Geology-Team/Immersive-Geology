@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunk;
 
 public class DefaultSurfaceBuilder implements ISurfaceBuilder {
@@ -33,13 +34,11 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	        int localX = x & 15;
 	        int localZ = z & 15;
 	        
-	        Block defaultBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material);
-	        
 	        SurfaceData surface = new SurfaceData(chunkIn);
 	        
-	        BlockState stateUnder = config.getUnder().get(surface, localX, localZ);
-	        BlockState stateUnderWater = config.getUnderWater().get(surface, localX, localZ);
-	        BlockState topBlock = config.getTop().get(surface, localX, localZ);
+	        BlockState stateUnder = config.getUnder().get(surface, localX, localZ, temperature, rainfall);
+	        BlockState stateUnderWater = config.getUnderWater().get(surface, localX, localZ, temperature, rainfall);
+	        BlockState topBlock = config.getTop().get(surface, localX, localZ, temperature, rainfall);
 	        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 	        for (int y = startHeight; y >= 0 && surfaceFlag != 0; y--)

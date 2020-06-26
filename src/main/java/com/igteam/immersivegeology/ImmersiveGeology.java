@@ -7,10 +7,12 @@ import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.handler.CreativeMenuHandler;
 import com.igteam.immersivegeology.common.CommonProxy;
 import com.igteam.immersivegeology.common.IGContent;
+import com.igteam.immersivegeology.common.network.PacketHandler;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import com.igteam.immersivegeology.common.world.WorldEventHandler;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
 import com.igteam.immersivegeology.server.ServerProxy;
 
 import net.minecraft.util.ResourceLocation;
@@ -92,6 +94,9 @@ public class ImmersiveGeology
 		proxy.preInitEnd();
 		//Previously in INIT
 		proxy.init();
+		
+		PacketHandler.setup();
+		ChunkDataCapability.setup();
 		IGContent.init();
 
 		proxy.initEnd();
