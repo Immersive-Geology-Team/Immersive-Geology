@@ -68,7 +68,8 @@ public final class WorldGenRegistryEvents {
 
             new MountainsBiome(48, 56, false).setRegistryName("mountains"),
             new MountainsBiome(30, 64, true).setRegistryName("flooded_mountains"),
-            new CanyonsBiome(-7, 26).setRegistryName("canyons"),
+            new MountainsBiome(48, 64, true, true).setRegistryName("lush_mountains"),
+            new CanyonsBiome(-7, 36).setRegistryName("canyons"),
 
             new ShoreBiome(false).setRegistryName("shore"),
             new ShoreBiome(true).setRegistryName("stone_shore"),

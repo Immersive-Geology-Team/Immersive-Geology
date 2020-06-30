@@ -13,7 +13,7 @@ public final class ClimateCache {
 
 	    @Nonnull
 	    public ClimateData get(BlockPos pos)
-	    {
+	    { 
 	        return get(new ChunkPos(pos));
 	    }
 

@@ -27,14 +27,11 @@ public class SurfaceData {
 		Biome biome = chunkData.getBiome(pos);
 		if(biome instanceof IGBiome) {
 			IGBiome igBiome = (IGBiome) biome;
-			float biomeTemp = igBiome.getTemperature(pos);
-			float biomeRainfall = igBiome.getBrain();
-
-			return IIGSurfaceBlock.getGrassState(igBiome, biomeTemp, biomeRainfall, ChunkTemp, ChunkRain);
+			return IIGSurfaceBlock.getGrassState(igBiome, ChunkTemp, ChunkRain);
 		} else {
 			return Blocks.WHITE_WOOL.getDefaultState(); 
 		} 
-	}
+	} 
 	
 	public BlockState getDirtBlock(int x, int z) {
 		//Works on servers Yay

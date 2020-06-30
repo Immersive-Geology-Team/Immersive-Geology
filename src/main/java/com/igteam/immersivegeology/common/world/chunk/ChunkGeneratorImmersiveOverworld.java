@@ -47,6 +47,10 @@ import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 
+/**
+ * @author alcatrazEscapee modified for use in IG by Muddykat
+ */
+
 public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGenerationSettings> {
 
 	public static WorldLayerData data;
@@ -122,14 +126,14 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		// The spread biomes (for calculating terrain smoothing), and the 16x16 biome
 		// grid (for height map creation)
-		Biome[] spreadBiomes = biomeProvider.getBiomes(chunkX - 4, chunkZ - 4, 24, 24, false);
-		Biome[] localBiomes = new Biome[16 * 16];
+		IGBiome[] spreadBiomes = biomeProvider.getBiomes(chunkX - 4, chunkZ - 4, 24, 24, false);
+		IGBiome[] localBiomes = new IGBiome[16 * 16];
 
 		// Build the base height map, and also assign surface types (different from
 		// biomes because we need more control)
 		double[] baseHeight = new double[16 * 16];
 		double[] baseRockHeight = new double[16 * 16];
-		Object2DoubleMap<Biome> heightBiomeMap = new Object2DoubleOpenHashMap<>(4);
+		Object2DoubleMap<IGBiome> heightBiomeMap = new Object2DoubleOpenHashMap<>(4);
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				// At each position, apply the parabolic field to a 9x9 square area around the
@@ -140,30 +144,28 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 				for (int xOffset = 0; xOffset < 9; xOffset++) {
 					for (int zOffset = 0; zOffset < 9; zOffset++) {
 						// Get the biome at the position and add it to the height biome map
-						Biome biomeAt = spreadBiomes[(x + xOffset) + 24 * (z + zOffset)];
+						IGBiome biomeAt = spreadBiomes[(x + xOffset) + 24 * (z + zOffset)];
 						heightBiomeMap.mergeDouble(biomeAt, PARABOLIC_FIELD[xOffset + 9 * zOffset], Double::sum);
-
 						// Sum the rock layer height
-						baseRockHeight[z + 16 * x] += PARABOLIC_FIELD[zOffset + 9 * xOffset] * (SEA_LEVEL + 4);// TODO
-																												// biomeAt.getDefaultRockHeight();
+						baseRockHeight[z + 16 * x] += PARABOLIC_FIELD[zOffset + 9 * xOffset] * (SEA_LEVEL / 2);																			// biomeAt.getDefaultRockHeight();
 					}
 				}
 
 				// The biome to reference when building the initial surface
-				Biome biomeAt = spreadBiomes[(x + 4) + 24 * (z + 4)];
-				Biome shoreBiomeAt = biomeAt, standardBiomeAt = biomeAt;
+				IGBiome biomeAt = spreadBiomes[(x + 4) + 24 * (z + 4)];
+				IGBiome shoreBiomeAt = biomeAt, standardBiomeAt = biomeAt;
 				double maxShoreWeight = 0, maxStandardBiomeWeight = 0;
 
 				// calculate the total height based on the biome noise map, using a custom
 				// Noise2D for each biome
-				for (Object2DoubleMap.Entry<Biome> entry : heightBiomeMap.object2DoubleEntrySet()) {
+				for (Object2DoubleMap.Entry<IGBiome> entry : heightBiomeMap.object2DoubleEntrySet()) {
 					double weight = entry.getDoubleValue();
 					double height = weight * biomeNoiseMap.get(entry.getKey()).noise(chunkX + x, chunkZ + z);
 					totalHeight += height;
-					if (entry.getKey() == Biomes.RIVER) {
+					if (entry.getKey() == IGBiomes.RIVER) {
 						riverHeight += height;
 						riverWeight += weight;
-					} else if (entry.getKey() == Biomes.BEACH || entry.getKey() == Biomes.STONE_SHORE) {
+					} else if (entry.getKey() == IGBiomes.SHORE || entry.getKey() == IGBiomes.STONE_SHORE) {
 						shoreHeight += height;
 						shoreWeight += weight;
 
@@ -190,14 +192,14 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 						double adjustedAboveWaterDelta = 0.02 * aboveWaterDelta * (40 - aboveWaterDelta) - 0.48;
 						actualHeight = riverHeight / riverWeight + adjustedAboveWaterDelta;
 					}
-					biomeAt = Biomes.RIVER; // Use river surface for the bottom of the river + small shore beneath
+					biomeAt = IGBiomes.RIVER; // Use river surface for the bottom of the river + small shore beneath
 											// cliffs
 				} else if (riverWeight > 0) {
 					double adjustedRiverWeight = 0.6 * riverWeight;
 					actualHeight = (totalHeight - riverHeight) * ((1 - adjustedRiverWeight) / (1 - riverWeight))
 							+ riverHeight * (adjustedRiverWeight / riverWeight);
 
-					if (biomeAt == Biomes.RIVER) {
+					if (biomeAt == IGBiomes.RIVER) {
 						biomeAt = standardBiomeAt;
 					}
 				}
@@ -242,24 +244,29 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							int lc = b.getLayerCount();
 							for (int l = lc; l > 0; l--) {
 								int totHeight = 256;
-								if ((y < (totHeight * l) / lc)
-										&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
+								replaceBlock = b.getLayerBlock(l);
+								
+								if((y <= (totHeight * l) / lc) && (y > ((totHeight * l) / lc) - 2)) {
+									if(random.nextInt(3) == 1){
+										replaceBlock = b.getLayerBlock(Math.min(lc,l + 1));
+									}
+								} else {
 									replaceBlock = b.getLayerBlock(l);
-									
-									
+								}
+								
+								if ((y <= (totHeight * l) / lc)
+										&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 									
 									// setting the block in here isn't super efficient,
 									double nh =  replaceBlock.getDefaultHardness();
-
 									double max = Math.max(1, y);
 									double log = Math.log(max / 512d);
-								
 									nh = -(Math.pow(Math.E, 3.6) * log - 25);
+																			
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
-											.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-													 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
-											true);
-
+									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
+											 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
+									true);
 								}
 							}
 						}
@@ -270,7 +277,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 						int lc = b.getLayerCount();
 						for (int l = lc; l > 0; l--) {
 							int totHeight = 256;
-							if ((y < (totHeight * l) / lc)
+							if ((y <= (totHeight * l) / lc)
 									&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material); 
 
@@ -280,11 +287,22 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 								double max = Math.max(1, y);
 								double log = Math.log(max / 512d);
 								nh = -(Math.pow(Math.E, 3.6) * log) - 25;
-								chunk.setBlockState(pos, replaceBlock.getDefaultState()
-												.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-												Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
-										true);
+								
+								
+								
+								for(int randomLevel = 0; randomLevel < 3; randomLevel++) {	
+									
+									if(randomLevel != 0 && random.nextInt() % 2 == 0) {
+										pos.add(0, random.nextInt(2) - random.nextInt(2), 0);
+									}
+									
+									chunk.setBlockState(pos, replaceBlock.getDefaultState()
+									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
+											 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
+									true);
+								}
 
+								
 							}
 						}
 					}
@@ -321,7 +339,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 			for(int z = 0; z < 16; z++) {
 				float noise = 0;
 				int topYLevel = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, x, z) + 1;
-				
 				((IGBiome) biomes[x + 16 * z]).getIGSurfaceBuilder().buildSurface(random, chunk, chunkPos.getXStart() + x, chunkPos.getZStart() + z, topYLevel + 1, temperature, rainfall, noise);
 			}
 		}

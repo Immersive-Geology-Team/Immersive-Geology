@@ -3,12 +3,18 @@ import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGener
 
 import javax.annotation.Nonnull;
 
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
+import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.biome.Biome.RainType;
 
 public class MountainsBiome extends IGBiome
@@ -16,16 +22,29 @@ public class MountainsBiome extends IGBiome
     private final float baseHeight;
     private final float scaleHeight;
     private final boolean isOceanMountains;
+    private final boolean isLushMountains;
 
-    public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains)
+    
+    public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains) {
+    	this(baseHeight, scaleHeight, isOceanMountains, false);
+    }
+    
+    public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains, boolean isLushMountains)
     {
         super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f),0.35f,(isOceanMountains) ? 0.85f : 0.6f);
 
         this.baseHeight = baseHeight;
         this.scaleHeight = scaleHeight;
         this.isOceanMountains = isOceanMountains;
-
+        this.isLushMountains = isLushMountains;
+        
+        if(isLushMountains) {
+        	IGDefaultBiomeFeatures.addLeafShurbs(this);
+        }
+        
         IGDefaultBiomeFeatures.addCarvers(this);
+        DefaultBiomeFeatures.addTaigaRocks(this);
+
     }
 
     @Nonnull
@@ -38,4 +57,14 @@ public class MountainsBiome extends IGBiome
         return (x, z) -> SEA_LEVEL + baseHeight + scaleHeight * mountainNoise.noise(x, z);
     }
 
+	@Override
+	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
+		// TODO Auto-generated method stub
+		if(isLushMountains) {
+			return Blocks.GRASS_BLOCK.getDefaultState();
+		} else {
+			return IGBlockGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Rhyolite.material).getDefaultState();
+		}
+	}
+    
 }

@@ -75,14 +75,15 @@ public enum EnumMaterials
 	Gabbros(new MaterialStoneGabbros()),
 	Marble(new MaterialStoneMarble()),	
 	Limestone(new MaterialStoneLimestone()),
-	Pegamite(new MaterialStonePegamite());
+	Pegamite(new MaterialStonePegamite()),
+	Regolith(new MaterialStoneRegolith());
 	
 	public final Material material;
 
 	EnumMaterials(Material material)
 	{
 		this.material = material;
-	}
+	} 
 
 	public static Stream<EnumMaterials> filterMetals()
 	{

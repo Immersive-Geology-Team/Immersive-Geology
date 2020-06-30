@@ -42,7 +42,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundNBT>{
         regionalTemp = 0;
         avgTemp = 10;
     }
-
+ 
     //Original Used RockData stored in chunks to change rock layers.
     
     public float getRainfall()
@@ -64,7 +64,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundNBT>{
     {
         this.regionalTemp = regionalTemp;
     }
-
+    
     public float getAvgTemp()
     {
         return avgTemp;
@@ -81,7 +81,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundNBT>{
     {
         return cap == ChunkDataCapability.CAPABILITY ? capability.cast() : LazyOptional.empty();
     }
-
+ 
     @Override
     public CompoundNBT serializeNBT()
     {

@@ -6,12 +6,16 @@ import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOve
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.help.Helpers;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.NetherGenSettings;
 import net.minecraftforge.registries.ObjectHolder;
 
 public class WorldTypeImmersive extends WorldType {
@@ -30,9 +34,15 @@ public class WorldTypeImmersive extends WorldType {
 	
 	@Override
 	public ChunkGenerator<?> createChunkGenerator(World world) {
-		ImmersiveGenerationSettings settings = CHUNK_GENERATOR_TYPE.createSettings();
-		settings.setWorldInfo(world.getWorldInfo());
-		BiomeProvider biomeProvider = BIOME_PROVIDER_TYPE.create(settings);
-		return CHUNK_GENERATOR_TYPE.create(world, biomeProvider, settings);
+		if (world.getDimension().getType() == DimensionType.OVERWORLD)
+    	{
+			ImmersiveGenerationSettings settings = CHUNK_GENERATOR_TYPE.createSettings();
+			settings.setWorldInfo(world.getWorldInfo());
+			BiomeProvider biomeProvider = BIOME_PROVIDER_TYPE.create(settings);
+			return CHUNK_GENERATOR_TYPE.create(world, biomeProvider, settings);
+    	} else 
+    	{
+    		return super.createChunkGenerator(world);
+    	}
 	}
 }	

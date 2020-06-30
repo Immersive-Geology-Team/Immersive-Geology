@@ -41,7 +41,7 @@ public class ChunkDataProvider {
                     return ((ChunkGeneratorImmersiveOverworld) chunkGenerator).getChunkDataProvider();
                 }
             }
-            else
+            else 
             { 
             	Random random = new Random();
             	random.setSeed(world.getSeed());
@@ -53,14 +53,14 @@ public class ChunkDataProvider {
     	random.setSeed(world.getSeed());
     	return new ChunkDataProvider(world, new ImmersiveGenerationSettings(), random);
     }
-    
+     
     private final Map<ChunkPos, ChunkData> cachedChunkData;
     private final IWorld world;
     private final int bottomLayerBaseHeight, middleLayerBaseHeight;
 
     private final INoise2D regionalTempNoise;
     private final INoise2D rainfallNoise;
-
+    
     public ChunkDataProvider(IWorld world, ImmersiveGenerationSettings settings, Random seedGenerator)
     {
         this.cachedChunkData = new FiniteLinkedHashMap<>(256);
@@ -70,10 +70,14 @@ public class ChunkDataProvider {
         this.bottomLayerBaseHeight = 30;
         this.middleLayerBaseHeight = 30;
         
+        
         // Climate
         this.regionalTempNoise = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).scaled(-5.5f, 5.5f).flattened(-5, 5).spread(0.002f);
         this.rainfallNoise = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).scaled(-25, 525).flattened(0, 500).spread(0.002f);
-    }
+        
+        final INoise2D warpX = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).spread(0.1f).scaled(-30, 30);
+        final INoise2D warpZ = new SimplexNoise2D(seedGenerator.nextLong() + 1).octaves(4).spread(0.1f).scaled(-30, 30);
+   }
 
     @Nonnull
     public ChunkData get(ChunkPos pos)
@@ -116,7 +120,7 @@ public class ChunkDataProvider {
         // Temperature / Rainfall
         data.setRainfall(rainfallNoise.noise(chunkX, chunkZ));
         data.setRegionalTemp(regionalTempNoise.noise(chunkX, chunkZ));
-        
+
         return data;
     }
 }

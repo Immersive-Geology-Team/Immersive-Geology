@@ -71,23 +71,19 @@ public class ImmersiveGeology
 	private static ImmersiveGeology INSTANCE;
 	
 	public static WorldTypeImmersive getWorldType()
-    { 
+    {
         return INSTANCE.worldType;
     }
-	
+	 
 	@SubscribeEvent
 	public void clientSetup(FMLClientSetupEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler()); 
 	}
-
-
 	
 	@SubscribeEvent
 	public void commonSetup(FMLCommonSetupEvent event)
 	{
-		
-		
 		//Previously in PREINIT
 		proxy.preInit();
 

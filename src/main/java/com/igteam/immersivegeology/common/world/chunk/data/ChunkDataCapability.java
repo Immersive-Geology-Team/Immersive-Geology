@@ -19,8 +19,8 @@ public class ChunkDataCapability {
     public static final Capability<ChunkData> CAPABILITY = Helpers.getNull();
     public static final ResourceLocation KEY = new ResourceLocation(MODID, "chunk_data");
 
-    public static void setup()
+    public static void setup() 
     {
         CapabilityManager.INSTANCE.register(ChunkData.class, new NoopStorage<>(), ChunkData::new);
     }
-}
+} 

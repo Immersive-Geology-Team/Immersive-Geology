@@ -4,13 +4,22 @@ import javax.annotation.Nonnull;
 
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
+import com.igteam.immersivegeology.common.world.gen.surface.ISurfacePart;
+import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-
+import com.igteam.immersivegeology.common.world.gen.surface.IIGSurfaceBlock;
 public abstract class IGBiome extends Biome {
 
 	protected final float btemp;
@@ -63,4 +72,8 @@ public abstract class IGBiome extends Biome {
 	public ISurfaceBuilder getIGSurfaceBuilder() {
 		return ISurfaceBuilder.DEFAULT;
 	}
+
+	@Nonnull
+	public abstract BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain);
+
 }

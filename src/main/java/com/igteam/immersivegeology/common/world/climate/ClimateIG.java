@@ -23,7 +23,7 @@ public class ClimateIG {
             return ((Chunk) chunk).getCapability(ChunkDataCapability.CAPABILITY).map(ChunkData::getAvgTemp).orElseGet(() -> getAvgTemp(pos));
         }
         return getAvgTemp(pos);
-    }
+    } 
 
     public static float getAvgTemp(BlockPos pos)
     {

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
@@ -22,7 +23,7 @@ public class BiomeLayerData {
 	private float baseHardnessMod;
 
 	public BiomeLayerData(Biome biome, float baseHardnessMod) {
-		this.lbiome = biome;
+		this.lbiome = biome; 
 		this.baseHardnessMod = baseHardnessMod;
 	}
 	
@@ -30,12 +31,16 @@ public class BiomeLayerData {
 		return layerMap;
 	}
 
-	public void addLayer(IGBaseBlock layerBlock) {
+	public void addLayer(IGBaseBlock layerBlock) { 
 		layerMap.add(layerBlock);
 	}
 
 	public void addLayerOre(int rarity, int veinSize, IGBaseBlock ore) {
-		layerOreMap.add(new LayerOre(rarity, veinSize, ore));
+
+	}
+	
+	public void addMachineOre(float coverage, EnumMaterials ore) {
+		layerOreMap.add(new LayerOre(coverage, ore));
 	}
 
 	public IGBaseBlock getLayerBlock(int layerID) {
@@ -60,38 +65,31 @@ public class BiomeLayerData {
 
 	public class LayerOre {
 
-		private int rarity, veinSize;
-		private Block ore;
+		private float coverage;
+		private EnumMaterials ore;
 
-		public LayerOre(int rarity, int veinSize, Block ore) {
-			this.rarity = rarity;
-			this.veinSize = veinSize;
+		public LayerOre(float coverage, EnumMaterials ore) {
+			this.coverage = coverage;
 			this.ore = ore;
 		}
 
-		public int getRarity() {
-			return rarity;
-		}
-
-		public void setRarity(int rarity) {
-			this.rarity = rarity;
-		}
-
-		public int getVeinSize() {
-			return veinSize;
-		}
-
-		public void setVeinSize(int veinSize) {
-			this.veinSize = veinSize;
-		}
-
-		public Block getOre() {
+		public EnumMaterials getOre() {
 			return ore;
 		}
 
-		public void setOre(Block ore) {
+		public void setOre(EnumMaterials ore) { 
 			this.ore = ore;
 		}
+
+		public float getCoverage() {
+			return coverage;
+		}
+
+		public void setCoverage(float coverage) {
+			this.coverage = coverage;
+		}
+		
+		
 	}
 
 	public int getLayerCount() {

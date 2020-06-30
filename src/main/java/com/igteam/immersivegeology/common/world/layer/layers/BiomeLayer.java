@@ -17,7 +17,7 @@ public enum BiomeLayer implements IC0Transformer {
 	public static final int[] MID_BIOMES = new int[]  { ROLLING_HILLS, OLD_MOUNTAINS, BADLANDS, HILLS, PLAINS };
 	
 	//never meets a low biome
-	public static final int[] HIGH_BIOMES = new int[] { DESERT, PLATEAU, BADLANDS, MOUNTAINS, FLOODED_MOUNTAINS };
+	public static final int[] HIGH_BIOMES = new int[] { DESERT, PLATEAU, BADLANDS, MOUNTAINS, FLOODED_MOUNTAINS, LUSH_MOUNTAINS};
 
 	@Override
 	public int apply(INoiseRandom context, int value) {

@@ -28,7 +28,7 @@ public class ClimateHelper {
 	    }
 
 	    /**
-	     * Range -32 to 35
+	     * Range -32 to 35 
 	     *
 	     * @param regionalTemp The base temp for the current location
 	     * @return z chunk coord

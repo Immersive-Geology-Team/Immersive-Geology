@@ -7,9 +7,13 @@ import javax.annotation.Nonnull;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
+import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 
 public class OceanBiome extends IGBiome {
@@ -22,14 +26,16 @@ public class OceanBiome extends IGBiome {
         if (isDeep)
         {
             this.depthMin = SEA_LEVEL - 80;
-            this.depthMax = SEA_LEVEL - 75;            
+            this.depthMax = SEA_LEVEL - 75;
+            
         }
         else
         {
             this.depthMin = SEA_LEVEL - 35;
             this.depthMax = SEA_LEVEL - 25;
         }
-
+        
+        DefaultBiomeFeatures.addKelp(this);
         IGDefaultBiomeFeatures.addOceanCarvers(this);
     }
 
@@ -47,4 +53,10 @@ public class OceanBiome extends IGBiome {
         final INoise2D warpZ = new SimplexNoise2D(seed + 1).octaves(4).spread(0.1f).scaled(-30, 30);
         return new SimplexNoise2D(seed).octaves(4).ridged().spread(0.04f).warped(warpX, warpZ).map(x -> x > 0.4 ? x - 0.8f : -x).scaled(-0.4f, 0.8f, depthMin, depthMax);
     }
+    
+	@Override
+	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
+		// TODO Auto-generated method stub
+		return Blocks.GRAVEL.getDefaultState();
+	}
 }

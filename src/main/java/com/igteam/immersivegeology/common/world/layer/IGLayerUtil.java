@@ -59,6 +59,7 @@ public class IGLayerUtil {
 	public static final int OLD_MOUNTAINS = getId(IGBiomes.OLD_MOUNTAINS);
 	public static final int MOUNTAINS = getId(IGBiomes.MOUNTAINS);
 	public static final int FLOODED_MOUNTAINS = getId(IGBiomes.FLOODED_MOUNTAINS);
+	public static final int LUSH_MOUNTAINS = getId(IGBiomes.LUSH_MOUNTAINS);
 	public static final int CANYONS = getId(IGBiomes.CANYONS);
 	public static final int SHORE = getId(IGBiomes.SHORE);
 	public static final int STONE_SHORE = getId(IGBiomes.STONE_SHORE);
@@ -220,7 +221,7 @@ public class IGLayerUtil {
 	}
 
 	public static boolean isMountains(int value) {
-		return value == MOUNTAINS || value == FLOODED_MOUNTAINS || value == MOUNTAINS_EDGE || value == OLD_MOUNTAINS;
+		return value == MOUNTAINS || value == FLOODED_MOUNTAINS || value == MOUNTAINS_EDGE || value == OLD_MOUNTAINS || value == LUSH_MOUNTAINS;
 	}
 
 	public static boolean isLow(int value) {
