@@ -1,5 +1,9 @@
 package com.igteam.immersivegeology.common.world;
 
+import java.nio.ByteBuffer;
+
+import org.lwjgl.opengl.GL11;
+
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.network.ChunkDataPacket;
 import com.igteam.immersivegeology.common.network.PacketHandler;
@@ -12,20 +16,28 @@ import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.shapes.VoxelShapeCube;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent.RenderTickEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -84,7 +96,6 @@ public class WorldEventHandler {
 			BlockState state = bpos != null ? mc.world.getBlockState(bpos) : null;
 			Block block = state == null ? null : state.getBlock();
 			TileEntity tile = bpos != null ? mc.world.getTileEntity(bpos) : null;
-
 			if (event.getType() == ElementType.ALL) {
 				profiler.startSection("ig-debug-info");
 				int w = mc.mainWindow.getScaledWidth();
@@ -92,21 +103,38 @@ public class WorldEventHandler {
 				ChunkPos cpos = new ChunkPos(mc.player.chunkCoordX, mc.player.chunkCoordZ);
 				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world);
 				if (chunkDataProvider != null) {
-					mc.fontRenderer.drawStringWithShadow(
-							"Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()),
-							w / 2 + 30, h / 2 + 10, 0xFFAA00);
-					mc.fontRenderer.drawStringWithShadow(
-							"Average Temp: " + String.valueOf(chunkDataProvider.get(cpos).getAvgTemp()), w / 2 + 30,
-							h / 2 + 20, 0xFFAA00);
-					mc.fontRenderer.drawStringWithShadow(
-							"Regional Rainfall: " + String.valueOf(chunkDataProvider.get(cpos).getRainfall()),
-							w / 2 + 30, h / 2 + 30, 0xFFAA00);
+//					mc.fontRenderer.drawStringWithShadow(
+//							"Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()),
+//							w / 2 + 30, h / 2 + 10, 0xFFAA00);
+//					mc.fontRenderer.drawStringWithShadow(
+//							"Average Temp: " + String.valueOf(chunkDataProvider.get(cpos).getAvgTemp()), w / 2 + 30,
+//							h / 2 + 20, 0xFFAA00);
+//					mc.fontRenderer.drawStringWithShadow(
+//							"Regional Rainfall: " + String.valueOf(chunkDataProvider.get(cpos).getRainfall()),
+//							w / 2 + 30, h / 2 + 30, 0xFFAA00);
 				}
 				profiler.endSection();
 			}
 		}
 	}
+	
+	@SubscribeEvent
+	public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event) {
+		World world = event.getObject().getWorld();
+		if (world.getWorldType() == ImmersiveGeology.getWorldType()) {
+			// Add the rock data to the chunk capability, for long term storage
+			ChunkData data;
+			ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(world);
+			if (chunkDataProvider != null) {
+				data = chunkDataProvider.get(event.getObject());
+			} else {
+				data = new ChunkData();
+			}
 
+			event.addCapability(ChunkDataCapability.KEY, data);
+		}
+	}
+	
 	/*
 	 * TODO Better Water fog for deep sea
 	 * 
@@ -140,23 +168,6 @@ public class WorldEventHandler {
 	 * ((Chunk) chunk).setModified(true); ((Chunk) chunk).markDirty();
 	 * WorldChunkChecker.setDone(event.getChunk()); } } }
 	 */
-
-	@SubscribeEvent
-	public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event) {
-		World world = event.getObject().getWorld();
-		if (world.getWorldType() == ImmersiveGeology.getWorldType()) {
-			// Add the rock data to the chunk capability, for long term storage
-			ChunkData data;
-			ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(world);
-			if (chunkDataProvider != null) {
-				data = chunkDataProvider.get(event.getObject());
-			} else {
-				data = new ChunkData();
-			}
-
-			event.addCapability(ChunkDataCapability.KEY, data);
-		}
-	}
 
 	/*
 	 * Old Layer Method

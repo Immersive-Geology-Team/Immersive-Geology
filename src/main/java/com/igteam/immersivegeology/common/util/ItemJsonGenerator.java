@@ -26,6 +26,21 @@ public class ItemJsonGenerator {
 				type.getName() + "_" + rockType.getName());
 	}
 
+	public static void generateDefaultBlockItem(Material material, MaterialUseType type, EnumStoneType rockType) {
+		generateBlockItem("block_" + type.getName() + "_" + material.getName(),
+				type.getName() + "_" + rockType.getName());
+	}
+
+	public static void generateDefaultBlockItem(Material material, MaterialUseType type) {
+		generateBlockItem("block_" + type.getName() + "_" + material.getName(), type.getName());
+	}
+	
+	public static void generateOreBearingBlockItem(Material material, MaterialUseType type, EnumStoneType stoneType) {
+		generateBlockItem("block_" + type.getName() + "_" + material.getName(),
+				type.getName() + "_" + stoneType.getName());
+	}
+
+
 	// NOTE: this generate runs at start up, minecraft looks for item and block
 	// models BEFORE this runs,
 	// which means you need to start minecraft up to generate the json, then close
@@ -49,18 +64,7 @@ public class ItemJsonGenerator {
 
 	}
 
-	public static void generateDefaultBlockItem(Material material, MaterialUseType type, EnumStoneType rockType) {
-		generateBlockItem("block_" + type.getName() + "_" + material.getName(),
-				type.getName() + "_" + rockType.getName());
-	}
-
-	public static void generateDefaultBlockItem(Material material, MaterialUseType type) {
-		generateBlockItem("block_" + type.getName() + "_" + material.getName(),
-				type.getName());
-	}
-
 	public static void generateBlockItem(String registryName, String type) {
-
 		if (!GENERATE_MODELS)
 			return;
 		try {
@@ -76,6 +80,23 @@ public class ItemJsonGenerator {
 		} catch (IOException e) {
 
 		}
+	}
 
+	public static void generateOreBearingBlockItem(String registryName, String type) {
+		if (!GENERATE_MODELS)
+			return;
+		try {
+			File file = new File("../src/main/resources/assets/immersivegeology/models/item/" + registryName + ".json");
+			if (!file.exists()) {
+				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
+				jsonWriter.setIndent(" "); // this makes it more readable for humans!
+				jsonWriter.beginObject();
+				jsonWriter.name("parent").value("immersivegeology:block/base/ore_bearing/" + type);
+				jsonWriter.endObject();
+				jsonWriter.close();
+			}
+		} catch (IOException e) {
+
+		}
 	}
 }

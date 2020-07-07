@@ -59,20 +59,19 @@ public class CreativeMenuHandler {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void initializeGuiEvent(InitGuiEvent.Post event) {
 		Screen screen = event.getGui();
 		if (screen instanceof CreativeScreen) {
 			CreativeScreen gui = (CreativeScreen) screen;
-			
-			
+
 			int i = (int) (gui.getGuiLeft() - Math.floor(136 * 1.425));
 			int j = (gui.height - 195) / 2;
 
 			for (int iteration = 0; iteration < ItemSubGroup.values().length; iteration++) {
 				ItemSubGroup currentGroup = ItemSubGroup.values()[iteration];
- 
+
 				CreativeMenuButton button = new CreativeMenuButton(gui.getContainer(), currentGroup, i + 166 + 7,
 						j + 46 + (23 * iteration), (onPress) -> {
 
@@ -86,12 +85,10 @@ public class CreativeMenuHandler {
 								}
 							});
 
-
 							ImmersiveGeology.IG_ITEM_GROUP.fill(gui.getContainer().itemList);
-							
+
 							Collections.sort(gui.getContainer().itemList, new ResourceSorter());
-							
-							
+
 							int slotIteration = 0;
 							for (int l = 0; l < gui.getContainer().inventorySlots.size(); l++) {
 								Slot slot = gui.getContainer().inventorySlots.get(l);

@@ -246,6 +246,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 								int totHeight = 256;
 								replaceBlock = b.getLayerBlock(l);
 								
+								//merge layers together a tad
 								if((y <= (totHeight * l) / lc) && (y > ((totHeight * l) / lc) - 2)) {
 									if(random.nextInt(3) == 1){
 										replaceBlock = b.getLayerBlock(Math.min(lc,l + 1));
@@ -288,8 +289,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 								double log = Math.log(max / 512d);
 								nh = -(Math.pow(Math.E, 3.6) * log) - 25;
 								
-								
-								
 								for(int randomLevel = 0; randomLevel < 3; randomLevel++) {	
 									
 									if(randomLevel != 0 && random.nextInt() % 2 == 0) {
@@ -301,8 +300,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 											 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
 									true);
 								}
-
-								
 							}
 						}
 					}

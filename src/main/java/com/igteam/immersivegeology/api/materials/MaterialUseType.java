@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
@@ -25,6 +26,7 @@ public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
 	ROCK(UseCategory.BLOCK, ItemSubGroup.raw),
+	ORE_BEARING(UseCategory.ORE_BEARING, Material.IRON, ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
@@ -86,12 +88,6 @@ public enum MaterialUseType implements IStringSerializable
 					return new IGDustBlock(material);
 				}
 			},
-
-	//Minerals / metals
-	POOR_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-	NORMAL_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-	RICH_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-
 	//Stones
 	DIRT(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
 	GRAVEL(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
@@ -189,6 +185,10 @@ public enum MaterialUseType implements IStringSerializable
 	{
 		return new IGMaterialBlock(material, this);
 	}
+	
+	public IGBaseBlock getBearingBlock(com.igteam.immersivegeology.api.materials.Material material) {
+		return new IGOreBearingBlock(material, this);
+	}
 
 	public enum UseCategory
 	{
@@ -204,6 +204,6 @@ public enum MaterialUseType implements IStringSerializable
 		RESOURCE_BLOCK,
 		//Will be used for non material blocks
 		BLOCK,
-
+		ORE_BEARING,
 	}
 }

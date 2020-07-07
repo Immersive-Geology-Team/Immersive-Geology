@@ -9,9 +9,11 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
+import com.igteam.immersivegeology.common.util.IGItemGrabber;
 
 import blusunrize.immersiveengineering.common.items.HammerItem;
 import blusunrize.immersiveengineering.common.items.WirecutterItem;
@@ -19,6 +21,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
@@ -97,6 +100,7 @@ public class IGBaseBlock extends Block implements IIGBlock {
 			return defaultHardness;
 		}
 	}
+	
 
 	public float getDefaultAndNaturalHardness() {
 		return this.defaultHardness + this.naturalHardness;

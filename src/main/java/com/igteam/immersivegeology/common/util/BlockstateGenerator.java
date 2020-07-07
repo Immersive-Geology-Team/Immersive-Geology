@@ -29,7 +29,9 @@ public class BlockstateGenerator
 		generateDefaultSlabBlock("slab_block_"+type.getName()+"_"+material.getName(), type.getName());
 	}
 	
-
+	public static void generateOreBearingBlock(Material material, MaterialUseType type, EnumStoneType stoneType) {
+		generateOreBearingBlock("block_"+type.getName()+"_"+material.getName(), type.getName() + "_" + stoneType.getName());
+	}
 	
 	private static void generateDefaultSlabBlock(String registryName, String baseType) {
 		if(!GENERATE_MODELS)
@@ -88,14 +90,14 @@ public class BlockstateGenerator
 				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
 				jsonWriter.setIndent(" "); //this makes it more readable for humans!
 				jsonWriter.beginObject();
-				jsonWriter.name("variants");
-				jsonWriter.beginObject();
-				jsonWriter.name("");
-				jsonWriter.beginObject();
-				jsonWriter.name("model");
-				jsonWriter.value("immersivegeology:block/base/"+itemBaseType);
-				jsonWriter.endObject();
-				jsonWriter.endObject();
+					jsonWriter.name("variants");
+					jsonWriter.beginObject();
+						jsonWriter.name("");
+						jsonWriter.beginObject();
+							jsonWriter.name("model");
+							jsonWriter.value("immersivegeology:block/base/"+itemBaseType);
+						jsonWriter.endObject();
+					jsonWriter.endObject();
 				jsonWriter.endObject();
 				jsonWriter.close();
 			}
@@ -103,7 +105,54 @@ public class BlockstateGenerator
 		{
 
 		}
-
 	}
 
+	public static void generateOreBearingBlock(String registryName, String itemBaseType)
+	{
+		if(!GENERATE_MODELS)
+			return;
+		try
+		{ 
+			File file = new File("../src/main/resources/assets/immersivegeology/blockstates/"+registryName+".json");
+			if(!file.exists())
+			{
+				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
+				jsonWriter.setIndent(" "); //this makes it more readable for humans!
+				jsonWriter.beginObject();
+					jsonWriter.name("variants");
+					jsonWriter.beginObject();
+						jsonWriter.name("richness=0");
+						jsonWriter.beginObject();
+							jsonWriter.name("model");
+							jsonWriter.value("immersivegeology:block/base/ore_bearing/"+itemBaseType + "_poor");
+						jsonWriter.endObject();
+					
+						jsonWriter.name("richness=1");
+						jsonWriter.beginObject();
+							jsonWriter.name("model");
+							jsonWriter.value("immersivegeology:block/base/ore_bearing/"+itemBaseType + "_normal");
+						jsonWriter.endObject();
+					
+						jsonWriter.name("richness=2");
+						jsonWriter.beginObject();
+							jsonWriter.name("model");
+							jsonWriter.value("immersivegeology:block/base/ore_bearing/"+itemBaseType + "_rich");
+						jsonWriter.endObject();
+	
+						jsonWriter.name("richness=3");
+						jsonWriter.beginObject();
+							jsonWriter.name("model");
+							jsonWriter.value("immersivegeology:block/base/ore_bearing/"+itemBaseType + "_dense");
+						jsonWriter.endObject();
+						
+					jsonWriter.endObject();
+				jsonWriter.endObject();
+				
+				jsonWriter.close();
+			}
+		} catch(IOException e)
+		{
+
+		}
+	}
 }
