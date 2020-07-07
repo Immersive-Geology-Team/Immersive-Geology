@@ -16,9 +16,11 @@ import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
@@ -27,6 +29,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootContext.Builder;
+import net.minecraftforge.common.ToolType;
 
 /**
  * Created by Pabilo8 on 26-03-2020.
@@ -37,17 +40,14 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	protected MaterialUseType type;
 
 
-	public IGMaterialBlock(Material material, MaterialUseType type)
-	{
-		this(material, type, "");
-	}
+	public IGMaterialBlock(Material material, MaterialUseType type) { this(material, type, ""); }
 
 	public IGMaterialBlock(Material material, MaterialUseType type, String sub)
 	{
 		super(sub+"block_"+type.getName()+"_"+material.getName(), 
 				Properties.create((type.getMaterial()==null?net.minecraft.block.material.Material.ROCK: type.getMaterial())),
 				IGBlockMaterialItem.class, type.getSubGroup());
-		
+
 		this.material = material;
 		this.type = type;
 		if(itemBlock instanceof IGBlockMaterialItem)
@@ -56,13 +56,16 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 			((IGBlockMaterialItem)itemBlock).subtype=this.type;
 		}
 
-		if(type.equals(MaterialUseType.ROCK)) {
-			if(material instanceof MaterialStoneBase) {
+		if(type.equals(MaterialUseType.ROCK))
+		{
+			if(material instanceof MaterialStoneBase)
+			{
 				MaterialStoneBase rockMat = (MaterialStoneBase) material;
 				BlockstateGenerator.generateDefaultBlock(material, type, rockMat.getStoneType());
 				ItemJsonGenerator.generateDefaultBlockItem(material, type, rockMat.getStoneType());
 			}
-		} else {
+		} else
+			{
 			BlockstateGenerator.generateDefaultBlock(material, type);
 			ItemJsonGenerator.generateDefaultBlockItem(material, type);
 		}
@@ -72,25 +75,42 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		// TODO Auto-generated method stub
-		if(!player.isCreative() && !player.isSpectator()) {
-			if(type.equals(MaterialUseType.ROCK)) {
-				if (state.get(IGProperties.NATURAL)) {
-					List<ItemStack> blockDrops = new ArrayList<ItemStack>();
-					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), Math.max(1, RANDOM.nextInt(4))));
-					for(ItemStack item : blockDrops) { 
+		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		if(!player.isCreative() && !player.isSpectator() && this.canHarvestBlock(state, worldIn, pos, player))
+		{
+			if(type.equals(MaterialUseType.ROCK) && !tool.isEmpty())
+			{
+				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
+				if (state.get(IGProperties.NATURAL) && !silk)
+				{
+					List<ItemStack> blockDrops = new ArrayList<>();
+					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
+					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
+					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
+					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, RANDOM.nextInt((int)((float)(2+effectiveLevel+fortune)*(1+player.getLuck())))))));
+					for(ItemStack item : blockDrops)
+					{
 						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(),item));
 					}
-				} else {
+				} else
+					{
 					worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 				}
-			} else {
+			} else
+				{
 				worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 			}
 		}
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
-	
-	
+
+	@Nullable
+	@Override
+	public ToolType getHarvestTool(BlockState state) { return ToolType.PICKAXE; }
+
+	@Override
+	public int getHarvestLevel(BlockState state) { return this.material.getBlockHarvestLevel(); }
+
 	@Override
 	public boolean hasCustomBlockColours()
 	{
@@ -98,8 +118,5 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	}
 
 	@Override
-	public int getRenderColour(BlockState blockState, @Nullable IBlockReader iBlockReader, @Nullable BlockPos blockPos, int i)
-	{
-		return material.getColor(0);
-	}
+	public int getRenderColour(BlockState blockState, @Nullable IBlockReader iBlockReader, @Nullable BlockPos blockPos, int i) { return material.getColor(0); }
 }

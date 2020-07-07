@@ -138,7 +138,7 @@ public abstract class Material
 	/**
 	 * @return tool level needed to mine material's blocks
 	 */
-	public abstract int getBlockHarvestLevel();
+	public int getBlockHarvestLevel() { return 0; }
 
 	/**
 	 * @return a block material (like Material.IRON)
