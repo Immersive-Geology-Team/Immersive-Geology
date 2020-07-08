@@ -87,7 +87,8 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
 					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
 					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
-					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, RANDOM.nextInt((int)((float)(2+effectiveLevel+fortune)*(1+player.getLuck())))))));
+					int dropAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(effectiveLevel+RANDOM.nextInt(2+fortune) )*( 1+player.getLuck() )) ) );
+					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), dropAmount));
 					for(ItemStack item : blockDrops)
 					{
 						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(),item));
