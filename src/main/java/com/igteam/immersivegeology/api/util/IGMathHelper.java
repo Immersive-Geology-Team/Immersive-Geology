@@ -1,8 +1,10 @@
 package com.igteam.immersivegeology.api.util;
 
+import net.minecraft.util.math.MathHelper;
+
 import java.util.Random;
 
-public class IGMathHelper
+public class IGMathHelper extends MathHelper
 {
     private static Random RANDOM = new Random();
 
