@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 import com.igteam.immersivegeology.common.util.IGItemGrabber;
@@ -15,20 +16,16 @@ import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
 
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootContext.Builder;
 import net.minecraftforge.common.ToolType;
 
 /**
@@ -87,7 +84,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
 					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
 					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
-					int dropAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(effectiveLevel+RANDOM.nextInt(2+fortune) )*( 1+player.getLuck() )) ) );
+					int dropAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.nextInt(2+fortune, effectiveLevel))*( 1+player.getLuck() )) ) );
 					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), dropAmount));
 					for(ItemStack item : blockDrops)
 					{
