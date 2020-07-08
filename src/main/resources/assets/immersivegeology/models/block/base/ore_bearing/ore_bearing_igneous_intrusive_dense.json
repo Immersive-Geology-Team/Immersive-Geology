@@ -1,20 +1,7 @@
 {
-    "parent": "block/block",
-    "elements": [
-        {   "from": [ 0, 0, 0 ],
-            "to": [ 16, 16, 16 ],
-            "faces": {
-                "down":  { "texture": "#all", "cullface": "down" , "tintindex": 0},
-                "up":    { "texture": "#all", "cullface": "up" , "tintindex": 0},
-                "north": { "texture": "#all", "cullface": "north" , "tintindex": 0},
-                "south": { "texture": "#all", "cullface": "south" , "tintindex": 0},
-                "west":  { "texture": "#all", "cullface": "west" , "tintindex": 0},
-                "east":  { "texture": "#all", "cullface": "east" , "tintindex": 0}
-            }
-        }
-    ],
+    "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_base",
     "textures": {
-        "all": "immersivegeology:block/greyscale/rock/rock_igneous_intrusive",
-        "particle": "immersivegeology:block/greyscale/rock/rock_igneous_intrusive" 
+        "base": "immersivegeology:block/greyscale/rock/rock_igneous_intrusive",
+        "overlay": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_intrusive_dense",
     }
 }

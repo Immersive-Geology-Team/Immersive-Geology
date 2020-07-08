@@ -23,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IEnviromentBlockReader;
 
-public class IGOreBearingBlock extends IGBaseBlock implements IColouredBlock, IOverlayColor, IBlockColor {
+public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBlockColor {
 
 	protected Material material;
 	protected MaterialUseType type;
@@ -61,17 +61,6 @@ public class IGOreBearingBlock extends IGBaseBlock implements IColouredBlock, IO
 		.with(ORE_RICHNESS, Integer.valueOf((int)(defaultRichness)))
 		.with(HARDNESS, Integer.valueOf((int)(defaultHardness))));
 	}
-
-	@Override
-	public boolean hasCustomBlockColours() {
-		return true;
-	}
-
-	@Override
-	public int getRenderColour(BlockState blockState, @Nullable IBlockReader iBlockReader, @Nullable BlockPos blockPos,
-			int i) {
-		return material.getColor(0);
-	}
 	
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
@@ -80,16 +69,22 @@ public class IGOreBearingBlock extends IGBaseBlock implements IColouredBlock, IO
 	}
 	
 	@Override
+	public BlockRenderLayer getRenderLayer() {
+		// TODO This is currently mostly a marker for culling, the actual layer is
+		// determined by canRenderInLayer
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(ORE_RICHNESS);
-		
 	}
 
 	@Override
 	public int getOverlayColor() {
 		// TODO Auto-generated method stub
-		return 0x7cce25;
+		return material.getColor(0) >> 2;
 	}
 
 	@Override
@@ -100,7 +95,6 @@ public class IGOreBearingBlock extends IGBaseBlock implements IColouredBlock, IO
 	@Override
 	public int getColor(BlockState p_getColor_1_, IEnviromentBlockReader p_getColor_2_, BlockPos p_getColor_3_,
 			int index) {
-		// TODO Auto-generated method stub
 			return material.getColor(0);
 	}
 }

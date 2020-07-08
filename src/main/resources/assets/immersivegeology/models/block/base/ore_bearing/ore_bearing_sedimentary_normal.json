@@ -1,21 +1,8 @@
 {
-    "parent": "block/block",
-    "elements": [
-        {   "from": [ 0, 0, 0 ],
-            "to": [ 16, 16, 16 ],
-            "faces": {
-                "down":  { "texture": "#all", "cullface": "down" , "tintindex": 0},
-                "up":    { "texture": "#all", "cullface": "up" , "tintindex": 0},
-                "north": { "texture": "#side", "cullface": "north" , "tintindex": 0},
-                "south": { "texture": "#side", "cullface": "south" , "tintindex": 0},
-                "west":  { "texture": "#side", "cullface": "west" , "tintindex": 0},
-                "east":  { "texture": "#side", "cullface": "east" , "tintindex": 0}
-            }
-        }
-    ],
+    "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_pillar",
     "textures": {
-        "all": "immersivegeology:block/greyscale/rock/rock_sedimentary",
-        "side": "immersivegeology:block/greyscale/rock/rock_sedimentary_side",
-        "particle": "immersivegeology:block/greyscale/rock/rock_sedimentary" 
+        "base": "immersivegeology:block/greyscale/rock/rock_sedimentary",
+        "sided": "immersivegeology:block/greyscale/rock/rock_sedimentary_side",
+        "overlay": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_sedimentary_normal",
     }
 }
