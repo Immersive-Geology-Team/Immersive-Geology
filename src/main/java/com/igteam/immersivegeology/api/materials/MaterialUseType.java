@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 
 import net.minecraft.block.material.Material;
@@ -186,8 +187,8 @@ public enum MaterialUseType implements IStringSerializable
 		return new IGMaterialBlock(material, this);
 	}
 	
-	public IGBaseBlock getBearingBlock(com.igteam.immersivegeology.api.materials.Material material) {
-		return new IGOreBearingBlock(material, this);
+	public IGBaseBlock getBearingBlock(com.igteam.immersivegeology.api.materials.Material material, EnumOreBearingMaterials oreMat) {
+		return new IGOreBearingBlock(material, this, oreMat);
 	}
 
 	public enum UseCategory

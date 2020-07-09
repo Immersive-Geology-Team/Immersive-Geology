@@ -26,20 +26,20 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;
 	
-	public static final IntegerProperty ORE_TYPE = IGProperties.ORE_TYPE;
 	
+	protected EnumOreBearingMaterials oreMaterial;
 	
-	public IGOreBearingBlock(Material material, MaterialUseType type) {
-		this(material, type, "");
+	public IGOreBearingBlock(Material material, MaterialUseType type, EnumOreBearingMaterials oreMat) {
+		this(material, type, "", oreMat);
 	}
 
-	public IGOreBearingBlock(Material material, MaterialUseType type, String sub) {
+	public IGOreBearingBlock(Material material, MaterialUseType type, String sub, EnumOreBearingMaterials oreMat) {
 		super(sub + "block_" + type.getName() + "_" + material.getName(),
 				Properties.create(
 						(type.getMaterial() == null ? net.minecraft.block.material.Material.ROCK : type.getMaterial())),
 				IGBlockMaterialItem.class, type.getSubGroup());
 
-		
+		this.oreMaterial = oreMat;
 		this.setBlockLayer(BlockRenderLayer.CUTOUT_MIPPED);
 		this.material = material;
 		this.type = type;
@@ -60,8 +60,9 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		this.setDefaultState(this.stateContainer.getBaseState()
 		.with(NATURAL, Boolean.valueOf(false))
 		.with(ORE_RICHNESS, Integer.valueOf((int)(defaultRichness)))
-		.with(HARDNESS, Integer.valueOf((int)(defaultHardness)))
-		.with(ORE_TYPE, EnumOreBearingMaterials.Casserite.ordinal()));
+		.with(HARDNESS, Integer.valueOf((int)(defaultHardness))));
+		
+		
 	}
 	
 	@Override
@@ -88,14 +89,12 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(ORE_RICHNESS);
-		builder.add(ORE_TYPE);
-	} 
+	}  
 
 	@Override
-	public int getOverlayColor(BlockState state) {
+	public int getOverlayColor() {
 		// TODO Auto-generated method stub
-		int mat = state.get(IGProperties.ORE_TYPE);
-		return EnumOreBearingMaterials.values()[mat].getColor();
+		return oreMaterial.getColor();
 	}
 
 	@Override

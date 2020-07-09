@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
@@ -64,8 +65,13 @@ public class IGContent {
 								materialItem.getBlock(material));
 						break;
 					case ORE_BEARING:
-						registeredIGBlocks.put(materialItem.getName() + "_" + material.getName(),
-								materialItem.getBearingBlock(material));
+
+						for (EnumOreBearingMaterials ore : EnumOreBearingMaterials.values()) {
+							registeredIGBlocks.put(
+									materialItem.getName() + "_" + material.getName() + "_" + ore.getName(),
+									materialItem.getBearingBlock(material, ore));
+						}
+
 						break;
 					default:
 						break;
@@ -143,13 +149,13 @@ public class IGContent {
 	@SubscribeEvent
 	public static void registerTEs(RegistryEvent.Register<TileEntityType<?>> event) {
 	}
-	
+
 	public static void registerRecipes() {
 
 	}
 
 	public static void registerOres() {
-		
+
 	}
 
 	public static void init() {
