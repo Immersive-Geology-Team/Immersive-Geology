@@ -54,6 +54,8 @@ public class MaterialMineralCassiterite extends MaterialMineralBase
         return EnumMineralType.MINERAL;
     }
 
+    protected static int baseColor = 0x8f8b96;
+    
     @Override
     public int getColor(int temperature) {
         return 0x8f8b96;

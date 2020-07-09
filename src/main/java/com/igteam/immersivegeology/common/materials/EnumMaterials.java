@@ -8,6 +8,9 @@ import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuar
 import com.igteam.immersivegeology.common.materials.fluids.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 import com.igteam.immersivegeology.common.materials.stones.*;
+
+import net.minecraft.util.IStringSerializable;
+
 import com.igteam.immersivegeology.common.materials.metals.*;
 
 public enum EnumMaterials
@@ -99,5 +102,4 @@ public enum EnumMaterials
 	{
 		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.MINERAL);
 	}
-
 }

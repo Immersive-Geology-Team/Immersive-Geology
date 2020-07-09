@@ -163,7 +163,7 @@ public abstract class Material
 	{
 		return null;
 	}
-
+	
 	/**
 	 * @return how many uses do tools made of this material have
 	 */

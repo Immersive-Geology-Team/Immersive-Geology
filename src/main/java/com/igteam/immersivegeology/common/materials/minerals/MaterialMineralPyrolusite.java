@@ -57,9 +57,11 @@ public class MaterialMineralPyrolusite extends MaterialMineralBase
         return EnumMineralType.MINERAL;
     }
 
+    protected static int baseColor = 0xc68f39;
+    
     @Override
     public int getColor(int temperature) {
-        return 0xc68f39;
+        return baseColor;
     }
 
     @Override

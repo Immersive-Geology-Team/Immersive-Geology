@@ -53,10 +53,12 @@ public class MaterialMineralUraninite extends MaterialMineralBase
     public EnumMineralType getMineralType() {
         return EnumMineralType.MINERAL;
     }
+    
+    protected static int baseColor = 0xB2BEB5;
 
     @Override
     public int getColor(int temperature) {
-        return 0xB2BEB5;
+        return baseColor; //TODO allow heat to change color!
     }
 
     @Override
@@ -82,5 +84,5 @@ public class MaterialMineralUraninite extends MaterialMineralBase
     @Override
     public int getBlockHarvestLevel() {
         return 0;
-    }
+    }    
 }

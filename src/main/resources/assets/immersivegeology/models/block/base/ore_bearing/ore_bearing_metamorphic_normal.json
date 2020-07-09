@@ -3,6 +3,6 @@
     "textures": {
         "base": "immersivegeology:block/greyscale/rock/rock_metamorphic",
         "sided": "immersivegeology:block/greyscale/rock/rock_metamorphic_side",
-        "overlay": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_metamorphic_normal",
+        "overlay": "immersivegeology:block/greyscale/rock/ore_bearing/metamorphic/igneous_metamorphic_normal",
     }
 }

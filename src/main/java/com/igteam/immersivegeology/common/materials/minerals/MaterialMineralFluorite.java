@@ -58,11 +58,12 @@ public class MaterialMineralFluorite extends MaterialMineralBase
 	{
 		return -1;
 	}
-
+	
+	protected static int baseColor = 0xffffff;
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xffffff;
+		return baseColor;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

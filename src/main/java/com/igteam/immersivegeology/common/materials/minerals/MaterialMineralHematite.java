@@ -54,9 +54,11 @@ public class MaterialMineralHematite extends MaterialMineralBase
         return EnumMineralType.MINERAL;
     }
 
+    protected static int baseColor = 0xffffff;
+    
     @Override
     public int getColor(int temperature) {
-        return 0x887c7d;
+        return baseColor;
     }
 
     @Override

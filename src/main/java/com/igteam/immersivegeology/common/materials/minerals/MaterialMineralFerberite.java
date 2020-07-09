@@ -54,10 +54,10 @@ public class MaterialMineralFerberite extends MaterialMineralBase
     public EnumMineralType getMineralType() {
         return EnumMineralType.MINERAL;
     }
-
+    protected static int baseColor = 0xa7d8de;
     @Override
     public int getColor(int temperature) {
-        return 0xa7d8de;
+        return baseColor;
     }
 
     @Override

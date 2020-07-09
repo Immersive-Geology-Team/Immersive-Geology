@@ -45,7 +45,7 @@ public abstract class MaterialMetalBase extends Material
 	{
 		return MaterialTypes.METAL;
 	}
-
+	
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{

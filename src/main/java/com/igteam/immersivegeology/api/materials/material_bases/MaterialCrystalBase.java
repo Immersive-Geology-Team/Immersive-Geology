@@ -6,6 +6,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
 public abstract class MaterialCrystalBase extends Material
 {
+	
+	
+	protected static int baseColor = 0xffffff;
 
     @Override
     public boolean hasSubtype(MaterialUseType useType)
@@ -33,7 +36,11 @@ public abstract class MaterialCrystalBase extends Material
     {
         return MaterialTypes.CRYSTAL;
     }
-
+    
+    public static int getStaticColor() {
+    	return baseColor;
+    }
+    
     @Override
     public net.minecraft.block.material.Material getBlockMaterial()
     {

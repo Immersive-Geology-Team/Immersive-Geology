@@ -29,7 +29,6 @@ public abstract class MaterialFluidBase extends Material
         return false;
     }
 
-
     @Override
     public MaterialTypes getMaterialType()
     {

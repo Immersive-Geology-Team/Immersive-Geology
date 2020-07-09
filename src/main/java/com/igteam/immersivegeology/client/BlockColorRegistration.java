@@ -34,7 +34,7 @@ public class BlockColorRegistration {
 		if (tintIndex == 1) {
 			if (state.getBlock() instanceof IGOreBearingBlock) {
 				IGOreBearingBlock oreBlock = (IGOreBearingBlock) state.getBlock();
-				return oreBlock.getOverlayColor();
+				return oreBlock.getOverlayColor(state);
 			}
 		} else if (tintIndex == 0) {
 			if (state.getBlock() instanceof IGOreBearingBlock) {

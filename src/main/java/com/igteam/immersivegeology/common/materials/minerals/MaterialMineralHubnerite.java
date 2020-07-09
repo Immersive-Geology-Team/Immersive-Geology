@@ -54,7 +54,9 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
     public EnumMineralType getMineralType() {
         return EnumMineralType.MINERAL;
     }
-
+    
+    
+    protected static int baseColor = 0x582721;
     @Override
     public int getColor(int temperature) {
         return 0x582721;
