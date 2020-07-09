@@ -4,12 +4,12 @@ import com.igteam.immersivegeology.common.materials.crystals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 
 public enum EnumOreBearingMaterials {
-	Quartz(MaterialCrystalQuartz.getStaticColor()),
+	Quartz(MaterialCrystalQuartz.baseColor),
 
 	// Minerals
-	Casserite(MaterialMineralCassiterite.getStaticColor()),
-	Thorite(MaterialMineralThorianite.getStaticColor()),
-	Uraninite(MaterialMineralUraninite.getStaticColor());
+	Casserite(MaterialMineralCassiterite.baseColor),
+	Thorite(MaterialMineralThorianite.baseColor), 
+	Uraninite(MaterialMineralUraninite.baseColor);
 	
 	/*
 	 * 	

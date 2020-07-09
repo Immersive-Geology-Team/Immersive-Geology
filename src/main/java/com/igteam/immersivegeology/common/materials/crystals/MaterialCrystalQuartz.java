@@ -49,7 +49,7 @@ public class MaterialCrystalQuartz extends MaterialCrystalBase
         return 1923;
     }
 
-    protected static int baseColor = 0xe9dfe0;
+    public static int baseColor = 0xe9dfe0;
     
     @Override
     public int getColor(int temperature) {

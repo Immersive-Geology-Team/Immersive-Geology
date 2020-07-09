@@ -54,7 +54,7 @@ public class MaterialMineralUraninite extends MaterialMineralBase
         return EnumMineralType.MINERAL;
     }
     
-    protected static int baseColor = 0xB2BEB5;
+    public static int baseColor = 0xB2BEB5;
 
     @Override
     public int getColor(int temperature) {
