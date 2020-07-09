@@ -65,10 +65,9 @@ public class IGContent {
 								materialItem.getBlock(material));
 						break;
 					case ORE_BEARING:
-
 						for (EnumOreBearingMaterials ore : EnumOreBearingMaterials.values()) {
 							registeredIGBlocks.put(
-									materialItem.getName() + "_" + material.getName() + "_" + ore.getName(),
+									materialItem.getName() + "_" + material.getName() + "_" + ore.toString().toLowerCase(),
 									materialItem.getBearingBlock(material, ore));
 						}
 

@@ -38,7 +38,8 @@ public abstract class MaterialMineralBase extends Material
         MINERAL
     }
     
-    public static int getStaticColor() {
+    public int getStaticColor() {
     	return baseColor;
     }
+   
 }

@@ -266,7 +266,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 																			
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
 									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-											 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
+											 Math.min(128, Math.max(1, (int)Math.ceil(nh)))),
 									true);
 								}
 							}
@@ -297,7 +297,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 									
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
 									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-											 Math.min(256, Math.max(1, (int)Math.ceil(nh)))),
+											 Math.min(128, Math.max(1, (int)Math.ceil(nh)))),
 									true);
 								}
 							}

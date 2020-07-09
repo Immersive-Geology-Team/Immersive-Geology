@@ -107,6 +107,11 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	{
 		return null;
 	}
+	
+	@Override
+	public int getStaticColor() {
+    	return baseColor;
+    }
 
 	/*@Nullable
 	@Override

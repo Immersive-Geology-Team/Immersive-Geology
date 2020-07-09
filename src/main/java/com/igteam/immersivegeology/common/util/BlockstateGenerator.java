@@ -10,6 +10,7 @@ import com.google.gson.stream.JsonWriter;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 
 public class BlockstateGenerator
 {
@@ -29,8 +30,8 @@ public class BlockstateGenerator
 		generateDefaultSlabBlock("slab_block_"+type.getName()+"_"+material.getName(), type.getName());
 	}
 	
-	public static void generateOreBearingBlock(Material material, MaterialUseType type, EnumStoneType stoneType) {
-		generateOreBearingBlock("block_"+type.getName()+"_"+material.getName(), type.getName() + "_" + stoneType.getName());
+	public static void generateOreBearingBlock(Material material, MaterialUseType type, EnumStoneType stoneType, EnumOreBearingMaterials oreType) {
+		generateOreBearingBlock("block_"+type.getName()+"_"+material.getName() + "_" + oreType.toString().toLowerCase(), type.getName() + "_" + stoneType.getName());
 	}
 	
 	private static void generateDefaultSlabBlock(String registryName, String baseType) {
@@ -144,7 +145,6 @@ public class BlockstateGenerator
 							jsonWriter.name("model");
 							jsonWriter.value("immersivegeology:block/base/ore_bearing/"+itemBaseType + "_dense");
 						jsonWriter.endObject();
-						
 					jsonWriter.endObject();
 				jsonWriter.endObject();
 				

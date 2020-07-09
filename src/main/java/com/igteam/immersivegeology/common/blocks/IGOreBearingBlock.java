@@ -34,7 +34,7 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 	}
 
 	public IGOreBearingBlock(Material material, MaterialUseType type, String sub, EnumOreBearingMaterials oreMat) {
-		super(sub + "block_" + type.getName() + "_" + material.getName(),
+		super(sub + "block_" + type.getName() + "_" + material.getName() + "_" + oreMat.toString().toLowerCase(),
 				Properties.create(
 						(type.getMaterial() == null ? net.minecraft.block.material.Material.ROCK : type.getMaterial())),
 				IGBlockMaterialItem.class, type.getSubGroup());
@@ -52,7 +52,7 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		if (type.equals(MaterialUseType.ORE_BEARING)) {
 			if (material instanceof MaterialStoneBase) {
 				MaterialStoneBase rockMat = (MaterialStoneBase) material;
-				BlockstateGenerator.generateOreBearingBlock(material, type, rockMat.getStoneType());
+				BlockstateGenerator.generateOreBearingBlock(material, type, rockMat.getStoneType(), oreMat);
 				ItemJsonGenerator.generateOreBearingBlockItem(material, type, rockMat.getStoneType());
 			}
 		}
@@ -61,8 +61,6 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		.with(NATURAL, Boolean.valueOf(false))
 		.with(ORE_RICHNESS, Integer.valueOf((int)(defaultRichness)))
 		.with(HARDNESS, Integer.valueOf((int)(defaultHardness))));
-		
-		
 	}
 	
 	@Override
