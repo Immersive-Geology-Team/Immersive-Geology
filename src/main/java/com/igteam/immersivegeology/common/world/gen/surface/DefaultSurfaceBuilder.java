@@ -66,13 +66,33 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                        {
 	                            chunkIn.setBlockState(pos, topBlock, false);
 	                        } else {
-	                        	
-	                        	if(y >= 200 + random.nextInt(7) - random.nextInt(4)) {
-	                        		
-	                        		chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
-	                        		chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
-	                        		chunkIn.setBlockState(pos.up().up(), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
-	                        		
+
+								int snowOffset = random.nextInt(2) + random.nextInt(2) + random.nextInt(1) - random.nextInt(2);
+	                        	if(y >= 180 + snowOffset) {
+
+	                        		int snowWeight = random.nextInt();
+	                        		if(snowWeight%4096 == 0 || snowOffset < 1)
+									{
+										chunkIn.setBlockState(pos, Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7 + random.nextInt(1) - random.nextInt(2)), false);
+									}
+	                        		else if(snowWeight%128 == 0 || snowOffset < 3)
+									{
+										chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7 + random.nextInt(1) - random.nextInt(2)), false);
+									}
+									else if(snowWeight%128 == 0)
+									{
+										chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(2), Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(3), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
+									}
+	                        		else
+									{
+										chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
+										chunkIn.setBlockState(pos.up(2), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
+									}
 	                        	}
 	                        }
 	                    }
