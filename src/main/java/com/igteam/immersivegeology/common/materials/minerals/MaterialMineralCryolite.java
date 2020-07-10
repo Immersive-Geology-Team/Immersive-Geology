@@ -59,7 +59,7 @@ public class MaterialMineralCryolite extends MaterialMineralBase
 	{
 		return -1;
 	}
-	protected static int baseColor = 0xffffff;
+	public static int baseColor = 0xffffff;
 	@Override
 	public int getColor(int temperature)
 	{

@@ -36,6 +36,13 @@ public class LakeBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
-		return Blocks.CLAY.getDefaultState();
+		switch(part) {
+			case grass:
+				return Blocks.SAND.getDefaultState();
+			case dirt:
+				return Blocks.SAND.getDefaultState();
+			default:
+				return Blocks.CLAY.getDefaultState();
+		}
 	}
 }

@@ -5,6 +5,9 @@ import java.nio.ByteBuffer;
 import org.lwjgl.opengl.GL11;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.network.ChunkDataPacket;
 import com.igteam.immersivegeology.common.network.PacketHandler;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
@@ -38,6 +41,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.RenderTickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -114,6 +121,25 @@ public class WorldEventHandler {
 //							w / 2 + 30, h / 2 + 30, 0xFFAA00);
 				}
 				profiler.endSection();
+			}
+		}
+	}
+	
+	
+	@SubscribeEvent
+	public void onBlockBreaking(PlayerEvent.BreakSpeed event) {
+		float original = event.getOriginalSpeed();
+		
+		Block block = event.getState().getBlock();
+		if(block instanceof IGMaterialBlock) {
+			IGMaterialBlock replaceBlock = (IGMaterialBlock) block;
+			
+			if(event.getState().get(IGProperties.NATURAL)) {
+				double nh =  replaceBlock.material.getHardness();
+				int y = event.getPos().getY();
+				double max = Math.max(1, y);
+				double ns = (((0.3 / Math.pow(Math.E, 8)) * Math.pow(max,Math.E*0.75)) * (original / 8)) / nh;				
+				event.setNewSpeed((float) ns);
 			}
 		}
 	}

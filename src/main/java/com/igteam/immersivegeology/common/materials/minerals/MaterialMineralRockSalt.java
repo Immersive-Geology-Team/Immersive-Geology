@@ -60,7 +60,7 @@ public class MaterialMineralRockSalt extends MaterialMineralBase
 	}
 
 	
-	protected static int baseColor = 0xffffff;
+	public static int baseColor = 0xffffff;
     
 	
 	@Override

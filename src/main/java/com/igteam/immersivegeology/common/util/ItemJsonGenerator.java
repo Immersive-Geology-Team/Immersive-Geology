@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -35,8 +36,8 @@ public class ItemJsonGenerator {
 		generateBlockItem("block_" + type.getName() + "_" + material.getName(), type.getName());
 	}
 	
-	public static void generateOreBearingBlockItem(Material material, MaterialUseType type, EnumStoneType stoneType) {
-		generateBlockItem("block_" + type.getName() + "_" + material.getName(),
+	public static void generateOreBearingBlockItem(Material material, MaterialUseType type, EnumStoneType stoneType, EnumOreBearingMaterials oreType) {
+		generateOreBearingBlockItem("block_" + type.getName() + "_" + material.getName() + "_" + oreType.toString().toLowerCase(),
 				type.getName() + "_" + stoneType.getName());
 	}
 
@@ -91,7 +92,7 @@ public class ItemJsonGenerator {
 				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
 				jsonWriter.setIndent(" "); // this makes it more readable for humans!
 				jsonWriter.beginObject();
-				jsonWriter.name("parent").value("immersivegeology:block/base/ore_bearing/" + type);
+				jsonWriter.name("parent").value("immersivegeology:block/base/ore_bearing/" + type + "_normal");
 				jsonWriter.endObject();
 				jsonWriter.close();
 			}

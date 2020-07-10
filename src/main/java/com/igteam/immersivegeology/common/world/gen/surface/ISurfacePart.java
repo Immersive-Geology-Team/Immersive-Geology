@@ -21,7 +21,7 @@ public interface ISurfacePart {
 	@Nonnull
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart dirt() {
-		return (data, x, z, rainfall, temp) -> data.getDirtBlock(x, z);
+		return (data, x, z, rainfall, temp) -> data.getDirtBlock(x, z, rainfall, temp);
 	}
  
 	@Nonnull

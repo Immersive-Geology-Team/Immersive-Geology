@@ -61,9 +61,25 @@ public class MountainsBiome extends IGBiome
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
 		if(isLushMountains) {
-			return Blocks.GRASS_BLOCK.getDefaultState();
+			switch(part) {
+				case grass:
+					return Blocks.GRASS_BLOCK.getDefaultState();
+				case dirt:
+					return Blocks.DIRT.getDefaultState();
+				default:
+					return Blocks.DIRT.getDefaultState();
+			}
 		} else {
-			return IGBlockGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Rhyolite.material).getDefaultState();
+			switch(part) {
+				case grass:
+					return IGBlockGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Rhyolite.material).getDefaultState();
+				case dirt:
+					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
+				default:
+					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
+			}
+			
+			
 		}
 	}
     

@@ -31,17 +31,12 @@ public interface IIGSurfaceBlock {
 		}
 	}
 	
-	public static BlockState getDirtState(Biome biome, float temp, float rain){
-		if(temp > 0.9) {
-			return (biome instanceof OasisBiome) ? Blocks.RED_SAND.getDefaultState() : Blocks.SAND.getDefaultState();
-		} else if(temp < 0.9 && temp > 0.7) {
-			if(rain > 0.8) {
-				return Blocks.DIRT.getDefaultState();
-			} else {
-				return Blocks.BROWN_TERRACOTTA.getDefaultState();
-			}
+	public static BlockState getDirtState(Biome biome, float chunkTemp, float chunkRain){
+		if(biome instanceof IGBiome) {
+			IGBiome igBiome = (IGBiome) biome;
+			return igBiome.returnBlockType(SurfaceBlockType.dirt, chunkTemp, chunkRain);
 		} else {
-			return Blocks.DIRT.getDefaultState();
+			return Blocks.WHITE_WOOL.getDefaultState();
 		}
 	}
 }

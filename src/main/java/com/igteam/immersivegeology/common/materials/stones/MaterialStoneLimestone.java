@@ -72,7 +72,7 @@ public class MaterialStoneLimestone extends MaterialStoneBase
 	@Override
 	public float getHardness()
 	{
-		return 1F;
+		return 0.5F;
 	}
 
 	@Override

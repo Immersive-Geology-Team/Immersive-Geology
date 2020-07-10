@@ -46,21 +46,21 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		if(itemBlock instanceof IGBlockMaterialItem)
 		{
 			((IGBlockMaterialItem)itemBlock).material=this.material;
+			((IGBlockMaterialItem)itemBlock).overlay=this.oreMaterial;
 			((IGBlockMaterialItem)itemBlock).subtype=this.type;
-		}
+		} 
 		
 		if (type.equals(MaterialUseType.ORE_BEARING)) {
 			if (material instanceof MaterialStoneBase) {
 				MaterialStoneBase rockMat = (MaterialStoneBase) material;
 				BlockstateGenerator.generateOreBearingBlock(material, type, rockMat.getStoneType(), oreMat);
-				ItemJsonGenerator.generateOreBearingBlockItem(material, type, rockMat.getStoneType());
+				ItemJsonGenerator.generateOreBearingBlockItem(material, type, rockMat.getStoneType(), oreMat);
 			}
 		}
 		
 		this.setDefaultState(this.stateContainer.getBaseState()
 		.with(NATURAL, Boolean.valueOf(false))
-		.with(ORE_RICHNESS, Integer.valueOf((int)(defaultRichness)))
-		.with(HARDNESS, Integer.valueOf((int)(defaultHardness))));
+		.with(ORE_RICHNESS, Integer.valueOf((int)(defaultRichness))));
 	}
 	
 	@Override

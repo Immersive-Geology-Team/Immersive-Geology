@@ -48,6 +48,13 @@ public class CanyonsBiome  extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
-		return Blocks.TERRACOTTA.getDefaultState();
+		switch(part) {
+			case grass:
+				return Blocks.TERRACOTTA.getDefaultState();
+			case dirt:
+				return Blocks.BROWN_TERRACOTTA.getDefaultState();
+			default:
+				return Blocks.TERRACOTTA.getDefaultState();
+		}
 	}
 }

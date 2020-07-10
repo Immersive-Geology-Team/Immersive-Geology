@@ -39,9 +39,23 @@ public class ShoreBiome extends IGBiome
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
 		if(isStone) {	
-			return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
+			switch(part) {
+				case grass:
+					return IGBlockGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Granite.material).getDefaultState();
+				case dirt:
+					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
+				default:
+					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
+			}
 		} else {
-			return Blocks.SAND.getDefaultState();
+			switch(part) {
+				case grass:
+					return Blocks.SAND.getDefaultState();
+				case dirt:
+					return Blocks.SANDSTONE.getDefaultState();
+				default:
+					return Blocks.SANDSTONE.getDefaultState();
+			}
 		}
 	}
 }

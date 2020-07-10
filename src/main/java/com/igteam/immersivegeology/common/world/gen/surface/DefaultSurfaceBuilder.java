@@ -10,7 +10,11 @@ import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuild
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Block.Properties;
+import net.minecraft.state.IProperty;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -61,6 +65,15 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                        if (surfaceFlag > 0)
 	                        {
 	                            chunkIn.setBlockState(pos, topBlock, false);
+	                        } else {
+	                        	
+	                        	if(y >= 200 + random.nextInt(7) - random.nextInt(4)) {
+	                        		
+	                        		chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+	                        		chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
+	                        		chunkIn.setBlockState(pos.up().up(), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
+	                        		
+	                        	}
 	                        }
 	                    }
 	                    else

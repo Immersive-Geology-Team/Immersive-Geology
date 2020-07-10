@@ -56,7 +56,7 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
     }
     
     
-    protected static int baseColor = 0x582721;
+    public static int baseColor = 0x582721;
     @Override
     public int getColor(int temperature) {
         return 0x582721;

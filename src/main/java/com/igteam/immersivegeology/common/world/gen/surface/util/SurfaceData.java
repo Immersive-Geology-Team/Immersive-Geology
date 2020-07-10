@@ -33,18 +33,17 @@ public class SurfaceData {
 		} 
 	} 
 	
-	public BlockState getDirtBlock(int x, int z) {
+	public BlockState getDirtBlock(int x, int z, float ChunkTemp, float ChunkRain) {
 		//Works on servers Yay
-		BlockPos pos = new BlockPos(x, chunkData.getHeight(), z);
+		BlockPos pos = new BlockPos(x,chunkData.getTopBlockY(Type.WORLD_SURFACE, x, z),z);
+		
 		Biome biome = chunkData.getBiome(pos);
 		if(biome instanceof IGBiome) {
 			IGBiome igBiome = (IGBiome) biome;
-			float currentTemp = igBiome.getTemperature(pos);
-			float currentRainfall = igBiome.getBrain();
-			return IIGSurfaceBlock.getDirtState(igBiome, currentTemp, currentRainfall);
+			return IIGSurfaceBlock.getDirtState(igBiome, ChunkTemp, ChunkRain);
 		} else {
-			return Blocks.DIRT.getDefaultState();
-		}
-	}
+			return Blocks.WHITE_WOOL.getDefaultState(); 
+		} 
+	} 
 	
 } 

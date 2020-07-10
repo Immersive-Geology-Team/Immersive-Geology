@@ -63,8 +63,6 @@ public class IGBaseBlock extends Block implements IIGBlock {
 	public ItemSubGroup itemSubGroup = ItemSubGroup.misc;
 
 	public static final BooleanProperty NATURAL = IGProperties.NATURAL;
-	public static final IntegerProperty HARDNESS = IGProperties.HARDNESS;
-	protected float defaultHardness = 1.5f;
 	
 	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock,
 			ItemSubGroup group, IProperty... additionalProperties) {
@@ -72,7 +70,7 @@ public class IGBaseBlock extends Block implements IIGBlock {
 		this.name = name;
 
 		this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
-		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)).with(HARDNESS, Integer.valueOf((int)(defaultHardness))));
+		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
 		if (itemBlock != null) {
@@ -89,36 +87,17 @@ public class IGBaseBlock extends Block implements IIGBlock {
 		lightOpacity = 15;
 	}
 
-	public float naturalHardness;
+	public float naturalHardness = 1f;
 
 	@Override
 	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		// TODO Auto-generated method stub
-		if (state.get(IGProperties.NATURAL)) {
-			return ((float)(state.get(IGProperties.HARDNESS)));
-		} else {
-			return defaultHardness;
-		}
-	}
-	
-
-	public float getDefaultAndNaturalHardness() {
-		return this.defaultHardness + this.naturalHardness;
-	}
-	
-	public void setDefaultHardness(float dhard) {
-		this.defaultHardness = dhard;
-	}
-	
-	public float getDefaultHardness(){
-		return defaultHardness;
+		return naturalHardness;
 	}
 	
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(NATURAL);
-		builder.add(HARDNESS);
 		builder.add(tempProperties);
 	}
 

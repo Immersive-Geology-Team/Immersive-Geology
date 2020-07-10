@@ -33,7 +33,7 @@ import net.minecraftforge.common.ToolType;
  */
 public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 {
-	protected Material material;
+	public Material material;
 	protected MaterialUseType type;
 
 

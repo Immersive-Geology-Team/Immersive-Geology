@@ -41,6 +41,13 @@ public class DesertBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
-		return Blocks.SAND.getDefaultState();
+		switch(part) {
+			case grass:
+				return Blocks.SAND.getDefaultState();
+			case dirt:
+				return Blocks.SANDSTONE.getDefaultState();
+			default:
+				return Blocks.SANDSTONE.getDefaultState();
+		}
 	}
 }

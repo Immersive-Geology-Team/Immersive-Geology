@@ -258,15 +258,9 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 								if ((y <= (totHeight * l) / lc)
 										&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 									
-									// setting the block in here isn't super efficient,
-									double nh =  replaceBlock.getDefaultHardness();
-									double max = Math.max(1, y);
-									double log = Math.log(max / 512d);
-									nh = -(Math.pow(Math.E, 3.6) * log - 25);
-																			
+									
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
-									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-											 Math.min(128, Math.max(1, (int)Math.ceil(nh)))),
+									.with(IGBaseBlock.NATURAL, Boolean.TRUE),
 									true);
 								}
 							}
@@ -280,15 +274,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							int totHeight = 256;
 							if ((y <= (totHeight * l) / lc)
 									&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
-								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material); 
-
-								// setting the block in here isn't super efficient,
-								double nh =  replaceBlock.getDefaultHardness();
-
-								double max = Math.max(1, y);
-								double log = Math.log(max / 512d);
-								nh = -(Math.pow(Math.E, 3.6) * log) - 25;
-								
+								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material); 				
 								for(int randomLevel = 0; randomLevel < 3; randomLevel++) {	
 									
 									if(randomLevel != 0 && random.nextInt() % 2 == 0) {
@@ -296,9 +282,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 									}
 									
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
-									.with(IGBaseBlock.NATURAL, Boolean.TRUE).with(IGBaseBlock.HARDNESS,
-											 Math.min(128, Math.max(1, (int)Math.ceil(nh)))),
-									true);
+									.with(IGBaseBlock.NATURAL, Boolean.TRUE),true);
 								}
 							}
 						}

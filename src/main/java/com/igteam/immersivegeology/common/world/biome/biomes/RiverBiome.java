@@ -32,6 +32,13 @@ public class RiverBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
-		return Blocks.DIRT.getDefaultState();
+		switch(part) {
+			case grass:
+				return Blocks.GRASS_BLOCK.getDefaultState();
+			case dirt:
+				return Blocks.DIRT.getDefaultState();
+			default:
+				return Blocks.DIRT.getDefaultState();
+		}
 	}
 }

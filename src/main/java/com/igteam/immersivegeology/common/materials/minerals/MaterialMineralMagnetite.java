@@ -54,7 +54,7 @@ public class MaterialMineralMagnetite extends MaterialMineralBase
         return EnumMineralType.MINERAL;
     }
 
-    protected static int baseColor = 0xb4b7b0;
+    public static int baseColor = 0xb4b7b0;
     
     @Override
     public int getColor(int temperature) {

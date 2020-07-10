@@ -9,25 +9,18 @@ public enum EnumOreBearingMaterials {
 	// Minerals
 	Casserite(MaterialMineralCassiterite.baseColor),
 	Thorite(MaterialMineralThorianite.baseColor), 
+	Chalcopyrite(MaterialMineralChalcopyrite.baseColor),
+	Chromite(MaterialMineralChromite.baseColor), 
+	Cryolite(MaterialMineralCryolite.baseColor),
+	Ferberite(MaterialMineralFerberite.baseColor),
+	Fluorite(MaterialMineralFluorite.baseColor), 
+	Gypsum(MaterialMineralGypsum.baseColor),
+	Hematite(MaterialMineralHematite.baseColor),
+	Hubnerite(MaterialMineralHubnerite.baseColor),
+	Magnetite(MaterialMineralMagnetite.baseColor),
+	Pyrolusite(MaterialMineralPyrolusite.baseColor),
+	RockSalt(MaterialMineralRockSalt.baseColor), 
 	Uraninite(MaterialMineralUraninite.baseColor);
-	
-	/*
-	 * 	
-	Chalcopyrite(MaterialMineralChalcopyrite.getStaticColor()),
-	Chromite(MaterialMineralChromite.getStaticColor()), 
-	Cryolite(MaterialMineralCryolite.getStaticColor());
-	
-	Ferberite(MaterialMineralFerberite.getStaticColor()),
-	Fluorite(MaterialMineralFluorite.getStaticColor()), 
-	Gypsum(MaterialMineralGypsum.getStaticColor()),
-	Hematite(MaterialMineralHematite.getStaticColor()),
-	Hubnerite(MaterialMineralHubnerite.getStaticColor()),
-	Magnetite(MaterialMineralMagnetite.getStaticColor()),
-	Pyrolusite(MaterialMineralPyrolusite.getStaticColor()),
-	RockSalt(MaterialMineralRockSalt.getStaticColor()), 
-	
-	 * 
-	 */
 
 	int oreColor;
 	EnumOreBearingMaterials(int colorCode)
