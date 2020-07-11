@@ -29,7 +29,8 @@ public class CanyonsBiome  extends IGBiome
 
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
-
+        
+        DefaultBiomeFeatures.addStructures(this);
         IGDefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addMonsterRooms(this);
         DefaultBiomeFeatures.addMushrooms(this);

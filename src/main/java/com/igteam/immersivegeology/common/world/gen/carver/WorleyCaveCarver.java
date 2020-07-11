@@ -22,7 +22,7 @@ public class WorleyCaveCarver {
 	private static int LIQUID_DEPTH_MAX = 11;
 	private static int LIQUID_DEPTH_MIN = 0;
 	private static final float NOISE_THRESHOLD = 0.4f;
-	private static final float HEIGHT_FADE_THRESHOLD = 72;
+	private static final float HEIGHT_FADE_THRESHOLD = 72; 
 	
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();

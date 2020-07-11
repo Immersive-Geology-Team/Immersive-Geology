@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
+import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
@@ -63,6 +64,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 	});
 	
+	private final WorleyOreCarver worleyOreCarver;
 	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
@@ -83,6 +85,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		this.biomeProvider = (ImmersiveBiomeProvider) provider;
 		
 		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
+		this.worleyOreCarver = new WorleyOreCarver(seedGenerator);
 		
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
@@ -95,7 +98,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
         {
             // First, run worley cave carver
             worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4);
-        }
+            worleyOreCarver.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4);
+        } 
 
         // Fire other world carvers
         super.carve(chunkIn, stage);

@@ -76,12 +76,17 @@ public enum TemperateLayer implements ICastleTransformer {
 	}
 
 	private boolean canPlaceBiomeNearHigh(int value) {
-		List<Integer> highMid = Stream.of(high, low).flatMap(x -> x.stream()).collect(Collectors.toList());
+		List<Integer> highMid = Stream.of(high, mid).flatMap(x -> x.stream()).collect(Collectors.toList());
 		return highMid.contains(value);
 	}
 
 	private boolean canPlaceBiomeNearLow(int value) {
 		List<Integer> lowMid = Stream.of(low, mid).flatMap(x -> x.stream()).collect(Collectors.toList());
+		return lowMid.contains(value);
+	}
+	
+	private boolean canPlaceBiomeNearMid(int value) {
+		List<Integer> lowMid = Stream.of(low, high).flatMap(x -> x.stream()).collect(Collectors.toList());
 		return lowMid.contains(value);
 	}
 
@@ -105,7 +110,19 @@ public enum TemperateLayer implements ICastleTransformer {
 				}
 
 				if (isBiomeMid(center)) {
-					return center;
+					if (canPlaceBiomeNearMid(top) && canPlaceBiomeNearMid(top) && canPlaceBiomeNearMid(bottom)
+							&& canPlaceBiomeNearMid(left)) {
+						
+						return center;
+					
+					} else {
+						List<Integer> ColdAndWarm = IGMathHelper.union(COLD, WARM);
+						List<Integer> temperateCompat = IGMathHelper.union(ColdAndWarm, TEMPERATE);
+						List<Integer> midTemperateCompat = IGMathHelper.intersection(temperateCompat, mid);
+
+						center = midTemperateCompat.get(context.random(midTemperateCompat.size()));
+						return center;
+					}
 				}
 
 				if (isBiomeHigh(center)) {

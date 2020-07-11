@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
@@ -34,21 +35,25 @@ public class BiomeLayerData {
 	public void addLayer(IGBaseBlock layerBlock) { 
 		layerMap.add(layerBlock);
 	}
-
+ 
 	public void addLayerOre(int rarity, int veinSize, IGBaseBlock ore) {
 
 	}
 	
-	public void addMachineOre(float coverage, EnumMaterials ore) {
+	public void addMachineOre(float coverage, EnumOreBearingMaterials ore) {
 		layerOreMap.add(new LayerOre(coverage, ore));
-	}
+	} 
 
 	public IGBaseBlock getLayerBlock(int layerID) {
 		return layerMap.get(layerID - 1); //take one off the input id as we need to start at 0!
 	}
 
 	public LayerOre getLayerOre(int layerID) {
-		return layerOreMap.get(layerID);
+		if(layerOreMap.size() < layerID && layerID >= 0) {
+			return layerOreMap.get(layerID);
+		} else {
+			return null;
+		}
 	}
 
 	public Biome getLbiome() {
@@ -66,18 +71,18 @@ public class BiomeLayerData {
 	public class LayerOre {
 
 		private float coverage;
-		private EnumMaterials ore;
+		private EnumOreBearingMaterials ore;
 
-		public LayerOre(float coverage, EnumMaterials ore) {
+		public LayerOre(float coverage, EnumOreBearingMaterials ore) {
 			this.coverage = coverage;
 			this.ore = ore;
 		}
 
-		public EnumMaterials getOre() {
+		public EnumOreBearingMaterials getOre() {
 			return ore;
 		}
 
-		public void setOre(EnumMaterials ore) { 
+		public void setOre(EnumOreBearingMaterials ore) { 
 			this.ore = ore;
 		}
 

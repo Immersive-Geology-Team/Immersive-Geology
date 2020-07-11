@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "richness=0": {
+   "model": "immersivegeology:block/base/ore_bearing/ore_bearing_igneous_extrusive_poor"
+  },
+  "richness=1": {
+   "model": "immersivegeology:block/base/ore_bearing/ore_bearing_igneous_extrusive_normal"
+  },
+  "richness=2": {
+   "model": "immersivegeology:block/base/ore_bearing/ore_bearing_igneous_extrusive_rich"
+  },
+  "richness=3": {
+   "model": "immersivegeology:block/base/ore_bearing/ore_bearing_igneous_extrusive_dense"
+  }
+ }
+}

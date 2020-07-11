@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.network.ChunkDataPacket;
 import com.igteam.immersivegeology.common.network.PacketHandler;
@@ -70,7 +71,7 @@ public class WorldEventHandler {
 					data = new WorldLayerData(); // TODO for some reason blocks passed through this end up null
 				} 
 			}
-		}
+		} 
 	}
 
 	@SubscribeEvent
@@ -133,6 +134,16 @@ public class WorldEventHandler {
 		Block block = event.getState().getBlock();
 		if(block instanceof IGMaterialBlock) {
 			IGMaterialBlock replaceBlock = (IGMaterialBlock) block;
+			
+			if(event.getState().get(IGProperties.NATURAL)) {
+				double nh =  replaceBlock.material.getHardness();
+				int y = event.getPos().getY();
+				double max = Math.max(1, y);
+				double ns = (((0.3 / Math.pow(Math.E, 8)) * Math.pow(max,Math.E*0.75)) * (original / 8)) / nh;				
+				event.setNewSpeed((float) ns);
+			}
+		} else if(block instanceof IGOreBearingBlock) {
+			IGOreBearingBlock replaceBlock = (IGOreBearingBlock) block;
 			
 			if(event.getState().get(IGProperties.NATURAL)) {
 				double nh =  replaceBlock.material.getHardness();

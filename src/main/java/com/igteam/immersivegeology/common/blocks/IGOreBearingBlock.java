@@ -34,7 +34,7 @@ import net.minecraftforge.common.ToolType;
 
 public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBlockColor {
 
-	protected Material material;
+	public Material material;
 	protected MaterialUseType type;
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;

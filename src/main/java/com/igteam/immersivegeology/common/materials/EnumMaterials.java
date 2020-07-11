@@ -47,6 +47,8 @@ public enum EnumMaterials
 	Quartz(new MaterialCrystalQuartz()),
 
 	//Minerals
+	Anatase(new MaterialMineralAnatase()),
+	Cuprite(new MaterialMineralCuprite()),
 	Zircon(new MaterialMineralZircon()),
 	Ilmenite(new MaterialMineralIlmenite()), 
 	Cobaltite(new MaterialMineralCobaltite()),

@@ -26,7 +26,8 @@ public class PlainsBiome extends IGBiome
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
         
-        IGDefaultBiomeFeatures.addCarvers(this);
+        DefaultBiomeFeatures.addStructures(this);
+        IGDefaultBiomeFeatures.addCarvers(this); 
         DefaultBiomeFeatures.addGrass(this);
         DefaultBiomeFeatures.addTaigaRocks(this);
     }

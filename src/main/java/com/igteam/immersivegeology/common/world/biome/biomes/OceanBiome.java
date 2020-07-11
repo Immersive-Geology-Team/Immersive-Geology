@@ -35,9 +35,11 @@ public class OceanBiome extends IGBiome {
             this.depthMax = SEA_LEVEL - 25;
         }
         
+        
+        DefaultBiomeFeatures.addStructures(this);
         DefaultBiomeFeatures.addKelp(this);
         IGDefaultBiomeFeatures.addOceanCarvers(this);
-    }
+    } 
 
     @Override
     public ISurfaceBuilder getIGSurfaceBuilder() {

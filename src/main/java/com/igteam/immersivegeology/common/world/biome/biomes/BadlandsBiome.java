@@ -39,7 +39,8 @@ public class BadlandsBiome extends IGBiome {
 		DefaultBiomeFeatures.func_222308_M(this);
 		DefaultBiomeFeatures.addStructures(this);
 		DefaultBiomeFeatures.addMonsterRooms(this);
-
+		DefaultBiomeFeatures.addStructures(this);
+		
 		this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));

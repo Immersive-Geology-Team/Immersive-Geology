@@ -34,7 +34,7 @@ public class HillsBiome extends IGBiome
         IGDefaultBiomeFeatures.addCarvers(this);
         IGDefaultBiomeFeatures.addTrees(this);
         
-        
+        DefaultBiomeFeatures.addStructures(this);
         DefaultBiomeFeatures.addTaigaRocks(this);
         DefaultBiomeFeatures.addBerryBushes(this);
     } 

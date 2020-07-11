@@ -1,15 +1,19 @@
 package com.igteam.immersivegeology.common.materials;
 
 import com.igteam.immersivegeology.common.materials.crystals.*;
+import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 
 public enum EnumOreBearingMaterials {
 	Quartz(MaterialCrystalQuartz.baseColor),
 
 	// Minerals 
+	Anatase(MaterialMineralAnatase.baseColor),
+	Cuprite(MaterialMineralCuprite.baseColor),
+	Gold(MaterialMetalGold.baseColor),
 	Zircon(MaterialMineralZircon.baseColor),
 	Ilmenite(MaterialMineralIlmenite.baseColor),
-	Cobaltite(MaterialMineralCobaltite.baseColor), 
+	Cobaltite(MaterialMineralCobaltite.baseColor),  
 	Casserite(MaterialMineralCassiterite.baseColor),
 	Chalcopyrite(MaterialMineralChalcopyrite.baseColor),
 	Chromite(MaterialMineralChromite.baseColor),  

@@ -20,16 +20,26 @@ public class DesertBiome extends IGBiome
     private final float minHeight;
     private final float maxHeight;
 
+    private final boolean isCold;
+    
     public DesertBiome(float minHeight, float maxHeight, boolean isCold)
     {
         super(new Builder().category(Category.DESERT).precipitation(RainType.NONE).downfall(0f).temperature(0.95f),0.95f,0f);
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
+        this.isCold = isCold;
         
         IGDefaultBiomeFeatures.addCarvers(this);
-        DefaultBiomeFeatures.addDeadBushes(this);
-        DefaultBiomeFeatures.addDesertFeatures(this);
-    }
+        DefaultBiomeFeatures.addStructures(this);
+        
+        if(!isCold) {
+	        DefaultBiomeFeatures.addDeadBushes(this);
+	        DefaultBiomeFeatures.addDesertFeatures(this);
+        } else {
+        	DefaultBiomeFeatures.addIcebergs(this);
+        	DefaultBiomeFeatures.addFreezeTopLayer(this);
+        }
+   }
 
     @Nonnull
     @Override
@@ -41,6 +51,7 @@ public class DesertBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain) {
 		// TODO Auto-generated method stub
+		
 		switch(part) {
 			case grass:
 				return Blocks.SAND.getDefaultState();
