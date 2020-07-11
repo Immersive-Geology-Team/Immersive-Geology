@@ -20,7 +20,7 @@ public class DesertBiome extends IGBiome
     private final float minHeight;
     private final float maxHeight;
 
-    public DesertBiome(float minHeight, float maxHeight)
+    public DesertBiome(float minHeight, float maxHeight, boolean isCold)
     {
         super(new Builder().category(Category.DESERT).precipitation(RainType.NONE).downfall(0f).temperature(0.95f),0.95f,0f);
         this.minHeight = minHeight;

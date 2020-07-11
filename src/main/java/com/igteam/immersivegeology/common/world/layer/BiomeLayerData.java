@@ -89,7 +89,7 @@ public class BiomeLayerData {
 			this.coverage = coverage;
 		}
 		
-		
+		 
 	}
 
 	public int getLayerCount() {

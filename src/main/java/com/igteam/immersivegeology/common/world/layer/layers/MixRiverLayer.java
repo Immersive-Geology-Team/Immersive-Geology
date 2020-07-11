@@ -25,7 +25,7 @@ public enum MixRiverLayer implements IAreaTransformer2, IDimOffset0Transformer
         {
             return riverValue;
         }
-        else
+        else 
         {
             return mainValue;
         }

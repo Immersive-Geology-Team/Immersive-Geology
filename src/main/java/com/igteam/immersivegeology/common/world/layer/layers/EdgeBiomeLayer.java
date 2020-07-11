@@ -30,7 +30,7 @@ public enum EdgeBiomeLayer implements ICastleTransformer {
 	            }
 	        }
 	        else if (IGLayerUtil.isMountains(center))
-	        {
+	        { 
 	            if (matcher.test(IGLayerUtil::isLow))
 	            {
 	                return IGLayerUtil.ROLLING_HILLS;

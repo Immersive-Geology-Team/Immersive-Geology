@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.common.world.layer.layers.RandomLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.RemoveOceanLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.RiverLayer;
 import com.igteam.immersivegeology.common.world.layer.layers.ShoreLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.TemperateLayer;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
@@ -47,8 +48,12 @@ public class IGLayerUtil {
 	public static final int DEEP_OCEAN = getId(IGBiomes.DEEP_OCEAN);
 	public static final int OCEAN_EDGE = getId(IGBiomes.OCEAN_EDGE);
 	public static final int DEEP_OCEAN_VOLCANIC = getId(IGBiomes.DEEP_OCEAN_VOLCANIC);
+	
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
 	public static final int DESERT = getId(IGBiomes.DESERT);
+	 
+	public static final int ARCTIC_DESERT = getId(IGBiomes.DESERT);
+	
 	public static final int OASIS = getId(IGBiomes.OASIS);
 	public static final int HILLS = getId(IGBiomes.HILLS);
 	public static final int LOWLANDS = getId(IGBiomes.LOWLANDS);
@@ -64,8 +69,8 @@ public class IGLayerUtil {
 	public static final int SHORE = getId(IGBiomes.SHORE);
 	public static final int STONE_SHORE = getId(IGBiomes.STONE_SHORE);
 	public static final int MOUNTAINS_EDGE = getId(IGBiomes.MOUNTAINS_EDGE);
-	public static final int LAKE = getId(IGBiomes.LAKE);
-	public static final int RIVER = getId(IGBiomes.RIVER);
+	public static final int LAKE = getId(IGBiomes.LAKE); 
+	public static final int RIVER = getId(IGBiomes.RIVER); 
 
 	public static List<IAreaFactory<LazyArea>> createOverworldBiomeLayer(long seed,
 			ImmersiveGenerationSettings settings) {
@@ -82,7 +87,7 @@ public class IGLayerUtil {
 		mainLayer = ZoomLayer.FUZZY.apply(contextFactory.apply(1001L), mainLayer);
 
 		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1002L), mainLayer);
-
+ 
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1003L), mainLayer);
 
 		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1004L), mainLayer);
@@ -120,24 +125,26 @@ public class IGLayerUtil {
 
 		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1011L), mainLayer);
 
-		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1012L), mainLayer);
+		mainLayer = TemperateLayer.NORMAL.apply(contextFactory.apply(1012L), mainLayer);
+		
+		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
 
-		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
+		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
 
-		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
+		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1015L), mainLayer);
 
-		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1015L), mainLayer);
+		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
 
-		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
+		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
 
-		mainLayer = EdgeBiomeLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
+		mainLayer = EdgeBiomeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
 
-		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
+		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1019L), mainLayer);
 
-		mainLayer = AddOasisLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
+		mainLayer = AddOasisLayer.INSTANCE.apply(contextFactory.apply(1020L), mainLayer);
 		
 		for (int i = 0; i < settings.getBiomeZoomLevel(); i++) {
-			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), mainLayer);
+			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1021L), mainLayer);
 		}
 
 		mainLayer = ShoreLayer.INSTANCE.apply(contextFactory.apply(1023L), mainLayer);

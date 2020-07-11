@@ -15,7 +15,7 @@ public enum AddIslandLayer implements IBishopTransformer
     AddIslandLayer(int oceanWeight)
     {
         this.oceanWeight = oceanWeight;
-    }
+    } 
 
     public int apply(INoiseRandom context, int bottomLeft, int bottomRight, int topRight, int topLeft, int center)
     {

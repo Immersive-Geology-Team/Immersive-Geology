@@ -23,7 +23,7 @@ public enum OceanLayer implements ICastleTransformer
                 if (context.random(3) == 0)
                 {
                     return IGLayerUtil.DEEP_OCEAN_VOLCANIC;
-                }
+                } 
             }
         }
         return center;

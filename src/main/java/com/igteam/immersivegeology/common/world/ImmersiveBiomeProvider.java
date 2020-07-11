@@ -48,7 +48,7 @@ public class ImmersiveBiomeProvider extends BiomeProvider {
 
         // todo: create temperature / rainfall layers, and use them to generate biome permutations
     }
-
+ 
     /**
      * Gets the biome from the provided coordinates
      *

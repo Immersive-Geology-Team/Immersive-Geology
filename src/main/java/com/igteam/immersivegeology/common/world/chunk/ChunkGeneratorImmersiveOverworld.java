@@ -176,7 +176,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 					} else if (maxStandardBiomeWeight < weight) {
 						standardBiomeAt = entry.getKey();
 						maxStandardBiomeWeight = weight;
-					}
+					} 
 				}
 
 				// Create river valleys - carve cliffs around river biomes, and smooth out the

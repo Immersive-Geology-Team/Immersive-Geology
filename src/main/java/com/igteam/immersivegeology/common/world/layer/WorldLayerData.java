@@ -81,7 +81,7 @@ public class WorldLayerData {
 		worldLayerData.add(desert);
 		worldLayerData.add(lush_mountains);
 		worldLayerData.add(flooded_mountains);
-		worldLayerData.add(plains);
+		worldLayerData.add(plains); 
 		worldLayerData.add(mountains);
 		worldLayerData.add(ocean);
 		worldLayerData.add(deep_ocean);

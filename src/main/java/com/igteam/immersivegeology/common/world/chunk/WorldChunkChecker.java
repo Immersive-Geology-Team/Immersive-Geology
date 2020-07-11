@@ -58,7 +58,7 @@ public class WorldChunkChecker {
 			}
 
 			@Override
-			public INBT serializeNBT() {
+			public INBT serializeNBT() { 
 				return IG_FIED.getStorage().writeNBT(IG_FIED, inst, null);
 			}
 

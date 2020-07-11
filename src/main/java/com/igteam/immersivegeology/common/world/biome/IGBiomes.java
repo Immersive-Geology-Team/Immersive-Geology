@@ -24,6 +24,7 @@ public class IGBiomes {
     //low height biomes
     public static final IGBiome PLAINS = Helpers.getNull(); 
     public static final IGBiome DESERT = Helpers.getNull();
+    public static final IGBiome ARCTIC_DESERT = Helpers.getNull();
     public static final IGBiome HILLS = Helpers.getNull(); 
     public static final IGBiome LOWLANDS = Helpers.getNull(); 
     public static final IGBiome LOW_CANYONS = Helpers.getNull(); 
@@ -48,9 +49,9 @@ public class IGBiomes {
     
     private static final LazyLoadBase<Set<IGBiome>> BIOMES = new LazyLoadBase<>(() -> {
         Set<IGBiome> values = new HashSet<>();
-        for (IGBiome biome : Arrays.asList(OCEAN, OCEAN_EDGE, DEEP_OCEAN, DEEP_OCEAN_VOLCANIC, PLAINS, DESERT, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, LUSH_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, OASIS, RIVER))
+        for (IGBiome biome : Arrays.asList(OCEAN, OCEAN_EDGE, DEEP_OCEAN, DEEP_OCEAN_VOLCANIC, PLAINS, DESERT, ARCTIC_DESERT, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, LUSH_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, OASIS, RIVER))
         {
-            if (biome == null)
+            if (biome == null) 
             {
                 throw new IllegalStateException("Unable to locate biome! Did an object holder not copy correctly, or was a registry entry changed?");
             }

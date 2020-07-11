@@ -56,11 +56,12 @@ public final class WorldGenRegistryEvents {
             new OceanBiome(true).setRegistryName("ocean_edge"),
             
             new PlainsBiome(-4, 10).setRegistryName("plains"),
-            new DesertBiome(-5, 20).setRegistryName("desert"),
+            new DesertBiome(-5, 20, false).setRegistryName("desert"),
+            new DesertBiome(-5,10, true).setRegistryName("arctic_desert"),
             new LowlandsBiome().setRegistryName("lowlands"),
             new HillsBiome(16).setRegistryName("hills"),
             new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
-
+ 
             new HillsBiome(28).setRegistryName("rolling_hills"),
             new BadlandsBiome().setRegistryName("badlands"),
             new PlainsBiome(20, 30).setRegistryName("plateau"),

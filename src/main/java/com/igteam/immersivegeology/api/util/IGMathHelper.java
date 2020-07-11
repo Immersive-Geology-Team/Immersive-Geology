@@ -1,9 +1,13 @@
 package com.igteam.immersivegeology.api.util;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.Random;
 
 public class IGMathHelper extends MathHelper
 {
@@ -258,7 +262,7 @@ public class IGMathHelper extends MathHelper
         if(gravity==0D)
         {
             return 90F-(float)(Math.atan(height/distance)*180F/Math.PI);
-        }
+        } 
         // simulate the trajectory for angles from 45 to 90 degrees,
         // returning the angle which lands the projectile closest to the target distance
     //        for (double i = Math.PI * 0.25D; i < Math.PI * 0.50D; i += 0.001D) {
@@ -335,5 +339,38 @@ public class IGMathHelper extends MathHelper
         }
         velocity = (float) IGMathHelper.root(Math.pow(vX, 2) * Math.pow(vY, 2));
         return mass*velocity;
+    }
+
+    /**
+     * @author Muddykat
+     * @param list1
+     * @param list2
+     * @return Intersection of List1 and List2
+     */
+    public static List<Integer> intersection(List<Integer> list1, List<Integer> list2) {
+        List<Integer> list = new ArrayList<Integer>();
+
+        for (Integer t : list1) { 
+            if(list2.contains(t)) {
+                list.add(t);
+            }
+        }
+
+        return list;
+    }
+    
+    /**
+     * @author Muddykat
+     * @param list1
+     * @param list2
+     * @return Union of List1 and List2
+     */
+    public static List<Integer> union(List<Integer> list1, List<Integer> list2) {
+        Set<Integer> set = new HashSet<Integer>();
+
+        set.addAll(list1);
+        set.addAll(list2);
+
+        return new ArrayList<Integer>(set);
     }
 }
