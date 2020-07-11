@@ -35,6 +35,8 @@ public class IGMathHelper extends MathHelper
      */
     public static int randInt(int bound)
     {
+        if(bound == 0)
+            return 0;
         if(bound < 0)
             return -RANDOM.nextInt(-bound);
         return RANDOM.nextInt(bound);
