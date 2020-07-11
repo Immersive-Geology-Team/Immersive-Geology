@@ -133,14 +133,15 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 					List<ItemStack> blockDrops = new ArrayList<>();
 					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
 					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
-					int richness = state.get(IGProperties.ORE_RICHNESS);
+					int richness = state.get(IGProperties.ORE_RICHNESS) + 1;
 					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
 					int stoneAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*( 1+player.getLuck()))));
 					int oreMax = richness + IGMathHelper.randInt(fortune);
 					int oreAmount = stoneAmount >= oreMax ? oreMax : stoneAmount;
 					stoneAmount -= oreAmount;
-
+					System.out.println(oreAmount);
 					blockDrops.add(new ItemStack(IGItemGrabber.getIGOreItem(MaterialUseType.ORE_CHUNK, this.material, oreMaterial), oreAmount));
+
 					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), stoneAmount));
 
 					for(ItemStack item : blockDrops)
