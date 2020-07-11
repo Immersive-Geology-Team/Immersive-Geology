@@ -7,6 +7,7 @@ public enum MaterialTypes
 {
 	FLUID,
 	METAL,
+	METALLOID,
 	MINERAL,
 	STONE,
 	CRYSTAL

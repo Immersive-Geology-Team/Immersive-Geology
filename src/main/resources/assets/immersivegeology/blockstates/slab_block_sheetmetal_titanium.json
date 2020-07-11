@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=top": {
+   "model": "immersivegeology:block/base/slab/slab_sheetmetal_top"
+  },
+  "type=bottom": {
+   "model": "immersivegeology:block/base/slab/slab_sheetmetal_bottom"
+  },
+  "type=double": {
+   "model": "immersivegeology:block/base/slab/slab_sheetmetal_double"
+  }
+ }
+}

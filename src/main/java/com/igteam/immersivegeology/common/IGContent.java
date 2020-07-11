@@ -58,7 +58,12 @@ public class IGContent {
 					switch (materialItem.getCategory()) {
 					case RESOURCE_ITEM:
 						registeredIGItems.add(materialItem.getItem(material));
-						break;
+					break;
+					case CHUNK_ORE:
+						for (EnumOreBearingMaterials ore : EnumOreBearingMaterials.values()) {
+							registeredIGItems.add(materialItem.getOreItem(material,ore));
+						}
+					break;
 					case RESOURCE_BLOCK:
 					case BLOCK:
 						registeredIGBlocks.put(materialItem.getName() + "_" + material.getName(),

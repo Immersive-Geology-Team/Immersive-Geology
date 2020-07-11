@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMineralBase extends Material
 {
     public abstract EnumMineralType getMineralType();
-    protected static int baseColor = 0xffffff;
 
     @Override
     public boolean hasSubtype(MaterialUseType useType)
@@ -39,7 +38,7 @@ public abstract class MaterialMineralBase extends Material
     }
     
     public int getStaticColor() {
-    	return baseColor;
+    	return 0xffffff;
     }
    
 }

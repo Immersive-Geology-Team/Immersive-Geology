@@ -10,7 +10,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
-
+ 
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -54,9 +54,10 @@ public abstract class MaterialMetalBase extends Material
 
 	public enum EnumMetalType
 	{
+		METALLOID,
 		METAL,
 		ALLOY
-	}
+	} 
 
 	public boolean hasIngot() { return true; };
 	public boolean hasPlate() { return true; };

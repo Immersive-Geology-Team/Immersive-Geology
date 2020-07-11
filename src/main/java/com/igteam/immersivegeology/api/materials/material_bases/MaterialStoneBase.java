@@ -22,6 +22,7 @@ public abstract class MaterialStoneBase extends Material
 			case ROCK:
 				//blocks
 			case ORE_BEARING:
+			case ORE_CHUNK:
 			case GRAVEL:
 			case COBBLESTONE:
 			case POLISHED_STONE:
@@ -37,7 +38,7 @@ public abstract class MaterialStoneBase extends Material
 		}
 		return false;
 	}
-	
+	 
 	@Override
 	public MaterialTypes getMaterialType()
 	{

@@ -42,7 +42,7 @@ public class CreativeMenuHandler {
 				if (!subGroupButtons.isEmpty()) {
 					subGroupButtons.forEach((button) -> {
 						button.active = true;
-						button.visible = true;
+						button.visible = true; 
 					});
 				}
 				Minecraft.getInstance().textureManager.bindTexture(CEX_GUI_TEXTURES);

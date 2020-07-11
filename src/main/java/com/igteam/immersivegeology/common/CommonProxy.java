@@ -4,7 +4,7 @@ import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 
 public class CommonProxy
 {
-	public void preInit()
+	public void preInit() 
 	{
 
 	}

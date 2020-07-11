@@ -6,11 +6,13 @@ import com.igteam.immersivegeology.common.materials.minerals.*;
 public enum EnumOreBearingMaterials {
 	Quartz(MaterialCrystalQuartz.baseColor),
 
-	// Minerals
+	// Minerals 
+	Zircon(MaterialMineralZircon.baseColor),
+	Ilmenite(MaterialMineralIlmenite.baseColor),
+	Cobaltite(MaterialMineralCobaltite.baseColor), 
 	Casserite(MaterialMineralCassiterite.baseColor),
-	Thorite(MaterialMineralThorianite.baseColor), 
 	Chalcopyrite(MaterialMineralChalcopyrite.baseColor),
-	Chromite(MaterialMineralChromite.baseColor), 
+	Chromite(MaterialMineralChromite.baseColor),  
 	Cryolite(MaterialMineralCryolite.baseColor),
 	Ferberite(MaterialMineralFerberite.baseColor),
 	Fluorite(MaterialMineralFluorite.baseColor), 
@@ -20,6 +22,7 @@ public enum EnumOreBearingMaterials {
 	Magnetite(MaterialMineralMagnetite.baseColor),
 	Pyrolusite(MaterialMineralPyrolusite.baseColor),
 	RockSalt(MaterialMineralRockSalt.baseColor), 
+	Thorite(MaterialMineralThorianite.baseColor), 
 	Uraninite(MaterialMineralUraninite.baseColor);
 
 	int oreColor;

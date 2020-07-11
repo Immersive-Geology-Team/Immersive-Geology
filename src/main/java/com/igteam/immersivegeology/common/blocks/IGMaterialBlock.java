@@ -67,7 +67,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 			ItemJsonGenerator.generateDefaultBlockItem(material, type);
 		}
 		
-	}
+	} 
 	
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -79,7 +79,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 			{
 				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
 				if (state.get(IGProperties.NATURAL) && !silk)
-				{
+				{ 
 					List<ItemStack> blockDrops = new ArrayList<>();
 					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
 					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
@@ -94,7 +94,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 					{
 					worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 				}
-			} else
+			} else 
 				{
 				worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 			}

@@ -68,7 +68,7 @@ public class WorldEventHandler {
 				if (!worldDone) {
 					worldDone = true;
 					data = new WorldLayerData(); // TODO for some reason blocks passed through this end up null
-				}
+				} 
 			}
 		}
 	}
@@ -108,11 +108,11 @@ public class WorldEventHandler {
 				int w = mc.mainWindow.getScaledWidth();
 				int h = mc.mainWindow.getScaledHeight();
 				ChunkPos cpos = new ChunkPos(mc.player.chunkCoordX, mc.player.chunkCoordZ);
-				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world);
+				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world); 
 				if (chunkDataProvider != null) {
-//					mc.fontRenderer.drawStringWithShadow(
-//							"Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()),
-//							w / 2 + 30, h / 2 + 10, 0xFFAA00);
+					//mc.fontRenderer.drawStringWithShadow(
+					//		"Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()),
+					//		w / 2 + 30, h / 2 + 10, 0xFFAA00);
 //					mc.fontRenderer.drawStringWithShadow(
 //							"Average Temp: " + String.valueOf(chunkDataProvider.get(cpos).getAvgTemp()), w / 2 + 30,
 //							h / 2 + 20, 0xFFAA00);

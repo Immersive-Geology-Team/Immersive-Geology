@@ -18,6 +18,7 @@
   "item.immersivegeology.crystal.name": "%s Crystal",
   "item.immersivegeology.raw_crystal.name": "Raw %s Crystal",
   "item.immersivegeology.chunk.name": "%s Chunk",
+  "item.immersivegeology.ore_chunk.name": "%s Ore Chunk",
   "block.immersivegeology.storage.name": "%s Block",
   "block.immersivegeology.rock.name": "%s Stone",
   "block.immersivegeology.cobblestone.name": "%s Cobblestone",
@@ -34,16 +35,15 @@
   "block.immersivegeology.sheetmetal.name": "%s Sheetmetal",
   "block.immersivegeology.sheetmetal.slab.name": "%s Sheetmetal Slab",
   "block.immersivegeology.dust.name": "%s Dust Block",
-  "block.immersivegeology.poor_ore.name": "Poor %s Ore",
-  "block.immersivegeology.rich_ore.name": "Rich %s Ore",
-  "block.immersivegeology.normal_ore.name": "%s Ore",
+  "block.immersivegeology.ore_bearing.name": "Ore Bearing %s",
 
   "material.immersivegeology.marble.name": "Marble",
   "material.immersivegeology.pegamite.name": "Pegamite",
   "material.immersivegeology.rhyolite.name": "Rhyolite",
   "material.immersivegeology.basalt.name": "Basalt",
-
-
+  "material.immersivegeology.regolith.name": "Regolith",
+  "material.immersivegeology.gabbros.name": "Gabbros",
+  
   "material.minecraft.granite.name": "Granite",
   "material.minecraft.diorite.name": "Diorite",
   "material.minecraft.andesite.name": "Andesite",
@@ -68,6 +68,7 @@
   "material.immersivegeology.zirconium.name": "Zirconium",
   "material.immersivegeology.vanadium.name": "Vanadium",
   "material.immersivegeology.platinum.name": "Platinum",
+  "material.immersivegeology.cobalt.name": "Cobalt",
 
   "material.immersivegeology.magnetite.name": "Magnetite",
   "material.immersivegeology.rocksalt.name": "Rock Salt",

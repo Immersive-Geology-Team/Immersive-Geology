@@ -24,23 +24,25 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 {
 	public IGMaterialResourceItem(Material material, MaterialUseType key) {
 		super(key, material);
-		this.setRegistryName("item_"+ key.getName() + "_" + material.getName());
-		this.itemName = "item."+ key.getName() + "." + material.getName()+".name";
+		if(!key.equals(MaterialUseType.ORE_CHUNK)){
+			this.setRegistryName("item_"+ key.getName() + "_" + material.getName());
+			this.itemName = "item."+ key.getName() + "." + material.getName()+".name";
+			IGItemGrabber.inputNewItem(key, material, this);
+		}
+		//add this item to the item grabber, that way we can reference this later. 
 		
-		//add this item to the item grabber, that way we can refrence this later.
-		IGItemGrabber.inputNewItem(key, material, this);
 		if(key.equals(MaterialUseType.ROCK)) {
 			if(material instanceof MaterialStoneBase) {
 				MaterialStoneBase rockMat = (MaterialStoneBase) material;
 				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
-			}
+			} 
 		} else if(key.equals(MaterialUseType.CHUNK)) {
+			ItemJsonGenerator.generateDefaultItem(material, key); 
+		} else if(!key.equals(MaterialUseType.ORE_CHUNK)){
 			ItemJsonGenerator.generateDefaultItem(material, key);
-		} else {
-			ItemJsonGenerator.generateDefaultItem(material, key);
-		}
+		} 
 
-	}
+	}  
 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)

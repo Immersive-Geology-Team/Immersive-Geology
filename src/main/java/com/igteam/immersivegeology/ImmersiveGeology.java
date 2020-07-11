@@ -40,7 +40,7 @@ public class ImmersiveGeology
 	public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
 			.named(new ResourceLocation(MODID, "main"))
 			.networkProtocolVersion(() -> NETWORK_VERSION)
-			.serverAcceptedVersions(NETWORK_VERSION::equals)
+			.serverAcceptedVersions(NETWORK_VERSION::equals) 
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);

@@ -303,7 +303,7 @@ public class IGBaseBlock extends Block implements IIGBlock {
 			return true;
 		}
 	}
-
+ 
 	@Override
 	public Item getItemBlock() {
 		return itemBlock;

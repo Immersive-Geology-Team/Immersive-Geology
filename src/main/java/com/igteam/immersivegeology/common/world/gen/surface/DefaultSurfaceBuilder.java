@@ -6,6 +6,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
+import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 
@@ -16,6 +19,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunk;
@@ -48,7 +52,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	        for (int y = startHeight; y >= 0 && surfaceFlag != 0; y--)
 	        {
 	            pos.setPos(localX, y, localZ);
-	            BlockState stateAt = chunkIn.getBlockState(pos);
+	            BlockState stateAt = chunkIn.getBlockState(pos); 
 	            if (stateAt.isAir(chunkIn, pos))
 	            {
 	                // Air, so continue downwards and wait for surface to appear
@@ -67,9 +71,11 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                            chunkIn.setBlockState(pos, topBlock, false);
 	                        } else {
 
-								int snowOffset = random.nextInt(2) + random.nextInt(2) + random.nextInt(1) - random.nextInt(2);
-	                        	if(y >= 180 + snowOffset) {
-
+								int snowOffset = random.nextInt(2) + random.nextInt(2) + random.nextInt(1) - random.nextInt(2);	
+								float regionTemp = temperature;
+								
+								if(y >= 180 + snowOffset + regionTemp) {
+	                        		
 	                        		int snowWeight = random.nextInt();
 	                        		if(snowWeight%4096 == 0 || snowOffset < 1)
 									{
@@ -94,7 +100,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 										chunkIn.setBlockState(pos.up(2), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
 									}
 	                        	}
-	                        }
+							}
 	                    }
 	                    else
 	                    {
@@ -106,7 +112,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder {
 	                {
 	                    surfaceFlag--;
 	                    chunkIn.setBlockState(pos, stateUnder, false);
-	                }
+	                } 
 	            }
 	        }
 	    }

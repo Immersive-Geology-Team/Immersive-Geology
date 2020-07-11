@@ -1,23 +1,36 @@
 package com.igteam.immersivegeology.common.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.common.blocks.helpers.IOverlayColor;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import com.igteam.immersivegeology.common.util.BlockstateGenerator;
+import com.igteam.immersivegeology.common.util.IGItemGrabber;
 import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IEnviromentBlockReader;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBlockColor {
 
@@ -42,9 +55,9 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		this.oreMaterial = oreMat;
 		this.setBlockLayer(BlockRenderLayer.CUTOUT_MIPPED);
 		this.material = material;
-		this.type = type;
+		this.type = type; 
 		if(itemBlock instanceof IGBlockMaterialItem)
-		{
+		{ 
 			((IGBlockMaterialItem)itemBlock).material=this.material;
 			((IGBlockMaterialItem)itemBlock).overlay=this.oreMaterial;
 			((IGBlockMaterialItem)itemBlock).subtype=this.type;
@@ -56,7 +69,7 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 				BlockstateGenerator.generateOreBearingBlock(material, type, rockMat.getStoneType(), oreMat);
 				ItemJsonGenerator.generateOreBearingBlockItem(material, type, rockMat.getStoneType(), oreMat);
 			}
-		}
+		} 
 		
 		this.setDefaultState(this.stateContainer.getBaseState()
 		.with(NATURAL, Boolean.valueOf(false))
@@ -105,4 +118,40 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 			int index) {
 			return material.getColor(0);
 	}
+	
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		// TODO Auto-generated method stub
+		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		if(!player.isCreative() && !player.isSpectator() && this.canHarvestBlock(state, worldIn, pos, player))
+		{
+			if(type.equals(MaterialUseType.ORE_BEARING) && !tool.isEmpty())
+			{
+				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
+				if (!silk)
+				{
+					List<ItemStack> blockDrops = new ArrayList<>();
+					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
+					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
+					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
+					int dropAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*( 1+player.getLuck()))));
+					blockDrops.add(new ItemStack(IGItemGrabber.getIGOreItem(MaterialUseType.ORE_CHUNK, this.material, oreMaterial), dropAmount));
+					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), 1 + RANDOM.nextInt(1)));
+
+					for(ItemStack item : blockDrops)
+					{
+						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(),item));
+					}
+					
+				} else {
+					worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
+				}
+			} else {
+				worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
+			}
+		}
+		
+		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+
 }

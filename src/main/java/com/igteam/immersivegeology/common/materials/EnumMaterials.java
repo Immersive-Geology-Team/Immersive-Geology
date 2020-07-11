@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.materials.stones.*;
 import net.minecraft.util.IStringSerializable;
 
 import com.igteam.immersivegeology.common.materials.metals.*;
+import com.igteam.immersivegeology.common.materials.metals.alloys.*;
 
 public enum EnumMaterials
 {
@@ -30,24 +31,25 @@ public enum EnumMaterials
 	Nickel(new MaterialMetalNickel()),
 	Platinum(new MaterialMetalPlatinum()),
 	Silver(new MaterialMetalSilver()),
+	Cobalt(new MaterialMetalCobalt()),
 	Uranium(new MaterialMetalUranium()),
-    /*, TODO add all Materials
-=======
 	Tin(new MaterialMetalTin()),
 	Titanium(new MaterialMetalTitanium()),
 	Tungsten(new MaterialMetalTungsten()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
-	/* TODO add alloys
 
     Constantan(new MaterialMetalConstantan()),
-    Electrum(new MaterialMetalElectrum()),
-    Steel(new MaterialMetalSteel()), */
-
+    Electrum(new MaterialMetalElectrum()), 
+    Steel(new MaterialMetalSteel()),  
+     
 	//Crystals
 	Quartz(new MaterialCrystalQuartz()),
 
 	//Minerals
+	Zircon(new MaterialMineralZircon()),
+	Ilmenite(new MaterialMineralIlmenite()), 
+	Cobaltite(new MaterialMineralCobaltite()),
 	Casserite(new MaterialMineralCassiterite()),
 	Chalcopyrite(new MaterialMineralChalcopyrite()),
 	Chromite(new MaterialMineralChromite()),
@@ -80,13 +82,13 @@ public enum EnumMaterials
 	Limestone(new MaterialStoneLimestone()),
 	Pegamite(new MaterialStonePegamite()),
 	Regolith(new MaterialStoneRegolith());
-	
+	 
 	public final Material material;
 
 	EnumMaterials(Material material)
 	{
 		this.material = material;
-	} 
+	}  
 
 	public static Stream<EnumMaterials> filterMetals()
 	{

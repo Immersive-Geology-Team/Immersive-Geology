@@ -45,7 +45,7 @@ public class IGMaterialItem extends IGBaseItem
 	{
 		String matName = I18n.format("material."+material.getModID()+"."+material.getName()+".name");
 		return new TranslationTextComponent("item."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", matName);
-	}
+	} 
 
 	@Override
 	public Rarity getRarity(ItemStack stack)

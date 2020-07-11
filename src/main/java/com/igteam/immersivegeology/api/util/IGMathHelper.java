@@ -48,10 +48,10 @@ public class IGMathHelper extends MathHelper
     public static int randInt(int x, int y)
     {
         if(x <= y)
-            return x + RANDOM.nextInt(y-x);
-        return y + RANDOM.nextInt(x-y);
-    }
-
+            return x + RANDOM.nextInt(Math.max(1,y-x));
+        return y + RANDOM.nextInt(Math.max(1,y-x));
+    }  
+ 
     /**
      * @Author Pabilo8
      * <p>

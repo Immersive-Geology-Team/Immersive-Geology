@@ -40,7 +40,12 @@ public class ItemJsonGenerator {
 		generateOreBearingBlockItem("block_" + type.getName() + "_" + material.getName() + "_" + oreType.toString().toLowerCase(),
 				type.getName() + "_" + stoneType.getName());
 	}
-
+	
+	public static void generateOreItem(Material material, MaterialUseType type, EnumOreBearingMaterials oreType) {
+		generateOreItem("item_"+ type.getName() + "_" + material.getName() + "_"+ oreType.toString().toLowerCase());
+		
+	}
+ 
 
 	// NOTE: this generate runs at start up, minecraft looks for item and block
 	// models BEFORE this runs,
@@ -62,9 +67,26 @@ public class ItemJsonGenerator {
 		} catch (IOException e) {
 
 		}
-
 	}
 
+	public static void generateOreItem(String registryName) {
+		if (!GENERATE_MODELS)
+			return; 
+		try {
+			File file = new File("../src/main/resources/assets/immersivegeology/models/item/" + registryName + ".json");
+			if (!file.exists()) {
+				JsonWriter jsonWriter = new JsonWriter(new FileWriter(file));
+				jsonWriter.setIndent(" "); // this makes it more readable for humans!
+				jsonWriter.beginObject();
+				jsonWriter.name("parent").value("immersivegeology:item/base/chunk");
+				jsonWriter.endObject();
+				jsonWriter.close();
+			}			
+		} catch (IOException e) {
+
+		}
+	}
+	
 	public static void generateBlockItem(String registryName, String type) {
 		if (!GENERATE_MODELS)
 			return;

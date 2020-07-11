@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.items.IGMaterialRockItem;
 import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 
@@ -29,8 +30,9 @@ public enum MaterialUseType implements IStringSerializable
 	ROCK(UseCategory.BLOCK, ItemSubGroup.raw),
 	ORE_BEARING(UseCategory.ORE_BEARING, Material.IRON, ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
+	ORE_CHUNK(UseCategory.CHUNK_ORE, ItemSubGroup.raw),
 	//Metal/crystal items
-	INGOT(ItemSubGroup.processed),
+	INGOT(ItemSubGroup.processed), 
 	PLATE(ItemSubGroup.processed),
 	DUST(ItemSubGroup.processed),
 	TINY_DUST(ItemSubGroup.processed),
@@ -179,7 +181,13 @@ public enum MaterialUseType implements IStringSerializable
 	public IGBaseItem getItem(com.igteam.immersivegeology.api.materials.Material material)
 	{
 		return new IGMaterialResourceItem(material,this);
-	}
+	} 
+		
+	//Default to resource, allows for using custom classes
+	public IGBaseItem getOreItem(com.igteam.immersivegeology.api.materials.Material material, EnumOreBearingMaterials ore)
+	{
+		return new IGMaterialRockItem(material,this, ore);
+	}  
 
 	//Default to resource, allows for using custom classes
 	public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
@@ -194,6 +202,8 @@ public enum MaterialUseType implements IStringSerializable
 	public enum UseCategory
 	{
 		//Used for chunks
+		CHUNK_ORE,
+		
 		CHUNK_ITEM,
 		//Used for ingots, plates, etc.
 		RESOURCE_ITEM,

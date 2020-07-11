@@ -27,7 +27,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Nonnull
 	@Override
 	public String getModID()
-	{
+	{ 
 		return ImmersiveGeology.MODID;
 	}
 
