@@ -38,8 +38,8 @@ public class IGMathHelper extends MathHelper
         if(bound == 0)
             return 0;
         if(bound < 0)
-            return -RANDOM.nextInt(-bound);
-        return RANDOM.nextInt(bound);
+            return -RANDOM.nextInt(Math.abs(bound));
+        return RANDOM.nextInt(Math.abs(bound));
     }
 
     /**
@@ -53,9 +53,11 @@ public class IGMathHelper extends MathHelper
      */
     public static int randInt(int x, int y)
     {
-        if(x <= y)
-            return x + RANDOM.nextInt(Math.max(1,y-x));
-        return y + RANDOM.nextInt(Math.max(1,y-x));
+        if (x == y)
+            return 0;
+        if(x < y)
+            return x + RANDOM.nextInt(y-x);
+        return y + RANDOM.nextInt(y-x);
     }  
  
     /**
