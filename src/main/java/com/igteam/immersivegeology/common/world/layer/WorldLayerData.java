@@ -29,13 +29,14 @@ public class WorldLayerData {
 		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
 		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Rhyolite.material));
 		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Basalt.material));
-		//mountains.addLayerOre(rarity, veinSize, ore); 
-		mountains.addMachineOre(0.12f, EnumOreBearingMaterials.Gold);
-		mountains.addMachineOre(0.38f, EnumOreBearingMaterials.Hematite); 
-		mountains.addMachineOre(0.35f, EnumOreBearingMaterials.Cuprite);
-		mountains.addMachineOre(0.15f, EnumOreBearingMaterials.Uraninite);  
-		 
-		mountains.settleLayers();
+		
+		for(int id = 0; id < mountains.getLayers().size(); id++) {
+			mountains.addMachineOre(id,0.12f, EnumOreBearingMaterials.Gold);
+			mountains.addMachineOre(id,0.38f, EnumOreBearingMaterials.Hematite); 
+			mountains.addMachineOre(id,0.35f, EnumOreBearingMaterials.Cuprite);
+			mountains.addMachineOre(id,0.15f, EnumOreBearingMaterials.Uraninite);   
+		}
+		mountains.settleLayers(); 
 		
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
@@ -71,7 +72,7 @@ public class WorldLayerData {
 		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Basalt.material));
 		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Gabbros.material));
 		ocean.settleLayers();
-		
+		 
 		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Limestone.material));
 		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Limestone.material));
 		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Basalt.material));
@@ -85,10 +86,12 @@ public class WorldLayerData {
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		badlands.settleLayers();
-		badlands.addMachineOre(0.62f, EnumOreBearingMaterials.Gold);
-		badlands.addMachineOre(0.08f, EnumOreBearingMaterials.Cuprite);
-		badlands.addMachineOre(0.30f, EnumOreBearingMaterials.Magnetite);
-		
+		for(int id = 0; id <= badlands.getLayers().size(); id++) {
+			badlands.addMachineOre(id, 0.42f, EnumOreBearingMaterials.Gold);
+			badlands.addMachineOre(id, 0.20f, EnumOreBearingMaterials.Cuprite);
+			badlands.addMachineOre(id, 0.40f, EnumOreBearingMaterials.Magnetite); 
+		}
+		 
 		 
 		worldLayerData.add(badlands);
 		worldLayerData.add(desert);

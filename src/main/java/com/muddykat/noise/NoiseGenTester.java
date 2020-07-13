@@ -10,10 +10,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
+import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 public class NoiseGenTester {
-	 public static void greyWriteImage(double[][] data, double[][] data2, double[][] data3){
+	
+
+	 public static void greyWriteImage(double[][] data){
 	        //this takes an array of doubles between 0 and 1 and generates a grey scale image from them
 
 	        BufferedImage image = new BufferedImage(data.length,data[0].length, BufferedImage.TYPE_INT_RGB);
@@ -28,19 +31,19 @@ public class NoiseGenTester {
 	            if (data[x][y]<0){
 	                data[x][y]=0;
 	            }
-	            if (data2[x][y]>1){
-	                data2[x][y]=1;
+	            if (data[x][y]>1){
+	            	data[x][y]=1;
 	            }
-	            if (data2[x][y]<0){
-	                data2[x][y]=0;
+	            if (data[x][y]<0){
+	            	data[x][y]=0;
 	            }
-	            if (data3[x][y]>1){
-	                data3[x][y]=1;
+	            if (data[x][y]>1){
+	            	data[x][y]=1;
 	            }
-	            if (data3[x][y]<0){
-	                data3[x][y]=0;
+	            if (data[x][y]<0){
+	            	data[x][y]=0;
 	            }
-	              Color col=new Color((float)data[x][y],(float)data2[x][y],(float)data3[x][y]); 
+	            Color col=new Color((float)data[x][y],(float)data[x][y],(float)data[x][y]); 
 	            image.setRGB(x, y, col.getRGB());
 	          }
 	        }
@@ -64,12 +67,10 @@ public class NoiseGenTester {
 	        double jEnd=500;
 	        int chunkAmount = 30;
 	        long seed = 1020;
-	        //OpenSimplexNoise noise = new OpenSimplexNoise(seed);
+	        SimplexNoise2D noise = new SimplexNoise2D(seed);
 	        
-	        final INoise2D warpX = new SimplexNoise2D(seed).octaves(4).spread(0.1f).scaled(-30, 30);
-	        final INoise2D warpZ = new SimplexNoise2D(seed + 1).octaves(4).spread(0.1f).scaled(-30, 30);
-	        INoise2D noise = new SimplexNoise2D(seed).octaves(4).spread(0.2f).warped(warpX, warpZ).map(x -> x > 0.4 ? x - 0.8f : -x).scaled(-0.4f, 0.8f, 0f, 1f).spread(0.3f);
-	       
+	       // final INoise2D noise = new SimplexNoise2D(seed);
+	         
 	        double[][] result=new double[16 * chunkAmount][16 * chunkAmount];
 
 	        for(int i=0;i< (16 * chunkAmount);i++){
@@ -77,36 +78,11 @@ public class NoiseGenTester {
 	                int xp=(int)(iStart+i*((iEnd-iStart)/(16 * chunkAmount)));
 	                int yp=(int)(jStart+j*((jEnd-jStart)/(16 * chunkAmount)));
 	                
-	                result[i][j]=noise.noise(xp, yp);
+	                result[i][j]=noise.spread(0.2f).flattened(0.5f, 1).noise(xp, yp);
 	                
-	            } 
+	            }    
 	        }
-
-	        //OpenSimplexNoise noise = new OpenSimplexNoise(seed);
-	        INoise2D noise2 = new SimplexNoise2D(seed).octaves(4).scaled(0, 0.8f).flattened(0, 500).spread(0.2f).terraces(8);
-	        double[][] result2=new double[16 * chunkAmount][16 * chunkAmount];
-
-	        for(int i=0;i< (16 * chunkAmount);i++){
-	            for(int j=0;j<(16 * chunkAmount);j++){
-	                int xp=(int)(iStart+i*((iEnd-iStart)/(16 * chunkAmount)));
-	                int yp=(int)(jStart+j*((jEnd-jStart)/(16 * chunkAmount)));
-	                
-	                result2[i][j]=noise.terraces(5).noise(xp, yp);
-	                
-	            } 
-	        }
-	        
-	        INoise2D noise3 = new SimplexNoise2D(seed).octaves(4).scaled(0.2f, 0.8f).flattened(0, 500).spread(0.02f);
-	        double[][] result3=new double[(16 * chunkAmount)][(16 * chunkAmount)];
-	         
-	
-	        for(int i=0;i< (16 * chunkAmount);i++){
-	            for(int j=0;j<(16 * chunkAmount);j++){
-	            	result3[i][j] = noise.flattened(0.2f, 0.6f).noise(i, j);
-	            }
-	        }
-	        
 	            
-	        greyWriteImage(result,result2,result3);
+	        greyWriteImage(result);
 	    }
 }

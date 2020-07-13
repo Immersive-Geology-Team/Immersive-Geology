@@ -31,8 +31,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.OXYGEN),
-				new ElementProportion(PeriodicTableElement.HYDROGEN, 2)
+				new ElementProportion(PeriodicTableElement.HYDROGEN, 2),
+				new ElementProportion(PeriodicTableElement.OXYGEN)
 		));
 	}
 

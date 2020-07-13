@@ -36,7 +36,7 @@ public class DesertBiome extends IGBiome
 	        DefaultBiomeFeatures.addDeadBushes(this);
 	        DefaultBiomeFeatures.addDesertFeatures(this);
         } else {
-        	DefaultBiomeFeatures.addIcebergs(this);
+        	DefaultBiomeFeatures.addIcebergs(this); 
         	DefaultBiomeFeatures.addFreezeTopLayer(this);
         }
    }

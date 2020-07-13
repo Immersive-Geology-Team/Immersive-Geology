@@ -69,10 +69,10 @@ public class WorldEventHandler {
 				if (!worldDone) {
 					worldDone = true;
 					data = new WorldLayerData(); // TODO for some reason blocks passed through this end up null
-				} 
+				}  
 			}
 		} 
-	}
+	} 
 
 	@SubscribeEvent
 	public static void onChunkWatchWatch(ChunkWatchEvent.Watch event) {
@@ -109,7 +109,7 @@ public class WorldEventHandler {
 				int w = mc.mainWindow.getScaledWidth();
 				int h = mc.mainWindow.getScaledHeight();
 				ChunkPos cpos = new ChunkPos(mc.player.chunkCoordX, mc.player.chunkCoordZ);
-				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world); 
+				ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(mc.world);  
 				if (chunkDataProvider != null) {
 					//mc.fontRenderer.drawStringWithShadow(
 					//		"Regional Temp: " + String.valueOf(chunkDataProvider.get(cpos).getRegionalTemp()),
@@ -142,14 +142,17 @@ public class WorldEventHandler {
 				double ns = (((0.3 / Math.pow(Math.E, 8)) * Math.pow(max,Math.E*0.75)) * (original / 8)) / nh;				
 				event.setNewSpeed((float) ns);
 			}
-		} else if(block instanceof IGOreBearingBlock) {
+		} 
+		if(block instanceof IGOreBearingBlock) {
 			IGOreBearingBlock replaceBlock = (IGOreBearingBlock) block;
 			
 			if(event.getState().get(IGProperties.NATURAL)) {
 				double nh =  replaceBlock.material.getHardness();
+				System.out.println("Ore start Hard: " + String.valueOf(nh));
 				int y = event.getPos().getY();
 				double max = Math.max(1, y);
-				double ns = (((0.3 / Math.pow(Math.E, 8)) * Math.pow(max,Math.E*0.75)) * (original / 8)) / nh;				
+				double ns = (((0.3 / Math.pow(Math.E, 8)) * Math.pow(max,Math.E*0.75)) * (original / 8)) / nh;			
+				System.out.println("Ore End Hard: " + String.valueOf(ns));
 				event.setNewSpeed((float) ns);
 			}
 		}

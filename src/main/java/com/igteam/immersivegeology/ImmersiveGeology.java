@@ -47,7 +47,7 @@ public class ImmersiveGeology
 	public static ServerProxy serverProxy = new ServerProxy();
 	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
 
-	public static final boolean GENERATE_MODELS=true;
+	public static final boolean GENERATE_MODELS=false;
 	
 	public ImmersiveGeology()
 	{

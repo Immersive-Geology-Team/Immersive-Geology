@@ -13,7 +13,7 @@ public class AbstractSimplexNoise
     AbstractSimplexNoise(long seed)
     {
         // Setup permutations
-        short[] p = PERMUTATION_BASE.clone();
+        short[] p = PERMUTATION_BASE.clone(); 
         Random rand = new Random(seed);
 
         //the seed determines the swaps that occur between the default order and the order we're actually going to use

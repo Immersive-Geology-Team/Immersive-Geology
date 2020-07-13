@@ -39,7 +39,7 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;
 	
-	
+	 
 	protected EnumOreBearingMaterials oreMaterial;
 	
 	public IGOreBearingBlock(Material material, MaterialUseType type, EnumOreBearingMaterials oreMat) {
@@ -139,7 +139,7 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 					int oreMax = richness + IGMathHelper.randInt(fortune);
 					int oreAmount = stoneAmount >= oreMax ? oreMax : stoneAmount;
 					stoneAmount -= oreAmount;
-					System.out.println(oreAmount);
+					
 					blockDrops.add(new ItemStack(IGItemGrabber.getIGOreItem(MaterialUseType.ORE_CHUNK, this.material, oreMaterial), oreAmount));
 
 					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), stoneAmount));

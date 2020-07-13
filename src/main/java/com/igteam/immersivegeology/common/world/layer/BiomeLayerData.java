@@ -18,12 +18,12 @@ import net.minecraft.world.biome.Biome;
 public class BiomeLayerData {
 
 	private ArrayList<IGBaseBlock> layerMap = new ArrayList<IGBaseBlock>();
-	private ArrayList<LayerOre> layerOreMap = new ArrayList<LayerOre>();
-
-	private Biome lbiome;
+	private HashMap<Integer, ArrayList<LayerOre>> layerOreMap = new HashMap<Integer, ArrayList<LayerOre>>();
+	
+	private Biome lbiome; 
 	private float baseHardnessMod;
-
-	public BiomeLayerData(Biome biome, float baseHardnessMod) {
+	
+	public BiomeLayerData(Biome biome, float baseHardnessMod) { 
 		this.lbiome = biome; 
 		this.baseHardnessMod = baseHardnessMod;
 	}
@@ -36,25 +36,39 @@ public class BiomeLayerData {
 		layerMap.add(layerBlock);
 	}
  
-	public void addLayerOre(int rarity, int veinSize, IGBaseBlock ore) {
-
-	}
-	
-	public void addMachineOre(float coverage, EnumOreBearingMaterials ore) {
-		layerOreMap.add(new LayerOre(coverage, ore));
-	} 
+	/**
+	 * @param layerID - Layer the ore is to appear in
+	 * @param coverage - How common is the ore; min is 0.2f max is 0.55f, higher or lower will be ignored and set to the closest acceptable value. (this is to allow ores to spawn in a controlled amount) if it was 1 every rock would be that ore, anything lower than a 0.2 would almost never show up
+	 * @param ore - the ore to spawn - choose from the EnumOreBearingMaterials
+	 */
+	public void addMachineOre(int layerID, float coverage, EnumOreBearingMaterials ore) {
+		if(layerOreMap.containsKey(layerID)) {
+			ArrayList<LayerOre> oreList = layerOreMap.get(layerID);
+			oreList.add(new LayerOre(coverage, ore));
+			layerOreMap.put(layerID, oreList);
+		} else {
+			ArrayList<LayerOre> firstOre = new ArrayList<LayerOre>();
+			firstOre.add(new LayerOre(coverage, ore));
+			layerOreMap.put(layerID, firstOre);
+		}
+	}  
 
 	public IGBaseBlock getLayerBlock(int layerID) {
 		return layerMap.get(layerID - 1); //take one off the input id as we need to start at 0!
 	}
 
-	public LayerOre getLayerOre(int layerID) {
-		if(layerOreMap.size() < layerID && layerID >= 0) {
-			return layerOreMap.get(layerID);
-		} else {
-			return null;
+	public int layerOreSize(int layerID) {
+		return layerOreMap.get(layerID).size();
+	}
+	
+	public ArrayList<LayerOre> getLayerOre(int layerID) {
+		if(layerOreMap.containsKey(layerID)) {
+			return layerOreMap.get(layerID);  
+		} else { 
+			return null; 
 		}
 	}
+	
 
 	public Biome getLbiome() {
 		return lbiome;

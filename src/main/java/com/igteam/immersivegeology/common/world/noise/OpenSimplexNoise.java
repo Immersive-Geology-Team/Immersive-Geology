@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common.world.noise;
 
-public class OpenSimplexNoise {
+public class OpenSimplexNoise implements INoise3D {
 
 	private static final double STRETCH_CONSTANT_2D = -0.211324865405187; // (1/Math.sqrt(2+1)-1)/2;
 	private static final double SQUISH_CONSTANT_2D = 0.366025403784439; // (Math.sqrt(2+1)-1)/2;
@@ -20,12 +20,12 @@ public class OpenSimplexNoise {
 
 	public OpenSimplexNoise() {
 		this(DEFAULT_SEED);
-	}
+	} 
 
 	public OpenSimplexNoise(short[] perm) {
 		this.perm = perm;
 		permGradIndex3D = new short[256];
-
+ 
 		for (int i = 0; i < 256; i++) {
 			// Since 3D has 24 gradients, simple bitmask won't work, so precompute modulo
 			// array.
@@ -2104,4 +2104,10 @@ public class OpenSimplexNoise {
 			-1, -1, -3, 1, -1, -1, -1, 3, -1, -1, -1, 1, -3, 3, 1, -1, -1, 1, 3, -1, -1, 1, 1, -3, -1, 1, 1, -1, -3, -3,
 			1, -1, -1, -1, 3, -1, -1, -1, 1, -3, -1, -1, 1, -1, -3, 3, -1, -1, -1, 1, -3, -1, -1, 1, -1, -3, -1, 1, -1,
 			-1, -3, -3, -1, -1, -1, -1, -3, -1, -1, -1, -1, -3, -1, -1, -1, -1, -3, };
+
+	@Override
+	public float noise(float x, float y, float z) {
+		// TODO Auto-generated method stub
+		return eval(x,y,z);
+	}
 }

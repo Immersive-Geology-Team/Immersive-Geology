@@ -10,7 +10,7 @@ public interface INoise3D {
 	}
 	
 	default INoise3D octaves(int octaves, float persistence)
-    {
+    { 
         final float[] frequency = new float[octaves];
         final float[] amplitude = new float[octaves];
         for (int i = 0; i < octaves; i++)
@@ -27,7 +27,7 @@ public interface INoise3D {
             return value;
         };
     }
-	
+	 
 	default INoise3D ridged()
     {
         return (x, y, z) -> {

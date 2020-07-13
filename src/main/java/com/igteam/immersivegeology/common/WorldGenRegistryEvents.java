@@ -61,7 +61,7 @@ public final class WorldGenRegistryEvents {
             new LowlandsBiome().setRegistryName("lowlands"),
             new HillsBiome(16).setRegistryName("hills"),
             new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
- 
+  
             new HillsBiome(28).setRegistryName("rolling_hills"),
             new BadlandsBiome().setRegistryName("badlands"),
             new PlainsBiome(20, 30).setRegistryName("plateau"),

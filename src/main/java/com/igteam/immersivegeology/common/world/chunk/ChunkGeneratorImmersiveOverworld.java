@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.BiomeLayerData.LayerOre;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
@@ -61,10 +62,9 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 			for (int z = 0; z < 9; z++) {
 				array[x + 9 * z] = 0.0211640211641D * (1 - 0.03125D * ((z - 4) * (z - 4) + (x - 4) * (x - 4)));
 			}
-		}
+		} 
 	});
 	
-	private final WorleyOreCarver worleyOreCarver;
 	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
@@ -85,7 +85,26 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		this.biomeProvider = (ImmersiveBiomeProvider) provider;
 		
 		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
-		this.worleyOreCarver = new WorleyOreCarver(seedGenerator);
+		
+		
+		// Create a generator for each ore in each layer for each biome!
+		// This is a BAD BAD way of doing things, we SHOULD be using something like 3D Noise Layering System, but no
+		// I went with the quickest easier way of creating a generator for each situation...
+		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
+		int biomeLayerID = 0;
+        for(BiomeLayerData biomeData : data.worldLayerData) {
+        	int totalLayers = biomeData.getLayerCount();
+        	for(int layer = totalLayers; layer > 0; layer--) {
+        		if(biomeData.getLayerOre(layer) != null){
+	            	for(LayerOre ore : biomeData.getLayerOre(layer)) {
+	            		WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, biomeData, biomeLayerID, ore);
+	            	}
+        		}  
+        	}
+        	biomeLayerID++;
+        }
+		
+		
 		
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
@@ -98,7 +117,24 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
         {
             // First, run worley cave carver
             worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4);
-            worleyOreCarver.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4);
+            
+            // TODO RE-WORK this trash!
+		    // ABSOLUTE HORROR right here, but I don't have the time to do a proper 3D noise Layer System for unquie ore veins, so
+            // so works, so it will do...
+
+		    int biomeLayerID = 0;
+	        for(BiomeLayerData biomeData : data.worldLayerData) {
+	        	int totalLayers = biomeData.getLayerCount();
+	        	for(int layer = totalLayers; layer > 0; layer--) {
+	        		if(biomeData.getLayerOre(layer) != null){
+		            	for(LayerOre ore : biomeData.getLayerOre(layer)) {
+		            		WorleyOreCarver.INSTANCE.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4, biomeData, biomeLayerID, layer, ore.getOre(), ore.getCoverage());
+		            	}
+	        		}
+	        	}
+	        	biomeLayerID++;
+	        }
+        
         } 
 
         // Fire other world carvers
@@ -130,7 +166,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		// The spread biomes (for calculating terrain smoothing), and the 16x16 biome
 		// grid (for height map creation)
-		IGBiome[] spreadBiomes = biomeProvider.getBiomes(chunkX - 4, chunkZ - 4, 24, 24, false);
+		IGBiome[] spreadBiomes = biomeProvider.getBiomes(chunkX - 4, chunkZ - 4, 24, 24, false); 
 		IGBiome[] localBiomes = new IGBiome[16 * 16];
 
 		// Build the base height map, and also assign surface types (different from
@@ -165,7 +201,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 				for (Object2DoubleMap.Entry<IGBiome> entry : heightBiomeMap.object2DoubleEntrySet()) {
 					double weight = entry.getDoubleValue();
 					double height = weight * biomeNoiseMap.get(entry.getKey()).noise(chunkX + x, chunkZ + z);
-					totalHeight += height;
+					totalHeight += height; 
 					if (entry.getKey() == IGBiomes.RIVER) {
 						riverHeight += height;
 						riverWeight += weight;
@@ -258,7 +294,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 								} else {
 									replaceBlock = b.getLayerBlock(l);
 								}
-								
+
 								if ((y <= (totHeight * l) / lc)
 										&& (y >= (((totHeight * l) / lc) - ((totHeight * l) / lc) / l))) {
 									
@@ -266,7 +302,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 									chunk.setBlockState(pos, replaceBlock.getDefaultState()
 									.with(IGBaseBlock.NATURAL, Boolean.TRUE),
 									true);
-								}
+								} 
+								
 							}
 						}
 					}
