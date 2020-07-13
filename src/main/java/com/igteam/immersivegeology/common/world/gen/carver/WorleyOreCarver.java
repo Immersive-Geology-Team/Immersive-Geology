@@ -60,6 +60,7 @@ public class WorleyOreCarver {
 		}
 	}
 
+	//TODO layer ore not spawning correctly (the top layer seems to be missing) (that means pretty likely all layers aside from bottom are missing
     public void carve(IChunk chunkIn, int chunkX, int chunkZ, BiomeLayerData biomeData, int biomeLayerID, int layer, EnumOreBearingMaterials oreMaterial, float coverage)
     {
     	
