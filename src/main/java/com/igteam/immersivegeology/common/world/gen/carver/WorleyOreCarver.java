@@ -211,7 +211,7 @@ public class WorleyOreCarver
 														{
 															richness = 2; // RICH
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.4)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.35)
 														{
 															richness = 1; // NORMAL
 														}
