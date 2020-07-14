@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_thorite",
+    "immersivegeology:item_ore_chunk_basalt_thorite",
+    "immersivegeology:item_ore_chunk_diorite_thorite",
+    "immersivegeology:item_ore_chunk_endstone_thorite",
+    "immersivegeology:item_ore_chunk_gabbros_thorite",
+    "immersivegeology:item_ore_chunk_granite_thorite",
+    "immersivegeology:item_ore_chunk_limestone_thorite",
+    "immersivegeology:item_ore_chunk_marble_thorite",
+    "immersivegeology:item_ore_chunk_netherrack_thorite",
+    "immersivegeology:item_ore_chunk_pegamite_thorite",
+    "immersivegeology:item_ore_chunk_regolith_thorite",
+    "immersivegeology:item_ore_chunk_rhyolite_thorite"
+  ]
+}

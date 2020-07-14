@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_zircon",
+    "immersivegeology:item_ore_chunk_basalt_zircon",
+    "immersivegeology:item_ore_chunk_diorite_zircon",
+    "immersivegeology:item_ore_chunk_endstone_zircon",
+    "immersivegeology:item_ore_chunk_gabbros_zircon",
+    "immersivegeology:item_ore_chunk_granite_zircon",
+    "immersivegeology:item_ore_chunk_limestone_zircon",
+    "immersivegeology:item_ore_chunk_marble_zircon",
+    "immersivegeology:item_ore_chunk_netherrack_zircon",
+    "immersivegeology:item_ore_chunk_pegamite_zircon",
+    "immersivegeology:item_ore_chunk_regolith_zircon",
+    "immersivegeology:item_ore_chunk_rhyolite_zircon"
+  ]
+}
