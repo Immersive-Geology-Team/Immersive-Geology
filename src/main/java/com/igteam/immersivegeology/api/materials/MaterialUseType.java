@@ -195,6 +195,12 @@ public enum MaterialUseType implements IStringSerializable
 		return new IGOreBearingBlock(material, this, oreMat);
 	}
 
+	public String getTagName()
+	{
+		String name = getName();
+		return name.charAt(name.length()-1)=='s'?name:name+"s";
+	}
+
 	public enum UseCategory
 	{
 		//Used for chunks
