@@ -65,7 +65,7 @@ public class MaterialMetalTin extends MaterialMetalBase
 	public float getHardness()
 	{
 		return 1.0F;
-	} 
+	}
 
 	@Override
 	public float getMiningResistance()

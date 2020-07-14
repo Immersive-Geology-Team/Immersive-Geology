@@ -30,10 +30,10 @@ public class MaterialMineralGypsum extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.CALCIUM),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CALCIUM),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN)
+		)
 		);
 	}
 
@@ -44,7 +44,8 @@ public class MaterialMineralGypsum extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -61,7 +62,7 @@ public class MaterialMineralGypsum extends MaterialMineralBase
 	}
 
 	public static int baseColor = 0xffffff;
-	
+
 	@Override
 	public int getColor(int temperature)
 	{

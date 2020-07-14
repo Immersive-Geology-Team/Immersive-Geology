@@ -54,7 +54,7 @@ public class NoiseGenTester {
 	    }
 
 
-	    public static void main(String args[]){
+	    public static void main(String[] args){
 	    	double iStart=0;
 	        double iEnd=500;
 	        double jStart=0;

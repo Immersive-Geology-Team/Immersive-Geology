@@ -1,16 +1,16 @@
 package com.igteam.immersivegeology.common.materials.minerals;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase;
-
 import net.minecraft.item.Rarity;
 
-public class MaterialMineralCuprite extends MaterialMineralBase {
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
+public class MaterialMineralCuprite extends MaterialMineralBase
+{
 
 	@Override
 	public String getName()
@@ -36,57 +36,66 @@ public class MaterialMineralCuprite extends MaterialMineralBase {
 	}
 
 	@Override
-	public Rarity getRarity() {
+	public Rarity getRarity()
+	{
 		// TODO Auto-generated method stub
 		return Rarity.COMMON;
 	}
 
 	@Override
-	public int getBoilingPoint() {
+	public int getBoilingPoint()
+	{
 		// TODO Auto-generated method stub
 		return 2835;
 	}
 
 	@Override
-	public int getMeltingPoint() {
+	public int getMeltingPoint()
+	{
 		// TODO Auto-generated method stub
 		return 1357;
 	}
 
 	public static int baseColor = 0xEF2161;
-	
+
 	@Override
-	public int getColor(int temperature) {
+	public int getColor(int temperature)
+	{
 		// TODO Auto-generated method stub
 		return baseColor;
 	}
 
 	@Override
-	public float getHardness() {
+	public float getHardness()
+	{
 		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
-	public float getMiningResistance() {
+	public float getMiningResistance()
+	{
 		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
-	public float getBlastResistance() {
+	public float getBlastResistance()
+	{
 		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
-	public float getDensity() {
+	public float getDensity()
+	{
 		// TODO Auto-generated method stub
 		return 8.96f;
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		// TODO Auto-generated method stub
 		return EnumMineralType.MINERAL;
 	}

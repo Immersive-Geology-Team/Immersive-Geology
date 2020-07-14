@@ -54,7 +54,7 @@ public class MaterialMetalGold extends MaterialMetalBase
 	}
 
 	public static int baseColor = 0xFFD700;
-	
+
 	@Override
 	public int getColor(int temperature)
 	{

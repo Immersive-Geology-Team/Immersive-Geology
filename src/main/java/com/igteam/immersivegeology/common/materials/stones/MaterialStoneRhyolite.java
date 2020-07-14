@@ -8,9 +8,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * Created by JStocke12 on 27-03-2020.
@@ -27,7 +25,7 @@ public class MaterialStoneRhyolite extends MaterialStoneBase
 	@Nonnull
 	@Override
 	public String getModID()
-	{ 
+	{
 		return ImmersiveGeology.MODID;
 	}
 

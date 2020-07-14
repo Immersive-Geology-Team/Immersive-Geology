@@ -30,9 +30,9 @@ public class MaterialMineralFluorite extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.CALCIUM),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.FLUORINE, 2)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CALCIUM),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.FLUORINE, 2)
+		)
 		);
 	}
 
@@ -43,7 +43,8 @@ public class MaterialMineralFluorite extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -58,8 +59,9 @@ public class MaterialMineralFluorite extends MaterialMineralBase
 	{
 		return -1;
 	}
-	
+
 	public static int baseColor = 0xffffff;
+
 	@Override
 	public int getColor(int temperature)
 	{

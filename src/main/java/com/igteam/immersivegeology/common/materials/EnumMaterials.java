@@ -1,25 +1,24 @@
 package com.igteam.immersivegeology.common.materials;
 
-import java.util.stream.Stream;
-
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
-import com.igteam.immersivegeology.common.materials.fluids.*;
+import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
+import com.igteam.immersivegeology.common.materials.metals.*;
+import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalConstantan;
+import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalElectrum;
+import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalSteel;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 import com.igteam.immersivegeology.common.materials.stones.*;
 
-import net.minecraft.util.IStringSerializable;
-
-import com.igteam.immersivegeology.common.materials.metals.*;
-import com.igteam.immersivegeology.common.materials.metals.alloys.*;
+import java.util.stream.Stream;
 
 public enum EnumMaterials
 {
- 
+
 	//Empty
 	Empty(new MaterialEmpty()),
-	
+
 	//Metals
 	Aluminium(new MaterialMetalAluminium()),
 	Chromium(new MaterialMetalChromium()),
@@ -39,10 +38,10 @@ public enum EnumMaterials
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
 
-    Constantan(new MaterialMetalConstantan()),
-    Electrum(new MaterialMetalElectrum()), 
-    Steel(new MaterialMetalSteel()),  
-     
+	Constantan(new MaterialMetalConstantan()),
+	Electrum(new MaterialMetalElectrum()),
+	Steel(new MaterialMetalSteel()),
+
 	//Crystals
 	Quartz(new MaterialCrystalQuartz()),
 
@@ -50,7 +49,7 @@ public enum EnumMaterials
 	Anatase(new MaterialMineralAnatase()),
 	Cuprite(new MaterialMineralCuprite()),
 	Zircon(new MaterialMineralZircon()),
-	Ilmenite(new MaterialMineralIlmenite()), 
+	Ilmenite(new MaterialMineralIlmenite()),
 	Cobaltite(new MaterialMineralCobaltite()),
 	Casserite(new MaterialMineralCassiterite()),
 	Chalcopyrite(new MaterialMineralChalcopyrite()),
@@ -80,17 +79,17 @@ public enum EnumMaterials
 	Endstone(new MaterialStoneEndstone()),
 	Basalt(new MaterialStoneBasalt()),
 	Gabbros(new MaterialStoneGabbros()),
-	Marble(new MaterialStoneMarble()),	
+	Marble(new MaterialStoneMarble()),
 	Limestone(new MaterialStoneLimestone()),
 	Pegamite(new MaterialStonePegamite()),
 	Regolith(new MaterialStoneRegolith());
-	 
+
 	public final Material material;
 
 	EnumMaterials(Material material)
 	{
 		this.material = material;
-	}  
+	}
 
 	public static Stream<EnumMaterials> filterMetals()
 	{

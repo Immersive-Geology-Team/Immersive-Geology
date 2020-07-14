@@ -1,42 +1,22 @@
 package com.igteam.immersivegeology.common.blocks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import blusunrize.immersiveengineering.common.items.HammerItem;
+import blusunrize.immersiveengineering.common.items.WirecutterItem;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
-import com.igteam.immersivegeology.common.util.IGItemGrabber;
-
-import blusunrize.immersiveengineering.common.items.HammerItem;
-import blusunrize.immersiveengineering.common.items.WirecutterItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -46,7 +26,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 
-public class IGBaseBlock extends Block implements IIGBlock {
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class IGBaseBlock extends Block implements IIGBlock
+{
 	protected static IProperty[] tempProperties;
 	public BlockItem itemBlock = null;
 	public final String name;
@@ -63,9 +50,10 @@ public class IGBaseBlock extends Block implements IIGBlock {
 	public ItemSubGroup itemSubGroup = ItemSubGroup.misc;
 
 	public static final BooleanProperty NATURAL = IGProperties.NATURAL;
-	
+
 	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock,
-			ItemSubGroup group, IProperty... additionalProperties) {
+					   ItemSubGroup group, IProperty... additionalProperties)
+	{
 		super(setTempProperties(blockProps, additionalProperties));
 		this.name = name;
 
@@ -73,14 +61,17 @@ public class IGBaseBlock extends Block implements IIGBlock {
 		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
-		if (itemBlock != null) {
-			try {
+		if(itemBlock!=null)
+		{
+			try
+			{
 				this.itemSubGroup = group;
 				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
 						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
 				this.itemBlock.setRegistryName(registryName);
 				IGContent.registeredIGItems.add(this.itemBlock);
-			} catch (Exception e) {
+			} catch(Exception e)
+			{
 				throw new RuntimeException(e);
 			}
 		}
@@ -90,101 +81,118 @@ public class IGBaseBlock extends Block implements IIGBlock {
 	public float naturalHardness = 1f;
 
 	@Override
-	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
 		return naturalHardness;
 	}
-	
+
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	{
 		super.fillStateContainer(builder);
 		builder.add(NATURAL);
 		builder.add(tempProperties);
 	}
 
 	// TODO do we still need this hackyness?
-	public static Block.Properties setTempProperties(Properties blockProps, Object[] additionalProperties) {
+	public static Block.Properties setTempProperties(Properties blockProps, Object[] additionalProperties)
+	{
 		List<IProperty<?>> propList = new ArrayList<>();
-		for (Object o : additionalProperties) {
-			if (o instanceof IProperty)
-				propList.add((IProperty<?>) o);
-			if (o instanceof IProperty[])
-				propList.addAll(Arrays.asList(((IProperty<?>[]) o)));
+		for(Object o : additionalProperties)
+		{
+			if(o instanceof IProperty)
+				propList.add((IProperty<?>)o);
+			if(o instanceof IProperty[])
+				propList.addAll(Arrays.asList(((IProperty<?>[])o)));
 		}
 		tempProperties = propList.toArray(new IProperty[0]);
 		return blockProps.variableOpacity();
 	}
 
-	public IGBaseBlock setHidden(boolean shouldHide) {
+	public IGBaseBlock setHidden(boolean shouldHide)
+	{
 		isHidden = shouldHide;
 		return this;
 	}
 
-	public boolean isHidden() {
+	public boolean isHidden()
+	{
 		return isHidden;
 	}
 
-	public IGBaseBlock setHasFlavour(boolean shouldHave) {
+	public IGBaseBlock setHasFlavour(boolean shouldHave)
+	{
 		hasFlavour = shouldHave;
 		return this;
 	}
 
 	@Override
-	public String getNameForFlavour() {
+	public String getNameForFlavour()
+	{
 		return name;
 	}
 
 	@Override
-	public boolean hasFlavour() {
+	public boolean hasFlavour()
+	{
 		return hasFlavour;
 	}
 
-	public IGBaseBlock setBlockLayer(BlockRenderLayer... layer) {
+	public IGBaseBlock setBlockLayer(BlockRenderLayer... layer)
+	{
 		Preconditions.checkArgument(layer.length > 0);
 		this.renderLayers = Arrays.asList(layer);
 		return this;
 	}
 
 	@Override
-	public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
+	public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer)
+	{
 		return renderLayers.contains(layer);
 	}
 
-	public IGBaseBlock setLightOpacity(int opacity) {
+	public IGBaseBlock setLightOpacity(int opacity)
+	{
 		lightOpacity = opacity;
 		return this;
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer() {
+	public BlockRenderLayer getRenderLayer()
+	{
 		// TODO This is currently mostly a marker for culling, the actual layer is
 		// determined by canRenderInLayer
-		return notNormalBlock ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID;
+		return notNormalBlock?BlockRenderLayer.CUTOUT: BlockRenderLayer.SOLID;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		if (notNormalBlock)
+	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		if(notNormalBlock)
 			return 0;
-		// TODO this sometimes locks up when generating IE blocks as part of worldgen
-		else if (state.isOpaqueCube(worldIn, pos))
+			// TODO this sometimes locks up when generating IE blocks as part of worldgen
+		else if(state.isOpaqueCube(worldIn, pos))
 			return lightOpacity;
 		else
-			return state.propagatesSkylightDown(worldIn, pos) ? 0 : 1;
+			return state.propagatesSkylightDown(worldIn, pos)?0: 1;
 	}
 
-	public IGBaseBlock setMobility(PushReaction flag) {
+	public IGBaseBlock setMobility(PushReaction flag)
+	{
 		mobilityFlag = flag;
 		return this;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public PushReaction getPushReaction(BlockState state) {
+	public PushReaction getPushReaction(BlockState state)
+	{
 		return mobilityFlag;
 	}
 
-	public IGBaseBlock setNotNormalBlock() {
+	public IGBaseBlock setNotNormalBlock()
+	{
 		notNormalBlock = true;
 		return this;
 	}
@@ -192,124 +200,148 @@ public class IGBaseBlock extends Block implements IIGBlock {
 	// TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to
 	// want to map
 	@Override
-	public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos) {
-		return notNormalBlock ? 1 : super.func_220080_a(state, world, pos);
+	public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos)
+	{
+		return notNormalBlock?1: super.func_220080_a(state, world, pos);
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
-		return notNormalBlock || super.propagatesSkylightDown(p_200123_1_, p_200123_2_, p_200123_3_);
+	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_)
+	{
+		return notNormalBlock||super.propagatesSkylightDown(p_200123_1_, p_200123_2_, p_200123_3_);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
 		return !notNormalBlock;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isNormalCube(BlockState state, IBlockReader world, BlockPos pos) {
+	public boolean isNormalCube(BlockState state, IBlockReader world, BlockPos pos)
+	{
 		return !notNormalBlock;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V extends Comparable<V>> BlockState applyProperty(BlockState in, IProperty<V> prop, Object val) {
-		return in.with(prop, (V) val);
+	protected <V extends Comparable<V>> BlockState applyProperty(BlockState in, IProperty<V> prop, Object val)
+	{
+		return in.with(prop, (V)val);
 	}
 
-	public void onIGBlockPlacedBy(BlockItemUseContext context, BlockState state) {
+	public void onIGBlockPlacedBy(BlockItemUseContext context, BlockState state)
+	{
 
 	}
 
-	public boolean canIGBlockBePlaced(BlockState newState, BlockItemUseContext context) {
+	public boolean canIGBlockBePlaced(BlockState newState, BlockItemUseContext context)
+	{
 		return true;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items)
+	{
 		items.add(new ItemStack(this, 1));
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean eventReceived(BlockState state, World worldIn, BlockPos pos, int eventID, int eventParam) {
-		if (worldIn.isRemote && eventID == 255) {
+	public boolean eventReceived(BlockState state, World worldIn, BlockPos pos, int eventID, int eventParam)
+	{
+		if(worldIn.isRemote&&eventID==255)
+		{
 			worldIn.notifyBlockUpdate(pos, state, state, 3);
 			return true;
 		}
 		return super.eventReceived(state, worldIn, pos, eventID, eventParam);
 	}
 
-	public IGBaseBlock setHammerHarvest() {
+	public IGBaseBlock setHammerHarvest()
+	{
 		canHammerHarvest = true;
 		return this;
 	}
 
-	public IGBaseBlock setWireHarvest() {
+	public IGBaseBlock setWireHarvest()
+	{
 		canCutterHarvest = true;
 		return this;
 	}
 
-	public boolean allowHammerHarvest(BlockState blockState) {
+	public boolean allowHammerHarvest(BlockState blockState)
+	{
 		return canHammerHarvest;
 	}
 
-	public boolean allowWirecutterHarvest(BlockState blockState) {
+	public boolean allowWirecutterHarvest(BlockState blockState)
+	{
 		return canCutterHarvest;
 	}
 
 	@Override
-	public boolean isToolEffective(BlockState state, ToolType tool) {
-		if (allowHammerHarvest(state) && tool == HammerItem.HAMMER_TOOL)
+	public boolean isToolEffective(BlockState state, ToolType tool)
+	{
+		if(allowHammerHarvest(state)&&tool==HammerItem.HAMMER_TOOL)
 			return true;
-		if (allowWirecutterHarvest(state) && tool == WirecutterItem.CUTTER_TOOL)
+		if(allowWirecutterHarvest(state)&&tool==WirecutterItem.CUTTER_TOOL)
 			return true;
 		return super.isToolEffective(state, tool);
 	}
 
-	public ResourceLocation createRegistryName() {
+	public ResourceLocation createRegistryName()
+	{
 		return new ResourceLocation(ImmersiveGeology.MODID, name);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-			BlockRayTraceResult hit) {
+									BlockRayTraceResult hit)
+	{
 		ItemStack activeStack = player.getHeldItem(hand);
-		if (activeStack.getToolTypes().contains(HammerItem.HAMMER_TOOL))
+		if(activeStack.getToolTypes().contains(HammerItem.HAMMER_TOOL))
 			return hammerUseSide(hit.getFace(), player, world, pos, hit);
 		return super.onBlockActivated(state, world, pos, player, hand, hit);
 	}
 
-	public boolean hammerUseSide(Direction side, PlayerEntity player, World w, BlockPos pos, BlockRayTraceResult hit) {
+	public boolean hammerUseSide(Direction side, PlayerEntity player, World w, BlockPos pos, BlockRayTraceResult hit)
+	{
 		return false;
 	}
 
-	public abstract static class IELadderBlock extends IGBaseBlock {
+	public abstract static class IELadderBlock extends IGBaseBlock
+	{
 		public IELadderBlock(String name, Block.Properties material, Class<? extends IGBlockItem> itemBlock,
-				IProperty... additionalProperties) {
+							 IProperty... additionalProperties)
+		{
 			super(name, material, IGBlockItem.class, ItemSubGroup.misc, additionalProperties);
 		}
 
 		@Override
-		public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
+		public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity)
+		{
 			return true;
 		}
 	}
- 
+
 	@Override
-	public Item getItemBlock() {
+	public Item getItemBlock()
+	{
 		return itemBlock;
 	}
 
-	public void setNaturalHardness(float h) {
+	public void setNaturalHardness(float h)
+	{
 		naturalHardness = h;
 	}
 

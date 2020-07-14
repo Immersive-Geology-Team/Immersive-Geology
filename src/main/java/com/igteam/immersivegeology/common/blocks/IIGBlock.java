@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 public interface IIGBlock
 {
 	boolean hasFlavour();
-	public Item getItemBlock();
+
+	Item getItemBlock();
+
 	String getNameForFlavour();
 }

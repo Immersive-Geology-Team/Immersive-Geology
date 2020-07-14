@@ -36,7 +36,7 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 				)
 		);
 	}
- 
+
 	@Override
 	public Rarity getRarity()
 	{
@@ -59,10 +59,10 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	public int getMeltingPoint()
 	{
 		return -1;
-	} 
+	}
 
 	public static int baseColor = 0x475B74;
-	
+
 	@Override
 	public int getColor(int temperature)
 	{
@@ -107,11 +107,12 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	{
 		return null;
 	}
-	
+
 	@Override
-	public int getStaticColor() {
-    	return baseColor;
-    }
+	public int getStaticColor()
+	{
+		return baseColor;
+	}
 
 	/*@Nullable
 	@Override

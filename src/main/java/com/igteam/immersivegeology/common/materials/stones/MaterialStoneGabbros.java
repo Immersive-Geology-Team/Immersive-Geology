@@ -1,16 +1,14 @@
 package com.igteam.immersivegeology.common.materials.stones;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-
-import javax.annotation.Nonnull;
-
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
-
 import net.minecraft.item.Rarity;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 /**
  * Created by JStocke12 on 27-03-2020.

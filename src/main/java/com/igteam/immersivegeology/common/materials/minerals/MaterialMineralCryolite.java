@@ -30,10 +30,10 @@ public class MaterialMineralCryolite extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.ALUMINIUM),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.FLUORINE, 6),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.SODIUM, 3)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.ALUMINIUM),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.FLUORINE, 6),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SODIUM, 3)
+		)
 		);
 	}
 
@@ -44,7 +44,8 @@ public class MaterialMineralCryolite extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -59,7 +60,9 @@ public class MaterialMineralCryolite extends MaterialMineralBase
 	{
 		return -1;
 	}
+
 	public static int baseColor = 0xffffff;
+
 	@Override
 	public int getColor(int temperature)
 	{

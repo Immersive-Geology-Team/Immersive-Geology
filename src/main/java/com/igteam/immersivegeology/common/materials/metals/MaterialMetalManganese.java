@@ -49,7 +49,10 @@ public class MaterialMetalManganese extends MaterialMetalBase
 	}
 
 	@Override
-	public int getMeltingPoint() { return 1519; }
+	public int getMeltingPoint()
+	{
+		return 1519;
+	}
 
 	@Override
 	public int getColor(int temperature)

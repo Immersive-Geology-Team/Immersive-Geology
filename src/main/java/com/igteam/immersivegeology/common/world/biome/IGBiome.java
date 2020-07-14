@@ -1,49 +1,48 @@
 package com.igteam.immersivegeology.common.world.biome;
 
-import javax.annotation.Nonnull;
-
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
-import com.igteam.immersivegeology.common.world.gen.surface.ISurfacePart;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import com.igteam.immersivegeology.common.world.gen.surface.IIGSurfaceBlock;
-public abstract class IGBiome extends Biome {
+
+import javax.annotation.Nonnull;
+
+public abstract class IGBiome extends Biome
+{
 
 	protected final float btemp;
 	protected final float brain;
-	
+
 	@Override
-	public float getTemperature(BlockPos pos) {
+	public float getTemperature(BlockPos pos)
+	{
 		int sea_level = ChunkGeneratorImmersiveOverworld.SEA_LEVEL;
-		if (pos.getY() > sea_level) {
-			float f = (float) (TEMPERATURE_NOISE.getValue((double) ((float) pos.getX() / 8.0F),
-					(double) ((float) pos.getZ() / 8.0F)) * 4.0D);
-			return btemp - (f + (float) pos.getY() - sea_level) * 0.05F / 30.0F;
-		} else {
+		if(pos.getY() > sea_level)
+		{
+			float f = (float)(TEMPERATURE_NOISE.getValue((float)pos.getX()/8.0F,
+					(float)pos.getZ()/8.0F)*4.0D);
+			return btemp-(f+(float)pos.getY()-sea_level)*0.05F/30.0F;
+		}
+		else
+		{
 			return btemp;
 		}
 	}
-	
-	public float getBrain() {
+
+	public float getBrain()
+	{
 		return brain;
 	}
 
 	// TODO may want to add salt and fresh water distinction
 	protected IGBiome(Builder builder, int waterColor, int waterFogColor, RainType type, float temperature,
-			float downfall) {
+					  float downfall)
+	{
 		super(builder.depth(0).scale(0).waterColor(waterColor).waterFogColor(waterFogColor).precipitation(type)
 				.temperature(temperature).downfall(downfall)
 				// Unused for now, may be used by variant biomes
@@ -54,7 +53,8 @@ public abstract class IGBiome extends Biome {
 		brain = downfall;
 	}
 
-	protected IGBiome(Builder builder, float temperature, float downfall) {
+	protected IGBiome(Builder builder, float temperature, float downfall)
+	{
 		super(builder.depth(0).scale(0).waterColor(0x456CBE).waterFogColor(0x3A5B82).precipitation(RainType.RAIN)
 				.temperature(0.5f).downfall(0.5f)
 				// Unused for now, may be used by variant biomes
@@ -69,7 +69,8 @@ public abstract class IGBiome extends Biome {
 	public abstract INoise2D createNoiseLayer(long seed);
 
 	@Nonnull
-	public ISurfaceBuilder getIGSurfaceBuilder() {
+	public ISurfaceBuilder getIGSurfaceBuilder()
+	{
 		return ISurfaceBuilder.DEFAULT;
 	}
 

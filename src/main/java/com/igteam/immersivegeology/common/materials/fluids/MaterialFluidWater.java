@@ -43,7 +43,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public EnumFluidType getFluidType() {
+	public EnumFluidType getFluidType()
+	{
 		return EnumFluidType.FLUID;
 	}
 
@@ -54,7 +55,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public float getConcentration() {
+	public float getConcentration()
+	{
 		return 0;
 	}
 

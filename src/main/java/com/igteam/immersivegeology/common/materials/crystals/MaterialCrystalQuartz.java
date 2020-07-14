@@ -11,78 +11,88 @@ import java.util.LinkedHashSet;
 
 public class MaterialCrystalQuartz extends MaterialCrystalBase
 {
-    @Override
-    public String getName()
-    {
-        return "quartz";
-    }
+	@Override
+	public String getName()
+	{
+		return "quartz";
+	}
 
-    @Nonnull
-    @Override
-    public String getModID()
-    {
-        return "minecraft";
-    }
+	@Nonnull
+	@Override
+	public String getModID()
+	{
+		return "minecraft";
+	}
 
-    @Override
+	@Override
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
-        ));
-    }
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
+		));
+	}
 
-    @Nonnull
-    @Override
-    public Rarity getRarity() {
-        return Rarity.UNCOMMON;
-    }
+	@Nonnull
+	@Override
+	public Rarity getRarity()
+	{
+		return Rarity.UNCOMMON;
+	}
 
-    @Override
-    public int getBoilingPoint() {
-        return 2503;
-    }
+	@Override
+	public int getBoilingPoint()
+	{
+		return 2503;
+	}
 
-    @Override
-    public int getMeltingPoint() {
-        return 1923;
-    }
+	@Override
+	public int getMeltingPoint()
+	{
+		return 1923;
+	}
 
-    public static int baseColor = 0xe9dfe0;
-    
-    @Override
-    public int getColor(int temperature) {
-        return baseColor;
-    }
+	public static int baseColor = 0xe9dfe0;
 
-    @Override
-    public float getHardness() {
-        return 3;
-    }
+	@Override
+	public int getColor(int temperature)
+	{
+		return baseColor;
+	}
 
-    @Override
-    public float getMiningResistance() {
-        return 2;
-    }
+	@Override
+	public float getHardness()
+	{
+		return 3;
+	}
 
-    @Override
-    public float getBlastResistance() {
-        return 2;
-    }
+	@Override
+	public float getMiningResistance()
+	{
+		return 2;
+	}
 
-    @Override
-    public float getDensity() {
-        return 0.45f;
-    }
+	@Override
+	public float getBlastResistance()
+	{
+		return 2;
+	}
 
-    @Override
-    public int getBlockHarvestLevel() {
-        return 1;
-    }
+	@Override
+	public float getDensity()
+	{
+		return 0.45f;
+	}
 
-    @Override
-    public boolean hasRawCrystal() {
-        return true;
-    }
+	@Override
+	public int getBlockHarvestLevel()
+	{
+		return 1;
+	}
+
+	@Override
+	public boolean hasRawCrystal()
+	{
+		return true;
+	}
 }

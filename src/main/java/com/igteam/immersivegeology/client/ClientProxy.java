@@ -33,7 +33,7 @@ public class ClientProxy extends CommonProxy
 	public void preInitEnd()
 	{
 		super.preInitEnd();
-		
+
 	}
 
 	@Override

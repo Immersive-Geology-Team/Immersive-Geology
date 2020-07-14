@@ -1,7 +1,5 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
@@ -53,7 +51,7 @@ public class MaterialMetalCobalt extends MaterialMetalBase
 	@Override
 	public int getMeltingPoint()
 	{
-		return 	1768;
+		return 1768;
 	}
 
 	@Override

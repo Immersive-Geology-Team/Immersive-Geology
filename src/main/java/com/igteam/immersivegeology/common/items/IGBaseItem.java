@@ -31,7 +31,7 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	private boolean isHidden = false;
 
 	protected ItemSubGroup subGroup;
-	
+
 	public IGBaseItem(String name)
 	{
 		this(name, new Properties());
@@ -40,7 +40,8 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	public IGBaseItem(String name, Properties props)
 	{
 		super(props.group(ImmersiveGeology.IG_ITEM_GROUP));
-		if(itemName == null) {
+		if(itemName==null)
+		{
 			itemName = name;
 		}
 	}
@@ -106,7 +107,8 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	}
 
 	@Override
-	public ItemSubGroup getSubGroup() {
+	public ItemSubGroup getSubGroup()
+	{
 		// TODO Auto-generated method stub
 		return subGroup;
 	}

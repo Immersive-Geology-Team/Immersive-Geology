@@ -22,34 +22,42 @@ import java.util.List;
  */
 public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 {
-	public IGMaterialResourceItem(Material material, MaterialUseType key) {
+	public IGMaterialResourceItem(Material material, MaterialUseType key)
+	{
 		super(key, material);
-		if(!key.equals(MaterialUseType.ORE_CHUNK)){
-			this.setRegistryName("item_"+ key.getName() + "_" + material.getName());
-			this.itemName = "item."+ key.getName() + "." + material.getName()+".name";
+		if(!key.equals(MaterialUseType.ORE_CHUNK))
+		{
+			this.setRegistryName("item_"+key.getName()+"_"+material.getName());
+			this.itemName = "item."+key.getName()+"."+material.getName()+".name";
 			IGItemGrabber.inputNewItem(key, material, this);
 		}
 		//add this item to the item grabber, that way we can reference this later. 
-		
-		if(key.equals(MaterialUseType.ROCK)) {
-			if(material instanceof MaterialStoneBase) {
-				MaterialStoneBase rockMat = (MaterialStoneBase) material;
-				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
-			} 
-		} else if(key.equals(MaterialUseType.CHUNK)) {
-			ItemJsonGenerator.generateDefaultItem(material, key); 
-		} else if(!key.equals(MaterialUseType.ORE_CHUNK)){
-			ItemJsonGenerator.generateDefaultItem(material, key);
-		} 
 
-	}  
+		if(key.equals(MaterialUseType.ROCK))
+		{
+			if(material instanceof MaterialStoneBase)
+			{
+				MaterialStoneBase rockMat = (MaterialStoneBase)material;
+				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
+			}
+		}
+		else if(key.equals(MaterialUseType.CHUNK))
+		{
+			ItemJsonGenerator.generateDefaultItem(material, key);
+		}
+		else if(!key.equals(MaterialUseType.ORE_CHUNK))
+		{
+			ItemJsonGenerator.generateDefaultItem(material, key);
+		}
+
+	}
 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		StringTextComponent text = new StringTextComponent("");
-		if (hasShiftDown() || Minecraft.getInstance().gameSettings.advancedItemTooltips)
+		if(hasShiftDown()||Minecraft.getInstance().gameSettings.advancedItemTooltips)
 		{
 			material.getElements().forEach(elementProportion -> text
 					.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
@@ -63,7 +71,8 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 
 	}
 
-	public static boolean hasShiftDown() {
-		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340) || InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
+	public static boolean hasShiftDown()
+	{
+		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340)||InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
 	}
 }

@@ -10,11 +10,11 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMetalloidBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
- 
+
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
-		switch(useType) 
+		switch(useType)
 		{
 			case DUST:
 				return hasDust();
@@ -26,7 +26,7 @@ public abstract class MaterialMetalloidBase extends Material
 				return true;
 			default:
 				return false;
-		}		
+		}
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public abstract class MaterialMetalloidBase extends Material
 	{
 		return MaterialTypes.METALLOID;
 	}
-	
+
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
@@ -48,13 +48,48 @@ public abstract class MaterialMetalloidBase extends Material
 		ALLOY
 	}
 
-	public boolean hasIngot() { return false; };
-	public boolean hasPlate() { return false; };
-	public boolean hasRod() { return true; };
-	public boolean hasGear() { return false; };
-	public boolean hasSheetmetal() { return false; };
-	public boolean hasDust() { return true; };
-	public boolean hasTinyDust() { return true; };
-	public boolean hasStorageBlock() { return false; };
-	public boolean hasDustBlock() { return false; };
+	public boolean hasIngot()
+	{
+		return false;
+	}
+
+	public boolean hasPlate()
+	{
+		return false;
+	}
+
+	public boolean hasRod()
+	{
+		return true;
+	}
+
+	public boolean hasGear()
+	{
+		return false;
+	}
+
+	public boolean hasSheetmetal()
+	{
+		return false;
+	}
+
+	public boolean hasDust()
+	{
+		return true;
+	}
+
+	public boolean hasTinyDust()
+	{
+		return true;
+	}
+
+	public boolean hasStorageBlock()
+	{
+		return false;
+	}
+
+	public boolean hasDustBlock()
+	{
+		return false;
+	}
 }

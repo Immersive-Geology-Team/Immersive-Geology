@@ -84,7 +84,7 @@ public class MaterialMetalTitanium extends MaterialMetalBase
 	public float getDensity()
 	{
 		return 2.3f;
-	} 
+	}
 
 	//Stone pickaxe level
 	@Override

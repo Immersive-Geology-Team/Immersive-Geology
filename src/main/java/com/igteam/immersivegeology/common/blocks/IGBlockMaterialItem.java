@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -26,16 +25,17 @@ import static com.igteam.immersivegeology.common.items.IGMaterialResourceItem.ha
 public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 {
 
-	public MaterialUseType subtype=MaterialUseType.STORAGE;
-	public Material material=EnumMaterials.Empty.material;
+	public MaterialUseType subtype = MaterialUseType.STORAGE;
+	public Material material = EnumMaterials.Empty.material;
 	public boolean isSlab = false;
-	
+
 	public EnumOreBearingMaterials overlay = null;
 
-	public IGBlockMaterialItem(Block b, Properties props, ItemSubGroup sub) {
+	public IGBlockMaterialItem(Block b, Properties props, ItemSubGroup sub)
+	{
 		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP), sub);
 	}
-	
+
 	@Override
 	public ITextComponent getDisplayName(ItemStack stack)
 	{
@@ -49,7 +49,7 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		StringTextComponent text = new StringTextComponent("");
-		if (hasShiftDown() || Minecraft.getInstance().gameSettings.advancedItemTooltips)
+		if(hasShiftDown()||Minecraft.getInstance().gameSettings.advancedItemTooltips)
 		{
 			material.getElements().forEach(elementProportion -> text
 					.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
@@ -67,12 +67,18 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 	@Override
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
-		if(pass == 0) {
-		return material.getColor(0);
-		} else {
-			if(overlay!=null) {
+		if(pass==0)
+		{
+			return material.getColor(0);
+		}
+		else
+		{
+			if(overlay!=null)
+			{
 				return overlay.getColor();
-			} else {
+			}
+			else
+			{
 				return material.getColor(0);
 			}
 		}

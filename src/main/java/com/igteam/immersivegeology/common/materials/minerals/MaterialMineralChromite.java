@@ -30,10 +30,10 @@ public class MaterialMineralChromite extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.CHROMIUM, 2),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CHROMIUM, 2),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
+		)
 		);
 	}
 
@@ -44,7 +44,8 @@ public class MaterialMineralChromite extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -61,7 +62,7 @@ public class MaterialMineralChromite extends MaterialMineralBase
 	}
 
 	public static int baseColor = 0xffffff;
-	
+
 	@Override
 	public int getColor(int temperature)
 	{

@@ -4,7 +4,6 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Rarity;
 
@@ -21,7 +20,7 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	{
 		return "cobaltite";
 	}
- 
+
 	@Override
 	public String getModID()
 	{
@@ -32,10 +31,10 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.COBALT),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.ARSENIC),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.COBALT),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.ARSENIC),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR)
+		)
 		);
 	}
 
@@ -46,7 +45,8 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -63,7 +63,7 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	}
 
 	public static int baseColor = 0x99A2D9;
-	
+
 	@Override
 	public int getColor(int temperature)
 	{

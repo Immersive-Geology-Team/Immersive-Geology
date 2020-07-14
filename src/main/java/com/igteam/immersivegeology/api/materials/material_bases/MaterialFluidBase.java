@@ -12,42 +12,51 @@ import java.util.Set;
  */
 public abstract class MaterialFluidBase extends Material
 {
-    public abstract EnumFluidType getFluidType();
+	public abstract EnumFluidType getFluidType();
 
-    public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
+	public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
 
-    public abstract float getConcentration();
+	public abstract float getConcentration();
 
-    @Override
-    public boolean hasSubtype(MaterialUseType useType) {
-        switch (useType) {
-            case BUCKET:
-                return hasBucket();
+	@Override
+	public boolean hasSubtype(MaterialUseType useType)
+	{
+		switch(useType)
+		{
+			case BUCKET:
+				return hasBucket();
 			case FLUIDS:
-                return hasFluidBlock();
-        }
-        return false;
-    }
+				return hasFluidBlock();
+		}
+		return false;
+	}
 
-    @Override
-    public MaterialTypes getMaterialType()
-    {
-        return MaterialTypes.FLUID;
-    }
+	@Override
+	public MaterialTypes getMaterialType()
+	{
+		return MaterialTypes.FLUID;
+	}
 
-    @Override
-    public net.minecraft.block.material.Material getBlockMaterial()
-    {
-        return net.minecraft.block.material.Material.WATER;
-    }
+	@Override
+	public net.minecraft.block.material.Material getBlockMaterial()
+	{
+		return net.minecraft.block.material.Material.WATER;
+	}
 
-    public enum EnumFluidType
-    {
-        FLUID,
-        SOLUTION,
-        GAS
-    }
+	public enum EnumFluidType
+	{
+		FLUID,
+		SOLUTION,
+		GAS
+	}
 
-    public boolean hasBucket() { return true; };
-    public boolean hasFluidBlock() { return true; };
+	public boolean hasBucket()
+	{
+		return true;
+	}
+
+	public boolean hasFluidBlock()
+	{
+		return true;
+	}
 }

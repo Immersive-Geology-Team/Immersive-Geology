@@ -6,7 +6,6 @@ import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBas
 import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import com.igteam.immersivegeology.common.util.IGItemGrabber;
 import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
-
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,43 +13,49 @@ import net.minecraft.item.ItemStack;
  */
 public class IGMaterialRockItem extends IGMaterialResourceItem
 {
-	
+
 	private final EnumOreBearingMaterials oreType;
 	private final Material baseType;
-	
+
 	public IGMaterialRockItem(Material mat, MaterialUseType type, EnumOreBearingMaterials oreType)
 	{
 		super(mat, type);
 		this.oreType = oreType;
 		this.baseType = mat;
 
-		if(type.equals(MaterialUseType.ORE_CHUNK)){
-			
-			this.setRegistryName("item_"+ type.getName() + "_" + mat.getName() + "_"+ oreType.toString().toLowerCase());
-			this.itemName = "item."+ type.getName() + "." + mat.getName() + "_"+ oreType.toString().toLowerCase() + ".name";
+		if(type.equals(MaterialUseType.ORE_CHUNK))
+		{
+
+			this.setRegistryName("item_"+type.getName()+"_"+mat.getName()+"_"+oreType.toString().toLowerCase());
+			this.itemName = "item."+type.getName()+"."+mat.getName()+"_"+oreType.toString().toLowerCase()+".name";
 			IGItemGrabber.inputNewOreItem(type, mat, oreType, this);
-			if(mat instanceof MaterialStoneBase) {
+			if(mat instanceof MaterialStoneBase)
+			{
 				ItemJsonGenerator.generateOreItem(mat, type, oreType);
 			}
 		}
-		
+
 	}
 
-	
+
 	@Override
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
-		if(pass==0) {
+		if(pass==0)
+		{
 			return baseType.getColor(0);
-		} else {
+		}
+		else
+		{
 			return oreType.getColor();
 		}
 	}
 
 	@Override
-	public boolean hasCustomItemColours() {
+	public boolean hasCustomItemColours()
+	{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	 
+
 }

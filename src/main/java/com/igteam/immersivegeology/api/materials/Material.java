@@ -138,7 +138,10 @@ public abstract class Material
 	/**
 	 * @return tool level needed to mine material's blocks
 	 */
-	public int getBlockHarvestLevel() { return 0; }
+	public int getBlockHarvestLevel()
+	{
+		return 0;
+	}
 
 	/**
 	 * @return a block material (like Material.IRON)
@@ -163,7 +166,7 @@ public abstract class Material
 	{
 		return null;
 	}
-	
+
 	/**
 	 * @return how many uses do tools made of this material have
 	 */

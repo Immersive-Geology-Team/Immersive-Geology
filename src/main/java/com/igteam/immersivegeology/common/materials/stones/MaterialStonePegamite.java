@@ -1,18 +1,17 @@
 package com.igteam.immersivegeology.common.materials.stones;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-
-import javax.annotation.Nonnull;
-
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
-
 import net.minecraft.item.Rarity;
 
-public class MaterialStonePegamite extends MaterialStoneBase {
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
+public class MaterialStonePegamite extends MaterialStoneBase
+{
 
 	@Override
 	public String getName()
@@ -26,9 +25,10 @@ public class MaterialStonePegamite extends MaterialStoneBase {
 	{
 		return ImmersiveGeology.MODID;
 	}
-	
+
 	@Override
-	public EnumStoneType getStoneType() {
+	public EnumStoneType getStoneType()
+	{
 		// TODO Auto-generated method stub
 		return EnumStoneType.IGNEOUS_INTRUSIVE;
 	}
@@ -40,56 +40,66 @@ public class MaterialStonePegamite extends MaterialStoneBase {
 				new ElementProportion(PeriodicTableElement.ALUMINIUM)
 		));
 	}
+
 	@Override
-	public Rarity getRarity() {
+	public Rarity getRarity()
+	{
 		// TODO Auto-generated method stub
 		return Rarity.COMMON;
 	}
 
 	@Override
-	public int getBoilingPoint() {
+	public int getBoilingPoint()
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getMeltingPoint() {
+	public int getMeltingPoint()
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getColor(int temperature) {
+	public int getColor(int temperature)
+	{
 		// TODO Auto-generated method stub
 		return 0xA78D5C;
 	}
 
 	@Override
-	public float getHardness() {
+	public float getHardness()
+	{
 		// TODO Auto-generated method stub
 		return 1.5f;
 	}
 
 	@Override
-	public float getMiningResistance() {
+	public float getMiningResistance()
+	{
 		// TODO Auto-generated method stub
 		return 1.5f;
 	}
 
 	@Override
-	public float getBlastResistance() {
+	public float getBlastResistance()
+	{
 		// TODO Auto-generated method stub
 		return 6f;
 	}
 
 	@Override
-	public float getDensity() {
+	public float getDensity()
+	{
 		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
-	public int getBlockHarvestLevel() {
+	public int getBlockHarvestLevel()
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
