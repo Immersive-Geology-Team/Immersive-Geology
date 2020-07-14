@@ -203,11 +203,11 @@ public class WorleyOreCarver
 													{
 														int richness = 1;
 
-														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.7)
+														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.85)
 														{
 															richness = 3; // DENSE
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.6)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.65)
 														{
 															richness = 2; // RICH
 														}
