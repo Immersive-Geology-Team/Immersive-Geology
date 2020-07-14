@@ -31,7 +31,7 @@ public class NoiseGenTester {
 	            if (data[x][y]<0){
 	                data[x][y]=0;
 	            }
-	            float THRESHOLD = 0.35f;
+	            float THRESHOLD = 0.3f;
 	            if(data[x][y] > THRESHOLD) {
 		            Color col=new Color((float)data[x][y],(float)data[x][y],(float)data[x][y]); 
 		            image.setRGB(x, y, col.getRGB());
@@ -60,14 +60,14 @@ public class NoiseGenTester {
 	        double jStart=0;
 	        double jEnd=500;
 	        int chunkAmount = 30;
-	        long seed = 1020;
+	        long seed = 100;
 	        
 	        INoise2D noise = new SimplexNoise2D(seed).flattened(0.4f, 1f).spread(0.001f);
 	        
-	        INoise2D noise2 = new SimplexNoise2D(seed).spread(0.02f).flattened(0f, 1);
+	        INoise2D noise2 = new SimplexNoise2D(seed).octaves(3, 0.95f).spread(0.005f).flattened(0f, 1);
 	       
 	        double[][] result=new double[16 * chunkAmount][16 * chunkAmount];
-
+ 
 	        for(int i=0;i< (16 * chunkAmount);i++){
 	            for(int j=0;j<(16 * chunkAmount);j++){
 	                int xp=(int)(iStart+i*((iEnd-iStart)/(16 * chunkAmount)));

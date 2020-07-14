@@ -21,9 +21,11 @@ import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOve
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData.LayerOre;
+import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
+import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -53,15 +55,14 @@ public class WorleyOreCarver {
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase())) {
 			
 			OpenSimplexNoise oreNoiseWorley= new OpenSimplexNoise(seedGenerator.nextLong() + offset);
-			
+			 
 			//this is to make ore veins less common (without this it's way too common)
 			INoise3D oreNoiseSub = (x, y, z) -> {
-	            return oreNoiseWorley.flattened(0.3f, 1f).noise(x / (FEATURE_SIZE * 20), y / (FEATURE_SIZE * 20), z / (FEATURE_SIZE * 20));
+	            return oreNoiseWorley.flattened(0.4f, 1f).noise(x / (FEATURE_SIZE * 5), y / (FEATURE_SIZE * 5), z / (FEATURE_SIZE * 5));
 			};
 			
-			
 			INoise3D oreNoise = (x, y, z) -> {
-	            return oreNoiseWorley.flattened(0f, 1f).noise(x / FEATURE_SIZE, y / FEATURE_SIZE, z / FEATURE_SIZE);
+	            return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.95f).noise(x / FEATURE_SIZE, y / FEATURE_SIZE, z / FEATURE_SIZE);
 			};
 			
 			
