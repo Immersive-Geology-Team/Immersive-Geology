@@ -197,19 +197,25 @@ public class WorleyOreCarver {
 	
 			                                         if (finalNoise > NOISE_THRESHOLD)
 			                                         {
-			                                        	 
 			                                        	 int richness = 1;
-			                                        	 
-			                                        	 if((finalNoise-NOISE_THRESHOLD) * (0.7) > finalNoise) {
-			                                        		 richness = 3; // DENSE
-			                                        	 } else if((finalNoise-NOISE_THRESHOLD) * (0.7) < finalNoise && (finalNoise-NOISE_THRESHOLD) * (0.6) >= finalNoise){
-			                                        		 richness = 2; // RICH
-			                                        	 } else if((finalNoise-NOISE_THRESHOLD) * (0.6) < finalNoise && (finalNoise-NOISE_THRESHOLD) * (0.4) >= finalNoise ) {
-			                                        		 richness = 1; // NORMAL
-			                                        	 } else if((finalNoise-NOISE_THRESHOLD) * (0.4) < finalNoise){
-			                                        		 richness = 0;
-			                                        	 }
-			                                        	 
+
+														 if(finalNoise >= NOISE_THRESHOLD + (1 - NOISE_THRESHOLD) * 0.7)
+														 {
+															 richness = 3; // DENSE
+														 }
+														 else if(finalNoise >= NOISE_THRESHOLD + (1 - NOISE_THRESHOLD) * 0.6)
+														 {
+															 richness = 2; // RICH
+														 }
+														 else if(finalNoise >= NOISE_THRESHOLD + (1 - NOISE_THRESHOLD) * 0.4)
+														 {
+															 richness = 1; // NORMAL
+														 }
+														 else
+														 {
+															 richness = 0;
+														 }
+
 			                                             // Create cave if possible
 			                                             BlockState originalState = chunkIn.getBlockState(pos);
 			                                             if (!originalState.isAir(chunkIn, pos) && originalState != BEDROCK && !originalState.getMaterial().isLiquid() && (originalState.getBlock() instanceof IGMaterialBlock))
