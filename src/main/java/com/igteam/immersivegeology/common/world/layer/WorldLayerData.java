@@ -80,17 +80,26 @@ public class WorldLayerData {
 		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK,  EnumMaterials.Gabbros.material));
 		deep_ocean.settleLayers();
 		
+		
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+			
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		badlands.addMachineOre(2, 0.25f, EnumOreBearingMaterials.Uraninite);
+		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Ilmenite);
+		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Hubnerite); 
+		
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		 
+		badlands.addMachineOre(1, 0.30f, EnumOreBearingMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
+		badlands.addMachineOre(1, 0.50f, EnumOreBearingMaterials.Magnetite); 
+		badlands.addMachineOre(1, 0.65f, EnumOreBearingMaterials.Gold);
+		
 		badlands.settleLayers();
-		for(int id = 0; id <= badlands.getLayers().size(); id++) {
-			badlands.addMachineOre(id, 0.42f, EnumOreBearingMaterials.Gold);
-			badlands.addMachineOre(id, 0.20f, EnumOreBearingMaterials.Cuprite);
-			badlands.addMachineOre(id, 0.40f, EnumOreBearingMaterials.Magnetite); 
-		}
+		
 		 
 		 
 		worldLayerData.add(badlands);

@@ -31,20 +31,14 @@ public class NoiseGenTester {
 	            if (data[x][y]<0){
 	                data[x][y]=0;
 	            }
-	            if (data[x][y]>1){
-	            	data[x][y]=1;
+	            float THRESHOLD = 0.35f;
+	            if(data[x][y] > THRESHOLD) {
+		            Color col=new Color((float)data[x][y],(float)data[x][y],(float)data[x][y]); 
+		            image.setRGB(x, y, col.getRGB());
+	            } else {
+	            	 Color col=new Color(255,0,0); 
+			         image.setRGB(x, y, col.getRGB());
 	            }
-	            if (data[x][y]<0){
-	            	data[x][y]=0;
-	            }
-	            if (data[x][y]>1){
-	            	data[x][y]=1;
-	            }
-	            if (data[x][y]<0){
-	            	data[x][y]=0;
-	            }
-	            Color col=new Color((float)data[x][y],(float)data[x][y],(float)data[x][y]); 
-	            image.setRGB(x, y, col.getRGB());
 	          }
 	        }
 
@@ -67,10 +61,11 @@ public class NoiseGenTester {
 	        double jEnd=500;
 	        int chunkAmount = 30;
 	        long seed = 1020;
-	        SimplexNoise2D noise = new SimplexNoise2D(seed);
 	        
-	       // final INoise2D noise = new SimplexNoise2D(seed);
-	         
+	        INoise2D noise = new SimplexNoise2D(seed).flattened(0.4f, 1f).spread(0.001f);
+	        
+	        INoise2D noise2 = new SimplexNoise2D(seed).spread(0.02f).flattened(0f, 1);
+	       
 	        double[][] result=new double[16 * chunkAmount][16 * chunkAmount];
 
 	        for(int i=0;i< (16 * chunkAmount);i++){
@@ -78,8 +73,7 @@ public class NoiseGenTester {
 	                int xp=(int)(iStart+i*((iEnd-iStart)/(16 * chunkAmount)));
 	                int yp=(int)(jStart+j*((jEnd-jStart)/(16 * chunkAmount)));
 	                
-	                result[i][j]=noise.spread(0.2f).flattened(0.5f, 1).noise(xp, yp);
-	                
+	                result[i][j]=noise2.sub(noise).noise(xp, yp);
 	            }    
 	        }
 	            

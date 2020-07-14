@@ -74,6 +74,11 @@ public interface INoise3D {
         return (x, y, z) -> INoise3D.this.noise(x, y, z) + other.noise(x, y, z);
     }
 
+    default INoise3D sub(INoise3D other)
+    {
+        return (x, y, z) -> INoise3D.this.noise(x, y, z) - other.noise(x, y, z);
+    }
+
     default INoise3D map(FloatUnaryFunction mappingFunction)
     {
         return (x, y, z) -> mappingFunction.applyAsFloat(INoise3D.this.noise(x, y, z));

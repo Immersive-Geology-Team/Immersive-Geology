@@ -38,17 +38,17 @@ public class BiomeLayerData {
  
 	/**
 	 * @param layerID - Layer the ore is to appear in
-	 * @param coverage - How common is the ore; min is 0.2f max is 0.55f, higher or lower will be ignored and set to the closest acceptable value. (this is to allow ores to spawn in a controlled amount) if it was 1 every rock would be that ore, anything lower than a 0.2 would almost never show up
+	 * @param coverage - How common is the ore; min is 0.2f max is 0.65f, higher or lower will be ignored and set to the closest acceptable value. (this is to allow ores to spawn in a controlled amount) if it was 1 every rock would be that ore, anything lower than a 0.2 would almost never show up
 	 * @param ore - the ore to spawn - choose from the EnumOreBearingMaterials
 	 */
 	public void addMachineOre(int layerID, float coverage, EnumOreBearingMaterials ore) {
 		if(layerOreMap.containsKey(layerID)) {
 			ArrayList<LayerOre> oreList = layerOreMap.get(layerID);
-			oreList.add(new LayerOre(coverage, ore));
+			oreList.add(new LayerOre(coverage, ore, layerID));
 			layerOreMap.put(layerID, oreList);
 		} else {
 			ArrayList<LayerOre> firstOre = new ArrayList<LayerOre>();
-			firstOre.add(new LayerOre(coverage, ore));
+			firstOre.add(new LayerOre(coverage, ore, layerID));
 			layerOreMap.put(layerID, firstOre);
 		}
 	}  
@@ -86,10 +86,13 @@ public class BiomeLayerData {
 
 		private float coverage;
 		private EnumOreBearingMaterials ore;
-
-		public LayerOre(float coverage, EnumOreBearingMaterials ore) {
+		private int setLayer;
+		
+		
+		public LayerOre(float coverage, EnumOreBearingMaterials ore, int layer) {
 			this.coverage = coverage;
 			this.ore = ore;
+			this.setSetLayer(layer);
 		}
 
 		public EnumOreBearingMaterials getOre() {
@@ -106,6 +109,14 @@ public class BiomeLayerData {
 
 		public void setCoverage(float coverage) {
 			this.coverage = coverage;
+		}
+
+		public int getSetLayer() {
+			return setLayer;
+		}
+
+		public void setSetLayer(int setLayer) {
+			this.setLayer = setLayer;
 		}
 		
 		 

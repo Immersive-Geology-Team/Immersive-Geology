@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import com.igteam.immersivegeology.common.util.IGBlockGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
@@ -91,21 +92,13 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		// This is a BAD BAD way of doing things, we SHOULD be using something like 3D Noise Layering System, but no
 		// I went with the quickest easier way of creating a generator for each situation...
 		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
-		int biomeLayerID = 0;
-        for(BiomeLayerData biomeData : data.worldLayerData) {
-        	int totalLayers = biomeData.getLayerCount();
-        	for(int layer = totalLayers; layer > 0; layer--) {
-        		if(biomeData.getLayerOre(layer) != null){
-	            	for(LayerOre ore : biomeData.getLayerOre(layer)) {
-	            		WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, biomeData, biomeLayerID, ore);
-	            	}
-        		}  
-        	}
-        	biomeLayerID++;
-        }
 		
-		
-		
+		int offset = 0;
+		for(EnumOreBearingMaterials ore : EnumOreBearingMaterials.values()) {
+			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore, offset);
+			offset++;
+		}
+
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
 
@@ -122,17 +115,13 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		    // ABSOLUTE HORROR right here, but I don't have the time to do a proper 3D noise Layer System for unquie ore veins, so
             // so works, so it will do...
 
-		    int biomeLayerID = 0;
 	        for(BiomeLayerData biomeData : data.worldLayerData) {
 	        	int totalLayers = biomeData.getLayerCount();
 	        	for(int layer = totalLayers; layer > 0; layer--) {
 	        		if(biomeData.getLayerOre(layer) != null){
-		            	for(LayerOre ore : biomeData.getLayerOre(layer)) {
-		            		WorleyOreCarver.INSTANCE.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4, biomeData, biomeLayerID, layer, ore.getOre(), ore.getCoverage());
-		            	}
+		            	WorleyOreCarver.INSTANCE.carve(chunkIn, chunkIn.getPos().x << 4, chunkIn.getPos().z << 4, biomeData, layer);
 	        		}
 	        	}
-	        	biomeLayerID++;
 	        }
         
         } 

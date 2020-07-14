@@ -143,4 +143,9 @@ public interface INoise2D
     {
         return (x, y) -> mappingFunction.applyAsFloat(INoise2D.this.noise(x, y));
     }
+
+	    default INoise2D sub(INoise2D other)
+    {
+        return (x, y) -> INoise2D.this.noise(x, y) - other.noise(x, y);
+    }
 }
