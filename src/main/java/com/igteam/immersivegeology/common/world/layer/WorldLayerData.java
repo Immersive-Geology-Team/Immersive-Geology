@@ -32,7 +32,7 @@ public class WorldLayerData
 
 		for(int id = 0; id < mountains.getLayers().size(); id++)
 		{
-			mountains.addMachineOre(id, 0.12f, EnumOreBearingMaterials.Gold);
+			mountains.addMachineOre(id, 0.52f, EnumOreBearingMaterials.Gold);
 			mountains.addMachineOre(id, 0.38f, EnumOreBearingMaterials.Hematite);
 			mountains.addMachineOre(id, 0.35f, EnumOreBearingMaterials.Cuprite);
 			mountains.addMachineOre(id, 0.15f, EnumOreBearingMaterials.Uraninite);
@@ -45,6 +45,7 @@ public class WorldLayerData
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+
 		lush_mountains.settleLayers();
 
 		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
@@ -52,6 +53,15 @@ public class WorldLayerData
 		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
 		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
 		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		
+		for(int id = 0; id < mountains.getLayers().size(); id++)
+		{
+			flooded_mountains.addMachineOre(id, 0.82f, EnumOreBearingMaterials.Gold);
+			flooded_mountains.addMachineOre(id, 0.38f, EnumOreBearingMaterials.Hematite);
+			flooded_mountains.addMachineOre(id, 0.35f, EnumOreBearingMaterials.Cuprite);
+			flooded_mountains.addMachineOre(id, 0.15f, EnumOreBearingMaterials.Uraninite);
+		}
+		
 		flooded_mountains.settleLayers();
 
 		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material));
@@ -95,13 +105,12 @@ public class WorldLayerData
 		badlands.addMachineOre(2, 0.60f, EnumOreBearingMaterials.Hubnerite);
 
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-
+		//These ores Spawn in badlands bioems, copper is fairly rare here, but does occur (eg cuprite with cover value of .3f
 		badlands.addMachineOre(1, 0.30f, EnumOreBearingMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
 		badlands.addMachineOre(1, 0.50f, EnumOreBearingMaterials.Magnetite);
 		badlands.addMachineOre(1, 0.65f, EnumOreBearingMaterials.Gold);
 
 		badlands.settleLayers();
-
 
 		worldLayerData.add(badlands);
 		worldLayerData.add(desert);

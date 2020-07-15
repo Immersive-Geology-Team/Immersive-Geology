@@ -24,23 +24,18 @@ import java.util.*;
 public class WorleyOreCarver
 {
 
-	private static final int SAMPLE_HEIGHT = 32;
+	private static final int SAMPLE_HEIGHT = 64;
 	private static float NOISE_THRESHOLD = 0.35f;
-	private static float HEIGHT_FADE_THRESHOLD = 80;
-
-	private static final BlockState AIR = Blocks.AIR.getDefaultState();
+	
 	private static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 
 	// size of the cave intrest points!
 	private static final float FEATURE_SIZE = 16;
 
-
 	private Map<String, INoise3D> oreNoiseArray = new HashMap<String, INoise3D>();
 	public static WorleyOreCarver INSTANCE = new WorleyOreCarver();
 
-	public WorleyOreCarver()
-	{ 
-	}
+	public WorleyOreCarver(){};
 
 	public void setupNewLayer(Random seedGenerator, EnumOreBearingMaterials oreMaterial, int offset)
 	{
@@ -218,7 +213,7 @@ public class WorleyOreCarver
 														else
 														{
 															richness = 0;
-														} 
+														}
 
 														// Create cave if possible
 														BlockState originalState = chunkIn.getBlockState(pos);
