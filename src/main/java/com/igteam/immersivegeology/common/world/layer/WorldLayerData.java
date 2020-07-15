@@ -37,6 +37,7 @@ public class WorldLayerData
 			mountains.addMachineOre(id, 0.35f, EnumOreBearingMaterials.Cuprite);
 			mountains.addMachineOre(id, 0.15f, EnumOreBearingMaterials.Uraninite);
 		}
+		
 		mountains.settleLayers();
 
 		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
@@ -90,8 +91,8 @@ public class WorldLayerData
 
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		badlands.addMachineOre(2, 0.25f, EnumOreBearingMaterials.Uraninite);
-		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Ilmenite);
-		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Hubnerite);
+		badlands.addMachineOre(2, 0.50f, EnumOreBearingMaterials.Ilmenite);
+		badlands.addMachineOre(2, 0.60f, EnumOreBearingMaterials.Hubnerite);
 
 		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 

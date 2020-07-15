@@ -56,16 +56,16 @@ public class NoiseGenTester {
 
 	    public static void main(String[] args){
 	    	double iStart=0;
-	        double iEnd=500;
+	        double iEnd=5000;
 	        double jStart=0;
-	        double jEnd=500;
+	        double jEnd=5000;
 	        int chunkAmount = 30;
-	        long seed = 100;
+	        long seed = 105;
 	        
-	        INoise2D noise = new SimplexNoise2D(seed).flattened(0.4f, 1f).spread(0.001f);
+	        INoise2D noise = new SimplexNoise2D(seed + 1).octaves(1, 0.75f).flattened(0.4f, 1f).spread(0.001f);
 	        
-	        INoise2D noise2 = new SimplexNoise2D(seed).octaves(3, 0.95f).spread(0.005f).flattened(0f, 1);
-	       
+	        INoise2D noise2 = new SimplexNoise2D(seed).octaves(6, 0.8f).spread(0.008f).flattened(0f, 1);
+	         
 	        double[][] result=new double[16 * chunkAmount][16 * chunkAmount];
  
 	        for(int i=0;i< (16 * chunkAmount);i++){
@@ -73,7 +73,7 @@ public class NoiseGenTester {
 	                int xp=(int)(iStart+i*((iEnd-iStart)/(16 * chunkAmount)));
 	                int yp=(int)(jStart+j*((jEnd-jStart)/(16 * chunkAmount)));
 	                
-	                result[i][j]=noise2.sub(noise).noise(xp, yp);
+	                result[i][j]=noise2.sub(noise).noise(xp, yp); 
 	            }    
 	        }
 	            

@@ -39,7 +39,7 @@ public class WorleyOreCarver
 	public static WorleyOreCarver INSTANCE = new WorleyOreCarver();
 
 	public WorleyOreCarver()
-	{
+	{ 
 	}
 
 	public void setupNewLayer(Random seedGenerator, EnumOreBearingMaterials oreMaterial, int offset)
@@ -47,15 +47,16 @@ public class WorleyOreCarver
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 		{
 
-			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong()+offset);
+			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong() + offset);
+			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong() + offset + 1);
 
 			//this is to make ore veins less common (without this it's way too common)
 			INoise3D oreNoiseSub = (x, y, z) -> {
-				return oreNoiseWorley.flattened(0.4f, 1f).noise(x/(FEATURE_SIZE*5), y/(FEATURE_SIZE*5), z/(FEATURE_SIZE*5));
+				return oreNoiseWorleySub.flattened(0.4f, 1f).octaves(1, 0.75f).noise(x/(FEATURE_SIZE*5), y/(FEATURE_SIZE*5), z/(FEATURE_SIZE*5));
 			};
 
 			INoise3D oreNoise = (x, y, z) -> {
-				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.95f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
+				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.8f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
 			};
 
 
@@ -181,21 +182,20 @@ public class WorleyOreCarver
 
 												int totHeight = 256;
 												float finalNoise = NoiseUtil.lerp(section[x0+16*z0], prevSection[x0+16*z0], 0.25f*y0);
-												float shrinkValue = 0.2f;
-
 												//change height fade value so we get less ores the higher up we are
 
 												int topOfLayer = (totHeight*currentLayer)/totalLayerCount;
 												int bottomOfLayer = (((totHeight*currentLayer)/totalLayerCount)-((totHeight*currentLayer)/totalLayerCount)/currentLayer);
 
-												if((yPos <= topOfLayer)&&
-														(yPos >= bottomOfLayer))
+												if((yPos > (topOfLayer * 0.66))) {
+													float dif = (float) ((yPos - (topOfLayer * 0.66)) / topOfLayer);
+													heightFadeValue = 1 - dif;
+												} 
+												
+												if((yPos <= topOfLayer) && (yPos >= bottomOfLayer))
 												{
-
-													heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD?1-(shrinkValue*(1+((yPos-HEIGHT_FADE_THRESHOLD)/HEIGHT_FADE_THRESHOLD))): 1;
-
 													replacementState = IGBlockGrabber.grabOreBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
-
+													
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;
 
@@ -207,18 +207,18 @@ public class WorleyOreCarver
 														{
 															richness = 3; // DENSE
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.65)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.45)
 														{
 															richness = 2; // RICH
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.35)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.3)
 														{
 															richness = 1; // NORMAL
 														}
 														else
 														{
 															richness = 0;
-														}
+														} 
 
 														// Create cave if possible
 														BlockState originalState = chunkIn.getBlockState(pos);
