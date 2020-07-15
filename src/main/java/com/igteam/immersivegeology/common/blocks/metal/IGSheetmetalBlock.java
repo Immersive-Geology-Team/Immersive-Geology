@@ -11,7 +11,7 @@ public class IGSheetmetalBlock extends IGMaterialBlock
 {
 	public IGSheetmetalBlock(Material material)
 	{
-		super(material, MaterialUseType.SHEETMETAL);
+		super(MaterialUseType.SHEETMETAL, material);
 	}
 
 	//Hardness * 0.6

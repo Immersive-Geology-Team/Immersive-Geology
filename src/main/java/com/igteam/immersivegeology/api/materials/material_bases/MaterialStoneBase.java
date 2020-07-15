@@ -19,7 +19,7 @@ public abstract class MaterialStoneBase extends Material
 			//items
 			case ROCK:
 				//blocks
-			case ORE_BEARING:
+			case ORE_BEARING_ROCK:
 			case ORE_CHUNK:
 			case GRAVEL:
 			case COBBLESTONE:

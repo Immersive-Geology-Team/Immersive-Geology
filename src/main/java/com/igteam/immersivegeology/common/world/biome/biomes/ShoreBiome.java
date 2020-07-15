@@ -2,7 +2,7 @@ package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
@@ -42,11 +42,11 @@ public class ShoreBiome extends IGBiome
 			switch(part)
 			{
 				case grass:
-					return IGBlockGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Granite.material).getDefaultState();
+					return IGRegistryGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Granite.material).getDefaultState();
 				case dirt:
-					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
+					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
 				default:
-					return IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
+					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material).getDefaultState();
 			}
 		}
 		else

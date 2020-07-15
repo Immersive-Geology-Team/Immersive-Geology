@@ -2,10 +2,10 @@ package com.igteam.immersivegeology.common.world.gen.carver;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
@@ -42,7 +42,7 @@ public class WorleyOreCarver
 	{
 	}
 
-	public void setupNewLayer(Random seedGenerator, EnumOreBearingMaterials oreMaterial, int offset)
+	public void setupNewLayer(Random seedGenerator, EnumMaterials oreMaterial, int offset)
 	{
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 		{
@@ -71,7 +71,7 @@ public class WorleyOreCarver
 		ArrayList<LayerOre> oreArrayData = biomeData.getLayerOre(currentLayer);
 		// run this through a full loop, for each ore, returns out if ore is not set in the biomes layer data!
 		int totalLayerCount = biomeData.getLayerCount();
-		Material baseMaterial = ((IGMaterialBlock)biomeData.getLayerBlock((currentLayer))).material;
+		Material baseMaterial = ((IGMaterialBlock)biomeData.getLayerBlock((currentLayer))).getMaterial();
 		LayerOre oreData = null;
 		for(LayerOre ore : oreArrayData)
 		{
@@ -84,7 +84,7 @@ public class WorleyOreCarver
 			}
 
 			//ore data has been retrieved, set ore material data for later use
-			EnumOreBearingMaterials oreMaterial = oreData.getOre();
+			Material oreMaterial = oreData.getOre().material;
 
 			//if ore data is found, generate ore
 			float coverage = oreData.getCoverage();
@@ -164,14 +164,14 @@ public class WorleyOreCarver
 							for(int y0 = 4-1; y0 >= 0; y0--)
 							{
 								int yPos = y*4+y0;
-								float heightFadeValue = 1;
+								float heightFadeValue;
 								for(int x0 = x*4; x0 < (x+1)*4; x0++)
 								{
 									for(int z0 = z*4; z0 < (z+1)*4; z0++)
 									{
 										// set the current position
 										pos.setPos(chunkX+x0, yPos, chunkZ+z0);
-										BlockState replacementState = Blocks.PINK_WOOL.getDefaultState();
+										BlockState replacementState;
 
 										if(chunkIn.getBiome(pos) instanceof IGBiome)
 										{
@@ -194,14 +194,14 @@ public class WorleyOreCarver
 
 													heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD?1-(shrinkValue*(1+((yPos-HEIGHT_FADE_THRESHOLD)/HEIGHT_FADE_THRESHOLD))): 1;
 
-													replacementState = IGBlockGrabber.grabOreBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
+													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING_ROCK, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
 
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;
 
 													if(finalNoise > NOISE_THRESHOLD)
 													{
-														int richness = 1;
+														int richness;
 
 														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.7)
 														{

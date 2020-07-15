@@ -3,7 +3,7 @@ package com.igteam.immersivegeology.common.data;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.util.IGItemGrabber;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -44,7 +44,7 @@ public class IGItemTagsProvider extends net.minecraft.data.ItemTagsProvider
 
 				if(material.hasSubtype(type))
 				{
-					Item item = IGItemGrabber.getIGItem(type, material);
+					Item item = IGRegistryGrabber.getIGItem(type, material);
 					if(item!=Items.AIR)
 					{
 						validItems.add(item);

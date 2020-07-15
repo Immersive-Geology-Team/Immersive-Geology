@@ -132,7 +132,8 @@ public class WorldEventHandler
 
 			if(event.getState().get(IGProperties.NATURAL))
 			{
-				double nh = replaceBlock.material.getHardness();
+				//depends of primary block material
+				double nh = replaceBlock.getMaterial().getHardness();
 				int y = event.getPos().getY();
 				double max = Math.max(1, y);
 				double ns = (((0.3/Math.pow(Math.E, 8))*Math.pow(max, Math.E*0.75))*(original/8))/nh;
@@ -145,7 +146,8 @@ public class WorldEventHandler
 
 			if(event.getState().get(IGProperties.NATURAL))
 			{
-				double nh = replaceBlock.material.getHardness();
+				//depends of primary block material
+				double nh = replaceBlock.getMaterial().getHardness();
 				System.out.println("Ore start Hard: "+nh);
 				int y = event.getPos().getY();
 				double max = Math.max(1, y);

@@ -4,7 +4,7 @@ import com.google.gson.stream.JsonWriter;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -31,7 +31,7 @@ public class BlockstateGenerator
 		generateDefaultSlabBlock("slab_block_"+type.getName()+"_"+material.getName(), type.getName());
 	}
 
-	public static void generateOreBearingBlock(Material material, MaterialUseType type, EnumStoneType stoneType, EnumOreBearingMaterials oreType)
+	public static void generateOreBearingBlock(Material material, MaterialUseType type, EnumStoneType stoneType, EnumMaterials oreType)
 	{
 		generateOreBearingBlock("block_"+type.getName()+"_"+material.getName()+"_"+oreType.toString().toLowerCase(), type.getName()+"_"+stoneType.getName());
 	}

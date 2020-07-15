@@ -7,27 +7,12 @@ public class CommonProxy
 
 	}
 
-	public void preInitEnd()
-	{
-
-	}
-
 	public void init()
 	{
 
 	}
 
-	public void initEnd()
-	{
-
-	}
-
 	public void postInit()
-	{
-
-	}
-
-	public void postInitEnd()
 	{
 
 	}

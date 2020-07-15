@@ -3,8 +3,8 @@ package com.igteam.immersivegeology.common.world.chunk;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
@@ -83,7 +83,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
 
 		int offset = 0;
-		for(EnumOreBearingMaterials ore : EnumOreBearingMaterials.values())
+		for(EnumMaterials ore : EnumMaterials.values())
 		{
 			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore, offset);
 			offset++;
@@ -273,7 +273,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 
 		// Build Rough Terrain
-		IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
+		IGBaseBlock replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		for(int x = 0; x < 16; x++)
@@ -336,7 +336,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							if((y <= (totHeight*l)/lc)
 									&&(y >= (((totHeight*l)/lc)-((totHeight*l)/lc)/l)))
 							{
-								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material);
+								replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material);
 								for(int randomLevel = 0; randomLevel < 3; randomLevel++)
 								{
 

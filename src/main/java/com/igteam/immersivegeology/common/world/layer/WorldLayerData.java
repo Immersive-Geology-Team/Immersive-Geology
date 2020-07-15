@@ -2,8 +2,8 @@ package com.igteam.immersivegeology.common.world.layer;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 
 import java.util.ArrayList;
@@ -24,80 +24,80 @@ public class WorldLayerData
 
 	public WorldLayerData()
 	{
-		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
-		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
-		mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
+		mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 
 		for(int id = 0; id < mountains.getLayers().size(); id++)
 		{
-			mountains.addMachineOre(id, 0.12f, EnumOreBearingMaterials.Gold);
-			mountains.addMachineOre(id, 0.38f, EnumOreBearingMaterials.Hematite);
-			mountains.addMachineOre(id, 0.35f, EnumOreBearingMaterials.Cuprite);
-			mountains.addMachineOre(id, 0.15f, EnumOreBearingMaterials.Uraninite);
+			mountains.addMachineOre(id, 0.12f, EnumMaterials.Gold);
+			mountains.addMachineOre(id, 0.38f, EnumMaterials.Hematite);
+			mountains.addMachineOre(id, 0.35f, EnumMaterials.Cuprite);
+			mountains.addMachineOre(id, 0.15f, EnumMaterials.Uraninite);
 		}
 		mountains.settleLayers();
 
-		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
-		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
-		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
-		lush_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
+		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
+		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		lush_mountains.settleLayers();
 
-		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
-		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
-		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
-		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
-		flooded_mountains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
+		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		flooded_mountains.settleLayers();
 
-		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material));
-		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material));
-		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
-		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
-		desert.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		desert.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material));
+		desert.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material));
+		desert.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+		desert.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+		desert.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
 		desert.settleLayers();
 
-		plains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		plains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		plains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
-		plains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
-		plains.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		plains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		plains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		plains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
+		plains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+		plains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		plains.settleLayers();
 
-		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-		ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
 		ocean.settleLayers();
 
-		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
-		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-		deep_ocean.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		deep_ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		deep_ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material));
+		deep_ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		deep_ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		deep_ocean.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
 		deep_ocean.settleLayers();
 
 
-		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
+		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material));
 
-		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
 
-		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
+		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material));
 
-		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-		badlands.addMachineOre(2, 0.25f, EnumOreBearingMaterials.Uraninite);
-		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Ilmenite);
-		badlands.addMachineOre(2, 0.30f, EnumOreBearingMaterials.Hubnerite);
+		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		badlands.addMachineOre(2, 0.25f, EnumMaterials.Uraninite);
+		badlands.addMachineOre(2, 0.30f, EnumMaterials.Ilmenite);
+		badlands.addMachineOre(2, 0.30f, EnumMaterials.Hubnerite);
 
-		badlands.addLayer(IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 
-		badlands.addMachineOre(1, 0.30f, EnumOreBearingMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
-		badlands.addMachineOre(1, 0.50f, EnumOreBearingMaterials.Magnetite);
-		badlands.addMachineOre(1, 0.65f, EnumOreBearingMaterials.Gold);
+		badlands.addMachineOre(1, 0.30f, EnumMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
+		badlands.addMachineOre(1, 0.50f, EnumMaterials.Magnetite);
+		badlands.addMachineOre(1, 0.65f, EnumMaterials.Gold);
 
 		badlands.settleLayers();
 

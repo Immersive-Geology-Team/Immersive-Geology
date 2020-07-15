@@ -91,18 +91,44 @@ public enum EnumMaterials
 		this.material = material;
 	}
 
+	/**
+	 * @return only metal materials
+	 */
 	public static Stream<EnumMaterials> filterMetals()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.METAL);
+		return filterByType(MaterialTypes.METAL);
 	}
 
+	/**
+	 * @return only stone materials
+	 */
 	public static Stream<EnumMaterials> filterStones()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.STONE);
+		return filterByType(MaterialTypes.STONE);
 	}
 
+	/**
+	 * @return only mineral materials
+	 */
 	public static Stream<EnumMaterials> filterMinerals()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.MINERAL);
+		return filterByType(MaterialTypes.MINERAL);
+	}
+
+	/**
+	 * @return only materials of a type (metal, mineral, fluid, etc.)
+	 */
+	public static Stream<EnumMaterials> filterByType(MaterialTypes type)
+	{
+		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==type);
+	}
+
+	/**
+	 * @return materials of one of the types
+	 */
+	public static Stream<EnumMaterials> filterByTypes(MaterialTypes... types)
+	{
+		Stream<MaterialTypes> typesStream = Stream.of(types);
+		return Stream.of(values()).filter(enumMaterials -> typesStream.anyMatch(materialTypes -> enumMaterials.material.getMaterialType()==materialTypes));
 	}
 }

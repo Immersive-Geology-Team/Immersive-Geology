@@ -2,7 +2,7 @@ package com.igteam.immersivegeology.common.world.gen.surface;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -51,7 +51,7 @@ public interface ISurfacePart
 	@SuppressWarnings("ConstantConditions")
 	static ISurfacePart rock()
 	{
-		return (data, x, y, rainfall, temp) -> IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material)
+		return (data, x, y, rainfall, temp) -> IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Limestone.material)
 				.getDefaultState();
 	}
 

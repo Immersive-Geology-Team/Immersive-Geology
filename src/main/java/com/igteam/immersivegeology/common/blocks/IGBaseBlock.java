@@ -58,7 +58,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 		this.name = name;
 
 		this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
-		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.FALSE));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
 		if(itemBlock!=null)
@@ -69,7 +69,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
 						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
 				this.itemBlock.setRegistryName(registryName);
-				IGContent.registeredIGItems.add(this.itemBlock);
+				IGContent.addItemBlockForBlock(name,this.itemBlock);
 			} catch(Exception e)
 			{
 				throw new RuntimeException(e);

@@ -2,14 +2,9 @@ package com.igteam.immersivegeology.common.blocks;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
-import com.igteam.immersivegeology.common.blocks.helpers.IOverlayColor;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.BlockstateGenerator;
-import com.igteam.immersivegeology.common.util.IGItemGrabber;
-import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -31,76 +26,38 @@ import net.minecraftforge.common.ToolType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBlockColor
+public class IGOreBearingBlock extends IGMaterialBlock implements IBlockColor
 {
 
-	public Material material;
-	protected MaterialUseType type;
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;
 
-
-	protected EnumOreBearingMaterials oreMaterial;
-
-	public IGOreBearingBlock(Material material, MaterialUseType type, EnumOreBearingMaterials oreMat)
+	public IGOreBearingBlock(Material material, MaterialUseType type, Material oreMat)
 	{
 		this(material, type, "", oreMat);
 	}
 
-	public IGOreBearingBlock(Material material, MaterialUseType type, String sub, EnumOreBearingMaterials oreMat)
+	public IGOreBearingBlock(Material material, MaterialUseType type, String sub, Material oreMat)
 	{
-		super(sub+"block_"+type.getName()+"_"+material.getName()+"_"+oreMat.toString().toLowerCase(),
-				Properties.create(
-						(type.getMaterial()==null?net.minecraft.block.material.Material.ROCK: type.getMaterial())),
-				IGBlockMaterialItem.class, type.getSubGroup());
+		super(sub, type, material, oreMat);
 
-		this.oreMaterial = oreMat;
 		this.setBlockLayer(BlockRenderLayer.CUTOUT_MIPPED);
-		this.material = material;
-		this.type = type;
-		if(itemBlock instanceof IGBlockMaterialItem)
-		{
-			((IGBlockMaterialItem)itemBlock).material = this.material;
-			((IGBlockMaterialItem)itemBlock).overlay = this.oreMaterial;
-			((IGBlockMaterialItem)itemBlock).subtype = this.type;
-		}
-
-		if(type.equals(MaterialUseType.ORE_BEARING))
-		{
-			if(material instanceof MaterialStoneBase)
-			{
-				MaterialStoneBase rockMat = (MaterialStoneBase)material;
-				BlockstateGenerator.generateOreBearingBlock(material, type, rockMat.getStoneType(), oreMat);
-				ItemJsonGenerator.generateOreBearingBlockItem(material, type, rockMat.getStoneType(), oreMat);
-			}
-		}
-
+		//set state variables
 		this.setDefaultState(this.stateContainer.getBaseState()
-				.with(NATURAL, Boolean.valueOf(false))
-				.with(ORE_RICHNESS, Integer.valueOf(defaultRichness)));
+				.with(NATURAL, Boolean.FALSE)
+				.with(ORE_RICHNESS, defaultRichness));
 	}
 
 	@Override
 	public BlockRenderType getRenderType(BlockState state)
 	{
-		// TODO Auto-generated method stub
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
 	public BlockRenderLayer getRenderLayer()
 	{
-		// TODO This is currently mostly a marker for culling, the actual layer is
-		// determined by canRenderInLayer
 		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
-	@Override
-	public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer)
-	{
-		// TODO Auto-generated method stub
-
-		return super.canRenderInLayer(state, layer);
 	}
 
 	@Override
@@ -111,40 +68,25 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 	}
 
 	@Override
-	public int getOverlayColor()
+	public int getColor(BlockState p_getColor_1_, IEnviromentBlockReader p_getColor_2_, BlockPos p_getColor_3_, int index)
 	{
-		// TODO Auto-generated method stub
-		return oreMaterial.getColor();
-	}
-
-	@Override
-	public String getOverlayName()
-	{
-		return "normal";
-	}
-
-	@Override
-	public int getColor(BlockState p_getColor_1_, IEnviromentBlockReader p_getColor_2_, BlockPos p_getColor_3_,
-						int index)
-	{
-		return material.getColor(0);
+		return index==0?getOreMaterial().getColor(0): getOreMaterial().getColor(0);
 	}
 
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		// TODO Auto-generated method stub
 		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player))
 		{
-			if(type.equals(MaterialUseType.ORE_BEARING)&&!tool.isEmpty())
+			if(type==MaterialUseType.ORE_BEARING_ROCK&&!tool.isEmpty())
 			{
 				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
 				if(!silk)
 				{
 					List<ItemStack> blockDrops = new ArrayList<>();
 					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
-					int effectiveLevel = Math.max(level-this.material.getBlockHarvestLevel(), 0);
+					int effectiveLevel = Math.max(level-getMaterial().getBlockHarvestLevel(), 0);
 					int richness = state.get(IGProperties.ORE_RICHNESS)+1;
 					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
 					int stoneAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*(1+player.getLuck()))));
@@ -152,9 +94,9 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 					int oreAmount = stoneAmount >= oreMax?oreMax: stoneAmount;
 					stoneAmount -= oreAmount;
 
-					blockDrops.add(new ItemStack(IGItemGrabber.getIGOreItem(MaterialUseType.ORE_CHUNK, this.material, oreMaterial), oreAmount));
+					blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.ORE_CHUNK, getMaterial(), getOreMaterial()), oreAmount));
 
-					blockDrops.add(new ItemStack(IGItemGrabber.getIGItem(MaterialUseType.CHUNK, this.material), stoneAmount));
+					blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.CHUNK, getMaterial()), stoneAmount));
 
 					for(ItemStack item : blockDrops)
 					{
@@ -174,6 +116,11 @@ public class IGOreBearingBlock extends IGBaseBlock implements IOverlayColor, IBl
 		}
 
 		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+
+	public Material getOreMaterial()
+	{
+		return materials[0];
 	}
 
 }

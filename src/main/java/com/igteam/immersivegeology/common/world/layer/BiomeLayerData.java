@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.common.world.layer;
 
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
@@ -36,9 +36,9 @@ public class BiomeLayerData
 	/**
 	 * @param layerID  - Layer the ore is to appear in
 	 * @param coverage - How common is the ore; min is 0.2f max is 0.65f, higher or lower will be ignored and set to the closest acceptable value. (this is to allow ores to spawn in a controlled amount) if it was 1 every rock would be that ore, anything lower than a 0.2 would almost never show up
-	 * @param ore      - the ore to spawn - choose from the EnumOreBearingMaterials
+	 * @param ore      - the ore to spawn - choose from the EnumMaterials
 	 */
-	public void addMachineOre(int layerID, float coverage, EnumOreBearingMaterials ore)
+	public void addMachineOre(int layerID, float coverage, EnumMaterials ore)
 	{
 		if(layerOreMap.containsKey(layerID))
 		{
@@ -96,23 +96,23 @@ public class BiomeLayerData
 	{
 
 		private float coverage;
-		private EnumOreBearingMaterials ore;
+		private EnumMaterials ore;
 		private int setLayer;
 
 
-		public LayerOre(float coverage, EnumOreBearingMaterials ore, int layer)
+		public LayerOre(float coverage, EnumMaterials ore, int layer)
 		{
 			this.coverage = coverage;
 			this.ore = ore;
 			this.setSetLayer(layer);
 		}
 
-		public EnumOreBearingMaterials getOre()
+		public EnumMaterials getOre()
 		{
 			return ore;
 		}
 
-		public void setOre(EnumOreBearingMaterials ore)
+		public void setOre(EnumMaterials ore)
 		{
 			this.ore = ore;
 		}

@@ -30,28 +30,16 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void preInitEnd()
-	{
-		super.preInitEnd();
-
-	}
-
-	@Override
 	public void init()
 	{
 		super.init();
-		for(Item item : IGContent.registeredIGItems)
+		//Colour registration
+		for(Item item : IGContent.registeredIGItems.values())
 			if(item instanceof IEItemInterfaces.IColouredItem&&((IEItemInterfaces.IColouredItem)item).hasCustomItemColours())
 				mc().getItemColors().register(IEDefaultColourHandlers.INSTANCE, item);
 		for(Block block : IGContent.registeredIGBlocks.values())
 			if(block instanceof IEBlockInterfaces.IColouredBlock&&((IEBlockInterfaces.IColouredBlock)block).hasCustomBlockColours())
 				mc().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
-	}
-
-	@Override
-	public void initEnd()
-	{
-		super.initEnd();
 	}
 
 	@Override
@@ -61,14 +49,14 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void postInitEnd()
-	{
-		super.postInitEnd();
-	}
-
-	@Override
 	public void serverStarting()
 	{
 		super.serverStarting();
+	}
+
+	@Override
+	public void onWorldLoad()
+	{
+		super.onWorldLoad();
 	}
 }

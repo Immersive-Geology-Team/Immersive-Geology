@@ -4,7 +4,7 @@ import com.google.gson.stream.JsonWriter;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -40,13 +40,13 @@ public class ItemJsonGenerator
 		generateBlockItem("block_"+type.getName()+"_"+material.getName(), type.getName());
 	}
 
-	public static void generateOreBearingBlockItem(Material material, MaterialUseType type, EnumStoneType stoneType, EnumOreBearingMaterials oreType)
+	public static void generateOreBearingBlockItem(Material material, MaterialUseType type, EnumStoneType stoneType, EnumMaterials oreType)
 	{
 		generateOreBearingBlockItem("block_"+type.getName()+"_"+material.getName()+"_"+oreType.toString().toLowerCase(),
 				type.getName()+"_"+stoneType.getName());
 	}
 
-	public static void generateOreItem(Material material, MaterialUseType type, EnumOreBearingMaterials oreType)
+	public static void generateOreItem(Material material, MaterialUseType type, EnumMaterials oreType)
 	{
 		generateOreItem("item_"+type.getName()+"_"+material.getName()+"_"+oreType.toString().toLowerCase());
 

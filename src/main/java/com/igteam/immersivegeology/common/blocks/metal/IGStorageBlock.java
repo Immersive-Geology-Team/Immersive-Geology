@@ -12,7 +12,7 @@ public class IGStorageBlock extends IGMaterialBlock
 {
 	public IGStorageBlock(Material material)
 	{
-		super(material, MaterialUseType.STORAGE);
+		super(MaterialUseType.STORAGE, material);
 	}
 
 	//No changes to stats

@@ -11,7 +11,6 @@ import com.igteam.immersivegeology.common.world.WorldEventHandler;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
-import com.igteam.immersivegeology.server.ServerProxy;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,7 +40,6 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static ServerProxy serverProxy = new ServerProxy();
 	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
 
 	public static final boolean GENERATE_MODELS = false;
@@ -84,7 +82,6 @@ public class ImmersiveGeology
 		//Previously in PREINIT
 		proxy.preInit();
 
-		proxy.preInitEnd();
 		//Previously in INIT
 		proxy.init();
 
@@ -92,12 +89,8 @@ public class ImmersiveGeology
 		ChunkDataCapability.setup();
 		IGContent.init();
 
-		proxy.initEnd();
-		//Previously in POSTINIT
 		proxy.postInit();
 		IGContent.postInit();
-
-		proxy.postInitEnd();
 	}
 
 	@SubscribeEvent

@@ -11,7 +11,7 @@ public class IGDustBlock extends IGMaterialBlock
 {
 	public IGDustBlock(Material material)
 	{
-		super(material, MaterialUseType.DUST);
+		super(MaterialUseType.DUST, material);
 	}
 
 	//Hardness * 0.4, Mining resistance * 0.5
