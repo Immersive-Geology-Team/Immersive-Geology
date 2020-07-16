@@ -54,10 +54,10 @@ public class IGItemModelProvider extends ItemModelProvider
 					StringBuilder specialName = new StringBuilder();
 					for(Material material : i.materials)
 					{
-						if(material.getSpecialSubtypeModelName(i.useType)!=null)
-							specialName.append('_').append(material.getSpecialSubtypeModelName(i.useType));
+						if(material.getSpecialSubtypeModelName(i.subtype)!=null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(i.subtype));
 					}
-					withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "item/"+i.itemName).getPath(), new ResourceLocation(ImmersiveGeology.MODID, "item/base/"+i.useType.getModelPath()+i.useType.getName()+specialName.toString()));
+					withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "item/"+i.itemName).getPath(), new ResourceLocation(ImmersiveGeology.MODID, "item/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
 				}
 			} catch(Exception ignored)
 			{
