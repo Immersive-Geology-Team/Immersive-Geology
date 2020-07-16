@@ -111,7 +111,7 @@ public class IGOreBearingBlock extends IGMaterialBlock
 
 	public Material getOreMaterial()
 	{
-		return materials[0];
+		return materials[1];
 	}
 
 	@Override

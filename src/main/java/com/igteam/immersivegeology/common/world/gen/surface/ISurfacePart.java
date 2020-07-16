@@ -1,8 +1,8 @@
 package com.igteam.immersivegeology.common.world.gen.surface;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.IGRegistryGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
