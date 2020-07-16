@@ -24,7 +24,7 @@ import net.minecraftforge.common.ToolType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IGOreBearingBlock extends IGMaterialBlock
+public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 {
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;
@@ -111,7 +111,7 @@ public class IGOreBearingBlock extends IGMaterialBlock
 
 	public Material getOreMaterial()
 	{
-		return materials[0];
+		return materials[1];
 	}
 
 	@Override

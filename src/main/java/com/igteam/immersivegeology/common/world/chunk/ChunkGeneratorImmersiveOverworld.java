@@ -82,12 +82,10 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		// I went with the quickest easier way of creating a generator for each situation...
 		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
 
-		int offset = 0;
-		for(EnumMaterials ore : EnumMaterials.values())
-		{
-			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore, offset);
-			offset++;
-		}
+		EnumMaterials.filterMinerals().forEach((ore) -> {
+				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
+		});
+		
 
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}

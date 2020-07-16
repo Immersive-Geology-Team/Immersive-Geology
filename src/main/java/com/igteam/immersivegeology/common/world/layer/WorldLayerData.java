@@ -100,7 +100,6 @@ public class WorldLayerData
 
 		badlands.settleLayers();
 
-
 		worldLayerData.add(badlands);
 		worldLayerData.add(desert);
 		worldLayerData.add(lush_mountains);
