@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_zirconium"
+    "item": "immersivegeology:item_nugget_zirconium",
+    "count": 9
   }
 }

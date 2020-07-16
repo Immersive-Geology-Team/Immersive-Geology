@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_chromium"
+    "item": "immersivegeology:item_nugget_chromium",
+    "count": 9
   }
 }

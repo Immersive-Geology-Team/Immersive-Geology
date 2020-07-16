@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_copper"
+    "item": "immersivegeology:item_nugget_copper",
+    "count": 9
   }
 }

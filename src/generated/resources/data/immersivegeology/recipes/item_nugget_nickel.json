@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_nickel"
+    "item": "immersivegeology:item_nugget_nickel",
+    "count": 9
   }
 }

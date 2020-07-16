@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_lead"
+    "item": "immersivegeology:item_nugget_lead",
+    "count": 9
   }
 }

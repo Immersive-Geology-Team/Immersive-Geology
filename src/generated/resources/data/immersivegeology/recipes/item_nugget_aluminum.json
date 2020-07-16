@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_aluminum"
+    "item": "immersivegeology:item_nugget_aluminum",
+    "count": 9
   }
 }

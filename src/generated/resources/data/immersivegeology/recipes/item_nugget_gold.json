@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_gold"
+    "item": "immersivegeology:item_nugget_gold",
+    "count": 9
   }
 }

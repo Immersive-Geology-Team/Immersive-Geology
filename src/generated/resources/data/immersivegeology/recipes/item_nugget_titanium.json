@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_titanium"
+    "item": "immersivegeology:item_nugget_titanium",
+    "count": 9
   }
 }

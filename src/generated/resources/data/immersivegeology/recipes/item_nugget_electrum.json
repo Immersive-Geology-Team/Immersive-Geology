@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_electrum"
+    "item": "immersivegeology:item_nugget_electrum",
+    "count": 9
   }
 }

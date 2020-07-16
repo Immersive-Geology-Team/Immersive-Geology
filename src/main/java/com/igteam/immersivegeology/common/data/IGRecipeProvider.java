@@ -70,7 +70,7 @@ public class IGRecipeProvider extends RecipeProvider
 								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
 								.build(consumer);
 						Item disassemble = IGRegistryGrabber.getIGItem(MaterialUseType.NUGGET, resourceItem.getMaterial());
-						ShapelessRecipeBuilder.shapelessRecipe(disassemble)
+						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
 								.addIngredient(resourceItem)
 								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
 								.build(consumer);
@@ -89,8 +89,8 @@ public class IGRecipeProvider extends RecipeProvider
 					else if(resourceItem.subtype.equals(MaterialUseType.STORAGE))
 					{
 						Item disassemble = IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
-						ShapelessRecipeBuilder.shapelessRecipe(disassemble)
-								.addIngredient(resourceItem)
+						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
+								.addIngredient(resourceItem.getItem())
 								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceItem)) //recipe unlock criterion
 								.build(consumer);
 					}

@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_manganese"
+    "item": "immersivegeology:item_nugget_manganese",
+    "count": 9
   }
 }

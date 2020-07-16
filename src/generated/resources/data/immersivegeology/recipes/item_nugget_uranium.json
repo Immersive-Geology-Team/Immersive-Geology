@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_uranium"
+    "item": "immersivegeology:item_nugget_uranium",
+    "count": 9
   }
 }

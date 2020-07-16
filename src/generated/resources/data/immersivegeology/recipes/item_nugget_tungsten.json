@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "immersivegeology:item_nugget_tungsten"
+    "item": "immersivegeology:item_nugget_tungsten",
+    "count": 9
   }
 }
