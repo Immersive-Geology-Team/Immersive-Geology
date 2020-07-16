@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  */
 public class IGMaterialItem extends IGBaseItem
 {
-	public MaterialUseType subtype;
+	public MaterialUseType useType;
 	public Material[] materials;
 
 	public IGMaterialItem(MaterialUseType type, Material... materials)
@@ -32,7 +32,7 @@ public class IGMaterialItem extends IGBaseItem
 	public IGMaterialItem(String sub, MaterialUseType type, Material... materials)
 	{
 		super(MaterialUtils.generateMaterialName("item", type, materials));
-		this.subtype = type;
+		this.useType = type;
 		this.subGroup = type.getSubGroup();
 		this.materials = materials;
 	}
@@ -56,7 +56,7 @@ public class IGMaterialItem extends IGBaseItem
 		ArrayList<String> localizedNames = new ArrayList<>();
 		for(Material m : materials)
 			localizedNames.add(I18n.format("material."+m.getModID()+"."+m.getName()+".name"));
-		return new TranslationTextComponent("item."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", localizedNames.toArray(new String[localizedNames.size()]));
+		return new TranslationTextComponent("item."+ImmersiveGeology.MODID+"."+useType.getName().toLowerCase(Locale.ENGLISH)+".name", localizedNames.toArray(new String[localizedNames.size()]));
 	}
 
 	/**
@@ -73,4 +73,8 @@ public class IGMaterialItem extends IGBaseItem
 		return getMaterial().getRarity();
 	}
 
+	public MaterialUseType getUseType()
+	{
+		return useType;
+	}
 }
