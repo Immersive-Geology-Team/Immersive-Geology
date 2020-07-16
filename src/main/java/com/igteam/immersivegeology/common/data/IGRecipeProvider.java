@@ -34,7 +34,8 @@ public class IGRecipeProvider extends RecipeProvider
             try {
                 if (item instanceof IGMaterialResourceItem) {
                     IGMaterialResourceItem resourceItem = (IGMaterialResourceItem) item;
-                    if (resourceItem.getUseType().equals(MaterialUseType.CHUNK)) {
+                    if(resourceItem.subtype.equals(MaterialUseType.CHUNK))
+                    {
                         IGBaseBlock block = IGRegistryGrabber.grabBlock(MaterialUseType.COBBLESTONE, resourceItem.getMaterial());
                         ShapedRecipeBuilder.shapedRecipe(block)
                                 .patternLine("xx")
@@ -43,7 +44,8 @@ public class IGRecipeProvider extends RecipeProvider
                                 //.addCriterion("cobblestone", InventoryChangeTrigger.Instance.forItems(Blocks.COBBLESTONE)) recipe unlock criterion
                                 .build(consumer);
                     }
-                    if (resourceItem.getUseType().equals(MaterialUseType.POLISHED_CHUNK)) {
+                    if(resourceItem.subtype.equals(MaterialUseType.ORE_CHUNK))
+                    {
 
                     }
                 }
