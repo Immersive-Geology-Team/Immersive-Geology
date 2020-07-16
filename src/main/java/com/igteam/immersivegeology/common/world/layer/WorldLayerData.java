@@ -94,7 +94,6 @@ public class WorldLayerData
 		badlands.addMachineOre(2, 0.30f, EnumMaterials.Hubnerite);
 
 		badlands.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
-
 		badlands.addMachineOre(1, 0.30f, EnumMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
 		badlands.addMachineOre(1, 0.50f, EnumMaterials.Magnetite);
 		badlands.addMachineOre(1, 0.65f, EnumMaterials.Gold);
