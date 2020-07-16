@@ -5,11 +5,9 @@ import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.item.Item;
 
 import java.util.function.Consumer;
@@ -25,6 +23,7 @@ public class IGRecipeProvider extends RecipeProvider
 	@Override
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
 	{
+		IGRegistryGrabber.getIGItem(MaterialUseType.GEAR, EnumMaterials.Copper.material);
 		createBasicRecipes(consumer);
 	}
 
@@ -48,7 +47,7 @@ public class IGRecipeProvider extends RecipeProvider
 								.addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(item))
 								.build(consumer);
 					}
-					if(resourceItem.subtype.equals(MaterialUseType.POLISHED_CHUNK))
+					else if(resourceItem.subtype.equals(MaterialUseType.POLISHED_CHUNK))
 					{
 						IGBaseBlock block = IGRegistryGrabber.grabBlock(MaterialUseType.NORMAL_BRICKS, resourceItem.getMaterial());
 						ShapedRecipeBuilder.shapedRecipe(block)
@@ -57,6 +56,42 @@ public class IGRecipeProvider extends RecipeProvider
 								.key('x', item)
 								.setGroup("bricks")
 								.addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(item))
+								.build(consumer);
+					}
+					else if(resourceItem.subtype.equals(MaterialUseType.INGOT))
+					{
+						IGBaseBlock combined = IGRegistryGrabber.grabBlock(MaterialUseType.STORAGE, resourceItem.getMaterial());
+						System.out.println("Creating Recipe for: "+combined);
+						ShapedRecipeBuilder.shapedRecipe(combined)
+								.key('x', resourceItem)
+								.patternLine("xxx")
+								.patternLine("xxx")
+								.patternLine("xxx")
+								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
+								.build(consumer);
+						Item disassemble = IGRegistryGrabber.getIGItem(MaterialUseType.NUGGET, resourceItem.getMaterial());
+						ShapelessRecipeBuilder.shapelessRecipe(disassemble)
+								.addIngredient(resourceItem)
+								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
+								.build(consumer);
+					}
+					else if(resourceItem.subtype.equals(MaterialUseType.NUGGET))
+					{
+						Item combined = IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
+						ShapedRecipeBuilder.shapedRecipe(combined)
+								.key('x', resourceItem)
+								.patternLine("xxx")
+								.patternLine("xxx")
+								.patternLine("xxx")
+								.addCriterion("nugget", InventoryChangeTrigger.Instance.forItems(resourceItem))
+								.build(consumer);
+					}
+					else if(resourceItem.subtype.equals(MaterialUseType.STORAGE))
+					{
+						Item disassemble = IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
+						ShapelessRecipeBuilder.shapelessRecipe(disassemble)
+								.addIngredient(resourceItem)
+								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceItem)) //recipe unlock criterion
 								.build(consumer);
 					}
 				}

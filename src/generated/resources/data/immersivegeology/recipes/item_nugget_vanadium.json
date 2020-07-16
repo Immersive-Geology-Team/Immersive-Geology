@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:item_ingot_vanadium"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_nugget_vanadium"
+  }
+}

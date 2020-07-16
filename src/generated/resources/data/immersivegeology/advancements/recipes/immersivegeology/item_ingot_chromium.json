@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersivegeology:item_ingot_chromium"
+    ]
+  },
+  "criteria": {
+    "nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersivegeology:item_nugget_chromium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersivegeology:item_ingot_chromium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

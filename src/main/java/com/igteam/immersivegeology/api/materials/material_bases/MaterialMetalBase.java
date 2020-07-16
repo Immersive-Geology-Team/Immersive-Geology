@@ -18,6 +18,8 @@ public abstract class MaterialMetalBase extends Material
 		{
 			case INGOT:
 				return hasIngot();
+			case NUGGET:
+				return hasNugget();
 			case PLATE:
 				return hasPlate();
 			case ROD:
@@ -73,6 +75,11 @@ public abstract class MaterialMetalBase extends Material
 	}
 
 	public boolean hasIngot()
+	{
+		return true;
+	}
+
+	public boolean hasNugget()
 	{
 		return true;
 	}
