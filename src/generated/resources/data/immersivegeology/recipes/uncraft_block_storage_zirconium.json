@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:block_storage_zirconium"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_ingot_zirconium",
+    "count": 9
+  }
+}

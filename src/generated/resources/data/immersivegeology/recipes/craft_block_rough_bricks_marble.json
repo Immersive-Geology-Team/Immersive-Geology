@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bricks",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "immersivegeology:item_chunk_marble"
+    }
+  },
+  "result": {
+    "item": "immersivegeology:block_rough_bricks_marble"
+  }
+}
