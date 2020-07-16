@@ -20,14 +20,26 @@ public abstract class MaterialMetalBase extends Material
 				return hasIngot();
 			case PLATE:
 				return hasPlate();
-			case DUST:
-				return hasDust();
-			case TINY_DUST:
-				return hasTinyDust();
 			case ROD:
 				return hasRod();
 			case GEAR:
 				return hasGear();
+			case WIRE:
+				return hasWire();
+			case ROUGH_INGOT:
+				return hasRoughIngot();
+			case ROUGH_PLATE:
+				return hasRoughPlate();
+			case ROUGH_ROD:
+				return hasRoughRod();
+			case ROUGH_GEAR:
+				return hasRoughGear();
+			case ROUGH_WIRE:
+				return hasRoughWire();
+			case DUST:
+				return hasDust();
+			case TINY_DUST:
+				return hasTinyDust();
 			case STORAGE:
 				return hasStorageBlock();
 			case SHEETMETAL:
@@ -36,8 +48,9 @@ public abstract class MaterialMetalBase extends Material
 				return hasDustBlock();
 			case FLUIDS:
 				return true;
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -75,6 +88,36 @@ public abstract class MaterialMetalBase extends Material
 	}
 
 	public boolean hasGear()
+	{
+		return true;
+	}
+
+	public boolean hasWire()
+	{
+		return true;
+	}
+
+	public boolean hasRoughIngot()
+	{
+		return true;
+	}
+
+	public boolean hasRoughPlate()
+	{
+		return true;
+	}
+
+	public boolean hasRoughRod()
+	{
+		return true;
+	}
+
+	public boolean hasRoughGear()
+	{
+		return true;
+	}
+
+	public boolean hasRoughWire()
 	{
 		return true;
 	}

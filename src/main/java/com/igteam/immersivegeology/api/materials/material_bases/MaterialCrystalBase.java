@@ -17,6 +17,8 @@ public abstract class MaterialCrystalBase extends Material
 		{
 			case CRYSTAL:
 				return hasCrystal();
+			case RAW_CRYSTAL:
+				return hasRawCrystal();
 			case DUST:
 				return hasDust();
 			case TINY_DUST:
@@ -25,8 +27,6 @@ public abstract class MaterialCrystalBase extends Material
 				return hasStorageBlock();
 			case DUST_BLOCK:
 				return hasDustBlock();
-			case RAW_CRYSTAL:
-				return hasRawCrystal();
 		}
 		return false;
 	}
