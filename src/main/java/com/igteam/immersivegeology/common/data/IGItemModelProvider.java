@@ -59,9 +59,9 @@ public class IGItemModelProvider extends ItemModelProvider
 					}
 					withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "item/"+i.itemName).getPath(), new ResourceLocation(ImmersiveGeology.MODID, "item/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
 				}
-			} catch(Exception ignored)
+			} catch(Exception e)
 			{
-
+				System.out.println("Failed to create Item Model:" + e);
 			}
 
 		}

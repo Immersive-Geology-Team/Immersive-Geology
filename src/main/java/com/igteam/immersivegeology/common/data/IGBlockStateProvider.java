@@ -90,9 +90,9 @@ public class IGBlockStateProvider extends BlockStateProvider
 				}
 
 
-			} catch(Exception ignored)
+			} catch(Exception e)
 			{
-
+				System.out.println("Failed to create blockstate: " + e);
 			}
 
 		}

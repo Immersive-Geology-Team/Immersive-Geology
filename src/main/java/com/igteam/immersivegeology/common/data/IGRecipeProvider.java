@@ -55,9 +55,9 @@ public class IGRecipeProvider extends RecipeProvider
                                 .build(consumer);
                     }
                 }
-            } catch(Exception ignored)
+            } catch(Exception e)
             {
-
+                System.out.println("Failed to create Recipe: " + e);
             }
         }
     }
