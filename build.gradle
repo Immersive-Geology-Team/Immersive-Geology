@@ -83,7 +83,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'fml.earlyprogresswindow', 'false'
 
-            args '--mod', 'immersivegeology', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'immersivegeology', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
             mods {
                 immersivegeology {

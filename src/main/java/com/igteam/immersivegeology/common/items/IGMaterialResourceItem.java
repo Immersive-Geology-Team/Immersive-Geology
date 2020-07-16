@@ -2,9 +2,7 @@ package com.igteam.immersivegeology.common.items;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersivegeology.client.menu.helper.IIGSubGroupContained;
-import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;

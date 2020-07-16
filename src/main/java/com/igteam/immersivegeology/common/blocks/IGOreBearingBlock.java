@@ -8,7 +8,6 @@ import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ItemEntity;
@@ -19,16 +18,14 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IGOreBearingBlock extends IGMaterialBlock implements IBlockColor
+public class IGOreBearingBlock extends IGMaterialBlock
 {
-
 	protected int defaultRichness = 1;
 	public static final IntegerProperty ORE_RICHNESS = IGProperties.ORE_RICHNESS;
 
@@ -68,18 +65,12 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IBlockColor
 	}
 
 	@Override
-	public int getColor(BlockState p_getColor_1_, IEnviromentBlockReader p_getColor_2_, BlockPos p_getColor_3_, int index)
-	{
-		return index==0?getOreMaterial().getColor(0): getOreMaterial().getColor(0);
-	}
-
-	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player))
 		{
-			if(type==MaterialUseType.ORE_BEARING_ROCK&&!tool.isEmpty())
+			if(subtype==MaterialUseType.ORE_BEARING&&!tool.isEmpty())
 			{
 				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
 				if(!silk)
@@ -121,6 +112,12 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IBlockColor
 	public Material getOreMaterial()
 	{
 		return materials[0];
+	}
+
+	@Override
+	public boolean hasMultipartModel()
+	{
+		return true;
 	}
 
 }

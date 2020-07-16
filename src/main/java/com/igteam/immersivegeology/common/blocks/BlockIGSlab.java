@@ -3,8 +3,6 @@ package com.igteam.immersivegeology.common.blocks;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;

@@ -30,9 +30,12 @@ public class IGDataGenerator
 		public static void gatherData(GatherDataEvent event) {
 			DataGenerator gen = event.getGenerator();
 			if (event.includeServer()) {
-				//gen.addProvider(new IGRecipesProvider(gen));
-				//gen.addProvider(new IGBlockTagsProvider(gen));
 				gen.addProvider(new IGItemTagsProvider(gen));
+			}
+			if(event.includeClient())
+			{
+				gen.addProvider(new IGItemModelProvider(gen, event.getExistingFileHelper()));
+				gen.addProvider(new IGBlockStateProvider(gen, event.getExistingFileHelper()));
 			}
 
 		}

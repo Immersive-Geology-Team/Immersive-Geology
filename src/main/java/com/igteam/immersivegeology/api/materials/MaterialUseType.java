@@ -25,7 +25,7 @@ public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
 	ROCK(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw),
-	ORE_BEARING_ROCK(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw)
+	ORE_BEARING(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw)
 			{
 				@Override
 				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
@@ -34,6 +34,13 @@ public enum MaterialUseType implements IStringSerializable
 					//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
 					EnumMaterials.filterMinerals().forEach(enumMaterials -> list.add(new IGOreBearingBlock(material, this, enumMaterials.material)));
 					return list.toArray(new IGBaseBlock[]{});
+				}
+
+				@Nonnull
+				@Override
+				public String getModelPath()
+				{
+					return getName()+"/";
 				}
 			},
 	CHUNK(ItemSubGroup.raw),
@@ -96,27 +103,19 @@ public enum MaterialUseType implements IStringSerializable
 				}
 			},
 	//Stones
-	DIRT(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
-	GRAVEL(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
-	SAND(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
-	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					IGMaterialBlock cobble = new IGMaterialBlock(MaterialUseType.COBBLESTONE, material);
-					return new IGMaterialBlock[]{cobble};
-				}
-			},
+	DIRT(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
+	GRAVEL(UseCategory.RESOURCE_BLOCK, Material.EARTH, ItemSubGroup.raw),
+	SAND(UseCategory.RESOURCE_BLOCK, Material.EARTH, ItemSubGroup.raw),
+	COBBLESTONE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
 
-	ROUGH_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	POLISHED_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	SMALL_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	NORMAL_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	ROAD_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	PILLAR(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	COLUMN(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
-	TILES(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
+	ROUGH_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	POLISHED_STONE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	SMALL_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	NORMAL_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	ROAD_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	PILLAR(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	COLUMN(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
+	TILES(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
 
 	//Fluids
 	FLUIDS(UseCategory.BLOCK, ItemSubGroup.misc);
@@ -136,7 +135,7 @@ public enum MaterialUseType implements IStringSerializable
 
 	MaterialUseType(UseCategory category)
 	{
-		this(category, Material.AIR, ItemSubGroup.raw);
+		this(category, Material.ROCK, ItemSubGroup.raw);
 	}
 
 	MaterialUseType(ItemSubGroup group)
@@ -175,8 +174,18 @@ public enum MaterialUseType implements IStringSerializable
 	}
 
 	/**
+	 * @return parent model path for the part, used by data generators, relative to items/ or blocks/
+	 */
+	@Nonnull
+	public String getModelPath()
+	{
+		return "";
+	}
+
+	/**
 	 * @return name used by forge tags (plural, lowercase)
 	 */
+	@Nonnull
 	public String getTagName()
 	{
 		String name = getName();

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "natural=false": {
+      "model": "immersivegeology:block/block_dust_nickel"
+    },
+    "natural=true": {
+      "model": "immersivegeology:block/block_dust_nickel"
+    }
+  }
+}

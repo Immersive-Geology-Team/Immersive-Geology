@@ -22,7 +22,6 @@ import net.minecraftforge.common.ToolType;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by Pabilo8 on 26-03-2020.
@@ -30,24 +29,24 @@ import java.util.stream.Stream;
 public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 {
 	public Material[] materials;
-	protected MaterialUseType type;
+	public MaterialUseType subtype;
 
-	public IGMaterialBlock(MaterialUseType type, Material... materials)
+	public IGMaterialBlock(MaterialUseType subtype, Material... materials)
 	{
-		this("", type, materials);
+		this("", subtype, materials);
 	}
 
-	public IGMaterialBlock(String sub, MaterialUseType type, Material... materials)
+	public IGMaterialBlock(String sub, MaterialUseType subtype, Material... materials)
 	{
-		super(MaterialUtils.generateMaterialName("block", type, materials),
-				Properties.create((type.getMaterial()==null?net.minecraft.block.material.Material.ROCK: type.getMaterial())), IGBlockMaterialItem.class, type.getSubGroup());
+		super(MaterialUtils.generateMaterialName("block", subtype, materials),
+				Properties.create((subtype.getMaterial()==null?net.minecraft.block.material.Material.ROCK: subtype.getMaterial())), IGBlockMaterialItem.class, subtype.getSubGroup());
 
 		this.materials = materials;
-		this.type = type;
+		this.subtype = subtype;
 		if(itemBlock instanceof IGBlockMaterialItem)
 		{
 			((IGBlockMaterialItem)itemBlock).materials = this.materials;
-			((IGBlockMaterialItem)itemBlock).subtype = this.type;
+			((IGBlockMaterialItem)itemBlock).subtype = this.subtype;
 		}
 
 	}
@@ -59,7 +58,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player))
 		{
-			if(type.equals(MaterialUseType.ROCK)&&!tool.isEmpty())
+			if(subtype.equals(MaterialUseType.ROCK)&&!tool.isEmpty())
 			{
 				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
 				if(state.get(IGProperties.NATURAL)&&!silk)
@@ -119,5 +118,10 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	public Material getMaterial()
 	{
 		return materials[0];
+	}
+
+	public boolean hasMultipartModel()
+	{
+		return false;
 	}
 }

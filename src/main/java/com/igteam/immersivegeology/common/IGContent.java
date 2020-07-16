@@ -50,13 +50,11 @@ public class IGContent
 					// Check if this type is an ITEM not a BLOCK type.
 					switch(materialItem.getCategory())
 					{
-						case ITEM:
 						case RESOURCE_ITEM:
-							Arrays.stream(materialItem.getItems(material)).forEach(item -> registeredIGItems.put(materialItem.getName()+"_"+material.getName(), item));
+							Arrays.stream(materialItem.getItems(material)).forEach(item -> registeredIGItems.put(item.itemName, item));
 							break;
-						case BLOCK:
 						case RESOURCE_BLOCK:
-							Arrays.stream(materialItem.getBlocks(material)).forEach(block -> registeredIGBlocks.put(materialItem.getName()+"_"+material.getName(), block));
+							Arrays.stream(materialItem.getBlocks(material)).forEach(block -> registeredIGBlocks.put(block.name, block));
 							break;
 						default:
 							break;

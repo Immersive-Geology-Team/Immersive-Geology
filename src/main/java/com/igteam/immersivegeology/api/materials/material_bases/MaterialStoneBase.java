@@ -4,6 +4,8 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
+import javax.annotation.Nullable;
+
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
@@ -19,7 +21,7 @@ public abstract class MaterialStoneBase extends Material
 			//items
 			case ROCK:
 				//blocks
-			case ORE_BEARING_ROCK:
+			case ORE_BEARING:
 			case ORE_CHUNK:
 			case GRAVEL:
 			case COBBLESTONE:
@@ -35,6 +37,15 @@ public abstract class MaterialStoneBase extends Material
 				return true;
 		}
 		return false;
+	}
+
+	@Nullable
+	@Override
+	public String getSpecialSubtypeModelName(MaterialUseType useType)
+	{
+		if(useType==MaterialUseType.ORE_BEARING||useType==MaterialUseType.ROCK)
+			return getStoneType().getName();
+		return null;
 	}
 
 	@Override
@@ -58,7 +69,6 @@ public abstract class MaterialStoneBase extends Material
 
 		public String getName()
 		{
-			// TODO Auto-generated method stub
 			return toString().toLowerCase();
 		}
 	}

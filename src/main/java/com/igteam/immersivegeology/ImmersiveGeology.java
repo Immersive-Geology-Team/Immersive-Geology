@@ -42,8 +42,6 @@ public class ImmersiveGeology
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
 
-	public static final boolean GENERATE_MODELS = false;
-
 	public ImmersiveGeology()
 	{
 		//setup world type

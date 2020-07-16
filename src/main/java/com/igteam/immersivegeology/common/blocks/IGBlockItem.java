@@ -37,6 +37,7 @@ public class IGBlockItem extends BlockItem implements IIGSubGroupContained
 	{
 		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP));
 		this.subGroup = sub;
+
 	}
 
 	@Override

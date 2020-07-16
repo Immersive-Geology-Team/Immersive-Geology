@@ -194,7 +194,7 @@ public class WorleyOreCarver
 
 													heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD?1-(shrinkValue*(1+((yPos-HEIGHT_FADE_THRESHOLD)/HEIGHT_FADE_THRESHOLD))): 1;
 
-													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING_ROCK, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
+													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
 
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;

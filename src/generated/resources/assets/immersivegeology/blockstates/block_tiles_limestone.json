@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "natural=false": {
+      "model": "immersivegeology:block/block_tiles_limestone"
+    },
+    "natural=true": {
+      "model": "immersivegeology:block/block_tiles_limestone"
+    }
+  }
+}
