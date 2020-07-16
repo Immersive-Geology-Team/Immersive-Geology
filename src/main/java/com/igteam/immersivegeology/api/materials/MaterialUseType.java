@@ -48,12 +48,17 @@ public enum MaterialUseType implements IStringSerializable
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
+	ROUGH_INGOT(ItemSubGroup.processed),
+	ROUGH_PLATE(ItemSubGroup.processed),
 	DUST(ItemSubGroup.processed),
 	TINY_DUST(ItemSubGroup.processed),
 	ROD(ItemSubGroup.processed),
+	ROUGH_ROD(ItemSubGroup.processed),
 	NUGGET(ItemSubGroup.processed),
 	GEAR(ItemSubGroup.processed),
+	ROUGH_GEAR(ItemSubGroup.processed),
 	WIRE(ItemSubGroup.processed),
+	ROUGH_WIRE(ItemSubGroup.processed),
 	RAW_CRYSTAL(ItemSubGroup.raw),
 	CRYSTAL(ItemSubGroup.processed),
 

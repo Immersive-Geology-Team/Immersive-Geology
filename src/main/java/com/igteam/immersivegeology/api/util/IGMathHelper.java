@@ -53,7 +53,7 @@ public class IGMathHelper extends MathHelper
 			return 0;
 		if(x < y)
 			return x+RANDOM.nextInt(y-x);
-		return y+RANDOM.nextInt(y-x);
+		return y+RANDOM.nextInt(x-y);
 	}
 
 	/**

@@ -24,38 +24,34 @@ import java.util.*;
 public class WorleyOreCarver
 {
 
-	private static final int SAMPLE_HEIGHT = 32;
+	private static final int SAMPLE_HEIGHT = 64;
 	private static float NOISE_THRESHOLD = 0.35f;
-	private static float HEIGHT_FADE_THRESHOLD = 80;
 
-	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	private static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 
 	// size of the cave intrest points!
 	private static final float FEATURE_SIZE = 16;
 
-
 	private Map<String, INoise3D> oreNoiseArray = new HashMap<String, INoise3D>();
 	public static WorleyOreCarver INSTANCE = new WorleyOreCarver();
 
-	public WorleyOreCarver()
-	{
-	}
+	public WorleyOreCarver(){};
 
 	public void setupNewLayer(Random seedGenerator, EnumMaterials oreMaterial, int offset)
 	{
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 		{
 
-			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong()+offset);
+			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong() + offset);
+			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong() + offset + 1);
 
 			//this is to make ore veins less common (without this it's way too common)
 			INoise3D oreNoiseSub = (x, y, z) -> {
-				return oreNoiseWorley.flattened(0.4f, 1f).noise(x/(FEATURE_SIZE*5), y/(FEATURE_SIZE*5), z/(FEATURE_SIZE*5));
+				return oreNoiseWorleySub.flattened(0.4f, 1f).octaves(1, 0.75f).noise(x/(FEATURE_SIZE*5), y/(FEATURE_SIZE*5), z/(FEATURE_SIZE*5));
 			};
 
 			INoise3D oreNoise = (x, y, z) -> {
-				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.95f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
+				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.8f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
 			};
 
 
@@ -164,14 +160,14 @@ public class WorleyOreCarver
 							for(int y0 = 4-1; y0 >= 0; y0--)
 							{
 								int yPos = y*4+y0;
-								float heightFadeValue;
+								float heightFadeValue = 1;
 								for(int x0 = x*4; x0 < (x+1)*4; x0++)
 								{
 									for(int z0 = z*4; z0 < (z+1)*4; z0++)
 									{
 										// set the current position
 										pos.setPos(chunkX+x0, yPos, chunkZ+z0);
-										BlockState replacementState;
+										BlockState replacementState = Blocks.PINK_WOOL.getDefaultState();
 
 										if(chunkIn.getBiome(pos) instanceof IGBiome)
 										{
@@ -181,19 +177,18 @@ public class WorleyOreCarver
 
 												int totHeight = 256;
 												float finalNoise = NoiseUtil.lerp(section[x0+16*z0], prevSection[x0+16*z0], 0.25f*y0);
-												float shrinkValue = 0.2f;
-
 												//change height fade value so we get less ores the higher up we are
 
 												int topOfLayer = (totHeight*currentLayer)/totalLayerCount;
 												int bottomOfLayer = (((totHeight*currentLayer)/totalLayerCount)-((totHeight*currentLayer)/totalLayerCount)/currentLayer);
 
-												if((yPos <= topOfLayer)&&
-														(yPos >= bottomOfLayer))
+												if((yPos > (topOfLayer * 0.66))) {
+													float dif = (float) ((yPos - (topOfLayer * 0.66)) / topOfLayer);
+													heightFadeValue = 1 - dif;
+												}
+
+												if((yPos <= topOfLayer) && (yPos >= bottomOfLayer))
 												{
-
-													heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD?1-(shrinkValue*(1+((yPos-HEIGHT_FADE_THRESHOLD)/HEIGHT_FADE_THRESHOLD))): 1;
-
 													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
 
 													//Run spawn in here to avoid creating ore outside of OUR layer.
@@ -203,15 +198,15 @@ public class WorleyOreCarver
 													{
 														int richness;
 
-														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.7)
+														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.85)
 														{
 															richness = 3; // DENSE
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.6)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.45)
 														{
 															richness = 2; // RICH
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.4)
+														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.3)
 														{
 															richness = 1; // NORMAL
 														}

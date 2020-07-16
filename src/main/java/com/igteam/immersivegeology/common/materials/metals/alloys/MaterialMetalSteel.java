@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.materials.metals.alloys;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -23,7 +24,7 @@ public class MaterialMetalSteel extends MaterialMetalBase
 	@Override
 	public String getModID()
 	{
-		return ImmersiveEngineering.MODID;
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
@@ -38,8 +39,8 @@ public class MaterialMetalSteel extends MaterialMetalBase
 	{
 		// TODO Auto-generated method stub
 		return new LinkedHashSet<>(Arrays.asList(
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.COPPER),
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.NICKEL)));
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CARBON)));
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class MaterialMetalSteel extends MaterialMetalBase
 	public int getColor(int temperature)
 	{
 		// TODO Auto-generated method stub
-		return 0x43464B;
+		return 0x717377;
 	}
 
 	@Override

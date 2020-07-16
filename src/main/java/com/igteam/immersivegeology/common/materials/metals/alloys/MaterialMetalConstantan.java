@@ -67,7 +67,7 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 	public int getColor(int temperature)
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 0xFE8E70;
 	}
 
 	@Override

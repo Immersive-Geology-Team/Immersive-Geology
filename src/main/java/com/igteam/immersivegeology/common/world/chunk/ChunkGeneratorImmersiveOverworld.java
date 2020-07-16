@@ -88,7 +88,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore, offset);
 			offset++;
 		}
-
+ 
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
 
