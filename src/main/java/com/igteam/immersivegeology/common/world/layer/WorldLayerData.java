@@ -108,7 +108,7 @@ public class WorldLayerData
 		//These ores Spawn in badlands bioems, copper is fairly rare here, but does occur (eg cuprite with cover value of .3f
 		badlands.addMachineOre(1, 0.30f, EnumOreBearingMaterials.Cuprite);//the first ore will have the most chance of spawning as it spawns FIRST
 		badlands.addMachineOre(1, 0.50f, EnumOreBearingMaterials.Magnetite);
-		badlands.addMachineOre(1, 0.65f, EnumOreBearingMaterials.Gold);
+		badlands.addMachineOre(1, 0.65f, EnumOreBearingMaterials.Gold); 
 
 		badlands.settleLayers();
 
