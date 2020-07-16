@@ -13,7 +13,7 @@ public class MaterialMetalloidArsenic extends MaterialMetalloidBase
 	public EnumMetalType getMetalType()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return EnumMetalType.METALLOID;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class MaterialMetalloidArsenic extends MaterialMetalloidBase
 	public Rarity getRarity()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return Rarity.COMMON;
 	}
 
 	@Override

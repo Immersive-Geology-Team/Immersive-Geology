@@ -109,5 +109,4 @@ public class WorldLayerData
 		worldLayerData.add(ocean);
 		worldLayerData.add(deep_ocean);
 	}
-
 }
