@@ -31,6 +31,7 @@ public class IGDataGenerator
 			DataGenerator gen = event.getGenerator();
 			if (event.includeServer()) {
 				gen.addProvider(new IGItemTagsProvider(gen));
+				gen.addProvider(new IGRecipeProvider(gen));
 			}
 			if(event.includeClient())
 			{

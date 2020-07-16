@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite",
-    "immersivegeology:item_dust_cobaltite"
+    "immersivegeology:item_ore_chunk_rhyolite",
+    "immersivegeology:item_ore_chunk_diorite",
+    "immersivegeology:item_ore_chunk_andesite",
+    "immersivegeology:item_ore_chunk_granite",
+    "immersivegeology:item_ore_chunk_netherrack",
+    "immersivegeology:item_ore_chunk_endstone",
+    "immersivegeology:item_ore_chunk_basalt",
+    "immersivegeology:item_ore_chunk_gabbros",
+    "immersivegeology:item_ore_chunk_marble",
+    "immersivegeology:item_ore_chunk_limestone",
+    "immersivegeology:item_ore_chunk_pegamite",
+    "immersivegeology:item_ore_chunk_regolith"
   ]
 }
