@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.world.layer;
 
-import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
@@ -40,20 +39,20 @@ public class BiomeLayerData
 	/**
 	 * @param layerID  - Layer the ore is to appear in
 	 * @param coverage - How common is the ore; min is 0.2f max is 0.65f, higher or lower will be ignored and set to the closest acceptable value. (this is to allow ores to spawn in a controlled amount) if it was 1 every rock would be that ore, anything lower than a 0.2 would almost never show up
-	 * @param ore      - the ore to spawn - choose from the EnumOreBearingMaterials
+	 * @param ore      - the ore to spawn - choose from the EnumMaterials
 	 */
 	public void addMachineOre(int layerID, float coverage, EnumMaterials ore)
 	{
 		if(layerOreMap.containsKey(layerID))
 		{
 			ArrayList<LayerOre> oreList = layerOreMap.get(layerID);
-			oreList.add(new LayerOre(coverage, ore.material, layerID));
+			oreList.add(new LayerOre(coverage, ore, layerID));
 			layerOreMap.put(layerID, oreList);
 		}
 		else
 		{
 			ArrayList<LayerOre> firstOre = new ArrayList<LayerOre>();
-			firstOre.add(new LayerOre(coverage, ore.material, layerID));
+			firstOre.add(new LayerOre(coverage, ore, layerID));
 			layerOreMap.put(layerID, firstOre);
 		}
 	}
@@ -100,23 +99,23 @@ public class BiomeLayerData
 	{
 
 		private float coverage;
-		private Material ore;
+		private EnumMaterials ore;
 		private int setLayer;
 
 
-		public LayerOre(float coverage, Material ore, int layer)
+		public LayerOre(float coverage, EnumMaterials ore, int layer)
 		{
 			this.coverage = coverage;
 			this.ore = ore;
 			this.setSetLayer(layer);
 		}
 
-		public Material getOre()
+		public EnumMaterials getOre()
 		{
 			return ore;
 		}
 
-		public void setOre(Material ore)
+		public void setOre(EnumMaterials ore)
 		{
 			this.ore = ore;
 		}

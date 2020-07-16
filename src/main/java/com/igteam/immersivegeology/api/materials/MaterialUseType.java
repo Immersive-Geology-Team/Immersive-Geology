@@ -56,8 +56,6 @@ public enum MaterialUseType implements IStringSerializable
 			return list.toArray(new IGMaterialItem[]{});
 		}
 	},
-	POLISHED_CHUNK(ItemSubGroup.processed),
-
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
