@@ -6,7 +6,11 @@
     ]
   },
   "criteria": {
+<<<<<<< HEAD
+    "chunks": {
+=======
     "has_chunk": {
+>>>>>>> ee4c10cea8222e1e8afd0d7aaaffe02aadbb8a1d
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +29,11 @@
   },
   "requirements": [
     [
+<<<<<<< HEAD
+      "chunks",
+=======
       "has_chunk",
+>>>>>>> ee4c10cea8222e1e8afd0d7aaaffe02aadbb8a1d
       "has_the_recipe"
     ]
   ]

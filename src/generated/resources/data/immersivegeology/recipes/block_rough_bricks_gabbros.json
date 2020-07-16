@@ -1,6 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
+<<<<<<< HEAD
+=======
   "group": "bricks",
+>>>>>>> ee4c10cea8222e1e8afd0d7aaaffe02aadbb8a1d
   "pattern": [
     "xx",
     "xx"
