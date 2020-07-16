@@ -45,6 +45,7 @@ public enum MaterialUseType implements IStringSerializable
 			},
 	CHUNK(ItemSubGroup.raw),
 	ORE_CHUNK(ItemSubGroup.raw),
+	POLISHED_CHUNK(ItemSubGroup.processed),
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
