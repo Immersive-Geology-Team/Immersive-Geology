@@ -126,28 +126,13 @@ public class WorldEventHandler
 		float original = event.getOriginalSpeed();
 
 		Block block = event.getState().getBlock();
-		if(block instanceof IGMaterialBlock)
-		{
-			IGMaterialBlock replaceBlock = (IGMaterialBlock)block;
-
-			if(event.getState().get(IGProperties.NATURAL))
-			{
-				//depends of primary block material
-				double nh = replaceBlock.getMaterial().getHardness();
-				int y = event.getPos().getY();
-				double max = Math.max(1, y);
-				double ns = (((0.3/Math.pow(Math.E, 8))*Math.pow(max, Math.E*0.75))*(original/8))/nh;
-				event.setNewSpeed((float)ns);
-			}
-		}
 		if(block instanceof IGOreBearingBlock)
 		{
 			IGOreBearingBlock replaceBlock = (IGOreBearingBlock)block;
 
 			if(event.getState().get(IGProperties.NATURAL))
 			{
-				//depends of primary block material
-				double nh = replaceBlock.getMaterial().getHardness();
+				double nh = replaceBlock.getOreMaterial().getHardness();
 				System.out.println("Ore start Hard: "+nh);
 				int y = event.getPos().getY();
 				double max = Math.max(1, y);
@@ -156,6 +141,20 @@ public class WorldEventHandler
 				event.setNewSpeed((float)ns);
 			}
 		}
+		else if(block instanceof IGMaterialBlock)
+		{
+			IGMaterialBlock replaceBlock = (IGMaterialBlock)block;
+
+			if(event.getState().get(IGProperties.NATURAL))
+			{
+				double nh = replaceBlock.getMaterial().getHardness();
+				int y = event.getPos().getY();
+				double max = Math.max(1, y);
+				double ns = (((0.3/Math.pow(Math.E, 8))*Math.pow(max, Math.E*0.75))*(original/8))/nh;
+				event.setNewSpeed((float)ns);
+			}
+		}
+
 	}
 
 	@SubscribeEvent
@@ -224,7 +223,7 @@ public class WorldEventHandler
 	 * for (ChunkSection storage : chunk.getSections()) { if (storage != null &&
 	 * !storage.isEmpty()) { int yPos = storage.getYLocation();
 	 *
-	 * IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
+	 * IGBaseBlock replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK,
 	 * EnumMaterials.Rhyolite.material);
 	 *
 	 * for (BiomeLayerData b : data.worldLayerData) { for (int x = 0; x < 16; x++) {

@@ -1,10 +1,9 @@
 package com.igteam.immersivegeology.common.world.chunk;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
@@ -32,8 +31,10 @@ import net.minecraft.world.gen.Heightmap.Type;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author alcatrazEscapee modified for use in IG by Muddykat
@@ -42,8 +43,7 @@ import java.util.Random;
 public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGenerationSettings>
 {
 
-	public static WorldLayerData data;
-
+	public static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 	private static final double[] PARABOLIC_FIELD = Util.make(new double[9*9], array -> {
 		for(int x = 0; x < 9; x++)
 		{
@@ -53,10 +53,13 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 			}
 		}
 	});
-
+	public static WorldLayerData data;
+	public static int SEA_LEVEL = 96;
 	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
+	private final INoiseGenerator surfaceDepthNoise;
+	private final Map<Biome, INoise2D> biomeNoiseMap;
 
 	public ChunkGeneratorImmersiveOverworld(IWorld world, BiomeProvider provider,
 											ImmersiveGenerationSettings settings)
@@ -82,14 +85,14 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		// I went with the quickest easier way of creating a generator for each situation...
 		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
 
-		EnumMaterials.filterMinerals().forEach((ore) -> {
-				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
-		});
-		
+		List<EnumMaterials> minerals = EnumMaterials.filterMinerals().collect(Collectors.toList());
+		for(int offset = 0; offset < minerals.size(); offset++)
+		{
+			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, minerals.get(offset).material, offset);
+		}
 
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
-
 
 	@Override
 	public void carve(IChunk chunkIn, GenerationStage.Carving stage)
@@ -132,11 +135,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 	{
 		return SEA_LEVEL;
 	}
-
-	private final INoiseGenerator surfaceDepthNoise;
-
-	private final Map<Biome, INoise2D> biomeNoiseMap;
-	public static int SEA_LEVEL = 96;
 
 	@Override
 	public void makeBase(IWorld worldIn, IChunk chunk)
@@ -392,9 +390,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		makeBedrock(chunk, random);
 	}
-
-	public static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-
 
 	public void makeBedrock(IChunk chunk, Random random)
 	{
