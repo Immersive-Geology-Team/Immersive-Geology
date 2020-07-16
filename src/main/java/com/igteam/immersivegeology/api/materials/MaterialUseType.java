@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
+import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.material.Material;
@@ -44,8 +45,17 @@ public enum MaterialUseType implements IStringSerializable
 				}
 			},
 	CHUNK(ItemSubGroup.raw),
-	ORE_CHUNK(ItemSubGroup.raw),
-	POLISHED_CHUNK(ItemSubGroup.processed),
+	ORE_CHUNK(ItemSubGroup.raw)
+	{
+		@Override
+		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGMaterialItem> list = new ArrayList<>();
+			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
+			EnumMaterials.filterMinerals().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
+			return list.toArray(new IGMaterialItem[]{});
+		}
+	},
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),

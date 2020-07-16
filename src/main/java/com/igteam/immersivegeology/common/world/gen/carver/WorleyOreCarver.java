@@ -1,10 +1,18 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.IIGOreBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
@@ -13,19 +21,18 @@ import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.IChunk;
-
-import java.util.*;
 
 public class WorleyOreCarver
 {
 
 	private static final int SAMPLE_HEIGHT = 64;
 	private static float NOISE_THRESHOLD = 0.35f;
-
+	
 	private static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 
 	// size of the cave intrest points!
@@ -34,19 +41,15 @@ public class WorleyOreCarver
 	private Map<String, INoise3D> oreNoiseArray = new HashMap<String, INoise3D>();
 	public static WorleyOreCarver INSTANCE = new WorleyOreCarver();
 
-	public WorleyOreCarver()
-	{
-	}
+	public WorleyOreCarver(){};
 
-	;
-
-	public void setupNewLayer(Random seedGenerator, Material oreMaterial, int offset)
+	public void setupNewLayer(Random seedGenerator, EnumMaterials oreMaterial)
 	{
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 		{
 
-			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong()+offset);
-			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong()+offset+1);
+			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong() + oreNoiseArray.size());
+			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong() + oreNoiseArray.size() + 1);
 
 			//this is to make ore veins less common (without this it's way too common)
 			INoise3D oreNoiseSub = (x, y, z) -> {
@@ -74,7 +77,7 @@ public class WorleyOreCarver
 		LayerOre oreData = null;
 		for(LayerOre ore : oreArrayData)
 		{
-			oreData = ore;
+			oreData = ore; 
 
 			//if ore data is not found, no ore to generate, exit out of carve function
 			if(oreData==null)
@@ -83,7 +86,7 @@ public class WorleyOreCarver
 			}
 
 			//ore data has been retrieved, set ore material data for later use
-			Material oreMaterial = oreData.getOre();
+			Material oreMaterial = oreData.getOre().material;
 
 			//if ore data is found, generate ore
 			float coverage = oreData.getCoverage();
@@ -185,16 +188,15 @@ public class WorleyOreCarver
 												int topOfLayer = (totHeight*currentLayer)/totalLayerCount;
 												int bottomOfLayer = (((totHeight*currentLayer)/totalLayerCount)-((totHeight*currentLayer)/totalLayerCount)/currentLayer);
 
-												if((yPos > (topOfLayer*0.66)))
-												{
-													float dif = (float)((yPos-(topOfLayer*0.66))/topOfLayer);
-													heightFadeValue = 1-dif;
-												}
-
-												if((yPos <= topOfLayer)&&(yPos >= bottomOfLayer))
+												if((yPos > (topOfLayer * 0.66))) {
+													float dif = (float) ((yPos - (topOfLayer * 0.66)) / topOfLayer);
+													heightFadeValue = 1 - dif;
+												} 
+												
+												if((yPos <= topOfLayer) && (yPos >= bottomOfLayer))
 												{
 													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
-
+													
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;
 
@@ -221,7 +223,7 @@ public class WorleyOreCarver
 
 														// Create cave if possible
 														BlockState originalState = chunkIn.getBlockState(pos);
-														if(!originalState.isAir(chunkIn, pos)&&originalState!=BEDROCK&&!originalState.getMaterial().isLiquid()&&(originalState.getBlock() instanceof IGMaterialBlock))
+														if(!originalState.isAir(chunkIn, pos)&&originalState!=BEDROCK&&!originalState.getMaterial().isLiquid() && (originalState.getBlock() instanceof IGMaterialBlock) &&!(originalState.getBlock() instanceof IIGOreBlock))
 														{
 															chunkIn.setBlockState(pos, replacementState.with(IGProperties.ORE_RICHNESS, richness), false);
 														}

@@ -27,9 +27,9 @@ public class IGRegistryGrabber
 	@Nonnull
 	public static Item getIGItem(@Nonnull MaterialUseType type, @Nonnull Material... materials)
 	{
-		StringBuilder builder = new StringBuilder("item_"+type.getName());
+		StringBuilder builder = new StringBuilder(type.getName());
 		Arrays.stream(materials).forEach(material -> builder.append("_").append(material.getName()));
-		return IGContent.registeredIGItems.getOrDefault(builder.toString(), IGContent.registeredIGItems.values().stream().findFirst().get());
+		return IGContent.registeredIGItems.getOrDefault(builder.toString(), IGContent.registeredIGItems.values().stream().findAny().get());
 	}
 
 	/**
@@ -41,10 +41,11 @@ public class IGRegistryGrabber
 	@Nonnull
 	public static IGBaseBlock grabBlock(@Nonnull MaterialUseType type, @Nonnull Material... materials)
 	{
-		StringBuilder builder = new StringBuilder("block_"+type.getName());
+		StringBuilder builder = new StringBuilder(type.getName());
 		Arrays.stream(materials).forEach(material -> builder.append("_").append(material.getName()));
+
 		//Yes, I know it will throw an error, but only if you use it wrong ^^
-		return IGContent.registeredIGBlocks.getOrDefault(builder.toString(), IGContent.registeredIGBlocks.values().stream().findFirst().get());
+		return IGContent.registeredIGBlocks.getOrDefault(builder.toString(), IGContent.registeredIGBlocks.values().stream().findAny().get());
 	}
 
 }
