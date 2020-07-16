@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.common.world.layer;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.world.biome.Biome;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 public class BiomeLayerData
 {
 
-	private ArrayList<IGBaseBlock> layerMap = new ArrayList<IGBaseBlock>();
+	private ArrayList<IGMaterialBlock> layerMap = new ArrayList<IGMaterialBlock>();
 	private HashMap<Integer, ArrayList<LayerOre>> layerOreMap = new HashMap<Integer, ArrayList<LayerOre>>();
 
 	private Biome lbiome;
@@ -24,14 +25,16 @@ public class BiomeLayerData
 		this.baseHardnessMod = baseHardnessMod;
 	}
 
-	public ArrayList<IGBaseBlock> getLayers()
+	public ArrayList<IGMaterialBlock> getLayers()
 	{
 		return layerMap;
 	}
 
 	public void addLayer(IGBaseBlock layerBlock)
 	{
-		layerMap.add(layerBlock);
+		if(layerBlock instanceof IGMaterialBlock) {
+			layerMap.add((IGMaterialBlock) layerBlock);
+		}
 	}
 
 	/**
@@ -55,7 +58,7 @@ public class BiomeLayerData
 		}
 	}
 
-	public IGBaseBlock getLayerBlock(int layerID)
+	public IGMaterialBlock getLayerBlock(int layerID)
 	{
 		return layerMap.get(layerID-1); //take one off the input id as we need to start at 0!
 	}
