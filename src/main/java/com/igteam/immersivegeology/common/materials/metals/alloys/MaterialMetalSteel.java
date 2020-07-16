@@ -29,72 +29,63 @@ public class MaterialMetalSteel extends MaterialMetalBase
 	@Override
 	public EnumMetalType getMetalType()
 	{
-		// TODO Auto-generated method stub
 		return EnumMetalType.ALLOY;
 	}
 
 	@Override
 	public LinkedHashSet<ElementProportion> getElements()
 	{
-		// TODO Auto-generated method stub
 		return new LinkedHashSet<>(Arrays.asList(
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.COPPER),
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.NICKEL)));
+			new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
+			new PeriodicTableElement.ElementProportion(PeriodicTableElement.CARBON))
+		);
 	}
 
 	@Override
 	public Rarity getRarity()
 	{
-		// TODO Auto-generated method stub
 		return Rarity.UNCOMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 3200;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 1698;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		// TODO Auto-generated method stub
-		return 0x43464B;
+		return 0x717377;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		// TODO Auto-generated method stub
 		return 3;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		// TODO Auto-generated method stub
 		return 8;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		// TODO Auto-generated method stub
 		return 12;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		// TODO Auto-generated method stub
 		return 7.800f; // gm/cm^3
 	}
 

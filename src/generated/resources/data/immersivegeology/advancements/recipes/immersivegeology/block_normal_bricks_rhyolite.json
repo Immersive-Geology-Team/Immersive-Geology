@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersivegeology:block_normal_bricks_rhyolite"
+    ]
+  },
+  "criteria": {
+    "polished_chunks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersivegeology:item_polished_chunk_rhyolite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersivegeology:block_normal_bricks_rhyolite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "polished_chunks",
+      "has_the_recipe"
+    ]
+  ]
+}

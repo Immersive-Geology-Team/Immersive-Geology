@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersivegeology:block_rough_bricks_regolith"
+    ]
+  },
+  "criteria": {
+    "chunks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersivegeology:item_chunk_regolith"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersivegeology:block_rough_bricks_regolith"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "chunks",
+      "has_the_recipe"
+    ]
+  ]
+}

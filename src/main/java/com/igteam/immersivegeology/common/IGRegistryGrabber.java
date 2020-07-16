@@ -45,7 +45,7 @@ public class IGRegistryGrabber
 		Arrays.stream(materials).forEach(material -> builder.append("_").append(material.getName()));
 
 		//Yes, I know it will throw an error, but only if you use it wrong ^^
-		return IGContent.registeredIGBlocks.getOrDefault(builder.toString(), IGContent.registeredIGBlocks.values().stream().findAny().get());
+		return IGContent.registeredIGBlocks.getOrDefault(builder.toString(), IGContent.registeredIGBlocks.values().stream().findFirst().get());
 	}
 
 }

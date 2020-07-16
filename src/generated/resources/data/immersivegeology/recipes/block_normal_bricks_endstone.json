@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "immersivegeology:item_polished_chunk_endstone"
+    }
+  },
+  "result": {
+    "item": "immersivegeology:block_normal_bricks_endstone"
+  }
+}
