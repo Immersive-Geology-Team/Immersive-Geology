@@ -103,7 +103,7 @@ public class MaterialEmpty extends Material
 	{
 		return null;
 	}
-
+	
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

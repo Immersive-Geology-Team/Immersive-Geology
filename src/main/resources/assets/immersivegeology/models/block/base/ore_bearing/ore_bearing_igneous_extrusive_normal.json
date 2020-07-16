@@ -1,0 +1,7 @@
+{
+    "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_base",
+    "textures": {
+        "base": "immersivegeology:block/greyscale/rock/rock_igneous_extrusive",
+        "overlay": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_extrusive/igneous_extrusive_normal"
+    }
+}

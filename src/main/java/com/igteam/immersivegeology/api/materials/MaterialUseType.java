@@ -2,15 +2,14 @@ package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
-import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
-import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.*;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.items.IGMaterialRockItem;
+import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
@@ -22,17 +21,24 @@ import java.util.Locale;
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
-	ROCK(ItemSubGroup.raw),
+	ROCK(UseCategory.BLOCK, ItemSubGroup.raw),
+	ORE_BEARING(UseCategory.ORE_BEARING, Material.IRON, ItemSubGroup.raw),
 	CHUNK(ItemSubGroup.raw),
+	ORE_CHUNK(UseCategory.CHUNK_ORE, ItemSubGroup.raw),
 	//Metal/crystal items
 	INGOT(ItemSubGroup.processed),
 	PLATE(ItemSubGroup.processed),
+	ROUGH_INGOT(ItemSubGroup.processed),
+	ROUGH_PLATE(ItemSubGroup.processed),
 	DUST(ItemSubGroup.processed),
 	TINY_DUST(ItemSubGroup.processed),
 	ROD(ItemSubGroup.processed),
+	ROUGH_ROD(ItemSubGroup.processed),
 	NUGGET(ItemSubGroup.processed),
 	GEAR(ItemSubGroup.processed),
+	ROUGH_GEAR(ItemSubGroup.processed),
 	WIRE(ItemSubGroup.processed),
+	ROUGH_WIRE(ItemSubGroup.processed),
 	RAW_CRYSTAL(ItemSubGroup.raw),
 	CRYSTAL(ItemSubGroup.processed),
 
@@ -57,7 +63,7 @@ public enum MaterialUseType implements IStringSerializable
 					((IGBlockMaterialItem)slab.itemBlock).material = material;
 					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
 					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
-					IGContent.registeredIGBlocks.add(slab);
+					//IGContent.registeredIGBlocks.add(slab);
 					return storage;
 				}
 			},
@@ -66,12 +72,12 @@ public enum MaterialUseType implements IStringSerializable
 				@Override
 				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 				{
-					IGBaseBlock sheetmetal = new IGSheetmetalBlock(material);
+					IGMaterialBlock sheetmetal = new IGSheetmetalBlock(material);
 					BlockIGSlab slab = IGContent.addMaterialSlabFor(sheetmetal);
 					((IGBlockMaterialItem)slab.itemBlock).material = material;
 					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
 					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
-					IGContent.registeredIGBlocks.add(slab);
+					//IGContent.registeredIGBlocks.put("",slab);
 					return sheetmetal;
 				}
 
@@ -84,18 +90,25 @@ public enum MaterialUseType implements IStringSerializable
 					return new IGDustBlock(material);
 				}
 			},
-
-	//Minerals / metals
-	POOR_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-	NORMAL_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-	RICH_ORE(UseCategory.BLOCK, Material.IRON, ItemSubGroup.raw),
-
 	//Stones
 	DIRT(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
 	GRAVEL(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
 	SAND(UseCategory.BLOCK, Material.EARTH, ItemSubGroup.raw),
-	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
-	SMOOTH_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw),
+	COBBLESTONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.raw)
+			{
+				@Override
+				public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
+				{
+					IGMaterialBlock cobble = new IGMaterialBlock(material, MaterialUseType.COBBLESTONE);
+
+					BlockIGSlab slab = IGContent.addMaterialSlabFor(cobble);
+					((IGBlockMaterialItem)slab.itemBlock).material = material;
+					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
+					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
+					//IGContent.registeredIGBlocks.add(slab);
+					return cobble;
+				}
+			},
 
 	ROUGH_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	POLISHED_STONE(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
@@ -103,6 +116,8 @@ public enum MaterialUseType implements IStringSerializable
 	NORMAL_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	ROAD_BRICKS(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 	PILLAR(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
+	COLUMN(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
+	TILES(UseCategory.BLOCK, Material.ROCK, ItemSubGroup.processed),
 
 	//Fluids
 	FLUIDS(UseCategory.BLOCK, ItemSubGroup.misc);
@@ -169,13 +184,28 @@ public enum MaterialUseType implements IStringSerializable
 	}
 
 	//Default to resource, allows for using custom classes
+	public IGBaseItem getOreItem(com.igteam.immersivegeology.api.materials.Material material, EnumOreBearingMaterials ore)
+	{
+		return new IGMaterialRockItem(material, this, ore);
+	}
+
+	//Default to resource, allows for using custom classes
 	public IGBaseBlock getBlock(com.igteam.immersivegeology.api.materials.Material material)
 	{
 		return new IGMaterialBlock(material, this);
 	}
 
+	public IGBaseBlock getBearingBlock(com.igteam.immersivegeology.api.materials.Material material, EnumOreBearingMaterials oreMat)
+	{
+		return new IGOreBearingBlock(material, this, oreMat);
+	}
+
 	public enum UseCategory
 	{
+		//Used for chunks
+		CHUNK_ORE,
+
+		CHUNK_ITEM,
 		//Used for ingots, plates, etc.
 		RESOURCE_ITEM,
 		//Will be used for tools
@@ -186,6 +216,6 @@ public enum MaterialUseType implements IStringSerializable
 		RESOURCE_BLOCK,
 		//Will be used for non material blocks
 		BLOCK,
-
+		ORE_BEARING,
 	}
 }

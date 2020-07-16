@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_cobaltite",
+    "immersivegeology:item_ore_chunk_basalt_cobaltite",
+    "immersivegeology:item_ore_chunk_diorite_cobaltite",
+    "immersivegeology:item_ore_chunk_endstone_cobaltite",
+    "immersivegeology:item_ore_chunk_gabbros_cobaltite",
+    "immersivegeology:item_ore_chunk_granite_cobaltite",
+    "immersivegeology:item_ore_chunk_limestone_cobaltite",
+    "immersivegeology:item_ore_chunk_marble_cobaltite",
+    "immersivegeology:item_ore_chunk_netherrack_cobaltite",
+    "immersivegeology:item_ore_chunk_pegamite_cobaltite",
+    "immersivegeology:item_ore_chunk_regolith_cobaltite",
+    "immersivegeology:item_ore_chunk_rhyolite_cobaltite"
+  ]
+}

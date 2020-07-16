@@ -6,12 +6,14 @@ import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.IGContent;
+import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.*;
@@ -39,7 +41,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 	boolean isHidden;
 	boolean hasFlavour;
 	protected List<BlockRenderLayer> renderLayers = Collections.singletonList(BlockRenderLayer.SOLID);
-	//TODO wtf is variable opacity?
+	// TODO wtf is variable opacity?
 	protected int lightOpacity;
 	protected PushReaction mobilityFlag = PushReaction.NORMAL;
 	protected boolean canHammerHarvest;
@@ -47,23 +49,25 @@ public class IGBaseBlock extends Block implements IIGBlock
 	protected boolean notNormalBlock;
 	public ItemSubGroup itemSubGroup = ItemSubGroup.misc;
 
-	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock, ItemSubGroup group, IProperty... additionalProperties)
+	public static final BooleanProperty NATURAL = IGProperties.NATURAL;
+
+	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock,
+					   ItemSubGroup group, IProperty... additionalProperties)
 	{
 		super(setTempProperties(blockProps, additionalProperties));
 		this.name = name;
 
 		this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
-		this.setDefaultState(getInitDefaultState());
+		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
-
 		if(itemBlock!=null)
 		{
 			try
 			{
 				this.itemSubGroup = group;
-				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class,ItemSubGroup.class)
-						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP),group);
+				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
+						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
 				this.itemBlock.setRegistryName(registryName);
 				IGContent.registeredIGItems.add(this.itemBlock);
 			} catch(Exception e)
@@ -74,8 +78,24 @@ public class IGBaseBlock extends Block implements IIGBlock
 		lightOpacity = 15;
 	}
 
-	//TODO do we still need this hackyness?
-	protected static Block.Properties setTempProperties(Properties blockProps, Object[] additionalProperties)
+	public float naturalHardness = 1f;
+
+	@Override
+	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		return naturalHardness;
+	}
+
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	{
+		super.fillStateContainer(builder);
+		builder.add(NATURAL);
+		builder.add(tempProperties);
+	}
+
+	// TODO do we still need this hackyness?
+	public static Block.Properties setTempProperties(Properties blockProps, Object[] additionalProperties)
 	{
 		List<IProperty<?>> propList = new ArrayList<>();
 		for(Object o : additionalProperties)
@@ -140,7 +160,8 @@ public class IGBaseBlock extends Block implements IIGBlock
 	@Override
 	public BlockRenderLayer getRenderLayer()
 	{
-		//TODO This is currently mostly a marker for culling, the actual layer is determined by canRenderInLayer
+		// TODO This is currently mostly a marker for culling, the actual layer is
+		// determined by canRenderInLayer
 		return notNormalBlock?BlockRenderLayer.CUTOUT: BlockRenderLayer.SOLID;
 	}
 
@@ -150,7 +171,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 	{
 		if(notNormalBlock)
 			return 0;
-			//TODO this sometimes locks up when generating IE blocks as part of worldgen
+			// TODO this sometimes locks up when generating IE blocks as part of worldgen
 		else if(state.isOpaqueCube(worldIn, pos))
 			return lightOpacity;
 		else
@@ -176,12 +197,13 @@ public class IGBaseBlock extends Block implements IIGBlock
 		return this;
 	}
 
-	//TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to want to map
-    @Override
-    public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos)
-    {
-        return notNormalBlock?1: super.func_220080_a(state, world, pos);
-    }
+	// TODO Supposed to be getAmbientOcclusionLightValue(), but it doesn't seem to
+	// want to map
+	@Override
+	public float func_220080_a(BlockState state, IBlockReader world, BlockPos pos)
+	{
+		return notNormalBlock?1: super.func_220080_a(state, world, pos);
+	}
 
 	@Override
 	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_)
@@ -201,18 +223,6 @@ public class IGBaseBlock extends Block implements IIGBlock
 	public boolean isNormalCube(BlockState state, IBlockReader world, BlockPos pos)
 	{
 		return !notNormalBlock;
-	}
-
-	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
-	{
-		super.fillStateContainer(builder);
-		builder.add(tempProperties);
-	}
-
-	protected BlockState getInitDefaultState()
-	{
-		return this.stateContainer.getBaseState();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -311,8 +321,8 @@ public class IGBaseBlock extends Block implements IIGBlock
 
 	public abstract static class IELadderBlock extends IGBaseBlock
 	{
-		public IELadderBlock(String name, Block.Properties material,
-							 Class<? extends IGBlockItem> itemBlock, IProperty... additionalProperties)
+		public IELadderBlock(String name, Block.Properties material, Class<? extends IGBlockItem> itemBlock,
+							 IProperty... additionalProperties)
 		{
 			super(name, material, IGBlockItem.class, ItemSubGroup.misc, additionalProperties);
 		}
@@ -325,7 +335,14 @@ public class IGBaseBlock extends Block implements IIGBlock
 	}
 
 	@Override
-	public Item getItemBlock() {
+	public Item getItemBlock()
+	{
 		return itemBlock;
 	}
+
+	public void setNaturalHardness(float h)
+	{
+		naturalHardness = h;
+	}
+
 }

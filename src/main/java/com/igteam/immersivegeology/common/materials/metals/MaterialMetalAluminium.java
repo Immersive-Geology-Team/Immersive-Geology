@@ -100,6 +100,8 @@ public class MaterialMetalAluminium extends MaterialMetalBase
 	}
 
 
+
+	
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

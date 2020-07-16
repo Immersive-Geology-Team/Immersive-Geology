@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_chromite",
+    "immersivegeology:item_ore_chunk_basalt_chromite",
+    "immersivegeology:item_ore_chunk_diorite_chromite",
+    "immersivegeology:item_ore_chunk_endstone_chromite",
+    "immersivegeology:item_ore_chunk_gabbros_chromite",
+    "immersivegeology:item_ore_chunk_granite_chromite",
+    "immersivegeology:item_ore_chunk_limestone_chromite",
+    "immersivegeology:item_ore_chunk_marble_chromite",
+    "immersivegeology:item_ore_chunk_netherrack_chromite",
+    "immersivegeology:item_ore_chunk_pegamite_chromite",
+    "immersivegeology:item_ore_chunk_regolith_chromite",
+    "immersivegeology:item_ore_chunk_rhyolite_chromite"
+  ]
+}

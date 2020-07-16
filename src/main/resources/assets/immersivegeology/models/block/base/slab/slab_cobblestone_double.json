@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+    	"all": "immersivegeology:block/greyscale/stone/cobble"
+     }
+}  
+   

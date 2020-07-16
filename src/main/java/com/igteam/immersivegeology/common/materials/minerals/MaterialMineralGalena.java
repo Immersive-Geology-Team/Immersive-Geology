@@ -30,9 +30,9 @@ public class MaterialMineralGalena extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.LEAD),
-						new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR)
-				)
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.LEAD),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR)
+		)
 		);
 	}
 
@@ -43,7 +43,8 @@ public class MaterialMineralGalena extends MaterialMineralBase
 	}
 
 	@Override
-	public EnumMineralType getMineralType() {
+	public EnumMineralType getMineralType()
+	{
 		return EnumMineralType.MINERAL;
 	}
 
@@ -59,10 +60,12 @@ public class MaterialMineralGalena extends MaterialMineralBase
 		return -1;
 	}
 
+	protected static int baseColor = 0xffffff;
+
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xffffff;
+		return baseColor;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

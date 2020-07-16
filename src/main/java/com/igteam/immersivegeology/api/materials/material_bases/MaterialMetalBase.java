@@ -20,6 +20,10 @@ public abstract class MaterialMetalBase extends Material
 				return hasIngot();
 			case PLATE:
 				return hasPlate();
+			case ROUGH_INGOT:
+				return hasRoughIngot();
+			case ROUGH_PLATE:
+				return hasRoughPlate();
 			case DUST:
 				return hasDust();
 			case TINY_DUST:
@@ -28,12 +32,20 @@ public abstract class MaterialMetalBase extends Material
 				return hasRod();
 			case GEAR:
 				return hasGear();
+			case ROUGH_ROD:
+				return hasRoughRod();
+			case ROUGH_GEAR:
+				return hasRoughGear();
 			case STORAGE:
 				return hasStorageBlock();
 			case SHEETMETAL:
 				return hasSheetmetal();
 			case DUST_BLOCK:
 				return hasDustBlock();
+			case ROUGH_WIRE:
+				return hasRoughWire();
+			case WIRE:
+				return hasWire();
 			case FLUIDS:
 				return true;
 		}
@@ -54,17 +66,83 @@ public abstract class MaterialMetalBase extends Material
 
 	public enum EnumMetalType
 	{
+		METALLOID,
 		METAL,
 		ALLOY
 	}
 
-	public boolean hasIngot() { return true; };
-	public boolean hasPlate() { return true; };
-	public boolean hasRod() { return true; };
-	public boolean hasGear() { return true; };
-	public boolean hasSheetmetal() { return true; };
-	public boolean hasDust() { return true; };
-	public boolean hasTinyDust() { return true; };
-	public boolean hasStorageBlock() { return true; };
-	public boolean hasDustBlock() { return true; };
+	public boolean hasIngot()
+	{
+		return true;
+	}
+
+	public boolean hasPlate()
+	{
+		return true;
+	}
+
+	public boolean hasRoughRod()
+	{
+		return true;
+	}
+
+	public boolean hasRoughGear()
+	{
+		return true;
+	}
+
+	public boolean hasRoughIngot()
+	{
+		return true;
+	}
+
+	public boolean hasRoughPlate()
+	{
+		return true;
+	}
+
+	public boolean hasRod()
+	{
+		return true;
+	}
+
+	public boolean hasGear()
+	{
+		return true;
+	}
+
+	public boolean hasSheetmetal()
+	{
+		return true;
+	}
+
+	public boolean hasDust()
+	{
+		return true;
+	}
+
+	public boolean hasTinyDust()
+	{
+		return true;
+	}
+
+	public boolean hasStorageBlock()
+	{
+		return true;
+	}
+
+	public boolean hasDustBlock()
+	{
+		return true;
+	}
+
+	public boolean hasRoughWire()
+	{
+		return true;
+	}
+
+	public boolean hasWire()
+	{
+		return true;
+	}
 }

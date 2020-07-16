@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_hematite",
+    "immersivegeology:item_ore_chunk_basalt_hematite",
+    "immersivegeology:item_ore_chunk_diorite_hematite",
+    "immersivegeology:item_ore_chunk_endstone_hematite",
+    "immersivegeology:item_ore_chunk_gabbros_hematite",
+    "immersivegeology:item_ore_chunk_granite_hematite",
+    "immersivegeology:item_ore_chunk_limestone_hematite",
+    "immersivegeology:item_ore_chunk_marble_hematite",
+    "immersivegeology:item_ore_chunk_netherrack_hematite",
+    "immersivegeology:item_ore_chunk_pegamite_hematite",
+    "immersivegeology:item_ore_chunk_regolith_hematite",
+    "immersivegeology:item_ore_chunk_rhyolite_hematite"
+  ]
+}

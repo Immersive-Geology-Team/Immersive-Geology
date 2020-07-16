@@ -26,7 +26,7 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 credits="Devs, committers and all the people who helped Immersive Geology and Engineering" #optional
 # A text field displayed in the mod UI
-authors="JStocke, Kuruma, Pabilo8" #optional
+authors="Muddykat, JStocke, Kuruma, Pabilo8" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Adds realistic worldgen, materials and progression to Immersive Engineering.

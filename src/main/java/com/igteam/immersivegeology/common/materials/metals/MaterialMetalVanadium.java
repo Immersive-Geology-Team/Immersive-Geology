@@ -49,10 +49,16 @@ public class MaterialMetalVanadium extends MaterialMetalBase
 	}
 
 	@Override
-	public int getMeltingPoint() { return 2183; }
+	public int getMeltingPoint()
+	{
+		return 2183;
+	}
 
 	@Override
-	public int getColor(int temperature) { return 0xaaa9ad; }
+	public int getColor(int temperature)
+	{
+		return 0xaaa9ad;
+	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
 	@Override

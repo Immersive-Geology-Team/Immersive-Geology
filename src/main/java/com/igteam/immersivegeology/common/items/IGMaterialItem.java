@@ -18,13 +18,14 @@ public class IGMaterialItem extends IGBaseItem
 {
 	public MaterialUseType subtype;
 	public Material material;
-	
+
 	public IGMaterialItem(MaterialUseType type, Material material)
 	{
 		super(type.getName());
 		this.subtype = type;
 		this.subGroup = type.getSubGroup();
 		this.material = material;
+
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class IGMaterialItem extends IGBaseItem
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
 		return material.getColor(0);
-	} 
+	}
 
 	@Override
 	public ITextComponent getDisplayName(ItemStack stack)
@@ -51,5 +52,5 @@ public class IGMaterialItem extends IGBaseItem
 	{
 		return material.getRarity();
 	}
-	
+
 }

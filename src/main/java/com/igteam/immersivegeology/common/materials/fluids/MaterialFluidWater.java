@@ -31,8 +31,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.OXYGEN),
-				new ElementProportion(PeriodicTableElement.HYDROGEN, 2)
+				new ElementProportion(PeriodicTableElement.HYDROGEN, 2),
+				new ElementProportion(PeriodicTableElement.OXYGEN)
 		));
 	}
 
@@ -43,7 +43,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public EnumFluidType getFluidType() {
+	public EnumFluidType getFluidType()
+	{
 		return EnumFluidType.FLUID;
 	}
 
@@ -54,7 +55,8 @@ public class MaterialFluidWater extends MaterialFluidBase
 	}
 
 	@Override
-	public float getConcentration() {
+	public float getConcentration()
+	{
 		return 0;
 	}
 

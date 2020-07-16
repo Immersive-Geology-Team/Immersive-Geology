@@ -49,7 +49,10 @@ public class MaterialMetalZirconium extends MaterialMetalBase
 	}
 
 	@Override
-	public int getMeltingPoint() { return 2128; }
+	public int getMeltingPoint()
+	{
+		return 2128;
+	}
 
 	@Override
 	public int getColor(int temperature)

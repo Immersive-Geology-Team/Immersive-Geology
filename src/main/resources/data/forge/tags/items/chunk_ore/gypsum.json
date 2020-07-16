@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    "immersivegeology:item_ore_chunk_andesite_gypsum",
+    "immersivegeology:item_ore_chunk_basalt_gypsum",
+    "immersivegeology:item_ore_chunk_diorite_gypsum",
+    "immersivegeology:item_ore_chunk_endstone_gypsum",
+    "immersivegeology:item_ore_chunk_gabbros_gypsum",
+    "immersivegeology:item_ore_chunk_granite_gypsum",
+    "immersivegeology:item_ore_chunk_limestone_gypsum",
+    "immersivegeology:item_ore_chunk_marble_gypsum",
+    "immersivegeology:item_ore_chunk_netherrack_gypsum",
+    "immersivegeology:item_ore_chunk_pegamite_gypsum",
+    "immersivegeology:item_ore_chunk_regolith_gypsum",
+    "immersivegeology:item_ore_chunk_rhyolite_gypsum"
+  ]
+}

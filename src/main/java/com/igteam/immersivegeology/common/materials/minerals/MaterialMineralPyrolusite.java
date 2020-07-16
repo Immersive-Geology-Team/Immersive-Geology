@@ -14,76 +14,86 @@ import java.util.LinkedHashSet;
  */
 public class MaterialMineralPyrolusite extends MaterialMineralBase
 {
-    @Override
-    public String getName()
-    {
-        return "pyrolusite";
-    }
+	@Override
+	public String getName()
+	{
+		return "pyrolusite";
+	}
 
-    @Override
-    public String getModID()
-    {
-        return ImmersiveGeology.MODID;
-    }
+	@Override
+	public String getModID()
+	{
+		return ImmersiveGeology.MODID;
+	}
 
-    @Override
+	@Override
 	public LinkedHashSet<ElementProportion> getElements()
-    {
+	{
 		return new LinkedHashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.MANGANESE),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
-        ));
-    }
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.MANGANESE),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
+		));
+	}
 
-    @Override
-    public Rarity getRarity()
-    {
-        return Rarity.RARE;
-    }
+	@Override
+	public Rarity getRarity()
+	{
+		return Rarity.RARE;
+	}
 
-    @Override
-    public int getBoilingPoint()
-    {
-        return 4673;
-    }
+	@Override
+	public int getBoilingPoint()
+	{
+		return 4673;
+	}
 
-    @Override
-    public int getMeltingPoint() {
-        return 3663;
-    }
+	@Override
+	public int getMeltingPoint()
+	{
+		return 3663;
+	}
 
-    @Override
-    public EnumMineralType getMineralType() {
-        return EnumMineralType.MINERAL;
-    }
+	@Override
+	public EnumMineralType getMineralType()
+	{
+		return EnumMineralType.MINERAL;
+	}
 
-    @Override
-    public int getColor(int temperature) {
-        return 0xc68f39;
-    }
+	public static int baseColor = 0xc68f39;
 
-    @Override
-    public float getHardness() {
-        return 0;
-    }
+	@Override
+	public int getColor(int temperature)
+	{
+		return baseColor;
+	}
 
-    @Override
-    public float getMiningResistance() {
-        return 0;
-    }
+	@Override
+	public float getHardness()
+	{
+		return 0;
+	}
 
-    @Override
-    public float getBlastResistance() {
-        return 0;
-    }
+	@Override
+	public float getMiningResistance()
+	{
+		return 0;
+	}
 
-    @Override
-    public float getDensity() {
-        return 0;
-    }
+	@Override
+	public float getBlastResistance()
+	{
+		return 0;
+	}
 
-    @Override
-    public int getBlockHarvestLevel() {
-        return 0;
-    }
+	@Override
+	public float getDensity()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getBlockHarvestLevel()
+	{
+		return 0;
+	}
 }

@@ -172,7 +172,8 @@ public enum PeriodicTableElement implements IStringSerializable
 		return toString().toLowerCase(Locale.ENGLISH);
 	}
 
-	public boolean isReal() {
+	public boolean isReal()
+	{
 		return this.isReal;
 	}
 

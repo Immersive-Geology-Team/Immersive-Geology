@@ -61,10 +61,12 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 		return -1;
 	}
 
+	public static int baseColor = 0x475B74;
+
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xffffff;
+		return baseColor;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
@@ -104,6 +106,12 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return null;
+	}
+
+	@Override
+	public int getStaticColor()
+	{
+		return baseColor;
 	}
 
 	/*@Nullable

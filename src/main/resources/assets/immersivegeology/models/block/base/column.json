@@ -1,0 +1,21 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#vertical", "cullface": "down" , "tintindex": 0},
+                "up":    { "texture": "#vertical", "cullface": "up" , "tintindex": 0},
+                "north": { "texture": "#horizontal", "cullface": "north" , "tintindex": 0},
+                "south": { "texture": "#horizontal", "cullface": "south" , "tintindex": 0},
+                "west":  { "texture": "#horizontal", "cullface": "west" , "tintindex": 0},
+                "east":  { "texture": "#horizontal", "cullface": "east" , "tintindex": 0}
+            }
+        }
+    ],
+    "textures": {
+        "vertical": "immersivegeology:block/greyscale/stone/column_top",
+        "horizontal": "immersivegeology:block/greyscale/stone/column",
+        "particle": "immersivegeology:block/greyscale/stone/column"
+    }
+}
