@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bricks",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "immersivegeology:item_polished_chunk_limestone"
+    }
+  },
+  "result": {
+    "item": "immersivegeology:block_normal_bricks_limestone"
+  }
+}

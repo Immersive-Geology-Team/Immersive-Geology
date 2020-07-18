@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:item_ingot_steel"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_nugget_steel",
+    "count": 9
+  }
+}

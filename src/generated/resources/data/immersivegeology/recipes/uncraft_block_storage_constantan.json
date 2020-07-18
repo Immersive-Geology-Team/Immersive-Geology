@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:block_storage_constantan"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_ingot_constantan",
+    "count": 9
+  }
+}

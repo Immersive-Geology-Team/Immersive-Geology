@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:block_storage_iron"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_ingot_iron",
+    "count": 9
+  }
+}

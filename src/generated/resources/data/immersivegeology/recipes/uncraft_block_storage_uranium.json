@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersivegeology:block_storage_uranium"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_ingot_uranium",
+    "count": 9
+  }
+}

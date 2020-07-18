@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "immersivegeology:item_ingot_tin"
+    }
+  },
+  "result": {
+    "item": "immersivegeology:block_storage_tin"
+  }
+}
