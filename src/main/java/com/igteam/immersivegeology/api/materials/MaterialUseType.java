@@ -25,8 +25,8 @@ import java.util.Locale;
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
-	ROCK(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw),
-	ORE_BEARING(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw)
+	ROCK(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
+	ORE_BEARING(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw)
 			{
 				@Override
 				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
@@ -135,7 +135,7 @@ public enum MaterialUseType implements IStringSerializable
 	TILES(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
 
 	//Fluids
-	FLUIDS(UseCategory.BLOCK, ItemSubGroup.misc);
+	FLUIDS(UseCategory.BLOCK, Material.WATER, ItemSubGroup.misc);
 
 	/**
 	 * MaterialUseType is mark a use case for a material, i.e. an Iron Ingot is a use case for Iron

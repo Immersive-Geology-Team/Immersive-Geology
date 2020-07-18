@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "natural=false": {
+      "model": "immersivegeology:block/block_small_bricks_marble"
+    },
+    "natural=true": {
+      "model": "immersivegeology:block/block_small_bricks_marble"
+    }
+  }
+}

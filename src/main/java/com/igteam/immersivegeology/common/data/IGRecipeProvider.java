@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
@@ -42,7 +43,7 @@ public class IGRecipeProvider extends RecipeProvider
 					if(resourceItem.subtype.equals(MaterialUseType.CHUNK))
 					{
 						IGBaseBlock block = IGRegistryGrabber.grabBlock(MaterialUseType.ROUGH_BRICKS, resourceItem.getMaterial());
-						System.out.println("Creating Recipe for: "+block);
+						IGLogger.info("Creating Recipe for: "+block);
 						ShapedRecipeBuilder.shapedRecipe(block)
 								.patternLine("xx")
 								.patternLine("xx")
@@ -54,7 +55,7 @@ public class IGRecipeProvider extends RecipeProvider
 					else if(resourceItem.subtype.equals(MaterialUseType.POLISHED_CHUNK))
 					{
 						IGBaseBlock block = IGRegistryGrabber.grabBlock(MaterialUseType.NORMAL_BRICKS, resourceItem.getMaterial());
-						System.out.println("Creating Recipe for: "+block);
+						IGLogger.info("Creating Recipe for: "+block);
 						ShapedRecipeBuilder.shapedRecipe(block)
 								.patternLine("xx")
 								.patternLine("xx")
@@ -66,7 +67,7 @@ public class IGRecipeProvider extends RecipeProvider
 					else if(resourceItem.subtype.equals(MaterialUseType.INGOT))
 					{
 						IGBaseBlock combined = IGRegistryGrabber.grabBlock(MaterialUseType.STORAGE, resourceItem.getMaterial());
-						System.out.println("Creating Recipe for: "+combined);
+						IGLogger.info("Creating Recipe for: "+combined);
 						ShapedRecipeBuilder.shapedRecipe(combined)
 								.key('x', resourceItem)
 								.patternLine("xxx")
@@ -75,7 +76,7 @@ public class IGRecipeProvider extends RecipeProvider
 								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "craft_" + combined.name));
 						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.NUGGET, resourceItem.getMaterial());
-						System.out.println("Creating Disassembling for: "+disassemble);
+						IGLogger.info("Creating Disassembling for: "+disassemble);
 						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
 								.addIngredient(resourceItem)
 								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
@@ -84,7 +85,7 @@ public class IGRecipeProvider extends RecipeProvider
 					else if(resourceItem.subtype.equals(MaterialUseType.NUGGET))
 					{
 						IGMaterialResourceItem combined = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
-						System.out.println("Creating Recipe for: "+combined);
+						IGLogger.info("Creating Recipe for: "+combined);
 						ShapedRecipeBuilder.shapedRecipe(combined)
 								.key('x', resourceItem)
 								.patternLine("xxx")
@@ -95,9 +96,9 @@ public class IGRecipeProvider extends RecipeProvider
 					}
 					else if(resourceItem.subtype.equals(MaterialUseType.STORAGE))
 					{
-						System.out.println("Block recipe");
+						IGLogger.info("Block recipe");
 						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
-						System.out.println("Creating Disassembling for: "+disassemble);
+						IGLogger.info("Creating Disassembling for: "+disassemble);
 						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
 								.addIngredient(resourceItem.getItem())
 								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceItem)) //recipe unlock criterion
@@ -106,7 +107,7 @@ public class IGRecipeProvider extends RecipeProvider
 				}
 			} catch(Exception e)
 			{
-				System.out.println("Failed to create Recipe: "+e);
+				IGLogger.info("Failed to create Recipe: "+e);
 			}
 		}
 		for(IGBaseBlock block : IGContent.registeredIGBlocks.values())
@@ -118,9 +119,9 @@ public class IGRecipeProvider extends RecipeProvider
 					IGMaterialBlock resourceBlock = (IGMaterialBlock)block;
 					if(resourceBlock.subtype.equals(MaterialUseType.STORAGE))
 					{
-						System.out.println("Block recipe");
+						IGLogger.info("Block recipe");
 						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceBlock.getMaterial());
-						System.out.println("Creating Disassembling for: "+disassemble);
+						IGLogger.info("Creating Disassembling for: "+disassemble);
 						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
 								.addIngredient(resourceBlock)
 								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceBlock)) //recipe unlock criterion
@@ -129,7 +130,7 @@ public class IGRecipeProvider extends RecipeProvider
 				}
 			} catch(Exception e)
 			{
-				System.out.println("Failed to create Recipe: "+e);
+				IGLogger.info("Failed to create Recipe: "+e);
 			}
 		}
 	}
