@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "natural=false": {
+      "model": "immersivegeology:block/block_storage_block_quartz"
+    },
+    "natural=true": {
+      "model": "immersivegeology:block/block_storage_block_quartz"
+    }
+  }
+}

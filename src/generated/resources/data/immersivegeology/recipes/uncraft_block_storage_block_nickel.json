@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/nickel"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_ingot_nickel",
+    "count": 9
+  }
+}

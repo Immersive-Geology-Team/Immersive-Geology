@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/quartz"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_gear_chromium",
+    "count": 9
+  }
+}

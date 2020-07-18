@@ -4,6 +4,8 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.IGRegistryGrabber;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -37,12 +39,14 @@ public class IGItemTagsProvider extends net.minecraft.data.ItemTagsProvider
 		for(MaterialUseType type : MaterialUseType.values())
 		{
 			ArrayList<Item> validItems = new ArrayList<>();
+			ArrayList<Item> validBlocks = new ArrayList<>();
 
 			for(EnumMaterials e : EnumMaterials.values())
 			{
 				Material material = e.material;
 
-				if(material.hasSubtype(type))
+				if(material.hasSubtype(type) && (type.getCategory() == MaterialUseType.UseCategory.RESOURCE_ITEM || type.getCategory() == MaterialUseType.UseCategory.STORAGE_ITEM ||
+						type.getCategory() == MaterialUseType.UseCategory.ITEM || type.getCategory() == MaterialUseType.UseCategory.TOOLPART_ITEM))
 				{
 					Item item = IGRegistryGrabber.getIGItem(type, material);
 					if(item!=Items.AIR)
@@ -52,10 +56,22 @@ public class IGItemTagsProvider extends net.minecraft.data.ItemTagsProvider
 					}
 
 				}
+				else if(material.hasSubtype(type))
+				{
+					Item block = IGRegistryGrabber.grabBlock(type, material).asItem();
+					if(block != Items.AIR)
+					{
+						validBlocks.add(block);
+						validItems.add(block);
+						this.getBuilder(new Wrapper(forgeLoc(type.getTagName()+"/"+material.getName()))).add(block);
+					}
+				}
 			}
 
 			if(!validItems.isEmpty())
 				this.getBuilder(new Wrapper(forgeLoc("items/"+type.getName()+"s"))).add(validItems.toArray(new Item[]{}));
+//			if(!validBlocks.isEmpty())
+//				this.getBuilder(new Wrapper(forgeLoc("blocks/" + type.getName() + "s"))).add(validBlocks.toArray(new Item[]{})); //TODO block tags doesn't register properly
 		}
 
 	}

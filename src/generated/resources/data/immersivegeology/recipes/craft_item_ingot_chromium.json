@@ -7,7 +7,7 @@
   ],
   "key": {
     "x": {
-      "item": "immersivegeology:item_nugget_chromium"
+      "tag": "forge:nuggets/chromium"
     }
   },
   "result": {

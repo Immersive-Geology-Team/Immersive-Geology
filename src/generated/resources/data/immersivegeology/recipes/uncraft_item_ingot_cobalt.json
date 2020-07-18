@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "immersivegeology:item_ingot_cobalt"
+      "tag": "forge:ingots/cobalt"
     }
   ],
   "result": {

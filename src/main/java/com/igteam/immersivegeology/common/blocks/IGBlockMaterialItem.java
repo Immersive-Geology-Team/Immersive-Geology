@@ -26,7 +26,7 @@ import static com.igteam.immersivegeology.common.items.IGMaterialResourceItem.ha
 public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 {
 
-	public MaterialUseType subtype = MaterialUseType.STORAGE;
+	public MaterialUseType subtype = MaterialUseType.STORAGE_BLOCK;
 	public Material[] materials;
 	public boolean isSlab = false;
 

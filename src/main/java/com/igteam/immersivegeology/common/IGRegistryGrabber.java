@@ -29,7 +29,7 @@ public class IGRegistryGrabber
 	{
 		StringBuilder builder = new StringBuilder("item_"+type.getName());
 		Arrays.stream(materials).forEach(material -> builder.append("_").append(material.getName()));
-		return IGContent.registeredIGItems.getOrDefault(builder.toString(), IGContent.registeredIGItems.values().stream().findAny().get());
+		return IGContent.registeredIGItems.getOrDefault(builder.toString(), IGContent.registeredIGItems.values().stream().findFirst().get());
 	}
 
 	/**

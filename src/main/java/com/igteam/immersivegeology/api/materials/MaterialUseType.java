@@ -44,8 +44,8 @@ public enum MaterialUseType implements IStringSerializable
 					return getName()+"/";
 				}
 			},
-	CHUNK(ItemSubGroup.raw),
-	ORE_CHUNK(ItemSubGroup.raw)
+	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
+	ORE_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw)
 	{
 		@Override
 		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
@@ -56,23 +56,23 @@ public enum MaterialUseType implements IStringSerializable
 			return list.toArray(new IGMaterialItem[]{});
 		}
 	},
-	POLISHED_CHUNK(ItemSubGroup.processed),
+	POLISHED_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	//Metal/crystal items
-	GEAR(ItemSubGroup.processed),
-	INGOT(ItemSubGroup.processed),
-	PLATE(ItemSubGroup.processed),
-	ROD(ItemSubGroup.processed),
-	WIRE(ItemSubGroup.processed),
-	ROUGH_INGOT(ItemSubGroup.processed),
-	ROUGH_PLATE(ItemSubGroup.processed),
-	ROUGH_ROD(ItemSubGroup.processed),
-	ROUGH_GEAR(ItemSubGroup.processed),
-	ROUGH_WIRE(ItemSubGroup.processed),
-	NUGGET(ItemSubGroup.processed),
-	DUST(ItemSubGroup.processed),
-	TINY_DUST(ItemSubGroup.processed),
-	RAW_CRYSTAL(ItemSubGroup.raw),
-	CRYSTAL(ItemSubGroup.processed),
+	GEAR(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	INGOT(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	PLATE(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROD(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	WIRE(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROUGH_INGOT(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROUGH_PLATE(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROUGH_ROD(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROUGH_GEAR(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROUGH_WIRE(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	NUGGET(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	DUST(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	TINY_DUST(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	RAW_CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
+	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 
 	//Tool System, Experimental / Not sure
 	PICKAXE_HEAD(UseCategory.TOOLPART_ITEM),
@@ -86,7 +86,7 @@ public enum MaterialUseType implements IStringSerializable
 	//Blocks
 
 	//Metals
-	STORAGE(UseCategory.RESOURCE_BLOCK, Material.IRON, ItemSubGroup.processed)
+	STORAGE_BLOCK(UseCategory.RESOURCE_BLOCK, Material.IRON, ItemSubGroup.processed)
 			{
 				@Override
 				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)

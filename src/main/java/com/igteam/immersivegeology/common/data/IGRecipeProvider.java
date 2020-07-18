@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.function.Consumer;
@@ -47,7 +48,7 @@ public class IGRecipeProvider extends RecipeProvider
 						ShapedRecipeBuilder.shapedRecipe(block)
 								.patternLine("xx")
 								.patternLine("xx")
-								.key('x', item)
+								.key('x', ItemTags.getCollection().get(new ResourceLocation("forge", "chunks/" + resourceItem.getMaterial().getName())))
 								.setGroup("bricks")
 								.addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(item))
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "craft_" + block.name));
@@ -59,17 +60,17 @@ public class IGRecipeProvider extends RecipeProvider
 						ShapedRecipeBuilder.shapedRecipe(block)
 								.patternLine("xx")
 								.patternLine("xx")
-								.key('x', item)
+								.key('x', ItemTags.getCollection().get(new ResourceLocation("forge", "polished_chunks/" + resourceItem.getMaterial().getName())))
 								.setGroup("bricks")
 								.addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(item))
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "craft_" + block.name));
 					}
 					else if(resourceItem.subtype.equals(MaterialUseType.INGOT))
 					{
-						IGBaseBlock combined = IGRegistryGrabber.grabBlock(MaterialUseType.STORAGE, resourceItem.getMaterial());
+						IGBaseBlock combined = IGRegistryGrabber.grabBlock(MaterialUseType.STORAGE_BLOCK, resourceItem.getMaterial());
 						IGLogger.info("Creating Recipe for: "+combined);
 						ShapedRecipeBuilder.shapedRecipe(combined)
-								.key('x', resourceItem)
+								.key('x', ItemTags.getCollection().get(new ResourceLocation("forge", "ingots/" + resourceItem.getMaterial().getName())))
 								.patternLine("xxx")
 								.patternLine("xxx")
 								.patternLine("xxx")
@@ -78,7 +79,7 @@ public class IGRecipeProvider extends RecipeProvider
 						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.NUGGET, resourceItem.getMaterial());
 						IGLogger.info("Creating Disassembling for: "+disassemble);
 						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
-								.addIngredient(resourceItem)
+								.addIngredient(ItemTags.getCollection().get(new ResourceLocation("forge", "ingots/" + resourceItem.getMaterial().getName())))
 								.addCriterion("ingot", InventoryChangeTrigger.Instance.forItems(resourceItem))
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "uncraft_" + resourceItem.itemName));
 					}
@@ -87,22 +88,12 @@ public class IGRecipeProvider extends RecipeProvider
 						IGMaterialResourceItem combined = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
 						IGLogger.info("Creating Recipe for: "+combined);
 						ShapedRecipeBuilder.shapedRecipe(combined)
-								.key('x', resourceItem)
+								.key('x', ItemTags.getCollection().get(new ResourceLocation("forge", "nuggets/" + resourceItem.getMaterial().getName())))
 								.patternLine("xxx")
 								.patternLine("xxx")
 								.patternLine("xxx")
 								.addCriterion("nugget", InventoryChangeTrigger.Instance.forItems(resourceItem))
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "craft_" + combined.itemName));
-					}
-					else if(resourceItem.subtype.equals(MaterialUseType.STORAGE))
-					{
-						IGLogger.info("Block recipe");
-						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceItem.getMaterial());
-						IGLogger.info("Creating Disassembling for: "+disassemble);
-						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
-								.addIngredient(resourceItem.getItem())
-								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceItem)) //recipe unlock criterion
-								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "uncraft_" + resourceItem.itemName));
 					}
 				}
 			} catch(Exception e)
@@ -117,13 +108,13 @@ public class IGRecipeProvider extends RecipeProvider
 				if(block instanceof IGMaterialBlock)
 				{
 					IGMaterialBlock resourceBlock = (IGMaterialBlock)block;
-					if(resourceBlock.subtype.equals(MaterialUseType.STORAGE))
+					if(resourceBlock.subtype.equals(MaterialUseType.STORAGE_BLOCK))
 					{
 						IGLogger.info("Block recipe");
 						IGMaterialResourceItem disassemble = (IGMaterialResourceItem)IGRegistryGrabber.getIGItem(MaterialUseType.INGOT, resourceBlock.getMaterial());
 						IGLogger.info("Creating Disassembling for: "+disassemble);
 						ShapelessRecipeBuilder.shapelessRecipe(disassemble, 9)
-								.addIngredient(resourceBlock)
+								.addIngredient(ItemTags.getCollection().get(new ResourceLocation("forge", "storage_blocks/" + resourceBlock.getMaterial().getName())))
 								.addCriterion("block", InventoryChangeTrigger.Instance.forItems(resourceBlock)) //recipe unlock criterion
 								.build(consumer, new ResourceLocation(ImmersiveGeology.MODID, "uncraft_" + resourceBlock.name));
 					}

@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium",
-    "immersivegeology:item_gear_chromium"
+    "immersivegeology:block_normal_bricks_rhyolite",
+    "immersivegeology:block_normal_bricks_diorite",
+    "immersivegeology:block_normal_bricks_andesite",
+    "immersivegeology:block_normal_bricks_granite",
+    "immersivegeology:block_normal_bricks_netherrack",
+    "immersivegeology:block_normal_bricks_endstone",
+    "immersivegeology:block_normal_bricks_basalt",
+    "immersivegeology:block_normal_bricks_gabbros",
+    "immersivegeology:block_normal_bricks_marble",
+    "immersivegeology:block_normal_bricks_limestone",
+    "immersivegeology:block_normal_bricks_pegamite",
+    "immersivegeology:block_normal_bricks_regolith"
   ]
 }
