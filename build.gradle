@@ -128,8 +128,8 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
-    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:0.14-94-+")
+    minecraft 'net.minecraftforge:forge:1.14.4-28.2.16'
+    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:0.14-107-+")
     runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11")
     compileOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.11:api")
     //testImplementation('junit:junit:4.13')
