@@ -1,8 +1,8 @@
 package com.igteam.immersivegeology.common.world.biome.biomes;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;

@@ -1,7 +1,8 @@
-package com.igteam.immersivegeology.common;
+package com.igteam.immersivegeology.api.util;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import net.minecraft.item.Item;
 

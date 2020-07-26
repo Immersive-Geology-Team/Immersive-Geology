@@ -13,7 +13,12 @@ import java.util.LinkedHashSet;
  * Created by Pabilo8 on 25-03-2020.
  */
 public class MaterialMetalGold extends MaterialMetalBase
-{
+{	
+
+	public MaterialMetalGold() {
+		isNativeMetal = true;
+	}
+	
 	@Override
 	public String getName()
 	{

@@ -2,8 +2,8 @@ package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;

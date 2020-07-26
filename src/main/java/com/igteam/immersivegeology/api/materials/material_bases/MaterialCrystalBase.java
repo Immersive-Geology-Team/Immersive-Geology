@@ -36,7 +36,13 @@ public abstract class MaterialCrystalBase extends Material
 	{
 		return MaterialTypes.CRYSTAL;
 	}
-
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.CRYSTAL;
+	}
+	
 	public static int getStaticColor()
 	{
 		return baseColor;

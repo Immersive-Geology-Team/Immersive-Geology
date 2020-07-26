@@ -54,7 +54,13 @@ public abstract class MaterialStoneBase extends Material
 	{
 		return MaterialTypes.STONE;
 	}
-
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.STONE;
+	}
+	
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{

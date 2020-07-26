@@ -3,7 +3,7 @@ package com.igteam.immersivegeology.common.blocks;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

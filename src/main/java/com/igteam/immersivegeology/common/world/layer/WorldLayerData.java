@@ -1,9 +1,9 @@
 package com.igteam.immersivegeology.common.world.layer;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class WorldLayerData
 
 		for(int id = 0; id < mountains.getLayers().size(); id++)
 		{
-			mountains.addMachineOre(id, 0.12f, EnumMaterials.Gold);
+			mountains.addMachineOre(id, 0.32f, EnumMaterials.Gold);
 			mountains.addMachineOre(id, 0.38f, EnumMaterials.Hematite);
 			mountains.addMachineOre(id, 0.35f, EnumMaterials.Cuprite);
 			mountains.addMachineOre(id, 0.15f, EnumMaterials.Uraninite);
@@ -44,6 +44,13 @@ public class WorldLayerData
 		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Marble.material));
 		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));
 		lush_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
+		for(int id = 0; id < lush_mountains.getLayers().size(); id++)
+		{
+			lush_mountains.addMachineOre(id, 0.32f, EnumMaterials.Gold);
+			lush_mountains.addMachineOre(id, 0.38f, EnumMaterials.Hematite);
+			lush_mountains.addMachineOre(id, 0.35f, EnumMaterials.Cuprite);
+			lush_mountains.addMachineOre(id, 0.15f, EnumMaterials.Uraninite);
+		}
 		lush_mountains.settleLayers();
 
 		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material));

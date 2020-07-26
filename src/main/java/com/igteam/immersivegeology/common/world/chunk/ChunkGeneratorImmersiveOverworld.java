@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology.common.world.chunk;
 
+import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase.EnumMineralType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
@@ -76,13 +78,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
 
-
-		// Create a generator for each ore in each layer for each biome!
-		// This is a BAD BAD way of doing things, we SHOULD be using something like 3D Noise Layering System, but no
-		// I went with the quickest easier way of creating a generator for each situation...
-		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
-
-		EnumMaterials.filterMinerals().forEach((ore) -> {
+		EnumMaterials.filterWorldGen().forEach((ore) -> {
 				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
 		});
 		

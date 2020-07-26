@@ -38,6 +38,12 @@ public abstract class MaterialMetalloidBase extends Material
 	}
 
 	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.METALLOID;
+	}
+	
+	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return net.minecraft.block.material.Material.IRON;

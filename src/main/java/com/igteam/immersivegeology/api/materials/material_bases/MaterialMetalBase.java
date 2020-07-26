@@ -10,7 +10,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
-
+	protected boolean isNativeMetal = false;
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -59,6 +59,12 @@ public abstract class MaterialMetalBase extends Material
 	public MaterialTypes getMaterialType()
 	{
 		return MaterialTypes.METAL;
+	}
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return (isNativeMetal ? MaterialTypes.MINERAL : MaterialTypes.METAL);
 	}
 
 	@Override

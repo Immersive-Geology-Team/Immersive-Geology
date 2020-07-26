@@ -27,6 +27,12 @@ public abstract class MaterialMineralBase extends Material
 	}
 
 	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.MINERAL;
+	}
+	
+	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return net.minecraft.block.material.Material.ROCK;

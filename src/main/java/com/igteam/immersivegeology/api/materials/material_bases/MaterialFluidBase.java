@@ -36,6 +36,12 @@ public abstract class MaterialFluidBase extends Material
 	{
 		return MaterialTypes.FLUID;
 	}
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.FLUID;
+	}
 
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()

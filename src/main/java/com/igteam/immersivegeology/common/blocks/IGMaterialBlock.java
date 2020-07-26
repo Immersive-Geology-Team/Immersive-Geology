@@ -5,7 +5,7 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUtils;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;

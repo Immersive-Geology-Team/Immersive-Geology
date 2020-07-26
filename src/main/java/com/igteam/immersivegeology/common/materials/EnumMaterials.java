@@ -114,13 +114,26 @@ public enum EnumMaterials
 	{
 		return filterByType(MaterialTypes.MINERAL);
 	}
+	
+	/**
+	 * @return only mineral materials
+	 */
+	public static Stream<EnumMaterials> filterWorldGen()
+	{
+		return filterBySubType(MaterialTypes.MINERAL);
+	}
+	
+	public static Stream<EnumMaterials> filterBySubType(MaterialTypes type)
+	{
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getMaterialSubType()==type));
+	}
 
 	/**
 	 * @return only materials of a type (metal, mineral, fluid, etc.)
 	 */
 	public static Stream<EnumMaterials> filterByType(MaterialTypes type)
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==type);
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getMaterialType()==type));
 	}
 
 	/**

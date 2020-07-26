@@ -2,8 +2,9 @@ package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.IGRegistryGrabber;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;

@@ -56,6 +56,12 @@ public abstract class Material
 
 	@Nonnull
 	public abstract MaterialTypes getMaterialType();
+	
+	/**
+	 * @return Used to help world generation where metal types have a native way of spawning
+	 */
+	@Nullable
+	public abstract MaterialTypes getMaterialSubType();
 
 	//Temperature properties
 
