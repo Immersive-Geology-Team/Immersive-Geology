@@ -10,6 +10,7 @@ import javax.imageio.stream.IIOByteBuffer;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGOreBlock;
@@ -31,7 +32,6 @@ import net.minecraft.world.chunk.IChunk;
 
 public class WorleyOreCarver
 {
-
 	private static final int SAMPLE_HEIGHT = 64;
 	private static float NOISE_THRESHOLD = 0.35f;
 	
@@ -76,18 +76,9 @@ public class WorleyOreCarver
 		// run this through a full loop, for each ore, returns out if ore is not set in the biomes layer data!
 		int totalLayerCount = biomeData.getLayerCount();
 		Material baseMaterial = ((IGMaterialBlock)biomeData.getLayerBlock((currentLayer))).getMaterial();
-		LayerOre oreData = null;
-		for(LayerOre ore : oreArrayData)
+
+		for(LayerOre oreData : oreArrayData)
 		{
-			oreData = ore; 
-
-			//if ore data is not found, no ore to generate, exit out of carve function
-			if(oreData==null)
-			{
-				System.out.println("No Ore Data found");
-				return;  
-			} 
-
 			//ore data has been retrieved, set ore material data for later use
 			EnumMaterials oreMaterial = oreData.getOre();
 
@@ -228,10 +219,11 @@ public class WorleyOreCarver
 														// Create cave if possible
 														BlockState originalState = chunkIn.getBlockState(pos);
 														if(!originalState.isAir(chunkIn, pos) && originalState!=BEDROCK && 
-														   !originalState.getMaterial().isLiquid() && originalState.getBlock() instanceof IGMaterialBlock &&
-														   !(originalState.getBlock() instanceof IIGOreBlock))
+														   !originalState.getMaterial().isLiquid() && originalState.getBlock() instanceof IGMaterialBlock)													   
 														{
-															chunkIn.setBlockState(pos, replacementState.with(IGProperties.ORE_RICHNESS, richness), false);
+															if(!(originalState.getBlock() instanceof IIGOreBlock) || (IGMathHelper.randInt(4) == 1)) {
+																chunkIn.setBlockState(pos, replacementState.with(IGProperties.ORE_RICHNESS, richness), false);
+															}
 														}
 													}
 												}

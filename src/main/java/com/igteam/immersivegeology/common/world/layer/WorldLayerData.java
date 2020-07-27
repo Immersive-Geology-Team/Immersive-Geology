@@ -60,7 +60,7 @@ public class WorldLayerData
 		flooded_mountains.addLayer(IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Basalt.material));
 		for(int id = 0; id < lush_mountains.getLayers().size(); id++)
 		{
-			flooded_mountains.addMachineOre(id, 0.42f, EnumMaterials.Gold);
+			flooded_mountains.addMachineOre(id, 0.72f, EnumMaterials.Gold);
 			flooded_mountains.addMachineOre(id, 0.38f, EnumMaterials.Hematite);
 			flooded_mountains.addMachineOre(id, 0.35f, EnumMaterials.Cuprite);
 			flooded_mountains.addMachineOre(id, 0.15f, EnumMaterials.Uraninite);

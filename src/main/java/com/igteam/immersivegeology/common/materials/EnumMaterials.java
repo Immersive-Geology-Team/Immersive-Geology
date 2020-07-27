@@ -120,7 +120,7 @@ public enum EnumMaterials
 	 */
 	public static Stream<EnumMaterials> filterWorldGen()
 	{
-		return filterBySubType(MaterialTypes.MINERAL);
+		return filterBySubType(MaterialTypes.MINERAL); //some metals have mineral as a subtype, (reusing mineral type in place of adding in a native material type)
 	}
 	
 	public static Stream<EnumMaterials> filterBySubType(MaterialTypes type)

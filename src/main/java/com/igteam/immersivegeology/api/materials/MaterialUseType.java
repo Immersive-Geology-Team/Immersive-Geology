@@ -32,8 +32,8 @@ public enum MaterialUseType implements IStringSerializable
 				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
 				{
 					List<IGBaseBlock> list = new ArrayList<>();
-					//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
-					EnumMaterials.filterMinerals().forEach(enumMaterials -> list.add(new IGOreBearingBlock(material, this, enumMaterials.material)));
+					//Filter materials for World Generation acceptable ores and iterate, add to the list new ore blocks with stone mat + mineral mat
+					EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGOreBearingBlock(material, this, enumMaterials.material)));
 					return list.toArray(new IGBaseBlock[]{});
 				}
 
@@ -52,7 +52,7 @@ public enum MaterialUseType implements IStringSerializable
 		{
 			List<IGMaterialItem> list = new ArrayList<>();
 			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
-			EnumMaterials.filterMinerals().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
+			EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
 			return list.toArray(new IGMaterialItem[]{});
 		}
 	},

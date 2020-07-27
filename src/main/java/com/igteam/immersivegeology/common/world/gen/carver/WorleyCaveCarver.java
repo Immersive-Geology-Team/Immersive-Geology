@@ -21,7 +21,7 @@ public class WorleyCaveCarver
 	private static int LIQUID_DEPTH_MAX = 11;
 	private static int LIQUID_DEPTH_MIN = 0;
 	private static final float NOISE_THRESHOLD = 0.4f;
-	private static final float HEIGHT_FADE_THRESHOLD = 72;
+	private static float HEIGHT_FADE_THRESHOLD = 72;
 
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -30,6 +30,7 @@ public class WorleyCaveCarver
 
 	//biomes to check!
 	private static final IGBiome OCEAN = IGBiomes.OCEAN;
+	private static final IGBiome FLOODED_MOUNTAINS = IGBiomes.FLOODED_MOUNTAINS;
 	private static final IGBiome OCEAN_DEEP = IGBiomes.DEEP_OCEAN;
 	private static final IGBiome OCEAN_EDGE = IGBiomes.OCEAN_EDGE;
 	private static final IGBiome OCEAN_DEEP_VOLCANIC = IGBiomes.DEEP_OCEAN_VOLCANIC;
@@ -118,7 +119,7 @@ public class WorleyCaveCarver
 									// set the current position
 									pos.setPos(chunkX+x0, yPos, chunkZ+z0);
 
-
+									HEIGHT_FADE_THRESHOLD = 72;
 									LIQUID_DEPTH_MAX = 11;
 									replacementAir = AIR;
 									if(chunkIn.getBiome(pos)==OCEAN)
@@ -134,6 +135,15 @@ public class WorleyCaveCarver
 										LIQUID_DEPTH_MAX = 78;
 										replacementAir = WATER;
 									}
+									
+									if(chunkIn.getBiome(pos)==FLOODED_MOUNTAINS)
+									{
+										replacementLiquid = WATER;
+										LIQUID_DEPTH_MAX = 93;
+										replacementAir = AIR;
+										HEIGHT_FADE_THRESHOLD = 130;
+									}
+									
 									if(chunkIn.getBiome(pos)==OCEAN_DEEP)
 									{
 										LIQUID_DEPTH_MAX = 14;
