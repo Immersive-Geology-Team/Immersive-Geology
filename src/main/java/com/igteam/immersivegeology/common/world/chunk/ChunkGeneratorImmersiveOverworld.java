@@ -57,16 +57,14 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 	});
 
-	private final WorleyCaveCarver worleyCaveCarver;
 	private final ImmersiveCarver immersiveCarver;
-	
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
 
 	public ChunkGeneratorImmersiveOverworld(IWorld world, BiomeProvider provider,
 											ImmersiveGenerationSettings settings)
 	{
-		super(world, provider, settings);
+		super(world, provider, settings); 
 		boolean usePerlin = true;
 		Random seedGenerator = new Random(world.getSeed());
 		this.surfaceDepthNoise = usePerlin?new PerlinNoiseGenerator(seedGenerator, 4)
@@ -81,13 +79,11 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		this.immersiveCarver = new ImmersiveCarver();
 		this.immersiveCarver.initialize(world);
-		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
-
+		
 		EnumMaterials.filterWorldGen().forEach((ore) -> {
 				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
 		});
 		
-
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
 
@@ -98,7 +94,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		if(stage==GenerationStage.Carving.AIR)
 		{
 			// First, run worley cave carver
-			worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x<<4, chunkIn.getPos().z<<4);
+			
 			this.immersiveCarver.carve(chunkIn, chunkIn.getPos().x, chunkIn.getPos().z);
 			
 			

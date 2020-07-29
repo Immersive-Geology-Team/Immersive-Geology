@@ -46,7 +46,7 @@ public class CaveCarverController {
             .bottomY(40)
             .topY(128)
             .density(17)
-            .liquidAltitude(10)
+            .liquidAltitude(15)
             .replaceGravel(true)
             .floodedUnderground(true)
             .build();
@@ -77,9 +77,9 @@ public class CaveCarverController {
         carvers.add(new VanillaCaveCarverBuilder()
             .bottomY(8)
             .topY(128)
-            .density(14)
+            .density(9)
             .priority(0)
-            .liquidAltitude(10)
+            .liquidAltitude(15)
             .replaceGravel(true)
             .floodedUnderground(true)
             .build());

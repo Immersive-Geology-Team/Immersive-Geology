@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.igteam.immersivegeology.common.world.gen.carver.builder.CaveCarverBuilder;
+import com.igteam.immersivegeology.common.world.gen.carver.settings.CarverSettings;
 import com.igteam.immersivegeology.common.world.gen.carver.util.CarverUtils;
 import com.igteam.immersivegeology.common.world.gen.carver.util.ColPos;
 import com.igteam.immersivegeology.common.world.noise.NoiseColumn;

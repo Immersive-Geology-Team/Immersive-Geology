@@ -24,7 +24,7 @@ public class ImmersiveCarver {
 
     private CaveCarverController caveCarver;
     private WaterRegionController waterCarver;
-    //private CavernCarverController cavernCarverController;
+    private WorleyCaveCarver worleyCaveCarver;
    // private RavineController ravineController;
     
     public void initialize(IWorld worldIn) {
@@ -43,6 +43,7 @@ public class ImmersiveCarver {
     	
     	this.caveCarver = new CaveCarverController(worldIn);
         this.waterCarver = new WaterRegionController(worldIn);
+        this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
     }
     
     public void carve(IChunk chunkIn, int chunkX, int chunkZ) {
@@ -74,7 +75,7 @@ public class ImmersiveCarver {
  
         // Carve chunk
         caveCarver.carveChunk(chunkIn, chunkX, chunkZ, surfaceAltitudes, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
-        //  cavernCarverController.carveChunk(chunkIn, chunkX, chunkZ, surfaceAltitudes, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
+        worleyCaveCarver.carve(chunkIn, chunkX << 4, chunkZ << 4, liquidBlocks, airCarvingMask);
        // ravineController.carveChunk(chunkIn, chunkX, chunkZ, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
 
         // Set carving masks for features to use

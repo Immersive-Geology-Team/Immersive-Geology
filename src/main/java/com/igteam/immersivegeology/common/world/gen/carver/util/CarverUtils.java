@@ -1,23 +1,31 @@
 package com.igteam.immersivegeology.common.world.gen.carver.util;
 
 import java.util.BitSet;
+import java.util.Map;
 import java.util.Random;
+import java.util.function.Function;
 
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 
 public class CarverUtils {
+	
+	public static Function<IGBiome.Category, Boolean> isOcean = b -> b == IGBiome.Category.OCEAN;
+    public static Function<IGBiome.Category, Boolean> isNotOcean = b -> b != IGBiome.Category.OCEAN;
+	
     public static int getLocal(int coordinate) {
         return coordinate & 0xF; // This is same as modulo 16, but quicker
     }
@@ -243,6 +251,41 @@ public class CarverUtils {
             || localX < 15 && chunkIn.getBlockState(blockPos.east()).getMaterial() == Material.WATER
             || localZ < 15 && chunkIn.getBlockState(blockPos.south()).getMaterial() == Material.WATER
             || localX > 0 && chunkIn.getBlockState(blockPos.west()).getMaterial() == Material.WATER;
+    }
+    
+    /**
+     * Returns a linear amplifier (from 0 to 1, inclusive) indicating how far away a target biome is.
+     * The target biome is searched for in a circle with a given radius centered around the starting block.
+     * The circle is searched radially outward from the starting position, so as not to perform unnecessary computation.
+     *
+     * This function is primarily used to search for nearby ocean/non-ocean biomes to close off flooded caves
+     * from non-flooded caves, preventing weird water walls.
+     *
+     * @param biomeMap Map of block positions as Longs to Biomes
+     * @param pos Center position to search around
+     * @param radius Radius of search circle
+     * @param isTargetBiome Function to use when testing if a given block's biome is the biome we are lookin for
+     */
+    public static float getDistFactor(IWorld worldIn, Map<Long, IGBiome> biomeMap, ColPos pos, int radius, Function<IGBiome.Category, Boolean> isTargetBiome) {
+        ColPos.MutableColPos checkpos = new ColPos.MutableColPos();
+        for (int i = 1; i <= radius; i++) {
+            for (int j = 0; j <= i; j++) {
+                for (Direction direction : Direction.Plane.HORIZONTAL) {
+                    checkpos.setPos(pos).move(direction, i).move(direction.rotateY(), j);
+                    if (isPosInWorld(checkpos, worldIn) && isTargetBiome.apply(biomeMap.get(checkpos.toLong()).getCategory())) {
+                        return (float)(i + j) / (2 * radius);
+                    }
+                    if (j != 0 && i != j) {
+                        checkpos.setPos(pos).move(direction, i).move(direction.rotateYCCW(), j);
+                        if (isPosInWorld(checkpos, worldIn) && isTargetBiome.apply(biomeMap.get(checkpos.toLong()).getCategory())) {
+                            return (float)(i + j) / (2 * radius);
+                        }
+                    }
+                }
+            }
+        }
+
+        return 1;
     }
     
 }

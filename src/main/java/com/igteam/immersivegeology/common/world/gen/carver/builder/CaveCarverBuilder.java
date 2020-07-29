@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.common.world.gen.carver.builder;
 
-import com.igteam.immersivegeology.common.world.gen.carver.CarverSettings;
 import com.igteam.immersivegeology.common.world.gen.carver.CaveCarver;
+import com.igteam.immersivegeology.common.world.gen.carver.settings.CarverSettings;
 import com.igteam.immersivegeology.common.world.gen.carver.util.CaveType;
 import com.igteam.immersivegeology.common.world.noise.FastNoise;
 
@@ -31,7 +31,7 @@ public class CaveCarverBuilder {
 	 * @param config   the config
 	 */
 	public CaveCarverBuilder ofTypeFromConfig(CaveType caveType) {
-		this.settings.setLiquidAltitude(10);
+		this.settings.setLiquidAltitude(15);
 		this.settings.setReplaceFloatingGravel(true);
 		this.settings.getNoiseSettings().setFractalType(FastNoise.FractalType.RigidMulti);
 		switch (caveType) { 

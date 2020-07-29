@@ -1,4 +1,4 @@
-package com.igteam.immersivegeology.common.world.gen.carver;
+package com.igteam.immersivegeology.common.world.gen.carver.settings;
 
 import com.igteam.immersivegeology.common.world.noise.NoiseSettings;
 
