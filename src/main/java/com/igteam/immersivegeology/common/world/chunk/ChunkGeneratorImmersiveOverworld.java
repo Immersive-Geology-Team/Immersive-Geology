@@ -11,6 +11,7 @@ import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
+import com.igteam.immersivegeology.common.world.gen.carver.ImmersiveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
@@ -57,6 +58,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 	});
 
 	private final WorleyCaveCarver worleyCaveCarver;
+	private final ImmersiveCarver immersiveCarver;
+	
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
 
@@ -76,6 +79,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		this.biomeProvider = (ImmersiveBiomeProvider)provider;
 
+		this.immersiveCarver = new ImmersiveCarver();
+		this.immersiveCarver.initialize(world);
 		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
 
 		EnumMaterials.filterWorldGen().forEach((ore) -> {
@@ -94,11 +99,9 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		{
 			// First, run worley cave carver
 			worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x<<4, chunkIn.getPos().z<<4);
-
-			// TODO RE-WORK this trash!
-			// ABSOLUTE HORROR right here, but I don't have the time to do a proper 3D noise Layer System for unquie ore veins, so
-			// so works, so it will do...
-
+			this.immersiveCarver.carve(chunkIn, chunkIn.getPos().x, chunkIn.getPos().z);
+			
+			
 			for(BiomeLayerData biomeData : data.worldLayerData)
 			{
 				int totalLayers = biomeData.getLayerCount();

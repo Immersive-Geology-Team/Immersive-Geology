@@ -1,3 +1,9 @@
+// Credit where credit due
+// World Generation - Muddykat (Using Modified Source Code from TerraFirmaCraft and YungsBetterCaves)
+// GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 for YungsBetterCaves sourced assets
+// European Union Public Licence V. 1.2 for for TerraFirmaCraft Sourced Assets - this includes most of the biome distribution code
+//
+
 package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.ClientProxy;

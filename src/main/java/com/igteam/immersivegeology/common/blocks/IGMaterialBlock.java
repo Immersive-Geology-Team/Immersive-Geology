@@ -50,6 +50,10 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 		}
 
 	}
+	
+	public MaterialUseType getUseType() {
+		return this.subtype;
+	}
 
 	// TODO: 15.07.2020 move rocks to their own class, like metals have
 	@Override
