@@ -60,7 +60,7 @@ public class MaterialMineralGalena extends MaterialMineralBase
 		return -1;
 	}
 
-	protected static int baseColor = 0xffffff;
+	protected static int baseColor = 0x857F83;
 
 	@Override
 	public int getColor(int temperature)

@@ -33,7 +33,6 @@ public class WaterRegionController {
         this.dimensionName = DimensionType.getKey(worldIn.getDimension().getType()).toString();
         this.rand = new Random();
 
-        // Vars from config
         lavaBlock = Blocks.LAVA.getDefaultState();
         waterBlock = Blocks.WATER.getDefaultState();
         waterRegionThreshold = NoiseUtil.simplexNoiseOffsetByPercent(-1f, 40f / 100f);

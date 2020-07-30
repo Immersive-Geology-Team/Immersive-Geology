@@ -10,7 +10,8 @@ import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.climate.ClimateIG;
-import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;

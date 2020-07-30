@@ -18,6 +18,7 @@
     "immersivegeology:item_dust_tungsten",
     "immersivegeology:item_dust_vanadium",
     "immersivegeology:item_dust_zirconium",
+    "immersivegeology:item_dust_zinc",
     "immersivegeology:item_dust_constantan",
     "immersivegeology:item_dust_electrum",
     "immersivegeology:item_dust_steel",
@@ -40,6 +41,11 @@
     "immersivegeology:item_dust_pyrolusite",
     "immersivegeology:item_dust_rocksalt",
     "immersivegeology:item_dust_thorite",
-    "immersivegeology:item_dust_uraninite"
+    "immersivegeology:item_dust_uraninite",
+    "immersivegeology:item_dust_sphalerite",
+    "immersivegeology:item_dust_ullmannite",
+    "immersivegeology:item_dust_galena",
+    "immersivegeology:item_dust_vanadinite",
+    "immersivegeology:item_dust_kaolinite"
   ]
 }

@@ -31,7 +31,7 @@ public class CaveCarverBuilder {
 	 * @param config   the config
 	 */
 	public CaveCarverBuilder ofTypeFromConfig(CaveType caveType) {
-		this.settings.setLiquidAltitude(15);
+		this.settings.setLiquidAltitude(12);
 		this.settings.setReplaceFloatingGravel(true);
 		this.settings.getNoiseSettings().setFractalType(FastNoise.FractalType.RigidMulti);
 		switch (caveType) { 

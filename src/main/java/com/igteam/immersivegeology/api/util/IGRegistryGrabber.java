@@ -4,10 +4,15 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
+
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * concept, design, basically everything by
@@ -33,6 +38,24 @@ public class IGRegistryGrabber
 		return IGContent.registeredIGItems.getOrDefault(builder.toString(), IGContent.registeredIGItems.values().stream().findFirst().get());
 	}
 
+
+	/**
+	 * @apiNote This function is a wrapper to allow you to use the EnumMaterials itself as a param, in place of using EnumMaterials.VALUE.material
+	 * @param type of block
+	 * @param EnumMaterial type that the block is made of
+	 * @return item that matches the given type and materials
+	 */
+	public static IGBaseBlock grabBlockAlt(@Nonnull MaterialUseType type, @Nonnull EnumMaterials... materials) {
+		
+		List<EnumMaterials> listEnumMats=Arrays.asList(materials);
+		
+		Stream<Material> streamMats = listEnumMats.stream().map(m->m.material);
+		
+		Material[] mats = streamMats.toArray(size -> new Material[materials.length]);
+		
+		return grabBlock(type, mats);
+	}
+	
 	/**
 	 *
 	 * @param type of the block

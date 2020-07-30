@@ -27,7 +27,7 @@ public enum EnumMaterials
 	Iron(new MaterialMetalIron()),
 	Lead(new MaterialMetalLead()),
 	Manganese(new MaterialMetalManganese()),
-	Nickel(new MaterialMetalNickel()),
+	Nickel(new MaterialMetalNickel()), 
 	Platinum(new MaterialMetalPlatinum()),
 	Silver(new MaterialMetalSilver()),
 	Cobalt(new MaterialMetalCobalt()),
@@ -37,7 +37,8 @@ public enum EnumMaterials
 	Tungsten(new MaterialMetalTungsten()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
-
+	Zinc(new MaterialMetalZinc()),
+	
 	Constantan(new MaterialMetalConstantan()),
 	Electrum(new MaterialMetalElectrum()),
 	Steel(new MaterialMetalSteel()),
@@ -65,7 +66,14 @@ public enum EnumMaterials
 	RockSalt(new MaterialMineralRockSalt()),
 	Thorite(new MaterialMineralThorianite()),
 	Uraninite(new MaterialMineralUraninite()),
-
+	Sphalerite(new MaterialMineralSphalerite()),
+	Ullmannite(new MaterialMineralUllmannite()),
+	Galena(new MaterialMineralGalena()),
+	Vanadinite(new MaterialMineralVanadinite()),
+	//Minerals that spawn in such a large quantity that we don't need an 'orebearing' variant, this is where most clay types will end up!
+	Kaolinite(new MaterialMineralKaolinite()),
+	
+	
 	//Fluids
 	Water(new MaterialFluidWater()),
 
@@ -81,13 +89,13 @@ public enum EnumMaterials
 	Gabbros(new MaterialStoneGabbros()),
 	Marble(new MaterialStoneMarble()),
 	Limestone(new MaterialStoneLimestone()),
-	Pegamite(new MaterialStonePegamite()),
+	Pegmatite(new MaterialStonePegmatite()),
 	Regolith(new MaterialStoneRegolith());
-
+	
 	public final Material material;
 
 	EnumMaterials(Material material)
-	{
+	{ 
 		this.material = material;
 	}
 

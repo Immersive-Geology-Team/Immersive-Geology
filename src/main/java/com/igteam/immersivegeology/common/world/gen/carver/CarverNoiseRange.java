@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
-import com.igteam.immersivegeology.common.world.noise.NoiseCube;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseCube;
 
 public class CarverNoiseRange {
     // Bounds of a range of noise values

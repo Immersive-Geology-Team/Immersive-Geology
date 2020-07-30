@@ -3,6 +3,8 @@ package com.igteam.immersivegeology.common.world.layer;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
+
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class BiomeLayerData
 
 	private Biome lbiome;
 	private float baseHardnessMod;
-
+	
 	public BiomeLayerData(Biome biome, float baseHardnessMod)
 	{
 		this.lbiome = biome;
@@ -147,5 +149,47 @@ public class BiomeLayerData
 	{
 		// TODO Auto-generated method stub
 		return this.layerMap.size();
+	}
+
+	
+	
+	public BiomeLayerData addLayerData(IGBaseBlock...layerBlocks) {
+		for(IGBaseBlock layerBlock : layerBlocks) {
+			addLayer(layerBlock);
+		}
+		return this;
+	}
+	
+	/**
+	 * @apiNote Only use after layer has been added!
+	 * @param layerID The lowest ID is 1, it relates to the lowest layer in the world
+	 * @param objects - input the EnumMaterial type before you input the float rarity
+	 */
+	public BiomeLayerData addLayerOreData(int layerID, Object...objects) {
+		for(int index = 0; index < (objects.length - 1); index+=2) {
+			addMachineOre(layerID, (float)objects[index+1], (EnumMaterials) objects[index]);
+		} 
+		
+		return this;
+	}
+	
+	/**
+	 * @apiNote Only use after layer has been added!
+	 * @param layerID The lowest ID is 1, it relates to the lowest layer in the world
+	 * @param objects - input the EnumMaterial type before you input the float rarity
+	 */
+	public BiomeLayerData addLayerOreData(int[] layerIDs, Object...objects) {
+		
+		for(int layerID : layerIDs) {
+			for(int index = 0; index < (objects.length - 1); index+=2) {
+				addMachineOre(layerID, (float)objects[index+1], (EnumMaterials) objects[index]);
+			} 
+		}
+		return this;
+	}
+
+	public BiomeLayerData build() {
+		settleLayers();
+		return this;
 	}
 }

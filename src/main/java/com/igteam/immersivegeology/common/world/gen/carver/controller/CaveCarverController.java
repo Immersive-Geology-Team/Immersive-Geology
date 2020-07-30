@@ -16,7 +16,8 @@ import com.igteam.immersivegeology.common.world.gen.carver.builder.VanillaCaveCa
 import com.igteam.immersivegeology.common.world.gen.carver.util.CaveType;
 import com.igteam.immersivegeology.common.world.gen.carver.util.ColPos;
 import com.igteam.immersivegeology.common.world.noise.FastNoise;
-import com.igteam.immersivegeology.common.world.noise.NoiseColumn;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseColumn;
+
 import static com.igteam.immersivegeology.common.world.gen.carver.util.CarverUtils.isPosInWorld;
 
 
@@ -46,7 +47,7 @@ public class CaveCarverController {
             .bottomY(40)
             .topY(128)
             .density(17)
-            .liquidAltitude(15)
+            .liquidAltitude(12)
             .replaceGravel(true)
             .floodedUnderground(true)
             .build();
@@ -79,7 +80,7 @@ public class CaveCarverController {
             .topY(128)
             .density(9)
             .priority(0)
-            .liquidAltitude(15)
+            .liquidAltitude(12)
             .replaceGravel(true)
             .floodedUnderground(true)
             .build());

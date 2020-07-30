@@ -16,7 +16,7 @@ import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
-import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -45,7 +45,7 @@ import java.util.Random;
 public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGenerationSettings>
 {
 
-	public static WorldLayerData data;
+	public static WorldLayerData data = WorldLayerData.instance;
 
 	private static final double[] PARABOLIC_FIELD = Util.make(new double[9*9], array -> {
 		for(int x = 0; x < 9; x++)
@@ -69,7 +69,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		Random seedGenerator = new Random(world.getSeed());
 		this.surfaceDepthNoise = usePerlin?new PerlinNoiseGenerator(seedGenerator, 4)
 				: new OctavesNoiseGenerator(seedGenerator, 4);
-		data = new WorldLayerData();
 		final long biomeNoiseSeed = seedGenerator.nextLong();
 
 		this.biomeNoiseMap = new HashMap<>();
@@ -329,7 +328,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							if((y <= (totHeight*l)/lc)
 									&&(y >= (((totHeight*l)/lc)-((totHeight*l)/lc)/l)))
 							{
-								replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material);
+								replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegmatite.material);
 								for(int randomLevel = 0; randomLevel < 3; randomLevel++)
 								{
 

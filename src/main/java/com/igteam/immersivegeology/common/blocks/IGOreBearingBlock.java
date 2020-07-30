@@ -97,6 +97,7 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 				}
 				else
 				{
+					//TODO find out how to store state in item (this.asItem())?
 					worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 				}
 			}

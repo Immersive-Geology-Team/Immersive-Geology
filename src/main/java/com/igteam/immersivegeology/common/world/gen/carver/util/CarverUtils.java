@@ -17,6 +17,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
@@ -37,10 +38,10 @@ public class CarverUtils {
     private static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
     private static final BlockState RED_SANDSTONE = Blocks.RED_SANDSTONE.getDefaultState();
 
-    public static boolean isPosInWorld(ColPos pos, IWorld world) {
+	public static boolean isPosInWorld(ColPos pos, IWorld world) {
         return world.chunkExists(pos.getX() >> 4, pos.getZ() >> 4);
-   }
-    
+    }
+ 	
     public static void carveBlock(IChunk chunkIn, BlockPos blockPos, BlockState airBlockState, BlockState liquidBlockState, int liquidAltitude, boolean replaceGravel, BitSet carvingMask) {
         // Mark block as processed - for use by features
         int bitIndex = (blockPos.getX() & 0xF) | ((blockPos.getZ() & 0xF) << 4) | (blockPos.getY() << 8);
@@ -113,6 +114,7 @@ public class CarverUtils {
      * @param blockPos         The block's position - can be with real (absolute) or chunk-local coordinates
      * @param liquidBlockState the BlockState to use for liquids. May be null if in buffer zone between liquid regions
      * @param liquidAltitude   altitude at and below which air is replaced with liquidBlockState
+     * @param replaceGravel    should we replace floating gravel with rock as we carve caves?
      * @param carvingMask      BitSet that keeps track of which blocks have already been dug.
      */
     public static void carveFloodedBlock(IChunk chunkIn, Random rand, BlockPos.MutableBlockPos blockPos, BlockState liquidBlockState, int liquidAltitude, boolean replaceGravel, BitSet carvingMask) {

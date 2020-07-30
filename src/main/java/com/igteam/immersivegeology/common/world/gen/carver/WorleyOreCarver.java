@@ -20,7 +20,7 @@ import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData.LayerOre;
-import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
@@ -194,20 +194,20 @@ public class WorleyOreCarver
 													
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;
-
+														
 													if(finalNoise > NOISE_THRESHOLD)
 													{
 														int richness = 1;
 
-														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.85)
+														if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.73)
 														{
 															richness = 3; // DENSE
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.45)
+														else if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.55)
 														{
 															richness = 2; // RICH
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.3)
+														else if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.3)
 														{
 															richness = 1; // NORMAL
 														}

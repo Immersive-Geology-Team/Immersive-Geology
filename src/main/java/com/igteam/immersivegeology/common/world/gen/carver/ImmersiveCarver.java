@@ -18,6 +18,11 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 
+/*
+ * This carver is a modified version of YungsBetterCaves BetterCavesCarver.java
+ * I've done my best to adhere to the GNU General Public License Version 3
+ */
+
 public class ImmersiveCarver {
     private IWorld world;
     public long seed = 0;
@@ -60,6 +65,7 @@ public class ImmersiveCarver {
                         chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x, z));
             }
         }
+        
         // Determine biomes in this chunk - used for flooded cave checking
         Map<Long, IGBiome> biomeMap = new HashMap<>();
         for (int x = chunkX * 16 - 2; x <= chunkX * 16 + 17; x++) {
@@ -70,15 +76,16 @@ public class ImmersiveCarver {
                 }
             }
         }
+        
         // Determine liquid blocks for this chunk
         BlockState[][] liquidBlocks = waterCarver.getLiquidBlocksForChunk(chunkX, chunkZ);
  
         // Carve chunk
         caveCarver.carveChunk(chunkIn, chunkX, chunkZ, surfaceAltitudes, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
-        worleyCaveCarver.carve(chunkIn, chunkX << 4, chunkZ << 4, liquidBlocks, airCarvingMask);
+        worleyCaveCarver.carve(chunkIn, chunkX << 4, chunkZ << 4, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
        // ravineController.carveChunk(chunkIn, chunkX, chunkZ, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
 
-        // Set carving masks for features to use
+        // Set carving masks for features to use 
         ((ChunkPrimer) chunkIn).setCarvingMask(GenerationStage.Carving.AIR, airCarvingMask);
         ((ChunkPrimer) chunkIn).setCarvingMask(GenerationStage.Carving.LIQUID, liquidCarvingMask);
     }
@@ -86,8 +93,8 @@ public class ImmersiveCarver {
     public void setWorld(IWorld worldIn) {
         this.world = worldIn;
         this.caveCarver.setWorld(worldIn);
-       // this.cavernCarverController.setWorld(worldIn);
         this.waterCarver.setWorld(worldIn);
+        this.worleyCaveCarver.setWorld(worldIn);
        // this.ravineController.setWorld(worldIn);
     }
 

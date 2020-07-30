@@ -1,49 +1,33 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import com.igteam.immersivegeology.common.world.IGLib;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
-import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.carver.util.CarverUtils;
 import com.igteam.immersivegeology.common.world.gen.carver.util.ColPos;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
-import com.igteam.immersivegeology.common.world.noise.NoiseColumn;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 
 public class WorleyCaveCarver {
 	// number of vertical samples to take, noise sampled every 4 blocks, then
 	// interpolated
 	private static final int SAMPLE_HEIGHT = 26;
-	// depth to fill the lower levers with a liquid
-	private static int LIQUID_DEPTH_MAX = 10;
-	private static int LIQUID_DEPTH_MIN = 0;
+
 	private static final float NOISE_THRESHOLD = 0.4f;
 	private static float HEIGHT_FADE_THRESHOLD = 72;
-
-	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
-	private static final BlockState AIR = Blocks.CAVE_AIR.getDefaultState();
-	private static final BlockState WATER = Blocks.WATER.getDefaultState();
-	private static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-
-	// biomes to check!
-	private static final IGBiome OCEAN = IGBiomes.OCEAN;
-	private static final IGBiome FLOODED_MOUNTAINS = IGBiomes.FLOODED_MOUNTAINS;
-	private static final IGBiome OCEAN_DEEP = IGBiomes.DEEP_OCEAN;
-	private static final IGBiome OCEAN_EDGE = IGBiomes.OCEAN_EDGE;
-	private static final IGBiome OCEAN_DEEP_VOLCANIC = IGBiomes.DEEP_OCEAN_VOLCANIC;
 
 	// size of the cave intrest points!
 	private static final float FEATURE_SIZE = 24;
@@ -57,10 +41,9 @@ public class WorleyCaveCarver {
 		};
 	}
 
-	@SuppressWarnings("PointlessArithmeticExpression")
-	public void carve(IChunk chunkIn, int chunkX, int chunkZ, BlockState[][] liquidBlocks, BitSet bitmask) {
+	public void carve(IChunk chunkIn, int chunkX, int chunkZ, BlockState[][] liquidBlocks, Map<Long, IGBiome> biomeMap, BitSet airBitmask, BitSet liquidBitmask) {
 		float[] noiseValues = new float[5 * 5 * SAMPLE_HEIGHT];
-
+		
 		// Sample initial noise values
 		for (int x = 0; x < 5; x++) {
 			for (int z = 0; z < 5; z++) {
@@ -69,7 +52,9 @@ public class WorleyCaveCarver {
 				}
 			}
 		}
-
+		
+		ColPos.MutableColPos mutablePos = new ColPos.MutableColPos();
+		
 		float[] section = new float[16 * 16];
 		float[] prevSection = null;
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -100,8 +85,6 @@ public class WorleyCaveCarver {
 									0.25f * sz);
 						}
 					}
-					BlockState replacementAir = AIR;
-
 					if (prevSection != null) {
 						// We aren't on the first section, so we need to interpolate between sections,
 						// and assign blocks from the previous section up until this one
@@ -119,6 +102,27 @@ public class WorleyCaveCarver {
 									pos.setPos(chunkX + x0, yPos, chunkZ + z0);
 									int localX = startX + (x0 / 4);
 			                        int localZ = startZ + (z0 / 4);
+			                        
+			                        ColPos colPos = new ColPos(pos.getX(), pos.getZ());
+			                        boolean flooded = biomeMap.get(colPos.toLong()).getCategory() == Biome.Category.OCEAN;
+			                        
+			                        if (flooded) {
+			                        	//TODO Error found with the isPosInWorld, suspect the colPos
+			                        	boolean east  = true;//isPosInWorld(mutablePos.setPos(colPos).move(Direction.EAST), chunkIn.getWorldForge());
+			                        	boolean west  = true;//isPosInWorld(mutablePos.setPos(colPos).move(Direction.WEST), world);
+			                        	boolean north = true; //isPosInWorld(mutablePos.setPos(colPos).move(Direction.NORTH), world);
+			                        	boolean south = true; //isPosInWorld(mutablePos.setPos(colPos).move(Direction.SOUTH), world);
+			                        	
+			                            if (
+			                                (east && biomeMap.get(mutablePos.setPos(colPos).move(Direction.EAST).toLong()).getCategory() != Biome.Category.OCEAN) ||
+			                                (west && biomeMap.get(mutablePos.setPos(colPos).move(Direction.WEST).toLong()).getCategory() != Biome.Category.OCEAN) ||
+			                                (north && biomeMap.get(mutablePos.setPos(colPos).move(Direction.NORTH).toLong()).getCategory() != Biome.Category.OCEAN) ||
+			                                (south && biomeMap.get(mutablePos.setPos(colPos).move(Direction.SOUTH).toLong()).getCategory() != Biome.Category.OCEAN)
+			                            ) {
+			                                continue;
+			                            }
+			                        }
+			                        
 			                        BlockState liquidBlock = liquidBlocks[localX][localZ];
 			                        
 									HEIGHT_FADE_THRESHOLD = 72;
@@ -127,122 +131,34 @@ public class WorleyCaveCarver {
 											0.25f * y0);
 									finalNoise *= heightFadeValue;
 
+									BitSet bitmask = flooded ? liquidBitmask : airBitmask;
+									
 									if (finalNoise > NOISE_THRESHOLD) {
 										// Create cave if possible
 										BlockState originalState = chunkIn.getBlockState(pos);
 										if (CarverUtils.canReplaceBlock(originalState,chunkIn.getBlockState(pos.up())) && originalState.getBlock() != Blocks.BEDROCK) {
-											
-												CarverUtils.carveBlock(chunkIn, pos, liquidBlock, 15, true, bitmask);
-											
+											 if (flooded) {
+												 CarverUtils.carveFloodedBlock(chunkIn, new Random(), pos, liquidBlock, 12, true, bitmask);
+											 } else {
+												 CarverUtils.carveBlock(chunkIn, pos, liquidBlock, 12, true, bitmask);
+											 }
 										}
 									}
 								}
 							}
 						}
-					}
-					// End of x/z iteration
+					} // End of x/z iteration
 				}
 			}
-			
 			// End of x/z loop, so move section to previous
 			prevSection = Arrays.copyOf(section, section.length);
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private IWorld world;
 	
 	public void setWorld(IWorld worldIn) {
         this.world = worldIn;
     }
-	
-	public void carveChunk(IChunk chunk, int chunkX, int chunkZ, int[][] surfaceAltitudes, BlockState[][] liquidBlocks, Map<Long, IGBiome> biomeMap, BitSet airCarvingMask, BitSet liquidCarvingMask) {
-		boolean flooded = false;
-        float smoothAmpFloodFactor = 1;
-        
-        for (int subX = 0; subX < 16 / IGLib.SUB_CHUNK_SIZE; subX++) {
-            for (int subZ = 0; subZ < 16 / IGLib.SUB_CHUNK_SIZE; subZ++) {
-                int startX = subX * IGLib.SUB_CHUNK_SIZE;
-                int startZ = subZ * IGLib.SUB_CHUNK_SIZE;
-                int endX = startX + IGLib.SUB_CHUNK_SIZE - 1;
-                int endZ = startZ + IGLib.SUB_CHUNK_SIZE - 1;
-
-                for (int y = 80; y >= 8; y--) {
-                for (int offsetX = 0; offsetX < IGLib.SUB_CHUNK_SIZE; offsetX++) {
-                    for (int offsetZ = 0; offsetZ < IGLib.SUB_CHUNK_SIZE; offsetZ++) {
-                        int localX = startX + offsetX;
-                        int localZ = startZ + offsetZ;
-                        ColPos colPos = new ColPos(chunkX * 16 + localX, chunkZ * 16 + localZ);
-                        
-                        flooded = biomeMap.get(colPos.toLong()).getCategory() == IGBiome.Category.OCEAN;
-                        smoothAmpFloodFactor = CarverUtils.getDistFactor(world, biomeMap, colPos, 2, flooded ? CarverUtils.isNotOcean : CarverUtils.isOcean);
-                        if (smoothAmpFloodFactor <= .25) { // Wall between flooded and normal caves.
-                            continue; // Continue to prevent unnecessary noise calculation 
-                        }
-
-                        BlockState liquidBlock = liquidBlocks[localX][localZ];
-                        
-                        float worleyRegionNoise = caveNoise.noise(colPos.getX(), y, colPos.getZ());
-                        	CarverNoiseRange range = new CarverNoiseRange(0,1, null);
-                        	float smoothAmp = range.getSmoothAmp(worleyRegionNoise) * smoothAmpFloodFactor;
-
-                        	BitSet carvingMask = flooded ? liquidCarvingMask : airCarvingMask;
-
-                            if (localX < 0 || localX > 15)
-                                return;
-                            if (localZ < 0 || localZ > 15)
-                                return;
-                           
-                            int topTransitionBoundary = 68 - 6;
-
-                            // Set altitude at which caverns start closing off on the bottom
-                            int bottomTransitionBoundary = 8 + 3;
-                            bottomTransitionBoundary = 8 < 10 ? 18 : 8 + 7;
-                            topTransitionBoundary = Math.max(topTransitionBoundary, 1);
-                            bottomTransitionBoundary = Math.min(bottomTransitionBoundary, 255);
-                            
-                                if (y <= 10 && liquidBlock == null)
-                                	break;
-                                
-                                List<Double> noiseBlock;
-                                boolean digBlock = false;
-
-                                // Compute a single noise value to represent all the noise values in the NoiseTuple
-                                float noise = 1;
-                                noiseBlock = new NoiseColumn().get(y).getNoiseValues();
-                                for (double n : noiseBlock)
-                                    noise *= n;
-
-                                // Adjust threshold if we're in the transition range to provide smoother transition into ceiling
-                                float noiseThreshold = 0.6f;
-                                if (y >= topTransitionBoundary)
-                                    noiseThreshold *= (float) (y - 70) / (topTransitionBoundary - 70);
-
-                                // Close off caverns at the bottom to hide bedrock and give some walkable area
-                                if (y < bottomTransitionBoundary)
-                                    noiseThreshold *= (float) (y - 8) / (bottomTransitionBoundary - 8);
-
-                                // Adjust threshold along region borders to create smooth transition
-                                if (smoothAmp < 1)
-                                    noiseThreshold *= smoothAmp;
-
-                                // Mark block for removal if the noise passes the threshold check
-                                if (noise < noiseThreshold) {
-	                                BlockPos blockPos = new BlockPos(localX, y, localZ);
-	                              
-	                                if (flooded) {
-	                                    CarverUtils.carveFloodedBlock(chunk, new Random(), new BlockPos.MutableBlockPos(blockPos), liquidBlock, 10, true, carvingMask);
-	                                } else {
-	                                    CarverUtils.carveBlock(chunk, blockPos, liquidBlock, 10, true, carvingMask);
-	                                }
-                                }
-                                
-                            
-                        }
-                    }
-                }
-            }
-        }
-	}
-	//
-	
 }

@@ -10,9 +10,9 @@ import com.igteam.immersivegeology.common.world.gen.carver.builder.CaveCarverBui
 import com.igteam.immersivegeology.common.world.gen.carver.settings.CarverSettings;
 import com.igteam.immersivegeology.common.world.gen.carver.util.CarverUtils;
 import com.igteam.immersivegeology.common.world.gen.carver.util.ColPos;
-import com.igteam.immersivegeology.common.world.noise.NoiseColumn;
-import com.igteam.immersivegeology.common.world.noise.NoiseGen;
-import com.igteam.immersivegeology.common.world.noise.NoiseTuple;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseColumn;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseGen;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseTuple;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

@@ -31,6 +31,8 @@ package com.igteam.immersivegeology.common.world.noise;
 import javax.vecmath.Vector2f; 
 import javax.vecmath.Vector3f;
 
+import com.igteam.immersivegeology.common.world.noise.ybc.INoiseLibrary;
+
 public class FastNoise implements INoiseLibrary {
     public enum NoiseType {Value, ValueFractal, Perlin, PerlinFractal, Simplex, SimplexFractal, Cellular, WhiteNoise, Cubic, CubicFractal}
     public enum Interp {Linear, Hermite, Quintic}

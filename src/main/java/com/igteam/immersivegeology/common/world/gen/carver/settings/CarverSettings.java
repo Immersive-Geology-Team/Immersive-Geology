@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.common.world.gen.carver.settings;
 
-import com.igteam.immersivegeology.common.world.noise.NoiseSettings;
+import com.igteam.immersivegeology.common.world.noise.ybc.NoiseSettings;
 
 import net.minecraft.block.BlockState;
 
