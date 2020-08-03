@@ -31,7 +31,7 @@ public class ImmersiveBiomeProvider extends BiomeProvider
 	 */
 	private final BiomeFactory biomeFactoryActual;
 
-	private Biome[] biomes = IGBiomes.getBiomes().toArray(new Biome[0]);
+	Biome[] biomes = IGBiomes.getBiomes().toArray(new Biome[0]);
 
 	public ImmersiveBiomeProvider(ImmersiveGenerationSettings settings)
 	{

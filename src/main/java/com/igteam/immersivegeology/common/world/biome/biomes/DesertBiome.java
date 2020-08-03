@@ -53,7 +53,6 @@ public class DesertBiome extends IGBiome
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
 		// TODO Auto-generated method stub
-
 		switch(part)
 		{
 			case grass:

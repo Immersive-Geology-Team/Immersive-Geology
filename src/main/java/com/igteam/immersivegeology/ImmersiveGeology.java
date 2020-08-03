@@ -17,8 +17,11 @@ import com.igteam.immersivegeology.common.world.WorldEventHandler;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
+import com.muddykat.noise.NoiseGenTester;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -66,12 +69,11 @@ public class ImmersiveGeology
 		IGContent.modConstruction();
 	}
 
-	private final WorldTypeImmersive worldType;
-	private static ImmersiveGeology INSTANCE;
-
+	public static WorldTypeImmersive worldType;
+	
 	public static WorldTypeImmersive getWorldType()
 	{
-		return INSTANCE.worldType;
+		return worldType;
 	}
 
 	@SubscribeEvent
@@ -100,9 +102,9 @@ public class ImmersiveGeology
 	@SubscribeEvent
 	public void loadComplete(FMLLoadCompleteEvent event)
 	{
-
+		
 	}
-
+	
 	@SubscribeEvent
 	public void serverStarting(FMLServerStartingEvent event)
 	{

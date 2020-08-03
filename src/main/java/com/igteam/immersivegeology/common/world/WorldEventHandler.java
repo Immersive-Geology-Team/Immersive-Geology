@@ -1,5 +1,8 @@
 package com.igteam.immersivegeology.common.world;
 
+import java.util.Arrays;
+import java.util.Random;
+
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
@@ -10,20 +13,24 @@ import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.climate.ClimateIG;
-import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
+import com.muddykat.noise.NoiseGenTester;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -43,9 +50,7 @@ public class WorldEventHandler
 
 	private boolean worldDone = false;
 	private int seed;
-
-	public static WorldLayerData data;
-
+	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onWorldLoad(WorldEvent.Load event)
 	{
@@ -56,10 +61,13 @@ public class WorldEventHandler
 				if(!worldDone)
 				{
 					worldDone = true;
-					data = new WorldLayerData(); // TODO for some reason blocks passed through this end up null
+					
 				}
 			}
 		}
+		
+		NoiseGenTester gen = new NoiseGenTester();
+ 		gen.generate(event.getWorld().getSeed());
 	}
 
 	@SubscribeEvent
@@ -248,4 +256,14 @@ public class WorldEventHandler
 	 * Boolean.valueOf(true)) .with(IGBaseBlock.HARDNESS, Integer.valueOf( (int)
 	 * Math.min(256, Math.max(0, nh)))), true); } } } } } } } } } } }
 	 */
+	
+	
+	//Sourced from TerraFirmaCraft - ForgeEventHandler (1.15) code
+	 @SubscribeEvent
+    public static void onCreateWorldSpawn(WorldEvent.CreateSpawnPosition event)
+    {
+		 event.setCanceled(true);
+		 int yPos = event.getWorld().getHeight(Heightmap.Type.WORLD_SURFACE, 0, 0);
+		 event.getWorld().getWorldInfo().setSpawn(new BlockPos(0, yPos, 0));
+    }	
 }

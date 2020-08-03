@@ -20,29 +20,30 @@ public class MountainsBiome extends IGBiome
 {
 	private final float baseHeight;
 	private final float scaleHeight;
-	private final boolean isOceanMountains;
-	private final boolean isLushMountains;
-
-
-	public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains)
+	private final MountainType mountainType;
+	
+	public MountainsBiome(float baseHeight, float scaleHeight, MountainType mountainType)
 	{
-		this(baseHeight, scaleHeight, isOceanMountains, false);
-	}
-
-	public MountainsBiome(float baseHeight, float scaleHeight, boolean isOceanMountains, boolean isLushMountains)
-	{
-		super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f), 0.35f, (isOceanMountains)?0.85f: 0.6f);
+		super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f), 0.35f, (mountainType == MountainType.FLOODED)?0.85f: 0.6f);
 
 		this.baseHeight = baseHeight;
 		this.scaleHeight = scaleHeight;
-		this.isOceanMountains = isOceanMountains;
-		this.isLushMountains = isLushMountains;
-
-		if(isLushMountains)
-		{
-			IGDefaultBiomeFeatures.addLeafShurbs(this);
+		
+		this.mountainType = mountainType;
+		
+		switch(mountainType) {
+			case LUSH:
+				IGDefaultBiomeFeatures.addLeafShurbs(this);
+			break;
+			case FROZEN:
+				DefaultBiomeFeatures.addIcebergs(this);
+				DefaultBiomeFeatures.addBlueIce(this);
+				DefaultBiomeFeatures.addFreezeTopLayer(this);
+			break;
+			default:
+			break;
 		}
-
+		
 		IGDefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addTaigaRocks(this);
 
@@ -62,8 +63,29 @@ public class MountainsBiome extends IGBiome
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
 		// TODO Auto-generated method stub
-		if(isLushMountains)
+		switch(mountainType)
 		{
+		case FROZEN:
+			switch(part) {
+			case grass:
+				return Blocks.PACKED_ICE.getDefaultState();
+			case dirt:
+				return Blocks.BLUE_ICE.getDefaultState();
+			default:
+				return Blocks.ICE.getDefaultState();
+			}
+		case DESERT:
+			switch(part)
+			{
+				case grass:
+					return Blocks.SAND.getDefaultState();
+				case dirt:
+					return Blocks.SAND.getDefaultState();
+				default:
+					return Blocks.SANDSTONE.getDefaultState();
+			}
+
+		case LUSH:
 			switch(part)
 			{
 				case grass:
@@ -73,9 +95,7 @@ public class MountainsBiome extends IGBiome
 				default:
 					return Blocks.DIRT.getDefaultState();
 			}
-		}
-		else
-		{
+		default:
 			switch(part)
 			{
 				case grass:
@@ -85,9 +105,14 @@ public class MountainsBiome extends IGBiome
 				default:
 					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
 			}
-
-
 		}
 	}
-
+	
+	public enum MountainType {
+		FROZEN,
+		NORMAL,
+		LUSH,
+		DESERT,
+		FLOODED
+	}
 }

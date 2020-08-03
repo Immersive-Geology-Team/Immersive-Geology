@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.biomes.*;
+import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome.MountainType;
+import com.igteam.immersivegeology.common.world.biome.biomes.PlainsBiome.PlainsType;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import net.minecraft.world.biome.Biome;
@@ -42,7 +44,7 @@ public final class WorldGenRegistryEvents
 				new OceanBiome(true).setRegistryName("deep_ocean_volcanic"),
 				new OceanBiome(true).setRegistryName("ocean_edge"),
 
-				new PlainsBiome(-4, 10).setRegistryName("plains"),
+				new PlainsBiome(-4, 10, PlainsType.DEFAULT).setRegistryName("plains"),
 				new DesertBiome(-5, 20, false).setRegistryName("desert"),
 				new DesertBiome(-5, 10, true).setRegistryName("arctic_desert"),
 				new LowlandsBiome().setRegistryName("lowlands"),
@@ -51,22 +53,28 @@ public final class WorldGenRegistryEvents
 
 				new HillsBiome(28).setRegistryName("rolling_hills"),
 				new BadlandsBiome().setRegistryName("badlands"),
-				new PlainsBiome(20, 30).setRegistryName("plateau"),
-				new MountainsBiome(48, 28, false).setRegistryName("old_mountains"),
-
-				new MountainsBiome(48, 56, false).setRegistryName("mountains"),
-				new MountainsBiome(30, 64, true).setRegistryName("flooded_mountains"),
-				new MountainsBiome(48, 64, true, true).setRegistryName("lush_mountains"),
+				new PlainsBiome(20,30, PlainsType.DEFAULT).setRegistryName("plateau"),
+				new PlainsBiome(20,30, PlainsType.GLACIER).setRegistryName("glacier"),
+				
+				new MountainsBiome(48, 28, MountainType.NORMAL).setRegistryName("old_mountains"),
+				
+				new MountainsBiome(48, 56, MountainType.NORMAL).setRegistryName("mountains"),
+				new MountainsBiome(30, 64, MountainType.FLOODED).setRegistryName("flooded_mountains"),
+				new MountainsBiome(48, 64, MountainType.LUSH).setRegistryName("lush_mountains"),
+				new MountainsBiome(48, 64, MountainType.FROZEN).setRegistryName("frozen_mountains"),
+				
+				new MountainsBiome(35, 30, MountainType.DESERT).setRegistryName("mountain_dunes"),
+				 
 				new CanyonsBiome(-7, 36).setRegistryName("canyons"),
 
 				new ShoreBiome(false).setRegistryName("shore"),
 				new ShoreBiome(true).setRegistryName("stone_shore"),
 
-				new MountainsBiome(36, 34, false).setRegistryName("mountains_edge"),
+				new MountainsBiome(36, 34, MountainType.NORMAL).setRegistryName("mountains_edge"),
 				new LakeBiome().setRegistryName("lake"),
 				new OasisBiome().setRegistryName("oasis"),
 				new RiverBiome().setRegistryName("river")
 		);
-	}
+	}///only oceans at moment look into later
 
 }

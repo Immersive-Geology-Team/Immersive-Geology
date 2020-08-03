@@ -14,7 +14,7 @@ public enum RemoveOceanLayer implements ICastleTransformer
 		{
 			if(context.random(3)==0)
 			{
-				return IGLayerUtil.PLATEAU;
+				return IGLayerUtil.DESERT;
 			}
 			return IGLayerUtil.PLAINS;
 		}
