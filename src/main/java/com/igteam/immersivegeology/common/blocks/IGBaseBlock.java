@@ -16,6 +16,7 @@ import net.minecraft.item.*;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -77,9 +78,9 @@ public class IGBaseBlock extends Block implements IIGBlock
 		}
 		lightOpacity = 15;
 	}
-
+	
 	public float naturalHardness = 1f;
-
+	
 	@Override
 	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{

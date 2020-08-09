@@ -120,8 +120,6 @@ public class NoiseGenTester {
 		IAreaFactory<LazyArea> areaFactoryActual = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(1029L),
 				mainLayer);
 		
-		
-		
 		IMAGES.color(this::biomeColor).dimensions(1000);
     	IMAGES.draw("world_map_" + String.valueOf(attachedID), mainLayer);
 

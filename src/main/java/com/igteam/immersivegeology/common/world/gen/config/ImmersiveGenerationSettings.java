@@ -18,7 +18,7 @@ public class ImmersiveGenerationSettings extends GenerationSettings implements I
 
 	public int getIslandFrequency()
 	{
-		return 6; // todo: config
+		return 3; // todo: config //Low island amount, more landmass
 	}
 
 	public int getBiomeZoomLevel()

@@ -147,7 +147,7 @@ public class IGLayerUtil
 		IAreaFactory<LazyArea> areaFactoryActual = ZoomLayer.NORMAL.apply(contextFactory.apply(1029L),
 				mainLayer);
 
-		return Arrays.asList(mainLayer, areaFactoryActual);
+		return Arrays.asList(mainLayer, mainLayer);
 	}
 	
 	public static <A extends IArea, C extends IExtendedNoiseRandom<A>> IAreaFactory<A> repeat(

@@ -66,8 +66,8 @@ public class WorldEventHandler
 			}
 		}
 		
-		NoiseGenTester gen = new NoiseGenTester();
- 		gen.generate(event.getWorld().getSeed());
+		//NoiseGenTester gen = new NoiseGenTester();
+ 		//gen.generate(event.getWorld().getSeed());
 	}
 
 	@SubscribeEvent
@@ -198,72 +198,5 @@ public class WorldEventHandler
 	 * event) { if (event.getInfo().getFluidState().isTagged(FluidTags.WATER)) {
 	 * GlStateManager.fogMode(GlStateManager.FogMode.LINEAR);
 	 * event.setDensity(0.5f); event.setCanceled(true); } }
-	 */
-
-	/*
-	 * Part of old stone replace method
-	 *
-	 * @SubscribeEvent(priority = EventPriority.LOWEST) public void
-	 * onChunkPopulate(ChunkEvent.Load event) {
-	 *
-	 *
-	 * if (!worldDone || event.getWorld() == null || event.getChunk() == null)
-	 * return;
-	 *
-	 * if (EffectiveSide.get() == LogicalSide.SERVER) {
-	 *
-	 * WorldType type = event.getWorld().getWorldInfo().getGenerator();
-	 *
-	 * if (!WorldChunkChecker.hasAlreadyBeenIGfied(event.getChunk())) { IChunk chunk
-	 * = event.getChunk();
-	 *
-	 * //this.replaceStone(chunk);
-	 *
-	 * ((Chunk) chunk).setModified(true); ((Chunk) chunk).markDirty();
-	 * WorldChunkChecker.setDone(event.getChunk()); } } }
-	 */
-
-	/*
-	 * Old Layer Method
-	 *
-	 * private void replaceStone(IChunk chunk) {
-	 *
-	 * int xPos = chunk.getPos().x * 16; int zPos = chunk.getPos().z * 16;
-	 *
-	 * for (ChunkSection storage : chunk.getSections()) { if (storage != null &&
-	 * !storage.isEmpty()) { int yPos = storage.getYLocation();
-	 *
-	 * IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK,
-	 * EnumMaterials.Rhyolite.material);
-	 *
-	 * for (BiomeLayerData b : data.worldLayerData) { for (int x = 0; x < 16; x++) {
-	 * for (int z = 0; z < 16; z++) { for (int y = 0; y < 16; ++y) { Biome biome =
-	 * chunk.getBiome(new BlockPos(x, y, z)); float trueY = (yPos + y); if
-	 * (b.getLbiome() == biome) { int lc = b.getLayerCount(); for (int l = lc; l >
-	 * 0; l--) { int totalHeight = 256; if ((trueY < (totalHeight * l) / lc) &&
-	 * (trueY >= (((totalHeight * l) / lc) - ((totalHeight * l) / lc) / l))) {
-	 * replaceBlock = b.getLayerBlock(l);
-	 *
-	 * Block oldBlock = storage.getBlockState(x, y, z).getBlock();
-	 *
-	 * // setting the block in here isn't super efficient, but it works. int nh =
-	 * (int) replaceBlock.getDefaultHardness();
-	 *
-	 * nh = (int) (12 - (Math.pow(Math.E, 2.6) * Math.log(trueY / 135)));
-	 *
-	 * if (oldBlock == Blocks.STONE) { storage.setBlockState(x, y, z,
-	 * replaceBlock.getDefaultState() .with(IGBaseBlock.NATURAL,
-	 * Boolean.valueOf(true)) .with(IGBaseBlock.HARDNESS, Integer.valueOf( (int)
-	 * Math.min(256, Math.max(0, nh)))), true); } } } } } } } } } } }
-	 */
-	
-	
-	//Sourced from TerraFirmaCraft - ForgeEventHandler (1.15) code
-	 @SubscribeEvent
-    public static void onCreateWorldSpawn(WorldEvent.CreateSpawnPosition event)
-    {
-		 event.setCanceled(true);
-		 int yPos = event.getWorld().getHeight(Heightmap.Type.WORLD_SURFACE, 0, 0);
-		 event.getWorld().getWorldInfo().setSpawn(new BlockPos(0, yPos, 0));
-    }	
+	 */	
 }
