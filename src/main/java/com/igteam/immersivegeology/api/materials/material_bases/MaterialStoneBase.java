@@ -35,6 +35,8 @@ public abstract class MaterialStoneBase extends Material
 			case COLUMN:
 			case TILES:
 			case CHUNK:
+			case ROCK_BIT:
+			case ORE_BIT:
 				return true;
 		}
 		return false;

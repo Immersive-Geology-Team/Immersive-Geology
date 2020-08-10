@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -29,7 +30,7 @@ public class MaterialMetalSilver extends MaterialMetalBase
 	@Override
 	public String getModID()
 	{
-		return ImmersiveEngineering.MODID;
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override

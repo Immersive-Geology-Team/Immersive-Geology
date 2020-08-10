@@ -57,6 +57,18 @@ public enum MaterialUseType implements IStringSerializable
 		}
 	},
 	POLISHED_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	ROCK_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
+	ORE_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw)
+			{
+				@Override
+				public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
+				{
+					List<IGMaterialItem> list = new ArrayList<>();
+					//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
+					EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
+					return list.toArray(new IGMaterialItem[]{});
+				}
+			},
 	//Metal/crystal items
 	GEAR(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	INGOT(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
