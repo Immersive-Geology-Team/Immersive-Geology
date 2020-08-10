@@ -20,12 +20,12 @@ public class DesertBiome extends IGBiome
 
 	private final boolean isCold;
 
-	public DesertBiome(float minHeight, float maxHeight, boolean isCold)
+	public DesertBiome(float minHeight, float maxHeight, boolean cold)
 	{
-		super(new Builder().category(Category.DESERT).precipitation(RainType.NONE).downfall(0f).temperature(0.95f), 0.95f, 0f);
+		super(new Builder().category((cold) ? Category.ICY : Category.DESERT).precipitation((cold) ? RainType.SNOW : RainType.NONE).downfall(0f).temperature((cold) ? 0.05f : 0.95f), 0.95f, 0.1f);
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
-		this.isCold = isCold;
+		this.isCold = cold;
 
 		IGDefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addStructures(this);
@@ -37,8 +37,9 @@ public class DesertBiome extends IGBiome
 		}
 		else
 		{
+			DefaultBiomeFeatures.addLakes(this);
 			DefaultBiomeFeatures.addIcebergs(this);
-			DefaultBiomeFeatures.addFreezeTopLayer(this);
+			DefaultBiomeFeatures.addFreezeTopLayer(this);			
 		}
 	}
 
@@ -53,14 +54,26 @@ public class DesertBiome extends IGBiome
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
 		// TODO Auto-generated method stub
-		switch(part)
-		{
-			case grass:
-				return Blocks.SAND.getDefaultState();
-			case dirt:
-				return Blocks.SANDSTONE.getDefaultState();
-			default:
-				return Blocks.SANDSTONE.getDefaultState();
+		if(!isCold) {
+			switch(part)
+			{
+				case grass:
+					return Blocks.SAND.getDefaultState();
+				case dirt:
+					return Blocks.SANDSTONE.getDefaultState();
+				default:
+					return Blocks.SANDSTONE.getDefaultState();
+			}
+		} else {
+			switch(part)
+			{
+				case grass:
+					return Blocks.SNOW_BLOCK.getDefaultState();
+				case dirt:
+					return Blocks.PACKED_ICE.getDefaultState();
+				default:
+					return Blocks.ICE.getDefaultState();
+			}
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class IGLayerUtil
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
 	public static final int DESERT = getId(IGBiomes.DESERT);
 
-	public static final int ARCTIC_DESERT = getId(IGBiomes.DESERT);
+	public static final int ARCTIC_DESERT = getId(IGBiomes.ARCTIC_DESERT);
 	public static final int GLACIER = getId(IGBiomes.GLACIER);
 	public static final int FROZEN_MOUNTAINS = getId(IGBiomes.FROZEN_MOUNTAINS);
 	

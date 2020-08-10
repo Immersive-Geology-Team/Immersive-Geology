@@ -23,29 +23,7 @@ public class IslandLayer implements IAreaTransformer0
 		}
 		else
 		{
-			int TEMPERATE = IGLayerUtil.PLAINS;
-			int HOT = IGLayerUtil.DESERT;
-			int COLD = IGLayerUtil.LOWLANDS;
-			int FROZEN = IGLayerUtil.ARCTIC_DESERT;
-			int WARM = IGLayerUtil.LOW_CANYONS;
-			
-			int TEMPERATURE_BIOME = TEMPERATE;
-			
-			int zmod = (z >= 0) ? z % 4 : z % -4;
-			if(zmod < -2) {
-				TEMPERATURE_BIOME = COLD;
-			}
-			if(zmod < -3) {
-				TEMPERATURE_BIOME = FROZEN;
-			}
-			if(zmod > 2) {
-				TEMPERATURE_BIOME = WARM;
-			}
-			if(zmod > 3) {
-				TEMPERATURE_BIOME = HOT;
-			}
-			
-			return random.random(islandFrequency)==0 ? TEMPERATURE_BIOME : IGLayerUtil.DEEP_OCEAN;
+			return random.random(islandFrequency)==0 ? IGLayerUtil.PLAINS : IGLayerUtil.DEEP_OCEAN;
 		}
 	}
 }
