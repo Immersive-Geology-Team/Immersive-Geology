@@ -23,6 +23,7 @@ public enum ElevationLayer implements IAreaTransformer1, IDimOffset0Transformer
 		if(!IGLayerUtil.isOcean(value))
 		{
 			int temp = TEMPERATE.get(context.random(TEMPERATE.size()));
+			
 			int ht   = HOT.get(context.random(HOT.size()));
 			int cld  = COLD.get(context.random(COLD.size()));
 			int fzn  = FROZEN.get(context.random(FROZEN.size()));
@@ -45,6 +46,10 @@ public enum ElevationLayer implements IAreaTransformer1, IDimOffset0Transformer
 			
 			if(zmod == -3) {
 				TEMPERATURE_BIOME = fzn;
+			}
+			
+			if(z == 0 || z == 1 || z == -1) {
+				TEMPERATURE_BIOME = (context.random(1) == 0) ? temp : (context.random(1) == 0) ? cld : wrm;
 			}
 			
 			return TEMPERATURE_BIOME;

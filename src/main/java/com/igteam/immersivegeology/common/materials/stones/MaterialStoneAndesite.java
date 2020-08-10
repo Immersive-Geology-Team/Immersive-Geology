@@ -33,7 +33,10 @@ public class MaterialStoneAndesite extends MaterialStoneBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.ALUMINIUM)
+				new ElementProportion(PeriodicTableElement.SILICON),
+				new ElementProportion(PeriodicTableElement.OXYGEN, 2),
+				new ElementProportion(PeriodicTableElement.SODIUM),
+				new ElementProportion(PeriodicTableElement.POTASSIUM, 2)
 		));
 	}
 

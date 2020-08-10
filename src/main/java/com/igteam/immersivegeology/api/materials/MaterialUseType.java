@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
+import com.igteam.immersivegeology.common.items.IGMaterialYeildItem;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
@@ -44,28 +45,46 @@ public enum MaterialUseType implements IStringSerializable
 					return getName()+"/";
 				}
 			},
-	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
-	ORE_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw)
+	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 162){
+		@Override
+		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGMaterialItem> list = new ArrayList<>();
+			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
+			list.add(new IGMaterialYeildItem(this, getStoneYeild(), getOreYeild(), material));
+			return list.toArray(new IGMaterialItem[]{});
+		}
+	},
+	ORE_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 18, 144)
 	{
 		@Override
 		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
 		{
 			List<IGMaterialItem> list = new ArrayList<>();
 			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
-			EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
+			EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialYeildItem(this, getStoneYeild(), getOreYeild(), material, enumMaterials.material)));
 			return list.toArray(new IGMaterialItem[]{});
 		}
 	},
 	POLISHED_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
-	ROCK_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
-	ORE_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw)
+	ROCK_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 40){
+		@Override
+		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGMaterialItem> list = new ArrayList<>();
+			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
+			list.add(new IGMaterialYeildItem(this, getStoneYeild(), getOreYeild(), material));
+			return list.toArray(new IGMaterialItem[]{});
+		}
+	},
+	ORE_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 8, 32)
 			{
 				@Override
 				public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
 				{
 					List<IGMaterialItem> list = new ArrayList<>();
 					//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
-					EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialResourceItem(this, material, enumMaterials.material)));
+					EnumMaterials.filterWorldGen().forEach(enumMaterials -> list.add(new IGMaterialYeildItem(this, getStoneYeild(), getOreYeild(), material, enumMaterials.material)));
 					return list.toArray(new IGMaterialItem[]{});
 				}
 			},
@@ -157,6 +176,8 @@ public enum MaterialUseType implements IStringSerializable
 	private Material blockMaterial;
 	private ItemSubGroup subGroup;
 	private UseCategory category;
+	private int stoneYeild;
+	private int oreYeild;
 
 	/**
 	 * Constructors, default is resource item in "raw" creative subtab
@@ -176,6 +197,20 @@ public enum MaterialUseType implements IStringSerializable
 	{
 		this(category, Material.AIR, sub);
 	}
+	
+	MaterialUseType(UseCategory category, ItemSubGroup sub, int stoneYeild)
+	{
+		this(category, sub, stoneYeild, 0);
+	}
+	
+	MaterialUseType(UseCategory category, ItemSubGroup sub, int stoneYeild, int oreYeild)
+	{
+		this.category = category;
+		this.subGroup = sub;
+		this.blockMaterial = Material.AIR;
+		this.stoneYeild = stoneYeild;
+		this.oreYeild = oreYeild;
+	}
 
 	MaterialUseType(UseCategory category, Material mat, ItemSubGroup sub)
 	{
@@ -184,6 +219,14 @@ public enum MaterialUseType implements IStringSerializable
 		this.blockMaterial = mat;
 	}
 
+	public int getStoneYeild() {
+		return this.stoneYeild;
+	}
+	
+	public int getOreYeild() {
+		return this.oreYeild;
+	}
+	
 	/**
 	 * @return item category, used to differentiate between resources, tools and other items
 	 */

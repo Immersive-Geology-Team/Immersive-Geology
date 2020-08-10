@@ -32,18 +32,20 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IIGSubGrou
 		StringTextComponent text = new StringTextComponent("");
 		if(hasShiftDown()||Minecraft.getInstance().gameSettings.advancedItemTooltips)
 		{
-			for(Material material : materials)
-			{
-				material.getElements().forEach(elementProportion -> text
-						.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
-						.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
-				tooltip.add(text);
-			}
+			int matAmounts = materials.length;
+			Material material = materials[(matAmounts > 1) ? 1 : 0 ];
+			
+			material.getElements().forEach(elementProportion -> text
+					.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
+					.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
+			
+			tooltip.add(text);
 		}
 	}
-
+	
 	public static boolean hasShiftDown()
 	{
-		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340)||InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
+		Minecraft mc = Minecraft.getInstance();
+		return InputMappings.isKeyDown(mc.mainWindow.getHandle(), 340)||InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
 	}
 }

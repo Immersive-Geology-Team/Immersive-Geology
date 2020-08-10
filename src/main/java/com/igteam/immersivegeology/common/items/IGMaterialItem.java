@@ -37,7 +37,6 @@ public class IGMaterialItem extends IGBaseItem
 		this.materials = materials;
 	}
 
-
 	@Override
 	public boolean hasCustomItemColours()
 	{
@@ -56,7 +55,8 @@ public class IGMaterialItem extends IGBaseItem
 		ArrayList<String> localizedNames = new ArrayList<>();
 		for(Material m : materials)
 			localizedNames.add(I18n.format("material."+m.getModID()+"."+m.getName()+".name"));
-		return new TranslationTextComponent("item."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", localizedNames.toArray(new String[localizedNames.size()]));
+		TranslationTextComponent name = new TranslationTextComponent("item."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", localizedNames.toArray(new Object[localizedNames.size()]));
+		return name;
 	}
 
 	/**
