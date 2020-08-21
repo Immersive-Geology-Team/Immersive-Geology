@@ -13,9 +13,9 @@ import java.util.Set;
 public class IGModularToolItem extends IGBaseItem implements ITool
 {
     private static final ToolType HAMMER_TOOL = ToolType.get(ImmersiveEngineering.MODID + "_hammer");
-    private static final ToolType PICKAXE_TOOL = ToolType.get("pickaxe");
-    private static final ToolType AXE_TOOL = ToolType.get("axe");
-    private static final ToolType SHOVEL_TOOL = ToolType.get("shovel");
+    private static final ToolType PICKAXE_TOOL = ToolType.PICKAXE;
+    private static final ToolType AXE_TOOL = ToolType.AXE;
+    private static final ToolType SHOVEL_TOOL = ToolType.SHOVEL;
 
     public IGModularToolItem(String name)
     {
