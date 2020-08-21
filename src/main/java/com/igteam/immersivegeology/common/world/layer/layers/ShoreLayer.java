@@ -33,11 +33,11 @@ public enum ShoreLayer implements ICastleTransformer
 				return IGLayerUtil.SHORE;
 			}
 		}
-		else if(center==IGLayerUtil.DEEP_OCEAN||center==IGLayerUtil.DEEP_OCEAN_VOLCANIC)
+		else if(center==IGLayerUtil.DEEP_OCEAN)
 		{
-			if(matcher.test(i -> i==IGLayerUtil.OCEAN))
+			if(matcher.test(IGLayerUtil::isShallowOcean))
 			{
-				return IGLayerUtil.OCEAN;
+				return IGLayerUtil.OCEAN_EDGE;
 			}
 		}
 		return center;

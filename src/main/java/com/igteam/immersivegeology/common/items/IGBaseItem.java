@@ -1,30 +1,18 @@
 package com.igteam.immersivegeology.common.items;
 
 import blusunrize.immersiveengineering.client.ClientProxy;
-import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.IIGSubGroupContained;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, IGSubGroup
+public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, IIGSubGroupContained
 {
 	public String itemName;
 	private int burnTime = -1;
@@ -40,10 +28,9 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	public IGBaseItem(String name, Properties props)
 	{
 		super(props.group(ImmersiveGeology.IG_ITEM_GROUP));
-		if(itemName==null)
-		{
-			itemName = name;
-		}
+		itemName=name;
+		ResourceLocation registryName = createRegistryName();
+		setRegistryName(registryName);
 	}
 
 	public IGBaseItem setBurnTime(int burnTime)
@@ -73,6 +60,8 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 		isHidden = false;
 	}
 
+	/*
+	//Should be moved to items that actually need GUIs
 	protected void openGui(PlayerEntity player, EquipmentSlotType slot)
 	{
 		ItemStack stack = player.getItemStackFromSlot(slot);
@@ -93,11 +82,12 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 			}
 		}, buffer -> buffer.writeInt(slot.ordinal()));
 	}
+	 */
 
 	@Override
 	public boolean hasCustomProperties()
 	{
-		return true;//TODO does always returning true break anything?
+		return true;
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -109,14 +99,11 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 	@Override
 	public ItemSubGroup getSubGroup()
 	{
-		// TODO Auto-generated method stub
 		return subGroup;
 	}
 
-    /* //TODO add obj renderer?
-    public static Item.Properties withIEOBJRender()
-    {
-        return ImmersiveGeology.proxy.useIEOBJRenderer(new Properties());
-    } */
-
+	public ResourceLocation createRegistryName()
+	{
+		return new ResourceLocation(ImmersiveGeology.MODID, itemName);
+	}
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/chromium"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_nugget_chromium",
+    "count": 9
+  }
+}

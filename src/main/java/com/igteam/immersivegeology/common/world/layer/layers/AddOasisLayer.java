@@ -13,7 +13,7 @@ public enum AddOasisLayer implements ICastleTransformer
 	{
 		if(IGLayerUtil.isOasisCompatible(north)&&IGLayerUtil.isOasisCompatible(west)&&IGLayerUtil.isOasisCompatible(south)&&IGLayerUtil.isOasisCompatible(east)&&IGLayerUtil.isOasisCompatible(center))
 		{
-			if(context.random(15)==0)
+			if(context.random(10)==0)
 			{
 				return IGLayerUtil.OASIS;
 			}

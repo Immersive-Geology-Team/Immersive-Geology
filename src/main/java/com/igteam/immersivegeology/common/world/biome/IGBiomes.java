@@ -34,8 +34,11 @@ public class IGBiomes
 	public static final IGBiome OLD_MOUNTAINS = Helpers.getNull();
 
 	public static final IGBiome MOUNTAINS = Helpers.getNull();
+	public static final IGBiome FROZEN_MOUNTAINS = Helpers.getNull();
 	public static final IGBiome LUSH_MOUNTAINS = Helpers.getNull();
 	public static final IGBiome FLOODED_MOUNTAINS = Helpers.getNull();
+	public static final IGBiome MOUNTAIN_DUNES = Helpers.getNull();
+	public static final IGBiome GLACIER = Helpers.getNull();
 	public static final IGBiome CANYONS = Helpers.getNull();
 
 	public static final IGBiome SHORE = Helpers.getNull();
@@ -48,7 +51,7 @@ public class IGBiomes
 
 	private static final LazyLoadBase<Set<IGBiome>> BIOMES = new LazyLoadBase<>(() -> {
 		Set<IGBiome> values = new HashSet<>();
-		for(IGBiome biome : Arrays.asList(OCEAN, OCEAN_EDGE, DEEP_OCEAN, DEEP_OCEAN_VOLCANIC, PLAINS, DESERT, ARCTIC_DESERT, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, LUSH_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, OASIS, RIVER))
+		for(IGBiome biome : Arrays.asList(OCEAN, OCEAN_EDGE, DEEP_OCEAN, DEEP_OCEAN_VOLCANIC, PLAINS, DESERT, FROZEN_MOUNTAINS, GLACIER, MOUNTAIN_DUNES, ARCTIC_DESERT, HILLS, LOWLANDS, LOW_CANYONS, ROLLING_HILLS, BADLANDS, PLATEAU, OLD_MOUNTAINS, MOUNTAINS, FLOODED_MOUNTAINS, LUSH_MOUNTAINS, CANYONS, SHORE, STONE_SHORE, MOUNTAINS_EDGE, LAKE, OASIS, RIVER))
 		{
 			if(biome==null)
 			{

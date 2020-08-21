@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.world.layer.layers;
 import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
+import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 
 public class IslandLayer implements IAreaTransformer0
 {
@@ -22,7 +23,7 @@ public class IslandLayer implements IAreaTransformer0
 		}
 		else
 		{
-			return random.random(islandFrequency)==0?IGLayerUtil.PLAINS: IGLayerUtil.DEEP_OCEAN;
+			return random.random(islandFrequency)==0 ? IGLayerUtil.PLAINS : IGLayerUtil.DEEP_OCEAN;
 		}
 	}
 }

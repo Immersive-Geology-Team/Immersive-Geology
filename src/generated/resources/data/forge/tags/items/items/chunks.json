@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:item_chunk_rhyolite",
+    "immersivegeology:item_chunk_diorite",
+    "immersivegeology:item_chunk_andesite",
+    "immersivegeology:item_chunk_granite",
+    "immersivegeology:item_chunk_netherrack",
+    "immersivegeology:item_chunk_endstone",
+    "immersivegeology:item_chunk_basalt",
+    "immersivegeology:item_chunk_gabbros",
+    "immersivegeology:item_chunk_marble",
+    "immersivegeology:item_chunk_limestone",
+    "immersivegeology:item_chunk_pegmatite",
+    "immersivegeology:item_chunk_regolith"
+  ]
+}

@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.materials.stones;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
@@ -25,14 +26,17 @@ public class MaterialStoneAndesite extends MaterialStoneBase
 	@Override
 	public String getModID()
 	{
-		return "minecraft";
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.ALUMINIUM)
+				new ElementProportion(PeriodicTableElement.SILICON),
+				new ElementProportion(PeriodicTableElement.OXYGEN, 2),
+				new ElementProportion(PeriodicTableElement.SODIUM),
+				new ElementProportion(PeriodicTableElement.POTASSIUM, 2)
 		));
 	}
 

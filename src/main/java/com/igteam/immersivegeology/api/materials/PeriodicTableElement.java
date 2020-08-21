@@ -131,9 +131,11 @@ public enum PeriodicTableElement implements IStringSerializable
 	OGANESSON("Og", "aaa9ad"),
 
 	//Non-real Elements (use three letters for non real to keep them separate)
-	REDIUM("Red", "d43c2c", false),
+	REDNIUM("Red", "d43c2c", false),
 	LUXUM("Lux", "FFBC5E", false),
-	SOULITE("Sou", "49362A", false);
+	SOULITE("Sou", "49362A", false),
+	UNOBTANIUM("Uno", "878681", false),
+	PHLEBOTINUM("Sas", "663399", false);
 
 	String symbol;
 	//the color of the this chemical element, not the metals made of it

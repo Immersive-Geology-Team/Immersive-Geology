@@ -2,10 +2,7 @@ package com.igteam.immersivegeology.common.items;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase;
-import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
-import com.igteam.immersivegeology.common.util.IGItemGrabber;
-import com.igteam.immersivegeology.common.util.ItemJsonGenerator;
+import com.igteam.immersivegeology.client.menu.helper.IIGSubGroupContained;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
@@ -19,37 +16,13 @@ import java.util.List;
 
 /**
  * Created by Pabilo8 on 27-03-2020.
+ * Is used by rock chunks (no special use yet)
  */
-public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
+public class IGMaterialResourceItem extends IGMaterialItem implements IIGSubGroupContained
 {
-	public IGMaterialResourceItem(Material material, MaterialUseType key)
+	public IGMaterialResourceItem(MaterialUseType key,Material... materials)
 	{
-		super(key, material);
-		if(!key.equals(MaterialUseType.ORE_CHUNK))
-		{
-			this.setRegistryName("item_"+key.getName()+"_"+material.getName());
-			this.itemName = "item."+key.getName()+"."+material.getName()+".name";
-			IGItemGrabber.inputNewItem(key, material, this);
-		}
-		//add this item to the item grabber, that way we can reference this later. 
-
-		if(key.equals(MaterialUseType.ROCK))
-		{
-			if(material instanceof MaterialStoneBase)
-			{
-				MaterialStoneBase rockMat = (MaterialStoneBase)material;
-				ItemJsonGenerator.generateDefaultItem(material, key, rockMat.getStoneType());
-			}
-		}
-		else if(key.equals(MaterialUseType.CHUNK))
-		{
-			ItemJsonGenerator.generateDefaultItem(material, key);
-		}
-		else if(!key.equals(MaterialUseType.ORE_CHUNK))
-		{
-			ItemJsonGenerator.generateDefaultItem(material, key);
-		}
-
+		super(key, materials);
 	}
 
 	@Override
@@ -59,20 +32,20 @@ public class IGMaterialResourceItem extends IGMaterialItem implements IGSubGroup
 		StringTextComponent text = new StringTextComponent("");
 		if(hasShiftDown()||Minecraft.getInstance().gameSettings.advancedItemTooltips)
 		{
+			int matAmounts = materials.length;
+			Material material = materials[(matAmounts > 1) ? 1 : 0 ];
+			
 			material.getElements().forEach(elementProportion -> text
 					.appendText("<hexcol="+elementProportion.getElement().getColor()+":"+elementProportion.getElement().getSymbol()+">")
 					.appendText(String.valueOf(elementProportion.getQuantity() > 1?elementProportion.getQuantity(): "")));
+			
 			tooltip.add(text);
 		}
 	}
-
-	public void addChunkVein(Material mineral)
-	{
-
-	}
-
+	
 	public static boolean hasShiftDown()
 	{
-		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 340)||InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
+		Minecraft mc = Minecraft.getInstance();
+		return InputMappings.isKeyDown(mc.mainWindow.getHandle(), 340)||InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), 344);
 	}
 }

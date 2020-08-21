@@ -22,6 +22,8 @@ public abstract class MaterialMetalloidBase extends Material
 				return hasTinyDust();
 			case ROD:
 				return hasRod();
+			case ROUGH_ROD:
+				return hasRoughRod();
 			case FLUIDS:
 				return true;
 			default:
@@ -35,6 +37,12 @@ public abstract class MaterialMetalloidBase extends Material
 		return MaterialTypes.METALLOID;
 	}
 
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.METALLOID;
+	}
+	
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
@@ -50,12 +58,12 @@ public abstract class MaterialMetalloidBase extends Material
 
 	public boolean hasIngot()
 	{
-		return false;
+		return true;
 	}
 
 	public boolean hasPlate()
 	{
-		return false;
+		return true;
 	}
 
 	public boolean hasRod()
@@ -65,12 +73,42 @@ public abstract class MaterialMetalloidBase extends Material
 
 	public boolean hasGear()
 	{
-		return false;
+		return true;
+	}
+
+	public boolean hasWire()
+	{
+		return true;
+	}
+
+	public boolean hasRoughIngot()
+	{
+		return true;
+	}
+
+	public boolean hasRoughPlate()
+	{
+		return true;
+	}
+
+	public boolean hasRoughRod()
+	{
+		return true;
+	}
+
+	public boolean hasRoughGear()
+	{
+		return true;
+	}
+
+	public boolean hasRoughWire()
+	{
+		return true;
 	}
 
 	public boolean hasSheetmetal()
 	{
-		return false;
+		return true;
 	}
 
 	public boolean hasDust()
@@ -85,11 +123,11 @@ public abstract class MaterialMetalloidBase extends Material
 
 	public boolean hasStorageBlock()
 	{
-		return false;
+		return true;
 	}
 
 	public boolean hasDustBlock()
 	{
-		return false;
+		return true;
 	}
 }

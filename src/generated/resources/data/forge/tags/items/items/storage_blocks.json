@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:block_storage_block_aluminum",
+    "immersivegeology:block_storage_block_chromium",
+    "immersivegeology:block_storage_block_copper",
+    "immersivegeology:block_storage_block_gold",
+    "immersivegeology:block_storage_block_iron",
+    "immersivegeology:block_storage_block_lead",
+    "immersivegeology:block_storage_block_manganese",
+    "immersivegeology:block_storage_block_nickel",
+    "immersivegeology:block_storage_block_platinum",
+    "immersivegeology:block_storage_block_silver",
+    "immersivegeology:block_storage_block_cobalt",
+    "immersivegeology:block_storage_block_uranium",
+    "immersivegeology:block_storage_block_tin",
+    "immersivegeology:block_storage_block_titanium",
+    "immersivegeology:block_storage_block_tungsten",
+    "immersivegeology:block_storage_block_vanadium",
+    "immersivegeology:block_storage_block_zirconium",
+    "immersivegeology:block_storage_block_zinc",
+    "immersivegeology:block_storage_block_constantan",
+    "immersivegeology:block_storage_block_electrum",
+    "immersivegeology:block_storage_block_steel",
+    "immersivegeology:block_storage_block_quartz"
+  ]
+}

@@ -7,10 +7,10 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -29,7 +29,7 @@ public class IGContent
 {
 	public static Map<String, IGBaseBlock> registeredIGBlocks = new HashMap<String, IGBaseBlock>();
 	public static Map<String, Block> registeredIGSlabBlocks = new HashMap<String, Block>();
-	public static List<Item> registeredIGItems = new ArrayList<>();
+	public static Map<String, Item> registeredIGItems = new HashMap<String, Item>();
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
@@ -37,42 +37,26 @@ public class IGContent
 	public static void modConstruction()
 	{
 		// Item, blocks here
-		// cycle through item Types
+		// Cycle through item Types
 		for(MaterialUseType materialItem : MaterialUseType.values())
 		{
 			// cycle through materials
 			for(EnumMaterials m : EnumMaterials.values())
 			{
 				Material material = m.material;
-				// check if that material is allowed to make this item type.
+				// Check if that material is allowed to make this item type.
 				if(material.hasSubtype(materialItem))
 				{
-					// check if this type is an ITEM not a BLOCK type.
-
+					// Check if this type is an ITEM not a BLOCK type.
 					switch(materialItem.getCategory())
 					{
 						case RESOURCE_ITEM:
-							registeredIGItems.add(materialItem.getItem(material));
-							break;
-						case CHUNK_ORE:
-							for(EnumOreBearingMaterials ore : EnumOreBearingMaterials.values())
-							{
-								registeredIGItems.add(materialItem.getOreItem(material, ore));
-							}
+							Arrays.stream(materialItem.getItems(material)).forEach(item -> registeredIGItems.put(item.itemName, item));
 							break;
 						case RESOURCE_BLOCK:
-						case BLOCK:
-							registeredIGBlocks.put(materialItem.getName()+"_"+material.getName(),
-									materialItem.getBlock(material));
-							break;
-						case ORE_BEARING:
-							for(EnumOreBearingMaterials ore : EnumOreBearingMaterials.values())
-							{
-								registeredIGBlocks.put(
-										materialItem.getName()+"_"+material.getName()+"_"+ore.toString().toLowerCase(),
-										materialItem.getBearingBlock(material, ore));
-							}
-
+							Arrays.stream(materialItem.getBlocks(material)).forEach(block -> {
+								registeredIGBlocks.put(block.name, block);
+							});
 							break;
 						default:
 							break;
@@ -106,20 +90,7 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
-		// checkNonNullNames(registeredIGItems);
 		for(Block b : registeredIGBlocks.values())
-		{
-			if(b!=null)
-			{
-				if(b instanceof IIGBlock)
-				{
-					event.getRegistry().register(((IIGBlock)b).getItemBlock());
-				}
-			}
-		}
-
-		// slabs only!
-		for(Block b : IGContent.registeredIGSlabBlocks.values())
 		{
 			if(b!=null)
 			{
@@ -131,16 +102,13 @@ public class IGContent
 		}
 	}
 
-	// We have client registry in client proxy for colors (this is so it doesn't
-	// give duplicate registry warnings)
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
 		// checkNonNullNames(registeredIGItems);
-		for(Item item : registeredIGItems)
+		for(Item item : registeredIGItems.values())
 			if(item!=null)
 				event.getRegistry().register(item);
-		IGContent.registerOres();
 	}
 
 	@SubscribeEvent
@@ -152,10 +120,10 @@ public class IGContent
 	}
 
 	// Changed due to blocks being registered later on
+	@Deprecated
 	public static <T extends IGMaterialBlock & IIGBlock> BlockIGSlab addMaterialSlabFor(T b)
 	{
-		BlockIGSlab<T> ret = new BlockIGSlab<T>("slab_"+b.name, Block.Properties.from(b), b.itemBlock.getClass(), b,
-				b.itemSubGroup);
+		BlockIGSlab<T> ret = new BlockIGSlab<T>("slab_"+b.name, Block.Properties.from(b), b.itemBlock.getClass(), b, b.itemSubGroup);
 		toSlab.put(b, ret);
 		return ret;
 	}
@@ -163,16 +131,6 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerTEs(RegistryEvent.Register<TileEntityType<?>> event)
 	{
-	}
-
-	public static void registerRecipes()
-	{
-
-	}
-
-	public static void registerOres()
-	{
-
 	}
 
 	public static void init()
@@ -185,8 +143,7 @@ public class IGContent
 
 	}
 
-	public static <T extends TileEntity> void registerTile(Class<T> tile,
-														   RegistryEvent.Register<TileEntityType<?>> event, Block... valid)
+	public static <T extends TileEntity> void registerTile(Class<T> tile, RegistryEvent.Register<TileEntityType<?>> event, Block... valid)
 	{
 		String s = tile.getSimpleName();
 		s = s.toLowerCase(Locale.ENGLISH);
@@ -213,5 +170,15 @@ public class IGContent
 			throw new RuntimeException(e);
 		}
 		registeredIGTiles.add(tile);
+	}
+
+	/**
+	 * Use only when needed, default only for IGBaseBlock, please extend that
+	 *
+	 * @param itemBlock the item to be registered
+	 */
+	public static void addItemBlockForBlock(String name, BlockItem itemBlock)
+	{
+		registeredIGItems.put(name, itemBlock);
 	}
 }

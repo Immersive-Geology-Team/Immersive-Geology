@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -24,7 +25,7 @@ public class MaterialMetalIron extends MaterialMetalBase
 	@Override
 	public String getModID()
 	{
-		return "minecraft";
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override

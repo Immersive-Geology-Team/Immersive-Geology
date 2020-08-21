@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialMetalBase;
@@ -13,7 +14,12 @@ import java.util.LinkedHashSet;
  * Created by Pabilo8 on 25-03-2020.
  */
 public class MaterialMetalGold extends MaterialMetalBase
-{
+{	
+
+	public MaterialMetalGold() {
+		isNativeMetal = true;
+	}
+	
 	@Override
 	public String getName()
 	{
@@ -24,7 +30,7 @@ public class MaterialMetalGold extends MaterialMetalBase
 	@Override
 	public String getModID()
 	{
-		return "minecraft";
+		return ImmersiveGeology.MODID;
 	}
 
 	@Override

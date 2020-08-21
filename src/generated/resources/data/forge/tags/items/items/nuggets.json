@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:item_nugget_aluminum",
+    "immersivegeology:item_nugget_chromium",
+    "immersivegeology:item_nugget_copper",
+    "immersivegeology:item_nugget_gold",
+    "immersivegeology:item_nugget_iron",
+    "immersivegeology:item_nugget_lead",
+    "immersivegeology:item_nugget_manganese",
+    "immersivegeology:item_nugget_nickel",
+    "immersivegeology:item_nugget_platinum",
+    "immersivegeology:item_nugget_silver",
+    "immersivegeology:item_nugget_cobalt",
+    "immersivegeology:item_nugget_uranium",
+    "immersivegeology:item_nugget_tin",
+    "immersivegeology:item_nugget_titanium",
+    "immersivegeology:item_nugget_tungsten",
+    "immersivegeology:item_nugget_vanadium",
+    "immersivegeology:item_nugget_zirconium",
+    "immersivegeology:item_nugget_zinc",
+    "immersivegeology:item_nugget_constantan",
+    "immersivegeology:item_nugget_electrum",
+    "immersivegeology:item_nugget_steel"
+  ]
+}

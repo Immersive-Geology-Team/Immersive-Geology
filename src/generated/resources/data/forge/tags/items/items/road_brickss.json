@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:block_road_bricks_rhyolite",
+    "immersivegeology:block_road_bricks_diorite",
+    "immersivegeology:block_road_bricks_andesite",
+    "immersivegeology:block_road_bricks_granite",
+    "immersivegeology:block_road_bricks_netherrack",
+    "immersivegeology:block_road_bricks_endstone",
+    "immersivegeology:block_road_bricks_basalt",
+    "immersivegeology:block_road_bricks_gabbros",
+    "immersivegeology:block_road_bricks_marble",
+    "immersivegeology:block_road_bricks_limestone",
+    "immersivegeology:block_road_bricks_pegmatite",
+    "immersivegeology:block_road_bricks_regolith"
+  ]
+}

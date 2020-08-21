@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:block_rough_bricks_rhyolite",
+    "immersivegeology:block_rough_bricks_diorite",
+    "immersivegeology:block_rough_bricks_andesite",
+    "immersivegeology:block_rough_bricks_granite",
+    "immersivegeology:block_rough_bricks_netherrack",
+    "immersivegeology:block_rough_bricks_endstone",
+    "immersivegeology:block_rough_bricks_basalt",
+    "immersivegeology:block_rough_bricks_gabbros",
+    "immersivegeology:block_rough_bricks_marble",
+    "immersivegeology:block_rough_bricks_limestone",
+    "immersivegeology:block_rough_bricks_pegmatite",
+    "immersivegeology:block_rough_bricks_regolith"
+  ]
+}

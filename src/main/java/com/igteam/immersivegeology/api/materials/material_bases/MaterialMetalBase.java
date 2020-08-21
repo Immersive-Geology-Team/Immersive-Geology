@@ -10,7 +10,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
-
+	protected boolean isNativeMetal = false;
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -18,44 +18,53 @@ public abstract class MaterialMetalBase extends Material
 		{
 			case INGOT:
 				return hasIngot();
+			case NUGGET:
+				return hasNugget();
 			case PLATE:
 				return hasPlate();
-			case ROUGH_INGOT:
-				return hasRoughIngot();
-			case ROUGH_PLATE:
-				return hasRoughPlate();
-			case DUST:
-				return hasDust();
-			case TINY_DUST:
-				return hasTinyDust();
 			case ROD:
 				return hasRod();
 			case GEAR:
 				return hasGear();
+			case WIRE:
+				return hasWire();
+			case ROUGH_INGOT:
+				return hasRoughIngot();
+			case ROUGH_PLATE:
+				return hasRoughPlate();
 			case ROUGH_ROD:
 				return hasRoughRod();
 			case ROUGH_GEAR:
 				return hasRoughGear();
-			case STORAGE:
+			case ROUGH_WIRE:
+				return hasRoughWire();
+			case DUST:
+				return hasDust();
+			case TINY_DUST:
+				return hasTinyDust();
+			case STORAGE_BLOCK:
 				return hasStorageBlock();
 			case SHEETMETAL:
 				return hasSheetmetal();
 			case DUST_BLOCK:
 				return hasDustBlock();
-			case ROUGH_WIRE:
-				return hasRoughWire();
-			case WIRE:
-				return hasWire();
 			case FLUIDS:
 				return true;
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	@Override
 	public MaterialTypes getMaterialType()
 	{
 		return MaterialTypes.METAL;
+	}
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return (isNativeMetal ? MaterialTypes.MINERAL : MaterialTypes.METAL);
 	}
 
 	@Override
@@ -76,17 +85,27 @@ public abstract class MaterialMetalBase extends Material
 		return true;
 	}
 
+	public boolean hasNugget()
+	{
+		return true;
+	}
+
 	public boolean hasPlate()
 	{
 		return true;
 	}
 
-	public boolean hasRoughRod()
+	public boolean hasRod()
 	{
 		return true;
 	}
 
-	public boolean hasRoughGear()
+	public boolean hasGear()
+	{
+		return true;
+	}
+
+	public boolean hasWire()
 	{
 		return true;
 	}
@@ -101,12 +120,17 @@ public abstract class MaterialMetalBase extends Material
 		return true;
 	}
 
-	public boolean hasRod()
+	public boolean hasRoughRod()
 	{
 		return true;
 	}
 
-	public boolean hasGear()
+	public boolean hasRoughGear()
+	{
+		return true;
+	}
+
+	public boolean hasRoughWire()
 	{
 		return true;
 	}
@@ -132,16 +156,6 @@ public abstract class MaterialMetalBase extends Material
 	}
 
 	public boolean hasDustBlock()
-	{
-		return true;
-	}
-
-	public boolean hasRoughWire()
-	{
-		return true;
-	}
-
-	public boolean hasWire()
 	{
 		return true;
 	}

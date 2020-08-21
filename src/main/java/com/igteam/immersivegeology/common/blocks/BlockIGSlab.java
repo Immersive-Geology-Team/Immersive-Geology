@@ -3,8 +3,6 @@ package com.igteam.immersivegeology.common.blocks;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.util.BlockstateGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
@@ -30,11 +28,8 @@ public class BlockIGSlab<T extends IGMaterialBlock & IIGBlock> extends SlabBlock
 		super(props);
 		ResourceLocation registryName = new ResourceLocation(ImmersiveGeology.MODID, name);
 		setRegistryName(registryName);
-		IGContent.registeredIGSlabBlocks.put("slab_"+name, this);
 		this.base = base;
-		this.hasCustomColor = base instanceof IColouredBlock&&((IColouredBlock)base).hasCustomBlockColours();
-
-		BlockstateGenerator.generateDefaultSlabBlock(this.base.material, this.base.type);
+		this.hasCustomColor = base!=null&&((IColouredBlock)base).hasCustomBlockColours();
 
 		if(itemBlock!=null)
 		{
@@ -43,7 +38,6 @@ public class BlockIGSlab<T extends IGMaterialBlock & IIGBlock> extends SlabBlock
 				this.itemBlock = (IGBlockItem)itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
 						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
 				this.itemBlock.setRegistryName(registryName);
-				IGContent.registeredIGItems.add(this.itemBlock);
 			} catch(Exception e)
 			{
 				throw new RuntimeException(e);

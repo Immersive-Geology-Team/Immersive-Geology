@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.IIGSubGroupContained;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,7 +27,7 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class IGBlockItem extends BlockItem implements IGSubGroup
+public class IGBlockItem extends BlockItem implements IIGSubGroupContained
 {
 
 	protected ItemSubGroup subGroup;
@@ -37,6 +37,7 @@ public class IGBlockItem extends BlockItem implements IGSubGroup
 	{
 		super(b, props.group(ImmersiveGeology.IG_ITEM_GROUP));
 		this.subGroup = sub;
+
 	}
 
 	@Override

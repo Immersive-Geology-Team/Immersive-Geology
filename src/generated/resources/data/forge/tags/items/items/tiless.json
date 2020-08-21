@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:block_tiles_rhyolite",
+    "immersivegeology:block_tiles_diorite",
+    "immersivegeology:block_tiles_andesite",
+    "immersivegeology:block_tiles_granite",
+    "immersivegeology:block_tiles_netherrack",
+    "immersivegeology:block_tiles_endstone",
+    "immersivegeology:block_tiles_basalt",
+    "immersivegeology:block_tiles_gabbros",
+    "immersivegeology:block_tiles_marble",
+    "immersivegeology:block_tiles_limestone",
+    "immersivegeology:block_tiles_pegmatite",
+    "immersivegeology:block_tiles_regolith"
+  ]
+}

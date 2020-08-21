@@ -39,8 +39,10 @@ public class IGLayerUtil
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
 	public static final int DESERT = getId(IGBiomes.DESERT);
 
-	public static final int ARCTIC_DESERT = getId(IGBiomes.DESERT);
-
+	public static final int ARCTIC_DESERT = getId(IGBiomes.ARCTIC_DESERT);
+	public static final int GLACIER = getId(IGBiomes.GLACIER);
+	public static final int FROZEN_MOUNTAINS = getId(IGBiomes.FROZEN_MOUNTAINS);
+	
 	public static final int OASIS = getId(IGBiomes.OASIS);
 	public static final int HILLS = getId(IGBiomes.HILLS);
 	public static final int LOWLANDS = getId(IGBiomes.LOWLANDS);
@@ -53,6 +55,8 @@ public class IGLayerUtil
 	public static final int FLOODED_MOUNTAINS = getId(IGBiomes.FLOODED_MOUNTAINS);
 	public static final int LUSH_MOUNTAINS = getId(IGBiomes.LUSH_MOUNTAINS);
 	public static final int CANYONS = getId(IGBiomes.CANYONS);
+	public static final int MOUNTAIN_DUNES = getId(IGBiomes.MOUNTAIN_DUNES);
+	
 	public static final int SHORE = getId(IGBiomes.SHORE);
 	public static final int STONE_SHORE = getId(IGBiomes.STONE_SHORE);
 	public static final int MOUNTAINS_EDGE = getId(IGBiomes.MOUNTAINS_EDGE);
@@ -66,8 +70,6 @@ public class IGLayerUtil
 				seedModifier);
 
 		IAreaFactory<LazyArea> mainLayer, riverLayer;
-		int layerCount = 0;
-
 		// Ocean / Continents
 
 		mainLayer = new IslandLayer(settings.getIslandFrequency()).apply(contextFactory.apply(1000L));
@@ -85,19 +87,14 @@ public class IGLayerUtil
 			mainLayer = AddIslandLayer.HEAVY.apply(contextFactory.apply(1005L+2*i), mainLayer);
 
 			mainLayer = SmoothLayer.INSTANCE.apply(contextFactory.apply(1006L+2*i), mainLayer);
-
 		}
 
 		// Oceans and Continents => Elevation Mapping
-		layerCount = 0;
-
 		mainLayer = ElevationLayer.INSTANCE.apply(contextFactory.apply(1009L), mainLayer);
 
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1010L), mainLayer);
 
 		// Elevation Mapping => Rivers
-		layerCount = 0;
-
 		riverLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1011L), mainLayer);
 
 		for(int i = 0; i < 6; i++)
@@ -110,13 +107,13 @@ public class IGLayerUtil
 		riverLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), riverLayer);
 
 		// Elevation Mapping => Biomes
-
-		layerCount = 0;
-
-		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1011L), mainLayer);
-
-		mainLayer = TemperateLayer.NORMAL.apply(contextFactory.apply(1012L), mainLayer);
-
+		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1012L), mainLayer);
+		
+		for(int i = 0; i <= 4; i++){
+			mainLayer = TemperateLayer.CASTLE.apply(contextFactory.apply(1012L), mainLayer);
+			mainLayer = TemperateLayer.BISHOP.apply(contextFactory.apply(1012L), mainLayer);
+		}
+		
 		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
 
 		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
@@ -126,8 +123,6 @@ public class IGLayerUtil
 		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
 
 		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
-
-		mainLayer = EdgeBiomeLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
 
 		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1019L), mainLayer);
 
@@ -149,40 +144,12 @@ public class IGLayerUtil
 
 		mainLayer = MixRiverLayer.INSTANCE.apply(contextFactory.apply(1026L), mainLayer, riverLayer);
 
-		IAreaFactory<LazyArea> areaFactoryActual = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(1029L),
+		IAreaFactory<LazyArea> areaFactoryActual = ZoomLayer.NORMAL.apply(contextFactory.apply(1029L),
 				mainLayer);
 
-		return Arrays.asList(mainLayer, areaFactoryActual);
+		return Arrays.asList(mainLayer, mainLayer);
 	}
-
-	public static IAreaFactory<LazyArea> createOverworldRockLayers(long seed, ImmersiveGenerationSettings settings)
-	{
-		LongFunction<LazyAreaLayerContext> contextFactory = seedModifier -> new LazyAreaLayerContext(25, seed,
-				seedModifier);
-
-		IAreaFactory<LazyArea> seedLayer, biomeLayer;
-		List<IAreaFactory<LazyArea>> completedLayers = new ArrayList<>(3);
-		int layerCount = 0;
-
-
-		// Seed Areas
-		seedLayer = RandomLayer.INSTANCE.apply(contextFactory.apply(1000L));
-
-		for(int i = 0; i < 3; i++)
-		{
-			seedLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1001L), seedLayer);
-
-			seedLayer = SmoothLayer.INSTANCE.apply(contextFactory.apply(1001L), seedLayer);
-		}
-
-		for(int i = 0; i < 5; i++)
-		{
-			seedLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1001L), seedLayer);
-		}
-
-		return seedLayer;
-	}
-
+	
 	public static <A extends IArea, C extends IExtendedNoiseRandom<A>> IAreaFactory<A> repeat(
 			IAreaTransformer1 transformer, int count, IAreaFactory<A> originalLayer, Supplier<C> contextSupplier)
 	{
@@ -243,7 +210,6 @@ public class IGLayerUtil
 
 	private static int getId(Biome biome)
 	{
-		// todo: once finished with testing, inline this method
 		return ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES).getID(biome);
 	}
 

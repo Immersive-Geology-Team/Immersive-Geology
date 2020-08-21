@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "natural=false": {
+      "model": "immersivegeology:block/block_pillar_pegmatite"
+    },
+    "natural=true": {
+      "model": "immersivegeology:block/block_pillar_pegmatite"
+    }
+  }
+}

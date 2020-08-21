@@ -27,7 +27,7 @@ public enum EnumMaterials
 	Iron(new MaterialMetalIron()),
 	Lead(new MaterialMetalLead()),
 	Manganese(new MaterialMetalManganese()),
-	Nickel(new MaterialMetalNickel()),
+	Nickel(new MaterialMetalNickel()), 
 	Platinum(new MaterialMetalPlatinum()),
 	Silver(new MaterialMetalSilver()),
 	Cobalt(new MaterialMetalCobalt()),
@@ -37,7 +37,8 @@ public enum EnumMaterials
 	Tungsten(new MaterialMetalTungsten()),
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
-
+	Zinc(new MaterialMetalZinc()),
+	
 	Constantan(new MaterialMetalConstantan()),
 	Electrum(new MaterialMetalElectrum()),
 	Steel(new MaterialMetalSteel()),
@@ -65,7 +66,14 @@ public enum EnumMaterials
 	RockSalt(new MaterialMineralRockSalt()),
 	Thorite(new MaterialMineralThorianite()),
 	Uraninite(new MaterialMineralUraninite()),
-
+	Sphalerite(new MaterialMineralSphalerite()),
+	Ullmannite(new MaterialMineralUllmannite()),
+	Galena(new MaterialMineralGalena()),
+	Vanadinite(new MaterialMineralVanadinite()),
+	//Minerals that spawn in such a large quantity that we don't need an 'orebearing' variant, this is where most clay types will end up!
+	Kaolinite(new MaterialMineralKaolinite()),
+	
+	
 	//Fluids
 	Water(new MaterialFluidWater()),
 
@@ -81,28 +89,67 @@ public enum EnumMaterials
 	Gabbros(new MaterialStoneGabbros()),
 	Marble(new MaterialStoneMarble()),
 	Limestone(new MaterialStoneLimestone()),
-	Pegamite(new MaterialStonePegamite()),
+	Pegmatite(new MaterialStonePegmatite()),
 	Regolith(new MaterialStoneRegolith());
-
+	
 	public final Material material;
 
 	EnumMaterials(Material material)
-	{
+	{ 
 		this.material = material;
 	}
 
+	/**
+	 * @return only metal materials
+	 */
 	public static Stream<EnumMaterials> filterMetals()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.METAL);
+		return filterByType(MaterialTypes.METAL);
 	}
 
+	/**
+	 * @return only stone materials
+	 */
 	public static Stream<EnumMaterials> filterStones()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.STONE);
+		return filterByType(MaterialTypes.STONE);
 	}
 
+	/**
+	 * @return only mineral materials
+	 */
 	public static Stream<EnumMaterials> filterMinerals()
 	{
-		return Stream.of(values()).filter(enumMaterials -> enumMaterials.material.getMaterialType()==MaterialTypes.MINERAL);
+		return filterByType(MaterialTypes.MINERAL);
+	}
+	
+	/**
+	 * @return only mineral materials
+	 */
+	public static Stream<EnumMaterials> filterWorldGen()
+	{
+		return filterBySubType(MaterialTypes.MINERAL); //some metals have mineral as a subtype, (reusing mineral type in place of adding in a native material type)
+	}
+	
+	public static Stream<EnumMaterials> filterBySubType(MaterialTypes type)
+	{
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getMaterialSubType()==type));
+	}
+
+	/**
+	 * @return only materials of a type (metal, mineral, fluid, etc.)
+	 */
+	public static Stream<EnumMaterials> filterByType(MaterialTypes type)
+	{
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getMaterialType()==type));
+	}
+
+	/**
+	 * @return materials of one of the types
+	 */
+	public static Stream<EnumMaterials> filterByTypes(MaterialTypes... types)
+	{
+		Stream<MaterialTypes> typesStream = Stream.of(types);
+		return Stream.of(values()).filter(enumMaterials -> typesStream.anyMatch(materialTypes -> enumMaterials.material.getMaterialType()==materialTypes));
 	}
 }

@@ -17,16 +17,16 @@ public abstract class MaterialCrystalBase extends Material
 		{
 			case CRYSTAL:
 				return hasCrystal();
+			case RAW_CRYSTAL:
+				return hasRawCrystal();
 			case DUST:
 				return hasDust();
 			case TINY_DUST:
 				return hasTinyDust();
-			case STORAGE:
+			case STORAGE_BLOCK:
 				return hasStorageBlock();
 			case DUST_BLOCK:
 				return hasDustBlock();
-			case RAW_CRYSTAL:
-				return hasRawCrystal();
 		}
 		return false;
 	}
@@ -36,7 +36,13 @@ public abstract class MaterialCrystalBase extends Material
 	{
 		return MaterialTypes.CRYSTAL;
 	}
-
+	
+	@Override
+	public MaterialTypes getMaterialSubType()
+	{
+		return MaterialTypes.CRYSTAL;
+	}
+	
 	public static int getStaticColor()
 	{
 		return baseColor;

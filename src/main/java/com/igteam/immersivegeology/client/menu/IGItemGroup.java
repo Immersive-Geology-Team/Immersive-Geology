@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.client.menu;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.client.menu.helper.IGSubGroup;
+import com.igteam.immersivegeology.client.menu.helper.IIGSubGroupContained;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.util.ResourceSorter;
 import net.minecraft.block.Blocks;
@@ -52,9 +52,9 @@ public class IGItemGroup extends ItemGroup
 	{
 		for(Item item : Registry.ITEM)
 		{
-			if(item instanceof IGSubGroup)
+			if(item instanceof IIGSubGroupContained)
 			{
-				IGSubGroup itm = (IGSubGroup)item;
+				IIGSubGroupContained itm = (IIGSubGroupContained)item;
 				if(itm.getSubGroup()==selectedSubGroup)
 				{
 					item.fillItemGroup(this, items);
@@ -69,9 +69,9 @@ public class IGItemGroup extends ItemGroup
 		NonNullList<ItemStack> list = NonNullList.create();
 		for(Item item : Registry.ITEM)
 		{
-			if(item instanceof IGSubGroup)
+			if(item instanceof IIGSubGroupContained)
 			{
-				IGSubGroup itm = (IGSubGroup)item;
+				IIGSubGroupContained itm = (IIGSubGroupContained)item;
 				if(itm.getSubGroup()==selectedSubGroup)
 				{
 					item.fillItemGroup(ImmersiveGeology.IG_ITEM_GROUP, list);

@@ -16,6 +16,7 @@ import net.minecraft.item.*;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -58,7 +59,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 		this.name = name;
 
 		this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
-		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.FALSE));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
 		if(itemBlock!=null)
@@ -69,7 +70,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
 						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
 				this.itemBlock.setRegistryName(registryName);
-				IGContent.registeredIGItems.add(this.itemBlock);
+				IGContent.addItemBlockForBlock(name,this.itemBlock);
 			} catch(Exception e)
 			{
 				throw new RuntimeException(e);
@@ -77,9 +78,9 @@ public class IGBaseBlock extends Block implements IIGBlock
 		}
 		lightOpacity = 15;
 	}
-
+	
 	public float naturalHardness = 1f;
-
+	
 	@Override
 	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{

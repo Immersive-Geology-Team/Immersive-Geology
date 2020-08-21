@@ -18,6 +18,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 public class ImmersiveBiomeProvider extends BiomeProvider
@@ -30,9 +31,9 @@ public class ImmersiveBiomeProvider extends BiomeProvider
 	 * After the final Voronoi Zoom - In OverworldBiomeProvider this is biomeFactoryLayer
 	 */
 	private final BiomeFactory biomeFactoryActual;
-
-	private Biome[] biomes = IGBiomes.getBiomes().toArray(new Biome[0]);
-
+	
+	Biome[] biomes = IGBiomes.getBiomes().stream().toArray(Biome[]::new);
+	
 	public ImmersiveBiomeProvider(ImmersiveGenerationSettings settings)
 	{
 		WorldInfo worldInfo = settings.getWorldInfo();
@@ -40,10 +41,19 @@ public class ImmersiveBiomeProvider extends BiomeProvider
 
 		this.biomeFactory = new BiomeFactory(areaFactory.get(0));
 		this.biomeFactoryActual = new BiomeFactory(areaFactory.get(1));
-
-		// todo: create temperature / rainfall layers, and use them to generate biome permutations
 	}
 
+	/**
+	 * Override the default spawn enabled biome list, as we don't use any of the applicable vanilla biomes.
+	 */
+	@Override
+	public List<Biome> getBiomesToSpawnIn() {
+		return Arrays.asList(biomes).stream().filter((biome) -> (biome != IGBiomes.OCEAN && 
+				  biome != IGBiomes.DEEP_OCEAN &&
+				  biome != IGBiomes.DEEP_OCEAN_VOLCANIC &&
+				  biome != IGBiomes.OCEAN_EDGE)).collect(Collectors.toList());
+	} 
+	
 	/**
 	 * Gets the biome from the provided coordinates
 	 *

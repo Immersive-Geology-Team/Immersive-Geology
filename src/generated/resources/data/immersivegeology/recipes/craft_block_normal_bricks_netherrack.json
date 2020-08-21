@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bricks",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:polished_chunks/netherrack"
+    }
+  },
+  "result": {
+    "item": "immersivegeology:block_normal_bricks_netherrack"
+  }
+}

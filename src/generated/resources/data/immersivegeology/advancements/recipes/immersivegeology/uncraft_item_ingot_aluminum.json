@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersivegeology:uncraft_item_ingot_aluminum"
+    ]
+  },
+  "criteria": {
+    "ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersivegeology:item_ingot_aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersivegeology:uncraft_item_ingot_aluminum"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

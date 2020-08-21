@@ -1,29 +1,37 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import javax.imageio.stream.IIOByteBuffer;
+
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGMathHelper;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.IIGOreBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData.LayerOre;
-import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.IChunk;
 
-import java.util.*;
-
 public class WorleyOreCarver
 {
-
 	private static final int SAMPLE_HEIGHT = 64;
 	private static float NOISE_THRESHOLD = 0.35f;
 	
@@ -37,13 +45,13 @@ public class WorleyOreCarver
 
 	public WorleyOreCarver(){};
 
-	public void setupNewLayer(Random seedGenerator, EnumOreBearingMaterials oreMaterial, int offset)
+	public void setupNewLayer(Random seedGenerator, EnumMaterials oreMaterial)
 	{
 		if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 		{
 
-			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong() + offset);
-			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong() + offset + 1);
+			OpenSimplexNoise oreNoiseWorley = new OpenSimplexNoise(seedGenerator.nextLong() + oreNoiseArray.size());
+			OpenSimplexNoise oreNoiseWorleySub = new OpenSimplexNoise(seedGenerator.nextLong() + oreNoiseArray.size() + 1);
 
 			//this is to make ore veins less common (without this it's way too common)
 			INoise3D oreNoiseSub = (x, y, z) -> {
@@ -54,7 +62,7 @@ public class WorleyOreCarver
 				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.8f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
 			};
 
-
+			System.out.println("Created Map for " + oreMaterial.toString().toLowerCase());
 			oreNoiseArray.put(oreMaterial.toString().toLowerCase(), oreNoise.sub(oreNoiseSub));
 		}
 	}
@@ -67,20 +75,12 @@ public class WorleyOreCarver
 		ArrayList<LayerOre> oreArrayData = biomeData.getLayerOre(currentLayer);
 		// run this through a full loop, for each ore, returns out if ore is not set in the biomes layer data!
 		int totalLayerCount = biomeData.getLayerCount();
-		Material baseMaterial = ((IGMaterialBlock)biomeData.getLayerBlock((currentLayer))).material;
-		LayerOre oreData = null;
-		for(LayerOre ore : oreArrayData)
+		Material baseMaterial = ((IGMaterialBlock)biomeData.getLayerBlock((currentLayer))).getMaterial();
+
+		for(LayerOre oreData : oreArrayData)
 		{
-			oreData = ore;
-
-			//if ore data is not found, no ore to generate, exit out of carve function
-			if(oreData==null)
-			{
-				return;
-			}
-
 			//ore data has been retrieved, set ore material data for later use
-			EnumOreBearingMaterials oreMaterial = oreData.getOre();
+			EnumMaterials oreMaterial = oreData.getOre();
 
 			//if ore data is found, generate ore
 			float coverage = oreData.getCoverage();
@@ -102,6 +102,7 @@ public class WorleyOreCarver
 			// (This should never be the case, but this is incase someone does a stupid
 			if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 			{
+				System.out.println("No Noise Map found for " + oreMaterial.toString().toLowerCase());
 				return;
 			}
 
@@ -189,24 +190,24 @@ public class WorleyOreCarver
 												
 												if((yPos <= topOfLayer) && (yPos >= bottomOfLayer))
 												{
-													replacementState = IGBlockGrabber.grabOreBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial).getDefaultState().with(IGProperties.NATURAL, true);
+													replacementState = IGRegistryGrabber.grabBlock(MaterialUseType.ORE_BEARING, baseMaterial, oreMaterial.material).getDefaultState().with(IGProperties.NATURAL, true);
 													
 													//Run spawn in here to avoid creating ore outside of OUR layer.
 													finalNoise *= heightFadeValue;
-
+														
 													if(finalNoise > NOISE_THRESHOLD)
 													{
 														int richness = 1;
 
-														if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.85)
+														if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.73)
 														{
 															richness = 3; // DENSE
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.45)
+														else if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.55)
 														{
 															richness = 2; // RICH
 														}
-														else if(finalNoise >= NOISE_THRESHOLD+(1-NOISE_THRESHOLD)*0.3)
+														else if(finalNoise >= NOISE_THRESHOLD+(0.8-NOISE_THRESHOLD)*0.3)
 														{
 															richness = 1; // NORMAL
 														}
@@ -217,9 +218,12 @@ public class WorleyOreCarver
 
 														// Create cave if possible
 														BlockState originalState = chunkIn.getBlockState(pos);
-														if(!originalState.isAir(chunkIn, pos)&&originalState!=BEDROCK&&!originalState.getMaterial().isLiquid()&&(originalState.getBlock() instanceof IGMaterialBlock))
+														if(!originalState.isAir(chunkIn, pos) && originalState!=BEDROCK && 
+														   !originalState.getMaterial().isLiquid() && originalState.getBlock() instanceof IGMaterialBlock)													   
 														{
-															chunkIn.setBlockState(pos, replacementState.with(IGProperties.ORE_RICHNESS, richness), false);
+															if(!(originalState.getBlock() instanceof IIGOreBlock) || (IGMathHelper.randInt(4) == 1)) {
+																chunkIn.setBlockState(pos, replacementState.with(IGProperties.ORE_RICHNESS, richness), false);
+															}
 														}
 													}
 												}
@@ -228,7 +232,7 @@ public class WorleyOreCarver
 									}
 								}
 							}
-						}
+						} 
 						// End of x/z iteration
 					}
 				}

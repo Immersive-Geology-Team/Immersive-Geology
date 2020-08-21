@@ -1,3 +1,9 @@
+// Credit where credit due
+// World Generation - Muddykat (Using Modified Source Code from TerraFirmaCraft and YungsBetterCaves)
+// GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 for YungsBetterCaves sourced assets
+// European Union Public Licence V. 1.2 for for TerraFirmaCraft Sourced Assets - this includes most of the biome distribution code
+//
+
 package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.ClientProxy;
@@ -11,9 +17,11 @@ import com.igteam.immersivegeology.common.world.WorldEventHandler;
 import com.igteam.immersivegeology.common.world.WorldTypeImmersive;
 import com.igteam.immersivegeology.common.world.chunk.WorldChunkChecker;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
-import com.igteam.immersivegeology.server.ServerProxy;
+import com.muddykat.noise.NoiseGenTester;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -41,10 +49,7 @@ public class ImmersiveGeology
 			.clientAcceptedVersions(NETWORK_VERSION::equals)
 			.simpleChannel();
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-	public static ServerProxy serverProxy = new ServerProxy();
 	public static final IGItemGroup IG_ITEM_GROUP = new IGItemGroup(MODID);
-
-	public static final boolean GENERATE_MODELS = false;
 
 	public ImmersiveGeology()
 	{
@@ -64,12 +69,11 @@ public class ImmersiveGeology
 		IGContent.modConstruction();
 	}
 
-	private final WorldTypeImmersive worldType;
-	private static ImmersiveGeology INSTANCE;
-
+	public static WorldTypeImmersive worldType;
+	
 	public static WorldTypeImmersive getWorldType()
 	{
-		return INSTANCE.worldType;
+		return worldType;
 	}
 
 	@SubscribeEvent
@@ -84,7 +88,6 @@ public class ImmersiveGeology
 		//Previously in PREINIT
 		proxy.preInit();
 
-		proxy.preInitEnd();
 		//Previously in INIT
 		proxy.init();
 
@@ -92,20 +95,16 @@ public class ImmersiveGeology
 		ChunkDataCapability.setup();
 		IGContent.init();
 
-		proxy.initEnd();
-		//Previously in POSTINIT
 		proxy.postInit();
 		IGContent.postInit();
-
-		proxy.postInitEnd();
 	}
 
 	@SubscribeEvent
 	public void loadComplete(FMLLoadCompleteEvent event)
 	{
-
+		
 	}
-
+	
 	@SubscribeEvent
 	public void serverStarting(FMLServerStartingEvent event)
 	{

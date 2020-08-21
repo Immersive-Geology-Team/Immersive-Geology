@@ -1,19 +1,22 @@
 package com.igteam.immersivegeology.common.world.chunk;
 
+import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase.EnumMineralType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.materials.EnumOreBearingMaterials;
-import com.igteam.immersivegeology.common.util.IGBlockGrabber;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
+import com.igteam.immersivegeology.common.world.gen.carver.ImmersiveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
-import com.igteam.immersivegeology.common.world.layer.WorldLayerData;
+import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -42,7 +45,7 @@ import java.util.Random;
 public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGenerationSettings>
 {
 
-	public static WorldLayerData data;
+	public static WorldLayerData data = WorldLayerData.instance;
 
 	private static final double[] PARABOLIC_FIELD = Util.make(new double[9*9], array -> {
 		for(int x = 0; x < 9; x++)
@@ -54,19 +57,18 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 	});
 
-	private final WorleyCaveCarver worleyCaveCarver;
+	private final ImmersiveCarver immersiveCarver;
 	private final ImmersiveBiomeProvider biomeProvider;
 	private final ChunkDataProvider chunkDataProvider;
 
 	public ChunkGeneratorImmersiveOverworld(IWorld world, BiomeProvider provider,
 											ImmersiveGenerationSettings settings)
 	{
-		super(world, provider, settings);
+		super(world, provider, settings); 
 		boolean usePerlin = true;
 		Random seedGenerator = new Random(world.getSeed());
 		this.surfaceDepthNoise = usePerlin?new PerlinNoiseGenerator(seedGenerator, 4)
 				: new OctavesNoiseGenerator(seedGenerator, 4);
-		data = new WorldLayerData();
 		final long biomeNoiseSeed = seedGenerator.nextLong();
 
 		this.biomeNoiseMap = new HashMap<>();
@@ -74,21 +76,13 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		this.biomeProvider = (ImmersiveBiomeProvider)provider;
 
-		this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
-
-
-		// Create a generator for each ore in each layer for each biome!
-		// This is a BAD BAD way of doing things, we SHOULD be using something like 3D Noise Layering System, but no
-		// I went with the quickest easier way of creating a generator for each situation...
-		// It's accurate, but Fat, it takes a lot of iteration, which is bad!
-
-		int offset = 0;
-		for(EnumOreBearingMaterials ore : EnumOreBearingMaterials.values())
-		{
-			WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore, offset);
-			offset++;
-		}
- 
+		this.immersiveCarver = new ImmersiveCarver();
+		this.immersiveCarver.initialize(world);
+		
+		EnumMaterials.filterWorldGen().forEach((ore) -> {
+				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
+		});
+		
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
 
@@ -99,12 +93,10 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		if(stage==GenerationStage.Carving.AIR)
 		{
 			// First, run worley cave carver
-			worleyCaveCarver.carve(chunkIn, chunkIn.getPos().x<<4, chunkIn.getPos().z<<4);
-
-			// TODO RE-WORK this trash!
-			// ABSOLUTE HORROR right here, but I don't have the time to do a proper 3D noise Layer System for unquie ore veins, so
-			// so works, so it will do...
-
+			
+			this.immersiveCarver.carve(chunkIn, chunkIn.getPos().x, chunkIn.getPos().z);
+			
+			
 			for(BiomeLayerData biomeData : data.worldLayerData)
 			{
 				int totalLayers = biomeData.getLayerCount();
@@ -273,7 +265,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 
 		// Build Rough Terrain
-		IGBaseBlock replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
+		IGBaseBlock replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material);
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		for(int x = 0; x < 16; x++)
@@ -336,7 +328,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							if((y <= (totHeight*l)/lc)
 									&&(y >= (((totHeight*l)/lc)-((totHeight*l)/lc)/l)))
 							{
-								replaceBlock = IGBlockGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegamite.material);
+								replaceBlock = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegmatite.material);
 								for(int randomLevel = 0; randomLevel < 3; randomLevel++)
 								{
 

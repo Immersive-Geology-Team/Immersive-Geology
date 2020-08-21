@@ -9,6 +9,16 @@ public class IGMathHelper extends MathHelper
 {
 	private static Random RANDOM = new Random();
 
+	public static double abs(double value)
+	{
+		return value >= 0 ? value : -value;
+	}
+
+	public static long abs(long value)
+	{
+		return value >= 0 ? value : -value;
+	}
+
 	/**
 	 * @return A random integer between Integer.MIN_VALUE and Integer.MAX_VALUE
 	 * @Author CrimsonTwilight
@@ -86,6 +96,95 @@ public class IGMathHelper extends MathHelper
 		long rounded = Math.round(d);
 		return Math.abs(rounded-d) < 0.00000000000001?rounded: d;
 	}
+
+
+	/**
+	 * @param velocity  original velocity
+	 * @param drag drag factor
+	 * @return drag applied velocity
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the drag applied velocity
+	 * </p>
+	 */
+	public static double apply_drag(double velocity, double drag)
+	{
+		return root(Math.pow(velocity, 2) * drag * 0.5) * (abs(velocity)/velocity);
+	}
+
+
+	/**
+	 * @param velocity  original velocity
+	 * @param drag drag factor
+	 * @return drag applied velocity
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the drag applied velocity
+	 * </p>
+	 */
+	public static double apply_drag(double velocity, double drag, double area)
+	{
+		return root(Math.pow(velocity, 2) * drag * 0.5 * area) * (abs(velocity)/velocity);
+	}
+
+
+	/**
+	 * @param height height above sea level
+	 * @return barometric air pressure in Pascal
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the air pressure at a certain height above sea level
+	 * </p>
+	 */
+	public static double barometric_air_pressure(double height)
+	{
+		return 101.325 * Math.exp(-0.00012*height) * 1000;
+	}
+
+
+	/**
+	 * @param pressure pressure on the air
+	 * @return air density at 20 C and pressure Pas
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the air density at a certain pressure and 20 Celsius
+	 * </p>
+	 */
+	public static double air_density(double pressure)
+	{
+		return pressure/(287*(20+273.15));
+	}
+
+
+	/**
+	 * @param pressure pressure on the air
+	 * @param temperature temperature in Kelvin
+	 * @return air density at 20 C and pressure Pas
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the air density at a certain pressure and 20 Celsius
+	 * </p>
+	 */
+	public static double air_density(double pressure, float temperature)
+	{
+		return pressure/(287*temperature);
+	}
+
+
+	/**
+	 * @param velocity  original velocity
+	 * @param drag drag factor
+	 * @return drag applied velocity
+	 * @Author CrimsonTwilight
+	 * <p>
+	 * Used to get the drag applied velocity
+	 * </p>
+	 */
+	public static double apply_drag(double velocity, double drag, double area, double density)
+	{
+		return -root(Math.pow(velocity, 2) * drag * 0.5 * area * density) * (abs(velocity)/velocity);
+	}
+
 
 	//CMY is actually reverse RGB (i tested that out in GIMP ^^)... adding black makes colour darker (less means lighter)
 	//Black is actually the limit of darkness (less value - darker) in RGB
@@ -228,8 +327,8 @@ public class IGMathHelper extends MathHelper
 			while(posY > height||motionY > 0)
 			{ // simulate movement, until we reach the y-level required
 				motionY -= gravity;
-				motionX = IGMathHelper.root(Math.pow(motionX, 2)*drag);
-				motionY = IGMathHelper.root(Math.pow(motionY, 2)*drag);
+				motionX += apply_drag(motionX, drag);
+				motionY += apply_drag(motionY, drag);
 				posX += motionX;
 				posY += motionY;
 			}
@@ -276,8 +375,8 @@ public class IGMathHelper extends MathHelper
 			while(posY > height||vY > 0)
 			{ // simulate movement, until we reach the y-level required
 				vY -= mass*gravity;
-				vX = IGMathHelper.root(Math.pow(vX, 2)*dragFactor);
-				vY = IGMathHelper.root(Math.pow(vY, 2)*dragFactor);
+				vX += apply_drag(vX, dragFactor);
+				vY += apply_drag(vY, dragFactor);
 				posX += vX;
 				posY += vY;
 			}
@@ -326,8 +425,8 @@ public class IGMathHelper extends MathHelper
 			while(posY > height||vY > 0)
 			{ // simulate movement, until we reach the y-level required
 				vY -= mass*gravity;
-				vX = IGMathHelper.root(Math.pow(vX, 2)*dragFactor);
-				vY = IGMathHelper.root(Math.pow(vY, 2)*dragFactor);
+				vX += apply_drag(vX, dragFactor);
+				vY += apply_drag(vY, dragFactor);
 				posX += vX;
 				posY += vY;
 			}

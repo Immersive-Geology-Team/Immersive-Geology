@@ -3,7 +3,6 @@ package com.igteam.immersivegeology.api.materials;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -57,6 +56,12 @@ public abstract class Material
 
 	@Nonnull
 	public abstract MaterialTypes getMaterialType();
+	
+	/**
+	 * @return Used to help world generation where metal types have a native way of spawning
+	 */
+	@Nullable
+	public abstract MaterialTypes getMaterialSubType();
 
 	//Temperature properties
 
@@ -162,7 +167,7 @@ public abstract class Material
 	 * @return a path to the texture
 	 */
 	@Nullable
-	public ResourceLocation getSpecialSubtypeTexture(MaterialUseType useType)
+	public String getSpecialSubtypeModelName(MaterialUseType useType)
 	{
 		return null;
 	}

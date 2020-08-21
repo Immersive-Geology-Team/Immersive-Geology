@@ -17,17 +17,26 @@ public class PlainsBiome extends IGBiome
 {
 	private final float minHeight;
 	private final float maxHeight;
-
-	public PlainsBiome(float minHeight, float maxHeight)
+	private final PlainsType plainType;
+	
+	public PlainsBiome(float minHeight, float maxHeight, PlainsType type)
 	{
 		super(new Builder().category(Category.PLAINS).precipitation(RainType.RAIN).downfall(0.4f).temperature(0.65f), 0.65f, 0.4f);
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
 
+		this.plainType = type;
+		if(type != PlainsType.GLACIER) {
+			IGDefaultBiomeFeatures.addCarvers(this);
+			DefaultBiomeFeatures.addGrass(this);
+			DefaultBiomeFeatures.addTaigaRocks(this);
+		} else {
+			DefaultBiomeFeatures.addIcebergs(this);
+			DefaultBiomeFeatures.addBlueIce(this);
+			DefaultBiomeFeatures.addFreezeTopLayer(this);
+		}
+		
 		DefaultBiomeFeatures.addStructures(this);
-		IGDefaultBiomeFeatures.addCarvers(this);
-		DefaultBiomeFeatures.addGrass(this);
-		DefaultBiomeFeatures.addTaigaRocks(this);
 	}
 
 	@Nonnull
@@ -40,15 +49,35 @@ public class PlainsBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		// TODO Auto-generated method stub
-		switch(part)
-		{
-			case grass:
-				return Blocks.GRASS_BLOCK.getDefaultState();
-			case dirt:
-				return Blocks.DIRT.getDefaultState();
-			default:
-				return Blocks.DIRT.getDefaultState();
+		switch(plainType) {
+		case GLACIER:
+			switch(part)
+			{
+				case grass:
+					return Blocks.ICE.getDefaultState();
+				case dirt:
+					return Blocks.PACKED_ICE.getDefaultState();
+				default:
+					return Blocks.PACKED_ICE.getDefaultState();
+			}
+		case DEFAULT:
+		default:
+			switch(part)
+			{
+				case grass:
+					return Blocks.GRASS_BLOCK.getDefaultState();
+				case dirt:
+					return Blocks.DIRT.getDefaultState();
+				default:
+					return Blocks.DIRT.getDefaultState();
+			}
 		}
+
 	}
+	
+	public enum PlainsType{
+		DEFAULT,
+		GLACIER
+	}
+	
 }

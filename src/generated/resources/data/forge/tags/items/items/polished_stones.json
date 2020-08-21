@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersivegeology:block_polished_stone_rhyolite",
+    "immersivegeology:block_polished_stone_diorite",
+    "immersivegeology:block_polished_stone_andesite",
+    "immersivegeology:block_polished_stone_granite",
+    "immersivegeology:block_polished_stone_netherrack",
+    "immersivegeology:block_polished_stone_endstone",
+    "immersivegeology:block_polished_stone_basalt",
+    "immersivegeology:block_polished_stone_gabbros",
+    "immersivegeology:block_polished_stone_marble",
+    "immersivegeology:block_polished_stone_limestone",
+    "immersivegeology:block_polished_stone_pegmatite",
+    "immersivegeology:block_polished_stone_regolith"
+  ]
+}

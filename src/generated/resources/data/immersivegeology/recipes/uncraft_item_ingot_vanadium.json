@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/vanadium"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:item_nugget_vanadium",
+    "count": 9
+  }
+}

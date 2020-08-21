@@ -15,6 +15,11 @@ import java.util.LinkedHashSet;
  */
 public class MaterialMetalPlatinum extends MaterialMetalBase
 {
+	
+	public MaterialMetalPlatinum() {
+		isNativeMetal = true;
+	}
+	
 	@Override
 	public String getName()
 	{
