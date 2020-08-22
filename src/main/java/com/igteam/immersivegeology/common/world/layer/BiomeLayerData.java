@@ -3,8 +3,6 @@ package com.igteam.immersivegeology.common.world.layer;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
-
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
@@ -147,7 +145,6 @@ public class BiomeLayerData
 
 	public int getLayerCount()
 	{
-		// TODO Auto-generated method stub
 		return this.layerMap.size();
 	}
 

@@ -1,22 +1,21 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+import com.igteam.immersivegeology.common.util.IGLogger;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.gen.carver.controller.CaveCarverController;
 import com.igteam.immersivegeology.common.world.gen.carver.controller.WaterRegionController;
 import com.igteam.immersivegeology.common.world.gen.carver.util.ColPos;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
+
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /*
  * This carver is a modified version of YungsBetterCaves BetterCavesCarver.java
@@ -43,7 +42,7 @@ public class ImmersiveCarver {
     	try {
     		
     	} catch (NullPointerException e) {
-    		System.out.println("ERROR, failed to find the name of the dimension with the ID " + String.valueOf(dimensionID));
+			IGLogger.info("ERROR, failed to find the name of the dimension with the ID "+dimensionID);
     	}
     	
     	this.caveCarver = new CaveCarverController(worldIn);
@@ -58,11 +57,10 @@ public class ImmersiveCarver {
         int[][] surfaceAltitudes = new int[16][16];
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                surfaceAltitudes[x][z] = false
-                    ? 1 // Don't bother doing unnecessary calculations
-                    : Math.min(
-                        chunkIn.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, x, z), 
-                        chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x, z));
+				// Don't bother doing unnecessary calculations
+				surfaceAltitudes[x][z] = Math.min(
+						chunkIn.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, x, z),
+						chunkIn.getTopBlockY(Heightmap.Type.OCEAN_FLOOR_WG, x, z));
             }
         }
         

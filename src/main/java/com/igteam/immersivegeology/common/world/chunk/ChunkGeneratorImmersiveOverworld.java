@@ -1,18 +1,14 @@
 package com.igteam.immersivegeology.common.world.chunk;
 
-import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.api.materials.material_bases.MaterialMineralBase.EnumMineralType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.gen.carver.ImmersiveCarver;
-import com.igteam.immersivegeology.common.world.gen.carver.WorleyCaveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
@@ -78,8 +74,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 
 		this.immersiveCarver = new ImmersiveCarver();
 		this.immersiveCarver.initialize(world);
-		
-		EnumMaterials.filterWorldGen().forEach((ore) -> {
+
+		EnumMaterials.filterByUseType(MaterialUseType.GENERATED_CHUNKS).forEach((ore) -> {
 				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);
 		});
 		
@@ -426,7 +422,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 	@Override
 	public int func_222529_a(int p_222529_1_, int p_222529_2_, Type p_222529_3_)
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

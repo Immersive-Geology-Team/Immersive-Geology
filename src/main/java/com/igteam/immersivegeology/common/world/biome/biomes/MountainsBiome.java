@@ -62,7 +62,6 @@ public class MountainsBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		// TODO Auto-generated method stub
 		switch(mountainType)
 		{
 		case FROZEN:

@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.materials.metals;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
@@ -16,8 +15,10 @@ import java.util.LinkedHashSet;
  */
 public class MaterialMetalSilver extends MaterialMetalBase
 {
-	public MaterialMetalSilver() {
-		isNativeMetal = true;
+	@Override
+	public boolean isNativeMetal()
+	{
+		return true;
 	}
 	
 	@Override

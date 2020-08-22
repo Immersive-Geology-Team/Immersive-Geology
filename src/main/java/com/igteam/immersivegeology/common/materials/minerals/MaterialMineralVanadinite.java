@@ -40,21 +40,18 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 	@Override
 	public Rarity getRarity()
 	{
-		// TODO Auto-generated method stub
 		return Rarity.COMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 7835;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 3470;
 	}
 
@@ -63,42 +60,36 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 	@Override
 	public int getColor(int temperature)
 	{
-		// TODO Auto-generated method stub
 		return baseColor;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		// TODO Auto-generated method stub
 		return 8.96f;
 	}
 
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		// TODO Auto-generated method stub
 		return EnumMineralType.MINERAL;
 	}
 

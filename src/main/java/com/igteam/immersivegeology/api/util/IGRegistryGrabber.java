@@ -5,12 +5,10 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -42,7 +40,7 @@ public class IGRegistryGrabber
 	/**
 	 * @apiNote This function is a wrapper to allow you to use the EnumMaterials itself as a param, in place of using EnumMaterials.VALUE.material
 	 * @param type of block
-	 * @param EnumMaterial type that the block is made of
+	 * @param materials the block is made of
 	 * @return item that matches the given type and materials
 	 */
 	public static IGBaseBlock grabBlockAlt(@Nonnull MaterialUseType type, @Nonnull EnumMaterials... materials) {

@@ -2586,7 +2586,6 @@ public class OpenSimplexNoise implements INoise3D
 	@Override
 	public float noise(float x, float y, float z)
 	{
-		// TODO Auto-generated method stub
 		return eval(x, y, z);
 	}
 }

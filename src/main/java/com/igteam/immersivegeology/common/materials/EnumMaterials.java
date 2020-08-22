@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.common.materials;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
@@ -124,16 +125,19 @@ public enum EnumMaterials
 	}
 	
 	/**
-	 * @return only mineral materials
+	 * @return materials used by worldgen (must have a dummy GENERATED_ORE subtype)
 	 */
 	public static Stream<EnumMaterials> filterWorldGen()
 	{
-		return filterBySubType(MaterialTypes.MINERAL); //some metals have mineral as a subtype, (reusing mineral type in place of adding in a native material type)
+		return filterByUseType(MaterialUseType.GENERATED_ORE);
 	}
-	
-	public static Stream<EnumMaterials> filterBySubType(MaterialTypes type)
+
+	/**
+	 * @return only materials of a type (metal, mineral, fluid, etc.)
+	 */
+	public static Stream<EnumMaterials> filterByUseType(MaterialUseType type)
 	{
-		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getMaterialSubType()==type));
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.hasUsetype(type)));
 	}
 
 	/**
@@ -151,5 +155,12 @@ public enum EnumMaterials
 	{
 		Stream<MaterialTypes> typesStream = Stream.of(types);
 		return Stream.of(values()).filter(enumMaterials -> typesStream.anyMatch(materialTypes -> enumMaterials.material.getMaterialType()==materialTypes));
+	}
+
+	public static EnumMaterials filterByName(String name)
+	{
+		if(name.isEmpty())
+			return Empty;
+		return Stream.of(values()).filter(enumMaterials -> (enumMaterials.material.getName().equals(name))).findFirst().orElse(Empty);
 	}
 }

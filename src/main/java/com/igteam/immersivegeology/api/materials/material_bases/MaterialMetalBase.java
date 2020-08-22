@@ -10,12 +10,15 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
-	protected boolean isNativeMetal = false;
+
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
+			case GENERATED_ORE:
+			case GENERATED_CHUNKS:
+				return isNativeMetal();
 			case INGOT:
 				return hasIngot();
 			case NUGGET:
@@ -55,16 +58,15 @@ public abstract class MaterialMetalBase extends Material
 		}
 	}
 
+	public boolean isNativeMetal()
+	{
+		return false;
+	}
+
 	@Override
 	public MaterialTypes getMaterialType()
 	{
 		return MaterialTypes.METAL;
-	}
-	
-	@Override
-	public MaterialTypes getMaterialSubType()
-	{
-		return (isNativeMetal ? MaterialTypes.MINERAL : MaterialTypes.METAL);
 	}
 
 	@Override

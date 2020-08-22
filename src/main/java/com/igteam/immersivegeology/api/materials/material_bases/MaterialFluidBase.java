@@ -19,7 +19,7 @@ public abstract class MaterialFluidBase extends Material
 	public abstract float getConcentration();
 
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
@@ -33,12 +33,6 @@ public abstract class MaterialFluidBase extends Material
 
 	@Override
 	public MaterialTypes getMaterialType()
-	{
-		return MaterialTypes.FLUID;
-	}
-	
-	@Override
-	public MaterialTypes getMaterialSubType()
 	{
 		return MaterialTypes.FLUID;
 	}

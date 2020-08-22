@@ -12,7 +12,7 @@ public abstract class MaterialMetalloidBase extends Material
 	public abstract EnumMetalType getMetalType();
 
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
@@ -33,12 +33,6 @@ public abstract class MaterialMetalloidBase extends Material
 
 	@Override
 	public MaterialTypes getMaterialType()
-	{
-		return MaterialTypes.METALLOID;
-	}
-
-	@Override
-	public MaterialTypes getMaterialSubType()
 	{
 		return MaterialTypes.METALLOID;
 	}

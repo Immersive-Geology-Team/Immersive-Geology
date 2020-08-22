@@ -113,7 +113,6 @@ public class IGBlockItem extends BlockItem implements IIGSubGroupContained
 	@Override
 	public ItemSubGroup getSubGroup()
 	{
-		// TODO Auto-generated method stub
 		return subGroup;
 	}
 

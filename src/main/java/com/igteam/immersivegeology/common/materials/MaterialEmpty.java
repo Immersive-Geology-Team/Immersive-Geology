@@ -46,12 +46,7 @@ public class MaterialEmpty extends Material
 	{
 		return MaterialTypes.STONE;
 	}
-	
-	@Override
-	public MaterialTypes getMaterialSubType()
-	{
-		return MaterialTypes.STONE;
-	}
+
 	@Override
 	public int getBoilingPoint()
 	{

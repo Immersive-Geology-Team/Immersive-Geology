@@ -29,7 +29,6 @@ public class MaterialStonePegmatite extends MaterialStoneBase
 	@Override
 	public EnumStoneType getStoneType()
 	{
-		// TODO Auto-generated method stub
 		return EnumStoneType.IGNEOUS_INTRUSIVE;
 	}
 
@@ -47,63 +46,54 @@ public class MaterialStonePegmatite extends MaterialStoneBase
 	@Override
 	public Rarity getRarity()
 	{
-		// TODO Auto-generated method stub
 		return Rarity.COMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		// TODO Auto-generated method stub
 		return 0xA78D5C;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		// TODO Auto-generated method stub
 		return 1.5f;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		// TODO Auto-generated method stub
 		return 1.5f;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		// TODO Auto-generated method stub
 		return 6f;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public int getBlockHarvestLevel()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

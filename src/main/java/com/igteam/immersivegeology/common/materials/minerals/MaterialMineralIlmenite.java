@@ -30,14 +30,12 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		// TODO Auto-generated method stub
 		return EnumMineralType.MINERAL;
 	}
 
 	@Override
 	public LinkedHashSet<ElementProportion> getElements()
 	{
-		// TODO Auto-generated method stub
 		return new LinkedHashSet<>(Arrays.asList(
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.TITANIUM),
@@ -48,21 +46,18 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 	@Override
 	public Rarity getRarity()
 	{
-		// TODO Auto-generated method stub
 		return Rarity.RARE;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 3923;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 1923;
 	}
 
@@ -71,35 +66,30 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 	@Override
 	public int getColor(int temperature)
 	{
-		// TODO Auto-generated method stub
 		return baseColor;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		// TODO Auto-generated method stub
 		return 4.55f;
 	}
 }

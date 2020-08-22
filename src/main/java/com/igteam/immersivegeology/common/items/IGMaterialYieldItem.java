@@ -1,26 +1,27 @@
 package com.igteam.immersivegeology.common.items;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
-public class IGMaterialYeildItem extends IGMaterialResourceItem {
+import javax.annotation.Nullable;
+import java.util.List;
 
-	public int stoneYeild;
-	public int oreYeild;
-	public IGMaterialYeildItem(MaterialUseType key,int maxStoneYeild, int maxOreYeild, Material... materials) {
+public class IGMaterialYieldItem extends IGMaterialResourceItem
+{
+
+	public int stoneYield;
+	public int oreYield;
+
+	public IGMaterialYieldItem(MaterialUseType key, int maxStoneYeild, int maxOreYeild, Material... materials)
+	{
 		super(key, materials);
-		stoneYeild = maxStoneYeild;
-		oreYeild = maxOreYeild;
+		stoneYield = maxStoneYeild;
+		oreYield = maxOreYeild;
 	}
 
 	@Override
@@ -29,21 +30,24 @@ public class IGMaterialYeildItem extends IGMaterialResourceItem {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if(hasShiftDown()) {
 			tooltip.add(new StringTextComponent(""));
-			StringTextComponent text = new StringTextComponent("Stone Yeild: " + String.valueOf(getMaxStoneYeild()) + "mb");
-			StringTextComponent text2 = new StringTextComponent("Ore Yeild: " + String.valueOf(getMaxOreYeild()) + "mb");
+			StringTextComponent text = new StringTextComponent("Stone Yield: "+String.valueOf(getMaxStoneYield())+"mb");
+			StringTextComponent text2 = new StringTextComponent("Ore Yield: "+String.valueOf(getMaxOreYield())+"mb");
 			tooltip.add(text);
-			if(getMaxOreYeild() > 0) {
+			if(getMaxOreYield() > 0)
+			{
 				tooltip.add(text2);
 			}
 		}
 	}
-	
-	public int getMaxStoneYeild() {
-		return stoneYeild;
+
+	public int getMaxStoneYield()
+	{
+		return stoneYield;
 	}
-	
-	public int getMaxOreYeild() {
-		return oreYeild;
+
+	public int getMaxOreYield()
+	{
+		return oreYield;
 	}
 	
 }

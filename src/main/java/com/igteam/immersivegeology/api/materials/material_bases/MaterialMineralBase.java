@@ -1,30 +1,30 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
-import javax.annotation.Nullable;
-
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
+
+import javax.annotation.Nullable;
 
 public abstract class MaterialMineralBase extends Material
 {
 	public abstract EnumMineralType getMineralType();
 
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
-			case ROCK:
-				return hasRock();
+			case GENERATED_ORE:
+			case GENERATED_CHUNKS:
 			case DUST:
 			case TINY_DUST:
 				return true;
 		}
 		return false;
 	}
-	
+
 	@Nullable
 	@Override
 	public String getSpecialSubtypeModelName(MaterialUseType useType)
@@ -34,11 +34,6 @@ public abstract class MaterialMineralBase extends Material
 		return null;
 	}
 
-	private boolean hasRock() {
-		// TODO Auto-generated method stub
-		return getMaterialSubType() == MaterialTypes.STONE ? true : false;
-	}
-
 	@Override
 	public MaterialTypes getMaterialType()
 	{
@@ -46,25 +41,19 @@ public abstract class MaterialMineralBase extends Material
 	}
 
 	@Override
-	public MaterialTypes getMaterialSubType()
-	{
-		return MaterialTypes.MINERAL;
-	}
-	
-	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return net.minecraft.block.material.Material.ROCK;
 	}
 
-	public enum EnumMineralType
-	{
-		MINERAL
-	}
-
 	public int getStaticColor()
 	{
 		return 0xffffff;
+	}
+
+	public enum EnumMineralType
+	{
+		MINERAL
 	}
 
 }

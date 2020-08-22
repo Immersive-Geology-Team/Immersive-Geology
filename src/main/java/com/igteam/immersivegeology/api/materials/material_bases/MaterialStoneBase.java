@@ -14,7 +14,7 @@ public abstract class MaterialStoneBase extends Material
 	public abstract EnumStoneType getStoneType();
 
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
@@ -53,12 +53,6 @@ public abstract class MaterialStoneBase extends Material
 
 	@Override
 	public MaterialTypes getMaterialType()
-	{
-		return MaterialTypes.STONE;
-	}
-	
-	@Override
-	public MaterialTypes getMaterialSubType()
 	{
 		return MaterialTypes.STONE;
 	}

@@ -6,6 +6,8 @@ import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.common.items.IGBaseItem;
+import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
@@ -45,7 +47,7 @@ public class IGContent
 			{
 				Material material = m.material;
 				// Check if that material is allowed to make this item type.
-				if(material.hasSubtype(materialItem))
+				if(material.hasUsetype(materialItem))
 				{
 					// Check if this type is an ITEM not a BLOCK type.
 					switch(materialItem.getCategory())
@@ -64,6 +66,8 @@ public class IGContent
 				}
 			}
 		}
+
+		addItem(new IGToolPickaxe());
 	}
 
 	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
@@ -91,15 +95,8 @@ public class IGContent
 	public static void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
 		for(Block b : registeredIGBlocks.values())
-		{
-			if(b!=null)
-			{
-				if(b instanceof IIGBlock)
-				{
-					event.getRegistry().register(((IIGBlock)b).getItemBlock());
-				}
-			}
-		}
+			if(b instanceof IIGBlock)
+				event.getRegistry().register(((IIGBlock)b).getItemBlock());
 	}
 
 	@SubscribeEvent
@@ -180,5 +177,10 @@ public class IGContent
 	public static void addItemBlockForBlock(String name, BlockItem itemBlock)
 	{
 		registeredIGItems.put(name, itemBlock);
+	}
+
+	public static void addItem(IGBaseItem item)
+	{
+		registeredIGItems.put(item.itemName, item);
 	}
 }

@@ -1,13 +1,5 @@
 package com.igteam.immersivegeology.common.world.gen.carver;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
-import javax.imageio.stream.IIOByteBuffer;
-
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
@@ -16,6 +8,7 @@ import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGOreBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
@@ -24,11 +17,12 @@ import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.NoiseUtil;
 import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.IChunk;
+
+import java.util.*;
 
 public class WorleyOreCarver
 {
@@ -62,7 +56,7 @@ public class WorleyOreCarver
 				return oreNoiseWorley.flattened(0f, 1f).octaves(3, 0.8f).noise(x/FEATURE_SIZE, y/FEATURE_SIZE, z/FEATURE_SIZE);
 			};
 
-			System.out.println("Created Map for " + oreMaterial.toString().toLowerCase());
+			IGLogger.info("Created Map for "+oreMaterial.toString().toLowerCase());
 			oreNoiseArray.put(oreMaterial.toString().toLowerCase(), oreNoise.sub(oreNoiseSub));
 		}
 	}
@@ -102,7 +96,7 @@ public class WorleyOreCarver
 			// (This should never be the case, but this is incase someone does a stupid
 			if(!oreNoiseArray.containsKey(oreMaterial.toString().toLowerCase()))
 			{
-				System.out.println("No Noise Map found for " + oreMaterial.toString().toLowerCase());
+				IGLogger.info("No Noise Map found for "+oreMaterial.toString().toLowerCase());
 				return;
 			}
 

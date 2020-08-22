@@ -1,36 +1,28 @@
 package com.igteam.immersivegeology.common.world;
 
-import java.util.Arrays;
-import java.util.Random;
-
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.network.ChunkDataPacket;
 import com.igteam.immersivegeology.common.network.PacketHandler;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkData;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataCapability;
 import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.climate.ClimateIG;
-import com.muddykat.noise.NoiseGenTester;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -50,25 +42,6 @@ public class WorldEventHandler
 
 	private boolean worldDone = false;
 	private int seed;
-	
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onWorldLoad(WorldEvent.Load event)
-	{
-		if(EffectiveSide.get()==LogicalSide.SERVER)
-		{
-			if(0==event.getWorld().getDimension().getType().getId())
-			{
-				if(!worldDone)
-				{
-					worldDone = true;
-					
-				}
-			}
-		}
-		
-		//NoiseGenTester gen = new NoiseGenTester();
- 		//gen.generate(event.getWorld().getSeed());
-	}
 
 	@SubscribeEvent
 	public static void onChunkWatchWatch(ChunkWatchEvent.Watch event)
@@ -85,6 +58,47 @@ public class WorldEventHandler
 						new ChunkDataPacket(pos.x, pos.z, data));
 			});
 		}
+	}
+
+	@SubscribeEvent
+	public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event)
+	{
+		World world = event.getObject().getWorld();
+		if(world.getWorldType()==ImmersiveGeology.getWorldType())
+		{
+			// Add the rock data to the chunk capability, for long term storage
+			ChunkData data;
+			ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(world);
+			if(chunkDataProvider!=null)
+			{
+				data = chunkDataProvider.get(event.getObject());
+			}
+			else
+			{
+				data = new ChunkData();
+			}
+
+			event.addCapability(ChunkDataCapability.KEY, data);
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onWorldLoad(WorldEvent.Load event)
+	{
+		if(EffectiveSide.get()==LogicalSide.SERVER)
+		{
+			if(0==event.getWorld().getDimension().getType().getId())
+			{
+				if(!worldDone)
+				{
+					worldDone = true;
+
+				}
+			}
+		}
+
+		//NoiseGenTester gen = new NoiseGenTester();
+		//gen.generate(event.getWorld().getSeed());
 	}
 
 	@OnlyIn(value = Dist.CLIENT)
@@ -128,7 +142,6 @@ public class WorldEventHandler
 		}
 	}
 
-
 	@SubscribeEvent
 	public void onBlockBreaking(PlayerEvent.BreakSpeed event)
 	{
@@ -157,35 +170,13 @@ public class WorldEventHandler
 			{
 				//depends of primary block material
 				double nh = replaceBlock.getMaterial().getHardness();
-				System.out.println("Ore start Hard: "+nh);
+				IGLogger.info("Ore start Hard: "+nh);
 				int y = event.getPos().getY();
 				double max = Math.max(1, y);
 				double ns = (((0.3/Math.pow(Math.E, 8))*Math.pow(max, Math.E*0.75))*(original/8))/nh;
-				System.out.println("Ore End Hard: "+ns);
+				IGLogger.info("Ore End Hard: "+ns);
 				event.setNewSpeed((float)ns);
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<Chunk> event)
-	{
-		World world = event.getObject().getWorld();
-		if(world.getWorldType()==ImmersiveGeology.getWorldType())
-		{
-			// Add the rock data to the chunk capability, for long term storage
-			ChunkData data;
-			ChunkDataProvider chunkDataProvider = ChunkDataProvider.get(world);
-			if(chunkDataProvider!=null)
-			{
-				data = chunkDataProvider.get(event.getObject());
-			}
-			else
-			{
-				data = new ChunkData();
-			}
-
-			event.addCapability(ChunkDataCapability.KEY, data);
 		}
 	}
 
@@ -198,5 +189,5 @@ public class WorldEventHandler
 	 * event) { if (event.getInfo().getFluidState().isTagged(FluidTags.WATER)) {
 	 * GlStateManager.fogMode(GlStateManager.FogMode.LINEAR);
 	 * event.setDensity(0.5f); event.setCanceled(true); } }
-	 */	
+	 */
 }

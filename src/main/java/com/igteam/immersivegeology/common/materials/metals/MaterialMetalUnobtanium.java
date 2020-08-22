@@ -15,11 +15,12 @@ import java.util.LinkedHashSet;
  */
 public class MaterialMetalUnobtanium extends MaterialMetalBase
 {
-
-	public MaterialMetalUnobtanium() {
-		isNativeMetal = true;
+	@Override
+	public boolean isNativeMetal()
+	{
+		return true;
 	}
-	
+
 	@Override
 	public String getName()
 	{

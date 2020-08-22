@@ -43,7 +43,6 @@ public class OceanBiome extends IGBiome
 	@Override
 	public ISurfaceBuilder getIGSurfaceBuilder()
 	{
-		// TODO Auto-generated method stub
 		return ISurfaceBuilder.OCEAN;
 	}
 
@@ -60,7 +59,6 @@ public class OceanBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		// TODO Auto-generated method stub
 		return Blocks.GRAVEL.getDefaultState();
 	}
 }

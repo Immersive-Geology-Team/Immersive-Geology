@@ -4,9 +4,6 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -46,7 +43,7 @@ public class IGItemTagsProvider extends net.minecraft.data.ItemTagsProvider
 			{
 				Material material = e.material;
 
-				if(material.hasSubtype(type) && (type.getCategory() == MaterialUseType.UseCategory.RESOURCE_ITEM || type.getCategory() == MaterialUseType.UseCategory.STORAGE_ITEM ||
+				if(material.hasUsetype(type)&&(type.getCategory()==MaterialUseType.UseCategory.RESOURCE_ITEM||type.getCategory()==MaterialUseType.UseCategory.STORAGE_ITEM||
 						type.getCategory() == MaterialUseType.UseCategory.ITEM || type.getCategory() == MaterialUseType.UseCategory.TOOLPART_ITEM))
 				{
 					Item item = IGRegistryGrabber.getIGItem(type, material);
@@ -57,7 +54,7 @@ public class IGItemTagsProvider extends net.minecraft.data.ItemTagsProvider
 					}
 
 				}
-				else if(material.hasSubtype(type))
+				else if(material.hasUsetype(type))
 				{
 					Item block = IGRegistryGrabber.grabBlock(type, material).asItem();
 					if(block != Items.AIR)

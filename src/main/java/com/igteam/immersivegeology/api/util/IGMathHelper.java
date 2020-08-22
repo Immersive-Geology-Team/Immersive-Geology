@@ -21,7 +21,7 @@ public class IGMathHelper extends MathHelper
 
 	/**
 	 * @return A random integer between Integer.MIN_VALUE and Integer.MAX_VALUE
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get a random Integer between Integer.MIN_VALUE and Integer.MAX_VALUE.
 	 * </p>
@@ -34,7 +34,7 @@ public class IGMathHelper extends MathHelper
 	/**
 	 * @param bound The bound of the random value. Can be positive and negative.
 	 * @return A random integer between 0 and Bound. Can be both positive and negative.
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get a random Integer zero and your bound. Bound can be positive and negative.
 	 * </p>
@@ -52,7 +52,7 @@ public class IGMathHelper extends MathHelper
 	 * @param x Bound 1 Can be positive and negative.
 	 * @param y Bound 2 Can be positive and negative.
 	 * @return A random integer between lower and upper. Can be positive and negative.
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get a random Integer between two bounds
 	 * </p>
@@ -70,7 +70,7 @@ public class IGMathHelper extends MathHelper
 	 * @param num  The number to get the root from
 	 * @param root The root
 	 * @return The root of num
-	 * @Author Pabilo8
+	 * @author Pabilo8
 	 * <p>
 	 * Used to get the xth root of a number
 	 * </p>
@@ -85,7 +85,7 @@ public class IGMathHelper extends MathHelper
 	/**
 	 * @param num The number to get the root from
 	 * @return The square root of num
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the square root of a number
 	 * </p>
@@ -102,7 +102,7 @@ public class IGMathHelper extends MathHelper
 	 * @param velocity  original velocity
 	 * @param drag drag factor
 	 * @return drag applied velocity
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the drag applied velocity
 	 * </p>
@@ -117,7 +117,7 @@ public class IGMathHelper extends MathHelper
 	 * @param velocity  original velocity
 	 * @param drag drag factor
 	 * @return drag applied velocity
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the drag applied velocity
 	 * </p>
@@ -131,7 +131,7 @@ public class IGMathHelper extends MathHelper
 	/**
 	 * @param height height above sea level
 	 * @return barometric air pressure in Pascal
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the air pressure at a certain height above sea level
 	 * </p>
@@ -145,7 +145,7 @@ public class IGMathHelper extends MathHelper
 	/**
 	 * @param pressure pressure on the air
 	 * @return air density at 20 C and pressure Pas
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the air density at a certain pressure and 20 Celsius
 	 * </p>
@@ -160,7 +160,7 @@ public class IGMathHelper extends MathHelper
 	 * @param pressure pressure on the air
 	 * @param temperature temperature in Kelvin
 	 * @return air density at 20 C and pressure Pas
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the air density at a certain pressure and 20 Celsius
 	 * </p>
@@ -175,7 +175,7 @@ public class IGMathHelper extends MathHelper
 	 * @param velocity  original velocity
 	 * @param drag drag factor
 	 * @return drag applied velocity
-	 * @Author CrimsonTwilight
+	 * @author CrimsonTwilight
 	 * <p>
 	 * Used to get the drag applied velocity
 	 * </p>
@@ -195,7 +195,7 @@ public class IGMathHelper extends MathHelper
 	 * @param green The amount of green, between 0 and 255
 	 * @param blue  The amount of blue, between 0 and 255
 	 * @return The CMYK version of the RGB input
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to turn RGB colors into CMYK colors
 	 * </p>
@@ -217,7 +217,7 @@ public class IGMathHelper extends MathHelper
 	 * @param yellow  The amount of yellow, between 0 and 255
 	 * @param black   The amount of black, between 0 and 255
 	 * @return The RGB version of the CMYK input
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to turn CMYK colors into RGB colors
 	 * </p>
@@ -243,7 +243,7 @@ public class IGMathHelper extends MathHelper
 	 * @param pointX The x value of the point
 	 * @param pointY The y value of the point
 	 * @return If the point is in the rectangle
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to see if a point is inside a rectangular area
 	 * </p>
@@ -282,7 +282,7 @@ public class IGMathHelper extends MathHelper
 	/**
 	 * @param rgb An Integer based version of RGB
 	 * @return A float array of Red, Green, Blue
-	 * @Author Pabilo8
+	 * @author Pabilo8
 	 * <p>
 	 * Used to turn a single RGB integer into a float array of Red, Green, Blue
 	 * </p>
@@ -302,7 +302,7 @@ public class IGMathHelper extends MathHelper
 	 * @param gravity  The loss of height per calculation
 	 * @param drag     The Drag Constant of the projectile
 	 * @return Angle to fire ballistic from
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to calculate best angle to fire projectile from
 	 * </p>
@@ -350,7 +350,7 @@ public class IGMathHelper extends MathHelper
 	 * @param gravity    Gravity constant of the dimension
 	 * @param dragFactor The drag factor of the projectile
 	 * @return Angle to fire ballistic projectile from
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to calculate best angle to fire projectile from
 	 * </p>
@@ -398,7 +398,7 @@ public class IGMathHelper extends MathHelper
 	 * @param gravity    Gravity constant of the dimension
 	 * @param dragFactor The drag factor of the projectile
 	 * @return Momentum of ballistic projectile
-	 * @Author Pabilo8 & CrimsonTwilight
+	 * @author Pabilo8 & CrimsonTwilight
 	 * <p>
 	 * Used to calculate momentum of projectile from best angle
 	 * </p>

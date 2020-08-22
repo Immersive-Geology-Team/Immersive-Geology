@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -61,7 +62,7 @@ public class IGItemModelProvider extends ItemModelProvider
 				}
 			} catch(Exception e)
 			{
-				System.out.println("Failed to create Item Model:" + e);
+				IGLogger.info("Failed to create Item Model:"+e);
 			}
 
 		}

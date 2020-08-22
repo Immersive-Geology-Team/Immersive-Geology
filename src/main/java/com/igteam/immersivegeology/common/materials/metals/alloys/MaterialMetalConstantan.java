@@ -29,14 +29,12 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 	@Override
 	public EnumMetalType getMetalType()
 	{
-		// TODO Auto-generated method stub
 		return EnumMetalType.ALLOY;
 	}
 
 	@Override
 	public LinkedHashSet<ElementProportion> getElements()
 	{
-		// TODO Auto-generated method stub
 		return new LinkedHashSet<>(Arrays.asList(
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.COPPER),
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.NICKEL)));
@@ -45,21 +43,18 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 	@Override
 	public Rarity getRarity()
 	{
-		// TODO Auto-generated method stub
 		return Rarity.UNCOMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -72,28 +67,24 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 	@Override
 	public float getHardness()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		// TODO Auto-generated method stub
 		return 8.885f; // g/cm^3
 	}
 

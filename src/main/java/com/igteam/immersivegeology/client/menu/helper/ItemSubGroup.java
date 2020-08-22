@@ -8,6 +8,7 @@ public enum ItemSubGroup
 	raw(Items.IRON_ORE),
 	processed(Items.IRON_INGOT),
 	machines(Items.PISTON),
+	tools(Items.IRON_PICKAXE),
 	misc(Items.OAK_SIGN);
 
 	private Item icon;

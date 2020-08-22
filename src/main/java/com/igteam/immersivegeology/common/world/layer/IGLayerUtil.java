@@ -10,13 +10,11 @@ import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.layer.SmoothLayer;
-import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.LongFunction;
@@ -215,7 +213,6 @@ public class IGLayerUtil
 
 	public static boolean isDeepOcean(int value)
 	{
-		// TODO Auto-generated method stub
 		return value==DEEP_OCEAN||value==DEEP_OCEAN_VOLCANIC;
 	}
 }

@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
@@ -92,7 +93,7 @@ public class IGBlockStateProvider extends BlockStateProvider
 
 			} catch(Exception e)
 			{
-				System.out.println("Failed to create blockstate: " + e);
+				IGLogger.info("Failed to create blockstate: "+e);
 			}
 
 		}

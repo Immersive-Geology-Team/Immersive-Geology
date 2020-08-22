@@ -11,7 +11,7 @@ public abstract class MaterialCrystalBase extends Material
 	protected static int baseColor = 0xffffff;
 
 	@Override
-	public boolean hasSubtype(MaterialUseType useType)
+	public boolean hasUsetype(MaterialUseType useType)
 	{
 		switch(useType)
 		{
@@ -33,12 +33,6 @@ public abstract class MaterialCrystalBase extends Material
 
 	@Override
 	public MaterialTypes getMaterialType()
-	{
-		return MaterialTypes.CRYSTAL;
-	}
-	
-	@Override
-	public MaterialTypes getMaterialSubType()
 	{
 		return MaterialTypes.CRYSTAL;
 	}

@@ -44,6 +44,7 @@
   "block.immersivegeology.sheetmetal.slab.name": "%s Sheetmetal Slab",
   "block.immersivegeology.dust.name": "%s Dust Block",
   "block.immersivegeology.ore_bearing.name": "Ore Bearing %s",
+  "block.immersivegeology.pickaxe.name": "%s Pickaxe",
 
   "material.immersivegeology.marble.name": "Marble",
   "material.immersivegeology.pegmatite.name": "Pegmatite",
