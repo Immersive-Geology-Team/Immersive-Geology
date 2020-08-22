@@ -11,6 +11,7 @@ import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalE
 import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalSteel;
 import com.igteam.immersivegeology.common.materials.minerals.*;
 import com.igteam.immersivegeology.common.materials.stones.*;
+import com.igteam.immersivegeology.common.materials.wood.*;
 
 import java.util.stream.Stream;
 
@@ -91,8 +92,17 @@ public enum EnumMaterials
 	Marble(new MaterialStoneMarble()),
 	Limestone(new MaterialStoneLimestone()),
 	Pegmatite(new MaterialStonePegmatite()),
-	Regolith(new MaterialStoneRegolith());
-	
+	Regolith(new MaterialStoneRegolith()),
+
+	//Wood
+	// TODO: 22.08.2020 add more types
+	Oak(new MaterialWoodOak()),
+	Birch(new MaterialWoodBirch()),
+	Spruce(new MaterialWoodSpruce()),
+	Jungle(new MaterialWoodJungle()),
+	Acacia(new MaterialWoodAcacia()),
+	DarkOak(new MaterialWoodDarkOak());
+
 	public final Material material;
 
 	EnumMaterials(Material material)

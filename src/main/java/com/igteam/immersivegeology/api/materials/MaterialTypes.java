@@ -10,5 +10,6 @@ public enum MaterialTypes
 	METALLOID,
 	MINERAL,
 	STONE,
-	CRYSTAL
+	CRYSTAL,
+	WOOD
 }

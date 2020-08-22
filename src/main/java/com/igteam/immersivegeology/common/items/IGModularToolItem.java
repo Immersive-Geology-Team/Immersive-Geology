@@ -42,7 +42,7 @@ public abstract class IGModularToolItem extends IGBaseItem implements ITool, ICo
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
 		//0 for head, 1 for handle
-		return getColorCache(stack, pass==0);
+		return getColorCache(stack, pass==1);
 	}
 
 	//true for head, false for handle
