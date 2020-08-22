@@ -106,11 +106,14 @@ public enum MaterialUseType implements IStringSerializable
 	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 
 	//Tool System, Experimental / Not sure
+	HAMMER_HEAD(UseCategory.TOOLPART_ITEM),
 	PICKAXE_HEAD(UseCategory.TOOLPART_ITEM),
 	SHOVEL_HEAD(UseCategory.TOOLPART_ITEM),
 	HOE_HEAD(UseCategory.TOOLPART_ITEM),
 	AXE_HEAD(UseCategory.TOOLPART_ITEM),
 	BROADSWORD_BLADE(UseCategory.TOOLPART_ITEM),
+	HANDLE(UseCategory.TOOLPART_ITEM),
+	BINDING(UseCategory.TOOLPART_ITEM),
 
 	BUCKET(UseCategory.STORAGE_ITEM),
 
