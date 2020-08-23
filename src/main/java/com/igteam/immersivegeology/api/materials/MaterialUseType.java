@@ -105,6 +105,11 @@ public enum MaterialUseType implements IStringSerializable
 	RAW_CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
 	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 
+	//Organic stuff
+	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
+	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	PLANKS(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
+
 	//Tool System, Experimental / Not sure
 	HAMMER_HEAD(UseCategory.TOOLPART_ITEM),
 	PICKAXE_HEAD(UseCategory.TOOLPART_ITEM),

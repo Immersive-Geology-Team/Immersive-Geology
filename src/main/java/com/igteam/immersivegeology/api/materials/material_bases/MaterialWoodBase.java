@@ -16,10 +16,12 @@ public abstract class MaterialWoodBase extends Material
 		switch(useType)
 		{
 			//items
+			case STICK:
 			case ROD:
 			case DUST:
-			case PLATE:
-			case ROUGH_PLATE:
+			case TINY_DUST:
+			case PLANK:
+			case PLANKS:
 				return true;
 		}
 		return false;
@@ -28,7 +30,7 @@ public abstract class MaterialWoodBase extends Material
 	@Override
 	public MaterialTypes getMaterialType()
 	{
-		return MaterialTypes.STONE;
+		return MaterialTypes.WOOD;
 	}
 
 	@Override
