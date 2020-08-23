@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.materials.wood;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialWoodBase;
@@ -14,7 +15,7 @@ import java.util.LinkedHashSet;
  * @author Pabilo8
  * @since 22.08.2020
  */
-public class MaterialWoodDarkOak extends MaterialWoodBase
+public class MaterialWoodDarkOak extends MaterialWoodBase implements IHandleMaterial
 {
 	//Rhyolite is the default minecraft stone, renamed
 	@Override
@@ -98,6 +99,21 @@ public class MaterialWoodDarkOak extends MaterialWoodBase
 	public int getBlockHarvestLevel()
 	{
 		return 0;
+	}
+
+	@Override
+	public int getHandleDurability() {
+		return 61;
+	}
+
+	@Override
+	public double getHandleMultiplier() {
+		return 0.95;
+	}
+
+	@Override
+	public int getHandleEnchantability() {
+		return 5;
 	}
 
 	/*@Nullable

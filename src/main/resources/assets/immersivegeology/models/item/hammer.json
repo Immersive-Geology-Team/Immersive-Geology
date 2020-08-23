@@ -1,5 +1,5 @@
 {
-  "parent": "immersiveengineering:item/ie_item_base",
+  "parent": "item/handheld",
   "textures": {
     "layer0": "immersivegeology:item/tools/hammer",
     "layer1": "immersivegeology:item/tools/hammer_binding",
