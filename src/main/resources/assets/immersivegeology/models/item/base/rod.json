@@ -1,5 +1,5 @@
 {
-  "parent": "immersiveengineering:item/ie_item_base",
+  "parent": "item/handheld",
   "textures": {
     "layer0": "immersivegeology:item/greyscale/metal/rod"
   }
