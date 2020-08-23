@@ -1,0 +1,9 @@
+{
+  "parent": "immersiveengineering:item/ie_item_base",
+  "textures": {
+    "layer0": "immersivegeology:item/tools/hammer",
+    "layer1": "immersivegeology:item/tools/hammer_binding",
+    "layer2": "immersivegeology:item/tools/handle",
+    "layer3": "immersivegeology:item/tools/hammer_tip"
+  }
+}

@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IIGBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
+import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.Block;
@@ -68,6 +69,7 @@ public class IGContent
 		}
 
 		addItem(new IGToolPickaxe());
+		addItem(new IGToolHammer());
 	}
 
 	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
