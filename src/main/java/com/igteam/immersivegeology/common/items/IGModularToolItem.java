@@ -3,6 +3,11 @@ package com.igteam.immersivegeology.common.items;
 import blusunrize.immersiveengineering.api.tool.ITool;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces.IColouredItem;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
+import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.interfaces.IBindingMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
+import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.BlockState;
@@ -14,12 +19,23 @@ import javax.annotation.Nullable;
 
 public abstract class IGModularToolItem extends IGBaseItem implements ITool, IColouredItem
 {
+
 	protected static String[] StrMaterials = {"head_material", "binding_material", "handle_material", "tip_material"};
 	protected static String[] StrColors = {"head_color", "binding_color", "handle_color", "tip_color"};
 
 	public IGModularToolItem(String name)
 	{
 		super(name);
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		int durability = ((IHeadMaterial)getToolMaterial(stack, 0)).getHeadDurability() + ((IBindingMaterial)getToolMaterial(stack, 1)).getBindingDurability() +
+				((IHandleMaterial)getToolMaterial(stack, 2)).getHandleDurability();
+		durability += ((ITipMaterial)getToolMaterial(stack, 3)).getTipDurability();
+		durability = (int)((double)durability * ((IBindingMaterial)getToolMaterial(stack, 1)).getBindingMultiplier() *
+				((IHandleMaterial)getToolMaterial(stack, 2)).getHandleMultiplier());
+		return durability;
 	}
 
 	public static Material getToolMaterial(ItemStack stack, int part)

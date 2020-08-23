@@ -33,7 +33,7 @@ public class IGBaseItem extends Item implements IEItemInterfaces.IColouredItem, 
 		setRegistryName(registryName);
 	}
 
-	public IGBaseItem setBurnTime(int burnTime)
+    public IGBaseItem setBurnTime(int burnTime)
 	{
 		this.burnTime = burnTime;
 		return this;
