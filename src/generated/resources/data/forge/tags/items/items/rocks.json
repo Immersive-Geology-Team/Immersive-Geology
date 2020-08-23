@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersivegeology:block_rock_kaolinite",
     "immersivegeology:block_rock_rhyolite",
     "immersivegeology:block_rock_diorite",
     "immersivegeology:block_rock_andesite",

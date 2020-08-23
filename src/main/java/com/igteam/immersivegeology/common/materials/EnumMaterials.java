@@ -4,6 +4,8 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
+import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidBrine;
+import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidCreosote;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalConstantan;
@@ -29,7 +31,7 @@ public enum EnumMaterials
 	Iron(new MaterialMetalIron()),
 	Lead(new MaterialMetalLead()),
 	Manganese(new MaterialMetalManganese()),
-	Nickel(new MaterialMetalNickel()), 
+	Nickel(new MaterialMetalNickel()),
 	Platinum(new MaterialMetalPlatinum()),
 	Silver(new MaterialMetalSilver()),
 	Cobalt(new MaterialMetalCobalt()),
@@ -40,7 +42,7 @@ public enum EnumMaterials
 	Vanadium(new MaterialMetalVanadium()),
 	Zirconium(new MaterialMetalZirconium()),
 	Zinc(new MaterialMetalZinc()),
-	
+
 	Constantan(new MaterialMetalConstantan()),
 	Electrum(new MaterialMetalElectrum()),
 	Steel(new MaterialMetalSteel()),
@@ -74,10 +76,12 @@ public enum EnumMaterials
 	Vanadinite(new MaterialMineralVanadinite()),
 	//Minerals that spawn in such a large quantity that we don't need an 'orebearing' variant, this is where most clay types will end up!
 	Kaolinite(new MaterialMineralKaolinite()),
-	
-	
+
+
 	//Fluids
 	Water(new MaterialFluidWater()),
+	Brine(new MaterialFluidBrine()),
+	Creosote(new MaterialFluidCreosote()),
 
 	//Stones
 	//TODO: add chemical formulas for the stones
@@ -101,12 +105,14 @@ public enum EnumMaterials
 	Spruce(new MaterialWoodSpruce()),
 	Jungle(new MaterialWoodJungle()),
 	Acacia(new MaterialWoodAcacia()),
-	DarkOak(new MaterialWoodDarkOak());
+	DarkOak(new MaterialWoodDarkOak()),
+
+	TreatedWood(new MaterialTreatedWood());
 
 	public final Material material;
 
 	EnumMaterials(Material material)
-	{ 
+	{
 		this.material = material;
 	}
 
@@ -133,7 +139,7 @@ public enum EnumMaterials
 	{
 		return filterByType(MaterialTypes.MINERAL);
 	}
-	
+
 	/**
 	 * @return materials used by worldgen (must have a dummy GENERATED_ORE subtype)
 	 */

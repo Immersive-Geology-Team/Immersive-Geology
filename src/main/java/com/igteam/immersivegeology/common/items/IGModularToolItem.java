@@ -3,7 +3,6 @@ package com.igteam.immersivegeology.common.items;
 import blusunrize.immersiveengineering.api.tool.ITool;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces.IColouredItem;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
-import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import net.minecraft.block.BlockState;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
-import java.util.Set;
 
 public abstract class IGModularToolItem extends IGBaseItem implements ITool, IColouredItem
 {

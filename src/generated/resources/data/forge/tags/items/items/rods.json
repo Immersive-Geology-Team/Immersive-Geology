@@ -21,6 +21,13 @@
     "immersivegeology:item_rod_zinc",
     "immersivegeology:item_rod_constantan",
     "immersivegeology:item_rod_electrum",
-    "immersivegeology:item_rod_steel"
+    "immersivegeology:item_rod_steel",
+    "immersivegeology:item_rod_oak",
+    "immersivegeology:item_rod_birch",
+    "immersivegeology:item_rod_spruce",
+    "immersivegeology:item_rod_jungle",
+    "immersivegeology:item_rod_acacia",
+    "immersivegeology:item_rod_dark_oak",
+    "immersivegeology:item_rod_treated_wood"
   ]
 }

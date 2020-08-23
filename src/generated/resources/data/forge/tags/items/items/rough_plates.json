@@ -21,6 +21,13 @@
     "immersivegeology:item_rough_plate_zinc",
     "immersivegeology:item_rough_plate_constantan",
     "immersivegeology:item_rough_plate_electrum",
-    "immersivegeology:item_rough_plate_steel"
+    "immersivegeology:item_rough_plate_steel",
+    "immersivegeology:item_rough_plate_oak",
+    "immersivegeology:item_rough_plate_birch",
+    "immersivegeology:item_rough_plate_spruce",
+    "immersivegeology:item_rough_plate_jungle",
+    "immersivegeology:item_rough_plate_acacia",
+    "immersivegeology:item_rough_plate_dark_oak",
+    "immersivegeology:item_rough_plate_treated_wood"
   ]
 }

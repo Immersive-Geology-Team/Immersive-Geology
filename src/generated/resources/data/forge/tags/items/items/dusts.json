@@ -46,6 +46,13 @@
     "immersivegeology:item_dust_ullmannite",
     "immersivegeology:item_dust_galena",
     "immersivegeology:item_dust_vanadinite",
-    "immersivegeology:item_dust_kaolinite"
+    "immersivegeology:item_dust_kaolinite",
+    "immersivegeology:item_dust_oak",
+    "immersivegeology:item_dust_birch",
+    "immersivegeology:item_dust_spruce",
+    "immersivegeology:item_dust_jungle",
+    "immersivegeology:item_dust_acacia",
+    "immersivegeology:item_dust_dark_oak",
+    "immersivegeology:item_dust_treated_wood"
   ]
 }
