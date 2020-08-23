@@ -86,7 +86,7 @@ public class MaterialFluidCreosote extends MaterialFluidBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xffffff;
+		return 0x2f1717;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
