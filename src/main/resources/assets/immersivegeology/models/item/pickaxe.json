@@ -2,8 +2,8 @@
   "parent": "immersiveengineering:item/ie_item_base",
   "textures": {
     "layer0": "immersivegeology:item/tools/pickaxe",
-    "layer1": "immersivegeology:item/tools/binding",
+    "layer1": "immersivegeology:item/tools/pickaxe_binding",
     "layer2": "immersivegeology:item/tools/handle",
-    "layer3": "immersivegeology:item/tools/tip"
+    "layer3": "immersivegeology:item/tools/pickaxe_tip"
   }
 }
