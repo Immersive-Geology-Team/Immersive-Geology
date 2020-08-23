@@ -16,14 +16,17 @@ import java.util.Set;
 
 public abstract class IGModularToolItem extends IGBaseItem implements ITool, IColouredItem
 {
+	protected static String[] StrMaterials = {"head_material", "binding_material", "handle_material", "tip_material"};
+	protected static String[] StrColors = {"head_color", "binding_color", "handle_color", "tip_color"};
+
 	public IGModularToolItem(String name)
 	{
 		super(name);
 	}
 
-	public static Material getToolMaterial(ItemStack stack, boolean head)
+	public static Material getToolMaterial(ItemStack stack, int part)
 	{
-		return EnumMaterials.filterByName(ItemNBTHelper.getString(stack, head?"head_material": "handle_material")).material;
+		return EnumMaterials.filterByName(ItemNBTHelper.getString(stack, StrMaterials[part])).material;
 	}
 
 	@Override
@@ -42,29 +45,22 @@ public abstract class IGModularToolItem extends IGBaseItem implements ITool, ICo
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
 		//0 for head, 1 for handle
-		return getColorCache(stack, pass==1);
+		return getColorCache(stack, pass);
 	}
 
 	//true for head, false for handle
-	public int getColorCache(ItemStack stack, boolean head)
+	public int getColorCache(ItemStack stack, int part)
 	{
-		String tagName = head?"head_color": "handle_color";
+		String tagName = StrColors[part];
 		//Adds quick access to the color, greatly improves performance
 		if(!ItemNBTHelper.hasKey(stack, tagName))
-			stack.getOrCreateTag().putInt(tagName, getToolMaterial(stack, head).getColor(0));
+			stack.getOrCreateTag().putInt(tagName, getToolMaterial(stack, part).getColor(0));
 		return ItemNBTHelper.getInt(stack, tagName);
 	}
 
 	@Override
-	public Set<ToolType> getToolTypes(ItemStack stack)
+	public int getHarvestLevel(ItemStack stack, ToolType toolType, @Nullable PlayerEntity player, @Nullable BlockState state)
 	{
-		ImmutableSet<ToolType> toolTypes = null;
-		return toolTypes;
-	}
-
-	@Override
-	public int getHarvestLevel(ItemStack p_getHarvestLevel_1_, ToolType p_getHarvestLevel_2_, @Nullable PlayerEntity p_getHarvestLevel_3_, @Nullable BlockState p_getHarvestLevel_4_)
-	{
-		return super.getHarvestLevel(p_getHarvestLevel_1_, p_getHarvestLevel_2_, p_getHarvestLevel_3_, p_getHarvestLevel_4_);
+		return super.getHarvestLevel(stack, toolType, player, state);
 	}
 }

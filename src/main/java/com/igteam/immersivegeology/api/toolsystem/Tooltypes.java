@@ -26,7 +26,7 @@ public class Tooltypes
 	public static final ToolType ADVANCED_CUTTER_TOOL = getTool("advanced_cutter");
 
 	//Crafting tools
-	public static final ToolType FORGE_HAMMER_TOOL = getTool("forge_hammer");
+	//public static final ToolType FORGE_HAMMER_TOOL = getTool("forge_hammer"); This is the same as the regular Hammer
 	public static final ToolType SCISSORS_TOOL = getTool("scissor");
 	public static final ToolType CHISEL_TOOL = getTool("chisel");
 	public static final ToolType FILE_TOOL = getTool("file");
@@ -39,6 +39,7 @@ public class Tooltypes
 	public static final ToolType PICKAXE_TOOL = ToolType.PICKAXE;
 	public static final ToolType AXE_TOOL = ToolType.AXE;
 	public static final ToolType SHOVEL_TOOL = ToolType.SHOVEL;
+	public static final ToolType HOE_TOOL = ToolType.get("hoe");
 
 	//The regular sword
 	public static final ToolType BROADSWORD_TOOL = ToolType.get("sword");
