@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.api.util.IGMathHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -46,7 +47,7 @@ public class IGMaterialItem extends IGBaseItem
 	@Override
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
-		return materials[IGMathHelper.clamp(pass, 0, materials.length-1)].getColor(0);
+		return materials[MathHelper.clamp(pass, 0, materials.length-1)].getColor(0);
 	}
 
 	@Override

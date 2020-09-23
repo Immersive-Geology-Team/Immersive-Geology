@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
 import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.materials.MaterialEmpty;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -30,12 +31,17 @@ public abstract class IGModularToolItem extends IGBaseItem implements ITool, ICo
 
 	@Override
 	public int getMaxDamage(ItemStack stack) {
-		int durability = ((IHeadMaterial)getToolMaterial(stack, 0)).getHeadDurability() + ((IBindingMaterial)getToolMaterial(stack, 1)).getBindingDurability() +
-				((IHandleMaterial)getToolMaterial(stack, 2)).getHandleDurability();
-		durability += ((ITipMaterial)getToolMaterial(stack, 3)).getTipDurability();
-		durability = (int)((double)durability * ((IBindingMaterial)getToolMaterial(stack, 1)).getBindingMultiplier() *
-				((IHandleMaterial)getToolMaterial(stack, 2)).getHandleMultiplier());
-		return durability;
+		Material toolMaterial = getToolMaterial(stack, 0);
+		if(toolMaterial instanceof MaterialEmpty){
+			return 1;
+		} else {
+			int durability = ((IHeadMaterial) toolMaterial).getHeadDurability() + ((IBindingMaterial) getToolMaterial(stack, 1)).getBindingDurability() +
+					((IHandleMaterial) getToolMaterial(stack, 2)).getHandleDurability();
+			durability += ((ITipMaterial) getToolMaterial(stack, 3)).getTipDurability();
+			durability = (int) ((double) durability * ((IBindingMaterial) getToolMaterial(stack, 1)).getBindingMultiplier() *
+					((IHandleMaterial) getToolMaterial(stack, 2)).getHandleMultiplier());
+			return durability;
+		}
 	}
 
 	public static Material getToolMaterial(ItemStack stack, int part)

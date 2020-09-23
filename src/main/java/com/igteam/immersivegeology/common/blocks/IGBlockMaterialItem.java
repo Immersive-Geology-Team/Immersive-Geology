@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -78,6 +79,6 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 	@Override
 	public int getColourForIEItem(ItemStack stack, int pass)
 	{
-		return materials[IGMathHelper.clamp(pass, 0, materials.length-1)].getColor(0);
+		return materials[MathHelper.clamp(pass, 0, materials.length-1)].getColor(0);
 	}
 }

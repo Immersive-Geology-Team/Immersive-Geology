@@ -17,7 +17,6 @@ import java.util.LinkedHashSet;
  */
 public class MaterialWoodDarkOak extends MaterialWoodBase implements IHandleMaterial
 {
-	//Rhyolite is the default minecraft stone, renamed
 	@Override
 	public String getName()
 	{

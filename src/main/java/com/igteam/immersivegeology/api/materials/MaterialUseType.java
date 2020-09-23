@@ -109,6 +109,25 @@ public enum MaterialUseType implements IStringSerializable
 	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
 	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	PLANKS(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
+	LOG(UseCategory.BLOCK, Material.WOOD, ItemSubGroup.raw){
+
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGBaseBlock> list = new ArrayList<>();
+			//Filter materials for World Generation acceptable ores and iterate, add to the list new ore blocks with stone mat + mineral mat
+			EnumMaterials.filterByUseType(LOG).forEach(enumMaterials -> list.add(new IGStorageBlock(material)));
+			return list.toArray(new IGBaseBlock[]{});
+		}
+
+		@Nonnull
+		@Override
+		public String getModelPath()
+		{
+			return getName()+"_log/";
+		}
+	},
+	STRIPPED_LOG(UseCategory.BLOCK, Material.WOOD, ItemSubGroup.processed),
 
 	//Tool System, Experimental / Not sure
 	HAMMER_HEAD(UseCategory.TOOLPART_ITEM),

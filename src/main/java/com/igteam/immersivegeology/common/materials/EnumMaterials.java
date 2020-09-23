@@ -106,7 +106,7 @@ public enum EnumMaterials
 	Jungle(new MaterialWoodJungle()),
 	Acacia(new MaterialWoodAcacia()),
 	DarkOak(new MaterialWoodDarkOak()),
-
+	Ebony(new MaterialWoodEbony()),
 	TreatedWood(new MaterialTreatedWood());
 
 	public final Material material;

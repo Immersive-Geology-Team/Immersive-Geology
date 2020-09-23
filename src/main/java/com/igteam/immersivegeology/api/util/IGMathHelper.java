@@ -5,7 +5,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.*;
 
-public class IGMathHelper extends MathHelper
+public class IGMathHelper
 {
 	private static Random RANDOM = new Random();
 

@@ -23,6 +23,9 @@ public abstract class MaterialWoodBase extends Material
 			case PLANK:
 			case PLANKS:
 				return true;
+			case LOG:
+			case STRIPPED_LOG:
+				newLogType();
 		}
 		return false;
 	}
@@ -39,5 +42,7 @@ public abstract class MaterialWoodBase extends Material
 		return net.minecraft.block.material.Material.WOOD;
 	}
 
-
+	protected boolean newLogType(){
+		return false;
+	}
 }

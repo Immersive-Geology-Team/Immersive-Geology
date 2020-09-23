@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -115,7 +116,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	@Override
 	public int getRenderColour(BlockState blockState, @Nullable IBlockReader iBlockReader, @Nullable BlockPos blockPos, int pass)
 	{
-		return materials[IGMathHelper.clamp(pass,0,materials.length-1)].getColor(0);
+		return materials[MathHelper.clamp(pass,0,materials.length-1)].getColor(0);
 	}
 
 	/**
