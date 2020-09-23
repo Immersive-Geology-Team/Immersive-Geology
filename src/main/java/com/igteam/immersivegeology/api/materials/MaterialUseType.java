@@ -30,24 +30,25 @@ public enum MaterialUseType implements IStringSerializable
 	GENERATED_ORE(UseCategory.DUMMY), //This one is for ore blocks
 	GENERATED_CHUNKS(UseCategory.DUMMY), //This one is for chunks
 	ORE_BEARING(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					List<IGBaseBlock> list = new ArrayList<>();
-					//Filter materials for World Generation acceptable ores and iterate, add to the list new ore blocks with stone mat + mineral mat
-					EnumMaterials.filterByUseType(GENERATED_ORE).forEach(enumMaterials -> list.add(new IGOreBearingBlock(material, this, enumMaterials.material)));
-					return list.toArray(new IGBaseBlock[]{});
-				}
+	{
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGBaseBlock> list = new ArrayList<>();
+			//Filter materials for World Generation acceptable ores and iterate, add to the list new ore blocks with stone mat + mineral mat
+			EnumMaterials.filterByUseType(GENERATED_ORE).forEach(enumMaterials -> list.add(new IGOreBearingBlock(material, this, enumMaterials.material)));
+			return list.toArray(new IGBaseBlock[]{});
+		}
 
-				@Nonnull
-				@Override
-				public String getModelPath()
-				{
-					return getName()+"/";
-				}
-			},
-	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 162){
+		@Nonnull
+		@Override
+		public String getModelPath()
+		{
+			return getName()+"/";
+		}
+	},
+	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 162)
+	{
 		@Override
 		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
 		{
@@ -68,7 +69,8 @@ public enum MaterialUseType implements IStringSerializable
 		}
 	},
 	POLISHED_CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
-	ROCK_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 40){
+	ROCK_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 40)
+	{
 		@Override
 		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
 		{
@@ -78,16 +80,16 @@ public enum MaterialUseType implements IStringSerializable
 		}
 	},
 	ORE_BIT(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 8, 32)
-			{
-				@Override
-				public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					List<IGMaterialItem> list = new ArrayList<>();
-					//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
-					EnumMaterials.filterByUseType(GENERATED_CHUNKS).forEach(enumMaterials -> list.add(new IGMaterialYieldItem(this, getStoneYield(), getOreYield(), material, enumMaterials.material)));
-					return list.toArray(new IGMaterialItem[]{});
-				}
-			},
+	{
+		@Override
+		public IGMaterialItem[] getItems(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			List<IGMaterialItem> list = new ArrayList<>();
+			//Filter materials for minerals only and iterate, add to the list new ore blocks with stone mat + mineral mat
+			EnumMaterials.filterByUseType(GENERATED_CHUNKS).forEach(enumMaterials -> list.add(new IGMaterialYieldItem(this, getStoneYield(), getOreYield(), material, enumMaterials.material)));
+			return list.toArray(new IGMaterialItem[]{});
+		}
+	},
 	//Metal/crystal items
 	GEAR(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	INGOT(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
@@ -109,8 +111,8 @@ public enum MaterialUseType implements IStringSerializable
 	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
 	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	PLANKS(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
-	LOG(UseCategory.BLOCK, Material.WOOD, ItemSubGroup.raw){
-
+	LOG(UseCategory.BLOCK, Material.WOOD, ItemSubGroup.raw)
+	{
 		@Override
 		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
 		{
@@ -145,38 +147,38 @@ public enum MaterialUseType implements IStringSerializable
 
 	//Metals
 	STORAGE_BLOCK(UseCategory.RESOURCE_BLOCK, Material.IRON, ItemSubGroup.processed)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					IGStorageBlock storage = new IGStorageBlock(material);
-					/*
-					BlockIGSlab slab = IGContent.addMaterialSlabFor(storage);
-					((IGBlockMaterialItem)slab.itemBlock).material = material;
-					((IGBlockMaterialItem)slab.itemBlock).subtype = this;
-					((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
-					 */
-					return new IGStorageBlock[]{storage};
-				}
-			},
+	{
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGStorageBlock storage = new IGStorageBlock(material);
+			/*
+			BlockIGSlab slab = IGContent.addMaterialSlabFor(storage);
+			((IGBlockMaterialItem)slab.itemBlock).material = material;
+			((IGBlockMaterialItem)slab.itemBlock).subtype = this;
+			((IGBlockMaterialItem)slab.itemBlock).isSlab = true;
+			 */
+			return new IGStorageBlock[]{storage};
+		}
+	},
 	SHEETMETAL(UseCategory.RESOURCE_BLOCK, Material.IRON, ItemSubGroup.processed)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					IGMaterialBlock sheetmetal = new IGSheetmetalBlock(material);
-					return new IGMaterialBlock[]{sheetmetal};
-				}
+	{
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGMaterialBlock sheetmetal = new IGSheetmetalBlock(material);
+			return new IGMaterialBlock[]{sheetmetal};
+		}
 
-			},
+	},
 	DUST_BLOCK(UseCategory.RESOURCE_BLOCK, Material.SAND, ItemSubGroup.processed)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					return new IGDustBlock[]{new IGDustBlock(material)};
-				}
-			},
+	{
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			return new IGDustBlock[]{new IGDustBlock(material)};
+		}
+	},
 	//Stones
 	DIRT(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
 	GRAVEL(UseCategory.RESOURCE_BLOCK, Material.EARTH, ItemSubGroup.raw),
