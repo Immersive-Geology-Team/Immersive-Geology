@@ -50,7 +50,6 @@ public class IGContent
 				// Check if that material is allowed to make this item type.
 				if(material.hasUsetype(materialItem))
 				{
-					// Check if this type is an ITEM not a BLOCK type.
 					switch(materialItem.getCategory())
 					{
 						case RESOURCE_ITEM:

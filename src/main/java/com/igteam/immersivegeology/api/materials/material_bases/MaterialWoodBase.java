@@ -17,15 +17,13 @@ public abstract class MaterialWoodBase extends Material
 		{
 			//items
 			case STICK:
-			case ROD:
 			case DUST:
-			case TINY_DUST:
 			case PLANK:
 			case PLANKS:
 				return true;
 			case LOG:
 			case STRIPPED_LOG:
-				newLogType();
+				return newLogType();
 		}
 		return false;
 	}
