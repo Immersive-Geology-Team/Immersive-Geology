@@ -37,7 +37,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 {
 	protected static IProperty[] tempProperties;
 	public BlockItem itemBlock = null;
-	public final String name;
+	public String name;
 	public final IProperty[] additionalProperties;
 	boolean isHidden;
 	boolean hasFlavour;
@@ -62,20 +62,24 @@ public class IGBaseBlock extends Block implements IIGBlock
 		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.FALSE));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
+
 		if(itemBlock!=null)
 		{
 			try
 			{
-				this.itemSubGroup = group;
-				this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
-						.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
-				this.itemBlock.setRegistryName(registryName);
-				IGContent.addItemBlockForBlock(name,this.itemBlock);
+				if(this.itemBlock == null) {
+					this.itemSubGroup = group;
+					this.itemBlock = itemBlock.getConstructor(Block.class, Item.Properties.class, ItemSubGroup.class)
+							.newInstance(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), group);
+					this.itemBlock.setRegistryName(registryName);
+					IGContent.addItemBlockForBlock(name, this.itemBlock);
+				}
 			} catch(Exception e)
 			{
 				throw new RuntimeException(e);
 			}
 		}
+
 		lightOpacity = 15;
 	}
 	

@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
+import com.igteam.immersivegeology.common.blocks.plant.IGRockMossBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import com.igteam.immersivegeology.common.items.IGMaterialResourceItem;
@@ -177,6 +178,13 @@ public enum MaterialUseType implements IStringSerializable
 	SAND(UseCategory.RESOURCE_BLOCK, Material.EARTH, ItemSubGroup.raw),
 	COBBLESTONE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
 
+	MOSS_ROCK(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw){
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			return new IGRockMossBlock[]{new IGRockMossBlock(material)};
+		}
+	},
 	ROUGH_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
 	POLISHED_STONE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),
 	SMALL_BRICKS(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.processed),

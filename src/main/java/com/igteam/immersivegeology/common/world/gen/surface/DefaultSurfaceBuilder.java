@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.common.world.gen.surface;
 
+import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 import net.minecraft.block.BlockState;
@@ -37,7 +41,6 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder
 		BlockState stateUnderWater = config.getUnderWater().get(surface, localX, localZ, temperature, rainfall);
 		BlockState topBlock = config.getTop().get(surface, localX, localZ, temperature, rainfall);
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-
 		for(int y = startHeight; y >= 0&&surfaceFlag!=0; y--)
 		{
 			pos.setPos(localX, y, localZ);
@@ -65,9 +68,18 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder
 							int snowOffset = random.nextInt(2)+random.nextInt(2)+random.nextInt(1)-random.nextInt(2);
 							float regionTemp = temperature;
 
+
+							if(y >= 141 && y <= 170+snowOffset){
+								if(chunkIn.getBiome(pos) instanceof MountainsBiome){
+									MountainsBiome mbiome = (MountainsBiome) chunkIn.getBiome(pos);
+									if(mbiome.mountainType == MountainsBiome.MountainType.LUSH) {
+										chunkIn.setBlockState(pos, IGRegistryGrabber.grabBlock(MaterialUseType.MOSS_ROCK, EnumMaterials.Marble.material).getDefaultState(), false);
+									}
+								}
+							}
+
 							if(y >= 180+snowOffset+regionTemp)
 							{
-
 								int snowWeight = random.nextInt();
 								if(snowWeight%4096==0||snowOffset < 1)
 								{

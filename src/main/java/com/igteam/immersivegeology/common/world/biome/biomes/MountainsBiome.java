@@ -11,8 +11,11 @@ import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.chunk.IChunk;
 
 import javax.annotation.Nonnull;
+
+import java.util.Random;
 
 import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
 
@@ -20,7 +23,7 @@ public class MountainsBiome extends IGBiome
 {
 	private final float baseHeight;
 	private final float scaleHeight;
-	private final MountainType mountainType;
+	public final MountainType mountainType;
 	
 	public MountainsBiome(float baseHeight, float scaleHeight, MountainType mountainType)
 	{
@@ -89,8 +92,6 @@ public class MountainsBiome extends IGBiome
 			{
 				case grass:
 					return Blocks.GRASS_BLOCK.getDefaultState();
-				case dirt:
-					return Blocks.DIRT.getDefaultState();
 				default:
 					return Blocks.DIRT.getDefaultState();
 			}
@@ -99,8 +100,6 @@ public class MountainsBiome extends IGBiome
 			{
 				case grass:
 					return IGRegistryGrabber.grabBlock(MaterialUseType.GRAVEL, EnumMaterials.Rhyolite.material).getDefaultState();
-				case dirt:
-					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
 				default:
 					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
 			}

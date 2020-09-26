@@ -1,11 +1,14 @@
 package com.igteam.immersivegeology.common.blocks;
 
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IColouredBlock;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.MaterialUtils;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -13,7 +16,9 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
@@ -44,6 +49,23 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 
 		this.materials = materials;
 		this.subtype = subtype;
+		this.name = MaterialUtils.generateMaterialName("block", subtype, materials);
+
+		if(itemBlock!=null)
+		{
+			try
+			{
+				this.itemSubGroup = subtype.getSubGroup();
+				this.itemBlock = new IGBlockMaterialItem(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), subtype.getSubGroup());
+
+				this.itemBlock.setRegistryName(new ResourceLocation(ImmersiveGeology.MODID, name));
+				IGContent.addItemBlockForBlock(name,this.itemBlock);
+			} catch(Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+
 		if(itemBlock instanceof IGBlockMaterialItem)
 		{
 			((IGBlockMaterialItem)itemBlock).materials = this.materials;

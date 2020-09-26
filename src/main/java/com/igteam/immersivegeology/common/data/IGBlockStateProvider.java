@@ -54,7 +54,6 @@ public class IGBlockStateProvider extends BlockStateProvider
 						String res = new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()).toString();
 						String subName = specialName.substring(1);
 
-
 						//Insert new properties below, the system is very extendable
 
 						//Richness property, get models for currentname_tier for all richness types

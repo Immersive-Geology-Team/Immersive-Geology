@@ -38,7 +38,7 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 	{
 		super(sub, type, material, oreMat);
 
-		this.setBlockLayer(BlockRenderLayer.CUTOUT_MIPPED);
+		this.setBlockLayer(BlockRenderLayer.CUTOUT);
 		//set state variables
 		this.setDefaultState(this.stateContainer.getBaseState()
 				.with(NATURAL, Boolean.FALSE)
@@ -54,7 +54,7 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 	@Override
 	public BlockRenderLayer getRenderLayer()
 	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -93,7 +93,6 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 					{
 						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item));
 					}
-
 				}
 				else
 				{

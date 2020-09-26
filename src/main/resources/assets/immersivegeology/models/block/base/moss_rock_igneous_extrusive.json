@@ -1,0 +1,32 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#all", "cullface": "down" , "tintindex": 0},
+                "up":    { "texture": "#all", "cullface": "up" , "tintindex": 0},
+                "north": { "texture": "#all", "cullface": "north" , "tintindex": 0},
+                "south": { "texture": "#all", "cullface": "south" , "tintindex": 0},
+                "west":  { "texture": "#all", "cullface": "west" , "tintindex": 0},
+                "east":  { "texture": "#all", "cullface": "east" , "tintindex": 0}
+            }
+        },
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "up":    { "texture": "#moss_top", "cullface": "up"},
+                "north": { "texture": "#moss_side", "cullface": "north"},
+                "south": { "texture": "#moss_side", "cullface": "south"},
+                "west":  { "texture": "#moss_side", "cullface": "west"},
+                "east":  { "texture": "#moss_side", "cullface": "east"}
+            }
+        }
+    ],
+    "textures": {
+        "all": "immersivegeology:block/greyscale/rock/rock_igneous_extrusive",
+        "particle": "immersivegeology:block/greyscale/rock/rock_igneous_extrusive",
+        "moss_top": "immersivegeology:block/plant/rock_moss_top",
+        "moss_side": "immersivegeology:block/plant/rock_moss_side"
+    }
+}

@@ -27,6 +27,7 @@ public abstract class MaterialStoneBase extends Material
 			case GRAVEL:
 			case COBBLESTONE:
 			case POLISHED_STONE:
+			case MOSS_ROCK:
 			case SMALL_BRICKS:
 			case NORMAL_BRICKS:
 			case ROAD_BRICKS:
@@ -46,7 +47,7 @@ public abstract class MaterialStoneBase extends Material
 	@Override
 	public String getSpecialSubtypeModelName(MaterialUseType useType)
 	{
-		if(useType==MaterialUseType.ORE_BEARING||useType==MaterialUseType.ROCK)
+		if(useType==MaterialUseType.ORE_BEARING||useType==MaterialUseType.ROCK||useType==MaterialUseType.MOSS_ROCK)
 			return getStoneType().getName();
 		return null;
 	}
