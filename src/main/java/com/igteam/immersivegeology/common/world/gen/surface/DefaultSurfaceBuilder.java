@@ -41,6 +41,7 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder
 		BlockState stateUnderWater = config.getUnderWater().get(surface, localX, localZ, temperature, rainfall);
 		BlockState topBlock = config.getTop().get(surface, localX, localZ, temperature, rainfall);
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+
 		for(int y = startHeight; y >= 0&&surfaceFlag!=0; y--)
 		{
 			pos.setPos(localX, y, localZ);

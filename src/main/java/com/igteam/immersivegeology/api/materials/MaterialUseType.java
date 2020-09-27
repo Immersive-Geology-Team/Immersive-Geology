@@ -113,16 +113,23 @@ public enum MaterialUseType implements IStringSerializable
 	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
 	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	PLANKS(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
-	LOG(UseCategory.RESOURCE_BLOCK, ItemSubGroup.raw)
+	LOG(UseCategory.RESOURCE_BLOCK, Material.WOOD, ItemSubGroup.raw)
 	{
 		@Override
 		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
 		{
-			IGLogBlock log = new IGLogBlock(material);
+			IGLogBlock log = new IGLogBlock(LOG, material);
 			return new IGLogBlock[]{log};
 		}
 	},
-	STRIPPED_LOG(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
+	STRIPPED_LOG(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed){
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGLogBlock log = new IGLogBlock(STRIPPED_LOG, material);
+			return new IGLogBlock[]{log};
+		}
+	},
 
 	//Tool System, Experimental / Not sure
 	HAMMER_HEAD(UseCategory.TOOLPART_ITEM),
@@ -236,7 +243,7 @@ public enum MaterialUseType implements IStringSerializable
 	{
 		this.category = category;
 		this.subGroup = sub;
-		this.blockMaterial = Material.AIR;
+		this.blockMaterial = Material.ROCK;
 		this.stoneYeild = stoneYeild;
 		this.oreYield = oreYield;
 	}

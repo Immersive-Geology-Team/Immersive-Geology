@@ -102,7 +102,9 @@ public class IGLayerUtil
 
 		riverLayer = RiverLayer.INSTANCE.apply(contextFactory.apply(1018L), riverLayer);
 
-		riverLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), riverLayer);
+		riverLayer = ZoomLayer.FUZZY.apply(contextFactory.apply(1019L), riverLayer);
+
+		riverLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1020L), riverLayer);
 
 		// Elevation Mapping => Biomes
 		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1012L), mainLayer);

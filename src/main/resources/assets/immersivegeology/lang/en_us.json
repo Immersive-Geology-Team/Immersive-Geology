@@ -27,6 +27,10 @@
   "item.immersivegeology.raw_crystal.name": "Raw %s Crystal",
   "item.immersivegeology.chunk.name": "%s Chunk",
   "item.immersivegeology.ore_chunk.name": "%s Ore Chunk",
+  "item.immersivegeology.stick.name": "%s Stick",
+  "item.immersivegeology.plank.name": "%s Plank",
+
+  "block.immersivegeology.stripped_log.name": "Stripped %s Log",
   "block.immersivegeology.storage_block.name": "%s Block",
   "block.immersivegeology.rock.name": "%s Stone",
   "block.immersivegeology.cobblestone.name": "%s Cobblestone",
@@ -46,6 +50,9 @@
   "block.immersivegeology.ore_bearing.name": "Ore Bearing %s",
   "block.immersivegeology.pickaxe.name": "%s Pickaxe",
   "block.immersivegeology.hammer.name": "%s Hammer",
+  "block.immersivegeology.moss_rock.name":"Mossy %s",
+  "block.immersivegeology.log.name": "%s Log",
+
   "material.immersivegeology.oak.name": "Oak",
   "material.immersivegeology.birch.name": "Birch",
   "material.immersivegeology.spruce.name": "Spruce",
@@ -53,6 +60,7 @@
   "material.immersivegeology.acacia.name": "Acacia",
   "material.immersivegeology.dark_oak.name": "Dark Oak",
   "material.immersivegeology.treated_wood.name": "Treated Wood",
+  "material.immersivegeology.ebony.name": "Ebony",
 
   "material.immersivegeology.marble.name": "Marble",
   "material.immersivegeology.pegmatite.name": "Pegmatite",

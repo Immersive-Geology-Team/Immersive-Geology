@@ -4,18 +4,18 @@
         {   "from": [ 0, 0, 0 ],
             "to": [ 16, 16, 16 ],
             "faces": {
-                "down":  { "texture": "#all", "cullface": "down" , "tintindex": 0},
-                "up":    { "texture": "#all", "cullface": "up" , "tintindex": 0},
-                "north": { "texture": "#side", "cullface": "north" , "tintindex": 0},
-                "south": { "texture": "#side", "cullface": "south" , "tintindex": 0},
-                "west":  { "texture": "#side", "cullface": "west" , "tintindex": 0},
-                "east":  { "texture": "#side", "cullface": "east" , "tintindex": 0}
+                "down":  { "texture": "#all", "cullface": "down"},
+                "up":    { "texture": "#all", "cullface": "up"},
+                "north": { "texture": "#side", "cullface": "north"},
+                "south": { "texture": "#side", "cullface": "south"},
+                "west":  { "texture": "#side", "cullface": "west"},
+                "east":  { "texture": "#side", "cullface": "east"}
             }
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped_top.png",
-        "side": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped.png",
-        "particle": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped.png"
+        "all": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped_top",
+        "side": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped",
+        "particle": "immersivegeology:block/plant/logs/ebony/ebony_log_stripped"
     }
 }

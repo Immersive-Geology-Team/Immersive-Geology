@@ -63,7 +63,7 @@ public class MaterialWoodEbony extends MaterialWoodBase implements IHandleMateri
     @Override
     public int getColor(int temperature)
     {
-        return 0x492f17;
+        return 0x2C1B2D;
     }
 
     //Needs to be changed in code for subtypes, such as sheetmetal

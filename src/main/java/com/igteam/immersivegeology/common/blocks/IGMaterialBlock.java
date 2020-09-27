@@ -71,7 +71,6 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 			((IGBlockMaterialItem)itemBlock).materials = this.materials;
 			((IGBlockMaterialItem)itemBlock).subtype = this.subtype;
 		}
-
 	}
 	
 	public MaterialUseType getUseType() {

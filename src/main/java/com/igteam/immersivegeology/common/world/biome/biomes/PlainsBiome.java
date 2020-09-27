@@ -55,8 +55,6 @@ public class PlainsBiome extends IGBiome
 			{
 				case grass:
 					return Blocks.ICE.getDefaultState();
-				case dirt:
-					return Blocks.PACKED_ICE.getDefaultState();
 				default:
 					return Blocks.PACKED_ICE.getDefaultState();
 			}
@@ -66,8 +64,6 @@ public class PlainsBiome extends IGBiome
 			{
 				case grass:
 					return Blocks.GRASS_BLOCK.getDefaultState();
-				case dirt:
-					return Blocks.DIRT.getDefaultState();
 				default:
 					return Blocks.DIRT.getDefaultState();
 			}

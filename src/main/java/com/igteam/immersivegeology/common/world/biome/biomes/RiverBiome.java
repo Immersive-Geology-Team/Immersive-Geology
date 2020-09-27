@@ -34,8 +34,6 @@ public class RiverBiome extends IGBiome
 		{
 			case grass:
 				return Blocks.GRASS_BLOCK.getDefaultState();
-			case dirt:
-				return Blocks.DIRT.getDefaultState();
 			default:
 				return Blocks.DIRT.getDefaultState();
 		}

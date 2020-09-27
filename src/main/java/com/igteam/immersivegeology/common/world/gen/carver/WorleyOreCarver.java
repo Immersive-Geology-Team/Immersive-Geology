@@ -177,10 +177,10 @@ public class WorleyOreCarver
 												int topOfLayer = (totHeight*currentLayer)/totalLayerCount;
 												int bottomOfLayer = (((totHeight*currentLayer)/totalLayerCount)-((totHeight*currentLayer)/totalLayerCount)/currentLayer);
 
-												if((yPos > (topOfLayer * 0.66))) {
-													float dif = (float) ((yPos - (topOfLayer * 0.66)) / topOfLayer);
-													heightFadeValue = 1 - dif;
-												} 
+//												if((yPos > (topOfLayer * 0.66))) {
+//													float dif = (float) ((yPos - (topOfLayer * 0.66)) / topOfLayer);
+//													heightFadeValue = 1;
+//												}
 												
 												if((yPos <= topOfLayer) && (yPos >= bottomOfLayer))
 												{

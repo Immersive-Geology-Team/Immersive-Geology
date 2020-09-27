@@ -73,6 +73,8 @@ public enum EnumMaterials
 	Sphalerite(new MaterialMineralSphalerite()),
 	Ullmannite(new MaterialMineralUllmannite()),
 	Galena(new MaterialMineralGalena()),
+	Pyrite(new MaterialMineralPyrite()),
+	Wolframite(new MaterialMineralWolframite()),
 	Vanadinite(new MaterialMineralVanadinite()),
 	//Minerals that spawn in such a large quantity that we don't need an 'orebearing' variant, this is where most clay types will end up!
 	Kaolinite(new MaterialMineralKaolinite()),

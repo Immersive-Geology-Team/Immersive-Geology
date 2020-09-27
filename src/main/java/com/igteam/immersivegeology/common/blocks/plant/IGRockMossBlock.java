@@ -8,7 +8,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUtils;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.IGContent;
-import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
 import com.igteam.immersivegeology.common.blocks.IIGOreBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
@@ -38,45 +38,16 @@ import java.util.List;
 /**
  * Created by Pabilo8 on 26-03-2020.
  */
-public class IGRockMossBlock extends IGBaseBlock implements IColouredBlock
+public class IGRockMossBlock extends IGMaterialBlock
 {
 	public Material[] materials;
 	public MaterialUseType subtype;
 
 	public IGRockMossBlock(Material... materials)
 	{
-		this("", MaterialUseType.MOSS_ROCK, materials);
-	}
-
-	public IGRockMossBlock(String sub, MaterialUseType subtype, Material... materials)
-	{
-		super(MaterialUtils.generateMaterialName("block", subtype, materials),
-				Properties.create((subtype.getMaterial()==null?net.minecraft.block.material.Material.ROCK: subtype.getMaterial())), IGBlockMaterialItem.class, subtype.getSubGroup());
-
+		super(MaterialUseType.MOSS_ROCK, materials);
 		this.materials = materials;
-		this.subtype = subtype;
-		this.name = MaterialUtils.generateMaterialName("block", subtype, materials);
 		this.setBlockLayer(BlockRenderLayer.CUTOUT);
-		if(itemBlock!=null)
-		{
-			try
-			{
-				this.itemSubGroup = subtype.getSubGroup();
-				this.itemBlock = new IGBlockMaterialItem(this, new Item.Properties().group(ImmersiveGeology.IG_ITEM_GROUP), subtype.getSubGroup());
-
-				this.itemBlock.setRegistryName(new ResourceLocation(ImmersiveGeology.MODID, name));
-				IGContent.addItemBlockForBlock(name,this.itemBlock);
-			} catch(Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-
-		if(itemBlock instanceof IGBlockMaterialItem)
-		{
-			((IGBlockMaterialItem)itemBlock).materials = this.materials;
-			((IGBlockMaterialItem)itemBlock).subtype = this.subtype;
-		}
 	}
 	@Override
 	public BlockRenderType getRenderType(BlockState state)
@@ -88,10 +59,6 @@ public class IGRockMossBlock extends IGBaseBlock implements IColouredBlock
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
-	}
-
-	public MaterialUseType getUseType() {
-		return this.subtype;
 	}
 
 	@Override

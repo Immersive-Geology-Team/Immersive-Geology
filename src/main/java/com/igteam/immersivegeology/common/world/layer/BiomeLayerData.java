@@ -147,8 +147,6 @@ public class BiomeLayerData
 	{
 		return this.layerMap.size();
 	}
-
-	
 	
 	public BiomeLayerData addLayerData(IGBaseBlock...layerBlocks) {
 		for(IGBaseBlock layerBlock : layerBlocks) {

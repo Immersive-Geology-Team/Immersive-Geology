@@ -5,9 +5,12 @@ import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
+import com.igteam.immersivegeology.common.blocks.plant.IGRockMossBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 
@@ -32,7 +35,22 @@ public class IGBlockStateProvider extends BlockStateProvider
 		{
 			try
 			{
-				if(block instanceof IGMaterialBlock)
+				if(block instanceof IGLogBlock) {
+
+					IGLogBlock b = (IGLogBlock)block;
+
+					StringBuilder specialName = new StringBuilder();
+					for(Material material : b.materials)
+					{
+						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+					}
+					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name).getPath(),
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()));
+
+					getVariantBuilder(block).forAllStates(blockState -> blockState.get(IGLogBlock.AXIS) == Direction.Axis.Z ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).build() : blockState.get(IGLogBlock.AXIS) == Direction.Axis.X ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).rotationY(90).build() : ConfiguredModel.builder().modelFile(baseModel).build());
+
+				} else if(block instanceof IGMaterialBlock)
 				{
 					IGMaterialBlock b = (IGMaterialBlock)block;
 
@@ -60,7 +78,6 @@ public class IGBlockStateProvider extends BlockStateProvider
 						if(b.getDefaultState().getProperties().contains(IGProperties.ORE_RICHNESS))
 						{
 							//For now, a static texture, poke @Pabilo8 if you need a texture for every block type possible
-
 							BlockModelBuilder poorModel = withExistingParent(res+"poor", res+"richness").texture("base",
 									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/"+subName+"/"+subName+"_poor"));
 
@@ -78,18 +95,13 @@ public class IGBlockStateProvider extends BlockStateProvider
 							multipart.part().modelFile(richModel).addModel().condition(IGProperties.ORE_RICHNESS, 2);
 							multipart.part().modelFile(denseModel).addModel().condition(IGProperties.ORE_RICHNESS, 3);
 						}
-
 					}
 					else
 					{
 						//A basic BlockState using a single model
 						getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
 					}
-
-
 				}
-
-
 			} catch(Exception e)
 			{
 				IGLogger.info("Failed to create blockstate: "+e);
