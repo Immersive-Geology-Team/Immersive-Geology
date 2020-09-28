@@ -106,7 +106,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 				}
 			}
 		}
-		super.onBlockHarvested(worldIn, pos, state, player);
+		worldIn.playEvent(player, 2001, pos, getStateId(state));
 	}
 
 	@Nullable

@@ -126,6 +126,8 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 				worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 			}
 		}
+
+		worldIn.playEvent(player, 2001, pos, getStateId(state));
 	}
 
 	public Material getOreMaterial()
