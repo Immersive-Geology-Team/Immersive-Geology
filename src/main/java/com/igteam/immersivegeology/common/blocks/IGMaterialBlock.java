@@ -82,34 +82,28 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player))
-		{
-			if(subtype.equals(MaterialUseType.ROCK)&&!tool.isEmpty())
-			{
-				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
-				if(state.get(IGProperties.NATURAL)&&!silk)
-				{
-					List<ItemStack> blockDrops = new ArrayList<>();
-					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
-					int effectiveLevel = Math.max(level-this.materials[0].getBlockHarvestLevel(), 0);
-					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
-					int dropAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+effectiveLevel+fortune, effectiveLevel))*(1+player.getLuck()))));
-					blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.CHUNK, this.materials[0]), dropAmount));
-					for(ItemStack item : blockDrops)
-					{
-						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item));
+		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player)) {
+			if (!tool.isEmpty()){
+				if (subtype.equals(MaterialUseType.ROCK)) {
+					boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
+					if (state.get(IGProperties.NATURAL) && !silk) {
+						List<ItemStack> blockDrops = new ArrayList<>();
+						int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
+						int effectiveLevel = Math.max(level - this.materials[0].getBlockHarvestLevel(), 0);
+						int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
+						int dropAmount = Math.max(Math.min(8, 1 + effectiveLevel), Math.min(8, Math.round((float) (IGMathHelper.randInt(2 + effectiveLevel + fortune, effectiveLevel)) * (1 + player.getLuck()))));
+						blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.CHUNK, this.materials[0]), dropAmount));
+						for (ItemStack item : blockDrops) {
+							worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item));
+						}
+					} else {
+						if (!(this instanceof IIGOreBlock)) {
+							worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
+						}
 					}
+				} else {
+					worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 				}
-				else
-				{
-					if(!(this instanceof IIGOreBlock)) {
-						worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
-					}
-				}
-			}
-			else
-			{
-				worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this.itemBlock)));
 			}
 		}
 		super.onBlockHarvested(worldIn, pos, state, player);

@@ -70,7 +70,7 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 		ItemStack tool = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 		if(!player.isCreative()&&!player.isSpectator()&&this.canHarvestBlock(state, worldIn, pos, player))
 		{
-			if(subtype==MaterialUseType.ORE_BEARING&&!tool.isEmpty())
+			if(subtype==MaterialUseType.ORE_BEARING&&!tool.getToolTypes().contains(ToolType.PICKAXE))
 			{
 				boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
 				if(!silk)
