@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.common.blocks;
 
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
+import com.igteam.immersivegeology.api.materials.ToolUseType;
+import com.igteam.immersivegeology.api.toolsystem.Tooltypes;
 import com.igteam.immersivegeology.api.util.IGMathHelper;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
@@ -76,18 +78,37 @@ public class IGOreBearingBlock extends IGMaterialBlock implements IIGOreBlock
 				if(!silk)
 				{
 					List<ItemStack> blockDrops = new ArrayList<>();
-					int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
-					int effectiveLevel = Math.max(level-getMaterial().getBlockHarvestLevel(), 0);
-					int richness = state.get(IGProperties.ORE_RICHNESS)+1;
-					int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
-					int stoneAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*(1+player.getLuck()))));
-					int oreMax = richness+IGMathHelper.randInt(fortune);
-					int oreAmount = stoneAmount >= oreMax?oreMax: stoneAmount;
-					stoneAmount -= oreAmount;
+					if(tool.getToolTypes().contains(Tooltypes.PICKAXE_TOOL))
+					{
+						int level = tool.getHarvestLevel(ToolType.PICKAXE, player, state);
+						int effectiveLevel = Math.max(level-getMaterial().getBlockHarvestLevel(), 0);
+						int richness = state.get(IGProperties.ORE_RICHNESS)+1;
+						int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
+						int stoneAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*(1+player.getLuck()))));
+						int oreMax = richness+IGMathHelper.randInt(fortune);
+						int oreAmount = stoneAmount >= oreMax?oreMax: stoneAmount;
+						stoneAmount -= oreAmount;
 
-					blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.ORE_CHUNK, getMaterial(), getOreMaterial()), oreAmount));
+						blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.ORE_CHUNK, getMaterial(), getOreMaterial()), oreAmount));
 
-					blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.CHUNK, getMaterial()), stoneAmount));
+						blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.CHUNK, getMaterial()), stoneAmount));
+					}
+					else if(tool.getToolTypes().contains(Tooltypes.HAMMER_TOOL))
+					{
+						int level = tool.getHarvestLevel(Tooltypes.HAMMER_TOOL, player, state);
+						int effectiveLevel = Math.max(level-getMaterial().getBlockHarvestLevel(), 0);
+						int richness = state.get(IGProperties.ORE_RICHNESS)+1;
+						int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool);
+						int stoneAmount = Math.max(Math.min(8, 1+effectiveLevel), Math.min(8, Math.round((float)(IGMathHelper.randInt(2+fortune, effectiveLevel))*(1+player.getLuck()))));
+						int oreMax = richness+IGMathHelper.randInt(fortune);
+						int oreAmount = stoneAmount >= oreMax?oreMax: stoneAmount;
+						stoneAmount -= oreAmount;
+
+						blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.ORE_BIT, getMaterial(), getOreMaterial()), oreAmount));
+
+						blockDrops.add(new ItemStack(IGRegistryGrabber.getIGItem(MaterialUseType.ROCK_BIT, getMaterial()), stoneAmount));
+					}
+
 
 					for(ItemStack item : blockDrops)
 					{
