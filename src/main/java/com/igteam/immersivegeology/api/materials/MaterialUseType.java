@@ -110,7 +110,7 @@ public enum MaterialUseType implements IStringSerializable
 	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 
 	//Organic stuff
-	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
+	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	PLANKS(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed),
 	LOG(UseCategory.RESOURCE_BLOCK, Material.WOOD, ItemSubGroup.raw)
