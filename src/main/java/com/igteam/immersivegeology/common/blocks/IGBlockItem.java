@@ -40,7 +40,7 @@ public class IGBlockItem extends BlockItem implements IIGSubGroupContained
 
 	}
 
-	@Override
+    @Override
 	public String getTranslationKey(ItemStack stack)
 	{
 		return getBlock().getTranslationKey();

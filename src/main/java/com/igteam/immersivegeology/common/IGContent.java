@@ -4,14 +4,13 @@ import blusunrize.immersiveengineering.client.DynamicModelLoader;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.blocks.BlockIGSlab;
-import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
-import com.igteam.immersivegeology.common.blocks.IIGBlock;
+import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersivegeology.common.blocks.*;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.tileentity.IGRegisterTileEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
@@ -40,6 +39,9 @@ public class IGContent
 	public static List<Class<? extends TileEntity>> registeredIGTiles = new ArrayList<>();
 	public static List<Fluid> registeredIGFluids = new ArrayList<>();
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
+
+	public static IGBaseItem itemPickaxe = new IGToolPickaxe().setSubGroup(ItemSubGroup.tools);
+	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge",MaterialUseType.ROCK,EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
 
 	public static void modConstruction()
 	{
@@ -71,8 +73,9 @@ public class IGContent
 			}
 		}
 
-		addItem(new IGToolPickaxe());
-		addItem(new IGToolHammer());
+		addItem(itemPickaxe);
+		addItem(new IGToolHammer().setSubGroup(ItemSubGroup.tools));
+		addBlock(toolForge);
 	}
 
 	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
@@ -134,6 +137,7 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerTEs(RegistryEvent.Register<TileEntityType<?>> event)
 	{
+		IGRegisterTileEntityTypes.parseRegistry(event);
 	}
 
 	public static void init()
@@ -188,5 +192,10 @@ public class IGContent
 	public static void addItem(IGBaseItem item)
 	{
 		registeredIGItems.put(item.itemName, item);
+	}
+
+	public static void addBlock(IGBaseBlock block)
+	{
+		registeredIGBlocks.put(block.name, block);
 	}
 }

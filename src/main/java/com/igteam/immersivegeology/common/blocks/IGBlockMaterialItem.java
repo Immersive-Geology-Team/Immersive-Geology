@@ -49,7 +49,6 @@ public class IGBlockMaterialItem extends IGBlockItem implements IColouredItem
 			);
 		else
 			return new TranslationTextComponent("block."+ImmersiveGeology.MODID+"."+subtype.getName().toLowerCase(Locale.ENGLISH)+".name", localizedNames.toArray(new String[localizedNames.size()]));
-
 	}
 
 	@Override

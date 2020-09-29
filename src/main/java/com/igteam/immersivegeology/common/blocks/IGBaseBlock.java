@@ -350,4 +350,9 @@ public class IGBaseBlock extends Block implements IIGBlock
 		naturalHardness = h;
 	}
 
+	public IGBaseBlock setSubGroup(ItemSubGroup group){
+		itemSubGroup = group;
+		return this;
+	}
+
 }
