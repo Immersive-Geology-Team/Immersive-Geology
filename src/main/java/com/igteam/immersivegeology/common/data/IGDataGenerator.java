@@ -35,8 +35,8 @@ public class IGDataGenerator
 			}
 			if(event.includeClient())
 			{
-				gen.addProvider(new IGItemModelProvider(gen, event.getExistingFileHelper()));
 				gen.addProvider(new IGBlockStateProvider(gen, event.getExistingFileHelper()));
+				gen.addProvider(new IGItemModelProvider(gen, event.getExistingFileHelper()));
 			}
 
 		}

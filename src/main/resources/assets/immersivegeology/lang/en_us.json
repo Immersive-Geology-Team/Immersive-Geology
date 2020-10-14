@@ -52,7 +52,6 @@
   "block.immersivegeology.hammer.name": "%s Hammer",
   "block.immersivegeology.moss_rock.name":"Mossy %s",
   "block.immersivegeology.log.name": "%s Log",
-
   "material.immersivegeology.oak.name": "Oak",
   "material.immersivegeology.birch.name": "Birch",
   "material.immersivegeology.spruce.name": "Spruce",
@@ -61,14 +60,13 @@
   "material.immersivegeology.dark_oak.name": "Dark Oak",
   "material.immersivegeology.treated_wood.name": "Treated Wood",
   "material.immersivegeology.ebony.name": "Ebony",
-
+  "material.immersivegeology.beech.name": "Beech",
   "material.immersivegeology.marble.name": "Marble",
   "material.immersivegeology.pegmatite.name": "Pegmatite",
   "material.immersivegeology.rhyolite.name": "Rhyolite",
   "material.immersivegeology.basalt.name": "Basalt",
   "material.immersivegeology.regolith.name": "Regolith",
   "material.immersivegeology.gabbros.name": "Gabbros",
-
   "material.immersivegeology.granite.name": "Granite",
   "material.immersivegeology.diorite.name": "Diorite",
   "material.immersivegeology.andesite.name": "Andesite",

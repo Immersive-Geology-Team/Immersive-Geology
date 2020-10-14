@@ -9,8 +9,6 @@ import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.tileentity.IGRegisterTileEntityTypes;
-import com.igteam.immersivegeology.common.world.gen.feature.MossFeature;
-import com.sun.org.apache.xerces.internal.util.FeatureState;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
@@ -40,7 +38,7 @@ public class IGContent
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 
 	public static IGBaseItem itemPickaxe = new IGToolPickaxe().setSubGroup(ItemSubGroup.tools);
-	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge",MaterialUseType.ROCK,EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
+	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge", MaterialUseType.ROCK, EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
 
 	public static void modConstruction()
 	{
@@ -102,13 +100,15 @@ public class IGContent
 	public static void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
 		for(Block b : registeredIGBlocks.values())
-			if(b instanceof IIGBlock) {
-				event.getRegistry().register(((IIGBlock) b).getItemBlock());
+			if(b instanceof IIGBlock)
+			{
+				event.getRegistry().register(((IIGBlock)b).getItemBlock());
 			}
 	}
 
 	@SubscribeEvent
-	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event){
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
+	{
 
 	}
 

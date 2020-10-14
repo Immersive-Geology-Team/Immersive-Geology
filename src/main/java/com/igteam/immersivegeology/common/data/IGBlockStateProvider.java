@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
-import com.igteam.immersivegeology.common.blocks.plant.IGRockMossBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
@@ -47,7 +46,9 @@ public class IGBlockStateProvider extends BlockStateProvider
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 					}
 					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name).getPath(),
-							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()));
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()))
+							.texture("side", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+((IGLogBlock)block).getUseType().getName()+"_side"))
+							.texture("end", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+((IGLogBlock)block).getUseType().getName()+"_top"));
 
 					getVariantBuilder(block).forAllStates(blockState -> blockState.get(IGLogBlock.AXIS) == Direction.Axis.Z ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).build() : blockState.get(IGLogBlock.AXIS) == Direction.Axis.X ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).rotationY(90).build() : ConfiguredModel.builder().modelFile(baseModel).build());
 
