@@ -37,13 +37,6 @@ public enum EdgeBiomeLayer implements ICastleTransformer
 				return IGLayerUtil.ROLLING_HILLS;
 			}
 		}
-//		else if(IGLayerUtil.isDeepOcean(center))
-//		{
-//			if(matcher.test(IGLayerUtil::isShallowOcean))
-//			{
-//				return IGLayerUtil.OCEAN_EDGE;
-//			}
-//		}
 		// Inverses of above conditions
 		else if(center==IGLayerUtil.LOWLANDS||center==IGLayerUtil.LOW_CANYONS)
 		{

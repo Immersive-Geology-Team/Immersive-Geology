@@ -22,8 +22,8 @@ public enum TemperateLayer implements ICastleTransformer, IBishopTransformer
 	CASTLE, BISHOP;
 
 	public static final int[] FROZEN_BIOMES = new int[]{ARCTIC_DESERT, GLACIER, FROZEN_MOUNTAINS};
-	public static final int[] COLD_BIOMES = new int[]{OLD_MOUNTAINS, MOUNTAINS, LOWLANDS};
-	public static final int[] TEMPERATE_BIOMES = new int[]{PLAINS, ROLLING_HILLS, HILLS, FLOODED_MOUNTAINS, PLATEAU};
+	public static final int[] COLD_BIOMES = new int[]{OLD_MOUNTAINS, MOUNTAINS, LOWLANDS, SNOWY_FOREST};
+	public static final int[] TEMPERATE_BIOMES = new int[]{SWEDISH_FOREST, PLAINS, ROLLING_HILLS, HILLS, FLOODED_MOUNTAINS, PLATEAU};
 	public static final int[] WARM_BIOMES = new int[]{LOW_CANYONS, BADLANDS, LUSH_MOUNTAINS};
 	public static final int[] HOT_BIOMES = new int[]{CANYONS, DESERT, BADLANDS, MOUNTAIN_DUNES};
 

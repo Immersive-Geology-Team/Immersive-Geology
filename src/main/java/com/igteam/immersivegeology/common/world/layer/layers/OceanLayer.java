@@ -11,7 +11,7 @@ public enum OceanLayer implements ICastleTransformer
 	@Override
 	public int apply(INoiseRandom context, int north, int west, int south, int east, int center)
 	{
-		if(IGLayerUtil.isOcean(center))
+		if(center == IGLayerUtil.DEEP_OCEAN)
 		{
 			if(!IGLayerUtil.isOcean(north)||!IGLayerUtil.isOcean(west)||!IGLayerUtil.isOcean(south)||!IGLayerUtil.isOcean(east))
 			{

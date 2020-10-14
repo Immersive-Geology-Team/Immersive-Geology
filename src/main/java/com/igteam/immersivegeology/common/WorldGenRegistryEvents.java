@@ -2,8 +2,10 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.biomes.*;
-import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome.MountainType;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.ForestType;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
 import com.igteam.immersivegeology.common.world.biome.biomes.PlainsBiome.PlainsType;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.OceanType;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import net.minecraft.world.biome.Biome;
@@ -39,10 +41,13 @@ public final class WorldGenRegistryEvents
 	public static void registerBiomes(RegistryEvent.Register<Biome> event)
 	{
 		event.getRegistry().registerAll(
-				new OceanBiome(false).setRegistryName("ocean"),
-				new OceanBiome(true).setRegistryName("deep_ocean"),
-				new OceanBiome(true).setRegistryName("deep_ocean_volcanic"),
-				new OceanBiome(true).setRegistryName("ocean_edge"),
+				new OceanBiome(OceanType.NORMAL).setRegistryName("ocean"),
+				new OceanBiome(OceanType.COLD).setRegistryName("cold_ocean"),
+				new OceanBiome(OceanType.WARM).setRegistryName("warm_ocean"),
+				new OceanBiome(OceanType.DEEP).setRegistryName("deep_ocean"),
+				new OceanBiome(OceanType.DEEP_FROZEN).setRegistryName("frozen_deep_ocean"),
+				new OceanBiome(OceanType.DEEP_VOLCANIC).setRegistryName("deep_ocean_volcanic"),
+				new OceanBiome(OceanType.EDGE).setRegistryName("ocean_edge"),
 
 				new PlainsBiome(-4, 10, PlainsType.DEFAULT).setRegistryName("plains"),
 				new DesertBiome(-5, 20, false).setRegistryName("desert"),
@@ -51,6 +56,9 @@ public final class WorldGenRegistryEvents
 				new HillsBiome(16).setRegistryName("hills"),
 				new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
 
+				new ForestBiome(ForestType.SNOWY,3,6).setRegistryName("snowy_forest"),
+				new ForestBiome(ForestType.SWEDISH,2,6).setRegistryName("swedish_forest"),
+				
 				new HillsBiome(28).setRegistryName("rolling_hills"),
 				new BadlandsBiome().setRegistryName("badlands"),
 				new PlainsBiome(20,30, PlainsType.DEFAULT).setRegistryName("plateau"),

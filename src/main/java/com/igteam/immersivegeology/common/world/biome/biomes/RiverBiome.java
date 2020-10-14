@@ -24,7 +24,7 @@ public class RiverBiome extends IGBiome
 	@Override
 	public INoise2D createNoiseLayer(long seed)
 	{
-		return new SimplexNoise2D(seed).octaves(6).spread(0.17f).scaled(SEA_LEVEL-6, SEA_LEVEL-1);
+		return new SimplexNoise2D(seed).octaves(4).spread(0.2f).scaled(SEA_LEVEL-6, SEA_LEVEL-1);
 	}
 
 	@Override
@@ -32,10 +32,8 @@ public class RiverBiome extends IGBiome
 	{
 		switch(part)
 		{
-			case grass:
-				return Blocks.GRASS_BLOCK.getDefaultState();
 			default:
-				return Blocks.DIRT.getDefaultState();
+				return Blocks.SAND.getDefaultState();
 		}
 	}
 }

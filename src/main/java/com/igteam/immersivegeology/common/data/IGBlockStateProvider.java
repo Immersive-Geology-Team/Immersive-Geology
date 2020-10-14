@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGRockMossBlock;
@@ -50,8 +51,28 @@ public class IGBlockStateProvider extends BlockStateProvider
 
 					getVariantBuilder(block).forAllStates(blockState -> blockState.get(IGLogBlock.AXIS) == Direction.Axis.Z ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).build() : blockState.get(IGLogBlock.AXIS) == Direction.Axis.X ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).rotationY(90).build() : ConfiguredModel.builder().modelFile(baseModel).build());
 
-				} else if(block instanceof IGMaterialBlock)
-				{
+				} else if(block instanceof IGLayerBase) {
+					IGLayerBase b = (IGLayerBase)block;
+
+					StringBuilder specialName = new StringBuilder();
+					for(Material material : b.materials)
+					{
+						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+					}
+					getVariantBuilder(block).forAllStates(blockState -> {
+						int layer_state = blockState.get(IGLayerBase.LAYERS).intValue();
+
+						String layer_name = layer_state == 8 ? "" : "_height" + String.valueOf((layer_state * 2));
+
+						BlockModelBuilder varientModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+b.name).getPath() +layer_name,
+								new ResourceLocation(ImmersiveGeology.MODID, "block/base/layer/"+(b).subtype.getName()+specialName.toString() + layer_name))
+								.texture("base","block/greyscale/layer/" + b.getMaterial().getName());
+
+						return ConfiguredModel.builder().modelFile(varientModel).build();
+					});
+				}
+				else if(block instanceof IGMaterialBlock) {
 					IGMaterialBlock b = (IGMaterialBlock)block;
 
 					StringBuilder specialName = new StringBuilder();

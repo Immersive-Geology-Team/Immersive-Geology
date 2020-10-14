@@ -42,10 +42,13 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 		this("", subtype, materials);
 	}
 
-	public IGMaterialBlock(String sub, MaterialUseType subtype, Material... materials)
+	public IGMaterialBlock(String sub, MaterialUseType subtype, Material... materials) {
+		this(sub,Properties.create((subtype.getMaterial() == null ? net.minecraft.block.material.Material.ROCK : subtype.getMaterial())), subtype, materials);
+	}
+
+	public IGMaterialBlock(String sub, Properties prop, MaterialUseType subtype, Material... materials)
 	{
-		super(MaterialUtils.generateMaterialName("block", subtype, materials),
-				Properties.create((subtype.getMaterial()==null?net.minecraft.block.material.Material.ROCK: subtype.getMaterial())), IGBlockMaterialItem.class, subtype.getSubGroup());
+		super(MaterialUtils.generateMaterialName("block", subtype, materials),prop, IGBlockMaterialItem.class, subtype.getSubGroup());
 
 		this.materials = materials;
 		this.subtype = subtype;
@@ -72,7 +75,7 @@ public class IGMaterialBlock extends IGBaseBlock implements IColouredBlock
 			((IGBlockMaterialItem)itemBlock).subtype = this.subtype;
 		}
 	}
-	
+
 	public MaterialUseType getUseType() {
 		return this.subtype;
 	}

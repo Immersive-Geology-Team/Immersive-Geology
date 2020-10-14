@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/layer/layer_height8",
+  "textures": {
+    "base": "immersivegeology:block/greyscale/layer/moss"
+  }
+}

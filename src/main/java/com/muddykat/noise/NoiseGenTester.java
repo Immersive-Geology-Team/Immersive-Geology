@@ -106,7 +106,7 @@ public class NoiseGenTester {
 			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1021L), mainLayer);
 		}
 
-		mainLayer = ShoreLayer.INSTANCE.apply(contextFactory.apply(1023L), mainLayer);
+		mainLayer = ShoreLayer.CASTLE.apply(contextFactory.apply(1023L), mainLayer);
 
 		for(int i = 0; i < 2; i++)
 		{

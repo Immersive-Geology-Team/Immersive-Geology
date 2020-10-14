@@ -1,7 +1,5 @@
 package com.igteam.immersivegeology.common;
 
-import blusunrize.immersiveengineering.client.DynamicModelLoader;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
@@ -11,15 +9,16 @@ import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.tileentity.IGRegisterTileEntityTypes;
+import com.igteam.immersivegeology.common.world.gen.feature.MossFeature;
+import com.sun.org.apache.xerces.internal.util.FeatureState;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.client.model.ModelLoaderRegistry2;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -106,6 +105,11 @@ public class IGContent
 			if(b instanceof IIGBlock) {
 				event.getRegistry().register(((IIGBlock) b).getItemBlock());
 			}
+	}
+
+	@SubscribeEvent
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event){
+
 	}
 
 	@SubscribeEvent

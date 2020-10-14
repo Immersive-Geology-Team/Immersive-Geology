@@ -16,7 +16,7 @@ public enum MixRiverLayer implements IAreaTransformer2, IDimOffset0Transformer
 	{
 		int mainValue = mainArea.getValue(func_215721_a(x), func_215722_b(z));
 		int riverValue = riverArea.getValue(func_215721_a(x), func_215722_b(z));
-		if(IGLayerUtil.isOcean(mainValue)||mainValue==IGLayerUtil.FLOODED_MOUNTAINS||mainValue==IGLayerUtil.LAKE)
+		if(IGLayerUtil.isOcean(mainValue)||!IGLayerUtil.isRiverCompatible(mainValue))
 		{
 			return mainValue;
 		}

@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
+import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import com.igteam.immersivegeology.common.util.IGLogger;
@@ -40,6 +41,18 @@ public class IGItemModelProvider extends ItemModelProvider
 		{
 			try
 			{
+				if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGLayerBase) {
+					IGBlockMaterialItem i = (IGBlockMaterialItem) item;
+					IGLayerBase b = (IGLayerBase) i.getBlock();
+					StringBuilder specialName = new StringBuilder();
+					for (Material material : b.materials) {
+						if (material.getSpecialSubtypeModelName(b.subtype) != null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+					}
+					String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/"+b.name).getPath();
+
+					withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/layer/"+i.subtype.getName()+specialName.toString() + "_height2")).texture("base","block/greyscale/layer/" + b.getMaterial().getName());
+				} else
 				if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGMaterialBlock)
 				{
 					IGBlockMaterialItem i = (IGBlockMaterialItem)item;

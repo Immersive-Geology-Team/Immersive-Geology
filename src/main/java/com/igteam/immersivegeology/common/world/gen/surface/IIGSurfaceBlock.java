@@ -45,4 +45,17 @@ public interface IIGSurfaceBlock
 			return Blocks.WHITE_WOOL.getDefaultState();
 		}
 	}
+
+	static BlockState getPeakState(Biome biome, float chunkTemp, float chunkRain)
+	{
+		if(biome instanceof IGBiome)
+		{
+			IGBiome igBiome = (IGBiome)biome;
+			return igBiome.returnBlockType(SurfaceBlockType.peak, chunkTemp, chunkRain);
+		}
+		else
+		{
+			return Blocks.WHITE_WOOL.getDefaultState();
+		}
+	}
 }

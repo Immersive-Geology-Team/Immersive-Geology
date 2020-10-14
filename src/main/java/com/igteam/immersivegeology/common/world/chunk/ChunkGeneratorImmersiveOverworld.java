@@ -11,6 +11,7 @@ import com.igteam.immersivegeology.common.world.chunk.data.ChunkDataProvider;
 import com.igteam.immersivegeology.common.world.gen.carver.ImmersiveCarver;
 import com.igteam.immersivegeology.common.world.gen.carver.WorleyOreCarver;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.gen.population.types.WorldPopFalls;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
 import com.igteam.immersivegeology.common.world.layer.wld.WorldLayerData;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
@@ -28,6 +29,8 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.Heightmap.Type;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -81,7 +84,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		
 		this.chunkDataProvider = new ChunkDataProvider(world, settings, seedGenerator);
 	}
-
 
 	@Override
 	public void carve(IChunk chunkIn, GenerationStage.Carving stage)
@@ -169,10 +171,8 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 				}
 
 				// The biome to reference when building the initial surface
-				IGBiome biomeAt = spreadBiomes[(x+4)+24*(z+4)];
-				IGBiome shoreBiomeAt = biomeAt, standardBiomeAt = biomeAt;
-				double maxShoreWeight = 0, maxStandardBiomeWeight = 0;
-
+				IGBiome biomeAt = null, normalBiomeAt = null, riverBiomeAt = null, shoreBiomeAt = null;
+				double maxNormalWeight = 0, maxRiverWeight = 0, maxShoreWeight = 0;
 				// calculate the total height based on the biome noise map, using a custom
 				// Noise2D for each biome
 				for(Object2DoubleMap.Entry<IGBiome> entry : heightBiomeMap.object2DoubleEntrySet())
@@ -180,12 +180,18 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 					double weight = entry.getDoubleValue();
 					double height = weight*biomeNoiseMap.get(entry.getKey()).noise(chunkX+x, chunkZ+z);
 					totalHeight += height;
-					if(entry.getKey()==IGBiomes.RIVER)
+					IGBiome currentBiome = entry.getKey();
+					if(currentBiome==IGBiomes.RIVER)
 					{
 						riverHeight += height;
 						riverWeight += weight;
+						if (maxRiverWeight < weight)
+						{
+							riverBiomeAt = entry.getKey();
+							maxRiverWeight = weight;
+						}
 					}
-					else if(entry.getKey()==IGBiomes.SHORE||entry.getKey()==IGBiomes.STONE_SHORE)
+					else if(currentBiome==IGBiomes.SHORE||currentBiome==IGBiomes.STONE_SHORE)
 					{
 						shoreHeight += height;
 						shoreWeight += weight;
@@ -196,62 +202,71 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 							maxShoreWeight = weight;
 						}
 					}
-					else if(maxStandardBiomeWeight < weight)
+					else if(maxNormalWeight < weight)
 					{
-						standardBiomeAt = entry.getKey();
-						maxStandardBiomeWeight = weight;
+						normalBiomeAt = entry.getKey();
+						maxNormalWeight = weight;
 					}
 				}
 
 				// Create river valleys - carve cliffs around river biomes, and smooth out the
 				// edges
 				double actualHeight = totalHeight;
-				if(riverWeight > 0.6)
+				if (riverWeight > 0.6 && riverBiomeAt != null)
 				{
 					// River bottom / shore
-					double aboveWaterDelta = actualHeight-riverHeight/riverWeight;
-					if(aboveWaterDelta > 0)
+					double aboveWaterDelta = actualHeight - riverHeight / riverWeight;
+					if (aboveWaterDelta > 0)
 					{
-						if(aboveWaterDelta > 20)
+						if (aboveWaterDelta > 20)
 						{
 							aboveWaterDelta = 20;
 						}
-						double adjustedAboveWaterDelta = 0.02*aboveWaterDelta*(40-aboveWaterDelta)-0.48;
-						actualHeight = riverHeight/riverWeight+adjustedAboveWaterDelta;
+						double adjustedAboveWaterDelta = 0.02 * aboveWaterDelta * (40 - aboveWaterDelta) - 0.48;
+						actualHeight = riverHeight / riverWeight + adjustedAboveWaterDelta;
 					}
-					biomeAt = IGBiomes.RIVER; // Use river surface for the bottom of the river + small shore beneath
-					// cliffs
+					biomeAt = riverBiomeAt; // Use river surface for the bottom of the river + small shore beneath cliffs
 				}
-				else if(riverWeight > 0)
+				else if (riverWeight > 0 && normalBiomeAt != null)
 				{
-					double adjustedRiverWeight = 0.6*riverWeight;
-					actualHeight = (totalHeight-riverHeight)*((1-adjustedRiverWeight)/(1-riverWeight))
-							+riverHeight*(adjustedRiverWeight/riverWeight);
+					double adjustedRiverWeight = 0.6 * riverWeight;
+					actualHeight = (totalHeight - riverHeight) * ((1 - adjustedRiverWeight) / (1 - riverWeight)) + riverHeight * (adjustedRiverWeight / riverWeight);
 
-					if(biomeAt==IGBiomes.RIVER)
-					{
-						biomeAt = standardBiomeAt;
-					}
+					biomeAt = normalBiomeAt;
+				}
+				else if (normalBiomeAt != null)
+				{
+					biomeAt = normalBiomeAt;
 				}
 
 				// Flatten shores, and create cliffs on the edges
-				if(shoreWeight > 0.4)
+				if(shoreWeight > 0.01)
 				{
-					if(actualHeight > SEA_LEVEL+1)
-					{
-						actualHeight = SEA_LEVEL+1;
+					if(actualHeight > SEA_LEVEL + 4){
+						actualHeight--;
+
+						biomeAt = IGBiomes.STONE_SHORE;
+
+						if(actualHeight == SEA_LEVEL) {
+							biomeAt = shoreBiomeAt;
+						}
+					} else {
+						if(actualHeight >= SEA_LEVEL) {
+							actualHeight = SEA_LEVEL;
+						}
+						biomeAt = shoreBiomeAt;
 					}
-					biomeAt = shoreBiomeAt;
 				}
 				else if(shoreWeight > 0)
 				{
-					double adjustedShoreWeight = 0.4*shoreWeight;
+					double adjustedShoreWeight = 0.01*shoreWeight;
+
 					actualHeight = (actualHeight-shoreHeight)*((1-adjustedShoreWeight)/(1-shoreWeight))
 							+shoreHeight*(adjustedShoreWeight/shoreWeight);
 
 					if(biomeAt==shoreBiomeAt)
 					{
-						biomeAt = standardBiomeAt;
+						biomeAt = normalBiomeAt;
 					}
 				}
 
@@ -309,7 +324,6 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 													.with(IGBaseBlock.NATURAL, Boolean.TRUE),
 											true);
 								}
-
 							}
 						}
 					}
@@ -381,10 +395,25 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		}
 
 		makeBedrock(chunk, random);
+		//populate(chunk); Soft Locks the game when generating, can't be lazy need to use the proper decoration method
 	}
 
 	public static final BlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 
+	private static final IWorldGenerator WATERFALL_POP = new WorldPopFalls(Blocks.WATER.getDefaultState(), 15);
+
+	public void populate(IChunk chunk){
+		int chunkX = chunk.getPos().x;
+		int chunkZ = chunk.getPos().z;
+
+		final int worldX = chunkX << 4;
+		final int worldZ = chunkZ << 4;
+		BlockPos pos = new BlockPos(worldX, 0, worldZ);
+		final Biome biome = world.getBiome(pos.add(16,0,16));
+		Random rand = new Random();
+		rand.setSeed(world.getSeed());
+		WATERFALL_POP.generate(rand, chunkX, chunkZ, world.getWorld(), this, world.getChunkProvider());
+	}
 
 	public void makeBedrock(IChunk chunk, Random random)
 	{

@@ -15,7 +15,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -36,9 +38,10 @@ import java.util.List;
 public class IGBaseBlock extends Block implements IIGBlock
 {
 	protected static IProperty[] tempProperties;
+
 	public BlockItem itemBlock = null;
 	public String name;
-	public final IProperty[] additionalProperties;
+	//public final IProperty[] additionalProperties;
 	boolean isHidden;
 	boolean hasFlavour;
 	protected List<BlockRenderLayer> renderLayers = Collections.singletonList(BlockRenderLayer.SOLID);
@@ -55,10 +58,10 @@ public class IGBaseBlock extends Block implements IIGBlock
 	public IGBaseBlock(String name, Block.Properties blockProps, @Nullable Class<? extends BlockItem> itemBlock,
 					   ItemSubGroup group, IProperty... additionalProperties)
 	{
-		super(setTempProperties(blockProps, additionalProperties));
+		super(blockProps);
 		this.name = name;
 
-		this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
+		//this.additionalProperties = Arrays.copyOf(tempProperties, tempProperties.length);
 		this.setDefaultState(this.stateContainer.getBaseState().with(NATURAL, Boolean.FALSE));
 		ResourceLocation registryName = createRegistryName();
 		setRegistryName(registryName);
@@ -96,7 +99,6 @@ public class IGBaseBlock extends Block implements IIGBlock
 	{
 		super.fillStateContainer(builder);
 		builder.add(NATURAL);
-		builder.add(tempProperties);
 	}
 
 	// TODO do we still need this hackyness?
@@ -111,7 +113,7 @@ public class IGBaseBlock extends Block implements IIGBlock
 				propList.addAll(Arrays.asList(((IProperty<?>[])o)));
 		}
 		tempProperties = propList.toArray(new IProperty[0]);
-		return blockProps.variableOpacity();
+		return blockProps;
 	}
 
 	public IGBaseBlock setHidden(boolean shouldHide)
@@ -354,5 +356,4 @@ public class IGBaseBlock extends Block implements IIGBlock
 		itemSubGroup = group;
 		return this;
 	}
-
 }

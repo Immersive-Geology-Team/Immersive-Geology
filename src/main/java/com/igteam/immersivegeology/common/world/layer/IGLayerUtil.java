@@ -30,17 +30,22 @@ public class IGLayerUtil
 
 	/* Biomes */
 	public static final int OCEAN = getId(IGBiomes.OCEAN);
-	public static final int DEEP_OCEAN = getId(IGBiomes.DEEP_OCEAN);
+	public static final int WARM_OCEAN = getId(IGBiomes.WARM_OCEAN);
+	public static final int COLD_OCEAN = getId(IGBiomes.COLD_OCEAN);
 	public static final int OCEAN_EDGE = getId(IGBiomes.OCEAN_EDGE);
+	public static final int DEEP_OCEAN = getId(IGBiomes.DEEP_OCEAN);
 	public static final int DEEP_OCEAN_VOLCANIC = getId(IGBiomes.DEEP_OCEAN_VOLCANIC);
+	public static final int FROZEN_DEEP_OCEAN = getId(IGBiomes.FROZEN_DEEP_OCEAN);
 
 	public static final int PLAINS = getId(IGBiomes.PLAINS);
-	public static final int DESERT = getId(IGBiomes.DESERT);
+	public static final int SWEDISH_FOREST = getId(IGBiomes.SWEDISH_FOREST);
 
+	public static final int DESERT = getId(IGBiomes.DESERT);
 	public static final int ARCTIC_DESERT = getId(IGBiomes.ARCTIC_DESERT);
 	public static final int GLACIER = getId(IGBiomes.GLACIER);
 	public static final int FROZEN_MOUNTAINS = getId(IGBiomes.FROZEN_MOUNTAINS);
-	
+	public static final int SNOWY_FOREST = getId(IGBiomes.SNOWY_FOREST);
+
 	public static final int OASIS = getId(IGBiomes.OASIS);
 	public static final int HILLS = getId(IGBiomes.HILLS);
 	public static final int LOWLANDS = getId(IGBiomes.LOWLANDS);
@@ -67,7 +72,7 @@ public class IGLayerUtil
 		LongFunction<LazyAreaLayerContext> contextFactory = seedModifier -> new LazyAreaLayerContext(25, seed,
 				seedModifier);
 
-		IAreaFactory<LazyArea> mainLayer, riverLayer;
+		IAreaFactory<LazyArea> mainLayer, riverLayer, beachLayer;
 		// Ocean / Continents
 
 		mainLayer = new IslandLayer(settings.getIslandFrequency()).apply(contextFactory.apply(1000L));
@@ -108,32 +113,36 @@ public class IGLayerUtil
 
 		// Elevation Mapping => Biomes
 		mainLayer = BiomeLayer.INSTANCE.apply(contextFactory.apply(1012L), mainLayer);
-		
+
 		for(int i = 0; i <= 4; i++){
-			mainLayer = TemperateLayer.CASTLE.apply(contextFactory.apply(1012L), mainLayer);
-			mainLayer = TemperateLayer.BISHOP.apply(contextFactory.apply(1012L), mainLayer);
+			mainLayer = TemperateLayer.CASTLE.apply(contextFactory.apply(1010L), mainLayer);
+			mainLayer = TemperateLayer.BISHOP.apply(contextFactory.apply(1011L), mainLayer);
 		}
 		
-		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
+		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1012L), mainLayer);
 
-		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
+		mainLayer = AddIslandLayer.NORMAL.apply(contextFactory.apply(1013L), mainLayer);
 
-		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1015L), mainLayer);
+		mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1014L), mainLayer);
 
-		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
+		mainLayer = RemoveOceanLayer.INSTANCE.apply(contextFactory.apply(1015L), mainLayer);
 
-		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
+		mainLayer = OceanLayer.INSTANCE.apply(contextFactory.apply(1016L), mainLayer);
 
-		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1019L), mainLayer);
+		mainLayer = AddLakeLayer.INSTANCE.apply(contextFactory.apply(1017L), mainLayer);
 
-		mainLayer = AddOasisLayer.INSTANCE.apply(contextFactory.apply(1020L), mainLayer);
+		mainLayer = AddOasisLayer.INSTANCE.apply(contextFactory.apply(1018L), mainLayer);
 
 		for(int i = 0; i < settings.getBiomeZoomLevel(); i++)
 		{
-			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1021L), mainLayer);
+			mainLayer = ZoomLayer.NORMAL.apply(contextFactory.apply(1019L), mainLayer);
 		}
 
-		mainLayer = ShoreLayer.INSTANCE.apply(contextFactory.apply(1023L), mainLayer);
+		mainLayer = ShoreLayer.CASTLE.apply(contextFactory.apply(1023L), mainLayer);
+		mainLayer = ShoreLayer.BISHOP.apply(contextFactory.apply(1023L), mainLayer);
+
+		mainLayer = OuterShoreLayer.CASTLE.apply(contextFactory.apply(1023L), mainLayer);
+		mainLayer = OuterShoreLayer.BISHOP.apply(contextFactory.apply(1023L), mainLayer);
 
 		for(int i = 0; i < 2; i++)
 		{
@@ -178,6 +187,11 @@ public class IGLayerUtil
 		return value!=LOWLANDS&&value!=LOW_CANYONS&&value!=CANYONS;
 	}
 
+	public static boolean isShore(int value)
+	{
+		return value==SHORE||value==STONE_SHORE;
+	}
+
 	public static boolean isLakeCompatible(int value)
 	{
 		return isLow(value)||value==CANYONS||value==ROLLING_HILLS;
@@ -190,7 +204,7 @@ public class IGLayerUtil
 
 	public static boolean isOcean(int value)
 	{
-		return value==OCEAN||value==DEEP_OCEAN||value==DEEP_OCEAN_VOLCANIC||value==OCEAN_EDGE;
+		return value==OCEAN||value==DEEP_OCEAN||value==DEEP_OCEAN_VOLCANIC||value==OCEAN_EDGE||value==WARM_OCEAN||value==COLD_OCEAN||value==FROZEN_DEEP_OCEAN;
 	}
 
 	public static boolean isShallowOcean(int value)
@@ -201,6 +215,11 @@ public class IGLayerUtil
 	public static boolean isMountains(int value)
 	{
 		return value==MOUNTAINS||value==FLOODED_MOUNTAINS||value==MOUNTAINS_EDGE||value==OLD_MOUNTAINS||value==LUSH_MOUNTAINS;
+	}
+
+	//Rivers don't really work well with high terrains, so we don't add them to any high terrain options
+	public static boolean isRiverCompatible(int value){
+		return value==PLAINS||value==HILLS||value==DESERT||value==SHORE||value==STONE_SHORE||value==LOWLANDS||value==LAKE;
 	}
 
 	public static boolean isLow(int value)

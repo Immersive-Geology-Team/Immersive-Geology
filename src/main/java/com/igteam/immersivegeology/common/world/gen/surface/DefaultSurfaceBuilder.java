@@ -5,6 +5,8 @@ import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.BiomeHelper;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceData;
 import net.minecraft.block.BlockState;
@@ -12,6 +14,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 
 import java.util.Random;
@@ -65,44 +68,60 @@ public class DefaultSurfaceBuilder implements ISurfaceBuilder
 						}
 						else
 						{
+							//Mountain Decoration
+							if(chunkIn.getBiome(pos) instanceof MountainsBiome){
+								MountainsBiome mbiome = (MountainsBiome) chunkIn.getBiome(pos);
+								MountainType mtype = mbiome.mountainType;
+								int snowOffset = random.nextInt(2)+random.nextInt(2)+random.nextInt(1)-random.nextInt(2);
+								float regionTemp = temperature;
 
-							int snowOffset = random.nextInt(2)+random.nextInt(2)+random.nextInt(1)-random.nextInt(2);
-							float regionTemp = temperature;
 
-
-							if(y >= 141 && y <= 170+snowOffset){
-								if(chunkIn.getBiome(pos) instanceof MountainsBiome){
-									MountainsBiome mbiome = (MountainsBiome) chunkIn.getBiome(pos);
-									if(mbiome.mountainType == MountainsBiome.MountainType.LUSH) {
+								if(y >= 141 && y <= 175+snowOffset){
+									if(mtype == MountainType.LUSH) {
 										chunkIn.setBlockState(pos, IGRegistryGrabber.grabBlock(MaterialUseType.MOSS_ROCK, EnumMaterials.Marble.material).getDefaultState(), false);
 									}
 								}
-							}
 
-							if(y >= 180+snowOffset+regionTemp)
-							{
-								int snowWeight = random.nextInt();
-								if(snowWeight%4096==0||snowOffset < 1)
-								{
-									chunkIn.setBlockState(pos, Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7+random.nextInt(1)-random.nextInt(2)), false);
-								}
-								else if(snowWeight%128==0||snowOffset < 3)
-								{
-									chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7+random.nextInt(1)-random.nextInt(2)), false);
-								}
-								else if(snowWeight%128==0)
-								{
-									chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(2), Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(3), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3+random.nextInt(5)-random.nextInt(2)), false);
-								}
-								else
-								{
-									chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
-									chunkIn.setBlockState(pos.up(2), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3+random.nextInt(5)-random.nextInt(2)), false);
+								if(BiomeHelper.isMountainSnowPeaked(mtype)) {
+									if (y >= 180 + snowOffset + regionTemp) {
+										int snowWeight = random.nextInt();
+										if (snowWeight % 4096 == 0 || snowOffset < 1) {
+											chunkIn.setBlockState(pos, Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7 + random.nextInt(1) - random.nextInt(2)), false);
+										} else if (snowWeight % 128 == 0 || snowOffset < 3) {
+											chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 7 + random.nextInt(1) - random.nextInt(2)), false);
+										} else if (snowWeight % 128 == 0) {
+											chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(2), Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(3), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
+										} else {
+											chunkIn.setBlockState(pos, Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(), Blocks.SNOW_BLOCK.getDefaultState(), false);
+											chunkIn.setBlockState(pos.up(2), Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, 3 + random.nextInt(5) - random.nextInt(2)), false);
+										}
+									}
+								} else
+								if(BiomeHelper.isMountainCustomPeaked(mtype)) {
+									BlockState customBlock = BiomeHelper.getCustomMountainPeak(mtype);
+									if (y >= 180 + snowOffset + regionTemp) {
+										int snowWeight = random.nextInt();
+										if (snowWeight % 4096 == 0 || snowOffset < 1) {
+											chunkIn.setBlockState(pos, customBlock, false);
+										} else if (snowWeight % 128 == 0 || snowOffset < 3) {
+											chunkIn.setBlockState(pos, customBlock, false);
+											chunkIn.setBlockState(pos.up(), customBlock, false);
+										} else if (snowWeight % 128 == 0) {
+											chunkIn.setBlockState(pos, customBlock, false);
+											chunkIn.setBlockState(pos.up(), customBlock, false);
+											chunkIn.setBlockState(pos.up(2), customBlock, false);
+											chunkIn.setBlockState(pos.up(3), customBlock, false);
+										} else {
+											chunkIn.setBlockState(pos, customBlock, false);
+											chunkIn.setBlockState(pos.up(), customBlock, false);
+											chunkIn.setBlockState(pos.up(2), customBlock, false);
+										}
+									}
 								}
 							}
 						}

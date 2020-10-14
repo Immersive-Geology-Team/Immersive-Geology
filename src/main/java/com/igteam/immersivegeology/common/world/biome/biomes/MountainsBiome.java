@@ -5,6 +5,8 @@ import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGDefaultBiomeFeatures;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.BiomeHelper;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
@@ -27,7 +29,7 @@ public class MountainsBiome extends IGBiome
 	
 	public MountainsBiome(float baseHeight, float scaleHeight, MountainType mountainType)
 	{
-		super(new Builder().category(Category.EXTREME_HILLS).precipitation(RainType.RAIN).downfall(0.6f).temperature(0.35f), 0.35f, (mountainType == MountainType.FLOODED)?0.85f: 0.6f);
+		super(new Builder().category(Category.EXTREME_HILLS).precipitation(BiomeHelper.getMountainRain(mountainType)).downfall(0.6f).temperature(0.35f), 0.35f, (mountainType == MountainType.FLOODED)?0.85f: 0.6f);
 
 		this.baseHeight = baseHeight;
 		this.scaleHeight = scaleHeight;
@@ -104,13 +106,5 @@ public class MountainsBiome extends IGBiome
 					return IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Rhyolite.material).getDefaultState();
 			}
 		}
-	}
-	
-	public enum MountainType {
-		FROZEN,
-		NORMAL,
-		LUSH,
-		DESERT,
-		FLOODED
 	}
 }

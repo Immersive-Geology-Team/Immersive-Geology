@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuar
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidBrine;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidCreosote;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
+import com.igteam.immersivegeology.common.materials.layer.MaterialLayerMoss;
 import com.igteam.immersivegeology.common.materials.metals.*;
 import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalConstantan;
 import com.igteam.immersivegeology.common.materials.metals.alloys.MaterialMetalElectrum;
@@ -109,7 +110,10 @@ public enum EnumMaterials
 	Acacia(new MaterialWoodAcacia()),
 	DarkOak(new MaterialWoodDarkOak()),
 	Ebony(new MaterialWoodEbony()),
-	TreatedWood(new MaterialTreatedWood());
+	TreatedWood(new MaterialTreatedWood()),
+
+	//Layer Types
+	Moss(new MaterialLayerMoss());
 
 	public final Material material;
 

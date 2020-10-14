@@ -7,6 +7,8 @@ import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 
 import javax.annotation.Nonnull;
@@ -24,12 +26,32 @@ public class CanyonsBiome extends IGBiome
 
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
+		IGDefaultBiomeFeatures.addCarvers(this);
 
 		DefaultBiomeFeatures.addStructures(this);
-		IGDefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addMonsterRooms(this);
 		DefaultBiomeFeatures.addMushrooms(this);
-
+		DefaultBiomeFeatures.addShatteredSavannaTrees(this);
+		DefaultBiomeFeatures.addDeadBushes(this);
+		DefaultBiomeFeatures.addMushrooms(this);
+		DefaultBiomeFeatures.addReedsAndPumpkins(this);
+		DefaultBiomeFeatures.addSprings(this);
+		DefaultBiomeFeatures.addFreezeTopLayer(this);
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.PIG, 10, 4, 4));
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.CHICKEN, 10, 4, 4));
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.COW, 8, 4, 4));
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.HORSE, 1, 2, 6));
+		this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.DONKEY, 1, 1, 1));
+		this.addSpawn(EntityClassification.AMBIENT, new SpawnListEntry(EntityType.BAT, 10, 8, 8));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.CREEPER, 100, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SLIME, 100, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
+		this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.WITCH, 5, 1, 1));
 	}
 
 	@Nonnull
@@ -44,14 +66,20 @@ public class CanyonsBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		switch(part)
-		{
-			case grass:
-				return Blocks.TERRACOTTA.getDefaultState();
-			case dirt:
-				return Blocks.BROWN_TERRACOTTA.getDefaultState();
-			default:
-				return Blocks.TERRACOTTA.getDefaultState();
+		if(chunkTemp > 0.5f) {
+			switch (part) {
+				case dirt:
+					return Blocks.BROWN_TERRACOTTA.getDefaultState();
+				default:
+					return Blocks.TERRACOTTA.getDefaultState();
+			}
+		} else {
+			switch (part) {
+				case grass:
+					return Blocks.YELLOW_TERRACOTTA.getDefaultState();
+				default:
+					return Blocks.TERRACOTTA.getDefaultState();
+			}
 		}
 	}
 }

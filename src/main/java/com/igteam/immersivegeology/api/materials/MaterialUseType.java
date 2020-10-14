@@ -7,7 +7,9 @@ import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
+import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
+import com.igteam.immersivegeology.common.blocks.plant.IGMossLayer;
 import com.igteam.immersivegeology.common.blocks.plant.IGRockMossBlock;
 import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
@@ -128,6 +130,20 @@ public enum MaterialUseType implements IStringSerializable
 		{
 			IGLogBlock log = new IGLogBlock(STRIPPED_LOG, material);
 			return new IGLogBlock[]{log};
+		}
+	},
+	LAYER(UseCategory.RESOURCE_BLOCK, Material.ORGANIC, ItemSubGroup.raw){
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGLayerBase moss = new IGMossLayer(LAYER, material);
+			return new IGLayerBase[]{moss};
+		}
+
+		@Override
+		public String getModelPath()
+		{
+			return "layer/";
 		}
 	},
 
