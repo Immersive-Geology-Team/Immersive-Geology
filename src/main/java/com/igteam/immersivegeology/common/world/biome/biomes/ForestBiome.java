@@ -27,6 +27,7 @@ public class ForestBiome extends IGBiome
 {
 	private final float minHeight;
 	private final float maxHeight;
+	private final ForestType forestType;
 
 	public ForestBiome(ForestType type, float minHeight, float maxHeight)
 	{
@@ -34,7 +35,7 @@ public class ForestBiome extends IGBiome
 
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
-
+		forestType = type;
 		switch(type){
 			case SNOWY:
 				this.addStructure(Feature.IGLOO, IFeatureConfig.NO_FEATURE_CONFIG);
@@ -102,5 +103,9 @@ public class ForestBiome extends IGBiome
 			default:
 				return Blocks.DIRT.getDefaultState();
 		}
+	}
+
+	public ForestType getType(){
+		return this.forestType;
 	}
 }

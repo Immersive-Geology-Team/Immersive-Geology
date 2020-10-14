@@ -5,6 +5,9 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.ForestBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.helpers.ForestType;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -43,9 +46,16 @@ public class MossFeature extends Feature<NoFeatureConfig> {
                 lvt_7_1_.setPos(lvt_6_1_).move(Direction.UP, 1);
 
                 BlockState lvt_14_1_ = worldIn.getBlockState(lvt_7_1_);
-                if (lvt_14_1_.getMaterial() == Material.AIR) {
-                    if (rand.nextInt(8) != 0)
-                        worldIn.setBlockState(lvt_6_1_, IGRegistryGrabber.grabBlock(MaterialUseType.LAYER, EnumMaterials.Moss.material).getDefaultState().with(IGLayerBase.LAYERS, 2 + rand.nextInt(4)), 2);
+                Biome biome = worldIn.getBiome(lvt_6_1_);
+
+                if(biome instanceof ForestBiome) {
+                    ForestBiome forest = (ForestBiome) biome;
+                    if(forest.getType() == ForestType.SWEDISH) {
+                        if (lvt_14_1_.getMaterial() == Material.AIR) {
+                            if (rand.nextInt(8) != 0)
+                                worldIn.setBlockState(lvt_6_1_, IGRegistryGrabber.grabBlock(MaterialUseType.LAYER, EnumMaterials.Moss.material).getDefaultState().with(IGLayerBase.LAYERS, 2 + rand.nextInt(4)), 2);
+                        }
+                    }
                 }
             }
         }
