@@ -110,6 +110,7 @@ public enum EnumMaterials
 	Acacia(new MaterialWoodAcacia()),
 	DarkOak(new MaterialWoodDarkOak()),
 	Ebony(new MaterialWoodEbony()),
+	Beech(new MaterialWoodBeech()),
 	TreatedWood(new MaterialTreatedWood()),
 
 	//Layer Types

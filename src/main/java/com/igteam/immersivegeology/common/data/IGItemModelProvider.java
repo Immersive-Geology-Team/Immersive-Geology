@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBlockMaterialItem;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
 import com.igteam.immersivegeology.common.items.IGMaterialItem;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
@@ -41,7 +42,8 @@ public class IGItemModelProvider extends ItemModelProvider
 		{
 			try
 			{
-				if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGLayerBase) {
+				if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGLayerBase)
+				{
 					IGBlockMaterialItem i = (IGBlockMaterialItem) item;
 					IGLayerBase b = (IGLayerBase) i.getBlock();
 					StringBuilder specialName = new StringBuilder();
@@ -52,27 +54,32 @@ public class IGItemModelProvider extends ItemModelProvider
 					String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/"+b.name).getPath();
 
 					withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/layer/"+i.subtype.getName()+specialName.toString() + "_height2")).texture("base","block/greyscale/layer/" + b.getMaterial().getName());
-				} else
-				if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGMaterialBlock)
+				} else if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGMaterialBlock)
 				{
 					IGBlockMaterialItem i = (IGBlockMaterialItem)item;
 					IGMaterialBlock b = (IGMaterialBlock)i.getBlock();
-					StringBuilder specialName = new StringBuilder();
-					for(Material material : b.materials)
+					if(b instanceof IGLogBlock)
 					{
-						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
-							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
-					}
 
-					String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/"+b.name).getPath();
-					withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
-					String type_name = specialName.toString();
-					if(type_name.length() > 1) {
-						getBuilder(builder_name).texture("ore", "immersivegeology:block/greyscale/rock/ore_bearing/" + type_name.substring(1, type_name.length()) + "/" + type_name.substring(1, type_name.length()) + "_normal");
-						getBuilder(builder_name).texture("base", "immersivegeology:block/greyscale/rock/rock" + type_name);
+					} else
+					{
+						StringBuilder specialName = new StringBuilder();
+						for(Material material : b.materials)
+						{
+							if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+								specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+						}
 
-						getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("base").tintindex(0).uvs(0,0,16,16)));
-						getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("ore").tintindex(1).uvs(0,0,16,16)));
+						String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/"+b.name).getPath();
+						withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
+						String type_name = specialName.toString();
+						if(type_name.length() > 1) {
+							getBuilder(builder_name).texture("ore", "immersivegeology:block/greyscale/rock/ore_bearing/" + type_name.substring(1, type_name.length()) + "/" + type_name.substring(1, type_name.length()) + "_normal");
+							getBuilder(builder_name).texture("base", "immersivegeology:block/greyscale/rock/rock" + type_name);
+
+							getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("base").tintindex(0).uvs(0,0,16,16)));
+							getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("ore").tintindex(1).uvs(0,0,16,16)));
+						}
 					}
 				}
 				else if(item instanceof IGMaterialItem)
