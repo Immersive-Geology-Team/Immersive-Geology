@@ -1,0 +1,77 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "rock_metamorphic": "immersivegeology:block/greyscale/rock/rock_metamorphic"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.4, 0.4, 0.4 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 7, 12, 7 ], 
+            "to": [ 9, 16, 9 ], 
+            "faces": {
+                "north": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 3, 12 ], "tintindex": 0 },
+                "east": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 3, 12 ], "tintindex": 0 },
+                "south": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 3, 12 ], "tintindex": 0 },
+                "west": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 3, 12 ], "tintindex": 0 },
+                "up": { "texture": "#rock_metamorphic", "uv": [ 1, 1, 3, 3 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 5, 0, 5 ], 
+            "to": [ 11, 6, 11 ], 
+            "faces": {
+                "north": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 8, 6 ], "tintindex": 0 },
+                "east": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 8, 6 ], "tintindex": 0 },
+                "south": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 8, 6 ], "tintindex": 0 },
+                "west": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 8, 6 ], "tintindex": 0 },
+                "up": { "texture": "#rock_metamorphic", "uv": [ 2, 2, 8, 8 ], "tintindex": 0 },
+                "down": { "texture": "#rock_metamorphic", "uv": [ 0, 0, 6, 6 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6, 6, 6 ], 
+            "to": [ 10, 12, 10 ], 
+            "faces": {
+                "north": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 5, 14 ], "tintindex": 0 },
+                "east": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 5, 14 ], "tintindex": 0 },
+                "south": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 5, 14 ], "tintindex": 0 },
+                "west": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 5, 14 ], "tintindex": 0 },
+                "up": { "texture": "#rock_metamorphic", "uv": [ 1, 1, 5, 5 ], "tintindex": 0 }
+            }
+        }
+    ]
+}

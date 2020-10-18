@@ -1,0 +1,156 @@
+{
+  "variants": {
+    "facing=down,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base",
+      "x": 180
+    },
+    "facing=up,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=north,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=south,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=west,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=east,natural=false,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=down,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base",
+      "x": 180
+    },
+    "facing=up,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=north,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=south,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=west,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=east,natural=true,part=base": {
+      "model": "immersivegeology:block/block_spike_endstone_base"
+    },
+    "facing=down,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle",
+      "x": 180
+    },
+    "facing=up,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=north,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=south,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=west,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=east,natural=false,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=down,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle",
+      "x": 180
+    },
+    "facing=up,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=north,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=south,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=west,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=east,natural=true,part=middle": {
+      "model": "immersivegeology:block/block_spike_endstone_middle"
+    },
+    "facing=down,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top",
+      "x": 180
+    },
+    "facing=up,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=north,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=south,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=west,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=east,natural=false,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=down,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top",
+      "x": 180
+    },
+    "facing=up,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=north,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=south,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=west,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=east,natural=true,part=top": {
+      "model": "immersivegeology:block/block_spike_endstone_top"
+    },
+    "facing=down,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip",
+      "x": 180
+    },
+    "facing=up,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=north,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=south,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=west,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=east,natural=false,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=down,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip",
+      "x": 180
+    },
+    "facing=up,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=north,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=south,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=west,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    },
+    "facing=east,natural=true,part=tip": {
+      "model": "immersivegeology:block/block_spike_endstone_tip"
+    }
+  }
+}

@@ -18,6 +18,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.IChunk;
 
+
+/**
+ * Author: Yung
+ */
 public class CaveCarver implements ICarver {
 	    private CarverSettings settings;
 	    private NoiseGen noiseGen;

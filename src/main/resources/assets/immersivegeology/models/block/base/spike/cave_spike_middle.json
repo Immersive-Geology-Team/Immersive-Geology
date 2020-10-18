@@ -1,0 +1,64 @@
+{
+    "textures": {
+        "rock_metamorphic": "immersivegeology:block/greyscale/rock/rock_metamorphic"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.25, 0.25, 0.25 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.4, 0.4, 0.4 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 315, 0 ],
+            "translation": [ 0, 2.5, 0 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 3, 8, 3 ], 
+            "to": [ 13, 16, 13 ], 
+            "faces": {
+                "north": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 11, 16 ], "tintindex": 0 },
+                "east": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 11, 16 ], "tintindex": 0 },
+                "south": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 11, 16 ], "tintindex": 0 },
+                "west": { "texture": "#rock_metamorphic", "uv": [ 1, 8, 11, 16 ], "tintindex": 0 },
+                "up": { "texture": "#rock_metamorphic", "uv": [ 1, 1, 11, 11 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 2, 0, 2 ], 
+            "to": [ 14, 8, 14 ], 
+            "faces": {
+                "north": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 14, 8 ], "tintindex": 0 },
+                "east": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 14, 8 ], "tintindex": 0 },
+                "south": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 14, 8 ], "tintindex": 0 },
+                "west": { "texture": "#rock_metamorphic", "uv": [ 2, 0, 14, 8 ], "tintindex": 0 },
+                "up": { "texture": "#rock_metamorphic", "uv": [ 2, 2, 14, 14 ], "tintindex": 0 },
+                "down": { "texture": "#rock_metamorphic", "uv": [ 0, 0, 12, 12 ], "tintindex": 0 }
+            }
+        }
+    ]
+}

@@ -4,10 +4,12 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
+import com.igteam.immersivegeology.common.blocks.IGCaveBlock;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
+import com.igteam.immersivegeology.common.blocks.property.SpikePart;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
@@ -35,6 +37,27 @@ public class IGBlockStateProvider extends BlockStateProvider
 		{
 			try
 			{
+				if(block instanceof IGCaveBlock) {
+
+					IGCaveBlock b = (IGCaveBlock)block;
+
+					StringBuilder specialName = new StringBuilder();
+					for(Material material : b.materials)
+					{
+						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+					}
+
+					getVariantBuilder(block).forAllStates(blockState -> {
+						Direction facing = blockState.get(IGCaveBlock.FACING);
+						SpikePart part = blockState.get(IGCaveBlock.PART);
+
+						BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name + "_" + part.getName()).getPath(),
+								new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+"cave_"+((IGMaterialBlock)block).subtype.getName()+specialName.toString() + "_" + part.getName()));
+
+						return facing == Direction.DOWN ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).build() : ConfiguredModel.builder().modelFile(baseModel).build();
+					});
+				} else
 				if(block instanceof IGLogBlock) {
 
 					IGLogBlock b = (IGLogBlock)block;

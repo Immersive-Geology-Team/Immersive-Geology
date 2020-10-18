@@ -6,10 +6,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.*;
 
 public class IGDefaultBiomeFeatures
 {
@@ -32,6 +29,10 @@ public class IGDefaultBiomeFeatures
 
 	public static void addMossLayers(Biome biomeIn){
 		biomeIn.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, Biome.createDecoratedFeature(IGFeatures.MOSS_LAYER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+	}
+
+	public static void addCaveFeatures(Biome biomeIn){
+		biomeIn.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(IGFeatures.CAVE_FEATURES, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.AIR, 0.015f)));
 	}
 
 	public static void addLeafShurbs(Biome biomeIn)

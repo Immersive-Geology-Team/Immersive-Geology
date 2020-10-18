@@ -41,7 +41,7 @@ public class IGContent
 	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge", MaterialUseType.ROCK, EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
 
 	public static IGBaseItem itemGuidebook = new IGBaseItem("ig_guidebook").setSubGroup(ItemSubGroup.misc);
-
+	
 	public static void modConstruction()
 	{
 		// Item, blocks here

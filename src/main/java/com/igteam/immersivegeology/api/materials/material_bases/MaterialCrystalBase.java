@@ -6,8 +6,6 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
 public abstract class MaterialCrystalBase extends Material
 {
-
-
 	protected static int baseColor = 0xffffff;
 
 	@Override

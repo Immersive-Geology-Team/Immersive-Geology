@@ -52,6 +52,7 @@ public abstract class IGBiome extends Biome
 				.surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.NOPE, SurfaceBuilder.AIR_CONFIG)));
 		btemp = temperature;
 		brain = downfall;
+		IGDefaultBiomeFeatures.addCaveFeatures(this);
 	}
 
 	protected IGBiome(Builder builder, float temperature, float downfall)
@@ -64,6 +65,7 @@ public abstract class IGBiome extends Biome
 				.surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.NOPE, SurfaceBuilder.AIR_CONFIG)));
 		btemp = temperature;
 		brain = downfall;
+		IGDefaultBiomeFeatures.addCaveFeatures(this);
 	}
 
 	@Nonnull

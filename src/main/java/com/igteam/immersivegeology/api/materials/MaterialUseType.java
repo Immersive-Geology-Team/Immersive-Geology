@@ -1,10 +1,7 @@
 package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
-import com.igteam.immersivegeology.common.blocks.IGLayerBase;
-import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
-import com.igteam.immersivegeology.common.blocks.IGOreBearingBlock;
+import com.igteam.immersivegeology.common.blocks.*;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
@@ -31,6 +28,20 @@ public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
 	ROCK(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
+	SPIKE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw){ //Stalagmites and such
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGCaveBlock cs = new IGCaveBlock(SPIKE, material);
+			return new IGCaveBlock[]{cs};
+		}
+
+		@Nonnull
+		public String getModelPath()
+		{
+			return "spike/";
+		}
+	},
 	GENERATED_ORE(UseCategory.DUMMY), //This one is for ore blocks
 	GENERATED_CHUNKS(UseCategory.DUMMY), //This one is for chunks
 	ORE_BEARING(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw)
