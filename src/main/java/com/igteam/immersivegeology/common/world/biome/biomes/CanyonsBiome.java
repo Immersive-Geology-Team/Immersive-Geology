@@ -66,7 +66,7 @@ public class CanyonsBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		if(chunkTemp > 0.5f) {
+		if(chunkTemp > 2.5f) {
 			switch (part) {
 				case dirt:
 					return Blocks.BROWN_TERRACOTTA.getDefaultState();

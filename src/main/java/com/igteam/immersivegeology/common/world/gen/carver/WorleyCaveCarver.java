@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.world.noise.OpenSimplexNoise;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -27,7 +28,7 @@ public class WorleyCaveCarver {
 	private static final int SAMPLE_HEIGHT = 26;
 
 	private static final float NOISE_THRESHOLD = 0.4f;
-	private static float HEIGHT_FADE_THRESHOLD = 72;
+	public static float HEIGHT_FADE_THRESHOLD = 72;
 
 	// size of the cave intrest points!
 	private static final float FEATURE_SIZE = 24;
@@ -124,8 +125,6 @@ public class WorleyCaveCarver {
 			                        }
 			                        
 			                        BlockState liquidBlock = liquidBlocks[localX][localZ];
-			                        
-									HEIGHT_FADE_THRESHOLD = 72;
 
 									float finalNoise = NoiseUtil.lerp(section[x0 + 16 * z0], prevSection[x0 + 16 * z0],
 											0.25f * y0);
@@ -136,11 +135,14 @@ public class WorleyCaveCarver {
 									if (finalNoise > NOISE_THRESHOLD) {
 										// Create cave if possible
 										BlockState originalState = chunkIn.getBlockState(pos);
+										BlockState blockStateAbove = chunkIn.getBlockState(pos.up());
 										if (CarverUtils.canReplaceBlock(originalState,chunkIn.getBlockState(pos.up())) && originalState.getBlock() != Blocks.BEDROCK) {
 											 if (flooded) {
 												 CarverUtils.carveFloodedBlock(chunkIn, new Random(), pos, liquidBlock, 12, true, bitmask);
 											 } else {
-												 CarverUtils.carveBlock(chunkIn, pos, liquidBlock, 12, true, bitmask);
+												 if (blockStateAbove.getMaterial() != Material.WATER && blockStateAbove.getMaterial() != Material.LAVA){
+												 	CarverUtils.carveBlock(chunkIn, pos, liquidBlock, 12, true, bitmask);
+												 }
 											 }
 										}
 									}

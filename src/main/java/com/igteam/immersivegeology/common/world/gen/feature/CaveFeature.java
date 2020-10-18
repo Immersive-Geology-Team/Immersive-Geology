@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
@@ -31,20 +32,20 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean place(IWorld iWorld, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random rand, BlockPos pos, NoFeatureConfig noFeatureConfig) {
         BlockState stateAt = iWorld.getBlockState(pos);
-        if(stateAt.getBlock() == Blocks.CAVE_AIR){
+        if(stateAt.getBlock() == Blocks.CAVE_AIR || (iWorld.getDimension().getType() == DimensionType.THE_NETHER && (stateAt.getBlock() == Blocks.CAVE_AIR || stateAt.getBlock() == Blocks.AIR))){
             Direction dir = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
             BlockState wall = iWorld.getBlockState(pos.offset(dir.getOpposite()));
             if(wall.getBlock() instanceof IGMaterialBlock){
                 IGMaterialBlock igBlock = (IGMaterialBlock) wall.getBlock();
                 if(igBlock.getUseType() == MaterialUseType.ROCK){
-                    placeSmallStalactite(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
+                    place(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
                 } else {
                     dir = dir.getOpposite();
                     wall = iWorld.getBlockState(pos.offset(dir.getOpposite()));
                     if(wall.getBlock() instanceof IGMaterialBlock) {
                         igBlock = (IGMaterialBlock) wall.getBlock();
                         if (igBlock.getUseType() == MaterialUseType.ROCK) {
-                            placeSmallStalactite(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
+                            place(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
                         }
                     }
                 }
@@ -54,7 +55,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
                 if(wall.getBlock() instanceof IGMaterialBlock) {
                     IGMaterialBlock igBlock = (IGMaterialBlock) wall.getBlock();
                     if (igBlock.getUseType() == MaterialUseType.ROCK) {
-                        placeSmallStalactite(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
+                        place(iWorld, pos, wall, wall, dir, rand, igBlock.getMaterial());
                     }
                 }
             }
@@ -64,7 +65,9 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-
+    protected void place(IWorld worldIn, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random rand, Material mat){
+        placeSmallStalactite(worldIn, pos, spike, raw, direction, rand, mat);
+    }
     protected void placeSmallStalactite(IWorld worldIn, BlockPos pos, BlockState rock, BlockState raw, Direction dir, Random rand, Material mat){
         placeSmallStalactite(worldIn, pos, rock, raw, dir, rand, rand.nextFloat(), mat);
     }
@@ -88,7 +91,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
     protected void replaceBlock(IWorld world, BlockPos pos, BlockState state)
     {
         Block block = world.getBlockState(pos).getBlock();
-        if (block == Blocks.CAVE_AIR)
+        if (block == Blocks.CAVE_AIR || block == Blocks.AIR)
         {
             setBlockState(world, pos, state);
         }

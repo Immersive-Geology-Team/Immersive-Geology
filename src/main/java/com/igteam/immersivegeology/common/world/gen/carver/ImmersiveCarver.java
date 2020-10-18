@@ -49,6 +49,10 @@ public class ImmersiveCarver {
         this.waterCarver = new WaterRegionController(worldIn);
         this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
     }
+
+    public void setHeightFadeThershold(int new_thershold){
+        this.worleyCaveCarver.HEIGHT_FADE_THRESHOLD = new_thershold;
+    }
     
     public void carve(IChunk chunkIn, int chunkX, int chunkZ) {
         BitSet airCarvingMask = chunkIn.getCarvingMask(GenerationStage.Carving.AIR);
@@ -77,7 +81,7 @@ public class ImmersiveCarver {
         
         // Determine liquid blocks for this chunk
         BlockState[][] liquidBlocks = waterCarver.getLiquidBlocksForChunk(chunkX, chunkZ);
- 
+
         // Carve chunk
         caveCarver.carveChunk(chunkIn, chunkX, chunkZ, surfaceAltitudes, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);
         worleyCaveCarver.carve(chunkIn, chunkX << 4, chunkZ << 4, liquidBlocks, biomeMap, airCarvingMask, liquidCarvingMask);

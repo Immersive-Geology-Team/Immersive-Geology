@@ -1,16 +1,22 @@
 package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
+import com.igteam.immersivegeology.common.world.ImmersiveNetherBiomeProvider;
 import com.igteam.immersivegeology.common.world.biome.biomes.*;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.ForestType;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
 import com.igteam.immersivegeology.common.world.biome.biomes.PlainsBiome.PlainsType;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.OceanType;
+import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveNether;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveNetherGenSettings;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.IBiomeProviderSettings;
 import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +31,8 @@ public final class WorldGenRegistryEvents
 	public static void registerChunkGeneratorTypes(RegistryEvent.Register<ChunkGeneratorType<?, ?>> event)
 	{
 		event.getRegistry().registerAll(
-				new ChunkGeneratorType<>(ChunkGeneratorImmersiveOverworld::new, false, ImmersiveGenerationSettings::new).setRegistryName("overworld")
+				new ChunkGeneratorType<>(ChunkGeneratorImmersiveOverworld::new, false, ImmersiveGenerationSettings::new).setRegistryName("overworld"),
+				new ChunkGeneratorType<>(ChunkGeneratorImmersiveNether::new, false, ImmersiveNetherGenSettings::new).setRegistryName("nether")
 		);
 	}
 
@@ -33,7 +40,8 @@ public final class WorldGenRegistryEvents
 	public static void registerBiomeProviderTypes(RegistryEvent.Register<BiomeProviderType<?, ?>> event)
 	{
 		event.getRegistry().registerAll(
-				new BiomeProviderType<>(ImmersiveBiomeProvider::new, ImmersiveGenerationSettings::new).setRegistryName("overworld")
+				new BiomeProviderType<>(ImmersiveBiomeProvider::new, ImmersiveGenerationSettings::new).setRegistryName("overworld"),
+				new BiomeProviderType<>(ImmersiveNetherBiomeProvider::new, ImmersiveNetherGenSettings::new).setRegistryName("nether")
 		);
 	}
 
@@ -81,7 +89,12 @@ public final class WorldGenRegistryEvents
 				new MountainsBiome(36, 34, MountainType.NORMAL).setRegistryName("mountains_edge"),
 				new LakeBiome().setRegistryName("lake"),
 				new OasisBiome().setRegistryName("oasis"),
-				new RiverBiome().setRegistryName("river")
+				new RiverBiome().setRegistryName("river"),
+
+				/*
+					Nether Biomes
+				*/
+				new ImmersiveNetherBiome().setRegistryName("mantle")
 		);
 	}///only oceans at moment look into later
 

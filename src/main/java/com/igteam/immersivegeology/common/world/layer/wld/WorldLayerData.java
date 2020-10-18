@@ -4,8 +4,10 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
+import com.igteam.immersivegeology.common.world.biome.IGBiome;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.layer.BiomeLayerData;
+import net.minecraft.world.gen.layer.BiomeLayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +26,11 @@ public class WorldLayerData
 	public IGBaseBlock GRANITE = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Granite.material);
 	public IGBaseBlock PEGMATITE = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Pegmatite.material);
 	public IGBaseBlock GABBROS = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Gabbros.material);
-	
+
 	public IGBaseBlock KAOLINITE = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Kaolinite.material); //this is getting ore not kaolinite
-	
+
+	public IGBaseBlock NETHERRACK = IGRegistryGrabber.grabBlock(MaterialUseType.ROCK, EnumMaterials.Netherrack.material);
+
 	public WorldLayerData()
 	{
 		initialize();
@@ -37,8 +41,15 @@ public class WorldLayerData
 		buildOceanData();
 		buildLowBiomeData();
 		buildMediumBiomeData();
+		buildNetherBiomeData();
 	}
-	
+
+	private void buildNetherBiomeData(){
+		worldLayerData.addAll(Arrays.asList(
+				BiomeLayerBuilder.create(IGBiomes.MANTLE).addLayerData(NETHERRACK).addLayerOreData(1, EnumMaterials.Gold,0.55f).build()
+		));
+	}
+
 	private void buildMediumBiomeData() {
 		worldLayerData.addAll(Arrays.asList(BiomeLayerBuilder.create(IGBiomes.BADLANDS).addLayerData(GRANITE, GRANITE, GABBROS, GABBROS, BASALT, BASALT)
 		.addLayerOreData(4, EnumMaterials.Gold, 0.45f,

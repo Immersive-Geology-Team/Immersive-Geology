@@ -60,15 +60,16 @@ public class WaterRegionController {
 
     private BlockState getLiquidBlockAtPos(Random rand, ColPos colPos) {
         BlockState liquidBlock = lavaBlock;
-        if (waterRegionThreshold > -1f) { // Don't bother calculating noise if water regions are disabled
-            float waterRegionNoise = waterRegionController.GetNoise(colPos.getX(), colPos.getZ());
-
-            // If water region threshold check is passed, change liquid block to water
-            float randOffset = rand.nextFloat() * SMOOTH_DELTA + SMOOTH_RANGE;
-            if (waterRegionNoise < waterRegionThreshold - randOffset)
-                liquidBlock = waterBlock;
-            else if (waterRegionNoise < waterRegionThreshold + randOffset)
-                liquidBlock = null;
+        if(dimensionId == DimensionType.OVERWORLD.getId()) {
+            if (waterRegionThreshold > -1f) { // Don't bother calculating noise if water regions are disabled
+                float waterRegionNoise = waterRegionController.GetNoise(colPos.getX(), colPos.getZ());
+                // If water region threshold check is passed, change liquid block to water
+                float randOffset = rand.nextFloat() * SMOOTH_DELTA + SMOOTH_RANGE;
+                if (waterRegionNoise < waterRegionThreshold - randOffset)
+                    liquidBlock = waterBlock;
+                else if (waterRegionNoise < waterRegionThreshold + randOffset)
+                    liquidBlock = null;
+            }
         }
         return liquidBlock;
     }

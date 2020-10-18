@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.common.world.layer;
 
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveNetherGenSettings;
 import com.igteam.immersivegeology.common.world.layer.layers.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
@@ -65,6 +66,12 @@ public class IGLayerUtil
 	public static final int MOUNTAINS_EDGE = getId(IGBiomes.MOUNTAINS_EDGE);
 	public static final int LAKE = getId(IGBiomes.LAKE);
 	public static final int RIVER = getId(IGBiomes.RIVER);
+
+	/*
+		NETHER BIOMES
+	*/
+
+	public static final int MANTLE = getId(IGBiomes.MANTLE);
 
 	public static List<IAreaFactory<LazyArea>> createOverworldBiomeLayer(long seed,
 																		 ImmersiveGenerationSettings settings)
@@ -236,4 +243,15 @@ public class IGLayerUtil
 	{
 		return value==DEEP_OCEAN||value==DEEP_OCEAN_VOLCANIC;
 	}
+
+    public static List<IAreaFactory<LazyArea>> createNetherBiomeLayer(long seed, ImmersiveNetherGenSettings settings) {
+		LongFunction<LazyAreaLayerContext> contextFactory = seedModifier -> new LazyAreaLayerContext(25, seed,
+				seedModifier);
+
+		IAreaFactory<LazyArea> mainLayer;
+
+		mainLayer = new NetherLayer(settings.getIslandFrequency()).apply(contextFactory.apply(1000L));
+
+		return Arrays.asList(mainLayer,mainLayer);
+    }
 }

@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.world.chunk.data;
 import com.igteam.immersivegeology.common.util.FiniteLinkedHashMap;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveNetherGenSettings;
 import com.igteam.immersivegeology.common.world.noise.INoise2D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import net.minecraft.util.math.ChunkPos;
@@ -66,6 +67,23 @@ public class ChunkDataProvider
 		this.bottomLayerBaseHeight = 30;
 		this.middleLayerBaseHeight = 30;
 
+		// Climate
+		this.regionalTempNoise = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).scaled(-5.5f, 5.5f).flattened(-5, 5).spread(0.002f);
+		this.rainfallNoise = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).scaled(-25, 525).flattened(0, 500).spread(0.002f);
+
+		final INoise2D warpX = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).spread(0.1f).scaled(-30, 30);
+		final INoise2D warpZ = new SimplexNoise2D(seedGenerator.nextLong()+1).octaves(4).spread(0.1f).scaled(-30, 30);
+	}
+
+
+	public ChunkDataProvider(IWorld world, ImmersiveNetherGenSettings settings, Random seedGenerator)
+	{
+		this.cachedChunkData = new FiniteLinkedHashMap<>(256);
+		this.world = world;
+
+		//TODO should include in config
+		this.bottomLayerBaseHeight = 30;
+		this.middleLayerBaseHeight = 30;
 
 		// Climate
 		this.regionalTempNoise = new SimplexNoise2D(seedGenerator.nextLong()).octaves(4).scaled(-5.5f, 5.5f).flattened(-5, 5).spread(0.002f);
