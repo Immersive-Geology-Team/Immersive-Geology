@@ -40,6 +40,8 @@ public class IGContent
 	public static IGBaseItem itemPickaxe = new IGToolPickaxe().setSubGroup(ItemSubGroup.tools);
 	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge", MaterialUseType.ROCK, EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
 
+	public static IGBaseItem itemGuidebook = new IGBaseItem("ig_guidebook").setSubGroup(ItemSubGroup.misc);
+
 	public static void modConstruction()
 	{
 		// Item, blocks here
@@ -70,6 +72,7 @@ public class IGContent
 			}
 		}
 
+		addItem(itemGuidebook);
 		addItem(itemPickaxe);
 		addItem(new IGToolHammer().setSubGroup(ItemSubGroup.tools));
 		addBlock(toolForge);

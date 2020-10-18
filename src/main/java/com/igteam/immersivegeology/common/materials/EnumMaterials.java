@@ -77,6 +77,7 @@ public enum EnumMaterials
 	Pyrite(new MaterialMineralPyrite()),
 	Wolframite(new MaterialMineralWolframite()),
 	Vanadinite(new MaterialMineralVanadinite()),
+
 	//Minerals that spawn in such a large quantity that we don't need an 'orebearing' variant, this is where most clay types will end up!
 	Kaolinite(new MaterialMineralKaolinite()),
 

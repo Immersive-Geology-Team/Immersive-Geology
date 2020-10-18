@@ -96,12 +96,21 @@ public class ForestBiome extends IGBiome
 	@Override
 	public BlockState returnBlockType(SurfaceBlockType part, float chunkTemp, float chunkRain)
 	{
-		switch(part)
-		{
-			case grass:
-				return Blocks.GRASS_BLOCK.getDefaultState();
+		switch(forestType) {
+			case SWEDISH:
+				switch (part) {
+					case grass:
+						return Blocks.PODZOL.getDefaultState();
+					default:
+						return Blocks.DIRT.getDefaultState();
+				}
 			default:
-				return Blocks.DIRT.getDefaultState();
+				switch (part) {
+					case grass:
+						return Blocks.GRASS_BLOCK.getDefaultState();
+					default:
+						return Blocks.DIRT.getDefaultState();
+				}
 		}
 	}
 

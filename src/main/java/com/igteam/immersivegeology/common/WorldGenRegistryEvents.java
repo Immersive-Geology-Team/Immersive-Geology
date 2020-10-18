@@ -57,7 +57,7 @@ public final class WorldGenRegistryEvents
 				new CanyonsBiome(-5, 14).setRegistryName("low_canyons"),
 
 				new ForestBiome(ForestType.SNOWY,3,6).setRegistryName("snowy_forest"),
-				new ForestBiome(ForestType.SWEDISH,2,6).setRegistryName("swedish_forest"),
+				new ForestBiome(ForestType.SWEDISH,1,14).setRegistryName("swedish_forest"),
 				
 				new HillsBiome(28).setRegistryName("rolling_hills"),
 				new BadlandsBiome().setRegistryName("badlands"),

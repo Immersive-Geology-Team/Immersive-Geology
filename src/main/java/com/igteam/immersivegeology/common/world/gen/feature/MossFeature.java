@@ -34,26 +34,29 @@ public class MossFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-        BlockPos.MutableBlockPos lvt_6_1_ = new BlockPos.MutableBlockPos();
-        BlockPos.MutableBlockPos lvt_7_1_ = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos block = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos block_above = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos block_under = new BlockPos.MutableBlockPos();
 
         for (int lvt_8_1_ = 0; lvt_8_1_ < 16; ++lvt_8_1_) {
             for (int lvt_9_1_ = 0; lvt_9_1_ < 16; ++lvt_9_1_) {
                 int lvt_10_1_ = pos.getX() + lvt_8_1_;
                 int lvt_11_1_ = pos.getZ() + lvt_9_1_;
                 int lvt_12_1_ = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, lvt_10_1_, lvt_11_1_);
-                lvt_6_1_.setPos(lvt_10_1_, lvt_12_1_, lvt_11_1_);
-                lvt_7_1_.setPos(lvt_6_1_).move(Direction.UP, 1);
+                block.setPos(lvt_10_1_, lvt_12_1_, lvt_11_1_);
+                block_above.setPos(block).move(Direction.UP, 1);
+                block_under.setPos(block).move(Direction.DOWN, 1);
 
-                BlockState lvt_14_1_ = worldIn.getBlockState(lvt_7_1_);
-                Biome biome = worldIn.getBiome(lvt_6_1_);
+                BlockState lvt_14_1_ = worldIn.getBlockState(block_above);
+                BlockState state_under = worldIn.getBlockState(block_under);
+                Biome biome = worldIn.getBiome(block);
 
                 if(biome instanceof ForestBiome) {
                     ForestBiome forest = (ForestBiome) biome;
                     if(forest.getType() == ForestType.SWEDISH) {
-                        if (lvt_14_1_.getMaterial() == Material.AIR) {
+                        if (lvt_14_1_.getMaterial() == Material.AIR && state_under.getBlock() == Blocks.DIRT || state_under.getBlock() == Blocks.GRASS_BLOCK || state_under.getBlock() == Blocks.PODZOL) {
                             if (rand.nextInt(8) != 0)
-                                worldIn.setBlockState(lvt_6_1_, IGRegistryGrabber.grabBlock(MaterialUseType.LAYER, EnumMaterials.Moss.material).getDefaultState().with(IGLayerBase.LAYERS, 2 + rand.nextInt(4)), 2);
+                                worldIn.setBlockState(block, IGRegistryGrabber.grabBlock(MaterialUseType.LAYER, EnumMaterials.Moss.material).getDefaultState().with(IGLayerBase.LAYERS, 2 + rand.nextInt(4)), 2);
                         }
                     }
                 }
