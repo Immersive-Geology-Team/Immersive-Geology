@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.materials.crystals;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.materials.MaterialCrystalStructure;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersivegeology.api.materials.material_bases.MaterialCrystalBase;
@@ -89,6 +90,16 @@ public class MaterialCrystalQuartz extends MaterialCrystalBase
 	public int getBlockHarvestLevel()
 	{
 		return 1;
+	}
+
+	@Override
+	public MaterialCrystalStructure getCrystalStructure() {
+		return MaterialCrystalStructure.HEXAGONAL;
+	}
+
+	@Override
+	public MaterialCrystalStructure.LatticeStructure getLatticeStructure() {
+		return MaterialCrystalStructure.LatticeStructure.trigonals;
 	}
 
 	@Override
