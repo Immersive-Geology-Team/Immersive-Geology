@@ -1,11 +1,14 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
 import com.igteam.immersivegeology.api.materials.Material;
+import com.igteam.immersivegeology.api.materials.MaterialCrystalStructure;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
 public abstract class MaterialCrystalBase extends Material
 {
+	public abstract MaterialCrystalStructure getCrystalStructure();
+	public abstract MaterialCrystalStructure.LatticeStructure getLatticeStructure();
 	protected static int baseColor = 0xffffff;
 
 	@Override

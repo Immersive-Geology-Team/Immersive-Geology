@@ -11,12 +11,12 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
+public class MaterialCrystalBituminous extends MaterialCrystalBase
 {
 	@Override
 	public String getName()
 	{
-		return "phlebotinum";
+		return "bituminous";
 	}
 
 	@Nonnull
@@ -30,30 +30,33 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new ElementProportion(PeriodicTableElement.PHLEBOTINUM)
+				new ElementProportion(PeriodicTableElement.CARBON, 18),
+				new ElementProportion(PeriodicTableElement.HYDROGEN, 14),
+				new ElementProportion(PeriodicTableElement.OXYGEN)
 		));
+
 	}
 
 	@Nonnull
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.EPIC;
+		return Rarity.COMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		return 982;
+		return 2503;
 	}
 
 	@Override
 	public int getMeltingPoint()
 	{
-		return 485;
+		return 1923;
 	}
 
-	public static int baseColor = 0x663399;
+	public static int baseColor = 0x353D3A;
 
 	@Override
 	public int getColor(int temperature)
@@ -64,25 +67,25 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 	@Override
 	public float getHardness()
 	{
-		return 7.0F;
+		return 3;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 7.0F;
+		return 2;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		return 16;
+		return 2;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		return 0.95f;
+		return 0.45f;
 	}
 
 	@Override
@@ -93,17 +96,17 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 
 	@Override
 	public MaterialCrystalStructure getCrystalStructure() {
-		return MaterialCrystalStructure.ISOMETRIC;
+		return MaterialCrystalStructure.HEXAGONAL;
 	}
 
 	@Override
 	public MaterialCrystalStructure.LatticeStructure getLatticeStructure() {
-		return MaterialCrystalStructure.LatticeStructure.cubes;
+		return MaterialCrystalStructure.LatticeStructure.hexagonals;
 	}
 
 	@Override
 	public boolean hasRawCrystal()
 	{
-		return false;
+		return true;
 	}
 }
