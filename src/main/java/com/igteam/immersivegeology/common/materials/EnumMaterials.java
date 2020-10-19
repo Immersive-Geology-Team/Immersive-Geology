@@ -3,7 +3,7 @@ package com.igteam.immersivegeology.common.materials;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
-import com.igteam.immersivegeology.common.materials.crystals.MaterialCrystalQuartz;
+import com.igteam.immersivegeology.common.materials.crystals.*;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidBrine;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidCreosote;
 import com.igteam.immersivegeology.common.materials.fluids.MaterialFluidWater;
@@ -49,6 +49,12 @@ public enum EnumMaterials
 	Steel(new MaterialMetalSteel()),
 
 	//Crystals
+	Anthracite(new MaterialCrystalAnthracite()),
+	Bitumen(new MaterialCrystalBituminous()),
+	Diamond(new MaterialCrystalDiamond()),
+	Graphite(new MaterialCrystalGraphite()),
+	Lignite(new MaterialCrystalLignite()),
+	Phlebotinum(new MaterialCrystalPhlebotinum()),
 	Quartz(new MaterialCrystalQuartz()),
 
 	//Minerals
