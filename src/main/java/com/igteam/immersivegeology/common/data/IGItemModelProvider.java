@@ -56,42 +56,37 @@ public class IGItemModelProvider extends ItemModelProvider
 				else if(item instanceof IGBlockMaterialItem&&((IGBlockMaterialItem)item).getBlock() instanceof IGMaterialBlock)
 				{
 					IGBlockMaterialItem i = (IGBlockMaterialItem)item;
-					IGMaterialBlock b = (IGMaterialBlock)i.getBlock();
+					IGMaterialBlock b = (IGMaterialBlock) i.getBlock();
 
 					StringBuilder specialName = new StringBuilder();
-					for(Material material : b.materials)
-					{
-						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+					for (Material material : b.materials) {
+						if (material.getSpecialSubtypeModelName(b.subtype) != null)
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 					}
 
-					String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/"+b.name).getPath();
-					if(((IGBlockMaterialItem)item).getBlock() instanceof IGLogBlock)
-						withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()))
-								.texture("side", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+b.getUseType().getName()+"_side"))
-								.texture("end", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+b.getUseType().getName()+"_top"));
+					String builder_name = new ResourceLocation(ImmersiveGeology.MODID, "item/" + b.name).getPath();
+					if (((IGBlockMaterialItem) item).getBlock() instanceof IGLogBlock)
+						withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + i.subtype.getModelPath(false, b.materials) + specialName.toString()))
+								.texture("side", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/" + b.getMaterial().getName() + "/" + b.getMaterial().getName() + "_" + b.getUseType().getName() + "_side"))
+								.texture("end", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/" + b.getMaterial().getName() + "/" + b.getMaterial().getName() + "_" + b.getUseType().getName() + "_top"));
 					else
-						withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
+						withExistingParent(builder_name, new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + i.subtype.getModelPath(false, b.materials) + specialName.toString()));
 					String type_name = specialName.toString();
-					if(type_name.length() > 1)
-					{
-						getBuilder(builder_name).texture("ore", "immersivegeology:block/greyscale/rock/ore_bearing/"+type_name.substring(1, type_name.length())+"/"+type_name.substring(1, type_name.length())+"_normal");
-						getBuilder(builder_name).texture("base", "immersivegeology:block/greyscale/rock/rock"+type_name);
+					if (type_name.length() > 1) {
+						getBuilder(builder_name).texture("ore", "immersivegeology:block/greyscale/rock/ore_bearing/" + type_name.substring(1, type_name.length()) + "/" + type_name.substring(1, type_name.length()) + "_normal");
+						getBuilder(builder_name).texture("base", "immersivegeology:block/greyscale/rock/rock" + type_name);
 
 						getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("base").tintindex(0).uvs(0, 0, 16, 16)));
 						getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("ore").tintindex(1).uvs(0, 0, 16, 16)));
 					}
-				}
-				else if(item instanceof IGMaterialItem)
-				{
-					IGMaterialItem i = (IGMaterialItem)item;
+				} else if (item instanceof IGMaterialItem) {
+					IGMaterialItem i = (IGMaterialItem) item;
 					StringBuilder specialName = new StringBuilder();
-					for(Material material : i.materials)
-					{
-						if(material.getSpecialSubtypeModelName(i.subtype)!=null)
+					for (Material material : i.materials) {
+						if (material.getSpecialSubtypeModelName(i.subtype) != null)
 							specialName.append('_').append(material.getSpecialSubtypeModelName(i.subtype));
 					}
-					withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "item/"+i.itemName).getPath(), new ResourceLocation(ImmersiveGeology.MODID, "item/base/"+i.subtype.getModelPath()+i.subtype.getName()+specialName.toString()));
+					withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "item/" + i.itemName).getPath(), new ResourceLocation(ImmersiveGeology.MODID, "item/base/" + i.subtype.getModelPath(false, i.materials) + specialName.toString()));
 				}
 			} catch(Exception e)
 			{

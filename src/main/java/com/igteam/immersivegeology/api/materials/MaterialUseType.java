@@ -53,9 +53,8 @@ public enum MaterialUseType implements IStringSerializable
 		}
 
 		@Nonnull
-		public String getModelPath()
-		{
-			return "spike/";
+		public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+			return "spike/" + (onlyPath ? "" : getName());
 		}
 	},
 	GENERATED_ORE(UseCategory.DUMMY), //This one is for ore blocks
@@ -73,9 +72,8 @@ public enum MaterialUseType implements IStringSerializable
 
 				@Nonnull
 				@Override
-				public String getModelPath()
-				{
-					return getName()+"/";
+				public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+					return getName() + "/" + (onlyPath ? "" : getName());
 				}
 			},
 	CHUNK(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw, 162)
@@ -135,28 +133,42 @@ public enum MaterialUseType implements IStringSerializable
 	NUGGET(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	DUST(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
 	TINY_DUST(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
-	RAW_CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw),
-	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
+	RAW_CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.raw) {
+		@Override
+		public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+			if (materials.length > 0) {
+				if (materials[0] instanceof MaterialCrystalBase)
+					return "crystal/" + ((MaterialCrystalBase) materials[0]).getCrystalStructure().name().toLowerCase() + "/" + (onlyPath ? "" : getName());
+			}
+			return "crystal/" + getName();
+		}
+	},
+	CRYSTAL(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed) {
+		@Override
+		public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+			if (materials.length > 0) {
+				if (materials[0] instanceof MaterialCrystalBase)
+					return "crystal/" + ((MaterialCrystalBase) materials[0]).getCrystalStructure().name().toLowerCase() + "/" + (onlyPath ? "" : getName());
+			}
+			return "crystal/" + getName();
+		}
+	},
 
 	//Organic stuff
 	STICK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed),
-	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed)
-			{
-				@Override
-				public String getTagName()
-				{
-					return "plank";
-				}
-			},
+	PLANK(UseCategory.RESOURCE_ITEM, ItemSubGroup.processed) {
+		@Override
+		public String getTagName() {
+			return "plank";
+		}
+	},
 	PLANKS(UseCategory.RESOURCE_BLOCK, Material.WOOD, ItemSubGroup.processed),
-	LOG(UseCategory.RESOURCE_BLOCK, Material.WOOD, ItemSubGroup.raw)
-			{
-				@Override
-				public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
-				{
-					IGLogBlock log = new IGLogBlock(LOG, material);
-					return new IGLogBlock[]{log};
-				}
+	LOG(UseCategory.RESOURCE_BLOCK, Material.WOOD, ItemSubGroup.raw) {
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material) {
+			IGLogBlock log = new IGLogBlock(LOG, material);
+			return new IGLogBlock[]{log};
+		}
 			},
 	STRIPPED_LOG(UseCategory.RESOURCE_BLOCK, ItemSubGroup.processed)
 			{
@@ -177,9 +189,8 @@ public enum MaterialUseType implements IStringSerializable
 				}
 
 				@Override
-				public String getModelPath()
-				{
-					return "layer/";
+				public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+					return "layer/" + (onlyPath ? "" : getName());
 				}
 			},
 
@@ -337,12 +348,13 @@ public enum MaterialUseType implements IStringSerializable
 	}
 
 	/**
+	 * @param onlyPath
+	 * @param materials
 	 * @return parent model path for the part, used by data generators, relative to items/ or blocks/
 	 */
 	@Nonnull
-	public String getModelPath()
-	{
-		return "";
+	public String getModelPath(boolean onlyPath, com.igteam.immersivegeology.api.materials.Material... materials) {
+		return onlyPath ? "" : getName();
 	}
 
 	/**

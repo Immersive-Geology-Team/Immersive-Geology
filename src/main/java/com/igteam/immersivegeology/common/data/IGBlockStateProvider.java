@@ -74,26 +74,25 @@ public class IGBlockStateProvider extends BlockStateProvider
 						Direction facing = blockState.get(IGCaveBlock.FACING);
 						SpikePart part = blockState.get(IGCaveBlock.PART);
 
-						BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name + "_" + part.getName()).getPath(),
-								new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+"cave_"+((IGMaterialBlock)block).subtype.getName()+specialName.toString() + "_" + part.getName()));
+						BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/" + block.name + "_" + part.getName()).getPath(),
+								new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + ((IGMaterialBlock) block).subtype.getModelPath(true) + "cave_" + ((IGMaterialBlock) block).subtype.getName() + specialName.toString() + "_" + part.getName()));
 
 						return facing == Direction.DOWN ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).build() : ConfiguredModel.builder().modelFile(baseModel).build();
 					});
 				} else
 				if(block instanceof IGLogBlock) {
 
-					IGLogBlock b = (IGLogBlock)block;
+					IGLogBlock b = (IGLogBlock) block;
 
 					StringBuilder specialName = new StringBuilder();
-					for(Material material : b.materials)
-					{
-						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+					for (Material material : b.materials) {
+						if (material.getSpecialSubtypeModelName(b.subtype) != null)
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 					}
-					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name).getPath(),
-							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()))
-							.texture("side", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+((IGLogBlock)block).getUseType().getName()+"_side"))
-							.texture("end", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/"+b.getMaterial().getName()+"/"+b.getMaterial().getName()+"_"+((IGLogBlock)block).getUseType().getName()+"_top"));
+					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/" + block.name).getPath(),
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + ((IGMaterialBlock) block).subtype.getModelPath(false) + specialName.toString()))
+							.texture("side", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/" + b.getMaterial().getName() + "/" + b.getMaterial().getName() + "_" + ((IGLogBlock) block).getUseType().getName() + "_side"))
+							.texture("end", new ResourceLocation(ImmersiveGeology.MODID, "block/plant/logs/" + b.getMaterial().getName() + "/" + b.getMaterial().getName() + "_" + ((IGLogBlock) block).getUseType().getName() + "_top"));
 
 					getVariantBuilder(block).forAllStates(blockState -> blockState.get(IGLogBlock.AXIS) == Direction.Axis.Z ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).build() : blockState.get(IGLogBlock.AXIS) == Direction.Axis.X ? ConfiguredModel.builder().modelFile(baseModel).rotationX(90).rotationY(90).build() : ConfiguredModel.builder().modelFile(baseModel).build());
 
@@ -107,55 +106,52 @@ public class IGBlockStateProvider extends BlockStateProvider
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 					}
 					getVariantBuilder(block).forAllStates(blockState -> {
-						int layer_state = blockState.get(IGLayerBase.LAYERS).intValue();
+						int layer_state = blockState.get(IGLayerBase.LAYERS);
 
-						String layer_name = layer_state == 8 ? "" : "_height" + String.valueOf((layer_state * 2));
+						String layer_name = layer_state == 8 ? "" : "_height" + layer_state * 2;
 
-						BlockModelBuilder varientModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+b.name).getPath() +layer_name,
-								new ResourceLocation(ImmersiveGeology.MODID, "block/base/layer/"+(b).subtype.getName()+specialName.toString() + layer_name))
-								.texture("base","block/greyscale/layer/" + b.getMaterial().getName());
+						BlockModelBuilder varientModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/" + b.name).getPath() + layer_name,
+								new ResourceLocation(ImmersiveGeology.MODID, "block/base/layer/" + (b).subtype.getName() + specialName.toString() + layer_name))
+								.texture("base", "block/greyscale/layer/" + b.getMaterial().getName());
 
 						return ConfiguredModel.builder().modelFile(varientModel).build();
 					});
 				}
 				else if(block instanceof IGMaterialBlock) {
-					IGMaterialBlock b = (IGMaterialBlock)block;
+					IGMaterialBlock b = (IGMaterialBlock) block;
 
 					StringBuilder specialName = new StringBuilder();
-					for(Material material : b.materials)
-					{
-						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+					for (Material material : b.materials) {
+						if (material.getSpecialSubtypeModelName(b.subtype) != null)
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 					}
-					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name).getPath(),
-							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()));
+					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/" + block.name).getPath(),
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + ((IGMaterialBlock) block).subtype.getModelPath(false) + specialName.toString()));
 
 
-					if(b.hasMultipartModel())
-					{
+					if (b.hasMultipartModel()) {
 						//An advanced model, with each property having an attached model
 						MultiPartBlockStateBuilder multipart = getMultipartBuilder(block);
 						multipart.part().modelFile(baseModel).addModel();
-						String res = new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()).toString();
+						String res = new ResourceLocation(ImmersiveGeology.MODID, "block/base/" + ((IGMaterialBlock) block).subtype.getModelPath(true)).toString();
 						String subName = specialName.substring(1);
 
 						//Insert new properties below, the system is very extendable
 
 						//Richness property, get models for currentname_tier for all richness types
-						if(b.getDefaultState().getProperties().contains(IGProperties.ORE_RICHNESS))
-						{
+						if (b.getDefaultState().getProperties().contains(IGProperties.ORE_RICHNESS)) {
 							//For now, a static texture, poke @Pabilo8 if you need a texture for every block type possible
-							BlockModelBuilder poorModel = withExistingParent(res+"poor", res+"richness").texture("base",
-									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/"+subName+"/"+subName+"_poor"));
+							BlockModelBuilder poorModel = withExistingParent(res + "poor", res + "richness").texture("base",
+									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/" + subName + "/" + subName + "_poor"));
 
-							BlockModelBuilder normalModel = withExistingParent(res+"normal", res+"richness").texture("base",
-									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/"+subName+"/"+subName+"_normal"));
+							BlockModelBuilder normalModel = withExistingParent(res + "normal", res + "richness").texture("base",
+									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/" + subName + "/" + subName + "_normal"));
 
-							BlockModelBuilder richModel = withExistingParent(res+"rich", res+"richness").texture("base",
-									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/"+subName+"/"+subName+"_rich"));
+							BlockModelBuilder richModel = withExistingParent(res + "rich", res + "richness").texture("base",
+									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/" + subName + "/" + subName + "_rich"));
 
-							BlockModelBuilder denseModel = withExistingParent(res+"dense", res+"richness").texture("base",
-									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/"+subName+"/"+subName+"_dense"));
+							BlockModelBuilder denseModel = withExistingParent(res + "dense", res + "richness").texture("base",
+									new ResourceLocation(ImmersiveGeology.MODID, "block/greyscale/rock/ore_bearing/" + subName + "/" + subName + "_dense"));
 
 							multipart.part().modelFile(poorModel).addModel().condition(IGProperties.ORE_RICHNESS, 0);
 							multipart.part().modelFile(normalModel).addModel().condition(IGProperties.ORE_RICHNESS, 1);
