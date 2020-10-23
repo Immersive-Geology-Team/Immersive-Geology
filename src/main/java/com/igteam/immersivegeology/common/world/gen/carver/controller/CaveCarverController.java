@@ -38,14 +38,14 @@ public class CaveCarverController {
     private boolean isSurfaceCavesEnabled;
     private boolean isFloodedUndergroundEnabled;
 	
-	public CaveCarverController(IWorld worldIn) {
+	public CaveCarverController(IWorld worldIn, int topY) {
         this.world = worldIn;
         this.isOverrideSurfaceDetectionEnabled = false;
         this.isSurfaceCavesEnabled = true;
         this.isFloodedUndergroundEnabled = true;
         this.surfaceCaveCarver = new VanillaCaveCarverBuilder()
             .bottomY(40)
-            .topY(128)
+            .topY(topY)
             .density(17)
             .liquidAltitude(12)
             .replaceGravel(true)
@@ -77,7 +77,7 @@ public class CaveCarverController {
         // Vanilla caves
         carvers.add(new VanillaCaveCarverBuilder()
             .bottomY(8)
-            .topY(128)
+            .topY(topY)
             .density(9)
             .priority(0)
             .liquidAltitude(12)

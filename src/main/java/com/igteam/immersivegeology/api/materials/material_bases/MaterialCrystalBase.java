@@ -16,6 +16,8 @@ public abstract class MaterialCrystalBase extends Material
 	{
 		switch(useType)
 		{
+			case GEODE:
+				return true;
 			case CRYSTAL:
 				return hasCrystal();
 			case RAW_CRYSTAL:

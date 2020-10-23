@@ -82,7 +82,7 @@ public class ChunkGeneratorImmersiveNether extends ChunkGenerator<ImmersiveNethe
 		this.biomeProvider = (ImmersiveNetherBiomeProvider)provider;
 
 		this.immersiveCarver = new ImmersiveCarver();
-		this.immersiveCarver.initialize(world);
+		this.immersiveCarver.initialize(world, 255);
 		this.immersiveCarver.setHeightFadeThershold(255);
 
 		EnumMaterials.filterByUseType(MaterialUseType.GENERATED_CHUNKS).forEach((ore) -> {

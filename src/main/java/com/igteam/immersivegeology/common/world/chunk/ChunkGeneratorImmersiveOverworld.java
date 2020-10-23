@@ -76,7 +76,7 @@ public class ChunkGeneratorImmersiveOverworld extends ChunkGenerator<ImmersiveGe
 		this.biomeProvider = (ImmersiveBiomeProvider)provider;
 
 		this.immersiveCarver = new ImmersiveCarver();
-		this.immersiveCarver.initialize(world);
+		this.immersiveCarver.initialize(world,128);
 
 		EnumMaterials.filterByUseType(MaterialUseType.GENERATED_CHUNKS).forEach((ore) -> {
 				WorleyOreCarver.INSTANCE.setupNewLayer(seedGenerator, ore);

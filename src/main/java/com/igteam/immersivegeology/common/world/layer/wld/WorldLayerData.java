@@ -45,23 +45,21 @@ public class WorldLayerData
 	}
 
 	private void buildNetherBiomeData(){
-		worldLayerData.addAll(Arrays.asList(
-				BiomeLayerBuilder.create(IGBiomes.MANTLE).addLayerData(NETHERRACK).addLayerOreData(1, EnumMaterials.Gold,0.55f).build()
+		worldLayerData.addAll(Arrays.asList(BiomeLayerBuilder.create(IGBiomes.MANTLE)
+						.addLayerData(NETHERRACK)
+						.addLayerOreData(1,   EnumMaterials.Gold,0.2f, EnumMaterials.Pyrolusite,0.2f)
+						.build()
 		));
 	}
 
 	private void buildMediumBiomeData() {
 		worldLayerData.addAll(Arrays.asList(BiomeLayerBuilder.create(IGBiomes.BADLANDS).addLayerData(GRANITE, GRANITE, GABBROS, GABBROS, BASALT, BASALT)
-		.addLayerOreData(4, EnumMaterials.Gold, 0.45f,
-							EnumMaterials.Hematite, 0.45f)
-		.addLayerOreData(3, EnumMaterials.Gold, 0.5f,
-							EnumMaterials.Hematite, 0.45f)
-		.addLayerOreData(2, EnumMaterials.Uraninite, 0.25f,
-						    EnumMaterials.Ilmenite, 0.38f,
-						    EnumMaterials.Hubnerite, 0.35f)
-		.addLayerOreData(1, EnumMaterials.Cuprite, 0.30f,
-							EnumMaterials.Hematite, 0.45f,
-							EnumMaterials.Gold, 0.55f).build()));
+						.addLayerOreData(4, EnumMaterials.Gold, 0.45f,EnumMaterials.Hematite, 0.45f)
+						.addLayerOreData(3, EnumMaterials.Gold, 0.5f, EnumMaterials.Hematite, 0.45f)
+						.addLayerOreData(2, EnumMaterials.Uraninite, 0.25f, EnumMaterials.Ilmenite, 0.38f, EnumMaterials.Hubnerite, 0.35f)
+						.addLayerOreData(1, EnumMaterials.Cuprite, 0.30f, EnumMaterials.Hematite, 0.45f, EnumMaterials.Gold, 0.55f)
+								.build()
+		));
 	}
 
 	private void buildLowBiomeData() {

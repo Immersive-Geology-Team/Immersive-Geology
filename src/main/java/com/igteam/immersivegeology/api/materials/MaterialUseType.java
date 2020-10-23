@@ -1,7 +1,9 @@
 package com.igteam.immersivegeology.api.materials;
 
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialCrystalBase;
 import com.igteam.immersivegeology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersivegeology.common.blocks.*;
+import com.igteam.immersivegeology.common.blocks.crystal.IGGeodeBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGDustBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGSheetmetalBlock;
 import com.igteam.immersivegeology.common.blocks.metal.IGStorageBlock;
@@ -27,6 +29,20 @@ import java.util.Locale;
 public enum MaterialUseType implements IStringSerializable
 {
 	//Mineral items
+	GEODE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw){
+		@Override
+		public IGBaseBlock[] getBlocks(com.igteam.immersivegeology.api.materials.Material material)
+		{
+			IGGeodeBlock geode = new IGGeodeBlock(GEODE, material);
+			return new IGGeodeBlock[]{geode};
+		}
+
+		@Nonnull
+		public String getModelPath()
+		{
+			return "crystal/";
+		}
+	},
 	ROCK(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw),
 	SPIKE(UseCategory.RESOURCE_BLOCK, Material.ROCK, ItemSubGroup.raw){ //Stalagmites and such
 		@Override

@@ -31,7 +31,7 @@ public class ImmersiveCarver {
     private WorleyCaveCarver worleyCaveCarver;
    // private RavineController ravineController;
     
-    public void initialize(IWorld worldIn) {
+    public void initialize(IWorld worldIn, int topY) {
     	this.world = worldIn;
     	this.seed = worldIn.getSeed();
     	Random seedGenerator = new Random();
@@ -45,7 +45,7 @@ public class ImmersiveCarver {
 			IGLogger.info("ERROR, failed to find the name of the dimension with the ID "+dimensionID);
     	}
     	
-    	this.caveCarver = new CaveCarverController(worldIn);
+    	this.caveCarver = new CaveCarverController(worldIn, topY);
         this.waterCarver = new WaterRegionController(worldIn);
         this.worleyCaveCarver = new WorleyCaveCarver(seedGenerator);
     }

@@ -24,6 +24,33 @@ public enum MaterialCrystalStructure
 		this.latticeType = type;
 	}
 
+	public MaterialCrystalStructure getParentStructure(LatticeStructure structure){
+		switch(structure){
+			case prisims:
+			case double_pyramids:
+				return TETRAGONAL;
+			case rhombic_prisms:
+			case dipyramids:
+				return ORTHORHOMBIC;
+			case trigonals:
+			case hexagonals:
+			case rhombohedrals:
+				return HEXAGONAL;
+			case pedials:
+			case pinacoidals:
+				return TRICLINIC;
+			case sphenoidals:
+			case domatics:
+			case prismatics:
+				return MONOCLINIC;
+			case octahedrons:
+			case dodecahedrons:
+			case cubes:
+			default:				//if the lattice structure isn't listed, return Isometric as a default
+				return ISOMETRIC;
+		}
+	}
+
 	public enum LatticeStructure
 	{
 		//ISOMETRIC

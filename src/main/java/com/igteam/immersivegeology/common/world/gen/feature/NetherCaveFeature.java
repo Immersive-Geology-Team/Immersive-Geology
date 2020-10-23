@@ -30,7 +30,7 @@ public class NetherCaveFeature extends CaveFeature {
 
     @Override
     public void place(IWorld worldIn, BlockPos pos, BlockState spike, BlockState raw, Direction direction, Random rand, Material mat) {
-        if (pos.getY() < 70)
+        if (pos.getY() < 85)
         {
             return;
         }
@@ -85,7 +85,7 @@ public class NetherCaveFeature extends CaveFeature {
                     }
                     else if (actualRadius < 1 && rand.nextInt(3) == 0 && y > 0)
                     {
-                        //placeSmallStalactite(worldIn, mutablePos, spike, raw, direction, rand, mat);
+                       // placeSmallStalactite(worldIn, mutablePos, spike, raw, direction, rand, mat);
                     }
                 }
             }

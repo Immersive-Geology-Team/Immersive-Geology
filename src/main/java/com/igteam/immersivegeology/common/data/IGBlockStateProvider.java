@@ -2,11 +2,14 @@ package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.Material;
+import com.igteam.immersivegeology.api.materials.MaterialCrystalStructure;
+import com.igteam.immersivegeology.api.materials.material_bases.MaterialCrystalBase;
 import com.igteam.immersivegeology.common.IGContent;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.blocks.IGCaveBlock;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.blocks.IGMaterialBlock;
+import com.igteam.immersivegeology.common.blocks.crystal.IGGeodeBlock;
 import com.igteam.immersivegeology.common.blocks.plant.IGLogBlock;
 import com.igteam.immersivegeology.common.blocks.property.IGProperties;
 import com.igteam.immersivegeology.common.blocks.property.SpikePart;
@@ -37,6 +40,25 @@ public class IGBlockStateProvider extends BlockStateProvider
 		{
 			try
 			{
+				if(block instanceof IGGeodeBlock) {
+					IGGeodeBlock b = (IGGeodeBlock)block;
+					StringBuilder specialName = new StringBuilder();
+					String structure = "";
+					for(Material material : b.materials)
+					{
+						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
+							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
+
+						structure = ((MaterialCrystalBase) material).getLatticeStructure().name();
+					}
+
+					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name + "_" + structure.toString()).getPath(),
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()))
+							.texture("base","block/greyscale/crystal/" + structure.toString());
+
+					getVariantBuilder(b).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+
+				} else
 				if(block instanceof IGCaveBlock) {
 
 					IGCaveBlock b = (IGCaveBlock)block;

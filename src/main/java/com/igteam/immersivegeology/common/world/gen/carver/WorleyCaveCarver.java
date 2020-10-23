@@ -92,9 +92,12 @@ public class WorleyCaveCarver {
 
 						for (int y0 = 4 - 1; y0 >= 0; y0--) {
 							int yPos = y * 4 + y0;
-							float heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD
-									? 1 - 0.02f * (yPos - HEIGHT_FADE_THRESHOLD)
-									: 1;
+							float heightFadeValue = 1;
+							if(HEIGHT_FADE_THRESHOLD < 255) {
+								heightFadeValue = yPos > HEIGHT_FADE_THRESHOLD
+										? 1 - 0.02f * (yPos - HEIGHT_FADE_THRESHOLD)
+										: 1;
+							}
 
 							// Replacement state for cave interior based on height
 							for (int x0 = x * 4; x0 < (x + 1) * 4; x0++) {
