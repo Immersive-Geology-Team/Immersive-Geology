@@ -49,12 +49,12 @@ public class IGBlockStateProvider extends BlockStateProvider
 						if(material.getSpecialSubtypeModelName(b.subtype)!=null)
 							specialName.append('_').append(material.getSpecialSubtypeModelName(b.subtype));
 
-						structure = ((MaterialCrystalBase) material).getLatticeStructure().name();
+						structure = ((MaterialCrystalBase) material).getLatticeStructure().toString();
 					}
 
-					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name + "_" + structure.toString()).getPath(),
-							new ResourceLocation(ImmersiveGeology.MODID, "block/base/"+((IGMaterialBlock)block).subtype.getModelPath()+((IGMaterialBlock)block).subtype.getName()+specialName.toString()))
-							.texture("base","block/greyscale/crystal/" + structure.toString());
+					BlockModelBuilder baseModel = withExistingParent(new ResourceLocation(ImmersiveGeology.MODID, "block/"+block.name + "_" + structure).getPath(),
+							new ResourceLocation(ImmersiveGeology.MODID, "block/base/crystal/"+((IGMaterialBlock)block).subtype.getName()+specialName.toString()))
+							.texture("base","block/greyscale/crystal/" + structure);
 
 					getVariantBuilder(b).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
 

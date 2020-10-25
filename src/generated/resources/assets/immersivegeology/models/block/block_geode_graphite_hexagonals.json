@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/crystal/geode",
+  "textures": {
+    "base": "immersivegeology:block/greyscale/crystal/hexagonals"
+  }
+}
