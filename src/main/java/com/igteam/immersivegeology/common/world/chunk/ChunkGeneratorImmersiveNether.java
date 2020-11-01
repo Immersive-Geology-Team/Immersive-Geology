@@ -134,7 +134,7 @@ public class ChunkGeneratorImmersiveNether extends ChunkGenerator<ImmersiveNethe
 	private final INoiseGenerator surfaceDepthNoise;
 
 	private final Map<Biome, INoise2D> biomeNoiseMap;
-	public static int SEA_LEVEL = 95;
+	public static int SEA_LEVEL = 70;
 
 	@Override
 	public void makeBase(IWorld worldIn, IChunk chunk)

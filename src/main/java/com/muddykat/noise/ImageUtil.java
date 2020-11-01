@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 
 import javax.imageio.ImageIO;
 
+import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
 import net.minecraft.util.math.MathHelper;
 
@@ -25,27 +26,33 @@ public abstract class ImageUtil<T>
 	
 	 public static void greyWriteImage(double[][] data){
 	        //this takes an array of doubles between 0 and 1 and generates a grey scale image from them
-	        BufferedImage image = new BufferedImage(data.length,data[0].length, BufferedImage.TYPE_INT_RGB);
+	        BufferedImage image = new BufferedImage(data.length,data[0].length, BufferedImage.TYPE_INT_ARGB_PRE);
 
 	        for (int y = 0; y < data[0].length; y++)
 	        {
 	          for (int x = 0; x < data.length; x++)
 	          {
-	            if (data[x][y]>1){
-	                data[x][y]=1;
+	            if (data[x][y]>255){
+	                data[x][y]=255;
 	            }
 	            if (data[x][y]<0){
 	                data[x][y]=0;
 	            }
-	            float THRESHOLD = 0.3f;
-	            if(data[x][y] > THRESHOLD) {
-		            Color col=new Color((float)data[x][y],(float)data[x][y],(float)data[x][y]); 
-		            image.setRGB(x, y, col.getRGB());
-	            } else {
-	            	 Color col=new Color(255,0,0); 
-			         image.setRGB(x, y, col.getRGB());
-	            }
-	          }
+
+	            double preData = data[x][y];
+	            data[x][y] = preData / 255;
+
+	            float THRESHOLD = ImmersiveGenerationSettings.SEA_LEVEL / 255;
+	            Color col;
+
+                  if(data[x][y] > THRESHOLD) {
+                      col = new Color((float) data[x][y], (float) data[x][y], (float) data[x][y]);
+                  } else {
+                      col = new Color(0, 0, 255);
+                  }
+
+                  image.setRGB(x, y, col.getRGB());
+              }
 	        }
 
 	        try {
@@ -54,6 +61,7 @@ public abstract class ImageUtil<T>
 	            outputfile.createNewFile();
 
 	            ImageIO.write(image, "png", outputfile);
+
 	        } catch (IOException e) {
 	            //o no!
 	        }

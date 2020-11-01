@@ -9,6 +9,8 @@ import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
 import com.igteam.immersivegeology.common.tileentity.IGRegisterTileEntityTypes;
+import com.igteam.immersivegeology.common.tileentity.helper.TileEntityEnum;
+import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluid;
@@ -38,8 +40,6 @@ public class IGContent
 	public static Map<Block, SlabBlock> toSlab = new IdentityHashMap<>();
 
 	public static IGBaseItem itemPickaxe = new IGToolPickaxe().setSubGroup(ItemSubGroup.tools);
-	public static IGBaseBlock toolForge = new IGTileBlock("tool_forge", MaterialUseType.ROCK, EnumMaterials.Marble.material).setSubGroup(ItemSubGroup.machines);
-
 	public static IGBaseItem itemGuidebook = new IGBaseItem("ig_guidebook").setSubGroup(ItemSubGroup.misc);
 	
 	public static void modConstruction()
@@ -72,10 +72,17 @@ public class IGContent
 			}
 		}
 
+		for(TileEntityEnum tee : TileEntityEnum.values()){
+			try {
+				registeredIGBlocks.put(tee.getBlock().getRegistryName().toString(), tee.getBlock());
+			} catch (Exception e){
+				IGLogger.logger.error("Failed to Register TileBlock due to " + e.getMessage());
+			}
+		}
+
 		addItem(itemGuidebook);
 		addItem(itemPickaxe);
 		addItem(new IGToolHammer().setSubGroup(ItemSubGroup.tools));
-		addBlock(toolForge);
 	}
 
 	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)
@@ -144,7 +151,13 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerTEs(RegistryEvent.Register<TileEntityType<?>> event)
 	{
-		IGRegisterTileEntityTypes.parseRegistry(event);
+		for(TileEntityEnum tee : TileEntityEnum.values()){
+			try {
+				registerTile(tee.getTile(), event, tee.getBlock());
+			} catch (Exception e){
+				IGLogger.logger.error("Invalid TileEntity caused by " + e.getMessage());
+			}
+		}
 	}
 
 	public static void init()
@@ -160,8 +173,8 @@ public class IGContent
 	public static <T extends TileEntity> void registerTile(Class<T> tile, RegistryEvent.Register<TileEntityType<?>> event, Block... valid)
 	{
 		String s = tile.getSimpleName();
-		s = s.toLowerCase(Locale.ENGLISH);
-		Set<Block> validSet = new LinkedHashSet<>(Arrays.asList(valid));
+		s = s.substring(0, s.indexOf("TileEntity")).toLowerCase(Locale.ENGLISH);
+		Set<Block> validSet = new HashSet<>(Arrays.asList(valid));
 		TileEntityType<T> type = new TileEntityType<>(() -> {
 			try
 			{
@@ -185,7 +198,6 @@ public class IGContent
 		}
 		registeredIGTiles.add(tile);
 	}
-
 	/**
 	 * Use only when needed, default only for IGBaseBlock, please extend that
 	 *

@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.world.biome.biomes.helpers;
 
-import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;

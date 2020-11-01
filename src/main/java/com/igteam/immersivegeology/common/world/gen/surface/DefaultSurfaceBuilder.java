@@ -4,7 +4,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGBaseBlock;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.world.biome.biomes.MountainsBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.overworld.MountainsBiome;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.BiomeHelper;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveSurfaceBuilderConfig;
@@ -14,7 +14,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 
 import java.util.Random;

@@ -3,7 +3,9 @@ package com.igteam.immersivegeology.common.world.layer;
 import com.igteam.immersivegeology.common.world.biome.IGBiomes;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveNetherGenSettings;
-import com.igteam.immersivegeology.common.world.layer.layers.*;
+import com.igteam.immersivegeology.common.world.layer.layers.nether.NetherLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.nether.NetherOceanLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
 import net.minecraft.world.gen.LazyAreaLayerContext;
@@ -72,6 +74,7 @@ public class IGLayerUtil
 	*/
 
 	public static final int MANTLE = getId(IGBiomes.MANTLE);
+	public static final int NETHER_OCEAN = getId(IGBiomes.NETHER_OCEAN);
 
 	public static List<IAreaFactory<LazyArea>> createOverworldBiomeLayer(long seed,
 																		 ImmersiveGenerationSettings settings)
@@ -212,6 +215,11 @@ public class IGLayerUtil
 	public static boolean isOcean(int value)
 	{
 		return value==OCEAN||value==DEEP_OCEAN||value==DEEP_OCEAN_VOLCANIC||value==OCEAN_EDGE||value==WARM_OCEAN||value==COLD_OCEAN||value==FROZEN_DEEP_OCEAN;
+	}
+
+	public static boolean isNetherOcean(int value)
+	{
+		return value==NETHER_OCEAN;
 	}
 
 	public static boolean isShallowOcean(int value)

@@ -5,19 +5,21 @@ import java.util.Random;
 import java.util.function.LongFunction;
 
 import com.igteam.immersivegeology.common.world.layer.IGLayerUtil;
-import com.igteam.immersivegeology.common.world.layer.layers.AddIslandLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.AddLakeLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.AddOasisLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.BiomeLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.ElevationLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.IslandLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.MixRiverLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.OceanLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.RemoveOceanLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.RiverLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.ShoreLayer;
-import com.igteam.immersivegeology.common.world.layer.layers.TemperateLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.AddIslandLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.AddLakeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.AddOasisLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.BiomeLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.ElevationLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.IslandLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.MixRiverLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.OceanLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.RemoveOceanLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.RiverLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.ShoreLayer;
+import com.igteam.immersivegeology.common.world.layer.layers.overworld.TemperateLayer;
 
+import com.igteam.immersivegeology.common.world.noise.INoise2D;
+import com.igteam.immersivegeology.common.world.noise.SimplexNoise2D;
 import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
@@ -25,8 +27,38 @@ import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 
+import static com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings.SEA_LEVEL;
+
 public class NoiseGenTester {
-	
+
+	public static void main(String[] args) {
+		long seed = 100;
+		NoiseGenTester test = new NoiseGenTester();
+		int attachedID = new Random().nextInt(1000);
+
+		LongFunction<LazyAreaLayerContext> contextFactory = seedModifier -> new LazyAreaLayerContext(25, seed,
+				seedModifier);
+
+		IAreaFactory<LazyArea> mainLayer;
+
+		final INoise2D ridgeNoise = new SimplexNoise2D(seed).octaves(4).ridged().spread(0.04f)
+				.map(x -> 1.3f*-(x > 0?(float)Math.pow(x, 3.2f): 0.5f*x)).scaled(-1f, 0.3f, -1f, 1f)
+				.terraces(16).scaled(SEA_LEVEL, SEA_LEVEL+60);
+
+		final INoise2D spots = new SimplexNoise2D(seed).terraces(2).scaled(SEA_LEVEL+4, SEA_LEVEL+62).spread(0.08f);
+		INoise2D noise = new SimplexNoise2D(seed).octaves(6).terraces(4).spread(0.08f).scaled(SEA_LEVEL+4, SEA_LEVEL+62).warped(ridgeNoise,spots);
+
+		double[][] data = new double[1000][1000];
+
+		for(int x = 0; x < 1000; x++){
+			for(int y = 0; y < 1000; y++){
+				data[x][y] = noise.noise(x,y);
+			}
+		}
+
+		ImageUtil.greyWriteImage(data);
+	}
+
 	public static final ImageUtil<IAreaFactory<LazyArea>> IMAGES = ImageUtil.noise(lazyAreaIAreaFactory -> {
         LazyArea area = lazyAreaIAreaFactory.make();
         return (left, right) -> area.getValue((int) left, (int) right);
@@ -169,4 +201,5 @@ public class NoiseGenTester {
         if (id == IGLayerUtil.STONE_SHORE) return new Color(181,178,181);
         return Color.black;
     }
+
 }

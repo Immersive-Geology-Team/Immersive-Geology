@@ -1,17 +1,14 @@
 package com.igteam.immersivegeology.common.world.gen.feature;
 
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.util.IGRegistryGrabber;
 import com.igteam.immersivegeology.common.blocks.IGLayerBase;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.world.biome.IGBiome;
-import com.igteam.immersivegeology.common.world.biome.biomes.ForestBiome;
+import com.igteam.immersivegeology.common.world.biome.biomes.overworld.ForestBiome;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.ForestType;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SnowyDirtBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

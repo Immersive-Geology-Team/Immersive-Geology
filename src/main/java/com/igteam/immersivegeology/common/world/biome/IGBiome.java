@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.world.biome;
 
-import com.igteam.immersivegeology.common.world.biome.biomes.OceanBiome;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.surface.ISurfaceBuilder;
 import com.igteam.immersivegeology.common.world.gen.surface.util.SurfaceBlockType;

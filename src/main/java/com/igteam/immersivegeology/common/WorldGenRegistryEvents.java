@@ -2,21 +2,20 @@ package com.igteam.immersivegeology.common;
 
 import com.igteam.immersivegeology.common.world.ImmersiveBiomeProvider;
 import com.igteam.immersivegeology.common.world.ImmersiveNetherBiomeProvider;
-import com.igteam.immersivegeology.common.world.biome.biomes.*;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.ForestType;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.MountainType;
-import com.igteam.immersivegeology.common.world.biome.biomes.PlainsBiome.PlainsType;
+import com.igteam.immersivegeology.common.world.biome.biomes.nether.NetherMantle;
+import com.igteam.immersivegeology.common.world.biome.biomes.nether.NetherOcean;
+import com.igteam.immersivegeology.common.world.biome.biomes.overworld.*;
+import com.igteam.immersivegeology.common.world.biome.biomes.overworld.PlainsBiome.PlainsType;
 import com.igteam.immersivegeology.common.world.biome.biomes.helpers.OceanType;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveNether;
 import com.igteam.immersivegeology.common.world.chunk.ChunkGeneratorImmersiveOverworld;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveGenerationSettings;
 import com.igteam.immersivegeology.common.world.gen.config.ImmersiveNetherGenSettings;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
-import net.minecraft.world.biome.provider.IBiomeProviderSettings;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -57,6 +56,7 @@ public final class WorldGenRegistryEvents
 				new OceanBiome(OceanType.DEEP_VOLCANIC).setRegistryName("deep_ocean_volcanic"),
 				new OceanBiome(OceanType.EDGE).setRegistryName("ocean_edge"),
 
+				new NetherOcean().setRegistryName("nether_ocean"),
 				new PlainsBiome(-4, 10, PlainsType.DEFAULT).setRegistryName("plains"),
 				new DesertBiome(-5, 20, false).setRegistryName("desert"),
 				new DesertBiome(-5, 10, true).setRegistryName("arctic_desert"),
@@ -94,7 +94,7 @@ public final class WorldGenRegistryEvents
 				/*
 					Nether Biomes
 				*/
-				new ImmersiveNetherBiome().setRegistryName("mantle")
+				new NetherMantle().setRegistryName("mantle")
 		);
 	}///only oceans at moment look into later
 
