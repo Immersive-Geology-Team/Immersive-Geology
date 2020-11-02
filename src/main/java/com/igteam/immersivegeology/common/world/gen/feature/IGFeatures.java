@@ -15,7 +15,7 @@ public class IGFeatures<FC extends IFeatureConfig> extends ForgeRegistryEntry<Fe
     public static final Feature<NoFeatureConfig> CAVE_FEATURES = new CaveFeature(NoFeatureConfig::deserialize);
     public static final Feature<NoFeatureConfig> NETHER_CAVE_FEATURES = new NetherCaveFeature(NoFeatureConfig::deserialize);
 
-    public static final Structure<NoFeatureConfig> IMMERSIVE_NETHER_BRIDGE = (Structure)register("immersive_nether_bridge", new ImmersiveFortressStructure(NoFeatureConfig::deserialize));
+    public static final Structure<NoFeatureConfig> IMMERSIVE_NETHER_BRIDGE = (Structure)register("nether_bridge", new ImmersiveFortressStructure(NoFeatureConfig::deserialize));
 
     private static <C extends IFeatureConfig, F extends Feature<C>> Feature register(String id, F feature) {
         return (Feature) Registry.register(Registry.FEATURE, id, feature);

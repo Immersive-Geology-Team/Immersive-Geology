@@ -1,7 +1,5 @@
 package com.igteam.immersivegeology.common.tileentity.entities;
 
-import blusunrize.immersiveengineering.common.blocks.IEBaseTileEntity;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 import com.igteam.immersivegeology.api.materials.ToolUseType;
 import com.igteam.immersivegeology.common.IGContent;
@@ -17,15 +15,34 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.HashMap;
 
-public abstract class IGTileEntity extends IEBaseTileEntity {
+public class CrudeForgeTileEntity extends IGTileEntity implements IClearable, ITickableTileEntity {
+    //THIS IS REQUIRED FOR IT TO REGISTER,
+    public static TileEntityType<CrudeForgeTileEntity> TYPE;
 
-    public IGTileEntity(TileEntityType<? extends TileEntity> type)
-    {
-        super(type);
+    public CrudeForgeTileEntity() {
+        super(TYPE);
     }
 
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public void readCustomNBT(CompoundNBT compoundNBT, boolean b) {
+
+    }
+
+    @Override
+    public void writeCustomNBT(CompoundNBT compoundNBT, boolean b) {
+
+    }
 }

@@ -8,8 +8,7 @@ import com.igteam.immersivegeology.common.items.IGBaseItem;
 import com.igteam.immersivegeology.common.items.tools.IGToolHammer;
 import com.igteam.immersivegeology.common.items.tools.IGToolPickaxe;
 import com.igteam.immersivegeology.common.materials.EnumMaterials;
-import com.igteam.immersivegeology.common.tileentity.IGRegisterTileEntityTypes;
-import com.igteam.immersivegeology.common.tileentity.helper.TileEntityEnum;
+import com.igteam.immersivegeology.common.tileentity.helper.TileEntityRegistryEnum;
 import com.igteam.immersivegeology.common.util.IGLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
@@ -72,7 +71,7 @@ public class IGContent
 			}
 		}
 
-		for(TileEntityEnum tee : TileEntityEnum.values()){
+		for(TileEntityRegistryEnum tee : TileEntityRegistryEnum.values()){
 			try {
 				registeredIGBlocks.put(tee.getBlock().getRegistryName().toString(), tee.getBlock());
 			} catch (Exception e){
@@ -151,7 +150,7 @@ public class IGContent
 	@SubscribeEvent
 	public static void registerTEs(RegistryEvent.Register<TileEntityType<?>> event)
 	{
-		for(TileEntityEnum tee : TileEntityEnum.values()){
+		for(TileEntityRegistryEnum tee : TileEntityRegistryEnum.values()){
 			try {
 				registerTile(tee.getTile(), event, tee.getBlock());
 			} catch (Exception e){
