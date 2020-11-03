@@ -88,4 +88,34 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 		return 8.885f; // g/cm^3
 	}
 
+	@Override
+	public int getHeadDurability() {
+		return 75;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 12;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 3;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 1;
+	}
+
 }

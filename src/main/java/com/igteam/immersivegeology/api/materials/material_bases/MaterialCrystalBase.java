@@ -1,11 +1,12 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
+import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialCrystalStructure;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
 
-public abstract class MaterialCrystalBase extends Material {
+public abstract class MaterialCrystalBase extends Material implements ITipMaterial {
     public abstract MaterialCrystalStructure getCrystalStructure();
 
 	@Override

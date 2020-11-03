@@ -107,6 +107,35 @@ public class MaterialMetalUnobtanium extends MaterialMetalBase
 		return EnumMetalType.METAL;
 	}
 
+	@Override
+	public int getHeadDurability() {
+		return 1000;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 5;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 15;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 5;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 4;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 6;
+	}
 
 	/*@Nullable
 	@Override

@@ -90,4 +90,33 @@ public class MaterialMetalSteel extends MaterialMetalBase
 		return 7.800f; // gm/cm^3
 	}
 
+	@Override
+	public int getHeadDurability() {
+		return 150;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 3;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 8;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 4;
+	}
 }

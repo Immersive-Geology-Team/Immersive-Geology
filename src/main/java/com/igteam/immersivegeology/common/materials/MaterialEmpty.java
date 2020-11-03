@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.common.materials;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.interfaces.IBindingMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
+import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
@@ -13,7 +17,7 @@ import java.util.LinkedHashSet;
  * Created by Pabilo8 on 25-03-2020.
  * A material (or actually lack of one) for compatibility, less crashing if a material has been removed
  */
-public class MaterialEmpty extends Material
+public class MaterialEmpty extends Material implements IHeadMaterial, IBindingMaterial, ITipMaterial, IHandleMaterial
 {
 	@Override
 	public String getName()

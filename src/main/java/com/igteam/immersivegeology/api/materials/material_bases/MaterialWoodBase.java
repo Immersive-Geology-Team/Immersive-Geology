@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
@@ -8,7 +10,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
  * @author Pabilo8
  * @since 22.08.2020
  */
-public abstract class MaterialWoodBase extends Material
+public abstract class MaterialWoodBase extends Material implements IHandleMaterial
 {
 	@Override
 	public boolean hasUsetype(MaterialUseType useType)

@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockReader;
 
 public class IGTileBlock extends IGBaseBlock {
 
-    Class<? extends TileEntity> linked_entity;
+    protected Class<? extends TileEntity> linked_entity;
 
     public IGTileBlock(String name, MaterialUseType subtype, Material... materials) {
         super("tile_"+name, Properties.create(subtype.getMaterial()), null, ItemSubGroup.machines);

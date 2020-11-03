@@ -1,5 +1,9 @@
 package com.igteam.immersivegeology.api.materials.material_bases;
 
+import com.igteam.immersivegeology.api.interfaces.IBindingMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
+import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.Material;
 import com.igteam.immersivegeology.api.materials.MaterialTypes;
 import com.igteam.immersivegeology.api.materials.MaterialUseType;
@@ -7,7 +11,7 @@ import com.igteam.immersivegeology.api.materials.MaterialUseType;
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
-public abstract class MaterialMetalBase extends Material
+public abstract class MaterialMetalBase extends Material implements IHeadMaterial, IHandleMaterial, IBindingMaterial
 {
 	public abstract EnumMetalType getMetalType();
 

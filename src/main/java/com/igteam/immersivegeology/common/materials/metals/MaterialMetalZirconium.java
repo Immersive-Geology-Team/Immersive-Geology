@@ -98,7 +98,35 @@ public class MaterialMetalZirconium extends MaterialMetalBase
 	{
 		return EnumMetalType.METAL;
 	}
+	@Override
+	public int getHeadDurability() {
+		return 48;
+	}
 
+	@Override
+	public int getHeadMiningLevel() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 7;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 1;
+	}
 
 	/*@Nullable
 	@Override

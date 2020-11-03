@@ -99,6 +99,35 @@ public class MaterialMetalCobalt extends MaterialMetalBase
 		return EnumMetalType.METAL;
 	}
 
+	@Override
+	public int getHeadDurability() {
+		return 90;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 5;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 2;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 3;
+	}
 
 	/*@Nullable
 	@Override

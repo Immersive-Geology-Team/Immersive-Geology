@@ -87,4 +87,35 @@ public class MaterialMetalElectrum extends MaterialMetalBase
 	{
 		return 13.5f; //gm/cm^3
 	}
+
+	@Override
+	public int getHeadDurability() {
+		return 25;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 7;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 8;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 10;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 1;
+	}
+
 }

@@ -91,4 +91,33 @@ public class MaterialMetalIlludium extends MaterialMetalBase
 		return 7.800f; // gm/cm^3
 	}
 
+	@Override
+	public int getHeadDurability() {
+		return 900;
+	}
+
+	@Override
+	public int getHeadMiningLevel() {
+		return 6;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 25;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 5;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 4;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 4;
+	}
 }

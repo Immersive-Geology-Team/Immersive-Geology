@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.api.materials;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.interfaces.IBindingMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHandleMaterial;
+import com.igteam.immersivegeology.api.interfaces.IHeadMaterial;
+import com.igteam.immersivegeology.api.interfaces.ITipMaterial;
 import com.igteam.immersivegeology.api.materials.PeriodicTableElement.ElementProportion;
 import net.minecraft.item.Rarity;
 
@@ -16,7 +20,7 @@ import java.util.LinkedHashSet;
  * <p>
  * Materials can have blocks and items, all of which are provided by Immersive Geology.
  */
-public abstract class Material
+public abstract class Material implements IHeadMaterial, IBindingMaterial, IHandleMaterial, ITipMaterial
 {
 	/**
 	 * @return material name
@@ -179,5 +183,83 @@ public abstract class Material
 	//TODO: Add material tools
 	//@Nullable
 	//public abstract IItemTier getToolTier();
+	@Override
+	public int getHeadDurability() {
+		return 1;
+	}
 
+	@Override
+	public int getHeadMiningLevel() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadEnchantability() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadMiningSpeed() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadAttackSpeed() {
+		return 1;
+	}
+
+	@Override
+	public int getHeadAttackDamage() {
+		return 1;
+	}
+
+	@Override
+	public int getBindingDurability() {
+		return 1;
+	}
+
+	@Override
+	public double getBindingMultiplier() {
+		return 1;
+	}
+
+	@Override
+	public int getBindingEnchantability() {
+		return 1;
+	}
+
+	@Override
+	public int getHandleDurability() {
+		return 1;
+	}
+
+	@Override
+	public double getHandleMultiplier() {
+		return 1;
+	}
+
+	@Override
+	public int getHandleEnchantability() {
+		return 1;
+	}
+
+	@Override
+	public int getTipDurability() {
+		return 1;
+	}
+
+	@Override
+	public int getTipMiningLevel() {
+		return 1;
+	}
+
+	@Override
+	public int getTipAttackDamage() {
+		return 1;
+	}
+
+	@Override
+	public int getTipMiningSpeed() {
+		return 1;
+	}
 }

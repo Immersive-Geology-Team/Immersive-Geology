@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "immersivegeology:block/machines/tool_forge_mold" }
+    }
+}
