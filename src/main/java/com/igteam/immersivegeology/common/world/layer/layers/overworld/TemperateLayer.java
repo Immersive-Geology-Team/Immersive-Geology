@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import static com.igteam.immersivegeology.common.world.layer.IGLayerUtil.*;
 
+@SuppressWarnings("unused")
 public enum TemperateLayer implements ICastleTransformer, IBishopTransformer
 {
 	CASTLE, BISHOP;
@@ -419,9 +420,17 @@ public enum TemperateLayer implements ICastleTransformer, IBishopTransformer
 		return center;
 	}
 	
-	@Override
-	public int func_215728_a(IExtendedNoiseRandom<?> context, IArea area, int x, int z) 
-	{
-		return this == CASTLE ? ICastleTransformer.super.func_215728_a(context, area, x, z) : IBishopTransformer.super.func_215728_a(context,  area, x, z);
-	}
+		@Override
+		public int func_215728_a(IExtendedNoiseRandom<?> context, IArea area, int x, int z)
+		{
+			//return this == CASTLE ? ICastleTransformer.super.func_215728_a(context, area, x, z) : IBishopTransformer.super.func_215728_a(context,  area, x, z);
+			
+			if(this == CASTLE) {
+				return this.apply(context, area.getValue(this.func_215721_a(x + 1), this.func_215722_b(z + 0)), area.getValue(this.func_215721_a(x + 2), this.func_215722_b(z + 1)), area.getValue(this.func_215721_a(x + 1), this.func_215722_b(z + 2)), area.getValue(this.func_215721_a(x + 0), this.func_215722_b(z + 1)), area.getValue(this.func_215721_a(x + 1), this.func_215722_b(z + 1)));
+			}
+			else {
+				return this.apply(context, area.getValue(this.func_215721_a(x + 0), this.func_215722_b(z + 2)), area.getValue(this.func_215721_a(x + 2), this.func_215722_b(z + 2)), area.getValue(this.func_215721_a(x + 2), this.func_215722_b(z + 0)), area.getValue(this.func_215721_a(x + 0), this.func_215722_b(z + 0)), area.getValue(this.func_215721_a(x + 1), this.func_215722_b(z + 1)));
+			}
+		}
+	
 }
