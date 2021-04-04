@@ -149,7 +149,7 @@ jar {
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"IG Team",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Implementation-Timestamp": "01/01/0001"//new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }

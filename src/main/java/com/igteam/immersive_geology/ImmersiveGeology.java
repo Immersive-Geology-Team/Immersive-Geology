@@ -11,6 +11,7 @@ import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
 import com.igteam.immersive_geology.core.proxy.ServerProxy;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.*;
@@ -40,9 +41,6 @@ public class ImmersiveGeology
 
 		modBus.addListener(this::onClientSetup);
 
-		modBus.addListener(this::onServerStarting);
-		modBus.addListener(this::onServerStopped);
-
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
 
@@ -64,12 +62,14 @@ public class ImmersiveGeology
 		proxy.onClientSetup(event);
 	}
 
-	public void onServerStarting(FMLServerStartingEvent event){
+	@SubscribeEvent
+	public static void onServerStarting(FMLServerStartingEvent event){
 		LOGGER.info("Setting up Server Stuff");
 		proxy.onServerStarting(event);
 	}
 
-	public void onServerStopped(FMLServerStoppedEvent event){
+	@SubscribeEvent
+	public static void onServerStopped(FMLServerStoppedEvent event){
 		LOGGER.info("Finalizing Server Stuff");
 		proxy.onServerStopped(event);
 	}

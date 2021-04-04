@@ -1,58 +1,32 @@
-# This is an example mods.toml file. It contains the data relating to the loading mods.
-# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
-# The overall format is standard TOML format, v0.5.0.
-# Note that there are a couple of TOML lists in this file.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
-modLoader="javafml" #mandatory
-# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[28,)" #mandatory (28 is current forge version)
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/Immersive-Geology-Team/Immersive-Geology/issues" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
-[[mods]] #mandatory
-# The modid of the mod
-modId="immersivegeology" #mandatory
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${file.jarVersion}" #mandatory
- # A display name for the mod
-displayName="Immersive Geology" #mandatory
-# A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://myurl.me/" #optional
-# A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://github.com/Immersive-Geology-Team/Immersive-Geology" #optional
-# A file name (in the root of the mod JAR) containing a logo for display
-logoFile="logo.png" #optional
-# A text field displayed in the mod UI
-credits="Devs, committers and all the people who helped Immersive Geology and Engineering" #optional
-# A text field displayed in the mod UI
-authors="Muddykat, JStocke, Kuruma, Pabilo8" #optional
-# The description text for the mod (multi line!) (#mandatory)
+modLoader="javafml"
+loaderVersion="[36,)"
+logoFile="logo.png"
+logoBlur=false
+issueTrackerURL=""
+license="LGPL v2.1"
+
+[[mods]]
+modId="immersive_geology"
+updateJSONURL=""
+version="${version}"
+displayName="${mod_name}"
+displayURL="${mod_download}"
+credits="${mod_credits}"
+authors="Muddykat, JStocke, Kuruma, Pabilo8"
 description='''
-Adds realistic worldgen, materials and progression to Immersive Engineering.
+${mod_description}
 '''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.immersivegeology]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[28,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+
+[[dependencies.immersive_geology]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
-# Here's another dependency
-[[dependencies.immersivegeology]]
+
+[[dependencies.immersive_geology]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.4]"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.immersivegeology]]
-    modId="immersiveengineering"
-    mandatory=true
-    versionRange="[0.14,)"
+    versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"
