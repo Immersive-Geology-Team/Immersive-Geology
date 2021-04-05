@@ -45,7 +45,7 @@ public abstract class MaterialCrystalBase extends Material
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
-		return net.minecraft.block.material.Material.STONE;
+		return net.minecraft.block.material.Material.ROCK;
 	}
 
 	public boolean hasCutCrystal()

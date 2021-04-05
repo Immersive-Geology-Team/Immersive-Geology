@@ -17,11 +17,6 @@ public class ServerProxy implements Proxy {
     }
 
     @Override
-    public void onClientSetup(FMLClientSetupEvent event) {
-
-    }
-
-    @Override
     public void onServerStarting(FMLServerStartingEvent event) {
 
     }

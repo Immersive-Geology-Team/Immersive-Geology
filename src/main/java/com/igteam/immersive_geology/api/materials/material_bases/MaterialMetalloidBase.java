@@ -52,7 +52,7 @@ public abstract class MaterialMetalloidBase extends Material
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
-		return net.minecraft.block.material.Material.METAL;
+		return net.minecraft.block.material.Material.IRON;
 	}
 
 	public enum EnumMetalType

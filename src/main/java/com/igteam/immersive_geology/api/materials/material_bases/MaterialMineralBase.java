@@ -53,7 +53,7 @@ public abstract class MaterialMineralBase extends Material
 	@Override
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
-		return net.minecraft.block.material.Material.STONE;
+		return net.minecraft.block.material.Material.ROCK;
 	}
 
 	public enum EnumMineralType

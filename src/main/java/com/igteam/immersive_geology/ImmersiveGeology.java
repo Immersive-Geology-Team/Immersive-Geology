@@ -6,6 +6,8 @@
 
 package com.igteam.immersive_geology;
 
+import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.core.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -30,6 +32,8 @@ public class ImmersiveGeology
 	private static final Logger LOGGER = getNewLogger();
 	public static Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
+	public static final IGItemGroup IGGroup = new IGItemGroup("immersive_geology");
+
 	public ImmersiveGeology()
 	{
 		// Register short-hand variables
@@ -53,7 +57,7 @@ public class ImmersiveGeology
 	}
 
 	private void onFinishSetup(final FMLLoadCompleteEvent event){
-		LOGGER.info("Finishing Grimoire Setup");
+		LOGGER.info("Finishing Immersive Geology Setup");
 		proxy.onFinishSetup(event);
 	}
 

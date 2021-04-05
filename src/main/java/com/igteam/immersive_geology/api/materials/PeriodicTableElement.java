@@ -178,7 +178,7 @@ public enum PeriodicTableElement implements IStringSerializable
 	}
 
 	@Override
-	public String getSerializedName() {
+	public String getString() {
 		return getName();
 	}
 

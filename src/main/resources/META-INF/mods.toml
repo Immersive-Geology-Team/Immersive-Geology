@@ -9,18 +9,18 @@ license="LGPL v2.1"
 modId="immersive_geology"
 updateJSONURL=""
 version="${version}"
-displayName="${mod_name}"
-displayURL="${mod_download}"
-credits="${mod_credits}"
+displayName="Immersive Geology"
+displayURL=""
+credits="Muddykat, JStocke, Kuruma, Pabilo8"
 authors="Muddykat, JStocke, Kuruma, Pabilo8"
 description='''
-${mod_description}
+Many Rocks, Many Metals, Many things
 '''
 
 [[dependencies.immersive_geology]]
     modId="forge"
     mandatory=true
-    versionRange="[36,)"
+    versionRange="[36.0.27,)"
     ordering="NONE"
     side="BOTH"
 
