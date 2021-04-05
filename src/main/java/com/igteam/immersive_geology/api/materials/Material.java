@@ -2,7 +2,10 @@ package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
@@ -19,6 +22,10 @@ import java.util.LinkedHashSet;
  */
 public abstract class Material
 {
+
+	public MaterialStoneBase.EnumStoneType getStoneType(){
+		return null;
+	}
 	/**
 	 * @return material name
 	 */
@@ -152,7 +159,9 @@ public abstract class Material
 	/**
 	 * @return a block material (like Material.IRON)
 	 */
-	public abstract net.minecraft.block.material.Material getBlockMaterial();
+	public net.minecraft.block.material.Material getBlockMaterial() {
+		return net.minecraft.block.material.Material.ROCK;
+	};
 
 	/**
 	 * @param useType the subtype checked (iterates trough all)
@@ -177,7 +186,15 @@ public abstract class Material
 	 * @return how many uses do tools made of this material have
 	 */
 
-	//Item Properites
+	private static AbstractBlock.Properties block_props = AbstractBlock.Properties.create(net.minecraft.block.material.Material.ROCK);
+
+	public AbstractBlock.Properties getMaterialBlockProperties(){
+		return block_props;
+	}
+
+	public Item.Properties getMaterialItemProperties(){
+		return new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(getRarity());
+	}
 
 	/**
 	 *

@@ -1,6 +1,6 @@
 {
   "parent": "immersiveengineering:item/ie_item_base",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/rock/rock_bit"
+    "layer0": "immersive_geology:item/greyscale/rock/rock_bit"
   }
 }

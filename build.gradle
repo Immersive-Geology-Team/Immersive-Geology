@@ -82,7 +82,7 @@ minecraft {
             property 'fml.earlyprogresswindow', 'false'
             property 'mixin.env.disableRefMap', 'true'
 
-            args '--mod', 'immersivepetroleum',
+            args '--mod', 'immersive_geology',
                     '--all',
                     '--output', file('src/generated/resources/'),
                     '--validate',

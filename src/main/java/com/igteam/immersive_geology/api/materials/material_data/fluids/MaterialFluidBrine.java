@@ -1,11 +1,10 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;

@@ -7,8 +7,7 @@
 package com.igteam.immersive_geology;
 
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
-import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
 import com.igteam.immersive_geology.core.proxy.ServerProxy;

@@ -1,16 +1,5 @@
 package com.igteam.immersive_geology.api.util;
 
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-
-import com.igteam.immersive_geology.core.IGContent;
-import net.minecraft.item.Item;
-
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 /**
  * concept, design, basically everything by
  * @author Muddykat

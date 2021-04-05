@@ -5,8 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
 public enum ItemSubGroup {
-    rocks(Items.STONE),
-    metals(Items.IRON_BLOCK),
+    natrual(Items.STONE),
+    processed(Items.IRON_BLOCK),
     machines(Items.FURNACE),
     misc(Items.WATER_BUCKET);
 

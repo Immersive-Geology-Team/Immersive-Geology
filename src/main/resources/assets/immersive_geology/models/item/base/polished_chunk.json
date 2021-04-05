@@ -1,6 +1,6 @@
 {
   "parent": "immersiveengineering:item/ie_item_base",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/rock/polished_rock_chunk"
+    "layer0": "immersive_geology:item/greyscale/rock/polished_rock_chunk"
   }
 }

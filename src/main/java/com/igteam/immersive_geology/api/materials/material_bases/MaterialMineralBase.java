@@ -16,8 +16,9 @@ public abstract class MaterialMineralBase extends Material
 	{
 		switch(useType)
 		{
-			case STONE:
-				return hasRock();
+			case ORE_STONE:
+			case ORE_BIT:
+			case ORE_CHUNK:
 			case DUST:
 				return true;
 		}
@@ -28,14 +29,9 @@ public abstract class MaterialMineralBase extends Material
 	@Override
 	public String getSpecialSubtypeModelName(MaterialUseType useType)
 	{
-		if(useType==MaterialUseType.STONE)
+		if(useType==MaterialUseType.ORE_STONE)
 			return EnumStoneType.SEDIMENTARY.getName();
 		return null;
-	}
-
-	private boolean hasRock() {
-		// TODO Auto-generated method stub
-		return getMaterialSubType() == MaterialTypes.STONE ? true : false;
 	}
 
 	@Override

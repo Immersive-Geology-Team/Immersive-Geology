@@ -1,32 +1,52 @@
 package com.igteam.immersive_geology.api.materials;
 
+import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
+import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+
 public enum MaterialUseType {
     //Blocks
-    DUST_BLOCK,     //Returns Self
-    SHEETMETAL,     //Returns Self
-    ORE_STONE,      //Gives Ore Chunks
-    COBBLESTONE,    //Returns Self
-    STONE,          //Gives Chunks
-    GEODE,          //Gives Crystals
+    DUST_BLOCK(true, ItemSubGroup.natrual),     //Returns Self
+    SHEET_METAL(true, ItemSubGroup.processed),     //Returns Self
+    ORE_STONE(true, ItemSubGroup.natrual),      //Gives Ore Chunks
+    COBBLESTONE(true, ItemSubGroup.natrual),    //Returns Self
+    STONE(true, ItemSubGroup.natrual),          //Gives Chunks
+    GEODE(true, ItemSubGroup.natrual),          //Gives Crystals
 
     //Items
-    CHUNK,
-    BIT,
-    ORE_CHUNK,
-    ORE_BIT,
-    CRYSTAL,
-    CUT_CRYSTAL,
-    DUST,
-    BUCKET,
-    FLUIDS,
-    ROD,
-    INGOT,
-    PLATE,
-    NUGGET,
-    GEAR,
-    WIRE;
+    CHUNK(false, ItemSubGroup.natrual),
+    ROCK_BIT(false, ItemSubGroup.natrual),
+    ORE_CHUNK(false, ItemSubGroup.natrual),
+    ORE_BIT(false, ItemSubGroup.natrual),
+    CRYSTAL(false, ItemSubGroup.natrual),
+    CUT_CRYSTAL(false, ItemSubGroup.processed),
+    DUST(false, ItemSubGroup.processed),
+    BUCKET(false, ItemSubGroup.processed),
+    FLUIDS(false, ItemSubGroup.misc),
+    ROD(false, ItemSubGroup.processed),
+    INGOT(false, ItemSubGroup.processed),
+    PLATE(false, ItemSubGroup.processed),
+    NUGGET(false, ItemSubGroup.processed),
+    GEAR(false, ItemSubGroup.processed),
+    WIRE(false, ItemSubGroup.processed);
 
     public String getName() {
-        return this.name();
+        return this.name().toLowerCase();
+    }
+
+    private final boolean isBlock;
+    private final ItemSubGroup subGroup;
+
+    MaterialUseType(boolean isBlock, ItemSubGroup subGroup){
+        this.isBlock = isBlock;
+        this.subGroup = subGroup;
+    }
+
+    public ItemSubGroup getSubgroup(){
+        return subGroup;
+    }
+
+    public boolean isBlock(){
+        return isBlock;
     }
 }

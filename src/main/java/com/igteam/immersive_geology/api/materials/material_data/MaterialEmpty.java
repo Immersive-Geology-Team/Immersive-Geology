@@ -3,7 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_data;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
@@ -103,12 +103,6 @@ public class MaterialEmpty extends Material
 		return 0;
 	}
 
-	@Override
-	public net.minecraft.block.material.Material getBlockMaterial()
-	{
-		return null;
-	}
-	
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

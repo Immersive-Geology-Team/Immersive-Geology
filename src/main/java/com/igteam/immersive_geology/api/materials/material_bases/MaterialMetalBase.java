@@ -30,12 +30,16 @@ public abstract class MaterialMetalBase extends Material
 				return hasWire();
 			case DUST:
 				return hasDust();
-			case SHEETMETAL:
+			case SHEET_METAL:
 				return hasSheetmetal();
 			case DUST_BLOCK:
 				return hasDustBlock();
 			case FLUIDS:
 				return true;
+			case ORE_CHUNK:
+			case ORE_BIT:
+			case ORE_STONE:
+				return isNativeMetal;
 			default:
 				return false;
 		}

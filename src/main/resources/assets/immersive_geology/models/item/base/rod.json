@@ -1,6 +1,6 @@
 {
   "parent": "immersiveengineering:item/ie_item_base",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/metal/rod"
+    "layer0": "immersive_geology:item/greyscale/metal/rod"
   }
 }

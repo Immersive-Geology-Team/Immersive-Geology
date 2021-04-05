@@ -2,7 +2,7 @@ package com.igteam.immersive_geology.client.menu.helper;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
@@ -10,12 +10,9 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -24,6 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CreativeMenuHandler {
@@ -85,6 +83,8 @@ public class CreativeMenuHandler {
                     });
 
                     ImmersiveGeology.IGGroup.fill(gui.getContainer().itemList);
+
+                    gui.getContainer().itemList.sort(new ResourceSorter());
 
                     int slotIteration = 0;
                     for(int l = 0; l < gui.getContainer().inventorySlots.size(); l++) {

@@ -3,7 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_data.stones;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
-import com.igteam.immersive_geology.core.IGLib;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;

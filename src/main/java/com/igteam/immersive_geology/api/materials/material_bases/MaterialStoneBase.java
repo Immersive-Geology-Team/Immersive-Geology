@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  */
 public abstract class MaterialStoneBase extends Material
 {
-	public abstract EnumStoneType getStoneType();
+
 
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)

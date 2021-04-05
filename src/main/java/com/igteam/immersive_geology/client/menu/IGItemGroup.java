@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class IGItemGroup extends ItemGroup {
 
-    public static ItemSubGroup selectedGroup = ItemSubGroup.rocks;
+    public static ItemSubGroup selectedGroup = ItemSubGroup.natrual;
 
     public IGItemGroup(String label){
         super(label);
