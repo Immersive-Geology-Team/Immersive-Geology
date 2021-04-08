@@ -1,7 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_bearing/pillar",
+  "parent": "immersive_geology:block/base/ore_bearing/pillar",
   "textures": {
-    "base": "immersivegeology:block/greyscale/rock/rock_metamorphic",
-    "sided": "immersivegeology:block/greyscale/rock/rock_metamorphic_side"
+    "base": "immersive_geology:block/greyscale/rock/rock_metamorphic",
+    "sided": "immersive_geology:block/greyscale/rock/rock_metamorphic_side"
   }
 }

@@ -4,7 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.StoneEnum;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.item.ItemBase;
@@ -14,20 +14,20 @@ public class IGVariantHolder {
 
     private static Logger log = ImmersiveGeology.getNewLogger();
 
-    public static void createVariants(MaterialUseType type) {
-        log.info("Creating " +  type.getName()+ " Variants");
-        for(MaterialEnum material : MaterialEnum.values()) {
-            Material mat = material.getMaterial();
+    public static void createVariants(Material mat) {
+        log.info("Creating " +  mat.getName().toUpperCase() + " Variants");
+        for(MaterialUseType type : MaterialUseType.values()) {
             if(mat.hasSubtype(type)) {
-                log.info("Variant " + type.getName() + ", Registering " + mat.getName());
+                log.info("Registering " + type.getName().toUpperCase());
                 if(type.isBlock()) {
-                    if (mat.hasSubtype(MaterialUseType.ORE_STONE)) {
-                        for (StoneEnum stone : StoneEnum.values()) {
-                            createBlockVariants(mat, type, stone);
+                    if(mat.hasSubtype(MaterialUseType.ORE_STONE) && !mat.hasSubtype(MaterialUseType.STONE)){
+                        for(MaterialEnum base : MaterialEnum.values()) {
+                            if(base.getMaterial().hasSubtype(MaterialUseType.STONE)) {
+                                createBlockVariants(base.getMaterial(), mat, type);
+                            }
                         }
-                    } else {
-                        createBlockVariants(mat, type);
                     }
+                    createBlockVariants(mat, type);
                 } else {
                     createItemVariants(mat, type);
                 }
@@ -41,22 +41,18 @@ public class IGVariantHolder {
         IGRegistrationHolder.registeredIGItems.put(holder_key, item);
     }
 
-    private static void createBlockVariants(Material material, MaterialUseType type, StoneEnum stonetype){
-        if(stonetype != null){
-            String holder_key = type.getName() + "_" + stonetype.name() + "_" + material.getName();
-            IGOreBlock block = new IGOreBlock(holder_key, material, type, stonetype);
+    private static void createBlockVariants(Material materialBase, Material materialOre, MaterialUseType type){
+            String holder_key = type.getName() + "_" + materialOre.getName() + "_" + materialBase.getName();
+            log.info("Registering special type: " + holder_key);
+            IGOreBlock block = new IGOreBlock(holder_key, new Material[]{materialBase, materialOre}, type);
             IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
             IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
-        } else {
-            String holder_key = type.getName() + "_" + material.getName();
-            BlockBase block = new BlockBase(holder_key, material, type);
-            IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
-            IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
-        }
-
     }
     private static void createBlockVariants(Material material, MaterialUseType type){
-        createBlockVariants(material, type, null);
+        String holder_key = type.getName() + "_" + material.getName();
+        BlockBase block = new BlockBase(holder_key, material, type);
+        IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }
 
 }

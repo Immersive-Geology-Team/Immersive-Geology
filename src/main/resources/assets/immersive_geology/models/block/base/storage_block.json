@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/metal/storage",
-        "particle": "immersivegeology:block/greyscale/metal/storage"
+        "all": "immersive_geology:block/greyscale/metal/storage",
+        "particle": "immersive_geology:block/greyscale/metal/storage"
     }
 }

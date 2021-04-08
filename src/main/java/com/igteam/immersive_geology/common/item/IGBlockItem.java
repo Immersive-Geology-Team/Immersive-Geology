@@ -6,9 +6,11 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.BlockBase;
+import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 
 public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfaces.IColouredItem {
 
@@ -42,6 +44,16 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
     @Override
     public int getColourForIEItem(ItemStack stack, int pass)
     {
-        return itemMaterial.getColor(0);
+        Material[] materials = new Material[2];
+        if((getBlock() instanceof IGOreBlock)) {
+            IGOreBlock oreBlock = (IGOreBlock) getBlock();
+            materials[0] = oreBlock.getOreBase();
+            materials[1] = itemMaterial;
+
+            return materials[MathHelper.clamp(pass,0,materials.length-1)].getColor(0);
+        } else {
+
+            return itemMaterial.getColor(0);
+        }
     }
 }

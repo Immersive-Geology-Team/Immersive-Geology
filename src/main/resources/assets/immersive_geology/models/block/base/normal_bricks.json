@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/stone/bricks",
-        "particle": "immersivegeology:block/greyscale/stone/bricks"
+        "all": "immersive_geology:block/greyscale/stone/bricks",
+        "particle": "immersive_geology:block/greyscale/stone/bricks"
     }
 }

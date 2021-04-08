@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/stone/rough_bricks",
-        "particle": "immersivegeology:block/greyscale/stone/rough_bricks"
+        "all": "immersive_geology:block/greyscale/stone/rough_bricks",
+        "particle": "immersive_geology:block/greyscale/stone/rough_bricks"
     }
 }

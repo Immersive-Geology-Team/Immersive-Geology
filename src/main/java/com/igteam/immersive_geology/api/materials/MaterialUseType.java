@@ -8,7 +8,7 @@ public enum MaterialUseType {
     //Blocks
     DUST_BLOCK(true, ItemSubGroup.natrual),     //Returns Self
     SHEET_METAL(true, ItemSubGroup.processed),     //Returns Self
-    ORE_STONE(true, ItemSubGroup.natrual),      //Gives Ore Chunks
+    ORE_STONE(true, ItemSubGroup.natrual),
     COBBLESTONE(true, ItemSubGroup.natrual),    //Returns Self
     STONE(true, ItemSubGroup.natrual),          //Gives Chunks
     GEODE(true, ItemSubGroup.natrual),          //Gives Crystals

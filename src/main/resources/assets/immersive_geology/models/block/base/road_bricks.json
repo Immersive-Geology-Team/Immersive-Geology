@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/stone/road",
-        "particle": "immersivegeology:block/greyscale/stone/road"
+        "all": "immersive_geology:block/greyscale/stone/road",
+        "particle": "immersive_geology:block/greyscale/stone/road"
     }
 }

@@ -32,19 +32,18 @@ public class IGItemModelProvider extends ItemModelProvider {
             try{
                 if(item instanceof IGBlockItem){
                     IGBlockItem blockItem = (IGBlockItem) item;
-                    String builder_name = new ResourceLocation(IGLib.MODID, "item/"+blockItem.getHolderName()).getPath();
-                    if(blockItem.getBlock() instanceof IGOreBlock){
+                    if(blockItem.getBlock() instanceof IGOreBlock) {
                         IGOreBlock oreBlock = (IGOreBlock) blockItem.getBlock();
-                        String stone_name = oreBlock.getStoneBase().getMaterial().getStoneType().toString().toLowerCase();
+                        String builder_name = new ResourceLocation(IGLib.MODID, "item/"+oreBlock.getHolderName()).getPath();
+                        String stone_name = oreBlock.getStoneBase().getStoneType().getName().toLowerCase();
                         withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/rock_" + stone_name));
                         getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/" + stone_name + "/" + stone_name + "_normal");
                         getBuilder(builder_name).texture("base", IGLib.MODID + ":block/greyscale/rock/rock_" + stone_name);
-                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("base").tintindex(0).uvs(0, 0, 16, 16)));
-                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("ore").tintindex(1).uvs(0, 0, 16, 16)));
+                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(0).uvs(0, 0, 16, 16)));
+                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(1).uvs(0, 0, 16, 16)));
                     }
                 } else if (item instanceof ItemBase) {
-                    ItemBase i = (ItemBase) item;
-                    withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
+                    genericItem(item);
                 }
             } catch (Exception e){
                 IGDataProvider.log.error("Failed to create Item Model: \n" + e);
@@ -58,11 +57,8 @@ public class IGItemModelProvider extends ItemModelProvider {
             IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
             return;
         }
-        String name = name(item);
-
-        getBuilder(name)
-                .parent(getExistingFile(mcLoc("item/generated")))
-                .texture("layer0", modLoc("item/"+name));
+        ItemBase i = (ItemBase) item;
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
     }
 
     private void createBucket(Fluid f){

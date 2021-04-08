@@ -14,8 +14,8 @@
         }
     ],
     "textures": {
-        "vertical": "immersivegeology:block/greyscale/stone/pillar_top",
-        "horizontal": "immersivegeology:block/greyscale/stone/pillar",
-        "particle": "immersivegeology:block/greyscale/stone/pillar"
+        "vertical": "immersive_geology:block/greyscale/stone/pillar_top",
+        "horizontal": "immersive_geology:block/greyscale/stone/pillar",
+        "particle": "immersive_geology:block/greyscale/stone/pillar"
     }
 }

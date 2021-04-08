@@ -84,8 +84,6 @@ public class CreativeMenuHandler {
 
                     ImmersiveGeology.IGGroup.fill(gui.getContainer().itemList);
 
-                    gui.getContainer().itemList.sort(new ResourceSorter());
-
                     int slotIteration = 0;
                     for(int l = 0; l < gui.getContainer().inventorySlots.size(); l++) {
                         Slot slot = gui.getContainer().inventorySlots.get(l);

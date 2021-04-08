@@ -20,10 +20,9 @@ public abstract class MaterialStoneBase extends Material
 		{
 			//items
 			case STONE:
-			case ORE_CHUNK:
 			case COBBLESTONE:
 			case CHUNK:
-			case ORE_BIT:
+			case ROCK_BIT:
 				return true;
 		}
 		return false;

@@ -14,7 +14,7 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/stone/polished",
-        "particle": "immersivegeology:block/greyscale/stone/polished"
+        "all": "immersive_geology:block/greyscale/stone/polished",
+        "particle": "immersive_geology:block/greyscale/stone/polished"
     }
 }

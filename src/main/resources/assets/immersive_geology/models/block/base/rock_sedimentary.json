@@ -14,8 +14,8 @@
         }
     ],
     "textures": {
-        "all": "immersivegeology:block/greyscale/rock/rock_sedimentary",
-        "side": "immersivegeology:block/greyscale/rock/rock_sedimentary_side",
-        "particle": "immersivegeology:block/greyscale/rock/rock_sedimentary" 
+        "all": "immersive_geology:block/greyscale/rock/rock_sedimentary",
+        "side": "immersive_geology:block/greyscale/rock/rock_sedimentary_side",
+        "particle": "immersive_geology:block/greyscale/rock/rock_sedimentary"
     }
 }

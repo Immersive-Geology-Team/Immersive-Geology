@@ -6,7 +6,11 @@ import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockReader;
 
 public class BlockBase extends Block {
 
@@ -24,7 +28,7 @@ public class BlockBase extends Block {
         itemBlock.setRegistryName(registryName.toLowerCase());
         blockMaterial = material;
         blockUseType = useType;
-        holder_name = registryName;
+        holder_name = registryName.toLowerCase();
     }
 
     @Override
@@ -35,4 +39,14 @@ public class BlockBase extends Block {
     public String getHolderName(){
         return holder_name;
     }
+
+    public MaterialUseType getBlockUseType() {
+        return blockUseType;
+    }
+
+    public Material getMaterial(){
+        return blockMaterial;
+    }
+
+
 }

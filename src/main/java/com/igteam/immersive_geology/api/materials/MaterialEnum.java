@@ -76,6 +76,11 @@ public enum MaterialEnum {
     Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
 
+    //Stones
+    Igneous_Intrusive(new MaterialStoneVanillaIntrusive()),
+    Igneous_Extrusive(new MaterialStoneVanillaExtrusive()),
+    Metamorphic(new MaterialStoneVanillaMetamorphic()),
+    Sedimentary(new MaterialStoneVanillaSedimentary()),
     //Fluids
     Water(new MaterialFluidWater()),
     Brine(new MaterialFluidBrine());
