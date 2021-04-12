@@ -59,7 +59,7 @@ public class MaterialStoneVanilla extends MaterialStoneBase
     @Override
     public int getColor(int temperature)
     {
-        return 0x7a7974;
+        return temperature == 1 ? 0xFFFFFF : 0x8F8F8F;
     }
 
     //Needs to be changed in code for subtypes, such as sheetmetal
@@ -98,6 +98,6 @@ public class MaterialStoneVanilla extends MaterialStoneBase
     @Override
     public EnumStoneType getStoneType()
     {
-        return EnumStoneType.IGNEOUS_EXTRUSIVE;
+        return EnumStoneType.VANILLA;
     }
 }

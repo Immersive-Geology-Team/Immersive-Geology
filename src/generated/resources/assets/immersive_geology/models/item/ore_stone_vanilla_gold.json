@@ -1,8 +1,8 @@
 {
-  "parent": "immersive_geology:block/base/rock_igneous_extrusive",
+  "parent": "immersive_geology:block/base/rock_vanilla",
   "textures": {
-    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/igneous_extrusive/igneous_extrusive_normal",
-    "base": "immersive_geology:block/greyscale/rock/rock_igneous_extrusive"
+    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/vanilla/vanilla_normal",
+    "base": "immersive_geology:block/greyscale/rock/rock_vanilla"
   },
   "elements": [
     {
@@ -19,27 +19,27 @@
       "faces": {
         "down": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         },
         "north": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "texture": "#base",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     },
@@ -57,27 +57,27 @@
       "faces": {
         "down": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         },
         "up": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         },
         "north": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         },
         "south": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         },
         "west": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         },
         "east": {
           "texture": "#ore",
-          "tintindex": 1
+          "tintindex": 0
         }
       }
     }

@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import net.minecraft.item.Item;
@@ -14,11 +15,14 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class IGItemGroup extends ItemGroup {
+
+    private Logger log = ImmersiveGeology.getNewLogger();
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.natrual;
 
@@ -60,44 +64,36 @@ public class IGItemGroup extends ItemGroup {
                             list.add(item);
                             itemMap.put(use_type, list);
                         }
-                    } else if(item instanceof IGBlockItem) {
+                    }
+
+                    if(item instanceof IGBlockItem) {
                         IGBlockItem block_item = (IGBlockItem) item;
-                        MaterialUseType use_type = block_item.getUseType();
-                        if(itemMap.containsKey(use_type)){
-                            ArrayList<Item> list = itemMap.get(use_type);
-                            list.add(item);
-                            itemMap.replace(use_type, list);
-                        } else {
-                            ArrayList<Item> list = new ArrayList<>();
-                            list.add(item);
-                            itemMap.put(use_type, list);
+                        if(block_item.getBlock() instanceof BlockBase){
+                            BlockBase block = ((BlockBase) block_item.getBlock());
+                            MaterialUseType use_type = block.getBlockUseType();
+                            if(!itemMap.containsKey(use_type)){
+                                ArrayList<Item> list = new ArrayList<>();
+                                list.add(item);
+                                itemMap.put(use_type, list);
+                            } else {
+                                ArrayList<Item> list = itemMap.get(use_type);
+                                list.add(item);
+                                itemMap.replace(use_type, list);
+                            }
                         }
                     }
+
                 }
             }
         }
 
-        for(ArrayList<Item> list : itemMap.values()){
-            for(Item item : list){
-                item.fillItemGroup(this, items);
-            }
-        }
-    }
-
-    public void empty(){
-
-    }
-
-    public NonNullList<ItemStack> getCurrentList() {
-        NonNullList<ItemStack> list = NonNullList.create();
-        for(Item item : Registry.ITEM) {
-            if(item instanceof IGSubGroup) {
-                IGSubGroup itm = (IGSubGroup)item;
-                if(itm.getSubGroup() == selectedGroup) {
-                    item.fillItemGroup(ImmersiveGeology.IGGroup, list);
+        for(MaterialUseType key : MaterialUseType.values()){
+            ArrayList<Item> list = itemMap.get(key);
+            if(list != null) {
+                for (Item item : list) {
+                    item.fillItemGroup(this, items);
                 }
             }
         }
-        return list;
     }
 }

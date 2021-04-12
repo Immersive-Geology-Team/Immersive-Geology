@@ -14,7 +14,7 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockBase extends Block {
 
-    protected Item itemBlock;
+    protected final Item itemBlock;
 
     protected Material blockMaterial;
     protected MaterialUseType blockUseType;
@@ -23,6 +23,16 @@ public class BlockBase extends Block {
 
     public BlockBase(String registryName, Material material, MaterialUseType useType) {
         super(material.getMaterialBlockProperties());
+        this.setRegistryName(registryName.toLowerCase());
+        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material);
+        itemBlock.setRegistryName(registryName.toLowerCase());
+        blockMaterial = material;
+        blockUseType = useType;
+        holder_name = registryName.toLowerCase();
+    }
+
+    public BlockBase(String registryName, Material material, MaterialUseType useType, Properties properties) {
+        super(properties);
         this.setRegistryName(registryName.toLowerCase());
         this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material);
         itemBlock.setRegistryName(registryName.toLowerCase());

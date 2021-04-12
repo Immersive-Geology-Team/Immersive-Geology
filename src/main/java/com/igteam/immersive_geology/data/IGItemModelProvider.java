@@ -1,7 +1,9 @@
 package com.igteam.immersive_geology.data;
 
+import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
+import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -39,9 +41,15 @@ public class IGItemModelProvider extends ItemModelProvider {
                         withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/rock_" + stone_name));
                         getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/" + stone_name + "/" + stone_name + "_normal");
                         getBuilder(builder_name).texture("base", IGLib.MODID + ":block/greyscale/rock/rock_" + stone_name);
-                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(0).uvs(0, 0, 16, 16)));
-                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(1).uvs(0, 0, 16, 16)));
+                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(1).uvs(0, 0, 16, 16)));
+                        getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(0).uvs(0, 0, 16, 16)));
+                    } else {
+                        BlockBase baseBlock = (BlockBase) blockItem.getBlock();
+                        String builder_name = new ResourceLocation(IGLib.MODID, "item/"+baseBlock.getHolderName()).getPath();
+                        withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + baseBlock.getBlockUseType().getName()));
                     }
+                } else if(item instanceof IGOreItem) {
+                    genericOreItem(item);
                 } else if (item instanceof ItemBase) {
                     genericItem(item);
                 }
@@ -59,6 +67,16 @@ public class IGItemModelProvider extends ItemModelProvider {
         }
         ItemBase i = (ItemBase) item;
         withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
+    }
+
+    private void genericOreItem(Item item){
+        if(item == null){
+            StackTraceElement where = new NullPointerException().getStackTrace()[1];
+            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            return;
+        }
+        IGOreItem i = (IGOreItem) item;
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/ore_" + i.getUseType().getName()));
     }
 
     private void createBucket(Fluid f){

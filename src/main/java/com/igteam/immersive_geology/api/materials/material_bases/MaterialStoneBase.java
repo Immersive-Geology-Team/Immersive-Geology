@@ -60,7 +60,8 @@ public abstract class MaterialStoneBase extends Material
 		IGNEOUS_INTRUSIVE,
 		IGNEOUS_EXTRUSIVE,
 		METAMORPHIC,
-		SEDIMENTARY;
+		SEDIMENTARY,
+		VANILLA;
 
 		public String getName()
 		{

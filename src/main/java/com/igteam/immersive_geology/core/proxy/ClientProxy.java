@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.client.IEDefaultColourHandlers;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
+import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onClientSetup(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
+        RenderLayerHandler.init();
         registerItemColors();
         registerBlockColors();
     }

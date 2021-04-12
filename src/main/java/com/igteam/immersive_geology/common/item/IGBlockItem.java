@@ -15,10 +15,10 @@ import net.minecraft.util.math.MathHelper;
 
 public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfaces.IColouredItem {
 
-    private ItemSubGroup subGroup;
-    private String holder_name;
-    private Material itemMaterial;
-    private MaterialUseType useType;
+    private final ItemSubGroup subGroup;
+    private final String holder_name;
+    private final Material itemMaterial;
+    private final MaterialUseType useType;
 
     public IGBlockItem(BlockBase blockIn, ItemSubGroup subGroup, Material material){
         super(blockIn, new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(material.getRarity()));
@@ -52,7 +52,7 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
             materials[0] = oreBlock.getOreBase();
             materials[1] = itemMaterial;
 
-            return materials[MathHelper.clamp(pass,0,materials.length-1)].getColor(0);
+            return materials[MathHelper.clamp(pass,0,materials.length-1)].getColor(1);
         } else {
 
             return itemMaterial.getColor(0);

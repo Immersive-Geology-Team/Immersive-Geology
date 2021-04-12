@@ -34,10 +34,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     String base_name = oreBlock.getStoneBase().getName(); //gets the name metamorphic and such
                     String ore_name = oreBlock.getOreBase().getName();
 
-                    BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + ore_name + "_" + base_name).getPath(),
-                            new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + oreBlock.getStoneBase().getStoneType().getName().toLowerCase()));
+                    BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
+                            new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + oreBlock.getStoneBase().getStoneType().getName().toLowerCase()))
+                            .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
                     getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
-
 
                 } else if (block instanceof BlockBase) {
                     getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + ((BlockBase) block).getBlockUseType().getName() + "_" + ((BlockBase) block).getMaterial().getName()).getPath(),
