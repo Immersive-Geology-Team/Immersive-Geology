@@ -9,13 +9,13 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialStoneVanillaExtrusive extends MaterialStoneBase
+public class MaterialStoneVanilla extends MaterialStoneBase
 {
     //Rhyolite is the default minecraft stone, renamed
     @Override
     public String getName()
     {
-        return "extrusive";
+        return "vanilla";
     }
 
     @Nonnull

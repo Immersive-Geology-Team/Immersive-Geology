@@ -1,7 +1,10 @@
 package com.igteam.immersive_geology.client.menu.helper;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.common.item.IGBlockItem;
+import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -22,6 +25,7 @@ import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class CreativeMenuHandler {
@@ -73,29 +77,8 @@ public class CreativeMenuHandler {
                 ItemSubGroup currentGroup = ItemSubGroup.values()[iteration];
 
                 CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 166 + 7, j + 46 + (23 * iteration),button1 -> {
-                    IGItemGroup.updateSubGroup(currentGroup);
-                    gui.getContainer().setAll(new ArrayList<ItemStack>());
-                    PlayerInventory playerinventory = gui.getMinecraft().player.inventory;
-                    gui.getContainer().inventorySlots.forEach((slot) -> {
-                        if(slot.inventory != playerinventory){
-                            slot.putStack(ItemStack.EMPTY);
-                        }
-                    });
-
-                    ImmersiveGeology.IGGroup.fill(gui.getContainer().itemList);
-
-                    int slotIteration = 0;
-                    for(int l = 0; l < gui.getContainer().inventorySlots.size(); l++) {
-                        Slot slot = gui.getContainer().inventorySlots.get(l);
-                        if(slot.inventory != playerinventory){
-                            if(slotIteration < gui.getContainer().itemList.size()) {
-                                slot.putStack(gui.getContainer().itemList.get(slotIteration));
-                                slotIteration++;
-                            }
-                        }
-                    }
-                    //resize the gui to the same size, quick way to get it to update the content
-                    gui.resize(gui.getMinecraft(), gui.width, gui.height);
+                    IGItemGroup.updateSubGroup(currentGroup); //Update the sub-group
+                    gui.resize(gui.getMinecraft(), gui.width, gui.height); //resize the gui to the same size, quick way to get it to update the content
                 });
 
                 subGroupButtons.add(button);

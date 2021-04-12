@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.common.item;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.BlockBase;
@@ -17,12 +18,14 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
     private ItemSubGroup subGroup;
     private String holder_name;
     private Material itemMaterial;
+    private MaterialUseType useType;
 
     public IGBlockItem(BlockBase blockIn, ItemSubGroup subGroup, Material material){
         super(blockIn, new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(material.getRarity()));
         this.subGroup = subGroup;
         this.holder_name = blockIn.getHolderName();
         this.itemMaterial = material;
+        this.useType = blockIn.getBlockUseType();
     }
 
     @Override
@@ -33,7 +36,6 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
     public String getHolderName(){
         return holder_name;
     }
-
 
     @Override
     public boolean hasCustomItemColours()
@@ -55,5 +57,9 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
 
             return itemMaterial.getColor(0);
         }
+    }
+
+    public MaterialUseType getUseType(){
+        return useType;
     }
 }

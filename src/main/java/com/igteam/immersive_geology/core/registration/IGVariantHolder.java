@@ -17,19 +17,14 @@ public class IGVariantHolder {
     public static void createVariants(Material mat) {
         log.info("Creating " +  mat.getName().toUpperCase() + " Variants");
         for(MaterialUseType type : MaterialUseType.values()) {
-            if(mat.hasSubtype(type)) {
-                log.info("Registering " + type.getName().toUpperCase());
-                if(type.isBlock()) {
-                    if(mat.hasSubtype(MaterialUseType.ORE_STONE) && !mat.hasSubtype(MaterialUseType.STONE)){
-                        for(MaterialEnum base : MaterialEnum.values()) {
-                            if(base.getMaterial().hasSubtype(MaterialUseType.STONE)) {
-                                createBlockVariants(base.getMaterial(), mat, type);
-                            }
-                        }
+            if(type != MaterialUseType.ORE_STONE) {
+                if (mat.hasSubtype(type)) {
+                    log.info("Registering " + type.getName().toUpperCase());
+                    if (type.isBlock()) {
+                        createBlockVariants(mat, type);
+                    } else {
+                        createItemVariants(mat, type);
                     }
-                    createBlockVariants(mat, type);
-                } else {
-                    createItemVariants(mat, type);
                 }
             }
         }
@@ -41,14 +36,34 @@ public class IGVariantHolder {
         IGRegistrationHolder.registeredIGItems.put(holder_key, item);
     }
 
-    private static void createBlockVariants(Material materialBase, Material materialOre, MaterialUseType type){
-            String holder_key = type.getName() + "_" + materialOre.getName() + "_" + materialBase.getName();
-            log.info("Registering special type: " + holder_key);
-            IGOreBlock block = new IGOreBlock(holder_key, new Material[]{materialBase, materialOre}, type);
-            IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
-            IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
+    private static void registerOreBlock(Material materialBase){
+        Material materialOre = null;
+        MaterialUseType type = MaterialUseType.ORE_STONE;
+        for(MaterialEnum container : MaterialEnum.values()) {
+            materialOre = container.getMaterial();
+            if (materialOre != null) {
+                if (materialOre.hasSubtype(MaterialUseType.ORE_STONE)) {
+                    String holder_key = type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName();
+                    log.info("Registering special type: " + holder_key);
+                    IGOreBlock block = new IGOreBlock(holder_key, new Material[]{materialBase, materialOre}, type);
+                    IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
+                    IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
+                }
+            }
+        }
     }
+
     private static void createBlockVariants(Material material, MaterialUseType type){
+        switch(type){
+            case STONE:
+               registerOreBlock(material);
+               registerBasicBlock(material, type);
+            default:
+                registerBasicBlock(material, type);
+        }
+    }
+
+    private static void registerBasicBlock(Material material, MaterialUseType type){
         String holder_key = type.getName() + "_" + material.getName();
         BlockBase block = new BlockBase(holder_key, material, type);
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);

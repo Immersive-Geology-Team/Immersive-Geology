@@ -11,10 +11,7 @@ import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.Ma
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.MaterialMetalElectrum;
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.MaterialMetalSteel;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
-import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanillaExtrusive;
-import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanillaIntrusive;
-import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanillaMetamorphic;
-import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanillaSedimentary;
+import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanilla;
 
 public enum MaterialEnum {
     //Empty
@@ -77,10 +74,8 @@ public enum MaterialEnum {
     Vanadinite(new MaterialMineralVanadinite()),
 
     //Stones
-    Igneous_Intrusive(new MaterialStoneVanillaIntrusive()),
-    Igneous_Extrusive(new MaterialStoneVanillaExtrusive()),
-    Metamorphic(new MaterialStoneVanillaMetamorphic()),
-    Sedimentary(new MaterialStoneVanillaSedimentary()),
+    Vanilla(new MaterialStoneVanilla()),
+
     //Fluids
     Water(new MaterialFluidWater()),
     Brine(new MaterialFluidBrine());
