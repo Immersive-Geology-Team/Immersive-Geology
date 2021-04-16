@@ -1,7 +1,10 @@
-package com.igteam.immersive_geology.data;
+package com.igteam.immersive_geology.core.data;
 
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.core.data.generators.IGBlockStateProvider;
+import com.igteam.immersive_geology.core.data.generators.IGItemModelProvider;
+import com.igteam.immersive_geology.core.data.generators.loot.IGLootTableProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -20,6 +23,10 @@ public class IGDataProvider {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper exhelper = event.getExistingFileHelper();
         StaticTemplateManager.EXISTING_HELPER = exhelper;
+
+        if(event.includeServer()){
+            generator.addProvider(new IGLootTableProvider(generator));
+        }
 
         if(event.includeClient()){
             generator.addProvider(new IGItemModelProvider(generator, exhelper));

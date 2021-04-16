@@ -2,7 +2,6 @@ package com.igteam.immersive_geology.common.item;
 
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 

@@ -1,10 +1,12 @@
-package com.igteam.immersive_geology.data;
+package com.igteam.immersive_geology.core.data.generators;
 
 import com.igteam.immersive_geology.common.block.BlockBase;
-import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
+import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import com.igteam.immersive_geology.core.data.IGDataProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
@@ -37,7 +39,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                     if(blockItem.getBlock() instanceof IGOreBlock) {
                         IGOreBlock oreBlock = (IGOreBlock) blockItem.getBlock();
                         String builder_name = new ResourceLocation(IGLib.MODID, "item/"+oreBlock.getHolderName()).getPath();
-                        String stone_name = oreBlock.getStoneBase().getStoneType().getName().toLowerCase();
+                        String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
                         withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/rock_" + stone_name));
                         getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/" + stone_name + "/" + stone_name + "_normal");
                         getBuilder(builder_name).texture("base", IGLib.MODID + ":block/greyscale/rock/rock_" + stone_name);

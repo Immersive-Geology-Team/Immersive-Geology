@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.BlockBase;
+import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import net.minecraft.item.Item;
@@ -68,8 +69,8 @@ public class IGItemGroup extends ItemGroup {
 
                     if(item instanceof IGBlockItem) {
                         IGBlockItem block_item = (IGBlockItem) item;
-                        if(block_item.getBlock() instanceof BlockBase){
-                            BlockBase block = ((BlockBase) block_item.getBlock());
+                        if(block_item.getBlock() instanceof IGBlockType){
+                            IGBlockType block = ((IGBlockType) block_item.getBlock());
                             MaterialUseType use_type = block.getBlockUseType();
                             if(!itemMap.containsKey(use_type)){
                                 ArrayList<Item> list = new ArrayList<>();

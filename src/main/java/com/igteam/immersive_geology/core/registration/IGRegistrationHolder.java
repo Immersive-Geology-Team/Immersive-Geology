@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,7 +20,7 @@ import java.util.SortedMap;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class IGRegistrationHolder {
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
-    public static HashMap<String, Block> registeredIGBlocks = new HashMap<>();
+    public static HashMap<String, IGBlockType> registeredIGBlocks = new HashMap<>();
 
     private static Logger log = ImmersiveGeology.getNewLogger();
 
@@ -39,7 +40,7 @@ public class IGRegistrationHolder {
         });
 
         registeredIGBlocks.values().forEach((block) ->{
-            event.getRegistry().register(block);
+            event.getRegistry().register(block.getSelf());
         });
     }
 
@@ -47,15 +48,23 @@ public class IGRegistrationHolder {
         return registeredIGItems.get(getRegistryKey(material, useType));
     }
 
-    public static Item getItemByMaterial(Material materialBase, Material materialOre, MaterialUseType type, MaterialStoneBase.EnumStoneType stoneType){
-        return registeredIGItems.get(getRegistryKey(materialBase, materialOre, type, stoneType));
+    public static Item getItemByMaterial(Material materialBase, Material materialOre, MaterialUseType type){
+        return registeredIGItems.get(getRegistryKey(materialBase, materialOre, type));
     }
 
     public static String getRegistryKey(Material mat, MaterialUseType useType){
         return (useType.getName() + "_" + mat.getName()).toLowerCase();
     }
 
-    public static String getRegistryKey(Material materialBase, Material materialOre, MaterialUseType type, MaterialStoneBase.EnumStoneType stoneType){
-        return (type.getName() + "_" + materialOre.getName() + "_" + materialBase.getName() + stoneType.getName());
+    public static String getRegistryKey(Material materialBase, Material materialOre, MaterialUseType type){
+        return (type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName());
+    }
+
+    public static Block getBlockByMaterial(MaterialUseType useType, Material material) {
+        return registeredIGBlocks.get(getRegistryKey(material, useType)).getSelf();
+    }
+
+    public static Block getBlockByMaterial(Material base_material, Material ore_material, MaterialUseType type){
+        return registeredIGBlocks.get(getRegistryKey(base_material, ore_material, type)).getSelf();
     }
 }

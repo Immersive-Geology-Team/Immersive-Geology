@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
+import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -31,9 +32,9 @@ public class ClientProxy extends ServerProxy {
     }
 
     private void registerBlockColors(){
-        for(Block block : IGRegistrationHolder.registeredIGBlocks.values()){
-            if(block instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block).hasCustomBlockColours()){
-                Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
+        for(IGBlockType block : IGRegistrationHolder.registeredIGBlocks.values()){
+            if(block.getSelf() instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block.getSelf()).hasCustomBlockColours()){
+                Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block.getSelf());
             }
         }
     }
