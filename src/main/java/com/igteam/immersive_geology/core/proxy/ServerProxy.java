@@ -9,7 +9,7 @@ public class ServerProxy implements Proxy {
 
     @Override
     public void onSetup(FMLCommonSetupEvent event) {
-        LootIG.initialize();
+
     }
 
     @Override

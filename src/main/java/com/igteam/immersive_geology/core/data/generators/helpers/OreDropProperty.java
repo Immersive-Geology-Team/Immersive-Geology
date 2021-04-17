@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 public class OreDropProperty extends LootFunction {
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "variable_ore_drops");
 
-    private OreDropProperty(ILootCondition[] conditions) {
+    public OreDropProperty(ILootCondition[] conditions) {
         super(conditions);
     }
 

@@ -7,6 +7,7 @@
 package com.igteam.immersive_geology;
 
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.core.data.generators.helpers.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -38,6 +39,8 @@ public class ImmersiveGeology
 		// Register short-hand variables
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+		LootIG.initialize();
 
 		modBus.addListener(this::setup);
 		modBus.addListener(this::onFinishSetup);
