@@ -57,7 +57,7 @@ public enum MaterialEnum {
     Chromite(new MaterialMineralChromite()),
     Cryolite(new MaterialMineralCryolite()),
     Ferberite(new MaterialMineralFerberite()),
-    Fluorite(new MaterialMineralFluorite()),
+    //Fluorite(new MaterialMineralFluorite()),  //TODO Immersive Engineering has trouble with this as it's looking for a GEM version under the tag forge:gem/fluorite
     Gypsum(new MaterialMineralGypsum()),
     Hematite(new MaterialMineralHematite()),
     Hubnerite(new MaterialMineralHubnerite()),
@@ -72,6 +72,7 @@ public enum MaterialEnum {
     Pyrite(new MaterialMineralPyrite()),
     Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
+    Unobtainium(new MaterialMetalUnobtanium()),
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),

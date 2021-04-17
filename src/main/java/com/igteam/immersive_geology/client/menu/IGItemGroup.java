@@ -4,7 +4,6 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
@@ -25,7 +24,7 @@ public class IGItemGroup extends ItemGroup {
 
     private Logger log = ImmersiveGeology.getNewLogger();
 
-    public static ItemSubGroup selectedGroup = ItemSubGroup.natrual;
+    public static ItemSubGroup selectedGroup = ItemSubGroup.natural;
 
     public IGItemGroup(String label){
         super(label);

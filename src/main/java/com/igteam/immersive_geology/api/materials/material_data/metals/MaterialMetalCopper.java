@@ -106,4 +106,49 @@ public class MaterialMetalCopper extends MaterialMetalBase
 	{
 		return IGContent.;
 	}*/
+
+	public boolean hasIngot()
+	{
+		return true;
+	}
+
+	public boolean hasNugget()
+	{
+		return true;
+	}
+
+	public boolean hasPlate()
+	{
+		return true;
+	}
+
+	public boolean hasRod()
+	{
+		return true;
+	}
+
+	public boolean hasGear()
+	{
+		return true;
+	}
+
+	public boolean hasWire()
+	{
+		return true;
+	}
+
+	public boolean hasSheetmetal()
+	{
+		return true;
+	}
+
+	public boolean hasDust()
+	{
+		return true;
+	}
+
+	public boolean hasDustBlock()
+	{
+		return true;
+	}
 }

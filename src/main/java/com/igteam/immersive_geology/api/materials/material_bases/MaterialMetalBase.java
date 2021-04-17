@@ -29,8 +29,9 @@ public abstract class MaterialMetalBase extends Material
 			case WIRE:
 				return hasWire();
 			case DUST:
+			case TINY_DUST:
 				return hasDust();
-			case SHEET_METAL:
+			case SHEETMETAL:
 				return hasSheetmetal();
 			case DUST_BLOCK:
 				return hasDustBlock();

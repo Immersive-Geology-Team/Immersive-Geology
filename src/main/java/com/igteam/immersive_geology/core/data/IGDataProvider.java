@@ -5,7 +5,10 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.data.generators.IGBlockStateProvider;
 import com.igteam.immersive_geology.core.data.generators.IGItemModelProvider;
 import com.igteam.immersive_geology.core.data.generators.loot.BlockLootProvider;
+import com.igteam.immersive_geology.core.data.generators.tags.IGBlockTagProvider;
+import com.igteam.immersive_geology.core.data.generators.tags.IGItemTagProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,6 +29,9 @@ public class IGDataProvider {
 
         if(event.includeServer()){
             generator.addProvider(new BlockLootProvider(generator));
+            BlockTagsProvider blockTagGen = new IGBlockTagProvider(generator, exhelper);
+            generator.addProvider(blockTagGen);
+            generator.addProvider(new IGItemTagProvider(generator,blockTagGen, exhelper));
         }
 
         if(event.includeClient()){

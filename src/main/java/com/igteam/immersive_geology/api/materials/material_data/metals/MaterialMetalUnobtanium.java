@@ -59,7 +59,7 @@ public class MaterialMetalUnobtanium extends MaterialMetalBase
 		return 4761;
 	}
 
-	public static int baseColor = 0x878681;
+	public static int baseColor = 0x232D1D;
 
 	@Override
 	public int getColor(int temperature)

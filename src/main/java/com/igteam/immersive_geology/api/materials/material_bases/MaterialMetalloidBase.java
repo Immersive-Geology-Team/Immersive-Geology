@@ -29,6 +29,7 @@ public abstract class MaterialMetalloidBase extends Material
 			case WIRE:
 				return hasWire();
 			case DUST:
+			case TINY_DUST:
 				return hasDust();
 			case FLUIDS:
 				return true;

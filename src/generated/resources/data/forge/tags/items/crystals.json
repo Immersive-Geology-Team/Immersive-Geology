@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:crystal_diamond",
+    "immersive_geology:crystal_phlebotinum",
+    "immersive_geology:crystal_quartz"
+  ]
+}

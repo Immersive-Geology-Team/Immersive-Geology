@@ -6,14 +6,18 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
+import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.HashMap;
+
 public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColouredItem {
 
-    private ItemSubGroup subGroup;
-    private MaterialUseType useType;
-    private Material itemMaterial;
+    protected ItemSubGroup subGroup;
+    protected MaterialUseType useType;
+    protected HashMap<BlockMaterialType, Material> itemMaterials = new HashMap<>();
 
     private String holding_name;
 
@@ -22,7 +26,7 @@ public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColo
         this.setRegistryName(registry_name.toLowerCase());
         this.useType = useType;
         this.holding_name = registry_name;
-        this.itemMaterial = material;
+        itemMaterials.put(BlockMaterialType.BASE_MATERIAL, material);
         setSubGroup(useType.getSubgroup());
     }
 
@@ -52,6 +56,10 @@ public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColo
     @Override
     public int getColourForIEItem(ItemStack stack, int pass)
     {
-        return itemMaterial.getColor(0);
+        return getMaterial(BlockMaterialType.BASE_MATERIAL).getColor(0);
+    }
+
+    public Material getMaterial(BlockMaterialType type) {
+        return itemMaterials.getOrDefault(type, itemMaterials.get(BlockMaterialType.BASE_MATERIAL));
     }
 }

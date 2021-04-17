@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:wire_aluminum",
+    "immersive_geology:wire_chromium",
+    "immersive_geology:wire_copper",
+    "immersive_geology:wire_gold",
+    "immersive_geology:wire_iron",
+    "immersive_geology:wire_lead",
+    "immersive_geology:wire_manganese",
+    "immersive_geology:wire_nickel",
+    "immersive_geology:wire_platinum",
+    "immersive_geology:wire_silver",
+    "immersive_geology:wire_cobalt",
+    "immersive_geology:wire_uranium",
+    "immersive_geology:wire_tin",
+    "immersive_geology:wire_titanium",
+    "immersive_geology:wire_tungsten",
+    "immersive_geology:wire_vanadium",
+    "immersive_geology:wire_zirconium",
+    "immersive_geology:wire_zinc",
+    "immersive_geology:wire_constantan",
+    "immersive_geology:wire_electrum",
+    "immersive_geology:wire_steel",
+    "immersive_geology:wire_unobtanium"
+  ]
+}

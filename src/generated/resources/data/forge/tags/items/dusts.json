@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:dust_aluminum",
+    "immersive_geology:dust_chromium",
+    "immersive_geology:dust_copper",
+    "immersive_geology:dust_gold",
+    "immersive_geology:dust_iron",
+    "immersive_geology:dust_lead",
+    "immersive_geology:dust_manganese",
+    "immersive_geology:dust_nickel",
+    "immersive_geology:dust_platinum",
+    "immersive_geology:dust_silver",
+    "immersive_geology:dust_cobalt",
+    "immersive_geology:dust_uranium",
+    "immersive_geology:dust_tin",
+    "immersive_geology:dust_titanium",
+    "immersive_geology:dust_tungsten",
+    "immersive_geology:dust_vanadium",
+    "immersive_geology:dust_zirconium",
+    "immersive_geology:dust_zinc",
+    "immersive_geology:dust_constantan",
+    "immersive_geology:dust_electrum",
+    "immersive_geology:dust_steel",
+    "immersive_geology:dust_diamond",
+    "immersive_geology:dust_phlebotinum",
+    "immersive_geology:dust_quartz",
+    "immersive_geology:dust_unobtanium"
+  ]
+}
