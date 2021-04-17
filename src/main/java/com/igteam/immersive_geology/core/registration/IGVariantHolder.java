@@ -40,6 +40,7 @@ public class IGVariantHolder {
             case CHUNK:
                 registerOreItem(material, type);
                 registerBasicItem(material, type);
+                break;
             default:
                 registerBasicItem(material, type);
         }
@@ -51,13 +52,17 @@ public class IGVariantHolder {
             materialOre = container.getMaterial();
             if(materialOre != null){
                 if(materialOre.hasSubtype(MaterialUseType.ORE_STONE)){
-                    String holder_key = type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName();
+                    String holder_key = getOreType(type).getName() + "_" + materialBase.getName() + "_" + materialOre.getName();
                     log.info("Registering special type: " + holder_key);
-                    IGOreItem item = new IGOreItem(holder_key, new Material[]{materialBase, materialOre}, type);
+                    IGOreItem item = new IGOreItem(holder_key, new Material[]{materialBase, materialOre}, getOreType(type));
                     IGRegistrationHolder.registeredIGItems.put(holder_key, item);
                 }
             }
         }
+    }
+
+    private static MaterialUseType getOreType(MaterialUseType type){
+        return type == MaterialUseType.ROCK_BIT ? MaterialUseType.ORE_BIT : MaterialUseType.ORE_CHUNK;
     }
 
     private static void registerBasicItem(Material material, MaterialUseType type){

@@ -59,7 +59,7 @@ public class BlockLootProvider implements IDataProvider {
                 IGBlockType blockType = ((IGBlockType) b);
                 if(b.getBlock() instanceof IGOreBlock) {
                     IGOreBlock oreBlock = (IGOreBlock) b.getBlock();
-                    Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.CHUNK);
+                    Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
                     functionTable.put(b, (block) -> LootTable.builder()
                             .addLootPool(LootPool.builder()
                                     .rolls(RandomValueRange.of(1F, 1F))

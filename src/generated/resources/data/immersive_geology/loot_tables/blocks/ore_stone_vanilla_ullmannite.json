@@ -11,7 +11,7 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
-          "name": "immersive_geology:chunk_vanilla_ullmannite"
+          "name": "immersive_geology:ore_chunk_vanilla_ullmannite"
         }
       ]
     }

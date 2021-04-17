@@ -78,7 +78,7 @@ public class IGItemModelProvider extends ItemModelProvider {
             return;
         }
         IGOreItem i = (IGOreItem) item;
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/ore_" + i.getUseType().getName()));
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
     }
 
     private void createBucket(Fluid f){
