@@ -40,6 +40,16 @@ public class IGItemTagProvider extends ItemTagsProvider {
                         case ORE_CHUNK:
                         case ORE_STONE:
                             break;
+                        case CRYSTAL:
+                        case CUT_CRYSTAL:
+                            if (container.getMaterial().hasSubtype(useType)) {
+                                this.tag(Tags.Items.GEMS).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                                this.tag(requestCustomTag("gems", container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+
+                                this.tag(requestUsetypeTag(useType)).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                                this.tag(requestUsetypeTag(useType, container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                            }
+                            break;
                         case ROCK_BIT:
                             //Add ore variants
                             for (MaterialEnum ore : MaterialEnum.values()) {
@@ -113,6 +123,10 @@ public class IGItemTagProvider extends ItemTagsProvider {
             default:
                 return TagsIG.itemTagForge(useType.getName().toLowerCase() + "s");
         }
+    }
+
+    private ITag.INamedTag<Item> requestCustomTag(String base, Material material){
+        return TagsIG.itemTagForge(base + "/" + material.getName().toLowerCase());
     }
 
     private ITag.INamedTag<Item> requestOreUsetypeTag(Material material) {

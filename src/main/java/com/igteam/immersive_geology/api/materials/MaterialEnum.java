@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
+import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalGlowstone;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalPhlebotinum;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalQuartz;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
@@ -44,6 +45,7 @@ public enum MaterialEnum {
     //Crystals
     Diamond(new MaterialCrystalDiamond()),
     Phlebotinum(new MaterialCrystalPhlebotinum()),
+    Glowstone(new MaterialCrystalGlowstone()),
     Quartz(new MaterialCrystalQuartz()),
 
     //Minerals
@@ -57,7 +59,7 @@ public enum MaterialEnum {
     Chromite(new MaterialMineralChromite()),
     Cryolite(new MaterialMineralCryolite()),
     Ferberite(new MaterialMineralFerberite()),
-    //Fluorite(new MaterialMineralFluorite()),  //TODO Immersive Engineering has trouble with this as it's looking for a GEM version under the tag forge:gem/fluorite
+    Fluorite(new MaterialMineralFluorite()),  //TODO Immersive Engineering has trouble with this as it's looking for a GEM version under the tag forge:gem/fluorite
     Gypsum(new MaterialMineralGypsum()),
     Hematite(new MaterialMineralHematite()),
     Hubnerite(new MaterialMineralHubnerite()),

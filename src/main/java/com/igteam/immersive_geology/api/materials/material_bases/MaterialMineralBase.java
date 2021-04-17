@@ -16,6 +16,9 @@ public abstract class MaterialMineralBase extends Material
 	{
 		switch(useType)
 		{
+			case CRYSTAL:
+			case CUT_CRYSTAL:
+				return hasCrystal();
 			case ORE_STONE:
 			case ORE_BIT:
 			case ORE_CHUNK:
@@ -31,6 +34,10 @@ public abstract class MaterialMineralBase extends Material
 		if(useType==MaterialUseType.ORE_STONE)
 			return EnumStoneType.SEDIMENTARY.getName();
 		return null;
+	}
+
+	protected boolean hasCrystal(){
+		return getMineralType() == EnumMineralType.CRYSTAL;
 	}
 
 	@Override
@@ -53,7 +60,10 @@ public abstract class MaterialMineralBase extends Material
 
 	public enum EnumMineralType
 	{
-		MINERAL
+		NATIVE,
+		CRYSTAL,
+		FUEL,
+		CLAY
 	}
 
 	public int getStaticColor()

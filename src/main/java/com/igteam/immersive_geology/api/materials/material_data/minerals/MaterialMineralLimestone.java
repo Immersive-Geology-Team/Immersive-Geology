@@ -46,7 +46,7 @@ public class MaterialMineralLimestone extends MaterialMineralBase
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CLAY;
 	}
 
 	@Override

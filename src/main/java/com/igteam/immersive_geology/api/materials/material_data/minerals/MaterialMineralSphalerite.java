@@ -54,7 +54,7 @@ public class MaterialMineralSphalerite extends MaterialMineralBase
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CRYSTAL;
 	}
 
 	public static int baseColor = 0x6F8070;

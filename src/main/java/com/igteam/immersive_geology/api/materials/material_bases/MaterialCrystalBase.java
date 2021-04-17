@@ -50,7 +50,7 @@ public abstract class MaterialCrystalBase extends Material
 
 	public boolean hasCutCrystal()
 	{
-		return false;
+		return true;
 	}
 
 	public boolean hasCrystal()

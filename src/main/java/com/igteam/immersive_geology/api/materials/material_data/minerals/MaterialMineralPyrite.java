@@ -52,7 +52,7 @@ public class MaterialMineralPyrite  extends MaterialMineralBase
     @Override
     public EnumMineralType getMineralType()
     {
-        return EnumMineralType.MINERAL;
+        return EnumMineralType.CRYSTAL;
     }
 
     public static int baseColor = 0xD6C380;

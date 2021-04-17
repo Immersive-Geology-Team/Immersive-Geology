@@ -45,7 +45,7 @@ public class MaterialMineralChalcopyrite extends MaterialMineralBase
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CRYSTAL;
 	}
 
 	@Override

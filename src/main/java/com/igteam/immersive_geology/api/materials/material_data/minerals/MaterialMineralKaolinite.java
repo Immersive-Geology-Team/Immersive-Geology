@@ -28,7 +28,7 @@ public class MaterialMineralKaolinite extends MaterialMineralBase {
 	@Override
 	public EnumMineralType getMineralType() {
 		// TODO Auto-generated method stub
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CLAY;
 	}
 
 	@Override

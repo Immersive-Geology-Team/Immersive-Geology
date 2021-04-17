@@ -30,7 +30,7 @@ public class MaterialMineralZircon extends MaterialMineralBase
 	public EnumMineralType getMineralType()
 	{
 		// TODO Auto-generated method stub
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CRYSTAL;
 	}
 
 	@Override

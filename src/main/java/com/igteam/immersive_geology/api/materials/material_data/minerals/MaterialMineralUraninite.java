@@ -53,7 +53,7 @@ public class MaterialMineralUraninite extends MaterialMineralBase
 	@Override
 	public EnumMineralType getMineralType()
 	{
-		return EnumMineralType.MINERAL;
+		return EnumMineralType.CRYSTAL;
 	}
 
 	public static int baseColor = 0xB2BEB5;
