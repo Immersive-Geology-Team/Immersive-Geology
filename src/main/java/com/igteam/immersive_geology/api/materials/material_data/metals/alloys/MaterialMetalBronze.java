@@ -10,12 +10,12 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialMetalElectrum extends MaterialMetalBase
+public class MaterialMetalBronze extends MaterialMetalBase
 {
 	@Override
 	public String getName()
 	{
-		return "electrum";
+		return "bronze";
 	}
 
 	@Nonnull
@@ -35,35 +35,38 @@ public class MaterialMetalElectrum extends MaterialMetalBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.GOLD),
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILVER)));
+				new ElementProportion(PeriodicTableElement.COPPER,3),
+				new ElementProportion(PeriodicTableElement.TIN)));
 	}
 
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.RARE;
+		return Rarity.COMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		return 3243;
-	} //Actually separates at melting point
+		return 2573;
+	}
 
 	@Override
-	public int getMeltingPoint() { return 1063; }
+	public int getMeltingPoint()
+	{
+		return 1183; //TODO could not find exact melting point, chose a value between gold and silver leaning more to silvers
+	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x94826A;
+		return 0xb56d46;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		return 1.75f;
+		return 2.45f;
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class MaterialMetalElectrum extends MaterialMetalBase
 	@Override
 	public float getBlastResistance()
 	{
-		return 4;
+		return 8;
 	}
 
 	@Override
