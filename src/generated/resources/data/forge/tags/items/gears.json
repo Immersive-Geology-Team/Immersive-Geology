@@ -22,6 +22,8 @@
     "immersive_geology:gear_constantan",
     "immersive_geology:gear_electrum",
     "immersive_geology:gear_steel",
+    "immersive_geology:gear_viking_steel",
+    "immersive_geology:gear_bronze",
     "immersive_geology:gear_unobtanium"
   ]
 }

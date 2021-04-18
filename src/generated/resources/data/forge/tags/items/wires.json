@@ -22,6 +22,8 @@
     "immersive_geology:wire_constantan",
     "immersive_geology:wire_electrum",
     "immersive_geology:wire_steel",
+    "immersive_geology:wire_viking_steel",
+    "immersive_geology:wire_bronze",
     "immersive_geology:wire_unobtanium"
   ]
 }

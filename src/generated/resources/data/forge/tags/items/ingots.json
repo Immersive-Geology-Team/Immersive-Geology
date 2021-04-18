@@ -22,6 +22,8 @@
     "immersive_geology:ingot_constantan",
     "immersive_geology:ingot_electrum",
     "immersive_geology:ingot_steel",
+    "immersive_geology:ingot_viking_steel",
+    "immersive_geology:ingot_bronze",
     "immersive_geology:ingot_unobtanium"
   ]
 }

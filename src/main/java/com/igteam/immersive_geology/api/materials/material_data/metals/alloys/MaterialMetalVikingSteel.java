@@ -69,7 +69,7 @@ public class MaterialMetalVikingSteel extends MaterialMetalBase
 	@Override
 	public float getHardness()
 	{
-		return 2.65f;
+		return 2.85f;
 	}
 
 	@Override

@@ -22,6 +22,8 @@
     "immersive_geology:nugget_constantan",
     "immersive_geology:nugget_electrum",
     "immersive_geology:nugget_steel",
+    "immersive_geology:nugget_viking_steel",
+    "immersive_geology:nugget_bronze",
     "immersive_geology:nugget_unobtanium"
   ]
 }
