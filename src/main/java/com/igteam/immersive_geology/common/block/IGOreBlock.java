@@ -28,16 +28,15 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
 
     public IGOreBlock(String registryName, Material[] material, MaterialUseType useType) {
         super(Properties.create(net.minecraft.block.material.Material.ROCK).setRequiresTool().hardnessAndResistance(3.0F, 3.0F));
-
         this.setRegistryName(registryName.toLowerCase());
-        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material[0]);
-        itemBlock.setRegistryName(registryName.toLowerCase());
-
         blockUseType = useType;
         holder_name = registryName.toLowerCase();
 
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material[0]);
         blockMaterialData.put(BlockMaterialType.ORE_MATERIAL, material[1]);
+
+        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material[0]);
+        itemBlock.setRegistryName(registryName.toLowerCase());
 
         RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.TRANSLUCENT);
     }

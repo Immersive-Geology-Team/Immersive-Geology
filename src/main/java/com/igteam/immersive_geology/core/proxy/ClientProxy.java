@@ -6,6 +6,7 @@ import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import com.igteam.immersive_geology.common.world.IGWorldGeneration;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

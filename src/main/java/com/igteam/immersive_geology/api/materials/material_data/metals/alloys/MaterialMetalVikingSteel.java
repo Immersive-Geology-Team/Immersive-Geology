@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
@@ -90,4 +91,15 @@ public class MaterialMetalVikingSteel extends MaterialMetalBase
 		return 7.950f; // gm/cm^3
 	}
 
+	@Override
+	public boolean hasAdditionalTags() {
+		return true;
+	}
+
+	@Override
+	public ArrayList<String> getTagList() {
+		ArrayList<String> tagList = new ArrayList<>();
+		tagList.add("ingots/steel");
+		return tagList;
+	}
 }

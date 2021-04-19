@@ -1,8 +1,11 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
+import blusunrize.immersiveengineering.common.config.CachedConfig;
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.core.config.IGOreConfig;
 
 public abstract class MaterialCrystalBase extends Material
 {

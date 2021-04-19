@@ -6,6 +6,8 @@
   "immersive_geology.config.title": "",
   "generator.immersive": "Immersive",
 
+
+  "item.immersive_geology.cut_crystal": "Cut %s Crystal",
   "item.immersive_geology.ingot": "%s Ingot",
   "item.immersive_geology.plate": "%s Plate",
   "item.immersive_geology.rough_ingot": "Rough %s Ingot",
@@ -43,8 +45,9 @@
   "block.immersive_geology.sheetmetal": "%s Sheetmetal",
   "block.immersive_geology.sheetmetal.slab": "%s Sheetmetal Slab",
   "block.immersive_geology.dust": "%s Dust Block",
-  "block.immersive_geology.ore_bearing": "Ore Bearing %s",
+  "block.immersive_geology.ore_stone": "%d Ore Bearing %s",
 
+  "material.immersive_geology.vanilla": "Vanilla",
   "material.immersive_geology.marble": "Marble",
   "material.immersive_geology.pegmatite": "Pegmatite",
   "material.immersive_geology.rhyolite": "Rhyolite",
@@ -59,9 +62,15 @@
   "material.immersive_geology.netherrack": "Netherrack",
 
   "material.immersive_geology.gold": "Gold",
+  "material.immersive_geology.bronze": "Bronze",
+  "material.immersive_geology.viking_steel": "Ashbone Steel",
+  "material.immersive_geology.glowstone": "Glowstone",
   "material.immersive_geology.iron": "Iron",
   "material.immersive_geology.quartz": "Quartz",
+  "material.immersive_geology.phlebotinum": "Phlebotinum",
 
+  "material.immersive_geology.wolframite": "Wolframite",
+  "material.immersive_geology.unobtainium": "Unobtainium",
   "material.immersive_geology.aluminum": "Aluminium",
   "material.immersive_geology.copper": "Copper",
   "material.immersive_geology.lead": "Lead",
@@ -70,6 +79,7 @@
   "material.immersive_geology.uranium": "Uranium",
   "material.immersive_geology.tungsten": "Tungsten",
   "material.immersive_geology.titanium": "Titanium",
+  "material.immersive_geology.thorianite": "Thorianite",
   "material.immersive_geology.chromium": "Chromium",
   "material.immersive_geology.manganese": "Manganese",
   "material.immersive_geology.tin": "Tin",
@@ -83,6 +93,7 @@
   "material.immersive_geology.electrum": "Electrum",
   "material.immersive_geology.steel": "Steel",
 
+  "material.immersive_geology.pyrite": "Pyrite",
   "material.immersive_geology.anatase": "Anatase",
   "material.immersive_geology.cuprite": "Cuprite",
   "material.immersive_geology.zircon": "Zircon",

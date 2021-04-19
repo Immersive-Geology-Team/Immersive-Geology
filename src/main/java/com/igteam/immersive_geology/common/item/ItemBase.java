@@ -7,11 +7,17 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import it.unimi.dsi.fastutil.Hash;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColouredItem {
 
@@ -61,5 +67,14 @@ public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColo
 
     public Material getMaterial(BlockMaterialType type) {
         return itemMaterials.getOrDefault(type, itemMaterials.get(BlockMaterialType.BASE_MATERIAL));
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack)
+    {
+        ArrayList<String> localizedNames = new ArrayList<>();
+        localizedNames.add(I18n.format("material."+ IGLib.MODID + "." + itemMaterials.get(BlockMaterialType.BASE_MATERIAL).getName().toLowerCase()));
+        TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+        return name;
     }
 }

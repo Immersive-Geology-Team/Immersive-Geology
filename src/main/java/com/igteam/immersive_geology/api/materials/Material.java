@@ -1,8 +1,11 @@
 package com.igteam.immersive_geology.api.materials;
 
+import blusunrize.immersiveengineering.common.config.CachedConfig;
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.Item;
@@ -10,6 +13,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 /**
@@ -196,6 +200,17 @@ public abstract class Material
 		return new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(getRarity());
 	}
 
+	public IGOreConfig getGenerationConfig() {
+		return new IGOreConfig(8, 1, 80, 6);
+	}
+
+	public boolean hasAdditionalTags(){
+		return false;
+	};
+
+	public ArrayList<String> getTagList(){
+		return null;
+	}
 	/**
 	 *
 	 * @return the tool tier / material, look at {@link net.minecraft.item.ItemTier}

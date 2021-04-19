@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:dust_block_unobtanium"
+          "name": "immersive_geology:dust_block_unobtainium"
         }
       ],
       "conditions": [

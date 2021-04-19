@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials;
 
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalGlowstone;
@@ -11,6 +12,9 @@ import com.igteam.immersive_geology.api.materials.material_data.metals.*;
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.*;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
 import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanilla;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public enum MaterialEnum {
     //Empty
@@ -74,7 +78,7 @@ public enum MaterialEnum {
     Pyrite(new MaterialMineralPyrite()),
     Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
-    Unobtainium(new MaterialMetalUnobtanium()),
+    Unobtainium(new MaterialMetalUnobtainium()),
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),
@@ -92,5 +96,15 @@ public enum MaterialEnum {
 
     public Material getMaterial(){
         return material;
+    }
+
+    public static MaterialEnum[] stoneValues() {
+        ArrayList<MaterialEnum> stoneMaterials = new ArrayList<>();
+        Arrays.stream(values()).forEach((container) -> {
+            if(container.getMaterial() instanceof MaterialStoneBase){
+                stoneMaterials.add(container);
+            }
+        });
+        return stoneMaterials.toArray(new MaterialEnum[stoneMaterials.size()]);
     }
 }

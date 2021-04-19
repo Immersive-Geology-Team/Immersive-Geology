@@ -13,17 +13,17 @@ import java.util.LinkedHashSet;
 /**
  * Created by Pabilo8 on 25-03-2020.
  */
-public class MaterialMetalUnobtanium extends MaterialMetalBase
+public class MaterialMetalUnobtainium extends MaterialMetalBase
 {
 
-	public MaterialMetalUnobtanium() {
+	public MaterialMetalUnobtainium() {
 		isNativeMetal = true;
 	}
 	
 	@Override
 	public String getName()
 	{
-		return "unobtanium";
+		return "unobtainium";
 	}
 
 	@Nonnull

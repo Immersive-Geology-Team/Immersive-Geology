@@ -21,6 +21,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+
 public class IGItemTagProvider extends ItemTagsProvider {
     public IGItemTagProvider(DataGenerator generator, BlockTagsProvider blockProvider, ExistingFileHelper fileHelper) {
         super(generator, blockProvider, IGLib.MODID, fileHelper);
@@ -105,6 +107,12 @@ public class IGItemTagProvider extends ItemTagsProvider {
                             if (container.getMaterial().hasSubtype(useType)) {
                                 this.tag(requestUsetypeTag(useType)).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
                                 this.tag(requestUsetypeTag(useType, container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                                if(container.getMaterial().hasAdditionalTags()){
+                                    ArrayList<String> tagList = container.getMaterial().getTagList();
+                                    for(String tag : tagList){
+                                        this.tag(requestCustomTag(tag)).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                                    }
+                                }
                             }
                     }
                 }
@@ -127,6 +135,10 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
     private ITag.INamedTag<Item> requestCustomTag(String base, Material material){
         return TagsIG.itemTagForge(base + "/" + material.getName().toLowerCase());
+    }
+
+    private ITag.INamedTag<Item> requestCustomTag(String base){
+        return TagsIG.itemTagForge(base);
     }
 
     private ITag.INamedTag<Item> requestOreUsetypeTag(Material material) {

@@ -26,11 +26,11 @@ public class BlockBase extends Block implements IGBlockType {
     public BlockBase(String registryName, Material material, MaterialUseType useType, Properties properties) {
         super(properties);
         this.setRegistryName(registryName.toLowerCase());
-        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material);
-        itemBlock.setRegistryName(registryName.toLowerCase());
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material);
         blockUseType = useType;
         holder_name = registryName.toLowerCase();
+        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material);
+        itemBlock.setRegistryName(registryName.toLowerCase());
     }
 
     @Override
