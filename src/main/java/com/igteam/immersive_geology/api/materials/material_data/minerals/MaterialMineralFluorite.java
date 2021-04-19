@@ -60,7 +60,7 @@ public class MaterialMineralFluorite extends MaterialMineralBase
 		return -1;
 	}
 
-	public static int baseColor = 0xffffff;
+	public static int baseColor = 0x329870;
 
 	@Override
 	public int getColor(int temperature)

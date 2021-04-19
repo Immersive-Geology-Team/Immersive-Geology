@@ -61,7 +61,7 @@ public class MaterialMineralChromite extends MaterialMineralBase
 		return -1;
 	}
 
-	public static int baseColor = 0xffffff;
+	public static int baseColor = 0x615964;
 
 	@Override
 	public int getColor(int temperature)

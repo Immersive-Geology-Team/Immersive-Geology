@@ -60,7 +60,7 @@ public class MaterialMineralChalcopyrite extends MaterialMineralBase
 		return -1;
 	}
 
-	public static int baseColor = 0xffffff;
+	public static int baseColor = 0x5B4D2A;
 
 	@Override
 	public int getColor(int temperature)

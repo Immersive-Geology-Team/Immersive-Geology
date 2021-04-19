@@ -56,7 +56,7 @@ public class MaterialMineralCuprite extends MaterialMineralBase
 		return 1357;
 	}
 
-	public static int baseColor = 0xEF2161;
+	public static int baseColor = 0x830922;
 
 	@Override
 	public int getColor(int temperature)

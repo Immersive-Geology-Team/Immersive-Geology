@@ -62,7 +62,7 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 		return -1;
 	}
 
-	public static int baseColor = 0x99A2D9;
+	public static int baseColor = 0x939AC4;
 
 	@Override
 	public int getColor(int temperature)

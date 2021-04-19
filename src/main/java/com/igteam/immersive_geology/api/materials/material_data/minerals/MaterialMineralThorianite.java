@@ -14,7 +14,7 @@ public class MaterialMineralThorianite extends MaterialMineralBase
 	@Override
 	public String getName()
 	{
-		return "thorite";
+		return "thorianite";
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class MaterialMineralThorianite extends MaterialMineralBase
 		return EnumMineralType.CRYSTAL;
 	}
 
-	public static int baseColor = 0xc68f39;
+	public static int baseColor = 0x687E95;
 
 	@Override
 	public int getColor(int temperature)

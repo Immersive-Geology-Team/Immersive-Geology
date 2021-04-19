@@ -61,7 +61,7 @@ public class MaterialMineralCassiterite extends MaterialMineralBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x8f8b96;
+		return 0x3B3B3D;
 	}
 
 	@Override

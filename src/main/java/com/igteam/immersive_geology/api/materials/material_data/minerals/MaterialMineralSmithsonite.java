@@ -61,7 +61,7 @@ public class MaterialMineralSmithsonite extends MaterialMineralBase
 		return -1;
 	}
 
-	protected static int baseColor = 0xffffff;
+	protected static int baseColor = 0x81D1DC;
 
 	@Override
 	public int getColor(int temperature)

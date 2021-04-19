@@ -61,7 +61,7 @@ public class MaterialMineralGypsum extends MaterialMineralBase
 		return -1;
 	}
 
-	public static int baseColor = 0xffffff;
+	public static int baseColor = 0x90AB8C;
 
 	@Override
 	public int getColor(int temperature)
