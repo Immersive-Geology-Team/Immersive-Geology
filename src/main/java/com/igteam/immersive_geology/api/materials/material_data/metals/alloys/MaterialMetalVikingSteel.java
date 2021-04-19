@@ -10,12 +10,13 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialMetalElectrum extends MaterialMetalBase
+public class MaterialMetalVikingSteel extends MaterialMetalBase
 {
+
 	@Override
 	public String getName()
 	{
-		return "electrum";
+		return "viking_steel";
 	}
 
 	@Nonnull
@@ -35,52 +36,58 @@ public class MaterialMetalElectrum extends MaterialMetalBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.GOLD),
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILVER)));
+			new ElementProportion(PeriodicTableElement.IRON, 10),
+			new ElementProportion(PeriodicTableElement.CARBON),
+			new ElementProportion(PeriodicTableElement.CALCIUM, 3))
+		);
 	}
 
 	@Override
 	public Rarity getRarity()
 	{
-		return Rarity.RARE;
+		return Rarity.UNCOMMON;
 	}
 
 	@Override
 	public int getBoilingPoint()
 	{
-		return 3243;
-	} //Actually separates at melting point
+		return 3200;
+	}
 
 	@Override
-	public int getMeltingPoint() { return 1063; }
+	public int getMeltingPoint()
+	{
+		return 1698;
+	}
 
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0x94826A;
+		return 0x6e7064;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		return 1.75f;
+		return 2.85f;
 	}
 
 	@Override
 	public float getMiningResistance()
 	{
-		return 2;
+		return 7.5f;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		return 4;
+		return 11.5f;
 	}
 
 	@Override
 	public float getDensity()
 	{
-		return 13.5f; //gm/cm^3
+		return 7.950f; // gm/cm^3
 	}
+
 }

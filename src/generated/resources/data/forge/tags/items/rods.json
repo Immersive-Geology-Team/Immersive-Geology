@@ -22,6 +22,8 @@
     "immersive_geology:rod_constantan",
     "immersive_geology:rod_electrum",
     "immersive_geology:rod_steel",
+    "immersive_geology:rod_viking_steel",
+    "immersive_geology:rod_bronze",
     "immersive_geology:rod_unobtanium"
   ]
 }

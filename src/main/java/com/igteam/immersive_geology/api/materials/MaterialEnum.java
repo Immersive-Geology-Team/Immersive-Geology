@@ -8,9 +8,7 @@ import com.igteam.immersive_geology.api.materials.material_data.crystals.Materia
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
-import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.MaterialMetalConstantan;
-import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.MaterialMetalElectrum;
-import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.MaterialMetalSteel;
+import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.*;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
 import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanilla;
 
@@ -41,6 +39,8 @@ public enum MaterialEnum {
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
     Steel(new MaterialMetalSteel()),
+    VikingSteel(new MaterialMetalVikingSteel()),
+    Bronze(new MaterialMetalBronze()),
 
     //Crystals
     Diamond(new MaterialCrystalDiamond()),
