@@ -44,8 +44,8 @@
   "block.immersive_geology.slab": "%s Slab",
   "block.immersive_geology.sheetmetal": "%s Sheetmetal",
   "block.immersive_geology.sheetmetal.slab": "%s Sheetmetal Slab",
-  "block.immersive_geology.dust": "%s Dust Block",
-  "block.immersive_geology.ore_stone": "%d Ore Bearing %s",
+  "block.immersive_geology.dust_block": "%s Dust Block",
+  "block.immersive_geology.ore_stone": "%d Bearing %s",
 
   "material.immersive_geology.vanilla": "Vanilla",
   "material.immersive_geology.marble": "Marble",
@@ -93,6 +93,7 @@
   "material.immersive_geology.electrum": "Electrum",
   "material.immersive_geology.steel": "Steel",
 
+  "material.immersive_geology.diamond": "Diamond",
   "material.immersive_geology.pyrite": "Pyrite",
   "material.immersive_geology.anatase": "Anatase",
   "material.immersive_geology.cuprite": "Cuprite",

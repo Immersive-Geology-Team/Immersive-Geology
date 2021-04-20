@@ -16,6 +16,7 @@ public abstract class MaterialCrystalBase extends Material
 	{
 		switch(useType)
 		{
+			case GEODE:
 			case CRYSTAL:
 				return hasCrystal();
 			case CUT_CRYSTAL:
@@ -69,5 +70,21 @@ public abstract class MaterialCrystalBase extends Material
 	public boolean hasDustBlock()
 	{
 		return true;
+	}
+
+
+	@Override
+	public IGOreConfig getGenerationConfig() {
+		return new IGOreConfig(1,1,40,10);
+	}
+
+	@Override
+	public float getMaxDrops() {
+		return 5f;
+	}
+
+	@Override
+	public float getMinDrops() {
+		return 2f;
 	}
 }

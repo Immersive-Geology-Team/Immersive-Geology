@@ -69,7 +69,15 @@ public class BlockLootProvider implements IDataProvider {
                             )
                     );
                 } else {
-                    functionTable.put(b,BlockLootProvider::genRegular);
+                    Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
+                    if(itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
+                        functionTable.put(b, (block) -> LootTable.builder()
+                                .addLootPool(LootPool.builder()
+                                        .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
+                                        .addEntry(ItemLootEntry.builder(itemDrop))));
+                    } else {
+                        functionTable.put(b, BlockLootProvider::genRegular);
+                    }
                 }
             }
         }
@@ -101,15 +109,6 @@ public class BlockLootProvider implements IDataProvider {
 
     private static LootTable.Builder empty(Block b) {
         return LootTable.builder();
-    }
-
-    private static LootTable.Builder genSilkDrop(IItemProvider silkDrop, IItemProvider normalDrop) {
-        LootEntry.Builder<?> cobbleDrop = ItemLootEntry.builder(normalDrop).acceptCondition(SurvivesExplosion.builder());
-        LootEntry.Builder<?> stoneDrop = ItemLootEntry.builder(silkDrop).acceptCondition(SILK_TOUCH);
-
-        return LootTable.builder().addLootPool(
-                LootPool.builder().name("main").rolls(ConstantRange.of(1))
-                        .addEntry(stoneDrop.alternatively(cobbleDrop)));
     }
 
     private static LootTable.Builder genRegular(Block b) {

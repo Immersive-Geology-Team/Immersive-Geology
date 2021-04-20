@@ -29,6 +29,9 @@ public class IGWorldGeneration {
                         if (container.getMaterial().hasSubtype(MaterialUseType.ORE_STONE)) {
                             addOreGen(IGRegistrationHolder.getBlockByMaterial(stoneContainer.getMaterial(), container.getMaterial(), MaterialUseType.ORE_STONE), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
                         }
+                        if(container.getMaterial().hasSubtype(MaterialUseType.GEODE)){
+                            addOreGen(IGRegistrationHolder.getBlockByMaterial(MaterialUseType.GEODE, container.getMaterial()), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
+                        }
                     }
                 }
             }

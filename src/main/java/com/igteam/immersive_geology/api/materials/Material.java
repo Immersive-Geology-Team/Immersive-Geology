@@ -201,7 +201,18 @@ public abstract class Material
 	}
 
 	public IGOreConfig getGenerationConfig() {
-		return new IGOreConfig(8, 1, 80, 6);
+		switch (getRarity()){
+			case COMMON:
+				return new IGOreConfig(8, 1, 90, 6);
+			case UNCOMMON:
+				return new IGOreConfig(5, 1, 70, 4);
+			case RARE:
+				return new IGOreConfig(4, 1, 50, 3);
+			case EPIC:
+				return new IGOreConfig(3, 1, 30, 2);
+			default:
+				return new IGOreConfig(2, 1, 20, 1);
+		}
 	}
 
 	public boolean hasAdditionalTags(){
@@ -211,6 +222,14 @@ public abstract class Material
 	public ArrayList<String> getTagList(){
 		return null;
 	}
+
+	public float getMinDrops(){
+		return 1F;
+	};
+
+	public float getMaxDrops(){
+		return 1F;
+	};
 	/**
 	 *
 	 * @return the tool tier / material, look at {@link net.minecraft.item.ItemTier}

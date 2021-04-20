@@ -90,13 +90,26 @@ public class IGVariantHolder {
 
     private static void createBlockVariants(Material material, MaterialUseType type){
         switch(type){
+            case GEODE:
+                registerGeodeBlock(material);
+                break;
             case STONE:
                registerOreBlock(material);
                registerBasicBlock(material, type);
+               break;
             default:
                 registerBasicBlock(material, type);
         }
     }
+
+    private static void registerGeodeBlock(Material material){
+        MaterialUseType type = MaterialUseType.GEODE;
+        String holder_key = type.getName() + "_" + material.getName();
+        BlockBase block = new BlockBase(holder_key, material, type, MaterialUseType.CRYSTAL, material.getMinDrops(), material.getMaxDrops());
+        IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
+    }
+
 
     private static void registerBasicBlock(Material material, MaterialUseType type){
         String holder_key = type.getName() + "_" + material.getName();

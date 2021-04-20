@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_data.crystals;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialCrystalBase;
+import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 
@@ -88,5 +89,21 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 	public int getBlockHarvestLevel()
 	{
 		return 1;
+	}
+
+
+	@Override
+	public IGOreConfig getGenerationConfig() {
+		return new IGOreConfig(1,1,30,2);
+	}
+
+	@Override
+	public float getMaxDrops() {
+		return 2f;
+	}
+
+	@Override
+	public float getMinDrops() {
+		return 1f;
 	}
 }

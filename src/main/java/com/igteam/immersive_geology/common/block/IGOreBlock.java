@@ -90,4 +90,19 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
     public Material getMaterial(BlockMaterialType type) {
         return blockMaterialData.get(type);
     }
+
+    @Override
+    public MaterialUseType getDropUseType() {
+        return MaterialUseType.CHUNK;
+    }
+
+    @Override
+    public float maxDrops() {
+        return 1;
+    }
+
+    @Override
+    public float minDrops() {
+        return 1;
+    }
 }

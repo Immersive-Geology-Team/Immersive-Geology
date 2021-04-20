@@ -9,4 +9,9 @@ public interface IGBlockType {
     String getHolderName();
     MaterialUseType getBlockUseType();
     Material getMaterial(BlockMaterialType type);
+
+    MaterialUseType getDropUseType();
+
+    float maxDrops();
+    float minDrops();
 }
