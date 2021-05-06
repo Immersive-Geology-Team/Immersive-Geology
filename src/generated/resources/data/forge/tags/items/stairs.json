@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:stairs_aluminum",
+    "immersive_geology:stairs_chromium",
+    "immersive_geology:stairs_copper",
+    "immersive_geology:stairs_gold",
+    "immersive_geology:stairs_iron",
+    "immersive_geology:stairs_lead",
+    "immersive_geology:stairs_manganese",
+    "immersive_geology:stairs_nickel",
+    "immersive_geology:stairs_platinum",
+    "immersive_geology:stairs_silver",
+    "immersive_geology:stairs_cobalt",
+    "immersive_geology:stairs_uranium",
+    "immersive_geology:stairs_tin",
+    "immersive_geology:stairs_titanium",
+    "immersive_geology:stairs_tungsten",
+    "immersive_geology:stairs_vanadium",
+    "immersive_geology:stairs_zirconium",
+    "immersive_geology:stairs_zinc",
+    "immersive_geology:stairs_constantan",
+    "immersive_geology:stairs_electrum",
+    "immersive_geology:stairs_steel",
+    "immersive_geology:stairs_viking_steel",
+    "immersive_geology:stairs_bronze",
+    "immersive_geology:stairs_unobtainium"
+  ]
+}

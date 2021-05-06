@@ -128,13 +128,15 @@ public class IGItemTagProvider extends ItemTagsProvider {
     private ITag.INamedTag<Item> requestUsetypeTag(MaterialUseType useType, Material material) {
         switch (useType){
             default:
-                return TagsIG.itemTagForge(useType.getName().toLowerCase() + "s/" + material.getName().toLowerCase());
+                return TagsIG.itemTagForge(useType.getName().toLowerCase() +
+                        (useType.getName().endsWith("s") ? "/" : "s/") + material.getName().toLowerCase());
         }
     }
     private ITag.INamedTag<Item> requestUsetypeTag(MaterialUseType useType) {
         switch (useType){
             default:
-                return TagsIG.itemTagForge(useType.getName().toLowerCase() + "s");
+                return TagsIG.itemTagForge(useType.getName().toLowerCase() +
+                        (useType.getName().endsWith("s") ? "" : "s"));
         }
     }
 
