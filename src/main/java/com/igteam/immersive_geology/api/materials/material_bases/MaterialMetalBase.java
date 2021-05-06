@@ -33,6 +33,8 @@ public abstract class MaterialMetalBase extends Material
 				return hasDust();
 			case SHEETMETAL:
 				return hasSheetmetal();
+			case STAIRS:
+				return hasStairs();
 			case DUST_BLOCK:
 				return hasDustBlock();
 			case FLUIDS:
@@ -105,6 +107,8 @@ public abstract class MaterialMetalBase extends Material
 	{
 		return true;
 	}
+
+	public boolean hasStairs() { return true; }
 
 	public boolean hasDust()
 	{
