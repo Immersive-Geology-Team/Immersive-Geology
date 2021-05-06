@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_crushed_anatase",
+    "immersive_geology:ore_crushed_cuprite",
+    "immersive_geology:ore_crushed_zircon",
+    "immersive_geology:ore_crushed_ilmenite",
+    "immersive_geology:ore_crushed_cobaltite",
+    "immersive_geology:ore_crushed_cassiterite",
+    "immersive_geology:ore_crushed_chalcopyrite",
+    "immersive_geology:ore_crushed_chromite",
+    "immersive_geology:ore_crushed_cryolite",
+    "immersive_geology:ore_crushed_ferberite",
+    "immersive_geology:ore_crushed_fluorite",
+    "immersive_geology:ore_crushed_gypsum",
+    "immersive_geology:ore_crushed_hematite",
+    "immersive_geology:ore_crushed_hubnerite",
+    "immersive_geology:ore_crushed_magnetite",
+    "immersive_geology:ore_crushed_pyrolusite",
+    "immersive_geology:ore_crushed_rocksalt",
+    "immersive_geology:ore_crushed_thorianite",
+    "immersive_geology:ore_crushed_uraninite",
+    "immersive_geology:ore_crushed_sphalerite",
+    "immersive_geology:ore_crushed_ullmannite",
+    "immersive_geology:ore_crushed_galena",
+    "immersive_geology:ore_crushed_pyrite",
+    "immersive_geology:ore_crushed_wolframite",
+    "immersive_geology:ore_crushed_vanadinite"
+  ]
+}

@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:crystal_hubnerite",
     "immersive_geology:cut_crystal_hubnerite"
   ]
 }
