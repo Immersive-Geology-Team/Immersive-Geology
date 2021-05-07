@@ -5,7 +5,9 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import net.minecraft.block.Block;
 
 public interface IGBlockType {
+    @Deprecated
     Block getSelf();
+
     String getHolderName();
     MaterialUseType getBlockUseType();
     Material getMaterial(BlockMaterialType type);
