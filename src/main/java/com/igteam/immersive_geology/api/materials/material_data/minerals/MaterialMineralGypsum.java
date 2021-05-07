@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -108,10 +109,9 @@ public class MaterialMineralGypsum extends MaterialMineralBase
 		return null;
 	}
 
-	/*@Nullable
 	@Override
-	public IItemTier getToolTier()
-	{
-		return IGContent.;
-	}*/
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.MONOCLINIC;
+	}
+
 }

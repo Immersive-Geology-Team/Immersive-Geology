@@ -238,4 +238,7 @@ public abstract class Material
 	//@Nullable
 	//public abstract IItemTier getToolTier();
 
+	public CrystalFamily getCrystalFamily(){
+		return CrystalFamily.CUBIC; //default cubic
+	}
 }

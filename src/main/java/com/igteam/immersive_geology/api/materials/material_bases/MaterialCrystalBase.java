@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 
 import blusunrize.immersiveengineering.common.config.CachedConfig;
 import blusunrize.immersiveengineering.common.config.IEServerConfig;
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
@@ -88,5 +89,8 @@ public abstract class MaterialCrystalBase extends Material
 		return 2f;
 	}
 
-
+	@Override
+	public CrystalFamily getCrystalFamily(){
+		return CrystalFamily.CUBIC; //default cubic
+	}
 }

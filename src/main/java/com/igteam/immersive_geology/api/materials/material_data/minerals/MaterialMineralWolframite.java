@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -94,4 +95,10 @@ public class MaterialMineralWolframite extends MaterialMineralBase
     {
         return 0;
     }
+
+    @Override
+    public CrystalFamily getCrystalFamily() {
+        return CrystalFamily.MONOCLINIC;
+    }
+
 }

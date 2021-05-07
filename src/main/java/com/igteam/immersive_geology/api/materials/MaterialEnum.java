@@ -70,7 +70,7 @@ public enum MaterialEnum {
     Magnetite(new MaterialMineralMagnetite()),
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
-    Thorite(new MaterialMineralThorianite()),
+    Thorite(new MaterialMineralThorianite()), //Change to Thorite Material (thorite is Tetragonal) but Thorianite is Cubic
     Uraninite(new MaterialMineralUraninite()),
     Sphalerite(new MaterialMineralSphalerite()),
     Ullmannite(new MaterialMineralUllmannite()),

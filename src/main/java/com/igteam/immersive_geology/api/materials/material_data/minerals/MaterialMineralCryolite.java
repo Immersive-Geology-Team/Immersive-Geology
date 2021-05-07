@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -106,6 +107,11 @@ public class MaterialMineralCryolite extends MaterialMineralBase
 	public net.minecraft.block.material.Material getBlockMaterial()
 	{
 		return null;
+	}
+
+	@Override
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.MONOCLINIC;
 	}
 
 	/*@Nullable
