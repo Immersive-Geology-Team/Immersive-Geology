@@ -87,4 +87,6 @@ public abstract class MaterialCrystalBase extends Material
 	public float getMinDrops() {
 		return 2f;
 	}
+
+
 }

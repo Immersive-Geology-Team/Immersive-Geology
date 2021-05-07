@@ -30,25 +30,40 @@ public class IGBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         for(IGBlockType blockType : IGRegistrationHolder.registeredIGBlocks.values()) {
             try {
-
-                if (blockType.getSelf() instanceof IGOreBlock) {
-                    IGOreBlock oreBlock = (IGOreBlock) blockType.getSelf();
-                    String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
-                    String base_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName(); //gets the name metamorphic and such
-                    String ore_name = oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL).getName();
-
-                    BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
-                            new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
-                            .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
-                    getVariantBuilder(blockType.getSelf()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
-
-                } else if (blockType.getSelf() instanceof BlockBase) {
-                    getVariantBuilder(blockType.getSelf()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + ((BlockBase) blockType.getSelf()).getBlockUseType().getName() + "_" + ((BlockBase) blockType.getSelf()).getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                            new ResourceLocation(IGLib.MODID, "block/base/" + ((BlockBase) blockType.getSelf()).getBlockUseType().getName()))).build());
+                switch(blockType.getBlockUseType()){
+                    case ORE_STONE:
+                        registerOreBlock(blockType);
+                        break;
+                    default:
+                        registerDefaultBlock(blockType);
                 }
             } catch (Exception e){
                 IGDataProvider.log.error("Failed to create Block Model/State: \n" + e);
             }
         }
     }
+
+    private void registerDefaultBlock(IGBlockType blockType){
+        if(blockType instanceof BlockBase) {
+            BlockBase block = (BlockBase) blockType;
+            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getBlockUseType().getName() + "_" + block.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/base/" + block.getBlockUseType().getName()))).build());
+
+        }
+    }
+
+    private void registerOreBlock(IGBlockType blockType){
+        if(blockType instanceof IGOreBlock){
+            IGOreBlock oreBlock = (IGOreBlock) blockType;
+            String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
+            String base_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName(); //gets the name metamorphic and such
+            String ore_name = oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL).getName();
+
+            BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
+                    .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
+            getVariantBuilder(blockType.getSelf()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+        }
+    }
+
 }

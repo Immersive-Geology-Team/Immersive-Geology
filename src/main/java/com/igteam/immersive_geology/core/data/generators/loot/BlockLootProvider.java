@@ -55,33 +55,31 @@ public class BlockLootProvider implements IDataProvider {
                 continue; // skip over this block in the loop if it isn't from our mod!
             }
 
-            if(b instanceof IGBlockType){
-                IGBlockType blockType = ((IGBlockType) b);
-                if(b.getBlock() instanceof IGOreBlock) {
-                    IGOreBlock oreBlock = (IGOreBlock) b.getBlock();
-                    Item stoneChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.CHUNK);
-                    Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
+            if(b instanceof IGOreBlock){
+                IGOreBlock oreBlock = ((IGOreBlock) b);
+                Item stoneChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.CHUNK);
+                Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
+                functionTable.put(b, (block) -> LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(RandomValueRange.of(1F, 1F))
+                                .addEntry(ItemLootEntry.builder(oreChunk)
+                                        .acceptFunction(OreDropProperty.builder()))
+                        )
+                );
+            } else if(b instanceof IGBlockType){
+                IGBlockType blockType = (IGBlockType) b;
+
+                Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
+                if(itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
                     functionTable.put(b, (block) -> LootTable.builder()
                             .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(oreChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                    );
+                                    .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
+                                    .addEntry(ItemLootEntry.builder(itemDrop))));
                 } else {
-                    Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
-                    if(itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
-                        functionTable.put(b, (block) -> LootTable.builder()
-                                .addLootPool(LootPool.builder()
-                                        .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
-                                        .addEntry(ItemLootEntry.builder(itemDrop))));
-                    } else {
-                        functionTable.put(b, BlockLootProvider::genRegular);
-                    }
+                    functionTable.put(b, BlockLootProvider::genRegular);
                 }
             }
         }
-
     }
 
     @Override
