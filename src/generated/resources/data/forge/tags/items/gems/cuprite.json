@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:crystal_cuprite",
     "immersive_geology:cut_crystal_cuprite"
   ]
 }

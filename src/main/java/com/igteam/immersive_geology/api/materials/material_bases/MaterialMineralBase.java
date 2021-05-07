@@ -16,12 +16,13 @@ public abstract class MaterialMineralBase extends Material
 	{
 		switch(useType)
 		{
-			case CRYSTAL:
+			case RAW_CRYSTAL:
 			case CUT_CRYSTAL:
 				return hasCrystal();
 			case ORE_STONE:
 			case ORE_BIT:
 			case ORE_CHUNK:
+			case ORE_CRUSHED:
 				return true;
 		}
 		return false;

@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:crystal_glowstone"
+          "name": "immersive_geology:raw_crystal_glowstone"
         }
       ]
     }

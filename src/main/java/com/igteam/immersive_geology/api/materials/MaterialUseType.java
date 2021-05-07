@@ -7,6 +7,7 @@ public enum MaterialUseType {
     //Blocks
     DUST_BLOCK(true, ItemSubGroup.natural),     //Returns Self
     SHEETMETAL(true, ItemSubGroup.processed),     //Returns Self
+    STAIRS(true, ItemSubGroup.processed), //Review ME!!
     ORE_STONE(true, ItemSubGroup.natural),
     COBBLESTONE(true, ItemSubGroup.natural),    //Returns Self
     STONE(true, ItemSubGroup.natural),          //Gives Chunks
@@ -17,7 +18,8 @@ public enum MaterialUseType {
     ROCK_BIT(false, ItemSubGroup.natural),
     ORE_CHUNK(false, ItemSubGroup.natural),
     ORE_BIT(false, ItemSubGroup.natural),
-    CRYSTAL(false, ItemSubGroup.natural),
+    ORE_CRUSHED(false, ItemSubGroup.processed),
+    RAW_CRYSTAL(false, ItemSubGroup.natural),
     CUT_CRYSTAL(false, ItemSubGroup.processed),
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
