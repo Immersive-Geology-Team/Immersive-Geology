@@ -70,10 +70,9 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
     public ToolType getHarvestTool(BlockState state) {
         return ToolType.PICKAXE;
     }
-
     @Override
     public Block getSelf() {
-        return this;
+        return getBlock();
     }
 
     @Override

@@ -53,7 +53,7 @@ public class BlockBase extends Block implements IGBlockType, IEBlockInterfaces.I
 
     @Override
     public Block getSelf() {
-        return this;
+        return getBlock();
     }
 
     @Override
