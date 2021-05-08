@@ -1,0 +1,344 @@
+{
+  "variants": {
+    "facing=north,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    },
+    "facing=north,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 270
+    },
+    "facing=south,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180,
+      "y": 180
+    },
+    "facing=east,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 270
+    },
+    "facing=south,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/sheetmetal_stairs_bronze"
+    }
+  }
+}
