@@ -33,7 +33,7 @@ public abstract class MaterialMetalBase extends Material
 				return hasDust();
 			case SHEETMETAL:
 				return hasSheetmetal();
-			case STAIRS:
+			case SHEETMETAL_STAIRS:
 				return hasStairs();
 			case DUST_BLOCK:
 				return hasDustBlock();

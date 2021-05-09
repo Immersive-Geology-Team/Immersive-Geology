@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.data.generators;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
@@ -73,7 +74,12 @@ public class IGItemModelProvider extends ItemModelProvider {
         if(blockItem.getBlock() instanceof IGOreBlock) {
             IGOreBlock oreBlock = (IGOreBlock) blockItem.getBlock();
             generateBlockOreItem(oreBlock);
-        } else {
+        } else if(blockItem.getBlock() instanceof IGStairsBlock) {
+            IGStairsBlock stairsBlock = (IGStairsBlock) blockItem.getBlock();
+            String builder_name = new ResourceLocation(IGLib.MODID,"item/"+stairsBlock.getHolderName()).getPath();
+            withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()));
+        } else
+        {
             BlockBase baseBlock = (BlockBase) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID, "item/"+baseBlock.getHolderName()).getPath();
             withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + baseBlock.getBlockUseType().getName()));

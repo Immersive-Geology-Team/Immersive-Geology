@@ -7,7 +7,7 @@ public enum MaterialUseType {
     //Blocks
     DUST_BLOCK(true, ItemSubGroup.natural),     //Returns Self
     SHEETMETAL(true, ItemSubGroup.processed),     //Returns Self
-    STAIRS(true, ItemSubGroup.processed), //Review ME!!
+    SHEETMETAL_STAIRS(true, ItemSubGroup.processed), //Review ME!!
     ORE_STONE(true, ItemSubGroup.natural),
     COBBLESTONE(true, ItemSubGroup.natural),    //Returns Self
     STONE(true, ItemSubGroup.natural),          //Gives Chunks
