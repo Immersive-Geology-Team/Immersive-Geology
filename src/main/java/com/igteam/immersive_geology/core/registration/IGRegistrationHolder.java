@@ -19,6 +19,8 @@ import java.util.SortedMap;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class IGRegistrationHolder {
+
+
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
     public static HashMap<String, IGBlockType> registeredIGBlocks = new HashMap<>();
 
