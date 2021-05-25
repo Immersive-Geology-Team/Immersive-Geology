@@ -48,7 +48,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                     switch(useType){
                         case CUT_CRYSTAL:
                         case RAW_CRYSTAL:
-                            generateCrystalItem(itemBase); //TODO allow CUT crystals in! Already supports it, just need some textures.
+                            generateCrystalItem(itemBase);
                             break;
                         default:
                             genericItem(item);

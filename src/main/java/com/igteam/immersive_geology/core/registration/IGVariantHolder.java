@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.util.IGRegistryGrabber;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.item.IGOreItem;

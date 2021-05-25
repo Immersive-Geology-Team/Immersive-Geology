@@ -6,7 +6,10 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,6 +45,7 @@ public class IGRegistrationHolder {
         registeredIGBlocks.values().forEach((block) ->{
             event.getRegistry().register(block.getSelf());
         });
+
     }
 
     public static Item getItemByMaterial(Material material, MaterialUseType useType){
