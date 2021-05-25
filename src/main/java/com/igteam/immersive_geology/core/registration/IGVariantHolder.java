@@ -7,8 +7,10 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.util.IGRegistryGrabber;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import net.minecraft.util.IStringSerializable;
 import org.apache.logging.log4j.Logger;
 
 public class IGVariantHolder {
@@ -97,7 +99,10 @@ public class IGVariantHolder {
             case STONE:
                registerOreBlock(material);
                registerBasicBlock(material, type);
-               break;
+                break;
+            case SHEETMETAL_STAIRS:
+                registerStairsBlock(material);
+                break;
             default:
                 registerBasicBlock(material, type);
         }
@@ -111,6 +116,14 @@ public class IGVariantHolder {
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }
 
+    private static void registerStairsBlock(Material material)
+    {
+        MaterialUseType type = MaterialUseType.SHEETMETAL_STAIRS;
+        String holder_key = type.getName() + "_" + material.getName();
+        IGStairsBlock block = new IGStairsBlock(holder_key, material,type);
+        IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
+    }
 
     private static void registerBasicBlock(Material material, MaterialUseType type){
         String holder_key = type.getName() + "_" + material.getName();
