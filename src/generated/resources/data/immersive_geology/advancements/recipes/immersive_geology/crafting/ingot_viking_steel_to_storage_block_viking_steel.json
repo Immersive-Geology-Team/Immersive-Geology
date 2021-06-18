@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_viking_steel_to_storage_block_viking_steel"
+    ]
+  },
+  "criteria": {
+    "has_ingot_viking_steel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_viking_steel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_viking_steel_to_storage_block_viking_steel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_viking_steel",
+      "has_the_recipe"
+    ]
+  ]
+}

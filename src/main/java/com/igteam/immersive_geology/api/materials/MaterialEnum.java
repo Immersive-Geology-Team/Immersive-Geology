@@ -8,6 +8,8 @@ import com.igteam.immersive_geology.api.materials.material_data.crystals.Materia
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalQuartz;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
+import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
+import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidArsenic;
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.*;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
@@ -36,6 +38,7 @@ public enum MaterialEnum {
     Tin(new MaterialMetalTin()),
     Titanium(new MaterialMetalTitanium()),
     Tungsten(new MaterialMetalTungsten()),
+    Thorium(new MaterialMetalThorium()),
     Vanadium(new MaterialMetalVanadium()),
     Zirconium(new MaterialMetalZirconium()),
     Zinc(new MaterialMetalZinc()),
@@ -45,6 +48,10 @@ public enum MaterialEnum {
     Steel(new MaterialMetalSteel()),
     VikingSteel(new MaterialMetalVikingSteel()),
     Bronze(new MaterialMetalBronze()),
+
+    //Metalloid
+    Arsenic(new MaterialMetalloidArsenic()),
+    Antimony(new MaterialMetalloidAntimony()),
 
     //Crystals
     Diamond(new MaterialCrystalDiamond()),
@@ -70,7 +77,8 @@ public enum MaterialEnum {
     Magnetite(new MaterialMineralMagnetite()),
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
-    Thorite(new MaterialMineralThorianite()), //Change to Thorite Material (thorite is Tetragonal) but Thorianite is Cubic
+    Thorianite(new MaterialMineralThorianite()),
+    Thorite(new MaterialMineralThorite()),
     Uraninite(new MaterialMineralUraninite()),
     Sphalerite(new MaterialMineralSphalerite()),
     Ullmannite(new MaterialMineralUllmannite()),

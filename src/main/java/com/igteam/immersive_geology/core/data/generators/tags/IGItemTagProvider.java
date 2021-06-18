@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.item.IGOreItem;
+import com.igteam.immersive_geology.core.data.generators.helpers.IGTags;
 import com.igteam.immersive_geology.core.data.generators.helpers.TagsIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -32,6 +33,31 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void registerTags() {
+        for(MaterialEnum material : MaterialEnum.values()) {
+            IGTags.MaterialTags tags = IGTags.getTagsFor(material);
+
+            Item crushed_ore = MaterialUseType.ORE_CRUSHED.getItem(material);
+
+            Item ingot = MaterialUseType.INGOT.getItem(material);
+
+            Item nugget = MaterialUseType.NUGGET.getItem(material);
+
+            if (nugget != null) {
+                getOrCreateBuilder(tags.nugget).addItemEntry(nugget);
+                log.info("Addding " + tags.nugget.getName() + " to tags");
+            }
+
+            if(crushed_ore != null){
+                getOrCreateBuilder(tags.crushed_ore).addItemEntry(crushed_ore);
+                log.info("Adding " + tags.crushed_ore.getName() + " to tags");
+            }
+
+            if (ingot != null) {
+                getOrCreateBuilder(tags.ingot).addItemEntry(ingot);
+                log.info("Addding " + tags.ingot.getName() + " to tags");
+            }
+        }
+
         for(MaterialUseType useType : MaterialUseType.values()) {
             for(MaterialEnum container : MaterialEnum.values()) {
                 if(container.getMaterial().hasSubtype(useType)) {

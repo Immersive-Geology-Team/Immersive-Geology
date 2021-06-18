@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_zinc_blasting"
+    ]
+  },
+  "criteria": {
+    "has_ore_chunk_vanilla_sphalerite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ore_chunk_vanilla_sphalerite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_zinc_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ore_chunk_vanilla_sphalerite",
+      "has_the_recipe"
+    ]
+  ]
+}

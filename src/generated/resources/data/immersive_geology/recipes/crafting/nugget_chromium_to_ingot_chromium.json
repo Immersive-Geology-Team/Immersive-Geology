@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/chromium"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_chromium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_chromium"
+  }
+}

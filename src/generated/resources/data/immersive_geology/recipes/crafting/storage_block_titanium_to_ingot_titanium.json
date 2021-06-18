@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:storage_block_titanium"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:ingot_titanium",
+    "count": 9
+  }
+}

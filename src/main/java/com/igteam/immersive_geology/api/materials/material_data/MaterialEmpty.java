@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data;
 
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -109,4 +110,15 @@ public class MaterialEmpty extends Material
 	{
 		return IGContent.;
 	}*/
+
+
+	@Override
+	public MaterialEnum getProcessedType() {
+		return null;
+	}
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return null;
+	}
 }

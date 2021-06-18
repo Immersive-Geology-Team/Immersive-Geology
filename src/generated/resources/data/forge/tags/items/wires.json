@@ -16,6 +16,7 @@
     "immersive_geology:wire_tin",
     "immersive_geology:wire_titanium",
     "immersive_geology:wire_tungsten",
+    "immersive_geology:wire_thorium",
     "immersive_geology:wire_vanadium",
     "immersive_geology:wire_zirconium",
     "immersive_geology:wire_zinc",
@@ -24,6 +25,8 @@
     "immersive_geology:wire_steel",
     "immersive_geology:wire_viking_steel",
     "immersive_geology:wire_bronze",
+    "immersive_geology:wire_arsenic",
+    "immersive_geology:wire_antimony",
     "immersive_geology:wire_unobtainium"
   ]
 }

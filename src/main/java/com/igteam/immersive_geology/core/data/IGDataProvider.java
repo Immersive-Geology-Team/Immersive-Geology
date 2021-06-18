@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.data.generators.IGBlockStateProvider;
 import com.igteam.immersive_geology.core.data.generators.IGItemModelProvider;
 import com.igteam.immersive_geology.core.data.generators.loot.BlockLootProvider;
+import com.igteam.immersive_geology.core.data.generators.recipe.IGRecipeProvider;
 import com.igteam.immersive_geology.core.data.generators.tags.IGBlockTagProvider;
 import com.igteam.immersive_geology.core.data.generators.tags.IGItemTagProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -32,6 +33,7 @@ public class IGDataProvider {
             BlockTagsProvider blockTagGen = new IGBlockTagProvider(generator, exhelper);
             generator.addProvider(blockTagGen);
             generator.addProvider(new IGItemTagProvider(generator,blockTagGen, exhelper));
+            generator.addProvider(new IGRecipeProvider(generator));
         }
 
         if(event.includeClient()){

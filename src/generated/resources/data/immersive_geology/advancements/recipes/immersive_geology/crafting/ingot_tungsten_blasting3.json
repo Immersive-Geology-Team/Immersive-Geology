@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_tungsten_blasting3"
+    ]
+  },
+  "criteria": {
+    "has_ore_chunk_vanilla_wolframite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ore_chunk_vanilla_wolframite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_tungsten_blasting3"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ore_chunk_vanilla_wolframite",
+      "has_the_recipe"
+    ]
+  ]
+}

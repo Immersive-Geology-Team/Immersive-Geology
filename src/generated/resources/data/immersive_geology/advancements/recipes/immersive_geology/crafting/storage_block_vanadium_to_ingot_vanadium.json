@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/storage_block_vanadium_to_ingot_vanadium"
+    ]
+  },
+  "criteria": {
+    "has_storage_block_vanadium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_vanadium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/storage_block_vanadium_to_ingot_vanadium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_block_vanadium",
+      "has_the_recipe"
+    ]
+  ]
+}

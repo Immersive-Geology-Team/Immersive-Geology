@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/zirconium"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_zirconium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_zirconium"
+  }
+}

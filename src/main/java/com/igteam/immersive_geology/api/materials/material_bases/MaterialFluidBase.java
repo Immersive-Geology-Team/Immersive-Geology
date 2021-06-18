@@ -1,9 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialTypes;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.*;
 
 import java.util.Set;
 
@@ -64,5 +61,16 @@ public abstract class MaterialFluidBase extends Material
 	public boolean hasFluidBlock()
 	{
 		return true;
+	}
+
+	@Override
+	public MaterialEnum getProcessedType() {
+		return null;
+	}
+
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return null;
 	}
 }

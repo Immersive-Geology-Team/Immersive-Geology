@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:ingot_tin",
     "immersive_geology:ingot_tin"
   ]
 }

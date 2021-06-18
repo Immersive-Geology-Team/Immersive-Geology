@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/viking_steel"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_viking_steel"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_viking_steel"
+  }
+}

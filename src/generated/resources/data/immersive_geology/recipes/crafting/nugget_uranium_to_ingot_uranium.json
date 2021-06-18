@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/uranium"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_uranium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_uranium"
+  }
+}

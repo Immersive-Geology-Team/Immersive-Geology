@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -30,7 +31,7 @@ public class MaterialMineralSmithsonite extends MaterialMineralBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		return new LinkedHashSet<>(Arrays.asList(
-				new PeriodicTableElement.ElementProportion(PeriodicTableElement.ZIRCONIUM),
+				new PeriodicTableElement.ElementProportion(PeriodicTableElement.ZINC),
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CARBON),
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 3)
 		)
@@ -114,4 +115,9 @@ public class MaterialMineralSmithsonite extends MaterialMineralBase
 	{
 		return IGContent.;
 	}*/
+
+	@Override
+	public MaterialEnum getProcessedType() {
+		return MaterialEnum.Zinc;
+	}
 }

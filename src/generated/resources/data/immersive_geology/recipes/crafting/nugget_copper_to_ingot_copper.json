@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/copper"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_copper"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_copper"
+  }
+}

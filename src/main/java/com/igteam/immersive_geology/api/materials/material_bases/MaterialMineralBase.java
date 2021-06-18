@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 import javax.annotation.Nullable;
 
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
@@ -72,4 +73,13 @@ public abstract class MaterialMineralBase extends Material
 		return 0xffffff;
 	}
 
+	public MaterialEnum getProcessedType(){
+		return null;
+	}
+
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return null;
+	}
 }

@@ -1,0 +1,21 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersive_geology:dust_iron"
+      }
+    }
+  ],
+  "result": {
+    "count": 2,
+    "base_ingredient": {
+      "tag": "forge:clumps/ferberite"
+    }
+  },
+  "input": {
+    "item": "immersive_geology:ore_chunk_vanilla_ferberite"
+  },
+  "energy": 6000
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_uranium_to_ingot_uranium"
+    ]
+  },
+  "criteria": {
+    "has_nugget_uranium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_uranium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_uranium_to_ingot_uranium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_uranium",
+      "has_the_recipe"
+    ]
+  ]
+}

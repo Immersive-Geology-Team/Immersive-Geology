@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_data.minerals;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
@@ -97,4 +98,8 @@ public class MaterialMineralKaolinite extends MaterialMineralBase {
 		return 1;
 	}
 
+	@Override
+	public MaterialEnum getProcessedType() {
+		return MaterialEnum.Aluminium;
+	}
 }

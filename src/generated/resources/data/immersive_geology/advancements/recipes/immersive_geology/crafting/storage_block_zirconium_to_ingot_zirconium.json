@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/storage_block_zirconium_to_ingot_zirconium"
+    ]
+  },
+  "criteria": {
+    "has_storage_block_zirconium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_zirconium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/storage_block_zirconium_to_ingot_zirconium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_block_zirconium",
+      "has_the_recipe"
+    ]
+  ]
+}

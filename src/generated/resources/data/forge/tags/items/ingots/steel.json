@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:ingot_steel",
+    "immersive_geology:storage_block_viking_steel",
     "immersive_geology:dust_block_viking_steel",
     "immersive_geology:sheetmetal_viking_steel",
     "immersive_geology:sheetmetal_stairs_viking_steel",

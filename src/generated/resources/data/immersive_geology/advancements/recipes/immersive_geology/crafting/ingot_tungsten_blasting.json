@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_tungsten_blasting"
+    ]
+  },
+  "criteria": {
+    "has_ore_chunk_vanilla_ferberite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ore_chunk_vanilla_ferberite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_tungsten_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ore_chunk_vanilla_ferberite",
+      "has_the_recipe"
+    ]
+  ]
+}

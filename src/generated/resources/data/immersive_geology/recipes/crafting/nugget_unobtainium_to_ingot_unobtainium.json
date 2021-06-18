@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:nuggets/unobtainium"
+    },
+    "i": {
+      "item": "immersive_geology:nugget_unobtainium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ingot_unobtainium"
+  }
+}

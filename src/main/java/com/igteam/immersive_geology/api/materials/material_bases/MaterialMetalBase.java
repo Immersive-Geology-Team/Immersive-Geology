@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 
@@ -10,7 +11,6 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
-	protected boolean isNativeMetal = false;
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -37,10 +37,12 @@ public abstract class MaterialMetalBase extends Material
 				return hasStairs();
 			case DUST_BLOCK:
 				return hasDustBlock();
+			case STORAGE_BLOCK:
 			case FLUIDS:
 				return true;
 			case ORE_CHUNK:
 			case ORE_BIT:
+			case ORE_CRUSHED:
 			case ORE_STONE:
 				return isNativeMetal;
 			default:
@@ -118,5 +120,16 @@ public abstract class MaterialMetalBase extends Material
 	public boolean hasDustBlock()
 	{
 		return true;
+	}
+
+	@Override
+	public MaterialEnum getProcessedType() {
+		return null;
+	}
+
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return null;
 	}
 }

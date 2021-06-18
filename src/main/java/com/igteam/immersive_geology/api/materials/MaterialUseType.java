@@ -1,10 +1,14 @@
 package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 public enum MaterialUseType {
     //Remember Naming convention is to add a type in the Singular, so Crystal not Crystals, this is due to how we generate tags! (we add an s to the end)
     //Blocks
+    STORAGE_BLOCK(true, ItemSubGroup.processed),
     DUST_BLOCK(true, ItemSubGroup.natural),     //Returns Self
     SHEETMETAL(true, ItemSubGroup.processed),     //Returns Self
     SHEETMETAL_STAIRS(true, ItemSubGroup.processed), //Review ME!!
@@ -32,8 +36,14 @@ public enum MaterialUseType {
     WIRE(false, ItemSubGroup.processed),
     TINY_DUST(false, ItemSubGroup.processed);
 
-    public String getName() {
+    public String getName()
+    {
         return this.name().toLowerCase();
+    }
+
+    public String tagName()
+    {
+        return getName();
     }
 
     private final boolean isBlock;
@@ -50,5 +60,17 @@ public enum MaterialUseType {
 
     public boolean isBlock(){
         return isBlock;
+    }
+
+    public Item getItem(MaterialEnum material) {
+        return IGRegistrationHolder.getItemByMaterial(material.getMaterial(), this);
+    }
+
+    public Item getItem(MaterialEnum stone_base, MaterialEnum material) {
+        return IGRegistrationHolder.getItemByMaterial(stone_base.getMaterial(), material.getMaterial(), this);
+    }
+
+    public Block getBlock(MaterialEnum material) {
+        return IGRegistrationHolder.getBlockByMaterial(this, material.getMaterial());
     }
 }

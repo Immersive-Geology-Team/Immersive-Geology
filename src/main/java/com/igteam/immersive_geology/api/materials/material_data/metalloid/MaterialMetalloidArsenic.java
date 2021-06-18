@@ -1,13 +1,30 @@
 package com.igteam.immersive_geology.api.materials.material_data.metalloid;
 
+import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalloidBase;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
+import net.minecraftforge.client.model.generators.ModelBuilder;
 
+import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 public class MaterialMetalloidArsenic extends MaterialMetalloidBase
 {
+	@Override
+	public String getName()
+	{
+		return "arsenic";
+	}
+
+	@Nonnull
+	@Override
+	public String getModID()
+	{
+		return IGLib.MODID;
+	}
 
 	@Override
 	public EnumMetalType getMetalType()
@@ -20,7 +37,9 @@ public class MaterialMetalloidArsenic extends MaterialMetalloidBase
 	public LinkedHashSet<ElementProportion> getElements()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return new LinkedHashSet<>(Arrays.asList(
+				new ElementProportion(PeriodicTableElement.ARSENIC)
+		));
 	}
 
 	@Override

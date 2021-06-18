@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.CrystalFamily;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -114,5 +115,14 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	@Override
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.ORTHORHOMBIC;
+	}
+
+	public MaterialEnum getProcessedType(){
+		return MaterialEnum.Cobalt;
+	}
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return MaterialEnum.Arsenic;
 	}
 }

@@ -1,5 +1,5 @@
 package com.igteam.immersive_geology.core.registration;
-
+/*
 import blusunrize.immersiveengineering.common.blocks.metal.EnergyConnectorTileEntity;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.common.block.tileentity.VatTileEntity;
@@ -14,7 +14,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Collection;
 import java.util.function.Supplier;
 
-@SuppressWarnings("unused")
 public class IGTileTypes
 {
     public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(
@@ -41,3 +40,5 @@ public class IGTileTypes
         return () -> new TileEntityType<>(create, ImmutableSet.copyOf(valid.get()), null);
     }
 }
+
+ */

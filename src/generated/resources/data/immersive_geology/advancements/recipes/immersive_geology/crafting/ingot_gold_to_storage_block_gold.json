@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_gold_to_storage_block_gold"
+    ]
+  },
+  "criteria": {
+    "has_ingot_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_gold"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_gold_to_storage_block_gold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_gold",
+      "has_the_recipe"
+    ]
+  ]
+}

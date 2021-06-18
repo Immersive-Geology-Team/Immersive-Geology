@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 
@@ -67,5 +68,15 @@ public abstract class MaterialStoneBase extends Material
 		{
 			return toString().toLowerCase();
 		}
+	}
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return null;
+	}
+
+	@Override
+	public MaterialEnum getProcessedType() {
+		return null;
 	}
 }

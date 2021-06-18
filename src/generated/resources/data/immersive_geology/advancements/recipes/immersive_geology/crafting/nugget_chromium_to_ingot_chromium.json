@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_chromium_to_ingot_chromium"
+    ]
+  },
+  "criteria": {
+    "has_nugget_chromium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_chromium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_chromium_to_ingot_chromium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_chromium",
+      "has_the_recipe"
+    ]
+  ]
+}

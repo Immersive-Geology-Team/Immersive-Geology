@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.CrystalFamily;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -102,4 +103,13 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		return CrystalFamily.MONOCLINIC;
 	}
 
+	@Override
+	public MaterialEnum getProcessedType() {
+		return MaterialEnum.Tungsten;
+	}
+
+	@Override
+	public MaterialEnum getSecondaryType() {
+		return MaterialEnum.Manganese;
+	}
 }

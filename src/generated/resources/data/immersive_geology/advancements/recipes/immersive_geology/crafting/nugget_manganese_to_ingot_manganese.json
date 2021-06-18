@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_manganese_to_ingot_manganese"
+    ]
+  },
+  "criteria": {
+    "has_nugget_manganese": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_manganese"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_manganese_to_ingot_manganese"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_manganese",
+      "has_the_recipe"
+    ]
+  ]
+}

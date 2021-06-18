@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/storage_block_chromium_to_ingot_chromium"
+    ]
+  },
+  "criteria": {
+    "has_storage_block_chromium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_chromium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/storage_block_chromium_to_ingot_chromium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_block_chromium",
+      "has_the_recipe"
+    ]
+  ]
+}

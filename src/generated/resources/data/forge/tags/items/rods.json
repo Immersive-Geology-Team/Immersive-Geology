@@ -16,6 +16,7 @@
     "immersive_geology:rod_tin",
     "immersive_geology:rod_titanium",
     "immersive_geology:rod_tungsten",
+    "immersive_geology:rod_thorium",
     "immersive_geology:rod_vanadium",
     "immersive_geology:rod_zirconium",
     "immersive_geology:rod_zinc",
@@ -24,6 +25,8 @@
     "immersive_geology:rod_steel",
     "immersive_geology:rod_viking_steel",
     "immersive_geology:rod_bronze",
+    "immersive_geology:rod_arsenic",
+    "immersive_geology:rod_antimony",
     "immersive_geology:rod_unobtainium"
   ]
 }

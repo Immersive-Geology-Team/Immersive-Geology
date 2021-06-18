@@ -27,7 +27,9 @@ import java.util.LinkedHashSet;
 public abstract class Material
 {
 
-	public MaterialStoneBase.EnumStoneType getStoneType(){
+    public boolean isNativeMetal = false;
+
+    public MaterialStoneBase.EnumStoneType getStoneType(){
 		return null;
 	}
 	/**
@@ -241,4 +243,7 @@ public abstract class Material
 	public CrystalFamily getCrystalFamily(){
 		return CrystalFamily.CUBIC; //default cubic
 	}
+
+    public abstract MaterialEnum getProcessedType();
+	public abstract MaterialEnum getSecondaryType();
 }

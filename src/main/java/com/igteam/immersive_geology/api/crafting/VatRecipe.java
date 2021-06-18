@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
 public class VatRecipe extends IGMultiblockRecipe
 {
     public static final IRecipeType<VatRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":vat");
@@ -23,3 +23,4 @@ public class VatRecipe extends IGMultiblockRecipe
         }
     }
 }
+*/

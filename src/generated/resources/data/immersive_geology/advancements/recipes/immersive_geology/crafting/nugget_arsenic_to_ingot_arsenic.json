@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_arsenic_to_ingot_arsenic"
+    ]
+  },
+  "criteria": {
+    "has_nugget_arsenic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_arsenic"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_arsenic_to_ingot_arsenic"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_arsenic",
+      "has_the_recipe"
+    ]
+  ]
+}

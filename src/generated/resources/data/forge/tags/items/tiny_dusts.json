@@ -16,6 +16,7 @@
     "immersive_geology:tiny_dust_tin",
     "immersive_geology:tiny_dust_titanium",
     "immersive_geology:tiny_dust_tungsten",
+    "immersive_geology:tiny_dust_thorium",
     "immersive_geology:tiny_dust_vanadium",
     "immersive_geology:tiny_dust_zirconium",
     "immersive_geology:tiny_dust_zinc",
@@ -24,6 +25,8 @@
     "immersive_geology:tiny_dust_steel",
     "immersive_geology:tiny_dust_viking_steel",
     "immersive_geology:tiny_dust_bronze",
+    "immersive_geology:tiny_dust_arsenic",
+    "immersive_geology:tiny_dust_antimony",
     "immersive_geology:tiny_dust_unobtainium"
   ]
 }

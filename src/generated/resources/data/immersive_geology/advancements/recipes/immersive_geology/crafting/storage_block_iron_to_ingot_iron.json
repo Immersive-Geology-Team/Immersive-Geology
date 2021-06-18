@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/storage_block_iron_to_ingot_iron"
+    ]
+  },
+  "criteria": {
+    "has_storage_block_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/storage_block_iron_to_ingot_iron"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_block_iron",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -16,6 +16,7 @@
     "immersive_geology:nugget_tin",
     "immersive_geology:nugget_titanium",
     "immersive_geology:nugget_tungsten",
+    "immersive_geology:nugget_thorium",
     "immersive_geology:nugget_vanadium",
     "immersive_geology:nugget_zirconium",
     "immersive_geology:nugget_zinc",
@@ -24,6 +25,8 @@
     "immersive_geology:nugget_steel",
     "immersive_geology:nugget_viking_steel",
     "immersive_geology:nugget_bronze",
+    "immersive_geology:nugget_arsenic",
+    "immersive_geology:nugget_antimony",
     "immersive_geology:nugget_unobtainium"
   ]
 }
