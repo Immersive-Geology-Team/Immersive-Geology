@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials;
 
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
@@ -7,6 +8,8 @@ import com.igteam.immersive_geology.api.materials.material_data.crystals.Materia
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalPhlebotinum;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalQuartz;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidHydrochloricAcid;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidSulfuricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidArsenic;
@@ -92,14 +95,24 @@ public enum MaterialEnum {
     Vanilla(new MaterialStoneVanilla()),
 
     //Fluids
-    Water(new MaterialFluidWater()),
-    Brine(new MaterialFluidBrine());
+    SulfuricAcid(new MaterialFluidSulfuricAcid()),
+    HydrochloricAcid(new MaterialFluidHydrochloricAcid());
 
     private final Material material;
 
     MaterialEnum(Material material)
     {
         this.material = material;
+    }
+
+    public static MaterialEnum[] fluidValues() {
+        ArrayList<MaterialEnum> fluidMaterials = new ArrayList<>();
+        Arrays.stream(values()).forEach((container) -> {
+            if(container.getMaterial() instanceof MaterialFluidBase){
+                fluidMaterials.add(container);
+            }
+        });
+        return fluidMaterials.toArray(new MaterialEnum[fluidMaterials.size()]);
     }
 
     public Material getMaterial(){

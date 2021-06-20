@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.data.IGDataProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -14,10 +15,7 @@ import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.StairsShape;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class IGBlockStateProvider extends BlockStateProvider {
@@ -42,12 +40,25 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SHEETMETAL_STAIRS:
                         registerStairsBlock(blockType);
                         break;
+                    case FLUIDS:
+                        break;
                     default:
                         registerDefaultBlock(blockType);
                 }
             } catch (Exception e){
                 IGDataProvider.log.error("Failed to create Block Model/State: \n" + e);
             }
+        }
+
+        registerFluidBlocks();
+    }
+
+    private void registerFluidBlocks(){
+        for(IGFluid f : IGFluid.IG_FLUIDS){
+            ResourceLocation stillTexture = f.getAttributes().getStillTexture();
+            ModelFile model = models().getBuilder("block/fluid/"+f.getRegistryName().getPath())
+                    .texture("particle", stillTexture);
+            getVariantBuilder(f.block).partialState().setModels(new ConfiguredModel(model));
         }
     }
 

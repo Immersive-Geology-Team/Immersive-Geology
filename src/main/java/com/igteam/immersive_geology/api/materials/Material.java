@@ -246,4 +246,8 @@ public abstract class Material
 
     public abstract MaterialEnum getProcessedType();
 	public abstract MaterialEnum getSecondaryType();
+
+	public int getViscosity(){
+		return 1000;
+	}
 }

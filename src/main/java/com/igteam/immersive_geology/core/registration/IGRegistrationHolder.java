@@ -1,22 +1,31 @@
 package com.igteam.immersive_geology.core.registration;
 
+import blusunrize.immersiveengineering.common.util.IELogger;
+import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.SortedMap;
 
@@ -26,6 +35,8 @@ public class IGRegistrationHolder {
 
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
     public static HashMap<String, IGBlockType> registeredIGBlocks = new HashMap<>();
+    public static HashMap<String, IGFluid> registeredIGFluids = new HashMap<>();
+
 
     private static Logger log = ImmersiveGeology.getNewLogger();
 
@@ -47,7 +58,13 @@ public class IGRegistrationHolder {
         registeredIGBlocks.values().forEach((block) ->{
             event.getRegistry().register(block.getSelf());
         });
+    }
 
+
+    @SubscribeEvent
+    public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
+        for(Fluid fluid : registeredIGFluids.values())
+            event.getRegistry().register(fluid);
     }
 
     public static Item getItemByMaterial(Material material, MaterialUseType useType){
@@ -64,6 +81,10 @@ public class IGRegistrationHolder {
 
     public static String getRegistryKey(Material materialBase, Material materialOre, MaterialUseType type){
         return (type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName());
+    }
+
+    public static Fluid getFluidByMaterial(Material material){
+        return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.FLUIDS));
     }
 
     public static Block getBlockByMaterial(MaterialUseType useType, Material material) {

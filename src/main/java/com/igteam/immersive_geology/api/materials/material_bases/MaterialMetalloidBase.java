@@ -33,7 +33,6 @@ public abstract class MaterialMetalloidBase extends Material
 			case TINY_DUST:
 				return hasDust();
 			case STORAGE_BLOCK:
-			case FLUIDS:
 				return true;
 			default:
 				return false;

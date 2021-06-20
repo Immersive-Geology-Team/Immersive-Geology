@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.materials;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 
 public enum MaterialUseType {
@@ -72,5 +73,9 @@ public enum MaterialUseType {
 
     public Block getBlock(MaterialEnum material) {
         return IGRegistrationHolder.getBlockByMaterial(this, material.getMaterial());
+    }
+
+    public Fluid getFluid(MaterialEnum material) {
+        return IGRegistrationHolder.getFluidByMaterial(material.getMaterial());
     }
 }

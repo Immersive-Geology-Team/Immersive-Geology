@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.core.data.generators.recipe;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
@@ -12,6 +13,7 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistration;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.mojang.authlib.UserType;
+import com.sun.swing.internal.plaf.metal.resources.metal;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
@@ -21,6 +23,9 @@ import net.minecraft.resources.ResourcePackType;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 import java.nio.file.Path;
+
+import static com.igteam.immersive_geology.core.data.generators.helpers.IGTags.createItemWrapper;
 
 public class IGRecipeProvider extends RecipeProvider {
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();
@@ -50,11 +57,14 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        CrusherRecipeBuilder crusherBuilder;
+
         for(MaterialEnum material : MaterialEnum.values()) {
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
             Item ingot =  MaterialUseType.INGOT.getItem(material);
+            Item dust = MaterialUseType.DUST.getItem(material);
 
             if(material.getMaterial().hasSubtype(MaterialUseType.NUGGET) && material.getMaterial().hasSubtype(MaterialUseType.INGOT)){
                 add3x3Conversion(ingot, nugget, tags.nugget, consumer);
@@ -65,6 +75,13 @@ public class IGRecipeProvider extends RecipeProvider {
                     add3x3Conversion(metal_block, ingot, tags.ingot, consumer);
                     log.info("Generate Storage Block recipe for: " + material.getMaterial().getName());
                 }
+
+                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+                    crusherBuilder.addCondition(getTagCondition(tags.dust)).addCondition(getTagCondition(tags.ingot));
+                crusherBuilder.addInput(tags.ingot)
+                        .setEnergy(3000)
+                        .build(consumer, toRL("crusher/ingot_"+ material.getMaterial().getName()));
+
             }
 
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {
@@ -88,7 +105,6 @@ public class IGRecipeProvider extends RecipeProvider {
 
                     MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
 
-                    CrusherRecipeBuilder crusherBuilder;
                     crusherBuilder = CrusherRecipeBuilder.builder(tags.crushed_ore, 2);
                     if(secondary_material != null){
                         Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
@@ -127,6 +143,16 @@ public class IGRecipeProvider extends RecipeProvider {
 
     private final int standardSmeltingTime = 200;
     private final int blastDivider = 2;
+
+    public static ICondition getTagCondition(ITag.INamedTag<?> tag)
+    {
+        return new NotCondition(new TagEmptyCondition(tag.getName()));
+    }
+
+    public static ICondition getTagCondition(ResourceLocation tag)
+    {
+        return getTagCondition(createItemWrapper(tag));
+    }
 
     private void addStandardSmeltingBlastingRecipe(IItemProvider input, IItemProvider output, float xp, Consumer<IFinishedRecipe> out)
     {

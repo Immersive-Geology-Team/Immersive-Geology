@@ -1,16 +1,22 @@
 package com.igteam.immersive_geology.core.registration;
 
+import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.util.IGRegistryGrabber;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
+import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Logger;
 
 public class IGVariantHolder {
@@ -27,6 +33,11 @@ public class IGVariantHolder {
                         createBlockVariants(mat, type);
                     } else {
                         createItemVariants(mat, type);
+
+                        if(type == MaterialUseType.FLUIDS) {
+                            registerFluidType(mat);
+                        }
+
                     }
                 }
             }
@@ -43,6 +54,8 @@ public class IGVariantHolder {
             case CHUNK:
                 registerOreItem(material, type);
                 registerBasicItem(material, type);
+                break;
+            case FLUIDS:
                 break;
             default:
                 registerBasicItem(material, type);
@@ -61,6 +74,20 @@ public class IGVariantHolder {
                     IGRegistrationHolder.registeredIGItems.put(holder_key, item);
                 }
             }
+        }
+    }
+
+    private static void registerFluidType(Material material){
+        if(material instanceof MaterialFluidBase) {
+            MaterialFluidBase fluid_material = (MaterialFluidBase) material;
+            String fluid_name = fluid_material.getName();
+
+            IGFluid fluid;
+            fluid = new IGFluid(fluid_material,IGFluid.createBuilder((int) fluid_material.getDensity(), fluid_material.getViscosity()));
+            if(fluid_material.getContactEffect() != null) {
+                fluid.block.setEffect(fluid_material.getContactEffect(), fluid_material.getContactEffectDuration(), fluid_material.getContactEffectLevel());
+            }
+            log.info("Registering Fluid Type: " + fluid_name);
         }
     }
 
@@ -102,6 +129,8 @@ public class IGVariantHolder {
                 break;
             case SHEETMETAL_STAIRS:
                 registerStairsBlock(material);
+                break;
+            case FLUIDS:
                 break;
             default:
                 registerBasicBlock(material, type);

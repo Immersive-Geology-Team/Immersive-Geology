@@ -1,0 +1,27 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/unobtainium"
+  },
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:dusts/unobtainium",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "value": {
+        "tag": "forge:ingots/unobtainium",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "input": {
+    "tag": "forge:ingots/unobtainium"
+  },
+  "energy": 3000
+}

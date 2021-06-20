@@ -38,7 +38,6 @@ public abstract class MaterialMetalBase extends Material
 			case DUST_BLOCK:
 				return hasDustBlock();
 			case STORAGE_BLOCK:
-			case FLUIDS:
 				return true;
 			case ORE_CHUNK:
 			case ORE_BIT:

@@ -68,15 +68,16 @@ public class BlockLootProvider implements IDataProvider {
                 );
             } else if(b instanceof IGBlockType){
                 IGBlockType blockType = (IGBlockType) b;
-
-                Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
-                if(itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
-                    functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
-                                    .addEntry(ItemLootEntry.builder(itemDrop))));
-                } else {
-                    functionTable.put(b, BlockLootProvider::genRegular);
+                if(blockType.getBlockUseType() != MaterialUseType.FLUIDS) {
+                    Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
+                    if (itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
+                        functionTable.put(b, (block) -> LootTable.builder()
+                                .addLootPool(LootPool.builder()
+                                        .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
+                                        .addEntry(ItemLootEntry.builder(itemDrop))));
+                    } else {
+                        functionTable.put(b, BlockLootProvider::genRegular);
+                    }
                 }
             }
         }
