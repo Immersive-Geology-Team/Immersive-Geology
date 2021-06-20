@@ -131,4 +131,9 @@ public abstract class MaterialMetalBase extends Material
 	public MaterialEnum getSecondaryType() {
 		return null;
 	}
+
+	@Override
+	public boolean preExists() {
+		return false;
+	}
 }

@@ -64,7 +64,12 @@ public class IGRegistrationHolder {
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
         for(Fluid fluid : registeredIGFluids.values())
-            event.getRegistry().register(fluid);
+            try {
+                event.getRegistry().register(fluid);
+            } catch (Throwable e){
+                log.error("Failed to register a fluid. ({}, {})", fluid, fluid.getRegistryName());
+                throw e;
+            }
     }
 
     public static Item getItemByMaterial(Material material, MaterialUseType useType){

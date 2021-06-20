@@ -76,6 +76,11 @@ public abstract class MaterialStoneBase extends Material
 	}
 
 	@Override
+	public boolean preExists() {
+		return false;
+	}
+
+	@Override
 	public MaterialEnum getProcessedType() {
 		return null;
 	}

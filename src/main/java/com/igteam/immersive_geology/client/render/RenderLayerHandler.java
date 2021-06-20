@@ -1,15 +1,12 @@
 package com.igteam.immersive_geology.client.render;
 
-import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.HashMap;

@@ -76,12 +76,13 @@ public class IGRecipeProvider extends RecipeProvider {
                     log.info("Generate Storage Block recipe for: " + material.getMaterial().getName());
                 }
 
-                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+                if(!material.getMaterial().preExists()) {
+                    crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
                     crusherBuilder.addCondition(getTagCondition(tags.dust)).addCondition(getTagCondition(tags.ingot));
-                crusherBuilder.addInput(tags.ingot)
-                        .setEnergy(3000)
-                        .build(consumer, toRL("crusher/ingot_"+ material.getMaterial().getName()));
-
+                    crusherBuilder.addInput(tags.ingot)
+                            .setEnergy(3000)
+                            .build(consumer, toRL("crusher/ingot_" + material.getMaterial().getName()));
+                }
             }
 
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {

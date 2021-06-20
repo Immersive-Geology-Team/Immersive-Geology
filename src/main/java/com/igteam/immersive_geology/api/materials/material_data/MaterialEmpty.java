@@ -111,6 +111,10 @@ public class MaterialEmpty extends Material
 		return IGContent.;
 	}*/
 
+	@Override
+	public boolean preExists() {
+		return false;
+	}
 
 	@Override
 	public MaterialEnum getProcessedType() {

@@ -80,7 +80,7 @@ public class IGTags {
             }
 
             if(material.hasSubtype(MaterialUseType.FLUIDS)) {
-                fluid = createFluidWrapper(getFluid(name));
+                fluid = createFluidWrapper(forgeLoc(name));
             } else {
                 fluid = null;
             }

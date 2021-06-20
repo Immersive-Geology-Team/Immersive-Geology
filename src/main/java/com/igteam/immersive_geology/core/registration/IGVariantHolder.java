@@ -13,11 +13,16 @@ import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import com.igteam.immersive_geology.core.data.generators.helpers.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class IGVariantHolder {
 
@@ -77,6 +82,8 @@ public class IGVariantHolder {
         }
     }
 
+    public static ArrayList<Fluid> fluidlist = new ArrayList<Fluid>();
+
     private static void registerFluidType(Material material){
         if(material instanceof MaterialFluidBase) {
             MaterialFluidBase fluid_material = (MaterialFluidBase) material;
@@ -87,6 +94,9 @@ public class IGVariantHolder {
             if(fluid_material.getContactEffect() != null) {
                 fluid.block.setEffect(fluid_material.getContactEffect(), fluid_material.getContactEffectDuration(), fluid_material.getContactEffectLevel());
             }
+
+            fluidlist.add(fluid);
+
             log.info("Registering Fluid Type: " + fluid_name);
         }
     }

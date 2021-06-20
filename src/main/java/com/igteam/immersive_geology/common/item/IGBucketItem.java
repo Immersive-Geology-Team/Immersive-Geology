@@ -22,12 +22,13 @@ import java.util.function.Supplier;
 
 public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterfaces.IColouredItem{
 
-
+    protected ItemSubGroup subGroup;
     private final Material fluidMaterial;
 
     public IGBucketItem(Supplier<? extends Fluid> p_i244800_1_, Material material, Properties p_i244800_2_) {
         super(p_i244800_1_, p_i244800_2_.group(ImmersiveGeology.IGGroup));
         this.fluidMaterial = material;
+        this.subGroup = ItemSubGroup.misc;
     }
 
     @Override
@@ -41,6 +42,18 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
 
     @Override
     public ItemSubGroup getSubGroup() {
-        return ItemSubGroup.misc;
+        return subGroup;
+    }
+
+    @Override
+    public boolean hasCustomItemColours()
+    {
+        return true;
+    }
+
+    @Override
+    public int getColourForIEItem(ItemStack stack, int pass)
+    {
+        return fluidMaterial.getColor(0);
     }
 }

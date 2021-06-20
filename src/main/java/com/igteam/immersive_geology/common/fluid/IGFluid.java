@@ -53,7 +53,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class IGFluid extends FlowingFluid {
+
     public static final Collection<IGFluid> IG_FLUIDS = new ArrayList<>();
+
     protected final String fluidName;
     protected final ResourceLocation stillTex;
     protected final ResourceLocation flowingTex;

@@ -250,4 +250,7 @@ public abstract class Material
 	public int getViscosity(){
 		return 1000;
 	}
+
+	//Check to see if this material already exists, used to prevent recipe duplication.
+	public abstract boolean preExists();
 }

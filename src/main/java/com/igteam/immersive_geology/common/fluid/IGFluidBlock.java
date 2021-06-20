@@ -3,11 +3,13 @@ package com.igteam.immersive_geology.common.fluid;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EmitterParticle;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FluidState;
@@ -17,10 +19,14 @@ import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType {
@@ -114,6 +120,15 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType {
     @Override
     public float maxDrops() {
         return 0;
+    }
+
+
+    @Override
+    public IFormattableTextComponent getTranslatedName() {
+        ArrayList<String> localizedNames = new ArrayList<>();
+        localizedNames.add(I18n.format("material."+ IGLib.MODID + "." + igFluid.fluidMaterial.getName().toLowerCase()));
+        TranslationTextComponent name = new TranslationTextComponent("block."+ IGLib.MODID+"."+ MaterialUseType.BUCKET.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+        return name;
     }
 
     @Override

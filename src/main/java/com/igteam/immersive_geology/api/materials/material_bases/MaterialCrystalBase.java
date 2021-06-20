@@ -97,6 +97,11 @@ public abstract class MaterialCrystalBase extends Material
 	}
 
 	@Override
+	public boolean preExists() {
+		return false;
+	}
+
+	@Override
 	public MaterialEnum getSecondaryType() {
 		return null;
 	}

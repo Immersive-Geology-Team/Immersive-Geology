@@ -99,6 +99,11 @@ public abstract class MaterialFluidBase extends Material
 		return new ResourceLocation(IGLib.MODID + ":block/fluid/" + getName() + "_flow");
 	}
 
+	@Override
+	public boolean preExists() {
+		return false;
+	}
+
 	public boolean getIsSolid(){
 		return isSolid;
 	}
