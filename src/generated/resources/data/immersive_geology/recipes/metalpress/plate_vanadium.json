@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_plate"
+  },
+  "result": {
+    "tag": "forge:plates/vanadium"
+  },
+  "input": {
+    "tag": "forge:ingots/vanadium"
+  },
+  "energy": 2400
+}

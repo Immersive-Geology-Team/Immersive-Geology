@@ -1,0 +1,16 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_gear"
+  },
+  "result": {
+    "tag": "forge:gears/nickel"
+  },
+  "input": {
+    "count": 4,
+    "base_ingredient": {
+      "tag": "forge:ingots/nickel"
+    }
+  },
+  "energy": 2400
+}

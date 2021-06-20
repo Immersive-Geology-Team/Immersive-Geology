@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_rod"
+  },
+  "result": {
+    "tag": "forge:rods/tin"
+  },
+  "input": {
+    "tag": "forge:ingots/tin"
+  },
+  "energy": 2400
+}

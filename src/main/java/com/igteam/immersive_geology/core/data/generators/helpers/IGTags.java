@@ -39,6 +39,10 @@ public class IGTags {
         public final INamedTag<Item> ingot;
         public final INamedTag<Block> metal_block;
         public final INamedTag<Item> crushed_ore;
+        public final INamedTag<Item> plate;
+        public final INamedTag<Item> rod;
+        public final INamedTag<Item> gear;
+        public final INamedTag<Item> wire;
 
         private MaterialTags(MaterialEnum mat) {
             String name = mat.getMaterial().getName();
@@ -49,6 +53,11 @@ public class IGTags {
             crushed_ore = createItemWrapper(getOreClumps(name));
 
             metal_block = createBlockWrapper(getStorageBlock(name));
+
+            plate = createItemWrapper(getPlate(name));
+            rod = createItemWrapper(getRod(name));
+            gear = createItemWrapper(getGear(name));
+            wire = createItemWrapper(getWire(name));
         }
     }
 

@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_rod"
+  },
+  "result": {
+    "tag": "forge:rods/manganese"
+  },
+  "input": {
+    "tag": "forge:ingots/manganese"
+  },
+  "energy": 2400
+}
