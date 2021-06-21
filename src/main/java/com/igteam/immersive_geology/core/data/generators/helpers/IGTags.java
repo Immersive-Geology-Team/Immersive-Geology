@@ -90,11 +90,31 @@ public class IGTags {
             } else {
                 fluid = null;
             }
-			
-			plate = createItemWrapper(getPlate(name));
-            rod = createItemWrapper(getRod(name));
-            gear = createItemWrapper(getGear(name));
-            wire = createItemWrapper(getWire(name));
+			if (material.hasSubtype(MaterialUseType.PLATE))
+            {
+                plate = createItemWrapper(getPlate(name));
+            } else {
+                plate = null;
+            }
+
+            if (material.hasSubtype(MaterialUseType.ROD))
+            {
+                rod = createItemWrapper(getRod(name));
+            } else {
+                rod = null;
+            }
+            if (material.hasSubtype(MaterialUseType.GEAR))
+            {
+                gear = createItemWrapper(getGear(name));
+            } else {
+                gear = null;
+            }
+            if (material.hasSubtype(MaterialUseType.WIRE))
+            {
+                wire = createItemWrapper(getWire(name));
+            } else {
+                wire = null;
+            }
         }
     }
 
