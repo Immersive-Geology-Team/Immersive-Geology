@@ -51,6 +51,8 @@ public class IGItemModelProvider extends ItemModelProvider {
                         case RAW_CRYSTAL:
                             generateCrystalItem(itemBase);
                             break;
+                        case FLUIDS:
+                            break;
                         default:
                             genericItem(item);
                     }

@@ -77,6 +77,10 @@ public abstract class MaterialMineralBase extends Material
 		return null;
 	}
 
+	@Override
+	public boolean preExists() {
+		return false;
+	}
 
 	@Override
 	public MaterialEnum getSecondaryType() {

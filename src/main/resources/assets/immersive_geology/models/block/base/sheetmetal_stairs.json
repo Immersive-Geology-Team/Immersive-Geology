@@ -1,4 +1,4 @@
-{   "parent": "block/base",
+{   "parent": "block/block",
   "display": {
     "gui": {
       "rotation": [ 30, 135, 0 ],

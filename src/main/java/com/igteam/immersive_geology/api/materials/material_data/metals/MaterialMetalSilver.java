@@ -98,6 +98,11 @@ public class MaterialMetalSilver extends MaterialMetalBase
 	}
 
 	@Override
+	public boolean preExists() {
+		return true;
+	}
+
+	@Override
 	public EnumMetalType getMetalType()
 	{
 		return EnumMetalType.METAL;

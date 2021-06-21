@@ -5,9 +5,12 @@ import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.Lib;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
@@ -39,22 +42,56 @@ public class IGTags {
         public final INamedTag<Item> ingot;
         public final INamedTag<Block> metal_block;
         public final INamedTag<Item> crushed_ore;
+		public final INamedTag<Fluid> fluid;
+		public final INamedTag<Item> dust;
+
+
         public final INamedTag<Item> plate;
         public final INamedTag<Item> rod;
         public final INamedTag<Item> gear;
         public final INamedTag<Item> wire;
-
+       
         private MaterialTags(MaterialEnum mat) {
             String name = mat.getMaterial().getName();
-            nugget = createItemWrapper(getNugget(name));
+            Material material = mat.getMaterial();
 
-            ingot = createItemWrapper(getIngot(name));
+            if(material.hasSubtype(MaterialUseType.NUGGET)) {
+                nugget = createItemWrapper(getNugget(name));
+            } else {
+                nugget = null;
+            }
 
-            crushed_ore = createItemWrapper(getOreClumps(name));
+            if(material.hasSubtype(MaterialUseType.INGOT)) {
+                ingot = createItemWrapper(getIngot(name));
+            } else {
+                ingot = null;
+            }
 
-            metal_block = createBlockWrapper(getStorageBlock(name));
+            if(material.hasSubtype(MaterialUseType.DUST)) {
+                dust = createItemWrapper(getDust(name));
+            } else {
+                dust = null;
+            }
 
-            plate = createItemWrapper(getPlate(name));
+            if(material.hasSubtype(MaterialUseType.ORE_CRUSHED)) {
+                crushed_ore = createItemWrapper(getOreClumps(name));
+            } else {
+                crushed_ore = null;
+            }
+
+            if(material.hasSubtype(MaterialUseType.STORAGE_BLOCK)) {
+                metal_block = createBlockWrapper(getStorageBlock(name));
+            } else {
+                metal_block = null;
+            }
+
+            if(material.hasSubtype(MaterialUseType.FLUIDS)) {
+                fluid = createFluidWrapper(forgeLoc(name));
+            } else {
+                fluid = null;
+            }
+			
+			plate = createItemWrapper(getPlate(name));
             rod = createItemWrapper(getRod(name));
             gear = createItemWrapper(getGear(name));
             wire = createItemWrapper(getWire(name));
@@ -64,6 +101,14 @@ public class IGTags {
     public static INamedTag<Block> createBlockWrapper(ResourceLocation name)
     {
         return BlockTags.makeWrapperTag(name.toString());
+    }
+
+    public static INamedTag<Fluid> createFluidWrapper(ResourceLocation name){
+        return FluidTags.makeWrapperTag(name.toString());
+    }
+
+    public static ResourceLocation getFluid(String type) {
+        return forgeLoc("fluids/"+type);
     }
 
     private static INamedTag<Block> createBlockTag(ResourceLocation name)

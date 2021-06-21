@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
+import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -80,6 +81,20 @@ public class IGItemGroup extends ItemGroup {
                                 list.add(item);
                                 itemMap.replace(use_type, list);
                             }
+                        }
+                    }
+
+                    if(item instanceof IGBucketItem){
+                        IGBucketItem bucketItem = (IGBucketItem) item;
+                        MaterialUseType use_type = MaterialUseType.BUCKET;
+                        if(itemMap.containsKey(use_type)){
+                            ArrayList<Item> list = itemMap.get(use_type);
+                            list.add(bucketItem);
+                            itemMap.replace(use_type, list);
+                        } else {
+                            ArrayList<Item> list = new ArrayList<>();
+                            list.add(bucketItem);
+                            itemMap.put(use_type, list);
                         }
                     }
 

@@ -19,7 +19,7 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onClientSetup(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
-        RenderLayerHandler.init();
+        RenderLayerHandler.init(event);
         registerItemColors();
         registerBlockColors();
     }

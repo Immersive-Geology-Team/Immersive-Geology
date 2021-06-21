@@ -1,6 +1,9 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.potion.Effect;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Set;
 
@@ -10,6 +13,8 @@ import java.util.Set;
 public abstract class MaterialFluidBase extends Material
 {
 	public abstract EnumFluidType getFluidType();
+
+	protected boolean isSolid = false;
 
 	public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
 
@@ -72,5 +77,34 @@ public abstract class MaterialFluidBase extends Material
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return null;
+	}
+
+	public Effect getContactEffect(){
+		return null;
+	}
+
+	public int getContactEffectDuration(){
+		return 0;
+	}
+
+	public int getContactEffectLevel(){
+		return 0;
+	}
+
+	public ResourceLocation getFluidStill(){
+		return new ResourceLocation(IGLib.MODID + ":block/fluid/" + getName() + "_still");
+	}
+
+	public ResourceLocation getFluidFlowing(){
+		return new ResourceLocation(IGLib.MODID + ":block/fluid/" + getName() + "_flow");
+	}
+
+	@Override
+	public boolean preExists() {
+		return false;
+	}
+
+	public boolean getIsSolid(){
+		return isSolid;
 	}
 }

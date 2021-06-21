@@ -1,11 +1,13 @@
 package com.igteam.immersive_geology.client.render;
 
+import com.igteam.immersive_geology.common.fluid.IGFluid;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,15 +32,23 @@ public class RenderLayerHandler {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void init() {
+    public static void init(FMLClientSetupEvent event) {
         for(Block b : inheritances.keySet()) {
             Block inherit = inheritances.get(b);
             if(mapping.containsKey(inherit))
                 mapping.put(b, mapping.get(inherit));
         }
 
-        for(Block b : mapping.keySet())
+        for(Block b : mapping.keySet()) {
             RenderTypeLookup.setRenderLayer(b, renderTypes.get(mapping.get(b)));
+        }
+
+        for(IGFluid fluid : IGFluid.IG_FLUIDS){
+            if(!fluid.isSolidFluid()) {
+                RenderTypeLookup.setRenderLayer(fluid, RenderType.getTranslucent());
+                RenderTypeLookup.setRenderLayer(fluid.getFlowingFluid(), RenderType.getTranslucent());
+            }
+        }
 
         inheritances.clear();
         mapping.clear();
