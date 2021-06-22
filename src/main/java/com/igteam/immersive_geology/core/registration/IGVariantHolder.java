@@ -11,12 +11,15 @@ import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.data.generators.helpers.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -62,6 +65,9 @@ public class IGVariantHolder {
                 break;
             case FLUIDS:
                 break;
+            case FLASK:
+                registerBucketItem(material, type);
+                break;
             default:
                 registerBasicItem(material, type);
         }
@@ -82,8 +88,6 @@ public class IGVariantHolder {
         }
     }
 
-    public static ArrayList<Fluid> fluidlist = new ArrayList<Fluid>();
-
     private static void registerFluidType(Material material){
         if(material instanceof MaterialFluidBase) {
             MaterialFluidBase fluid_material = (MaterialFluidBase) material;
@@ -94,8 +98,19 @@ public class IGVariantHolder {
             if(fluid_material.getContactEffect() != null) {
                 fluid.block.setEffect(fluid_material.getContactEffect(), fluid_material.getContactEffectDuration(), fluid_material.getContactEffectLevel());
             }
+            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLUIDS), fluid);
+            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLUIDS) + "_flowing", fluid.getFlowingFluid());
+            IGRegistrationHolder.registeredIGBlocks.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLUIDS), fluid.block);
 
-            fluidlist.add(fluid);
+            if(fluid_material.hasBucket()) {
+                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.BUCKET), fluid.getBucket());
+                log.info("Registering Bucket for fluid: " + fluid_name);
+            }
+
+            if(fluid_material.hasFlask()){
+                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLASK), fluid.getBucket());
+                log.info("Registering Flask for fluid: " + fluid_name);
+            }
 
             log.info("Registering Fluid Type: " + fluid_name);
         }
@@ -108,6 +123,13 @@ public class IGVariantHolder {
     private static void registerBasicItem(Material material, MaterialUseType type){
         String holder_key = type.getName()+"_"+material.getName();
         ItemBase item = new ItemBase(holder_key, material, type);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, item);
+    }
+
+    private static void registerBucketItem(Material material, MaterialUseType useType){
+        String holder_key = useType.getName()+"_"+material.getName();
+        IGBucketItem item = new IGBucketItem(() -> Fluids.EMPTY, material, useType, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup));
+        item.setRegistryName(holder_key);
         IGRegistrationHolder.registeredIGItems.put(holder_key, item);
     }
 

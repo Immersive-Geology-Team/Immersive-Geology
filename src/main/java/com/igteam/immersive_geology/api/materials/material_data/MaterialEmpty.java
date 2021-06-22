@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.materials.material_data;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
@@ -124,5 +125,10 @@ public class MaterialEmpty extends Material
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return null;
+	}
+
+	@Override
+	public boolean hasSubtype(MaterialUseType useType) {
+		return false;
 	}
 }

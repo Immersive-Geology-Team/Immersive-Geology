@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialGlassBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
@@ -95,8 +96,13 @@ public enum MaterialEnum {
     Vanilla(new MaterialStoneVanilla()),
 
     //Fluids
+    Brine(new MaterialFluidBrine()),
+
     SulfuricAcid(new MaterialFluidSulfuricAcid()),
-    HydrochloricAcid(new MaterialFluidHydrochloricAcid());
+    HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
+
+    //Glass
+    Glass(new MaterialGlassBase());
 
     private final Material material;
 

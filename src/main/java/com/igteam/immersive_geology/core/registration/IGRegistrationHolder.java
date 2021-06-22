@@ -32,10 +32,9 @@ import java.util.SortedMap;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class IGRegistrationHolder {
 
-
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
     public static HashMap<String, IGBlockType> registeredIGBlocks = new HashMap<>();
-    public static HashMap<String, IGFluid> registeredIGFluids = new HashMap<>();
+    public static HashMap<String, Fluid> registeredIGFluids = new HashMap<>();
 
 
     private static Logger log = ImmersiveGeology.getNewLogger();
@@ -44,7 +43,7 @@ public class IGRegistrationHolder {
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
         log.warn("Applying Registration");
         registeredIGItems.values().forEach((item) -> {
-            event.getRegistry().register(item);
+                event.getRegistry().register(item);
         });
     }
 
@@ -59,7 +58,6 @@ public class IGRegistrationHolder {
             event.getRegistry().register(block.getSelf());
         });
     }
-
 
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
@@ -88,8 +86,8 @@ public class IGRegistrationHolder {
         return (type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName());
     }
 
-    public static Fluid getFluidByMaterial(Material material){
-        return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.FLUIDS));
+    public static Fluid getFluidByMaterial(Material material, boolean isFlowing){
+        return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.FLUIDS) + (isFlowing ? "_flowing" : ""));
     }
 
     public static Block getBlockByMaterial(MaterialUseType useType, Material material) {

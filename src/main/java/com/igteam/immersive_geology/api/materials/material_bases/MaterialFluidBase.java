@@ -27,6 +27,8 @@ public abstract class MaterialFluidBase extends Material
 		{
 			case BUCKET:
 				return hasBucket();
+			case FLASK:
+				return hasFlask();
 			case FLUIDS:
 				return hasFluidBlock();
 		}
@@ -60,7 +62,7 @@ public abstract class MaterialFluidBase extends Material
 
 	public boolean hasBucket()
 	{
-		return true;
+		return false;
 	}
 
 	public boolean hasFluidBlock()
@@ -106,5 +108,9 @@ public abstract class MaterialFluidBase extends Material
 
 	public boolean getIsSolid(){
 		return isSolid;
+	}
+
+	public boolean hasFlask() {
+		return false;
 	}
 }

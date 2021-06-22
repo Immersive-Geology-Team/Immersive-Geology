@@ -28,6 +28,7 @@ public enum MaterialUseType {
     CUT_CRYSTAL(false, ItemSubGroup.processed),
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
+    FLASK(false, ItemSubGroup.processed),
     FLUIDS(false, ItemSubGroup.misc),
     ROD(false, ItemSubGroup.processed),
     INGOT(false, ItemSubGroup.processed),
@@ -75,7 +76,7 @@ public enum MaterialUseType {
         return IGRegistrationHolder.getBlockByMaterial(this, material.getMaterial());
     }
 
-    public Fluid getFluid(MaterialEnum material) {
-        return IGRegistrationHolder.getFluidByMaterial(material.getMaterial());
+    public Fluid getFluid(MaterialEnum material, boolean isFlowing) {
+        return IGRegistrationHolder.getFluidByMaterial(material.getMaterial(), isFlowing);
     }
 }

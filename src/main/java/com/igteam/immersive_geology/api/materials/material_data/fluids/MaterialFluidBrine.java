@@ -84,7 +84,7 @@ public class MaterialFluidBrine extends MaterialFluidBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xffffff;
+		return 0xF7E9A2;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal
@@ -118,5 +118,15 @@ public class MaterialFluidBrine extends MaterialFluidBase
 	public int getBlockHarvestLevel()
 	{
 		return 0;
+	}
+
+	@Override
+	public boolean hasFlask() {
+		return false;
+	}
+
+	@Override
+	public boolean hasBucket() {
+		return true;
 	}
 }

@@ -1,11 +1,13 @@
 package com.igteam.immersive_geology.core.data.generators;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
+import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.data.IGDataProvider;
@@ -13,15 +15,19 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.system.CallbackI;
 
 public class IGItemModelProvider extends ItemModelProvider {
+
+    private Logger log = ImmersiveGeology.getNewLogger();
 
     public IGItemModelProvider(DataGenerator gen, ExistingFileHelper exHelper){
         super(gen, IGLib.MODID, exHelper);
@@ -37,6 +43,10 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         for(Item item : IGRegistrationHolder.registeredIGItems.values()){
             try{
+                if(item instanceof IGBucketItem){
+                    IGBucketItem itemBase = ((IGBucketItem) item);
+                    genericFlask(item);
+                } else
                 if(item instanceof IGBlockItem){
                     IGBlockItem blockItem = (IGBlockItem) item;
                     generateBlockItem(blockItem);
@@ -98,6 +108,8 @@ public class IGItemModelProvider extends ItemModelProvider {
         getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(0).uvs(0, 0, 16, 16)));
     }
 
+
+
     private void genericItem(Item item){
         if(item == null){
             StackTraceElement where = new NullPointerException().getStackTrace()[1];
@@ -116,6 +128,20 @@ public class IGItemModelProvider extends ItemModelProvider {
         }
         IGOreItem i = (IGOreItem) item;
         withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
+    }
+
+    private void genericFlask(Item item){
+        if(item == null){
+            StackTraceElement where = new NullPointerException().getStackTrace()[1];
+            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            return;
+        }
+        IGBucketItem i = (IGBucketItem) item;
+        if(i.getFluid() == Fluids.EMPTY){
+            withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/empty_" + i.getUseType().getName()));
+        } else {
+            withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getUseType().getName()));
+        }
     }
 
     private void createBucket(Fluid f){

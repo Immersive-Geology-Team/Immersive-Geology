@@ -93,4 +93,14 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
     public int getContactEffectLevel(){
         return 4;
     }
+
+    @Override
+    public boolean hasFlask() {
+        return true;
+    }
+
+    @Override
+    public boolean hasBucket() {
+        return false;
+    }
 }

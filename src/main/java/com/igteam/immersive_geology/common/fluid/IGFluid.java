@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
+import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistration;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -89,7 +90,6 @@ public class IGFluid extends FlowingFluid {
         this.flowingTex = material.getFluidFlowing();
         this.buildAttributes = buildAttributes;
         this.isSolid = material.getIsSolid();
-        IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS), this);
         if(!isSource){
             flowing = this;
             setRegistryName(IGLib.MODID, IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS) + "_flowing");
@@ -99,10 +99,10 @@ public class IGFluid extends FlowingFluid {
             source = this;
             this.block = new IGFluidBlock(this);
             this.block.setRegistryName(IGLib.MODID, IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS));
-            IGRegistrationHolder.registeredIGBlocks.put(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS), this.block);
+
 
             if(fluidMaterial.hasBucket()) {
-                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(Items.BUCKET)) {
+                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.BUCKET, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(Items.BUCKET)) {
                     @Override
                     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
                         return new FluidBucketWrapper(stack);
@@ -113,10 +113,30 @@ public class IGFluid extends FlowingFluid {
                         return burnTime;
                     }
                 };
+
                 this.bucket.setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET));
-                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET), this.bucket);
                 DispenserBlock.registerDispenseBehavior(this.bucket, BUCKET_DISPENSE_BEHAVIOR);
+
             }
+            if(fluidMaterial.hasFlask()) {
+                Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
+                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask)) {
+                    @Override
+                    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+                        return new FluidBucketWrapper(stack);
+                    }
+
+                    @Override
+                    public int getBurnTime(ItemStack itemStack) {
+                        return burnTime;
+                    }
+                };
+
+                this.bucket.setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLASK));
+                DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
+            }
+
+
 
             flowing = createFlowingVariant();
             setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS));
@@ -298,18 +318,50 @@ public class IGFluid extends FlowingFluid {
 
         public ItemStack dispenseStack(IBlockSource source, ItemStack stack)
         {
-            BucketItem bucketitem = (BucketItem)stack.getItem();
+            IGBucketItem bucketItem = (IGBucketItem)stack.getItem();
             BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
             World world = source.getWorld();
-            if(bucketitem.tryPlaceContainedLiquid(null, world, blockpos, null))
+            if(bucketItem.tryPlaceContainedLiquid(null, world, blockpos, null))
             {
-                bucketitem.onLiquidPlaced(world, stack, blockpos);
+                bucketItem.onLiquidPlaced(world, stack, blockpos);
                 return new ItemStack(Items.BUCKET);
             }
             else
                 return this.defaultBehavior.dispense(source, stack);
         }
     };
+
+    public static final IDispenseItemBehavior FLASK_DISPENSE_BEHAVIOR = new DefaultDispenseItemBehavior()
+    {
+        private final DefaultDispenseItemBehavior defaultBehavior = new DefaultDispenseItemBehavior();
+
+        public ItemStack dispenseStack(IBlockSource source, ItemStack stack)
+        {
+            IGBucketItem bucketItem = (IGBucketItem)stack.getItem();
+            BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+            World world = source.getWorld();
+            if(bucketItem.tryPlaceContainedLiquid(null, world, blockpos, null))
+            {
+                bucketItem.onLiquidPlaced(world, stack, blockpos);
+                Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
+                return new ItemStack(flask);
+            }
+            else
+                return this.defaultBehavior.dispense(source, stack);
+        }
+    };
+
+    public IGBucketItem getBucket() {
+        return bucket;
+    }
+
+    public boolean hasBucket(){
+        return fluidMaterial.hasBucket();
+    }
+
+    public boolean hasFlask(){
+        return fluidMaterial.hasFlask();
+    }
 
     //controls if the fluid is transparent or not.
     public boolean isSolidFluid() {

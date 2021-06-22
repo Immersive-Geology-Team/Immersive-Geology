@@ -29,7 +29,7 @@ public class IGFluidTagProvider extends FluidTagsProvider
         for(MaterialEnum material : MaterialEnum.fluidValues()) {
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
-            Fluid fluid = MaterialUseType.FLUIDS.getFluid(material);
+            Fluid fluid = MaterialUseType.FLUIDS.getFluid(material, false);
             getOrCreateBuilder(tags.fluid).add(fluid);
 
             log.info("Fluid: " + tags.fluid.getName());

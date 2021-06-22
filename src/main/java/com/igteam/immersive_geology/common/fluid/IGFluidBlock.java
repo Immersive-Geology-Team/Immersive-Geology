@@ -3,16 +3,20 @@ package com.igteam.immersive_geology.common.fluid;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
+import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EmitterParticle;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.state.Property;
@@ -21,6 +25,7 @@ import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -29,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType {
+public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFlaskPickupHandler {
     private final IGFluid igFluid;
     @Nullable
     private Effect effect;
@@ -134,6 +139,28 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType {
     @Override
     public float minDrops() {
         return 0;
+    }
+
+    @Override
+    public Fluid pickupFluid(IWorld iWorld, BlockPos pos, BlockState state) {
+        if(igFluid.hasBucket()){
+          return super.pickupFluid(iWorld, pos, state);
+        } else {
+            return Fluids.EMPTY;
+        }
+    }
+
+    @Override
+    public Fluid pickupFlaskFluid(IWorld iWorld, BlockPos pos, BlockState state) {
+        if(igFluid.hasBucket()){
+            return Fluids.EMPTY;
+        } else
+        if ((Integer)state.get(LEVEL) == 0) {
+            iWorld.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
+            return this.igFluid;
+        } else {
+            return Fluids.EMPTY;
+        }
     }
 }
 

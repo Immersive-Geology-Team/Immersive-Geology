@@ -93,4 +93,14 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
     public int getContactEffectLevel(){
         return 2;
     }
+
+    @Override
+    public boolean hasFlask() {
+        return true;
+    }
+
+    @Override
+    public boolean hasBucket() {
+        return false;
+    }
 }
