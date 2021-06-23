@@ -26,6 +26,7 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
@@ -37,7 +38,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -180,5 +184,10 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
 
     public MaterialUseType getUseType() {
         return useType;
+    }
+
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
+        return new FluidHandlerItemStack(stack, 1000);
     }
 }
