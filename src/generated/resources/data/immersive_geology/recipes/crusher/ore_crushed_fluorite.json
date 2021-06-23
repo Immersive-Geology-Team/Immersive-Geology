@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/fluorite"
+  },
+  "input": {
+    "tag": "forge:clumps/fluorite"
+  },
+  "energy": 3000
+}

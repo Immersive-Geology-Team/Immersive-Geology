@@ -41,7 +41,7 @@ public class IGTags {
         public final INamedTag<Item> nugget;
         public final INamedTag<Item> ingot;
         public final INamedTag<Block> metal_block;
-        public final INamedTag<Item> crushed_ore;
+        public final INamedTag<Item> ore_crushed;
 		public final INamedTag<Fluid> fluid;
 		public final INamedTag<Item> dust;
 
@@ -74,9 +74,9 @@ public class IGTags {
             }
 
             if(material.hasSubtype(MaterialUseType.ORE_CRUSHED)) {
-                crushed_ore = createItemWrapper(getOreClumps(name));
+                ore_crushed = createItemWrapper(getOreClumps(name));
             } else {
-                crushed_ore = null;
+                ore_crushed = null;
             }
 
             if(material.hasSubtype(MaterialUseType.STORAGE_BLOCK)) {

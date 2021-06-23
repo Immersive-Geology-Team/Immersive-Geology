@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersive_geology:dust_manganese"
+      }
+    }
+  ],
+  "result": {
+    "tag": "forge:dusts/wolframite"
+  },
+  "input": {
+    "tag": "forge:clumps/wolframite"
+  },
+  "energy": 3000
+}

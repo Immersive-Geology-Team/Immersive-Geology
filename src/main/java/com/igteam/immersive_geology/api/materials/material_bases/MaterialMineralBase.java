@@ -24,6 +24,7 @@ public abstract class MaterialMineralBase extends Material
 			case ORE_BIT:
 			case ORE_CHUNK:
 			case ORE_CRUSHED:
+			case DUST:
 				return true;
 		}
 		return false;

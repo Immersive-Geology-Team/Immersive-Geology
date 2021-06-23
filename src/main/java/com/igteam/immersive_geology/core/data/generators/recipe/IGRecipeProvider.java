@@ -126,22 +126,24 @@ public class IGRecipeProvider extends RecipeProvider {
                         }
                     }
 
-                    MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
-
-                    crusherBuilder = CrusherRecipeBuilder.builder(tags.crushed_ore, 2);
-                    if(secondary_material != null){
-                        Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
-                        if(secondary_out != null) {
-                            crusherBuilder.addSecondary(secondary_out, 0.33f);
-                        }
-                    }
+                    crusherBuilder = CrusherRecipeBuilder.builder(tags.ore_crushed, 2);
                     crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/ore_"+material.getMaterial().getName()));
 
                 }
 
             }
-
-
+            if(material.getMaterial().hasSubtype(MaterialUseType.ORE_CRUSHED) && material.getMaterial().hasSubtype(MaterialUseType.DUST))
+            {
+                MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
+                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+                if(secondary_material != null){
+                    Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
+                    if(secondary_out != null) {
+                        crusherBuilder.addSecondary(secondary_out, 0.33f);
+                    }
+                }
+                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
+            }
         }
 
 

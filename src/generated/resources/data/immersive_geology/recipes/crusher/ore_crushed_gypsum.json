@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/gypsum"
+  },
+  "input": {
+    "tag": "forge:clumps/gypsum"
+  },
+  "energy": 3000
+}

@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/galena"
+  },
+  "input": {
+    "tag": "forge:clumps/galena"
+  },
+  "energy": 3000
+}
