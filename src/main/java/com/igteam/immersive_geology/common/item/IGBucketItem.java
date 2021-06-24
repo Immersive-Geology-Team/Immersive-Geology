@@ -11,6 +11,7 @@ import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
+import com.igteam.immersive_geology.common.item.helper.IGFlaskFluidHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -22,10 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
@@ -41,8 +39,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -186,8 +189,33 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
         return useType;
     }
 
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack){
+        return FluidUtil.getFluidContained(stack).isPresent();
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack stack) {
+        if (FluidUtil.getFluidContained(stack) != null) {
+            ItemStack ret = stack.copy();
+            FluidUtil.getFluidHandler(ret).ifPresent(handler -> handler.drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE));
+            return ret;
+        }
+        return stack;
+    }
+
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return new FluidHandlerItemStack(stack, 1000);
+        //(container, new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK)), capacity);
+        if (this.useType == MaterialUseType.FLASK )
+        {
+                return new IGFlaskFluidHandler(stack);
+        } else
+        {
+            return  new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
+        }
+
     }
 }
+
