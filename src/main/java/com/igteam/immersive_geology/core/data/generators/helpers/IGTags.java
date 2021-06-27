@@ -41,10 +41,16 @@ public class IGTags {
         public final INamedTag<Item> nugget;
         public final INamedTag<Item> ingot;
         public final INamedTag<Block> metal_block;
-        public final INamedTag<Item> crushed_ore;
-        public final INamedTag<Fluid> fluid;
-        public final INamedTag<Item> dust;
+        public final INamedTag<Item> ore_crushed;
+		public final INamedTag<Fluid> fluid;
+		public final INamedTag<Item> dust;
 
+
+        public final INamedTag<Item> plate;
+        public final INamedTag<Item> rod;
+        public final INamedTag<Item> gear;
+        public final INamedTag<Item> wire;
+       
         private MaterialTags(MaterialEnum mat) {
             String name = mat.getMaterial().getName();
             Material material = mat.getMaterial();
@@ -68,9 +74,9 @@ public class IGTags {
             }
 
             if(material.hasSubtype(MaterialUseType.ORE_CRUSHED)) {
-                crushed_ore = createItemWrapper(getOreClumps(name));
+                ore_crushed = createItemWrapper(getOreClumps(name));
             } else {
-                crushed_ore = null;
+                ore_crushed = null;
             }
 
             if(material.hasSubtype(MaterialUseType.STORAGE_BLOCK)) {
@@ -83,6 +89,31 @@ public class IGTags {
                 fluid = createFluidWrapper(forgeLoc(name));
             } else {
                 fluid = null;
+            }
+			if (material.hasSubtype(MaterialUseType.PLATE))
+            {
+                plate = createItemWrapper(getPlate(name));
+            } else {
+                plate = null;
+            }
+
+            if (material.hasSubtype(MaterialUseType.ROD))
+            {
+                rod = createItemWrapper(getRod(name));
+            } else {
+                rod = null;
+            }
+            if (material.hasSubtype(MaterialUseType.GEAR))
+            {
+                gear = createItemWrapper(getGear(name));
+            } else {
+                gear = null;
+            }
+            if (material.hasSubtype(MaterialUseType.WIRE))
+            {
+                wire = createItemWrapper(getWire(name));
+            } else {
+                wire = null;
             }
         }
     }

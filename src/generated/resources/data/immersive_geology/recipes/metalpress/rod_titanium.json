@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_rod"
+  },
+  "result": {
+    "tag": "forge:rods/titanium"
+  },
+  "input": {
+    "tag": "forge:ingots/titanium"
+  },
+  "energy": 2400
+}

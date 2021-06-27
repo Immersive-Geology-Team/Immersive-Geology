@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_plate"
+  },
+  "result": {
+    "tag": "forge:plates/thorium"
+  },
+  "input": {
+    "tag": "forge:ingots/thorium"
+  },
+  "energy": 2400
+}

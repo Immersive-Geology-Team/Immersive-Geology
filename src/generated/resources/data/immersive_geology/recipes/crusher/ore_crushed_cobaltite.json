@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersive_geology:dust_arsenic"
+      }
+    }
+  ],
+  "result": {
+    "tag": "forge:dusts/cobaltite"
+  },
+  "input": {
+    "tag": "forge:clumps/cobaltite"
+  },
+  "energy": 3000
+}

@@ -1,6 +1,11 @@
 package com.igteam.immersive_geology.core.data.generators.recipe;
 
+
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
+import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
@@ -73,7 +78,27 @@ public class IGRecipeProvider extends RecipeProvider {
                             .build(consumer, toRL("crusher/ingot_" + material.getMaterial().getName()));
                 }
             }
+            if (material.getMaterial().hasSubtype(MaterialUseType.PLATE)) {
+                MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
+                        .setEnergy(2400).build(consumer, toRL("metalpress/plate_"+material.getMaterial().getName()));
+            }
 
+            if (material.getMaterial().hasSubtype(MaterialUseType.ROD)) {
+                MetalPressRecipeBuilder.builder(IEItems.Molds.moldRod, tags.rod, 1).addInput(tags.ingot)
+                        .setEnergy(2400).build(consumer, toRL("metalpress/rod_"+material.getMaterial().getName()));
+            }
+
+
+            if (material.getMaterial().hasSubtype(MaterialUseType.GEAR)) {
+                MetalPressRecipeBuilder.builder(IEItems.Molds.moldGear, tags.gear, 1)
+                        .addInput(new IngredientWithSize(tags.ingot,4))
+                        .setEnergy(2400).build(consumer, toRL("metalpress/gear_"+material.getMaterial().getName()));
+            }
+            if (material.getMaterial().hasSubtype(MaterialUseType.WIRE)) {
+                MetalPressRecipeBuilder.builder(IEItems.Molds.moldWire, tags.wire, 2).addInput(tags.ingot)
+                        .setEnergy(2400).build(consumer, toRL("metalpress/wire_"+material.getMaterial().getName()));
+
+            }
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {
                 if (material.getMaterial().hasSubtype(MaterialUseType.ORE_CHUNK)) {
                     Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base, material);
@@ -93,20 +118,24 @@ public class IGRecipeProvider extends RecipeProvider {
                         }
                     }
 
-                    MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
-
-                    crusherBuilder = CrusherRecipeBuilder.builder(tags.crushed_ore, 2);
-                    if(secondary_material != null){
-                        Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
-                        if(secondary_out != null) {
-                            crusherBuilder.addSecondary(secondary_out, 0.33f);
-                        }
-                    }
+                    crusherBuilder = CrusherRecipeBuilder.builder(tags.ore_crushed, 2);
                     crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/ore_"+material.getMaterial().getName()));
+
                 }
+
             }
-
-
+            if(material.getMaterial().hasSubtype(MaterialUseType.ORE_CRUSHED) && material.getMaterial().hasSubtype(MaterialUseType.DUST))
+            {
+                MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
+                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+                if(secondary_material != null){
+                    Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
+                    if(secondary_out != null) {
+                        crusherBuilder.addSecondary(secondary_out, 0.33f);
+                    }
+                }
+                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
+            }
         }
 
 

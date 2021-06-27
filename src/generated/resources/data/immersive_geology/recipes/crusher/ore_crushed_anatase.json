@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/anatase"
+  },
+  "input": {
+    "tag": "forge:clumps/anatase"
+  },
+  "energy": 3000
+}

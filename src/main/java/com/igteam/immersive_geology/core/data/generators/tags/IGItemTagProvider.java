@@ -48,8 +48,8 @@ public class IGItemTagProvider extends ItemTagsProvider {
             }
 
             if(crushed_ore != null){
-                getOrCreateBuilder(tags.crushed_ore).addItemEntry(crushed_ore);
-                log.info("Adding " + tags.crushed_ore.getName() + " to tags");
+                getOrCreateBuilder(tags.ore_crushed).addItemEntry(crushed_ore);
+                log.info("Adding " + tags.ore_crushed.getName() + " to tags");
             }
 
             if (ingot != null) {

@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "mold": {
+    "item": "immersiveengineering:mold_rod"
+  },
+  "result": {
+    "tag": "forge:rods/uranium"
+  },
+  "input": {
+    "tag": "forge:ingots/uranium"
+  },
+  "energy": 2400
+}
