@@ -1,32 +1,21 @@
 package com.igteam.immersive_geology.core.data.generators.recipe;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
-import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.util.IGRegistryGrabber;
 import com.igteam.immersive_geology.core.data.generators.helpers.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistration;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import com.mojang.authlib.UserType;
-import com.sun.swing.internal.plaf.metal.resources.metal;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.resources.ResourcePackType;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
