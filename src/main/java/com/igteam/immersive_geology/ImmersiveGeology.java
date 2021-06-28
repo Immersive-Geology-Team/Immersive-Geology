@@ -7,6 +7,7 @@
 package com.igteam.immersive_geology;
 
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.data.generators.helpers.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
@@ -50,6 +51,7 @@ public class ImmersiveGeology
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
 
+		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
 	}
 
