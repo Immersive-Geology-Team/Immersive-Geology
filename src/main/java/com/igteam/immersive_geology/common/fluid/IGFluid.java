@@ -120,12 +120,8 @@ public class IGFluid extends FlowingFluid {
             }
             if(fluidMaterial.hasFlask()) {
                 Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
-                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask)) {
-                    @Override
-                    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-                        return new FluidBucketWrapper(stack);
-                    }
-
+                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask))
+                {
                     @Override
                     public int getBurnTime(ItemStack itemStack) {
                         return burnTime;
