@@ -1,10 +1,9 @@
 package com.igteam.immersive_geology.common.world;
 
-
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
+import blusunrize.immersiveengineering.common.blocks.metal.SheetmetalTankTileEntity;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 
@@ -39,6 +38,17 @@ public class IGInteractionHandler {
                         break;
                     }
 
+                }
+            }
+
+            //FIXME -- ask IE guyz to provide API to get capabilites of multiblock as whole
+            if (tileEntity instanceof SheetmetalTankTileEntity)
+            {
+                Fluid fluid =((SheetmetalTankTileEntity) tileEntity).master().tank.getFluid().getFluid();
+                if ((fluid instanceof  IGFluid) && (!((IGFluid) fluid).hasBucket())
+                        && (event.getItemStack().getItem() == Items.BUCKET))
+                {
+                    event.setCanceled(true);
                 }
             }
         }
