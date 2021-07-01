@@ -8,9 +8,15 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
     }
 }
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+}
+
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -43,7 +49,7 @@ sourceSets {
 
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
-
+    
     runs {
         client {
             workingDirectory project.file('run')
@@ -101,8 +107,8 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
-    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.0-pre.36")
-    datagenCompile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.0-pre.36:datagen")
+    compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.0-pre.99")
+    datagenCompile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.0-pre.99:datagen")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
 }

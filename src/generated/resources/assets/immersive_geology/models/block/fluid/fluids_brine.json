@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "immersive_geology:block/fluid/brine_still"
+    "particle": "immersive_geology:block/solution/brine/brine_still"
   }
 }

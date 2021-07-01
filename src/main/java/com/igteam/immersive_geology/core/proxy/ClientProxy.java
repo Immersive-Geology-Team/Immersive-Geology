@@ -33,9 +33,9 @@ public class ClientProxy extends ServerProxy {
     }
 
     private void registerBlockColors(){
-        for(IGBlockType block : IGRegistrationHolder.registeredIGBlocks.values()){
-            if(block.getSelf() instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block.getSelf()).hasCustomBlockColours()){
-                Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block.getSelf());
+        for(Block block : IGRegistrationHolder.registeredIGBlocks.values()){
+            if(block instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block).hasCustomBlockColours()){
+                Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
             }
         }
     }

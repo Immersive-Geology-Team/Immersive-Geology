@@ -33,7 +33,7 @@ import java.util.SortedMap;
 public class IGRegistrationHolder {
 
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
-    public static HashMap<String, IGBlockType> registeredIGBlocks = new HashMap<>();
+    public static HashMap<String, Block> registeredIGBlocks = new HashMap<>();
     public static HashMap<String, Fluid> registeredIGFluids = new HashMap<>();
 
 
@@ -55,7 +55,7 @@ public class IGRegistrationHolder {
         });
 
         registeredIGBlocks.values().forEach((block) ->{
-            event.getRegistry().register(block.getSelf());
+                event.getRegistry().register(block);
         });
     }
 
@@ -91,10 +91,10 @@ public class IGRegistrationHolder {
     }
 
     public static Block getBlockByMaterial(MaterialUseType useType, Material material) {
-        return registeredIGBlocks.get(getRegistryKey(material, useType)).getSelf();
+        return registeredIGBlocks.get(getRegistryKey(material, useType));
     }
 
     public static Block getBlockByMaterial(Material base_material, Material ore_material, MaterialUseType type){
-        return registeredIGBlocks.get(getRegistryKey(base_material, ore_material, type)).getSelf();
+        return registeredIGBlocks.get(getRegistryKey(base_material, ore_material, type));
     }
 }

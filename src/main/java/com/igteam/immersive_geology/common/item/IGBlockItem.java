@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -28,12 +29,12 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
     private final Material itemMaterial;
     private final MaterialUseType useType;
 
-    public IGBlockItem(IGBlockType blockIn, ItemSubGroup subGroup, Material material){
-        super(blockIn.getSelf(), new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(material.getRarity()));
+    public IGBlockItem(Block blockIn, IGBlockType blockType, ItemSubGroup subGroup, Material material){
+        super(blockIn, new Item.Properties().group(ImmersiveGeology.IGGroup).rarity(material.getRarity()));
         this.subGroup = subGroup;
-        this.holder_name = blockIn.getHolderName();
+        this.holder_name = blockType.getHolderName();
         this.itemMaterial = material;
-        this.useType = blockIn.getBlockUseType();
+        this.useType = blockType.getBlockUseType();
     }
 
     @Override

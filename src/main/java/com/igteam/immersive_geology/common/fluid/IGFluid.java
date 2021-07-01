@@ -21,10 +21,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -274,12 +271,19 @@ public class IGFluid extends FlowingFluid {
         return ret;
     }
 
-    public static Consumer<FluidAttributes.Builder> createBuilder(int density, int viscosity)
+    public static Consumer<FluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, boolean isGas)
     {
-        return builder -> {
-            builder.viscosity(viscosity)
-                    .density(density);
-        };
+        if(isGas){
+            return builder -> {
+                builder.viscosity(viscosity)
+                        .density(density).rarity(rarity).gaseous();
+            };
+        } else {
+            return builder -> {
+                builder.viscosity(viscosity).rarity(rarity)
+                        .density(density);
+            };
+        }
     }
 
     public static final IDataSerializer<Optional<FluidStack>> OPTIONAL_FLUID_STACK = new IDataSerializer<Optional<FluidStack>>()

@@ -35,7 +35,7 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material[0]);
         blockMaterialData.put(BlockMaterialType.ORE_MATERIAL, material[1]);
 
-        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material[0]);
+        this.itemBlock = new IGBlockItem(this, this, useType.getSubgroup(), material[0]);
         itemBlock.setRegistryName(registryName.toLowerCase());
 
         RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.TRANSLUCENT);
@@ -69,10 +69,6 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
     @Override
     public ToolType getHarvestTool(BlockState state) {
         return ToolType.PICKAXE;
-    }
-    @Override
-    public Block getSelf() {
-        return getBlock();
     }
 
     @Override

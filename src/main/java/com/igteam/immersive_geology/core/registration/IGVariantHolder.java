@@ -94,7 +94,7 @@ public class IGVariantHolder {
             String fluid_name = fluid_material.getName();
 
             IGFluid fluid;
-            fluid = new IGFluid(fluid_material,IGFluid.createBuilder((int) fluid_material.getDensity(), fluid_material.getViscosity()));
+            fluid = new IGFluid(fluid_material,IGFluid.createBuilder((int) fluid_material.getDensity(), fluid_material.getViscosity(), fluid_material.getRarity(), fluid_material.getFluidType().isGas()));
             if(fluid_material.getContactEffect() != null) {
                 fluid.block.setEffect(fluid_material.getContactEffect(), fluid_material.getContactEffectDuration(), fluid_material.getContactEffectLevel());
             }

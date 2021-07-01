@@ -42,18 +42,13 @@ public class BlockBase extends Block implements IGBlockType, IEBlockInterfaces.I
         holder_name = registryName.toLowerCase();
         this.itemDrop = itemDropType;
         this.drops = new Float[]{min_drop, max_drop};
-        this.itemBlock = new IGBlockItem(this, useType.getSubgroup(), material);
+        this.itemBlock = new IGBlockItem(this, this, useType.getSubgroup(), material);
         itemBlock.setRegistryName(registryName.toLowerCase());
     }
 
     @Override
     public Item asItem() {
         return itemBlock;
-    }
-
-    @Override
-    public Block getSelf() {
-        return getBlock();
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialF
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidHydrochloricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidSulfuricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
+import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasHydrogen;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidArsenic;
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
@@ -96,10 +97,15 @@ public enum MaterialEnum {
     Vanilla(new MaterialStoneVanilla()),
 
     //Fluids
+    //Non Volatile
     Brine(new MaterialFluidBrine()),
 
+    //Volatile
     SulfuricAcid(new MaterialFluidSulfuricAcid()),
     HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
+
+    //Gasses
+    Hydrogen(new MaterialGasHydrogen()),
 
     //Glass
     Glass(new MaterialGlassBase());

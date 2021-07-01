@@ -9,6 +9,7 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.data.IGDataProvider;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.Half;
@@ -31,25 +32,27 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for(IGBlockType blockType : IGRegistrationHolder.registeredIGBlocks.values()) {
-            try {
-                switch(blockType.getBlockUseType()){
-                    case ORE_STONE:
-                        registerOreBlock(blockType);
-                        break;
-                    case SHEETMETAL_STAIRS:
-                        registerStairsBlock(blockType);
-                        break;
-                    case FLUIDS:
-                        break;
-                    default:
-                        registerDefaultBlock(blockType);
+        for(Block block : IGRegistrationHolder.registeredIGBlocks.values()) {
+            if (block instanceof IGBlockType) {
+                IGBlockType blockType = (IGBlockType) block;
+                try {
+                    switch (blockType.getBlockUseType()) {
+                        case ORE_STONE:
+                            registerOreBlock(blockType);
+                            break;
+                        case SHEETMETAL_STAIRS:
+                            registerStairsBlock(blockType);
+                            break;
+                        case FLUIDS:
+                            break;
+                        default:
+                            registerDefaultBlock(blockType);
+                    }
+                } catch (Exception e) {
+                    IGDataProvider.log.error("Failed to create Block Model/State: \n" + e);
                 }
-            } catch (Exception e){
-                IGDataProvider.log.error("Failed to create Block Model/State: \n" + e);
             }
         }
-
         registerFluidBlocks();
     }
 
@@ -81,7 +84,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
             BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
                     .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
-            getVariantBuilder(blockType.getSelf()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+            getVariantBuilder(oreBlock).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
         }
     }
 

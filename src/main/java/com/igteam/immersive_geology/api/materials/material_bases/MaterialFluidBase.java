@@ -55,9 +55,19 @@ public abstract class MaterialFluidBase extends Material
 
 	public enum EnumFluidType
 	{
-		FLUID,
-		SOLUTION,
-		GAS
+		FLUID(0),
+		SOLUTION(1),
+		GAS(2);
+
+		private int type;
+
+		EnumFluidType(int type){
+			this.type = type;
+		}
+
+		public boolean isGas() {
+			return type == 2;
+		}
 	}
 
 	public boolean hasBucket()
@@ -94,11 +104,15 @@ public abstract class MaterialFluidBase extends Material
 	}
 
 	public ResourceLocation getFluidStill(){
-		return new ResourceLocation(IGLib.MODID + ":block/fluid/" + getName() + "_still");
+		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_still");
 	}
 
 	public ResourceLocation getFluidFlowing(){
-		return new ResourceLocation(IGLib.MODID + ":block/fluid/" + getName() + "_flow");
+		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_flow");
+	}
+
+	private String getTypeName(){
+		return getFluidType().toString().toLowerCase();
 	}
 
 	@Override
