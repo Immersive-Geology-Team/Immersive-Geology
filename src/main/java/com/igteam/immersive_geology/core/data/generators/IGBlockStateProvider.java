@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.core.data.generators;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
@@ -18,8 +19,11 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.logging.log4j.Logger;
 
 public class IGBlockStateProvider extends BlockStateProvider {
+
+    private Logger log = ImmersiveGeology.getNewLogger();
 
     public IGBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper)
     {
@@ -49,7 +53,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                             registerDefaultBlock(blockType);
                     }
                 } catch (Exception e) {
-                    IGDataProvider.log.error("Failed to create Block Model/State: \n" + e);
+                    log.error("Failed to create Block Model/State: \n" + e);
                 }
             }
         }

@@ -32,11 +32,11 @@ public class IGVariantHolder {
     private static Logger log = ImmersiveGeology.getNewLogger();
 
     public static void createVariants(Material mat) {
-        log.info("Creating " +  mat.getName().toUpperCase() + " Variants");
+        log.debug("Creating " +  mat.getName().toUpperCase() + " Variants");
         for(MaterialUseType type : MaterialUseType.values()) {
             if(shouldGenerate(type)) {
                 if (mat.hasSubtype(type)) {
-                    log.info("Registering " + type.getName().toUpperCase());
+                    log.debug("Registering " + type.getName().toUpperCase());
                     if (type.isBlock()) {
                         createBlockVariants(mat, type);
                     } else {
@@ -80,7 +80,7 @@ public class IGVariantHolder {
             if(materialOre != null){
                 if(materialOre.hasSubtype(MaterialUseType.ORE_STONE)){
                     String holder_key = getOreType(type).getName() + "_" + materialBase.getName() + "_" + materialOre.getName();
-                    log.info("Registering special type: " + holder_key);
+                    log.debug("Registering special type: " + holder_key);
                     IGOreItem item = new IGOreItem(holder_key, new Material[]{materialBase, materialOre}, getOreType(type));
                     IGRegistrationHolder.registeredIGItems.put(holder_key, item);
                 }
@@ -104,15 +104,15 @@ public class IGVariantHolder {
 
             if(fluid_material.hasBucket()) {
                 IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.BUCKET), fluid.getBucket());
-                log.info("Registering Bucket for fluid: " + fluid_name);
+                log.debug("Registering Bucket for fluid: " + fluid_name);
             }
 
             if(fluid_material.hasFlask()){
                 IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLASK), fluid.getBucket());
-                log.info("Registering Flask for fluid: " + fluid_name);
+                log.debug("Registering Flask for fluid: " + fluid_name);
             }
 
-            log.info("Registering Fluid Type: " + fluid_name);
+            log.debug("Registering Fluid Type: " + fluid_name);
         }
     }
 
@@ -141,7 +141,7 @@ public class IGVariantHolder {
             if (materialOre != null) {
                 if (materialOre.hasSubtype(MaterialUseType.ORE_STONE)) {
                     String holder_key = type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName();
-                    log.info("Registering special type: " + holder_key);
+                    log.debug("Registering special type: " + holder_key);
                     IGOreBlock block = new IGOreBlock(holder_key, new Material[]{materialBase, materialOre}, type);
                     IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
                     IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());

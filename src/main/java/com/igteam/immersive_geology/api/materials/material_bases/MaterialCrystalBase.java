@@ -3,7 +3,9 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 import blusunrize.immersiveengineering.common.config.CachedConfig;
 import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public abstract class MaterialCrystalBase extends Material
 {
@@ -68,12 +70,6 @@ public abstract class MaterialCrystalBase extends Material
 	public boolean hasDustBlock()
 	{
 		return true;
-	}
-
-
-	@Override
-	public IGOreConfig getGenerationConfig() {
-		return new IGOreConfig(1,1,40,10);
 	}
 
 	@Override

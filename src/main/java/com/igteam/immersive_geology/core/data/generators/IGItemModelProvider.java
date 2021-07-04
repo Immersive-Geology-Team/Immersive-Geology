@@ -68,7 +68,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                     }
                 }
             } catch (Exception e){
-                IGDataProvider.log.error("Failed to create Item Model: \n" + e);
+                log.error("Failed to create Item Model: \n" + e);
             }
         }
     }
@@ -76,7 +76,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void generateCrystalItem(ItemBase item){
         if(item == null){
             StackTraceElement where = new NullPointerException().getStackTrace()[1];
-            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
             return;
         }
         withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHoldingName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + item.getUseType().getName() + "_" + item.getMaterial(BlockMaterialType.BASE_MATERIAL).getCrystalFamily().getCrystalSystem()));
@@ -113,7 +113,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void genericItem(Item item){
         if(item == null){
             StackTraceElement where = new NullPointerException().getStackTrace()[1];
-            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
             return;
         }
         ItemBase i = (ItemBase) item;
@@ -123,7 +123,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void genericOreItem(Item item){
         if(item == null){
             StackTraceElement where = new NullPointerException().getStackTrace()[1];
-            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
             return;
         }
         IGOreItem i = (IGOreItem) item;
@@ -133,7 +133,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void genericFlask(Item item){
         if(item == null){
             StackTraceElement where = new NullPointerException().getStackTrace()[1];
-            IGDataProvider.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
             return;
         }
         IGBucketItem i = (IGBucketItem) item;

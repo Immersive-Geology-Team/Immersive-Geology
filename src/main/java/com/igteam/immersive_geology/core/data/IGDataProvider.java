@@ -21,9 +21,6 @@ import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = IGLib.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IGDataProvider {
-
-    public static final Logger log = ImmersiveGeology.getNewLogger();
-
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();

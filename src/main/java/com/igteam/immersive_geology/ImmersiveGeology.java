@@ -6,17 +6,23 @@
 
 package com.igteam.immersive_geology;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.data.generators.helpers.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
 import com.igteam.immersive_geology.core.proxy.ServerProxy;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
@@ -43,6 +49,11 @@ public class ImmersiveGeology
 
 		LootIG.initialize();
 
+		//I need to generate the block materials, in order to get their config from the material.
+		IGRegistrationHolder.generateVariants();
+		// Generate Material Data and Configs
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL); // World generation needs to be initialized first as the default configs for ore spawning is created there.
+
 		modBus.addListener(this::setup);
 		modBus.addListener(this::onFinishSetup);
 
@@ -56,7 +67,7 @@ public class ImmersiveGeology
 	}
 
 	private void setup(final FMLCommonSetupEvent event){
-		LOGGER.info(String.format("Initializing setup for Immersive Geology V'%s'",IGLib.VERSION));
+		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
 		proxy.onSetup(event);
 	}
 

@@ -91,12 +91,6 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 		return 1;
 	}
 
-
-	@Override
-	public IGOreConfig getGenerationConfig() {
-		return new IGOreConfig(1,1,30,2);
-	}
-
 	@Override
 	public float getMaxDrops() {
 		return 2f;

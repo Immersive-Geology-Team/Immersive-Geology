@@ -1,6 +1,5 @@
 package com.igteam.immersive_geology.client.menu;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
@@ -16,15 +15,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class IGItemGroup extends ItemGroup {
-
-    private Logger log = ImmersiveGeology.getNewLogger();
-
     public static ItemSubGroup selectedGroup = ItemSubGroup.natural;
 
     public IGItemGroup(String label){

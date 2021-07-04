@@ -9,6 +9,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -41,7 +42,7 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
-        log.warn("Applying Registration");
+        log.info("Applying Registration");
         registeredIGItems.values().forEach((item) -> {
                 event.getRegistry().register(item);
         });
@@ -49,14 +50,20 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
-        //Best spot to create all data for items and blocks, Blocks are registered first, then Items after that it's alphabetical
-        Arrays.stream(MaterialEnum.values()).forEach(material -> {
-            IGVariantHolder.createVariants(material.getMaterial());
-        });
-
         registeredIGBlocks.values().forEach((block) ->{
                 event.getRegistry().register(block);
         });
+    }
+
+    public static boolean variantsGenerated = false;
+
+    public static void generateVariants(){
+        if(!variantsGenerated) {
+            Arrays.stream(MaterialEnum.values()).forEach(material -> {
+                IGVariantHolder.createVariants(material.getMaterial());
+            });
+        }
+        variantsGenerated = true;
     }
 
     @SubscribeEvent

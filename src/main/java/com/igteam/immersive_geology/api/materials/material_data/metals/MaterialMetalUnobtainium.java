@@ -109,11 +109,6 @@ public class MaterialMetalUnobtainium extends MaterialMetalBase
 	}
 
 	@Override
-	public IGOreConfig getGenerationConfig() {
-		return new IGOreConfig(4, 1, 30, 1);
-	}
-
-	@Override
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.HEXAGONAL; //Base on studies of Boron nitride, it seems that Hexagonal is one of the strongest crystal structures known.
 	}

@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class ClientProxy extends ServerProxy {
 
@@ -34,7 +35,7 @@ public class ClientProxy extends ServerProxy {
 
     private void registerBlockColors(){
         for(Block block : IGRegistrationHolder.registeredIGBlocks.values()){
-            if(block instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block).hasCustomBlockColours()){
+            if(block instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block).hasCustomBlockColours()) {
                 Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
             }
         }

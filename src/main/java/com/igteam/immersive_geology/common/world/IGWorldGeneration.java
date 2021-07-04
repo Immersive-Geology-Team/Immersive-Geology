@@ -2,6 +2,8 @@ package com.igteam.immersive_geology.common.world;
 
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
@@ -22,27 +24,23 @@ public class IGWorldGeneration {
     public static Map<String, ConfiguredFeature<?, ?>> features = new HashMap<>();
 
     public static void initialize(){
-        DeferredWorkQueue.runLater(
-            () -> {
-                for(MaterialEnum stoneContainer : MaterialEnum.stoneValues()) {
-                    for (MaterialEnum container : MaterialEnum.values()) {
-                        if (container.getMaterial().hasSubtype(MaterialUseType.ORE_STONE)) {
-                            addOreGen(IGRegistrationHolder.getBlockByMaterial(stoneContainer.getMaterial(), container.getMaterial(), MaterialUseType.ORE_STONE), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
-                        }
-                        if(container.getMaterial().hasSubtype(MaterialUseType.GEODE)){
-                            addOreGen(IGRegistrationHolder.getBlockByMaterial(MaterialUseType.GEODE, container.getMaterial()), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
-                        }
-                    }
+        for(MaterialEnum stoneContainer : MaterialEnum.stoneValues()) {
+            for (MaterialEnum container : MaterialEnum.values()) {
+                if (container.getMaterial().hasSubtype(MaterialUseType.ORE_STONE)) {
+                    Block block = IGRegistrationHolder.getBlockByMaterial(stoneContainer.getMaterial(), container.getMaterial(), MaterialUseType.ORE_STONE);
+                    addOreGen(block, container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
+                }
+                if(container.getMaterial().hasSubtype(MaterialUseType.GEODE)) {
+                    addOreGen(IGRegistrationHolder.getBlockByMaterial(MaterialUseType.GEODE, container.getMaterial()), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
                 }
             }
-        );
-
+        }
     }
 
     public static void addOreGen(Block block, String name, IGOreConfig config)
     {
-        ConfiguredFeature feature = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, block.getDefaultState(), config.veinSize)).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY, 0, config.maxY))
-            .square()).count(config.veinsPerChunk);
+        ConfiguredFeature feature = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, block.getDefaultState(), config.veinSize.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
+            .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);
     }
 

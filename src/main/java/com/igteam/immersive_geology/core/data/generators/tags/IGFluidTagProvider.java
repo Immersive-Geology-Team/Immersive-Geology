@@ -25,14 +25,14 @@ public class IGFluidTagProvider extends FluidTagsProvider
     @Override
     protected void registerTags()
     {
-        log.info("Fluid Tag Registration:");
+        log.info("Fluid Tag Registration");
         for(MaterialEnum material : MaterialEnum.fluidValues()) {
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
             Fluid fluid = MaterialUseType.FLUIDS.getFluid(material, false);
             getOrCreateBuilder(tags.fluid).add(fluid);
 
-            log.info("Fluid: " + tags.fluid.getName());
+            log.debug("Fluid: " + tags.fluid.getName());
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:ore_stone_vanilla_silver"
+    "minecraft:air"
   ]
 }

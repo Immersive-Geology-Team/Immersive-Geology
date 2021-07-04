@@ -8,7 +8,7 @@ license="LGPL v2.1"
 [[mods]]
 modId="immersive_geology"
 updateJSONURL=""
-version="${version}"
+version="0.92v16"
 displayName="Immersive Geology"
 displayURL=""
 credits="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"

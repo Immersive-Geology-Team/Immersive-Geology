@@ -75,6 +75,7 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
         String base_name = "block."+IGLib.MODID+"."+useType.getName().toLowerCase(Locale.ENGLISH);
         return new TranslationTextComponent(base_name, localizedNames.toArray(new String[localizedNames.size()]));
     }
+
     public MaterialUseType getUseType(){
         return useType;
     }

@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:sheetmetal_constantan"
+    "minecraft:air"
   ]
 }

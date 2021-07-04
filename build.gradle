@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-version = '1.0'
+version = '0.92v16'
 group = 'com.igteam.immersive_geology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'immersive_geology'
 

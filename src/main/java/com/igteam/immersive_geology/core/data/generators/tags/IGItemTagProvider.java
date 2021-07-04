@@ -44,17 +44,17 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
             if (nugget != null) {
                 getOrCreateBuilder(tags.nugget).addItemEntry(nugget);
-                log.info("Addding " + tags.nugget.getName() + " to tags");
+                log.debug("Addding " + tags.nugget.getName() + " to tags");
             }
 
             if(crushed_ore != null){
                 getOrCreateBuilder(tags.ore_crushed).addItemEntry(crushed_ore);
-                log.info("Adding " + tags.ore_crushed.getName() + " to tags");
+                log.debug("Adding " + tags.ore_crushed.getName() + " to tags");
             }
 
             if (ingot != null) {
                 getOrCreateBuilder(tags.ingot).addItemEntry(ingot);
-                log.info("Addding " + tags.ingot.getName() + " to tags");
+                log.debug("Addding " + tags.ingot.getName() + " to tags");
             }
         }
 
@@ -124,7 +124,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                                         IGOreBlock oreBlock = (IGOreBlock) block;
                                         this.tag(requestOreUsetypeTag()).add(oreBlock.asItem());
                                         this.tag(requestOreUsetypeTag(ore.getMaterial())).add(oreBlock.asItem());
-                                        log.info("Addding " + oreBlock.asItem().getRegistryName() + " to tags");
+                                        log.debug("Addding " + oreBlock.asItem().getRegistryName() + " to tags");
                                     }
                                 }
                             }

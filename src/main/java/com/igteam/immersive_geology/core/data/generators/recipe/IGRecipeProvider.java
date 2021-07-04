@@ -62,12 +62,12 @@ public class IGRecipeProvider extends RecipeProvider {
 
             if(material.getMaterial().hasSubtype(MaterialUseType.NUGGET) && material.getMaterial().hasSubtype(MaterialUseType.INGOT)){
                 add3x3Conversion(ingot, nugget, tags.nugget, consumer);
-                log.info("Generated Ingot/Nugget Recipe for: " + material.getMaterial().getName());
+                log.debug("Generated Ingot/Nugget Recipe for: " + material.getMaterial().getName());
 
                 Block metal_block = MaterialUseType.STORAGE_BLOCK.getBlock(material);
                 if(metal_block != null) {
                     add3x3Conversion(metal_block, ingot, tags.ingot, consumer);
-                    log.info("Generate Storage Block recipe for: " + material.getMaterial().getName());
+                    log.debug("Generate Storage Block recipe for: " + material.getMaterial().getName());
                 }
 
                 if(!material.getMaterial().preExists()) {
@@ -78,6 +78,7 @@ public class IGRecipeProvider extends RecipeProvider {
                             .build(consumer, toRL("crusher/ingot_" + material.getMaterial().getName()));
                 }
             }
+
             if (material.getMaterial().hasSubtype(MaterialUseType.PLATE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
                         .setEnergy(2400).build(consumer, toRL("metalpress/plate_"+material.getMaterial().getName()));
@@ -114,7 +115,7 @@ public class IGRecipeProvider extends RecipeProvider {
 
                         if (ore_ingot != null && ore_chunk != null) {
                             addBlastingRecipe(ore_chunk, ore_ingot, 0, 150, consumer);
-                            log.info("Generated Blasting Recipe for: " + ore_chunk.getRegistryName());
+                            log.debug("Generated Blasting Recipe for: " + ore_chunk.getRegistryName());
                         }
                     }
 

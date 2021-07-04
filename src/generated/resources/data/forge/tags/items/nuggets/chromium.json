@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:nugget_chromium",
-    "immersive_geology:nugget_chromium"
+    "minecraft:air"
   ]
 }

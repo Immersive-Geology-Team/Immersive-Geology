@@ -1,8 +1,6 @@
 package com.igteam.immersive_geology.api.materials;
 
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialGlassBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.api.materials.material_bases.*;
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalGlowstone;
@@ -18,6 +16,7 @@ import com.igteam.immersive_geology.api.materials.material_data.metalloid.Materi
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.*;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
+import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneAndesite;
 import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanilla;
 
 import java.util.ArrayList;
@@ -139,5 +138,24 @@ public enum MaterialEnum {
             }
         });
         return stoneMaterials.toArray(new MaterialEnum[stoneMaterials.size()]);
+    }
+
+    public static MaterialEnum[] worldMaterials() {
+        ArrayList<MaterialEnum> worldMaterials = new ArrayList<>();
+        Arrays.stream(values()).forEach((container) -> {
+            if(container.getMaterial() instanceof MaterialMineralBase){
+                worldMaterials.add(container);
+            }
+            if(container.getMaterial() instanceof MaterialCrystalBase){
+                worldMaterials.add(container);
+            }
+            if(container.getMaterial() instanceof MaterialMetalBase){
+                MaterialMetalBase material = ((MaterialMetalBase) container.getMaterial());
+                if(material.isNativeMetal) {
+                    worldMaterials.add(container);
+                }
+            }
+        });
+        return worldMaterials.toArray(new MaterialEnum[worldMaterials.size()]);
     }
 }

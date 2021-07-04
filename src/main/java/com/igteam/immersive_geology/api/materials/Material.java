@@ -5,11 +5,13 @@ import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,8 +30,13 @@ public abstract class Material
 {
 
     public boolean isNativeMetal = false;
+	private IGOreConfig oreConfiguration;
 
-    public MaterialStoneBase.EnumStoneType getStoneType(){
+	public void setConfiguration(IGOreConfig config){
+		this.oreConfiguration = config;
+	}
+
+	public MaterialStoneBase.EnumStoneType getStoneType(){
 		return null;
 	}
 	/**
@@ -203,18 +210,7 @@ public abstract class Material
 	}
 
 	public IGOreConfig getGenerationConfig() {
-		switch (getRarity()){
-			case COMMON:
-				return new IGOreConfig(8, 1, 90, 6);
-			case UNCOMMON:
-				return new IGOreConfig(5, 1, 70, 4);
-			case RARE:
-				return new IGOreConfig(4, 1, 50, 3);
-			case EPIC:
-				return new IGOreConfig(3, 1, 30, 2);
-			default:
-				return new IGOreConfig(2, 1, 20, 1);
-		}
+		return this.oreConfiguration;
 	}
 
 	public boolean hasAdditionalTags(){

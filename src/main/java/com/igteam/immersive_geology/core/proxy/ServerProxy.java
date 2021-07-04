@@ -1,10 +1,15 @@
 package com.igteam.immersive_geology.core.proxy;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.world.IGWorldGeneration;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.data.generators.helpers.LootIG;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
@@ -20,8 +25,7 @@ public class ServerProxy implements Proxy {
 
     @Override
     public void onFinishSetup(FMLLoadCompleteEvent event) {
-
-    }
+   }
 
     @Override
     public void onServerStarting(FMLServerStartingEvent event) {

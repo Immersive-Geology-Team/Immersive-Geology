@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:flask_sulfuric_acid",
-    "immersive_geology:flask_hydrochloric_acid",
-    "immersive_geology:flask_glass"
+    "minecraft:air",
+    "minecraft:air",
+    "minecraft:air"
   ]
 }

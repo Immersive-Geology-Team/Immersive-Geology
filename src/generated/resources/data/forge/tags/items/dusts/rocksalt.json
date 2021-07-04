@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:dust_rocksalt"
+    "minecraft:air"
   ]
 }
