@@ -84,7 +84,7 @@ public class MaterialFluidBrine extends MaterialFluidBase
 	@Override
 	public int getColor(int temperature)
 	{
-		return 0xF7E9A2;
+		return 0xBCA271;
 	}
 
 	//Needs to be changed in code for subtypes, such as sheetmetal

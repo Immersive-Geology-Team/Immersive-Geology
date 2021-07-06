@@ -6,6 +6,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,18 +18,23 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
     }
 
     @Override
-    public EnumFluidType getFluidType() {
-        return EnumFluidType.FLUID;
+    public EnumFluidType getFluidType()
+    {
+        return EnumFluidType.SOLUTION;
     }
 
     @Override
     public Set<PeriodicTableElement.ElementProportion> getSoluteElements() {
-        return null;
+        return new LinkedHashSet<>(Arrays.asList(
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.HYDROGEN, 2),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
+        ));
     }
 
     @Override
     public float getConcentration() {
-        return 0;
+        return 0.983f;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
 
     @Override
     public int getColor(int temperature) {
-        return 0;
+        return 0xFFFFFF;
     }
 
     @Override

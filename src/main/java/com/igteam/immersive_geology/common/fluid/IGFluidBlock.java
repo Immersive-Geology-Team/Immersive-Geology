@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.fluid;
 
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
@@ -25,6 +26,7 @@ import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 

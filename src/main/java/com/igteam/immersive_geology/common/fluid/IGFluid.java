@@ -1,15 +1,11 @@
 package com.igteam.immersive_geology.common.fluid;
 
-import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
-import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistration;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -44,6 +40,7 @@ import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -267,17 +264,19 @@ public class IGFluid extends FlowingFluid {
         return ret;
     }
 
-    public static Consumer<FluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, boolean isGas)
+    public static Consumer<FluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, int colPass, boolean isGas)
     {
+        Color col = new Color(colPass);
+        Color finalColor = new Color(col.getRed(), col.getGreen(), col.getBlue(), 255);
         if(isGas){
             return builder -> {
                 builder.viscosity(viscosity)
-                        .density(density).rarity(rarity).gaseous();
+                        .density(density).rarity(rarity).color(finalColor.getRGB()).gaseous();
             };
         } else {
             return builder -> {
                 builder.viscosity(viscosity).rarity(rarity)
-                        .density(density);
+                        .density(density).color(finalColor.getRGB());
             };
         }
     }
@@ -367,4 +366,5 @@ public class IGFluid extends FlowingFluid {
     public boolean isSolidFluid() {
         return isSolid;
     }
+
 }

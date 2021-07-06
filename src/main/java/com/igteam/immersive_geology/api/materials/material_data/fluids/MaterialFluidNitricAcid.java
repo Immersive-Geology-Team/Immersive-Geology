@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
+public class MaterialFluidNitricAcid extends MaterialFluidBase {
 
     @Override
     public String getName() {
-        return "hydrochloric_acid";
+        return "nitric_acid";
     }
 
     @Override
@@ -27,20 +27,21 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
     public Set<PeriodicTableElement.ElementProportion> getSoluteElements() {
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.HYDROGEN),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.CHLORINE)
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.NITROGEN),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN,3)
         ));
     }
 
     @Override
     public float getConcentration() {
-        return 0;
+        return 0.95f;
     }
 
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
         return new LinkedHashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.HYDROGEN, 2)
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.HYDROGEN, 2),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN)
         ));
     }
 
@@ -61,7 +62,7 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
 
     @Override
     public int getColor(int temperature) {
-        return 0xFFFFFF;
+        return 0xe3ce77;
     }
 
     @Override
