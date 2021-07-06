@@ -16,6 +16,8 @@ public abstract class MaterialFluidBase extends Material
 
 	protected boolean isSolid = false;
 
+	protected boolean useDefaultFluidTextures = false;
+
 	public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
 
 	public abstract float getConcentration();
@@ -104,10 +106,16 @@ public abstract class MaterialFluidBase extends Material
 	}
 
 	public ResourceLocation getFluidStill(){
+		if(useDefaultFluidTextures){
+			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + "default" + "/" + "default" + "_still");
+		}
 		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_still");
 	}
 
 	public ResourceLocation getFluidFlowing(){
+		if(useDefaultFluidTextures){
+			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + "default" + "/" + "default" + "_flow");
+		}
 		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_flow");
 	}
 

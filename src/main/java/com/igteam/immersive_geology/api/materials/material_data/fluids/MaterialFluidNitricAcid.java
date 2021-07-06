@@ -12,6 +12,10 @@ import java.util.Set;
 
 public class MaterialFluidNitricAcid extends MaterialFluidBase {
 
+    public MaterialFluidNitricAcid() {
+        useDefaultFluidTextures = true;
+    }
+
     @Override
     public String getName() {
         return "nitric_acid";

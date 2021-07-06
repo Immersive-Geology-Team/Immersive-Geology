@@ -52,6 +52,7 @@
   "block.immersive_geology.dust_block": "%s Dust Block",
   "block.immersive_geology.ore_stone": "%d Bearing %s",
 
+  "fluid.immersive_geology.fluids_nitric_acid": "Nitric Acid",
   "fluid.immersive_geology.fluids_hydrochloric_acid": "Hydrochloric Acid",
   "fluid.immersive_geology.fluids_sulfuric_acid": "Sulfuric Acid",
   "fluid.immersive_geology.fluids_brine": "Brine",
@@ -100,6 +101,7 @@
   "material.immersive_geology.arsenic": "Arsenic",
   "material.immersive_geology.antimony": "Antimony",
 
+  "material.immersive_geology.nitric_acid": "Nitric Acid",
   "material.immersive_geology.sulfuric_acid": "Sulfuric Acid",
   "material.immersive_geology.hydrochloric_acid": "Hydrochloric Acid",
   "material.immersive_geology.brine": "Brine",

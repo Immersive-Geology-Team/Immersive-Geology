@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "immersive_geology:block/fluid/hydrochloric_acid/hydrochloric_acid_still"
+    "particle": "immersive_geology:block/solution/hydrochloric_acid/hydrochloric_acid_still"
   }
 }
