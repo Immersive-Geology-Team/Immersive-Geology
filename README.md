@@ -8,6 +8,12 @@ The mod requires Immersive Engineering for the appropriate Minecraft Version <br
 **This mod is in development and not all features have been implemented**
 <br />
 
+If you want to help us out, you can donate with Liberapay!
+
+<noscript><a href="https://liberapay.com/Immersive-Geology/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+<img src="https://img.shields.io/liberapay/patrons/Immersive-Geology.svg?logo=liberapay">
+
  Content that Immersive Geology will implement
  ------------
 **Some of the new ores and the corrasponding items that will be added:**
