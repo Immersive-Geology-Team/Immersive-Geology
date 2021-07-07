@@ -36,6 +36,7 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 						new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2)
 				)
 		);
+
 	}
 
 	@Override

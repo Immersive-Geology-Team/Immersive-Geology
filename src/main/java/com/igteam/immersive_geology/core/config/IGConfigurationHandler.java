@@ -51,11 +51,44 @@ public class IGConfigurationHandler {
     public static class Server {
         public static final ForgeConfigSpec ALL;
 
+        public static final MultiblockConfigSetup MULTIBLOCK;
+
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-
+            MULTIBLOCK = new MultiblockConfigSetup(builder);
             ALL = builder.build();
         }
+    }
+
+    public static class MultiblockConfigSetup{
+        public final ForgeConfigSpec.ConfigValue<Double> chemicalVat_energyModifier;
+        public final ForgeConfigSpec.ConfigValue<Double> chemicalVat_timeModifier;
+
+        public final ForgeConfigSpec.ConfigValue<Double> electrolizer_energyModifier;
+        public final ForgeConfigSpec.ConfigValue<Double> electrolizer_timeModifier;
+
+        MultiblockConfigSetup(ForgeConfigSpec.Builder builder){
+            builder.push("Multiblock Configuration");
+
+            chemicalVat_energyModifier = builder
+                    .comment("A modifier to apply to the energy costs of every Chemical Vat recipe, default=1")
+                    .define("distillationTower_energyModifier", Double.valueOf(1.0));
+
+            chemicalVat_timeModifier = builder
+                    .comment("A modifier to apply to the time of every Chemical Vat recipe. Can't be lower than 1, default=1")
+                    .define("distillationTower_timeModifier", Double.valueOf(1.0));
+
+            electrolizer_energyModifier = builder
+                    .comment("A modifier to apply to the energy costs of every Electrolizer recipe, default=1")
+                    .define("distillationTower_energyModifier", Double.valueOf(1.0));
+
+            electrolizer_timeModifier = builder
+                    .comment("A modifier to apply to the time of every Electrolizer recipe. Can't be lower than 1, default=1")
+                    .define("distillationTower_timeModifier", Double.valueOf(1.0));
+
+            builder.pop();
+        }
+
     }
 
 
