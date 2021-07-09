@@ -36,25 +36,39 @@ public class IGItemTagProvider extends ItemTagsProvider {
         for(MaterialEnum material : MaterialEnum.values()) {
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
-            Item crushed_ore = MaterialUseType.ORE_CRUSHED.getItem(material);
+            Item crushed_ore = MaterialUseType.CRUSHED_ORE.getItem(material);
 
             Item ingot = MaterialUseType.INGOT.getItem(material);
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
 
             if (nugget != null) {
+                assert tags.nugget != null;
                 getOrCreateBuilder(tags.nugget).addItemEntry(nugget);
                 log.debug("Addding " + tags.nugget.getName() + " to tags");
             }
 
             if(crushed_ore != null){
+                assert tags.ore_crushed != null;
                 getOrCreateBuilder(tags.ore_crushed).addItemEntry(crushed_ore);
                 log.debug("Adding " + tags.ore_crushed.getName() + " to tags");
             }
 
             if (ingot != null) {
+                assert tags.ingot != null;
                 getOrCreateBuilder(tags.ingot).addItemEntry(ingot);
                 log.debug("Addding " + tags.ingot.getName() + " to tags");
+            }
+
+            //dual material items
+            for(MaterialEnum stone_base : MaterialEnum.stoneValues()) {
+                Item dirty_crushed_ore = MaterialUseType.DIRTY_CRUSHED_ORE.getItem(stone_base, material);
+
+                if (dirty_crushed_ore != null) {
+                    assert tags.dirty_ore_crushed != null;
+                    getOrCreateBuilder(tags.dirty_ore_crushed).addItemEntry(dirty_crushed_ore);
+                    log.debug("Adding " + tags.dirty_ore_crushed.getName() + " to tags");
+                }
             }
         }
 

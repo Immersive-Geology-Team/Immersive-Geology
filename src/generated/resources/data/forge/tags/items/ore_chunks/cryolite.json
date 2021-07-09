@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:air"
+    "immersive_geology:ore_chunk_vanilla_cryolite"
   ]
 }

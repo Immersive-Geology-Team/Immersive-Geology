@@ -42,6 +42,7 @@ public class IGTags {
         public final INamedTag<Item> ingot;
         public final INamedTag<Block> metal_block;
         public final INamedTag<Item> ore_crushed;
+        public final INamedTag<Item> dirty_ore_crushed;
 		public final INamedTag<Fluid> fluid;
 		public final INamedTag<Item> dust;
 
@@ -73,7 +74,13 @@ public class IGTags {
                 dust = null;
             }
 
-            if(material.hasSubtype(MaterialUseType.ORE_CRUSHED)) {
+            if(material.hasSubtype(MaterialUseType.DIRTY_CRUSHED_ORE)) {
+                dirty_ore_crushed = createItemWrapper(getDirtyOre(name));
+            } else {
+                dirty_ore_crushed = null;
+            }
+
+            if(material.hasSubtype(MaterialUseType.CRUSHED_ORE)) {
                 ore_crushed = createItemWrapper(getOreClumps(name));
             } else {
                 ore_crushed = null;
@@ -175,6 +182,10 @@ public class IGTags {
 
     public static ResourceLocation getOreClumps(String type){
         return forgeLoc("clumps/"+type);
+    }
+
+    public static ResourceLocation getDirtyOre(String type){
+        return forgeLoc("shards/"+type);
     }
 
     public static ResourceLocation getDust(String type)

@@ -97,4 +97,8 @@ public class MaterialMetalConstantan extends MaterialMetalBase
 		return 8.885f; // g/cm^3
 	}
 
+	@Override
+	public boolean hasCrystal(){
+		return false;
+	}
 }

@@ -39,14 +39,26 @@ public abstract class MaterialMetalBase extends Material
 				return hasDustBlock();
 			case STORAGE_BLOCK:
 				return true;
+			case METAL_OXIDE:
+				return generateOxide();
+			case RAW_CRYSTAL:
+				return hasCrystal();
 			case ORE_CHUNK:
 			case ORE_BIT:
-			case ORE_CRUSHED:
+			case DIRTY_CRUSHED_ORE:
 			case ORE_STONE:
 				return isNativeMetal;
 			default:
 				return false;
 		}
+	}
+
+	public boolean generateOxide(){
+		return false;// !(isAlloy() || isNativeMetal);
+	}
+
+	public boolean isAlloy(){
+		return getMetalType() == EnumMetalType.ALLOY;
 	}
 
 	@Override
@@ -118,6 +130,10 @@ public abstract class MaterialMetalBase extends Material
 
 	public boolean hasDustBlock()
 	{
+		return true;
+	}
+
+	public boolean hasCrystal(){
 		return true;
 	}
 

@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.metalloid;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalloidBase;
@@ -97,4 +98,8 @@ public class MaterialMetalloidAntimony extends MaterialMetalloidBase
 		return 5.73f;
 	}
 
+	@Override
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.HEXAGONAL;
+	}
 }

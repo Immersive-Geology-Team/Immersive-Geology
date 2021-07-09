@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.metals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
@@ -108,6 +109,10 @@ public class MaterialMetalSilver extends MaterialMetalBase
 		return EnumMetalType.METAL;
 	}
 
+	@Override
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.CUBIC;
+	}
 
 	/*@Nullable
 	@Override

@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:shards/chromite"
+  },
+  "input": {
+    "item": "immersive_geology:ore_chunk_vanilla_chromite"
+  },
+  "energy": 6000
+}

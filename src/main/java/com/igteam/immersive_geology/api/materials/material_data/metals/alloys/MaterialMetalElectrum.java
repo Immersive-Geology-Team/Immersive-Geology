@@ -79,6 +79,11 @@ public class MaterialMetalElectrum extends MaterialMetalBase
 	}
 
 	@Override
+	public boolean hasCrystal(){
+		return false;
+	}
+
+	@Override
 	public float getDensity()
 	{
 		return 13.5f; //gm/cm^3

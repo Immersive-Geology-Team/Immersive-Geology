@@ -89,4 +89,8 @@ public class MaterialMetalSteel extends MaterialMetalBase
 		return 7.800f; // gm/cm^3
 	}
 
+	@Override
+	public boolean hasCrystal(){
+		return false;
+	}
 }

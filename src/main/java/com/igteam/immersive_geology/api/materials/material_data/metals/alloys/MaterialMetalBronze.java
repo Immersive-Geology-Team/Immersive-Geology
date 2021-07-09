@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.metals.alloys;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
@@ -30,6 +31,8 @@ public class MaterialMetalBronze extends MaterialMetalBase
 	{
 		return EnumMetalType.ALLOY;
 	}
+
+
 
 	@Override
 	public LinkedHashSet<ElementProportion> getElements()
@@ -85,5 +88,10 @@ public class MaterialMetalBronze extends MaterialMetalBase
 	public float getDensity()
 	{
 		return 13.5f; //gm/cm^3
+	}
+
+	@Override
+	public boolean hasCrystal(){
+		return false;
 	}
 }

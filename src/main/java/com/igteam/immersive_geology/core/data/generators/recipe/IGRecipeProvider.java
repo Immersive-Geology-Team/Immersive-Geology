@@ -89,17 +89,18 @@ public class IGRecipeProvider extends RecipeProvider {
                         .setEnergy(2400).build(consumer, toRL("metalpress/rod_"+material.getMaterial().getName()));
             }
 
-
             if (material.getMaterial().hasSubtype(MaterialUseType.GEAR)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldGear, tags.gear, 1)
                         .addInput(new IngredientWithSize(tags.ingot,4))
                         .setEnergy(2400).build(consumer, toRL("metalpress/gear_"+material.getMaterial().getName()));
             }
+
             if (material.getMaterial().hasSubtype(MaterialUseType.WIRE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldWire, tags.wire, 2).addInput(tags.ingot)
                         .setEnergy(2400).build(consumer, toRL("metalpress/wire_"+material.getMaterial().getName()));
 
             }
+
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {
                 if (material.getMaterial().hasSubtype(MaterialUseType.ORE_CHUNK)) {
                     Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base, material);
@@ -119,24 +120,23 @@ public class IGRecipeProvider extends RecipeProvider {
                         }
                     }
 
-                    crusherBuilder = CrusherRecipeBuilder.builder(tags.ore_crushed, 2);
-                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/ore_"+material.getMaterial().getName()));
-
+                    crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
+                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_"+material.getMaterial().getName()));
                 }
-
             }
-            if(material.getMaterial().hasSubtype(MaterialUseType.ORE_CRUSHED) && material.getMaterial().hasSubtype(MaterialUseType.DUST))
-            {
-                MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
-                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
-                if(secondary_material != null){
-                    Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
-                    if(secondary_out != null) {
-                        crusherBuilder.addSecondary(secondary_out, 0.33f);
-                    }
-                }
-                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
-            }
+//
+//            if(material.getMaterial().hasSubtype(MaterialUseType.CRUSHED_ORE) && material.getMaterial().hasSubtype(MaterialUseType.DUST))
+//            {
+//                MaterialEnum secondary_material = material.getMaterial().getSecondaryType();
+//                crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+//                if(secondary_material != null){
+//                    Item secondary_out = MaterialUseType.DUST.getItem(secondary_material);
+//                    if(secondary_out != null) {
+//                        crusherBuilder.addSecondary(secondary_out, 0.33f);
+//                    }
+//                }
+//                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
+//            }
         }
 
 

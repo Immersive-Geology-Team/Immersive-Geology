@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.metals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
@@ -97,6 +98,11 @@ public class MaterialMetalUranium extends MaterialMetalBase
 	public EnumMetalType getMetalType()
 	{
 		return EnumMetalType.METAL;
+	}
+
+	@Override
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.ORTHORHOMBIC;
 	}
 
 /*@Nullable

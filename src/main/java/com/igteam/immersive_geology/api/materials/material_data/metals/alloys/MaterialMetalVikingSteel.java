@@ -102,4 +102,9 @@ public class MaterialMetalVikingSteel extends MaterialMetalBase
 		tagList.add("ingots/steel");
 		return tagList;
 	}
+
+	@Override
+	public boolean hasCrystal(){
+		return false;
+	}
 }

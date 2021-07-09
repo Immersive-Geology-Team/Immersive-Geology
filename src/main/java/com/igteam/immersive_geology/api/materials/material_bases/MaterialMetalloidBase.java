@@ -99,6 +99,10 @@ public abstract class MaterialMetalloidBase extends Material
 		return true;
 	}
 
+	public boolean hasCrystal(){
+		return true;
+	}
+
 	@Override
 	public boolean preExists() {
 		return false;

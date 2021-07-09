@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:air"
+    "immersive_geology:ingot_nickel",
+    "immersive_geology:ingot_nickel"
   ]
 }

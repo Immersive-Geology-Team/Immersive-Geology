@@ -63,6 +63,9 @@ public class IGVariantHolder {
                 registerOreItem(material, type);
                 registerBasicItem(material, type);
                 break;
+            case DIRTY_CRUSHED_ORE:
+                registerDirtyOreItem(material, type);
+                break;
             case FLUIDS:
                 break;
             case FLASK:
@@ -70,6 +73,21 @@ public class IGVariantHolder {
                 break;
             default:
                 registerBasicItem(material, type);
+        }
+    }
+
+    private static void registerDirtyOreItem(Material materialOre, MaterialUseType type){
+        Material materialStone = null;
+        for(MaterialEnum container : MaterialEnum.stoneValues()){
+            materialStone = container.getMaterial();
+            if(materialStone != null){
+                if(materialStone.hasSubtype(MaterialUseType.STONE)){
+                    String holder_key = getOreType(type).getName() + "_" + materialStone.getName() + "_" + materialOre.getName();
+                    log.debug("Registering special type: " + holder_key);
+                    IGOreItem item = new IGOreItem(holder_key, new Material[]{materialStone, materialOre}, getOreType(type));
+                    IGRegistrationHolder.registeredIGItems.put(holder_key, item);
+                }
+            }
         }
     }
 
@@ -117,7 +135,14 @@ public class IGVariantHolder {
     }
 
     private static MaterialUseType getOreType(MaterialUseType type){
-        return type == MaterialUseType.ROCK_BIT ? MaterialUseType.ORE_BIT : MaterialUseType.ORE_CHUNK;
+        switch(type){
+            case ROCK_BIT:
+                return MaterialUseType.ORE_BIT;
+            case CHUNK:
+                return MaterialUseType.ORE_CHUNK;
+            default:
+                return type;
+        }
     }
 
     private static void registerBasicItem(Material material, MaterialUseType type){

@@ -1,18 +1,19 @@
 {
   "replace": false,
   "values": [
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air",
-    "minecraft:air"
+    "immersive_geology:ingot_steel",
+    "immersive_geology:storage_block_viking_steel",
+    "immersive_geology:dust_block_viking_steel",
+    "immersive_geology:sheetmetal_viking_steel",
+    "immersive_geology:sheetmetal_stairs_viking_steel",
+    "immersive_geology:dust_viking_steel",
+    "immersive_geology:rod_viking_steel",
+    "immersive_geology:ingot_steel",
+    "immersive_geology:ingot_viking_steel",
+    "immersive_geology:plate_viking_steel",
+    "immersive_geology:nugget_viking_steel",
+    "immersive_geology:gear_viking_steel",
+    "immersive_geology:wire_viking_steel",
+    "immersive_geology:tiny_dust_viking_steel"
   ]
 }

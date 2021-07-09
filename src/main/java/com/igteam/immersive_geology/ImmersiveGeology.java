@@ -49,10 +49,9 @@ public class ImmersiveGeology
 
 		LootIG.initialize();
 
-		//I need to generate the block materials, in order to get their config from the material.
 		IGRegistrationHolder.generateVariants();
-		// Generate Material Data and Configs
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL); // World generation needs to be initialized first as the default configs for ore spawning is created there.
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL);
 
 		modBus.addListener(this::setup);
 		modBus.addListener(this::onFinishSetup);

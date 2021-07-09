@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.crystals;
 
+import com.igteam.immersive_geology.api.materials.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialCrystalBase;
@@ -99,5 +100,10 @@ public class MaterialCrystalPhlebotinum extends MaterialCrystalBase
 	@Override
 	public float getMinDrops() {
 		return 1f;
+	}
+
+	@Override
+	public CrystalFamily getCrystalFamily() {
+		return CrystalFamily.TRICLINIC;
 	}
 }

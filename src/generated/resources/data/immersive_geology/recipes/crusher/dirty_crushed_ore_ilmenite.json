@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:shards/ilmenite"
+  },
+  "input": {
+    "item": "immersive_geology:ore_chunk_vanilla_ilmenite"
+  },
+  "energy": 6000
+}

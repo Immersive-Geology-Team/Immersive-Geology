@@ -23,9 +23,14 @@ public enum MaterialUseType {
     ROCK_BIT(false, ItemSubGroup.natural),
     ORE_CHUNK(false, ItemSubGroup.natural),
     ORE_BIT(false, ItemSubGroup.natural),
-    ORE_CRUSHED(false, ItemSubGroup.processed),
+
+    DIRTY_CRUSHED_ORE(false, ItemSubGroup.processed),
+    CRUSHED_ORE(false, ItemSubGroup.processed),
+    METAL_OXIDE(false, ItemSubGroup.processed),
+
     RAW_CRYSTAL(false, ItemSubGroup.natural),
     CUT_CRYSTAL(false, ItemSubGroup.processed),
+
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
     FLASK(false, ItemSubGroup.processed),

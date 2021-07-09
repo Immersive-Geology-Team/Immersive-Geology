@@ -2,10 +2,7 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 
 import javax.annotation.Nullable;
 
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialTypes;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.*;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
 
 public abstract class MaterialMineralBase extends Material
@@ -17,19 +14,38 @@ public abstract class MaterialMineralBase extends Material
 	{
 		switch(useType)
 		{
-			case RAW_CRYSTAL:
-			case CUT_CRYSTAL:
-				return hasCrystal();
+			case CRUSHED_ORE:
+				return hasCrushedOre();
 			case ORE_STONE:
 			case ORE_BIT:
 			case ORE_CHUNK:
-			case ORE_CRUSHED:
 			case DUST:
+			case DIRTY_CRUSHED_ORE:
 				return true;
 		}
 		return false;
 	}
-	
+
+	public boolean hasCrushedOre(){
+		return true;
+	}
+
+	public boolean isOxide(){
+		boolean result = false;
+
+		int element_length = getElements().size();
+
+		if(element_length == 2){
+			for(PeriodicTableElement.ElementProportion e : getElements()){
+				if(e.getElement().getSymbol().equals(PeriodicTableElement.OXYGEN.getSymbol())) {
+					result = true;
+				}
+			}
+		}
+
+		return result;
+	}
+
 	@Nullable
 	@Override
 	public String getSpecialSubtypeModelName(MaterialUseType useType)
