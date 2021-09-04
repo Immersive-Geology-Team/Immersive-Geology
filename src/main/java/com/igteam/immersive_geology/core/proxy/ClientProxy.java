@@ -13,11 +13,9 @@ import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.MultiblockChemicalVatRenderer;
 import com.igteam.immersive_geology.client.render.MultiblockGravitySeperatorRenderer;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.GravitySeperatorMultiblock;
-import com.igteam.immersive_geology.common.world.IGWorldGeneration;
+import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -35,7 +33,6 @@ import net.minecraft.util.math.vector.Quaternion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ClientProxy extends ServerProxy {
@@ -110,7 +107,7 @@ public class ClientProxy extends ServerProxy {
         mineral_info(0);
 
         IG_CATEGORY_MACHINES = IG_CATEGORY.getOrCreateSubnode(modLoc("machines"), 1);
-        gravityseperator(modLoc("gravityseperator"), 0);
+        gravityseparator(modLoc("gravityseparator"), 0);
         chemicalvat(modLoc("chemicalvat"), 1);
     }
 
@@ -151,11 +148,11 @@ public class ClientProxy extends ServerProxy {
         man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
     }
 
-    private static void gravityseperator(ResourceLocation location, int priority){
+    private static void gravityseparator(ResourceLocation location, int priority){
         ManualInstance man = ManualHelper.getManual();
 
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
-        builder.addSpecialElement("gravityseperator0", 0, () -> new ManualElementMultiblock(man, GravitySeperatorMultiblock.INSTANCE));
+        builder.addSpecialElement("gravityseparator0", 0, () -> new ManualElementMultiblock(man, GravitySeparatorMultiblock.INSTANCE));
         builder.readFromFile(location);
         man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
     }

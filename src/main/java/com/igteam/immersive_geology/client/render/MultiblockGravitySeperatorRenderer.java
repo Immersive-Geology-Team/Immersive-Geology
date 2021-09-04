@@ -2,10 +2,8 @@ package com.igteam.immersive_geology.client.render;
 
 import com.igteam.immersive_geology.client.model.IGModel;
 import com.igteam.immersive_geology.client.model.IGModels;
-import com.igteam.immersive_geology.client.model.ModelChemicalVat;
 import com.igteam.immersive_geology.client.model.ModelGravitySeperator;
-import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
-import com.igteam.immersive_geology.common.block.tileentity.GravitySeperatorTileEntity;
+import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
@@ -18,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class MultiblockGravitySeperatorRenderer extends TileEntityRenderer<GravitySeperatorTileEntity> {
+public class MultiblockGravitySeperatorRenderer extends TileEntityRenderer<GravitySeparatorTileEntity> {
     public MultiblockGravitySeperatorRenderer(TileEntityRendererDispatcher dispatcher){
         super(dispatcher);
     }
@@ -27,7 +25,7 @@ public class MultiblockGravitySeperatorRenderer extends TileEntityRenderer<Gravi
 
     //Ripped from IP's Pumpjack
     @Override
-    public void render(GravitySeperatorTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(GravitySeparatorTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         if(te != null && !te.isDummy()){
             transform.push();
             Direction rotation = te.getFacing();

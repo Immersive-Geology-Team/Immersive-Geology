@@ -5,8 +5,7 @@ import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
-import com.igteam.immersive_geology.common.block.tileentity.GravitySeperatorTileEntity;
+import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -29,16 +28,16 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 import java.util.List;
 import java.util.Random;
 
-public class GravitySeperatorMultiblock extends IETemplateMultiblock {
+public class GravitySeparatorMultiblock extends IETemplateMultiblock {
     private static final Random RAND = new Random();
-    public static final GravitySeperatorMultiblock INSTANCE = new GravitySeperatorMultiblock();
+    public static final GravitySeparatorMultiblock INSTANCE = new GravitySeparatorMultiblock();
 
-    private GravitySeperatorMultiblock(){
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseperator"),
+    private GravitySeparatorMultiblock(){
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseparator"),
                 new BlockPos(0,0,0),
                 new BlockPos(0,0,3),
                 new BlockPos(4,6,4),
-                () -> IGMultiblockRegistrationHolder.Multiblock.gravityseperator.getDefaultState());
+                () -> IGMultiblockRegistrationHolder.Multiblock.gravityseparator.getDefaultState());
     }
 
     @Override
@@ -53,19 +52,19 @@ public class GravitySeperatorMultiblock extends IETemplateMultiblock {
     }
 
     @OnlyIn(Dist.CLIENT)
-    private GravitySeperatorTileEntity te;
+    private GravitySeparatorTileEntity te;
     @OnlyIn(Dist.CLIENT)
     List<BakedQuad> list;
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         if(this.te == null){
-            this.te = new GravitySeperatorTileEntity();
-            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.gravityseperator.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH));
+            this.te = new GravitySeparatorTileEntity();
+            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.gravityseparator.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH));
         }
 
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.gravityseperator.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockRegistrationHolder.Multiblock.gravityseparator.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

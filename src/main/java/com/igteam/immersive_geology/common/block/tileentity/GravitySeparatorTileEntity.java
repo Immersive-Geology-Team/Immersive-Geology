@@ -6,7 +6,7 @@ import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransfor
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import com.google.common.collect.ImmutableSet;
-import com.igteam.immersive_geology.common.multiblocks.GravitySeperatorMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class GravitySeperatorTileEntity extends PoweredMultiblockTileEntity<GravitySeperatorTileEntity, MultiblockRecipe> implements IBlockBounds {
+public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, MultiblockRecipe> implements IBlockBounds {
     /** Template-Location of the Redstone Input Port. (0, 1, 5) */
     public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(0, 0, 0));
 
@@ -48,8 +48,8 @@ public class GravitySeperatorTileEntity extends PoweredMultiblockTileEntity<Grav
     public boolean wasActive = false;
     public float activeTicks = 0;
     public FluidTank fakeTank = new FluidTank(0);
-    public GravitySeperatorTileEntity(){
-        super(GravitySeperatorMultiblock.INSTANCE, 16000, true, null);
+    public GravitySeparatorTileEntity(){
+        super(GravitySeparatorMultiblock.INSTANCE, 16000, true, null);
     }
 
     @Override
@@ -195,7 +195,7 @@ public class GravitySeperatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return false;
     }
 
-    private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(GravitySeperatorTileEntity::getShape);
+    private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(GravitySeparatorTileEntity::getShape);
 
     @Override
     public VoxelShape getBlockBounds(ISelectionContext ctx){

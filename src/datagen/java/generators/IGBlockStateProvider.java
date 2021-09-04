@@ -12,6 +12,7 @@ import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -73,8 +74,20 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
 
         chemicalvat();
+        gravityseparator();
 
         registerFluidBlocks();
+    }
+
+    private void gravityseparator() {
+        ResourceLocation texture = modLoc("multiblock/gravityseparator_base");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/gravityseparator.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/gravityseparator_mirrored.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelNormal, texture, "", GravitySeparatorMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, normal, mirrored, texture);
     }
 
     private void chemicalvat(){
