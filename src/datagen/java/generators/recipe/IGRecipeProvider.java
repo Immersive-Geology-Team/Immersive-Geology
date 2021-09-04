@@ -8,7 +8,7 @@ import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.core.data_helper.IGTags;
+import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.nio.file.Path;
 
-import static com.igteam.immersive_geology.core.data_helper.IGTags.createItemWrapper;
+import static com.igteam.immersive_geology.api.tags.IGTags.createItemWrapper;
 
 public class IGRecipeProvider extends RecipeProvider {
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();

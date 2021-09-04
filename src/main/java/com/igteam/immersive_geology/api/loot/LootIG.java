@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.core.data_helper;
+package com.igteam.immersive_geology.api.loot;
 
 import net.minecraft.loot.ILootSerializer;
 import net.minecraft.loot.LootFunctionType;

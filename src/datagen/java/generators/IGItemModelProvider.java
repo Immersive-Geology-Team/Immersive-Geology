@@ -83,7 +83,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void chemicalvatItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "item/obj/chemicalvat_itemmockup.obj")
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat.asItem(), "item/obj/chemicalvat_itemmockup.obj")
                 .texture("texture_base", modLoc("multiblock/chemicalvat_base"))
                 .texture("texture_fan", modLoc("models/chemicalvat_fan"));
 

@@ -35,17 +35,17 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     /** Template-Location of the Energy Input Port. (2, 1, 5) */
     public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(2, 1, 5));
 
-    /** Template-Location of the Eastern Item Input Port. (2, 0, 2) */
-    public static final BlockPos ITEM_OUT = new BlockPos(2, 0, 2);
+    /** Template-Location of the Eastern Item Input Port. (2, 2, 1) */
+    public static final BlockPos ITEM_OUT = new BlockPos(2, 2, 1);
 
     /** Template-Location of the Western Fluid Input Port. (0, 0, 2) */
-    public static final BlockPos FLUID_IN = new BlockPos(0, 0, 2);
+    public static final BlockPos FLUID_IN = new BlockPos(0, 2, 0);
 
     /**
      * Template-Location of the Bottom Fluid Output Port. (1, 0, 4) <b>(Also
      * Master Block)</b>
      */
-    public static final BlockPos FLUID_OUT = new BlockPos(1, 0, 4);
+    public static final BlockPos FLUID_OUT = new BlockPos(1, 0, 3);
 
     public boolean wasActive = false;
     public float activeTicks = 0;

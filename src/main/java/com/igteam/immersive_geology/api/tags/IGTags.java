@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.core.data_helper;
+package com.igteam.immersive_geology.api.tags;
 
 
 import blusunrize.immersiveengineering.api.Lib;

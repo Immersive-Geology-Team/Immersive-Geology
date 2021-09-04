@@ -34,8 +34,8 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
     private ChemicalVatMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/chemicalvat"),
-                new BlockPos(1,0,0),
-                new BlockPos(1,1,4),
+                new BlockPos(1,1,0),
+                new BlockPos(2,1,5),
                 new BlockPos(3,4,6),
                 () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
     }

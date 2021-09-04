@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.Lib;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.core.data_helper.IGTags;
+import com.igteam.immersive_geology.api.tags.IGTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.FluidTagsProvider;
 import net.minecraft.fluid.Fluid;

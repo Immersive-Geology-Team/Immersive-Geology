@@ -42,6 +42,11 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     }
 
     @Override
+    public Item asItem() {
+        return itemBlock;
+    }
+
+    @Override
     public ResourceLocation createRegistryName(){
         return new ResourceLocation(IGLib.MODID, name);
     }

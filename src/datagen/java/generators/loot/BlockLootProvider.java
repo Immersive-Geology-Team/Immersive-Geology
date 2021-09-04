@@ -6,7 +6,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
-import com.igteam.immersive_geology.core.data_helper.OreDropProperty;
+import com.igteam.immersive_geology.api.loot.OreDropProperty;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;

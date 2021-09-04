@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.core.data_helper;
+package com.igteam.immersive_geology.api.loot;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;

@@ -9,7 +9,7 @@ package com.igteam.immersive_geology;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.data_helper.LootIG;
+import com.igteam.immersive_geology.api.loot.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;

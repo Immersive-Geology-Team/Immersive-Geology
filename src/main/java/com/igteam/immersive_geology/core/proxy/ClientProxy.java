@@ -32,6 +32,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ClientProxy extends ServerProxy {
 
@@ -42,6 +43,10 @@ public class ClientProxy extends ServerProxy {
         registerItemColors();
         registerBlockColors();
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.VAT.get(), MultiblockChemicalVatRenderer::new);
+    }
+
+    @Override
+    public void onFinishSetup(FMLLoadCompleteEvent event) {
         setupManualPages();
     }
 
