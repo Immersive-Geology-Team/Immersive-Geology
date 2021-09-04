@@ -1,12 +1,10 @@
 package com.igteam.immersive_geology.core.registration;
 
-import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.api.util.IGRegistryGrabber;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
@@ -14,18 +12,9 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
-import com.igteam.immersive_geology.core.data.generators.helpers.IGTags;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class IGVariantHolder {
 

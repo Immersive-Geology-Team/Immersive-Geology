@@ -41,7 +41,10 @@ public enum MaterialUseType {
     NUGGET(false, ItemSubGroup.processed),
     GEAR(false, ItemSubGroup.processed),
     WIRE(false, ItemSubGroup.processed),
-    TINY_DUST(false, ItemSubGroup.processed);
+    TINY_DUST(false, ItemSubGroup.processed),
+
+    //Multiblock type
+    MACHINE(false, ItemSubGroup.machines);
 
     public String getName()
     {

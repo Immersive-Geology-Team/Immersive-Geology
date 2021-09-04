@@ -6,7 +6,8 @@
   "immersive_geology.config.title": "",
   "generator.immersive": "Immersive",
 
-
+  "item.immersive_geology.dirty_crushed_ore": "Dirty Crushed %s Ore",
+  "item.immersive_geology.crushed_ore": "Crushed %s Ore",
   "item.immersive_geology.cut_crystal": "Cut %s Crystal",
   "item.immersive_geology.bucket": "Bucket of %s",
   "item.immersive_geology.flask": "Flask of %s",

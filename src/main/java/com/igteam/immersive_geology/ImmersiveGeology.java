@@ -6,17 +6,17 @@
 
 package com.igteam.immersive_geology;
 
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.data.generators.helpers.LootIG;
+import com.igteam.immersive_geology.core.data_helper.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
 import com.igteam.immersive_geology.core.proxy.ServerProxy;
+import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -63,6 +63,9 @@ public class ImmersiveGeology
 
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
+
+		IGMultiblockRegistrationHolder.populate();
+		IGTileTypes.REGISTER.register(modBus);
 	}
 
 	private void setup(final FMLCommonSetupEvent event){
