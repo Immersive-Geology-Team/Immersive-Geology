@@ -1,0 +1,4 @@
+Sphalerite
+Minerals
+<&sphalerite>
+Mineral Test for sphalerite

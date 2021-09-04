@@ -1,0 +1,4 @@
+Uraninite
+Minerals
+<&uraninite>
+Mineral Test for uraninite

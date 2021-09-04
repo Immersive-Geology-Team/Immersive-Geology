@@ -1,0 +1,4 @@
+Anatase
+Minerals
+<&anatase>
+Mineral Test for anatase

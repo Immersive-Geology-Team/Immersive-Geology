@@ -1,0 +1,4 @@
+Thorianite
+Minerals
+<&thorianite>
+Mineral Test for thorianite

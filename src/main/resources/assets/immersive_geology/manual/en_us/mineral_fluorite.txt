@@ -1,0 +1,4 @@
+Fluorite
+Minerals
+<&fluorite>
+Mineral Test for fluorite

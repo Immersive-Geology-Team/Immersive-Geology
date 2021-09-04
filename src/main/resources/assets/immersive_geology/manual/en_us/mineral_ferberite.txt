@@ -1,0 +1,4 @@
+Ferberite
+Minerals
+<&ferberite>
+Mineral Test for ferberite

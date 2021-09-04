@@ -1,0 +1,4 @@
+Chromite
+Minerals
+<&chromite>
+Mineral Test for chromite

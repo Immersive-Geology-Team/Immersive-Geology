@@ -1,0 +1,4 @@
+Hematite
+Minerals
+<&hematite>
+Mineral Test for hematite

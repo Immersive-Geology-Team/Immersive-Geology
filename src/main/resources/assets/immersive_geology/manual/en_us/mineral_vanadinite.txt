@@ -1,0 +1,4 @@
+Vanadinite
+Minerals
+<&vanadinite>
+Mineral Test for vanadinite

@@ -1,0 +1,4 @@
+Cuprite
+Minerals
+<&cuprite>
+Mineral Test for cuprite

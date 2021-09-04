@@ -1,0 +1,4 @@
+Magnetite
+Minerals
+<&magnetite>
+Mineral Test for magnetite

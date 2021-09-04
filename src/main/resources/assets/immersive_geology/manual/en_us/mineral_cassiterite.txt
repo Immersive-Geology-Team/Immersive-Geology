@@ -1,0 +1,4 @@
+Cassiterite
+Minerals
+<&cassiterite>
+Mineral Test for cassiterite

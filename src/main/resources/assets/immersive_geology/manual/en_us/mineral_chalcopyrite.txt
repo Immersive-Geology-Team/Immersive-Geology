@@ -1,0 +1,4 @@
+Chalcopyrite
+Minerals
+<&chalcopyrite>
+Mineral Test for chalcopyrite
