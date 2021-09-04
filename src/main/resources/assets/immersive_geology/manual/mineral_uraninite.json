@@ -1,0 +1,8 @@
+{
+"mineral_uraninite": {
+  "type":"item_display",
+  "item": {
+     "item":"immersive_geology:ore_stone_vanilla_uraninite"
+    }
+  }
+}
