@@ -1,6 +1,9 @@
 package generators;
 
+import blusunrize.lib.manual.ManualElementItem;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
@@ -13,10 +16,13 @@ import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import com.mojang.realmsclient.util.JsonUtils;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
@@ -30,6 +36,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class IGItemModelProvider extends ItemModelProvider {
 
@@ -80,6 +88,42 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         chemicalvatItem();
 
+
+        //generateManualPageSkeleton();
+
+    }
+
+    private void generateManualPageSkeleton() {
+        for(MaterialEnum material : MaterialEnum.worldMaterials()) {
+            Material mineral = material.getMaterial();
+            Block block = IGRegistrationHolder.getBlockByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.ORE_STONE);
+            if (block instanceof IGOreBlock) {
+                IGOreBlock oreBlock = (IGOreBlock) block;
+
+                try {
+                    /*
+                    PrintWriter out = new PrintWriter("mineral_" + mineral.getName() + ".json");
+                    out.println("{");
+                    out.println("\"mineral_" + mineral.getName() + "\": {");
+                    out.println("  \"type\":" + "\"item_display\",");
+                    out.println("  \"item\": {");
+                    out.println("     \"item\":" + "\"immersive_geology:" + oreBlock.getHolderName() + "\"");
+                    out.println("    }");
+                    out.println("  }");
+                    out.println("}");
+                    out.close();
+                    */
+                    PrintWriter out = new PrintWriter("mineral_" + mineral.getName() + ".txt");
+                    out.println(mineral.getName().substring(0,1).toUpperCase() + mineral.getName().substring(1));
+                    out.println("Minerals");
+                    out.println("<&"+mineral.getName()+">");
+                    out.println("Mineral Test for " + mineral.getName());
+                    out.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void chemicalvatItem(){

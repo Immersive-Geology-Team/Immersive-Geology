@@ -90,8 +90,10 @@ public abstract class MaterialMineralBase extends Material
 		return 0xffffff;
 	}
 
+	//Defaults to Iron
+	@Override
 	public MaterialEnum getProcessedType(){
-		return null;
+		return MaterialEnum.Iron;
 	}
 
 	@Override

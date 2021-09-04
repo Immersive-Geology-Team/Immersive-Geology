@@ -20,6 +20,7 @@ public class IGModels {
     @SubscribeEvent
     public static void init(FMLConstructModEvent event){
         add(ModelChemicalVat.ID, new ModelChemicalVat());
+        add(ModelGravitySeperator.ID, new ModelGravitySeperator());
     }
     private static final Map<String, IGModel> MODELS = new HashMap<>();
 

@@ -37,6 +37,10 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
         this.useType = blockType.getBlockUseType();
     }
 
+    public String getHolderName() {
+        return holder_name;
+    }
+
     @Override
     public ItemSubGroup getSubGroup(){
         return this.subGroup;

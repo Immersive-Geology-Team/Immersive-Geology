@@ -35,10 +35,10 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
         }
 
         String holder_name = IGRegistrationHolder.getRegistryKey(MaterialEnum.Steel.getMaterial(), MaterialUseType.MACHINE).toLowerCase();
-        IGRegistrationHolder.registeredIGBlocks.put(holder_name, this);
+        IGRegistrationHolder.registeredIGBlocks.put(holder_name + "_" + name, this);
 
         this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Steel.getMaterial());
-        itemBlock.setRegistryName(holder_name.toLowerCase());
+        itemBlock.setRegistryName(holder_name.toLowerCase() + "_" + name);
     }
 
     @Override

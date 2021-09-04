@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:crafting/ingot_titanium_blasting"
+      "immersive_geology:crafting/ingot_iron_blasting5"
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_anatase": {
+    "has_ore_chunk_vanilla_rocksalt": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_anatase"
+            "item": "immersive_geology:ore_chunk_vanilla_rocksalt"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:crafting/ingot_titanium_blasting"
+        "recipe": "immersive_geology:crafting/ingot_iron_blasting5"
       }
     }
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_anatase",
+      "has_ore_chunk_vanilla_rocksalt",
       "has_the_recipe"
     ]
   ]

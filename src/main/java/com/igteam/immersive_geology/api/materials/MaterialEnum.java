@@ -137,6 +137,15 @@ public enum MaterialEnum {
         });
         return stoneMaterials.toArray(new MaterialEnum[stoneMaterials.size()]);
     }
+    public static MaterialEnum[] minerals() {
+        ArrayList<MaterialEnum> mineralMaterials = new ArrayList<>();
+        Arrays.stream(values()).forEach((container) -> {
+            if(container.getMaterial() instanceof MaterialMineralBase){
+                mineralMaterials.add(container);
+            }
+        });
+        return mineralMaterials.toArray(new MaterialEnum[mineralMaterials.size()]);
+    }
 
     public static MaterialEnum[] worldMaterials() {
         ArrayList<MaterialEnum> worldMaterials = new ArrayList<>();

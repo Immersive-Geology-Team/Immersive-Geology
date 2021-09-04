@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:ore_chunk_vanilla_anatase"
+    "item": "immersive_geology:ore_chunk_vanilla_ilmenite"
   },
   "result": "immersive_geology:ingot_titanium",
   "experience": 0.0,

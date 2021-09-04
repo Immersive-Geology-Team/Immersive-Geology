@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_hematite": {
+    "has_ore_chunk_vanilla_fluorite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_hematite"
+            "item": "immersive_geology:ore_chunk_vanilla_fluorite"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_hematite",
+      "has_ore_chunk_vanilla_fluorite",
       "has_the_recipe"
     ]
   ]

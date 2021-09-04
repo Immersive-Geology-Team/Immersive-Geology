@@ -1,5 +1,5 @@
 # Made in Blockbench 3.8.4
-mtllib chemicalvat.mtl
+mtllib vat.mtl
 o cube
 v 2.25 3.25 1.25
 v 2.25 3.25 0.75

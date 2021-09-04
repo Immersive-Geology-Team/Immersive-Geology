@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_magnetite": {
+    "has_ore_chunk_vanilla_gypsum": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_magnetite"
+            "item": "immersive_geology:ore_chunk_vanilla_gypsum"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_magnetite",
+      "has_ore_chunk_vanilla_gypsum",
       "has_the_recipe"
     ]
   ]

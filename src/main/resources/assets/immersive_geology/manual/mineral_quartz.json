@@ -1,0 +1,8 @@
+{
+"mineral_quartz": {
+  "type":"item_display",
+  "item": {
+     "item":"immersive_geology:crystal_quartz"
+    }
+  }
+}
