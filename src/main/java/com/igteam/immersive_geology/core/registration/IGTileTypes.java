@@ -17,7 +17,7 @@ public class IGTileTypes {
     public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, IGLib.MODID);
 
     public static final RegistryObject<TileEntityType<ChemicalVatTileEntity>> VAT = register("chemicalvat", ChemicalVatTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.chemicalvat);
-    public static final RegistryObject<TileEntityType<GravitySeparatorTileEntity>> GRAVITY = register("gravityseperator", GravitySeparatorTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.gravityseparator);
+    public static final RegistryObject<TileEntityType<GravitySeparatorTileEntity>> GRAVITY = register("gravityseparator", GravitySeparatorTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.gravityseparator);
 
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<T> factory, Block... valid){
         return REGISTER.register(name, () -> new TileEntityType<>(factory, ImmutableSet.copyOf(valid), null));

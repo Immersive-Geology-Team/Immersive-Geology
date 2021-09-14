@@ -6,13 +6,17 @@ import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilde
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
+import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
@@ -138,8 +142,17 @@ public class IGRecipeProvider extends RecipeProvider {
 //            }
         }
 
-
-
+        for(MaterialEnum orewrap : MaterialEnum.minerals()) {
+            Material orebase = orewrap.getMaterial();
+            ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
+            for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
+                Material stonebase = stoneWrap.getMaterial();
+                ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
+                ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
+                SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
+                sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+            }
+        }
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));
     }
 

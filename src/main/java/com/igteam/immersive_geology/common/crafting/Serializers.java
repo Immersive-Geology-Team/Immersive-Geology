@@ -16,6 +16,6 @@ public class Serializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGLib.MODID);
 
     public static final RegistryObject<IERecipeSerializer<SeparatorRecipe>> GRAVITY_SEPARATOR_SERIALIZER = RECIPE_SERIALIZERS.register(
-            "gravity_separator", SeparatorRecipeSerializer::new
+            "gravityseparator", SeparatorRecipeSerializer::new
     );
 }

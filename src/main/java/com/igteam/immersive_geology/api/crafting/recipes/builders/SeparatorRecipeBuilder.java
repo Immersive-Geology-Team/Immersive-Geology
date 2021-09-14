@@ -16,7 +16,7 @@ public class SeparatorRecipeBuilder extends IEFinishedRecipe<SeparatorRecipeBuil
 
     JsonArray secondaryArray = new JsonArray();
 
-    private SeparatorRecipeBuilder(){
+    public SeparatorRecipeBuilder(){
         super(Serializers.GRAVITY_SEPARATOR_SERIALIZER.get());
         addWriter(jsonObject -> jsonObject.add("secondaries", secondaryArray));
     }

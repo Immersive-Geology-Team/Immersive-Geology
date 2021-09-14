@@ -1,6 +1,6 @@
 {
-  "gravityseperator0": {
+  "gravityseparator0": {
     "type": "multiblock",
-    "name": "immersive_geology:multiblocks/gravityseperator"
+    "name": "immersive_geology:multiblocks/gravityseparator"
   }
 }

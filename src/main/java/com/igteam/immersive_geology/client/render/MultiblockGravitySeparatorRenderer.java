@@ -2,7 +2,7 @@ package com.igteam.immersive_geology.client.render;
 
 import com.igteam.immersive_geology.client.model.IGModel;
 import com.igteam.immersive_geology.client.model.IGModels;
-import com.igteam.immersive_geology.client.model.ModelGravitySeperator;
+import com.igteam.immersive_geology.client.model.ModelGravitySeparator;
 import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -16,12 +16,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class MultiblockGravitySeperatorRenderer extends TileEntityRenderer<GravitySeparatorTileEntity> {
-    public MultiblockGravitySeperatorRenderer(TileEntityRendererDispatcher dispatcher){
+public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<GravitySeparatorTileEntity> {
+    public MultiblockGravitySeparatorRenderer(TileEntityRendererDispatcher dispatcher){
         super(dispatcher);
     }
-
-    private static Supplier<IGModel> gravityseperator_center = IGModels.getSupplier(ModelGravitySeperator.ID);
 
     //Ripped from IP's Pumpjack
     @Override

@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTi
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.api.crafting.recipes.SeparatorRecipe;
+import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.entity.Entity;
@@ -26,7 +27,6 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
@@ -38,8 +38,9 @@ import java.util.Set;
 public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IBlockBounds {
 
     public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(3, 1, 0));
+    public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(1, 0, 1));
 
-    public GravitySeparatorTileEntity(){
+    public GravitySeparatorTileEntity() {
         super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
     }
 
@@ -51,55 +52,59 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public void tick() {
         super.tick();
-
     }
 
-    private boolean isInInput(boolean allowMiddleLayer)
-    {
-        if(posInMultiblock.getY()==2||(allowMiddleLayer&&posInMultiblock.getY()==1))
-            return posInMultiblock.getX() > 0&&posInMultiblock.getX() < 4;
+    @Override
+    public boolean isRSDisabled() {
+        return true;
+    }
+
+    private boolean isInInput(boolean allowMiddleLayer) {
+        if (posInMultiblock.getY() == 2 || (allowMiddleLayer && posInMultiblock.getY() == 1))
+            return posInMultiblock.getX() > 0 && posInMultiblock.getX() < 4;
         return false;
     }
 
     @Override
-    public Set<BlockPos> getEnergyPos(){
+    public Set<BlockPos> getRedstonePos() {
+        return Redstone_IN;
+    }
+
+    @Override
+    public Set<BlockPos> getEnergyPos() {
         return Energy_IN;
     }
 
     @Override
-    public boolean isInWorldProcessingMachine(){
+    public boolean isInWorldProcessingMachine() {
         return true;
     }
 
     @Override
-    public void onEntityCollision(World world, Entity entity)
-    {
+    public void onEntityCollision(World world, Entity entity) {
         // Actual intersection with the input box is checked later
         boolean bpos = isInInput(true);
-        if(bpos&&!world.isRemote&&entity.isAlive()&&!isRSDisabled())
-        {
+        if (bpos && !world.isRemote && entity.isAlive() && !isRSDisabled()) {
             GravitySeparatorTileEntity master = master();
-            if(master==null)
+            if (master == null)
                 return;
             Vector3d center = Vector3d.copyCentered(master.getPos()).add(0, 0.25, 0);
-            AxisAlignedBB separatorInternal = new AxisAlignedBB(center.x-1.0625, center.y, center.z-1.0625, center.x+1.0625, center.y+1.25, center.z+1.0625);
-            if(!entity.getBoundingBox().intersects(separatorInternal))
+            AxisAlignedBB separatorInternal = new AxisAlignedBB(center.x - 1.0625, center.y, center.z - 1.0625, center.x + 1.0625, center.y + 1.25, center.z + 1.0625);
+            if (!entity.getBoundingBox().intersects(separatorInternal))
                 return;
-            if(entity instanceof ItemEntity &&!((ItemEntity)entity).getItem().isEmpty())
-            {
-                ItemStack stack = ((ItemEntity)entity).getItem();
-                if(stack.isEmpty())
+            if (entity instanceof ItemEntity && !((ItemEntity) entity).getItem().isEmpty()) {
+                ItemStack stack = ((ItemEntity) entity).getItem();
+                if (stack.isEmpty())
                     return;
-                SeparatorRecipe recipe = (SeparatorRecipe) master.findRecipeForInsertion(stack);
-                if(recipe==null)
+                SeparatorRecipe recipe = master.findRecipeForInsertion(stack);
+                if (recipe == null)
                     return;
                 ItemStack displayStack = recipe.getDisplayStack(stack);
                 MultiblockProcess<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
-                if(master.addProcessToQueue(process, true, true))
-                {
+                if (master.addProcessToQueue(process, true, true)) {
                     master.addProcessToQueue(process, false, true);
                     stack.shrink(displayStack.getCount());
-                    if(stack.getCount() <= 0)
+                    if (stack.getCount() <= 0)
                         entity.remove();
                 }
             }
@@ -107,80 +112,80 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public void doProcessOutput(ItemStack output){
+    public void doProcessOutput(ItemStack output) {
     }
 
     @Override
-    public void doProcessFluidOutput(FluidStack output){
+    public void doProcessFluidOutput(FluidStack output) {
     }
 
     @Override
-    public void onProcessFinish(MultiblockProcess<SeparatorRecipe> process){
+    public void onProcessFinish(MultiblockProcess<SeparatorRecipe> process) {
     }
 
     @Override
-    public boolean additionalCanProcessCheck(MultiblockProcess<SeparatorRecipe> process){
+    public boolean additionalCanProcessCheck(MultiblockProcess<SeparatorRecipe> process) {
         return false;
     }
 
     @Override
-    public float getMinProcessDistance(MultiblockProcess<SeparatorRecipe> process){
+    public float getMinProcessDistance(MultiblockProcess<SeparatorRecipe> process) {
         return 0;
     }
 
     @Override
-    public int getMaxProcessPerTick(){
+    public int getMaxProcessPerTick() {
         return 1;
     }
 
     @Override
-    public int getProcessQueueMaxLength(){
+    public int getProcessQueueMaxLength() {
         return 1;
     }
 
     @Override
-    public boolean isStackValid(int slot, ItemStack stack){
+    public boolean isStackValid(int slot, ItemStack stack) {
         return true;
     }
 
     @Override
-    public int getSlotLimit(int slot){
+    public int getSlotLimit(int slot) {
         return 64;
     }
 
     @Override
-    public int[] getOutputSlots(){
+    public int[] getOutputSlots() {
         return null;
     }
 
     @Override
-    public int[] getOutputTanks(){
+    public int[] getOutputTanks() {
         return new int[]{1};
     }
 
     @Override
-    public void doGraphicalUpdates(int slot){
+    public void doGraphicalUpdates(int slot) {
         this.markDirty();
         this.markContainingBlockForUpdate(null);
     }
 
     @Override
-    public SeparatorRecipe findRecipeForInsertion(ItemStack inserting){
+    public SeparatorRecipe findRecipeForInsertion(ItemStack inserting) {
         return SeparatorRecipe.findRecipe(inserting);
     }
 
     @Override
-    protected SeparatorRecipe getRecipeForId(ResourceLocation id){
+    protected SeparatorRecipe getRecipeForId(ResourceLocation id) {
+        return SeparatorRecipe.recipes.get(id);
+    }
+
+    @Override
+    public NonNullList<ItemStack> getInventory() {
         return null;
     }
 
     @Override
-    public NonNullList<ItemStack> getInventory(){
-        return null;
-    }
-
-    @Override
-    public IFluidTank[] getInternalTanks(){
+    public IFluidTank[] getInternalTanks() {
         return null;
     }
 
@@ -191,32 +196,20 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource){
+    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
         return false;
     }
 
     @Override
-    protected boolean canDrainTankFrom(int iTank, Direction side){
+    protected boolean canDrainTankFrom(int iTank, Direction side) {
         return false;
     }
 
     private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(GravitySeparatorTileEntity::getShape);
 
     @Override
-    public VoxelShape getBlockBounds(ISelectionContext ctx){
+    public VoxelShape getBlockBounds(ISelectionContext ctx) {
         return SHAPES.get(this.posInMultiblock, Pair.of(getFacing(), getIsMirrored()));
-    }
-
-    @Nonnull
-    @Override
-    public VoxelShape getCollisionShape(ISelectionContext ctx) {
-        return null;
-    }
-
-    @Nonnull
-    @Override
-    public VoxelShape getSelectionShape(ISelectionContext ctx) {
-        return null;
     }
 
     //Direct Copy from IP's Pumpjack, this will need to be changed.
@@ -224,6 +217,150 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         final int bX = posInMultiblock.getX();
         final int bY = posInMultiblock.getY();
         final int bZ = posInMultiblock.getZ();
+
+        // Most of the arm doesnt need collision. Dumb anyway.
+        if((bY == 3 && bX == 1 && bZ != 2) || (bX == 1 && bY == 2 && bZ == 0)){
+            return new ArrayList<>();
+        }
+
+        // Motor
+        if(bY < 3 && bX == 1 && bZ == 4){
+            List<AxisAlignedBB> list = new ArrayList<>();
+            if(bY == 2){
+                list.add(new AxisAlignedBB(0.25, 0.0, 0.0, 0.75, 0.25, 1.0));
+            }else{
+                list.add(new AxisAlignedBB(0.25, 0.0, 0.0, 0.75, 1.0, 1.0));
+            }
+            if(bY == 0){
+                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+            }
+            return list;
+        }
+
+        // Support
+        if(bZ == 2 && bY > 0){
+            if(bX == 0){
+                if(bY == 1){
+                    List<AxisAlignedBB> list = new ArrayList<>();
+                    list.add(new AxisAlignedBB(0.6875, 0.0, 0.0, 1.0, 1.0, 0.25));
+                    list.add(new AxisAlignedBB(0.6875, 0.0, 0.75, 1.0, 1.0, 1.0));
+                    return list;
+                }
+                if(bY == 2){
+                    List<AxisAlignedBB> list = new ArrayList<>();
+                    list.add(new AxisAlignedBB(0.8125, 0.0, 0.0, 1.0, 0.5, 1.0));
+                    list.add(new AxisAlignedBB(0.8125, 0.5, 0.25, 1.0, 1.0, 0.75));
+                    return list;
+                }
+                if(bY == 3){
+                    return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.375, 1.0, 0.125, 0.625));
+                }
+            }
+            if(bX == 1 && bY == 3){
+                return Arrays.asList(new AxisAlignedBB(0.0, -0.125, 0.375, 1.0, 0.125, 0.625));
+            }
+            if(bX == 2){
+                if(bY == 1){
+                    List<AxisAlignedBB> list = new ArrayList<>();
+                    list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 0.3125, 1.0, 0.25));
+                    list.add(new AxisAlignedBB(0.0, 0.0, 0.75, 0.3125, 1.0, 1.0));
+                    return list;
+                }
+                if(bY == 2){
+                    List<AxisAlignedBB> list = new ArrayList<>();
+                    list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 0.1875, 0.5, 1.0));
+                    list.add(new AxisAlignedBB(0.0, 0.5, 0.25, 0.1875, 1.0, 0.75));
+                    return list;
+                }
+                if(bY == 3){
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.375, 0.0625, 0.125, 0.625));
+                }
+            }
+        }
+
+        // Redstone Controller
+        if(bX == 0 && bZ == 5){
+            if(bY == 0){ // Bottom
+                return Arrays.asList(
+                        new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.75, 0.0, 0.625, 0.875, 1.0, 0.875),
+                        new AxisAlignedBB(0.125, 0.0, 0.625, 0.25, 1.0, 0.875)
+                );
+            }
+            if(bY == 1){ // Top
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
+            }
+        }
+
+        // Below the power-in block, base height
+        if(bX == 2 && bY == 0 && bZ == 5){
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        }
+
+        // Misc
+        if(bY == 0){
+
+            // Legs Bottom Front
+            if(bZ == 1 && (bX == 0 || bX == 2)){
+                List<AxisAlignedBB> list = new ArrayList<>();
+
+                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+
+                if(bX == 0){
+                    list.add(new AxisAlignedBB(0.5, 0.5, 0.5, 1.0, 1.0, 1.0));
+                }
+                if(bX == 2){
+                    list.add(new AxisAlignedBB(0.0, 0.5, 0.5, 0.5, 1.0, 1.0));
+                }
+
+                return list;
+            }
+
+            // Legs Bottom Back
+            if(bZ == 3 && (bX == 0 || bX == 2)){
+                List<AxisAlignedBB> list = new ArrayList<>();
+
+                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+
+                if(bX == 0){
+                    list.add(new AxisAlignedBB(0.5, 0.5, 0.0, 1.0, 1.0, 0.5));
+                }
+                if(bX == 2){
+                    list.add(new AxisAlignedBB(0.0, 0.5, 0.0, 0.5, 1.0, 0.5));
+                }
+
+                return list;
+            }
+
+            // Fluid Outputs
+            if(bZ == 2 && (bX == 0 || bX == 2)){
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+
+            if(bX == 1){
+                // Well
+                if(bZ == 0){
+                    return Arrays.asList(new AxisAlignedBB(0.3125, 0.5, 0.8125, 0.6875, 0.875, 1.0), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 1.0, 0.8125));
+                }
+
+                // Pipes
+                if(bZ == 1){
+                    return Arrays.asList(
+                            new AxisAlignedBB(0.3125, 0.5, 0.0, 0.6875, 0.875, 1.0),
+                            new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0)
+                    );
+                }
+                if(bZ == 2){
+                    return Arrays.asList(
+                            new AxisAlignedBB(0.3125, 0.5, 0.0, 0.6875, 0.875, 0.6875),
+                            new AxisAlignedBB(0.0, 0.5, 0.3125, 1.0, 0.875, 0.6875),
+                            new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0)
+                    );
+                }
+            }
+
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+        }
 
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }

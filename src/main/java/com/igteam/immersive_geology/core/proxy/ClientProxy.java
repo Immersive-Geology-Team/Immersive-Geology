@@ -11,7 +11,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.MultiblockChemicalVatRenderer;
-import com.igteam.immersive_geology.client.render.MultiblockGravitySeperatorRenderer;
+import com.igteam.immersive_geology.client.render.MultiblockGravitySeparatorRenderer;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
@@ -44,7 +44,7 @@ public class ClientProxy extends ServerProxy {
         registerItemColors();
         registerBlockColors();
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.VAT.get(), MultiblockChemicalVatRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(IGTileTypes.GRAVITY.get(), MultiblockGravitySeperatorRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(IGTileTypes.GRAVITY.get(), MultiblockGravitySeparatorRenderer::new);
     }
 
     @Override

@@ -7,9 +7,9 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelGravitySeperator extends IGModel{
-    public static final String ID = "gravityseperatorcenter";
-    public static final ResourceLocation TEXTURE = new ResourceLocation(IGLib.MODID, "textures/models/gravityseperator_center.png");
+public class ModelGravitySeparator extends IGModel{
+    public static final String ID = "gravityseparatorcenter";
+    public static final ResourceLocation TEXTURE = new ResourceLocation(IGLib.MODID, "textures/models/gravityseparator_center.png");
 
     public ModelRenderer origin;
     public ModelRenderer swingy;
@@ -20,7 +20,7 @@ public class ModelGravitySeperator extends IGModel{
 
     public float ticks = 0;
 
-    public ModelGravitySeperator(){
+    public ModelGravitySeparator(){
         super(IGRenderTypes::getEntitySolid);
 
         this.textureWidth = 190;

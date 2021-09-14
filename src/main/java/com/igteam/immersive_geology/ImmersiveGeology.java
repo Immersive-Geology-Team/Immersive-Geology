@@ -7,6 +7,7 @@
 package com.igteam.immersive_geology;
 
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.api.loot.LootIG;
@@ -63,6 +64,8 @@ public class ImmersiveGeology
 
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
+
+		Serializers.RECIPE_SERIALIZERS.register(modBus);
 
 		IGMultiblockRegistrationHolder.populate();
 		IGTileTypes.REGISTER.register(modBus);
