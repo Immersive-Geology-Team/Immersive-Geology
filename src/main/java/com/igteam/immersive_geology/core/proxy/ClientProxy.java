@@ -98,7 +98,7 @@ public class ClientProxy extends ServerProxy {
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY;
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MACHINES;
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MINERALS;
-    public void setupManualPages(){
+    public void setupManualPages() {
         ManualInstance man = ManualHelper.getManual();
 
         IG_CATEGORY = man.getRoot().getOrCreateSubnode(modLoc("main"), 101);

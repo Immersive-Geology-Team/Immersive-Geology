@@ -34,15 +34,15 @@ public class GravitySeparatorMultiblock extends IETemplateMultiblock {
 
     private GravitySeparatorMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseparator"),
-                new BlockPos(0,0,0),
-                new BlockPos(0,0,3),
-                new BlockPos(4,6,4),
+                new BlockPos(1,0,1),
+                new BlockPos(1,6,2),
+                new BlockPos(3,7,3),
                 () -> IGMultiblockRegistrationHolder.Multiblock.gravityseparator.getDefaultState());
     }
 
     @Override
     public float getManualScale(){
-        return 12;
+        return 9;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class GravitySeparatorMultiblock extends IETemplateMultiblock {
 
     @OnlyIn(Dist.CLIENT)
     private GravitySeparatorTileEntity te;
+
     @OnlyIn(Dist.CLIENT)
     List<BakedQuad> list;
     @Override

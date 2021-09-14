@@ -5,9 +5,13 @@ import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableSet;
+import com.igteam.immersive_geology.api.crafting.recipes.SeparatorRecipe;
 import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
@@ -18,6 +22,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -29,27 +35,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, MultiblockRecipe> implements IBlockBounds {
-    /** Template-Location of the Redstone Input Port. (0, 1, 5) */
-    public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(0, 0, 0));
+public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IBlockBounds {
 
-    /** Template-Location of the Energy Input Port. (2, 1, 5) */
-    public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(2, 1, 5));
+    public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(3, 1, 0));
 
-    /** Template-Location of the Eastern Item Input Port. (2, 2, 1) */
-    public static final BlockPos ITEM_OUT = new BlockPos(1, 5, 1);
-
-    /**
-     * Template-Location of the Bottom Fluid Output Port. (1, 0, 4) <b>(Also
-     * Master Block)</b>
-     */
-    public static final BlockPos FLUID_OUT = new BlockPos(1, 0, 3);
-
-    public boolean wasActive = false;
-    public float activeTicks = 0;
-    public FluidTank fakeTank = new FluidTank(0);
     public GravitySeparatorTileEntity(){
-        super(GravitySeparatorMultiblock.INSTANCE, 16000, true, null);
+        super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
     }
 
     @Override
@@ -57,31 +48,17 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return IGTileTypes.GRAVITY.get();
     }
 
-    //used to load stored states.
-    @Override
-    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.readCustomNBT(nbt, descPacket);
-    }
-
-    //Used to store states is active? etc.
-    @Override
-    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.writeCustomNBT(nbt, descPacket);
-    }
-
-    @Nonnull
-    @Override
-    protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
-        return new IFluidTank[0];
-    }
-
     @Override
     public void tick() {
         super.tick();
 
-        if((this.world.isRemote || isDummy()) && this.wasActive) {
-            this.activeTicks++;
-        }
+    }
+
+    private boolean isInInput(boolean allowMiddleLayer)
+    {
+        if(posInMultiblock.getY()==2||(allowMiddleLayer&&posInMultiblock.getY()==1))
+            return posInMultiblock.getX() > 0&&posInMultiblock.getX() < 4;
+        return false;
     }
 
     @Override
@@ -90,21 +67,43 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public IEEnums.IOSideConfig getEnergySideConfig(Direction facing){
-        if(this.formed && this.isEnergyPos() && (facing == null || facing == Direction.UP))
-            return IEEnums.IOSideConfig.INPUT;
-
-        return IEEnums.IOSideConfig.NONE;
-    }
-
-    @Override
-    public Set<BlockPos> getRedstonePos(){
-        return Redstone_IN;
-    }
-
-    @Override
     public boolean isInWorldProcessingMachine(){
-        return false;
+        return true;
+    }
+
+    @Override
+    public void onEntityCollision(World world, Entity entity)
+    {
+        // Actual intersection with the input box is checked later
+        boolean bpos = isInInput(true);
+        if(bpos&&!world.isRemote&&entity.isAlive()&&!isRSDisabled())
+        {
+            GravitySeparatorTileEntity master = master();
+            if(master==null)
+                return;
+            Vector3d center = Vector3d.copyCentered(master.getPos()).add(0, 0.25, 0);
+            AxisAlignedBB separatorInternal = new AxisAlignedBB(center.x-1.0625, center.y, center.z-1.0625, center.x+1.0625, center.y+1.25, center.z+1.0625);
+            if(!entity.getBoundingBox().intersects(separatorInternal))
+                return;
+            if(entity instanceof ItemEntity &&!((ItemEntity)entity).getItem().isEmpty())
+            {
+                ItemStack stack = ((ItemEntity)entity).getItem();
+                if(stack.isEmpty())
+                    return;
+                SeparatorRecipe recipe = (SeparatorRecipe) master.findRecipeForInsertion(stack);
+                if(recipe==null)
+                    return;
+                ItemStack displayStack = recipe.getDisplayStack(stack);
+                MultiblockProcess<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
+                if(master.addProcessToQueue(process, true, true))
+                {
+                    master.addProcessToQueue(process, false, true);
+                    stack.shrink(displayStack.getCount());
+                    if(stack.getCount() <= 0)
+                        entity.remove();
+                }
+            }
+        }
     }
 
     @Override
@@ -116,16 +115,16 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public void onProcessFinish(MultiblockProcess<MultiblockRecipe> process){
+    public void onProcessFinish(MultiblockProcess<SeparatorRecipe> process){
     }
 
     @Override
-    public boolean additionalCanProcessCheck(MultiblockProcess<MultiblockRecipe> process){
+    public boolean additionalCanProcessCheck(MultiblockProcess<SeparatorRecipe> process){
         return false;
     }
 
     @Override
-    public float getMinProcessDistance(MultiblockProcess<MultiblockRecipe> process){
+    public float getMinProcessDistance(MultiblockProcess<SeparatorRecipe> process){
         return 0;
     }
 
@@ -166,12 +165,12 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public MultiblockRecipe findRecipeForInsertion(ItemStack inserting){
-        return null;
+    public SeparatorRecipe findRecipeForInsertion(ItemStack inserting){
+        return SeparatorRecipe.findRecipe(inserting);
     }
 
     @Override
-    protected MultiblockRecipe getRecipeForId(ResourceLocation id){
+    protected SeparatorRecipe getRecipeForId(ResourceLocation id){
         return null;
     }
 
@@ -183,6 +182,12 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public IFluidTank[] getInternalTanks(){
         return null;
+    }
+
+    @Nonnull
+    @Override
+    protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
+        return new IFluidTank[0];
     }
 
     @Override
@@ -202,155 +207,23 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return SHAPES.get(this.posInMultiblock, Pair.of(getFacing(), getIsMirrored()));
     }
 
+    @Nonnull
+    @Override
+    public VoxelShape getCollisionShape(ISelectionContext ctx) {
+        return null;
+    }
+
+    @Nonnull
+    @Override
+    public VoxelShape getSelectionShape(ISelectionContext ctx) {
+        return null;
+    }
+
     //Direct Copy from IP's Pumpjack, this will need to be changed.
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
         final int bX = posInMultiblock.getX();
         final int bY = posInMultiblock.getY();
         final int bZ = posInMultiblock.getZ();
-
-        // Most of the arm doesnt need collision. Dumb anyway.
-        if((bY == 3 && bX == 1 && bZ != 2) || (bX == 1 && bY == 2 && bZ == 0)){
-            return new ArrayList<>();
-        }
-
-        // Motor
-        if(bY < 3 && bX == 1 && bZ == 4){
-            List<AxisAlignedBB> list = new ArrayList<>();
-            if(bY == 2){
-                list.add(new AxisAlignedBB(0.25, 0.0, 0.0, 0.75, 0.25, 1.0));
-            }else{
-                list.add(new AxisAlignedBB(0.25, 0.0, 0.0, 0.75, 1.0, 1.0));
-            }
-            if(bY == 0){
-                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
-            }
-            return list;
-        }
-
-        // Support
-        if(bZ == 2 && bY > 0){
-            if(bX == 0){
-                if(bY == 1){
-                    List<AxisAlignedBB> list = new ArrayList<>();
-                    list.add(new AxisAlignedBB(0.6875, 0.0, 0.0, 1.0, 1.0, 0.25));
-                    list.add(new AxisAlignedBB(0.6875, 0.0, 0.75, 1.0, 1.0, 1.0));
-                    return list;
-                }
-                if(bY == 2){
-                    List<AxisAlignedBB> list = new ArrayList<>();
-                    list.add(new AxisAlignedBB(0.8125, 0.0, 0.0, 1.0, 0.5, 1.0));
-                    list.add(new AxisAlignedBB(0.8125, 0.5, 0.25, 1.0, 1.0, 0.75));
-                    return list;
-                }
-                if(bY == 3){
-                    return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.375, 1.0, 0.125, 0.625));
-                }
-            }
-            if(bX == 1 && bY == 3){
-                return Arrays.asList(new AxisAlignedBB(0.0, -0.125, 0.375, 1.0, 0.125, 0.625));
-            }
-            if(bX == 2){
-                if(bY == 1){
-                    List<AxisAlignedBB> list = new ArrayList<>();
-                    list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 0.3125, 1.0, 0.25));
-                    list.add(new AxisAlignedBB(0.0, 0.0, 0.75, 0.3125, 1.0, 1.0));
-                    return list;
-                }
-                if(bY == 2){
-                    List<AxisAlignedBB> list = new ArrayList<>();
-                    list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 0.1875, 0.5, 1.0));
-                    list.add(new AxisAlignedBB(0.0, 0.5, 0.25, 0.1875, 1.0, 0.75));
-                    return list;
-                }
-                if(bY == 3){
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.375, 0.0625, 0.125, 0.625));
-                }
-            }
-        }
-
-        // Redstone Controller
-        if(bX == 0 && bZ == 5){
-            if(bY == 0){ // Bottom
-                return Arrays.asList(
-                        new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
-                        new AxisAlignedBB(0.75, 0.0, 0.625, 0.875, 1.0, 0.875),
-                        new AxisAlignedBB(0.125, 0.0, 0.625, 0.25, 1.0, 0.875)
-                );
-            }
-            if(bY == 1){ // Top
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
-            }
-        }
-
-        // Below the power-in block, base height
-        if(bX == 2 && bY == 0 && bZ == 5){
-            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-        }
-
-        // Misc
-        if(bY == 0){
-
-            // Legs Bottom Front
-            if(bZ == 1 && (bX == 0 || bX == 2)){
-                List<AxisAlignedBB> list = new ArrayList<>();
-
-                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
-
-                if(bX == 0){
-                    list.add(new AxisAlignedBB(0.5, 0.5, 0.5, 1.0, 1.0, 1.0));
-                }
-                if(bX == 2){
-                    list.add(new AxisAlignedBB(0.0, 0.5, 0.5, 0.5, 1.0, 1.0));
-                }
-
-                return list;
-            }
-
-            // Legs Bottom Back
-            if(bZ == 3 && (bX == 0 || bX == 2)){
-                List<AxisAlignedBB> list = new ArrayList<>();
-
-                list.add(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
-
-                if(bX == 0){
-                    list.add(new AxisAlignedBB(0.5, 0.5, 0.0, 1.0, 1.0, 0.5));
-                }
-                if(bX == 2){
-                    list.add(new AxisAlignedBB(0.0, 0.5, 0.0, 0.5, 1.0, 0.5));
-                }
-
-                return list;
-            }
-
-            // Fluid Outputs
-            if(bZ == 2 && (bX == 0 || bX == 2)){
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-            }
-
-            if(bX == 1){
-                // Well
-                if(bZ == 0){
-                    return Arrays.asList(new AxisAlignedBB(0.3125, 0.5, 0.8125, 0.6875, 0.875, 1.0), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 1.0, 0.8125));
-                }
-
-                // Pipes
-                if(bZ == 1){
-                    return Arrays.asList(
-                            new AxisAlignedBB(0.3125, 0.5, 0.0, 0.6875, 0.875, 1.0),
-                            new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0)
-                    );
-                }
-                if(bZ == 2){
-                    return Arrays.asList(
-                            new AxisAlignedBB(0.3125, 0.5, 0.0, 0.6875, 0.875, 0.6875),
-                            new AxisAlignedBB(0.0, 0.5, 0.3125, 1.0, 0.875, 0.6875),
-                            new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0)
-                    );
-                }
-            }
-
-            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
-        }
 
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }

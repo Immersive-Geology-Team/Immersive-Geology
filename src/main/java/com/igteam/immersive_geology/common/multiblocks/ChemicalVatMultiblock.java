@@ -34,9 +34,9 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
     private ChemicalVatMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/chemicalvat"),
-                new BlockPos(1,1,0),
-                new BlockPos(2,1,5),
-                new BlockPos(3,4,6),
+                new BlockPos(0,0,0),
+                new BlockPos(0,0,2),
+                new BlockPos(4,4,3),
                 () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
     }
 
@@ -73,6 +73,7 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
             World world = ClientUtils.mc().world;
             if(world != null){
                 transform.push();
+                //transform.rotate(new Quaternion(new Vector3f(0f,1f,0f), 180, true));
                 transform.translate(1, 0, 0);
                 RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getSolid()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
 

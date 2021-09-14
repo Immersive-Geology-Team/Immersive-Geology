@@ -49,14 +49,14 @@ public class MultiblockGravitySeperatorRenderer extends TileEntityRenderer<Gravi
                     break;
 
             }
-
-            ModelGravitySeperator model;
-            if((model = (ModelGravitySeperator) gravityseperator_center.get()) != null){
-                float ticks = te.activeTicks + (te.wasActive ? partialTicks : 0);
-                model.ticks = 1.5F * ticks;
-
-                model.render(transform, buffer.getBuffer(model.getRenderType(ModelGravitySeperator.TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
-            }
+//
+//            ModelGravitySeperator model;
+//            if((model = (ModelGravitySeperator) gravityseperator_center.get()) != null){
+//                float ticks = te.activeTicks + (te.wasActive ? partialTicks : 0);
+//                model.ticks = 1.5F * ticks;
+//
+//                model.render(transform, buffer.getBuffer(model.getRenderType(ModelGravitySeperator.TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
+//            }
             transform.pop();
         }
     }

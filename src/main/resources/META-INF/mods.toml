@@ -8,10 +8,10 @@ license="LGPL v2.1"
 [[mods]]
 modId="immersive_geology"
 updateJSONURL=""
-version="0.92v16"
+version="0.94v16"
 displayName="Immersive Geology"
 displayURL=""
-credits="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
+credits="Sen#1629 - Chemical Vat Model"
 authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
 description='''
 Many Rocks, Many Metals, Many things

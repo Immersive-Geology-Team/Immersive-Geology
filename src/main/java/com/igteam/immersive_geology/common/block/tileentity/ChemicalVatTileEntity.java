@@ -30,22 +30,19 @@ import java.util.Set;
 
 public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalVatTileEntity, MultiblockRecipe> implements IBlockBounds {
     /** Template-Location of the Redstone Input Port. (0, 1, 5) */
-    public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(0, 1, 5));
+    public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(3, 0, 0));
 
-    /** Template-Location of the Energy Input Port. (2, 1, 5) */
-    public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(2, 1, 5));
+    /** Template-Location of the Energy Input Port. (3, 1, 0) */
+    public static final Set<BlockPos> Energy_IN = ImmutableSet.of(new BlockPos(3, 1, 0));
 
-    /** Template-Location of the Eastern Item Input Port. (2, 2, 1) */
-    public static final BlockPos ITEM_OUT = new BlockPos(2, 2, 1);
+    public static final Set<BlockPos> ITEM_IN = ImmutableSet.of(new BlockPos(1, 3, 1));
 
-    /** Template-Location of the Western Fluid Input Port. (0, 0, 2) */
-    public static final BlockPos FLUID_IN = new BlockPos(0, 2, 0);
+    public static final BlockPos FLUID_PRIMARY_IN = new BlockPos(3, 0, 1);
+    public static final BlockPos FLUID_SECONDARY_IN = new BlockPos(3, 0, 2);
 
-    /**
-     * Template-Location of the Bottom Fluid Output Port. (1, 0, 4) <b>(Also
-     * Master Block)</b>
-     */
-    public static final BlockPos FLUID_OUT = new BlockPos(1, 0, 3);
+    /** Template-Location of the Eastern Item Input Port. (1, 0, 0) and also it's the master block */
+    public static final BlockPos ITEM_OUT = new BlockPos(1, 0, 0);
+
 
     public boolean wasActive = false;
     public float activeTicks = 0;
@@ -183,16 +180,22 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction side){
-        ChemicalVatTileEntity master = master();
+        return new FluidTank[0];
+        /*
+         ChemicalVatTileEntity master = master();
         if(master != null){
-            if(this.posInMultiblock.equals(FLUID_IN)){
+            if(this.posInMultiblock.equals(ITEM_OUT)){ //master block location
                 if(side == null || (getIsMirrored() ? (side == getFacing().rotateYCCW()) : (side == getFacing().rotateY()))){
-                    return new FluidTank[]{master.fakeTank};
+                    return new NonNullList<ItemStack>();
                 }
             }
         }
-        return new FluidTank[0];
+         */
+
+
     }
+
+
 
     @Override
     protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource){
