@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
@@ -27,14 +28,14 @@ public class SeparatorRecipe extends MultiblockRecipe
     public static Map<ResourceLocation, SeparatorRecipe> recipes = new HashMap<>();
     public final Ingredient input;
     public final ItemStack output;
-    public final Ingredient extra;
+    public final Ingredient waste;
 
     public final List<StackWithChance> secondaryOutputs = new ArrayList<>();
 
-    public SeparatorRecipe(ResourceLocation id, ItemStack output, Ingredient extra, Ingredient input) {
+    public SeparatorRecipe(ResourceLocation id, ItemStack output, Ingredient waste, Ingredient input) {
         super(output, TYPE, id);
         this.output = output;
-        this.extra = extra;
+        this.waste = waste;
         this.input = input;
 
         setInputList(Lists.newArrayList(this.input));
@@ -59,7 +60,7 @@ public class SeparatorRecipe extends MultiblockRecipe
 
     @Override
     protected IERecipeSerializer getIESerializer() {
-        return null;
+        return Serializers.GRAVITY_SEPARATOR_SERIALIZER.get();
     }
 
     @Override

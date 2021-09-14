@@ -45,12 +45,24 @@ public class SeparatorRecipeSerializer extends IERecipeSerializer<SeparatorRecip
     }
 
     @Override
-    public SeparatorRecipe read(ResourceLocation resourceLocation, PacketBuffer packetBuffer) {
-        return null;
+    public SeparatorRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        ItemStack output = buffer.readItemStack();
+        Ingredient input = Ingredient.read(buffer);
+        Ingredient waste = Ingredient.read(buffer);
+        int secondaryCount = buffer.readInt();
+        SeparatorRecipe recipe = new SeparatorRecipe(recipeId, output, waste, input);
+        for(int i = 0; i < secondaryCount; i++)
+            recipe.addToSecondaryOutput(StackWithChance.read(buffer));
+        return recipe;
     }
 
     @Override
-    public void write(PacketBuffer packetBuffer, SeparatorRecipe separatorRecipe) {
-
+    public void write(PacketBuffer buffer, SeparatorRecipe recipe) {
+        buffer.writeItemStack(recipe.output);
+        recipe.input.write(buffer);
+        recipe.waste.write(buffer);
+        buffer.writeInt(recipe.secondaryOutputs.size());
+        for(StackWithChance secondaryOutput : recipe.secondaryOutputs)
+            secondaryOutput.write(buffer);
     }
 }

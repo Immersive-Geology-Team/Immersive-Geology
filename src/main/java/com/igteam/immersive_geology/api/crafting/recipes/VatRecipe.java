@@ -63,7 +63,7 @@ public class VatRecipe extends IGMultiblockRecipe
 
     @Override
     protected IERecipeSerializer getIESerializer() {
-        return Serializers.CHEMICAL_VAT_SERIALIZER.get();
+        return null; //Serializers.CHEMICAL_VAT_SERIALIZER.get();
     }
 
     @Override
