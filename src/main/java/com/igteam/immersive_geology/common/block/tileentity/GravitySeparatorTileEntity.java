@@ -60,9 +60,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     private boolean isInInput(boolean allowMiddleLayer) {
-        if (posInMultiblock.getY() == 2 || (allowMiddleLayer && posInMultiblock.getY() == 1))
-            return posInMultiblock.getX() > 0 && posInMultiblock.getX() < 4;
-        return false;
+        return true;
     }
 
     @Override
@@ -88,8 +86,8 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
             GravitySeparatorTileEntity master = master();
             if (master == null)
                 return;
-            Vector3d center = Vector3d.copyCentered(master.getPos()).add(0, 0.25, 0);
-            AxisAlignedBB separatorInternal = new AxisAlignedBB(center.x - 1.0625, center.y, center.z - 1.0625, center.x + 1.0625, center.y + 1.25, center.z + 1.0625);
+            Vector3d center = Vector3d.copyCentered(master.getPos());
+            AxisAlignedBB separatorInternal = new AxisAlignedBB(center.x - 4, center.y, center.z - 4, center.x + 4, center.y + 10, center.z + 4);
             if (!entity.getBoundingBox().intersects(separatorInternal))
                 return;
             if (entity instanceof ItemEntity && !((ItemEntity) entity).getItem().isEmpty()) {
