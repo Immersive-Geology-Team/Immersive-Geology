@@ -1,7 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.crystals;
 
-import com.igteam.immersive_geology.api.materials.PeriodicTableElement;
-import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialCrystalBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;

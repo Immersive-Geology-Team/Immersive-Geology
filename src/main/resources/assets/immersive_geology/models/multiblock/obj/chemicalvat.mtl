@@ -1,4 +1,25 @@
-# Made in Blockbench 3.8.4
-newmtl m_0
-map_Kd immersive_geology:chemicalvat_base.png
-newmtl none
+# Blender MTL File: 'tank1.blend'
+# Material Count: 2
+
+newmtl Material
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd #texture
+
+newmtl Material.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd #texture
+map_d #texture

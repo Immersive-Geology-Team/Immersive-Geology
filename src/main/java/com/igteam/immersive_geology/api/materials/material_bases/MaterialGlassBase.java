@@ -1,6 +1,8 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;

@@ -1,0 +1,23 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "result": {
+    "item": "minecraft:apple"
+  },
+  "fluid_result": {
+    "fluid": "immersive_geology:fluids_hubnerite_hydrochloric_acid_slurry",
+    "amount": 125
+  },
+  "energy": 1000,
+  "time": 120,
+  "fluid_input1": {
+    "fluid": "immersive_geology:fluids_hydrochloric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "fluid": "minecraft:empty",
+    "amount": 0
+  },
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_hubnerite"
+  }
+}

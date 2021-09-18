@@ -2,7 +2,7 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 
 import javax.annotation.Nullable;

@@ -7,12 +7,17 @@ import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBui
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.IGMineralProcess;
+import com.igteam.immersive_geology.api.materials.helper.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
@@ -24,6 +29,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
+import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -143,7 +149,8 @@ public class IGRecipeProvider extends RecipeProvider {
         }
 
         for(MaterialEnum orewrap : MaterialEnum.minerals()) {
-            Material orebase = orewrap.getMaterial();
+            MaterialMineralBase orebase = (MaterialMineralBase) orewrap.getMaterial();
+            //Gravity Separator
             ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
             for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
                 Material stonebase = stoneWrap.getMaterial();
@@ -151,6 +158,43 @@ public class IGRecipeProvider extends RecipeProvider {
                 ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
                 SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
                 sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+            }
+
+            //Setup Recipe Generation for Mineral Processing
+
+            //Create Recipe Builders
+            VatRecipeBuilder vatBuilder = new VatRecipeBuilder();
+
+            if(orebase.getProcessingMethod() != null){
+                Pair<ProcessingMethod, IGMineralProcess> method = orebase.getProcessingMethod();
+                switch(method.getKey()){
+                    case BLASTING:
+                        break;
+                    case CALCINATION:
+                        break;
+                    case ACID:
+                        MaterialEnum acid_resultWrapper = method.getValue().getResultingMaterial();
+                        MaterialUseType acid_resultUseType = method.getValue().getResultingType();
+                        FluidStack acid_chemical = method.getValue().getProcessingFluid();
+                        ItemStack acid_catalyst = method.getValue().getProcessingCatalyst();
+                        ItemStack acid_result = method.getValue().getResultAsItemStack();
+
+                        FluidStack slurry = method.getValue().getResultingFluid();
+
+                            vatBuilder.builder(acid_result, slurry).setEnergy(1000).setTime(120)
+                                    .addFluidInputs(acid_chemical, FluidStack.EMPTY)
+                                    .addItemInput(IngredientWithSize.of(acid_catalyst))
+                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + acid_resultUseType.getName() + "_" + acid_resultWrapper.name().toLowerCase()));
+
+                        break;
+                    case ROASTER:
+                        break;
+                    case SEDIMENT:
+
+                        break;
+                    case ELECTROLYSIS:
+                        break;
+                }
             }
         }
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));

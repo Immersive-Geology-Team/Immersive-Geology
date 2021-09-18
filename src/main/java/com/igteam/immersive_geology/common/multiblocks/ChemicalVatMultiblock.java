@@ -34,15 +34,15 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
     private ChemicalVatMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/chemicalvat"),
-                new BlockPos(0,0,0),
-                new BlockPos(0,0,2),
+                new BlockPos(3,0,0),
+                new BlockPos(3,0,0),
                 new BlockPos(4,4,3),
                 () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
     }
 
     @Override
     public float getManualScale(){
-        return 12;
+        return 11;
     }
 
     @Override
@@ -75,12 +75,12 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
                 transform.push();
                 //transform.rotate(new Quaternion(new Vector3f(0f,1f,0f), 180, true));
                 transform.translate(1, 0, 0);
-                RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getSolid()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
+                RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
 
                 transform.push();
                 transform.rotate(rot);
                 transform.translate(-2, -1, -1);
-                ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getSolid()), transform, buffer);
+                ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getCutout()), transform, buffer);
                 transform.pop();
 
                 transform.pop();

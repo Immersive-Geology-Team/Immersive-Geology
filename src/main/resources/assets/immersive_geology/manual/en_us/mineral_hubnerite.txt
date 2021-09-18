@@ -16,4 +16,3 @@ The grit can be used to create some very strong metal alloys.
 <&ingot_tungsten>
 No current use, will be used for late game machines!
 please note that the real process generally doesn't use an arc furnace as most arc furnaces reach 1800C, while laboratory units run around 3000C but can exceed said temperature. (Tungsten Melting point is 3422C)
-

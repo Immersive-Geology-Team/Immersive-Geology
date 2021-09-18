@@ -34,7 +34,6 @@ public enum MaterialUseType {
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
     FLASK(false, ItemSubGroup.processed),
-    FLUIDS(false, ItemSubGroup.misc),
     ROD(false, ItemSubGroup.processed),
     INGOT(false, ItemSubGroup.processed),
     PLATE(false, ItemSubGroup.processed),
@@ -42,6 +41,10 @@ public enum MaterialUseType {
     GEAR(false, ItemSubGroup.processed),
     WIRE(false, ItemSubGroup.processed),
     TINY_DUST(false, ItemSubGroup.processed),
+
+    //Liquid Types
+    FLUIDS(false, ItemSubGroup.misc),
+    SLURRY(false, ItemSubGroup.misc),
 
     //Multiblock type
     MACHINE(false, ItemSubGroup.machines);

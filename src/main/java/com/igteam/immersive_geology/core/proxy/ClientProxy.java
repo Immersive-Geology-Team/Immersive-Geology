@@ -72,27 +72,13 @@ public class ClientProxy extends ServerProxy {
     public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
         TileEntityRenderer<TileEntity> tesr = TileEntityRendererDispatcher.instance.getRenderer((TileEntity) te);
 
-        if(te instanceof ChemicalVatTileEntity){
-            transform.push();
-            transform.rotate(new Quaternion(0, -90, 0, true));
-            transform.translate(1, 1, -2);
-
-            float pt = 0;
-            if(Minecraft.getInstance().player != null){
-                ((ChemicalVatTileEntity) te).activeTicks = Minecraft.getInstance().player.ticksExisted;
-                pt = Minecraft.getInstance().getRenderPartialTicks();
-            }
-
-            tesr.render(te, pt, transform, buffer, 0xF000F0, 0);
-            transform.pop();
-        }else{
             transform.push();
             transform.rotate(new Quaternion(0, -90, 0, true));
             transform.translate(0, 1, -4);
 
             tesr.render(te, 0, transform, buffer, 0xF000F0, 0);
             transform.pop();
-        }
+
     }
 
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY;

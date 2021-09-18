@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
@@ -29,12 +30,11 @@ public class IGVariantHolder {
                     if (type.isBlock()) {
                         createBlockVariants(mat, type);
                     } else {
-                        createItemVariants(mat, type);
-
-                        if(type == MaterialUseType.FLUIDS) {
+                        if(type == MaterialUseType.FLUIDS || type == MaterialUseType.SLURRY) {
                             registerFluidType(mat);
+                        } else {
+                            createItemVariants(mat, type);
                         }
-
                     }
                 }
             }
@@ -56,6 +56,7 @@ public class IGVariantHolder {
                 registerDirtyOreItem(material, type);
                 break;
             case FLUIDS:
+            case SLURRY:
                 break;
             case FLASK:
                 registerBucketItem(material, type);
@@ -96,6 +97,7 @@ public class IGVariantHolder {
     }
 
     private static void registerFluidType(Material material){
+        //Basic Fluid
         if(material instanceof MaterialFluidBase) {
             MaterialFluidBase fluid_material = (MaterialFluidBase) material;
             String fluid_name = fluid_material.getName();
@@ -115,9 +117,27 @@ public class IGVariantHolder {
             }
 
             if(fluid_material.hasFlask()){
-                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLASK), fluid.getBucket());
+                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(fluid_material, MaterialUseType.FLASK), fluid.getFlask());
                 log.debug("Registering Flask for fluid: " + fluid_name);
             }
+
+            log.debug("Registering Fluid Type: " + fluid_name);
+        } else {
+            MaterialSlurryWrapper wrapper = material.getSlurry();
+            String fluid_name = wrapper.getName();
+
+            IGFluid fluid;
+            fluid = new IGFluid(wrapper,IGFluid.createBuilder((int) wrapper.getDensity(), wrapper.getViscosity(), wrapper.getRarity(), wrapper.getColor(0), wrapper.getFluidType().isGas()));
+            if(wrapper.getContactEffect() != null) {
+                fluid.block.setEffect(wrapper.getContactEffect(), wrapper.getContactEffectDuration(), wrapper.getContactEffectLevel());
+            }
+
+            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY), fluid);
+            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY) + "_flowing", fluid.getFlowingFluid());
+            IGRegistrationHolder.registeredIGBlocks.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY), fluid.block);
+
+            log.debug("Registering Bucket for fluid: " + fluid_name);
+            IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.BUCKET), fluid.getBucket());
 
             log.debug("Registering Fluid Type: " + fluid_name);
         }

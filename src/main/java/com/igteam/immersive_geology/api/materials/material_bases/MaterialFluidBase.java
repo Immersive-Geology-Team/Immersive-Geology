@@ -1,6 +1,8 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +18,7 @@ public abstract class MaterialFluidBase extends Material
 
 	protected boolean isSolid = false;
 
-	protected boolean useDefaultFluidTextures = false;
+	protected boolean useDefaultFluidTextures = true;
 
 	public abstract Set<PeriodicTableElement.ElementProportion> getSoluteElements();
 
@@ -107,19 +109,19 @@ public abstract class MaterialFluidBase extends Material
 
 	public ResourceLocation getFluidStill(){
 		if(useDefaultFluidTextures){
-			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + "default" + "/" + "default" + "_still");
+			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName().toLowerCase() + "/" + "default" + "_still");
 		}
-		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_still");
+		return new ResourceLocation(IGLib.MODID + ":block/"  + getTypeName().toLowerCase() + "/" + getName() + "_still");
 	}
 
 	public ResourceLocation getFluidFlowing(){
 		if(useDefaultFluidTextures){
-			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + "default" + "/" + "default" + "_flow");
+			return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName().toLowerCase() + "/" + "default" + "_flow");
 		}
-		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName() + "/" + getName() + "/" + getName() + "_flow");
+		return new ResourceLocation(IGLib.MODID + ":block/" + getTypeName().toLowerCase() + "/" + getName() + "_flow");
 	}
 
-	private String getTypeName(){
+	String getTypeName(){
 		return getFluidType().toString().toLowerCase();
 	}
 

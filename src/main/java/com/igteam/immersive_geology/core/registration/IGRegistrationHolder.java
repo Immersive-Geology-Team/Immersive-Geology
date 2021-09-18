@@ -97,6 +97,11 @@ public class IGRegistrationHolder {
         return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.FLUIDS) + (isFlowing ? "_flowing" : ""));
     }
 
+    public static Fluid getSlurryByMaterial(Material material, boolean isFlowing){
+        return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.SLURRY) + (isFlowing ? "_flowing" : ""));
+    }
+
+
     public static Block getBlockByMaterial(MaterialUseType useType, Material material) {
         return registeredIGBlocks.get(getRegistryKey(material, useType));
     }

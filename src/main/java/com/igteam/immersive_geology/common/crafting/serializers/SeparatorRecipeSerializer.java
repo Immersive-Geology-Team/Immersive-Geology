@@ -1,12 +1,10 @@
 package com.igteam.immersive_geology.common.crafting.serializers;
 
-import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.api.crafting.recipes.SeparatorRecipe;
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -29,7 +27,6 @@ public class SeparatorRecipeSerializer extends IERecipeSerializer<SeparatorRecip
         Ingredient input = Ingredient.deserialize(JSONUtils.getJsonObject(json, "input"));
         Ingredient waste = Ingredient.deserialize(JSONUtils.getJsonObject(json, "waste"));
         JsonArray array = json.getAsJsonArray("secondaries");
-        int energy = JSONUtils.getInt(json, "energy");
         SeparatorRecipe recipe = new SeparatorRecipe(recipeId, output, waste, input);
         for(int i = 0; i < array.size(); i++)
         {

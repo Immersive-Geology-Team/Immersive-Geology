@@ -7,13 +7,16 @@ import com.igteam.immersive_geology.api.materials.material_data.crystals.Materia
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalPhlebotinum;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalQuartz;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.*;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidHydrochloricAcid;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidNitricAcid;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSodiumHydroxide;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSulfuricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasHydrogen;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidArsenic;
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
 import com.igteam.immersive_geology.api.materials.material_data.metals.alloys.*;
 import com.igteam.immersive_geology.api.materials.material_data.minerals.*;
-import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneAndesite;
 import com.igteam.immersive_geology.api.materials.material_data.stones.MaterialStoneVanilla;
 
 import java.util.ArrayList;
@@ -95,11 +98,13 @@ public enum MaterialEnum {
     //Fluids
     //Non Volatile
     Brine(new MaterialFluidBrine()),
+    Water(new MaterialFluidWater()),
 
     //Volatile
     SulfuricAcid(new MaterialFluidSulfuricAcid()),
     HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
     NitricAcid(new MaterialFluidNitricAcid()),
+    SodiumHydroxide(new MaterialFluidSodiumHydroxide()),
 
     //Gasses
     Hydrogen(new MaterialGasHydrogen()),

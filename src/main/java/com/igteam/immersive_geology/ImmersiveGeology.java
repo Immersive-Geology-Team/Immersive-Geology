@@ -6,6 +6,7 @@
 
 package com.igteam.immersive_geology;
 
+import com.igteam.immersive_geology.api.crafting.recipes.RecipeReloadListener;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
@@ -19,6 +20,7 @@ import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHo
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -62,6 +64,8 @@ public class ImmersiveGeology
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
 
+		forgeBus.addListener(this::addReloadListeners);
+
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
 
@@ -69,6 +73,10 @@ public class ImmersiveGeology
 
 		IGMultiblockRegistrationHolder.populate();
 		IGTileTypes.REGISTER.register(modBus);
+	}
+
+	public void addReloadListeners(AddReloadListenerEvent event){
+		event.addListener(new RecipeReloadListener(event.getDataPackRegistries()));
 	}
 
 	private void setup(final FMLCommonSetupEvent event){

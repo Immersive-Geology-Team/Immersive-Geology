@@ -354,6 +354,10 @@ public class IGFluid extends FlowingFluid {
         return bucket;
     }
 
+    public IGBucketItem getFlask() {
+        return bucket;
+    }
+
     public boolean hasBucket(){
         return fluidMaterial.hasBucket();
     }

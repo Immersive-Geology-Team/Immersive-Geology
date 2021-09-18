@@ -3,7 +3,10 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 import javax.annotation.Nullable;
 
 import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 
 public abstract class MaterialMineralBase extends Material
 {
@@ -22,6 +25,8 @@ public abstract class MaterialMineralBase extends Material
 			case DUST:
 			case DIRTY_CRUSHED_ORE:
 				return true;
+			case SLURRY:
+				return hasSlurry();
 		}
 		return false;
 	}

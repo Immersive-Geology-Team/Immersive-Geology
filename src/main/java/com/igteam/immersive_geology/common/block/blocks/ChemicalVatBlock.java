@@ -8,4 +8,6 @@ public class ChemicalVatBlock extends IGMetalMultiblock<ChemicalVatTileEntity> {
     public ChemicalVatBlock(){
         super("chemicalvat", () -> IGTileTypes.VAT.get());
     }
+
+    
 }

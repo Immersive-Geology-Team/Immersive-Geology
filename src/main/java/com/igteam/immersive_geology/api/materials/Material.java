@@ -1,17 +1,17 @@
 package com.igteam.immersive_geology.api.materials;
 
-import blusunrize.immersiveengineering.common.config.CachedConfig;
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.*;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import javafx.util.Pair;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -249,4 +249,21 @@ public abstract class Material
 
 	//Check to see if this material already exists, used to prevent recipe duplication.
 	public abstract boolean preExists();
+
+	public Pair<ProcessingMethod, IGMineralProcess> getProcessingMethod(){
+		return null;
+	}
+
+
+	public boolean hasSlurry(){
+		return false;
+	}
+
+	public MaterialFluidBase getSlurryBaseFluid(){
+		return (MaterialFluidBase) MaterialEnum.Water.getMaterial();
+	}
+
+	public MaterialSlurryWrapper getSlurry(){
+		return new MaterialSlurryWrapper(this, getSlurryBaseFluid(), 0.75f);
+	}
 }

@@ -2,8 +2,11 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.IGMineralProcess;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.ProcessingMethod;
+import javafx.util.Pair;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -152,4 +155,11 @@ public abstract class MaterialMetalBase extends Material
 	public boolean preExists() {
 		return false;
 	}
+
+	//Input the processing steps for this material
+	@Override
+	public Pair<ProcessingMethod, IGMineralProcess> getProcessingMethod() {
+		return null;
+	}
+
 }
