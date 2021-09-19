@@ -354,4 +354,24 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return VatRecipe.recipes.get(id);
     }
 
+    //Direct Copy from IP's Pumpjack, this will need to be changed.
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
+        final int bX = posInMultiblock.getX();
+        final int bY = posInMultiblock.getY();
+        final int bZ = posInMultiblock.getZ();
+
+        //Empty space
+        if (bX == 0 && bZ == 0)
+        {
+            if (bY == 2 || bY == 3)
+            {
+                return new ArrayList<>();
+            }
+            if (bY == 1)
+            {
+                return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+        }
+        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+    }
 }
