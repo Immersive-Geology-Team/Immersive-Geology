@@ -69,9 +69,8 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
             float ix, iy, iz;
             if(master != null){
                 for(int i = 0; i < master.processQueue.size(); i++){
-
-                    float progress = (float) master.getCurrentProcessesStep()[i];
-                    float angle = (float) Math.toRadians((progress / master.getCurrentProcessesMax()[i]) * 360f);
+                    float progress = (float) master.processQueue.get(i).processTick;
+                    float angle = (float) Math.toRadians((progress / master.processQueue.get(i).maxTicks) * 360f);
                     ix = (float) (Math.cos(angle) * radius);
                     iy = (float) (6 - (6 * (progress * 0.005)));
                     iz = (float) (Math.sin(angle) * radius);
@@ -79,7 +78,7 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
                     ItemStack[] item_input = input.getMatchingStacks();
                     ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
                     transform.push();
-                        float scale = .625f;;
+                        float scale = .625f;
                         transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
                         transform.scale(scale, scale, 1);
                         transform.translate(0, 0, iy);
@@ -87,9 +86,7 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
                         transform.translate(5 + ix, 0, 0);
                         itemRender.renderItem(item_input[0], ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
                     transform.pop();
-
                 }
-
             }
 
             transform.pop();
