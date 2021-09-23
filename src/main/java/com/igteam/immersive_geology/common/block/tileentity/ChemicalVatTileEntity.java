@@ -38,9 +38,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalVatTileEntity, VatRecipe> implements IBlockBounds {
 
@@ -120,7 +118,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         return getShape(SHAPES);
     }
-
+/*
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock)
     {
         if(posInMultiblock.getZ()%2==0&&posInMultiblock.getY()==0&&posInMultiblock.getX()%4==0)
@@ -185,7 +183,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         else
             return ImmutableList.of(new AxisAlignedBB(0, 0, 0, 1, 1, 1));
     }
-
+*/
     @Override
     public Set<BlockPos> getEnergyPos()
     {
@@ -354,4 +352,24 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return VatRecipe.recipes.get(id);
     }
 
+    //Direct Copy from IP's Pumpjack, this will need to be changed.
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
+        final int bX = posInMultiblock.getX();
+        final int bY = posInMultiblock.getY();
+        final int bZ = posInMultiblock.getZ();
+
+        //Empty space
+        if (bX == 0 && bZ == 0)
+        {
+            if (bY == 2 || bY == 3)
+            {
+                return new ArrayList<>();
+            }
+            if (bY == 1)
+            {
+                return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+        }
+        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+    }
 }
