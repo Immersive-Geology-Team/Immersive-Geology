@@ -21,8 +21,8 @@ import java.util.function.Supplier;
 public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends MetalMultiblockBlock<T> implements IGBlockType {
 
     protected final Item itemBlock;
-    public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te, Property<?>... additionalProperties){
-        super(name, te, additionalProperties);
+    public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te){
+        super(name, te);
 
         IEContent.registeredIEBlocks.remove(this);
         Iterator<Item> it = IEContent.registeredIEItems.iterator();

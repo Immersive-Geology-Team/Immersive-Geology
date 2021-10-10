@@ -325,8 +325,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return outputOffset.equals(posInMultiblock)&&(side==null||side==getFacing().getOpposite());
     }
 
-    @Override
-    public void doGraphicalUpdates(int slot)
+   @Override
+    public void doGraphicalUpdates()
     {
         this.markDirty();
         this.markContainingBlockForUpdate(null);

@@ -239,7 +239,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public void doGraphicalUpdates(int slot) {
+    public void doGraphicalUpdates() {
         this.markDirty();
         this.markContainingBlockForUpdate(null);
     }
