@@ -18,6 +18,13 @@ Many Rocks, Many Metals, Many things
 '''
 
 [[dependencies.immersive_geology]]
+    modId="immersiveengineering"
+    mandatory=true
+    versionRange="[1.16.5-5.0.4,)"
+    ordering="BEFORE"
+    side="BOTH"
+
+[[dependencies.immersive_geology]]
     modId="forge"
     mandatory=true
     versionRange="[36.0.27,)"
