@@ -68,6 +68,7 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
             float radius = 2;
             float ix, iy, iz;
             if(master != null){
+
                 for(int i = 0; i < master.processQueue.size(); i++){
                     float progress = (float) master.processQueue.get(i).processTick;
                     float angle = (float) Math.toRadians((progress / master.processQueue.get(i).maxTicks) * 360f);
@@ -76,6 +77,8 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
                     iz = (float) (Math.sin(angle) * radius);
                     Ingredient input = master.processQueue.get(i).recipe.input;
                     ItemStack[] item_input = input.getMatchingStacks();
+                    System.out.println("Array Size: " + item_input.length);
+                    System.out.println("Stack Size: " + item_input[0].getCount());
                     ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
                     transform.push();
                         float scale = .625f;

@@ -63,7 +63,7 @@ public class SeparatorRecipe extends MultiblockRecipe
     public int getMultipleProcessTicks() {
         return 4;
     }
-
+    
     @Override
     public int getTotalProcessTime() {
         return 20 * 4; //20 ticks times 4, four seconds approx

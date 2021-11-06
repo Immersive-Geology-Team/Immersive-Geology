@@ -60,11 +60,11 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         if(this.te == null){
             this.te = new ChemicalVatTileEntity();
-            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH));
+            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.SOUTH));
         }
 
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.SOUTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

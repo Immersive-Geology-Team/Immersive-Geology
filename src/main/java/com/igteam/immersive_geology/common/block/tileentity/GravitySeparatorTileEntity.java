@@ -12,6 +12,7 @@ import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultibloc
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -25,6 +26,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -41,7 +43,6 @@ import java.util.Set;
 public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IBlockBounds {
 
     public static final Set<BlockPos> Fluid_OUT = ImmutableSet.of(new BlockPos(1,0,0), new BlockPos(1,0,2));
-    public static final Set<BlockPos> Fluid_IN = ImmutableSet.of(new BlockPos(1, 6, 1));
     public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(1, 6, 2));
 
     /** Input Fluid Tank<br> */
@@ -50,7 +51,10 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     /** Output Fluid Tank<br> */
     public static final int TANK_OUTPUT = 1;
 
-    public final FluidTank[] bufferTanks = {new FluidTank(16000), new FluidTank(16000)};
+    public final FluidTank[] tanks = new FluidTank[] {
+            new FluidTank(16 * FluidAttributes.BUCKET_VOLUME),
+            new FluidTank(16 * FluidAttributes.BUCKET_VOLUME)
+    };
 
     public GravitySeparatorTileEntity() {
         super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
@@ -64,21 +68,6 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public void tick() {
         super.tick();
-    }
-
-    @Override
-    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
-        if (this.posInMultiblock.equals(Fluid_IN)) {
-            if (side == null || side == getFacing()) {
-                GravitySeparatorTileEntity master = master();
-                if (master != null && master.bufferTanks[TANK_INPUT].getFluidAmount() < master.bufferTanks[TANK_INPUT].getCapacity()) {
-                    if (!master.bufferTanks[TANK_INPUT].isEmpty()) {
-                        return resource.isFluidEqual(master.bufferTanks[TANK_INPUT].getFluid());
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     @Override
@@ -261,27 +250,41 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public IFluidTank[] getInternalTanks() {
-        return this.bufferTanks;
+        return tanks;
     }
+
+    private static final BlockPos outputOffset = new BlockPos(1, 0, 0);
+    private static final Set<BlockPos> inputOffset = ImmutableSet.of(
+            new BlockPos(1, 6, 1)
+    );
 
     @Nonnull
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
         GravitySeparatorTileEntity master = master();
         if(master != null){
-            if(this.posInMultiblock.equals(Fluid_IN)){
-                if(side == null || side == Direction.UP){
-                    return new IFluidTank[]{master.bufferTanks[TANK_INPUT]};
-                }
-            }
-
-            if(this.posInMultiblock.equals(Fluid_OUT)){
-                if(side == null || side == getFacing().getOpposite()){
-                    return new IFluidTank[]{master.bufferTanks[TANK_OUTPUT]};
-                }
+            if(inputOffset.contains(posInMultiblock) && side == Direction.DOWN){
+                return new IFluidTank[]{master.tanks[TANK_INPUT]};
             }
         }
         return new IFluidTank[0];
+    }
+
+
+    @Override
+    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
+        if(inputOffset.contains(posInMultiblock) && side == null || true) {
+            GravitySeparatorTileEntity master = this.master();
+            if(master == null || master.tanks[iTank].getFluidAmount() >= master.tanks[iTank].getCapacity()){
+                return false;
+            }
+
+            if(master.tanks[TANK_INPUT].getFluid().isEmpty()){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -289,7 +292,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         if(this.posInMultiblock.equals(Fluid_OUT) && (side == null || side == getFacing())){
             GravitySeparatorTileEntity master = master();
 
-            return master != null && master.bufferTanks[TANK_OUTPUT].getFluidAmount() > 0;
+            return master != null && master.tanks[TANK_INPUT].getFluidAmount() > 0;
         }
         return false;
     }
