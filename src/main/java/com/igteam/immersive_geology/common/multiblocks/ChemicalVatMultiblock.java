@@ -14,7 +14,9 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +31,6 @@ import java.util.List;
 import java.util.Random;
 
 public class ChemicalVatMultiblock extends IETemplateMultiblock {
-    private static final Random RAND = new Random();
     public static final ChemicalVatMultiblock INSTANCE = new ChemicalVatMultiblock();
 
     private ChemicalVatMultiblock(){
@@ -52,41 +53,20 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
     }
 
     @OnlyIn(Dist.CLIENT)
-    private ChemicalVatTileEntity te;
-    @OnlyIn(Dist.CLIENT)
     List<BakedQuad> list;
+
+    Random RAND = new Random();
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
-        if(this.te == null){
-            this.te = new ChemicalVatTileEntity();
-            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.SOUTH));
-        }
-
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.SOUTH);
+            BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }
 
-        if(this.list != null && this.list.size() > 0){
-            World world = ClientUtils.mc().world;
-            if(world != null){
-                transform.push();
-                //transform.rotate(new Quaternion(new Vector3f(0f,1f,0f), 180, true));
-                transform.translate(1, 0, 0);
-                RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
-
-                transform.push();
-                transform.rotate(rot);
-                transform.translate(-2, -1, -1);
-                ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getCutout()), transform, buffer);
-                transform.pop();
-
-                transform.pop();
-            }
-        }
+        //Need to use this method otherwise it doesn't show up in the manual...
+        RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
     }
-
-    final Quaternion rot = new Quaternion(new Vector3f(0F, 1F, 0F), 90, true);
 }

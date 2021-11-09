@@ -1,63 +1,68 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
+import blusunrize.immersiveengineering.client.utils.TextUtils;
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.blocks.metal.SheetmetalTankTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IBlockBounds {
+public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds {
 
-    public static final Set<BlockPos> Fluid_OUT = ImmutableSet.of(new BlockPos(1,0,0), new BlockPos(1,0,2));
     public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(1, 6, 2));
 
     /** Input Fluid Tank<br> */
     public static final int TANK_INPUT = 0;
 
-    /** Output Fluid Tank<br> */
-    public static final int TANK_OUTPUT = 1;
-
-    public final FluidTank[] tanks = new FluidTank[] {
-            new FluidTank(16 * FluidAttributes.BUCKET_VOLUME),
-            new FluidTank(16 * FluidAttributes.BUCKET_VOLUME)
-    };
+    public final FluidTank tank = new FluidTank(16 * FluidAttributes.BUCKET_VOLUME);
+    private final List<CapabilityReference<IFluidHandler>> fluidNeighbors;
 
     public GravitySeparatorTileEntity() {
         super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
+        this.fluidNeighbors = new ArrayList();
+        this.fluidNeighbors.add(CapabilityReference.forNeighbor(this, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP));
     }
 
     @Override
@@ -68,6 +73,24 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public void tick() {
         super.tick();
+        if(!processQueue.isEmpty()){
+            if(this.tank.isEmpty()){
+
+            } else {
+                this.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
+    }
+
+    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
+        super.readCustomNBT(nbt, descPacket);
+        this.tank.readFromNBT(nbt.getCompound("tank"));
+    }
+
+    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
+        super.writeCustomNBT(nbt, descPacket);
+        CompoundNBT tankTag = this.tank.writeToNBT(new CompoundNBT());
+        nbt.put("tank", tankTag);
     }
 
     @Override
@@ -110,9 +133,9 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
                     return;
                 }
                 ItemStack displayStack = recipe.getDisplayStack(stack);
-                MultiblockProcess<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
-                if (master.addProcessToQueue(process, true, true)) {
-                    master.addProcessToQueue(process, false, true);
+                MultiblockProcessInWorld<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
+                if (master.addProcessToQueue(process, true, false)) {
+                    master.addProcessToQueue(process, false, false);
                     stack.shrink(displayStack.getCount());
                     if (stack.getCount() <= 0)
                         entity.remove();
@@ -155,6 +178,32 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return super.getCapability(capability, facing);
     }
 
+    public ITextComponent[] getOverlayText(PlayerEntity player, RayTraceResult mop, boolean hammer) {
+        if (Utils.isFluidRelatedItemStack(player.getHeldItem(Hand.MAIN_HAND))) {
+            GravitySeparatorTileEntity master = (GravitySeparatorTileEntity)this.master();
+            FluidStack fs = master != null ? master.tank.getFluid() : this.tank.getFluid();
+            return new ITextComponent[]{TextUtils.formatFluidStack(fs)};
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
+        return false;
+    }
+
+
+    public boolean interact(Direction side, PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY, float hitZ) {
+        GravitySeparatorTileEntity master = (GravitySeparatorTileEntity)this.master();
+        if (master != null && FluidUtils.interactWithFluidHandler(player, hand, master.tank)) {
+            this.updateMasterBlock((BlockState)null, true);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public int[] getCurrentProcessesStep()
     {
@@ -189,17 +238,17 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public boolean additionalCanProcessCheck(MultiblockProcess<SeparatorRecipe> process) {
-        return true;
+        return !tank.isEmpty();
     }
 
     @Override
     public float getMinProcessDistance(MultiblockProcess<SeparatorRecipe> process) {
-        return 0;
-    }
+        return (float) 0.05;
+    } // min amount of progress needed before new items can be inserted! (seperation between items) (doesn't apply to same item types...
 
     @Override
     public int getMaxProcessPerTick() {
-        return 1;
+        return 64; // Number of Parallel items that can run at once!
     }
 
     @Override
@@ -214,7 +263,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public int getSlotLimit(int slot) {
-        return 64;
+        return 3;
     }
 
     @Override
@@ -224,7 +273,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public int[] getOutputTanks() {
-        return new int[]{TANK_OUTPUT};
+        return new int[]{TANK_INPUT};
     }
 
     @Override
@@ -250,7 +299,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public IFluidTank[] getInternalTanks() {
-        return tanks;
+        return new IFluidTank[]{tank};
     }
 
     private static final BlockPos outputOffset = new BlockPos(1, 0, 0);
@@ -263,8 +312,8 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
         GravitySeparatorTileEntity master = master();
         if(master != null){
-            if(inputOffset.contains(posInMultiblock) && side == Direction.DOWN){
-                return new IFluidTank[]{master.tanks[TANK_INPUT]};
+            if(inputOffset.contains(posInMultiblock)){
+                return new IFluidTank[]{master.tank};
             }
         }
         return new IFluidTank[0];
@@ -273,15 +322,13 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
-        if(inputOffset.contains(posInMultiblock) && side == null || true) {
+        if(inputOffset.contains(posInMultiblock) && resource.getFluid().equals(Fluids.WATER)) {
             GravitySeparatorTileEntity master = this.master();
-            if(master == null || master.tanks[iTank].getFluidAmount() >= master.tanks[iTank].getCapacity()){
+            if(master == null || master.tank.getFluidAmount() >= master.tank.getCapacity()){
                 return false;
             }
 
-            if(master.tanks[TANK_INPUT].getFluid().isEmpty()){
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -289,11 +336,6 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     protected boolean canDrainTankFrom(int iTank, Direction side) {
-        if(this.posInMultiblock.equals(Fluid_OUT) && (side == null || side == getFacing())){
-            GravitySeparatorTileEntity master = master();
-
-            return master != null && master.tanks[TANK_INPUT].getFluidAmount() > 0;
-        }
         return false;
     }
 
