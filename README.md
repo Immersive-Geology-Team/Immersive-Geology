@@ -16,15 +16,94 @@ If you want to help us out, you can donate with Liberapay!
 
  Content that Immersive Geology will implement
  ------------
-**Some of the new ores and the corrasponding items that will be added:**
-  
-  * Tungsten
-  * Titanium
-  * Silicon
-  * Tin
-  * Platinum
+**Some of the new items that will be added:**
+ 
+**Metals**
+* Aluminium
+* Chromium
+* Copper
+* Gold
+* Iron
+* Lead
+* Manganese
+* Nickel
+* Platinum
+* Silver
+* Cobalt
+* Uranium
+* Tin
+* Titanium
+* Tungsten
+* Thorium
+* Vanadium
+* Zirconium
+* Zinc
 
-*Some ores may require advanced machines to process*
+**Alloys**
+* Constantan
+* Electrum
+* Steel
+* VikingSteel
+* Bronze
+
+**Metalloid**
+* Arsenic
+* Antimony
+
+**Crystals**
+* Diamond
+* Phlebotinum
+* Glowstone
+* Quartz
+
+**Minerals** 
+*These will replace the default ores in game (configurable)*
+* Anatase
+* Cuprite
+* Zircon
+* Ilmenite
+* Cobaltite
+* Casserite
+* Chalcopyrite
+* Chromite
+* Cryolite
+* Ferberite
+* Fluorite
+* Gypsum
+* Hematite
+* Hubnerite
+* Magnetite
+* Pyrolusite
+* RockSalt
+* Thorianite
+* Thorite
+* Uraninite
+* Sphalerite
+* Ullmannite
+* Galena
+* Pyrite
+* Wolframite
+* Vanadinite
+* Unobtainium
+
+**Liquids**
+* Brine
+* Sulfuric Acid
+* Nitric Acid
+* Sodium Hydroxide
+
+
+**Gases**
+ * Hydrogen (WIP, will have compat with Mekanism)
+
+**Gravity Separator**
+ * Separate the stone out of the ore chunks with a machine (used for ore recoverability efficiency)
+
+**Chemical Vat**
+ * Used to process advanced ores that cannot be processed via normal means (usually when melting point is too high)
+ * Used to mix two liquids and one item together!
+
+***More will be added in the future!***
 
 ### Mod Authors and Contributors ###
 [Pabilo8](https://www.curseforge.com/members/pabilo8)<br />
