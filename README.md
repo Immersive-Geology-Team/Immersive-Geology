@@ -18,81 +18,81 @@ If you want to help us out, you can donate with Liberapay!
  ------------
 **Some of the new items that will be added:**
  
-    **Metals**
-    * Aluminium
-    * Chromium
-    * Copper
-    * Gold
-    * Iron
-    * Lead
-    * Manganese
-    * Nickel
-    * Platinum
-    * Silver
-    * Cobalt
-    * Uranium
-    * Tin
-    * Titanium
-    * Tungsten
-    * Thorium
-    * Vanadium
-    * Zirconium
-    * Zinc
+**Metals**
+* Aluminium
+* Chromium
+* Copper
+* Gold
+* Iron
+* Lead
+* Manganese
+* Nickel
+* Platinum
+* Silver
+* Cobalt
+* Uranium
+* Tin
+* Titanium
+* Tungsten
+* Thorium
+* Vanadium
+* Zirconium
+* Zinc
 
-    **Alloys**
-    * Constantan
-    * Electrum
-    * Steel
-    * VikingSteel
-    * Bronze
+**Alloys**
+* Constantan
+* Electrum
+* Steel
+* VikingSteel
+* Bronze
 
-    **Metalloid**
-    * Arsenic
-    * Antimony
+**Metalloid**
+* Arsenic
+* Antimony
 
-    **Crystals**
-    * Diamond
-    * Phlebotinum
-    * Glowstone
-    * Quartz
+**Crystals**
+* Diamond
+* Phlebotinum
+* Glowstone
+* Quartz
 
-    **Minerals**
-    * Anatase
-    * Cuprite
-    * Zircon
-    * Ilmenite
-    * Cobaltite
-    * Casserite
-    * Chalcopyrite
-    * Chromite
-    * Cryolite
-    * Ferberite
-    * Fluorite
-    * Gypsum
-    * Hematite
-    * Hubnerite
-    * Magnetite
-    * Pyrolusite
-    * RockSalt
-    * Thorianite
-    * Thorite
-    * Uraninite
-    * Sphalerite
-    * Ullmannite
-    * Galena
-    * Pyrite
-    * Wolframite
-    * Vanadinite
-    * Unobtainium
- 
-    **Liquids**
-    * Brine
-    * Sulfuric Acid
-    * Nitric Acid
-    * Sodium Hydroxide
-    
-    **Gasses
-    * Hydrogen (WIP, will have compat with Mekanism)
+**Minerals**
+* Anatase
+* Cuprite
+* Zircon
+* Ilmenite
+* Cobaltite
+* Casserite
+* Chalcopyrite
+* Chromite
+* Cryolite
+* Ferberite
+* Fluorite
+* Gypsum
+* Hematite
+* Hubnerite
+* Magnetite
+* Pyrolusite
+* RockSalt
+* Thorianite
+* Thorite
+* Uraninite
+* Sphalerite
+* Ullmannite
+* Galena
+* Pyrite
+* Wolframite
+* Vanadinite
+* Unobtainium
+
+**Liquids**
+* Brine
+* Sulfuric Acid
+* Nitric Acid
+* Sodium Hydroxide
+
+**Gasses
+* Hydrogen (WIP, will have compat with Mekanism)
   
 *These will replace the default ores in game (configurable)*
 **Gravity Separator**
