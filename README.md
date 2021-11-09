@@ -92,7 +92,7 @@ If you want to help us out, you can donate with Liberapay!
 * Sodium Hydroxide
 
 
-**Gasses
+**Gases
  * Hydrogen (WIP, will have compat with Mekanism)
   
 *These will replace the default ores in game (configurable)*
