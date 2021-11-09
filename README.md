@@ -91,10 +91,12 @@ If you want to help us out, you can donate with Liberapay!
 * Nitric Acid
 * Sodium Hydroxide
 
+
 **Gasses
-* Hydrogen (WIP, will have compat with Mekanism)
+ * Hydrogen (WIP, will have compat with Mekanism)
   
 *These will replace the default ores in game (configurable)*
+
 **Gravity Separator**
  * Separate the stone out of the ore chunks with a machine (used for ore recoverability efficiency)
 
