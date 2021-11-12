@@ -30,7 +30,7 @@ public class VatRecipe extends IGMultiblockRecipe
     {
         if(!recipes.isEmpty()){
             for(VatRecipe r:recipes.values()){
-                if(r.itemInput != null && r.fluidInput1 != null && r.fluidInput2 != null && r.fluidInput1.testIgnoringAmount(fluidInput1) && r.fluidInput2.testIgnoringAmount(fluidInput2) && r.itemInput.equals(itemInput)){
+                if(r.itemInput != null && r.fluidInput1 != null && r.fluidInput2 != null && r.fluidInput1.isFluidEqual(fluidInput1) && r.fluidInput2.isFluidEqual(fluidInput2) && r.itemInput.test(itemInput)){
                     return r;
                 }
             }
@@ -47,14 +47,14 @@ public class VatRecipe extends IGMultiblockRecipe
             while (var2.hasNext()) {
                 VatRecipe recipe = (VatRecipe) var2.next();
                 if (!input0.isEmpty() && input1.isEmpty()) {
-                    if (recipe.fluidInput1.testIgnoringAmount(input0) || recipe.fluidInput2.testIgnoringAmount(input0)) {
+                    if (recipe.fluidInput1.getFluid().equals(input0.getFluid()) || recipe.fluidInput2.getFluid().equals(input0.getFluid())) {
                         return Optional.of(recipe);
                     }
                 } else if (input0.isEmpty() && !input1.isEmpty()) {
-                    if (recipe.fluidInput1.testIgnoringAmount(input1) || recipe.fluidInput2.testIgnoringAmount(input1)) {
+                    if (recipe.fluidInput1.getFluid().equals(input1.getFluid()) || recipe.fluidInput2.getFluid().equals(input1.getFluid())) {
                         return Optional.of(recipe);
                     }
-                } else if (recipe.fluidInput1.testIgnoringAmount(input0) && recipe.fluidInput1.testIgnoringAmount(input1) || recipe.fluidInput2.testIgnoringAmount(input0) && recipe.fluidInput2.testIgnoringAmount(input1)) {
+                } else if (recipe.fluidInput1.getFluid().equals(input0.getFluid()) && recipe.fluidInput1.getFluid().equals(input1.getFluid()) || recipe.fluidInput2.getFluid().equals(input0.getFluid()) && recipe.fluidInput2.getFluid().equals(input1.getFluid())) {
                     return Optional.of(recipe);
                 }
             }
@@ -69,14 +69,15 @@ public class VatRecipe extends IGMultiblockRecipe
         return findRecipe(itemInput, fluidInput1, fluidInput2);
     }
 
-    protected final FluidTagInput fluidInput1;
-    protected final FluidTagInput fluidInput2;
+    protected final FluidStack fluidInput1;
+    protected final FluidStack fluidInput2;
     protected final FluidStack fluidOutput;
     protected final IngredientWithSize itemInput;
     protected final ItemStack itemOutput;
 
+    protected List<FluidStack> cfluidInputList;
 
-    public VatRecipe(ResourceLocation id, FluidStack fluidOutput, ItemStack itemOutput, FluidTagInput fluidInput1, FluidTagInput fluidInput2, IngredientWithSize itemInput, int energy, int time) {
+    public VatRecipe(ResourceLocation id, FluidStack fluidOutput, ItemStack itemOutput, FluidStack fluidInput1, FluidStack fluidInput2, IngredientWithSize itemInput, int energy, int time) {
         super(ItemStack.EMPTY, TYPE, id);
         this.fluidInput1 = fluidInput1;
         this.fluidInput2 = fluidInput2;
@@ -84,9 +85,9 @@ public class VatRecipe extends IGMultiblockRecipe
         this.itemInput = itemInput;
         this.itemOutput = itemOutput;
 
-        this.fluidInputList = Arrays.asList(fluidInput1, fluidInput2);
+        this.cfluidInputList = Arrays.asList(fluidInput1, fluidInput2);
         this.fluidOutputList = Arrays.asList(this.fluidOutput);
-        this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
+        this.outputList = NonNullList.from(itemOutput);
 
         timeAndEnergy(time, energy);
         modifyTimeAndEnergy(IGConfigurationHandler.Server.MULTIBLOCK.chemicalVat_energyModifier::get, IGConfigurationHandler.Server.MULTIBLOCK.chemicalVat_timeModifier::get);
@@ -109,8 +110,12 @@ public class VatRecipe extends IGMultiblockRecipe
         return output;
     }
 
-    public FluidTagInput[] getInputFluids(){
-        return new FluidTagInput[]{this.fluidInput1, this.fluidInput2};
+    public IngredientWithSize getItemInput() {
+        return itemInput;
+    }
+
+    public FluidStack[] getInputFluids(){
+        return new FluidStack[]{this.fluidInput1, this.fluidInput2};
     }
 
 }

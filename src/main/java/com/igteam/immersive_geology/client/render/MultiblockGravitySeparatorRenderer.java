@@ -27,6 +27,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 
+import java.util.Iterator;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
@@ -68,27 +69,30 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
             float radius = 2;
             float ix, iy, iz;
             if(master != null){
-                for(int i = 0; i < master.processQueue.size(); i++){
-                    float progress = (float) master.processQueue.get(i).processTick;
-                    float angle = (float) Math.toRadians((progress / master.processQueue.get(i).maxTicks) * 360f);
+                Iterator<PoweredMultiblockTileEntity.MultiblockProcess<SeparatorRecipe>> queueIterator = master.processQueue.iterator();
+
+                while(queueIterator.hasNext()){
+                    PoweredMultiblockTileEntity.MultiblockProcessInWorld<SeparatorRecipe> wrapper = (PoweredMultiblockTileEntity.MultiblockProcessInWorld<SeparatorRecipe>) queueIterator.next();
+                    ItemStack item = wrapper.inputItems.get(0);
+                    float progress = (float) wrapper.processTick;
+                    float angle = (float) Math.toRadians((progress % (wrapper.maxTicks / 4)  / (wrapper.maxTicks / 4)) * 360f);
                     ix = (float) (Math.cos(angle) * radius);
-                    iy = (float) (6 - (6 * (progress * 0.005)));
-                    iz = (float) (Math.sin(angle) * radius);
-                    Ingredient input = master.processQueue.get(i).recipe.input;
-                    ItemStack[] item_input = input.getMatchingStacks();
+                    iz = (float) (6 - (7 * (progress * 0.0045)));
+                    iy = (float) (Math.sin(angle) * radius);
+                    float yoffset = 2.7f;
+                    float xoffset = 8.65f;
                     ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
                     transform.push();
-                        float scale = .625f;
-                        transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
-                        transform.scale(scale, scale, 1);
-                        transform.translate(0, 0, iy);
-                        transform.translate(0, -4 + iz, 0);
-                        transform.translate(5 + ix, 0, 0);
-                        itemRender.renderItem(item_input[0], ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+                    float scale = .625f;
+                    transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
+                    transform.scale(scale, scale, 1);
+                    transform.translate(0, 0, iz);
+                    transform.translate(0, -yoffset + iy, 0);
+                    transform.translate(xoffset + ix, 0, 0);
+                    itemRender.renderItem(item, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
                     transform.pop();
                 }
             }
-
             transform.pop();
         }
 

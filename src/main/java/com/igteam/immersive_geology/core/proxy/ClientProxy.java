@@ -72,13 +72,12 @@ public class ClientProxy extends ServerProxy {
     public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
         TileEntityRenderer<TileEntity> tesr = TileEntityRendererDispatcher.instance.getRenderer((TileEntity) te);
 
-            transform.push();
-            transform.rotate(new Quaternion(0, -90, 0, true));
-            transform.translate(0, 1, -4);
+        transform.push();
+        transform.rotate(new Quaternion(0, -90, 0, true));
+        transform.translate(0, 1, -4);
 
-            tesr.render(te, 0, transform, buffer, 0xF000F0, 0);
-            transform.pop();
-
+        tesr.render(te, 0, transform, buffer, 0xF000F0, 0);
+        transform.pop();
     }
 
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY;

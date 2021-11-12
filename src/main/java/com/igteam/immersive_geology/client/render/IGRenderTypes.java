@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.client.render;
 
+import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.renderer.RenderState;
 import net.minecraft.client.renderer.RenderType;
@@ -7,8 +8,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class IGRenderTypes {
+import java.util.OptionalDouble;
 
+public class IGRenderTypes {
     static final RenderState.ShadeModelState SHADE_ENABLED = new RenderState.ShadeModelState(true);
     static final RenderState.LightmapState LIGHTMAP_ENABLED = new RenderState.LightmapState(true);
     static final RenderState.OverlayState OVERLAY_ENABLED = new RenderState.OverlayState(true);
@@ -23,6 +25,7 @@ public class IGRenderTypes {
     }, () -> {
     });
     static final RenderState.DiffuseLightingState DIFFUSE_LIGHTING_ENABLED = new RenderState.DiffuseLightingState(true);
+
 
     public static RenderType getEntitySolid(ResourceLocation locationIn){
         RenderType.State renderState = RenderType.State.getBuilder()

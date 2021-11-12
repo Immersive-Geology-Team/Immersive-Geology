@@ -1,6 +1,8 @@
 package com.igteam.immersive_geology.client.render;
 
+import com.igteam.immersive_geology.common.block.helpers.IGMetalMultiblock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -49,6 +51,9 @@ public class RenderLayerHandler {
                 RenderTypeLookup.setRenderLayer(fluid.getFlowingFluid(), RenderType.getTranslucent());
             }
         }
+
+        //This is to tell minecraft that we want to render some of the texture as a cutout.
+        RenderTypeLookup.setRenderLayer(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, RenderType.getCutoutMipped());
 
         inheritances.clear();
         mapping.clear();
