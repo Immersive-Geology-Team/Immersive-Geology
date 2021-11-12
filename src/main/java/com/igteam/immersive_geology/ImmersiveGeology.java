@@ -71,7 +71,7 @@ public class ImmersiveGeology
 
 		Serializers.RECIPE_SERIALIZERS.register(modBus);
 
-		IGMultiblockRegistrationHolder.populate();
+		IGMultiblockRegistrationHolder.populate(); //Might need to move this to another locations, can cause a ConcurrentModificationException, RANDOMLY.
 		IGTileTypes.REGISTER.register(modBus);
 	}
 

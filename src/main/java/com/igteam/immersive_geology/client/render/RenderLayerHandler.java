@@ -52,8 +52,8 @@ public class RenderLayerHandler {
             }
         }
 
-        // Ensure that we can render the multiblock transparently, this needs to be done MANUALLY
-        RenderTypeLookup.setRenderLayer(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, RenderType.getTranslucent());
+        //This is to tell minecraft that we want to render some of the texture as a cutout.
+        RenderTypeLookup.setRenderLayer(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, RenderType.getCutoutMipped());
 
         inheritances.clear();
         mapping.clear();

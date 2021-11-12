@@ -49,6 +49,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.Nonnull;
 import java.util.*;
 
+//Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
 public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<GravitySeparatorTileEntity, SeparatorRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds {
 
     public static final Set<BlockPos> Redstone_IN = ImmutableSet.of(new BlockPos(1, 6, 2));
@@ -134,8 +135,8 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
                 }
                 ItemStack displayStack = recipe.getDisplayStack(stack);
                 MultiblockProcessInWorld<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
-                if (master.addProcessToQueue(process, true, false)) {
-                    master.addProcessToQueue(process, false, false);
+                if (master.addProcessToQueue(process, true, true)) {
+                    master.addProcessToQueue(process, false, true);
                     stack.shrink(displayStack.getCount());
                     if (stack.getCount() <= 0)
                         entity.remove();

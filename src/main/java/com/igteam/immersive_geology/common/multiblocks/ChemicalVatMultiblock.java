@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.BakedQuad;
@@ -36,7 +37,7 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
     private ChemicalVatMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/chemicalvat"),
                 new BlockPos(3,0,0),
-                new BlockPos(3,0,0),
+                new BlockPos(3,0,2),
                 new BlockPos(4,4,3),
                 () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
     }
@@ -65,6 +66,9 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }
+
+        //Fix issue of manual render being off center.
+        transform.translate(3,0,0);
 
         //Need to use this method otherwise it doesn't show up in the manual...
         RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);

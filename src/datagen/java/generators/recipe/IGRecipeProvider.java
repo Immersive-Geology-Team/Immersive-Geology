@@ -20,6 +20,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -180,10 +181,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         ItemStack acid_result = method.getValue().getResultAsItemStack();
 
                         FluidStack slurry = method.getValue().getResultingFluid();
-
-                            vatBuilder.builder(acid_result, slurry).setEnergy(1000).setTime(120)
-                                    .addFluidInputs(acid_chemical, FluidStack.EMPTY)
-                                    .addItemInput(IngredientWithSize.of(acid_catalyst))
+                            vatBuilder.builder(acid_result, slurry).addItemInput(IngredientWithSize.of(acid_catalyst)).addFluidInputs(acid_chemical, new FluidStack(Fluids.WATER,125)).setEnergy(1000).setTime(120)
                                     .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + acid_resultUseType.getName() + "_" + acid_resultWrapper.name().toLowerCase()));
 
                         break;
