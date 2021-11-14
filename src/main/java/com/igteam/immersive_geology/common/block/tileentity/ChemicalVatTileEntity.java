@@ -17,6 +17,7 @@ import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -273,7 +274,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public void doProcessOutput(ItemStack output)
     {
         output = Utils.insertStackIntoInventory(this.output, output, false);
-        if(!output.isEmpty())
+        if(!output.isEmpty() && (!output.getItem().getRegistryName().equals(Blocks.COMMAND_BLOCK.getRegistryName()))) //I couldn't be stuffed to get it to work with EMPTY Item types, so, command blocks are our new EMPTY. ~Muddykat
             Utils.dropStackAtPos(world, getPos().add(0, 0, 1).offset(getFacing(), -2), output, getFacing().getOpposite());
     }
 

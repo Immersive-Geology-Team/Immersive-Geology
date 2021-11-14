@@ -1,19 +1,13 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
-import com.igteam.immersive_geology.api.materials.helper.IGMineralProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
-import com.igteam.immersive_geology.api.materials.helper.ProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import javafx.util.Pair;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -135,8 +129,7 @@ public class MaterialMineralAlumina extends MaterialMineralBase
 
 	//Input the processing steps for this material
 	@Override
-	public Pair<ProcessingMethod, IGMineralProcess> getProcessingMethod() {
-		return new Pair<>(ProcessingMethod.BLASTING,
-				new IGMineralProcess(new Pair<MaterialEnum, MaterialUseType>(MaterialEnum.Aluminium, MaterialUseType.INGOT)));
+	public IGMaterialProcess getProcessingMethod() {
+		return null;
 	}
 }

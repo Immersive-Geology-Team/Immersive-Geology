@@ -105,7 +105,6 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 		return 4.55f;
 	}
 
-
 	@Override
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.HEXAGONAL;

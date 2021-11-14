@@ -3,12 +3,12 @@ package com.igteam.immersive_geology.api.materials;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.helper.*;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import javafx.util.Pair;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
@@ -17,6 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -250,20 +251,23 @@ public abstract class Material
 	//Check to see if this material already exists, used to prevent recipe duplication.
 	public abstract boolean preExists();
 
-	public Pair<ProcessingMethod, IGMineralProcess> getProcessingMethod(){
+	public IGMaterialProcess getProcessingMethod(){
 		return null;
 	}
-
 
 	public boolean hasSlurry(){
 		return false;
 	}
 
-	public MaterialFluidBase getSlurryBaseFluid(){
-		return (MaterialFluidBase) MaterialEnum.Water.getMaterial();
+	public MaterialFluidBase[] getFluidsForSlurries(){
+		return new  MaterialFluidBase[]{(MaterialFluidBase) MaterialEnum.Water.getMaterial()};
 	}
 
-	public MaterialSlurryWrapper getSlurry(){
-		return new MaterialSlurryWrapper(this, getSlurryBaseFluid(), 0.75f);
+	public List<MaterialSlurryWrapper> getSlurries(){
+		List<MaterialSlurryWrapper> slurries = new ArrayList<>();
+		for(MaterialFluidBase fluid : getFluidsForSlurries()) {
+			slurries.add(new MaterialSlurryWrapper(this, fluid, 0.5f)); //default concentration of 50%
+		}
+		return slurries;
 	}
 }

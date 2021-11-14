@@ -31,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 public class IGVariantHolder {
 
@@ -55,6 +56,7 @@ public class IGVariantHolder {
             }
         }
 
+        /*
         Registry<Block> blocks = Registry.BLOCK;
         blocks.getEntries().forEach((entry) -> {
             Block block = entry.getValue();
@@ -129,6 +131,7 @@ public class IGVariantHolder {
                 });
             }
         });
+        */
     }
 
     private static boolean shouldGenerate(MaterialUseType type){
@@ -213,23 +216,25 @@ public class IGVariantHolder {
 
             log.debug("Registering Fluid Type: " + fluid_name);
         } else {
-            MaterialSlurryWrapper wrapper = material.getSlurry();
-            String fluid_name = wrapper.getName();
+            List<MaterialSlurryWrapper> wrappers = material.getSlurries();
+            for(MaterialSlurryWrapper wrapper : wrappers) {
+                String fluid_name = wrapper.getName();
 
-            IGFluid fluid;
-            fluid = new IGFluid(wrapper,IGFluid.createBuilder((int) wrapper.getDensity(), wrapper.getViscosity(), wrapper.getRarity(), wrapper.getColor(0), wrapper.getFluidType().isGas()));
-            if(wrapper.getContactEffect() != null) {
-                fluid.block.setEffect(wrapper.getContactEffect(), wrapper.getContactEffectDuration(), wrapper.getContactEffectLevel());
+                IGFluid fluid;
+                fluid = new IGFluid(wrapper, IGFluid.createBuilder((int) wrapper.getDensity(), wrapper.getViscosity(), wrapper.getRarity(), wrapper.getColor(0), wrapper.getFluidType().isGas()));
+                if (wrapper.getContactEffect() != null) {
+                    fluid.block.setEffect(wrapper.getContactEffect(), wrapper.getContactEffectDuration(), wrapper.getContactEffectLevel());
+                }
+
+                IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), wrapper.getBaseFluidMaterial(), MaterialUseType.SLURRY), fluid);
+                IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), wrapper.getBaseFluidMaterial(), MaterialUseType.SLURRY) + "_flowing", fluid.getFlowingFluid());
+                IGRegistrationHolder.registeredIGBlocks.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), wrapper.getBaseFluidMaterial(), MaterialUseType.SLURRY), fluid.block);
+
+                log.info("Registering Bucket for fluid: " + fluid_name);
+                IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), wrapper.getBaseFluidMaterial(), MaterialUseType.BUCKET), fluid.getBucket());
+
+                log.info("Registering Fluid Type: " + fluid_name);
             }
-
-            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY), fluid);
-            IGRegistrationHolder.registeredIGFluids.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY) + "_flowing", fluid.getFlowingFluid());
-            IGRegistrationHolder.registeredIGBlocks.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.SLURRY), fluid.block);
-
-            log.debug("Registering Bucket for fluid: " + fluid_name);
-            IGRegistrationHolder.registeredIGItems.put(IGRegistrationHolder.getRegistryKey(wrapper.getSoluteMaterial(), MaterialUseType.BUCKET), fluid.getBucket());
-
-            log.debug("Registering Fluid Type: " + fluid_name);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -34,6 +35,14 @@ public class MaterialMineralRockSalt extends MaterialMineralBase
 				new PeriodicTableElement.ElementProportion(PeriodicTableElement.CHLORINE)
 		)
 		);
+	}
+
+	@Override
+	public boolean hasSubtype(MaterialUseType useType) {
+		if(useType == MaterialUseType.DUST){
+			return true;
+		}
+		return super.hasSubtype(useType);
 	}
 
 	@Override

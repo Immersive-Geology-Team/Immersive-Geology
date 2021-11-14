@@ -1,7 +1,7 @@
 {
   "type": "immersive_geology:chemicalvat",
   "result": {
-    "item": "minecraft:apple"
+    "item": "minecraft:command_block"
   },
   "fluid_result": {
     "fluid": "immersive_geology:fluids_hubnerite_hydrochloric_acid_slurry",

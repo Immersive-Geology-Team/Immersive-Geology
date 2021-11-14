@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
@@ -105,4 +106,9 @@ public class MaterialMineralHematite extends MaterialMineralBase
 		return MaterialEnum.Iron;
 	}
 
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		return super.getProcessingMethod();
+	}
 }

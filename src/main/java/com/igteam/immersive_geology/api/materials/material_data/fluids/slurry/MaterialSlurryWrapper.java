@@ -132,4 +132,8 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
     public Material getSoluteMaterial() {
         return soluteMaterial;
     }
+
+    public Material getBaseFluidMaterial() {
+        return baseFluid;
+    }
 }

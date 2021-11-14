@@ -75,7 +75,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         chemicalvat();
         gravityseparator();
-
         registerFluidBlocks();
     }
 

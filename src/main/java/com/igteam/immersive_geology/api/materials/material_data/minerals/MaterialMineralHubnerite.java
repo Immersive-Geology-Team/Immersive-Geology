@@ -1,17 +1,20 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.helper.IGMineralProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
-import com.igteam.immersive_geology.api.materials.helper.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGAcidProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import javafx.util.Pair;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -120,13 +123,21 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		return MaterialEnum.Manganese;
 	}
 
+
+	//TODO refactor to include crusher stuff as well!
 	//Input the processing steps for this material
 	@Override
-	public Pair<ProcessingMethod, IGMineralProcess> getProcessingMethod() {
-		return new Pair<>(ProcessingMethod.ACID,
-				new IGMineralProcess(new Pair<MaterialEnum, MaterialUseType>(MaterialEnum.Hubnerite, MaterialUseType.SLURRY),
-						new FluidStack(IGRegistrationHolder.getFluidByMaterial(MaterialEnum.HydrochloricAcid.getMaterial(), false), 125),
-						this, MaterialUseType.CRUSHED_ORE));
+	public IGMaterialProcess getProcessingMethod() {
+
+		Pair<FluidStack, FluidStack> inputFluids = new Pair<FluidStack, FluidStack>(new FluidStack(IGRegistrationHolder.getFluidByMaterial(getFluidsForSlurries()[0], false), 125), new FluidStack(Fluids.WATER, 125));
+
+		//Next step for turning Crushed Ore to Slurry
+		IGAcidProcessingMethod crushedOreProcess = new IGAcidProcessingMethod(
+				new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE)),
+				inputFluids,
+				ItemStack.EMPTY,
+				new Pair<MaterialUseType, Material>(MaterialUseType.SLURRY,this), 125, 1000, 120);
+		return new IGMaterialProcess(crushedOreProcess);
 	}
 
 	@Override
@@ -134,7 +145,9 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		return true;
 	}
 
-	public MaterialFluidBase getSlurryBaseFluid(){
-		return (MaterialFluidBase) MaterialEnum.HydrochloricAcid.getMaterial();
+	//TODO refactor to use a Map method. Eaiser way to select the correct fluid for recipe uses
+	@Override
+	public MaterialFluidBase[] getFluidsForSlurries(){
+		return new MaterialFluidBase[]{(MaterialFluidBase) MaterialEnum.HydrochloricAcid.getMaterial()};
 	}
 }

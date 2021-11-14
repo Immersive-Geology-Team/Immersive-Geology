@@ -91,13 +91,12 @@ public class IGConfigurationHandler {
 
     }
 
-
     public static class MaterialConfigSetup{
         public MaterialConfigSetup(ForgeConfigSpec.Builder builder){
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
             for(MaterialEnum container : MaterialEnum.worldMaterials()) {
                 Material material = (Material) container.getMaterial();
-                ImmersiveGeology.getNewLogger().info("Rarity Config Set: " + material.getRarity().name());
+                ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + material.getName());
                 builder.push(material.getName());
                 switch (material.getRarity()) {
                     case COMMON:
@@ -113,7 +112,7 @@ public class IGConfigurationHandler {
                         material.setConfiguration(new IGOreConfig(builder, material.getName(), 3, 1, 30, 2));
                         break;
                     default:
-                        ImmersiveGeology.getNewLogger().info("Null Rarity for material " + container.name() + " setting as default Common Rarity");
+                        ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.name() + " setting as default Common Rarity");
                         material.setConfiguration(new IGOreConfig(builder, material.getName(), 8, 1, 90, 6));
                         break;
                 }

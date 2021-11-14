@@ -11,16 +11,15 @@ import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuild
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.helper.IGMineralProcess;
-import com.igteam.immersive_geology.api.materials.helper.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGAcidProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -167,31 +166,38 @@ public class IGRecipeProvider extends RecipeProvider {
             VatRecipeBuilder vatBuilder = new VatRecipeBuilder();
 
             if(orebase.getProcessingMethod() != null){
-                Pair<ProcessingMethod, IGMineralProcess> method = orebase.getProcessingMethod();
-                switch(method.getKey()){
-                    case BLASTING:
-                        break;
-                    case CALCINATION:
-                        break;
-                    case ACID:
-                        MaterialEnum acid_resultWrapper = method.getValue().getResultingMaterial();
-                        MaterialUseType acid_resultUseType = method.getValue().getResultingType();
-                        FluidStack acid_chemical = method.getValue().getProcessingFluid();
-                        ItemStack acid_catalyst = method.getValue().getProcessingCatalyst();
-                        ItemStack acid_result = method.getValue().getResultAsItemStack();
+                IGMaterialProcess processess = orebase.getProcessingMethod();
+                List<IGProcessingMethod> data = processess.getData();
 
-                        FluidStack slurry = method.getValue().getResultingFluid();
-                            vatBuilder.builder(acid_result, slurry).addItemInput(IngredientWithSize.of(acid_catalyst)).addFluidInputs(acid_chemical, new FluidStack(Fluids.WATER,125)).setEnergy(1000).setTime(120)
-                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + acid_resultUseType.getName() + "_" + acid_resultWrapper.name().toLowerCase()));
+                for (IGProcessingMethod method : data) {
+                    switch (method.getKey()) {
+                        case BLASTING:
+                            break;
+                        case CALCINATION:
+                            break;
+                        case ACID:
+                            IGAcidProcessingMethod m = (IGAcidProcessingMethod) method;
+                            int energyCost = m.getEnergyCost();
+                            int timeTaken = m.getProcessingTime();
+                            FluidStack secondary_chemical = m.getSecondaryFluid();
+                            FluidStack primary_chemical = m.getPrimaryFluid();
+                            ItemStack acid_catalyst = m.getItemInput();
+                            ItemStack acid_result = m.getItemOutput();
+                            FluidStack slurry = m.getFluidResult();
 
-                        break;
-                    case ROASTER:
-                        break;
-                    case SEDIMENT:
 
-                        break;
-                    case ELECTROLYSIS:
-                        break;
+                            vatBuilder.builder(acid_result, slurry).addItemInput(IngredientWithSize.of(acid_catalyst)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + m.outputFluidData().getKey().getName() + "_" + m.outputFluidData().getValue().getName().toLowerCase()));
+
+                            break;
+                        case ROASTER:
+                            break;
+                        case SEDIMENT:
+
+                            break;
+                        case ELECTROLYSIS:
+                            break;
+                    }
                 }
             }
         }

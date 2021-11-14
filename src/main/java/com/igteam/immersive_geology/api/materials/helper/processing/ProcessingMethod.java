@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.api.materials.helper;
+package com.igteam.immersive_geology.api.materials.helper.processing;
 
 public enum ProcessingMethod {
     ACID,
