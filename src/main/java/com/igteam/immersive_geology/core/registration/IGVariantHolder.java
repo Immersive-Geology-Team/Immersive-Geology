@@ -4,7 +4,9 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.BlockBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
@@ -13,9 +15,22 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.Minecraft;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 public class IGVariantHolder {
 
@@ -39,6 +54,81 @@ public class IGVariantHolder {
                 }
             }
         }
+
+        Registry<Block> blocks = Registry.BLOCK;
+        blocks.getEntries().forEach((entry) -> {
+            Block block = entry.getValue();
+            if(block.getDefaultState().getMaterial().equals(net.minecraft.block.material.Material.ROCK) &&
+                    block.getMaterialColor().equals(MaterialColor.STONE) &&
+            block.getDefaultState().getRequiresTool()) {
+                System.out.println("ID: " + block.getRegistryName().getPath());
+                System.out.println("NAME: " + block.getRegistryName().getNamespace());
+                registerOreBlock(new MaterialStoneBase() {
+
+                    @Nonnull
+                    @Override
+                    public String getModID() {
+                        return block.getRegistryName().getPath();
+                    }
+
+                    @Override
+                    public String getName() {
+                        return block.getRegistryName().getNamespace();
+                    }
+
+                    @Override
+                    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
+                        return new LinkedHashSet<>(Arrays.asList(
+                                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON),
+                                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2),
+                                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SODIUM),
+                                new PeriodicTableElement.ElementProportion(PeriodicTableElement.POTASSIUM, 2)
+                        ));
+                    }
+
+                    @Nonnull
+                    @Override
+                    public Rarity getRarity() {
+                        return Rarity.COMMON;
+                    }
+
+                    @Override
+                    public int getBoilingPoint() {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getMeltingPoint() {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getColor(int temperature) {
+                        return block.getMaterialColor().colorValue;
+                    }
+
+                    @Override
+                    public float getHardness() {
+                        return 0;
+                    }
+
+                    @Override
+                    public float getMiningResistance() {
+                        return 0;
+                    }
+
+                    @Override
+                    public float getBlastResistance() {
+                        return 0;
+                    }
+
+                    @Override
+                    public float getDensity() {
+                        return 0;
+                    }
+                });
+            }
+        });
     }
 
     private static boolean shouldGenerate(MaterialUseType type){

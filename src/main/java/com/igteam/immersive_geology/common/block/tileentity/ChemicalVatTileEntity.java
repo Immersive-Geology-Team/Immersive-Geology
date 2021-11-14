@@ -40,6 +40,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -202,6 +203,22 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             }
         }
 
+        if (this.tanks[2].getFluidAmount() > 0) {
+            FluidStack out = Utils.copyFluidStackWithAmount(this.tanks[2].getFluid(), Math.min(this.tanks[2].getFluidAmount(), 80), false);
+            BlockPos outputPos = this.getPos().add(1, 0, 0).offset(this.getFacing().getOpposite());
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos, this.getFacing()).map((output) -> {
+                int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
+                if (accepted > 0) {
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false), IFluidHandler.FluidAction.EXECUTE);
+                    this.tanks[2].drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }).orElse(false);
+        }
+
+
         if(update)
         {
             this.markDirty();
@@ -247,8 +264,9 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return master.tanks[2].getFluidAmount() < master.tanks[2].getCapacity();
     }
 
+    //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(getPos().add(1, 0, 0).offset(getFacing(), -2), getFacing()),
+            () -> new DirectionalBlockPos(getPos().add(0, 0, 1).offset(getFacing(), -2), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
@@ -256,7 +274,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty())
-            Utils.dropStackAtPos(world, getPos().add(1, 0, 0).offset(getFacing(), -2), output, getFacing().getOpposite());
+            Utils.dropStackAtPos(world, getPos().add(0, 0, 1).offset(getFacing(), -2), output, getFacing().getOpposite());
     }
 
     @Override
@@ -266,7 +284,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     }
 
     @Override
-    public void onProcessFinish(MultiblockProcess<VatRecipe> process)
+    public void onProcessFinish(@Nonnull MultiblockProcess<VatRecipe> process)
     {
         int primaryDrainAmount = process.recipe.getInputFluids()[0].getAmount();
         int secondaryDrainAmount = process.recipe.getInputFluids()[1].getAmount();
@@ -275,6 +293,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
         master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
         master.getInventory().get(0).shrink(shrinkAmount);
+        doProcessOutput(process.recipe.getRecipeOutput());
     }
 
     @Override
@@ -286,7 +305,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public int getProcessQueueMaxLength()
     {
-        return 16;
+        return 1;
     }
 
     @Override
@@ -425,7 +444,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
             FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
             FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
-            return new ITextComponent[]{TextUtils.formatFluidStack(fs1),TextUtils.formatFluidStack(fs2), new StringTextComponent("Input: " + master.getInventory().get(0).getDisplayName().getString() + " | Count: " + master.getInventory().get(0).getCount()), TextUtils.formatFluidStack(fs3)};
+            return new ITextComponent[]{TextUtils.formatFluidStack(fs1),TextUtils.formatFluidStack(fs2), new StringTextComponent("Input: " + master.getInventory().get(0).getDisplayName().getString() + " | Count: " + master.getInventory().get(0).getCount()), TextUtils.formatFluidStack(fs3), new StringTextComponent("Input: " + master.getInventory().get(1).getDisplayName().getString() + " | Count: " + master.getInventory().get(1).getCount())};
         } else {
             return null;
         }

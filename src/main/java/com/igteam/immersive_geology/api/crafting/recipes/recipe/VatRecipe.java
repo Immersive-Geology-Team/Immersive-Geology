@@ -114,6 +114,11 @@ public class VatRecipe extends IGMultiblockRecipe
         return itemInput;
     }
 
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.itemOutput;
+    }
+
     public FluidStack[] getInputFluids(){
         return new FluidStack[]{this.fluidInput1, this.fluidInput2};
     }
