@@ -62,6 +62,7 @@
   "fluid.immersive_geology.fluids_sulfuric_acid": "Sulfuric Acid",
   "fluid.immersive_geology.fluids_brine": "Brine",
   "fluid.immersive_geology.fluids_hubnerite_hydrochloric_acid_slurry": "Hubnerite Acid Slurry",
+  "fluid.immersive_geology.fluids_anatase_hydrochloric_acid_slurry": "Titanium Chloride",
 
   "material.immersive_geology.vanilla": "Vanilla",
   "material.immersive_geology.marble": "Marble",
@@ -145,5 +146,6 @@
   "material.immersive_geology.vanadinite": "Vanadinite",
   "material.immersive_geology.glass": "Glass",
   "material.immersive_geology.thorium": "Thorium",
-  "material.immersive_geology.hubnerite_hydrochloric_acid_slurry": "Hubnerite Acid Slurry"
+  "material.immersive_geology.hubnerite_hydrochloric_acid_slurry": "Hubnerite Acid Slurry",
+  "material.immersive_geology.anatase_hydrochloric_acid_slurry": "Titanium Chloride"
 }

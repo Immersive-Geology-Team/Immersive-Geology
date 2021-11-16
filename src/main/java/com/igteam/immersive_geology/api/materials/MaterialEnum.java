@@ -142,6 +142,7 @@ public enum MaterialEnum {
         });
         return stoneMaterials.toArray(new MaterialEnum[stoneMaterials.size()]);
     }
+
     public static MaterialEnum[] minerals() {
         ArrayList<MaterialEnum> mineralMaterials = new ArrayList<>();
         Arrays.stream(values()).forEach((container) -> {

@@ -111,10 +111,22 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                 float fillAmount = ((float)(tankPrimary.getFluidAmount() + tankSecondary.getFluidAmount())) / (24 * FluidAttributes.BUCKET_VOLUME);
                 if((!tankSecondary.isEmpty() || !tankPrimary.isEmpty())) {
                     transform.push();
+                    //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work!
+                    switch(master.getFacing()){
+                        case NORTH:
+                            transform.translate(-3.6D, 1.26, -2.5D);
+                            break;
+                        case WEST:
+                            transform.translate(0.45D, 1.26, 0.38D);
+                            break;
+                        case SOUTH:
+                            transform.translate(-0.2D, 1.26, 0.35D);
+                            break;
+                        case EAST:
+                            transform.translate(-1D,1.26D,1D);
+                            break;
+                    }
 
-                    //WEST
-                    if(master.getFacing().equals(Direction.WEST))
-                    transform.translate(0.45D, 1.26, 0.38D); //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work!
 
                     //display output fluid first, then choose primary over secondary.
                     IGRippLib.renderFluid(outputFluid.isEmpty() ? (fs1.isEmpty() ? fs2.getFluid() : fs1.getFluid()): outputFluid.getFluid(), te.getWorldNonnull(), te.getPos(), transform, buffer, combinedLightIn, combinedOverlayIn, 2.15f, fillAmount);

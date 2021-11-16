@@ -74,7 +74,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         holdItem = ItemStack.EMPTY;
 
-        this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 0, true, false){
+        this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 1, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
                 ChemicalVatTileEntity master = (ChemicalVatTileEntity) master(); //Need to manually tell the inserter to insert to Master tile only
@@ -82,7 +82,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
                     if (!master.isStackValid(slot, stack)) {
                         return stack;
                     } else {
-                        int offsetSlot = slot;
+                        int offsetSlot = 1;
                         ItemStack currentStack = (ItemStack)master.getInventory().get(offsetSlot);
                         int accepted;
                         if (currentStack.isEmpty()) {
@@ -188,7 +188,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         {
             if(master.tanks[0].getFluidAmount() > 0 || master.tanks[1].getFluidAmount() > 0)
             {
-                ItemStack inputStack = master.getInventory().get(0); //Input Item
+                ItemStack inputStack = master.getInventory().get(1); //Input Item
                 VatRecipe recipe = VatRecipe.findRecipe(inputStack, master.tanks[0].getFluid(), master.tanks[1].getFluid());
                 if(recipe!=null)
                 {
@@ -267,15 +267,15 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(getPos().add(0, 0, 1).offset(getFacing(), -2), getFacing()),
+            () -> new DirectionalBlockPos(getPos().add(3, 0, -1).offset(getFacing(), -2), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
     public void doProcessOutput(ItemStack output)
     {
-        output = Utils.insertStackIntoInventory(this.output, output, false);
+        //output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty() && (!output.getItem().getRegistryName().equals(Blocks.COMMAND_BLOCK.getRegistryName()))) //I couldn't be stuffed to get it to work with EMPTY Item types, so, command blocks are our new EMPTY. ~Muddykat
-            Utils.dropStackAtPos(world, getPos().add(0, 0, 1).offset(getFacing(), -2), output, getFacing().getOpposite());
+            Utils.dropStackAtPos(world, getPos().add(4, 0, -1).offset(getFacing(), -2), output, getFacing().getOpposite());
     }
 
     @Override
@@ -293,7 +293,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) master();
         master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
         master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
-        master.getInventory().get(0).shrink(shrinkAmount);
+        master.getInventory().get(1).shrink(shrinkAmount);
         doProcessOutput(process.recipe.getRecipeOutput());
     }
 
