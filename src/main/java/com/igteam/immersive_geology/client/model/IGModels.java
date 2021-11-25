@@ -28,6 +28,7 @@ public class IGModels {
         if(MODELS.containsKey(id)){
             ImmersiveGeology.getNewLogger().error("Duplicate ID, \"{}\" already used by {}. Skipping.", id, MODELS.get(id).getClass());
         }else{
+            ImmersiveGeology.getNewLogger().info("Adding new Modelpart: " + model.toString());
             model.init();
             MODELS.put(id, model);
         }

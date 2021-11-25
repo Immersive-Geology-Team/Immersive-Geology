@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.registration;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
+import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -18,6 +19,7 @@ public class IGTileTypes {
 
     public static final RegistryObject<TileEntityType<ChemicalVatTileEntity>> VAT = register("chemicalvat", ChemicalVatTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.chemicalvat);
     public static final RegistryObject<TileEntityType<GravitySeparatorTileEntity>> GRAVITY = register("gravityseparator", GravitySeparatorTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.gravityseparator);
+    public static final RegistryObject<TileEntityType<ReverberationFurnaceTileEntity>> REV_FURNACE = register("reverberation_furnace", ReverberationFurnaceTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace);
 
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<T> factory, Block... valid){
         return REGISTER.register(name, () -> new TileEntityType<>(factory, ImmutableSet.copyOf(valid), null));

@@ -5,7 +5,7 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.BlockBase;
+import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
@@ -13,6 +13,7 @@ import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
 import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -75,13 +76,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         chemicalvat();
         gravityseparator();
+        reverberation_furnace();
         registerFluidBlocks();
     }
 
     private void gravityseparator() {
         ResourceLocation texture = modLoc("multiblock/gravityseparator_base");
-        ResourceLocation modelNormal = modLoc("models/multiblock/obj/gravityseparator.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/gravityseparator_mirrored.obj");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/gravityseparator/gravityseparator.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/gravityseparator/gravityseparator_mirrored.obj");
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelNormal, texture, "", GravitySeparatorMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
@@ -91,14 +93,26 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void chemicalvat(){
         ResourceLocation texture = modLoc("multiblock/chemicalvat_base");
-        ResourceLocation modelNormal = modLoc("models/multiblock/obj/chemicalvat.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/chemicalvat_mirrored.obj");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/chemicalvat/chemicalvat.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/chemicalvat/chemicalvat_mirrored.obj");
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, modelNormal, texture, "", ChemicalVatMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, modelMirrored, texture, "_mirrored", ChemicalVatMultiblock.INSTANCE, true);
 
         createMultiblock(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, normal, mirrored, texture);
     }
+
+    private void reverberation_furnace(){
+        ResourceLocation texture = modLoc("multiblock/reverberation_furnace");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace_mirrored.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, modelNormal, texture, "", ReverberationFurnaceMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, modelMirrored, texture, "_mirrored", ReverberationFurnaceMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, normal, mirrored, texture);
+    }
+
 
     private BlockModelBuilder multiblockModel(Block block, ResourceLocation model, ResourceLocation texture, String add, TemplateMultiblock mb, boolean mirror){
         UnaryOperator<BlockPos> transform = UnaryOperator.identity();
@@ -139,8 +153,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void registerDefaultBlock(IGBlockType blockType){
-        if(blockType instanceof BlockBase) {
-            BlockBase block = (BlockBase) blockType;
+        if(blockType instanceof IGBaseBlock) {
+            IGBaseBlock block = (IGBaseBlock) blockType;
             getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getBlockUseType().getName() + "_" + block.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + block.getBlockUseType().getName()))).build());
 

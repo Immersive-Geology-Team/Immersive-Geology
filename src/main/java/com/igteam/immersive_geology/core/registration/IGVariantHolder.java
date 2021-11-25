@@ -4,33 +4,19 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
-import com.igteam.immersive_geology.common.block.BlockBase;
+import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.registry.Registry;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class IGVariantHolder {
@@ -301,7 +287,7 @@ public class IGVariantHolder {
     private static void registerGeodeBlock(Material material){
         MaterialUseType type = MaterialUseType.GEODE;
         String holder_key = type.getName() + "_" + material.getName();
-        BlockBase block = new BlockBase(holder_key, material, type, MaterialUseType.RAW_CRYSTAL, material.getMinDrops(), material.getMaxDrops());
+        IGBaseBlock block = new IGBaseBlock(holder_key, material, type, MaterialUseType.RAW_CRYSTAL, material.getMinDrops(), material.getMaxDrops());
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }
@@ -317,7 +303,7 @@ public class IGVariantHolder {
 
     private static void registerBasicBlock(Material material, MaterialUseType type){
         String holder_key = type.getName() + "_" + material.getName();
-        BlockBase block = new BlockBase(holder_key, material, type);
+        IGBaseBlock block = new IGBaseBlock(holder_key, material, type);
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }

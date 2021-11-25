@@ -5,7 +5,7 @@
     "particle": "immersive_geology:multiblock/gravityseparator_base"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/gravityseparator_mirrored.obj",
+  "model": "immersive_geology:models/multiblock/obj/gravityseparator/gravityseparator_mirrored.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

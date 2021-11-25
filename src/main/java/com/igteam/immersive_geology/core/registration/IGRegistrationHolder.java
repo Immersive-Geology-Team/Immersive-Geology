@@ -7,14 +7,20 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.client.menu.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.common.block.IGBaseBlock;
+import com.igteam.immersive_geology.common.block.IGStaticBlock;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.common.item.IGStaticItem;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effects;
@@ -36,13 +42,15 @@ public class IGRegistrationHolder {
     public static HashMap<String, Item> registeredIGItems = new HashMap<>();
     public static HashMap<String, Block> registeredIGBlocks = new HashMap<>();
     public static HashMap<String, Fluid> registeredIGFluids = new HashMap<>();
-
-
     private static Logger log = ImmersiveGeology.getNewLogger();
 
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
-        log.info("Applying Registration");
+        log.info("Adding Static Item Registries");
+
+        Items.initializeStaticItems();
+
+        log.info("Applying Item Registration");
         registeredIGItems.values().forEach((item) -> {
                 event.getRegistry().register(item);
         });
@@ -50,6 +58,11 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
+        log.info("Adding Static Block Registries");
+
+        Blocks.initializeStaticBlocks();
+
+        log.info("Applying Block Registries");
         registeredIGBlocks.values().forEach((block) ->{
                 event.getRegistry().register(block);
         });
@@ -107,5 +120,22 @@ public class IGRegistrationHolder {
 
     public static Block getBlockByMaterial(Material base_material, Material ore_material, MaterialUseType type){
         return registeredIGBlocks.get(getRegistryKey(base_material, ore_material, type));
+    }
+
+    public static class Items {
+        public static Item testItem = new IGStaticItem("testing_name", ItemSubGroup.misc);
+
+        public static void initializeStaticItems(){
+
+        }
+    }
+
+    public static class Blocks {
+        public static Block refractoryBrick = new IGStaticBlock("refractoryBricks", net.minecraft.block.material.Material.ROCK);
+        public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforcedRefractoryBricks", net.minecraft.block.material.Material.ROCK);
+
+        public static void initializeStaticBlocks(){
+
+        }
     }
 }

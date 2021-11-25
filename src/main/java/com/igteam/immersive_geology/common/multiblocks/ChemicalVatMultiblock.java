@@ -5,6 +5,9 @@ import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.client.model.IGModel;
+import com.igteam.immersive_geology.client.model.IGModels;
+import com.igteam.immersive_geology.client.model.ModelChemicalVat;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
@@ -30,6 +33,7 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class ChemicalVatMultiblock extends IETemplateMultiblock {
     public static final ChemicalVatMultiblock INSTANCE = new ChemicalVatMultiblock();
@@ -58,6 +62,8 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
     Random RAND = new Random();
 
+    private static final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
@@ -69,6 +75,13 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
         //Fix issue of manual render being off center.
         transform.translate(3,0,0);
+
+        ModelChemicalVat model = (ModelChemicalVat) stirrer.get();
+        if(model != null){
+            float ticks = 0;
+            model.ticks = ticks;
+            model.render(transform, buffer.getBuffer(model.getRenderType(ModelChemicalVat.TEXTURE)), 0xF000F0, 0xF000F0, 1.0f, 1.0f, 1.0f, 1.0f);
+        }
 
         //Need to use this method otherwise it doesn't show up in the manual...
         RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);

@@ -20,6 +20,11 @@ public class ModelGravitySeparator extends IGModel{
 
     public float ticks = 0;
 
+    @Override
+    public String toString() {
+        return ID;
+    }
+
     public ModelGravitySeparator(){
         super(IGRenderTypes::getEntitySolid);
 

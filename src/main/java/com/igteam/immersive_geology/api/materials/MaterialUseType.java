@@ -8,6 +8,9 @@ import net.minecraft.item.Item;
 
 public enum MaterialUseType {
     //Remember Naming convention is to add a type in the Singular, so Crystal not Crystals, this is due to how we generate tags! (we add an s to the end)
+    STATIC_ITEM(false, ItemSubGroup.misc),
+    STATIC_BLOCK(true, ItemSubGroup.misc),
+
     //Blocks
     STORAGE_BLOCK(true, ItemSubGroup.processed),
     DUST_BLOCK(true, ItemSubGroup.natural),     //Returns Self

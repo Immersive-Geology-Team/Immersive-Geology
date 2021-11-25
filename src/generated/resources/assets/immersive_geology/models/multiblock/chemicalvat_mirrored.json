@@ -5,7 +5,7 @@
     "particle": "immersive_geology:multiblock/chemicalvat_base"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/chemicalvat_mirrored.obj",
+  "model": "immersive_geology:models/multiblock/obj/chemicalvat/chemicalvat_mirrored.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

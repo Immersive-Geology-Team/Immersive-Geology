@@ -64,8 +64,12 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME),
             new FluidTank(24* FluidAttributes.BUCKET_VOLUME)
     };
+
     public NonNullList<ItemStack> inventory;
     private LazyOptional<IItemHandler> insertionHandler;
+
+    public boolean wasActive = false;
+    public float activeTicks = 0;
 
     public ItemStack holdItem;
 
@@ -219,6 +223,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             }).orElse(false);
         }
 
+        activeTicks++;
 
         if(update)
         {
