@@ -133,8 +133,8 @@ public class IGRegistrationHolder {
     }
 
     public static class Blocks {
-        public static Block refractoryBrick = new IGStaticBlock("refractoryBricks", net.minecraft.block.material.Material.ROCK);
-        public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforcedRefractoryBricks", net.minecraft.block.material.Material.ROCK);
+        public static Block refractoryBrick = new IGStaticBlock("refractory_brick", net.minecraft.block.material.Material.ROCK);
+        public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforced_refractory_brick", net.minecraft.block.material.Material.ROCK);
 
         public static void initializeStaticBlocks() {
 

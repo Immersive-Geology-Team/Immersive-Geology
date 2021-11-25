@@ -8,6 +8,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
+import com.igteam.immersive_geology.common.block.IGStaticBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
@@ -62,6 +63,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
                             break;
                         case SHEETMETAL_STAIRS:
                             registerStairsBlock(blockType);
+                            break;
+                        case STATIC_BLOCK:
+                            registerStaticBlock(blockType);
                             break;
                         case FLUIDS:
                             break;
@@ -157,6 +161,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
             IGBaseBlock block = (IGBaseBlock) blockType;
             getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getBlockUseType().getName() + "_" + block.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + block.getBlockUseType().getName()))).build());
+
+        }
+    }
+    private void registerStaticBlock(IGBlockType blockType){
+        if(blockType instanceof IGStaticBlock) {
+            IGStaticBlock block = (IGStaticBlock) blockType;
+            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getHolderName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/static_block/" + block.getHolderName()))).build());
 
         }
     }

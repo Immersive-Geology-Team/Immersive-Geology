@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
+import com.igteam.immersive_geology.common.block.IGStaticBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
@@ -155,6 +156,10 @@ public class IGItemModelProvider extends ItemModelProvider {
             IGStairsBlock stairsBlock = (IGStairsBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID,"item/"+stairsBlock.getHolderName()).getPath();
             withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()));
+        } else if(blockItem.getBlock() instanceof IGStaticBlock) {
+            IGStaticBlock staticBlock = (IGStaticBlock) blockItem.getBlock();
+            String builder_name = new ResourceLocation(IGLib.MODID, "item/"+staticBlock.getHolderName()).getPath();
+            withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/static_block/" +staticBlock.getHolderName()));
         } else
         {
             IGBaseBlock baseBlock = (IGBaseBlock) blockItem.getBlock();
