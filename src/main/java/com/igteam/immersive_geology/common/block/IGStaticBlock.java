@@ -17,29 +17,33 @@ import net.minecraft.item.Item;
 public class IGStaticBlock extends Block implements IGBlockType {
 
     //Also known as Registry Name
-    private String holder_name;
-
+    private final String registryName;
     private final Item itemBlock;
 
     public IGStaticBlock(String registryName, Material material, MaterialColor color){
-        this(AbstractBlock.Properties.create(material, color));
-        this.setRegistryName(registryName);
-        this.holder_name = registryName;
+        this(AbstractBlock.Properties.create(material, color), registryName);
     }
 
     public IGStaticBlock(String registryName, Material blockMaterial) {
-        this(AbstractBlock.Properties.create(blockMaterial, MaterialColor.STONE));
-        this.setRegistryName(registryName);
-        this.holder_name = registryName;
+        this(AbstractBlock.Properties.create(blockMaterial, MaterialColor.STONE), registryName);
     }
 
-    private IGStaticBlock(Properties prop){
+    private IGStaticBlock(Properties prop, String registryName){
         super(prop);
-        this.itemBlock = new IGBlockItem(this, this, ItemSubGroup.misc, MaterialEnum.Empty.getMaterial());
-        itemBlock.setRegistryName(holder_name.toLowerCase());
+        this.setRegistryName(registryName.toLowerCase());
 
-        if(IGRegistrationHolder.registeredIGBlocks.putIfAbsent(holder_name, this) != null){
+        this.itemBlock = new IGBlockItem(this, this, ItemSubGroup.misc, MaterialEnum.Empty.getMaterial());
+        itemBlock.setRegistryName(registryName.toLowerCase());
+
+
+        this.registryName = registryName.toLowerCase();
+
+        if(IGRegistrationHolder.registeredIGBlocks.putIfAbsent(registryName.toLowerCase(), this) != null){
             ImmersiveGeology.getNewLogger().error("Duplicate key used to register static block");
+        }
+
+        if(IGRegistrationHolder.registeredIGItems.putIfAbsent(registryName.toLowerCase(), this.itemBlock) != null){
+            ImmersiveGeology.getNewLogger().error("Duplicate key used to register static item block");
         }
     }
 
@@ -50,7 +54,7 @@ public class IGStaticBlock extends Block implements IGBlockType {
 
     @Override
     public String getHolderName() {
-        return holder_name;
+        return registryName;
     }
 
     @Override

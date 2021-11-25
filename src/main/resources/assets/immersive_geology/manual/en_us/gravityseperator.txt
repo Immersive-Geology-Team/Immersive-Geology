@@ -1,3 +1,0 @@
-Gravity Separator
-Rolling Stones
-<&gravityseparator0>The Gravity Separator is a multiblock that is used to separate rock from ore by density.

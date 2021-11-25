@@ -75,14 +75,14 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
             World world = ClientUtils.mc().world;
             if(world != null){
                 transform.push();
-                transform.translate(1, 0, 0);
-                RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getSolid()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
+                    transform.translate(1, 0, 0);
+                    RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getSolid()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
 
-                transform.push();
-                transform.rotate(rot);
-                transform.translate(-2, -1, -1);
-                ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getSolid()), transform, buffer);
-                transform.pop();
+                    transform.push();
+                        transform.rotate(rot);
+                        transform.translate(-2, -1, -1);
+                        ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getSolid()), transform, buffer);
+                    transform.pop();
 
                 transform.pop();
             }

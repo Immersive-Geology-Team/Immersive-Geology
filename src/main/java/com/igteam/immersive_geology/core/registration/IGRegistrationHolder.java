@@ -123,9 +123,11 @@ public class IGRegistrationHolder {
     }
 
     public static class Items {
-        public static Item testItem = new IGStaticItem("testing_name", ItemSubGroup.misc);
+        //Example ~ remove once another static item has been added. This is the only thing it needs to run
+        //public static Item testItem = new IGStaticItem("testing_name", ItemSubGroup.misc);
 
-        public static void initializeStaticItems(){
+        //Method used for any static item intialization needed that can't be done in the constructor.
+        public static void initializeStaticItems() {
 
         }
     }
@@ -134,7 +136,7 @@ public class IGRegistrationHolder {
         public static Block refractoryBrick = new IGStaticBlock("refractoryBricks", net.minecraft.block.material.Material.ROCK);
         public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforcedRefractoryBricks", net.minecraft.block.material.Material.ROCK);
 
-        public static void initializeStaticBlocks(){
+        public static void initializeStaticBlocks() {
 
         }
     }
