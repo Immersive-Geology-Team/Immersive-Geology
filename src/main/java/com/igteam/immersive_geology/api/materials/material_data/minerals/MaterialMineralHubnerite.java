@@ -137,6 +137,7 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 				inputFluids,
 				ItemStack.EMPTY,
 				new Pair<MaterialUseType, Material>(MaterialUseType.SLURRY,this), 125, 1000, 120);
+
 		return new IGMaterialProcess(crushedOreProcess);
 	}
 

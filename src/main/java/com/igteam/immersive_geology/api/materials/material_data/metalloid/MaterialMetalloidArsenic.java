@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalloidBase;
+import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Rarity;
 

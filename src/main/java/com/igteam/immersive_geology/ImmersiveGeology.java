@@ -69,10 +69,10 @@ public class ImmersiveGeology
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
 
-		Serializers.RECIPE_SERIALIZERS.register(modBus);
-
 		IGMultiblockRegistrationHolder.populate(); //Might need to move this to another locations, can cause a ConcurrentModificationException, RANDOMLY.
 		IGTileTypes.REGISTER.register(modBus);
+
+		Serializers.RECIPE_SERIALIZERS.register(modBus);
 	}
 
 	public void addReloadListeners(AddReloadListenerEvent event){

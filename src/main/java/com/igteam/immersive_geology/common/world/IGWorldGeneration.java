@@ -28,6 +28,7 @@ public class IGWorldGeneration {
             for (MaterialEnum container : MaterialEnum.values()) {
                 if (container.getMaterial().hasSubtype(MaterialUseType.ORE_STONE)) {
                     Block block = IGRegistrationHolder.getBlockByMaterial(stoneContainer.getMaterial(), container.getMaterial(), MaterialUseType.ORE_STONE);
+                    if(block != null)
                     addOreGen(block, container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
                 }
                 if(container.getMaterial().hasSubtype(MaterialUseType.GEODE)) {

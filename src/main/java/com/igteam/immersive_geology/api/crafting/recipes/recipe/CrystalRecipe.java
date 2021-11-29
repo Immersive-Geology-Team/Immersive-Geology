@@ -17,7 +17,7 @@ import java.util.*;
 
 public class CrystalRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystalyzer");
+    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystallizer");
     public static Map<ResourceLocation, CrystalRecipe> recipes = new HashMap<>();
 
 

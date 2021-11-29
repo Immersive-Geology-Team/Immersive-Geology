@@ -1,0 +1,5 @@
+# Blender MTL File: 'crystalyzer.blend'
+# Material Count: 1
+
+newmtl Material.001
+map_Kd #texture

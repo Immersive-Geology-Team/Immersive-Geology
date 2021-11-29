@@ -164,7 +164,7 @@ public enum MaterialEnum {
             }
             if(container.getMaterial() instanceof MaterialMetalBase){
                 MaterialMetalBase material = ((MaterialMetalBase) container.getMaterial());
-                if(material.isNativeMetal) {
+                if(material.isNativeMetal()) {
                     worldMaterials.add(container);
                 }
             }

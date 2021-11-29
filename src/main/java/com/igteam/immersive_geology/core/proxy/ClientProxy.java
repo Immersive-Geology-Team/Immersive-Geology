@@ -10,14 +10,9 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
-import com.igteam.immersive_geology.client.render.MultiblockChemicalVatRenderer;
-import com.igteam.immersive_geology.client.render.MultiblockGravitySeparatorRenderer;
-import com.igteam.immersive_geology.client.render.MultiblockReverberationFurnaceRenderer;
-import com.igteam.immersive_geology.client.render.RenderLayerHandler;
+import com.igteam.immersive_geology.client.render.*;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
-import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -45,9 +40,15 @@ public class ClientProxy extends ServerProxy {
         RenderLayerHandler.init(event);
         registerItemColors();
         registerBlockColors();
+        registerSpecialRenderers();
+    }
+
+    private void registerSpecialRenderers(){
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.VAT.get(), MultiblockChemicalVatRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.GRAVITY.get(), MultiblockGravitySeparatorRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.REV_FURNACE.get(), MultiblockReverberationFurnaceRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(IGTileTypes.CRYSTALLIZER.get(), MultiblockCrystallizerRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(IGTileTypes.ROTARYKILN.get(), MultiblockRotaryKilnRenderer::new);
     }
 
     @Override
@@ -98,6 +99,9 @@ public class ClientProxy extends ServerProxy {
         gravityseparator(modLoc("gravityseparator"), 0);
         chemicalvat(modLoc("chemicalvat"), 1);
         reverberation_furnace(modLoc("reverberation_furnace"), 2);
+        crystallizer(modLoc("crystallizer"), 3);
+        rotarykiln(modLoc("rotarykiln"),4);
+
     }
 
     private static void mineral_info(int priority){
@@ -133,6 +137,24 @@ public class ClientProxy extends ServerProxy {
 
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
         builder.addSpecialElement("chemicalvat0", 0, () -> new ManualElementMultiblock(man, ChemicalVatMultiblock.INSTANCE));
+        builder.readFromFile(location);
+        man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
+    }
+
+    private static void rotarykiln(ResourceLocation location, int priority){
+        ManualInstance man = ManualHelper.getManual();
+
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+        builder.addSpecialElement("rotarykiln0", 0, () -> new ManualElementMultiblock(man, RotaryKilnMultiblock.INSTANCE));
+        builder.readFromFile(location);
+        man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
+    }
+
+    private static void crystallizer(ResourceLocation location, int priority){
+        ManualInstance man = ManualHelper.getManual();
+
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+        builder.addSpecialElement("crystallizer0", 0, () -> new ManualElementMultiblock(man, CrystallizerMultiblock.INSTANCE));
         builder.readFromFile(location);
         man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
     }

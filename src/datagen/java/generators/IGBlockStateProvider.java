@@ -12,9 +12,7 @@ import com.igteam.immersive_geology.common.block.IGStaticBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.GravitySeparatorMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -81,6 +79,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
         chemicalvat();
         gravityseparator();
         reverberation_furnace();
+        crystallizer();
+        rotarykiln();
+
         registerFluidBlocks();
     }
 
@@ -93,6 +94,28 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
 
         createMultiblock(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, normal, mirrored, texture);
+    }
+
+    private void rotarykiln() {
+        ResourceLocation texture = modLoc("multiblock/rotarykiln");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/rotarykiln/rotarykiln.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/rotarykiln/rotarykiln_mirrored.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, modelNormal, texture, "", RotaryKilnMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, modelMirrored, texture, "_mirrored", RotaryKilnMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, normal, mirrored, texture);
+    }
+
+    private void crystallizer() {
+        ResourceLocation texture = modLoc("multiblock/crystallizer");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer_mirrored.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.crystallizer, modelNormal, texture, "", CrystallizerMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.crystallizer, modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.crystallizer, normal, mirrored, texture);
     }
 
     private void chemicalvat(){

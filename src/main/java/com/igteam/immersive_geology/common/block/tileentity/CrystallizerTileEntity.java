@@ -1,27 +1,16 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
-import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
-import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
-import blusunrize.immersiveengineering.common.util.Utils;
-import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.CrystalRecipe;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
-import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
-import com.igteam.immersive_geology.common.multiblocks.CrystalyzerMultiblock;
+import com.igteam.immersive_geology.common.multiblocks.CrystallizerMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
@@ -32,38 +21,31 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
-public class CrystalyzerTileEntity extends PoweredMultiblockTileEntity<CrystalyzerTileEntity, CrystalRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
+//I swear's I'll use the API after Alpha release ~Muddykat
+public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<CrystallizerTileEntity, CrystalRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
-    public CrystalyzerTileEntity() {
-        super(CrystalyzerMultiblock.INSTANCE, 24000, true, IGTileTypes.CRYSTALYZER.get());
+    public CrystallizerTileEntity() {
+        super(CrystallizerMultiblock.INSTANCE, 24000, true, IGTileTypes.CRYSTALLIZER.get());
     }
+
+    private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
+            CachedShapesWithTransform.createForMultiblock(CrystallizerTileEntity::getShape);
 
     @Nonnull
     @Override
     public VoxelShape getBlockBounds( ISelectionContext iSelectionContext) {
-        return null;
+        return getShape(SHAPES);
     }
 
     @Override
@@ -88,7 +70,16 @@ public class CrystalyzerTileEntity extends PoweredMultiblockTileEntity<Crystalyz
 
     @Override
     public Set<BlockPos> getEnergyPos() {
-        return null;
+        return ImmutableSet.of(
+                new BlockPos(1, 2, 1)
+        );
+    }
+
+    @Override
+    public Set<BlockPos> getRedstonePos() {
+        return ImmutableSet.of(
+                new BlockPos(2, 1, 1)
+        );
     }
 
     @Override
@@ -185,5 +176,25 @@ public class CrystalyzerTileEntity extends PoweredMultiblockTileEntity<Crystalyz
     @Override
     public void doGraphicalUpdates() {
 
+    }
+
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
+        final int bX = posInMultiblock.getX();
+        final int bY = posInMultiblock.getY();
+        final int bZ = posInMultiblock.getZ();
+
+        //Empty space
+        if (bX == 0 && bZ == 0)
+        {
+            if (bY == 2 || bY == 3)
+            {
+                return new ArrayList<>();
+            }
+            if (bY == 1)
+            {
+                return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+        }
+        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }
 }

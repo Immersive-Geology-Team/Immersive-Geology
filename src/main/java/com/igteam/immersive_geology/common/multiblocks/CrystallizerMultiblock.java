@@ -27,20 +27,20 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class CrystalyzerMultiblock extends IETemplateMultiblock {
-    public static final CrystalyzerMultiblock INSTANCE = new CrystalyzerMultiblock();
+public class CrystallizerMultiblock extends IETemplateMultiblock {
+    public static final CrystallizerMultiblock INSTANCE = new CrystallizerMultiblock();
 
-    private CrystalyzerMultiblock(){
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystalyzer"),
-                new BlockPos(3,0,0),
-                new BlockPos(3,0,2),
-                new BlockPos(4,4,3),
-                () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
+    private CrystallizerMultiblock(){
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"),
+                new BlockPos(2,0,1),
+                new BlockPos(1,2,1),
+                new BlockPos(3,3,3),
+                () -> IGMultiblockRegistrationHolder.Multiblock.crystallizer.getDefaultState());
     }
 
     @Override
     public float getManualScale(){
-        return 11;
+        return 16;
     }
 
     @Override
@@ -58,13 +58,10 @@ public class CrystalyzerMultiblock extends IETemplateMultiblock {
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.crystalyzer.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockRegistrationHolder.Multiblock.crystallizer.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }
-
-        //Fix issue of manual render being off center.
-        transform.translate(3,0,0);
 
         //Need to use this method otherwise it doesn't show up in the manual...
         RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
