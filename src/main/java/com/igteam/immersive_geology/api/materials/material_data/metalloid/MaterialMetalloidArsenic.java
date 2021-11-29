@@ -102,4 +102,7 @@ public class MaterialMetalloidArsenic extends MaterialMetalloidBase
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.HEXAGONAL;
 	}
+
+	@Override
+	public boolean isNativeMetal() {return true;}
 }

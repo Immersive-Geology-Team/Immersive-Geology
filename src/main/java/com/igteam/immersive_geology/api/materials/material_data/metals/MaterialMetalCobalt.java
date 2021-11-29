@@ -106,11 +106,6 @@ public class MaterialMetalCobalt extends MaterialMetalBase
 		return CrystalFamily.HEXAGONAL;
 	}
 
-
-	/*@Nullable
 	@Override
-	public IItemTier getToolTier()
-	{
-		return IGContent.;
-	}*/
+	public boolean isNativeMetal() {return true;}
 }

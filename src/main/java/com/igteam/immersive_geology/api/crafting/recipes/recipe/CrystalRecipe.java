@@ -15,17 +15,17 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
 
-public class ElectrolizerRecipe extends IGMultiblockRecipe
+public class CrystalRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<ElectrolizerRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":electrolizer");
-    public static Map<ResourceLocation, ElectrolizerRecipe> recipes = new HashMap<>();
+    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystalyzer");
+    public static Map<ResourceLocation, CrystalRecipe> recipes = new HashMap<>();
 
 
     /** May return null! */
-    public static ElectrolizerRecipe findRecipe(FluidStack fluidInput)
+    public static CrystalRecipe findRecipe(FluidStack fluidInput)
     {
         if(!recipes.isEmpty()){
-            for(ElectrolizerRecipe r:recipes.values()){
+            for(CrystalRecipe r:recipes.values()){
                 if(r.fluidInput != null && r.fluidInput.testIgnoringAmount(fluidInput)){
                     return r;
                 }
@@ -34,24 +34,20 @@ public class ElectrolizerRecipe extends IGMultiblockRecipe
         return null;
     }
 
-    public static ElectrolizerRecipe loadFromNBT(CompoundNBT nbt){
+    public static CrystalRecipe loadFromNBT(CompoundNBT nbt){
         FluidStack fluidInput = FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid_input"));
         return findRecipe(fluidInput);
     }
 
     protected final FluidTagInput fluidInput;
-    protected final FluidStack fluidOutput;
     protected final ItemStack itemOutput;
 
-
-    protected ElectrolizerRecipe(ResourceLocation id, FluidStack fluidOutput, ItemStack itemOutput, FluidTagInput fluidInput, int energy, int time) {
+    protected CrystalRecipe(ResourceLocation id, ItemStack itemOutput, FluidTagInput fluidInput, int energy, int time) {
         super(ItemStack.EMPTY, TYPE, id);
         this.fluidInput = fluidInput;
-        this.fluidOutput = fluidOutput;
         this.itemOutput = itemOutput;
 
         this.fluidInputList = Collections.singletonList(fluidInput);
-        this.fluidOutputList = Arrays.asList(this.fluidOutput);
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
 
         timeAndEnergy(time, energy);
@@ -66,13 +62,6 @@ public class ElectrolizerRecipe extends IGMultiblockRecipe
     @Override
     public int getMultipleProcessTicks() {
         return 0;
-    }
-
-    @Override
-    public List<FluidStack> getActualFluidOutputs(TileEntity tile) {
-        NonNullList<FluidStack> output = NonNullList.create();
-        output.add(fluidOutput);
-        return output;
     }
 
     public FluidTagInput getInputFluid(){

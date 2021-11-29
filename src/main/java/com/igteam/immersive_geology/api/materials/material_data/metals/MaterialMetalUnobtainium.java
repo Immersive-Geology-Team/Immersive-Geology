@@ -16,11 +16,6 @@ import java.util.LinkedHashSet;
  */
 public class MaterialMetalUnobtainium extends MaterialMetalBase
 {
-
-	public MaterialMetalUnobtainium() {
-		isNativeMetal = true;
-	}
-	
 	@Override
 	public String getName()
 	{
@@ -111,4 +106,7 @@ public class MaterialMetalUnobtainium extends MaterialMetalBase
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.HEXAGONAL; //Base on studies of Boron nitride, it seems that Hexagonal is one of the strongest crystal structures known.
 	}
+
+	@Override
+	public boolean isNativeMetal() {return true;}
 }

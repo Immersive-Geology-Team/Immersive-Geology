@@ -35,8 +35,8 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
 
     private ReverberationFurnaceMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/reverberation_furnace"),
-                new BlockPos(1,0,1),
-                new BlockPos(1,6,2),
+                new BlockPos(0,0,0),
+                new BlockPos(0,0,5),
                 new BlockPos(6,12,6),
                 () -> IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace.getDefaultState());
     }
@@ -75,19 +75,13 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
             World world = ClientUtils.mc().world;
             if(world != null){
                 transform.push();
-                    transform.translate(1, 0, 0);
                     RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getSolid()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);
 
                     transform.push();
-                        transform.rotate(rot);
-                        transform.translate(-2, -1, -1);
                         ImmersiveGeology.proxy.renderTile(this.te, buffer.getBuffer(RenderType.getSolid()), transform, buffer);
                     transform.pop();
-
                 transform.pop();
             }
         }
     }
-
-    final Quaternion rot = new Quaternion(new Vector3f(0F, 1F, 0F), 90, true);
 }

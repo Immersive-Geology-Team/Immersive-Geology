@@ -114,10 +114,6 @@ public class MaterialMetalSilver extends MaterialMetalBase
 		return CrystalFamily.CUBIC;
 	}
 
-	/*@Nullable
 	@Override
-	public IItemTier getToolTier()
-	{
-		return IGContent.;
-	}*/
+	public boolean isNativeMetal() {return true;}
 }

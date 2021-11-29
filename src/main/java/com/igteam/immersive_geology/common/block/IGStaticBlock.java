@@ -38,7 +38,7 @@ public class IGStaticBlock extends Block implements IGBlockType {
 
         this.registryName = registryName.toLowerCase();
 
-        if(IGRegistrationHolder.registeredIGBlocks.putIfAbsent(registryName.toLowerCase(), this) != null){
+        if(IGRegistrationHolder.registeredIGBlocks.putIfAbsent(registryName.toLowerCase(), this) != null) {
             ImmersiveGeology.getNewLogger().error("Duplicate key used to register static block");
         }
 

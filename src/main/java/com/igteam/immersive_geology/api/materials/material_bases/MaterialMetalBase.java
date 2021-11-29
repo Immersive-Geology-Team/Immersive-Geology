@@ -48,7 +48,7 @@ public abstract class MaterialMetalBase extends Material
 			case ORE_BIT:
 			case DIRTY_CRUSHED_ORE:
 			case ORE_STONE:
-				return isNativeMetal;
+				return isNativeMetal();
 			default:
 				return false;
 		}
@@ -137,6 +137,8 @@ public abstract class MaterialMetalBase extends Material
 	public boolean hasCrystal(){
 		return true;
 	}
+
+	public boolean isNativeMetal() {return false;}
 
 	@Override
 	public MaterialEnum getProcessedType() {

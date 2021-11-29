@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import com.igteam.immersive_geology.common.block.blocks.ChemicalVatBlock;
+import com.igteam.immersive_geology.common.block.blocks.CrystalyzerBlock;
 import com.igteam.immersive_geology.common.block.blocks.GravitySeparatorBlock;
 import com.igteam.immersive_geology.common.block.blocks.ReverberationFurnaceBlock;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
@@ -17,13 +18,16 @@ public class IGMultiblockRegistrationHolder {
         public static Block industrialseparator;
         public static Block industrialcalcinator;
         public static Block industrialroaster;
-        public static Block electrolizer;
+        public static Block crystalyzer;
         public static Block reverberation_furnace;
     }
 
     public static void populate() {
+        //Steel
         Multiblock.chemicalvat = new ChemicalVatBlock();
         Multiblock.gravityseparator = new GravitySeparatorBlock();
+        Multiblock.crystalyzer = new CrystalyzerBlock();
+        //Stone
         Multiblock.reverberation_furnace = new ReverberationFurnaceBlock();
     }
 

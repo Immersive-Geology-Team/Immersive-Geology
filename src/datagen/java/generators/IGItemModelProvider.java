@@ -9,10 +9,7 @@ import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.block.IGStaticBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
-import com.igteam.immersive_geology.common.item.IGBlockItem;
-import com.igteam.immersive_geology.common.item.IGBucketItem;
-import com.igteam.immersive_geology.common.item.IGOreItem;
-import com.igteam.immersive_geology.common.item.ItemBase;
+import com.igteam.immersive_geology.common.item.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
@@ -77,6 +74,8 @@ public class IGItemModelProvider extends ItemModelProvider {
                         default:
                             genericItem(item);
                     }
+                } else if(item instanceof IGStaticItem){
+                    staticItem(item);
                 }
             } catch (Exception e){
                 log.error("Failed to create Item Model: \n" + e);
@@ -178,7 +177,15 @@ public class IGItemModelProvider extends ItemModelProvider {
         getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(0).uvs(0, 0, 16, 16)));
     }
 
-
+    private void staticItem(Item item){
+        if(item == null){
+            StackTraceElement where = new NullPointerException().getStackTrace()[1];
+            log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+            return;
+        }
+        IGStaticItem i = (IGStaticItem) item;
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + i.getResourceName()).getPath(), new ResourceLocation(IGLib.MODID, "item/base/" + i.getResourceName()));
+    }
 
     private void genericItem(Item item){
         if(item == null){

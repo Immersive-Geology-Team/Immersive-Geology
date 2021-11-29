@@ -17,10 +17,6 @@ import java.util.LinkedHashSet;
 public class MaterialMetalPlatinum extends MaterialMetalBase
 {
 	
-	public MaterialMetalPlatinum() {
-		isNativeMetal = true;
-	}
-	
 	@Override
 	public String getName()
 	{
@@ -109,6 +105,9 @@ public class MaterialMetalPlatinum extends MaterialMetalBase
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.CUBIC;
 	}
+
+	@Override
+	public boolean isNativeMetal() {return false;}
 
 	/*@Nullable
 	@Override
