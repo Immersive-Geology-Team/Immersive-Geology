@@ -8,11 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 
-public class ElectrolizerRecipeSerializer extends IERecipeSerializer<VatRecipe> {
+public class CrystalizerRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.electrolizer);
+        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystalyzer);
     }
 
     @Override
