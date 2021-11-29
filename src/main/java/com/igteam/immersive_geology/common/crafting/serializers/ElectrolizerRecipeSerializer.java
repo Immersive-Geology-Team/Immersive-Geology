@@ -12,7 +12,7 @@ public class ElectrolizerRecipeSerializer extends IERecipeSerializer<VatRecipe> 
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.electrolizer);
+        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystalyzer);
     }
 
     @Override

@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:ore_bit_vanilla_gold",
-    "immersive_geology:ore_bit_vanilla_platinum",
+    "immersive_geology:ore_bit_vanilla_aluminum",
+    "immersive_geology:ore_bit_vanilla_lead",
+    "immersive_geology:ore_bit_vanilla_manganese",
     "immersive_geology:ore_bit_vanilla_silver",
+    "immersive_geology:ore_bit_vanilla_cobalt",
+    "immersive_geology:ore_bit_vanilla_arsenic",
     "immersive_geology:ore_bit_vanilla_anatase",
     "immersive_geology:ore_bit_vanilla_cuprite",
     "immersive_geology:ore_bit_vanilla_zircon",
