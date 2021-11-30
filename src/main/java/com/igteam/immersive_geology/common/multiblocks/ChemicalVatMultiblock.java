@@ -62,11 +62,10 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
     Random RAND = new Random();
 
-    private static final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
+        //This is to ensure it can load on servers, if it's null, it's a server, so we can't use it anyway.
         if(this.list == null){
             BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
@@ -75,13 +74,6 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
 
         //Fix issue of manual render being off center.
         transform.translate(3,0,0);
-
-        ModelChemicalVat model = (ModelChemicalVat) stirrer.get();
-        if(model != null){
-            float ticks = 0;
-            model.ticks = ticks;
-            model.render(transform, buffer.getBuffer(model.getRenderType(ModelChemicalVat.TEXTURE)), 0xF000F0, 0xF000F0, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
 
         //Need to use this method otherwise it doesn't show up in the manual...
         RenderUtils.renderModelTESRFast(this.list, buffer.getBuffer(RenderType.getCutout()), transform, 0xF000F0, OverlayTexture.NO_OVERLAY);

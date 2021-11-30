@@ -13,6 +13,7 @@ import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.*;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.*;
+import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;

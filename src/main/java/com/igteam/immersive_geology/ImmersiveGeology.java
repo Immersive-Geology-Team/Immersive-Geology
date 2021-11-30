@@ -80,6 +80,10 @@ public class ImmersiveGeology
 	}
 
 	private void setup(final FMLCommonSetupEvent event){
+
+		LOGGER.info("Initializing Immersive Geology Multiblocks");
+		IGMultiblockRegistrationHolder.initialize();
+
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
 		proxy.onSetup(event);
 	}
