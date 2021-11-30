@@ -22,7 +22,6 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInt
     protected final MaterialUseType blockUseType;
     protected final MaterialUseType itemDrop;
     protected final Item itemBlock;
-
     protected Map<BlockMaterialType, Material> blockMaterialData = new HashMap<>();
 
     public IGStairsBlock(String registryName, Material material, MaterialUseType useType) {
