@@ -5,7 +5,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import javafx.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -51,12 +51,12 @@ public class IGAcidProcessingMethod extends IGProcessingMethod {
 
     @Override
     public FluidStack getSecondaryFluid() {
-        return fluidInput.getValue();
+        return fluidInput.getSecond();
     }
 
     @Override
     public FluidStack getPrimaryFluid() {
-        return fluidInput.getKey();
+        return fluidInput.getFirst();
     }
 
     @Override
@@ -71,10 +71,10 @@ public class IGAcidProcessingMethod extends IGProcessingMethod {
 
     @Override
     public FluidStack getFluidResult() {
-        if(resultingFluid.getKey().equals(MaterialUseType.SLURRY)) {
-            return new FluidStack(IGRegistrationHolder.getSlurryByMaterials(resultingFluid.getValue(), resultingFluid.getValue().getFluidsForSlurries()[0], false), fluidOutAmount);
+        if(resultingFluid.getFirst().equals(MaterialUseType.SLURRY)) {
+            return new FluidStack(IGRegistrationHolder.getSlurryByMaterials(resultingFluid.getSecond(), resultingFluid.getSecond().getFluidsForSlurries()[0], false), fluidOutAmount);
         } else {
-            return new FluidStack(IGRegistrationHolder.getFluidByMaterial(resultingFluid.getValue(), false), fluidOutAmount);
+            return new FluidStack(IGRegistrationHolder.getFluidByMaterial(resultingFluid.getSecond(), false), fluidOutAmount);
         }
     }
 }

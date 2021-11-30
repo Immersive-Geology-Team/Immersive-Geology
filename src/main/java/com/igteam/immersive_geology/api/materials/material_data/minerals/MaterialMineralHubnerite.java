@@ -12,7 +12,7 @@ import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBa
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import javafx.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;

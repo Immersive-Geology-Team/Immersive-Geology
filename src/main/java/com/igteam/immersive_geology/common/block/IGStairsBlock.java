@@ -1,15 +1,12 @@
 package com.igteam.immersive_geology.common.block;
 
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
-import blusunrize.immersiveengineering.common.blocks.IIEBlock;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import javafx.util.Pair;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.Item;
@@ -18,7 +15,6 @@ import net.minecraft.world.IBlockReader;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInterfaces.IColouredBlock {
 

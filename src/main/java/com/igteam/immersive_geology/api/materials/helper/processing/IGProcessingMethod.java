@@ -2,7 +2,7 @@ package com.igteam.immersive_geology.api.materials.helper.processing;
 
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import javafx.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

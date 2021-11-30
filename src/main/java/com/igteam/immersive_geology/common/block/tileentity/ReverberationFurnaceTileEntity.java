@@ -1,63 +1,27 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
-import blusunrize.immersiveengineering.api.crafting.AlloyRecipe;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
-import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
-import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
-import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
-import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
-import blusunrize.immersiveengineering.common.blocks.stone.AlloySmelterTileEntity;
-import blusunrize.immersiveengineering.common.util.CachedRecipe;
-import blusunrize.immersiveengineering.common.util.Utils;
-import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
-import com.google.common.collect.ImmutableSet;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
-import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.FurnaceTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import org.apache.commons.lang3.tuple.Pair;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Supplier;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
 public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<ReverberationFurnaceTileEntity> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
@@ -66,8 +30,8 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
     public int processMax;
     public int burnTime;
     public int lastBurnTime;
-    public final ReverberationFurnaceTileEntity.FurnaceState guiState;
-    private final Supplier<AlloyRecipe> cachedModel;
+    //public final ReverberationFurnaceTileEntity.FurnaceState guiState;
+    //private final Supplier<AlloyRecipe> cachedModel;
 
     public ReverberationFurnaceTileEntity() {
         super(ReverberationFurnaceMultiblock.INSTANCE, IGTileTypes.REV_FURNACE.get(), true);
@@ -76,12 +40,12 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
         this.processMax = 0;
         this.burnTime = 0;
         this.lastBurnTime = 0;
-        this.guiState = new ReverberationFurnaceTileEntity.FurnaceState();
-        this.cachedModel = CachedRecipe.cached(AlloyRecipe::findRecipe, () -> {
-            return (ItemStack) this.inventory.get(0);
-        }, () -> {
-            return (ItemStack) this.inventory.get(1);
-        });
+        //this.guiState = new ReverberationFurnaceTileEntity.FurnaceState();
+//        this.cachedModel = CachedRecipe.cached(AlloyRecipe::findRecipe, () -> {
+//            return (ItemStack) this.inventory.get(0);
+//        }, () -> {
+//            return (ItemStack) this.inventory.get(1);
+//        });
     }
 
     public boolean canUseGui(PlayerEntity player) {
@@ -97,6 +61,7 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
     }
 
     public void tick() {
+        /*
         this.checkForNeedlessTicking();
         if (!this.world.isRemote && this.formed && !this.isDummy()) {
             boolean activeBeforeTick = this.getIsActive();
@@ -195,19 +160,19 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
                 }
             }
         }
-
+         */
     }
 
-    @Nullable
-    public AlloyRecipe getRecipe() {
-        AlloyRecipe recipe = (AlloyRecipe) this.cachedModel.get();
-        if (recipe == null) {
-            return null;
-        } else {
-            ItemStack output = (ItemStack) this.inventory.get(3);
-            return !output.isEmpty() && (!ItemStack.areItemsEqual(output, recipe.output) || output.getCount() + recipe.output.getCount() > this.getSlotLimit(3)) ? null : recipe;
-        }
-    }
+//    @Nullable
+//    public AlloyRecipe getRecipe() {
+//        AlloyRecipe recipe = (AlloyRecipe) this.cachedModel.get();
+//        if (recipe == null) {
+//            return null;
+//        } else {
+//            ItemStack output = (ItemStack) this.inventory.get(3);
+//            return !output.isEmpty() && (!ItemStack.areItemsEqual(output, recipe.output) || output.getCount() + recipe.output.getCount() > this.getSlotLimit(3)) ? null : recipe;
+//        }
+//    }
 
     public int[] getCurrentProcessesStep() {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
@@ -241,6 +206,7 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
 
     }
 
+    @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         if (!descPacket) {
@@ -250,7 +216,6 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
             nbt.putInt("lastBurnTime", this.lastBurnTime);
             ItemStackHelper.saveAllItems(nbt, this.inventory);
         }
-
     }
 
     public NonNullList<ItemStack> getInventory() {

@@ -1,7 +1,5 @@
 package com.igteam.immersive_geology.api.materials.helper.processing;
 
-import javafx.util.Pair;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
