@@ -11,6 +11,9 @@ import java.util.LinkedHashSet;
 public class MaterialBrickRefractory extends MaterialBrickBase
 {
     @Override
+    public String getName() { return "refractory"; }
+
+    @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
         return new LinkedHashSet<>(Arrays.asList(
@@ -36,7 +39,7 @@ public class MaterialBrickRefractory extends MaterialBrickBase
         return 2327;
     }
 
-    public static int baseColor = 0xDDD3BF;
+    public static int baseColor = 0xE5D2AC;
 
     @Override
     public int getColor(int temperature) {
