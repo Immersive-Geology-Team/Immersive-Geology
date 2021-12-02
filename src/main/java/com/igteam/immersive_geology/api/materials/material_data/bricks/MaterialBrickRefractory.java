@@ -36,9 +36,11 @@ public class MaterialBrickRefractory extends MaterialBrickBase
         return 2327;
     }
 
+    public static int baseColor = 0xDDD3BF;
+
     @Override
     public int getColor(int temperature) {
-        return 0;
+        return baseColor;
     }
 
     @Override
