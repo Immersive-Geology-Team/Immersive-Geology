@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:clay_kaolinite",
     "immersive_geology:clay_refractory"
   ]
 }
