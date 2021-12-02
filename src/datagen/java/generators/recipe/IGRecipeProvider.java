@@ -187,7 +187,7 @@ public class IGRecipeProvider extends RecipeProvider {
 
 
                             vatBuilder.builder(acid_result, slurry).addItemInput(IngredientWithSize.of(acid_catalyst)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
-                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + m.outputFluidData().getKey().getName() + "_" + m.outputFluidData().getValue().getName().toLowerCase()));
+                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + m.outputFluidData().getFirst().getName() + "_" + m.outputFluidData().getSecond().getName().toLowerCase()));
 
                             break;
                         case ROASTER:
