@@ -1,12 +1,13 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
-import javax.annotation.Nullable;
-
-import com.igteam.immersive_geology.api.materials.*;
+import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
+
+import javax.annotation.Nullable;
 
 public abstract class MaterialMineralBase extends Material
 {
@@ -22,9 +23,13 @@ public abstract class MaterialMineralBase extends Material
 			case ORE_STONE:
 			case ORE_BIT:
 			case ORE_CHUNK:
-			case DUST:
 			case DIRTY_CRUSHED_ORE:
 				return true;
+			case TINY_DUST:
+			case DUST:
+				return hasDust();
+			case CLAY:
+				return hasClay();
 			case SLURRY:
 				return hasSlurry();
 		}
@@ -33,6 +38,14 @@ public abstract class MaterialMineralBase extends Material
 
 	public boolean hasCrushedOre(){
 		return true;
+	}
+
+	public boolean hasDust(){
+		return true;
+	}
+
+	public boolean hasClay(){
+		return getMineralType() == EnumMineralType.CLAY;
 	}
 
 	public boolean isOxide(){

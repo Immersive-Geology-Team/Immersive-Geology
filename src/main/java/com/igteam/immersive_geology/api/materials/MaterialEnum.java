@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.api.materials.material_bases.*;
 import com.igteam.immersive_geology.api.materials.material_data.MaterialEmpty;
+import com.igteam.immersive_geology.api.materials.material_data.bricks.MaterialBrickRefractory;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalDiamond;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalGlowstone;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalPhlebotinum;
@@ -94,6 +95,9 @@ public enum MaterialEnum {
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),
+
+    //Bricks
+    Refractory(new MaterialBrickRefractory()),
 
     //Fluids
     //Non Volatile

@@ -20,12 +20,14 @@ public enum MaterialUseType {
     COBBLESTONE(true, ItemSubGroup.natural),    //Returns Self
     STONE(true, ItemSubGroup.natural),          //Gives Chunks
     GEODE(true, ItemSubGroup.natural),          //Gives Crystals
+    BRICKS(true, ItemSubGroup.processed),
 
     //Items
     CHUNK(false, ItemSubGroup.natural),
     ROCK_BIT(false, ItemSubGroup.natural),
     ORE_CHUNK(false, ItemSubGroup.natural),
     ORE_BIT(false, ItemSubGroup.natural),
+    CLAY(false, ItemSubGroup.natural),
 
     DIRTY_CRUSHED_ORE(false, ItemSubGroup.processed),
     CRUSHED_ORE(false, ItemSubGroup.processed),
@@ -44,6 +46,7 @@ public enum MaterialUseType {
     GEAR(false, ItemSubGroup.processed),
     WIRE(false, ItemSubGroup.processed),
     TINY_DUST(false, ItemSubGroup.processed),
+    BRICK(false, ItemSubGroup.processed),
 
     //Liquid Types
     FLUIDS(false, ItemSubGroup.misc),
