@@ -31,7 +31,8 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void registerTags() {
-        for(MaterialEnum material : MaterialEnum.values()) {
+        for(MaterialEnum wrapper : MaterialEnum.values()) {
+            Material material = wrapper.getMaterial();
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
             Item crushed_ore = MaterialUseType.CRUSHED_ORE.getItem(material);
@@ -60,7 +61,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
             //dual material items
             for(MaterialEnum stone_base : MaterialEnum.stoneValues()) {
-                Item dirty_crushed_ore = MaterialUseType.DIRTY_CRUSHED_ORE.getItem(stone_base, material);
+                Item dirty_crushed_ore = MaterialUseType.DIRTY_CRUSHED_ORE.getItem(stone_base.getMaterial(), material);
 
                 if (dirty_crushed_ore != null) {
                     assert tags.dirty_ore_crushed != null;

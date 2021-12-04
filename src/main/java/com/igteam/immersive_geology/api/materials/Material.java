@@ -16,6 +16,7 @@ import net.minecraft.item.Rarity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -257,17 +258,5 @@ public abstract class Material
 
 	public boolean hasSlurry(){
 		return false;
-	}
-
-	public MaterialFluidBase[] getFluidsForSlurries(){
-		return new  MaterialFluidBase[]{(MaterialFluidBase) MaterialEnum.Water.getMaterial()};
-	}
-
-	public List<MaterialSlurryWrapper> getSlurries(){
-		List<MaterialSlurryWrapper> slurries = new ArrayList<>();
-		for(MaterialFluidBase fluid : getFluidsForSlurries()) {
-			slurries.add(new MaterialSlurryWrapper(this, fluid, 0.5f)); //default concentration of 50%
-		}
-		return slurries;
 	}
 }

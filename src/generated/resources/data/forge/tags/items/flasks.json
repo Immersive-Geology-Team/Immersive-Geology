@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:flask_sulfuric_acid",
-    "immersive_geology:flask_hydrochloric_acid",
-    "immersive_geology:flask_nitric_acid",
-    "immersive_geology:flask_sodium_hydroxide",
     "immersive_geology:flask_glass"
   ]
 }

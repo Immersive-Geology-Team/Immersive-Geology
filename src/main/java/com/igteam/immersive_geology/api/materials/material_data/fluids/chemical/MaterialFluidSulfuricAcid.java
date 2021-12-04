@@ -39,7 +39,11 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
 
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
-        return null;
+        return new LinkedHashSet<>(Arrays.asList(
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.HYDROGEN, 2),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 4)
+        ));
     }
 
     @Override

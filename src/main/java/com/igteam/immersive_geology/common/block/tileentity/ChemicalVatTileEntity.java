@@ -292,9 +292,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void onProcessFinish(@Nonnull MultiblockProcess<VatRecipe> process)
     {
-        int primaryDrainAmount = process.recipe.getInputFluids()[0].getAmount();
-        int secondaryDrainAmount = process.recipe.getInputFluids()[1].getAmount();
-        int shrinkAmount = process.recipe.getItemInput().getCount();
+        //TODO take into account reverse recipes
+        int primaryDrainAmount = process.recipe.getInputFluids().get(0).getAmount();
+        int secondaryDrainAmount = process.recipe.getInputFluids().get(1).getAmount();
+        int shrinkAmount = 1;
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) master();
         master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
         master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
@@ -305,7 +306,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public int getMaxProcessPerTick()
     {
-        return 1;
+        return 6;
     }
 
     @Override
@@ -450,7 +451,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
             FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
             FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
-            return new ITextComponent[]{TextUtils.formatFluidStack(fs1),TextUtils.formatFluidStack(fs2), new StringTextComponent("Input: " + master.getInventory().get(0).getDisplayName().getString() + " | Count: " + master.getInventory().get(0).getCount()), TextUtils.formatFluidStack(fs3), new StringTextComponent("Input: " + master.getInventory().get(1).getDisplayName().getString() + " | Count: " + master.getInventory().get(1).getCount())};
+            return new ITextComponent[]{};
         } else {
             return null;
         }

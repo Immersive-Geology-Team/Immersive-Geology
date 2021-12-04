@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
+import blusunrize.immersiveengineering.common.crafting.fluidaware.IngredientFluidStack;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
@@ -19,6 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.List;
+
 public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
@@ -30,8 +33,9 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
     public VatRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
         IngredientWithSize input = IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
 
-        FluidStack fluid_input1 = ApiUtils.jsonDeserializeFluidStack(JSONUtils.getJsonObject(json, "fluid_input1"));
-        FluidStack fluid_input2 = ApiUtils.jsonDeserializeFluidStack(JSONUtils.getJsonObject(json, "fluid_input2"));
+        FluidTagInput fluid_input1 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input1"));
+        FluidTagInput fluid_input2 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input2"));
+
         ItemStack item_output = readOutput(json.get("result"));
         FluidStack fluid_output = ApiUtils.jsonDeserializeFluidStack(JSONUtils.getJsonObject(json, "fluid_result"));
 
@@ -44,26 +48,28 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public VatRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-
-
         IngredientWithSize item_input = IngredientWithSize.read(buffer);
-        FluidStack fluid_input1 = FluidStack.readFromPacket(buffer);
-        FluidStack fluid_input2 = FluidStack.readFromPacket(buffer);
+
+        FluidTagInput fluid_input1 = FluidTagInput.read(buffer);
+        FluidTagInput fluid_input2 = FluidTagInput.read(buffer);
+
         ItemStack item_output = buffer.readItemStack();
         FluidStack fluid_output = buffer.readFluidStack();
 
         int energy = buffer.readInt();
         int time = buffer.readInt();
 
-        return new VatRecipe(recipeId, fluid_output, item_output, fluid_input1, fluid_input2,item_input,energy,time);
+        VatRecipe recipe = new VatRecipe(recipeId, fluid_output, item_output, fluid_input1, fluid_input2,item_input,energy,time);
+        return recipe;
     }
 
     @Override
     public void write(PacketBuffer buffer, VatRecipe recipe) {
         recipe.getItemInputs().get(0).write(buffer);
 
-        recipe.getInputFluids()[0].writeToPacket(buffer);
-        recipe.getInputFluids()[1].writeToPacket(buffer);
+        List<FluidTagInput> inputFluids = recipe.getInputFluids();
+        inputFluids.get(0).write(buffer);
+        inputFluids.get(1).write(buffer);
 
         buffer.writeItemStack(recipe.getItemOutputs().get(0));
         buffer.writeFluidStack(recipe.getFluidOutputs().get(0));

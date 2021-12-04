@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.api.crafting.recipes.builders;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.igteam.immersive_geology.common.crafting.Serializers;
@@ -29,9 +30,9 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
         return this;
     }
 
-    public VatRecipeBuilder addFluidInputs(FluidStack input_1, FluidStack input_2){
-        this.addFluid("fluid_input1", input_1);
-        this.addFluid("fluid_input2", input_2);
+    public VatRecipeBuilder addFluidInputs(FluidTagInput input_1, FluidTagInput input_2){
+        this.addFluidTag("fluid_input1", input_1);
+        this.addFluidTag("fluid_input2", input_2);
         return this;
     }
 }

@@ -6,5 +6,8 @@ public enum ProcessingMethod {
     ROASTER,
     ELECTROLYSIS,
     SEDIMENT,
-    BLASTING;
+    BLASTING,
+    CRUSHING,
+    SEPARATING,
+    CRAFTING;
 }
