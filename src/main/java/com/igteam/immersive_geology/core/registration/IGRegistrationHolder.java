@@ -6,7 +6,12 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
@@ -75,6 +80,16 @@ public class IGRegistrationHolder {
             Arrays.stream(MaterialEnum.values()).forEach(material -> {
                 IGVariantHolder.createVariants(material.getMaterial());
             });
+
+            for (FluidEnum wrapper : FluidEnum.values()) {
+                IGVariantHolder.createVariants(wrapper.getMaterial()); //Create and Register all basic fluids
+            }
+
+            for (SlurryEnum wrapper : SlurryEnum.values()) {
+                for (MaterialSlurryWrapper slurry : wrapper.getEntries()) {
+                    IGVariantHolder.createVariants(slurry); //Create and Register all Slurries
+                }
+            }
         }
         variantsGenerated = true;
     }
@@ -112,6 +127,10 @@ public class IGRegistrationHolder {
 
     public static Fluid getSlurryByMaterials(Material soluteMaterial, Material fluidMaterial, boolean isFlowing){
         return registeredIGFluids.get(getRegistryKey(soluteMaterial, fluidMaterial, MaterialUseType.SLURRY) + (isFlowing ? "_flowing" : ""));
+    }
+
+    public static String getSlurryKey(Material soluteMaterial, Material fluidMaterial, boolean isFlowing){
+        return getRegistryKey(soluteMaterial, fluidMaterial, MaterialUseType.SLURRY) + (isFlowing ? "_flowing" : "");
     }
 
     public static Block getBlockByMaterial(MaterialUseType useType, Material material) {

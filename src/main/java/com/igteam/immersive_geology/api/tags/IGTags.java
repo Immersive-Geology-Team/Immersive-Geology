@@ -5,6 +5,10 @@ import blusunrize.immersiveengineering.api.Lib;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -21,38 +25,44 @@ public class IGTags {
 
     private static final Map<INamedTag<Block>, INamedTag<Item>> toItemTag = new HashMap<>();
 
-    private static final Map<MaterialEnum, MaterialTags> materials = new HashMap<>();
+    private static final Map<Material, MaterialTags> materials = new HashMap<>();
 
     static
     {
         for(MaterialEnum m : MaterialEnum.values()){
-            materials.put(m, new MaterialTags(m));
+            materials.put(m.getMaterial(), new MaterialTags(m.getMaterial()));
+        }
+        for (FluidEnum f : FluidEnum.values()) {
+            materials.put(f.getMaterial(), new MaterialTags(f.getMaterial()));
+        }
+        for(SlurryEnum s : SlurryEnum.values()){
+            for(MaterialSlurryWrapper slurry : s.getEntries()){
+                materials.put(slurry, new MaterialTags(slurry));
+            }
         }
     }
 
-
-    public static MaterialTags getTagsFor(MaterialEnum material) {
+    public static MaterialTags getTagsFor(Material material) {
         return materials.get(material);
     }
 
     public static class MaterialTags {
         public final INamedTag<Item> nugget;
         public final INamedTag<Item> ingot;
-        public final INamedTag<Block> metal_block;
         public final INamedTag<Item> ore_crushed;
         public final INamedTag<Item> dirty_ore_crushed;
-		public final INamedTag<Fluid> fluid;
-		public final INamedTag<Item> dust;
-
-
+        public final INamedTag<Item> dust;
         public final INamedTag<Item> plate;
         public final INamedTag<Item> rod;
         public final INamedTag<Item> gear;
         public final INamedTag<Item> wire;
-       
-        private MaterialTags(MaterialEnum mat) {
-            String name = mat.getMaterial().getName();
-            Material material = mat.getMaterial();
+
+        public final INamedTag<Fluid> fluid;
+
+        public final INamedTag<Block> metal_block;
+
+        private MaterialTags(Material material) {
+            String name = material.getName();
 
             if(material.hasSubtype(MaterialUseType.NUGGET)) {
                 nugget = createItemWrapper(getNugget(name));
@@ -90,11 +100,12 @@ public class IGTags {
                 metal_block = null;
             }
 
-            if(material.hasSubtype(MaterialUseType.FLUIDS)) {
+            if(material.hasSubtype(MaterialUseType.FLUIDS) || material.hasSubtype(MaterialUseType.SLURRY)) {
                 fluid = createFluidWrapper(forgeLoc(name));
             } else {
                 fluid = null;
             }
+
 			if (material.hasSubtype(MaterialUseType.PLATE))
             {
                 plate = createItemWrapper(getPlate(name));

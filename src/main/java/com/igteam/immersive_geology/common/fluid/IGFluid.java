@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -64,19 +65,21 @@ public class IGFluid extends FlowingFluid {
     protected IGBucketItem bucket;
     private int burnTime = -1;
 
+    private boolean isSlurry;
+
     private boolean isSolid;
 
     public IGFluid(MaterialFluidBase material)
     {
-        this(material, null);
+        this(material, null, false);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes)
+    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes, boolean isSlurry)
     {
-        this(material, buildAttributes, true);
+        this(material, buildAttributes, true, isSlurry);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes, boolean isSource)
+    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes, boolean isSource, boolean isSlurry)
     {
         this.fluidMaterial = material;
         this.fluidName = material.getName();
@@ -84,15 +87,23 @@ public class IGFluid extends FlowingFluid {
         this.flowingTex = material.getFluidFlowing();
         this.buildAttributes = buildAttributes;
         this.isSolid = material.getIsSolid();
+        this.isSlurry = isSlurry;
+
+        String registryName = isSlurry ?
+                IGRegistrationHolder.getSlurryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), !isSource)
+                : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS) + (isSource ? "" : "_flowing");
+
         if(!isSource){
             flowing = this;
-            setRegistryName(IGLib.MODID, IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS) + "_flowing");
+            setRegistryName(IGLib.MODID, registryName);
         }
         else
         {
             source = this;
             this.block = new IGFluidBlock(this);
-            this.block.setRegistryName(IGLib.MODID, IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS));
+
+
+            this.block.setRegistryName(IGLib.MODID, registryName);
 
 
             if(fluidMaterial.hasBucket()) {
@@ -108,7 +119,11 @@ public class IGFluid extends FlowingFluid {
                     }
                 };
 
-                this.bucket.setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET));
+                String bucketRegName = isSlurry ?
+                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.BUCKET)
+                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET);
+
+                this.bucket.setRegistryName(bucketRegName);
                 DispenserBlock.registerDispenseBehavior(this.bucket, BUCKET_DISPENSE_BEHAVIOR);
 
             }
@@ -121,15 +136,18 @@ public class IGFluid extends FlowingFluid {
                         return burnTime;
                     }
                 };
+                String bucketRegName = isSlurry ?
+                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.FLASK)
+                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLASK);
 
-                this.bucket.setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLASK));
+
+                this.bucket.setRegistryName(bucketRegName);
+
                 DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
             }
 
-
-
             flowing = createFlowingVariant();
-            setRegistryName(IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS));
+            setRegistryName(registryName);
             IG_FLUIDS.add(this);
         }
     }
@@ -248,7 +266,7 @@ public class IGFluid extends FlowingFluid {
 
     protected IGFluid createFlowingVariant()
     {
-        IGFluid ret = new IGFluid(fluidMaterial, buildAttributes, false)
+        IGFluid ret = new IGFluid(fluidMaterial, buildAttributes, false, isSlurry)
         {
             @Override
             protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder)
@@ -371,4 +389,9 @@ public class IGFluid extends FlowingFluid {
         return isSolid;
     }
 
+    public boolean isSlurry() {return isSlurry;}
+
+    public MaterialFluidBase getFluidMaterial() {
+        return fluidMaterial;
+    }
 }

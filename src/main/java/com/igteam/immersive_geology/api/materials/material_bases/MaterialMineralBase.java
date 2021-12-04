@@ -7,9 +7,16 @@ import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
+import com.igteam.immersive_geology.api.tags.IGTags;
+
+import java.util.HashMap;
 
 public abstract class MaterialMineralBase extends Material
 {
+
+	public MaterialMineralBase() {
+	}
+
 	public abstract EnumMineralType getMineralType();
 
 	@Override
@@ -25,8 +32,6 @@ public abstract class MaterialMineralBase extends Material
 			case DUST:
 			case DIRTY_CRUSHED_ORE:
 				return true;
-			case SLURRY:
-				return hasSlurry();
 		}
 		return false;
 	}

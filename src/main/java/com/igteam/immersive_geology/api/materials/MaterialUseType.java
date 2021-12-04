@@ -78,19 +78,23 @@ public enum MaterialUseType {
         return isBlock;
     }
 
-    public Item getItem(MaterialEnum material) {
-        return IGRegistrationHolder.getItemByMaterial(material.getMaterial(), this);
+    public Item getItem(Material material) {
+        return IGRegistrationHolder.getItemByMaterial(material, this);
     }
 
-    public Item getItem(MaterialEnum stone_base, MaterialEnum material) {
-        return IGRegistrationHolder.getItemByMaterial(stone_base.getMaterial(), material.getMaterial(), this);
+    public Item getItem(Material stone_base, Material material) {
+        return IGRegistrationHolder.getItemByMaterial(stone_base, material, this);
     }
 
-    public Block getBlock(MaterialEnum material) {
-        return IGRegistrationHolder.getBlockByMaterial(this, material.getMaterial());
+    public Block getBlock(Material material) {
+        return IGRegistrationHolder.getBlockByMaterial(this, material);
     }
 
-    public Fluid getFluid(MaterialEnum material, boolean isFlowing) {
-        return IGRegistrationHolder.getFluidByMaterial(material.getMaterial(), isFlowing);
+    public Fluid getFluid(Material material, boolean isFlowing) {
+        return IGRegistrationHolder.getFluidByMaterial(material, isFlowing);
+    }
+
+    public Fluid getSlurry(Material solute, Material fluid, boolean isFlowing) {
+        return IGRegistrationHolder.getSlurryByMaterials(solute, fluid, isFlowing);
     }
 }

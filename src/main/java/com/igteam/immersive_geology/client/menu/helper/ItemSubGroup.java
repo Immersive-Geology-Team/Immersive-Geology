@@ -1,6 +1,5 @@
 package com.igteam.immersive_geology.client.menu.helper;
 
-import blusunrize.immersiveengineering.common.items.IEItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 

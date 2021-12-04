@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_cryolite": {
+    "has_ore_chunk_vanilla_aluminum": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_cryolite"
+            "item": "immersive_geology:ore_chunk_vanilla_aluminum"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_cryolite",
+      "has_ore_chunk_vanilla_aluminum",
       "has_the_recipe"
     ]
   ]

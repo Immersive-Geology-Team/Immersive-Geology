@@ -26,7 +26,8 @@ public class IGMultiblockRegistrationHolder {
         Multiblock.reverberation_furnace = new ReverberationFurnaceBlock();
     }
 
-    public static void initialize(){
+    //Not the cause of network issue, try elsewhere
+    public static void initialize() {
         MultiblockHandler.registerMultiblock(ChemicalVatMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(GravitySeparatorMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(ReverberationFurnaceMultiblock.INSTANCE);

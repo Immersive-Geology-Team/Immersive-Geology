@@ -1,6 +1,7 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
@@ -11,21 +12,30 @@ import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuild
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGAcidProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
+import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
@@ -62,62 +72,65 @@ public class IGRecipeProvider extends RecipeProvider {
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         CrusherRecipeBuilder crusherBuilder;
 
-        for(MaterialEnum material : MaterialEnum.values()) {
+        for(MaterialEnum wrapper : MaterialEnum.values()) {
+            Material material = wrapper.getMaterial();
+
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
             Item ingot =  MaterialUseType.INGOT.getItem(material);
             Item dust = MaterialUseType.DUST.getItem(material);
 
-            if(material.getMaterial().hasSubtype(MaterialUseType.NUGGET) && material.getMaterial().hasSubtype(MaterialUseType.INGOT)){
+            if(material.hasSubtype(MaterialUseType.NUGGET) && material.hasSubtype(MaterialUseType.INGOT)){
                 add3x3Conversion(ingot, nugget, tags.nugget, consumer);
-                log.debug("Generated Ingot/Nugget Recipe for: " + material.getMaterial().getName());
+                log.debug("Generated Ingot/Nugget Recipe for: " + material.getName());
 
                 Block metal_block = MaterialUseType.STORAGE_BLOCK.getBlock(material);
                 if(metal_block != null) {
                     add3x3Conversion(metal_block, ingot, tags.ingot, consumer);
-                    log.debug("Generate Storage Block recipe for: " + material.getMaterial().getName());
+                    log.debug("Generate Storage Block recipe for: " + material.getName());
                 }
 
-                if(!material.getMaterial().preExists()) {
+                if(!material.preExists()) {
                     crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
                     crusherBuilder.addCondition(getTagCondition(tags.dust)).addCondition(getTagCondition(tags.ingot));
                     crusherBuilder.addInput(tags.ingot)
                             .setEnergy(3000)
-                            .build(consumer, toRL("crusher/ingot_" + material.getMaterial().getName()));
+                            .build(consumer, toRL("crusher/ingot_" + material.getName()));
                 }
             }
 
-            if (material.getMaterial().hasSubtype(MaterialUseType.PLATE)) {
+            if (material.hasSubtype(MaterialUseType.PLATE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/plate_"+material.getMaterial().getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/plate_"+material.getName()));
             }
 
-            if (material.getMaterial().hasSubtype(MaterialUseType.ROD)) {
+            if (material.hasSubtype(MaterialUseType.ROD)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldRod, tags.rod, 1).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/rod_"+material.getMaterial().getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/rod_"+material.getName()));
             }
 
-            if (material.getMaterial().hasSubtype(MaterialUseType.GEAR)) {
+            if (material.hasSubtype(MaterialUseType.GEAR)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldGear, tags.gear, 1)
                         .addInput(new IngredientWithSize(tags.ingot,4))
-                        .setEnergy(2400).build(consumer, toRL("metalpress/gear_"+material.getMaterial().getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/gear_"+material.getName()));
             }
 
-            if (material.getMaterial().hasSubtype(MaterialUseType.WIRE)) {
+            if (material.hasSubtype(MaterialUseType.WIRE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldWire, tags.wire, 2).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/wire_"+material.getMaterial().getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/wire_"+material.getName()));
 
             }
 
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {
-                if (material.getMaterial().hasSubtype(MaterialUseType.ORE_CHUNK)) {
-                    Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base, material);
-                    MaterialEnum processed_material = material.getMaterial().getProcessedType();
+                if (material.hasSubtype(MaterialUseType.ORE_CHUNK)) {
+                    Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base.getMaterial(), material);
+                    Material processed_material = material;
 
-                    if(material.getMaterial().isNativeMetal) // means that it's a native metal chunk e.g gold_chunk, it's material is gold, so it's processed into gold.
-                    {
-                        processed_material = material;
+                    if(material.getProcessedType() != null && !material.isNativeMetal) {
+                        processed_material = material.getProcessedType().getMaterial();
+                    } else if(material.getProcessedType() != null) {
+                        log.info("Material Processed Type not Null put is Native? " + material.getName());
                     }
 
                     if(processed_material != null) {
@@ -130,7 +143,7 @@ public class IGRecipeProvider extends RecipeProvider {
                     }
 
                     crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
-                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_"+material.getMaterial().getName()));
+                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_"+material.getName()));
                 }
             }
 //
@@ -176,18 +189,45 @@ public class IGRecipeProvider extends RecipeProvider {
                         case CALCINATION:
                             break;
                         case ACID:
-                            IGAcidProcessingMethod m = (IGAcidProcessingMethod) method;
+                            IGVatProcessingMethod m = (IGVatProcessingMethod) method;
                             int energyCost = m.getEnergyCost();
                             int timeTaken = m.getProcessingTime();
-                            FluidStack secondary_chemical = m.getSecondaryFluid();
-                            FluidStack primary_chemical = m.getPrimaryFluid();
-                            ItemStack acid_catalyst = m.getItemInput();
-                            ItemStack acid_result = m.getItemOutput();
-                            FluidStack slurry = m.getFluidResult();
 
+                            FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
+                            FluidTagInput secondary_chemical = new FluidTagInput(FluidTags.WATER, 1);
 
-                            vatBuilder.builder(acid_result, slurry).addItemInput(IngredientWithSize.of(acid_catalyst)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
-                                    .build(consumer, toRL("chemicalvat/convert_" + orebase.getName() + "_to_" + m.outputFluidData().getKey().getName() + "_" + m.outputFluidData().getValue().getName().toLowerCase()));
+                            FluidStack output_chemical = m.getOutputFluid();
+
+                            FluidStack primary_input = m.getPrimaryInputFluid();
+                            if(!primary_input.isEmpty()){
+                                if(primary_input.getFluid() instanceof IGFluid) {
+                                    IGFluid igFluid = (IGFluid) primary_input.getFluid();
+                                    MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                                    IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                                    primary_chemical = new FluidTagInput(tags.fluid, primary_input.getAmount());
+                                } else {
+                                    primary_chemical = new FluidTagInput(primary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, primary_input.getAmount());
+                                }
+                            }
+
+                            FluidStack secondary_input = m.getSecondaryInputFluid();
+                            if(!secondary_input.isEmpty()){
+                                if(secondary_input.getFluid() instanceof IGFluid) {
+                                    IGFluid igFluid = (IGFluid) secondary_input.getFluid();
+                                    MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                                    IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                                    secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
+                                } else {
+                                    secondary_chemical = new FluidTagInput(secondary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, secondary_input.getAmount());
+                                }
+                            }
+                            ItemStack outputItem = m.getOutputItem();
+                            ItemStack itemInput = m.getInputItem();
+
+                            log.info("Registering Chemical Vat Recipe");
+
+                            vatBuilder.builder(outputItem.isEmpty() ? new ItemStack(Items.COMMAND_BLOCK) : outputItem, output_chemical).addItemInput(IngredientWithSize.of(itemInput)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                                    .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
 
                             break;
                         case ROASTER:
