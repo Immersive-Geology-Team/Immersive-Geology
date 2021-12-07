@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:bricks_missingno"
+          "name": "immersive_geology:sheetmetal_stairs_refractory"
         }
       ],
       "conditions": [

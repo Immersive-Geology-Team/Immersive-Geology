@@ -16,8 +16,10 @@ public abstract class MaterialBrickBase extends Material
 		switch(useType)
 		{
 			//items
+			case SLAB:
 			case BRICK:
 			case BRICKS:
+			case SHEETMETAL_STAIRS:
 				return true;
 			case CLAY:
 				return hasClay();

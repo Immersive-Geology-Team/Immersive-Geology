@@ -151,7 +151,9 @@ public class IGItemModelProvider extends ItemModelProvider {
         } else if(blockItem.getBlock() instanceof IGStairsBlock) {
             IGStairsBlock stairsBlock = (IGStairsBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID,"item/"+stairsBlock.getHolderName()).getPath();
-            withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()));
+            withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName())).
+                    texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture())).
+                    texture("particle", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
         } else if(blockItem.getBlock() instanceof IGStaticBlock) {
             IGStaticBlock staticBlock = (IGStaticBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID, "item/"+staticBlock.getHolderName()).getPath();

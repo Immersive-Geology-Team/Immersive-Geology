@@ -1,3 +1,7 @@
 {
-  "parent": "immersive_geology:block/base/sheetmetal_stairs"
+  "parent": "immersive_geology:block/base/sheetmetal_stairs",
+  "textures": {
+    "all": "immersive_geology:block/greyscale/metal/sheetmetal",
+    "particle": "immersive_geology:block/greyscale/metal/sheetmetal"
+  }
 }

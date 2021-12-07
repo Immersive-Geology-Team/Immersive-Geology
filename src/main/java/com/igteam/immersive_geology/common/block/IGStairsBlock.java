@@ -22,14 +22,28 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInt
     protected final MaterialUseType blockUseType;
     protected final MaterialUseType itemDrop;
     protected final Item itemBlock;
+    private String parentTexture = "";
+
     protected Map<BlockMaterialType, Material> blockMaterialData = new HashMap<>();
+
+    public String getParentTexture() {
+        return parentTexture;
+    }
+
+    public IGStairsBlock setParentTexture(String parentTexture) {
+        this.parentTexture = parentTexture;
+        return this;
+    }
+
 
     public IGStairsBlock(String registryName, Material material, MaterialUseType useType) {
         this(registryName, material, useType, material.getMaterialBlockProperties());
     }
     public IGStairsBlock(String registryName, Material material, MaterialUseType itemDropType, Properties properties) {
-
-        super(() -> IGRegistrationHolder.getBlockByMaterial(MaterialUseType.SHEETMETAL, material).getDefaultState(),
+    //TODO fix this properly
+        super(() -> IGRegistrationHolder.getBlockByMaterial(MaterialUseType.SHEETMETAL, material) != null ?
+                    IGRegistrationHolder.getBlockByMaterial(MaterialUseType.SHEETMETAL, material).getDefaultState() :
+                        IGRegistrationHolder.getBlockByMaterial(MaterialUseType.BRICKS, material).getDefaultState(),
                 properties);
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material);
         this.setRegistryName(registryName.toLowerCase());

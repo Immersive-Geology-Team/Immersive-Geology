@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialBrickBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
@@ -308,7 +309,12 @@ public class IGVariantHolder {
             block.setCoverTexturePath("block/greyscale/metal/sheetmetal");
             block.setSideTexturePath("block/greyscale/metal/sheetmetal");
         }
-        //TODO fill data for brick and stone slabs
+
+        if (material instanceof MaterialBrickBase)
+        {
+            block.setCoverTexturePath("block/static_block/"+material.getName()+"_brick");
+            block.setSideTexturePath("block/static_block/"+material.getName()+"_brick");
+        }
 
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
@@ -319,6 +325,14 @@ public class IGVariantHolder {
         MaterialUseType type = MaterialUseType.SHEETMETAL_STAIRS;
         String holder_key = type.getName() + "_" + material.getName();
         IGStairsBlock block = new IGStairsBlock(holder_key, material,type);
+        if (material instanceof MaterialMetalBase)
+        {
+            block.setParentTexture("block/greyscale/metal/sheetmetal");
+        }
+        if (material instanceof MaterialBrickBase)
+        {
+            block.setParentTexture("block/static_block/"+material.getName()+"_brick");
+        }
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }

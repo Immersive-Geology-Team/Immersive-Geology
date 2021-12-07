@@ -256,6 +256,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
             BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_outer_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()+ "_outer"));
 
+
+            baseModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+            innerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+            outerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+
             builder.forAllStates(blockState ->
                     blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?
                         (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
