@@ -5,14 +5,17 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.IGSlabBlock;
 import com.igteam.immersive_geology.common.block.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import org.apache.logging.log4j.Logger;
@@ -274,6 +277,9 @@ public class IGVariantHolder {
                registerOreBlock(material);
                registerBasicBlock(material, type);
                 break;
+            case SLAB:
+                registerSlabBlock(material);
+                break;
             case SHEETMETAL_STAIRS:
                 registerStairsBlock(material);
                 break;
@@ -288,6 +294,22 @@ public class IGVariantHolder {
         MaterialUseType type = MaterialUseType.GEODE;
         String holder_key = type.getName() + "_" + material.getName();
         IGBaseBlock block = new IGBaseBlock(holder_key, material, type, MaterialUseType.RAW_CRYSTAL, material.getMinDrops(), material.getMaxDrops());
+        IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
+    }
+
+    private static void registerSlabBlock(Material material)
+    {
+        MaterialUseType type = MaterialUseType.SLAB;
+        String holder_key = type.getName() + "_" + material.getName();
+        IGSlabBlock block = new IGSlabBlock(holder_key, material,type);
+        if (material instanceof MaterialMetalBase)
+        {
+            block.setCoverTexturePath("block/greyscale/metal/sheetmetal");
+            block.setSideTexturePath("block/greyscale/metal/sheetmetal");
+        }
+        //TODO fill data for brick and stone slabs
+
         IGRegistrationHolder.registeredIGBlocks.put(holder_key, block);
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }

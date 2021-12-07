@@ -1,23 +1,32 @@
 package com.igteam.immersive_geology.common.block;
 
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IGSlabBlock extends SlabBlock implements IGBlockType {
+public class IGSlabBlock extends SlabBlock implements IGBlockType, IEBlockInterfaces.IColouredBlock {
 
     protected final String holder_name;
     protected final MaterialUseType blockUseType;
     protected final MaterialUseType itemDrop;
     protected final Item itemBlock;
+
+    private String sideTexturePath;
+    private String coverTexturePath;
+
     protected Map<BlockMaterialType, Material> blockMaterialData = new HashMap<>();
 
     public IGSlabBlock(String registryName, Material material, MaterialUseType useType) {
@@ -70,5 +79,35 @@ public class IGSlabBlock extends SlabBlock implements IGBlockType {
     @Override
     public Item asItem() {
         return itemBlock;
+    }
+
+    public  IGSlabBlock setSideTexturePath(String path)
+    {
+        this.sideTexturePath = path.toLowerCase();
+        return this;
+    }
+
+    public  IGSlabBlock setCoverTexturePath(String path)
+    {
+        this.coverTexturePath = path.toLowerCase();
+        return this;
+    }
+
+    public String getSideTexturePath() {
+        return sideTexturePath;
+    }
+
+    public String getCoverTexturePath() {
+        return coverTexturePath;
+    }
+
+    @Override
+    public boolean hasCustomBlockColours() {
+        return true;
+    }
+
+    @Override
+    public int getRenderColour(BlockState state, IBlockReader worldIn, BlockPos pos, int tintIndex) {
+        return getMaterial(BlockMaterialType.BASE_MATERIAL).getColor(0);
     }
 }

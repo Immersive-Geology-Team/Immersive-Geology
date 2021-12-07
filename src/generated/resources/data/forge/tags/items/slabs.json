@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:slab_aluminum",
+    "immersive_geology:slab_chromium",
+    "immersive_geology:slab_copper",
+    "immersive_geology:slab_gold",
+    "immersive_geology:slab_iron",
+    "immersive_geology:slab_lead",
+    "immersive_geology:slab_manganese",
+    "immersive_geology:slab_nickel",
+    "immersive_geology:slab_platinum",
+    "immersive_geology:slab_silver",
+    "immersive_geology:slab_cobalt",
+    "immersive_geology:slab_uranium",
+    "immersive_geology:slab_tin",
+    "immersive_geology:slab_titanium",
+    "immersive_geology:slab_tungsten",
+    "immersive_geology:slab_thorium",
+    "immersive_geology:slab_vanadium",
+    "immersive_geology:slab_zirconium",
+    "immersive_geology:slab_zinc",
+    "immersive_geology:slab_constantan",
+    "immersive_geology:slab_electrum",
+    "immersive_geology:slab_steel",
+    "immersive_geology:slab_viking_steel",
+    "immersive_geology:slab_bronze",
+    "immersive_geology:slab_arsenic",
+    "immersive_geology:slab_antimony",
+    "immersive_geology:slab_unobtainium"
+  ]
+}

@@ -4,10 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.common.block.IGBaseBlock;
-import com.igteam.immersive_geology.common.block.IGOreBlock;
-import com.igteam.immersive_geology.common.block.IGStairsBlock;
-import com.igteam.immersive_geology.common.block.IGStaticBlock;
+import com.igteam.immersive_geology.common.block.*;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -159,7 +156,13 @@ public class IGItemModelProvider extends ItemModelProvider {
             IGStaticBlock staticBlock = (IGStaticBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID, "item/"+staticBlock.getHolderName()).getPath();
             withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/static_block/" +staticBlock.getHolderName()));
-        } else
+        }  else if(blockItem.getBlock() instanceof IGSlabBlock) {
+            IGSlabBlock slabBlock = (IGSlabBlock) blockItem.getBlock();
+            String builder_name = new ResourceLocation(IGLib.MODID, "item/"+slabBlock.getHolderName()).getPath();
+            withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/slab/" +slabBlock.getBlockUseType().getName())).
+                    texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath())).
+                    texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));;
+        }else
         {
             IGBaseBlock baseBlock = (IGBaseBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID, "item/"+baseBlock.getHolderName()).getPath();

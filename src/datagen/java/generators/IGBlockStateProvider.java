@@ -5,10 +5,7 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.IGBaseBlock;
-import com.igteam.immersive_geology.common.block.IGOreBlock;
-import com.igteam.immersive_geology.common.block.IGStairsBlock;
-import com.igteam.immersive_geology.common.block.IGStaticBlock;
+import com.igteam.immersive_geology.common.block.*;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
@@ -21,6 +18,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.properties.Half;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.state.properties.StairsShape;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -61,6 +59,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
                             break;
                         case SHEETMETAL_STAIRS:
                             registerStairsBlock(blockType);
+                            break;
+                        case SLAB:
+                            registerSlabBlock(blockType);
                             break;
                         case STATIC_BLOCK:
                             registerStaticBlock(blockType);
@@ -179,6 +180,38 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
+    private void registerSlabBlock(IGBlockType blockType)
+    {
+        if(blockType instanceof IGSlabBlock) {
+            IGSlabBlock slabBlock = (IGSlabBlock) blockType;
+            VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
+            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()));
+
+            BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_top_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_top"));
+
+            BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_double_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_double"));
+
+            doubleModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+            doubleModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+
+            topModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+            topModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+
+            baseModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+            baseModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+
+            builder.forAllStates(blockState ->
+                    blockState.get(slabBlock.TYPE) == SlabType.BOTTOM ?
+                            (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
+                    blockState.get(slabBlock.TYPE) == SlabType.TOP ?
+                            (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
+                            (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
+        }
+
+    }
     private void registerDefaultBlock(IGBlockType blockType){
         if(blockType instanceof IGBaseBlock) {
             IGBaseBlock block = (IGBaseBlock) blockType;

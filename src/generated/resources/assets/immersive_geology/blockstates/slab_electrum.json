@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "type=top,waterlogged=false": {
+      "model": "immersive_geology:block/slab/slab_top_electrum",
+      "uvlock": true
+    },
+    "type=bottom,waterlogged=false": {
+      "model": "immersive_geology:block/slab/slab_electrum",
+      "uvlock": true
+    },
+    "type=double,waterlogged=false": {
+      "model": "immersive_geology:block/slab/slab_double_electrum",
+      "uvlock": true
+    },
+    "type=top,waterlogged=true": {
+      "model": "immersive_geology:block/slab/slab_top_electrum",
+      "uvlock": true
+    },
+    "type=bottom,waterlogged=true": {
+      "model": "immersive_geology:block/slab/slab_electrum",
+      "uvlock": true
+    },
+    "type=double,waterlogged=true": {
+      "model": "immersive_geology:block/slab/slab_double_electrum",
+      "uvlock": true
+    }
+  }
+}
