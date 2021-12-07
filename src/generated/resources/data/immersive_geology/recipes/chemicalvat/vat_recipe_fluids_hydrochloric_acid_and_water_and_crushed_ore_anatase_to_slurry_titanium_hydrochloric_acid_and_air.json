@@ -11,10 +11,6 @@
     "tag": "forge:hydrochloric_acid",
     "amount": 125
   },
-  "fluid_input2": {
-    "tag": "minecraft:water",
-    "amount": 125
-  },
   "energy": 1000,
   "time": 120
 }

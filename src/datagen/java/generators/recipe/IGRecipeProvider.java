@@ -194,7 +194,7 @@ public class IGRecipeProvider extends RecipeProvider {
                             int timeTaken = m.getProcessingTime();
 
                             FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
-                            FluidTagInput secondary_chemical = new FluidTagInput(FluidTags.WATER, 1);
+                            FluidTagInput secondary_chemical = null;
 
                             FluidStack output_chemical = m.getOutputFluid();
 
@@ -217,8 +217,6 @@ public class IGRecipeProvider extends RecipeProvider {
                                     MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
                                     IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
                                     secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
-                                } else {
-                                    secondary_chemical = new FluidTagInput(secondary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, secondary_input.getAmount());
                                 }
                             }
                             ItemStack outputItem = m.getOutputItem();

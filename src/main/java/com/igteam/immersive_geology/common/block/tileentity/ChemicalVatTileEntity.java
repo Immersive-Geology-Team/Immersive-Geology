@@ -187,12 +187,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
                 if(recipe!=null)
                 {
                     MultiblockProcessInMachine<VatRecipe> process = new MultiblockProcessInMachine<>(recipe, inputSlot)
-                            .setInputTanks(new int[]{0, 1});
+                            .setInputTanks(master.tanks[1].getFluidAmount() == 0 ? new int[]{0} : (master.tanks[0].getFluidAmount() == 0 ? new int[]{1} : new int[]{0,1}));
                     if(master.addProcessToQueue(process, true, true))
                     {
-                        log.warn("Pre Queue? " + master.processQueue.size());
                         master.addProcessToQueue(process, false, true);
-                        log.warn("Post Queue? " + master.processQueue.size());
                         update = true;
                     }
                 }
@@ -284,15 +282,20 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void onProcessFinish(@Nonnull MultiblockProcess<VatRecipe> process)
     {
-        log.info("Finishing?");
-        //TODO take into account reverse recipes
-        int primaryDrainAmount = process.recipe.getInputFluids().get(0).getAmount();
-        int secondaryDrainAmount = process.recipe.getInputFluids().get(1).getAmount();
-        int shrinkAmount = process.recipe.getItemInputs().get(0).getCount();
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) master();
-        master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
-        master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
+        //TODO take into account reverse recipes
+
+        int shrinkAmount = process.recipe.getItemInputs().get(0).getCount();
         master.getInventory().get(inputSlot).shrink(shrinkAmount);
+
+        int primaryDrainAmount = process.recipe.getInputFluids().get(0).getAmount();
+        master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
+
+        if(process.recipe.getInputFluids().size() == 2) {
+            int secondaryDrainAmount = process.recipe.getInputFluids().get(1).getAmount();
+            master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
+        }
+
         doProcessOutput(process.recipe.getRecipeOutput());
     }
 
@@ -445,13 +448,13 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
             FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
             FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
-            StringTextComponent primary = new StringTextComponent("Primary: " + fs1.getFluid().getRegistryName().toString());
-            StringTextComponent secondary = new StringTextComponent("Secondary: " + fs2.getFluid().getRegistryName().toString());
-            StringTextComponent output = new StringTextComponent("Output: " + fs3.getFluid().getRegistryName().toString());
+            StringTextComponent primary = new StringTextComponent("Primary: " + fs1.getDisplayName().getString());
+            StringTextComponent secondary = new StringTextComponent("Secondary: " + fs2.getDisplayName().getString());
+            StringTextComponent output = new StringTextComponent("Output: " + fs3.getDisplayName().getString());
             ItemStack input = master.getInventory().get(inputSlot);
             ItemStack outputItemStack = master.getInventory().get(outputSlot);
-            StringTextComponent inputItem = new StringTextComponent("Input Item: " + input.getItem().getRegistryName().toString());
-            StringTextComponent outputItem = new StringTextComponent("Output Item: " + outputItemStack.getItem().getRegistryName().toString());
+            StringTextComponent inputItem = new StringTextComponent("Input Item: " + input.getDisplayName().getString());
+            StringTextComponent outputItem = new StringTextComponent("Output Item: " + outputItemStack.getDisplayName().getString());
             return new ITextComponent[]{primary, secondary, output, inputItem, outputItem};
         } else {
             return null;

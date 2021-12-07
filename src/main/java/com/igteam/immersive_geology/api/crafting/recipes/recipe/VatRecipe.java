@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class VatRecipe extends IGMultiblockRecipe
@@ -33,10 +34,16 @@ public class VatRecipe extends IGMultiblockRecipe
     {
         if(!recipes.isEmpty()){
             for(VatRecipe r:recipes.values()){
-                if(r.itemInput != null && r.fluidInput1 != null && r.fluidInput2 != null) {
+                if(r.itemInput != null && r.fluidInput1 != null) {
                     if(r.itemInput.test(itemInput)) {
-                        if(r.fluidInput1.test(fluid1) && r.fluidInput2.test(fluid2)){
-                            return r;
+                        if(fluid2 != null && (!fluid2.isEmpty()) && r.fluidInput2 != null) {
+                            if (r.fluidInput1.test(fluid1) && r.fluidInput2.test(fluid2)) {
+                                return r;
+                            }
+                        } else {
+                            if (r.fluidInput1.test(fluid1)) {
+                                return r;
+                            }
                         }
                     }
                 }
@@ -44,30 +51,6 @@ public class VatRecipe extends IGMultiblockRecipe
         }
 
         return null;
-    }
-
-    public static Optional<VatRecipe> findIncompleteVatRecipe(@Nonnull FluidStack input0, @Nonnull FluidStack input1) {
-        if (input0.isEmpty() && input1.isEmpty()) {
-            return Optional.empty();
-        } else {
-            Iterator var2 = recipes.values().iterator();
-
-            while (var2.hasNext()) {
-                VatRecipe recipe = (VatRecipe) var2.next();
-                if (!input0.isEmpty() && input1.isEmpty()) {
-                    if (recipe.fluidInput1.test(input0) || recipe.fluidInput2.test(input0)) {
-                        return Optional.of(recipe);
-                    }
-                } else if (input0.isEmpty() && !input1.isEmpty()) {
-                    if (recipe.fluidInput1.test(input1) || recipe.fluidInput2.test(input1)) {
-                        return Optional.of(recipe);
-                    }
-                } else if (recipe.fluidInput1.test(input0) && recipe.fluidInput1.test(input1) || recipe.fluidInput2.test(input0) && recipe.fluidInput2.test(input1)) {
-                    return Optional.of(recipe);
-                }
-            }
-            return Optional.empty();
-        }
     }
 
     public static VatRecipe loadFromNBT(CompoundNBT nbt){
@@ -79,6 +62,7 @@ public class VatRecipe extends IGMultiblockRecipe
 
     protected final FluidTagInput fluidInput1;
     protected final FluidTagInput fluidInput2;
+
     protected final FluidStack fluidOutput;
     protected final IngredientWithSize itemInput;
     protected final ItemStack itemOutput;
@@ -90,8 +74,11 @@ public class VatRecipe extends IGMultiblockRecipe
         this.fluidOutput = fluidOutput;
         this.itemInput = itemInput;
         this.itemOutput = itemOutput;
+        this.fluidInputList = Arrays.asList(fluidInput1);
 
-        this.fluidInputList = Arrays.asList(fluidInput1, fluidInput2);
+        if(fluidInput2 != null){
+            this.fluidInputList.add(fluidInput2);
+        }
 
         this.fluidOutputList = Arrays.asList(this.fluidOutput);
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);

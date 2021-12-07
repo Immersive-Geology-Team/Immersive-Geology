@@ -34,7 +34,11 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
         IngredientWithSize input = IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
 
         FluidTagInput fluid_input1 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input1"));
-        FluidTagInput fluid_input2 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input2"));
+
+        FluidTagInput fluid_input2 = null;
+        if(json.has("fluid_input2")) {
+            fluid_input2 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input2"));
+        }
 
         ItemStack item_output = ItemStack.EMPTY;
         if(json.get("result") != null) {

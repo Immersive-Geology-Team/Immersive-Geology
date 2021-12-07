@@ -62,7 +62,7 @@ public class IGFluid extends FlowingFluid {
     protected IGFluid source;
 
     @Nullable
-    protected final Consumer<FluidAttributes.Builder> buildAttributes;
+    protected final Consumer<IGFluidAttributes.IGBuilder> buildAttributes;
     public IGFluidBlock block;
     protected IGBucketItem bucket;
     private int burnTime = -1;
@@ -76,12 +76,12 @@ public class IGFluid extends FlowingFluid {
         this(material, null, false);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes, boolean isSlurry)
+    public IGFluid(MaterialFluidBase material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSlurry)
     {
         this(material, buildAttributes, true, isSlurry);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<FluidAttributes.Builder> buildAttributes, boolean isSource, boolean isSlurry)
+    public IGFluid(MaterialFluidBase material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSource, boolean isSlurry)
     {
         this.fluidMaterial = material;
         this.fluidName = material.getName();
@@ -216,7 +216,7 @@ public class IGFluid extends FlowingFluid {
     @Override
     protected FluidAttributes createAttributes()
     {
-        FluidAttributes.Builder builder = FluidAttributes.builder(stillTex, flowingTex);
+        IGFluidAttributes.IGBuilder builder = IGFluidAttributes.builder(stillTex, flowingTex);
         if(buildAttributes!=null)
             buildAttributes.accept(builder);
         return builder.build(this);
@@ -284,7 +284,7 @@ public class IGFluid extends FlowingFluid {
         return ret;
     }
 
-    public static Consumer<IGFluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, int colPass, boolean isGas)
+    public static Consumer<IGFluidAttributes.IGBuilder> createBuilder(int density, int viscosity, Rarity rarity, int colPass, boolean isGas)
     {
         Color col = new Color(colPass);
         Color finalColor = new Color(col.getRed(), col.getGreen(), col.getBlue(), 255);

@@ -36,6 +36,7 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
 
     public VatRecipeBuilder addFluidInputs(FluidTagInput input_1, FluidTagInput input_2){
         this.addFluidTag("fluid_input1", input_1);
+        if(input_2 != null)
         this.addFluidTag("fluid_input2", input_2);
         return this;
     }

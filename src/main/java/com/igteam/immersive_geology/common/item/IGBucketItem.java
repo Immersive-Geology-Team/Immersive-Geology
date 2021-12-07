@@ -89,7 +89,6 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
             TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }
-
     }
 
     @Override
