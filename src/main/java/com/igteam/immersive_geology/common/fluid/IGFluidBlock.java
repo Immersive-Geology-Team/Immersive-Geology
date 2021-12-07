@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.common.fluid;
 
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
@@ -133,7 +134,13 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
     @Override
     public IFormattableTextComponent getTranslatedName() {
         ArrayList<String> localizedNames = new ArrayList<>();
-        localizedNames.add(I18n.format("material."+ IGLib.MODID + "." + igFluid.fluidMaterial.getName().toLowerCase()));
+        if(igFluid.fluidMaterial instanceof MaterialSlurryWrapper){
+            MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) igFluid.fluidMaterial;
+            localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
+            localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+        } else {
+            localizedNames.add(I18n.format("material." + IGLib.MODID + "." + igFluid.fluidMaterial.getName().toLowerCase()));
+        }
         TranslationTextComponent name = new TranslationTextComponent("block."+ IGLib.MODID+"."+ MaterialUseType.BUCKET.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
         return name;
     }

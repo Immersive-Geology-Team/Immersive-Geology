@@ -1,28 +1,23 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
-import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
-import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
-import blusunrize.immersiveengineering.common.blocks.metal.MetalPressTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -33,10 +28,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -49,6 +42,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -57,8 +51,7 @@ import java.util.*;
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
 public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalVatTileEntity, VatRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
-    public static final int OUTPUT_EMPTY = 4;
-    public static final int OUTPUT_FILLED = 5;
+    Logger log = ImmersiveGeology.getNewLogger();
     public FluidTank[] tanks = new FluidTank[]{
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME),
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME),
@@ -67,18 +60,18 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     public NonNullList<ItemStack> inventory;
     private LazyOptional<IItemHandler> insertionHandler;
-
-    public boolean wasActive = false;
-    public float activeTicks = 0;
-
+    protected final int inputSlot = 0;
+    protected final int outputSlot = 1;
+    public float activeTicks;
     public ItemStack holdItem;
 
     public ChemicalVatTileEntity(){
         super(ChemicalVatMultiblock.INSTANCE, 16000, true, IGTileTypes.VAT.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         holdItem = ItemStack.EMPTY;
+        activeTicks = 0;
 
-        this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 1, true, false){
+        this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 0, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
                 ChemicalVatTileEntity master = (ChemicalVatTileEntity) master(); //Need to manually tell the inserter to insert to Master tile only
@@ -86,7 +79,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
                     if (!master.isStackValid(slot, stack)) {
                         return stack;
                     } else {
-                        int offsetSlot = 1;
+                        int offsetSlot = inputSlot;
                         ItemStack currentStack = (ItemStack)master.getInventory().get(offsetSlot);
                         int accepted;
                         if (currentStack.isEmpty()) {
@@ -158,6 +151,11 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return super.getCapability(capability, facing);
     }
 
+    public float getActiveTicks() {
+        ChemicalVatTileEntity master = this.master();
+        return master.activeTicks;
+    }
+
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
     {
@@ -183,6 +181,11 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         super.tick();
 
+
+        activeTicks++;
+        activeTicks = activeTicks % 360;
+
+
         if(world.isRemote||isDummy())
             return;
 
@@ -192,38 +195,35 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         {
             if(master.tanks[0].getFluidAmount() > 0 || master.tanks[1].getFluidAmount() > 0)
             {
-                ItemStack inputStack = master.getInventory().get(1); //Input Item
+                ItemStack inputStack = master.getInventory().get(inputSlot); //Input Item
                 VatRecipe recipe = VatRecipe.findRecipe(inputStack, master.tanks[0].getFluid(), master.tanks[1].getFluid());
                 if(recipe!=null)
                 {
-                    MultiblockProcessInMachine<VatRecipe> process = new MultiblockProcessInMachine<>(recipe)
-                            .setInputTanks((master.tanks[0].getFluidAmount() > 0&&master.tanks[1].getFluidAmount() > 0)?new int[]{0, 1}: master.tanks[0].getFluidAmount() > 0?new int[]{0}: new int[]{1});
-                    if(master.addProcessToQueue(process, true))
+                    MultiblockProcessInMachine<VatRecipe> process = new MultiblockProcessInMachine<>(recipe, inputSlot)
+                            .setInputTanks(master.tanks[1].getFluidAmount() == 0 ? new int[]{0} : (master.tanks[0].getFluidAmount() == 0 ? new int[]{1} : new int[]{0,1}));
+                    if(master.addProcessToQueue(process, true, true))
                     {
-                        master.addProcessToQueue(process, false);
+                        master.addProcessToQueue(process, false, true);
                         update = true;
-                        System.out.println("Added Process to Queue!");
                     }
                 }
             }
         }
 
-        if (this.tanks[2].getFluidAmount() > 0) {
-            FluidStack out = Utils.copyFluidStackWithAmount(this.tanks[2].getFluid(), Math.min(this.tanks[2].getFluidAmount(), 80), false);
-            BlockPos outputPos = this.getPos().add(1, 0, 0).offset(this.getFacing().getOpposite());
+        if (master.tanks[2].getFluidAmount() > 0) {
+            FluidStack out = Utils.copyFluidStackWithAmount(master.tanks[2].getFluid(), Math.min(master.tanks[2].getFluidAmount(), 80), false);
+            BlockPos outputPos = master.getPos().add(1, 0, 0).offset(master.getFacing().getOpposite());
             update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos, this.getFacing()).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
                     int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false), IFluidHandler.FluidAction.EXECUTE);
-                    this.tanks[2].drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    master.tanks[2].drain(drained, IFluidHandler.FluidAction.EXECUTE);
                     return true;
                 } else {
                     return false;
                 }
             }).orElse(false);
         }
-
-        activeTicks++;
 
         if(update)
         {
@@ -279,6 +279,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public void doProcessOutput(ItemStack output)
     {
         //output = Utils.insertStackIntoInventory(this.output, output, false);
+        log.info("Outputting?");
         if(!output.isEmpty() && (!output.getItem().getRegistryName().equals(Blocks.COMMAND_BLOCK.getRegistryName()))) //I couldn't be stuffed to get it to work with EMPTY Item types, so, command blocks are our new EMPTY. ~Muddykat
             Utils.dropStackAtPos(world, getPos().add(4, 0, -1).offset(getFacing(), -2), output, getFacing().getOpposite());
     }
@@ -286,19 +287,26 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void doProcessFluidOutput(FluidStack output)
     {
-
+        log.info("Outputting? 2");
     }
 
     @Override
     public void onProcessFinish(@Nonnull MultiblockProcess<VatRecipe> process)
     {
-        int primaryDrainAmount = process.recipe.getInputFluids()[0].getAmount();
-        int secondaryDrainAmount = process.recipe.getInputFluids()[1].getAmount();
-        int shrinkAmount = process.recipe.getItemInput().getCount();
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) master();
+        //TODO take into account reverse recipes
+
+        int shrinkAmount = process.recipe.getItemInputs().get(0).getCount();
+        master.getInventory().get(inputSlot).shrink(shrinkAmount);
+
+        int primaryDrainAmount = process.recipe.getInputFluids().get(0).getAmount();
         master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
-        master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
-        master.getInventory().get(1).shrink(shrinkAmount);
+
+        if(process.recipe.getInputFluids().size() == 2) {
+            int secondaryDrainAmount = process.recipe.getInputFluids().get(1).getAmount();
+            master.tanks[1].drain(secondaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);
+        }
+
         doProcessOutput(process.recipe.getRecipeOutput());
     }
 
@@ -320,11 +328,14 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return 0;
     }
 
-
     @Override
     public NonNullList<ItemStack> getInventory()
     {
-        return this.inventory;
+        ChemicalVatTileEntity master = this.master();
+        if(master != null){
+            return master.inventory;
+        }
+        return null;
     }
 
     @Override
@@ -340,7 +351,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     @Override
     public IFluidTank[] getInternalTanks() {
-        return tanks;
+        ChemicalVatTileEntity master = this.master();
+        return master.tanks;
     }
 
     private static final BlockPos outputOffset = new BlockPos(1, 0, 2);
@@ -410,7 +422,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     @Override
     public int[] getOutputSlots() {
-        return new int[0];
+        return new int[]{outputSlot};
     }
 
     @Override
@@ -447,10 +459,26 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public ITextComponent[] getOverlayText(PlayerEntity player, RayTraceResult mop, boolean hammer) {
         if (Utils.isFluidRelatedItemStack(player.getHeldItem(Hand.MAIN_HAND))) {
             ChemicalVatTileEntity master = (ChemicalVatTileEntity)this.master();
-            FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
-            FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
-            FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
-            return new ITextComponent[]{TextUtils.formatFluidStack(fs1),TextUtils.formatFluidStack(fs2), new StringTextComponent("Input: " + master.getInventory().get(0).getDisplayName().getString() + " | Count: " + master.getInventory().get(0).getCount()), TextUtils.formatFluidStack(fs3), new StringTextComponent("Input: " + master.getInventory().get(1).getDisplayName().getString() + " | Count: " + master.getInventory().get(1).getCount())};
+            if(master != null) {
+                FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
+                FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
+                FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
+                StringTextComponent primary = new StringTextComponent("Primary: " + fs1.getDisplayName().getString());
+                StringTextComponent secondary = new StringTextComponent("Secondary: " + fs2.getDisplayName().getString());
+                StringTextComponent output = new StringTextComponent("Output: " + fs3.getDisplayName().getString());
+
+                ItemStack input = ItemStack.EMPTY;
+                ItemStack outputItemStack = ItemStack.EMPTY;
+
+                if (master.getInventory() != null) {
+                    input = master.getInventory().get(inputSlot);
+                    outputItemStack = master.getInventory().get(outputSlot);
+                }
+                StringTextComponent inputItem = new StringTextComponent("Input Item: " + input.getDisplayName().getString());
+                StringTextComponent outputItem = new StringTextComponent("Output Item: " + outputItemStack.getDisplayName().getString());
+                return new ITextComponent[]{primary, secondary, output, inputItem, outputItem};
+            }
+            return null;
         } else {
             return null;
         }
@@ -464,5 +492,4 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public boolean interact(Direction side, PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY, float hitZ) {
         return false;
     }
-
 }

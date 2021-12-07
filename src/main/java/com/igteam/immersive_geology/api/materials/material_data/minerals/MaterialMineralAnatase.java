@@ -2,25 +2,24 @@ package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGAcidProcessingMethod;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import com.mojang.datafixers.util.Pair;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 /**
  * Created by JStocke12 on 31-03-2020
@@ -139,34 +138,27 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 	}
 
 	@Override
-	public MaterialFluidBase[] getFluidsForSlurries(){
-		return new MaterialFluidBase[]{(MaterialFluidBase) MaterialEnum.HydrochloricAcid.getMaterial()};
-	}
-
-	@Override
 	public MaterialEnum getProcessedType(){
 		return MaterialEnum.Titanium;
 	}
 
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
+		//Create Titanium Slurry
+		IGVatProcessingMethod titanium_slurry_method = new IGVatProcessingMethod(1000, 120);
+		titanium_slurry_method.addItemOutput(ItemStack.EMPTY);
+		titanium_slurry_method.addFluidOutput(SlurryEnum.TITANIUM, 0, 125);
+		titanium_slurry_method.addPrimaryFluidInput(FluidEnum.HydrochloricAcid, 125);
+		titanium_slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
+		titanium_slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 
-		Pair<FluidStack, FluidStack> inputFluids = new Pair<FluidStack, FluidStack>(new FluidStack(IGRegistrationHolder.getFluidByMaterial(getFluidsForSlurries()[0], false),125),
-																new FluidStack(Fluids.WATER, 125));
-		//Next step for turning Crushed Ore to Slurry
-		IGAcidProcessingMethod crushedOreProcess = new IGAcidProcessingMethod(
-				new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE)),
-				inputFluids,
-				ItemStack.EMPTY,
-				new Pair<MaterialUseType, Material>(MaterialUseType.SLURRY,this), 125, 1000, 120);
+		IGVatProcessingMethod sedimentary_method = new IGVatProcessingMethod(1000, 240);
+		sedimentary_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Titanium.getMaterial(), MaterialUseType.DUST)));
+		sedimentary_method.addFluidOutput(FluidEnum.Brine, 500);
+		sedimentary_method.addPrimaryFluidInput(SlurryEnum.TITANIUM, 0, 125);
+		sedimentary_method.addSecondaryFluidInput(Fluids.EMPTY, 0);
+		sedimentary_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.DUST), 4));
 
-		IGAcidProcessingMethod dustProcessing = new IGAcidProcessingMethod(
-				new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.RockSalt.getMaterial(), MaterialUseType.DUST), 4),
-				new Pair<FluidStack, FluidStack>(new FluidStack(IGRegistrationHolder.getSlurryByMaterials(this,getFluidsForSlurries()[0], false), 125), FluidStack.EMPTY),
-				new ItemStack(IGRegistrationHolder.getItemByMaterial(this.getProcessedType().getMaterial(), MaterialUseType.DUST)),
-				new Pair<MaterialUseType, Material>(MaterialUseType.FLUIDS,MaterialEnum.Brine.getMaterial()), 125, 1000, 120);
-
-		return new IGMaterialProcess(crushedOreProcess, dustProcessing);
+		return new IGMaterialProcess(titanium_slurry_method, sedimentary_method);
 	}
-
 }

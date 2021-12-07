@@ -1,12 +1,19 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids.slurry;
 
 import com.igteam.immersive_geology.api.materials.Material;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
+import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
@@ -17,7 +24,12 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
     @Override
     public String getName()
     {
-        return soluteMaterial.getName() + "_"+baseFluid.getName()+"_"+"slurry";
+        return soluteMaterial.getName() + "_" + baseFluid.getName();
+    }
+
+    @Override
+    public String getDisplayName() {
+        return new TranslationTextComponent(I18n.format("fluid." + IGLib.MODID + ".slurry_" + soluteMaterial.getName() + "_" + baseFluid.getName())).getString();
     }
 
     @Override
@@ -32,6 +44,11 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
     protected final float concentration;
 
     //We need to parse through everything a slurry type will use!
+
+    public MaterialSlurryWrapper(MaterialEnum solute_material, FluidEnum base, float strength){
+        this(solute_material.getMaterial(), base.getMaterial(), strength);
+    }
+
     public MaterialSlurryWrapper(Material solute_material, MaterialFluidBase base, float strength){
         this.soluteMaterial = solute_material;
         this.baseFluid = base;
@@ -133,7 +150,22 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
         return soluteMaterial;
     }
 
-    public Material getBaseFluidMaterial() {
+    public MaterialFluidBase getBaseFluidMaterial() {
         return baseFluid;
+    }
+
+    @Override
+    public boolean hasSubtype(MaterialUseType useType)
+    {
+        switch(useType)
+        {
+            case BUCKET:
+                return hasBucket();
+            case FLASK:
+                return hasFlask();
+            case SLURRY:
+                return true;
+        }
+        return false;
     }
 }

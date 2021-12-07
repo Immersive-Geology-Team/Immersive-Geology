@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
@@ -74,15 +75,20 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
     {
         ArrayList<String> localizedNames = new ArrayList<>();
         if(getFluid() == Fluids.EMPTY){
-            localizedNames.add(I18n.format("material."+IGLib.MODID + "." + fluidMaterial.getName().toLowerCase()));
+            localizedNames.add(fluidMaterial.getDisplayName());
             TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         } else {
-            localizedNames.add(I18n.format("material."+IGLib.MODID + "." + fluidMaterial.getName().toLowerCase()));
+            if(fluidMaterial instanceof MaterialSlurryWrapper){
+                MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluidMaterial;
+                localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
+                localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+            } else {
+                localizedNames.add(fluidMaterial.getDisplayName());
+            }
             TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }
-
     }
 
     @Override

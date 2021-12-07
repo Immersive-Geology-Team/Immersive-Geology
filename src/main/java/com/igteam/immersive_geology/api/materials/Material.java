@@ -10,12 +10,14 @@ import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.Ma
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -259,15 +261,7 @@ public abstract class Material
 		return false;
 	}
 
-	public MaterialFluidBase[] getFluidsForSlurries(){
-		return new  MaterialFluidBase[]{(MaterialFluidBase) MaterialEnum.Water.getMaterial()};
-	}
-
-	public List<MaterialSlurryWrapper> getSlurries(){
-		List<MaterialSlurryWrapper> slurries = new ArrayList<>();
-		for(MaterialFluidBase fluid : getFluidsForSlurries()) {
-			slurries.add(new MaterialSlurryWrapper(this, fluid, 0.5f)); //default concentration of 50%
-		}
-		return slurries;
+	public String getDisplayName(){
+		return I18n.format("material." + IGLib.MODID + "." + this.getName().toLowerCase());
 	}
 }

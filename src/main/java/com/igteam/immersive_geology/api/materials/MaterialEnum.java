@@ -47,6 +47,8 @@ public enum MaterialEnum {
     Vanadium(new MaterialMetalVanadium()),
     Zirconium(new MaterialMetalZirconium()),
     Zinc(new MaterialMetalZinc()),
+    Sodium(new MaterialMetalSodium()),
+
 
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
@@ -100,19 +102,10 @@ public enum MaterialEnum {
     //Bricks
     Refractory(new MaterialBrickRefractory()),
 
-    //Fluids
-    //Non Volatile
-    Brine(new MaterialFluidBrine()),
-    Water(new MaterialFluidWater()),
-
-    //Volatile
-    SulfuricAcid(new MaterialFluidSulfuricAcid()),
-    HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
-    NitricAcid(new MaterialFluidNitricAcid()),
-    SodiumHydroxide(new MaterialFluidSodiumHydroxide()),
 
     //Gasses
     Hydrogen(new MaterialGasHydrogen()),
+    //TODO add sulfiric gas when gasses are being handled better! ~Muddykat
 
     //Glass
     Glass(new MaterialGlassBase());
@@ -122,16 +115,6 @@ public enum MaterialEnum {
     MaterialEnum(Material material)
     {
         this.material = material;
-    }
-
-    public static MaterialEnum[] fluidValues() {
-        ArrayList<MaterialEnum> fluidMaterials = new ArrayList<>();
-        Arrays.stream(values()).forEach((container) -> {
-            if(container.getMaterial() instanceof MaterialFluidBase){
-                fluidMaterials.add(container);
-            }
-        });
-        return fluidMaterials.toArray(new MaterialEnum[fluidMaterials.size()]);
     }
 
     public Material getMaterial(){

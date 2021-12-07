@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.api.materials.*;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 
@@ -136,5 +137,9 @@ public abstract class MaterialFluidBase extends Material
 
 	public boolean hasFlask() {
 		return false;
+	}
+
+	public String getComponentName(){
+		return I18n.format("component." + IGLib.MODID + "." + getName());
 	}
 }

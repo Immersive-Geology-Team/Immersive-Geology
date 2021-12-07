@@ -6,12 +6,20 @@
     ]
   },
   "criteria": {
+<<<<<<< HEAD
     "has_ore_chunk_vanilla_kaolinite": {
+=======
+    "has_ore_chunk_vanilla_cryolite": {
+>>>>>>> fb61d2090d0bbee4b7a59e3ebfabe39e7764113b
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
+<<<<<<< HEAD
             "item": "immersive_geology:ore_chunk_vanilla_kaolinite"
+=======
+            "item": "immersive_geology:ore_chunk_vanilla_cryolite"
+>>>>>>> fb61d2090d0bbee4b7a59e3ebfabe39e7764113b
           }
         ]
       }
@@ -25,7 +33,11 @@
   },
   "requirements": [
     [
+<<<<<<< HEAD
       "has_ore_chunk_vanilla_kaolinite",
+=======
+      "has_ore_chunk_vanilla_cryolite",
+>>>>>>> fb61d2090d0bbee4b7a59e3ebfabe39e7764113b
       "has_the_recipe"
     ]
   ]
