@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.Ma
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 
@@ -258,5 +259,9 @@ public abstract class Material
 
 	public boolean hasSlurry(){
 		return false;
+	}
+
+	public String getDisplayName(){
+		return I18n.format("material." + IGLib.MODID + "." + this.getName().toLowerCase());
 	}
 }

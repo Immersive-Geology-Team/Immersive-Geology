@@ -10,8 +10,10 @@ import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineral
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
@@ -22,7 +24,12 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
     @Override
     public String getName()
     {
-        return soluteMaterial.getName() + "_"+baseFluid.getName()+"_"+"slurry";
+        return soluteMaterial.getName() + "_" + baseFluid.getName();
+    }
+
+    @Override
+    public String getDisplayName() {
+        return new TranslationTextComponent(I18n.format("fluid." + IGLib.MODID + ".slurry_" + soluteMaterial.getName() + "_" + baseFluid.getName())).getString();
     }
 
     @Override
@@ -143,10 +150,9 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
         return soluteMaterial;
     }
 
-    public Material getBaseFluidMaterial() {
+    public MaterialFluidBase getBaseFluidMaterial() {
         return baseFluid;
     }
-
 
     @Override
     public boolean hasSubtype(MaterialUseType useType)

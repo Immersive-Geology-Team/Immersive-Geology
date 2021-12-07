@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
+import com.igteam.immersive_geology.common.fluid.helper.IGFluidAttributes;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.WaterFluid;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -125,8 +127,8 @@ public class IGFluid extends FlowingFluid {
 
                 this.bucket.setRegistryName(bucketRegName);
                 DispenserBlock.registerDispenseBehavior(this.bucket, BUCKET_DISPENSE_BEHAVIOR);
-
             }
+
             if(fluidMaterial.hasFlask()) {
                 Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
                 this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask))
@@ -282,7 +284,7 @@ public class IGFluid extends FlowingFluid {
         return ret;
     }
 
-    public static Consumer<FluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, int colPass, boolean isGas)
+    public static Consumer<IGFluidAttributes.Builder> createBuilder(int density, int viscosity, Rarity rarity, int colPass, boolean isGas)
     {
         Color col = new Color(colPass);
         Color finalColor = new Color(col.getRed(), col.getGreen(), col.getBlue(), 255);

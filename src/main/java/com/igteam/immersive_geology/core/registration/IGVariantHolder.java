@@ -132,7 +132,6 @@ public class IGVariantHolder {
 
 
     private static void registerFluidType(Material material){
-        //Slurry Type first
         if(material instanceof MaterialFluidBase) {
             MaterialFluidBase fluid_material = (MaterialFluidBase) material;
             String fluid_name = fluid_material.getName();

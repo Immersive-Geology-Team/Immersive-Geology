@@ -13,7 +13,7 @@
   "item.immersive_geology.dirty_crushed_ore": "Dirty Crushed %s Ore",
   "item.immersive_geology.crushed_ore": "Crushed %s Ore",
   "item.immersive_geology.cut_crystal": "Cut %s Crystal",
-  "item.immersive_geology.bucket": "Bucket of %s",
+  "item.immersive_geology.bucket": "Bucket of %s %s",
   "item.immersive_geology.flask": "Flask of %s",
   "item.immersive_geology.empty_flask": "Empty %s Flask",
   "item.immersive_geology.ingot": "%s Ingot",
@@ -62,7 +62,7 @@
   "fluid.immersive_geology.fluids_sulfuric_acid": "Sulfuric Acid",
   "fluid.immersive_geology.fluids_brine": "Brine",
   "fluid.immersive_geology.fluids_hubnerite_hydrochloric_acid_slurry": "Hubnerite Acid Slurry",
-  "fluid.immersive_geology.slurry_titanium_hydrochloric_acid": "Titanium Chloride",
+  "fluid.immersive_geology.slurry_titanium_hydrochloric_acid": "%s %s",
 
   "material.immersive_geology.vanilla": "Stone",
   "material.immersive_geology.marble": "Marble",
@@ -146,6 +146,6 @@
   "material.immersive_geology.vanadinite": "Vanadinite",
   "material.immersive_geology.glass": "Glass",
   "material.immersive_geology.thorium": "Thorium",
-  "material.immersive_geology.hubnerite_hydrochloric_acid_slurry": "Hubnerite Acid Slurry",
-  "material.immersive_geology.anatase_hydrochloric_acid_slurry": "Titanium Chloride"
+
+  "component.immersive_geology.hydrochloric_acid": "Chloride"
 }
