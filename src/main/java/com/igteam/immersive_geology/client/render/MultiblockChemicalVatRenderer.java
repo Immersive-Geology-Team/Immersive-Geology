@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.client.render;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.model.IGModel;
 import com.igteam.immersive_geology.client.model.IGModels;
 import com.igteam.immersive_geology.client.model.ModelChemicalVat;
@@ -74,32 +75,49 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                 float fillAmount = ((float)(tankPrimary.getFluidAmount() + tankSecondary.getFluidAmount())) / (24 * FluidAttributes.BUCKET_VOLUME);
                 if((!tankSecondary.isEmpty() || !tankPrimary.isEmpty())) {
                     transform.push();
-                    //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work!
-                    switch(master.getFacing()){
-                        case NORTH:
-                            transform.translate(-3.6D, 1.26, -2.5D);
-                            break;
-                        case WEST:
-                            transform.translate(0.45D, 1.26, 0.38D);
-                            break;
-                        case SOUTH:
-                            transform.translate(-0.2D, 1.26, 0.35D); //TODO adjust positioning
-                            break;
-                        case EAST:
-                            transform.translate(-1D,1.26D,1D); //TODO adjust positioning
-                            break;
-                    }
+                        //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work!
+                        switch(master.getFacing()){
+                            case NORTH:
+                                transform.translate(-3.6D, 1.26, -2.5D);
+                                if(!master.getIsMirrored()) {
+                                    transform.translate(4.05D, 0, 0);
+                                }
+                                break;
+                            case WEST:
+                                transform.translate(0.45D, 1.26, 0.38D);
+                                if(!master.getIsMirrored()) {
+                                    transform.translate(-4.05D, 0, 0);
+                                }
+                                break;
+                            case SOUTH:
+                                transform.translate(0.45D, 1.26, -0.65D); //TODO adjust positioning
+                                if(!master.getIsMirrored()) {
+                                    transform.translate(-4.05D, 0, 0);
+                                }
+                                break;
+                            case EAST:
+                                transform.translate(-1.5D,1.26D,1.45D);
+                                if(!master.getIsMirrored()) {
+                                    transform.translate(0, 0, -4.05D);
+                                }
+                                break;
+                        }
 
-                    ModelChemicalVat model = (ModelChemicalVat) stirrer.get();
-                    if(model != null){
-                        float ticks = te.activeTicks + partialTicks;
-                        model.ticks = 1.5F * ticks;
-                        model.render(transform, buffer.getBuffer(model.getRenderType(ModelChemicalVat.TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0f, 1.0f, 1.0f, 1.0f);
-                    }
+                        ModelChemicalVat model = (ModelChemicalVat) stirrer.get();
+                        if(model != null){
+                            float ticks = master.getActiveTicks() + partialTicks;
+                            model.ticks = ticks;
+                            transform.push();
 
-                    //display output fluid first, then choose primary over secondary.
-                    IGRippLib.renderFluid(outputFluid.isEmpty() ? (fs1.isEmpty() ? fs2.getFluid() : fs1.getFluid()): outputFluid.getFluid(), te.getWorldNonnull(), te.getPos(), transform, buffer, combinedLightIn, combinedOverlayIn, 2.15f, fillAmount);
-                    transform.pop();
+                            transform.translate(1.125,0,1.125);
+
+                            model.render(transform, buffer.getBuffer(model.getRenderType(ModelChemicalVat.TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0f, 1.0f, 1.0f, 1.0f);
+                            transform.pop();
+                        }
+
+                        IGRippLib.renderFluid(outputFluid.isEmpty() ? (fs1.isEmpty() ? fs2.getFluid() : fs1.getFluid()): outputFluid.getFluid(), te.getWorldNonnull(), te.getPos(), transform, buffer, combinedLightIn, combinedOverlayIn, 2.15f, fillAmount);
+                        //display output fluid first, then choose primary over secondary.
+                   transform.pop();
                 }
             }
             transform.pop();

@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.client.model;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.render.IGRenderTypes;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -7,6 +8,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Quaternion;
 
 public class ModelChemicalVat extends IGModel{
     public static final String ID = "chemical_stirbar";
@@ -34,14 +36,15 @@ public class ModelChemicalVat extends IGModel{
         this.origin = new ModelRenderer(this, 0, 0);
 
         this.connector = new ModelRenderer(this, 0, 0);
-        this.connector.addBox(15F, 0F, 12F, 4, 4, 10);
-        this.connector.setRotationPoint(15F,0,12F);
+        this.connector.addBox( -2F, 0, -5F, 4, 4, 10);
+        this.connector.setRotationPoint(0f, 0f, 0f);
+
         this.origin.addChild(this.connector);
     }
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha){
-        this.connector.rotateAngleY = (float) (2 * (Math.PI) + (ticks / 2D));
+        this.connector.rotateAngleY = ticks;
         this.origin.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 }

@@ -14,6 +14,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import com.igteam.immersive_geology.common.multiblocks.ChemicalVatMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -61,13 +62,14 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     private LazyOptional<IItemHandler> insertionHandler;
     protected final int inputSlot = 0;
     protected final int outputSlot = 1;
-    public float activeTicks = 0;
+    public float activeTicks;
     public ItemStack holdItem;
 
     public ChemicalVatTileEntity(){
         super(ChemicalVatMultiblock.INSTANCE, 16000, true, IGTileTypes.VAT.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         holdItem = ItemStack.EMPTY;
+        activeTicks = 0;
 
         this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 0, true, false){
             @Override
@@ -149,6 +151,11 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return super.getCapability(capability, facing);
     }
 
+    public float getActiveTicks() {
+        ChemicalVatTileEntity master = this.master();
+        return master.activeTicks;
+    }
+
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
     {
@@ -173,6 +180,12 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public void tick()
     {
         super.tick();
+
+
+        activeTicks++;
+        activeTicks = activeTicks % 360;
+
+
         if(world.isRemote||isDummy())
             return;
 
@@ -211,8 +224,6 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
                 }
             }).orElse(false);
         }
-
-        activeTicks++;
 
         if(update)
         {
@@ -321,7 +332,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public NonNullList<ItemStack> getInventory()
     {
         ChemicalVatTileEntity master = this.master();
-        return master.inventory;
+        if(master != null){
+            return master.inventory;
+        }
+        return null;
     }
 
     @Override
@@ -445,17 +459,26 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public ITextComponent[] getOverlayText(PlayerEntity player, RayTraceResult mop, boolean hammer) {
         if (Utils.isFluidRelatedItemStack(player.getHeldItem(Hand.MAIN_HAND))) {
             ChemicalVatTileEntity master = (ChemicalVatTileEntity)this.master();
-            FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
-            FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
-            FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
-            StringTextComponent primary = new StringTextComponent("Primary: " + fs1.getDisplayName().getString());
-            StringTextComponent secondary = new StringTextComponent("Secondary: " + fs2.getDisplayName().getString());
-            StringTextComponent output = new StringTextComponent("Output: " + fs3.getDisplayName().getString());
-            ItemStack input = master.getInventory().get(inputSlot);
-            ItemStack outputItemStack = master.getInventory().get(outputSlot);
-            StringTextComponent inputItem = new StringTextComponent("Input Item: " + input.getDisplayName().getString());
-            StringTextComponent outputItem = new StringTextComponent("Output Item: " + outputItemStack.getDisplayName().getString());
-            return new ITextComponent[]{primary, secondary, output, inputItem, outputItem};
+            if(master != null) {
+                FluidStack fs1 = master != null ? master.tanks[0].getFluid() : this.tanks[0].getFluid();
+                FluidStack fs2 = master != null ? master.tanks[1].getFluid() : this.tanks[1].getFluid();
+                FluidStack fs3 = master != null ? master.tanks[2].getFluid() : this.tanks[2].getFluid();
+                StringTextComponent primary = new StringTextComponent("Primary: " + fs1.getDisplayName().getString());
+                StringTextComponent secondary = new StringTextComponent("Secondary: " + fs2.getDisplayName().getString());
+                StringTextComponent output = new StringTextComponent("Output: " + fs3.getDisplayName().getString());
+
+                ItemStack input = ItemStack.EMPTY;
+                ItemStack outputItemStack = ItemStack.EMPTY;
+
+                if (master.getInventory() != null) {
+                    input = master.getInventory().get(inputSlot);
+                    outputItemStack = master.getInventory().get(outputSlot);
+                }
+                StringTextComponent inputItem = new StringTextComponent("Input Item: " + input.getDisplayName().getString());
+                StringTextComponent outputItem = new StringTextComponent("Output Item: " + outputItemStack.getDisplayName().getString());
+                return new ITextComponent[]{primary, secondary, output, inputItem, outputItem};
+            }
+            return null;
         } else {
             return null;
         }
