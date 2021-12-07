@@ -36,7 +36,10 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
         FluidTagInput fluid_input1 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input1"));
         FluidTagInput fluid_input2 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input2"));
 
-        ItemStack item_output = readOutput(json.get("result"));
+        ItemStack item_output = ItemStack.EMPTY;
+        if(json.get("result") != null) {
+            item_output = readOutput(json.get("result"));
+        }
         FluidStack fluid_output = ApiUtils.jsonDeserializeFluidStack(JSONUtils.getJsonObject(json, "fluid_result"));
 
         int energy = JSONUtils.getInt(json, "energy");

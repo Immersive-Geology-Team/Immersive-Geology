@@ -118,6 +118,11 @@ public class VatRecipe extends IGMultiblockRecipe
     }
 
     @Override
+    public List<FluidStack> getFluidOutputs() {
+        return fluidOutputList;
+    }
+
+    @Override
     public List<IngredientWithSize> getItemInputs() {
         return Arrays.asList(itemInput);
     }
@@ -127,8 +132,22 @@ public class VatRecipe extends IGMultiblockRecipe
         return this.itemOutput;
     }
 
+    @Override
+    public int getTotalProcessTime() {
+        return this.totalProcessTime.get();
+    }
+
+    @Override
+    public int getTotalProcessEnergy() {
+        return this.totalProcessEnergy.get();
+    }
+
+    @Override
+    public NonNullList<ItemStack> getItemOutputs() {
+        return outputList;
+    }
+
     public List<FluidTagInput> getInputFluids(){
         return fluidInputList;
     }
-
 }

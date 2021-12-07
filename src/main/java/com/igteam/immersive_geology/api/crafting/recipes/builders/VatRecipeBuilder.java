@@ -17,7 +17,11 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
 
     public static VatRecipeBuilder builder(ItemStack result, FluidStack fluid_result)
     {
-        return new VatRecipeBuilder().addResult(result).addFluid("fluid_result", fluid_result);
+        VatRecipeBuilder builder = new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
+        if(!result.isEmpty()){
+            builder.addResult(result);
+        }
+        return builder;
     }
 
     public static VatRecipeBuilder builder(FluidStack fluid_result)

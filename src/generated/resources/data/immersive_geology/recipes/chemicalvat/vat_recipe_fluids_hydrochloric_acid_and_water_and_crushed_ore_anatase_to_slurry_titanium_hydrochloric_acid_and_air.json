@@ -1,8 +1,5 @@
 {
   "type": "immersive_geology:chemicalvat",
-  "result": {
-    "item": "minecraft:command_block"
-  },
   "fluid_result": {
     "fluid": "immersive_geology:slurry_titanium_hydrochloric_acid",
     "amount": 125

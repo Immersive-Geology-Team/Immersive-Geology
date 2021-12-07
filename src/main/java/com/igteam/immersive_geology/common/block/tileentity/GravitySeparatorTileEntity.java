@@ -74,23 +74,24 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public void tick() {
         super.tick();
-        if(!processQueue.isEmpty()){
-            if(this.tank.isEmpty()){
-
-            } else {
-                this.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+        GravitySeparatorTileEntity master = this.master();
+        if(!master.processQueue.isEmpty()){
+            if(!master.tank.isEmpty()){
+                master.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
             }
         }
     }
 
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
-        this.tank.readFromNBT(nbt.getCompound("tank"));
+        GravitySeparatorTileEntity master = this.master();
+        master.tank.readFromNBT(nbt.getCompound("tank"));
     }
 
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
-        CompoundNBT tankTag = this.tank.writeToNBT(new CompoundNBT());
+        GravitySeparatorTileEntity master = this.master();
+        CompoundNBT tankTag = master.tank.writeToNBT(new CompoundNBT());
         nbt.put("tank", tankTag);
     }
 

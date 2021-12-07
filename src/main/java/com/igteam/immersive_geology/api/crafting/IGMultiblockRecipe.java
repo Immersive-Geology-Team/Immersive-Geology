@@ -10,8 +10,8 @@ import java.util.function.DoubleSupplier;
 
 public abstract class IGMultiblockRecipe extends MultiblockRecipe
 {
-    Lazy<Integer> totalProcessTime;
-    Lazy<Integer> totalProcessEnergy;
+    protected Lazy<Integer> totalProcessTime;
+    protected Lazy<Integer> totalProcessEnergy;
     protected IGMultiblockRecipe(ItemStack outputDummy, IRecipeType<?> type, ResourceLocation id){
         super(outputDummy, type, id);
     }
