@@ -9,6 +9,7 @@ import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBa
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 
 public abstract class MaterialMineralBase extends Material
