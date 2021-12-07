@@ -1,7 +1,12 @@
 {
   "replace": false,
   "values": [
+<<<<<<< HEAD
     "immersive_geology:bricks_missingno",
     "immersive_geology:brick_missingno"
+=======
+    "immersive_geology:bricks_refractory",
+    "immersive_geology:brick_refractory"
+>>>>>>> 8917f12e28466f9389c9749aa7eed9cb524570ee
   ]
 }

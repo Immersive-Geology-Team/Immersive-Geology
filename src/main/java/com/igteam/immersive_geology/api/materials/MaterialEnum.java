@@ -92,6 +92,7 @@ public enum MaterialEnum {
     Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
     Unobtainium(new MaterialMetalUnobtainium()),
+    Kaolinite(new MaterialMineralKaolinite()),
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),
