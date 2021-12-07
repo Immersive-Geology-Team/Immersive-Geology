@@ -21,7 +21,7 @@ public enum MaterialUseType {
     STONE(true, ItemSubGroup.natural),          //Gives Chunks
     GEODE(true, ItemSubGroup.natural),          //Gives Crystals
     BRICKS(true, ItemSubGroup.processed),
-
+    SLAB(true, ItemSubGroup.processed), //Gives slab
     //Items
     CHUNK(false, ItemSubGroup.natural),
     ROCK_BIT(false, ItemSubGroup.natural),
