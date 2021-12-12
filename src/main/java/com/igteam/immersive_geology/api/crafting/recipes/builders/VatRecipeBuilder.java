@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.common.crafting.Serializers;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
@@ -32,8 +33,11 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
     }
 
     public VatRecipeBuilder addItemInput(IngredientWithSize input){
-        if(Arrays.stream(input.getMatchingStacks()).noneMatch(ItemStack::isEmpty))
-        this.addIngredient("item_input", input);
+        if(Arrays.stream(input.getMatchingStacks()).noneMatch(ItemStack::isEmpty)) {
+            this.addIngredient("item_input", input);
+        } else {
+            this.addIngredient("item_input", IngredientWithSize.of(new ItemStack(Items.AIR)));
+        }
         return this;
     }
 
