@@ -150,5 +150,6 @@
   "material.immersive_geology.sodium": "Sodium",
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
-  "component.immersive_geology.sulfuric_acid": "Sulphide"
+  "component.immersive_geology.sulfuric_acid": "Sulfate",
+  "component.immersive_geology.nitric_acid": "Nitrate"
 }

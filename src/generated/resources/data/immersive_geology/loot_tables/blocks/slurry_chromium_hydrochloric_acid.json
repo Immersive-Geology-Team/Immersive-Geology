@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:slab_sodium"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

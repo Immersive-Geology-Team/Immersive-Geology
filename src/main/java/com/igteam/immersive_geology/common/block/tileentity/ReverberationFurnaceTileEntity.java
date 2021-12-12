@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
@@ -13,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -20,8 +23,11 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
 public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<ReverberationFurnaceTileEntity> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
@@ -32,6 +38,7 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
     public int lastBurnTime;
     //public final ReverberationFurnaceTileEntity.FurnaceState guiState;
     //private final Supplier<AlloyRecipe> cachedModel;
+    private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(ReverberationFurnaceTileEntity::getShape);
 
     public ReverberationFurnaceTileEntity() {
         super(ReverberationFurnaceMultiblock.INSTANCE, IGTileTypes.REV_FURNACE.get(), true);
@@ -56,8 +63,9 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
         return (IEBlockInterfaces.IInteractionObjectIE) this.master();
     }
 
-    public VoxelShape getBlockBounds(@Nullable ISelectionContext ctx) {
-        return VoxelShapes.fullCube();
+    @Override
+    public VoxelShape getBlockBounds(ISelectionContext ctx) {
+        return SHAPES.get(this.posInMultiblock, Pair.of(getFacing(), getIsMirrored()));
     }
 
     public void tick() {
@@ -173,6 +181,78 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
 //            return !output.isEmpty() && (!ItemStack.areItemsEqual(output, recipe.output) || output.getCount() + recipe.output.getCount() > this.getSlotLimit(3)) ? null : recipe;
 //        }
 //    }
+
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
+        final int bX = posInMultiblock.getX();
+        final int bY = posInMultiblock.getY();
+        final int bZ = posInMultiblock.getZ();
+        if (bX < 3) {
+            if (bY == 2) {
+                if (bZ == 0) {
+                    if (bX == 0) {
+                        return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.25, 1.0, 0.5, 1.0));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.25, 1.0, 0.5, 1.0));
+                }
+                if (bZ == 2 || bZ == 3) {
+                    if (bX == 0) {
+                        return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.0, 1.0, 0.5, 1.0));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+
+                }
+                if (bZ == 5) {
+                    if (bX == 0) {
+                        return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.0, 1.0, 0.5, 0.75));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 0.75));
+
+                }
+            }
+            if (bY < 2) {
+                if (bZ == 0) {
+                    if (bX == 0) {
+                        return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.25, 1.0, 1.0, 1.0));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.25, 1.0, 1.0, 1.0));
+
+                }
+                if (bZ == 5) {
+                    if (bX == 0) {
+                        return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.0, 1.0, 1.0, 0.75));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.75));
+                }
+
+                if (bX == 0) {
+                    if (bY == 0 && (bZ == 1 || bZ == 4)) {
+                        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+                    }
+                    return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.0, 1.0, 1.0, 1.0));
+                }
+
+            }
+        }
+        if (bY >= 6 && bY < 10) {
+            if (bX == 3) {
+                return Arrays.asList(new AxisAlignedBB(0.5, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+            if (bX == 5) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 0.5, 1.0, 1.0));
+            }
+            if (bX == 4) {
+                if (bZ == 5 || bZ == 2) {
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.5));
+                }
+                if (bZ == 0 || bZ == 3) {
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
+
+                }
+            }
+        }
+        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+
+    }
 
     public int[] getCurrentProcessesStep() {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();

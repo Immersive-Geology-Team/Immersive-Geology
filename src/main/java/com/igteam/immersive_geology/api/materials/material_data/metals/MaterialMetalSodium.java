@@ -137,6 +137,11 @@ public class MaterialMetalSodium extends MaterialMetalBase
 		return false;
 	}
 
+	public boolean hasSlab()
+	{
+		return false;
+	}
+
 	public boolean hasStairs() { return false; }
 
 	public boolean hasDust()
