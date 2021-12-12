@@ -13,6 +13,7 @@ import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.
 import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSodiumHydroxide;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSulfuricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasHydrogen;
+import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasSulfuric;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidArsenic;
 import com.igteam.immersive_geology.api.materials.material_data.metals.*;
@@ -84,6 +85,7 @@ public enum MaterialEnum {
     Magnetite(new MaterialMineralMagnetite()),
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
+    SaltPeter(new MaterialMineralSaltpeter()),
     Thorianite(new MaterialMineralThorianite()),
     Thorite(new MaterialMineralThorite()),
     Uraninite(new MaterialMineralUraninite()),
@@ -105,6 +107,7 @@ public enum MaterialEnum {
 
     //Gasses
     Hydrogen(new MaterialGasHydrogen()),
+    Sulfuric(new MaterialGasSulfuric()),
     //TODO add sulfiric gas when gasses are being handled better! ~Muddykat
 
     //Glass

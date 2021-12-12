@@ -1,7 +1,15 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids.chemical;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
@@ -110,5 +118,19 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
     @Override
     public boolean hasBucket() {
         return false;
+    }
+
+    @Override
+    public IGMaterialProcess getProcessingMethod()
+    {
+        //TODO -- rocksalt + water + sulf acid to get HCL acid
+        IGVatProcessingMethod sulfuric_brine_method = new IGVatProcessingMethod(1000, 120);
+        //FIXME -- Na sulfate as output
+        sulfuric_brine_method.addItemOutput(ItemStack.EMPTY);
+        sulfuric_brine_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
+        sulfuric_brine_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
+        sulfuric_brine_method.addSecondaryFluidInput(FluidEnum.Brine, 125);
+        sulfuric_brine_method.addItemInput(ItemStack.EMPTY);
+        return new IGMaterialProcess(sulfuric_brine_method);
     }
 }

@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:crafting/ingot_iron_blasting6"
+      "immersive_geology:crafting/ingot_iron_blasting7"
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_saltpeter": {
+    "has_ore_chunk_vanilla_pyrite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_saltpeter"
+            "item": "immersive_geology:ore_chunk_vanilla_pyrite"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:crafting/ingot_iron_blasting6"
+        "recipe": "immersive_geology:crafting/ingot_iron_blasting7"
       }
     }
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_saltpeter",
+      "has_ore_chunk_vanilla_pyrite",
       "has_the_recipe"
     ]
   ]

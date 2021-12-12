@@ -15,6 +15,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -160,7 +161,61 @@ public class IGRecipeProvider extends RecipeProvider {
 //                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
 //            }
         }
+        for (FluidEnum fluidwrap: FluidEnum.values())
+        {
 
+            if (fluidwrap.getMaterial() instanceof MaterialSlurryWrapper) {continue;} //slurries registered not here
+            VatRecipeBuilder vatBuilder = new VatRecipeBuilder();
+
+            if (fluidwrap.getMaterial().getProcessingMethod() != null) {
+                IGMaterialProcess processess = fluidwrap.getMaterial().getProcessingMethod();
+                List<IGProcessingMethod> data = processess.getData();
+                for (IGProcessingMethod method : data) {
+                    //TODO -- Make fluids to be created not in vat
+                    //Assume we've talk only ACIDS
+                    if (method.getKey() != ProcessingMethod.ACID) continue;
+                    IGVatProcessingMethod m = (IGVatProcessingMethod) method;
+                    int energyCost = m.getEnergyCost();
+                    int timeTaken = m.getProcessingTime();
+
+                    FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
+                    FluidTagInput secondary_chemical = null;
+
+                    FluidStack output_chemical = m.getOutputFluid();
+
+                    FluidStack primary_input = m.getPrimaryInputFluid();
+                    if(!primary_input.isEmpty()){
+                        if(primary_input.getFluid() instanceof IGFluid) {
+                            IGFluid igFluid = (IGFluid) primary_input.getFluid();
+                            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                            primary_chemical = new FluidTagInput(tags.fluid, primary_input.getAmount());
+                        } else {
+                            primary_chemical = new FluidTagInput(primary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, primary_input.getAmount());
+                        }
+                    }
+
+                    FluidStack secondary_input = m.getSecondaryInputFluid();
+                    if(!secondary_input.isEmpty()){
+                        if(secondary_input.getFluid() instanceof IGFluid) {
+                            IGFluid igFluid = (IGFluid) secondary_input.getFluid();
+                            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                            secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
+                        }
+                    }
+                    ItemStack outputItem = m.getOutputItem();
+                    ItemStack itemInput = m.getInputItem();
+
+                    log.info("Registering Chemical Vat Recipe");
+
+                    vatBuilder.builder(outputItem, output_chemical).addItemInput(IngredientWithSize.of(itemInput)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                            .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
+
+                }
+            }
+
+        }
         for(MaterialEnum orewrap : MaterialEnum.minerals()) {
             MaterialMineralBase orebase = (MaterialMineralBase) orewrap.getMaterial();
             //Gravity Separator
