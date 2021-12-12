@@ -272,16 +272,15 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(getPos().add(3, 0, -1).offset(getFacing(), -2), getFacing()),
+            () -> new DirectionalBlockPos(getPos().add(3, 0, -1), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
     public void doProcessOutput(ItemStack output)
     {
-        //output = Utils.insertStackIntoInventory(this.output, output, false);
-        log.info("Outputting?");
-        if(!output.isEmpty() && (!output.getItem().getRegistryName().equals(Blocks.COMMAND_BLOCK.getRegistryName()))) //I couldn't be stuffed to get it to work with EMPTY Item types, so, command blocks are our new EMPTY. ~Muddykat
-            Utils.dropStackAtPos(world, getPos().add(4, 0, -1).offset(getFacing(), -2), output, getFacing().getOpposite());
+        output = Utils.insertStackIntoInventory(this.output, output, false);
+        if(!output.isEmpty())
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(getPos().add(3, 0, -1), getFacing()).getPosition(), output, getFacing().getOpposite());
     }
 
     @Override

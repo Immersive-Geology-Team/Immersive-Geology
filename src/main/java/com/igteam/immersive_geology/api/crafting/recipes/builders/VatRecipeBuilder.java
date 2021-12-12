@@ -9,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.Arrays;
+
 public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
 
     public VatRecipeBuilder(){
@@ -30,6 +32,7 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
     }
 
     public VatRecipeBuilder addItemInput(IngredientWithSize input){
+        if(Arrays.stream(input.getMatchingStacks()).noneMatch(ItemStack::isEmpty))
         this.addIngredient("item_input", input);
         return this;
     }
