@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/ferberite"
+    "tag": "forge:dirty_chunk/ferberite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_ferberite"

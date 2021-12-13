@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/wolframite"
+    "tag": "forge:dirty_chunk/wolframite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_wolframite"

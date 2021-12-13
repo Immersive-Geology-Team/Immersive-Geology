@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.common.crafting.fluidaware.IngredientFluidStack;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
@@ -35,7 +36,7 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
         IngredientWithSize input = IngredientWithSize.of(ItemStack.EMPTY);
 
         if(json.get("item_input") != null)
-            IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
+            input = IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
 
         FluidTagInput fluid_input1 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input1"));
 
@@ -76,6 +77,7 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public void write(PacketBuffer buffer, VatRecipe recipe) {
+        if(!recipe.getItemInputs().isEmpty())
         recipe.getItemInputs().get(0).write(buffer);
 
         List<FluidTagInput> inputFluids = recipe.getInputFluids();

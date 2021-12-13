@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:ore_chunk_vanilla_pyrite"
+    "item": "immersive_geology:ore_chunk_vanilla_saltpeter"
   },
   "result": "immersive_geology:ingot_iron",
   "experience": 0.0,

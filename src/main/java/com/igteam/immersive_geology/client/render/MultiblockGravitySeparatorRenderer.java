@@ -40,8 +40,6 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
     @Override
     public void render(GravitySeparatorTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         if(te != null && !te.isDummy()) {
-
-
             transform.push();
             Direction rotation = te.getFacing();
             switch (rotation) {

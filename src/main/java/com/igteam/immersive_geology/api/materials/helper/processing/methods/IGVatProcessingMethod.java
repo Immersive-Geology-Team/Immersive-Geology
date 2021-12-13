@@ -18,7 +18,15 @@ public class IGVatProcessingMethod extends IGProcessingMethod {
     private ItemStack outputItem, inputItem;
     private FluidStack primaryInputFluid, secondaryInputFluid, outputFluid;
 
+    private IGVatProcessingMethod reversedFluids;
+
     public IGVatProcessingMethod(int energyCost, int processingTime) {
+        this.energyCost = energyCost;
+        this.processingTime = processingTime;
+        this.reversedFluids = new IGVatProcessingMethod(energyCost, processingTime, true);
+    }
+
+    private IGVatProcessingMethod(int energyCost, int processingTime, boolean reversed){
         this.energyCost = energyCost;
         this.processingTime = processingTime;
     }
@@ -40,56 +48,67 @@ public class IGVatProcessingMethod extends IGProcessingMethod {
 
     public IGVatProcessingMethod addItemOutput(ItemStack inputItem){
         this.outputItem = inputItem.copy();
+        this.reversedFluids.outputItem = inputItem.copy();
         return this;
     }
 
     public IGVatProcessingMethod addFluidOutput(FluidEnum fluid, int fluidOutputAmount){
         this.outputFluid = new FluidStack(IGRegistrationHolder.getFluidByMaterial(fluid.getMaterial(), false), fluidOutputAmount);
+        this.reversedFluids.outputFluid = outputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addFluidOutput(SlurryEnum slurry, int entry, int fluidOutputAmount){
         this.outputFluid = new FluidStack(IGRegistrationHolder.getSlurryByMaterials(slurry.getEntries().get(entry).getSoluteMaterial(), slurry.getEntries().get(entry).getBaseFluidMaterial(), false), fluidOutputAmount);
+        this.reversedFluids.outputFluid = outputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addFluidOutput(Fluid fluid, int fluidOutputAmount){
         this.outputFluid = new FluidStack(fluid, fluidOutputAmount);
+        this.reversedFluids.outputFluid = outputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addPrimaryFluidInput(SlurryEnum slurry, int entry, int primaryFluidAmount){
         this.primaryInputFluid = new FluidStack(IGRegistrationHolder.getSlurryByMaterials(slurry.getEntries().get(entry).getSoluteMaterial(), slurry.getEntries().get(entry).getBaseFluidMaterial(), false), primaryFluidAmount);
+        this.reversedFluids.secondaryInputFluid = primaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addPrimaryFluidInput(Fluid fluid, int primaryFluidAmount){
         this.primaryInputFluid = new FluidStack(fluid, primaryFluidAmount);
+        this.reversedFluids.secondaryInputFluid = primaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addPrimaryFluidInput(FluidEnum fluid, int primaryFluidAmount){
         this.primaryInputFluid = new FluidStack(IGRegistrationHolder.getFluidByMaterial(fluid.getMaterial(), false), primaryFluidAmount);
+        this.reversedFluids.secondaryInputFluid = primaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addSecondaryFluidInput(SlurryEnum slurry, int entry, int secondaryFluidAmount){
         this.secondaryInputFluid = new FluidStack(IGRegistrationHolder.getSlurryByMaterials(slurry.getEntries().get(entry).getSoluteMaterial(), slurry.getEntries().get(entry).getBaseFluidMaterial(), false), secondaryFluidAmount);
+        this.reversedFluids.primaryInputFluid = secondaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addSecondaryFluidInput(FluidEnum fluid, int secondaryFluidAmount){
         this.secondaryInputFluid = new FluidStack(IGRegistrationHolder.getFluidByMaterial(fluid.getMaterial(), false), secondaryFluidAmount);
+        this.reversedFluids.primaryInputFluid = secondaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addSecondaryFluidInput(Fluid fluid, int secondaryFluidAmount){
         this.secondaryInputFluid = new FluidStack(fluid, secondaryFluidAmount);
+        this.reversedFluids.primaryInputFluid = secondaryInputFluid.copy();
         return this;
     }
 
     public IGVatProcessingMethod addItemInput(ItemStack input){
         this.inputItem = input.copy();
+        this.reversedFluids.inputItem = inputItem.copy();
         return this;
     }
 
@@ -111,5 +130,9 @@ public class IGVatProcessingMethod extends IGProcessingMethod {
 
     public FluidStack getOutputFluid() {
         return outputFluid;
+    }
+
+    public IGVatProcessingMethod getReversedProcess(){
+        return this.reversedFluids;
     }
 }

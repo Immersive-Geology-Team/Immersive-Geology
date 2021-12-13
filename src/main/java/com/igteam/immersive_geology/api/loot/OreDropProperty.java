@@ -21,6 +21,7 @@ import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class OreDropProperty extends LootFunction {
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "variable_ore_drops");
@@ -32,8 +33,8 @@ public class OreDropProperty extends LootFunction {
     @Override
     protected ItemStack doApply(ItemStack itemStack, LootContext lootContext) {
         Item tool = lootContext.get(LootParameters.TOOL).getItem();
-        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(lootContext.get(LootParameters.TOOL));
-
+        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(Objects.requireNonNull(lootContext.get(LootParameters.TOOL)));
+        //used to use lootContext without wrapper, wrapper should prevent some issues, but if we have drop issues, check here
 
         if(tool instanceof PickaxeItem) {
             PickaxeItem pick = (PickaxeItem) tool;

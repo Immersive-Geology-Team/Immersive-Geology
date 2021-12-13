@@ -1,11 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-<<<<<<< HEAD
-    "item": "immersive_geology:ore_chunk_vanilla_kaolinite"
-=======
     "item": "immersive_geology:ore_chunk_vanilla_cryolite"
->>>>>>> fb61d2090d0bbee4b7a59e3ebfabe39e7764113b
   },
   "result": "immersive_geology:ingot_aluminum",
   "experience": 0.0,

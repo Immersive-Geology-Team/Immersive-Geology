@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/chromite"
+    "tag": "forge:dirty_chunk/chromite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_chromite"

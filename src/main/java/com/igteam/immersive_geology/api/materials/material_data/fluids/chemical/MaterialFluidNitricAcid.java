@@ -1,10 +1,23 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids.chemical;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.common.IEContent;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -115,5 +128,20 @@ public class MaterialFluidNitricAcid extends MaterialFluidBase {
     @Override
     public boolean hasBucket() {
         return false;
+    }
+
+
+    @Override
+    public IGMaterialProcess getProcessingMethod()
+    {
+        IGVatProcessingMethod sulfuric_saltpeter_method = new IGVatProcessingMethod(1000, 120);
+        //FIXME -- K sulfate as output
+        sulfuric_saltpeter_method.addItemOutput(ItemStack.EMPTY);
+        sulfuric_saltpeter_method.addFluidOutput(FluidEnum.NitricAcid, 125);
+        sulfuric_saltpeter_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
+        sulfuric_saltpeter_method.addSecondaryFluidInput(Fluids.WATER, 125);
+        //FIXME -- wiggle it to have just forge:dusts/saltpeter as intput
+        sulfuric_saltpeter_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.SaltPeter.getMaterial(), MaterialUseType.DUST), 1));
+        return new IGMaterialProcess(sulfuric_saltpeter_method);
     }
 }

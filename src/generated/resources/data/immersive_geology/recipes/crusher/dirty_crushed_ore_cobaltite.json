@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/cobaltite"
+    "tag": "forge:dirty_chunk/cobaltite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_cobaltite"

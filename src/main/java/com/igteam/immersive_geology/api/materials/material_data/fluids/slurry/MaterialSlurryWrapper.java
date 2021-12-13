@@ -93,7 +93,7 @@ public class MaterialSlurryWrapper extends MaterialFluidBase {
 
     @Override
     public int getColor(int temperature) {
-        return 0;
+        return (baseFluid.getColor(0) * 128 + soluteMaterial.getColor(0) * (255 - 128)) / 255;
     }
 
     @Override

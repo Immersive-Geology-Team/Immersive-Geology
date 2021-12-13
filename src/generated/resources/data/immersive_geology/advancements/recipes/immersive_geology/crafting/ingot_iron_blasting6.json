@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_pyrite": {
+    "has_ore_chunk_vanilla_saltpeter": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_pyrite"
+            "item": "immersive_geology:ore_chunk_vanilla_saltpeter"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_pyrite",
+      "has_ore_chunk_vanilla_saltpeter",
       "has_the_recipe"
     ]
   ]
