@@ -181,7 +181,7 @@ public class IGTags {
 
     public static ResourceLocation getGem(String type)
     {
-        return forgeLoc("gems/"+type);
+        return forgeLoc("crystals/"+type);
     }
 
     public static ResourceLocation getStorageBlock(String type)
@@ -190,11 +190,11 @@ public class IGTags {
     }
 
     public static ResourceLocation getOreClumps(String type){
-        return forgeLoc("clumps/"+type);
+        return forgeLoc("clean_chunk/"+type);
     }
 
     public static ResourceLocation getDirtyOre(String type){
-        return forgeLoc("shards/"+type);
+        return forgeLoc("dirty_chunk/"+type);
     }
 
     public static ResourceLocation getDust(String type)

@@ -90,7 +90,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                         case CUT_CRYSTAL:
                             if (container.getMaterial().hasSubtype(useType)) {
                                 this.tag(Tags.Items.GEMS).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
-                                this.tag(requestCustomTag("gems", container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
+                                this.tag(requestCustomTag("crystals", container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
 
                                 this.tag(requestUsetypeTag(useType)).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
                                 this.tag(requestUsetypeTag(useType, container.getMaterial())).add(IGRegistrationHolder.getItemByMaterial(container.getMaterial(), useType));
@@ -188,10 +188,10 @@ public class IGItemTagProvider extends ItemTagsProvider {
     }
 
     private ITag.INamedTag<Item> requestOreUsetypeTag(Material material) {
-        return TagsIG.itemTagForge("ores/" + material.getName().toLowerCase());
+        return TagsIG.itemTagForge("ore_bearing/" + material.getName().toLowerCase());
     }
     private ITag.INamedTag<Item> requestOreUsetypeTag() {
-        return TagsIG.itemTagForge("ores");
+        return TagsIG.itemTagForge("ore_bearing");
     }
 
     private TagsProvider.Builder<Item> tag(ITag.INamedTag<Item> tag) {

@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/uraninite"
+    "tag": "forge:dirty_chunk/uraninite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_uraninite"

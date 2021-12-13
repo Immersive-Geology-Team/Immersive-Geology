@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/pyrite"
+    "tag": "forge:dirty_chunk/pyrite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_pyrite"

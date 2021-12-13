@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "tag": "forge:shards/kaolinite"
+    "tag": "forge:dirty_chunk/kaolinite"
   },
   "input": {
     "item": "immersive_geology:ore_chunk_vanilla_kaolinite"
