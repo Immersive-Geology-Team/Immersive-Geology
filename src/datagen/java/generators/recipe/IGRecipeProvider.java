@@ -205,11 +205,11 @@ public class IGRecipeProvider extends RecipeProvider {
                         }
                     }
                     ItemStack outputItem = m.getOutputItem();
-                    ItemStack itemInput = m.getInputItem();
+                    ItemStack itemInput = m.getInputItem() == null ? ItemStack.EMPTY : m.getInputItem();
 
                     log.info("Registering Chemical Vat Recipe");
 
-                    vatBuilder.builder(outputItem, output_chemical).addItemInput(IngredientWithSize.of(itemInput.copy())).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                    vatBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
                             .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
 
                 }
@@ -275,11 +275,11 @@ public class IGRecipeProvider extends RecipeProvider {
                                 }
                             }
                             ItemStack outputItem = m.getOutputItem();
-                            ItemStack itemInput = m.getInputItem();
+                            ItemStack itemInput = m.getInputItem() != null ? m.getInputItem() : ItemStack.EMPTY;
 
                             log.info("Registering Chemical Vat Recipe");
 
-                            vatBuilder.builder(outputItem, output_chemical).addItemInput(IngredientWithSize.of(itemInput)).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                            vatBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
                                     .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
 
                             break;

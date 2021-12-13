@@ -43,9 +43,8 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
         FluidTagInput fluid_input2 = null;
         if(json.has("fluid_input2")) {
             fluid_input2 = FluidTagInput.deserialize(JSONUtils.getJsonObject(json, "fluid_input2"));
-        } else {
-            ImmersiveGeology.getNewLogger().warn("Fluid 2 is NULL");
         }
+
         ItemStack item_output = ItemStack.EMPTY;
         if(json.get("result") != null) {
             item_output = readOutput(json.get("result"));
@@ -78,6 +77,7 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public void write(PacketBuffer buffer, VatRecipe recipe) {
+        if(!recipe.getItemInputs().isEmpty())
         recipe.getItemInputs().get(0).write(buffer);
 
         List<FluidTagInput> inputFluids = recipe.getInputFluids();

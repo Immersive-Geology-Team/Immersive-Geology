@@ -295,8 +295,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) master();
         //TODO take into account reverse recipes
 
-        int shrinkAmount = process.recipe.getItemInputs().get(0).getCount();
-        master.getInventory().get(inputSlot).shrink(shrinkAmount);
+        if(!process.recipe.getItemInputs().isEmpty()) {
+            int shrinkAmount = process.recipe.getItemInputs().get(0).getCount();
+            master.getInventory().get(inputSlot).shrink(shrinkAmount);
+        }
 
         int primaryDrainAmount = process.recipe.getInputFluids().get(0).getAmount();
         master.tanks[0].drain(primaryDrainAmount, IFluidHandler.FluidAction.EXECUTE);

@@ -4,8 +4,11 @@
     "fluid": "immersive_geology:fluids_hydrochloric_acid",
     "amount": 125
   },
+  "item_input": {
+    "item": "immersive_geology:dust_rocksalt"
+  },
   "fluid_input1": {
-    "tag": "forge:brine",
+    "tag": "minecraft:water",
     "amount": 125
   },
   "fluid_input2": {

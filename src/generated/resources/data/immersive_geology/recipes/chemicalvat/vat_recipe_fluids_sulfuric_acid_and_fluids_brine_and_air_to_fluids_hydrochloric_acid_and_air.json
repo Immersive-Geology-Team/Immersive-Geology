@@ -4,10 +4,6 @@
     "fluid": "immersive_geology:fluids_hydrochloric_acid",
     "amount": 125
   },
-  "item_input": {
-    "count": 0,
-    "base_ingredient": []
-  },
   "fluid_input1": {
     "tag": "forge:sulfuric_acid",
     "amount": 125

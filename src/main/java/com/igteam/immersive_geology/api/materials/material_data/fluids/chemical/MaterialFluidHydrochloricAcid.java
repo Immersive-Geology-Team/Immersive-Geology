@@ -140,6 +140,6 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
         sulfuric_brine_method.addSecondaryFluidInput(FluidEnum.Brine, 125);
         sulfuric_brine_method.addItemInput(ItemStack.EMPTY);
 
-        return new IGMaterialProcess(sulfuric_brine_method);
+        return new IGMaterialProcess(sulfuric_brine_method, sulfuric_rocksalt_method);
     }
 }

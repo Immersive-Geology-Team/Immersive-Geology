@@ -32,11 +32,9 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
         return new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
     }
 
-    public VatRecipeBuilder addItemInput(IngredientWithSize input){
-        if(Arrays.stream(input.getMatchingStacks()).noneMatch(ItemStack::isEmpty)) {
-            this.addIngredient("item_input", input);
-        } else {
-            this.addIngredient("item_input", IngredientWithSize.of(new ItemStack(Items.AIR)));
+    public VatRecipeBuilder addItemInput(ItemStack input){
+        if(!input.isEmpty()) {
+            this.addIngredient("item_input", IngredientWithSize.of(input));
         }
         return this;
     }
