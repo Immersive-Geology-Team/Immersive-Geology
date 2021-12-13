@@ -23,7 +23,12 @@ public class IGVatProcessingMethod extends IGProcessingMethod {
     public IGVatProcessingMethod(int energyCost, int processingTime) {
         this.energyCost = energyCost;
         this.processingTime = processingTime;
-        this.reversedFluids = new IGVatProcessingMethod(energyCost, processingTime);
+        this.reversedFluids = new IGVatProcessingMethod(energyCost, processingTime, true);
+    }
+
+    private IGVatProcessingMethod(int energyCost, int processingTime, boolean reversed){
+        this.energyCost = energyCost;
+        this.processingTime = processingTime;
     }
 
     @Override
@@ -103,7 +108,7 @@ public class IGVatProcessingMethod extends IGProcessingMethod {
 
     public IGVatProcessingMethod addItemInput(ItemStack input){
         this.inputItem = input.copy();
-        this.reversedFluids.primaryInputFluid = secondaryInputFluid.copy();
+        this.reversedFluids.inputItem = inputItem.copy();
         return this;
     }
 
