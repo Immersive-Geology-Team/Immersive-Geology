@@ -123,14 +123,14 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
     @Override
     public IGMaterialProcess getProcessingMethod()
     {
-        //TODO -- rocksalt + water + sulf acid to get HCL acid
+        //TODO -- brine + sulf acid to get HCL acid
         IGVatProcessingMethod sulfuric_brine_method = new IGVatProcessingMethod(1000, 120);
         //FIXME -- Na sulfate as output
         sulfuric_brine_method.addItemOutput(ItemStack.EMPTY);
         sulfuric_brine_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
         sulfuric_brine_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
-        sulfuric_brine_method.addSecondaryFluidInput(FluidEnum.Brine, 125);
-        sulfuric_brine_method.addItemInput(ItemStack.EMPTY);
+        sulfuric_brine_method.addSecondaryFluidInput(Fluids.WATER, 125);
+        sulfuric_brine_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.RockSalt.getMaterial(), MaterialUseType.DUST), 1));
         return new IGMaterialProcess(sulfuric_brine_method);
     }
 }

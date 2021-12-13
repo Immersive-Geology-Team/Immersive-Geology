@@ -5,15 +5,10 @@
     "amount": 125
   },
   "item_input": {
-    "count": 0,
-    "base_ingredient": []
+    "item": "immersive_geology:dust_rocksalt"
   },
   "fluid_input1": {
     "tag": "forge:sulfuric_acid",
-    "amount": 125
-  },
-  "fluid_input2": {
-    "tag": "forge:brine",
     "amount": 125
   },
   "energy": 1000,
