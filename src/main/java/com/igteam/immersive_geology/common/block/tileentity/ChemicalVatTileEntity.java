@@ -416,7 +416,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public VatRecipe findRecipeForInsertion(ItemStack inserting) {
         VatRecipe primeSec = VatRecipe.findRecipe(inserting, tanks[0].getFluid(), tanks[1].getFluid());
-        return primeSec == null ? VatRecipe.findRecipe(inserting, tanks[1].getFluid(), tanks[0].getFluid()) : primeSec;
+        return primeSec;
     }
 
     @Override

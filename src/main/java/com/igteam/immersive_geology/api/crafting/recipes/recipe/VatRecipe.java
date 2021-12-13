@@ -74,11 +74,14 @@ public class VatRecipe extends IGMultiblockRecipe
         this.fluidOutput = fluidOutput;
         this.itemInput = itemInput;
         this.itemOutput = itemOutput;
-        this.fluidInputList = Arrays.asList(fluidInput1);
 
-        if(fluidInput2 != null){
-            this.fluidInputList.add(fluidInput2);
-        }
+        this.fluidInputList = new ArrayList<>();
+
+        if(fluidInput1 != null)
+        fluidInputList.add(fluidInput1);
+
+        if(fluidInput2 != null)
+        fluidInputList.add(fluidInput2);
 
         this.fluidOutputList = Arrays.asList(this.fluidOutput);
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
