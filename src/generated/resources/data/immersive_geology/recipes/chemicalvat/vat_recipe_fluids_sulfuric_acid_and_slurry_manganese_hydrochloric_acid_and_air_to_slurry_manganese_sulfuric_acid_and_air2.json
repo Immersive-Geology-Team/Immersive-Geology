@@ -1,0 +1,17 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_manganese_sulfuric_acid",
+    "amount": 125
+  },
+  "fluid_input1": {
+    "tag": "forge:sulfuric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "forge:manganese_hydrochloric_acid",
+    "amount": 125
+  },
+  "energy": 1000,
+  "time": 120
+}
