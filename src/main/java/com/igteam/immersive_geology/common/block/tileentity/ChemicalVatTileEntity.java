@@ -234,8 +234,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         if (master.tanks[2].getFluidAmount() > 0) {
             FluidStack out = Utils.copyFluidStackWithAmount(master.tanks[2].getFluid(), Math.min(master.tanks[2].getFluidAmount(), 80), false);
             Direction fw = this.getFacing().getOpposite();
-
-            BlockPos outputPos = master.getPos().add(2, 0, 2).offset(fw, 2);
+            Direction shift_1 =  this.getIsMirrored() ?  this.getFacing().rotateY() : this.getFacing().rotateYCCW();
+            BlockPos outputPos = master.getPos().offset(shift_1, 2).offset(fw, 3);
             update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos,fw.getOpposite()).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
@@ -296,7 +296,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () ->new DirectionalBlockPos(pos.add(1, 0, 0).offset(this.getFacing().rotateY().getOpposite(), 4), getFacing()),
+            () ->new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing().rotateYCCW(), 4)
+                    .offset(this.getFacing().getOpposite(), 1), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
@@ -304,10 +305,12 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty()) {
-            Direction fw = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
+            Direction fw = this.getFacing().getOpposite();
+            Direction shift_1 = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
 
-            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.add(1, 0, 0).offset(fw.getOpposite(), 4),
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1.getOpposite(), 4).offset(fw, 1),
                    fw).getPosition(), output, fw.getOpposite());
+            master().getInventory().get(outputSlot).shrink(output.getCount());
         }
     }
 
