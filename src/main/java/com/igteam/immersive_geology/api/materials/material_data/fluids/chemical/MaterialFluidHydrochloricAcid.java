@@ -125,16 +125,13 @@ public class MaterialFluidHydrochloricAcid extends MaterialFluidBase {
     {
         //TODO -- brine + sulf acid to get HCL acid
         IGVatProcessingMethod sulfuric_rocksalt_method = new IGVatProcessingMethod(1000, 120);
-        //FIXME -- Na sulfate as output
-        sulfuric_rocksalt_method.addItemOutput(ItemStack.EMPTY);
-        sulfuric_rocksalt_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
+        sulfuric_rocksalt_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.COMPOUND_DUST),1));        sulfuric_rocksalt_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
         sulfuric_rocksalt_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
         sulfuric_rocksalt_method.addSecondaryFluidInput(Fluids.WATER, 125);
         sulfuric_rocksalt_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.RockSalt.getMaterial(), MaterialUseType.DUST), 1));
 
         IGVatProcessingMethod sulfuric_brine_method = new IGVatProcessingMethod(1000, 120);
-        //FIXME -- Na sulfate as output
-        sulfuric_brine_method.addItemOutput(ItemStack.EMPTY);
+        sulfuric_brine_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.COMPOUND_DUST),1));        sulfuric_rocksalt_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
         sulfuric_brine_method.addFluidOutput(FluidEnum.HydrochloricAcid, 125);
         sulfuric_brine_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
         sulfuric_brine_method.addSecondaryFluidInput(FluidEnum.Brine, 125);

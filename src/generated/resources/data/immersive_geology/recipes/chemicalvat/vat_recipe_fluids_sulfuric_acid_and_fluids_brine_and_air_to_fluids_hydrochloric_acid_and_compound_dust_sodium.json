@@ -4,12 +4,15 @@
     "fluid": "immersive_geology:fluids_hydrochloric_acid",
     "amount": 125
   },
+  "result": {
+    "item": "immersive_geology:compound_dust_sodium"
+  },
   "fluid_input1": {
-    "tag": "forge:brine",
+    "tag": "forge:sulfuric_acid",
     "amount": 125
   },
   "fluid_input2": {
-    "tag": "forge:sulfuric_acid",
+    "tag": "forge:brine",
     "amount": 125
   },
   "energy": 1000,

@@ -135,8 +135,7 @@ public class MaterialFluidNitricAcid extends MaterialFluidBase {
     public IGMaterialProcess getProcessingMethod()
     {
         IGVatProcessingMethod sulfuric_saltpeter_method = new IGVatProcessingMethod(1000, 120);
-        //FIXME -- K sulfate as output
-        sulfuric_saltpeter_method.addItemOutput(ItemStack.EMPTY);
+        sulfuric_saltpeter_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.COMPOUND_DUST),1));
         sulfuric_saltpeter_method.addFluidOutput(FluidEnum.NitricAcid, 125);
         sulfuric_saltpeter_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
         sulfuric_saltpeter_method.addSecondaryFluidInput(Fluids.WATER, 125);

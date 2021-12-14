@@ -157,4 +157,9 @@ public class MaterialMetalSodium extends MaterialMetalBase
 	public boolean hasCrystal(){
 		return true;
 	}
+
+	public boolean hasCompoundDust()
+	{
+		return true;
+	}
 }

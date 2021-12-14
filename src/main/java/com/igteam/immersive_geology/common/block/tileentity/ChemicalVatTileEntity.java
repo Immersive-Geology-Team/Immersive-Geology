@@ -60,6 +60,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     public NonNullList<ItemStack> inventory;
     private LazyOptional<IItemHandler> insertionHandler;
+    private LazyOptional<IItemHandler> extractionHandler;
+
     protected final int inputSlot = 0;
     protected final int outputSlot = 1;
     public float activeTicks;
@@ -70,7 +72,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         holdItem = ItemStack.EMPTY;
         activeTicks = 0;
-
+        this.extractionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 1, false, true));
         this.insertionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 0, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
@@ -138,15 +140,22 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         });
     }
 
+
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            ChemicalVatTileEntity master = (ChemicalVatTileEntity) this.master();
-            if (master == null) {
-                return LazyOptional.empty();
-            }
 
-            return this.insertionHandler.cast();
+            if (outputItemOffset.equals(this.posInMultiblock)) {
+                return this.extractionHandler.cast();
+            }
+            else {
+                ChemicalVatTileEntity master = (ChemicalVatTileEntity) this.master();
+                if (master == null) {
+                    return LazyOptional.empty();
+                }
+
+                return this.insertionHandler.cast();
+            }
         }
         return super.getCapability(capability, facing);
     }
@@ -216,7 +225,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos, this.getFacing()).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
-                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false), IFluidHandler.FluidAction.EXECUTE);
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
+                            IFluidHandler.FluidAction.EXECUTE);
                     master.tanks[2].drain(drained, IFluidHandler.FluidAction.EXECUTE);
                     return true;
                 } else {
@@ -272,7 +282,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(getPos().add(3, 0, -1), getFacing()),
+            () ->new DirectionalBlockPos(this.outputItemOffset.offset(this.getFacing(), 2), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
@@ -280,7 +290,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty())
-            Utils.dropStackAtPos(world, new DirectionalBlockPos(getPos().add(3, 0, -1), getFacing()).getPosition(), output, getFacing().getOpposite());
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(this.outputItemOffset.offset(this.getFacing(), 2),
+                    getFacing()).getPosition(), output, getFacing().getOpposite());
     }
 
     @Override
@@ -357,6 +368,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     }
 
     private static final BlockPos outputOffset = new BlockPos(1, 0, 2);
+    private static final BlockPos outputItemOffset = new BlockPos(0, 0, 1);
+
     private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
             new BlockPos(3, 0, 0)
     );

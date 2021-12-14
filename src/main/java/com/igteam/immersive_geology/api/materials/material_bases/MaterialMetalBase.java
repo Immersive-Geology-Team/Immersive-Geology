@@ -29,6 +29,8 @@ public abstract class MaterialMetalBase extends Material
 				return hasGear();
 			case WIRE:
 				return hasWire();
+			case COMPOUND_DUST:
+				return hasCompoundDust();
 			case DUST:
 			case TINY_DUST:
 				return hasDust();
@@ -54,6 +56,14 @@ public abstract class MaterialMetalBase extends Material
 			default:
 				return false;
 		}
+	}
+
+	/**
+	 * Use it for chemical waste stuff
+	 * @return
+	 */
+	public boolean hasCompoundDust() {
+		return false;
 	}
 
 	public boolean generateOxide(){
