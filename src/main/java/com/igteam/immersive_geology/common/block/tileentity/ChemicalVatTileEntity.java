@@ -67,6 +67,18 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public float activeTicks;
     public ItemStack holdItem;
 
+    private static final BlockPos outputOffset = new BlockPos(1, 0, 2);
+    private static final BlockPos outputItemOffset = new BlockPos(0, 0, 1);
+
+    private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
+            new BlockPos(3, 0, 0)
+    );
+
+    private static final Set<BlockPos> inputSecondary = ImmutableSet.of(
+            new BlockPos(3, 0, 1)
+    );
+
+
     public ChemicalVatTileEntity(){
         super(ChemicalVatMultiblock.INSTANCE, 16000, true, IGTileTypes.VAT.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
@@ -221,8 +233,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
         if (master.tanks[2].getFluidAmount() > 0) {
             FluidStack out = Utils.copyFluidStackWithAmount(master.tanks[2].getFluid(), Math.min(master.tanks[2].getFluidAmount(), 80), false);
-            BlockPos outputPos = master.getPos().add(1, 0, 0).offset(master.getFacing().getOpposite());
-            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos, this.getFacing()).map((output) -> {
+            Direction fw = this.getFacing().getOpposite();
+
+            BlockPos outputPos = master.getPos().add(2, 0, 2).offset(fw, 2);
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos,fw.getOpposite()).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
                     int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
@@ -282,16 +296,19 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () ->new DirectionalBlockPos(this.outputItemOffset.offset(this.getFacing(), 2), getFacing()),
+            () ->new DirectionalBlockPos(pos.add(1, 0, 0).offset(this.getFacing().rotateY().getOpposite(), 4), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
     public void doProcessOutput(ItemStack output)
     {
         output = Utils.insertStackIntoInventory(this.output, output, false);
-        if(!output.isEmpty())
-            Utils.dropStackAtPos(world, new DirectionalBlockPos(this.outputItemOffset.offset(this.getFacing(), 2),
-                    getFacing()).getPosition(), output, getFacing().getOpposite());
+        if(!output.isEmpty()) {
+            Direction fw = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
+
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.add(1, 0, 0).offset(fw.getOpposite(), 4),
+                   fw).getPosition(), output, fw.getOpposite());
+        }
     }
 
     @Override
@@ -367,16 +384,6 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return master.tanks;
     }
 
-    private static final BlockPos outputOffset = new BlockPos(1, 0, 2);
-    private static final BlockPos outputItemOffset = new BlockPos(0, 0, 1);
-
-    private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
-            new BlockPos(3, 0, 0)
-    );
-
-    private static final Set<BlockPos> inputSecondary = ImmutableSet.of(
-            new BlockPos(3, 0, 1)
-    );
 
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction side)
