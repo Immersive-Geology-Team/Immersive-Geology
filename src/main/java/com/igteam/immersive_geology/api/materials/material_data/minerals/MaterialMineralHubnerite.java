@@ -140,7 +140,7 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		manganese_sulf_slurry_method.addSecondaryFluidInput(SlurryEnum.MANGANESE, 0, 125);
 		manganese_sulf_slurry_method.addItemInput(ItemStack.EMPTY);
 		
-		return new IGMaterialProcess(manganese_sulf_slurry_method,manganese_sulf_slurry_method);
+		return new IGMaterialProcess(manganese_slurry_method,manganese_sulf_slurry_method);
 
 	}
 
