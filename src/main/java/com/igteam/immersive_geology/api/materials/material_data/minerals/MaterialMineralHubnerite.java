@@ -1,12 +1,19 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -119,7 +126,22 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 	//Input the processing steps for this material
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
-		return null;
+		IGVatProcessingMethod manganese_slurry_method = new IGVatProcessingMethod(1000, 120);
+		manganese_slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.COMPOUND_DUST), 1));
+		manganese_slurry_method.addFluidOutput(SlurryEnum.MANGANESE, 0, 125);
+		manganese_slurry_method.addPrimaryFluidInput(FluidEnum.HydrochloricAcid, 125);
+		manganese_slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
+		manganese_slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+
+		IGVatProcessingMethod manganese_sulf_slurry_method = new IGVatProcessingMethod(1000, 120);
+		manganese_sulf_slurry_method.addItemOutput(ItemStack.EMPTY);
+		manganese_sulf_slurry_method.addFluidOutput(SlurryEnum.MANGANESE, 1, 125);
+		manganese_sulf_slurry_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
+		manganese_sulf_slurry_method.addSecondaryFluidInput(SlurryEnum.MANGANESE, 0, 125);
+		manganese_sulf_slurry_method.addItemInput(ItemStack.EMPTY);
+		
+		return new IGMaterialProcess(manganese_slurry_method,manganese_sulf_slurry_method);
+
 	}
 
 	@Override

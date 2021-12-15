@@ -105,6 +105,11 @@ public class MaterialMetalTungsten extends MaterialMetalBase
 		return CrystalFamily.CUBIC;
 	}
 
+	public boolean hasCompoundDust()
+	{
+		return true;
+	}
+
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

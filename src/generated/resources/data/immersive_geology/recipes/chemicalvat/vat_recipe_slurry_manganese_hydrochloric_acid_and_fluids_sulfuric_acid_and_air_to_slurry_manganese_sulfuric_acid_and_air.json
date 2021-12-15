@@ -1,14 +1,11 @@
 {
   "type": "immersive_geology:chemicalvat",
   "fluid_result": {
-    "fluid": "immersive_geology:fluids_hydrochloric_acid",
+    "fluid": "immersive_geology:slurry_manganese_sulfuric_acid",
     "amount": 125
   },
-  "item_input": {
-    "item": "immersive_geology:dust_rocksalt"
-  },
   "fluid_input1": {
-    "tag": "minecraft:water",
+    "tag": "forge:manganese_hydrochloric_acid",
     "amount": 125
   },
   "fluid_input2": {

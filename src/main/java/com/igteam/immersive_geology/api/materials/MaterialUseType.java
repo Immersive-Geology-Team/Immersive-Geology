@@ -36,6 +36,9 @@ public enum MaterialUseType {
     RAW_CRYSTAL(false, ItemSubGroup.natural),
     CUT_CRYSTAL(false, ItemSubGroup.processed),
 
+    //TODO -- REVIEW ME
+    COMPOUND_DUST (false, ItemSubGroup.processed),
+
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
     FLASK(false, ItemSubGroup.processed),

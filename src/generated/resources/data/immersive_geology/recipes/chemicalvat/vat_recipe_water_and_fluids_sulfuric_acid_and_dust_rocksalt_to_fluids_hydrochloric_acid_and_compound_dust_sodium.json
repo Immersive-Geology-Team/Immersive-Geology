@@ -4,10 +4,17 @@
     "fluid": "immersive_geology:fluids_hydrochloric_acid",
     "amount": 125
   },
+  "result": {
+    "item": "immersive_geology:compound_dust_sodium"
+  },
   "item_input": {
     "item": "immersive_geology:dust_rocksalt"
   },
   "fluid_input1": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "fluid_input2": {
     "tag": "forge:sulfuric_acid",
     "amount": 125
   },
