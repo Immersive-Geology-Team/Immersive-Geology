@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.registration;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import com.igteam.immersive_geology.common.block.blocks.*;
 import com.igteam.immersive_geology.common.multiblocks.*;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import net.minecraft.block.Block;
 
 public class IGMultiblockRegistrationHolder {
@@ -13,6 +14,7 @@ public class IGMultiblockRegistrationHolder {
         public static Block rotarykiln;
         public static Block crystallizer;
         public static Block reverberation_furnace;
+        public static Block bloomery;
     }
 
     public static void populate() {
@@ -24,6 +26,7 @@ public class IGMultiblockRegistrationHolder {
 
         //Stone
         Multiblock.reverberation_furnace = new ReverberationFurnaceBlock();
+        Multiblock.bloomery = new BloomeryBlock();
     }
 
     //Not the cause of network issue, try elsewhere

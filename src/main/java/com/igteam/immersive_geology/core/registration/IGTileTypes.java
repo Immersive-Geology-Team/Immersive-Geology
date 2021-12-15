@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.registration;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.common.block.tileentity.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import javafx.scene.effect.Bloom;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -14,6 +15,8 @@ import java.util.function.Supplier;
 
 public class IGTileTypes {
     public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, IGLib.MODID);
+
+    public static final RegistryObject<TileEntityType<BloomeryTileEntity>> BLOOMERY = register("bloomery", BloomeryTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.bloomery);
 
     public static final RegistryObject<TileEntityType<RotaryKilnTileEntity>> ROTARYKILN = register("rotarykiln", RotaryKilnTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.rotarykiln);
     public static final RegistryObject<TileEntityType<CrystallizerTileEntity>> CRYSTALLIZER = register("crystallizer", CrystallizerTileEntity::new, IGMultiblockRegistrationHolder.Multiblock.crystallizer);

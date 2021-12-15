@@ -82,19 +82,6 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         }
     }
 
-    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.readCustomNBT(nbt, descPacket);
-        GravitySeparatorTileEntity master = this.master();
-        master.tank.readFromNBT(nbt.getCompound("tank"));
-    }
-
-    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.writeCustomNBT(nbt, descPacket);
-        GravitySeparatorTileEntity master = this.master();
-        CompoundNBT tankTag = master.tank.writeToNBT(new CompoundNBT());
-        nbt.put("tank", tankTag);
-    }
-
     @Override
     public Set<BlockPos> getRedstonePos() {
         return Redstone_IN;
