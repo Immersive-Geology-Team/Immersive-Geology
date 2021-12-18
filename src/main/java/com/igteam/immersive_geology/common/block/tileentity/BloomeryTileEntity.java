@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.common.blocks.IEBaseTileEntity;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
+import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -32,8 +33,8 @@ import javax.annotation.Nonnull;
 public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTileEntity, IEBlockInterfaces.IStateBasedDirectional, IEBlockInterfaces.IBlockBounds, IEBlockInterfaces.IHasDummyBlocks,
         IIEInventory, EnergyHelper.IIEInternalFluxHandler, IEBlockInterfaces.IInteractionObjectIE, IOBJModelCallback<BlockState>, IModelOffsetProvider {
 
-    public BloomeryTileEntity(TileEntityType<? extends TileEntity> type) {
-        super(type);
+    public BloomeryTileEntity() {
+        super(IGTileTypes.BLOOMERY.get());
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGStaticBlock;
+import com.igteam.immersive_geology.common.block.blocks.BloomeryBlock;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGStaticItem;

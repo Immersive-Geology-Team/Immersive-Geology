@@ -202,10 +202,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         super.tick();
 
-
         activeTicks++;
         activeTicks = activeTicks % 360;
-
 
         if(world.isRemote||isDummy())
             return;
