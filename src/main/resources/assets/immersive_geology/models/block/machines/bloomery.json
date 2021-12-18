@@ -1,0 +1,9 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "immersive_geology:multiblock/bloomery"
+  },
+  "loader": "immersiveengineering:ie_obj",
+  "model": "immersive_geology:models/multiblock/obj/bloomery/bloomery.obj",
+  "flip-v": true
+}

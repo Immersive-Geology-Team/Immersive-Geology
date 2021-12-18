@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "immersive_geology:block/machines/bloomery_split",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "immersive_geology:block/machines/bloomery_split",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=west": {
+      "model": "immersive_geology:block/machines/bloomery_split",
+      "uvlock": true
+    },
+    "facing=east": {
+      "model": "immersive_geology:block/machines/bloomery_split",
+      "y": 180,
+      "uvlock": true
+    }
+  }
+}

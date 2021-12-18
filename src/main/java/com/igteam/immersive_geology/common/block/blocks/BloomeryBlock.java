@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.block.blocks;
 
+import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
@@ -12,14 +13,21 @@ import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntityType;
 
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -46,7 +54,8 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
         IGRegistrationHolder.registeredIGBlocks.put(holder_name + "_" + "bloomery", this);
 
         this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Vanilla.getMaterial());
-        itemBlock.setRegistryName(holder_name + "_" + "bloomery");
+        itemBlock.setRegistryName(IGLib.MODID + ":" + holder_name + "_" + "bloomery");
+        IGRegistrationHolder.registeredIGItems.put(holder_name + "_" + "bloomery", itemBlock);
     }
 
     @Override
@@ -87,5 +96,30 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
     @Override
     public float minDrops() {
         return 1;
+    }
+
+    @Override
+    public boolean canIEBlockBePlaced(BlockState newState, BlockItemUseContext context)
+    {
+        BlockPos start = context.getPos();
+        World w = context.getWorld();
+        return areAllReplaceable(start, start.up(), context);
+    }
+
+    @Override
+    public StateContainer<Block, BlockState> getStateContainer() {
+        return super.getStateContainer();
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        super.fillStateContainer(builder);
+        builder.add(IEProperties.FACING_HORIZONTAL, IEProperties.MULTIBLOCKSLAVE);
+    }
+
+    @Override
+    protected BlockState getInitDefaultState() {
+        BlockState state = this.stateContainer.getBaseState();
+        return state.with(IEProperties.FACING_HORIZONTAL, getDefaultFacing()).getBlockState();
     }
 }

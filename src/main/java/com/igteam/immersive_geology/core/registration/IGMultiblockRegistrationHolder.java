@@ -3,7 +3,6 @@ package com.igteam.immersive_geology.core.registration;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import com.igteam.immersive_geology.common.block.blocks.*;
 import com.igteam.immersive_geology.common.multiblocks.*;
-import com.sun.org.apache.xpath.internal.operations.Mult;
 import net.minecraft.block.Block;
 
 public class IGMultiblockRegistrationHolder {

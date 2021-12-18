@@ -1,24 +1,33 @@
 package com.igteam.immersive_geology.common.item;
 
+import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.common.block.blocks.BloomeryBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -82,5 +91,26 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
 
     public MaterialUseType getUseType(){
         return useType;
+    }
+
+    @Override
+    protected boolean placeBlock(BlockItemUseContext context, BlockState state) {
+        Block b = state.getBlock();
+        if(b instanceof BloomeryBlock){
+            BloomeryBlock bloomeryBlock = (BloomeryBlock) b;
+            if(!bloomeryBlock.canIEBlockBePlaced(state, context))
+                return false;
+            boolean ret = super.placeBlock(context, state);
+            if(ret) bloomeryBlock.onIEBlockPlacedBy(context, state);
+            return ret;
+        }
+        return super.placeBlock(context, state);
+    }
+
+    @Override
+    protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+        if(state.hasProperty(IEProperties.MULTIBLOCKSLAVE))
+            return false;
+        return super.onBlockPlaced(pos, worldIn, player, stack, state);
     }
 }
