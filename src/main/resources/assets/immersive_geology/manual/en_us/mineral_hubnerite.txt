@@ -6,9 +6,11 @@ It is used as a source of Tungsten. However it needs to be processed first.
 Also see <link;immersive_geology:mineral_ferberite;Ferberite;start> and <link;immersive_geology:mineral_wolframite;Wolframite;start>
 <&dirty_crushed_hubnerite>
 Using a method to <link;crusher;crush;start> the mineral will give some dirty crushed hubnerite 
-Putting it through a <link;immersive_geology:gravityseparator;Gravity;start> or industrial seperator will yield crushed hubnerite
+Putting it through a <link;immersive_geology:gravityseparator;Gravity;start> or manual separation will yield crushed hubnerite
 <&crushed_hubnerite>
 Processing Hubnernite into Tungsten Ingots is difficult due to it's high melting point.
+First of all you need to leech manganeese from ore in Chemical Vat with hydrochloric acid. Then you take tungsten sediment and put it throgh calcination in Rotary Kiln. Last step in process is to obtain pure tungsten ingots from oxide in blast furnace. 
+To extract Manganese you had to treat leftover manganese slurry in second vat with sulfuric acid and put result liquid in Crystallizer, to get smeltable Manganese crystals. Acids used in this process gonna be wasted, keep that in mind.
 So the eaiser method is to use a <link;blast_furnace;blast furnace;start> and get some Tungesten Grit.
 <&grit_tungsten>
 If you have access to a <link;arc_furnace;Arc Furnace;start> you can produce tungsten ingots from either grit or crushed hubnerite. 

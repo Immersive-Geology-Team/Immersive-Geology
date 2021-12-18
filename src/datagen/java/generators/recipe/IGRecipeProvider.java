@@ -1,8 +1,10 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
@@ -16,6 +18,7 @@ import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -165,53 +168,14 @@ public class IGRecipeProvider extends RecipeProvider {
         {
 
             if (fluidwrap.getMaterial() instanceof MaterialSlurryWrapper) {continue;} //slurries registered not here
-            VatRecipeBuilder vatBuilder = new VatRecipeBuilder();
 
             if (fluidwrap.getMaterial().getProcessingMethod() != null) {
                 IGMaterialProcess processess = fluidwrap.getMaterial().getProcessingMethod();
                 List<IGProcessingMethod> data = processess.getData();
                 for (IGProcessingMethod method : data) {
-                    //TODO -- Make fluids to be created not in vat
-                    //Assume we've talk only ACIDS
-                    if (method.getKey() != ProcessingMethod.ACID) continue;
-                    IGVatProcessingMethod m = (IGVatProcessingMethod) method;
-                    int energyCost = m.getEnergyCost();
-                    int timeTaken = m.getProcessingTime();
-
-                    FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
-                    FluidTagInput secondary_chemical = null;
-
-                    FluidStack output_chemical = m.getOutputFluid();
-
-                    FluidStack primary_input = m.getPrimaryInputFluid();
-                    if(!primary_input.isEmpty()){
-                        if(primary_input.getFluid() instanceof IGFluid) {
-                            IGFluid igFluid = (IGFluid) primary_input.getFluid();
-                            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
-                            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
-                            primary_chemical = new FluidTagInput(tags.fluid, primary_input.getAmount());
-                        } else {
-                            primary_chemical = new FluidTagInput(primary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, primary_input.getAmount());
-                        }
+                    if (method instanceof IGVatProcessingMethod){
+                    addVatMethod(method, consumer);
                     }
-
-                    FluidStack secondary_input = m.getSecondaryInputFluid();
-                    if(!secondary_input.isEmpty()){
-                        if(secondary_input.getFluid() instanceof IGFluid) {
-                            IGFluid igFluid = (IGFluid) secondary_input.getFluid();
-                            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
-                            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
-                            secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
-                        }
-                    }
-                    ItemStack outputItem = m.getOutputItem();
-                    ItemStack itemInput = m.getInputItem() == null ? ItemStack.EMPTY : m.getInputItem();
-
-                    log.info("Registering Chemical Vat Recipe");
-
-                    vatBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
-                            .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
-
                 }
             }
 
@@ -231,8 +195,6 @@ public class IGRecipeProvider extends RecipeProvider {
             //Setup Recipe Generation for Mineral Processing
 
             //Create Recipe Builders
-            VatRecipeBuilder vatBuilder = new VatRecipeBuilder();
-
             if(orebase.getProcessingMethod() != null){
                 IGMaterialProcess processess = orebase.getProcessingMethod();
                 List<IGProcessingMethod> data = processess.getData();
@@ -240,53 +202,16 @@ public class IGRecipeProvider extends RecipeProvider {
                 for (IGProcessingMethod method : data) {
                     switch (method.getKey()) {
                         case BLASTING:
+                            addRedoxMethod(method,consumer);
                             break;
                         case CALCINATION:
                             break;
                         case ACID:
-                            IGVatProcessingMethod m = (IGVatProcessingMethod) method;
-                            int energyCost = m.getEnergyCost();
-                            int timeTaken = m.getProcessingTime();
-
-                            FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
-                            FluidTagInput secondary_chemical = null;
-
-                            FluidStack output_chemical = m.getOutputFluid();
-
-                            FluidStack primary_input = m.getPrimaryInputFluid();
-                            if(!primary_input.isEmpty()){
-                                if(primary_input.getFluid() instanceof IGFluid) {
-                                    IGFluid igFluid = (IGFluid) primary_input.getFluid();
-                                    MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
-                                    IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
-                                    primary_chemical = new FluidTagInput(tags.fluid, primary_input.getAmount());
-                                } else {
-                                    primary_chemical = new FluidTagInput(primary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, primary_input.getAmount());
-                                }
-                            }
-
-                            FluidStack secondary_input = m.getSecondaryInputFluid();
-                            if(!secondary_input.isEmpty()){
-                                if(secondary_input.getFluid() instanceof IGFluid) {
-                                    IGFluid igFluid = (IGFluid) secondary_input.getFluid();
-                                    MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
-                                    IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
-                                    secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
-                                }
-                            }
-                            ItemStack outputItem = m.getOutputItem();
-                            ItemStack itemInput = m.getInputItem() != null ? m.getInputItem() : ItemStack.EMPTY;
-
-                            log.info("Registering Chemical Vat Recipe");
-
-                            vatBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
-                                    .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath() + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_" + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
-
+                            addVatMethod(method, consumer);
                             break;
                         case ROASTER:
                             break;
                         case SEDIMENT:
-
                             break;
                         case ELECTROLYSIS:
                             break;
@@ -297,7 +222,69 @@ public class IGRecipeProvider extends RecipeProvider {
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));
     }
 
+    private void addRedoxMethod(IGProcessingMethod method,  Consumer<IFinishedRecipe> consumer)
+    {
+        IGReductionProcessingMethod redoxMethod = (IGReductionProcessingMethod) method;
+        int energyCost = redoxMethod.getEnergyCost();
+        int processingTime = redoxMethod.getProcessingTime();
+        ItemStack outputItem = redoxMethod.getOutputItem();
+        ItemStack inputItem = redoxMethod.getInputItem();
+        ItemStack slagItem = redoxMethod.getSlagItem();
+        BlastFurnaceRecipeBuilder builder = BlastFurnaceRecipeBuilder.builder(outputItem);
+        builder.addSlag(slagItem).addInput(inputItem).setEnergy(energyCost).setTime(processingTime)
+                .build(consumer,toRL("ieblastfurnace/redox_recipe_" +
+                        inputItem.getItem().getRegistryName().getPath().toLowerCase() + "_to_" +
+                        outputItem.getItem().getRegistryName().getPath().toLowerCase() + "_and_"
+                        + slagItem.getItem().getRegistryName().getPath().toLowerCase()));
+    }
 
+    private void addVatMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
+    {
+        VatRecipeBuilder vatRecipeBuilder = new VatRecipeBuilder();
+
+        IGVatProcessingMethod m = (IGVatProcessingMethod) method;
+        int energyCost = m.getEnergyCost();
+        int timeTaken = m.getProcessingTime();
+
+        FluidTagInput primary_chemical = new FluidTagInput(FluidTags.WATER, 1);
+        FluidTagInput secondary_chemical = null;
+
+        FluidStack output_chemical = m.getOutputFluid();
+
+        FluidStack primary_input = m.getPrimaryInputFluid();
+        if(!primary_input.isEmpty()){
+            if(primary_input.getFluid() instanceof IGFluid) {
+                IGFluid igFluid = (IGFluid) primary_input.getFluid();
+                MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                primary_chemical = new FluidTagInput(tags.fluid, primary_input.getAmount());
+            } else {
+                primary_chemical = new FluidTagInput(primary_input.getFluid().isEquivalentTo(Fluids.WATER) ? FluidTags.WATER : FluidTags.LAVA, primary_input.getAmount());
+            }
+        }
+
+        FluidStack secondary_input = m.getSecondaryInputFluid();
+        if(!secondary_input.isEmpty()){
+            if(secondary_input.getFluid() instanceof IGFluid) {
+                IGFluid igFluid = (IGFluid) secondary_input.getFluid();
+                MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+                IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+                secondary_chemical = new FluidTagInput(tags.fluid, secondary_input.getAmount());
+            }
+        }
+        ItemStack outputItem = m.getOutputItem();
+        ItemStack itemInput = m.getInputItem() != null ? m.getInputItem() : ItemStack.EMPTY;
+
+        log.info("Registering Chemical Vat Recipe");
+
+        vatRecipeBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
+                .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath()
+                        + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_"
+                        + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_"
+                        + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_"
+                        + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
+
+    }
     private void add3x3Conversion(IItemProvider bigItem, IItemProvider smallItem, ITag.INamedTag<Item> smallTag, Consumer<IFinishedRecipe> out)
     {
         ShapedRecipeBuilder.shapedRecipe(bigItem)
