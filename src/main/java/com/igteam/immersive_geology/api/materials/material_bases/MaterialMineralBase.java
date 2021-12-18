@@ -37,7 +37,14 @@ public abstract class MaterialMineralBase extends Material
 				return hasDust();
 			case CLAY:
 				return hasClay();
+			case SLAG:
+				return hasSlag();
+
 		}
+		return false;
+	}
+
+	public boolean hasSlag() {
 		return false;
 	}
 

@@ -1,10 +1,15 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -99,4 +104,15 @@ public class MaterialMineralMagnetite extends MaterialMineralBase
 	public MaterialEnum getProcessedType() {
 		return MaterialEnum.Iron;
 	}
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		IGReductionProcessingMethod method = new IGReductionProcessingMethod(1000, 240);
+		method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
+		//we grab IE slag in recipe builder here
+		method.addItemSlag(ItemStack.EMPTY);
+		return new IGMaterialProcess(method);
+	}
 }
+

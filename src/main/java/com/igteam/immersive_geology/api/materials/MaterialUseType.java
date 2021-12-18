@@ -38,6 +38,7 @@ public enum MaterialUseType {
 
     //TODO -- REVIEW ME
     COMPOUND_DUST (false, ItemSubGroup.processed),
+    SLAG(false,ItemSubGroup.processed ),
 
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
