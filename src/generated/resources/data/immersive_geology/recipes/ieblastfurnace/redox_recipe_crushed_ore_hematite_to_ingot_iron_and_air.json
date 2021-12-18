@@ -4,7 +4,7 @@
     "item": "immersive_geology:ingot_iron"
   },
   "slag": {
-    "item": "immersiveengineering:slag"
+    "tag": "forge:slag"
   },
   "input": {
     "item": "immersive_geology:crushed_ore_hematite"

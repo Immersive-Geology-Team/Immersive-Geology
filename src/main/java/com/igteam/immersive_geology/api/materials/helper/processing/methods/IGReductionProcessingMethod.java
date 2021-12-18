@@ -53,13 +53,7 @@ public class IGReductionProcessingMethod extends IGProcessingMethod {
 
     public IGReductionProcessingMethod addItemSlag(ItemStack slagItem)
     {
-        if (!slagItem.isEmpty()) {
-            this.slagItem = slagItem;
-        }
-        else {
-            //Sorry, malte, but I need it!
-            this.slagItem = new ItemStack(IEItems.Ingredients.slag, 1);
-        }
+       this.slagItem = slagItem;
         return this;
     }
 

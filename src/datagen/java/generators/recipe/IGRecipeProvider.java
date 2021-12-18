@@ -1,6 +1,7 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
@@ -231,7 +232,14 @@ public class IGRecipeProvider extends RecipeProvider {
         ItemStack inputItem = redoxMethod.getInputItem();
         ItemStack slagItem = redoxMethod.getSlagItem();
         BlastFurnaceRecipeBuilder builder = BlastFurnaceRecipeBuilder.builder(outputItem);
-        builder.addSlag(slagItem).addInput(inputItem).setEnergy(energyCost).setTime(processingTime)
+        if (slagItem.isEmpty()) {
+            builder.addSlag(IETags.slag, 1);
+        }
+        else{
+            builder.addSlag(slagItem);
+        }
+
+        builder.addInput(inputItem).setEnergy(energyCost).setTime(processingTime)
                 .build(consumer,toRL("ieblastfurnace/redox_recipe_" +
                         inputItem.getItem().getRegistryName().getPath().toLowerCase() + "_to_" +
                         outputItem.getItem().getRegistryName().getPath().toLowerCase() + "_and_"

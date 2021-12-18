@@ -116,7 +116,7 @@ public class MaterialMineralHematite extends MaterialMineralBase
 		IGReductionProcessingMethod method = new IGReductionProcessingMethod(1000, 240);
 		method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
-		//FIXME -- grab IE slag
+		//we grab IE slag in recipe builder here
 		method.addItemSlag(ItemStack.EMPTY);
 		return new IGMaterialProcess(method);
 	}
