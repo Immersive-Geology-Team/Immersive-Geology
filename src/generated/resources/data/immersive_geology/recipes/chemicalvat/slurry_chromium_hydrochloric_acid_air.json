@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_chromium_hydrochloric_acid",
+    "amount": 125
+  },
+  "fluid_input1": {
+    "tag": "forge:hydrochloric_acid",
+    "amount": 125
+  },
+  "energy": 1000,
+  "time": 240
+}

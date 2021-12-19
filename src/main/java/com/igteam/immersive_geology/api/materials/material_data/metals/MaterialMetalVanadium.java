@@ -104,6 +104,9 @@ public class MaterialMetalVanadium extends MaterialMetalBase
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.CUBIC;
 	}
+
+	@Override
+	public boolean generateOxide() {return true;}
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

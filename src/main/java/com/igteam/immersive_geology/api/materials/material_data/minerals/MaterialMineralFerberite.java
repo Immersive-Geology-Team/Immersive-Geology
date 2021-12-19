@@ -129,8 +129,14 @@ public class MaterialMineralFerberite extends MaterialMineralBase
 		//we grab IE slag in recipe builder here
 		redox_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG),1));
 
+		//TODO - SLAG separation method
 
-		return new IGMaterialProcess(redox_method);
+		IGReductionProcessingMethod wolf_redox_method =  new IGReductionProcessingMethod(1000, 240);
+		wolf_redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		wolf_redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.DUST)));
+		//we grab IE slag in recipe builder here
+		wolf_redox_method.addItemSlag(ItemStack.EMPTY);
+		return new IGMaterialProcess(redox_method, wolf_redox_method);
 	}
 }
 

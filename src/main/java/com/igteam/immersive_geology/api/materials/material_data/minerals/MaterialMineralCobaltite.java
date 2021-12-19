@@ -1,12 +1,21 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.material.Material;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -124,5 +133,27 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return MaterialEnum.Arsenic;
+	}
+
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		//TODO -- add roasting process
+		IGReductionProcessingMethod redox_method = new IGReductionProcessingMethod(1000, 240);
+		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.INGOT)));
+		//we grab IE slag in recipe builder here
+		redox_method.addItemSlag(ItemStack.EMPTY);
+
+		IGVatProcessingMethod slurry_method = new IGVatProcessingMethod(1000, 240);
+		slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		slurry_method.addPrimaryFluidInput(FluidEnum.HydrochloricAcid,125);
+		slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
+		slurry_method.addFluidOutput(SlurryEnum.COBALT,0,125);
+		slurry_method.addItemOutput(ItemStack.EMPTY);
+
+		//TODO -- add crystallization process
+
+		return new IGMaterialProcess(redox_method,slurry_method);
 	}
 }

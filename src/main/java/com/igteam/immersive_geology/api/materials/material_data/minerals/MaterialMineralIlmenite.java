@@ -1,11 +1,16 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
@@ -118,5 +123,16 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return MaterialEnum.Iron;
+	}
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		//I've put simplification here
+		IGReductionProcessingMethod method = new IGReductionProcessingMethod(1000, 240);
+		method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
+		method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Anatase.getMaterial(), MaterialUseType.DIRTY_CRUSHED_ORE)));
+
+		return new IGMaterialProcess(method);
 	}
 }

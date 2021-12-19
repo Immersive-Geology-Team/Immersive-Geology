@@ -105,6 +105,7 @@ public class MaterialMetalTitanium extends MaterialMetalBase
 		return CrystalFamily.HEXAGONAL;
 	}
 
+
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

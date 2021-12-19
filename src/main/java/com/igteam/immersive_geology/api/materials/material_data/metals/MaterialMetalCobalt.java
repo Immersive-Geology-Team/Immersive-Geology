@@ -108,4 +108,7 @@ public class MaterialMetalCobalt extends MaterialMetalBase
 
 	@Override
 	public boolean isNativeMetal() {return true;}
+
+	@Override
+	public boolean generateOxide() {return true;}
 }

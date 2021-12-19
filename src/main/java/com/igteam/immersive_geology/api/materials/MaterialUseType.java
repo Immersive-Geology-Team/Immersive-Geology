@@ -31,14 +31,14 @@ public enum MaterialUseType {
 
     DIRTY_CRUSHED_ORE(false, ItemSubGroup.processed),
     CRUSHED_ORE(false, ItemSubGroup.processed),
-    METAL_OXIDE(false, ItemSubGroup.processed),
 
     RAW_CRYSTAL(false, ItemSubGroup.natural),
     CUT_CRYSTAL(false, ItemSubGroup.processed),
 
-    //TODO -- REVIEW ME
+    //TODO -- move'em to itermediate group
     COMPOUND_DUST (false, ItemSubGroup.processed),
     SLAG(false,ItemSubGroup.processed ),
+    METAL_OXIDE(false, ItemSubGroup.processed),
 
     DUST(false, ItemSubGroup.processed),
     BUCKET(false, ItemSubGroup.processed),
