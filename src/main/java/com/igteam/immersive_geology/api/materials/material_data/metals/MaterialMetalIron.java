@@ -105,6 +105,8 @@ public class MaterialMetalIron extends MaterialMetalBase
 		return CrystalFamily.CUBIC;
 	}
 
+	@Override
+	public boolean hasCompoundDust() {return true;}
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

@@ -16,7 +16,8 @@ public enum SlurryEnum {
     CHROMIUM(new MaterialSlurryWrapper(MaterialEnum.Chromium, FluidEnum.HydrochloricAcid, 0.5f),
             new MaterialSlurryWrapper(MaterialEnum.Chromium, FluidEnum.NitricAcid, 0.5f)),
     MANGANESE (new MaterialSlurryWrapper(MaterialEnum.Manganese, FluidEnum.HydrochloricAcid, 0.5f),
-            new MaterialSlurryWrapper(MaterialEnum.Manganese, FluidEnum.SulfuricAcid,0.5f));
+            new MaterialSlurryWrapper(MaterialEnum.Manganese, FluidEnum.SulfuricAcid,0.5f)),
+    VANADIUM(new MaterialSlurryWrapper(MaterialEnum.Vanadium, FluidEnum.SulfuricAcid, 0.5f));
     List<MaterialSlurryWrapper> entries = new ArrayList<>();
     SlurryEnum(MaterialSlurryWrapper... slurries){
         entries.addAll(Arrays.asList(slurries));

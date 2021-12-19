@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:slag_ferberite"
+    "immersive_geology:slag_ferberite",
+    "immersive_geology:slag_sphalerite",
+    "immersive_geology:slag_vanadinite"
   ]
 }
