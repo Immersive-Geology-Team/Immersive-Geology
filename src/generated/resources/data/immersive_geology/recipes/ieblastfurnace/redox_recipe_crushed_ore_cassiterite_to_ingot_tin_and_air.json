@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersive_geology:ingot_tin"
+  },
+  "slag": {
+    "tag": "forge:slag"
+  },
+  "input": {
+    "item": "immersive_geology:crushed_ore_cassiterite"
+  },
+  "energy": 1000,
+  "time": 240
+}

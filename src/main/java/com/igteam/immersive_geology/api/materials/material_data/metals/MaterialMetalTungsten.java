@@ -110,6 +110,8 @@ public class MaterialMetalTungsten extends MaterialMetalBase
 		return true;
 	}
 
+	@Override
+	public boolean generateOxide() {return true;}
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()
