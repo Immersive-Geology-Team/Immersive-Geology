@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilde
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.CrystalizerRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
 import com.igteam.immersive_geology.api.materials.Material;
@@ -19,6 +20,7 @@ import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
@@ -215,6 +217,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         case SEDIMENT:
                             break;
                         case ELECTROLYSIS:
+                            addCrystalizerMethod(method,consumer)
                             break;
                     }
                 }
@@ -244,6 +247,31 @@ public class IGRecipeProvider extends RecipeProvider {
                         inputItem.getItem().getRegistryName().getPath().toLowerCase() + "_to_" +
                         outputItem.getItem().getRegistryName().getPath().toLowerCase() + "_and_"
                         + slagItem.getItem().getRegistryName().getPath().toLowerCase()));
+    }
+
+    private void addCrystalizerMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
+    {
+
+        IGCrystalizerProcessingMethod crystalMethod = (IGCrystalizerProcessingMethod) method;
+        int energyCost = crystalMethod.getEnergyCost();
+        int processingTime = crystalMethod.getProcessingTime();
+        ItemStack outputItem = crystalMethod.getOutputItem();
+        FluidStack input_fluid = crystalMethod.getInputFluid();
+
+        CrystalizerRecipeBuilder crystalizerRecipeBuilder = CrystalizerRecipeBuilder.builder(outputItem)
+               .setEnergy(energyCost).setTime(processingTime);
+        FluidTagInput input_chemical = new FluidTagInput(FluidTags.WATER, 1);
+
+        if (input_fluid.getFluid() instanceof IGFluid)
+        {
+            IGFluid igFluid = (IGFluid) input_fluid.getFluid();
+            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+            input_chemical = new FluidTagInput(tags.fluid, input_fluid.getAmount());
+        }
+
+        crystalizerRecipeBuilder.addFluidInput(input_chemical).build(consumer,toRL("crystalizer/" +
+                 outputItem.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addVatMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
