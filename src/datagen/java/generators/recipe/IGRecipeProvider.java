@@ -286,11 +286,8 @@ public class IGRecipeProvider extends RecipeProvider {
         log.info("Registering Chemical Vat Recipe");
 
         vatRecipeBuilder.builder(outputItem, output_chemical).addItemInput(itemInput).addFluidInputs(primary_chemical, secondary_chemical).setEnergy(energyCost).setTime(timeTaken)
-                .build(consumer, toRL("chemicalvat/vat_recipe_" + primary_input.getFluid().getRegistryName().getPath()
-                        + "_and_" + secondary_input.getFluid().getRegistryName().getPath() + "_and_"
-                        + itemInput.getItem().getRegistryName().getPath().toLowerCase() + "_to_"
-                        + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() + "_and_"
-                        + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
+                .build(consumer,toRL("chemicalvat/" + output_chemical.getFluid().getRegistryName().getPath().toLowerCase() +
+                        "_" + outputItem.getItem().getRegistryName().getPath().toLowerCase()));
 
     }
     private void add3x3Conversion(IItemProvider bigItem, IItemProvider smallItem, ITag.INamedTag<Item> smallTag, Consumer<IFinishedRecipe> out)
