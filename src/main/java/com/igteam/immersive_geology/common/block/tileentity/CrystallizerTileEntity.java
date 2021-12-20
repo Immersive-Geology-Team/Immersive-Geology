@@ -21,8 +21,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.IItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
@@ -35,8 +39,19 @@ import java.util.Set;
 //I swear's I'll use the API after Alpha release ~Muddykat
 public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<CrystallizerTileEntity, CrystalRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
+    public float activeTicks;
+    public FluidTank inputFluidTank =  new FluidTank(12* FluidAttributes.BUCKET_VOLUME);
+    public BlockPos inputOffset = new BlockPos(0, 1, 1);
+    public BlockPos outputOffset = new BlockPos(2, 1, 1);
+    public NonNullList<ItemStack> inventory;
+
+    private LazyOptional<IItemHandler> extractionHandler;
+
     public CrystallizerTileEntity() {
         super(CrystallizerMultiblock.INSTANCE, 24000, true, IGTileTypes.CRYSTALLIZER.get());
+        activeTicks = 0;
+        this.inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+
     }
 
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
@@ -96,6 +111,19 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
     public int[] getOutputSlots() {
         return new int[0];
     }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        checkForNeedlessTicking();
+        activeTicks++;
+        activeTicks = activeTicks % 360;
+
+
+    }
+
+
 
     @Override
     public int[] getOutputTanks() {
