@@ -6,11 +6,13 @@ import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import blusunrize.lib.manual.*;
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.*;
+import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
@@ -25,6 +27,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
@@ -55,6 +58,13 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onFinishSetup(FMLLoadCompleteEvent event) {
         setupManualPages();
+        setupBloomeryFuels();
+    }
+
+    private void setupBloomeryFuels(){
+        ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
+        BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
+        BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
     }
 
     private void registerItemColors(){

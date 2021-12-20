@@ -107,7 +107,7 @@ public class MaterialMetalPlatinum extends MaterialMetalBase
 	}
 
 	@Override
-	public boolean isNativeMetal() {return false;}
+	public boolean isNativeMetal() {return true;}
 
 	/*@Nullable
 	@Override

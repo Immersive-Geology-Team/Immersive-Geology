@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:ore_chunk_vanilla_iron"
+    },
+    {
+      "item": "immersive_geology:ore_chunk_vanilla_iron"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_vanilla_iron"
+  }
+}

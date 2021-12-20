@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:crushed_ore_aluminum",
+    "immersive_geology:crushed_ore_iron",
+    "immersive_geology:crushed_ore_lead",
+    "immersive_geology:crushed_ore_manganese",
+    "immersive_geology:crushed_ore_platinum",
+    "immersive_geology:crushed_ore_silver",
+    "immersive_geology:crushed_ore_cobalt",
+    "immersive_geology:crushed_ore_arsenic",
     "immersive_geology:crushed_ore_anatase",
     "immersive_geology:crushed_ore_cuprite",
     "immersive_geology:crushed_ore_zircon",
@@ -28,6 +36,7 @@
     "immersive_geology:crushed_ore_pyrite",
     "immersive_geology:crushed_ore_wolframite",
     "immersive_geology:crushed_ore_vanadinite",
+    "immersive_geology:crushed_ore_unobtainium",
     "immersive_geology:crushed_ore_kaolinite"
   ]
 }

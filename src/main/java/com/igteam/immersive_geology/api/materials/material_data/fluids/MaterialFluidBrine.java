@@ -148,6 +148,9 @@ public class MaterialFluidBrine extends MaterialFluidBase
 		rocksalt_solution_method.addPrimaryFluidInput(Fluids.WATER, 125);
 		rocksalt_solution_method.addSecondaryFluidInput(Fluids.EMPTY, 0);
 		rocksalt_solution_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.RockSalt.getMaterial(), MaterialUseType.DUST), 1));
-		return new IGMaterialProcess(rocksalt_solution_method);
+
+		inheritedProcessingMethods.add(rocksalt_solution_method);
+
+		return super.getProcessingMethod();
 	}
 }

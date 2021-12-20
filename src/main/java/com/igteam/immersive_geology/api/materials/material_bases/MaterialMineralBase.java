@@ -5,9 +5,14 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -134,5 +139,24 @@ public abstract class MaterialMineralBase extends Material
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return null;
+	}
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		Item inputCrushManual = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.ORE_CHUNK);
+
+		IGCraftingProcessingMethod defaultNativeOreCrushing = new IGCraftingProcessingMethod("has_ore_chunk", IGTags.getTagsFor(this).ore_crushed);
+		defaultNativeOreCrushing.setShapeless(inputCrushManual, inputCrushManual);
+		defaultNativeOreCrushing.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.DIRTY_CRUSHED_ORE), 1));
+
+		Item inputDirtyCrush = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.DIRTY_CRUSHED_ORE);
+		IGCraftingProcessingMethod manualClean = new IGCraftingProcessingMethod("has_ore_chunk", IGTags.getTagsFor(this).ore_crushed);
+		manualClean.setShapeless(inputDirtyCrush, inputDirtyCrush);
+		manualClean.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial( this, MaterialUseType.CRUSHED_ORE), 1));
+
+		inheritedProcessingMethods.add(defaultNativeOreCrushing);
+		inheritedProcessingMethods.add(manualClean);
+
+		return super.getProcessingMethod();
 	}
 }

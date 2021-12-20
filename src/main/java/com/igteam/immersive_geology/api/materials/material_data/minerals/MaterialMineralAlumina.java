@@ -130,6 +130,6 @@ public class MaterialMineralAlumina extends MaterialMineralBase
 	//Input the processing steps for this material
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
-		return null;
+		return super.getProcessingMethod();
 	}
 }

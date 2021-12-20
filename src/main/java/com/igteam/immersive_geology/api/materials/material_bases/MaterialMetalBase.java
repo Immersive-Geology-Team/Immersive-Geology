@@ -1,10 +1,17 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
+import com.igteam.immersive_geology.api.tags.IGTags;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -12,6 +19,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 public abstract class MaterialMetalBase extends Material
 {
 	public abstract EnumMetalType getMetalType();
+
 	@Override
 	public boolean hasSubtype(MaterialUseType useType)
 	{
@@ -51,6 +59,7 @@ public abstract class MaterialMetalBase extends Material
 			case ORE_CHUNK:
 			case ORE_BIT:
 			case DIRTY_CRUSHED_ORE:
+			case CRUSHED_ORE:
 			case ORE_STONE:
 				return isNativeMetal();
 			default:
@@ -83,7 +92,7 @@ public abstract class MaterialMetalBase extends Material
 	@Override
 	public MaterialTypes getMaterialSubType()
 	{
-		return (isNativeMetal ? MaterialTypes.MINERAL : MaterialTypes.METAL);
+		return (isNativeMetal() ? MaterialTypes.MINERAL : MaterialTypes.METAL);
 	}
 
 	@Override
@@ -176,7 +185,28 @@ public abstract class MaterialMetalBase extends Material
 	//Input the processing steps for this material
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
-		return null;
+		if(isNativeMetal()) {
+			Item inputCrushManual = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.ORE_CHUNK);
+
+			IGCraftingProcessingMethod defaultNativeOreCrushing = new IGCraftingProcessingMethod("has_ore_chunk", IGTags.getTagsFor(this).ore_crushed);
+			defaultNativeOreCrushing.setShapeless(inputCrushManual, inputCrushManual);
+			defaultNativeOreCrushing.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.DIRTY_CRUSHED_ORE), 1));
+
+			Item inputDirtyCrush = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this, MaterialUseType.DIRTY_CRUSHED_ORE);
+			IGCraftingProcessingMethod manualClean = new IGCraftingProcessingMethod("has_ore_chunk", IGTags.getTagsFor(this).ore_crushed);
+			manualClean.setShapeless(inputDirtyCrush, inputDirtyCrush);
+			manualClean.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial( this, MaterialUseType.CRUSHED_ORE), 1));
+
+			IGBloomeryProcessingMethod bloomeryIronIngot = new IGBloomeryProcessingMethod(10, 1);
+			bloomeryIronIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 2));
+			bloomeryIronIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
+
+			inheritedProcessingMethods.add(bloomeryIronIngot);
+			inheritedProcessingMethods.add(defaultNativeOreCrushing);
+			inheritedProcessingMethods.add(manualClean);
+		}
+
+		return super.getProcessingMethod();
 	}
 
 }

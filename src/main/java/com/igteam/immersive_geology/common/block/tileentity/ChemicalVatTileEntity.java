@@ -202,6 +202,8 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     {
         super.tick();
 
+        checkForNeedlessTicking();
+
         activeTicks++;
         activeTicks = activeTicks % 360;
 

@@ -154,6 +154,9 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 
 		//TODO -- add crystallization process
 
-		return new IGMaterialProcess(redox_method,slurry_method);
+		inheritedProcessingMethods.add(redox_method);
+		inheritedProcessingMethods.add(slurry_method);
+
+		return super.getProcessingMethod();
 	}
 }

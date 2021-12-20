@@ -130,6 +130,8 @@ public class MaterialMineralSphalerite extends MaterialMineralBase
 
 		//TODO -- add crystallization process
 
-		return new IGMaterialProcess(slurry_method);
+		inheritedProcessingMethods.add(slurry_method);
+
+		return super.getProcessingMethod();
 	}
 }

@@ -2,13 +2,12 @@ package com.igteam.immersive_geology.api.materials.helper.processing;
 
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class IGMaterialProcess {
 
-    List<IGProcessingMethod> data = new LinkedList<IGProcessingMethod>();
+    //Using a Set to prevent Duplicate Cases
+    Set<IGProcessingMethod> data = new LinkedHashSet<>();
 
     public IGMaterialProcess(IGProcessingMethod... method){
         for (IGProcessingMethod m : method) {
@@ -20,7 +19,7 @@ public class IGMaterialProcess {
         }
     }
 
-    public List<IGProcessingMethod> getData() {
+    public Set<IGProcessingMethod> getData() {
         return data;
     }
 }

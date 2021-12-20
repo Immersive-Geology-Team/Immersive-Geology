@@ -141,6 +141,10 @@ public class MaterialFluidNitricAcid extends MaterialFluidBase {
         sulfuric_saltpeter_method.addSecondaryFluidInput(Fluids.WATER, 125);
         //FIXME -- wiggle it to have just forge:dusts/saltpeter as intput
         sulfuric_saltpeter_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.SaltPeter.getMaterial(), MaterialUseType.DUST), 1));
-        return new IGMaterialProcess(sulfuric_saltpeter_method);
+
+        inheritedProcessingMethods.add(sulfuric_saltpeter_method);
+        
+        return super.getProcessingMethod();
+
     }
 }

@@ -1,11 +1,16 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -113,7 +118,6 @@ public class MaterialMineralChalcopyrite extends MaterialMineralBase
 	public CrystalFamily getCrystalFamily() {
 		return CrystalFamily.TETRAGONAL;
 	}
-
 
 	@Override
 	public MaterialEnum getProcessedType() {

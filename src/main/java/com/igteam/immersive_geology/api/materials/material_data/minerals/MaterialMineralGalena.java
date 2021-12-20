@@ -134,6 +134,9 @@ public class MaterialMineralGalena extends MaterialMineralBase
 		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Lead.getMaterial(), MaterialUseType.INGOT)));
 		//we grab IE slag in recipe builder here
 		method.addItemSlag(ItemStack.EMPTY);
-		return new IGMaterialProcess(method);
+
+		inheritedProcessingMethods.add(method);
+
+		return super.getProcessingMethod();
 	}
 }

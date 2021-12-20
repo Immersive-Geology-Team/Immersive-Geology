@@ -159,6 +159,9 @@ public class MaterialMineralAnatase extends MaterialMineralBase
 		sedimentary_method.addSecondaryFluidInput(Fluids.EMPTY, 0);
 		sedimentary_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.DUST), 4));
 
-		return new IGMaterialProcess(titanium_slurry_method, sedimentary_method);
+		inheritedProcessingMethods.add(titanium_slurry_method);
+		inheritedProcessingMethods.add(sedimentary_method);
+
+		return super.getProcessingMethod();
 	}
 }

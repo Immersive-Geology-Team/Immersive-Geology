@@ -133,6 +133,8 @@ public class MaterialMineralIlmenite extends MaterialMineralBase
 		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
 		method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Anatase.getMaterial(), MaterialUseType.DIRTY_CRUSHED_ORE)));
 
-		return new IGMaterialProcess(method);
+		inheritedProcessingMethods.add(method);
+
+		return super.getProcessingMethod();
 	}
 }

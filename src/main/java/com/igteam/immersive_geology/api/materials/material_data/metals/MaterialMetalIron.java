@@ -1,10 +1,20 @@
 package com.igteam.immersive_geology.api.materials.material_data.metals;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
+import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
@@ -20,6 +30,11 @@ public class MaterialMetalIron extends MaterialMetalBase
 	public String getName()
 	{
 		return "iron";
+	}
+
+	@Override
+	public boolean isNativeMetal() {
+		return true;
 	}
 
 	@Nonnull
@@ -107,10 +122,9 @@ public class MaterialMetalIron extends MaterialMetalBase
 
 	@Override
 	public boolean hasCompoundDust() {return true;}
-	/*@Nullable
+
 	@Override
-	public IItemTier getToolTier()
-	{
-		return IGContent.;
-	}*/
+	public IGMaterialProcess getProcessingMethod() {
+		return super.getProcessingMethod();
+	}
 }

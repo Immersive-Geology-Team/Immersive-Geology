@@ -156,6 +156,9 @@ public class MaterialMineralChromite extends MaterialMineralBase
 
 		//TODO - add crystallization procces
 
-		return new IGMaterialProcess(slurry_method,slurry_method_pt2);
+		inheritedProcessingMethods.add(slurry_method);
+		inheritedProcessingMethods.add(slurry_method_pt2);
+
+		return super.getProcessingMethod();
 	}
 }

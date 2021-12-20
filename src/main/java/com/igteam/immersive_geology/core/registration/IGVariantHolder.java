@@ -44,6 +44,8 @@ public class IGVariantHolder {
                         case SLURRY:
                             registerSlurryType(mat);
                             break;
+                        case MACHINE:
+                            break;
                         default:
                             createItemVariants(mat, type);
                     }

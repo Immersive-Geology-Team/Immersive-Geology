@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.helper.*;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
@@ -16,10 +17,7 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -32,7 +30,12 @@ import java.util.List;
 public abstract class Material
 {
 
-    public boolean isNativeMetal = false;
+	protected ArrayList<IGProcessingMethod> inheritedProcessingMethods;
+
+	public Material(){
+		 inheritedProcessingMethods = new ArrayList<>();
+	}
+
 	private IGOreConfig oreConfiguration;
 
 	public void setConfiguration(IGOreConfig config){
@@ -253,8 +256,15 @@ public abstract class Material
 	//Check to see if this material already exists, used to prevent recipe duplication.
 	public abstract boolean preExists();
 
+	/**
+	 * Only Call once otherwise duplicates may ensue
+	 * @return
+	 */
 	public IGMaterialProcess getProcessingMethod(){
-		return null;
+		//Using a set prevents duplicate elements... Just in case
+		Set<IGProcessingMethod> methods = new LinkedHashSet<>();
+		methods.addAll(inheritedProcessingMethods);
+		return new IGMaterialProcess(methods.toArray(new IGProcessingMethod[methods.size()]));
 	}
 
 	public boolean hasSlurry(){

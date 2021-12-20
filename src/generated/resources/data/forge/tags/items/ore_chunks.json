@@ -2,8 +2,10 @@
   "replace": false,
   "values": [
     "immersive_geology:ore_chunk_vanilla_aluminum",
+    "immersive_geology:ore_chunk_vanilla_iron",
     "immersive_geology:ore_chunk_vanilla_lead",
     "immersive_geology:ore_chunk_vanilla_manganese",
+    "immersive_geology:ore_chunk_vanilla_platinum",
     "immersive_geology:ore_chunk_vanilla_silver",
     "immersive_geology:ore_chunk_vanilla_cobalt",
     "immersive_geology:ore_chunk_vanilla_arsenic",

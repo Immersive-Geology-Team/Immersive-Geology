@@ -56,9 +56,9 @@ public class IGTags {
         public final INamedTag<Item> rod;
         public final INamedTag<Item> gear;
         public final INamedTag<Item> wire;
+        public final INamedTag<Item> brick;
 
         public final INamedTag<Fluid> fluid;
-
         public final INamedTag<Block> metal_block;
 
         private MaterialTags(Material material) {
@@ -74,6 +74,12 @@ public class IGTags {
                 ingot = createItemWrapper(getIngot(name));
             } else {
                 ingot = null;
+            }
+
+            if(material.hasSubtype(MaterialUseType.BRICK)){
+                brick = createItemWrapper(getBrick(name));
+            } else {
+                brick = null;
             }
 
             if(material.hasSubtype(MaterialUseType.DUST)) {
@@ -177,6 +183,12 @@ public class IGTags {
     public static ResourceLocation getIngot(String type)
     {
         return forgeLoc("ingots/"+type);
+    }
+
+
+    public static ResourceLocation getBrick(String type)
+    {
+        return forgeLoc("bricks/"+type);
     }
 
     public static ResourceLocation getGem(String type)

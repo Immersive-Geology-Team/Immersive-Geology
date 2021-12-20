@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dirty_crushed_ore_vanilla_cobaltite"
+    },
+    {
+      "item": "immersive_geology:dirty_crushed_ore_vanilla_cobaltite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:crushed_ore_cobaltite"
+  }
+}

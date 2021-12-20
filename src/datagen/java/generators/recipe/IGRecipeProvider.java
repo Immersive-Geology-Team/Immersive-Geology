@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilde
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.BloomeryRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
 import com.igteam.immersive_geology.api.materials.Material;
@@ -19,9 +20,12 @@ import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
@@ -48,9 +52,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.nio.file.Path;
 
@@ -77,26 +79,26 @@ public class IGRecipeProvider extends RecipeProvider {
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         CrusherRecipeBuilder crusherBuilder;
 
-        for(MaterialEnum wrapper : MaterialEnum.values()) {
+        for (MaterialEnum wrapper : MaterialEnum.values()) {
             Material material = wrapper.getMaterial();
 
             IGTags.MaterialTags tags = IGTags.getTagsFor(material);
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
-            Item ingot =  MaterialUseType.INGOT.getItem(material);
+            Item ingot = MaterialUseType.INGOT.getItem(material);
             Item dust = MaterialUseType.DUST.getItem(material);
 
-            if(material.hasSubtype(MaterialUseType.NUGGET) && material.hasSubtype(MaterialUseType.INGOT)){
+            if (material.hasSubtype(MaterialUseType.NUGGET) && material.hasSubtype(MaterialUseType.INGOT)) {
                 add3x3Conversion(ingot, nugget, tags.nugget, consumer);
                 log.debug("Generated Ingot/Nugget Recipe for: " + material.getName());
 
                 Block metal_block = MaterialUseType.STORAGE_BLOCK.getBlock(material);
-                if(metal_block != null) {
+                if (metal_block != null) {
                     add3x3Conversion(metal_block, ingot, tags.ingot, consumer);
                     log.debug("Generate Storage Block recipe for: " + material.getName());
                 }
 
-                if(!material.preExists()) {
+                if (!material.preExists()) {
                     crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
                     crusherBuilder.addCondition(getTagCondition(tags.dust)).addCondition(getTagCondition(tags.ingot));
                     crusherBuilder.addInput(tags.ingot)
@@ -107,23 +109,23 @@ public class IGRecipeProvider extends RecipeProvider {
 
             if (material.hasSubtype(MaterialUseType.PLATE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/plate_"+material.getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/plate_" + material.getName()));
             }
 
             if (material.hasSubtype(MaterialUseType.ROD)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldRod, tags.rod, 1).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/rod_"+material.getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/rod_" + material.getName()));
             }
 
             if (material.hasSubtype(MaterialUseType.GEAR)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldGear, tags.gear, 1)
-                        .addInput(new IngredientWithSize(tags.ingot,4))
-                        .setEnergy(2400).build(consumer, toRL("metalpress/gear_"+material.getName()));
+                        .addInput(new IngredientWithSize(tags.ingot, 4))
+                        .setEnergy(2400).build(consumer, toRL("metalpress/gear_" + material.getName()));
             }
 
             if (material.hasSubtype(MaterialUseType.WIRE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldWire, tags.wire, 2).addInput(tags.ingot)
-                        .setEnergy(2400).build(consumer, toRL("metalpress/wire_"+material.getName()));
+                        .setEnergy(2400).build(consumer, toRL("metalpress/wire_" + material.getName()));
 
             }
 
@@ -132,13 +134,13 @@ public class IGRecipeProvider extends RecipeProvider {
                     Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base.getMaterial(), material);
                     Material processed_material = material;
 
-                    if(material.getProcessedType() != null && !material.isNativeMetal) {
+                    if (material.getProcessedType() != null && material instanceof MaterialMetalBase && !((MaterialMetalBase) material).isNativeMetal()) {
                         processed_material = material.getProcessedType().getMaterial();
-                    } else if(material.getProcessedType() != null) {
+                    } else if (material.getProcessedType() != null) {
                         log.info("Material Processed Type not Null put is Native? " + material.getName());
                     }
 
-                    if(processed_material != null) {
+                    if (processed_material != null) {
                         Item ore_ingot = MaterialUseType.INGOT.getItem(processed_material);
 
                         if (ore_ingot != null && ore_chunk != null) {
@@ -148,7 +150,7 @@ public class IGRecipeProvider extends RecipeProvider {
                     }
 
                     crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
-                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_"+material.getName()));
+                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_" + material.getName()));
                 }
             }
 //
@@ -165,40 +167,44 @@ public class IGRecipeProvider extends RecipeProvider {
 //                crusherBuilder.addInput(tags.ore_crushed).setEnergy(3000).build(consumer, toRL("crusher/ore_crushed_"+material.getMaterial().getName()));
 //            }
         }
+
         for (FluidEnum fluidwrap: FluidEnum.values())
         {
 
             if (fluidwrap.getMaterial() instanceof MaterialSlurryWrapper) {continue;} //slurries registered not here
 
-            if (fluidwrap.getMaterial().getProcessingMethod() != null) {
-                IGMaterialProcess processess = fluidwrap.getMaterial().getProcessingMethod();
-                List<IGProcessingMethod> data = processess.getData();
+            IGMaterialProcess processess = fluidwrap.getMaterial().getProcessingMethod();
+            if (processess != null) {
+                Set<IGProcessingMethod> data = processess.getData();
                 for (IGProcessingMethod method : data) {
                     if (method instanceof IGVatProcessingMethod){
                     addVatMethod(method, consumer);
                     }
                 }
             }
-
         }
-        for(MaterialEnum orewrap : MaterialEnum.minerals()) {
-            MaterialMineralBase orebase = (MaterialMineralBase) orewrap.getMaterial();
-            //Gravity Separator
-            ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
-            for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
-                Material stonebase = stoneWrap.getMaterial();
-                ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
-                ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
-                SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
-                sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+
+        for(MaterialEnum wrap : MaterialEnum.values()) {
+            if(wrap.getMaterial() instanceof MaterialMineralBase) {
+                MaterialMineralBase orebase = (MaterialMineralBase) wrap.getMaterial();
+                //Gravity Separator
+                ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
+                for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
+                    Material stonebase = stoneWrap.getMaterial();
+                    ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
+                    ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
+                    SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
+                    sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+                }
             }
 
             //Setup Recipe Generation for Mineral Processing
+            Material base = wrap.getMaterial();
 
             //Create Recipe Builders
-            if(orebase.getProcessingMethod() != null){
-                IGMaterialProcess processess = orebase.getProcessingMethod();
-                List<IGProcessingMethod> data = processess.getData();
+            IGMaterialProcess processess = base.getProcessingMethod();
+            if(processess != null){
+                Set<IGProcessingMethod> data = processess.getData();
 
                 for (IGProcessingMethod method : data) {
                     switch (method.getKey()) {
@@ -211,10 +217,14 @@ public class IGRecipeProvider extends RecipeProvider {
                             addVatMethod(method, consumer);
                             break;
                         case ROASTER:
+                            addBloomeryMethod(method, consumer);
                             break;
                         case SEDIMENT:
                             break;
                         case ELECTROLYSIS:
+                            break;
+                        case CRAFTING:
+                            addCraftingMethod(method, consumer);
                             break;
                     }
                 }
@@ -244,6 +254,57 @@ public class IGRecipeProvider extends RecipeProvider {
                         inputItem.getItem().getRegistryName().getPath().toLowerCase() + "_to_" +
                         outputItem.getItem().getRegistryName().getPath().toLowerCase() + "_and_"
                         + slagItem.getItem().getRegistryName().getPath().toLowerCase()));
+    }
+
+    private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+        assert method instanceof IGCraftingProcessingMethod;
+        IGCraftingProcessingMethod m = (IGCraftingProcessingMethod) method;
+
+        if(m.isShapeless()){
+            ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapelessRecipe(m.getOutput().getItem(), m.getOutput().getCount());
+            builder.addCriterion(m.getCriterionName(), hasItem(m.getCriterion()));
+
+            for (Item item : m.getShapelessInputs()) {
+                builder.addIngredient(item);
+            }
+
+            StringBuilder inputStrings = new StringBuilder();
+            m.getShapelessInputs().stream().distinct().forEach((i) -> {
+                inputStrings.append(i.getRegistryName().getPath().toLowerCase() + "_and_");
+            });
+
+            builder.build(consumer, toRL("crafting/" + inputStrings.toString() + "to_" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
+            return;
+        }
+
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shapedRecipe(m.getOutput().getItem(), m.getOutput().getCount());
+        builder.addCriterion(m.getCriterionName(), hasItem(m.getCriterion()));
+
+        for (Character k : m.getPatternKeys()) {
+            builder.key(k, m.getItemByKey(k));
+        }
+        builder.patternLine(m.topLine());
+        builder.patternLine(m.midLine());
+        builder.patternLine(m.botLine());
+
+        StringBuilder inputStrings = new StringBuilder();
+        m.getShapedInputs().stream().distinct().forEach((i) -> {
+            inputStrings.append(i.getRegistryName().getPath().toLowerCase() + "_and_");
+        });
+
+        builder.build(consumer, toRL("crafting/" + inputStrings.toString() + "to_" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
+
+    }
+
+    private void addBloomeryMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+        IGBloomeryProcessingMethod m = (IGBloomeryProcessingMethod) method;
+        int fuelCost = m.getEnergyCost();
+        int timeMult = m.getProcessingTime();
+
+        ItemStack input = m.getInputItem();
+        ItemStack output = m.getOutputItem();
+
+        BloomeryRecipeBuilder.builder(output).setTime(timeMult).setEnergy(fuelCost).addItemInput(input).build(consumer, toRL("bloomery/" + input.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addVatMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)

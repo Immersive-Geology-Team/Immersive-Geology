@@ -152,6 +152,9 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 		//TODO -- add roasting process to compound dust
 		//TODO -- add Arc furnacing of Vanadium oxide
 
-		return new IGMaterialProcess(redox_method, slurry_method);
+		inheritedProcessingMethods.add(redox_method);
+		inheritedProcessingMethods.add(slurry_method);
+
+		return super.getProcessingMethod();
 	}
 }
