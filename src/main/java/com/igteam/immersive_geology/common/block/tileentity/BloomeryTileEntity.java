@@ -11,6 +11,7 @@ import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.BloomeryRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -209,12 +210,16 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         checkForNeedlessTicking();
         if(isDummy()) return;
         boolean burning = isBurning();
+        boolean dirty = false;
         if (burning) this.currentBurnTime--;
         BloomeryRecipe recipe = cachedRecipe.get();
         if(recipe != null){
             ItemStack input = inventory.get(inputSlot);
             if(recipe.matches(input)) {
-                if(!burning) burnFuelAsNeeded();
+                if(!burning)
+                {
+                    dirty = burnFuelAsNeeded();;
+                }
                 if(isBurning()) {
                     progress += (1 * recipe.getTime()); //how fast does it progress?
                     if (progress >= maxProgress) {
@@ -230,6 +235,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                                 inventory.get(inputSlot).shrink(recipe.getRecipeInput().getCount());
                             }
                         }
+                        dirty = true;
                     }
                 } else {
                     if(progress > 0) progress -= 0.5;
@@ -240,13 +246,23 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         } else {
             progress = 0;
         }
+        if (burning != this.isBurning()) {
+            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(AbstractFurnaceBlock.LIT, Boolean.valueOf(this.isBurning())), 3);
+            dirty = true;
+        }
+
+        if (dirty) {
+            this.markDirty();
+        }
     }
 
-    private void burnFuelAsNeeded() {
+    private boolean burnFuelAsNeeded() {
         if(hasFuelAvailable()) {
             currentBurnTime += fuelMap.get(inventory.get(fuelSlot).getItem());
             inventory.get(fuelSlot).shrink(1);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -282,6 +298,15 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     @Override
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         BloomeryTileEntity master = (BloomeryTileEntity) master();
+        /* //TODO Make actually work
+        if(!master.inventory.get(outputSlot).isEmpty() && master.inventory.get(outputSlot).equals(itemStack)){
+            int diff = Math.abs(master.inventory.get(outputSlot).getCount() - itemStack.getCount());
+            master.inventory.get(outputSlot).shrink(diff);
+            ItemStack handItem = playerEntity.getHeldItem(hand);
+            handItem.grow(diff);
+            playerEntity.setHeldItem(hand, handItem);
+            return true;
+        }*/
         if(itemStack.isEmpty()){
             if(!master.inventory.get(outputSlot).isEmpty()){
                 playerEntity.setHeldItem(hand, master.inventory.get(outputSlot));
