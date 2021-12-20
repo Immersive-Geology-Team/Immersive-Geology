@@ -1,35 +1,26 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
-import blusunrize.immersiveengineering.api.IEEnums;
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.client.IModelOffsetProvider;
-import blusunrize.immersiveengineering.api.energy.immersiveflux.FluxStorage;
 import blusunrize.immersiveengineering.client.models.IOBJModelCallback;
 import blusunrize.immersiveengineering.common.blocks.IEBaseTileEntity;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
-import blusunrize.immersiveengineering.common.blocks.metal.ClocheTileEntity;
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
-import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.BloomeryRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
-import javafx.scene.effect.Bloom;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.Property;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
@@ -46,9 +37,7 @@ import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -65,6 +54,8 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     protected float progress = 0;
     protected int maxProgress = 100;
 
+    private float currentBurnTime = 0;
+
     public final Supplier<BloomeryRecipe> cachedRecipe = CachedRecipe.cached(
             BloomeryRecipe::findRecipe, () -> inventory.get(inputSlot)
     );
@@ -77,6 +68,8 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         dummy = nbt.getInt("dummy");
         inventory = Utils.readInventory(nbt.getList("inventory", 10), 3);
+        progress = nbt.getFloat("progress");
+        currentBurnTime = nbt.getFloat("burnTime");
         renderBB = null;
     }
 
@@ -84,6 +77,8 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         nbt.putInt("dummy", dummy);
         nbt.put("inventory", Utils.writeInventory(inventory));
+        nbt.putFloat("progress", progress);
+        nbt.putFloat("burnTime", currentBurnTime);
     }
 
     @Override
@@ -199,10 +194,8 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         return renderBB;
     }
 
-    private float currentBurnTime = 0;
-
-    public boolean canSmelt(){
-        return currentBurnTime > 0;
+    private boolean isBurning() {
+        return this.currentBurnTime > 0;
     }
 
     public static HashMap<Item, Integer> fuelMap = new HashMap<>();
@@ -215,39 +208,42 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     public void tick() {
         checkForNeedlessTicking();
         if(isDummy()) return;
+        boolean burning = isBurning();
+        if (burning) this.currentBurnTime--;
         BloomeryRecipe recipe = cachedRecipe.get();
         if(recipe != null){
             ItemStack input = inventory.get(inputSlot);
             if(recipe.matches(input)) {
-                burnFuelAsNeeded();
-                if(canSmelt()) {
+                if(!burning) burnFuelAsNeeded();
+                if(isBurning()) {
+                    progress += (1 * recipe.getTime()); //how fast does it progress?
                     if (progress >= maxProgress) {
                         ItemStack outputSlotItem = inventory.get(outputSlot);
-                        if(outputSlotItem.isEmpty()) {
+                        if (outputSlotItem.isEmpty()) {
                             inventory.set(outputSlot, recipe.getRecipeOutput());
-                            return;
+                            progress = 0;
+                            inventory.get(inputSlot).shrink(recipe.getRecipeInput().getCount());
                         } else {
-                            if(outputSlotItem.isItemEqual(recipe.getRecipeOutput())){
+                            if (outputSlotItem.isItemEqual(recipe.getRecipeOutput())) {
                                 inventory.get(outputSlot).grow(recipe.getRecipeOutput().getCount());
                                 progress = 0;
                                 inventory.get(inputSlot).shrink(recipe.getRecipeInput().getCount());
                             }
                         }
-                    } else {
-                        progress += (1 * recipe.getTime()); //how fast does it progress?
-                        currentBurnTime--;
                     }
                 } else {
-                    if(progress > 0) progress *= 0.75;
+                    if(progress > 0) progress -= 0.5;
                 }
             } else {
-                if(progress > 0) progress *= 0.75;
+                if(progress > 0) progress -= 0.5;
             }
+        } else {
+            progress = 0;
         }
     }
 
     private void burnFuelAsNeeded() {
-        if(currentBurnTime == 0 && hasFuelAvailable()) {
+        if(hasFuelAvailable()) {
             currentBurnTime += fuelMap.get(inventory.get(fuelSlot).getItem());
             inventory.get(fuelSlot).shrink(1);
         }
@@ -297,6 +293,11 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                 master.inventory.set(inputSlot, ItemStack.EMPTY);
                 return true;
             }
+            if(!master.inventory.get(fuelSlot).isEmpty()) {
+                playerEntity.setHeldItem(hand, master.inventory.get(fuelSlot));
+                master.inventory.set(fuelSlot, ItemStack.EMPTY);
+                return true;
+            }
         }
         if(master.fuelMap.containsKey(itemStack.getItem())){
             ItemStack fuelTest = master.inventory.get(fuelSlot);
@@ -317,6 +318,14 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         if(master.inventory.get(inputSlot).isEmpty()){
             master.inventory.set(inputSlot, itemStack);
             playerEntity.setHeldItem(hand, ItemStack.EMPTY);
+            return true;
+        }
+        if(master.inventory.get(inputSlot).equals(itemStack)){
+            int diff = Math.abs(itemStack.getCount() - master.inventory.get(inputSlot).getCount());
+            master.inventory.get(inputSlot).grow(diff);
+            ItemStack handItem = playerEntity.getHeldItem(hand);
+            handItem.shrink(diff);
+            playerEntity.setHeldItem(hand, handItem);
             return true;
         }
         return false;
