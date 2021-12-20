@@ -44,7 +44,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Nonnull
     @Override
-    public VoxelShape getBlockBounds( ISelectionContext iSelectionContext) {
+    public VoxelShape getBlockBounds(ISelectionContext iSelectionContext) {
         return getShape(SHAPES);
     }
 
@@ -139,7 +139,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     public boolean isInWorldProcessingMachine() {
-        return false;
+        return true;
     }
 
     @Nonnull
@@ -178,23 +178,78 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     }
 
-    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
         final int bX = posInMultiblock.getX();
         final int bY = posInMultiblock.getY();
         final int bZ = posInMultiblock.getZ();
 
-        //Empty space
-        if (bX == 0 && bZ == 0)
-        {
-            if (bY == 2 || bY == 3)
-            {
-                return new ArrayList<>();
+        if (bY == 0) {
+
+            if (bX == 0 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.0625, 0.5, 0.0625, 0.3175, 1.0, 0.3175));
             }
-            if (bY == 1)
-            {
-                return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));
+
+            if (bX == 0 && bZ == 2) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.0625, 0.5, 0.9375, 0.3175, 1.0, 0.6825));
+            }
+
+            if (bX == 2 && bZ == 2) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.9375, 0.5, 0.9375, 0.6825, 1.0, 0.6825));
+            }
+
+            if (bX == 2 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.9375, 0.5, 0.0625, 0.6825, 1.0, 0.3175));
+            }
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+        }
+
+        if (bY == 1) {
+            if (bX == 0 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0625, 1, 1.0, 1));
+            }
+
+            if (bX == 0 && bZ == 2) {
+                return Arrays.asList(
+                        new AxisAlignedBB(0.0625, 0.0, 0.9375, 1, 1.0, 0));
+            }
+
+            if (bX == 2 && bZ == 2) {
+                return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.9375, 0, 1.0, 0));
+            }
+
+            if (bX == 2 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.0625, 0, 1.0, 1));
             }
         }
+        if (bY == 2) {
+            if (bX == 0 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0625, 1, 0.25, 1));
+            }
+
+            if (bX == 0 && bZ == 2) {
+                return Arrays.asList(
+                        new AxisAlignedBB(0.0625, 0.0, 0.9375, 1, 0.25, 0));
+            }
+
+            if (bX == 2 && bZ == 2) {
+                return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.9375, 0, 0.25, 0));
+            }
+
+            if (bX == 2 && bZ == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.9375, 0.0, 0.0625, 0, 0.25, 1));
+            }
+            if (bX == 1 && bZ == 1) {
+                return Arrays.asList(new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.75, 0.875),
+                        new AxisAlignedBB(0.25, 0.75, 0.25, 0.75, 1.0, 0.75));
+            }
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.25, 1.0));
+
+        }
+
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }
 }
