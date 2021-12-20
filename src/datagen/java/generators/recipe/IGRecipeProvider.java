@@ -217,7 +217,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         case SEDIMENT:
                             break;
                         case ELECTROLYSIS:
-                            addCrystalizerMethod(method,consumer)
+                            addCrystalizerMethod(method,consumer);
                             break;
                     }
                 }
