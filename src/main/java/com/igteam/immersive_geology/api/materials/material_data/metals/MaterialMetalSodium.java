@@ -162,4 +162,6 @@ public class MaterialMetalSodium extends MaterialMetalBase
 	{
 		return true;
 	}
+	@Override
+	public boolean generateOxide() {return  true;}
 }
