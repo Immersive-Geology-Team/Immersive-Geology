@@ -29,12 +29,14 @@ public class IGFluidAttributes extends FluidAttributes {
         ArrayList<String> localizedNames = new ArrayList<>();
         if (stack.getFluid() instanceof IGFluid) {
             IGFluid fluid = (IGFluid) stack.getFluid();
+            String base_name = getTranslationKey();
             if (fluid.getFluidMaterial() instanceof MaterialSlurryWrapper) {
                 MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluid.getFluidMaterial();
                 localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
                 localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+                base_name = "fluid."+IGLib.MODID+"."+"slurry" ;
             }
-            TranslationTextComponent name = new TranslationTextComponent(getTranslationKey(), localizedNames.toArray(new Object[localizedNames.size()]));
+            TranslationTextComponent name = new TranslationTextComponent(base_name, localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }
         return super.getDisplayName(stack);
