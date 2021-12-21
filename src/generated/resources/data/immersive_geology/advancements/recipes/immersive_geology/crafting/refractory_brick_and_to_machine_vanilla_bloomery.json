@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:crafting/refractory_brick_and__to_machine_vanilla_bloomery"
+      "immersive_geology:crafting/refractory_brick_and_to_machine_vanilla_bloomery"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:crafting/refractory_brick_and__to_machine_vanilla_bloomery"
+        "recipe": "immersive_geology:crafting/refractory_brick_and_to_machine_vanilla_bloomery"
       }
     }
   },

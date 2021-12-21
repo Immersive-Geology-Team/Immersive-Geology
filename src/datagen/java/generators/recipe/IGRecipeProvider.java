@@ -298,7 +298,7 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
 
     }
 
-    private void addBloomeryMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+    private void addBloomeryMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer) {
         IGBloomeryProcessingMethod m = (IGBloomeryProcessingMethod) method;
         int fuelCost = m.getEnergyCost();
         int timeMult = m.getProcessingTime();
@@ -307,6 +307,7 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
         ItemStack output = m.getOutputItem();
 
         BloomeryRecipeBuilder.builder(output).setTime(timeMult).setEnergy(fuelCost).addItemInput(input).build(consumer, toRL("bloomery/" + input.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output.getItem().getRegistryName().getPath().toLowerCase()));
+    }
     private void addCrystalizerMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
     {
 

@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.api.crafting.recipes.recipe.CrystalRecipe;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import com.igteam.immersive_geology.common.crafting.serializers.BloomeryRecipeSerializer;
+import com.igteam.immersive_geology.common.crafting.serializers.CrystalizerRecipeSerializer;
 import com.igteam.immersive_geology.common.crafting.serializers.SeparatorRecipeSerializer;
 import com.igteam.immersive_geology.common.crafting.serializers.VatRecipeSerializer;
 import com.igteam.immersive_geology.core.lib.IGLib;
