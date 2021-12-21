@@ -61,9 +61,8 @@
   "fluid.immersive_geology.fluids_hydrochloric_acid": "Hydrochloric Acid",
   "fluid.immersive_geology.fluids_sulfuric_acid": "Sulfuric Acid",
   "fluid.immersive_geology.fluids_brine": "Brine",
-  "fluid.immersive_geology.slurry_titanium_hydrochloric_acid": "%s %s",
-  "fluid.immersive_geology.slurry_zinc_hydrochloric_acid": "%s %s",
-  "fluid.immersive_geology.slurry_zinc_sulfuric_acid": "%s %s",
+  "fluid.immersive_geology.fluids_sodium_hydroxide": "Sodium Hydroxide",
+  "fluid.immersive_geology.slurry": "%s %s",
 
   "material.immersive_geology.vanilla": "Stone",
   "material.immersive_geology.marble": "Marble",
@@ -151,7 +150,5 @@
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",
-  "component.immersive_geology.nitric_acid": "Nitrate",
-
-  "fluid.immersive_geology.slurry": "%s %s"
+  "component.immersive_geology.nitric_acid": "Nitrate"
 }
