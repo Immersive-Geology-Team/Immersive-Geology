@@ -19,12 +19,7 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
-import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.*;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -252,8 +247,7 @@ public class IGRecipeProvider extends RecipeProvider {
         }
 
         builder.addInput(inputItem).setEnergy(energyCost).setTime(processingTime)
-                .build(consumer,toRL("ieblastfurnace/redox_recipe_" +
-                        inputItem.getItem().getRegistryName().getPath().toLowerCase() + "_to_" +
+                .build(consumer,toRL("ieblastfurnace/" +
                         outputItem.getItem().getRegistryName().getPath().toLowerCase() + "_and_"
                         + slagItem.getItem().getRegistryName().getPath().toLowerCase()));
     }
@@ -270,12 +264,7 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
                 builder.addIngredient(item);
             }
 
-            StringBuilder inputStrings = new StringBuilder();
-            m.getShapelessInputs().stream().distinct().forEach((i) -> {
-                inputStrings.append(i.getRegistryName().getPath().toLowerCase() + "_and_");
-            });
-
-            builder.build(consumer, toRL("crafting/" + inputStrings.toString() + "to_" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
+            builder.build(consumer, toRL("crafting/" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
             return;
         }
 
@@ -289,12 +278,7 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
         builder.patternLine(m.midLine());
         builder.patternLine(m.botLine());
 
-        StringBuilder inputStrings = new StringBuilder();
-        m.getShapedInputs().stream().distinct().forEach((i) -> {
-            inputStrings.append(i.getRegistryName().getPath().toLowerCase() + "_and_");
-        });
-
-        builder.build(consumer, toRL("crafting/" + inputStrings.toString() + "to_" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
+        builder.build(consumer, toRL("crafting/" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
 
     }
 
@@ -306,7 +290,7 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
         ItemStack input = m.getInputItem();
         ItemStack output = m.getOutputItem();
 
-        BloomeryRecipeBuilder.builder(output).setTime(timeMult).setEnergy(fuelCost).addItemInput(input).build(consumer, toRL("bloomery/" + input.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output.getItem().getRegistryName().getPath().toLowerCase()));
+        BloomeryRecipeBuilder.builder(output).setTime(timeMult).setEnergy(fuelCost).addItemInput(input).build(consumer, toRL("bloomery/" + output.getItem().getRegistryName().getPath().toLowerCase()));
     }
     private void addCrystalizerMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
     {
@@ -386,11 +370,11 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
                 .patternLine("sis")
                 .patternLine("sss")
                 .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
-                .build(out, toRL(toPath(smallItem)+"_to_")+toPath(bigItem));
+                .build(out, toRL(toPath(bigItem)));
         ShapelessRecipeBuilder.shapelessRecipe(smallItem, 9)
                 .addIngredient(bigItem)
                 .addCriterion("has_"+toPath(bigItem), hasItem(smallItem))
-                .build(out, toRL(toPath(bigItem)+"_to_"+toPath(smallItem)));
+                .build(out, toRL(toPath(smallItem)));
     }
 
     private final int standardSmeltingTime = 200;

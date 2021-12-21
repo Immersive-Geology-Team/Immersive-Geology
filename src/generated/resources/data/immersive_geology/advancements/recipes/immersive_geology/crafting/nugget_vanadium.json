@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_vanadium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_vanadium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_vanadium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_vanadium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_vanadium",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/nugget_zirconium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_zirconium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:nugget_zirconium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/nugget_zirconium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_zirconium",
+      "has_the_recipe"
+    ]
+  ]
+}

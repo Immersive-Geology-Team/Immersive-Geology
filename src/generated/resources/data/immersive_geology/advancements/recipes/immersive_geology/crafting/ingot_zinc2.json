@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_zinc2"
+    ]
+  },
+  "criteria": {
+    "has_storage_block_zinc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:ingot_zinc"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_zinc2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_block_zinc",
+      "has_the_recipe"
+    ]
+  ]
+}

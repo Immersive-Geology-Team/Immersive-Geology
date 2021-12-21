@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/crushed_ore_aluminum"
+    ]
+  },
+  "criteria": {
+    "": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:clean_chunk/aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/crushed_ore_aluminum"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "",
+      "has_the_recipe"
+    ]
+  ]
+}
