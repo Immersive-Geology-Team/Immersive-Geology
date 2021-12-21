@@ -1,6 +1,5 @@
 package com.igteam.immersive_geology.common.fluid.helper;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -12,7 +11,6 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.function.BiFunction;
 
 public class IGFluidAttributes extends FluidAttributes {
@@ -34,7 +32,7 @@ public class IGFluidAttributes extends FluidAttributes {
                 MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluid.getFluidMaterial();
                 localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
                 localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
-                base_name = "fluid."+IGLib.MODID+"."+"slurry" ;
+                base_name = "fluid."+IGLib.MODID+".slurry";
             }
             TranslationTextComponent name = new TranslationTextComponent(base_name, localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
