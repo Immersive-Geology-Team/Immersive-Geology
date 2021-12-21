@@ -220,7 +220,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                 {
                     dirty = burnFuelAsNeeded();;
                 }
-                if(isBurning()) {
+                if(isBurning() && inventory.get(outputSlot).getCount() < 64) {
                     progress += (1 * recipe.getTime()); //how fast does it progress?
                     if (progress >= maxProgress) {
                         ItemStack outputSlotItem = inventory.get(outputSlot);
@@ -303,14 +303,16 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
 
 
         if(master.inventory.get(outputSlot).isItemEqual(itemStack)){
+            //low stack cases, but not Merges with more than one stack total
             if(itemStack.getCount() < 64 && (itemStack.getCount() + outputSlotStack.getCount() <= 64)) {
-                int diff = Math.max(64,Math.abs(master.inventory.get(outputSlot).getCount() - itemStack.getCount()));
-                master.inventory.get(outputSlot).shrink(diff);
+                int growAmount = outputSlotStack.getCount();
+                master.inventory.set(outputSlot, ItemStack.EMPTY);
                 ItemStack handItem = playerEntity.getHeldItem(hand);
-                handItem.grow(diff);
+                handItem.grow(growAmount);
                 playerEntity.setHeldItem(hand, handItem);
                 return true;
             }
+            //Handle where held item stack is 62 and output slot holds 43 items.
         }
 
         if(itemStack.isEmpty()){

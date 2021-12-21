@@ -32,6 +32,7 @@ public class IGRippLib {
             final TextureAtlasSprite sprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(texture);
             renderBlockSprite(buffer.getBuffer(RenderType.getTranslucent()), matrix, sprite, light, overlay, color, scale, height);
     }
+
     public static void renderFluid2(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, FluidStack fluidStack, float alpha, float heightPercentage, int combinedLight){
         IVertexBuilder vertexBuilder = renderTypeBuffer.getBuffer(RenderType.getTranslucent());
         TextureAtlasSprite sprite = ClientUtils.mc().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(fluidStack.getFluid().getAttributes().getStillTexture(fluidStack));

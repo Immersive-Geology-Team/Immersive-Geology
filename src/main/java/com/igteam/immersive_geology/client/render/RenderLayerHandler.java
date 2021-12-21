@@ -55,6 +55,8 @@ public class RenderLayerHandler {
         //This is to tell minecraft that we want to render some of the texture as a cutout.
         RenderTypeLookup.setRenderLayer(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, RenderType.getCutoutMipped());
 
+        RenderTypeLookup.setRenderLayer(IGMultiblockRegistrationHolder.Multiblock.bloomery, RenderType.getCutout());
+
         inheritances.clear();
         mapping.clear();
     }

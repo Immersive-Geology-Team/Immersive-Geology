@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.OptionalDouble;
 
+
 public class IGRenderTypes {
 
     static final ResourceLocation activeTexture = new ResourceLocation(IGLib.MODID, "textures/multiblock/bloomery_burning.png");
@@ -26,10 +27,12 @@ public class IGRenderTypes {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
     }, RenderSystem::disableBlend);
+
     static final RenderState.TransparencyState NO_TRANSPARENCY = new RenderState.TransparencyState("no_transparency", () -> {
         RenderSystem.disableBlend();
     }, () -> {
     });
+
     static final RenderState.DiffuseLightingState DIFFUSE_LIGHTING_ENABLED = new RenderState.DiffuseLightingState(true);
 
     static {
@@ -40,7 +43,12 @@ public class IGRenderTypes {
                 256,
                 true,
                 false,
-                RenderType.State.getBuilder().texture(TEXTURE_BLOOMERY_ACTIVE).shadeModel(SHADE_ENABLED).lightmap(LIGHTMAP_ENABLED).overlay(OVERLAY_DISABLED).build(false)
+                RenderType.State.getBuilder()
+                        .texture(TEXTURE_BLOOMERY_ACTIVE)
+                        .shadeModel(SHADE_ENABLED)
+                        .lightmap(LIGHTMAP_ENABLED)
+                        .overlay(OVERLAY_DISABLED)
+                        .build(false)
         );
     }
 

@@ -74,6 +74,8 @@ public class IGVariantHolder {
             case FLASK:
                 registerBucketItem(material, type);
                 break;
+            case MACHINE:
+                break;
             default:
                 registerBasicItem(material, type);
         }
@@ -222,6 +224,8 @@ public class IGVariantHolder {
                 registerStairsBlock(material);
                 break;
             case FLUIDS:
+                break;
+            case MACHINE:
                 break;
             default:
                 registerBasicBlock(material, type);
