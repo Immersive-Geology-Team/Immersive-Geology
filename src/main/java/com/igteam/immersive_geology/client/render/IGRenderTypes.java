@@ -11,6 +11,12 @@ import org.lwjgl.opengl.GL11;
 import java.util.OptionalDouble;
 
 public class IGRenderTypes {
+
+    static final ResourceLocation activeTexture = new ResourceLocation(IGLib.MODID, "textures/multiblock/bloomery_burning.png");
+
+    static RenderType BLOOMERY_ACTIVE;
+
+    static final RenderState.TextureState TEXTURE_BLOOMERY_ACTIVE = new RenderState.TextureState(activeTexture, false, false);
     static final RenderState.ShadeModelState SHADE_ENABLED = new RenderState.ShadeModelState(true);
     static final RenderState.LightmapState LIGHTMAP_ENABLED = new RenderState.LightmapState(true);
     static final RenderState.OverlayState OVERLAY_ENABLED = new RenderState.OverlayState(true);
@@ -26,6 +32,17 @@ public class IGRenderTypes {
     });
     static final RenderState.DiffuseLightingState DIFFUSE_LIGHTING_ENABLED = new RenderState.DiffuseLightingState(true);
 
+    static {
+        BLOOMERY_ACTIVE = RenderType.makeType(
+                IGLib.MODID + ":bloomery_active",
+                DefaultVertexFormats.BLOCK,
+                GL11.GL_QUADS,
+                256,
+                true,
+                false,
+                RenderType.State.getBuilder().texture(TEXTURE_BLOOMERY_ACTIVE).shadeModel(SHADE_ENABLED).lightmap(LIGHTMAP_ENABLED).overlay(OVERLAY_DISABLED).build(false)
+        );
+    }
 
     public static RenderType getEntitySolid(ResourceLocation locationIn){
         RenderType.State renderState = RenderType.State.getBuilder()

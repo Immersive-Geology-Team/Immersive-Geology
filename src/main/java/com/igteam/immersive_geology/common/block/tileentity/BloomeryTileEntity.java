@@ -195,7 +195,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         return renderBB;
     }
 
-    private boolean isBurning() {
+    public boolean isBurning() {
         return this.currentBurnTime > 0;
     }
 
@@ -298,17 +298,23 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     @Override
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         BloomeryTileEntity master = (BloomeryTileEntity) master();
-        /* //TODO Make actually work
-        if(!master.inventory.get(outputSlot).isEmpty() && master.inventory.get(outputSlot).equals(itemStack)){
-            int diff = Math.abs(master.inventory.get(outputSlot).getCount() - itemStack.getCount());
-            master.inventory.get(outputSlot).shrink(diff);
-            ItemStack handItem = playerEntity.getHeldItem(hand);
-            handItem.grow(diff);
-            playerEntity.setHeldItem(hand, handItem);
-            return true;
-        }*/
+        //TODO change inventory.gets to local variables
+        ItemStack outputSlotStack = master.inventory.get(outputSlot);
+
+
+        if(master.inventory.get(outputSlot).isItemEqual(itemStack)){
+            if(itemStack.getCount() < 64 && (itemStack.getCount() + outputSlotStack.getCount() <= 64)) {
+                int diff = Math.max(64,Math.abs(master.inventory.get(outputSlot).getCount() - itemStack.getCount()));
+                master.inventory.get(outputSlot).shrink(diff);
+                ItemStack handItem = playerEntity.getHeldItem(hand);
+                handItem.grow(diff);
+                playerEntity.setHeldItem(hand, handItem);
+                return true;
+            }
+        }
+
         if(itemStack.isEmpty()){
-            if(!master.inventory.get(outputSlot).isEmpty()){
+            if(!outputSlotStack.isEmpty()){
                 playerEntity.setHeldItem(hand, master.inventory.get(outputSlot));
                 master.inventory.set(outputSlot, ItemStack.EMPTY);
                 return true;
@@ -331,13 +337,15 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                 playerEntity.setHeldItem(hand, ItemStack.EMPTY);
                 return true;
             }
-            if(fuelTest.equals(itemStack)){
-                int diff = Math.abs(itemStack.getCount() - master.inventory.get(fuelSlot).getCount());
-                master.inventory.get(fuelSlot).grow(diff);
-                ItemStack handItem = playerEntity.getHeldItem(hand);
-                handItem.shrink(diff);
-                playerEntity.setHeldItem(hand, handItem);
-                return true;
+            if(fuelTest.isItemEqual(itemStack)){
+                if(itemStack.getCount() < 64 && (itemStack.getCount() + fuelTest.getCount() <= 64)) {
+                    int diff = Math.max(64,Math.abs(itemStack.getCount() - master.inventory.get(fuelSlot).getCount()));
+                    master.inventory.get(fuelSlot).grow(diff);
+                    ItemStack handItem = playerEntity.getHeldItem(hand);
+                    handItem.shrink(diff);
+                    playerEntity.setHeldItem(hand, handItem);
+                    return true;
+                }
             }
         }
         if(master.inventory.get(inputSlot).isEmpty()){
@@ -345,13 +353,15 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
             playerEntity.setHeldItem(hand, ItemStack.EMPTY);
             return true;
         }
-        if(master.inventory.get(inputSlot).equals(itemStack)){
-            int diff = Math.abs(itemStack.getCount() - master.inventory.get(inputSlot).getCount());
-            master.inventory.get(inputSlot).grow(diff);
-            ItemStack handItem = playerEntity.getHeldItem(hand);
-            handItem.shrink(diff);
-            playerEntity.setHeldItem(hand, handItem);
-            return true;
+        if(master.inventory.get(inputSlot).isItemEqual(itemStack)){
+            if(itemStack.getCount() < 64 && (itemStack.getCount() + master.inventory.get(inputSlot).getCount() <= 64)) {
+                int diff = Math.abs(itemStack.getCount() - master.inventory.get(inputSlot).getCount());
+                master.inventory.get(inputSlot).grow(diff);
+                ItemStack handItem = playerEntity.getHeldItem(hand);
+                handItem.shrink(diff);
+                playerEntity.setHeldItem(hand, handItem);
+                return true;
+            }
         }
         return false;
     }
