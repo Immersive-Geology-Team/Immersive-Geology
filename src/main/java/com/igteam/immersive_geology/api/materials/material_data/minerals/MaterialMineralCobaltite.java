@@ -8,6 +8,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -153,9 +154,13 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 		slurry_method.addItemOutput(ItemStack.EMPTY);
 
 		//TODO -- add crystallization process
+		IGCrystalizerProcessingMethod crystal_method = new IGCrystalizerProcessingMethod(1000, 240);
+		crystal_method.addFluidInput(SlurryEnum.COBALT,0,125);
+		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.DUST)));
 
 		inheritedProcessingMethods.add(redox_method);
 		inheritedProcessingMethods.add(slurry_method);
+		inheritedProcessingMethods.add(crystal_method);
 
 		return super.getProcessingMethod();
 	}

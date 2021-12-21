@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.api.crafting.recipes.recipe;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.igteam.immersive_geology.api.crafting.IGMultiblockRecipe;
+import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import java.util.*;
 
 public class CrystalRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystallizer");
+    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystalizer");
     public static Map<ResourceLocation, CrystalRecipe> recipes = new HashMap<>();
 
 
@@ -42,7 +43,7 @@ public class CrystalRecipe extends IGMultiblockRecipe
     protected final FluidTagInput fluidInput;
     protected final ItemStack itemOutput;
 
-    protected CrystalRecipe(ResourceLocation id, ItemStack itemOutput, FluidTagInput fluidInput, int energy, int time) {
+    public CrystalRecipe(ResourceLocation id, ItemStack itemOutput, FluidTagInput fluidInput, int energy, int time) {
         super(ItemStack.EMPTY, TYPE, id);
         this.fluidInput = fluidInput;
         this.itemOutput = itemOutput;
@@ -56,8 +57,11 @@ public class CrystalRecipe extends IGMultiblockRecipe
 
     @Override
     protected IERecipeSerializer getIESerializer() {
-        return null;//Serializers.CHEMICAL_VAT_SERIALIZER.get();
+        return Serializers.CRYSTALIZER_SERIALIZER.get();
     }
+
+    @Override
+    public boolean shouldCheckItemAvailability() {return false;}
 
     @Override
     public int getMultipleProcessTicks() {

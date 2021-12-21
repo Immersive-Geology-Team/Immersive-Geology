@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBui
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.BloomeryRecipeBuilder;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.CrystalizerRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
 import com.igteam.immersive_geology.api.materials.Material;
@@ -20,6 +21,8 @@ import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialPr
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.ProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
@@ -220,6 +223,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         case SEDIMENT:
                             break;
                         case ELECTROLYSIS:
+                            addCrystalizerMethod(method,consumer);
                             break;
                         case CRAFTING:
                             addCraftingMethod(method, consumer);
@@ -254,7 +258,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         + slagItem.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
-    private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
         assert method instanceof IGCraftingProcessingMethod;
         IGCraftingProcessingMethod m = (IGCraftingProcessingMethod) method;
 
@@ -303,6 +307,29 @@ public class IGRecipeProvider extends RecipeProvider {
         ItemStack output = m.getOutputItem();
 
         BloomeryRecipeBuilder.builder(output).setTime(timeMult).setEnergy(fuelCost).addItemInput(input).build(consumer, toRL("bloomery/" + input.getItem().getRegistryName().getPath().toLowerCase() + "_to_" + output.getItem().getRegistryName().getPath().toLowerCase()));
+    private void addCrystalizerMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
+    {
+
+        IGCrystalizerProcessingMethod crystalMethod = (IGCrystalizerProcessingMethod) method;
+        int energyCost = crystalMethod.getEnergyCost();
+        int processingTime = crystalMethod.getProcessingTime();
+        ItemStack outputItem = crystalMethod.getOutputItem();
+        FluidStack input_fluid = crystalMethod.getInputFluid();
+
+        CrystalizerRecipeBuilder crystalizerRecipeBuilder = CrystalizerRecipeBuilder.builder(outputItem)
+               .setEnergy(energyCost).setTime(processingTime);
+        FluidTagInput input_chemical = new FluidTagInput(FluidTags.WATER, 1);
+
+        if (input_fluid.getFluid() instanceof IGFluid)
+        {
+            IGFluid igFluid = (IGFluid) input_fluid.getFluid();
+            MaterialFluidBase fluidWrapper = igFluid.getFluidMaterial();
+            IGTags.MaterialTags tags = IGTags.getTagsFor(fluidWrapper);
+            input_chemical = new FluidTagInput(tags.fluid, input_fluid.getAmount());
+        }
+
+        crystalizerRecipeBuilder.addFluidInput(input_chemical).build(consumer,toRL("crystalizer/" +
+                 outputItem.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addVatMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)
