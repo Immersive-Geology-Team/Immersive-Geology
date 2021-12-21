@@ -25,7 +25,7 @@ public class IGCrystalizerProcessingMethod extends IGProcessingMethod {
 
     @Override
     public ProcessingMethod getKey() {
-        return ProcessingMethod.BLASTING;
+        return ProcessingMethod.ELECTROLYSIS;
     }
 
     @Override

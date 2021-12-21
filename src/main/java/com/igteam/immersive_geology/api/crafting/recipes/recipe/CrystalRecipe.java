@@ -18,7 +18,7 @@ import java.util.*;
 
 public class CrystalRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystallizer");
+    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystalizer");
     public static Map<ResourceLocation, CrystalRecipe> recipes = new HashMap<>();
 
 
@@ -59,6 +59,9 @@ public class CrystalRecipe extends IGMultiblockRecipe
     protected IERecipeSerializer getIESerializer() {
         return Serializers.CRYSTALIZER_SERIALIZER.get();
     }
+
+    @Override
+    public boolean shouldCheckItemAvailability() {return false;}
 
     @Override
     public int getMultipleProcessTicks() {
