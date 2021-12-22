@@ -1,11 +1,8 @@
 package com.igteam.immersive_geology.api.crafting.recipes;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.BloomeryRecipe;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.CrystalRecipe;
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.*;
 
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.VatRecipe;
 import javafx.scene.effect.Bloom;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.IRecipe;
@@ -60,10 +57,12 @@ public class RecipeReloadListener  implements IResourceManagerReloadListener {
 
 		ImmersiveGeology.getNewLogger().info("Loading Bloomery Recipes");
         BloomeryRecipe.recipes = filterRecipes(recipes, BloomeryRecipe.class, BloomeryRecipe.TYPE);
+
         ImmersiveGeology.getNewLogger().info("Loading Crystalizer Recipes.");
         CrystalRecipe.recipes = filterRecipes(recipes, CrystalRecipe.class, CrystalRecipe.TYPE);
 
-
+        ImmersiveGeology.getNewLogger().info("Loading Reverberation Furnace Recipes.");
+        ReverberationRecipe.recipes = filterRecipes(recipes, ReverberationRecipe.class, ReverberationRecipe.TYPE);
     }
 
     static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType){
