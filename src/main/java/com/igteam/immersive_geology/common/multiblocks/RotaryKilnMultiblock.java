@@ -28,7 +28,7 @@ public class RotaryKilnMultiblock extends IETemplateMultiblock {
 
     private RotaryKilnMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"),
-                new BlockPos(2,0,1),
+                new BlockPos(1,0,1),
                 new BlockPos(7,2,1),
                 new BlockPos(8,3,3),
                 () -> IGMultiblockRegistrationHolder.Multiblock.rotarykiln.getDefaultState());

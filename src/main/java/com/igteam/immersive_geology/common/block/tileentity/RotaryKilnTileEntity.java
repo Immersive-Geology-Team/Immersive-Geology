@@ -294,12 +294,13 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
 
     @Override
     public void tick() {
-        super.tick();
         activeTicks++;
         activeTicks = activeTicks % 360;
 
         if (world.isRemote || isDummy())
             return;
+        super.tick();
+
         RotaryKilnTileEntity master = this.master();
         boolean update = false;
         if (master.energyStorage.getEnergyStored() > 0 && master.processQueue.size() < master.getProcessQueueMaxLength()) {
@@ -321,7 +322,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
 
     @Override
     public boolean additionalCanProcessCheck(MultiblockProcess<CalcinationRecipe> multiblockProcess) {
-        return true;
+        return this.master().getInventory().get(outputSlot).getCount() < this.getSlotLimit(outputSlot);
     }
 
     @Override
@@ -410,7 +411,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
-        inventory = Utils.readInventory(nbt.getList("inventory", 10), 1);
+        inventory = Utils.readInventory(nbt.getList("inventory", 10), 2);
     }
 
     @Override

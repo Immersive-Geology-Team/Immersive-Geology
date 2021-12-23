@@ -14,9 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CalcinationRecipe extends IGMultiblockRecipe
 {
@@ -67,5 +65,21 @@ public class CalcinationRecipe extends IGMultiblockRecipe
     public int getMultipleProcessTicks() {
         return 0;
     }
+
+    @Override
+    public NonNullList<ItemStack> getItemOutputs() {
+        return outputList;
+    }
+
+    @Override
+    public List<IngredientWithSize> getItemInputs() {
+        return Arrays.asList(itemInput);
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.itemOutput;
+    }
+
 
 }
