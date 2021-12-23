@@ -48,9 +48,9 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInt
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material);
         this.setRegistryName(registryName.toLowerCase());
         holder_name = registryName.toLowerCase();
-        blockUseType = MaterialUseType.SHEETMETAL_STAIRS;
+        blockUseType = itemDropType == MaterialUseType.SHEETMETAL ? MaterialUseType.SHEETMETAL_STAIRS : MaterialUseType.STAIRS;
         this.itemDrop = itemDropType;
-        this.itemBlock = new IGBlockItem(this, this, MaterialUseType.SHEETMETAL_STAIRS.getSubgroup(), material);
+        this.itemBlock = new IGBlockItem(this, this, blockUseType.getSubgroup(), material);
         itemBlock.setRegistryName(registryName.toLowerCase());
 
     }
@@ -80,7 +80,7 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInt
     }
 
     public MaterialUseType getDropUseType() {
-        return MaterialUseType.SHEETMETAL_STAIRS;
+        return blockUseType;
     }
 
     public float maxDrops () { return  1f; }

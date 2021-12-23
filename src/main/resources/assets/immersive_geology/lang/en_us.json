@@ -38,8 +38,15 @@
   "item.immersive_geology.chunk": "%s Chunk",
   "item.immersive_geology.ore_chunk": "%s Ore Chunk",
   "item.immersive_geology.ore_crushed": "Crushed %s Ore",
+  "item.immersive_geology.clay": "%s Clay",
+  "item.immersive_geology.compound_dust": "%s Compound Dust",
+  "item.immersive_geology.slag": "%s Slag",
+  "item.immersive_geology.metal_oxide": "%s Oxide",
+  "item.immersive_geology.brick": "%s Brick",
+
   "block.immersive_geology.storage_block": "%s Block",
   "block.immersive_geology.rock": "%s Stone",
+  "block.immersive_geology.stone": "%s",
   "block.immersive_geology.cobblestone": "%s Cobblestone",
   "block.immersive_geology.gravel": "%s Gravel",
   "block.immersive_geology.column": "%s Column",
@@ -56,6 +63,12 @@
   "block.immersive_geology.sheetmetal.slab": "%s Sheetmetal Slab",
   "block.immersive_geology.dust_block": "%s Dust Block",
   "block.immersive_geology.ore_stone": "%d Bearing %s",
+  "block.immersive_geology.geode": "%s Geode",
+  "block.immersive_geology.bricks": "%s Bricks",
+  "block.immersive_geology.stairs": "%s Stairs",
+
+  "block.immersive_geology.machine": "%s",
+  "block.immersive_geology.static_block": "%s",
 
   "fluid.immersive_geology.fluids_nitric_acid": "Nitric Acid",
   "fluid.immersive_geology.fluids_hydrochloric_acid": "Hydrochloric Acid",
@@ -112,6 +125,7 @@
   "material.immersive_geology.sulfuric_acid": "Sulfuric Acid",
   "material.immersive_geology.hydrochloric_acid": "Hydrochloric Acid",
   "material.immersive_geology.brine": "Brine",
+  "material.immersive_geology.sodium_hydroxide": "Sodium Hydroxide",
 
   "material.immersive_geology.constantan": "Constantan",
   "material.immersive_geology.electrum": "Electrum",
@@ -147,6 +161,8 @@
   "material.immersive_geology.glass": "Glass",
   "material.immersive_geology.thorium": "Thorium",
   "material.immersive_geology.sodium": "Sodium",
+  "material.immersive_geology.saltpeter": "Saltpeter",
+  "material.immersive_geology.refractory": "Refractory",
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",
