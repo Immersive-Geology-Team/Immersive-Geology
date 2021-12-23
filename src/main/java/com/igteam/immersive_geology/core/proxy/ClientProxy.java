@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.client.IEDefaultColourHandlers;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
+import blusunrize.immersiveengineering.common.items.IEItems;
 import blusunrize.lib.manual.*;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
@@ -14,6 +15,7 @@ import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.*;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
+import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -60,6 +62,13 @@ public class ClientProxy extends ServerProxy {
     public void onFinishSetup(FMLLoadCompleteEvent event) {
         setupManualPages();
         setupBloomeryFuels();
+        setupReverberationFuels();
+    }
+
+    private void setupReverberationFuels(){
+        ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 100);
+        ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
     }
 
     private void setupBloomeryFuels(){

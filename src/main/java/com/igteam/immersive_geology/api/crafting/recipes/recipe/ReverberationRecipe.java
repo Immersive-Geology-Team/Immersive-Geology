@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReverberationRecipe extends IGMultiblockRecipe
@@ -24,12 +25,18 @@ public class ReverberationRecipe extends IGMultiblockRecipe
     public final IngredientWithSize input;
     public final ItemStack output;
     public final int time;
+    private final float wasteMult;
 
-    public ReverberationRecipe(ResourceLocation id, ItemStack output, IngredientWithSize input, int time) {
+    private int slotOffset;
+
+    public ReverberationRecipe(ResourceLocation id, ItemStack output, IngredientWithSize input, int time, float wasteMult) {
         super(output, TYPE, id);
         this.output = output;
         this.input = input;
         this.time = time;
+        this.wasteMult = wasteMult;
+        this.outputList = NonNullList.from(ItemStack.EMPTY, output);
+        timeAndEnergy(time, 0);
     }
 
     public static ReverberationRecipe findRecipe(ItemStack input){
@@ -47,6 +54,14 @@ public class ReverberationRecipe extends IGMultiblockRecipe
         return null;
     }
 
+    public void setSlotOffset(int offset){
+        this.slotOffset = offset;
+    }
+
+    public float getWasteMultipler() {
+        return wasteMult;
+    }
+
     public boolean matches(ItemStack input){
         return this.input.test(input);
     }
@@ -61,8 +76,9 @@ public class ReverberationRecipe extends IGMultiblockRecipe
         return output.copy();
     }
 
-    public IngredientWithSize getRecipeInput() {
-        return input;
+    @Override
+    public List<IngredientWithSize> getItemInputs() {
+        return NonNullList.from(input);
     }
 
     @Override
@@ -87,5 +103,9 @@ public class ReverberationRecipe extends IGMultiblockRecipe
     @Override
     public int getMultipleProcessTicks() {
         return 2;
+    }
+
+    public int getSlotOffset(){
+        return slotOffset;
     }
 }

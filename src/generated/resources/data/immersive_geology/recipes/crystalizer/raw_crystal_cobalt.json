@@ -1,7 +1,7 @@
 {
   "type": "immersive_geology:crystalizer",
   "result": {
-    "item": "immersive_geology:dust_cobalt"
+    "item": "immersive_geology:raw_crystal_cobalt"
   },
   "energy": 1000,
   "time": 240,

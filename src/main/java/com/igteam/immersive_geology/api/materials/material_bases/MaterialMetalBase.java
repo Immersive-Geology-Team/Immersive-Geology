@@ -8,6 +8,7 @@ import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrushingProcessingMethod;
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.item.Item;
@@ -204,6 +205,13 @@ public abstract class MaterialMetalBase extends Material
 			inheritedProcessingMethods.add(bloomeryIronIngot);
 			inheritedProcessingMethods.add(defaultNativeOreCrushing);
 			inheritedProcessingMethods.add(manualClean);
+
+			if(hasCrystal()) {
+				IGCrushingProcessingMethod toDust = new IGCrushingProcessingMethod(1000, 100);
+				toDust.inputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.RAW_CRYSTAL)));
+				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 2));
+				inheritedProcessingMethods.add(toDust);
+			}
 		}
 
 		return super.getProcessingMethod();

@@ -16,7 +16,7 @@ public class ReverberationRecipeSerializer extends IERecipeSerializer<Reverberat
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.bloomery);
+        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace);
     }
 
     @Override
@@ -24,7 +24,8 @@ public class ReverberationRecipeSerializer extends IERecipeSerializer<Reverberat
         ItemStack output = readOutput(json.get("result"));
         IngredientWithSize input = IngredientWithSize.deserialize(JSONUtils.getJsonObject(json, "item_input"));
         Integer time = JSONUtils.getInt(json, "time");
-        ReverberationRecipe recipe = new ReverberationRecipe(recipeId, output, input, time);
+        Float wasteMult = JSONUtils.getFloat(json, "wasteMultiplier");
+        ReverberationRecipe recipe = new ReverberationRecipe(recipeId, output, input, time, wasteMult);
         return recipe;
     }
 
@@ -33,7 +34,8 @@ public class ReverberationRecipeSerializer extends IERecipeSerializer<Reverberat
         ItemStack output = buffer.readItemStack();
         IngredientWithSize input = IngredientWithSize.read(buffer);
         Integer time = buffer.readInt();
-        ReverberationRecipe recipe = new ReverberationRecipe(recipeId, output, input, time);
+        Float wasteMult = buffer.readFloat();
+        ReverberationRecipe recipe = new ReverberationRecipe(recipeId, output, input, time, wasteMult);
         return recipe;
     }
 
@@ -42,5 +44,6 @@ public class ReverberationRecipeSerializer extends IERecipeSerializer<Reverberat
         buffer.writeItemStack(recipe.output);
         recipe.input.write(buffer);
         buffer.writeInt(recipe.getTime());
+        buffer.writeFloat(recipe.getWasteMultipler());
     }
 }

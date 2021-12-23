@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_silver",
+    "count": 2
+  },
+  "input": {
+    "item": "immersive_geology:raw_crystal_silver"
+  },
+  "energy": 0
+}

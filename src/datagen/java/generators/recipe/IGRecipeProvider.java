@@ -9,10 +9,8 @@ import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilde
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.BloomeryRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.CrystalizerRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.*;
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
@@ -209,13 +207,17 @@ public class IGRecipeProvider extends RecipeProvider {
                             break;
                         case CALCINATION:
                             break;
+                        case CRUSHING:
+                            addCrushingMethod(method, consumer);
+                            break;
                         case ACID:
                             addVatMethod(method, consumer);
                             break;
-                        case ROASTER:
+                        case BLOOMERY:
                             addBloomeryMethod(method, consumer);
                             break;
-                        case SEDIMENT:
+                        case ROASTER:
+                            addReverberationMethod(method, consumer);
                             break;
                         case ELECTROLYSIS:
                             addCrystalizerMethod(method,consumer);
@@ -228,6 +230,15 @@ public class IGRecipeProvider extends RecipeProvider {
             }
         }
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));
+    }
+
+    private void addCrushingMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+        IGCrushingProcessingMethod m = (IGCrushingProcessingMethod) method;
+
+        CrusherRecipeBuilder crusherBuilder = CrusherRecipeBuilder.builder(m.getItemOutput());
+        crusherBuilder.addInput(m.getItemInput())
+                .setEnergy(m.getEnergyCost())
+                .build(consumer, toRL("crusher/" + m.getItemOutput().getDisplayName().getString()));
     }
 
     private void addRedoxMethod(IGProcessingMethod method,  Consumer<IFinishedRecipe> consumer)
@@ -280,6 +291,17 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
 
         builder.build(consumer, toRL("crafting/" + m.getOutput().getItem().getRegistryName().getPath().toLowerCase()));
 
+    }
+
+    private void addReverberationMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){
+        IGRoastingProcessingMethod m = (IGRoastingProcessingMethod) method;
+        float wasteMult = m.getWasteMultiplier();
+        int timeCost = m.getProcessingTime();
+
+        ItemStack input = m.getInputItem();
+        ItemStack output = m.getOutputItem();
+
+        ReverberationRecipeBuilder.builder(output).setTime(timeCost).setWasteMult(wasteMult).addItemInput(input).build(consumer, toRL("reverberation/" + output.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addBloomeryMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer) {
