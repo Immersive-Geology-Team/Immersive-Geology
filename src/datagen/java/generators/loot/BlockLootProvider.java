@@ -2,11 +2,12 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.igteam.immersive_geology.api.loot.OreDropProperty;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
-import com.igteam.immersive_geology.api.loot.OreDropProperty;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
@@ -18,6 +19,7 @@ import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.conditions.MatchTool;
@@ -57,13 +59,38 @@ public class BlockLootProvider implements IDataProvider {
                 IGOreBlock oreBlock = ((IGOreBlock) b);
                 Item stoneChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.CHUNK);
                 Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
-                functionTable.put(b, (block) -> LootTable.builder()
-                        .addLootPool(LootPool.builder()
-                                .rolls(RandomValueRange.of(1F, 1F))
-                                .addEntry(ItemLootEntry.builder(oreChunk)
-                                        .acceptFunction(OreDropProperty.builder()))
-                        )
-                );
+                if(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL) == MaterialEnum.Coal.getMaterial()) {
+                    functionTable.put(b, (block) -> LootTable.builder()
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(oreChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(Items.COAL)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                    );
+                } else {
+                    functionTable.put(b, (block) -> LootTable.builder()
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(oreChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                    );
+                }
             } else if(b instanceof IGBlockType){
                 IGBlockType blockType = (IGBlockType) b;
                 if(blockType.getBlockUseType() != MaterialUseType.FLUIDS) {

@@ -1,7 +1,1 @@
-{
-  "parent": "immersive_geology:block/base/sheetmetal_stairs",
-  "textures": {
-    "all": "immersive_geology:block/static_block/refractory_brick",
-    "particle": "immersive_geology:block/static_block/refractory_brick"
-  }
-}
+{}

@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:dusts/coal"
+  },
+  "input": {
+    "item": "immersive_geology:ore_chunk_vanilla_coal"
+  },
+  "energy": 6000
+}

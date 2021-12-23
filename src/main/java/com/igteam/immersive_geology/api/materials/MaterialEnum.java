@@ -7,11 +7,6 @@ import com.igteam.immersive_geology.api.materials.material_data.crystals.Materia
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalGlowstone;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalPhlebotinum;
 import com.igteam.immersive_geology.api.materials.material_data.crystals.MaterialCrystalQuartz;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.*;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidHydrochloricAcid;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidNitricAcid;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSodiumHydroxide;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSulfuricAcid;
 import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasHydrogen;
 import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasSulfuric;
 import com.igteam.immersive_geology.api.materials.material_data.metalloid.MaterialMetalloidAntimony;
@@ -97,6 +92,7 @@ public enum MaterialEnum {
     Vanadinite(new MaterialMineralVanadinite()),
     Unobtainium(new MaterialMetalUnobtainium()),
     Kaolinite(new MaterialMineralKaolinite()),
+    Coal(new MaterialMineralCoal()),
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),

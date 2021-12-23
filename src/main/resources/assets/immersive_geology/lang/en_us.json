@@ -32,7 +32,7 @@
   "item.immersive_geology.polished_chunk": "Polished %s Chunk",
   "item.immersive_geology.ore_bit": "%s Ore Bit",
   "item.immersive_geology.rock_bit": "%s Bit",
-  "item.immersive_geology.tiny_dust": "%s Tiny Grit",
+  "item.immersive_geology.tiny_dust": "Tiny %s Grit",
   "item.immersive_geology.crystal": "%s Crystal",
   "item.immersive_geology.raw_crystal": "Raw %s Crystal",
   "item.immersive_geology.chunk": "%s Chunk",
@@ -162,6 +162,7 @@
   "material.immersive_geology.thorium": "Thorium",
   "material.immersive_geology.sodium": "Sodium",
   "material.immersive_geology.saltpeter": "Saltpeter",
+  "material.immersive_geology.coal": "Coal",
   "material.immersive_geology.refractory": "Refractory",
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",

@@ -22,7 +22,6 @@ import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBa
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
-import com.igteam.immersive_geology.common.crafting.serializers.CalcinationRecipeSerializer;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -142,9 +141,14 @@ public class IGRecipeProvider extends RecipeProvider {
                             log.debug("Generated Blasting Recipe for: " + ore_chunk.getRegistryName());
                         }
                     }
-
-                    crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
-                    crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_" + material.getName()));
+                    if(processed_material.hasSubtype(MaterialUseType.DIRTY_CRUSHED_ORE)) {
+                        crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
+                        crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_" + material.getName()));
+                    } else if(processed_material.hasSubtype(MaterialUseType.DUST))
+                    {
+                        crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
+                        crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dust_" + material.getName()));
+                    }
                 }
             }
 //
@@ -182,13 +186,15 @@ public class IGRecipeProvider extends RecipeProvider {
             if(wrap.getMaterial() instanceof MaterialMineralBase) {
                 MaterialMineralBase orebase = (MaterialMineralBase) wrap.getMaterial();
                 //Gravity Separator
-                ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
-                for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
-                    Material stonebase = stoneWrap.getMaterial();
-                    ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
-                    ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
-                    SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
-                    sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+                if(orebase.hasCrushedOre()) {
+                    ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
+                    for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
+                        Material stonebase = stoneWrap.getMaterial();
+                        ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
+                        ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
+                        SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
+                        sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
+                    }
                 }
             }
 

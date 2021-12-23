@@ -12,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootFunction;
@@ -40,8 +41,8 @@ public class OreDropProperty extends LootFunction {
             PickaxeItem pick = (PickaxeItem) tool;
 
             int fortuneLevel = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
+            Item dropItem = itemStack.getItem();
             if(enchantments.get(Enchantments.SILK_TOUCH) != null) {
-                Item dropItem = itemStack.getItem();
                 if(dropItem instanceof IGOreItem) {
                     IGOreItem oreItem = (IGOreItem) dropItem;
                     return new ItemStack(IGRegistrationHolder.getBlockByMaterial(oreItem.getMaterial(BlockMaterialType.BASE_MATERIAL), oreItem.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_STONE));
@@ -49,7 +50,9 @@ public class OreDropProperty extends LootFunction {
                     return itemStack;
                 }
             } else {
-                return new ItemStack(itemStack.getItem(), Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel);
+                if(dropItem.asItem() == Items.COAL.getItem()) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel));
+                if(dropItem instanceof IGOreItem) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel));
+                return new ItemStack(itemStack.getItem(), Math.max(0, 4 - Math.min(4, pick.getTier().getHarvestLevel())));
             }
         } else {
             return ItemStack.EMPTY;
