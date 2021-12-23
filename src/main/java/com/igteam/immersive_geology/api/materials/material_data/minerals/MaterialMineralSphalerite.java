@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -128,10 +129,13 @@ public class MaterialMineralSphalerite extends MaterialMineralBase
 		slurry_method.addFluidOutput(SlurryEnum.ZINC,1,125);
 		slurry_method.addItemOutput(ItemStack.EMPTY);
 
-		//TODO -- add crystallization process
+		IGCrystalizerProcessingMethod crystal_method = new IGCrystalizerProcessingMethod(1000, 120);
+		crystal_method.addFluidInput(SlurryEnum.ZINC,1,125);
+		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Zinc.getMaterial(),
+				MaterialUseType.RAW_CRYSTAL), 1));
 
 		inheritedProcessingMethods.add(slurry_method);
-
+		inheritedProcessingMethods.add(crystal_method);
 		return super.getProcessingMethod();
 	}
 }

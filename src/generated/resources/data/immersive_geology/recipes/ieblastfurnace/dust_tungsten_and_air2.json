@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersive_geology:dust_tungsten"
+  },
+  "slag": {
+    "tag": "forge:slag"
+  },
+  "input": {
+    "item": "immersive_geology:metal_oxide_tungsten"
+  },
+  "energy": 1000,
+  "time": 240
+}

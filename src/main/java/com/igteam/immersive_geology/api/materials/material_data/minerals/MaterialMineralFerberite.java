@@ -126,7 +126,6 @@ public class MaterialMineralFerberite extends MaterialMineralBase
 		IGReductionProcessingMethod redox_method = new IGReductionProcessingMethod(1000, 240);
 		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
-		//we grab IE slag in recipe builder here
 		redox_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG),1));
 
 		//TODO - SLAG separation method

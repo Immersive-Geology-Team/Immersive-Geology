@@ -1,12 +1,12 @@
 {
   "type": "immersive_geology:crystalizer",
   "result": {
-    "item": "immersive_geology:dust_cobalt"
+    "item": "immersive_geology:raw_crystal_manganese"
   },
   "energy": 1000,
-  "time": 240,
+  "time": 120,
   "fluid_input": {
-    "tag": "forge:cobalt_hydrochloric_acid",
+    "tag": "forge:manganese_sulfuric_acid",
     "amount": 125
   }
 }

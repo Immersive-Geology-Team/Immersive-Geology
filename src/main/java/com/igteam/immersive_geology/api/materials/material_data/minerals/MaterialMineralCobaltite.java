@@ -141,22 +141,25 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	public IGMaterialProcess getProcessingMethod() {
 		//TODO -- add roasting process
 		IGReductionProcessingMethod redox_method = new IGReductionProcessingMethod(1000, 240);
-		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
-		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.INGOT)));
+		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
+				MaterialUseType.INGOT)));
 		//we grab IE slag in recipe builder here
 		redox_method.addItemSlag(ItemStack.EMPTY);
 
 		IGVatProcessingMethod slurry_method = new IGVatProcessingMethod(1000, 240);
-		slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
 		slurry_method.addPrimaryFluidInput(FluidEnum.HydrochloricAcid,125);
 		slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
 		slurry_method.addFluidOutput(SlurryEnum.COBALT,0,125);
 		slurry_method.addItemOutput(ItemStack.EMPTY);
 
-		//TODO -- add crystallization process
 		IGCrystalizerProcessingMethod crystal_method = new IGCrystalizerProcessingMethod(1000, 240);
 		crystal_method.addFluidInput(SlurryEnum.COBALT,0,125);
-		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(), MaterialUseType.DUST)));
+		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
+				MaterialUseType.RAW_CRYSTAL)));
 
 		inheritedProcessingMethods.add(redox_method);
 		inheritedProcessingMethods.add(slurry_method);

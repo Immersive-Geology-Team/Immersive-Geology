@@ -8,6 +8,9 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCalcinationProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -133,6 +136,15 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		manganese_slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
 		manganese_slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 
+		IGCalcinationProcessingMethod calcination_method = new IGCalcinationProcessingMethod(1000, 240);
+		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.COMPOUND_DUST), 1));
+		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+
+		IGReductionProcessingMethod reduction_method = new IGReductionProcessingMethod(1000, 240);
+		reduction_method.addItemSlag(ItemStack.EMPTY);
+		reduction_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		reduction_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.DUST), 1));
+
 		IGVatProcessingMethod manganese_sulf_slurry_method = new IGVatProcessingMethod(1000, 120);
 		manganese_sulf_slurry_method.addItemOutput(ItemStack.EMPTY);
 		manganese_sulf_slurry_method.addFluidOutput(SlurryEnum.MANGANESE, 1, 125);
@@ -140,8 +152,18 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 		manganese_sulf_slurry_method.addSecondaryFluidInput(SlurryEnum.MANGANESE, 0, 125);
 		manganese_sulf_slurry_method.addItemInput(ItemStack.EMPTY);
 
+
+		IGCrystalizerProcessingMethod crystal_method; /*name of the game*/
+		crystal_method = new IGCrystalizerProcessingMethod(1000, 120);
+		crystal_method.addFluidInput(SlurryEnum.MANGANESE, 1, 125);
+		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Manganese.getMaterial(),
+				MaterialUseType.RAW_CRYSTAL), 1));
+
+		inheritedProcessingMethods.add(crystal_method);
 		inheritedProcessingMethods.add(manganese_slurry_method);
 		inheritedProcessingMethods.add(manganese_sulf_slurry_method);
+		inheritedProcessingMethods.add(calcination_method);
+		inheritedProcessingMethods.add(reduction_method);
 
 		return super.getProcessingMethod();
 

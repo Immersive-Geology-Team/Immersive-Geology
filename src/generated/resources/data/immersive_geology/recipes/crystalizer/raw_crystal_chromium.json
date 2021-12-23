@@ -1,0 +1,12 @@
+{
+  "type": "immersive_geology:crystalizer",
+  "result": {
+    "item": "immersive_geology:raw_crystal_chromium"
+  },
+  "energy": 1000,
+  "time": 120,
+  "fluid_input": {
+    "tag": "forge:chromium_hydrochloric_acid",
+    "amount": 125
+  }
+}

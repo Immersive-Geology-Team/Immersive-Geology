@@ -2,14 +2,18 @@ package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCalcinationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
@@ -133,7 +137,17 @@ public class MaterialMineralRockSalt extends MaterialMineralBase
 		method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(),
 				MaterialUseType.METAL_OXIDE)));
 
+		IGVatProcessingMethod sodium_method = new IGVatProcessingMethod(1000, 120);
+		sodium_method.addFluidOutput(FluidEnum.SodiumHydroxide,125);
+		sodium_method.addItemOutput(ItemStack.EMPTY);
+		sodium_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(),
+				MaterialUseType.METAL_OXIDE)));
+		sodium_method.addPrimaryFluidInput(Fluids.WATER, 125);
+		sodium_method.addSecondaryFluidInput(Fluids.EMPTY, 0);
+
+		inheritedProcessingMethods.add(sodium_method);
 		inheritedProcessingMethods.add(method);
+
 		return super.getProcessingMethod();
 	}
 	/*@Nullable
