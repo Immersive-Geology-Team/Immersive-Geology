@@ -9,10 +9,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilde
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.BloomeryRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.CrystalizerRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.SeparatorRecipeBuilder;
-import com.igteam.immersive_geology.api.crafting.recipes.builders.VatRecipeBuilder;
+import com.igteam.immersive_geology.api.crafting.recipes.builders.*;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
@@ -25,6 +22,7 @@ import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBa
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.api.tags.IGTags;
+import com.igteam.immersive_geology.common.crafting.serializers.CalcinationRecipeSerializer;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -208,6 +206,7 @@ public class IGRecipeProvider extends RecipeProvider {
                             addRedoxMethod(method,consumer);
                             break;
                         case CALCINATION:
+                            addCalcinationMethod(method,consumer);
                             break;
                         case ACID:
                             addVatMethod(method, consumer);
@@ -315,6 +314,19 @@ private void addCraftingMethod(IGProcessingMethod method, Consumer<IFinishedReci
 
         crystalizerRecipeBuilder.addFluidInput(input_chemical).build(consumer,toRL("crystalizer/" +
                  outputItem.getItem().getRegistryName().getPath().toLowerCase()));
+    }
+
+    private void addCalcinationMethod (IGProcessingMethod method,  Consumer<IFinishedRecipe> consumer)
+    {
+        IGCalcinationProcessingMethod processingMethod = (IGCalcinationProcessingMethod) method;
+        int energyCost = processingMethod.getEnergyCost();
+        int processingTime = processingMethod.getProcessingTime();
+        ItemStack outputItem = processingMethod.getOutputItem();
+        ItemStack inputItem = processingMethod.getInputItem();
+        CalcinationRecipeBuilder calcinationRecipeBuilder = CalcinationRecipeBuilder.builder(outputItem)
+                .setEnergy(energyCost).setTime(processingTime);
+        calcinationRecipeBuilder.addItemInput(inputItem).build(consumer,toRL("rotary_kiln/" +
+                outputItem.getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addVatMethod (IGProcessingMethod method, Consumer<IFinishedRecipe> consumer)

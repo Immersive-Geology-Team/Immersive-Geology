@@ -52,7 +52,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
     public float activeTicks;
     public FluidTank inputFluidTank = new FluidTank(12 * FluidAttributes.BUCKET_VOLUME);
     public BlockPos inputOffset = new BlockPos(1, 1, 0);
-    public BlockPos outputOffset = new BlockPos(1, 1, 2);
+    //public BlockPos outputOffset = new BlockPos(1, 1, 2);
     public NonNullList<ItemStack> inventory;
    // private final LazyOptional<IItemHandler> extractionHandler;
 
