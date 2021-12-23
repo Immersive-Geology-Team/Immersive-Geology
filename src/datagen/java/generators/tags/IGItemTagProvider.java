@@ -41,10 +41,6 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
 
-            Item dust = MaterialUseType.DUST.getItem(material);
-
-            //Item tiny_dust = MaterialUseType.TINY_DUST.getItem(material); //TODO tiny dusts tags pt1
-
             if (nugget != null) {
                 assert tags.nugget != null;
                 getOrCreateBuilder(tags.nugget).addItemEntry(nugget);
@@ -61,19 +57,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 assert tags.ingot != null;
                 getOrCreateBuilder(tags.ingot).addItemEntry(ingot);
                 log.debug("Addding " + tags.ingot.getName() + " to tags");
-            }/*
-
-            if (dust != null) {
-                assert tags.dust != null;
-                getOrCreateBuilder(tags.dust).addItemEntry(dust);
-                log.debug("Addding " + tags.dust.getName() + " to tags");
-            }*/
-
-            /*if (tiny_dust != null) { //TODO tiny dust tags pt2
-                assert tags.tiny_dust != null;
-                getOrCreateBuilder(tags.tiny_dust).addItemEntry(tiny_dust);
-                log.debug("Addding " + tags.tiny_dust.getName() + " to tags");
-            } */
+            }
 
             //dual material items
             for(MaterialEnum stone_base : MaterialEnum.stoneValues()) {
