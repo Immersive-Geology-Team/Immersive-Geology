@@ -206,9 +206,9 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
             int slotOffset = r.getSlotOffset();
             ReverberationFurnaceTileEntity master = this.master();
-            if(master.getInventory() != null && !master.getInventory().isEmpty())
-            master.getInventory().get(INPUT_SLOT1 + slotOffset).shrink(r.input.getCount());
-
+            if(master.getInventory() != null && !master.getInventory().isEmpty()) {
+                master.getInventory().get(INPUT_SLOT1 + slotOffset).shrink(r.input.getCount());
+            }
             if(gasTank.getFluidAmount() < gasTank.getCapacity()){
                 gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(MaterialEnum.Sulfuric.getMaterial(),false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
             }
