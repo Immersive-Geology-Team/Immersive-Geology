@@ -53,7 +53,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     private Logger log = ImmersiveGeology.getNewLogger();
 
-    protected FluidTank gasTank = new FluidTank(1000);
+    protected FluidTank gasTank;
     protected NonNullList<ItemStack> inventory;
     public static HashMap<Item, Integer> fuelMap = new HashMap<>();
 
@@ -69,6 +69,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
         burntime[0] = 0;
         burntime[1] = 0;
+        gasTank = new FluidTank(1000);
     }
 
     public boolean canUseGui(PlayerEntity player) {
@@ -217,7 +218,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     public int getMaxProcessPerTick() {
-        return 2;
+        return 1;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.igteam.immersive_geology.api.crafting.recipes.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.api.crafting.IGMultiblockRecipe;
 import com.igteam.immersive_geology.common.crafting.Serializers;
@@ -14,6 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
