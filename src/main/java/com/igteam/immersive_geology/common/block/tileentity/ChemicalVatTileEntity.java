@@ -200,15 +200,13 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void tick()
     {
-        super.tick();
-
-        checkForNeedlessTicking();
 
         activeTicks++;
         activeTicks = activeTicks % 360;
 
         if(world.isRemote||isDummy())
             return;
+        super.tick();
 
         ChemicalVatTileEntity master = (ChemicalVatTileEntity) this.master();
         boolean update = false;

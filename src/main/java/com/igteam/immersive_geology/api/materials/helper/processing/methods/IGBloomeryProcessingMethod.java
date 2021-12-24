@@ -18,7 +18,7 @@ public class IGBloomeryProcessingMethod extends IGProcessingMethod {
 
     @Override
     public ProcessingMethod getKey() {
-        return ProcessingMethod.ROASTER;
+        return ProcessingMethod.BLOOMERY;
     }
 
     @Override

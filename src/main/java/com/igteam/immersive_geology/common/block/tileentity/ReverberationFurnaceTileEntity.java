@@ -1,58 +1,75 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
+import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
+import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
+import com.google.common.collect.ImmutableSet;
+import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.FurnaceTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
-public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<ReverberationFurnaceTileEntity> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
-    NonNullList<ItemStack> inventory;
-    public int process;
-    public int processMax;
-    public int burnTime;
-    public int lastBurnTime;
-    //public final ReverberationFurnaceTileEntity.FurnaceState guiState;
-    //private final Supplier<AlloyRecipe> cachedModel;
+public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<ReverberationFurnaceTileEntity, ReverberationRecipe> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
     private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(ReverberationFurnaceTileEntity::getShape);
 
+    private Logger log = ImmersiveGeology.getNewLogger();
+
+    protected FluidTank gasTank;
+    protected NonNullList<ItemStack> inventory;
+    public static HashMap<Item, Integer> fuelMap = new HashMap<>();
+
+    private int burntime[] = new int[2];
+    private int maxBurntime = 100;
+
+    public int FUEL_SLOT1 = 0, FUEL_SLOT2 = 1;
+    public int OUTPUT_SLOT1 = 2, OUTPUT_SLOT2 = 3;
+    public int INPUT_SLOT1 = 4, INPUT_SLOT2 = 5;
+
     public ReverberationFurnaceTileEntity() {
-        super(ReverberationFurnaceMultiblock.INSTANCE, IGTileTypes.REV_FURNACE.get(), true);
-        this.inventory = NonNullList.withSize(4, ItemStack.EMPTY);
-        this.process = 0;
-        this.processMax = 0;
-        this.burnTime = 0;
-        this.lastBurnTime = 0;
-        //this.guiState = new ReverberationFurnaceTileEntity.FurnaceState();
-//        this.cachedModel = CachedRecipe.cached(AlloyRecipe::findRecipe, () -> {
-//            return (ItemStack) this.inventory.get(0);
-//        }, () -> {
-//            return (ItemStack) this.inventory.get(1);
-//        });
+        super(ReverberationFurnaceMultiblock.INSTANCE,0,true, IGTileTypes.REV_FURNACE.get());
+        this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
+        burntime[0] = 0;
+        burntime[1] = 0;
+        gasTank = new FluidTank(1000);
     }
 
     public boolean canUseGui(PlayerEntity player) {
@@ -68,119 +85,166 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
         return SHAPES.get(this.posInMultiblock, Pair.of(getFacing(), getIsMirrored()));
     }
 
+    @Nullable
+    @Override
+    protected ReverberationRecipe getRecipeForId(ResourceLocation id) {
+        return ReverberationRecipe.recipes.get(id);
+    }
+
+    @Override
+    public Set<BlockPos> getEnergyPos() {
+        return null;
+    }
+
+    private static final Set<BlockPos> redStonePos = ImmutableSet.of(
+            new BlockPos(1, 0, 0)
+    );
+
+    @Override
+    public Set<BlockPos> getRedstonePos() {
+        return redStonePos;
+    }
+
+    @Override
     public void tick() {
-        /*
-        this.checkForNeedlessTicking();
-        if (!this.world.isRemote && this.formed && !this.isDummy()) {
-            boolean activeBeforeTick = this.getIsActive();
-            boolean activeAfterTick;
-            if (this.burnTime <= 0) {
-                if (activeBeforeTick) {
-                    this.setActive(false);
-                }
-            } else {
-                activeAfterTick = false;
-                AlloyRecipe recipe;
-                if (this.process > 0) {
-                    if (!((ItemStack) this.inventory.get(0)).isEmpty() && !((ItemStack) this.inventory.get(1)).isEmpty()) {
-                        recipe = this.getRecipe();
-                        if (recipe != null && recipe.time != this.processMax) {
-                            this.processMax = 0;
-                            this.process = 0;
-                            this.setActive(false);
-                        } else {
-                            --this.process;
-                            activeAfterTick = true;
-                            if (!activeBeforeTick) {
-                                this.setActive(true);
-                            }
-                        }
-                    } else {
-                        this.process = 0;
-                        this.processMax = 0;
-                    }
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        assert master != null;
 
-                    this.markContainingBlockForUpdate((BlockState) null);
-                }
+        checkForNeedlessTicking();
 
-                --this.burnTime;
-                if (this.process <= 0) {
-                    if (this.processMax > 0) {
-                        recipe = this.getRecipe();
-                        if (recipe != null) {
-                            boolean flip = !recipe.input0.test((ItemStack) this.inventory.get(0));
-                            Utils.modifyInvStackSize(this.inventory, flip ? 1 : 0, -recipe.input0.getCount());
-                            Utils.modifyInvStackSize(this.inventory, flip ? 0 : 1, -recipe.input1.getCount());
-                            if (!((ItemStack) this.inventory.get(3)).isEmpty()) {
-                                ((ItemStack) this.inventory.get(3)).grow(recipe.output.copy().getCount());
-                            } else {
-                                this.inventory.set(3, recipe.output.copy());
-                            }
-                        }
+        if(world.isRemote || isDummy())
+            return;
 
-                        this.processMax = 0;
-                    }
+        super.tick();
 
-                    recipe = this.getRecipe();
-                    if (recipe != null) {
-                        this.process = recipe.time;
-                        if (!activeAfterTick) {
-                            --this.process;
-                        }
-
-                        this.processMax = recipe.time;
-                        this.setActive(true);
+        if(formed){
+            for(int offset = 0; offset < 2; offset++) {
+                if(!isDummy()) {
+                    if (master.isBurning(FUEL_SLOT1 + offset)) {
+                        master.burntime[offset] = master.burntime[offset] - 1;
+                    } else if (hasFuel(FUEL_SLOT1 + offset)) {
+                        master.burntime[offset] += fuelMap.get(master.getInventory().get(FUEL_SLOT1 + offset).getItem());
+                        master.getInventory().get(FUEL_SLOT1 + offset).shrink(1);
                     }
                 }
-            }
 
-            int x;
-            if (this.burnTime <= 10 && this.getRecipe() != null) {
-                ItemStack fuel = (ItemStack) this.inventory.get(2);
-                x = ForgeHooks.getBurnTime(fuel);
-                if (x > 0) {
-                    this.lastBurnTime = x;
-                    this.burnTime += this.lastBurnTime;
-                    Item itemFuel = fuel.getItem();
-                    fuel.shrink(1);
-                    if (fuel.isEmpty()) {
-                        this.inventory.set(2, itemFuel.getContainerItem(fuel));
-                    }
+                ItemStack inputItem = master.inventory.get(INPUT_SLOT1 + offset);
+                ReverberationRecipe recipe = ReverberationRecipe.findRecipe(inputItem);
+                if(recipe != null) {
+                    recipe.setSlotOffset(offset);
+                    MultiblockProcessInMachine<ReverberationRecipe> process = new MultiblockProcessInMachine<ReverberationRecipe>(recipe, INPUT_SLOT1 + offset);
+                    process.setInputAmounts(recipe.input.getCount());
 
-                    this.markContainingBlockForUpdate((BlockState) null);
-                }
-            }
-
-            activeAfterTick = this.getIsActive();
-            if (activeBeforeTick != activeAfterTick) {
-                this.markDirty();
-
-                for (x = 0; x < 2; ++x) {
-                    for (int y = 0; y < 2; ++y) {
-                        for (int z = 0; z < 2; ++z) {
-                            BlockPos actualPos = this.getBlockPosForPos(new BlockPos(x, y, z));
-                            TileEntity te = Utils.getExistingTileEntity(this.world, actualPos);
-                            if (te instanceof AlloySmelterTileEntity) {
-                                ((AlloySmelterTileEntity) te).setActive(activeAfterTick);
-                            }
-                        }
+                    if(master.addProcessToQueue(process, true, false))
+                    {
+                        master.addProcessToQueue(process, false, false);
                     }
                 }
             }
         }
-         */
     }
 
-//    @Nullable
-//    public AlloyRecipe getRecipe() {
-//        AlloyRecipe recipe = (AlloyRecipe) this.cachedModel.get();
-//        if (recipe == null) {
-//            return null;
-//        } else {
-//            ItemStack output = (ItemStack) this.inventory.get(3);
-//            return !output.isEmpty() && (!ItemStack.areItemsEqual(output, recipe.output) || output.getCount() + recipe.output.getCount() > this.getSlotLimit(3)) ? null : recipe;
-//        }
-//    }
+    @Override
+    public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
+    {
+        super.readCustomNBT(nbt, descPacket);
+        inventory = Utils.readInventory(nbt.getList("inventory", 10), 6);
+    }
+
+    @Override
+    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket)
+    {
+        super.writeCustomNBT(nbt, descPacket);
+        nbt.put("inventory", Utils.writeInventory(inventory));
+    }
+
+    @Nullable
+    @Override
+    public IFluidTank[] getInternalTanks() {
+        return new IFluidTank[]{gasTank};
+    }
+
+    @Nullable
+    @Override
+    public ReverberationRecipe findRecipeForInsertion(ItemStack itemStack) {
+        return ReverberationRecipe.findRecipe(itemStack);
+    }
+
+    @Nullable
+    @Override
+    public int[] getOutputSlots() {
+        return new int[]{OUTPUT_SLOT1, OUTPUT_SLOT2};
+    }
+
+    @Nullable
+    @Override
+    public int[] getOutputTanks() {
+        return new int[]{0};
+    }
+
+    @Override
+    public boolean additionalCanProcessCheck(MultiblockProcess multiblockProcess) {
+        if (multiblockProcess.recipe instanceof ReverberationRecipe) {
+            ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
+            return (processQueue.get(r.getSlotOffset()).recipe.getId().equals(multiblockProcess.recipe.getId()) && isBurning(r.getSlotOffset()));
+        }
+        return false;
+    }
+
+    @Override
+    public void doProcessOutput(ItemStack itemStack) {
+
+    }
+
+    @Override
+    public void doProcessFluidOutput(FluidStack fluidStack) {
+
+    }
+
+    @Override
+    public void onProcessFinish(MultiblockProcess multiblockProcess) {
+        if(multiblockProcess.recipe instanceof ReverberationRecipe){
+            ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
+            int slotOffset = r.getSlotOffset();
+            ReverberationFurnaceTileEntity master = this.master();
+            if(master.getInventory() != null && !master.getInventory().isEmpty()) {
+                master.getInventory().get(INPUT_SLOT1 + slotOffset).shrink(r.input.getCount());
+            }
+            if(gasTank.getFluidAmount() < gasTank.getCapacity()){
+                gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(MaterialEnum.Sulfuric.getMaterial(),false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
+    }
+
+    @Override
+    public int getMaxProcessPerTick() {
+        return 1;
+    }
+
+    @Override
+    public int getProcessQueueMaxLength() {
+        return 256;
+    }
+
+    @Override
+    public float getMinProcessDistance(MultiblockProcess multiblockProcess) {
+        return 0;
+    }
+
+    @Override
+    public boolean isInWorldProcessingMachine() {
+        return true;
+    }
+
+    public boolean isBurning(int slot){
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        return master.burntime[slot] > 0;
+    }
+
+    public boolean hasFuel(int slot){
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        return fuelMap.containsKey(master.inventory.get(slot).getItem());
+    }
 
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
         final int bX = posInMultiblock.getX();
@@ -251,146 +315,122 @@ public class ReverberationFurnaceTileEntity extends MultiblockPartTileEntity<Rev
             }
         }
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-
     }
 
+    @Nonnull
+    @Override
+    protected IFluidTank[] getAccessibleFluidTanks(Direction direction) {
+        return new IFluidTank[]{gasTank};
+    }
+
+    @Override
+    protected boolean canFillTankFrom(int i, Direction direction, FluidStack fluidStack) {
+        return false;
+    }
+
+    private static final BlockPos gasOutputs = new BlockPos(1, 12, 1);
+
+    @Override
+    protected boolean canDrainTankFrom(int i, Direction side) {
+        return gasOutputs.equals(posInMultiblock)&&(side==null||side==getFacing().getOpposite()); //TODO this seems to always be true? for some reason? ~Muddykat
+    }
+
+    @Override
     public int[] getCurrentProcessesStep() {
-        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        return master != this && master != null ? master.getCurrentProcessesStep() : new int[]{this.processMax - this.process};
+        return new int[0];
     }
 
+    @Override
     public int[] getCurrentProcessesMax() {
-        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        return master != this && master != null ? master.getCurrentProcessesMax() : new int[]{this.processMax};
+        return new int[0];
     }
 
-    public boolean receiveClientEvent(int id, int arg) {
-        if (id == 0) {
-            this.formed = arg == 1;
-        }
+    @Nullable
+    @Override
+    public NonNullList<ItemStack> getInventory() {
+        return inventory;
+    }
 
-        this.markDirty();
-        this.markContainingBlockForUpdate((BlockState) null);
+    @Override
+    public boolean isStackValid(int i, ItemStack itemStack) {
         return true;
     }
 
-    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.readCustomNBT(nbt, descPacket);
-        if (!descPacket) {
-            ItemStackHelper.loadAllItems(nbt, this.inventory);
-            this.process = nbt.getInt("process");
-            this.processMax = nbt.getInt("processMax");
-            this.burnTime = nbt.getInt("burnTime");
-            this.lastBurnTime = nbt.getInt("lastBurnTime");
-        }
+    @Override
+    public int getSlotLimit(int i) {
+        return 64;
+    }
+
+    @Override
+    public void doGraphicalUpdates() {
 
     }
 
     @Override
-    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
-        super.writeCustomNBT(nbt, descPacket);
-        if (!descPacket) {
-            nbt.putInt("process", this.process);
-            nbt.putInt("processMax", this.processMax);
-            nbt.putInt("burnTime", this.burnTime);
-            nbt.putInt("lastBurnTime", this.lastBurnTime);
-            ItemStackHelper.saveAllItems(nbt, this.inventory);
+    public TileEntityType<?> getType() {
+        return IGTileTypes.REV_FURNACE.get();
+    }
+
+    @Nullable
+    @Override
+    public ITextComponent[] getOverlayText(PlayerEntity playerEntity, RayTraceResult rayTraceResult, boolean b) {
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+
+        ArrayList<StringTextComponent> info = new ArrayList<>();
+        for(int offset = 0; offset < 2; offset++) {
+            String FuelName = master.getInventory().get(FUEL_SLOT1 + offset).getDisplayName().getString();
+            String InputName = master.getInventory().get(INPUT_SLOT1 + offset).getDisplayName().getString();
+            String OutputName = master.getInventory().get(OUTPUT_SLOT1 + offset).getDisplayName().getString();
+
+            StringTextComponent FuelNames = new StringTextComponent("Fuel Slot[" + offset + "]: " + FuelName + " x" + master.getInventory().get(FUEL_SLOT1 + offset).getCount());
+            StringTextComponent InputNames = new StringTextComponent("Input Slot[" + offset + "]: " + InputName + " x" +  master.getInventory().get(INPUT_SLOT1 + offset).getCount());
+            StringTextComponent OutputNames = new StringTextComponent("Output Slot[" + offset + "]: " + OutputName + " x" +  master.getInventory().get(OUTPUT_SLOT1 + offset).getCount());
+
+            info.add(FuelNames);
+            info.add(InputNames);
+            info.add(OutputNames);
         }
+
+        String TankOutputName  = master.getInternalTanks()[0].getFluid().getDisplayName().getString();
+
+        info.add(new StringTextComponent("Gas Output: " + TankOutputName + " x" + master.getInternalTanks()[0].getFluidAmount()));
+        info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
+        info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
+
+        return info.toArray(new ITextComponent[info.size()]);
     }
 
-    public NonNullList<ItemStack> getInventory() {
-        return this.inventory;
-    }
-
-    public boolean isStackValid(int slot, ItemStack stack) {
-        return slot == 0 || slot == 1 && FurnaceTileEntity.isFuel(stack);
-    }
-
-    public int getSlotLimit(int slot) {
-        return 64;
-    }
-
-    public void doGraphicalUpdates() {
-    }
-
-    protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
-        return new FluidTank[0];
-    }
-
-    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resources) {
+    @Override
+    public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
         return false;
     }
 
-    protected boolean canDrainTankFrom(int iTank, Direction side) {
+    @Override
+    public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        if(master != null) {
+            if (fuelMap.containsKey(itemStack.getItem())) {
+                if (master.getInventory().get(FUEL_SLOT1).isEmpty()) {
+                    master.inventory.set(FUEL_SLOT1, itemStack.copy());
+                    itemStack.shrink(itemStack.getCount());
+                    return true;
+                }
+            }
+
+            if (master.getInventory().get(INPUT_SLOT1).isEmpty()) {
+                master.inventory.set(INPUT_SLOT1, itemStack.copy());
+                itemStack.shrink(itemStack.getCount());
+                return true;
+            }
+
+            if(itemStack.isEmpty()){
+                if(!master.getInventory().get(master.OUTPUT_SLOT1).isEmpty()){
+                    playerEntity.setHeldItem(hand, master.getInventory().get(master.OUTPUT_SLOT1).copy());
+                    master.getInventory().set(master.OUTPUT_SLOT1, ItemStack.EMPTY);
+                }
+            }
+        }
+
         return false;
-    }
-
-    private static int getBurnTime(ItemStack stack) {
-        return stack.isEmpty() ? 0 : ForgeHooks.getBurnTime(stack);
-    }
-
-    public class FurnaceState implements IIntArray {
-        public static final int LAST_BURN_TIME = 0;
-        public static final int BURN_TIME = 1;
-        public static final int PROCESS_MAX = 2;
-        public static final int CURRENT_PROCESS = 3;
-
-        public FurnaceState() {
-        }
-
-        public int getLastBurnTime() {
-            return this.get(0);
-        }
-
-        public int getBurnTime() {
-            return this.get(1);
-        }
-
-        public int getMaxProcess() {
-            return this.get(2);
-        }
-
-        public int getProcess() {
-            return this.get(3);
-        }
-
-        public int get(int index) {
-            switch (index) {
-                case 0:
-                    return ReverberationFurnaceTileEntity.this.lastBurnTime;
-                case 1:
-                    return ReverberationFurnaceTileEntity.this.burnTime;
-                case 2:
-                    return ReverberationFurnaceTileEntity.this.processMax;
-                case 3:
-                    return ReverberationFurnaceTileEntity.this.process;
-                default:
-                    throw new IllegalArgumentException("Unknown index " + index);
-            }
-        }
-
-        public void set(int index, int value) {
-            switch (index) {
-                case 0:
-                    ReverberationFurnaceTileEntity.this.lastBurnTime = value;
-                    break;
-                case 1:
-                    ReverberationFurnaceTileEntity.this.burnTime = value;
-                    break;
-                case 2:
-                    ReverberationFurnaceTileEntity.this.processMax = value;
-                    break;
-                case 3:
-                    ReverberationFurnaceTileEntity.this.process = value;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown index " + index);
-            }
-
-        }
-
-        public int size() {
-            return 4;
-        }
     }
 }

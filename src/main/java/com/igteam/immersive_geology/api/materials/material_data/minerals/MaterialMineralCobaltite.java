@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.El
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGRoastingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -140,6 +141,10 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
 		//TODO -- add roasting process
+		IGRoastingProcessingMethod roasting_method = new IGRoastingProcessingMethod(100, 1);
+		roasting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+		roasting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(getProcessedType().getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+
 		IGReductionProcessingMethod redox_method = new IGReductionProcessingMethod(1000, 240);
 		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
 				MaterialUseType.METAL_OXIDE), 1));
@@ -161,6 +166,7 @@ public class MaterialMineralCobaltite extends MaterialMineralBase
 		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cobalt.getMaterial(),
 				MaterialUseType.RAW_CRYSTAL)));
 
+		inheritedProcessingMethods.add(roasting_method);
 		inheritedProcessingMethods.add(redox_method);
 		inheritedProcessingMethods.add(slurry_method);
 		inheritedProcessingMethods.add(crystal_method);

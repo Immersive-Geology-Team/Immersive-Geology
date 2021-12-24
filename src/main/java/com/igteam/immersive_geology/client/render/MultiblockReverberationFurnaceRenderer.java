@@ -53,7 +53,7 @@ public class MultiblockReverberationFurnaceRenderer extends TileEntityRenderer<R
                     break;
             }
 
-            ReverberationFurnaceTileEntity master = te.master();
+            ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) te.master();
             transform.pop();
         }
 

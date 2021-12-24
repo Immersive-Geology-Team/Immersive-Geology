@@ -5,7 +5,7 @@ public enum ProcessingMethod {
     CALCINATION,
     ROASTER,
     ELECTROLYSIS,
-    SEDIMENT,
+    BLOOMERY,
     BLASTING,
     CRUSHING,
     SEPARATING,

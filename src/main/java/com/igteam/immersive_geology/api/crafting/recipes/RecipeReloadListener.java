@@ -57,12 +57,15 @@ public class RecipeReloadListener  implements IResourceManagerReloadListener {
 
 		ImmersiveGeology.getNewLogger().info("Loading Bloomery Recipes");
         BloomeryRecipe.recipes = filterRecipes(recipes, BloomeryRecipe.class, BloomeryRecipe.TYPE);
+
         ImmersiveGeology.getNewLogger().info("Loading Crystalizer Recipes.");
         CrystalRecipe.recipes = filterRecipes(recipes, CrystalRecipe.class, CrystalRecipe.TYPE);
 
         ImmersiveGeology.getNewLogger().info("Loading Rotary Kiln Recipes.");
         CalcinationRecipe.recipes = filterRecipes(recipes, CalcinationRecipe.class, CalcinationRecipe.TYPE);
 
+        ImmersiveGeology.getNewLogger().info("Loading Reverberation Furnace Recipes.");
+        ReverberationRecipe.recipes = filterRecipes(recipes, ReverberationRecipe.class, ReverberationRecipe.TYPE);
 
     }
 

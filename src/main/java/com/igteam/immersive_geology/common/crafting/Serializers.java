@@ -12,6 +12,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Serializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGLib.MODID);
 
+    public static final RegistryObject<IERecipeSerializer<ReverberationRecipe>> REVERBERATION_SERIALIZER = RECIPE_SERIALIZERS.register(
+            "reverberation_furnace", ReverberationRecipeSerializer::new
+    );
+
     public static final RegistryObject<IERecipeSerializer<BloomeryRecipe>> BLOOMERY_SERIALIZER = RECIPE_SERIALIZERS.register(
             "bloomery", BloomeryRecipeSerializer::new
     );
@@ -23,6 +27,7 @@ public class Serializers {
     public static final RegistryObject<IERecipeSerializer<SeparatorRecipe>> GRAVITY_SEPARATOR_SERIALIZER = RECIPE_SERIALIZERS.register(
             "gravityseparator", SeparatorRecipeSerializer::new
     );
+
     public static final RegistryObject<IERecipeSerializer<CrystalRecipe>> CRYSTALIZER_SERIALIZER = RECIPE_SERIALIZERS.register(
             "crystalizer", CrystalizerRecipeSerializer::new
     );

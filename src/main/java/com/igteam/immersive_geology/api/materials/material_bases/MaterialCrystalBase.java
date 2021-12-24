@@ -3,6 +3,10 @@ package com.igteam.immersive_geology.api.materials.material_bases;
 import com.igteam.immersive_geology.api.materials.*;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrushingProcessingMethod;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.ItemStack;
 
 public abstract class MaterialCrystalBase extends Material
 {
@@ -97,5 +101,10 @@ public abstract class MaterialCrystalBase extends Material
 	@Override
 	public MaterialEnum getSecondaryType() {
 		return null;
+	}
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		return super.getProcessingMethod();
 	}
 }

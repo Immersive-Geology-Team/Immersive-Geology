@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:reverberation_furnace",
+  "result": {
+    "item": "immersive_geology:metal_oxide_cobalt"
+  },
+  "time": 100,
+  "wasteMultiplier": 1.0,
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_cobaltite"
+  }
+}
