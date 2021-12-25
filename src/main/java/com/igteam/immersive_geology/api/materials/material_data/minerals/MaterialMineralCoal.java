@@ -40,6 +40,11 @@ public class MaterialMineralCoal extends MaterialMineralBase
 	}
 
 	@Override
+	public boolean hasFuel() {
+		return false; //Uses vanilla coal instead
+	}
+
+	@Override
 	public boolean hasCrushedOre() {
 		return false;
 	}

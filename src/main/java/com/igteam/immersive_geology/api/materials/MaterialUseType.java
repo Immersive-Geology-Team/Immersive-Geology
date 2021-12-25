@@ -29,6 +29,7 @@ public enum MaterialUseType {
     ORE_CHUNK(false, ItemSubGroup.natural),
     ORE_BIT(false, ItemSubGroup.natural),
     CLAY(false, ItemSubGroup.natural),
+    FUEL(false, ItemSubGroup.natural),
 
     DIRTY_CRUSHED_ORE(false, ItemSubGroup.processed),
     CRUSHED_ORE(false, ItemSubGroup.processed),

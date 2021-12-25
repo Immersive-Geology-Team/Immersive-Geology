@@ -3,8 +3,10 @@ package com.igteam.immersive_geology.api.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.IGOreItem;
+import com.igteam.immersive_geology.common.item.ItemBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.enchantment.Enchantment;
@@ -50,8 +52,13 @@ public class OreDropProperty extends LootFunction {
                     return itemStack;
                 }
             } else {
-                if(dropItem.asItem() == Items.COAL.getItem()) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel));
+                if(dropItem.asItem() == Items.COAL.getItem()) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()+1) + fortuneLevel));
                 if(dropItem instanceof IGOreItem) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel));
+                if(dropItem instanceof ItemBase && ((ItemBase)dropItem).getMaterial(BlockMaterialType.BASE_MATERIAL) instanceof MaterialMineralBase) {
+                    MaterialMineralBase mineral = ((MaterialMineralBase)((ItemBase)dropItem).getMaterial(BlockMaterialType.BASE_MATERIAL));
+                    if(mineral.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) return new ItemStack(itemStack.getItem(), 4 + fortuneLevel);
+                    if(mineral.getMineralType() == MaterialMineralBase.EnumMineralType.FUEL) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()+1) + fortuneLevel));
+                }
                 return new ItemStack(itemStack.getItem(), Math.max(0, 4 - Math.min(4, pick.getTier().getHarvestLevel())));
             }
         } else {

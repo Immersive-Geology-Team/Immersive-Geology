@@ -1,0 +1,420 @@
+{
+  "variants": {
+    "facing=north,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=straight,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=inner_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=inner_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=outer_left,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=outer_right,waterlogged=false": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "y": 180
+    },
+    "facing=east,half=bottom,shape=straight,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_electrum",
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=inner_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=inner_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_inner_electrum",
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=outer_left,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 90
+    },
+    "facing=west,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=outer_right,waterlogged=true": {
+      "model": "immersive_geology:block/stairs_outer_electrum",
+      "uvlock": true
+    }
+  }
+}

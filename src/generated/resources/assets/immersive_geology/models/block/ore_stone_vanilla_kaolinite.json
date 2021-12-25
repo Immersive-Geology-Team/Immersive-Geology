@@ -1,6 +1,6 @@
 {
   "parent": "immersive_geology:block/base/ore_bearing/ore_bearing_vanilla",
   "textures": {
-    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"
+    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/clay"
   }
 }

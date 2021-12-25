@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.*;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.item.*;
@@ -176,7 +177,11 @@ public class IGItemModelProvider extends ItemModelProvider {
         String builder_name = new ResourceLocation(IGLib.MODID, "item/"+oreBlock.getHolderName()).getPath();
         String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
         withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/rock_" + stone_name));
-        getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/" + stone_name + "/" + stone_name + "_normal");
+        if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
+            getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/clay");
+        } else {
+            getBuilder(builder_name).texture("ore", IGLib.MODID + ":block/greyscale/rock/ore_bearing/" + stone_name + "/" + stone_name + "_normal");
+        }
         getBuilder(builder_name).texture("base", IGLib.MODID + ":block/greyscale/rock/rock_" + stone_name);
         getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(1).uvs(0, 0, 16, 16)));
         getBuilder(builder_name).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(0).uvs(0, 0, 16, 16)));

@@ -42,6 +42,8 @@ public abstract class MaterialMineralBase extends Material
 				return hasClay();
 			case SLAG:
 				return hasSlag();
+			case FUEL:
+				return hasFuel();
 
 		}
 		return false;
@@ -61,6 +63,10 @@ public abstract class MaterialMineralBase extends Material
 
 	public boolean hasClay(){
 		return getMineralType() == EnumMineralType.CLAY;
+	}
+
+	public boolean hasFuel(){
+		return getMineralType() == EnumMineralType.FUEL;
 	}
 
 	public boolean isOxide(){
@@ -115,7 +121,8 @@ public abstract class MaterialMineralBase extends Material
 		NATIVE,
 		CRYSTAL,
 		FUEL,
-		CLAY
+		CLAY,
+		NONE
 	}
 
 	public int getStaticColor()

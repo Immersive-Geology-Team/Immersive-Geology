@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.*;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
@@ -57,6 +58,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         case ORE_STONE:
                             registerOreBlock(blockType);
                             break;
+                        case STAIRS:
                         case SHEETMETAL_STAIRS:
                             registerStairsBlock(blockType);
                             break;
@@ -235,10 +237,16 @@ public class IGBlockStateProvider extends BlockStateProvider {
             String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
             String base_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName(); //gets the name metamorphic and such
             String ore_name = oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL).getName();
-
-            BlockModelBuilder  baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
-                    .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
+            BlockModelBuilder  baseModel;
+            if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
+                baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
+                        .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/clay"));
+            } else {
+                baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
+                        .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
+            }
             getVariantBuilder(oreBlock).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
         }
     }

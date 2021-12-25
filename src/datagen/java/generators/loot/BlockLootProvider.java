@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.igteam.immersive_geology.api.loot.OreDropProperty;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
@@ -69,6 +70,44 @@ public class BlockLootProvider implements IDataProvider {
                             .addLootPool(LootPool.builder()
                                     .rolls(RandomValueRange.of(1F, 1F))
                                     .addEntry(ItemLootEntry.builder(Items.COAL)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                    );
+                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
+                    Item clay = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.CLAY);
+                    functionTable.put(b, (block) -> LootTable.builder()
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(oreChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(clay)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                    );
+                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.FUEL) {
+                    Item fuel = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.FUEL);
+                    functionTable.put(b, (block) -> LootTable.builder()
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(oreChunk)
+                                            .acceptFunction(OreDropProperty.builder()))
+                            )
+                            .addLootPool(LootPool.builder()
+                                    .rolls(RandomValueRange.of(1F, 1F))
+                                    .addEntry(ItemLootEntry.builder(fuel)
                                             .acceptFunction(OreDropProperty.builder()))
                             )
                             .addLootPool(LootPool.builder()

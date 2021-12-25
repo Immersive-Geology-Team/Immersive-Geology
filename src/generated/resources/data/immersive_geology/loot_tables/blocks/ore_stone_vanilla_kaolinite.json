@@ -25,6 +25,20 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
+          "name": "immersive_geology:clay_kaolinite"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
           "name": "immersive_geology:chunk_vanilla"
         }
       ]

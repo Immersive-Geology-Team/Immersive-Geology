@@ -3,12 +3,13 @@ package com.igteam.immersive_geology.common.block;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
+import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGBlockItem;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.OreBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -84,6 +85,12 @@ public class IGOreBlock extends OreBlock implements IGBlockType, IForgeBlock, IE
     @Override
     public Material getMaterial(BlockMaterialType type) {
         return blockMaterialData.get(type);
+    }
+
+    public MaterialMineralBase.EnumMineralType getMineralType() {
+        if(getMaterial(BlockMaterialType.ORE_MATERIAL) instanceof MaterialMineralBase)
+            return ((MaterialMineralBase)getMaterial(BlockMaterialType.ORE_MATERIAL)).getMineralType();
+        return MaterialMineralBase.EnumMineralType.NONE;
     }
 
     @Override
