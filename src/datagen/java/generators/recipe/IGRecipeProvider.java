@@ -4,6 +4,7 @@ package generators.recipe;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
@@ -233,11 +234,27 @@ public class IGRecipeProvider extends RecipeProvider {
                         case CRAFTING:
                             addCraftingMethod(method, consumer);
                             break;
+                        case MOLTEN_REDUCTION:
+                            addArcFurnaceMethod(method,consumer);
+                            break;
                     }
                 }
             }
         }
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));
+    }
+
+    private void addArcFurnaceMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer) {
+        IGArcFurnaceProcessingMethod m = (IGArcFurnaceProcessingMethod) method;
+        ArcFurnaceRecipeBuilder arcFurnaceRecipeBuilder = ArcFurnaceRecipeBuilder.builder(m.getOutputItem());
+        if (!m.getSlagItem().isEmpty()) {
+            arcFurnaceRecipeBuilder.addSlag(m.getSlagItem());
+        }
+        arcFurnaceRecipeBuilder.setEnergy(m.getEnergyCost()).setTime(m.getProcessingTime()).addIngredient("input",m.getInputItem());
+        for (IngredientWithSize t:m.getAdditives()) {
+            arcFurnaceRecipeBuilder.addMultiInput(t);
+        }
+        arcFurnaceRecipeBuilder.build(consumer, toRL("arcfurnace/"+m.getOutputItem().getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addCrushingMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer){

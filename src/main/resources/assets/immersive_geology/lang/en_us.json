@@ -73,6 +73,8 @@
 
   "fluid.immersive_geology.fluids_nitric_acid": "Nitric Acid",
   "fluid.immersive_geology.fluids_hydrochloric_acid": "Hydrochloric Acid",
+  "fluid.immersive_geology.fluids_hydrofluoric_acid": "Hydrofluoric Acid",
+
   "fluid.immersive_geology.fluids_sulfuric_acid": "Sulfuric Acid",
   "fluid.immersive_geology.fluids_brine": "Brine",
   "fluid.immersive_geology.fluids_sodium_hydroxide": "Sodium Hydroxide",
@@ -125,6 +127,7 @@
   "material.immersive_geology.nitric_acid": "Nitric Acid",
   "material.immersive_geology.sulfuric_acid": "Sulfuric Acid",
   "material.immersive_geology.hydrochloric_acid": "Hydrochloric Acid",
+  "material.immersive_geology.hydrofluoric_acid": "Hydrofluoric Acid",
   "material.immersive_geology.brine": "Brine",
   "material.immersive_geology.sodium_hydroxide": "Sodium Hydroxide",
 
@@ -134,6 +137,7 @@
 
   "material.immersive_geology.diamond": "Diamond",
   "material.immersive_geology.pyrite": "Pyrite",
+  "material.immersive_geology.alumina": "Alumina",
   "material.immersive_geology.anatase": "Anatase",
   "material.immersive_geology.cuprite": "Cuprite",
   "material.immersive_geology.zircon": "Zircon",
@@ -168,5 +172,6 @@
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",
-  "component.immersive_geology.nitric_acid": "Nitrate"
+  "component.immersive_geology.nitric_acid": "Nitrate",
+  "component.immersive_geology.hydrofluoric_acid": "Fluorite"
 }

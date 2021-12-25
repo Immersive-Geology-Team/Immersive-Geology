@@ -1,5 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
@@ -7,6 +9,7 @@ import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGArcFurnaceProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -14,6 +17,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -154,9 +158,31 @@ public class MaterialMineralAlumina extends MaterialMineralBase
 		cryolite_method.addSecondaryFluidInput(Fluids.WATER, 125);
 		cryolite_method.addPrimaryFluidInput(FluidEnum.HydrofluoricAcid, 125);
 
+		IGArcFurnaceProcessingMethod smelting_method = new IGArcFurnaceProcessingMethod(20000,80,
+				new IngredientWithSize(IETags.coalCokeDust,1),
+				IngredientWithSize.of(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cryolite.getMaterial(),
+						MaterialUseType.DUST))));
+		//REFACTOR -- chance based shenanigans here
+		smelting_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cryolite.getMaterial(),
+				MaterialUseType.DUST)));
+		smelting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE)));
+		smelting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Aluminium.getMaterial(),
+				MaterialUseType.INGOT)));
 
-		//TODO -- Arc Furnace method of cryolite, alumina and cryolite to cryolite + Al ingots
+		IGArcFurnaceProcessingMethod smelting_method2 = new IGArcFurnaceProcessingMethod(20000,80,
+				new IngredientWithSize(IETags.coalCokeDust,1),
+				IngredientWithSize.of(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cryolite.getMaterial(),
+						MaterialUseType.DUST))));
+		//REFACTOR -- chance based shenanigans here
+		smelting_method2.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cryolite.getMaterial(),
+				MaterialUseType.DUST)));
+		smelting_method2.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST)));
+		smelting_method2.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Aluminium.getMaterial(),
+				MaterialUseType.INGOT)));
 
+		inheritedProcessingMethods.add(smelting_method2);
+
+		inheritedProcessingMethods.add(smelting_method);
 		inheritedProcessingMethods.add(cryolite_method);
 		inheritedProcessingMethods.add(aluminate_method);
 

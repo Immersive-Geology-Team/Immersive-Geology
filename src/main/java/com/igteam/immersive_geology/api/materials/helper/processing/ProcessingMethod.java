@@ -9,5 +9,6 @@ public enum ProcessingMethod {
     BLASTING,
     CRUSHING,
     SEPARATING,
-    CRAFTING;
+    CRAFTING,
+    MOLTEN_REDUCTION
 }
