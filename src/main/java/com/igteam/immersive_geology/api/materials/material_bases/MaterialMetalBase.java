@@ -1,11 +1,13 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
+import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGArcFurnaceProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrushingProcessingMethod;
@@ -212,6 +214,23 @@ public abstract class MaterialMetalBase extends Material
 				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 2));
 				inheritedProcessingMethods.add(toDust);
 			}
+		}
+
+		if(hasSubtype(MaterialUseType.DUST) && hasSubtype(MaterialUseType.INGOT)) {
+			IGArcFurnaceProcessingMethod gritToIngot = new IGArcFurnaceProcessingMethod(250, 100);
+			gritToIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST)));
+			gritToIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
+			gritToIngot.addItemSlag(new ItemStack(IEItems.Ingredients.slag));
+
+			inheritedProcessingMethods.add(gritToIngot);
+		}
+
+		if(hasSubtype(MaterialUseType.PLATE) && hasSubtype(MaterialUseType.INGOT)) {
+			IGCraftingProcessingMethod ingotToPlate = new IGCraftingProcessingMethod("ingot_to_plate", IGTags.getTagsFor(this).ingot);
+			ingotToPlate.setShapeless(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT), IEItems.Tools.hammer);
+			ingotToPlate.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.PLATE)));
+
+			inheritedProcessingMethods.add(ingotToPlate);
 		}
 
 		return super.getProcessingMethod();

@@ -2,7 +2,7 @@
   "type": "immersiveengineering:arc_furnace",
   "results": [
     {
-      "item": "immersive_geology:ingot_aluminum"
+      "item": "immersive_geology:ingot_uranium"
     }
   ],
   "additives": [],
@@ -12,6 +12,6 @@
   "energy": 250,
   "time": 100,
   "input": {
-    "item": "immersive_geology:dust_aluminum"
+    "item": "immersive_geology:dust_uranium"
   }
 }

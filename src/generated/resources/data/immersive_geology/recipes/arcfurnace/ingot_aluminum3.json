@@ -19,6 +19,6 @@
   "energy": 20000,
   "time": 80,
   "input": {
-    "item": "immersive_geology:dust_alumina"
+    "item": "immersive_geology:crushed_ore_alumina"
   }
 }
