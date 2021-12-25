@@ -45,7 +45,6 @@ public enum MaterialEnum {
     Zinc(new MaterialMetalZinc()),
     Sodium(new MaterialMetalSodium()),
 
-
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
     Steel(new MaterialMetalSteel()),
