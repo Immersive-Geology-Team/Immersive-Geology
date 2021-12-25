@@ -105,6 +105,10 @@ public class MaterialMetalNickel extends MaterialMetalBase
 		return CrystalFamily.CUBIC;
 	}
 
+
+	@Override
+	public boolean generateOxide() {return true;}
+
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

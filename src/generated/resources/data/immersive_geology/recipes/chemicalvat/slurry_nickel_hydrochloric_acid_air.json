@@ -4,6 +4,9 @@
     "fluid": "immersive_geology:slurry_nickel_hydrochloric_acid",
     "amount": 125
   },
+  "item_input": {
+    "item": "immersive_geology:metal_oxide_nickel"
+  },
   "fluid_input1": {
     "tag": "forge:hydrochloric_acid",
     "amount": 125
