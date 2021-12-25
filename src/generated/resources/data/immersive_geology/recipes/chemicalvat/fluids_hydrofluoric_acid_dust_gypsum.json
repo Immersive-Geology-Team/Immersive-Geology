@@ -1,7 +1,7 @@
 {
   "type": "immersive_geology:chemicalvat",
   "fluid_result": {
-    "fluid": "immersive_geology:fluids_hydrochloric_acid",
+    "fluid": "immersive_geology:fluids_hydrofluoric_acid",
     "amount": 125
   },
   "result": {

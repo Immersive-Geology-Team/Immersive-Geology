@@ -63,6 +63,7 @@ public enum MaterialEnum {
     Quartz(new MaterialCrystalQuartz()),
 
     //Minerals
+    Alumina(new MaterialMineralAlumina()),
     Anatase(new MaterialMineralAnatase()),
     Cuprite(new MaterialMineralCuprite()),
     Zircon(new MaterialMineralZircon()),

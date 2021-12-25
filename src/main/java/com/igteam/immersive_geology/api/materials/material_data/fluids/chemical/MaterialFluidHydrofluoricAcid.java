@@ -22,7 +22,7 @@ public class MaterialFluidHydrofluoricAcid extends MaterialFluidBase {
 
     @Override
     public String getName() {
-        return "hydrochloric_acid";
+        return "hydrofluoric_acid";
     }
 
     @Override
@@ -123,18 +123,18 @@ public class MaterialFluidHydrofluoricAcid extends MaterialFluidBase {
     @Override
     public IGMaterialProcess getProcessingMethod()
     {
-        IGVatProcessingMethod sulfuric_rocksalt_method = new IGVatProcessingMethod(1000, 120);
-        sulfuric_rocksalt_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
-        sulfuric_rocksalt_method.addItemInput(new ItemStack(IGRegistrationHolder.
+        IGVatProcessingMethod sulfuric_fluorite_method = new IGVatProcessingMethod(1000, 120);
+        sulfuric_fluorite_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
+        sulfuric_fluorite_method.addItemInput(new ItemStack(IGRegistrationHolder.
                 getItemByMaterial(MaterialEnum.Fluorite.getMaterial(), MaterialUseType.DUST), 1));
-        sulfuric_rocksalt_method.addSecondaryFluidInput(Fluids.WATER, 125);
-        sulfuric_rocksalt_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Gypsum.getMaterial(),
+        sulfuric_fluorite_method.addSecondaryFluidInput(Fluids.WATER, 125);
+        sulfuric_fluorite_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Gypsum.getMaterial(),
                 MaterialUseType.DUST),1));
-        sulfuric_rocksalt_method.addFluidOutput(FluidEnum.HydrofluoricAcid, 125);
+        sulfuric_fluorite_method.addFluidOutput(FluidEnum.HydrofluoricAcid, 125);
 
 
 
-        inheritedProcessingMethods.add(sulfuric_rocksalt_method);
+        inheritedProcessingMethods.add(sulfuric_fluorite_method);
 
         return super.getProcessingMethod();
     }
