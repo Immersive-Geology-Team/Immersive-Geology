@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:compound_dust_aluminum",
     "immersive_geology:compound_dust_iron",
     "immersive_geology:compound_dust_tungsten",
     "immersive_geology:compound_dust_sodium"

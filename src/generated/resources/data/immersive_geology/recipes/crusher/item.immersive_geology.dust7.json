@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_cobalt",
+    "item": "immersive_geology:dust_arsenic",
     "count": 2
   },
   "input": {
-    "item": "immersive_geology:raw_crystal_cobalt"
+    "item": "immersive_geology:raw_crystal_arsenic"
   },
   "energy": 0
 }

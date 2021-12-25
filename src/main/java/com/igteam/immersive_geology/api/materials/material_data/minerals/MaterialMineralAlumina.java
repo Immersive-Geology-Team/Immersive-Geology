@@ -156,7 +156,7 @@ public class MaterialMineralAlumina extends MaterialMineralBase
 
 
 		//TODO -- Arc Furnace method of cryolite, alumina and cryolite to cryolite + Al ingots
-		
+
 		inheritedProcessingMethods.add(cryolite_method);
 		inheritedProcessingMethods.add(aluminate_method);
 
