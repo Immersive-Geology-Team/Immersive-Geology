@@ -19,6 +19,7 @@ public class IGArcFurnaceProcessingMethod extends IGProcessingMethod {
         this.energyCost = energyCost;
         this.processingTime = processingTime;
         this.additives = additives;
+        this.slagItem = ItemStack.EMPTY;
 
     }
 

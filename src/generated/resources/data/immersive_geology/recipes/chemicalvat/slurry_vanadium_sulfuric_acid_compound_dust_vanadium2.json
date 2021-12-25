@@ -1,23 +1,23 @@
 {
   "type": "immersive_geology:chemicalvat",
   "fluid_result": {
-    "fluid": "immersive_geology:slurry_manganese_hydrochloric_acid",
+    "fluid": "immersive_geology:slurry_vanadium_sulfuric_acid",
     "amount": 125
   },
   "result": {
-    "item": "immersive_geology:compound_dust_tungsten"
+    "item": "immersive_geology:compound_dust_vanadium"
   },
   "item_input": {
-    "item": "immersive_geology:dust_hubnerite"
+    "item": "immersive_geology:slag_vanadinite"
   },
   "fluid_input1": {
     "tag": "minecraft:water",
     "amount": 125
   },
   "fluid_input2": {
-    "tag": "forge:hydrochloric_acid",
+    "tag": "forge:sulfuric_acid",
     "amount": 125
   },
   "energy": 1000,
-  "time": 120
+  "time": 240
 }

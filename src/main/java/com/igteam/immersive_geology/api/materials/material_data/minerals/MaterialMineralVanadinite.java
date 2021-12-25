@@ -1,5 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
@@ -8,6 +10,8 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGArcFurnaceProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCalcinationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
@@ -147,11 +151,31 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 		slurry_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid,125);
 		slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
 		slurry_method.addFluidOutput(SlurryEnum.VANADIUM,0,125);
-		slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(), MaterialUseType.COMPOUND_DUST), 1));
+		slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
+				MaterialUseType.COMPOUND_DUST), 1));
+
 
 		//TODO -- add roasting process to compound dust
+		IGCalcinationProcessingMethod calcination_method = new IGCalcinationProcessingMethod(1000, 240);
+		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
+				MaterialUseType.COMPOUND_DUST), 1));
+		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+
+
 		//TODO -- add Arc furnacing of Vanadium oxide
 
+		IGArcFurnaceProcessingMethod smelting_method = new IGArcFurnaceProcessingMethod(20000,80,
+				new IngredientWithSize(IETags.coalCokeDust,1));
+		//REFACTOR -- chance based shenanigans here
+		smelting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this.getProcessedType().getMaterial(),
+				MaterialUseType.METAL_OXIDE)));
+		smelting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
+				MaterialUseType.INGOT)));
+
+
+		inheritedProcessingMethods.add(calcination_method);
+		inheritedProcessingMethods.add(smelting_method);
 		inheritedProcessingMethods.add(redox_method);
 		inheritedProcessingMethods.add(slurry_method);
 

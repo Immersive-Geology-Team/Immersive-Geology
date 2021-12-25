@@ -130,20 +130,25 @@ public class MaterialMineralHubnerite extends MaterialMineralBase
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
 		IGVatProcessingMethod manganese_slurry_method = new IGVatProcessingMethod(1000, 120);
-		manganese_slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.COMPOUND_DUST), 1));
+		manganese_slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.COMPOUND_DUST), 1));
 		manganese_slurry_method.addFluidOutput(SlurryEnum.MANGANESE, 0, 125);
 		manganese_slurry_method.addPrimaryFluidInput(FluidEnum.HydrochloricAcid, 125);
 		manganese_slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
-		manganese_slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+		manganese_slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 1));
 
 		IGCalcinationProcessingMethod calcination_method = new IGCalcinationProcessingMethod(1000, 240);
-		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.COMPOUND_DUST), 1));
-		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
+		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.COMPOUND_DUST), 1));
+		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
 
 		IGReductionProcessingMethod reduction_method = new IGReductionProcessingMethod(1000, 240);
 		reduction_method.addItemSlag(ItemStack.EMPTY);
-		reduction_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
-		reduction_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.DUST), 1));
+		reduction_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+		reduction_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.DUST), 1));
 
 		IGVatProcessingMethod manganese_sulf_slurry_method = new IGVatProcessingMethod(1000, 120);
 		manganese_sulf_slurry_method.addItemOutput(ItemStack.EMPTY);

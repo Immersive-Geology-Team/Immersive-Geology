@@ -185,21 +185,12 @@ public class IGRecipeProvider extends RecipeProvider {
         }
 
         for(MaterialEnum wrap : MaterialEnum.values()) {
-            if(wrap.getMaterial() instanceof MaterialMineralBase) {
+            /*if(wrap.getMaterial() instanceof MaterialMineralBase) {
                 MaterialMineralBase orebase = (MaterialMineralBase) wrap.getMaterial();
                 //Gravity Separator
-                if(orebase.hasCrushedOre()) {
-                    ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(orebase, MaterialUseType.CRUSHED_ORE));
-                    for (MaterialEnum stoneWrap : MaterialEnum.stoneValues()) {
-                        Material stonebase = stoneWrap.getMaterial();
-                        ItemStack input = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, orebase, MaterialUseType.DIRTY_CRUSHED_ORE));
-                        ItemStack waste = new ItemStack(IGRegistrationHolder.getItemByMaterial(stonebase, MaterialUseType.ROCK_BIT));
-                        SeparatorRecipeBuilder sepBuilder = new SeparatorRecipeBuilder();
-                        sepBuilder.addResult(output).addInput(input).addWaste(waste).build(consumer, toRL("gravityseparator/wash_dirty_crushed_" + orebase.getName()));
-                    }
-                }
-            }
 
+            }
+*/
             //Setup Recipe Generation for Mineral Processing
             Material base = wrap.getMaterial();
 
@@ -237,11 +228,21 @@ public class IGRecipeProvider extends RecipeProvider {
                         case MOLTEN_REDUCTION:
                             addArcFurnaceMethod(method,consumer);
                             break;
+                        case SEPARATING:
+                            addSeparationMethod(method, consumer);
+                            break;
                     }
                 }
             }
         }
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(consumer));
+    }
+
+    private void addSeparationMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer) {
+        IGSeparationProcessingMethod m = (IGSeparationProcessingMethod) method;
+        SeparatorRecipeBuilder builder = SeparatorRecipeBuilder.builder(m.getOutputItem());
+        builder.addWaste(m.getWasteItem()).addInput(m.getInputItem()).build(consumer,
+                toRL("gravityseparator/wash_" + m.getOutputItem().getItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private void addArcFurnaceMethod(IGProcessingMethod method, Consumer<IFinishedRecipe> consumer) {

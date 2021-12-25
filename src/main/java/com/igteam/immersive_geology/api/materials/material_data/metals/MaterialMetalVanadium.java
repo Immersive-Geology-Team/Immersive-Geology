@@ -107,6 +107,9 @@ public class MaterialMetalVanadium extends MaterialMetalBase
 
 	@Override
 	public boolean generateOxide() {return true;}
+
+	@Override
+	public boolean hasCompoundDust() {return  true;}
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

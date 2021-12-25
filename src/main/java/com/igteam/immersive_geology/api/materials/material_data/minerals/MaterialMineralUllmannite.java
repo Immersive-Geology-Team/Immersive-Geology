@@ -8,6 +8,7 @@ import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGRoastingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -138,6 +139,14 @@ public class MaterialMineralUllmannite extends MaterialMineralBase
 
 	public IGMaterialProcess getProcessingMethod() {
 		//TODO -- add roasting process
+
+		IGRoastingProcessingMethod roasting_method = new IGRoastingProcessingMethod(100, 1);
+		roasting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.CRUSHED_ORE), 1));
+		roasting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(getProcessedType().getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+
+
 		IGVatProcessingMethod slurry_method = new IGVatProcessingMethod(1000, 240);
 		slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Nickel.getMaterial(),
 				MaterialUseType.METAL_OXIDE), 1));
@@ -150,6 +159,8 @@ public class MaterialMineralUllmannite extends MaterialMineralBase
 		crystal_method.addFluidInput(SlurryEnum.NICKEL,0,125);
 		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Nickel.getMaterial(),
 				MaterialUseType.RAW_CRYSTAL), 1));
+
+		inheritedProcessingMethods.add(roasting_method);
 
 		inheritedProcessingMethods.add(slurry_method);
 		inheritedProcessingMethods.add(crystal_method);

@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGSeparationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -128,14 +129,24 @@ public class MaterialMineralFerberite extends MaterialMineralBase
 		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(), MaterialUseType.INGOT)));
 		redox_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG),1));
 
+
 		//TODO - SLAG separation method
+		IGSeparationProcessingMethod sep_method = new IGSeparationProcessingMethod(120);
+		sep_method.addItemWaste(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+		sep_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(),
+				MaterialUseType.DUST)));
+		sep_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG),1));
 
 		IGReductionProcessingMethod wolf_redox_method =  new IGReductionProcessingMethod(1000, 240);
-		wolf_redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.METAL_OXIDE), 1));
-		wolf_redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(), MaterialUseType.DUST)));
+		wolf_redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.METAL_OXIDE), 1));
+		wolf_redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Tungsten.getMaterial(),
+				MaterialUseType.DUST)));
 		//we grab IE slag in recipe builder here
 		wolf_redox_method.addItemSlag(ItemStack.EMPTY);
 
+		inheritedProcessingMethods.add(sep_method);
 		inheritedProcessingMethods.add(redox_method);
 		inheritedProcessingMethods.add(wolf_redox_method);
 

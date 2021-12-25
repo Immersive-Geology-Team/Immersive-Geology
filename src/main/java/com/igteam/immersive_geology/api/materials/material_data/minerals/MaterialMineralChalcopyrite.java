@@ -128,4 +128,9 @@ public class MaterialMineralChalcopyrite extends MaterialMineralBase
 	public MaterialEnum getSecondaryType() {
 		return MaterialEnum.Iron;
 	}
+
+	@Override
+	public boolean hasSlag() {return  true;}
+
+
 }

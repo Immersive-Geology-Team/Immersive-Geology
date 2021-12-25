@@ -7,7 +7,7 @@
     "tag": "forge:slag"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_ilmenite"
+    "item": "immersive_geology:crushed_ore_hematite"
   },
   "energy": 1000,
   "time": 240
