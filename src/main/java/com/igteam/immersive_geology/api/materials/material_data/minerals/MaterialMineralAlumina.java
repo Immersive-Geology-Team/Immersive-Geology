@@ -1,12 +1,18 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -130,6 +136,30 @@ public class MaterialMineralAlumina extends MaterialMineralBase
 	//Input the processing steps for this material
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
+
+		IGVatProcessingMethod aluminate_method = new IGVatProcessingMethod(1000, 240);
+		aluminate_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST)));
+		aluminate_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Aluminium.getMaterial(),
+				MaterialUseType.COMPOUND_DUST)));
+		aluminate_method.addPrimaryFluidInput(FluidEnum.SodiumHydroxide, 125);
+		aluminate_method.addSecondaryFluidInput(Fluids.WATER, 125);
+		aluminate_method.addFluidOutput(Fluids.EMPTY, 0);
+
+		IGVatProcessingMethod cryolite_method = new IGVatProcessingMethod(1000, 120);
+		cryolite_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Aluminium.getMaterial(),
+				MaterialUseType.COMPOUND_DUST)));
+		cryolite_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cryolite.getMaterial(),
+				MaterialUseType.DUST)));
+		cryolite_method.addFluidOutput(Fluids.EMPTY, 0);
+		cryolite_method.addSecondaryFluidInput(Fluids.WATER, 125);
+		cryolite_method.addPrimaryFluidInput(FluidEnum.HydrofluoricAcid, 125);
+
+
+		//TODO -- Arc Furnace method of cryolite, alumina and cryolite to cryolite + Al ingots
+		
+		inheritedProcessingMethods.add(cryolite_method);
+		inheritedProcessingMethods.add(aluminate_method);
+
 		return super.getProcessingMethod();
 	}
 }

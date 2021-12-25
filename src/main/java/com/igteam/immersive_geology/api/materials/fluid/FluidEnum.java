@@ -5,10 +5,7 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidHydrochloricAcid;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidNitricAcid;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSodiumHydroxide;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.MaterialFluidSulfuricAcid;
+import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +18,7 @@ public enum FluidEnum {
     //Volatile
     SulfuricAcid(new MaterialFluidSulfuricAcid()),
     HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
+    HydrofluoricAcid(new MaterialFluidHydrofluoricAcid()),
     NitricAcid(new MaterialFluidNitricAcid()),
     SodiumHydroxide(new MaterialFluidSodiumHydroxide());
 

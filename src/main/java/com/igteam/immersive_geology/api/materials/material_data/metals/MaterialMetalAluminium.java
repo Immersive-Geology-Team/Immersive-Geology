@@ -106,5 +106,8 @@ public class MaterialMetalAluminium extends MaterialMetalBase
 	}
 
 	@Override
-	public boolean isNativeMetal() {return true;}
+	public boolean isNativeMetal() {return false;}
+
+	@Override
+	public boolean hasCompoundDust() {return  true;}
 }
