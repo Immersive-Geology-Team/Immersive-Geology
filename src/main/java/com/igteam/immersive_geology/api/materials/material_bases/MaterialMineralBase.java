@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrushingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase.EnumStoneType;
 import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -159,6 +160,12 @@ public abstract class MaterialMineralBase extends Material
 			manualClean.setShapeless(inputDirtyCrush, inputDirtyCrush);
 			manualClean.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 
+
+			IGCrushingProcessingMethod ore2Dust = new IGCrushingProcessingMethod(1000, 80);
+			ore2Dust.inputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
+			ore2Dust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 1));
+
+			inheritedProcessingMethods.add(ore2Dust);
 			inheritedProcessingMethods.add(defaultNativeOreCrushing);
 			inheritedProcessingMethods.add(manualClean);
 		}
