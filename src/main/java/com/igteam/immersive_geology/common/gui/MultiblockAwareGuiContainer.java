@@ -19,7 +19,7 @@ public class MultiblockAwareGuiContainer<T extends MultiblockPartTileEntity<T>> 
 
     protected BlockPos templateSize;
     public MultiblockAwareGuiContainer(PlayerInventory inv, T tile, int id, IETemplateMultiblock template){
-        super(inv, tile, id);
+        super(tile, id);
 
         this.templateSize = new BlockPos(template.getSize(this.tile.getWorldNonnull())).subtract(ONE);
     }

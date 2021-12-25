@@ -134,8 +134,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     }
 
     @Override
-    public boolean shouldRenderAsActive()
-    {
+    protected boolean shouldRenderAsActiveImpl() {
         return !processQueue.isEmpty();
     }
 
