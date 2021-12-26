@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dust_gold"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:tiny_dust_gold",
+    "count": 9
+  }
+}

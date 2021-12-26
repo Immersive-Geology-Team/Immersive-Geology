@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/tiny_dust_wolframite"
+    ]
+  },
+  "criteria": {
+    "has_dust_wolframite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_wolframite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/tiny_dust_wolframite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dust_wolframite",
+      "has_the_recipe"
+    ]
+  ]
+}

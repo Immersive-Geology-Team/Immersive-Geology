@@ -54,12 +54,12 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
             }
         }
 
-        holder_name = IGRegistrationHolder.getRegistryKey(MaterialEnum.Vanilla.getMaterial(), MaterialUseType.MACHINE).toLowerCase();
-        IGRegistrationHolder.registeredIGBlocks.put(holder_name + "_" + "bloomery", this);
+        holder_name = "bloomery";
+        IGRegistrationHolder.registeredIGBlocks.put(holder_name, this);
 
         this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Vanilla.getMaterial());
-        itemBlock.setRegistryName(IGLib.MODID + ":" + holder_name + "_" + "bloomery");
-        IGRegistrationHolder.registeredIGItems.put(holder_name + "_" + "bloomery", itemBlock);
+        itemBlock.setRegistryName(IGLib.MODID + ":" + holder_name);
+        IGRegistrationHolder.registeredIGItems.put(holder_name, itemBlock);
     }
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 

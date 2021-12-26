@@ -7,14 +7,13 @@ import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ITag.*;
+import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
@@ -52,10 +51,12 @@ public class IGTags {
         public final INamedTag<Item> ore_crushed;
         public final INamedTag<Item> dirty_ore_crushed;
         public final INamedTag<Item> dust;
+        public final INamedTag<Item> tiny_dust;
         public final INamedTag<Item> plate;
         public final INamedTag<Item> rod;
         public final INamedTag<Item> gear;
         public final INamedTag<Item> wire;
+        public final INamedTag<Item> clay;
         public final INamedTag<Item> brick;
 
         public final INamedTag<Fluid> fluid;
@@ -76,6 +77,12 @@ public class IGTags {
                 ingot = null;
             }
 
+            if(material.hasSubtype(MaterialUseType.CLAY)){
+                clay = createItemWrapper(getClay(name));
+            } else {
+                clay = null;
+            }
+
             if(material.hasSubtype(MaterialUseType.BRICK)){
                 brick = createItemWrapper(getBrick(name));
             } else {
@@ -86,6 +93,12 @@ public class IGTags {
                 dust = createItemWrapper(getDust(name));
             } else {
                 dust = null;
+            }
+
+            if(material.hasSubtype(MaterialUseType.TINY_DUST)) {
+                tiny_dust = createItemWrapper(getTinyDust(name));
+            } else {
+                tiny_dust = null;
             }
 
             if(material.hasSubtype(MaterialUseType.DIRTY_CRUSHED_ORE)) {
@@ -185,8 +198,17 @@ public class IGTags {
         return forgeLoc("ingots/"+type);
     }
 
+    public static ResourceLocation getClay(String type)
+    {
+        return forgeLoc("clay/"+type);
+    }
 
     public static ResourceLocation getBrick(String type)
+    {
+        return forgeLoc("ingots/"+type);
+    }
+
+    public static ResourceLocation getBricks(String type)
     {
         return forgeLoc("bricks/"+type);
     }
@@ -209,10 +231,9 @@ public class IGTags {
         return forgeLoc("dirty_chunk/"+type);
     }
 
-    public static ResourceLocation getDust(String type)
-    {
-        return forgeLoc("dusts/"+type);
-    }
+    public static ResourceLocation getDust(String type) { return forgeLoc("dusts/"+type); }
+
+    public static ResourceLocation getTinyDust(String type) { return forgeLoc("tiny_dusts/"+type); }
 
     public static ResourceLocation getPlate(String type)
     {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/dust_chromium"
+    ]
+  },
+  "criteria": {
+    "has_tiny_dust_chromium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_chromium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/dust_chromium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_dust_chromium",
+      "has_the_recipe"
+    ]
+  ]
+}

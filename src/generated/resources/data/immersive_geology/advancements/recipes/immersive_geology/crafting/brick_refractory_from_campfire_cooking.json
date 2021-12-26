@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/brick_refractory_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "has_clay_refractory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:clay_refractory"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/brick_refractory_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_clay_refractory",
+      "has_the_recipe"
+    ]
+  ]
+}

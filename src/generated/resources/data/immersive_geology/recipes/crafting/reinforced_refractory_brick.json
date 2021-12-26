@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rbr",
+    "bpb",
+    "rbr"
+  ],
+  "key": {
+    "p": {
+      "item": "immersive_geology:plate_bronze"
+    },
+    "r": {
+      "item": "immersive_geology:rod_bronze"
+    },
+    "b": {
+      "item": "immersive_geology:bricks_refractory"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:reinforced_refractory_brick",
+    "count": 4
+  }
+}

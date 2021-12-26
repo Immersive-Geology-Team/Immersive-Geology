@@ -12,11 +12,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,7 @@ public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColo
     protected HashMap<BlockMaterialType, Material> itemMaterials = new HashMap<>();
 
     private String holding_name;
+    private int burn_time = 0;
 
     public ItemBase(String registry_name, Material material, MaterialUseType useType) {
         super(material.getMaterialItemProperties());
@@ -37,6 +40,15 @@ public class ItemBase extends Item implements IGSubGroup, IEItemInterfaces.IColo
         this.holding_name = registry_name;
         itemMaterials.put(BlockMaterialType.BASE_MATERIAL, material);
         setSubGroup(useType.getSubgroup());
+    }
+
+    public void setBurnTime(int burn_time) {
+        this.burn_time = burn_time;
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
+        return burn_time;
     }
 
     public void setSubGroup(ItemSubGroup subGroup){

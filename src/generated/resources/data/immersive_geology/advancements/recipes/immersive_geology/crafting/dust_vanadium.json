@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/dust_vanadium"
+    ]
+  },
+  "criteria": {
+    "has_tiny_dust_vanadium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_vanadium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/dust_vanadium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_dust_vanadium",
+      "has_the_recipe"
+    ]
+  ]
+}

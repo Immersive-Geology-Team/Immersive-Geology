@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/tungsten"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_tungsten"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_tungsten"
+  }
+}

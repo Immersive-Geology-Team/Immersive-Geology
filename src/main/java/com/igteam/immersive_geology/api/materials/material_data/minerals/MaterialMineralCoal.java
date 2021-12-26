@@ -45,6 +45,11 @@ public class MaterialMineralCoal extends MaterialMineralBase
 	}
 
 	@Override
+	public int getBurnTime() {
+		return 1600;
+	}
+
+	@Override
 	public boolean hasCrushedOre() {
 		return false;
 	}

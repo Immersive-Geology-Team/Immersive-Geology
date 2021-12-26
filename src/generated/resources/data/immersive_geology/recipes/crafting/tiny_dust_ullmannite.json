@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dust_ullmannite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:tiny_dust_ullmannite",
+    "count": 9
+  }
+}

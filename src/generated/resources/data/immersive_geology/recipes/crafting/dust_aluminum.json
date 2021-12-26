@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/aluminum"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_aluminum"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_aluminum"
+  }
+}

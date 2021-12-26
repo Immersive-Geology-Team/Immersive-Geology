@@ -1,16 +1,22 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
-
+import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 public class MaterialMineralKaolinite extends MaterialMineralBase {
 	
@@ -101,5 +107,28 @@ public class MaterialMineralKaolinite extends MaterialMineralBase {
 	@Override
 	public MaterialEnum getProcessedType() {
 		return MaterialEnum.Aluminium;
+	}
+
+	@Override
+	public IGMaterialProcess getProcessingMethod() {
+		IGCraftingProcessingMethod refractory_clay = new IGCraftingProcessingMethod("create_refractory", IGTags.getTagsFor(this).clay);
+		refractory_clay.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Refractory.getMaterial(), MaterialUseType.CLAY), 2));
+		refractory_clay.setShapeless(
+				IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CLAY),
+				IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CLAY),
+				IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CLAY),
+				Items.CLAY_BALL
+		);
+		IGCraftingProcessingMethod refractory_clay2 = new IGCraftingProcessingMethod("create_refractory", IGTags.getTagsFor(this).clay);
+		refractory_clay2.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Refractory.getMaterial(), MaterialUseType.CLAY), 2));
+		refractory_clay2.setShapeless(
+				IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CLAY),
+				IGRegistrationHolder.getItemByMaterial(MaterialEnum.Alumina.getMaterial(), MaterialUseType.DUST)
+		);
+
+		inheritedProcessingMethods.add(refractory_clay);
+		inheritedProcessingMethods.add(refractory_clay2);
+
+		return super.getProcessingMethod();
 	}
 }

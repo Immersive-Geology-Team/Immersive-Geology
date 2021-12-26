@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dust_thorite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:tiny_dust_thorite",
+    "count": 9
+  }
+}

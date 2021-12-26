@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/dust_bronze"
+    ]
+  },
+  "criteria": {
+    "has_tiny_dust_bronze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_bronze"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/dust_bronze"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_dust_bronze",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:machine_vanilla_bloomery"
+          "name": "immersive_geology:bloomery"
         }
       ],
       "conditions": [

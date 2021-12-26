@@ -7,7 +7,6 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialBrickBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMetalBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
@@ -17,13 +16,9 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.common.item.IGOreItem;
 import com.igteam.immersive_geology.common.item.ItemBase;
-import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import org.apache.logging.log4j.Logger;
-
-import java.util.HashMap;
-import java.util.List;
 
 public class IGVariantHolder {
 
@@ -76,6 +71,14 @@ public class IGVariantHolder {
                 break;
             case MACHINE:
                 break;
+            case DUST:
+            case TINY_DUST:
+            case FUEL:
+            case NUGGET:
+            case INGOT:
+            case BRICK:
+                registerBurnableItem(material, type);
+                return;
             default:
                 registerBasicItem(material, type);
         }
@@ -176,6 +179,15 @@ public class IGVariantHolder {
             default:
                 return type;
         }
+    }
+
+    private static void registerBurnableItem(Material material, MaterialUseType type){
+        String holder_key = type.getName()+"_"+material.getName();
+        ItemBase item = new ItemBase(holder_key, material, type);
+        float time = material.getBurnTime();
+        time *= type == MaterialUseType.TINY_DUST ? 0.125f : type == MaterialUseType.DUST ? 1.25f: type == MaterialUseType.NUGGET ? 0.1f : 1f;
+        item.setBurnTime((int)time);
+        IGRegistrationHolder.registeredIGItems.put(holder_key, item);
     }
 
     private static void registerBasicItem(Material material, MaterialUseType type){

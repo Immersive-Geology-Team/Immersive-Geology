@@ -1,46 +1,23 @@
 package com.igteam.immersive_geology.core.registration;
 
-import blusunrize.immersiveengineering.common.util.IELogger;
-import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
-import com.igteam.immersive_geology.client.menu.IGItemGroup;
-import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersive_geology.common.block.IGBaseBlock;
 import com.igteam.immersive_geology.common.block.IGStaticBlock;
-import com.igteam.immersive_geology.common.block.blocks.BloomeryBlock;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
-import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.common.item.IGStaticItem;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.SortedMap;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class IGRegistrationHolder {
@@ -153,7 +130,6 @@ public class IGRegistrationHolder {
     }
 
     public static class Blocks {
-        public static Block refractoryBrick = new IGStaticBlock("refractory_brick", net.minecraft.block.material.Material.ROCK);
         public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforced_refractory_brick", net.minecraft.block.material.Material.ROCK);
 
         public static void initializeStaticBlocks() {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/zirconium"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_zirconium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_zirconium"
+  }
+}

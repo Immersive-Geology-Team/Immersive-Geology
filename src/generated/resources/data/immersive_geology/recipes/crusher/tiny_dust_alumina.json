@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "tag": "forge:tiny_dusts/alumina"
+  },
+  "input": {
+    "item": "immersive_geology:ore_bit_vanilla_alumina"
+  },
+  "energy": 600
+}

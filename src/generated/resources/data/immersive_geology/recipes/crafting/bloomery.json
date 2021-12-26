@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "a a",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "immersive_geology:bricks_refractory"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:bloomery"
+  }
+}

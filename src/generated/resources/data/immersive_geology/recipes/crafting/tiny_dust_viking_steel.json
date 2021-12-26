@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dust_viking_steel"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:tiny_dust_viking_steel",
+    "count": 9
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/titanium"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_titanium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_titanium"
+  }
+}

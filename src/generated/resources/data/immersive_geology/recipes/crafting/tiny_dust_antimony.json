@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "immersive_geology:dust_antimony"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:tiny_dust_antimony",
+    "count": 9
+  }
+}

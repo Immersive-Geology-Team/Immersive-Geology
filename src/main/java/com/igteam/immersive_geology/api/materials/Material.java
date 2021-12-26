@@ -1,13 +1,13 @@
 package com.igteam.immersive_geology.api.materials;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.helper.*;
+import com.igteam.immersive_geology.api.materials.helper.CrystalFamily;
+import com.igteam.immersive_geology.api.materials.helper.MaterialState;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGProcessingMethod;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialStoneBase;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.AbstractBlock;
@@ -17,7 +17,9 @@ import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by Pabilo8 on 25-03-2020.
@@ -171,6 +173,14 @@ public abstract class Material
 	 * @return tool level needed to mine material's blocks
 	 */
 	public int getBlockHarvestLevel()
+	{
+		return 0;
+	}
+
+	/**
+	 * @return burn time
+	 */
+	public int getBurnTime()
 	{
 		return 0;
 	}

@@ -1,5 +1,7 @@
 package com.igteam.immersive_geology.api.materials.material_data.bricks;
 
+import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
@@ -8,7 +10,6 @@ import com.igteam.immersive_geology.api.tags.IGTags;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 
 import javax.annotation.Nonnull;
@@ -79,9 +80,17 @@ public class MaterialBrickRefractory extends MaterialBrickBase
         IGCraftingProcessingMethod bloomery = new IGCraftingProcessingMethod("create_bloomery", IGTags.getTagsFor(this).brick);
         bloomery.setOutput(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.bloomery));
         bloomery.setPattern("aaa","a a","aaa");
-        bloomery.setItemToKey('a', IGRegistrationHolder.Blocks.refractoryBrick.asItem());
+        bloomery.setItemToKey('a', IGRegistrationHolder.getBlockByMaterial(MaterialUseType.BRICKS, MaterialEnum.Refractory.getMaterial()).asItem());
+
+        IGCraftingProcessingMethod reinforced_bricks = new IGCraftingProcessingMethod("create_reinforced_bricks", IGTags.getTagsFor(this).brick);
+        reinforced_bricks.setOutput(new ItemStack(IGRegistrationHolder.Blocks.reinforcedRefractoryBrick, 4));
+        reinforced_bricks.setPattern("rbr","bpb","rbr");
+        reinforced_bricks.setItemToKey('r', IGRegistrationHolder.getItemByMaterial(MaterialEnum.Bronze.getMaterial(), MaterialUseType.ROD));
+        reinforced_bricks.setItemToKey('b', IGRegistrationHolder.getBlockByMaterial(MaterialUseType.BRICKS, MaterialEnum.Refractory.getMaterial()).asItem());
+        reinforced_bricks.setItemToKey('p', IGRegistrationHolder.getItemByMaterial(MaterialEnum.Bronze.getMaterial(), MaterialUseType.PLATE));
 
         inheritedProcessingMethods.add(bloomery);
+        inheritedProcessingMethods.add(reinforced_bricks);
 
         return super.getProcessingMethod();
     }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/dust_zircon"
+    ]
+  },
+  "criteria": {
+    "has_tiny_dust_zircon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_zircon"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/dust_zircon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_dust_zircon",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/hematite"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_hematite"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_hematite"
+  }
+}

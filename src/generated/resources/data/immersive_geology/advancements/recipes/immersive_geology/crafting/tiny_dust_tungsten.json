@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/tiny_dust_tungsten"
+    ]
+  },
+  "criteria": {
+    "has_dust_tungsten": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:tiny_dust_tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/tiny_dust_tungsten"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dust_tungsten",
+      "has_the_recipe"
+    ]
+  ]
+}

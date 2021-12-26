@@ -7,11 +7,10 @@ import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
+import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.blocks.BloomeryBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
-import com.igteam.immersive_geology.common.block.IGOreBlock;
-import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -80,11 +79,17 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
     public ITextComponent getDisplayName(ItemStack stack) {
         ArrayList<String> localizedNames = new ArrayList<>();
 
-        if((getBlock() instanceof IGOreBlock)) {
+        if(getBlock() instanceof IGOreBlock) {
             IGOreBlock oreBlock = (IGOreBlock) getBlock();
             localizedNames.add(I18n.format("material." + IGLib.MODID + "." + oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL).getName()));
         }
-        localizedNames.add(I18n.format("material."+ IGLib.MODID +"."+itemMaterial.getName()));
+        if(useType == MaterialUseType.MACHINE) {
+            localizedNames.add(I18n.format("machine." + IGLib.MODID + "." + this.getHolderName()));
+        } else if(useType == MaterialUseType.STATIC_BLOCK) {
+            localizedNames.add(I18n.format("static." + IGLib.MODID + "." + this.getHolderName()));
+        } else {
+            localizedNames.add(I18n.format("material." + IGLib.MODID + "." + itemMaterial.getName()));
+        }
         String base_name = "block."+IGLib.MODID+"."+useType.getName().toLowerCase(Locale.ENGLISH);
         return new TranslationTextComponent(base_name, localizedNames.toArray(new String[localizedNames.size()]));
     }
