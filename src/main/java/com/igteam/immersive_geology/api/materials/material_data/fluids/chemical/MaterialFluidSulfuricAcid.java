@@ -1,7 +1,11 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids.chemical;
 
+import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
@@ -112,5 +116,17 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
     @Override
     public boolean hasBucket() {
         return false;
+    }
+
+    @Override
+    public IGMaterialProcess getProcessingMethod() {
+        IGVatProcessingMethod acid = new IGVatProcessingMethod(1000, 120);
+        acid.addFluidOutput(FluidEnum.SulfuricAcid, 125);
+        acid.addPrimaryFluidInput(FluidEnum.SulfurDioxide, 125);
+        acid.addSecondaryFluidInput(Fluids.WATER, 125);
+
+        inheritedProcessingMethods.add(acid);
+
+        return super.getProcessingMethod();
     }
 }

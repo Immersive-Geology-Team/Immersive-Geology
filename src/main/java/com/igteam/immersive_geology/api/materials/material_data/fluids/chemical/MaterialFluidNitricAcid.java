@@ -1,8 +1,5 @@
 package com.igteam.immersive_geology.api.materials.material_data.fluids.chemical;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.common.IEContent;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
@@ -16,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -139,8 +134,9 @@ public class MaterialFluidNitricAcid extends MaterialFluidBase {
         sulfuric_saltpeter_method.addFluidOutput(FluidEnum.NitricAcid, 125);
         sulfuric_saltpeter_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid, 125);
         sulfuric_saltpeter_method.addSecondaryFluidInput(Fluids.WATER, 125);
-        //FIXME -- wiggle it to have just forge:dusts/saltpeter as intput
-        sulfuric_saltpeter_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.SaltPeter.getMaterial(), MaterialUseType.DUST), 1));
+        sulfuric_saltpeter_method.addItemInput(
+                new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.SaltPeter.getMaterial(), MaterialUseType.DUST), 1)
+        ); //FIXME -- wiggle it to have just forge:dusts/saltpeter as intput. Make vat recipes accept tags.
 
         inheritedProcessingMethods.add(sulfuric_saltpeter_method);
         

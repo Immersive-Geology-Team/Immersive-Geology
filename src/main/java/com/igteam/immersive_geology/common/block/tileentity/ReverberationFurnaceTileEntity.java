@@ -1,41 +1,34 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
-import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
-import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.*;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -211,7 +204,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 master.getInventory().get(INPUT_SLOT1 + slotOffset).shrink(r.input.getCount());
             }
             if(gasTank.getFluidAmount() < gasTank.getCapacity()){
-                gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(MaterialEnum.Sulfuric.getMaterial(),false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+                gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(),false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
             }
         }
     }
@@ -409,24 +402,122 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
         if(master != null) {
-            if (fuelMap.containsKey(itemStack.getItem())) {
-                if (master.getInventory().get(FUEL_SLOT1).isEmpty()) {
-                    master.inventory.set(FUEL_SLOT1, itemStack.copy());
-                    itemStack.shrink(itemStack.getCount());
+            ItemStack output1SlotStack = master.inventory.get(OUTPUT_SLOT1);
+            ItemStack input1SlotStack = master.inventory.get(INPUT_SLOT1);
+            ItemStack fuel1SlotStack = master.inventory.get(FUEL_SLOT1);
+            ItemStack output2SlotStack = master.inventory.get(OUTPUT_SLOT2);
+            ItemStack input2SlotStack = master.inventory.get(INPUT_SLOT2);
+            ItemStack fuel2SlotStack = master.inventory.get(FUEL_SLOT2);
+
+            if(output1SlotStack.isItemEqual(itemStack)){
+                if(itemStack.getCount() < 64) {
+                    int growMax = 64 - Math.min(itemStack.getCount() + output1SlotStack.getCount(), 64);
+                    int growAmount = Math.min(growMax, output1SlotStack.getCount());
+                    output1SlotStack.shrink(growAmount);
+                    itemStack.grow(growAmount);
+                    return true;
+                }
+            }
+            if(output2SlotStack.isItemEqual(itemStack)){
+                if(itemStack.getCount() < 64) {
+                    int growMax = 64 - Math.min(itemStack.getCount() + output2SlotStack.getCount(), 64);
+                    int growAmount = Math.min(growMax, output2SlotStack.getCount());
+                    output2SlotStack.shrink(growAmount);
+                    itemStack.grow(growAmount);
                     return true;
                 }
             }
 
-            if (master.getInventory().get(INPUT_SLOT1).isEmpty()) {
-                master.inventory.set(INPUT_SLOT1, itemStack.copy());
-                itemStack.shrink(itemStack.getCount());
-                return true;
+            if(itemStack.isEmpty()){
+                if(!output1SlotStack.isEmpty()){
+                    playerEntity.setHeldItem(hand, output1SlotStack);
+                    master.inventory.set(OUTPUT_SLOT1, ItemStack.EMPTY);
+                    return true;
+                }
+                if(!output2SlotStack.isEmpty()){
+                    playerEntity.setHeldItem(hand, output2SlotStack);
+                    master.inventory.set(OUTPUT_SLOT2, ItemStack.EMPTY);
+                    return true;
+                }
+                if(!input1SlotStack.isEmpty()) {
+                    playerEntity.setHeldItem(hand, input1SlotStack);
+                    master.inventory.set(INPUT_SLOT1, ItemStack.EMPTY);
+                    return true;
+                }
+                if(!input2SlotStack.isEmpty()) {
+                    playerEntity.setHeldItem(hand, input2SlotStack);
+                    master.inventory.set(INPUT_SLOT2, ItemStack.EMPTY);
+                    return true;
+                }
+                if(!fuel1SlotStack.isEmpty()) {
+                    playerEntity.setHeldItem(hand, fuel1SlotStack);
+                    master.inventory.set(FUEL_SLOT1, ItemStack.EMPTY);
+                    return true;
+                }
+                if(!fuel2SlotStack.isEmpty()) {
+                    playerEntity.setHeldItem(hand, fuel2SlotStack);
+                    master.inventory.set(FUEL_SLOT2, ItemStack.EMPTY);
+                    return true;
+                }
             }
 
-            if(itemStack.isEmpty()){
-                if(!master.getInventory().get(master.OUTPUT_SLOT1).isEmpty()){
-                    playerEntity.setHeldItem(hand, master.getInventory().get(master.OUTPUT_SLOT1).copy());
-                    master.getInventory().set(master.OUTPUT_SLOT1, ItemStack.EMPTY);
+            if(master.fuelMap.containsKey(itemStack.getItem())){
+                if(fuel1SlotStack.isEmpty()){
+                    master.inventory.set(FUEL_SLOT1, itemStack);
+                    playerEntity.setHeldItem(hand, ItemStack.EMPTY);
+                    return true;
+                }
+                if(fuel1SlotStack.isItemEqual(itemStack)){
+                    if(fuel1SlotStack.getCount() < 64) {
+                        int growMax = 64 - Math.min(itemStack.getCount() + fuel1SlotStack.getCount(), 64);
+                        int growAmount = Math.min(growMax, itemStack.getCount());
+                        fuel1SlotStack.grow(growAmount);
+                        itemStack.shrink(growAmount);
+                        return true;
+                    }
+                }
+                if(fuel2SlotStack.isEmpty()){
+                    master.inventory.set(FUEL_SLOT2, itemStack);
+                    playerEntity.setHeldItem(hand, ItemStack.EMPTY);
+                    return true;
+                }
+                if(fuel2SlotStack.isItemEqual(itemStack)){
+                    if(fuel2SlotStack.getCount() < 64) {
+                        int growMax = 64 - Math.min(itemStack.getCount() + fuel2SlotStack.getCount(), 64);
+                        int growAmount = Math.min(growMax, itemStack.getCount());
+                        fuel2SlotStack.grow(growAmount);
+                        itemStack.shrink(growAmount);
+                        return true;
+                    }
+                }
+            }
+
+            if(input1SlotStack.isEmpty()){
+                master.inventory.set(INPUT_SLOT1, itemStack);
+                playerEntity.setHeldItem(hand, ItemStack.EMPTY);
+                return true;
+            }
+            if(input1SlotStack.isItemEqual(itemStack)){
+                if(input1SlotStack.getCount() < 64) {
+                    int growMax = 64 - Math.min(itemStack.getCount() + input1SlotStack.getCount(), 64);
+                    int growAmount = Math.min(growMax, itemStack.getCount());
+                    input1SlotStack.grow(growAmount);
+                    itemStack.shrink(growAmount);
+                    return true;
+                }
+            }
+            if(input2SlotStack.isEmpty()){
+                master.inventory.set(INPUT_SLOT2, itemStack);
+                playerEntity.setHeldItem(hand, ItemStack.EMPTY);
+                return true;
+            }
+            if(input2SlotStack.isItemEqual(itemStack)){
+                if(input2SlotStack.getCount() < 64) {
+                    int growMax = 64 - Math.min(itemStack.getCount() + input2SlotStack.getCount(), 64);
+                    int growAmount = Math.min(growMax, itemStack.getCount());
+                    input2SlotStack.grow(growAmount);
+                    itemStack.shrink(growAmount);
+                    return true;
                 }
             }
         }

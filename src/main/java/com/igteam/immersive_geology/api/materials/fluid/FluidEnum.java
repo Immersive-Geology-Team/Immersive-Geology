@@ -1,14 +1,10 @@
 package com.igteam.immersive_geology.api.materials.fluid;
 
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidBrine;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.MaterialFluidWater;
 import com.igteam.immersive_geology.api.materials.material_data.fluids.chemical.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasHydrogen;
+import com.igteam.immersive_geology.api.materials.material_data.gases.MaterialGasSulfuric;
 
 public enum FluidEnum {
     //Fluids
@@ -20,7 +16,11 @@ public enum FluidEnum {
     HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
     HydrofluoricAcid(new MaterialFluidHydrofluoricAcid()),
     NitricAcid(new MaterialFluidNitricAcid()),
-    SodiumHydroxide(new MaterialFluidSodiumHydroxide());
+    SodiumHydroxide(new MaterialFluidSodiumHydroxide()),
+
+    //Gas
+    SulfurDioxide(new MaterialGasSulfuric()),
+    Hydrogen(new MaterialGasHydrogen());
 
     private final MaterialFluidBase material;
 

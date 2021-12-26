@@ -298,22 +298,18 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     @Override
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         BloomeryTileEntity master = (BloomeryTileEntity) master();
-        //TODO change inventory.gets to local variables
         ItemStack outputSlotStack = master.inventory.get(outputSlot);
         ItemStack inputSlotStack = master.inventory.get(inputSlot);
         ItemStack fuelSlotStack = master.inventory.get(fuelSlot);
 
-        if(master.inventory.get(outputSlot).isItemEqual(itemStack)){
-            //low stack cases, but not Merges with more than one stack total
-            if(itemStack.getCount() < 64 && (itemStack.getCount() + outputSlotStack.getCount() <= 64)) {
-                int growAmount = outputSlotStack.getCount();
-                master.inventory.set(outputSlot, ItemStack.EMPTY);
-                ItemStack handItem = playerEntity.getHeldItem(hand);
-                handItem.grow(growAmount);
-                playerEntity.setHeldItem(hand, handItem);
+        if(outputSlotStack.isItemEqual(itemStack)){
+            if(itemStack.getCount() < 64) {
+                int growMax = 64 - Math.min(itemStack.getCount() + outputSlotStack.getCount(), 64);
+                int growAmount = Math.min(growMax, outputSlotStack.getCount());
+                outputSlotStack.shrink(growAmount);
+                itemStack.grow(growAmount);
                 return true;
             }
-            //Handle where held item stack is 62 and output slot holds 43 items.
         }
 
         if(itemStack.isEmpty()){
@@ -334,19 +330,17 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
             }
         }
         if(master.fuelMap.containsKey(itemStack.getItem())){
-            ItemStack fuelTest = fuelSlotStack;
-            if(fuelTest.isEmpty()){
+            if(fuelSlotStack.isEmpty()){
                 master.inventory.set(fuelSlot, itemStack);
                 playerEntity.setHeldItem(hand, ItemStack.EMPTY);
                 return true;
             }
-            if(fuelTest.isItemEqual(itemStack)){
-                if(itemStack.getCount() < 64 && (itemStack.getCount() + fuelTest.getCount() <= 64)) {
-                    int diff = Math.max(64,Math.abs(itemStack.getCount() - fuelSlotStack.getCount()));
-                    fuelSlotStack.grow(diff);
-                    ItemStack handItem = playerEntity.getHeldItem(hand);
-                    handItem.shrink(diff);
-                    playerEntity.setHeldItem(hand, handItem);
+            if(fuelSlotStack.isItemEqual(itemStack)){
+                if(fuelSlotStack.getCount() < 64) {
+                    int growMax = 64 - Math.min(itemStack.getCount() + fuelSlotStack.getCount(), 64);
+                    int growAmount = Math.min(growMax, itemStack.getCount());
+                    fuelSlotStack.grow(growAmount);
+                    itemStack.shrink(growAmount);
                     return true;
                 }
             }
@@ -357,12 +351,11 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
             return true;
         }
         if(inputSlotStack.isItemEqual(itemStack)){
-            if(itemStack.getCount() < 64 && (itemStack.getCount() + inputSlotStack.getCount() <= 64)) {
-                int diff = Math.abs(itemStack.getCount() - inputSlotStack.getCount());
-                inputSlotStack.grow(diff);
-                ItemStack handItem = playerEntity.getHeldItem(hand);
-                handItem.shrink(diff);
-                playerEntity.setHeldItem(hand, handItem);
+            if(inputSlotStack.getCount() < 64) {
+                int growMax = 64 - Math.min(itemStack.getCount() + inputSlotStack.getCount(), 64);
+                int growAmount = Math.min(growMax, itemStack.getCount());
+                inputSlotStack.grow(growAmount);
+                itemStack.shrink(growAmount);
                 return true;
             }
         }

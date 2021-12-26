@@ -6,7 +6,10 @@ import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItems;
-import blusunrize.lib.manual.*;
+import blusunrize.lib.manual.ManualElementItem;
+import blusunrize.lib.manual.ManualEntry;
+import blusunrize.lib.manual.ManualInstance;
+import blusunrize.lib.manual.Tree;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
@@ -14,10 +17,8 @@ import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.*;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
-import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.multiblocks.*;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -67,12 +68,17 @@ public class ClientProxy extends ServerProxy {
 
     private void setupReverberationFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
-        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 100);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 240);
+        ReverberationFurnaceTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 120);
         ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
     }
 
     private void setupBloomeryFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 240);
+        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 120);
         BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
         BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
     }
