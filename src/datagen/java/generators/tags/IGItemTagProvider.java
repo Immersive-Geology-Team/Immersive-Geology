@@ -41,6 +41,8 @@ public class IGItemTagProvider extends ItemTagsProvider {
 
             Item nugget = MaterialUseType.NUGGET.getItem(material);
 
+            Item brick = MaterialUseType.BRICK.getItem(material);
+
             if (nugget != null) {
                 assert tags.nugget != null;
                 getOrCreateBuilder(tags.nugget).addItemEntry(nugget);
@@ -57,6 +59,14 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 assert tags.ingot != null;
                 getOrCreateBuilder(tags.ingot).addItemEntry(ingot);
                 log.debug("Addding " + tags.ingot.getName() + " to tags");
+            }
+
+            if (brick != null) {
+                assert tags.ingot != null;
+                assert tags.brick != null;
+                getOrCreateBuilder(tags.ingot).addItemEntry(brick);
+                getOrCreateBuilder(tags.brick).addItemEntry(brick);
+                log.debug("Addding " + tags.brick.getName() + " to tags");
             }
 
             //dual material items

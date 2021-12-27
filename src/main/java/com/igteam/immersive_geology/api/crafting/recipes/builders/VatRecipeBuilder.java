@@ -4,13 +4,8 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.igteam.immersive_geology.common.crafting.Serializers;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.Arrays;
 
 public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
 
@@ -21,6 +16,7 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
     public static VatRecipeBuilder builder(ItemStack result, FluidStack fluid_result)
     {
         VatRecipeBuilder builder = new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
+
         if(!result.isEmpty()){
             builder.addResult(result);
         }

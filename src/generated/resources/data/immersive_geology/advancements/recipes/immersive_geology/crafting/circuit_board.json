@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/circuit_board"
+    ]
+  },
+  "criteria": {
+    "has_steel_sheetmetal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:sheetmetals/steel"
+          }
+        ]
+      }
+    },
+    "has_steel_component": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersiveengineering:component_steel"
+          }
+        ]
+      }
+    },
+    "has_circuit_board": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersiveengineering:circuit_board"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/circuit_board"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_sheetmetal",
+      "has_steel_component",
+      "has_circuit_board",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -71,7 +71,7 @@ public class IGTags {
                 nugget = null;
             }
 
-            if(material.hasSubtype(MaterialUseType.INGOT)) {
+            if(material.hasSubtype(MaterialUseType.INGOT) || material.hasSubtype(MaterialUseType.BRICK)) {
                 ingot = createItemWrapper(getIngot(name));
             } else {
                 ingot = null;
@@ -83,7 +83,7 @@ public class IGTags {
                 clay = null;
             }
 
-            if(material.hasSubtype(MaterialUseType.BRICK)){
+            if(material.hasSubtype(MaterialUseType.BRICKS)){
                 brick = createItemWrapper(getBrick(name));
             } else {
                 brick = null;

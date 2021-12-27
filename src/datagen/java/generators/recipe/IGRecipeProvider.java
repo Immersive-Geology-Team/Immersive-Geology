@@ -235,7 +235,7 @@ public class IGRecipeProvider extends RecipeProvider {
                 Set<IGProcessingMethod> data = processess.getData();
                 for (IGProcessingMethod method : data) {
                     if (method instanceof IGVatProcessingMethod){
-                    addVatMethod(method, consumer);
+                       addVatMethod(method, consumer);
                     }
                 }
             }
