@@ -23,11 +23,14 @@ public class JEIIntegration  implements IModPlugin{
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        IModPlugin.super.registerCategories(registration);
+        IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
+        registration.addRecipeCategories(new CalcinationRecipeCategory(guiHelper));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
+
         IModPlugin.super.registerRecipes(registration);
     }
 
