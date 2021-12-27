@@ -105,6 +105,26 @@ public class MaterialMetalThorium extends MaterialMetalBase
 		return CrystalFamily.CUBIC;
 	}
 
+	@Override
+	public boolean hasGear() {
+		return false;
+	}
+
+	@Override
+	public boolean hasWire() {
+		return false;
+	}
+
+	@Override
+	public boolean hasPlate() {
+		return false;
+	}
+
+	@Override
+	public boolean hasSheetmetal() {
+		return false;
+	}
+
 	/*@Nullable
 	@Override
 	public IItemTier getToolTier()

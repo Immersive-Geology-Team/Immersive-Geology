@@ -1,6 +1,7 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
@@ -72,6 +73,18 @@ public class IGRecipeProvider extends RecipeProvider {
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         CrusherRecipeBuilder crusherBuilder;
+
+        ShapedRecipeBuilder.shapedRecipe(IGRegistrationHolder.Blocks.electronicEngineering, 4)
+                .patternLine("igi")
+                .patternLine("gcg")
+                .patternLine("igi")
+                .key('i', IETags.getItemTag(IETags.getTagsFor(EnumMetals.STEEL).sheetmetal))
+                .key('g', IEItems.Ingredients.componentSteel)
+                .key('c', IEItems.Ingredients.circuitBoard)
+                .addCriterion("has_steel_sheetmetal", hasItem(IETags.getItemTag(IETags.getTagsFor(EnumMetals.STEEL).sheetmetal)))
+                .addCriterion("has_steel_component", hasItem(IEItems.Ingredients.componentSteel))
+                .addCriterion("has_circuit_board", hasItem(IEItems.Ingredients.circuitBoard))
+                .build(consumer, toRL("crafting/" + IEItems.Ingredients.circuitBoard.getItem().getRegistryName().getPath().toLowerCase()));
 
         for (MaterialEnum wrapper : MaterialEnum.values()) {
             Material material = wrapper.getMaterial();

@@ -105,6 +105,26 @@ public class MaterialMetalUranium extends MaterialMetalBase
 		return CrystalFamily.ORTHORHOMBIC;
 	}
 
+	@Override
+	public boolean hasGear() {
+		return false;
+	}
+
+	@Override
+	public boolean hasWire() {
+		return false;
+	}
+
+	@Override
+	public boolean hasPlate() {
+		return false;
+	}
+
+	@Override
+	public boolean hasSheetmetal() {
+		return false;
+	}
+
 /*@Nullable
 	@Override
 	public IItemTier getToolTier()
