@@ -1,11 +1,14 @@
 package com.igteam.immersive_geology.api.materials.material_data.minerals;
 
+import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGArcFurnaceProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCalcinationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
@@ -16,6 +19,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -145,6 +149,12 @@ public class MaterialMineralRockSalt extends MaterialMineralBase
 		sodium_method.addPrimaryFluidInput(Fluids.WATER, 125);
 		sodium_method.addSecondaryFluidInput(Fluids.EMPTY, 0);
 
+		IGArcFurnaceProcessingMethod arc_method = new IGArcFurnaceProcessingMethod(2000, 120, new IngredientWithSize(IETags.coalCokeDust,1));
+		arc_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(), MaterialUseType.DUST)));
+		arc_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Sodium.getMaterial(),
+				MaterialUseType.METAL_OXIDE)));
+
+		inheritedProcessingMethods.add(arc_method);
 		inheritedProcessingMethods.add(sodium_method);
 		inheritedProcessingMethods.add(method);
 

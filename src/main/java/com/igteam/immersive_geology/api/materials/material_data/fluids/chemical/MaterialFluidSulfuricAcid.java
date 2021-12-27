@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialPr
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
@@ -124,7 +125,8 @@ public class MaterialFluidSulfuricAcid extends MaterialFluidBase {
         acid.addFluidOutput(FluidEnum.SulfuricAcid, 125);
         acid.addPrimaryFluidInput(FluidEnum.SulfurDioxide, 125);
         acid.addSecondaryFluidInput(Fluids.WATER, 125);
-
+        acid.addItemOutput(ItemStack.EMPTY);
+        acid.addItemInput(ItemStack.EMPTY);
         inheritedProcessingMethods.add(acid);
 
         return super.getProcessingMethod();

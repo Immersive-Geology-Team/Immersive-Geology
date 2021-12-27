@@ -1,0 +1,17 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluids_sulfuric_acid",
+    "amount": 125
+  },
+  "fluid_input1": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "forge:sulfuric_dioxide",
+    "amount": 125
+  },
+  "energy": 1000,
+  "time": 120
+}

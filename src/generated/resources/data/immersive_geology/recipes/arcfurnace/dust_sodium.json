@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersive_geology:dust_sodium"
+    }
+  ],
+  "additives": [
+    {
+      "tag": "forge:dusts/coal_coke"
+    }
+  ],
+  "energy": 2000,
+  "time": 120,
+  "input": {
+    "item": "immersive_geology:metal_oxide_sodium"
+  }
+}
