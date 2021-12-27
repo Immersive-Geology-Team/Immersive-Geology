@@ -165,7 +165,7 @@ public class IGItemModelProvider extends ItemModelProvider {
             withExistingParent(builder_name, new ResourceLocation(IGLib.MODID, "block/base/slab/" +slabBlock.getBlockUseType().getName())).
                     texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath())).
                     texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));;
-        }else
+        }else if (blockItem.getUseType() != MaterialUseType.MACHINE)
         {
             IGBaseBlock baseBlock = (IGBaseBlock) blockItem.getBlock();
             String builder_name = new ResourceLocation(IGLib.MODID, "item/"+baseBlock.getHolderName()).getPath();
