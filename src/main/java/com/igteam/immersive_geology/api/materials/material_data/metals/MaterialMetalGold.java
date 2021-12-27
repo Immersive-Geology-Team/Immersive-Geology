@@ -108,5 +108,5 @@ public class MaterialMetalGold extends MaterialMetalBase
 	}
 
 	@Override
-	public boolean isNativeMetal() {return false;}
+	public boolean isNativeMetal() {return true;}
 }
