@@ -19,7 +19,7 @@ public abstract class MaterialBrickBase extends Material
 			case SLAB:
 			case BRICK:
 			case BRICKS:
-			case SHEETMETAL_STAIRS:
+			case STAIRS:
 				return true;
 			case CLAY:
 				return hasClay();
