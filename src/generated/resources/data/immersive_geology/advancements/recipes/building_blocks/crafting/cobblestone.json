@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:crafting/tiny_dust_kaolinite"
+      "immersive_geology:crafting/cobblestone"
     ]
   },
   "criteria": {
-    "has_dust_kaolinite": {
+    "has_rock_bit_vanilla": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:tiny_dust_kaolinite"
+            "item": "immersive_geology:rock_bit_vanilla"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:crafting/tiny_dust_kaolinite"
+        "recipe": "immersive_geology:crafting/cobblestone"
       }
     }
   },
   "requirements": [
     [
-      "has_dust_kaolinite",
+      "has_rock_bit_vanilla",
       "has_the_recipe"
     ]
   ]
