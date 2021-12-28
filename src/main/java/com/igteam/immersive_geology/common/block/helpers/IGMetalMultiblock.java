@@ -39,6 +39,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
 
         this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Steel.getMaterial());
         itemBlock.setRegistryName(holder_name.toLowerCase() + "_" + name);
+        IGRegistrationHolder.registeredIGItems.put(holder_name + "_" + name, itemBlock);
     }
 
     @Override

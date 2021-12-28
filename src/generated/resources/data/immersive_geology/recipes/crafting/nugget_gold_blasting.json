@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "immersive_geology:ore_bit_vanilla_gold"
+  },
+  "result": "immersive_geology:nugget_gold",
+  "experience": 0.0,
+  "cookingtime": 50
+}

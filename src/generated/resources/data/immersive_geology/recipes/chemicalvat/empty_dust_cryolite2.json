@@ -8,7 +8,7 @@
     "item": "immersive_geology:dust_cryolite"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_aluminum"
+    "item": "immersive_geology:compound_dust_aluminium"
   },
   "fluid_input1": {
     "tag": "minecraft:water",

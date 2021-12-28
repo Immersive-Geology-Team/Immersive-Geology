@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:crushed_ore_gold",
     "immersive_geology:crushed_ore_iron",
     "immersive_geology:crushed_ore_lead",
     "immersive_geology:crushed_ore_manganese",

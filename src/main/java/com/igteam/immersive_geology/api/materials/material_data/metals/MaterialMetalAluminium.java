@@ -19,7 +19,7 @@ public class MaterialMetalAluminium extends MaterialMetalBase
 	@Override
 	public String getName()
 	{
-		return "aluminum";
+		return "aluminium";
 	}
 
 	@Nonnull
