@@ -33,9 +33,10 @@ public abstract class MaterialMineralBase extends Material
 			case DIRTY_CRUSHED_ORE:
 				return hasCrushedOre();
 			case ORE_STONE:
+				return true;
 			case ORE_BIT:
 			case ORE_CHUNK:
-				return true;
+				return !hasClay();
 			case TINY_DUST:
 			case DUST:
 				return hasDust();
@@ -58,9 +59,7 @@ public abstract class MaterialMineralBase extends Material
 		return true;
 	}
 
-	public boolean hasDust(){
-		return true;
-	}
+	public boolean hasDust() { return getMineralType() != EnumMineralType.CLAY; }
 
 	public boolean hasClay(){
 		return getMineralType() == EnumMineralType.CLAY;

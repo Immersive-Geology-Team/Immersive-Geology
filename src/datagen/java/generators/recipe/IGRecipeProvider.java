@@ -27,6 +27,7 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -98,6 +99,8 @@ public class IGRecipeProvider extends RecipeProvider {
             Item clay = MaterialUseType.CLAY.getItem(material);
             Item brick = MaterialUseType.BRICK.getItem(material);
             Item bricks = MaterialUseType.BRICKS.getItem(material);
+            Item rock = MaterialUseType.ROCK_BIT.getItem(material);
+            Item cobble = MaterialUseType.COBBLESTONE.getItem(material);
 
             if(material.hasSubtype(MaterialUseType.CLAY) && material.hasSubtype(MaterialUseType.BRICK)) {
                 addSmeltingRecipe(clay, brick, 0.15f, 300, consumer);
@@ -157,6 +160,11 @@ public class IGRecipeProvider extends RecipeProvider {
             }
 
             for (MaterialEnum stone_base : MaterialEnum.stoneValues()) {
+                if(material.hasSubtype(MaterialUseType.ROCK_BIT) && material.hasSubtype(MaterialUseType.COBBLESTONE))
+                {
+                    if(material == MaterialEnum.Vanilla.getMaterial()) add2x2Combine(Blocks.COBBLESTONE, rock, consumer);
+                    else add2x2Combine(cobble, rock, consumer);
+                }
                 if (material.hasSubtype(MaterialUseType.ORE_CHUNK)) {
                     Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base.getMaterial(), material);
                     Material processed_material = material;
@@ -494,11 +502,37 @@ public class IGRecipeProvider extends RecipeProvider {
                 .addCriterion("has_"+toPath(bigItem), hasItem(smallItem))
                 .build(out, toRL(toPath(smallItem)));
     }
+    private void add2x2Combine(IItemProvider bigItem, IItemProvider smallItem, Consumer<IFinishedRecipe> out) {
+        ShapedRecipeBuilder.shapedRecipe(bigItem)
+                .key('s', smallItem)
+                .patternLine("ss")
+                .patternLine("ss")
+                .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
+                .build(out, toRL(toPath(bigItem)));
+    }
     private void add2x2Combine(IItemProvider bigItem, IItemProvider smallItem, ITag.INamedTag<Item> smallTag, Consumer<IFinishedRecipe> out) {
         ShapedRecipeBuilder.shapedRecipe(bigItem)
                 .key('s', smallTag)
                 .patternLine("ss")
                 .patternLine("ss")
+                .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
+                .build(out, toRL(toPath(bigItem)));
+    }
+    private void add3x3Combine(IItemProvider bigItem, IItemProvider smallItem, Consumer<IFinishedRecipe> out) {
+        ShapedRecipeBuilder.shapedRecipe(bigItem)
+                .key('s', smallItem)
+                .patternLine("sss")
+                .patternLine("sss")
+                .patternLine("sss")
+                .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
+                .build(out, toRL(toPath(bigItem)));
+    }
+    private void add3x3Combine(IItemProvider bigItem, IItemProvider smallItem, ITag.INamedTag<Item> smallTag, Consumer<IFinishedRecipe> out) {
+        ShapedRecipeBuilder.shapedRecipe(bigItem)
+                .key('s', smallTag)
+                .patternLine("sss")
+                .patternLine("sss")
+                .patternLine("sss")
                 .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
                 .build(out, toRL(toPath(bigItem)));
     }

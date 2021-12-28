@@ -80,12 +80,8 @@ public class BlockLootProvider implements IDataProvider {
                     );
                 } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
                     Item clay = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.CLAY);
+                    Item rock = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.ROCK_BIT);
                     functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(oreChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
                             .addLootPool(LootPool.builder()
                                     .rolls(RandomValueRange.of(1F, 1F))
                                     .addEntry(ItemLootEntry.builder(clay)
@@ -93,7 +89,7 @@ public class BlockLootProvider implements IDataProvider {
                             )
                             .addLootPool(LootPool.builder()
                                     .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+                                    .addEntry(ItemLootEntry.builder(rock)
                                             .acceptFunction(OreDropProperty.builder()))
                             )
                     );
