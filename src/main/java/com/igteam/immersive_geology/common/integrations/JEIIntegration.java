@@ -1,7 +1,10 @@
 package com.igteam.immersive_geology.common.integrations;
 
 
+import com.igteam.immersive_geology.api.crafting.IGMultiblockRecipe;
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.CalcinationRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -9,7 +12,10 @@ import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
 
 @JeiPlugin
 public class JEIIntegration  implements IModPlugin{
@@ -29,18 +35,18 @@ public class JEIIntegration  implements IModPlugin{
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
-
-        IModPlugin.super.registerRecipes(registration);
+        registration.addRecipes(new ArrayList<>((CalcinationRecipe.recipes.values())),CalcinationRecipeCategory.ID);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        IModPlugin.super.registerRecipeCatalysts(registration);
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.rotarykiln), CalcinationRecipeCategory.ID);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         IModPlugin.super.registerGuiHandlers(registration);
     }
+
+
 }

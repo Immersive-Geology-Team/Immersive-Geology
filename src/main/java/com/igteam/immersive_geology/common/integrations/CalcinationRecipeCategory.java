@@ -20,8 +20,9 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "rotarykiln");
 
     public CalcinationRecipeCategory(IGuiHelper guiHelper) {
-        super(CalcinationRecipe.class, guiHelper, ID, "block.immersive_geology.rotarykiln");
-        //ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotarykiln.png");
+        super(CalcinationRecipe.class, guiHelper, ID, "machine.immersive_geology.rotarykiln");
+        ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotarykiln.png");
+        setBackground(guiHelper.createDrawable(background, 0, 0, 128, 128));
         setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.rotarykiln));
 
     }
@@ -37,11 +38,11 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
     public void setRecipe(IRecipeLayout recipeLayout, CalcinationRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(0, true, 5, 0);
-        guiItemStacks.set (0, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
+        guiItemStacks.init(0, true, 5, 50);
+        guiItemStacks.set (0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
         guiItemStacks.init(1, false, 33, 0);
-        guiItemStacks.set (0, Arrays.asList(recipe.getItemOutputs().get(0)));
+        guiItemStacks.set (1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 
     @Override
