@@ -152,6 +152,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         });
     }
 
+    @Override
+    public boolean isEnergyPos() {
+        return getEnergyPos().contains(this.posInMultiblock);
+    }
 
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
@@ -514,4 +518,5 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     public boolean interact(Direction side, PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY, float hitZ) {
         return false;
     }
+
 }

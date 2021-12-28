@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:ore_bit_vanilla_gold",
     "immersive_geology:ore_bit_vanilla_iron",
     "immersive_geology:ore_bit_vanilla_lead",
     "immersive_geology:ore_bit_vanilla_manganese",

@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersive_geology:ingot_aluminium"
+    }
+  ],
+  "additives": [],
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "energy": 250,
+  "time": 100,
+  "input": {
+    "item": "immersive_geology:dust_aluminium"
+  }
+}

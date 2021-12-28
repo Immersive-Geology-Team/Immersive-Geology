@@ -1,0 +1,131 @@
+{
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        -1.75,
+        2.5,
+        1.25
+      ],
+      "scale": [
+        0.03125,
+        0.03125,
+        0.03125
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        -1.75,
+        2.5,
+        1.75
+      ],
+      "scale": [
+        0.03125,
+        0.03125,
+        0.03125
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "translation": [
+        -0.75,
+        0,
+        -1.25
+      ],
+      "scale": [
+        0.03125,
+        0.03125,
+        0.03125
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        270,
+        0
+      ],
+      "translation": [
+        1,
+        0,
+        -1.75
+      ],
+      "scale": [
+        0.03125,
+        0.03125,
+        0.03125
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        8,
+        -8
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        6,
+        -6,
+        0
+      ],
+      "scale": [
+        0.1875,
+        0.1875,
+        0.1875
+      ]
+    },
+    "ground": {
+      "translation": [
+        -1.5,
+        3,
+        -1.5
+      ],
+      "scale": [
+        0.0625,
+        0.0625,
+        0.0625
+      ]
+    },
+    "fixed": {
+      "translation": [
+        -1,
+        -8,
+        -2
+      ],
+      "scale": [
+        0.0625,
+        0.0625,
+        0.0625
+      ]
+    }
+  },
+  "textures": {
+    "texture": "immersive_geology:multiblock/rotarykiln"
+  },
+  "loader": "forge:obj",
+  "model": "immersive_geology:models/multiblock/obj/rotarykiln/rotarykiln.obj",
+  "flip-v": true
+}
