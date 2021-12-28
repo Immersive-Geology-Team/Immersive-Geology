@@ -140,6 +140,16 @@ public class IGRecipeProvider extends RecipeProvider {
             if (material.hasSubtype(MaterialUseType.PLATE)) {
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
                         .setEnergy(2400).build(consumer, toRL("metalpress/plate_" + material.getName()));
+                if(material.hasSubtype(MaterialUseType.SHEETMETAL)) {
+                    Item sheetmetal = MaterialUseType.SHEETMETAL.getBlock(material).asItem();
+                    ShapedRecipeBuilder.shapedRecipe(sheetmetal)
+                            .key('s', tags.plate)
+                            .patternLine(" s ")
+                            .patternLine("s s")
+                            .patternLine(" s ")
+                            .addCriterion("has_"+toPath(MaterialUseType.PLATE.getItem(material)), hasItem(tags.plate))
+                            .build(consumer, toRL(toPath(sheetmetal)));
+                }
             }
 
             if (material.hasSubtype(MaterialUseType.ROD)) {
@@ -164,6 +174,10 @@ public class IGRecipeProvider extends RecipeProvider {
                 {
                     if(material == MaterialEnum.Vanilla.getMaterial()) add2x2Combine(Blocks.COBBLESTONE, rock, consumer);
                     else add2x2Combine(cobble, rock, consumer);
+                }
+                if(material.hasSubtype(MaterialUseType.COBBLESTONE) && material.hasSubtype(MaterialUseType.STONE))
+                {
+                    if(material != MaterialEnum.Vanilla.getMaterial()) addSmeltingRecipe(cobble, MaterialUseType.STONE.getBlock(material).asItem(), 0.15f, 200, consumer);
                 }
                 if (material.hasSubtype(MaterialUseType.ORE_CHUNK)) {
                     Item ore_chunk = MaterialUseType.ORE_CHUNK.getItem(stone_base.getMaterial(), material);

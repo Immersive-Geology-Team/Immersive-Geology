@@ -69,16 +69,18 @@ public class ClientProxy extends ServerProxy {
     private void setupReverberationFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
         ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
-        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 240);
-        ReverberationFurnaceTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 120);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
+        ReverberationFurnaceTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 125);
+        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.TINY_DUST), 10);
         ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
     }
 
     private void setupBloomeryFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
         BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
-        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 240);
-        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 120);
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
+        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 125);
+        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.TINY_DUST), 10);
         BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
         BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
     }
