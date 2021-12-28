@@ -220,7 +220,10 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     private void generateMultiblockItems(){
         rotarykilnItem();
-        //chemcialVatItem();
+        chemcialVatItem();
+        gravitySeparatorItem();
+        revfurnaceItem();
+        crystalizerItem();
     }
 
     private void genericOreItem(Item item){
@@ -284,9 +287,49 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     private void chemcialVatItem(){
         ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/chemicalvat/chemicalvat.obj")
-                .texture("texture_base", modLoc("multiblock/pumpjack_base")) //TODO change textures to be well, the correct ones ~Muddykat, thanks again IP for your work
-                .texture("texture_armature", modLoc("models/pumpjack_armature"));
+                .texture("texture", modLoc("multiblock/chemicalvat_base"));
+        ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+        doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+        doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+        doTransform(trans, Perspective.GUI, new Vector3f(6, -6, 0), new Vector3f(30, 225, 0), 0.1875F);
+        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+        doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+    }
 
+    private void gravitySeparatorItem(){
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/gravityseparator/gravityseparator.obj")
+                .texture("texture", modLoc("multiblock/gravityseparator_base"));
+        ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+        doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+        doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+        doTransform(trans, Perspective.GUI, new Vector3f(6, -6, 0), new Vector3f(30, 225, 0), 0.1875F);
+        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+        doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+    }
+
+    private void revfurnaceItem(){
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/revfurnace/reverberation_furnace.obj")
+                .texture("texture", modLoc("multiblock/reverberation_furnace"));
+        ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+        doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+        doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+        doTransform(trans, Perspective.GUI, new Vector3f(6, -6, 0), new Vector3f(30, 225, 0), 0.1875F);
+        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+        doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+    }
+
+    private void crystalizerItem() {
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/crystallizer/crystallizer.obj")
+                .texture("texture", modLoc("multiblock/crystallizer"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
         doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
