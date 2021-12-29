@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:tiny_dust_antimony"
+  },
+  "input": {
+    "item": "immersive_geology:raw_crystal_antimony"
+  },
+  "energy": 0
+}

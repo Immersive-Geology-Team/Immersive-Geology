@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_copper_blasting"
+    ]
+  },
+  "criteria": {
+    "has_raw_crystal_copper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:raw_crystal_copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_copper_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_crystal_copper",
+      "has_the_recipe"
+    ]
+  ]
+}

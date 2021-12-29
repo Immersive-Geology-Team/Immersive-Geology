@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/sheetmetal_titanium"
+    ]
+  },
+  "criteria": {
+    "has_plate_titanium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/titanium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/sheetmetal_titanium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plate_titanium",
+      "has_the_recipe"
+    ]
+  ]
+}

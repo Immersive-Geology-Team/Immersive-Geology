@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:ore_chunk_vanilla_unobtainium"
+    "item": "immersive_geology:raw_crystal_unobtainium"
   },
   "result": "immersive_geology:ingot_unobtainium",
   "experience": 0.15,

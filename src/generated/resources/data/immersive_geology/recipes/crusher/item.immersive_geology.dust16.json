@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_chalcopyrite"
+    "item": "immersive_geology:dust_magnetite"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_chalcopyrite"
+    "item": "immersive_geology:crushed_ore_magnetite"
   },
   "energy": 0
 }

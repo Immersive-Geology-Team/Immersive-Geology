@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/sheetmetal_tin"
+    ]
+  },
+  "criteria": {
+    "has_plate_tin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/tin"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/sheetmetal_tin"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plate_tin",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "immersive_geology:raw_crystal_zinc"
+  },
+  "result": "immersive_geology:ingot_zinc",
+  "experience": 0.15,
+  "cookingtime": 150
+}

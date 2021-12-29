@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_lead": {
+    "has_raw_crystal_lead": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_lead"
+            "item": "immersive_geology:raw_crystal_lead"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_lead",
+      "has_raw_crystal_lead",
       "has_the_recipe"
     ]
   ]

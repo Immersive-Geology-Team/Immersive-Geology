@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_chromite"
+    "item": "immersive_geology:dust_pyrolusite"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_chromite"
+    "item": "immersive_geology:crushed_ore_pyrolusite"
   },
   "energy": 0
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/sheetmetal_antimony"
+    ]
+  },
+  "criteria": {
+    "has_plate_antimony": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/antimony"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/sheetmetal_antimony"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plate_antimony",
+      "has_the_recipe"
+    ]
+  ]
+}

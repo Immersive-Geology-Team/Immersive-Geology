@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s ",
+    "s s",
+    " s "
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:plates/titanium"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:sheetmetal_titanium"
+  }
+}

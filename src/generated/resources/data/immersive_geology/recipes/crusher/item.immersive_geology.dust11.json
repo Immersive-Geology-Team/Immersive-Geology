@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_cuprite"
+    "item": "immersive_geology:dust_ferberite"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_cuprite"
+    "item": "immersive_geology:crushed_ore_ferberite"
   },
   "energy": 0
 }

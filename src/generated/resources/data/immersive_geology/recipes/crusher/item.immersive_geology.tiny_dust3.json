@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:tiny_dust_copper"
+  },
+  "input": {
+    "item": "immersive_geology:raw_crystal_copper"
+  },
+  "energy": 0
+}

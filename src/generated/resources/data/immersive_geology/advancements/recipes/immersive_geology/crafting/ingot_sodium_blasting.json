@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_sodium_blasting"
+    ]
+  },
+  "criteria": {
+    "has_raw_crystal_sodium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:raw_crystal_sodium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_sodium_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_crystal_sodium",
+      "has_the_recipe"
+    ]
+  ]
+}

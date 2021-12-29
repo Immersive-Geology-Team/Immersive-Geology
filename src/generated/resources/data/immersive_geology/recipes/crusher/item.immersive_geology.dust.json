@@ -2,11 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_gold",
-    "count": 2
+    "item": "immersive_geology:dust_alumina"
   },
   "input": {
-    "item": "immersive_geology:raw_crystal_gold"
+    "item": "immersive_geology:crushed_ore_alumina"
   },
   "energy": 0
 }

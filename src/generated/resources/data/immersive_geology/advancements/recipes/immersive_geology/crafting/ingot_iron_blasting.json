@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_iron": {
+    "has_raw_crystal_iron": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_iron"
+            "item": "immersive_geology:raw_crystal_iron"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_iron",
+      "has_raw_crystal_iron",
       "has_the_recipe"
     ]
   ]
