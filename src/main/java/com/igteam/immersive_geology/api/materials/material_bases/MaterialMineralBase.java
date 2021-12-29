@@ -164,17 +164,6 @@ public abstract class MaterialMineralBase extends Material
 			ore2Dust.inputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 1));
 			ore2Dust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 1));
 
-
-			/*
-			IGSeparationProcessingMethod wash_ore = new IGSeparationProcessingMethod(120);
-			wash_ore.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), this,
-					MaterialUseType.DIRTY_CRUSHED_ORE)));
-			wash_ore.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE)));
-			//fix me later
-			wash_ore.addItemWaste(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(),
-					MaterialUseType.ROCK_BIT)));
-			inheritedProcessingMethods.add(wash_ore);*/
-
 			inheritedProcessingMethods.add(ore2Dust);
 			inheritedProcessingMethods.add(defaultNativeOreCrushing);
 			inheritedProcessingMethods.add(manualClean);

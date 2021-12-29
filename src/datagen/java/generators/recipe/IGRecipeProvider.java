@@ -101,6 +101,7 @@ public class IGRecipeProvider extends RecipeProvider {
             Item bricks = MaterialUseType.BRICKS.getItem(material);
             Item rock = MaterialUseType.ROCK_BIT.getItem(material);
             Item cobble = MaterialUseType.COBBLESTONE.getItem(material);
+            Item raw_crystal = MaterialUseType.RAW_CRYSTAL.getItem(material);
 
             if(material.hasSubtype(MaterialUseType.CLAY) && material.hasSubtype(MaterialUseType.BRICK)) {
                 addSmeltingRecipe(clay, brick, 0.15f, 300, consumer);
@@ -111,6 +112,9 @@ public class IGRecipeProvider extends RecipeProvider {
             if(material.hasSubtype(MaterialUseType.BRICK) && material.hasSubtype(MaterialUseType.BRICKS)) {
                 add2x2Combine(bricks, brick, tags.brick, consumer);
                 log.debug("Generated Brick/Bricks Dust Recipe for: " + material.getName());
+            }
+            if(material.hasSubtype(MaterialUseType.INGOT) && material.hasSubtype(MaterialUseType.RAW_CRYSTAL)) {
+                addBlastingRecipe(raw_crystal, ingot, 0.15f, 150, consumer);
             }
 
             if(material.hasSubtype(MaterialUseType.DUST) && material.hasSubtype(MaterialUseType.TINY_DUST)) {

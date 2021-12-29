@@ -1,12 +1,11 @@
 package com.igteam.immersive_geology.api.materials.material_bases;
 
 import blusunrize.immersiveengineering.common.items.IEItems;
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
-import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.api.materials.helper.MaterialTypes;
+import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGArcFurnaceProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCraftingProcessingMethod;
@@ -200,19 +199,28 @@ public abstract class MaterialMetalBase extends Material
 			manualClean.setShapeless(inputDirtyCrush, inputDirtyCrush);
 			manualClean.setOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial( this, MaterialUseType.CRUSHED_ORE), 1));
 
-			IGBloomeryProcessingMethod bloomeryIronIngot = new IGBloomeryProcessingMethod(10, 1);
-			bloomeryIronIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 2));
-			bloomeryIronIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
+			IGBloomeryProcessingMethod bloomeryNativeIngot = new IGBloomeryProcessingMethod(10, 1);
+			bloomeryNativeIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 2));
+			bloomeryNativeIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
 
-			inheritedProcessingMethods.add(bloomeryIronIngot);
+			inheritedProcessingMethods.add(bloomeryNativeIngot);
 			inheritedProcessingMethods.add(defaultNativeOreCrushing);
 			inheritedProcessingMethods.add(manualClean);
+		}
 
-			if(hasCrystal()) {
+		if(hasCrystal()) {
+			if (hasDust()) {
 				IGCrushingProcessingMethod toDust = new IGCrushingProcessingMethod(1000, 100);
 				toDust.inputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.RAW_CRYSTAL)));
-				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 2));
+				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST)));
+				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.TINY_DUST)));
 				inheritedProcessingMethods.add(toDust);
+			}
+			if (hasIngot()) {
+				IGArcFurnaceProcessingMethod crystalToIngot = new IGArcFurnaceProcessingMethod(250, 100);
+				crystalToIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.RAW_CRYSTAL)));
+				crystalToIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
+				crystalToIngot.addItemSlag(new ItemStack(IEItems.Ingredients.slag));
 			}
 		}
 
