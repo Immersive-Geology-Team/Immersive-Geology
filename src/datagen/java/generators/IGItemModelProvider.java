@@ -300,7 +300,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void gravitySeparatorItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/gravityseparator/gravityseparator.obj")
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, "multiblock/obj/gravityseparator/gravityseparator.obj")
                 .texture("texture", modLoc("multiblock/gravityseparator_base"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -314,7 +314,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void revfurnaceItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/revfurnace/reverberation_furnace.obj")
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, "multiblock/obj/revfurnace/reverberation_furnace.obj")
                 .texture("texture", modLoc("multiblock/reverberation_furnace"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -328,7 +328,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void crystalizerItem() {
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/crystallizer/crystallizer.obj")
+        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.crystallizer, "multiblock/obj/crystallizer/crystallizer.obj")
                 .texture("texture", modLoc("multiblock/crystallizer"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);

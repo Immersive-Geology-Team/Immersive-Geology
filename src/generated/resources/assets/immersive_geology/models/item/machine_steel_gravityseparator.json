@@ -123,9 +123,9 @@
     }
   },
   "textures": {
-    "texture": "immersive_geology:multiblock/chemicalvat_base"
+    "texture": "immersive_geology:multiblock/gravityseparator_base"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/chemicalvat/chemicalvat.obj",
+  "model": "immersive_geology:models/multiblock/obj/gravityseparator/gravityseparator.obj",
   "flip-v": true
 }

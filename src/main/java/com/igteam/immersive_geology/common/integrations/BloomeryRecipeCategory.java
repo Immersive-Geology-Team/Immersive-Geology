@@ -1,9 +1,9 @@
 package com.igteam.immersive_geology.common.integrations;
 
+import com.igteam.immersive_geology.api.crafting.recipes.recipe.BloomeryRecipe;
 import com.igteam.immersive_geology.api.crafting.recipes.recipe.CalcinationRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -16,40 +16,40 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 
-public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationRecipe> {
+public class BloomeryRecipeCategory extends  IGRecipeCategory<BloomeryRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "rotarykiln");
+    public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "bloomery");
 
-    public CalcinationRecipeCategory(IGuiHelper guiHelper) {
-        super(CalcinationRecipe.class, guiHelper, ID, "machine.immersive_geology.rotarykiln");
-        ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
+    public BloomeryRecipeCategory(IGuiHelper guiHelper) {
+        super(BloomeryRecipe.class, guiHelper, ID, "machine.immersive_geology.bloomery");
+        ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/bloomery.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();
         setBackground(back);
-        setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.rotarykiln));
+        setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.bloomery));
 
     }
 
     @Override
-    public void setIngredients(CalcinationRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+    public void setIngredients(BloomeryRecipe recipe, IIngredients ingredients) {
+        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getRecipeInput().getMatchingStacks()));
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
 
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, CalcinationRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, BloomeryRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(0, true, 15, 33);
+        guiItemStacks.init(0, true, 16, 40);
         guiItemStacks.set (0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
-        guiItemStacks.init(1, false, 66, 41);
+        guiItemStacks.init(1, false, 67, 40);
         guiItemStacks.set (1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 
     @Override
-    public void draw(CalcinationRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(BloomeryRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         super.draw(recipe, matrixStack, mouseX, mouseY);
     }
 }
