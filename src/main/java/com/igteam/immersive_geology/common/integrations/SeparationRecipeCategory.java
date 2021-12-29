@@ -45,7 +45,7 @@ public class SeparationRecipeCategory extends  IGRecipeCategory<SeparatorRecipe>
         guiItemStacks.init(0, true, 15, 32);
         guiItemStacks.set (0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
-        guiItemStacks.init(1, false, 65, 41);
+        guiItemStacks.init(1, false, 66, 41);
         guiItemStacks.set (1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 
         guiItemStacks.init(2, false, 66, 61);

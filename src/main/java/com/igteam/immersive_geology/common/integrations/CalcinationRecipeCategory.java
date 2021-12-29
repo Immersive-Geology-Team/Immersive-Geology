@@ -41,7 +41,7 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
     public void setRecipe(IRecipeLayout recipeLayout, CalcinationRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(0, true, 15, 33);
+        guiItemStacks.init(0, true, 15, 32);
         guiItemStacks.set (0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
         guiItemStacks.init(1, false, 66, 41);
