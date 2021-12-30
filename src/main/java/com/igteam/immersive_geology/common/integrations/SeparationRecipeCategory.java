@@ -22,7 +22,7 @@ public class SeparationRecipeCategory extends  IGRecipeCategory<SeparatorRecipe>
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "gravityseparator");
 
     public SeparationRecipeCategory(IGuiHelper guiHelper) {
-        super(SeparatorRecipe.class, guiHelper, ID, "machine.immersive_geology.gravityseparator");
+        super(SeparatorRecipe.class, guiHelper, ID, "machine.immersive_geology.machine_steel_gravityseparator");
         ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/gravity_separator.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
         setBackground(back);

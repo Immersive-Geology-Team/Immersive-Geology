@@ -8,6 +8,10 @@
     "tag": "forge:hydrochloric_acid",
     "amount": 125
   },
+  "fluid_input2": {
+    "tag": "forge:chromium_nitric_acid",
+    "amount": 125
+  },
   "energy": 1000,
   "time": 240
 }

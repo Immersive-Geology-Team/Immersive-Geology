@@ -21,7 +21,7 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "rotarykiln");
 
     public CalcinationRecipeCategory(IGuiHelper guiHelper) {
-        super(CalcinationRecipe.class, guiHelper, ID, "machine.immersive_geology.rotarykiln");
+        super(CalcinationRecipe.class, guiHelper, ID, "machine.immersive_geology.machine_steel_rotarykiln");
         ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();

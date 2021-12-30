@@ -35,6 +35,8 @@ public class JEIIntegration  implements IModPlugin{
         registration.addRecipeCategories(new CrystalizationRecipeCategory(guiHelper));
         registration.addRecipeCategories(new BloomeryRecipeCategory(guiHelper));
         registration.addRecipeCategories(new VatRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new RoastingRecipeCategory(guiHelper));
+
 
 
     }
@@ -46,6 +48,7 @@ public class JEIIntegration  implements IModPlugin{
         registration.addRecipes(new ArrayList<>((CrystalRecipe.recipes.values())),CrystalizationRecipeCategory.ID);
         registration.addRecipes(new ArrayList<>((BloomeryRecipe.recipes.values())),BloomeryRecipeCategory.ID);
         registration.addRecipes(new ArrayList<>((VatRecipe.recipes.values())),VatRecipeCategory.ID);
+        registration.addRecipes(new ArrayList<>((ReverberationRecipe.recipes.values())),RoastingRecipeCategory.ID);
 
     }
 
@@ -64,6 +67,9 @@ public class JEIIntegration  implements IModPlugin{
 
         registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.chemicalvat),
                 VatRecipeCategory.ID);
+
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace),
+                RoastingRecipeCategory.ID);
     }
 
     @Override

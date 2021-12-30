@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCalcinationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
@@ -148,11 +149,17 @@ public class MaterialMineralChromite extends MaterialMineralBase
 		slurry_method.addFluidOutput(SlurryEnum.CHROMIUM,1,125);
 		slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(),
 				MaterialUseType.COMPOUND_DUST), 1));
+
+		IGCalcinationProcessingMethod calcination_method = new IGCalcinationProcessingMethod(1000, 240);
+		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(),
+				MaterialUseType.COMPOUND_DUST), 1));
+		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Hematite.getMaterial(),
+				MaterialUseType.CRUSHED_ORE), 1));
 		//TODO -- add roasting process of iron nitrate
 		IGVatProcessingMethod slurry_method_pt2 = new IGVatProcessingMethod(1000, 240);
 		slurry_method_pt2.addItemInput(ItemStack.EMPTY);
 		slurry_method_pt2.addPrimaryFluidInput(FluidEnum.HydrochloricAcid,125);
-		slurry_method_pt2.addSecondaryFluidInput(Fluids.WATER, 125);
+		slurry_method_pt2.addSecondaryFluidInput(SlurryEnum.CHROMIUM,1, 125);
 		slurry_method_pt2.addFluidOutput(SlurryEnum.CHROMIUM,0,125);
 		slurry_method_pt2.addItemOutput(ItemStack.EMPTY);
 
@@ -160,6 +167,8 @@ public class MaterialMineralChromite extends MaterialMineralBase
 		crystalizerMethod.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Chromium.getMaterial(),
 				MaterialUseType.RAW_CRYSTAL),1));
 		crystalizerMethod.addFluidInput(SlurryEnum.CHROMIUM,0,125);
+		inheritedProcessingMethods.add(calcination_method);
+
 		inheritedProcessingMethods.add(crystalizerMethod);
 		inheritedProcessingMethods.add(slurry_method);
 		inheritedProcessingMethods.add(slurry_method_pt2);

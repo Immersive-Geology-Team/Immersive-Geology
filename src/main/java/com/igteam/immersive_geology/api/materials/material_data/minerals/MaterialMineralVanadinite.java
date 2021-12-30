@@ -154,16 +154,12 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 		slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
 				MaterialUseType.COMPOUND_DUST), 1));
 
-
-		//TODO -- add roasting process to compound dust
 		IGCalcinationProcessingMethod calcination_method = new IGCalcinationProcessingMethod(1000, 240);
 		calcination_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
 				MaterialUseType.COMPOUND_DUST), 1));
 		calcination_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanadium.getMaterial(),
 				MaterialUseType.METAL_OXIDE), 1));
 
-
-		//TODO -- add Arc furnacing of Vanadium oxide
 
 		IGArcFurnaceProcessingMethod smelting_method = new IGArcFurnaceProcessingMethod(20000,80,
 				new IngredientWithSize(IETags.coalCokeDust,1));

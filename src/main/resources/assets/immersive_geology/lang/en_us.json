@@ -71,8 +71,13 @@
   "block.immersive_geology.machine": "%s",
   "block.immersive_geology.static_block": "%s",
 
-  "machine.immersive_geology.rotarykiln": "Rotary Kiln",
+  "machine.immersive_geology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersive_geology.bloomery": "Bloomery",
+  "machine.immersive_geology.machine_steel_crystallizer" : "Crystalizer",
+  "machine.immersive_geology.machine_steel_gravityseparator" : "Gravity Ore Separator",
+  "machine.immersive_geology.machine_steel_chemicalvat" : "Vat",
+  "machine.immersive_geology.machine_steel_reverberation_furnace" : "Reverberation Furnace",
+
 
   "static.immersive_geology.reinforced_refractory_brick": "Reinforced Refractory Bricks",
 

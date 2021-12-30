@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:crushed_ore_hematite"
+  },
+  "waste": {
+    "item": "immersive_geology:crushed_ore_cuprite"
+  },
+  "input": {
+    "item": "immersive_geology:slag_chalcopyrite"
+  }
+}

@@ -25,7 +25,7 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "chemicalvat");
 
     public VatRecipeCategory(IGuiHelper guiHelper) {
-        super(VatRecipe.class, guiHelper, ID, "machine.immersive_geology.chemicalvat");
+        super(VatRecipe.class, guiHelper, ID, "machine.immersive_geology.machine_steel_chemicalvat");
         ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/vat.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 101)
                 .setTextureSize(128,101).build();
@@ -37,18 +37,22 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     @Override
     public void setIngredients(VatRecipe recipe, IIngredients ingredients) {
         List<List<FluidStack>> l = new ArrayList();
-        if (recipe.getInputFluids().get(0) != null) {
+        if (recipe.getInputFluids().size() >=1 && recipe.getInputFluids().get(0) != null) {
             l.add(recipe.getInputFluids().get(0).getMatchingFluidStacks());
         }
 
-        if (recipe.getInputFluids().get(1) != null) {
+        if (recipe.getInputFluids().size() >=2 && recipe.getInputFluids().get(1) != null) {
             l.add(recipe.getInputFluids().get(1).getMatchingFluidStacks());
         }
 
         ingredients.setInputLists(VanillaTypes.FLUID, l);
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
+        if (recipe.getItemInputs().size() != 0) {
+            ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
+        }
 
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+        if (recipe.getItemOutputs().size() != 0 && !recipe.getItemOutputs().get(0).isEmpty()){
+            ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+        }
         ingredients.setOutput(VanillaTypes.FLUID, recipe.getFluidOutputs().get(0));
 
     }
@@ -57,12 +61,14 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     public void setRecipe(IRecipeLayout recipeLayout, VatRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
+
         guiFluidStacks.init(0, true, 15, 45);
         guiFluidStacks.set (0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 
-        guiFluidStacks.init(1, true, 40, 59);
-        guiFluidStacks.set (1, ingredients.getInputs(VanillaTypes.FLUID).get(1));
-
+        if (ingredients.getInputs(VanillaTypes.FLUID).size() >1) {
+            guiFluidStacks.init(1, true, 40, 59);
+            guiFluidStacks.set(1, ingredients.getInputs(VanillaTypes.FLUID).get(1));
+        }
         if (ingredients.getInputs(VanillaTypes.ITEM).size() != 0) {
             guiItemStacks.init(0, true, 14, 68);
             guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
