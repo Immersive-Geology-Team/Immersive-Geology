@@ -46,9 +46,13 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
         }
 
         ingredients.setInputLists(VanillaTypes.FLUID, l);
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
+        if (recipe.getItemInputs().size() != 0) {
+            ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
+        }
 
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+        if (recipe.getItemOutputs().size() != 0 && !recipe.getItemOutputs().get(0).isEmpty()){
+            ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+        }
         ingredients.setOutput(VanillaTypes.FLUID, recipe.getFluidOutputs().get(0));
 
     }

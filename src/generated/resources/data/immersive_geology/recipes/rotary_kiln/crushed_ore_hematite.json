@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:rotary_kiln",
+  "result": {
+    "item": "immersive_geology:crushed_ore_hematite"
+  },
+  "energy": 1000,
+  "time": 240,
+  "item_input": {
+    "item": "immersive_geology:compound_dust_iron"
+  }
+}
