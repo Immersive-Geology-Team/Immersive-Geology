@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 
-public class RoastingRecipeCategory extends  IGRecipeCategory<ReverberationRecipe> {
+public class RoastingRecipeCategory extends IGRecipeCategory<ReverberationRecipe> {
 
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "revfurnace");
 
@@ -32,8 +32,13 @@ public class RoastingRecipeCategory extends  IGRecipeCategory<ReverberationRecip
                 .setTextureSize(128,101).build();
         setBackground(back);
         setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace));
-
     }
+
+    @Override
+    public void draw(ReverberationRecipe recipe, MatrixStack transform, double mouseX, double mouseY) {
+        super.draw(recipe, transform, mouseX, mouseY);
+    }
+
 
     @Override
     public void setIngredients(ReverberationRecipe recipe, IIngredients ingredients) {
@@ -58,10 +63,5 @@ public class RoastingRecipeCategory extends  IGRecipeCategory<ReverberationRecip
 
         guiFluidStacks.init(0, false, 101, 58);
         guiFluidStacks.set (0, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
-    }
-
-    @Override
-    public void draw(ReverberationRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        super.draw(recipe, matrixStack, mouseX, mouseY);
     }
 }

@@ -27,7 +27,6 @@ public class SeparationRecipeCategory extends  IGRecipeCategory<SeparatorRecipe>
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
         setBackground(back);
         setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.gravityseparator));
-
     }
 
     @Override

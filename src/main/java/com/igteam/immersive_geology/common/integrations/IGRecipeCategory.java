@@ -42,7 +42,6 @@ public  abstract class IGRecipeCategory<T> implements IRecipeCategory<T> {
         return this.id;
     }
 
-
     @Override
     public String getTitle() {
         return this.localizedName;

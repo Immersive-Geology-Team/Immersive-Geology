@@ -45,6 +45,11 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
         this.useType = blockType.getBlockUseType();
     }
 
+    public IGBlockItem useDefaultNamingConvention(){
+        useCustomDisplayName = false;
+        return this;
+    }
+
     public String getHolderName() {
         return holder_name;
     }
@@ -75,8 +80,13 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
             return itemMaterial.getColor(0);
         }
     }
+
+    public boolean useCustomDisplayName = true;
+
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
+        if(!useCustomDisplayName) return super.getDisplayName(stack);
+
         ArrayList<String> localizedNames = new ArrayList<>();
 
         if(getBlock() instanceof IGOreBlock) {
@@ -92,6 +102,7 @@ public class IGBlockItem extends BlockItem implements IGSubGroup, IEItemInterfac
         }
         String base_name = "block."+IGLib.MODID+"."+useType.getName().toLowerCase(Locale.ENGLISH);
         return new TranslationTextComponent(base_name, localizedNames.toArray(new String[localizedNames.size()]));
+
     }
 
     public MaterialUseType getUseType(){

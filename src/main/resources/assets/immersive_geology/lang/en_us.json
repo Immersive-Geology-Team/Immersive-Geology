@@ -42,7 +42,6 @@
   "item.immersive_geology.clay": "%s Clay",
   "item.immersive_geology.compound_dust": "%s Compound Dust",
   "item.immersive_geology.slag": "%s Slag",
-  "item.immersive_geology.metal_oxide": "%s Oxide",
   "item.immersive_geology.brick": "%s Brick",
 
   "block.immersive_geology.storage_block": "%s Block",
@@ -78,6 +77,11 @@
   "machine.immersive_geology.machine_steel_chemicalvat" : "Vat",
   "machine.immersive_geology.machine_steel_reverberation_furnace" : "Reverberation Furnace",
 
+  "block.immersive_geology.rotarykiln": "Rotary Kiln",
+  "block.immersive_geology.crystallizer" : "Crystalizer",
+  "block.immersive_geology.gravityseparator" : "Gravity Ore Separator",
+  "block.immersive_geology.chemicalvat" : "Vat",
+  "block.immersive_geology.reverberation_furnace" : "Reverberation Furnace",
 
   "static.immersive_geology.reinforced_refractory_brick": "Reinforced Refractory Bricks",
 
@@ -115,7 +119,7 @@
 
   "material.immersive_geology.wolframite": "Wolframite",
   "material.immersive_geology.unobtainium": "Unobtainium",
-  "material.immersive_geology.aluminum": "Aluminium",
+  "material.immersive_geology.aluminium": "Aluminium",
   "material.immersive_geology.copper": "Copper",
   "material.immersive_geology.lead": "Lead",
   "material.immersive_geology.nickel": "Nickel",

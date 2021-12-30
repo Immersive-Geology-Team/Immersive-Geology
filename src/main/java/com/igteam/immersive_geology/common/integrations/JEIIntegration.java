@@ -36,9 +36,6 @@ public class JEIIntegration  implements IModPlugin{
         registration.addRecipeCategories(new BloomeryRecipeCategory(guiHelper));
         registration.addRecipeCategories(new VatRecipeCategory(guiHelper));
         registration.addRecipeCategories(new RoastingRecipeCategory(guiHelper));
-
-
-
     }
 
     @Override
