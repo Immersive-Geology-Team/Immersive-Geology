@@ -37,11 +37,11 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     @Override
     public void setIngredients(VatRecipe recipe, IIngredients ingredients) {
         List<List<FluidStack>> l = new ArrayList();
-        if (recipe.getInputFluids().get(0) != null) {
+        if (recipe.getInputFluids().size() >=1 && recipe.getInputFluids().get(0) != null) {
             l.add(recipe.getInputFluids().get(0).getMatchingFluidStacks());
         }
 
-        if (recipe.getInputFluids().get(1) != null) {
+        if (recipe.getInputFluids().size() >=2 && recipe.getInputFluids().get(1) != null) {
             l.add(recipe.getInputFluids().get(1).getMatchingFluidStacks());
         }
 
@@ -57,12 +57,14 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     public void setRecipe(IRecipeLayout recipeLayout, VatRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
+
         guiFluidStacks.init(0, true, 15, 45);
         guiFluidStacks.set (0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 
-        guiFluidStacks.init(1, true, 40, 59);
-        guiFluidStacks.set (1, ingredients.getInputs(VanillaTypes.FLUID).get(1));
-
+        if (ingredients.getInputs(VanillaTypes.FLUID).size() >1) {
+            guiFluidStacks.init(1, true, 40, 59);
+            guiFluidStacks.set(1, ingredients.getInputs(VanillaTypes.FLUID).get(1));
+        }
         if (ingredients.getInputs(VanillaTypes.ITEM).size() != 0) {
             guiItemStacks.init(0, true, 14, 68);
             guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
