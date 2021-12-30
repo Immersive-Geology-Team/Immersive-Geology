@@ -7,6 +7,8 @@ import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement;
 import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.ElementProportion;
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGBloomeryProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGRoastingProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGSeparationProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -132,5 +134,25 @@ public class MaterialMineralChalcopyrite extends MaterialMineralBase
 	@Override
 	public boolean hasSlag() {return  true;}
 
+	public IGMaterialProcess getProcessingMethod() {
+		//A bit lazy approach
+		IGRoastingProcessingMethod roasting_method = new IGRoastingProcessingMethod(100, 2);
+		roasting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.CRUSHED_ORE), 1));
+		roasting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.SLAG), 1));
 
+		IGSeparationProcessingMethod sep_method = new IGSeparationProcessingMethod(120);
+		sep_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.SLAG), 1));
+		sep_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Hematite.getMaterial(),
+				MaterialUseType.CRUSHED_ORE), 1));
+		sep_method.addItemWaste(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Cuprite.getMaterial(),
+				MaterialUseType.CRUSHED_ORE), 1));
+
+
+		inheritedProcessingMethods.add(roasting_method);
+		inheritedProcessingMethods.add(sep_method);
+		return super.getProcessingMethod();
+	}
 }

@@ -9,6 +9,7 @@ import com.igteam.immersive_geology.api.materials.helper.PeriodicTableElement.El
 import com.igteam.immersive_geology.api.materials.helper.processing.IGMaterialProcess;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGCrystalizerProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGReductionProcessingMethod;
+import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGRoastingProcessingMethod;
 import com.igteam.immersive_geology.api.materials.helper.processing.methods.IGVatProcessingMethod;
 import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -121,19 +122,26 @@ public class MaterialMineralSphalerite extends MaterialMineralBase
 
 	@Override
 	public IGMaterialProcess getProcessingMethod() {
-		//TODO -- add roasting process
+		IGRoastingProcessingMethod roasting_method = new IGRoastingProcessingMethod(100, 2);
+		roasting_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.CRUSHED_ORE), 1));
+		roasting_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this,
+				MaterialUseType.SLAG), 1));
+
 		IGVatProcessingMethod slurry_method = new IGVatProcessingMethod(1000, 240);
 		slurry_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG), 1));
 		slurry_method.addPrimaryFluidInput(FluidEnum.SulfuricAcid,125);
 		slurry_method.addSecondaryFluidInput(Fluids.WATER, 125);
 		slurry_method.addFluidOutput(SlurryEnum.ZINC,1,125);
-		slurry_method.addItemOutput(ItemStack.EMPTY);
+		slurry_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Iron.getMaterial(),
+				MaterialUseType.COMPOUND_DUST)));
 
 		IGCrystalizerProcessingMethod crystal_method = new IGCrystalizerProcessingMethod(1000, 120);
 		crystal_method.addFluidInput(SlurryEnum.ZINC,1,125);
 		crystal_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Zinc.getMaterial(),
 				MaterialUseType.RAW_CRYSTAL), 1));
 
+		inheritedProcessingMethods.add(roasting_method);
 		inheritedProcessingMethods.add(slurry_method);
 		inheritedProcessingMethods.add(crystal_method);
 		return super.getProcessingMethod();
