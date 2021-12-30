@@ -196,6 +196,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
             BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_double_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_double"));
 
+            doubleModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+            topModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+            baseModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+
+
             doubleModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
             doubleModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
 
@@ -225,7 +230,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void registerStaticBlock(IGBlockType blockType){
         if(blockType instanceof IGStaticBlock) {
             IGStaticBlock block = (IGStaticBlock) blockType;
-            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getHolderName()).getPath(),
+            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models()
+                    .withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getHolderName()).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/static_block/" + block.getHolderName()))).build());
 
         }
