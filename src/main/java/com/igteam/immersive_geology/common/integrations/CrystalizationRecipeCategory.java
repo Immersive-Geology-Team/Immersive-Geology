@@ -22,7 +22,7 @@ public class CrystalizationRecipeCategory extends  IGRecipeCategory<CrystalRecip
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "crystalizer");
 
     public CrystalizationRecipeCategory(IGuiHelper guiHelper) {
-        super(CrystalRecipe.class, guiHelper, ID, "machine.immersive_geology.crystallizer");
+        super(CrystalRecipe.class, guiHelper, ID, "machine.immersive_geology.machine_steel_crystallizer");
         ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/crystalizer.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();

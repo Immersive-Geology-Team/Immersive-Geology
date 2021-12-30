@@ -25,7 +25,7 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "chemicalvat");
 
     public VatRecipeCategory(IGuiHelper guiHelper) {
-        super(VatRecipe.class, guiHelper, ID, "machine.immersive_geology.chemicalvat");
+        super(VatRecipe.class, guiHelper, ID, "machine.immersive_geology.machine_steel_chemicalvat");
         ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/vat.png");
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 101)
                 .setTextureSize(128,101).build();
