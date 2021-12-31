@@ -215,7 +215,7 @@ public abstract class MaterialMetalBase extends Material
 				IGCrushingProcessingMethod toDust = new IGCrushingProcessingMethod(1000, 100);
 				toDust.inputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.RAW_CRYSTAL)));
 				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST)));
-				toDust.outputItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.TINY_DUST)));
+				toDust.secondaryItem(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.TINY_DUST)));
 				inheritedProcessingMethods.add(toDust);
 			}
 			if (hasIngot()) {

@@ -74,7 +74,7 @@ public abstract class MaterialMineralBase extends Material
 
 		int element_length = getElements().size();
 
-		if(element_length == 2){
+		if(element_length > 1){
 			for(PeriodicTableElement.ElementProportion e : getElements()){
 				if(e.getElement().getSymbol().equals(PeriodicTableElement.OXYGEN.getSymbol())) {
 					result = true;

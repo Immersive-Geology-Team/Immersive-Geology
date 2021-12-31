@@ -7,7 +7,7 @@
     "item": "immersive_geology:slag_vanadinite"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_vanadinite"
+    "item": "immersive_geology:dust_vanadinite"
   },
   "energy": 1000,
   "time": 240

@@ -21,6 +21,7 @@
     "immersive_geology:dust_zirconium",
     "immersive_geology:dust_zinc",
     "immersive_geology:dust_sodium",
+    "immersive_geology:dust_unobtainium",
     "immersive_geology:dust_constantan",
     "immersive_geology:dust_electrum",
     "immersive_geology:dust_steel",
@@ -60,7 +61,7 @@
     "immersive_geology:dust_pyrite",
     "immersive_geology:dust_wolframite",
     "immersive_geology:dust_vanadinite",
-    "immersive_geology:dust_unobtainium",
-    "immersive_geology:dust_coal"
+    "immersive_geology:dust_coal",
+    "immersive_geology:dust_unobtania"
   ]
 }

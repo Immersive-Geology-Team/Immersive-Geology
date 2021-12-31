@@ -18,13 +18,13 @@
     "immersive_geology:plate_vanadium",
     "immersive_geology:plate_zirconium",
     "immersive_geology:plate_zinc",
+    "immersive_geology:plate_unobtainium",
     "immersive_geology:plate_constantan",
     "immersive_geology:plate_electrum",
     "immersive_geology:plate_steel",
     "immersive_geology:plate_viking_steel",
     "immersive_geology:plate_bronze",
     "immersive_geology:plate_arsenic",
-    "immersive_geology:plate_antimony",
-    "immersive_geology:plate_unobtainium"
+    "immersive_geology:plate_antimony"
   ]
 }

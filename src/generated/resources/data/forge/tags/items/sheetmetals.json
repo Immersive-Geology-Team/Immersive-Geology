@@ -18,13 +18,13 @@
     "immersive_geology:sheetmetal_vanadium",
     "immersive_geology:sheetmetal_zirconium",
     "immersive_geology:sheetmetal_zinc",
+    "immersive_geology:sheetmetal_unobtainium",
     "immersive_geology:sheetmetal_constantan",
     "immersive_geology:sheetmetal_electrum",
     "immersive_geology:sheetmetal_steel",
     "immersive_geology:sheetmetal_viking_steel",
     "immersive_geology:sheetmetal_bronze",
     "immersive_geology:sheetmetal_arsenic",
-    "immersive_geology:sheetmetal_antimony",
-    "immersive_geology:sheetmetal_unobtainium"
+    "immersive_geology:sheetmetal_antimony"
   ]
 }

@@ -144,6 +144,11 @@ public class MaterialMineralVanadinite extends MaterialMineralBase
 		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Lead.getMaterial(), MaterialUseType.INGOT), 1));
 		redox_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG), 1));
 
+		IGReductionProcessingMethod redox_method2 = new IGReductionProcessingMethod(1000, 240);
+		redox_method.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.DUST), 2));
+		redox_method.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Lead.getMaterial(), MaterialUseType.INGOT), 1));
+		redox_method.addItemSlag(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.SLAG), 1));
+
 		//small simplification here
 
 		IGVatProcessingMethod slurry_method = new IGVatProcessingMethod(1000, 240);

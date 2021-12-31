@@ -1,0 +1,16 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_unobtania_sulfuric_acid",
+    "amount": 125
+  },
+  "item_input": {
+    "item": "immersive_geology:slag_unobtania"
+  },
+  "fluid_input1": {
+    "tag": "forge:sulfuric_acid",
+    "amount": 125
+  },
+  "energy": 2000,
+  "time": 480
+}

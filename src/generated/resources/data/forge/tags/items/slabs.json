@@ -20,6 +20,7 @@
     "immersive_geology:slab_vanadium",
     "immersive_geology:slab_zirconium",
     "immersive_geology:slab_zinc",
+    "immersive_geology:slab_unobtainium",
     "immersive_geology:slab_constantan",
     "immersive_geology:slab_electrum",
     "immersive_geology:slab_steel",
@@ -27,7 +28,6 @@
     "immersive_geology:slab_bronze",
     "immersive_geology:slab_arsenic",
     "immersive_geology:slab_antimony",
-    "immersive_geology:slab_unobtainium",
     "immersive_geology:slab_refractory"
   ]
 }

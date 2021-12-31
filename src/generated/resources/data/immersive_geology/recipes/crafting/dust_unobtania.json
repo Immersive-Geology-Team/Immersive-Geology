@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:tiny_dusts/unobtania"
+    },
+    "i": {
+      "item": "immersive_geology:tiny_dust_unobtania"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:dust_unobtania"
+  }
+}

@@ -108,5 +108,12 @@ public class MaterialMetalUnobtainium extends MaterialMetalBase
 	}
 
 	@Override
-	public boolean isNativeMetal() {return true;}
+	public boolean hasCompoundDust() {
+		return true;
+	}
+
+	@Override
+	public boolean generateOxide() {
+		return true;
+	}
 }

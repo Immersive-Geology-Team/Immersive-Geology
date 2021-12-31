@@ -1,0 +1,17 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_unobtainium_hydrochloric_acid",
+    "amount": 125
+  },
+  "fluid_input1": {
+    "tag": "forge:unobtainium_nitric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "forge:hydrochloric_acid",
+    "amount": 125
+  },
+  "energy": 1000,
+  "time": 240
+}

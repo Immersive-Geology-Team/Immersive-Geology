@@ -395,6 +395,7 @@ public class IGRecipeProvider extends RecipeProvider {
         IGCrushingProcessingMethod m = (IGCrushingProcessingMethod) method;
 
         CrusherRecipeBuilder crusherBuilder = CrusherRecipeBuilder.builder(m.getItemOutput());
+        if (m.getItemSecondary() != ItemStack.EMPTY) crusherBuilder.addSecondary(m.getItemSecondary(), m.getChance());
         crusherBuilder.addInput(m.getItemInput())
                 .setEnergy(m.getEnergyCost())
                 .build(consumer, toRL("crusher/" + m.getItemOutput().getDisplayName().getString()));
