@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "immersive_geology:sheetmetal_antimony"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:slab_antimony",
+    "count": 6
+  }
+}

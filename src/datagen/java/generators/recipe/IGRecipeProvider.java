@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeB
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
+import blusunrize.immersiveengineering.data.recipebuilder.HammerCrushingRecipeBuilder;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.crafting.recipes.builders.*;
 import com.igteam.immersive_geology.api.materials.Material;
@@ -112,6 +113,30 @@ public class IGRecipeProvider extends RecipeProvider {
             if(material.hasSubtype(MaterialUseType.BRICK) && material.hasSubtype(MaterialUseType.BRICKS)) {
                 add2x2Combine(bricks, brick, tags.brick, consumer);
                 log.debug("Generated Brick/Bricks Dust Recipe for: " + material.getName());
+                if(material.hasSubtype(MaterialUseType.STAIRS)) { //TODO Make stair recipes work again????
+                    Item stair = MaterialUseType.STAIRS.getItem(material);
+                    ShapedRecipeBuilder.shapedRecipe(stair, 4)
+                            .key('b', bricks)
+                            .patternLine("b  ")
+                            .patternLine("bb ")
+                            .patternLine("bbb")
+                            .addCriterion("has"+toPath(bricks), hasItem(bricks))
+                            .build(consumer, toRL(toPath(stair)));
+                    SingleItemRecipeBuilder.stonecuttingRecipe(Ingredient.fromItems(bricks), stair)
+                            .addCriterion("has"+toPath(bricks), hasItem(bricks))
+                            .build(consumer, toRL(toPath(stair)));
+                }
+                if(material.hasSubtype(MaterialUseType.SLAB)) {
+                    Item slab = MaterialUseType.SLAB.getItem(material);
+                    ShapedRecipeBuilder.shapedRecipe(slab, 6)
+                            .key('s', bricks)
+                            .patternLine("sss")
+                            .addCriterion("has"+toPath(bricks), hasItem(bricks))
+                            .build(consumer, toRL(toPath(slab)));
+                    SingleItemRecipeBuilder.stonecuttingRecipe(Ingredient.fromItems(bricks), slab, 2)
+                            .addCriterion("has"+toPath(bricks), hasItem(bricks))
+                            .build(consumer, toRL(toPath(slab)));
+                }
             }
             if(material.hasSubtype(MaterialUseType.INGOT) && material.hasSubtype(MaterialUseType.RAW_CRYSTAL)) {
                 addBlastingRecipe(raw_crystal, ingot, 0.15f, 150, consumer);
@@ -142,10 +167,11 @@ public class IGRecipeProvider extends RecipeProvider {
             }
 
             if (material.hasSubtype(MaterialUseType.PLATE)) {
+                //addHammering(MaterialUseType.PLATE.getItem(material), ingot, consumer);
                 MetalPressRecipeBuilder.builder(IEItems.Molds.moldPlate, tags.plate, 1).addInput(tags.ingot)
                         .setEnergy(2400).build(consumer, toRL("metalpress/plate_" + material.getName()));
                 if(material.hasSubtype(MaterialUseType.SHEETMETAL)) {
-                    Item sheetmetal = MaterialUseType.SHEETMETAL.getBlock(material).asItem();
+                    Item sheetmetal = MaterialUseType.SHEETMETAL.getItem(material);
                     ShapedRecipeBuilder.shapedRecipe(sheetmetal)
                             .key('s', tags.plate)
                             .patternLine(" s ")
@@ -153,6 +179,24 @@ public class IGRecipeProvider extends RecipeProvider {
                             .patternLine(" s ")
                             .addCriterion("has_"+toPath(MaterialUseType.PLATE.getItem(material)), hasItem(tags.plate))
                             .build(consumer, toRL(toPath(sheetmetal)));
+                    if(material.hasSubtype(MaterialUseType.SHEETMETAL_STAIRS)) {
+                        Item stair = MaterialUseType.SHEETMETAL_STAIRS.getItem(material);
+                        ShapedRecipeBuilder.shapedRecipe(stair, 4)
+                                .key('s', sheetmetal)
+                                .patternLine("s  ")
+                                .patternLine("ss ")
+                                .patternLine("sss")
+                                .addCriterion("has"+toPath(sheetmetal), hasItem(sheetmetal))
+                                .build(consumer, toRL(toPath(stair)));
+                    }
+                    if(material.hasSubtype(MaterialUseType.SLAB)) {
+                        Item slab = MaterialUseType.SLAB.getItem(material);
+                        ShapedRecipeBuilder.shapedRecipe(slab, 6)
+                                .key('s', sheetmetal)
+                                .patternLine("sss")
+                                .addCriterion("has"+toPath(sheetmetal), hasItem(sheetmetal))
+                                .build(consumer, toRL(toPath(slab)));
+                    }
                 }
             }
 
@@ -204,10 +248,16 @@ public class IGRecipeProvider extends RecipeProvider {
                     if(processed_material.hasSubtype(MaterialUseType.DIRTY_CRUSHED_ORE)) {
                         crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 1);
                         crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dirty_crushed_ore_" + material.getName()));
+                        crusherBuilder = CrusherRecipeBuilder.builder(tags.dirty_ore_crushed, 2);
+                        crusherBuilder.addInput(MaterialUseType.ORE_STONE.getItem(stone_base.getMaterial(), material)).setEnergy(12000).build(consumer, toRL("crusher/dirty_crushed_ore_" + material.getName()));
+                        addHammering(MaterialUseType.DIRTY_CRUSHED_ORE.getItem(stone_base.getMaterial(), material), ore_chunk, consumer);
                     } else if(processed_material.hasSubtype(MaterialUseType.DUST))
                     {
                         crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 1);
                         crusherBuilder.addInput(ore_chunk).setEnergy(6000).build(consumer, toRL("crusher/dust_" + material.getName()));
+                        crusherBuilder = CrusherRecipeBuilder.builder(tags.dust, 2);
+                        crusherBuilder.addInput(MaterialUseType.ORE_STONE.getItem(stone_base.getMaterial(), material)).setEnergy(12000).build(consumer, toRL("crusher/dust_" + material.getName()));
+                        addHammering(dust, ore_chunk, consumer);
                     }
                 }
 
@@ -553,6 +603,12 @@ public class IGRecipeProvider extends RecipeProvider {
                 .patternLine("sss")
                 .addCriterion("has_"+toPath(smallItem), hasItem(smallItem))
                 .build(out, toRL(toPath(bigItem)));
+    }
+
+    private void addHammering(IItemProvider result, IItemProvider input, Consumer<IFinishedRecipe> consumer) {
+        HammerCrushingRecipeBuilder hammerBuilder = HammerCrushingRecipeBuilder.builder(result);
+        hammerBuilder.addInput(input);
+        hammerBuilder.build(consumer, toRL("crafting/hammering_" + result.asItem().getRegistryName().getPath().toLowerCase()));
     }
 
     private final int standardSmeltingTime = 200;

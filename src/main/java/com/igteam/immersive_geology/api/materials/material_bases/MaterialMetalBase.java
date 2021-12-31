@@ -203,6 +203,8 @@ public abstract class MaterialMetalBase extends Material
 			bloomeryNativeIngot.addItemInput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.CRUSHED_ORE), 2));
 			bloomeryNativeIngot.addItemOutput(new ItemStack(IGRegistrationHolder.getItemByMaterial(this, MaterialUseType.INGOT)));
 
+
+
 			inheritedProcessingMethods.add(bloomeryNativeIngot);
 			inheritedProcessingMethods.add(defaultNativeOreCrushing);
 			inheritedProcessingMethods.add(manualClean);

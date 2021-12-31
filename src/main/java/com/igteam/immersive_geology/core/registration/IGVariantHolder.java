@@ -233,7 +233,8 @@ public class IGVariantHolder {
                 registerSlabBlock(material);
                 break;
             case SHEETMETAL_STAIRS:
-                registerStairsBlock(material);
+            case STAIRS:
+                registerStairsBlock(material, type);
                 break;
             case FLUIDS:
                 break;
@@ -273,11 +274,10 @@ public class IGVariantHolder {
         IGRegistrationHolder.registeredIGItems.put(holder_key, block.asItem());
     }
 
-    private static void registerStairsBlock(Material material)
+    private static void registerStairsBlock(Material material, MaterialUseType type)
     {
-        MaterialUseType type = MaterialUseType.SHEETMETAL_STAIRS;
         String holder_key = type.getName() + "_" + material.getName();
-        IGStairsBlock block = new IGStairsBlock(holder_key, material,type);
+        IGStairsBlock block = new IGStairsBlock(holder_key, material, type);
         if (material instanceof MaterialMetalBase)
         {
             block.setParentTexture("block/greyscale/metal/sheetmetal");

@@ -17,8 +17,8 @@
     }
   },
   "textures": {
-    "all": "immersive_geology:block/greyscale/metal/sheetmetal",
-    "particle": "immersive_geology:block/greyscale/metal/sheetmetal"
+    "all": "immersive_geology:block/greyscale/stone/small_bricks",
+    "particle": "immersive_geology:block/greyscale/stone/small_bricks"
   },
   "elements": [
     {   "from": [ 0, 0, 0 ],

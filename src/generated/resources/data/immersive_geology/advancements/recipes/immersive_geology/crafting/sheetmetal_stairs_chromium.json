@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/sheetmetal_stairs_chromium"
+    ]
+  },
+  "criteria": {
+    "hassheetmetal_chromium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:sheetmetal_chromium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/sheetmetal_stairs_chromium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hassheetmetal_chromium",
+      "has_the_recipe"
+    ]
+  ]
+}

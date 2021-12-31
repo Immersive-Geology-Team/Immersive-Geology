@@ -48,7 +48,7 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType,IEBlockInt
         blockMaterialData.put(BlockMaterialType.BASE_MATERIAL, material);
         this.setRegistryName(registryName.toLowerCase());
         holder_name = registryName.toLowerCase();
-        blockUseType = itemDropType == MaterialUseType.SHEETMETAL ? MaterialUseType.SHEETMETAL_STAIRS : MaterialUseType.STAIRS;
+        blockUseType = itemDropType;
         this.itemDrop = itemDropType;
         this.itemBlock = new IGBlockItem(this, this, blockUseType.getSubgroup(), material);
         itemBlock.setRegistryName(registryName.toLowerCase());
