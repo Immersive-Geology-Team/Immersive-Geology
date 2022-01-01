@@ -323,8 +323,8 @@ public class IGItemModelProvider extends ItemModelProvider {
         doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
         doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
         doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
-        doTransform(trans, Perspective.GUI, new Vector3f(6, -6, 0), new Vector3f(30, 225, 0), 0.1875F);
-        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+        doTransform(trans, Perspective.GUI, new Vector3f(0, -7, 0), new Vector3f(30, 120, 0), 0.08F);
+        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.1F);
         doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
     }
 
@@ -337,7 +337,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
         doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
         doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
-        doTransform(trans, Perspective.GUI, new Vector3f(6, -6, 0), new Vector3f(30, 225, 0), 0.1875F);
+        doTransform(trans, Perspective.GUI, new Vector3f(0F, -3F, 0), new Vector3f(30, 225, 0), 0.16F);
         doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
         doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
     }
