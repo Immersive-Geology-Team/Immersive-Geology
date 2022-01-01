@@ -38,13 +38,12 @@ public class CrystalizerRecipeSerializer extends IERecipeSerializer<CrystalRecip
         int time = packetBuffer.readInt();
         CrystalRecipe recipe = new CrystalRecipe(resourceLocation,  item_output, fluid_input, energy, time);
         return recipe;
-
     }
 
     @Override
     public void write(PacketBuffer packetBuffer, CrystalRecipe crystalRecipe) {
         crystalRecipe.getInputFluid().write(packetBuffer);
-        packetBuffer.writeItemStack(crystalRecipe.getItemOutputs().get(0));
+        packetBuffer.writeItemStack(crystalRecipe.getItemOutput());
 
         packetBuffer.writeInt(crystalRecipe.getTotalProcessEnergy());
         packetBuffer.writeInt(crystalRecipe.getTotalProcessTime());

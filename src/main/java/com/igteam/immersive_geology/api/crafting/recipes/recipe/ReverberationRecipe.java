@@ -77,11 +77,6 @@ public class ReverberationRecipe extends IGMultiblockRecipe
     }
 
     @Override
-    public List<IngredientWithSize> getItemInputs() {
-        return NonNullList.from(input);
-    }
-
-    @Override
     public NonNullList<ItemStack> getRemainingItems(IInventory inv) {
         return super.getRemainingItems(inv);
     }
@@ -107,5 +102,14 @@ public class ReverberationRecipe extends IGMultiblockRecipe
 
     public int getSlotOffset(){
         return slotOffset;
+    }
+
+    @Override
+    public NonNullList<ItemStack> getItemOutputs() {
+        return NonNullList.from(output);
+    }
+
+    public IngredientWithSize getInput() {
+        return input;
     }
 }

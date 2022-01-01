@@ -44,8 +44,8 @@ public class CalcinationRecipeSerializer extends IERecipeSerializer<CalcinationR
 
     @Override
     public void write(PacketBuffer packetBuffer, CalcinationRecipe calcinationRecipe) {
-        calcinationRecipe.getItemInputs().get(0).write(packetBuffer);
-        packetBuffer.writeItemStack(calcinationRecipe.getItemOutputs().get(0));
+        calcinationRecipe.getItemInput().write(packetBuffer);
+        packetBuffer.writeItemStack(calcinationRecipe.getRecipeOutput());
 
         packetBuffer.writeInt(calcinationRecipe.getTotalProcessEnergy());
         packetBuffer.writeInt(calcinationRecipe.getTotalProcessTime());

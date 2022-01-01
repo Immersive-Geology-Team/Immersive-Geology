@@ -31,6 +31,7 @@ public class Serializers {
     public static final RegistryObject<IERecipeSerializer<CrystalRecipe>> CRYSTALIZER_SERIALIZER = RECIPE_SERIALIZERS.register(
             "crystalizer", CrystalizerRecipeSerializer::new
     );
+
     public static final RegistryObject<IERecipeSerializer<CalcinationRecipe>> ROTARY_KILN_SERIALIZER = RECIPE_SERIALIZERS.register(
             "rotary_kiln", CalcinationRecipeSerializer::new
     );

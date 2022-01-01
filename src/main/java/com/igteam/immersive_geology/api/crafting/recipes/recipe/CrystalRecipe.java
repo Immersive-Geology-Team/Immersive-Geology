@@ -50,7 +50,6 @@ public class CrystalRecipe extends IGMultiblockRecipe
 
         this.fluidInputList = Collections.singletonList(fluidInput);
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
-
         timeAndEnergy(time, energy);
         modifyTimeAndEnergy(IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_energyModifier::get, IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_timeModifier::get);
     }
@@ -62,6 +61,15 @@ public class CrystalRecipe extends IGMultiblockRecipe
 
     @Override
     public boolean shouldCheckItemAvailability() {return false;}
+
+    public ItemStack getItemOutput() {
+        return itemOutput;
+    }
+
+    @Override
+    public NonNullList<ItemStack> getItemOutputs() {
+        return outputList;
+    }
 
     @Override
     public int getMultipleProcessTicks() {

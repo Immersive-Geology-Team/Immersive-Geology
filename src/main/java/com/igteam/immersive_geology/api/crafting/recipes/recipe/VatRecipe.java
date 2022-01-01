@@ -137,6 +137,18 @@ public class VatRecipe extends IGMultiblockRecipe
         return outputList;
     }
 
+    public IngredientWithSize getItemInput() {
+        return itemInput;
+    }
+
+    public ItemStack getItemOutput() {
+        return itemOutput;
+    }
+
+    public FluidStack getFluidOutput() {
+        return fluidOutput;
+    }
+
     public List<FluidTagInput> getInputFluids(){
         return fluidInputList;
     }

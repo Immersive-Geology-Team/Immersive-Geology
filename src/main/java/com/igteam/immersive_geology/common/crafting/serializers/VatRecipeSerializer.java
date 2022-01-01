@@ -60,10 +60,19 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public VatRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        IngredientWithSize item_input = IngredientWithSize.read(buffer);
+        boolean hasItemInput = buffer.readBoolean();
+        IngredientWithSize item_input = IngredientWithSize.of(ItemStack.EMPTY);
+
+        if(hasItemInput) item_input = IngredientWithSize.read(buffer);
+
 
         FluidTagInput fluid_input1 = FluidTagInput.read(buffer);
-        FluidTagInput fluid_input2 = FluidTagInput.read(buffer);
+
+        boolean hasSecondaryFluidInput = buffer.readBoolean();
+
+        FluidTagInput fluid_input2 = null;
+        if(hasSecondaryFluidInput) fluid_input2 = FluidTagInput.read(buffer);
+
 
         ItemStack item_output = buffer.readItemStack();
         FluidStack fluid_output = buffer.readFluidStack();
@@ -77,15 +86,24 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public void write(PacketBuffer buffer, VatRecipe recipe) {
-        if(!recipe.getItemInputs().isEmpty())
-        recipe.getItemInputs().get(0).write(buffer);
+        boolean hasInputItem = recipe.getItemInput() != null;
+        buffer.writeBoolean(hasInputItem);
+        if(hasInputItem) {
+            recipe.getItemInput().write(buffer);
+        }
 
         List<FluidTagInput> inputFluids = recipe.getInputFluids();
         inputFluids.get(0).write(buffer);
+
+        boolean hasSecondaryFluidInput = inputFluids.size() > 1;
+        buffer.writeBoolean(hasSecondaryFluidInput);
+        if(hasSecondaryFluidInput)
         inputFluids.get(1).write(buffer);
 
-        buffer.writeItemStack(recipe.getItemOutputs().get(0));
-        buffer.writeFluidStack(recipe.getFluidOutputs().get(0));
+        buffer.writeItemStack(recipe.getItemOutput());
+
+        if(recipe.getFluidOutput() != null)
+        buffer.writeFluidStack(recipe.getFluidOutput());
 
         buffer.writeInt(recipe.getTotalProcessEnergy());
         buffer.writeInt(recipe.getTotalProcessTime());
