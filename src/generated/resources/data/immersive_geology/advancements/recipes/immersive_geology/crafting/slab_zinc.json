@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/slab_zinc"
+    ]
+  },
+  "criteria": {
+    "hassheetmetal_zinc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:sheetmetal_zinc"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/slab_zinc"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hassheetmetal_zinc",
+      "has_the_recipe"
+    ]
+  ]
+}

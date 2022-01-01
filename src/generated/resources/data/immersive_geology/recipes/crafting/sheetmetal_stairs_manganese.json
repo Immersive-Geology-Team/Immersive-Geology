@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s  ",
+    "ss ",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "immersive_geology:sheetmetal_manganese"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:sheetmetal_stairs_manganese",
+    "count": 4
+  }
+}

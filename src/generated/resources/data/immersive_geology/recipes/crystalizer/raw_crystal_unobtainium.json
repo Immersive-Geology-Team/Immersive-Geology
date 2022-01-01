@@ -1,0 +1,12 @@
+{
+  "type": "immersive_geology:crystalizer",
+  "result": {
+    "item": "immersive_geology:raw_crystal_unobtainium"
+  },
+  "energy": 4000,
+  "time": 480,
+  "fluid_input": {
+    "tag": "forge:unobtainium_hydrochloric_acid",
+    "amount": 125
+  }
+}

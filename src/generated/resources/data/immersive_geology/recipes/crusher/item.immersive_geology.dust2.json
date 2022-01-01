@@ -1,11 +1,18 @@
 {
   "type": "immersiveengineering:crusher",
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "immersive_geology:tiny_dust_chromium"
+      }
+    }
+  ],
   "result": {
-    "item": "immersive_geology:dust_anatase"
+    "item": "immersive_geology:dust_chromium"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_anatase"
+    "item": "immersive_geology:raw_crystal_chromium"
   },
   "energy": 0
 }

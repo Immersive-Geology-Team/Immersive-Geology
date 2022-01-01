@@ -1,11 +1,18 @@
 {
   "type": "immersiveengineering:crusher",
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "immersive_geology:tiny_dust_unobtainium"
+      }
+    }
+  ],
   "result": {
-    "item": "immersive_geology:dust_thorite"
+    "item": "immersive_geology:dust_unobtainium"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_thorite"
+    "item": "immersive_geology:raw_crystal_unobtainium"
   },
   "energy": 0
 }

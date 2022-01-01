@@ -44,6 +44,7 @@ public enum MaterialEnum {
     Zirconium(new MaterialMetalZirconium()),
     Zinc(new MaterialMetalZinc()),
     Sodium(new MaterialMetalSodium()),
+    Unobtainium(new MaterialMetalUnobtainium()),
 
     Constantan(new MaterialMetalConstantan()),
     Electrum(new MaterialMetalElectrum()),
@@ -90,9 +91,9 @@ public enum MaterialEnum {
     Pyrite(new MaterialMineralPyrite()),
     Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
-    Unobtainium(new MaterialMetalUnobtainium()),
     Kaolinite(new MaterialMineralKaolinite()),
     Coal(new MaterialMineralCoal()),
+    Unobtania(new MaterialMineralUnobtania()),
 
     //Stones
     Vanilla(new MaterialStoneVanilla()),

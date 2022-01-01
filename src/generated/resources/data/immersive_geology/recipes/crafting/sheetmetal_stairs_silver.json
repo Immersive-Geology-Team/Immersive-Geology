@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s  ",
+    "ss ",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "immersive_geology:sheetmetal_silver"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:sheetmetal_stairs_silver",
+    "count": 4
+  }
+}

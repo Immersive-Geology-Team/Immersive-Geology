@@ -20,13 +20,13 @@
     "immersive_geology:sheetmetal_stairs_vanadium",
     "immersive_geology:sheetmetal_stairs_zirconium",
     "immersive_geology:sheetmetal_stairs_zinc",
+    "immersive_geology:sheetmetal_stairs_unobtainium",
     "immersive_geology:sheetmetal_stairs_constantan",
     "immersive_geology:sheetmetal_stairs_electrum",
     "immersive_geology:sheetmetal_stairs_steel",
     "immersive_geology:sheetmetal_stairs_viking_steel",
     "immersive_geology:sheetmetal_stairs_bronze",
     "immersive_geology:sheetmetal_stairs_arsenic",
-    "immersive_geology:sheetmetal_stairs_antimony",
-    "immersive_geology:sheetmetal_stairs_unobtainium"
+    "immersive_geology:sheetmetal_stairs_antimony"
   ]
 }

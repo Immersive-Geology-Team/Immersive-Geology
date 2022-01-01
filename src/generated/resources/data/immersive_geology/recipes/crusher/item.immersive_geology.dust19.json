@@ -1,11 +1,18 @@
 {
   "type": "immersiveengineering:crusher",
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "immersive_geology:tiny_dust_zinc"
+      }
+    }
+  ],
   "result": {
-    "item": "immersive_geology:dust_saltpeter"
+    "item": "immersive_geology:dust_zinc"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_saltpeter"
+    "item": "immersive_geology:raw_crystal_zinc"
   },
   "energy": 0
 }

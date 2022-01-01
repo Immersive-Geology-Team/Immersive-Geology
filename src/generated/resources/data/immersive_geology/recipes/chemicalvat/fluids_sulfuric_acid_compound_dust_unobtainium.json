@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluids_sulfuric_acid",
+    "amount": 125
+  },
+  "result": {
+    "item": "immersive_geology:compound_dust_unobtainium"
+  },
+  "fluid_input1": {
+    "tag": "forge:unobtania_sulfuric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "forge:brine",
+    "amount": 125
+  },
+  "energy": 2000,
+  "time": 480
+}

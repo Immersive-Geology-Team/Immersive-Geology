@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/slab_titanium"
+    ]
+  },
+  "criteria": {
+    "hassheetmetal_titanium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:sheetmetal_titanium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/slab_titanium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hassheetmetal_titanium",
+      "has_the_recipe"
+    ]
+  ]
+}

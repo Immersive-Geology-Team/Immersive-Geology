@@ -1,11 +1,18 @@
 {
   "type": "immersiveengineering:crusher",
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "immersive_geology:tiny_dust_lead"
+      }
+    }
+  ],
   "result": {
-    "item": "immersive_geology:dust_cobaltite"
+    "item": "immersive_geology:dust_lead"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_cobaltite"
+    "item": "immersive_geology:raw_crystal_lead"
   },
   "energy": 0
 }

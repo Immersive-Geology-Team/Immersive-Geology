@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_vanadinite"
+    "item": "immersive_geology:dust_ilmenite"
   },
   "input": {
-    "item": "immersive_geology:crushed_ore_vanadinite"
+    "item": "immersive_geology:crushed_ore_ilmenite"
   },
   "energy": 0
 }

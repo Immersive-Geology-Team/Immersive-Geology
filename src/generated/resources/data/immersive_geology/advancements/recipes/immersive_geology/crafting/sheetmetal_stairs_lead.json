@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/sheetmetal_stairs_lead"
+    ]
+  },
+  "criteria": {
+    "hassheetmetal_lead": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:sheetmetal_lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/sheetmetal_stairs_lead"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hassheetmetal_lead",
+      "has_the_recipe"
+    ]
+  ]
+}

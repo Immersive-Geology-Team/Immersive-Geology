@@ -21,13 +21,13 @@
     "immersive_geology:ingot_zirconium",
     "immersive_geology:ingot_zinc",
     "immersive_geology:ingot_sodium",
+    "immersive_geology:ingot_unobtainium",
     "immersive_geology:ingot_constantan",
     "immersive_geology:ingot_electrum",
     "immersive_geology:ingot_steel",
     "immersive_geology:ingot_viking_steel",
     "immersive_geology:ingot_bronze",
     "immersive_geology:ingot_arsenic",
-    "immersive_geology:ingot_antimony",
-    "immersive_geology:ingot_unobtainium"
+    "immersive_geology:ingot_antimony"
   ]
 }

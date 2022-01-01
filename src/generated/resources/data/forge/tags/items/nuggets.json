@@ -21,13 +21,13 @@
     "immersive_geology:nugget_zirconium",
     "immersive_geology:nugget_zinc",
     "immersive_geology:nugget_sodium",
+    "immersive_geology:nugget_unobtainium",
     "immersive_geology:nugget_constantan",
     "immersive_geology:nugget_electrum",
     "immersive_geology:nugget_steel",
     "immersive_geology:nugget_viking_steel",
     "immersive_geology:nugget_bronze",
     "immersive_geology:nugget_arsenic",
-    "immersive_geology:nugget_antimony",
-    "immersive_geology:nugget_unobtainium"
+    "immersive_geology:nugget_antimony"
   ]
 }

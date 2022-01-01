@@ -21,13 +21,13 @@
     "immersive_geology:storage_block_zirconium",
     "immersive_geology:storage_block_zinc",
     "immersive_geology:storage_block_sodium",
+    "immersive_geology:storage_block_unobtainium",
     "immersive_geology:storage_block_constantan",
     "immersive_geology:storage_block_electrum",
     "immersive_geology:storage_block_steel",
     "immersive_geology:storage_block_viking_steel",
     "immersive_geology:storage_block_bronze",
     "immersive_geology:storage_block_arsenic",
-    "immersive_geology:storage_block_antimony",
-    "immersive_geology:storage_block_unobtainium"
+    "immersive_geology:storage_block_antimony"
   ]
 }
