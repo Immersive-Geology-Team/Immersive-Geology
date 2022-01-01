@@ -8,13 +8,14 @@ license="LGPL v2.1"
 [[mods]]
 modId="immersive_geology"
 updateJSONURL=""
-version="1.0v2"
+version="1.0v5"
 displayName="Immersive Geology"
 displayURL=""
 credits="Sen#1629 - Chemical Vat Model"
 authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
 description='''
-Many Rocks, Many Metals, Many things
+Immersive Implementation of Minerals and ore processing, adds pretty much all the metals and realistic ore options
+along with multiblocks to process them!
 '''
 
 [[dependencies.immersive_geology]]
