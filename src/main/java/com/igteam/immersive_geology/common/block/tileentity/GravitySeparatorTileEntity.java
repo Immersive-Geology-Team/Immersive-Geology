@@ -89,7 +89,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public Set<BlockPos> getEnergyPos() {
-        return null;
+        return ImmutableSet.of(new BlockPos(1, 3, 1));
     }
 
     @Override
