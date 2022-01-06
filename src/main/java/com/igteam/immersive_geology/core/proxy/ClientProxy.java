@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.client.IEDefaultColourHandlers;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
+import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import blusunrize.lib.manual.ManualElementItem;
@@ -14,20 +15,28 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.api.materials.Material;
 import com.igteam.immersive_geology.api.materials.MaterialEnum;
 import com.igteam.immersive_geology.api.materials.MaterialUseType;
+import com.igteam.immersive_geology.client.gui.ReverberationScreen;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.*;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
+import com.igteam.immersive_geology.common.gui.ReverberationContainer;
 import com.igteam.immersive_geology.common.multiblocks.*;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.IHasContainer;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -204,5 +213,20 @@ public class ClientProxy extends ServerProxy {
         builder.addSpecialElement("reverberation_furnace0", 0, () -> new ManualElementMultiblock(man, ReverberationFurnaceMultiblock.INSTANCE));
         builder.readFromFile(location);
         man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
+    }
+
+    protected static ResourceLocation modLoc(String str){
+        return new ResourceLocation(IGLib.MODID, str);
+    }
+    @SuppressWarnings("unchecked")
+    public <C extends Container, S extends Screen & IHasContainer<C>> void registerScreen(ResourceLocation name, ScreenManager.IScreenFactory<C, S> factory){
+        ContainerType<C> type = (ContainerType<C>) GuiHandler.getContainerType(name);
+        ScreenManager.registerFactory(type, factory);
+    }
+
+    public void registerContainersAndScreens() {
+        GuiHandler.register(ReverberationFurnaceTileEntity.class,
+                new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationContainer::new);
+        registerScreen(new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationScreen::new);
     }
 }

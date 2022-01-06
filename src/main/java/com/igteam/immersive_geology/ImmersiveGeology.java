@@ -73,6 +73,8 @@ public class ImmersiveGeology
 
 		IGTileTypes.REGISTER.register(modBus);
 		Serializers.RECIPE_SERIALIZERS.register(modBus);
+
+		proxy.registerContainersAndScreens();
 	}
 
 	public void addReloadListeners(AddReloadListenerEvent event){

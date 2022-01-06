@@ -41,7 +41,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
-public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<ReverberationFurnaceTileEntity, ReverberationRecipe> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
+public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<ReverberationFurnaceTileEntity, ReverberationRecipe> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IBlockOverlayText,  IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
     private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(ReverberationFurnaceTileEntity::getShape);
 
     private Logger log = ImmersiveGeology.getNewLogger();
@@ -136,6 +136,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             }
         }
     }
+
 
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
@@ -397,7 +398,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
         return false;
     }
-
+/*
     @Override
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
@@ -523,5 +524,5 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         }
 
         return false;
-    }
+    }*/
 }

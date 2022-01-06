@@ -32,8 +32,8 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
 
     @Override
     public void setIngredients(CalcinationRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInputs().get(0).getMatchingStacks()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
+        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.getItemInput().getMatchingStacks()));
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
 
     }
 

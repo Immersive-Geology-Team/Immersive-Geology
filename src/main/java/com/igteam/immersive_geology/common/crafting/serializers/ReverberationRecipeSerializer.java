@@ -22,9 +22,9 @@ public class ReverberationRecipeSerializer extends IERecipeSerializer<Reverberat
     @Override
     public ReverberationRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
         ItemStack output = readOutput(json.get("result"));
-        IngredientWithSize input = IngredientWithSize.deserialize(JSONUtils.getJsonObject(json, "item_input"));
         Integer time = JSONUtils.getInt(json, "time");
         Float wasteMult = JSONUtils.getFloat(json, "wasteMultiplier");
+        IngredientWithSize input = IngredientWithSize.deserialize(JSONUtils.getJsonObject(json, "item_input"));
         ReverberationRecipe recipe = new ReverberationRecipe(recipeId, output, input, time, wasteMult);
         return recipe;
     }

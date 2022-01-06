@@ -21,11 +21,12 @@ public class CalcinationRecipeSerializer extends IERecipeSerializer<CalcinationR
 
     @Override
     public CalcinationRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        IngredientWithSize item_input = IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
         ItemStack item_output = readOutput(json.get("result"));
 
         int energy = JSONUtils.getInt(json, "energy");
         int time = JSONUtils.getInt(json, "time");
+        IngredientWithSize item_input = IngredientWithSize.deserialize((JSONUtils.getJsonObject(json, "item_input")));
+
         CalcinationRecipe recipe = new CalcinationRecipe(recipeId,  item_output, item_input, energy, time);
         return recipe;
     }

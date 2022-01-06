@@ -1,13 +1,22 @@
 package com.igteam.immersive_geology.core.proxy;
 
+import blusunrize.immersiveengineering.common.gui.GuiHandler;
+import com.igteam.immersive_geology.client.gui.ReverberationScreen;
+import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
+import com.igteam.immersive_geology.common.gui.ReverberationContainer;
 import com.igteam.immersive_geology.common.world.IGWorldGeneration;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.gui.IHasContainer;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -45,5 +54,15 @@ public class ServerProxy implements Proxy {
 
     protected static ResourceLocation modLoc(String str){
         return new ResourceLocation(IGLib.MODID, str);
+    }
+    @SuppressWarnings("unchecked")
+    public <C extends Container, S extends Screen & IHasContainer<C>> void registerScreen(ResourceLocation name, ScreenManager.IScreenFactory<C, S> factory){
+        ContainerType<C> type = (ContainerType<C>) GuiHandler.getContainerType(name);
+        ScreenManager.registerFactory(type, factory);
+    }
+
+    public void registerContainersAndScreens() {
+        GuiHandler.register(ReverberationFurnaceTileEntity.class,
+                new ResourceLocation(IGLib.MODID, "reverberation_furnace"),ReverberationContainer::new);
     }
 }

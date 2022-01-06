@@ -106,7 +106,7 @@ public class ReverberationRecipe extends IGMultiblockRecipe
 
     @Override
     public NonNullList<ItemStack> getItemOutputs() {
-        return NonNullList.from(output);
+        return outputList;
     }
 
     public IngredientWithSize getInput() {
