@@ -1,8 +1,0 @@
-{
-  "parent": "immersive_geology:block/base/slab/slab",
-  "textures": {
-    "side": "immersive_geology:block/static_block/refractory_brick",
-    "all": "immersive_geology:block/static_block/refractory_brick",
-    "cover": "immersive_geology:block/static_block/refractory_brick"
-  }
-}

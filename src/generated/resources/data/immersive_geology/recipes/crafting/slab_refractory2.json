@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "immersive_geology:bricks_refractory"
-  },
-  "result": "immersive_geology:slab_refractory",
-  "count": 2
-}

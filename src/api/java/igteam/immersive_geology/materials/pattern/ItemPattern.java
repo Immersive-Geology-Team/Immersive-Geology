@@ -1,0 +1,64 @@
+package igteam.immersive_geology.materials.pattern;
+
+import igteam.immersive_geology.menu.ItemSubGroup;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public enum ItemPattern implements MaterialPattern {
+    ingot(ItemSubGroup.processed),
+    stone_chunk,
+    stone_bit,
+    ore_chunk(true),
+    ore_bit(true),
+    crushed_ore,
+    dirty_crushed_ore(true),
+    dust(ItemSubGroup.processed),
+    compound_dust(ItemSubGroup.processed),
+    metal_oxide(ItemSubGroup.processed),
+    wire(ItemSubGroup.processed),
+    gear(ItemSubGroup.processed),
+    rod(ItemSubGroup.processed),
+    plate(ItemSubGroup.processed),
+    nugget(ItemSubGroup.processed),
+    crystal,
+    clay(ItemSubGroup.misc),
+    fuel,
+    slag(ItemSubGroup.misc);
+
+    private final ItemSubGroup subgroup;
+    private final boolean isComplex;
+
+    ItemPattern(ItemSubGroup group, boolean isComplex){
+        this.subgroup = group;
+        this.isComplex = isComplex;
+    }
+
+    ItemPattern(ItemSubGroup group){
+        this(group, false);
+    }
+
+    ItemPattern(boolean isComplex){
+        this.subgroup = ItemSubGroup.natural;
+        this.isComplex = isComplex;
+    }
+
+    ItemPattern(){
+        this(ItemSubGroup.natural, false);
+    }
+
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
+
+    @Override
+    public ItemSubGroup getSubGroup() {
+        return subgroup;
+    }
+
+    @Override
+    public boolean isComplexPattern() {
+        return isComplex;
+    }
+}

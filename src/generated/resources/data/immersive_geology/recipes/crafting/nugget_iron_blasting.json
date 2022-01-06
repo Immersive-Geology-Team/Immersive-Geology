@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "immersive_geology:ore_bit_vanilla_iron"
-  },
-  "result": "immersive_geology:nugget_iron",
-  "experience": 0.0,
-  "cookingtime": 50
-}

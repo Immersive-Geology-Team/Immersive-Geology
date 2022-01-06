@@ -1,40 +1,35 @@
-modLoader="javafml"
-loaderVersion="[36,)"
-logoFile="logo.png"
-logoBlur=false
-issueTrackerURL=""
-license="LGPL v2.1"
-
-[[mods]]
-modId="immersive_geology"
-updateJSONURL=""
-version="1.0v6"
-displayName="Immersive Geology"
-displayURL=""
-credits="Sen#1629 - Chemical Vat Model"
-authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
+modLoader="javafml" #mandatory
+loaderVersion="[39,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+[[mods]] #mandatory
+modId="immersive_geology" #mandatory
+version="${version}" #mandatory
+displayName="Immersive Geology" #mandatory
+logoFile="examplemod.png" #optional
+credits="Thanks for this example mod goes to Java" #optional
+authors="Love, Cheese and small house plants" #optional
 description='''
-Immersive Implementation of Minerals and ore processing, adds pretty much all the metals and realistic ore options
-along with multiblocks to process them!
+This is a long form description of the mod. You can write whatever you want here
+
+Have some lorem ipsum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 '''
-
-[[dependencies.immersive_geology]]
-    modId="immersiveengineering"
-    mandatory=true
-    versionRange="[1.16.5-5.0.4,)"
-    ordering="BEFORE"
-    side="BOTH"
-
 [[dependencies.immersive_geology]]
     modId="forge"
-    mandatory=true
-    versionRange="[36.0.27,)"
+    mandatory=true #mandatory
+    versionRange="${forge_version}"
     ordering="NONE"
     side="BOTH"
-
 [[dependencies.immersive_geology]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5]"
+    versionRange="${mc_version}"
     ordering="NONE"
+    side="BOTH"
+[[dependencies.immersive_geology]]
+    modId="immersiveengineering"
+    mandatory=true
+    versionRange="${ie_version}"
+    ordering="BEFORE"
     side="BOTH"

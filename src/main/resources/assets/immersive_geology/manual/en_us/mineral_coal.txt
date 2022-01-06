@@ -1,4 +1,0 @@
-Coal
-Minerals
-<&coal>
-Because we wanna override it

@@ -1,9 +1,0 @@
-{
-  "type": "immersiveengineering:hammer_crushing",
-  "result": {
-    "item": "immersive_geology:dirty_crushed_ore_vanilla_ilmenite"
-  },
-  "input": {
-    "item": "immersive_geology:ore_chunk_vanilla_ilmenite"
-  }
-}

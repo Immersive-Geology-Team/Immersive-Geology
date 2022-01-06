@@ -1,5 +1,0 @@
-base_intro
-base_intro_2
-biomes
-adv_intro
-tools

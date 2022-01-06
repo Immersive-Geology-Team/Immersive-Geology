@@ -1,0 +1,24 @@
+id: Enforce_Logger
+version: 10
+metadata:
+  name: Enforce Logger
+  shortDescription: Do not use System.out for Logging
+  level: error
+  language: java
+  enabled: true
+search:
+  methodcall:
+    name: println
+    "on":
+      field:
+        in:
+          class:
+            name: java.lang.System
+availableFixes:
+- name: Use Logger
+  actions:
+  - rewrite:
+      to: logger.log(java.util.logging.Level.INFO, {{{ arguments.0 }}})
+  - addField:
+      field: private final java.util.logging.Logger logger = Logger.getLogger({{{ name }}}.class.getName());
+      target: parentClass
