@@ -182,13 +182,13 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
-    compileOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.61:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.61")
 
-    compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.0.1-144:api")
-    runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.0.1-144")
+    compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145:api")
+    runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145")
 
-    datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.0.1-144:datagen")
+    datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145:datagen")
 
     testImplementation('junit:junit:4.13.2')
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
