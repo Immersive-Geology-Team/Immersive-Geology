@@ -172,7 +172,7 @@ public class IGRecipeProvider extends RecipeProvider {
                         .setEnergy(2400).build(consumer, toRL("metalpress/plate_" + material.getName()));
                 if(material.hasSubtype(MaterialUseType.SHEETMETAL)) {
                     Item sheetmetal = MaterialUseType.SHEETMETAL.getItem(material);
-                    ShapedRecipeBuilder.shapedRecipe(sheetmetal)
+                    ShapedRecipeBuilder.shapedRecipe(sheetmetal, 4)
                             .key('s', tags.plate)
                             .patternLine(" s ")
                             .patternLine("s s")
