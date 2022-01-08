@@ -9,7 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ClientProxy implements Proxy {
     @Override
-    public void onSetup(FMLCommonSetupEvent event) {
+    public void onCommonSetup(FMLCommonSetupEvent event) {
 
     }
 

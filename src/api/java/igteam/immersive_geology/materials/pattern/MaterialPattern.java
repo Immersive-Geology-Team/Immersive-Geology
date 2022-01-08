@@ -8,4 +8,8 @@ public interface MaterialPattern {
     ItemSubGroup getSubGroup();
 
     boolean isComplexPattern();
+
+    //Used for Tags (Clay is a bitch)
+    boolean hasSuffix();
+    String getSuffix();
 }

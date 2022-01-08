@@ -38,7 +38,7 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasStorageBlock() {
-        return true;
+        return !hasExistingImplementation();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasOreBlock() {
-        return isNative();
+        return isNative() &! hasExistingImplementation();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasIngot() {
-        return true;
+        return !hasExistingImplementation();
     }
 
     @Override
@@ -123,12 +123,12 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasPlate() {
-        return false;
+        return !hasExistingImplementation();
     }
 
     @Override
     protected boolean hasNugget() {
-        return true;
+        return hasIngot();
     }
 
     @Override

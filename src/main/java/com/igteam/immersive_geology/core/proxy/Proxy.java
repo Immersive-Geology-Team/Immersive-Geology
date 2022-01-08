@@ -5,7 +5,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public interface Proxy {
-    void onSetup(final FMLCommonSetupEvent event);
+    void onCommonSetup(final FMLCommonSetupEvent event);
     default void onFinishSetup(final FMLLoadCompleteEvent event){};
     default void onClientSetup(final FMLClientSetupEvent event){};
 }

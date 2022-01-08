@@ -22,16 +22,35 @@ public enum ItemPattern implements MaterialPattern {
     plate(ItemSubGroup.processed),
     nugget(ItemSubGroup.processed),
     crystal,
-    clay(ItemSubGroup.misc),
+    clay(ItemSubGroup.misc, ""),
     fuel,
     slag(ItemSubGroup.misc);
 
     private final ItemSubGroup subgroup;
     private final boolean isComplex;
+    private final String suffix;
+    private final boolean hasSuffix;
+
 
     ItemPattern(ItemSubGroup group, boolean isComplex){
         this.subgroup = group;
         this.isComplex = isComplex;
+        this.suffix = "";
+        this.hasSuffix = false;
+    }
+
+    ItemPattern(ItemSubGroup group, String suffix){
+        this.subgroup = group;
+        this.isComplex = false;
+        this.suffix = suffix;
+        this.hasSuffix = true;
+    }
+
+    ItemPattern(ItemSubGroup group, boolean isComplex, String suffix){
+        this.subgroup = group;
+        this.isComplex = isComplex;
+        this.suffix = suffix;
+        this.hasSuffix = true;
     }
 
     ItemPattern(ItemSubGroup group){
@@ -41,6 +60,8 @@ public enum ItemPattern implements MaterialPattern {
     ItemPattern(boolean isComplex){
         this.subgroup = ItemSubGroup.natural;
         this.isComplex = isComplex;
+        this.suffix = "";
+        this.hasSuffix = false;
     }
 
     ItemPattern(){
@@ -60,5 +81,15 @@ public enum ItemPattern implements MaterialPattern {
     @Override
     public boolean isComplexPattern() {
         return isComplex;
+    }
+
+    @Override
+    public boolean hasSuffix() {
+        return false;
+    }
+
+    @Override
+    public String getSuffix() {
+        return null;
     }
 }

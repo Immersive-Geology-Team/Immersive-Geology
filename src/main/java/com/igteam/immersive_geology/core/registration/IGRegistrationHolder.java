@@ -15,20 +15,31 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 
 public class IGRegistrationHolder {
-    private static Logger log = ImmersiveGeology.getNewLogger();
+    private static Logger logger = ImmersiveGeology.getNewLogger();
 
     public static void initialize(){
-        log.info("Registration of Material Interfaces");
+        logger.info("Registration of Material Interfaces");
         registerForInterface(StoneEnum.values());
         registerForInterface(MetalEnum.values());
         registerForInterface(MineralEnum.values());
         registerForInterface(FluidEnum.values());
         registerForInterface(GasEnum.values());
+    }
+
+
+    public static void buildRecipes() {
+        logger.log(Level.INFO, "Building Recipes");
+        buildMaterialRecipes(StoneEnum.values());
+        buildMaterialRecipes(MetalEnum.values());
+        buildMaterialRecipes(MineralEnum.values());
+        buildMaterialRecipes(FluidEnum.values());
+        buildMaterialRecipes(GasEnum.values());
     }
 
     private static void registerForInterface(MaterialInterface... material){
@@ -96,7 +107,7 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
-        log.info("Applying Item Registration");
+        logger.info("Applying Item Registration");
 
         IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((item) -> {
             event.getRegistry().register(item);
@@ -105,7 +116,7 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
-        log.info("Applying Block Registries");
+        logger.info("Applying Block Registries");
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
             event.getRegistry().register(block);
@@ -121,14 +132,6 @@ public class IGRegistrationHolder {
 
     public static ResourceLocation getRegistryKey(IGGenericItem item){
         return new ResourceLocation(IGLib.MODID, item.getHolderKey());
-    }
-
-    public static void buildRecipes() {
-        buildMaterialRecipes(StoneEnum.values());
-        buildMaterialRecipes(MetalEnum.values());
-        buildMaterialRecipes(MineralEnum.values());
-        buildMaterialRecipes(FluidEnum.values());
-        buildMaterialRecipes(GasEnum.values());
     }
 
     private static void buildMaterialRecipes(MaterialInterface... material){

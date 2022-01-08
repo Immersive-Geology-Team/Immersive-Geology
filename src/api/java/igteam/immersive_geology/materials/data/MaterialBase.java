@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import igteam.immersive_geology.processing.IGProcessingStage;
@@ -36,6 +38,8 @@ public abstract class MaterialBase {
     }
 
     public void build(){
+        logger.log(Level.INFO, "Building " + getName() + " Processing Stages");
+
         //Recipes this material implements
         setupProcessingStages();
 
@@ -171,6 +175,10 @@ public abstract class MaterialBase {
     protected abstract boolean hasCompoundDust();
 
     protected abstract boolean hasDirtyCrushedOre();
+
+    public boolean hasExistingImplementation(){
+        return false;
+    }
 
     public ItemStack getStack(MaterialPattern pattern, int amount){
         ItemStack stack = getStack(pattern);

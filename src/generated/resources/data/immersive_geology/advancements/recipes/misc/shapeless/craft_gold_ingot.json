@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:shapeless/craft_ingot_gold"
+      "immersive_geology:shapeless/craft_gold_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:shapeless/craft_ingot_gold"
+        "recipe": "immersive_geology:shapeless/craft_gold_ingot"
       }
     }
   },

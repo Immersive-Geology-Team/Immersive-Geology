@@ -1,6 +1,7 @@
 package igteam.immersive_geology.generators.recipes;
 
 import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
@@ -14,12 +15,17 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class IGRecipeProvider extends RecipeProvider {
+
+    private Logger logger = IGApi.getNewLogger();
+
     public IGRecipeProvider(DataGenerator gen) {
         super(gen);
     }
@@ -28,6 +34,7 @@ public class IGRecipeProvider extends RecipeProvider {
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         for(MaterialInterface metal : MetalEnum.values()){
             for(IGProcessingStage stage : metal.getStages()){
+                logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + metal.getName());
                 for(IGProcessingMethod method : stage.getMethods()){
                     switch (method.getRecipeType()){
                         case Crafting -> buildCraftingMethods((IGCraftingMethod) method, consumer);

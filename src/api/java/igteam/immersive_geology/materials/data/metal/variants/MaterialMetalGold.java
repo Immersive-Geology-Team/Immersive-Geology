@@ -1,11 +1,17 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.api.IEApi;
+import blusunrize.immersiveengineering.api.IEEnums;
+import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Items;
 
 public class MaterialMetalGold extends MaterialBaseMetal {
 
@@ -18,17 +24,17 @@ public class MaterialMetalGold extends MaterialBaseMetal {
         return 0xFFD700;
     }
 
-
     @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
-
 
         new IGProcessingStage("Extration Stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.crafting()
-                        .shapeless(getItem(ItemPattern.ingot), 16, MetalEnum.Silver.getItemTag(ItemPattern.ingot), MetalEnum.Silver.getItemTag(ItemPattern.nugget))
+                        .shapeless(Items.GOLD_INGOT, 16,
+                                IETags.getTagsFor(EnumMetals.SILVER).ingot,
+                                IETags.getTagsFor(EnumMetals.SILVER).nugget)
                         .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot)).build(this);
             }
         }.build(this);
@@ -36,6 +42,11 @@ public class MaterialMetalGold extends MaterialBaseMetal {
 
     @Override
     public boolean isNative() {
+        return true;
+    }
+
+    @Override
+    public boolean hasExistingImplementation(){
         return true;
     }
 }

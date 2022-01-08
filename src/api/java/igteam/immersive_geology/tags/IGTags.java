@@ -1,5 +1,6 @@
 package igteam.immersive_geology.tags;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -17,19 +18,31 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 import org.stringtemplate.v4.misc.Misc;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class IGTags {
+    private static Logger logger = IGApi.getNewLogger();
+
     public static HashMap<ItemPattern, HashMap<MaterialBase, Named<Item>>> IG_ITEM_TAGS = new HashMap<>();
     public static HashMap<BlockPattern, HashMap<MaterialBase, Named<Block>>> IG_BLOCK_TAGS = new HashMap<>();
     public static HashMap<MiscPattern, HashMap<MaterialBase, Named<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
     public static void initialize(){
+        logger.log(Level.INFO, "Initializing Tags");
         for (ItemPattern pattern : ItemPattern.values()) {
             IG_ITEM_TAGS.put(pattern, new HashMap<MaterialBase, Named<Item>>());
+            for (MaterialInterface metal : MetalEnum.values()) {
+                createWrapperForPattern(pattern, metal);
+            }
+        }
+
+        for (BlockPattern pattern : BlockPattern.values()) {
+            IG_BLOCK_TAGS.put(pattern, new HashMap<MaterialBase, Named<Block>>());
             for (MaterialInterface metal : MetalEnum.values()) {
                 createWrapperForPattern(pattern, metal);
             }
@@ -40,24 +53,34 @@ public class IGTags {
         if(m.hasPattern(p)) {
             if (p instanceof ItemPattern) {
                 HashMap<MaterialBase, Named<Item>> map = IG_ITEM_TAGS.get((ItemPattern) p);
-                map.put(m.get(), ItemTags.bind(wrapPattern(p, m).toString()));
+
+                map.put(m.get(), ItemTags.bind(
+                        p.hasSuffix() ? wrapPattern(p, m, p.getSuffix()).toString()
+                        : wrapPattern(p, m).toString()));
+
                 IG_ITEM_TAGS.put((ItemPattern) p, map);
             }
 
-            /*
+            if (p instanceof BlockPattern b) {
+                HashMap<MaterialBase, Named<Block>> map = IG_BLOCK_TAGS.get(b);
+                map.put(m.get(), BlockTags.bind(wrapPattern(b, m).toString()));
+                IG_BLOCK_TAGS.put(b, map);
+            }
 
-            if (p instanceof BlockPattern) {
-                IG_BLOCK_TAGS.put((BlockPattern) p, BlockTags.bind(wrapPattern(p, m).toString()));
+            if (p instanceof MiscPattern f) {
+                HashMap<MaterialBase, Named<Fluid>> map = IG_FLUID_TAGS.get(f);
+                map.put(m.get(), FluidTags.bind(wrapPattern(f, m).toString()));
+                IG_FLUID_TAGS.put(f, map);
             }
-            if (p instanceof MiscPattern) {
-                IG_FLUID_TAGS.put((MiscPattern) p, FluidTags.bind(wrapPattern(p, m).toString()));
-            }
-             */
         }
     }
 
+    private static ResourceLocation wrapPattern(MaterialPattern pattern, MaterialInterface m, String suffix) {
+        return forgeLoc(pattern.getName() + suffix + "/" + m.getName());
+    }
+
     private static ResourceLocation wrapPattern(MaterialPattern pattern, MaterialInterface m) {
-        return forgeLoc(pattern.getName() + "s/" + m.getName());
+        return wrapPattern(pattern, m, "s");
     }
 
     private static ResourceLocation forgeLoc(String path)
