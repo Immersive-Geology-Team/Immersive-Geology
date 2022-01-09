@@ -125,7 +125,12 @@ public class MaterialMetalUranium extends MaterialMetalBase
 		return false;
 	}
 
-/*@Nullable
+	@Override
+	public boolean hasStairs() {
+		return false;
+	}
+
+	/*@Nullable
 	@Override
 	public IItemTier getToolTier()
 	{

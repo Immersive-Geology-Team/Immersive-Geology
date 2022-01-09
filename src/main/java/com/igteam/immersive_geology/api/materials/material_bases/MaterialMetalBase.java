@@ -150,7 +150,7 @@ public abstract class MaterialMetalBase extends Material
 		return true;
 	}
 
-	public boolean hasStairs() { return true; }
+	public boolean hasStairs() { return hasSheetmetal(); }
 
 	public boolean hasDust()
 	{
