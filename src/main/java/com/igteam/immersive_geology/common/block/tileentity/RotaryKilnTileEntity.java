@@ -354,7 +354,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
 
     @Override
     public int getProcessQueueMaxLength() {
-        return 2;
+        return 1;
     }
 
     @Override
