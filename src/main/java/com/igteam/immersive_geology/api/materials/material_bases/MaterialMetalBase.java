@@ -140,9 +140,9 @@ public abstract class MaterialMetalBase extends Material
 		return true;
 	}
 
-	public boolean hasSheetmetal()
-	{
-		return true;
+	public boolean hasSheetmetal() {
+		//otherwise we have a bug
+		return hasPlate();
 	}
 
 	public boolean hasSlab()
