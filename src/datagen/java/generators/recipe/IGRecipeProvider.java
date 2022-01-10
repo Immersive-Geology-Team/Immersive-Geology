@@ -239,10 +239,11 @@ public class IGRecipeProvider extends RecipeProvider {
 
                     if (processed_material != null) {
                         Item ore_ingot = MaterialUseType.INGOT.getItem(processed_material);
+                        Item ore_crushed = MaterialUseType.CRUSHED_ORE.getItem(processed_material);
 
-                        if (ore_ingot != null && ore_chunk != null) {
-                            addBlastingRecipe(ore_chunk, ore_ingot, 0.15f, 150, consumer);
-                            log.debug("Generated Blasting Recipe for: " + ore_chunk.getRegistryName());
+                        if (ore_ingot != null && ore_crushed != null) {
+                            addBlastingRecipe(ore_crushed, ore_ingot, 0.15f, 150, consumer);
+                            log.debug("Generated Blasting Recipe for: " + ore_crushed.getRegistryName());
                         }
                     }
                     if(processed_material.hasSubtype(MaterialUseType.DIRTY_CRUSHED_ORE)) {

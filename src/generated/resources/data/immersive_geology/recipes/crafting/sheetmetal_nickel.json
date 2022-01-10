@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_nickel"
+    "item": "immersive_geology:sheetmetal_nickel",
+    "count": 4
   }
 }

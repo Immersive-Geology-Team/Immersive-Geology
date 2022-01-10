@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_electrum"
+    "item": "immersive_geology:sheetmetal_electrum",
+    "count": 4
   }
 }

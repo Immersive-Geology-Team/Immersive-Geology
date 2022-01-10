@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_zinc"
+    "item": "immersive_geology:sheetmetal_zinc",
+    "count": 4
   }
 }

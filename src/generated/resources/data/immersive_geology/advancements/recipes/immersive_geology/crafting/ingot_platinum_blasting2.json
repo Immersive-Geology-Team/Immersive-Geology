@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_platinum": {
+    "has_crushed_ore_platinum": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_platinum"
+            "item": "immersive_geology:crushed_ore_platinum"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_platinum",
+      "has_crushed_ore_platinum",
       "has_the_recipe"
     ]
   ]

@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_steel"
+    "item": "immersive_geology:sheetmetal_steel",
+    "count": 4
   }
 }

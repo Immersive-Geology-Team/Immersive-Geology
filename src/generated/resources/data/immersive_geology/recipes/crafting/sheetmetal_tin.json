@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_tin"
+    "item": "immersive_geology:sheetmetal_tin",
+    "count": 4
   }
 }

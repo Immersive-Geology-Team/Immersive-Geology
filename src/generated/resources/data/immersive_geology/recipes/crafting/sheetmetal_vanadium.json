@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_vanadium"
+    "item": "immersive_geology:sheetmetal_vanadium",
+    "count": 4
   }
 }

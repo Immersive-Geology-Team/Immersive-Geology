@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_arsenic": {
+    "has_crushed_ore_arsenic": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_arsenic"
+            "item": "immersive_geology:crushed_ore_arsenic"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_arsenic",
+      "has_crushed_ore_arsenic",
       "has_the_recipe"
     ]
   ]

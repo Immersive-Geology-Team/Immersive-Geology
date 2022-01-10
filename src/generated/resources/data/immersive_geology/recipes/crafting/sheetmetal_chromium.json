@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_chromium"
+    "item": "immersive_geology:sheetmetal_chromium",
+    "count": 4
   }
 }

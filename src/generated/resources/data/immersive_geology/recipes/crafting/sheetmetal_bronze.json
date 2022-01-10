@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "immersive_geology:sheetmetal_bronze"
+    "item": "immersive_geology:sheetmetal_bronze",
+    "count": 4
   }
 }

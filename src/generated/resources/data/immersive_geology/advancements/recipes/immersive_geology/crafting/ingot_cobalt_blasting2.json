@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_ore_chunk_vanilla_cobalt": {
+    "has_crushed_ore_cobalt": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:ore_chunk_vanilla_cobalt"
+            "item": "immersive_geology:crushed_ore_cobalt"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_ore_chunk_vanilla_cobalt",
+      "has_crushed_ore_cobalt",
       "has_the_recipe"
     ]
   ]
