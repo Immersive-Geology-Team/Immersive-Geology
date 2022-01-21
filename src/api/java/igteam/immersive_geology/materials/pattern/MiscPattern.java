@@ -21,4 +21,14 @@ public enum MiscPattern implements MaterialPattern {
     public boolean isComplexPattern() {
         return false;
     }
+
+    @Override
+    public boolean hasSuffix() {
+        return false;
+    }
+
+    @Override
+    public String getSuffix() {
+        return null;
+    }
 }

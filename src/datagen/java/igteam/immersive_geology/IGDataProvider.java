@@ -1,6 +1,7 @@
 package igteam.immersive_geology;
 
 import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.generators.IGBlockStateProvider;
 import igteam.immersive_geology.generators.IGItemModelProvider;
 import igteam.immersive_geology.generators.recipes.IGRecipeProvider;
 import igteam.immersive_geology.generators.tags.IGBlockTagProvider;
@@ -33,8 +34,8 @@ public class IGDataProvider {
         }
 
         if(event.includeClient()){
+            generator.addProvider(new IGBlockStateProvider(generator, exhelper));
             generator.addProvider(new IGItemModelProvider(generator, exhelper));
-            //generator.addProvider(new IGBlockStateProvider(generator, exhelper));
         }
     }
 }

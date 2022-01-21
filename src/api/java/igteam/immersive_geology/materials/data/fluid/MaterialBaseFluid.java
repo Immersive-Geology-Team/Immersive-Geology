@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.fluid;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 
@@ -8,11 +10,6 @@ public class MaterialBaseFluid extends MaterialBase {
 
     public MaterialBaseFluid(String name) {
         super(name);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return new ResourceLocation("minecraft", "textures/block/water_still");
     }
 
     @Override
@@ -163,5 +160,10 @@ public class MaterialBaseFluid extends MaterialBase {
     @Override
     protected boolean hasDirtyCrushedOre() {
         return false;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        return null;
     }
 }

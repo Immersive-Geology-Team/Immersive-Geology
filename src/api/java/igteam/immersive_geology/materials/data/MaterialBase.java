@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials.data;
 
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -50,10 +51,6 @@ public abstract class MaterialBase {
     protected String name;
 
     private final Logger logger = LogManager.getLogger(MaterialBase.class.getName());
-
-    public abstract ResourceLocation getTextureLocation();
-
-    public String getOverrideName(MaterialPattern pattern) { return null; }
 
     public Block getBlock(MaterialPattern p) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, p));
@@ -215,6 +212,7 @@ public abstract class MaterialBase {
                 case stone_chunk -> hasStoneChunk();
                 case compound_dust -> hasCompoundDust();
                 case dirty_crushed_ore -> hasDirtyCrushedOre();
+                case block_item -> false;
             };
         }
 
@@ -271,4 +269,10 @@ public abstract class MaterialBase {
     public Tag.Named<Block> getBlockTag(BlockPattern pattern){
         return (Tag.Named<Block>) getTag(pattern);
     }
+
+    public CrystalFamily getCrystalFamily() {
+        return CrystalFamily.CUBIC;
+    }
+
+    public abstract ResourceLocation getTextureLocation(MaterialPattern pattern);
 }

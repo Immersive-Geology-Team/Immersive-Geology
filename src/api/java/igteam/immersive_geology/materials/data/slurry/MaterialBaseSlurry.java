@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials.data.slurry;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -10,11 +11,6 @@ public class MaterialBaseSlurry extends MaterialBase {
 
     public MaterialBaseSlurry(String name) {
         super(name);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return new ResourceLocation("minecraft", "textures/block/water_still");
     }
 
     @Override
@@ -170,5 +166,10 @@ public class MaterialBaseSlurry extends MaterialBase {
     @Override
     protected boolean hasDirtyCrushedOre() {
         return false;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        return null;
     }
 }

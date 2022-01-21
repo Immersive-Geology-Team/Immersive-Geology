@@ -5,7 +5,7 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface IGItemType {
     default boolean hasCustomItemColours()
@@ -16,6 +16,6 @@ public interface IGItemType {
     int getColourForIGItem(ItemStack stack, int pass);
 
     public ItemSubGroup getSubGroup();
-    Set<MaterialInterface> getMaterials();
+    Collection<MaterialInterface> getMaterials();
     MaterialPattern getPattern();
 }

@@ -1,11 +1,14 @@
 package com.igteam.immersive_geology.core.registration;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
@@ -72,10 +75,15 @@ public class IGRegistrationHolder {
             case ore_chunk, ore_bit, dirty_crushed_ore -> {
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
                     IGGenericItem multi_item = new IGGenericItem(m, p);
-                    multi_item.addMaterial(stone);
+                    multi_item.addMaterial(MaterialTexture.base, stone);
+                    multi_item.addMaterial(MaterialTexture.overlay, m);
                     multi_item.finalizeData();
                     register(multi_item);
                 });
+            }
+            case block_item -> {
+                //DO NOT REGISTER HERE, used as an item pattern for all block items,
+                //which is registered with the Block itself.
             }
             default -> {
                 IGGenericItem item = new IGGenericItem(m, p);
@@ -86,7 +94,24 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForBlockPattern(MaterialInterface m, BlockPattern p){
-
+        switch(p) {
+            case ore -> {
+                Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
+                    IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                    multi_block.addMaterial(stone, MaterialTexture.base);
+                    multi_block.addMaterial(m, MaterialTexture.overlay);
+                    multi_block.finalizeData();
+                    register(multi_block.asItem());
+                    register(multi_block);
+                });
+            }
+            default -> {
+                IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                multi_block.finalizeData();
+                register(multi_block.asItem());
+                register(multi_block);
+            }
+        }
     }
 
     private static void registerForMiscPattern(MaterialInterface m, MiscPattern p){
@@ -130,8 +155,16 @@ public class IGRegistrationHolder {
         });
     }
 
+    public static ResourceLocation getRegistryKey(IGGenericBlockItem item){
+        return new ResourceLocation(IGLib.MODID, item.getHolderKey());
+    }
+
     public static ResourceLocation getRegistryKey(IGGenericItem item){
         return new ResourceLocation(IGLib.MODID, item.getHolderKey());
+    }
+
+    public static ResourceLocation getRegistryKey(IGGenericBlock block){
+        return new ResourceLocation(IGLib.MODID, block.getHolderKey());
     }
 
     private static void buildMaterialRecipes(MaterialInterface... material){

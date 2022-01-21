@@ -2,10 +2,12 @@ package igteam.immersive_geology.materials;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.metal.variants.*;
+import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -144,6 +146,16 @@ public enum MetalEnum implements MaterialInterface {
     @Override
     public int getColor() {
         return material.getColor();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        return material.getTextureLocation(pattern);
+    }
+
+    @Override
+    public CrystalFamily getCrystalFamily() {
+        return material.getCrystalFamily();
     }
 
     @Override

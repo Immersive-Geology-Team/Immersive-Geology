@@ -1,9 +1,14 @@
 package igteam.immersive_geology.generators;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -29,13 +34,48 @@ public class IGItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((i) -> {
             if(i instanceof IGGenericItem item) {
-                generateGenericItem(item);
+                ItemPattern pattern = item.getPattern();
+                if (pattern != ItemPattern.block_item) {
+                    generateGenericItem(item);
+                }
+            }
+            if(i instanceof IGGenericBlockItem item){
+                IGGenericBlock block = (IGGenericBlock) item.getBlock();
+                BlockPattern blockPattern = block.getPattern();
+                switch(blockPattern) {
+                    case ore -> {
+                        generateOreItemBlock(block);
+                    }
+                    default -> generateGenericItemBlock(block);
+                }
             }
         });
     }
 
     private void generateGenericItem(IGGenericItem item){
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey()).getPath(),
-                new ResourceLocation(IGLib.MODID, "item/base/" + item.getPattern().getName()));
+        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey()).getPath();
+        withExistingParent(item_loc,
+                new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
+                .texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getPattern()));
+
+        if(item.getMaterial(MaterialTexture.overlay) != null) {
+            getBuilder(item_loc).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
+        }
+    }
+
+    private void generateGenericItemBlock(IGGenericBlock block){
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + block.getHolderKey()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
+                        (block.getMaterial(MaterialTexture.overlay) != null ? "_" + block.getMaterial(MaterialTexture.overlay).getName() : "")));
+    }
+
+    private void generateOreItemBlock(IGGenericBlock block) {
+        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + block.getHolderKey()).getPath();
+
+        withExistingParent(item_loc, new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()));
+        getBuilder(item_loc).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));
+        getBuilder(item_loc).texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()));
+        getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(0).uvs(0, 0, 16, 16)));
+        getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(1).uvs(0, 0, 16, 16)));
     }
 }

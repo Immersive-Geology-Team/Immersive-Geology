@@ -1,24 +1,18 @@
 package igteam.immersive_geology.materials.data.metal;
 
-import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
-import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.helper.RecipeMethod;
 
 public class MaterialBaseMetal extends MaterialBase {
 
     public MaterialBaseMetal(String name) {
         super(name);
 }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return null;
-    }
 
     @Override
     public int getColor() {
@@ -37,13 +31,37 @@ public class MaterialBaseMetal extends MaterialBase {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        if(pattern instanceof BlockPattern b){
+            return switch(b) {
+                case ore -> new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
+                case storage -> new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
+                default ->   new ResourceLocation(IGApi.MODID, "block/greyscale/metal/dust_block");
+            };
+        }
+
+        if(pattern instanceof ItemPattern i){
+            return switch(i) {
+                case ore_chunk, stone_chunk -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_chunk_vein");
+                case ore_bit, stone_bit -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_bit_vein");
+                case dirty_crushed_ore, crushed_ore -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_ore");
+                case clay -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/clay");
+                case dust, gear, ingot, nugget, plate, rod, wire, metal_oxide -> new ResourceLocation(IGApi.MODID, "item/greyscale/metal/" + i.getName());
+                case crystal -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/raw_crystal_" + getCrystalFamily().getName());
+                default -> new ResourceLocation(IGApi.MODID, "item/greyscale/" + i.getName());
+            };
+        }
+        return null;
+    }
+
+    @Override
     protected boolean hasStorageBlock() {
         return !hasExistingImplementation();
     }
 
     @Override
     protected boolean hasStairs() {
-        return true;
+        return false;
     }
 
     @Override
@@ -133,7 +151,7 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasCrystal() {
-        return false;
+        return true;
     }
 
     @Override

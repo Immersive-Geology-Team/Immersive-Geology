@@ -24,7 +24,8 @@ public enum ItemPattern implements MaterialPattern {
     crystal,
     clay(ItemSubGroup.misc, ""),
     fuel,
-    slag(ItemSubGroup.misc);
+    slag(ItemSubGroup.misc),
+    block_item;
 
     private final ItemSubGroup subgroup;
     private final boolean isComplex;

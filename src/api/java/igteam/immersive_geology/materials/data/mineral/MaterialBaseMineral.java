@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.mineral;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -9,11 +11,6 @@ import net.minecraft.world.item.Rarity;
 public class MaterialBaseMineral extends MaterialBase {
     public MaterialBaseMineral(String name) {
         super(name);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return null;
     }
 
     @Override
@@ -169,5 +166,10 @@ public class MaterialBaseMineral extends MaterialBase {
     @Override
     protected boolean hasDirtyCrushedOre() {
         return true;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        return null;
     }
 }

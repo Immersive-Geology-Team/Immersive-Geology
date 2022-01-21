@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 
 public class MaterialMetalManganese extends MaterialBaseMetal {
@@ -18,4 +20,5 @@ public class MaterialMetalManganese extends MaterialBaseMetal {
     {
         return Rarity.UNCOMMON;
     }
+
 }

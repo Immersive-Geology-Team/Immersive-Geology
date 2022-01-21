@@ -1,6 +1,10 @@
 package igteam.immersive_geology.materials.data.stone;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -10,11 +14,6 @@ public class MaterialBaseStone extends MaterialBase {
 
     public MaterialBaseStone(String name) {
         super(name);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return new ResourceLocation("minecraft", "textures/block/stone");
     }
 
     @Override
@@ -170,5 +169,25 @@ public class MaterialBaseStone extends MaterialBase {
     @Override
     protected boolean hasDirtyCrushedOre() {
         return false;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        if(pattern instanceof BlockPattern b){
+            return switch(b) {
+                case block, ore -> new ResourceLocation("minecraft", "block/stone");
+                default -> new ResourceLocation("minecraft", "block/blackstone");
+            };
+        }
+
+        if(pattern instanceof ItemPattern i){
+            return switch(i) {
+                case ore_chunk, stone_chunk -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_chunk");
+                case ore_bit, stone_bit -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_bit");
+                case dirty_crushed_ore -> new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_stone");
+                default -> new ResourceLocation("minecraft", "block/stone");
+            };
+        }
+        return null;
     }
 }
