@@ -1,6 +1,0 @@
-{
-  "parent": "immersive_geology:block/base/ore_bearing/richness",
-  "textures": {
-    "base": "immersive_geology:block/greyscale/rock/rock_igneous_extrusive"
-  }
-}

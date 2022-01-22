@@ -46,7 +46,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void registerGenericBlock(IGGenericBlock block){
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
-                new ResourceLocation(IGLib.MODID, "block/" + block.getHolderKey()).getPath(), new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()))).build());
+                new ResourceLocation(IGLib.MODID, "block/" + block.getHolderKey()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/block"))
+                        .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()))
+                        .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern())))
+                .build());
     }
 
     private void registerOreBlock(IGGenericBlock block){

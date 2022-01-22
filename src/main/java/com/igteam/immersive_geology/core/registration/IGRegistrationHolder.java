@@ -156,7 +156,7 @@ public class IGRegistrationHolder {
     }
 
     public static ResourceLocation getRegistryKey(IGGenericBlockItem item){
-        return new ResourceLocation(IGLib.MODID, item.getHolderKey());
+        return new ResourceLocation(IGLib.MODID, item.getHolderKey() + "_" + item.getBlock().getPattern().getName());
     }
 
     public static ResourceLocation getRegistryKey(IGGenericItem item){

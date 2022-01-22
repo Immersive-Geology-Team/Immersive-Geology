@@ -1,6 +1,6 @@
 package com.igteam.immersive_geology.core.proxy;
 
-import com.igteam.immersive_geology.client.IGColorHandlers;
+import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import igteam.immersive_geology.menu.CreativeMenuHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,7 +20,8 @@ public class ClientProxy implements Proxy {
 
     @Override
     public void onClientSetup(FMLClientSetupEvent event) {
-        IGColorHandlers.register();
+        IGClientRenderHandler.register();
+        IGClientRenderHandler.init(event);
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
     }
 }

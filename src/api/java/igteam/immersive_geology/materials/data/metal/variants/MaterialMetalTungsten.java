@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
 public class MaterialMetalTungsten extends MaterialBaseMetal {
 
@@ -9,7 +10,7 @@ public class MaterialMetalTungsten extends MaterialBaseMetal {
     }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0x767980;
     }
 

@@ -2,6 +2,7 @@ package igteam.immersive_geology.tags;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -27,6 +28,9 @@ import java.util.Map;
 
 public class IGTags {
     private static Logger logger = IGApi.getNewLogger();
+
+    //TODO - Refactor this to allow Multiple Material References, perhaps use String inplace of a MaterialBase Reference and
+    // make a multi material name reference?
 
     public static HashMap<ItemPattern, HashMap<MaterialBase, Named<Item>>> IG_ITEM_TAGS = new HashMap<>();
     public static HashMap<BlockPattern, HashMap<MaterialBase, Named<Block>>> IG_BLOCK_TAGS = new HashMap<>();

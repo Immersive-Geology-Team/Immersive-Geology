@@ -1,10 +1,15 @@
 package igteam.immersive_geology.materials.data.metal;
 
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 
@@ -15,7 +20,7 @@ public class MaterialBaseMetal extends MaterialBase {
 }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0;
     }
 
@@ -28,6 +33,19 @@ public class MaterialBaseMetal extends MaterialBase {
 
     protected void setupProcessingStages(){
         super.setupProcessingStages();
+
+        if(isNative()) {
+            new IGProcessingStage(this, "Initial Crafting") {
+                @Override
+                protected void describe() {
+                    IRecipeBuilder.crafting()
+                            .shapeless(StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk), getItemTag(ItemPattern.ore_chunk))
+                            .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk)).build(this);
+                    ;
+                }
+            };
+        }
+
     }
 
     @Override
@@ -36,7 +54,8 @@ public class MaterialBaseMetal extends MaterialBase {
             return switch(b) {
                 case ore -> new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
                 case storage -> new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
-                default ->   new ResourceLocation(IGApi.MODID, "block/greyscale/metal/dust_block");
+                case geode -> new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
+                default -> new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");
             };
         }
 

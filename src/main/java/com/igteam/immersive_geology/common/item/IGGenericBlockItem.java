@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -27,6 +28,10 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
         super(b, new Properties().tab(IGItemGroup.IGGroup));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
+    }
+
+    public IGGenericBlock getBlock() {
+        return (IGGenericBlock) super.getBlock();
     }
 
     public @NotNull Component getName(@NotNull ItemStack stack) {
@@ -69,7 +74,7 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
             }
         }
 
-        return materialList.get(pass).getColor();
+        return materialList.get(pass).getColor(pattern);
     }
 
     @Override

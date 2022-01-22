@@ -1,7 +1,6 @@
 package igteam.immersive_geology.materials.data.gas;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -19,7 +18,7 @@ public class MaterialBaseGas extends MaterialBase {
     }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0xFFFFFF;
     }
 

@@ -1,8 +1,4 @@
 {
-  "textures": {
-    "all": "immersive_geology:block/greyscale/metal/sheetmetal",
-    "particle": "immersive_geology:block/greyscale/metal/sheetmetal"
-  },
   "elements": [
     {   "from": [ 0, 0, 0 ],
       "to": [ 16, 8, 16 ],

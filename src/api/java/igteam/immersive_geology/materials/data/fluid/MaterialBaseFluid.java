@@ -13,7 +13,7 @@ public class MaterialBaseFluid extends MaterialBase {
     }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0xFFFFFF;
     }
 

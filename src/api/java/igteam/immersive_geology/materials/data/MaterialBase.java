@@ -60,6 +60,10 @@ public abstract class MaterialBase {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
     }
 
+    public Block getBlock(MaterialPattern p, MaterialBase secondaryMaterial){
+        return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
+    }
+
     public Item getItem(MaterialPattern pattern) {
         return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, pattern));
     };
@@ -68,11 +72,19 @@ public abstract class MaterialBase {
         return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, secondaryMaterial, pattern));
     }
 
+    public Item getItem(MaterialPattern pattern, MaterialBase secondaryMaterial) {
+        return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, secondaryMaterial, pattern));
+    }
+
     public ItemStack getStack(MaterialPattern pattern) {
         return new ItemStack(getItem(pattern));
     };
 
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
+        return new ItemStack(getItem(pattern, secondaryMaterial));
+    };
+
+    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial) {
         return new ItemStack(getItem(pattern, secondaryMaterial));
     };
 
@@ -113,7 +125,7 @@ public abstract class MaterialBase {
         return null;
     }
 
-    public abstract int getColor();
+    public abstract int getColor(MaterialPattern p);
 
     public abstract Rarity getRarity();
 
@@ -184,6 +196,12 @@ public abstract class MaterialBase {
     }
 
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount){
+        ItemStack stack = getStack(pattern, secondaryMaterial);
+        stack.setCount(amount);
+        return stack;
+    }
+
+    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial, int amount){
         ItemStack stack = getStack(pattern, secondaryMaterial);
         stack.setCount(amount);
         return stack;

@@ -13,10 +13,17 @@ public abstract class IGProcessingStage {
     private final String name;
 
     private Set<IGProcessingMethod> methods = new LinkedHashSet<>();
+    private MaterialBase material;
 
-    public IGProcessingStage(String name){
+    public IGProcessingStage(MaterialBase material, String name){
         this.name = name;
+        this.material = material;
+        material.addStage(this);
         describe();
+    }
+
+    public MaterialBase getParentMaterial(){
+        return material;
     }
 
     protected abstract void describe();
@@ -31,9 +38,5 @@ public abstract class IGProcessingStage {
 
     public String getStageName(){
         return name;
-    }
-
-    public void build(MaterialBase material) {
-        material.addStage(this);
     }
 }

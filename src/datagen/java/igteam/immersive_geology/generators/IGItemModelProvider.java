@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -13,6 +14,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,9 +46,9 @@ public class IGItemModelProvider extends ItemModelProvider {
                 BlockPattern blockPattern = block.getPattern();
                 switch(blockPattern) {
                     case ore -> {
-                        generateOreItemBlock(block);
+                        generateOreItemBlock(block, item);
                     }
-                    default -> generateGenericItemBlock(block);
+                    default -> generateGenericItemBlock(block, item);
                 }
             }
         });
@@ -63,15 +65,14 @@ public class IGItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void generateGenericItemBlock(IGGenericBlock block){
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + block.getHolderKey()).getPath(),
+    private void generateGenericItemBlock(IGGenericBlock block, IGGenericBlockItem item){
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
                         (block.getMaterial(MaterialTexture.overlay) != null ? "_" + block.getMaterial(MaterialTexture.overlay).getName() : "")));
     }
 
-    private void generateOreItemBlock(IGGenericBlock block) {
-        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + block.getHolderKey()).getPath();
-
+    private void generateOreItemBlock(IGGenericBlock block, IGGenericBlockItem item) {
+        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath();
         withExistingParent(item_loc, new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()));
         getBuilder(item_loc).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));
         getBuilder(item_loc).texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()));

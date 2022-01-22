@@ -11,7 +11,7 @@ public class MaterialMetalManganese extends MaterialBaseMetal {
     }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0xaaa9ad;
     }
 

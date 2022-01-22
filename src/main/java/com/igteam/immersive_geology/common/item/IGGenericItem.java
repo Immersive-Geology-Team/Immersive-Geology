@@ -1,7 +1,7 @@
 package com.igteam.immersive_geology.common.item;
 
-import igteam.immersive_geology.item.IGItemType;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -36,6 +36,13 @@ public class IGGenericItem extends Item implements IGItemType {
             }
         }
 
+        switch(pattern){
+            case ore_chunk -> Collections.reverse(materialList); //Doing this for Display Purpose
+            default -> {
+
+            }
+        }
+
         return new TranslatableComponent("item.immersive_geology." + pattern.getName(), materialList.toArray());
     }
 
@@ -67,7 +74,7 @@ public class IGGenericItem extends Item implements IGItemType {
             }
         }
 
-        return materialList.get(pass).getColor();
+        return materialList.get(pass).getColor(pattern);
     }
 
     @Override

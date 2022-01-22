@@ -18,8 +18,10 @@ import java.util.Set;
 public interface MaterialInterface {
     ItemStack getStack(MaterialPattern ingot);
     ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial);
+    ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial);
     ItemStack getStack(MaterialPattern ingot, int amount);
     ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount);
+    ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial, int amount);
 
     Fluid getFluid(MaterialPattern pattern);
     Fluid getFluid(MaterialPattern pattern, MaterialInterface secondaryMaterial);
@@ -27,9 +29,11 @@ public interface MaterialInterface {
     FluidStack getFluidStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount);
 
     Item getItem(MaterialPattern pattern, MaterialInterface secondaryMaterial);
+    Item getItem(MaterialPattern pattern, MaterialBase secondaryMaterial);
     Item getItem(MaterialPattern pattern);
 
     Block getBlock(MaterialPattern pattern, MaterialInterface secondaryMaterial);
+    Block getBlock(MaterialPattern pattern, MaterialBase secondaryMaterial);
     Block getBlock(MaterialPattern pattern);
 
     Tag.Named<?> getTag(MaterialPattern pattern);
@@ -46,7 +50,7 @@ public interface MaterialInterface {
 
     void build();
 
-    int getColor();
+    int getColor(MaterialPattern p);
 
     CrystalFamily getCrystalFamily();
 

@@ -12,9 +12,5 @@
                 "east":  { "texture": "#all", "cullface": "east" , "tintindex": 0}
             }
         }
-    ],
-    "textures": {
-        "all": "immersive_geology:block/greyscale/rock/rock_vanilla",
-        "particle": "immersive_geology:block/greyscale/rock/rock_vanilla"
-    }
+    ]
 }

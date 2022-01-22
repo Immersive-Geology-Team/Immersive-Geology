@@ -29,4 +29,8 @@ public class IGRegistryProvider {
     public static ResourceLocation getRegistryKey(MaterialBase material, MaterialInterface secondary, MaterialPattern pattern){
         return new ResourceLocation("immersive_geology",  pattern.getName() + "_" + material.getName() + "_" + secondary.getName() );
     }
+
+    public static ResourceLocation getRegistryKey(MaterialBase material, MaterialBase secondary, MaterialPattern pattern){
+        return new ResourceLocation("immersive_geology",  pattern.getName() + "_" + material.getName() + "_" + secondary.getName() );
+    }
 }

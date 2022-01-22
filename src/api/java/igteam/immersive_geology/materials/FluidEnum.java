@@ -39,7 +39,14 @@ public enum FluidEnum implements MaterialInterface {
 
     @Override
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
-        return material.getStack(pattern, secondaryMaterial);
+        ItemStack i = material.getStack(pattern, secondaryMaterial);
+        return i.isEmpty() ? secondaryMaterial.getStack(pattern, material) : i;
+    }
+
+    @Override
+    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial) {
+        ItemStack i = material.getStack(pattern, secondaryMaterial);
+        return i.isEmpty() ? secondaryMaterial.getStack(pattern, material) : i;
     }
 
     @Override
@@ -49,7 +56,14 @@ public enum FluidEnum implements MaterialInterface {
 
     @Override
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount) {
-        return material.getStack(pattern, amount);
+        ItemStack i = material.getStack(pattern, secondaryMaterial, amount);
+        return i.isEmpty() ? secondaryMaterial.getStack(pattern, material, amount) : i;
+    }
+
+    @Override
+    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial, int amount) {
+        ItemStack i = material.getStack(pattern, secondaryMaterial, amount);
+        return i.isEmpty() ? secondaryMaterial.getStack(pattern, material, amount) : i;
     }
 
     @Override
@@ -72,10 +86,6 @@ public enum FluidEnum implements MaterialInterface {
         return material.getFluid(pattern, secondaryMaterial);
     }
 
-    @Override
-    public Item getItem(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
-        return material.getItem(pattern, secondaryMaterial);
-    }
 
     @Override
     public Item getItem(MaterialPattern pattern) {
@@ -83,8 +93,27 @@ public enum FluidEnum implements MaterialInterface {
     }
 
     @Override
+    public Item getItem(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
+        Item i = material.getItem(pattern, secondaryMaterial);
+        return i == null ? secondaryMaterial.getItem(pattern, material) : i;
+    }
+
+    @Override
+    public Item getItem(MaterialPattern pattern, MaterialBase secondaryMaterial) {
+        Item i = material.getItem(pattern, secondaryMaterial);
+        return i == null ? secondaryMaterial.getItem(pattern, material) : i;
+    }
+
+    @Override
     public Block getBlock(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
-        return material.getBlock(pattern, secondaryMaterial);
+        Block i = material.getBlock(pattern, secondaryMaterial);
+        return i == null ? secondaryMaterial.getBlock(pattern, material) : i;
+    }
+
+    @Override
+    public Block getBlock(MaterialPattern pattern, MaterialBase secondaryMaterial) {
+        Block b = material.getBlock(pattern, secondaryMaterial);
+        return b == null ? secondaryMaterial.getBlock(pattern, material) : b;
     }
 
     @Override
@@ -118,8 +147,8 @@ public enum FluidEnum implements MaterialInterface {
     }
 
     @Override
-    public int getColor() {
-        return material.getColor();
+    public int getColor(MaterialPattern p) {
+        return material.getColor(p);
     }
 
     @Override

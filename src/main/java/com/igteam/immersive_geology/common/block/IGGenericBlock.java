@@ -1,9 +1,11 @@
 package com.igteam.immersive_geology.common.block;
 
+import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -17,7 +19,7 @@ import org.apache.logging.log4j.Level;
 
 import java.util.*;
 
-public class IGGenericBlock extends Block {
+public class IGGenericBlock extends Block implements IGBlockType {
 
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
@@ -29,6 +31,8 @@ public class IGGenericBlock extends Block {
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
+
+        IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
 
     @Override
@@ -43,6 +47,11 @@ public class IGGenericBlock extends Block {
     public void addMaterial(MaterialInterface material, MaterialTexture t){
         materialMap.put(t, material);
         itemBlock.addMaterial(t, material);
+    }
+
+    @Override
+    public int getColourForIGBlock(int pass) {
+        return materialMap.get(MaterialTexture.values()[pass]).getColor(pattern);
     }
 
     public Collection<MaterialInterface> getMaterials() {

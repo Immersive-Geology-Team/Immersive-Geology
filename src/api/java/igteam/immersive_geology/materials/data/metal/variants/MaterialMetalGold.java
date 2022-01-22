@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
@@ -20,7 +21,7 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     }
 
     @Override
-    public int getColor() {
+    public int getColor(MaterialPattern p) {
         return 0xFFD700;
     }
 
@@ -28,7 +29,7 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage("Extration Stage") {
+        new IGProcessingStage(this,"Extration Stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.crafting()
@@ -37,7 +38,7 @@ public class MaterialMetalGold extends MaterialBaseMetal {
                                 IETags.getTagsFor(EnumMetals.SILVER).nugget)
                         .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot)).build(this);
             }
-        }.build(this);
+        };
     }
 
     @Override
