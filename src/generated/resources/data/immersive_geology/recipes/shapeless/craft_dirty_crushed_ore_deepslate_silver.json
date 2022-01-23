@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "crush_ore_chunks",
+  "ingredients": [
+    {
+      "tag": "forge:ore_chunks/deepslate_silver"
+    },
+    {
+      "tag": "forge:ore_chunks/deepslate_silver"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_deepslate_silver"
+  }
+}

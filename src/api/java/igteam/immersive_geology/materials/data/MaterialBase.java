@@ -24,9 +24,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.StageProvider;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static igteam.immersive_geology.materials.helper.IGRegistryProvider.getRegistryKey;
 
@@ -108,19 +106,51 @@ public abstract class MaterialBase {
 
     public Tag.Named<?> getTag(MaterialPattern pattern) {
         if(pattern instanceof ItemPattern i){
-            HashMap<MaterialBase, Tag.Named<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
-            Tag.Named<Item> tag = data_map.get(this);
-            return tag;
+            HashMap<String, Tag.Named<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
+            return data_map.get(IGApi.getWrapFromSet(materials));
+        }
+
+        if(pattern instanceof BlockPattern b){
+            HashMap<String, Tag.Named<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
+
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
+            return data_map.get(IGApi.getWrapFromSet(materials));
+        }
+
+        if(pattern instanceof MiscPattern f){
+            HashMap<String, Tag.Named<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
+            return data_map.get(IGApi.getWrapFromSet(materials));
+        }
+
+        return null;
+    }
+
+    public Tag.Named<?> getTag(MaterialPattern pattern, MaterialBase... materials) {
+        if(pattern instanceof ItemPattern i){
+            HashMap<String, Tag.Named<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
+            List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
+
+            materialList.add(this);
+            LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
+            return data_map.get(IGApi.getWrapFromSet(matSet));
         }
         if(pattern instanceof BlockPattern b){
-            HashMap<MaterialBase, Tag.Named<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
-            Tag.Named<Block> tag = data_map.get(this);
-            return tag;
+            HashMap<String, Tag.Named<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
+            List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
+
+            materialList.add(this);
+            LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
+            return data_map.get(IGApi.getWrapFromSet(matSet));
         }
         if(pattern instanceof MiscPattern f){
-            HashMap<MaterialBase, Tag.Named<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
-            Tag.Named<Fluid> tag = data_map.get(this);
-            return tag;
+            HashMap<String, Tag.Named<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
+            List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
+
+            materialList.add(this);
+            LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
+            return data_map.get(IGApi.getWrapFromSet(matSet));
         }
         return null;
     }
@@ -286,6 +316,20 @@ public abstract class MaterialBase {
      */
     public Tag.Named<Block> getBlockTag(BlockPattern pattern){
         return (Tag.Named<Block>) getTag(pattern);
+    }
+
+    /**
+     * @apiNote Wrapped version of the normal @getTag used to reduce castings
+     */
+    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials){
+        return (Tag.Named<Item>) getTag(pattern, materials);
+    }
+
+    /**
+     * @apiNote Wrapped version of the normal @getTag used to reduce castings
+     */
+    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials){
+        return (Tag.Named<Block>) getTag(pattern, materials);
     }
 
     public CrystalFamily getCrystalFamily() {

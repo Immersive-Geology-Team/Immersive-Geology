@@ -3,10 +3,10 @@
   "group": "crush_ore_chunks",
   "ingredients": [
     {
-      "tag": "forge:ore_chunks/osmium"
+      "tag": "forge:ore_chunks/stone_osmium"
     },
     {
-      "tag": "forge:ore_chunks/osmium"
+      "tag": "forge:ore_chunks/stone_osmium"
     }
   ],
   "result": {

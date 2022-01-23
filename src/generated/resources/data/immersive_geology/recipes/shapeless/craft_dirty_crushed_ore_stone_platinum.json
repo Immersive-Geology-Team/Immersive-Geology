@@ -3,10 +3,10 @@
   "group": "crush_ore_chunks",
   "ingredients": [
     {
-      "tag": "forge:ore_chunks/platinum"
+      "tag": "forge:ore_chunks/stone_platinum"
     },
     {
-      "tag": "forge:ore_chunks/platinum"
+      "tag": "forge:ore_chunks/stone_platinum"
     }
   ],
   "result": {

@@ -13,11 +13,6 @@ public class MaterialBaseGas extends MaterialBase {
     }
 
     @Override
-    public Tag.Named<?> getTag(MaterialPattern pattern) {
-        return null;
-    }
-
-    @Override
     public int getColor(MaterialPattern p) {
         return 0xFFFFFF;
     }

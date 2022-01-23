@@ -40,6 +40,10 @@ public interface MaterialInterface {
     Tag.Named<Item> getItemTag(ItemPattern pattern);
     Tag.Named<Block> getBlockTag(BlockPattern pattern);
 
+
+    Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials);
+    Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials);
+
     boolean hasPattern(MaterialPattern gear);
 
     MaterialBase get();

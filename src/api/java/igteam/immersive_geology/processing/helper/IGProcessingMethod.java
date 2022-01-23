@@ -6,15 +6,13 @@ public class IGProcessingMethod {
 
     protected RecipeMethod recipeType;
 
-    protected IGProcessingMethod(RecipeMethod method){
+    protected IGProcessingMethod(RecipeMethod method, IGProcessingStage stage){
         recipeType = method;
+        stage.addMethod(this);
     }
 
     public RecipeMethod getRecipeType(){
         return recipeType;
     }
 
-    public void build(IGProcessingStage stage) {
-        stage.addMethod(this);
-    }
 }

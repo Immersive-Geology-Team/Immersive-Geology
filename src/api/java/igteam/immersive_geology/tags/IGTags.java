@@ -2,6 +2,7 @@ package igteam.immersive_geology.tags;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.MineralEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -23,8 +24,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.stringtemplate.v4.misc.Misc;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class IGTags {
     private static Logger logger = IGApi.getNewLogger();
@@ -32,58 +32,123 @@ public class IGTags {
     //TODO - Refactor this to allow Multiple Material References, perhaps use String inplace of a MaterialBase Reference and
     // make a multi material name reference?
 
-    public static HashMap<ItemPattern, HashMap<MaterialBase, Named<Item>>> IG_ITEM_TAGS = new HashMap<>();
-    public static HashMap<BlockPattern, HashMap<MaterialBase, Named<Block>>> IG_BLOCK_TAGS = new HashMap<>();
-    public static HashMap<MiscPattern, HashMap<MaterialBase, Named<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
+    public static HashMap<ItemPattern, HashMap<String, Named<Item>>> IG_ITEM_TAGS = new HashMap<>();
+    public static HashMap<BlockPattern, HashMap<String, Named<Block>>> IG_BLOCK_TAGS = new HashMap<>();
+    public static HashMap<MiscPattern, HashMap<String, Named<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
     public static void initialize(){
         logger.log(Level.INFO, "Initializing Tags");
         for (ItemPattern pattern : ItemPattern.values()) {
-            IG_ITEM_TAGS.put(pattern, new HashMap<MaterialBase, Named<Item>>());
+            IG_ITEM_TAGS.put(pattern, new HashMap<String, Named<Item>>());
+
             for (MaterialInterface metal : MetalEnum.values()) {
-                createWrapperForPattern(pattern, metal);
+                if (metal.hasPattern(pattern)) {
+                    switch(pattern){
+                        case ore_bit, ore_chunk, dirty_crushed_ore -> {
+                            for (StoneEnum stone : StoneEnum.values()) {
+                                createWrapperForPattern(pattern,  stone.get(), metal.get());
+                            }
+                        }
+                        default -> {
+                            createWrapperForPattern(pattern, metal.get());
+                        }
+                    }
+                }
+            }
+
+            for (MaterialInterface stone : StoneEnum.values()) {
+                if(stone.hasPattern(pattern)){
+                    createWrapperForPattern(pattern, stone.get());
+                }
+            }
+
+            for (MaterialInterface mineral : MineralEnum.values()) {
+                if(mineral.hasPattern(pattern)){
+                    switch(pattern){
+                        case ore_bit, ore_chunk, dirty_crushed_ore -> {
+                            for (StoneEnum stone : StoneEnum.values()) {
+                                createWrapperForPattern(pattern,  stone.get(), mineral.get());
+                            }
+                        }
+                        default -> {
+                            createWrapperForPattern(pattern, mineral.get());
+                        }
+                    }
+                }
             }
         }
 
         for (BlockPattern pattern : BlockPattern.values()) {
-            IG_BLOCK_TAGS.put(pattern, new HashMap<MaterialBase, Named<Block>>());
+            IG_BLOCK_TAGS.put(pattern, new HashMap<String, Named<Block>>());
             for (MaterialInterface metal : MetalEnum.values()) {
-                createWrapperForPattern(pattern, metal);
+                if (metal.hasPattern(pattern)) {
+                    switch(pattern){
+                        case ore -> {
+                            for (StoneEnum stone : StoneEnum.values()) {
+                                createWrapperForPattern(pattern,  stone.get(), metal.get());
+                            }
+                        }
+                        default -> {
+                            createWrapperForPattern(pattern, metal.get());
+                        }
+                    }
+                }
+            }
+            for (MaterialInterface stone : StoneEnum.values()) {
+                if(stone.hasPattern(pattern)){
+                    createWrapperForPattern(pattern, stone.get());
+                }
             }
         }
     }
 
-    private static void createWrapperForPattern(MaterialPattern p, MaterialInterface m){
-        if(m.hasPattern(p)) {
-            if (p instanceof ItemPattern) {
-                HashMap<MaterialBase, Named<Item>> map = IG_ITEM_TAGS.get((ItemPattern) p);
+    private static void createWrapperForPattern(MaterialPattern p, MaterialBase... materials){
+        if(Arrays.stream(materials).anyMatch(m -> m.hasPattern(p))) {
+            if (p instanceof ItemPattern i) {
+                HashMap<String, Named<Item>> map = IG_ITEM_TAGS.get(i);
+                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(List.of(materials));
 
-                map.put(m.get(), ItemTags.bind(
-                        p.hasSuffix() ? wrapPattern(p, m, p.getSuffix()).toString()
-                        : wrapPattern(p, m).toString()));
-
-                IG_ITEM_TAGS.put((ItemPattern) p, map);
+                map.put(IGApi.getWrapFromSet(materialSet), ItemTags.bind(
+                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
+                        : wrapPattern(p, materialSet).toString()));
+                IG_ITEM_TAGS.put(i, map);
             }
 
             if (p instanceof BlockPattern b) {
-                HashMap<MaterialBase, Named<Block>> map = IG_BLOCK_TAGS.get(b);
-                map.put(m.get(), BlockTags.bind(wrapPattern(b, m).toString()));
+                HashMap<String, Named<Block>> map = IG_BLOCK_TAGS.get(b);
+                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(List.of(materials));
+                map.put(IGApi.getWrapFromSet(materialSet), BlockTags.bind(
+                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
+                                : wrapPattern(p, materialSet).toString()));
+
                 IG_BLOCK_TAGS.put(b, map);
             }
 
-            if (p instanceof MiscPattern f) {
-                HashMap<MaterialBase, Named<Fluid>> map = IG_FLUID_TAGS.get(f);
-                map.put(m.get(), FluidTags.bind(wrapPattern(f, m).toString()));
-                IG_FLUID_TAGS.put(f, map);
+            if (p instanceof MiscPattern m) {
+                HashMap<String, Named<Fluid>> map = IG_FLUID_TAGS.get(m);
+                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(List.of(materials));
+
+                map.put(IGApi.getWrapFromSet(materialSet), FluidTags.bind(
+                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
+                                : wrapPattern(p, materialSet).toString()));
+
+                IG_FLUID_TAGS.put(m, map);
             }
         }
     }
 
-    private static ResourceLocation wrapPattern(MaterialPattern pattern, MaterialInterface m, String suffix) {
-        return forgeLoc(pattern.getName() + suffix + "/" + m.getName());
+    private static ResourceLocation wrapPattern(MaterialPattern pattern, Set<MaterialBase> matSet, String suffix) {
+        StringJoiner matSetName = new StringJoiner("_");
+
+        for(MaterialBase m : matSet) {
+            matSetName.add(m.getName());
+        }
+
+        ResourceLocation loc = forgeLoc(pattern.getName() + suffix + "/" + matSetName.toString());
+        return loc;
     }
 
-    private static ResourceLocation wrapPattern(MaterialPattern pattern, MaterialInterface m) {
+    private static ResourceLocation wrapPattern(MaterialPattern pattern, Set<MaterialBase> m) {
         return wrapPattern(pattern, m, "s");
     }
 

@@ -153,6 +153,16 @@ public enum MetalEnum implements MaterialInterface {
     }
 
     @Override
+    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+        return material.getItemTag(pattern, materials);
+    }
+
+    @Override
+    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
+        return material.getBlockTag(pattern, materials);
+    }
+
+    @Override
     public boolean hasPattern(MaterialPattern pattern) {
         return material.hasPattern(pattern);
     }

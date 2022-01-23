@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ore_chunks/platinum"
+            "tag": "forge:ore_chunks/stone_platinum"
           }
         ]
       }

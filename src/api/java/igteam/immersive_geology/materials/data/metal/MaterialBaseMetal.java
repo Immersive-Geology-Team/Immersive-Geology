@@ -4,6 +4,7 @@ import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -38,10 +39,11 @@ public class MaterialBaseMetal extends MaterialBase {
             new IGProcessingStage(this, "Initial Crafting") {
                 @Override
                 protected void describe() {
-                    IRecipeBuilder.crafting()
-                            .shapeless(StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk), getItemTag(ItemPattern.ore_chunk))
-                            .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk)).build(this);
-                    ;
+                    for (MaterialInterface stone : StoneEnum.values()) {
+                        IRecipeBuilder.crafting(this)
+                                .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
+                                .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                    }
                 }
             };
         }

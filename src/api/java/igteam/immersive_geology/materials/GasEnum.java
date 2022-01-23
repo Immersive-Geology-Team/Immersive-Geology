@@ -156,6 +156,16 @@ public enum GasEnum implements MaterialInterface {
     }
 
     @Override
+    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+        return material.getItemTag(pattern, materials);
+    }
+
+    @Override
+    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
+        return material.getBlockTag(pattern, materials);
+    }
+
+    @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
         return material.getTextureLocation(pattern);
     }

@@ -3,10 +3,10 @@
   "group": "crush_ore_chunks",
   "ingredients": [
     {
-      "tag": "forge:ore_chunks/nickel"
+      "tag": "forge:ore_chunks/stone_nickel"
     },
     {
-      "tag": "forge:ore_chunks/nickel"
+      "tag": "forge:ore_chunks/stone_nickel"
     }
   ],
   "result": {

@@ -26,7 +26,7 @@ public class IGBlockTagProvider extends BlockTagsProvider {
                     switch (pattern){
                         case ore -> {
                             for (MaterialInterface stone : StoneEnum.values()) {
-                                tag(metal.getBlockTag(pattern)).add(metal.getBlock(pattern, stone));
+                                tag(metal.getBlockTag(pattern, stone.get())).add(metal.getBlock(pattern, stone));
                             }
                         }
                         default -> {

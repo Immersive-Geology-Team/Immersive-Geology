@@ -3,10 +3,10 @@
   "group": "crush_ore_chunks",
   "ingredients": [
     {
-      "tag": "forge:ore_chunks/silver"
+      "tag": "forge:ore_chunks/stone_silver"
     },
     {
-      "tag": "forge:ore_chunks/silver"
+      "tag": "forge:ore_chunks/stone_silver"
     }
   ],
   "result": {

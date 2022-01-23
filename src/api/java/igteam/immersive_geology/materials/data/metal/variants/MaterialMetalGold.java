@@ -32,11 +32,11 @@ public class MaterialMetalGold extends MaterialBaseMetal {
         new IGProcessingStage(this,"Extration Stage") {
             @Override
             protected void describe() {
-                IRecipeBuilder.crafting()
+                IRecipeBuilder.crafting(this)
                         .shapeless(Items.GOLD_INGOT, 16,
                                 IETags.getTagsFor(EnumMetals.SILVER).ingot,
                                 IETags.getTagsFor(EnumMetals.SILVER).nugget)
-                        .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot)).build(this);
+                        .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot));
             }
         };
     }

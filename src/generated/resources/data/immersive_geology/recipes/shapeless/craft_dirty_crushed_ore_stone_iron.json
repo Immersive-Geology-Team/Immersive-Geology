@@ -3,10 +3,10 @@
   "group": "crush_ore_chunks",
   "ingredients": [
     {
-      "tag": "forge:ore_chunks/iron"
+      "tag": "forge:ore_chunks/stone_iron"
     },
     {
-      "tag": "forge:ore_chunks/iron"
+      "tag": "forge:ore_chunks/stone_iron"
     }
   ],
   "result": {

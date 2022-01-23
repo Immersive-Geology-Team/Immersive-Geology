@@ -3,6 +3,7 @@ package igteam.immersive_geology.materials;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDeepslate;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
+import igteam.immersive_geology.materials.data.stone.variants.MaterialGranite;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -17,11 +18,13 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import igteam.immersive_geology.processing.IGProcessingStage;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public enum StoneEnum implements MaterialInterface {
     Stone(new MaterialDefaultStone()),
-    Deepslate(new MaterialDeepslate());
+    Deepslate(new MaterialDeepslate()),
+    Granite(new MaterialGranite());
 
     private final MaterialBase material;
 
@@ -150,6 +153,16 @@ public enum StoneEnum implements MaterialInterface {
     @Override
     public Tag.Named<Block> getBlockTag(BlockPattern pattern) {
         return material.getBlockTag(pattern);
+    }
+
+    @Override
+    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+        return material.getItemTag(pattern, materials);
+    }
+
+    @Override
+    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
+        return material.getBlockTag(pattern, materials);
     }
 
     @Override
