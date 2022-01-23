@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:ore_chunk_stone_iron"
+    "immersive_geology:ore_chunk_stone_iron",
+    "immersive_geology:ore_chunk_deepslate_iron"
   ]
 }

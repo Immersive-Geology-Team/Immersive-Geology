@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.stone.variants.MaterialDeepslate;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -19,7 +20,8 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import java.util.Set;
 
 public enum StoneEnum implements MaterialInterface {
-    Stone(new MaterialDefaultStone());
+    Stone(new MaterialDefaultStone()),
+    Deepslate(new MaterialDeepslate());
 
     private final MaterialBase material;
 

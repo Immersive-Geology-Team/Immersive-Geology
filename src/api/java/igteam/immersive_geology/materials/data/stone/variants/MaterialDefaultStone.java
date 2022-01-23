@@ -34,4 +34,9 @@ public class MaterialDefaultStone extends MaterialBaseStone {
 
         return 0xFFFFFF;
     }
+
+    @Override
+    public boolean hasExistingImplementation() {
+        return true;
+    }
 }

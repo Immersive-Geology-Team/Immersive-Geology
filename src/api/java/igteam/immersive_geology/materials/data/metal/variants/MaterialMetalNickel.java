@@ -17,4 +17,9 @@ public class MaterialMetalNickel extends MaterialBaseMetal {
     public boolean isNative() {
         return true;
     }
+    
+    @Override
+    public boolean hasExistingImplementation() {
+        return true;
+    }
 }
