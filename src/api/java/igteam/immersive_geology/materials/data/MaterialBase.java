@@ -337,4 +337,8 @@ public abstract class MaterialBase {
     }
 
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern);
+
+    public boolean generateOreFor(MaterialInterface m) {
+        return true;
+    }
 }

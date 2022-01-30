@@ -87,7 +87,7 @@ public class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasOreBlock() {
-        return isNative() &! hasExistingImplementation();
+        return isNative();
     }
 
     @Override
@@ -213,5 +213,16 @@ public class MaterialBaseMetal extends MaterialBase {
     @Override
     protected boolean hasDirtyCrushedOre() {
         return isNative();
+    }
+
+    @Override
+    public boolean generateOreFor(MaterialInterface m) {
+        if(m instanceof StoneEnum s){
+            return switch(s){
+                case Deepslate, Stone -> !hasExistingImplementation();
+                case Granite -> isNative();
+            };
+        }
+        return false;
     }
 }

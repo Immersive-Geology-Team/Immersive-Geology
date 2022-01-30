@@ -2,6 +2,7 @@ package igteam.immersive_geology.materials.data.stone.variants;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;

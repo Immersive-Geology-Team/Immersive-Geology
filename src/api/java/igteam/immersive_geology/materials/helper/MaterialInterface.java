@@ -59,4 +59,8 @@ public interface MaterialInterface {
     CrystalFamily getCrystalFamily();
 
     ResourceLocation getTextureLocation(MaterialPattern pattern);
+
+    boolean hasExistingImplementation();
+
+    boolean generateOreFor(MaterialInterface m);
 }

@@ -182,6 +182,16 @@ public enum FluidEnum implements MaterialInterface {
     }
 
     @Override
+    public boolean hasExistingImplementation() {
+        return material.hasExistingImplementation();
+    }
+
+    @Override
+    public boolean generateOreFor(MaterialInterface m) {
+        return material.generateOreFor(m);
+    }
+
+    @Override
     public MaterialBase get() {
         return material;
     }

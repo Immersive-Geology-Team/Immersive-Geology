@@ -36,6 +36,11 @@ public class MaterialDefaultStone extends MaterialBaseStone {
     }
 
     @Override
+    protected boolean hasDefaultBlock() {
+        return false;
+    }
+
+    @Override
     public boolean hasExistingImplementation() {
         return true;
     }

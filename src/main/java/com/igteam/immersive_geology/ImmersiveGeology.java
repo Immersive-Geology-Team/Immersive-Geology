@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology;
 
+import com.igteam.immersive_geology.common.world.IGCommonWorldHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -48,6 +49,7 @@ public class ImmersiveGeology {
         modBus.addListener(this::onFinishSetup);
 
         modBus.register(IGRegistrationHolder.class);
+        modBus.register(IGCommonWorldHandler.class);
     }
 
     public void setup(final FMLCommonSetupEvent event)

@@ -176,6 +176,16 @@ public enum StoneEnum implements MaterialInterface {
     }
 
     @Override
+    public boolean hasExistingImplementation() {
+        return material.hasExistingImplementation();
+    }
+
+    @Override
+    public boolean generateOreFor(MaterialInterface m) {
+        return material.generateOreFor(m);
+    }
+
+    @Override
     public CrystalFamily getCrystalFamily() {
         return material.getCrystalFamily();
     }
