@@ -66,6 +66,19 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         this.fluidNeighbors.add(CapabilityReference.forNeighbor(this, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP));
     }
 
+
+    @Override
+    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
+        super.writeCustomNBT(nbt, descPacket);
+        nbt.put("tank_input", tank.writeToNBT(new CompoundNBT()));
+    }
+
+    @Override
+    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
+        super.readCustomNBT(nbt, descPacket);
+        tank.readFromNBT(nbt.getCompound("tank_input"));
+    }
+
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.GRAVITY.get();
@@ -222,6 +235,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public void onProcessFinish(MultiblockProcess<SeparatorRecipe> process) {
+
     }
 
     @Override

@@ -319,7 +319,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void doProcessFluidOutput(FluidStack output)
     {
-        log.info("Outputting? 2");
+
     }
 
     @Override

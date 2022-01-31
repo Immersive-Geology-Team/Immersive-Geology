@@ -29,6 +29,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -44,7 +45,8 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     private static final Set<BlockPos> redStonePos = ImmutableSet.of(
             new BlockPos(1, 0, 0)
     );
-    private static final BlockPos gasOutputs = new BlockPos(1, 12, 1);
+    private static final ImmutableSet<BlockPos> gasOutputs = ImmutableSet.of(new BlockPos(4, 11, 1), new BlockPos(4,11,4));
+
     public static HashMap<Item, Integer> fuelMap = new HashMap<>();
     private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(ReverberationFurnaceTileEntity::getShape);
     public int FUEL_SLOT1 = 0, FUEL_SLOT2 = 1;
@@ -205,6 +207,36 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 }
             }
         }
+
+        if (master.gasTank.getFluidAmount() > 0) {
+            FluidStack out = Utils.copyFluidStackWithAmount(master.gasTank.getFluid(), Math.min(master.gasTank.getFluidAmount(), 80), false);
+            Direction fw = this.getFacing().getOpposite();
+            Direction shift_1 =  Direction.UP;
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1),fw.getOpposite()).map((output) -> {
+                int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
+                if (accepted > 0) {
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
+                            IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }).orElse(false);
+
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1),fw.getOpposite()).map((output) -> {
+                int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
+                if (accepted > 0) {
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
+                            IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }).orElse(false);
+        }
+
         if (update) {
             this.markDirty();
             this.markContainingBlockForUpdate(null);
@@ -215,12 +247,18 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
         inventory = Utils.readInventory(nbt.getList("inventory", 10), 6);
+        burntime[0] = nbt.getInt("burntime_1");
+        burntime[1] = nbt.getInt("burntime_2");
+        gasTank.readFromNBT(nbt.getCompound("gas_tank"));
     }
 
     @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         nbt.put("inventory", Utils.writeInventory(inventory));
+        nbt.putInt("burntime_1", burntime[0]);
+        nbt.putInt("burntime_2", burntime[1]);
+        nbt.put("gas_tank", gasTank.writeToNBT(new CompoundNBT()));
     }
 
     @Nullable
@@ -273,9 +311,10 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
             int slotOffset = r.getSlotOffset();
             ReverberationFurnaceTileEntity master = this.master();
-
-            if (gasTank.getFluidAmount() < gasTank.getCapacity()) {
-                gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(), false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+            if(master != null) {
+                if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
+                    master.gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(), false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+                }
             }
         }
     }
@@ -309,19 +348,31 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     public boolean isBurning(int slot) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        return master.burntime[slot] > 0;
+        assert master != null;
+        if(master.burntime.length > slot) {
+            return master.burntime[slot] > 0;
+        } else {
+            return false;
+        }
     }
 
     public boolean hasFuel(int slot) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        assert master != null;
         return fuelMap.containsKey(master.inventory.get(slot).getItem());
     }
 
     @Nonnull
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction direction) {
-        return new IFluidTank[]{gasTank};
+        if(gasOutputs.contains(posInMultiblock) && (direction == null || direction == Direction.UP)) {
+            return new IFluidTank[]{ gasTank };
+        }
+
+        return new FluidTank[0];
     }
+
+
 
     @Override
     protected boolean canFillTankFrom(int i, Direction direction, FluidStack fluidStack) {
@@ -330,14 +381,16 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     protected boolean canDrainTankFrom(int i, Direction side) {
-        return gasOutputs.equals(posInMultiblock) && (side == null || side == getFacing().getOpposite()); //TODO this seems to always be true? for some reason? ~Muddykat
+        return gasOutputs.contains(posInMultiblock) && (side == null || side == Direction.UP);
     }
 
+    @Nonnull
     @Override
     public int[] getCurrentProcessesStep() {
         return new int[0];
     }
 
+    @Nonnull
     @Override
     public int[] getCurrentProcessesMax() {
         return new int[0];
@@ -364,6 +417,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     }
 
+    @Nonnull
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.REV_FURNACE.get();
@@ -373,9 +427,11 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     @Override
     public ITextComponent[] getOverlayText(PlayerEntity playerEntity, RayTraceResult rayTraceResult, boolean b) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        assert master != null;
 
         ArrayList<StringTextComponent> info = new ArrayList<>();
         for (int offset = 0; offset < 2; offset++) {
+            assert master.getInventory() != null;
             String FuelName = master.getInventory().get(FUEL_SLOT1 + offset).getDisplayName().getString();
             String InputName = master.getInventory().get(INPUT_SLOT1 + offset).getDisplayName().getString();
             String OutputName = master.getInventory().get(OUTPUT_SLOT1 + offset).getDisplayName().getString();
@@ -389,11 +445,18 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             info.add(OutputNames);
         }
 
-        String TankOutputName = master.getInternalTanks()[0].getFluid().getDisplayName().getString();
+        String TankOutputName = Objects.requireNonNull(master.getInternalTanks())[0].getFluid().getDisplayName().getString();
 
         info.add(new StringTextComponent("Gas Output: " + TankOutputName + " x" + master.getInternalTanks()[0].getFluidAmount()));
-        info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
-        info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
+
+        if(master.burntime.length > FUEL_SLOT1) {
+            info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
+        }
+        if(master.burntime.length > FUEL_SLOT2) {
+            info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
+        }
+
+        info.add(new StringTextComponent("Pos in MB: " + posInMultiblock.toString()));
 
         return info.toArray(new ITextComponent[info.size()]);
     }
