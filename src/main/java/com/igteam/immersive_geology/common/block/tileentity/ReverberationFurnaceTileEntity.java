@@ -210,9 +210,8 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
         if (master.gasTank.getFluidAmount() > 0) {
             FluidStack out = Utils.copyFluidStackWithAmount(master.gasTank.getFluid(), Math.min(master.gasTank.getFluidAmount(), 80), false);
-            Direction fw = this.getFacing().getOpposite();
-            Direction shift_1 =  Direction.UP;
-            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1),fw.getOpposite()).map((output) -> {
+
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1), Direction.DOWN).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
                     int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
@@ -224,7 +223,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 }
             }).orElse(false);
 
-            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1),fw.getOpposite()).map((output) -> {
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, new BlockPos(4,11,1), Direction.DOWN).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
                 if (accepted > 0) {
                     int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
