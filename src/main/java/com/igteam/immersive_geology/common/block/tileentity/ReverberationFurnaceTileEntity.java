@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
+import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
@@ -28,10 +29,16 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
 
@@ -55,13 +62,95 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     private Logger log = ImmersiveGeology.getNewLogger();
     private int burntime[] = new int[2];
     private int maxBurntime = 100;
+    private LazyOptional<IItemHandler> insertionHandler1,insertionHandler2;
 
+    private static final BlockPos input1Pos = new BlockPos(1, 1, 1);
+    private static final BlockPos input2Pos = new BlockPos(1, 1, 4);
     public ReverberationFurnaceTileEntity() {
         super(ReverberationFurnaceMultiblock.INSTANCE, 0, true, IGTileTypes.REV_FURNACE.get());
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
         burntime[0] = 0;
         burntime[1] = 0;
         gasTank = new FluidTank(1000);
+        this.insertionHandler1 = this.registerConstantCap(new IEInventoryHandler(1, this.master(),INPUT_SLOT1, true, false){
+            @Override
+            public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+            {
+                return insertionHandlerImpl(slot+4, stack, simulate);
+            }
+        });
+
+        this.insertionHandler2 = this.registerConstantCap(new IEInventoryHandler(1, this.master(),INPUT_SLOT2, true, false){
+            @Override
+            public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+            {
+                return insertionHandlerImpl(slot+5, stack, simulate);
+            }
+        });
+
+    }
+
+    public ItemStack insertionHandlerImpl(int slot, ItemStack stack, boolean simulate) {
+        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) master(); //Need to manually tell the inserter to insert to Master tile only
+        if (!stack.isEmpty()) {
+            if (!master.isStackValid(slot, stack)) {
+                return stack;
+            } else {
+                int offsetSlot = slot;
+                ItemStack currentStack = (ItemStack)master.getInventory().get(offsetSlot);
+                int accepted;
+                if (currentStack.isEmpty()) {
+                    accepted = Math.min(stack.getMaxStackSize(), master.getSlotLimit(offsetSlot));
+                    if (accepted < stack.getCount()) {
+                        stack = stack.copy();
+                        if (!simulate) {
+                            master.getInventory().set(offsetSlot, stack.split(accepted));
+                            master.doGraphicalUpdates();
+                        } else {
+                            stack.shrink(accepted);
+                        }
+
+                        return stack;
+                    } else {
+                        if (!simulate) {
+                            master.getInventory().set(offsetSlot, stack.copy());
+                            master.doGraphicalUpdates();
+                        }
+
+                        return ItemStack.EMPTY;
+                    }
+                } else if (!ItemHandlerHelper.canItemStacksStack(stack, currentStack)) {
+                    return stack;
+                } else {
+                    accepted = Math.min(stack.getMaxStackSize(), master.getSlotLimit(offsetSlot)) - currentStack.getCount();
+                    ItemStack newStack;
+                    if (accepted < stack.getCount()) {
+                        stack = stack.copy();
+                        if (!simulate) {
+                            newStack = stack.split(accepted);
+                            newStack.grow(currentStack.getCount());
+                            master.getInventory().set(offsetSlot, newStack);
+                            master.doGraphicalUpdates();
+                        } else {
+                            stack.shrink(accepted);
+                        }
+
+                        return stack;
+                    } else {
+                        if (!simulate) {
+                            newStack = stack.copy();
+                            newStack.grow(currentStack.getCount());
+                            master.getInventory().set(offsetSlot, newStack);
+                            master.doGraphicalUpdates();
+                        }
+
+                        return ItemStack.EMPTY;
+                    }
+                }
+            }
+        } else {
+            return stack;
+        }
     }
 
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
@@ -351,7 +440,16 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     public boolean isStackValid(int i, ItemStack itemStack) {
-        return true;
+        if (i == INPUT_SLOT1 || i == INPUT_SLOT2)
+        {
+            return (ReverberationRecipe.findRecipe(itemStack) != null);
+        }
+        if (i == FUEL_SLOT1 || i == FUEL_SLOT2)
+        {
+            return fuelMap.containsKey(itemStack.getItem());
+
+        }
+        return false;
     }
 
     @Override
@@ -367,6 +465,22 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.REV_FURNACE.get();
+    }
+    @Nonnull
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+            if (master == null || !(input1Pos.equals(this.posInMultiblock) || input2Pos.equals(this.posInMultiblock))) {
+                return LazyOptional.empty();
+            }
+            if (input1Pos.equals(this.posInMultiblock)) {
+                return this.insertionHandler1.cast();
+            }
+            if (input2Pos.equals(this.posInMultiblock)) {
+                return this.insertionHandler2.cast();
+            }
+        }
+        return super.getCapability(capability, facing);
     }
 
     @Nullable
