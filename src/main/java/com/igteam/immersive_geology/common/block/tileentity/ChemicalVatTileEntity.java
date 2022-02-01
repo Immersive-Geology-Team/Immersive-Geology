@@ -176,6 +176,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return super.getCapability(capability, facing);
     }
 
+
     public float getActiveTicks() {
         ChemicalVatTileEntity master = this.master();
         return master.activeTicks;
