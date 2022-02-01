@@ -69,9 +69,14 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     private int maxBurntime = 100;
     private final LazyOptional<IFluidHandler> holder;
     private LazyOptional<IItemHandler> insertionHandler1,insertionHandler2;
+    private final LazyOptional<IItemHandler> extractionHandler1, extractionHandler2;
 
     private static final BlockPos input1Pos = new BlockPos(1, 1, 1);
     private static final BlockPos input2Pos = new BlockPos(1, 1, 4);
+
+    private static final BlockPos output1Pos = new BlockPos(0, 0, 1);
+    private static final BlockPos output2Pos = new BlockPos(0, 0, 4);
+
     public ReverberationFurnaceTileEntity() {
         super(ReverberationFurnaceMultiblock.INSTANCE, 0, true, IGTileTypes.REV_FURNACE.get());
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
@@ -94,6 +99,10 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 return insertionHandlerImpl(slot+5, stack, simulate);
             }
         });
+
+        this.extractionHandler1 =  this.registerConstantCap(new IEInventoryHandler(1, this.master(), OUTPUT_SLOT1, false, true));
+        this.extractionHandler2 =  this.registerConstantCap(new IEInventoryHandler(1, this.master(), OUTPUT_SLOT2, false, true));
+
     }
   public ItemStack insertionHandlerImpl(int slot, ItemStack stack, boolean simulate) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) master(); //Need to manually tell the inserter to insert to Master tile only
@@ -171,15 +180,27 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         }
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-            if (master == null || !(input1Pos.equals(this.posInMultiblock) || input2Pos.equals(this.posInMultiblock))) {
+            if (master == null) {
                 return LazyOptional.empty();
             }
+
+            if (output1Pos.equals(this.posInMultiblock))
+            {
+                return master.extractionHandler1.cast();
+            }
+
+            if (output2Pos.equals(this.posInMultiblock))
+            {
+                return master.extractionHandler2.cast();
+            }
+
             if (input1Pos.equals(this.posInMultiblock)) {
-                return this.insertionHandler1.cast();
+                return master.insertionHandler1.cast();
             }
             if (input2Pos.equals(this.posInMultiblock)) {
-                return this.insertionHandler2.cast();
+                return master.insertionHandler2.cast();
             }
+
         }
         return super.getCapability(capability, facing);
     }
