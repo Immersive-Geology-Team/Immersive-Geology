@@ -176,6 +176,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return super.getCapability(capability, facing);
     }
 
+
     public float getActiveTicks() {
         ChemicalVatTileEntity master = this.master();
         return master.activeTicks;
@@ -319,7 +320,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     @Override
     public void doProcessFluidOutput(FluidStack output)
     {
-        log.info("Outputting? 2");
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
@@ -33,13 +34,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -51,7 +55,8 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     private static final Set<BlockPos> redStonePos = ImmutableSet.of(
             new BlockPos(1, 0, 0)
     );
-    private static final BlockPos gasOutputs = new BlockPos(1, 12, 1);
+    private static final ImmutableSet<BlockPos> gasOutputs = ImmutableSet.of(new BlockPos(4, 11, 1), new BlockPos(4,11,4));
+
     public static HashMap<Item, Integer> fuelMap = new HashMap<>();
     private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(ReverberationFurnaceTileEntity::getShape);
     public int FUEL_SLOT1 = 0, FUEL_SLOT2 = 1;
@@ -62,6 +67,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     private Logger log = ImmersiveGeology.getNewLogger();
     private int burntime[] = new int[2];
     private int maxBurntime = 100;
+    private final LazyOptional<IFluidHandler> holder;
     private LazyOptional<IItemHandler> insertionHandler1,insertionHandler2;
 
     private static final BlockPos input1Pos = new BlockPos(1, 1, 1);
@@ -72,6 +78,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         burntime[0] = 0;
         burntime[1] = 0;
         gasTank = new FluidTank(1000);
+        holder = LazyOptional.of(() -> gasTank);
         this.insertionHandler1 = this.registerConstantCap(new IEInventoryHandler(1, this.master(),INPUT_SLOT1, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
@@ -87,10 +94,8 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 return insertionHandlerImpl(slot+5, stack, simulate);
             }
         });
-
     }
-
-    public ItemStack insertionHandlerImpl(int slot, ItemStack stack, boolean simulate) {
+  public ItemStack insertionHandlerImpl(int slot, ItemStack stack, boolean simulate) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) master(); //Need to manually tell the inserter to insert to Master tile only
         if (!stack.isEmpty()) {
             if (!master.isStackValid(slot, stack)) {
@@ -151,6 +156,32 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         } else {
             return stack;
         }
+    }
+
+    @Override
+    @Nonnull
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing)
+    {
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && gasOutputs.contains(posInMultiblock) && facing == Direction.UP) {
+            ReverberationFurnaceTileEntity master = master();
+            if(master != null)
+                return master.holder.cast();
+
+            return LazyOptional.empty();
+        }
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+            if (master == null || !(input1Pos.equals(this.posInMultiblock) || input2Pos.equals(this.posInMultiblock))) {
+                return LazyOptional.empty();
+            }
+            if (input1Pos.equals(this.posInMultiblock)) {
+                return this.insertionHandler1.cast();
+            }
+            if (input2Pos.equals(this.posInMultiblock)) {
+                return this.insertionHandler2.cast();
+            }
+        }
+        return super.getCapability(capability, facing);
     }
 
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
@@ -294,6 +325,41 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 }
             }
         }
+
+        if (master.gasTank.getFluidAmount() > 0 && gasOutputs.contains(posInMultiblock)) {
+            FluidStack out = Utils.copyFluidStackWithAmount(master.gasTank.getFluid(), Math.min(master.gasTank.getFluidAmount(), 80), false);
+            Direction fw = Direction.UP;
+            Direction shift_1 =  this.getIsMirrored() ?  this.getFacing().rotateY() : this.getFacing().rotateYCCW();
+            BlockPos outputPos1 = new BlockPos(4,11,4);
+            BlockPos outputPos2 = new BlockPos(1,11,4);
+
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos1,fw).map((output) -> {
+                int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
+
+                if (accepted > 0) {
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
+                            IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }).orElse(false);
+
+            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos2,fw).map((output) -> {
+                int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
+
+                if (accepted > 0) {
+                    int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false),
+                            IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.drain(drained, IFluidHandler.FluidAction.EXECUTE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }).orElse(false);
+        }
+
         if (update) {
             this.markDirty();
             this.markContainingBlockForUpdate(null);
@@ -304,12 +370,18 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
         inventory = Utils.readInventory(nbt.getList("inventory", 10), 6);
+        burntime[0] = nbt.getInt("burntime_1");
+        burntime[1] = nbt.getInt("burntime_2");
+        gasTank.readFromNBT(nbt.getCompound("gas_tank"));
     }
 
     @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         nbt.put("inventory", Utils.writeInventory(inventory));
+        nbt.putInt("burntime_1", burntime[0]);
+        nbt.putInt("burntime_2", burntime[1]);
+        nbt.put("gas_tank", gasTank.writeToNBT(new CompoundNBT()));
     }
 
     @Nullable
@@ -362,9 +434,10 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
             int slotOffset = r.getSlotOffset();
             ReverberationFurnaceTileEntity master = this.master();
-
-            if (gasTank.getFluidAmount() < gasTank.getCapacity()) {
-                gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(), false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+            if(master != null) {
+                if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
+                    master.gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(), false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+                }
             }
         }
     }
@@ -398,19 +471,31 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     public boolean isBurning(int slot) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        return master.burntime[slot] > 0;
+        assert master != null;
+        if(master.burntime.length > slot) {
+            return master.burntime[slot] > 0;
+        } else {
+            return false;
+        }
     }
 
     public boolean hasFuel(int slot) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        assert master != null;
         return fuelMap.containsKey(master.inventory.get(slot).getItem());
     }
 
     @Nonnull
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction direction) {
-        return new IFluidTank[]{gasTank};
+        if(gasOutputs.contains(posInMultiblock) && (direction == null || direction == Direction.UP)) {
+            return new IFluidTank[]{ gasTank };
+        }
+
+        return new FluidTank[0];
     }
+
+
 
     @Override
     protected boolean canFillTankFrom(int i, Direction direction, FluidStack fluidStack) {
@@ -419,14 +504,16 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     protected boolean canDrainTankFrom(int i, Direction side) {
-        return gasOutputs.equals(posInMultiblock) && (side == null || side == getFacing().getOpposite()); //TODO this seems to always be true? for some reason? ~Muddykat
+        return gasOutputs.contains(posInMultiblock) && (side == null || side == Direction.UP);
     }
 
+    @Nonnull
     @Override
     public int[] getCurrentProcessesStep() {
         return new int[0];
     }
 
+    @Nonnull
     @Override
     public int[] getCurrentProcessesMax() {
         return new int[0];
@@ -462,34 +549,21 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     }
 
+    @Nonnull
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.REV_FURNACE.get();
-    }
-    @Nonnull
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-            if (master == null || !(input1Pos.equals(this.posInMultiblock) || input2Pos.equals(this.posInMultiblock))) {
-                return LazyOptional.empty();
-            }
-            if (input1Pos.equals(this.posInMultiblock)) {
-                return this.insertionHandler1.cast();
-            }
-            if (input2Pos.equals(this.posInMultiblock)) {
-                return this.insertionHandler2.cast();
-            }
-        }
-        return super.getCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public ITextComponent[] getOverlayText(PlayerEntity playerEntity, RayTraceResult rayTraceResult, boolean b) {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
+        assert master != null;
 
         ArrayList<StringTextComponent> info = new ArrayList<>();
         for (int offset = 0; offset < 2; offset++) {
+            assert master.getInventory() != null;
             String FuelName = master.getInventory().get(FUEL_SLOT1 + offset).getDisplayName().getString();
             String InputName = master.getInventory().get(INPUT_SLOT1 + offset).getDisplayName().getString();
             String OutputName = master.getInventory().get(OUTPUT_SLOT1 + offset).getDisplayName().getString();
@@ -503,11 +577,18 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             info.add(OutputNames);
         }
 
-        String TankOutputName = master.getInternalTanks()[0].getFluid().getDisplayName().getString();
+        String TankOutputName = Objects.requireNonNull(master.getInternalTanks())[0].getFluid().getDisplayName().getString();
 
         info.add(new StringTextComponent("Gas Output: " + TankOutputName + " x" + master.getInternalTanks()[0].getFluidAmount()));
-        info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
-        info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
+
+        if(master.burntime.length > FUEL_SLOT1) {
+            info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
+        }
+        if(master.burntime.length > FUEL_SLOT2) {
+            info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
+        }
+
+        info.add(new StringTextComponent("Pos in MB: " + posInMultiblock.toString()));
 
         return info.toArray(new ITextComponent[info.size()]);
     }
@@ -516,131 +597,4 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
         return false;
     }
-/*
-    @Override
-    public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
-        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        if(master != null) {
-            ItemStack output1SlotStack = master.inventory.get(OUTPUT_SLOT1);
-            ItemStack input1SlotStack = master.inventory.get(INPUT_SLOT1);
-            ItemStack fuel1SlotStack = master.inventory.get(FUEL_SLOT1);
-            ItemStack output2SlotStack = master.inventory.get(OUTPUT_SLOT2);
-            ItemStack input2SlotStack = master.inventory.get(INPUT_SLOT2);
-            ItemStack fuel2SlotStack = master.inventory.get(FUEL_SLOT2);
-
-            if(output1SlotStack.isItemEqual(itemStack)){
-                if(itemStack.getCount() < 64) {
-                    int growMax = 64 - Math.min(itemStack.getCount() + output1SlotStack.getCount(), 64);
-                    int growAmount = Math.min(growMax, output1SlotStack.getCount());
-                    output1SlotStack.shrink(growAmount);
-                    itemStack.grow(growAmount);
-                    return true;
-                }
-            }
-            if(output2SlotStack.isItemEqual(itemStack)){
-                if(itemStack.getCount() < 64) {
-                    int growMax = 64 - Math.min(itemStack.getCount() + output2SlotStack.getCount(), 64);
-                    int growAmount = Math.min(growMax, output2SlotStack.getCount());
-                    output2SlotStack.shrink(growAmount);
-                    itemStack.grow(growAmount);
-                    return true;
-                }
-            }
-
-            if(itemStack.isEmpty()){
-                if(!output1SlotStack.isEmpty()){
-                    playerEntity.setHeldItem(hand, output1SlotStack);
-                    master.inventory.set(OUTPUT_SLOT1, ItemStack.EMPTY);
-                    return true;
-                }
-                if(!output2SlotStack.isEmpty()){
-                    playerEntity.setHeldItem(hand, output2SlotStack);
-                    master.inventory.set(OUTPUT_SLOT2, ItemStack.EMPTY);
-                    return true;
-                }
-                if(!input1SlotStack.isEmpty()) {
-                    playerEntity.setHeldItem(hand, input1SlotStack);
-                    master.inventory.set(INPUT_SLOT1, ItemStack.EMPTY);
-                    return true;
-                }
-                if(!input2SlotStack.isEmpty()) {
-                    playerEntity.setHeldItem(hand, input2SlotStack);
-                    master.inventory.set(INPUT_SLOT2, ItemStack.EMPTY);
-                    return true;
-                }
-                if(!fuel1SlotStack.isEmpty()) {
-                    playerEntity.setHeldItem(hand, fuel1SlotStack);
-                    master.inventory.set(FUEL_SLOT1, ItemStack.EMPTY);
-                    return true;
-                }
-                if(!fuel2SlotStack.isEmpty()) {
-                    playerEntity.setHeldItem(hand, fuel2SlotStack);
-                    master.inventory.set(FUEL_SLOT2, ItemStack.EMPTY);
-                    return true;
-                }
-            }
-
-            if(master.fuelMap.containsKey(itemStack.getItem())){
-                if(fuel1SlotStack.isEmpty()){
-                    master.inventory.set(FUEL_SLOT1, itemStack);
-                    playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-                    return true;
-                }
-                if(fuel1SlotStack.isItemEqual(itemStack)){
-                    if(fuel1SlotStack.getCount() < 64) {
-                        int growMax = 64 - Math.min(itemStack.getCount() + fuel1SlotStack.getCount(), 64);
-                        int growAmount = Math.min(growMax, itemStack.getCount());
-                        fuel1SlotStack.grow(growAmount);
-                        itemStack.shrink(growAmount);
-                        return true;
-                    }
-                }
-                if(fuel2SlotStack.isEmpty()){
-                    master.inventory.set(FUEL_SLOT2, itemStack);
-                    playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-                    return true;
-                }
-                if(fuel2SlotStack.isItemEqual(itemStack)){
-                    if(fuel2SlotStack.getCount() < 64) {
-                        int growMax = 64 - Math.min(itemStack.getCount() + fuel2SlotStack.getCount(), 64);
-                        int growAmount = Math.min(growMax, itemStack.getCount());
-                        fuel2SlotStack.grow(growAmount);
-                        itemStack.shrink(growAmount);
-                        return true;
-                    }
-                }
-            }
-
-            if(input1SlotStack.isEmpty()){
-                master.inventory.set(INPUT_SLOT1, itemStack);
-                playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
-            }
-            if(input1SlotStack.isItemEqual(itemStack)){
-                if(input1SlotStack.getCount() < 64) {
-                    int growMax = 64 - Math.min(itemStack.getCount() + input1SlotStack.getCount(), 64);
-                    int growAmount = Math.min(growMax, itemStack.getCount());
-                    input1SlotStack.grow(growAmount);
-                    itemStack.shrink(growAmount);
-                    return true;
-                }
-            }
-            if(input2SlotStack.isEmpty()){
-                master.inventory.set(INPUT_SLOT2, itemStack);
-                playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
-            }
-            if(input2SlotStack.isItemEqual(itemStack)){
-                if(input2SlotStack.getCount() < 64) {
-                    int growMax = 64 - Math.min(itemStack.getCount() + input2SlotStack.getCount(), 64);
-                    int growAmount = Math.min(growMax, itemStack.getCount());
-                    input2SlotStack.grow(growAmount);
-                    itemStack.shrink(growAmount);
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }*/
 }

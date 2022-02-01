@@ -21,11 +21,15 @@ public class MaterialGasSulfuric extends MaterialFluidBase {
     {
         switch(useType)
         {
+            case FLASK:
+                return hasFlask();
             case FLUIDS:
                 return hasFluidBlock();
         }
         return false;
     }
+
+
 
     @Override
     public EnumFluidType getFluidType() {
@@ -62,7 +66,7 @@ public class MaterialGasSulfuric extends MaterialFluidBase {
 
     @Override
     public boolean hasFlask() {
-        return false;
+        return true;
     }
 
     @Override
