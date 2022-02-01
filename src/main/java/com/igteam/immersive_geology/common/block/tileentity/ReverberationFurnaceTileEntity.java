@@ -304,9 +304,9 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 //ask me not, but input binds are screwed
                 if (master.isBurning(FUEL_SLOT1 + offset)) {
                     master.burntime[offset] = master.burntime[offset] - 1;
-                } else if (hasFuel(FUEL_SLOT1 + 3*offset)) {
-                    master.burntime[offset] += fuelMap.get(master.getInventory().get(FUEL_SLOT1 + 3*offset).getItem());
-                    master.getInventory().get(FUEL_SLOT1 + 3*offset).shrink(1);
+                } else if (hasFuel(FUEL_SLOT1 + offset)) {
+                    master.burntime[offset] += fuelMap.get(master.getInventory().get(FUEL_SLOT1 + offset).getItem());
+                    master.getInventory().get(FUEL_SLOT1 + offset).shrink(1);
                 }
             }
 
@@ -461,7 +461,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     public float getMinProcessDistance(MultiblockProcess multiblockProcess) {
-        return 1;
+        return 0;
     }
 
     @Override
