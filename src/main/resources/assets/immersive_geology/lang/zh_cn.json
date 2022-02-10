@@ -111,7 +111,7 @@
 
   "material.immersive_geology.gold": "金",
   "material.immersive_geology.bronze": "青铜",
-  "material.immersive_geology.viking_steel": "Ashbone Steel",
+  "material.immersive_geology.viking_steel": "骨钢",
   "material.immersive_geology.glowstone": "萤石",
   "material.immersive_geology.iron": "铁",
   "material.immersive_geology.quartz": "石英",
@@ -160,7 +160,7 @@
   "material.immersive_geology.cobaltite": "钴矿",
   "material.immersive_geology.magnetite": "磁铁矿",
   "material.immersive_geology.rocksalt": "岩盐",
-  "material.immersive_geology.hubnerite": "辉辉石",
+  "material.immersive_geology.hubnerite": "钨锰矿",
   "material.immersive_geology.hematite": "赤铁矿",
   "material.immersive_geology.cassiterite": "锡石",
   "material.immersive_geology.gypsum": "石膏",
@@ -184,7 +184,7 @@
   "material.immersive_geology.sodium": "钠",
   "material.immersive_geology.saltpeter": "硝",
   "material.immersive_geology.coal": "煤炭",
-  "material.immersive_geology.refractory": "Refractory",
+  "material.immersive_geology.refractory": "耐火锭",
 
   "component.immersive_geology.hydrochloric_acid": "氯化物",
   "component.immersive_geology.sulfuric_acid": "硫酸盐",
