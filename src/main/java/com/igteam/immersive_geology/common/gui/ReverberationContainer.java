@@ -8,36 +8,38 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class ReverberationContainer extends MultiblockAwareGuiContainer<ReverberationFurnaceTileEntity> {
     public ReverberationContainer(int id, PlayerInventory inv, ReverberationFurnaceTileEntity te) {
         super(inv, te, id, ReverberationFurnaceMultiblock.INSTANCE);
     //fuel
         this.addSlot(new IGSlot(this.inv, 0, 67, 37) {
             @Override
-            public boolean isItemValid(ItemStack itemStack) {
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 //gonna figure out what is where later
-                return te.fuelMap.containsKey(itemStack.getItem());
+                return ReverberationFurnaceTileEntity.fuelMap.containsKey(itemStack.getItem());
             }
         });
 
         this.addSlot(new IGSlot(this.inv, 1, 147, 37) {
             @Override
-            public boolean isItemValid(ItemStack itemStack) {
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 //gonna figure out what is where later
-                return te.fuelMap.containsKey(itemStack.getItem());
+                return ReverberationFurnaceTileEntity.fuelMap.containsKey(itemStack.getItem());
             }
         });
 //inputs
         this.addSlot(new IGSlot(this.inv, 4,36 ,17 ) {
             @Override
-            public boolean isItemValid(ItemStack itemStack) {
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return (ReverberationRecipe.findRecipe(itemStack) != null);
             }
         });
 
         this.addSlot(new IGSlot(this.inv, 5,116 ,17 ) {
             @Override
-            public boolean isItemValid(ItemStack itemStack) {
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return (ReverberationRecipe.findRecipe(itemStack) != null);
             }
         });
