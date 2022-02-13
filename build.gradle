@@ -33,7 +33,12 @@ repositories {
 }
 
 sourceSets {
+    api {
+        compileClasspath = main.compileClasspath
+    }
     main {
+        compileClasspath += api.output
+        runtimeClasspath += api.output
         resources {
             srcDirs = [
                     "$rootDir/src/main/resources",

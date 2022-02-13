@@ -132,7 +132,6 @@ public class CreativeMenuHandler {
                 List<IFormattableTextComponent> tooltip = new ArrayList<>();
                 tooltip.add(new StringTextComponent(corrected_name));
 
-
                 //we divide the width by four to force the tooltip to the left, as it's on a lower layer then the items in the creative menu.
                 GuiUtils.drawHoveringText(matrixStack, tooltip,mouseX,mouseY,(mc.currentScreen.width / 4),mc.currentScreen.height,80,mc.fontRenderer);
             }
