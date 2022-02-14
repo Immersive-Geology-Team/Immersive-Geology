@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:flask_sulfuric_dioxide",
     "immersive_geology:flask_glass"
   ]
 }

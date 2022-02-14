@@ -730,6 +730,7 @@ aeaa1901e91fad1ac156faf2c520569c3467d73e assets/immersive_geology/models/item/du
 0eec8b5e782cc2acb1be9697f64b8f4897dbb08d assets/immersive_geology/models/item/flask_nitric_acid.json
 0eec8b5e782cc2acb1be9697f64b8f4897dbb08d assets/immersive_geology/models/item/flask_sodium_hydroxide.json
 0eec8b5e782cc2acb1be9697f64b8f4897dbb08d assets/immersive_geology/models/item/flask_sulfuric_acid.json
+0eec8b5e782cc2acb1be9697f64b8f4897dbb08d assets/immersive_geology/models/item/flask_sulfuric_dioxide.json
 2a0803646a4d13bec1fe18cb6260ac38e5f2a3ba assets/immersive_geology/models/item/gear_aluminium.json
 2a0803646a4d13bec1fe18cb6260ac38e5f2a3ba assets/immersive_geology/models/item/gear_antimony.json
 2a0803646a4d13bec1fe18cb6260ac38e5f2a3ba assets/immersive_geology/models/item/gear_arsenic.json
@@ -1573,8 +1574,9 @@ d7007117cc88643745be9e25095907cdc685f209 data/forge/tags/items/dusts/vanadium.js
 074bafafd5bd81741f09ab3c5ae5f99d95be2711 data/forge/tags/items/dusts/zinc.json
 81bb4bbe1cdd10b5bfcbed4657e3b4747f3eacaa data/forge/tags/items/dusts/zircon.json
 e1fda02c249fd3bbbb2dc864ac8feb7d8e46973a data/forge/tags/items/dusts/zirconium.json
-e4010c0e269baa9475f05355e419c4b9f9b5adfa data/forge/tags/items/flasks.json
+9232eef62ef55766775a66cc6a540a658cdd14aa data/forge/tags/items/flasks.json
 e4010c0e269baa9475f05355e419c4b9f9b5adfa data/forge/tags/items/flasks/glass.json
+0d6547575b759163ae8e289a23562e5602095b93 data/forge/tags/items/flasks/sulfuric_dioxide.json
 9b49a2b98167efe98640063c5c1cf6bf0ca4c801 data/forge/tags/items/gears.json
 946dd843a5e8116ce28603a94157294167f868ec data/forge/tags/items/gears/aluminium.json
 17275e3acaee95786bb1caba6468de7c8fc03a0c data/forge/tags/items/gears/antimony.json

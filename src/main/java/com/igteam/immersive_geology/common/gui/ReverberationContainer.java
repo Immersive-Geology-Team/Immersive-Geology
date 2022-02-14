@@ -30,14 +30,14 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
             }
         });
 //inputs
-        this.addSlot(new IGSlot(this.inv, 4,67 ,37 ) {
+        this.addSlot(new IGSlot(this.inv, 4,36 ,17 ) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return (ReverberationRecipe.findRecipe(itemStack) != null);
             }
         });
 
-        this.addSlot(new IGSlot(this.inv, 5,147 ,37 ) {
+        this.addSlot(new IGSlot(this.inv, 5,116 ,17 ) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return (ReverberationRecipe.findRecipe(itemStack) != null);
@@ -45,8 +45,18 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
         });
 
         //outputs
-        this.addSlot(new IGSlot(this.inv, 2, 36, 17));
-        this.addSlot(new IGSlot(this.inv, 3, 116, 17));
+        this.addSlot(new IGSlot(this.inv, 2, 67, 37){
+            @Override
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
+                return false;
+            }
+        });
+        this.addSlot(new IGSlot(this.inv, 3, 147, 37){
+            @Override
+            public boolean isItemValid(@Nonnull ItemStack itemStack) {
+                return false;
+            }
+        });
 
         this.slotCount = 6;
 
