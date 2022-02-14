@@ -1,12 +1,12 @@
 package igteam.immersive_geology.materials.data.stone.variants;
 
-import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.data.stone.MaterialBasStone;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
 
-public class MaterialDefaultStone extends MaterialBaseStone {
+public class MaterialDefaultStone extends MaterialBasStone {
     public MaterialDefaultStone() {
         super("stone");
     }

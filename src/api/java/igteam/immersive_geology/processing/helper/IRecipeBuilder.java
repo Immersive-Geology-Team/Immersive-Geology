@@ -1,6 +1,5 @@
 package igteam.immersive_geology.processing.helper;
 
-import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import igteam.immersive_geology.processing.methods.IGSeparatorMethod;

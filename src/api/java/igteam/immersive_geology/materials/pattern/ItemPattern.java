@@ -2,9 +2,6 @@ package igteam.immersive_geology.materials.pattern;
 
 import igteam.immersive_geology.menu.ItemSubGroup;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public enum ItemPattern implements MaterialPattern {
     ingot(ItemSubGroup.processed),
     stone_chunk,
@@ -25,6 +22,7 @@ public enum ItemPattern implements MaterialPattern {
     clay(ItemSubGroup.misc, ""),
     fuel,
     slag(ItemSubGroup.misc),
+    flask(ItemSubGroup.misc),
     block_item;
 
     private final ItemSubGroup subgroup;

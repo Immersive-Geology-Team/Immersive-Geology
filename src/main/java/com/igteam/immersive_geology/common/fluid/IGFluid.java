@@ -1,14 +1,13 @@
 package com.igteam.immersive_geology.common.fluid;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.fluid.helper.IGFluidAttributes;
-import com.igteam.immersive_geology.common.item.IGBucketItem;
+import com.igteam.immersive_geology.common.item.legacy.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.materials.FluidEnum;
+import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FlowingFluidBlock;
@@ -19,8 +18,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.WaterFluid;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -36,10 +37,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -57,7 +56,7 @@ public class IGFluid extends FlowingFluid {
     protected final String fluidName;
     protected final ResourceLocation stillTex;
     protected final ResourceLocation flowingTex;
-    protected final MaterialFluidBase fluidMaterial;
+    protected final FluidEnum fluidMaterial;
     protected IGFluid flowing;
     protected IGFluid source;
 
@@ -67,33 +66,28 @@ public class IGFluid extends FlowingFluid {
     protected IGBucketItem bucket;
     private int burnTime = -1;
 
-    private boolean isSlurry;
+    private MaterialPattern pattern;
 
-    private boolean isSolid;
-
-    public IGFluid(MaterialFluidBase material)
+    public IGFluid(FluidEnum material)
     {
-        this(material, null, false);
+        this(material, null, MiscPattern.fluid_still);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSlurry)
+    public IGFluid(FluidEnum material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, MaterialPattern pattern)
     {
-        this(material, buildAttributes, true, isSlurry);
+        this(material, buildAttributes, true, pattern);
     }
 
-    public IGFluid(MaterialFluidBase material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSource, boolean isSlurry)
+    public IGFluid(FluidEnum material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSource, MaterialPattern pattern)
     {
         this.fluidMaterial = material;
         this.fluidName = material.getName();
-        this.stillTex = material.getFluidStill();
-        this.flowingTex = material.getFluidFlowing();
+        this.stillTex = material.getTextureLocation(MiscPattern.fluid_still);
+        this.flowingTex = material.getTextureLocation(MiscPattern.fluid_flowing);
         this.buildAttributes = buildAttributes;
-        this.isSolid = material.getIsSolid();
-        this.isSlurry = isSlurry;
+        this.pattern = pattern;
 
-        String registryName = isSlurry ?
-                IGRegistrationHolder.getSlurryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), !isSource)
-                : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLUIDS) + (isSource ? "" : "_flowing");
+        String registryName = pattern.getName() + "_" + material.getName();
 
         if(!isSource){
             flowing = this;
@@ -107,46 +101,46 @@ public class IGFluid extends FlowingFluid {
 
             this.block.setRegistryName(IGLib.MODID, registryName);
 
-
-            if(fluidMaterial.hasBucket()) {
-                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.BUCKET, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(Items.BUCKET)) {
-                    @Override
-                    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-                        return new FluidBucketWrapper(stack);
-                    }
-
-                    @Override
-                    public int getBurnTime(ItemStack itemStack) {
-                        return burnTime;
-                    }
-                };
-
-                String bucketRegName = isSlurry ?
-                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.BUCKET)
-                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET);
-
-                this.bucket.setRegistryName(bucketRegName);
-                DispenserBlock.registerDispenseBehavior(this.bucket, BUCKET_DISPENSE_BEHAVIOR);
-            }
-
-            if(fluidMaterial.hasFlask()) {
-                Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
-                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask))
-                {
-                    @Override
-                    public int getBurnTime(ItemStack itemStack) {
-                        return burnTime;
-                    }
-                };
-                String bucketRegName = isSlurry ?
-                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.FLASK)
-                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLASK);
-
-
-                this.bucket.setRegistryName(bucketRegName);
-
-                DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
-            }
+//
+//            if(fluidMaterial.hasBucket()) {
+//                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.BUCKET, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(Items.BUCKET)) {
+//                    @Override
+//                    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+//                        return new FluidBucketWrapper(stack);
+//                    }
+//
+//                    @Override
+//                    public int getBurnTime(ItemStack itemStack) {
+//                        return burnTime;
+//                    }
+//                };
+//
+//                String bucketRegName = isSlurry ?
+//                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.BUCKET)
+//                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.BUCKET);
+//
+//                this.bucket.setRegistryName(bucketRegName);
+//                DispenserBlock.registerDispenseBehavior(this.bucket, BUCKET_DISPENSE_BEHAVIOR);
+//            }
+//
+//            if(fluidMaterial.hasFlask()) {
+//                Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
+//                this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, MaterialUseType.FLASK, new Item.Properties().maxStackSize(1).group(ImmersiveGeology.IGGroup).containerItem(flask))
+//                {
+//                    @Override
+//                    public int getBurnTime(ItemStack itemStack) {
+//                        return burnTime;
+//                    }
+//                };
+//                String bucketRegName = isSlurry ?
+//                        IGRegistrationHolder.getRegistryKey(((MaterialSlurryWrapper) fluidMaterial).getSoluteMaterial(), ((MaterialSlurryWrapper) fluidMaterial).getBaseFluidMaterial(), MaterialUseType.FLASK)
+//                        : IGRegistrationHolder.getRegistryKey(fluidMaterial, MaterialUseType.FLASK);
+//
+//
+//                this.bucket.setRegistryName(bucketRegName);
+//
+//                DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
+//            }
 
             flowing = createFlowingVariant();
             setRegistryName(registryName);
@@ -268,7 +262,7 @@ public class IGFluid extends FlowingFluid {
 
     protected IGFluid createFlowingVariant()
     {
-        IGFluid ret = new IGFluid(fluidMaterial, buildAttributes, false, isSlurry)
+        IGFluid ret = new IGFluid(fluidMaterial, buildAttributes, false, pattern)
         {
             @Override
             protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder)
@@ -362,7 +356,7 @@ public class IGFluid extends FlowingFluid {
             if(bucketItem.tryPlaceContainedLiquid(null, world, blockpos, null))
             {
                 bucketItem.onLiquidPlaced(world, stack, blockpos);
-                Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
+                Item flask = MiscEnum.Glass.getItem(ItemPattern.flask);
                 return new ItemStack(flask);
             }
             else
@@ -379,21 +373,21 @@ public class IGFluid extends FlowingFluid {
     }
 
     public boolean hasBucket(){
-        return fluidMaterial.hasBucket();
+        return false;
     }
 
     public boolean hasFlask(){
-        return fluidMaterial.hasFlask();
+        return true;
     }
 
     //controls if the fluid is transparent or not.
     public boolean isSolidFluid() {
-        return isSolid;
+        return true;
     }
 
-    public boolean isSlurry() {return isSlurry;}
+    public boolean isSlurry() {return pattern == MiscPattern.slurry;}
 
-    public MaterialFluidBase getFluidMaterial() {
+    public FluidEnum getFluidMaterial() {
         return fluidMaterial;
     }
 }

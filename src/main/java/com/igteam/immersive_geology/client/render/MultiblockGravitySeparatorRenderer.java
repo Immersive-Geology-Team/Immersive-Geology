@@ -1,34 +1,23 @@
 package com.igteam.immersive_geology.client.render;
 
-import blusunrize.immersiveengineering.api.tool.assembler.ItemStackRecipeQuery;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.SeparatorRecipe;
-import com.igteam.immersive_geology.client.model.IGModel;
-import com.igteam.immersive_geology.client.model.IGModels;
-import com.igteam.immersive_geology.client.model.ModelGravitySeparator;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Iterator;
-import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
 public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<GravitySeparatorTileEntity> {

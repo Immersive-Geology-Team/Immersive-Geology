@@ -1,14 +1,10 @@
 package igteam.immersive_geology.processing.methods;
 
-import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.Tag;
-
-import java.util.ArrayList;
 
 public class IGCraftingMethod extends IGProcessingMethod {
     public IGCraftingMethod(IGProcessingStage stage) {

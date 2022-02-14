@@ -1,7 +1,7 @@
 package com.igteam.immersive_geology.common.crafting;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.*;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.*;
 import com.igteam.immersive_geology.common.crafting.serializers.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.crafting.IRecipeSerializer;

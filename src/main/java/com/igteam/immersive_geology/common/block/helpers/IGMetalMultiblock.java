@@ -4,14 +4,13 @@ import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalMultiblockBlock;
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.common.item.IGBlockItem;
+import com.igteam.immersive_geology.legacy_api.materials.Material;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
+import com.igteam.immersive_geology.common.item.legacy.IGBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.item.Item;
-import net.minecraft.state.Property;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 

@@ -1,8 +1,7 @@
 package com.igteam.immersive_geology.common.integrations;
 
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.CalcinationRecipe;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
-import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.ReverberationRecipe;
+import com.igteam.immersive_geology.legacy_api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
@@ -15,7 +14,6 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 

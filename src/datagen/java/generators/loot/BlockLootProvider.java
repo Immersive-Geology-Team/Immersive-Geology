@@ -2,11 +2,11 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.igteam.immersive_geology.api.loot.OreDropProperty;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
-import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.legacy_api.loot.OreDropProperty;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
+import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;
+import com.igteam.immersive_geology.common.block.legacy.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.core.lib.IGLib;

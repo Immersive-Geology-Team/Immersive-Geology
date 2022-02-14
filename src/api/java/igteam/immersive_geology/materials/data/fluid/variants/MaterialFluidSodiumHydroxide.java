@@ -1,9 +1,9 @@
 package igteam.immersive_geology.materials.data.fluid.variants;
 
-import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.fluid.MaterialBasFluid;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
-public class MaterialFluidSodiumHydroxide extends MaterialBaseFluid {
+public class MaterialFluidSodiumHydroxide extends MaterialBasFluid {
 
     public MaterialFluidSodiumHydroxide(){
         super("sodium_hydroxide");

@@ -15,7 +15,6 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.*;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 

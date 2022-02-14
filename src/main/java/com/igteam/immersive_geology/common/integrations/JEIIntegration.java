@@ -1,8 +1,7 @@
 package com.igteam.immersive_geology.common.integrations;
 
 
-import com.igteam.immersive_geology.api.crafting.IGMultiblockRecipe;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.*;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import mezz.jei.api.IModPlugin;

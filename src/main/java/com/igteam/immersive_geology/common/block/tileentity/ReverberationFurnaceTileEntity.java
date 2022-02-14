@@ -9,11 +9,11 @@ import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
-import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.ReverberationRecipe;
+import igteam.immersive_geology.materials.FluidEnum;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -42,7 +41,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -456,7 +454,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             ReverberationFurnaceTileEntity master = this.master();
             if(master != null) {
                 if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
-                    master.gasTank.fill(new FluidStack(IGRegistrationHolder.getFluidByMaterial(FluidEnum.SulfurDioxide.getMaterial(), false), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(MiscPattern.fluid), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
                 }
             }
         }

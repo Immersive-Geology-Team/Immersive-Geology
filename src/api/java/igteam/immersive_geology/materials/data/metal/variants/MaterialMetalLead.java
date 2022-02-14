@@ -1,11 +1,11 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialMetalLead extends MaterialBaseMetal {
+public class MaterialMetalLead extends MaterialBasMetal {
     public MaterialMetalLead() {
         super("lead");
     }

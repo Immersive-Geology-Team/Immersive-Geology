@@ -1,10 +1,7 @@
 package igteam.immersive_geology.processing;
 
-import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

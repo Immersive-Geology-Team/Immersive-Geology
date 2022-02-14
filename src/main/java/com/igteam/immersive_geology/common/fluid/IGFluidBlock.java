@@ -1,8 +1,7 @@
 package com.igteam.immersive_geology.common.fluid;
 
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
+import com.igteam.immersive_geology.legacy_api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
@@ -12,7 +11,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EmitterParticle;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +25,6 @@ import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
@@ -116,7 +113,7 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
     }
 
     @Override
-    public com.igteam.immersive_geology.api.materials.Material getMaterial(BlockMaterialType type) {
+    public com.igteam.immersive_geology.legacy_api.materials.Material getMaterial(BlockMaterialType type) {
         return null;
     }
 

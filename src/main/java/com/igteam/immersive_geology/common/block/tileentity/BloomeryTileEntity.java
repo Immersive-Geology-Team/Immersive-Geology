@@ -8,7 +8,7 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.BloomeryRecipe;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.BloomeryRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.AbstractFurnaceBlock;

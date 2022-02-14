@@ -1,20 +1,16 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.api.IEEnums;
 import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import igteam.immersive_geology.processing.helper.RecipeMethod;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Items;
 
-public class MaterialMetalGold extends MaterialBaseMetal {
+public class MaterialMetalGold extends MaterialBasMetal {
 
     public MaterialMetalGold() {
         super("gold");

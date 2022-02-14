@@ -8,7 +8,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.CalcinationRecipe;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.CalcinationRecipe;
 import com.igteam.immersive_geology.common.multiblocks.RotaryKilnMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.entity.player.PlayerEntity;

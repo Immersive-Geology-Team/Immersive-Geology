@@ -1,8 +1,6 @@
 package com.igteam.immersive_geology.common.fluid.helper;
 
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -28,12 +26,12 @@ public class IGFluidAttributes extends FluidAttributes {
         if (stack.getFluid() instanceof IGFluid) {
             IGFluid fluid = (IGFluid) stack.getFluid();
             String base_name = getTranslationKey();
-            if (fluid.getFluidMaterial() instanceof MaterialSlurryWrapper) {
-                MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluid.getFluidMaterial();
-                localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
-                localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
-                base_name = "fluid."+IGLib.MODID+".slurry";
-            }
+//            if (fluid.getFluidMaterial() instanceof SlurryEnum) {
+//                MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluid.getFluidMaterial();
+//                localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
+//                localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+//                base_name = "fluid."+IGLib.MODID+".slurry";
+//            }
             TranslationTextComponent name = new TranslationTextComponent(base_name, localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }

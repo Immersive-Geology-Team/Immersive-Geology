@@ -1,16 +1,13 @@
 package generators;
 
-import blusunrize.immersiveengineering.data.ItemModels;
-import blusunrize.immersiveengineering.data.models.TRSRModelBuilder;
-import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialMineralBase;
-import com.igteam.immersive_geology.common.block.*;
+import com.igteam.immersive_geology.common.block.legacy.*;
+import com.igteam.immersive_geology.common.item.legacy.*;
+import com.igteam.immersive_geology.legacy_api.materials.Material;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
+import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
-import com.igteam.immersive_geology.common.item.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;

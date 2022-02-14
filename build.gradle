@@ -22,7 +22,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-version = '1.1v1'
+version = '1.2v16'
 group = 'com.igteam.immersive_geology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'immersive_geology'
 
@@ -37,14 +37,14 @@ sourceSets {
         compileClasspath = main.compileClasspath
     }
     main {
-        compileClasspath += api.output
-        runtimeClasspath += api.output
         resources {
             srcDirs = [
                     "$rootDir/src/main/resources",
-                    "$rootDir/src/generated/resources"
+                    "$rootDir/src/generated/resources",
             ]
         }
+        compileClasspath += api.output
+        runtimeClasspath += api.output
     }
     datagen {
         compileClasspath += main.compileClasspath
@@ -69,6 +69,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                 }
             }
         }
@@ -86,6 +87,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                 }
             }
         }
@@ -108,6 +110,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                     source sourceSets.datagen
                 }
             }
@@ -123,48 +126,104 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
 }
 
+
 def version_replaces = [
-        'version': project.version
+        'version': version_ig,
+        'mc_version': minecraft_version_range,
+        'forge_version': version_forge,
+        'ie_version': ie_version_range
 ]
 
 processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        include 'META-INF/mods.toml'
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    filesMatching("META-INF/mods.toml") {
         expand version_replaces
     }
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'META-INF/mods.toml'
-    }
-    outputs.upToDateWhen { false }
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
+// When using "Run using IntelliJ" (the only option with well-working hotswapping) the used "resources" directory is
+// different from the one used by gradle/the processResources task
+task copyModsTomlForIntelliJ(type: Copy) {
+    from processResources.destinationDir
+    into "$projectDir/out/production/resources"
+    include "META-INF/mods.toml"
+}
+
+copyModsTomlForIntelliJ.dependsOn processResources
+afterEvaluate {
+    // prepareRuns doesn't exist before afterEvaluate
+    prepareRuns.dependsOn copyModsTomlForIntelliJ
+}
+
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "immersive_geology",
-                "Specification-Vendor"    : "IG Team",
+                "Specification-Vendor"    : "ig_team",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "IG Team",
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "ig_team",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def reobfArtifact = artifacts.add('default', reobfFile) { type 'jar'; builtBy 'reobfJar'; }
+// Example configuration to allow publishing using the maven-publish plugin
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar')
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+// publish.dependsOn('reobfJar')
+
+apply plugin: 'maven-publish'
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact reobfArtifact
+        maven(MavenPublication) {
+            groupId = project.group
+            version = project.version
+            artifactId = project.archivesBaseName
+
+            artifact jar
+
+            pom {
+                name = project.archivesBaseName
+                description = project.archivesBaseName
+                url = 'https://www.curseforge.com/minecraft/mc-mods/immersive-geology'
+                scm {
+                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology/'
+                    connection = 'scm:git:git@github.com/Immersive-Geology-Team/Immersive-Geology.git'
+                    developerConnection = 'scm:git:git@github.com/Immersive-Geology-Team/Immersive-Geology.git'
+                }
+                issueManagement {
+                    system = 'github'
+                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology/issues'
+                }
+
+                developers {
+                    developer {
+                        id = 'Muddykat'
+                        name = 'Muddykat'
+                    }
+                }
+            }
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/mcmodsrepo"
         }
+    }
+}
+
+// Running this is equivalent to running genIntellijRuns, but it exists before afterEvaluate
+task genIntellijRunsDummy {}
+
+tasks.withType(Task) {
+    if (it.name == "genIntellijRuns") {
+        genIntellijRunsDummy.dependsOn it
     }
 }

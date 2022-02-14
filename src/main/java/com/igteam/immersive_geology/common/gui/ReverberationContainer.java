@@ -1,6 +1,6 @@
 package com.igteam.immersive_geology.common.gui;
 
-import com.igteam.immersive_geology.api.crafting.recipes.recipe.ReverberationRecipe;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.ReverberationRecipe;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.gui.helper.IGSlot;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;

@@ -5,12 +5,9 @@ import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
-import com.igteam.immersive_geology.common.item.IGBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
@@ -84,7 +81,7 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
     }
 
     @Override
-    public com.igteam.immersive_geology.api.materials.Material getMaterial(BlockMaterialType type) {
+    public com.igteam.immersive_geology.legacy_api.materials.Material getMaterial(BlockMaterialType type) {
         return MaterialEnum.Vanilla.getMaterial();
     }
 

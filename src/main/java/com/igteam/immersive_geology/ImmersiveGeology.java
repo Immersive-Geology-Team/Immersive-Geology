@@ -6,12 +6,12 @@
 
 package com.igteam.immersive_geology;
 
-import com.igteam.immersive_geology.api.crafting.recipes.RecipeReloadListener;
+import com.igteam.immersive_geology.legacy_api.crafting.recipes.RecipeReloadListener;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.api.loot.LootIG;
+import com.igteam.immersive_geology.legacy_api.loot.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -19,6 +19,7 @@ import com.igteam.immersive_geology.core.proxy.ServerProxy;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import igteam.immersive_geology.tags.IGTags;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +39,6 @@ import org.apache.logging.log4j.util.StackLocatorUtil;
 @Mod(IGLib.MODID)
 public class ImmersiveGeology
 {
-
 	private static final Logger LOGGER = getNewLogger();
 	public static Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
@@ -52,7 +52,9 @@ public class ImmersiveGeology
 
 		LootIG.initialize();
 
-		IGRegistrationHolder.generateVariants();
+		IGRegistrationHolder.initialize();
+		IGTags.initialize();
+		IGRegistrationHolder.buildRecipes();
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL);
 
@@ -73,6 +75,7 @@ public class ImmersiveGeology
 
 		IGTileTypes.REGISTER.register(modBus);
 		Serializers.RECIPE_SERIALIZERS.register(modBus);
+
 
 		proxy.registerContainersAndScreens();
 	}

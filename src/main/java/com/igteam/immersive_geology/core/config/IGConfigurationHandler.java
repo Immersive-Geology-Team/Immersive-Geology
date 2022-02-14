@@ -1,8 +1,8 @@
 package com.igteam.immersive_geology.core.config;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.Material;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
 import com.igteam.immersive_geology.core.lib.IGLib;
 
 import net.minecraftforge.api.distmarker.Dist;

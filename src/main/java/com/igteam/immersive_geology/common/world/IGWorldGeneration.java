@@ -1,9 +1,7 @@
 package com.igteam.immersive_geology.common.world;
 
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.common.block.IGOreBlock;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
 import com.igteam.immersive_geology.core.config.IGOreConfig;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.block.Block;
@@ -15,7 +13,7 @@ import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
+
 import java.util.HashMap;
 import java.util.Map;
 

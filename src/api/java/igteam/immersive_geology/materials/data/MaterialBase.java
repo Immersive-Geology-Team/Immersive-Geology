@@ -15,7 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Level;
@@ -24,7 +23,6 @@ import org.apache.logging.log4j.Logger;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.StageProvider;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 import static igteam.immersive_geology.materials.helper.IGRegistryProvider.getRegistryKey;

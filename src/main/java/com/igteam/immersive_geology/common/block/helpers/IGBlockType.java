@@ -1,9 +1,7 @@
 package com.igteam.immersive_geology.common.block.helpers;
 
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import net.minecraft.block.Block;
+import com.igteam.immersive_geology.legacy_api.materials.Material;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
 
 public interface IGBlockType {
     String getHolderName();

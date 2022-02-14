@@ -1,12 +1,12 @@
 package com.igteam.immersive_geology.client.menu;
 
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
-import com.igteam.immersive_geology.common.item.IGBlockItem;
-import com.igteam.immersive_geology.common.item.IGBucketItem;
-import com.igteam.immersive_geology.common.item.ItemBase;
+import igteam.immersive_geology.item.IGItemType;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -42,62 +42,48 @@ public class IGItemGroup extends ItemGroup {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void fill(NonNullList<ItemStack> items) {
-        HashMap<MaterialUseType, ArrayList<Item>> itemMap = new HashMap<>();
+        HashMap<MaterialPattern, ArrayList<Item>> itemMap = new HashMap<>();
 
         for(Item item : Registry.ITEM) {
             if(item instanceof IGSubGroup) {
                 IGSubGroup itm = (IGSubGroup )item;
                 if(itm.getSubGroup() == selectedGroup) {
-                    if(item instanceof ItemBase){
-                        ItemBase base_item = (ItemBase) item;
-                        MaterialUseType use_type = base_item.getUseType();
-                        if(itemMap.containsKey(use_type)){
-                            ArrayList<Item> list = itemMap.get(use_type);
+                    if(item instanceof IGItemType){
+                        IGItemType base_item = (IGItemType) item;
+                        MaterialPattern pattern = base_item.getPattern();
+                        if(itemMap.containsKey(pattern)){
+                            ArrayList<Item> list = itemMap.get(pattern);
                             list.add(item);
-                            itemMap.replace(use_type, list);
+                            itemMap.replace(pattern, list);
                         } else {
                             ArrayList<Item> list = new ArrayList<>();
                             list.add(item);
-                            itemMap.put(use_type, list);
+                            itemMap.put(pattern, list);
                         }
                     }
-
-                    if(item instanceof IGBlockItem) {
-                        IGBlockItem block_item = (IGBlockItem) item;
-                        if(block_item.getBlock() instanceof IGBlockType){
-                            IGBlockType block = ((IGBlockType) block_item.getBlock());
-                            MaterialUseType use_type = block.getBlockUseType();
-                            if(!itemMap.containsKey(use_type)){
-                                ArrayList<Item> list = new ArrayList<>();
-                                list.add(item);
-                                itemMap.put(use_type, list);
-                            } else {
-                                ArrayList<Item> list = itemMap.get(use_type);
-                                list.add(item);
-                                itemMap.replace(use_type, list);
-                            }
-                        }
-                    }
-
-                    if(item instanceof IGBucketItem){
-                        IGBucketItem bucketItem = (IGBucketItem) item;
-                        MaterialUseType use_type = MaterialUseType.BUCKET;
-                        if(itemMap.containsKey(use_type)){
-                            ArrayList<Item> list = itemMap.get(use_type);
-                            list.add(bucketItem);
-                            itemMap.replace(use_type, list);
-                        } else {
-                            ArrayList<Item> list = new ArrayList<>();
-                            list.add(bucketItem);
-                            itemMap.put(use_type, list);
-                        }
-                    }
-
                 }
             }
         }
 
-        for(MaterialUseType key : MaterialUseType.values()){
+        for(MaterialPattern key : ItemPattern.values()){
+            ArrayList<Item> list = itemMap.get(key);
+            if(list != null) {
+                for (Item item : list) {
+                    item.fillItemGroup(this, items);
+                }
+            }
+        }
+
+        for(MaterialPattern key : BlockPattern.values()){
+            ArrayList<Item> list = itemMap.get(key);
+            if(list != null) {
+                for (Item item : list) {
+                    item.fillItemGroup(this, items);
+                }
+            }
+        }
+
+        for(MaterialPattern key : MiscPattern.values()){
             ArrayList<Item> list = itemMap.get(key);
             if(list != null) {
                 for (Item item : list) {

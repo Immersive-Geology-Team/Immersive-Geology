@@ -1,16 +1,11 @@
 package com.igteam.immersive_geology.common.item.helper;
 
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.material_bases.MaterialFluidBase;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
+import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
+import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.common.item.IGBucketItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;

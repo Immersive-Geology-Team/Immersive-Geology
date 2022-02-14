@@ -1,140 +1,183 @@
 package com.igteam.immersive_geology.core.registration;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.api.materials.Material;
-import com.igteam.immersive_geology.api.materials.MaterialEnum;
-import com.igteam.immersive_geology.api.materials.MaterialUseType;
-import com.igteam.immersive_geology.api.materials.fluid.FluidEnum;
-import com.igteam.immersive_geology.api.materials.fluid.SlurryEnum;
-import com.igteam.immersive_geology.api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
-import com.igteam.immersive_geology.common.block.IGStaticBlock;
+import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import com.igteam.immersive_geology.common.item.IGGenericItem;
+import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.materials.*;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
-@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class IGRegistrationHolder {
+    private static Logger logger = ImmersiveGeology.getNewLogger();
 
-    public static HashMap<String, Item> registeredIGItems = new HashMap<>();
-    public static HashMap<String, Block> registeredIGBlocks = new HashMap<>();
-    public static HashMap<String, Fluid> registeredIGFluids = new HashMap<>();
-    private static Logger log = ImmersiveGeology.getNewLogger();
+    public static void initialize(){
+        logger.info("Registration of Material Interfaces");
+
+        registerForInterface(StoneEnum.values());
+        registerForInterface(MetalEnum.values());
+        registerForInterface(MineralEnum.values());
+        registerForInterface(FluidEnum.values());
+        registerForInterface(GasEnum.values());
+    }
+
+
+    public static void buildRecipes() {
+        logger.log(Level.INFO, "Building Recipes");
+        buildMaterialRecipes(StoneEnum.values());
+        buildMaterialRecipes(MetalEnum.values());
+        buildMaterialRecipes(MineralEnum.values());
+        buildMaterialRecipes(FluidEnum.values());
+        buildMaterialRecipes(GasEnum.values());
+    }
+
+    private static void registerForInterface(MaterialInterface... material){
+        Arrays.stream(material).iterator().forEachRemaining((m) -> {
+            //Item Patterns
+            Arrays.stream(ItemPattern.values()).iterator().forEachRemaining((pattern) -> {
+                if(m.hasPattern(pattern)){
+                    registerForItemPattern(m, pattern);
+                }
+            });
+
+            //Block Patterns
+            Arrays.stream(BlockPattern.values()).iterator().forEachRemaining((pattern) -> {
+                if(m.hasPattern(pattern)){
+                    registerForBlockPattern(m, pattern);
+                }
+            });
+
+            //Misc Patterns
+            Arrays.stream(MiscPattern.values()).iterator().forEachRemaining((pattern) -> {
+                if(m.hasPattern(pattern)){
+                    registerForMiscPattern(m, pattern);
+                }
+            });
+        });
+    }
+
+    private static void registerForItemPattern(MaterialInterface m, ItemPattern p){
+        switch(p) {
+            case ore_chunk: case ore_bit: case dirty_crushed_ore: {
+                Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
+                    IGGenericItem multi_item = new IGGenericItem(m, p);
+                    multi_item.addMaterial(MaterialTexture.base, stone);
+                    multi_item.addMaterial(MaterialTexture.overlay, m);
+                    multi_item.finalizeData();
+                    register(multi_item);
+                });
+            }
+            break;
+            case block_item: {
+                //DO NOT REGISTER HERE, used as an item pattern for all block items,
+                //which is registered with the Block itself.
+            }
+            break;
+            default: {
+                IGGenericItem item = new IGGenericItem(m, p);
+                item.finalizeData();
+                register(item);
+            }
+            break;
+        }
+    }
+
+    private static void registerForBlockPattern(MaterialInterface m, BlockPattern p){
+        switch(p) {
+            case ore: {
+                Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
+                    if(m.generateOreFor(stone)) {
+                        IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                        multi_block.addMaterial(stone, MaterialTexture.base);
+                        multi_block.addMaterial(m, MaterialTexture.overlay);
+                        multi_block.finalizeData();
+                        register(multi_block.asItem());
+                        register(multi_block);
+                    }
+                });
+            }
+            break;
+            default: {
+                IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                multi_block.finalizeData();
+                register(multi_block.asItem());
+                register(multi_block);
+            }
+            break;
+        }
+    }
+
+    private static void registerForMiscPattern(MaterialInterface m, MiscPattern p){
+
+    }
+
+    private static void register(Item i){
+        IGRegistryProvider.IG_ITEM_REGISTRY.put(i.getRegistryName(), i);
+    }
+
+    private static void register(Block b){
+        IGRegistryProvider.IG_BLOCK_REGISTRY.put(b.getRegistryName(), b);
+    }
+
+    private static void register(Fluid f){
+        IGRegistryProvider.IG_FLUID_REGISTRY.put(f.getRegistryName(), f);
+    }
 
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
-        log.info("Adding Static Item Registries");
+        logger.info("Applying Item Registration");
 
-        Items.initializeStaticItems();
-
-        log.info("Applying Item Registration");
-        registeredIGItems.values().forEach((item) -> {
-                event.getRegistry().register(item);
+        IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((item) -> {
+            event.getRegistry().register(item);
         });
     }
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
-        log.info("Adding Static Block Registries");
+        logger.info("Applying Block Registries");
 
-        Blocks.initializeStaticBlocks();
-
-        log.info("Applying Block Registries");
-        registeredIGBlocks.values().forEach((block) ->{
-                event.getRegistry().register(block);
+        IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
+            event.getRegistry().register(block);
         });
-    }
-
-    public static boolean variantsGenerated = false;
-
-    public static void generateVariants(){
-        if(!variantsGenerated) {
-            Arrays.stream(MaterialEnum.values()).forEach(material -> {
-                IGVariantHolder.createVariants(material.getMaterial());
-            });
-
-            for (FluidEnum wrapper : FluidEnum.values()) {
-                IGVariantHolder.createVariants(wrapper.getMaterial()); //Create and Register all basic fluids
-            }
-
-            for (SlurryEnum wrapper : SlurryEnum.values()) {
-                for (MaterialSlurryWrapper slurry : wrapper.getEntries()) {
-                    IGVariantHolder.createVariants(slurry); //Create and Register all Slurries
-                }
-            }
-        }
-        variantsGenerated = true;
     }
 
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
-        for(Fluid fluid : registeredIGFluids.values())
-            try {
-                event.getRegistry().register(fluid);
-            } catch (Throwable e){
-                log.error("Failed to register a fluid. ({}, {})", fluid, fluid.getRegistryName());
-                throw e;
-            }
+        IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) ->{
+            event.getRegistry().register(fluid);
+        });
     }
 
-    public static Item getItemByMaterial(Material material, MaterialUseType useType){
-        return registeredIGItems.get(getRegistryKey(material, useType));
+    public static ResourceLocation getRegistryKey(IGGenericBlockItem item){
+        return new ResourceLocation(IGLib.MODID, item.getHolderKey() + "_" + item.getBlock().getPattern().getName());
     }
 
-    public static Item getItemByMaterial(Material materialBase, Material materialOre, MaterialUseType type){
-        return registeredIGItems.get(getRegistryKey(materialBase, materialOre, type));
+    public static ResourceLocation getRegistryKey(IGGenericItem item){
+        return new ResourceLocation(IGLib.MODID, item.getHolderKey());
     }
 
-    public static String getRegistryKey(Material mat, MaterialUseType useType){
-        return (useType.getName() + "_" + mat.getName()).toLowerCase();
+    public static ResourceLocation getRegistryKey(IGGenericBlock block){
+        return new ResourceLocation(IGLib.MODID, block.getHolderKey());
     }
 
-    public static String getRegistryKey(Material materialBase, Material materialOre, MaterialUseType type){
-        return (type.getName() + "_" + materialBase.getName() + "_" + materialOre.getName());
-    }
-
-    public static Fluid getFluidByMaterial(Material material, boolean isFlowing){
-        return registeredIGFluids.get(getRegistryKey(material, MaterialUseType.FLUIDS) + (isFlowing ? "_flowing" : ""));
-    }
-
-    public static Fluid getSlurryByMaterials(Material soluteMaterial, Material fluidMaterial, boolean isFlowing){
-        return registeredIGFluids.get(getRegistryKey(soluteMaterial, fluidMaterial, MaterialUseType.SLURRY) + (isFlowing ? "_flowing" : ""));
-    }
-
-    public static String getSlurryKey(Material soluteMaterial, Material fluidMaterial, boolean isFlowing){
-        return getRegistryKey(soluteMaterial, fluidMaterial, MaterialUseType.SLURRY) + (isFlowing ? "_flowing" : "");
-    }
-
-    public static Block getBlockByMaterial(MaterialUseType useType, Material material) {
-        return registeredIGBlocks.get(getRegistryKey(material, useType));
-    }
-
-    public static Block getBlockByMaterial(Material base_material, Material ore_material, MaterialUseType type){
-        return registeredIGBlocks.get(getRegistryKey(base_material, ore_material, type));
-    }
-
-    public static class Items {
-        //Example ~ remove once another static item has been added. This is the only thing it needs to run
-        //public static Item testItem = new IGStaticItem("testing_name", ItemSubGroup.misc);
-
-        //Method used for any static item intialization needed that can't be done in the constructor.
-        public static void initializeStaticItems() {
-
-        }
-    }
-
-    public static class Blocks {
-        public static Block reinforcedRefractoryBrick = new IGStaticBlock("reinforced_refractory_brick", net.minecraft.block.material.Material.ROCK);
-        public static Block electronicEngineering = new IGStaticBlock("electronic_engineering", net.minecraft.block.material.Material.IRON);
-
-        public static void initializeStaticBlocks() {
-
-        }
+    private static void buildMaterialRecipes(MaterialInterface... material){
+        Arrays.stream(material).iterator().forEachRemaining((m) -> {
+            m.build();
+        });
     }
 }
