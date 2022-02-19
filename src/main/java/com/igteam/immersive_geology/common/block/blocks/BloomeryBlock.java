@@ -6,11 +6,13 @@ import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -30,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -68,36 +71,6 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
     @Override
     public Item asItem() {
         return itemBlock;
-    }
-
-    @Override
-    public String getHolderName() {
-        return holder_name;
-    }
-
-    @Override
-    public MaterialUseType getBlockUseType() {
-        return MaterialUseType.MACHINE;
-    }
-
-    @Override
-    public com.igteam.immersive_geology.legacy_api.materials.Material getMaterial(BlockMaterialType type) {
-        return MaterialEnum.Vanilla.getMaterial();
-    }
-
-    @Override
-    public MaterialUseType getDropUseType() {
-        return MaterialUseType.MACHINE;
-    }
-
-    @Override
-    public float maxDrops() {
-        return 1;
-    }
-
-    @Override
-    public float minDrops() {
-        return 1;
     }
 
     @Override
@@ -145,5 +118,25 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
             worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             worldIn.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    @Override
+    public int getColourForIGBlock(int pass) {
+        return 0;
+    }
+
+    @Override
+    public Collection<MaterialInterface> getMaterials() {
+        return null;
+    }
+
+    @Override
+    public MaterialPattern getPattern() {
+        return null;
+    }
+
+    @Override
+    public String getHolderKey() {
+        return null;
     }
 }

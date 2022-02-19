@@ -1,17 +1,14 @@
 package com.igteam.immersive_geology.common.fluid;
 
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.legacy_api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
-import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
@@ -23,15 +20,12 @@ import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.util.Collection;
 import java.util.function.Supplier;
 
 public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFlaskPickupHandler {
@@ -102,50 +96,19 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
         return this;
     }
 
-    @Override
-    public String getHolderName() {
-        return getRegistryName().getNamespace();
-    }
-
-    @Override
-    public MaterialUseType getBlockUseType() {
-        return MaterialUseType.FLUIDS;
-    }
-
-    @Override
-    public com.igteam.immersive_geology.legacy_api.materials.Material getMaterial(BlockMaterialType type) {
-        return null;
-    }
-
-    @Override
-    public MaterialUseType getDropUseType() {
-        return MaterialUseType.FLUIDS;
-    }
-
-    @Override
-    public float maxDrops() {
-        return 0;
-    }
-
-
-    @Override
-    public IFormattableTextComponent getTranslatedName() {
-        ArrayList<String> localizedNames = new ArrayList<>();
-        if(igFluid.fluidMaterial instanceof MaterialSlurryWrapper){
-            MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) igFluid.fluidMaterial;
-            localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
-            localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
-        } else {
-            localizedNames.add(I18n.format("material." + IGLib.MODID + "." + igFluid.fluidMaterial.getName().toLowerCase()));
-        }
-        TranslationTextComponent name = new TranslationTextComponent("block."+ IGLib.MODID+"."+ MaterialUseType.BUCKET.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
-        return name;
-    }
-
-    @Override
-    public float minDrops() {
-        return 0;
-    }
+//    @Override
+//    public IFormattableTextComponent getTranslatedName() {
+//        ArrayList<String> localizedNames = new ArrayList<>();
+//        if(igFluid.fluidMaterial instanceof MaterialSlurryWrapper){
+//            MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) igFluid.fluidMaterial;
+//            localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
+//            localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+//        } else {
+//            localizedNames.add(I18n.format("material." + IGLib.MODID + "." + igFluid.fluidMaterial.getName().toLowerCase()));
+//        }
+//        TranslationTextComponent name = new TranslationTextComponent("block."+ IGLib.MODID+"."+ MaterialUseType.BUCKET.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+//        return name;
+//    }
 
     @Override
     public Fluid pickupFluid(IWorld iWorld, BlockPos pos, BlockState state) {
@@ -167,6 +130,26 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
         } else {
             return Fluids.EMPTY;
         }
+    }
+
+    @Override
+    public int getColourForIGBlock(int pass) {
+        return 0;
+    }
+
+    @Override
+    public Collection<MaterialInterface> getMaterials() {
+        return null;
+    }
+
+    @Override
+    public MaterialPattern getPattern() {
+        return igFluid.block.getPattern();
+    }
+
+    @Override
+    public String getHolderKey() {
+        return null;
     }
 }
 

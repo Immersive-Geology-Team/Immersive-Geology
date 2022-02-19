@@ -1,6 +1,5 @@
-package com.igteam.immersive_geology.client.render;
+package com.igteam.immersive_geology.client.render.multiblock;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.model.IGModel;
 import com.igteam.immersive_geology.client.model.IGModels;
 import com.igteam.immersive_geology.client.model.ModelChemicalVat;
@@ -8,7 +7,7 @@ import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntit
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.lib.IGRippLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.Direction;

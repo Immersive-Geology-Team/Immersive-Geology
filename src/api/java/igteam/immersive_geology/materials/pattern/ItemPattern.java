@@ -23,6 +23,7 @@ public enum ItemPattern implements MaterialPattern {
     fuel,
     slag(ItemSubGroup.misc),
     flask(ItemSubGroup.misc),
+    bucket(ItemSubGroup.misc),
     block_item;
 
     private final ItemSubGroup subgroup;

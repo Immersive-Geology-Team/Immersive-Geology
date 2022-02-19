@@ -8,7 +8,6 @@ import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
 import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;
 import com.igteam.immersive_geology.common.block.legacy.IGOreBlock;
 import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;

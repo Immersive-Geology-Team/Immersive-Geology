@@ -6,12 +6,11 @@
 
 package com.igteam.immersive_geology;
 
-import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
-import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.crafting.Serializers;
+import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
+import com.igteam.immersive_geology.common.loot.LootIG;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.common.loot.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -22,6 +21,7 @@ import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -31,7 +31,6 @@ import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.eventbus.api.IEventBus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.StackLocatorUtil;
@@ -41,8 +40,6 @@ public class ImmersiveGeology
 {
 	private static final Logger LOGGER = getNewLogger();
 	public static Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
-
-	public static final IGItemGroup IGGroup = new IGItemGroup("immersive_geology");
 
 	public ImmersiveGeology()
 	{

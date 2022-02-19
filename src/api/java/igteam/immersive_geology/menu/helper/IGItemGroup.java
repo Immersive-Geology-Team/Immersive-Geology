@@ -1,8 +1,6 @@
 package igteam.immersive_geology.menu.helper;
 
 import igteam.immersive_geology.item.IGItemType;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;

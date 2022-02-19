@@ -5,7 +5,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.client.resources.I18n;
@@ -20,30 +20,26 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
 
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
-    private final ItemPattern pattern;
+    private boolean useCustomDisplayName;
+    private final BlockPattern pattern;
 
-    public IGGenericBlockItem(IGGenericBlock b, MaterialInterface m, ItemPattern p) {
+    public IGGenericBlockItem(IGGenericBlock b, MaterialInterface m, BlockPattern p) {
         super(b, new Properties().group(IGItemGroup.IGGroup));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
+        this.useCustomDisplayName = true;
+    }
+
+    public IGGenericBlockItem useDefaultNamingConvention(){
+        useCustomDisplayName = false;
+        return this;
     }
 
     public IGGenericBlock getBlock() {
         return (IGGenericBlock) super.getBlock();
     }
 
-    public ITextComponent getDisplayName(ItemStack stack) {
-        List<String> materialList = new ArrayList<>();
-        for(MaterialTexture t : MaterialTexture.values()){
-            if (materialMap.containsKey(t)) {
-                materialList.add(I18n.format("material.immersive_geology." + materialMap.get(t).getName()));
-            }
-        }
-
-        return new TranslationTextComponent("item.immersive_geology." + pattern.getName(), materialList.toArray());
-    }
-
-    public ItemPattern getPattern(){
+    public BlockPattern getPattern(){
         return this.pattern;
     }
 
@@ -73,6 +69,20 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
         }
 
         return materialList.get(pass).getColor(pattern);
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        if(!useCustomDisplayName) return super.getDisplayName(stack);
+
+        List<String> materialList = new ArrayList<>();
+        for(MaterialTexture t : MaterialTexture.values()){
+            if (materialMap.containsKey(t)) {
+                materialList.add(I18n.format("material.immersive_geology." + materialMap.get(t).getName()));
+            }
+        }
+
+        return new TranslationTextComponent("block.immersive_geology." + pattern.getName(), materialList.toArray());
     }
 
     @Override

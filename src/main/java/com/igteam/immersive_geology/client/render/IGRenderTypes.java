@@ -8,14 +8,12 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import java.util.OptionalDouble;
-
 
 public class IGRenderTypes {
 
     static final ResourceLocation activeTexture = new ResourceLocation(IGLib.MODID, "textures/multiblock/bloomery_burning.png");
 
-    static RenderType BLOOMERY_ACTIVE;
+    public static RenderType BLOOMERY_ACTIVE;
 
     static final RenderState.TextureState TEXTURE_BLOOMERY_ACTIVE = new RenderState.TextureState(activeTexture, false, false);
     static final RenderState.ShadeModelState SHADE_ENABLED = new RenderState.ShadeModelState(true);

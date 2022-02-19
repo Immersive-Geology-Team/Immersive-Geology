@@ -6,7 +6,6 @@ import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
-import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;

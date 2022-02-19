@@ -6,6 +6,7 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -163,6 +164,16 @@ public enum GasEnum implements MaterialInterface {
     @Override
     public ITag.INamedTag<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
         return material.getBlockTag(pattern, materials);
+    }
+
+    @Override
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern) {
+        return material.getFluidTag(pattern);
+    }
+
+    @Override
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials) {
+        return material.getFluidTag(pattern, materials);
     }
 
     @Override

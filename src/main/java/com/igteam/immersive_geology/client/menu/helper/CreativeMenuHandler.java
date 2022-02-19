@@ -1,10 +1,10 @@
 package com.igteam.immersive_geology.client.menu.helper;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import igteam.immersive_geology.menu.ItemSubGroup;
+import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.Screen;
@@ -32,7 +32,7 @@ public class CreativeMenuHandler {
             CreativeScreen gui = (CreativeScreen) screen;
             int i = (int) (gui.getGuiLeft() - Math.floor(136*1.425));
 
-            if(gui.getSelectedTabIndex() == ImmersiveGeology.IGGroup.getIndex()) {
+            if(gui.getSelectedTabIndex() == IGItemGroup.IGGroup.getIndex()) {
                 if(!subGroupButtons.isEmpty()) {
                     subGroupButtons.forEach((button) -> {
                         button.active = true;
@@ -109,7 +109,7 @@ public class CreativeMenuHandler {
 
             AbstractGui.blit(matrixStack, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height, 256, 256);
 
-            ItemStack stack = new ItemStack(group.getIcon());
+            ItemStack stack = group.getMaterial().getStack(group.getPattern());
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
                 mc.getItemRenderer().renderItemIntoGUI(stack, x + 1, y + 2);

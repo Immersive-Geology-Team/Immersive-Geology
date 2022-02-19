@@ -12,6 +12,8 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.client.render.multiblock.*;
+import com.igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
 import com.igteam.immersive_geology.legacy_api.materials.Material;
 import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
 import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;

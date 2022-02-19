@@ -5,9 +5,9 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBasSlurry extends MaterialBase {
+public class MaterialBaseSlurry extends MaterialBase {
 
-    public MaterialBasSlurry(String name) {
+    public MaterialBaseSlurry(String name) {
         super(name);
     }
 

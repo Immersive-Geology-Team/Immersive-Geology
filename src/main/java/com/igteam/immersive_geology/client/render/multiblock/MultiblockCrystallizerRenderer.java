@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.client.render;
+package com.igteam.immersive_geology.client.render.multiblock;
 
 import com.igteam.immersive_geology.client.model.IGModel;
 import com.igteam.immersive_geology.client.model.IGModels;

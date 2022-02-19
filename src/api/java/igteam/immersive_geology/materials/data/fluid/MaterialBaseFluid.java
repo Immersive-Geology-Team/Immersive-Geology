@@ -5,9 +5,9 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBasFluid extends MaterialBase {
+public class MaterialBaseFluid extends MaterialBase {
 
-    public MaterialBasFluid(String name) {
+    public MaterialBaseFluid(String name) {
         super(name);
     }
 

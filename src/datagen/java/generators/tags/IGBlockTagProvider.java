@@ -1,12 +1,12 @@
 package generators.tags;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.legacy_api.materials.Material;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.legacy_api.tags.TagsIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.MineralEnum;
+import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -24,22 +24,37 @@ public class IGBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void registerTags() {
-        for(MaterialUseType useType : MaterialUseType.values()) {
-            for(MaterialEnum container : MaterialEnum.values()) {
-                if(container.getMaterial().hasSubtype(useType)) {
-                    switch (useType) {
-                        case STONE:
-                            for (MaterialEnum ore : MaterialEnum.values()) {
-                                Material oreMat = ore.getMaterial();
-                                if (oreMat.hasSubtype(MaterialUseType.ORE_STONE)) {
-                                    Block oreBlock = IGRegistrationHolder.getBlockByMaterial(container.getMaterial(), oreMat, MaterialUseType.ORE_STONE);
-                                    this.tag(requestOreUsetypeTag()).add(oreBlock);
-                                    this.tag(requestOreUsetypeTag(ore.getMaterial())).add(oreBlock);
-                                }
+        for (MaterialInterface metal : MetalEnum.values()) {
+            for (BlockPattern pattern : BlockPattern.values()) {
+                if (metal.hasPattern(pattern)) {
+                    switch (pattern){
+                        case ore: {
+                            for (MaterialInterface stone : StoneEnum.values()) {
+                                tag(metal.getBlockTag(pattern, stone.get())).add(metal.getBlock(pattern, stone));
                             }
-                            break;
-                        default:
-                            break;
+                        }
+                        default: {
+                            Block block = metal.getBlock(pattern);
+                            tag(metal.getBlockTag(pattern)).add(block);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (MaterialInterface mineral : MineralEnum.values()) {
+            for (BlockPattern pattern : BlockPattern.values()) {
+                if (mineral.hasPattern(pattern)) {
+                    switch (pattern){
+                        case ore: {
+                            for (MaterialInterface stone : StoneEnum.values()) {
+                                tag(mineral.getBlockTag(pattern, stone.get())).add(mineral.getBlock(pattern, stone));
+                            }
+                        }
+                        default: {
+                            Block block = mineral.getBlock(pattern);
+                            tag(mineral.getBlockTag(pattern)).add(block);
+                        }
                     }
                 }
             }
@@ -50,23 +65,4 @@ public class IGBlockTagProvider extends BlockTagsProvider {
         return this.getOrCreateBuilder(tag);
     }
 
-    private ITag.INamedTag<Block> requestUsetypeTag(MaterialUseType useType, Material material) {
-        switch (useType){
-            default:
-                return TagsIG.blockTagForge(useType.getName().toLowerCase() + "s/" + material.getName().toLowerCase());
-        }
-    }
-    private ITag.INamedTag<Block> requestUsetypeTag(MaterialUseType useType) {
-        switch (useType){
-            default:
-                return TagsIG.blockTagForge(useType.getName().toLowerCase() + "s");
-        }
-    }
-
-    private ITag.INamedTag<Block> requestOreUsetypeTag(Material material) {
-        return TagsIG.blockTagForge("ores/" + material.getName().toLowerCase());
-    }
-    private ITag.INamedTag<Block> requestOreUsetypeTag() {
-        return TagsIG.blockTagForge("ores");
-    }
 }

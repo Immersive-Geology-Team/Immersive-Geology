@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.client.render;
+package com.igteam.immersive_geology.client.render.multiblock;
 
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import com.igteam.immersive_geology.common.crafting.recipes.recipe.SeparatorRecipe;

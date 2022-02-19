@@ -5,6 +5,8 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -167,11 +169,11 @@ public class IGRegistrationHolder {
         return new ResourceLocation(IGLib.MODID, item.getHolderKey() + "_" + item.getBlock().getPattern().getName());
     }
 
-    public static ResourceLocation getRegistryKey(IGGenericItem item){
+    public static ResourceLocation getRegistryKey(IGItemType item){
         return new ResourceLocation(IGLib.MODID, item.getHolderKey());
     }
 
-    public static ResourceLocation getRegistryKey(IGGenericBlock block){
+    public static ResourceLocation getRegistryKey(IGBlockType block){
         return new ResourceLocation(IGLib.MODID, block.getHolderKey());
     }
 

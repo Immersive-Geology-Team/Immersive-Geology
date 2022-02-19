@@ -25,4 +25,5 @@ public enum SlurryEnum {
     public Set<MaterialSlurryWrapper> getEntries() {
         return entries;
     }
+
 }

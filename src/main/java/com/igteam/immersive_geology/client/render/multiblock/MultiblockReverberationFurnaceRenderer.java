@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.client.render;
+package com.igteam.immersive_geology.client.render.multiblock;
 
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;

@@ -375,11 +375,27 @@ public abstract class MaterialBase {
         return (ITag.INamedTag<Block>) getTag(pattern);
     }
 
+
+    /**
+     * @apiNote Wrapped version of the normal @getTag used to reduce castings
+     */
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern){
+        return (ITag.INamedTag<Fluid>) getTag(pattern);
+    }
+
+
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
     public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials){
         return (ITag.INamedTag<Item>) getTag(pattern, materials);
+    }
+
+    /**
+     * @apiNote Wrapped version of the normal @getTag used to reduce castings
+     */
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials){
+        return (ITag.INamedTag<Fluid>) getTag(pattern, materials);
     }
 
     /**

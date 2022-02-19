@@ -15,4 +15,5 @@ public interface IGBlockType {
 
     Collection<MaterialInterface> getMaterials();
     MaterialPattern getPattern();
+    String getHolderKey();
 }

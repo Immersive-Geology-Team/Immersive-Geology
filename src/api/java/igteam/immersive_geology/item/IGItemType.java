@@ -12,10 +12,11 @@ public interface IGItemType {
     {
         return false;
     }
-
     int getColourForIGItem(ItemStack stack, int pass);
 
-    public ItemSubGroup getSubGroup();
+    ItemSubGroup getSubGroup();
     Collection<MaterialInterface> getMaterials();
     MaterialPattern getPattern();
+
+    String getHolderKey();
 }

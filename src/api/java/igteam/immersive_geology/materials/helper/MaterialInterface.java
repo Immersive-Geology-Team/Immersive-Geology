@@ -4,6 +4,7 @@ import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -39,10 +40,11 @@ public interface MaterialInterface {
     ITag.INamedTag<?> getTag(MaterialPattern pattern);
     ITag.INamedTag<Item> getItemTag(ItemPattern pattern);
     ITag.INamedTag<Block> getBlockTag(BlockPattern pattern);
-
+    ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern);
 
     ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials);
     ITag.INamedTag<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials);
+    ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials);
 
     boolean hasPattern(MaterialPattern gear);
 

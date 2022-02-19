@@ -1,18 +1,20 @@
-package com.igteam.immersive_geology.common.item.legacy;
+package com.igteam.immersive_geology.common.item.distinct;
 
-import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.legacy_api.materials.Material;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialFluidBase;
-import com.igteam.immersive_geology.legacy_api.materials.material_data.fluids.slurry.MaterialSlurryWrapper;
-import com.igteam.immersive_geology.client.menu.helper.IGSubGroup;
-import com.igteam.immersive_geology.client.menu.helper.ItemSubGroup;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import com.igteam.immersive_geology.common.item.helper.IGFlaskFluidHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.item.IGItemType;
+import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.menu.ItemSubGroup;
+import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ILiquidContainer;
@@ -20,7 +22,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
@@ -34,32 +38,29 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
-
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterfaces.IColouredItem{
+
+public class IGBucketItem extends BucketItem implements IGItemType{
 
     private Fluid igContainedBlock;
     protected ItemSubGroup subGroup;
-    private final Material fluidMaterial;
-    protected final MaterialUseType useType;
+    private final MaterialBase fluidMaterial;
+    protected final MaterialPattern pattern;
 
-    public IGBucketItem(Supplier<? extends Fluid> fluid_supplier, Material material, MaterialUseType useType, Properties p_i244800_2_) {
-        super(fluid_supplier, p_i244800_2_.group(ImmersiveGeology.IGGroup));
+    public IGBucketItem(Supplier<? extends Fluid> fluid_supplier, MaterialBase material, MaterialPattern pattern, Properties p_i244800_2_) {
+        super(fluid_supplier, p_i244800_2_.group(IGItemGroup.IGGroup));
         this.igContainedBlock = fluid_supplier.get();
         this.fluidMaterial = material;
         this.subGroup = ItemSubGroup.misc;
-        this.useType = useType;
-    }
-
-    public String getHoldingName(){
-        return IGRegistrationHolder.getRegistryKey(fluidMaterial, useType);
+        this.pattern = pattern;
     }
 
     @Override
@@ -67,18 +68,18 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
     {
         ArrayList<String> localizedNames = new ArrayList<>();
         if(getFluid() == Fluids.EMPTY){
-            localizedNames.add(fluidMaterial.getDisplayName());
-            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+            localizedNames.add(fluidMaterial.getName());
+            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         } else {
-            if(fluidMaterial instanceof MaterialSlurryWrapper){
+            if(pattern == MiscPattern.slurry){
                 MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluidMaterial;
-                localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
-                localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
+                localizedNames.add(slurry.getSoluteMaterial().getName());
+                localizedNames.add(slurry.getFluidBase().getName());
             } else {
-                localizedNames.add(fluidMaterial.getDisplayName());
+                localizedNames.add(fluidMaterial.getName());
             }
-            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ useType.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }
     }
@@ -89,16 +90,30 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
     }
 
     @Override
+    public Collection<MaterialInterface> getMaterials() {
+        return null;
+    }
+
+    @Override
+    public MaterialPattern getPattern() {
+        return null;
+    }
+
+    @Override
+    public String getHolderKey() {
+        return null;
+    }
+
+    @Override
     public boolean hasCustomItemColours()
     {
         return true;
     }
 
     @Override
-    public int getColourForIEItem(ItemStack stack, int pass)
-    {
+    public int getColourForIGItem(ItemStack stack, int pass) {
         if(pass == 0) {
-            return fluidMaterial.getColor(0);
+            return fluidMaterial.getColor(pattern);
         } else {
             return 0xFFFFFF;
         }
@@ -106,7 +121,7 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
-        if(useType == MaterialUseType.BUCKET){
+        if(pattern == ItemPattern.flask){
            return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
         } else {
             ItemStack itemstack = p_77659_2_.getHeldItem(p_77659_3_);
@@ -175,18 +190,13 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
 
     @Override
     protected ItemStack emptyBucket(ItemStack itemStack, PlayerEntity playerEntity) {
-        if (useType == MaterialUseType.BUCKET) {
+        if (pattern == ItemPattern.flask) {
             return super.emptyBucket(itemStack, playerEntity);
         } else {
-            Item flask = IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK);
+            Item flask = MiscEnum.Glass.getItem(ItemPattern.flask);
             return !playerEntity.abilities.isCreativeMode ? new ItemStack(flask) : itemStack;
         }
     }
-
-    public MaterialUseType getUseType() {
-        return useType;
-    }
-
 
     @Override
     public boolean hasContainerItem(ItemStack stack){
@@ -206,14 +216,13 @@ public class IGBucketItem extends BucketItem implements IGSubGroup, IEItemInterf
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
         //(container, new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK)), capacity);
-        if (this.useType == MaterialUseType.FLASK )
+        if (this.pattern == ItemPattern.flask)
         {
                 return new IGFlaskFluidHandler(stack);
         } else
         {
             return  new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
         }
-
     }
 }
 
