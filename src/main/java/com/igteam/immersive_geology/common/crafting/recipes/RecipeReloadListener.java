@@ -1,7 +1,7 @@
-package com.igteam.immersive_geology.legacy_api.crafting.recipes;
+package com.igteam.immersive_geology.common.crafting.recipes;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.*;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.IRecipe;

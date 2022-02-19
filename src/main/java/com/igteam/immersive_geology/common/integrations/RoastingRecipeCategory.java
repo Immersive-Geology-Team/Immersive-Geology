@@ -1,6 +1,6 @@
 package com.igteam.immersive_geology.common.integrations;
 
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.ReverberationRecipe;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.ReverberationRecipe;
 import com.igteam.immersive_geology.legacy_api.materials.fluid.FluidEnum;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;

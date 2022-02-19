@@ -2,7 +2,7 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.igteam.immersive_geology.legacy_api.loot.OreDropProperty;
+import com.igteam.immersive_geology.common.loot.OreDropProperty;
 import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
 import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
 import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;

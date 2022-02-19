@@ -3,7 +3,7 @@ package com.igteam.immersive_geology.common.crafting.serializers;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.CrystalRecipe;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.CrystalRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;

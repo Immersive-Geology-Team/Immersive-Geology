@@ -1,8 +1,8 @@
-package com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe;
+package com.igteam.immersive_geology.common.crafting.recipes.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersive_geology.legacy_api.crafting.IGMultiblockRecipe;
+import com.igteam.immersive_geology.common.crafting.IGMultiblockRecipe;
 import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.inventory.IInventory;

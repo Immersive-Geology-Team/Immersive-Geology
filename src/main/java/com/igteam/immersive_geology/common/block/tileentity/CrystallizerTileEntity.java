@@ -9,7 +9,7 @@ import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTi
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.CrystalRecipe;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.CrystalRecipe;
 import com.igteam.immersive_geology.common.multiblocks.CrystallizerMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.entity.player.PlayerEntity;

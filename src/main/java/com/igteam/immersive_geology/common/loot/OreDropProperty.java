@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.legacy_api.loot;
+package com.igteam.immersive_geology.common.loot;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;

@@ -6,12 +6,12 @@
 
 package com.igteam.immersive_geology;
 
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.RecipeReloadListener;
+import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.common.crafting.Serializers;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.legacy_api.loot.LootIG;
+import com.igteam.immersive_geology.common.loot.LootIG;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;

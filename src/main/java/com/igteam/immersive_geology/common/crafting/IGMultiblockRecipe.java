@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.legacy_api.crafting;
+package com.igteam.immersive_geology.common.crafting;
 
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import net.minecraft.item.ItemStack;

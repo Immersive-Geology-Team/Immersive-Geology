@@ -5,22 +5,19 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.legacy.*;
-import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;
-import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
+import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.helpers.IGBlockType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
-import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.SlabType;
-import net.minecraft.state.properties.StairsShape;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -50,41 +47,24 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for(Block block : IGRegistrationHolder.registeredIGBlocks.values()) {
-            if (block instanceof IGBlockType) {
-                IGBlockType blockType = (IGBlockType) block;
-                try {
-                    switch (blockType.getBlockUseType()) {
-                        case ORE_STONE:
-                            registerOreBlock(blockType);
-                            break;
-                        case STAIRS:
-                        case SHEETMETAL_STAIRS:
-                            registerStairsBlock(blockType);
-                            break;
-                        case SLAB:
-                            registerSlabBlock(blockType);
-                            break;
-                        case STATIC_BLOCK:
-                            registerStaticBlock(blockType);
-                            break;
-                        case FLUIDS:
-                            break;
-                        default:
-                            registerDefaultBlock(blockType);
-                    }
-                } catch (Exception e) {
-                    log.error("Failed to create Block Model/State: \n" + e);
+        IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((i) -> {
+            if(i instanceof IGGenericBlock){
+                IGGenericBlock block = (IGGenericBlock) i;
+                BlockPattern pattern = block.getPattern();
+                switch(pattern){
+                    case ore: registerOreBlock(block); break;
+//                    case stairs -> registerStairBlock(block);
+//                    case slab -> registerSlabBlock(block);
+                    case block: case geode: case storage: registerGenericBlock(block); break;
                 }
             }
-        }
+        });
 
         chemicalvat();
         gravityseparator();
         reverberation_furnace();
         crystallizer();
         rotarykiln();
-
         registerFluidBlocks();
     }
 
@@ -182,160 +162,143 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void registerSlabBlock(IGBlockType blockType)
+    private void registerGenericBlock(IGGenericBlock block){
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
+                                new ResourceLocation(IGLib.MODID, "block/" + block.getHolderKey()).getPath(),
+                                new ResourceLocation(IGLib.MODID, "block/base/block"))
+                        .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()))
+                        .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern())))
+                .build());
+    }
+
+    private void registerOreBlock(IGGenericBlock block){
+        BlockModelBuilder baseModel;
+
+        baseModel = models().withExistingParent(
+                        new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()))
+                .texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()))
+                .texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));
+
+        getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+    }
+
+    private void registerSlabBlock(BlockPattern pattern)
     {
-        if(blockType instanceof IGSlabBlock) {
-            IGSlabBlock slabBlock = (IGSlabBlock) blockType;
-            VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
-            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()));
-
-            BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_top_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_top"));
-
-            BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_double_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_double"));
-
-            doubleModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-            topModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-            baseModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-
-
-            doubleModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-            doubleModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-
-            topModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-            topModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-
-            baseModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-            baseModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-
-            builder.forAllStates(blockState ->
-                    blockState.get(slabBlock.TYPE) == SlabType.BOTTOM ?
-                            (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
-                    blockState.get(slabBlock.TYPE) == SlabType.TOP ?
-                            (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
-                            (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
-        }
-
-    }
-    private void registerDefaultBlock(IGBlockType blockType){
-        if(blockType instanceof IGBaseBlock) {
-            IGBaseBlock block = (IGBaseBlock) blockType;
-            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getBlockUseType().getName() + "_" + block.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/" + block.getBlockUseType().getName()))).build());
-
-        }
-    }
-    private void registerStaticBlock(IGBlockType blockType){
-        if(blockType instanceof IGStaticBlock) {
-            IGStaticBlock block = (IGStaticBlock) blockType;
-            getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(models()
-                    .withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + block.getHolderName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/static_block/" + block.getHolderName()))).build());
-
-        }
-    }
-
-    private void registerOreBlock(IGBlockType blockType){
-        if(blockType instanceof IGOreBlock){
-            IGOreBlock oreBlock = (IGOreBlock) blockType;
-            String stone_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getStoneType().getName().toLowerCase();
-            String base_name = oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName(); //gets the name metamorphic and such
-            String ore_name = oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL).getName();
-            BlockModelBuilder  baseModel;
-            if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
-                baseModel  = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
-                        new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
-                        .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/clay"));
-            } else {
-                baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + "ore_stone_" + base_name + "_" + ore_name).getPath(),
-                        new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_" + stone_name))
-                        .texture("ore", new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal"));
-            }
-            getVariantBuilder(oreBlock).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
-        }
+//        if(pattern == BlockPattern.slab) {
+//            IGBlockType slabBlock = (IGBlockType) ;
+//            VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
+//            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()));
+//
+//            BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_top_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_top"));
+//
+//            BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_double_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_double"));
+//
+//            doubleModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//            topModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//            baseModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//
+//
+//            doubleModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//            doubleModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+//
+//            topModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//            topModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+//
+//            baseModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
+//            baseModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
+//
+//            builder.forAllStates(blockState ->
+//                    blockState.get(slabBlock.TYPE) == SlabType.BOTTOM ?
+//                            (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
+//                    blockState.get(slabBlock.TYPE) == SlabType.TOP ?
+//                            (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
+//                            (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
+//        }
     }
 
     private void registerStairsBlock(IGBlockType blockType){
-        if(blockType instanceof IGStairsBlock) {
-            IGStairsBlock stairsBlock = (IGStairsBlock) blockType;
-            VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
-            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()));
-
-            BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_inner_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()+ "_inner"));
-
-            BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_outer_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()+ "_outer"));
-
-
-            baseModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
-            innerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
-            outerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
-
-            builder.forAllStates(blockState ->
-                    blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?
-                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(innerModel).uvLock(true).build()) :
-
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
-
-                    blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_RIGHT ?
-                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(0).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build()) :
-
-                           (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
-                            blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
-                            blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build() :
-                            ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
-
-                    blockState.get(stairsBlock.SHAPE) == StairsShape.OUTER_LEFT ?
-                         (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(90).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build()) :
-
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
-
-                    blockState.get(stairsBlock.SHAPE) == StairsShape.OUTER_RIGHT ?
-                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(outerModel).rotationY(90).build()) :
-
-                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build() :
-                             ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
-
-                    (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
-                       (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(270).uvLock(true).build() :
-                        blockState.get(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(90).uvLock(true).build() :
-                        blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationY(0).uvLock(true).build() :
-                        ConfiguredModel.builder().modelFile(baseModel).rotationY(180).build()) :
-
-                       (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(270).uvLock(true).build() :
-                        blockState.get(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(90).uvLock(true).build() :
-                        blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(0).uvLock(true).build() :
-                        ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(180).uvLock(true).build()))
-        );
-        }
+//        if(blockType instanceof IGStairsBlock) {
+//            IGStairsBlock stairsBlock = (IGStairsBlock) blockType;
+//            VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
+//            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()));
+//
+//            BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_inner_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()+ "_inner"));
+//
+//            BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getBlockUseType().getName() + "_outer_" + stairsBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
+//                    new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getBlockUseType().getName()+ "_outer"));
+//
+//
+//            baseModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+//            innerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+//            outerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+//
+//            builder.forAllStates(blockState ->
+//                    blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?
+//                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(innerModel).uvLock(true).build()) :
+//
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
+//
+//                    blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_RIGHT ?
+//                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(0).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build()) :
+//
+//                           (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+//                            blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+//                            blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build() :
+//                            ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
+//
+//                    blockState.get(stairsBlock.SHAPE) == StairsShape.OUTER_LEFT ?
+//                         (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(90).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build()) :
+//
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
+//
+//                    blockState.get(stairsBlock.SHAPE) == StairsShape.OUTER_RIGHT ?
+//                        (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(outerModel).rotationY(90).build()) :
+//
+//                            (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+//                             blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build() :
+//                             ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
+//
+//                    (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
+//                       (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(270).uvLock(true).build() :
+//                        blockState.get(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(90).uvLock(true).build() :
+//                        blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationY(0).uvLock(true).build() :
+//                        ConfiguredModel.builder().modelFile(baseModel).rotationY(180).build()) :
+//
+//                       (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(270).uvLock(true).build() :
+//                        blockState.get(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(90).uvLock(true).build() :
+//                        blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(0).uvLock(true).build() :
+//                        ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(180).uvLock(true).build()))
+//        );
+//        }
     }
     private void createMultiblock(Block b, ModelFile masterModel, ModelFile mirroredModel, ResourceLocation particleTexture){
         createMultiblock(b, masterModel, mirroredModel, IEProperties.MULTIBLOCKSLAVE, IEProperties.FACING_HORIZONTAL, IEProperties.MIRRORED, 180, particleTexture);

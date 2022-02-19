@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.legacy_api.crafting.recipes.builders;
+package com.igteam.immersive_geology.common.crafting.recipes.builders;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;

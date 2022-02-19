@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.SeparatorRecipe;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

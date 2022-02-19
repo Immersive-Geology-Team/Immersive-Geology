@@ -1,6 +1,6 @@
 package com.igteam.immersive_geology.common.integrations;
 
-import com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe.SeparatorRecipe;
+import com.igteam.immersive_geology.common.crafting.recipes.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;

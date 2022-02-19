@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.legacy_api.crafting.recipes.recipe;
+package com.igteam.immersive_geology.common.crafting.recipes.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import com.igteam.immersive_geology.common.crafting.Serializers;
