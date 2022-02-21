@@ -118,6 +118,8 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:1.16.5-36.2.22"
     compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.7-143")
+    compile fg.deobf("slimeknights.mantle:Mantle:1.16.5-1.6.158")
+    compile fg.deobf("slimeknights.tconstruct:TConstruct:1.16.5-3.3.2.328")
     datagenCompile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.7-143:datagen")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")

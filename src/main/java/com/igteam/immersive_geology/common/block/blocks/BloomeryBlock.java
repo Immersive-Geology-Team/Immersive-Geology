@@ -56,7 +56,7 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
 
         holder_name = "bloomery";
         IGRegistrationHolder.registeredIGBlocks.put(holder_name, this);
-
+ 
         this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Vanilla.getMaterial());
         itemBlock.setRegistryName(IGLib.MODID + ":" + holder_name);
         IGRegistrationHolder.registeredIGItems.put(holder_name, itemBlock);
