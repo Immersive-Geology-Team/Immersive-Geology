@@ -5,6 +5,9 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.MineralEnum;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
+import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.data.BlockTagsProvider;
@@ -26,11 +29,11 @@ public class IGItemTagProvider extends ItemTagsProvider {
     @Override
     protected void registerTags() {
         for (ItemPattern pattern : ItemPattern.values()) {
-            for (MaterialInterface metal : MetalEnum.values()) {
+            for (MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()) {
                 if (metal.hasPattern(pattern)) {
                     switch (pattern) {
                         case dirty_crushed_ore: case ore_chunk: case ore_bit: {
-                            for (MaterialInterface stone : StoneEnum.values()) {
+                            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                                 tag(metal.getItemTag(pattern, stone.get())).add(metal.getItem(pattern, stone));
                             }
                         }
@@ -43,11 +46,11 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 }
             }
 
-            for (MaterialInterface mineral : MineralEnum.values()) {
+            for (MaterialInterface<MaterialBaseMineral> mineral : MineralEnum.values()) {
                 if (mineral.hasPattern(pattern)) {
                     switch (pattern) {
                         case dirty_crushed_ore: case ore_chunk: case ore_bit: {
-                            for (MaterialInterface stone : StoneEnum.values()) {
+                            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                                 tag(mineral.getItemTag(pattern, stone.get())).add(mineral.getItem(pattern, stone));
                             }
                         }
@@ -61,7 +64,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 }
             }
 
-            for (MaterialInterface stone : StoneEnum.values()) {
+            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if (stone.hasPattern(pattern)) {
                     Item item = stone.getItem(pattern);
                     tag(stone.getItemTag(pattern)).add(item);

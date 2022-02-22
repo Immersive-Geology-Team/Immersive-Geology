@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.fluid;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
@@ -163,6 +164,6 @@ public class MaterialBaseFluid extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-        return null;
+        return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
     }
 }

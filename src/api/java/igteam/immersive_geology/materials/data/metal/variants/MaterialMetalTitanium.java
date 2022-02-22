@@ -1,10 +1,10 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
-import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
-public class MaterialMetalTitanium extends MaterialBasMetal {
+public class MaterialMetalTitanium extends MaterialBaseMetal {
 
     public MaterialMetalTitanium(){
         super("titanium");

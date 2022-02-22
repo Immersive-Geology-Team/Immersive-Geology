@@ -5,14 +5,18 @@ import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -38,8 +42,7 @@ import java.util.Random;
 
 public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> implements IGBlockType {
 
-    protected final String holder_name;
-    protected final Item itemBlock;
+    protected final IGGenericBlockItem itemBlock;
     public BloomeryBlock() {
         super("bloomery", () -> IGTileTypes.BLOOMERY.get(), Properties.create(Material.ROCK).sound(SoundType.STONE));
         ImmersiveGeology.getNewLogger().info("Setting up Bloomery");
@@ -54,18 +57,17 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
             }
         }
 
-        holder_name = "bloomery";
-        IGRegistrationHolder.registeredIGBlocks.put(holder_name, this);
+        IGRegistryProvider.IG_BLOCK_REGISTRY.put(IGRegistrationHolder.getRegistryKey(this), this);
 
-        this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Vanilla.getMaterial());
-        itemBlock.setRegistryName(IGLib.MODID + ":" + holder_name);
-        IGRegistrationHolder.registeredIGItems.put(holder_name, itemBlock);
+        this.itemBlock = new IGGenericBlockItem(this, MetalEnum.Iron, ItemPattern.block_item);
+
+        IGRegistryProvider.IG_ITEM_REGISTRY.put(IGRegistrationHolder.getRegistryKey(itemBlock), itemBlock);
     }
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     @Override
     public ResourceLocation createRegistryName(){
-        return new ResourceLocation(IGLib.MODID, IGRegistrationHolder.getRegistryKey(MaterialEnum.Vanilla.getMaterial(), MaterialUseType.MACHINE).toLowerCase() + "_" + "bloomery");
+        return IGRegistryProvider.getRegistryKey(StoneEnum.Stone, MiscPattern.machine);
     }
 
     @Override
@@ -132,11 +134,20 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
 
     @Override
     public MaterialPattern getPattern() {
-        return null;
+        return MiscPattern.machine;
     }
 
     @Override
     public String getHolderKey() {
-        return null;
+        StringBuilder data = new StringBuilder();
+
+        data.append("_").append(StoneEnum.Stone.getName());
+
+        return getPattern() + data.toString() + "_" + name;
+    }
+
+    @Override
+    public Block getBlock() {
+        return this;
     }
 }

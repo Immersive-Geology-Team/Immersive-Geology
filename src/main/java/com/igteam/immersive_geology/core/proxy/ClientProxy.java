@@ -3,32 +3,30 @@ package com.igteam.immersive_geology.core.proxy;
 import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.client.IEDefaultColourHandlers;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
-import blusunrize.immersiveengineering.common.items.IEItemInterfaces;
 import blusunrize.immersiveengineering.common.items.IEItems;
-import blusunrize.lib.manual.ManualElementItem;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.client.render.multiblock.*;
-import com.igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
-import com.igteam.immersive_geology.legacy_api.materials.Material;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
 import com.igteam.immersive_geology.client.gui.ReverberationScreen;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
-import com.igteam.immersive_geology.client.render.*;
+import com.igteam.immersive_geology.client.render.RenderLayerHandler;
+import com.igteam.immersive_geology.client.render.multiblock.*;
+import com.igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.gui.ReverberationContainer;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.item.IGItemType;
+import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IHasContainer;
@@ -40,7 +38,6 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -81,8 +78,7 @@ public class ClientProxy extends ServerProxy {
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
         ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
         ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
-        ReverberationFurnaceTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 125);
-        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.TINY_DUST), 10);
+        ReverberationFurnaceTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
         ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
     }
 
@@ -90,23 +86,22 @@ public class ClientProxy extends ServerProxy {
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
         BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
         BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
-        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.DUST), 125);
-        BloomeryTileEntity.fuelMap.put(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Coal.getMaterial(), MaterialUseType.TINY_DUST), 10);
+        BloomeryTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
         BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
         BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
     }
 
     private void registerItemColors(){
-        for(Item item : IGRegistrationHolder.registeredIGItems.values()){
-            if(item instanceof IEItemInterfaces.IColouredItem && ((IEItemInterfaces.IColouredItem) item).hasCustomItemColours()){
+        for(Item item : IGRegistryProvider.IG_ITEM_REGISTRY.values()){
+            if(item instanceof IGItemType && ((IGItemType) item).hasCustomItemColours()){
                 Minecraft.getInstance().getItemColors().register(IEDefaultColourHandlers.INSTANCE, item);
             }
         }
     }
 
     private void registerBlockColors(){
-        for(Block block : IGRegistrationHolder.registeredIGBlocks.values()){
-            if(block instanceof IEBlockInterfaces.IColouredBlock && ((IEBlockInterfaces.IColouredBlock) block).hasCustomBlockColours()) {
+        for(Block block : IGRegistryProvider.IG_BLOCK_REGISTRY.values()){
+            if(block instanceof IGBlockType && ((IGBlockType) block).hasCustomBlockColours()) {
                 Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
             }
         }
@@ -147,29 +142,29 @@ public class ClientProxy extends ServerProxy {
     private static void mineral_info(int priority){
         ManualInstance man = ManualHelper.getManual();
 
-        for(MaterialEnum material : MaterialEnum.minerals()) {
-            ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
-            Material mineral = material.getMaterial();
-            ItemStack item = new ItemStack(IGRegistrationHolder.getBlockByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.ORE_STONE));
-            builder.addSpecialElement(mineral.getName(), 0, () -> new ManualElementItem(man, item));
-
-            ItemStack dirty_crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.DIRTY_CRUSHED_ORE));
-            builder.addSpecialElement("dirty_crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, dirty_crushed_ore));
-
-            ItemStack crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(mineral, MaterialUseType.CRUSHED_ORE));
-            builder.addSpecialElement("crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, crushed_ore));
-
-            Material material_ingot = mineral.getProcessedType().getMaterial();
-
-            ItemStack grit = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.DUST));
-            builder.addSpecialElement("grit_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, grit));
-
-            ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.INGOT));
-            builder.addSpecialElement("ingot_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, output));
-
-            builder.readFromFile(modLoc("mineral_" + mineral.getName()));
-            man.addEntry(IG_CATEGORY_MINERALS, builder.create(), priority);
-        }
+//        for(MaterialEnum material : MaterialEnum.minerals()) {
+//            ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+//            Material mineral = material.getMaterial();
+//            ItemStack item = new ItemStack(IGRegistrationHolder.getBlockByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.ORE_STONE));
+//            builder.addSpecialElement(mineral.getName(), 0, () -> new ManualElementItem(man, item));
+//
+//            ItemStack dirty_crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.DIRTY_CRUSHED_ORE));
+//            builder.addSpecialElement("dirty_crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, dirty_crushed_ore));
+//
+//            ItemStack crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(mineral, MaterialUseType.CRUSHED_ORE));
+//            builder.addSpecialElement("crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, crushed_ore));
+//
+//            Material material_ingot = mineral.getProcessedType().getMaterial();
+//
+//            ItemStack grit = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.DUST));
+//            builder.addSpecialElement("grit_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, grit));
+//
+//            ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.INGOT));
+//            builder.addSpecialElement("ingot_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, output));
+//
+//            builder.readFromFile(modLoc("mineral_" + mineral.getName()));
+//            man.addEntry(IG_CATEGORY_MINERALS, builder.create(), priority);
+//        }
     }
 
     private static void chemicalvat(ResourceLocation location, int priority){

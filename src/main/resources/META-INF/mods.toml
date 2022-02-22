@@ -8,9 +8,9 @@ license="LGPL v2.1"
 [[mods]]
 modId="immersive_geology"
 updateJSONURL=""
-version="1.1v1"
+version="Beta v1.1 MC 1.16.5"
 displayName="Immersive Geology"
-displayURL=""
+displayURL="https://www.curseforge.com/minecraft/mc-mods/immersive-geology"
 credits="Sen#1629 - Chemical Vat Model"
 authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
 description='''

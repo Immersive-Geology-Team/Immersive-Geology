@@ -2,14 +2,7 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.igteam.immersive_geology.common.loot.OreDropProperty;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialMineralBase;
-import com.igteam.immersive_geology.common.block.legacy.IGOreBlock;
-import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -18,8 +11,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.conditions.MatchTool;
@@ -55,90 +46,90 @@ public class BlockLootProvider implements IDataProvider {
                 continue; // skip over this block in the loop if it isn't from our mod!
             }
 
-            if(b instanceof IGOreBlock){
-                IGOreBlock oreBlock = ((IGOreBlock) b);
-                Item stoneChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.CHUNK);
-                Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
-                if(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL) == MaterialEnum.Coal.getMaterial()) {
-                    functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(oreChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(Items.COAL)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(stoneChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                    );
-                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
-                    Item clay = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.CLAY);
-                    Item rock = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.ROCK_BIT);
-                    functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(clay)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(rock)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                    );
-                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.FUEL) {
-                    Item fuel = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.FUEL);
-                    functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(oreChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(fuel)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(stoneChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                    );
-                } else {
-                    functionTable.put(b, (block) -> LootTable.builder()
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(oreChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                            .addLootPool(LootPool.builder()
-                                    .rolls(RandomValueRange.of(1F, 1F))
-                                    .addEntry(ItemLootEntry.builder(stoneChunk)
-                                            .acceptFunction(OreDropProperty.builder()))
-                            )
-                    );
-                }
-            } else if(b instanceof IGBlockType){
-                IGBlockType blockType = (IGBlockType) b;
-                if(blockType.getBlockUseType() != MaterialUseType.FLUIDS) {
-                    Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
-                    if (itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
-                        functionTable.put(b, (block) -> LootTable.builder()
-                                .addLootPool(LootPool.builder()
-                                        .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
-                                        .addEntry(ItemLootEntry.builder(itemDrop))));
-                    } else {
-                        functionTable.put(b, BlockLootProvider::genRegular);
-                    }
-                }
-            }
+//            if(b instanceof IGOreBlock){
+//                IGOreBlock oreBlock = ((IGOreBlock) b);
+//                Item stoneChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.CHUNK);
+//                Item oreChunk = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_CHUNK);
+//                if(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL) == MaterialEnum.Coal.getMaterial()) {
+//                    functionTable.put(b, (block) -> LootTable.builder()
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(oreChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(Items.COAL)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                    );
+//                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) {
+//                    Item clay = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.CLAY);
+//                    Item rock = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.BASE_MATERIAL), MaterialUseType.ROCK_BIT);
+//                    functionTable.put(b, (block) -> LootTable.builder()
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(clay)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(rock)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                    );
+//                } else if(oreBlock.getMineralType() == MaterialMineralBase.EnumMineralType.FUEL) {
+//                    Item fuel = IGRegistrationHolder.getItemByMaterial(oreBlock.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.FUEL);
+//                    functionTable.put(b, (block) -> LootTable.builder()
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(oreChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(fuel)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                    );
+//                } else {
+//                    functionTable.put(b, (block) -> LootTable.builder()
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(oreChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                            .addLootPool(LootPool.builder()
+//                                    .rolls(RandomValueRange.of(1F, 1F))
+//                                    .addEntry(ItemLootEntry.builder(stoneChunk)
+//                                            .acceptFunction(OreDropProperty.builder()))
+//                            )
+//                    );
+//                }
+//            } else if(b instanceof IGBlockType){
+//                IGBlockType blockType = (IGBlockType) b;
+//                if(blockType.getBlockUseType() != MaterialUseType.FLUIDS) {
+//                    Item itemDrop = IGRegistrationHolder.getItemByMaterial(((IGBlockType) b).getMaterial(BlockMaterialType.BASE_MATERIAL), ((IGBlockType) b).getDropUseType());
+//                    if (itemDrop != null && ((IGBlockType) b).getDropUseType() != ((IGBlockType) b).getBlockUseType()) {
+//                        functionTable.put(b, (block) -> LootTable.builder()
+//                                .addLootPool(LootPool.builder()
+//                                        .rolls(RandomValueRange.of(blockType.minDrops(), (blockType).maxDrops()))
+//                                        .addEntry(ItemLootEntry.builder(itemDrop))));
+//                    } else {
+//                        functionTable.put(b, BlockLootProvider::genRegular);
+//                    }
+//                }
+//            }
         }
     }
 

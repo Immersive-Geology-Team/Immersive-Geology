@@ -16,13 +16,13 @@ public enum SlurryEnum {
             new MaterialSlurryWrapper(MetalEnum.Manganese, FluidEnum.SulfuricAcid)),
     VANADIUM(new MaterialSlurryWrapper(MetalEnum.Vanadium, FluidEnum.SulfuricAcid));
 
-    Set<MaterialSlurryWrapper> entries = new LinkedHashSet<>();
+    LinkedHashSet<MaterialSlurryWrapper> entries = new LinkedHashSet<>();
 
     SlurryEnum(MaterialSlurryWrapper... slurries){
         entries.addAll(Arrays.asList(slurries));
     }
 
-    public Set<MaterialSlurryWrapper> getEntries() {
+    public LinkedHashSet<MaterialSlurryWrapper> getEntries() {
         return entries;
     }
 

@@ -151,5 +151,10 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
     public String getHolderKey() {
         return null;
     }
+
+    @Override
+    public Block getBlock() {
+        return this;
+    }
 }
 

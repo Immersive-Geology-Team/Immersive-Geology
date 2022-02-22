@@ -18,6 +18,7 @@ import com.igteam.immersive_geology.core.proxy.ServerProxy;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -48,7 +49,6 @@ public class ImmersiveGeology
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		LootIG.initialize();
-
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();
 		IGRegistrationHolder.buildRecipes();

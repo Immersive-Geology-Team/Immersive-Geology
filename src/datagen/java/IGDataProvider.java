@@ -36,8 +36,8 @@ public class IGDataProvider {
         }
 
         if(event.includeClient()){
-            generator.addProvider(new IGItemModelProvider(generator, exhelper));
             generator.addProvider(new IGBlockStateProvider(generator, exhelper));
+            generator.addProvider(new IGItemModelProvider(generator, exhelper));
         }
     }
 }

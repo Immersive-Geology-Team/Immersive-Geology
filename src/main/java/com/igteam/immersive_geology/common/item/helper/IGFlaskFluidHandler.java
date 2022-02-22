@@ -1,15 +1,12 @@
 package com.igteam.immersive_geology.common.item.helper;
 
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.legacy_api.materials.material_bases.MaterialFluidBase;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
-
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +20,7 @@ public class IGFlaskFluidHandler extends FluidBucketWrapper {
     protected void setFluid(@Nonnull FluidStack fluidStack)
     {
         if (fluidStack.isEmpty())
-            container = new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Glass.getMaterial(), MaterialUseType.FLASK));
+            container = MiscEnum.Glass.getStack(ItemPattern.flask);
         else
         {
             container = FluidUtil.getFilledBucket(fluidStack);

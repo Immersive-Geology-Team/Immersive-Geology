@@ -3,6 +3,7 @@ package generators.tags;
 import blusunrize.immersiveengineering.api.Lib;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.materials.FluidEnum;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.data.DataGenerator;
@@ -26,11 +27,13 @@ public class IGFluidTagProvider extends FluidTagsProvider
     {
         log.info("Fluid Tag Registration");
 
-        for (MaterialInterface fluid : FluidEnum.values()) {
+        for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
             for (MiscPattern pattern : MiscPattern.values()) {
                 if (fluid.hasPattern(pattern)) {
                     Fluid fluidBlock = fluid.getFluid(pattern);
-                    getOrCreateBuilder(fluid.getFluidTag(pattern)).add(fluidBlock);
+                    if (fluidBlock != null) {
+                        getOrCreateBuilder(fluid.getFluidTag(pattern)).add(fluidBlock);
+                    }
                 }
             }
         }

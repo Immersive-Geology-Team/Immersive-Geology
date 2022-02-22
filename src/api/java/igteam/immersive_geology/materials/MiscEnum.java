@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -19,8 +20,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Set;
 
-public enum MiscEnum implements MaterialInterface {
-    Glass(new MaterialDefaultStone());
+public enum MiscEnum implements MaterialInterface<MaterialBase> {
+    Glass(new MaterialDefaultStone()),
+    Coal(new MaterialDefaultStone());
 
     private final MaterialBase material;
 
@@ -200,4 +202,10 @@ public enum MiscEnum implements MaterialInterface {
     public MaterialBase get() {
         return material;
     }
+
+    @Override
+    public IGOreConfig getGenerationConfig() {
+        return null;
+    }
+
 }

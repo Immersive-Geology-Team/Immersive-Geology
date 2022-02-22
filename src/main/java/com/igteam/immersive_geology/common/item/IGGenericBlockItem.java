@@ -1,13 +1,14 @@
 package com.igteam.immersive_geology.common.item;
 
-import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import igteam.immersive_geology.menu.helper.IGItemGroup;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -21,13 +22,15 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
     private boolean useCustomDisplayName;
-    private final BlockPattern pattern;
+    private final ItemPattern pattern;
+    private final IGBlockType type;
 
-    public IGGenericBlockItem(IGGenericBlock b, MaterialInterface m, BlockPattern p) {
-        super(b, new Properties().group(IGItemGroup.IGGroup));
+    public IGGenericBlockItem(IGBlockType b, MaterialInterface m, ItemPattern p) {
+        super(b.getBlock(), new Properties().group(IGItemGroup.IGGroup));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
         this.useCustomDisplayName = true;
+        this.type = b;
     }
 
     public IGGenericBlockItem useDefaultNamingConvention(){
@@ -35,11 +38,15 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
         return this;
     }
 
-    public IGGenericBlock getBlock() {
-        return (IGGenericBlock) super.getBlock();
+    public Block getBlock() {
+        return super.getBlock();
     }
 
-    public BlockPattern getPattern(){
+    public IGBlockType getIGBlockType(){
+        return type;
+    }
+
+    public ItemPattern getPattern(){
         return this.pattern;
     }
 

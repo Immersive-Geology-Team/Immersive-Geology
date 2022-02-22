@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "immersive_geology:raw_crystal_sodium"
-  },
-  "result": "immersive_geology:ingot_sodium",
-  "experience": 0.15,
-  "cookingtime": 150
-}

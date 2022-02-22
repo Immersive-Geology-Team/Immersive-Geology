@@ -2,12 +2,14 @@ package com.igteam.immersive_geology.core.registration;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.*;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
@@ -124,8 +126,12 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForMiscPattern(MaterialInterface m, MiscPattern p){
+    private static void registerForMiscPattern(MaterialInterface<MaterialBaseFluid> m, MiscPattern p){
+        if (p == MiscPattern.fluid) {
+            IGFluid fluid = new IGFluid(m);
 
+            register(fluid);
+        }
     }
 
     private static void register(Item i){
@@ -166,7 +172,7 @@ public class IGRegistrationHolder {
     }
 
     public static ResourceLocation getRegistryKey(IGGenericBlockItem item){
-        return new ResourceLocation(IGLib.MODID, item.getHolderKey() + "_" + item.getBlock().getPattern().getName());
+        return new ResourceLocation(IGLib.MODID, item.getHolderKey() + "_" + item.getIGBlockType().getPattern().getName());
     }
 
     public static ResourceLocation getRegistryKey(IGItemType item){

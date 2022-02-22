@@ -4,22 +4,33 @@ import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalMultiblockBlock;
-import com.igteam.immersive_geology.legacy_api.materials.Material;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.common.item.legacy.IGBlockItem;
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends MetalMultiblockBlock<T> implements IGBlockType {
 
-    protected final Item itemBlock;
+    protected final IGGenericBlockItem itemBlock;
     public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te){
         super(name, te);
 
@@ -33,18 +44,17 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
             }
         }
 
-        String holder_name = IGRegistrationHolder.getRegistryKey(MaterialEnum.Steel.getMaterial(), MaterialUseType.MACHINE).toLowerCase();
-        IGRegistrationHolder.registeredIGBlocks.put(holder_name + "_" + name, this);
+        IGRegistryProvider.IG_BLOCK_REGISTRY.put(IGRegistrationHolder.getRegistryKey(this), this);
 
-        this.itemBlock = new IGBlockItem(this, this,  MaterialUseType.MACHINE.getSubgroup(), MaterialEnum.Steel.getMaterial()).useDefaultNamingConvention();
-        itemBlock.setRegistryName(holder_name.toLowerCase() + "_" + name);
+        this.itemBlock = new IGGenericBlockItem(this, MetalEnum.Iron, ItemPattern.block_item);
+        this.itemBlock.finalizeData();
+        IGRegistryProvider.IG_ITEM_REGISTRY.put(IGRegistrationHolder.getRegistryKey(itemBlock), itemBlock);
 
-        IGRegistrationHolder.registeredIGItems.put(holder_name + "_" + name, itemBlock);
     }
 
     @Override
     public Item asItem() {
-        return itemBlock;
+        return this.itemBlock;
     }
 
     @Override
@@ -53,32 +63,31 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     }
 
     @Override
-    public String getHolderName() {
-        return IGRegistrationHolder.getRegistryKey(MaterialEnum.Steel.getMaterial(), MaterialUseType.MACHINE);
-    }
-
-    @Override
-    public MaterialUseType getBlockUseType() {
-        return MaterialUseType.MACHINE;
-    }
-
-    @Override
-    public Material getMaterial(BlockMaterialType type) {
-        return MaterialEnum.Steel.getMaterial();
-    }
-
-    @Override
-    public MaterialUseType getDropUseType() {
-        return MaterialUseType.MACHINE;
-    }
-
-    @Override
-    public float maxDrops() {
+    public int getColourForIGBlock(int pass) {
         return 0;
     }
 
     @Override
-    public float minDrops() {
-        return 0;
+    public Collection<MaterialInterface> getMaterials() {
+        return Collections.singleton(MetalEnum.Iron);
+    }
+
+    @Override
+    public MaterialPattern getPattern() {
+        return MiscPattern.machine;
+    }
+
+    @Override
+    public String getHolderKey() {
+        StringBuilder data = new StringBuilder();
+
+        data.append("_").append(MetalEnum.Iron.getName());
+
+        return getPattern() + data.toString() + "_" + name;
+    }
+
+    @Override
+    public Block getBlock() {
+        return this;
     }
 }

@@ -4,6 +4,7 @@ package generators.recipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
@@ -35,7 +36,8 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        for(MaterialInterface metal : MetalEnum.values()){
+        for(MaterialInterface container : MetalEnum.values()){
+            MaterialBase metal = container.get();
             for(IGProcessingStage stage : metal.getStages()){
                 logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + metal.getName());
                 for(IGProcessingMethod method : stage.getMethods()){

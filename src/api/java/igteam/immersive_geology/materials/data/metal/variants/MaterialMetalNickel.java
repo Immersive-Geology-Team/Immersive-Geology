@@ -1,9 +1,9 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
-import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
-public class MaterialMetalNickel extends MaterialBasMetal {
+public class MaterialMetalNickel extends MaterialBaseMetal {
     public MaterialMetalNickel() {
         super("nickel");
     }

@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "immersive_geology:geode_diamond",
-    "immersive_geology:geode_phlebotinum",
-    "immersive_geology:geode_glowstone",
-    "immersive_geology:geode_quartz"
-  ]
-}

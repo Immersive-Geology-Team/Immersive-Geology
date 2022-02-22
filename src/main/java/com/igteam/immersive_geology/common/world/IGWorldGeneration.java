@@ -1,13 +1,15 @@
 package com.igteam.immersive_geology.common.world;
 
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialUseType;
-import com.igteam.immersive_geology.core.config.IGOreConfig;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.config.IGOreConfig;
+import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.APIMaterials;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.*;
-
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -22,15 +24,17 @@ public class IGWorldGeneration {
     public static Map<String, ConfiguredFeature<?, ?>> features = new HashMap<>();
 
     public static void initialize(){
-        for(MaterialEnum stoneContainer : MaterialEnum.stoneValues()) {
-            for (MaterialEnum container : MaterialEnum.values()) {
-                if (container.getMaterial().hasSubtype(MaterialUseType.ORE_STONE)) {
-                    Block block = IGRegistrationHolder.getBlockByMaterial(stoneContainer.getMaterial(), container.getMaterial(), MaterialUseType.ORE_STONE);
+        for(StoneEnum stones : APIMaterials.stoneValues()) {
+            for (MaterialInterface container : APIMaterials.all()) {
+                if (container.hasPattern(BlockPattern.ore)) {
+                    Block block = container.getBlock(BlockPattern.ore);
                     if(block != null)
-                    addOreGen(block, container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
+                    addOreGen(block, container.getName(), container.getGenerationConfig());
                 }
-                if(container.getMaterial().hasSubtype(MaterialUseType.GEODE)) {
-                    addOreGen(IGRegistrationHolder.getBlockByMaterial(MaterialUseType.GEODE, container.getMaterial()), container.getMaterial().getName(), container.getMaterial().getGenerationConfig());
+                if (container.hasPattern(BlockPattern.geode)) {
+                    Block block = container.getBlock(BlockPattern.geode);
+                    if(block != null)
+                        addOreGen(block, container.getName(), container.getGenerationConfig());
                 }
             }
         }

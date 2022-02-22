@@ -3,14 +3,14 @@ package igteam.immersive_geology.materials.data.metal.variants;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Items;
 
-public class MaterialMetalGold extends MaterialBasMetal {
+public class MaterialMetalGold extends MaterialBaseMetal {
 
     public MaterialMetalGold() {
         super("gold");

@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.gas.MaterialBaseGas;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -18,12 +20,12 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 
 import java.util.Set;
 
-public enum GasEnum implements MaterialInterface {
+public enum GasEnum implements MaterialInterface<MaterialBaseGas> {
     ;
 
-    private final MaterialBase material;
+    private final MaterialBaseGas material;
 
-    GasEnum(MaterialBase m){
+    GasEnum(MaterialBaseGas m){
         this.material = m;
     }
 
@@ -197,7 +199,13 @@ public enum GasEnum implements MaterialInterface {
     }
 
     @Override
-    public MaterialBase get() {
+    public MaterialBaseGas get() {
         return material;
     }
+
+    @Override
+    public IGOreConfig getGenerationConfig() {
+        return null;
+    }
+
 }

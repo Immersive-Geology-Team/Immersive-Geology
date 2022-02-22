@@ -1,10 +1,10 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
-import igteam.immersive_geology.materials.data.metal.MaterialBasMetal;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 
-public class MaterialMetalAluminium extends MaterialBasMetal {
+public class MaterialMetalAluminium extends MaterialBaseMetal {
     public MaterialMetalAluminium() {
         super("aluminium");
     }

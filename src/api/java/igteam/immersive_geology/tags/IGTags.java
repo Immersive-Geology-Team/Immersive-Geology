@@ -1,10 +1,13 @@
 package igteam.immersive_geology.tags;
 
 import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.MineralEnum;
-import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
+import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
+import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -13,7 +16,10 @@ import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
-import net.minecraft.tags.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +37,7 @@ public class IGTags {
         for (ItemPattern pattern : ItemPattern.values()) {
             IG_ITEM_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Item>>());
 
-            for (MaterialInterface metal : MetalEnum.values()) {
+            for (MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()) {
                 if (metal.hasPattern(pattern)) {
                     switch(pattern){
                         case ore_bit:
@@ -49,13 +55,13 @@ public class IGTags {
                 }
             }
 
-            for (MaterialInterface stone : StoneEnum.values()) {
+            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if(stone.hasPattern(pattern)){
                     createWrapperForPattern(pattern, stone.get());
                 }
             }
 
-            for (MaterialInterface mineral : MineralEnum.values()) {
+            for (MaterialInterface<MaterialBaseMineral> mineral : MineralEnum.values()) {
                 if(mineral.hasPattern(pattern)){
                     switch(pattern){
                         case ore_bit:
@@ -74,9 +80,29 @@ public class IGTags {
             }
         }
 
+        for(MiscPattern pattern : MiscPattern.values()){
+            IG_FLUID_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Fluid>>());
+            if(pattern == MiscPattern.fluid) {
+                for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
+                    createWrapperForPattern(pattern, fluid.get());
+                }
+            }
+            if(pattern == MiscPattern.slurry){
+                for (SlurryEnum slurry : SlurryEnum.values()) {
+                    HashSet<MaterialSlurryWrapper> slurryWrappers = slurry.getEntries();
+                    for (MaterialSlurryWrapper wrapper : slurryWrappers) {
+                        FluidEnum fluid = wrapper.getFluidBase();
+                        MaterialInterface<? extends MaterialBase> soluteMaterial = wrapper.getSoluteMaterial();
+
+                        createWrapperForPattern(pattern, fluid.get(), soluteMaterial.get());
+                    }
+                }
+            }
+        }
+
         for (BlockPattern pattern : BlockPattern.values()) {
             IG_BLOCK_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Block>>());
-            for (MaterialInterface metal : MetalEnum.values()) {
+            for (MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()) {
                 if (metal.hasPattern(pattern)) {
                     switch(pattern){
                         case ore: {
@@ -92,7 +118,7 @@ public class IGTags {
                     }
                 }
             }
-            for (MaterialInterface stone : StoneEnum.values()) {
+            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if(stone.hasPattern(pattern)){
                     createWrapperForPattern(pattern, stone.get());
                 }

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "immersive_geology:clay_refractory"
-  },
-  "result": "immersive_geology:brick_refractory",
-  "experience": 0.15,
-  "cookingtime": 600
-}

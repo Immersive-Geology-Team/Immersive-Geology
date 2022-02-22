@@ -1,10 +1,11 @@
 package com.igteam.immersive_geology.common.fluid;
 
 import com.igteam.immersive_geology.common.fluid.helper.IGFluidAttributes;
-import com.igteam.immersive_geology.common.item.legacy.IGBucketItem;
+import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
@@ -56,7 +57,7 @@ public class IGFluid extends FlowingFluid {
     protected final String fluidName;
     protected final ResourceLocation stillTex;
     protected final ResourceLocation flowingTex;
-    protected final FluidEnum fluidMaterial;
+    protected final MaterialInterface<MaterialBaseFluid> fluidMaterial;
     protected IGFluid flowing;
     protected IGFluid source;
 
@@ -68,22 +69,22 @@ public class IGFluid extends FlowingFluid {
 
     private MaterialPattern pattern;
 
-    public IGFluid(FluidEnum material)
+    public IGFluid(MaterialInterface<MaterialBaseFluid> material)
     {
-        this(material, null, MiscPattern.fluid_still);
+        this(material, null, MiscPattern.fluid);
     }
 
-    public IGFluid(FluidEnum material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, MaterialPattern pattern)
+    public IGFluid(MaterialInterface<MaterialBaseFluid> material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, MaterialPattern pattern)
     {
         this(material, buildAttributes, true, pattern);
     }
 
-    public IGFluid(FluidEnum material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSource, MaterialPattern pattern)
+    public IGFluid(MaterialInterface<MaterialBaseFluid> material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, boolean isSource, MaterialPattern pattern)
     {
         this.fluidMaterial = material;
         this.fluidName = material.getName();
-        this.stillTex = material.getTextureLocation(MiscPattern.fluid_still);
-        this.flowingTex = material.getTextureLocation(MiscPattern.fluid_flowing);
+        this.stillTex = material.getTextureLocation(MiscPattern.fluid);
+        this.flowingTex = material.getTextureLocation(MiscPattern.fluid); //TODO refactor MiscPattern, add a new Pattern type for Fluids
         this.buildAttributes = buildAttributes;
         this.pattern = pattern;
 
@@ -97,8 +98,6 @@ public class IGFluid extends FlowingFluid {
         {
             source = this;
             this.block = new IGFluidBlock(this);
-
-
             this.block.setRegistryName(IGLib.MODID, registryName);
 
 //
@@ -387,7 +386,7 @@ public class IGFluid extends FlowingFluid {
 
     public boolean isSlurry() {return pattern == MiscPattern.slurry;}
 
-    public FluidEnum getFluidMaterial() {
+    public MaterialInterface<MaterialBaseFluid> getFluidMaterial() {
         return fluidMaterial;
     }
 }

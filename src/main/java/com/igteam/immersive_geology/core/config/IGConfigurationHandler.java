@@ -1,10 +1,11 @@
 package com.igteam.immersive_geology.core.config;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.legacy_api.materials.Material;
-import com.igteam.immersive_geology.legacy_api.materials.MaterialEnum;
 import com.igteam.immersive_geology.core.lib.IGLib;
-
+import igteam.immersive_geology.config.IGOreConfig;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -94,29 +95,30 @@ public class IGConfigurationHandler {
     public static class MaterialConfigSetup{
         public MaterialConfigSetup(ForgeConfigSpec.Builder builder){
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
-            for(MaterialEnum container : MaterialEnum.worldMaterials()) {
-                Material material = (Material) container.getMaterial();
-                ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + material.getName());
-                builder.push(material.getName());
-                switch (material.getRarity()) {
-                    case COMMON:
-                        material.setConfiguration(new IGOreConfig(builder, material.getName(), 8, 1, 90, 6));
-                        break;
-                    case UNCOMMON:
-                        material.setConfiguration(new IGOreConfig(builder, material.getName(), 5, 1, 70, 4));
-                        break;
-                    case RARE:
-                        material.setConfiguration(new IGOreConfig(builder, material.getName(), 4, 1, 50, 3));
-                        break;
-                    case EPIC:
-                        material.setConfiguration(new IGOreConfig(builder, material.getName(), 3, 1, 30, 2));
-                        break;
-                    default:
-                        ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.name() + " setting as default Common Rarity");
-                        material.setConfiguration(new IGOreConfig(builder, material.getName(), 8, 1, 90, 6));
-                        break;
+            for(MaterialInterface<MaterialBaseMetal> container : MetalEnum.values()) {
+                if (container.get().isNative()) {
+                    ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + container.getName());
+                    builder.push(container.getName());
+                    switch (container.get().getRarity()) {
+                        case COMMON:
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 8, 1, 90, 6));
+                            break;
+                        case UNCOMMON:
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 5, 1, 70, 4));
+                            break;
+                        case RARE:
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 4, 1, 50, 3));
+                            break;
+                        case EPIC:
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 3, 1, 30, 2));
+                            break;
+                        default:
+                            ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Common Rarity");
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 8, 1, 90, 6));
+                            break;
+                    }
+                    builder.pop();
                 }
-                builder.pop();
             }
             builder.pop();
         }

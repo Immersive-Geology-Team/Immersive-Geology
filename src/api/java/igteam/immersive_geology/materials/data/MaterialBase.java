@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials.data;
 
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -107,7 +108,7 @@ public abstract class MaterialBase {
         if(pattern instanceof ItemPattern){
             ItemPattern i = (ItemPattern) pattern;
             HashMap<String, ITag.INamedTag<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
-            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Arrays.asList(this));
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
@@ -115,14 +116,14 @@ public abstract class MaterialBase {
             BlockPattern b = (BlockPattern) pattern;
             HashMap<String, ITag.INamedTag<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
 
-            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Arrays.asList(this));
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
         if(pattern instanceof MiscPattern){
             MiscPattern f = (MiscPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
-            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Arrays.asList(this));
+            LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
@@ -413,5 +414,15 @@ public abstract class MaterialBase {
 
     public boolean generateOreFor(MaterialInterface m) {
         return true;
+    }
+
+    private IGOreConfig oreConfiguration;
+
+    public IGOreConfig getGenerationConfig() {
+        return oreConfiguration;
+    }
+
+    public void setGenerationConfiguration(IGOreConfig config){
+        this.oreConfiguration = config;
     }
 }

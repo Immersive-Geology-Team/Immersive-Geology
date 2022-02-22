@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.data.fluid.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -19,7 +21,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 
 import java.util.Set;
 
-public enum FluidEnum implements MaterialInterface {
+public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     Brine(new MaterialFluidBrine()),
     SulfuricAcid(new MaterialFluidSulfuricAcid()),
     HydrochloricAcid(new MaterialFluidHydrochloricAcid()),
@@ -27,9 +29,9 @@ public enum FluidEnum implements MaterialInterface {
     NitricAcid(new MaterialFluidNitricAcid()),
     SodiumHydroxide(new MaterialFluidSodiumHydroxide());
 
-    private final MaterialBase material;
+    private final MaterialBaseFluid material;
 
-    FluidEnum(MaterialBase m){
+    FluidEnum(MaterialBaseFluid m){
         this.material = m;
     }
 
@@ -86,7 +88,6 @@ public enum FluidEnum implements MaterialInterface {
     public Fluid getFluid(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         return material.getFluid(pattern, secondaryMaterial);
     }
-
 
     @Override
     public Item getItem(MaterialPattern pattern) {
@@ -204,7 +205,13 @@ public enum FluidEnum implements MaterialInterface {
     }
 
     @Override
-    public MaterialBase get() {
+    public MaterialBaseFluid get() {
         return material;
     }
+
+    @Override
+    public IGOreConfig getGenerationConfig() {
+        return null;
+    }
+
 }

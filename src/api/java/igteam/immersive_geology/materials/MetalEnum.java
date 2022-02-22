@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.data.metal.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -19,7 +21,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 
 import java.util.Set;
 
-public enum MetalEnum implements MaterialInterface {
+public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     Aluminium(new MaterialMetalAluminium()),
     Chromium(new MaterialMetalChromium()),
     Copper(new MaterialMetalCopper()),
@@ -42,13 +44,11 @@ public enum MetalEnum implements MaterialInterface {
     Sodium(new MaterialMetalSodium()),
     Osmium(new MaterialMetalOsmium());
 
-    private final MaterialBase material;
+    private final MaterialBaseMetal material;
 
-    MetalEnum(MaterialBase m){
+    MetalEnum(MaterialBaseMetal m){
         this.material = m;
     }
-
-
 
     @Override
     public ItemStack getStack(MaterialPattern pattern) {
@@ -219,7 +219,12 @@ public enum MetalEnum implements MaterialInterface {
     }
 
     @Override
-    public MaterialBase get() {
+    public IGOreConfig getGenerationConfig() {
+        return null;
+    }
+
+    @Override
+    public MaterialBaseMetal get() {
         return material;
     }
 }

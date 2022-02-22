@@ -1,7 +1,0 @@
-{
-  "parent": "immersiveengineering:item/ie_item_base",
-  "textures": {
-    "layer0": "immersive_geology:item/greyscale/fluid/bucket_fluid",
-    "layer1": "immersive_geology:item/greyscale/fluid/bucket_base"
-  }
-}

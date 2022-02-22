@@ -68,6 +68,11 @@ public class IGGenericBlock extends Block implements IGBlockType {
         return this.pattern + data.toString();
     }
 
+    @Override
+    public Block getBlock() {
+        return this;
+    }
+
     public void finalizeData(){
         itemBlock.finalizeData();
         setRegistryName(IGRegistrationHolder.getRegistryKey(this));

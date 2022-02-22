@@ -6,10 +6,12 @@ import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -39,7 +41,7 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        generateMultiblockItems();
+
         IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((i) -> {
             if(i instanceof IGGenericItem) {
                 IGGenericItem item = (IGGenericItem) i;
@@ -50,18 +52,27 @@ public class IGItemModelProvider extends ItemModelProvider {
             }
             if(i instanceof IGGenericBlockItem){
                 IGGenericBlockItem item = (IGGenericBlockItem) i;
-                IGGenericBlock block = item.getBlock();
-                BlockPattern blockPattern = block.getPattern();
-                switch(blockPattern) {
-                    case ore:
-                        generateOreItemBlock(block, item);
-                        break;
-                    default:
-                        generateGenericItemBlock(block, item);
-                        break;
+                IGBlockType block = item.getIGBlockType();
+                MaterialPattern pattern = block.getPattern();
+                if(pattern instanceof BlockPattern) {
+                    BlockPattern blockPattern = (BlockPattern) pattern;
+                    if(block.getBlock() instanceof IGGenericBlock) {
+                        IGGenericBlock igBlock = (IGGenericBlock) item.getBlock();
+                        switch (blockPattern) {
+                            case ore:
+                                generateOreItemBlock(igBlock, item);
+                                break;
+                            default:
+                                generateGenericItemBlock(igBlock, item);
+                                break;
+                        }
+                    }
                 }
             }
         });
+
+        generateMultiblockItems();
+
     }
 
     private ItemModelBuilder obj(IItemProvider item, String model){

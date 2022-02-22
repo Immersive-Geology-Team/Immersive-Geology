@@ -1,7 +1,8 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialDeepslate;
+import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialGranite;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -21,14 +22,13 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 
 import java.util.Set;
 
-public enum StoneEnum implements MaterialInterface {
+public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     Stone(new MaterialDefaultStone()),
-    Deepslate(new MaterialDeepslate()),
     Granite(new MaterialGranite());
 
-    private final MaterialBase material;
+    private final MaterialBaseStone material;
 
-    StoneEnum(MaterialBase m){
+    StoneEnum(MaterialBaseStone m){
         this.material = m;
     }
 
@@ -201,7 +201,13 @@ public enum StoneEnum implements MaterialInterface {
     }
 
     @Override
-    public MaterialBase get() {
+    public MaterialBaseStone get() {
         return material;
     }
+
+    @Override
+    public IGOreConfig getGenerationConfig() {
+        return null;
+    }
+
 }
