@@ -73,6 +73,11 @@ public class IGGenericBlock extends Block implements IGBlockType {
         return this;
     }
 
+    @Override
+    public boolean hasCustomBlockColours() {
+        return true;
+    }
+
     public void finalizeData(){
         itemBlock.finalizeData();
         setRegistryName(IGRegistrationHolder.getRegistryKey(this));

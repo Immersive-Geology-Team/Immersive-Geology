@@ -90,6 +90,11 @@ public class IGGenericItem extends Item implements IGItemType {
     }
 
     @Override
+    public boolean hasCustomItemColours() {
+        return true;
+    }
+
+    @Override
     public ItemSubGroup getSubGroup() {
         return pattern.getSubGroup();
     }

@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.block.IGBlockType;
@@ -57,17 +58,18 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
             }
         }
 
-        IGRegistryProvider.IG_BLOCK_REGISTRY.put(IGRegistrationHolder.getRegistryKey(this), this);
+        this.itemBlock = new IGGenericBlockItem(this, StoneEnum.Stone, ItemPattern.block_item);
+        this.itemBlock.setRegistryName(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()));
+;
+        IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);
+        IGRegistryProvider.IG_ITEM_REGISTRY.putIfAbsent(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()), itemBlock);
 
-        this.itemBlock = new IGGenericBlockItem(this, MetalEnum.Iron, ItemPattern.block_item);
-
-        IGRegistryProvider.IG_ITEM_REGISTRY.put(IGRegistrationHolder.getRegistryKey(itemBlock), itemBlock);
     }
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     @Override
     public ResourceLocation createRegistryName(){
-        return IGRegistryProvider.getRegistryKey(StoneEnum.Stone, MiscPattern.machine);
+        return IGRegistrationHolder.getRegistryKey(this);
     }
 
     @Override

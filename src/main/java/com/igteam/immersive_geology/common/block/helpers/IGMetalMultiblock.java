@@ -44,12 +44,11 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
             }
         }
 
-        IGRegistryProvider.IG_BLOCK_REGISTRY.put(IGRegistrationHolder.getRegistryKey(this), this);
-
         this.itemBlock = new IGGenericBlockItem(this, MetalEnum.Iron, ItemPattern.block_item);
-        this.itemBlock.finalizeData();
-        IGRegistryProvider.IG_ITEM_REGISTRY.put(IGRegistrationHolder.getRegistryKey(itemBlock), itemBlock);
+        this.itemBlock.setRegistryName(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()));
 
+        IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);
+        IGRegistryProvider.IG_ITEM_REGISTRY.putIfAbsent(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()), itemBlock);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
 
     @Override
     public ResourceLocation createRegistryName(){
-        return new ResourceLocation(IGLib.MODID, name);
+        return IGRegistrationHolder.getRegistryKey(this);
     }
 
     @Override

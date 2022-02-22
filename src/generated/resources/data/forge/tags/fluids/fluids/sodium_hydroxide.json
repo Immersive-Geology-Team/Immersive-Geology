@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:empty"
+    "immersive_geology:fluid_sodium_hydroxide"
   ]
 }

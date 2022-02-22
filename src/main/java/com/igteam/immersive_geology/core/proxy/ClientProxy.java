@@ -11,6 +11,7 @@ import blusunrize.lib.manual.Tree;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.gui.ReverberationScreen;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
+import com.igteam.immersive_geology.client.render.IGColorHandler;
 import com.igteam.immersive_geology.client.render.RenderLayerHandler;
 import com.igteam.immersive_geology.client.render.multiblock.*;
 import com.igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
@@ -94,7 +95,7 @@ public class ClientProxy extends ServerProxy {
     private void registerItemColors(){
         for(Item item : IGRegistryProvider.IG_ITEM_REGISTRY.values()){
             if(item instanceof IGItemType && ((IGItemType) item).hasCustomItemColours()){
-                Minecraft.getInstance().getItemColors().register(IEDefaultColourHandlers.INSTANCE, item);
+                Minecraft.getInstance().getItemColors().register(IGColorHandler.INSTANCE, item);
             }
         }
     }
@@ -102,7 +103,7 @@ public class ClientProxy extends ServerProxy {
     private void registerBlockColors(){
         for(Block block : IGRegistryProvider.IG_BLOCK_REGISTRY.values()){
             if(block instanceof IGBlockType && ((IGBlockType) block).hasCustomBlockColours()) {
-                Minecraft.getInstance().getBlockColors().register(IEDefaultColourHandlers.INSTANCE, block);
+                Minecraft.getInstance().getBlockColors().register(IGColorHandler.INSTANCE, block);
             }
         }
     }

@@ -48,10 +48,11 @@ public class ImmersiveGeology
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		LootIG.initialize();
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();
 		IGRegistrationHolder.buildRecipes();
+
+		LootIG.initialize();
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL);
 
@@ -65,6 +66,7 @@ public class ImmersiveGeology
 
 		forgeBus.addListener(this::addReloadListeners);
 
+		modBus.register(IGRegistrationHolder.class);
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
 
@@ -72,7 +74,6 @@ public class ImmersiveGeology
 
 		IGTileTypes.REGISTER.register(modBus);
 		Serializers.RECIPE_SERIALIZERS.register(modBus);
-
 
 		proxy.registerContainersAndScreens();
 	}

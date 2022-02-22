@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
 public class IGRegistrationHolder {
-    private static Logger logger = ImmersiveGeology.getNewLogger();
+    private static final Logger logger = ImmersiveGeology.getNewLogger();
 
     public static void initialize(){
         logger.info("Registration of Material Interfaces");
@@ -102,27 +102,22 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForBlockPattern(MaterialInterface m, BlockPattern p){
-        switch(p) {
-            case ore: {
-                Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
-                    if(m.generateOreFor(stone)) {
-                        IGGenericBlock multi_block = new IGGenericBlock(m, p);
-                        multi_block.addMaterial(stone, MaterialTexture.base);
-                        multi_block.addMaterial(m, MaterialTexture.overlay);
-                        multi_block.finalizeData();
-                        register(multi_block.asItem());
-                        register(multi_block);
-                    }
-                });
-            }
-            break;
-            default: {
-                IGGenericBlock multi_block = new IGGenericBlock(m, p);
-                multi_block.finalizeData();
-                register(multi_block.asItem());
-                register(multi_block);
-            }
-            break;
+        if (p == BlockPattern.ore) {
+            Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
+                if (m.generateOreFor(stone)) {
+                    IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                    multi_block.addMaterial(stone, MaterialTexture.base);
+                    multi_block.addMaterial(m, MaterialTexture.overlay);
+                    multi_block.finalizeData();
+                    register(multi_block.asItem());
+                    register(multi_block);
+                }
+            });
+        } else {
+            IGGenericBlock multi_block = new IGGenericBlock(m, p);
+            multi_block.finalizeData();
+            register(multi_block.asItem());
+            register(multi_block);
         }
     }
 
@@ -135,14 +130,17 @@ public class IGRegistrationHolder {
     }
 
     private static void register(Item i){
+        logger.info("Registering: " + i.getRegistryName());
         IGRegistryProvider.IG_ITEM_REGISTRY.put(i.getRegistryName(), i);
     }
 
     private static void register(Block b){
+        logger.info("Registering: " + b.getRegistryName());
         IGRegistryProvider.IG_BLOCK_REGISTRY.put(b.getRegistryName(), b);
     }
 
     private static void register(Fluid f){
+        logger.info("Registering: " + f.getRegistryName());
         IGRegistryProvider.IG_FLUID_REGISTRY.put(f.getRegistryName(), f);
     }
 
@@ -150,8 +148,10 @@ public class IGRegistrationHolder {
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
         logger.info("Applying Item Registration");
 
-        IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((item) -> {
-            event.getRegistry().register(item);
+
+        IGRegistryProvider.IG_ITEM_REGISTRY.keySet().forEach((key) -> {
+            logger.info("Attempting Registry for " + key.toString());
+            event.getRegistry().register(IGRegistryProvider.IG_ITEM_REGISTRY.get(key));
         });
     }
 
@@ -166,6 +166,8 @@ public class IGRegistrationHolder {
 
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
+        logger.info("Applying Fluid Registries");
+
         IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) ->{
             event.getRegistry().register(fluid);
         });
@@ -184,8 +186,6 @@ public class IGRegistrationHolder {
     }
 
     private static void buildMaterialRecipes(MaterialInterface... material){
-        Arrays.stream(material).iterator().forEachRemaining((m) -> {
-            m.build();
-        });
+        Arrays.stream(material).iterator().forEachRemaining(MaterialInterface::build);
     }
 }
