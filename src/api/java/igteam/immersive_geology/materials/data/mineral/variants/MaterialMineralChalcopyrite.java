@@ -1,23 +1,29 @@
-package igteam.immersive_geology.materials.data.metal.variants;
+package igteam.immersive_geology.materials.data.mineral.variants;
 
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialMetalTin extends MaterialBaseMetal {
+public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
 
     @Override
     public String getName() {
-        return "tin";
+        return "chalcopyrite";
     }
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xd3d4d5;
+        return 0x5B4D2A;
+    }
+
+    @Override
+    public Rarity getRarity() {
+        return Rarity.UNCOMMON;
     }
 
     @Override
@@ -29,7 +35,9 @@ public class MaterialMetalTin extends MaterialBaseMetal {
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
         return new LinkedHashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.TIN)
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.COPPER),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR, 2)
         ));
     }
 }

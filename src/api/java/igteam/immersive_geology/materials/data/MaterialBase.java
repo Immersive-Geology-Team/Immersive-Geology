@@ -5,10 +5,13 @@ import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.StageProvider;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
@@ -21,8 +24,6 @@ import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.helper.StageProvider;
 
 import java.util.*;
 
@@ -32,8 +33,8 @@ public abstract class MaterialBase {
 
     private Set<IGProcessingStage> stageSet = new HashSet<>();
 
-    public MaterialBase(String name) {
-        this.name = name;
+    public MaterialBase() {
+        this.name = getName();
     }
 
     public void build(){
@@ -351,7 +352,7 @@ public abstract class MaterialBase {
     }
 
     public String getName(){
-        return this.name;
+        return "missingno";
     }
 
     public void addStage(IGProcessingStage igProcessingStage) {
@@ -421,6 +422,8 @@ public abstract class MaterialBase {
     public IGOreConfig getGenerationConfig() {
         return oreConfiguration;
     }
+
+    public abstract LinkedHashSet<PeriodicTableElement.ElementProportion> getElements();
 
     public void setGenerationConfiguration(IGOreConfig config){
         this.oreConfiguration = config;

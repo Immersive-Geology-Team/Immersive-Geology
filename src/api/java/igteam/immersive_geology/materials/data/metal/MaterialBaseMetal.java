@@ -12,11 +12,7 @@ import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBaseMetal extends MaterialBase {
-
-    public MaterialBaseMetal(String name) {
-        super(name);
-}
+public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     public int getColor(MaterialPattern p) {

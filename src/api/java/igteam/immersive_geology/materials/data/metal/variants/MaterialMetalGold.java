@@ -4,16 +4,22 @@ import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Items;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
 public class MaterialMetalGold extends MaterialBaseMetal {
 
-    public MaterialMetalGold() {
-        super("gold");
+    @Override
+    public String getName() {
+        return "gold";
     }
 
     @Override
@@ -25,13 +31,13 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extration Stage") {
+        new IGProcessingStage(this,"Extraction Stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.crafting(this)
                         .shapeless(Items.GOLD_INGOT, 16,
                                 IETags.getTagsFor(EnumMetals.SILVER).ingot,
-                                IETags.getTagsFor(EnumMetals.SILVER).nugget)
+                                MetalEnum.Chromium.getItemTag(ItemPattern.ingot))
                         .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot));
             }
         };
@@ -46,4 +52,13 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     public boolean hasExistingImplementation(){
         return true;
     }
+
+    @Override
+    public LinkedHashSet<ElementProportion> getElements()
+    {
+        return new LinkedHashSet<>(Arrays.asList(
+                new ElementProportion(PeriodicTableElement.GOLD)
+        ));
+    }
+
 }

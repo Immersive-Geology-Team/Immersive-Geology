@@ -5,9 +5,9 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBaseMineral extends MaterialBase {
-    public MaterialBaseMineral(String name) {
-        super(name);
+public abstract class MaterialBaseMineral extends MaterialBase {
+    public MaterialBaseMineral() {
+        super();
     }
 
     @Override

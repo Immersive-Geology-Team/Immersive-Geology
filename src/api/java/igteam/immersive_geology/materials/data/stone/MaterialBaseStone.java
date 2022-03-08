@@ -8,12 +8,7 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBaseStone extends MaterialBase {
-
-    public MaterialBaseStone(String name) {
-        super(name);
-    }
-
+public abstract class MaterialBaseStone extends MaterialBase {
     @Override
     public int getColor(MaterialPattern p) {
         return 0xFFFFFF;
