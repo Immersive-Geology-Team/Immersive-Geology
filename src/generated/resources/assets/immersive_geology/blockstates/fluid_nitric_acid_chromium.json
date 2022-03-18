@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersive_geology:block/fluid/fluid_nitric_acid_chromium"
+    }
+  }
+}

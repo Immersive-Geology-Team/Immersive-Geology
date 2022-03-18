@@ -1,14 +1,29 @@
 package igteam.immersive_geology.materials.data.stone.variants;
 
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
 public class MaterialDefaultStone extends MaterialBaseStone {
+
     public MaterialDefaultStone() {
         super("stone");
+    }
+
+    @Override
+    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
+        return new LinkedHashSet<>(Arrays.asList(
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 2),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.ALUMINIUM),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 3)
+        ));
     }
 
     @Override

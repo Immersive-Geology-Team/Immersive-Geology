@@ -204,6 +204,11 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return material.getTextureLocation(pattern, subtype);
+    }
+
+    @Override
     public CrystalFamily getCrystalFamily() {
         return material.getCrystalFamily();
     }
@@ -221,6 +226,11 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     @Override
     public IGOreConfig getGenerationConfig() {
         return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        return false;
     }
 
     @Override

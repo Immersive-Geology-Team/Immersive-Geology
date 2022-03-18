@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalOsmium extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "osmium";
+    public MaterialMetalOsmium() {
+        super("osmium");
     }
 
     @Override

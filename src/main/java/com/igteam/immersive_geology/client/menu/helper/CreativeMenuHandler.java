@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.client.menu.helper;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.client.Minecraft;
@@ -110,6 +111,8 @@ public class CreativeMenuHandler {
             AbstractGui.blit(matrixStack, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height, 256, 256);
 
             ItemStack stack = group.getMaterial().getStack(group.getPattern());
+            if(stack.isEmpty()) // A nice quick and dirty fix, used when an icon has 'dual' materials  ~Muddykat
+                stack = group.getMaterial().getStack(group.getPattern(), StoneEnum.Stone);
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
                 mc.getItemRenderer().renderItemIntoGUI(stack, x + 1, y + 2);

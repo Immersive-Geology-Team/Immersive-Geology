@@ -1,8 +1,9 @@
 package igteam.immersive_geology.materials;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
+import igteam.immersive_geology.materials.data.misc.MaterialMiscBase;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -21,8 +22,18 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.Set;
 
 public enum MiscEnum implements MaterialInterface<MaterialBase> {
-    Glass(new MaterialDefaultStone()),
-    Coal(new MaterialDefaultStone());
+    Glass(new MaterialMiscBase("glass"){
+        @Override
+        public boolean hasFlask(){
+            return true;
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+            return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/empty_flask");
+        }
+    }),
+    Coal(new MaterialMiscBase("coal"));
 
     private final MaterialBase material;
 
@@ -184,6 +195,11 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return material.getTextureLocation(pattern, subtype);
+    }
+
+    @Override
     public boolean hasExistingImplementation() {
         return material.hasExistingImplementation();
     }
@@ -208,4 +224,8 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         return null;
     }
 
+    @Override
+    public boolean isFluidPortable(ItemPattern bucket) {
+        return material.isFluidPortable(bucket);
+    }
 }

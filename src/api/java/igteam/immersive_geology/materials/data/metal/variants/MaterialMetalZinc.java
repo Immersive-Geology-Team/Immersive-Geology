@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalZinc extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "zinc";
+    public MaterialMetalZinc() {
+        super("zinc");
     }
 
     @Override

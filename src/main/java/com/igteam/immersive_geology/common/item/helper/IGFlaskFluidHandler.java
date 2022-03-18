@@ -32,7 +32,7 @@ public class IGFlaskFluidHandler extends FluidBucketWrapper {
     {
         if (fluid.getFluid() instanceof IGFluid)
         {
-            return ((IGFluid)fluid.getFluid()).hasFlask();
+            return ((IGFluid)fluid.getFluid()).getFluidMaterial().isFluidPortable(ItemPattern.flask);
 
         }
         return false;

@@ -12,10 +12,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMineralAnatase extends MaterialBaseMineral {
 
-
-    @Override
-    public String getName() {
-        return "anatase";
+    public MaterialMineralAnatase() {
+        super("anatase");
     }
 
     @Override

@@ -31,7 +31,7 @@ public class IGInteractionHandler {
                 IFluidHandler handler = cap.resolve().get();
                 for (int i = 0; i< handler.getTanks();i++) {
                     if ((handler.getFluidInTank(i).getFluid() instanceof IGFluid) &&
-                            (!((IGFluid) handler.getFluidInTank(i).getFluid()).hasBucket())
+                            (!((IGFluid) handler.getFluidInTank(i).getFluid()).hasFlask())
                             && (event.getItemStack().getItem() == Items.BUCKET))
                     {
                         event.setCanceled(true);
@@ -45,7 +45,7 @@ public class IGInteractionHandler {
             if (tileEntity instanceof SheetmetalTankTileEntity)
             {
                 Fluid fluid =((SheetmetalTankTileEntity) tileEntity).master().tank.getFluid().getFluid();
-                if ((fluid instanceof  IGFluid) && (!((IGFluid) fluid).hasBucket())
+                if ((fluid instanceof  IGFluid) && (((IGFluid) fluid).hasFlask())
                         && (event.getItemStack().getItem() == Items.BUCKET))
                 {
                     event.setCanceled(true);

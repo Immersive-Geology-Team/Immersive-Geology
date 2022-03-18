@@ -26,12 +26,7 @@ public class IGFluidAttributes extends FluidAttributes {
         if (stack.getFluid() instanceof IGFluid) {
             IGFluid fluid = (IGFluid) stack.getFluid();
             String base_name = getTranslationKey();
-//            if (fluid.getFluidMaterial() instanceof SlurryEnum) {
-//                MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluid.getFluidMaterial();
-//                localizedNames.add(slurry.getSoluteMaterial().getDisplayName());
-//                localizedNames.add(slurry.getBaseFluidMaterial().getComponentName());
-//                base_name = "fluid."+IGLib.MODID+".slurry";
-//            }
+            localizedNames.add(fluid.getFluidMaterial().getName());
             TranslationTextComponent name = new TranslationTextComponent(base_name, localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }

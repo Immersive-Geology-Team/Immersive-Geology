@@ -9,6 +9,10 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseStone extends MaterialBase {
+    public MaterialBaseStone(String name) {
+        super(name);
+    }
+
     @Override
     public int getColor(MaterialPattern p) {
         return 0xFFFFFF;
@@ -180,4 +184,15 @@ public abstract class MaterialBaseStone extends MaterialBase {
         }
         return null;
     }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        return false;
+    }
+
 }

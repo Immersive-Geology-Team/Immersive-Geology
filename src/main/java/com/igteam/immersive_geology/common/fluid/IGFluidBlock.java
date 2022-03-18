@@ -2,11 +2,12 @@ package com.igteam.immersive_geology.common.fluid;
 
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -112,21 +113,13 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
 
     @Override
     public Fluid pickupFluid(IWorld iWorld, BlockPos pos, BlockState state) {
-        if(igFluid.hasBucket()){
-          return super.pickupFluid(iWorld, pos, state);
-        } else {
-            return Fluids.EMPTY;
-        }
+        return Fluids.EMPTY;
     }
 
     @Override
     public Fluid pickupFlaskFluid(IWorld iWorld, BlockPos pos, BlockState state) {
-        if(igFluid.hasBucket()){
-            return Fluids.EMPTY;
-        } else
-        if ((Integer)state.get(LEVEL) == 0) {
-            iWorld.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-            return this.igFluid;
+        if(igFluid.hasFlask()){
+            return super.pickupFluid(iWorld, pos, state);
         } else {
             return Fluids.EMPTY;
         }
@@ -134,7 +127,7 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
 
     @Override
     public int getColourForIGBlock(int pass) {
-        return 0;
+        return igFluid.getFluidMaterial().getColor(MiscPattern.fluid);
     }
 
     @Override
@@ -149,7 +142,7 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
 
     @Override
     public String getHolderKey() {
-        return null;
+        return IGRegistryProvider.getRegistryKey(igFluid.fluidMaterial, getPattern()).getPath();
     }
 
     @Override

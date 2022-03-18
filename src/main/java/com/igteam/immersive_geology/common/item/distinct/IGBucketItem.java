@@ -1,6 +1,5 @@
 package com.igteam.immersive_geology.common.item.distinct;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import com.igteam.immersive_geology.common.item.helper.IGFlaskFluidHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -8,11 +7,11 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
+import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -42,13 +41,11 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Supplier;
 
 
-public class IGBucketItem extends BucketItem implements IGItemType{
+public class IGBucketItem extends BucketItem implements IGItemType {
 
     private Fluid igContainedBlock;
     protected ItemSubGroup subGroup;
@@ -71,17 +68,13 @@ public class IGBucketItem extends BucketItem implements IGItemType{
             localizedNames.add(fluidMaterial.getName());
             TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
-        } else {
-            if(pattern == MiscPattern.slurry){
-                MaterialSlurryWrapper slurry = (MaterialSlurryWrapper) fluidMaterial;
-                localizedNames.add(slurry.getSoluteMaterial().getName());
-                localizedNames.add(slurry.getFluidBase().getName());
-            } else {
-                localizedNames.add(fluidMaterial.getName());
-            }
-            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
-            return name;
         }
+
+        localizedNames.add(fluidMaterial.getName());
+
+        TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+        return name;
+
     }
 
     @Override
@@ -96,12 +89,12 @@ public class IGBucketItem extends BucketItem implements IGItemType{
 
     @Override
     public MaterialPattern getPattern() {
-        return null;
+        return pattern;
     }
 
     @Override
     public String getHolderKey() {
-        return null;
+        return IGRegistryProvider.getRegistryKey(fluidMaterial, pattern).getPath();
     }
 
     @Override
@@ -120,68 +113,68 @@ public class IGBucketItem extends BucketItem implements IGItemType{
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
-        if(pattern == ItemPattern.flask){
-           return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity playerEntity, Hand handIn) {
+        if(pattern == ItemPattern.bucket){
+            return super.onItemRightClick(world, playerEntity, handIn);
+        }
+        ItemStack itemstack = playerEntity.getHeldItem(handIn);
+        RayTraceResult raytraceresult = rayTrace(world, playerEntity, this.igContainedBlock == Fluids.EMPTY ? RayTraceContext.FluidMode.SOURCE_ONLY : RayTraceContext.FluidMode.NONE);
+        ActionResult<ItemStack> ret = ForgeEventFactory.onBucketUse(playerEntity, world, itemstack, raytraceresult);
+        if (ret != null) {
+            return ret;
+        } else if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
+            return ActionResult.resultPass(itemstack);
+        } else if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
+            return ActionResult.resultPass(itemstack);
         } else {
-            ItemStack itemstack = p_77659_2_.getHeldItem(p_77659_3_);
-            RayTraceResult raytraceresult = rayTrace(p_77659_1_, p_77659_2_, this.igContainedBlock == Fluids.EMPTY ? RayTraceContext.FluidMode.SOURCE_ONLY : RayTraceContext.FluidMode.NONE);
-            ActionResult<ItemStack> ret = ForgeEventFactory.onBucketUse(p_77659_2_, p_77659_1_, itemstack, raytraceresult);
-            if (ret != null) {
-                return ret;
-            } else if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
-                return ActionResult.resultPass(itemstack);
-            } else if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
-                return ActionResult.resultPass(itemstack);
-            } else {
-                BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
-                BlockPos blockpos = blockraytraceresult.getPos();
-                Direction direction = blockraytraceresult.getFace();
-                BlockPos blockpos1 = blockpos.offset(direction);
-                if (p_77659_1_.isBlockModifiable(p_77659_2_, blockpos) && p_77659_2_.canPlayerEdit(blockpos1, direction, itemstack)) {
-                    BlockState blockstate1;
-                    if (this.igContainedBlock == Fluids.EMPTY) {
-                        blockstate1 = p_77659_1_.getBlockState(blockpos);
-                        if (blockstate1.getBlock() instanceof IFlaskPickupHandler) {
-                            Fluid fluid = ((IFlaskPickupHandler) blockstate1.getBlock()).pickupFlaskFluid(p_77659_1_, blockpos, blockstate1);
-                            if (fluid != Fluids.EMPTY) {
-                                p_77659_2_.addStat(Stats.ITEM_USED.get(this));
-                                SoundEvent soundevent = this.igContainedBlock.getAttributes().getFillSound();
-                                if (soundevent == null) {
-                                    soundevent = fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_FILL_LAVA : SoundEvents.ITEM_BUCKET_FILL;
-                                }
-
-                                p_77659_2_.playSound(soundevent, 1.0F, 1.0F);
-                                ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_77659_2_, new ItemStack(fluid.getFilledBucket()));
-                                if (!p_77659_1_.isRemote) {
-                                    CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) p_77659_2_, new ItemStack(fluid.getFilledBucket()));
-                                }
-
-                                return ActionResult.func_233538_a_(itemstack1, p_77659_1_.isRemote());
-                            }
-                        }
-
-                        return ActionResult.resultFail(itemstack);
-                    } else {
-                        blockstate1 = p_77659_1_.getBlockState(blockpos);
-                        BlockPos blockpos2 = this.canBlockContainFluid(p_77659_1_, blockpos, blockstate1) ? blockpos : blockpos1;
-                        if (this.tryPlaceContainedLiquid(p_77659_2_, p_77659_1_, blockpos2, blockraytraceresult)) {
-                            this.onLiquidPlaced(p_77659_1_, itemstack, blockpos2);
-                            if (p_77659_2_ instanceof ServerPlayerEntity) {
-                                CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) p_77659_2_, blockpos2, itemstack);
+            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
+            BlockPos blockpos = blockraytraceresult.getPos();
+            Direction direction = blockraytraceresult.getFace();
+            BlockPos blockpos1 = blockpos.offset(direction);
+            if (world.isBlockModifiable(playerEntity, blockpos) && playerEntity.canPlayerEdit(blockpos1, direction, itemstack)) {
+                BlockState blockstate1;
+                if (this.igContainedBlock == Fluids.EMPTY) {
+                    blockstate1 = world.getBlockState(blockpos);
+                    if (blockstate1.getBlock() instanceof IFlaskPickupHandler) {
+                        Fluid fluid = ((IFlaskPickupHandler) blockstate1.getBlock()).pickupFlaskFluid(world, blockpos, blockstate1);
+                        if (fluid != Fluids.EMPTY) {
+                            playerEntity.addStat(Stats.ITEM_USED.get(this));
+                            SoundEvent soundevent = this.igContainedBlock.getAttributes().getFillSound();
+                            if (soundevent == null) {
+                                soundevent = fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_FILL_LAVA : SoundEvents.ITEM_BUCKET_FILL;
                             }
 
-                            p_77659_2_.addStat(Stats.ITEM_USED.get(this));
-                            return ActionResult.func_233538_a_(this.emptyBucket(itemstack, p_77659_2_), p_77659_1_.isRemote());
-                        } else {
-                            return ActionResult.resultFail(itemstack);
+                            playerEntity.playSound(soundevent, 1.0F, 1.0F);
+                            ItemStack itemstack1 = DrinkHelper.fill(itemstack, playerEntity, new ItemStack(fluid.getFilledBucket()));
+                            if (!world.isRemote) {
+                                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) playerEntity, new ItemStack(fluid.getFilledBucket()));
+                            }
+
+                            return ActionResult.func_233538_a_(itemstack1, world.isRemote());
                         }
                     }
-                } else {
+
                     return ActionResult.resultFail(itemstack);
+                } else {
+                    blockstate1 = world.getBlockState(blockpos);
+                    BlockPos blockpos2 = this.canBlockContainFluid(world, blockpos, blockstate1) ? blockpos : blockpos1;
+                    if (this.tryPlaceContainedLiquid(playerEntity, world, blockpos2, blockraytraceresult)) {
+                        this.onLiquidPlaced(world, itemstack, blockpos2);
+                        if (playerEntity instanceof ServerPlayerEntity) {
+                            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockpos2, itemstack);
+                        }
+
+                        playerEntity.addStat(Stats.ITEM_USED.get(this));
+                        return ActionResult.func_233538_a_(this.emptyBucket(itemstack, playerEntity), world.isRemote());
+                    } else {
+                        return ActionResult.resultFail(itemstack);
+                    }
                 }
+            } else {
+                return ActionResult.resultFail(itemstack);
             }
         }
+        
     }
 
     private boolean canBlockContainFluid(World p_canBlockContainFluid_1_, BlockPos p_canBlockContainFluid_2_, BlockState p_canBlockContainFluid_3_) {
@@ -190,7 +183,7 @@ public class IGBucketItem extends BucketItem implements IGItemType{
 
     @Override
     protected ItemStack emptyBucket(ItemStack itemStack, PlayerEntity playerEntity) {
-        if (pattern == ItemPattern.flask) {
+        if (pattern == ItemPattern.bucket) {
             return super.emptyBucket(itemStack, playerEntity);
         } else {
             Item flask = MiscEnum.Glass.getItem(ItemPattern.flask);
@@ -205,7 +198,7 @@ public class IGBucketItem extends BucketItem implements IGItemType{
 
     @Override
     public ItemStack getContainerItem(ItemStack stack) {
-        if (FluidUtil.getFluidContained(stack) != null) {
+        if (FluidUtil.getFluidContained(stack).isPresent()) {
             ItemStack ret = stack.copy();
             FluidUtil.getFluidHandler(ret).ifPresent(handler -> handler.drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE));
             return ret;
@@ -223,6 +216,17 @@ public class IGBucketItem extends BucketItem implements IGItemType{
         {
             return  new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
         }
+    }
+
+    public void finalizeData() {
+        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
+    }
+
+    public MaterialBase getMaterial(MaterialTexture base) {
+        if(base == MaterialTexture.base){
+            return MiscEnum.Glass.get();
+        }
+        return fluidMaterial;
     }
 }
 

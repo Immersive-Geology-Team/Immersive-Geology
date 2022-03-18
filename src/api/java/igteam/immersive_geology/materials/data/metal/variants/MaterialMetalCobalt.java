@@ -11,9 +11,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalCobalt extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "cobalt";
+    public MaterialMetalCobalt() {
+        super("cobalt");
     }
 
     @Override

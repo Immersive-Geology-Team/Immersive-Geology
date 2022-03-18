@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
+import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import igteam.immersive_geology.block.IGBlockType;
@@ -48,6 +49,13 @@ public class IGItemModelProvider extends ItemModelProvider {
                 ItemPattern pattern = item.getPattern();
                 if (pattern != ItemPattern.block_item) {
                     generateGenericItem(item);
+                }
+            }
+            if(i instanceof IGBucketItem) {
+                IGBucketItem item = (IGBucketItem) i;
+                ItemPattern pattern = (ItemPattern) item.getPattern();
+                if (pattern == ItemPattern.flask) {
+                    generateIGBucketItem(item);
                 }
             }
             if(i instanceof IGGenericBlockItem){
@@ -112,6 +120,17 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         if(item.getMaterial(MaterialTexture.overlay) != null) {
             getBuilder(item_loc).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
+        }
+    }
+
+    private void generateIGBucketItem(IGBucketItem item){
+        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey()).getPath();
+        withExistingParent(item_loc,
+                new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
+                .texture("layer1", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getPattern()));
+
+        if(item.getMaterial(MaterialTexture.overlay) != null) {
+            getBuilder(item_loc).texture("layer0", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
         }
     }
 

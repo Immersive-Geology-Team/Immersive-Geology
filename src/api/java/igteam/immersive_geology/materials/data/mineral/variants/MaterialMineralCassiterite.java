@@ -12,10 +12,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMineralCassiterite extends MaterialBaseMineral {
 
-
-    @Override
-    public String getName() {
-        return "cassiterite";
+    public MaterialMineralCassiterite() {
+        super("cassiterite");
     }
 
     @Override

@@ -63,9 +63,13 @@ public interface MaterialInterface<T extends MaterialBase> {
 
     ResourceLocation getTextureLocation(MaterialPattern pattern);
 
+    ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
+
     boolean hasExistingImplementation();
 
     boolean generateOreFor(MaterialInterface m);
 
     IGOreConfig getGenerationConfig();
+
+    boolean isFluidPortable(ItemPattern bucket);
 }

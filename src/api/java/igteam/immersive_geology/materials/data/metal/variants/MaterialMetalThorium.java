@@ -9,9 +9,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalThorium extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "thorium";
+    public MaterialMetalThorium() {
+        super("thorium");
     }
 
     @Override

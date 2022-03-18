@@ -1,13 +1,14 @@
 package igteam.immersive_geology.materials.data.mineral;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseMineral extends MaterialBase {
-    public MaterialBaseMineral() {
-        super();
+    public MaterialBaseMineral(String name) {
+        super(name);
     }
 
     @Override
@@ -163,5 +164,15 @@ public abstract class MaterialBaseMineral extends MaterialBase {
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
         return null;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        return false;
     }
 }

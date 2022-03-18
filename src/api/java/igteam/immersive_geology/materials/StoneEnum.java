@@ -186,6 +186,11 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return material.getTextureLocation(pattern, subtype);
+    }
+
+    @Override
     public boolean hasExistingImplementation() {
         return material.hasExistingImplementation();
     }
@@ -208,6 +213,11 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     @Override
     public IGOreConfig getGenerationConfig() {
         return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern bucket) {
+        return false;
     }
 
 }

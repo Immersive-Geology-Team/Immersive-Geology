@@ -190,6 +190,11 @@ public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return material.getTextureLocation(pattern, subtype);
+    }
+
+    @Override
     public CrystalFamily getCrystalFamily() {
         return material.getCrystalFamily();
     }
@@ -212,6 +217,11 @@ public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     @Override
     public IGOreConfig getGenerationConfig() {
         return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        return material.isFluidPortable(pattern);
     }
 
 }

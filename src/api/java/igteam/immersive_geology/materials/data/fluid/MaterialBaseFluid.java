@@ -1,12 +1,15 @@
 package igteam.immersive_geology.materials.data.fluid;
 
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBaseFluid extends MaterialBase {
+public abstract class MaterialBaseFluid extends MaterialBase {
 
     public MaterialBaseFluid(String name) {
         super(name);
@@ -163,7 +166,52 @@ public class MaterialBaseFluid extends MaterialBase {
     }
 
     @Override
+    public boolean hasFlask() {
+        return true;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern) {
+        switch(pattern){
+            case flask:
+                return true;
+            case bucket:
+            default:
+                return false;
+        }
+    };
+
+
+    @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        if(pattern instanceof MiscPattern){
+            MiscPattern m = (MiscPattern) pattern;
+            switch (m){
+                case fluid:
+                    return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
+            }
+        }
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
         return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
+        return subtype == 0 ? new ResourceLocation(IGApi.MODID, "block/fluid/default_still") : new ResourceLocation(IGApi.MODID, "block/fluid/default_flowing");
     }
 }

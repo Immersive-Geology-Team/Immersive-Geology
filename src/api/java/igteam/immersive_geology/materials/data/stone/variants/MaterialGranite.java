@@ -14,10 +14,8 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 public class MaterialGranite extends MaterialBaseStone {
-
-    @Override
-    public String getName() {
-        return "granite";
+    public MaterialGranite() {
+        super("granite");
     }
 
     @Override

@@ -11,9 +11,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
 
-    @Override
-    public String getName() {
-        return "chalcopyrite";
+    public MaterialMineralChalcopyrite() {
+        super("chalcopyrite");
     }
 
     @Override

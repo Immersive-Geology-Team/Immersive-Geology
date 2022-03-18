@@ -2,6 +2,7 @@ package igteam.immersive_geology.menu;
 
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 
@@ -20,7 +21,7 @@ public enum ItemSubGroup {
     }
 
     //We need to do things this way as we cannot introduce a circular reference, this method prevents it. (Order of Operation issue) ~Muddykat
-    public MaterialInterface getMaterial() {
+    public MaterialInterface<? extends MaterialBase> getMaterial() {
         try {
             return MetalEnum.valueOf(materialName);
         } catch (Exception ignored){}

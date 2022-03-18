@@ -14,6 +14,10 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
 
+    public MaterialBaseMetal(String name) {
+        super(name);
+    }
+
     @Override
     public int getColor(MaterialPattern p) {
         return 0;
@@ -33,7 +37,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             new IGProcessingStage(this, "Initial Crafting") {
                 @Override
                 protected void describe() {
-                    for (MaterialInterface stone : StoneEnum.values()) {
+                    for (MaterialInterface<?> stone : StoneEnum.values()) {
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
@@ -76,6 +80,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/" + i.getName());
             }
         }
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
         return null;
     }
 
@@ -230,6 +239,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     return isNative();
             };
         }
+        return false;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
         return false;
     }
 }

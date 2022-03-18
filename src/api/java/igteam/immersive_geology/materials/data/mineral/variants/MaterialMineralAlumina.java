@@ -13,9 +13,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMineralAlumina extends MaterialBaseMineral {
 
-    @Override
-    public String getName() {
-        return "alumina";
+    public MaterialMineralAlumina() {
+        super("alumina");
     }
 
     @Override

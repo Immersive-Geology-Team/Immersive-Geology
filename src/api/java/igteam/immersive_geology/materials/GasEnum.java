@@ -184,6 +184,11 @@ public enum GasEnum implements MaterialInterface<MaterialBaseGas> {
     }
 
     @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        return material.getTextureLocation(pattern, subtype);
+    }
+
+    @Override
     public CrystalFamily getCrystalFamily() {
         return material.getCrystalFamily();
     }
@@ -206,6 +211,11 @@ public enum GasEnum implements MaterialInterface<MaterialBaseGas> {
     @Override
     public IGOreConfig getGenerationConfig() {
         return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        return false;
     }
 
 }

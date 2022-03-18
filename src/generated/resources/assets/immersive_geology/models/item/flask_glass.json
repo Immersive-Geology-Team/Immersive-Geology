@@ -1,0 +1,7 @@
+{
+  "parent": "immersive_geology:item/base/ig_base_item",
+  "textures": {
+    "layer1": "immersive_geology:item/greyscale/fluid/empty_flask",
+    "layer0": "immersive_geology:item/greyscale/fluid/empty_flask"
+  }
+}

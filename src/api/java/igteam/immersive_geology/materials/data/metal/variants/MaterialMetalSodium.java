@@ -9,9 +9,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalSodium extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "sodium";
+    public MaterialMetalSodium() {
+        super("sodium");
     }
 
     @Override

@@ -1,14 +1,25 @@
 package igteam.immersive_geology.materials.data.slurry;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.LinkedHashSet;
 
 public class MaterialBaseSlurry extends MaterialBase {
 
     public MaterialBaseSlurry(String name) {
-        super(name);
+       super(name);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -163,6 +174,50 @@ public class MaterialBaseSlurry extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        if(pattern instanceof MiscPattern){
+            MiscPattern m = (MiscPattern) pattern;
+            switch (m){
+                case fluid:
+                    return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
+            }
+        }
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
+        return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
+        return subtype == 0 ? new ResourceLocation(IGApi.MODID, "block/fluid/default_still") : new ResourceLocation(IGApi.MODID, "block/fluid/default_flowing");
+    }
+
+    @Override
+    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
         return null;
+    }
+
+    @Override
+    public boolean isFluidPortable(ItemPattern pattern){
+        switch (pattern){
+            case flask:
+                return true;
+            case bucket:
+            default:
+                return false;
+        }
     }
 }

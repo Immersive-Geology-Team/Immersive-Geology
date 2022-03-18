@@ -33,11 +33,11 @@ public abstract class MaterialBase {
 
     private Set<IGProcessingStage> stageSet = new HashSet<>();
 
-    public MaterialBase() {
-        this.name = getName();
+    public MaterialBase(String name) {
+        this.name = name;
     }
 
-    public void build(){
+    public void build() {
         logger.log(Level.INFO, "Building " + getName() + " Processing Stages");
 
         //Recipes this material implements
@@ -53,19 +53,23 @@ public abstract class MaterialBase {
 
     public Block getBlock(MaterialPattern p) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, p));
-    };
+    }
 
-    public Block getBlock(MaterialPattern p, MaterialInterface secondaryMaterial){
+    ;
+
+    public Block getBlock(MaterialPattern p, MaterialInterface secondaryMaterial) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
     }
 
-    public Block getBlock(MaterialPattern p, MaterialBase secondaryMaterial){
+    public Block getBlock(MaterialPattern p, MaterialBase secondaryMaterial) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
     }
 
     public Item getItem(MaterialPattern pattern) {
         return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, pattern));
-    };
+    }
+
+    ;
 
     public Item getItem(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, secondaryMaterial, pattern));
@@ -77,22 +81,28 @@ public abstract class MaterialBase {
 
     public ItemStack getStack(MaterialPattern pattern) {
         return new ItemStack(getItem(pattern));
-    };
+    }
+
+    ;
 
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         return new ItemStack(getItem(pattern, secondaryMaterial));
-    };
+    }
+
+    ;
 
     public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial) {
         return new ItemStack(getItem(pattern, secondaryMaterial));
-    };
+    }
 
-    public Fluid getFluid(MaterialPattern pattern){
+    ;
+
+    public Fluid getFluid(MaterialPattern pattern) {
         Fluid f = IGRegistryProvider.IG_FLUID_REGISTRY.get(getRegistryKey(this, pattern));
         return f;
     }
 
-    public Fluid getFluid(MaterialPattern pattern, MaterialInterface secondaryMaterial){
+    public Fluid getFluid(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         Fluid f = IGRegistryProvider.IG_FLUID_REGISTRY.get(getRegistryKey(this, secondaryMaterial, pattern));
         return f;
     }
@@ -106,14 +116,14 @@ public abstract class MaterialBase {
     }
 
     public ITag.INamedTag<?> getTag(MaterialPattern pattern) {
-        if(pattern instanceof ItemPattern){
+        if (pattern instanceof ItemPattern) {
             ItemPattern i = (ItemPattern) pattern;
             HashMap<String, ITag.INamedTag<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
-        if(pattern instanceof BlockPattern){
+        if (pattern instanceof BlockPattern) {
             BlockPattern b = (BlockPattern) pattern;
             HashMap<String, ITag.INamedTag<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
 
@@ -121,7 +131,7 @@ public abstract class MaterialBase {
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
-        if(pattern instanceof MiscPattern){
+        if (pattern instanceof MiscPattern) {
             MiscPattern f = (MiscPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
@@ -132,7 +142,7 @@ public abstract class MaterialBase {
     }
 
     public ITag.INamedTag<?> getTag(MaterialPattern pattern, MaterialBase... materials) {
-        if(pattern instanceof ItemPattern){
+        if (pattern instanceof ItemPattern) {
             ItemPattern i = (ItemPattern) pattern;
             HashMap<String, ITag.INamedTag<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
             List<MaterialBase> materialList = new ArrayList<>(Arrays.asList(materials));
@@ -141,7 +151,7 @@ public abstract class MaterialBase {
             LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
             return data_map.get(IGApi.getWrapFromSet(matSet));
         }
-        if(pattern instanceof BlockPattern){
+        if (pattern instanceof BlockPattern) {
             BlockPattern b = (BlockPattern) pattern;
             HashMap<String, ITag.INamedTag<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
             List<MaterialBase> materialList = new ArrayList<>(Arrays.asList(materials));
@@ -150,7 +160,7 @@ public abstract class MaterialBase {
             LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
             return data_map.get(IGApi.getWrapFromSet(matSet));
         }
-        if(pattern instanceof MiscPattern){
+        if (pattern instanceof MiscPattern) {
             MiscPattern f = (MiscPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             List<MaterialBase> materialList = new ArrayList<>(Arrays.asList(materials));
@@ -222,30 +232,30 @@ public abstract class MaterialBase {
 
     protected abstract boolean hasDirtyCrushedOre();
 
-    public boolean hasExistingImplementation(){
+    public boolean hasExistingImplementation() {
         return false;
     }
 
-    public ItemStack getStack(MaterialPattern pattern, int amount){
+    public ItemStack getStack(MaterialPattern pattern, int amount) {
         ItemStack stack = getStack(pattern);
         stack.setCount(amount);
         return stack;
     }
 
-    public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount){
+    public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial, int amount) {
         ItemStack stack = getStack(pattern, secondaryMaterial);
         stack.setCount(amount);
         return stack;
     }
 
-    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial, int amount){
+    public ItemStack getStack(MaterialPattern pattern, MaterialBase secondaryMaterial, int amount) {
         ItemStack stack = getStack(pattern, secondaryMaterial);
         stack.setCount(amount);
         return stack;
     }
 
     public boolean hasPattern(MaterialPattern pattern) {
-        if(pattern instanceof ItemPattern){
+        if (pattern instanceof ItemPattern) {
             ItemPattern p = (ItemPattern) pattern;
             switch (p) {
                 case rod: {
@@ -257,63 +267,70 @@ public abstract class MaterialBase {
                 case wire: {
                     return hasWire();
                 }
-                case ingot : {
+                case ingot: {
                     return hasIngot();
                 }
-                case clay : {
+                case clay: {
                     return hasClay();
                 }
-                case dust : {
+                case dust: {
                     return hasDust();
                 }
-                case fuel : {
+                case fuel: {
                     return hasFuel();
                 }
-                case slag : {
+                case slag: {
                     return hasSlag();
                 }
-                case plate : {
+                case plate: {
                     return hasPlate();
                 }
-                case nugget : {
+                case nugget: {
                     return hasNugget();
                 }
-                case crystal : {
+                case crystal: {
                     return hasCrystal();
                 }
-                case ore_bit : {
+                case ore_bit: {
                     return hasOreBit();
                 }
-                case ore_chunk : {
+                case ore_chunk: {
                     return hasOreChunk();
                 }
-                case stone_bit : {
+                case stone_bit: {
                     return hasStoneBit();
                 }
-                case crushed_ore : {
+                case crushed_ore: {
                     return hasCrushedOre();
                 }
-                case metal_oxide : {
+                case metal_oxide: {
                     return hasMetalOxide();
                 }
-                case stone_chunk : {
+                case stone_chunk: {
                     return hasStoneChunk();
                 }
-                case compound_dust : {
+                case compound_dust: {
                     return hasCompoundDust();
                 }
-                case dirty_crushed_ore : {
+                case dirty_crushed_ore: {
                     return hasDirtyCrushedOre();
                 }
-                case block_item : {
+                case bucket: {
+                    return hasBucket();
+                }
+                case flask: {
+                    return hasFlask();
+                }
+                case block_item: {
                     return false;
                 }
-            };
+            }
+            ;
         }
 
-        if(pattern instanceof BlockPattern){
+        if (pattern instanceof BlockPattern) {
             BlockPattern p = (BlockPattern) pattern;
-            switch (p){
+            switch (p) {
                 case slab: {
                     return hasSlab();
                 }
@@ -332,48 +349,61 @@ public abstract class MaterialBase {
                 case storage: {
                     return hasStorageBlock();
                 }
-            };
+            }
+            ;
         }
 
-        if(pattern instanceof MiscPattern){
+        if (pattern instanceof MiscPattern) {
             MiscPattern p = (MiscPattern) pattern;
-            switch (p){
-                case fluid: return isFluid();
-                case slurry: return isSlurry();
-                case machine: return isMachine();
-            };
+            switch (p) {
+                case fluid:
+                    return isFluid();
+                case slurry:
+                    return isSlurry();
+                case machine:
+                    return isMachine();
+            }
+            ;
         }
 
         return false;
     }
 
-    protected void setupProcessingStages(){
+    public boolean hasFlask() {
+        return false;
+    }
+
+    public boolean hasBucket() {
+        return false;
+    }
+
+    protected void setupProcessingStages() {
 
     }
 
-    public String getName(){
-        return "missingno";
+    public String getName() {
+        return this.name;
     }
 
     public void addStage(IGProcessingStage igProcessingStage) {
         stageSet.add(igProcessingStage);
     }
 
-    public Set<IGProcessingStage> getStages(){
+    public Set<IGProcessingStage> getStages() {
         return StageProvider.get(this);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern){
+    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern) {
         return (ITag.INamedTag<Item>) getTag(pattern);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Block> getBlockTag(BlockPattern pattern){
+    public ITag.INamedTag<Block> getBlockTag(BlockPattern pattern) {
         return (ITag.INamedTag<Block>) getTag(pattern);
     }
 
@@ -381,7 +411,7 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern){
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern) {
         return (ITag.INamedTag<Fluid>) getTag(pattern);
     }
 
@@ -389,21 +419,21 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials){
+    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
         return (ITag.INamedTag<Item>) getTag(pattern, materials);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials){
+    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials) {
         return (ITag.INamedTag<Fluid>) getTag(pattern, materials);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials){
+    public ITag.INamedTag<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
         return (ITag.INamedTag<Block>) getTag(pattern, materials);
     }
 
@@ -425,7 +455,11 @@ public abstract class MaterialBase {
 
     public abstract LinkedHashSet<PeriodicTableElement.ElementProportion> getElements();
 
-    public void setGenerationConfiguration(IGOreConfig config){
+    public void setGenerationConfiguration(IGOreConfig config) {
         this.oreConfiguration = config;
     }
+
+    public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
+
+    public abstract boolean isFluidPortable(ItemPattern bucket);
 }

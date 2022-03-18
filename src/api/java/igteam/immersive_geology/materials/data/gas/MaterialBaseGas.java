@@ -5,7 +5,7 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public class MaterialBaseGas extends MaterialBase {
+public abstract class MaterialBaseGas extends MaterialBase {
 
     public MaterialBaseGas(String name) {
         super(name);
@@ -163,6 +163,11 @@ public class MaterialBaseGas extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
         return null;
     }
 }

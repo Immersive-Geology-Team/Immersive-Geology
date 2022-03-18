@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalTitanium extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "titanium";
+    public MaterialMetalTitanium() {
+        super("titanium");
     }
 
     @Override

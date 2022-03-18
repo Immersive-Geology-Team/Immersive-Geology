@@ -5,19 +5,23 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
+import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,8 +40,17 @@ public class IGRegistrationHolder {
         registerForInterface(StoneEnum.values());
         registerForInterface(MetalEnum.values());
         registerForInterface(MineralEnum.values());
+        registerForInterface(MiscEnum.values());
         registerForInterface(FluidEnum.values());
         registerForInterface(GasEnum.values());
+
+        logger.info("Registration of Slurry Fluids");
+        //This needs to be handled differently
+        for(SlurryEnum slurryEnum : SlurryEnum.values()){
+            for (MaterialSlurryWrapper slurry : slurryEnum.getEntries()) {
+                registerForSlurryTypes(slurry, MiscPattern.slurry);
+            }
+        }
     }
 
 
@@ -69,7 +82,7 @@ public class IGRegistrationHolder {
             //Misc Patterns
             Arrays.stream(MiscPattern.values()).iterator().forEachRemaining((pattern) -> {
                 if(m.hasPattern(pattern)){
-                    registerForMiscPattern(m, pattern);
+                    registerForFluidTypes(m, pattern);
                 }
             });
         });
@@ -90,6 +103,12 @@ public class IGRegistrationHolder {
             case block_item: {
                 //DO NOT REGISTER HERE, used as an item pattern for all block items,
                 //which is registered with the Block itself.
+            }
+            break;
+            case flask: {
+                IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
+                container.finalizeData();
+                register(container);
             }
             break;
             default: {
@@ -121,12 +140,23 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForMiscPattern(MaterialInterface<MaterialBaseFluid> m, MiscPattern p){
-        if (p == MiscPattern.fluid) {
-            IGFluid fluid = new IGFluid(m);
-
+    private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, MiscPattern p){
+        if(p != MiscPattern.machine) {
+            IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
+            if(m.get().hasFlask()){
+                register(fluid.getFluidContainer());
+            }
             register(fluid);
         }
+    }
+
+    private static void registerForSlurryTypes(MaterialSlurryWrapper slurry, MiscPattern p){
+        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(p), false), p);
+        logger.info("Registering: " + slurry.getName());
+        if(slurry.hasFlask()){
+            register(fluid.getFluidContainer());
+        }
+        register(fluid);
     }
 
     private static void register(Item i){

@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 public class MaterialMetalChromium extends MaterialBaseMetal {
-    @Override
-    public String getName() {
-        return "chromium";
+
+    public MaterialMetalChromium() {
+        super("chromium");
     }
 
     @Override

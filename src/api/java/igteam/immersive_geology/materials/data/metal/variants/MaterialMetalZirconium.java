@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalZirconium extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "zirconium";
+    public MaterialMetalZirconium() {
+        super("zirconium");
     }
 
     @Override

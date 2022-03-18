@@ -9,9 +9,8 @@ import java.util.LinkedHashSet;
 
 public class MaterialMetalIron extends MaterialBaseMetal {
 
-    @Override
-    public String getName() {
-        return "iron";
+    public MaterialMetalIron() {
+        super("iron");
     }
 
     @Override
