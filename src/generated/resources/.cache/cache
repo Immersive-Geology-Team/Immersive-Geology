@@ -439,10 +439,6 @@ facad671ea66de8b8f089d4ffb25e98a4ff663ca data/forge/tags/items/dusts/titanium.js
 d7007117cc88643745be9e25095907cdc685f209 data/forge/tags/items/dusts/vanadium.json
 074bafafd5bd81741f09ab3c5ae5f99d95be2711 data/forge/tags/items/dusts/zinc.json
 e1fda02c249fd3bbbb2dc864ac8feb7d8e46973a data/forge/tags/items/dusts/zirconium.json
-9232eef62ef55766775a66cc6a540a658cdd14aa data/forge/tags/items/flasks.json
-e4010c0e269baa9475f05355e419c4b9f9b5adfa data/forge/tags/items/flasks/glass.json
-0d6547575b759163ae8e289a23562e5602095b93 data/forge/tags/items/flasks/sulfuric_dioxide.json
-9b49a2b98167efe98640063c5c1cf6bf0ca4c801 data/forge/tags/items/gears.json
 946dd843a5e8116ce28603a94157294167f868ec data/forge/tags/items/gears/aluminium.json
 42ce8d285a0472fd391367e02a0ac7443f41464d data/forge/tags/items/gears/chromium.json
 7c92185378a5f02a0a46e93301dc6e0171393338 data/forge/tags/items/gears/cobalt.json

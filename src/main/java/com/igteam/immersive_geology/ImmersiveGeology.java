@@ -68,8 +68,8 @@ public class ImmersiveGeology
 		modBus.register(IGRegistrationHolder.class);
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
-		LOGGER.info("Initializing Immersive Geology Multiblocks");
 
+		LOGGER.info("Initializing Immersive Geology Multiblocks");
 
 		IGMultiblockRegistrationHolder.populate();
 		IGMultiblockRegistrationHolder.initialize();
