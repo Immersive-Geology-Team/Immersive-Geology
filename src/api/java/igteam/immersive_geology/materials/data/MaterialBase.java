@@ -135,6 +135,16 @@ public abstract class MaterialBase {
             MiscPattern f = (MiscPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
+            logger.info("Attempting to get Tag from Misc Pattern:" + f.getName());
+            if(f == MiscPattern.slurry) {
+                String wrap = IGApi.getWrapFromSet(materials);
+                logger.info("material dump: " + wrap);
+                logger.info(data_map.get(wrap).getName());
+                return data_map.get(IGApi.getWrapFromSet(materials));
+            }
+            String wrap = IGApi.getWrapFromSet(materials);
+            logger.info("material dump: " + wrap);
+            logger.info(data_map.get(wrap).getName());
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 

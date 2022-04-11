@@ -18,7 +18,6 @@ import com.igteam.immersive_geology.core.proxy.ServerProxy;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -69,8 +68,11 @@ public class ImmersiveGeology
 		modBus.register(IGRegistrationHolder.class);
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
+		LOGGER.info("Initializing Immersive Geology Multiblocks");
 
-		IGMultiblockRegistrationHolder.populate(); //Might need to move this to another locations, can cause a ConcurrentModificationException, RANDOMLY.
+
+		IGMultiblockRegistrationHolder.populate();
+		IGMultiblockRegistrationHolder.initialize();
 
 		IGTileTypes.REGISTER.register(modBus);
 		Serializers.RECIPE_SERIALIZERS.register(modBus);
@@ -84,8 +86,6 @@ public class ImmersiveGeology
 
 	private void setup(final FMLCommonSetupEvent event){
 
-		//LOGGER.info("Initializing Immersive Geology Multiblocks");
-		IGMultiblockRegistrationHolder.initialize();
 
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
 		proxy.onSetup(event);

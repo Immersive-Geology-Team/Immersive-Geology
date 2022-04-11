@@ -116,7 +116,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     }
 
     @Override
-    public void setFacing(Direction facing) {
+    public void setFacing(@Nonnull Direction facing) {
         BlockPos lowest = pos.down(dummy);
         for(int i = 0; i < 3; ++i)
         {
@@ -133,6 +133,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         for(int i = 0; i <= 1; i++)
         {
             BlockPos p = getPos().down(dummy).up(i);
+            assert world != null;
             if(world.getTileEntity(p) instanceof BloomeryTileEntity)
                 world.removeBlock(p, false);
         }

@@ -87,14 +87,15 @@ public class IGTags {
                     createWrapperForPattern(pattern, fluid.get());
                 }
             }
+
             if(pattern == MiscPattern.slurry){
+                logger.info("Creating Slurry Tags");
                 for (SlurryEnum slurry : SlurryEnum.values()) {
                     HashSet<MaterialSlurryWrapper> slurryWrappers = slurry.getEntries();
                     for (MaterialSlurryWrapper wrapper : slurryWrappers) {
-                        FluidEnum fluid = wrapper.getFluidBase();
-                        MaterialInterface<? extends MaterialBase> soluteMaterial = wrapper.getSoluteMaterial();
+                        logger.info("Wrapper Found: " + wrapper.getName());
 
-                        createWrapperForPattern(pattern, fluid.get(), soluteMaterial.get());
+                        createWrapperForPattern(pattern, wrapper);
                     }
                 }
             }
@@ -153,13 +154,15 @@ public class IGTags {
             if (p instanceof MiscPattern) {
                 MiscPattern m = (MiscPattern) p;
                 HashMap<String, ITag.INamedTag<Fluid>> map = IG_FLUID_TAGS.get(m);
-                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));
 
-                map.put(IGApi.getWrapFromSet(materialSet), FluidTags.makeWrapperTag(
-                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
-                                : wrapPattern(p, materialSet).toString()));
+                    LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));
+                    String wrap = IGApi.getWrapFromSet(materialSet);
+                    logger.info("Putting wrap in Fluid Tags: " + wrap + " Pattern: " + p.getName());
+                    map.put(wrap, FluidTags.makeWrapperTag(
+                            p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
+                                    : wrapPattern(p, materialSet).toString()));
 
-                IG_FLUID_TAGS.put(m, map);
+                    IG_FLUID_TAGS.put(m, map);
             }
         }
     }

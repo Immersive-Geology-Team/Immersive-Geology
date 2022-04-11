@@ -43,10 +43,12 @@ public class IGFluidTagProvider extends FluidTagsProvider
         log.info("Slurry Fluid Tag Registration");
         for(SlurryEnum wrapper : SlurryEnum.values()){
             for(MaterialSlurryWrapper slurry : wrapper.getEntries()) {
-                Fluid fluidBlock = slurry.getFluid(MiscPattern.slurry);
-                if (fluidBlock != null) {
-                    getOrCreateBuilder(slurry.getFluidTag(MiscPattern.slurry)).add(fluidBlock);
-                    log.info("Slurry: " + slurry.getFluidTag(MiscPattern.slurry).toString());
+                if(slurry != null) {
+                    Fluid fluidBlock = slurry.getFluid(MiscPattern.slurry);
+                    if (fluidBlock != null) {
+                        log.info("Slurry: " + slurry.getFluidTag(MiscPattern.slurry).toString());
+                        getOrCreateBuilder(slurry.getFluidTag(MiscPattern.slurry)).add(fluidBlock);
+                    }
                 }
             }
         }

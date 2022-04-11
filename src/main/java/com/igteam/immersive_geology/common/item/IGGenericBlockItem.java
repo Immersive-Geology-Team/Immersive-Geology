@@ -105,4 +105,9 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
     public ItemSubGroup getSubGroup() {
         return pattern.getSubGroup();
     }
+
+    @Override
+    public boolean hasCustomItemColours() {
+        return true;
+    }
 }

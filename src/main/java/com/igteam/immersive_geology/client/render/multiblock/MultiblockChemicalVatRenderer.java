@@ -105,7 +105,8 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                         ModelChemicalVat model = (ModelChemicalVat) stirrer.get();
                         if(model != null){
                             float ticks = master.getActiveTicks() + partialTicks;
-                            model.ticks = ticks;
+                            float old_tick = model.ticks;
+                            model.ticks = master.shouldStir() ? ticks : old_tick;
                             transform.push();
 
                             transform.translate(1.125,0,1.125);

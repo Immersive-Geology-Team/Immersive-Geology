@@ -518,4 +518,7 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         return false;
     }
 
+    public boolean shouldStir() {
+        return energyStorage.getEnergyStored() > 0 && processQueue.size() > 0;
+    }
 }
