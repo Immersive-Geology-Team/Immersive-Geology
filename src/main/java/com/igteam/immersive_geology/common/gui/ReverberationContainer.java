@@ -14,7 +14,7 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
     public ReverberationContainer(int id, PlayerInventory inv, ReverberationFurnaceTileEntity te) {
         super(inv, te, id, ReverberationFurnaceMultiblock.INSTANCE);
     //fuel
-        this.addSlot(new IGSlot(this.inv, 0, 67, 37) {
+        this.addSlot(new IGSlot(this.inv, 0, 36, 53) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 //gonna figure out what is where later
@@ -22,7 +22,7 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
             }
         });
 
-        this.addSlot(new IGSlot(this.inv, 1, 147, 37) {
+        this.addSlot(new IGSlot(this.inv, 1, 116, 53) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 //gonna figure out what is where later
