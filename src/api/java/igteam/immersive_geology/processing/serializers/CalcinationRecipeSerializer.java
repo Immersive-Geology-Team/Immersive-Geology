@@ -1,10 +1,10 @@
-package com.igteam.immersive_geology.common.crafting.serializers;
+package igteam.immersive_geology.processing.serializers;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.CalcinationRecipe;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.CalcinationRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
@@ -14,7 +14,7 @@ public class CalcinationRecipeSerializer extends IERecipeSerializer<CalcinationR
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystallizer);
+        return new ItemStack(IGMultiblockProvider.crystallizer);
     }
 
     @Override

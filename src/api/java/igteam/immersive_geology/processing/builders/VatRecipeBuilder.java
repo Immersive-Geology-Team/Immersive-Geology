@@ -1,9 +1,9 @@
-package com.igteam.immersive_geology.common.crafting.recipes.builders;
+package igteam.immersive_geology.processing.builders;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
-import com.igteam.immersive_geology.common.crafting.Serializers;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

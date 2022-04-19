@@ -1,12 +1,12 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class SeparatorRecipe extends MultiblockRecipe
 {
-    public static IRecipeType<SeparatorRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":gravityseparator");
+    public static IRecipeType<SeparatorRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":gravityseparator");
     public static Map<ResourceLocation, SeparatorRecipe> recipes = new HashMap<>();
     public final Ingredient input;
     public final ItemStack output;

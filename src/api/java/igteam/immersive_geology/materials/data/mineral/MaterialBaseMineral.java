@@ -1,8 +1,12 @@
 package igteam.immersive_geology.materials.data.mineral;
 
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
@@ -174,5 +178,28 @@ public abstract class MaterialBaseMineral extends MaterialBase {
     @Override
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
+    }
+
+    @Override
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+
+        new IGProcessingStage(this,"Default Ore Processing Stage") {
+            @Override
+            protected void describe() {
+                for (MaterialInterface<?> stone : StoneEnum.values()) {
+                    IRecipeBuilder.separating(this).create(
+                            getParentMaterial().getItemTag(ItemPattern.crushed_ore), //result
+                            1, //amount out
+                            stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial())//input
+                            );
+
+                    IRecipeBuilder.crafting(this)
+                            .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
+                            .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                }
+
+            }
+        };
     }
 }

@@ -1,11 +1,9 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersive_geology.common.crafting.IGMultiblockRecipe;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
@@ -16,7 +14,7 @@ import java.util.*;
 
 public class CalcinationRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<CalcinationRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":rotary_kiln");
+    public static final IRecipeType<CalcinationRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":rotary_kiln");
     public static Map<ResourceLocation, CalcinationRecipe> recipes = new HashMap<>();
 
 
@@ -48,7 +46,6 @@ public class CalcinationRecipe extends IGMultiblockRecipe
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
 
         timeAndEnergy(time, energy);
-        modifyTimeAndEnergy(IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_energyModifier::get, IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_timeModifier::get);
     }
 
     @Override

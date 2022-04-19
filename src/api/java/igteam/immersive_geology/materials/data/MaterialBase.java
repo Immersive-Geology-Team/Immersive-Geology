@@ -3,7 +3,7 @@ package igteam.immersive_geology.materials.data;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
-import static igteam.immersive_geology.materials.helper.IGRegistryProvider.getRegistryKey;
+import static igteam.immersive_geology.main.IGRegistryProvider.getRegistryKey;
 
 public abstract class MaterialBase {
 

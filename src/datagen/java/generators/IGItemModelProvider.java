@@ -8,7 +8,8 @@ import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -163,7 +164,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void rotarykilnItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, "multiblock/obj/rotarykiln/rotarykiln.obj")
+        ItemModelBuilder model = obj(IGMultiblockProvider.rotarykiln, "multiblock/obj/rotarykiln/rotarykiln.obj")
                 .texture("texture", modLoc("multiblock/rotarykiln"));
 
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
@@ -179,7 +180,7 @@ public class IGItemModelProvider extends ItemModelProvider {
 
 
     private void chemcialVatItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, "multiblock/obj/chemicalvat/chemicalvat.obj")
+        ItemModelBuilder model = obj(IGMultiblockProvider.chemicalvat, "multiblock/obj/chemicalvat/chemicalvat.obj")
                 .texture("texture", modLoc("multiblock/chemicalvat_base"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -193,7 +194,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void gravitySeparatorItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, "multiblock/obj/gravityseparator/gravityseparator.obj")
+        ItemModelBuilder model = obj(IGMultiblockProvider.gravityseparator, "multiblock/obj/gravityseparator/gravityseparator.obj")
                 .texture("texture", modLoc("multiblock/gravityseparator_base"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -207,7 +208,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void revfurnaceItem(){
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, "multiblock/obj/revfurnace/reverberation_furnace.obj")
+        ItemModelBuilder model = obj(IGMultiblockProvider.reverberation_furnace, "multiblock/obj/revfurnace/reverberation_furnace.obj")
                 .texture("texture", modLoc("multiblock/reverberation_furnace"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -221,7 +222,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void crystalizerItem() {
-        ItemModelBuilder model = obj(IGMultiblockRegistrationHolder.Multiblock.crystallizer, "multiblock/obj/crystallizer/crystallizer.obj")
+        ItemModelBuilder model = obj(IGMultiblockProvider.crystallizer, "multiblock/obj/crystallizer/crystallizer.obj")
                 .texture("texture", modLoc("multiblock/crystallizer"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);

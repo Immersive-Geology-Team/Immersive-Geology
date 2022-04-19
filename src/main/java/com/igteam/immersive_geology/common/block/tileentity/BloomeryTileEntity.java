@@ -8,7 +8,8 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.BloomeryRecipe;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.BloomeryRecipe;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.block.AbstractFurnaceBlock;
@@ -122,7 +123,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         {
             BlockPos pos = lowest.up(i);
             BlockState state = getWorldNonnull().getBlockState(pos);
-            if(state.getBlock()== IGMultiblockRegistrationHolder.Multiblock.bloomery)
+            if(state.getBlock()== IGMultiblockProvider.bloomery)
                 getWorldNonnull().setBlockState(pos, state.with(getFacingProperty(), facing));
         }
     }

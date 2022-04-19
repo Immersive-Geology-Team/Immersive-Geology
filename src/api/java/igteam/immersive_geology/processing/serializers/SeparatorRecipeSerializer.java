@@ -1,11 +1,11 @@
-package com.igteam.immersive_geology.common.crafting.serializers;
+package igteam.immersive_geology.processing.serializers;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.SeparatorRecipe;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.SeparatorRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
@@ -18,7 +18,7 @@ public class SeparatorRecipeSerializer extends IERecipeSerializer<SeparatorRecip
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.gravityseparator);
+        return new ItemStack(IGMultiblockProvider.gravityseparator);
     }
 
     @Override

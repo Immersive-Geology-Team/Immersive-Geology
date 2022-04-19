@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMulti
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import igteam.immersive_geology.main.IGMultiblockProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -31,7 +32,7 @@ public class RotaryKilnMultiblock extends IETemplateMultiblock {
                 new BlockPos(1,0,1),
                 new BlockPos(7,2,1),
                 new BlockPos(8,3,3),
-                () -> IGMultiblockRegistrationHolder.Multiblock.rotarykiln.getDefaultState());
+                () -> IGMultiblockProvider.rotarykiln.getDefaultState());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class RotaryKilnMultiblock extends IETemplateMultiblock {
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.rotarykiln.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockProvider.rotarykiln.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

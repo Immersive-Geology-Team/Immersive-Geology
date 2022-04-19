@@ -2,7 +2,7 @@ package com.igteam.immersive_geology.common.fluid;
 
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;

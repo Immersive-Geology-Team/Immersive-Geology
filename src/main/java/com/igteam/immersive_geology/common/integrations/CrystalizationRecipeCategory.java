@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.common.integrations;
 
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.CrystalRecipe;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.CrystalRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -24,7 +25,7 @@ public class CrystalizationRecipeCategory extends  IGRecipeCategory<CrystalRecip
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();
         setBackground(back);
-        setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystallizer));
+        setIcon(new ItemStack(IGMultiblockProvider.crystallizer));
 
     }
 

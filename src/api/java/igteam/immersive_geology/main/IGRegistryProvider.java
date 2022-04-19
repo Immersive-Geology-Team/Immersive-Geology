@@ -1,6 +1,7 @@
-package igteam.immersive_geology.materials.helper;
+package igteam.immersive_geology.main;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;

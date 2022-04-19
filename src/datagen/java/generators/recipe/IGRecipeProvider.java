@@ -7,6 +7,7 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.builders.SeparatorRecipeBuilder;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import igteam.immersive_geology.processing.methods.IGSeparatorMethod;
@@ -31,8 +32,6 @@ public class IGRecipeProvider extends RecipeProvider {
     public IGRecipeProvider(DataGenerator gen) {
         super(gen);
     }
-
-
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -62,7 +61,8 @@ public class IGRecipeProvider extends RecipeProvider {
     }
 
     private void buildSeparatingMethods(IGSeparatorMethod method, Consumer<IFinishedRecipe> consumer){
-
+        SeparatorRecipeBuilder recipe = method.getBuilder();
+        recipe.build(consumer, toRL("shapeless/craft_" + Objects.requireNonNull(method.getName())));
     }
 
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();

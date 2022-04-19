@@ -6,13 +6,13 @@ import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
-import com.igteam.immersive_geology.common.block.blocks.BloomeryBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
@@ -74,10 +74,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/gravityseparator/gravityseparator.obj");
         ResourceLocation modelMirrored = modLoc("models/multiblock/obj/gravityseparator/gravityseparator_mirrored.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelNormal, texture, "", GravitySeparatorMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.gravityseparator, modelNormal, texture, "", GravitySeparatorMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.gravityseparator, modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.gravityseparator, normal, mirrored, texture);
+        createMultiblock(IGMultiblockProvider.gravityseparator, normal, mirrored, texture);
     }
 
     private void rotarykiln() {
@@ -85,10 +85,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/rotarykiln/rotarykiln.obj");
         ResourceLocation modelMirrored = modLoc("models/multiblock/obj/rotarykiln/rotarykiln_mirrored.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, modelNormal, texture, "", RotaryKilnMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, modelMirrored, texture, "_mirrored", RotaryKilnMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.rotarykiln, modelNormal, texture, "", RotaryKilnMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.rotarykiln, modelMirrored, texture, "_mirrored", RotaryKilnMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.rotarykiln, normal, mirrored, texture);
+        createMultiblock(IGMultiblockProvider.rotarykiln, normal, mirrored, texture);
     }
 
     private void crystallizer() {
@@ -96,10 +96,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj");
         ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer_mirrored.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.crystallizer, modelNormal, texture, "", CrystallizerMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.crystallizer, modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.crystallizer, modelNormal, texture, "", CrystallizerMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.crystallizer, modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.crystallizer, normal, mirrored, texture);
+        createMultiblock(IGMultiblockProvider.crystallizer, normal, mirrored, texture);
     }
 
     private void chemicalvat(){
@@ -107,10 +107,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/chemicalvat/chemicalvat.obj");
         ResourceLocation modelMirrored = modLoc("models/multiblock/obj/chemicalvat/chemicalvat_mirrored.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, modelNormal, texture, "", ChemicalVatMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, modelMirrored, texture, "_mirrored", ChemicalVatMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.chemicalvat, modelNormal, texture, "", ChemicalVatMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.chemicalvat, modelMirrored, texture, "_mirrored", ChemicalVatMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.chemicalvat, normal, mirrored, texture);
+        createMultiblock(IGMultiblockProvider.chemicalvat, normal, mirrored, texture);
     }
 
     private void reverberation_furnace(){
@@ -118,10 +118,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace.obj");
         ResourceLocation modelMirrored = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace_mirrored.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, modelNormal, texture, "", ReverberationFurnaceMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, modelMirrored, texture, "_mirrored", ReverberationFurnaceMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.reverberation_furnace, modelNormal, texture, "", ReverberationFurnaceMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.reverberation_furnace, modelMirrored, texture, "_mirrored", ReverberationFurnaceMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace, normal, mirrored, texture);
+        createMultiblock(IGMultiblockProvider.reverberation_furnace, normal, mirrored, texture);
     }
 
 

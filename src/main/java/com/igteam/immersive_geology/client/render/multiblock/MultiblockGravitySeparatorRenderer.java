@@ -1,7 +1,7 @@
 package com.igteam.immersive_geology.client.render.multiblock;
 
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.SeparatorRecipe;
+import igteam.immersive_geology.processing.recipe.SeparatorRecipe;
 import com.igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;

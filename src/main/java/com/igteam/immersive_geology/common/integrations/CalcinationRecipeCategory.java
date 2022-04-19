@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.common.integrations;
 
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.CalcinationRecipe;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.CalcinationRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -25,7 +26,7 @@ public class CalcinationRecipeCategory extends  IGRecipeCategory<CalcinationReci
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();
         setBackground(back);
-        setIcon(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.rotarykiln));
+        setIcon(new ItemStack(IGMultiblockProvider.rotarykiln));
 
     }
 

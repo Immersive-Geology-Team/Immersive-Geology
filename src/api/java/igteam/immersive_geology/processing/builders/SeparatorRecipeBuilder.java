@@ -1,10 +1,10 @@
-package com.igteam.immersive_geology.common.crafting.recipes.builders;
+package igteam.immersive_geology.processing.builders;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.common.crafting.Serializers;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;

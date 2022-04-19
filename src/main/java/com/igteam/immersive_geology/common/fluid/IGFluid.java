@@ -7,7 +7,7 @@ import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;

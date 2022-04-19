@@ -3,29 +3,20 @@ package com.igteam.immersive_geology.core.registration;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import com.igteam.immersive_geology.common.block.blocks.*;
 import com.igteam.immersive_geology.common.multiblocks.*;
+import igteam.immersive_geology.main.IGMultiblockProvider;
 import net.minecraft.block.Block;
 
 public class IGMultiblockRegistrationHolder {
-    public static class Multiblock {
-        //Ore Processing
-        public static Block chemicalvat;
-        public static Block gravityseparator;
-        public static Block rotarykiln;
-        public static Block crystallizer;
-        public static Block reverberation_furnace;
-        public static Block bloomery;
-    }
-
     public static void populate() {
         //Steel
-        Multiblock.chemicalvat = new ChemicalVatBlock();
-        Multiblock.gravityseparator = new GravitySeparatorBlock();
-        Multiblock.crystallizer = new CrystallizerBlock();
-        Multiblock.rotarykiln = new RotaryKilnBlock();
+        IGMultiblockProvider.chemicalvat = new ChemicalVatBlock();
+        IGMultiblockProvider.gravityseparator = new GravitySeparatorBlock();
+        IGMultiblockProvider.crystallizer = new CrystallizerBlock();
+        IGMultiblockProvider.rotarykiln = new RotaryKilnBlock();
 
         //Stone
-        Multiblock.reverberation_furnace = new ReverberationFurnaceBlock();
-        Multiblock.bloomery = new BloomeryBlock();
+        IGMultiblockProvider.reverberation_furnace = new ReverberationFurnaceBlock();
+        IGMultiblockProvider.bloomery = new BloomeryBlock();
     }
 
     //Not the cause of network issue, try elsewhere

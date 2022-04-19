@@ -7,7 +7,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;

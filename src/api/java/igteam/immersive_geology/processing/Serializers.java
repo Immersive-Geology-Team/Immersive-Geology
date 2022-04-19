@@ -1,16 +1,16 @@
-package com.igteam.immersive_geology.common.crafting;
+package igteam.immersive_geology.processing;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.*;
-import com.igteam.immersive_geology.common.crafting.serializers.*;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.recipe.*;
+import igteam.immersive_geology.processing.serializers.*;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class Serializers {
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGLib.MODID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGApi.MODID);
 
     public static final RegistryObject<IERecipeSerializer<ReverberationRecipe>> REVERBERATION_SERIALIZER = RECIPE_SERIALIZERS.register(
             "reverberation_furnace", ReverberationRecipeSerializer::new

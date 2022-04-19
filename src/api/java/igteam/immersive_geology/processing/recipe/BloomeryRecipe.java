@@ -1,8 +1,8 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.*;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class BloomeryRecipe extends IESerializableRecipe
 {
-    public static IRecipeType<BloomeryRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":bloomery");
+    public static IRecipeType<BloomeryRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":bloomery");
     public static Map<ResourceLocation, BloomeryRecipe> recipes = new HashMap<>();
     public final IngredientWithSize input;
     public final ItemStack output;

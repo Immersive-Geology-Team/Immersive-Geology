@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnace
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import igteam.immersive_geology.main.IGMultiblockProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -38,7 +39,7 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
                 new BlockPos(0,0,0),
                 new BlockPos(0,0,5),
                 new BlockPos(6,12,6),
-                () -> IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace.getDefaultState());
+                () -> IGMultiblockProvider.reverberation_furnace.getDefaultState());
     }
 
     @Override
@@ -62,11 +63,11 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         if(this.te == null){
             this.te = new ReverberationFurnaceTileEntity();
-            this.te.setOverrideState(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH));
+            this.te.setOverrideState(IGMultiblockProvider.reverberation_furnace.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH));
         }
 
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockProvider.reverberation_furnace.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

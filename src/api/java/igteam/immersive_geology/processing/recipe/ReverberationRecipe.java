@@ -1,10 +1,9 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersive_geology.common.crafting.IGMultiblockRecipe;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class ReverberationRecipe extends IGMultiblockRecipe
 {
-    public static IRecipeType<ReverberationRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":reverberation_furnace");
+    public static IRecipeType<ReverberationRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":reverberation_furnace");
     public static Map<ResourceLocation, ReverberationRecipe> recipes = new HashMap<>();
     public final IngredientWithSize input;
     public final ItemStack output;

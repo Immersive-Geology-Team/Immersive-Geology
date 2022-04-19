@@ -1,9 +1,9 @@
 package com.igteam.immersive_geology.common.integrations;
 
 
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.*;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -51,20 +51,20 @@ public class JEIIntegration  implements IModPlugin{
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.rotarykiln),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.rotarykiln),
                 CalcinationRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.gravityseparator),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.gravityseparator),
                 SeparationRecipeCategory.ID);
 
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystallizer),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.crystallizer),
                 CrystalizationRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.bloomery),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.bloomery),
                 BloomeryRecipeCategory.ID);
 
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.chemicalvat),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.chemicalvat),
                 VatRecipeCategory.ID);
 
-        registration.addRecipeCatalyst(new ItemStack(IGMultiblockRegistrationHolder.Multiblock.reverberation_furnace),
+        registration.addRecipeCatalyst(new ItemStack(IGMultiblockProvider.reverberation_furnace),
                 RoastingRecipeCategory.ID);
     }
 

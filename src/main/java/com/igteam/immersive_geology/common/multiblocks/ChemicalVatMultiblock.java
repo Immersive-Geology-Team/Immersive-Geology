@@ -12,6 +12,7 @@ import com.igteam.immersive_geology.common.block.tileentity.ChemicalVatTileEntit
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import igteam.immersive_geology.main.IGMultiblockProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -43,7 +44,7 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
                 new BlockPos(3,0,0),
                 new BlockPos(3,0,2),
                 new BlockPos(4,4,3),
-                () -> IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState());
+                () -> IGMultiblockProvider.chemicalvat.getDefaultState());
     }
 
     @Override
@@ -67,7 +68,7 @@ public class ChemicalVatMultiblock extends IETemplateMultiblock {
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
         //This is to ensure it can load on servers, if it's null, it's a server, so we can't use it anyway.
         if(this.list == null){
-            BlockState state = IGMultiblockRegistrationHolder.Multiblock.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockProvider.chemicalvat.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

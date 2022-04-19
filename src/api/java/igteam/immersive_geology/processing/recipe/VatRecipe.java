@@ -1,13 +1,10 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.crafting.IGMultiblockRecipe;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,10 +18,10 @@ import java.util.*;
 
 public class VatRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<VatRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":chemicalvat");
+    public static final IRecipeType<VatRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":chemicalvat");
     public static Map<ResourceLocation, VatRecipe> recipes = new HashMap<>();
 
-    public static Logger log = ImmersiveGeology.getNewLogger();
+    public static Logger log = IGApi.getNewLogger();
 
     /** May return null! */
     public static VatRecipe findRecipe(ItemStack itemInput, FluidStack fluid1, FluidStack fluid2)
@@ -84,7 +81,6 @@ public class VatRecipe extends IGMultiblockRecipe
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
 
         timeAndEnergy(time, energy);
-        modifyTimeAndEnergy(IGConfigurationHandler.Server.MULTIBLOCK.chemicalVat_energyModifier::get, IGConfigurationHandler.Server.MULTIBLOCK.chemicalVat_timeModifier::get);
     }
 
     @Override

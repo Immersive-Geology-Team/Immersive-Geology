@@ -1,7 +1,6 @@
 package com.igteam.immersive_geology.core.proxy;
 
 import blusunrize.immersiveengineering.api.ManualHelper;
-import blusunrize.immersiveengineering.client.IEDefaultColourHandlers;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItems;
@@ -26,7 +25,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

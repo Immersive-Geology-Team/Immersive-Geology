@@ -6,7 +6,7 @@
 
 package com.igteam.immersive_geology;
 
-import com.igteam.immersive_geology.common.crafting.Serializers;
+import igteam.immersive_geology.processing.Serializers;
 import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
 import com.igteam.immersive_geology.common.loot.LootIG;
 import com.igteam.immersive_geology.common.world.IGInteractionHandler;

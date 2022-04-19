@@ -69,8 +69,8 @@ public class IGConfigurationHandler {
         public final ForgeConfigSpec.ConfigValue<Double> electrolizer_timeModifier;
 
         MultiblockConfigSetup(ForgeConfigSpec.Builder builder){
-            builder.push("Multiblock Configuration");
-
+            builder.push("Multiblock Configuration -- NOT Implemented at the moment");
+            //TODO Implement these Configs into the TileEntity so that it works!
             chemicalVat_energyModifier = builder
                     .comment("A modifier to apply to the energy costs of every Chemical Vat recipe, default=1")
                     .define("distillationTower_energyModifier", Double.valueOf(1.0));

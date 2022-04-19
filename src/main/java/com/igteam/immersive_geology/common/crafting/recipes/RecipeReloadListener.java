@@ -1,8 +1,8 @@
 package com.igteam.immersive_geology.common.crafting.recipes;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.*;
 
+import igteam.immersive_geology.processing.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class RecipeReloadListener  implements IResourceManagerReloadListener {
-
     private final DataPackRegistries dataPackRegistries;
 
     public RecipeReloadListener(DataPackRegistries dataPackRegistries){

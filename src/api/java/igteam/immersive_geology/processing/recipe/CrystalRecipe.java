@@ -1,11 +1,9 @@
-package com.igteam.immersive_geology.common.crafting.recipes.recipe;
+package igteam.immersive_geology.processing.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import com.igteam.immersive_geology.common.crafting.IGMultiblockRecipe;
-import com.igteam.immersive_geology.common.crafting.Serializers;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.processing.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
@@ -17,7 +15,7 @@ import java.util.*;
 
 public class CrystalRecipe extends IGMultiblockRecipe
 {
-    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGLib.MODID + ":crystalizer");
+    public static final IRecipeType<CrystalRecipe> TYPE = IRecipeType.register(IGApi.MODID + ":crystalizer");
     public static Map<ResourceLocation, CrystalRecipe> recipes = new HashMap<>();
 
 
@@ -50,7 +48,6 @@ public class CrystalRecipe extends IGMultiblockRecipe
         this.fluidInputList = Collections.singletonList(fluidInput);
         this.outputList = NonNullList.from(ItemStack.EMPTY, itemOutput);
         timeAndEnergy(time, energy);
-        modifyTimeAndEnergy(IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_energyModifier::get, IGConfigurationHandler.Server.MULTIBLOCK.electrolizer_timeModifier::get);
     }
 
     @Override

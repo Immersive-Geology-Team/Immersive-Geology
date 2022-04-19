@@ -1,12 +1,12 @@
-package com.igteam.immersive_geology.common.crafting.serializers;
+package igteam.immersive_geology.processing.serializers;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.VatRecipe;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.VatRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
@@ -19,7 +19,7 @@ public class VatRecipeSerializer extends IERecipeSerializer<VatRecipe> {
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.chemicalvat);
+        return new ItemStack(IGMultiblockProvider.chemicalvat);
     }
 
     @Override

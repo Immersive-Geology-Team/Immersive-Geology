@@ -1,10 +1,10 @@
-package com.igteam.immersive_geology.common.crafting.serializers;
+package igteam.immersive_geology.processing.serializers;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.CrystalRecipe;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.processing.recipe.CrystalRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
@@ -14,7 +14,7 @@ public class CrystalizerRecipeSerializer extends IERecipeSerializer<CrystalRecip
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockRegistrationHolder.Multiblock.crystallizer);
+        return new ItemStack(IGMultiblockProvider.crystallizer);
     }
 
     @Override

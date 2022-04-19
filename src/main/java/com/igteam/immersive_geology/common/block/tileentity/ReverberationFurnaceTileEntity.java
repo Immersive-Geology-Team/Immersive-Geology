@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
-import com.igteam.immersive_geology.common.crafting.recipes.recipe.ReverberationRecipe;
+import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.entity.player.PlayerEntity;
