@@ -13,7 +13,7 @@ import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ILiquidContainer;

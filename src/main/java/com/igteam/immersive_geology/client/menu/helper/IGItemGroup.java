@@ -1,4 +1,4 @@
-package igteam.immersive_geology.menu.helper;
+package com.igteam.immersive_geology.client.menu.helper;
 
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.pattern.BlockPattern;

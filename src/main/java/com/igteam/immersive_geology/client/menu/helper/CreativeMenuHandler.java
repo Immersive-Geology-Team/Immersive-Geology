@@ -5,7 +5,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.menu.ItemSubGroup;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.Screen;

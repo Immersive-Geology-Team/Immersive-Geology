@@ -6,7 +6,7 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

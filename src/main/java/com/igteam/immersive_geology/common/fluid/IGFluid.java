@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.fluid;
 
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import com.igteam.immersive_geology.common.fluid.helper.IGFluidAttributes;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -12,7 +13,7 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FlowingFluidBlock;

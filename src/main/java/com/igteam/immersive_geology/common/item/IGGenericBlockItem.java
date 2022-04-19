@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.item;
 
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
@@ -7,7 +8,6 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.BlockItem;

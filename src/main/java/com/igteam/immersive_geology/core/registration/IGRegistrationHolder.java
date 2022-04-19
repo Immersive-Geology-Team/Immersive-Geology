@@ -18,11 +18,12 @@ import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MiscPattern;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -40,17 +41,19 @@ public class IGRegistrationHolder {
         registerForInterface(StoneEnum.values());
         registerForInterface(MetalEnum.values());
         registerForInterface(MineralEnum.values());
-        registerForInterface(MiscEnum.values());
         registerForInterface(FluidEnum.values());
-        registerForInterface(GasEnum.values());
 
         logger.info("Registration of Slurry Fluids");
         //This needs to be handled differently
         for(SlurryEnum slurryEnum : SlurryEnum.values()){
             for (MaterialSlurryWrapper slurry : slurryEnum.getEntries()) {
-                registerForSlurryTypes(slurry, MiscPattern.slurry);
+                registerForSlurryTypes(slurry);
             }
         }
+
+        registerForInterface(GasEnum.values());
+
+        registerForInterface(MiscEnum.values());
     }
 
 
@@ -88,7 +91,7 @@ public class IGRegistrationHolder {
         });
     }
 
-    private static void registerForItemPattern(MaterialInterface m, ItemPattern p){
+    private static void registerForItemPattern(MaterialInterface<?> m, ItemPattern p){
         switch(p) {
             case ore_chunk: case ore_bit: case dirty_crushed_ore: {
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
@@ -120,7 +123,7 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForBlockPattern(MaterialInterface m, BlockPattern p){
+    private static void registerForBlockPattern(MaterialInterface<?> m, BlockPattern p){
         if (p == BlockPattern.ore) {
             Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
                 if (m.generateOreFor(stone)) {
@@ -142,7 +145,8 @@ public class IGRegistrationHolder {
 
     private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, MiscPattern p){
         if(p != MiscPattern.machine) {
-            IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
+            //m.get().getRarity() has a loader constraint violation, API and Minecraft weirdness? Worked fine before...
+            IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, Rarity.COMMON, m.getColor(p), false), p);
             if(m.get().hasFlask()){
                 register(fluid.getFluidContainer());
             }
@@ -150,8 +154,8 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForSlurryTypes(MaterialSlurryWrapper slurry, MiscPattern p){
-        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(p), false), p);
+    private static void registerForSlurryTypes(MaterialSlurryWrapper slurry){
+        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(MiscPattern.slurry), false), MiscPattern.slurry);
         logger.info("Registering: " + slurry.getName());
         if(slurry.hasFlask()){
             register(fluid.getFluidContainer());
