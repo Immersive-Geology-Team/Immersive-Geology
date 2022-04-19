@@ -190,9 +190,9 @@ public abstract class MaterialBaseMineral extends MaterialBase {
 
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
                     IRecipeBuilder.separating(this).create(
-                            getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, getParentMaterial()), //input
+                            getParentMaterial().getStack(ItemPattern.crushed_ore), //input
                             1, //amount out
-                            getParentMaterial().getStack(ItemPattern.crushed_ore)//result
+                            getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get())//result
                             );
 
                     IRecipeBuilder.crafting(this)

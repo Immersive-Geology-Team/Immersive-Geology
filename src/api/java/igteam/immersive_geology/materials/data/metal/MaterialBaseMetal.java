@@ -39,9 +39,9 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 protected void describe() {
                     for (MaterialInterface<?> stone : StoneEnum.values()) {
                         IRecipeBuilder.separating(this).create(
-                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, getParentMaterial()), //input
+                                getParentMaterial().getStack(ItemPattern.crushed_ore), //output
                                 1, //amount out
-                                getParentMaterial().getStack(ItemPattern.crushed_ore)//result
+                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get())//input
                         );
 
                         IRecipeBuilder.crafting(this)

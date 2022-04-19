@@ -41,34 +41,32 @@ public class ImmersiveGeology
 	private static final Logger LOGGER = getNewLogger();
 	public static Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
+	IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+	IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+
 	public ImmersiveGeology()
 	{
-		// Register short-hand variables
-		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();
+		IGRegistrationHolder.buildRecipes();
 
 		LootIG.initialize();
 
+		//setup configs
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL);
 
+		//setup the listeners
 		modBus.addListener(this::setup);
 		modBus.addListener(this::onFinishSetup);
-
 		modBus.addListener(this::onClientSetup);
-
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
-
 		forgeBus.addListener(this::addReloadListeners);
 
+		//Register Classes for Mod and forge Bus
 		modBus.register(IGRegistrationHolder.class);
 		forgeBus.register(IGInteractionHandler.class);
 		forgeBus.register(this);
-
-		LOGGER.info("Initializing Immersive Geology Multiblocks");
 
 		IGMultiblockRegistrationHolder.populate();
 		IGMultiblockRegistrationHolder.initialize();
@@ -85,9 +83,6 @@ public class ImmersiveGeology
 
 	private void setup(final FMLCommonSetupEvent event){
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
-
-		IGRegistrationHolder.buildRecipes();
-
 		proxy.onSetup(event);
 	}
 

@@ -22,6 +22,7 @@ public class IGApi {
             value.add(m.getName());
         }
 
+        getNewLogger().info("Creating Wrap for Tags: " + "[" + value.toString() + "]");
         return "[" + value.toString() + "]";
     }
 
