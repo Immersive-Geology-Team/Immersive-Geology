@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.builders.SeparatorRecipeBuilder;
@@ -35,14 +36,21 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        for(MaterialInterface container : MetalEnum.values()){
-            MaterialBase metal = container.get();
-            for(IGProcessingStage stage : metal.getStages()){
-                logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + metal.getName());
-                for(IGProcessingMethod method : stage.getMethods()){
-                    switch (method.getRecipeType()){
-                        case Crafting: buildCraftingMethods((IGCraftingMethod) method, consumer); break;
-                        case Separator: buildSeparatingMethods((IGSeparatorMethod) method, consumer); break;
+        for(MaterialInterface container : APIMaterials.all()){
+            MaterialBase material = container.get();
+
+            for(IGProcessingStage stage : material.getStages()){
+                if(stage != null) {
+                    logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + material.getName());
+                    for (IGProcessingMethod method : stage.getMethods()) {
+                        switch (method.getRecipeType()) {
+                            case Crafting:
+                                buildCraftingMethods((IGCraftingMethod) method, consumer);
+                                break;
+                            case Separator:
+                                buildSeparatingMethods((IGSeparatorMethod) method, consumer);
+                                break;
+                        }
                     }
                 }
             }
@@ -61,8 +69,10 @@ public class IGRecipeProvider extends RecipeProvider {
     }
 
     private void buildSeparatingMethods(IGSeparatorMethod method, Consumer<IFinishedRecipe> consumer){
+        logger.info("Data Gen for Washing Recipes");
+        logger.info("[" + method.getName() + "]");
         SeparatorRecipeBuilder recipe = method.getBuilder();
-        recipe.build(consumer, toRL("shapeless/craft_" + Objects.requireNonNull(method.getName())));
+        recipe.build(consumer, toRL("wash/wash_" + Objects.requireNonNull(method.getName())));
     }
 
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();

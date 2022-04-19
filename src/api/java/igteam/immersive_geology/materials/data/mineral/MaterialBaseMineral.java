@@ -187,11 +187,12 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         new IGProcessingStage(this,"Default Ore Processing Stage") {
             @Override
             protected void describe() {
+
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
                     IRecipeBuilder.separating(this).create(
-                            getParentMaterial().getItemTag(ItemPattern.crushed_ore), //result
+                            getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, getParentMaterial()), //input
                             1, //amount out
-                            stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial())//input
+                            getParentMaterial().getStack(ItemPattern.crushed_ore)//result
                             );
 
                     IRecipeBuilder.crafting(this)

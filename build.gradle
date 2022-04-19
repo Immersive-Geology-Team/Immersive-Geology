@@ -69,6 +69,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                 }
             }
         }
@@ -86,6 +87,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                 }
             }
         }
@@ -108,6 +110,7 @@ minecraft {
             mods {
                 immersive_geology {
                     source sourceSets.main
+                    source sourceSets.api
                     source sourceSets.datagen
                 }
             }

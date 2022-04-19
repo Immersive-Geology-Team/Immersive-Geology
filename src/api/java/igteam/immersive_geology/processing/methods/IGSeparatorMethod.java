@@ -19,7 +19,7 @@ public class IGSeparatorMethod extends IGProcessingMethod {
     private SeparatorRecipeBuilder builder;
 
     public SeparatorRecipeBuilder create(ITag<Item> result, int count, ItemStack input){
-        methodName = "separate_" + input.getDisplayName().getString();
+        methodName = input.getDisplayName().getString();
         builder = SeparatorRecipeBuilder.builder(result, count).addInput(input);
         return builder;
     }

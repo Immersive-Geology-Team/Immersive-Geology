@@ -49,7 +49,6 @@ public class ImmersiveGeology
 
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();
-		IGRegistrationHolder.buildRecipes();
 
 		LootIG.initialize();
 
@@ -85,9 +84,10 @@ public class ImmersiveGeology
 	}
 
 	private void setup(final FMLCommonSetupEvent event){
-
-
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
+
+		IGRegistrationHolder.buildRecipes();
+
 		proxy.onSetup(event);
 	}
 

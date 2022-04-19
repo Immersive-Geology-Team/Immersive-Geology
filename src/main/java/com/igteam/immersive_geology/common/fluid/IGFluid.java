@@ -131,7 +131,6 @@ public class IGFluid extends FlowingFluid {
                     };
                     containerRegistryName = IGRegistryProvider.getRegistryKey(slurryFluid, ItemPattern.flask);
                     DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
-                    this.bucket.setRegistryName(containerRegistryName);
                 }
             } else {
                 MaterialBaseFluid fluid = (MaterialBaseFluid) fluidMaterial;
@@ -151,7 +150,7 @@ public class IGFluid extends FlowingFluid {
                     containerRegistryName = IGRegistryProvider.getRegistryKey(fluid, ItemPattern.flask);
 
                     DispenserBlock.registerDispenseBehavior(this.bucket, FLASK_DISPENSE_BEHAVIOR);
-                    this.bucket.setRegistryName(containerRegistryName);
+                    //this.bucket.setRegistryName(containerRegistryName);
                 }
             }
 

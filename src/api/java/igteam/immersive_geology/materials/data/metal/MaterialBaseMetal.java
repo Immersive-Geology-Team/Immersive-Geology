@@ -38,6 +38,12 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 @Override
                 protected void describe() {
                     for (MaterialInterface<?> stone : StoneEnum.values()) {
+                        IRecipeBuilder.separating(this).create(
+                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, getParentMaterial()), //input
+                                1, //amount out
+                                getParentMaterial().getStack(ItemPattern.crushed_ore)//result
+                        );
+
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
