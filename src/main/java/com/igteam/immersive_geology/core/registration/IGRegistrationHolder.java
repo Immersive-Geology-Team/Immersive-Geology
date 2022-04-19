@@ -11,6 +11,7 @@ import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.misc.MaterialMiscBase;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -41,6 +42,9 @@ public class IGRegistrationHolder {
         registerForInterface(StoneEnum.values());
         registerForInterface(MetalEnum.values());
         registerForInterface(MineralEnum.values());
+
+        registerForInterface(MiscEnum.values());
+
         registerForInterface(FluidEnum.values());
 
         logger.info("Registration of Slurry Fluids");
@@ -53,7 +57,6 @@ public class IGRegistrationHolder {
 
         registerForInterface(GasEnum.values());
 
-        registerForInterface(MiscEnum.values());
     }
 
 
@@ -62,6 +65,9 @@ public class IGRegistrationHolder {
         buildMaterialRecipes(StoneEnum.values());
         buildMaterialRecipes(MetalEnum.values());
         buildMaterialRecipes(MineralEnum.values());
+
+        buildMaterialRecipes(MiscEnum.values());
+
         buildMaterialRecipes(FluidEnum.values());
         buildMaterialRecipes(GasEnum.values());
     }
@@ -109,9 +115,10 @@ public class IGRegistrationHolder {
             }
             break;
             case flask: {
-                IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
-                container.finalizeData();
-                register(container);
+                if(m instanceof MaterialMiscBase) {
+                    IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
+                    register(container);
+                }
             }
             break;
             default: {

@@ -58,6 +58,7 @@ public class IGBucketItem extends BucketItem implements IGItemType {
         this.fluidMaterial = material;
         this.subGroup = ItemSubGroup.misc;
         this.pattern = pattern;
+        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
     }
 
     @Override
@@ -216,10 +217,6 @@ public class IGBucketItem extends BucketItem implements IGItemType {
         {
             return  new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
         }
-    }
-
-    public void finalizeData() {
-        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
     }
 
     public MaterialBase getMaterial(MaterialTexture base) {
