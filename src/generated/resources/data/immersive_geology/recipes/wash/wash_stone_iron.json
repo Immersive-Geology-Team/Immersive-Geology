@@ -6,5 +6,8 @@
   },
   "input": {
     "tag": "forge:dirty_crushed_ores/stone_iron"
+  },
+  "waste": {
+    "item": "immersive_geology:stone_bit_stone"
   }
 }

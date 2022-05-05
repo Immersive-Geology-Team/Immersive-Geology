@@ -25,5 +25,4 @@ public class IGApi {
         getNewLogger().info("Creating Wrap for Tags: " + "[" + value.toString() + "]");
         return "[" + value.toString() + "]";
     }
-
 }

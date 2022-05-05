@@ -3,10 +3,14 @@ package igteam.immersive_geology.processing.methods;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
+import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import slimeknights.tconstruct.library.utils.TagUtil;
+
+import javax.annotation.Nonnull;
 
 public class IGSeparatorMethod extends IGProcessingMethod {
 
@@ -19,13 +23,15 @@ public class IGSeparatorMethod extends IGProcessingMethod {
     private ItemStack result;
     private int rCount;
     private ITag<Item> input;
+    private ItemStack waste;
 
-    public void create(ItemStack output, int count, ITag<Item> input){
+    public void create(ItemStack output, int count, ITag<Item> input, @Nonnull ItemStack waste){
         String sanitizedTagName = input.toString().substring(input.toString().indexOf("/")+1, input.toString().indexOf("]"));
         methodName = sanitizedTagName;
         this.result = output;
         this.rCount = count;
         this.input = input;
+        this.waste = waste;
     }
 
     public ItemStack getResult(){
@@ -42,5 +48,9 @@ public class IGSeparatorMethod extends IGProcessingMethod {
 
     public String getName() {
         return methodName;
+    }
+
+    public ItemStack getWaste() {
+        return waste;
     }
 }

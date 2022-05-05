@@ -6,5 +6,8 @@
   },
   "input": {
     "tag": "forge:dirty_crushed_ores/granite_platinum"
+  },
+  "waste": {
+    "item": "immersive_geology:stone_bit_granite"
   }
 }

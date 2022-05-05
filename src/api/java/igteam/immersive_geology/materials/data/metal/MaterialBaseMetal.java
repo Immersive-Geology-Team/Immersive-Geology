@@ -41,7 +41,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         IRecipeBuilder.separating(this).create(
                                 getParentMaterial().getStack(ItemPattern.crushed_ore), //output
                                 1, //amount out
-                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get())//input
+                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//input
+                                stone.getStack(ItemPattern.stone_bit)
                         );
 
                         IRecipeBuilder.crafting(this)

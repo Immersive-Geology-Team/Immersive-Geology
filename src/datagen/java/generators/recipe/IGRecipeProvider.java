@@ -71,7 +71,7 @@ public class IGRecipeProvider extends RecipeProvider {
     private void buildSeparatingMethods(IGSeparatorMethod method, Consumer<IFinishedRecipe> consumer){
         logger.info("Data Gen for Washing Recipes");
         logger.info("[" + method.getName() + "]");
-        SeparatorRecipeBuilder recipe = SeparatorRecipeBuilder.builder(method.getResult()).addInput(method.getInput());
+        SeparatorRecipeBuilder recipe = SeparatorRecipeBuilder.builder(method.getResult()).addInput(method.getInput()).addWaste(method.getWaste());
         recipe.build(consumer, toRL("wash/wash_" + Objects.requireNonNull(method.getName())));
     }
 
