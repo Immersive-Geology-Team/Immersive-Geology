@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import java.util.LinkedHashSet;
 
 public class MaterialMiscBase extends MaterialBase {
-
+    //Can be used to create any one time item/block by instantiating it in the enum, see MiscEnum
     public MaterialMiscBase(String name) {
         super(name);
     }

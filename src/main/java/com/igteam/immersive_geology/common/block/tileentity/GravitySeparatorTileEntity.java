@@ -19,6 +19,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -154,6 +155,10 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
             () -> new DirectionalBlockPos(getPos().add(0, 0, 0).offset(getFacing(), -2), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
+    private CapabilityReference<IItemHandler> waste = CapabilityReference.forTileEntityAt(this,
+            () -> new DirectionalBlockPos(getPos().add(0, 0, 0).offset(getFacing(), 2), getFacing()),
+            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+
     @Override
     public void doProcessOutput(ItemStack output) {
         output = Utils.insertStackIntoInventory(this.output, output, false);
@@ -234,7 +239,13 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public void onProcessFinish(MultiblockProcess<SeparatorRecipe> process) {
+        Ingredient waste = process.recipe.waste;
+        Optional<ItemStack> optionalWaste = Arrays.stream(waste.getMatchingStacks()).findFirst();
 
+        ItemStack itemWaste = optionalWaste.orElse(ItemStack.EMPTY);
+        itemWaste = Utils.insertStackIntoInventory(this.waste, itemWaste, false);
+        if(!itemWaste.isEmpty())
+            Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
     }
 
     @Override

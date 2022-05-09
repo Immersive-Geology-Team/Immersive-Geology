@@ -52,7 +52,6 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 }
             };
         }
-
     }
 
     @Override
