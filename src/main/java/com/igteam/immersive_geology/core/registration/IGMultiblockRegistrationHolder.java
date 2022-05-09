@@ -1,10 +1,9 @@
 package com.igteam.immersive_geology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import com.igteam.immersive_geology.common.block.blocks.*;
+import com.igteam.immersive_geology.common.block.blocks.multiblocks.*;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import igteam.immersive_geology.main.IGMultiblockProvider;
-import net.minecraft.block.Block;
 
 public class IGMultiblockRegistrationHolder {
     public static void populate() {

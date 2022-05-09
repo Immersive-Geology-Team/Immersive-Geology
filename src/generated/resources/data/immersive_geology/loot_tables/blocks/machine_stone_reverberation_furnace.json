@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:block_item_machine_iron_reverberation_furnace"
+          "name": "immersive_geology:block_item_machine_stone_reverberation_furnace"
         }
       ],
       "conditions": [

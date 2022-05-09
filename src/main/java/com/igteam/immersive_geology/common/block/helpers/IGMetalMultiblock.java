@@ -27,6 +27,7 @@ import java.util.function.Supplier;
 public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends MetalMultiblockBlock<T> implements IGBlockType {
 
     protected final IGGenericBlockItem itemBlock;
+
     public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te){
         super(name, te);
 
@@ -40,7 +41,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
             }
         }
 
-        this.itemBlock = new IGGenericBlockItem(this, MetalEnum.Iron, ItemPattern.block_item);
+        this.itemBlock = new IGGenericBlockItem(this, getMachineMaterial(), ItemPattern.block_item);
         this.itemBlock.setRegistryName(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()));
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);
@@ -53,18 +54,17 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     }
 
     @Override
-    public ResourceLocation createRegistryName(){
-        return IGRegistrationHolder.getRegistryKey(this);
-    }
-
-    @Override
     public int getColourForIGBlock(int pass) {
         return 0;
     }
 
     @Override
     public Collection<MaterialInterface> getMaterials() {
-        return Collections.singleton(MetalEnum.Iron);
+        return Collections.singleton(getMachineMaterial());
+    }
+
+    public MaterialInterface<?> getMachineMaterial(){
+        return MetalEnum.Iron;
     }
 
     @Override
@@ -76,11 +76,15 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     public String getHolderKey() {
         StringBuilder data = new StringBuilder();
 
-        data.append("_").append(MetalEnum.Iron.getName());
+        data.append("_").append(getMachineMaterial().getName());
 
         return getPattern() + data.toString() + "_" + name;
     }
 
+    @Override
+    public ResourceLocation createRegistryName(){
+        return IGRegistrationHolder.getRegistryKey(this);
+    }
     @Override
     public Block getBlock() {
         return this;

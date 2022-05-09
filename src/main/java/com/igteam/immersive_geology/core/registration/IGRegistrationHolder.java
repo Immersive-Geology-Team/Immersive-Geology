@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.core.registration;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
@@ -131,8 +132,10 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForBlockPattern(MaterialInterface<?> m, BlockPattern p){
-        if (p == BlockPattern.ore) {
-            Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
+
+        switch(p){
+            case ore:
+                Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
                 if (m.generateOreFor(stone)) {
                     IGGenericBlock multi_block = new IGGenericBlock(m, p);
                     multi_block.addMaterial(stone, MaterialTexture.base);
@@ -142,11 +145,21 @@ public class IGRegistrationHolder {
                     register(multi_block);
                 }
             });
-        } else {
-            IGGenericBlock multi_block = new IGGenericBlock(m, p);
-            multi_block.finalizeData();
-            register(multi_block.asItem());
-            register(multi_block);
+                break;
+
+            case slab:
+                IGSlabBlock slab = new IGSlabBlock(m);
+                slab.finalizeData();
+                register(slab.asItem());
+                register(slab);
+                break;
+            default:
+                IGGenericBlock multi_block = new IGGenericBlock(m, p);
+                multi_block.finalizeData();
+                register(multi_block.asItem());
+                register(multi_block);
+                break;
+
         }
     }
 

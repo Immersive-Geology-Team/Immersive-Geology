@@ -2,7 +2,8 @@
 # www.blender.org
 mtllib reverberation_furnace.mtl
 
-o FurnaceCube_Furnace.002_Cube.297
+
+o default
 v 6.000671 3.000001 0.000003
 v 3.000672 3.000000 0.000002
 v 3.000671 6.000000 0.000002
@@ -358,7 +359,7 @@ vn -0.8944 0.4472 0.0000
 vn 0.0000 0.4472 -0.8944
 vn -0.0000 0.4472 0.8944
 vn 0.8944 0.4472 0.0000
-usemtl reverberation_furnace.005
+usemtl reverberation_furnace
 f 1/1/1 2/2/1 3/3/1 4/4/1
 f 5/5/2 6/6/2 7/7/2 8/8/2
 f 9/9/3 10/10/3 11/11/3 12/12/3

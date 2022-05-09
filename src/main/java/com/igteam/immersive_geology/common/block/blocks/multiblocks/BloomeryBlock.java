@@ -1,4 +1,4 @@
-package com.igteam.immersive_geology.common.block.blocks;
+package com.igteam.immersive_geology.common.block.blocks.multiblocks;
 
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.IEContent;
@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import com.igteam.immersive_geology.common.item.multiblock.IGBloomeryBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
@@ -37,6 +38,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -57,7 +59,7 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
             }
         }
 
-        this.itemBlock = new IGGenericBlockItem(this, StoneEnum.Stone, ItemPattern.block_item);
+        this.itemBlock = new IGBloomeryBlockItem(this, StoneEnum.Stone, ItemPattern.block_item);
         this.itemBlock.setRegistryName(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()));
 ;
         IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);
@@ -130,7 +132,7 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
 
     @Override
     public Collection<MaterialInterface> getMaterials() {
-        return null;
+        return Collections.singleton(StoneEnum.Stone);
     }
 
     @Override

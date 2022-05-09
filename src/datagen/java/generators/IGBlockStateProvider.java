@@ -6,6 +6,8 @@ import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
 import com.google.common.base.Preconditions;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
+import com.igteam.immersive_geology.common.block.helpers.BlockMaterialType;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -19,6 +21,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +32,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,14 +53,27 @@ public class IGBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((i) -> {
-            if(i instanceof IGGenericBlock){
-                IGGenericBlock block = (IGGenericBlock) i;
-                BlockPattern pattern = block.getPattern();
-                switch(pattern){
-                    case ore: registerOreBlock(block); break;
+            if(i instanceof IGBlockType){
+                IGBlockType type = (IGBlockType) i;
+                if(type.getPattern() instanceof BlockPattern) {
+                    BlockPattern pattern = (BlockPattern) type.getPattern();
+                    switch (pattern) {
+                        case ore:
+                            registerOreBlock(type);
+                            break;
 //                    case stairs -> registerStairBlock(block);
-//                    case slab -> registerSlabBlock(block);
-                    case block: case geode: case storage: registerGenericBlock(block); break;
+                        case slab:
+                            registerSlabBlock(type);
+                            break;
+                        case block:
+                        case geode:
+                        case storage:
+                            registerGenericBlock(type);
+                            break;
+                    }
+                } else {
+                    String name = Objects.requireNonNull(type.getBlock().getRegistryName()).toString();
+                    log.warn("Found Non Block Pattern in Block Registry for: " + name);
                 }
             }
         });
@@ -116,7 +133,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void reverberation_furnace(){
         ResourceLocation texture = modLoc("multiblock/reverberation_furnace");
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace_mirrored.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/revfurnace/reverberation_furnace.obj");
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.reverberation_furnace, modelNormal, texture, "", ReverberationFurnaceMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.reverberation_furnace, modelMirrored, texture, "_mirrored", ReverberationFurnaceMultiblock.INSTANCE, true);
@@ -126,6 +143,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
 
     private BlockModelBuilder multiblockModel(Block block, ResourceLocation model, ResourceLocation texture, String add, TemplateMultiblock mb, boolean mirror){
+        log.info("Starting Generation of Multiblock Models: " + model.toString());
+
         UnaryOperator<BlockPos> transform = UnaryOperator.identity();
         if(mirror){
             Vector3i size = mb.getSize(null);
@@ -163,7 +182,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void registerGenericBlock(IGGenericBlock block){
+    private void registerGenericBlock(IGBlockType type){
+        IGGenericBlock block = (IGGenericBlock) type;
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
                                 new ResourceLocation(IGLib.MODID, "block/" + block.getHolderKey()).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))
@@ -172,9 +192,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 .build());
     }
 
-    private void registerOreBlock(IGGenericBlock block){
+    private void registerOreBlock(IGBlockType type){
         BlockModelBuilder baseModel;
-
+        IGGenericBlock block = (IGGenericBlock) type;
         baseModel = models().withExistingParent(
                         new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
                         new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()))
@@ -184,41 +204,43 @@ public class IGBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(block).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
     }
 
-    private void registerSlabBlock(BlockPattern pattern)
+    private void registerSlabBlock(IGBlockType igBlockType)
     {
-//        if(pattern == BlockPattern.slab) {
-//            IGBlockType slabBlock = (IGBlockType) ;
-//            VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
-//            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()));
-//
-//            BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_top_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_top"));
-//
-//            BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getBlockUseType().getName() + "_double_" + slabBlock.getMaterial(BlockMaterialType.BASE_MATERIAL).getName()).getPath(),
-//                    new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getBlockUseType().getName()+ "_double"));
-//
-//            doubleModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//            topModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//            baseModel.texture("all", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//
-//
-//            doubleModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//            doubleModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-//
-//            topModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//            topModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-//
-//            baseModel.texture("side", new ResourceLocation(IGLib.MODID, slabBlock.getSideTexturePath()));
-//            baseModel.texture("cover", new ResourceLocation(IGLib.MODID, slabBlock.getCoverTexturePath()));
-//
-//            builder.forAllStates(blockState ->
-//                    blockState.get(slabBlock.TYPE) == SlabType.BOTTOM ?
-//                            (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
-//                    blockState.get(slabBlock.TYPE) == SlabType.TOP ?
-//                            (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
-//                            (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
-//        }
+        IGSlabBlock slabBlock = (IGSlabBlock) igBlockType;
+        VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
+        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getPattern().getName() + "_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getPattern().getName()));
+
+        BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getPattern().getName() + "_top_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getPattern().getName()+ "_top"));
+
+        BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getPattern().getName() + "_double_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getPattern().getName()+ "_double"));
+
+        ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getPattern());
+        ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getPattern());
+
+        doubleModel.texture("all", rTextureLocBase);
+        topModel.texture("all", rTextureLocBase);
+        baseModel.texture("all", rTextureLocBase);
+
+
+        doubleModel.texture("side", rTextureLocSide);
+        doubleModel.texture("cover", rTextureLocBase);
+
+        topModel.texture("side", rTextureLocSide);
+        topModel.texture("cover", rTextureLocBase);
+
+        baseModel.texture("side", rTextureLocSide);
+        baseModel.texture("cover", rTextureLocBase);
+
+        builder.forAllStates(blockState ->
+                blockState.get(slabBlock.TYPE) == SlabType.BOTTOM ?
+                        (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
+                blockState.get(slabBlock.TYPE) == SlabType.TOP ?
+                        (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
+                        (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
+
     }
 
     private void registerStairsBlock(IGBlockType blockType){

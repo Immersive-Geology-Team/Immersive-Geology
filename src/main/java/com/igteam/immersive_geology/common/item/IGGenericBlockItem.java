@@ -25,7 +25,7 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
     private final ItemPattern pattern;
     private final IGBlockType type;
 
-    public IGGenericBlockItem(IGBlockType b, MaterialInterface m, ItemPattern p) {
+    public IGGenericBlockItem(IGBlockType b, MaterialInterface<?> m, ItemPattern p) {
         super(b.getBlock(), new Properties().group(IGItemGroup.IGGroup));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);

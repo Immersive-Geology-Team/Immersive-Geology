@@ -1,5 +1,5 @@
 # Blender MTL File: 'bloomery.blend'
 # Material Count: 1
 
-newmtl Material.001
+newmtl material
 map_Kd immersive_geology:multiblock/bloomery

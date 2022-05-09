@@ -37,7 +37,7 @@ public class ReverberationFurnaceMultiblock extends IETemplateMultiblock {
     private ReverberationFurnaceMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/reverberation_furnace"),
                 new BlockPos(0,0,0),
-                new BlockPos(0,0,5),
+                new BlockPos(1,1,5),
                 new BlockPos(6,12,6),
                 () -> IGMultiblockProvider.reverberation_furnace.getDefaultState());
     }

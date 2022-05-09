@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/block",
-  "loader": "immersiveengineering:basic_split",
-  "dynamic": false,
-  "base_model": "immersive_geology:multiblock/machine_iron_reverberation_furnace_mirrored",
-  "split_parts": []
-}
