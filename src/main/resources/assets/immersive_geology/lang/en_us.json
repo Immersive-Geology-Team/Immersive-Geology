@@ -38,11 +38,14 @@
   "item.immersive_geology.raw_crystal": "Raw %s Crystal",
   "item.immersive_geology.chunk": "%s Chunk",
   "item.immersive_geology.ore_chunk": "%s Ore Chunk",
+  "item.immersive_geology.stone_chunk": "%s Chunk",
+  "item.immersive_geology.stone_bit": "%s Chunk",
   "item.immersive_geology.ore_crushed": "Crushed %s Ore",
   "item.immersive_geology.clay": "%s Clay",
   "item.immersive_geology.compound_dust": "%s Compound Dust",
   "item.immersive_geology.slag": "%s Slag",
   "item.immersive_geology.brick": "%s Brick",
+
 
   "block.immersive_geology.storage_block": "%s Block",
   "block.immersive_geology.rock": "%s Stone",
@@ -62,13 +65,13 @@
   "block.immersive_geology.sheetmetal": "%s Sheetmetal",
   "block.immersive_geology.sheetmetal.slab": "%s Sheetmetal Slab",
   "block.immersive_geology.dust_block": "%s Dust Block",
-  "block.immersive_geology.ore_stone": "%d Bearing %s",
+  "block.immersive_geology.ore": "%s Ore",
   "block.immersive_geology.geode": "%s Geode",
   "block.immersive_geology.bricks": "%s Bricks",
   "block.immersive_geology.stairs": "%s Stairs",
 
   "block.immersive_geology.machine": "%s",
-  "block.immersive_geology.static_block": "%s",
+  "block.immersive_geology.storage": "Block of %s",
 
   "machine.immersive_geology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersive_geology.bloomery": "Bloomery",
@@ -103,6 +106,7 @@
   "material.immersive_geology.regolith": "Regolith",
   "material.immersive_geology.gabbros": "Gabbros",
 
+  "material.immersive_geology.refractory_brick": "Refractory Brick",
   "material.immersive_geology.granite": "Granite",
   "material.immersive_geology.diorite": "Diorite",
   "material.immersive_geology.andesite": "Andesite",
@@ -117,6 +121,7 @@
   "material.immersive_geology.quartz": "Quartz",
   "material.immersive_geology.phlebotinum": "Phlebotinum",
 
+  "material.immersive_geology.stone": "Stone",
   "material.immersive_geology.wolframite": "Wolframite",
   "material.immersive_geology.unobtainium": "Unobtainium",
   "material.immersive_geology.aluminium": "Aluminium",
