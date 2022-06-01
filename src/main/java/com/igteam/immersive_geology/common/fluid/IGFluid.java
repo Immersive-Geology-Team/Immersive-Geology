@@ -181,6 +181,10 @@ public class IGFluid extends FlowingFluid {
         return direction==Direction.DOWN&&!isEquivalentTo(fluidIn);
     }
 
+    public MaterialPattern getPattern() {
+        return pattern;
+    }
+
     @Override
     public boolean isEquivalentTo(Fluid fluidIn)
     {

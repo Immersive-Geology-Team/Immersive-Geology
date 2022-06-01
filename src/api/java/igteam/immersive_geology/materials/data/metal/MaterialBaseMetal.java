@@ -76,9 +76,9 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_bit_vein");
                 case dirty_crushed_ore: case crushed_ore:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_ore");
-                case clay:
-                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/clay");
-                case dust: case gear: case ingot: case nugget: case plate: case rod: case wire: case metal_oxide:
+                case clay: case slag:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/" + i.getName());
+                case dust: case gear: case ingot: case nugget: case plate: case rod: case wire: case metal_oxide: case compound_dust:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/" + i.getName());
                 case crystal:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/crystal/raw_crystal_" + getCrystalFamily().getName());
@@ -226,7 +226,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasCompoundDust() {
-        return false;
+        return true;
     }
 
     @Override

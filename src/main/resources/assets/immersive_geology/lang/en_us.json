@@ -70,7 +70,7 @@
   "block.immersive_geology.bricks": "%s Bricks",
   "block.immersive_geology.stairs": "%s Stairs",
 
-  "block.immersive_geology.machine": "%s",
+  "block.immersive_geology.machine": "Error 404",
   "block.immersive_geology.storage": "Block of %s",
 
   "machine.immersive_geology.machine_steel_rotarykiln": "Rotary Kiln",
@@ -88,14 +88,7 @@
 
   "static.immersive_geology.reinforced_refractory_brick": "Reinforced Refractory Bricks",
 
-  "fluid.immersive_geology.fluid_nitric_acid": "Nitric Acid",
-  "fluid.immersive_geology.fluid_hydrochloric_acid": "Hydrochloric Acid",
-  "fluid.immersive_geology.fluid_hydrofluoric_acid": "Hydrofluoric Acid",
-  "fluid.immersive_geology.fluid_hydrogen": "Hydrogen",
-  "fluid.immersive_geology.fluid_sulfuric_acid": "Sulfuric Acid",
-  "fluid.immersive_geology.fluid_brine": "Brine",
-  "fluid.immersive_geology.fluid_sodium_hydroxide": "Sodium Hydroxide",
-  "fluid.immersive_geology.fluid_sulfuric_dioxide": "Sulfuric Dioxide",
+  "fluid.immersive_geology.fluid": "%s",
   "fluid.immersive_geology.slurry": "%s %s",
 
   "material.immersive_geology.vanilla": "Stone",

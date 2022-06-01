@@ -26,4 +26,16 @@ public enum SlurryEnum {
         return entries;
     }
 
+    public MaterialSlurryWrapper getType(FluidEnum baseFluid) {
+
+        MaterialSlurryWrapper found = entries.toArray(new MaterialSlurryWrapper[entries.size()])[0];
+        for (MaterialSlurryWrapper wrapper : entries) {
+            if(wrapper.getFluidBase().getName().equals(baseFluid.getName())){
+                found = wrapper;
+                break;
+            }
+        }
+
+        return found;
+    }
 }

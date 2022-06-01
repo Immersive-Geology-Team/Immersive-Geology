@@ -17,6 +17,7 @@ import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ILiquidContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -66,18 +67,16 @@ public class IGBucketItem extends BucketItem implements IGItemType {
     {
         ArrayList<String> localizedNames = new ArrayList<>();
         if(getFluid() == Fluids.EMPTY){
-            localizedNames.add(fluidMaterial.getName());
+            localizedNames.add("material.immersive_geology." + fluidMaterial.getName());
             TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
             return name;
         }
 
-        localizedNames.add(fluidMaterial.getName());
+        localizedNames.add("material.immersive_geology." + fluidMaterial.getName());
 
-        TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
+        TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray());
         return name;
-
     }
-
     @Override
     public ItemSubGroup getSubGroup() {
         return subGroup;

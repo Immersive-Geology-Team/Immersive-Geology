@@ -9,9 +9,12 @@ import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.builders.SeparatorRecipeBuilder;
+import igteam.immersive_geology.processing.builders.VatRecipeBuilder;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
+import igteam.immersive_geology.processing.methods.IGChemicalMethod;
 import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import igteam.immersive_geology.processing.methods.IGSeparatorMethod;
+import igteam.immersive_geology.processing.recipe.VatRecipe;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
@@ -50,6 +53,8 @@ public class IGRecipeProvider extends RecipeProvider {
                             case Separator:
                                 buildSeparatingMethods((IGSeparatorMethod) method, consumer);
                                 break;
+                            case Chemical:
+                                buildChemicalMethods((IGChemicalMethod) method, consumer);
                         }
                     }
                 }
@@ -73,6 +78,13 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.info("[" + method.getName() + "]");
         SeparatorRecipeBuilder recipe = SeparatorRecipeBuilder.builder(method.getResult()).addInput(method.getInput()).addWaste(method.getWaste());
         recipe.build(consumer, toRL("wash/wash_" + Objects.requireNonNull(method.getName())));
+    }
+
+    private void buildChemicalMethods(IGChemicalMethod method, Consumer<IFinishedRecipe> consumer){
+        logger.info("Data Gen for Chemical Vat Recipes");
+        logger.info("[" + method.getMethodName() + "]");
+        VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
+        recipe.build(consumer, toRL("vat/vat_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();

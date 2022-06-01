@@ -194,8 +194,8 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_bit_vein");
                 case dirty_crushed_ore: case crushed_ore:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_ore");
-                case clay:
-                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/clay");
+                case clay: case slag:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/" + i.getName());
                 case dust: case gear: case ingot: case nugget: case plate: case rod: case wire: case metal_oxide:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/" + i.getName());
                 case crystal:

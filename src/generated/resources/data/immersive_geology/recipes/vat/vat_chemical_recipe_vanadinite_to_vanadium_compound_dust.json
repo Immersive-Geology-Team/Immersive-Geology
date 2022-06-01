@@ -1,0 +1,23 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_sulfuric_acid_vanadium",
+    "amount": 250
+  },
+  "result": {
+    "item": "immersive_geology:compound_dust_vanadium"
+  },
+  "item_input": {
+    "item": "immersive_geology:slag_vanadinite"
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/sulfuric_acid",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 250
+  },
+  "time": 20,
+  "energy": 1000
+}
