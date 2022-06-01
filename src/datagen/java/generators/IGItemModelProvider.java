@@ -2,6 +2,7 @@ package generators;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
@@ -10,6 +11,7 @@ import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHo
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -63,6 +65,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                 IGGenericBlockItem item = (IGGenericBlockItem) i;
                 IGBlockType block = item.getIGBlockType();
                 MaterialPattern pattern = block.getPattern();
+
                 if(pattern instanceof BlockPattern) {
                     BlockPattern blockPattern = (BlockPattern) pattern;
                     if(block.getBlock() instanceof IGGenericBlock) {
@@ -76,12 +79,23 @@ public class IGItemModelProvider extends ItemModelProvider {
                                 break;
                         }
                     }
+                    if (block.getBlock() instanceof IGSlabBlock)
+                    {
+                        IGSlabBlock igBlock = (IGSlabBlock) item.getBlock();
+                        generateSlabItemBlock(igBlock, item);
+                    }
                 }
             }
         });
 
         generateMultiblockItems();
 
+    }
+
+    private void generateSlabItemBlock(IGSlabBlock slab, IGGenericBlockItem item) {
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/slab/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
+                        (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
     }
 
     private ItemModelBuilder obj(IItemProvider item, String model){

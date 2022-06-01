@@ -220,6 +220,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getPattern());
         ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getPattern());
 
+        baseModel.texture("particle", rTextureLocBase);
+        topModel.texture("particle", rTextureLocBase);
+        doubleModel.texture("particle", rTextureLocBase);
+
         doubleModel.texture("all", rTextureLocBase);
         topModel.texture("all", rTextureLocBase);
         baseModel.texture("all", rTextureLocBase);
