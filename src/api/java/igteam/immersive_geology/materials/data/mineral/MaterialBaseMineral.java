@@ -1,10 +1,16 @@
 package igteam.immersive_geology.materials.data.mineral;
 
+import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.FluidEnum;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.materials.pattern.MiscPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;

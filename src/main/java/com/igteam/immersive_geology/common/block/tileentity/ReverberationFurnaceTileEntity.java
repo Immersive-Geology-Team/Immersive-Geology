@@ -48,7 +48,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
-public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<ReverberationFurnaceTileEntity, ReverberationRecipe> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
+public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<ReverberationFurnaceTileEntity, ReverberationRecipe> implements IIEInventory, IEBlockInterfaces.IActiveState, IEBlockInterfaces.IInteractionObjectIE, IEBlockInterfaces.IProcessTile, IBlockBounds {
     private static final Set<BlockPos> redStonePos = ImmutableSet.of(
             new BlockPos(1, 0, 0)
     );
@@ -571,48 +571,5 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.REV_FURNACE.get();
-    }
-
-    @Nullable
-    @Override
-    public ITextComponent[] getOverlayText(PlayerEntity playerEntity, RayTraceResult rayTraceResult, boolean b) {
-        ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
-        assert master != null;
-
-        ArrayList<StringTextComponent> info = new ArrayList<>();
-        for (int offset = 0; offset < 2; offset++) {
-            assert master.getInventory() != null;
-            String FuelName = master.getInventory().get(FUEL_SLOT1 + offset).getDisplayName().getString();
-            String InputName = master.getInventory().get(INPUT_SLOT1 + offset).getDisplayName().getString();
-            String OutputName = master.getInventory().get(OUTPUT_SLOT1 + offset).getDisplayName().getString();
-
-            StringTextComponent FuelNames = new StringTextComponent("Fuel Slot[" + offset + "]: " + FuelName + " x" + master.getInventory().get(FUEL_SLOT1 + offset).getCount());
-            StringTextComponent InputNames = new StringTextComponent("Input Slot[" + offset + "]: " + InputName + " x" + master.getInventory().get(INPUT_SLOT1 + offset).getCount());
-            StringTextComponent OutputNames = new StringTextComponent("Output Slot[" + offset + "]: " + OutputName + " x" + master.getInventory().get(OUTPUT_SLOT1 + offset).getCount());
-
-            info.add(FuelNames);
-            info.add(InputNames);
-            info.add(OutputNames);
-        }
-
-        String TankOutputName = Objects.requireNonNull(master.getInternalTanks())[0].getFluid().getDisplayName().getString();
-
-        info.add(new StringTextComponent("Gas Output: " + TankOutputName + " x" + master.getInternalTanks()[0].getFluidAmount()));
-
-        if(master.burntime.length > FUEL_SLOT1) {
-            info.add(new StringTextComponent("Burn Time[1]: " + master.burntime[FUEL_SLOT1]));
-        }
-        if(master.burntime.length > FUEL_SLOT2) {
-            info.add(new StringTextComponent("Burn Time[2]: " + master.burntime[FUEL_SLOT2]));
-        }
-
-        info.add(new StringTextComponent("Pos in MB: " + posInMultiblock.toString()));
-
-        return info.toArray(new ITextComponent[info.size()]);
-    }
-
-    @Override
-    public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
-        return false;
     }
 }
