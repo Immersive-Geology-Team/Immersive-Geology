@@ -81,7 +81,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 case dust: case gear: case ingot: case nugget: case plate: case rod: case wire: case metal_oxide:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/" + i.getName());
                 case crystal:
-                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/raw_crystal_" + getCrystalFamily().getName());
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/crystal/raw_crystal_" + getCrystalFamily().getName());
                 default:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/" + i.getName());
             }
