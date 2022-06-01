@@ -10,20 +10,20 @@ import net.minecraft.item.Rarity;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialMineralKaolinite extends MaterialBaseMineral {
+public class MaterialMineralSaltpeter extends MaterialBaseMineral {
 
-    public MaterialMineralKaolinite() {
-        super("kaolinite");
+    public MaterialMineralSaltpeter() {
+        super("saltpeter");
     }
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xE5DFD1;
+        return 0xffffff;
     }
 
     @Override
     public CrystalFamily getCrystalFamily() {
-        return null;
+        return CrystalFamily.ORTHORHOMBIC;
     }
 
     @Override
@@ -39,23 +39,21 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
-    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
-        // TODO Auto-generated method stub
+    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
+    {
         return new LinkedHashSet<>(Arrays.asList(
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.ALUMINIUM, 2),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON, 2),
-                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 5)
-        ));
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.POTASSIUM),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.NITROGEN),
+                new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 3)
+        )
+        );
     }
 
+
     @Override
-    public Rarity getRarity() {
-        // TODO Auto-generated method stub
+    public Rarity getRarity()
+    {
         return Rarity.COMMON;
     }
 
-    @Override
-    protected boolean hasCrystal() {
-        return false;
-    }
 }
