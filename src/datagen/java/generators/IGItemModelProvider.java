@@ -118,8 +118,9 @@ public class IGItemModelProvider extends ItemModelProvider {
         withExistingParent(item_loc,
                 new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
                 .texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getPattern()));
-
+        log.warn("Attempting to set Texture for: " + item.getPattern().getName() + " " + item.getMaterial(MaterialTexture.base));
         if(item.getMaterial(MaterialTexture.overlay) != null) {
+            log.warn("Attempting to set Texture for: " + item.getPattern().getName() + " " + item.getMaterial(MaterialTexture.overlay));
             getBuilder(item_loc).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
         }
     }

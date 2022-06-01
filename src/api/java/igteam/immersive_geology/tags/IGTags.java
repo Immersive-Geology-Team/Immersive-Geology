@@ -119,6 +119,22 @@ public class IGTags {
                     }
                 }
             }
+            for (MaterialInterface<MaterialBaseMineral> mineral : MineralEnum.values()) {
+                if (mineral.hasPattern(pattern)) {
+                    switch(pattern){
+                        case ore: {
+                            for (StoneEnum stone : StoneEnum.values()) {
+                                createWrapperForPattern(pattern,  stone.get(), mineral.get());
+                            }
+                        }
+                        break;
+                        default :
+                        {
+                            createWrapperForPattern(pattern, mineral.get());
+                        }
+                    }
+                }
+            }
             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if(stone.hasPattern(pattern)){
                     createWrapperForPattern(pattern, stone.get());

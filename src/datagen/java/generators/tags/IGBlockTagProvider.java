@@ -62,7 +62,11 @@ public class IGBlockTagProvider extends BlockTagsProvider {
                         break;
                         default: {
                             Block block = mineral.getBlock(pattern);
-                            tag(mineral.getBlockTag(pattern)).add(block);
+                            if (block != null) {
+                                tag(mineral.getBlockTag(pattern)).add(block);
+                            } else {
+                                log.error("Failed to get Block with singleton Pattern: " + pattern.getName());
+                            }
                         }
                     }
                 }

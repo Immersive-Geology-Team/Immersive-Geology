@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:crushed_ore_vanadinite"
+  },
+  "input": {
+    "tag": "forge:dirty_crushed_ores/granite_vanadinite"
+  },
+  "waste": {
+    "item": "immersive_geology:stone_bit_granite"
+  }
+}

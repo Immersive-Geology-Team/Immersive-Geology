@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:crushed_ore_chromite"
+  },
+  "input": {
+    "tag": "forge:dirty_crushed_ores/stone_chromite"
+  },
+  "waste": {
+    "item": "immersive_geology:stone_bit_stone"
+  }
+}
