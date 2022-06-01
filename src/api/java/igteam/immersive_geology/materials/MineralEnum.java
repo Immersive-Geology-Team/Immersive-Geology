@@ -3,6 +3,7 @@ package igteam.immersive_geology.materials;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
+import igteam.immersive_geology.materials.data.mineral.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -21,7 +22,36 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import java.util.Set;
 
 public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
-    ;
+    Alumina(new MaterialMineralAlumina()),
+    Anatase(new MaterialMineralAnatase()),
+    Cuprite(new MaterialMineralCuprite()),
+    Zircon(new MaterialMineralZircon()),
+    Ilmenite(new MaterialMineralIlmenite()),
+    Cobaltite(new MaterialMineralCobaltite()),
+    Casserite(new MaterialMineralCassiterite()),
+    Chalcopyrite(new MaterialMineralChalcopyrite()),
+    Chromite(new MaterialMineralChromite()),
+    Cryolite(new MaterialMineralCryolite()),
+    Ferberite(new MaterialMineralFerberite()),
+    Fluorite(new MaterialMineralFluorite()),  //TODO Immersive Engineering has trouble with this as it's looking for a GEM version under the tag forge:gem/fluorite
+    Gypsum(new MaterialMineralGypsum()),
+    Hematite(new MaterialMineralHematite()),
+    Hubnerite(new MaterialMineralHubnerite()),
+    Magnetite(new MaterialMineralMagnetite()),
+    Pyrolusite(new MaterialMineralPyrolusite()),
+    RockSalt(new MaterialMineralRockSalt()),
+    SaltPeter(new MaterialMineralSaltpeter()),
+    Thorianite(new MaterialMineralThorianite()),
+    Thorite(new MaterialMineralThorite()),
+    Uraninite(new MaterialMineralUraninite()),
+    Sphalerite(new MaterialMineralSphalerite()),
+    Ullmannite(new MaterialMineralUllmannite()),
+    Galena(new MaterialMineralGalena()),
+    Pyrite(new MaterialMineralPyrite()),
+    Wolframite(new MaterialMineralWolframite()),
+    Vanadinite(new MaterialMineralVanadinite()),
+    Kaolinite(new MaterialMineralKaolinite()),
+    Unobtania(new MaterialMineralUnobtania());
 
     private final MaterialBaseMineral material;
 
