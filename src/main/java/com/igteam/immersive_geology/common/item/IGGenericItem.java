@@ -36,7 +36,9 @@ public class IGGenericItem extends Item implements IGItemType {
         }
 
         switch(pattern){
+            case ore_bit:
             case ore_chunk:
+            case dirty_crushed_ore:
                 Collections.reverse(materialList); //Doing this for Display Purpose
                 break;
             default: break;
