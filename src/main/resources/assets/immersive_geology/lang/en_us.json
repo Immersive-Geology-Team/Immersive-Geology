@@ -86,8 +86,6 @@
   "block.immersive_geology.chemicalvat" : "Vat",
   "block.immersive_geology.reverberation_furnace" : "Reverberation Furnace",
 
-  "static.immersive_geology.reinforced_refractory_brick": "Reinforced Refractory Bricks",
-
   "fluid.immersive_geology.fluid": "%s",
   "fluid.immersive_geology.slurry": "%s %s",
 
@@ -99,6 +97,7 @@
   "material.immersive_geology.regolith": "Regolith",
   "material.immersive_geology.gabbros": "Gabbros",
 
+  "material.immersive_geology.reinforced_refractory_brick": "Reinforced Refractory Brick",
   "material.immersive_geology.refractory_brick": "Refractory Brick",
   "material.immersive_geology.granite": "Granite",
   "material.immersive_geology.diorite": "Diorite",
@@ -183,6 +182,7 @@
   "material.immersive_geology.saltpeter": "Saltpeter",
   "material.immersive_geology.coal": "Coal",
   "material.immersive_geology.refractory": "Refractory",
+  "material.immersive_geology.reinforced_refractory": "Reinforced Refractory",
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",

@@ -50,6 +50,22 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
             return new ResourceLocation(IGApi.MODID, "block/static_block/refractory_brick");
         }
     }),
+    Reinforced_refractory(new MaterialMiscBase("reinforced_refractory_brick"){
+        @Override
+        protected boolean hasStorageBlock() {
+            return true;
+        }
+
+        @Override
+        protected boolean hasSlab() {
+            return true;
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+            return new ResourceLocation(IGApi.MODID, "block/static_block/reinforced_refractory_brick");
+        }
+    }),
 
     Coal(new MaterialMiscBase("coal"));
 
