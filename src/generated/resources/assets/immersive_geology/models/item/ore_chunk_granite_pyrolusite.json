@@ -2,6 +2,6 @@
   "parent": "immersive_geology:item/base/ig_base_item",
   "textures": {
     "layer0": "immersive_geology:item/greyscale/rock/rock_chunk",
-    "layer1": "immersive_geology:item/greyscale/rock/rock_chunk_vein"
+    "layer1": "immersive_geology:item/greyscale/rock/ore_chunk/rock_chunk_vein_tetragonal"
   }
 }

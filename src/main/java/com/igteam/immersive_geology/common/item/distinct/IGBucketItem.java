@@ -8,6 +8,7 @@ import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -62,20 +63,16 @@ public class IGBucketItem extends BucketItem implements IGItemType {
         setRegistryName(IGRegistrationHolder.getRegistryKey(this));
     }
 
-    @Override
-    public ITextComponent getDisplayName(ItemStack stack)
-    {
-        ArrayList<String> localizedNames = new ArrayList<>();
-        if(getFluid() == Fluids.EMPTY){
-            localizedNames.add("material.immersive_geology." + fluidMaterial.getName());
-            TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+".empty_"+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray(new Object[localizedNames.size()]));
-            return name;
+    public ITextComponent getDisplayName(ItemStack stack) {
+        List<String> materialList = new ArrayList<>();
+        if(fluidMaterial instanceof MaterialSlurryWrapper){
+            MaterialSlurryWrapper wrapper = (MaterialSlurryWrapper) fluidMaterial;
+            materialList.add(I18n.format("material.immersive_geology." + wrapper.getSoluteMaterial().getName()));
+            materialList.add(I18n.format("component.immersive_geology." + wrapper.getFluidBase().getName()));
+        } else {
+            materialList.add(I18n.format("material.immersive_geology." + fluidMaterial.getName()));
         }
-
-        localizedNames.add("material.immersive_geology." + fluidMaterial.getName());
-
-        TranslationTextComponent name = new TranslationTextComponent("item."+ IGLib.MODID+"."+ pattern.getName().toLowerCase(Locale.ENGLISH), localizedNames.toArray());
-        return name;
+        return new TranslationTextComponent("item.immersive_geology." + pattern.getName(), materialList.toArray());
     }
     @Override
     public ItemSubGroup getSubGroup() {

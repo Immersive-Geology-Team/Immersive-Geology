@@ -70,10 +70,15 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             ItemPattern i = (ItemPattern) pattern;
             switch(i) {
                 case ore_chunk:
+                    String chunk_vein_name = "rock_chunk_vein" + (getCrystalFamily() != null ? "_" + getCrystalFamily().getName() : "");
+                    ResourceLocation chunkLoc = new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_chunk/" + chunk_vein_name);
+                    return chunkLoc;
                 case stone_chunk:
-                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_chunk_vein");
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_chunk/rock_chunk_vein");
                 case ore_bit: case stone_bit:
-                    return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/rock_bit_vein");
+                    String bit_vein_name = "rock_bit_vein" + (getCrystalFamily() != null ? "_" + getCrystalFamily().getName() : "");
+                    ResourceLocation bitLoc = new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_bit/" + bit_vein_name);
+                    return bitLoc;
                 case dirty_crushed_ore: case crushed_ore:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_ore");
                 case clay: case slag:
