@@ -65,7 +65,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                 IGGenericBlockItem item = (IGGenericBlockItem) i;
                 IGBlockType block = item.getIGBlockType();
                 MaterialPattern pattern = block.getPattern();
-
+//TODO Muddykat, please, "just move the instance check into the method itself"
                 if(pattern instanceof BlockPattern) {
                     BlockPattern blockPattern = (BlockPattern) pattern;
                     if(block.getBlock() instanceof IGGenericBlock) {
