@@ -18,9 +18,20 @@ public class BloomeryRecipeBuilder extends IEFinishedRecipe<BloomeryRecipeBuilde
         return new BloomeryRecipeBuilder().addResult(result);
     }
 
-    public static BloomeryRecipeBuilder builder(ItemStack result)
-    {
-        return new BloomeryRecipeBuilder().addResult(result);
+    public static BloomeryRecipeBuilder builder(ItemStack result, IngredientWithSize input){
+        BloomeryRecipeBuilder builder = new BloomeryRecipeBuilder();
+        builder.addResult(result);
+        builder.addIngredient("item_input", input);
+
+        return builder;
+    }
+
+    public static BloomeryRecipeBuilder builder(ItemStack result, ItemStack input){
+        BloomeryRecipeBuilder builder = new BloomeryRecipeBuilder();
+        builder.addResult(result);
+        builder.addIngredient("item_input", IngredientWithSize.of(input));
+
+        return builder;
     }
 
     public static BloomeryRecipeBuilder builder(ITag<Item> result, int count)
@@ -31,12 +42,5 @@ public class BloomeryRecipeBuilder extends IEFinishedRecipe<BloomeryRecipeBuilde
     public static BloomeryRecipeBuilder builder(IngredientWithSize result)
     {
         return new BloomeryRecipeBuilder().addResult(result);
-    }
-
-    public BloomeryRecipeBuilder addItemInput(ItemStack input){
-        if(!input.isEmpty()) {
-            this.addIngredient("item_input", IngredientWithSize.of(input));
-        }
-        return this;
     }
 }

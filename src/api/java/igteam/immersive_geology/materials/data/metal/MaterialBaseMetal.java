@@ -51,6 +51,17 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     }
                 }
             };
+
+            //Also note Osmium is a Native metal, so yeah I don't think that'd work for it... May need to hardcode the Bloomery recipes, it may just be better to do so
+
+            if (!hasExistingImplementation()) { //TODO Fix this, essentially when something has an existing implementation EG: Silver, it already has an Ingot, so an Ingot pattern will not retrieve the ingot, we'd need to use a tag for output.
+                new IGProcessingStage(this, "Roasting for Native Metals") {
+                    @Override
+                    protected void describe() {
+                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
+                    }
+                };
+            }
         }
     }
 

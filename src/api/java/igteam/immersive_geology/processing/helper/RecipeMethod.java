@@ -3,6 +3,7 @@ package igteam.immersive_geology.processing.helper;
 public enum RecipeMethod {
     Crafting,
     Separator,
+    Bloomery,
     Chemical;
 
     //Used to differentiate method types when using,

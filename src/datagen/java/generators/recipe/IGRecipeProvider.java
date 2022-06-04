@@ -8,9 +8,11 @@ import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.builders.BloomeryRecipeBuilder;
 import igteam.immersive_geology.processing.builders.SeparatorRecipeBuilder;
 import igteam.immersive_geology.processing.builders.VatRecipeBuilder;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
+import igteam.immersive_geology.processing.methods.IGBloomeryMethod;
 import igteam.immersive_geology.processing.methods.IGChemicalMethod;
 import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import igteam.immersive_geology.processing.methods.IGSeparatorMethod;
@@ -55,6 +57,10 @@ public class IGRecipeProvider extends RecipeProvider {
                                 break;
                             case Chemical:
                                 buildChemicalMethods((IGChemicalMethod) method, consumer);
+                                break;
+                            case Bloomery:
+                                buildBloomeryMethods((IGBloomeryMethod) method, consumer);
+                                break;
                         }
                     }
                 }
@@ -63,6 +69,7 @@ public class IGRecipeProvider extends RecipeProvider {
     }
 
     private void buildCraftingMethods(IGCraftingMethod method, Consumer<IFinishedRecipe> consumer){
+        //TODO add in Shaped Crafting
         ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapelessRecipe(method.getResult(), method.getResultAmount());
 
         for (ITag<Item> tag : method.getInputTags()) {
@@ -85,6 +92,14 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.info("[" + method.getMethodName() + "]");
         VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
         recipe.build(consumer, toRL("vat/vat_" + Objects.requireNonNull(method.getMethodName())));
+    }
+
+    private void buildBloomeryMethods(IGBloomeryMethod method, Consumer<IFinishedRecipe> consumer){
+        logger.info("Data Gen for Bloomery Recipes");
+        logger.info("[" + method.getMethodName() + "]");
+        BloomeryRecipeBuilder recipe = BloomeryRecipeBuilder.builder(method.getItemResult(), method.getItemInput());
+        recipe.setTime(method.getTime());
+        recipe.build(consumer, toRL("bloomery/roast_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();
