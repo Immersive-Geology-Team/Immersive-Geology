@@ -10,7 +10,9 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          {}
+          {
+            "tag": "forge:ingots/silver"
+          }
         ]
       }
     },

@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IEApi;
+import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -26,6 +28,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 import static igteam.immersive_geology.main.IGRegistryProvider.getRegistryKey;
@@ -117,8 +120,25 @@ public abstract class MaterialBase {
     }
 
     public ITag.INamedTag<?> getTag(MaterialPattern pattern) {
+
         if (pattern instanceof ItemPattern) {
             ItemPattern i = (ItemPattern) pattern;
+            try {
+                EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+                IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+
+                switch (i) {
+                    case ingot:
+                        return ieMetalTags.ingot;
+                    case dust:
+                        return ieMetalTags.dust;
+                    case nugget:
+                        return ieMetalTags.nugget;
+                    case plate:
+                        return ieMetalTags.plate;
+                } // Now we can get IE Tags via IG Methods!
+            } catch (IllegalArgumentException ignored){};
+
             HashMap<String, ITag.INamedTag<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
@@ -148,6 +168,8 @@ public abstract class MaterialBase {
             logger.info(data_map.get(wrap).getName());
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
+
+        //Last Attempt to
 
         return null;
     }

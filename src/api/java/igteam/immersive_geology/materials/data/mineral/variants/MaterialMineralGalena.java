@@ -1,8 +1,11 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import net.minecraft.item.Rarity;
@@ -33,7 +36,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
         new IGProcessingStage(this,"Extraction Stage") {
             @Override
             protected void describe() {
-
+                IGApi.getNewLogger().info("Attempting to get IE Ingot with IG Methods: " + MetalEnum.Gold.getTag(ItemPattern.ingot).getName());
             }
         };
     }
