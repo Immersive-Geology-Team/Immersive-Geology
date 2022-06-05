@@ -46,6 +46,11 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         }
 
         @Override
+        protected boolean hasStairs() {
+            return true;
+        }
+
+        @Override
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
             return new ResourceLocation(IGApi.MODID, "block/static_block/refractory_brick");
         }
@@ -61,6 +66,10 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
             return true;
         }
 
+        @Override
+        protected boolean hasStairs() {
+            return true;
+        }
         @Override
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
             return new ResourceLocation(IGApi.MODID, "block/static_block/reinforced_refractory_brick");

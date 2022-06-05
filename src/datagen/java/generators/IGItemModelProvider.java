@@ -3,6 +3,7 @@ package generators;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
@@ -84,6 +85,11 @@ public class IGItemModelProvider extends ItemModelProvider {
                         IGSlabBlock igBlock = (IGSlabBlock) item.getBlock();
                         generateSlabItemBlock(igBlock, item);
                     }
+                    if (block.getBlock() instanceof IGStairsBlock)
+                    {
+                        IGStairsBlock igBlock = (IGStairsBlock) item.getBlock();
+                        generateStairsItemBlock(igBlock, item);
+                    }
                 }
             }
         });
@@ -92,9 +98,16 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     }
 
-    private void generateSlabItemBlock(IGSlabBlock slab, IGGenericBlockItem item) {
+    private void generateStairsItemBlock(IGStairsBlock slab, IGGenericBlockItem item) {
         withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/slab/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
+                        (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
+    }
+
+
+    private void generateSlabItemBlock(IGSlabBlock slab, IGGenericBlockItem item) {
+        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/stairs/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
                         (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
     }
 
