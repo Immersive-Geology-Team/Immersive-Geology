@@ -87,7 +87,7 @@ public class IGRecipeProvider extends RecipeProvider {
         recipe.addItemInput(method.getItemInput());
         recipe.setWasteMult(method.getWasteMult());
         recipe.setTime(method.getTime());
-        recipe.build(consumer, toRL("roasting/refine_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, toRL("roasting/roast_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildCalcinationMethods(IGCalcinationMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -123,7 +123,7 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.info("Data Gen for Chemical Vat Recipes");
         logger.info("[" + method.getMethodName() + "]");
         VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
-        recipe.build(consumer, toRL("vat/vat_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, toRL("vat/leach_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildBloomeryMethods(IGBloomeryMethod method, Consumer<IFinishedRecipe> consumer){
@@ -131,7 +131,7 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.info("[" + method.getMethodName() + "]");
         BloomeryRecipeBuilder recipe = BloomeryRecipeBuilder.builder(method.getItemResult(), method.getItemInput());
         recipe.setTime(method.getTime());
-        recipe.build(consumer, toRL("bloomery/roast_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, toRL("bloomery/refine_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();
