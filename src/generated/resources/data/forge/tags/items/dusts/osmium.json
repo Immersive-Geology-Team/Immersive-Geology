@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:dust_osmium",
     "immersive_geology:dust_osmium"
   ]
 }

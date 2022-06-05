@@ -26,6 +26,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Anatase(new MaterialMineralAnatase()),
     Cuprite(new MaterialMineralCuprite()),
     Zircon(new MaterialMineralZircon()),
+    Monazite(new MaterialMineralMonazite()),
     Ilmenite(new MaterialMineralIlmenite()),
     Cobaltite(new MaterialMineralCobaltite()),
     Cassiterite(new MaterialMineralCassiterite()),

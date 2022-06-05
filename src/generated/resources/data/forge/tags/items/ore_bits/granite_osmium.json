@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:ore_bit_granite_osmium",
     "immersive_geology:ore_bit_granite_osmium"
   ]
 }

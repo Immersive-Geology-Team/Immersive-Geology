@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:storage_osmium",
     "immersive_geology:storage_osmium"
   ]
 }
