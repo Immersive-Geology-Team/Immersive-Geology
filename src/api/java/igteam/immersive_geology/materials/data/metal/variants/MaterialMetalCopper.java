@@ -25,6 +25,10 @@ public class MaterialMetalCopper extends MaterialBaseMetal {
     }
 
     @Override
+    protected boolean hasMetalOxide() {
+        return true;
+    }
+    @Override
     public boolean hasExistingImplementation() {
         return true;
     }

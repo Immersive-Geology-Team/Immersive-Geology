@@ -3,20 +3,13 @@ package generators.recipe;
 
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.builders.BloomeryRecipeBuilder;
-import igteam.immersive_geology.processing.builders.SeparatorRecipeBuilder;
-import igteam.immersive_geology.processing.builders.VatRecipeBuilder;
+import igteam.immersive_geology.processing.builders.*;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
-import igteam.immersive_geology.processing.methods.IGBloomeryMethod;
-import igteam.immersive_geology.processing.methods.IGChemicalMethod;
-import igteam.immersive_geology.processing.methods.IGCraftingMethod;
-import igteam.immersive_geology.processing.methods.IGSeparatorMethod;
-import igteam.immersive_geology.processing.recipe.VatRecipe;
+import igteam.immersive_geology.processing.methods.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
@@ -61,11 +54,50 @@ public class IGRecipeProvider extends RecipeProvider {
                             case Bloomery:
                                 buildBloomeryMethods((IGBloomeryMethod) method, consumer);
                                 break;
+                            case Calcination:
+                                buildCalcinationMethods((IGCalcinationMethod) method, consumer);
+                                break;
+                            case Roasting:
+                                buildRoastingMethods((IGRoastingMethod) method, consumer);
+                                break;
+                            case Crystalization:
+                                buildCrystallizationMethods((IGCrystallizationMethod) method, consumer);
+                                break;
                         }
                     }
                 }
             }
         }
+    }
+
+    private void buildCrystallizationMethods(IGCrystallizationMethod method, Consumer<IFinishedRecipe> consumer) {
+        logger.info("Data Gen for Crystallization Recipes");
+        logger.info("[" + method.getMethodName() + "]");
+        CrystalizerRecipeBuilder recipe = CrystalizerRecipeBuilder.builder(method.getItemResult());
+        recipe.addFluidInput(method.getFluidInput());
+        recipe.setTime(method.getTime());
+        recipe.setEnergy(method.getEnergy());
+        recipe.build(consumer, toRL("crystallization/crystallize_" + Objects.requireNonNull(method.getMethodName())));
+    }
+
+    private void buildRoastingMethods(IGRoastingMethod method, Consumer<IFinishedRecipe> consumer) {
+        logger.info("Data Gen for Roasting Recipes");
+        logger.info("[" + method.getMethodName() + "]");
+        ReverberationRecipeBuilder recipe = ReverberationRecipeBuilder.builder(method.getItemResult());
+        recipe.addItemInput(method.getItemInput());
+        recipe.setWasteMult(method.getWasteMult());
+        recipe.setTime(method.getTime());
+        recipe.build(consumer, toRL("roasting/refine_" + Objects.requireNonNull(method.getMethodName())));
+    }
+
+    private void buildCalcinationMethods(IGCalcinationMethod method, Consumer<IFinishedRecipe> consumer) {
+        logger.info("Data Gen for Roasting Recipes");
+        logger.info("[" + method.getMethodName() + "]");
+        CalcinationRecipeBuilder recipe = CalcinationRecipeBuilder.builder(method.getItemResult());
+        recipe.addItemInput(method.getItemInput());
+        recipe.setEnergy(method.getEnergy());
+        recipe.setTime(method.getTime());
+        recipe.build(consumer, toRL("calcination/decompose_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildCraftingMethods(IGCraftingMethod method, Consumer<IFinishedRecipe> consumer){

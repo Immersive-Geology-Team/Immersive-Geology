@@ -20,11 +20,6 @@ public class MaterialMetalOsmium extends MaterialBaseMetal {
     }
 
     @Override
-    public boolean isNative() {
-        return true;
-    }
-
-    @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.HEXAGONAL;
     }

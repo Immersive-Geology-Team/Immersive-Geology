@@ -1,10 +1,7 @@
 package igteam.immersive_geology.processing.helper;
 
 import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.methods.IGBloomeryMethod;
-import igteam.immersive_geology.processing.methods.IGChemicalMethod;
-import igteam.immersive_geology.processing.methods.IGCraftingMethod;
-import igteam.immersive_geology.processing.methods.IGSeparatorMethod;
+import igteam.immersive_geology.processing.methods.*;
 
 public interface IRecipeBuilder {
     static IGCraftingMethod crafting(IGProcessingStage parentStage) { return new IGCraftingMethod(parentStage);}
@@ -12,5 +9,11 @@ public interface IRecipeBuilder {
     static IGChemicalMethod chemical(IGProcessingStage parentStage) { return new IGChemicalMethod(parentStage);}
 
     static IGBloomeryMethod bloomery(IGProcessingStage parentStage) {return new IGBloomeryMethod(parentStage);}
+
+    static IGRoastingMethod roast(IGProcessingStage parentStage) {return new IGRoastingMethod(parentStage);}
+
+    static IGCalcinationMethod decompose(IGProcessingStage parentStage) {return new IGCalcinationMethod(parentStage);}
+
+    static IGCrystallizationMethod crystalize(IGProcessingStage parentStage) {return new IGCrystallizationMethod(parentStage);}
 
 }

@@ -19,10 +19,8 @@ public class CalcinationRecipeBuilder extends IEFinishedRecipe<CalcinationRecipe
         return builder;
     }
 
-    public CalcinationRecipeBuilder addItemInput(ItemStack input){
-        if(!input.isEmpty()) {
-            this.addIngredient("item_input", IngredientWithSize.of(input));
-        }
+    public CalcinationRecipeBuilder addItemInput(IngredientWithSize input){
+        this.addIngredient("item_input", input);
         return this;
     }
 }

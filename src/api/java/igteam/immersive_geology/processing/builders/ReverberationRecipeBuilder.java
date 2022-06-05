@@ -25,10 +25,9 @@ public class ReverberationRecipeBuilder extends IEFinishedRecipe<ReverberationRe
         });
     }
 
-    public ReverberationRecipeBuilder addItemInput(ItemStack input){
-        if(!input.isEmpty()) {
-            this.addIngredient("item_input", IngredientWithSize.of(input));
-        }
+    public ReverberationRecipeBuilder addItemInput(IngredientWithSize input){
+        this.addIngredient("item_input", input);
+
         return this;
     }
 }

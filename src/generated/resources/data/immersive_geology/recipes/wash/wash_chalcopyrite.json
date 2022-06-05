@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:metal_oxide_iron"
+  },
+  "input": {
+    "tag": "forge:slags/chalcopyrite"
+  },
+  "waste": {
+    "item": "immersive_geology:metal_oxide_copper"
+  }
+}

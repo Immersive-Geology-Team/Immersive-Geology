@@ -21,15 +21,13 @@ public class IGSeparatorMethod extends IGProcessingMethod {
     }
 
     private ItemStack result;
-    private int rCount;
     private ITag<Item> input;
     private ItemStack waste;
 
-    public void create(ItemStack output, int count, ITag<Item> input, @Nonnull ItemStack waste){
+    public void create(ITag<Item> input, ItemStack output, @Nonnull ItemStack waste){
         String sanitizedTagName = input.toString().substring(input.toString().indexOf("/")+1, input.toString().indexOf("]"));
         methodName = sanitizedTagName;
         this.result = output;
-        this.rCount = count;
         this.input = input;
         this.waste = waste;
     }
@@ -38,9 +36,6 @@ public class IGSeparatorMethod extends IGProcessingMethod {
         return result;
     }
 
-    public int getResultCount(){
-        return rCount;
-    }
 
     public ITag<Item> getInput(){
         return input;

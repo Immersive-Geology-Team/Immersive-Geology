@@ -54,8 +54,6 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     protected static final int inputSlot = 0, outputSlot = 1, fuelSlot = 2;
 
     protected float progress = 0;
-    protected int maxProgress = 100;
-
     private float currentBurnTime = 0;
 
     public final Supplier<BloomeryRecipe> cachedRecipe = CachedRecipe.cached(
@@ -223,8 +221,8 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                     dirty = burnFuelAsNeeded();;
                 }
                 if(isBurning() && inventory.get(outputSlot).getCount() < 64) {
-                    progress += (1 * recipe.getTime()); //how fast does it progress?
-                    if (progress >= maxProgress) {
+                    progress++;
+                    if (progress >= recipe.getTime()) {
                         ItemStack outputSlotItem = inventory.get(outputSlot);
                         if (outputSlotItem.isEmpty()) {
                             inventory.set(outputSlot, recipe.getRecipeOutput());
