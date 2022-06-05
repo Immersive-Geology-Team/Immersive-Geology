@@ -45,8 +45,8 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
         });
 
         //outputs
-        this.addSlot(new IGSlot(this.inv, 2, 36, 53));
-        this.addSlot(new IGSlot(this.inv, 3, 116, 53));
+        this.addSlot(new IGSlot(this.inv, 2, 67, 37));
+        this.addSlot(new IGSlot(this.inv, 3, 147, 37));
 
         this.slotCount = 6;
 
