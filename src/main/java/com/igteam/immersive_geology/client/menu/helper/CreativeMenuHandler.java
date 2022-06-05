@@ -1,9 +1,13 @@
 package com.igteam.immersive_geology.client.menu.helper;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -109,9 +113,12 @@ public class CreativeMenuHandler {
 
             AbstractGui.blit(matrixStack, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height, 256, 256);
 
-            ItemStack stack = group.getMaterial().getStack(group.getPattern());
+            MaterialPattern groupPattern = group.getPattern();
+
+            ItemStack stack = group.getMaterial().getStack(groupPattern); //  CAN'T GET ANY BLOCKS for some reason, probs Order of Operations
+
             if(stack.isEmpty()) // A nice quick and dirty fix, used when an icon has 'dual' materials  ~Muddykat
-                stack = group.getMaterial().getStack(group.getPattern(), StoneEnum.Stone);
+                stack = group.getMaterial().getStack(groupPattern, StoneEnum.Stone);
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
                 mc.getItemRenderer().renderItemIntoGUI(stack, x + 1, y + 2);

@@ -16,7 +16,7 @@ public class MaterialMetalNeodymium extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xDADBDD;
+        return 0xAB9CA3;
     }
 
     @Override

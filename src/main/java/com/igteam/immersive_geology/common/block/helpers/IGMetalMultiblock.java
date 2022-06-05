@@ -11,9 +11,9 @@ import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -69,7 +69,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
 
     @Override
     public MaterialPattern getPattern() {
-        return MiscPattern.machine;
+        return BlockPattern.machine;
     }
 
     @Override

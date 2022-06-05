@@ -20,6 +20,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 public class IGGenericBlockItem extends BlockItem implements IGItemType {
@@ -65,6 +66,12 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
         }
 
         return this.pattern + data.toString();
+    }
+
+    @Nonnull
+    @Override
+    public BlockPattern getBlockPattern() {
+        return (BlockPattern) getIGBlockType().getPattern();
     }
 
     public void addMaterial(MaterialTexture t, MaterialInterface material){

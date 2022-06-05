@@ -17,7 +17,7 @@ public class MaterialMetalCobalt extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0x0047AB;
+        return 0x1A79FF;
     }
 
     @Override

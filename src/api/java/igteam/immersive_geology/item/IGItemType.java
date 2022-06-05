@@ -1,10 +1,12 @@
 package igteam.immersive_geology.item;
 
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 
 public interface IGItemType {
@@ -19,4 +21,5 @@ public interface IGItemType {
     MaterialPattern getPattern();
 
     String getHolderKey();
+    BlockPattern getBlockPattern();
 }

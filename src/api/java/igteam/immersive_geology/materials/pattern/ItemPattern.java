@@ -18,10 +18,10 @@ public enum ItemPattern implements MaterialPattern {
     rod(ItemSubGroup.processed),
     plate(ItemSubGroup.processed),
     nugget(ItemSubGroup.processed),
-    crystal,
-    clay(ItemSubGroup.misc, ""),
+    crystal(ItemSubGroup.processed),
+    clay(ItemSubGroup.natural, ""),
     fuel,
-    slag(ItemSubGroup.misc),
+    slag(ItemSubGroup.processed),
     flask(ItemSubGroup.misc),
     bucket(ItemSubGroup.misc),
     block_item;

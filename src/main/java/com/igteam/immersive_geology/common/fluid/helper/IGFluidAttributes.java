@@ -1,11 +1,9 @@
 package com.igteam.immersive_geology.common.fluid.helper;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
-import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +32,7 @@ public class IGFluidAttributes extends FluidAttributes {
             IGFluid fluid = (IGFluid) stack.getFluid();
             MaterialPattern pattern = fluid.getPattern();
             List<String> materialList = new ArrayList<>();
-            if(pattern == MiscPattern.slurry){
+            if(pattern == FluidPattern.slurry){
                 MaterialSlurryWrapper wrapper = (MaterialSlurryWrapper) fluid.getFluidMaterial();
                 materialList.add(I18n.format("material.immersive_geology." + wrapper.getSoluteMaterial().getName()));
                 materialList.add(I18n.format("component.immersive_geology." + wrapper.getFluidBase().getName()));

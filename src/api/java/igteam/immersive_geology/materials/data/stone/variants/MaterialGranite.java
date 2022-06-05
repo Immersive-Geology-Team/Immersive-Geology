@@ -5,9 +5,9 @@ import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class MaterialGranite extends MaterialBaseStone {
             }
         }
 
-        if(p instanceof MiscPattern){
+        if(p instanceof FluidPattern){
 
         }
 

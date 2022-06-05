@@ -9,7 +9,7 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -164,12 +164,12 @@ public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     }
 
     @Override
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern) {
+    public ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern) {
         return material.getFluidTag(pattern);
     }
 
     @Override
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials) {
+    public ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern, MaterialBase... materials) {
         return material.getFluidTag(pattern, materials);
     }
 

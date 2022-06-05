@@ -11,6 +11,7 @@ import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
@@ -92,6 +93,11 @@ public class IGBucketItem extends BucketItem implements IGItemType {
     @Override
     public String getHolderKey() {
         return IGRegistryProvider.getRegistryKey(fluidMaterial, pattern).getPath();
+    }
+
+    @Override
+    public BlockPattern getBlockPattern() {
+        return null;
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.igteam.immersive_geology.client.menu.helper;
 
+import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -15,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +55,7 @@ public class IGItemGroup extends ItemGroup {
         selectedGroup = group;
     }
 
+    Logger log = IGApi.getNewLogger();
     public static ItemSubGroup getCurrentSubGroup() {
         return selectedGroup;
     }
@@ -62,8 +67,8 @@ public class IGItemGroup extends ItemGroup {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if(item instanceof IGItemType){
                 IGItemType type = (IGItemType) item;
-                if(type.getSubGroup() == selectedGroup) {
-                    MaterialPattern pattern = type.getPattern();
+                MaterialPattern pattern = type.getPattern();
+                if(type.getSubGroup() == selectedGroup && pattern != ItemPattern.block_item) {
                     if (itemMap.containsKey(pattern)) {
                         ArrayList<Item> list = itemMap.get(pattern);
                         list.add(item);
@@ -75,11 +80,28 @@ public class IGItemGroup extends ItemGroup {
                     }
                 }
             }
+
+            if(item instanceof IGGenericBlockItem){
+                IGBlockType blockType = ((IGGenericBlockItem) item).getIGBlockType();
+                MaterialPattern blockPattern = blockType.getPattern();
+                if(blockPattern.getSubGroup() == selectedGroup){
+                    if (itemMap.containsKey(blockPattern)) {
+                        ArrayList<Item> list = itemMap.get(blockPattern);
+                        list.add(item);
+                        itemMap.replace(blockPattern, list);
+                    } else {
+                        ArrayList<Item> list = new ArrayList<>();
+                        list.add(item);
+                        itemMap.put(blockPattern, list);
+                    }
+                }
+            }
         }
+
         ArrayList<MaterialPattern> allPatternList = new ArrayList<>();
         allPatternList.addAll(Arrays.asList(ItemPattern.values()));
         allPatternList.addAll(Arrays.asList(BlockPattern.values()));
-        allPatternList.addAll(Arrays.asList(MiscPattern.values()));
+        allPatternList.addAll(Arrays.asList(FluidPattern.values()));
 
         for (MaterialPattern pattern : allPatternList)
         {

@@ -15,7 +15,7 @@ public class MaterialMetalVanadium extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xaaa9ad;
+        return 0x8e1e1d;
     }
 
     @Override

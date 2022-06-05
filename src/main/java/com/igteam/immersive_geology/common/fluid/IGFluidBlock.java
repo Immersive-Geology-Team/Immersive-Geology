@@ -4,8 +4,8 @@ import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -127,7 +127,7 @@ public class IGFluidBlock extends FlowingFluidBlock implements IGBlockType, IFla
 
     @Override
     public int getColourForIGBlock(int pass) {
-        return igFluid.getFluidMaterial().getColor(MiscPattern.fluid);
+        return igFluid.getFluidMaterial().getColor(FluidPattern.fluid);
     }
 
     @Override

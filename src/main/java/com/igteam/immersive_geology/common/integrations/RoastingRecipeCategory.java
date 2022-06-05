@@ -3,10 +3,9 @@ package com.igteam.immersive_geology.common.integrations;
 import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import igteam.immersive_geology.materials.FluidEnum;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -45,7 +44,7 @@ public class RoastingRecipeCategory extends IGRecipeCategory<ReverberationRecipe
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
         //BAD IDEA
         ingredients.setOutput(VanillaTypes.FLUID,
-                new FluidStack(FluidEnum.SulfuricAcid.getFluid(MiscPattern.fluid).getFluid(),
+                new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid).getFluid(),
                         (int) (recipe.getWasteMultipler() * 125)));
     }
 

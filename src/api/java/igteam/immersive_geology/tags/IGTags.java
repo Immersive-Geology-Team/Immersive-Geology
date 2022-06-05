@@ -12,7 +12,7 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -30,7 +30,7 @@ public class IGTags {
     private static Logger logger = IGApi.getNewLogger();
     public static HashMap<ItemPattern, HashMap<String, ITag.INamedTag<Item>>> IG_ITEM_TAGS = new HashMap<>();
     public static HashMap<BlockPattern, HashMap<String, ITag.INamedTag<Block>>> IG_BLOCK_TAGS = new HashMap<>();
-    public static HashMap<MiscPattern, HashMap<String, ITag.INamedTag<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
+    public static HashMap<FluidPattern, HashMap<String, ITag.INamedTag<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
     public static void initialize(){
         logger.log(Level.INFO, "Initializing Tags");
@@ -80,15 +80,15 @@ public class IGTags {
             }
         }
 
-        for(MiscPattern pattern : MiscPattern.values()){
+        for(FluidPattern pattern : FluidPattern.values()){
             IG_FLUID_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Fluid>>());
-            if(pattern == MiscPattern.fluid) {
+            if(pattern == FluidPattern.fluid) {
                 for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
                     createWrapperForPattern(pattern, fluid.get());
                 }
             }
 
-            if(pattern == MiscPattern.slurry){
+            if(pattern == FluidPattern.slurry){
                 logger.info("Creating Slurry Tags");
                 for (SlurryEnum slurry : SlurryEnum.values()) {
                     HashSet<MaterialSlurryWrapper> slurryWrappers = slurry.getEntries();
@@ -167,8 +167,8 @@ public class IGTags {
                 IG_BLOCK_TAGS.put(b, map);
             }
 
-            if (p instanceof MiscPattern) {
-                MiscPattern m = (MiscPattern) p;
+            if (p instanceof FluidPattern) {
+                FluidPattern m = (FluidPattern) p;
                 HashMap<String, ITag.INamedTag<Fluid>> map = IG_FLUID_TAGS.get(m);
 
                     LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));

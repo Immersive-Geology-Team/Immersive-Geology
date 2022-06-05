@@ -2,6 +2,7 @@ package igteam.immersive_geology.materials.data.metal.variants;
 
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
 import java.util.Arrays;
@@ -16,11 +17,16 @@ public class MaterialMetalPlatinum extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xe7e7f7;
+        return p == ItemPattern.metal_oxide ? 0x65698C : 0xe7e7f7;
     }
 
     @Override
     public boolean isNative() {
+        return true;
+    }
+
+    @Override
+    protected boolean hasMetalOxide() {
         return true;
     }
 

@@ -13,7 +13,7 @@ import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMulti
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import igteam.immersive_geology.materials.FluidEnum;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,11 +24,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -454,7 +451,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             ReverberationFurnaceTileEntity master = this.master();
             if(master != null) {
                 if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
-                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(MiscPattern.fluid), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.common.block.blocks;
 
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
@@ -73,16 +74,14 @@ public class IGStairsBlock extends StairsBlock implements IGBlockType {
     public Block getBlock() {
         return this;
     }
-    public String getParentTexture() {
-        return parentTexture;
-    }
 
-    public IGStairsBlock setParentTexture(String parentTexture) {
-        this.parentTexture = parentTexture;
-        return this;
-    }
     public MaterialInterface getMaterial(MaterialTexture t){
         return materialMap.get(t);
+    }
+
+    public void finalizeData(){
+        itemBlock.finalizeData();
+        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
     }
 }
 

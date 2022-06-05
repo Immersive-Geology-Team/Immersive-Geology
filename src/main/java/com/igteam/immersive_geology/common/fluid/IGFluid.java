@@ -12,7 +12,7 @@ import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -77,12 +77,12 @@ public class IGFluid extends FlowingFluid {
 
     public IGFluid(MaterialInterface<?> material)
     {
-        this(material.get(), null, MiscPattern.fluid);
+        this(material.get(), null, FluidPattern.fluid);
     }
 
     public IGFluid(MaterialBase material)
     {
-        this(material, null, MiscPattern.fluid);
+        this(material, null, FluidPattern.fluid);
     }
 
     public IGFluid(MaterialBase material, @Nullable Consumer<IGFluidAttributes.IGBuilder> buildAttributes, MaterialPattern pattern)
@@ -94,14 +94,14 @@ public class IGFluid extends FlowingFluid {
     {
         this.fluidMaterial = material;
         this.fluidName = material.getName();
-        this.stillTex = material.getTextureLocation(MiscPattern.fluid, 0);
-        this.flowingTex = material.getTextureLocation(MiscPattern.fluid, 1);
+        this.stillTex = material.getTextureLocation(FluidPattern.fluid, 0);
+        this.flowingTex = material.getTextureLocation(FluidPattern.fluid, 1);
         this.buildAttributes = buildAttributes;
         this.pattern = pattern;
 
         String registryName = pattern.getName() + "_" + material.getName();
 
-        boolean isSlurry = (pattern == MiscPattern.slurry);
+        boolean isSlurry = (pattern == FluidPattern.slurry);
 
         if(!isSource){
             flowing = this;

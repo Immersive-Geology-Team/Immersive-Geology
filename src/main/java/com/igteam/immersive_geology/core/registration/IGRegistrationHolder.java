@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.registration;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
@@ -19,13 +20,12 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -90,7 +90,7 @@ public class IGRegistrationHolder {
             });
 
             //Misc Patterns
-            Arrays.stream(MiscPattern.values()).iterator().forEachRemaining((pattern) -> {
+            Arrays.stream(FluidPattern.values()).iterator().forEachRemaining((pattern) -> {
                 if(m.hasPattern(pattern)){
                     registerForFluidTypes(m, pattern);
                 }
@@ -153,6 +153,12 @@ public class IGRegistrationHolder {
                 register(slab.asItem());
                 register(slab);
                 break;
+            case stairs:
+                IGStairsBlock stairs = new IGStairsBlock(m);
+                stairs.finalizeData();
+                register(stairs.asItem());
+                register(stairs);
+                break;
             default:
                 IGGenericBlock multi_block = new IGGenericBlock(m, p);
                 multi_block.finalizeData();
@@ -163,19 +169,17 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, MiscPattern p){
-        if(p != MiscPattern.machine) {
-            //m.get().getRarity() has a loader constraint violation, API and Minecraft weirdness? Worked fine before...
-            IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
-            if(m.get().hasFlask()){
-                register(fluid.getFluidContainer());
-            }
-            register(fluid);
+    private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, FluidPattern p){
+        //m.get().getRarity() has a loader constraint violation, API and Minecraft weirdness? Worked fine before...
+        IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
+        if(m.get().hasFlask()){
+            register(fluid.getFluidContainer());
         }
+        register(fluid);
     }
 
     private static void registerForSlurryTypes(MaterialSlurryWrapper slurry){
-        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(MiscPattern.slurry), false), MiscPattern.slurry);
+        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(FluidPattern.slurry), false), FluidPattern.slurry);
         logger.info("Registering: " + slurry.getName());
         if(slurry.hasFlask()){
             register(fluid.getFluidContainer());

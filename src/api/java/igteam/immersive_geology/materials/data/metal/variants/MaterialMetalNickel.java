@@ -15,7 +15,7 @@ public class MaterialMetalNickel extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xb3c1b3;
+        return 0x7FFFD4;
     }
 
     @Override

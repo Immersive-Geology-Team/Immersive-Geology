@@ -66,29 +66,19 @@ public class IGItemModelProvider extends ItemModelProvider {
                 IGGenericBlockItem item = (IGGenericBlockItem) i;
                 IGBlockType block = item.getIGBlockType();
                 MaterialPattern pattern = block.getPattern();
-//TODO Muddykat, please, "just move the instance check into the method itself"
                 if(pattern instanceof BlockPattern) {
                     BlockPattern blockPattern = (BlockPattern) pattern;
-                    if(block.getBlock() instanceof IGGenericBlock) {
-                        IGGenericBlock igBlock = (IGGenericBlock) item.getBlock();
-                        switch (blockPattern) {
-                            case ore:
-                                generateOreItemBlock(igBlock, item);
-                                break;
-                            default:
-                                generateGenericItemBlock(igBlock, item);
-                                break;
-                        }
-                    }
-                    if (block.getBlock() instanceof IGSlabBlock)
-                    {
-                        IGSlabBlock igBlock = (IGSlabBlock) item.getBlock();
-                        generateSlabItemBlock(igBlock, item);
-                    }
-                    if (block.getBlock() instanceof IGStairsBlock)
-                    {
-                        IGStairsBlock igBlock = (IGStairsBlock) item.getBlock();
-                        generateStairsItemBlock(igBlock, item);
+                    switch (blockPattern) {
+                        case ore:
+                            generateOreItemBlock(block, item);
+                            break;
+                        case slab:
+                            generateSlabItemBlock(block, item);
+                        case stairs:
+                            generateStairsItemBlock(block, item);
+                        default:
+                            generateGenericItemBlock(block, item);
+                            break;
                     }
                 }
             }
@@ -98,17 +88,22 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     }
 
-    private void generateStairsItemBlock(IGStairsBlock slab, IGGenericBlockItem item) {
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/slab/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
-                        (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
+    private void generateStairsItemBlock(IGBlockType type, IGGenericBlockItem item) {
+        if (type.getBlock() instanceof IGStairsBlock) {
+            IGStairsBlock stairs = (IGStairsBlock) type.getBlock();
+            withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + stairs.getPattern().getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/stairs/" + stairs.getPattern().getName() + "_" + stairs.getMaterial(MaterialTexture.base).getName() +
+                            (stairs.getMaterial(MaterialTexture.overlay) != null ? "_" + stairs.getMaterial(MaterialTexture.overlay).getName() : "")));
+        }
     }
 
-
-    private void generateSlabItemBlock(IGSlabBlock slab, IGGenericBlockItem item) {
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/stairs/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
-                        (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
+    private void generateSlabItemBlock(IGBlockType type, IGGenericBlockItem item) {
+        if(type.getBlock() instanceof IGSlabBlock) {
+            IGSlabBlock slab = (IGSlabBlock) type.getBlock();
+            withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + slab.getPattern().getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/slab/" + slab.getPattern().getName() + "_" + slab.getMaterial(MaterialTexture.base).getName() +
+                            (slab.getMaterial(MaterialTexture.overlay) != null ? "_" + slab.getMaterial(MaterialTexture.overlay).getName() : "")));
+        }
     }
 
     private ItemModelBuilder obj(IItemProvider item, String model){
@@ -163,19 +158,25 @@ public class IGItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void generateGenericItemBlock(IGGenericBlock block, IGGenericBlockItem item){
-        withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
-                        (block.getMaterial(MaterialTexture.overlay) != null ? "_" + block.getMaterial(MaterialTexture.overlay).getName() : "")));
+    private void generateGenericItemBlock(IGBlockType type, IGGenericBlockItem item) {
+        if(type.getBlock() instanceof IGGenericBlock) {
+            IGGenericBlock block = (IGGenericBlock) type.getBlock();
+            withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath(),
+                    new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
+                            (block.getMaterial(MaterialTexture.overlay) != null ? "_" + block.getMaterial(MaterialTexture.overlay).getName() : "")));
+        }
     }
 
-    private void generateOreItemBlock(IGGenericBlock block, IGGenericBlockItem item) {
-        String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath();
-        withExistingParent(item_loc, new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()));
-        getBuilder(item_loc).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));
-        getBuilder(item_loc).texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()));
-        getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(0).uvs(0, 0, 16, 16)));
-        getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(1).uvs(0, 0, 16, 16)));
+    private void generateOreItemBlock(IGBlockType type, IGGenericBlockItem item) {
+        if(type.getBlock() instanceof IGGenericBlock) {
+            IGGenericBlock block = (IGGenericBlock) type.getBlock();
+            String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath();
+            withExistingParent(item_loc, new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()));
+            getBuilder(item_loc).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));
+            getBuilder(item_loc).texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()));
+            getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#base").tintindex(0).uvs(0, 0, 16, 16)));
+            getBuilder(item_loc).element().allFaces(((direction, faceBuilder) -> faceBuilder.texture("#ore").tintindex(1).uvs(0, 0, 16, 16)));
+        }
     }
 
     protected ResourceLocation forgeLoc(String str){

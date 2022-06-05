@@ -2,10 +2,9 @@ package igteam.immersive_geology.materials.pattern;
 
 import igteam.immersive_geology.menu.ItemSubGroup;
 
-public enum MiscPattern implements MaterialPattern {
+public enum FluidPattern implements MaterialPattern {
     slurry,
-    fluid,
-    machine;
+    fluid;
 
     @Override
     public String getName() {

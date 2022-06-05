@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data;
 
+import blusunrize.immersiveengineering.api.IEApi;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -7,9 +8,9 @@ import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.StageProvider;
 import igteam.immersive_geology.tags.IGTags;
@@ -131,12 +132,12 @@ public abstract class MaterialBase {
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
-        if (pattern instanceof MiscPattern) {
-            MiscPattern f = (MiscPattern) pattern;
+        if (pattern instanceof FluidPattern) {
+            FluidPattern f = (FluidPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             logger.info("Attempting to get Tag from Misc Pattern:" + f.getName());
-            if(f == MiscPattern.slurry) {
+            if(f == FluidPattern.slurry) {
                 String wrap = IGApi.getWrapFromSet(materials);
                 logger.info("material dump: " + wrap);
                 logger.info(data_map.get(wrap).getName());
@@ -170,8 +171,8 @@ public abstract class MaterialBase {
             LinkedHashSet<MaterialBase> matSet = new LinkedHashSet<>(materialList);
             return data_map.get(IGApi.getWrapFromSet(matSet));
         }
-        if (pattern instanceof MiscPattern) {
-            MiscPattern f = (MiscPattern) pattern;
+        if (pattern instanceof FluidPattern) {
+            FluidPattern f = (FluidPattern) pattern;
             HashMap<String, ITag.INamedTag<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             List<MaterialBase> materialList = new ArrayList<>(Arrays.asList(materials));
 
@@ -359,19 +360,20 @@ public abstract class MaterialBase {
                 case storage: {
                     return hasStorageBlock();
                 }
+                case machine: {
+                    return isMachine();
+                }
             }
             ;
         }
 
-        if (pattern instanceof MiscPattern) {
-            MiscPattern p = (MiscPattern) pattern;
+        if (pattern instanceof FluidPattern) {
+            FluidPattern p = (FluidPattern) pattern;
             switch (p) {
                 case fluid:
                     return isFluid();
                 case slurry:
                     return isSlurry();
-                case machine:
-                    return isMachine();
             }
             ;
         }
@@ -421,7 +423,7 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern) {
+    public ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern) {
         return (ITag.INamedTag<Fluid>) getTag(pattern);
     }
 
@@ -436,7 +438,7 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Fluid> getFluidTag(MiscPattern pattern, MaterialBase... materials) {
+    public ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern, MaterialBase... materials) {
         return (ITag.INamedTag<Fluid>) getTag(pattern, materials);
     }
 

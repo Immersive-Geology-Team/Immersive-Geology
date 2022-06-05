@@ -4,11 +4,12 @@ import igteam.immersive_geology.menu.ItemSubGroup;
 
 public enum BlockPattern implements MaterialPattern {
     block, //Generic Type
-    storage(ItemSubGroup.processed), // used for storage, eg Block of Material (Iron, Gold, Copper, ...)
+    storage(ItemSubGroup.decoration), // used for storage, eg Block of Material (Iron, Gold, Copper, ...)
     ore, // used for igteam.immersive_geology.materials that generate like minerals
     geode, // used for igteam.immersive_geology.materials that generate like geodes
-    stairs(ItemSubGroup.processed),
-    slab(ItemSubGroup.processed);
+    stairs(ItemSubGroup.decoration),
+    slab(ItemSubGroup.decoration),
+    machine(ItemSubGroup.misc);
 
     private ItemSubGroup subgroup;
 

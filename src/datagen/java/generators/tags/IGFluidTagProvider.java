@@ -7,7 +7,7 @@ import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.FluidTagsProvider;
 import net.minecraft.fluid.Fluid;
@@ -30,7 +30,7 @@ public class IGFluidTagProvider extends FluidTagsProvider
         log.info("Fluid Tag Registration");
 
         for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
-            for (MiscPattern pattern : MiscPattern.values()) {
+            for (FluidPattern pattern : FluidPattern.values()) {
                 if (fluid.hasPattern(pattern)) {
                     Fluid fluidBlock = fluid.getFluid(pattern);
                     if (fluidBlock != null) {
@@ -44,10 +44,10 @@ public class IGFluidTagProvider extends FluidTagsProvider
         for(SlurryEnum wrapper : SlurryEnum.values()){
             for(MaterialSlurryWrapper slurry : wrapper.getEntries()) {
                 if(slurry != null) {
-                    Fluid fluidBlock = slurry.getFluid(MiscPattern.slurry);
+                    Fluid fluidBlock = slurry.getFluid(FluidPattern.slurry);
                     if (fluidBlock != null) {
-                        log.info("Slurry: " + slurry.getFluidTag(MiscPattern.slurry).toString());
-                        getOrCreateBuilder(slurry.getFluidTag(MiscPattern.slurry)).add(fluidBlock);
+                        log.info("Slurry: " + slurry.getFluidTag(FluidPattern.slurry).toString());
+                        getOrCreateBuilder(slurry.getFluidTag(FluidPattern.slurry)).add(fluidBlock);
                     }
                 }
             }

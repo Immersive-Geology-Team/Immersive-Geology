@@ -22,9 +22,8 @@ public class MaterialMetalLead extends MaterialBaseMetal {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-        return pattern == BlockPattern.storage ?
-                new ResourceLocation("minecraft", "block/iron_block") : super.getTextureLocation(pattern);
+    public boolean hasExistingImplementation() {
+        return true;
     }
 
     @Override

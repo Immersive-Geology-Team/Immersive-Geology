@@ -15,9 +15,9 @@ import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -137,7 +137,7 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
 
     @Override
     public MaterialPattern getPattern() {
-        return MiscPattern.machine;
+        return BlockPattern.machine;
     }
 
     @Override

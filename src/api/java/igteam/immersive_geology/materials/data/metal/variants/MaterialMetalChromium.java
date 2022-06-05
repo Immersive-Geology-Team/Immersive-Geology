@@ -16,7 +16,7 @@ public class MaterialMetalChromium extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0xc6c8c9;
+        return 0xD7B4F3;
     }
 
     @Override

@@ -1,11 +1,10 @@
 package igteam.immersive_geology.materials.data.fluid;
 
 import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
@@ -184,8 +183,8 @@ public abstract class MaterialBaseFluid extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-        if(pattern instanceof MiscPattern){
-            MiscPattern m = (MiscPattern) pattern;
+        if(pattern instanceof FluidPattern){
+            FluidPattern m = (FluidPattern) pattern;
             switch (m){
                 case fluid:
                     return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");

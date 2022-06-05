@@ -19,6 +19,7 @@ import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
@@ -257,19 +258,18 @@ public class IGBlockStateProvider extends BlockStateProvider {
             IGStairsBlock stairsBlock = (IGStairsBlock) blockType;
             VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
             String materialName = stairsBlock.getMaterials().stream().findAny().get().get().getName();
-            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getPattern().getName() + "_" + materialName).getPath(),
+            BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/" + stairsBlock.getPattern().getName() + "_" + materialName).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getPattern().getName()));
 
-            BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getPattern().getName() + "_inner_" + materialName).getPath(),
+            BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/" + stairsBlock.getPattern().getName() + "_inner_" + materialName).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getPattern().getName()+ "_inner"));
 
-            BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/" + stairsBlock.getPattern().getName() + "_outer_" +materialName).getPath(),
+            BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/" + stairsBlock.getPattern().getName() + "_outer_" +materialName).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getPattern().getName()+ "_outer"));
 
-
-            baseModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
-            innerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
-            outerModel.texture("all", new ResourceLocation(IGLib.MODID, stairsBlock.getParentTexture()));
+            baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockPattern.storage));
+            innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockPattern.storage));
+            outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockPattern.storage));
 
             builder.forAllStates(blockState ->
                     blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?
@@ -287,7 +287,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     blockState.get(stairsBlock.SHAPE) == StairsShape.INNER_RIGHT ?
                         (blockState.get(stairsBlock.HALF) == Half.BOTTOM ?
                             (blockState.get(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
-                             blockState.get(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
+                             blockState.get(StairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
                              blockState.get(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(0).uvLock(true).build() :
                              ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build()) :
 

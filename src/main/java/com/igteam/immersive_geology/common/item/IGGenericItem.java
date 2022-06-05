@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
 import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 public class IGGenericItem extends Item implements IGItemType {
@@ -60,6 +62,10 @@ public class IGGenericItem extends Item implements IGItemType {
         }
 
         return this.pattern + data.toString();
+    }
+    @Override
+    public BlockPattern getBlockPattern() {
+        return null;
     }
 
     public void addMaterial(MaterialTexture t, MaterialInterface material){

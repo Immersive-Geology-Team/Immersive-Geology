@@ -15,7 +15,7 @@ public class MaterialMetalTungsten extends MaterialBaseMetal {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return 0x767980;
+        return 0x444D6A;
     }
 
     @Override
