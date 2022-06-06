@@ -45,6 +45,8 @@ public abstract class MaterialBase {
 
     protected void initializeColorMap(Function<MaterialPattern, Integer> function) {
         colorFunction = function;
+        HashMap<MaterialPattern, Integer> map = new HashMap<>();
+        
     }
 
     public void build() {
