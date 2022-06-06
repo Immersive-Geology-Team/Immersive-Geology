@@ -59,7 +59,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     protected FluidTank gasTank;
     protected NonNullList<ItemStack> inventory;
     private Logger log = ImmersiveGeology.getNewLogger();
-    private int burntime[] = new int[2];
+    private int[] burntime= new int[2];
     private int maxBurntime = 100;
     private final LazyOptional<IFluidHandler> holder;
     private LazyOptional<IItemHandler> insertionHandler1,insertionHandler2;

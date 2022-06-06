@@ -11,11 +11,7 @@ public class MaterialMetalThorium extends MaterialBaseMetal {
 
     public MaterialMetalThorium() {
         super("thorium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x45484b;
+        initializeColorMap((p) -> 0x45484b);
     }
 
     @Override

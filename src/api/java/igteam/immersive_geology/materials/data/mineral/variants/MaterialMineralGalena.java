@@ -36,7 +36,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
         new IGProcessingStage(this,"Extraction Stage") {
             @Override
             protected void describe() {
-                IGApi.getNewLogger().info("Attempting to get IE Ingot with IG Methods: " + MetalEnum.Gold.getTag(ItemPattern.ingot).getName());
+
             }
         };
     }
@@ -47,7 +47,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.LEAD),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR)
-        )
+            )
         );
     }
 

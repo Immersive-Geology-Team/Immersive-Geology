@@ -12,11 +12,7 @@ public class MaterialMetalOsmium extends MaterialBaseMetal {
 
     public MaterialMetalOsmium() {
         super("osmium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x8A9A9A;
+        initializeColorMap((p) -> 0x8A9A9A);
     }
 
     @Override

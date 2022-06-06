@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral;
 
+import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
@@ -10,6 +11,7 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
+import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseMineral extends MaterialBase {
@@ -169,6 +171,21 @@ public abstract class MaterialBaseMineral extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        ResourceLocation returnTexture = new ResourceLocation(IGApi.MODID, "null"); //This doesn't exist so if it's parsed it'll Trigger GreyScale Textures
+
+        if (pattern instanceof BlockPattern) {
+            returnTexture = new ResourceLocation(IGApi.MODID, "block/colored/" + this.name + "/" + pattern.getName());
+        }
+
+        if (pattern instanceof ItemPattern) {
+            returnTexture = new ResourceLocation(IGApi.MODID, "item/colored/" + this.name + "/" + pattern.getName());
+        }
+        IGApi.getNewLogger().warn("Trying for Texture: " + returnTexture.getPath());
+        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(returnTexture, ResourcePackType.CLIENT_RESOURCES);
+        return exists ? returnTexture : greyScaleTextures(pattern);
+    }
+
+    private ResourceLocation greyScaleTextures(MaterialPattern pattern) {
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;
             switch(b) {

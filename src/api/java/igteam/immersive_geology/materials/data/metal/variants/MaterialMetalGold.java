@@ -19,11 +19,7 @@ public class MaterialMetalGold extends MaterialBaseMetal {
 
     public MaterialMetalGold() {
         super("gold");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xFFD700;
+        initializeColorMap((p) -> 0xFFD700);
     }
 
     @Override

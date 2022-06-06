@@ -12,11 +12,7 @@ public class MaterialMetalTitanium extends MaterialBaseMetal {
 
     public MaterialMetalTitanium() {
         super("titanium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x878681;
+        initializeColorMap((p) -> 0x878681);
     }
 
     @Override

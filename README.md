@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/Immersive-Geology-Team/Immersive-Geology/blob/1.14/logos/logo.png?raw=true"></img></p>
+<p align="center"><img src="https://github.com/Immersive-Geology-Team/Immersive-Geology/blob/1.14/logos/logo.png?raw=true"></p>
 <hr>
 <blockquote>Immersive Geology is a mod for Minecraft 1.16<br />
 The mod requires Immersive Engineering for the appropriate Minecraft Version <br /></blockquote>

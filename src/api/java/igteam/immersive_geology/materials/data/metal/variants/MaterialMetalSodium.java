@@ -11,11 +11,7 @@ public class MaterialMetalSodium extends MaterialBaseMetal {
 
     public MaterialMetalSodium() {
         super("sodium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xd0d5db;
+        initializeColorMap((p) -> 0xd0d5db);
     }
 
     @Override

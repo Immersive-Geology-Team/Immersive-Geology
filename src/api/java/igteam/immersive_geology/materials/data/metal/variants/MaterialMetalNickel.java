@@ -11,11 +11,7 @@ public class MaterialMetalNickel extends MaterialBaseMetal {
 
     public MaterialMetalNickel() {
         super("nickel");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x7FFFD4;
+        initializeColorMap((p) -> 0x7FFFD4);
     }
 
     @Override

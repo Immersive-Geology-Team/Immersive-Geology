@@ -44,11 +44,11 @@ import java.util.stream.Stream;
 public class IGBlockStateProvider extends BlockStateProvider {
 
     private Logger log = ImmersiveGeology.getNewLogger();
-
     public IGBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper)
     {
         super(gen, IGLib.MODID, exFileHelper);
     }
+
     @Override
     public String getName(){
         return "Block Model/States";

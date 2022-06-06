@@ -13,11 +13,7 @@ public class MaterialMetalCobalt extends MaterialBaseMetal {
 
     public MaterialMetalCobalt() {
         super("cobalt");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x1A79FF;
+        initializeColorMap((p) -> 0x1A79FF);
     }
 
     @Override

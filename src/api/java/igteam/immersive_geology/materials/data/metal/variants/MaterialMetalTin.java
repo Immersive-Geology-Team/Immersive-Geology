@@ -12,11 +12,7 @@ public class MaterialMetalTin extends MaterialBaseMetal {
 
     public MaterialMetalTin() {
         super("tin");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xd3d4d5;
+        initializeColorMap((p) -> 0xd3d4d5);
     }
 
     @Override

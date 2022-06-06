@@ -12,11 +12,7 @@ public class MaterialMetalUranium extends MaterialBaseMetal {
 
     public MaterialMetalUranium() {
         super("uranium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x759068;
+        initializeColorMap((p) -> 0x759068);
     }
 
     @Override

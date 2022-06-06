@@ -11,11 +11,7 @@ public class MaterialMetalSilver extends MaterialBaseMetal {
 
     public MaterialMetalSilver() {
         super("silver");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xe7e7f7;
+        initializeColorMap((p) -> 0xe7e7f7);
     }
 
     @Override

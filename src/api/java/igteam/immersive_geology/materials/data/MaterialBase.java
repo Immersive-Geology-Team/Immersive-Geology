@@ -1,7 +1,6 @@
 package igteam.immersive_geology.materials.data;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.IETags;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
@@ -28,8 +27,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nonnull;
 import java.util.*;
+import java.util.function.Function;
 
 import static igteam.immersive_geology.main.IGRegistryProvider.getRegistryKey;
 
@@ -37,8 +36,15 @@ public abstract class MaterialBase {
 
     private Set<IGProcessingStage> stageSet = new HashSet<>();
 
+    protected boolean useColorTint = false;
+    protected Function<MaterialPattern, Integer> colorFunction;
     public MaterialBase(String name) {
         this.name = name;
+        initializeColorMap((p) -> 0xFFFFFF);
+    }
+
+    protected void initializeColorMap(Function<MaterialPattern, Integer> function) {
+        colorFunction = function;
     }
 
     public void build() {
@@ -205,7 +211,9 @@ public abstract class MaterialBase {
         return null;
     }
 
-    public abstract int getColor(MaterialPattern p);
+    public int getColor(MaterialPattern p) {
+        return useColorTint ? colorFunction.apply(p) : 0xFFFFFF;
+    }
 
     public abstract Rarity getRarity();
 

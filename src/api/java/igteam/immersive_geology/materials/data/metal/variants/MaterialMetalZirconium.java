@@ -12,11 +12,7 @@ public class MaterialMetalZirconium extends MaterialBaseMetal {
 
     public MaterialMetalZirconium() {
         super("zirconium");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xeaeded;
+        initializeColorMap((p) -> 0xeaeded);
     }
 
     @Override

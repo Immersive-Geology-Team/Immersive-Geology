@@ -12,11 +12,7 @@ public class MaterialMetalZinc extends MaterialBaseMetal {
 
     public MaterialMetalZinc() {
         super("zinc");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xd0d5db;
+        initializeColorMap((p) -> 0xd0d5db);
     }
 
     @Override

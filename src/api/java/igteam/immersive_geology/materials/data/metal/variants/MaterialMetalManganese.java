@@ -16,42 +16,7 @@ public class MaterialMetalManganese extends MaterialBaseMetal {
 
     public MaterialMetalManganese() {
         super("manganese");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        if ((p == ItemPattern.ingot) || (p == ItemPattern.nugget) || (p == ItemPattern.plate)
-                || (p == ItemPattern.block_item) || (p == BlockPattern.storage))
-            return 0xFFFFFF;
-        return 0xaaa9ad;
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-        if (pattern instanceof BlockPattern)
-        {
-            BlockPattern i = (BlockPattern) pattern;
-            switch (i)
-            {
-                case storage: return new ResourceLocation(IGApi.MODID, "block/colored/manganese/storage");
-
-                //case sheetmetal:return new ResourceLocation(IGApi.MODID, "block/colored/manganese/sheetmetal");
-            }
-        }
-        if (pattern instanceof ItemPattern)
-        {
-            ItemPattern i = (ItemPattern) pattern;
-            switch (i)
-            {
-                case ingot:
-                    return new ResourceLocation(IGApi.MODID, "item/colored/manganese/ingot");
-                case nugget:
-                    return new ResourceLocation(IGApi.MODID, "item/colored/manganese/nugget");
-                case plate:
-                    return new ResourceLocation(IGApi.MODID, "item/colored/manganese/plate");
-            }
-        }
-        return super.getTextureLocation(pattern);
+        initializeColorMap((p) -> 0xaaa9ad);
     }
 
     @Override

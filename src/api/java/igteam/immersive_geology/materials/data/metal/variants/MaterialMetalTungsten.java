@@ -11,11 +11,7 @@ public class MaterialMetalTungsten extends MaterialBaseMetal {
 
     public MaterialMetalTungsten() {
         super("tungsten");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x444D6A;
+        initializeColorMap((p) -> 0x444D6A);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.metal;
 
+import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
@@ -9,18 +10,19 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.data.BlockModelProvider;
 import net.minecraft.item.Rarity;
+import net.minecraft.resources.IResourceManager;
+import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.ModelProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
 
     public MaterialBaseMetal(String name) {
         super(name);
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0;
     }
 
     public boolean isNative() {return false;}
@@ -66,6 +68,26 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+        ResourceLocation returnTexture = new ResourceLocation(IGApi.MODID, "block/colored/" + this.name + "/" + pattern.getName()); //This doesn't exist so if it's parsed it'll Trigger GreyScale Textures
+
+
+        if (pattern instanceof BlockPattern) {
+            returnTexture = new ResourceLocation(IGApi.MODID, "block/colored/" + this.name + "/" + pattern.getName());
+        }
+
+        if (pattern instanceof ItemPattern) {
+            returnTexture = new ResourceLocation(IGApi.MODID, "item/colored/" + this.name + "/" + pattern.getName());
+        }
+
+        IGApi.getNewLogger().warn("Trying for Texture: " + returnTexture);
+        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(returnTexture, ResourcePackType.CLIENT_RESOURCES);
+        IGApi.getNewLogger().warn(exists ? "Succeeded" : "Failed");
+        return exists ? returnTexture : greyScaleTextures(pattern);
+    }
+
+    private ResourceLocation greyScaleTextures(MaterialPattern pattern) {
+        this.useColorTint = true;
+
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;
             switch(b) {
