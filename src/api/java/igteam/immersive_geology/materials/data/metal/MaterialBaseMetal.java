@@ -16,6 +16,8 @@ import net.minecraft.item.Rarity;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -79,9 +81,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             returnTexture = new ResourceLocation(IGApi.MODID, "item/colored/" + this.name + "/" + pattern.getName());
         }
 
-        IGApi.getNewLogger().warn("Trying for Texture: " + returnTexture);
-        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(returnTexture, ResourcePackType.CLIENT_RESOURCES);
-        IGApi.getNewLogger().warn(exists ? "Succeeded" : "Failed");
+        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGApi.MODID, "textures/" + returnTexture.getPath() + ".png"), ResourcePackType.CLIENT_RESOURCES);
         return exists ? returnTexture : greyScaleTextures(pattern);
     }
 

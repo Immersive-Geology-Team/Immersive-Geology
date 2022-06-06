@@ -180,8 +180,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         if (pattern instanceof ItemPattern) {
             returnTexture = new ResourceLocation(IGApi.MODID, "item/colored/" + this.name + "/" + pattern.getName());
         }
-        IGApi.getNewLogger().warn("Trying for Texture: " + returnTexture.getPath());
-        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(returnTexture, ResourcePackType.CLIENT_RESOURCES);
+        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGApi.MODID, "textures/" + returnTexture.getPath() + ".png"), ResourcePackType.CLIENT_RESOURCES);
         return exists ? returnTexture : greyScaleTextures(pattern);
     }
 
