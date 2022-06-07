@@ -23,6 +23,8 @@ import java.util.Set;
 
 public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     Aluminium(new MaterialMetalAluminium()),
+    Bronze(new MaterialMetalBronze()),
+
     Chromium(new MaterialMetalChromium()),
     Copper(new MaterialMetalCopper()),
     Gold(new MaterialMetalGold()),
