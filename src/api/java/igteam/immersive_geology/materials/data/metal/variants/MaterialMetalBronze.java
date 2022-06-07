@@ -11,7 +11,8 @@ public class MaterialMetalBronze extends MaterialBaseMetal {
 
     public MaterialMetalBronze() {
         super("bronze");
-        initializeColorMap((p) -> 0xf5d57f);
+        initializeColorMap((p) -> (hasColoredTexture(p)) ? 0xFFFFFF : 0xf5d57f);
+
     }
 
     @Override
@@ -33,6 +34,7 @@ public class MaterialMetalBronze extends MaterialBaseMetal {
     public boolean hasMetalOxide() {
         return false;
     }
+
 
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {

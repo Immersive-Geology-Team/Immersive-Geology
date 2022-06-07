@@ -10,16 +10,9 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import net.minecraft.client.Minecraft;
-import net.minecraft.data.BlockModelProvider;
 import net.minecraft.item.Rarity;
-import net.minecraft.resources.IResourceManager;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
 
@@ -27,17 +20,19 @@ public abstract class MaterialBaseMetal extends MaterialBase {
         super(name);
     }
 
-    public boolean isNative() {return false;}
+    public boolean isNative() {
+        return false;
+    }
 
     @Override
     public Rarity getRarity() {
         return Rarity.COMMON; //setup default
     }
 
-    protected void setupProcessingStages(){
+    protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        if(isNative()) {
+        if (isNative()) {
             new IGProcessingStage(this, "Initial Crafting") {
                 @Override
                 protected void describe() {
@@ -74,7 +69,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
 
         if (pattern instanceof BlockPattern) {
+            //work around for slabs
             returnTexture = new ResourceLocation(IGApi.MODID, "block/colored/" + this.name + "/" + pattern.getName());
+            if (pattern.get() == BlockPattern.slab) {
+                returnTexture = new ResourceLocation(IGApi.MODID, "block/colored/" + this.name + "/" + BlockPattern.sheetmetal.getName());
+            }
         }
 
         if (pattern instanceof ItemPattern) {
@@ -86,35 +85,52 @@ public abstract class MaterialBaseMetal extends MaterialBase {
     }
 
     private ResourceLocation greyScaleTextures(MaterialPattern pattern) {
-        if(pattern instanceof BlockPattern){
+        if (pattern instanceof BlockPattern) {
             BlockPattern b = (BlockPattern) pattern;
-            switch(b) {
-                case ore: return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
-                case storage: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
-                case sheetmetal: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/sheetmetal");
-                case geode: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
-                default: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");
+            switch (b) {
+                case ore:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
+                case storage:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
+                case slab:
+                case sheetmetal:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/sheetmetal");
+                case geode:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
+                default:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");
             }
         }
 
-        if(pattern instanceof ItemPattern){
+        if (pattern instanceof ItemPattern) {
             ItemPattern i = (ItemPattern) pattern;
-            switch(i) {
+            switch (i) {
                 case ore_chunk:
                     String chunk_vein_name = "rock_chunk_vein" + (getCrystalFamily() != null ? "_" + getCrystalFamily().getName() : "");
                     ResourceLocation chunkLoc = new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_chunk/" + chunk_vein_name);
                     return chunkLoc;
                 case stone_chunk:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_chunk/rock_chunk_vein");
-                case ore_bit: case stone_bit:
+                case ore_bit:
+                case stone_bit:
                     String bit_vein_name = "rock_bit_vein" + (getCrystalFamily() != null ? "_" + getCrystalFamily().getName() : "");
                     ResourceLocation bitLoc = new ResourceLocation(IGApi.MODID, "item/greyscale/rock/ore_bit/" + bit_vein_name);
                     return bitLoc;
-                case dirty_crushed_ore: case crushed_ore:
+                case dirty_crushed_ore:
+                case crushed_ore:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/crushed_ore");
-                case clay: case slag:
+                case clay:
+                case slag:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/rock/" + i.getName());
-                case dust: case gear: case ingot: case nugget: case plate: case rod: case wire: case metal_oxide: case compound_dust:
+                case dust:
+                case gear:
+                case ingot:
+                case nugget:
+                case plate:
+                case rod:
+                case wire:
+                case metal_oxide:
+                case compound_dust:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/" + i.getName());
                 case crystal:
                     return new ResourceLocation(IGApi.MODID, "item/greyscale/crystal/raw_crystal_" + getCrystalFamily().getName());
@@ -131,7 +147,10 @@ public abstract class MaterialBaseMetal extends MaterialBase {
     }
 
     @Override
-    protected boolean hasSheetmetalBlock() { return true; }
+    protected boolean hasSheetmetalBlock() {
+        return !hasExistingImplementation();
+    }
+
     @Override
     protected boolean hasStorageBlock() {
         return !hasExistingImplementation();
@@ -159,7 +178,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasSlab() {
-        return false;
+        return !hasExistingImplementation();
     }
 
     @Override
@@ -274,20 +293,21 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     public boolean generateOreFor(MaterialInterface m) {
-        if(m instanceof StoneEnum){
+        if (m instanceof StoneEnum) {
             StoneEnum s = (StoneEnum) m;
-            switch(s){
+            switch (s) {
                 case Stone:
                     return !hasExistingImplementation();
                 case Granite:
                     return isNative();
-            };
+            }
+            ;
         }
         return false;
     }
 
     @Override
-    public boolean isFluidPortable(ItemPattern pattern){
+    public boolean isFluidPortable(ItemPattern pattern) {
         return false;
     }
 }

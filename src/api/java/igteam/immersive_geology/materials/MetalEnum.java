@@ -22,7 +22,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import java.util.Set;
 
 public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
-    Aluminium(new MaterialMetalAluminium()),
+    Aluminum(new MaterialMetalAluminium()),
     Bronze(new MaterialMetalBronze()),
 
     Chromium(new MaterialMetalChromium()),

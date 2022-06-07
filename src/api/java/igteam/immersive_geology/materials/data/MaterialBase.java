@@ -131,6 +131,7 @@ public abstract class MaterialBase {
             ItemPattern i = (ItemPattern) pattern;
             try {
                 EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+
                 IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
 
                 switch (i) {
@@ -511,6 +512,6 @@ public abstract class MaterialBase {
     public abstract boolean isFluidPortable(ItemPattern bucket);
 
     protected static boolean hasColoredTexture(MaterialPattern p){
-        return (p == ItemPattern.ingot || p == ItemPattern.nugget || p == ItemPattern.plate || p == BlockPattern.storage || p == ItemPattern.block_item);
+        return (p == ItemPattern.ingot || p == ItemPattern.nugget || p == ItemPattern.plate || p == BlockPattern.storage || p == ItemPattern.block_item || p == BlockPattern.sheetmetal);
     }
 }

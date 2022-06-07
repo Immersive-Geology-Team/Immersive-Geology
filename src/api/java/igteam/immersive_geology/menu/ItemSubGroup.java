@@ -1,6 +1,5 @@
 package igteam.immersive_geology.menu;
 
-import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.StoneEnum;
@@ -47,7 +46,7 @@ public enum ItemSubGroup {
             return StoneEnum.valueOf(materialName);
         } catch (Exception ignored){}
 
-        return MetalEnum.Aluminium;
+        return MetalEnum.Aluminum;
     }
 
     //We use patternOrdinal to avoid a Circular reference, which would result in a Null pointer error,

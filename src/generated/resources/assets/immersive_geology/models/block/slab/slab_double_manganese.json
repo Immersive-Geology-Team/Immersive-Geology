@@ -1,0 +1,9 @@
+{
+  "parent": "immersive_geology:block/base/slab/slab_double",
+  "textures": {
+    "particle": "immersive_geology:block/colored/manganese/sheetmetal",
+    "all": "immersive_geology:block/colored/manganese/sheetmetal",
+    "side": "immersive_geology:block/colored/manganese/sheetmetal",
+    "cover": "immersive_geology:block/colored/manganese/sheetmetal"
+  }
+}
