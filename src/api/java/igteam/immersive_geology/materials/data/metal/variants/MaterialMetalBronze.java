@@ -11,8 +11,7 @@ public class MaterialMetalBronze extends MaterialBaseMetal {
 
     public MaterialMetalBronze() {
         super("bronze");
-        initializeColorMap((p) -> (hasColoredTexture(p)) ? 0xFFFFFF : 0xf5d57f);
-
+        initializeColorMap((p) -> 0xf5d57f);
     }
 
     @Override

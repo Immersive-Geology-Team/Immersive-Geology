@@ -49,7 +49,6 @@ import java.util.function.Supplier;
 
 
 public class IGBucketItem extends BucketItem implements IGItemType {
-
     private Fluid igContainedBlock;
     protected ItemSubGroup subGroup;
     private final MaterialBase fluidMaterial;
