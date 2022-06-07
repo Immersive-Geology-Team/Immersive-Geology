@@ -74,6 +74,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         case block:
                         case geode:
                         case storage:
+                        case sheetmetal:
                             registerGenericBlock(type);
                             break;
                     }

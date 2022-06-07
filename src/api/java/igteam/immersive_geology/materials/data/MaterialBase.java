@@ -392,6 +392,9 @@ public abstract class MaterialBase {
                 case storage: {
                     return hasStorageBlock();
                 }
+                case sheetmetal: {
+                    return hasSheetmetalBlock();
+                }
                 case machine: {
                     return isMachine();
                 }
@@ -412,6 +415,8 @@ public abstract class MaterialBase {
 
         return false;
     }
+
+    protected boolean hasSheetmetalBlock() {return false;}
 
     public boolean hasFlask() {
         return false;
