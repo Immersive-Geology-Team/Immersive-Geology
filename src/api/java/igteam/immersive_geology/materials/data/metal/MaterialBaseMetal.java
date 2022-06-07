@@ -91,6 +91,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             switch(b) {
                 case ore: return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
                 case storage: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
+                case sheetmetal: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/sheetmetal");
                 case geode: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
                 default: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");
             }
@@ -129,6 +130,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
         return null;
     }
 
+    @Override
+    protected boolean hasSheetmetalBlock() { return true; }
     @Override
     protected boolean hasStorageBlock() {
         return !hasExistingImplementation();
