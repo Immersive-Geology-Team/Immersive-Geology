@@ -14,11 +14,7 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
 
     public MaterialMineralFluorite() {
         super("fluorite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x329870;
+        initializeColorMap((p) -> 0x329870);
     }
 
     @Override

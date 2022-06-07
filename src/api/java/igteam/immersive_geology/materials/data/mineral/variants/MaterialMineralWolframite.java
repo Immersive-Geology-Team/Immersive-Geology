@@ -14,11 +14,7 @@ public class  MaterialMineralWolframite extends MaterialBaseMineral {
 
     public  MaterialMineralWolframite() {
         super("wolframite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x3A3E49;
+        initializeColorMap((p) -> 0x3A3E49);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class MaterialMetalManganese extends MaterialBaseMetal {
 
     public MaterialMetalManganese() {
         super("manganese");
-        initializeColorMap((p) -> 0xaaa9ad);
+        initializeColorMap((p) -> (hasColoredTexture(p)) ? 0xFFFFFF : 0xaaa9ad);
     }
 
     @Override

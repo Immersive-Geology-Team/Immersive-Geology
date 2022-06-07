@@ -14,11 +14,7 @@ public class  MaterialMineralZircon extends MaterialBaseMineral {
 
     public  MaterialMineralZircon() {
         super("zircon");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x8B2E1D;
+        initializeColorMap((p) -> 0x8B2E1D);
     }
 
     @Override

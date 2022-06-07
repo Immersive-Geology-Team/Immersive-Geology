@@ -14,11 +14,7 @@ public class MaterialMineralFerberite extends MaterialBaseMineral {
 
     public MaterialMineralFerberite() {
         super("ferberite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x2688D1;
+        initializeColorMap((p) -> 0x2688D1);
     }
 
     @Override

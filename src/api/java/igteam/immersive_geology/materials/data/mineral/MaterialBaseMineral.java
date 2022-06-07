@@ -20,11 +20,6 @@ public abstract class MaterialBaseMineral extends MaterialBase {
     }
 
     @Override
-    public int getColor(MaterialPattern p) {
-        return 0xFFFFFF;
-    }
-
-    @Override
     public Rarity getRarity() {
         return Rarity.COMMON;
     }

@@ -14,11 +14,7 @@ public class MaterialMineralThorianite extends MaterialBaseMineral {
 
     public MaterialMineralThorianite() {
         super("thorianite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x485560;
+        initializeColorMap((p) -> 0x485560);
     }
 
     @Override

@@ -14,11 +14,7 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
 
     public MaterialMineralIlmenite() {
         super("ilmenite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x4A3E3E;
+        initializeColorMap((p) -> 0x4A3E3E);
     }
 
     @Override

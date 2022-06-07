@@ -17,11 +17,7 @@ public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
 
     public MaterialMineralChalcopyrite() {
         super("chalcopyrite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x5B4D2A;
+        initializeColorMap((p) -> 0x5B4D2A);
     }
 
     @Override

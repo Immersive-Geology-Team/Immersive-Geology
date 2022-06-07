@@ -26,4 +26,6 @@ public interface MaterialPattern {
 
         return patternList.toArray(new MaterialPattern[patternList.size()]);
     }
+
+    default MaterialPattern get() {return this;};
 }

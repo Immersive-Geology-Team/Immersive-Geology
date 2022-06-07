@@ -22,6 +22,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
 
     public  MaterialMineralVanadinite() {
         super("vanadinite");
+        initializeColorMap((p) -> 0xEF2161);
     }
 
     @Override

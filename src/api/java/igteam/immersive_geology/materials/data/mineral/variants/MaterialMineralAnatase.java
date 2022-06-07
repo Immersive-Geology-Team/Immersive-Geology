@@ -14,11 +14,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
 
     public MaterialMineralAnatase() {
         super("anatase");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x475B74;
+        initializeColorMap((p) -> 0x475B74);
     }
 
     @Override

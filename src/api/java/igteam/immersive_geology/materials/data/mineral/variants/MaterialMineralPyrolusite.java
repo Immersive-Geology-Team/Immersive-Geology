@@ -14,11 +14,7 @@ public class MaterialMineralPyrolusite extends MaterialBaseMineral {
 
     public MaterialMineralPyrolusite() {
         super("pyrolusite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xc68f39;
+        initializeColorMap((p) -> 0xc68f39);
     }
 
     @Override

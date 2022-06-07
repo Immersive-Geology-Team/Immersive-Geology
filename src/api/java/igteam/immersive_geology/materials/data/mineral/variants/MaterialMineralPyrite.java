@@ -14,11 +14,7 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
 
     public MaterialMineralPyrite() {
         super("pyrite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xD6C380;
+        initializeColorMap((p) -> 0xD6C380);
     }
 
     @Override

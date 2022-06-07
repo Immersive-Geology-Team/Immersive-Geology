@@ -14,11 +14,7 @@ public class MaterialMineralCryolite extends MaterialBaseMineral {
 
     public MaterialMineralCryolite() {
         super("cryolite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xC5C5C5;
+        initializeColorMap((p) -> 0xC5C5C5);
     }
 
     @Override

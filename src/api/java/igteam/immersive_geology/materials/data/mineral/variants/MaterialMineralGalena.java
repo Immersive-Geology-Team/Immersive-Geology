@@ -17,11 +17,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
 
     public MaterialMineralGalena() {
         super("galena");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x857F83;
+        initializeColorMap((p) -> 0x857F83);
     }
 
     @Override

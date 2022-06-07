@@ -14,11 +14,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
     public MaterialMineralRockSalt() {
         super("rocksalt");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xffffff;
+        initializeColorMap((p) -> 0xffffff);
     }
 
     @Override

@@ -14,11 +14,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
 
     public MaterialMineralCobaltite() {
         super("cobaltite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x939AC4;
+        initializeColorMap((p) -> 0x939AC4);
     }
 
     @Override

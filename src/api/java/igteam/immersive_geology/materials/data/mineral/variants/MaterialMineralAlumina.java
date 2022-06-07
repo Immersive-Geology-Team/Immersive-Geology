@@ -15,11 +15,7 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
 
     public MaterialMineralAlumina() {
         super("alumina");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x999FAF;
+        initializeColorMap((p) -> 0x999FAF);
     }
 
     @Override

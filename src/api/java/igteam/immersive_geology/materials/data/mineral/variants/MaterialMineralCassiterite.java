@@ -14,11 +14,7 @@ public class MaterialMineralCassiterite extends MaterialBaseMineral {
 
     public MaterialMineralCassiterite() {
         super("cassiterite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x8f8b96;
+        initializeColorMap((p) -> 0x8f8b96);
     }
 
     @Override

@@ -16,6 +16,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.StageProvider;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,24 +30,21 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static igteam.immersive_geology.main.IGRegistryProvider.getRegistryKey;
 
 public abstract class MaterialBase {
 
     private Set<IGProcessingStage> stageSet = new HashSet<>();
-
-    protected boolean useColorTint = false;
     protected Function<MaterialPattern, Integer> colorFunction;
     public MaterialBase(String name) {
         this.name = name;
-        initializeColorMap((p) -> 0xFFFFFF);
+        initializeColorMap((p) -> (p == ItemPattern.ingot ? 0xFF0000 :  0xFFFFFF));
     }
 
     protected void initializeColorMap(Function<MaterialPattern, Integer> function) {
         colorFunction = function;
-        HashMap<MaterialPattern, Integer> map = new HashMap<>();
-        
     }
 
     public void build() {
@@ -214,7 +212,7 @@ public abstract class MaterialBase {
     }
 
     public int getColor(MaterialPattern p) {
-        return useColorTint ? colorFunction.apply(p) : 0xFFFFFF;
+        return colorFunction.apply(p);
     }
 
     public abstract Rarity getRarity();
@@ -506,4 +504,8 @@ public abstract class MaterialBase {
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
 
     public abstract boolean isFluidPortable(ItemPattern bucket);
+
+    protected static boolean hasColoredTexture(MaterialPattern p){
+        return (p == ItemPattern.ingot || p == ItemPattern.nugget || p == ItemPattern.plate || p == BlockPattern.storage || p == ItemPattern.block_item);
+    }
 }

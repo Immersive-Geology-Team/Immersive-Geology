@@ -14,11 +14,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
 
     public MaterialMineralMonazite() {
         super("monazite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xC21E56;
+        initializeColorMap((p) -> 0xC21E56);
     }
 
     @Override

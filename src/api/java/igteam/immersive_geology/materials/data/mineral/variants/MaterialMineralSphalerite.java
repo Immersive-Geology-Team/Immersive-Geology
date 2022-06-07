@@ -14,11 +14,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
 
     public MaterialMineralSphalerite() {
         super("sphalerite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x6F8070;
+        initializeColorMap((p) -> 0x6F8070);
     }
 
     @Override

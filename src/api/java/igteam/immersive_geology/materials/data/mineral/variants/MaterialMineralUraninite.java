@@ -14,11 +14,7 @@ public class  MaterialMineralUraninite extends MaterialBaseMineral {
 
     public  MaterialMineralUraninite() {
         super("uraninite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xB2BEB5;
+        initializeColorMap((p) -> 0xB2BEB5);
     }
 
     @Override

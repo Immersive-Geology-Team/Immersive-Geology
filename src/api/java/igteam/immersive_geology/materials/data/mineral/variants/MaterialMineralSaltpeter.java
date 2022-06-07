@@ -14,11 +14,7 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
 
     public MaterialMineralSaltpeter() {
         super("saltpeter");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xffffff;
+        initializeColorMap((p) -> 0xffffff);
     }
 
     @Override

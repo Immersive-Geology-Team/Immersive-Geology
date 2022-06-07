@@ -14,11 +14,7 @@ public class MaterialMineralHematite extends MaterialBaseMineral {
 
     public MaterialMineralHematite() {
         super("hematite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x4B2F2C;
+        initializeColorMap((p) -> 0x4B2F2C);
     }
 
     @Override

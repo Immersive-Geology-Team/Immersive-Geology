@@ -14,13 +14,8 @@ public class MaterialMineralGypsum extends MaterialBaseMineral {
 
     public MaterialMineralGypsum() {
         super("gypsum");
+        initializeColorMap((p) -> 0x90AB8C);
     }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x90AB8C;
-    }
-
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.MONOCLINIC;

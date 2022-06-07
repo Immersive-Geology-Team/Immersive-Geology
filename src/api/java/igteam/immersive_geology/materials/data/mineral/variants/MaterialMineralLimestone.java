@@ -14,11 +14,7 @@ public class MaterialMineralLimestone extends MaterialBaseMineral {
 
     public MaterialMineralLimestone() {
         super("limestone");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xffffff;
+        initializeColorMap((p) -> 0xffffff);
     }
 
     @Override

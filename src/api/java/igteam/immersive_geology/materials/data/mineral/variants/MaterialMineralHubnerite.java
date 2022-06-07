@@ -14,11 +14,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
 
     public MaterialMineralHubnerite() {
         super("hubnerite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x32332E;
+        initializeColorMap((p) -> 0x32332E);
     }
 
     @Override

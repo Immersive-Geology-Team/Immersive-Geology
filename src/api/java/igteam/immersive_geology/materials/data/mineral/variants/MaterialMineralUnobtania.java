@@ -13,11 +13,7 @@ import java.util.LinkedHashSet;
 public class MaterialMineralUnobtania extends MaterialBaseMineral {
     public  MaterialMineralUnobtania() {
         super("unobtania");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x999FAF;
+        initializeColorMap((p) -> 0x999FAF);
     }
 
     @Override

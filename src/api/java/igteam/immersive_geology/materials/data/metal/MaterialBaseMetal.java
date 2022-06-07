@@ -86,8 +86,6 @@ public abstract class MaterialBaseMetal extends MaterialBase {
     }
 
     private ResourceLocation greyScaleTextures(MaterialPattern pattern) {
-        this.useColorTint = true;
-
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;
             switch(b) {

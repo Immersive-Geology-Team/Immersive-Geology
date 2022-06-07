@@ -14,11 +14,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
 
     public MaterialMineralKaolinite() {
         super("kaolinite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xE5DFD1;
+        initializeColorMap((p) -> 0xE5DFD1);
     }
 
     @Override

@@ -14,11 +14,7 @@ public class MaterialMineralThorite extends MaterialBaseMineral {
 
     public MaterialMineralThorite() {
         super("thorite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xaa7547;
+        initializeColorMap((p) -> 0xaa7547);
     }
 
     @Override

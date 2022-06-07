@@ -14,11 +14,7 @@ public class MaterialMineralMagnetite extends MaterialBaseMineral {
 
     public MaterialMineralMagnetite() {
         super("magnetite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0xb4b7b0;
+        initializeColorMap((p) -> 0xb4b7b0);
     }
 
     @Override

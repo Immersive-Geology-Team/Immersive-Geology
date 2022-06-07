@@ -14,11 +14,7 @@ public class MaterialMineralCuprite extends MaterialBaseMineral {
 
     public MaterialMineralCuprite() {
         super("cuprite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-        return 0x830922;
+        initializeColorMap((p) -> 0x830922);
     }
 
     @Override
