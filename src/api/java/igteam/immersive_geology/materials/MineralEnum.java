@@ -24,6 +24,7 @@ import java.util.Set;
 public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Alumina(new MaterialMineralAlumina()),
     Anatase(new MaterialMineralAnatase()),
+    Acanthite(new MaterialMineralAcanthite()),
     Cuprite(new MaterialMineralCuprite()),
     Zircon(new MaterialMineralZircon()),
     Monazite(new MaterialMineralMonazite()),
