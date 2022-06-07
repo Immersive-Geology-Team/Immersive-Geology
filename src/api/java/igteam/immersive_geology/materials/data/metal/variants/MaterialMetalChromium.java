@@ -19,7 +19,7 @@ public class MaterialMetalChromium extends MaterialBaseMetal {
 
     public MaterialMetalChromium() {
         super("chromium");
-        initializeColorMap((p) -> (hasColoredTexture(p)) ? 0xFFFFFF : 0xD7B4F3);
+        initializeColorMap((p) -> 0xD7B4F3);
     }
 
     @Override

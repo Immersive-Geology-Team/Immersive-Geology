@@ -1,7 +1,7 @@
 {
   "parent": "immersive_geology:block/base/block",
   "textures": {
-    "all": "immersive_geology:block/greyscale/metal/storage",
-    "particle": "immersive_geology:block/greyscale/metal/storage"
+    "all": "immersive_geology:block/colored/cobalt/storage",
+    "particle": "immersive_geology:block/colored/cobalt/storage"
   }
 }

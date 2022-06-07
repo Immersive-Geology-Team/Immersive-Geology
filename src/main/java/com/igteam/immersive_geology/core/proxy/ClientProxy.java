@@ -22,11 +22,16 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.APIMaterials;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IHasContainer;
@@ -42,10 +47,13 @@ import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+
+import java.util.HashMap;
 
 public class ClientProxy extends ServerProxy {
 
@@ -56,6 +64,24 @@ public class ClientProxy extends ServerProxy {
         registerItemColors();
         registerBlockColors();
         registerSpecialRenderers();
+        Minecraft minecraft = event.getMinecraftSupplier().get();
+        for(MaterialInterface<?> i : APIMaterials.all()) {
+            MaterialBase base = i.get();
+            HashMap<MaterialPattern, Boolean> colorCheckMap = new HashMap<>();
+            for (MaterialPattern pattern : MaterialPattern.values()) {
+                colorCheckMap.put(pattern, true);
+                if (base.hasPattern(pattern)) {
+                    ResourceLocation test = new ResourceLocation(IGApi.MODID, "textures/" + (pattern instanceof ItemPattern ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
+                    try {
+                        boolean check = minecraft.getResourceManager().hasResource(test);
+                        colorCheckMap.put(pattern, !check);
+                    } catch (Exception ignored) {}
+                }
+            }
+
+            base.initializeColorTint(colorCheckMap::get);
+        }
+
     }
 
     private void registerSpecialRenderers(){

@@ -16,7 +16,7 @@ public class MaterialMetalPlatinum extends MaterialBaseMetal {
 
     public MaterialMetalPlatinum() {
         super("platinum");
-        initializeColorMap((p) -> (hasColoredTexture(p)) ? 0xFFFFFF : (p == ItemPattern.metal_oxide ? 0x65698C : 0xe7e7f7));
+        initializeColorMap((p) -> (p == ItemPattern.metal_oxide ? 0x65698C : 0xe7e7f7));
     }
 
     @Override

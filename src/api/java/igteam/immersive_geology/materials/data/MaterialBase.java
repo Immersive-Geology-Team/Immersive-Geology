@@ -2,6 +2,7 @@ package igteam.immersive_geology.materials.data;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -21,8 +22,13 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.resources.IResourceManager;
+import net.minecraft.resources.ResourcePackType;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -38,13 +44,19 @@ public abstract class MaterialBase {
 
     private Set<IGProcessingStage> stageSet = new HashSet<>();
     protected Function<MaterialPattern, Integer> colorFunction;
+    protected Predicate<MaterialPattern> applyColorTint;
     public MaterialBase(String name) {
         this.name = name;
         initializeColorMap((p) -> (p == ItemPattern.ingot ? 0xFF0000 :  0xFFFFFF));
+        initializeColorTint((p) -> true); //default will be overridden later on in ClientProxy
     }
 
     protected void initializeColorMap(Function<MaterialPattern, Integer> function) {
         colorFunction = function;
+    }
+
+    public void initializeColorTint(Predicate<MaterialPattern> predicate) {
+        applyColorTint = predicate;
     }
 
     public void build() {
@@ -212,7 +224,7 @@ public abstract class MaterialBase {
     }
 
     public int getColor(MaterialPattern p) {
-        return colorFunction.apply(p);
+        return applyColorTint.test(p) ? colorFunction.apply(p) : 0xFFFFFF;
     }
 
     public abstract Rarity getRarity();
@@ -509,8 +521,4 @@ public abstract class MaterialBase {
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
 
     public abstract boolean isFluidPortable(ItemPattern bucket);
-
-    protected static boolean hasColoredTexture(MaterialPattern p){
-        return (p == ItemPattern.ingot || p == ItemPattern.nugget || p == ItemPattern.plate || p == BlockPattern.storage || p == ItemPattern.block_item);
-    }
 }

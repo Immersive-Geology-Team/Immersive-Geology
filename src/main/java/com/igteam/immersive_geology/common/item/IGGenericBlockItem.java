@@ -87,7 +87,7 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
             }
         }
 
-        return materialList.get(pass).getColor(pattern);
+        return materialList.get(pass).getColor(getBlockPattern()); //Want the color of the block
     }
 
     private Logger logger = ImmersiveGeology.getNewLogger();
