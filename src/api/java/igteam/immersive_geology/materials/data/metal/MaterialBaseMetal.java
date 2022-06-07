@@ -198,7 +198,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasRod() {
-        return true;
+        return !hasExistingImplementation();
     }
 
     @Override
@@ -223,7 +223,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasDust() {
-        return true;
+        return !hasExistingImplementation();
     }
 
     @Override

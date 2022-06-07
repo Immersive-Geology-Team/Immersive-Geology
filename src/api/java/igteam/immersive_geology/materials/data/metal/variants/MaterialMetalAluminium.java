@@ -17,6 +17,12 @@ public class MaterialMetalAluminium extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasExistingImplementation() {
+        return true;
+    }
+
+
+    @Override
     public Rarity getRarity() {
         return Rarity.UNCOMMON;
     }

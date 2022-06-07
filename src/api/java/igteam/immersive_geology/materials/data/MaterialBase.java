@@ -155,6 +155,19 @@ public abstract class MaterialBase {
             BlockPattern b = (BlockPattern) pattern;
             HashMap<String, ITag.INamedTag<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
 
+            try {
+                EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+
+                IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+                switch (b) {
+                    case storage:
+                        return ieMetalTags.storage;
+                    case sheetmetal:
+                        return ieMetalTags.sheetmetal;
+                } // Now we can get IE Tags via IG Methods!
+            } catch (IllegalArgumentException ignored){};
+
+
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
