@@ -1,0 +1,9 @@
+{
+  "parent": "immersive_geology:block/base/slab/slab",
+  "textures": {
+    "particle": "immersive_geology:block/colored/chromium/sheetmetal",
+    "all": "immersive_geology:block/colored/chromium/sheetmetal",
+    "side": "immersive_geology:block/colored/chromium/sheetmetal",
+    "cover": "immersive_geology:block/colored/chromium/sheetmetal"
+  }
+}

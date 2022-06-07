@@ -143,6 +143,7 @@ public abstract class MaterialBase {
             ItemPattern i = (ItemPattern) pattern;
             try {
                 EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+
                 IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
 
                 switch (i) {
@@ -165,6 +166,19 @@ public abstract class MaterialBase {
         if (pattern instanceof BlockPattern) {
             BlockPattern b = (BlockPattern) pattern;
             HashMap<String, ITag.INamedTag<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
+
+            try {
+                EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+
+                IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+                switch (b) {
+                    case storage:
+                        return ieMetalTags.storage;
+                    case sheetmetal:
+                        return ieMetalTags.sheetmetal;
+                } // Now we can get IE Tags via IG Methods!
+            } catch (IllegalArgumentException ignored){};
+
 
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(Collections.singletonList(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
@@ -521,4 +535,5 @@ public abstract class MaterialBase {
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
 
     public abstract boolean isFluidPortable(ItemPattern bucket);
+
 }

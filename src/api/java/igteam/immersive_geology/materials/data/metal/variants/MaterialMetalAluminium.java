@@ -12,9 +12,15 @@ import java.util.LinkedHashSet;
 public class MaterialMetalAluminium extends MaterialBaseMetal {
 
     public MaterialMetalAluminium() {
-        super("aluminium");
+        super("aluminum"); //compat rename
         initializeColorMap((p) -> 0xd0d5db);
     }
+
+    @Override
+    public boolean hasExistingImplementation() {
+        return true;
+    }
+
 
     @Override
     public Rarity getRarity() {
