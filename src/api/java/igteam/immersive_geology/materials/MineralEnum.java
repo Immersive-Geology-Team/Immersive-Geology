@@ -50,7 +50,6 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Ullmannite(new MaterialMineralUllmannite()),
     Galena(new MaterialMineralGalena()),
     Pyrite(new MaterialMineralPyrite()),
-    Wolframite(new MaterialMineralWolframite()),
     Vanadinite(new MaterialMineralVanadinite()),
     Kaolinite(new MaterialMineralKaolinite()),
     Unobtania(new MaterialMineralUnobtania());

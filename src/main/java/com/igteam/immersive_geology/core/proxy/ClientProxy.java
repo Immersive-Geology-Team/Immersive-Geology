@@ -30,6 +30,7 @@ import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
@@ -72,6 +73,10 @@ public class ClientProxy extends ServerProxy {
                 colorCheckMap.put(pattern, true);
                 if (base.hasPattern(pattern)) {
                     ResourceLocation test = new ResourceLocation(IGApi.MODID, "textures/" + (pattern instanceof ItemPattern ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
+                    if (pattern.equals(BlockPattern.slab)) //crunch for sheetmetal slabs
+                    {
+                        test =  new ResourceLocation(IGApi.MODID, "textures/" + (pattern instanceof ItemPattern ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockPattern.sheetmetal.getName() + ".png");
+                    }
                     try {
                         boolean check = minecraft.getResourceManager().hasResource(test);
                         colorCheckMap.put(pattern, !check);

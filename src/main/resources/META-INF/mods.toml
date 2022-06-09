@@ -12,7 +12,7 @@ version="Beta v1.1 MC 1.16.5"
 displayName="Immersive Geology"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/immersive-geology"
 credits="Sen#1629 - Chemical Vat Model"
-authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch"
+authors="Muddykat, JStocke, Kuruma, Pabilo8, UnSchtalch, SteelBlue8"
 description='''
 Immersive Implementation of Minerals and ore processing, adds pretty much all the metals and realistic ore options
 along with multiblocks to process them!
@@ -21,14 +21,14 @@ along with multiblocks to process them!
 [[dependencies.immersive_geology]]
     modId="immersiveengineering"
     mandatory=true
-    versionRange="[1.16.5-5.0.4,)"
+    versionRange="[1.16.5-5.1.0,)"
     ordering="BEFORE"
     side="BOTH"
 
 [[dependencies.immersive_geology]]
     modId="forge"
     mandatory=true
-    versionRange="[36.0.27,)"
+    versionRange="[36.2.35,)"
     ordering="NONE"
     side="BOTH"
 
