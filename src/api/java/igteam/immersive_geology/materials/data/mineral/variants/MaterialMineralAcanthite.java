@@ -1,7 +1,9 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -11,6 +13,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Rarity;
+import net.minecraft.tags.FluidTags;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -68,14 +71,24 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
         new IGProcessingStage(this,"Leeching Stage") {
             @Override
             protected void describe() {
-            //FIXME get info from Muddy how to create vat recipe with water
-            //IRecipeBuilder.chemical(this).create("slag_" + getName() + "_to_slurry", getParentMaterial().getStack(ItemPattern.slag),
-            //          FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), Fluids.WATER.getFluid(), MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
-            //                        120, 10000);
+            IRecipeBuilder.chemical(this).create(
+            "slag_" + getName() + "_to_slurry",
+                    getStack(ItemPattern.slag),
+                    new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
+                    new FluidTagInput(FluidTags.WATER, 250),
+                    MetalEnum.Platinum.getStack(ItemPattern.compound_dust),
+                    SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
+            120, 10000);
 
-            // IRecipeBuilder.separating(this) PT compound dust to Os and Pt dust
-
-                //IRecipeBuilder.crystalize(this) Ag sulfide to Ag crystals
+                IRecipeBuilder.crystalize(this).create(
+                        "slurry" + SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
+                        MetalEnum.Silver.getStack(ItemPattern.crystal),
+                        new FluidTagInput(SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        120, 10000);
+                IRecipeBuilder.separating(this).create(
+                        MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
+                        MetalEnum.Platinum.getStack(ItemPattern.dust),
+                        MetalEnum.Osmium.getStack(ItemPattern.dust));
             }
         };
     }

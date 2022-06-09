@@ -1,0 +1,12 @@
+{
+  "type": "immersive_geology:crystalizer",
+  "result": {
+    "item": "immersive_geology:crystal_silver"
+  },
+  "fluid_input": {
+    "tag": "forge:slurrys/hydrochloric_acid_silver",
+    "amount": 250
+  },
+  "time": 120,
+  "energy": 10000
+}

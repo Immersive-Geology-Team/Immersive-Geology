@@ -30,6 +30,12 @@ public class MaterialMetalPlatinum extends MaterialBaseMetal {
     }
 
     @Override
+    protected boolean hasCompoundDust() {
+        return true;
+    }
+
+
+    @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
         return new LinkedHashSet<>(Arrays.asList(

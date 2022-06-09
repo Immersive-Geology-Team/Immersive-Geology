@@ -14,6 +14,7 @@ public enum SlurryEnum {
             new MaterialSlurryWrapper(MetalEnum.Chromium, FluidEnum.NitricAcid)),
     MANGANESE (new MaterialSlurryWrapper(MetalEnum.Manganese, FluidEnum.HydrochloricAcid),
             new MaterialSlurryWrapper(MetalEnum.Manganese, FluidEnum.SulfuricAcid)),
+    SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid)),
     VANADIUM(new MaterialSlurryWrapper(MetalEnum.Vanadium, FluidEnum.SulfuricAcid));
 
     final LinkedHashSet<MaterialSlurryWrapper> entries;
