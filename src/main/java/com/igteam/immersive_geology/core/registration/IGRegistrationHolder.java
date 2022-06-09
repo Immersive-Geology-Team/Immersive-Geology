@@ -170,7 +170,6 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, FluidPattern p){
-        //m.get().getRarity() has a loader constraint violation, API and Minecraft weirdness? Worked fine before...
         IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
         if(m.get().hasFlask()){
             register(fluid.getFluidContainer());
@@ -179,7 +178,7 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForSlurryTypes(MaterialSlurryWrapper slurry){
-        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getSoluteMaterial().getColor(FluidPattern.slurry), false), FluidPattern.slurry);
+        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getColor(FluidPattern.slurry), false), FluidPattern.slurry);
         logger.info("Registering: " + slurry.getName());
         if(slurry.hasFlask()){
             register(fluid.getFluidContainer());

@@ -36,7 +36,6 @@ public class IGSlabBlock extends SlabBlock implements IGBlockType {
         RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
 
-
     @Override
     public Item asItem() {
         return itemBlock;

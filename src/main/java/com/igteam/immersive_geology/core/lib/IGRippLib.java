@@ -22,6 +22,8 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.awt.*;
+
 //This class here holds a BUNCH of methods that IG relies on, incidentally, most are from other mods and or libraries, although most of it is modified a fair amount.
 public class IGRippLib {
 

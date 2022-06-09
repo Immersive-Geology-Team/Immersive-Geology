@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.common.item.distinct;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import com.igteam.immersive_geology.common.item.helper.IGFlaskFluidHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.lib.IGRippLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MiscEnum;
@@ -44,7 +45,9 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.function.Supplier;
 
 
