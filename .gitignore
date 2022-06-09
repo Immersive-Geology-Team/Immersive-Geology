@@ -34,3 +34,4 @@ libs/
 *.classpath
 .settings/
 *.launch
+/src/main/resources/.cache/
