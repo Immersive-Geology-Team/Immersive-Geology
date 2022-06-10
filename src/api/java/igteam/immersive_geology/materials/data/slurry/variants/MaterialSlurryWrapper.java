@@ -1,10 +1,13 @@
 package igteam.immersive_geology.materials.data.slurry.variants;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.slurry.MaterialBaseSlurry;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+
+import java.awt.*;
 
 public class MaterialSlurryWrapper extends MaterialBaseSlurry {
     private final MaterialInterface<? extends MaterialBase> soluteMaterial;
@@ -25,7 +28,7 @@ public class MaterialSlurryWrapper extends MaterialBaseSlurry {
 
     @Override
     public int getColor(MaterialPattern p) {
-        return soluteMaterial.getColor(p);
+        return IGApi.mixColors(new Color(getFluidBase().getColor(p)), new Color(getSoluteMaterial().getColor(p))).getRGB();
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.StackLocatorUtil;
 
+import java.awt.*;
 import java.util.LinkedHashSet;
 import java.util.StringJoiner;
 
@@ -24,5 +25,17 @@ public class IGApi {
 
         getNewLogger().info("Creating Wrap for Tags: " + "[" + value.toString() + "]");
         return "[" + value.toString() + "]";
+    }
+
+    public static Color mixColors(Color... colors) {
+        float ratio = 1f / ((float) colors.length);
+        int r = 0, g = 0, b = 0, a = 0;
+        for (Color color : colors) {
+            r += color.getRed() * ratio;
+            g += color.getGreen() * ratio;
+            b += color.getBlue() * ratio;
+            a += color.getAlpha() * ratio;
+        }
+        return new Color(r, g, b, a);
     }
 }
