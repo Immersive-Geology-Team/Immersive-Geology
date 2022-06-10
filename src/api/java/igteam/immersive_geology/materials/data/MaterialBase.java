@@ -41,7 +41,6 @@ import java.util.function.Predicate;
 import static igteam.immersive_geology.main.IGRegistryProvider.getRegistryKey;
 
 public abstract class MaterialBase {
-
     private Set<IGProcessingStage> stageSet = new HashSet<>();
     protected Function<MaterialPattern, Integer> colorFunction;
     protected Predicate<MaterialPattern> applyColorTint;

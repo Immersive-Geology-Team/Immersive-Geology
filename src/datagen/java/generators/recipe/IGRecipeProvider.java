@@ -1,6 +1,9 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
@@ -15,6 +18,7 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
@@ -63,11 +67,35 @@ public class IGRecipeProvider extends RecipeProvider {
                             case Crystalization:
                                 buildCrystallizationMethods((IGCrystallizationMethod) method, consumer);
                                 break;
+                            case Blasting:
+                                buildBlastingMethods((IGBlastingMethod) method, consumer);
+                                break;
+                            case Crushing:
+                                buildCrushingMethods((IGCrushingMethod) method, consumer);
+                                break;
                         }
                     }
                 }
             }
         }
+    }
+
+    private void buildCrushingMethods(IGCrushingMethod method, Consumer<IFinishedRecipe> consumer) {
+        CrusherRecipeBuilder recipe = CrusherRecipeBuilder.builder(method.getOutput());
+        recipe.addInput(method.getInput());
+        if(method.hasSecondary()){
+            recipe.addSecondary(method.getSecondary(), method.getSecondaryChange());
+        }
+        recipe.setTime(method.getTime());
+        recipe.setEnergy(method.getEnergy());
+        recipe.build(consumer, toRL("crushing/crush_" + Objects.requireNonNull(method.getMethodName())));
+    }
+
+    private void buildBlastingMethods(IGBlastingMethod method, Consumer<IFinishedRecipe> consumer) {
+        BlastFurnaceRecipeBuilder recipe = BlastFurnaceRecipeBuilder.builder(method.getOutput());
+        recipe.addInput(method.getInput());
+        recipe.addSlag(method.getSlag().isEmpty() ? new ItemStack(IEItems.Ingredients.slag) : method.getSlag());
+        recipe.build(consumer, toRL("blasting/blast_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildCrystallizationMethods(IGCrystallizationMethod method, Consumer<IFinishedRecipe> consumer) {

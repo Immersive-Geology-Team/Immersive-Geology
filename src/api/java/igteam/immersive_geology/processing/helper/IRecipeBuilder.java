@@ -16,4 +16,11 @@ public interface IRecipeBuilder {
 
     static IGCrystallizationMethod crystalize(IGProcessingStage parentStage) {return new IGCrystallizationMethod(parentStage);}
 
+    static IGBlastingMethod blasting(IGProcessingStage parentStage) {
+        return new IGBlastingMethod(parentStage);
+    }
+
+    static IGCrushingMethod crushing(IGProcessingStage parentStage) {
+        return new IGCrushingMethod(parentStage);
+    }
 }
