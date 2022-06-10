@@ -18,7 +18,7 @@ import net.minecraft.tags.FluidTags;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class MaterialMineralChalcocite  extends MaterialBaseMineral {
+public class MaterialMineralChalcocite extends MaterialBaseMineral {
 
     public MaterialMineralChalcocite() {
         super("chalcocite");
@@ -36,8 +36,7 @@ public class MaterialMineralChalcocite  extends MaterialBaseMineral {
     }
 
     @Override
-    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
-    {
+    public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements() {
         return new LinkedHashSet<>(
                 Arrays.asList(
                         new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
@@ -47,28 +46,32 @@ public class MaterialMineralChalcocite  extends MaterialBaseMineral {
     }
 
     @Override
-    public boolean hasSlag() {return true;}
+    public boolean hasSlag() {
+        return true;
+    }
 
     @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Roasting Stage") {
+        new IGProcessingStage(this, "Roasting Stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag),1000, 1);
+                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
             }
         };
-        new IGProcessingStage(this,"Blasting Stage") {
+        new IGProcessingStage(this, "Blasting Stage") {
             @Override
             protected void describe() {
                 //FIXME blasting process
-                //IRecipeBuilder.blast(this).create("slag_" + getName() + "_to_metal", getParentMaterial().getStack(ItemPattern.slag),
-                //        MetalEnum.Silver.getStack(ItemPattern.ingot),1000, 1);
+                IRecipeBuilder.blasting(this).create(
+                        "slag_" + getName() + "_to_metal",
+                        MetalEnum.Copper.getStack(ItemPattern.ingot, 1),
+                        getParentMaterial().getItemTag(ItemPattern.slag));
             }
         };
-        new IGProcessingStage(this,"Leeching Stage") {
+        new IGProcessingStage(this, "Leeching Stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
