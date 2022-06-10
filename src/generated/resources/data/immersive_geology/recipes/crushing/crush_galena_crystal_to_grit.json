@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_galena"
+  },
+  "input": {
+    "tag": "forge:crystals/galena"
+  },
+  "time": 1000,
+  "energy": 1000
+}

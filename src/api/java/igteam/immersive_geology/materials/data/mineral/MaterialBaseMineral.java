@@ -96,7 +96,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
 
     @Override
     protected boolean hasDust() {
-        return false;
+        return hasCrystal();
     }
 
     @Override
@@ -236,7 +236,6 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         new IGProcessingStage(this,"Default Ore Processing Stage") {
             @Override
             protected void describe() {
-
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
                     IRecipeBuilder.separating(this).create(
                             getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//result
@@ -247,7 +246,15 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                             .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
                             .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
                 }
+            }
+        };
 
+        new IGProcessingStage(this, "Crystal Processing"){
+            @Override
+            protected void describe() {
+                if (hasDust() && hasCrystal()) {
+                    IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit", getStack(ItemPattern.dust), getItemTag(ItemPattern.crystal), 1000, 1000);
+                }
             }
         };
     }
