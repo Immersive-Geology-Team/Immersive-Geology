@@ -2,10 +2,10 @@
   "type": "immersive_geology:gravityseparator",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crushed_ore_magnetite"
+    "item": "immersive_geology:crushed_ore_chalcocite"
   },
   "input": {
-    "tag": "forge:dirty_crushed_ores/stone_magnetite"
+    "tag": "forge:dirty_crushed_ores/stone_chalcocite"
   },
   "waste": {
     "item": "immersive_geology:stone_bit_stone"

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_magnetite"
+      "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_chalcocite"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ore_chunks/granite_magnetite"
+            "tag": "forge:ore_chunks/granite_chalcocite"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_magnetite"
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_chalcocite"
       }
     }
   },

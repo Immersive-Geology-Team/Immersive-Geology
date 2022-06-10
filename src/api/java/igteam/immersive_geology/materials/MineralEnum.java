@@ -25,6 +25,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Alumina(new MaterialMineralAlumina()),
     Anatase(new MaterialMineralAnatase()),
     Acanthite(new MaterialMineralAcanthite()),
+    Chalcocite(new MaterialMineralChalcocite()),
     Cuprite(new MaterialMineralCuprite()),
     Zircon(new MaterialMineralZircon()),
     Monazite(new MaterialMineralMonazite()),
@@ -39,7 +40,8 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Gypsum(new MaterialMineralGypsum()),
     Hematite(new MaterialMineralHematite()),
     Hubnerite(new MaterialMineralHubnerite()),
-    Magnetite(new MaterialMineralMagnetite()),
+    //Disabled due the same processing as Hematite. And Hematite is more common IRL
+   // Magnetite(new MaterialMineralMagnetite()),
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
     SaltPeter(new MaterialMineralSaltpeter()),

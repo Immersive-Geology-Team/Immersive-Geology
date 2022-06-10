@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:block_item_stone_magnetite_ore"
+          "name": "immersive_geology:block_item_stone_chalcocite_ore"
         }
       ],
       "conditions": [
