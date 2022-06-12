@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_monazite"
+    "item": "immersive_geology:dust_monazite"
   },
   "input": {
-    "tag": "forge:dusts/monazite"
+    "tag": "forge:crystals/monazite"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

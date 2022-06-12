@@ -80,14 +80,21 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 };
 
         }
-        //TODO Implement crystal to dust and crystal to ingot transformations
-        /*
+
         new IGProcessingStage(this, "Crystal Processing") {
             @Override
             protected void describe() {
-                IRecipeBuilder.crushing(this).create()
+                if (hasCrystal() && (hasDust() || hasExistingImplementation()))
+                {
+                    IRecipeBuilder.crushing(this).create(
+                            "crystal_" + getName() + "to_dust",
+                            getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 1000, 500);
+                    IRecipeBuilder.basicSmelting(this).create(
+                            getItem(ItemPattern.crystal),
+                            getItem(ItemPattern.ingot));
+                }
             }
-        };*/
+        };
 
     }
 

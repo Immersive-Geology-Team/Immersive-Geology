@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_tungsten"
+  },
+  "input": {
+    "tag": "forge:crystals/tungsten"
+  },
+  "time": 500,
+  "energy": 1000
+}

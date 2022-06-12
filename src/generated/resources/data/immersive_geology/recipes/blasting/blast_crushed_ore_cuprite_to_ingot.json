@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersiveengineering:ingot_copper"
+  },
+  "input": {
+    "tag": "forge:crushed_ores/cuprite"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  }
+}

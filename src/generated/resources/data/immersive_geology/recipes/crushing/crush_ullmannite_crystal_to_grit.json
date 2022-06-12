@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_ullmannite"
+    "item": "immersive_geology:dust_ullmannite"
   },
   "input": {
-    "tag": "forge:dusts/ullmannite"
+    "tag": "forge:crystals/ullmannite"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

@@ -15,9 +15,7 @@ public enum SlurryEnum {
     MANGANESE (new MaterialSlurryWrapper(MetalEnum.Manganese, FluidEnum.HydrochloricAcid),
             new MaterialSlurryWrapper(MetalEnum.Manganese, FluidEnum.SulfuricAcid)),
     COPPER(new MaterialSlurryWrapper(MetalEnum.Copper, FluidEnum.HydrochloricAcid)),
-    SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid)),
-    VANADIUM(new MaterialSlurryWrapper(MetalEnum.Vanadium, FluidEnum.SulfuricAcid));
-
+    SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid));
     final LinkedHashSet<MaterialSlurryWrapper> entries;
 
     SlurryEnum(MaterialSlurryWrapper... slurries){

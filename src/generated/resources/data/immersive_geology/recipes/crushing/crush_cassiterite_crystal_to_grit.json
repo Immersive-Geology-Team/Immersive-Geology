@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_cassiterite"
+    "item": "immersive_geology:dust_cassiterite"
   },
   "input": {
-    "tag": "forge:dusts/cassiterite"
+    "tag": "forge:crystals/cassiterite"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

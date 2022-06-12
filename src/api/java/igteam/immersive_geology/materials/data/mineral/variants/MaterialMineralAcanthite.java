@@ -63,9 +63,10 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
         new IGProcessingStage(this,"Blasting Stage") {
             @Override
             protected void describe() {
-                //FIXME blasting process
-                //IRecipeBuilder.blast(this).create("slag_" + getName() + "_to_metal", getParentMaterial().getStack(ItemPattern.slag),
-                //        MetalEnum.Silver.getStack(ItemPattern.ingot),1000, 1);
+                IRecipeBuilder.blasting(this).create(
+                        "slag_" + getName() + "_to_metal",
+                        getParentMaterial().getItemTag(ItemPattern.slag),
+                        MetalEnum.Silver.getStack(ItemPattern.ingot));
             }
         };
         new IGProcessingStage(this,"Leeching Stage") {

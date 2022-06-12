@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_pyrite"
+    "item": "immersive_geology:dust_pyrite"
   },
   "input": {
-    "tag": "forge:dusts/pyrite"
+    "tag": "forge:crystals/pyrite"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

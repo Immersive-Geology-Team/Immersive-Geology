@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersiveengineering:ingot_lead"
+  },
+  "input": {
+    "tag": "forge:crushed_ores/vanadinite"
+  },
+  "slag": {
+    "item": "immersive_geology:slag_vanadinite"
+  }
+}

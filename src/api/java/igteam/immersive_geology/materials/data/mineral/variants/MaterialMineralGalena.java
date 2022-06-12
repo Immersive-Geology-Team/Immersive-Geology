@@ -8,6 +8,7 @@ import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -26,17 +27,33 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
     }
 
     @Override
+    public boolean hasSlag() {return true;}
+    @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, "Roasting Stage") {
             @Override
             protected void describe() {
+                IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
+                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
 
             }
         };
-    }
+        new IGProcessingStage(this, "Blasting Stage") {
+            @Override
+            protected void describe() {
+                IRecipeBuilder.blasting(this).create(
+                        "slag_" + getName() + "_to_ingot",
+                        getParentMaterial().getItemTag(ItemPattern.slag),
+                        MetalEnum.Lead.getStack(ItemPattern.ingot, 1));
+            }
+        };
 
+        //TODO Arc Furnace smelting slag with zinc to get Lead AND Silver
+
+
+    }
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {

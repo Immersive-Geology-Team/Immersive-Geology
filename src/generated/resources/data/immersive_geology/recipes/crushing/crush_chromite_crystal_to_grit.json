@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_chromite"
+    "item": "immersive_geology:dust_chromite"
   },
   "input": {
-    "tag": "forge:dusts/chromite"
+    "tag": "forge:crystals/chromite"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }
