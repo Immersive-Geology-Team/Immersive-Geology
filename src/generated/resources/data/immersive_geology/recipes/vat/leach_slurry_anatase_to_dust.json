@@ -1,0 +1,26 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluid_brine",
+    "amount": 250
+  },
+  "result": {
+    "item": "immersive_geology:dust_titanium"
+  },
+  "item_input": {
+    "count": 4,
+    "base_ingredient": {
+      "item": "immersive_geology:dust_sodium"
+    }
+  },
+  "fluid_input1": {
+    "tag": "forge:slurrys/hydrochloric_acid_titanium",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "time": 250,
+  "energy": 10000
+}

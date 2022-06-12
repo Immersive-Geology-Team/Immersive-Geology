@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersiveengineering:ingot_silver"
+  },
+  "input": {
+    "tag": "forge:slags/acanthite"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  }
+}

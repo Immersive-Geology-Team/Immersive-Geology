@@ -1,27 +1,19 @@
 package igteam.immersive_geology;
 
-import blusunrize.immersiveengineering.api.*;
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.common.IEContent;
-import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.IRegistryDelegate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.StackLocatorUtil;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 public class IGApi {
     public final static String MODID = "immersive_geology";
@@ -36,7 +28,7 @@ public class IGApi {
         for (MaterialBase m : matSet) {
             value.add(m.getName());
         }
-        return "[" + value.toString() + "]";
+        return "[" + value + "]";
     }
 
     public static Color mixColors(Color... colors) {
@@ -51,7 +43,8 @@ public class IGApi {
         return new Color(r, g, b, a);
     }
 
-    public static void init(){};
+    public static void init(){}
+
     public static Item grabIEItemFromRegistry(ItemPattern p, EnumMetals ieMetals){
         IGApi.getNewLogger().debug("DEBUG: Getting IE or MC Item From Registration");
         if(MaterialBase.isExistingPattern(p)){

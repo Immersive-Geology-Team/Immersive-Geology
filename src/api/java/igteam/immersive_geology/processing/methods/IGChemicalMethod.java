@@ -45,6 +45,7 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.energy = energy;
     }
 
+    //TODO -- add version with itemTag as input
     public void create(String name, ItemStack itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
         methodName = name;
 
