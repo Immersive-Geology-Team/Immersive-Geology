@@ -37,10 +37,9 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
         new IGProcessingStage(this,"Nitric production stage") {
             @Override
             protected void describe() {
-                //TODO fix for tags!!!
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_acid_and_salt",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust),1,
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust), //We never ever gonna use potassium, so sodium

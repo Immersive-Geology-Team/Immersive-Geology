@@ -85,7 +85,6 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
-        // TODO Auto-generated method stub
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.LEAD, 5),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.VANADIUM),

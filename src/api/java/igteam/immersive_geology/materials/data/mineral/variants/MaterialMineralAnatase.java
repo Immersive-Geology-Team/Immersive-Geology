@@ -67,8 +67,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_"+getName() + "_to_dust",
-                        //FIXME - requre 4 dusts of any sodium dust
-                        MetalEnum.Sodium.getStack(ItemPattern.dust, 4),
+                        MetalEnum.Sodium.getItemTag(ItemPattern.dust),4,
                         new FluidTagInput(SlurryEnum.TITANIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Titanium.getStack(ItemPattern.dust, 1),

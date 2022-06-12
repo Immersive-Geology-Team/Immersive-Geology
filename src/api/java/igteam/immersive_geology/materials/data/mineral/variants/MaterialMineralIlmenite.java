@@ -37,7 +37,6 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
-        // TODO Auto-generated method stub
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.IRON),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.TITANIUM),

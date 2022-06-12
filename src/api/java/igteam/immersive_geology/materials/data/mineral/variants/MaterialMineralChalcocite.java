@@ -65,7 +65,6 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
         new IGProcessingStage(this, "Blasting Stage") {
             @Override
             protected void describe() {
-                //FIXME blasting process
                 IRecipeBuilder.blasting(this).create(
                         "slag_" + getName() + "_to_metal",
                         getParentMaterial().getItemTag(ItemPattern.slag),
