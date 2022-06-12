@@ -176,13 +176,8 @@ public class IGRecipeProvider extends RecipeProvider {
     private void buildChemicalMethods(IGChemicalMethod method, Consumer<IFinishedRecipe> consumer){
         logger.info("Data Gen for Chemical Vat Recipes");
         logger.info("[" + method.getMethodName() + "]");
-        if(method.getItemTagInput() != null){
-            VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemTagInput(), method.getEnergy(), method.getTime());
-            recipe.build(consumer, toRL("vat/leach_" + Objects.requireNonNull(method.getMethodName())));
-        } else {
-            VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
-            recipe.build(consumer, toRL("vat/leach_" + Objects.requireNonNull(method.getMethodName())));
-        }
+        VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
+        recipe.build(consumer, toRL("vat/leach_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildBloomeryMethods(IGBloomeryMethod method, Consumer<IFinishedRecipe> consumer){

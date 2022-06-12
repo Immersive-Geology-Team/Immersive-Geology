@@ -8,6 +8,7 @@ import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -28,8 +29,6 @@ public class IGChemicalMethod extends IGProcessingMethod {
     private FluidTagInput fluidInput2;
     private IngredientWithSize itemInput;
 
-    private ITag<Item> itemTagInput;
-
     int time;
     int energy;
 
@@ -41,7 +40,6 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
         this.itemInput = itemInput;
-        this.itemTagInput = null;
 
         this.time = time;
         this.energy = energy;
@@ -55,27 +53,22 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
         this.itemInput = IngredientWithSize.of(itemInput);
-        this.itemTagInput = null;
 
         this.time = time;
         this.energy = energy;
     }
 
-    public void create(String name, ITag<Item> itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
+    public void create(String name, ITag<Item> itemInput, int input_count, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
         methodName = name;
 
         this.fluidResult = fluidResult;
         this.itemResult = itemResult;
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
-        this.itemTagInput = itemInput;
+        this.itemInput = new IngredientWithSize(Ingredient.fromTag(itemInput), input_count);
 
         this.time = time;
         this.energy = energy;
-    }
-
-    public ITag<Item> getItemTagInput() {
-        return itemTagInput;
     }
 
     public String getMethodName() {

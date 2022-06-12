@@ -60,20 +60,4 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
 
         return builder;
     }
-
-    public static VatRecipeBuilder builder(FluidStack fluid_result, ItemStack result, FluidTagInput input_1, FluidTagInput input_2, ITag<Item> input, int energy, int time)
-    {
-        VatRecipeBuilder builder = new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
-        if(!result.isEmpty()){
-            builder.addResult(result);
-        }
-
-        builder.addIngredient("item_input", Ingredient.fromTag(input));
-        builder.addFluidTag("fluid_input1", input_1);
-        builder.addFluidTag("fluid_input2", input_2);
-        builder.setTime(time);
-        builder.setEnergy(energy);
-
-        return builder;
-    }
 }
