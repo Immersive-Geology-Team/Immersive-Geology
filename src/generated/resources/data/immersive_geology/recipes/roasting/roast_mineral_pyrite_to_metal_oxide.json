@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:reverberation_furnace",
+  "result": {
+    "item": "minecraft:iron_ingot"
+  },
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_pyrite"
+  },
+  "wasteMultiplier": 1.0,
+  "time": 1000
+}

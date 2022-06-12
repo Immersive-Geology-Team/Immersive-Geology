@@ -1,10 +1,13 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -26,10 +29,21 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, "Roasting Stage") {
             @Override
             protected void describe() {
+                IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_metal_oxide",
+                        getParentMaterial().getStack(ItemPattern.crushed_ore), MetalEnum.Iron.getStack(ItemPattern.ingot, 1), 1000, 1);
 
+            }
+        };
+        new IGProcessingStage(this, "Blasting Stage") {
+            @Override
+            protected void describe() {
+                IRecipeBuilder.blasting(this).create(
+                        "metal_oxide_" + getName() + "_to_ingot",
+                        MetalEnum.Iron.getItemTag(ItemPattern.metal_oxide),
+                        MetalEnum.Iron.getStack(ItemPattern.ingot, 1));
             }
         };
     }

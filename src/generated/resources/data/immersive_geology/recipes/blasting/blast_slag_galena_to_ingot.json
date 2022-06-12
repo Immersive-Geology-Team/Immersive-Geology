@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "result": {
+    "item": "immersiveengineering:ingot_lead"
+  },
+  "input": {
+    "tag": "forge:slags/galena"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  }
+}
