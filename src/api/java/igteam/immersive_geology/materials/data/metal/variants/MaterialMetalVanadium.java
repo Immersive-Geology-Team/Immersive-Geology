@@ -15,6 +15,10 @@ public class MaterialMetalVanadium extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasMetalOxide(){return true;}
+    @Override
+    public boolean hasCompoundDust(){return true;}
+    @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
         return new LinkedHashSet<>(Arrays.asList(

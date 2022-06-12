@@ -254,7 +254,8 @@ public abstract class MaterialBaseMineral extends MaterialBase {
             @Override
             protected void describe() {
                 if (hasDust() && hasCrystal()) {
-                    IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit", getItemTag(ItemPattern.dust), getStack(ItemPattern.crystal), 1000, 1000);
+                    IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit",
+                            getItemTag(ItemPattern.crystal),  getStack(ItemPattern.dust),1000, 500);
                 }
 
             }

@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:crystal_saltpeter"
+    "item": "immersive_geology:dust_saltpeter"
   },
   "input": {
-    "tag": "forge:dusts/saltpeter"
+    "tag": "forge:crystals/saltpeter"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

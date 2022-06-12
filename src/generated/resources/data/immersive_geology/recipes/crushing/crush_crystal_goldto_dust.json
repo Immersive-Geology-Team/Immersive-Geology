@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersiveengineering:dust_gold"
+  },
+  "input": {
+    "tag": "forge:crystals/gold"
+  },
+  "time": 500,
+  "energy": 1000
+}

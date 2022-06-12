@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_dust_nickel": {
+    "has_crystal_nickel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersiveengineering:dust_nickel"
+            "item": "immersive_geology:crystal_nickel"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_dust_nickel",
+      "has_crystal_nickel",
       "has_the_recipe"
     ]
   ]

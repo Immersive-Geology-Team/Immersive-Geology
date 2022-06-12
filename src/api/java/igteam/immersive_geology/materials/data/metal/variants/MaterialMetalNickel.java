@@ -16,13 +16,19 @@ public class MaterialMetalNickel extends MaterialBaseMetal {
 
     @Override
     public boolean isNative() {
-        return true;
+        return false;
     }
-    
+
+
+    @Override
+    public boolean hasMetalOxide () {return true;}
     @Override
     public boolean hasExistingImplementation() {
         return true;
     }
+
+    @Override
+    public boolean hasCrystal() {return true;}
 
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
