@@ -28,24 +28,25 @@ public class IGChemicalMethod extends IGProcessingMethod {
     private FluidTagInput fluidInput2;
     private IngredientWithSize itemInput;
 
+    private ITag<Item> itemTagInput;
+
     int time;
     int energy;
 
     public void create(IngredientWithSize itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
-        String sanitizedTagName = itemInput.toString().substring(primaryFluid.toString().indexOf("/")+1, secondaryFluid.toString().indexOf("]"));
-        methodName = sanitizedTagName;
+        methodName = itemInput.toString().substring(primaryFluid.toString().indexOf("/")+1, secondaryFluid.toString().indexOf("]"));
 
         this.fluidResult = fluidResult;
         this.itemResult = itemResult;
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
         this.itemInput = itemInput;
+        this.itemTagInput = null;
 
         this.time = time;
         this.energy = energy;
     }
 
-    //TODO -- add version with itemTag as input
     public void create(String name, ItemStack itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
         methodName = name;
 
@@ -54,9 +55,27 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
         this.itemInput = IngredientWithSize.of(itemInput);
+        this.itemTagInput = null;
 
         this.time = time;
         this.energy = energy;
+    }
+
+    public void create(String name, ITag<Item> itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
+        methodName = name;
+
+        this.fluidResult = fluidResult;
+        this.itemResult = itemResult;
+        this.fluidInput1 = primaryFluid;
+        this.fluidInput2 = secondaryFluid;
+        this.itemTagInput = itemInput;
+
+        this.time = time;
+        this.energy = energy;
+    }
+
+    public ITag<Item> getItemTagInput() {
+        return itemTagInput;
     }
 
     public String getMethodName() {

@@ -4,7 +4,10 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import igteam.immersive_geology.processing.Serializers;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraftforge.fluids.FluidStack;
 
 public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
@@ -28,7 +31,6 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
         return new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
     }
 
-
     public VatRecipeBuilder addItemInput(ItemStack input){
         if(!input.isEmpty()) {
             this.addIngredient("item_input", IngredientWithSize.of(input));
@@ -51,6 +53,22 @@ public class VatRecipeBuilder extends IEFinishedRecipe<VatRecipeBuilder> {
         }
 
         builder.addIngredient("item_input", input);
+        builder.addFluidTag("fluid_input1", input_1);
+        builder.addFluidTag("fluid_input2", input_2);
+        builder.setTime(time);
+        builder.setEnergy(energy);
+
+        return builder;
+    }
+
+    public static VatRecipeBuilder builder(FluidStack fluid_result, ItemStack result, FluidTagInput input_1, FluidTagInput input_2, ITag<Item> input, int energy, int time)
+    {
+        VatRecipeBuilder builder = new VatRecipeBuilder().addFluid("fluid_result", fluid_result);
+        if(!result.isEmpty()){
+            builder.addResult(result);
+        }
+
+        builder.addIngredient("item_input", Ingredient.fromTag(input));
         builder.addFluidTag("fluid_input1", input_1);
         builder.addFluidTag("fluid_input2", input_2);
         builder.setTime(time);
