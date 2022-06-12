@@ -87,7 +87,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 if (hasCrystal() && (hasDust() || hasExistingImplementation()))
                 {
                     IRecipeBuilder.crushing(this).create(
-                            "crystal_" + getName() + "to_dust",
+                            "crystal_" + getName() + "_to_dust",
                             getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 1000, 500);
                     IRecipeBuilder.basicSmelting(this).create(
                             getItem(ItemPattern.crystal),

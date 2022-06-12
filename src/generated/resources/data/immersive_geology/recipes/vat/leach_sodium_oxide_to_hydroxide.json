@@ -1,0 +1,23 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluid_sodium_hydroxide",
+    "amount": 250
+  },
+  "item_input": {
+    "count": 2,
+    "base_ingredient": {
+      "item": "immersive_geology:metal_oxide_sodium"
+    }
+  },
+  "fluid_input1": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "time": 240,
+  "energy": 12000
+}

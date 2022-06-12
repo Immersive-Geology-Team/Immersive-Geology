@@ -1,0 +1,24 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluid_hydrochloric_acid",
+    "amount": 125
+  },
+  "result": {
+    "item": "immersive_geology:compound_dust_sodium"
+  },
+  "item_input": {
+    "count": 0,
+    "base_ingredient": []
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/sulfuric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "forge:fluids/brine",
+    "amount": 125
+  },
+  "time": 240,
+  "energy": 12000
+}
