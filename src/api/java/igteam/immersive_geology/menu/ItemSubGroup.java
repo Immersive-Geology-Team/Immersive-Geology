@@ -1,6 +1,7 @@
 package igteam.immersive_geology.menu;
 
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.MineralEnum;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
@@ -36,6 +37,10 @@ public enum ItemSubGroup {
     public MaterialInterface<? extends MaterialBase> getMaterial() {
         try {
             return MetalEnum.valueOf(materialName);
+        } catch (Exception ignored){}
+
+        try {
+            return MineralEnum.valueOf(materialName);
         } catch (Exception ignored){}
 
         try {
