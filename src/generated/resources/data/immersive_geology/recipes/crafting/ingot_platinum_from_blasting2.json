@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:dust_platinum"
+    "item": "immersive_geology:crystal_platinum"
   },
   "result": "immersive_geology:ingot_platinum",
   "experience": 2.0,

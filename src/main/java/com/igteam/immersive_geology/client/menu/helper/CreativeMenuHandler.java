@@ -117,13 +117,12 @@ public class CreativeMenuHandler {
 
             MaterialPattern groupPattern = group.getPattern();
             ItemStack stack;
-            if(groupPattern == ItemPattern.ore_chunk || groupPattern == ItemPattern.dirty_crushed_ore) {
+            if(groupPattern == ItemPattern.ore_chunk || groupPattern == ItemPattern.dirty_crushed_ore || groupPattern == ItemPattern.ore_bit) {
                 // A nice quick and dirty fix, used when an icon has 'dual' materials  ~Muddykat
                 stack = group.getMaterial().getStack(groupPattern, StoneEnum.Stone);
             } else {
                 stack = group.getMaterial().getStack(groupPattern);
             }
-
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
                 mc.getItemRenderer().renderItemIntoGUI(stack, x + 1, y + 2);

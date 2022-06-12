@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_platinum": {
+    "has_dust_platinum": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:crystal_platinum"
+            "item": "immersive_geology:dust_platinum"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_crystal_platinum",
+      "has_dust_platinum",
       "has_the_recipe"
     ]
   ]

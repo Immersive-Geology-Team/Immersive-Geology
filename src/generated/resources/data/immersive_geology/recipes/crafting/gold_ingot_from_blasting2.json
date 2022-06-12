@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersiveengineering:dust_gold"
+    "item": "immersive_geology:crystal_gold"
   },
   "result": "minecraft:gold_ingot",
   "experience": 2.0,

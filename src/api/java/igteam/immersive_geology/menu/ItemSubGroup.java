@@ -10,8 +10,8 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 
 public enum ItemSubGroup {
-    natural(3, "Gold"),
-    processed(13, "Tin"),
+    natural(4, "Monazite"),
+    processed(11, "Chromium"),
     decoration(1, "Titanium", true),
     misc(2, "Stone");
 

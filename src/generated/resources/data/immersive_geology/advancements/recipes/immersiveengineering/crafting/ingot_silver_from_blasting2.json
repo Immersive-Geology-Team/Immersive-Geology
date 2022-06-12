@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_dust_silver": {
+    "has_crystal_silver": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersiveengineering:dust_silver"
+            "item": "immersive_geology:crystal_silver"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_dust_silver",
+      "has_crystal_silver",
       "has_the_recipe"
     ]
   ]
