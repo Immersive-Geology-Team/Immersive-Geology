@@ -105,7 +105,7 @@ public abstract class MaterialBase {
 
         Item igItem = IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, pattern));
         if(igItem == null) {
-            logger.error("ERROR: IG ITEM IS NULL: " + pattern.getName() + " | " + getName());
+            logger.error("Failed to get IG Item: " + getRegistryKey(this, pattern).toString());
         }
         return igItem;
     }
