@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral;
 
+import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
@@ -253,8 +254,9 @@ public abstract class MaterialBaseMineral extends MaterialBase {
             @Override
             protected void describe() {
                 if (hasDust() && hasCrystal()) {
-                    IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit", getStack(ItemPattern.dust), getItemTag(ItemPattern.crystal), 1000, 1000);
+                    IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit", getItemTag(ItemPattern.dust), getStack(ItemPattern.crystal), 1000, 1000);
                 }
+
             }
         };
     }

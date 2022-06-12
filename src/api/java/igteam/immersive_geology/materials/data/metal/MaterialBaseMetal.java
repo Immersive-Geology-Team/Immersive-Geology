@@ -10,8 +10,13 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourcePackType;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
@@ -37,6 +42,13 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 @Override
                 protected void describe() {
                     for (MaterialInterface<?> stone : StoneEnum.values()) {
+
+                        ItemStack dirty_crushed_ore = stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial());
+                        ITag<Item> ore_chunk = getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get());
+                        ITag<Item> ore_bit = getParentMaterial().getItemTag(ItemPattern.ore_bit, stone.get());
+
+                        IRecipeBuilder.crushing(this).create("crush_chunk_"+ getName() +"_to_dirty_crushed", ore_chunk, dirty_crushed_ore, ore_bit, 1000, 1000, 0.33f);
+
                         IRecipeBuilder.separating(this).create(
                                 getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//input
                                 getParentMaterial().getStack(ItemPattern.crushed_ore),
@@ -44,22 +56,29 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         );
 
                         IRecipeBuilder.crafting(this)
-                                .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
-                                .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                                .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()))
+                                .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()));
+
+
                     }
                 }
             };
 
             //Also note Osmium is a Native metal, so yeah I don't think that'd work for it... May need to hardcode the Bloomery recipes, it may just be better to do so
 
-            if (!hasExistingImplementation()) { //TODO Fix this, essentially when something has an existing implementation EG: Silver, it already has an Ingot, so an Ingot pattern will not retrieve the ingot, we'd need to use a tag for output.
-                new IGProcessingStage(this, "Smelting for Native Metals") {
+
+                new IGProcessingStage(this, "Ingot Processing") {
                     @Override
                     protected void describe() {
-                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
+                        if (!hasExistingImplementation()) {
+                            IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
+                        }
+
+                        IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
+
                     }
                 };
-            }
+
         }
         //TODO Implement crystal to dust and crystal to ingot transformations
         /*

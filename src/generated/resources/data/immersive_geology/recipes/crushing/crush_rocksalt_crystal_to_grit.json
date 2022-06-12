@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_rocksalt"
+    "item": "immersive_geology:crystal_rocksalt"
   },
   "input": {
-    "tag": "forge:crystals/rocksalt"
+    "tag": "forge:dusts/rocksalt"
   },
   "time": 1000,
   "energy": 1000

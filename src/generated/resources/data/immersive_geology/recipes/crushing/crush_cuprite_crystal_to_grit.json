@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_cuprite"
+    "item": "immersive_geology:crystal_cuprite"
   },
   "input": {
-    "tag": "forge:crystals/cuprite"
+    "tag": "forge:dusts/cuprite"
   },
   "time": 1000,
   "energy": 1000

@@ -33,7 +33,8 @@ public class IGTags {
     public static HashMap<FluidPattern, HashMap<String, ITag.INamedTag<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
     public static void initialize(){
-        logger.log(Level.INFO, "Initializing Tags");
+        logger.log(Level.INFO, "Immersive Geology: Initializing Tags");
+
         for (ItemPattern pattern : ItemPattern.values()) {
             IG_ITEM_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Item>>());
 
@@ -141,6 +142,7 @@ public class IGTags {
                 }
             }
         }
+        logger.log(Level.INFO, "Immersive Geology: Finished Initializing Tags");
     }
 
     private static void createWrapperForPattern(MaterialPattern p, MaterialBase... materials){

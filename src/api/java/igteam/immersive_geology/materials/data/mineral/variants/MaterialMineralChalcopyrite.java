@@ -53,7 +53,7 @@ public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag", getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag),1000, 1);
-                IRecipeBuilder.separating(this).create(getParentMaterial().getItemTag(ItemPattern.slag),MetalEnum.Iron.getStack(ItemPattern.metal_oxide), MetalEnum.Copper.getStack(ItemPattern.metal_oxide));
+                IRecipeBuilder.separating(this).create(getParentMaterial().getItemTag(ItemPattern.slag), MetalEnum.Iron.getStack(ItemPattern.metal_oxide), MetalEnum.Copper.getStack(ItemPattern.metal_oxide));
             }
         };
     }

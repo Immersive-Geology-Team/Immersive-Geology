@@ -109,7 +109,7 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
 
     @Override
     public Item getItem(MaterialPattern pattern) {
-        return material.getItem(pattern);
+        return material.getItem((ItemPattern) pattern);
     }
 
     @Override
@@ -138,7 +138,7 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
 
     @Override
     public Block getBlock(MaterialPattern pattern) {
-        return material.getBlock(pattern);
+        return material.getBlock((BlockPattern) pattern);
     }
 
     @Override

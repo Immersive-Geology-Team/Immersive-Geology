@@ -88,7 +88,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
 
     @Override
     public Item getItem(MaterialPattern pattern) {
-        return material.getItem(pattern);
+        return material.getItem((ItemPattern) pattern);
     }
 
     @Override
@@ -117,7 +117,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
 
     @Override
     public Block getBlock(MaterialPattern pattern) {
-        return material.getBlock(pattern);
+        return material.getBlock((BlockPattern) pattern);
     }
 
     @Override

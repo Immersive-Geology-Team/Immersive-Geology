@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_uraninite"
+    "item": "immersive_geology:crystal_uraninite"
   },
   "input": {
-    "tag": "forge:crystals/uraninite"
+    "tag": "forge:dusts/uraninite"
   },
   "time": 1000,
   "energy": 1000

@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_acanthite"
+    "item": "immersive_geology:crystal_acanthite"
   },
   "input": {
-    "tag": "forge:crystals/acanthite"
+    "tag": "forge:dusts/acanthite"
   },
   "time": 1000,
   "energy": 1000

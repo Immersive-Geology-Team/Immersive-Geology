@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_hematite"
+    "item": "immersive_geology:crystal_hematite"
   },
   "input": {
-    "tag": "forge:crystals/hematite"
+    "tag": "forge:dusts/hematite"
   },
   "time": 1000,
   "energy": 1000

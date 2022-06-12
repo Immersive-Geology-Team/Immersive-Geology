@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:shapeless/craft_gold_ingot"
+      "immersive_geology:crafting/ingot_nickel_from_blasting"
     ]
   },
   "criteria": {
-    "has_silver": {
+    "has_dust_nickel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/silver"
+            "item": "immersiveengineering:dust_nickel"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:shapeless/craft_gold_ingot"
+        "recipe": "immersive_geology:crafting/ingot_nickel_from_blasting"
       }
     }
   },
   "requirements": [
     [
-      "has_silver",
+      "has_dust_nickel",
       "has_the_recipe"
     ]
   ]

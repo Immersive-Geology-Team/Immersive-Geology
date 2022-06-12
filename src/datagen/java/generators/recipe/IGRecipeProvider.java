@@ -1,6 +1,7 @@
 package generators.recipe;
 
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
@@ -9,18 +10,20 @@ import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.builders.*;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.methods.*;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +41,10 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+
+        String iePath = Objects.requireNonNull(IGApi.grabIEItemFromRegistry(ItemPattern.ingot, EnumMetals.GOLD)).getRegistryName().getPath();
+        logger.warn("IE Path: " + iePath);
+
         for(MaterialInterface container : APIMaterials.all()){
             MaterialBase material = container.get();
 
@@ -45,6 +52,7 @@ public class IGRecipeProvider extends RecipeProvider {
                 if(stage != null) {
                     logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + material.getName());
                     for (IGProcessingMethod method : stage.getMethods()) {
+                        logger.log(Level.DEBUG, "Building for " + stage.getStageName() + " in Material: " + material.getName());
                         switch (method.getRecipeType()) {
                             case Crafting:
                                 buildCraftingMethods((IGCraftingMethod) method, consumer);
@@ -73,6 +81,9 @@ public class IGRecipeProvider extends RecipeProvider {
                             case Crushing:
                                 buildCrushingMethods((IGCrushingMethod) method, consumer);
                                 break;
+                            case basicSmelting:
+                                buildBasicSmeltingMethods((IGBasicSmeltingMethod) method, consumer);
+                                break;
                         }
                     }
                 }
@@ -80,15 +91,29 @@ public class IGRecipeProvider extends RecipeProvider {
         }
     }
 
+    private void buildBasicSmeltingMethods(IGBasicSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {
+        IItemProvider input = method.getInput();
+        IItemProvider output = method.getOutput();
+        float xp = 2;
+        int smeltingTime = 200;
+        CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, this.toRL(this.toPath(output) + "_from_blasting"));
+    }
+
     private void buildCrushingMethods(IGCrushingMethod method, Consumer<IFinishedRecipe> consumer) {
-        CrusherRecipeBuilder recipe = CrusherRecipeBuilder.builder(method.getOutput());
-        recipe.addInput(method.getInput());
-        if(method.hasSecondary()){
-            recipe.addSecondary(method.getSecondary(), method.getSecondaryChange());
+        logger.warn("Attempting to build Crusher Method: " + method.getMethodName());
+        logger.warn("Output: " + method.getOutput().getItem().getRegistryName().getPath());
+        if(!method.getOutput().isEmpty()) {
+            CrusherRecipeBuilder recipe = CrusherRecipeBuilder.builder(method.getOutput());
+            recipe.addInput(method.getInput());
+            if (method.hasSecondary()) {
+                recipe.addSecondary(method.getSecondary(), method.getSecondaryChange());
+            }
+            recipe.setTime(method.getTime());
+            recipe.setEnergy(method.getEnergy());
+            recipe.build(consumer, toRL("crushing/crush_" + Objects.requireNonNull(method.getMethodName())));
+        } else {
+            logger.error("Failed to create Crusher Recipe for [" + method.getMethodName() + "]");
         }
-        recipe.setTime(method.getTime());
-        recipe.setEnergy(method.getEnergy());
-        recipe.build(consumer, toRL("crushing/crush_" + Objects.requireNonNull(method.getMethodName())));
     }
 
     private void buildBlastingMethods(IGBlastingMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -100,8 +125,9 @@ public class IGRecipeProvider extends RecipeProvider {
 
     private void buildCrystallizationMethods(IGCrystallizationMethod method, Consumer<IFinishedRecipe> consumer) {
         logger.info("Data Gen for Crystallization Recipes");
-        logger.info("[" + method.getMethodName() + "]");
-        CrystalizerRecipeBuilder recipe = CrystalizerRecipeBuilder.builder(method.getItemResult());
+        logger.info("[" + method.getMethodName() + "] - " + method.getItemResult().getItem().getRegistryName());
+        CrystalizerRecipeBuilder recipe = CrystalizerRecipeBuilder.builder();
+        recipe.addItem("result", method.getItemResult());
         recipe.addFluidInput(method.getFluidInput());
         recipe.setTime(method.getTime());
         recipe.setEnergy(method.getEnergy());
@@ -175,5 +201,9 @@ public class IGRecipeProvider extends RecipeProvider {
         }
         PATH_COUNT.put(s, 1);
         return new ResourceLocation(IGLib.MODID, s);
+    }
+
+    private String toPath(IItemProvider src) {
+        return Objects.requireNonNull(src.asItem().getRegistryName()).getPath();
     }
 }

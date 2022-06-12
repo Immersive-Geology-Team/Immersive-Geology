@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_thorianite"
+    "item": "immersive_geology:crystal_thorianite"
   },
   "input": {
-    "tag": "forge:crystals/thorianite"
+    "tag": "forge:dusts/thorianite"
   },
   "time": 1000,
   "energy": 1000

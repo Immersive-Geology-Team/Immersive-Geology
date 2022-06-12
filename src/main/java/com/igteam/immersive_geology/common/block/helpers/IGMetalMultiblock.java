@@ -42,6 +42,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
         }
 
         this.itemBlock = new IGGenericBlockItem(this, getMachineMaterial(), ItemPattern.block_item);
+        this.itemBlock.useDefaultNamingConvention();
         this.itemBlock.setRegistryName(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()));
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);

@@ -59,6 +59,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
                         getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
+
             }
         };
         new IGProcessingStage(this, "Blasting Stage") {
@@ -67,8 +68,8 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                 //FIXME blasting process
                 IRecipeBuilder.blasting(this).create(
                         "slag_" + getName() + "_to_metal",
-                        MetalEnum.Copper.getStack(ItemPattern.ingot, 1),
-                        getParentMaterial().getItemTag(ItemPattern.slag));
+                        getParentMaterial().getItemTag(ItemPattern.slag),
+                        MetalEnum.Copper.getStack(ItemPattern.ingot, 1));
             }
         };
         new IGProcessingStage(this, "Leeching Stage") {
@@ -88,6 +89,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                         MetalEnum.Copper.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         120, 10000);
+
                 IRecipeBuilder.separating(this).create(
                         MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
                         MetalEnum.Platinum.getStack(ItemPattern.dust),

@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_anatase"
+    "item": "immersive_geology:crystal_anatase"
   },
   "input": {
-    "tag": "forge:crystals/anatase"
+    "tag": "forge:dusts/anatase"
   },
   "time": 1000,
   "energy": 1000

@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_alumina"
+    "item": "immersive_geology:crystal_alumina"
   },
   "input": {
-    "tag": "forge:crystals/alumina"
+    "tag": "forge:dusts/alumina"
   },
   "time": 1000,
   "energy": 1000

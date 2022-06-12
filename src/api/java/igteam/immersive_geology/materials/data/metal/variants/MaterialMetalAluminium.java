@@ -1,8 +1,12 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 

@@ -2,9 +2,11 @@ package igteam.immersive_geology.materials.data;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -30,6 +32,10 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,6 +56,10 @@ public abstract class MaterialBase {
         initializeColorTint((p) -> true); //default will be overridden later on in ClientProxy
     }
 
+    public static boolean isExistingPattern(MaterialPattern pattern){
+        return (pattern == ItemPattern.ingot || pattern == ItemPattern.dust || pattern == ItemPattern.plate || pattern == ItemPattern.nugget);
+    }
+
     protected void initializeColorMap(Function<MaterialPattern, Integer> function) {
         colorFunction = function;
     }
@@ -59,7 +69,7 @@ public abstract class MaterialBase {
     }
 
     public void build() {
-        logger.log(Level.INFO, "Building " + getName() + " Processing Stages");
+        logger.debug("Building " + getName() + " Processing Stages");
 
         //Recipes this material implements
         setupProcessingStages();
@@ -72,11 +82,9 @@ public abstract class MaterialBase {
 
     private final Logger logger = LogManager.getLogger(MaterialBase.class.getName());
 
-    public Block getBlock(MaterialPattern p) {
+    public Block getBlock(BlockPattern p) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, p));
-    }
-
-    ;
+    };
 
     public Block getBlock(MaterialPattern p, MaterialInterface secondaryMaterial) {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
@@ -86,11 +94,29 @@ public abstract class MaterialBase {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
     }
 
-    public Item getItem(MaterialPattern pattern) {
-        return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, pattern));
+    public Item getItem(ItemPattern pattern) {
+        if(getIEMetalEquiv() != null && isExistingPattern(pattern)) {
+            logger.debug("Attempting to find IE Metal or MC Metal Item: " + getName() + " | " + pattern.getName());
+            Item ieItem = IGApi.grabIEItemFromRegistry(pattern, getIEMetalEquiv());
+            if (ieItem != null) {
+                return ieItem;
+            }
+        }
+
+        Item igItem = IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, pattern));
+        if(igItem == null) {
+            logger.error("ERROR: IG ITEM IS NULL: " + pattern.getName() + " | " + getName());
+        }
+        return igItem;
     }
 
-    ;
+    private EnumMetals getIEMetalEquiv() {
+        try {
+            return EnumMetals.valueOf(getName().toUpperCase());
+        } catch (IllegalArgumentException exception){
+            return null;
+        }
+    };
 
     public Item getItem(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         return IGRegistryProvider.IG_ITEM_REGISTRY.get(getRegistryKey(this, secondaryMaterial, pattern));
@@ -101,10 +127,16 @@ public abstract class MaterialBase {
     }
 
     public ItemStack getStack(MaterialPattern pattern) {
-        return new ItemStack(getItem(pattern));
-    }
+        if(pattern instanceof ItemPattern) {
+            return new ItemStack(getItem((ItemPattern) pattern));
+        }
+        if(pattern instanceof BlockPattern){
+            return new ItemStack(getBlock((BlockPattern) pattern));
+        }
 
-    ;
+        logger.error("Immersive Geology: Internal Method 'getStack(MaterialPattern pattern)' Was incorrectly referenced");
+        return ItemStack.EMPTY;
+    };
 
     public ItemStack getStack(MaterialPattern pattern, MaterialInterface secondaryMaterial) {
         return new ItemStack(getItem(pattern, secondaryMaterial));
@@ -534,5 +566,4 @@ public abstract class MaterialBase {
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
 
     public abstract boolean isFluidPortable(ItemPattern bucket);
-
 }

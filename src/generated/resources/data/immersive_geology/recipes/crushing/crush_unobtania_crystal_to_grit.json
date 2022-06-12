@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_unobtania"
+    "item": "immersive_geology:crystal_unobtania"
   },
   "input": {
-    "tag": "forge:crystals/unobtania"
+    "tag": "forge:dusts/unobtania"
   },
   "time": 1000,
   "energy": 1000

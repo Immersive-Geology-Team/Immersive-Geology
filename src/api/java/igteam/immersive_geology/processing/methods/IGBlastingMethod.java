@@ -21,14 +21,14 @@ public class IGBlastingMethod extends IGProcessingMethod {
 
     private String name;
 
-    public void create(String method_name, ItemStack output, ITag<Item> input){
+    public void create(String method_name, ITag<Item> input, ItemStack output){
         this.input = input;
         this.output = output;
         this.name = method_name;
         this.slag = new ItemStack(IEItems.Ingredients.slag);
     }
 
-    public void create(String method_name, ItemStack output, ITag<Item> input, ItemStack slag){
+    public void create(String method_name, ITag<Item> input, ItemStack output, ItemStack slag){
         this.input = input;
         this.output = output;
         this.name = method_name;

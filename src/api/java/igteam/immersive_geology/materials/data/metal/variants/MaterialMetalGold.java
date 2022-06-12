@@ -6,10 +6,14 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
 import java.util.Arrays;
@@ -20,22 +24,6 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     public MaterialMetalGold() {
         super("gold");
         initializeColorMap((p) -> 0xFFD700);
-    }
-
-    @Override
-    protected void setupProcessingStages() {
-        super.setupProcessingStages();
-
-        new IGProcessingStage(this,"Extraction Stage") {
-            @Override
-            protected void describe() {
-                IRecipeBuilder.crafting(this)
-                        .shapeless(Items.GOLD_INGOT, 16,
-                                IETags.getTagsFor(EnumMetals.SILVER).ingot,
-                                MetalEnum.Chromium.getItemTag(ItemPattern.ingot))
-                        .finializeRecipe("gold_test", "has_silver", MetalEnum.Silver.getItemTag(ItemPattern.ingot));
-            }
-        };
     }
 
     @Override
@@ -55,5 +43,4 @@ public class MaterialMetalGold extends MaterialBaseMetal {
                 new ElementProportion(PeriodicTableElement.GOLD)
         ));
     }
-
 }

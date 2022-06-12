@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.core.proxy;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
@@ -65,6 +66,11 @@ public class ClientProxy extends ServerProxy {
         registerItemColors();
         registerBlockColors();
         registerSpecialRenderers();
+        supplyMaterialTint(event);
+
+    }
+
+    private void supplyMaterialTint(FMLClientSetupEvent event){
         Minecraft minecraft = event.getMinecraftSupplier().get();
         for(MaterialInterface<?> i : APIMaterials.all()) {
             MaterialBase base = i.get();
@@ -73,7 +79,7 @@ public class ClientProxy extends ServerProxy {
                 colorCheckMap.put(pattern, true);
                 if (base.hasPattern(pattern)) {
                     ResourceLocation test = new ResourceLocation(IGApi.MODID, "textures/" + (pattern instanceof ItemPattern ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
-                    if (pattern.equals(BlockPattern.slab)) //crunch for sheetmetal slabs
+                    if (pattern.equals(BlockPattern.slab)) //crutch for sheetmetal slabs
                     {
                         test =  new ResourceLocation(IGApi.MODID, "textures/" + (pattern instanceof ItemPattern ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockPattern.sheetmetal.getName() + ".png");
                     }
@@ -86,13 +92,12 @@ public class ClientProxy extends ServerProxy {
 
             base.initializeColorTint(colorCheckMap::get);
         }
-
     }
 
     private void registerSpecialRenderers(){
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.VAT.get(), MultiblockChemicalVatRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.GRAVITY.get(), MultiblockGravitySeparatorRenderer::new);
-        //ClientRegistry.bindTileEntityRenderer(IGTileTypes.REV_FURNACE.get(), MultiblockReverberationFurnaceRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(IGTileTypes.REV_FURNACE.get(), MultiblockReverberationFurnaceRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.CRYSTALLIZER.get(), MultiblockCrystallizerRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.ROTARYKILN.get(), MultiblockRotaryKilnRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.BLOOMERY.get(), BloomeryRenderer::new);

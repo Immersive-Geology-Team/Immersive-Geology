@@ -1,5 +1,6 @@
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import generators.IGBlockStateProvider;
 import generators.IGItemModelProvider;
 import generators.loot.BlockLootProvider;
@@ -35,6 +36,7 @@ public class IGDataProvider {
             generator.addProvider(new IGItemTagProvider(generator,blockTagGen, exhelper));
             generator.addProvider(new IGFluidTagProvider(generator, exhelper));
 
+            IGRegistrationHolder.buildRecipes(); //Only used in the Recipe Provider, so we should build them here...
             generator.addProvider(new IGRecipeProvider(generator));
         }
 

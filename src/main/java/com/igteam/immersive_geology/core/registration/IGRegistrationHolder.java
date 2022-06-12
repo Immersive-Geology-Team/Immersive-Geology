@@ -38,17 +38,15 @@ public class IGRegistrationHolder {
     private static final Logger logger = ImmersiveGeology.getNewLogger();
 
     public static void initialize(){
-        logger.info("Registration of Material Interfaces");
+        logger.info("Immersive Geology: Internal Registration of Material Interfaces");
 
         registerForInterface(StoneEnum.values());
         registerForInterface(MetalEnum.values());
         registerForInterface(MineralEnum.values());
-
         registerForInterface(MiscEnum.values());
-
         registerForInterface(FluidEnum.values());
 
-        logger.info("Registration of Slurry Fluids");
+        logger.info("Immersive Geology: Internal Registration of Slurry Fluids");
         //This needs to be handled differently
         for(SlurryEnum slurryEnum : SlurryEnum.values()){
             for (MaterialSlurryWrapper slurry : slurryEnum.getEntries()) {
@@ -56,13 +54,15 @@ public class IGRegistrationHolder {
             }
         }
 
+        logger.info("Immersive Geology: Internal Registration of Gas");
         registerForInterface(GasEnum.values());
 
     }
 
 
     public static void buildRecipes() {
-        logger.log(Level.INFO, "Building Recipes");
+        logger.info("Immersive Geology: Building Internal Recipe Structures");
+
         buildMaterialRecipes(StoneEnum.values());
         buildMaterialRecipes(MetalEnum.values());
         buildMaterialRecipes(MineralEnum.values());
@@ -73,7 +73,7 @@ public class IGRegistrationHolder {
         buildMaterialRecipes(GasEnum.values());
     }
 
-    private static void registerForInterface(MaterialInterface... material){
+    private static void registerForInterface(MaterialInterface<?>... material){
         Arrays.stream(material).iterator().forEachRemaining((m) -> {
             //Item Patterns
             Arrays.stream(ItemPattern.values()).iterator().forEachRemaining((pattern) -> {
@@ -132,7 +132,6 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForBlockPattern(MaterialInterface<?> m, BlockPattern p){
-
         switch(p){
             case ore:
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
@@ -169,7 +168,7 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForFluidTypes(MaterialInterface<MaterialBaseFluid> m, FluidPattern p){
+    private static void registerForFluidTypes(MaterialInterface<?> m, FluidPattern p){
         IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
         if(m.get().hasFlask()){
             register(fluid.getFluidContainer());
@@ -179,7 +178,6 @@ public class IGRegistrationHolder {
 
     private static void registerForSlurryTypes(MaterialSlurryWrapper slurry){
         IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getColor(FluidPattern.slurry), false), FluidPattern.slurry);
-        logger.info("Registering: " + slurry.getName());
         if(slurry.hasFlask()){
             register(fluid.getFluidContainer());
         }
@@ -187,45 +185,43 @@ public class IGRegistrationHolder {
     }
 
     private static void register(Item i){
-        logger.info("Registering: " + i.getRegistryName());
         IGRegistryProvider.IG_ITEM_REGISTRY.put(i.getRegistryName(), i);
     }
 
     private static void register(Block b){
-        logger.info("Registering: " + b.getRegistryName());
         IGRegistryProvider.IG_BLOCK_REGISTRY.put(b.getRegistryName(), b);
     }
 
     private static void register(Fluid f){
-        logger.info("Registering: " + f.getRegistryName());
         IGRegistryProvider.IG_FLUID_REGISTRY.put(f.getRegistryName(), f);
     }
 
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
-        logger.info("Applying Item Registration");
-
+        logger.info("Immersive Geology: Item Registration");
 
         IGRegistryProvider.IG_ITEM_REGISTRY.keySet().forEach((key) -> {
-            logger.info("Attempting Registry for " + key.toString());
+            logger.debug("Registering: " + key.toString());
             event.getRegistry().register(IGRegistryProvider.IG_ITEM_REGISTRY.get(key));
         });
     }
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
-        logger.info("Applying Block Registries");
+        logger.info("Immersive Geology: Block Registration");
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
+            logger.debug("Registering: " + block.toString());
             event.getRegistry().register(block);
         });
     }
 
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
-        logger.info("Applying Fluid Registries");
+        logger.info("Immersive Geology: Fluid Registration");
 
-        IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) ->{
+        IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) -> {
+            logger.debug("Registering: " + fluid.toString());
             event.getRegistry().register(fluid);
         });
     }

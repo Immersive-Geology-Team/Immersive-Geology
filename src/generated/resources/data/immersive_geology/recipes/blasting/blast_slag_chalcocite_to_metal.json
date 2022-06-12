@@ -1,10 +1,10 @@
 {
   "type": "immersiveengineering:blast_furnace",
   "result": {
-    "item": "immersive_geology:slag_chalcocite"
+    "item": "immersiveengineering:ingot_copper"
   },
   "input": {
-    "tag": "forge:ingots/copper"
+    "tag": "forge:slags/chalcocite"
   },
   "slag": {
     "item": "immersiveengineering:slag"

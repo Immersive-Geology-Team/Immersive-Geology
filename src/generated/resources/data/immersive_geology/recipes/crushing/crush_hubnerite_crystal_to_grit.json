@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_hubnerite"
+    "item": "immersive_geology:crystal_hubnerite"
   },
   "input": {
-    "tag": "forge:crystals/hubnerite"
+    "tag": "forge:dusts/hubnerite"
   },
   "time": 1000,
   "energy": 1000

@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_ferberite"
+    "item": "immersive_geology:crystal_ferberite"
   },
   "input": {
-    "tag": "forge:crystals/ferberite"
+    "tag": "forge:dusts/ferberite"
   },
   "time": 1000,
   "energy": 1000

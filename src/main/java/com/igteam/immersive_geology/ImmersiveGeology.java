@@ -6,6 +6,9 @@
 
 package com.igteam.immersive_geology;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.Serializers;
 import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
 import com.igteam.immersive_geology.common.loot.LootIG;
@@ -23,6 +26,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +38,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.StackLocatorUtil;
+
+import java.util.Objects;
 
 @Mod(IGLib.MODID)
 public class ImmersiveGeology
@@ -48,7 +54,6 @@ public class ImmersiveGeology
 	{
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();
-		IGRegistrationHolder.buildRecipes();
 
 		LootIG.initialize();
 
@@ -61,7 +66,7 @@ public class ImmersiveGeology
 		modBus.addListener(this::onClientSetup);
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
-		forgeBus.addListener(this::addReloadListeners);
+
 
 		//Register Classes for Mod and forge Bus
 		modBus.register(IGRegistrationHolder.class);
@@ -72,9 +77,12 @@ public class ImmersiveGeology
 		IGMultiblockRegistrationHolder.initialize();
 
 		IGTileTypes.REGISTER.register(modBus);
-		Serializers.RECIPE_SERIALIZERS.register(modBus);
 
+		forgeBus.addListener(this::addReloadListeners);
+
+		Serializers.RECIPE_SERIALIZERS.register(modBus); //Recipe Structure Builder is Now located in IGDataProvider - As it's only used during Data Gen anyway.
 		proxy.registerContainersAndScreens();
+		IGApi.init();
 	}
 
 	public void addReloadListeners(AddReloadListenerEvent event){
@@ -83,6 +91,7 @@ public class ImmersiveGeology
 
 	private void setup(final FMLCommonSetupEvent event){
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
+
 		proxy.onSetup(event);
 	}
 

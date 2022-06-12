@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_chalcocite"
+    "item": "immersive_geology:crystal_chalcocite"
   },
   "input": {
-    "tag": "forge:crystals/chalcocite"
+    "tag": "forge:dusts/chalcocite"
   },
   "time": 1000,
   "energy": 1000
