@@ -34,7 +34,7 @@ public class ReverberationContainer extends MultiblockAwareGuiContainer<Reverber
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 //gonna figure out what is where later
-                return true;
+                return ReverberationFurnaceTileEntity.fuelMap.containsKey(itemStack.getItem());
             }
         });
 //inputs
