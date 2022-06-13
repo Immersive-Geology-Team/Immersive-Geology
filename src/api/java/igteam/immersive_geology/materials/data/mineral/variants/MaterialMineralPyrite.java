@@ -33,7 +33,7 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_metal_oxide",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), MetalEnum.Iron.getStack(ItemPattern.ingot, 1), 1000, 1);
+                        getParentMaterial().getStack(ItemPattern.crushed_ore), MetalEnum.Iron.getStack(ItemPattern.metal_oxide, 1), 1000, 1);
 
             }
         };
