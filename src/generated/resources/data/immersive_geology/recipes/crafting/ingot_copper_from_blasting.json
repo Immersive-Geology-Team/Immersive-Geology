@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersiveengineering:dust_copper"
+    "item": "immersive_geology:crystal_copper"
   },
   "result": "immersiveengineering:ingot_copper",
   "experience": 2.0,

@@ -7,10 +7,6 @@
   "result": {
     "item": "immersive_geology:compound_dust_sodium"
   },
-  "item_input": {
-    "count": 0,
-    "base_ingredient": []
-  },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",
     "amount": 125

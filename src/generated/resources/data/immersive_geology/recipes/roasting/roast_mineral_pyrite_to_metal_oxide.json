@@ -1,7 +1,7 @@
 {
   "type": "immersive_geology:reverberation_furnace",
   "result": {
-    "item": "minecraft:iron_ingot"
+    "item": "immersive_geology:metal_oxide_iron"
   },
   "item_input": {
     "item": "immersive_geology:crushed_ore_pyrite"

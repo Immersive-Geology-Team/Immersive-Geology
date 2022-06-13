@@ -1,0 +1,17 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_hydrochloric_acid_chromium",
+    "amount": 250
+  },
+  "fluid_input1": {
+    "tag": "forge:slurrys/nitric_acid_chromium",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "forge:fluids/hydrochloric_acid",
+    "amount": 125
+  },
+  "time": 240,
+  "energy": 12000
+}

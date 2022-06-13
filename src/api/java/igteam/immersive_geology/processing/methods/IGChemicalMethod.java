@@ -13,6 +13,7 @@ import net.minecraft.tags.ITag;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class IGChemicalMethod extends IGProcessingMethod {
 
@@ -52,7 +53,7 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.itemResult = itemResult;
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
-        this.itemInput = IngredientWithSize.of(itemInput);
+        this.itemInput = itemInput.isEmpty() ? null : IngredientWithSize.of(itemInput);
 
         this.time = time;
         this.energy = energy;
@@ -91,6 +92,7 @@ public class IGChemicalMethod extends IGProcessingMethod {
         return fluidInput2;
     }
 
+    @Nullable
     public IngredientWithSize getItemInput() {
         return itemInput;
     }

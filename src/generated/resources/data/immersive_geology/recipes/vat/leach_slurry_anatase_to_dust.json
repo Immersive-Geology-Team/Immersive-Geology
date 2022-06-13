@@ -10,7 +10,7 @@
   "item_input": {
     "count": 4,
     "base_ingredient": {
-      "item": "immersive_geology:dust_sodium"
+      "tag": "forge:dusts/sodium"
     }
   },
   "fluid_input1": {

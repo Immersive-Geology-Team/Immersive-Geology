@@ -9,6 +9,9 @@ import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.common.block.helpers.CapabilityReverberationProgress;
+import com.igteam.immersive_geology.common.block.helpers.IProgress;
+import com.igteam.immersive_geology.common.block.helpers.RevProgressHandler;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
@@ -18,6 +21,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -27,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -39,6 +45,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -78,6 +85,15 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         burntime[1] = 0;
         gasTank = new FluidTank(1000);
         holder = LazyOptional.of(() -> gasTank);
+
+        recipe_1_progress = 0;
+        recipe_1_time = 100;
+        recipe_1 = null;
+
+        recipe_2_progress = 0;
+        recipe_2_time = 100;
+        recipe_2 = null;
+
         this.insertionHandler1 = this.registerConstantCap(new IEInventoryHandler(1, this.master(),INPUT_SLOT1, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
@@ -196,6 +212,9 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             }
 
         }
+        if(capability == CapabilityReverberationProgress.ReverberationProgress){
+            return progress.cast();
+        }
         return super.getCapability(capability, facing);
     }
 
@@ -298,11 +317,28 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public Set<BlockPos> getRedstonePos() {
         return redStonePos;
     }
+    private int recipe_1_progress;
+    private ReverberationRecipe recipe_1;
 
+    private int recipe_2_progress;
+
+    private int recipe_2_time;
+    private int recipe_1_time;
+
+
+    private LazyOptional<IProgress> progress = LazyOptional.of(this::createProgress);
+
+    private IProgress createProgress () {
+        return new RevProgressHandler(0, 0);
+    }
+
+    private ReverberationRecipe recipe_2;
     @Override
     public void tick() {
         ReverberationFurnaceTileEntity master = (ReverberationFurnaceTileEntity) this.master();
         assert master != null;
+        assert master.getInventory() != null;
+        assert world != null;
 
         checkForNeedlessTicking();
 
@@ -310,34 +346,107 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             return;
 
         super.tick();
-
-
         boolean update = false;
 
-        for (int offset = 0; offset < 2; offset++) {
-            if (!isDummy()) {
-                //ask me not, but input binds are screwed
-                if (master.isBurning(FUEL_SLOT1 + offset)) {
-                    master.burntime[offset] = master.burntime[offset] - 1;
-                } else if (hasFuel(FUEL_SLOT1 + offset)) {
-                    master.burntime[offset] += fuelMap.get(master.getInventory().get(FUEL_SLOT1 + offset).getItem());
-                    master.getInventory().get(FUEL_SLOT1 + offset).shrink(1);
+        if (recipe_1 == null && master.hasRecipe(INPUT_SLOT1)) {
+            recipe_1 = master.getRecipe(INPUT_SLOT1);
+            recipe_1_time = recipe_1.getTime();
+            update = true;
+        }
+
+        if (recipe_2 == null && master.hasRecipe(INPUT_SLOT2)) {
+            recipe_2 = master.getRecipe(INPUT_SLOT2);
+            recipe_2_time = recipe_2.getTime();
+            update = true;
+        }
+
+        if(recipe_1 != null){
+            ItemStack output_1 = recipe_1.getRecipeOutput().copy();
+            int recipeTime = recipe_1.getTime();
+            float wasteMult = recipe_1.getWasteMultipler();
+
+            if(recipe_1_progress >= recipeTime){
+                int old_count = master.getInventory().get(OUTPUT_SLOT1).getCount();
+                output_1.grow(old_count);
+                master.getInventory().set(OUTPUT_SLOT1, output_1);
+                if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
+                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
+                }
+                master.getInventory().get(INPUT_SLOT1).shrink(recipe_1.getInput().getCount());
+                recipe_1_progress = 0;
+                progress.ifPresent(p -> ((RevProgressHandler)p).setLeftProgress(0));
+                update = true;
+            } else {
+                if(isBurning(FUEL_SLOT1)) {
+                    recipe_1_progress++;
+                    float r1_prog = ((float) recipe_1_progress) / ((float) recipe_1_time) * 100;
+                    progress.ifPresent(p -> ((RevProgressHandler)p).setLeftProgress(r1_prog));
+                    burntime[0]--;
+                } else {
+                    if(hasFuel(FUEL_SLOT1)){
+                        burntime[0] = fuelMap.get(master.getInventory().get(FUEL_SLOT1).getItem()); //refuel
+                        master().getInventory().get(FUEL_SLOT1).shrink(1);
+                    } else {
+                        if(recipe_1_progress > 0){
+                            recipe_1_progress--;
+                            float r1_prog = ((float) recipe_1_progress) / ((float) recipe_1_time) * 100;
+                            progress.ifPresent(p -> ((RevProgressHandler)p).setLeftProgress(r1_prog));
+                        }
+                    }
                 }
             }
 
-            ItemStack inputItem = master.inventory.get(INPUT_SLOT1 + offset);
-            if (!inputItem.isEmpty() && inputItem.getCount() > 0) {
 
-                ReverberationRecipe recipe = ReverberationRecipe.findRecipe(inputItem);
-                if (recipe != null) {
-                    recipe.setSlotOffset(offset);
-                    MultiblockProcessInMachine<ReverberationRecipe> process = new MultiblockProcessInMachine<ReverberationRecipe>(recipe, INPUT_SLOT1 + offset);
-                    process.setInputAmounts(recipe.input.getCount());
+            if(master.getInventory().get(INPUT_SLOT1).isEmpty()){
+                update = true;
+                recipe_1 = null;
+                recipe_1_progress = 0;
+                progress.ifPresent(p -> ((RevProgressHandler)p).setLeftProgress(0));
+            }
+        }
 
-                    if (master.addProcessToQueue(process, true, false)) {
-                        update = master.addProcessToQueue(process, false, false);
+        if(recipe_2 != null){
+            ItemStack output_2 = recipe_2.getRecipeOutput().copy();
+            int recipeTime = recipe_2.getTime();
+            float wasteMult = recipe_2.getWasteMultipler();
+
+            if(recipe_2_progress >= recipeTime){
+                int old_count = master.getInventory().get(OUTPUT_SLOT2).getCount();
+                output_2.grow(old_count);
+                master.getInventory().set(OUTPUT_SLOT2, output_2);
+                if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
+                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
+                }
+                master.getInventory().get(INPUT_SLOT2).shrink(recipe_2.getInput().getCount());
+                recipe_2_progress = 0;
+                float r2_prog = ((float) recipe_2_progress) / ((float) recipe_2_time) * 100;
+                progress.ifPresent(p -> ((RevProgressHandler)p).setRightProgress(r2_prog));
+                update = true;
+            } else {
+                if(isBurning(FUEL_SLOT2)) {
+                    recipe_2_progress++;
+                    float r2_prog = ((float) recipe_2_progress) / ((float) recipe_2_time) * 100;
+                    progress.ifPresent(p -> ((RevProgressHandler)p).setRightProgress(r2_prog));
+                    burntime[1]--;
+                } else {
+                    if(hasFuel(FUEL_SLOT2)){
+                        burntime[1] = fuelMap.get(master.getInventory().get(FUEL_SLOT2).getItem()); //refuel
+                        master().getInventory().get(FUEL_SLOT2).shrink(1);
+                    } else {
+                        if(recipe_2_progress > 0){
+                            recipe_2_progress--;
+                            float r2_prog = ((float) recipe_2_progress) / ((float) recipe_2_time);
+                            progress.ifPresent(p -> ((RevProgressHandler)p).setRightProgress(r2_prog));
+                        }
                     }
                 }
+            }
+
+            if(master.getInventory().get(INPUT_SLOT2).isEmpty()){
+                recipe_2 = null;
+                recipe_2_progress = 0;
+                progress.ifPresent(p -> ((RevProgressHandler)p).setRightProgress(0));
+                update = true;
             }
         }
 
@@ -379,6 +488,23 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
             this.markDirty();
             this.markContainingBlockForUpdate(null);
         }
+    }
+
+    public float getLeftProgress() {
+        return this.getCapability(CapabilityReverberationProgress.ReverberationProgress).map(IProgress::getLeftProgress).orElse(0f);
+    }
+
+    public float getRightProgress() {
+        return this.getCapability(CapabilityReverberationProgress.ReverberationProgress).map(IProgress::getRightProgress).orElse(0f);
+    }
+
+    public boolean hasRecipe(int input_slot) {
+        return getRecipe(input_slot) != null;
+    }
+
+    private ReverberationRecipe getRecipe(int input_slot) {
+        ItemStack inputItem = inventory.get(input_slot);
+        return ReverberationRecipe.findRecipe(inputItem);
     }
 
     @Override
@@ -445,16 +571,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     public void onProcessFinish(MultiblockProcess multiblockProcess) {
-        if (multiblockProcess.recipe instanceof ReverberationRecipe) {
-            ReverberationRecipe r = (ReverberationRecipe) multiblockProcess.recipe;
-            int slotOffset = r.getSlotOffset();
-            ReverberationFurnaceTileEntity master = this.master();
-            if(master != null) {
-                if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
-                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * r.getWasteMultipler())), IFluidHandler.FluidAction.EXECUTE);
-                }
-            }
-        }
+
     }
 
     @Override
@@ -464,19 +581,46 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
 
     @Override
     public int getProcessQueueMaxLength() {
-        int size = 0;
-        if ((!master().inventory.get(INPUT_SLOT1).isEmpty())) {
-            size++;
-        }
-        if ((!master().inventory.get(INPUT_SLOT2).isEmpty())) {
-            size++;
-        }
-        return size;
+        return 0;
     }
 
     @Override
     public float getMinProcessDistance(MultiblockProcess multiblockProcess) {
         return 0;
+    }
+
+    @Override
+
+    public void remove() {
+        super.remove();
+        progress.invalidate();
+        insertionHandler1.invalidate();
+        insertionHandler2.invalidate();
+        holder.invalidate();
+    }
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
+    }
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return this.write(new CompoundNBT());
+    }
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        read(pkt.getNbtCompound());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void read(CompoundNBT nbtCompound) {
+        progress.ifPresent(h -> ((INBTSerializable<CompoundNBT>)h).deserializeNBT(nbtCompound));
+    }
+
+    @Override
+    public CompoundNBT write(CompoundNBT nbt) {
+        CompoundNBT progressTag = nbt.getCompound("progress");
+        progress.ifPresent(h -> ((INBTSerializable<CompoundNBT>)h).deserializeNBT(progressTag));
+        return super.write(nbt);
     }
 
     @Override

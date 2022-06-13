@@ -8,7 +8,7 @@
     "item": "immersive_geology:compound_dust_sodium"
   },
   "item_input": {
-    "item": "immersive_geology:dust_rocksalt"
+    "tag": "forge:dusts/rocksalt"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",

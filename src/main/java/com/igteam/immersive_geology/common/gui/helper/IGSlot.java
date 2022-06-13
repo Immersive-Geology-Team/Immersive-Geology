@@ -20,7 +20,7 @@ public class IGSlot extends Slot {
 
         @Override
         public boolean isItemValid(ItemStack stack){
-            return false;
+            return true;
         }
     }
 

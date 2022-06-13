@@ -1,17 +1,17 @@
 {
   "type": "immersive_geology:chemicalvat",
   "fluid_result": {
-    "fluid": "immersive_geology:fluid_nitric_acid",
-    "amount": 125
+    "fluid": "immersive_geology:slurry_nitric_acid_chromium",
+    "amount": 250
   },
   "result": {
-    "item": "immersive_geology:compound_dust_sodium"
+    "item": "immersive_geology:compound_dust_iron"
   },
   "item_input": {
-    "tag": "forge:dusts/saltpeter"
+    "item": "immersive_geology:crushed_ore_chromite"
   },
   "fluid_input1": {
-    "tag": "forge:fluids/sulfuric_acid",
+    "tag": "forge:fluids/nitric_acid",
     "amount": 125
   },
   "fluid_input2": {
