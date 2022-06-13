@@ -1,7 +1,10 @@
 package com.igteam.immersive_geology.core.proxy;
 
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
+import blusunrize.immersiveengineering.common.items.IEItems;
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.gui.ReverberationScreen;
+import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.gui.ReverberationContainer;
@@ -11,12 +14,15 @@ import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHo
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -36,6 +42,8 @@ public class ServerProxy implements Proxy {
 
     @Override
     public void onFinishSetup(FMLLoadCompleteEvent event) {
+        setupBloomeryFuels();
+        setupReverberationFuels();
    }
 
     @Override
@@ -64,5 +72,22 @@ public class ServerProxy implements Proxy {
     public void registerContainersAndScreens() {
         GuiHandler.register(ReverberationFurnaceTileEntity.class,
                 new ResourceLocation(IGLib.MODID, "reverberation_furnace"),ReverberationContainer::new);
+    }
+
+    private void setupReverberationFuels(){
+        ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
+        ReverberationFurnaceTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
+        ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
+    }
+
+    private void setupBloomeryFuels(){
+        ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
+        BloomeryTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
+        BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
+        BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
     }
 }
