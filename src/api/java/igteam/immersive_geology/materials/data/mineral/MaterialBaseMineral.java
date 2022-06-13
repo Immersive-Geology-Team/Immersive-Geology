@@ -1,6 +1,7 @@
 package igteam.immersive_geology.materials.data.mineral;
 
 import blusunrize.immersiveengineering.api.IEApi;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
@@ -11,9 +12,15 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nullable;
+
+import static java.util.Arrays.asList;
 
 public abstract class MaterialBaseMineral extends MaterialBase {
     public MaterialBaseMineral(String name) {

@@ -2,6 +2,7 @@ package generators.recipe;
 
 
 import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
@@ -84,11 +85,21 @@ public class IGRecipeProvider extends RecipeProvider {
                             case basicSmelting:
                                 buildBasicSmeltingMethods((IGBasicSmeltingMethod) method, consumer);
                                 break;
+                            case arcSmelting:
+                                buildArcSmeltingMethods((IGArcSmeltingMethod) method, consumer);
                         }
                     }
                 }
             }
         }
+    }
+
+    private void buildArcSmeltingMethods(IGArcSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {
+        ArcFurnaceRecipeBuilder recipe = ArcFurnaceRecipeBuilder.builder(method.getOutput());
+        recipe.addSlag(method.getSlag());
+        recipe.setEnergy(method.getEnergy());
+        recipe.setTime(method.getTime());
+        recipe.addInput(method.getInput());
     }
 
     private void buildBasicSmeltingMethods(IGBasicSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {

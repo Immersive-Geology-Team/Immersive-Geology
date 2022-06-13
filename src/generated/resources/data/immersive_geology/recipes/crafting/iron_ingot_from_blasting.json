@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersiveengineering:dust_iron"
+    "item": "immersive_geology:crystal_iron"
   },
   "result": "minecraft:iron_ingot",
   "experience": 2.0,
