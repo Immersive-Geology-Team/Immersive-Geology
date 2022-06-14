@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.common.world;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.helper.APIMaterials;
@@ -10,31 +11,31 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IGWorldGeneration {
-
-    public static Map<String, ConfiguredFeature<?, ?>> features = new HashMap<>();
+    public static List<ConfiguredFeature<?, ?>> features = new ArrayList<ConfiguredFeature<?, ?>>();
 
     public static void initialize(){
-        for(StoneEnum stones : APIMaterials.stoneValues()) {
-            for (MaterialInterface container : APIMaterials.all()) {
+        IGApi.getNewLogger().warn("Immersive Geology: Initializing World Generation");
+
+        for(StoneEnum stone : APIMaterials.stoneValues()) {
+            for (MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
                 if (container.hasPattern(BlockPattern.ore)) {
-                    Block block = container.getBlock(BlockPattern.ore);
-                    if(block != null)
-                    addOreGen(block, container.getName(), container.getGenerationConfig());
-                }
-                if (container.hasPattern(BlockPattern.geode)) {
-                    Block block = container.getBlock(BlockPattern.geode);
-                    if(block != null)
+                    Block block = container.getBlock(BlockPattern.ore, stone);
+                    if (block != null) {
                         addOreGen(block, container.getName(), container.getGenerationConfig());
+                        IGApi.getNewLogger().warn("Created New Ore Generation");
+                    } else {
+                        IGApi.getNewLogger().warn("Failed to find Ore from: " + container.getName() + " and " + stone.getName());
+                    }
+                } else {
+                    IGApi.getNewLogger().warn("Containing Material has no Ore Pattern");
                 }
             }
         }
@@ -42,16 +43,22 @@ public class IGWorldGeneration {
 
     public static void addOreGen(Block block, String name, IGOreConfig config)
     {
-        ConfiguredFeature feature = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, block.getDefaultState(), config.veinSize.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
-            .square()).count(config.veinsPerChunk.get());
-        features.put(name, feature);
+        ConfiguredFeature<?, ?> feature = Feature.ORE.withConfiguration(
+                new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                        block.getDefaultState(),
+                        config.veinSize.get())).range(config.maxY.get()).square().count(config.veinsPerChunk.get());
+
+        features.add(feature);
     }
 
     @SubscribeEvent
-    public void onBiomeLoad(BiomeLoadingEvent ev)
-    {
+    @SuppressWarnings("unused")
+    public void onBiomeLoad(BiomeLoadingEvent ev) {
         BiomeGenerationSettingsBuilder generation = ev.getGeneration();
-        for(Map.Entry<String, ConfiguredFeature<?, ?>> e : features.entrySet())
-            generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, e.getValue());
+        for (ConfiguredFeature<?, ?> ore : features) {
+            generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
+            IGApi.getNewLogger().warn("Added Ore as Feature!");
+        }
     }
 }

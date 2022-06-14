@@ -7,6 +7,7 @@
 package com.igteam.immersive_geology;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
+import com.igteam.immersive_geology.common.world.IGWorldGeneration;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.Serializers;

@@ -27,18 +27,18 @@ public class VatRecipe extends IGMultiblockRecipe
     public static VatRecipe findRecipe(ItemStack itemInput, FluidStack fluid1, FluidStack fluid2)
     {
         if(!recipes.isEmpty()){
-            for(VatRecipe r:recipes.values()){
-                if(r.itemInput != null && r.fluidInput1 != null) {
-                    if(r.itemInput.test(itemInput)) {
-                        if(fluid2 != null && (!fluid2.isEmpty()) && r.fluidInput2 != null) {
-                            if (r.fluidInput1.test(fluid1) && r.fluidInput2.test(fluid2)) {
-                                return r;
-                            }
-                        } else {
-                            if (r.fluidInput1.test(fluid1)) {
-                                return r;
-                            }
-                        }
+            for(VatRecipe r : recipes.values()){
+
+                if(r.itemInput != null && fluid1 != null && fluid2 != null){
+                    List<FluidTagInput> recipeFluids = new ArrayList<>();
+                    recipeFluids.add(r.fluidInput1);
+                    recipeFluids.add(r.fluidInput2);
+
+                    boolean fluid1Found = recipeFluids.stream().anyMatch((recFluid) -> (recFluid.test(fluid1)));
+                    boolean fluid2Found = recipeFluids.stream().anyMatch((recFluid) -> (recFluid.test(fluid2)));
+
+                    if(fluid1Found && fluid2Found && r.itemInput.test(itemInput)){
+                        return r;
                     }
                 }
             }

@@ -38,9 +38,6 @@ public class IGGenericBlock extends Block implements IGBlockType {
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
 
         RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.TRANSLUCENT);
-
-        
-
     }
 
     @Override
