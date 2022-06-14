@@ -41,8 +41,9 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationContaine
         int oW = 20;
         int oH = 51;
 
+        ReverberationFurnaceTileEntity master = tileEntity.master();
         List<ITextComponent> tooltip = new ArrayList<>();
-        GuiHelper.handleGuiTank(transform, Objects.requireNonNull(tileEntity.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mouseX, mouseY, guiTexture, tooltip);
+        GuiHelper.handleGuiTank(transform, Objects.requireNonNull(master.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mouseX, mouseY, guiTexture, tooltip);
 
         if(!tooltip.isEmpty()){
             GuiUtils.drawHoveringText(transform, tooltip, mouseX, mouseY, width, height, -1, font);
@@ -62,9 +63,9 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationContaine
         int oW = 20;
         int oH = 51;
 
-        GuiHelper.handleGuiTank(matrix, Objects.requireNonNull(tileEntity.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mx, my, guiTexture, null);
-
         ReverberationFurnaceTileEntity master = tileEntity.master();
+        GuiHelper.handleGuiTank(matrix, Objects.requireNonNull(master.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mx, my, guiTexture, null);
+
         if(master != null) {
             float leftProgress =  ((float) container.getLeftProgress() / 100);
 

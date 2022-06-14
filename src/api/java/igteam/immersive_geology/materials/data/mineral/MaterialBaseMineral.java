@@ -191,7 +191,9 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;
             switch(b) {
-                case ore: return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
+                case ore:
+                    String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
                 case storage: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
                 case geode: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
                 default: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");

@@ -94,8 +94,6 @@ public class IGTags {
                 for (SlurryEnum slurry : SlurryEnum.values()) {
                     HashSet<MaterialSlurryWrapper> slurryWrappers = slurry.getEntries();
                     for (MaterialSlurryWrapper wrapper : slurryWrappers) {
-                        logger.info("Wrapper Found: " + wrapper.getName());
-
                         createWrapperForPattern(pattern, wrapper);
                     }
                 }
@@ -175,7 +173,7 @@ public class IGTags {
 
                     LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));
                     String wrap = IGApi.getWrapFromSet(materialSet);
-                    logger.info("Putting wrap in Fluid Tags: " + wrap + " Pattern: " + p.getName());
+                    logger.debug("Putting wrap in Fluid Tags: " + wrap + " Pattern: " + p.getName());
                     map.put(wrap, FluidTags.makeWrapperTag(
                             p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
                                     : wrapPattern(p, materialSet).toString()));

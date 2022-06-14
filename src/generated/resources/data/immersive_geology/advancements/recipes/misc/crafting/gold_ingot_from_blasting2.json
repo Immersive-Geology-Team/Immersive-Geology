@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_gold": {
+    "has_dust_gold": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:crystal_gold"
+            "item": "immersiveengineering:dust_gold"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_crystal_gold",
+      "has_dust_gold",
       "has_the_recipe"
     ]
   ]
