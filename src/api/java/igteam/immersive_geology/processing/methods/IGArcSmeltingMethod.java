@@ -11,7 +11,10 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class IGArcSmeltingMethod extends IGProcessingMethod {
 
@@ -20,37 +23,34 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
     }
     private IngredientWithSize input;
     private ItemStack slag, output;
-    private IngredientWithSize[] additives;
+    private List<IngredientWithSize> additives;
     int energy, time;
 
-    public void create(IngredientWithSize input, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
+    private String name;
+
+    public void create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
         this.input = input;
         this.output = output;
         this.slag = iSlag == null ? ItemStack.EMPTY : iSlag;
-        this.additives = additives;
+        this.additives = asList(additives);
+        this.name = method_name;
     }
 
-    public void create(IngredientWithSize input, ItemStack output, @Nullable ItemStack Slag, List<ITag<Item>> tagAdditives, @Nullable List<Integer> tagCounts){
-//        MergeFunction<IngredientWithSize[], List<ITag<Item>>, List<Integer>> function = (tags, counts) -> {
-//            IngredientWithSize[] l = new IngredientWithSize[tags.length];
-//            for (ITag<Item> tag : tags) {
-//
-//            }
-//            return l;
-//        };
+    public void create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack slag){
+        this.input = input;
+        this.output = output;
+        this.slag = slag == null ? ItemStack.EMPTY : slag;
+        this.additives = new ArrayList<>();
+        this.name = method_name;
     }
 
-    public void create(ITag<Item> input, int inputCount, ItemStack output, @Nullable ItemStack Slag, IngredientWithSize... additives){
-
+    public IGArcSmeltingMethod addAdditive(ITag<Item> item, int count){
+        this.additives.add(new IngredientWithSize(item, count));
+        return this;
     }
 
-
-    public void create(ITag<Item> input, int inputCount, ItemStack output, @Nullable ItemStack Slag, List<ITag<Item>> tagAdditives, @Nullable List<Integer> tagCounts){
-
-    }
-
-    public void create(ItemStack input, ItemStack output, @Nullable ItemStack Slag, List<ITag<Item>> tagAdditives, @Nullable List<Integer> tagCounts){
-
+    public String getName(){
+        return this.name;
     }
 
     public IngredientWithSize getInput() {
@@ -71,11 +71,6 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
 
     public int getTime(){
         return time;
-    }
-
-    @FunctionalInterface
-    protected interface MergeFunction<R, T, I> {
-        R merge(T[] type, I[] count);
     }
 }
 

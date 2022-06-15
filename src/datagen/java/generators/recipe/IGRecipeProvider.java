@@ -100,6 +100,7 @@ public class IGRecipeProvider extends RecipeProvider {
         recipe.setEnergy(method.getEnergy());
         recipe.setTime(method.getTime());
         recipe.addInput(method.getInput());
+        recipe.build(consumer, toRL("arc_smelting/arc_" + Objects.requireNonNull(method.getName())));
     }
 
     private void buildBasicSmeltingMethods(IGBasicSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {

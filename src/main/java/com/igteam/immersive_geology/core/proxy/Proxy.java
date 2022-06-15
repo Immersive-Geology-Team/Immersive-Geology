@@ -27,6 +27,4 @@ public interface Proxy {
     default void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){};
 
     void registerContainersAndScreens();
-
-
 }
