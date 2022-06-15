@@ -28,20 +28,22 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
 
     private String name;
 
-    public void create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
+    public IGArcSmeltingMethod create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
         this.input = input;
         this.output = output;
         this.slag = iSlag == null ? ItemStack.EMPTY : iSlag;
         this.additives = asList(additives);
         this.name = method_name;
+        return this;
     }
 
-    public void create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack slag){
+    public IGArcSmeltingMethod create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack slag){
         this.input = input;
         this.output = output;
         this.slag = slag == null ? ItemStack.EMPTY : slag;
         this.additives = new ArrayList<>();
         this.name = method_name;
+        return this;
     }
 
     public IGArcSmeltingMethod addAdditive(ITag<Item> item, int count){
@@ -49,6 +51,11 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
         return this;
     }
 
+    public void setEnergyTime(int energy, int time)
+    {
+        this.time = time;
+        this.energy = energy;
+    }
     public String getName(){
         return this.name;
     }
@@ -72,6 +79,10 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
     public int getTime(){
         return time;
     }
+
+
+    public IngredientWithSize[] getAdditives() { return this.additives.toArray(new IngredientWithSize[this.additives.size()]);}
+
 }
 
 
