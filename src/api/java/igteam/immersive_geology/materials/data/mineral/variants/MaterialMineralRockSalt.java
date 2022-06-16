@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
@@ -8,16 +10,12 @@ import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
 import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -94,7 +92,11 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
                         300,12000);
 
-                //TODO -- AF RECIPE FOR PURE SODIUM
+                IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
+                                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Sodium.getStack(ItemPattern.dust),null,
+                                new IngredientWithSize(IETags.coalCokeDust, 1))
+                        .setEnergyTime(120000, 100);
             }
         };
 

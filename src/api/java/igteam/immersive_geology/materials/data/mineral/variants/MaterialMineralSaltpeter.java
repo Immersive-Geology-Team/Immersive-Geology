@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
@@ -50,7 +52,11 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
                         MetalEnum.Sodium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
                         300,12000);
-                //TODO -- AF RECIPE FOR PURE SODIUM
+                IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
+                                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Sodium.getStack(ItemPattern.dust),null,
+                                new IngredientWithSize(IETags.coalCokeDust, 1))
+                        .setEnergyTime(120000, 100);
             }
         };
     }

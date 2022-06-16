@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
@@ -9,7 +10,12 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
+import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -50,8 +56,22 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
             }
         };
 
-        //TODO Arc Furnace smelting slag with zinc to get Lead AND Silver
-
+        new IGProcessingStage(this, "Arc furnace smelting Stage") {
+            @Override
+            protected void describe() {
+                IRecipeBuilder.arcSmelting(this).create("slag_"+getName() +"_to_metal_and_compound_dust",
+                        new IngredientWithSize(getParentMaterial().getItemTag(ItemPattern.slag), 1),
+                        MetalEnum.Lead.getStack(ItemPattern.ingot),
+                        MetalEnum.Silver.getStack(ItemPattern.compound_dust),
+                        new IngredientWithSize(Ingredient.fromItems(Items.BONE_MEAL), 1))
+                        .setEnergyTime(120000, 100);
+                
+                IRecipeBuilder.decompose(this).create("compound_dust_"+ MetalEnum.Silver.getName() + "_to_dust",
+                        MetalEnum.Silver.getStack(ItemPattern.dust),
+                        MetalEnum.Silver.getStack(ItemPattern.compound_dust),
+                        120, 120000);
+            }
+        };
 
     }
     @Override

@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:rotary_kiln",
+  "result": {
+    "item": "immersiveengineering:dust_silver"
+  },
+  "item_input": {
+    "item": "immersive_geology:compound_dust_silver"
+  },
+  "energy": 120000,
+  "time": 120
+}

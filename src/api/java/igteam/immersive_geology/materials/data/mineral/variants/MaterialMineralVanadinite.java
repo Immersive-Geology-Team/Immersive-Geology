@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.SlurryEnum;
@@ -77,7 +79,12 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                         MetalEnum.Vanadium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Vanadium.getStack(ItemPattern.compound_dust),
                         200, 10000 );
-                //TODO AF smelting with coal coke dust to get pure
+
+                IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
+                                new IngredientWithSize(MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Vanadium.getStack(ItemPattern.ingot),null,
+                                new IngredientWithSize(IETags.coalCokeDust, 1))
+                        .setEnergyTime(120000, 100);
             }
         };
     }

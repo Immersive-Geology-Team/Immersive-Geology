@@ -96,10 +96,16 @@ public class IGRecipeProvider extends RecipeProvider {
 
     private void buildArcSmeltingMethods(IGArcSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {
         ArcFurnaceRecipeBuilder recipe = ArcFurnaceRecipeBuilder.builder(method.getOutput());
-        recipe.addSlag(method.getSlag());
+        if (!method.getSlag().isEmpty()) {
+            recipe.addSlag(method.getSlag());
+        }
         recipe.setEnergy(method.getEnergy());
         recipe.setTime(method.getTime());
-        recipe.addInput(method.getInput());
+        recipe.addIngredient("input", method.getInput());
+        for (IngredientWithSize t:method.getAdditives())
+        {
+            recipe.addMultiInput(t);
+        }
         recipe.build(consumer, toRL("arc_smelting/arc_" + Objects.requireNonNull(method.getName())));
     }
 

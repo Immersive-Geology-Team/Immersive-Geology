@@ -1,0 +1,21 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersiveengineering:ingot_lead"
+    }
+  ],
+  "additives": [
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "slag": {
+    "item": "immersive_geology:compound_dust_silver"
+  },
+  "energy": 120000,
+  "time": 100,
+  "input": {
+    "tag": "forge:slags/galena"
+  }
+}
