@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
+import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -95,30 +96,26 @@ public class IGConfigurationHandler {
     public static class MaterialConfigSetup{
         public MaterialConfigSetup(ForgeConfigSpec.Builder builder){
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
-            for(MaterialInterface<MaterialBaseMetal> container : MetalEnum.values()) {
-                if (container.get().isNative()) {
+            for(MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
                     ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + container.getName());
-                    builder.push(container.getName());
                     switch (container.get().getRarity()) {
                         case COMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 8, 1, 90, 6));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 120, 1, 90, 3, 30));
                             break;
                         case UNCOMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 5, 1, 70, 4));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 90, 1, 70, 2, 25));
                             break;
                         case RARE:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 4, 1, 50, 3));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 70, 1, 50, 1, 15));
                             break;
                         case EPIC:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 3, 1, 30, 2));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 40, 1, 30, 1, 5));
                             break;
                         default:
                             ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Common Rarity");
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 8, 1, 90, 6));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 120, 1, 90, 1, 20));
                             break;
                     }
-                    builder.pop();
-                }
             }
             builder.pop();
         }

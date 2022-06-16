@@ -87,11 +87,11 @@ public abstract class MaterialBase {
     };
 
     public Block getBlock(MaterialPattern p, MaterialInterface secondaryMaterial) {
-        return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
+        return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, secondaryMaterial, p));
     }
 
     public Block getBlock(MaterialPattern p, MaterialBase secondaryMaterial) {
-        return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(secondaryMaterial, p));
+        return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, secondaryMaterial, p));
     }
 
     public Item getItem(ItemPattern pattern) {
@@ -107,6 +107,7 @@ public abstract class MaterialBase {
         if(igItem == null) {
             logger.error("Failed to get IG Item: " + getRegistryKey(this, pattern).toString());
         }
+
         return igItem;
     }
 
@@ -500,7 +501,7 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern) {
         return (ITag.INamedTag<Item>) getTag(pattern);
     }
 
@@ -523,7 +524,7 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern, MaterialBase... materials) {
         return (ITag.INamedTag<Item>) getTag(pattern, materials);
     }
 

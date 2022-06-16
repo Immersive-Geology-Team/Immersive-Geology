@@ -39,11 +39,11 @@ public interface MaterialInterface<T extends MaterialBase> {
     Block getBlock(MaterialPattern pattern);
 
     ITag.INamedTag<?> getTag(MaterialPattern pattern);
-    ITag.INamedTag<Item> getItemTag(ItemPattern pattern);
+    ITag.INamedTag<Item> getItemTag(MaterialPattern pattern);
     ITag.INamedTag<Block> getBlockTag(BlockPattern pattern);
     ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern);
 
-    ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials);
+    ITag.INamedTag<Item> getItemTag(MaterialPattern pattern, MaterialBase... materials);
     ITag.INamedTag<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials);
     ITag.INamedTag<Fluid> getFluidTag(FluidPattern pattern, MaterialBase... materials);
 

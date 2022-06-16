@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:ore_chunk_stone_gypsum"
+  },
+  "input": {
+    "tag": "forge:ores/stone_gypsum"
+  },
+  "time": 500,
+  "energy": 1000
+}

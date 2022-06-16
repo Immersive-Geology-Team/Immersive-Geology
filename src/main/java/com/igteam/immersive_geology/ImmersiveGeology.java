@@ -9,6 +9,10 @@ package com.igteam.immersive_geology;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import com.igteam.immersive_geology.common.world.IGWorldGeneration;
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.MineralEnum;
+import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.Serializers;
 import com.igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
@@ -23,6 +27,7 @@ import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHo
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.tags.IGTags;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -54,6 +59,7 @@ public class ImmersiveGeology
 	public ImmersiveGeology()
 	{
 		IGRegistrationHolder.initialize();
+
 		IGTags.initialize();
 
 		LootIG.initialize();
@@ -67,7 +73,6 @@ public class ImmersiveGeology
 		modBus.addListener(this::onClientSetup);
 		modBus.addListener(this::enqueueIMC);
 		modBus.addListener(this::processIMC);
-
 
 		//Register Classes for Mod and forge Bus
 		modBus.register(IGRegistrationHolder.class);
@@ -83,6 +88,7 @@ public class ImmersiveGeology
 
 		Serializers.RECIPE_SERIALIZERS.register(modBus); //Recipe Structure Builder is Now located in IGDataProvider - As it's only used during Data Gen anyway.
 		proxy.registerContainersAndScreens();
+
 		IGApi.init();
 	}
 

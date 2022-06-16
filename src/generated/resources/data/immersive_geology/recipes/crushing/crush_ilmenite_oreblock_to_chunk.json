@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:ore_chunk_stone_ilmenite"
+  },
+  "input": {
+    "tag": "forge:ores/stone_ilmenite"
+  },
+  "time": 500,
+  "energy": 1000
+}

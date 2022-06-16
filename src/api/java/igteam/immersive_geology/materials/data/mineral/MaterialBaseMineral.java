@@ -6,11 +6,13 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateM
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -243,7 +245,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Default Ore Processing Stage") {
+        new IGProcessingStage(this,IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
@@ -255,18 +257,20 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                     IRecipeBuilder.crafting(this)
                             .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
                             .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+
+                    IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
+                            getItemTag(BlockPattern.ore, stone.get()),  stone.getStack(ItemPattern.ore_chunk, getParentMaterial()),1000, 500);
                 }
             }
         };
 
-        new IGProcessingStage(this, "Crystal Processing"){
+        new IGProcessingStage(this, IGStageDesignation.preparation){
             @Override
             protected void describe() {
                 if (hasDust() && hasCrystal()) {
                     IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit",
                             getItemTag(ItemPattern.crystal),  getStack(ItemPattern.dust),1000, 500);
                 }
-
             }
         };
     }

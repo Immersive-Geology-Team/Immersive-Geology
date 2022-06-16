@@ -9,6 +9,7 @@ import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -36,18 +37,16 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     protected void setupProcessingStages() {
         super.setupProcessingStages();
-
-        if (isNative()) {
-            new IGProcessingStage(this, "Initial Crafting") {
-                @Override
-                protected void describe() {
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
+            @Override
+            protected void describe() {
+                if (isNative()) { //TODO Double check if this needs to be native?
                     for (MaterialInterface<?> stone : StoneEnum.values()) {
-
                         ItemStack dirty_crushed_ore = stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial());
                         ITag<Item> ore_chunk = getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get());
                         ITag<Item> ore_bit = getParentMaterial().getItemTag(ItemPattern.ore_bit, stone.get());
 
-                        IRecipeBuilder.crushing(this).create("crush_chunk_"+ getName() +"_to_dirty_crushed", ore_chunk, dirty_crushed_ore, ore_bit, 1000, 1000, 0.33f);
+                        IRecipeBuilder.crushing(this).create("crush_chunk_" + getName() + "_to_dirty_crushed", ore_chunk, dirty_crushed_ore, ore_bit, 1000, 1000, 0.33f);
 
                         IRecipeBuilder.separating(this).create(
                                 getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//input
@@ -58,32 +57,25 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()));
-
-
                     }
                 }
-            };
+            }
+        };
 
             //Also note Osmium is a Native metal, so yeah I don't think that'd work for it... May need to hardcode the Bloomery recipes, it may just be better to do so
 
 
-                new IGProcessingStage(this, "Ingot Processing") {
-                    @Override
-                    protected void describe() {
-                        if (!hasExistingImplementation()) {
-                            IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
-                        }
-
-                        IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
-
-                    }
-                };
-
-        }
-
-        new IGProcessingStage(this, "Crystal Processing") {
+        new IGProcessingStage(this, IGStageDesignation.preparation) {
             @Override
             protected void describe() {
+                if (isNative()) { //TODO Double check if this needs to be Native
+                    if (!hasExistingImplementation()) {
+                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
+                    }
+
+                    IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
+                }
+
                 if (hasCrystal() && (hasDust() || hasExistingImplementation()))
                 {
                     IRecipeBuilder.crushing(this).create(
@@ -95,7 +87,6 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 }
             }
         };
-
     }
 
     @Override

@@ -8,6 +8,7 @@ import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -28,7 +29,7 @@ import java.util.*;
 
 public class IGTags {
     private static Logger logger = IGApi.getNewLogger();
-    public static HashMap<ItemPattern, HashMap<String, ITag.INamedTag<Item>>> IG_ITEM_TAGS = new HashMap<>();
+    public static HashMap<MaterialPattern, HashMap<String, ITag.INamedTag<Item>>> IG_ITEM_TAGS = new HashMap<>();
     public static HashMap<BlockPattern, HashMap<String, ITag.INamedTag<Block>>> IG_BLOCK_TAGS = new HashMap<>();
     public static HashMap<FluidPattern, HashMap<String, ITag.INamedTag<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
@@ -102,44 +103,27 @@ public class IGTags {
 
         for (BlockPattern pattern : BlockPattern.values()) {
             IG_BLOCK_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Block>>());
-            for (MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()) {
-                if (metal.hasPattern(pattern)) {
-                    switch(pattern){
-                        case ore: {
-                            for (StoneEnum stone : StoneEnum.values()) {
-                                createWrapperForPattern(pattern,  stone.get(), metal.get());
-                            }
-                        }
-                        break;
-                        default :
-                        {
-                            createWrapperForPattern(pattern, metal.get());
+            IG_ITEM_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Item>>()); //for BlockItem References
+
+            for (MaterialInterface<?> genMaterial : APIMaterials.generatedMaterials()) {
+                if (genMaterial.hasPattern(pattern)) {
+                    if(pattern == BlockPattern.ore) {
+                        for (StoneEnum stone : StoneEnum.values()) {
+                            createWrapperForPattern(pattern, stone.get(), genMaterial.get());
                         }
                     }
                 }
             }
-            for (MaterialInterface<MaterialBaseMineral> mineral : MineralEnum.values()) {
-                if (mineral.hasPattern(pattern)) {
-                    switch(pattern){
-                        case ore: {
-                            for (StoneEnum stone : StoneEnum.values()) {
-                                createWrapperForPattern(pattern,  stone.get(), mineral.get());
-                            }
-                        }
-                        break;
-                        default :
-                        {
-                            createWrapperForPattern(pattern, mineral.get());
-                        }
+
+            for (MaterialInterface<?> material : APIMaterials.all()) {
+                if(pattern != BlockPattern.ore) {
+                    if (material.hasPattern(pattern)) {
+                        createWrapperForPattern(pattern, material.get());
                     }
-                }
-            }
-            for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
-                if(stone.hasPattern(pattern)){
-                    createWrapperForPattern(pattern, stone.get());
                 }
             }
         }
+
         logger.log(Level.INFO, "Immersive Geology: Finished Initializing Tags");
     }
 
@@ -159,11 +143,23 @@ public class IGTags {
             if (p instanceof BlockPattern) {
                 BlockPattern b = (BlockPattern) p;
                 HashMap<String, ITag.INamedTag<Block>> map = IG_BLOCK_TAGS.get(b);
-                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));
-                map.put(IGApi.getWrapFromSet(materialSet), BlockTags.makeWrapperTag(
-                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
-                                : wrapPattern(p, materialSet).toString()));
+                HashMap<String, ITag.INamedTag<Item>> item_map = IG_ITEM_TAGS.get(b);//We need Item Tags for our blocks for Block Item References!
 
+                LinkedHashSet<MaterialBase> materialSet = new LinkedHashSet<MaterialBase>(Arrays.asList(materials));
+                String key = IGApi.getWrapFromSet(materialSet);
+
+                ITag.INamedTag<Block> block_value = BlockTags.makeWrapperTag(p.hasSuffix() ?
+                                wrapPattern(p, materialSet, p.getSuffix()).toString()
+                                : wrapPattern(p, materialSet).toString());
+
+                ITag.INamedTag<Item> item_value = ItemTags.makeWrapperTag(
+                        p.hasSuffix() ? wrapPattern(p, materialSet, p.getSuffix()).toString()
+                                : wrapPattern(p, materialSet).toString());
+
+                map.put(key, block_value);
+                item_map.put(key, item_value);
+
+                IG_ITEM_TAGS.put(b, item_map);
                 IG_BLOCK_TAGS.put(b, map);
             }
 

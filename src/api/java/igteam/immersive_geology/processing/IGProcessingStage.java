@@ -2,6 +2,7 @@ package igteam.immersive_geology.processing;
 
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,6 +15,13 @@ public abstract class IGProcessingStage {
 
     public IGProcessingStage(MaterialBase material, String name){
         this.name = name;
+        this.material = material;
+        material.addStage(this);
+        describe();
+    }
+
+    public IGProcessingStage(MaterialBase material, IGStageDesignation designation){
+        this.name = designation.name();
         this.material = material;
         material.addStage(this);
         describe();

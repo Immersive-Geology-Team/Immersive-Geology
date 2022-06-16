@@ -40,8 +40,6 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Gypsum(new MaterialMineralGypsum()),
     Hematite(new MaterialMineralHematite()),
     Hubnerite(new MaterialMineralHubnerite()),
-    //Disabled due the same processing as Hematite. And Hematite is more common IRL
-   // Magnetite(new MaterialMineralMagnetite()),
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
     SaltPeter(new MaterialMineralSaltpeter()),
@@ -192,7 +190,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     }
 
     @Override
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern) {
         return material.getItemTag(pattern);
     }
 
@@ -202,7 +200,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     }
 
     @Override
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern, MaterialBase... materials) {
         return material.getItemTag(pattern, materials);
     }
 

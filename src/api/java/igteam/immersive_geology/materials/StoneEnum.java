@@ -146,7 +146,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     }
 
     @Override
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern) {
         return material.getItemTag(pattern);
     }
 
@@ -166,7 +166,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     }
 
     @Override
-    public ITag.INamedTag<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+    public ITag.INamedTag<Item> getItemTag(MaterialPattern pattern, MaterialBase... materials) {
         return material.getItemTag(pattern, materials);
     }
 

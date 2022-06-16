@@ -31,7 +31,7 @@ public class APIMaterials {
         for (MaterialInterface<?> metal : MetalEnum.values()) {
             if(metal.get() instanceof MaterialBaseMetal){
                 MaterialBaseMetal m = (MaterialBaseMetal) metal.get();
-                if(m.isNative()){
+                if(m.isNative() && !m.hasExistingImplementation()){
                     metals.add(metal);
                 }
             }

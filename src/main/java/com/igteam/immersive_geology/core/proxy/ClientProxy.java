@@ -67,7 +67,7 @@ public class ClientProxy extends ServerProxy {
         registerBlockColors();
         registerSpecialRenderers();
         supplyMaterialTint(event);
-
+        setupManualPages();
     }
 
     private void supplyMaterialTint(FMLClientSetupEvent event){
@@ -104,8 +104,8 @@ public class ClientProxy extends ServerProxy {
     }
 
     @Override
-    public void onFinishSetup(FMLLoadCompleteEvent event) {
-        setupManualPages();
+    public void onFinishSetup(FMLLoadCompleteEvent event) { //Common Finish Setup!
+        super.onFinishSetup(event);
         setupBloomeryFuels();
         setupReverberationFuels();
     }

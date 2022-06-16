@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:ore_chunk_granite_kaolinite"
+  },
+  "input": {
+    "tag": "forge:ores/granite_kaolinite"
+  },
+  "time": 500,
+  "energy": 1000
+}

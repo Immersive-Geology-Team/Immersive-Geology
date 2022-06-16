@@ -2,6 +2,7 @@ package generators.recipe;
 
 
 import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
@@ -16,6 +17,7 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.builders.*;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.methods.*;
+import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,8 +31,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class IGRecipeProvider extends RecipeProvider {
 
@@ -42,16 +46,12 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-
-        String iePath = Objects.requireNonNull(IGApi.grabIEItemFromRegistry(ItemPattern.ingot, EnumMetals.GOLD)).getRegistryName().getPath();
-        logger.warn("IE Path: " + iePath);
-
         for(MaterialInterface container : APIMaterials.all()){
             MaterialBase material = container.get();
 
             for(IGProcessingStage stage : material.getStages()){
                 if(stage != null) {
-                    logger.log(Level.INFO, "Building for " + stage.getStageName() + " in Material: " + material.getName());
+                    logger.log(Level.DEBUG, "Building for " + stage.getStageName() + " in Material: " + material.getName());
                     for (IGProcessingMethod method : stage.getMethods()) {
                         logger.log(Level.DEBUG, "Building for " + stage.getStageName() + " in Material: " + material.getName());
                         switch (method.getRecipeType()) {
@@ -116,6 +116,7 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.warn("Output: " + method.getOutput().getItem().getRegistryName().getPath());
         if(!method.getOutput().isEmpty()) {
             CrusherRecipeBuilder recipe = CrusherRecipeBuilder.builder(method.getOutput());
+
             recipe.addInput(method.getInput());
             if (method.hasSecondary()) {
                 recipe.addSecondary(method.getSecondary(), method.getSecondaryChange());

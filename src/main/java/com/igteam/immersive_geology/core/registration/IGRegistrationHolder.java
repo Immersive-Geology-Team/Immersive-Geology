@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.core.registration;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
@@ -8,6 +9,7 @@ import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
+import com.igteam.immersive_geology.common.world.feature.IGOreFeature;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
@@ -26,7 +28,9 @@ import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.apache.logging.log4j.Level;
@@ -211,9 +215,10 @@ public class IGRegistrationHolder {
         logger.info("Immersive Geology: Block Registration");
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
-            logger.debug("Registering: " + block.toString());
+            logger.warn("Registering Block: " + block.getRegistryName().toString());
             event.getRegistry().register(block);
         });
+
     }
 
     @SubscribeEvent
@@ -241,4 +246,5 @@ public class IGRegistrationHolder {
     private static void buildMaterialRecipes(MaterialInterface... material){
         Arrays.stream(material).iterator().forEachRemaining(MaterialInterface::build);
     }
+
 }
