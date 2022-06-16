@@ -1,8 +1,11 @@
 package com.igteam.immersive_geology.common.world.feature;
 
+import com.igteam.immersive_geology.common.world.helper.SimplexNoise;
 import com.mojang.serialization.Codec;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -11,11 +14,13 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.SimplexNoiseGenerator;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
+import org.apache.logging.log4j.Logger;
 
 import java.util.BitSet;
 import java.util.Random;
@@ -23,6 +28,7 @@ import java.util.Random;
 public class IGOreFeature extends OreFeature {
 
     private final int spawnChance;
+    private final Logger logger = IGApi.getNewLogger();
     public IGOreFeature(Codec<OreFeatureConfig> codec, int spawnChance) {
         super(codec);
         this.spawnChance = spawnChance;
@@ -50,7 +56,7 @@ public class IGOreFeature extends OreFeature {
             for (int l1 = k; l1 <= k + j1; ++l1) {
                 for (int i2 = i1; i2 <= i1 + j1; ++i2) {
                     if (l <= reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, l1, i2)) {
-                        return this.func_207803_a(reader, rand, config, d0, d1, d2, d3, d4, d5, k, l, i1, j1, k1);
+                        return generateVein(reader, rand, (IGOreFeatureConfig) config, d0, d1, d2, d3, d4, d5, k, l, i1, j1, k1);
                     }
                 }
             }
@@ -59,12 +65,17 @@ public class IGOreFeature extends OreFeature {
         return false;
     }
 
-    protected boolean func_207803_a(IWorld worldIn, Random random, IGOreFeatureConfig config, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
+    protected boolean generateVein(IWorld worldIn, Random random, IGOreFeatureConfig config, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
+        //This Function generates the actual ore vein pocket.
+
         int i = 0;
         BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
         int j = (int) Math.floor(Math.random()*(config.maxSize-config.minSize+1)+config.minSize);
         double[] adouble = new double[j * 4];
+
+        BlockState granteOre = StoneEnum.Granite.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
+        BlockState stoneOre = StoneEnum.Stone.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
@@ -125,10 +136,18 @@ public class IGOreFeature extends OreFeature {
                                         if (!bitset.get(l2)) {
                                             bitset.set(l2);
                                             blockpos$mutable.setPos(i2, j2, k2);
-                                            if (config.target.test(worldIn.getBlockState(blockpos$mutable), random)) {
-                                                worldIn.setBlockState(blockpos$mutable, config.state, 2);
-                                                ++i;
+                                            double noiseValCheck = SimplexNoise.noise(i2, j2, k2);
+                                            if(noiseValCheck > -0.5){
+                                                BlockState worldState = worldIn.getBlockState(blockpos$mutable);
+                                                if (config.target.test(worldState, random)) {
+                                                    if (worldState.getBlock().equals(Blocks.GRANITE)) {
+                                                        worldIn.setBlockState(blockpos$mutable, granteOre, 2);
+                                                    } else {
+                                                        worldIn.setBlockState(blockpos$mutable, stoneOre, 2);
+                                                    }
+                                                }
                                             }
+                                            ++i;
                                         }
                                     }
                                 }

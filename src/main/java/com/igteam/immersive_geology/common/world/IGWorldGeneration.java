@@ -35,7 +35,7 @@ public class IGWorldGeneration {
             if (container.hasPattern(BlockPattern.ore)) {
                 Block block = StoneEnum.Stone.getBlock(BlockPattern.ore, container);
                 if (block != null) {
-                    addOreGen(block, container.getName(), container.getGenerationConfig());
+                    addOreGen(container, container.getName(), container.getGenerationConfig());
                 } else {
                     IGApi.getNewLogger().warn("Failed to find Ore from: " + container.getName() + " and " + StoneEnum.Stone.getName());
                 }
@@ -46,12 +46,12 @@ public class IGWorldGeneration {
 
     }
 
-    public static void addOreGen(Block block, String name, IGOreConfig config)
+    public static void addOreGen(MaterialInterface<?> oreType, String name, IGOreConfig config)
     {
         ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
                         OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-                        block.getDefaultState(),
+                        oreType,
                         config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);
