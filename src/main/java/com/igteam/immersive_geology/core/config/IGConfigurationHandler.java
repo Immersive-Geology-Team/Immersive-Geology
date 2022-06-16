@@ -100,20 +100,20 @@ public class IGConfigurationHandler {
                     ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + container.getName());
                     switch (container.get().getRarity()) {
                         case COMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 120, 1, 90, 3, 30));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 80, 140, 1, 90, 2, 50)); // 0.015% Chance of successful Spawn
                             break;
                         case UNCOMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 90, 1, 70, 2, 25));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 60, 120, 1, 70, 2, 40));
                             break;
                         case RARE:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 70, 1, 50, 1, 15));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 40,100, 1, 50, 2, 25));
                             break;
                         case EPIC:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 40, 1, 30, 1, 5));
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 30, 80,1, 30, 1, 25)); // 0.005% Chance of successful Spawn
                             break;
                         default:
-                            ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Common Rarity");
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 120, 1, 90, 1, 20));
+                            ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
+                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 50, 80, 1, 90, 1, 20));
                             break;
                     }
             }

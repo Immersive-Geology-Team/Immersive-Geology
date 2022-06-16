@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.common.world;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.world.feature.IGOreFeature;
+import com.igteam.immersive_geology.common.world.feature.IGOreFeatureConfig;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.StoneEnum;
@@ -9,6 +10,7 @@ import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
@@ -47,10 +49,10 @@ public class IGWorldGeneration {
     public static void addOreGen(Block block, String name, IGOreConfig config)
     {
         ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
-                new OreFeatureConfig(
+                new IGOreFeatureConfig(
                         OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
                         block.getDefaultState(),
-                        config.veinSize.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
+                        config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);
     }
@@ -62,6 +64,11 @@ public class IGWorldGeneration {
 
         //TODO Make config option to remove ores
         generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).clear();
+
+        DefaultBiomeFeatures.withCommonOverworldBlocks(generation); // re-add non-ore blocks using same stage of underground_ores
+        DefaultBiomeFeatures.withInfestedStone(generation);
+        DefaultBiomeFeatures.withDisks(generation);
+        DefaultBiomeFeatures.withClayDisks(generation);
 
         //TODO Make Config Option to Disable All IG Ores
         for (ConfiguredFeature<?, ?> ore : features.values()) {
