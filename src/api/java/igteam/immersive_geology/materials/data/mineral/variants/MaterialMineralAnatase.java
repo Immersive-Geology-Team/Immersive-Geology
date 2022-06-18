@@ -71,7 +71,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
                         new FluidTagInput(SlurryEnum.TITANIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Titanium.getStack(ItemPattern.dust, 1),
-                        new FluidStack(FluidEnum.Brine.getFluid(FluidPattern.fluid), 250),
+                        new FluidStack(FluidEnum.Brine.getFluid(FluidPattern.fluid), 500),
                 250, 10000);
             }
         };
