@@ -25,7 +25,11 @@ public class MaterialMetalAluminium extends MaterialBaseMetal {
         return true;
     }
 
+    @Override
+   public boolean hasCompoundDust () {return  true;}
 
+    @Override
+    public boolean hasMetalOxide () {return  true;}
     @Override
     public Rarity getRarity() {
         return Rarity.UNCOMMON;
