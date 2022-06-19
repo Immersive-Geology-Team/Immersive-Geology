@@ -1,0 +1,4 @@
+Ullmannite
+UNCOMMON mineral
+<&ullmannite_display> Ullmannite is found between y layers: 1 and 70 and a source of Nickel. Further information on how to process this Mineral can be found in the next few pages.
+<&ullmannite_recipe> (Generic) Crafting Recipe

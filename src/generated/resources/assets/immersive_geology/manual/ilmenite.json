@@ -1,0 +1,24 @@
+{
+  "ilmenite_recipe": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_ilmenite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_ilmenite"
+      }
+    ]
+  },
+  "ilmenite_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ore_chunk_stone_ilmenite"
+      },
+      {
+        "item": "immersive_geology:dirty_crushed_ore_stone_ilmenite"
+      }
+    ]
+  }
+}

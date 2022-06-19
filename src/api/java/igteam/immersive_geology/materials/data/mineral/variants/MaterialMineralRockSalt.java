@@ -118,4 +118,8 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Sodium;
+    }
 }

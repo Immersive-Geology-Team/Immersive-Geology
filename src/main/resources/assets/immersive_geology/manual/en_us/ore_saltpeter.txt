@@ -1,7 +1,0 @@
-Saltpeter
-Minerals
-<&ore_saltpeter>
-Quick Fill Information for saltpeter, Rarity: COMMON, found in Y Level [1, 90]
-<&saltpeter_preparation>
-preparation, 
-Crushing

@@ -10,7 +10,6 @@ import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
@@ -20,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralAnatase extends MaterialBaseMineral {
 
@@ -75,5 +75,12 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
                 250, 10000);
             }
         };
+    }
+
+    @Override
+    public Set<MetalEnum> getSourceMetals() {
+        Set<MetalEnum> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Titanium);
+        return sources;
     }
 }

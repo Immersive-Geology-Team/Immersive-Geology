@@ -1,0 +1,4 @@
+Unobtania
+EPIC mineral
+<&unobtania_display> Unobtania is found between y layers: 1 and 30 and a source of Unobtanium. Further information on how to process this Mineral can be found in the next few pages.
+<&unobtania_recipe> (Generic) Crafting Recipe

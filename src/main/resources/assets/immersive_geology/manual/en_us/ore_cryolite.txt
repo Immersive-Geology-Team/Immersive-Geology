@@ -1,7 +1,0 @@
-Cryolite
-Minerals
-<&ore_cryolite>
-Quick Fill Information for cryolite, Rarity: EPIC, found in Y Level [1, 30]
-<&cryolite_preparation>
-preparation, 
-Crushing

@@ -1,7 +1,0 @@
-Hematite
-Minerals
-<&ore_hematite>
-Quick Fill Information for hematite, Rarity: COMMON, found in Y Level [1, 90]
-<&hematite_extraction>
-extraction, 
-Separator

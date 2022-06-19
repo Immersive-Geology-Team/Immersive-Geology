@@ -1,0 +1,24 @@
+{
+  "acanthite_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ore_chunk_stone_acanthite"
+      },
+      {
+        "item": "immersive_geology:dirty_crushed_ore_stone_acanthite"
+      }
+    ]
+  },
+  "acanthite_recipe": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_acanthite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_acanthite"
+      }
+    ]
+  }
+}

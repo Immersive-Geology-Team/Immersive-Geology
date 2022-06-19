@@ -1,7 +1,0 @@
-Platinum
-Minerals
-<&ore_platinum>
-Quick Fill Information for platinum, Rarity: COMMON, found in Y Level [1, 90]
-<&platinum_preparation>
-preparation, 
-Bloomery

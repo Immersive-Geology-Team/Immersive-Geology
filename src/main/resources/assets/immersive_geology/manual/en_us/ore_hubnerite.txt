@@ -1,5 +1,0 @@
-Hubnerite
-Minerals
-<&ore_hubnerite>
-Quick Fill Information for hubnerite, Rarity: RARE, found in Y Level [1, 50]
-<&hubnerite_extraction_stage>

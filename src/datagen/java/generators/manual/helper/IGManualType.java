@@ -1,5 +1,6 @@
 package generators.manual.helper;
 
 public enum IGManualType {
-    item_display;
+    item_display,
+    crafting;
 }

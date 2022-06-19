@@ -1,5 +1,0 @@
-Cobaltite
-Minerals
-<&ore_cobaltite>
-Quick Fill Information for cobaltite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&cobaltite_extraction_stage>

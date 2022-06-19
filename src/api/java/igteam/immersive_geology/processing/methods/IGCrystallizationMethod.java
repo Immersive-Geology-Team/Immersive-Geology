@@ -5,6 +5,9 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
 
 public class IGCrystallizationMethod extends IGProcessingMethod {
 
@@ -44,5 +47,10 @@ public class IGCrystallizationMethod extends IGProcessingMethod {
 
     public int getTime() {
         return time;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("crystallization/crystallize_" + Objects.requireNonNull(getMethodName()));
     }
 }

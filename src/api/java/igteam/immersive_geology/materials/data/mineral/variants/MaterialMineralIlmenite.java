@@ -89,4 +89,8 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
         return Rarity.RARE;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Titanium;
+    }
 }

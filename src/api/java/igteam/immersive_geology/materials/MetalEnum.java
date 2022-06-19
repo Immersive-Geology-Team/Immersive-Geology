@@ -45,7 +45,8 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     Zinc(new MaterialMetalZinc()),
     Sodium(new MaterialMetalSodium()),
     Osmium(new MaterialMetalOsmium()),
-    Neodymium(new MaterialMetalOsmium());
+    Neodymium(new MaterialMetalOsmium()),
+    Unobtanium(new MaterialMetalUnobtanium());
 
     private final MaterialBaseMetal material;
 

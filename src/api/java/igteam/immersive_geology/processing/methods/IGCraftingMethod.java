@@ -5,6 +5,9 @@ import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
 
 public class IGCraftingMethod extends IGProcessingMethod {
     public IGCraftingMethod(IGProcessingStage stage) {
@@ -70,5 +73,10 @@ public class IGCraftingMethod extends IGProcessingMethod {
 
     public String[] getPatterns() {
         return patterns;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("shapeless/craft_" + Objects.requireNonNull(getResult().asItem().getRegistryName()).getPath());
     }
 }

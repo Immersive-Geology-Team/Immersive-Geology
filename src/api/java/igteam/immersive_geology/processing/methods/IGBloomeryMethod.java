@@ -6,7 +6,10 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.Objects;
 
 public class IGBloomeryMethod extends IGProcessingMethod {
 
@@ -44,4 +47,8 @@ public class IGBloomeryMethod extends IGProcessingMethod {
         return time;
     }
 
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("bloomery/refine_" + Objects.requireNonNull(getMethodName()));
+    }
 }

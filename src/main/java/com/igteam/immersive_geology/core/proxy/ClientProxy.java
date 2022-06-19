@@ -28,6 +28,7 @@ import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.MineralEnum;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.StoneEnum;
@@ -182,13 +183,11 @@ public class ClientProxy extends ServerProxy {
     private static void mineral_info(int priority){
         ManualInstance man = ManualHelper.getManual();
 
-        for (MaterialInterface<?> wrapper : APIMaterials.generatedMaterials()){
+        for (MaterialInterface<?> wrapper : MineralEnum.values()){
             Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.get().getRarity().name().toLowerCase()),wrapper.get().getRarity().ordinal());
             ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
 
-
-
-            builder.readFromFile(modLoc("ore_" + wrapper.getName()));
+            builder.readFromFile(modLoc(wrapper.getName()));
             man.addEntry(IG_CATEGORY_RARITY, builder.create(), priority);
         }
     }

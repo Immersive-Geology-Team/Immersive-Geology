@@ -12,18 +12,17 @@ import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralAlumina extends MaterialBaseMineral {
 
@@ -99,5 +98,13 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
                     new ElementProportion(PeriodicTableElement.OXYGEN, 3)
             )
         );
+    }
+
+    @Override
+    public Set<MetalEnum> getSourceMetals() {
+        Set<MetalEnum> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Aluminum);
+
+        return sources;
     }
 }

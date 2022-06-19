@@ -1,7 +1,0 @@
-Ferberite
-Minerals
-<&ore_ferberite>
-Quick Fill Information for ferberite, Rarity: RARE, found in Y Level [1, 50]
-<&ferberite_preparation>
-preparation, 
-Crushing

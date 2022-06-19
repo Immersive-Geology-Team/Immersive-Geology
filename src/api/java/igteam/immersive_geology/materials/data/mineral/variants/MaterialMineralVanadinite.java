@@ -99,11 +99,14 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.CHLORINE)
         ));
     }
-
     @Override
     public Rarity getRarity()
     {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Vanadium;
+    }
 }

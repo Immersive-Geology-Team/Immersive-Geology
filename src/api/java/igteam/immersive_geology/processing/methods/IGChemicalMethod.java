@@ -10,10 +10,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class IGChemicalMethod extends IGProcessingMethod {
 
@@ -103,5 +105,10 @@ public class IGChemicalMethod extends IGProcessingMethod {
 
     public int getEnergy() {
         return energy;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("vat/leach_" + Objects.requireNonNull(getMethodName()));
     }
 }

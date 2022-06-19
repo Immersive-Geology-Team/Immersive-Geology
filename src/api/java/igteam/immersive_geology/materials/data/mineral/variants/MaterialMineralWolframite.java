@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -10,7 +11,7 @@ import net.minecraft.item.Rarity;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class  MaterialMineralWolframite extends MaterialBaseMineral {
+public class MaterialMineralWolframite extends MaterialBaseMineral {
 
     public  MaterialMineralWolframite() {
         super("wolframite");
@@ -51,4 +52,8 @@ public class  MaterialMineralWolframite extends MaterialBaseMineral {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Tungsten;
+    }
 }

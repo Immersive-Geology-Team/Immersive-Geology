@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Objects;
 
@@ -95,5 +96,10 @@ public class IGCrushingMethod extends IGProcessingMethod {
         create(method_name, blockTag, stack, energy, time);
         this.secondary = secondary;
         this.chance = chance;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("crushing/crush_" + Objects.requireNonNull(getMethodName()));
     }
 }

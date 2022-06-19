@@ -1,7 +1,0 @@
-Cassiterite
-Minerals
-<&ore_cassiterite>
-Quick Fill Information for cassiterite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&cassiterite_extraction>
-extraction, 
-Separator

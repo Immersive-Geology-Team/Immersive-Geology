@@ -100,4 +100,9 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
     {
         return Rarity.COMMON;
     }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Chromium;
+    }
 }

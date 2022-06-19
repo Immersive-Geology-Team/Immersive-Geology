@@ -5,6 +5,9 @@ import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
 
 public class IGBasicSmeltingMethod extends IGProcessingMethod {
 
@@ -24,5 +27,14 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
 
     public IItemProvider getOutput() {
         return output;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL(toPath(output) + "_from_blasting");
+    }
+
+    private String toPath(IItemProvider src) {
+        return Objects.requireNonNull(src.asItem().getRegistryName()).getPath();
     }
 }

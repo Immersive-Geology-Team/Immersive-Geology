@@ -70,4 +70,9 @@ public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
             }
         };
     }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Iron;
+    }
 }

@@ -86,4 +86,8 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
         return Rarity.UNCOMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Nickel;
+    }
 }

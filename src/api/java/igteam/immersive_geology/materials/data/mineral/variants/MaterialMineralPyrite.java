@@ -63,4 +63,9 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Iron;
+    }
+
 }

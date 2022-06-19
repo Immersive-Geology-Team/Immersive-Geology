@@ -1,7 +1,0 @@
-Pyrite
-Minerals
-<&ore_pyrite>
-Quick Fill Information for pyrite, Rarity: COMMON, found in Y Level [1, 90]
-<&pyrite_preparation>
-preparation, 
-Crushing

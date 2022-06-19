@@ -1,7 +1,0 @@
-Chalcopyrite
-Minerals
-<&ore_chalcopyrite>
-Quick Fill Information for chalcopyrite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&chalcopyrite_extraction>
-extraction, 
-Separator

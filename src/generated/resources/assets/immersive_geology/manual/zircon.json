@@ -1,0 +1,24 @@
+{
+  "zircon_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ore_chunk_stone_zircon"
+      },
+      {
+        "item": "immersive_geology:dirty_crushed_ore_stone_zircon"
+      }
+    ]
+  },
+  "zircon_recipe": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_zircon"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_zircon"
+      }
+    ]
+  }
+}

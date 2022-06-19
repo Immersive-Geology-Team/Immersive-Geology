@@ -1,7 +1,0 @@
-Cuprite
-Minerals
-<&ore_cuprite>
-Quick Fill Information for cuprite, Rarity: COMMON, found in Y Level [1, 90]
-<&cuprite_processing_stage>
-processing stage, 
-Blasting

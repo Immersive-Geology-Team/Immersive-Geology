@@ -1,7 +1,0 @@
-Sphalerite
-Minerals
-<&ore_sphalerite>
-Quick Fill Information for sphalerite, Rarity: COMMON, found in Y Level [1, 90]
-<&sphalerite_preparation>
-preparation, 
-Crushing

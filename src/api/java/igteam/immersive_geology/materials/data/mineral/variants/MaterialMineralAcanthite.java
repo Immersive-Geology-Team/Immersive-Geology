@@ -11,12 +11,13 @@ import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralAcanthite  extends MaterialBaseMineral {
 
@@ -39,10 +40,10 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
         return new LinkedHashSet<>(
-                Arrays.asList(
-                        new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
-                        new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILVER, 2)
-                )
+            Arrays.asList(
+                    new PeriodicTableElement.ElementProportion(PeriodicTableElement.SULFUR),
+                    new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILVER, 2)
+            )
         );
     }
 
@@ -94,4 +95,13 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
         };
     }
 
+    @Override
+    public Set<MetalEnum> getSourceMetals() {
+        Set<MetalEnum> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Silver);
+        sources.add(MetalEnum.Platinum);
+        sources.add(MetalEnum.Osmium);
+
+        return sources;
+    }
 }

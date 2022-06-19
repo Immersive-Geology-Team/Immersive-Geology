@@ -1,5 +1,0 @@
-Uraninite
-Minerals
-<&ore_uraninite>
-Quick Fill Information for uraninite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&uraninite_extraction_stage>

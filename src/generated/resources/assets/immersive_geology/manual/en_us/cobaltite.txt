@@ -1,0 +1,4 @@
+Cobaltite
+UNCOMMON mineral
+<&cobaltite_display> Cobaltite is found between y layers: 1 and 70 and a source of Cobalt. Further information on how to process this Mineral can be found in the next few pages.
+<&cobaltite_recipe> (Generic) Crafting Recipe

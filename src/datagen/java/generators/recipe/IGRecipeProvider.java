@@ -106,7 +106,7 @@ public class IGRecipeProvider extends RecipeProvider {
         {
             recipe.addMultiInput(t);
         }
-        recipe.build(consumer, toRL("arc_smelting/arc_" + Objects.requireNonNull(method.getName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildBasicSmeltingMethods(IGBasicSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -114,7 +114,7 @@ public class IGRecipeProvider extends RecipeProvider {
         IItemProvider output = method.getOutput();
         float xp = 2;
         int smeltingTime = 200;
-        CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, this.toRL(this.toPath(output) + "_from_blasting"));
+        CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, method.getLocation());
     }
 
     private void buildCrushingMethods(IGCrushingMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -129,7 +129,7 @@ public class IGRecipeProvider extends RecipeProvider {
             }
             recipe.setTime(method.getTime());
             recipe.setEnergy(method.getEnergy());
-            recipe.build(consumer, toRL("crushing/crush_" + Objects.requireNonNull(method.getMethodName())));
+            recipe.build(consumer, method.getLocation());
         } else {
             logger.error("Failed to create Crusher Recipe for [" + method.getMethodName() + "]");
         }
@@ -139,7 +139,7 @@ public class IGRecipeProvider extends RecipeProvider {
         BlastFurnaceRecipeBuilder recipe = BlastFurnaceRecipeBuilder.builder(method.getOutput());
         recipe.addInput(method.getInput());
         recipe.addSlag(method.getSlag().isEmpty() ? new ItemStack(IEItems.Ingredients.slag) : method.getSlag());
-        recipe.build(consumer, toRL("blasting/blast_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildCrystallizationMethods(IGCrystallizationMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -150,7 +150,7 @@ public class IGRecipeProvider extends RecipeProvider {
         recipe.addFluidInput(method.getFluidInput());
         recipe.setTime(method.getTime());
         recipe.setEnergy(method.getEnergy());
-        recipe.build(consumer, toRL("crystallization/crystallize_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildRoastingMethods(IGRoastingMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -160,7 +160,7 @@ public class IGRecipeProvider extends RecipeProvider {
         recipe.addItemInput(method.getItemInput());
         recipe.setWasteMult(method.getWasteMult());
         recipe.setTime(method.getTime());
-        recipe.build(consumer, toRL("roasting/roast_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildCalcinationMethods(IGCalcinationMethod method, Consumer<IFinishedRecipe> consumer) {
@@ -170,7 +170,7 @@ public class IGRecipeProvider extends RecipeProvider {
         recipe.addItemInput(method.getItemInput());
         recipe.setEnergy(method.getEnergy());
         recipe.setTime(method.getTime());
-        recipe.build(consumer, toRL("calcination/decompose_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildCraftingMethods(IGCraftingMethod method, Consumer<IFinishedRecipe> consumer){
@@ -182,21 +182,21 @@ public class IGRecipeProvider extends RecipeProvider {
         }
 
         recipe.setGroup(method.getRecipeGroup()).addCriterion(method.getCriterionName(), hasItem(method.getCriterionTrigger()));
-        recipe.build(consumer, toRL("shapeless/craft_" + Objects.requireNonNull(method.getResult().asItem().getRegistryName()).getPath()));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildSeparatingMethods(IGSeparatorMethod method, Consumer<IFinishedRecipe> consumer){
         logger.info("Data Gen for Washing Recipes");
         logger.info("[" + method.getName() + "]");
         SeparatorRecipeBuilder recipe = SeparatorRecipeBuilder.builder(method.getResult()).addInput(method.getInput()).addWaste(method.getWaste());
-        recipe.build(consumer, toRL("wash/wash_" + Objects.requireNonNull(method.getName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildChemicalMethods(IGChemicalMethod method, Consumer<IFinishedRecipe> consumer){
         logger.info("Data Gen for Chemical Vat Recipes");
         logger.info("[" + method.getMethodName() + "]");
         VatRecipeBuilder recipe = VatRecipeBuilder.builder(method.getFluidResult(), method.getItemResult(), method.getFluidInput1(), method.getFluidInput2(), method.getItemInput(), method.getEnergy(), method.getTime());
-        recipe.build(consumer, toRL("vat/leach_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildBloomeryMethods(IGBloomeryMethod method, Consumer<IFinishedRecipe> consumer){
@@ -204,24 +204,8 @@ public class IGRecipeProvider extends RecipeProvider {
         logger.info("[" + method.getMethodName() + "]");
         BloomeryRecipeBuilder recipe = BloomeryRecipeBuilder.builder(method.getItemResult(), method.getItemInput());
         recipe.setTime(method.getTime());
-        recipe.build(consumer, toRL("bloomery/refine_" + Objects.requireNonNull(method.getMethodName())));
+        recipe.build(consumer, method.getLocation());
     }
-
-    private final HashMap<String, Integer> PATH_COUNT = new HashMap<>();
-    private ResourceLocation toRL(String s)
-    {
-        if(!s.contains("/"))
-            s = "crafting/"+s;
-        if(PATH_COUNT.containsKey(s))
-        {
-            int count = PATH_COUNT.get(s)+1;
-            PATH_COUNT.put(s, count);
-            return new ResourceLocation(IGLib.MODID, s+count);
-        }
-        PATH_COUNT.put(s, 1);
-        return new ResourceLocation(IGLib.MODID, s);
-    }
-
     private String toPath(IItemProvider src) {
         return Objects.requireNonNull(src.asItem().getRegistryName()).getPath();
     }

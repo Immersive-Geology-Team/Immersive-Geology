@@ -5,7 +5,6 @@ import generators.IGBlockStateProvider;
 import generators.IGItemModelProvider;
 import generators.manual.IGManualProvider;
 import generators.loot.BlockLootProvider;
-import generators.manual.ManualPageProvider;
 import generators.recipe.IGRecipeProvider;
 import generators.tags.IGBlockTagProvider;
 import generators.tags.IGFluidTagProvider;

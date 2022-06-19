@@ -1,7 +1,0 @@
-Chalcocite
-Minerals
-<&ore_chalcocite>
-Quick Fill Information for chalcocite, Rarity: COMMON, found in Y Level [1, 90]
-<&chalcocite_preparation>
-preparation, 
-Crushing

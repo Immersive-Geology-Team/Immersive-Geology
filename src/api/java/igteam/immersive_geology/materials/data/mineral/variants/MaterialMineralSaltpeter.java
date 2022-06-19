@@ -72,11 +72,14 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
         );
     }
 
-
     @Override
     public Rarity getRarity()
     {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Zirconium;
+    }
 }

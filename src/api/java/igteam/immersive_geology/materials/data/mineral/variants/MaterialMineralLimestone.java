@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -53,5 +54,10 @@ public class MaterialMineralLimestone extends MaterialBaseMineral {
     @Override
     protected boolean hasCrystal() {
         return false;
+    }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Tungsten;
     }
 }

@@ -90,4 +90,9 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Lead;
+    }
+
 }

@@ -1,7 +1,0 @@
-Acanthite
-Minerals
-<&ore_acanthite>
-Quick Fill Information for acanthite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&acanthite_extraction>
-extraction, 
-Separator

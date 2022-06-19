@@ -11,6 +11,9 @@ import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
 
 public class IGBlastingMethod extends IGProcessingMethod {
     public IGBlastingMethod(IGProcessingStage stage) {
@@ -48,5 +51,10 @@ public class IGBlastingMethod extends IGProcessingMethod {
     }
     public String getMethodName() {
         return name;
+    }
+
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("blasting/blast_" + Objects.requireNonNull(getMethodName()));
     }
 }

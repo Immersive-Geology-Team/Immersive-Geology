@@ -1,5 +1,0 @@
-Kaolinite
-Minerals
-<&ore_kaolinite>
-Quick Fill Information for kaolinite, Rarity: COMMON, found in Y Level [1, 90]
-<&kaolinite_preparation>

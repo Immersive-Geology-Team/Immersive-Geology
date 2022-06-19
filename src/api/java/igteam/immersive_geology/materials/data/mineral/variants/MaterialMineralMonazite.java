@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -51,6 +52,11 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
     {
         // TODO Auto-generated method stub
         return Rarity.COMMON;
+    }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Neodymium;
     }
 
 }

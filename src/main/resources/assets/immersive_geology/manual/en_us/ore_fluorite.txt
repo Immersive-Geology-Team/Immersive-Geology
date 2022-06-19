@@ -1,7 +1,0 @@
-Fluorite
-Minerals
-<&ore_fluorite>
-Quick Fill Information for fluorite, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&fluorite_preparation>
-preparation, 
-Crushing

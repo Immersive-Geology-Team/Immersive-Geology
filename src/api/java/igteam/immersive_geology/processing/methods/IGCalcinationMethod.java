@@ -5,6 +5,9 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
 
 public class IGCalcinationMethod extends IGProcessingMethod {
 
@@ -46,4 +49,8 @@ public class IGCalcinationMethod extends IGProcessingMethod {
         return time;
     }
 
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("calcination/decompose_" + Objects.requireNonNull(getMethodName()));
+    }
 }

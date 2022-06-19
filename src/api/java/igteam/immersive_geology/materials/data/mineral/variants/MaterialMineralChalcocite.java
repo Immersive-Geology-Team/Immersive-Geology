@@ -97,4 +97,8 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
         };
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Copper;
+    }
 }

@@ -1,0 +1,24 @@
+{
+  "hematite_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ore_chunk_stone_hematite"
+      },
+      {
+        "item": "immersive_geology:dirty_crushed_ore_stone_hematite"
+      }
+    ]
+  },
+  "hematite_recipe": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_hematite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_hematite"
+      }
+    ]
+  }
+}

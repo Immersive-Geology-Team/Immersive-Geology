@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -50,4 +51,9 @@ public class MaterialMineralGypsum extends MaterialBaseMineral {
         return Rarity.UNCOMMON;
     }
 
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Zirconium;
+    }
 }

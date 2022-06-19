@@ -55,4 +55,8 @@ public class MaterialMineralHematite extends MaterialBaseMineral {
         return Rarity.COMMON;
     }
 
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Iron;
+    }
 }

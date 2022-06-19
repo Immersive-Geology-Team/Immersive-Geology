@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -48,6 +49,11 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
     public Rarity getRarity()
     {
         return Rarity.UNCOMMON;
+    }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Zirconium;
     }
 
 }

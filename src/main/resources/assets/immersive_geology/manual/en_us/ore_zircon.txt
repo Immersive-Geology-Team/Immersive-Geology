@@ -1,7 +1,0 @@
-Zircon
-Minerals
-<&ore_zircon>
-Quick Fill Information for zircon, Rarity: UNCOMMON, found in Y Level [1, 70]
-<&zircon_preparation>
-preparation, 
-Crushing

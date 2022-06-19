@@ -9,10 +9,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
@@ -83,6 +85,10 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
 
     public IngredientWithSize[] getAdditives() { return this.additives.toArray(new IngredientWithSize[this.additives.size()]);}
 
+    @Override
+    public ResourceLocation getLocation() {
+        return toRL("arc_smelting/arc_" + Objects.requireNonNull(getName()));
+    }
 }
 
 

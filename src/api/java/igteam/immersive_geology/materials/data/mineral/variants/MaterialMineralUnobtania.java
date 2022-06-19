@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
@@ -48,5 +49,10 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
     public Rarity getRarity()
     {
         return Rarity.EPIC;
+    }
+
+    @Override
+    public MetalEnum getSourceMetals() {
+        return MetalEnum.Unobtanium;
     }
 }
