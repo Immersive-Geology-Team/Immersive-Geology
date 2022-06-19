@@ -41,7 +41,7 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     Tungsten(new MaterialMetalTungsten()),
     Thorium(new MaterialMetalThorium()),
     Vanadium(new MaterialMetalVanadium()),
-    Zirconium(new MaterialMetalZirconium()),
+ //   Zirconium(new MaterialMetalZirconium()),
     Zinc(new MaterialMetalZinc()),
     Sodium(new MaterialMetalSodium()),
     Osmium(new MaterialMetalOsmium()),
