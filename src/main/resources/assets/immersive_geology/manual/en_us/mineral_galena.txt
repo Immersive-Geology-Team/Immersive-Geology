@@ -1,4 +1,0 @@
-Galena
-Minerals
-<&galena>
-Mineral Test for galena

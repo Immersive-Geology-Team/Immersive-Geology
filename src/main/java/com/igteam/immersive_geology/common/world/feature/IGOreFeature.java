@@ -7,19 +7,14 @@ import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.SimplexNoiseGenerator;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
 import org.apache.logging.log4j.Logger;
 
 import java.util.BitSet;
@@ -28,7 +23,6 @@ import java.util.Random;
 public class IGOreFeature extends OreFeature {
 
     private final int spawnChance;
-    private final Logger logger = IGApi.getNewLogger();
     public IGOreFeature(Codec<OreFeatureConfig> codec, int spawnChance) {
         super(codec);
         this.spawnChance = spawnChance;
@@ -66,7 +60,8 @@ public class IGOreFeature extends OreFeature {
     }
 
     protected boolean generateVein(IWorld worldIn, Random random, IGOreFeatureConfig config, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
-        //This Function generates the actual ore vein pocket.
+        //This Function generates the actual ore vein pocket. It's pretty much a modified version of the vanilla ore generation code.
+        //We add Simplex Noise to help break up the elliptical nature of the ore veins these provide
 
         int i = 0;
         BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);

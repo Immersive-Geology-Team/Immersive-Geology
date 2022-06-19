@@ -1,4 +1,0 @@
-Thorite
-Minerals
-<&thorite>
-Mineral Test for thorite

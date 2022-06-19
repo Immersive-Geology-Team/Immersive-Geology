@@ -1,0 +1,7 @@
+Thorianite
+Minerals
+<&ore_thorianite>
+Quick Fill Information for thorianite, Rarity: RARE, found in Y Level [1, 50]
+<&thorianite_extraction>
+extraction, 
+Separator

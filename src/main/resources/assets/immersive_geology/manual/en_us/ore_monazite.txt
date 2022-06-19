@@ -1,0 +1,5 @@
+Monazite
+Minerals
+<&ore_monazite>
+Quick Fill Information for monazite, Rarity: COMMON, found in Y Level [1, 90]
+<&monazite_extraction_stage>

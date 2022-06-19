@@ -2,7 +2,8 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_granite_acanthite"
+    "item": "immersive_geology:ore_chunk_granite_acanthite",
+    "count": 4
   },
   "input": {
     "tag": "forge:ores/granite_acanthite"

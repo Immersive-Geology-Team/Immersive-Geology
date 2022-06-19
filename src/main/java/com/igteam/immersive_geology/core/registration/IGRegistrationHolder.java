@@ -215,7 +215,7 @@ public class IGRegistrationHolder {
         logger.info("Immersive Geology: Block Registration");
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
-            logger.warn("Registering Block: " + block.getRegistryName().toString());
+            logger.debug("Registering Block: " + block.getRegistryName().toString());
             event.getRegistry().register(block);
         });
 

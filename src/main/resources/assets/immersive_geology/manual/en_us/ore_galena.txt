@@ -1,0 +1,7 @@
+Galena
+Minerals
+<&ore_galena>
+Quick Fill Information for galena, Rarity: COMMON, found in Y Level [1, 90]
+<&galena_preparation>
+preparation, 
+Crushing

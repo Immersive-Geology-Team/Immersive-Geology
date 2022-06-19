@@ -57,6 +57,15 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()));
+
+                        if(!hasExistingImplementation()) {
+                            IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
+                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 4), 1000, 500);
+                        }
+
+                        IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
+                                getItemTag(ItemPattern.ore_chunk, stone.get()),  stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()),1000, 500);
+
                     }
                 }
             }

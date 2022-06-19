@@ -1,0 +1,5 @@
+Alumina
+Minerals
+<&ore_alumina>
+Quick Fill Information for alumina, Rarity: UNCOMMON, found in Y Level [1, 70]
+<&alumina_extraction_stage>

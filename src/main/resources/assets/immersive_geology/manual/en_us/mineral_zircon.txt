@@ -1,4 +1,0 @@
-Zircon
-Minerals
-<&zircon>
-Mineral Test for zircon

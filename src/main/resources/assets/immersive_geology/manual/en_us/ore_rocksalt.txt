@@ -1,0 +1,7 @@
+Rocksalt
+Minerals
+<&ore_rocksalt>
+Quick Fill Information for rocksalt, Rarity: COMMON, found in Y Level [1, 90]
+<&rocksalt_preparation>
+preparation, 
+Crushing

@@ -1,0 +1,10 @@
+{
+  "type": "item_display",
+  "ore_anatase": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_anatase_ore"
+      }
+    ]
+  }
+}

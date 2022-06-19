@@ -1,0 +1,10 @@
+{
+  "type": "item_display",
+  "ore_hematite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_hematite_ore"
+      }
+    ]
+  }
+}

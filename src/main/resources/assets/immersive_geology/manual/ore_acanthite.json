@@ -1,0 +1,10 @@
+{
+  "ore_acanthite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_acanthite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

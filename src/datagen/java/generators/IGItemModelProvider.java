@@ -1,5 +1,8 @@
 package generators;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
@@ -7,16 +10,25 @@ import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
+import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
+import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.MiscEnum;
+import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.APIMaterials;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGProcessingMethod;
+import igteam.immersive_geology.processing.methods.IGCrushingMethod;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -28,8 +40,14 @@ import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.jackson.Log4jJsonObjectMapper;
 
 import javax.annotation.Nullable;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class IGItemModelProvider extends ItemModelProvider {
 
@@ -85,6 +103,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         });
 
         generateMultiblockItems();
+        //generateManualPageSkeleton();
 
     }
 
@@ -261,5 +280,78 @@ public class IGItemModelProvider extends ItemModelProvider {
         doTransform(trans, Perspective.GUI, new Vector3f(0F, -3F, 0), new Vector3f(30, 225, 0), 0.16F);
         doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
         doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+    }
+
+    private void generateManualPageSkeleton(){
+        JsonObject json = new JsonObject();
+
+        for (MaterialInterface<?> material : APIMaterials.generatedMaterials()) {
+           try {
+                PrintWriter out = new PrintWriter("..\\src\\main\\resources\\assets\\"+ IGApi.MODID + "\\manual\\en_us\\ore_" + material.getName() + ".txt");
+
+                IGProcessingStage stage = material.getStages().stream().findFirst().get();
+
+                boolean hasMethod =  stage.getMethods().stream().findFirst().isPresent();
+
+                out.println(material.getName().substring(0,1).toUpperCase() + material.getName().substring(1)); // Page Information being filled out
+                out.println("Minerals"); // Subtitle of the page
+                out.println("<&" + "ore_"+material.getName() + ">"); //Link it to the display type
+                IGOreConfig config = material.get().getGenerationConfig();
+                out.println("Quick Fill Information for " + material.getName() + ", Rarity: " + material.get().getRarity().name() + ", found in Y Level [" + config.minY.get() + ", " +  config.maxY.get() + "]");
+                out.println("<&" + material.getName() + "_" + stage.getStageName().toLowerCase().replace(" ", "_")  + ">"); //Link it to the display type
+                if(hasMethod) {
+                    IGProcessingMethod method = stage.getMethods().stream().findFirst().get();
+
+                    out.println(stage.getStageName().toLowerCase().replace("_", " ") + ", ");
+                    out.println(method.getRecipeType().name());
+
+                }
+                out.close();
+
+                out = new PrintWriter("..\\src\\main\\resources\\assets\\"+ IGApi.MODID + "\\manual\\ore_" + material.getName() + ".json");
+                log.warn("Trying New Json Method!");
+                Map<String,Object> jsonWrapper = new HashMap<>();
+                Map<String, List<Map<String,String>>> internalWrap = new HashMap<>();
+                List<Map<String,String>> itemList = new ArrayList<>();
+                Map<String, String> itemMap = new HashMap<>();
+
+                jsonWrapper.put("type", "item_display");
+
+                itemMap.put("item", Objects.requireNonNull(StoneEnum.Stone.getBlock(BlockPattern.ore, material).asItem().getRegistryName()).toString());
+                itemList.add(itemMap);
+                internalWrap.put("item", itemList);
+                jsonWrapper.put("ore_" + material.getName(), internalWrap);
+
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                // convert book object to JSON file
+                gson.toJson(jsonWrapper, out);
+
+                // close writer
+                out.close();
+//
+//                out.println("{");
+//                out.println("\"ore_" + material.getName() + "\": {");
+//                out.println("  \"type\":" + "\"item_display\",");
+//                out.println("  \"item\": [{");
+//
+//                out.println("     \"item\":" + "\"" + StoneEnum.Stone.getBlock(BlockPattern.ore, material).asItem().getRegistryName() + "\",");
+//                out.println("     \"item\":" + "\"" + StoneEnum.Stone.getItem(ItemPattern.ore_chunk, material).getRegistryName() + "\"");
+//
+//                out.println("    }]");
+//                out.println("  },");
+//
+//                out.println("\"" + material.getName() + "_" + stage.getStageName().toLowerCase().replace(" ", "_") + "\": {");
+//                out.println("  \"type\":" + "\"item_display\",");
+//                out.println("  \"item\": {");
+//                out.println("     \"item\":" + "\"" + StoneEnum.Stone.getBlock(BlockPattern.ore, material).asItem().getRegistryName() + "\"");
+//                out.println("    }");
+//                out.println("  }");
+//                out.println("}");
+//
+//                out.close();
+            } catch (Exception exception){
+                log.error("Failed to create Manual Entry: " + exception.getMessage());
+            };
+        }
     }
 }

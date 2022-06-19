@@ -1,4 +1,0 @@
-Gold
-Minerals
-<&gold>
-Mineral Test for gold

@@ -1,0 +1,10 @@
+{
+  "ore_fluorite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_fluorite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

@@ -88,9 +88,11 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     public void tick() {
         super.tick();
         GravitySeparatorTileEntity master = this.master();
-        if(!master.processQueue.isEmpty()){
-            if(!master.tank.isEmpty()){
-                master.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+        if(master != null) { //TODO FIX THIS SO IT ISN'T SHIT
+            if (!master.processQueue.isEmpty()) {
+                if (!master.tank.isEmpty()) {
+                    master.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                }
             }
         }
     }

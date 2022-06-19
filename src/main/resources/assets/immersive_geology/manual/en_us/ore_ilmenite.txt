@@ -1,0 +1,7 @@
+Ilmenite
+Minerals
+<&ore_ilmenite>
+Quick Fill Information for ilmenite, Rarity: RARE, found in Y Level [1, 50]
+<&ilmenite_preparation>
+preparation, 
+Crushing

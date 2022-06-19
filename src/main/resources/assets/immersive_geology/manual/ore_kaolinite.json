@@ -1,0 +1,10 @@
+{
+  "ore_kaolinite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_kaolinite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

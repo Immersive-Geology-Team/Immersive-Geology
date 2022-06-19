@@ -1,0 +1,10 @@
+{
+  "ore_vanadinite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_vanadinite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

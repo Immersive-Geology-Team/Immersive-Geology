@@ -3,16 +3,15 @@ import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import generators.IGBlockStateProvider;
 import generators.IGItemModelProvider;
+import generators.manual.IGManualProvider;
 import generators.loot.BlockLootProvider;
+import generators.manual.ManualPageProvider;
 import generators.recipe.IGRecipeProvider;
 import generators.tags.IGBlockTagProvider;
 import generators.tags.IGFluidTagProvider;
 import generators.tags.IGItemTagProvider;
-import igteam.immersive_geology.IGApi;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourcePackType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -21,6 +20,8 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = IGLib.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IGDataProvider {
+
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
@@ -43,6 +44,7 @@ public class IGDataProvider {
         if(event.includeClient()){
             generator.addProvider(new IGBlockStateProvider(generator, exhelper));
             generator.addProvider(new IGItemModelProvider(generator, exhelper));
+            generator.addProvider(new IGManualProvider(generator, exhelper, IGLib.MODID));
         }
     }
 }

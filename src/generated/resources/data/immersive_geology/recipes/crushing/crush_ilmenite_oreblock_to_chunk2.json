@@ -2,7 +2,8 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_granite_ilmenite"
+    "item": "immersive_geology:ore_chunk_granite_ilmenite",
+    "count": 4
   },
   "input": {
     "tag": "forge:ores/granite_ilmenite"

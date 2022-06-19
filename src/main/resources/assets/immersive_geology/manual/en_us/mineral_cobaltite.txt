@@ -1,4 +1,0 @@
-Cobaltite
-Minerals
-<&cobaltite>
-Mineral Test for cobaltite

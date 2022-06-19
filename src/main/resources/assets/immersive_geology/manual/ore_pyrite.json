@@ -1,0 +1,10 @@
+{
+  "ore_pyrite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_pyrite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

@@ -1,0 +1,10 @@
+{
+  "ore_cuprite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_cuprite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

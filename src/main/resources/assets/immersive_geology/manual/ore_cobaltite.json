@@ -1,0 +1,10 @@
+{
+  "ore_cobaltite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_cobaltite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

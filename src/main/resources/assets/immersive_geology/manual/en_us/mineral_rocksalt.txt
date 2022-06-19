@@ -1,4 +1,0 @@
-Rocksalt
-Minerals
-<&rocksalt>
-Mineral Test for rocksalt

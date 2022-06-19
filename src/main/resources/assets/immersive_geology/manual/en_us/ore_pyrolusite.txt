@@ -1,0 +1,7 @@
+Pyrolusite
+Minerals
+<&ore_pyrolusite>
+Quick Fill Information for pyrolusite, Rarity: RARE, found in Y Level [1, 50]
+<&pyrolusite_extraction>
+extraction, 
+Separator

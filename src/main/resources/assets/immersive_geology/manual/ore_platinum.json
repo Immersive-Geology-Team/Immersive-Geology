@@ -1,0 +1,10 @@
+{
+  "ore_platinum": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_platinum_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

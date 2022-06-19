@@ -1,0 +1,7 @@
+Thorite
+Minerals
+<&ore_thorite>
+Quick Fill Information for thorite, Rarity: RARE, found in Y Level [1, 50]
+<&thorite_preparation>
+preparation, 
+Crushing

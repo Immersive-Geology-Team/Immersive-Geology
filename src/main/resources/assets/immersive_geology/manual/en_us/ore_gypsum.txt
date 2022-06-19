@@ -1,0 +1,7 @@
+Gypsum
+Minerals
+<&ore_gypsum>
+Quick Fill Information for gypsum, Rarity: UNCOMMON, found in Y Level [1, 70]
+<&gypsum_preparation>
+preparation, 
+Crushing

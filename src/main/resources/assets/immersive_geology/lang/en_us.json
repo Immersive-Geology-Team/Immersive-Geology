@@ -9,6 +9,10 @@
   "manual.immersive_geology.main": "Immersive Geology",
   "manual.immersive_geology.machines": "Machines",
   "manual.immersive_geology.minerals": "Minerals",
+  "manual.immersive_geology.common": "Common Minerals",
+  "manual.immersive_geology.uncommon": "Uncommon Minerals",
+  "manual.immersive_geology.rare": "Rare Minerals",
+  "manual.immersive_geology.epic": "Super Rare Minerals",
 
   "item.immersive_geology.metal_oxide": "%s Oxide",
   "item.immersive_geology.dirty_crushed_ore": "Dirty Crushed %s Ore",

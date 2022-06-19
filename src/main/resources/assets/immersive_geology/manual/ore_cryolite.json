@@ -1,0 +1,10 @@
+{
+  "ore_cryolite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_cryolite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

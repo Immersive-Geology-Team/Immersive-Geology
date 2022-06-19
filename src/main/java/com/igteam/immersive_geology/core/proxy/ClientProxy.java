@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItems;
+import blusunrize.lib.manual.ManualElementItem;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
@@ -26,8 +27,10 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -45,8 +48,10 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -174,33 +179,18 @@ public class ClientProxy extends ServerProxy {
         rotarykiln(modLoc("rotarykiln"),4);
 
     }
-
     private static void mineral_info(int priority){
         ManualInstance man = ManualHelper.getManual();
 
-//        for(MaterialEnum material : MaterialEnum.minerals()) {
-//            ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
-//            Material mineral = material.getMaterial();
-//            ItemStack item = new ItemStack(IGRegistrationHolder.getBlockByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.ORE_STONE));
-//            builder.addSpecialElement(mineral.getName(), 0, () -> new ManualElementItem(man, item));
-//
-//            ItemStack dirty_crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(MaterialEnum.Vanilla.getMaterial(), mineral, MaterialUseType.DIRTY_CRUSHED_ORE));
-//            builder.addSpecialElement("dirty_crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, dirty_crushed_ore));
-//
-//            ItemStack crushed_ore = new ItemStack(IGRegistrationHolder.getItemByMaterial(mineral, MaterialUseType.CRUSHED_ORE));
-//            builder.addSpecialElement("crushed_" + mineral.getName(), 0, () -> new ManualElementItem(man, crushed_ore));
-//
-//            Material material_ingot = mineral.getProcessedType().getMaterial();
-//
-//            ItemStack grit = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.DUST));
-//            builder.addSpecialElement("grit_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, grit));
-//
-//            ItemStack output = new ItemStack(IGRegistrationHolder.getItemByMaterial(material_ingot, MaterialUseType.INGOT));
-//            builder.addSpecialElement("ingot_" + material_ingot.getName(), 0, () -> new ManualElementItem(man, output));
-//
-//            builder.readFromFile(modLoc("mineral_" + mineral.getName()));
-//            man.addEntry(IG_CATEGORY_MINERALS, builder.create(), priority);
-//        }
+        for (MaterialInterface<?> wrapper : APIMaterials.generatedMaterials()){
+            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.get().getRarity().name().toLowerCase()),wrapper.get().getRarity().ordinal());
+            ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+
+
+
+            builder.readFromFile(modLoc("ore_" + wrapper.getName()));
+            man.addEntry(IG_CATEGORY_RARITY, builder.create(), priority);
+        }
     }
 
     private static void chemicalvat(ResourceLocation location, int priority){

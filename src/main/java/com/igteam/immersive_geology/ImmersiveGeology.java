@@ -64,6 +64,7 @@ public class ImmersiveGeology
 
 		LootIG.initialize();
 
+
 		//setup configs
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, IGConfigurationHandler.Common.ALL);
 

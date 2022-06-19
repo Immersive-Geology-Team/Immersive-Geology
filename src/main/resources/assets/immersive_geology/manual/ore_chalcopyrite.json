@@ -1,0 +1,10 @@
+{
+  "ore_chalcopyrite": {
+    "item": [
+      {
+        "item": "immersive_geology:block_item_stone_chalcopyrite_ore"
+      }
+    ]
+  },
+  "type": "item_display"
+}

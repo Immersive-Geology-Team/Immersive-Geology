@@ -1,4 +1,0 @@
-Gypsum
-Minerals
-<&gypsum>
-Mineral Test for gypsum

@@ -1,0 +1,7 @@
+Chromite
+Minerals
+<&ore_chromite>
+Quick Fill Information for chromite, Rarity: COMMON, found in Y Level [1, 90]
+<&chromite_preparation>
+preparation, 
+Crushing

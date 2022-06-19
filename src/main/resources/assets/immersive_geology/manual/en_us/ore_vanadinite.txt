@@ -1,0 +1,7 @@
+Vanadinite
+Minerals
+<&ore_vanadinite>
+Quick Fill Information for vanadinite, Rarity: COMMON, found in Y Level [1, 90]
+<&vanadinite_extraction>
+extraction, 
+Separator

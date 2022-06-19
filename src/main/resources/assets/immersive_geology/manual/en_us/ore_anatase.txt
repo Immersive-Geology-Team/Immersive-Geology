@@ -1,0 +1,7 @@
+Anatase
+Minerals
+<&ore_anatase>
+Quick Fill Information for anatase, Rarity: COMMON, found in Y Level [1, 90]
+<&anatase_preparation>
+preparation, 
+Crushing

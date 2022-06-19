@@ -1,0 +1,7 @@
+Ullmannite
+Minerals
+<&ore_ullmannite>
+Quick Fill Information for ullmannite, Rarity: UNCOMMON, found in Y Level [1, 70]
+<&ullmannite_roasting_stage>
+roasting stage, 
+Roasting

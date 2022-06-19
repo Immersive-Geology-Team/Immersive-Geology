@@ -1,4 +1,0 @@
-Saltpeter
-Minerals
-<&saltpeter>
-Mineral Test for saltpeter

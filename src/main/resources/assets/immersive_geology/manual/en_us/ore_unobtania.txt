@@ -1,0 +1,7 @@
+Unobtania
+Minerals
+<&ore_unobtania>
+Quick Fill Information for unobtania, Rarity: EPIC, found in Y Level [1, 30]
+<&unobtania_preparation>
+preparation, 
+Crushing
