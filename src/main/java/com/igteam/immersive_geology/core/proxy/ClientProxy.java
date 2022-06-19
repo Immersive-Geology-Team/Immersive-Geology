@@ -162,23 +162,42 @@ public class ClientProxy extends ServerProxy {
     }
 
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY;
-    private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MACHINES;
-    private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MINERALS;
+    private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MACHINES, IG_CATEGORY_MINERALS, IG_CATEGORY_METALS;
     public void setupManualPages() {
         ManualInstance man = ManualHelper.getManual();
 
         IG_CATEGORY = man.getRoot().getOrCreateSubnode(modLoc("main"), 101);
 
-        IG_CATEGORY_MINERALS = IG_CATEGORY.getOrCreateSubnode(modLoc("minerals"), 0);
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+
+        builder.readFromFile(modLoc("ig_note"));
+        man.addEntry(IG_CATEGORY, builder.create(), 0);
+
+        IG_CATEGORY_MINERALS = IG_CATEGORY.getOrCreateSubnode(modLoc("minerals"), 1);
         mineral_info(0);
 
-        IG_CATEGORY_MACHINES = IG_CATEGORY.getOrCreateSubnode(modLoc("machines"), 1);
+        IG_CATEGORY_METALS = IG_CATEGORY.getOrCreateSubnode(modLoc("metals"), 2);
+        metal_info(0);
+
+        IG_CATEGORY_MACHINES = IG_CATEGORY.getOrCreateSubnode(modLoc("machines"), 3);
         gravityseparator(modLoc("gravityseparator"), 0);
         chemicalvat(modLoc("chemicalvat"), 1);
         reverberation_furnace(modLoc("reverberation_furnace"), 2);
         crystallizer(modLoc("crystallizer"), 3);
         rotarykiln(modLoc("rotarykiln"),4);
 
+    }
+
+    private static void metal_info(int priority){
+        ManualInstance man = ManualHelper.getManual();
+
+        for (MaterialInterface<?> wrapper : MetalEnum.values()){
+            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_METALS.getOrCreateSubnode(modLoc(wrapper.get().getRarity().name().toLowerCase()),wrapper.get().getRarity().ordinal());
+            ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+
+            builder.readFromFile(modLoc(wrapper.getName()));
+            man.addEntry(IG_CATEGORY_RARITY, builder.create(), priority);
+        }
     }
     private static void mineral_info(int priority){
         ManualInstance man = ManualHelper.getManual();

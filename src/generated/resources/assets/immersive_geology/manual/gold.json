@@ -1,0 +1,16 @@
+{
+  "gold_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:gold_ingot"
+      },
+      {
+        "item": "minecraft:gold_nugget"
+      },
+      {
+        "item": "immersiveengineering:dust_gold"
+      }
+    ]
+  }
+}

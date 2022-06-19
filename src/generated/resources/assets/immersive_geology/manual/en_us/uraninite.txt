@@ -1,5 +1,5 @@
 Uraninite
 UNCOMMON mineral
-<&uraninite_display> Uraninite is found between y layers: 1 and 70 and a source of [uranium].
+<&uraninite_display> Uraninite is found between y layers: 1 and 70 and a source of [<link;immersive_geology:uranium;uranium>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&uraninite_recipe> (Generic) Crafting Recipe

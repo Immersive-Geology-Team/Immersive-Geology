@@ -1,5 +1,5 @@
 Hubnerite
 RARE mineral
-<&hubnerite_display> Hubnerite is found between y layers: 1 and 50 and a source of [manganese, tungsten].
+<&hubnerite_display> Hubnerite is found between y layers: 1 and 50 and a source of [<link;immersive_geology:manganese;manganese>, <link;immersive_geology:tungsten;tungsten>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&hubnerite_recipe> (Generic) Crafting Recipe

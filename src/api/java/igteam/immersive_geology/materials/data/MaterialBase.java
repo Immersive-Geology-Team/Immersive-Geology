@@ -94,7 +94,7 @@ public abstract class MaterialBase {
         return IGRegistryProvider.IG_BLOCK_REGISTRY.get(getRegistryKey(this, secondaryMaterial, p));
     }
 
-    public Item getItem(ItemPattern pattern) {
+    public Item getItem(MaterialPattern pattern) {
         if(getIEMetalEquiv() != null && isExistingPattern(pattern)) {
             logger.debug("Attempting to find IE Metal or MC Metal Item: " + getName() + " | " + pattern.getName());
             Item ieItem = IGApi.grabIEItemFromRegistry(pattern, getIEMetalEquiv());

@@ -1,0 +1,3 @@
+Sodium
+COMMON metal
+<&sodium_display> 

@@ -1,5 +1,5 @@
 Acanthite
 UNCOMMON mineral
-<&acanthite_display> Acanthite is found between y layers: 1 and 70 and a source of [silver, platinum, osmium].
+<&acanthite_display> Acanthite is found between y layers: 1 and 70 and a source of [<link;immersive_geology:silver;silver>, <link;immersive_geology:platinum;platinum>, <link;immersive_geology:osmium;osmium>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&acanthite_recipe> (Generic) Crafting Recipe

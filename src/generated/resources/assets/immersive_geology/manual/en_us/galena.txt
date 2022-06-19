@@ -1,5 +1,5 @@
 Galena
 COMMON mineral
-<&galena_display> Galena is found between y layers: 1 and 90 and a source of [lead, silver].
+<&galena_display> Galena is found between y layers: 1 and 90 and a source of [<link;immersive_geology:lead;lead>, <link;immersive_geology:silver;silver>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&galena_recipe> (Generic) Crafting Recipe

@@ -1,0 +1,16 @@
+{
+  "manganese_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ingot_manganese"
+      },
+      {
+        "item": "immersive_geology:nugget_manganese"
+      },
+      {
+        "item": "immersive_geology:dust_manganese"
+      }
+    ]
+  }
+}

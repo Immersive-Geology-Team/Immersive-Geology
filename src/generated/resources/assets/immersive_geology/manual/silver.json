@@ -1,0 +1,16 @@
+{
+  "silver_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:ingot_silver"
+      },
+      {
+        "item": "immersiveengineering:nugget_silver"
+      },
+      {
+        "item": "immersiveengineering:dust_silver"
+      }
+    ]
+  }
+}

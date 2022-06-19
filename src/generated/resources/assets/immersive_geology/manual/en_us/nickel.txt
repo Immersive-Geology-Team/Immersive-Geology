@@ -1,0 +1,3 @@
+Nickel
+COMMON metal
+<&nickel_display> 

@@ -1,0 +1,16 @@
+{
+  "osmium_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ingot_osmium"
+      },
+      {
+        "item": "immersive_geology:nugget_osmium"
+      },
+      {
+        "item": "immersive_geology:dust_osmium"
+      }
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+Manganese
+UNCOMMON metal
+<&manganese_display> 

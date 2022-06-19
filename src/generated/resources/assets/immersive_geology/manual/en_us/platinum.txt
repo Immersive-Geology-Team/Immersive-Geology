@@ -1,0 +1,3 @@
+Platinum
+COMMON metal
+<&platinum_display> 

@@ -1,0 +1,16 @@
+{
+  "uranium_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:ingot_uranium"
+      },
+      {
+        "item": "immersiveengineering:nugget_uranium"
+      },
+      {
+        "item": "immersiveengineering:dust_uranium"
+      }
+    ]
+  }
+}

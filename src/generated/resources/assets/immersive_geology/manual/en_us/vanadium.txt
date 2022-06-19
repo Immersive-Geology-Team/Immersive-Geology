@@ -1,0 +1,3 @@
+Vanadium
+COMMON metal
+<&vanadium_display> 

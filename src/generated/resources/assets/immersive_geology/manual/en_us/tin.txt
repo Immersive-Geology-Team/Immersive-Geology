@@ -1,0 +1,3 @@
+Tin
+COMMON metal
+<&tin_display> 

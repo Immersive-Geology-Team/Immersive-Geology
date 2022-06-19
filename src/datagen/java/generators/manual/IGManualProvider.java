@@ -7,10 +7,15 @@ import com.google.gson.GsonBuilder;
 import generators.manual.helper.IGManualType;
 import generators.manual.providers.ManualPageProvider;
 import generators.manual.providers.ManualTextProvider;
+import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.MineralEnum;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
@@ -59,6 +64,25 @@ public class IGManualProvider implements IDataProvider {
     }
 
     public void registerPages(){
+        for(MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()){
+            String material_name = metal.getName();
+            String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
+
+            ManualPageProvider provider = attemptPageCreation(material_name)
+                    .startAnchor(material_name + "_display")
+                    .setType(IGManualType.item_display)
+                    .addListElements("items",
+                            metal.getItem(ItemPattern.ingot).getRegistryName(),
+                            metal.getItem(ItemPattern.nugget).getRegistryName(),
+                            metal.getItem(ItemPattern.dust).getRegistryName())
+                    .closeAnchor();
+
+            ManualTextProvider textProvider = attemptTextCreation(material_name)
+                    .setTitle(formalName, metal.get().getRarity().name() + " metal")
+                    .attachPage(material_name + "_display", "");
+
+        }
+
         for (MaterialInterface<MaterialBaseMineral> material : MineralEnum.values()){
             MaterialBaseMineral baseMaterial = material.get();
             String material_name = baseMaterial.getName();
@@ -78,9 +102,9 @@ public class IGManualProvider implements IDataProvider {
                 StringBuilder materialSources = new StringBuilder("[");
 
                 baseMaterial.getSourceMaterials().stream().forEach((smat) -> {
-                    materialSources.append(smat.getName() + ", ");
+                    materialSources.append( "<link;" + IGApi.MODID + ":" + smat.getName() + ";" + smat.getName().replace("_", " ") + ">, ");
                 });
-                sanitizedMaterials = (materialSources.toString().substring(0, materialSources.toString().lastIndexOf(",")) + "]").replace("_", " ");
+                sanitizedMaterials = (materialSources.toString().substring(0, materialSources.toString().lastIndexOf(",")) + "]");
             }
 
             ManualTextProvider textProvider = attemptTextCreation(material_name)
@@ -88,8 +112,6 @@ public class IGManualProvider implements IDataProvider {
                     .attachPage(material_name + "_display",
                             formalName + " is found between y layers: " + material.getGenerationConfig().minY.get() + " and " + material.getGenerationConfig().maxY.get() +
                                     (sanitizedMaterials.isEmpty() ? "" : " and a source of " + sanitizedMaterials + ".") + "\nFurther information on how to process this Mineral can be found in the next few pages.");
-
-            
 
             List<ResourceLocation> crafting = new ArrayList<>();
             List<ResourceLocation> crushing = new ArrayList<>();

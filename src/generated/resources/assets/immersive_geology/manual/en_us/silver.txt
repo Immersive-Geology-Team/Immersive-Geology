@@ -1,0 +1,3 @@
+Silver
+COMMON metal
+<&silver_display> 

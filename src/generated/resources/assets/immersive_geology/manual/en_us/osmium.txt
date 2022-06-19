@@ -1,0 +1,3 @@
+Osmium
+COMMON metal
+<&osmium_display> 

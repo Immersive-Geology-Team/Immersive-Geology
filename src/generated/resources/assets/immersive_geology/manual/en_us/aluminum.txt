@@ -1,0 +1,3 @@
+Aluminum
+UNCOMMON metal
+<&aluminum_display> 

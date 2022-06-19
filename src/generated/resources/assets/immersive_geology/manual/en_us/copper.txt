@@ -1,0 +1,3 @@
+Copper
+COMMON metal
+<&copper_display> 

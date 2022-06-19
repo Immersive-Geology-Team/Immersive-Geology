@@ -1,0 +1,16 @@
+{
+  "bronze_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ingot_bronze"
+      },
+      {
+        "item": "immersive_geology:nugget_bronze"
+      },
+      {
+        "item": "immersive_geology:dust_bronze"
+      }
+    ]
+  }
+}

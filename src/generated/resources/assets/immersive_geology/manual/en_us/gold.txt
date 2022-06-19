@@ -1,0 +1,3 @@
+Gold
+COMMON metal
+<&gold_display> 

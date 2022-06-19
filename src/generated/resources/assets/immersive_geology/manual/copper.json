@@ -1,0 +1,16 @@
+{
+  "copper_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:ingot_copper"
+      },
+      {
+        "item": "immersiveengineering:nugget_copper"
+      },
+      {
+        "item": "immersiveengineering:dust_copper"
+      }
+    ]
+  }
+}

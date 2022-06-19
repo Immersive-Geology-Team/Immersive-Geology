@@ -1,0 +1,16 @@
+{
+  "tin_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ingot_tin"
+      },
+      {
+        "item": "immersive_geology:nugget_tin"
+      },
+      {
+        "item": "immersive_geology:dust_tin"
+      }
+    ]
+  }
+}

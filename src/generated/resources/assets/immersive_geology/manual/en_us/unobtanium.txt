@@ -1,0 +1,3 @@
+Unobtanium
+COMMON metal
+<&unobtanium_display> 

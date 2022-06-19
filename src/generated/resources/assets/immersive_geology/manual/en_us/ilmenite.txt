@@ -1,5 +1,5 @@
 Ilmenite
 RARE mineral
-<&ilmenite_display> Ilmenite is found between y layers: 1 and 50 and a source of [iron, titanium].
+<&ilmenite_display> Ilmenite is found between y layers: 1 and 50 and a source of [<link;immersive_geology:iron;iron>, <link;immersive_geology:titanium;titanium>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&ilmenite_recipe> (Generic) Crafting Recipe

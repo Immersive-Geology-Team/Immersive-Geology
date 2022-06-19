@@ -1,0 +1,16 @@
+{
+  "nickel_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:ingot_nickel"
+      },
+      {
+        "item": "immersiveengineering:nugget_nickel"
+      },
+      {
+        "item": "immersiveengineering:dust_nickel"
+      }
+    ]
+  }
+}

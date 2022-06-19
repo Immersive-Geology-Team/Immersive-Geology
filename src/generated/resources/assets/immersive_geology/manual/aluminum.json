@@ -1,0 +1,16 @@
+{
+  "aluminum_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:ingot_aluminum"
+      },
+      {
+        "item": "immersiveengineering:nugget_aluminum"
+      },
+      {
+        "item": "immersiveengineering:dust_aluminum"
+      }
+    ]
+  }
+}
