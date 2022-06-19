@@ -1,4 +1,5 @@
 Sphalerite
 COMMON mineral
-<&sphalerite_display> Sphalerite is found between y layers: 1 and 90 and a source of Zinc. Further information on how to process this Mineral can be found in the next few pages.
+<&sphalerite_display> Sphalerite is found between y layers: 1 and 90 and a source of [zinc, iron].
+Further information on how to process this Mineral can be found in the next few pages.
 <&sphalerite_recipe> (Generic) Crafting Recipe

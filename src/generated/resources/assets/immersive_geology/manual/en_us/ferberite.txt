@@ -1,4 +1,5 @@
 Ferberite
 RARE mineral
-<&ferberite_display> Ferberite is found between y layers: 1 and 50 and a source of Tungsten. Further information on how to process this Mineral can be found in the next few pages.
+<&ferberite_display> Ferberite is found between y layers: 1 and 50 and a source of [iron, tungsten].
+Further information on how to process this Mineral can be found in the next few pages.
 <&ferberite_recipe> (Generic) Crafting Recipe

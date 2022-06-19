@@ -1,4 +1,5 @@
 Alumina
 UNCOMMON mineral
-<&alumina_display> Alumina is found between y layers: 1 and 70 and a source of Aluminum. Further information on how to process this Mineral can be found in the next few pages.
+<&alumina_display> Alumina is found between y layers: 1 and 70 and a source of [aluminum].
+Further information on how to process this Mineral can be found in the next few pages.
 <&alumina_recipe> (Generic) Crafting Recipe

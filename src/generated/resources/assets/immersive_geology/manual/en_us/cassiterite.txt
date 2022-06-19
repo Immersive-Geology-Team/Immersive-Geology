@@ -1,4 +1,5 @@
 Cassiterite
 UNCOMMON mineral
-<&cassiterite_display> Cassiterite is found between y layers: 1 and 70 and a source of Tin. Further information on how to process this Mineral can be found in the next few pages.
+<&cassiterite_display> Cassiterite is found between y layers: 1 and 70 and a source of [tin].
+Further information on how to process this Mineral can be found in the next few pages.
 <&cassiterite_recipe> (Generic) Crafting Recipe

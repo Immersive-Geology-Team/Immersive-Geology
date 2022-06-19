@@ -1,4 +1,5 @@
 Cryolite
 EPIC mineral
-<&cryolite_display> Cryolite is found between y layers: 1 and 30 and a source of Sodium. Further information on how to process this Mineral can be found in the next few pages.
+<&cryolite_display> Cryolite is found between y layers: 1 and 30
+Further information on how to process this Mineral can be found in the next few pages.
 <&cryolite_recipe> (Generic) Crafting Recipe

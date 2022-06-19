@@ -2,7 +2,6 @@ package igteam.immersive_geology.materials.data.mineral;
 
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -272,7 +271,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         };
     }
 
-    public abstract Set<MetalEnum> getSourceMetals();
+    public abstract Set<MaterialInterface<?>> getSourceMaterials();
 
     public String getSecondSourceMetals(){
         return "Chemical X and Chemical Y";

@@ -1,8 +1,8 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
-import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import net.minecraft.item.Rarity;
@@ -58,7 +58,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
-    public Set<MetalEnum> getSourceMetals() {
+    public Set<MaterialInterface<?>> getSourceMaterials() {
         return Collections.emptySet();
     }
 }

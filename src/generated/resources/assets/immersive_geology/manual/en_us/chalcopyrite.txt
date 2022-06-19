@@ -1,4 +1,5 @@
 Chalcopyrite
 UNCOMMON mineral
-<&chalcopyrite_display> Chalcopyrite is found between y layers: 1 and 70 and a source of Iron. Further information on how to process this Mineral can be found in the next few pages.
+<&chalcopyrite_display> Chalcopyrite is found between y layers: 1 and 70 and a source of [copper, iron].
+Further information on how to process this Mineral can be found in the next few pages.
 <&chalcopyrite_recipe> (Generic) Crafting Recipe

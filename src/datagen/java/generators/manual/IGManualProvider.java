@@ -72,11 +72,24 @@ public class IGManualProvider implements IDataProvider {
                                 StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, baseMaterial).getRegistryName())
                     .closeAnchor();
 
+            String sanitizedMaterials = "";
+
+            if(!baseMaterial.getSourceMaterials().isEmpty()) {
+                StringBuilder materialSources = new StringBuilder("[");
+
+                baseMaterial.getSourceMaterials().stream().forEach((smat) -> {
+                    materialSources.append(smat.getName() + ", ");
+                });
+                sanitizedMaterials = (materialSources.toString().substring(0, materialSources.toString().lastIndexOf(",")) + "]").replace("_", " ");
+            }
+
             ManualTextProvider textProvider = attemptTextCreation(material_name)
                     .setTitle(formalName, baseMaterial.getRarity().name() + " mineral")
                     .attachPage(material_name + "_display",
                             formalName + " is found between y layers: " + material.getGenerationConfig().minY.get() + " and " + material.getGenerationConfig().maxY.get() +
-                            " and a source of " + baseMaterial.getSourceMetals() + ". Further information on how to process this Mineral can be found in the next few pages.");
+                                    (sanitizedMaterials.isEmpty() ? "" : " and a source of " + sanitizedMaterials + ".") + "\nFurther information on how to process this Mineral can be found in the next few pages.");
+
+            
 
             List<ResourceLocation> crafting = new ArrayList<>();
             List<ResourceLocation> crushing = new ArrayList<>();

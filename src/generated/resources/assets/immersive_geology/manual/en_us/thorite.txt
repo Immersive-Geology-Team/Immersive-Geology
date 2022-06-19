@@ -1,4 +1,5 @@
 Thorite
 RARE mineral
-<&thorite_display> Thorite is found between y layers: 1 and 50 and a source of Thorium. Further information on how to process this Mineral can be found in the next few pages.
+<&thorite_display> Thorite is found between y layers: 1 and 50 and a source of [thorium, uranium].
+Further information on how to process this Mineral can be found in the next few pages.
 <&thorite_recipe> (Generic) Crafting Recipe

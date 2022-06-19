@@ -7,6 +7,7 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -17,6 +18,7 @@ import net.minecraft.tags.FluidTags;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralChalcocite extends MaterialBaseMineral {
 
@@ -98,7 +100,12 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
     }
 
     @Override
-    public MetalEnum getSourceMetals() {
-        return MetalEnum.Copper;
+    public Set<MaterialInterface<?>> getSourceMaterials() {
+        Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Copper);
+        sources.add(MetalEnum.Platinum);
+        sources.add(MetalEnum.Osmium);
+
+        return sources;
     }
 }

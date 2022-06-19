@@ -6,20 +6,19 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralUllmannite extends MaterialBaseMineral {
 
@@ -87,7 +86,10 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
     }
 
     @Override
-    public MetalEnum getSourceMetals() {
-        return MetalEnum.Nickel;
+    public Set<MaterialInterface<?>> getSourceMaterials() {
+        Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Nickel);
+
+        return sources;
     }
 }

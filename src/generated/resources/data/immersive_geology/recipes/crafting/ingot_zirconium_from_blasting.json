@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "immersive_geology:crystal_zirconium"
-  },
-  "result": "immersive_geology:ingot_zirconium",
-  "experience": 2.0,
-  "cookingtime": 100
-}

@@ -7,10 +7,10 @@ import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralSaltpeter extends MaterialBaseMineral {
 
@@ -79,7 +80,11 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
     }
 
     @Override
-    public MetalEnum getSourceMetals() {
-        return MetalEnum.Zirconium;
+    public Set<MaterialInterface<?>> getSourceMaterials() {
+        Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Sodium);
+        sources.add(FluidEnum.NitricAcid);
+
+        return sources;
     }
 }

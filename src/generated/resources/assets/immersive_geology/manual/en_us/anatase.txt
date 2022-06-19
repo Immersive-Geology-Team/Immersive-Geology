@@ -1,4 +1,5 @@
 Anatase
 COMMON mineral
-<&anatase_display> Anatase is found between y layers: 1 and 90 and a source of Titanium. Further information on how to process this Mineral can be found in the next few pages.
+<&anatase_display> Anatase is found between y layers: 1 and 90 and a source of [titanium].
+Further information on how to process this Mineral can be found in the next few pages.
 <&anatase_recipe> (Generic) Crafting Recipe

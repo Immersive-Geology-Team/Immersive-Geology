@@ -6,10 +6,10 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
@@ -20,6 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralIlmenite extends MaterialBaseMineral {
 
@@ -90,7 +91,11 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
     }
 
     @Override
-    public MetalEnum getSourceMetals() {
-        return MetalEnum.Titanium;
+    public Set<MaterialInterface<?>> getSourceMaterials() {
+        Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Iron);
+        sources.add(MetalEnum.Titanium);
+
+        return sources;
     }
 }

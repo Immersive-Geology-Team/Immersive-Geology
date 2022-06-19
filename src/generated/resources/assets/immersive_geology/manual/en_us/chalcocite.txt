@@ -1,4 +1,5 @@
 Chalcocite
 COMMON mineral
-<&chalcocite_display> Chalcocite is found between y layers: 1 and 90 and a source of Copper. Further information on how to process this Mineral can be found in the next few pages.
+<&chalcocite_display> Chalcocite is found between y layers: 1 and 90 and a source of [copper, platinum, osmium].
+Further information on how to process this Mineral can be found in the next few pages.
 <&chalcocite_recipe> (Generic) Crafting Recipe

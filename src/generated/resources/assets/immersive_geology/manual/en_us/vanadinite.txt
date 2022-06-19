@@ -1,4 +1,5 @@
 Vanadinite
 COMMON mineral
-<&vanadinite_display> Vanadinite is found between y layers: 1 and 90 and a source of Vanadium. Further information on how to process this Mineral can be found in the next few pages.
+<&vanadinite_display> Vanadinite is found between y layers: 1 and 90 and a source of [lead, vanadium].
+Further information on how to process this Mineral can be found in the next few pages.
 <&vanadinite_recipe> (Generic) Crafting Recipe

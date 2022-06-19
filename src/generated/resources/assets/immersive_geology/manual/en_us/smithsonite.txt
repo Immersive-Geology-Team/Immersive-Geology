@@ -1,0 +1,5 @@
+Smithsonite
+COMMON mineral
+<&smithsonite_display> Smithsonite is found between y layers: 1 and 90 and a source of [zinc].
+Further information on how to process this Mineral can be found in the next few pages.
+<&smithsonite_recipe> (Generic) Crafting Recipe

@@ -7,6 +7,7 @@ import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -19,6 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
@@ -119,7 +121,11 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
     }
 
     @Override
-    public MetalEnum getSourceMetals() {
-        return MetalEnum.Sodium;
+    public Set<MaterialInterface<?>> getSourceMaterials() {
+        Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
+        sources.add(MetalEnum.Sodium);
+        sources.add(FluidEnum.HydrochloricAcid);
+
+        return sources;
     }
 }
