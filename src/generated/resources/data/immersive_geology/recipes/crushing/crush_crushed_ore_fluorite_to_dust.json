@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_fluorite"
+  },
+  "input": {
+    "tag": "forge:crushed_ores/fluorite"
+  },
+  "time": 200,
+  "energy": 10000
+}
