@@ -25,6 +25,7 @@ import java.util.Set;
 public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Alumina(new MaterialMineralAlumina()),
     Anatase(new MaterialMineralAnatase()),
+    Bauxite(new MaterialMineralBauxite()),
     Acanthite(new MaterialMineralAcanthite()),
     Chalcocite(new MaterialMineralChalcocite()),
     Cuprite(new MaterialMineralCuprite()),
@@ -44,6 +45,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     Pyrolusite(new MaterialMineralPyrolusite()),
     RockSalt(new MaterialMineralRockSalt()),
     SaltPeter(new MaterialMineralSaltpeter()),
+    Scheelite(new MaterialMineralScheelite()),
     Thorianite(new MaterialMineralThorianite()),
     Thorite(new MaterialMineralThorite()),
     Uraninite(new MaterialMineralUraninite()),

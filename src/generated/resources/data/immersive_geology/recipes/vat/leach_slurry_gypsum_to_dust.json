@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluid_hydrochloric_acid",
+    "amount": 250
+  },
+  "result": {
+    "item": "immersive_geology:dust_gypsum"
+  },
+  "fluid_input1": {
+    "tag": "forge:slurrys/hydrochloric_acid_gypsum",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "forge:fluids/sulfuric_acid",
+    "amount": 250
+  },
+  "time": 120,
+  "energy": 10000
+}

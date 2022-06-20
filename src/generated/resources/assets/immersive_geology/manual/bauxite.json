@@ -1,0 +1,27 @@
+{
+  "bauxite_display": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:ore_chunk_stone_bauxite"
+      },
+      {
+        "item": "immersive_geology:dirty_crushed_ore_stone_bauxite"
+      }
+    ]
+  },
+  "bauxite_recipe": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_bauxite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_bauxite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_bauxite"
+      }
+    ]
+  }
+}

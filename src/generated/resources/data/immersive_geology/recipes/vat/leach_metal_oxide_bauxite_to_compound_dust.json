@@ -1,0 +1,23 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "minecraft:empty",
+    "amount": 0
+  },
+  "result": {
+    "item": "immersive_geology:compound_dust_aluminum"
+  },
+  "item_input": {
+    "item": "immersive_geology:metal_oxide_aluminum"
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/sodium_hydroxide",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "time": 200,
+  "energy": 10000
+}

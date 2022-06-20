@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "crush_ore_chunks",
+  "ingredients": [
+    {
+      "tag": "forge:ore_chunks/stone_scheelite"
+    },
+    {
+      "tag": "forge:ore_chunks/stone_scheelite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_stone_scheelite"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_netherrack_bauxite"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/netherrack_bauxite"
+  },
+  "time": 500,
+  "energy": 1000
+}

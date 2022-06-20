@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:rotary_kiln",
+  "result": {
+    "item": "immersive_geology:metal_oxide_aluminum"
+  },
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_bauxite"
+  },
+  "energy": 200,
+  "time": 10000
+}
