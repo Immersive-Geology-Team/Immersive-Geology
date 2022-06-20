@@ -1,0 +1,12 @@
+{
+  "type": "immersive_geology:crystalizer",
+  "result": {
+    "item": "immersive_geology:crystal_zinc"
+  },
+  "fluid_input": {
+    "tag": "forge:slurrys/sulfuric_acid_zinc",
+    "amount": 250
+  },
+  "time": 300,
+  "energy": 12000
+}

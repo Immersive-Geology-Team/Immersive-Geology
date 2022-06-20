@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_sulfuric_acid_zinc",
+    "amount": 250
+  },
+  "item_input": {
+    "item": "immersive_geology:metal_oxide_zinc"
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/sulfuric_acid",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 250
+  },
+  "time": 120,
+  "energy": 10000
+}
