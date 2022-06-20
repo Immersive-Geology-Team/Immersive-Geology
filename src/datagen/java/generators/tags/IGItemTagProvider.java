@@ -39,7 +39,11 @@ public class IGItemTagProvider extends ItemTagsProvider {
                         for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                             ITag.INamedTag<Item> itag = genMaterial.getItemTag(pattern, stone.get());
                             Block block = stone.getBlock(pattern, genMaterial);
-                            tag(itag).add(block.asItem());
+                            if(block != null) {
+                                tag(itag).add(block.asItem());
+                            } else {
+                                log.error("Failed to find block with pattern: " + pattern.getName() + " and materials: " + genMaterial.getName());
+                            }
                         }
                     }
                 }

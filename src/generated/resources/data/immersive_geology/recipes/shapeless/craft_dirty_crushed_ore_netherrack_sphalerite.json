@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "crush_ore_chunks",
+  "ingredients": [
+    {
+      "tag": "forge:ore_chunks/netherrack_sphalerite"
+    },
+    {
+      "tag": "forge:ore_chunks/netherrack_sphalerite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_netherrack_sphalerite"
+  }
+}

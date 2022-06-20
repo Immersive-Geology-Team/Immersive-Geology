@@ -5,8 +5,10 @@ import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
 import igteam.immersive_geology.materials.data.stone.variants.MaterialGranite;
+import igteam.immersive_geology.materials.data.stone.variants.MaterialNetherrack;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -24,7 +26,10 @@ import java.util.Set;
 
 public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     Stone(new MaterialDefaultStone()),
-    Granite(new MaterialGranite());
+    Granite(new MaterialGranite()),
+    Netherrack(new MaterialNetherrack());
+
+    //TODO Add Endstone stone type ~Muddykat
 
     private final MaterialBaseStone material;
 
@@ -218,6 +223,11 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     @Override
     public boolean isFluidPortable(ItemPattern bucket) {
         return false;
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.overworld;
     }
 
 }

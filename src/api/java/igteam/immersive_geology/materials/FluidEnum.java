@@ -6,6 +6,7 @@ import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.data.fluid.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -222,6 +223,11 @@ public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     @Override
     public boolean isFluidPortable(ItemPattern pattern){
         return material.isFluidPortable(pattern);
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.overworld;
     }
 
 }

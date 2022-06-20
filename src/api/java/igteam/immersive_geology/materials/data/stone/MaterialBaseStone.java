@@ -2,6 +2,7 @@ package igteam.immersive_geology.materials.data.stone;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -194,5 +195,4 @@ public abstract class MaterialBaseStone extends MaterialBase {
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
     }
-
 }

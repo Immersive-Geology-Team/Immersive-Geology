@@ -7,6 +7,7 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -94,31 +95,31 @@ public class IGConfigurationHandler {
     }
 
     public static class MaterialConfigSetup{
-        public MaterialConfigSetup(ForgeConfigSpec.Builder builder){
+        public MaterialConfigSetup(ForgeConfigSpec.Builder builder) {
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
             for(MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
-                    ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + container.getName());
-                    switch (container.get().getRarity()) {
-                        case COMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 80, 140, 1, 90, 2, 50)); // 0.015% Chance of successful Spawn
-                            break;
-                        case UNCOMMON:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 60, 120, 1, 70, 2, 40));
-                            break;
-                        case RARE:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 40,100, 1, 50, 2, 25));
-                            break;
-                        case EPIC:
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 30, 80,1, 30, 1, 25)); // 0.005% Chance of successful Spawn
-                            break;
-                        default:
-                            ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
-                            container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getName(), 50, 80, 1, 90, 1, 20));
-                            break;
-                    }
+                ImmersiveGeology.getNewLogger().info("Generation Config setup for: " + container.getName());
+                int heightMod = container.getDimension().equals(MaterialSourceWorld.nether) ? 2 : 1;
+                switch (container.get().getRarity()) {
+                    case COMMON:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 240, 1, Math.min(255, 140 * heightMod), 3  * heightMod, 7  * heightMod)); // 0.0010% Chance of successful Spawn
+                        break;
+                    case UNCOMMON:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 120, 220, 1, Math.min(255,140 * heightMod), 2  * heightMod, 7  * heightMod));
+                        break;
+                    case RARE:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 100,200, 1, Math.min(255, 90 * heightMod), heightMod, 7 * heightMod));
+                        break;
+                    case EPIC:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 80, 180,1, Math.min(255, 60 * heightMod), heightMod, 5 * heightMod)); // 0.0015% Chance of successful Spawn
+                        break;
+                    default:
+                        ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
+                        break;
+                }
             }
             builder.pop();
         }
     }
-
 }

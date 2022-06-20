@@ -332,11 +332,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             StoneEnum s = (StoneEnum) m;
             switch (s) {
                 case Stone:
+                case Netherrack:
                     return !hasExistingImplementation();
                 case Granite:
                     return isNative();
-            }
-            ;
+            };
         }
         return false;
     }

@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.registration;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
@@ -139,17 +140,16 @@ public class IGRegistrationHolder {
         switch(p){
             case ore:
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
-                if (m.generateOreFor(stone)) {
-                    IGGenericBlock multi_block = new IGGenericBlock(m, p);
-                    multi_block.addMaterial(stone, MaterialTexture.base);
-                    multi_block.addMaterial(m, MaterialTexture.overlay);
-                    multi_block.finalizeData();
-                    register(multi_block.asItem());
-                    register(multi_block);
-                }
-            });
+                    if (m.generateOreFor(stone)) {
+                        IGOreBlock multi_block = new IGOreBlock(m, p);
+                        multi_block.addMaterial(stone, MaterialTexture.base);
+                        multi_block.addMaterial(m, MaterialTexture.overlay);
+                        multi_block.finalizeData();
+                        register(multi_block.asItem());
+                        register(multi_block);
+                    }
+                });
                 break;
-
             case slab:
                 IGSlabBlock slab = new IGSlabBlock(m);
                 slab.finalizeData();

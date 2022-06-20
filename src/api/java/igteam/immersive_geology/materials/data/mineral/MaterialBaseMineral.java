@@ -5,6 +5,8 @@ import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
+import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -15,11 +17,26 @@ import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public abstract class MaterialBaseMineral extends MaterialBase {
     public MaterialBaseMineral(String name) {
         super(name);
+        ArrayList<PeriodicTableElement.ElementProportion> elementProportions = new ArrayList<>(getElements());
+        boolean hasSulphur = false;
+
+        for (PeriodicTableElement.ElementProportion element : elementProportions) {
+            if(element.getElement().equals(PeriodicTableElement.SULFUR)){
+                hasSulphur = true;
+                break;
+            }
+        }
+
+        sourceWorld = hasSulphur ? MaterialSourceWorld.nether : MaterialSourceWorld.overworld;
     }
 
     @Override

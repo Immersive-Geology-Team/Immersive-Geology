@@ -6,6 +6,7 @@ import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.misc.MaterialMiscBase;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -269,5 +270,10 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     @Override
     public boolean isFluidPortable(ItemPattern bucket) {
         return material.isFluidPortable(bucket);
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.overworld;
     }
 }

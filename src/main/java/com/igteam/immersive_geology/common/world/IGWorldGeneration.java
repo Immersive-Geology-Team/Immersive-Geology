@@ -6,8 +6,10 @@ import com.igteam.immersive_geology.common.world.feature.IGOreFeatureConfig;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
@@ -33,11 +35,15 @@ public class IGWorldGeneration {
 
         for (MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
             if (container.hasPattern(BlockPattern.ore)) {
-                Block block = StoneEnum.Stone.getBlock(BlockPattern.ore, container);
-                if (block != null) {
-                    addOreGen(container, container.getName(), container.getGenerationConfig());
-                } else {
-                    IGApi.getNewLogger().warn("Failed to find Ore from: " + container.getName() + " and " + StoneEnum.Stone.getName());
+                for(MaterialInterface<MaterialBaseStone> stonetype : StoneEnum.values()) {
+                    if(stonetype.generateOreFor(container)) {
+                        Block block = stonetype.getBlock(BlockPattern.ore, container);
+                        if (block != null) {
+                            addOreGen(container, container.getName(), container.getGenerationConfig());
+                        } else {
+                            IGApi.getNewLogger().warn("Failed to find Ore from: " + container.getName() + " and " + StoneEnum.Stone.getName());
+                        }
+                    }
                 }
             } else {
                 IGApi.getNewLogger().warn("Containing Material has no Ore Pattern");
@@ -46,15 +52,19 @@ public class IGWorldGeneration {
 
     }
 
+    static Map<String, IGOreConfig> configMap = new HashMap<>();
+
     public static void addOreGen(MaterialInterface<?> oreType, String name, IGOreConfig config)
     {
         ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                        oreType.getDimension().equals(MaterialSourceWorld.overworld) ? OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD : OreFeatureConfig.FillerBlockType.NETHERRACK,
                         oreType,
                         config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);
+
+        configMap.put(feature.toString(), config);
     }
 
     @SubscribeEvent
@@ -72,8 +82,17 @@ public class IGWorldGeneration {
 
         //TODO Make Config Option to Disable All IG Ores
         for (ConfiguredFeature<?, ?> ore : features.values()) {
-            generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
+            IGOreConfig config = configMap.get(ore.toString());
+            if(config.sourceWorld.get().equals(MaterialSourceWorld.overworld)) {
+                generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
+            }
         }
 
+        for (ConfiguredFeature<?, ?> ore : features.values()) {
+            IGOreConfig config = configMap.get(ore.toString());
+            if(config.sourceWorld.get().equals(MaterialSourceWorld.nether)) {
+                generation.withFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, ore);
+            }
+        }
     }
 }

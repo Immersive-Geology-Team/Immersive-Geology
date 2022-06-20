@@ -6,6 +6,7 @@ import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.data.metal.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
@@ -235,6 +236,11 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     @Override
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return material.getDimension();
     }
 
     @Override

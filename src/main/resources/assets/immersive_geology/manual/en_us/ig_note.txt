@@ -1,4 +1,5 @@
 Note from IG Developers
-Muddykat and UnSchtalch
+Muddykat, UnSchtalch and Kuruma
 IG version 1.1 is still in development, it's a very ambitious mod, and as such will take a LONG time to update to future versions of minecraft, I'd like to ask our players to be patient for the 1.18.2+ versions of IG, or the development of other IE Addons by the Immersive Team. ~Muddykat
+[Insert link for Issue Posting here?]
 <&ig_note>

@@ -2,6 +2,8 @@ package igteam.immersive_geology.materials.data.stone.variants;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -25,7 +27,7 @@ public class MaterialGranite extends MaterialBaseStone {
             BlockPattern b = (BlockPattern) p;
             switch(b){
                 case ore: case block: return 0xFFFFFF;
-                default: return 0x484A49;
+                default: return 0x986B59;
             }
         }
 
@@ -33,7 +35,7 @@ public class MaterialGranite extends MaterialBaseStone {
             ItemPattern i = (ItemPattern) p;
             switch(i){
                 case block_item: return 0xFFFFFF;
-                default: return 0x484A49;
+                default: return 0x986B59;
             }
         }
 
@@ -80,5 +82,10 @@ public class MaterialGranite extends MaterialBaseStone {
     @Override
     public boolean hasExistingImplementation() {
         return true;
+    }
+
+    @Override
+    public boolean generateOreFor(MaterialInterface m) {
+        return getDimension().equals(MaterialSourceWorld.overworld);
     }
 }

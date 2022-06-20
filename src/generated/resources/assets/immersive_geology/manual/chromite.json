@@ -7,6 +7,9 @@
       },
       {
         "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_chromite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_chromite"
       }
     ]
   },

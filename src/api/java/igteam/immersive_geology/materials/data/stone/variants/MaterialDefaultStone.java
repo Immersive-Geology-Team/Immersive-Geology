@@ -1,6 +1,8 @@
 package igteam.immersive_geology.materials.data.stone.variants;
 
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
@@ -60,5 +62,10 @@ public class MaterialDefaultStone extends MaterialBaseStone {
     @Override
     public boolean hasExistingImplementation() {
         return true;
+    }
+
+    @Override
+    public boolean generateOreFor(MaterialInterface m) {
+        return getDimension().equals(MaterialSourceWorld.overworld);
     }
 }

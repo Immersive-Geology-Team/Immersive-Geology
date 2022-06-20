@@ -72,4 +72,6 @@ public interface MaterialInterface<T extends MaterialBase> {
     IGOreConfig getGenerationConfig();
 
     boolean isFluidPortable(ItemPattern bucket);
+
+    MaterialSourceWorld getDimension();
 }

@@ -10,6 +10,7 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
@@ -50,10 +51,14 @@ public abstract class MaterialBase {
     private Set<IGProcessingStage> stageSet = new HashSet<>();
     protected Function<MaterialPattern, Integer> colorFunction;
     protected Predicate<MaterialPattern> applyColorTint;
+
+    protected MaterialSourceWorld sourceWorld;
+
     public MaterialBase(String name) {
         this.name = name;
         initializeColorMap((p) -> (p == ItemPattern.ingot ? 0xFF0000 :  0xFFFFFF));
         initializeColorTint((p) -> true); //default will be overridden later on in ClientProxy
+        sourceWorld = MaterialSourceWorld.overworld;
     }
 
     public static boolean isExistingPattern(MaterialPattern pattern){
@@ -567,4 +572,8 @@ public abstract class MaterialBase {
     public abstract ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype);
 
     public abstract boolean isFluidPortable(ItemPattern bucket);
+
+    public MaterialSourceWorld getDimension() {
+        return sourceWorld;
+    }
 }
