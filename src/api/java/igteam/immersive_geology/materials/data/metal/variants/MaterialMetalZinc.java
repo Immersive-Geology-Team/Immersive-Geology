@@ -16,6 +16,8 @@ public class MaterialMetalZinc extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasMetalOxide() {return true;}
+    @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.HEXAGONAL;
     }

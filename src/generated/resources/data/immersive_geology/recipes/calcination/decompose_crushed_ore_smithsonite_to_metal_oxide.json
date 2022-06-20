@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:rotary_kiln",
+  "result": {
+    "item": "immersive_geology:metal_oxide_zinc"
+  },
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_smithsonite"
+  },
+  "energy": 12000,
+  "time": 300
+}
