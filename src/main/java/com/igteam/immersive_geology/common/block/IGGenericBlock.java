@@ -47,7 +47,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
         this.materialMap.put(MaterialTexture.base, m);
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
 
-        RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.SOLID); //CUTOUT_MIPPED
+        RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.CUTOUT_MIPPED);
     }
 
     @Override
