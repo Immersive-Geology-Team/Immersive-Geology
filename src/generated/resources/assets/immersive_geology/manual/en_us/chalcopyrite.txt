@@ -1,5 +1,5 @@
 Chalcopyrite
 UNCOMMON mineral
-<&chalcopyrite_display> Chalcopyrite is found between y layers: 1 and 70 and a source of [<link;immersive_geology:copper;copper>, <link;immersive_geology:iron;iron>].
+<&chalcopyrite_display> Chalcopyrite is found in the nether between y layers 1 and 255 and provides a source of [<link;immersive_geology:copper;copper>, <link;immersive_geology:iron;iron>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&chalcopyrite_recipe> (Generic) Crafting Recipe

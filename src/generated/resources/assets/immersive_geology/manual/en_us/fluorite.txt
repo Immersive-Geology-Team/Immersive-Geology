@@ -1,5 +1,5 @@
 Fluorite
 UNCOMMON mineral
-<&fluorite_display> Fluorite is found between y layers: 1 and 70 and a source of [<link;immersive_geology:hydrofluoric_acid;hydrofluoric acid>].
+<&fluorite_display> Fluorite is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:hydrofluoric_acid;hydrofluoric acid>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&fluorite_recipe> (Generic) Crafting Recipe

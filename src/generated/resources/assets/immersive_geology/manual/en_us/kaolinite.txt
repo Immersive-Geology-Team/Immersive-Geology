@@ -1,5 +1,5 @@
 Kaolinite
 COMMON mineral
-<&kaolinite_display> Kaolinite is found between y layers: 1 and 90
+<&kaolinite_display> Kaolinite is found in the overworld between y layers 1 and 140
 Further information on how to process this Mineral can be found in the next few pages.
 <&kaolinite_recipe> (Generic) Crafting Recipe

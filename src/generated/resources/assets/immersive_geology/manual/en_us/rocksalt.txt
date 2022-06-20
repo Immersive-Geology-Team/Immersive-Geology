@@ -1,5 +1,5 @@
 Rocksalt
 COMMON mineral
-<&rocksalt_display> Rocksalt is found between y layers: 1 and 90 and a source of [<link;immersive_geology:sodium;sodium>, <link;immersive_geology:hydrochloric_acid;hydrochloric acid>].
+<&rocksalt_display> Rocksalt is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:sodium;sodium>, <link;immersive_geology:hydrochloric_acid;hydrochloric acid>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&rocksalt_recipe> (Generic) Crafting Recipe

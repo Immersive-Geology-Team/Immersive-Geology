@@ -1,5 +1,5 @@
 Saltpeter
 COMMON mineral
-<&saltpeter_display> Saltpeter is found between y layers: 1 and 90 and a source of [<link;immersive_geology:sodium;sodium>, <link;immersive_geology:nitric_acid;nitric acid>].
+<&saltpeter_display> Saltpeter is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:sodium;sodium>, <link;immersive_geology:nitric_acid;nitric acid>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&saltpeter_recipe> (Generic) Crafting Recipe

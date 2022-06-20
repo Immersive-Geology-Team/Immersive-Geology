@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:metal_oxide_tungsten"
+  },
+  "input": {
+    "tag": "forge:dusts/ferberite"
+  },
+  "waste": {
+    "item": "immersiveengineering:dust_iron"
+  }
+}

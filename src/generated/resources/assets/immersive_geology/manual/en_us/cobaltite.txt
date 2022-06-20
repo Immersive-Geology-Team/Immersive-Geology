@@ -1,5 +1,5 @@
 Cobaltite
 UNCOMMON mineral
-<&cobaltite_display> Cobaltite is found between y layers: 1 and 70 and a source of [<link;immersive_geology:cobalt;cobalt>, <link;immersive_geology:platinum;platinum>, <link;immersive_geology:osmium;osmium>].
+<&cobaltite_display> Cobaltite is found in the nether between y layers 1 and 255 and provides a source of [<link;immersive_geology:cobalt;cobalt>, <link;immersive_geology:platinum;platinum>, <link;immersive_geology:osmium;osmium>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&cobaltite_recipe> (Generic) Crafting Recipe

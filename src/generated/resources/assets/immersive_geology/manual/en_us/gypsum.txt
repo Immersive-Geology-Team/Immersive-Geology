@@ -1,5 +1,5 @@
 Gypsum
 UNCOMMON mineral
-<&gypsum_display> Gypsum is found between y layers: 1 and 70
+<&gypsum_display> Gypsum is found in the nether between y layers 1 and 255
 Further information on how to process this Mineral can be found in the next few pages.
 <&gypsum_recipe> (Generic) Crafting Recipe

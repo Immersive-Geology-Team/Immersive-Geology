@@ -5,7 +5,7 @@
     "item": "immersive_geology:metal_oxide_iron"
   },
   "input": {
-    "tag": "forge:slags/chalcopyrite"
+    "tag": "forge:dusts/chalcopyrite"
   },
   "waste": {
     "item": "immersive_geology:metal_oxide_copper"
