@@ -52,7 +52,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
                         getItemTag(ItemPattern.slag),
                         getStack(ItemPattern.dust), 10000, 100);
                 IRecipeBuilder.separating(this).create(
-                        getItemTag(ItemPattern.slag),
+                        getItemTag(ItemPattern.dust),
                         MetalEnum.Iron.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Zinc.getStack(ItemPattern.metal_oxide));
 

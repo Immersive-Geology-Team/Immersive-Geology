@@ -5,7 +5,7 @@
     "item": "immersive_geology:metal_oxide_iron"
   },
   "input": {
-    "tag": "forge:slags/sphalerite"
+    "tag": "forge:dusts/sphalerite"
   },
   "waste": {
     "item": "immersive_geology:metal_oxide_zinc"

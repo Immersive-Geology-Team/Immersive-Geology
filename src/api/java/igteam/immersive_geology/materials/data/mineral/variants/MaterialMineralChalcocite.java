@@ -52,6 +52,8 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
         return true;
     }
 
+
+
     @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
@@ -73,6 +75,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                         MetalEnum.Copper.getStack(ItemPattern.ingot, 1));
             }
         };
+
         new IGProcessingStage(this, "Leeching Stage") {
             @Override
             protected void describe() {

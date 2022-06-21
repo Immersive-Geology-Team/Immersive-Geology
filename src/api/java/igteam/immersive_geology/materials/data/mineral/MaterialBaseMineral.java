@@ -114,9 +114,10 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         return false;
     }
 
+    //If there's I enable it manually
     @Override
     protected boolean hasDust() {
-        return hasCrystal();
+        return true;
     }
 
     @Override
@@ -139,9 +140,10 @@ public abstract class MaterialBaseMineral extends MaterialBase {
         return false;
     }
 
+    //There's no need
     @Override
     protected boolean hasCrystal() {
-        return true;
+        return false;
     }
 
     @Override

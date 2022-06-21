@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "immersive_geology:crystal_vanadium"
-  },
-  "result": "immersive_geology:ingot_vanadium",
-  "experience": 2.0,
-  "cookingtime": 100
-}

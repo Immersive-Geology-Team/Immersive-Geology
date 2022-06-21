@@ -21,7 +21,13 @@ public class MaterialMineralCassiterite extends MaterialBaseMineral {
         super("cassiterite");
         initializeColorMap((p) -> 0x8f8b96);
     }
+    @Override
+    public boolean hasDust() {
+        return false;
+    }
 
+    @Override
+    public boolean hasCrystal() { return false;}
     @Override
     public Rarity getRarity() {
         return Rarity.UNCOMMON;

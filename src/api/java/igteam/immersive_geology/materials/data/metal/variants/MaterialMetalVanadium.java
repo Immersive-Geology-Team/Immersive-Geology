@@ -13,7 +13,8 @@ public class MaterialMetalVanadium extends MaterialBaseMetal {
         super("vanadium");
         initializeColorMap((p) -> 0x8e1e1d);
     }
-
+    @Override
+    public boolean hasCrystal() {return false;}
     @Override
     public boolean hasMetalOxide(){return true;}
     @Override

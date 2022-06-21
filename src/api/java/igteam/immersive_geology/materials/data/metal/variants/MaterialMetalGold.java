@@ -25,6 +25,8 @@ public class MaterialMetalGold extends MaterialBaseMetal {
         super("gold");
         initializeColorMap((p) -> 0xFFD700);
     }
+    @Override
+    public boolean hasCrystal() {return false;}
 
     @Override
     public boolean isNative() {

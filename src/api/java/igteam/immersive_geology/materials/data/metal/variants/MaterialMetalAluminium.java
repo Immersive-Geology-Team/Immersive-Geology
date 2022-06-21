@@ -21,6 +21,9 @@ public class MaterialMetalAluminium extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasCrystal() {return false;}
+
+    @Override
     public boolean hasExistingImplementation() {
         return true;
     }

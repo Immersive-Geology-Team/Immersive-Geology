@@ -19,6 +19,7 @@ public class MaterialMetalManganese extends MaterialBaseMetal {
         initializeColorMap((p) -> 0xaaa9ad);
     }
 
+
     @Override
     public Rarity getRarity()
     {

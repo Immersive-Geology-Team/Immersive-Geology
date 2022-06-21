@@ -22,6 +22,14 @@ public class MaterialMineralCuprite extends MaterialBaseMineral {
     }
 
     @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
+
+    @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.CUBIC;
     }

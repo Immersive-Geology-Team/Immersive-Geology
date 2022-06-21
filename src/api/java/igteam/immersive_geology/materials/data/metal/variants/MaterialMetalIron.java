@@ -14,6 +14,9 @@ public class MaterialMetalIron extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasCrystal() {return false;}
+
+    @Override
     public boolean isNative() {
         return true;
     }

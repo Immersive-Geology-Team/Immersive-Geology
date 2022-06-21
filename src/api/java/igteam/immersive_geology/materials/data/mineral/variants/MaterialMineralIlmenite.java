@@ -33,6 +33,13 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.HEXAGONAL;
     }
+    @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
 
     @Override
     protected void setupProcessingStages() {

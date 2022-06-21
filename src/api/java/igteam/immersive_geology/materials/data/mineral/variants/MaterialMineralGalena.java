@@ -30,6 +30,14 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
     }
 
     @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
+
+    @Override
     public boolean hasSlag() {return true;}
     @Override
     protected void setupProcessingStages() {
