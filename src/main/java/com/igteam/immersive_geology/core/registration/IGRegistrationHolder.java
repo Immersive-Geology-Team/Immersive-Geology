@@ -168,7 +168,6 @@ public class IGRegistrationHolder {
                 register(multi_block.asItem());
                 register(multi_block);
                 break;
-
         }
     }
 

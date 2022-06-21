@@ -2,9 +2,15 @@ package com.igteam.immersive_geology.common.loot;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
+import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -13,9 +19,11 @@ import net.minecraft.loot.LootFunctionType;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ToolType;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class OreDropProperty extends LootFunction {
     public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "variable_ore_drops");
@@ -26,35 +34,27 @@ public class OreDropProperty extends LootFunction {
 
     @Override
     protected ItemStack doApply(ItemStack itemStack, LootContext lootContext) {
-        Item tool = lootContext.get(LootParameters.TOOL).getItem();
+        ItemStack toolStack = lootContext.get(LootParameters.TOOL);
+        Set<ToolType> tool = toolStack.getToolTypes();
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(Objects.requireNonNull(lootContext.get(LootParameters.TOOL)));
-//        //used to use lootContext without wrapper, wrapper should prevent some issues, but if we have drop issues, check here
-//
-//        if(tool instanceof PickaxeItem) {
-//            PickaxeItem pick = (PickaxeItem) tool;
-//
-//            int fortuneLevel = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
-//            Item dropItem = itemStack.getItem();
-//            if(enchantments.get(Enchantments.SILK_TOUCH) != null) {
-//                if(dropItem instanceof IGOreItem) {
-//                    IGOreItem oreItem = (IGOreItem) dropItem;
-//                    return new ItemStack(IGRegistrationHolder.getBlockByMaterial(oreItem.getMaterial(BlockMaterialType.BASE_MATERIAL), oreItem.getMaterial(BlockMaterialType.ORE_MATERIAL), MaterialUseType.ORE_STONE));
-//                } else {
-//                    return itemStack;
-//                }
-//            } else {
-//                if(dropItem.asItem() == Items.COAL.getItem()) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()+1) + fortuneLevel));
-//                if(dropItem instanceof IGOreItem) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()) + fortuneLevel));
-//                if(dropItem instanceof ItemBase && ((ItemBase)dropItem).getMaterial(BlockMaterialType.BASE_MATERIAL) instanceof MaterialMineralBase) {
-//                    MaterialMineralBase mineral = ((MaterialMineralBase)((ItemBase)dropItem).getMaterial(BlockMaterialType.BASE_MATERIAL));
-//                    if(mineral.getMineralType() == MaterialMineralBase.EnumMineralType.CLAY) return new ItemStack(itemStack.getItem(), 4 + fortuneLevel);
-//                    if(mineral.getMineralType() == MaterialMineralBase.EnumMineralType.FUEL) return new ItemStack(itemStack.getItem(), Math.min(8, Math.min(4, pick.getTier().getHarvestLevel()+1) + fortuneLevel));
-//                }
-//                return new ItemStack(itemStack.getItem(), Math.max(0, 4 - Math.min(4, pick.getTier().getHarvestLevel())));
-//            }
-//        } else {
-//            return ItemStack.EMPTY;
-//        }
+
+        if(tool.contains(ToolType.PICKAXE)){
+            int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
+            int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
+            if(enchantments.get(Enchantments.SILK_TOUCH) != null){
+                //Tool has silk touch
+                if(itemStack.getItem() instanceof IGGenericItem){
+                    IGGenericItem igItem = (IGGenericItem) itemStack.getItem();
+                    Block igOreBlock = igItem.getMaterial(MaterialTexture.base).getBlock(BlockPattern.ore, igItem.getMaterial(MaterialTexture.overlay));
+                    return new ItemStack(igOreBlock);
+                }
+                return itemStack; //catch return if for some reason the item isn't IGGenericItem
+            } else {
+                //Does not have silk touch
+                itemStack.setCount(Math.min(8, Math.min(4, harvestLevel) + fortune));
+                return itemStack;
+            }
+        }
         return ItemStack.EMPTY;
     }
 
