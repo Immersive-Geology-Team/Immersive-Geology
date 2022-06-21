@@ -1,11 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-<<<<<<< Updated upstream
-    "item": "immersive_geology:dust_neodymium"
-=======
     "item": "immersive_geology:crystal_neodymium"
->>>>>>> Stashed changes
   },
   "result": "immersive_geology:ingot_neodymium",
   "experience": 2.0,
