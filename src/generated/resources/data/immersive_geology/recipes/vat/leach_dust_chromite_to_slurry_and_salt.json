@@ -8,7 +8,7 @@
     "item": "immersive_geology:compound_dust_iron"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_chromite"
+    "item": "immersive_geology:dust_chromite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/nitric_acid",

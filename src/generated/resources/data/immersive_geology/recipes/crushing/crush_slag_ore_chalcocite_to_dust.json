@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_chalcocite"
+  },
+  "input": {
+    "tag": "forge:slags/chalcocite"
+  },
+  "time": 200,
+  "energy": 10000
+}

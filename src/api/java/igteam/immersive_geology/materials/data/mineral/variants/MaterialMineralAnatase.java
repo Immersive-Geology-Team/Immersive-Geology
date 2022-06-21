@@ -57,9 +57,14 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
         new IGProcessingStage(this, "Leaching stage") {
             @Override
             protected void describe() {
+
+                IRecipeBuilder.crushing(this).create( "crushed_ore_" +getName() + "_to_dust",
+                        getItemTag(ItemPattern.crushed_ore),
+                        getStack(ItemPattern.dust), 10000, 200);
+
                 IRecipeBuilder.chemical(this).create(
-                        "crushed_ore_" + getName()+"_to_slurry",
-                        getStack(ItemPattern.crushed_ore),
+                        "dust_" + getName()+"_to_slurry",
+                        getStack(ItemPattern.dust),
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
