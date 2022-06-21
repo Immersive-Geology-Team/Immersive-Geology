@@ -16,6 +16,10 @@ public class MaterialMetalLead extends MaterialBaseMetal {
         super("lead");
         initializeColorMap((p) -> 0x444f53);
     }
+
+    @Override
+    public boolean hasCrystal() {return false;}
+
     @Override
     public boolean hasExistingImplementation() {
         return true;

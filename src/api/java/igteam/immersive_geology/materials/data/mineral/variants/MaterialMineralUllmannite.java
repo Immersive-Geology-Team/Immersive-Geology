@@ -33,6 +33,14 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
     }
 
     @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
+
+    @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 

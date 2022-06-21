@@ -64,9 +64,13 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
         new IGProcessingStage(this,"Chemical Stage") {
             @Override
             protected void describe() {
+                IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",
+                        getItemTag(ItemPattern.slag),
+                        getStack(ItemPattern.dust), 10000, 200);
+
                 IRecipeBuilder.chemical(this).create(
                     "chemical_recipe_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),
-                    getStack(ItemPattern.slag),
+                    getStack(ItemPattern.dust),
                     new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                     new FluidTagInput(FluidEnum.Brine.getFluidTag(FluidPattern.fluid), 250),
                     MetalEnum.Vanadium.getStack(ItemPattern.compound_dust, 2),

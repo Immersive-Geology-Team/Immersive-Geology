@@ -36,6 +36,13 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
         initializeColorMap((p) -> 0x999FAF);
     }
 
+    @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
 
     @Override
     public Rarity getRarity() {

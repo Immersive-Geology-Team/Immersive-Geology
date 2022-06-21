@@ -56,9 +56,14 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
         new IGProcessingStage(this,"Chromium extraction Stage") {
             @Override
             protected void describe() {
+
+                IRecipeBuilder.crushing(this).create( "crushed_ore_" +getName() + "_to_dust",
+                        getItemTag(ItemPattern.crushed_ore),
+                        getStack(ItemPattern.dust), 10000, 200);
+
                 IRecipeBuilder.chemical(this).create(
-                        "crushed_ore_"+getName()+"_to_slurry_and_salt",
-                        getStack(ItemPattern.crushed_ore),
+                        "dust_"+getName()+"_to_slurry_and_salt",
+                        getStack(ItemPattern.dust),
                         new FluidTagInput(FluidEnum.NitricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Iron.getStack(ItemPattern.compound_dust),

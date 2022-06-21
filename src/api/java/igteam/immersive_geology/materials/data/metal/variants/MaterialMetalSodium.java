@@ -14,6 +14,9 @@ public class MaterialMetalSodium extends MaterialBaseMetal {
     }
 
     @Override
+    public boolean hasCrystal() {return false;}
+
+    @Override
     public boolean hasMetalOxide() {
         return true;
     }

@@ -52,6 +52,8 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
         return true;
     }
 
+
+
     @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
@@ -73,12 +75,18 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                         MetalEnum.Copper.getStack(ItemPattern.ingot, 1));
             }
         };
+
         new IGProcessingStage(this, "Leeching Stage") {
             @Override
             protected void describe() {
+
+                IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",
+                        getItemTag(ItemPattern.slag),
+                        getStack(ItemPattern.dust), 10000, 200);
+
                 IRecipeBuilder.chemical(this).create(
-                        "slag_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.slag),
+                        "dust_" + getName() + "_to_slurry",
+                        getStack(ItemPattern.dust),
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Platinum.getStack(ItemPattern.compound_dust),

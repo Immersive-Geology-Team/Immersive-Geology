@@ -26,6 +26,13 @@ public class MaterialMineralSmithsonite extends MaterialBaseMineral {
         super("smithsonite");
         initializeColorMap((p) -> 0x81D1DC);
     }
+    @Override
+    public boolean hasDust() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCrystal() { return false;}
 
     @Override
     public CrystalFamily getCrystalFamily() {

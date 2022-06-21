@@ -1,6 +1,0 @@
-{
-  "parent": "immersive_geology:item/base/ig_base_item",
-  "textures": {
-    "layer0": "immersive_geology:item/greyscale/crystal/raw_crystal_orthorhombic"
-  }
-}
