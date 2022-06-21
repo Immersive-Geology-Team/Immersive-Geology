@@ -10,6 +10,9 @@
       },
       {
         "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_chromite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_chromite"
       }
     ]
   },

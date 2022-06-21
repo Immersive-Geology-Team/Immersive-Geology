@@ -1,5 +1,8 @@
 package com.igteam.immersive_geology.common.world;
 
+import blusunrize.immersiveengineering.common.world.IECountPlacement;
+import blusunrize.immersiveengineering.common.world.IEOreFeature;
+import blusunrize.immersiveengineering.common.world.IEWorldGen;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.world.feature.IGOreFeature;
 import com.igteam.immersive_geology.common.world.feature.IGOreFeatureConfig;
@@ -12,26 +15,26 @@ import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.world.TinkerWorld;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class IGWorldGeneration {
     public static Map<String, ConfiguredFeature<?, ?>> features = new HashMap<>();
+    public static Set<ConfiguredFeature<?,?>> featureBlacklist = new HashSet<>();
 
     public static void initialize(){
-        ImmersiveGeology.getNewLogger().warn("Immersive Geology: Initializing World Generation");
+        ImmersiveGeology.getNewLogger().info("Immersive Geology: Initializing World Generation");
 
         for (MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
             if (container.hasPattern(BlockPattern.ore)) {
@@ -49,7 +52,16 @@ public class IGWorldGeneration {
                 IGApi.getNewLogger().warn("Containing Material has no Ore Pattern");
             }
         }
+    }
 
+    private static void fillFeatureBlacklist() {
+        featureBlacklist.add(Features.ORE_GOLD);
+        featureBlacklist.add(Features.ORE_IRON);
+        featureBlacklist.add(Features.ORE_GOLD_EXTRA);
+        featureBlacklist.add(IEWorldGen.features.get("veins")); //Remove IE Ore Generation (We'll replace it later!) Also need to look at a way to do this without Internal Classes...
+        featureBlacklist.add(TinkerWorld.COPPER_ORE_FEATURE);   //We get rid of the Tinker Version of copper
+        featureBlacklist.add(TinkerWorld.COBALT_ORE_FEATURE_SMALL); //And cobalt
+        featureBlacklist.add(TinkerWorld.COBALT_ORE_FEATURE_LARGE);
     }
 
     static Map<String, IGOreConfig> configMap = new HashMap<>();
@@ -72,8 +84,24 @@ public class IGWorldGeneration {
     public void onBiomeLoad(BiomeLoadingEvent ev) {
         BiomeGenerationSettingsBuilder generation = ev.getGeneration();
 
+        //We still allow Coal, Diamonds and Emeralds to spawn.
+        if(featureBlacklist.isEmpty()) {
+            IGApi.getNewLogger().warn("Blacklisting Metallic Ores from spawning. This includes ores from IE and TC - This is configurable this is a default IG process however");
+            fillFeatureBlacklist();
+        }
+
         //TODO Make config option to remove ores
-        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).clear();
+        //Most Overworld Ores use this
+        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).removeIf((suppliedFeature) -> {
+            ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
+            return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
+        });
+
+        //Most Nether Ores use this
+        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION).removeIf((suppliedFeature) -> {
+            ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
+            return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
+        });
 
         DefaultBiomeFeatures.withCommonOverworldBlocks(generation); // re-add non-ore blocks using same stage of underground_ores
         DefaultBiomeFeatures.withInfestedStone(generation);

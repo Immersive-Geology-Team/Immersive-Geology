@@ -15,7 +15,9 @@ import java.util.LinkedHashSet;
 
 public class MaterialBassalt extends MaterialBaseStone {
     public MaterialBassalt() {
-        super("bassalt");
+        super("basalt");
+
+        initializeColorMap((p) -> (0x35302C));
     }
 
     @Override
@@ -23,6 +25,11 @@ public class MaterialBassalt extends MaterialBaseStone {
         return new LinkedHashSet<>(Collections.singletonList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON)
         ));
+    }
+
+    @Override
+    public int getColor(MaterialPattern p) {
+        return 0x35302C;
     }
 
     @Override

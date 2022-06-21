@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:ore_chunk_basalt_smithsonite",
+    "count": 4
+  },
+  "input": {
+    "tag": "forge:ores/basalt_smithsonite"
+  },
+  "time": 500,
+  "energy": 1000
+}

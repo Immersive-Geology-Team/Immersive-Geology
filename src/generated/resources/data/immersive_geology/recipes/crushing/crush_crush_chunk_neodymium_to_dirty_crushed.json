@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ore_bits/stone_neodymium"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_stone_neodymium"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/stone_neodymium"
+  },
+  "time": 1000,
+  "energy": 1000
+}

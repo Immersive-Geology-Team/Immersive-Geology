@@ -71,7 +71,8 @@ public class IGOreFeature extends OreFeature {
 
         BlockState granteOre = StoneEnum.Granite.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
         BlockState stoneOre = StoneEnum.Stone.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
-        BlockState netherOre = StoneEnum.Netherrack.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
+        BlockState netherrackOre = StoneEnum.Netherrack.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
+        BlockState basaltOre = StoneEnum.Netherrack.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
@@ -137,9 +138,11 @@ public class IGOreFeature extends OreFeature {
                                                 BlockState worldState = worldIn.getBlockState(blockpos$mutable);
                                                 if (config.target.test(worldState, random)) {
                                                     if(worldState.getBlock().equals(Blocks.NETHERRACK)){ //TODO Not a very 'nice' way of doing this, but it works well enough.
-                                                        worldIn.setBlockState(blockpos$mutable, netherOre, 2);
+                                                        worldIn.setBlockState(blockpos$mutable, netherrackOre, 2);
                                                     } else if (worldState.getBlock().equals(Blocks.GRANITE)) {
                                                         worldIn.setBlockState(blockpos$mutable, granteOre, 2);
+                                                    } else if (worldState.getBlock().equals(Blocks.BASALT)) {
+                                                        worldIn.setBlockState(blockpos$mutable, basaltOre, 2);
                                                     } else {
                                                         worldIn.setBlockState(blockpos$mutable, stoneOre, 2);
                                                     }

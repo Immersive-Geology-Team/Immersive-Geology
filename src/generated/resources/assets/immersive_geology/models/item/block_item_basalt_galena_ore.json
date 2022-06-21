@@ -1,0 +1,85 @@
+{
+  "parent": "immersive_geology:block/base/ore",
+  "textures": {
+    "base": "minecraft:block/blackstone",
+    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/vanilla/cubic"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#base",
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#base",
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#base",
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#base",
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#base",
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#base",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#ore",
+          "tintindex": 1
+        },
+        "up": {
+          "texture": "#ore",
+          "tintindex": 1
+        },
+        "north": {
+          "texture": "#ore",
+          "tintindex": 1
+        },
+        "south": {
+          "texture": "#ore",
+          "tintindex": 1
+        },
+        "west": {
+          "texture": "#ore",
+          "tintindex": 1
+        },
+        "east": {
+          "texture": "#ore",
+          "tintindex": 1
+        }
+      }
+    }
+  ]
+}

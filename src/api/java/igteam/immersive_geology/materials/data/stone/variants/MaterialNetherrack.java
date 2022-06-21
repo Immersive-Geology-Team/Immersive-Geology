@@ -17,6 +17,7 @@ import java.util.LinkedHashSet;
 public class MaterialNetherrack extends MaterialBaseStone {
     public MaterialNetherrack() {
         super("netherrack");
+        initializeColorMap((p) -> (0x5C221D));
     }
 
     @Override
@@ -24,6 +25,11 @@ public class MaterialNetherrack extends MaterialBaseStone {
         return new LinkedHashSet<>(Collections.singletonList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.SILICON)
         ));
+    }
+
+    @Override
+    public int getColor(MaterialPattern p) {
+        return 0x5C221D;
     }
 
     @Override

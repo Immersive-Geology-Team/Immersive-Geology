@@ -34,6 +34,10 @@ public class MaterialMetalPlatinum extends MaterialBaseMetal {
         return true;
     }
 
+    @Override
+    public boolean hasExistingImplementation() {
+        return false;
+    }
 
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()

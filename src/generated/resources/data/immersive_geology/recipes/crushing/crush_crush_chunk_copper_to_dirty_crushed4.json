@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ore_bits/basalt_copper"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_basalt_copper"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/basalt_copper"
+  },
+  "time": 1000,
+  "energy": 1000
+}

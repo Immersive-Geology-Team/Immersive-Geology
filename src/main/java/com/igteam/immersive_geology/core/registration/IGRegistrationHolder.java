@@ -140,14 +140,12 @@ public class IGRegistrationHolder {
         switch(p){
             case ore:
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
-                    if (m.generateOreFor(stone)) {
-                        IGOreBlock multi_block = new IGOreBlock(m, p);
-                        multi_block.addMaterial(stone, MaterialTexture.base);
-                        multi_block.addMaterial(m, MaterialTexture.overlay);
-                        multi_block.finalizeData();
-                        register(multi_block.asItem());
-                        register(multi_block);
-                    }
+                    IGOreBlock multi_block = new IGOreBlock(m, p);
+                    multi_block.addMaterial(stone, MaterialTexture.base);
+                    multi_block.addMaterial(m, MaterialTexture.overlay);
+                    multi_block.finalizeData();
+                    register(multi_block.asItem());
+                    register(multi_block);
                 });
                 break;
             case slab:

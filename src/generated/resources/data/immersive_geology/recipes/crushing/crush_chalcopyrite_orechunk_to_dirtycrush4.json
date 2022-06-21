@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_basalt_chalcopyrite"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/basalt_chalcopyrite"
+  },
+  "time": 500,
+  "energy": 1000
+}

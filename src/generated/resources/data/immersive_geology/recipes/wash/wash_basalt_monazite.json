@@ -1,0 +1,13 @@
+{
+  "type": "immersive_geology:gravityseparator",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:crushed_ore_monazite"
+  },
+  "input": {
+    "tag": "forge:dirty_crushed_ores/basalt_monazite"
+  },
+  "waste": {
+    "item": "immersive_geology:stone_bit_basalt"
+  }
+}

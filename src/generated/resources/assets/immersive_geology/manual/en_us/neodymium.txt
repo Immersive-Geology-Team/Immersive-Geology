@@ -1,0 +1,3 @@
+Neodymium
+COMMON metal
+<&neodymium_display> 
