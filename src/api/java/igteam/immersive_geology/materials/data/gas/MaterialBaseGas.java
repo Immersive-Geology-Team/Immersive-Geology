@@ -1,6 +1,9 @@
 package igteam.immersive_geology.materials.data.gas;
 
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.pattern.FluidPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
@@ -163,11 +166,34 @@ public abstract class MaterialBaseGas extends MaterialBase {
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-        return null;
+        if(pattern instanceof FluidPattern){
+            FluidPattern m = (FluidPattern) pattern;
+            switch (m){
+                case fluid:
+                    return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
+            }
+        }
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
+        return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
     }
 
     @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
-        return null;
+        if(pattern instanceof ItemPattern){
+            ItemPattern i = (ItemPattern) pattern;
+            switch (i){
+                case flask:
+                    return new ResourceLocation(IGApi.MODID, "item/greyscale/fluid/compound_flask_fluid");
+            }
+        }
+
+        return subtype == 0 ? new ResourceLocation(IGApi.MODID, "block/fluid/default_still") : new ResourceLocation(IGApi.MODID, "block/fluid/default_flowing");
     }
 }

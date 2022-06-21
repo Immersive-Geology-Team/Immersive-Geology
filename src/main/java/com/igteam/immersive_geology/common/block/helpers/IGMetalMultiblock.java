@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.common.blocks.metal.MetalMultiblockBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.main.IGRegistryProvider;
@@ -21,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
@@ -31,15 +33,21 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te){
         super(name, te);
 
-        IEContent.registeredIEBlocks.remove(this);
-        Iterator<Item> it = IEContent.registeredIEItems.iterator();
-        while(it.hasNext()){
-            Item item = it.next();
-            if(item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this){
-                it.remove();
-                break;
+        try {
+            IEContent.registeredIEBlocks.remove(this);
+            Iterator<Item> it = IEContent.registeredIEItems.iterator();
+            while (it.hasNext()) {
+                Item item = it.next();
+                if (item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this) {
+                    it.remove();
+                    break;
+                }
             }
+        } catch (ConcurrentModificationException exception){
+            IGApi.getNewLogger().error("Concurrent Modification Error - Essentially you'll need to restart, this issue is erratic and it's due to IG using IE internal Classes. Don't bother Immersive Engineering about this. (sorry Blu, I'll fix it sometime in the future ~Muddykat)");
+            IGApi.getNewLogger().error(exception.getMessage());
         }
+
 
         this.itemBlock = new IGGenericBlockItem(this, getMachineMaterial(), ItemPattern.block_item);
         this.itemBlock.useDefaultNamingConvention();

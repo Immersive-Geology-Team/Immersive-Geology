@@ -40,29 +40,4 @@ public class IGOreBlock extends IGGenericBlock {
     public IGOreBlock(MaterialInterface<?> m, BlockPattern p) {
         super(m, p, Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        //TODO Crimson - Basic Setup here for block drops
-        boolean hasSilk = false;
-        List<ItemStack> dropItems = new ArrayList<>();
-        int level = builder.get(LootParameters.TOOL).getHarvestLevel(ToolType.PICKAXE, null, state);
-        if(level != -1) {
-            ItemStack ore_chunk = getMaterial(MaterialTexture.base).getStack(ItemPattern.ore_chunk, getMaterial(MaterialTexture.overlay), 1 + level);
-            if (!hasSilk) {
-                dropItems.add(ore_chunk);
-            } else {
-                dropItems.add(new ItemStack(this));
-            }
-        } else {
-            dropItems.add(new ItemStack(this));
-        }
-
-        return dropItems;
-    }
-
-    @Override
-    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-    }
 }

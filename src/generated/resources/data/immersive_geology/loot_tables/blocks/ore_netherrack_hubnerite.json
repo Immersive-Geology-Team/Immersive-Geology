@@ -2,17 +2,30 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "main",
-      "rolls": 1,
+      "rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:block_item_netherrack_hubnerite_ore"
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_chunk_netherrack_hubnerite"
         }
-      ],
-      "conditions": [
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
         {
-          "condition": "minecraft:survives_explosion"
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:stone_chunk_netherrack"
         }
       ]
     }
