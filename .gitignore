@@ -36,3 +36,4 @@ libs/
 .settings/
 *.launch
 
+/src/generated/resources/.cache/
