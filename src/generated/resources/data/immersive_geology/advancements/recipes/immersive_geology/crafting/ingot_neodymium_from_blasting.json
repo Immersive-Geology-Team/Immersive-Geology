@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_dust_neodymium": {
+    "has_crystal_neodymium": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:dust_neodymium"
+            "item": "immersive_geology:crystal_neodymium"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_dust_neodymium",
+      "has_crystal_neodymium",
       "has_the_recipe"
     ]
   ]

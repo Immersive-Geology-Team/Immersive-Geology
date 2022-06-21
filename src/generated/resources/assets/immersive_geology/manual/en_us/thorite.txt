@@ -1,5 +1,0 @@
-Thorite
-RARE mineral
-<&thorite_display> Thorite is found in the overworld between y layers 1 and 90 and provides a source of [<link;immersive_geology:thorium;thorium>, <link;immersive_geology:uranium;uranium>].
-Further information on how to process this Mineral can be found in the next few pages.
-<&thorite_recipe> (Generic) Crafting Recipe

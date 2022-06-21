@@ -17,7 +17,10 @@ public enum SlurryEnum {
     COPPER(new MaterialSlurryWrapper(MetalEnum.Copper, FluidEnum.HydrochloricAcid)),
     //this is fine...
     CALCIUM(new MaterialSlurryWrapper(MineralEnum.Gypsum, FluidEnum.HydrochloricAcid)),
-    SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid));
+    SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid)),
+
+    NEODYMIUM(new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrochloricAcid),
+            new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrofluoricAcid));
     final LinkedHashSet<MaterialSlurryWrapper> entries;
 
     SlurryEnum(MaterialSlurryWrapper... slurries){

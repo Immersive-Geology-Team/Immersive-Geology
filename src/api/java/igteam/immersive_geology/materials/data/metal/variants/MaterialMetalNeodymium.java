@@ -17,8 +17,14 @@ public class MaterialMetalNeodymium extends MaterialBaseMetal {
 
     @Override
     public boolean isNative() {
-        return true;
+        return false;
     }
+
+    @Override
+    public boolean hasCompoundDust() {return true;}
+
+    @Override
+    public boolean hasMetalOxide() {return true;}
 
     @Override
     public CrystalFamily getCrystalFamily() {

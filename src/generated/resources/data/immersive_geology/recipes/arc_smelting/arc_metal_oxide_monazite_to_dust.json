@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersive_geology:dust_thorium"
+    }
+  ],
+  "additives": [
+    {
+      "tag": "forge:dusts/zinc"
+    }
+  ],
+  "energy": 120000,
+  "time": 100,
+  "input": {
+    "tag": "forge:metal_oxides/thorium"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:fluid_brine",
+    "amount": 250
+  },
+  "result": {
+    "item": "immersive_geology:compound_dust_neodymium"
+  },
+  "fluid_input1": {
+    "tag": "forge:slurrys/hydrochloric_acid_neodymium",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "forge:fluids/sodium_hydroxide",
+    "amount": 250
+  },
+  "time": 120,
+  "energy": 10000
+}
