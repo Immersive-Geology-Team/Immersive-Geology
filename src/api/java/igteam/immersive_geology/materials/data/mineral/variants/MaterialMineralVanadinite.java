@@ -66,7 +66,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",
                         getItemTag(ItemPattern.slag),
-                        getStack(ItemPattern.dust), 10000, 200);
+                        getStack(ItemPattern.dust), 3000, 200);
 
                 IRecipeBuilder.chemical(this).create(
                     "chemical_recipe_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),

@@ -7,6 +7,6 @@
   "input": {
     "tag": "forge:ore_chunks/netherrack_cassiterite"
   },
-  "time": 500,
-  "energy": 1000
+  "time": 200,
+  "energy": 6000
 }

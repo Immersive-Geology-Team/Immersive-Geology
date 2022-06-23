@@ -14,6 +14,6 @@
   "input": {
     "tag": "forge:ore_chunks/granite_iron"
   },
-  "time": 1000,
-  "energy": 1000
+  "time": 200,
+  "energy": 6000
 }

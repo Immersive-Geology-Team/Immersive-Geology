@@ -52,7 +52,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
                         "slag_" +getName()+"_to_dust",
                         getItemTag(ItemPattern.slag),
                         getStack(ItemPattern.dust),
-                        10000, 200);
+                        3000, 200);
 
                 IRecipeBuilder.blasting(this).create(
                         "slag_" +getName() + "_to_ingot",

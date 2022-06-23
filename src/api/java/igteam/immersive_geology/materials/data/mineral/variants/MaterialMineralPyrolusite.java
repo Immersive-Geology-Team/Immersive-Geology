@@ -43,7 +43,7 @@ public class MaterialMineralPyrolusite extends MaterialBaseMineral {
                         "crushed_ore_" +getName()+"_to_dust",
                         getItemTag(ItemPattern.crushed_ore),
                         getStack(ItemPattern.dust),
-                        10000, 200);
+                        3000, 200);
 
                 IRecipeBuilder.chemical(this).create(
                         "slag_" + getName() + "_to_slurry",

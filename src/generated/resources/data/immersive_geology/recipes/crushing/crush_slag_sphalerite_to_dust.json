@@ -7,6 +7,6 @@
   "input": {
     "tag": "forge:slags/sphalerite"
   },
-  "time": 100,
-  "energy": 10000
+  "time": 200,
+  "energy": 3000
 }

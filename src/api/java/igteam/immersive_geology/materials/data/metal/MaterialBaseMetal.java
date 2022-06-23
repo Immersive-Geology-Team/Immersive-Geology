@@ -1,10 +1,8 @@
 package igteam.immersive_geology.materials.data.metal;
 
-import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -14,13 +12,11 @@ import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
@@ -49,7 +45,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         ITag<Item> ore_chunk = getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get());
                         ITag<Item> ore_bit = getParentMaterial().getItemTag(ItemPattern.ore_bit, stone.get());
 
-                        IRecipeBuilder.crushing(this).create("crush_chunk_" + getName() + "_to_dirty_crushed", ore_chunk, dirty_crushed_ore, ore_bit, 1000, 1000, 0.33f);
+                        IRecipeBuilder.crushing(this).create("crush_chunk_" + getName() + "_to_dirty_crushed",
+                                ore_chunk, dirty_crushed_ore, ore_bit, 6000, 200, 0.33f);
 
                         IRecipeBuilder.separating(this).create(
                                 getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore),//input
@@ -58,27 +55,27 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         );
 
                         IRecipeBuilder.crafting(this)
-                                .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),  getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()))
+                                .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()), getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()))
                                 .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
 
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()));
 
-                        if(!hasExistingImplementation()) {
+                        if (!hasExistingImplementation()) {
                             IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
-                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 4), 1000, 500);
+                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 4), 6000, 200);
                         }
 
                         IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
-                                getItemTag(ItemPattern.ore_chunk, stone.get()),  stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()),1000, 500);
+                                getItemTag(ItemPattern.ore_chunk, stone.get()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
 
                     }
                 }
             }
         };
 
-            //Also note Osmium is a Native metal, so yeah I don't think that'd work for it... May need to hardcode the Bloomery recipes, it may just be better to do so
+        //Also note Osmium is a Native metal, so yeah I don't think that'd work for it... May need to hardcode the Bloomery recipes, it may just be better to do so
 
 
         new IGProcessingStage(this, IGStageDesignation.preparation) {
@@ -92,27 +89,25 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
                 }
 
-                if (hasCrystal() && (hasDust() || hasExistingImplementation()))
-                {
+                if (hasCrystal() && (hasDust() || hasExistingImplementation())) {
                     IRecipeBuilder.crushing(this).create(
                             "crystal_" + getName() + "_to_dust",
-                            getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 1000, 500);
+                            getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 3000, 200);
                     IRecipeBuilder.basicSmelting(this).create(
                             getItem(ItemPattern.crystal),
                             getItem(ItemPattern.ingot));
                 }
-                if (hasDust() && hasIngot())
-                {
+                if (hasDust() && hasIngot()) {
                     IRecipeBuilder.crushing(this).create(
                             "ingot_" + getName() + "_to_dust",
-                            getItemTag(ItemPattern.ingot), getStack(ItemPattern.dust), 1000, 500);
+                            getItemTag(ItemPattern.ingot), getStack(ItemPattern.dust), 3000, 200);
                     IRecipeBuilder.basicSmelting(this).create(
                             getItem(ItemPattern.dust),
                             getItem(ItemPattern.ingot));
 
-                    IRecipeBuilder.arcSmelting(this).create("dust_"+getName() +"_to_ingot",
+                    IRecipeBuilder.arcSmelting(this).create("dust_" + getName() + "_to_ingot",
                                     new IngredientWithSize(getItemTag(ItemPattern.dust), 1),
-                                    getStack(ItemPattern.ingot),null)
+                                    getStack(ItemPattern.ingot), null)
                             .setEnergyTime(51200, 100);
                 }
             }
@@ -357,7 +352,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     return !hasExistingImplementation();
                 case Granite:
                     return isNative();
-            };
+            }
         }
         return false;
     }

@@ -46,7 +46,7 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
                         "crushed_ore_" + getName() + "_to_dust",
                         getItemTag(ItemPattern.crushed_ore),
                         getStack(ItemPattern.dust),
-                        10000, 200);
+                        6000, 200);
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_acid",

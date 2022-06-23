@@ -7,6 +7,6 @@
   "input": {
     "tag": "forge:ore_chunks/stone_hematite"
   },
-  "time": 500,
-  "energy": 1000
+  "time": 200,
+  "energy": 6000
 }
