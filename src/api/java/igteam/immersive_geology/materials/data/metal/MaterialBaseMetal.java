@@ -94,6 +94,15 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                             getItem(ItemPattern.crystal),
                             getItem(ItemPattern.ingot));
                 }
+                if (hasDust() && hasIngot())
+                {
+                    IRecipeBuilder.crushing(this).create(
+                            "ingot_" + getName() + "_to_dust",
+                            getItemTag(ItemPattern.ingot), getStack(ItemPattern.dust), 1000, 500);
+                    IRecipeBuilder.basicSmelting(this).create(
+                            getItem(ItemPattern.dust),
+                            getItem(ItemPattern.ingot));
+                }
             }
         };
     }
