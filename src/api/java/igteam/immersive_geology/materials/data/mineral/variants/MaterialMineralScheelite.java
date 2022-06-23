@@ -60,7 +60,7 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
                         SlurryEnum.CALCIUM.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        120, 10000);
+                        200, 51200);
 
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Tungsten.getName() + "_to_metal_oxide",
@@ -81,7 +81,7 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         MineralEnum.Gypsum.getStack(ItemPattern.dust),
                         FluidEnum.HydrochloricAcid.getFluidStack(FluidPattern.fluid, 250),
-                        120, 10000);
+                        200, 51200);
             }
         };
     }

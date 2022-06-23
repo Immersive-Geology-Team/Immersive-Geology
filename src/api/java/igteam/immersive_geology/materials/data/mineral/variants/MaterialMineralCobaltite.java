@@ -67,7 +67,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
                         MetalEnum.Platinum.getStack(ItemPattern.compound_dust, 1),
                         SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
                         200,
-                        10000);
+                        51200);
 
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",

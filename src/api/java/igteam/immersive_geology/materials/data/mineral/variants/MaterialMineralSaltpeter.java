@@ -47,7 +47,7 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust), //We never ever gonna use potassium, so sodium
                         new FluidStack(FluidEnum.NitricAcid.getFluid(FluidPattern.fluid), 125),
-                        240, 12000);
+                        100, 12800);
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Sodium.getName() + "_to_metal_oxide",
                         MetalEnum.Sodium.getStack(ItemPattern.metal_oxide),

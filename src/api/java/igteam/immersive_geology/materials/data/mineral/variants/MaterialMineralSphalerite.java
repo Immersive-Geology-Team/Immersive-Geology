@@ -73,7 +73,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
                         SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        120, 10000);
+                        200, 51200);
 
 
                 IRecipeBuilder.crystalize(this).create(

@@ -49,7 +49,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
                         new FluidStack(FluidEnum.Brine.getFluid(FluidPattern.fluid), 250),
-                        200, 10000);
+                        100, 12800);
 
                 IRecipeBuilder.chemical(this).create(
                         "sodium_oxide_to_hydroxide",
@@ -58,7 +58,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
                         new FluidStack(FluidEnum.SodiumHydroxide.getFluid(FluidPattern.fluid), 250),
-                        240, 12000);
+                        100, 12800);
 
             }
         };
@@ -73,7 +73,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
                         new FluidStack(FluidEnum.HydrochloricAcid.getFluid(FluidPattern.fluid), 125),
-                        240, 12000);
+                        100, 12800);
 
                 IRecipeBuilder.chemical(this).create(
                         "brine_to_acid_and_salt",
@@ -82,7 +82,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         new FluidTagInput(FluidEnum.Brine.getFluidTag(FluidPattern.fluid), 125),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
                         new FluidStack(FluidEnum.HydrochloricAcid.getFluid(FluidPattern.fluid), 125),
-                        240, 12000);
+                        100, 12800);
             }
         };
         new IGProcessingStage(this,"Sodium extraction stage") {

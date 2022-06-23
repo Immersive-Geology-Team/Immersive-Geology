@@ -69,7 +69,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
                         SlurryEnum.TITANIUM.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        250, 10000);
+                        200, 51200);
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_"+getName() + "_to_dust",
@@ -78,7 +78,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Titanium.getStack(ItemPattern.dust, 1),
                         new FluidStack(FluidEnum.Brine.getFluid(FluidPattern.fluid), 500),
-                250, 10000);
+                200, 51200);
             }
         };
     }

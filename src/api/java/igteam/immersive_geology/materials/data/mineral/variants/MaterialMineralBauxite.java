@@ -82,7 +82,7 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
                         MetalEnum.Aluminum.getStack(ItemPattern.compound_dust, 1),
                         new FluidStack(Fluids.EMPTY, 250),
                         200,
-                        10000);
+                        51200);
 
                 IRecipeBuilder.chemical(this).create(
                         "chemical_recipe_" + MetalEnum.Aluminum.getName() + "_to_cryolite_dust",
@@ -92,7 +92,7 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
                         MineralEnum.Cryolite.getStack(ItemPattern.dust, 1),
                         new FluidStack(Fluids.EMPTY, 250),
                         200,
-                        10000);
+                        51200);
 
 
                 //TODO in 1.18 -- chance based output for cryolite

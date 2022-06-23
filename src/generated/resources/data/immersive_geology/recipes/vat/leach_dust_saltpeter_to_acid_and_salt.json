@@ -18,6 +18,6 @@
     "tag": "minecraft:water",
     "amount": 125
   },
-  "time": 240,
-  "energy": 12000
+  "time": 100,
+  "energy": 12800
 }

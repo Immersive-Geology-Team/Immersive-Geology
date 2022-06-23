@@ -76,7 +76,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                     MetalEnum.Vanadium.getStack(ItemPattern.compound_dust, 2),
                     new FluidStack(Fluids.WATER, 250), //to be fair, there should be solution of Na compound dust, but I'm to lazy
                     200,
-                    10000
+                    51200
                 );
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Vanadium.getName() + "_to_metal_oxide",

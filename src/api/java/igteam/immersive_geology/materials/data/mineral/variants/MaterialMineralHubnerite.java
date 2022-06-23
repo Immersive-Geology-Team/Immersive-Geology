@@ -51,7 +51,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
                         SlurryEnum.MANGANESE.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        120, 10000);
+                        200, 51200);
 
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Tungsten.getName() + "_to_metal_oxide",
@@ -78,7 +78,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         ItemStack.EMPTY,
                         SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        120, 10000);
+                        200, 51200);
 
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",

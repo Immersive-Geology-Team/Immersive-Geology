@@ -55,7 +55,7 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 250),
                         MineralEnum.Gypsum.getStack(ItemPattern.dust),
                         new FluidStack(FluidEnum.HydrofluoricAcid.getFluid(FluidPattern.fluid), 125),
-                        120, 10000);
+                        100, 12800);
             }
         };
     }

@@ -12,6 +12,6 @@
     "tag": "forge:fluids/hydrochloric_acid",
     "amount": 125
   },
-  "time": 240,
-  "energy": 12000
+  "time": 200,
+  "energy": 51200
 }

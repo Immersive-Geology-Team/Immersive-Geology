@@ -68,7 +68,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Iron.getStack(ItemPattern.compound_dust),
                         SlurryEnum.CHROMIUM.getType(FluidEnum.NitricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        240, 12000);
+                        200, 51200);
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_"+getName()+"_to_slurry",
@@ -77,7 +77,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 125),
                         ItemStack.EMPTY,
                         SlurryEnum.CHROMIUM.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        240, 12000);
+                        200, 51200);
 
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + getName() + "_to_crystal",

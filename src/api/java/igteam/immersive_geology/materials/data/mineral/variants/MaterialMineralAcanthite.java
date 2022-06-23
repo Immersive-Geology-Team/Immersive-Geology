@@ -84,7 +84,7 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
                     new FluidTagInput(FluidTags.WATER, 250),
                     MetalEnum.Platinum.getStack(ItemPattern.compound_dust),
                     SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-            120, 10000);
+            200, 51200);
 
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",

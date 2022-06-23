@@ -65,7 +65,7 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
                         SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
-                        200, 100000);
+                        200, 51200);
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Nickel.getStack(ItemPattern.crystal),

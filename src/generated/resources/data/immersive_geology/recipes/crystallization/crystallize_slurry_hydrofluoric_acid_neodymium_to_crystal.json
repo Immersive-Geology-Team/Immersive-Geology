@@ -7,6 +7,6 @@
     "tag": "forge:slurrys/hydrofluoric_acid_neodymium",
     "amount": 250
   },
-  "time": 120,
-  "energy": 10000
+  "time": 200,
+  "energy": 51200
 }
