@@ -52,8 +52,7 @@ public class MaterialMetalChromium extends MaterialBaseMetal {
         new IGProcessingStage(this, "Crystal Processing"){
             @Override
             protected void describe() {
-                IRecipeBuilder.crushing(this).create(getName() + "_crystal_to_grit", getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 1000, 1000);
-                IRecipeBuilder.blasting(this).create(getName() + "_grit_to_ingot", getItemTag(ItemPattern.dust), getStack(ItemPattern.ingot));
+
             }
         };
     }

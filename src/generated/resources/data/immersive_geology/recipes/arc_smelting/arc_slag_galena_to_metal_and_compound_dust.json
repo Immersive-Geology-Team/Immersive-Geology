@@ -13,8 +13,8 @@
   "slag": {
     "item": "immersive_geology:compound_dust_silver"
   },
-  "energy": 120000,
-  "time": 100,
+  "energy": 102400,
+  "time": 200,
   "input": {
     "tag": "forge:slags/galena"
   }

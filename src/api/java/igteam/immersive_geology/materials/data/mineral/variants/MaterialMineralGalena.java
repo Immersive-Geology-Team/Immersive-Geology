@@ -69,7 +69,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
                         MetalEnum.Lead.getStack(ItemPattern.ingot),
                         MetalEnum.Silver.getStack(ItemPattern.compound_dust),
                         new IngredientWithSize(Ingredient.fromItems(Items.BONE_MEAL), 1))
-                        .setEnergyTime(120000, 100);
+                        .setEnergyTime(102400, 200);
                 
                 IRecipeBuilder.decompose(this).create("compound_dust_"+ MetalEnum.Silver.getName() + "_to_dust",
                         MetalEnum.Silver.getStack(ItemPattern.dust),

@@ -16,8 +16,8 @@
   "slag": {
     "item": "immersive_geology:dust_cryolite"
   },
-  "energy": 50000,
-  "time": 100,
+  "energy": 102400,
+  "time": 200,
   "input": {
     "tag": "forge:metal_oxides/aluminum"
   }

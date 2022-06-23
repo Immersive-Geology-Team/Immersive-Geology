@@ -97,13 +97,13 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
 
                 //TODO in 1.18 -- chance based output for cryolite
                 IRecipeBuilder.arcSmelting(this).create(
-                                "dust_"+getName()+"_to_ingot",
+                                "metal_oxide_"+MetalEnum.Aluminum.getName()+"_to_ingot",
                                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemPattern.metal_oxide), 1),
                                 MetalEnum.Aluminum.getStack(ItemPattern.ingot),
                                 MineralEnum.Cryolite.getStack(ItemPattern.dust),
                                 new IngredientWithSize(IETags.coalCokeDust, 1),
                                 new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemPattern.dust), 1))
-                        .setEnergyTime(50000, 100);
+                        .setEnergyTime(102400, 200);
 
             }
         };

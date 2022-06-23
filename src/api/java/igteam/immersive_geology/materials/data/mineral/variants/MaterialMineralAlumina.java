@@ -85,7 +85,7 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
                         MineralEnum.Cryolite.getStack(ItemPattern.dust),
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemPattern.dust), 1))
-                        .setEnergyTime(50000, 100);
+                        .setEnergyTime(102400, 200);
             }
         };
     }

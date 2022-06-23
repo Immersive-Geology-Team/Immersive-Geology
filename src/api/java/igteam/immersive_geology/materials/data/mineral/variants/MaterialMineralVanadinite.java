@@ -88,7 +88,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                                 new IngredientWithSize(MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1),
                                 MetalEnum.Vanadium.getStack(ItemPattern.ingot),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
-                        .setEnergyTime(120000, 100);
+                        .setEnergyTime(102400, 200);
             }
         };
     }

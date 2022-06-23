@@ -1,7 +1,10 @@
 package igteam.immersive_geology.materials.data.metal;
 
+import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -106,6 +109,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     IRecipeBuilder.basicSmelting(this).create(
                             getItem(ItemPattern.dust),
                             getItem(ItemPattern.ingot));
+
+                    IRecipeBuilder.arcSmelting(this).create("dust_"+getName() +"_to_ingot",
+                                    new IngredientWithSize(getItemTag(ItemPattern.dust), 1),
+                                    getStack(ItemPattern.ingot),null)
+                            .setEnergyTime(51200, 100);
                 }
             }
         };

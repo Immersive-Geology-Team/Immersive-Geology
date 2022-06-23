@@ -102,7 +102,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                                 new IngredientWithSize(MetalEnum.Thorium.getItemTag(ItemPattern.metal_oxide), 1),
                                 MetalEnum.Thorium.getStack(ItemPattern.dust),null,
                                 new IngredientWithSize( MetalEnum.Zinc.getItemTag(ItemPattern.dust), 1))
-                        .setEnergyTime(120000, 100);
+                        .setEnergyTime(102400, 200);
             }
         };
     }

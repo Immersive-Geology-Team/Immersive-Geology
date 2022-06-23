@@ -57,7 +57,7 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
                                 new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),
                                 MetalEnum.Sodium.getStack(ItemPattern.dust),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
-                        .setEnergyTime(120000, 100);
+                        .setEnergyTime(102400, 200);
             }
         };
     }

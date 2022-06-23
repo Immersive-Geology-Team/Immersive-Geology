@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_thorium"
+  },
+  "input": {
+    "tag": "forge:ingots/thorium"
+  },
+  "time": 500,
+  "energy": 1000
+}

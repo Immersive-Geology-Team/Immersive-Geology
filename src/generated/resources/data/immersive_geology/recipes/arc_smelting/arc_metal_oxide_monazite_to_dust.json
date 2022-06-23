@@ -10,8 +10,8 @@
       "tag": "forge:dusts/zinc"
     }
   ],
-  "energy": 120000,
-  "time": 100,
+  "energy": 102400,
+  "time": 200,
   "input": {
     "tag": "forge:metal_oxides/thorium"
   }

@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_chromium"
+    "item": "immersive_geology:dust_osmium"
   },
   "input": {
-    "tag": "forge:crystals/chromium"
+    "tag": "forge:ingots/osmium"
   },
-  "time": 1000,
+  "time": 500,
   "energy": 1000
 }

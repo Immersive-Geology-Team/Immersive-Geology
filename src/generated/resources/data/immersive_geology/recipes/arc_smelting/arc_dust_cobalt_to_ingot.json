@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersive_geology:ingot_cobalt"
+    }
+  ],
+  "additives": [],
+  "energy": 51200,
+  "time": 100,
+  "input": {
+    "tag": "forge:dusts/cobalt"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_cobalt_from_blasting2"
+    ]
+  },
+  "criteria": {
+    "has_dust_cobalt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:dust_cobalt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_cobalt_from_blasting2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dust_cobalt",
+      "has_the_recipe"
+    ]
+  ]
+}
