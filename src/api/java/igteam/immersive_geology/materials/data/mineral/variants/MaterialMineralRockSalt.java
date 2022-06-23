@@ -92,7 +92,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         "compound_dust_" + MetalEnum.Sodium.getName() + "_to_metal_oxide",
                         MetalEnum.Sodium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
-                        300,12000);
+                        300,153600);
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
                                 new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),

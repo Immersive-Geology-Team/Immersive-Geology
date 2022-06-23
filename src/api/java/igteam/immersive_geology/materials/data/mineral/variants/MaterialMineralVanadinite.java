@@ -82,7 +82,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                         "compound_dust_" + MetalEnum.Vanadium.getName() + "_to_metal_oxide",
                         MetalEnum.Vanadium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Vanadium.getStack(ItemPattern.compound_dust),
-                        200, 10000 );
+                        300, 153600 );
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
                                 new IngredientWithSize(MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1),

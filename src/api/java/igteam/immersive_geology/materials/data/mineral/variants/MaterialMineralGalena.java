@@ -74,7 +74,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create("compound_dust_"+ MetalEnum.Silver.getName() + "_to_dust",
                         MetalEnum.Silver.getStack(ItemPattern.dust),
                         MetalEnum.Silver.getStack(ItemPattern.compound_dust),
-                        120, 120000);
+                        300, 153600);
             }
         };
 

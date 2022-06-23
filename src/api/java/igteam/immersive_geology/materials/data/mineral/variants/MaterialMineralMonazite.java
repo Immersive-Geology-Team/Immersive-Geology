@@ -59,7 +59,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                         "compound_dust_" +MetalEnum.Thorium.getName() + "_to_metal_oxide",
                         MetalEnum.Thorium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Thorium.getStack(ItemPattern.compound_dust),
-                        120, 10000);
+                        300, 153600);
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_" + MetalEnum.Neodymium.getName()+ "_to_compound_dust",
@@ -74,7 +74,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                         "compound_dust_" +MetalEnum.Neodymium.getName() + "_to_metal_oxide",
                         MetalEnum.Neodymium.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Neodymium.getStack(ItemPattern.compound_dust),
-                        120, 10000);
+                        300, 153600);
 
             }
         };

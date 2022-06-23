@@ -72,7 +72,7 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "crushed_ore_" + getName() + "_to_oxide",
                         MetalEnum.Aluminum.getStack(ItemPattern.metal_oxide),
-                        getStack(ItemPattern.crushed_ore), 10000, 200);
+                        getStack(ItemPattern.crushed_ore), 300, 153600);
 
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + getName() + "_to_compound_dust" ,

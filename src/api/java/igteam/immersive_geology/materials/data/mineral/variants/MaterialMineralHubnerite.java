@@ -57,7 +57,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
                         "compound_dust_" + MetalEnum.Tungsten.getName() + "_to_metal_oxide",
                         MetalEnum.Tungsten.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
-                        200, 10000);
+                        300, 153600);
 
                 //To be fair, it should be dust, but I'd like not to bother here
                 IRecipeBuilder.blasting(this).create(

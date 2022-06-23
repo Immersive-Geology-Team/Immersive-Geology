@@ -44,7 +44,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                         "compound_dust_" + MetalEnum.Iron.getName() + "_to_metal_oxide",
                         MetalEnum.Iron.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Iron.getStack(ItemPattern.compound_dust),
-                        300, 10000);
+                        300, 153600);
 
                 IRecipeBuilder.blasting(this).create(
                         "oxide_" + MetalEnum.Iron.getName() + "_to_ingot",
