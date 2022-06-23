@@ -79,34 +79,38 @@ public class IGWorldGeneration {
         configMap.put(feature.toString(), config);
     }
 
+    public static boolean replaceOres = false; //disabled for now
+
     @SubscribeEvent
     @SuppressWarnings("unused")
     public void onBiomeLoad(BiomeLoadingEvent ev) {
         BiomeGenerationSettingsBuilder generation = ev.getGeneration();
 
-        //We still allow Coal, Diamonds and Emeralds to spawn.
-        if(featureBlacklist.isEmpty()) {
-            IGApi.getNewLogger().warn("Blacklisting Metallic Ores from spawning. This includes ores from IE and TC - This is configurable this is a default IG process however");
-            fillFeatureBlacklist();
+        if(replaceOres) {
+            //We still allow Coal, Diamonds and Emeralds to spawn.
+            if (featureBlacklist.isEmpty()) {
+                IGApi.getNewLogger().warn("Blacklisting Metallic Ores from spawning. This includes ores from IE and TC - This is configurable this is a default IG process however");
+                fillFeatureBlacklist();
+            }
+
+            //TODO Make config option to remove ores
+            //Most Overworld Ores use this
+            generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).removeIf((suppliedFeature) -> {
+                ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
+                return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
+            });
+
+            //Most Nether Ores use this
+            generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION).removeIf((suppliedFeature) -> {
+                ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
+                return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
+            });
+
+            DefaultBiomeFeatures.withCommonOverworldBlocks(generation); // re-add non-ore blocks using same stage of underground_ores
+            DefaultBiomeFeatures.withInfestedStone(generation);
+            DefaultBiomeFeatures.withDisks(generation);
+            DefaultBiomeFeatures.withClayDisks(generation);
         }
-
-        //TODO Make config option to remove ores
-        //Most Overworld Ores use this
-        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).removeIf((suppliedFeature) -> {
-            ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
-            return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
-        });
-
-        //Most Nether Ores use this
-        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION).removeIf((suppliedFeature) -> {
-            ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();
-            return featureBlacklist.stream().anyMatch((blacklist) -> (Objects.equals(blacklist.feature.getRegistryName(), loc)));
-        });
-
-        DefaultBiomeFeatures.withCommonOverworldBlocks(generation); // re-add non-ore blocks using same stage of underground_ores
-        DefaultBiomeFeatures.withInfestedStone(generation);
-        DefaultBiomeFeatures.withDisks(generation);
-        DefaultBiomeFeatures.withClayDisks(generation);
 
         //TODO Make Config Option to Disable All IG Ores
         for (ConfiguredFeature<?, ?> ore : features.values()) {

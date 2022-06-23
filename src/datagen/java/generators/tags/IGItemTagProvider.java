@@ -12,6 +12,8 @@ import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -22,6 +24,10 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+
+import static igteam.immersive_geology.tags.IGTags.IG_PATTERN_GROUP_TAGS;
 
 public class IGItemTagProvider extends ItemTagsProvider {
     public IGItemTagProvider(DataGenerator generator, BlockTagsProvider blockProvider, ExistingFileHelper fileHelper) {
@@ -41,6 +47,8 @@ public class IGItemTagProvider extends ItemTagsProvider {
                             Block block = stone.getBlock(pattern, genMaterial);
                             if(block != null) {
                                 tag(itag).add(block.asItem());
+                                ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                                tag(groupTag).add(block.asItem());
                             } else {
                                 log.error("Failed to find block with pattern: " + pattern.getName() + " and materials: " + genMaterial.getName());
                             }
@@ -57,6 +65,8 @@ public class IGItemTagProvider extends ItemTagsProvider {
                             Item item = block.asItem();
                             log.warn("Attempting to bind item tag: " + item + " with " + item.getRegistryName());
                             tag(material.getItemTag(pattern)).add(item);
+                            ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                            tag(groupTag).add(item);
                         } else {
                             log.error("Failed to get Block with singleton Pattern: " + pattern.getName());
                         }
@@ -65,22 +75,25 @@ public class IGItemTagProvider extends ItemTagsProvider {
             }
         }
 
-
-
-
         for (ItemPattern pattern : ItemPattern.values()) {
             for (MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()) {
                 if (metal.hasPattern(pattern)) {
                     switch (pattern) {
                         case dirty_crushed_ore: case ore_chunk: case ore_bit: {
                             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
-                                tag(metal.getItemTag(pattern, stone.get())).add(metal.getItem(pattern, stone));
+                                Item itm = metal.getItem(pattern, stone);
+                                tag(metal.getItemTag(pattern, stone.get())).add(itm);
+                                tag(metal.getItemTag(pattern)).add(itm);
+                                ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                                tag(groupTag).add(itm);
                             }
                         }
                         break;
                         default: {
                             Item item = metal.getItem(pattern);
                             tag(metal.getItemTag(pattern)).add(item);
+                            ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                            tag(groupTag).add(item);
                         }
                     }
                 }
@@ -91,13 +104,21 @@ public class IGItemTagProvider extends ItemTagsProvider {
                     switch (pattern) {
                         case dirty_crushed_ore: case ore_chunk: case ore_bit: {
                             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
-                                tag(mineral.getItemTag(pattern, stone.get())).add(mineral.getItem(pattern, stone));
+                                Item item = mineral.getItem(pattern, stone);
+                                tag(mineral.getItemTag(pattern)).add(item);
+                                tag(mineral.getItemTag(pattern, stone.get())).add(item);
+
+                                ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                                tag(groupTag).add(item);
                             }
                         }
                         break;
                         default: {
                             Item item = mineral.getItem(pattern);
                             tag(mineral.getItemTag(pattern)).add(item);
+
+                            ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                            tag(groupTag).add(item);
                         }
                         break;
                     }
@@ -108,6 +129,9 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 if (stone.hasPattern(pattern)) {
                     Item item = stone.getItem(pattern);
                     tag(stone.getItemTag(pattern)).add(item);
+
+                    ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
+                    tag(groupTag).add(item);
                 }
             }
         }

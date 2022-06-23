@@ -4,7 +4,8 @@ import igteam.immersive_geology.menu.ItemSubGroup;
 
 public enum FluidPattern implements MaterialPattern {
     slurry,
-    fluid;
+    fluid,
+    gas; //Not the best way to implement gas, but it works well enough.
 
     @Override
     public String getName() {

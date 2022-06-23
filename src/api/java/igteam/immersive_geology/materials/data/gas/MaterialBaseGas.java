@@ -2,14 +2,15 @@ package igteam.immersive_geology.materials.data.gas;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.data.MaterialBase;
+import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class MaterialBaseGas extends MaterialBase {
-
+public abstract class MaterialBaseGas extends MaterialBaseFluid {
+    //Gas is a 'special' type of fluid, technically it'd be way better if we had some kind of ability to work with Mekanism Gas, but eh. This will do. ~Muddyakt.
     public MaterialBaseGas(String name) {
         super(name);
     }
@@ -161,6 +162,16 @@ public abstract class MaterialBaseGas extends MaterialBase {
 
     @Override
     protected boolean hasDirtyCrushedOre() {
+        return false;
+    }
+
+    @Override
+    protected boolean isGas() {
+        return true;
+    }
+
+    @Override
+    public boolean hasFlask() {
         return false;
     }
 

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:stone_chunk_stone",
+    "immersive_geology:stone_chunk_granite",
+    "immersive_geology:stone_chunk_netherrack",
+    "immersive_geology:stone_chunk_basalt"
+  ]
+}

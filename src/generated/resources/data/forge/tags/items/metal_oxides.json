@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:metal_oxide_aluminum",
+    "immersive_geology:metal_oxide_copper",
+    "immersive_geology:metal_oxide_iron",
+    "immersive_geology:metal_oxide_nickel",
+    "immersive_geology:metal_oxide_platinum",
+    "immersive_geology:metal_oxide_titanium",
+    "immersive_geology:metal_oxide_tungsten",
+    "immersive_geology:metal_oxide_thorium",
+    "immersive_geology:metal_oxide_vanadium",
+    "immersive_geology:metal_oxide_zinc",
+    "immersive_geology:metal_oxide_sodium",
+    "immersive_geology:metal_oxide_neodymium"
+  ]
+}

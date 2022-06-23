@@ -14,6 +14,7 @@ import com.igteam.immersive_geology.common.block.helpers.IProgress;
 import com.igteam.immersive_geology.common.block.helpers.RevProgressHandler;
 import com.igteam.immersive_geology.common.multiblocks.ReverberationFurnaceMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
+import igteam.immersive_geology.materials.GasEnum;
 import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import igteam.immersive_geology.materials.FluidEnum;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
@@ -370,7 +371,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 output_1.grow(old_count);
                 master.getInventory().set(OUTPUT_SLOT1, output_1);
                 if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
-                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.fill(new FluidStack(GasEnum.SulphurDioxide.getFluid(FluidPattern.gas), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
                 }
                 master.getInventory().get(INPUT_SLOT1).shrink(recipe_1.getInput().getCount());
                 recipe_1_progress = 0;
@@ -415,7 +416,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 output_2.grow(old_count);
                 master.getInventory().set(OUTPUT_SLOT2, output_2);
                 if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
-                    master.gasTank.fill(new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
+                    master.gasTank.fill(new FluidStack(GasEnum.SulphurDioxide.getFluid(FluidPattern.gas), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
                 }
                 master.getInventory().get(INPUT_SLOT2).shrink(recipe_2.getInput().getCount());
                 recipe_2_progress = 0;

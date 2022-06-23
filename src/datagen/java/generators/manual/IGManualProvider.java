@@ -19,6 +19,7 @@ import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
+import igteam.immersive_geology.processing.methods.IGCraftingMethod;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
@@ -121,11 +122,9 @@ public class IGManualProvider implements IDataProvider {
                     m.clearRecipePath();
 
                     if(m.getRecipeType() == RecipeMethod.Crafting) {
-                        crafting.add(m.getLocation());
-                    }
-
-                    if(m.getRecipeType() == RecipeMethod.Crushing) {
-                        crushing.add(m.getLocation());
+                        IGCraftingMethod crft = (IGCraftingMethod) m;
+                        if(crft.getRecipeGroup().equals("wash_dirty_ore"))
+                            crafting.add(m.getLocation());
                     }
                 });
             }

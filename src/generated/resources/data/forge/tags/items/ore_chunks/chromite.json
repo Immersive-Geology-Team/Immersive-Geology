@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_chromite",
+    "immersive_geology:ore_chunk_granite_chromite",
+    "immersive_geology:ore_chunk_netherrack_chromite",
+    "immersive_geology:ore_chunk_basalt_chromite"
+  ]
+}

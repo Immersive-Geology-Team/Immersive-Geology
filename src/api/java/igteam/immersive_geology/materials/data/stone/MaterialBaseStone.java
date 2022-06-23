@@ -15,8 +15,8 @@ public abstract class MaterialBaseStone extends MaterialBase {
     }
 
     @Override
-    public int getColor(MaterialPattern p) {
-        return 0xFFFFFF;
+    public int getColor(MaterialPattern p)  {
+        return (p != BlockPattern.ore && p != ItemPattern.block_item && p != BlockPattern.block) ? colorFunction.apply(p) : 0xFFFFFF;
     }
 
     @Override

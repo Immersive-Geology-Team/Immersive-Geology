@@ -16,6 +16,7 @@ public class MaterialDefaultStone extends MaterialBaseStone {
 
     public MaterialDefaultStone() {
         super("stone");
+        initializeColorMap((p) -> 0x8F8F8F);
     }
 
     @Override
@@ -26,32 +27,6 @@ public class MaterialDefaultStone extends MaterialBaseStone {
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.ALUMINIUM),
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.OXYGEN, 3)
         ));
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-
-        if(p instanceof BlockPattern){
-            BlockPattern b = (BlockPattern) p;
-            switch(b){
-                case ore: case block: return 0xFFFFFF;
-                default: return 0x8F8F8F;
-            }
-        }
-
-        if(p instanceof ItemPattern){
-            ItemPattern i = (ItemPattern) p;
-            switch(i){
-                case block_item: return 0xFFFFFF;
-                default: return 0x8F8F8F;
-            }
-        }
-
-        if(p instanceof FluidPattern){
-
-        }
-
-        return 0xFFFFFF;
     }
 
     @Override

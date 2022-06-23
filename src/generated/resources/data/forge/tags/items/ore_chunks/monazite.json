@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_monazite",
+    "immersive_geology:ore_chunk_granite_monazite",
+    "immersive_geology:ore_chunk_netherrack_monazite",
+    "immersive_geology:ore_chunk_basalt_monazite"
+  ]
+}

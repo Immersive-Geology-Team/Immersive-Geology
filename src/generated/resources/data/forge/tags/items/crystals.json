@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:crystal_chromium",
+    "immersive_geology:crystal_copper",
+    "immersive_geology:crystal_manganese",
+    "immersive_geology:crystal_nickel",
+    "immersive_geology:crystal_silver",
+    "immersive_geology:crystal_cobalt",
+    "immersive_geology:crystal_uranium",
+    "immersive_geology:crystal_thorium",
+    "immersive_geology:crystal_zinc",
+    "immersive_geology:crystal_neodymium",
+    "immersive_geology:crystal_unobtanium"
+  ]
+}

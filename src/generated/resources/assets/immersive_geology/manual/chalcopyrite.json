@@ -3,16 +3,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_chalcopyrite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_chalcopyrite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_chalcopyrite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_chalcopyrite"
+        "recipe": "immersive_geology:shapeless/craft_chalcopyrite_crushed_ore_chalcopyrite"
       }
     ]
   },

@@ -276,6 +276,12 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                     IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
                             getItemTag(ItemPattern.ore_chunk, stone.get()),  stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()),1000, 500);
                 }
+
+
+                IRecipeBuilder.crafting(this)
+                        .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore),  getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore))
+                        .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk));
+
             }
         };
 

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_anatase",
+    "immersive_geology:ore_bit_granite_anatase",
+    "immersive_geology:ore_bit_netherrack_anatase",
+    "immersive_geology:ore_bit_basalt_anatase"
+  ]
+}

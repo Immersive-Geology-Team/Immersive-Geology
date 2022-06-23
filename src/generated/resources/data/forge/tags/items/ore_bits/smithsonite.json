@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_smithsonite",
+    "immersive_geology:ore_bit_granite_smithsonite",
+    "immersive_geology:ore_bit_netherrack_smithsonite",
+    "immersive_geology:ore_bit_basalt_smithsonite"
+  ]
+}

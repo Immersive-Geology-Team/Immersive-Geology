@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:stone_bit_stone",
+    "immersive_geology:stone_bit_granite",
+    "immersive_geology:stone_bit_netherrack",
+    "immersive_geology:stone_bit_basalt"
+  ]
+}

@@ -18,32 +18,7 @@ import java.util.LinkedHashSet;
 public class MaterialGranite extends MaterialBaseStone {
     public MaterialGranite() {
         super("granite");
-    }
-
-    @Override
-    public int getColor(MaterialPattern p) {
-
-        if(p instanceof BlockPattern){
-            BlockPattern b = (BlockPattern) p;
-            switch(b){
-                case ore: case block: return 0xFFFFFF;
-                default: return 0x986B59;
-            }
-        }
-
-        if(p instanceof ItemPattern){
-            ItemPattern i = (ItemPattern) p;
-            switch(i){
-                case block_item: return 0xFFFFFF;
-                default: return 0x986B59;
-            }
-        }
-
-        if(p instanceof FluidPattern){
-
-        }
-
-        return 0xFFFFFF;
+        initializeColorMap((p) -> 0x986B59);
     }
 
     @Override

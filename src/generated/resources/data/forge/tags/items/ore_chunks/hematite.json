@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_hematite",
+    "immersive_geology:ore_chunk_granite_hematite",
+    "immersive_geology:ore_chunk_netherrack_hematite",
+    "immersive_geology:ore_chunk_basalt_hematite"
+  ]
+}

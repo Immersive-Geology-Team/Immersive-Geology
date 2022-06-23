@@ -58,6 +58,13 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
+            @Override
+            protected void describe() {
+                //TODO Implement a way to turn IE Bauxite into Ore Chunks - We do not want to override the stuff IE normally does. Try to keep it separate.
+            }
+        };
+
         new IGProcessingStage(this, IGStageDesignation.purification) {
             @Override
             protected void describe() {

@@ -33,6 +33,8 @@ public class IGTags {
     public static HashMap<BlockPattern, HashMap<String, ITag.INamedTag<Block>>> IG_BLOCK_TAGS = new HashMap<>();
     public static HashMap<FluidPattern, HashMap<String, ITag.INamedTag<Fluid>>> IG_FLUID_TAGS = new HashMap<>();
 
+    public static HashMap<MaterialPattern, ITag.INamedTag<Item>> IG_PATTERN_GROUP_TAGS = new HashMap<>();
+
     public static void initialize(){
         logger.log(Level.INFO, "Immersive Geology: Initializing Tags");
 
@@ -48,10 +50,13 @@ public class IGTags {
                             for (StoneEnum stone : StoneEnum.values()) {
                                 createWrapperForPattern(pattern,  stone.get(), metal.get());
                             }
+                            createWrapperForPattern(pattern, metal.get());
+                            createWrapperForPatternGroup(pattern);
                         }
                         break;
                         default: {
                             createWrapperForPattern(pattern, metal.get());
+                            createWrapperForPatternGroup(pattern);
                         }
                     }
                 }
@@ -60,6 +65,7 @@ public class IGTags {
             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if(stone.hasPattern(pattern)){
                     createWrapperForPattern(pattern, stone.get());
+                    createWrapperForPatternGroup(pattern);
                 }
             }
 
@@ -72,12 +78,14 @@ public class IGTags {
                             for (StoneEnum stone : StoneEnum.values()) {
                                 createWrapperForPattern(pattern,  stone.get(), mineral.get());
                             }
+                            createWrapperForPattern(pattern, mineral.get());
                         }
                         break;
                         default: {
                             createWrapperForPattern(pattern, mineral.get());
                         }
                     }
+                    createWrapperForPatternGroup(pattern);
                 }
             }
         }
@@ -111,6 +119,7 @@ public class IGTags {
                         for (StoneEnum stone : StoneEnum.values()) {
                             createWrapperForPattern(pattern, stone.get(), genMaterial.get());
                         }
+                        createWrapperForPatternGroup(pattern);
                     }
                 }
             }
@@ -119,12 +128,19 @@ public class IGTags {
                 if(pattern != BlockPattern.ore) {
                     if (material.hasPattern(pattern)) {
                         createWrapperForPattern(pattern, material.get());
+                        createWrapperForPatternGroup(pattern);
                     }
                 }
             }
         }
 
         logger.log(Level.INFO, "Immersive Geology: Finished Initializing Tags");
+    }
+
+    private static void createWrapperForPatternGroup(MaterialPattern pattern) {
+        String suffix = pattern.hasSuffix() ? "s" : "s";
+        ResourceLocation loc = forgeLoc(pattern.getName() + suffix);
+        IG_PATTERN_GROUP_TAGS.putIfAbsent(pattern, ItemTags.makeWrapperTag(loc.toString()));
     }
 
     private static void createWrapperForPattern(MaterialPattern p, MaterialBase... materials){

@@ -1,6 +1,7 @@
 package com.igteam.immersive_geology.common.integrations;
 
 import igteam.immersive_geology.main.IGMultiblockProvider;
+import igteam.immersive_geology.materials.GasEnum;
 import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -42,9 +43,9 @@ public class RoastingRecipeCategory extends IGRecipeCategory<ReverberationRecipe
     public void setIngredients(ReverberationRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(recipe.input.getMatchingStacks()));
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
-        //BAD IDEA
+        //BAD IDEA - ((23/06/2022) no idea what this means now. ~Muddykat)
         ingredients.setOutput(VanillaTypes.FLUID,
-                new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid).getFluid(),
+                new FluidStack(GasEnum.SulphurDioxide.getFluid(FluidPattern.gas),
                         (int) (recipe.getWasteMultipler() * 125)));
     }
 

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_chalcocite",
+    "immersive_geology:ore_chunk_granite_chalcocite",
+    "immersive_geology:ore_chunk_netherrack_chalcocite",
+    "immersive_geology:ore_chunk_basalt_chalcocite"
+  ]
+}
