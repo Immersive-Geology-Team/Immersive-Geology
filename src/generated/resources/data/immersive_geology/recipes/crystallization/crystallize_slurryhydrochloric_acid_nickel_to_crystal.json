@@ -7,6 +7,6 @@
     "tag": "forge:slurrys/hydrochloric_acid_nickel",
     "amount": 250
   },
-  "time": 120,
-  "energy": 10000
+  "time": 300,
+  "energy": 38400
 }

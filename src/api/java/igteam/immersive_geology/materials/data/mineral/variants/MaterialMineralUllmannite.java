@@ -70,7 +70,7 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
                         "slurry" + SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Nickel.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        120, 10000);
+                        300, 38400);
             }
         };
     }

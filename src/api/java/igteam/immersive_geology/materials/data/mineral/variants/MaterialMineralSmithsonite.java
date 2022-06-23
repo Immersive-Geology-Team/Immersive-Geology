@@ -66,7 +66,7 @@ public class MaterialMineralSmithsonite extends MaterialBaseMineral {
                         "slurry_" + SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Zinc.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        300,12000);
+                        300,38400);
             }
         };
     }

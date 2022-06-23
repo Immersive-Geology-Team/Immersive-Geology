@@ -95,7 +95,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                         "slurry_" + SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrofluoricAcid).getName() + "_to_crystal",
                         MetalEnum.Neodymium.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrofluoricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        200, 51200);
+                        300, 38400);
 
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",

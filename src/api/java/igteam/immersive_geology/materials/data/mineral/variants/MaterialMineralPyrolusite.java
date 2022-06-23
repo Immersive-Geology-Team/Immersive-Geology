@@ -58,7 +58,7 @@ public class MaterialMineralPyrolusite extends MaterialBaseMineral {
                         "slurry_" + SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Manganese.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        120, 10000);
+                        300, 38400);
 
             }
         };

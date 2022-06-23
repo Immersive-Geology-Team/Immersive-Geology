@@ -83,7 +83,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                         "slurry_" + getName() + "_to_crystal",
                         MetalEnum.Chromium.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.CHROMIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        240, 12000);
+                        300, 38400);
             }
         };
     }

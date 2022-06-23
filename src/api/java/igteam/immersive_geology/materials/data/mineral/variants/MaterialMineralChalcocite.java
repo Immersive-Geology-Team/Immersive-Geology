@@ -97,7 +97,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                         "slurry" + SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Copper.getStack(ItemPattern.crystal),
                         new FluidTagInput(SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
-                        120, 10000);
+                        300, 38400);
 
                 IRecipeBuilder.separating(this).create(
                         MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
