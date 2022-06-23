@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shapeless/craft_netherrack_iron_dirty_crushed_ore_netherrack_iron"
+    ]
+  },
+  "criteria": {
+    "has_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ore_chunks/netherrack_iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shapeless/craft_netherrack_iron_dirty_crushed_ore_netherrack_iron"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}

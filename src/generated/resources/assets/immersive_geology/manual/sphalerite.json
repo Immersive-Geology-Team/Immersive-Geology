@@ -3,16 +3,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_sphalerite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_sphalerite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_sphalerite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_sphalerite"
+        "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
       }
     ]
   },

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_unobtania",
+    "immersive_geology:ore_chunk_granite_unobtania",
+    "immersive_geology:ore_chunk_netherrack_unobtania",
+    "immersive_geology:ore_chunk_basalt_unobtania"
+  ]
+}

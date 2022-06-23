@@ -170,8 +170,8 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForFluidTypes(MaterialInterface<?> m, FluidPattern p){
-        IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), false), p);
-        if(m.get().hasFlask()){
+        IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), (p == FluidPattern.gas)), p);
+        if(m.get().hasFlask() && (p != FluidPattern.gas)){ //no flask can hold the gas!
             register(fluid.getFluidContainer());
         }
         register(fluid);

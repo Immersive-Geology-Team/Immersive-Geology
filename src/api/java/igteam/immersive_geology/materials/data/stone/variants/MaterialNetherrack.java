@@ -28,11 +28,6 @@ public class MaterialNetherrack extends MaterialBaseStone {
     }
 
     @Override
-    public int getColor(MaterialPattern p) {
-        return 0x5C221D;
-    }
-
-    @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;

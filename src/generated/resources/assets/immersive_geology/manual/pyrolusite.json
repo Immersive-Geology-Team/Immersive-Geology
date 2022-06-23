@@ -3,16 +3,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_pyrolusite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_pyrolusite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_pyrolusite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_pyrolusite"
+        "recipe": "immersive_geology:shapeless/craft_pyrolusite_crushed_ore_pyrolusite"
       }
     ]
   },

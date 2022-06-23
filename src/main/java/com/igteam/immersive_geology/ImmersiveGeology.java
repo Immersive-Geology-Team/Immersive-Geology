@@ -52,7 +52,6 @@ public class ImmersiveGeology
 {
 	private static final Logger LOGGER = getNewLogger();
 	public static Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
-
 	IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 	IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 

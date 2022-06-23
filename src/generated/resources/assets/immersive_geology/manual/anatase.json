@@ -14,16 +14,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_anatase"
+        "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
       }
     ]
   }

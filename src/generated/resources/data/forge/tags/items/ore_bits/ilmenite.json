@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_ilmenite",
+    "immersive_geology:ore_bit_granite_ilmenite",
+    "immersive_geology:ore_bit_netherrack_ilmenite",
+    "immersive_geology:ore_bit_basalt_ilmenite"
+  ]
+}

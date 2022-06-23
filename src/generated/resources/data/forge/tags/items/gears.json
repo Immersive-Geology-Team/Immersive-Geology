@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:gear_aluminum",
+    "immersive_geology:gear_bronze",
+    "immersive_geology:gear_chromium",
+    "immersive_geology:gear_copper",
+    "immersive_geology:gear_gold",
+    "immersive_geology:gear_iron",
+    "immersive_geology:gear_lead",
+    "immersive_geology:gear_manganese",
+    "immersive_geology:gear_nickel",
+    "immersive_geology:gear_platinum",
+    "immersive_geology:gear_silver",
+    "immersive_geology:gear_cobalt",
+    "immersive_geology:gear_uranium",
+    "immersive_geology:gear_tin",
+    "immersive_geology:gear_titanium",
+    "immersive_geology:gear_tungsten",
+    "immersive_geology:gear_thorium",
+    "immersive_geology:gear_vanadium",
+    "immersive_geology:gear_zinc",
+    "immersive_geology:gear_sodium",
+    "immersive_geology:gear_osmium",
+    "immersive_geology:gear_neodymium",
+    "immersive_geology:gear_unobtanium"
+  ]
+}

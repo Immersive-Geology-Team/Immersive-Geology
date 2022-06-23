@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_anatase",
+    "immersive_geology:ore_chunk_granite_anatase",
+    "immersive_geology:ore_chunk_netherrack_anatase",
+    "immersive_geology:ore_chunk_basalt_anatase"
+  ]
+}

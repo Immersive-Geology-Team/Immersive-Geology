@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_galena",
+    "immersive_geology:ore_chunk_granite_galena",
+    "immersive_geology:ore_chunk_netherrack_galena",
+    "immersive_geology:ore_chunk_basalt_galena"
+  ]
+}

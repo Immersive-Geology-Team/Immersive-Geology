@@ -14,16 +14,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_bauxite"
+        "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
       }
     ]
   }

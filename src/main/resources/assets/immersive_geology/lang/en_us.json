@@ -92,8 +92,10 @@
   "block.immersive_geology.reverberation_furnace" : "Reverberation Furnace",
 
   "fluid.immersive_geology.fluid": "%s",
+  "fluid.immersive_geology.gas": "%s",
   "fluid.immersive_geology.slurry": "%s %s",
 
+  "material.immersive_geology.sulphur_dioxide": "Sulphur Dioxide",
   "material.immersive_geology.vanilla": "Stone",
   "material.immersive_geology.marble": "Marble",
   "material.immersive_geology.pegmatite": "Pegmatite",

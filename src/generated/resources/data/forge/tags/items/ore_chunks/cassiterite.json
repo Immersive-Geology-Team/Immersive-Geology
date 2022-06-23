@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_cassiterite",
+    "immersive_geology:ore_chunk_granite_cassiterite",
+    "immersive_geology:ore_chunk_netherrack_cassiterite",
+    "immersive_geology:ore_chunk_basalt_cassiterite"
+  ]
+}

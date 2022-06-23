@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shapeless/craft_granite_gold_dirty_crushed_ore_granite_gold"
+    ]
+  },
+  "criteria": {
+    "has_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ore_chunks/granite_gold"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shapeless/craft_granite_gold_dirty_crushed_ore_granite_gold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}

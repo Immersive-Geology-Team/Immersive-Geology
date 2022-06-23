@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_uraninite",
+    "immersive_geology:ore_bit_granite_uraninite",
+    "immersive_geology:ore_bit_netherrack_uraninite",
+    "immersive_geology:ore_bit_basalt_uraninite"
+  ]
+}

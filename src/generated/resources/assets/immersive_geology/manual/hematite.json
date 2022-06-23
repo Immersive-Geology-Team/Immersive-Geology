@@ -14,16 +14,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_stone_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_granite_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_netherrack_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_dirty_crushed_ore_basalt_hematite"
+        "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
       }
     ]
   }

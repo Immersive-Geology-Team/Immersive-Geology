@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wash_dirty_ore",
+  "ingredients": [
+    {
+      "tag": "forge:dirty_crushed_ores/cuprite"
+    },
+    {
+      "tag": "forge:dirty_crushed_ores/cuprite"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:crushed_ore_cuprite"
+  }
+}

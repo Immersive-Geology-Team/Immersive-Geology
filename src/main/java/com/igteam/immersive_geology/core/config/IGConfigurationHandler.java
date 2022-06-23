@@ -102,6 +102,32 @@ public class IGConfigurationHandler {
                 int heightMod = container.getDimension().equals(MaterialSourceWorld.nether) ? 2 : 1;
                 switch (container.get().getRarity()) {
                     case COMMON:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 6, 12, 1, Math.min(255, 140 * heightMod), 10  * heightMod, 9000)); // 0.0010% Chance of successful Spawn (x / 10000)
+                        break;
+                    case UNCOMMON:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 5, 10, 1, Math.min(255,140 * heightMod), 8  * heightMod, 8000));
+                        break;
+                    case RARE:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 4,8, 1, Math.min(255, 90 * heightMod), 6 * heightMod, 6000)); // 70% chance to spawn
+                        break;
+                    case EPIC:
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 3, 6,1, Math.min(255, 60 * heightMod), 4 * heightMod, 5000)); // 50% Chance of successful Spawn
+                        break;
+                    default:
+                        ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
+                        container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
+                        break;
+                }
+            }
+            builder.pop();
+        }
+    }
+
+
+    /*
+    old settings for large ore veins
+            switch (container.get().getRarity()) {
+                    case COMMON:
                         container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 240, 1, Math.min(255, 140 * heightMod), 3  * heightMod, 7  * heightMod)); // 0.0010% Chance of successful Spawn
                         break;
                     case UNCOMMON:
@@ -118,8 +144,5 @@ public class IGConfigurationHandler {
                         container.get().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
                         break;
                 }
-            }
-            builder.pop();
-        }
-    }
+     */
 }

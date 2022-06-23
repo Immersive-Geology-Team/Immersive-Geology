@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shapeless/craft_granite_acanthite_dirty_crushed_ore_granite_acanthite"
+    ]
+  },
+  "criteria": {
+    "has_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ore_chunks/granite_acanthite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shapeless/craft_granite_acanthite_dirty_crushed_ore_granite_acanthite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}

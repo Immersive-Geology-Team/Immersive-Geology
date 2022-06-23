@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_chalcopyrite",
+    "immersive_geology:ore_bit_granite_chalcopyrite",
+    "immersive_geology:ore_bit_netherrack_chalcopyrite",
+    "immersive_geology:ore_bit_basalt_chalcopyrite"
+  ]
+}

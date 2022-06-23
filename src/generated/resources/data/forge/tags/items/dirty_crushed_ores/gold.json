@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:dirty_crushed_ore_stone_gold",
+    "immersive_geology:dirty_crushed_ore_granite_gold",
+    "immersive_geology:dirty_crushed_ore_netherrack_gold",
+    "immersive_geology:dirty_crushed_ore_basalt_gold"
+  ]
+}

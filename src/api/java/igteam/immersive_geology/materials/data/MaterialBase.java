@@ -470,12 +470,16 @@ public abstract class MaterialBase {
                     return isFluid();
                 case slurry:
                     return isSlurry();
+                case gas:
+                    return isGas();
             }
             ;
         }
 
         return false;
     }
+
+    protected boolean isGas() {return false;}
 
     protected boolean hasSheetmetalBlock() {return false;}
 

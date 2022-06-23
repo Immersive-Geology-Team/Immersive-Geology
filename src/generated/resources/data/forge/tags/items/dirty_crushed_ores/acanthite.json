@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:dirty_crushed_ore_stone_acanthite",
+    "immersive_geology:dirty_crushed_ore_granite_acanthite",
+    "immersive_geology:dirty_crushed_ore_netherrack_acanthite",
+    "immersive_geology:dirty_crushed_ore_basalt_acanthite"
+  ]
+}

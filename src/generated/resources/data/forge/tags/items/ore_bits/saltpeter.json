@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_saltpeter",
+    "immersive_geology:ore_bit_granite_saltpeter",
+    "immersive_geology:ore_bit_netherrack_saltpeter",
+    "immersive_geology:ore_bit_basalt_saltpeter"
+  ]
+}

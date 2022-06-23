@@ -28,11 +28,6 @@ public class MaterialBassalt extends MaterialBaseStone {
     }
 
     @Override
-    public int getColor(MaterialPattern p) {
-        return 0x35302C;
-    }
-
-    @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern) {
         if(pattern instanceof BlockPattern){
             BlockPattern b = (BlockPattern) pattern;

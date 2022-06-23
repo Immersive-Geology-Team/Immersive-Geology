@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:slag_acanthite",
+    "immersive_geology:slag_chalcocite",
+    "immersive_geology:slag_cobaltite",
+    "immersive_geology:slag_chalcopyrite",
+    "immersive_geology:slag_ferberite",
+    "immersive_geology:slag_sphalerite",
+    "immersive_geology:slag_galena",
+    "immersive_geology:slag_vanadinite"
+  ]
+}

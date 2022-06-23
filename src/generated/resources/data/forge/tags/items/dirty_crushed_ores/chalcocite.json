@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:dirty_crushed_ore_stone_chalcocite",
+    "immersive_geology:dirty_crushed_ore_granite_chalcocite",
+    "immersive_geology:dirty_crushed_ore_netherrack_chalcocite",
+    "immersive_geology:dirty_crushed_ore_basalt_chalcocite"
+  ]
+}
