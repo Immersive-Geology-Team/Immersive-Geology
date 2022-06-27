@@ -3,8 +3,10 @@ package generators.tags;
 import blusunrize.immersiveengineering.api.Lib;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.materials.FluidEnum;
+import igteam.immersive_geology.materials.GasEnum;
 import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.gas.MaterialBaseGas;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
@@ -28,13 +30,21 @@ public class IGFluidTagProvider extends FluidTagsProvider
     protected void registerTags()
     {
         log.info("Fluid Tag Registration");
-
-        for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
-            for (FluidPattern pattern : FluidPattern.values()) {
+        for (FluidPattern pattern : FluidPattern.values()) {
+            for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
                 if (fluid.hasPattern(pattern)) {
                     Fluid fluidBlock = fluid.getFluid(pattern);
                     if (fluidBlock != null) {
                         getOrCreateBuilder(fluid.getFluidTag(pattern)).add(fluidBlock);
+                    }
+                }
+            }
+
+            for (MaterialInterface<MaterialBaseGas> gas : GasEnum.values()) {
+                if (gas.hasPattern(pattern)) {
+                    Fluid fluidBlock = gas.getFluid(pattern);
+                    if (fluidBlock != null) {
+                        getOrCreateBuilder(gas.getFluidTag(pattern)).add(fluidBlock);
                     }
                 }
             }

@@ -1,10 +1,13 @@
 package com.igteam.immersive_geology.common.world.feature;
 
+import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.world.helper.SimplexNoise;
 import com.mojang.serialization.Codec;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
+import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,6 +25,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import org.apache.logging.log4j.Logger;
 
 import java.util.BitSet;
+import java.util.Objects;
 import java.util.Random;
 
 public class IGOreFeature extends OreFeature {
@@ -137,7 +141,7 @@ public class IGOreFeature extends OreFeature {
                                             blockpos$mutable.setPos(i2, j2, k2);
                                             double noiseValCheck = SimplexNoise.noise(i2, j2, k2);
                                             if(noiseValCheck > -0.5){
-                                                replaceOreForDimension(ore, config.sourceDimension, blockpos$mutable, worldIn);
+                                                replaceOreForDimension(ore, blockpos$mutable, worldIn);
                                             }
                                             ++i;
                                         }
@@ -153,20 +157,28 @@ public class IGOreFeature extends OreFeature {
         return i > 0;
     }
 
-    private void replaceOreForDimension(BlockState ore, MaterialSourceWorld sourceDimension, BlockPos position, IWorld worldIn) {
-        if(getSourceStone(ore, sourceDimension, position, worldIn)) {
+    private void replaceOreForDimension(BlockState ore, BlockPos position, IWorld worldIn) {
+        if(getSourceStone(ore, position, worldIn)) {
             worldIn.setBlockState(position, ore, 2);
         }
     }
 
-    private boolean getSourceStone(BlockState ore, MaterialSourceWorld sourceDimension, BlockPos position, IWorld world) {
+    private boolean getSourceStone(BlockState ore, BlockPos position, IWorld world) {
 
-        DimensionType currentDim = world.getDimensionType();
+        BlockState worldState = world.getBlockState(position);
 
-        boolean isEndDimension = currentDim.doesHasDragonFight();
-        boolean isNetherDimension = currentDim.getHasCeiling();
-        boolean isOverworldDimension = currentDim.doesBedWork();
+        try {
+            if (ore.getBlock() instanceof IGOreBlock) {
+                IGOreBlock oreBlock = (IGOreBlock) ore.getBlock();
+                MaterialInterface<?> stoneMaterial = oreBlock.getMaterial(MaterialTexture.base);
+                String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
 
+                
+                return worldKey.equals(stoneMaterial.getName());
+            }
+        } catch (Exception exception){
+            IGApi.getNewLogger().error("Failed To Generate Ore: " + exception.getMessage());
+        }
 
         return false;
     }
