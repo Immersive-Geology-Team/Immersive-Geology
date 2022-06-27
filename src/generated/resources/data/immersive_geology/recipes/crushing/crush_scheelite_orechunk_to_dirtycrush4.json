@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_scheelite"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_scheelite"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_scheelite"
+    "tag": "forge:ore_chunks/blackstone_scheelite"
   },
   "time": 200,
   "energy": 6000

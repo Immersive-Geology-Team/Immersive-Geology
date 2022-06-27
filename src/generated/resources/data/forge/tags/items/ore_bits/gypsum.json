@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_gypsum",
     "immersive_geology:ore_bit_granite_gypsum",
     "immersive_geology:ore_bit_netherrack_gypsum",
-    "immersive_geology:ore_bit_basalt_gypsum"
+    "immersive_geology:ore_bit_blackstone_gypsum",
+    "immersive_geology:ore_bit_end_stone_gypsum"
   ]
 }

@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_monazite",
+    "item": "immersive_geology:ore_chunk_blackstone_monazite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_monazite"
+    "tag": "forge:ores/blackstone_monazite"
   },
   "time": 200,
   "energy": 6000

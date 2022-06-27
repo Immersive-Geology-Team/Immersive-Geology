@@ -42,7 +42,7 @@ public class IGWorldGeneration {
                     if(stonetype.generateOreFor(container)) {
                         Block block = stonetype.getBlock(BlockPattern.ore, container);
                         if (block != null) {
-                            addOreGen(container, container.getName(), container.getGenerationConfig());
+                            addOreGen(container, stonetype, container.getName(), container.getGenerationConfig());
                         } else {
                             IGApi.getNewLogger().warn("Failed to find Ore from: " + container.getName() + " and " + StoneEnum.Stone.getName());
                         }
@@ -54,7 +54,7 @@ public class IGWorldGeneration {
         }
     }
 
-    private static void fillFeatureBlacklist() {
+    private static void fillFeatureBlacklist() { //Probably going the way of the DODO ~Muddykat
         featureBlacklist.add(Features.ORE_GOLD);
         featureBlacklist.add(Features.ORE_IRON);
         featureBlacklist.add(Features.ORE_GOLD_EXTRA);
@@ -66,12 +66,13 @@ public class IGWorldGeneration {
 
     static Map<String, IGOreConfig> configMap = new HashMap<>();
 
-    public static void addOreGen(MaterialInterface<?> oreType, String name, IGOreConfig config)
+    public static void addOreGen(MaterialInterface<?> oreType, MaterialInterface<?> stoneType, String name, IGOreConfig config)
     {
         ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
-                        oreType.getDimension().equals(MaterialSourceWorld.overworld) ? OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD : OreFeatureConfig.FillerBlockType.NETHERRACK,
+                        oreType.getDimension(),
                         oreType,
+                        stoneType,
                         config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);

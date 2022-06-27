@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "crush_ore_chunks",
+  "ingredients": [
+    {
+      "tag": "forge:ore_chunks/end_stone_gypsum"
+    },
+    {
+      "tag": "forge:ore_chunks/end_stone_gypsum"
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_end_stone_gypsum"
+  }
+}

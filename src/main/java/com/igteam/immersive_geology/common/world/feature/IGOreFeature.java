@@ -4,13 +4,17 @@ import com.igteam.immersive_geology.common.world.helper.SimplexNoise;
 import com.mojang.serialization.Codec;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.multiplayer.ClientChunkProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.provider.NetherBiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.OreFeature;
@@ -56,6 +60,7 @@ public class IGOreFeature extends OreFeature {
             }
         }
 
+
         return false;
     }
 
@@ -69,10 +74,7 @@ public class IGOreFeature extends OreFeature {
         int j = (int) Math.floor(Math.random()*(config.maxSize-config.minSize+1)+config.minSize);
         double[] adouble = new double[j * 4];
 
-        BlockState granteOre = StoneEnum.Granite.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
-        BlockState stoneOre = StoneEnum.Stone.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
-        BlockState netherrackOre = StoneEnum.Netherrack.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
-        BlockState basaltOre = StoneEnum.Netherrack.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
+        BlockState ore = config.stoneType.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
@@ -135,18 +137,7 @@ public class IGOreFeature extends OreFeature {
                                             blockpos$mutable.setPos(i2, j2, k2);
                                             double noiseValCheck = SimplexNoise.noise(i2, j2, k2);
                                             if(noiseValCheck > -0.5){
-                                                BlockState worldState = worldIn.getBlockState(blockpos$mutable);
-                                                if (config.target.test(worldState, random)) {
-                                                    if(worldState.getBlock().equals(Blocks.NETHERRACK)){ //TODO Not a very 'nice' way of doing this, but it works well enough.
-                                                        worldIn.setBlockState(blockpos$mutable, netherrackOre, 2);
-                                                    } else if (worldState.getBlock().equals(Blocks.GRANITE)) {
-                                                        worldIn.setBlockState(blockpos$mutable, granteOre, 2);
-                                                    } else if (worldState.getBlock().equals(Blocks.BASALT)) {
-                                                        worldIn.setBlockState(blockpos$mutable, basaltOre, 2);
-                                                    } else {
-                                                        worldIn.setBlockState(blockpos$mutable, stoneOre, 2);
-                                                    }
-                                                }
+                                                replaceOreForDimension(ore, config.sourceDimension, blockpos$mutable, worldIn);
                                             }
                                             ++i;
                                         }
@@ -160,5 +151,23 @@ public class IGOreFeature extends OreFeature {
         }
 
         return i > 0;
+    }
+
+    private void replaceOreForDimension(BlockState ore, MaterialSourceWorld sourceDimension, BlockPos position, IWorld worldIn) {
+        if(getSourceStone(ore, sourceDimension, position, worldIn)) {
+            worldIn.setBlockState(position, ore, 2);
+        }
+    }
+
+    private boolean getSourceStone(BlockState ore, MaterialSourceWorld sourceDimension, BlockPos position, IWorld world) {
+
+        DimensionType currentDim = world.getDimensionType();
+
+        boolean isEndDimension = currentDim.doesHasDragonFight();
+        boolean isNetherDimension = currentDim.getHasCeiling();
+        boolean isOverworldDimension = currentDim.doesBedWork();
+
+
+        return false;
     }
 }

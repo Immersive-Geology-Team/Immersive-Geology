@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_alumina",
     "immersive_geology:ore_chunk_granite_alumina",
     "immersive_geology:ore_chunk_netherrack_alumina",
-    "immersive_geology:ore_chunk_basalt_alumina"
+    "immersive_geology:ore_chunk_blackstone_alumina",
+    "immersive_geology:ore_chunk_end_stone_alumina"
   ]
 }

@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_chalcopyrite",
+    "item": "immersive_geology:ore_chunk_blackstone_chalcopyrite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_chalcopyrite"
+    "tag": "forge:ores/blackstone_chalcopyrite"
   },
   "time": 200,
   "energy": 6000

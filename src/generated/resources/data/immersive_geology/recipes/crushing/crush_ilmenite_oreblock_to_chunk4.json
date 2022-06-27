@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_ilmenite",
+    "item": "immersive_geology:ore_chunk_blackstone_ilmenite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_ilmenite"
+    "tag": "forge:ores/blackstone_ilmenite"
   },
   "time": 200,
   "energy": 6000

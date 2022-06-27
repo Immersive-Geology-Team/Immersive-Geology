@@ -4,15 +4,15 @@
     {
       "chance": 0.33,
       "output": {
-        "tag": "forge:ore_bits/basalt_silver"
+        "tag": "forge:ore_bits/blackstone_silver"
       }
     }
   ],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_silver"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_silver"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_silver"
+    "tag": "forge:ore_chunks/blackstone_silver"
   },
   "time": 200,
   "energy": 6000

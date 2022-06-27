@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_ullmannite",
     "immersive_geology:ore_chunk_granite_ullmannite",
     "immersive_geology:ore_chunk_netherrack_ullmannite",
-    "immersive_geology:ore_chunk_basalt_ullmannite"
+    "immersive_geology:ore_chunk_blackstone_ullmannite",
+    "immersive_geology:ore_chunk_end_stone_ullmannite"
   ]
 }

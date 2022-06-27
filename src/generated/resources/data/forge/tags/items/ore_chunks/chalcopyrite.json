@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_chalcopyrite",
     "immersive_geology:ore_chunk_granite_chalcopyrite",
     "immersive_geology:ore_chunk_netherrack_chalcopyrite",
-    "immersive_geology:ore_chunk_basalt_chalcopyrite"
+    "immersive_geology:ore_chunk_blackstone_chalcopyrite",
+    "immersive_geology:ore_chunk_end_stone_chalcopyrite"
   ]
 }

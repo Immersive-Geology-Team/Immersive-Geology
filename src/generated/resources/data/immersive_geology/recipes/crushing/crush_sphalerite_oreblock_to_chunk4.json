@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_sphalerite",
+    "item": "immersive_geology:ore_chunk_blackstone_sphalerite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_sphalerite"
+    "tag": "forge:ores/blackstone_sphalerite"
   },
   "time": 200,
   "energy": 6000

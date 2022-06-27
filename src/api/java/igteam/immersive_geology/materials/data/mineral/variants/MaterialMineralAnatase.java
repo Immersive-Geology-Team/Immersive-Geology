@@ -7,6 +7,7 @@ import igteam.immersive_geology.materials.SlurryEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
@@ -88,5 +89,10 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
         Set<MaterialInterface<?>> sources = new LinkedHashSet<>();
         sources.add(MetalEnum.Titanium);
         return sources;
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.end;
     }
 }

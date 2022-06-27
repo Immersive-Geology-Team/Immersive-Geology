@@ -4,6 +4,7 @@ import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
+import igteam.immersive_geology.materials.data.gas.MaterialBaseGas;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
@@ -95,6 +96,12 @@ public class IGTags {
             if(pattern == FluidPattern.fluid) {
                 for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
                     createWrapperForPattern(pattern, fluid.get());
+                }
+            }
+
+            if(pattern == FluidPattern.gas) {
+                for (MaterialInterface<MaterialBaseGas> gas : GasEnum.values()) {
+                    createWrapperForPattern(pattern, gas.get());
                 }
             }
 

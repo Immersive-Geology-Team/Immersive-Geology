@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_ullmannite"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_ullmannite"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_ullmannite"
+    "tag": "forge:ore_chunks/blackstone_ullmannite"
   },
   "time": 200,
   "energy": 6000

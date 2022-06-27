@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_kaolinite",
+    "item": "immersive_geology:ore_chunk_blackstone_kaolinite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_kaolinite"
+    "tag": "forge:ores/blackstone_kaolinite"
   },
   "time": 200,
   "energy": 6000

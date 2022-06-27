@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_copper"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_copper"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_copper"
+    "tag": "forge:ore_chunks/blackstone_copper"
   },
   "time": 200,
   "energy": 6000

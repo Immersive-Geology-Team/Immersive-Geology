@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_ferberite",
     "immersive_geology:ore_bit_granite_ferberite",
     "immersive_geology:ore_bit_netherrack_ferberite",
-    "immersive_geology:ore_bit_basalt_ferberite"
+    "immersive_geology:ore_bit_blackstone_ferberite",
+    "immersive_geology:ore_bit_end_stone_ferberite"
   ]
 }

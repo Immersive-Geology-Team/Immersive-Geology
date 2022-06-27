@@ -4,15 +4,15 @@
     {
       "chance": 0.33,
       "output": {
-        "tag": "forge:ore_bits/basalt_platinum"
+        "tag": "forge:ore_bits/blackstone_platinum"
       }
     }
   ],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_platinum"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_platinum"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_platinum"
+    "tag": "forge:ore_chunks/blackstone_platinum"
   },
   "time": 200,
   "energy": 6000

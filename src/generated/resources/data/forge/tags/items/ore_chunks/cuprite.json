@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_cuprite",
     "immersive_geology:ore_chunk_granite_cuprite",
     "immersive_geology:ore_chunk_netherrack_cuprite",
-    "immersive_geology:ore_chunk_basalt_cuprite"
+    "immersive_geology:ore_chunk_blackstone_cuprite",
+    "immersive_geology:ore_chunk_end_stone_cuprite"
   ]
 }

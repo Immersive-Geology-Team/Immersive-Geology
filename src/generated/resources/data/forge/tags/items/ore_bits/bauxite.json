@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_bauxite",
     "immersive_geology:ore_bit_granite_bauxite",
     "immersive_geology:ore_bit_netherrack_bauxite",
-    "immersive_geology:ore_bit_basalt_bauxite"
+    "immersive_geology:ore_bit_blackstone_bauxite",
+    "immersive_geology:ore_bit_end_stone_bauxite"
   ]
 }

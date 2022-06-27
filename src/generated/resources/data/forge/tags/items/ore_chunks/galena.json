@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_galena",
     "immersive_geology:ore_chunk_granite_galena",
     "immersive_geology:ore_chunk_netherrack_galena",
-    "immersive_geology:ore_chunk_basalt_galena"
+    "immersive_geology:ore_chunk_blackstone_galena",
+    "immersive_geology:ore_chunk_end_stone_galena"
   ]
 }

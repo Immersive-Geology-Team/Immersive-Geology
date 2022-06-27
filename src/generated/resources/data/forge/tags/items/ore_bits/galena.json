@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_galena",
     "immersive_geology:ore_bit_granite_galena",
     "immersive_geology:ore_bit_netherrack_galena",
-    "immersive_geology:ore_bit_basalt_galena"
+    "immersive_geology:ore_bit_blackstone_galena",
+    "immersive_geology:ore_bit_end_stone_galena"
   ]
 }

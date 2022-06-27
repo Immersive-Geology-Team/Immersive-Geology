@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_cryolite",
     "immersive_geology:ore_chunk_granite_cryolite",
     "immersive_geology:ore_chunk_netherrack_cryolite",
-    "immersive_geology:ore_chunk_basalt_cryolite"
+    "immersive_geology:ore_chunk_blackstone_cryolite",
+    "immersive_geology:ore_chunk_end_stone_cryolite"
   ]
 }

@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_cuprite",
+    "item": "immersive_geology:ore_chunk_blackstone_cuprite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_cuprite"
+    "tag": "forge:ores/blackstone_cuprite"
   },
   "time": 200,
   "energy": 6000
