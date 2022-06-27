@@ -19,6 +19,8 @@ public interface IRecipeBuilder {
     static IGCrushingMethod crushing(IGProcessingStage parentStage) {
         return new IGCrushingMethod(parentStage);
     }
+
+    static IGRefineryMethod synthesis (IGProcessingStage parentStage) {return new IGRefineryMethod(parentStage);}
     static IGBasicSmeltingMethod basicSmelting(IGProcessingStage parentStage){ return new IGBasicSmeltingMethod(parentStage); }
 
     static IGArcSmeltingMethod arcSmelting(IGProcessingStage parentStage) { return new IGArcSmeltingMethod(parentStage);};

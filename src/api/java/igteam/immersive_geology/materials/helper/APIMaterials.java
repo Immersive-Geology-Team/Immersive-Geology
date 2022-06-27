@@ -1,9 +1,6 @@
 package igteam.immersive_geology.materials.helper;
 
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.MineralEnum;
-import igteam.immersive_geology.materials.MiscEnum;
-import igteam.immersive_geology.materials.StoneEnum;
+import igteam.immersive_geology.materials.*;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 
 import java.util.ArrayList;
@@ -22,6 +19,8 @@ public class APIMaterials {
         all.addAll(Arrays.asList(MetalEnum.values()));
         all.addAll(Arrays.asList(MineralEnum.values()));
         all.addAll(Arrays.asList(MiscEnum.values()));
+        all.addAll(Arrays.asList(FluidEnum.values()));
+        all.addAll(Arrays.asList(GasEnum.values()));
         return all;
     }
 

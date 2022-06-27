@@ -6,6 +6,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.RefineryRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.IGApi;
@@ -46,11 +47,11 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        for(MaterialInterface container : APIMaterials.all()){
+        for (MaterialInterface container : APIMaterials.all()) {
             MaterialBase material = container.get();
 
-            for(IGProcessingStage stage : material.getStages()){
-                if(stage != null) {
+            for (IGProcessingStage stage : material.getStages()) {
+                if (stage != null) {
                     logger.log(Level.DEBUG, "Building for " + stage.getStageName() + " in Material: " + material.getName());
                     for (IGProcessingMethod method : stage.getMethods()) {
                         logger.log(Level.DEBUG, "Building for " + stage.getStageName() + " in Material: " + material.getName());
@@ -87,11 +88,24 @@ public class IGRecipeProvider extends RecipeProvider {
                                 break;
                             case arcSmelting:
                                 buildArcSmeltingMethods((IGArcSmeltingMethod) method, consumer);
+                                break;
+                            case Synthesis:
+                                buildRefineryMethods((IGRefineryMethod) method, consumer);
+                                break;
                         }
                     }
                 }
             }
         }
+    }
+
+    private void buildRefineryMethods(IGRefineryMethod method, Consumer<IFinishedRecipe> consumer)
+    {
+        RefineryRecipeBuilder recipe = RefineryRecipeBuilder.builder(method.getFluidResult());
+        recipe.addInput(method.getFluidInput1());
+        recipe.addInput(method.getFluidInput2());
+        recipe.setEnergy(160);
+        recipe.build(consumer,method.getLocation());
     }
 
     private void buildArcSmeltingMethods(IGArcSmeltingMethod method, Consumer<IFinishedRecipe> consumer) {

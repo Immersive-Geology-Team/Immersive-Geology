@@ -195,7 +195,11 @@ public abstract class MaterialBaseGas extends MaterialBaseFluid {
         return new ResourceLocation(IGApi.MODID, "block/fluid/default_still");
     }
 
-    @Override
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+    }
+
+        @Override
     public ResourceLocation getTextureLocation(MaterialPattern pattern, int subtype) {
         if(pattern instanceof ItemPattern){
             ItemPattern i = (ItemPattern) pattern;
