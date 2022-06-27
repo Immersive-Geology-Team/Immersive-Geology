@@ -41,7 +41,7 @@ public class MaterialSulphurDioxideGas extends MaterialBaseGas {
             protected void describe() {
                 //TODO -- add catalytic synthesis in 1.18.2 ~UnSchtalch
                 IRecipeBuilder.synthesis(this).create(
-                        "convert_sulfuric_dioxide_to_acid",
+                        "sulfuric_acid_from_oxide",
                         new FluidTagInput(GasEnum.SulphurDioxide.getFluidTag(FluidPattern.gas), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         new FluidStack(FluidEnum.SulfuricAcid.getFluid(FluidPattern.fluid), 125)

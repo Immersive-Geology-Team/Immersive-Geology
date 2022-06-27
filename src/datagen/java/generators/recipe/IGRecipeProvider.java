@@ -104,6 +104,7 @@ public class IGRecipeProvider extends RecipeProvider {
         RefineryRecipeBuilder recipe = RefineryRecipeBuilder.builder(method.getFluidResult());
         recipe.addInput(method.getFluidInput1());
         recipe.addInput(method.getFluidInput2());
+        recipe.setEnergy(160);
         recipe.build(consumer,method.getLocation());
     }
 

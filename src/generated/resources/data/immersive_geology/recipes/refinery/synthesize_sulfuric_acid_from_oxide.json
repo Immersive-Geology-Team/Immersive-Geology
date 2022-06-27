@@ -1,0 +1,16 @@
+{
+  "type": "immersiveengineering:refinery",
+  "result": {
+    "fluid": "immersive_geology:fluid_sulfuric_acid",
+    "amount": 125
+  },
+  "input0": {
+    "tag": "forge:gass/sulphur_dioxide",
+    "amount": 125
+  },
+  "input1": {
+    "tag": "minecraft:water",
+    "amount": 125
+  },
+  "energy": 160
+}
