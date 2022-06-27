@@ -27,7 +27,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     Granite(new MaterialGranite()),
     Netherrack(new MaterialNetherrack()),
     Blackstone(new MaterialBlackstone()),
-    Endstone(new MaterialEndstone());
+    End_stone(new MaterialEndstone()); //Needs underscore to generate correctly
 
     //TODO Add Endstone stone type ~Muddykat
 

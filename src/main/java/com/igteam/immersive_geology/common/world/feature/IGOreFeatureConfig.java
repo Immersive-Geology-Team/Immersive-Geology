@@ -14,13 +14,12 @@ public class IGOreFeatureConfig extends OreFeatureConfig {
     final int minSize, maxSize;
 
     final MaterialSourceWorld sourceDimension;
-    final MaterialInterface<?> oreType, stoneType;
-    public IGOreFeatureConfig(MaterialSourceWorld dimension, MaterialInterface<?> oreType, MaterialInterface<?> stoneType, int sizeMin, int sizeMax) {
+    final MaterialInterface<?> oreType;
+    public IGOreFeatureConfig(MaterialSourceWorld dimension, MaterialInterface<?> oreType, int sizeMin, int sizeMax) {
         super(BASE_STONE_OVERWORLD, Blocks.STONE.getDefaultState(), sizeMax);
         this.minSize = sizeMin;
         this.maxSize = sizeMax;
         this.oreType = oreType;
-        this.stoneType = stoneType;
         this.sourceDimension = dimension;
     }
 }
