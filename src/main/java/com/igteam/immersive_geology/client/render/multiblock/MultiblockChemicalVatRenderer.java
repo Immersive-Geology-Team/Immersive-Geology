@@ -74,10 +74,10 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                 float fillAmount = ((float)(tankPrimary.getFluidAmount() + tankSecondary.getFluidAmount())) / (24 * FluidAttributes.BUCKET_VOLUME);
                 if((!tankSecondary.isEmpty() || !tankPrimary.isEmpty())) {
                     transform.push();
-                        //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work!
-                        switch(master.getFacing()){
+                        //move the fluid render to inside the glass container area on the model, yes magic number bad, but magic number work! ~Muddykat
+                    switch(master.getFacing()){
                             case NORTH:
-                                transform.translate(-3.6D, 1.26, -2.5D);
+                                transform.translate(-3.6D, 1.26, -2.6D);
                                 if(!master.getIsMirrored()) {
                                     transform.translate(4.05D, 0, 0);
                                 }
@@ -89,13 +89,13 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                                 }
                                 break;
                             case SOUTH:
-                                transform.translate(0.45D, 1.26, -0.65D); //TODO adjust positioning
+                                transform.translate(0.45D, 1.26, -0.55D);
                                 if(!master.getIsMirrored()) {
                                     transform.translate(-4.05D, 0, 0);
                                 }
                                 break;
                             case EAST:
-                                transform.translate(-1.5D,1.26D,1.45D);
+                                transform.translate(-1.55D,1.26D,1.45D);
                                 if(!master.getIsMirrored()) {
                                     transform.translate(0, 0, -4.05D);
                                 }
