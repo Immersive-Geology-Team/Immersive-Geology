@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_iron",
     "immersive_geology:ore_bit_granite_iron",
     "immersive_geology:ore_bit_netherrack_iron",
-    "immersive_geology:ore_bit_basalt_iron"
+    "immersive_geology:ore_bit_blackstone_iron",
+    "immersive_geology:ore_bit_end_stone_iron"
   ]
 }

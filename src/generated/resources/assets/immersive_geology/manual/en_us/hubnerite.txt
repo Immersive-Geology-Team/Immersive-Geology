@@ -1,5 +1,5 @@
 Hubnerite
 RARE mineral
-<&hubnerite_display> Hubnerite is found in the overworld between y layers 1 and 90 and provides a source of [<link;immersive_geology:manganese;manganese>, <link;immersive_geology:tungsten;tungsten>].
+<&hubnerite_display> Hubnerite is found in the end between y layers 1 and 90 and provides a source of [<link;immersive_geology:manganese;manganese>, <link;immersive_geology:tungsten;tungsten>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&hubnerite_recipe> (Generic) Crafting Recipe

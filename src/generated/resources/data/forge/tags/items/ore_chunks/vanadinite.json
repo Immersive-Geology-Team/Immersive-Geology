@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_vanadinite",
     "immersive_geology:ore_chunk_granite_vanadinite",
     "immersive_geology:ore_chunk_netherrack_vanadinite",
-    "immersive_geology:ore_chunk_basalt_vanadinite"
+    "immersive_geology:ore_chunk_blackstone_vanadinite",
+    "immersive_geology:ore_chunk_end_stone_vanadinite"
   ]
 }

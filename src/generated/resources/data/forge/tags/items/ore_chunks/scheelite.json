@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_scheelite",
     "immersive_geology:ore_chunk_granite_scheelite",
     "immersive_geology:ore_chunk_netherrack_scheelite",
-    "immersive_geology:ore_chunk_basalt_scheelite"
+    "immersive_geology:ore_chunk_blackstone_scheelite",
+    "immersive_geology:ore_chunk_end_stone_scheelite"
   ]
 }

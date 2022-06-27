@@ -3,10 +3,7 @@ package igteam.immersive_geology.materials;
 import igteam.immersive_geology.config.IGOreConfig;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialBassalt;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialDefaultStone;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialGranite;
-import igteam.immersive_geology.materials.data.stone.variants.MaterialNetherrack;
+import igteam.immersive_geology.materials.data.stone.variants.*;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
@@ -29,7 +26,8 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     Stone(new MaterialDefaultStone()),
     Granite(new MaterialGranite()),
     Netherrack(new MaterialNetherrack()),
-    Basalt(new MaterialBassalt());
+    Blackstone(new MaterialBlackstone()),
+    Endstone(new MaterialEndstone());
 
     //TODO Add Endstone stone type ~Muddykat
 

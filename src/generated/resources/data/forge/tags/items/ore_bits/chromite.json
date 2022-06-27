@@ -4,6 +4,7 @@
     "immersive_geology:ore_bit_stone_chromite",
     "immersive_geology:ore_bit_granite_chromite",
     "immersive_geology:ore_bit_netherrack_chromite",
-    "immersive_geology:ore_bit_basalt_chromite"
+    "immersive_geology:ore_bit_blackstone_chromite",
+    "immersive_geology:ore_bit_end_stone_chromite"
   ]
 }

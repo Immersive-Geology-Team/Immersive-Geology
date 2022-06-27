@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_vanadinite"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_vanadinite"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_vanadinite"
+    "tag": "forge:ore_chunks/blackstone_vanadinite"
   },
   "time": 200,
   "energy": 6000

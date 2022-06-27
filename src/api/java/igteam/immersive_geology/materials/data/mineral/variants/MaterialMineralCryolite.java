@@ -4,8 +4,10 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class MaterialMineralCryolite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.refinement) {
             @Override
             protected void describe() {
 
@@ -57,5 +59,10 @@ public class MaterialMineralCryolite extends MaterialBaseMineral {
     @Override
     public Set<MaterialInterface<?>> getSourceMaterials() {
         return Collections.emptySet();
+    }
+
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.end;
     }
 }

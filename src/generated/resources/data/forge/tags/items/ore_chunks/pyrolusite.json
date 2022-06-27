@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_pyrolusite",
     "immersive_geology:ore_chunk_granite_pyrolusite",
     "immersive_geology:ore_chunk_netherrack_pyrolusite",
-    "immersive_geology:ore_chunk_basalt_pyrolusite"
+    "immersive_geology:ore_chunk_blackstone_pyrolusite",
+    "immersive_geology:ore_chunk_end_stone_pyrolusite"
   ]
 }

@@ -1,5 +1,5 @@
 Anatase
 COMMON mineral
-<&anatase_display> Anatase is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:titanium;titanium>].
+<&anatase_display> Anatase is found in the end between y layers 1 and 140 and provides a source of [<link;immersive_geology:titanium;titanium>].
 Further information on how to process this Mineral can be found in the next few pages.
 <&anatase_recipe> (Generic) Crafting Recipe

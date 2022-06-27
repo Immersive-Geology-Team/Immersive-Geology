@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_alumina",
+    "item": "immersive_geology:ore_chunk_blackstone_alumina",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_alumina"
+    "tag": "forge:ores/blackstone_alumina"
   },
   "time": 200,
   "energy": 6000

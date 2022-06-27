@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_anatase",
+    "item": "immersive_geology:ore_chunk_blackstone_anatase",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_anatase"
+    "tag": "forge:ores/blackstone_anatase"
   },
   "time": 200,
   "energy": 6000

@@ -4,6 +4,7 @@ import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
+import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
@@ -91,4 +92,8 @@ public class MaterialMineralFerberite extends MaterialBaseMineral {
         return sources;
     }
 
+    @Override
+    public MaterialSourceWorld getDimension() {
+        return MaterialSourceWorld.end;
+    }
 }

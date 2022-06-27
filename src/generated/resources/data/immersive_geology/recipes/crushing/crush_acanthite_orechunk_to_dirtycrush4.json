@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dirty_crushed_ore_basalt_acanthite"
+    "item": "immersive_geology:dirty_crushed_ore_blackstone_acanthite"
   },
   "input": {
-    "tag": "forge:ore_chunks/basalt_acanthite"
+    "tag": "forge:ore_chunks/blackstone_acanthite"
   },
   "time": 200,
   "energy": 6000

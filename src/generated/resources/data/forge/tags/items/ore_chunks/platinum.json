@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_platinum",
     "immersive_geology:ore_chunk_granite_platinum",
     "immersive_geology:ore_chunk_netherrack_platinum",
-    "immersive_geology:ore_chunk_basalt_platinum"
+    "immersive_geology:ore_chunk_blackstone_platinum",
+    "immersive_geology:ore_chunk_end_stone_platinum"
   ]
 }

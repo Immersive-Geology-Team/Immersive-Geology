@@ -2,11 +2,11 @@
   "type": "immersiveengineering:crusher",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:ore_chunk_basalt_uraninite",
+    "item": "immersive_geology:ore_chunk_blackstone_uraninite",
     "count": 4
   },
   "input": {
-    "tag": "forge:ores/basalt_uraninite"
+    "tag": "forge:ores/blackstone_uraninite"
   },
   "time": 200,
   "energy": 6000

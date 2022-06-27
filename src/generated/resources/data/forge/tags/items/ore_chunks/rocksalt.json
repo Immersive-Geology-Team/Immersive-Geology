@@ -4,6 +4,7 @@
     "immersive_geology:ore_chunk_stone_rocksalt",
     "immersive_geology:ore_chunk_granite_rocksalt",
     "immersive_geology:ore_chunk_netherrack_rocksalt",
-    "immersive_geology:ore_chunk_basalt_rocksalt"
+    "immersive_geology:ore_chunk_blackstone_rocksalt",
+    "immersive_geology:ore_chunk_end_stone_rocksalt"
   ]
 }
