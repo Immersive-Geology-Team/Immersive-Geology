@@ -1,28 +1,20 @@
 package com.igteam.immersive_geology.common.world.feature;
 
-import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
-import com.igteam.immersive_geology.common.world.helper.SimplexNoise;
 import com.mojang.serialization.Codec;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
-import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.multiplayer.ClientChunkProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.provider.NetherBiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import org.apache.logging.log4j.Logger;
 
 import java.util.BitSet;
 import java.util.Objects;
@@ -77,8 +69,6 @@ public class IGOreFeature extends OreFeature {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
         int j = (int) Math.floor(Math.random()*(config.maxSize-config.minSize+1)+config.minSize);
         double[] adouble = new double[j * 4];
-
-        BlockState ore = config.stoneType.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
@@ -139,9 +129,8 @@ public class IGOreFeature extends OreFeature {
                                         if (!bitset.get(l2)) {
                                             bitset.set(l2);
                                             blockpos$mutable.setPos(i2, j2, k2);
-                                            double noiseValCheck = SimplexNoise.noise(i2, j2, k2);
-                                            if(noiseValCheck > -0.5){
-                                                replaceOreForDimension(ore, blockpos$mutable, worldIn);
+                                            if(generateForDimension(config, worldIn)) {
+                                                replaceStoneWithOre(blockpos$mutable, worldIn, config);
                                             }
                                             ++i;
                                         }
@@ -157,29 +146,33 @@ public class IGOreFeature extends OreFeature {
         return i > 0;
     }
 
-    private void replaceOreForDimension(BlockState ore, BlockPos position, IWorld worldIn) {
-        if(getSourceStone(ore, position, worldIn)) {
-            worldIn.setBlockState(position, ore, 2);
-        }
+    private boolean generateForDimension(IGOreFeatureConfig config, IWorld worldIn) {
+        DimensionType currentDim = worldIn.getDimensionType();
+
+        boolean isEndDimension = currentDim.doesHasDragonFight();
+        boolean isNetherDimension = currentDim.getHasCeiling();
+        boolean isOverworldDimension = currentDim.doesBedWork();
+
+        MaterialSourceWorld sourceDim = config.sourceDimension;
+
+        return (sourceDim == MaterialSourceWorld.overworld && isOverworldDimension) ||
+                        (sourceDim == MaterialSourceWorld.end && isEndDimension) ||
+                        (sourceDim == MaterialSourceWorld.nether && isNetherDimension);
     }
 
-    private boolean getSourceStone(BlockState ore, BlockPos position, IWorld world) {
+    private void replaceStoneWithOre(BlockPos position, IWorld world, IGOreFeatureConfig config) {
 
         BlockState worldState = world.getBlockState(position);
 
         try {
-            if (ore.getBlock() instanceof IGOreBlock) {
-                IGOreBlock oreBlock = (IGOreBlock) ore.getBlock();
-                MaterialInterface<?> stoneMaterial = oreBlock.getMaterial(MaterialTexture.base);
-                String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
+            String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
+            String stoneKey = worldKey.toUpperCase().charAt(0) + worldKey.toLowerCase().substring(1);
+            StoneEnum stoneType = StoneEnum.valueOf(stoneKey);
+            BlockState ore = stoneType.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
 
-                
-                return worldKey.equals(stoneMaterial.getName());
-            }
-        } catch (Exception exception){
-            IGApi.getNewLogger().error("Failed To Generate Ore: " + exception.getMessage());
-        }
+            world.setBlockState(position, ore, 2);
 
-        return false;
+        } catch (Exception ignored){}
     }
+
 }
