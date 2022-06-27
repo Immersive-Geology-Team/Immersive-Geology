@@ -106,6 +106,8 @@ public class ClientProxy extends ServerProxy {
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.REV_FURNACE.get(), MultiblockReverberationFurnaceRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.CRYSTALLIZER.get(), MultiblockCrystallizerRenderer::new);
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.ROTARYKILN.get(), MultiblockRotaryKilnRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(IGTileTypes.HYDROJET.get(), MultiblockHydroJetRenderer::new);
+
         ClientRegistry.bindTileEntityRenderer(IGTileTypes.BLOOMERY.get(), BloomeryRenderer::new);
     }
 
@@ -185,6 +187,7 @@ public class ClientProxy extends ServerProxy {
         reverberation_furnace(modLoc("reverberation_furnace"), 2);
         crystallizer(modLoc("crystallizer"), 3);
         rotarykiln(modLoc("rotarykiln"),4);
+        hydrojet(modLoc("hydrojet"),5);
 
     }
 
@@ -225,6 +228,14 @@ public class ClientProxy extends ServerProxy {
 
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
         builder.addSpecialElement("rotarykiln0", 0, () -> new ManualElementMultiblock(man, RotaryKilnMultiblock.INSTANCE));
+        builder.readFromFile(location);
+        man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
+    }
+    private static void hydrojet(ResourceLocation location, int priority){
+        ManualInstance man = ManualHelper.getManual();
+
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+        builder.addSpecialElement("hydrojet0", 0, () -> new ManualElementMultiblock(man, RotaryKilnMultiblock.INSTANCE));
         builder.readFromFile(location);
         man.addEntry(IG_CATEGORY_MACHINES, builder.create(), priority);
     }

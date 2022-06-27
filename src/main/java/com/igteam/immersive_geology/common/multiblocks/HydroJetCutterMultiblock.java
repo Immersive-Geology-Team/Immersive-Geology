@@ -5,7 +5,6 @@ import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import igteam.immersive_geology.main.IGMultiblockProvider;
 import net.minecraft.block.BlockState;
@@ -24,15 +23,23 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 import java.util.List;
 import java.util.Random;
 
-public class RotaryKilnMultiblock extends IETemplateMultiblock {
-    public static final RotaryKilnMultiblock INSTANCE = new RotaryKilnMultiblock();
+public class HydroJetCutterMultiblock extends IETemplateMultiblock {
+    public static final HydroJetCutterMultiblock INSTANCE = new HydroJetCutterMultiblock();
 
-    private RotaryKilnMultiblock(){
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"),
-                new BlockPos(0,0,0),
-                new BlockPos(1,2,7),
-                new BlockPos(3,3,8), // as we hit the north side of the block at the end to form the multiblock structure, the Z size is the dimension where the model should be largest, as we hit the block face in the z dimension toward the model.
-                () -> IGMultiblockProvider.rotarykiln.getDefaultState());
+    //Used in HydroJetCutterTileEntity -- Do not forget about Data Gen - this is where we apply the Model File!
+    //Keep naming convention the same as In IGTileType - this is referencing the NBT Structure File, I'd recommend ensuring you have a pre-made one at your convenience
+    //See IGBlockStateProvider in DataGen for how we link a multiblock it's model and texture.
+
+    //For the fancy animation stuff we use the HydrojetRenderer - which is a assigned in ClientProxy.
+
+    //Don't forget to register the multiblock in IGMultiblockRegistrationHolder!
+    //This is where we assign it's size, master position and activation block (the one you hammer)
+    private HydroJetCutterMultiblock(){
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/hydrojet_cutter"),
+                new BlockPos(0,0,0), // master block location - generally want this in the middle.
+                new BlockPos(0,1,2), // hammer block to activate
+                new BlockPos(2,2,3), //total blockspace used
+                () -> IGMultiblockProvider.hydrojet_cutter.getDefaultState());
     }
 
     @Override
@@ -54,8 +61,9 @@ public class RotaryKilnMultiblock extends IETemplateMultiblock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderFormedStructure(MatrixStack transform, IRenderTypeBuffer buffer){
+        //This is to ensure it can load on servers, if it's null, it's a server, so we can't use it anyway.
         if(this.list == null){
-            BlockState state = IGMultiblockProvider.rotarykiln.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
+            BlockState state = IGMultiblockProvider.hydrojet_cutter.getDefaultState().with(IEProperties.FACING_HORIZONTAL, Direction.NORTH);
             IBakedModel model = ClientUtils.mc().getBlockRendererDispatcher().getModelForState(state);
             this.list = model.getQuads(state, null, RAND, EmptyModelData.INSTANCE);
         }

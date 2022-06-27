@@ -10,4 +10,5 @@ public class IGMultiblockProvider  {
         public static Block crystallizer;
         public static Block reverberation_furnace;
         public static Block bloomery;
+        public static Block hydrojet_cutter; //Main Reference Block
 }

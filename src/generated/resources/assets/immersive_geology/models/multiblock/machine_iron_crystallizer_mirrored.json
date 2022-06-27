@@ -5,7 +5,7 @@
     "particle": "immersive_geology:multiblock/crystallizer"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/crystallizer/crystallizer_mirrored.obj",
+  "model": "immersive_geology:models/multiblock/obj/crystallizer/crystallizer.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

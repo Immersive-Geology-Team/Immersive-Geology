@@ -90,6 +90,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         reverberation_furnace();
         crystallizer();
         rotarykiln();
+
+        //Used to assign a multiblock it's Model and Texture. - Unsure but I also think this is influenced somewhat by the NBT structure file but unable to confirm.
+        hydrojet_cutter();
+
         registerFluidBlocks();
     }
 
@@ -107,7 +111,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void rotarykiln() {
         ResourceLocation texture = modLoc("multiblock/rotarykiln");
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/rotarykiln/rotarykiln.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/rotarykiln/rotarykiln_mirrored.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/rotarykiln/rotarykiln.obj");
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.rotarykiln, modelNormal, texture, "", RotaryKilnMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.rotarykiln, modelMirrored, texture, "_mirrored", RotaryKilnMultiblock.INSTANCE, true);
@@ -118,7 +122,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void crystallizer() {
         ResourceLocation texture = modLoc("multiblock/crystallizer");
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer_mirrored.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj"); // doesn't need a mirror model
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.crystallizer, modelNormal, texture, "", CrystallizerMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.crystallizer, modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);
@@ -146,6 +150,17 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.reverberation_furnace, modelMirrored, texture, "_mirrored", ReverberationFurnaceMultiblock.INSTANCE, true);
 
         createMultiblock(IGMultiblockProvider.reverberation_furnace, normal, mirrored, texture);
+    }
+
+    private void hydrojet_cutter(){
+        ResourceLocation texture = modLoc("multiblock/hydrojet");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/hydrojet/hydrojet.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/hydrojet/hydrojet.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.hydrojet_cutter, modelNormal, texture, "", HydroJetCutterMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.hydrojet_cutter, modelMirrored, texture, "_mirrored", HydroJetCutterMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockProvider.hydrojet_cutter, normal, mirrored, texture);
     }
 
 

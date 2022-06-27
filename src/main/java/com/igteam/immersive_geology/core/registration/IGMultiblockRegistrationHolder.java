@@ -13,6 +13,10 @@ public class IGMultiblockRegistrationHolder {
         IGMultiblockProvider.crystallizer = new CrystallizerBlock();
         IGMultiblockProvider.rotarykiln = new RotaryKilnBlock();
 
+        //First location a Multiblock is set in. While static reference is a Block type, it needs to be a IGMetalMultiblock which extends IE's MetalMultiblockBlock
+        //Used in IGTileTypes - this is where the Block is linked with it's TileEntity
+        IGMultiblockProvider.hydrojet_cutter = new HydroJetCutterBlock();
+
         //Stone
         IGMultiblockProvider.reverberation_furnace = new ReverberationFurnaceBlock();
         IGMultiblockProvider.bloomery = new BloomeryBlock();
@@ -25,5 +29,6 @@ public class IGMultiblockRegistrationHolder {
         MultiblockHandler.registerMultiblock(ReverberationFurnaceMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(CrystallizerMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(RotaryKilnMultiblock.INSTANCE);
+        MultiblockHandler.registerMultiblock(HydroJetCutterMultiblock.INSTANCE);
     }
 }

@@ -12,6 +12,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Serializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGApi.MODID);
 
+    //Used in HydroJetRecipe - Dependent on HydroJetRecipeSerializer
+    //Ensure Name used is the same as the one used in IGTileType, HydroJetRecipe and so on.
+    public static final RegistryObject<IERecipeSerializer<HydrojetRecipe>> HYDROJET_CUTTER_SERIALIZER = RECIPE_SERIALIZERS.register(
+            "hydrojet_cutter", HydrojetRecipeSerializer::new
+    );
+
     public static final RegistryObject<IERecipeSerializer<ReverberationRecipe>> REVERBERATION_SERIALIZER = RECIPE_SERIALIZERS.register(
             "reverberation_furnace", ReverberationRecipeSerializer::new
     );

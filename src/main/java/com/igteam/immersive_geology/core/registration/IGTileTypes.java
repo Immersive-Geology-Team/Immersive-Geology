@@ -17,8 +17,9 @@ import java.util.function.Supplier;
 public class IGTileTypes {
     public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, IGLib.MODID);
 
+    //This links the Multibock 'block' to the Tile Entity that our logic is held in - See HydrojetCutterTileEntity This is dependent on the static block reference defined in IGMultiblockRegistrationHolder
+    public static final RegistryObject<TileEntityType<HydroJetCutterTileEntity>> HYDROJET = register("hydrojet_cutter", HydroJetCutterTileEntity::new, IGMultiblockProvider.hydrojet_cutter);
     public static final RegistryObject<TileEntityType<BloomeryTileEntity>> BLOOMERY = register("bloomery", BloomeryTileEntity::new, IGMultiblockProvider.bloomery);
-
     public static final RegistryObject<TileEntityType<RotaryKilnTileEntity>> ROTARYKILN = register("rotarykiln", RotaryKilnTileEntity::new, IGMultiblockProvider.rotarykiln);
     public static final RegistryObject<TileEntityType<CrystallizerTileEntity>> CRYSTALLIZER = register("crystallizer", CrystallizerTileEntity::new, IGMultiblockProvider.crystallizer);
     public static final RegistryObject<TileEntityType<ChemicalVatTileEntity>> VAT = register("chemicalvat", ChemicalVatTileEntity::new, IGMultiblockProvider.chemicalvat);

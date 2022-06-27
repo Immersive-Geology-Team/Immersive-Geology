@@ -33,7 +33,7 @@ public class CrystallizerMultiblock extends IETemplateMultiblock {
 
     private CrystallizerMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"),
-                new BlockPos(2,0,1),
+                new BlockPos(0,0,0),
                 new BlockPos(1,2,1),
                 new BlockPos(3,3,3),
                 () -> IGMultiblockProvider.crystallizer.getDefaultState());

@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "texture": "immersive_geology:multiblock/hydrojet",
+    "particle": "immersive_geology:multiblock/hydrojet"
+  },
+  "loader": "forge:obj",
+  "model": "immersive_geology:models/multiblock/obj/hydrojet/hydrojet.obj",
+  "detectCullableFaces": false,
+  "flip-v": true
+}
