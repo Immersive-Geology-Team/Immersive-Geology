@@ -167,13 +167,17 @@ public class IGOreFeature extends OreFeature {
 
         BlockState worldState = world.getBlockState(position);
 
-        if(ore.getBlock() instanceof IGOreBlock){
-            IGOreBlock oreBlock = (IGOreBlock) ore.getBlock();
-            MaterialInterface<?> stoneMaterial = oreBlock.getMaterial(MaterialTexture.base);
-            String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
-            String compKey = worldKey.substring(worldKey.lastIndexOf("."));
+        try {
+            if (ore.getBlock() instanceof IGOreBlock) {
+                IGOreBlock oreBlock = (IGOreBlock) ore.getBlock();
+                MaterialInterface<?> stoneMaterial = oreBlock.getMaterial(MaterialTexture.base);
+                String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
 
-            return compKey.equals(stoneMaterial.getName());
+                
+                return worldKey.equals(stoneMaterial.getName());
+            }
+        } catch (Exception exception){
+            IGApi.getNewLogger().error("Failed To Generate Ore: " + exception.getMessage());
         }
 
         return false;
