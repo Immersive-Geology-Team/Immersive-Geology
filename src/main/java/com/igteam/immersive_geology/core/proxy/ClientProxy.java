@@ -3,6 +3,7 @@ package com.igteam.immersive_geology.core.proxy;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
+import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import blusunrize.lib.manual.ManualElementItem;
@@ -280,5 +281,12 @@ public class ClientProxy extends ServerProxy {
         GuiHandler.register(ReverberationFurnaceTileEntity.class,
                 new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationContainer::new);
         registerScreen(new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationScreen::new);
+    }
+
+    public static void requestModelsAndTextures() {
+        MultiblockHydroJetRenderer.ARM = DynamicModel.createSimple(
+                new ResourceLocation(IGApi.MODID, "multiblock/obj/hydrojet/hydrojet_arm.obj"),
+                "hydrojet_arm", DynamicModel.ModelType.OBJ
+        );
     }
 }

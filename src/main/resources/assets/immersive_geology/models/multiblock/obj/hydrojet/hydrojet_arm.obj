@@ -1,6 +1,6 @@
 # Blender v2.92.0 OBJ File: 'stonecutter.blend'
 # www.blender.org
-mtllib stonecutter_arm.mtl
+mtllib hydrojet.mtl
 o Arm_Cube.005
 v -0.749900 1.625000 -0.406053
 v -0.749900 1.625000 -0.218553
@@ -186,7 +186,7 @@ vn 0.0000 1.0000 0.0000
 vn 0.0000 0.0000 1.0000
 vn 0.0000 -1.0000 0.0000
 vn 1.0000 0.0000 0.0000
-usemtl Material.001
+usemtl base
 s off
 f 30/1/1 29/2/1 36/3/1 35/4/1
 f 5/5/2 10/6/2 8/7/2 1/8/2

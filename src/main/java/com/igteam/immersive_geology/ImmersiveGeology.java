@@ -28,6 +28,7 @@ import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -89,6 +90,10 @@ public class ImmersiveGeology
 		Serializers.RECIPE_SERIALIZERS.register(modBus); //Recipe Structure Builder is Now located in IGDataProvider - As it's only used during Data Gen anyway.
 		proxy.registerContainersAndScreens();
 
+		if(Minecraft.getInstance()!=null) {
+			//Prevents Issues with datagen runs
+			ClientProxy.requestModelsAndTextures();
+		}
 		IGApi.init();
 	}
 

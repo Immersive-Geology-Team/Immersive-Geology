@@ -1,5 +1,8 @@
 # Blender 3.2.0 MTL File: 'None'
 # www.blender.org
 
-newmtl Material.001
+newmtl base
 map_Kd #texture
+
+newmtl conveyor
+map_Kd immersiveengineering:block/conveyor/conveyor

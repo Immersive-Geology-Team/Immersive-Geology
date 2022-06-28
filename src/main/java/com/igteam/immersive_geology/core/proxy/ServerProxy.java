@@ -73,7 +73,6 @@ public class ServerProxy implements Proxy {
         GuiHandler.register(ReverberationFurnaceTileEntity.class,
                 new ResourceLocation(IGLib.MODID, "reverberation_furnace"),ReverberationContainer::new);
     }
-
     private void setupReverberationFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
         ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
