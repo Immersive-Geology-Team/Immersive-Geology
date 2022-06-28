@@ -35,7 +35,7 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
         return true;
     }
 
-    private static final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
+    private final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
 
     @Override
     public void render(ChemicalVatTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
