@@ -469,10 +469,6 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
         //Empty space
         if (bX == 0 && bZ == 0)
         {
-            if (bY == 2 || bY == 3)
-            {
-                return new ArrayList<>();
-            }
             if (bY == 1)
             {
                 return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));

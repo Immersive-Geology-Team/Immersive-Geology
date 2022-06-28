@@ -122,7 +122,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void crystallizer() {
         ResourceLocation texture = modLoc("multiblock/crystallizer");
         ResourceLocation modelNormal = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer.obj"); // doesn't need a mirror model
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/crystallizer/crystallizer_mirrored.obj");
 
         BlockModelBuilder normal = multiblockModel(IGMultiblockProvider.crystallizer, modelNormal, texture, "", CrystallizerMultiblock.INSTANCE, false);
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockProvider.crystallizer, modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);

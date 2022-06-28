@@ -134,78 +134,81 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
         final int bY = posInMultiblock.getY();
         final int bZ = posInMultiblock.getZ();
 
+        List<AxisAlignedBB> stairShape = Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0), //Not actually sure if this is a stair shape...
+                                        new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 0.0));
+
+        //I would recommend having a variable for each shape type to make it easier to understand and modify later on.
+
         if (bY == 0) {
-            if (bZ == 0 || bZ == 2) {
-                if (bX % 2 == 0) {
+            if (bX == 0 || bX == 2) {
+                if (bZ % 2 == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
                 }
-                if (bX == 7 && bZ == 2) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
-                            new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 0.0));
-
+                if (bZ == 7 && bX == 2) {
+                    return stairShape;
                 }
-                if (bX == 7 && bZ == 0) {
+                if (bZ == 7 && bX == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
                             new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 1.0));
                 }
             }
         }
         if (bY == 2) {
-            if (bZ == 1) {
-                if (bX == 7) {
+            if (bX == 1) {
+                if (bZ == 7) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
                 }
-                if (bX == 2) {
+                if (bZ == 2) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.75, 1.0));
                 }
-                if (bX == 3) {
+                if (bZ == 3) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.625, 1.0));
                 }
-                if (bX == 4) {
+                if (bZ == 4) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
                 }
-                if (bX == 5) {
+                if (bZ == 5) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.375, 1.0));
                 }
 
             }
-            if (bZ == 0 && bX == 7) {
+            if (bX == 0 && bZ == 7) {
                 return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 0.5, 1.0));
             }
-            if (bZ == 2 && bX == 7) {
+            if (bX == 2 && bZ == 7) {
                 return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 0.5));
             }
         }
         if (bY == 1) {
-            if (bX == 7) {
-                if (bZ == 0) {
+            if (bZ == 7) {
+                if (bX == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
                 }
-                if (bZ == 2) {
+                if (bX == 2) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.5));
                 }
             }
-            if (bX == 5) {
-                if (bZ == 2) {
+            if (bZ == 5) {
+                if (bX == 2) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 1.0, 1.0, 1.0, 0.5));
                 }
-                if (bZ == 0) {
+                if (bX == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 0.9375),
                             new AxisAlignedBB(0.0, 0.5, 0.9375, 1.0, 1.0, 0.5));
                 }
             }
 
-            if (bX == 3) {
-                if (bZ == 0) {
+            if (bZ == 3) {
+                if (bX == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.9375));
                 }
-                if (bZ == 2) {
+                if (bX == 2) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0625, 1.0, 0.5, 1.0),
                             new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 0.0625));
                 }
             }
 
-            if (bX == 0) {
+            if (bZ == 0) {
                 return Arrays.asList(new AxisAlignedBB(0.0, 0.5, 0.0, 1.0, 1.0, 1.0),
                         new AxisAlignedBB(0.5, 0.5, 0.0, 1.0, 0.0, 1.0));
             }
@@ -243,14 +246,14 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
     @Override
     public Set<BlockPos> getEnergyPos() {
         return ImmutableSet.of(
-                new BlockPos(3, 1, 0)
+                new BlockPos(0, 1, 3)
         );
     }
 
     @Override
     public Set<BlockPos> getRedstonePos() {
         return ImmutableSet.of(
-                new BlockPos(5, 1, 2)
+                new BlockPos(2, 1, 5)
         );
     }
 

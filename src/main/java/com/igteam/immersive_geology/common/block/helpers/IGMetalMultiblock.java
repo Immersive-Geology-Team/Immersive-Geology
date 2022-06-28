@@ -46,6 +46,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
         } catch (ConcurrentModificationException exception){
             IGApi.getNewLogger().error("Concurrent Modification Error - Essentially you'll need to restart, this issue is erratic and it's due to IG using IE internal Classes. Don't bother Immersive Engineering about this. (sorry Blu, I'll fix it sometime in the future ~Muddykat)");
             IGApi.getNewLogger().error(exception.getMessage());
+            throw exception;
         }
 
 
