@@ -42,6 +42,7 @@ import java.util.Set;
 // This tile entity is dependent on the HydroJetRecipe which is defined in
 public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJetCutterTileEntity, HydrojetRecipe> implements IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
+    public float progress = 0;
     //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
     Logger log = ImmersiveGeology.getNewLogger();
 
@@ -85,11 +86,14 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     protected HydrojetRecipe getRecipeForId(ResourceLocation resourceLocation) {
         return null;
     }
-
     @Override
     public void tick()
     {
-
+        if(progress >= 1){
+            progress = 0;
+        } else {
+            progress += 0.0025;
+        }
     }
 
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =

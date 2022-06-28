@@ -183,4 +183,8 @@ public class IGRippLib {
         colors[3] = color & 0xff; // blue
         return colors;
     }
+
+    public static float lerp(float point1, float point2, float alpha){
+        return point1 + alpha * (point2 - point1);
+    }
 }

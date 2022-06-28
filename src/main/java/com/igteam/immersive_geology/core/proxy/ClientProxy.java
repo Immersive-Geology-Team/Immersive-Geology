@@ -288,5 +288,10 @@ public class ClientProxy extends ServerProxy {
                 new ResourceLocation(IGApi.MODID, "multiblock/obj/hydrojet/hydrojet_arm.obj"),
                 "hydrojet_arm", DynamicModel.ModelType.OBJ
         );
+
+        MultiblockHydroJetRenderer.HEAD = DynamicModel.createSided(
+                new ResourceLocation(IGApi.MODID, "multiblock/obj/hydrojet/hydrojet_head.obj"),
+                "hydrojet_head", DynamicModel.ModelType.OBJ
+        );
     }
 }
