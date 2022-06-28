@@ -284,7 +284,7 @@ public class ClientProxy extends ServerProxy {
     }
 
     public static void requestModelsAndTextures() {
-        MultiblockHydroJetRenderer.ARM = DynamicModel.createSimple(
+        MultiblockHydroJetRenderer.ARM = DynamicModel.createSided(
                 new ResourceLocation(IGApi.MODID, "multiblock/obj/hydrojet/hydrojet_arm.obj"),
                 "hydrojet_arm", DynamicModel.ModelType.OBJ
         );
