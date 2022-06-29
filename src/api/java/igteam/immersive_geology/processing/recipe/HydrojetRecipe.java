@@ -77,6 +77,7 @@ public class HydrojetRecipe extends IGMultiblockRecipe
         return Arrays.asList(itemInput);
     }
 
+
     @Override
     public List<FluidTagInput> getFluidInputs() {
         return fluidInputList;

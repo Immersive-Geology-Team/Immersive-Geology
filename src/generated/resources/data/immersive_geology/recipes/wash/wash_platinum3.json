@@ -2,16 +2,12 @@
   "type": "immersive_geology:gravityseparator",
   "secondaries": [],
   "result": {
-    "item": "immersive_geology:dust_platinum"
+    "item": "immersive_geology:crushed_ore_platinum"
   },
   "input": {
-    "tag": "forge:compound_dusts/platinum"
+    "tag": "forge:dirty_crushed_ores/platinum"
   },
   "waste": {
-<<<<<<< HEAD
-    "item": "immersive_geology:stone_bit_granite"
-=======
-    "item": "immersive_geology:dust_osmium"
->>>>>>> 5b38acac5b2c98e6db1446f6ff6f5352cb58ac96
+    "item": "immersive_geology:stone_bit_stone"
   }
 }
