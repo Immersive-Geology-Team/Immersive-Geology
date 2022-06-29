@@ -42,7 +42,7 @@ import java.util.Set;
 // This tile entity is dependent on the HydroJetRecipe which is defined in
 public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJetCutterTileEntity, HydrojetRecipe> implements IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
-    public float progress = 0;
+
     //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
     Logger log = ImmersiveGeology.getNewLogger();
 
@@ -54,9 +54,10 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     private LazyOptional<IItemHandler> insertionHandler;
     private LazyOptional<IItemHandler> extractionHandler;
 
+    public float progress = 0;
+
     public HydroJetCutterTileEntity(){
         super(HydroJetCutterMultiblock.INSTANCE, 2000, true, IGTileTypes.HYDROJET.get());
-
     }
 
     @Override
@@ -73,12 +74,14 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
     {
         super.readCustomNBT(nbt, descPacket);
+        progress = nbt.getFloat("progress");
     }
 
     @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket)
     {
         super.writeCustomNBT(nbt, descPacket);
+        nbt.putFloat("progress", progress);
     }
 
     @Nullable
@@ -89,11 +92,11 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public void tick()
     {
-        if(progress >= 1){
-            progress = 0;
-        } else {
-            progress += 0.0025;
-        }
+
+    }
+
+    public float getProgress() {
+        return progress;
     }
 
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =

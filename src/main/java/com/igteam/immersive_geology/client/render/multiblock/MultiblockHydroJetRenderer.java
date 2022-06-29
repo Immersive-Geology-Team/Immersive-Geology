@@ -41,6 +41,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
     public void render(HydroJetCutterTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         //this is where we can put in special rendering things!
         if(te.formed && !te.isDummy()){
+            machineProgress += 0.0025;
 
             transform.push();
             {
@@ -72,9 +73,9 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
 
 
-    private PositionEnum currentState = PositionEnum.ZERO;
+    private PositionEnum currentState = PositionEnum.ONE;
 
-
+    float machineProgress = 0f;
     private float currentArmPosition = 2.125f;
     private float newArmPosition = 2.125f;
     private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
@@ -82,21 +83,22 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         matrix.push();
         matrix.rotate(new Quaternion(0F, 180F, 0F, true));
 
-        float machineProgress = te.progress;
-
         if(te.shouldRenderAsActive()) {
             if (currentState.component == AnimationPart.ARM) {
                 if (newArmPosition != currentState.position)
                     newArmPosition = currentState.position;
 
-                if (currentArmPosition < (newArmPosition - 0.05)) {
-                    currentArmPosition += 0.025;
-                } else if (currentArmPosition > (newArmPosition + 0.05)) {
-                    currentArmPosition -= 0.025;
+                if (currentArmPosition < (newArmPosition - 0.1)) {
+                    currentArmPosition += 0.0825;
+                } else if (currentArmPosition > (newArmPosition + 0.1)) {
+                    currentArmPosition -= 0.0825;
                 }
 
-                if (machineProgress > currentState.breakPercent) {
-                    currentState = currentState.advance();
+                if(machineProgress > currentState.breakPercent){
+                    float offAmount = Math.abs(currentArmPosition - currentState.position);
+                    if(offAmount > 0.0625){
+                        IGApi.getNewLogger().warn("Animation Position was off by: " + offAmount);
+                    }
                 }
             }
         }
@@ -110,6 +112,12 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 renderHead(matrix, te, bufferIn, combinedLightIn, combinedOverlayIn);
             matrix.pop();
 
+        if (machineProgress > currentState.breakPercent) {
+            machineProgress = currentState.breakPercent;
+            PositionEnum nextState = currentState.advance();
+            currentState = nextState;
+        }
+
         matrix.pop();
     }
 
@@ -119,20 +127,19 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         matrix.push();
         List<BakedQuad> quads = HEAD.getNullQuads(te.getFacing(), IGMultiblockProvider.hydrojet_cutter.getDefaultState());
 
-        float machineProgress = te.progress;
         if(te.shouldRenderAsActive()) {
             if (currentState.component == AnimationPart.HEAD) {
                 if (headNewPosition != currentState.position)
                     headNewPosition = currentState.position;
 
-                if (headCurrentPosition < (headNewPosition - 0.05)) {
-                    headCurrentPosition += 0.025;
-                } else if (headCurrentPosition > (headNewPosition + 0.05)) {
-                    headCurrentPosition -= 0.025;
+                if (headCurrentPosition < (headNewPosition - 0.05125)) {
+                    headCurrentPosition += 0.05;
+                } else if (headCurrentPosition > (headNewPosition + 0.05125)) {
+                    headCurrentPosition -= 0.05;
                 }
 
                 if (machineProgress > currentState.breakPercent) {
-                    currentState = currentState.advance();
+                    headCurrentPosition = currentState.position;
                 }
             }
         }
@@ -146,93 +153,53 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         return new ResourceLocation(IGLib.MODID, name);
     }
 
+    //This system works but is not very good? Still fixing issues with it.
     private enum PositionEnum {
-        ZERO(0f, 2.125f, AnimationPart.ARM) {
+        ZERO(0.30f, 2.125f, AnimationPart.ARM){ //16% of the progress is spent keeping arm in starting position when looping
             @Override
             public PositionEnum advance() {
                 return ONE;
             }
-
-            @Override
-            public PositionEnum previous() {
-                return ZERO; // Screws with stage percent calculations if it loops
-            }
         },
-        ONE(0.16f, 1.8125f, AnimationPart.ARM){
+        ONE(0.52f, 1.8125f, AnimationPart.ARM){ //16% of progress is spent moving arm to this position
             @Override
             public PositionEnum advance() {
                 return TWO;
             }
-            @Override
-            public PositionEnum previous() {
-                return ZERO;
-            }
         },
-        TWO(0.32f, -0.1875f, AnimationPart.HEAD){
+        TWO(0.68f, -0.1875f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
             @Override
             public PositionEnum advance() {
                 return THREE;
             }
-            @Override
-            public PositionEnum previous() {
-                return ONE;
-            }
         },
-        THREE(0.48f, 0.125f, AnimationPart.HEAD){
+        THREE(0.74f, 0.125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
             @Override
             public PositionEnum advance() {
                 return FOUR;
             }
-            @Override
-            public PositionEnum previous() {
-                return TWO;
-            }
         },
-        FOUR(0.64f, -0.03125f, AnimationPart.HEAD){
+        FOUR(0.80f, -0.03125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
             @Override
             public PositionEnum advance() {
                 return FIVE;
             }
-            @Override
-            public PositionEnum previous() {
-                return THREE;
-            }
         },
-        FIVE(0.64f, -0.1875f, AnimationPart.HEAD){
+        FIVE(0.9f, 1.5f, AnimationPart.ARM){ // 20% of progress is spent moving head to position (this should be the starting position of the head)
             @Override
             public PositionEnum advance() {
                 return SIX;
             }
-
-            @Override
-            public PositionEnum previous() {
-                return FOUR;
-            }
         },
-        SIX(0.80f, 1.5f, AnimationPart.ARM){
-            @Override
-            public PositionEnum advance() {
-                return SEVEN;
-            }
-            @Override
-            public PositionEnum previous() {
-                return FIVE;
-            }
-        },
-        SEVEN(1f, 2.125f, AnimationPart.ARM){
+        SIX(1f, 2.125f, AnimationPart.ARM){
             @Override
             public PositionEnum advance() {
                 return ZERO;
-            }
-
-            @Override
-            public PositionEnum previous() {
-                return SIX;
             }
         };
 
-        final float breakPercent;
-        final float position;
+        public final float breakPercent;
+        public final float position;
 
         final AnimationPart component;
 
@@ -243,8 +210,6 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         }
 
         public abstract PositionEnum advance();
-
-        public abstract PositionEnum previous();
     }
 
     private enum AnimationPart {
