@@ -236,23 +236,41 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         return new int[]{0};
     }
 
-    //Direct Copy from IP's Pumpjack, this will need to be changed.
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
         final int bX = posInMultiblock.getX();
         final int bY = posInMultiblock.getY();
         final int bZ = posInMultiblock.getZ();
 
-        //Empty space
-        if (bX == 0 && bZ == 0)
+        if (bX == 1 && bZ != 1)
         {
-            if (bY == 2 || bY == 3)
-            {
-                return new ArrayList<>();
-            }
             if (bY == 1)
             {
-                return Arrays.asList(new AxisAlignedBB(0.1875, 0.0, 0.0, 1.0, 1.0, 1.0));
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0));
             }
+        }
+        if (bX == 0 && bZ ==0){
+            if (bY == 1)
+            {
+                return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0625, 0.9325, 1.0, 0.9325));
+            }
+            if (bY == 0)
+            {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.0625, 0.5, 0.0625, 0.9325, 1.0, 0.9325)
+                        );
+            }
+        }
+        if (bX == 0 && bZ == 1 && bY == 0)
+        {
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+        }
+        if (bX == 1 && bZ == 1)
+        {
+            return Arrays.asList(
+                    new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0),
+                    new AxisAlignedBB(0.0, 0.0, 0.25, 1.0, 1.0, 0.75)
+            );
+
         }
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }
