@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "immersive_geology:ingot_vanadium"
+    }
+  ],
+  "additives": [
+    {
+      "tag": "forge:dusts/coal_coke"
+    }
+  ],
+  "energy": 102400,
+  "time": 200,
+  "input": {
+    "tag": "forge:metal_oxides/vanadium"
+  }
+}

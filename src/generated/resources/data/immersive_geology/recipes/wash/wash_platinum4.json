@@ -8,6 +8,10 @@
     "tag": "forge:dirty_crushed_ores/platinum"
   },
   "waste": {
+<<<<<<< HEAD
     "item": "immersive_geology:stone_bit_netherrack"
+=======
+    "item": "immersive_geology:stone_bit_stone"
+>>>>>>> 5b38acac5b2c98e6db1446f6ff6f5352cb58ac96
   }
 }

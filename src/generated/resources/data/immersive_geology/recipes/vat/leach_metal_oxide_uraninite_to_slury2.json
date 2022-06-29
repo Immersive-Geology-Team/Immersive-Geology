@@ -1,0 +1,23 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "minecraft:empty",
+    "amount": 0
+  },
+  "result": {
+    "item": "immersiveengineering:dust_uranium"
+  },
+  "item_input": {
+    "item": "minecraft:bone_meal"
+  },
+  "fluid_input1": {
+    "tag": "forge:slurrys/hydrofluoric_acid_uranium",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 250
+  },
+  "time": 100,
+  "energy": 12800
+}

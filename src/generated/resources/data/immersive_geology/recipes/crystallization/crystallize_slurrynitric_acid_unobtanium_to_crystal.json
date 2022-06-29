@@ -1,0 +1,12 @@
+{
+  "type": "immersive_geology:crystalizer",
+  "result": {
+    "item": "immersive_geology:crystal_unobtanium"
+  },
+  "fluid_input": {
+    "tag": "forge:slurrys/nitric_acid_unobtanium",
+    "amount": 250
+  },
+  "time": 300,
+  "energy": 38400
+}

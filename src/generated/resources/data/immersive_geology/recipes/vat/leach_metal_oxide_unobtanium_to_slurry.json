@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_nitric_acid_unobtanium",
+    "amount": 250
+  },
+  "item_input": {
+    "item": "immersive_geology:metal_oxide_unobtanium"
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/nitric_acid",
+    "amount": 250
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 250
+  },
+  "time": 200,
+  "energy": 51200
+}

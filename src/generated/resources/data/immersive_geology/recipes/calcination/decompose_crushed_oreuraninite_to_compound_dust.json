@@ -1,0 +1,11 @@
+{
+  "type": "immersive_geology:rotary_kiln",
+  "result": {
+    "item": "immersive_geology:compound_dust_uranium"
+  },
+  "item_input": {
+    "item": "immersive_geology:crushed_ore_uraninite"
+  },
+  "energy": 153600,
+  "time": 300
+}

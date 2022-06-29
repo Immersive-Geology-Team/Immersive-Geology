@@ -161,6 +161,7 @@
   "material.immersive_geology.alumina": "Alumina",
   "material.immersive_geology.anatase": "Anatase",
   "material.immersive_geology.acanthite": "Acanthite",
+  "material.immersive_geology.bauxite": "Bauxite",
   "material.immersive_geology.cuprite": "Cuprite",
   "material.immersive_geology.chalcocite": "Chalcocite",
   "material.immersive_geology.zircon": "Zircon",
@@ -179,7 +180,7 @@
   "material.immersive_geology.fluorite": "Fluorite",
   "material.immersive_geology.chromite": "Chromite",
   "material.immersive_geology.chalcopyrite": "Chalcopyrite",
-  "material.immersive_geology.chalcocite": "Chalcocite",
+  "material.immersive_geology.unobtanium": "Unobtanium",
   "material.immersive_geology.ferberite": "Ferberite",
   "material.immersive_geology.thorite": "Thorite",
   "material.immersive_geology.galena": "Galena",
@@ -201,5 +202,7 @@
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",
   "component.immersive_geology.nitric_acid": "Nitrate",
-  "component.immersive_geology.hydrofluoric_acid": "Fluorite"
+  "component.immersive_geology.hydrofluoric_acid": "Fluorite",
+  "component.immersive_geology.sodium_hydroxide": "Sodium Salt"
+
 }

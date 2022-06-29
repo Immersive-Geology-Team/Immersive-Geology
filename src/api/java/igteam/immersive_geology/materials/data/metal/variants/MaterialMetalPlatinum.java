@@ -29,7 +29,7 @@ public class MaterialMetalPlatinum extends MaterialBaseMetal {
 
     @Override
     protected boolean hasMetalOxide() {
-        return true;
+        return false;
     }
 
     @Override
