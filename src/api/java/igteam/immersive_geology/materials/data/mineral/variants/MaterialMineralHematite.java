@@ -37,6 +37,12 @@ public class MaterialMineralHematite extends MaterialBaseMineral {
                         "crushed_" + getName() + "_to_metal",
                         getParentMaterial().getItemTag(ItemPattern.crushed_ore),
                         MetalEnum.Iron.getStack(ItemPattern.ingot, 1));
+
+                IRecipeBuilder.bloomery(this).create(
+                        "crushed_ore_" + getName() + "_to_ingot",
+                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        MetalEnum.Iron.getStack(ItemPattern.ingot),
+                        120);
             }
         };
     }
