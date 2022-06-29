@@ -4,7 +4,6 @@ import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersive_geology.common.block.tileentity.HydroJetCutterTileEntity;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.lib.IGRippLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.main.IGMultiblockProvider;
@@ -77,10 +76,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
 
     private float currentArmPosition = 2.125f;
-    private float OldArmPosition = 2.125f;
-    private float NewArmPosition = 2.125f;
-
-    private float stageProgress = 0f;
+    private float newArmPosition = 2.125f;
     private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
     {
         matrix.push();
@@ -88,20 +84,20 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
         float machineProgress = te.progress;
 
-        if(currentState.component == AnimationPart.ARM) {
-            if(NewArmPosition != currentState.position)
-                NewArmPosition = currentState.position;
+        if(te.shouldRenderAsActive()) {
+            if (currentState.component == AnimationPart.ARM) {
+                if (newArmPosition != currentState.position)
+                    newArmPosition = currentState.position;
 
-            IGApi.getNewLogger().warn("Data: " + String.valueOf(currentArmPosition) + " | " + NewArmPosition  + " | " + String.valueOf(OldArmPosition) + " stage progress: " + stageProgress);
+                if (currentArmPosition < (newArmPosition - 0.05)) {
+                    currentArmPosition += 0.025;
+                } else if (currentArmPosition > (newArmPosition + 0.05)) {
+                    currentArmPosition -= 0.025;
+                }
 
-            currentArmPosition = IGRippLib.lerp(OldArmPosition, NewArmPosition, stageProgress);
-
-            if (machineProgress > currentState.breakPercent) {
-                OldArmPosition = currentArmPosition;
-                currentState = currentState.advance();
-                stageProgress = 0;
-            } else {
-                stageProgress += 0.1; //Need better way to calculate this... Not sure how we should go about it, this is a very important variable.
+                if (machineProgress > currentState.breakPercent) {
+                    currentState = currentState.advance();
+                }
             }
         }
 
@@ -117,21 +113,31 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         matrix.pop();
     }
 
-    private float headProgress = -0.03125f;
+    private float headCurrentPosition = -0.03125f;
+    private float headNewPosition = -0.03125f;
     private void renderHead(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         matrix.push();
         List<BakedQuad> quads = HEAD.getNullQuads(te.getFacing(), IGMultiblockProvider.hydrojet_cutter.getDefaultState());
 
         float machineProgress = te.progress;
-        if(currentState.component == AnimationPart.HEAD) {
-            headProgress = currentState.position;
+        if(te.shouldRenderAsActive()) {
+            if (currentState.component == AnimationPart.HEAD) {
+                if (headNewPosition != currentState.position)
+                    headNewPosition = currentState.position;
 
-            if(machineProgress > currentState.breakPercent){
-                currentState = currentState.advance();
+                if (headCurrentPosition < (headNewPosition - 0.05)) {
+                    headCurrentPosition += 0.025;
+                } else if (headCurrentPosition > (headNewPosition + 0.05)) {
+                    headCurrentPosition -= 0.025;
+                }
+
+                if (machineProgress > currentState.breakPercent) {
+                    currentState = currentState.advance();
+                }
             }
         }
 
-        matrix.translate(headProgress, 0, 0);
+        matrix.translate(headCurrentPosition, 0, 0);
         RenderUtils.renderModelTESRFast(quads, bufferIn.getBuffer(RenderType.getSolid()), matrix, combinedLightIn, combinedOverlayIn);
         matrix.pop();
     }
