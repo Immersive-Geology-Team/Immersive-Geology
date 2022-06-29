@@ -14,6 +14,13 @@ public class MaterialMetalUranium extends MaterialBaseMetal {
         super("uranium");
         initializeColorMap((p) -> 0x759068);
     }
+    @Override
+    public boolean hasMetalOxide () {return true;}
+
+    @Override
+    public boolean hasCompoundDust () {return true;}
+
+
 
     @Override
     public boolean hasExistingImplementation() {

@@ -23,7 +23,9 @@ public enum SlurryEnum {
     NEODYMIUM(new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrochloricAcid),
             new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrofluoricAcid)),
     UNOBTANIUM (new MaterialSlurryWrapper(MetalEnum.Unobtanium, FluidEnum.SodiumHydroxide),
-            new MaterialSlurryWrapper(MetalEnum.Unobtanium, FluidEnum.NitricAcid));
+            new MaterialSlurryWrapper(MetalEnum.Unobtanium, FluidEnum.NitricAcid)),
+    URANIUM (new MaterialSlurryWrapper(MetalEnum.Uranium, FluidEnum.HydrochloricAcid),
+            new MaterialSlurryWrapper(MetalEnum.Uranium, FluidEnum.HydrofluoricAcid));
     final LinkedHashSet<MaterialSlurryWrapper> entries;
 
     SlurryEnum(MaterialSlurryWrapper... slurries){

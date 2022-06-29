@@ -1,0 +1,20 @@
+{
+  "type": "immersive_geology:chemicalvat",
+  "fluid_result": {
+    "fluid": "immersive_geology:slurry_hydrofluoric_acid_uranium",
+    "amount": 125
+  },
+  "item_input": {
+    "item": "immersive_geology:metal_oxide_uranium"
+  },
+  "fluid_input1": {
+    "tag": "forge:fluids/hydrofluoric_acid",
+    "amount": 125
+  },
+  "fluid_input2": {
+    "tag": "minecraft:water",
+    "amount": 250
+  },
+  "time": 100,
+  "energy": 12800
+}
