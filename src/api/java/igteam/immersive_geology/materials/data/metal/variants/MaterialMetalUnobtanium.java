@@ -13,6 +13,15 @@ public class MaterialMetalUnobtanium extends MaterialBaseMetal {
         initializeColorMap((p) -> 0x444D6A);
     }
 
+
+    @Override
+    public boolean hasMetalOxide () {return true;}
+
+    @Override
+    public boolean hasCompoundDust () {return true;}
+    @Override
+    public boolean hasCrystal() {return true;}
+
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {

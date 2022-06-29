@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials;
 
+import blusunrize.lib.manual.ManualEntry;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 
 import java.util.*;
@@ -20,7 +21,9 @@ public enum SlurryEnum {
     SILVER(new MaterialSlurryWrapper(MetalEnum.Silver, FluidEnum.HydrochloricAcid)),
 
     NEODYMIUM(new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrochloricAcid),
-            new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrofluoricAcid));
+            new MaterialSlurryWrapper(MetalEnum.Neodymium, FluidEnum.HydrofluoricAcid)),
+    UNOBTANIUM (new MaterialSlurryWrapper(MetalEnum.Unobtanium, FluidEnum.SodiumHydroxide),
+            new MaterialSlurryWrapper(MetalEnum.Unobtanium, FluidEnum.NitricAcid));
     final LinkedHashSet<MaterialSlurryWrapper> entries;
 
     SlurryEnum(MaterialSlurryWrapper... slurries){

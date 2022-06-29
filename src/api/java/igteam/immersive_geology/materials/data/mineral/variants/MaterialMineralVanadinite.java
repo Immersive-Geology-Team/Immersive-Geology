@@ -69,7 +69,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                         getStack(ItemPattern.dust), 3000, 200);
 
                 IRecipeBuilder.chemical(this).create(
-                    "chemical_recipe_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),
+                    "dust_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),
                     getStack(ItemPattern.dust),
                     new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                     new FluidTagInput(FluidEnum.Brine.getFluidTag(FluidPattern.fluid), 250),

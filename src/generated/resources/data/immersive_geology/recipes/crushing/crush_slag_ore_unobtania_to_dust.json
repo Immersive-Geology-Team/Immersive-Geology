@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dust_unobtania"
+  },
+  "input": {
+    "tag": "forge:crushed_ores/unobtania"
+  },
+  "time": 200,
+  "energy": 3000
+}
