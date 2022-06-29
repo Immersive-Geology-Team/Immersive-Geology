@@ -3,7 +3,7 @@
   "secondaries": [],
   "result": {
     "item": "immersive_geology:ore_chunk_granite_cuprite",
-    "count": 4
+    "count": 3
   },
   "input": {
     "tag": "forge:ores/granite_cuprite"

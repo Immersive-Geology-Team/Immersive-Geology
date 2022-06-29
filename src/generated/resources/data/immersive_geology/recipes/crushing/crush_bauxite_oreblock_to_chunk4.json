@@ -3,7 +3,7 @@
   "secondaries": [],
   "result": {
     "item": "immersive_geology:ore_chunk_blackstone_bauxite",
-    "count": 4
+    "count": 3
   },
   "input": {
     "tag": "forge:ores/blackstone_bauxite"

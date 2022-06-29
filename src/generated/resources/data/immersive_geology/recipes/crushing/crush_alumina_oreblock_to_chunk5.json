@@ -3,7 +3,7 @@
   "secondaries": [],
   "result": {
     "item": "immersive_geology:ore_chunk_end_stone_alumina",
-    "count": 4
+    "count": 3
   },
   "input": {
     "tag": "forge:ores/end_stone_alumina"

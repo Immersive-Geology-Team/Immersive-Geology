@@ -4,12 +4,16 @@ import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransfor
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.multiblocks.HydroJetCutterMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.processing.recipe.HydrojetRecipe;
+import igteam.immersive_geology.processing.recipe.SeparatorRecipe;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,6 +25,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -50,7 +56,6 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME)
     };
 
-    public NonNullList<ItemStack> inventory;
     private LazyOptional<IItemHandler> insertionHandler;
     private LazyOptional<IItemHandler> extractionHandler;
 
@@ -86,13 +91,13 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Nullable
     @Override
-    protected HydrojetRecipe getRecipeForId(ResourceLocation resourceLocation) {
-        return null;
+    protected HydrojetRecipe getRecipeForId(ResourceLocation id) {
+        return HydrojetRecipe.recipes.get(id);
     }
     @Override
     public void tick()
     {
-
+        super.tick();
     }
 
     public float getProgress() {
@@ -125,6 +130,34 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
+    public void onEntityCollision(World world, Entity entity) {
+        HydroJetCutterTileEntity master = this.master();
+        if(master != null){
+            Vector3d center = Vector3d.copyCentered(master.getPos());
+            AxisAlignedBB inputLocation = new AxisAlignedBB(center.x + 0.5, center.y + 0.5, center.z+1.5, center.x + 1.5, center.y + 1.5, center.z + 2.5);
+            if (!entity.getBoundingBox().intersects(inputLocation))
+                return;
+            if (entity instanceof ItemEntity && !((ItemEntity) entity).getItem().isEmpty()) {
+                ItemStack stack = ((ItemEntity) entity).getItem();
+                if (stack.isEmpty())
+                    return;
+                HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, master.getInternalTanks()[0].getFluid());
+                if (recipe == null) {
+                    return;
+                }
+                ItemStack displayStack = recipe.getDisplayStack(stack);
+                MultiblockProcessInWorld<HydrojetRecipe> process = new MultiblockProcessInWorld<HydrojetRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
+                if (master.addProcessToQueue(process, true, true)) {
+                    master.addProcessToQueue(process, false, true);
+                    stack.shrink(displayStack.getCount());
+                    if (stack.getCount() <= 0)
+                        entity.remove();
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean isInWorldProcessingMachine()
     {
         return true;
@@ -133,7 +166,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public boolean additionalCanProcessCheck(MultiblockProcess<HydrojetRecipe> process)
     {
-        return false;
+        return true;
     }
 
     @Override
@@ -170,13 +203,9 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         return 0;
     }
 
+    @Nullable
     @Override
-    public NonNullList<ItemStack> getInventory()
-    {
-        HydroJetCutterTileEntity master = this.master();
-        if(master != null){
-            return master.inventory;
-        }
+    public NonNullList<ItemStack> getInventory() {
         return null;
     }
 
@@ -267,7 +296,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         {
             return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
         }
-        if (bX == 1 && bZ == 1)
+        if (bX == 1 && bZ == 1 && bY == 1)
         {
             return Arrays.asList(
                     new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0),

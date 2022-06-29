@@ -92,11 +92,22 @@ public class IGRecipeProvider extends RecipeProvider {
                             case Synthesis:
                                 buildRefineryMethods((IGRefineryMethod) method, consumer);
                                 break;
+                            case Cutting:
+                                buildCuttingMethods((IGHydrojetMethod) method, consumer);
                         }
                     }
                 }
             }
         }
+    }
+
+    private void buildCuttingMethods(IGHydrojetMethod method, Consumer<IFinishedRecipe> consumer) {
+        CuttingRecipeBuilder recipe = CuttingRecipeBuilder.builder(method.getResult());
+        recipe.addFluidInputs(method.getFluidInput());
+        recipe.addInput(method.getInput());
+        recipe.setEnergy(80);
+        recipe.setTime(60);
+        recipe.build(consumer, method.getLocation());
     }
 
     private void buildRefineryMethods(IGRefineryMethod method, Consumer<IFinishedRecipe> consumer)

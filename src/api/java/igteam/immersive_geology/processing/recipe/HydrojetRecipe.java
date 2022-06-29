@@ -30,6 +30,10 @@ public class HydrojetRecipe extends IGMultiblockRecipe
     /** May return null! */
     public static HydrojetRecipe findRecipe(ItemStack itemInput, FluidStack fluidIn)
     {
+        for (HydrojetRecipe recipe : recipes.values()) {
+            if(recipe.itemInput.testIgnoringSize(itemInput)) return recipe;
+        }
+
         return null;
     }
 
@@ -71,6 +75,11 @@ public class HydrojetRecipe extends IGMultiblockRecipe
     @Override
     public List<IngredientWithSize> getItemInputs() {
         return Arrays.asList(itemInput);
+    }
+
+    @Override
+    public List<FluidTagInput> getFluidInputs() {
+        return fluidInputList;
     }
 
     @Override

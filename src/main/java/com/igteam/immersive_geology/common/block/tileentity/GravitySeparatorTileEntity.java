@@ -64,6 +64,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
         this.fluidNeighbors = new ArrayList();
         this.fluidNeighbors.add(CapabilityReference.forNeighbor(this, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP));
+
     }
 
 
@@ -71,6 +72,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         nbt.put("tank_input", tank.writeToNBT(new CompoundNBT()));
+
     }
 
     @Override

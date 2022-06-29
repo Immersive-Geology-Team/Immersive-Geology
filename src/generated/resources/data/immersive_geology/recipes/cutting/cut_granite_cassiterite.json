@@ -1,0 +1,16 @@
+{
+  "type": "immersive_geology:hydrojet_cutter",
+  "result": {
+    "item": "immersive_geology:ore_chunk_granite_cassiterite",
+    "count": 5
+  },
+  "fluid": {
+    "tag": "minecraft:water",
+    "amount": 80
+  },
+  "input": {
+    "tag": "forge:ores/granite_cassiterite"
+  },
+  "energy": 80,
+  "time": 60
+}

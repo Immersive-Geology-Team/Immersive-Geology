@@ -24,4 +24,6 @@ public interface IRecipeBuilder {
     static IGBasicSmeltingMethod basicSmelting(IGProcessingStage parentStage){ return new IGBasicSmeltingMethod(parentStage); }
 
     static IGArcSmeltingMethod arcSmelting(IGProcessingStage parentStage) { return new IGArcSmeltingMethod(parentStage);};
+
+    static IGHydrojetMethod cutting(IGProcessingStage parentStage) { return new IGHydrojetMethod(parentStage); };
 }

@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.metal;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.immersive_geology.IGApi;
@@ -16,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourcePackType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 
@@ -64,7 +66,13 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
                         if (!hasExistingImplementation()) {
                             IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
-                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 4), 6000, 200);
+                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
+
+                            IRecipeBuilder.cutting(this).create(
+                                    getItemTag(BlockPattern.ore, stone.get()),
+                                    new FluidTagInput(FluidTags.WATER, 80),
+                                    stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
+                            );
                         }
 
                         IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
