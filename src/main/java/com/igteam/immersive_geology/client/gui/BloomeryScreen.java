@@ -47,14 +47,14 @@ public class BloomeryScreen extends IEContainerScreen<BloomeryContainer> {
 
         BloomeryTileEntity master = (BloomeryTileEntity) tileEntity.master();
 
-/*        if(master != null) {
-            float leftProgress =  ((float) container.getLeftProgress() / 100);
-
-            this.blit(matrix, guiLeft + 42, guiTop + 35, 176, 16, Math.round(21 * leftProgress), 16);
-
-            float rightProgress = ((float) container.getRightProgress() / 100);
-            this.blit(matrix, guiLeft + 122, guiTop + 35, 176, 16, Math.round(21 * rightProgress), 16);
-        }*/
+     if(master != null) {
+            float leftProgress =  ((float) container.getProgress() / 100);
+            this.blit(matrix, guiLeft + 72, guiTop + 15, 176, 16, Math.round(21 * leftProgress), 16);
+            if(container.getBurningState())
+            {
+                this.blit(matrix, guiLeft + 51, guiTop + 36, 176, 0, 16, 16);
+            }
+        }
     }
 
 }

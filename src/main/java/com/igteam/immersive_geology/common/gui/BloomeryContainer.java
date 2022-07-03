@@ -1,18 +1,15 @@
 package com.igteam.immersive_geology.common.gui;
 
 import blusunrize.immersiveengineering.common.gui.IEBaseContainer;
-import com.igteam.immersive_geology.common.block.blocks.multiblocks.BloomeryBlock;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
-import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.igteam.immersive_geology.common.gui.helper.IGSlot;
 import igteam.immersive_geology.processing.recipe.BloomeryRecipe;
-import igteam.immersive_geology.processing.recipe.ReverberationRecipe;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IntReferenceHolder;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 
 //FIXME Rewrite without internal IE classes
@@ -29,14 +26,14 @@ public class BloomeryContainer extends IEBaseContainer<BloomeryTileEntity> {
             }
         });
 
-        this.addSlot(new IGSlot(this.inv, 0,51 ,17 ) {
+        this.addSlot(new IGSlot(this.inv, 0, 51, 17) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return (BloomeryRecipe.findRecipe(itemStack) != null);
             }
         });
 
-        this.addSlot(new IGSlot(this.inv, 1, 97, 17){
+        this.addSlot(new IGSlot(this.inv, 1, 97, 17) {
             @Override
             public boolean isItemValid(@Nonnull ItemStack itemStack) {
                 return false;
@@ -52,6 +49,27 @@ public class BloomeryContainer extends IEBaseContainer<BloomeryTileEntity> {
 
         //TODO -- Add trackers
 
+        trackInt(new IntReferenceHolder() {
+                     @Override
+                     public void set(int value) {
+                         ((BloomeryTileEntity) tile.master()).setProgress(value);
+                     }
+
+                     @Override
+                     public int get() {
+                         return getProgress();
+                     }
+                 }
+        );
+
+    }
+    public int getProgress(){
+        return ((BloomeryTileEntity) tile.master()).getProgress();
+    }
+
+    public boolean getBurningState()
+    {
+        return ((BloomeryTileEntity) tile.master()).isBurning();
     }
 
 }

@@ -46,7 +46,7 @@ import java.util.function.Supplier;
  * Another Apology to Immersive Engineering, Using their internal Classes isn't a good thing to do... But it does make some things easier.
  */
 public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTileEntity, IEBlockInterfaces.IStateBasedDirectional, IEBlockInterfaces.IBlockBounds, IEBlockInterfaces.IHasDummyBlocks,
-        IIEInventory, IEBlockInterfaces.IInteractionObjectIE, IOBJModelCallback<BlockState>, IModelOffsetProvider, IEBlockInterfaces.IBlockOverlayText {
+        IIEInventory, IEBlockInterfaces.IInteractionObjectIE, IOBJModelCallback<BlockState>, IModelOffsetProvider {
 
     public int dummy = 0;
 
@@ -269,96 +269,21 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         return true;
     }
 
+    public void setProgress(int value)
+    {
+        progress = value;
+    }
+
+    public int getProgress()
+    {
+        return (int)progress;
+    }
+
     @Override
     public boolean canRotate(Direction axis)
     {
         return true;
     }
-
-    @Nullable
-    @Override
-    public ITextComponent[] getOverlayText(PlayerEntity playerEntity, RayTraceResult rayTraceResult, boolean b) {
-        BloomeryTileEntity master = (BloomeryTileEntity) master();
-        StringTextComponent inputString = new StringTextComponent("INPUT: " + master.inventory.get(inputSlot).getDisplayName().getString() + " x " + master.inventory.get(inputSlot).getCount());
-        StringTextComponent outputString = new StringTextComponent("OUTPUT: " + master.inventory.get(outputSlot).getDisplayName().getString() + " x " + master.inventory.get(outputSlot).getCount());
-        StringTextComponent fuelString = new StringTextComponent("FUEL: " + master.inventory.get(fuelSlot).getDisplayName().getString() + " x " + master.inventory.get(fuelSlot).getCount());
-        StringTextComponent burnTime = new StringTextComponent("BURNTIME: " + master.currentBurnTime);
-        StringTextComponent progressTime = new StringTextComponent("PROGRESS: " + master.progress + "/100");
-
-        return new ITextComponent[]{inputString, outputString, fuelString, burnTime, progressTime};
-    }
-
-    @Override
-    public boolean useNixieFont(PlayerEntity playerEntity, RayTraceResult rayTraceResult) {
-        return false;
-    }
-
-    @Override
-  /*  public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
-        BloomeryTileEntity master = (BloomeryTileEntity) master();
-        ItemStack outputSlotStack = master.inventory.get(outputSlot);
-        ItemStack inputSlotStack = master.inventory.get(inputSlot);
-        ItemStack fuelSlotStack = master.inventory.get(fuelSlot);
-
-        if(outputSlotStack.isItemEqual(itemStack)){
-            if(itemStack.getCount() < 64) {
-                int growMax = 64 - Math.min(itemStack.getCount() + outputSlotStack.getCount(), 64);
-                int growAmount = Math.min(growMax, outputSlotStack.getCount());
-                outputSlotStack.shrink(growAmount);
-                itemStack.grow(growAmount);
-                return true;
-            }
-        }
-
-        if(itemStack.isEmpty()){
-            if(!outputSlotStack.isEmpty()){
-                playerEntity.setHeldItem(hand, outputSlotStack);
-                master.inventory.set(outputSlot, ItemStack.EMPTY);
-                return true;
-            }
-            if(!inputSlotStack.isEmpty()) {
-                playerEntity.setHeldItem(hand, inputSlotStack);
-                master.inventory.set(inputSlot, ItemStack.EMPTY);
-                return true;
-            }
-            if(!fuelSlotStack.isEmpty()) {
-                playerEntity.setHeldItem(hand, fuelSlotStack);
-                master.inventory.set(fuelSlot, ItemStack.EMPTY);
-                return true;
-            }
-        }
-        if(master.fuelMap.containsKey(itemStack.getItem())){
-            if(fuelSlotStack.isEmpty()){
-                master.inventory.set(fuelSlot, itemStack);
-                playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
-            }
-            if(fuelSlotStack.isItemEqual(itemStack)){
-                if(fuelSlotStack.getCount() < 64) {
-                    int growMax = 64 - Math.min(itemStack.getCount() + fuelSlotStack.getCount(), 64);
-                    int growAmount = Math.min(growMax, itemStack.getCount());
-                    fuelSlotStack.grow(growAmount);
-                    itemStack.shrink(growAmount);
-                    return true;
-                }
-            }
-        }
-        if(inputSlotStack.isEmpty()){
-            master.inventory.set(inputSlot, itemStack);
-            playerEntity.setHeldItem(hand, ItemStack.EMPTY);
-            return true;
-        }
-        if(inputSlotStack.isItemEqual(itemStack)){
-            if(inputSlotStack.getCount() < 64) {
-                int growMax = 64 - Math.min(itemStack.getCount() + inputSlotStack.getCount(), 64);
-                int growAmount = Math.min(growMax, itemStack.getCount());
-                inputSlotStack.grow(growAmount);
-                itemStack.shrink(growAmount);
-                return true;
-            }
-        }
-        return false;
-    }*/
 
     public boolean canUseGui(PlayerEntity player) {
         return true;
