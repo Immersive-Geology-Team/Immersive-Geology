@@ -362,7 +362,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return SHAPES.get(this.posInMultiblock, Pair.of(getFacing(), getIsMirrored()));
     }
 
-    //Direct Copy from IP's Pumpjack, this will need to be changed.
+    //Direct Copy from IP's Pumpjack,
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
         final int bX = posInMultiblock.getX();
         final int bY = posInMultiblock.getY();

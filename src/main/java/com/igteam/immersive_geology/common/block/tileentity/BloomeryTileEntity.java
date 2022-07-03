@@ -46,9 +46,12 @@ import java.util.function.Supplier;
  * Another Apology to Immersive Engineering, Using their internal Classes isn't a good thing to do... But it does make some things easier.
  */
 public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTileEntity, IEBlockInterfaces.IStateBasedDirectional, IEBlockInterfaces.IBlockBounds, IEBlockInterfaces.IHasDummyBlocks,
-        IIEInventory, IEBlockInterfaces.IInteractionObjectIE, IOBJModelCallback<BlockState>, IModelOffsetProvider, IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction {
+        IIEInventory, IEBlockInterfaces.IInteractionObjectIE, IOBJModelCallback<BlockState>, IModelOffsetProvider, IEBlockInterfaces.IBlockOverlayText {
 
     public int dummy = 0;
+
+    public boolean formed = false;
+
     private NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
 
     protected static final int inputSlot = 0, outputSlot = 1, fuelSlot = 2;
@@ -155,14 +158,9 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         return dummy!=0;
     }
 
-    @Override
-    public IEBlockInterfaces.IInteractionObjectIE getGuiMaster() {
-        return null;
-    }
 
-    @Override
-    public boolean canUseGui(PlayerEntity playerEntity) {
-        return false;
+    public IEBlockInterfaces.IInteractionObjectIE getGuiMaster() {
+        return (IEBlockInterfaces.IInteractionObjectIE) this.master();
     }
 
     @Override
@@ -296,7 +294,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     }
 
     @Override
-    public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
+  /*  public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         BloomeryTileEntity master = (BloomeryTileEntity) master();
         ItemStack outputSlotStack = master.inventory.get(outputSlot);
         ItemStack inputSlotStack = master.inventory.get(inputSlot);
@@ -360,5 +358,10 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
             }
         }
         return false;
+    }*/
+
+    public boolean canUseGui(PlayerEntity player) {
+        return true;
     }
+
 }

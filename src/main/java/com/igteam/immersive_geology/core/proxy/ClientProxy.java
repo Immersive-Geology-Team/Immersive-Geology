@@ -11,6 +11,7 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.client.gui.BloomeryScreen;
 import com.igteam.immersive_geology.client.gui.ReverberationScreen;
 import com.igteam.immersive_geology.client.menu.helper.CreativeMenuHandler;
 import com.igteam.immersive_geology.client.render.IGColorHandler;
@@ -19,6 +20,7 @@ import com.igteam.immersive_geology.client.render.multiblock.*;
 import com.igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
 import com.igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import com.igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
+import com.igteam.immersive_geology.common.gui.BloomeryContainer;
 import com.igteam.immersive_geology.common.gui.ReverberationContainer;
 import com.igteam.immersive_geology.common.multiblocks.*;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -281,6 +283,10 @@ public class ClientProxy extends ServerProxy {
         GuiHandler.register(ReverberationFurnaceTileEntity.class,
                 new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationContainer::new);
         registerScreen(new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationScreen::new);
+
+        GuiHandler.register(BloomeryTileEntity.class,
+                new ResourceLocation(IGLib.MODID, "bloomery"), BloomeryContainer::new);
+        registerScreen(new ResourceLocation(IGLib.MODID, "bloomery"), BloomeryScreen::new);
     }
 
     public static void requestModelsAndTextures() {

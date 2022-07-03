@@ -80,12 +80,14 @@
 
   "machine.immersive_geology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersive_geology.bloomery": "Bloomery",
+  "machine.immersive_geology.hydrojet": "Hydrojet Cutter",
   "machine.immersive_geology.machine_steel_crystallizer" : "Crystalizer",
   "machine.immersive_geology.machine_steel_gravityseparator" : "Gravity Ore Separator",
   "machine.immersive_geology.machine_steel_chemicalvat" : "Vat",
   "machine.immersive_geology.machine_steel_reverberation_furnace" : "Reverberation Furnace",
 
   "block.immersive_geology.rotarykiln": "Rotary Kiln",
+  "block.immersive_geology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",
   "block.immersive_geology.crystallizer" : "Crystalizer",
   "block.immersive_geology.gravityseparator" : "Gravity Ore Separator",
   "block.immersive_geology.chemicalvat" : "Vat",

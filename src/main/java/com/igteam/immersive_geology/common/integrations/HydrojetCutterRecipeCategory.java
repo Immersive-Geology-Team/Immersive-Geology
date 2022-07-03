@@ -6,6 +6,7 @@ import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.processing.recipe.HydrojetRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -25,7 +26,9 @@ public class HydrojetCutterRecipeCategory extends  IGRecipeCategory<HydrojetReci
         IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101)
                 .setTextureSize(101,101).build();
         setBackground(back);
-        setIcon(new ItemStack(IGMultiblockProvider.bloomery));
+        ResourceLocation icon = new ResourceLocation(IGLib.MODID, "textures/gui/jei/hydrojet_icon.png");
+        IDrawableStatic usedIcon = guiHelper.drawableBuilder(icon, 0,0,16,16).setTextureSize(16,16).build();
+        setIcon(usedIcon);
 
     }
 
@@ -40,10 +43,10 @@ public class HydrojetCutterRecipeCategory extends  IGRecipeCategory<HydrojetReci
     public void setRecipe(IRecipeLayout recipeLayout, HydrojetRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(0, true, 16, 40);
+        guiItemStacks.init(0, true, 12, 35);
         guiItemStacks.set (0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
-        guiItemStacks.init(1, false, 67, 40);
+        guiItemStacks.init(1, false, 66, 36);
         guiItemStacks.set (1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 
