@@ -2773,7 +2773,7 @@ d22e620c167b9442032c3c0c300510ff17c5e1cc data/forge/tags/items/ore_chunks/stone_
 2cdd536ec7e2591f57824222cecc3dba3caf85d8 data/forge/tags/items/ore_chunks/unobtania.json
 9a7c9d0aba601592a63f3934b7ea9ca687cb69a6 data/forge/tags/items/ore_chunks/uraninite.json
 1997ff7327c00cd3dc6dd410f6fd7abced430dd1 data/forge/tags/items/ore_chunks/vanadinite.json
-03d879829e0861b8bbb58b31d954dc3507b00c20 data/forge/tags/items/ores.json
+70fd5f07fb61cde65e6a8e7a0eb340d86efc0ee3 data/forge/tags/items/ores.json
 8e619b45f447f2615201cfa1c6d3e0eaafb6fa0f data/forge/tags/items/ores/blackstone_acanthite.json
 5bb414e52ea1621f8cc8e22d7d7505829a15444c data/forge/tags/items/ores/blackstone_alumina.json
 70ba0938d9b0a87864d8c49209a4a61ff527c617 data/forge/tags/items/ores/blackstone_anatase.json
@@ -2966,7 +2966,7 @@ e3e94e8198fdb53b50040a75e21753d375f9bd26 data/forge/tags/items/rods/platinum.jso
 b54a24fb6d86c8c739bf553dc9717bafb2fbe8d7 data/forge/tags/items/rods/unobtanium.json
 5270cabf46b51f32a31bd630cab9abdfa53de57e data/forge/tags/items/rods/vanadium.json
 97f504fd9809abdc76a17e2f47fa9c6870fadf0a data/forge/tags/items/rods/zinc.json
-96b18cb0970f90e4446d4d5dafa1da363322710d data/forge/tags/items/sheetmetals.json
+1646ed5230835ac30add56b480b0141fa5ceb131 data/forge/tags/items/sheetmetals.json
 3ed22688eb07c66834d3ba3e913f7077a1992785 data/forge/tags/items/sheetmetals/bronze.json
 c909ccdec33725817753e9d504e38bb2dfdc203a data/forge/tags/items/sheetmetals/chromium.json
 2c716f728ea9ad62499fcfa4d1544c41e3d7547b data/forge/tags/items/sheetmetals/cobalt.json
@@ -2982,7 +2982,7 @@ f9291a48d4bf6d2d61b1a3bb564855a59be29a81 data/forge/tags/items/sheetmetals/titan
 7feb85f3430e67871e2b17251b5178d5092d9826 data/forge/tags/items/sheetmetals/unobtanium.json
 893570d3f1c3b5a271cf1e48fccef89a9a8d900a data/forge/tags/items/sheetmetals/vanadium.json
 37df9b8f439c48eb15ede4b4835af7d15fd19083 data/forge/tags/items/sheetmetals/zinc.json
-af7b4451e5fd716b927f7fb04e9bee304541cfcd data/forge/tags/items/slabs.json
+da1e4b9a4291856839084d553ba7786d39ba9cf1 data/forge/tags/items/slabs.json
 78f34d99c285f67d1d352def8d9a50bc106d5db3 data/forge/tags/items/slabs/bronze.json
 cdf01cb25db472c63f32ac6097f6dd326214e5ba data/forge/tags/items/slabs/chromium.json
 2f6133fd05b08e376d19ed865720f8db875de94a data/forge/tags/items/slabs/cobalt.json
@@ -3009,7 +3009,7 @@ c029e94862f69f679f1b6429f5cbde609fc4fe89 data/forge/tags/items/slags/cobaltite.j
 7ef9828c24c4e31ffecf360d49f02f8d36671e9a data/forge/tags/items/slags/galena.json
 53b4c1003e81b3c9e527b8cb29f7a27defa42a58 data/forge/tags/items/slags/sphalerite.json
 22ea61c93d930e8afbfc71fdba23c604ae715c62 data/forge/tags/items/slags/vanadinite.json
-6ece8649cfbb2cb2bd3fdb758d6ad997587b74b5 data/forge/tags/items/stairss.json
+4407c5a067004242e1de2e08e5f7d60237e52064 data/forge/tags/items/stairss.json
 3a229f23f62ab16b77e94291ae0ee15b3df59fae data/forge/tags/items/stairss/refractory_brick.json
 128c692d466d24ad5f281fec0cf75b76e4b376cb data/forge/tags/items/stairss/reinforced_refractory_brick.json
 062d81d4a3d036a464ba9f9f5651caa12d5f08c6 data/forge/tags/items/stone_bits.json
@@ -3024,7 +3024,7 @@ c029e94862f69f679f1b6429f5cbde609fc4fe89 data/forge/tags/items/slags/cobaltite.j
 bff6e49021fbe095e1149ffd87eeb8df1be6f7d4 data/forge/tags/items/stone_chunks/granite.json
 35d390c3e9c4c25dc93b6d26eb77df0e4dce4402 data/forge/tags/items/stone_chunks/netherrack.json
 fd44f6861702a3d37892df6b6cae89a16e352a50 data/forge/tags/items/stone_chunks/stone.json
-a584d9a2b73ae7eb1dbfc9e313ef167c185264f7 data/forge/tags/items/storages.json
+473ac9b3b3f0894ad1a4c9d4beab3798e2a7174c data/forge/tags/items/storages.json
 0f3979dc65fb3df432b1747eedf4b23ce014738d data/forge/tags/items/storages/bronze.json
 e39bbdb52bccad24eb0384cd764f6d5eb6305335 data/forge/tags/items/storages/chromium.json
 43648c0f1afddcdbda2c9161e0ef0876c90fc593 data/forge/tags/items/storages/cobalt.json
@@ -4641,12 +4641,12 @@ f414c08b385a8557259bed0b59bde2f9365428c6 data/immersive_geology/recipes/wash/was
 313291140246849b5d01f71e55b91a726f8df02b data/immersive_geology/recipes/wash/wash_netherrack_uraninite.json
 a14d18152a8ce2a5633cb2c5ba3246aae8f66df1 data/immersive_geology/recipes/wash/wash_netherrack_vanadinite.json
 ef53753a603495c845c35e24bc447df913520b72 data/immersive_geology/recipes/wash/wash_platinum.json
-ef53753a603495c845c35e24bc447df913520b72 data/immersive_geology/recipes/wash/wash_platinum2.json
-1b837e4d3e662fd87f225940161acb377ec4af76 data/immersive_geology/recipes/wash/wash_platinum3.json
-9f4c436e248bb7ac8ccc3c226d7d7fa12b02c90d data/immersive_geology/recipes/wash/wash_platinum4.json
-418ab5ae9ab88166f88a4c6c12c2d20891cde29d data/immersive_geology/recipes/wash/wash_platinum5.json
-fd04fa971ba9394a3316f8d9ee6ac23fffdb518a data/immersive_geology/recipes/wash/wash_platinum6.json
-9f707d9161279b108083bf73f35450468c28ddcf data/immersive_geology/recipes/wash/wash_platinum7.json
+1b837e4d3e662fd87f225940161acb377ec4af76 data/immersive_geology/recipes/wash/wash_platinum2.json
+9f4c436e248bb7ac8ccc3c226d7d7fa12b02c90d data/immersive_geology/recipes/wash/wash_platinum3.json
+418ab5ae9ab88166f88a4c6c12c2d20891cde29d data/immersive_geology/recipes/wash/wash_platinum4.json
+fd04fa971ba9394a3316f8d9ee6ac23fffdb518a data/immersive_geology/recipes/wash/wash_platinum5.json
+9f707d9161279b108083bf73f35450468c28ddcf data/immersive_geology/recipes/wash/wash_platinum6.json
+ef53753a603495c845c35e24bc447df913520b72 data/immersive_geology/recipes/wash/wash_platinum7.json
 ef53753a603495c845c35e24bc447df913520b72 data/immersive_geology/recipes/wash/wash_platinum8.json
 ac88bca40339eb4a8b93153f353692dbb6073f30 data/immersive_geology/recipes/wash/wash_silver.json
 c2359fd30888769df544cc409e363c508f6f5061 data/immersive_geology/recipes/wash/wash_silver2.json

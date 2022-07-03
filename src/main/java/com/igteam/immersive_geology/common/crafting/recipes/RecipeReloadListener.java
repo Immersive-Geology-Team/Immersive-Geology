@@ -65,6 +65,9 @@ public class RecipeReloadListener  implements IResourceManagerReloadListener {
         ImmersiveGeology.getNewLogger().info("Loading Reverberation Furnace Recipes.");
         ReverberationRecipe.recipes = filterRecipes(recipes, ReverberationRecipe.class, ReverberationRecipe.TYPE);
 
+        ImmersiveGeology.getNewLogger().info("Loading Hydrojet Cutter Recipes.");
+        HydrojetRecipe.recipes = filterRecipes(recipes, HydrojetRecipe.class, HydrojetRecipe.TYPE);
+
     }
 
     static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType){
