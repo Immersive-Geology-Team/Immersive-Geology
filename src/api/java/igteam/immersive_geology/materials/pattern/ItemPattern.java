@@ -1,6 +1,11 @@
 package igteam.immersive_geology.materials.pattern;
 
 import igteam.immersive_geology.menu.ItemSubGroup;
+import igteam.immersive_geology.tags.IGTags;
+import net.minecraft.item.Item;
+import net.minecraft.tags.ITag;
+
+import java.util.HashMap;
 
 public enum ItemPattern implements MaterialPattern {
     ingot(ItemSubGroup.processed),
@@ -92,4 +97,9 @@ public enum ItemPattern implements MaterialPattern {
     public String getSuffix() {
         return null;
     }
+
+    public ITag<Item> getPatternGroup(){
+        return IGTags.IG_PATTERN_GROUP_TAGS.get(this);
+    }
+
 }
