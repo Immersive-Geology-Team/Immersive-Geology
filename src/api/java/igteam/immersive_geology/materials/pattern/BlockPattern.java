@@ -10,6 +10,7 @@ public enum BlockPattern implements MaterialPattern {
     geode, // used for igteam.immersive_geology.materials that generate like geodes
     stairs(ItemSubGroup.decoration),
     slab(ItemSubGroup.decoration),
+    dust_block(ItemSubGroup.processed),
     machine(ItemSubGroup.misc);
 
     private ItemSubGroup subgroup;

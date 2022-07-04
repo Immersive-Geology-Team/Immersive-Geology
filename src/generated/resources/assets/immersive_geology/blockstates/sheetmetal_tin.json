@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/sheetmetal_tin"
+      "model": "immersive_geology:block/sheetmetal/sheetmetal_tin"
     }
   }
 }

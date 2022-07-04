@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/ore_stone_pyrolusite"
+      "model": "immersive_geology:block/ore/ore_stone_pyrolusite"
     }
   }
 }

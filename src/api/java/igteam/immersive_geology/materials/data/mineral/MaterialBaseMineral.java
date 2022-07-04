@@ -215,6 +215,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                     String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
                     return new ResourceLocation(IGApi.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
                 case storage: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/storage");
+                case dust_block: return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/dust_block");
                 case geode: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
                 default: return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/cobble");
             }

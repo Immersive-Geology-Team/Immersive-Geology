@@ -186,7 +186,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         if(type.getBlock() instanceof IGGenericBlock) {
             IGGenericBlock block = (IGGenericBlock) type.getBlock();
             withExistingParent(new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey() + "_" + block.getPattern().getName()).getPath(),
-                    new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
+                    new ResourceLocation(IGLib.MODID, "block/"+ block.getPattern().getName() + "/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() +
                             (block.getMaterial(MaterialTexture.overlay) != null ? "_" + block.getMaterial(MaterialTexture.overlay).getName() : "")));
         }
     }

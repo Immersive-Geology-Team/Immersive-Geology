@@ -32,6 +32,11 @@ public abstract class MaterialBaseMetal extends MaterialBase {
     }
 
     @Override
+    protected boolean hasDustBlock() {
+        return hasDust();
+    }
+
+    @Override
     public Rarity getRarity() {
         return Rarity.COMMON; //setup default
     }
@@ -154,6 +159,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 case slab:
                 case sheetmetal:
                     return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/sheetmetal");
+                case dust_block:
+                    return new ResourceLocation(IGApi.MODID, "block/greyscale/metal/dust_block");
                 case geode:
                     return new ResourceLocation(IGApi.MODID, "block/greyscale/stone/geode");
                 default:

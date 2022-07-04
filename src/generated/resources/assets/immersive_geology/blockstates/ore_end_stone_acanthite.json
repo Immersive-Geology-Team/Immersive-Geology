@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/ore_end_stone_acanthite"
+      "model": "immersive_geology:block/ore/ore_end_stone_acanthite"
     }
   }
 }

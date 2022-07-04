@@ -320,6 +320,8 @@ public abstract class MaterialBase {
 
     protected abstract boolean hasCrystal();
 
+    protected boolean hasDustBlock() { return false; };
+
     protected abstract boolean hasOreBit();
 
     protected abstract boolean hasOreChunk();
@@ -454,6 +456,9 @@ public abstract class MaterialBase {
                 }
                 case sheetmetal: {
                     return hasSheetmetalBlock();
+                }
+                case dust_block: {
+                    return hasDustBlock();
                 }
                 case machine: {
                     return isMachine();

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersive_geology:block/dust_block/dust_block_bronze"
+    }
+  }
+}

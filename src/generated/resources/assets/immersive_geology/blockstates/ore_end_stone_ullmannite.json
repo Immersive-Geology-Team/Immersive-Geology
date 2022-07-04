@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/ore_end_stone_ullmannite"
+      "model": "immersive_geology:block/ore/ore_end_stone_ullmannite"
     }
   }
 }

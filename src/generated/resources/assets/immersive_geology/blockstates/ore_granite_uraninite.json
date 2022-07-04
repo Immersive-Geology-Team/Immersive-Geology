@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/ore_granite_uraninite"
+      "model": "immersive_geology:block/ore/ore_granite_uraninite"
     }
   }
 }

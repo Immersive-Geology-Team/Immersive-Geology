@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/storage_kaolinite"
+      "model": "immersive_geology:block/storage/storage_kaolinite"
     }
   }
 }

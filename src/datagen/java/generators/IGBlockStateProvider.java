@@ -18,6 +18,7 @@ import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.data.DataGenerator;
@@ -75,7 +76,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         case geode:
                         case storage:
                         case sheetmetal:
-                            registerGenericBlock(type);
+                        case dust_block:
+                            registerGenericBlock(type, pattern);
                             break;
                     }
                 } else {
@@ -204,10 +206,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void registerGenericBlock(IGBlockType type){
+    private void registerGenericBlock(IGBlockType type, MaterialPattern pattern){
         IGGenericBlock block = (IGGenericBlock) type;
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
-                                new ResourceLocation(IGLib.MODID, "block/" + block.getHolderKey()).getPath(),
+                                new ResourceLocation(IGLib.MODID, "block/" + pattern.getName() + "/" + block.getHolderKey()).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))
                         .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()))
                         .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern())))
@@ -218,7 +220,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder baseModel;
         IGGenericBlock block = (IGGenericBlock) type;
         baseModel = models().withExistingParent(
-                        new ResourceLocation(IGLib.MODID, "block/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/ore/" + block.getPattern().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
                         new ResourceLocation(IGLib.MODID, "block/base/" + block.getPattern().getName()))
                 .texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getPattern()))
                 .texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getPattern()));

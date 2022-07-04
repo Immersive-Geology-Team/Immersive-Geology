@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/sheetmetal_manganese"
+      "model": "immersive_geology:block/sheetmetal/sheetmetal_manganese"
     }
   }
 }

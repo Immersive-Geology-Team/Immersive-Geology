@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersive_geology:block/sheetmetal_neodymium"
+      "model": "immersive_geology:block/sheetmetal/sheetmetal_neodymium"
     }
   }
 }
