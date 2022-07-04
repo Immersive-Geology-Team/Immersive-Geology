@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,6 +36,11 @@ public class IGItemGroup extends ItemGroup {
     public IGItemGroup(String label) {
         super(label);
         setBackgroundImage(CMB_TEXTURES);
+    }
+
+    @Override
+    public ITextComponent getGroupName() {
+        return new TranslationTextComponent("itemGroup.immersive_geology." + selectedGroup.name());
     }
 
     @Override

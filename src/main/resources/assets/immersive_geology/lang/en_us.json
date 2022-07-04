@@ -3,6 +3,10 @@
   "language.code": "en_us",
   "language.region": "United States",
   "itemGroup.immersive_geology": "Immersive Geology",
+  "itemGroup.immersive_geology.natural": "Immersive Geology - Natural",
+  "itemGroup.immersive_geology.processed": "Immersive Geology - Processed",
+  "itemGroup.immersive_geology.decoration": "Immersive Geology - Decoration",
+  "itemGroup.immersive_geology.misc": "Immersive Geology - Miscellaneous",
   "immersive_geology.config.title": "",
   "generator.immersive": "Immersive",
 
