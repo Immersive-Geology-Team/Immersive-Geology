@@ -1,14 +1,13 @@
 package com.igteam.immersive_geology.common.item.distinct;
 
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import com.igteam.immersive_geology.common.item.helper.IFlaskPickupHandler;
 import com.igteam.immersive_geology.common.item.helper.IGFlaskFluidHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.lib.IGRippLib;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
+import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.main.IGRegistryProvider;
 import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
@@ -16,7 +15,6 @@ import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.menu.ItemSubGroup;
-import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ILiquidContainer;
@@ -45,8 +43,8 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -98,15 +96,10 @@ public class IGBucketItem extends BucketItem implements IGItemType {
     }
 
     @Override
-    public BlockPattern getBlockPattern() {
-        return null;
-    }
+    public BlockPattern getBlockPattern() { return null; }
 
     @Override
-    public boolean hasCustomItemColours()
-    {
-        return true;
-    }
+    public boolean hasCustomItemColours() { return true; }
 
     @Override
     public int getColourForIGItem(ItemStack stack, int pass) {

@@ -5,8 +5,6 @@ import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 
-import java.util.HashMap;
-
 public enum ItemPattern implements MaterialPattern {
     ingot(ItemSubGroup.processed),
     stone_chunk,
@@ -29,6 +27,7 @@ public enum ItemPattern implements MaterialPattern {
     slag(ItemSubGroup.processed),
     flask(ItemSubGroup.misc),
     bucket(ItemSubGroup.misc),
+    bag(ItemSubGroup.misc),
     block_item;
 
     private final ItemSubGroup subgroup;

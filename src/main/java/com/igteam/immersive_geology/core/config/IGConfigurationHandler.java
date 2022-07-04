@@ -3,8 +3,6 @@ package com.igteam.immersive_geology.core.config;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.config.IGOreConfig;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.APIMaterials;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialSourceWorld;
@@ -37,10 +35,16 @@ public class IGConfigurationHandler {
         public static ForgeConfigSpec ALL;
 
         protected static MaterialConfigSetup MATERIALS;
+        public static final ForgeConfigSpec.ConfigValue<Integer> ROCK_BAG_STACKS;
 
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
             MATERIALS = new MaterialConfigSetup(builder);
+
+            ROCK_BAG_STACKS = builder
+                    .comment("How many stacks the Rock Bag should hold, default=9, min=1, max=27")
+                    .define("bag_amount", Integer.valueOf(9));
+
             ALL = builder.build();
         }
 
