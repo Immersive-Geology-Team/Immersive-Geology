@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_hubnerite_crushed_ore_hubnerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_hubnerite_crushed_ore_hubnerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_hubnerite_crushed_ore_hubnerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_hubnerite_crushed_ore_hubnerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_hubnerite_crushed_ore_hubnerite"
       }
     ]
   },

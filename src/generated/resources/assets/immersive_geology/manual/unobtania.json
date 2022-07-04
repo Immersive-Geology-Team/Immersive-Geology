@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_unobtania_crushed_ore_unobtania"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_unobtania_crushed_ore_unobtania"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_unobtania_crushed_ore_unobtania"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_unobtania_crushed_ore_unobtania"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_unobtania_crushed_ore_unobtania"
       }
     ]
   },

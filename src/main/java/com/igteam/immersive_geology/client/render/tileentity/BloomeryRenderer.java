@@ -52,28 +52,61 @@ public class BloomeryRenderer extends TileEntityRenderer<BloomeryTileEntity> {
                             break;
                     }
 
-                    IVertexBuilder buf = buffer.getBuffer(IGRenderTypes.BLOOMERY_ACTIVE);
-                    transform.push();
-                    Matrix4f mat = transform.getLast().getMatrix();
-
-                    int ux = 16, vy = 0;
-                    int w = 16, h = 16;
-                    float br = 1;
-                    float uw = w/32f, vh = h/32f, u0 = ux/32f, v0 = vy / 32f, u1 = u0 + uw, v1 = v0 + vh;
-                    World world = te.getWorld();
-
-                    assert world != null;
-                    int scuffedLight = 256 * ((1 + world.getLight(te.getPos().offset(rotation, 1))) / 16); //No idea why, but the normal combinedLightIn is just broken, so... We made our own.
-
-                    buf.pos(mat, 1.0015f,0f + h/16f, 0.0f).color(br,br,br,br).tex(u1, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-                    buf.pos(mat, 1.0015f,0f + h/16f, w/16f).color(br,br,br,br).tex(u0, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-                    buf.pos(mat, 1.0015f,0f, w/16f).color(br,br,br,br).tex(u0, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-                    buf.pos(mat, 1.0015f,0f, 0.0f).color(br,br,br,br).tex(u1, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-
-                    transform.pop();
+                    renderBloomeryActiveFront(te, transform, buffer, combinedOverlayIn);
+                    renderBloomeryActiveTop(te, transform, buffer, combinedOverlayIn);
                 }
                 transform.pop();
             }
         }
+    }
+
+
+    private void renderBloomeryActiveFront(BloomeryTileEntity te, MatrixStack transform, IRenderTypeBuffer buffer, int combinedOverlayIn){
+        IVertexBuilder buf = buffer.getBuffer(IGRenderTypes.BLOOMERY_ACTIVE);
+        Direction rotation = te.getFacing();
+        transform.push();
+        Matrix4f mat = transform.getLast().getMatrix();
+
+        int ux = 16, vy = 0;
+        int w = 16, h = 16;
+        float br = 1;
+        float uw = w/48f, vh = h/48f, u0 = ux/48f, v0 = vy / 48f, u1 = u0 + uw, v1 = v0 + vh;
+        World world = te.getWorld();
+
+        assert world != null;
+        int scuffedLight = 256 * ((1 + world.getLight(te.getPos().offset(rotation, 1))) / 16); //No idea why, but the normal combinedLightIn is just broken, so... We made our own.
+
+        buf.pos(mat, 1.0015f,0f + h/16f, 0.0f).color(br,br,br,br).tex(u1, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, 1.0015f,0f + h/16f, w/16f).color(br,br,br,br).tex(u0, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, 1.0015f,0f, w/16f).color(br,br,br,br).tex(u0, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, 1.0015f,0f, 0.0f).color(br,br,br,br).tex(u1, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+
+        transform.pop();
+    }
+
+    private void renderBloomeryActiveTop(BloomeryTileEntity te, MatrixStack transform, IRenderTypeBuffer buffer, int combinedOverlayIn){
+        IVertexBuilder buf = buffer.getBuffer(IGRenderTypes.BLOOMERY_ACTIVE);
+        Direction rotation = te.getFacing();
+        transform.push();
+        Matrix4f mat = transform.getLast().getMatrix();
+
+        int ux = 24, vy = 24;
+        int w = 8, h = 8;
+        float br = 1;
+        float uw = w/48f, vh = h/48f, u0 = ux/48f, v0 = vy / 48f, u1 = u0 + uw, v1 = v0 + vh;
+        World world = te.getWorld();
+
+        assert world != null;
+        int scuffedLight = 256 * ((1 + world.getLight(te.getPos().offset(rotation, 1))) / 16); //No idea why, but the normal combinedLightIn is just broken, so... We made our own.
+
+        float xoffset = 0.25f;
+        float woffset = 0.25f;
+
+        buf.pos(mat, xoffset + 0.0015f,1.350015f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.0015f,1.350015f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.5f,1.350015f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.5f,1.351005f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+
+        transform.pop();
     }
 }

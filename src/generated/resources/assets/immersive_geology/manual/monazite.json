@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_monazite_crushed_ore_monazite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_monazite_crushed_ore_monazite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_monazite_crushed_ore_monazite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_monazite_crushed_ore_monazite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_monazite_crushed_ore_monazite"
       }
     ]
   },

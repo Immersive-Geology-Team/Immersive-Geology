@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_cuprite_crushed_ore_cuprite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cuprite_crushed_ore_cuprite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cuprite_crushed_ore_cuprite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cuprite_crushed_ore_cuprite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cuprite_crushed_ore_cuprite"
       }
     ]
   },

@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_acanthite_crushed_ore_acanthite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_acanthite_crushed_ore_acanthite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_acanthite_crushed_ore_acanthite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_acanthite_crushed_ore_acanthite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_acanthite_crushed_ore_acanthite"
       }
     ]
   }

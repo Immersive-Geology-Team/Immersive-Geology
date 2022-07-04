@@ -58,6 +58,45 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
+    protected boolean hasClay() {
+        return true;
+    }
+
+    @Override
+    protected boolean hasStorageBlock() {
+        return true;
+    }
+
+    @Override
+    protected boolean hasOreBlock() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasOreBit() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasOreChunk() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasCrushedOre() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasDirtyCrushedOre() {
+        return false;
+    }
+    @Override
+    protected boolean hasDust() {
+        return false;
+    }
+
+    @Override
     public Set<MaterialInterface<?>> getSourceMaterials() {
         return Collections.emptySet();
     }

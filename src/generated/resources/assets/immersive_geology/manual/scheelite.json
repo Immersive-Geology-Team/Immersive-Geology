@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_scheelite_crushed_ore_scheelite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_scheelite_crushed_ore_scheelite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_scheelite_crushed_ore_scheelite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_scheelite_crushed_ore_scheelite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_scheelite_crushed_ore_scheelite"
       }
     ]
   },

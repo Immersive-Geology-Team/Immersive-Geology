@@ -16,6 +16,24 @@
       ]
     },
     {
+      "rolls": {
+        "min": 0.5,
+        "max": 1.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_bit_granite_gypsum"
+        }
+      ]
+    },
+    {
       "rolls": 1.0,
       "entries": [
         {

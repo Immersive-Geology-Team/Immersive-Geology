@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_uraninite_crushed_ore_uraninite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_uraninite_crushed_ore_uraninite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_uraninite_crushed_ore_uraninite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_uraninite_crushed_ore_uraninite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_uraninite_crushed_ore_uraninite"
       }
     ]
   },

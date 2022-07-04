@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
       }
     ]
   },

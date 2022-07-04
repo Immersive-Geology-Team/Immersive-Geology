@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_ferberite_crushed_ore_ferberite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_ferberite_crushed_ore_ferberite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_ferberite_crushed_ore_ferberite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_ferberite_crushed_ore_ferberite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_ferberite_crushed_ore_ferberite"
       }
     ]
   },

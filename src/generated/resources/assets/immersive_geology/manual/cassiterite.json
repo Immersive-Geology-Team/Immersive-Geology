@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_cassiterite_crushed_ore_cassiterite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cassiterite_crushed_ore_cassiterite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cassiterite_crushed_ore_cassiterite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cassiterite_crushed_ore_cassiterite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cassiterite_crushed_ore_cassiterite"
       }
     ]
   }

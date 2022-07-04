@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_gypsum_crushed_ore_gypsum"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_gypsum_crushed_ore_gypsum"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_gypsum_crushed_ore_gypsum"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_gypsum_crushed_ore_gypsum"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_gypsum_crushed_ore_gypsum"
       }
     ]
   }

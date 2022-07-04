@@ -1,7 +1,0 @@
-{
-  "parent": "immersive_geology:item/base/ig_base_item",
-  "textures": {
-    "layer0": "immersive_geology:item/greyscale/rock/rock_bit",
-    "layer1": "immersive_geology:item/greyscale/rock/ore_bit/rock_bit_vein"
-  }
-}

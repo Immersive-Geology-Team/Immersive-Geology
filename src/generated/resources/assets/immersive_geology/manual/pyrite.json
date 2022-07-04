@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_pyrite_crushed_ore_pyrite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_pyrite_crushed_ore_pyrite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_pyrite_crushed_ore_pyrite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_pyrite_crushed_ore_pyrite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_pyrite_crushed_ore_pyrite"
       }
     ]
   },

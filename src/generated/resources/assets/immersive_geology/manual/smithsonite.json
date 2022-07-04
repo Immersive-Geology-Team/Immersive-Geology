@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_smithsonite_crushed_ore_smithsonite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_smithsonite_crushed_ore_smithsonite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_smithsonite_crushed_ore_smithsonite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_smithsonite_crushed_ore_smithsonite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_smithsonite_crushed_ore_smithsonite"
       }
     ]
   }

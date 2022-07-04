@@ -428,8 +428,7 @@ public abstract class MaterialBase {
                 case block_item: {
                     return false;
                 }
-            }
-            ;
+            };
         }
 
         if (pattern instanceof BlockPattern) {
@@ -459,8 +458,7 @@ public abstract class MaterialBase {
                 case machine: {
                     return isMachine();
                 }
-            }
-            ;
+            };
         }
 
         if (pattern instanceof FluidPattern) {

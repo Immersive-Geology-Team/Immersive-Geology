@@ -54,7 +54,7 @@ public class OreDropProperty extends LootFunction {
                 return itemStack; //catch return if for some reason the item isn't IGGenericItem
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.min(8, Math.min(4, harvestLevel) + fortune));
+                itemStack.setCount(Math.min(5, Math.min(4, harvestLevel) + fortune));
                 return itemStack;
             }
         }

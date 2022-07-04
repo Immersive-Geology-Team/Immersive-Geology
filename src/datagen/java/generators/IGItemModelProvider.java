@@ -152,16 +152,22 @@ public class IGItemModelProvider extends ItemModelProvider {
         gravitySeparatorItem();
         revfurnaceItem();
         crystalizerItem();
+        hydrojetItem();
     }
 
     private void generateGenericItem(IGGenericItem item){
         String item_loc = new ResourceLocation(IGLib.MODID, "item/" + item.getHolderKey()).getPath();
-        withExistingParent(item_loc,
-                new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
-                .texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getPattern()));
-        if(item.getMaterial(MaterialTexture.overlay) != null) {
-            log.debug("Attempting to set Texture for: " + item.getPattern().getName() + " " + item.getMaterial(MaterialTexture.overlay));
-            getBuilder(item_loc).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
+        try {
+            withExistingParent(item_loc,
+                    new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
+                    .texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getPattern()));
+            if (item.getMaterial(MaterialTexture.overlay) != null) {
+                log.debug("Attempting to set Texture for: " + item.getPattern().getName() + " " + item.getMaterial(MaterialTexture.overlay));
+                getBuilder(item_loc).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getPattern()));
+            }
+        } catch (Exception ex){
+            log.error("Attempted generation of textures for Item: " + item.getRegistryName().getPath() + " received error: " + ex.getMessage());
+
         }
     }
 
@@ -271,6 +277,20 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void crystalizerItem() {
         ItemModelBuilder model = obj(IGMultiblockProvider.crystallizer, "multiblock/obj/crystallizer/crystallizer.obj")
                 .texture("texture", modLoc("multiblock/crystallizer"));
+        ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+        doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+        doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+        doTransform(trans, Perspective.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+        doTransform(trans, Perspective.GUI, new Vector3f(0F, -3F, 0), new Vector3f(30, 225, 0), 0.16F);
+        doTransform(trans, Perspective.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+        doTransform(trans, Perspective.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+    }
+
+    private void hydrojetItem() {
+        ItemModelBuilder model = obj(IGMultiblockProvider.hydrojet_cutter, "multiblock/obj/hydrojet/hydrojet.obj")
+                .texture("texture", modLoc("multiblock/hydrojet"));
         ModelBuilder<?>.TransformsBuilder trans = model.transforms();
         doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
         doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);

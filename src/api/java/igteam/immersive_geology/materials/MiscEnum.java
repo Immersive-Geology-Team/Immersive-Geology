@@ -36,6 +36,12 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     }),
 
     Refractory(new MaterialMiscBase("refractory_brick"){
+
+        @Override
+        public int getColor(MaterialPattern p) {
+            return p == ItemPattern.ingot ? 0xD7C8A7 : super.getColor(p);
+        }
+
         @Override
         protected boolean hasStorageBlock() {
             return true;
@@ -52,8 +58,13 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         }
 
         @Override
+        protected boolean hasIngot() {
+            return true;
+        }
+
+        @Override
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
-            return new ResourceLocation(IGApi.MODID, "block/static_block/refractory_brick");
+            return pattern == ItemPattern.ingot ? new ResourceLocation(IGApi.MODID, "item/greyscale/metal/ingot") : new ResourceLocation(IGApi.MODID, "block/static_block/refractory_brick");
         }
     }),
     Reinforced_refractory(new MaterialMiscBase("reinforced_refractory_brick"){
@@ -75,8 +86,20 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
             return new ResourceLocation(IGApi.MODID, "block/static_block/reinforced_refractory_brick");
         }
     }),
+    Coal(new MaterialMiscBase("coal"){
+        @Override
+        protected boolean hasDust() { return true; };
 
-    Coal(new MaterialMiscBase("coal"));
+        @Override
+        public int getColor(MaterialPattern p) {
+            return 0x212121;
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(MaterialPattern pattern) {
+            return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/dust");
+        }
+    });
 
     private final MaterialBase material;
 

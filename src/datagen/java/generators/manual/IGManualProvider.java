@@ -89,13 +89,17 @@ public class IGManualProvider implements IDataProvider {
             String material_name = baseMaterial.getName();
             String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
 
-            ManualPageProvider provider = attemptPageCreation(material_name)
-                    .startAnchor(material_name + "_display")
-                        .setType(IGManualType.item_display)
-                        .addListElements("items",
-                                StoneEnum.Stone.getItem(ItemPattern.ore_chunk, baseMaterial).getRegistryName(),
-                                StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, baseMaterial).getRegistryName())
+
+                ManualPageProvider provider = attemptPageCreation(material_name);
+
+            if(baseMaterial.hasPattern(ItemPattern.ore_chunk) && baseMaterial.hasPattern(ItemPattern.dirty_crushed_ore)) {
+                    provider.startAnchor(material_name + "_display")
+                    .setType(IGManualType.item_display)
+                    .addListElements("items",
+                            StoneEnum.Stone.getItem(ItemPattern.ore_chunk, baseMaterial).getRegistryName(),
+                            StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, baseMaterial).getRegistryName())
                     .closeAnchor();
+            }
 
             String sanitizedMaterials = "";
 

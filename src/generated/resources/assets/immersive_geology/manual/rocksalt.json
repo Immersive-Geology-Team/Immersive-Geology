@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
       }
     ]
   }

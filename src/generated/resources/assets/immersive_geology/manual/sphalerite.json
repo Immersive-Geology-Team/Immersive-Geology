@@ -4,6 +4,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_sphalerite_crushed_ore_sphalerite"
       }
     ]
   },

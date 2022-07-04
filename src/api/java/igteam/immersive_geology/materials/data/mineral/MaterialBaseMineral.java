@@ -267,33 +267,39 @@ public abstract class MaterialBaseMineral extends MaterialBase {
             @Override
             protected void describe() {
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
+                    if (hasOreChunk()) {
+                        if (hasOreBlock()) {
+                            IRecipeBuilder.cutting(this).create(
+                                    getItemTag(BlockPattern.ore, stone.get()),
+                                    new FluidTagInput(FluidTags.WATER, 80),
+                                    stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
+                            );
 
-                    IRecipeBuilder.cutting(this).create(
-                            getItemTag(BlockPattern.ore, stone.get()),
-                            new FluidTagInput(FluidTags.WATER, 80),
-                            stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
-                    );
+                            IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
+                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
+                        }
 
-                    IRecipeBuilder.separating(this).create(
-                            getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//result
-                            getParentMaterial().getStack(ItemPattern.crushed_ore), //input
-                            stone.getStack(ItemPattern.stone_bit));
+                        IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
+                                getItemTag(ItemPattern.ore_chunk, stone.get()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
+                        if (hasCrushedOre()) {
+                            IRecipeBuilder.crafting(this)
+                                    .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
+                                    .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
 
-                    IRecipeBuilder.crafting(this)
-                            .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
-                            .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                            if (hasDirtyCrushedOre())
+                                IRecipeBuilder.crafting(this)
+                                        .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore), getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore))
+                                        .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk));
+                        }
+                    }
 
-                    IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
-                            getItemTag(BlockPattern.ore, stone.get()),  stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3),6000, 200);
-
-                    IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
-                            getItemTag(ItemPattern.ore_chunk, stone.get()),  stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()),6000, 200);
+                    if (hasCrushedOre() && hasDirtyCrushedOre()) {
+                        IRecipeBuilder.separating(this).create(
+                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//result
+                                getParentMaterial().getStack(ItemPattern.crushed_ore), //input
+                                stone.getStack(ItemPattern.stone_bit));
+                    }
                 }
-
-                IRecipeBuilder.crafting(this)
-                        .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore),  getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore))
-                        .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk));
-
             }
         };
 

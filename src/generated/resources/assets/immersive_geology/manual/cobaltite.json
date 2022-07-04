@@ -15,6 +15,18 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_cobaltite_crushed_ore_cobaltite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cobaltite_crushed_ore_cobaltite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cobaltite_crushed_ore_cobaltite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cobaltite_crushed_ore_cobaltite"
+      },
+      {
+        "recipe": "immersive_geology:shapeless/craft_cobaltite_crushed_ore_cobaltite"
       }
     ]
   }

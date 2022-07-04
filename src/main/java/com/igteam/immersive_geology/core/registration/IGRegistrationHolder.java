@@ -121,10 +121,8 @@ public class IGRegistrationHolder {
             }
             break;
             case flask: {
-                if(m instanceof MaterialMiscBase) {
-                    IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
-                    register(container);
-                }
+                IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
+                register(container);
             }
             break;
             default: {

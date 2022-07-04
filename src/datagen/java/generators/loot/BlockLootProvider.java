@@ -2,10 +2,14 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.loot.OreDropProperty;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.materials.MineralEnum;
+import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
@@ -20,8 +24,10 @@ import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.conditions.MatchTool;
 import net.minecraft.loot.conditions.SurvivesExplosion;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -53,13 +59,19 @@ public class BlockLootProvider implements IDataProvider {
 
             if(b instanceof IGOreBlock){
                 IGOreBlock ore = (IGOreBlock) b;
-                Item stoneChunk = ore.getMaterial(MaterialTexture.base).getItem(ItemPattern.stone_chunk);
-                Item oreChunk = ore.getMaterial(MaterialTexture.base).getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
+                MaterialInterface<?> stoneMaterial = ore.getMaterial(MaterialTexture.base);
+                Item stoneChunk = stoneMaterial.getItem(ItemPattern.stone_chunk);
+                Item oreChunk = stoneMaterial.getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
+                Item oreBit = stoneMaterial.getItem(ItemPattern.ore_bit, ore.getMaterial(MaterialTexture.overlay));
 
                 functionTable.put(b, (block) -> LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(RandomValueRange.of(1F, 1F))
                                 .addEntry(ItemLootEntry.builder(oreChunk)
+                                        .acceptFunction(OreDropProperty.builder()))
+                        ).addLootPool(LootPool.builder()
+                                .rolls(RandomValueRange.of(.5F, 1F))
+                                .addEntry(ItemLootEntry.builder(oreBit)
                                         .acceptFunction(OreDropProperty.builder()))
                         )
                         .addLootPool(LootPool.builder()
@@ -68,6 +80,23 @@ public class BlockLootProvider implements IDataProvider {
                                         .acceptFunction(OreDropProperty.builder()))
                         )
                 );
+            }
+
+            if(b instanceof IGGenericBlock){
+                IGGenericBlock genericBlock = (IGGenericBlock) b;
+                BlockPattern pattern = genericBlock.getPattern();
+                if(pattern == BlockPattern.storage){
+                    if(genericBlock.getMaterial(MaterialTexture.base).getName().equals( MineralEnum.Kaolinite.getName())){
+                        Item clay = MineralEnum.Kaolinite.getItem(ItemPattern.clay);
+                        functionTable.put(b, (block) -> LootTable.builder()
+                                .addLootPool(LootPool.builder()
+                                        .rolls(RandomValueRange.of(1F, 1F))
+                                        .addEntry(ItemLootEntry.builder(clay)
+                                                .acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 4.0F))))
+                                )
+                        );
+                    }
+                }
             }
 
 //                        functionTable.put(b, BlockLootProvider::genRegular);
