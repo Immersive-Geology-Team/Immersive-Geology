@@ -2,6 +2,7 @@ package igteam.immersive_geology.materials;
 
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.config.IGOreConfig;
+import igteam.immersive_geology.main.IGMultiblockProvider;
 import igteam.immersive_geology.materials.data.MaterialBase;
 import igteam.immersive_geology.materials.data.misc.MaterialMiscBase;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
@@ -12,6 +13,8 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -60,6 +63,30 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         @Override
         protected boolean hasIngot() {
             return true;
+        }
+
+        @Override
+        protected void setupProcessingStages() {
+            super.setupProcessingStages();
+
+            new IGProcessingStage(this, IGStageDesignation.preparation) {
+                @Override
+                protected void describe() {
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem(), 1, "xx", "xx")
+                            .setInputToCharacter('x', MiscEnum.Refractory.getItem(ItemPattern.ingot))
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Reinforced_refractory.getBlock(BlockPattern.storage).asItem(), 5, "crc", "rrr", "crc")
+                            .setInputToCharacter('c', MetalEnum.Copper.getItem(ItemPattern.plate))
+                            .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(IGMultiblockProvider.bloomery.asItem(), 1, " r ", "r r", "rrr")
+                            .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                }
+            };
         }
 
         @Override
@@ -163,7 +190,7 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
 
     @Override
     public Item getItem(MaterialPattern pattern) {
-        return material.getItem((ItemPattern) pattern);
+        return material.getItem(pattern);
     }
 
     @Override

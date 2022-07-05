@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "crc",
+    "rrr",
+    "crc"
+  ],
+  "key": {
+    "r": {
+      "item": "immersive_geology:block_item_refractory_brick_storage"
+    },
+    "c": {
+      "item": "immersiveengineering:plate_copper"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:block_item_reinforced_refractory_brick_storage",
+    "count": 5
+  }
+}

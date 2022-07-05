@@ -102,10 +102,10 @@ public class BloomeryRenderer extends TileEntityRenderer<BloomeryTileEntity> {
         float xoffset = 0.25f;
         float woffset = 0.25f;
 
-        buf.pos(mat, xoffset + 0.0015f,1.350015f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-        buf.pos(mat, xoffset + 0.0015f,1.350015f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-        buf.pos(mat, xoffset + 0.5f,1.350015f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
-        buf.pos(mat, xoffset + 0.5f,1.351005f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.0015f,1.35002f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.0015f,1.35002f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v0).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.5f,1.35002f + h/20f, woffset + w/16f).color(br,br,br,br).tex(u0, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
+        buf.pos(mat, xoffset + 0.5f,1.35102f + h/20f, woffset + 0.0f).color(br,br,br,br).tex(u1, v1).overlay(combinedOverlayIn).lightmap(scuffedLight).normal(1,1,1).endVertex();
 
         transform.pop();
     }

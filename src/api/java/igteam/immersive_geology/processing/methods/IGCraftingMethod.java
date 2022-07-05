@@ -8,8 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
+
+import static java.util.Arrays.asList;
 
 public class IGCraftingMethod extends IGProcessingMethod {
     public IGCraftingMethod(IGProcessingStage stage) {
@@ -24,14 +25,17 @@ public class IGCraftingMethod extends IGProcessingMethod {
     private String criterionName;
     private ITag<Item> criterionTriggerItem;
 
+    private boolean isShapeless = false;
+
     /**
      * @param patternLines - input up to 3, 3 character long strings
      * @return
      */
-    public IGCraftingMethod crafting(Item result, int amount, String... patternLines){
+    public IGCraftingMethod shaped(Item result, int amount, String... patternLines){
         this.patterns = patternLines;
         this.result = result;
         this.amount = amount;
+        this.isShapeless = false;
         return this;
     }
 
@@ -39,6 +43,7 @@ public class IGCraftingMethod extends IGProcessingMethod {
         this.result = result;
         this.amount = amount;
         this.shapelessInputs = inputs;
+        this.isShapeless = true;
         return this;
     }
 
@@ -80,12 +85,40 @@ public class IGCraftingMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         String inputLoc = "";
-        if(Arrays.stream(getInputTags()).findFirst().isPresent()) {
-            inputLoc = Objects.requireNonNull(Arrays.stream(getInputTags()).findFirst().get().toString());
-            int startPos = inputLoc.indexOf('/') + 1;
-            inputLoc = inputLoc.substring(startPos).replace("]", "");
+        if(isShapeless) {
+            if (Arrays.stream(getInputTags()).findFirst().isPresent()) {
+                inputLoc = Objects.requireNonNull(Arrays.stream(getInputTags()).findFirst().get().toString());
+                int startPos = inputLoc.indexOf('/') + 1;
+                inputLoc = inputLoc.substring(startPos).replace("]", "");
+            }
+        } else {
+            List<Item> shapedArray = asList(getCharacterInputMap().values().toArray(new Item[getCharacterInputMap().size()]));
+            if (!shapedArray.isEmpty()) {
+                StringBuilder locBuilder = new StringBuilder();
+                for (Item i : shapedArray) {
+                    locBuilder.append(i.getRegistryName().getPath() + "_");
+                }
+                inputLoc = locBuilder.toString() + "shaped";
+                IGApi.getNewLogger().warn("Location Test: " + inputLoc);
+            }
         }
 
-        return toRL("shapeless/craft_" + inputLoc + "_" + Objects.requireNonNull(getResult().asItem().getRegistryName()).getPath());
+        String type = isShapeless ? "shapeless" : "shaped";
+        return toRL(type + "/craft_" + inputLoc + "_" + Objects.requireNonNull(getResult().getRegistryName()).getPath());
+    }
+
+    protected HashMap<Character, Item> inputMap = new HashMap<>();
+
+    public IGCraftingMethod setInputToCharacter(Character c, Item item) {
+        inputMap.putIfAbsent(c, item);
+        return this;
+    }
+
+    public boolean isShaped() {
+        return !isShapeless;
+    }
+
+    public HashMap<Character, Item> getCharacterInputMap() {
+        return inputMap;
     }
 }

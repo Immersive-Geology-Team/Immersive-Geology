@@ -74,11 +74,11 @@ public class BlockLootProvider implements IDataProvider {
                                 .addEntry(ItemLootEntry.builder(oreBit)
                                         .acceptFunction(OreDropProperty.builder()))
                         )
-                        .addLootPool(LootPool.builder()
-                                .rolls(RandomValueRange.of(1F, 1F))
-                                .addEntry(ItemLootEntry.builder(stoneChunk)
-                                        .acceptFunction(OreDropProperty.builder()))
-                        )
+//                        .addLootPool(LootPool.builder()
+//                                .rolls(RandomValueRange.of(1F, 1F))
+//                                .addEntry(ItemLootEntry.builder(stoneChunk)
+//                                        .acceptFunction(OreDropProperty.builder()))
+//                        )
                 );
             }
 

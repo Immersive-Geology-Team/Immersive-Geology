@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "immersive_geology:clay_kaolinite"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:block_item_kaolinite_storage"
+  }
+}

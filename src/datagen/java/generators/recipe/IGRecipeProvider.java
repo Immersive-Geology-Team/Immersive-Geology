@@ -199,15 +199,31 @@ public class IGRecipeProvider extends RecipeProvider {
     }
 
     private void buildCraftingMethods(IGCraftingMethod method, Consumer<IFinishedRecipe> consumer){
-        //TODO add in Shaped Crafting
-        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapelessRecipe(method.getResult(), method.getResultAmount());
+        if(method.isShaped()){
+            ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(method.getResult(), method.getResultAmount());
 
-        for (ITag<Item> tag : method.getInputTags()) {
-            recipe.addIngredient(tag);
+            String[] patterns = method.getPatterns();
+            for (String line : patterns) {
+                recipe.patternLine(line);
+            }
+
+            HashMap<Character, Item> map = method.getCharacterInputMap();
+            for (Character c : map.keySet()) {
+                recipe.key(c, map.get(c));
+            }
+
+            recipe.setGroup(method.getRecipeGroup()).addCriterion(method.getCriterionName(), hasItem(method.getCriterionTrigger()));
+            recipe.build(consumer, method.getLocation());
+        } else {
+            ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapelessRecipe(method.getResult(), method.getResultAmount());
+
+            for (ITag<Item> tag : method.getInputTags()) {
+                recipe.addIngredient(tag);
+            }
+            recipe.setGroup(method.getRecipeGroup()).addCriterion(method.getCriterionName(), hasItem(method.getCriterionTrigger()));
+            recipe.build(consumer, method.getLocation());
         }
 
-        recipe.setGroup(method.getRecipeGroup()).addCriterion(method.getCriterionName(), hasItem(method.getCriterionTrigger()));
-        recipe.build(consumer, method.getLocation());
     }
 
     private void buildSeparatingMethods(IGSeparatorMethod method, Consumer<IFinishedRecipe> consumer){

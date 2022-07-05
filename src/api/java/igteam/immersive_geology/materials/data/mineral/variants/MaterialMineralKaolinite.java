@@ -1,10 +1,16 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import igteam.immersive_geology.materials.MiscEnum;
 import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
 import igteam.immersive_geology.materials.helper.CrystalFamily;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -28,9 +34,15 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.preparation) {
+
             @Override
             protected void describe() {
+                IRecipeBuilder.crafting(this).shaped(getBlock(BlockPattern.storage).asItem(), 1, "xx", "xx")
+                        .setInputToCharacter('x', getItem(ItemPattern.clay))
+                        .finializeRecipe("general_crafting", "has_clay", getItemTag(ItemPattern.clay));
+
+                IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.clay), MiscEnum.Refractory.getItem(ItemPattern.ingot));
 
             }
         };

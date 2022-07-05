@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_refractory_brick_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_clay_kaolinite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:clay_kaolinite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_refractory_brick_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_clay_kaolinite",
+      "has_the_recipe"
+    ]
+  ]
+}
