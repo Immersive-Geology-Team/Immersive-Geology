@@ -9,7 +9,7 @@
     "amount": 80
   },
   "input": {
-    "tag": "forge:ores/stone_bauxite"
+    "tag": "forge:ores/aluminum"
   },
   "energy": 80,
   "time": 60

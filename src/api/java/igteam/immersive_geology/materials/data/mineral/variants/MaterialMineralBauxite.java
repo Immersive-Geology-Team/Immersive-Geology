@@ -1,5 +1,6 @@
 package igteam.immersive_geology.materials.data.mineral.variants;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
@@ -21,13 +22,22 @@ import igteam.immersive_geology.processing.IGProcessingStage;
 import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagRegistry;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class MaterialMineralBauxite extends MaterialBaseMineral {
@@ -36,6 +46,8 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
         initializeColorMap((p) -> 0x999FAF);
     }
 
+    @Override
+    public boolean hasOreBlock() {return false;}
     @Override
     public boolean hasDust() {
         return false;
@@ -61,7 +73,15 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
         new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
-                //TODO Implement a way to turn IE Bauxite into Ore Chunks - We do not want to override the stuff IE normally does. Try to keep it separate.
+
+                ITag<Item> t = ItemTags.makeWrapperTag("forge:ores/aluminum");
+
+                IRecipeBuilder.cutting(this).create(
+                        t,
+                        new FluidTagInput(FluidTags.WATER, 80),
+                        StoneEnum.Stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
+
+                );
             }
         };
 
