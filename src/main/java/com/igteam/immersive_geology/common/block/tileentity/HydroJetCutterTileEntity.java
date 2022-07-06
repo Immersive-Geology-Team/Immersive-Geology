@@ -11,7 +11,6 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.multiblocks.HydroJetCutterMultiblock;
 import com.igteam.immersive_geology.core.registration.IGTileTypes;
 import igteam.immersive_geology.processing.recipe.HydrojetRecipe;
-import igteam.immersive_geology.processing.recipe.SeparatorRecipe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,30 +38,32 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 //HydroJetCutterTileEntity - Used in IGTileTypes when linking it to it's BlockReference
 // This tile entity is dependent on the HydroJetRecipe which is defined in
 public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJetCutterTileEntity, HydrojetRecipe> implements IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
-
-
     //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
     Logger log = ImmersiveGeology.getNewLogger();
-
     public FluidTank[] tanks = new FluidTank[]{
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME)
     };
 
     private LazyOptional<IItemHandler> insertionHandler;
     private LazyOptional<IItemHandler> extractionHandler;
+    public NonNullList<ItemStack> inventory;
+
+    protected int INPUT_SLOT = 0;
+    protected int OUTPUT_SLOT = 1;
 
     public float progress = 0;
 
     public HydroJetCutterTileEntity(){
         super(HydroJetCutterMultiblock.INSTANCE, 2000, true, IGTileTypes.HYDROJET.get());
+        this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     {
         super.readCustomNBT(nbt, descPacket);
         progress = nbt.getFloat("progress");
+        inventory = Utils.readInventory(nbt.getList("inventory", 10), 2);
     }
 
     @Override
@@ -87,6 +89,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     {
         super.writeCustomNBT(nbt, descPacket);
         nbt.putFloat("progress", progress);
+        nbt.put("inventory", Utils.writeInventory(inventory));
     }
 
     @Nullable
@@ -135,23 +138,31 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         if(master != null){
             Vector3d center = Vector3d.copyCentered(master.getPos());
             AxisAlignedBB inputLocation = new AxisAlignedBB(center.x + 0.5, center.y + 0.5, center.z+1.5, center.x + 1.5, center.y + 1.5, center.z + 2.5);
-            if (!entity.getBoundingBox().intersects(inputLocation))
-                return;
+            if (!entity.getBoundingBox().intersects(inputLocation)) {
+                log.warn("Item Not in correct Boundaries");
+                //return;
+            }
             if (entity instanceof ItemEntity && !((ItemEntity) entity).getItem().isEmpty()) {
                 ItemStack stack = ((ItemEntity) entity).getItem();
-                if (stack.isEmpty())
-                    return;
-                HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, master.getInternalTanks()[0].getFluid());
-                if (recipe == null) {
-                    return;
-                }
-                ItemStack displayStack = recipe.getDisplayStack(stack);
-                MultiblockProcessInWorld<HydrojetRecipe> process = new MultiblockProcessInWorld<HydrojetRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
-                if (master.addProcessToQueue(process, true, true)) {
-                    master.addProcessToQueue(process, false, true);
-                    stack.shrink(displayStack.getCount());
-                    if (stack.getCount() <= 0)
-                        entity.remove();
+                if(master.getInventory().get(INPUT_SLOT).isEmpty()) {
+                    if (stack.isEmpty())
+                        return;
+                    HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, master.getInternalTanks()[0].getFluid());
+                    if (recipe == null) {
+                        return;
+                    }
+                    ItemStack displayStack = recipe.getDisplayStack(stack);
+                    master.getInventory().set(INPUT_SLOT, displayStack);
+                    MultiblockProcessInWorld<HydrojetRecipe> process = new MultiblockProcessInWorld<HydrojetRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
+                    if (master.addProcessToQueue(process, true, true)) {
+                        log.warn("Attempting to process item");
+                        master.addProcessToQueue(process, false, true);
+                        stack.shrink(displayStack.getCount());
+                        if (stack.getCount() <= 0)
+                            entity.remove();
+                    } else {
+                        log.warn("Failed to process Item");
+                    }
                 }
             }
         }
@@ -187,26 +198,24 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
-    public int getMaxProcessPerTick()
-    {
-        return 1;
+    public float getMinProcessDistance(MultiblockProcess<HydrojetRecipe> process) {
+        return 0.95f;
+    } // min amount of progress needed before new items can be inserted! (seperation between items) (doesn't apply to same item types...
+
+    @Override
+    public int getMaxProcessPerTick() {
+        return 1; // Number of Parallel items that can run at once!
     }
 
     @Override
-    public int getProcessQueueMaxLength()
-    {
-        return 1;
-    }
-
-    @Override
-    public float getMinProcessDistance(MultiblockProcess<HydrojetRecipe> multiblockProcess) {
-        return 0;
+    public int getProcessQueueMaxLength() {
+        return 64;
     }
 
     @Nullable
     @Override
     public NonNullList<ItemStack> getInventory() {
-        return null;
+        return inventory;
     }
 
     @Override
@@ -217,7 +226,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Override
     public int getSlotLimit(int i) {
-        return 8;
+        return 64;
     }
 
     @Override
@@ -229,7 +238,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Nullable
     @Override
     public HydrojetRecipe findRecipeForInsertion(ItemStack itemStack) {
-        return null;
+        return HydrojetRecipe.findRecipe(itemStack, Objects.requireNonNull(Objects.requireNonNull(master()).getInternalTanks())[0].getFluid());
     }
 
 
