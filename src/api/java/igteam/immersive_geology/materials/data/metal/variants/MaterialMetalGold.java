@@ -2,7 +2,9 @@ package igteam.immersive_geology.materials.data.metal.variants;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import igteam.immersive_geology.materials.MetalEnum;
+import igteam.immersive_geology.materials.StoneEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement.ElementProportion;
@@ -10,11 +12,15 @@ import igteam.immersive_geology.materials.pattern.BlockPattern;
 import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.processing.helper.IRecipeBuilder;
+import igteam.immersive_geology.processing.methods.IGHydrojetMethod;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -36,6 +42,18 @@ public class MaterialMetalGold extends MaterialBaseMetal {
     @Override
     public boolean hasExistingImplementation(){
         return true;
+    }
+
+    @Override
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
+            @Override
+            protected void describe() {
+                IRecipeBuilder.cutting(this).create(ItemTags.GOLD_ORES, new FluidTagInput(FluidTags.WATER, 80), StoneEnum.Stone.getStack(ItemPattern.ore_chunk));
+            }
+        };
     }
 
     @Override
