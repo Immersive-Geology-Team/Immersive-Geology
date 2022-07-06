@@ -52,8 +52,14 @@ public class MaterialMetalGold extends MaterialBaseMetal {
             @Override
             protected void describe() {
                 IRecipeBuilder.cutting(this).create(ItemTags.GOLD_ORES, new FluidTagInput(FluidTags.WATER, 80), StoneEnum.Stone.getStack(ItemPattern.ore_chunk));
+                IRecipeBuilder.bloomery(this).create(
+                        "crushed_ore_" + getName() + "_to_ingot",
+                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        MetalEnum.Gold.getStack(ItemPattern.ingot),
+                        120);
             }
         };
+
     }
 
     @Override
@@ -63,19 +69,4 @@ public class MaterialMetalGold extends MaterialBaseMetal {
                 new ElementProportion(PeriodicTableElement.GOLD)
         ));
     }
-
-    protected void setupProcessingStages() {
-        super.setupProcessingStages();
-        new IGProcessingStage(this, IGStageDesignation.extraction) {
-            @Override
-            protected void describe() {
-                IRecipeBuilder.bloomery(this).create(
-                        "crushed_ore_" + getName() + "_to_ingot",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
-                        MetalEnum.Gold.getStack(ItemPattern.ingot),
-                        120);
-            }
-        };
-    }
-
 }

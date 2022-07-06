@@ -199,6 +199,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public void doProcessOutput(ItemStack output)
     {
+        log.warn("Outputting");
         output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty()) {
             Direction fw = this.getFacing().getOpposite();
@@ -206,7 +207,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
             Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1.getOpposite(), 4).offset(fw, 1),
                     fw).getPosition(), output, fw.getOpposite());
-            master().getInventory().get(outputSlot).shrink(output.getCount());
+            master().getInventory().get(OUTPUT_SLOT).shrink(output.getCount());
         }
     }
     @Override
@@ -297,7 +298,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Override
     public int[] getOutputSlots() {
-        return new int[]{0};
+        return new int[]{OUTPUT_SLOT};
     }
 
     @Override

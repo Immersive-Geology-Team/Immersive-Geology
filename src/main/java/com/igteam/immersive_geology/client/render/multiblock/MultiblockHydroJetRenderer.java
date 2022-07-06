@@ -41,10 +41,13 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
     public void render(HydroJetCutterTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         //this is where we can put in special rendering things!
         if(te.formed && !te.isDummy()){
-            machineProgress += 0.0025;
-
+            HydroJetCutterTileEntity master = te.master();
+            if(master != null) {
+                machineProgress = master.getProgress();
+            }
             transform.push();
             {
+                transform.push();
                 Direction rotation = te.getFacing();
                 switch (rotation){
                     case NORTH: {
@@ -63,7 +66,6 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                         break;
                 }
 
-                transform.push();
                 renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn);
                 transform.pop();
             }
