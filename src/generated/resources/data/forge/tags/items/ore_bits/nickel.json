@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_bit_stone_nickel",
+    "immersive_geology:ore_bit_granite_nickel",
+    "immersive_geology:ore_bit_netherrack_nickel",
+    "immersive_geology:ore_bit_blackstone_nickel",
+    "immersive_geology:ore_bit_end_stone_nickel"
+  ]
+}

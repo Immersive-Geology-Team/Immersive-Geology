@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ore_bits/end_stone_nickel"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_end_stone_nickel"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/end_stone_nickel"
+  },
+  "time": 200,
+  "energy": 6000
+}
