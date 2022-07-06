@@ -1,5 +1,7 @@
 package com.igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.api.utils.CapabilityReference;
+import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
@@ -33,6 +35,7 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
@@ -56,8 +59,8 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
             new FluidTank(12* FluidAttributes.BUCKET_VOLUME)
     };
 
-    private LazyOptional<IItemHandler> insertionHandler;
-    private LazyOptional<IItemHandler> extractionHandler;
+    protected final int outputSlot = 1;
+
 
     public float progress = 0;
 
@@ -170,17 +173,31 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
-    public void doProcessOutput(ItemStack output)
-    {
-
-    }
-
-    @Override
     public void doProcessFluidOutput(FluidStack output)
     {
 
     }
 
+
+    //TODO set the position of this to the correct output area.
+    private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
+            () ->new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing().rotateYCCW(), 4)
+                    .offset(this.getFacing().getOpposite(), 1), getFacing()),
+            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+
+    @Override
+    public void doProcessOutput(ItemStack output)
+    {
+        output = Utils.insertStackIntoInventory(this.output, output, false);
+        if(!output.isEmpty()) {
+            Direction fw = this.getFacing().getOpposite();
+            Direction shift_1 = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
+
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1.getOpposite(), 4).offset(fw, 1),
+                    fw).getPosition(), output, fw.getOpposite());
+            master().getInventory().get(outputSlot).shrink(output.getCount());
+        }
+    }
     @Override
     public void onProcessFinish(MultiblockProcess<HydrojetRecipe> multiblockProcess) {
 
@@ -239,9 +256,20 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         return new FluidTank[0];
     }
 
+    private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
+            new BlockPos(0, 0, 0)
+    );
+
     @Override
     protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource)
     {
+        if(inputPrimary.contains(posInMultiblock)&&(side==null||side.getAxis()==getFacing().rotateYCCW().getAxis()))
+        {
+            HydroJetCutterTileEntity master = this.master();
+            if(master == null || (master.tanks[0].getFluidAmount() >= master.tanks[0].getCapacity()))
+                return false;
+            return true;
+        }
         return false;
     }
 
