@@ -1,8 +1,13 @@
 package igteam.immersive_geology.materials.data.metal.variants;
 
+import igteam.immersive_geology.materials.MetalEnum;
 import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
 import igteam.immersive_geology.materials.helper.PeriodicTableElement;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
+import igteam.immersive_geology.processing.IGProcessingStage;
+import igteam.immersive_geology.processing.helper.IGStageDesignation;
+import igteam.immersive_geology.processing.helper.IRecipeBuilder;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -16,7 +21,7 @@ public class MaterialMetalNickel extends MaterialBaseMetal {
 
     @Override
     public boolean isNative() {
-        return false;
+        return true;
     }
 
 

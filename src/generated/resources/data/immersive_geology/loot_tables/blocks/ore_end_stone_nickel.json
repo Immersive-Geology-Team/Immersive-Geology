@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_chunk_end_stone_nickel"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0.5,
+        "max": 1.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_bit_end_stone_nickel"
+        }
+      ]
+    }
+  ]
+}

@@ -63,4 +63,19 @@ public class MaterialMetalGold extends MaterialBaseMetal {
                 new ElementProportion(PeriodicTableElement.GOLD)
         ));
     }
+
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
+            @Override
+            protected void describe() {
+                IRecipeBuilder.bloomery(this).create(
+                        "crushed_ore_" + getName() + "_to_ingot",
+                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        MetalEnum.Gold.getStack(ItemPattern.ingot),
+                        120);
+            }
+        };
+    }
+
 }
