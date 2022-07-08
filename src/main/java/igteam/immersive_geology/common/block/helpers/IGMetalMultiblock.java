@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.loading.FMLLoader;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,20 +34,22 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     public IGMetalMultiblock(String name, Supplier<TileEntityType<T>> te){
         super(name, te);
 
-        try {
-            IEContent.registeredIEBlocks.remove(this);
-            Iterator<Item> it = IEContent.registeredIEItems.iterator();
-            while (it.hasNext()) {
-                Item item = it.next();
-                if (item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this) {
-                    it.remove();
-                    break;
+        if(!FMLLoader.isProduction()) { // apparently this fixes the concurrent exception and it works for IP so hopefully this works for us. ~Muddykat and thanks again Twisted for your code!
+            try {
+                IEContent.registeredIEBlocks.remove(this);
+                Iterator<Item> it = IEContent.registeredIEItems.iterator();
+                while (it.hasNext()) {
+                    Item item = it.next();
+                    if (item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this) {
+                        it.remove();
+                        break;
+                    }
                 }
+            } catch (ConcurrentModificationException exception) {
+                IGApi.getNewLogger().error("Concurrent Modification Error - Essentially you'll need to restart, this issue is erratic and it's due to IG using IE internal Classes. Don't bother Immersive Engineering about this. (sorry Blu, I'll fix it sometime in the future ~Muddykat)");
+                IGApi.getNewLogger().error(exception.getMessage());
+                throw exception;
             }
-        } catch (ConcurrentModificationException exception){
-            IGApi.getNewLogger().error("Concurrent Modification Error - Essentially you'll need to restart, this issue is erratic and it's due to IG using IE internal Classes. Don't bother Immersive Engineering about this. (sorry Blu, I'll fix it sometime in the future ~Muddykat)");
-            IGApi.getNewLogger().error(exception.getMessage());
-            throw exception;
         }
 
 

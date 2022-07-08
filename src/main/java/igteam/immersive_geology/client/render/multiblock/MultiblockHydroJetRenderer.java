@@ -2,6 +2,8 @@ package igteam.immersive_geology.client.render.multiblock;
 
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
+import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import igteam.api.processing.recipe.HydrojetRecipe;
 import igteam.immersive_geology.common.block.tileentity.HydroJetCutterTileEntity;
 import igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -43,15 +45,18 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         if(te.formed && !te.isDummy()){
             HydroJetCutterTileEntity master = te.master();
             if(master != null) {
-                machineProgress = master.getProgress();
+                if(master.processQueue.stream().findFirst().isPresent()) {
+                    PoweredMultiblockTileEntity.MultiblockProcess<HydrojetRecipe> wrapper = master.processQueue.stream().findFirst().get();
+                    machineProgress = ((float) wrapper.processTick / (float) wrapper.maxTicks);
+                }
             }
             transform.push();
             {
                 transform.push();
+                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn);
                 Direction rotation = te.getFacing();
                 switch (rotation){
                     case NORTH: {
-
                     }
                     case SOUTH: {
                         transform.rotate(new Quaternion(0F, 180F, 0F, true));
@@ -65,8 +70,6 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                     default:
                         break;
                 }
-
-                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn);
                 transform.pop();
             }
             transform.pop();
@@ -83,16 +86,21 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
     private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
     {
         matrix.push();
-        matrix.rotate(new Quaternion(0F, 180F, 0F, true));
 
         if(te.shouldRenderAsActive()) {
+            //IGApi.getNewLogger().warn("I'm Fucking rendering! " + currentArmPosition + " | " + machineProgress + " | " + currentState.name());
+            if(machineProgress < .3){
+                if(currentState != PositionEnum.ZERO){
+                    currentState = PositionEnum.ZERO; // Needed hack because sometimes progress only gets to 98%
+                }
+            }
             if (currentState.component == AnimationPart.ARM) {
                 if (newArmPosition != currentState.position)
                     newArmPosition = currentState.position;
 
-                if (currentArmPosition < (newArmPosition - 0.1)) {
+                if (currentArmPosition < (newArmPosition - 0.0825)) {
                     currentArmPosition += 0.0825;
-                } else if (currentArmPosition > (newArmPosition + 0.1)) {
+                } else if (currentArmPosition > (newArmPosition + 0.0825)) {
                     currentArmPosition -= 0.0825;
                 }
 
@@ -134,9 +142,9 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 if (headNewPosition != currentState.position)
                     headNewPosition = currentState.position;
 
-                if (headCurrentPosition < (headNewPosition - 0.05125)) {
+                if (headCurrentPosition < headNewPosition - 0.05) {
                     headCurrentPosition += 0.05;
-                } else if (headCurrentPosition > (headNewPosition + 0.05125)) {
+                } else if (headCurrentPosition > headNewPosition + 0.05) {
                     headCurrentPosition -= 0.05;
                 }
 

@@ -106,10 +106,6 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         super.tick();
     }
 
-    public float getProgress() {
-        return progress;
-    }
-
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
             CachedShapesWithTransform.createForMultiblock(HydroJetCutterTileEntity::getShape);
 
@@ -135,6 +131,8 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         );
     }
 
+    HydrojetRecipe currentRecipe;
+
     @Override
     public void onEntityCollision(World world, Entity entity) {
         HydroJetCutterTileEntity master = this.master();
@@ -155,7 +153,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
                         return;
                     }
                     ItemStack displayStack = recipe.getDisplayStack(stack);
-                    master.getInventory().set(INPUT_SLOT, displayStack);
+
                     MultiblockProcessInWorld<HydrojetRecipe> process = new MultiblockProcessInWorld<HydrojetRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
                     if (master.addProcessToQueue(process, true, true)) {
                         log.warn("Attempting to process item");
@@ -211,8 +209,12 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         }
     }
     @Override
-    public void onProcessFinish(MultiblockProcess<HydrojetRecipe> multiblockProcess) {
-
+    public void onProcessFinish(MultiblockProcess<HydrojetRecipe> process) {
+        if(master() != null) {
+            doProcessOutput(process.recipe.getRecipeOutput());
+            doGraphicalUpdates();
+            markDirty();
+        }
     }
 
     @Override
