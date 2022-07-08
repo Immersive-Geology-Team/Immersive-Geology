@@ -1,34 +1,20 @@
 package generators;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.block.IGGenericBlock;
-import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
-import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
-import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
-import com.igteam.immersive_geology.common.item.IGGenericItem;
-import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
-import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGMultiblockRegistrationHolder;
-import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.config.IGOreConfig;
-import igteam.immersive_geology.main.IGMultiblockProvider;
-import igteam.immersive_geology.main.IGRegistryProvider;
-import igteam.immersive_geology.materials.MiscEnum;
-import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.helper.APIMaterials;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.helper.MaterialTexture;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.helper.IGProcessingMethod;
-import igteam.immersive_geology.processing.methods.IGCrushingMethod;
+import igteam.immersive_geology.ImmersiveGeology;
+import igteam.immersive_geology.common.block.IGGenericBlock;
+import igteam.immersive_geology.common.block.blocks.IGSlabBlock;
+import igteam.immersive_geology.common.block.blocks.IGStairsBlock;
+import igteam.immersive_geology.common.item.IGGenericBlockItem;
+import igteam.immersive_geology.common.item.IGGenericItem;
+import igteam.immersive_geology.common.item.distinct.IGBucketItem;
+import igteam.immersive_geology.core.lib.IGLib;
+import igteam.api.block.IGBlockType;
+import igteam.api.main.IGMultiblockProvider;
+import igteam.api.main.IGRegistryProvider;
+import igteam.api.materials.helper.MaterialTexture;
+import igteam.api.materials.pattern.BlockPattern;
+import igteam.api.materials.pattern.ItemPattern;
+import igteam.api.materials.pattern.MaterialPattern;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -40,14 +26,8 @@ import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.jackson.Log4jJsonObjectMapper;
 
 import javax.annotation.Nullable;
-import java.io.PrintWriter;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
 
 public class IGItemModelProvider extends ItemModelProvider {
 

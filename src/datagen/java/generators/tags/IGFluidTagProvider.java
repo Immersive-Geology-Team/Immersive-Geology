@@ -1,15 +1,15 @@
 package generators.tags;
 
 import blusunrize.immersiveengineering.api.Lib;
-import com.igteam.immersive_geology.ImmersiveGeology;
-import igteam.immersive_geology.materials.FluidEnum;
-import igteam.immersive_geology.materials.GasEnum;
-import igteam.immersive_geology.materials.SlurryEnum;
-import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
-import igteam.immersive_geology.materials.data.gas.MaterialBaseGas;
-import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.FluidPattern;
+import igteam.immersive_geology.ImmersiveGeology;
+import igteam.api.materials.FluidEnum;
+import igteam.api.materials.GasEnum;
+import igteam.api.materials.SlurryEnum;
+import igteam.api.materials.data.fluid.MaterialBaseFluid;
+import igteam.api.materials.data.gas.MaterialBaseGas;
+import igteam.api.materials.data.slurry.variants.MaterialSlurryWrapper;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.pattern.FluidPattern;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.FluidTagsProvider;
 import net.minecraft.fluid.Fluid;

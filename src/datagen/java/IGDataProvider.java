@@ -1,6 +1,6 @@
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import generators.IGBlockStateProvider;
 import generators.IGItemModelProvider;
 import generators.manual.IGManualProvider;

@@ -1,19 +1,17 @@
 package generators.tags;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.MineralEnum;
-import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
-import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
-import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
-import igteam.immersive_geology.materials.helper.APIMaterials;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MaterialPattern;
-import igteam.immersive_geology.tags.IGTags;
+import igteam.immersive_geology.ImmersiveGeology;
+import igteam.immersive_geology.core.lib.IGLib;
+import igteam.api.materials.MetalEnum;
+import igteam.api.materials.MineralEnum;
+import igteam.api.materials.StoneEnum;
+import igteam.api.materials.data.metal.MaterialBaseMetal;
+import igteam.api.materials.data.mineral.MaterialBaseMineral;
+import igteam.api.materials.data.stone.MaterialBaseStone;
+import igteam.api.materials.helper.APIMaterials;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.pattern.BlockPattern;
+import igteam.api.materials.pattern.ItemPattern;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -21,13 +19,10 @@ import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.data.TagsProvider;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-
-import static igteam.immersive_geology.tags.IGTags.IG_PATTERN_GROUP_TAGS;
+import static igteam.api.tags.IGTags.IG_PATTERN_GROUP_TAGS;
 
 public class IGItemTagProvider extends ItemTagsProvider {
     public IGItemTagProvider(DataGenerator generator, BlockTagsProvider blockProvider, ExistingFileHelper fileHelper) {

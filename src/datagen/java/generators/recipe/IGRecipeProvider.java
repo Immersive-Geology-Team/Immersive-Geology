@@ -1,41 +1,32 @@
 package generators.recipe;
 
 
-import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.RefineryRecipeBuilder;
 import blusunrize.immersiveengineering.common.items.IEItems;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.materials.data.MaterialBase;
-import igteam.immersive_geology.materials.helper.APIMaterials;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.processing.IGProcessingStage;
-import igteam.immersive_geology.processing.builders.*;
-import igteam.immersive_geology.processing.helper.IGProcessingMethod;
-import igteam.immersive_geology.processing.methods.*;
-import net.minecraft.block.Block;
+import igteam.api.IGApi;
+import igteam.api.materials.data.MaterialBase;
+import igteam.api.materials.helper.APIMaterials;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.builders.*;
+import igteam.api.processing.methods.*;
+import igteam.api.processing.helper.IGProcessingMethod;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class IGRecipeProvider extends RecipeProvider {
 

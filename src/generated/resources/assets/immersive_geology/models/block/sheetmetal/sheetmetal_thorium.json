@@ -1,7 +1,7 @@
 {
   "parent": "immersive_geology:block/base/block",
   "textures": {
-    "all": "immersive_geology:block/greyscale/metal/sheetmetal",
-    "particle": "immersive_geology:block/greyscale/metal/sheetmetal"
+    "all": "immersive_geology:block/colored/thorium/sheetmetal",
+    "particle": "immersive_geology:block/colored/thorium/sheetmetal"
   }
 }

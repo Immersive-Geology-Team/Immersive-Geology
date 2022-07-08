@@ -1,16 +1,12 @@
 package generators.tags;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.MineralEnum;
-import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.data.metal.MaterialBaseMetal;
-import igteam.immersive_geology.materials.data.mineral.MaterialBaseMineral;
-import igteam.immersive_geology.materials.data.stone.MaterialBaseStone;
-import igteam.immersive_geology.materials.helper.APIMaterials;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
+import igteam.immersive_geology.ImmersiveGeology;
+import igteam.immersive_geology.core.lib.IGLib;
+import igteam.api.materials.StoneEnum;
+import igteam.api.materials.data.stone.MaterialBaseStone;
+import igteam.api.materials.helper.APIMaterials;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.pattern.BlockPattern;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
