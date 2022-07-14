@@ -190,7 +190,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () ->new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing().rotateYCCW(), 4)
+            () ->new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing(), 4)
                     .offset(this.getFacing().getOpposite(), 1), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
@@ -201,10 +201,9 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         output = Utils.insertStackIntoInventory(this.output, output, false);
         if(!output.isEmpty()) {
             Direction fw = this.getFacing().getOpposite();
-            Direction shift_1 = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
+            Direction shift_1 = this.getIsMirrored() ? this.getFacing() : this.getFacing().rotateY();
 
-            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1.getOpposite(), 4).offset(fw, 1),
-                    fw).getPosition(), output, fw.getOpposite());
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1, 1).up(), fw).getPosition(), output, fw.getOpposite());
             master().getInventory().get(OUTPUT_SLOT).shrink(output.getCount());
         }
     }

@@ -3,20 +3,27 @@ package igteam.immersive_geology.client.render.multiblock;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.recipe.HydrojetRecipe;
 import igteam.immersive_geology.common.block.tileentity.HydroJetCutterTileEntity;
 import igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import igteam.api.IGApi;
 import igteam.api.main.IGMultiblockProvider;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
@@ -39,6 +46,11 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         return true;
     }
 
+    ItemStack item = ItemStack.EMPTY;
+    ItemStack itemPile = ItemStack.EMPTY;
+
+    float test = 0;
+
     @Override
     public void render(HydroJetCutterTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         //this is where we can put in special rendering things!
@@ -48,13 +60,29 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 if(master.processQueue.stream().findFirst().isPresent()) {
                     PoweredMultiblockTileEntity.MultiblockProcess<HydrojetRecipe> wrapper = master.processQueue.stream().findFirst().get();
                     machineProgress = ((float) wrapper.processTick / (float) wrapper.maxTicks);
+                    item = wrapper.recipe.getItemInput().getRandomizedExampleStack(0);
+                    itemPile = item.copy();
+                    itemPile.setCount(master.processQueue.size());
                 }
             }
             transform.push();
             {
                 transform.push();
-                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn);
-                Direction rotation = te.getFacing();
+                Direction rotation = master.getFacing();
+
+                transform.push();
+                switch (rotation){
+                    case WEST:
+                        transform.translate(0, 0, -3);
+                        renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true);
+                        break;
+                    case NORTH:
+                        transform.rotate(new Quaternion(0F, 0F, 0F, true));
+                        renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, false);
+                        break;
+                }
+                transform.pop();
+
                 switch (rotation){
                     case NORTH: {
                     }
@@ -70,6 +98,19 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                     default:
                         break;
                 }
+
+                if(machineProgress > 0.95f){
+                    item = ItemStack.EMPTY;
+                }
+
+                    ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
+                    transform.push();
+                    transform.scale(0.5f,0.5f,0.5f);
+                    transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
+                    transform.translate(-3f, 4 + (-4 * machineProgress), 2.5f);
+                    itemRender.renderItem(item, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+
+                    transform.pop();
                 transform.pop();
             }
             transform.pop();
@@ -83,10 +124,8 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
     float machineProgress = 0f;
     private float currentArmPosition = 2.125f;
     private float newArmPosition = 2.125f;
-    private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
+    private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed)
     {
-        matrix.push();
-
         if(te.shouldRenderAsActive()) {
             //IGApi.getNewLogger().warn("I'm Fucking rendering! " + currentArmPosition + " | " + machineProgress + " | " + currentState.name());
             if(machineProgress < .3){
@@ -107,19 +146,19 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 if(machineProgress > currentState.breakPercent){
                     float offAmount = Math.abs(currentArmPosition - currentState.position);
                     if(offAmount > 0.0625){
-                        IGApi.getNewLogger().warn("Animation Position was off by: " + offAmount);
+                        //IGApi.getNewLogger().warn("Animation Position was off by: " + offAmount);
                     }
                 }
             }
         }
 
 
-        matrix.translate(1.5, 0, currentArmPosition);
+        matrix.translate(isAnimReversed ? currentArmPosition : 1.5f, 0, isAnimReversed ? 1.5f : currentArmPosition);
         List<BakedQuad> quads = ARM.getNullQuads(te.getFacing(), IGMultiblockProvider.hydrojet_cutter.getDefaultState());
         RenderUtils.renderModelTESRFast(quads, bufferIn.getBuffer(RenderType.getSolid()), matrix, combinedLightIn, combinedOverlayIn);
 
             matrix.push();
-                renderHead(matrix, te, bufferIn, combinedLightIn, combinedOverlayIn);
+                renderHead(matrix, te, bufferIn, combinedLightIn, combinedOverlayIn, isAnimReversed);
             matrix.pop();
 
         if (machineProgress > currentState.breakPercent) {
@@ -127,13 +166,11 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
             PositionEnum nextState = currentState.advance();
             currentState = nextState;
         }
-
-        matrix.pop();
     }
 
     private float headCurrentPosition = -0.03125f;
     private float headNewPosition = -0.03125f;
-    private void renderHead(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    private void renderHead(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed) {
         matrix.push();
         List<BakedQuad> quads = HEAD.getNullQuads(te.getFacing(), IGMultiblockProvider.hydrojet_cutter.getDefaultState());
 
@@ -154,7 +191,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
             }
         }
 
-        matrix.translate(headCurrentPosition, 0, 0);
+        matrix.translate(isAnimReversed ? 0 : headCurrentPosition, 0, isAnimReversed ? headCurrentPosition: 0);
         RenderUtils.renderModelTESRFast(quads, bufferIn.getBuffer(RenderType.getSolid()), matrix, combinedLightIn, combinedOverlayIn);
         matrix.pop();
     }
