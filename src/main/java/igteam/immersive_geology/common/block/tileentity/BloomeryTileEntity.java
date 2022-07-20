@@ -51,6 +51,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
     protected static final int inputSlot = 0, outputSlot = 1, fuelSlot = 2;
 
     protected float progress = 0;
+    protected float maxProgress = 1;
     private float currentBurnTime = 0;
 
     public final Supplier<BloomeryRecipe> cachedRecipe = CachedRecipe.cached(
@@ -66,6 +67,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         dummy = nbt.getInt("dummy");
         inventory = Utils.readInventory(nbt.getList("inventory", 10), 3);
         progress = nbt.getFloat("progress");
+        maxProgress = nbt.getFloat("max_progress");
         currentBurnTime = nbt.getFloat("burnTime");
         renderBB = null;
     }
@@ -75,6 +77,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         nbt.putInt("dummy", dummy);
         nbt.put("inventory", Utils.writeInventory(inventory));
         nbt.putFloat("progress", progress);
+        nbt.putFloat("max_progress", maxProgress);
         nbt.putFloat("burnTime", currentBurnTime);
     }
 
@@ -206,6 +209,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         if (burning) this.currentBurnTime--;
         BloomeryRecipe recipe = cachedRecipe.get();
         if(recipe != null){
+            maxProgress = recipe.getTime();
             ItemStack input = inventory.get(inputSlot);
             if(recipe.matches(input)) {
                 if(!burning)
@@ -214,7 +218,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
                 }
                 if(isBurning() && inventory.get(outputSlot).getCount() < 64) {
                     progress++;
-                    if (progress >= recipe.getTime()) {
+                    if (progress >= maxProgress) {
                         ItemStack outputSlotItem = inventory.get(outputSlot);
                         if (outputSlotItem.isEmpty()) {
                             inventory.set(outputSlot, recipe.getRecipeOutput());
@@ -283,4 +287,7 @@ public class BloomeryTileEntity extends IEBaseTileEntity implements ITickableTil
         return true;
     }
 
+    public int getMaxProgress() {
+        return (int) maxProgress;
+    }
 }

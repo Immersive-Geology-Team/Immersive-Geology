@@ -44,7 +44,7 @@ public class BloomeryScreen extends IEContainerScreen<BloomeryContainer> {
         BloomeryTileEntity master = (BloomeryTileEntity) tileEntity.master();
 
      if(master != null) {
-            float leftProgress =  ((float) container.getProgress() / 100);
+            float leftProgress = ((float) container.getProgress() / container.getMaxProgress());
             this.blit(matrix, guiLeft + 72, guiTop + 15, 176, 16, Math.round(21 * leftProgress), 16);
             if(container.getBurningState())
             {

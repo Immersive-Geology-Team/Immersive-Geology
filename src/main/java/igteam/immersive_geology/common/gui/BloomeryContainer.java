@@ -72,4 +72,7 @@ public class BloomeryContainer extends IEBaseContainer<BloomeryTileEntity> {
         return ((BloomeryTileEntity) tile.master()).isBurning();
     }
 
+    public int getMaxProgress() {
+        return ((BloomeryTileEntity) tile.master()).getMaxProgress();
+    }
 }
