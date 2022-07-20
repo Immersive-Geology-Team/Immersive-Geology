@@ -9,6 +9,7 @@ import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTi
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
+import igteam.api.IGApi;
 import igteam.immersive_geology.common.multiblocks.CrystallizerMultiblock;
 import igteam.api.processing.recipe.CrystalRecipe;
 import igteam.immersive_geology.core.registration.IGTileTypes;
@@ -51,7 +52,8 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
     public float activeTicks;
     public FluidTank inputFluidTank = new FluidTank(12 * FluidAttributes.BUCKET_VOLUME);
     public BlockPos inputOffset = new BlockPos(0, 1, 0);
-    //public BlockPos outputOffset = new BlockPos(1, 1, 2);
+    public BlockPos outputOffset = new BlockPos(1, 0, 2);
+
     public NonNullList<ItemStack> inventory;
    // private final LazyOptional<IItemHandler> extractionHandler;
 
@@ -218,7 +220,9 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
         CrystallizerTileEntity master = this.master();
         boolean update = false;
         if (master.energyStorage.getEnergyStored() > 0 && master.processQueue.size() < master.getProcessQueueMaxLength()) {
-            CrystalRecipe recipe = CrystalRecipe.findRecipe(master.inputFluidTank.getFluid());
+            FluidStack fluid = master.inputFluidTank.getFluid();
+            IGApi.getNewLogger().warn("Finding Recipe with Fluid: " + fluid.getDisplayName());
+            CrystalRecipe recipe = CrystalRecipe.findRecipe(fluid);
             if (recipe != null) {
                 MultiblockProcessInMachine<CrystalRecipe> process = new MultiblockProcessInMachine<>(recipe, new int[0])
                         .setInputTanks(0);
@@ -227,6 +231,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
                 }
             }
         }
+
         if (update) {
             this.markDirty();
             this.markContainingBlockForUpdate(null);
@@ -329,7 +334,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     protected boolean canDrainTankFrom(int i, Direction direction) {
-        if (inputOffset.equals(posInMultiblock)) {
+        if (outputOffset.equals(posInMultiblock)) {
             CrystallizerTileEntity master = this.master();
             return master != null && master.inputFluidTank.getFluidAmount() < master.inputFluidTank.getCapacity();
         }

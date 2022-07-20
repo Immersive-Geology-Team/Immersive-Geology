@@ -22,12 +22,12 @@ public class CrystalRecipe extends IGMultiblockRecipe
     /** May return null! */
     public static CrystalRecipe findRecipe(FluidStack fluidInput)
     {
+        IGApi.getNewLogger().warn("Trying for fluid: " + fluidInput.getDisplayName());
         if(!recipes.isEmpty()){
             for(CrystalRecipe r:recipes.values()){
+                //IGApi.getNewLogger().warn("Testing against: " + r.fluidInput.getRandomizedExampleStack(0).getDisplayName());
                 if(r.fluidInput != null && r.fluidInput.testIgnoringAmount(fluidInput)){
-                    if(fluidInput.getAmount() >= r.fluidInput.getAmount()) {
-                        return r;
-                    }
+                    return r;
                 }
             }
         }
