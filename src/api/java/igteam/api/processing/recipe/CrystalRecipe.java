@@ -25,7 +25,9 @@ public class CrystalRecipe extends IGMultiblockRecipe
         if(!recipes.isEmpty()){
             for(CrystalRecipe r:recipes.values()){
                 if(r.fluidInput != null && r.fluidInput.testIgnoringAmount(fluidInput)){
-                    return r;
+                    if(fluidInput.getAmount() >= r.fluidInput.getAmount()) {
+                        return r;
+                    }
                 }
             }
         }

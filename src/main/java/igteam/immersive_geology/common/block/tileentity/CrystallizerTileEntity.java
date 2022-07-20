@@ -222,12 +222,8 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
             if (recipe != null) {
                 MultiblockProcessInMachine<CrystalRecipe> process = new MultiblockProcessInMachine<>(recipe, new int[0])
                         .setInputTanks(0);
-                if (!master.inputFluidTank.drain(recipe.getInputFluid().getAmount(),
-                        IFluidHandler.FluidAction.SIMULATE).isEmpty()){
-                    if (master.addProcessToQueue(process, true, true)) {
-
-                        update = master.addProcessToQueue(process, false, true);
-                    }
+                if (master.addProcessToQueue(process, true, true)) {
+                    update = master.addProcessToQueue(process, false, true);
                 }
             }
         }
@@ -309,7 +305,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     public boolean isInWorldProcessingMachine() {
-        return false;
+        return true;
     }
 
     @Nonnull
@@ -333,6 +329,10 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     protected boolean canDrainTankFrom(int i, Direction direction) {
+        if (inputOffset.equals(posInMultiblock)) {
+            CrystallizerTileEntity master = this.master();
+            return master != null && master.inputFluidTank.getFluidAmount() < master.inputFluidTank.getCapacity();
+        }
         return false;
     }
 

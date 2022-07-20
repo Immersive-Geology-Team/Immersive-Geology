@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 public class ModelChemicalVat extends IGModel{
     public static final String ID = "chemical_stirbar";
     public static final ResourceLocation TEXTURE = new ResourceLocation(IGLib.MODID, "textures/models/chemical_stirbar.png");
-
     public ModelRenderer origin;
     public ModelRenderer connector;
 

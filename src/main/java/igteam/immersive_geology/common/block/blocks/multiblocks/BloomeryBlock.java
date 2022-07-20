@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.IETileProviderBlock;
+import igteam.api.IGApi;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import igteam.immersive_geology.common.item.IGGenericBlockItem;
@@ -36,11 +37,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.loading.FMLLoader;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> implements IGBlockType {
 
@@ -49,13 +48,21 @@ public class BloomeryBlock extends IETileProviderBlock<BloomeryTileEntity> imple
         super("bloomery", () -> IGTileTypes.BLOOMERY.get(), Properties.create(Material.ROCK).sound(SoundType.STONE));
         ImmersiveGeology.getNewLogger().info("Setting up Bloomery");
 
-        IEContent.registeredIEBlocks.remove(this);
-        Iterator<Item> it = IEContent.registeredIEItems.iterator();
-        while(it.hasNext()){
-            Item item = it.next();
-            if(item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this){
-                it.remove();
-                break;
+        if(!FMLLoader.isProduction()) { // apparently this fixes the concurrent exception and it works for IP so hopefully this works for us. ~Muddykat and thanks again Twisted for your code!
+            try {
+                IEContent.registeredIEBlocks.remove(this);
+                Iterator<Item> it = IEContent.registeredIEItems.iterator();
+                while (it.hasNext()) {
+                    Item item = it.next();
+                    if (item instanceof BlockItemIE && ((BlockItemIE) item).getBlock() == this) {
+                        it.remove();
+                        break;
+                    }
+                }
+            } catch (ConcurrentModificationException exception) {
+                IGApi.getNewLogger().error("Concurrent Modification Error - Essentially you'll need to restart, this issue is erratic and it's due to IG using IE internal Classes. Don't bother Immersive Engineering about this. (sorry Blu, I'll fix it sometime in the future ~Muddykat)");
+                IGApi.getNewLogger().error(exception.getMessage());
+                throw exception;
             }
         }
 

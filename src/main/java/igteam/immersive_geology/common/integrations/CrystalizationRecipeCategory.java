@@ -1,5 +1,6 @@
 package igteam.immersive_geology.common.integrations;
 
+import blusunrize.immersiveengineering.common.util.compat.jei.IEFluidTooltipCallback;
 import igteam.api.main.IGMultiblockProvider;
 import igteam.api.processing.recipe.CrystalRecipe;
 import igteam.immersive_geology.core.lib.IGLib;
@@ -9,10 +10,17 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiFluidStackGroup;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CrystalizationRecipeCategory extends  IGRecipeCategory<CrystalRecipe> {
 
@@ -30,7 +38,7 @@ public class CrystalizationRecipeCategory extends  IGRecipeCategory<CrystalRecip
 
     @Override
     public void setIngredients(CrystalRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputs(VanillaTypes.FLUID,recipe.getInputFluid().getMatchingFluidStacks());
+        ingredients.setInputs(VanillaTypes.FLUID, recipe.getInputFluid().getMatchingFluidStacks());
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemOutputs().get(0));
 
     }
@@ -41,6 +49,11 @@ public class CrystalizationRecipeCategory extends  IGRecipeCategory<CrystalRecip
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
         guiFluidStacks.init(0, true, 15, 58);
         guiFluidStacks.set (0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+        ITooltipCallback<FluidStack> callback = new IEFluidTooltipCallback();
+        ArrayList< ITextComponent > list = new ArrayList<>();
+        list.add(new StringTextComponent("Fluid Amount?"));
+        callback.onTooltip(0, true, recipe.getInputFluid().getRandomizedExampleStack(0), list);
+        guiFluidStacks.addTooltipCallback(callback);
 
         guiItemStacks.init(0, false, 65, 48);
         guiItemStacks.set (0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));

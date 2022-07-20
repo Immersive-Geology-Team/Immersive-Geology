@@ -75,8 +75,6 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     private static final Set<BlockPos> inputSecondary = ImmutableSet.of(
             new BlockPos(3, 0, 1)
     );
-
-
     public ChemicalVatTileEntity(){
         super(ChemicalVatMultiblock.INSTANCE, 16000, true, IGTileTypes.VAT.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
@@ -515,6 +513,11 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     }
 
     public boolean shouldStir() {
-        return energyStorage.getEnergyStored() > 0 && processQueue.size() > 0;
+        return energyStorage.getEnergyStored() > 0 && processQueue.size() > 0 && hasEnergyToProcess();
     }
+
+    private boolean hasEnergyToProcess() {
+        return energyStorage.getEnergyStored() >= 256;
+    }
+
 }
