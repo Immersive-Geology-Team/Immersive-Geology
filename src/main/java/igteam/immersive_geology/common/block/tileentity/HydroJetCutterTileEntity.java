@@ -7,7 +7,6 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
-import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import igteam.api.processing.recipe.HydrojetRecipe;
@@ -39,7 +38,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
 
@@ -238,23 +236,23 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     public void doProcessFluidOutput(FluidStack output) {
 
     }
-
+    private DirectionalBlockPos getOutputPos() {
+        return new DirectionalBlockPos(this.getBlockPosForPos(new BlockPos(1, 1, 0)).offset(this.getFacing(), 1), this.getFacing());
+    }
 
     //TODO set the position of this to the correct output area.
-    private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing(), 4)
-                    .offset(this.getFacing().getOpposite(), 1), getFacing()),
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+    private CapabilityReference<IItemHandler> outputCap = CapabilityReference.forTileEntityAt(this,
+            this::getOutputPos, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
     public void doProcessOutput(ItemStack output) {
         log.warn("Outputting");
-        output = Utils.insertStackIntoInventory(this.output, output, false);
+        output = Utils.insertStackIntoInventory(this.outputCap, output, false);
         if (!output.isEmpty()) {
             Direction fw = this.getFacing().getOpposite();
-            Direction shift_1 = this.getIsMirrored() ? this.getFacing() : this.getFacing().rotateY();
+            Direction shift_1 = this.getIsMirrored() ? this.getFacing().rotateYCCW() : this.getFacing().rotateY();
 
-            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1, 1).up(), fw).getPosition(), output, fw.getOpposite());
+            Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1, 1).up().offset(fw, -1), fw).getPosition(), output, fw.getOpposite());
             master().getInventory().get(OUTPUT_SLOT).shrink(output.getCount());
         }
     }
