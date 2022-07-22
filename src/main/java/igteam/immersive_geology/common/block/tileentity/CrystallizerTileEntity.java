@@ -31,6 +31,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -51,9 +52,10 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
             CachedShapesWithTransform.createForMultiblock(CrystallizerTileEntity::getShape);
     public float activeTicks;
     public FluidTank inputFluidTank = new FluidTank(12 * FluidAttributes.BUCKET_VOLUME);
-    public BlockPos inputOffset = new BlockPos(0, 1, 0);
-    public BlockPos outputOffset = new BlockPos(1, 0, 2);
+    public Set<BlockPos> inputFluidOffset = ImmutableSet.of(new BlockPos(1, 1, 2));
+    public Set<BlockPos> outputFluidOffset = ImmutableSet.of(new BlockPos(1, 0, 1)); //drain from the center bottom
 
+    private final LazyOptional<IFluidHandler> inputFluidHandler;
     public NonNullList<ItemStack> inventory;
    // private final LazyOptional<IItemHandler> extractionHandler;
 
@@ -61,6 +63,8 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
         super(CrystallizerMultiblock.INSTANCE, 24000, true, IGTileTypes.CRYSTALLIZER.get());
         activeTicks = 0;
         this.inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+        inputFluidHandler = LazyOptional.of(() -> inputFluidTank);
+
         //this.extractionHandler = this.registerConstantCap(new IEInventoryHandler(1, this.master(), 0, false, true));
 
     }
@@ -147,6 +151,13 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
                 return this.extractionHandler.cast();
             }
         }*/
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && this.inputFluidOffset.contains(posInMultiblock))
+        {
+            CrystallizerTileEntity master = master();
+            if (master != null) {
+                return master.inputFluidHandler.cast();
+            }
+        }
         return super.getCapability(capability, facing);
 
     }
@@ -260,14 +271,15 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     public boolean additionalCanProcessCheck(MultiblockProcess<CrystalRecipe> multiblockProcess) {
-        return true;
+        return  (inputFluidTank.getFluidAmount() >= multiblockProcess.recipe.getInputFluid().getAmount());
+    }
+
+
+    private DirectionalBlockPos getOutputPos() {
+        return new DirectionalBlockPos(this.getBlockPosForPos(new BlockPos(1, 1, 0)).offset(this.getFacing(), 1), this.getFacing());
     }
     private final CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () -> new DirectionalBlockPos(pos.offset(this.getFacing().getOpposite(), 2)
-                    .offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing().rotateYCCW(), 1)
-                    .offset(Direction.UP, 1)
-                    , getFacing().getOpposite()),
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+            this::getOutputPos, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
     public void doProcessOutput(ItemStack itemStack) {
@@ -289,7 +301,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
     @Override
     public void onProcessFinish(MultiblockProcess<CrystalRecipe> multiblockProcess) {
         CrystallizerTileEntity master = this.master();
-        master.inputFluidTank.drain( multiblockProcess.recipe.getInputFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+    //    master.inputFluidTank.drain( multiblockProcess.recipe.getInputFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
         doProcessOutput(multiblockProcess.recipe.getRecipeOutput());
     }
 
@@ -325,7 +337,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     protected boolean canFillTankFrom(int i, Direction direction, FluidStack fluidStack) {
-        if (inputOffset.equals(posInMultiblock)) {
+        if (inputFluidOffset.contains(posInMultiblock)) {
             CrystallizerTileEntity master = this.master();
             return master != null && master.inputFluidTank.getFluidAmount() < master.inputFluidTank.getCapacity();
         }
@@ -334,7 +346,7 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
 
     @Override
     protected boolean canDrainTankFrom(int i, Direction direction) {
-        if (outputOffset.equals(posInMultiblock)) {
+        if (outputFluidOffset.contains(posInMultiblock)) {
             CrystallizerTileEntity master = this.master();
             return master != null && master.inputFluidTank.getFluidAmount() < master.inputFluidTank.getCapacity();
         }
