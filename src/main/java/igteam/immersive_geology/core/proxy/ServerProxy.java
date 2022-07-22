@@ -1,13 +1,17 @@
 package igteam.immersive_geology.core.proxy;
 
+import blusunrize.immersiveengineering.api.energy.ThermoelectricHandler;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItems;
+import igteam.api.materials.MetalEnum;
+import igteam.api.materials.pattern.BlockPattern;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import igteam.immersive_geology.common.fluid.IGFluid;
 import igteam.immersive_geology.common.gui.ReverberationContainer;
 import igteam.immersive_geology.common.world.IGWorldGeneration;
+import igteam.immersive_geology.core.config.IGConfigurationHandler;
 import igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -41,6 +45,12 @@ public class ServerProxy implements Proxy {
     public void onFinishSetup(FMLLoadCompleteEvent event) {
         setupBloomeryFuels();
         setupReverberationFuels();
+
+        //TODO wrap it to check if thorium is enabled
+        ThermoelectricHandler.ThermoelectricSource thorium = new ThermoelectricHandler.
+                ThermoelectricSource(MetalEnum.Thorium.getBlockTag(BlockPattern.storage),
+                1800, ThermoelectricHandler.TemperatureScale.KELVIN);
+        ThermoelectricHandler.registerSourceInKelvin(thorium);
    }
 
     @Override

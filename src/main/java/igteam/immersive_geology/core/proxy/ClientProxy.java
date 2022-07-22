@@ -1,6 +1,7 @@
 package igteam.immersive_geology.core.proxy;
 
 import blusunrize.immersiveengineering.api.ManualHelper;
+import blusunrize.immersiveengineering.api.energy.ThermoelectricHandler;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
@@ -113,6 +114,12 @@ public class ClientProxy extends ServerProxy {
         super.onFinishSetup(event);
         setupBloomeryFuels();
         setupReverberationFuels();
+
+        //TODO wrap it to check if thorium is enabled
+        ThermoelectricHandler.ThermoelectricSource thorium = new ThermoelectricHandler.
+                ThermoelectricSource(MetalEnum.Thorium.getBlockTag(BlockPattern.storage),
+                1800, ThermoelectricHandler.TemperatureScale.KELVIN);
+        ThermoelectricHandler.registerSourceInKelvin(thorium);
     }
 
     private void setupReverberationFuels(){
