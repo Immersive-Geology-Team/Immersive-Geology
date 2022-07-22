@@ -7,12 +7,13 @@ import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import blusunrize.immersiveengineering.common.util.Utils;
+import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
+import igteam.api.processing.recipe.HydrojetRecipe;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.multiblocks.HydroJetCutterMultiblock;
 import igteam.immersive_geology.core.registration.IGTileTypes;
-import igteam.api.processing.recipe.HydrojetRecipe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,9 +34,12 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
 
@@ -49,24 +53,65 @@ import java.util.Set;
 //HydroJetCutterTileEntity - Used in IGTileTypes when linking it to it's BlockReference
 // This tile entity is dependent on the HydroJetRecipe which is defined in
 public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJetCutterTileEntity, HydrojetRecipe> implements IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
-    //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
-    Logger log = ImmersiveGeology.getNewLogger();
-    public FluidTank[] tanks = new FluidTank[]{
-            new FluidTank(12* FluidAttributes.BUCKET_VOLUME)
-    };
-
-    private LazyOptional<IItemHandler> insertionHandler;
-    private LazyOptional<IItemHandler> extractionHandler;
-    public NonNullList<ItemStack> inventory;
-
+    private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
+            CachedShapesWithTransform.createForMultiblock(HydroJetCutterTileEntity::getShape);
+    private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
+            new BlockPos(0, 0, 0)
+    );
+    private static final Set<BlockPos> inputItem = ImmutableSet.of(
+            new BlockPos(1, 1, 2)
+    );
     protected final int INPUT_SLOT = 0;
     protected final int OUTPUT_SLOT = 1;
-
+    public FluidTank[] tanks = new FluidTank[]{
+            new FluidTank(12 * FluidAttributes.BUCKET_VOLUME)
+    };
+    public NonNullList<ItemStack> inventory;
     public float progress = 0;
+    //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
+    Logger log = ImmersiveGeology.getNewLogger();
+    HydrojetRecipe currentRecipe;
+    private LazyOptional<IFluidHandler> insertionFluidHandler;
+    private LazyOptional<IItemHandler> insertionHandler;
 
-    public HydroJetCutterTileEntity(){
+    public HydroJetCutterTileEntity() {
         super(HydroJetCutterMultiblock.INSTANCE, 2000, true, IGTileTypes.HYDROJET.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+        insertionFluidHandler = LazyOptional.of(() -> tanks[0]);
+        insertionHandler = this.registerConstantCap(new PoweredMultiblockTileEntity.MultiblockInventoryHandler_DirectProcessing(this));
+    }
+
+    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
+        final int bX = posInMultiblock.getX();
+        final int bY = posInMultiblock.getY();
+        final int bZ = posInMultiblock.getZ();
+
+        if (bX == 1 && bZ != 1) {
+            if (bY == 1) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0));
+            }
+        }
+        if (bX == 0 && bZ == 0) {
+            if (bY == 1) {
+                return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0625, 0.9325, 1.0, 0.9325));
+            }
+            if (bY == 0) {
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
+                        new AxisAlignedBB(0.0625, 0.5, 0.0625, 0.9325, 1.0, 0.9325)
+                );
+            }
+        }
+        if (bX == 0 && bZ == 1 && bY == 0) {
+            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+        }
+        if (bX == 1 && bZ == 1 && bY == 1) {
+            return Arrays.asList(
+                    new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0),
+                    new AxisAlignedBB(0.0, 0.0, 0.25, 1.0, 1.0, 0.75)
+            );
+
+        }
+        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }
 
     @Override
@@ -76,20 +121,38 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
+
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && inputPrimary.contains(posInMultiblock)) {
+            Direction d = this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing().rotateYCCW();
+            if (facing == d) {
+                HydroJetCutterTileEntity master = master();
+                if (master != null) {
+                    return master.insertionFluidHandler.cast();
+                }
+            }
+
+            return LazyOptional.empty();
+        }
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inputItem.contains(posInMultiblock)){
+            HydroJetCutterTileEntity master = master();
+            if (master != null){
+                return master.insertionHandler.cast();
+            }
+            return LazyOptional.empty();
+        }
+
         return super.getCapability(capability, facing);
     }
 
     @Override
-    public void readCustomNBT(CompoundNBT nbt, boolean descPacket)
-    {
+    public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
         progress = nbt.getFloat("progress");
         inventory = Utils.readInventory(nbt.getList("inventory", 10), 2);
     }
 
     @Override
-    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket)
-    {
+    public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         nbt.putFloat("progress", progress);
         nbt.put("inventory", Utils.writeInventory(inventory));
@@ -100,52 +163,44 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     protected HydrojetRecipe getRecipeForId(ResourceLocation id) {
         return HydrojetRecipe.recipes.get(id);
     }
+
     @Override
-    public void tick()
-    {
+    public void tick() {
         super.tick();
     }
 
-    private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
-            CachedShapesWithTransform.createForMultiblock(HydroJetCutterTileEntity::getShape);
-
     @Override
-    public VoxelShape getBlockBounds(@Nullable ISelectionContext ctx)
-    {
+    public VoxelShape getBlockBounds(@Nullable ISelectionContext ctx) {
         return getShape(SHAPES);
     }
 
     @Override
-    public Set<BlockPos> getEnergyPos()
-    {
+    public Set<BlockPos> getEnergyPos() {
         return ImmutableSet.of(
                 new BlockPos(0, 1, 2)
         );
     }
 
     @Override
-    public Set<BlockPos> getRedstonePos()
-    {
+    public Set<BlockPos> getRedstonePos() {
         return ImmutableSet.of(
                 new BlockPos(1, 0, 1)
         );
     }
 
-    HydrojetRecipe currentRecipe;
-
     @Override
     public void onEntityCollision(World world, Entity entity) {
         HydroJetCutterTileEntity master = this.master();
-        if(master != null){
+        if (master != null) {
             Vector3d center = Vector3d.copyCentered(master.getPos());
-            AxisAlignedBB inputLocation = new AxisAlignedBB(center.x + 0.5, center.y + 0.5, center.z+1.5, center.x + 1.5, center.y + 1.5, center.z + 2.5);
+            AxisAlignedBB inputLocation = new AxisAlignedBB(center.x + 0.5, center.y + 0.5, center.z + 1.5, center.x + 1.5, center.y + 1.5, center.z + 2.5);
             if (!entity.getBoundingBox().intersects(inputLocation)) {
                 log.warn("Item Not in correct Boundaries");
                 //return;
             }
             if (entity instanceof ItemEntity && !((ItemEntity) entity).getItem().isEmpty()) {
                 ItemStack stack = ((ItemEntity) entity).getItem();
-                if(master.getInventory().get(INPUT_SLOT).isEmpty()) {
+                if (master.getInventory().get(INPUT_SLOT).isEmpty()) {
                     if (stack.isEmpty())
                         return;
                     HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, master.getInternalTanks()[0].getFluid());
@@ -170,36 +225,32 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
-    public boolean isInWorldProcessingMachine()
-    {
+    public boolean isInWorldProcessingMachine() {
         return true;
     }
 
     @Override
-    public boolean additionalCanProcessCheck(MultiblockProcess<HydrojetRecipe> process)
-    {
+    public boolean additionalCanProcessCheck(MultiblockProcess<HydrojetRecipe> process) {
         return true;
     }
 
     @Override
-    public void doProcessFluidOutput(FluidStack output)
-    {
+    public void doProcessFluidOutput(FluidStack output) {
 
     }
 
 
     //TODO set the position of this to the correct output area.
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
-            () ->new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing(), 4)
+            () -> new DirectionalBlockPos(pos.offset(this.getIsMirrored() ? this.getFacing().rotateY() : this.getFacing(), 4)
                     .offset(this.getFacing().getOpposite(), 1), getFacing()),
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
-    public void doProcessOutput(ItemStack output)
-    {
+    public void doProcessOutput(ItemStack output) {
         log.warn("Outputting");
         output = Utils.insertStackIntoInventory(this.output, output, false);
-        if(!output.isEmpty()) {
+        if (!output.isEmpty()) {
             Direction fw = this.getFacing().getOpposite();
             Direction shift_1 = this.getIsMirrored() ? this.getFacing() : this.getFacing().rotateY();
 
@@ -207,9 +258,10 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
             master().getInventory().get(OUTPUT_SLOT).shrink(output.getCount());
         }
     }
+
     @Override
     public void onProcessFinish(MultiblockProcess<HydrojetRecipe> process) {
-        if(master() != null) {
+        if (master() != null) {
             doProcessOutput(process.recipe.getRecipeOutput());
             doGraphicalUpdates();
             markDirty();
@@ -238,8 +290,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
-    public boolean isStackValid(int slot, ItemStack stack)
-    {
+    public boolean isStackValid(int slot, ItemStack stack) {
         return true;
     }
 
@@ -260,24 +311,16 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
         return HydrojetRecipe.findRecipe(itemStack, Objects.requireNonNull(Objects.requireNonNull(master()).getInternalTanks())[0].getFluid());
     }
 
-
     @Override
-    protected IFluidTank[] getAccessibleFluidTanks(Direction side)
-    {
+    protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
         return new FluidTank[0];
     }
 
-    private static final Set<BlockPos> inputPrimary = ImmutableSet.of(
-            new BlockPos(0, 0, 0)
-    );
-
     @Override
-    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource)
-    {
-        if(inputPrimary.contains(posInMultiblock)&&(side==null||side.getAxis()==getFacing().rotateYCCW().getAxis()))
-        {
+    protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
+        if (inputPrimary.contains(posInMultiblock) && (side == null || side.getAxis() == getFacing().rotateYCCW().getAxis())) {
             HydroJetCutterTileEntity master = this.master();
-            if(master == null || (master.tanks[0].getFluidAmount() >= master.tanks[0].getCapacity()))
+            if (master == null || (master.tanks[0].getFluidAmount() >= master.tanks[0].getCapacity()))
                 return false;
             return true;
         }
@@ -285,14 +328,12 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     }
 
     @Override
-    protected boolean canDrainTankFrom(int iTank, Direction side)
-    {
+    protected boolean canDrainTankFrom(int iTank, Direction side) {
         return false;
     }
 
-   @Override
-    public void doGraphicalUpdates()
-    {
+    @Override
+    public void doGraphicalUpdates() {
         this.markDirty();
         this.markContainingBlockForUpdate(null);
     }
@@ -305,45 +346,6 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public int[] getOutputTanks() {
         return new int[]{0};
-    }
-
-    private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
-        final int bX = posInMultiblock.getX();
-        final int bY = posInMultiblock.getY();
-        final int bZ = posInMultiblock.getZ();
-
-        if (bX == 1 && bZ != 1)
-        {
-            if (bY == 1)
-            {
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0));
-            }
-        }
-        if (bX == 0 && bZ ==0){
-            if (bY == 1)
-            {
-                return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0625, 0.9325, 1.0, 0.9325));
-            }
-            if (bY == 0)
-            {
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
-                        new AxisAlignedBB(0.0625, 0.5, 0.0625, 0.9325, 1.0, 0.9325)
-                        );
-            }
-        }
-        if (bX == 0 && bZ == 1 && bY == 0)
-        {
-            return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
-        }
-        if (bX == 1 && bZ == 1 && bY == 1)
-        {
-            return Arrays.asList(
-                    new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.125, 1.0),
-                    new AxisAlignedBB(0.0, 0.0, 0.25, 1.0, 1.0, 0.75)
-            );
-
-        }
-        return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
     }
 
     @Override
