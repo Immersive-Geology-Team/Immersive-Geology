@@ -16,6 +16,7 @@ import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
@@ -42,6 +43,12 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
         {
             @Override
             protected void describe(){
+                IRecipeBuilder.crushing(this).create(
+                        "crushed_ore_to_dust",
+                        getItemTag(ItemPattern.crushed_ore),
+                        getStack(ItemPattern.dust),
+                        3000, 200);
+
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_brine",
                         getStack(ItemPattern.dust, 2),
