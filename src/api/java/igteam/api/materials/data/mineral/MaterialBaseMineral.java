@@ -94,6 +94,9 @@ public abstract class MaterialBaseMineral extends MaterialBase {
     }
 
     @Override
+    public boolean isSalt() { return false; }
+
+    @Override
     protected boolean isMachine() {
         return false;
     }
@@ -261,6 +264,10 @@ public abstract class MaterialBaseMineral extends MaterialBase {
             @Override
             protected void describe() {
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
+                    if(isSalt()) {
+                        IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_salt",
+                                getItemTag(BlockPattern.ore, stone.get()), getParentMaterial().getStack(ItemPattern.dust, 5), getParentMaterial().getItemTag(ItemPattern.dust), 6000, 200, 0.3f);
+                    }
                     if (hasOreChunk()) {
                         if (hasOreBlock()) {
                             IRecipeBuilder.cutting(this).create(

@@ -1,33 +1,6 @@
 {
   "saltpeter_recipe": {
     "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_saltpeter_crushed_ore_saltpeter"
-      }
-    ]
-  },
-  "saltpeter_display": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:ore_chunk_stone_saltpeter"
-      },
-      {
-        "item": "immersive_geology:dirty_crushed_ore_stone_saltpeter"
-      }
-    ]
+    "recipes": []
   }
 }

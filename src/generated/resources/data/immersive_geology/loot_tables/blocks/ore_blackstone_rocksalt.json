@@ -11,7 +11,7 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_chunk_blackstone_rocksalt"
+          "name": "immersive_geology:crystal_rocksalt"
         }
       ]
     },
@@ -29,7 +29,7 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_bit_blackstone_rocksalt"
+          "name": "immersive_geology:dust_rocksalt"
         }
       ]
     }

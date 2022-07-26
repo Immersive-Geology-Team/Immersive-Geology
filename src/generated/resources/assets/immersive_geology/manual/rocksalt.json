@@ -1,33 +1,6 @@
 {
-  "rocksalt_display": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:ore_chunk_stone_rocksalt"
-      },
-      {
-        "item": "immersive_geology:dirty_crushed_ore_stone_rocksalt"
-      }
-    ]
-  },
   "rocksalt_recipe": {
     "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_rocksalt_crushed_ore_rocksalt"
-      }
-    ]
+    "recipes": []
   }
 }

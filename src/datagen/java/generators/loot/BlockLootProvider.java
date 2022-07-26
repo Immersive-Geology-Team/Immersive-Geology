@@ -2,15 +2,15 @@ package generators.loot;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import igteam.immersive_geology.common.block.IGGenericBlock;
-import igteam.immersive_geology.common.block.blocks.IGOreBlock;
-import igteam.immersive_geology.common.loot.OreDropProperty;
-import igteam.immersive_geology.core.lib.IGLib;
 import igteam.api.materials.MineralEnum;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.MaterialTexture;
 import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
+import igteam.immersive_geology.common.block.IGGenericBlock;
+import igteam.immersive_geology.common.block.blocks.IGOreBlock;
+import igteam.immersive_geology.common.loot.OreDropProperty;
+import igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -59,26 +59,49 @@ public class BlockLootProvider implements IDataProvider {
             if(b instanceof IGOreBlock){
                 IGOreBlock ore = (IGOreBlock) b;
                 MaterialInterface<?> stoneMaterial = ore.getMaterial(MaterialTexture.base);
+                MaterialInterface<?> oreMaterial = ore.getMaterial(MaterialTexture.overlay);
                 Item stoneChunk = stoneMaterial.getItem(ItemPattern.stone_chunk);
-                Item oreChunk = stoneMaterial.getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
-                Item oreBit = stoneMaterial.getItem(ItemPattern.ore_bit, ore.getMaterial(MaterialTexture.overlay));
+                if (oreMaterial.get().isSalt())
+                {
+                    Item crystal = oreMaterial.getItem(ItemPattern.crystal);
+                    Item dust = oreMaterial.getItem(ItemPattern.dust);
+                    functionTable.put(b, (block) -> LootTable.builder()
+                                    .addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(1F, 1F))
+                                            .addEntry(ItemLootEntry.builder(crystal)
+                                                    .acceptFunction(OreDropProperty.builder()))
+                                    ).addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(.5F, 1F))
+                                            .addEntry(ItemLootEntry.builder(dust)
+                                                    .acceptFunction(OreDropProperty.builder()))
+                                    )
+                            //                        .addLootPool(LootPool.builder()
+                            //                                .rolls(RandomValueRange.of(1F, 1F))
+                            //                                .addEntry(ItemLootEntry.builder(stoneChunk)
+                            //                                        .acceptFunction(OreDropProperty.builder()))
+                            //                        )
+                    );
+                } else {
+                    Item oreChunk = stoneMaterial.getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
+                    Item oreBit = stoneMaterial.getItem(ItemPattern.ore_bit, ore.getMaterial(MaterialTexture.overlay));
 
-                functionTable.put(b, (block) -> LootTable.builder()
-                        .addLootPool(LootPool.builder()
-                                .rolls(RandomValueRange.of(1F, 1F))
-                                .addEntry(ItemLootEntry.builder(oreChunk)
-                                        .acceptFunction(OreDropProperty.builder()))
-                        ).addLootPool(LootPool.builder()
-                                .rolls(RandomValueRange.of(.5F, 1F))
-                                .addEntry(ItemLootEntry.builder(oreBit)
-                                        .acceptFunction(OreDropProperty.builder()))
-                        )
-//                        .addLootPool(LootPool.builder()
-//                                .rolls(RandomValueRange.of(1F, 1F))
-//                                .addEntry(ItemLootEntry.builder(stoneChunk)
-//                                        .acceptFunction(OreDropProperty.builder()))
-//                        )
-                );
+                    functionTable.put(b, (block) -> LootTable.builder()
+                                    .addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(1F, 1F))
+                                            .addEntry(ItemLootEntry.builder(oreChunk)
+                                                    .acceptFunction(OreDropProperty.builder()))
+                                    ).addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(.5F, 1F))
+                                            .addEntry(ItemLootEntry.builder(oreBit)
+                                                    .acceptFunction(OreDropProperty.builder()))
+                                    )
+                            //                        .addLootPool(LootPool.builder()
+                            //                                .rolls(RandomValueRange.of(1F, 1F))
+                            //                                .addEntry(ItemLootEntry.builder(stoneChunk)
+                            //                                        .acceptFunction(OreDropProperty.builder()))
+                            //                        )
+                    );
+                }
             }
 
             if(b instanceof IGGenericBlock){

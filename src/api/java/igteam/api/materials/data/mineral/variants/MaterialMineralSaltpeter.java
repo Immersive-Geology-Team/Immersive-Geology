@@ -87,4 +87,19 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
 
         return sources;
     }
+
+    @Override
+    public boolean isSalt() { return true; }
+
+    @Override
+    protected boolean hasCrystal() { return true; }
+
+    @Override
+    protected boolean hasOreBit() { return false; }
+
+    @Override
+    protected boolean hasOreChunk() { return false; }
+
+    @Override
+    protected boolean hasDirtyCrushedOre() { return false; }
 }

@@ -286,6 +286,8 @@ public abstract class MaterialBase {
 
     protected abstract boolean hasRod();
 
+    public boolean isSalt() { return false; }
+
     protected abstract boolean isMachine();
 
     protected abstract boolean isSlurry();
@@ -306,7 +308,7 @@ public abstract class MaterialBase {
 
     protected abstract boolean hasCrystal();
 
-    protected boolean hasDustBlock() { return false; };
+    protected boolean hasDustBlock() { return false; }
 
     protected abstract boolean hasOreBit();
 

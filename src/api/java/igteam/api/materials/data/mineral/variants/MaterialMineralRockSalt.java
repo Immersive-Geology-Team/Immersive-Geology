@@ -5,18 +5,17 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.materials.FluidEnum;
 import igteam.api.materials.MetalEnum;
-import igteam.api.materials.helper.PeriodicTableElement;
-import igteam.api.materials.pattern.FluidPattern;
 import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.helper.PeriodicTableElement;
+import igteam.api.materials.pattern.FluidPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
@@ -135,4 +134,19 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
         return sources;
     }
+
+    @Override
+    public boolean isSalt() { return true; }
+
+    @Override
+    protected boolean hasCrystal() { return true; }
+
+    @Override
+    protected boolean hasOreBit() { return false; }
+
+    @Override
+    protected boolean hasOreChunk() { return false; }
+
+    @Override
+    protected boolean hasDirtyCrushedOre() { return false; }
 }

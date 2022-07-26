@@ -1,0 +1,20 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "forge:dusts/saltpeter"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dust_saltpeter",
+    "count": 5
+  },
+  "input": {
+    "tag": "forge:ores/netherrack_saltpeter"
+  },
+  "time": 200,
+  "energy": 6000
+}

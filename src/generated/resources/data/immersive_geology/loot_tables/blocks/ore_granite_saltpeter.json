@@ -11,7 +11,7 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_chunk_granite_saltpeter"
+          "name": "immersive_geology:crystal_saltpeter"
         }
       ]
     },
@@ -29,7 +29,7 @@
               "function": "immersive_geology:variable_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_bit_granite_saltpeter"
+          "name": "immersive_geology:dust_saltpeter"
         }
       ]
     }
