@@ -2238,7 +2238,7 @@ f8a396bedfcb12128b2532f51c3e0c4638459862 data/forge/tags/items/dirty_crushed_ore
 5e44936e8d25e7cd7532daac025a52b3a103a008 data/forge/tags/items/dirty_crushed_ores/unobtania.json
 fa6018d4bde98e9e010bb036bc1e8a8842dc5fed data/forge/tags/items/dirty_crushed_ores/uraninite.json
 f6894553dbe82358eec0bdef9d0f9aa866eccbd6 data/forge/tags/items/dirty_crushed_ores/vanadinite.json
-3bab9b0974635f170504895f9bdaefcf49c9de8f data/forge/tags/items/dust_blocks.json
+7a1a25c82563de9568b5d95f838f27d4164be8ce data/forge/tags/items/dust_blocks.json
 b0ed27d8aa9d2ba157a4389b61322af822317a1c data/forge/tags/items/dust_blocks/bronze.json
 6a6a6265855fa4a9c611d8cac277c57ddad147fd data/forge/tags/items/dust_blocks/chromium.json
 ea75e072dbab1cdb84aa174d53f6d2e0e447f566 data/forge/tags/items/dust_blocks/cobalt.json
@@ -2771,7 +2771,7 @@ d22e620c167b9442032c3c0c300510ff17c5e1cc data/forge/tags/items/ore_chunks/stone_
 2cdd536ec7e2591f57824222cecc3dba3caf85d8 data/forge/tags/items/ore_chunks/unobtania.json
 9a7c9d0aba601592a63f3934b7ea9ca687cb69a6 data/forge/tags/items/ore_chunks/uraninite.json
 1997ff7327c00cd3dc6dd410f6fd7abced430dd1 data/forge/tags/items/ore_chunks/vanadinite.json
-6d13fb5190c4e3b2d6c5f1623bd6926742d9a5e7 data/forge/tags/items/ores.json
+0a1106ee5f5bc3f23b011055b5fbcbd3a57d8fd4 data/forge/tags/items/ores.json
 8e619b45f447f2615201cfa1c6d3e0eaafb6fa0f data/forge/tags/items/ores/blackstone_acanthite.json
 5bb414e52ea1621f8cc8e22d7d7505829a15444c data/forge/tags/items/ores/blackstone_alumina.json
 70ba0938d9b0a87864d8c49209a4a61ff527c617 data/forge/tags/items/ores/blackstone_anatase.json
@@ -2954,7 +2954,7 @@ e3e94e8198fdb53b50040a75e21753d375f9bd26 data/forge/tags/items/rods/platinum.jso
 b54a24fb6d86c8c739bf553dc9717bafb2fbe8d7 data/forge/tags/items/rods/unobtanium.json
 5270cabf46b51f32a31bd630cab9abdfa53de57e data/forge/tags/items/rods/vanadium.json
 97f504fd9809abdc76a17e2f47fa9c6870fadf0a data/forge/tags/items/rods/zinc.json
-5aca23142b329a4e28511b71762a404d2201df8e data/forge/tags/items/sheetmetals.json
+c39aa70506d7ce0a5f91bd7e523b06f02278b052 data/forge/tags/items/sheetmetals.json
 3ed22688eb07c66834d3ba3e913f7077a1992785 data/forge/tags/items/sheetmetals/bronze.json
 c909ccdec33725817753e9d504e38bb2dfdc203a data/forge/tags/items/sheetmetals/chromium.json
 2c716f728ea9ad62499fcfa4d1544c41e3d7547b data/forge/tags/items/sheetmetals/cobalt.json
@@ -2970,7 +2970,7 @@ f9291a48d4bf6d2d61b1a3bb564855a59be29a81 data/forge/tags/items/sheetmetals/titan
 7feb85f3430e67871e2b17251b5178d5092d9826 data/forge/tags/items/sheetmetals/unobtanium.json
 893570d3f1c3b5a271cf1e48fccef89a9a8d900a data/forge/tags/items/sheetmetals/vanadium.json
 37df9b8f439c48eb15ede4b4835af7d15fd19083 data/forge/tags/items/sheetmetals/zinc.json
-a4fe7c641e4191a64c63d500d621f8e2314287b5 data/forge/tags/items/slabs.json
+d1ee3a54d0ea70e0c48df666235c5cd50f8dc541 data/forge/tags/items/slabs.json
 78f34d99c285f67d1d352def8d9a50bc106d5db3 data/forge/tags/items/slabs/bronze.json
 cdf01cb25db472c63f32ac6097f6dd326214e5ba data/forge/tags/items/slabs/chromium.json
 2f6133fd05b08e376d19ed865720f8db875de94a data/forge/tags/items/slabs/cobalt.json
@@ -3012,7 +3012,7 @@ c029e94862f69f679f1b6429f5cbde609fc4fe89 data/forge/tags/items/slags/cobaltite.j
 bff6e49021fbe095e1149ffd87eeb8df1be6f7d4 data/forge/tags/items/stone_chunks/granite.json
 35d390c3e9c4c25dc93b6d26eb77df0e4dce4402 data/forge/tags/items/stone_chunks/netherrack.json
 fd44f6861702a3d37892df6b6cae89a16e352a50 data/forge/tags/items/stone_chunks/stone.json
-4e72b70cf08fe6d8de4595c6b14c8e450b827279 data/forge/tags/items/storages.json
+3ec8a2243bbc1805197ca263306bb76a2a7e4783 data/forge/tags/items/storages.json
 0f3979dc65fb3df432b1747eedf4b23ce014738d data/forge/tags/items/storages/bronze.json
 e39bbdb52bccad24eb0384cd764f6d5eb6305335 data/forge/tags/items/storages/chromium.json
 43648c0f1afddcdbda2c9161e0ef0876c90fc593 data/forge/tags/items/storages/cobalt.json
@@ -4682,7 +4682,6 @@ eba7255bdd570045b5275a301c628f933bd9d2d5 data/immersive_geology/recipes/vat/leac
 906b6a7226ca83c2ddde50972ad9735a8e38bd0c data/immersive_geology/recipes/vat/leach_metal_oxide_titanium_to_slurry.json
 7273fddb344ca7665aec4e86535323cd37e53acf data/immersive_geology/recipes/vat/leach_metal_oxide_unobtanium_to_slurry.json
 b91b1479cfe5b7aec99fa936c16ecd6474a2b297 data/immersive_geology/recipes/vat/leach_metal_oxide_uraninite_to_slury.json
-8b442c9f66442ee11d69872b59bb4c64a1757d28 data/immersive_geology/recipes/vat/leach_metal_oxide_uraninite_to_slury2.json
 10554eed7025c0d33395fb04b54e752f85eae82b data/immersive_geology/recipes/vat/leach_metal_oxide_zinc_to_slurry.json
 10554eed7025c0d33395fb04b54e752f85eae82b data/immersive_geology/recipes/vat/leach_metal_oxide_zinc_to_slurry2.json
 caea868f558711fda1e3b4fd54156c0269794eea data/immersive_geology/recipes/vat/leach_slag_pyrolusite_to_slurry.json
@@ -4694,6 +4693,7 @@ caea868f558711fda1e3b4fd54156c0269794eea data/immersive_geology/recipes/vat/leac
 764831439fe30f521cbd951ad8de5cbef4af5efa data/immersive_geology/recipes/vat/leach_slurry_neodymium_to_compound_dust.json
 ac8853372a1e8d0d0c8cdce3411d967266d6225d data/immersive_geology/recipes/vat/leach_slurry_unobtania_to_unobtanium_compound_dust.json
 25ee5e21a20e351f6f9b85618441cb226e8e6bc2 data/immersive_geology/recipes/vat/leach_slurry_uraninite_to_uranium_compound_dust.json
+8b442c9f66442ee11d69872b59bb4c64a1757d28 data/immersive_geology/recipes/vat/leach_slurryuraninite_to_metal_dust.json
 07a9c79a6b0d69247ae60bb0ca8f1f465babb67c data/immersive_geology/recipes/vat/leach_sodium_oxide_to_hydroxide.json
 dde18f513c8d4952475201ea6b5fe2ce8f5a002b data/immersive_geology/recipes/wash/wash_blackstone_acanthite.json
 c53bfe300d413c3a769775830a75e7d592906345 data/immersive_geology/recipes/wash/wash_blackstone_alumina.json
