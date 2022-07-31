@@ -26,7 +26,7 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "immersive_geology:variable_ore_drops"
+              "function": "immersive_geology:variable_secondary_ore_drops"
             }
           ],
           "name": "immersive_geology:ore_bit_stone_cobaltite"

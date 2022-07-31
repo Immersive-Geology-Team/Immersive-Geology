@@ -2,11 +2,7 @@ package igteam.immersive_geology.common.loot;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import igteam.api.materials.helper.MaterialTexture;
-import igteam.api.materials.pattern.BlockPattern;
-import igteam.immersive_geology.common.item.IGGenericItem;
 import igteam.immersive_geology.core.lib.IGLib;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -23,10 +19,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public class OreDropProperty extends LootFunction {
-    public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "variable_ore_drops");
+public class DummyOreDropProperty extends LootFunction {
+    public static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "variable_dummy_ore_drops");
 
-    public OreDropProperty(ILootCondition[] conditions) {
+    public DummyOreDropProperty(ILootCondition[] conditions) {
         super(conditions);
     }
 
@@ -41,16 +37,10 @@ public class OreDropProperty extends LootFunction {
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
                 //Tool has silk touch
-                if(itemStack.getItem() instanceof IGGenericItem){
-                    IGGenericItem igItem = (IGGenericItem) itemStack.getItem();
-                    Block igOreBlock = igItem.getMaterial(MaterialTexture.base).getBlock(BlockPattern.ore, igItem.getMaterial(MaterialTexture.overlay));
-                    return new ItemStack(igOreBlock);
-                }
-                return itemStack; //catch return if for some reason the item isn't IGGenericItem
+                return itemStack; //To drop the ore
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.min(8, Math.min(4, harvestLevel) + fortune));
-                return itemStack;
+                return ItemStack.EMPTY;
             }
         }
         return ItemStack.EMPTY;
@@ -58,18 +48,18 @@ public class OreDropProperty extends LootFunction {
 
     @Override
     public LootFunctionType getFunctionType() {
-        return LootIG.Functions.ORE_DROP_PROPERTIES;
+        return LootIG.Functions.SILKTOUCH_DUMMY_ORE_DROP_PROPERTIES;
     }
 
-    public static LootFunction.Builder<?> builder() {
-        return builder(OreDropProperty::new);
+    public static Builder<?> builder() {
+        return builder(DummyOreDropProperty::new);
     }
 
-    public static class Serializer extends LootFunction.Serializer<OreDropProperty> {
+    public static class Serializer extends LootFunction.Serializer<DummyOreDropProperty> {
 
         @Override
-        public OreDropProperty deserialize(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext, ILootCondition[] iLootConditions) {
-            return new OreDropProperty(iLootConditions);
+        public DummyOreDropProperty deserialize(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext, ILootCondition[] iLootConditions) {
+            return new DummyOreDropProperty(iLootConditions);
         }
     }
 }

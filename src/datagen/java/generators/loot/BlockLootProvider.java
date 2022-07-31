@@ -9,7 +9,9 @@ import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.immersive_geology.common.block.IGGenericBlock;
 import igteam.immersive_geology.common.block.blocks.IGOreBlock;
+import igteam.immersive_geology.common.loot.DummyOreDropProperty;
 import igteam.immersive_geology.common.loot.OreDropProperty;
+import igteam.immersive_geology.common.loot.SecondaryOreDropProperty;
 import igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
@@ -65,20 +67,25 @@ public class BlockLootProvider implements IDataProvider {
                 {
                     Item crystal = oreMaterial.getItem(ItemPattern.crystal);
                     Item dust = oreMaterial.getItem(ItemPattern.dust);
+                    Block oreBlock = stoneMaterial.getBlock(BlockPattern.ore, ore.getMaterial(MaterialTexture.overlay));
                     functionTable.put(b, (block) -> LootTable.builder()
                                     .addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(1f,1f))
+                                            .addEntry(ItemLootEntry.builder(oreBlock)
+                                                    .acceptFunction(DummyOreDropProperty.builder()))
+                                    ).addLootPool(LootPool.builder()
                                             .rolls(RandomValueRange.of(1F, 1F))
                                             .addEntry(ItemLootEntry.builder(crystal)
-                                                    .acceptFunction(OreDropProperty.builder()))
+                                                    .acceptFunction(SecondaryOreDropProperty.builder()))
                                     ).addLootPool(LootPool.builder()
                                             .rolls(RandomValueRange.of(.5F, 1F))
                                             .addEntry(ItemLootEntry.builder(dust)
-                                                    .acceptFunction(OreDropProperty.builder()))
+                                                    .acceptFunction(SecondaryOreDropProperty.builder()))
                                     )
                             //                        .addLootPool(LootPool.builder()
                             //                                .rolls(RandomValueRange.of(1F, 1F))
                             //                                .addEntry(ItemLootEntry.builder(stoneChunk)
-                            //                                        .acceptFunction(OreDropProperty.builder()))
+                            //                                        .acceptFunction(SecondaryOreDropProperty.builder()))
                             //                        )
                     );
                 } else {
@@ -93,12 +100,12 @@ public class BlockLootProvider implements IDataProvider {
                                     ).addLootPool(LootPool.builder()
                                             .rolls(RandomValueRange.of(.5F, 1F))
                                             .addEntry(ItemLootEntry.builder(oreBit)
-                                                    .acceptFunction(OreDropProperty.builder()))
+                                                    .acceptFunction(SecondaryOreDropProperty.builder()))
                                     )
                             //                        .addLootPool(LootPool.builder()
                             //                                .rolls(RandomValueRange.of(1F, 1F))
                             //                                .addEntry(ItemLootEntry.builder(stoneChunk)
-                            //                                        .acceptFunction(OreDropProperty.builder()))
+                            //                                        .acceptFunction(SecondaryOreDropProperty.builder()))
                             //                        )
                     );
                 }
