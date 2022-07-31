@@ -96,7 +96,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             protected void describe() {
                 if (isNative()) { //TODO Double check if this needs to be Native
                     if (!hasExistingImplementation()) {
-                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 2000);
+                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 200);
                     }
 
                     IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));

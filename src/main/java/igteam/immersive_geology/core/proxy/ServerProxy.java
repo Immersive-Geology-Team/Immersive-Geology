@@ -82,18 +82,18 @@ public class ServerProxy implements Proxy {
     }
     private void setupReverberationFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
-        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
-        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
-        ReverberationFurnaceTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
-        ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 100);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 2000);
+        ReverberationFurnaceTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 2500);
+        ReverberationFurnaceTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 1250);
+        ReverberationFurnaceTileEntity.fuelMap.put(Items.COAL, 1000);
     }
 
     private void setupBloomeryFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Bloomery");
-        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 200);
-        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 250);
-        BloomeryTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 125);
-        BloomeryTileEntity.fuelMap.put(Items.COAL, 100);
-        BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 100);
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.coalCoke, 2000);
+        BloomeryTileEntity.fuelMap.put(IEItems.Ingredients.dustCoke, 2500);
+        BloomeryTileEntity.fuelMap.put(MiscEnum.Coal.getItem(ItemPattern.dust), 1250);
+        BloomeryTileEntity.fuelMap.put(Items.COAL, 1000);
+        BloomeryTileEntity.fuelMap.put(Items.CHARCOAL, 1000);
     }
 }
