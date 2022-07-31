@@ -1,23 +1,23 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:block_item_osmium_storage",
+    "immersive_geology:block_item_tin_storage",
+    "immersive_geology:block_item_thorium_storage",
+    "immersive_geology:block_item_neodymium_storage",
+    "immersive_geology:block_item_cobalt_storage",
+    "immersive_geology:block_item_platinum_storage",
+    "immersive_geology:block_item_titanium_storage",
+    "immersive_geology:block_item_zinc_storage",
+    "immersive_geology:block_item_chromium_storage",
     "immersive_geology:block_item_tungsten_storage",
     "immersive_geology:block_item_reinforced_refractory_brick_storage",
-    "immersive_geology:block_item_titanium_storage",
-    "immersive_geology:block_item_unobtanium_storage",
-    "immersive_geology:block_item_bronze_storage",
-    "immersive_geology:block_item_chromium_storage",
-    "immersive_geology:block_item_vanadium_storage",
-    "immersive_geology:block_item_platinum_storage",
-    "immersive_geology:block_item_osmium_storage",
-    "immersive_geology:block_item_manganese_storage",
-    "immersive_geology:block_item_tin_storage",
     "immersive_geology:block_item_sodium_storage",
-    "immersive_geology:block_item_refractory_brick_storage",
     "immersive_geology:block_item_kaolinite_storage",
-    "immersive_geology:block_item_neodymium_storage",
-    "immersive_geology:block_item_thorium_storage",
-    "immersive_geology:block_item_cobalt_storage",
-    "immersive_geology:block_item_zinc_storage"
+    "immersive_geology:block_item_vanadium_storage",
+    "immersive_geology:block_item_bronze_storage",
+    "immersive_geology:block_item_unobtanium_storage",
+    "immersive_geology:block_item_manganese_storage",
+    "immersive_geology:block_item_refractory_brick_storage"
   ]
 }

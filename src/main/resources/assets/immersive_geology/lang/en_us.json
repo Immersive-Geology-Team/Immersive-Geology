@@ -209,6 +209,13 @@
   "component.immersive_geology.sulfuric_acid": "Sulfate",
   "component.immersive_geology.nitric_acid": "Nitrate",
   "component.immersive_geology.hydrofluoric_acid": "Fluorite",
-  "component.immersive_geology.sodium_hydroxide": "Sodium Salt"
+  "component.immersive_geology.sodium_hydroxide": "Sodium Salt",
+
+  "desc.immersiveengineering.info.multiblock.IE:ChemicalVat":"Chemical Vat",
+  "desc.immersiveengineering.info.multiblock.IE:Crystallizer":"Crystallizer",
+  "desc.immersiveengineering.info.multiblock.IE:GravitySeparator":"Gravity Separator",
+  "desc.immersiveengineering.info.multiblock.IE:HydroJetCutter":"Hydrojet Cutter",
+  "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace":"Reverberation Furnace",
+  "desc.immersiveengineering.info.multiblock.IE:RotaryKiln":"Rotary Kiln"
 
 }
