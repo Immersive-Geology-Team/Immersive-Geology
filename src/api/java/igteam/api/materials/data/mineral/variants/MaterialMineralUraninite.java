@@ -77,7 +77,7 @@ public class MaterialMineralUraninite extends MaterialBaseMineral {
                         100, 12800);
 
                 IRecipeBuilder.chemical(this).create(
-                        "slurry" + getName() + "_to_metal_dust",
+                        "metal_oxide_" + getName() + "_to_slury",
                         new ItemStack(Items.BONE_MEAL, 1),
                         new FluidTagInput( SlurryEnum.URANIUM.getType(FluidEnum.HydrofluoricAcid).getFluidTag(FluidPattern.slurry), 125),
                         new FluidTagInput(FluidTags.WATER, 250),
