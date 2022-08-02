@@ -123,6 +123,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                                     getStack(ItemPattern.ingot), null)
                             .setEnergyTime(51200, 100);
                 }
+
+
             }
         };
     }

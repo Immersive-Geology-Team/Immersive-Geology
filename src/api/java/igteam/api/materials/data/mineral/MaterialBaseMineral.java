@@ -3,6 +3,8 @@ package igteam.api.materials.data.mineral;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.api.IGApi;
+import igteam.api.main.IGMultiblockProvider;
+import igteam.api.materials.MiscEnum;
 import igteam.api.materials.StoneEnum;
 import igteam.api.materials.data.MaterialBase;
 import igteam.api.materials.helper.MaterialInterface;
@@ -291,6 +293,12 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                                 IRecipeBuilder.crafting(this)
                                         .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore), getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore))
                                         .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk));
+                        }
+                        if (hasOreBit())
+                        {
+                            IRecipeBuilder.crafting(this).shaped( stone.getItem(ItemPattern.ore_chunk, getParentMaterial()), 1, "ooo", "ooo", "ooo")
+                                    .setInputToCharacter('o',  stone.getItem(ItemPattern.ore_bit, getParentMaterial()))
+                                    .finializeRecipe("general_crafting", "has_ore_bit", stone.getItemTag(ItemPattern.ore_bit, getParentMaterial()));
                         }
                     }
 

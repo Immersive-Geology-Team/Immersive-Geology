@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shaped/craft_ore_bit_blackstone_chalcocite_shaped_ore_chunk_blackstone_chalcocite"
+    ]
+  },
+  "criteria": {
+    "has_ore_bit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {}
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shaped/craft_ore_bit_blackstone_chalcocite_shaped_ore_chunk_blackstone_chalcocite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ore_bit",
+      "has_the_recipe"
+    ]
+  ]
+}

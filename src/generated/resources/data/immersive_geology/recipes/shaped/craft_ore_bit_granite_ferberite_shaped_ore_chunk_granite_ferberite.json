@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "ooo",
+    "ooo",
+    "ooo"
+  ],
+  "key": {
+    "o": {
+      "item": "immersive_geology:ore_bit_granite_ferberite"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ore_chunk_granite_ferberite"
+  }
+}

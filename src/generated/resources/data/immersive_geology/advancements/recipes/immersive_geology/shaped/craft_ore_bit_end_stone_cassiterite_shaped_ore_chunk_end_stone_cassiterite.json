@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shaped/craft_ore_bit_end_stone_cassiterite_shaped_ore_chunk_end_stone_cassiterite"
+    ]
+  },
+  "criteria": {
+    "has_ore_bit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {}
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_cassiterite_shaped_ore_chunk_end_stone_cassiterite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ore_bit",
+      "has_the_recipe"
+    ]
+  ]
+}
