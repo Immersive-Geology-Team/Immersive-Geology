@@ -3,6 +3,7 @@ package igteam.immersive_geology.common.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import igteam.immersive_geology.core.lib.IGLib;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -31,8 +32,8 @@ public class SecondaryOreDropProperty extends LootFunction {
         ItemStack toolStack = lootContext.get(LootParameters.TOOL);
         Set<ToolType> tool = toolStack.getToolTypes();
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(Objects.requireNonNull(lootContext.get(LootParameters.TOOL)));
-
-        if(tool.contains(ToolType.PICKAXE)){
+        BlockState blockStateIn = Objects.requireNonNull(lootContext.get(LootParameters.BLOCK_STATE));
+        if (toolStack.canHarvestBlock(blockStateIn)){
             int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
