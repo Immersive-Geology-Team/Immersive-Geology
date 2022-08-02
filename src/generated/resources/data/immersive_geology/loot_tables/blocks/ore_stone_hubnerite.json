@@ -32,6 +32,20 @@
           "name": "immersive_geology:ore_bit_stone_hubnerite"
         }
       ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_chunk_drops"
+            }
+          ],
+          "name": "immersive_geology:stone_chunk_stone"
+        }
+      ]
     }
   ]
 }

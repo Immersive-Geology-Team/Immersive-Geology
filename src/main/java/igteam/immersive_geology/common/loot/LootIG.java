@@ -12,6 +12,7 @@ public class LootIG {
         Functions.ORE_DROP_PROPERTIES = registerFunction(OreDropProperty.ID, new OreDropProperty.Serializer());
         Functions.SECONDARY_ORE_DROP_PROPERTIES = registerFunction(SecondaryOreDropProperty.ID, new SecondaryOreDropProperty.Serializer());
         Functions.SILKTOUCH_DUMMY_ORE_DROP_PROPERTIES = registerFunction(DummyOreDropProperty.ID, new DummyOreDropProperty.Serializer());
+        Functions.CHUNK_DROP_PROPERTIES = registerFunction(ChunkDropProperty.ID, new ChunkDropProperty.Serializer());
     }
 
     private static LootFunctionType registerFunction(ResourceLocation id, ILootSerializer<? extends ILootFunction> serializer)
@@ -25,5 +26,6 @@ public class LootIG {
         public static LootFunctionType ORE_DROP_PROPERTIES;
         public static LootFunctionType SECONDARY_ORE_DROP_PROPERTIES;
         public static LootFunctionType SILKTOUCH_DUMMY_ORE_DROP_PROPERTIES;
+        public static LootFunctionType CHUNK_DROP_PROPERTIES;
     }
 }

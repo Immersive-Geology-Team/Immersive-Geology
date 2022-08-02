@@ -9,6 +9,7 @@ import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.immersive_geology.common.block.IGGenericBlock;
 import igteam.immersive_geology.common.block.blocks.IGOreBlock;
+import igteam.immersive_geology.common.loot.ChunkDropProperty;
 import igteam.immersive_geology.common.loot.DummyOreDropProperty;
 import igteam.immersive_geology.common.loot.OreDropProperty;
 import igteam.immersive_geology.common.loot.SecondaryOreDropProperty;
@@ -82,11 +83,11 @@ public class BlockLootProvider implements IDataProvider {
                                             .addEntry(ItemLootEntry.builder(dust)
                                                     .acceptFunction(SecondaryOreDropProperty.builder()))
                                     )
-                            //                        .addLootPool(LootPool.builder()
-                            //                                .rolls(RandomValueRange.of(1F, 1F))
-                            //                                .addEntry(ItemLootEntry.builder(stoneChunk)
-                            //                                        .acceptFunction(SecondaryOreDropProperty.builder()))
-                            //                        )
+                                    .addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(1F, 1F))
+                                            .addEntry(ItemLootEntry.builder(stoneChunk)
+                                                    .acceptFunction(ChunkDropProperty.builder()))
+                                    )
                     );
                 } else {
                     Item oreChunk = stoneMaterial.getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
@@ -102,11 +103,11 @@ public class BlockLootProvider implements IDataProvider {
                                             .addEntry(ItemLootEntry.builder(oreBit)
                                                     .acceptFunction(SecondaryOreDropProperty.builder()))
                                     )
-                            //                        .addLootPool(LootPool.builder()
-                            //                                .rolls(RandomValueRange.of(1F, 1F))
-                            //                                .addEntry(ItemLootEntry.builder(stoneChunk)
-                            //                                        .acceptFunction(SecondaryOreDropProperty.builder()))
-                            //                        )
+                                    .addLootPool(LootPool.builder()
+                                            .rolls(RandomValueRange.of(1F, 1F))
+                                            .addEntry(ItemLootEntry.builder(stoneChunk)
+                                                    .acceptFunction(ChunkDropProperty.builder()))
+                                    )
                     );
                 }
             }
