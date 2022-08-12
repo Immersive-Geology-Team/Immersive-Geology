@@ -239,12 +239,7 @@ public enum MetalEnum implements MaterialInterface<MaterialBaseMetal> {
     }
 
     @Override
-    public MaterialSourceWorld getDimension() {
-        return material.getDimension();
-    }
-
-    @Override
-    public MaterialBaseMetal get() {
+    public MaterialBaseMetal instance() {
         return material;
     }
 }

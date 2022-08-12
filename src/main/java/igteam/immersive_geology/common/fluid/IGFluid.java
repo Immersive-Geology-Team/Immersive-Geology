@@ -77,7 +77,7 @@ public class IGFluid extends FlowingFluid {
 
     public IGFluid(MaterialInterface<?> material)
     {
-        this(material.get(), null, FluidPattern.fluid);
+        this(material.instance(), null, FluidPattern.fluid);
     }
 
     public IGFluid(MaterialBase material)
@@ -115,7 +115,7 @@ public class IGFluid extends FlowingFluid {
 
             if(isSlurry) {
                 MaterialSlurryWrapper slurryFluid = (MaterialSlurryWrapper) fluidMaterial;
-                MaterialBaseFluid slurryBase = slurryFluid.getFluidBase().get();
+                MaterialBaseFluid slurryBase = slurryFluid.getFluidBase().instance();
                 ResourceLocation containerRegistryName = null;
                 if(slurryBase.isFluidPortable(ItemPattern.flask)){
                     this.bucket = new IGBucketItem(() -> this.source, fluidMaterial, ItemPattern.flask, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup).containerItem(MiscEnum.Glass.getItem(ItemPattern.flask))) {

@@ -2,9 +2,12 @@ package igteam.immersive_geology.common.world.feature;
 
 import com.mojang.serialization.Codec;
 import igteam.api.materials.StoneEnum;
+import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.MaterialSourceWorld;
 import igteam.api.materials.pattern.BlockPattern;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
@@ -14,10 +17,9 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraftforge.common.Tags;
 
-import java.util.BitSet;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class IGOreFeature extends OreFeature {
 
@@ -162,16 +164,36 @@ public class IGOreFeature extends OreFeature {
     private void replaceStoneWithOre(BlockPos position, IWorld world, IGOreFeatureConfig config) {
 
         BlockState worldState = world.getBlockState(position);
-
+        BlockPattern pattern = config.blockPattern;
+        MaterialInterface<?> replaceType = config.oreType;
         try {
-            String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
-            String stoneKey = worldKey.toUpperCase().charAt(0) + worldKey.toLowerCase().substring(1);
-            StoneEnum stoneType = StoneEnum.valueOf(stoneKey);
-            BlockState ore = stoneType.getBlock(BlockPattern.ore, config.oreType).getDefaultState();
-
-            world.setBlockState(position, ore, 2);
-
+            switch (pattern) {
+                case ore:
+                    String worldKey = Objects.requireNonNull(worldState.getBlock().getRegistryName()).getPath();
+                    String stoneKey = worldKey.toUpperCase().charAt(0) + worldKey.toLowerCase().substring(1);
+                    StoneEnum stoneType = StoneEnum.valueOf(stoneKey);
+                    BlockState ore = stoneType.getBlock(pattern, replaceType).getDefaultState();
+                    world.setBlockState(position, ore, 2);
+                    break;
+                case storage:
+                    BlockState replace = replaceType.getBlock(pattern).getDefaultState();
+                    BlockState existing = world.getBlockState(position);
+                    if(isSilt(existing)) {
+                        world.setBlockState(position, replace, 2);
+                    }
+                    break;
+            }
         } catch (Exception ignored){}
     }
 
+    protected static List<Block> siltBlocks = new ArrayList<>();
+    private boolean isSilt(BlockState b){
+        return siltBlocks.contains(b.getBlock());
+    }
+
+    static {
+        siltBlocks.add(Blocks.DIRT);
+        siltBlocks.add(Blocks.SAND);
+        siltBlocks.add(Blocks.GRAVEL);
+    }
 }

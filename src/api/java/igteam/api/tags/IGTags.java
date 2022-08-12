@@ -9,7 +9,6 @@ import igteam.api.materials.data.stone.MaterialBaseStone;
 import igteam.api.materials.helper.APIMaterials;
 import igteam.api.materials.pattern.FluidPattern;
 import igteam.api.IGApi;
-import igteam.api.materials.*;
 import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.api.materials.helper.MaterialInterface;
@@ -50,14 +49,14 @@ public class IGTags {
                         case ore_chunk:
                         case dirty_crushed_ore: {
                             for (StoneEnum stone : StoneEnum.values()) {
-                                createWrapperForPattern(pattern,  stone.get(), metal.get());
+                                createWrapperForPattern(pattern,  stone.instance(), metal.instance());
                             }
-                            createWrapperForPattern(pattern, metal.get());
+                            createWrapperForPattern(pattern, metal.instance());
                             createWrapperForPatternGroup(pattern);
                         }
                         break;
                         default: {
-                            createWrapperForPattern(pattern, metal.get());
+                            createWrapperForPattern(pattern, metal.instance());
                             createWrapperForPatternGroup(pattern);
                         }
                     }
@@ -66,7 +65,7 @@ public class IGTags {
 
             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                 if(stone.hasPattern(pattern)){
-                    createWrapperForPattern(pattern, stone.get());
+                    createWrapperForPattern(pattern, stone.instance());
                     createWrapperForPatternGroup(pattern);
                 }
             }
@@ -78,13 +77,13 @@ public class IGTags {
                         case ore_chunk:
                         case dirty_crushed_ore: {
                             for (StoneEnum stone : StoneEnum.values()) {
-                                createWrapperForPattern(pattern,  stone.get(), mineral.get());
+                                createWrapperForPattern(pattern,  stone.instance(), mineral.instance());
                             }
-                            createWrapperForPattern(pattern, mineral.get());
+                            createWrapperForPattern(pattern, mineral.instance());
                         }
                         break;
                         default: {
-                            createWrapperForPattern(pattern, mineral.get());
+                            createWrapperForPattern(pattern, mineral.instance());
                         }
                     }
                     createWrapperForPatternGroup(pattern);
@@ -96,13 +95,13 @@ public class IGTags {
             IG_FLUID_TAGS.put(pattern, new HashMap<String, ITag.INamedTag<Fluid>>());
             if(pattern == FluidPattern.fluid) {
                 for (MaterialInterface<MaterialBaseFluid> fluid : FluidEnum.values()) {
-                    createWrapperForPattern(pattern, fluid.get());
+                    createWrapperForPattern(pattern, fluid.instance());
                 }
             }
 
             if(pattern == FluidPattern.gas) {
                 for (MaterialInterface<MaterialBaseGas> gas : GasEnum.values()) {
-                    createWrapperForPattern(pattern, gas.get());
+                    createWrapperForPattern(pattern, gas.instance());
                 }
             }
 
@@ -125,7 +124,7 @@ public class IGTags {
                 if (genMaterial.hasPattern(pattern)) {
                     if(pattern == BlockPattern.ore) {
                         for (StoneEnum stone : StoneEnum.values()) {
-                            createWrapperForPattern(pattern, stone.get(), genMaterial.get());
+                            createWrapperForPattern(pattern, stone.instance(), genMaterial.instance());
                         }
                         createWrapperForPatternGroup(pattern);
                     }
@@ -135,7 +134,7 @@ public class IGTags {
             for (MaterialInterface<?> material : APIMaterials.all()) {
                 if(pattern != BlockPattern.ore) {
                     if (material.hasPattern(pattern)) {
-                        createWrapperForPattern(pattern, material.get());
+                        createWrapperForPattern(pattern, material.instance());
                         createWrapperForPatternGroup(pattern);
                     }
                 }

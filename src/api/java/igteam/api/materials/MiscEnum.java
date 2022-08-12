@@ -308,7 +308,7 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     }
 
     @Override
-    public MaterialBase get() {
+    public MaterialBase instance() {
         return material;
     }
 
@@ -320,10 +320,5 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     @Override
     public boolean isFluidPortable(ItemPattern bucket) {
         return material.isFluidPortable(bucket);
-    }
-
-    @Override
-    public MaterialSourceWorld getDimension() {
-        return MaterialSourceWorld.overworld;
     }
 }

@@ -222,7 +222,7 @@ public class IGBucketItem extends BucketItem implements IGItemType {
 
     public MaterialBase getMaterial(MaterialTexture base) {
         if(base == MaterialTexture.base){
-            return MiscEnum.Glass.get();
+            return MiscEnum.Glass.instance();
         }
         return fluidMaterial;
     }

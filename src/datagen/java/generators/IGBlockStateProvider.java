@@ -273,7 +273,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
             IGStairsBlock stairsBlock = (IGStairsBlock) blockType;
             VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
-            String materialName = stairsBlock.getMaterials().stream().findAny().get().get().getName();
+            String materialName = stairsBlock.getMaterials().stream().findAny().get().instance().getName();
             BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/" + stairsBlock.getPattern().getName() + "_" + materialName).getPath(),
                     new ResourceLocation(IGLib.MODID, "block/base/" + stairsBlock.getPattern().getName()));
 

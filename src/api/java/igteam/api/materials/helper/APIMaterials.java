@@ -1,7 +1,6 @@
 package igteam.api.materials.helper;
 
 import igteam.api.materials.*;
-import igteam.api.materials.*;
 import igteam.api.materials.data.metal.MaterialBaseMetal;
 
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ public class APIMaterials {
         HashSet<MaterialInterface<?>> all = new HashSet<>();
         List<MaterialInterface<?>> metals = new ArrayList<>();
         for (MaterialInterface<?> metal : MetalEnum.values()) {
-            if(metal.get() instanceof MaterialBaseMetal){
-                MaterialBaseMetal m = (MaterialBaseMetal) metal.get();
+            if(metal.instance() instanceof MaterialBaseMetal){
+                MaterialBaseMetal m = (MaterialBaseMetal) metal.instance();
                 if(m.isNative() && !m.hasExistingImplementation()){
                     metals.add(metal);
                 }

@@ -77,13 +77,13 @@ public class IGManualProvider implements IDataProvider {
                     .closeAnchor();
 
             ManualTextProvider textProvider = attemptTextCreation(material_name)
-                    .setTitle(formalName, metal.get().getRarity().name() + " metal")
+                    .setTitle(formalName, metal.instance().getRarity().name() + " metal")
                     .attachPage(material_name + "_display", "");
 
         }
 
         for (MaterialInterface<MaterialBaseMineral> material : MineralEnum.values()){
-            MaterialBaseMineral baseMaterial = material.get();
+            MaterialBaseMineral baseMaterial = material.instance();
             String material_name = baseMaterial.getName();
             String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
 

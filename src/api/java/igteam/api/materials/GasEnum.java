@@ -205,7 +205,7 @@ public enum GasEnum implements MaterialInterface<MaterialBaseGas> {
     }
 
     @Override
-    public MaterialBaseGas get() {
+    public MaterialBaseGas instance() {
         return material;
     }
 
@@ -217,11 +217,6 @@ public enum GasEnum implements MaterialInterface<MaterialBaseGas> {
     @Override
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
-    }
-
-    @Override
-    public MaterialSourceWorld getDimension() {
-        return MaterialSourceWorld.overworld;
     }
 
 }

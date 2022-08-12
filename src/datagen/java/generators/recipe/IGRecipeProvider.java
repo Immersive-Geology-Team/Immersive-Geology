@@ -39,7 +39,7 @@ public class IGRecipeProvider extends RecipeProvider {
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         for (MaterialInterface container : APIMaterials.all()) {
-            MaterialBase material = container.get();
+            MaterialBase material = container.instance();
 
             for (IGProcessingStage stage : material.getStages()) {
                 if (stage != null) {

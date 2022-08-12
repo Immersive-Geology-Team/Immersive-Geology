@@ -1,5 +1,6 @@
 package igteam.api.materials.data.mineral.variants;
 
+import igteam.api.config.IGOreConfig;
 import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.materials.MiscEnum;
@@ -108,7 +109,16 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
+    public IGOreConfig getGenerationConfig() {
+        return super.getGenerationConfig();
+    }
+
+    @Override
     public Set<MaterialInterface<?>> getSourceMaterials() {
         return Collections.emptySet();
+    }
+
+    public boolean generateForBlockPattern(BlockPattern p) {
+        return p.equals(BlockPattern.storage);
     }
 }

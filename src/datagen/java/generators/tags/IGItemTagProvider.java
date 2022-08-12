@@ -38,7 +38,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                 if (genMaterial.hasPattern(pattern)) {
                     if (pattern == BlockPattern.ore) {
                         for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
-                            ITag.INamedTag<Item> itag = genMaterial.getItemTag(pattern, stone.get());
+                            ITag.INamedTag<Item> itag = genMaterial.getItemTag(pattern, stone.instance());
                             Block block = stone.getBlock(pattern, genMaterial);
                             if(block != null) {
                                 tag(itag).add(block.asItem());
@@ -77,7 +77,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                         case dirty_crushed_ore: case ore_chunk: case ore_bit: {
                             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                                 Item itm = metal.getItem(pattern, stone);
-                                tag(metal.getItemTag(pattern, stone.get())).add(itm);
+                                tag(metal.getItemTag(pattern, stone.instance())).add(itm);
                                 tag(metal.getItemTag(pattern)).add(itm);
                                 ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
                                 tag(groupTag).add(itm);
@@ -101,7 +101,7 @@ public class IGItemTagProvider extends ItemTagsProvider {
                             for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
                                 Item item = mineral.getItem(pattern, stone);
                                 tag(mineral.getItemTag(pattern)).add(item);
-                                tag(mineral.getItemTag(pattern, stone.get())).add(item);
+                                tag(mineral.getItemTag(pattern, stone.instance())).add(item);
 
                                 ITag.INamedTag<Item> groupTag = IG_PATTERN_GROUP_TAGS.get(pattern);
                                 tag(groupTag).add(item);

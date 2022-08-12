@@ -77,7 +77,7 @@ public class ClientProxy extends ServerProxy {
     private void supplyMaterialTint(FMLClientSetupEvent event){
         Minecraft minecraft = event.getMinecraftSupplier().get();
         for(MaterialInterface<?> i : APIMaterials.all()) {
-            MaterialBase base = i.get();
+            MaterialBase base = i.instance();
             HashMap<MaterialPattern, Boolean> colorCheckMap = new HashMap<>();
             for (MaterialPattern pattern : MaterialPattern.values()) {
                 colorCheckMap.put(pattern, true);
@@ -199,7 +199,7 @@ public class ClientProxy extends ServerProxy {
         ManualInstance man = ManualHelper.getManual();
 
         for (MaterialInterface<?> wrapper : MetalEnum.values()){
-            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_METALS.getOrCreateSubnode(modLoc(wrapper.get().getRarity().name().toLowerCase()),wrapper.get().getRarity().ordinal());
+            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_METALS.getOrCreateSubnode(modLoc(wrapper.instance().getRarity().name().toLowerCase()),wrapper.instance().getRarity().ordinal());
             ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
 
             builder.readFromFile(modLoc(wrapper.getName()));
@@ -210,7 +210,7 @@ public class ClientProxy extends ServerProxy {
         ManualInstance man = ManualHelper.getManual();
 
         for (MaterialInterface<?> wrapper : MineralEnum.values()){
-            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.get().getRarity().name().toLowerCase()),wrapper.get().getRarity().ordinal());
+            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.instance().getRarity().name().toLowerCase()),wrapper.instance().getRarity().ordinal());
             ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
 
             builder.readFromFile(modLoc(wrapper.getName()));

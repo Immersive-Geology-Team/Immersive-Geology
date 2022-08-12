@@ -49,8 +49,8 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                 if (isNative()) { //TODO Double check if this needs to be native?
                     for (MaterialInterface<?> stone : StoneEnum.values()) {
                         ItemStack dirty_crushed_ore = stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial());
-                        ITag<Item> ore_chunk = getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get());
-                        ITag<Item> ore_bit = getParentMaterial().getItemTag(ItemPattern.ore_bit, stone.get());
+                        ITag<Item> ore_chunk = getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance());
+                        ITag<Item> ore_bit = getParentMaterial().getItemTag(ItemPattern.ore_bit, stone.instance());
 
                         IRecipeBuilder.crushing(this).create("crush_chunk_" + getName() + "_to_dirty_crushed",
                                 ore_chunk, dirty_crushed_ore, ore_bit, 6000, 200, 0.33f);
@@ -62,26 +62,26 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         );
 
                         IRecipeBuilder.crafting(this)
-                                .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()), getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()))
-                                .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                                .shapeless(getParentMaterial().getItem(ItemPattern.crushed_ore), 1, getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.instance()), getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.instance()))
+                                .finializeRecipe("wash_dirty_ore", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.instance()));
 
                         IRecipeBuilder.crafting(this)
-                                .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()))
-                                .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.get()));
+                                .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()))
+                                .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()));
 
                         if (!hasExistingImplementation()) {
                             IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
-                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
+                                    getItemTag(BlockPattern.ore, stone.instance()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
 
                             IRecipeBuilder.cutting(this).create(
-                                    getItemTag(BlockPattern.ore, stone.get()),
+                                    getItemTag(BlockPattern.ore, stone.instance()),
                                     new FluidTagInput(FluidTags.WATER, 80),
                                     stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
                             );
                         }
 
                         IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
-                                getItemTag(ItemPattern.ore_chunk, stone.get()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
+                                getItemTag(ItemPattern.ore_chunk, stone.instance()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
 
                     }
                 }

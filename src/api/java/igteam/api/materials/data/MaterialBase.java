@@ -571,4 +571,8 @@ public abstract class MaterialBase {
     public MaterialSourceWorld getDimension() {
         return sourceWorld;
     }
+
+    public boolean generateForBlockPattern(BlockPattern p) {
+        return p.equals(BlockPattern.ore);
+    }
 }

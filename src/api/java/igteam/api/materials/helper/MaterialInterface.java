@@ -49,7 +49,7 @@ public interface MaterialInterface<T extends MaterialBase> {
 
     boolean hasPattern(MaterialPattern gear);
 
-    T get();
+    T instance();
 
     String getName();
 
@@ -73,5 +73,11 @@ public interface MaterialInterface<T extends MaterialBase> {
 
     boolean isFluidPortable(ItemPattern bucket);
 
-    MaterialSourceWorld getDimension();
+    default boolean generateForBlockPattern(BlockPattern pattern) {
+        return instance().generateForBlockPattern(pattern);
+    };
+
+    default MaterialSourceWorld getDimension(){
+        return instance().getDimension();
+    }
 }

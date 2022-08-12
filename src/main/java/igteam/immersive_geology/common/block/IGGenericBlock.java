@@ -26,7 +26,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
     private final IGGenericBlockItem itemBlock;
 
     public IGGenericBlock(MaterialInterface<?> m, BlockPattern p) {
-        super(Properties.create((m.get() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f));
+        super(Properties.create((m.instance() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);

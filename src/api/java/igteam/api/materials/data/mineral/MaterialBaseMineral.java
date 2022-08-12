@@ -3,8 +3,6 @@ package igteam.api.materials.data.mineral;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import igteam.api.IGApi;
-import igteam.api.main.IGMultiblockProvider;
-import igteam.api.materials.MiscEnum;
 import igteam.api.materials.StoneEnum;
 import igteam.api.materials.data.MaterialBase;
 import igteam.api.materials.helper.MaterialInterface;
@@ -268,26 +266,26 @@ public abstract class MaterialBaseMineral extends MaterialBase {
                 for (MaterialInterface<?> stone : StoneEnum.values()) {
                     if(isSalt()) {
                         IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_salt",
-                                getItemTag(BlockPattern.ore, stone.get()), getParentMaterial().getStack(ItemPattern.dust, 5), getParentMaterial().getItemTag(ItemPattern.dust), 6000, 200, 0.3f);
+                                getItemTag(BlockPattern.ore, stone.instance()), getParentMaterial().getStack(ItemPattern.dust, 5), getParentMaterial().getItemTag(ItemPattern.dust), 6000, 200, 0.3f);
                     }
                     if (hasOreChunk()) {
                         if (hasOreBlock()) {
                             IRecipeBuilder.cutting(this).create(
-                                    getItemTag(BlockPattern.ore, stone.get()),
+                                    getItemTag(BlockPattern.ore, stone.instance()),
                                     new FluidTagInput(FluidTags.WATER, 80),
                                     stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
                             );
 
                             IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
-                                    getItemTag(BlockPattern.ore, stone.get()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
+                                    getItemTag(BlockPattern.ore, stone.instance()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
                         }
 
                         IRecipeBuilder.crushing(this).create(getName() + "_orechunk_to_dirtycrush",
-                                getItemTag(ItemPattern.ore_chunk, stone.get()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
+                                getItemTag(ItemPattern.ore_chunk, stone.instance()), stone.getStack(ItemPattern.dirty_crushed_ore, getParentMaterial()), 6000, 200);
                         if (hasCrushedOre()) {
                             IRecipeBuilder.crafting(this)
-                                    .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.get()), getItemTag(ItemPattern.ore_chunk, stone.get()))
-                                    .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.get()));
+                                    .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getItemTag(ItemPattern.ore_chunk, stone.instance()), getItemTag(ItemPattern.ore_chunk, stone.instance()))
+                                    .finializeRecipe("crush_ore_chunks", "has_chunk", getItemTag(ItemPattern.ore_chunk, stone.instance()));
 
                             if (hasDirtyCrushedOre())
                                 IRecipeBuilder.crafting(this)
@@ -304,7 +302,7 @@ public abstract class MaterialBaseMineral extends MaterialBase {
 
                     if (hasCrushedOre() && hasDirtyCrushedOre()) {
                         IRecipeBuilder.separating(this).create(
-                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.get()),//result
+                                getParentMaterial().getItemTag(ItemPattern.dirty_crushed_ore, stone.instance()),//result
                                 getParentMaterial().getStack(ItemPattern.crushed_ore), //input
                                 stone.getStack(ItemPattern.stone_bit));
                     }

@@ -1,17 +1,20 @@
 package igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionalBlockPos;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
 import com.google.common.collect.ImmutableSet;
 import igteam.api.IGApi;
 import igteam.immersive_geology.common.multiblocks.CrystallizerMultiblock;
 import igteam.api.processing.recipe.CrystalRecipe;
+import igteam.immersive_geology.core.registration.IGSounds;
 import igteam.immersive_geology.core.registration.IGTileTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -46,7 +49,7 @@ import java.util.Set;
 
 //Sorry to IE for using their internal classes, we should have used an API, and we'll maybe fix it later.
 //I swear's I'll use the API after Alpha release ~Muddykat
-public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<CrystallizerTileEntity, CrystalRecipe> implements IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
+public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<CrystallizerTileEntity, CrystalRecipe> implements IEBlockInterfaces.ISoundTile, IEBlockInterfaces.IBlockOverlayText, IEBlockInterfaces.IPlayerInteraction, IBlockBounds, IIEInventory {
 
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
             CachedShapesWithTransform.createForMultiblock(CrystallizerTileEntity::getShape);
@@ -226,13 +229,18 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
         activeTicks++;
         activeTicks = activeTicks % 360;
 
+        assert this.world != null;
+        if (this.world.isRemote && !this.isDummy()) {
+            boolean active = this.shouldRenderAsActive();
+            ImmersiveEngineering.proxy.handleTileSound(IGSounds.crystallizer, this, active, 0.25F, 1.0F);
+        }
+
         if (world.isRemote || isDummy())
             return;
         CrystallizerTileEntity master = this.master();
         boolean update = false;
         if (master.energyStorage.getEnergyStored() > 0 && master.processQueue.size() < master.getProcessQueueMaxLength()) {
             FluidStack fluid = master.inputFluidTank.getFluid();
-            IGApi.getNewLogger().warn("Finding Recipe with Fluid: " + fluid.getDisplayName());
             CrystalRecipe recipe = CrystalRecipe.findRecipe(fluid);
             if (recipe != null) {
                 MultiblockProcessInMachine<CrystalRecipe> process = new MultiblockProcessInMachine<>(recipe, new int[0])
@@ -242,6 +250,8 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
                 }
             }
         }
+
+
 
         if (update) {
             this.markDirty();
@@ -375,5 +385,10 @@ public class CrystallizerTileEntity extends PoweredMultiblockTileEntity<Crystall
     @Override
     public void doGraphicalUpdates() {
 
+    }
+
+    @Override
+    public boolean shouldPlaySound(String s) {
+        return this.shouldRenderAsActive();
     }
 }

@@ -114,7 +114,7 @@ public class IGRegistrationHolder {
             }
             break;
             case flask: {
-                IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.get(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
+                IGBucketItem container = new IGBucketItem(() -> Fluids.EMPTY, m.instance(), p, new Item.Properties().maxStackSize(1).group(IGItemGroup.IGGroup));
                 register(container);
             }
             break;
@@ -161,15 +161,15 @@ public class IGRegistrationHolder {
     }
 
     private static void registerForFluidTypes(MaterialInterface<?> m, FluidPattern p){
-        IGFluid fluid = new IGFluid(m.get(), IGFluid.createBuilder(1, 405, m.get().getRarity(), m.getColor(p), (p == FluidPattern.gas)), p);
-        if(m.get().hasFlask() && (p != FluidPattern.gas)){ //no flask can hold the gas!
+        IGFluid fluid = new IGFluid(m.instance(), IGFluid.createBuilder(1, 405, m.instance().getRarity(), m.getColor(p), (p == FluidPattern.gas)), p);
+        if(m.instance().hasFlask() && (p != FluidPattern.gas)){ //no flask can hold the gas!
             register(fluid.getFluidContainer());
         }
         register(fluid);
     }
 
     private static void registerForSlurryTypes(MaterialSlurryWrapper slurry){
-        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().get().getRarity(), slurry.getColor(FluidPattern.slurry), false), FluidPattern.slurry);
+        IGFluid fluid = new IGFluid(slurry, IGFluid.createBuilder(1, 405, slurry.getSoluteMaterial().instance().getRarity(), slurry.getColor(FluidPattern.slurry), false), FluidPattern.slurry);
         if(slurry.hasFlask()){
             register(fluid.getFluidContainer());
         }

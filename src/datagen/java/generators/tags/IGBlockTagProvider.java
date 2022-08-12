@@ -29,7 +29,7 @@ public class IGBlockTagProvider extends BlockTagsProvider {
                 if (genMaterial.hasPattern(pattern)) {
                     if (pattern == BlockPattern.ore) {
                         for (MaterialInterface<MaterialBaseStone> stone : StoneEnum.values()) {
-                            tag(genMaterial.getBlockTag(pattern, stone.get())).add(genMaterial.getBlock(pattern, stone));
+                            tag(genMaterial.getBlockTag(pattern, stone.instance())).add(genMaterial.getBlock(pattern, stone));
                         }
                     }
                 }

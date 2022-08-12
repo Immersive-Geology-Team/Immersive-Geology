@@ -64,7 +64,7 @@ public class BlockLootProvider implements IDataProvider {
                 MaterialInterface<?> stoneMaterial = ore.getMaterial(MaterialTexture.base);
                 MaterialInterface<?> oreMaterial = ore.getMaterial(MaterialTexture.overlay);
                 Item stoneChunk = stoneMaterial.getItem(ItemPattern.stone_chunk);
-                if (oreMaterial.get().isSalt())
+                if (oreMaterial.instance().isSalt())
                 {
                     Item crystal = oreMaterial.getItem(ItemPattern.crystal);
                     Item dust = oreMaterial.getItem(ItemPattern.dust);

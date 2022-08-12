@@ -212,7 +212,7 @@ public enum FluidEnum implements MaterialInterface<MaterialBaseFluid> {
     }
 
     @Override
-    public MaterialBaseFluid get() {
+    public MaterialBaseFluid instance() {
         return material;
     }
 

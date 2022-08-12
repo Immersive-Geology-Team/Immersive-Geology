@@ -212,7 +212,7 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     }
 
     @Override
-    public MaterialBaseStone get() {
+    public MaterialBaseStone instance() {
         return material;
     }
 
@@ -225,10 +225,4 @@ public enum StoneEnum implements MaterialInterface<MaterialBaseStone> {
     public boolean isFluidPortable(ItemPattern bucket) {
         return false;
     }
-
-    @Override
-    public MaterialSourceWorld getDimension() {
-        return MaterialSourceWorld.overworld;
-    }
-
 }

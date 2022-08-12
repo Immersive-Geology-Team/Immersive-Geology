@@ -240,7 +240,7 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     }
 
     @Override
-    public MaterialBaseMineral get() {
+    public MaterialBaseMineral instance() {
         return material;
     }
 
@@ -253,10 +253,4 @@ public enum MineralEnum implements MaterialInterface<MaterialBaseMineral> {
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
     }
-
-    @Override
-    public MaterialSourceWorld getDimension() {
-        return material.getDimension();
-    }
-
 }

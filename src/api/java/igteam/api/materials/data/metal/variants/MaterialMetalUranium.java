@@ -52,7 +52,7 @@ public class MaterialMetalUranium extends MaterialBaseMetal {
                 IRecipeBuilder.cutting(this).create(
                         t,
                         new FluidTagInput(FluidTags.WATER, 80),
-                        StoneEnum.Stone.getStack(ItemPattern.ore_chunk, MineralEnum.Uraninite.get(), 5)
+                        StoneEnum.Stone.getStack(ItemPattern.ore_chunk, MineralEnum.Uraninite.instance(), 5)
 
                 );
             }

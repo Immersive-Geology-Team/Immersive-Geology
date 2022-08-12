@@ -31,14 +31,14 @@ public class IGWorldGeneration {
         ImmersiveGeology.getNewLogger().info("Immersive Geology: Initializing World Generation");
 
         for (MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
-            if (container.hasPattern(BlockPattern.ore)) {
-                addOreGen(container, container.getName(), container.getGenerationConfig());
-            } else {
-                IGApi.getNewLogger().warn("Containing Material has no Ore Pattern");
+            for (BlockPattern pattern : BlockPattern.values()) {
+                if (container.generateForBlockPattern(pattern)) {
+                    addOreGen(container, container.getName(), pattern, container.getGenerationConfig());
+                }
             }
         }
     }
-
+    @Deprecated
     private static void fillFeatureBlacklist() { //Probably going the way of the DODO ~Muddykat
         featureBlacklist.add(Features.ORE_GOLD);
         featureBlacklist.add(Features.ORE_IRON);
@@ -51,12 +51,13 @@ public class IGWorldGeneration {
 
     static Map<String, IGOreConfig> configMap = new HashMap<>();
 
-    public static void addOreGen(MaterialInterface<?> oreType, String name, IGOreConfig config)
+    public static void addOreGen(MaterialInterface<?> oreType, String name, BlockPattern blockPattern, IGOreConfig config)
     {
         ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
                         oreType.getDimension(),
                         oreType,
+                        blockPattern,
                         config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
         features.put(name, feature);
