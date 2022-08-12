@@ -8,6 +8,7 @@ import generators.manual.helper.IGManualType;
 import generators.manual.providers.ManualPageProvider;
 import generators.manual.providers.ManualTextProvider;
 import igteam.api.IGApi;
+import igteam.api.config.IGOreConfig;
 import igteam.api.materials.MetalEnum;
 import igteam.api.materials.MineralEnum;
 import igteam.api.materials.StoneEnum;
@@ -113,7 +114,7 @@ public class IGManualProvider implements IDataProvider {
             ManualTextProvider textProvider = attemptTextCreation(material_name)
                     .setTitle(formalName, baseMaterial.getRarity().name() + " mineral")
                     .attachPage(material_name + "_display",
-                            formalName + " is found in the " + material.getDimension().name() + " between y layers " + material.getGenerationConfig().minY.get() + " and " + material.getGenerationConfig().maxY.get() +
+                            formalName + " is found in the " + material.getDimension().name() + " between y layers " + ((IGOreConfig) material.getGenerationConfig()).minY.get() + " and " + ((IGOreConfig) material.getGenerationConfig()).maxY.get() +
                                     (sanitizedMaterials.isEmpty() ? "" : " and provides a source of " + sanitizedMaterials + ".") + "\nFurther information on how to process this Mineral can be found in the next few pages.");
 
             List<ResourceLocation> crafting = new ArrayList<>();
