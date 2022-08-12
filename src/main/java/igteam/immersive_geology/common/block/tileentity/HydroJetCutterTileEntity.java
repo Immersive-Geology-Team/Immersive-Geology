@@ -311,7 +311,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Override
     protected IFluidTank[] getAccessibleFluidTanks(Direction side) {
-        return new FluidTank[0];
+        return master().tanks;
     }
 
     @Override

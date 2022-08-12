@@ -1,11 +1,9 @@
 package igteam.api.materials;
 
 import igteam.api.IGApi;
-import igteam.api.config.IGOreConfig;
 import igteam.api.main.IGMultiblockProvider;
 import igteam.api.materials.data.MaterialBase;
 import igteam.api.materials.data.misc.MaterialMiscBase;
-import igteam.api.materials.helper.MaterialSourceWorld;
 import igteam.api.materials.pattern.FluidPattern;
 import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.materials.helper.CrystalFamily;
@@ -21,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Set;
@@ -313,7 +312,7 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
     }
 
     @Override
-    public IGOreConfig getGenerationConfig() {
+    public IFeatureConfig getGenerationConfig() {
         return null;
     }
 

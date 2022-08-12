@@ -190,10 +190,7 @@ public class IGOreFeature extends OreFeature {
     private boolean isSilt(BlockState b){
         return siltBlocks.contains(b.getBlock());
     }
-
     static {
-        siltBlocks.add(Blocks.DIRT);
-        siltBlocks.add(Blocks.SAND);
         siltBlocks.add(Blocks.GRAVEL);
     }
 }

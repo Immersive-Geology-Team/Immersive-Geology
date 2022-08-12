@@ -23,6 +23,8 @@ import slimeknights.tconstruct.world.TinkerWorld;
 
 import java.util.*;
 
+import static igteam.immersive_geology.core.registration.IGRegistrationHolder.register;
+
 public class IGWorldGeneration {
     public static Map<String, ConfiguredFeature<?, ?>> features = new HashMap<>();
     public static Set<ConfiguredFeature<?,?>> featureBlacklist = new HashSet<>();
@@ -49,20 +51,32 @@ public class IGWorldGeneration {
         featureBlacklist.add(TinkerWorld.COBALT_ORE_FEATURE_LARGE);
     }
 
-    static Map<String, IGOreConfig> configMap = new HashMap<>();
+    static Map<String, IFeatureConfig> configMap = new HashMap<>();
 
-    public static void addOreGen(MaterialInterface<?> oreType, String name, BlockPattern blockPattern, IGOreConfig config)
+    public static void addOreGen(MaterialInterface<?> oreType, String name, BlockPattern blockPattern, IFeatureConfig fc)
     {
-        ConfiguredFeature<?, ?> feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
+        ConfiguredFeature<?, ?> feature;
+        if(fc instanceof IGOreConfig) {
+            IGOreConfig config = (IGOreConfig) fc;
+            feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
                         oreType.getDimension(),
                         oreType,
                         blockPattern,
                         config.veinSizeMin.get(), config.veinSizeMax.get())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(config.minY.get(), 0, config.maxY.get()))
                 .square()).count(config.veinsPerChunk.get());
-        features.put(name, feature);
+            features.put(name, feature);
 
-        configMap.put(feature.toString(), config);
+            configMap.put(feature.toString(), fc);
+        }
+        // TODO This method of 'switching' the ore config type is bad, need to refactor this at some point.
+        // However this should be functional enough for now.
+        if(fc instanceof SphereReplaceConfig) {
+            IGApi.getNewLogger().info("Mapping Kaolinite Generation");
+            feature = register("disk_kaolinite_clay", new SphereReplaceFeature(SphereReplaceConfig.CODEC).withConfiguration((SphereReplaceConfig) fc));
+            features.put(name, feature);
+            configMap.put(feature.toString(), fc);
+        }
     }
 
     public static boolean replaceOres = false; //disabled for now
@@ -100,16 +114,18 @@ public class IGWorldGeneration {
 
         //TODO Make Config Option to Disable All IG Ores
         for (ConfiguredFeature<?, ?> ore : features.values()) {
-            IGOreConfig config = configMap.get(ore.toString());
-            if(config.sourceWorld.get().equals(MaterialSourceWorld.overworld)) {
+            IFeatureConfig fc = configMap.get(ore.toString());
+            if(fc instanceof IGOreConfig) {
+                IGOreConfig config = (IGOreConfig) fc;
+                if (config.sourceWorld.get().equals(MaterialSourceWorld.overworld)) {
+                    generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
+                }
+                if (config.sourceWorld.get().equals(MaterialSourceWorld.nether)) {
+                    generation.withFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, ore);
+                }
+            } else {
+                IGApi.getNewLogger().info("Generate Kaolinite?");
                 generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
-            }
-        }
-
-        for (ConfiguredFeature<?, ?> ore : features.values()) {
-            IGOreConfig config = configMap.get(ore.toString());
-            if(config.sourceWorld.get().equals(MaterialSourceWorld.nether)) {
-                generation.withFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, ore);
             }
         }
     }

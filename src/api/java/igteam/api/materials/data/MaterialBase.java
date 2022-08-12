@@ -23,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -552,15 +553,15 @@ public abstract class MaterialBase {
         return true;
     }
 
-    private IGOreConfig oreConfiguration;
+    private IFeatureConfig oreConfiguration;
 
-    public IGOreConfig getGenerationConfig() {
+    public IFeatureConfig getGenerationConfig() {
         return oreConfiguration;
     }
 
     public abstract LinkedHashSet<PeriodicTableElement.ElementProportion> getElements();
 
-    public void setGenerationConfiguration(IGOreConfig config) {
+    public void setGenerationConfiguration(IFeatureConfig config) {
         this.oreConfiguration = config;
     }
 

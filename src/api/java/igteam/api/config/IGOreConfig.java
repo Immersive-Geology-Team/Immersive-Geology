@@ -1,11 +1,12 @@
 package igteam.api.config;
 
 import igteam.api.materials.helper.MaterialSourceWorld;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import static net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
-public class IGOreConfig {
+public class IGOreConfig implements IFeatureConfig {
     public IntValue veinSizeMin, veinSizeMax;
     public IntValue minY;
     public IntValue maxY;

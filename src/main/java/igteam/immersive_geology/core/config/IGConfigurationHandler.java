@@ -1,13 +1,20 @@
 package igteam.immersive_geology.core.config;
 
+import com.google.common.collect.ImmutableList;
 import igteam.api.materials.MineralEnum;
 import igteam.api.materials.data.mineral.variants.MaterialMineralKaolinite;
+import igteam.api.materials.pattern.BlockPattern;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.core.lib.IGLib;
 import igteam.api.config.IGOreConfig;
 import igteam.api.materials.helper.APIMaterials;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.MaterialSourceWorld;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.feature.FeatureSpread;
+import net.minecraft.world.gen.feature.Features;
+import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -95,38 +102,36 @@ public class IGConfigurationHandler {
     }
 
     public static class MaterialConfigSetup{
-        public static IGOreConfig clayGenerationConfig;
         public MaterialConfigSetup(ForgeConfigSpec.Builder builder) {
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
 
             ImmersiveGeology.getNewLogger().info("Generation Config Setup");
-            clayGenerationConfig = new IGOreConfig(builder, MaterialSourceWorld.overworld, MineralEnum.Kaolinite.getName(), 12, 46, 30, 70, 4, 10000);
+            IGOreConfig clayGenerationConfig = new IGOreConfig(builder, MaterialSourceWorld.overworld, MineralEnum.Kaolinite.getName(), 30, 46, 30, 70, 3, 5000);
 
             for(MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
-                int heightMod = container.getDimension().equals(MaterialSourceWorld.nether) ? 2 : 1;
-                switch (container.instance().getRarity()) {
-                    case COMMON:
-                        container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 6, 12, 1, Math.min(255, 140 * heightMod), 10  * heightMod, 9000)); // 0.0010% Chance of successful Spawn (x / 10000)
-                        break;
-                    case UNCOMMON:
-                        container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 5, 10, 1, Math.min(255,140 * heightMod), 8  * heightMod, 8000));
-                        break;
-                    case RARE:
-                        container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 4,8, 1, Math.min(255, 90 * heightMod), 6 * heightMod, 6000)); // 70% chance to spawn
-                        break;
-                    case EPIC:
-                        container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 3, 6,1, Math.min(255, 60 * heightMod), 4 * heightMod, 5000)); // 50% Chance of successful Spawn
-                        break;
-                    default:
-                        ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
-                        container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
-                        break;
-                }
-
                 if(container.equals(MineralEnum.Kaolinite)){
                     container.instance().setGenerationConfiguration(clayGenerationConfig);
+                } else {
+                    int heightMod = container.getDimension().equals(MaterialSourceWorld.nether) ? 2 : 1;
+                    switch (container.instance().getRarity()) {
+                        case COMMON:
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 6, 12, 1, Math.min(255, 140 * heightMod), 10 * heightMod, 9000)); // 0.0010% Chance of successful Spawn (x / 10000)
+                            break;
+                        case UNCOMMON:
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 5, 10, 1, Math.min(255, 140 * heightMod), 8 * heightMod, 8000));
+                            break;
+                        case RARE:
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 4, 8, 1, Math.min(255, 90 * heightMod), 6 * heightMod, 6000)); // 70% chance to spawn
+                            break;
+                        case EPIC:
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 3, 6, 1, Math.min(255, 60 * heightMod), 4 * heightMod, 5000)); // 50% Chance of successful Spawn
+                            break;
+                        default:
+                            ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
+                            break;
+                    }
                 }
-
             }
             builder.pop();
         }

@@ -1,6 +1,5 @@
 package igteam.api.materials.data.mineral.variants;
 
-import igteam.api.config.IGOreConfig;
 import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.materials.MiscEnum;
@@ -12,6 +11,7 @@ import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -109,7 +109,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
-    public IGOreConfig getGenerationConfig() {
+    public IFeatureConfig getGenerationConfig() {
         return super.getGenerationConfig();
     }
 

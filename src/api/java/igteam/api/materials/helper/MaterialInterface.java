@@ -1,6 +1,5 @@
 package igteam.api.materials.helper;
 
-import igteam.api.config.IGOreConfig;
 import igteam.api.materials.data.MaterialBase;
 import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.FluidPattern;
@@ -13,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Set;
@@ -69,7 +69,7 @@ public interface MaterialInterface<T extends MaterialBase> {
 
     boolean generateOreFor(MaterialInterface m);
 
-    IGOreConfig getGenerationConfig();
+    IFeatureConfig getGenerationConfig();
 
     boolean isFluidPortable(ItemPattern bucket);
 
