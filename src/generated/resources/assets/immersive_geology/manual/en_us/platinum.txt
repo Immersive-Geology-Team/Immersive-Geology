@@ -2,6 +2,10 @@ Platinum
 COMMON metal
 <&platinum_display> Metal can be processed from: <link;immersive_geology:acanthite;acanthite>, 
 <link;immersive_geology:chalcocite;chalcocite>
+preparation:
+Process dust platinum by <link;minecraft:furnace;basicSmelting>, 
+Process ingot platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dust platinum by <link;minecraft:furnace;basicSmelting>, 
 extraction:
 Process ore_chunk stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
@@ -27,8 +31,4 @@ Process ore_chunk end_stone_platinum by <link;immersiveengineering:crusher;Crush
 Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
 Process ore end_stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
 Process ore end_stone_platinum by <link;immersive_geology:hydrojet;Cutting>, 
-Process ore_chunk end_stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
-preparation:
-Process dust platinum by <link;minecraft:furnace;basicSmelting>, 
-Process ingot platinum by <link;immersiveengineering:crusher;Crushing>, 
-Process dust platinum by <link;minecraft:furnace;basicSmelting>
+Process ore_chunk end_stone_platinum by <link;immersiveengineering:crusher;Crushing>

@@ -42,6 +42,8 @@ extraction:
 Process dirty_crushed_ore end_stone_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
 Roasting Stage:
 Process crushed_ore acanthite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Blasting Stage:
+Process slag acanthite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 Leeching Stage:
 Process slag acanthite by <link;immersiveengineering:crusher;Crushing>, 
 Leeching Stage:
@@ -50,7 +52,5 @@ Leeching Stage:
 Process slurry hydrochloric_acid_silver by <link;immersive_geology:crystallizer;Crystalization>, 
 Leeching Stage:
 Process compound_dust platinum by <link;immersive_geology:gravityseparator;Separator>, 
-Blasting Stage:
-Process slag acanthite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&acanthite_recipe> (Generic) Crafting Recipe

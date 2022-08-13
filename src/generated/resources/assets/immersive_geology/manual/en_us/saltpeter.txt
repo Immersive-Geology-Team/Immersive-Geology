@@ -1,11 +1,7 @@
 Saltpeter
 COMMON mineral
-<&saltpeter_display> Nitric production stage:
-Process dust saltpeter by <link;immersive_geology:chemicalvat;Chemical>, 
-Nitric production stage:
-Process compound_dust sodium by <link;immersive_geology:rotarykiln;Calcination>, 
-Nitric production stage:
-Process metal_oxide sodium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+<&saltpeter_display> preparation:
+Process crystal saltpeter by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process ore stone_saltpeter by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
@@ -16,7 +12,11 @@ extraction:
 Process ore blackstone_saltpeter by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process ore end_stone_saltpeter by <link;immersiveengineering:crusher;Crushing>, 
-preparation:
-Process crystal saltpeter by <link;immersiveengineering:crusher;Crushing>, 
+Nitric production stage:
+Process dust saltpeter by <link;immersive_geology:chemicalvat;Chemical>, 
+Nitric production stage:
+Process compound_dust sodium by <link;immersive_geology:rotarykiln;Calcination>, 
+Nitric production stage:
+Process metal_oxide sodium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
 
 <&saltpeter_recipe> (Generic) Crafting Recipe

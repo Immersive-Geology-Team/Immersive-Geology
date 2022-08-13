@@ -6,6 +6,8 @@ COMMON metal
 extraction:
 Process crushed_ore copper by <link;immersive_geology:bloomery;Bloomery>, 
 preparation:
+Process ore copper by <link;immersive_geology:hydrojet;Cutting>, 
+preparation:
 Process dust copper by <link;minecraft:furnace;basicSmelting>, 
 Process crystal copper by <link;immersiveengineering:crusher;Crushing>, 
 Process crystal copper by <link;minecraft:furnace;basicSmelting>, 
@@ -24,6 +26,4 @@ Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Sep
 Process ore_chunk blackstone_copper by <link;immersiveengineering:crusher;Crushing>, 
 Process ore_chunk end_stone_copper by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk end_stone_copper by <link;immersiveengineering:crusher;Crushing>, 
-preparation:
-Process ore copper by <link;immersive_geology:hydrojet;Cutting>
+Process ore_chunk end_stone_copper by <link;immersiveengineering:crusher;Crushing>

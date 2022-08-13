@@ -1,13 +1,6 @@
 Uraninite
 UNCOMMON mineral
-<&uraninite_display> Extraction Stage:
-Process crushed_ore uraninite by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Extraction Stage:
-Extraction Stage:
-Process metal_oxide uranium by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-extraction:
+<&uraninite_display> extraction:
 Process ore stone_uraninite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_uraninite by <link;immersiveengineering:crusher;Crushing>, 
@@ -47,5 +40,12 @@ extraction:
 Process ore_chunk end_stone_uraninite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_uraninite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore uraninite by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Extraction Stage:
+Extraction Stage:
+Process metal_oxide uranium by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
 
 <&uraninite_recipe> (Generic) Crafting Recipe

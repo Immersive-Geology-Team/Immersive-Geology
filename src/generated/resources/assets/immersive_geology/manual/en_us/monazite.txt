@@ -1,6 +1,12 @@
 Monazite
 COMMON mineral
-<&monazite_display> refinement:
+<&monazite_display> purification:
+Process metal_oxide neodymium by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process slurry hydrofluoric_acid_neodymium by <link;immersive_geology:crystallizer;Crystalization>, 
+purification:
+Process metal_oxide thorium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+refinement:
 Process crushed_ore monazite by <link;immersiveengineering:crusher;Crushing>, 
 refinement:
 Process dust monazite by <link;immersive_geology:chemicalvat;Chemical>, 
@@ -9,12 +15,6 @@ Process compound_dust thorium by <link;immersive_geology:rotarykiln;Calcination>
 refinement:
 refinement:
 Process compound_dust neodymium by <link;immersive_geology:rotarykiln;Calcination>, 
-purification:
-Process metal_oxide neodymium by <link;immersive_geology:chemicalvat;Chemical>, 
-purification:
-Process slurry hydrofluoric_acid_neodymium by <link;immersive_geology:crystallizer;Crystalization>, 
-purification:
-Process metal_oxide thorium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
 extraction:
 Process ore stone_monazite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:

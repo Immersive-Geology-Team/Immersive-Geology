@@ -1,6 +1,14 @@
 Sphalerite
 COMMON mineral
-<&sphalerite_display> Purification Stage:
+<&sphalerite_display> Refining Stage:
+Process crushed_ore sphalerite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Refining Stage:
+Process slag sphalerite by <link;immersiveengineering:crusher;Crushing>, 
+Refining Stage:
+Process dust sphalerite by <link;immersive_geology:gravityseparator;Separator>, 
+Refining Stage:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Purification Stage:
 Process metal_oxide zinc by <link;immersive_geology:chemicalvat;Chemical>, 
 Purification Stage:
 Process slurry sulfuric_acid_zinc by <link;immersive_geology:crystallizer;Crystalization>, 
@@ -44,13 +52,5 @@ extraction:
 Process ore_chunk end_stone_sphalerite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_sphalerite by <link;immersive_geology:gravityseparator;Separator>, 
-Refining Stage:
-Process crushed_ore sphalerite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-Refining Stage:
-Process slag sphalerite by <link;immersiveengineering:crusher;Crushing>, 
-Refining Stage:
-Process dust sphalerite by <link;immersive_geology:gravityseparator;Separator>, 
-Refining Stage:
-Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&sphalerite_recipe> (Generic) Crafting Recipe

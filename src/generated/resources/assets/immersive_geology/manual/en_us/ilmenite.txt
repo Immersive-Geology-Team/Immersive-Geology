@@ -1,9 +1,7 @@
 Ilmenite
 RARE mineral
-<&ilmenite_display> purification:
-Process metal_oxide titanium by <link;immersive_geology:chemicalvat;Chemical>, 
-purification:
-Process dust sodium by <link;immersive_geology:chemicalvat;Chemical>, 
+<&ilmenite_display> refinement:
+Process crushed_ore ilmenite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 extraction:
 Process ore stone_ilmenite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
@@ -44,7 +42,9 @@ extraction:
 Process ore_chunk end_stone_ilmenite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_ilmenite by <link;immersive_geology:gravityseparator;Separator>, 
-refinement:
-Process crushed_ore ilmenite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+purification:
+Process metal_oxide titanium by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process dust sodium by <link;immersive_geology:chemicalvat;Chemical>, 
 
 <&ilmenite_recipe> (Generic) Crafting Recipe

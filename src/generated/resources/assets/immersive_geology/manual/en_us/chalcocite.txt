@@ -1,6 +1,8 @@
 Chalcocite
 COMMON mineral
-<&chalcocite_display> extraction:
+<&chalcocite_display> Blasting Stage:
+Process slag chalcocite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+extraction:
 Process ore stone_chalcocite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_chalcocite by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,8 +42,6 @@ extraction:
 Process ore_chunk end_stone_chalcocite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_chalcocite by <link;immersive_geology:gravityseparator;Separator>, 
-Blasting Stage:
-Process slag chalcocite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 Leeching Stage:
 Process slag chalcocite by <link;immersiveengineering:crusher;Crushing>, 
 Leeching Stage:
