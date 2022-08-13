@@ -1,15 +1,6 @@
 Scheelite
 COMMON mineral
-<&scheelite_display> Extraction Stage:
-Process crushed_ore scheelite by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process dust scheelite by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process compound_dust tungsten by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Extraction Stage:
-extraction:
+<&scheelite_display> extraction:
 Process ore stone_scheelite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_scheelite by <link;immersiveengineering:crusher;Crushing>, 
@@ -49,5 +40,14 @@ extraction:
 Process ore_chunk end_stone_scheelite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_scheelite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore scheelite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust scheelite by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process compound_dust tungsten by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Extraction Stage:
 
 <&scheelite_recipe> (Generic) Crafting Recipe

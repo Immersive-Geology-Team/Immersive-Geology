@@ -1,8 +1,6 @@
 Acanthite
 UNCOMMON mineral
-<&acanthite_display> Roasting Stage:
-Process crushed_ore acanthite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-extraction:
+<&acanthite_display> extraction:
 Process ore stone_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
@@ -42,6 +40,8 @@ extraction:
 Process ore_chunk end_stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
+Roasting Stage:
+Process crushed_ore acanthite by <link;immersive_geology:reverberation_furnace;Roasting>, 
 Leeching Stage:
 Process slag acanthite by <link;immersiveengineering:crusher;Crushing>, 
 Leeching Stage:

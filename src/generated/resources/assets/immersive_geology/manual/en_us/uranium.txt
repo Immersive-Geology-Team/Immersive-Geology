@@ -2,7 +2,7 @@ Uranium
 COMMON metal
 <&uranium_display> Metal can be processed from: <link;immersive_geology:uraninite;uraninite>
 preparation:
-Process ore uranium by <link;immersive_geology:hydrojet;Cutting>, 
-preparation:
 Process crystal uranium by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal uranium by <link;minecraft:furnace;basicSmelting>
+Process crystal uranium by <link;minecraft:furnace;basicSmelting>, 
+preparation:
+Process ore uranium by <link;immersive_geology:hydrojet;Cutting>

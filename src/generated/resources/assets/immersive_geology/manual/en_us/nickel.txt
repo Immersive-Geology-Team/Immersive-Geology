@@ -1,6 +1,10 @@
 Nickel
 COMMON metal
 <&nickel_display> Metal can be processed from: <link;immersive_geology:ullmannite;ullmannite>
+preparation:
+Process dust nickel by <link;minecraft:furnace;basicSmelting>, 
+Process crystal nickel by <link;immersiveengineering:crusher;Crushing>, 
+Process crystal nickel by <link;minecraft:furnace;basicSmelting>, 
 extraction:
 Process ore_chunk stone_nickel by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore nickel by <link;immersive_geology:gravityseparator;Separator>, 
@@ -16,8 +20,4 @@ Process dirty_crushed_ore nickel by <link;immersive_geology:gravityseparator;Sep
 Process ore_chunk blackstone_nickel by <link;immersiveengineering:crusher;Crushing>, 
 Process ore_chunk end_stone_nickel by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore nickel by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk end_stone_nickel by <link;immersiveengineering:crusher;Crushing>, 
-preparation:
-Process dust nickel by <link;minecraft:furnace;basicSmelting>, 
-Process crystal nickel by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal nickel by <link;minecraft:furnace;basicSmelting>
+Process ore_chunk end_stone_nickel by <link;immersiveengineering:crusher;Crushing>
