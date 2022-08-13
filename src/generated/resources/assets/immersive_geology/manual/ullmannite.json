@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_ullmannite_crushed_ore_ullmannite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ullmannite_crushed_ore_ullmannite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ullmannite_crushed_ore_ullmannite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ullmannite_crushed_ore_ullmannite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ullmannite_crushed_ore_ullmannite"
       }
     ]
   }

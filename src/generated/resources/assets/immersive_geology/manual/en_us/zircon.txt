@@ -1,0 +1,44 @@
+Zircon
+UNCOMMON mineral
+<&zircon_display> extraction:
+Process ore stone_zircon by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_zircon by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_zircon by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_zircon by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_zircon by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_zircon by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_zircon by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_zircon by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_zircon by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_zircon by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_zircon by <link;immersive_geology:gravityseparator;Separator>, 
+
+<&zircon_recipe> (Generic) Crafting Recipe

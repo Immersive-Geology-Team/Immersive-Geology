@@ -46,7 +46,7 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.SodiumHydroxide.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Vanadium.getStack(ItemPattern.compound_dust, 2),
@@ -59,18 +59,18 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Vanadium.getName() + "_to_metal_oxide",
                         MetalEnum.Vanadium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Vanadium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Vanadium.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600 );
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
-                                new IngredientWithSize(MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Vanadium.getStack(ItemPattern.ingot),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
                         .setEnergyTime(102400, 200);
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_" + getName() + "_to_" + MetalEnum.Unobtanium.getName() + "_" + ItemPattern.compound_dust.getName(),
-                        ItemStack.EMPTY,
+                        null, 0,
                         new FluidTagInput(SlurryEnum.UNOBTANIUM.getType(FluidEnum.SodiumHydroxide).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         MetalEnum.Unobtanium.getStack(ItemPattern.compound_dust, 1),
@@ -82,12 +82,12 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Unobtanium.getName() + "_to_metal_oxide",
                         MetalEnum.Unobtanium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Unobtanium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Unobtanium.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600 );
 
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Unobtanium.getName() + "_to_slurry",
-                        MetalEnum.Unobtanium.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Unobtanium.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.NitricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
@@ -97,7 +97,7 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.UNOBTANIUM.getType(FluidEnum.NitricAcid).getName() + "_to_crystal",
                         MetalEnum.Unobtanium.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.UNOBTANIUM.getType(FluidEnum.NitricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.UNOBTANIUM.getType(FluidEnum.NitricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
             }
 

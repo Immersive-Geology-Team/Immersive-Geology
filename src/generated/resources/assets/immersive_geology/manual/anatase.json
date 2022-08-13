@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_anatase_crushed_ore_anatase"
       }
     ]
   }

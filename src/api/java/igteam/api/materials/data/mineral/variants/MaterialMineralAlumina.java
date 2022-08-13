@@ -58,7 +58,7 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
                 //Hall-Heroult proccess bitches!
                 IRecipeBuilder.chemical(this).create(
                         "chemical_recipe_dust" + getName() + "_to_compound_dust" ,
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.SodiumHydroxide.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Aluminum.getStack(ItemPattern.compound_dust, 1),
@@ -68,7 +68,7 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "chemical_recipe_" + MetalEnum.Aluminum.getName() + "_to_cryolite_dust",
-                        MetalEnum.Aluminum.getStack(ItemPattern.compound_dust, 1),
+                        MetalEnum.Aluminum.getItemTag(ItemPattern.compound_dust), 1,
                         new FluidTagInput(FluidEnum.HydrofluoricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MineralEnum.Cryolite.getStack(ItemPattern.dust, 1),
@@ -80,7 +80,7 @@ public class MaterialMineralAlumina extends MaterialBaseMineral {
                 //TODO in 1.18 -- chance based output for cryolite
                 IRecipeBuilder.arcSmelting(this).create(
                         "dust_"+getName()+"_to_ingot",
-                        new IngredientWithSize(getItemTag(ItemPattern.dust), 1),
+                        getItemTag(ItemPattern.dust), 1,
                         MetalEnum.Aluminum.getStack(ItemPattern.ingot),
                         MineralEnum.Cryolite.getStack(ItemPattern.dust),
                         new IngredientWithSize(IETags.coalCokeDust, 1),

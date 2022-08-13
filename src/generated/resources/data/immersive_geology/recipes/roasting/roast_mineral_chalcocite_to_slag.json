@@ -4,7 +4,7 @@
     "item": "immersive_geology:slag_chalcocite"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_chalcocite"
+    "tag": "forge:crushed_ores/chalcocite"
   },
   "wasteMultiplier": 1.0,
   "time": 1000

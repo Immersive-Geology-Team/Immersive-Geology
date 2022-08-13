@@ -5,7 +5,7 @@
     "amount": 250
   },
   "item_input": {
-    "item": "immersive_geology:metal_oxide_unobtanium"
+    "tag": "forge:metal_oxides/unobtanium"
   },
   "fluid_input1": {
     "tag": "forge:fluids/nitric_acid",

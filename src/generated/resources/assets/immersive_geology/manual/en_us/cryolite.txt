@@ -1,5 +1,44 @@
 Cryolite
 EPIC mineral
-<&cryolite_display> Cryolite is found in the end between y layers 1 and 60
-Further information on how to process this Mineral can be found in the next few pages.
+<&cryolite_display> extraction:
+Process ore stone_cryolite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_cryolite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_cryolite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_cryolite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_cryolite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_cryolite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_cryolite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_cryolite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_cryolite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_cryolite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_cryolite by <link;immersive_geology:gravityseparator;Separator>, 
+
 <&cryolite_recipe> (Generic) Crafting Recipe

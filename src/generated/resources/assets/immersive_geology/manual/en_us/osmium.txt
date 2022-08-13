@@ -1,3 +1,7 @@
 Osmium
 COMMON metal
-<&osmium_display> 
+<&osmium_display> Metal can be processed from: <link;immersive_geology:acanthite;acanthite>, 
+<link;immersive_geology:chalcocite;chalcocite>
+preparation:
+Process ingot osmium by <link;immersiveengineering:crusher;Crushing>, 
+Process dust osmium by <link;minecraft:furnace;basicSmelting>

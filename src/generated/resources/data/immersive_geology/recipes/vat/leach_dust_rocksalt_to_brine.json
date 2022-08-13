@@ -7,7 +7,7 @@
   "item_input": {
     "count": 2,
     "base_ingredient": {
-      "item": "immersive_geology:dust_rocksalt"
+      "tag": "forge:dusts/rocksalt"
     }
   },
   "fluid_input1": {

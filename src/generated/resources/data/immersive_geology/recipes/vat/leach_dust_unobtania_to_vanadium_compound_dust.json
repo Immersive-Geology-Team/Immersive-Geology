@@ -9,7 +9,7 @@
     "count": 2
   },
   "item_input": {
-    "item": "immersive_geology:dust_unobtania"
+    "tag": "forge:dusts/unobtania"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sodium_hydroxide",

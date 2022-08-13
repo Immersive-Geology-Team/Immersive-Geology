@@ -5,7 +5,7 @@
     "amount": 250
   },
   "item_input": {
-    "item": "immersive_geology:dust_pyrolusite"
+    "tag": "forge:dusts/pyrolusite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",

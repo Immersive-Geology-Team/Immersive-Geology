@@ -1,6 +1,8 @@
 package igteam.api.materials.data.metal.variants;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import igteam.api.materials.data.mineral.MaterialBaseMineral;
+import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.MineralEnum;
 import igteam.api.materials.StoneEnum;
@@ -15,6 +17,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
@@ -65,5 +68,13 @@ public class MaterialMetalUranium extends MaterialBaseMetal {
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.URANIUM)
         ));
+    }
+
+    @Override
+    public ArrayList<MaterialInterface<? extends MaterialBaseMineral>> getSourceMinerals() {
+        ArrayList<MaterialInterface<? extends MaterialBaseMineral>> lst = new ArrayList<>();
+        lst.add(MineralEnum.Uraninite);
+
+        return lst;
     }
 }

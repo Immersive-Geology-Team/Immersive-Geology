@@ -29,44 +29,31 @@ public class IGChemicalMethod extends IGProcessingMethod {
     private FluidTagInput fluidInput1;
     private FluidTagInput fluidInput2;
     private IngredientWithSize itemInput;
-
+    private ITag<Item> inputTag;
     int time;
     int energy;
 
-    public void create(IngredientWithSize itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
+    public void create(ITag<Item> inputTag, int inputAmount, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
         methodName = itemInput.toString().substring(primaryFluid.toString().indexOf("/")+1, secondaryFluid.toString().indexOf("]"));
 
         this.fluidResult = fluidResult;
         this.itemResult = itemResult;
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
-        this.itemInput = itemInput;
+        this.itemInput = new IngredientWithSize(inputTag, inputAmount);
 
         this.time = time;
         this.energy = energy;
     }
-
-    public void create(String name, ItemStack itemInput, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
-        methodName = name;
-
-        this.fluidResult = fluidResult;
-        this.itemResult = itemResult;
-        this.fluidInput1 = primaryFluid;
-        this.fluidInput2 = secondaryFluid;
-        this.itemInput = itemInput.isEmpty() ? null : IngredientWithSize.of(itemInput);
-
-        this.time = time;
-        this.energy = energy;
-    }
-
     public void create(String name, ITag<Item> itemInput, int input_count, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack itemResult, FluidStack fluidResult, int time, int energy){
         methodName = name;
 
+        this.inputTag = itemInput;
         this.fluidResult = fluidResult;
         this.itemResult = itemResult;
         this.fluidInput1 = primaryFluid;
         this.fluidInput2 = secondaryFluid;
-        this.itemInput = new IngredientWithSize(Ingredient.fromTag(itemInput), input_count);
+        this.itemInput = itemInput == null ? null : new IngredientWithSize(Ingredient.fromTag(itemInput), input_count);
 
         this.time = time;
         this.energy = energy;
@@ -108,5 +95,23 @@ public class IGChemicalMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("vat/leach_" + Objects.requireNonNull(getMethodName()));
+    }
+
+    @Override
+    public ITag<?> getGenericInput(){
+        return inputTag;
+    }
+
+    public void create(String s, ItemStack itemStack, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack stackResult, FluidStack fluidResult, int time, int energy) {
+        methodName = s;
+
+        this.fluidResult = fluidResult;
+        this.itemResult = stackResult;
+        this.fluidInput1 = primaryFluid;
+        this.fluidInput2 = secondaryFluid;
+        this.itemInput = itemStack.isEmpty() ? null : IngredientWithSize.of(itemStack);
+
+        this.time = time;
+        this.energy = energy;
     }
 }

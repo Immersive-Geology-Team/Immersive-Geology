@@ -1,3 +1,8 @@
 Tungsten
 COMMON metal
-<&tungsten_display> 
+<&tungsten_display> Metal can be processed from: <link;immersive_geology:scheelite;scheelite>, 
+<link;immersive_geology:ferberite;ferberite>, 
+<link;immersive_geology:hubnerite;hubnerite>
+preparation:
+Process ingot tungsten by <link;immersiveengineering:crusher;Crushing>, 
+Process dust tungsten by <link;minecraft:furnace;basicSmelting>

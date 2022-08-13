@@ -4,18 +4,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_ilmenite_crushed_ore_ilmenite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ilmenite_crushed_ore_ilmenite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ilmenite_crushed_ore_ilmenite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ilmenite_crushed_ore_ilmenite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_ilmenite_crushed_ore_ilmenite"
       }
     ]
   },

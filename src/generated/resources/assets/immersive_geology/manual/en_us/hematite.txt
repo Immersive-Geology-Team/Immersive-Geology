@@ -1,5 +1,48 @@
 Hematite
 COMMON mineral
-<&hematite_display> Hematite is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:iron;iron>].
-Further information on how to process this Mineral can be found in the next few pages.
+<&hematite_display> Extraction Stage:
+Process crushed_ore hematite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Extraction Stage:
+Process crushed_ore hematite by <link;immersive_geology:bloomery;Bloomery>, 
+extraction:
+Process ore stone_hematite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_hematite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_hematite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_hematite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_hematite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+
 <&hematite_recipe> (Generic) Crafting Recipe

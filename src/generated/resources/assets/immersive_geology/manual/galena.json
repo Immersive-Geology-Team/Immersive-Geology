@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_galena_crushed_ore_galena"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_galena_crushed_ore_galena"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_galena_crushed_ore_galena"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_galena_crushed_ore_galena"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_galena_crushed_ore_galena"
       }
     ]
   }

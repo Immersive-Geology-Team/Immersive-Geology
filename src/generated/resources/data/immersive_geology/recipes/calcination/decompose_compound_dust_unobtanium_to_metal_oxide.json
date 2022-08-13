@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_unobtanium"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_unobtanium"
+    "tag": "forge:compound_dusts/unobtanium"
   },
   "energy": 153600,
   "time": 300

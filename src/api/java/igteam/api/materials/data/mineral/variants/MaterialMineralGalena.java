@@ -47,7 +47,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1, getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
 
             }
         };
@@ -65,7 +65,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.arcSmelting(this).create("slag_"+getName() +"_to_metal_and_compound_dust",
-                        new IngredientWithSize(getParentMaterial().getItemTag(ItemPattern.slag), 1),
+                        getParentMaterial().getItemTag(ItemPattern.slag), 1,
                         MetalEnum.Lead.getStack(ItemPattern.ingot),
                         MetalEnum.Silver.getStack(ItemPattern.compound_dust),
                         new IngredientWithSize(Ingredient.fromItems(Items.BONE_MEAL), 1))
@@ -73,7 +73,7 @@ public class MaterialMineralGalena extends MaterialBaseMineral {
                 
                 IRecipeBuilder.decompose(this).create("compound_dust_"+ MetalEnum.Silver.getName() + "_to_dust",
                         MetalEnum.Silver.getStack(ItemPattern.dust),
-                        MetalEnum.Silver.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Silver.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
             }
         };

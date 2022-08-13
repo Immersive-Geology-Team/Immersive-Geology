@@ -1,3 +1,8 @@
 Chromium
 COMMON metal
-<&chromium_display> 
+<&chromium_display> Metal can be processed from: <link;immersive_geology:chromite;chromite>
+preparation:
+Process crystal chromium by <link;immersiveengineering:crusher;Crushing>, 
+Process crystal chromium by <link;minecraft:furnace;basicSmelting>, 
+Process ingot chromium by <link;immersiveengineering:crusher;Crushing>, 
+Process dust chromium by <link;minecraft:furnace;basicSmelting>

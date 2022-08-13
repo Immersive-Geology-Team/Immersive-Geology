@@ -1,5 +1,8 @@
 package igteam.api.materials.data.metal.variants;
 
+import igteam.api.materials.MineralEnum;
+import igteam.api.materials.data.mineral.MaterialBaseMineral;
+import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.MetalEnum;
 import igteam.api.materials.data.metal.MaterialBaseMetal;
@@ -7,6 +10,7 @@ import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IRecipeBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
@@ -29,6 +33,16 @@ public class MaterialMetalSilver extends MaterialBaseMetal {
 
     @Override
     public boolean hasCompoundDust() {return true;}
+
+    @Override
+    public ArrayList<MaterialInterface<? extends MaterialBaseMineral>> getSourceMinerals() {
+        ArrayList<MaterialInterface<? extends MaterialBaseMineral>> lst = new ArrayList<>();
+        lst.add(MineralEnum.Acanthite);
+        lst.add(MineralEnum.Galena);
+
+        return lst;
+    }
+
     @Override
     public LinkedHashSet<PeriodicTableElement.ElementProportion> getElements()
     {
@@ -46,7 +60,7 @@ public class MaterialMetalSilver extends MaterialBaseMetal {
             protected void describe() {
                 IRecipeBuilder.bloomery(this).create(
                         "crushed_ore_" + getName() + "_to_ingot",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 2,
                         MetalEnum.Silver.getStack(ItemPattern.ingot),
                         120);
             }

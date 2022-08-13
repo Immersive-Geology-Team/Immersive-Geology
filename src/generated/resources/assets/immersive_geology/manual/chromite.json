@@ -4,18 +4,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_chromite_crushed_ore_chromite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chromite_crushed_ore_chromite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chromite_crushed_ore_chromite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chromite_crushed_ore_chromite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chromite_crushed_ore_chromite"
       }
     ]
   },

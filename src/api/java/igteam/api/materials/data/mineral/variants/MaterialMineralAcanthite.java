@@ -58,7 +58,7 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag),1000, 1);
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1, getParentMaterial().getStack(ItemPattern.slag),1000, 1);
             }
         };
         new IGProcessingStage(this,"Blasting Stage") {
@@ -79,7 +79,7 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
 
             IRecipeBuilder.chemical(this).create(
             "dust_" + getName() + "_to_slurry",
-                    getStack(ItemPattern.dust),
+                    getItemTag(ItemPattern.dust), 1,
                     new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                     new FluidTagInput(FluidTags.WATER, 250),
                     MetalEnum.Platinum.getStack(ItemPattern.compound_dust),
@@ -89,7 +89,7 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Silver.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.SILVER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
                 IRecipeBuilder.separating(this).create(
                         MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),

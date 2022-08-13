@@ -1,5 +1,6 @@
 package igteam.api.processing.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
@@ -98,5 +99,10 @@ public class IGCrushingMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("crushing/crush_" + Objects.requireNonNull(getMethodName()));
+    }
+
+    @Override
+    public ITag<?> getGenericInput(){
+        return input;
     }
 }

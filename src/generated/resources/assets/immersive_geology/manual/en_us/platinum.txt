@@ -1,3 +1,34 @@
 Platinum
 COMMON metal
-<&platinum_display> 
+<&platinum_display> Metal can be processed from: <link;immersive_geology:acanthite;acanthite>, 
+<link;immersive_geology:chalcocite;chalcocite>
+preparation:
+Process dust platinum by <link;minecraft:furnace;basicSmelting>, 
+Process ingot platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dust platinum by <link;minecraft:furnace;basicSmelting>, 
+extraction:
+Process ore_chunk stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore stone_platinum by <link;immersive_geology:hydrojet;Cutting>, 
+Process ore_chunk stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk granite_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore granite_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore granite_platinum by <link;immersive_geology:hydrojet;Cutting>, 
+Process ore_chunk granite_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk netherrack_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore netherrack_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore netherrack_platinum by <link;immersive_geology:hydrojet;Cutting>, 
+Process ore_chunk netherrack_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk blackstone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore blackstone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore blackstone_platinum by <link;immersive_geology:hydrojet;Cutting>, 
+Process ore_chunk blackstone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk end_stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore platinum by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore end_stone_platinum by <link;immersiveengineering:crusher;Crushing>, 
+Process ore end_stone_platinum by <link;immersive_geology:hydrojet;Cutting>, 
+Process ore_chunk end_stone_platinum by <link;immersiveengineering:crusher;Crushing>

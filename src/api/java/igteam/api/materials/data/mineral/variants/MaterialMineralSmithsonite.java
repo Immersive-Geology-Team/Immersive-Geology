@@ -49,12 +49,12 @@ public class MaterialMineralSmithsonite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "crushed_ore_" + getName() + "_to_metal_oxide",
                         MetalEnum.Zinc.getStack(ItemPattern.metal_oxide),
-                        getStack(ItemPattern.crushed_ore),
+                        getItemTag(ItemPattern.crushed_ore), 1,
                         300,153600);
 
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Zinc.getName() + "_to_slurry",
-                        MetalEnum.Zinc.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Zinc.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
@@ -65,7 +65,7 @@ public class MaterialMineralSmithsonite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Zinc.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300,38400);
             }
         };

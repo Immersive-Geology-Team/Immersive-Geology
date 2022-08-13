@@ -1,17 +1,29 @@
 package igteam.api.processing.methods;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import igteam.api.materials.FluidEnum;
+import igteam.api.materials.SlurryEnum;
+import igteam.api.materials.pattern.FluidPattern;
+import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class IGCrystallizationMethod extends IGProcessingMethod {
 
     private String methodName;
+    private ITag<Fluid> fluidTag;
 
     public IGCrystallizationMethod(IGProcessingStage stage) {
         super(RecipeMethod.Crystalization, stage);
@@ -21,11 +33,12 @@ public class IGCrystallizationMethod extends IGProcessingMethod {
     private int time;
     private int energy;
 
-    public void create(String name, ItemStack output, FluidTagInput fluidInput, int time, int energy){
+    public void create(String name, ItemStack output, ITag<Fluid> fluidInput, int fluidAmount, int time, int energy){
         methodName = name;
 
         this.itemResult = output;
-        this.fluidInput = fluidInput;
+        this.fluidTag = fluidInput;
+        this.fluidInput = new FluidTagInput(fluidInput, fluidAmount);
 
         this.time = time;
         this.energy = energy;
@@ -52,5 +65,10 @@ public class IGCrystallizationMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("crystallization/crystallize_" + Objects.requireNonNull(getMethodName()));
+    }
+
+    @Override
+    public ITag<?> getGenericInput(){
+        return fluidTag;
     }
 }

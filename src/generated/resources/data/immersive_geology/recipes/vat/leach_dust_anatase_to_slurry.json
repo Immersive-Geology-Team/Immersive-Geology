@@ -5,7 +5,7 @@
     "amount": 250
   },
   "item_input": {
-    "item": "immersive_geology:dust_anatase"
+    "tag": "forge:dusts/anatase"
   },
   "fluid_input1": {
     "tag": "forge:fluids/hydrochloric_acid",

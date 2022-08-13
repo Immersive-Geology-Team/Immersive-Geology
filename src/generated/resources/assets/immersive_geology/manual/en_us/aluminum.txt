@@ -1,3 +1,4 @@
 Aluminum
 UNCOMMON metal
-<&aluminum_display> 
+<&aluminum_display> Metal can be processed from: <link;immersive_geology:bauxite;bauxite>
+

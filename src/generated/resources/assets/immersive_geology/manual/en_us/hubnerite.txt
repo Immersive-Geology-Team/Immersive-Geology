@@ -1,5 +1,55 @@
 Hubnerite
 RARE mineral
-<&hubnerite_display> Hubnerite is found in the end between y layers 1 and 90 and provides a source of [<link;immersive_geology:manganese;manganese>, <link;immersive_geology:tungsten;tungsten>].
-Further information on how to process this Mineral can be found in the next few pages.
+<&hubnerite_display> Extraction Stage:
+Process crushed_ore hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust hubnerite by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process compound_dust tungsten by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+extraction:
+Process ore stone_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+refinement:
+refinement:
+Process slurry sulfuric_acid_manganese by <link;immersive_geology:crystallizer;Crystalization>, 
+
 <&hubnerite_recipe> (Generic) Crafting Recipe

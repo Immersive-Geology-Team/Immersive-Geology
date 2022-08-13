@@ -4,7 +4,7 @@
     "item": "immersive_geology:slag_sphalerite"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_sphalerite"
+    "tag": "forge:crushed_ores/sphalerite"
   },
   "wasteMultiplier": 1.0,
   "time": 1000

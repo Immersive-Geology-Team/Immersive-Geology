@@ -4,18 +4,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_chalcocite_crushed_ore_chalcocite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chalcocite_crushed_ore_chalcocite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chalcocite_crushed_ore_chalcocite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chalcocite_crushed_ore_chalcocite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_chalcocite_crushed_ore_chalcocite"
       }
     ]
   },

@@ -48,7 +48,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Thorium.getStack(ItemPattern.compound_dust),
@@ -58,12 +58,12 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" +MetalEnum.Thorium.getName() + "_to_metal_oxide",
                         MetalEnum.Thorium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Thorium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Thorium.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_" + MetalEnum.Neodymium.getName()+ "_to_compound_dust",
-                        ItemStack.EMPTY,
+                        null, 0,
                         new FluidTagInput(SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidEnum.SodiumHydroxide.getFluidTag(FluidPattern.fluid), 250),
                         MetalEnum.Neodymium.getStack(ItemPattern.compound_dust),
@@ -73,7 +73,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" +MetalEnum.Neodymium.getName() + "_to_metal_oxide",
                         MetalEnum.Neodymium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Neodymium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Neodymium.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
 
             }
@@ -84,7 +84,7 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Neodymium.getName()+ "_slurry",
-                        MetalEnum.Neodymium.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Neodymium.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidTags.WATER, 250),
                         new FluidTagInput(FluidEnum.HydrofluoricAcid.getFluidTag(FluidPattern.fluid), 250),
                         ItemStack.EMPTY,
@@ -94,12 +94,12 @@ public class MaterialMineralMonazite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrofluoricAcid).getName() + "_to_crystal",
                         MetalEnum.Neodymium.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrofluoricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.NEODYMIUM.getType(FluidEnum.HydrofluoricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
 
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
-                                new IngredientWithSize(MetalEnum.Thorium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Thorium.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Thorium.getStack(ItemPattern.dust),null,
                                 new IngredientWithSize( MetalEnum.Zinc.getItemTag(ItemPattern.dust), 1))
                         .setEnergyTime(102400, 200);

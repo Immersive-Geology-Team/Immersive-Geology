@@ -4,7 +4,7 @@
     "item": "immersive_geology:slag_cobaltite"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_cobaltite"
+    "tag": "forge:crushed_ores/cobaltite"
   },
   "wasteMultiplier": 2.0,
   "time": 200

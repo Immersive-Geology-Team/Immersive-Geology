@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:dirty_crushed_ore_stone_zircon",
+    "immersive_geology:dirty_crushed_ore_granite_zircon",
+    "immersive_geology:dirty_crushed_ore_netherrack_zircon",
+    "immersive_geology:dirty_crushed_ore_blackstone_zircon",
+    "immersive_geology:dirty_crushed_ore_end_stone_zircon"
+  ]
+}

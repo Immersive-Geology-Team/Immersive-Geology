@@ -8,7 +8,7 @@
     "item": "immersive_geology:dust_cryolite"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_aluminum"
+    "tag": "forge:compound_dusts/aluminum"
   },
   "fluid_input1": {
     "tag": "forge:fluids/hydrofluoric_acid",

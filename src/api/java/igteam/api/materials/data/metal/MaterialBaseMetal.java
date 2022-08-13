@@ -3,6 +3,7 @@ package igteam.api.materials.data.metal;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
+import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.IGApi;
 import igteam.api.materials.StoneEnum;
@@ -20,6 +21,8 @@ import net.minecraft.resources.ResourcePackType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
 
 public abstract class MaterialBaseMetal extends MaterialBase {
 
@@ -96,10 +99,9 @@ public abstract class MaterialBaseMetal extends MaterialBase {
             protected void describe() {
                 if (isNative()) { //TODO Double check if this needs to be Native
                     if (!hasExistingImplementation()) {
-                        IRecipeBuilder.bloomery(this).create("native_" + getName() + "_to_ingot", getParentMaterial().getStack(ItemPattern.crushed_ore, 2), getParentMaterial().getStack(ItemPattern.ingot), 200);
                     }
 
-                    IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
+                    IRecipeBuilder.basicSmelting(this).create(getItemTag(ItemPattern.dust), getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
                 }
 
                 if (hasCrystal() && (hasDust() || hasExistingImplementation())) {
@@ -107,6 +109,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                             "crystal_" + getName() + "_to_dust",
                             getItemTag(ItemPattern.crystal), getStack(ItemPattern.dust), 3000, 200);
                     IRecipeBuilder.basicSmelting(this).create(
+                            getItemTag(ItemPattern.crystal),
                             getItem(ItemPattern.crystal),
                             getItem(ItemPattern.ingot));
                 }
@@ -115,6 +118,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                             "ingot_" + getName() + "_to_dust",
                             getItemTag(ItemPattern.ingot), getStack(ItemPattern.dust), 3000, 200);
                     IRecipeBuilder.basicSmelting(this).create(
+                            getItemTag(ItemPattern.dust),
                             getItem(ItemPattern.dust),
                             getItem(ItemPattern.ingot));
 
@@ -378,4 +382,6 @@ public abstract class MaterialBaseMetal extends MaterialBase {
     public boolean isFluidPortable(ItemPattern pattern) {
         return false;
     }
+
+    public abstract ArrayList<MaterialInterface<? extends MaterialBaseMineral>> getSourceMinerals();
 }

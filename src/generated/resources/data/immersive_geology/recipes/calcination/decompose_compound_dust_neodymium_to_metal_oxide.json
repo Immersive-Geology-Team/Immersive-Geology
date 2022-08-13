@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_neodymium"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_neodymium"
+    "tag": "forge:compound_dusts/neodymium"
   },
   "energy": 153600,
   "time": 300

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "immersive_geology:ore_chunk_stone_zircon",
+    "immersive_geology:ore_chunk_granite_zircon",
+    "immersive_geology:ore_chunk_netherrack_zircon",
+    "immersive_geology:ore_chunk_blackstone_zircon",
+    "immersive_geology:ore_chunk_end_stone_zircon"
+  ]
+}

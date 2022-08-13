@@ -78,9 +78,45 @@ public class IGManualProvider implements IDataProvider {
                     .closeAnchor();
 
             ManualTextProvider textProvider = attemptTextCreation(material_name)
-                    .setTitle(formalName, metal.instance().getRarity().name() + " metal")
-                    .attachPage(material_name + "_display", "");
+                    .setTitle(formalName, metal.instance().getRarity().name() + " metal");
 
+            String sanitizedProcessing = "";
+            StringBuilder metalSources = new StringBuilder("");
+
+
+            metal.instance().getStages().stream().forEach((stage) -> {
+                if(!stage.getMethods().isEmpty()) {
+                    metalSources.append(stage.getStageName() + ":\n");
+                    stage.getMethods().stream().forEach((method) -> {
+                        method.clearRecipePath();
+                        if(method.getGenericInput() != null) {
+                            String dirtyTag = method.getGenericInput().toString();
+                            String tag = dirtyTag.substring(dirtyTag.indexOf(":") + 1, dirtyTag.lastIndexOf("]")).replace("s/", " ").replace("/", " ");
+                            IGApi.getNewLogger().info("Generic Input: " + tag);
+                            metalSources.append("Process " + tag + " by <link;" + method.getRecipeType().getMachineName() + ";" + method.getRecipeType().name() + ">, \n");
+                        }
+                    });
+                    metalSources.append("");
+                }
+            });
+            StringBuilder sourceLink = new StringBuilder();
+            if(metalSources.toString().length() > 0) {
+                sanitizedProcessing = (metalSources.toString().substring(0, metalSources.toString().lastIndexOf(",")));
+            }
+
+            ArrayList<MaterialInterface<? extends MaterialBaseMineral>> sourceMinerals = metal.instance().getSourceMinerals();
+
+            for (MaterialInterface<? extends MaterialBaseMineral> mineral : sourceMinerals) {
+                sourceLink.append("<link;immersive_geology:" + mineral.getName() + ";" + mineral.getName() + ">, \n");
+            }
+
+            String sourceText = "";
+            if(!sourceLink.toString().isEmpty()) {
+                sourceText = "Metal can be processed from: " + (sourceLink.toString().substring(0, sourceLink.toString().lastIndexOf(",")) + "");
+            }
+
+            IGApi.getNewLogger().info(sanitizedProcessing);
+            textProvider.attachPage(material_name + "_display", sourceText + "\n" + sanitizedProcessing);
         }
 
         for (MaterialInterface<MaterialBaseMineral> material : MineralEnum.values()){
@@ -88,8 +124,7 @@ public class IGManualProvider implements IDataProvider {
             String material_name = baseMaterial.getName();
             String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
 
-
-                ManualPageProvider provider = attemptPageCreation(material_name);
+            ManualPageProvider provider = attemptPageCreation(material_name);
 
             if(baseMaterial.hasPattern(ItemPattern.ore_chunk) && baseMaterial.hasPattern(ItemPattern.dirty_crushed_ore)) {
                     provider.startAnchor(material_name + "_display")
@@ -99,7 +134,6 @@ public class IGManualProvider implements IDataProvider {
                             StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, baseMaterial).getRegistryName())
                     .closeAnchor();
             }
-
             String sanitizedMaterials = "";
 
             if(!baseMaterial.getSourceMaterials().isEmpty()) {
@@ -117,8 +151,9 @@ public class IGManualProvider implements IDataProvider {
                             formalName + " is found in the " + material.getDimension().name() + " between y layers " + ((IGOreConfig) material.getGenerationConfig()).minY.get() + " and " + ((IGOreConfig) material.getGenerationConfig()).maxY.get() +
                                     (sanitizedMaterials.isEmpty() ? "" : " and provides a source of " + sanitizedMaterials + ".") + "\nFurther information on how to process this Mineral can be found in the next few pages.");
 
-            List<ResourceLocation> crafting = new ArrayList<>();
-            List<ResourceLocation> crushing = new ArrayList<>();
+            HashSet<ResourceLocation> crafting = new HashSet<>();
+            HashSet<ResourceLocation> crushing = new HashSet<>();
+            StringBuilder mineralMethods = new StringBuilder();
 
             for (IGProcessingStage stage : material.getStages()) {
                 stage.getMethods().stream().forEach((m) -> {
@@ -128,6 +163,16 @@ public class IGManualProvider implements IDataProvider {
                         IGCraftingMethod crft = (IGCraftingMethod) m;
                         if(crft.getRecipeGroup().equals("wash_dirty_ore"))
                             crafting.add(m.getLocation());
+                    } else if(!stage.getMethods().isEmpty()) {
+                        mineralMethods.append(stage.getStageName() + ":\n");
+                        if(m.getGenericInput() != null) {
+                            String dirtyTag = m.getGenericInput().toString();
+                            String tag = dirtyTag.substring(dirtyTag.indexOf(":") + 1, dirtyTag.lastIndexOf("]")).replace("s/", " ").replace("/", " ");
+                            IGApi.getNewLogger().info("Generic Input: " + tag);
+                            mineralMethods.append("Process " + tag + " by <link;" + m.getRecipeType().getMachineName() + ";" + m.getRecipeType().name() + ">, \n");
+                        }
+
+                        mineralMethods.append("");
                     }
                 });
             }
@@ -137,6 +182,7 @@ public class IGManualProvider implements IDataProvider {
                     .addListElements("recipes", crafting.toArray(new ResourceLocation[crafting.size()]));
 
             textProvider.attachPage(material_name + "_recipe", "(Generic) Crafting Recipe");
+            textProvider.attachPage(material_name + "_display", mineralMethods.toString());
         }
     }
 

@@ -47,7 +47,7 @@ public class MaterialMineralPyrolusite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "slag_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
@@ -57,7 +57,7 @@ public class MaterialMineralPyrolusite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Manganese.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
 
             }

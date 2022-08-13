@@ -45,7 +45,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag),1000, 1);
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1, getParentMaterial().getStack(ItemPattern.slag),1000, 1);
                 IRecipeBuilder.crushing(this).create("slag_" + getName() + "_to_dust",
                         getItemTag(ItemPattern.slag),
                         getStack(ItemPattern.dust), 3000, 200);
@@ -66,7 +66,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Zinc.getName() + "_to_slurry",
-                        MetalEnum.Zinc.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Zinc.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
@@ -77,7 +77,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Zinc.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.ZINC.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300,38400);
             }
         };

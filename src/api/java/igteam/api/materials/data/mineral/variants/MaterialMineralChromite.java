@@ -42,7 +42,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Iron.getName() + "_to_metal_oxide",
                         MetalEnum.Iron.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Iron.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Iron.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
 
                 IRecipeBuilder.blasting(this).create(
@@ -62,7 +62,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_"+getName()+"_to_slurry_and_salt",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.NitricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Iron.getStack(ItemPattern.compound_dust),
@@ -71,7 +71,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_"+getName()+"_to_slurry",
-                        ItemStack.EMPTY,
+                        null, 1,
                         new FluidTagInput(SlurryEnum.CHROMIUM.getType(FluidEnum.NitricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 125),
                         ItemStack.EMPTY,
@@ -81,7 +81,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + getName() + "_to_crystal",
                         MetalEnum.Chromium.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.CHROMIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.CHROMIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
             }
         };

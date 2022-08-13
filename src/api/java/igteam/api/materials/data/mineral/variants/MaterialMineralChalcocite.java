@@ -62,7 +62,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore), getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1, getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
 
             }
         };
@@ -86,7 +86,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Platinum.getStack(ItemPattern.compound_dust),
@@ -96,7 +96,7 @@ public class MaterialMineralChalcocite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Copper.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.COPPER.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
 
                 IRecipeBuilder.separating(this).create(

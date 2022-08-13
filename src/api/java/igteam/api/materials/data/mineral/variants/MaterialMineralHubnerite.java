@@ -47,7 +47,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
@@ -57,7 +57,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Tungsten.getName() + "_to_metal_oxide",
                         MetalEnum.Tungsten.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Tungsten.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
 
                 //To be fair, it should be dust, but I'd like not to bother here
@@ -74,7 +74,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_" +  SlurryEnum.MANGANESE.getType(FluidEnum.HydrochloricAcid).getName() + "_to_slurry",
-                        ItemStack.EMPTY,
+                        null, 0,
                         new FluidTagInput(SlurryEnum.MANGANESE.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         ItemStack.EMPTY,
@@ -84,7 +84,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getName() + "_to_crystal",
                         MetalEnum.Manganese.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.MANGANESE.getType(FluidEnum.SulfuricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
             }
         };

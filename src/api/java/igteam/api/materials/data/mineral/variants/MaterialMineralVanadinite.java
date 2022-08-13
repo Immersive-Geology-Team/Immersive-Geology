@@ -70,7 +70,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                     "dust_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemPattern.compound_dust.getName(),
-                    getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                     new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                     new FluidTagInput(FluidEnum.Brine.getFluidTag(FluidPattern.fluid), 250),
                     MetalEnum.Vanadium.getStack(ItemPattern.compound_dust, 2),
@@ -81,11 +81,11 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Vanadium.getName() + "_to_metal_oxide",
                         MetalEnum.Vanadium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Vanadium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Vanadium.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600 );
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
-                                new IngredientWithSize(MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Vanadium.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Vanadium.getStack(ItemPattern.ingot),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
                         .setEnergyTime(102400, 200);

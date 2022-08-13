@@ -1,5 +1,6 @@
 package igteam.api.processing.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.IGApi;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
@@ -121,4 +122,5 @@ public class IGCraftingMethod extends IGProcessingMethod {
     public HashMap<Character, Item> getCharacterInputMap() {
         return inputMap;
     }
+
 }

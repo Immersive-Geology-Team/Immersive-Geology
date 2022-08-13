@@ -49,7 +49,7 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.roast(this).create(
                         "crushed_ore_" + getName() + "_to_oxide",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore),
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1,
                         MetalEnum.Nickel.getStack(ItemPattern.metal_oxide),
                         200, 2);
             }
@@ -60,7 +60,7 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Nickel.getName() + "_to_slurry",
-                        MetalEnum.Nickel.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Nickel.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,
@@ -69,7 +69,7 @@ public class MaterialMineralUllmannite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Nickel.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.NICKEL.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
             }
         };

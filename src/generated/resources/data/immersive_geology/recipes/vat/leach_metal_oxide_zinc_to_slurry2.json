@@ -5,7 +5,7 @@
     "amount": 250
   },
   "item_input": {
-    "item": "immersive_geology:metal_oxide_zinc"
+    "tag": "forge:metal_oxides/zinc"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",

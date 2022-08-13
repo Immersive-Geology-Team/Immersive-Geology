@@ -50,7 +50,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_brine",
-                        getStack(ItemPattern.dust, 2),
+                        getItemTag(ItemPattern.dust), 2,
                         new FluidTagInput(FluidTags.WATER, 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
@@ -59,7 +59,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "sodium_oxide_to_hydroxide",
-                        MetalEnum.Sodium.getStack(ItemPattern.metal_oxide, 2),
+                        MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 2,
                         new FluidTagInput(FluidTags.WATER, 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,
@@ -83,7 +83,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "brine_to_acid_and_salt",
-                        ItemStack.EMPTY,
+                        null,0,
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidEnum.Brine.getFluidTag(FluidPattern.fluid), 125),
                         MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
@@ -97,11 +97,11 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Sodium.getName() + "_to_metal_oxide",
                         MetalEnum.Sodium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Sodium.getItemTag(ItemPattern.compound_dust), 1,
                         300,153600);
 
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
-                                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Sodium.getStack(ItemPattern.dust),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
                         .setEnergyTime(102400, 200);

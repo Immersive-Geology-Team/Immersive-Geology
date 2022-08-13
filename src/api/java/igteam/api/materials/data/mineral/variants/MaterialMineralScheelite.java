@@ -55,7 +55,7 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 250),
                         new FluidTagInput(FluidTags.WATER, 250),
                         MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
@@ -65,7 +65,7 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Tungsten.getName() + "_to_metal_oxide",
                         MetalEnum.Tungsten.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Tungsten.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Tungsten.getItemTag(ItemPattern.compound_dust), 1,
                         300, 153600);
 
                 //To be fair, it should be dust, but I'd like not to bother here
@@ -76,7 +76,7 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "slurry_" + MineralEnum.Gypsum.getName() + "_to_dust",
-                        ItemStack.EMPTY,
+                        null, 0,
                         new FluidTagInput(SlurryEnum.CALCIUM.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
                         new FluidTagInput(FluidEnum.SulfuricAcid.getFluidTag(FluidPattern.fluid), 250),
                         MineralEnum.Gypsum.getStack(ItemPattern.dust),

@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_vanadinite_crushed_ore_vanadinite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_vanadinite_crushed_ore_vanadinite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_vanadinite_crushed_ore_vanadinite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_vanadinite_crushed_ore_vanadinite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_vanadinite_crushed_ore_vanadinite"
       }
     ]
   }

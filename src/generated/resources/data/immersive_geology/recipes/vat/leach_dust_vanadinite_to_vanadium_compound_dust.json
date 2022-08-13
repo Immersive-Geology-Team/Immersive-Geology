@@ -9,7 +9,7 @@
     "count": 2
   },
   "item_input": {
-    "item": "immersive_geology:dust_vanadinite"
+    "tag": "forge:dusts/vanadinite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",

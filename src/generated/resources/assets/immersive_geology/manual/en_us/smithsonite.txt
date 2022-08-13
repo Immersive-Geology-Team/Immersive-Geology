@@ -1,5 +1,50 @@
 Smithsonite
 COMMON mineral
-<&smithsonite_display> Smithsonite is found in the overworld between y layers 1 and 140 and provides a source of [<link;immersive_geology:zinc;zinc>].
-Further information on how to process this Mineral can be found in the next few pages.
+<&smithsonite_display> Extraction Stage:
+Process crushed_ore smithsonite by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide zinc by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process slurry sulfuric_acid_zinc by <link;immersive_geology:crystallizer;Crystalization>, 
+extraction:
+Process ore stone_smithsonite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_smithsonite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_smithsonite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_smithsonite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_smithsonite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_smithsonite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_smithsonite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_smithsonite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_smithsonite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_smithsonite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_smithsonite by <link;immersive_geology:gravityseparator;Separator>, 
+
 <&smithsonite_recipe> (Generic) Crafting Recipe

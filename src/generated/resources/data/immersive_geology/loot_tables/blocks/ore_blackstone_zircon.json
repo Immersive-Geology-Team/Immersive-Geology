@@ -1,0 +1,51 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_chunk_blackstone_zircon"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0.5,
+        "max": 1.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_secondary_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_bit_blackstone_zircon"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_chunk_drops"
+            }
+          ],
+          "name": "immersive_geology:stone_chunk_blackstone"
+        }
+      ]
+    }
+  ]
+}

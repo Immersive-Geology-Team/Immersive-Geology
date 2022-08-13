@@ -51,10 +51,10 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "compound_dust_" + MetalEnum.Sodium.getName() + "_to_metal_oxide",
                         MetalEnum.Sodium.getStack(ItemPattern.metal_oxide),
-                        MetalEnum.Sodium.getStack(ItemPattern.compound_dust),
+                        MetalEnum.Sodium.getItemTag(ItemPattern.compound_dust), 1,
                         300,153600);
                 IRecipeBuilder.arcSmelting(this).create("metal_oxide_"+getName() +"_to_dust",
-                                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Sodium.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Sodium.getStack(ItemPattern.dust),null,
                                 new IngredientWithSize(IETags.coalCokeDust, 1))
                         .setEnergyTime(102400, 200);

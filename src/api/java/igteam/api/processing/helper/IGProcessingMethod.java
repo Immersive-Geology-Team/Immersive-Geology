@@ -1,7 +1,11 @@
 package igteam.api.processing.helper;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.IGApi;
 import igteam.api.processing.IGProcessingStage;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
@@ -40,4 +44,9 @@ public abstract class IGProcessingMethod {
     public void clearRecipePath(){
         PATH_COUNT.clear();
     }
+
+    public ITag<?> getGenericInput(){
+        return null;
+    }
+
 }

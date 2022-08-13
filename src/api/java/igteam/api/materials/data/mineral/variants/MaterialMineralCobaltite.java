@@ -42,7 +42,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.roast(this).create(
                         "crushed_ore_" + getName() + "_to_slag",
-                        getStack(ItemPattern.crushed_ore),
+                        getItemTag(ItemPattern.crushed_ore), 1,
                         getStack(ItemPattern.slag),
                         200, 2);
 
@@ -59,7 +59,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" +getName()+"_to_slurry",
-                        getStack(ItemPattern.dust),
+                        getItemTag(ItemPattern.dust), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Platinum.getStack(ItemPattern.compound_dust, 1),
@@ -70,7 +70,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Cobalt.getStack(ItemPattern.crystal),
-                        new FluidTagInput(SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250),
+                        SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
 
                 IRecipeBuilder.separating(this).create(

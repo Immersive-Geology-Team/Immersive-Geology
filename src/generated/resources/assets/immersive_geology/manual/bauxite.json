@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_bauxite_crushed_ore_bauxite"
       }
     ]
   }

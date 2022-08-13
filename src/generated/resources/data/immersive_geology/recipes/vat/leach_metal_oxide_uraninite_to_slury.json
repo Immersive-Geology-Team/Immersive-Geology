@@ -5,7 +5,7 @@
     "amount": 125
   },
   "item_input": {
-    "item": "immersive_geology:metal_oxide_uranium"
+    "tag": "forge:metal_oxides/uranium"
   },
   "fluid_input1": {
     "tag": "forge:fluids/hydrofluoric_acid",

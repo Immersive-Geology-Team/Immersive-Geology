@@ -1,6 +1,9 @@
 package igteam.api.materials.data.metal.variants;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import igteam.api.materials.MineralEnum;
+import igteam.api.materials.data.mineral.MaterialBaseMineral;
+import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.MetalEnum;
 import igteam.api.materials.StoneEnum;
@@ -14,6 +17,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
@@ -50,7 +54,7 @@ public class MaterialMetalGold extends MaterialBaseMetal {
 
                 IRecipeBuilder.bloomery(this).create(
                         "crushed_ore_" + getName() + "_to_ingot",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 2,
                         MetalEnum.Gold.getStack(ItemPattern.ingot),
                         120);
             }
@@ -64,5 +68,11 @@ public class MaterialMetalGold extends MaterialBaseMetal {
         return new LinkedHashSet<>(Arrays.asList(
                 new PeriodicTableElement.ElementProportion(PeriodicTableElement.GOLD)
         ));
+    }
+
+    @Override
+    public ArrayList<MaterialInterface<? extends MaterialBaseMineral>> getSourceMinerals() {
+        ArrayList<MaterialInterface<? extends MaterialBaseMineral>> lst = new ArrayList<>();
+        return lst;
     }
 }

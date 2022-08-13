@@ -42,7 +42,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
                         .setInputToCharacter('x', getItem(ItemPattern.clay))
                         .finializeRecipe("general_crafting", "has_clay", getItemTag(ItemPattern.clay));
 
-                IRecipeBuilder.basicSmelting(this).create(getItem(ItemPattern.clay), MiscEnum.Refractory.getItem(ItemPattern.ingot));
+                IRecipeBuilder.basicSmelting(this).create(getItemTag(ItemPattern.clay), getItem(ItemPattern.clay), MiscEnum.Refractory.getItem(ItemPattern.ingot));
 
             }
         };

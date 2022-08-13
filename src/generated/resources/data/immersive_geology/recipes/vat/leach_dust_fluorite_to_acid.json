@@ -8,7 +8,7 @@
     "item": "immersive_geology:dust_gypsum"
   },
   "item_input": {
-    "item": "immersive_geology:dust_fluorite"
+    "tag": "forge:dusts/fluorite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/sulfuric_acid",

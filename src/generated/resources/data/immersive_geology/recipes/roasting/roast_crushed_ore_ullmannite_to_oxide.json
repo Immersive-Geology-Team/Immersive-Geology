@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_nickel"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_ullmannite"
+    "tag": "forge:crushed_ores/ullmannite"
   },
   "wasteMultiplier": 2.0,
   "time": 200

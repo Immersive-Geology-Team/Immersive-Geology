@@ -1,3 +1,6 @@
 Bronze
 UNCOMMON metal
 <&bronze_display> 
+preparation:
+Process ingot bronze by <link;immersiveengineering:crusher;Crushing>, 
+Process dust bronze by <link;minecraft:furnace;basicSmelting>

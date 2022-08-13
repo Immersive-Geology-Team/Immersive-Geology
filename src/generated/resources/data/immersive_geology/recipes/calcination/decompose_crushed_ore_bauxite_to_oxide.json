@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_aluminum"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_bauxite"
+    "tag": "forge:crushed_ores/bauxite"
   },
   "energy": 153600,
   "time": 300

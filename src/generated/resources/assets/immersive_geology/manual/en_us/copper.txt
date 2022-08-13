@@ -1,3 +1,29 @@
 Copper
 COMMON metal
-<&copper_display> 
+<&copper_display> Metal can be processed from: <link;immersive_geology:cuprite;cuprite>, 
+<link;immersive_geology:chalcopyrite;chalcopyrite>, 
+<link;immersive_geology:chalcocite;chalcocite>
+extraction:
+Process ore_chunk stone_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk stone_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk granite_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk granite_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk netherrack_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk netherrack_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk blackstone_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk blackstone_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk end_stone_copper by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore copper by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk end_stone_copper by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process crushed_ore copper by <link;immersive_geology:bloomery;Bloomery>, 
+preparation:
+Process dust copper by <link;minecraft:furnace;basicSmelting>, 
+Process crystal copper by <link;immersiveengineering:crusher;Crushing>, 
+Process crystal copper by <link;minecraft:furnace;basicSmelting>, 
+preparation:
+Process ore copper by <link;immersive_geology:hydrojet;Cutting>

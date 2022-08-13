@@ -47,7 +47,7 @@ public class MaterialMineralCuprite extends MaterialBaseMineral {
                         MetalEnum.Copper.getStack(ItemPattern.ingot));
                 IRecipeBuilder.bloomery(this).create(
                         "crushed_ore_" + getName() + "_to_ingot",
-                        getParentMaterial().getStack(ItemPattern.crushed_ore, 2),
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 2,
                         MetalEnum.Copper.getStack(ItemPattern.ingot),
                         120);
             }

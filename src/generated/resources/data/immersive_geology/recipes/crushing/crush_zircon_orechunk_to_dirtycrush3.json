@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [],
+  "result": {
+    "item": "immersive_geology:dirty_crushed_ore_netherrack_zircon"
+  },
+  "input": {
+    "tag": "forge:ore_chunks/netherrack_zircon"
+  },
+  "time": 200,
+  "energy": 6000
+}

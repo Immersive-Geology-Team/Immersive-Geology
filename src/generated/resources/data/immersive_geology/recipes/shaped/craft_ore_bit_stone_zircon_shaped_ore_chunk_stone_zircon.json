@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "ooo",
+    "ooo",
+    "ooo"
+  ],
+  "key": {
+    "o": {
+      "item": "immersive_geology:ore_bit_stone_zircon"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:ore_chunk_stone_zircon"
+  }
+}

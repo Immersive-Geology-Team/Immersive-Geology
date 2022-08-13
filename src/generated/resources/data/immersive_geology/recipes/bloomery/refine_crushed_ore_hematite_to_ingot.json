@@ -6,7 +6,7 @@
   "item_input": {
     "count": 2,
     "base_ingredient": {
-      "item": "immersive_geology:crushed_ore_hematite"
+      "tag": "forge:crushed_ores/hematite"
     }
   },
   "time": 120

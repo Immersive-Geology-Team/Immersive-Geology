@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_sodium"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_sodium"
+    "tag": "forge:compound_dusts/sodium"
   },
   "energy": 153600,
   "time": 300

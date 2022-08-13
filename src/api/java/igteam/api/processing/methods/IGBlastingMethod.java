@@ -1,5 +1,6 @@
 package igteam.api.processing.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
@@ -52,5 +53,10 @@ public class IGBlastingMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("blasting/blast_" + Objects.requireNonNull(getMethodName()));
+    }
+
+    @Override
+    public ITag<?> getGenericInput(){
+        return input;
     }
 }

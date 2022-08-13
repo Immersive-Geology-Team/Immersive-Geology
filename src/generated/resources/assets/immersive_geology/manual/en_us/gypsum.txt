@@ -1,5 +1,44 @@
 Gypsum
 UNCOMMON mineral
-<&gypsum_display> Gypsum is found in the nether between y layers 1 and 255
-Further information on how to process this Mineral can be found in the next few pages.
+<&gypsum_display> extraction:
+Process ore stone_gypsum by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_gypsum by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_gypsum by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_gypsum by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_gypsum by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_gypsum by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_gypsum by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_gypsum by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_gypsum by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_gypsum by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_gypsum by <link;immersive_geology:gravityseparator;Separator>, 
+
 <&gypsum_recipe> (Generic) Crafting Recipe

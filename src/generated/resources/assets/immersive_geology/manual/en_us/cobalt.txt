@@ -1,3 +1,8 @@
 Cobalt
 COMMON metal
-<&cobalt_display> 
+<&cobalt_display> Metal can be processed from: <link;immersive_geology:cobaltite;cobaltite>
+preparation:
+Process crystal cobalt by <link;immersiveengineering:crusher;Crushing>, 
+Process crystal cobalt by <link;minecraft:furnace;basicSmelting>, 
+Process ingot cobalt by <link;immersiveengineering:crusher;Crushing>, 
+Process dust cobalt by <link;minecraft:furnace;basicSmelting>

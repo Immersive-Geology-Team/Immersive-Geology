@@ -1,6 +1,7 @@
 package igteam.api.processing.methods;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
@@ -47,9 +48,9 @@ public class IGRefineryMethod  extends IGProcessingMethod {
         return fluidInput2;
     }
 
-
     @Override
     public ResourceLocation getLocation() {
         return toRL("refinery/synthesize_" + Objects.requireNonNull(getMethodName()));
     }
+
 }

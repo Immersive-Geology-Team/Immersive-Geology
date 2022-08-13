@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_tungsten"
   },
   "item_input": {
-    "item": "immersive_geology:compound_dust_tungsten"
+    "tag": "forge:compound_dusts/tungsten"
   },
   "energy": 153600,
   "time": 300

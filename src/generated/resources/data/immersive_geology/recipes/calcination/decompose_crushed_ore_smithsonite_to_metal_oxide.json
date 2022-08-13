@@ -4,7 +4,7 @@
     "item": "immersive_geology:metal_oxide_zinc"
   },
   "item_input": {
-    "item": "immersive_geology:crushed_ore_smithsonite"
+    "tag": "forge:crushed_ores/smithsonite"
   },
   "energy": 153600,
   "time": 300

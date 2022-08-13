@@ -80,11 +80,11 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "crushed_ore_" + getName() + "_to_oxide",
                         MetalEnum.Aluminum.getStack(ItemPattern.metal_oxide),
-                        getStack(ItemPattern.crushed_ore), 300, 153600);
+                        getItemTag(ItemPattern.crushed_ore), 1, 300, 153600);
 
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + getName() + "_to_compound_dust" ,
-                        MetalEnum.Aluminum.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Aluminum.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.SodiumHydroxide.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MetalEnum.Aluminum.getStack(ItemPattern.compound_dust, 1),
@@ -94,7 +94,7 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "chemical_recipe_" + MetalEnum.Aluminum.getName() + "_to_cryolite_dust",
-                        MetalEnum.Aluminum.getStack(ItemPattern.compound_dust, 1),
+                        MetalEnum.Aluminum.getItemTag(ItemPattern.compound_dust), 1,
                         new FluidTagInput(FluidEnum.HydrofluoricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 125),
                         MineralEnum.Cryolite.getStack(ItemPattern.dust, 1),
@@ -106,7 +106,7 @@ public class MaterialMineralBauxite extends MaterialBaseMineral {
                 //TODO in 1.18 -- chance based output for cryolite
                 IRecipeBuilder.arcSmelting(this).create(
                                 "metal_oxide_"+MetalEnum.Aluminum.getName()+"_to_ingot",
-                                new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemPattern.metal_oxide), 1),
+                                MetalEnum.Aluminum.getItemTag(ItemPattern.metal_oxide), 1,
                                 MetalEnum.Aluminum.getStack(ItemPattern.ingot),
                                 MineralEnum.Cryolite.getStack(ItemPattern.dust),
                                 new IngredientWithSize(IETags.coalCokeDust, 1),

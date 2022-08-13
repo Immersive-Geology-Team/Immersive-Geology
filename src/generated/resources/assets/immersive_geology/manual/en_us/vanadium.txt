@@ -1,3 +1,6 @@
 Vanadium
 COMMON metal
-<&vanadium_display> 
+<&vanadium_display> Metal can be processed from: <link;immersive_geology:vanadinite;vanadinite>
+preparation:
+Process ingot vanadium by <link;immersiveengineering:crusher;Crushing>, 
+Process dust vanadium by <link;minecraft:furnace;basicSmelting>

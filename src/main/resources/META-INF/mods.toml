@@ -8,16 +8,16 @@ license="LGPL v2.1"
 [[mods]]
 modId="immersive_geology"
 updateJSONURL=""
-version="Beta v1.1 MC 1.16.5"
+version="Beta v1.3 MC 1.16.5"
 displayName="Immersive Geology"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/immersive-geology"
 credits='''
 Codework done by Muddykat and UnSchtalch assisted by Kuruma
 Recipe Research done by UnSchtalch
-Modelwork done by UnSchtalch
-Texturework done by SteelBlue8 (Ingame) and Muddykat, Kuruma and UnSchtalch (Machine Gui's)
+Modelwork done by UnSchtalch assisted by Muddykat
+Texturework done by SteelBlue8 (Ingame); Muddykat, Kuruma and UnSchtalch (Machine Gui's)
 Balance Tweaking by UnSchtalch
-Manual Information filled out by Kuruma
+Manual Information filled out by Muddykat
 Early Frameworking by Kuruma, UnSchtalch and Pablio8
 
 Special Thanks to Sen#1629 for the Chemical Vat Model

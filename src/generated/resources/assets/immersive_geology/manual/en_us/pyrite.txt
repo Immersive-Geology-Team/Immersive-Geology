@@ -1,5 +1,48 @@
 Pyrite
 COMMON mineral
-<&pyrite_display> Pyrite is found in the nether between y layers 1 and 255 and provides a source of [<link;immersive_geology:iron;iron>].
-Further information on how to process this Mineral can be found in the next few pages.
+<&pyrite_display> Roasting Stage:
+Process crushed_ore pyrite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+extraction:
+Process ore stone_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
+Blasting Stage:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+
 <&pyrite_recipe> (Generic) Crafting Recipe

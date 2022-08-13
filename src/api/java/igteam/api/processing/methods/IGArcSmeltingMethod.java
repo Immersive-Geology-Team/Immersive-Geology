@@ -22,14 +22,17 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
         super(RecipeMethod.arcSmelting, stage);
     }
     private IngredientWithSize input;
+    private ITag<?> inputTag;
+
     private ItemStack slag, output;
     private List<IngredientWithSize> additives;
     int energy, time;
 
     private String name;
 
-    public IGArcSmeltingMethod create(String method_name, IngredientWithSize input, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
-        this.input = input;
+    public IGArcSmeltingMethod create(String method_name, ITag<Item> input, int inputAmount, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
+        this.inputTag = input;
+        this.input = new IngredientWithSize(input, inputAmount);
         this.output = output;
         this.slag = iSlag == null ? ItemStack.EMPTY : iSlag;
         this.additives = asList(additives);
@@ -86,6 +89,11 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("arc_smelting/arc_" + Objects.requireNonNull(getName()));
+    }
+
+    @Override
+    public ITag<?> getGenericInput(){
+        return inputTag;
     }
 }
 

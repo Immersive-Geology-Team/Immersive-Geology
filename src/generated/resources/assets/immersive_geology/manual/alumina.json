@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_alumina_crushed_ore_alumina"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_alumina_crushed_ore_alumina"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_alumina_crushed_ore_alumina"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_alumina_crushed_ore_alumina"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_alumina_crushed_ore_alumina"
       }
     ]
   }

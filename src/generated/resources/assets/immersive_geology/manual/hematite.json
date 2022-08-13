@@ -15,18 +15,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_hematite_crushed_ore_hematite"
       }
     ]
   }

@@ -8,7 +8,7 @@
     "item": "immersive_geology:compound_dust_tungsten"
   },
   "item_input": {
-    "item": "immersive_geology:dust_hubnerite"
+    "tag": "forge:dusts/hubnerite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/hydrochloric_acid",

@@ -1,3 +1,8 @@
 Thorium
 COMMON metal
-<&thorium_display> 
+<&thorium_display> Metal can be processed from: <link;immersive_geology:monazite;monazite>
+preparation:
+Process crystal thorium by <link;immersiveengineering:crusher;Crushing>, 
+Process crystal thorium by <link;minecraft:furnace;basicSmelting>, 
+Process ingot thorium by <link;immersiveengineering:crusher;Crushing>, 
+Process dust thorium by <link;minecraft:furnace;basicSmelting>

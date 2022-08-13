@@ -4,18 +4,6 @@
     "recipes": [
       {
         "recipe": "immersive_geology:shapeless/craft_fluorite_crushed_ore_fluorite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_fluorite_crushed_ore_fluorite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_fluorite_crushed_ore_fluorite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_fluorite_crushed_ore_fluorite"
-      },
-      {
-        "recipe": "immersive_geology:shapeless/craft_fluorite_crushed_ore_fluorite"
       }
     ]
   },

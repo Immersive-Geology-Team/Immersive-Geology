@@ -7,7 +7,7 @@
   "item_input": {
     "count": 2,
     "base_ingredient": {
-      "item": "immersive_geology:metal_oxide_sodium"
+      "tag": "forge:metal_oxides/sodium"
     }
   },
   "fluid_input1": {

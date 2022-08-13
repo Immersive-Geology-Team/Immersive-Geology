@@ -62,7 +62,7 @@ public class MaterialMineralIlmenite extends MaterialBaseMineral {
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + MetalEnum.Titanium.getName() + "_to_slurry",
-                        MetalEnum.Titanium.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Titanium.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.HydrochloricAcid.getFluidTag(FluidPattern.fluid), 500),
                         new FluidTagInput(FluidTags.WATER, 125),
                         ItemStack.EMPTY,

@@ -1,3 +1,7 @@
 Sodium
 COMMON metal
-<&sodium_display> 
+<&sodium_display> Metal can be processed from: <link;immersive_geology:rocksalt;rocksalt>, 
+<link;immersive_geology:cryolite;cryolite>
+preparation:
+Process ingot sodium by <link;immersiveengineering:crusher;Crushing>, 
+Process dust sodium by <link;minecraft:furnace;basicSmelting>

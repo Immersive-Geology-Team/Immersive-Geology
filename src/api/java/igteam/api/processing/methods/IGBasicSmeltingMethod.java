@@ -1,8 +1,12 @@
 package igteam.api.processing.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,9 +18,11 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
         super(RecipeMethod.basicSmelting, stage);
     }
     private IItemProvider input, output;
+    private ITag<Item> inputTag;
 
-    public void create(IItemProvider input, IItemProvider output){
-        this.input = input;
+    public void create(ITag<Item> inputTag, IItemProvider inputProvider, IItemProvider output){
+        this.inputTag = inputTag;
+        this.input = inputProvider;
         this.output = output;
     }
 
@@ -35,5 +41,9 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
 
     private String toPath(IItemProvider src) {
         return Objects.requireNonNull(src.asItem().getRegistryName()).getPath();
+    }
+    @Override
+    public ITag<?> getGenericInput(){
+        return inputTag;
     }
 }

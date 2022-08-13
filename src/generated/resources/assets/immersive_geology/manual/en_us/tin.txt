@@ -1,3 +1,6 @@
 Tin
 COMMON metal
-<&tin_display> 
+<&tin_display> Metal can be processed from: <link;immersive_geology:cassiterite;cassiterite>
+preparation:
+Process ingot tin by <link;immersiveengineering:crusher;Crushing>, 
+Process dust tin by <link;minecraft:furnace;basicSmelting>

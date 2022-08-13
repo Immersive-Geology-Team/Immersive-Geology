@@ -8,7 +8,7 @@
     "item": "immersive_geology:compound_dust_thorium"
   },
   "item_input": {
-    "item": "immersive_geology:dust_monazite"
+    "tag": "forge:dusts/monazite"
   },
   "fluid_input1": {
     "tag": "forge:fluids/hydrochloric_acid",

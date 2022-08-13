@@ -44,7 +44,7 @@ public class MaterialMineralUraninite extends MaterialBaseMineral {
                 IRecipeBuilder.decompose(this).create(
                         "crushed_ore" + getName() + "_to_compound_dust",
                         MetalEnum.Uranium.getStack(ItemPattern.compound_dust),
-                        getStack(ItemPattern.crushed_ore),
+                        getItemTag(ItemPattern.crushed_ore), 1,
                         300,153600);
 
                 IRecipeBuilder.chemical(this).create(
@@ -69,7 +69,7 @@ public class MaterialMineralUraninite extends MaterialBaseMineral {
 
                 IRecipeBuilder.chemical(this).create(
                         "metal_oxide_" + getName() + "_to_slury",
-                        MetalEnum.Uranium.getStack(ItemPattern.metal_oxide),
+                        MetalEnum.Uranium.getItemTag(ItemPattern.metal_oxide), 1,
                         new FluidTagInput(FluidEnum.HydrofluoricAcid.getFluidTag(FluidPattern.fluid), 125),
                         new FluidTagInput(FluidTags.WATER, 250),
                         ItemStack.EMPTY,

@@ -1,3 +1,29 @@
 Iron
 COMMON metal
-<&iron_display> 
+<&iron_display> Metal can be processed from: <link;immersive_geology:hematite;hematite>, 
+<link;immersive_geology:chalcopyrite;chalcopyrite>, 
+<link;immersive_geology:pyrite;pyrite>, 
+<link;immersive_geology:sphalerite;sphalerite>, 
+<link;immersive_geology:ferberite;ferberite>
+preparation:
+Process ore iron by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process crushed_ore iron by <link;immersive_geology:bloomery;Bloomery>, 
+preparation:
+Process dust iron by <link;minecraft:furnace;basicSmelting>, 
+extraction:
+Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>
