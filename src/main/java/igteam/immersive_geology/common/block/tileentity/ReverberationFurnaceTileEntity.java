@@ -1,9 +1,12 @@
 package igteam.immersive_geology.common.block.tileentity;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
+import blusunrize.immersiveengineering.common.blocks.metal.ClocheTileEntity;
+import blusunrize.immersiveengineering.common.network.MessageTileSync;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.IEInventoryHandler;
 import blusunrize.immersiveengineering.common.util.inventory.IIEInventory;
@@ -23,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -40,6 +44,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -62,12 +67,13 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     public int FUEL_SLOT1 = 0, FUEL_SLOT2 = 1;
     public int OUTPUT_SLOT1 = 2, OUTPUT_SLOT2 = 3;
     public int INPUT_SLOT1 = 4, INPUT_SLOT2 = 5;
-    protected FluidTank gasTank;
+    public final FluidTank gasTank;
+
     protected NonNullList<ItemStack> inventory;
     private Logger log = ImmersiveGeology.getNewLogger();
     private int[] burntime= new int[2];
     private int maxBurntime = 100;
-    private final LazyOptional<IFluidHandler> holder;
+    private final LazyOptional<IFluidHandler> tankCap;
     private LazyOptional<IItemHandler> insertionHandler1,insertionHandler2;
     private final LazyOptional<IItemHandler> extractionHandler1, extractionHandler2;
 
@@ -82,8 +88,13 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
         burntime[0] = 0;
         burntime[1] = 0;
-        gasTank = new FluidTank(1000);
-        holder = LazyOptional.of(() -> gasTank);
+        gasTank = new FluidTank(1000) {
+            protected void onContentsChanged() {
+                ReverberationFurnaceTileEntity.this.sendSyncPacket(2);
+            }
+        };
+
+        this.tankCap = LazyOptional.of(() -> gasTank);
 
         recipe_1_progress = 0;
         recipe_1_time = 100;
@@ -93,7 +104,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         recipe_2_time = 100;
         recipe_2 = null;
 
-        this.insertionHandler1 = this.registerConstantCap(new IEInventoryHandler(1, this.master(),INPUT_SLOT1, true, false){
+        this.insertionHandler1 = this.registerConstantCap(new IEInventoryHandler(1, this.master(), INPUT_SLOT1, true, false){
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
             {
@@ -183,7 +194,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && gasOutputs.contains(posInMultiblock) && facing == Direction.UP) {
             ReverberationFurnaceTileEntity master = master();
             if(master != null)
-                return master.holder.cast();
+                return master.tankCap.cast();
 
             return LazyOptional.empty();
         }
@@ -368,12 +379,15 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 int old_count = master.getInventory().get(OUTPUT_SLOT1).getCount();
                 output_1.grow(old_count);
                 master.getInventory().set(OUTPUT_SLOT1, output_1);
+
                 if (master.gasTank.getFluidAmount() < master.gasTank.getCapacity()) {
                     master.gasTank.fill(new FluidStack(GasEnum.SulphurDioxide.getFluid(FluidPattern.gas), Math.round(50 * wasteMult)), IFluidHandler.FluidAction.EXECUTE);
                 }
+
                 master.getInventory().get(INPUT_SLOT1).shrink(recipe_1.getInput().getCount());
                 recipe_1_progress = 0;
                 progress.ifPresent(p -> ((RevProgressHandler)p).setLeftProgress(0));
+
                 update = true;
             } else {
                 if(isBurning(FUEL_SLOT1)) {
@@ -420,6 +434,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                 recipe_2_progress = 0;
                 float r2_prog = ((float) recipe_2_progress) / ((float) recipe_2_time) * 100;
                 progress.ifPresent(p -> ((RevProgressHandler)p).setRightProgress(r2_prog));
+
                 update = true;
             } else {
                 if(isBurning(FUEL_SLOT2)) {
@@ -452,11 +467,8 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         if (master.gasTank.getFluidAmount() > 0 && gasOutputs.contains(posInMultiblock)) {
             FluidStack out = Utils.copyFluidStackWithAmount(master.gasTank.getFluid(), Math.min(master.gasTank.getFluidAmount(), 80), false);
             Direction fw = Direction.UP;
-            Direction shift_1 =  this.getIsMirrored() ?  this.getFacing().rotateY() : this.getFacing().rotateYCCW();
-            BlockPos outputPos1 = new BlockPos(4,11,4);
-            BlockPos outputPos2 = new BlockPos(1,11,4);
-
-            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos1,fw).map((output) -> {
+            BlockPos outputPos2 = new BlockPos(1, 11, 4);
+            update |= FluidUtil.getFluidHandler(this.world, outputPos2, fw).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
 
                 if (accepted > 0) {
@@ -468,8 +480,13 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
                     return false;
                 }
             }).orElse(false);
+        }
 
-            update |= (Boolean) FluidUtil.getFluidHandler(this.world, outputPos2,fw).map((output) -> {
+        if (master.gasTank.getFluidAmount() > 0 && gasOutputs.contains(posInMultiblock)) {
+            FluidStack out = Utils.copyFluidStackWithAmount(master.gasTank.getFluid(), Math.min(master.gasTank.getFluidAmount(), 80), false);
+            Direction fw = Direction.UP;
+            BlockPos outputPos1 = new BlockPos(4, 11, 4);
+            update |= FluidUtil.getFluidHandler(this.world, outputPos1, fw).map((output) -> {
                 int accepted = output.fill(out, IFluidHandler.FluidAction.SIMULATE);
 
                 if (accepted > 0) {
@@ -509,19 +526,27 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
-        inventory = Utils.readInventory(nbt.getList("inventory", 10), 6);
         burntime[0] = nbt.getInt("burntime_1");
         burntime[1] = nbt.getInt("burntime_2");
-        gasTank.readFromNBT(nbt.getCompound("gas_tank"));
+        gasTank.readFromNBT(nbt.getCompound("tank"));
+
+        if(!descPacket) {
+            inventory = Utils.readInventory(nbt.getList("inventory", 10), 6);
+        }
     }
 
     @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
-        nbt.put("inventory", Utils.writeInventory(inventory));
         nbt.putInt("burntime_1", burntime[0]);
         nbt.putInt("burntime_2", burntime[1]);
-        nbt.put("gas_tank", gasTank.writeToNBT(new CompoundNBT()));
+        CompoundNBT tankTag = this.gasTank.writeToNBT(new CompoundNBT());
+        nbt.put("tank", tankTag);
+
+        if(!descPacket){
+            nbt.put("inventory", Utils.writeInventory(inventory));
+        }
+
     }
 
     @Nullable
@@ -595,7 +620,7 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
         progress.invalidate();
         insertionHandler1.invalidate();
         insertionHandler2.invalidate();
-        holder.invalidate();
+        tankCap.invalidate();
     }
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
@@ -711,5 +736,28 @@ public class ReverberationFurnaceTileEntity extends PoweredMultiblockTileEntity<
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.REV_FURNACE.get();
+    }
+
+    protected void sendSyncPacket(int type) {
+        CompoundNBT nbt = new CompoundNBT();
+        if (type == 0) {
+            nbt.putInt("energy", this.energyStorage.getEnergyStored());
+        } else if (type == 2) {
+            nbt.put("tank", this.gasTank.writeToNBT(new CompoundNBT()));
+        }
+
+        ImmersiveEngineering.packetHandler.send(PacketDistributor.TRACKING_CHUNK.with(() -> {
+            return this.world.getChunkAt(this.pos);
+        }), new MessageTileSync(this, nbt));
+    }
+
+    public void receiveMessageFromServer(CompoundNBT message) {
+        if (message.contains("energy", 3)) {
+            this.energyStorage.setEnergy(message.getInt("energy"));
+        }
+
+        if (message.contains("tank", 10)) {
+            this.gasTank.readFromNBT(message.getCompound("tank"));
+        }
     }
 }

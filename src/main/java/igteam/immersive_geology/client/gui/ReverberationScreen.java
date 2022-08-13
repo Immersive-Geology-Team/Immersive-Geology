@@ -3,6 +3,7 @@ package igteam.immersive_geology.client.gui;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.client.utils.GuiHelper;
+import com.mojang.blaze3d.systems.RenderSystem;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import igteam.immersive_geology.common.gui.ReverberationContainer;
 import igteam.immersive_geology.core.lib.IGLib;
@@ -14,7 +15,6 @@ import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ReverberationScreen extends IEContainerScreen<ReverberationContainer> {
 
@@ -27,8 +27,8 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationContaine
     }
 
     @Override
-    public void render(MatrixStack transform, int mouseX, int mouseY, float partialTicks) {
-        super.render(transform, mouseX, mouseY, partialTicks);
+    public void render(MatrixStack matrix, int mx, int my, float partialTicks) {
+        super.render(matrix, mx, my, partialTicks);
         int tank_x = guiLeft + 13;
         int tank_y = guiTop + 18;
         int tank_w = 16;
@@ -40,10 +40,12 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationContaine
 
         ReverberationFurnaceTileEntity master = tileEntity.master();
         List<ITextComponent> tooltip = new ArrayList<>();
-        GuiHelper.handleGuiTank(transform, Objects.requireNonNull(master.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mouseX, mouseY, guiTexture, tooltip);
+        assert master != null;
+
+        GuiHelper.handleGuiTank(matrix, this.tileEntity.gasTank, tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mx, my, guiTexture, tooltip);
 
         if(!tooltip.isEmpty()){
-            GuiUtils.drawHoveringText(transform, tooltip, mouseX, mouseY, width, height, -1, font);
+            GuiUtils.drawHoveringText(matrix, tooltip, mx, my, width, height, -1, font);
         }
     }
 
@@ -60,16 +62,14 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationContaine
         int oW = 20;
         int oH = 51;
 
-        ReverberationFurnaceTileEntity master = tileEntity.master();
-        GuiHelper.handleGuiTank(matrix, Objects.requireNonNull(master.getInternalTanks())[0], tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mx, my, guiTexture, null);
+        RenderSystem.disableBlend();
+        GuiHelper.handleGuiTank(matrix, this.tileEntity.gasTank, tank_x, tank_y, tank_w, tank_h, oX, oY, oW, oH, mx, my, guiTexture, (List<ITextComponent>) null);
 
-        if(master != null) {
-            float leftProgress =  ((float) container.getLeftProgress() / 100);
+        float leftProgress =  ((float) container.getLeftProgress() / 100);
 
-            this.blit(matrix, guiLeft + 42, guiTop + 35, 176, 16, Math.round(21 * leftProgress), 16);
+        this.blit(matrix, guiLeft + 42, guiTop + 35, 176, 16, Math.round(21 * leftProgress), 16);
 
-            float rightProgress = ((float) container.getRightProgress() / 100);
-            this.blit(matrix, guiLeft + 122, guiTop + 35, 176, 16, Math.round(21 * rightProgress), 16);
-        }
+        float rightProgress = ((float) container.getRightProgress() / 100);
+        this.blit(matrix, guiLeft + 122, guiTop + 35, 176, 16, Math.round(21 * rightProgress), 16);
     }
 }
