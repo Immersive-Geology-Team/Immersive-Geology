@@ -5,7 +5,7 @@
     "particle": "immersive_geology:multiblock/reverberation_furnace"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/revfurnace/reverberation_furnace.obj",
+  "model": "immersive_geology:models/multiblock/obj/revfurnace/reverberation_furnace_mirrored.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

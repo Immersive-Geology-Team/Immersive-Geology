@@ -165,6 +165,13 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public void tick() {
         super.tick();
+        assert this.world != null;
+
+        if (!this.world.isRemote && !this.isDummy() && !this.isRSDisabled()) {
+            if (!processQueue.isEmpty() && energyStorage.getEnergyStored() > 0) {
+                getInternalTanks()[0].drain(1, IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
     }
 
     @Override
@@ -209,7 +216,6 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
                     MultiblockProcessInWorld<HydrojetRecipe> process = new MultiblockProcessInWorld<HydrojetRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
                     if (master.addProcessToQueue(process, true, true)) {
-                        log.warn("Attempting to process item");
                         master.addProcessToQueue(process, false, true);
                         stack.shrink(displayStack.getCount());
                         if (stack.getCount() <= 0)
@@ -229,7 +235,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
     @Override
     public boolean additionalCanProcessCheck(MultiblockProcess<HydrojetRecipe> process) {
-        return true;
+        return getInternalTanks()[0].getFluidAmount() > process.recipe.getFluidInputs().get(0).getAmount();
     }
 
     @Override

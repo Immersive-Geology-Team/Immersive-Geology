@@ -5,7 +5,7 @@
     "particle": "immersive_geology:multiblock/hydrojet"
   },
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/hydrojet/hydrojet.obj",
+  "model": "immersive_geology:models/multiblock/obj/hydrojet/hydrojet_mirror.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }
