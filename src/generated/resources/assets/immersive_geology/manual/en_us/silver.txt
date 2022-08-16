@@ -6,8 +6,6 @@ preparation:
 Process dust silver by <link;minecraft:furnace;basicSmelting>, 
 Process crystal silver by <link;immersiveengineering:crusher;Crushing>, 
 Process crystal silver by <link;minecraft:furnace;basicSmelting>, 
-Processing Stage:
-Process crushed_ore silver by <link;immersive_geology:bloomery;Bloomery>, 
 extraction:
 Process ore_chunk stone_silver by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore silver by <link;immersive_geology:gravityseparator;Separator>, 
@@ -23,4 +21,6 @@ Process dirty_crushed_ore silver by <link;immersive_geology:gravityseparator;Sep
 Process ore_chunk blackstone_silver by <link;immersiveengineering:crusher;Crushing>, 
 Process ore_chunk end_stone_silver by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore silver by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk end_stone_silver by <link;immersiveengineering:crusher;Crushing>
+Process ore_chunk end_stone_silver by <link;immersiveengineering:crusher;Crushing>, 
+Processing Stage:
+Process crushed_ore silver by <link;immersive_geology:bloomery;Bloomery>

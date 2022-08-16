@@ -6,11 +6,11 @@ COMMON metal
 <link;immersive_geology:sphalerite;sphalerite>, 
 <link;immersive_geology:ferberite;ferberite>
 preparation:
-Process ore iron by <link;immersive_geology:hydrojet;Cutting>, 
-preparation:
 Process dust iron by <link;minecraft:furnace;basicSmelting>, 
 extraction:
 Process crushed_ore iron by <link;immersive_geology:bloomery;Bloomery>, 
+preparation:
+Process ore iron by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 

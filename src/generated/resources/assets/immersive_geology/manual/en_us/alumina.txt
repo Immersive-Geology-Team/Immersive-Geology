@@ -1,6 +1,14 @@
 Alumina
 UNCOMMON mineral
-<&alumina_display> extraction:
+<&alumina_display> purification:
+Process crushed_ore alumina by <link;immersiveengineering:crusher;Crushing>, 
+purification:
+Process dust alumina by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process compound_dust aluminum by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process dust alumina by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+extraction:
 Process ore stone_alumina by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_alumina by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,13 +48,5 @@ extraction:
 Process ore_chunk end_stone_alumina by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_alumina by <link;immersive_geology:gravityseparator;Separator>, 
-purification:
-Process crushed_ore alumina by <link;immersiveengineering:crusher;Crushing>, 
-purification:
-Process dust alumina by <link;immersive_geology:chemicalvat;Chemical>, 
-purification:
-Process compound_dust aluminum by <link;immersive_geology:chemicalvat;Chemical>, 
-purification:
-Process dust alumina by <link;immersiveengineering:arc_furnace;arcSmelting>, 
 
 <&alumina_recipe> (Generic) Crafting Recipe

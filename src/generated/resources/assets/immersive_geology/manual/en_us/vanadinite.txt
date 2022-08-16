@@ -1,8 +1,6 @@
 Vanadinite
 COMMON mineral
-<&vanadinite_display> Reduction stage:
-Process crushed_ore vanadinite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Chemical Stage:
+<&vanadinite_display> Chemical Stage:
 Process slag vanadinite by <link;immersiveengineering:crusher;Crushing>, 
 Chemical Stage:
 Process dust vanadinite by <link;immersive_geology:chemicalvat;Chemical>, 
@@ -10,6 +8,8 @@ Chemical Stage:
 Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
 Chemical Stage:
 Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+Reduction stage:
+Process crushed_ore vanadinite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 extraction:
 Process ore stone_vanadinite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:

@@ -2,10 +2,7 @@ package generators.recipe;
 
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
-import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
-import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
-import blusunrize.immersiveengineering.api.crafting.builders.RefineryRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.*;
 import blusunrize.immersiveengineering.common.items.IEItems;
 import igteam.api.IGApi;
 import igteam.api.materials.data.MaterialBase;
@@ -15,17 +12,22 @@ import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.builders.*;
 import igteam.api.processing.methods.*;
 import igteam.api.processing.helper.IGProcessingMethod;
+import igteam.api.veins.IGOreVein;
+import igteam.api.veins.OreVeinGatherer;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class IGRecipeProvider extends RecipeProvider {
@@ -38,6 +40,13 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        OreVeinGatherer gatherer = new OreVeinGatherer();
+        gatherer.initRegisteredVeins();
+
+        for (IGOreVein v: gatherer.RegisteredVeins)
+        {
+            buildVeinData(v, consumer);
+        }
         for (MaterialInterface container : APIMaterials.all()) {
             MaterialBase material = container.instance();
 
@@ -90,6 +99,20 @@ public class IGRecipeProvider extends RecipeProvider {
                 }
             }
         }
+    }
+
+    private void buildVeinData(IGOreVein vein, Consumer<IFinishedRecipe> consumer)
+    {
+        MineralMixBuilder builder = MineralMixBuilder.builder(vein.getSpawnDimension());
+        Set<ITag.INamedTag<Item>> minerals = vein.getVeinContent().keySet();
+        for (ITag.INamedTag<Item> t: minerals)
+        {
+            builder.addOre(t, vein.getVeinContent().get(t));
+        }
+        builder.setFailchance(vein.getFailChance());
+        builder.setWeight(vein.getWeight());
+        builder.build(consumer, new ResourceLocation(IGApi.MODID, "mineral/"+vein.getVeinName()));
+
     }
 
     private void buildCuttingMethods(IGHydrojetMethod method, Consumer<IFinishedRecipe> consumer) {
