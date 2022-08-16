@@ -1,6 +1,21 @@
 Unobtania
 EPIC mineral
-<&unobtania_display> extraction:
+<&unobtania_display> Extraction Stage:
+Process crushed_ore unobtania by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust unobtania by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+Extraction Stage:
+Extraction Stage:
+Process compound_dust unobtanium by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide unobtanium by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process slurry nitric_acid_unobtanium by <link;immersive_geology:crystallizer;Crystalization>, 
+extraction:
 Process ore stone_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,20 +55,5 @@ extraction:
 Process ore_chunk end_stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-Extraction Stage:
-Process crushed_ore unobtania by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process dust unobtania by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
-Extraction Stage:
-Extraction Stage:
-Process compound_dust unobtanium by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide unobtanium by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process slurry nitric_acid_unobtanium by <link;immersive_geology:crystallizer;Crystalization>, 
 
 <&unobtania_recipe> (Generic) Crafting Recipe

@@ -1,17 +1,6 @@
 Chromite
 COMMON mineral
-<&chromite_display> Chromium extraction Stage:
-Process crushed_ore chromite by <link;immersiveengineering:crusher;Crushing>, 
-Chromium extraction Stage:
-Process dust chromite by <link;immersive_geology:chemicalvat;Chemical>, 
-Chromium extraction Stage:
-Chromium extraction Stage:
-Process slurry hydrochloric_acid_chromium by <link;immersive_geology:crystallizer;Crystalization>, 
-Iron Extraction:
-Process compound_dust iron by <link;immersive_geology:rotarykiln;Calcination>, 
-Iron Extraction:
-Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-extraction:
+<&chromite_display> extraction:
 Process ore stone_chromite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_chromite by <link;immersiveengineering:crusher;Crushing>, 
@@ -51,5 +40,16 @@ extraction:
 Process ore_chunk end_stone_chromite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_chromite by <link;immersive_geology:gravityseparator;Separator>, 
+Chromium extraction Stage:
+Process crushed_ore chromite by <link;immersiveengineering:crusher;Crushing>, 
+Chromium extraction Stage:
+Process dust chromite by <link;immersive_geology:chemicalvat;Chemical>, 
+Chromium extraction Stage:
+Chromium extraction Stage:
+Process slurry hydrochloric_acid_chromium by <link;immersive_geology:crystallizer;Crystalization>, 
+Iron Extraction:
+Process compound_dust iron by <link;immersive_geology:rotarykiln;Calcination>, 
+Iron Extraction:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&chromite_recipe> (Generic) Crafting Recipe

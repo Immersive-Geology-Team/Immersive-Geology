@@ -1,9 +1,17 @@
 Rocksalt
 COMMON mineral
-<&rocksalt_display> Sodium extraction stage:
+<&rocksalt_display> preparation:
+Process crystal rocksalt by <link;immersiveengineering:crusher;Crushing>, 
+Sodium extraction stage:
 Process compound_dust sodium by <link;immersive_geology:rotarykiln;Calcination>, 
 Sodium extraction stage:
 Process metal_oxide sodium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+Brine and hydroxide production stage:
+Process crushed_ore rocksalt by <link;immersiveengineering:crusher;Crushing>, 
+Brine and hydroxide production stage:
+Process dust rocksalt by <link;immersive_geology:chemicalvat;Chemical>, 
+Brine and hydroxide production stage:
+Process metal_oxide sodium by <link;immersive_geology:chemicalvat;Chemical>, 
 Hydrochloric production stage:
 Process dust rocksalt by <link;immersive_geology:chemicalvat;Chemical>, 
 Hydrochloric production stage:
@@ -17,13 +25,5 @@ extraction:
 Process ore blackstone_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process ore end_stone_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-preparation:
-Process crystal rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-Brine and hydroxide production stage:
-Process crushed_ore rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-Brine and hydroxide production stage:
-Process dust rocksalt by <link;immersive_geology:chemicalvat;Chemical>, 
-Brine and hydroxide production stage:
-Process metal_oxide sodium by <link;immersive_geology:chemicalvat;Chemical>, 
 
 <&rocksalt_recipe> (Generic) Crafting Recipe

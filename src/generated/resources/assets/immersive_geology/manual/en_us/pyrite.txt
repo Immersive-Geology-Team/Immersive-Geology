@@ -1,6 +1,8 @@
 Pyrite
 COMMON mineral
-<&pyrite_display> extraction:
+<&pyrite_display> Blasting Stage:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+extraction:
 Process ore stone_pyrite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
@@ -42,7 +44,5 @@ extraction:
 Process dirty_crushed_ore end_stone_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
 Roasting Stage:
 Process crushed_ore pyrite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-Blasting Stage:
-Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&pyrite_recipe> (Generic) Crafting Recipe

@@ -223,7 +223,11 @@
   "desc.immersiveengineering.info.mineral.cobalt_bearing_sulfide" : "Cobalt-bearing Sulfides",
   "desc.immersiveengineering.info.mineral.fine_alluvial_sediment" : "Fine Alluvial Sediments",
   "desc.immersiveengineering.info.mineral.ig_wolframite" : "Wolframite",
-  
-
+  "desc.immersiveengineering.info.mineral.metamorphic_intrusion" : "Igneous Intrusions",
+  "desc.immersiveengineering.info.mineral.tin_bearing_oxides" : "Tin-Bearing Oxides",
+  "desc.immersiveengineering.info.mineral.copper_bearing_oxides" : "Copper-bearing Oxides",
+  "desc.immersiveengineering.info.mineral.alluvial_sediment" : "Alluvial Sediments",
+  "desc.immersiveengineering.info.mineral.deteriorated_igneous_rock" : "Deteriorated Radioactive Sediments",
+  "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments"
 
 }

@@ -7,23 +7,23 @@ COMMON metal
 <link;immersive_geology:ferberite;ferberite>
 preparation:
 Process dust iron by <link;minecraft:furnace;basicSmelting>, 
+extraction:
+Process crushed_ore iron by <link;immersive_geology:bloomery;Bloomery>, 
+extraction:
+Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>, 
+Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
+Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>, 
 preparation:
-Process ore iron by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk stone_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk granite_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk netherrack_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk blackstone_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>, 
-Process dirty_crushed_ore iron by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk end_stone_iron by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process crushed_ore iron by <link;immersive_geology:bloomery;Bloomery>
+Process ore iron by <link;immersive_geology:hydrojet;Cutting>

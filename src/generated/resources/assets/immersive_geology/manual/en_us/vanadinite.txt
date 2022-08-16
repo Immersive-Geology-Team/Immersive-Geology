@@ -1,16 +1,6 @@
 Vanadinite
 COMMON mineral
-<&vanadinite_display> Reduction stage:
-Process crushed_ore vanadinite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Chemical Stage:
-Process slag vanadinite by <link;immersiveengineering:crusher;Crushing>, 
-Chemical Stage:
-Process dust vanadinite by <link;immersive_geology:chemicalvat;Chemical>, 
-Chemical Stage:
-Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
-Chemical Stage:
-Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
-extraction:
+<&vanadinite_display> extraction:
 Process ore stone_vanadinite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_vanadinite by <link;immersiveengineering:crusher;Crushing>, 
@@ -50,5 +40,15 @@ extraction:
 Process ore_chunk end_stone_vanadinite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_vanadinite by <link;immersive_geology:gravityseparator;Separator>, 
+Chemical Stage:
+Process slag vanadinite by <link;immersiveengineering:crusher;Crushing>, 
+Chemical Stage:
+Process dust vanadinite by <link;immersive_geology:chemicalvat;Chemical>, 
+Chemical Stage:
+Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
+Chemical Stage:
+Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+Reduction stage:
+Process crushed_ore vanadinite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&vanadinite_recipe> (Generic) Crafting Recipe

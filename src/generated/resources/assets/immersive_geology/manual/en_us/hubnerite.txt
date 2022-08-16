@@ -1,17 +1,6 @@
 Hubnerite
 RARE mineral
-<&hubnerite_display> Extraction Stage:
-Process crushed_ore hubnerite by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process dust hubnerite by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process compound_dust tungsten by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-refinement:
-refinement:
-Process slurry sulfuric_acid_manganese by <link;immersive_geology:crystallizer;Crystalization>, 
-extraction:
+<&hubnerite_display> extraction:
 Process ore stone_hubnerite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
@@ -51,5 +40,16 @@ extraction:
 Process ore_chunk end_stone_hubnerite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_hubnerite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore hubnerite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust hubnerite by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process compound_dust tungsten by <link;immersive_geology:rotarykiln;Calcination>, 
+Extraction Stage:
+Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+refinement:
+refinement:
+Process slurry sulfuric_acid_manganese by <link;immersive_geology:crystallizer;Crystalization>, 
 
 <&hubnerite_recipe> (Generic) Crafting Recipe

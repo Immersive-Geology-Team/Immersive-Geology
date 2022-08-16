@@ -1,10 +1,6 @@
 Hematite
 COMMON mineral
-<&hematite_display> Extraction Stage:
-Process crushed_ore hematite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Extraction Stage:
-Process crushed_ore hematite by <link;immersive_geology:bloomery;Bloomery>, 
-extraction:
+<&hematite_display> extraction:
 Process ore stone_hematite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
@@ -44,5 +40,9 @@ extraction:
 Process ore_chunk end_stone_hematite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_hematite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore hematite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Extraction Stage:
+Process crushed_ore hematite by <link;immersive_geology:bloomery;Bloomery>, 
 
 <&hematite_recipe> (Generic) Crafting Recipe
