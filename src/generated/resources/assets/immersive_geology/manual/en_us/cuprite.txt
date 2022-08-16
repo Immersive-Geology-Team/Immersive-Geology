@@ -1,0 +1,48 @@
+Cuprite
+COMMON mineral
+<&cuprite_display> Processing Stage:
+Process crushed_ore cuprite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Processing Stage:
+Process crushed_ore cuprite by <link;immersive_geology:bloomery;Bloomery>, 
+extraction:
+Process ore stone_cuprite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_cuprite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_cuprite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_cuprite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_cuprite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_cuprite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_cuprite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_cuprite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_cuprite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_cuprite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_cuprite by <link;immersive_geology:gravityseparator;Separator>, 
+
+<&cuprite_recipe> (Generic) Crafting Recipe

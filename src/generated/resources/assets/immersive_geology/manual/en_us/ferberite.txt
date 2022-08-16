@@ -1,0 +1,52 @@
+Ferberite
+RARE mineral
+<&ferberite_display> extraction:
+Process ore stone_ferberite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore stone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk stone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore granite_ferberite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore granite_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk granite_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore netherrack_ferberite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore netherrack_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk netherrack_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore blackstone_ferberite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore blackstone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk blackstone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore end_stone_ferberite by <link;immersive_geology:hydrojet;Cutting>, 
+extraction:
+Process ore end_stone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore_chunk end_stone_ferberite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore ferberite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Extraction Stage:
+Process slag ferberite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust ferberite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process metal_oxide tungsten by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+
+<&ferberite_recipe> (Generic) Crafting Recipe

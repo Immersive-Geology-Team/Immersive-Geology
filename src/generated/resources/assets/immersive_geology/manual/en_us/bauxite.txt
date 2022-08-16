@@ -1,0 +1,34 @@
+Bauxite
+COMMON mineral
+<&bauxite_display> extraction:
+Process ore_chunk stone_bauxite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore stone_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore_chunk granite_bauxite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore granite_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore_chunk netherrack_bauxite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore netherrack_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore_chunk blackstone_bauxite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore blackstone_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore_chunk end_stone_bauxite by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process dirty_crushed_ore end_stone_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+purification:
+Process crushed_ore bauxite by <link;immersive_geology:rotarykiln;Calcination>, 
+purification:
+Process metal_oxide aluminum by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process compound_dust aluminum by <link;immersive_geology:chemicalvat;Chemical>, 
+purification:
+Process metal_oxide aluminum by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+extraction:
+Process ore aluminum by <link;immersive_geology:hydrojet;Cutting>, 
+
+<&bauxite_recipe> (Generic) Crafting Recipe
