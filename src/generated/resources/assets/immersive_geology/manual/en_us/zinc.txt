@@ -1,9 +1,0 @@
-Zinc
-COMMON metal
-<&zinc_display> Metal can be processed from: <link;immersive_geology:smithsonite;smithsonite>, 
-<link;immersive_geology:sphalerite;sphalerite>
-preparation:
-Process crystal zinc by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal zinc by <link;minecraft:furnace;basicSmelting>, 
-Process ingot zinc by <link;immersiveengineering:crusher;Crushing>, 
-Process dust zinc by <link;minecraft:furnace;basicSmelting>

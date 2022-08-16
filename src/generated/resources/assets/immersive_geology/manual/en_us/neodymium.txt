@@ -1,8 +1,0 @@
-Neodymium
-COMMON metal
-<&neodymium_display> Metal can be processed from: <link;immersive_geology:monazite;monazite>
-preparation:
-Process crystal neodymium by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal neodymium by <link;minecraft:furnace;basicSmelting>, 
-Process ingot neodymium by <link;immersiveengineering:crusher;Crushing>, 
-Process dust neodymium by <link;minecraft:furnace;basicSmelting>

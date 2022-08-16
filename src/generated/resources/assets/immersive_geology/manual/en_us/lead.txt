@@ -1,5 +1,0 @@
-Lead
-COMMON metal
-<&lead_display> Metal can be processed from: <link;immersive_geology:vanadinite;vanadinite>, 
-<link;immersive_geology:galena;galena>
-

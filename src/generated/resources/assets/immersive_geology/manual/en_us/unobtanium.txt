@@ -1,8 +1,0 @@
-Unobtanium
-COMMON metal
-<&unobtanium_display> Metal can be processed from: <link;immersive_geology:unobtania;unobtania>
-preparation:
-Process crystal unobtanium by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal unobtanium by <link;minecraft:furnace;basicSmelting>, 
-Process ingot unobtanium by <link;immersiveengineering:crusher;Crushing>, 
-Process dust unobtanium by <link;minecraft:furnace;basicSmelting>

@@ -25,6 +25,7 @@ import net.minecraft.data.IDataProvider;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -49,6 +50,9 @@ public class IGManualProvider implements IDataProvider {
     public final ExistingFileHelper existingFileHelper;
     protected final String folder;
     protected final String modid;
+
+    protected final Logger log = IGApi.getNewLogger();
+
     public IGManualProvider(DataGenerator generator, ExistingFileHelper existingFileHelper, String modid) {
         Preconditions.checkNotNull(generator);
         this.generator = generator;
@@ -64,125 +68,21 @@ public class IGManualProvider implements IDataProvider {
     }
 
     public void registerPages(){
-        for(MaterialInterface<MaterialBaseMetal> metal : MetalEnum.values()){
-            String material_name = metal.getName();
-            String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
+        log.info("Registering IG Manual Pages");
+        for(MaterialInterface<MaterialBaseMineral> mineral : MineralEnum.values()) {
+            String mineral_name = mineral.getName();
+            String title_name = mineral_name.substring(0,1).toUpperCase() + mineral_name.substring(1).toLowerCase();
 
-            ManualPageProvider provider = attemptPageCreation(material_name)
-                    .startAnchor(material_name + "_display")
-                    .setType(IGManualType.item_display)
-                    .addListElements("items",
-                            metal.getItem(ItemPattern.ingot).getRegistryName(),
-                            metal.getItem(ItemPattern.nugget).getRegistryName(),
-                            metal.getItem(ItemPattern.dust).getRegistryName())
-                    .closeAnchor();
+            ManualPageProvider provider = attemptPageCreation(mineral_name);
 
-            ManualTextProvider textProvider = attemptTextCreation(material_name)
-                    .setTitle(formalName, metal.instance().getRarity().name() + " metal");
+            provider.startAnchor(mineral_name + "_introduction").setType(IGManualType.text).closeAnchor();
 
-            String sanitizedProcessing = "";
-            StringBuilder metalSources = new StringBuilder("");
+            ManualTextProvider mineralIntroPage = attemptTextCreation(mineral_name).setTitle(title_name, mineral.instance().getRarity().name());
 
+            String intro_text = "Hello, I'm an introductionary page";
 
-            metal.instance().getStages().stream().forEach((stage) -> {
-                if(!stage.getMethods().isEmpty()) {
-                    metalSources.append(stage.getStageName() + ":\n");
-                    stage.getMethods().stream().forEach((method) -> {
-                        method.clearRecipePath();
-                        if(method.getGenericInput() != null) {
-                            String dirtyTag = method.getGenericInput().toString();
-                            String tag = dirtyTag.substring(dirtyTag.indexOf(":") + 1, dirtyTag.lastIndexOf("]")).replace("s/", " ").replace("/", " ");
-                            IGApi.getNewLogger().info("Generic Input: " + tag);
-                            metalSources.append("Process " + tag + " by <link;" + method.getRecipeType().getMachineName() + ";" + method.getRecipeType().name() + ">, \n");
-                        }
-                    });
-                    metalSources.append("");
-                }
-            });
-            StringBuilder sourceLink = new StringBuilder();
-            if(metalSources.toString().length() > 0) {
-                sanitizedProcessing = (metalSources.toString().substring(0, metalSources.toString().lastIndexOf(",")));
-            }
+            mineralIntroPage.attachPage(mineral_name + "_introduction", intro_text);
 
-            ArrayList<MaterialInterface<? extends MaterialBaseMineral>> sourceMinerals = metal.instance().getSourceMinerals();
-
-            for (MaterialInterface<? extends MaterialBaseMineral> mineral : sourceMinerals) {
-                sourceLink.append("<link;immersive_geology:" + mineral.getName() + ";" + mineral.getName() + ">, \n");
-            }
-
-            String sourceText = "";
-            if(!sourceLink.toString().isEmpty()) {
-                sourceText = "Metal can be processed from: " + (sourceLink.toString().substring(0, sourceLink.toString().lastIndexOf(",")) + "");
-            }
-
-            IGApi.getNewLogger().info(sanitizedProcessing);
-            textProvider.attachPage(material_name + "_display", sourceText + "\n" + sanitizedProcessing);
-        }
-
-        for (MaterialInterface<MaterialBaseMineral> material : MineralEnum.values()){
-            MaterialBaseMineral baseMaterial = material.instance();
-            String material_name = baseMaterial.getName();
-            String formalName = material_name.substring(0,1).toUpperCase() + material_name.substring(1).toLowerCase();
-
-            ManualPageProvider provider = attemptPageCreation(material_name);
-
-            if(baseMaterial.hasPattern(ItemPattern.ore_chunk) && baseMaterial.hasPattern(ItemPattern.dirty_crushed_ore)) {
-                    provider.startAnchor(material_name + "_display")
-                    .setType(IGManualType.item_display)
-                    .addListElements("items",
-                            StoneEnum.Stone.getItem(ItemPattern.ore_chunk, baseMaterial).getRegistryName(),
-                            StoneEnum.Stone.getItem(ItemPattern.dirty_crushed_ore, baseMaterial).getRegistryName())
-                    .closeAnchor();
-            }
-            String sanitizedMaterials = "";
-
-            if(!baseMaterial.getSourceMaterials().isEmpty()) {
-                StringBuilder materialSources = new StringBuilder("[");
-
-                baseMaterial.getSourceMaterials().stream().forEach((smat) -> {
-                    materialSources.append( "<link;" + IGApi.MODID + ":" + smat.getName() + ";" + smat.getName().replace("_", " ") + ">, ");
-                });
-                sanitizedMaterials = (materialSources.toString().substring(0, materialSources.toString().lastIndexOf(",")) + "]");
-            }
-
-            ManualTextProvider textProvider = attemptTextCreation(material_name)
-                    .setTitle(formalName, baseMaterial.getRarity().name() + " mineral")
-                    .attachPage(material_name + "_display",
-                            formalName + " is found in the " + material.getDimension().name() + " between y layers " + ((IGOreConfig) material.getGenerationConfig()).minY.get() + " and " + ((IGOreConfig) material.getGenerationConfig()).maxY.get() +
-                                    (sanitizedMaterials.isEmpty() ? "" : " and provides a source of " + sanitizedMaterials + ".") + "\nFurther information on how to process this Mineral can be found in the next few pages.");
-
-            HashSet<ResourceLocation> crafting = new HashSet<>();
-            HashSet<ResourceLocation> crushing = new HashSet<>();
-            StringBuilder mineralMethods = new StringBuilder();
-
-            for (IGProcessingStage stage : material.getStages()) {
-                stage.getMethods().stream().forEach((m) -> {
-                    m.clearRecipePath();
-
-                    if(m.getRecipeType() == RecipeMethod.Crafting) {
-                        IGCraftingMethod crft = (IGCraftingMethod) m;
-                        if(crft.getRecipeGroup().equals("wash_dirty_ore"))
-                            crafting.add(m.getLocation());
-                    } else if(!stage.getMethods().isEmpty()) {
-                        mineralMethods.append(stage.getStageName() + ":\n");
-                        if(m.getGenericInput() != null) {
-                            String dirtyTag = m.getGenericInput().toString();
-                            String tag = dirtyTag.substring(dirtyTag.indexOf(":") + 1, dirtyTag.lastIndexOf("]")).replace("s/", " ").replace("/", " ");
-                            IGApi.getNewLogger().info("Generic Input: " + tag);
-                            mineralMethods.append("Process " + tag + " by <link;" + m.getRecipeType().getMachineName() + ";" + m.getRecipeType().name() + ">, \n");
-                        }
-
-                        mineralMethods.append("");
-                    }
-                });
-            }
-
-            provider.startAnchor(material_name + "_recipe")
-                    .setType(IGManualType.crafting)
-                    .addListElements("recipes", crafting.toArray(new ResourceLocation[crafting.size()]));
-
-            textProvider.attachPage(material_name + "_recipe", "(Generic) Crafting Recipe");
-            textProvider.attachPage(material_name + "_display", mineralMethods.toString());
         }
     }
 

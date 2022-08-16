@@ -1,6 +1,0 @@
-Kaolinite
-COMMON mineral
-<&kaolinite_display> preparation:
-Process clay kaolinite by <link;minecraft:furnace;basicSmelting>, 
-
-<&kaolinite_recipe> (Generic) Crafting Recipe

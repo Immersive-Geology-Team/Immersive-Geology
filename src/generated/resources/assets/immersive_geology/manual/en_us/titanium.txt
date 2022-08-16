@@ -1,7 +1,0 @@
-Titanium
-COMMON metal
-<&titanium_display> Metal can be processed from: <link;immersive_geology:ilmenite;ilmenite>, 
-<link;immersive_geology:anatase;anatase>
-preparation:
-Process ingot titanium by <link;immersiveengineering:crusher;Crushing>, 
-Process dust titanium by <link;minecraft:furnace;basicSmelting>

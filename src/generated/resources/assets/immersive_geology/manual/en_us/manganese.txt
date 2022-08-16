@@ -1,9 +1,0 @@
-Manganese
-UNCOMMON metal
-<&manganese_display> Metal can be processed from: <link;immersive_geology:pyrolusite;pyrolusite>, 
-<link;immersive_geology:hubnerite;hubnerite>
-preparation:
-Process crystal manganese by <link;immersiveengineering:crusher;Crushing>, 
-Process crystal manganese by <link;minecraft:furnace;basicSmelting>, 
-Process ingot manganese by <link;immersiveengineering:crusher;Crushing>, 
-Process dust manganese by <link;minecraft:furnace;basicSmelting>
