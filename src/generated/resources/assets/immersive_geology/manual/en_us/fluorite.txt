@@ -1,6 +1,10 @@
 Fluorite
 UNCOMMON mineral
-<&fluorite_display> extraction:
+<&fluorite_display> synthesis:
+Process crushed_ore fluorite by <link;immersiveengineering:crusher;Crushing>, 
+synthesis:
+Process dust fluorite by <link;immersive_geology:chemicalvat;Chemical>, 
+extraction:
 Process ore stone_fluorite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_fluorite by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,9 +44,5 @@ extraction:
 Process ore_chunk end_stone_fluorite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_fluorite by <link;immersive_geology:gravityseparator;Separator>, 
-synthesis:
-Process crushed_ore fluorite by <link;immersiveengineering:crusher;Crushing>, 
-synthesis:
-Process dust fluorite by <link;immersive_geology:chemicalvat;Chemical>, 
 
 <&fluorite_recipe> (Generic) Crafting Recipe

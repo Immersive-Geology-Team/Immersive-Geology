@@ -1,6 +1,14 @@
 Galena
 COMMON mineral
-<&galena_display> extraction:
+<&galena_display> Blasting Stage:
+Process slag galena by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Arc furnace smelting Stage:
+Process slag galena by <link;immersiveengineering:arc_furnace;arcSmelting>, 
+Arc furnace smelting Stage:
+Process compound_dust silver by <link;immersive_geology:rotarykiln;Calcination>, 
+Roasting Stage:
+Process crushed_ore galena by <link;immersive_geology:reverberation_furnace;Roasting>, 
+extraction:
 Process ore stone_galena by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_galena by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,13 +48,5 @@ extraction:
 Process ore_chunk end_stone_galena by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_galena by <link;immersive_geology:gravityseparator;Separator>, 
-Arc furnace smelting Stage:
-Process slag galena by <link;immersiveengineering:arc_furnace;arcSmelting>, 
-Arc furnace smelting Stage:
-Process compound_dust silver by <link;immersive_geology:rotarykiln;Calcination>, 
-Blasting Stage:
-Process slag galena by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Roasting Stage:
-Process crushed_ore galena by <link;immersive_geology:reverberation_furnace;Roasting>, 
 
 <&galena_recipe> (Generic) Crafting Recipe

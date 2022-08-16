@@ -1,6 +1,10 @@
 Cassiterite
 UNCOMMON mineral
-<&cassiterite_display> extraction:
+<&cassiterite_display> Processing Stage:
+Process crushed_ore cassiterite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Processing Stage:
+Process crushed_ore cassiterite by <link;immersive_geology:bloomery;Bloomery>, 
+extraction:
 Process ore stone_cassiterite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_cassiterite by <link;immersiveengineering:crusher;Crushing>, 
@@ -40,9 +44,5 @@ extraction:
 Process ore_chunk end_stone_cassiterite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_cassiterite by <link;immersive_geology:gravityseparator;Separator>, 
-Processing Stage:
-Process crushed_ore cassiterite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Processing Stage:
-Process crushed_ore cassiterite by <link;immersive_geology:bloomery;Bloomery>, 
 
 <&cassiterite_recipe> (Generic) Crafting Recipe

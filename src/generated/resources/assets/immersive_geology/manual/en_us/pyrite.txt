@@ -40,9 +40,9 @@ extraction:
 Process ore_chunk end_stone_pyrite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_pyrite by <link;immersive_geology:gravityseparator;Separator>, 
-Blasting Stage:
-Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 Roasting Stage:
 Process crushed_ore pyrite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Blasting Stage:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&pyrite_recipe> (Generic) Crafting Recipe

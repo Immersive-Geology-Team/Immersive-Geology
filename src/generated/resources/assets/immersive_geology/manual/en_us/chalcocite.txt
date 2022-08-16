@@ -40,6 +40,8 @@ extraction:
 Process ore_chunk end_stone_chalcocite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_chalcocite by <link;immersive_geology:gravityseparator;Separator>, 
+Roasting Stage:
+Process crushed_ore chalcocite by <link;immersive_geology:reverberation_furnace;Roasting>, 
 Leeching Stage:
 Process slag chalcocite by <link;immersiveengineering:crusher;Crushing>, 
 Leeching Stage:
@@ -50,7 +52,5 @@ Leeching Stage:
 Process compound_dust platinum by <link;immersive_geology:gravityseparator;Separator>, 
 Blasting Stage:
 Process slag chalcocite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Roasting Stage:
-Process crushed_ore chalcocite by <link;immersive_geology:reverberation_furnace;Roasting>, 
 
 <&chalcocite_recipe> (Generic) Crafting Recipe

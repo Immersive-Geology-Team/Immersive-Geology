@@ -1,0 +1,34 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "ores": [
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ores/netherrack_chalcocite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ores/netherrack_pyrite"
+      }
+    },
+    {
+      "chance": 0.17,
+      "output": {
+        "tag": "forge:ores/netherrack_acanthite"
+      }
+    },
+    {
+      "chance": 0.17,
+      "output": {
+        "tag": "forge:ores/netherrack_chalcopyrite"
+      }
+    }
+  ],
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "fail_chance": 0.1,
+  "weight": 25
+}

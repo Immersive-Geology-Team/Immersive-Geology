@@ -4,24 +4,24 @@
     {
       "chance": 0.4,
       "output": {
-        "tag": "forge:ores/netherrack_sphalerite"
+        "tag": "forge:ores/end_stone_anatase"
       }
     },
     {
       "chance": 0.2,
       "output": {
-        "tag": "forge:ores/netherrack_vanadinite"
+        "tag": "forge:ores/end_stone_cryolite"
       }
     },
     {
       "chance": 0.4,
       "output": {
-        "tag": "forge:ores/netherrack_galena"
+        "tag": "forge:ores/end_stone_alumina"
       }
     }
   ],
   "dimensions": [
-    "minecraft:the_nether"
+    "minecraft:the_end"
   ],
   "fail_chance": 0.1,
   "weight": 15

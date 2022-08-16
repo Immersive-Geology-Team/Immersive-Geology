@@ -1,10 +1,6 @@
 Ullmannite
 UNCOMMON mineral
-<&ullmannite_display> Chemical Stage:
-Process metal_oxide nickel by <link;immersive_geology:chemicalvat;Chemical>, 
-Chemical Stage:
-Process slurry hydrochloric_acid_nickel by <link;immersive_geology:crystallizer;Crystalization>, 
-extraction:
+<&ullmannite_display> extraction:
 Process ore stone_ullmannite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_ullmannite by <link;immersiveengineering:crusher;Crushing>, 
@@ -46,5 +42,9 @@ extraction:
 Process dirty_crushed_ore end_stone_ullmannite by <link;immersive_geology:gravityseparator;Separator>, 
 Roasting Stage:
 Process crushed_ore ullmannite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Chemical Stage:
+Process metal_oxide nickel by <link;immersive_geology:chemicalvat;Chemical>, 
+Chemical Stage:
+Process slurry hydrochloric_acid_nickel by <link;immersive_geology:crystallizer;Crystalization>, 
 
 <&ullmannite_recipe> (Generic) Crafting Recipe

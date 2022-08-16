@@ -218,6 +218,12 @@
   "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace":"Reverberation Furnace",
   "desc.immersiveengineering.info.multiblock.IE:RotaryKiln":"Rotary Kiln",
 
-  "desc.immersiveengineering.info.mineral.lead_bearing_sulfide" : "Lead-bearing Sulfides"
+  "desc.immersiveengineering.info.mineral.lead_bearing_sulfide" : "Lead-bearing Sulfides",
+  "desc.immersiveengineering.info.mineral.copper_bearing_sulfide" : "Copper-bearing Sulfides",
+  "desc.immersiveengineering.info.mineral.cobalt_bearing_sulfide" : "Cobalt-bearing Sulfides",
+  "desc.immersiveengineering.info.mineral.fine_alluvial_sediment" : "Fine Alluvial Sediments",
+  "desc.immersiveengineering.info.mineral.ig_wolframite" : "Wolframite",
+  
+
 
 }

@@ -1,18 +1,6 @@
 Cobaltite
 UNCOMMON mineral
-<&cobaltite_display> Extraction Stage:
-Process crushed_ore cobaltite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-Extraction Stage:
-Process slag cobaltite by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process slag cobaltite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Extraction Stage:
-Process dust cobaltite by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process slurry hydrochloric_acid_cobalt by <link;immersive_geology:crystallizer;Crystalization>, 
-Extraction Stage:
-Process compound_dust platinum by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
+<&cobaltite_display> extraction:
 Process ore stone_cobaltite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_cobaltite by <link;immersiveengineering:crusher;Crushing>, 
@@ -52,5 +40,17 @@ extraction:
 Process ore_chunk end_stone_cobaltite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_cobaltite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore cobaltite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Extraction Stage:
+Process slag cobaltite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process slag cobaltite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Extraction Stage:
+Process dust cobaltite by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process slurry hydrochloric_acid_cobalt by <link;immersive_geology:crystallizer;Crystalization>, 
+Extraction Stage:
+Process compound_dust platinum by <link;immersive_geology:gravityseparator;Separator>, 
 
 <&cobaltite_recipe> (Generic) Crafting Recipe

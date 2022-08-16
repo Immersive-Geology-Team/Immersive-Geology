@@ -1,16 +1,6 @@
 Chalcopyrite
 UNCOMMON mineral
-<&chalcopyrite_display> Processing Stage:
-Process crushed_ore chalcopyrite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-Processing Stage:
-Process slag chalcopyrite by <link;immersiveengineering:crusher;Crushing>, 
-Processing Stage:
-Process dust chalcopyrite by <link;immersive_geology:gravityseparator;Separator>, 
-Processing Stage:
-Process metal_oxide copper by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-Processing Stage:
-Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-extraction:
+<&chalcopyrite_display> extraction:
 Process ore stone_chalcopyrite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_chalcopyrite by <link;immersiveengineering:crusher;Crushing>, 
@@ -50,5 +40,15 @@ extraction:
 Process ore_chunk end_stone_chalcopyrite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_chalcopyrite by <link;immersive_geology:gravityseparator;Separator>, 
+Processing Stage:
+Process crushed_ore chalcopyrite by <link;immersive_geology:reverberation_furnace;Roasting>, 
+Processing Stage:
+Process slag chalcopyrite by <link;immersiveengineering:crusher;Crushing>, 
+Processing Stage:
+Process dust chalcopyrite by <link;immersive_geology:gravityseparator;Separator>, 
+Processing Stage:
+Process metal_oxide copper by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
+Processing Stage:
+Process metal_oxide iron by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
 
 <&chalcopyrite_recipe> (Generic) Crafting Recipe
