@@ -1,1 +1,22 @@
-{}
+{
+  "pyrite_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_pyrite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_pyrite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_pyrite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_pyrite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_pyrite_ore"
+      }
+    ]
+  }
+}

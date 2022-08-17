@@ -5,5 +5,6 @@ public enum IGStageDesignation {
     extraction, // get clean ore
     refinement, // get main pure metal
     purification, // get pure metal from side products
-    synthesis // for acids and stuff
+    synthesis, // for acids and stuff
+    crystallization
 }

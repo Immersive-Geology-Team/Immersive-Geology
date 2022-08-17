@@ -1,5 +1,6 @@
 package generators.manual;
 
+import blusunrize.immersiveengineering.api.ManualHelper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
@@ -15,15 +16,21 @@ import igteam.api.materials.StoneEnum;
 import igteam.api.materials.data.metal.MaterialBaseMetal;
 import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
 import igteam.api.processing.methods.IGCraftingMethod;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+import net.minecraft.item.Item;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
 
@@ -75,14 +82,74 @@ public class IGManualProvider implements IDataProvider {
 
             ManualPageProvider provider = attemptPageCreation(mineral_name);
 
-            provider.startAnchor(mineral_name + "_introduction").setType(IGManualType.text).closeAnchor();
+            ArrayList<ResourceLocation> intro_display_list = new ArrayList<>();
+
+            for(StoneEnum stone : StoneEnum.values()) {
+                Block oreDisplay = stone.getBlock(BlockPattern.ore, mineral);
+                if (oreDisplay != null) {
+                    Item oreItem = oreDisplay.asItem();
+                    intro_display_list.add(oreDisplay.asItem().getRegistryName());
+                }
+            }
+
+            provider.startAnchor(mineral_name + "_introduction")
+                    .setType(IGManualType.item_display)
+                    .addListElements("items", intro_display_list.toArray(new ResourceLocation[intro_display_list.size()])).closeAnchor();
 
             ManualTextProvider mineralIntroPage = attemptTextCreation(mineral_name).setTitle(title_name, mineral.instance().getRarity().name());
 
-            String intro_text = "Hello, I'm an introductionary page";
-
+            StringBuilder intro_text_builder = new StringBuilder();
+            buildMineralIntroPage(intro_text_builder, mineral);
+            String intro_text = intro_text_builder.toString();
             mineralIntroPage.attachPage(mineral_name + "_introduction", intro_text);
 
+            for (IGProcessingStage stage : mineral.instance().getStages()) {
+                String stage_type = stage.getStageName();
+                for (IGProcessingMethod method : stage.getMethods()) {
+                    provider.startAnchor(mineral_name + "_" + stage_type)
+                            .setType(IGManualType.item_display)
+                            .addListElements("items", method.getLocation())
+                            .closeAnchor();
+
+                    ManualTextProvider stageProcessMethod = attemptTextCreation(mineral_name + "_" + stage_type).setTitle(stage_type, method.getRecipeType().getMachineName());
+                    stageProcessMethod.attachPage(mineral_name + "_" + stage_type, "Testing out method and stage attempts");
+                }
+            }
+        }
+    }
+
+    private void buildMineralIntroPage(StringBuilder builder, MaterialInterface<MaterialBaseMineral> mineral){
+        String mineral_name = mineral.getName();
+        String title_name = mineral_name.substring(0,1).toUpperCase() + mineral_name.substring(1).toLowerCase();
+
+        builder.append(title_name + " is a material found in the " + mineral.getDimension().name() + ".\n");
+
+        StringBuilder source_metals_builder = new StringBuilder();
+
+        for(MaterialInterface<?> metal : mineral.instance().getSourceMaterials()) {
+            source_metals_builder.append(metal.getName() + ", ");
+        }
+
+        IFeatureConfig config = mineral.getGenerationConfig();
+
+        if(config instanceof IGOreConfig){
+            IGOreConfig oreConfig = (IGOreConfig) config;
+            String heightInfo = "It Generates between Y" + oreConfig.minY.get() + " and Y" + oreConfig.maxY.get() + ", ";
+            String sizeInfo = "each deposit is between " + oreConfig.veinSizeMin.get() + " and " + oreConfig.veinSizeMax.get() + " blocks.\n";
+            String spawnChance = "It can be spawn a max of " + oreConfig.veinsPerChunk.get() + " times per chunk.\n";
+            builder.append(heightInfo + sizeInfo + spawnChance);
+        }
+
+        String source_metals = source_metals_builder.toString();
+        if(!source_metals.isEmpty()) {
+            String refined_source_metals = source_metals.substring(0, source_metals.lastIndexOf(","));
+            if (refined_source_metals.contains(",")) {
+                String lhs = refined_source_metals.substring(0, refined_source_metals.lastIndexOf(","));
+                String rhs = refined_source_metals.substring(refined_source_metals.lastIndexOf(",") + 1);
+                builder.append("It is a source for " + lhs + " and" + rhs + ".");
+            } else {
+                builder.append("It is a source for " + refined_source_metals + ".");
+            }
         }
     }
 

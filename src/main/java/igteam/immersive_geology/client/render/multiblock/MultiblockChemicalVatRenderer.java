@@ -35,7 +35,7 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
         return true;
     }
 
-    private Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
+    private static final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);
 
     @Override
     public void render(ChemicalVatTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
@@ -107,11 +107,9 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
                         if(model != null){
                             float ticks = master.getActiveTicks() + partialTicks;
                             float old_tick = model.ticks;
-                            model.ticks = master.shouldStir() ? ticks : old_tick;
-                            transform.push();
+                            model.ticks = master.shouldStir() ? ticks : 0;
                             transform.translate(1.125,0,1.125);
                             model.render(transform, buffer.getBuffer(model.getRenderType(ModelChemicalVat.TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0f, 1.0f, 1.0f, 1.0f);
-                            transform.pop();
                         }
                     transform.pop();
 

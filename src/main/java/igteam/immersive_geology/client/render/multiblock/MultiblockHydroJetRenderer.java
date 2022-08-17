@@ -48,7 +48,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
     @Override
     public boolean isGlobalRenderer(HydroJetCutterTileEntity te) {
-        return false;
+        return true;
     }
 
     ItemStack item = ItemStack.EMPTY;

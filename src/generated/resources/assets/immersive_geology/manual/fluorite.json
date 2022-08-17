@@ -1,1 +1,22 @@
-{}
+{
+  "fluorite_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_fluorite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_fluorite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_fluorite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_fluorite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_fluorite_ore"
+      }
+    ]
+  }
+}

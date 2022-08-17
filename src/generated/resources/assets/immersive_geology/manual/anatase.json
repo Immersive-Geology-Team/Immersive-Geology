@@ -1,1 +1,22 @@
-{}
+{
+  "anatase_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_anatase_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_anatase_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_anatase_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_anatase_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_anatase_ore"
+      }
+    ]
+  }
+}

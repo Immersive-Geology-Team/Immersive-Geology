@@ -40,13 +40,6 @@ public class IGRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        OreVeinGatherer gatherer = new OreVeinGatherer();
-        gatherer.initRegisteredVeins();
-
-        for (IGOreVein v: gatherer.RegisteredVeins)
-        {
-            buildVeinData(v, consumer);
-        }
         for (MaterialInterface container : APIMaterials.all()) {
             MaterialBase material = container.instance();
 
@@ -99,6 +92,17 @@ public class IGRecipeProvider extends RecipeProvider {
                 }
             }
         }
+
+        buildExcavatorRecipes(consumer);
+    }
+
+    private void buildExcavatorRecipes(Consumer<IFinishedRecipe> consumer){
+        OreVeinGatherer gatherer = OreVeinGatherer.INSTANCE;
+
+        for (IGOreVein v: gatherer.RegisteredVeins)
+        {
+            buildVeinData(v, consumer);
+        }
     }
 
     private void buildVeinData(IGOreVein vein, Consumer<IFinishedRecipe> consumer)
@@ -112,7 +116,6 @@ public class IGRecipeProvider extends RecipeProvider {
         builder.setFailchance(vein.getFailChance());
         builder.setWeight(vein.getWeight());
         builder.build(consumer, new ResourceLocation(IGApi.MODID, "mineral/"+vein.getVeinName()));
-
     }
 
     private void buildCuttingMethods(IGHydrojetMethod method, Consumer<IFinishedRecipe> consumer) {

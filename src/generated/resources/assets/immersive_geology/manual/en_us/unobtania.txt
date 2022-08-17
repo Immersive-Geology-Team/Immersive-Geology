@@ -1,59 +1,6 @@
 Unobtania
-EPIC mineral
-<&unobtania_display> extraction:
-Process ore stone_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore stone_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore granite_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore granite_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk granite_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore granite_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore netherrack_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore netherrack_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk netherrack_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore netherrack_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore blackstone_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore blackstone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk blackstone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore blackstone_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore end_stone_unobtania by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore end_stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk end_stone_unobtania by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore end_stone_unobtania by <link;immersive_geology:gravityseparator;Separator>, 
-Extraction Stage:
-Process crushed_ore unobtania by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process dust unobtania by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process compound_dust vanadium by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide vanadium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
-Extraction Stage:
-Extraction Stage:
-Process compound_dust unobtanium by <link;immersive_geology:rotarykiln;Calcination>, 
-Extraction Stage:
-Process metal_oxide unobtanium by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process slurry nitric_acid_unobtanium by <link;immersive_geology:crystallizer;Crystalization>, 
-
-<&unobtania_recipe> (Generic) Crafting Recipe
+EPIC
+<&unobtania_introduction> Unobtania is a material found in the overworld.
+It Generates at between Y1 and Y60, each deposit is between 3 and 6 blocks.
+It can be spawn a max of 4 times per chunk.
+It is a source for unobtanium and vanadium.

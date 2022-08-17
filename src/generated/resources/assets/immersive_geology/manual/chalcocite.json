@@ -1,1 +1,22 @@
-{}
+{
+  "chalcocite_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_chalcocite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_chalcocite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_chalcocite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_chalcocite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_chalcocite_ore"
+      }
+    ]
+  }
+}

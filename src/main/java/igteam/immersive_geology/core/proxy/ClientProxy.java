@@ -6,9 +6,11 @@ import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
 import blusunrize.immersiveengineering.common.items.IEItems;
+import blusunrize.lib.manual.ManualElementTable;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
+import igteam.api.processing.IGProcessingStage;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.client.gui.BloomeryScreen;
 import igteam.immersive_geology.client.gui.ReverberationScreen;
@@ -54,12 +56,17 @@ import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class ClientProxy extends ServerProxy {
 
@@ -72,6 +79,7 @@ public class ClientProxy extends ServerProxy {
         registerSpecialRenderers();
         supplyMaterialTint(event);
         setupManualPages();
+        requestModelsAndTextures();
     }
 
     private void supplyMaterialTint(FMLClientSetupEvent event){
@@ -112,14 +120,6 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onFinishSetup(FMLLoadCompleteEvent event) { //Common Finish Setup!
         super.onFinishSetup(event);
-        setupBloomeryFuels();
-        setupReverberationFuels();
-
-        //TODO wrap it to check if thorium is enabled
-        ThermoelectricHandler.ThermoelectricSource thorium = new ThermoelectricHandler.
-                ThermoelectricSource(MetalEnum.Thorium.getBlockTag(BlockPattern.storage),
-                1800, ThermoelectricHandler.TemperatureScale.KELVIN);
-        ThermoelectricHandler.registerSourceInKelvin(thorium);
     }
 
     private void setupReverberationFuels(){
@@ -182,8 +182,8 @@ public class ClientProxy extends ServerProxy {
         IG_CATEGORY_MINERALS = IG_CATEGORY.getOrCreateSubnode(modLoc("minerals"), 1);
         mineral_info(0);
 
-        IG_CATEGORY_METALS = IG_CATEGORY.getOrCreateSubnode(modLoc("metals"), 2);
-        metal_info(0);
+//        IG_CATEGORY_METALS = IG_CATEGORY.getOrCreateSubnode(modLoc("metals"), 2);
+//        metal_info(0);
 
         IG_CATEGORY_MACHINES = IG_CATEGORY.getOrCreateSubnode(modLoc("machines"), 3);
         gravityseparator(modLoc("gravityseparator"), 0);
@@ -211,6 +211,7 @@ public class ClientProxy extends ServerProxy {
 
         for (MaterialInterface<?> wrapper : MineralEnum.values()){
             Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.instance().getRarity().name().toLowerCase()),wrapper.instance().getRarity().ordinal());
+
             ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
 
             builder.readFromFile(modLoc(wrapper.getName()));
@@ -290,7 +291,7 @@ public class ClientProxy extends ServerProxy {
         registerScreen(new ResourceLocation(IGLib.MODID, "bloomery"), BloomeryScreen::new);
     }
 
-    public static void requestModelsAndTextures() {
+    public void requestModelsAndTextures() {
         MultiblockHydroJetRenderer.ARM = DynamicModel.createSided(
                 new ResourceLocation(IGApi.MODID, "multiblock/obj/hydrojet/hydrojet_arm.obj"),
                 "hydrojet_arm", DynamicModel.ModelType.OBJ

@@ -7,6 +7,7 @@ import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.data.metal.MaterialBaseMetal;
 import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +42,7 @@ public class MaterialMetalChromium extends MaterialBaseMetal {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Crystal Processing"){
+        new IGProcessingStage(this, IGStageDesignation.crystallization){
             @Override
             protected void describe() {
 

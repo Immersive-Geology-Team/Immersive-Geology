@@ -1,50 +1,6 @@
 Anatase
-COMMON mineral
-<&anatase_display> extraction:
-Process ore stone_anatase by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore stone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk stone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore stone_anatase by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore granite_anatase by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore granite_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk granite_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore granite_anatase by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore netherrack_anatase by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore netherrack_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk netherrack_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore netherrack_anatase by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore blackstone_anatase by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore blackstone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk blackstone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore blackstone_anatase by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore end_stone_anatase by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore end_stone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk end_stone_anatase by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore end_stone_anatase by <link;immersive_geology:gravityseparator;Separator>, 
-Leaching stage:
-Process crushed_ore anatase by <link;immersiveengineering:crusher;Crushing>, 
-Leaching stage:
-Process dust anatase by <link;immersive_geology:chemicalvat;Chemical>, 
-Leaching stage:
-Process dust sodium by <link;immersive_geology:chemicalvat;Chemical>, 
-
-<&anatase_recipe> (Generic) Crafting Recipe
+COMMON
+<&anatase_introduction> Anatase is a material found in the end.
+It Generates at between Y1 and Y140, each deposit is between 6 and 12 blocks.
+It can be spawn a max of 10 times per chunk.
+It is a source for titanium.

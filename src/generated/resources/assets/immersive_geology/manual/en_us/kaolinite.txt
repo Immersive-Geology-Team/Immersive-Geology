@@ -1,0 +1,6 @@
+Kaolinite
+COMMON
+<&kaolinite_introduction> Kaolinite is a material found in the overworld.
+It Generates at between Y30 and Y70, each deposit is between 30 and 46 blocks.
+It can be spawn a max of 3 times per chunk.
+

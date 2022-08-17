@@ -8,6 +8,7 @@ import igteam.api.materials.MetalEnum;
 import igteam.api.materials.data.metal.MaterialBaseMetal;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class MaterialMetalSilver extends MaterialBaseMetal {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Processing Stage") {
+        new IGProcessingStage(this, IGStageDesignation.refinement) {
             @Override
             protected void describe() {
                 IRecipeBuilder.bloomery(this).create(

@@ -1,1 +1,22 @@
-{}
+{
+  "zircon_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_zircon_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_zircon_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_zircon_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_zircon_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_zircon_ore"
+      }
+    ]
+  }
+}

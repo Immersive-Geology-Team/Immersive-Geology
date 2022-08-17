@@ -1,1 +1,22 @@
-{}
+{
+  "ferberite_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_ferberite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_ferberite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_ferberite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_ferberite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_ferberite_ore"
+      }
+    ]
+  }
+}

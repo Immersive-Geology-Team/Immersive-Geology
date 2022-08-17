@@ -1,1 +1,22 @@
-{}
+{
+  "ullmannite_introduction": {
+    "type": "immersiveengineering:item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_stone_ullmannite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_granite_ullmannite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_netherrack_ullmannite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_blackstone_ullmannite_ore"
+      },
+      {
+        "item": "immersive_geology:block_item_end_stone_ullmannite_ore"
+      }
+    ]
+  }
+}

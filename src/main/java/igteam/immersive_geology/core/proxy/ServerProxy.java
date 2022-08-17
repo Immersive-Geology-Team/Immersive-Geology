@@ -9,6 +9,7 @@ import igteam.api.materials.MetalEnum;
 import igteam.api.materials.MiscEnum;
 import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
+import igteam.api.veins.OreVeinGatherer;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
@@ -39,6 +40,8 @@ public class ServerProxy implements Proxy {
         IGWorldGeneration.initialize();
         MinecraftForge.EVENT_BUS.register(new IGWorldGeneration());
         DataSerializers.registerSerializer(IGFluid.OPTIONAL_FLUID_STACK);
+
+        OreVeinGatherer.INSTANCE.initRegisteredVeins();
     }
 
     @Override

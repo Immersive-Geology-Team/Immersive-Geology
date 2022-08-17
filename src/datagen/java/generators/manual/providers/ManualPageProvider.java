@@ -60,7 +60,7 @@ public class ManualPageProvider {
 
         public ManualPageAnchor setType(IGManualType type) {
             this.page_type = type;
-            root.addProperty("type", type.name().toLowerCase());
+            root.addProperty("type", type.get());
             return this;
         }
 

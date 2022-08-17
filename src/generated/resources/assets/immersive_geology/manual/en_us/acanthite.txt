@@ -1,56 +1,7 @@
 Acanthite
-UNCOMMON mineral
-<&acanthite_display> Roasting Stage:
-Process crushed_ore acanthite by <link;immersive_geology:reverberation_furnace;Roasting>, 
-Blasting Stage:
-Process slag acanthite by <link;immersive_engineering:crude_blast_furnace;Blasting>, 
-extraction:
-Process ore stone_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore stone_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore granite_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore granite_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk granite_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore granite_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore netherrack_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore netherrack_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk netherrack_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore netherrack_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore blackstone_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore blackstone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk blackstone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore blackstone_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
-extraction:
-Process ore end_stone_acanthite by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
-Process ore end_stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore_chunk end_stone_acanthite by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process dirty_crushed_ore end_stone_acanthite by <link;immersive_geology:gravityseparator;Separator>, 
-Leeching Stage:
-Process slag acanthite by <link;immersiveengineering:crusher;Crushing>, 
-Leeching Stage:
-Process dust acanthite by <link;immersive_geology:chemicalvat;Chemical>, 
-Leeching Stage:
-Process slurry hydrochloric_acid_silver by <link;immersive_geology:crystallizer;Crystalization>, 
-Leeching Stage:
-Process compound_dust platinum by <link;immersive_geology:gravityseparator;Separator>, 
-
-<&acanthite_recipe> (Generic) Crafting Recipe
+UNCOMMON
+<&acanthite_introduction> Acanthite is a material found in the nether.
+It Generates at between Y1 and Y255, each deposit is between 5 and 10 blocks.
+It can be spawn a max of 16 times per chunk.
+It is a source for silver, platinum and osmium.
+<&acanthite_table>

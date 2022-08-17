@@ -84,7 +84,7 @@ public class ImmersiveGeology
 
 		if(!DatagenModLoader.isRunningDataGen()) {
 			//Prevents Issues with datagen runs
-			ClientProxy.requestModelsAndTextures();
+			//ClientProxy
 		}
 		IGApi.init();
 	}
@@ -107,6 +107,7 @@ public class ImmersiveGeology
 	private void onClientSetup(final FMLClientSetupEvent event){
 		LOGGER.info("Setting up Client Stuff");
 		proxy.onClientSetup(event);
+
 	}
 
 	@SubscribeEvent

@@ -1,29 +1,6 @@
 Rocksalt
-COMMON mineral
-<&rocksalt_display> preparation:
-Process crystal rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-Brine and hydroxide production stage:
-Process crushed_ore rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-Brine and hydroxide production stage:
-Process dust rocksalt by <link;immersive_geology:chemicalvat;Chemical>, 
-Brine and hydroxide production stage:
-Process metal_oxide sodium by <link;immersive_geology:chemicalvat;Chemical>, 
-extraction:
-Process ore stone_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore granite_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore netherrack_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore blackstone_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-extraction:
-Process ore end_stone_rocksalt by <link;immersiveengineering:crusher;Crushing>, 
-Sodium extraction stage:
-Process compound_dust sodium by <link;immersive_geology:rotarykiln;Calcination>, 
-Sodium extraction stage:
-Process metal_oxide sodium by <link;immersiveengineering:arc_furnace;arcSmelting>, 
-Hydrochloric production stage:
-Process dust rocksalt by <link;immersive_geology:chemicalvat;Chemical>, 
-Hydrochloric production stage:
-
-<&rocksalt_recipe> (Generic) Crafting Recipe
+COMMON
+<&rocksalt_introduction> Rocksalt is a material found in the overworld.
+It Generates at between Y1 and Y140, each deposit is between 6 and 12 blocks.
+It can be spawn a max of 10 times per chunk.
+It is a source for sodium and hydrochloric_acid.

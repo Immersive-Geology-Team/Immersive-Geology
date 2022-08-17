@@ -11,9 +11,10 @@ import java.util.List;
 
 public class OreVeinGatherer {
 
+    public static OreVeinGatherer INSTANCE = new OreVeinGatherer();
     public List<IGOreVein> RegisteredVeins;
 
-    public OreVeinGatherer()
+    private OreVeinGatherer()
     {
         RegisteredVeins = new ArrayList<>();
     }

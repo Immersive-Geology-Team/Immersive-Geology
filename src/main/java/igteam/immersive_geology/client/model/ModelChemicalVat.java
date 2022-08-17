@@ -41,6 +41,7 @@ public class ModelChemicalVat extends IGModel{
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha){
         this.connector.rotateAngleY = ticks;
+
         this.origin.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 }
