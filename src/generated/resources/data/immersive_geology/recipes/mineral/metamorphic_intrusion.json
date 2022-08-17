@@ -1,0 +1,28 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "ores": [
+    {
+      "chance": 0.5,
+      "output": {
+        "tag": "forge:ores/granite_hematite"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:ores/granite_chromite"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:ores/granite_pyrolusite"
+      }
+    }
+  ],
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.1,
+  "weight": 15
+}

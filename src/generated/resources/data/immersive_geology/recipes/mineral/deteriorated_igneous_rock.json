@@ -1,0 +1,22 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "ores": [
+    {
+      "chance": 0.67,
+      "output": {
+        "tag": "forge:ores/stone_uraninite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "tag": "forge:ores/stone_monazite"
+      }
+    }
+  ],
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.1,
+  "weight": 15
+}

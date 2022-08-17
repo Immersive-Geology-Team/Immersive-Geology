@@ -83,8 +83,7 @@ public class ImmersiveGeology
 
 
 		if(!DatagenModLoader.isRunningDataGen()) {
-			//Prevents Issues with datagen runs
-			//ClientProxy
+
 		}
 		IGApi.init();
 	}

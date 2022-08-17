@@ -1,0 +1,22 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "ores": [
+    {
+      "chance": 0.5,
+      "output": {
+        "tag": "forge:ores/stone_cuprite"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "tag": "forge:ores/stone_hematite"
+      }
+    }
+  ],
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.1,
+  "weight": 15
+}

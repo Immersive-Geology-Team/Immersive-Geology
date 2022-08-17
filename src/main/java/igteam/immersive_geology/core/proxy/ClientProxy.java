@@ -76,6 +76,7 @@ public class ClientProxy extends ServerProxy {
         RenderLayerHandler.init(event);
         registerItemColors();
         registerBlockColors();
+        requestModelsAndTextures();
         registerSpecialRenderers();
         supplyMaterialTint(event);
         setupManualPages();
