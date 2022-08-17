@@ -1,12 +1,6 @@
 Pyrolusite
 RARE mineral
-<&pyrolusite_display> Extraction Stage:
-Process crushed_ore pyrolusite by <link;immersiveengineering:crusher;Crushing>, 
-Extraction Stage:
-Process dust pyrolusite by <link;immersive_geology:chemicalvat;Chemical>, 
-Extraction Stage:
-Process slurry sulfuric_acid_manganese by <link;immersive_geology:crystallizer;Crystalization>, 
-extraction:
+<&pyrolusite_display> extraction:
 Process ore stone_pyrolusite by <link;immersive_geology:hydrojet;Cutting>, 
 extraction:
 Process ore stone_pyrolusite by <link;immersiveengineering:crusher;Crushing>, 
@@ -46,5 +40,11 @@ extraction:
 Process ore_chunk end_stone_pyrolusite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_pyrolusite by <link;immersive_geology:gravityseparator;Separator>, 
+Extraction Stage:
+Process crushed_ore pyrolusite by <link;immersiveengineering:crusher;Crushing>, 
+Extraction Stage:
+Process dust pyrolusite by <link;immersive_geology:chemicalvat;Chemical>, 
+Extraction Stage:
+Process slurry sulfuric_acid_manganese by <link;immersive_geology:crystallizer;Crystalization>, 
 
 <&pyrolusite_recipe> (Generic) Crafting Recipe

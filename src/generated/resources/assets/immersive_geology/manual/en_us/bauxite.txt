@@ -1,8 +1,6 @@
 Bauxite
 COMMON mineral
 <&bauxite_display> extraction:
-Process ore aluminum by <link;immersive_geology:hydrojet;Cutting>, 
-extraction:
 Process ore_chunk stone_bauxite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore stone_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
@@ -22,6 +20,8 @@ extraction:
 Process ore_chunk end_stone_bauxite by <link;immersiveengineering:crusher;Crushing>, 
 extraction:
 Process dirty_crushed_ore end_stone_bauxite by <link;immersive_geology:gravityseparator;Separator>, 
+extraction:
+Process ore aluminum by <link;immersive_geology:hydrojet;Cutting>, 
 purification:
 Process crushed_ore bauxite by <link;immersive_geology:rotarykiln;Calcination>, 
 purification:

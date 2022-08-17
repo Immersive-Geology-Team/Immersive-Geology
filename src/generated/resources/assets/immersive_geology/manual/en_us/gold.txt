@@ -1,9 +1,6 @@
 Gold
 COMMON metal
 <&gold_display> 
-extraction:
-Process ore gold by <link;immersive_geology:hydrojet;Cutting>, 
-Process crushed_ore gold by <link;immersive_geology:bloomery;Bloomery>, 
 preparation:
 Process dust gold by <link;minecraft:furnace;basicSmelting>, 
 extraction:
@@ -21,4 +18,7 @@ Process dirty_crushed_ore gold by <link;immersive_geology:gravityseparator;Separ
 Process ore_chunk blackstone_gold by <link;immersiveengineering:crusher;Crushing>, 
 Process ore_chunk end_stone_gold by <link;immersiveengineering:crusher;Crushing>, 
 Process dirty_crushed_ore gold by <link;immersive_geology:gravityseparator;Separator>, 
-Process ore_chunk end_stone_gold by <link;immersiveengineering:crusher;Crushing>
+Process ore_chunk end_stone_gold by <link;immersiveengineering:crusher;Crushing>, 
+extraction:
+Process ore gold by <link;immersive_geology:hydrojet;Cutting>, 
+Process crushed_ore gold by <link;immersive_geology:bloomery;Bloomery>
