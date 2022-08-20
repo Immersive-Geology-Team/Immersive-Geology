@@ -11,9 +11,11 @@ import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.veins.OreVeinGatherer;
 import igteam.immersive_geology.ImmersiveGeology;
+import igteam.immersive_geology.client.gui.BloomeryScreen;
 import igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import igteam.immersive_geology.common.fluid.IGFluid;
+import igteam.immersive_geology.common.gui.BloomeryContainer;
 import igteam.immersive_geology.common.gui.ReverberationContainer;
 import igteam.immersive_geology.common.world.IGWorldGeneration;
 import igteam.immersive_geology.core.lib.IGLib;
@@ -80,8 +82,12 @@ public class ServerProxy implements Proxy {
     }
 
     public void registerContainersAndScreens() {
+        //And here we hack to IE code. Sorry for that
         GuiHandler.register(ReverberationFurnaceTileEntity.class,
                 new ResourceLocation(IGLib.MODID, "reverberation_furnace"), ReverberationContainer::new);
+        GuiHandler.register(BloomeryTileEntity.class,
+                new ResourceLocation(IGLib.MODID, "bloomery"), BloomeryContainer::new);
+
     }
     private void setupReverberationFuels(){
         ImmersiveGeology.getNewLogger().info("Setting up Fuels for Reverberation Furnace");
