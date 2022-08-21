@@ -59,7 +59,7 @@ public class BlockLootProvider implements IDataProvider {
                 continue; // skip over this block in the loop if it isn't from our mod!
             }
 
-            if(b instanceof IGOreBlock){
+            if(b instanceof IGOreBlock) {
                 IGOreBlock ore = (IGOreBlock) b;
                 MaterialInterface<?> stoneMaterial = ore.getMaterial(MaterialTexture.base);
                 MaterialInterface<?> oreMaterial = ore.getMaterial(MaterialTexture.overlay);

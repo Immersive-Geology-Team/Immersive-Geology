@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ToolType;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,7 +27,8 @@ public class IGGenericBlock extends Block implements IGBlockType {
     private final IGGenericBlockItem itemBlock;
 
     public IGGenericBlock(MaterialInterface<?> m, BlockPattern p) {
-        super(Properties.create((m.instance() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f));
+
+        super(Properties.create(m.hasPattern(ItemPattern.clay) ? Material.CLAY : (m.instance() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f).harvestTool(p == BlockPattern.dust_block || m.hasPattern(ItemPattern.clay) ? ToolType.SHOVEL : ToolType.PICKAXE));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
