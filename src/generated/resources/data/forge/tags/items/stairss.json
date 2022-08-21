@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:block_item_refractory_brick_stairs",
-    "immersive_geology:block_item_reinforced_refractory_brick_stairs"
+    "immersive_geology:block_item_reinforced_refractory_brick_stairs",
+    "immersive_geology:block_item_refractory_brick_stairs"
   ]
 }
