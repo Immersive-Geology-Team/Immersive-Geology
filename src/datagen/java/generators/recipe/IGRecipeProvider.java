@@ -10,8 +10,8 @@ import igteam.api.materials.helper.APIMaterials;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.builders.*;
-import igteam.api.processing.methods.*;
 import igteam.api.processing.helper.IGProcessingMethod;
+import igteam.api.processing.methods.*;
 import igteam.api.veins.IGOreVein;
 import igteam.api.veins.OreVeinGatherer;
 import net.minecraft.data.*;
@@ -24,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
@@ -69,6 +68,9 @@ public class IGRecipeProvider extends RecipeProvider {
                                 break;
                             case Crystalization:
                                 buildCrystallizationMethods((IGCrystallizationMethod) method, consumer);
+                                break;
+                            case BasicBlasting:
+                                buildBasicBlastingMethods((IGBasicBlastingMethod) method, consumer);
                                 break;
                             case Blasting:
                                 buildBlastingMethods((IGBlastingMethod) method, consumer);
@@ -156,6 +158,14 @@ public class IGRecipeProvider extends RecipeProvider {
         IItemProvider output = method.getOutput();
         float xp = 2;
         int smeltingTime = 200;
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, method.getLocation());
+    }
+
+    private void buildBasicBlastingMethods(IGBasicBlastingMethod method, Consumer<IFinishedRecipe> consumer) {
+        IItemProvider input = method.getInput();
+        IItemProvider output = method.getOutput();
+        float xp = 2;
+        int smeltingTime = 100;
         CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, method.getLocation());
     }
 

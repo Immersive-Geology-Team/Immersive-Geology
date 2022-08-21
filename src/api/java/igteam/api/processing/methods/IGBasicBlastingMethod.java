@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Objects;
 
-public class IGBasicSmeltingMethod extends IGProcessingMethod {
+public class IGBasicBlastingMethod extends IGProcessingMethod {
 
-    public IGBasicSmeltingMethod(IGProcessingStage stage) {
+    public IGBasicBlastingMethod(IGProcessingStage stage) {
         super(RecipeMethod.basicSmelting, stage);
     }
     private IItemProvider input, output;
@@ -34,7 +34,7 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
 
     @Override
     public ResourceLocation getLocation() {
-        return toRL(toPath(output) + "_from_smelting");
+        return toRL(toPath(output) + "_from_blasting");
     }
 
     private String toPath(IItemProvider src) {
