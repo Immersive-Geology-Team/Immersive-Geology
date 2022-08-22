@@ -22,7 +22,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-version = 'beta_v1.3-1.16.5'
+version = 'beta_v1.4-1.16.5'
 group = 'com.igteam.immersive_geology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'immersive_geology'
 
