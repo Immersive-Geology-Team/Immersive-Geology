@@ -1,20 +1,20 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:block_item_sodium_dust_block",
-    "immersive_geology:block_item_unobtanium_dust_block",
     "immersive_geology:block_item_chromium_dust_block",
-    "immersive_geology:block_item_cobalt_dust_block",
-    "immersive_geology:block_item_manganese_dust_block",
     "immersive_geology:block_item_thorium_dust_block",
-    "immersive_geology:block_item_neodymium_dust_block",
-    "immersive_geology:block_item_platinum_dust_block",
-    "immersive_geology:block_item_titanium_dust_block",
-    "immersive_geology:block_item_zinc_dust_block",
-    "immersive_geology:block_item_tungsten_dust_block",
     "immersive_geology:block_item_tin_dust_block",
-    "immersive_geology:block_item_bronze_dust_block",
+    "immersive_geology:block_item_osmium_dust_block",
+    "immersive_geology:block_item_zinc_dust_block",
+    "immersive_geology:block_item_manganese_dust_block",
+    "immersive_geology:block_item_tungsten_dust_block",
+    "immersive_geology:block_item_platinum_dust_block",
+    "immersive_geology:block_item_cobalt_dust_block",
+    "immersive_geology:block_item_neodymium_dust_block",
+    "immersive_geology:block_item_unobtanium_dust_block",
+    "immersive_geology:block_item_sodium_dust_block",
     "immersive_geology:block_item_vanadium_dust_block",
-    "immersive_geology:block_item_osmium_dust_block"
+    "immersive_geology:block_item_bronze_dust_block",
+    "immersive_geology:block_item_titanium_dust_block"
   ]
 }

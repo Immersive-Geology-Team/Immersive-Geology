@@ -1,11 +1,50 @@
 {
-  "rocksalt_extraction": {
-    "type": "item_display"
+  "rocksalt_preparation_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   },
-  "rocksalt_preparation": {
-    "type": "item_display"
+  "rocksalt_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   },
-  "rocksalt_synthesis": {
-    "type": "item_display"
+  "rocksalt_extraction_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "rocksalt_extraction_arcsmelting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "rocksalt_synthesis_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "rocksalt_synthesis_chemical": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

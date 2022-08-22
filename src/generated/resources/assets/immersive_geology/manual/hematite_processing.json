@@ -1,5 +1,50 @@
 {
-  "hematite_extraction": {
-    "type": "item_display"
+  "hematite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "hematite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "hematite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "hematite_extraction_bloomery": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "hematite_extraction_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_crushed_hematite_to_metal2"
+      }
+    ]
+  },
+  "hematite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

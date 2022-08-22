@@ -1,5 +1,18 @@
 {
-  "kaolinite_preparation": {
-    "type": "item_display"
+  "kaolinite_preparation_basicsmelting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "kaolinite_preparation_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

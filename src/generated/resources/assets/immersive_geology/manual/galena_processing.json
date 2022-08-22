@@ -1,19 +1,66 @@
 {
-  "galena_roasting": {
-    "type": "item_display"
-  },
-  "galena_blasting": {
+  "galena_extraction_cutting": {
     "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_roasting_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_refinement_arcsmelting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_refinement_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_blasting_blasting": {
+    "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
       }
     ]
   },
-  "galena_extraction": {
-    "type": "item_display"
-  },
-  "galena_refinement": {
-    "type": "item_display"
+  "galena_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

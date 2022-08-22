@@ -1,11 +1,42 @@
 {
-  "saltpeter_preparation": {
-    "type": "item_display"
+  "saltpeter_preparation_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   },
-  "saltpeter_synthesis": {
-    "type": "item_display"
+  "saltpeter_synthesis_arcsmelting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   },
-  "saltpeter_extraction": {
-    "type": "item_display"
+  "saltpeter_synthesis_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "saltpeter_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "saltpeter_synthesis_chemical": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

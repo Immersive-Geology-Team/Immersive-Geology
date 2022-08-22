@@ -1,4 +1,8 @@
 Cuprite Processing
 Factoring Factories
-<&cuprite_extraction> cuprite
-<&cuprite_refinement> cuprite
+<&cuprite_extraction_cutting> cuprite
+<&cuprite_extraction_crushing> cuprite
+<&cuprite_extraction_crafting> cupriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_cuprite
+<&cuprite_extraction_separator> cuprite
+<&cuprite_refinement_blasting> cuprite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_copper', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&cuprite_refinement_bloomery> cuprite

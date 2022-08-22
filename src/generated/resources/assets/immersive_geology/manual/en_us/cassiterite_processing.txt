@@ -1,3 +1,8 @@
 Cassiterite Processing
 Factoring Factories
-<&cassiterite_extraction> cassiterite
+<&cassiterite_extraction_blasting> cassiterite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_tin', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&cassiterite_extraction_bloomery> cassiterite
+<&cassiterite_extraction_cutting> cassiterite
+<&cassiterite_extraction_crushing> cassiterite
+<&cassiterite_extraction_crafting> cassiteriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_cassiterite
+<&cassiterite_extraction_separator> cassiterite

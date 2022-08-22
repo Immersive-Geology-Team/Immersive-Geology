@@ -1,5 +1,58 @@
 {
-  "scheelite_extraction": {
-    "type": "item_display"
+  "scheelite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_chemical": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "scheelite_extraction_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_metal_oxide_tungsten_to_ingot6"
+      }
+    ]
   }
 }

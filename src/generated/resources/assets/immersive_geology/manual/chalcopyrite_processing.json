@@ -1,16 +1,50 @@
 {
-  "chalcopyrite_blasting": {
+  "chalcopyrite_extraction_cutting": {
     "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "chalcopyrite_roasting_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "chalcopyrite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "chalcopyrite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "chalcopyrite_blasting_blasting": {
+    "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot4"
       }
     ]
   },
-  "chalcopyrite_extraction": {
-    "type": "item_display"
-  },
-  "chalcopyrite_roasting": {
-    "type": "item_display"
+  "chalcopyrite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

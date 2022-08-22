@@ -1,3 +1,6 @@
 Cryolite Processing
 Factoring Factories
-<&cryolite_extraction> cryolite
+<&cryolite_extraction_cutting> cryolite
+<&cryolite_extraction_crushing> cryolite
+<&cryolite_extraction_crafting> cryoliteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_cryolite
+<&cryolite_extraction_separator> cryolite

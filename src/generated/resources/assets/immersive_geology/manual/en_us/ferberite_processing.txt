@@ -1,4 +1,8 @@
 Ferberite Processing
 Factoring Factories
-<&ferberite_extraction> ferberite
-<&ferberite_blasting> ferberite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_tungsten', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&ferberite_extraction_cutting> ferberite
+<&ferberite_extraction_crushing> ferberite
+<&ferberite_extraction_crafting> ferberiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_ferberite
+<&ferberite_extraction_separator> ferberite
+<&ferberite_extraction_blasting> ferberite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&ferberite_blasting_blasting> ferberite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_tungsten', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

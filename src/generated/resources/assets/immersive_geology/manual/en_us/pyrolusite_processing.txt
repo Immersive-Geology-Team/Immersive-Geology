@@ -1,3 +1,8 @@
 Pyrolusite Processing
 Factoring Factories
-<&pyrolusite_extraction> pyrolusite
+<&pyrolusite_extraction_crushing> pyrolusite
+<&pyrolusite_extraction_chemical> pyrolusiteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
+<&pyrolusite_extraction_crystalization> pyrolusite
+<&pyrolusite_extraction_cutting> pyrolusite
+<&pyrolusite_extraction_crafting> pyrolusiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_pyrolusite
+<&pyrolusite_extraction_separator> pyrolusite

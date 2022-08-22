@@ -1,5 +1,11 @@
 Vanadinite Processing
 Factoring Factories
-<&vanadinite_leeching> vanadiniteArc Smelter Recipe for item.immersive_geology.ingot
-<&vanadinite_extraction> vanadinite
-<&vanadinite_reduction> vanadinite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_lead', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&vanadinite_reduction_blasting> vanadinite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_lead', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&vanadinite_extraction_cutting> vanadinite
+<&vanadinite_extraction_crushing> vanadinite
+<&vanadinite_extraction_crafting> vanadiniteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_vanadinite
+<&vanadinite_extraction_separator> vanadinite
+<&vanadinite_leeching_crushing> vanadinite
+<&vanadinite_leeching_chemical> vanadiniteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.vanadium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Water
+<&vanadinite_leeching_calcination> vanadinite
+<&vanadinite_leeching_arcsmelting> vanadiniteArc Smelter Recipe for item.immersive_geology.ingot

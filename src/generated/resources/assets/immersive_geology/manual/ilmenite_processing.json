@@ -1,16 +1,50 @@
 {
-  "ilmenite_refinement": {
+  "ilmenite_purification_chemical": {
     "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ilmenite_refinement_blasting": {
+    "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:blasting/blast_crushed_ore_ilmenite_to_ingot_and_oxide2"
       }
     ]
   },
-  "ilmenite_extraction": {
-    "type": "item_display"
+  "ilmenite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   },
-  "ilmenite_purification": {
-    "type": "item_display"
+  "ilmenite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ilmenite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ilmenite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

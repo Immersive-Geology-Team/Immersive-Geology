@@ -1,12 +1,49 @@
 {
-  "ferberite_extraction": {
-    "type": "item_display"
-  },
-  "ferberite_blasting": {
-    "type": "item_display",
+  "ferberite_blasting_blasting": {
+    "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:blasting/blast_metal_oxide_tungsten_to_ingot4"
+      }
+    ]
+  },
+  "ferberite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ferberite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ferberite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ferberite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "ferberite_extraction_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_crushed_ore_ferberite_to_slag2"
       }
     ]
   }

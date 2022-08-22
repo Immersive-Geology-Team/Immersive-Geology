@@ -1,3 +1,8 @@
 Hematite Processing
 Factoring Factories
-<&hematite_extraction> hematite
+<&hematite_extraction_cutting> hematite
+<&hematite_extraction_crushing> hematite
+<&hematite_extraction_crafting> hematiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_hematite
+<&hematite_extraction_separator> hematite
+<&hematite_extraction_blasting> hematite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&hematite_extraction_bloomery> hematite

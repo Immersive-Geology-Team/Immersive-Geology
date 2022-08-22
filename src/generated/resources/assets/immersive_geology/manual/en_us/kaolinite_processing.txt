@@ -1,3 +1,4 @@
 Kaolinite Processing
 Factoring Factories
-<&kaolinite_preparation> kaolinite
+<&kaolinite_preparation_crafting> kaoliniteCrafting Recipe for block.immersive_geology.storage_kaolinite
+<&kaolinite_preparation_basicsmelting> kaolinite

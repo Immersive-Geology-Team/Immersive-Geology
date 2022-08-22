@@ -1,5 +1,12 @@
 Monazite Processing
 Factoring Factories
-<&monazite_purification> monaziteArc Smelter Recipe for item.immersive_geology.dust
-<&monazite_extraction> monazite
-<&monazite_refinement> monazite
+<&monazite_purification_chemical> monaziteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
+<&monazite_purification_crystalization> monazite
+<&monazite_purification_arcsmelting> monaziteArc Smelter Recipe for item.immersive_geology.dust
+<&monazite_extraction_cutting> monazite
+<&monazite_extraction_crushing> monazite
+<&monazite_extraction_crafting> monaziteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_monazite
+<&monazite_extraction_separator> monazite
+<&monazite_refinement_crushing> monazite
+<&monazite_refinement_chemical> monaziteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.neodymium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
+<&monazite_refinement_calcination> monazite

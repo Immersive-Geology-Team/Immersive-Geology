@@ -1,4 +1,8 @@
 Fluorite Processing
 Factoring Factories
-<&fluorite_synthesis> fluoriteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.gypsum], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
-<&fluorite_extraction> fluorite
+<&fluorite_synthesis_crushing> fluorite
+<&fluorite_synthesis_chemical> fluoriteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.gypsum], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
+<&fluorite_extraction_cutting> fluorite
+<&fluorite_extraction_crushing> fluorite
+<&fluorite_extraction_crafting> fluoriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_fluorite
+<&fluorite_extraction_separator> fluorite

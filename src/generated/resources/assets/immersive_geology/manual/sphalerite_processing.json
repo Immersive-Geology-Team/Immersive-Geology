@@ -1,16 +1,82 @@
 {
-  "sphalerite_purification": {
-    "type": "item_display"
-  },
-  "sphalerite_refinement": {
+  "sphalerite_extraction_cutting": {
     "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_refinement_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_extraction_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_refinement_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_refinement_blasting": {
+    "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot6"
       }
     ]
   },
-  "sphalerite_extraction": {
-    "type": "item_display"
+  "sphalerite_refinement_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_purification_crystalization": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_purification_chemical": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "sphalerite_extraction_crafting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
   }
 }

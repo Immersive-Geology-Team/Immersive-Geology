@@ -26,6 +26,7 @@ import igteam.api.processing.methods.*;
 import net.minecraft.block.Block;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
@@ -110,66 +111,81 @@ public class IGManualProvider implements IDataProvider {
                 ManualTextProvider stageProcessMethod = attemptTextCreation(mineral_name + "_processing").setTitle(title_name + " Processing", "Factoring Factories");
 
                 for (IGProcessingMethod method : stage.getMethods()) {
-                    ManualPageProvider.ManualPageAnchor anchor = processing_provider.startAnchor(mineral_name + "_" + stage_type + "_" + method.getRecipeType().name())
+                    ManualPageProvider.ManualPageAnchor anchor = processing_provider.startAnchor(mineral_name + "_" + stage_type + "_" + method.getRecipeType().name().toLowerCase())
                             .setType(IGManualType.item_display);
 
                     StringBuilder processing_text = new StringBuilder(mineral_name);
 
                     if (method instanceof IGBlastingMethod) {
                         IGBlastingMethod blastingMethod = (IGBlastingMethod) method;
+                        anchor.setType(IGManualType.crafting);
                         anchor.addListElements("recipes", method.getLocation());
                         processing_text.append(" can be processed into " + blastingMethod.getOutput().getItem().getName());
                     } else
                     if (method instanceof IGCraftingMethod) {
                         IGCraftingMethod craftingMethod = (IGCraftingMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
                         //TODO Make Crafting Page Type
                         processing_text.append("Crafting Recipe for " + craftingMethod.getResult().getName().getString());
                     } else
                     if (method instanceof IGArcSmeltingMethod) {
                         IGArcSmeltingMethod arcSmeltingMethod = (IGArcSmeltingMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                         processing_text.append("Arc Smelter Recipe for " + arcSmeltingMethod.getOutput().getDisplayName().getString());
                     } else
                     if (method instanceof IGChemicalMethod) {
                         IGChemicalMethod chemicalMethod = (IGChemicalMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                         processing_text.append("Chemical Vat Recipe for " + chemicalMethod.getItemResult().getDisplayName().toString() + " and " + chemicalMethod.getFluidResult().getDisplayName().getString());
                     } else
                     if (method instanceof IGCalcinationMethod) {
                         IGCalcinationMethod calcinationMethod = (IGCalcinationMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGBloomeryMethod) {
                         IGBloomeryMethod bloomeryMethod = (IGBloomeryMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGCrystallizationMethod) {
                         IGCrystallizationMethod crystallizationMethod = (IGCrystallizationMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGHydrojetMethod) {
                         IGHydrojetMethod hydrojetMethod = (IGHydrojetMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGBasicSmeltingMethod) {
                         IGBasicSmeltingMethod basicSmeltingMethod = (IGBasicSmeltingMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGRefineryMethod) {
                         IGRefineryMethod refineryMethod = (IGRefineryMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGRoastingMethod) {
                         IGRoastingMethod roastingMethod = (IGRoastingMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
                     } else
                     if (method instanceof IGSeparatorMethod) {
                         IGSeparatorMethod separatorMethod = (IGSeparatorMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
 
+                    } else if(method instanceof IGCrushingMethod){
+                        IGCrushingMethod crushingMethod = (IGCrushingMethod) method;
+                        anchor.addListElements("items", Items.APPLE.getRegistryName());
                     }
                     anchor.closeAnchor();
 
-                    stageProcessMethod.attachPage(mineral_name + "_" + stage_type, processing_text.toString());
+                    stageProcessMethod.attachPage(mineral_name + "_" + stage_type + "_" + method.getRecipeType().name().toLowerCase(), processing_text.toString());
                 }
             }
         }

@@ -1,3 +1,8 @@
 Uraninite Processing
 Factoring Factories
-<&uraninite_extraction> uraninite
+<&uraninite_extraction_cutting> uraninite
+<&uraninite_extraction_crushing> uraninite
+<&uraninite_extraction_crafting> uraniniteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_uraninite
+<&uraninite_extraction_separator> uraninite
+<&uraninite_extraction_calcination> uraninite
+<&uraninite_extraction_chemical> uraniniteChemical Vat Recipe for TranslatableComponent{key='item.immersiveengineering.dust_uranium', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Air

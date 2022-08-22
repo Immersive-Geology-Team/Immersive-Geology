@@ -1,22 +1,22 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:block_item_sodium_slab",
-    "immersive_geology:block_item_unobtanium_slab",
     "immersive_geology:block_item_chromium_slab",
-    "immersive_geology:block_item_cobalt_slab",
-    "immersive_geology:block_item_manganese_slab",
     "immersive_geology:block_item_refractory_brick_slab",
     "immersive_geology:block_item_thorium_slab",
-    "immersive_geology:block_item_neodymium_slab",
-    "immersive_geology:block_item_platinum_slab",
-    "immersive_geology:block_item_titanium_slab",
-    "immersive_geology:block_item_zinc_slab",
-    "immersive_geology:block_item_reinforced_refractory_brick_slab",
-    "immersive_geology:block_item_tungsten_slab",
     "immersive_geology:block_item_tin_slab",
-    "immersive_geology:block_item_bronze_slab",
+    "immersive_geology:block_item_osmium_slab",
+    "immersive_geology:block_item_zinc_slab",
+    "immersive_geology:block_item_manganese_slab",
+    "immersive_geology:block_item_tungsten_slab",
+    "immersive_geology:block_item_platinum_slab",
+    "immersive_geology:block_item_cobalt_slab",
+    "immersive_geology:block_item_neodymium_slab",
+    "immersive_geology:block_item_unobtanium_slab",
+    "immersive_geology:block_item_sodium_slab",
     "immersive_geology:block_item_vanadium_slab",
-    "immersive_geology:block_item_osmium_slab"
+    "immersive_geology:block_item_bronze_slab",
+    "immersive_geology:block_item_reinforced_refractory_brick_slab",
+    "immersive_geology:block_item_titanium_slab"
   ]
 }
