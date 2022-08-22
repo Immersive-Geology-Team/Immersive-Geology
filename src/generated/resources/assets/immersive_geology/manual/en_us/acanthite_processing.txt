@@ -1,6 +1,6 @@
 Acanthite Processing
 Factoring Factories
-<&acanthite_blasting_blasting> acanthite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_silver', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&acanthite_roasting_roasting> acanthite
 <&acanthite_extraction_cutting> acanthite
 <&acanthite_extraction_crushing> acanthite
 <&acanthite_extraction_crafting> acanthiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_acanthite
@@ -9,4 +9,4 @@ Factoring Factories
 <&acanthite_leeching_chemical> acanthiteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.platinum], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
 <&acanthite_leeching_crystalization> acanthite
 <&acanthite_leeching_separator> acanthite
-<&acanthite_roasting_roasting> acanthite
+<&acanthite_blasting_blasting> acanthite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_silver', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

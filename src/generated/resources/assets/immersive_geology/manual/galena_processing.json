@@ -7,7 +7,7 @@
       }
     ]
   },
-  "galena_roasting_roasting": {
+  "galena_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "galena_extraction_crushing": {
+  "galena_roasting_roasting": {
     "type": "item_display",
     "items": [
       {

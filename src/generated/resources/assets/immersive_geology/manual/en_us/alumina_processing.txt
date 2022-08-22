@@ -1,9 +1,9 @@
 Alumina Processing
 Factoring Factories
-<&alumina_purification_crushing> alumina
-<&alumina_purification_chemical> aluminaChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.cryolite], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Air
-<&alumina_purification_arcsmelting> aluminaArc Smelter Recipe for item.immersiveengineering.ingot_aluminum
 <&alumina_extraction_cutting> alumina
 <&alumina_extraction_crushing> alumina
 <&alumina_extraction_crafting> aluminaCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_alumina
 <&alumina_extraction_separator> alumina
+<&alumina_purification_crushing> alumina
+<&alumina_purification_chemical> aluminaChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.cryolite], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Air
+<&alumina_purification_arcsmelting> aluminaArc Smelter Recipe for item.immersiveengineering.ingot_aluminum

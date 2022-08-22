@@ -1,6 +1,0 @@
-Zircon Processing
-Factoring Factories
-<&zircon_extraction_cutting> zircon
-<&zircon_extraction_crushing> zircon
-<&zircon_extraction_crafting> zirconCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_zircon
-<&zircon_extraction_separator> zircon

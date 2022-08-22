@@ -47,7 +47,7 @@
       }
     ]
   },
-  "sphalerite_refinement_crushing": {
+  "sphalerite_purification_crystalization": {
     "type": "item_display",
     "items": [
       {
@@ -55,7 +55,7 @@
       }
     ]
   },
-  "sphalerite_purification_crystalization": {
+  "sphalerite_refinement_crushing": {
     "type": "item_display",
     "items": [
       {

@@ -31,14 +31,6 @@
       }
     ]
   },
-  "vanadinite_extraction_separator": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "minecraft:apple"
-      }
-    ]
-  },
   "vanadinite_leeching_calcination": {
     "type": "item_display",
     "items": [
@@ -48,6 +40,14 @@
     ]
   },
   "vanadinite_leeching_arcsmelting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
+  "vanadinite_extraction_separator": {
     "type": "item_display",
     "items": [
       {

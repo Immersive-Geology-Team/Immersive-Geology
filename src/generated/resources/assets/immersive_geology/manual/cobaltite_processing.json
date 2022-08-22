@@ -1,5 +1,5 @@
 {
-  "cobaltite_extraction_crafting": {
+  "cobaltite_crystallization_crystalization": {
     "type": "item_display",
     "items": [
       {
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "cobaltite_crystallization_crystalization": {
+  "cobaltite_extraction_crafting": {
     "type": "item_display",
     "items": [
       {
