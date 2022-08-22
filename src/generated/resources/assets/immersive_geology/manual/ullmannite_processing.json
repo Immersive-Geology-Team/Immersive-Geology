@@ -1,0 +1,11 @@
+{
+  "ullmannite_extraction": {
+    "type": "item_display"
+  },
+  "ullmannite_leeching": {
+    "type": "item_display"
+  },
+  "ullmannite_roasting": {
+    "type": "item_display"
+  }
+}

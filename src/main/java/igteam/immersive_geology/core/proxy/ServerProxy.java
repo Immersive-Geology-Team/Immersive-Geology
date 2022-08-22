@@ -40,7 +40,6 @@ public class ServerProxy implements Proxy {
         IGWorldGeneration.initialize();
         MinecraftForge.EVENT_BUS.register(new IGWorldGeneration());
         DataSerializers.registerSerializer(IGFluid.OPTIONAL_FLUID_STACK);
-
         OreVeinGatherer.INSTANCE.initRegisteredVeins();
     }
 

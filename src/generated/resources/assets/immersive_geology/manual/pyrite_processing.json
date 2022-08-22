@@ -1,0 +1,16 @@
+{
+  "pyrite_blasting": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_metal_oxide_pyrite_to_ingot2"
+      }
+    ]
+  },
+  "pyrite_roasting": {
+    "type": "item_display"
+  },
+  "pyrite_extraction": {
+    "type": "item_display"
+  }
+}

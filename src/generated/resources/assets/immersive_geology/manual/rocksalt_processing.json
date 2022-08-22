@@ -1,0 +1,11 @@
+{
+  "rocksalt_extraction": {
+    "type": "item_display"
+  },
+  "rocksalt_preparation": {
+    "type": "item_display"
+  },
+  "rocksalt_synthesis": {
+    "type": "item_display"
+  }
+}

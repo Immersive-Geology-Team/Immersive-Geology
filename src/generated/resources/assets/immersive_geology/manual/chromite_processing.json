@@ -1,0 +1,13 @@
+{
+  "chromite_extraction": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot5"
+      }
+    ]
+  },
+  "chromite_crystallization": {
+    "type": "item_display"
+  }
+}

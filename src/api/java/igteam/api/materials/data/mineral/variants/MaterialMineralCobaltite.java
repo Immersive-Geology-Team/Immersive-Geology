@@ -11,6 +11,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
@@ -37,7 +38,7 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create(
@@ -67,17 +68,21 @@ public class MaterialMineralCobaltite extends MaterialBaseMineral {
                         200,
                         51200);
 
+                IRecipeBuilder.separating(this).create(
+                        MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
+                        MetalEnum.Platinum.getStack(ItemPattern.dust),
+                        MetalEnum.Osmium.getStack(ItemPattern.dust));
+            }
+        };
+
+        new IGProcessingStage(this, IGStageDesignation.crystallization){
+            @Override
+            protected void describe() {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry" + SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getName() + "_to_crystal",
                         MetalEnum.Cobalt.getStack(ItemPattern.crystal),
                         SlurryEnum.COBALT.getType(FluidEnum.HydrochloricAcid).getFluidTag(FluidPattern.slurry), 250,
                         300, 38400);
-
-                IRecipeBuilder.separating(this).create(
-                        MetalEnum.Platinum.getItemTag(ItemPattern.compound_dust),
-                        MetalEnum.Platinum.getStack(ItemPattern.dust),
-                        MetalEnum.Osmium.getStack(ItemPattern.dust));
-
             }
         };
     }

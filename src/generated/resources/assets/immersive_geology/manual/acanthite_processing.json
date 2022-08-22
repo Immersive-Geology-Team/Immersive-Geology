@@ -1,0 +1,19 @@
+{
+  "acanthite_roasting": {
+    "type": "item_display"
+  },
+  "acanthite_blasting": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_slag_acanthite_to_metal2"
+      }
+    ]
+  },
+  "acanthite_extraction": {
+    "type": "item_display"
+  },
+  "acanthite_leeching": {
+    "type": "item_display"
+  }
+}

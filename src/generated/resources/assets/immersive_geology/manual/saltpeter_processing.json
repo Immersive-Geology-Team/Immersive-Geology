@@ -1,0 +1,11 @@
+{
+  "saltpeter_preparation": {
+    "type": "item_display"
+  },
+  "saltpeter_synthesis": {
+    "type": "item_display"
+  },
+  "saltpeter_extraction": {
+    "type": "item_display"
+  }
+}

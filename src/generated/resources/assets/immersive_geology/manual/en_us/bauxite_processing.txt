@@ -1,0 +1,4 @@
+Bauxite Processing
+Factoring Factories
+<&bauxite_purification> bauxiteArc Smelter Recipe for item.immersiveengineering.ingot_aluminum
+<&bauxite_extraction> bauxite

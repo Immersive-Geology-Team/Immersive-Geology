@@ -11,6 +11,8 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGProcessingMethod;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.client.gui.BloomeryScreen;
 import igteam.immersive_geology.client.gui.ReverberationScreen;
@@ -25,6 +27,7 @@ import igteam.immersive_geology.common.gui.BloomeryContainer;
 import igteam.immersive_geology.common.gui.ReverberationContainer;
 import igteam.immersive_geology.common.multiblocks.*;
 import igteam.immersive_geology.core.lib.IGLib;
+import igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.core.registration.IGTileTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -171,6 +174,7 @@ public class ClientProxy extends ServerProxy {
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY;
     private static Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_MACHINES, IG_CATEGORY_MINERALS, IG_CATEGORY_METALS;
     public void setupManualPages() {
+
         ManualInstance man = ManualHelper.getManual();
 
         IG_CATEGORY = man.getRoot().getOrCreateSubnode(modLoc("main"), 101);
@@ -210,13 +214,22 @@ public class ClientProxy extends ServerProxy {
     private static void mineral_info(int priority){
         ManualInstance man = ManualHelper.getManual();
 
+        int index = 0;
         for (MaterialInterface<?> wrapper : MineralEnum.values()){
             Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_RARITY = IG_CATEGORY_MINERALS.getOrCreateSubnode(modLoc(wrapper.instance().getRarity().name().toLowerCase()),wrapper.instance().getRarity().ordinal());
-
+            Tree.InnerNode<ResourceLocation, ManualEntry> IG_CATEGORY_SPECIFIC_MINERAL = IG_CATEGORY_RARITY.getOrCreateSubnode(modLoc(wrapper.getName().toLowerCase()), index);
             ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
 
+            IGStageDesignation[] stages = IGStageDesignation.values();
+
             builder.readFromFile(modLoc(wrapper.getName()));
-            man.addEntry(IG_CATEGORY_RARITY, builder.create(), priority);
+            man.addEntry(IG_CATEGORY_SPECIFIC_MINERAL, builder.create(), priority);
+
+            builder.readFromFile(modLoc(wrapper.getName() + "_processing"));
+            man.addEntry(IG_CATEGORY_SPECIFIC_MINERAL, builder.create(), priority);
+
+
+            index++;
         }
     }
 

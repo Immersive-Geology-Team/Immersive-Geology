@@ -1,0 +1,8 @@
+{
+  "bauxite_purification": {
+    "type": "item_display"
+  },
+  "bauxite_extraction": {
+    "type": "item_display"
+  }
+}

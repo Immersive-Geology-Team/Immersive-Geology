@@ -1,0 +1,8 @@
+{
+  "alumina_extraction": {
+    "type": "item_display"
+  },
+  "alumina_purification": {
+    "type": "item_display"
+  }
+}

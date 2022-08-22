@@ -12,6 +12,7 @@ import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.pattern.FluidPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -38,7 +39,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Brine and hydroxide production stage")
+        new IGProcessingStage(this, IGStageDesignation.synthesis, "Brine and Hydroxide Production")
         {
             @Override
             protected void describe(){
@@ -65,11 +66,10 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         ItemStack.EMPTY,
                         new FluidStack(FluidEnum.SodiumHydroxide.getFluid(FluidPattern.fluid), 250),
                         100, 12800);
-
             }
         };
 
-        new IGProcessingStage(this,"Hydrochloric production stage") {
+        new IGProcessingStage(this,IGStageDesignation.synthesis, "Hydrochloric Production") {
             @Override
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
@@ -91,7 +91,7 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
                         100, 12800);
             }
         };
-        new IGProcessingStage(this,"Sodium extraction stage") {
+        new IGProcessingStage(this,IGStageDesignation.extraction, "Sodium Extraction") {
             @Override
             protected void describe() {
                 IRecipeBuilder.decompose(this).create(

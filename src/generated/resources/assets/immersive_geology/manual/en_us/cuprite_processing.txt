@@ -1,0 +1,4 @@
+Cuprite Processing
+Factoring Factories
+<&cuprite_extraction> cuprite
+<&cuprite_refinement> cuprite

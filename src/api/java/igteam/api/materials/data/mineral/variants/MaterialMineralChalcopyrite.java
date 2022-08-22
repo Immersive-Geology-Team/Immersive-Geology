@@ -7,6 +7,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
@@ -49,14 +50,9 @@ public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
     @Override
     protected void setupProcessingStages() {
         super.setupProcessingStages();
-
-        new IGProcessingStage(this, "Processing Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction){
             @Override
             protected void describe() {
-                IRecipeBuilder.roast(this).create(
-                        "mineral_" + getName() + "_to_slag",
-                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1,
-                        getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
                 IRecipeBuilder.crushing(this).create( "slag_" +getName() + "_to_dust",
                         getItemTag(ItemPattern.slag),
                         getStack(ItemPattern.dust), 3000, 200);
@@ -64,6 +60,21 @@ public class MaterialMineralChalcopyrite extends MaterialBaseMineral {
                         getParentMaterial().getItemTag(ItemPattern.dust),
                         MetalEnum.Iron.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Copper.getStack(ItemPattern.metal_oxide));
+            }
+        };
+        new IGProcessingStage(this, IGStageDesignation.roasting){
+            @Override
+            protected void describe() {
+                IRecipeBuilder.roast(this).create(
+                        "mineral_" + getName() + "_to_slag",
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1,
+                        getParentMaterial().getStack(ItemPattern.slag), 1000, 1);
+            }
+        };
+        new IGProcessingStage(this, IGStageDesignation.blasting) {
+            @Override
+            protected void describe() {
+
                 IRecipeBuilder.blasting(this).create(
                         "oxide_" + MetalEnum.Copper.getName() + "_to_ingot",
                         MetalEnum.Copper.getItemTag(ItemPattern.metal_oxide),

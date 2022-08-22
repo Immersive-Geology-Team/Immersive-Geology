@@ -1,0 +1,8 @@
+{
+  "cuprite_refinement": {
+    "type": "item_display"
+  },
+  "cuprite_extraction": {
+    "type": "item_display"
+  }
+}

@@ -38,7 +38,7 @@ public class MaterialMineralHubnerite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this,IGStageDesignation.extraction) { //TODO May need to have this broken into other stages, don't know which ones though.
             @Override
             protected void describe() {
                 IRecipeBuilder.crushing(this).create( "crushed_ore_" +getName() + "_to_dust",

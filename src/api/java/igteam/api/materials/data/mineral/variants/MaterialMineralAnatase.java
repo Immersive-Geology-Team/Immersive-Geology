@@ -12,6 +12,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -54,7 +55,7 @@ public class MaterialMineralAnatase extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Leaching stage") {
+        new IGProcessingStage(this, IGStageDesignation.leeching) {
             @Override
             protected void describe() {
 

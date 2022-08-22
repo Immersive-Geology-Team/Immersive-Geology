@@ -7,6 +7,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
@@ -38,7 +39,7 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Roasting Stage") {
+        new IGProcessingStage(this, IGStageDesignation.roasting) {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_metal_oxide",
@@ -46,7 +47,7 @@ public class MaterialMineralPyrite extends MaterialBaseMineral {
 
             }
         };
-        new IGProcessingStage(this, "Blasting Stage") {
+        new IGProcessingStage(this, IGStageDesignation.blasting) {
             @Override
             protected void describe() {
                 IRecipeBuilder.blasting(this).create(

@@ -1,0 +1,3 @@
+Gypsum Processing
+Factoring Factories
+<&gypsum_extraction> gypsum

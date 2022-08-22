@@ -1,0 +1,16 @@
+{
+  "ilmenite_refinement": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_crushed_ore_ilmenite_to_ingot_and_oxide2"
+      }
+    ]
+  },
+  "ilmenite_extraction": {
+    "type": "item_display"
+  },
+  "ilmenite_purification": {
+    "type": "item_display"
+  }
+}

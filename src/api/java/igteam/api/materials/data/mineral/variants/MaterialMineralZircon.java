@@ -5,6 +5,7 @@ import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import net.minecraft.item.Rarity;
 
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class MaterialMineralZircon extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
 

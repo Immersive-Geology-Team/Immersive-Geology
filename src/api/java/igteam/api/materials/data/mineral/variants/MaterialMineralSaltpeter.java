@@ -12,6 +12,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
@@ -37,7 +38,7 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Nitric production stage") {
+        new IGProcessingStage(this, IGStageDesignation.synthesis, "Nitric production stage") {
             @Override
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(

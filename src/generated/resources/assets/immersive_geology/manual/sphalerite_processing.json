@@ -1,0 +1,16 @@
+{
+  "sphalerite_purification": {
+    "type": "item_display"
+  },
+  "sphalerite_refinement": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot6"
+      }
+    ]
+  },
+  "sphalerite_extraction": {
+    "type": "item_display"
+  }
+}

@@ -1,0 +1,6 @@
+Galena Processing
+Factoring Factories
+<&galena_extraction> galena
+<&galena_refinement> galena
+<&galena_blasting> galena can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_lead', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&galena_roasting> galena

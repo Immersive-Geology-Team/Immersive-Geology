@@ -55,14 +55,14 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, IGStageDesignation.extraction) {
+        new IGProcessingStage(this, IGStageDesignation.roasting) {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
                         getParentMaterial().getItemTag(ItemPattern.crushed_ore), 1, getParentMaterial().getStack(ItemPattern.slag),1000, 1);
             }
         };
-        new IGProcessingStage(this,IGStageDesignation.refinement) {
+        new IGProcessingStage(this,IGStageDesignation.blasting) {
             @Override
             protected void describe() {
                 IRecipeBuilder.blasting(this).create(
@@ -71,7 +71,7 @@ public class MaterialMineralAcanthite  extends MaterialBaseMineral {
                         MetalEnum.Silver.getStack(ItemPattern.ingot));
             }
         };
-        new IGProcessingStage(this,"Leeching Stage") {
+        new IGProcessingStage(this,IGStageDesignation.leeching) {
             @Override
             protected void describe() {
                 IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",

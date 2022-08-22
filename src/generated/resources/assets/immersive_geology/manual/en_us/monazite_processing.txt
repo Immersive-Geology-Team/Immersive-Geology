@@ -1,0 +1,5 @@
+Monazite Processing
+Factoring Factories
+<&monazite_purification> monaziteArc Smelter Recipe for item.immersive_geology.dust
+<&monazite_extraction> monazite
+<&monazite_refinement> monazite

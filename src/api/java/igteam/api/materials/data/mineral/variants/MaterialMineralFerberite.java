@@ -8,6 +8,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
@@ -34,7 +35,7 @@ public class MaterialMineralFerberite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 IRecipeBuilder.blasting(this).create(
@@ -53,14 +54,17 @@ public class MaterialMineralFerberite extends MaterialBaseMineral {
                         getItemTag(ItemPattern.dust),
                         MetalEnum.Tungsten.getStack(ItemPattern.metal_oxide),
                         MetalEnum.Iron.getStack(ItemPattern.dust));
+            }
+        };
 
-
+        new IGProcessingStage(this, IGStageDesignation.blasting){
+            @Override
+            protected void describe() {
                 //To be fair, it should be dust, but I'd like not to bother here
                 IRecipeBuilder.blasting(this).create(
                         "metal_oxide_" + MetalEnum.Tungsten.getName() + "_to_ingot",
                         MetalEnum.Tungsten.getItemTag(ItemPattern.metal_oxide),
                         MetalEnum.Tungsten.getStack(ItemPattern.ingot));
-
             }
         };
     }

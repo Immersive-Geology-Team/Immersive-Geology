@@ -1,0 +1,5 @@
+Vanadinite Processing
+Factoring Factories
+<&vanadinite_leeching> vanadiniteArc Smelter Recipe for item.immersive_geology.ingot
+<&vanadinite_extraction> vanadinite
+<&vanadinite_reduction> vanadinite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_lead', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

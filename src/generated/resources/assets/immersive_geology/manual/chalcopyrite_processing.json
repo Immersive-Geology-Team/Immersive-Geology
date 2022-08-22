@@ -1,0 +1,16 @@
+{
+  "chalcopyrite_blasting": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot4"
+      }
+    ]
+  },
+  "chalcopyrite_extraction": {
+    "type": "item_display"
+  },
+  "chalcopyrite_roasting": {
+    "type": "item_display"
+  }
+}

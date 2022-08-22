@@ -1,5 +1,6 @@
 package generators.manual;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.ManualHelper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
@@ -21,11 +22,9 @@ import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
-import igteam.api.processing.methods.IGCraftingMethod;
+import igteam.api.processing.methods.*;
 import net.minecraft.block.Block;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
+import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
@@ -33,6 +32,7 @@ import net.minecraft.util.StringUtils;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.Logger;
+import slimeknights.tconstruct.common.data.tags.ItemTagProvider;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -80,7 +80,8 @@ public class IGManualProvider implements IDataProvider {
             String mineral_name = mineral.getName();
             String title_name = mineral_name.substring(0,1).toUpperCase() + mineral_name.substring(1).toLowerCase();
 
-            ManualPageProvider provider = attemptPageCreation(mineral_name);
+            ManualPageProvider intro_provider = attemptPageCreation(mineral_name);
+            ManualPageProvider processing_provider = attemptPageCreation(mineral_name + "_processing");
 
             ArrayList<ResourceLocation> intro_display_list = new ArrayList<>();
 
@@ -92,7 +93,7 @@ public class IGManualProvider implements IDataProvider {
                 }
             }
 
-            provider.startAnchor(mineral_name + "_introduction")
+            intro_provider.startAnchor(mineral_name + "_introduction")
                     .setType(IGManualType.item_display)
                     .addListElements("items", intro_display_list.toArray(new ResourceLocation[intro_display_list.size()])).closeAnchor();
 
@@ -102,17 +103,73 @@ public class IGManualProvider implements IDataProvider {
             buildMineralIntroPage(intro_text_builder, mineral);
             String intro_text = intro_text_builder.toString();
             mineralIntroPage.attachPage(mineral_name + "_introduction", intro_text);
+            Set<IGProcessingStage> stages = mineral.instance().getStages();
 
-            for (IGProcessingStage stage : mineral.instance().getStages()) {
+            for (IGProcessingStage stage : stages) {
                 String stage_type = stage.getStageName();
-                for (IGProcessingMethod method : stage.getMethods()) {
-                    provider.startAnchor(mineral_name + "_" + stage_type)
-                            .setType(IGManualType.item_display)
-                            .addListElements("items", method.getLocation())
-                            .closeAnchor();
+                ManualTextProvider stageProcessMethod = attemptTextCreation(mineral_name + "_processing").setTitle(title_name + " Processing", "Factoring Factories");
 
-                    ManualTextProvider stageProcessMethod = attemptTextCreation(mineral_name + "_" + stage_type).setTitle(stage_type, method.getRecipeType().getMachineName());
-                    stageProcessMethod.attachPage(mineral_name + "_" + stage_type, "Testing out method and stage attempts");
+                for (IGProcessingMethod method : stage.getMethods()) {
+                    ManualPageProvider.ManualPageAnchor anchor = processing_provider.startAnchor(mineral_name + "_" + stage_type + "_" + method.getRecipeType().name())
+                            .setType(IGManualType.item_display);
+
+                    StringBuilder processing_text = new StringBuilder(mineral_name);
+
+                    if (method instanceof IGBlastingMethod) {
+                        IGBlastingMethod blastingMethod = (IGBlastingMethod) method;
+                        anchor.addListElements("recipes", method.getLocation());
+                        processing_text.append(" can be processed into " + blastingMethod.getOutput().getItem().getName());
+                    } else
+                    if (method instanceof IGCraftingMethod) {
+                        IGCraftingMethod craftingMethod = (IGCraftingMethod) method;
+                        //TODO Make Crafting Page Type
+                        processing_text.append("Crafting Recipe for " + craftingMethod.getResult().getName().getString());
+                    } else
+                    if (method instanceof IGArcSmeltingMethod) {
+                        IGArcSmeltingMethod arcSmeltingMethod = (IGArcSmeltingMethod) method;
+
+                        processing_text.append("Arc Smelter Recipe for " + arcSmeltingMethod.getOutput().getDisplayName().getString());
+                    } else
+                    if (method instanceof IGChemicalMethod) {
+                        IGChemicalMethod chemicalMethod = (IGChemicalMethod) method;
+
+                        processing_text.append("Chemical Vat Recipe for " + chemicalMethod.getItemResult().getDisplayName().toString() + " and " + chemicalMethod.getFluidResult().getDisplayName().getString());
+                    } else
+                    if (method instanceof IGCalcinationMethod) {
+                        IGCalcinationMethod calcinationMethod = (IGCalcinationMethod) method;
+
+                    } else
+                    if (method instanceof IGBloomeryMethod) {
+                        IGBloomeryMethod bloomeryMethod = (IGBloomeryMethod) method;
+
+                    } else
+                    if (method instanceof IGCrystallizationMethod) {
+                        IGCrystallizationMethod crystallizationMethod = (IGCrystallizationMethod) method;
+
+                    } else
+                    if (method instanceof IGHydrojetMethod) {
+                        IGHydrojetMethod hydrojetMethod = (IGHydrojetMethod) method;
+
+                    } else
+                    if (method instanceof IGBasicSmeltingMethod) {
+                        IGBasicSmeltingMethod basicSmeltingMethod = (IGBasicSmeltingMethod) method;
+
+                    } else
+                    if (method instanceof IGRefineryMethod) {
+                        IGRefineryMethod refineryMethod = (IGRefineryMethod) method;
+
+                    } else
+                    if (method instanceof IGRoastingMethod) {
+                        IGRoastingMethod roastingMethod = (IGRoastingMethod) method;
+
+                    } else
+                    if (method instanceof IGSeparatorMethod) {
+                        IGSeparatorMethod separatorMethod = (IGSeparatorMethod) method;
+
+                    }
+                    anchor.closeAnchor();
+
+                    stageProcessMethod.attachPage(mineral_name + "_" + stage_type, processing_text.toString());
                 }
             }
         }

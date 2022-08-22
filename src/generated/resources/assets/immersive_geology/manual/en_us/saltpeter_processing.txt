@@ -1,0 +1,5 @@
+Saltpeter Processing
+Factoring Factories
+<&saltpeter_synthesis> saltpeterArc Smelter Recipe for item.immersive_geology.dust
+<&saltpeter_preparation> saltpeter
+<&saltpeter_extraction> saltpeter

@@ -1,0 +1,19 @@
+{
+  "chalcocite_leeching": {
+    "type": "item_display"
+  },
+  "chalcocite_extraction": {
+    "type": "item_display"
+  },
+  "chalcocite_blasting": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_slag_chalcocite_to_metal2"
+      }
+    ]
+  },
+  "chalcocite_roasting": {
+    "type": "item_display"
+  }
+}

@@ -13,6 +13,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -37,7 +38,8 @@ public class MaterialMineralUnobtania extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Extraction Stage") {
+        //TODO Please dear god, this stage needs to be broken down
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",

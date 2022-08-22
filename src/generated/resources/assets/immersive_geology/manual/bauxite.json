@@ -1,6 +1,6 @@
 {
   "bauxite_introduction": {
-    "type": "immersiveengineering:item_display",
+    "type": "item_display",
     "items": []
   }
 }

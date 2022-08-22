@@ -48,5 +48,4 @@ public abstract class IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return null;
     }
-
 }

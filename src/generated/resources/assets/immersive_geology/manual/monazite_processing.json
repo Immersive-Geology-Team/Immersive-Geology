@@ -1,0 +1,11 @@
+{
+  "monazite_extraction": {
+    "type": "item_display"
+  },
+  "monazite_refinement": {
+    "type": "item_display"
+  },
+  "monazite_purification": {
+    "type": "item_display"
+  }
+}

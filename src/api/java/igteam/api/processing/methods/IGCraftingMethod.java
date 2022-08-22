@@ -100,7 +100,6 @@ public class IGCraftingMethod extends IGProcessingMethod {
                     locBuilder.append(i.getRegistryName().getPath() + "_");
                 }
                 inputLoc = locBuilder.toString() + "shaped";
-                IGApi.getNewLogger().warn("Location Test: " + inputLoc);
             }
         }
 

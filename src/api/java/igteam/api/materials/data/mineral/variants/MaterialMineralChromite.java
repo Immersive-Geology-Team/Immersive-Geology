@@ -11,6 +11,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -36,7 +37,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Iron Extraction") {
+        new IGProcessingStage(this, IGStageDesignation.extraction, "Iron Extraction") {
             @Override
             protected void describe() {
                 IRecipeBuilder.decompose(this).create(
@@ -52,7 +53,7 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
             }
         };
 
-        new IGProcessingStage(this,"Chromium extraction Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction,"Chromium Extraction") {
             @Override
             protected void describe() {
 
@@ -77,7 +78,12 @@ public class MaterialMineralChromite extends MaterialBaseMineral {
                         ItemStack.EMPTY,
                         SlurryEnum.CHROMIUM.getType(FluidEnum.HydrochloricAcid).getFluidStack(FluidPattern.slurry, 250),
                         200, 51200);
+            }
+        };
 
+        new IGProcessingStage(this, IGStageDesignation.crystallization){
+            @Override
+            protected void describe() {
                 IRecipeBuilder.crystalize(this).create(
                         "slurry_" + getName() + "_to_crystal",
                         MetalEnum.Chromium.getStack(ItemPattern.crystal),

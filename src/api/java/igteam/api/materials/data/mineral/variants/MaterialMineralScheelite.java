@@ -12,6 +12,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
@@ -46,7 +47,8 @@ public class MaterialMineralScheelite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Extraction Stage") {
+        //TODO Break Stage Down More
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 IRecipeBuilder.crushing(this).create("crushed_ore_" + getName() + "_to_dust",

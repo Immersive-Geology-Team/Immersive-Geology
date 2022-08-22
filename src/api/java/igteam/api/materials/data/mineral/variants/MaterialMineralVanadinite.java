@@ -13,6 +13,7 @@ import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.materials.pattern.MaterialPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Rarity;
@@ -48,7 +49,7 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Reduction stage")
+        new IGProcessingStage(this, IGStageDesignation.reduction)
         {
             @Override
             protected void describe()
@@ -61,7 +62,9 @@ public class  MaterialMineralVanadinite extends MaterialBaseMineral {
                 );
             }
         };
-        new IGProcessingStage(this,"Chemical Stage") {
+
+        //TODO Break this stage down some more.
+        new IGProcessingStage(this,IGStageDesignation.leeching) {
             @Override
             protected void describe() {
                 IRecipeBuilder.crushing(this).create( "slag_ore_" +getName() + "_to_dust",

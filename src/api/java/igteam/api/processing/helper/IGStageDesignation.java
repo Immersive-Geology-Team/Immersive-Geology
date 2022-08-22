@@ -6,5 +6,11 @@ public enum IGStageDesignation {
     refinement, // get main pure metal
     purification, // get pure metal from side products
     synthesis, // for acids and stuff
-    crystallization
+    reduction,
+    crystallization,
+    roasting,
+    blasting,
+    leeching,
+
+
 }

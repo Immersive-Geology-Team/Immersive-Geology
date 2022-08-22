@@ -1,0 +1,5 @@
+Sphalerite Processing
+Factoring Factories
+<&sphalerite_refinement> sphalerite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&sphalerite_purification> sphalerite
+<&sphalerite_extraction> sphalerite

@@ -7,6 +7,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 
@@ -50,7 +51,7 @@ public class MaterialMineralCassiterite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this, "Processing Stage") {
+        new IGProcessingStage(this, IGStageDesignation.extraction) {
             @Override
             protected void describe() {
                 IRecipeBuilder.blasting(this).create(

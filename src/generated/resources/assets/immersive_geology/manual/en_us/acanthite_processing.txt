@@ -1,0 +1,6 @@
+Acanthite Processing
+Factoring Factories
+<&acanthite_extraction> acanthite
+<&acanthite_roasting> acanthite
+<&acanthite_blasting> acanthite can be processed into TranslatableComponent{key='item.immersiveengineering.ingot_silver', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&acanthite_leeching> acanthite

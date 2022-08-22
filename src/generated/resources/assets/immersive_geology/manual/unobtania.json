@@ -1,6 +1,6 @@
 {
   "unobtania_introduction": {
-    "type": "immersiveengineering:item_display",
+    "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_stone_unobtania_ore"

@@ -1,0 +1,5 @@
+Chalcopyrite Processing
+Factoring Factories
+<&chalcopyrite_extraction> chalcopyrite
+<&chalcopyrite_roasting> chalcopyrite
+<&chalcopyrite_blasting> chalcopyrite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

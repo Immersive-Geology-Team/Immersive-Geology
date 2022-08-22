@@ -1,0 +1,4 @@
+Cobaltite Processing
+Factoring Factories
+<&cobaltite_extraction> cobaltite
+<&cobaltite_crystallization> cobaltite

@@ -1,0 +1,4 @@
+Alumina Processing
+Factoring Factories
+<&alumina_extraction> alumina
+<&alumina_purification> aluminaArc Smelter Recipe for item.immersiveengineering.ingot_aluminum

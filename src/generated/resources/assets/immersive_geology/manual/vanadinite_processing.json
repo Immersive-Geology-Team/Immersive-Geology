@@ -1,0 +1,16 @@
+{
+  "vanadinite_reduction": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_crushed_ore_vanadinite_to_slag_and_lead2"
+      }
+    ]
+  },
+  "vanadinite_extraction": {
+    "type": "item_display"
+  },
+  "vanadinite_leeching": {
+    "type": "item_display"
+  }
+}

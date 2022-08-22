@@ -1,0 +1,19 @@
+{
+  "galena_roasting": {
+    "type": "item_display"
+  },
+  "galena_blasting": {
+    "type": "item_display",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
+      }
+    ]
+  },
+  "galena_extraction": {
+    "type": "item_display"
+  },
+  "galena_refinement": {
+    "type": "item_display"
+  }
+}

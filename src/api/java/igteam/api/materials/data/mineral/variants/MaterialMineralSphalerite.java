@@ -11,6 +11,7 @@ import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -41,7 +42,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
     protected void setupProcessingStages() {
         super.setupProcessingStages();
 
-        new IGProcessingStage(this,"Refining Stage") {
+        new IGProcessingStage(this, IGStageDesignation.refinement) {
             @Override
             protected void describe() {
                 IRecipeBuilder.roast(this).create("mineral_" + getName() + "_to_slag",
@@ -61,7 +62,7 @@ public class MaterialMineralSphalerite extends MaterialBaseMineral {
             }
         };
 
-        new IGProcessingStage(this,"Purification Stage") {
+        new IGProcessingStage(this,IGStageDesignation.purification) {
             @Override
             protected void describe() {
                 IRecipeBuilder.chemical(this).create(
