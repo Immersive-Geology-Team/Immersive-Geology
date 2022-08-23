@@ -32,7 +32,7 @@ public class SecondaryOreDropProperty extends LootFunction {
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(Objects.requireNonNull(lootContext.get(LootParameters.TOOL)));
         BlockState blockStateIn = Objects.requireNonNull(lootContext.get(LootParameters.BLOCK_STATE));
         if (toolStack.canHarvestBlock(blockStateIn)){
-            int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
+            int fortune = Math.min(5,enchantments.getOrDefault(Enchantments.FORTUNE, 0));
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
             Random rand = new Random();
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
