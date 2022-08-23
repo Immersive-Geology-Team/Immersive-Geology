@@ -39,7 +39,6 @@ public class OreDropProperty extends LootFunction {
         BlockState blockStateIn = Objects.requireNonNull(lootContext.get(LootParameters.BLOCK_STATE));
         if (toolStack.canHarvestBlock(blockStateIn))
         {
-            //int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
                 //Tool has silk touch
@@ -48,12 +47,11 @@ public class OreDropProperty extends LootFunction {
                     Block igOreBlock = igItem.getMaterial(MaterialTexture.base).getBlock(BlockPattern.ore, igItem.getMaterial(MaterialTexture.overlay));
                     return new ItemStack(igOreBlock);
                 }
-                return itemStack; //catch return if for some reason the item isn't IGGenericItem
             } else {
                 //Does not have silk touch
                 itemStack.setCount(Math.min(8, harvestLevel + 3));
-                return itemStack;
             }
+            return itemStack; //catch return if for some reason the item isn't IGGenericItem
         }
         return ItemStack.EMPTY;
     }

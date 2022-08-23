@@ -35,7 +35,6 @@ public class ChunkDropProperty extends LootFunction {
         BlockState blockStateIn = Objects.requireNonNull(lootContext.get(LootParameters.BLOCK_STATE));
         if (toolStack.canHarvestBlock(blockStateIn))
         {
-            //int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
                 //Tool has silk touch
