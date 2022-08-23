@@ -40,7 +40,7 @@ public class SecondaryOreDropProperty extends LootFunction {
                 return ItemStack.EMPTY; //To prevent multiple ore blocks when something has a secondary drop.
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.min(8, harvestLevel + rand.nextInt(harvestLevel+1)) + fortune > 0 ? rand.nextInt(fortune+1) : 0);
+                itemStack.setCount(Math.min(8, harvestLevel + rand.nextInt(harvestLevel+1)) + rand.nextInt(fortune+1));
                 return itemStack;
             }
         }
