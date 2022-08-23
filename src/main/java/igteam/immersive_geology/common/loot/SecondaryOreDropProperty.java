@@ -8,16 +8,14 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootFunction;
-import net.minecraft.loot.LootFunctionType;
-import net.minecraft.loot.LootParameters;
+import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 public class SecondaryOreDropProperty extends LootFunction {
@@ -36,12 +34,13 @@ public class SecondaryOreDropProperty extends LootFunction {
         if (toolStack.canHarvestBlock(blockStateIn)){
             int fortune = enchantments.getOrDefault(Enchantments.FORTUNE, 0);
             int harvestLevel = toolStack.getHarvestLevel(ToolType.PICKAXE, null, lootContext.get(LootParameters.BLOCK_STATE));
+            Random rand = new Random();
             if(enchantments.get(Enchantments.SILK_TOUCH) != null){
                 //Tool has silk touch
                 return ItemStack.EMPTY; //To prevent multiple ore blocks when something has a secondary drop.
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.min(8, Math.min(4, harvestLevel) + fortune));
+                itemStack.setCount(Math.min(8, harvestLevel + rand.nextInt(harvestLevel+1)) + fortune > 0 ? rand.nextInt(fortune+1) : 0);
                 return itemStack;
             }
         }

@@ -25,10 +25,5 @@ public class IGOreBlock extends IGGenericBlock {
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
 
-        /*try { //TODO remove if unnecessary, otherwise implement properly
-            int amount = worldIn.getRandom().nextInt(4);
-            ItemEntity item = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), getMaterial(MaterialTexture.base).getStack(ItemPattern.ore_bit, getMaterial(MaterialTexture.overlay), amount));
-            worldIn.addEntity(item);
-        } catch (Exception ignored){}; */
     }
 }
