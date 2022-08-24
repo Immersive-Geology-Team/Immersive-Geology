@@ -1,10 +1,10 @@
 Unobtania Processing
 Factoring Factories
-<&unobtania_extraction_cutting> unobtania
 <&unobtania_extraction_crushing> unobtania
-<&unobtania_extraction_crafting> unobtaniaCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_unobtania
-<&unobtania_extraction_separator> unobtania
 <&unobtania_extraction_chemical> unobtaniaChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
 <&unobtania_extraction_calcination> unobtania
 <&unobtania_extraction_arcsmelting> unobtaniaArc Smelter Recipe for item.immersive_geology.ingot
 <&unobtania_extraction_crystalization> unobtania
+<&unobtania_extraction_cutting> unobtania
+<&unobtania_extraction_crafting> unobtaniaCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_unobtania
+<&unobtania_extraction_separator> unobtania

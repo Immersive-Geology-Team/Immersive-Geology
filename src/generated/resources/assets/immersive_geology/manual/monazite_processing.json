@@ -15,7 +15,7 @@
       }
     ]
   },
-  "monazite_extraction_separator": {
+  "monazite_refinement_calcination": {
     "type": "item_display",
     "items": [
       {
@@ -23,7 +23,7 @@
       }
     ]
   },
-  "monazite_refinement_calcination": {
+  "monazite_extraction_separator": {
     "type": "item_display",
     "items": [
       {

@@ -23,19 +23,19 @@
       }
     ]
   },
-  "cassiterite_extraction_blasting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:blasting/blast_crushed_ore_cassiterite_to_ingot2"
-      }
-    ]
-  },
   "cassiterite_extraction_cutting": {
     "type": "item_display",
     "items": [
       {
         "item": "minecraft:apple"
+      }
+    ]
+  },
+  "cassiterite_extraction_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_crushed_ore_cassiterite_to_ingot2"
       }
     ]
   },

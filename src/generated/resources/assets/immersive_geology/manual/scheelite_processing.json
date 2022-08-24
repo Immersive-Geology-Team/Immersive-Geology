@@ -31,7 +31,7 @@
       }
     ]
   },
-  "scheelite_extraction_cutting": {
+  "scheelite_extraction_chemical": {
     "type": "item_display",
     "items": [
       {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "scheelite_extraction_chemical": {
+  "scheelite_extraction_cutting": {
     "type": "item_display",
     "items": [
       {

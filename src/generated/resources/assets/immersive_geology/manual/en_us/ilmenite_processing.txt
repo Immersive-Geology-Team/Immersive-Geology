@@ -1,8 +1,8 @@
 Ilmenite Processing
 Factoring Factories
-<&ilmenite_purification_chemical> ilmeniteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.titanium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
 <&ilmenite_extraction_cutting> ilmenite
 <&ilmenite_extraction_crushing> ilmenite
 <&ilmenite_extraction_crafting> ilmeniteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_ilmenite
 <&ilmenite_extraction_separator> ilmenite
 <&ilmenite_refinement_blasting> ilmenite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&ilmenite_purification_chemical> ilmeniteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.titanium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
