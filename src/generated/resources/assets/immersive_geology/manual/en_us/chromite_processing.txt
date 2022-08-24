@@ -1,10 +1,10 @@
 Chromite Processing
 Factoring Factories
 <&chromite_crystallization_crystalization> chromite
-<&chromite_extraction_cutting> chromite
 <&chromite_extraction_crushing> chromite
+<&chromite_extraction_chemical> chromiteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
+<&chromite_extraction_cutting> chromite
 <&chromite_extraction_crafting> chromiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_chromite
 <&chromite_extraction_separator> chromite
 <&chromite_extraction_calcination> chromite
 <&chromite_extraction_blasting> chromite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
-<&chromite_extraction_chemical> chromiteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry

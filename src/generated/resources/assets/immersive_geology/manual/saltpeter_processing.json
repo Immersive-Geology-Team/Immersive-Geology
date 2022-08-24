@@ -1,5 +1,5 @@
 {
-  "saltpeter_preparation_crushing": {
+  "saltpeter_synthesis_arcsmelting": {
     "type": "item_display",
     "items": [
       {
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "saltpeter_synthesis_arcsmelting": {
+  "saltpeter_preparation_crushing": {
     "type": "item_display",
     "items": [
       {
