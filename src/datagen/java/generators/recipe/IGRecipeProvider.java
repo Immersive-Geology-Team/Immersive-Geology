@@ -10,8 +10,8 @@ import igteam.api.materials.helper.APIMaterials;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.builders.*;
-import igteam.api.processing.methods.*;
 import igteam.api.processing.helper.IGProcessingMethod;
+import igteam.api.processing.methods.*;
 import igteam.api.veins.IGOreVein;
 import igteam.api.veins.OreVeinGatherer;
 import net.minecraft.data.*;
@@ -24,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
