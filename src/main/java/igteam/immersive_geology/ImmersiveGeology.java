@@ -96,6 +96,7 @@ public class ImmersiveGeology
 		LOGGER.info(String.format("Initializing setup for Immersive Geology V%s%s",IGLib.VERSION, IGLib.MINECRAFT_VERSION));
 
 		proxy.onSetup(event);
+		proxy.init();
 	}
 
 	private void onFinishSetup(final FMLLoadCompleteEvent event){

@@ -1,7 +1,6 @@
 package igteam.immersive_geology.core.proxy;
 
 import blusunrize.immersiveengineering.api.ManualHelper;
-import blusunrize.immersiveengineering.api.energy.ThermoelectricHandler;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.common.gui.GuiHandler;
@@ -23,6 +22,7 @@ import igteam.immersive_geology.client.render.multiblock.*;
 import igteam.immersive_geology.client.render.tileentity.BloomeryRenderer;
 import igteam.immersive_geology.common.block.tileentity.BloomeryTileEntity;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
+import igteam.immersive_geology.common.crafting.recipes.RecipeReloadListener;
 import igteam.immersive_geology.common.gui.BloomeryContainer;
 import igteam.immersive_geology.common.gui.ReverberationContainer;
 import igteam.immersive_geology.common.multiblocks.*;
@@ -74,6 +74,11 @@ import java.util.Set;
 public class ClientProxy extends ServerProxy {
 
     @Override
+    public void init() {
+        MinecraftForge.EVENT_BUS.register(new RecipeReloadListener(null));
+    }
+
+        @Override
     public void onClientSetup(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
         RenderLayerHandler.init(event);
