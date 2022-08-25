@@ -1,9 +1,9 @@
 Bauxite Processing
 Factoring Factories
 <&bauxite_extraction_cutting> bauxite
-<&bauxite_purification_calcination> bauxite
-<&bauxite_purification_chemical> bauxiteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.cryolite], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Air
-<&bauxite_purification_arcsmelting> bauxiteArc Smelter Recipe for item.immersiveengineering.ingot_aluminum
 <&bauxite_extraction_crushing> bauxite
 <&bauxite_extraction_crafting> bauxiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_bauxite
 <&bauxite_extraction_separator> bauxite
+<&bauxite_purification_calcination> bauxite
+<&bauxite_purification_chemical> bauxiteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.cryolite], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and Air
+<&bauxite_purification_arcsmelting> bauxiteArc Smelter Recipe for item.immersiveengineering.ingot_aluminum

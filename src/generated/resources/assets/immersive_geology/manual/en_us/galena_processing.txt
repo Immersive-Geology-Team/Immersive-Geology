@@ -1,8 +1,8 @@
 Galena Processing
 Factoring Factories
-<&galena_roasting_roasting> galena
 <&galena_refinement_arcsmelting> galenaArc Smelter Recipe for item.immersiveengineering.ingot_lead
 <&galena_refinement_calcination> galena
+<&galena_roasting_roasting> galena
 <&galena_extraction_cutting> galena
 <&galena_extraction_crushing> galena
 <&galena_extraction_crafting> galenaCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_galena

@@ -1,5 +1,5 @@
 {
-  "unobtania_extraction_crystalization": {
+  "unobtania_extraction_cutting": {
     "type": "item_display",
     "items": [
       {
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "unobtania_extraction_cutting": {
+  "unobtania_extraction_crystalization": {
     "type": "item_display",
     "items": [
       {

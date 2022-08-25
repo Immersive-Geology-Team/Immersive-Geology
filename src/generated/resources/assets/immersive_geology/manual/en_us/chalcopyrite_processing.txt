@@ -1,8 +1,8 @@
 Chalcopyrite Processing
 Factoring Factories
-<&chalcopyrite_extraction_crushing> chalcopyrite
-<&chalcopyrite_extraction_separator> chalcopyrite
 <&chalcopyrite_roasting_roasting> chalcopyrite
-<&chalcopyrite_blasting_blasting> chalcopyrite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
 <&chalcopyrite_extraction_cutting> chalcopyrite
+<&chalcopyrite_extraction_crushing> chalcopyrite
 <&chalcopyrite_extraction_crafting> chalcopyriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_chalcopyrite
+<&chalcopyrite_extraction_separator> chalcopyrite
+<&chalcopyrite_blasting_blasting> chalcopyrite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

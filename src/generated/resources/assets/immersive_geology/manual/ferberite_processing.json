@@ -7,7 +7,7 @@
       }
     ]
   },
-  "ferberite_extraction_crafting": {
+  "ferberite_extraction_separator": {
     "type": "item_display",
     "items": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "ferberite_extraction_separator": {
+  "ferberite_extraction_crafting": {
     "type": "item_display",
     "items": [
       {

@@ -71,8 +71,13 @@ public class MaterialMetalIron extends MaterialBaseMetal {
                         t,
                         new FluidTagInput(FluidTags.WATER, 80),
                         StoneEnum.Stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
-
                 );
+
+                IRecipeBuilder.bloomery(this).create(
+                        "crushed_ore_" + getName() + "_to_ingot",
+                        getParentMaterial().getItemTag(ItemPattern.crushed_ore), 2,
+                        MetalEnum.Iron.getStack(ItemPattern.ingot),
+                        120);
             }
         };
         new IGProcessingStage(this, IGStageDesignation.extraction) {

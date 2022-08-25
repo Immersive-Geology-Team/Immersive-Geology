@@ -7,6 +7,14 @@
       }
     ]
   },
+  "hubnerite_extraction_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "minecraft:apple"
+      }
+    ]
+  },
   "hubnerite_extraction_cutting": {
     "type": "item_display",
     "items": [
@@ -16,14 +24,6 @@
     ]
   },
   "hubnerite_extraction_crafting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "minecraft:apple"
-      }
-    ]
-  },
-  "hubnerite_extraction_calcination": {
     "type": "item_display",
     "items": [
       {
