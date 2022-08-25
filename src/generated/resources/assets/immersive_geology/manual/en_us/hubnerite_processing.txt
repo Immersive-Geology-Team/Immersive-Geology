@@ -2,10 +2,10 @@ Hubnerite Processing
 Factoring Factories
 <&hubnerite_refinement_chemical> hubneriteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
 <&hubnerite_refinement_crystalization> hubnerite
-<&hubnerite_extraction_cutting> hubnerite
 <&hubnerite_extraction_crushing> hubnerite
-<&hubnerite_extraction_crafting> hubneriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_hubnerite
-<&hubnerite_extraction_separator> hubnerite
 <&hubnerite_extraction_chemical> hubneriteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.tungsten], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
 <&hubnerite_extraction_calcination> hubnerite
 <&hubnerite_extraction_blasting> hubnerite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_tungsten', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&hubnerite_extraction_cutting> hubnerite
+<&hubnerite_extraction_crafting> hubneriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_hubnerite
+<&hubnerite_extraction_separator> hubnerite

@@ -15,7 +15,7 @@
       }
     ]
   },
-  "ullmannite_roasting_roasting": {
+  "ullmannite_leeching_crystalization": {
     "type": "item_display",
     "items": [
       {
@@ -23,7 +23,7 @@
       }
     ]
   },
-  "ullmannite_leeching_crystalization": {
+  "ullmannite_roasting_roasting": {
     "type": "item_display",
     "items": [
       {

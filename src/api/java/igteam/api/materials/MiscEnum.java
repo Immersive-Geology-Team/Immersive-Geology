@@ -18,6 +18,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.fluids.FluidStack;
@@ -150,6 +151,21 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         @Override
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
             return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/dust");
+        }
+
+        @Override
+        protected void setupProcessingStages() {
+            super.setupProcessingStages();
+            new IGProcessingStage(this, IGStageDesignation.preparation) {
+                @Override
+                protected void describe() {
+                    ITag<Item> t = ItemTags.makeWrapperTag("minecraft:coals");
+                    IRecipeBuilder.crushing(this).create( getName() + "_to_dust",
+                            t,
+                            getStack(ItemPattern.dust), 3000, 200);
+
+                }
+            };
         }
     });
 

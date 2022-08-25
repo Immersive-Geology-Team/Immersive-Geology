@@ -2,7 +2,7 @@ Rocksalt Processing
 Factoring Factories
 <&rocksalt_extraction_calcination> rocksalt
 <&rocksalt_extraction_arcsmelting> rocksaltArc Smelter Recipe for item.immersive_geology.dust
-<&rocksalt_synthesis_chemical> rocksaltChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
 <&rocksalt_extraction_crushing> rocksalt
+<&rocksalt_synthesis_chemical> rocksaltChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
 <&rocksalt_preparation_crushing> rocksalt
 <&rocksalt_synthesis_crushing> rocksalt

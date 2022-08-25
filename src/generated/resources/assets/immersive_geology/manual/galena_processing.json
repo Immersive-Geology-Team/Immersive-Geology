@@ -31,14 +31,6 @@
       }
     ]
   },
-  "galena_blasting_blasting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
-      }
-    ]
-  },
   "galena_refinement_arcsmelting": {
     "type": "item_display",
     "items": [
@@ -52,6 +44,14 @@
     "items": [
       {
         "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_blasting_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
       }
     ]
   },

@@ -1,8 +1,8 @@
 Pyrite Processing
 Factoring Factories
+<&pyrite_roasting_roasting> pyrite
 <&pyrite_extraction_cutting> pyrite
 <&pyrite_extraction_crushing> pyrite
 <&pyrite_extraction_crafting> pyriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_pyrite
 <&pyrite_extraction_separator> pyrite
 <&pyrite_blasting_blasting> pyrite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
-<&pyrite_roasting_roasting> pyrite
