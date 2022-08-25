@@ -1,5 +1,5 @@
 {
-  "chalcocite_roasting_roasting": {
+  "chalcocite_extraction_crafting": {
     "type": "item_display",
     "items": [
       {
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "chalcocite_extraction_crafting": {
+  "chalcocite_roasting_roasting": {
     "type": "item_display",
     "items": [
       {

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:crushed_ore_copper"
+    "item": "immersive_geology:crystal_silver"
   },
-  "result": "immersiveengineering:ingot_copper",
+  "result": "immersiveengineering:ingot_silver",
   "experience": 2.0,
   "cookingtime": 100
 }

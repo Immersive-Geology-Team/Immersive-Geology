@@ -1,9 +1,9 @@
 Scheelite Processing
 Factoring Factories
+<&scheelite_extraction_cutting> scheelite
 <&scheelite_extraction_crushing> scheelite
+<&scheelite_extraction_crafting> scheeliteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_scheelite
+<&scheelite_extraction_separator> scheelite
 <&scheelite_extraction_chemical> scheeliteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.dust', args=[material.immersive_geology.gypsum], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
 <&scheelite_extraction_calcination> scheelite
 <&scheelite_extraction_blasting> scheelite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_tungsten', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
-<&scheelite_extraction_cutting> scheelite
-<&scheelite_extraction_crafting> scheeliteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_scheelite
-<&scheelite_extraction_separator> scheelite

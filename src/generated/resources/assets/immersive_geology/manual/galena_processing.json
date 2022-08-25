@@ -7,7 +7,7 @@
       }
     ]
   },
-  "galena_roasting_roasting": {
+  "galena_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "galena_extraction_crushing": {
+  "galena_roasting_roasting": {
     "type": "item_display",
     "items": [
       {
@@ -28,6 +28,14 @@
     "items": [
       {
         "item": "minecraft:apple"
+      }
+    ]
+  },
+  "galena_blasting_blasting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
       }
     ]
   },
@@ -44,14 +52,6 @@
     "items": [
       {
         "item": "minecraft:apple"
-      }
-    ]
-  },
-  "galena_blasting_blasting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:blasting/blast_slag_galena_to_ingot2"
       }
     ]
   },

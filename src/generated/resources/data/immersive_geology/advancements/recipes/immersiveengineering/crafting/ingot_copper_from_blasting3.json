@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:crafting/ingot_silver_from_blasting2"
+      "immersive_geology:crafting/ingot_copper_from_blasting3"
     ]
   },
   "criteria": {
-    "has_crushed_ore_silver": {
+    "has_crystal_copper": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:crushed_ore_silver"
+            "item": "immersive_geology:crystal_copper"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:crafting/ingot_silver_from_blasting2"
+        "recipe": "immersive_geology:crafting/ingot_copper_from_blasting3"
       }
     }
   },
   "requirements": [
     [
-      "has_crushed_ore_silver",
+      "has_crystal_copper",
       "has_the_recipe"
     ]
   ]
