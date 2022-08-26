@@ -11,7 +11,6 @@ import igteam.immersive_geology.common.block.IGGenericBlock;
 import igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import igteam.immersive_geology.common.loot.ChunkDropProperty;
 import igteam.immersive_geology.common.loot.DummyOreDropProperty;
-import igteam.immersive_geology.common.loot.OreDropProperty;
 import igteam.immersive_geology.common.loot.SecondaryOreDropProperty;
 import igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
@@ -90,6 +89,7 @@ public class BlockLootProvider implements IDataProvider {
                                     )
                     );
                 } else {
+                    /* TODO this is no longer used, due to limitations
                     Item oreChunk = stoneMaterial.getItem(ItemPattern.ore_chunk, ore.getMaterial(MaterialTexture.overlay));
                     Item oreBit = stoneMaterial.getItem(ItemPattern.ore_bit, ore.getMaterial(MaterialTexture.overlay));
 
@@ -108,7 +108,7 @@ public class BlockLootProvider implements IDataProvider {
                                             .addEntry(ItemLootEntry.builder(stoneChunk)
                                                     .acceptFunction(ChunkDropProperty.builder()))
                                     )
-                    );
+                    );*/
                 }
             }
 
