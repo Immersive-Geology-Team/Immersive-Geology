@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_silver": {
+    "has_crushed_ore_silver": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:crystal_silver"
+            "item": "immersive_geology:crushed_ore_silver"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_crystal_silver",
+      "has_crushed_ore_silver",
       "has_the_recipe"
     ]
   ]

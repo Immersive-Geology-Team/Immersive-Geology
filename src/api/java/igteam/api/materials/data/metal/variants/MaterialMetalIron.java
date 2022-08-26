@@ -71,8 +71,8 @@ public class MaterialMetalIron extends MaterialBaseMetal {
                         t,
                         new FluidTagInput(FluidTags.WATER, 80),
                         StoneEnum.Stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 5)
-
                 );
+
             }
         };
         new IGProcessingStage(this, IGStageDesignation.extraction) {

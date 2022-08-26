@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/ingot_silver_from_blasting3"
+    ]
+  },
+  "criteria": {
+    "has_crystal_silver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:crystal_silver"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/ingot_silver_from_blasting3"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_silver",
+      "has_the_recipe"
+    ]
+  ]
+}

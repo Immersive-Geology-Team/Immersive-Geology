@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "immersive_geology:crystal_nickel"
+    "item": "immersive_geology:crushed_ore_nickel"
   },
   "result": "immersiveengineering:ingot_nickel",
   "experience": 2.0,

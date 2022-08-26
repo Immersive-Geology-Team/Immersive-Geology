@@ -31,7 +31,7 @@
       }
     ]
   },
-  "anatase_extraction_separator": {
+  "anatase_leeching_crushing": {
     "type": "item_display",
     "items": [
       {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "anatase_leeching_crushing": {
+  "anatase_extraction_separator": {
     "type": "item_display",
     "items": [
       {

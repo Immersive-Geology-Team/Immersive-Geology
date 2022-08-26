@@ -18,6 +18,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.fluids.FluidStack;
@@ -84,6 +85,14 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
                             .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
                             .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
 
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.slab).asItem(), 6, "   ", "   ", "rrr")
+                            .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.stairs).asItem(), 4, "r  ", "rr ", "rrr")
+                            .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
                 }
             };
         }
@@ -111,6 +120,24 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
             return new ResourceLocation(IGApi.MODID, "block/static_block/reinforced_refractory_brick");
         }
+
+        @Override
+        protected void setupProcessingStages() {
+            super.setupProcessingStages();
+
+            new IGProcessingStage(this, IGStageDesignation.preparation) {
+                @Override
+            protected void describe() {
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Reinforced_refractory.getBlock(BlockPattern.slab).asItem(), 6, "   ", "   ", "rrr")
+                            .setInputToCharacter('r', MiscEnum.Reinforced_refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Reinforced_refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Reinforced_refractory.getBlock(BlockPattern.stairs).asItem(), 4, "r  ", "rr ", "rrr")
+                            .setInputToCharacter('r', MiscEnum.Reinforced_refractory.getBlock(BlockPattern.storage).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Reinforced_refractory.getItemTag(ItemPattern.ingot));
+                }
+            };
+        }
     }),
     Coal(new MaterialMiscBase("coal"){
         @Override
@@ -124,6 +151,21 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
         @Override
         public ResourceLocation getTextureLocation(MaterialPattern pattern) {
             return new ResourceLocation(IGApi.MODID, "item/greyscale/metal/dust");
+        }
+
+        @Override
+        protected void setupProcessingStages() {
+            super.setupProcessingStages();
+            new IGProcessingStage(this, IGStageDesignation.preparation) {
+                @Override
+                protected void describe() {
+                    ITag<Item> t = ItemTags.makeWrapperTag("minecraft:coals");
+                    IRecipeBuilder.crushing(this).create( getName() + "_to_dust",
+                            t,
+                            getStack(ItemPattern.dust), 3000, 200);
+
+                }
+            };
         }
     });
 

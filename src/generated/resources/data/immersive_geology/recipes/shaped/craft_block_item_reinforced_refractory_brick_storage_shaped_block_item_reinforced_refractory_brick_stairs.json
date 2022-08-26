@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "r  ",
+    "rr ",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "immersive_geology:block_item_reinforced_refractory_brick_storage"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:block_item_reinforced_refractory_brick_stairs",
+    "count": 4
+  }
+}

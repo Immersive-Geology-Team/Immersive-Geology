@@ -2,7 +2,6 @@ package igteam.immersive_geology.common.crafting.recipes;
 
 import igteam.api.processing.recipe.*;
 import igteam.immersive_geology.ImmersiveGeology;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
@@ -20,30 +19,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
-public class RecipeReloadListener  implements IResourceManagerReloadListener {
+public class RecipeReloadListener implements IResourceManagerReloadListener {
     private final DataPackRegistries dataPackRegistries;
 
-    public RecipeReloadListener(DataPackRegistries dataPackRegistries){
+    public RecipeReloadListener(DataPackRegistries dataPackRegistries) {
         this.dataPackRegistries = dataPackRegistries;
     }
 
-    @Override
-    public void onResourceManagerReload(IResourceManager resourceManager){
-        if(dataPackRegistries != null){
-            lists(dataPackRegistries.getRecipeManager());
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public void recipesUpdated(RecipesUpdatedEvent event){
-        if(!Minecraft.getInstance().isSingleplayer()){
-            lists(event.getRecipeManager());
-        }
-    }
-
-    static void lists(RecipeManager recipeManager){
+    static void lists(RecipeManager recipeManager) {
         Collection<IRecipe<?>> recipes = recipeManager.getRecipes();
-        if(recipes.size() == 0){
+        if (recipes.size() == 0) {
             return;
         }
 
@@ -53,7 +38,7 @@ public class RecipeReloadListener  implements IResourceManagerReloadListener {
         ImmersiveGeology.getNewLogger().info("Loading Chemical Vat Recipes.");
         VatRecipe.recipes = filterRecipes(recipes, VatRecipe.class, VatRecipe.TYPE);
 
-		ImmersiveGeology.getNewLogger().info("Loading Bloomery Recipes");
+        ImmersiveGeology.getNewLogger().info("Loading Bloomery Recipes");
         BloomeryRecipe.recipes = filterRecipes(recipes, BloomeryRecipe.class, BloomeryRecipe.TYPE);
 
         ImmersiveGeology.getNewLogger().info("Loading Crystalizer Recipes.");
@@ -70,10 +55,24 @@ public class RecipeReloadListener  implements IResourceManagerReloadListener {
 
     }
 
-    static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType){
+    static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {
         return recipes.stream()
                 .filter(iRecipe -> iRecipe.getType() == recipeType)
                 .map(recipeClass::cast)
                 .collect(Collectors.toMap(recipe -> recipe.getId(), recipe -> recipe));
+    }
+
+    @Override
+    public void onResourceManagerReload(IResourceManager resourceManager) {
+        if (dataPackRegistries != null) {
+            lists(dataPackRegistries.getRecipeManager());
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void OnRecipesUpdated(RecipesUpdatedEvent event) {
+        if (!Minecraft.getInstance().isSingleplayer()) {
+            lists(event.getRecipeManager());
+        }
     }
 }

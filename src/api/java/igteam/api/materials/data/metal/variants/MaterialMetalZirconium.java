@@ -34,7 +34,7 @@ public class MaterialMetalZirconium extends MaterialBaseMetal {
     @Override
     public ArrayList<MaterialInterface<? extends MaterialBaseMineral>> getSourceMinerals() {
         ArrayList<MaterialInterface<? extends MaterialBaseMineral>> lst = new ArrayList<>();
-        lst.add(MineralEnum.Zircon);
+      //  lst.add(MineralEnum.Zircon);
 
         return lst;
     }

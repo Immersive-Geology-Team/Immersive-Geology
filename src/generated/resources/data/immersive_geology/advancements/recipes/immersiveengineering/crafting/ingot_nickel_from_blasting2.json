@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_nickel": {
+    "has_crushed_ore_nickel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "immersive_geology:crystal_nickel"
+            "item": "immersive_geology:crushed_ore_nickel"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_crystal_nickel",
+      "has_crushed_ore_nickel",
       "has_the_recipe"
     ]
   ]

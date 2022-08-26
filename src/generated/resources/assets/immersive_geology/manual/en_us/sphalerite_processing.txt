@@ -1,12 +1,12 @@
 Sphalerite Processing
 Factoring Factories
-<&sphalerite_refinement_roasting> sphalerite
-<&sphalerite_refinement_crushing> sphalerite
-<&sphalerite_refinement_separator> sphalerite
-<&sphalerite_refinement_blasting> sphalerite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
+<&sphalerite_purification_chemical> sphaleriteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
+<&sphalerite_purification_crystalization> sphalerite
 <&sphalerite_extraction_cutting> sphalerite
 <&sphalerite_extraction_crushing> sphalerite
 <&sphalerite_extraction_crafting> sphaleriteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_sphalerite
 <&sphalerite_extraction_separator> sphalerite
-<&sphalerite_purification_chemical> sphaleriteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
-<&sphalerite_purification_crystalization> sphalerite
+<&sphalerite_refinement_roasting> sphalerite
+<&sphalerite_refinement_crushing> sphalerite
+<&sphalerite_refinement_separator> sphalerite
+<&sphalerite_refinement_blasting> sphalerite can be processed into TranslatableComponent{key='item.minecraft.iron_ingot', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}

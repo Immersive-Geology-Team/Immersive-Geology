@@ -71,7 +71,12 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                         IRecipeBuilder.crafting(this)
                                 .shapeless(stone.getItem(ItemPattern.dirty_crushed_ore, getParentMaterial()), 1, getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()), getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()))
                                 .finializeRecipe("crush_ore_chunks", "has_chunk", getParentMaterial().getItemTag(ItemPattern.ore_chunk, stone.instance()));
-
+                        if (hasOreBit())
+                        {
+                            IRecipeBuilder.crafting(this).shaped( stone.getItem(ItemPattern.ore_chunk, getParentMaterial()), 1, "ooo", "ooo", "ooo")
+                                    .setInputToCharacter('o',  stone.getItem(ItemPattern.ore_bit, getParentMaterial()))
+                                    .finializeRecipe("general_crafting", "has_ore_bit", stone.getItemTag(ItemPattern.ore_bit, getParentMaterial()));
+                        }
                         if (!hasExistingImplementation()) {
                             IRecipeBuilder.crushing(this).create(getName() + "_oreblock_to_chunk",
                                     getItemTag(BlockPattern.ore, stone.instance()), stone.getStack(ItemPattern.ore_chunk, getParentMaterial(), 3), 6000, 200);
@@ -101,7 +106,13 @@ public abstract class MaterialBaseMetal extends MaterialBase {
                     if (!hasExistingImplementation()) {
                     }
 
-                    IRecipeBuilder.basicSmelting(this).create(getItemTag(ItemPattern.dust), getItem(ItemPattern.dust), getItem(ItemPattern.ingot));
+                    IRecipeBuilder.basicSmelting(this)
+                            .create(getItemTag(ItemPattern.dust), getItem(ItemPattern.dust),
+                                    getItem(ItemPattern.ingot));
+
+                    IRecipeBuilder.basicSmelting(this).create(getItemTag(ItemPattern.crushed_ore),
+                            getItem(ItemPattern.crushed_ore),
+                            getItem(ItemPattern.ingot));
                 }
 
                 if (hasCrystal() && (hasDust() || hasExistingImplementation())) {

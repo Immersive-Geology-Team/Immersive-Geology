@@ -39,7 +39,7 @@
       }
     ]
   },
-  "smithsonite_extraction_separator": {
+  "smithsonite_extraction_crystalization": {
     "type": "item_display",
     "items": [
       {
@@ -47,7 +47,7 @@
       }
     ]
   },
-  "smithsonite_extraction_crystalization": {
+  "smithsonite_extraction_separator": {
     "type": "item_display",
     "items": [
       {

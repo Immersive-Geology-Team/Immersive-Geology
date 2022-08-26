@@ -15,7 +15,7 @@
       }
     ]
   },
-  "sphalerite_refinement_separator": {
+  "sphalerite_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
@@ -23,7 +23,7 @@
       }
     ]
   },
-  "sphalerite_extraction_crushing": {
+  "sphalerite_refinement_separator": {
     "type": "item_display",
     "items": [
       {
@@ -47,7 +47,7 @@
       }
     ]
   },
-  "sphalerite_refinement_crushing": {
+  "sphalerite_purification_crystalization": {
     "type": "item_display",
     "items": [
       {
@@ -55,7 +55,7 @@
       }
     ]
   },
-  "sphalerite_purification_crystalization": {
+  "sphalerite_refinement_crushing": {
     "type": "item_display",
     "items": [
       {

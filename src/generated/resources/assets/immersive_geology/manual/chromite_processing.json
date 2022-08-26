@@ -23,7 +23,7 @@
       }
     ]
   },
-  "chromite_extraction_crafting": {
+  "chromite_extraction_calcination": {
     "type": "item_display",
     "items": [
       {
@@ -31,7 +31,7 @@
       }
     ]
   },
-  "chromite_extraction_calcination": {
+  "chromite_extraction_crafting": {
     "type": "item_display",
     "items": [
       {

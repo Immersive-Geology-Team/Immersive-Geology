@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:crafting/iron_ingot_from_blasting2"
+    ]
+  },
+  "criteria": {
+    "has_crushed_ore_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:crushed_ore_iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:crafting/iron_ingot_from_blasting2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crushed_ore_iron",
+      "has_the_recipe"
+    ]
+  ]
+}

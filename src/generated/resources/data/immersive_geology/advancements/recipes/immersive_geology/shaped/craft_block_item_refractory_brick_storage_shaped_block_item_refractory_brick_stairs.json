@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shaped/craft_block_item_refractory_brick_storage_shaped_block_item_refractory_brick_stairs"
+    ]
+  },
+  "criteria": {
+    "refractory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {}
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shaped/craft_block_item_refractory_brick_storage_shaped_block_item_refractory_brick_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "refractory",
+      "has_the_recipe"
+    ]
+  ]
+}
