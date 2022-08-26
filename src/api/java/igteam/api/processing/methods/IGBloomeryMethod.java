@@ -33,10 +33,6 @@ public class IGBloomeryMethod extends IGProcessingMethod {
         this.time = time;
     }
 
-    public String getMethodName() {
-        return methodName;
-    }
-
     public ItemStack getItemResult() {
         return itemResult;
     }
@@ -51,11 +47,16 @@ public class IGBloomeryMethod extends IGProcessingMethod {
 
     @Override
     public ResourceLocation getLocation() {
-        return toRL("bloomery/refine_" + Objects.requireNonNull(getMethodName()));
+        return toRL("bloomery/refine_" + Objects.requireNonNull(getName()));
     }
 
     @Override
     public ITag<?> getGenericInput(){
         return inputTag;
+    }
+
+    @Override
+    public String getName() {
+        return methodName;
     }
 }

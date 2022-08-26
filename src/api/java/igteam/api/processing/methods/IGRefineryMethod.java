@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Objects;
 
-public class IGRefineryMethod  extends IGProcessingMethod {
+public class IGRefineryMethod extends IGProcessingMethod {
     public IGRefineryMethod(IGProcessingStage stage) {
         super(RecipeMethod.Synthesis, stage);
     }
@@ -33,8 +33,6 @@ public class IGRefineryMethod  extends IGProcessingMethod {
         this.fluidInput2 = secondaryFluid;
     }
 
-
-
     public FluidStack getFluidResult() {
         return fluidResult;
     }
@@ -51,6 +49,11 @@ public class IGRefineryMethod  extends IGProcessingMethod {
     @Override
     public ResourceLocation getLocation() {
         return toRL("refinery/synthesize_" + Objects.requireNonNull(getMethodName()));
+    }
+
+    @Override
+    public String getName() {
+        return methodName;
     }
 
 }

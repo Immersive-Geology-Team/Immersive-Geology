@@ -46,4 +46,9 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return inputTag;
     }
+
+    @Override
+    public String getName() {
+        return toPath(output) + "_from_blasting";
+    }
 }

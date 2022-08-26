@@ -102,6 +102,11 @@ public class IGChemicalMethod extends IGProcessingMethod {
         return inputTag;
     }
 
+    @Override
+    public String getName() {
+        return methodName;
+    }
+
     public void create(String s, ItemStack itemStack, FluidTagInput primaryFluid, FluidTagInput secondaryFluid, ItemStack stackResult, FluidStack fluidResult, int time, int energy) {
         methodName = s;
 

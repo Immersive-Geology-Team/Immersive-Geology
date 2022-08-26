@@ -62,4 +62,9 @@ public class IGRoastingMethod extends IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return itemTag;
     }
+
+    @Override
+    public String getName() {
+        return methodName;
+    }
 }

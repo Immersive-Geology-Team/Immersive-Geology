@@ -62,4 +62,9 @@ public class IGCalcinationMethod extends IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return inputTag;
     }
+
+    @Override
+    public String getName() {
+        return methodName;
+    }
 }

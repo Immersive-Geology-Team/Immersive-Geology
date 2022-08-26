@@ -14,6 +14,7 @@ public abstract class IGProcessingMethod {
 
     protected RecipeMethod recipeType;
     protected ResourceLocation location;
+    protected String name = "N/A";
 
     protected IGProcessingMethod(RecipeMethod method, IGProcessingStage stage){
         recipeType = method;
@@ -48,4 +49,6 @@ public abstract class IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return null;
     }
+
+    public abstract String getName();
 }

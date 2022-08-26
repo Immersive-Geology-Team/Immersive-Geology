@@ -46,17 +46,19 @@ public class IGBlastingMethod extends IGProcessingMethod {
     public ItemStack getSlag() {
         return slag;
     }
-    public String getMethodName() {
-        return name;
-    }
 
     @Override
     public ResourceLocation getLocation() {
-        return toRL("blasting/blast_" + Objects.requireNonNull(getMethodName()));
+        return toRL("blasting/blast_" + Objects.requireNonNull(getName()));
     }
 
     @Override
     public ITag<?> getGenericInput(){
         return input;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

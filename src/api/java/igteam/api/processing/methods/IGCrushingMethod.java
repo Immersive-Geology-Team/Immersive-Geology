@@ -49,10 +49,6 @@ public class IGCrushingMethod extends IGProcessingMethod {
     public ITag<Item> getInput() {
         return input;
     }
-    
-    public String getMethodName() {
-        return name;
-    }
 
     public int getEnergy() {
         return energy;
@@ -98,11 +94,16 @@ public class IGCrushingMethod extends IGProcessingMethod {
 
     @Override
     public ResourceLocation getLocation() {
-        return toRL("crushing/crush_" + Objects.requireNonNull(getMethodName()));
+        return toRL("crushing/crush_" + Objects.requireNonNull(getName()));
     }
 
     @Override
     public ITag<?> getGenericInput(){
         return input;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

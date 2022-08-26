@@ -46,10 +46,6 @@ public class IGCrystallizationMethod extends IGProcessingMethod {
 
     public int getEnergy() {return energy;};
 
-    public String getMethodName() {
-        return methodName;
-    }
-
     public ItemStack getItemResult() {
         return itemResult;
     }
@@ -64,11 +60,16 @@ public class IGCrystallizationMethod extends IGProcessingMethod {
 
     @Override
     public ResourceLocation getLocation() {
-        return toRL("crystallization/crystallize_" + Objects.requireNonNull(getMethodName()));
+        return toRL("crystallization/crystallize_" + Objects.requireNonNull(getName()));
     }
 
     @Override
     public ITag<?> getGenericInput(){
         return fluidTag;
+    }
+
+    @Override
+    public String getName() {
+        return methodName;
     }
 }

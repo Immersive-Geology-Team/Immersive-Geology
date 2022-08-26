@@ -107,6 +107,28 @@ public class IGCraftingMethod extends IGProcessingMethod {
         return toRL(type + "/craft_" + inputLoc + "_" + Objects.requireNonNull(getResult().getRegistryName()).getPath());
     }
 
+    @Override
+    public String getName() {
+        String inputLoc = "";
+        if(isShapeless) {
+            if (Arrays.stream(getInputTags()).findFirst().isPresent()) {
+                inputLoc = Objects.requireNonNull(Arrays.stream(getInputTags()).findFirst().get().toString());
+                int startPos = inputLoc.indexOf('/') + 1;
+                inputLoc = inputLoc.substring(startPos).replace("]", "");
+            }
+        } else {
+            List<Item> shapedArray = asList(getCharacterInputMap().values().toArray(new Item[getCharacterInputMap().size()]));
+            if (!shapedArray.isEmpty()) {
+                StringBuilder locBuilder = new StringBuilder();
+                for (Item i : shapedArray) {
+                    locBuilder.append(i.getRegistryName().getPath() + "_");
+                }
+                inputLoc = locBuilder.toString() + "shaped";
+            }
+        }
+        return "craft_" + inputLoc + "_" + Objects.requireNonNull(getResult().getRegistryName()).getPath();
+    }
+
     protected HashMap<Character, Item> inputMap = new HashMap<>();
 
     public IGCraftingMethod setInputToCharacter(Character c, Item item) {
