@@ -51,7 +51,7 @@ public class IGOreBlock extends IGGenericBlock {
                     int harvestLevel = tool.getHarvestLevel(ToolType.PICKAXE, null, state);
                     int fortune = Math.min(5,enchantments.getOrDefault(Enchantments.FORTUNE, 0));
                     Random rand = new Random();
-                    int oreAmount = Math.min(8, harvestLevel + rand.nextInt(harvestLevel+fortune+1));
+                    int oreAmount = Math.min(6, harvestLevel + rand.nextInt(harvestLevel+1));
                     int chunkAmount = 8 - oreAmount;
                     int bitAmount = Math.min(8, harvestLevel + rand.nextInt(harvestLevel+1)) + rand.nextInt((rand.nextInt(fortune+1)+1)*fortune+1);
                     try {
