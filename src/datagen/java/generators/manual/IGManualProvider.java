@@ -131,7 +131,7 @@ public class IGManualProvider implements IDataProvider {
                         anchor.setType(IGManualType.crafting);
                         anchor.addListElements("recipes", method.getLocation());
                         //TODO Make Crafting Page Type
-                        processing_text.append("Crafting Recipe for " + craftingMethod.getResult().getRegistryName().getNamespace());
+                        processing_text.append("Crafting Recipe for " + craftingMethod.getName());
                     } else
                     if (method instanceof IGArcSmeltingMethod) {
                         IGArcSmeltingMethod arcSmeltingMethod = (IGArcSmeltingMethod) method;

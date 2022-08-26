@@ -1,4 +1,4 @@
-Chalcocite
+Generation
 COMMON
 <&chalcocite_introduction> Chalcocite is a material found in the nether.
 It Generates between Y1 and Y255, each deposit is between 6 and 12 blocks.

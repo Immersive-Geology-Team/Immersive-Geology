@@ -159,7 +159,7 @@ public class IGRecipeProvider extends RecipeProvider {
     }
 
     private void buildCrushingMethods(IGCrushingMethod method, Consumer<IFinishedRecipe> consumer) {
-        logger.warn("Attempting to build Crusher Method: " + method.getMethodName());
+        logger.warn("Attempting to build Crusher Method: " + method.getName());
         logger.warn("Output: " + method.getOutput().getItem().getRegistryName().getPath());
         if(!method.getOutput().isEmpty()) {
             CrusherRecipeBuilder recipe = CrusherRecipeBuilder.builder(method.getOutput());
@@ -172,7 +172,7 @@ public class IGRecipeProvider extends RecipeProvider {
             recipe.setEnergy(method.getEnergy());
             recipe.build(consumer, method.getLocation());
         } else {
-            logger.error("Failed to create Crusher Recipe for [" + method.getMethodName() + "]");
+            logger.error("Failed to create Crusher Recipe for [" + method.getName() + "]");
         }
     }
 
@@ -185,7 +185,7 @@ public class IGRecipeProvider extends RecipeProvider {
 
     private void buildCrystallizationMethods(IGCrystallizationMethod method, Consumer<IFinishedRecipe> consumer) {
         logger.info("Data Gen for Crystallization Recipes");
-        logger.info("[" + method.getMethodName() + "] - " + method.getItemResult().getItem().getRegistryName());
+        logger.info("[" + method.getName() + "] - " + method.getItemResult().getItem().getRegistryName());
         CrystalizerRecipeBuilder recipe = CrystalizerRecipeBuilder.builder();
         recipe.addItem("result", method.getItemResult());
         recipe.addFluidInput(method.getFluidInput());
@@ -258,7 +258,7 @@ public class IGRecipeProvider extends RecipeProvider {
 
     private void buildBloomeryMethods(IGBloomeryMethod method, Consumer<IFinishedRecipe> consumer){
         logger.info("Data Gen for Bloomery Recipes");
-        logger.info("[" + method.getMethodName() + "]");
+        logger.info("[" + method.getName() + "]");
         BloomeryRecipeBuilder recipe = BloomeryRecipeBuilder.builder(method.getItemResult(), method.getItemInput());
         recipe.setTime(method.getTime());
         recipe.build(consumer, method.getLocation());

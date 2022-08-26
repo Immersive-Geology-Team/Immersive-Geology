@@ -1,4 +1,4 @@
-Cassiterite
+Generation
 UNCOMMON
 <&cassiterite_introduction> Cassiterite is a material found in the overworld.
 It Generates between Y1 and Y140, each deposit is between 5 and 10 blocks.

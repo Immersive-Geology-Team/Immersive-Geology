@@ -1,6 +1,6 @@
-Gypsum Processing
+Processing
 Factoring Factories
-<&gypsum_extraction_cutting> gypsum
+<&gypsum_extraction_cutting> gypsumMethod: end_stone_gypsum
 <&gypsum_extraction_crushing> gypsum
-<&gypsum_extraction_crafting> gypsumCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_gypsum
+<&gypsum_extraction_crafting> gypsumCrafting Recipe for craft_ore_bit_end_stone_gypsum_shaped_ore_chunk_end_stone_gypsum
 <&gypsum_extraction_separator> gypsum

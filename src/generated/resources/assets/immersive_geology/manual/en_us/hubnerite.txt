@@ -1,4 +1,4 @@
-Hubnerite
+Generation
 RARE
 <&hubnerite_introduction> Hubnerite is a material found in the end.
 It Generates between Y1 and Y90, each deposit is between 4 and 8 blocks.

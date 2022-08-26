@@ -1,7 +1,7 @@
-Saltpeter Processing
+Processing
 Factoring Factories
-<&saltpeter_extraction_crushing> saltpeter
+<&saltpeter_synthesis_chemical> saltpeterMethod: dust_saltpeter_to_acid_and_salt
+<&saltpeter_synthesis_calcination> saltpeterMethod: compound_dust_sodium_to_metal_oxide
+<&saltpeter_synthesis_arcsmelting> saltpeterMethod: metal_oxide_saltpeter_to_dust
 <&saltpeter_preparation_crushing> saltpeter
-<&saltpeter_synthesis_chemical> saltpeterChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.sodium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
-<&saltpeter_synthesis_calcination> saltpeter
-<&saltpeter_synthesis_arcsmelting> saltpeterArc Smelter Recipe for item.immersive_geology.dust
+<&saltpeter_extraction_crushing> saltpeter

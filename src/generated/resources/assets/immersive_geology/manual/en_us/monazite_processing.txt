@@ -1,12 +1,12 @@
-Monazite Processing
+Processing
 Factoring Factories
-<&monazite_extraction_cutting> monazite
-<&monazite_extraction_crushing> monazite
-<&monazite_extraction_crafting> monaziteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_monazite
-<&monazite_extraction_separator> monazite
 <&monazite_refinement_crushing> monazite
-<&monazite_refinement_chemical> monaziteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.neodymium], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.fluid
-<&monazite_refinement_calcination> monazite
-<&monazite_purification_chemical> monaziteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
-<&monazite_purification_crystalization> monazite
-<&monazite_purification_arcsmelting> monaziteArc Smelter Recipe for item.immersive_geology.dust
+<&monazite_refinement_chemical> monaziteMethod: slurry_neodymium_to_compound_dust
+<&monazite_refinement_calcination> monaziteMethod: compound_dust_neodymium_to_metal_oxide
+<&monazite_extraction_cutting> monaziteMethod: end_stone_monazite
+<&monazite_extraction_crushing> monazite
+<&monazite_extraction_crafting> monaziteCrafting Recipe for craft_ore_bit_end_stone_monazite_shaped_ore_chunk_end_stone_monazite
+<&monazite_extraction_separator> monazite
+<&monazite_purification_chemical> monaziteMethod: metal_oxide_neodymium_slurry
+<&monazite_purification_crystalization> monaziteMethod: slurry_hydrofluoric_acid_neodymium_to_crystal
+<&monazite_purification_arcsmelting> monaziteMethod: metal_oxide_monazite_to_dust

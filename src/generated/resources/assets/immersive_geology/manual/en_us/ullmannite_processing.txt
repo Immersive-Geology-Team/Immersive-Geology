@@ -1,9 +1,9 @@
-Ullmannite Processing
+Processing
 Factoring Factories
-<&ullmannite_leeching_chemical> ullmanniteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
-<&ullmannite_leeching_crystalization> ullmannite
-<&ullmannite_extraction_cutting> ullmannite
-<&ullmannite_extraction_crushing> ullmannite
-<&ullmannite_extraction_crafting> ullmanniteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_ullmannite
-<&ullmannite_extraction_separator> ullmannite
 <&ullmannite_roasting_roasting> ullmannite
+<&ullmannite_leeching_chemical> ullmanniteMethod: metal_oxide_nickel_to_slurry
+<&ullmannite_leeching_crystalization> ullmanniteMethod: slurryhydrochloric_acid_nickel_to_crystal
+<&ullmannite_extraction_cutting> ullmanniteMethod: end_stone_ullmannite
+<&ullmannite_extraction_crushing> ullmannite
+<&ullmannite_extraction_crafting> ullmanniteCrafting Recipe for craft_ore_bit_end_stone_ullmannite_shaped_ore_chunk_end_stone_ullmannite
+<&ullmannite_extraction_separator> ullmannite

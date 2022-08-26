@@ -3,7 +3,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },
@@ -11,15 +11,15 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
   "hematite_extraction_crafting": {
-    "type": "item_display",
-    "items": [
+    "type": "crafting",
+    "recipes": [
       {
-        "item": "minecraft:apple"
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_hematite_shaped_ore_chunk_end_stone_hematite2"
       }
     ]
   },
@@ -27,15 +27,15 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_stone_bloomery"
       }
     ]
   },
   "hematite_extraction_blasting": {
-    "type": "crafting",
-    "recipes": [
+    "type": "item_display",
+    "items": [
       {
-        "recipe": "immersive_geology:blasting/blast_crushed_hematite_to_metal2"
+        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },
@@ -43,7 +43,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   }

@@ -1,9 +1,9 @@
-Smithsonite Processing
+Processing
 Factoring Factories
-<&smithsonite_extraction_calcination> smithsonite
-<&smithsonite_extraction_chemical> smithsoniteChemical Vat Recipe for TranslatableComponent{key='block.minecraft.air', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
-<&smithsonite_extraction_crystalization> smithsonite
-<&smithsonite_extraction_cutting> smithsonite
+<&smithsonite_extraction_calcination> smithsoniteMethod: crushed_ore_smithsonite_to_metal_oxide
+<&smithsonite_extraction_chemical> smithsoniteMethod: metal_oxide_zinc_to_slurry
+<&smithsonite_extraction_crystalization> smithsoniteMethod: slurry_sulfuric_acid_zinc_to_crystal
+<&smithsonite_extraction_cutting> smithsoniteMethod: end_stone_smithsonite
 <&smithsonite_extraction_crushing> smithsonite
-<&smithsonite_extraction_crafting> smithsoniteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_smithsonite
+<&smithsonite_extraction_crafting> smithsoniteCrafting Recipe for craft_ore_bit_end_stone_smithsonite_shaped_ore_chunk_end_stone_smithsonite
 <&smithsonite_extraction_separator> smithsonite

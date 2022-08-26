@@ -3,15 +3,15 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
   "alumina_extraction_crafting": {
-    "type": "item_display",
-    "items": [
+    "type": "crafting",
+    "recipes": [
       {
-        "item": "minecraft:apple"
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_alumina_shaped_ore_chunk_end_stone_alumina2"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
@@ -27,7 +27,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_chemicalvat"
       }
     ]
   },
@@ -35,7 +35,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },
@@ -43,7 +43,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
@@ -51,7 +51,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:arc_furnace"
       }
     ]
   }

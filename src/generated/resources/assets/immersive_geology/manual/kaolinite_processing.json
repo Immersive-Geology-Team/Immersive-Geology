@@ -3,15 +3,15 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "minecraft:furnace"
       }
     ]
   },
   "kaolinite_preparation_crafting": {
-    "type": "item_display",
-    "items": [
+    "type": "crafting",
+    "recipes": [
       {
-        "item": "minecraft:apple"
+        "recipe": "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_storage2"
       }
     ]
   }

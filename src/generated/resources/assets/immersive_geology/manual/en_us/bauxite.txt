@@ -1,4 +1,4 @@
-Bauxite
+Generation
 COMMON
 <&bauxite_introduction> Bauxite is a material found in the overworld.
 It Generates between Y1 and Y140, each deposit is between 6 and 12 blocks.

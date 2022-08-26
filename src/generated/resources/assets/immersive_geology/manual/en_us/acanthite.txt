@@ -1,4 +1,4 @@
-Acanthite
+Generation
 UNCOMMON
 <&acanthite_introduction> Acanthite is a material found in the nether.
 It Generates between Y1 and Y255, each deposit is between 5 and 10 blocks.

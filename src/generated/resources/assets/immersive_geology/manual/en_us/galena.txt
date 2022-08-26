@@ -1,4 +1,4 @@
-Galena
+Generation
 COMMON
 <&galena_introduction> Galena is a material found in the nether.
 It Generates between Y1 and Y255, each deposit is between 6 and 12 blocks.

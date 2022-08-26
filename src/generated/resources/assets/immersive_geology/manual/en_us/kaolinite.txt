@@ -1,4 +1,4 @@
-Kaolinite
+Generation
 COMMON
 <&kaolinite_introduction> Kaolinite is a material found in the overworld.
 It Generates between Y30 and Y70, each deposit is between 30 and 46 blocks.

@@ -1,4 +1,4 @@
-Alumina
+Generation
 UNCOMMON
 <&alumina_introduction> Alumina is a material found in the end.
 It Generates between Y1 and Y140, each deposit is between 5 and 10 blocks.

@@ -3,7 +3,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
@@ -27,23 +27,23 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
   "chalcopyrite_blasting_blasting": {
-    "type": "crafting",
-    "recipes": [
+    "type": "item_display",
+    "items": [
       {
-        "recipe": "immersive_geology:blasting/blast_oxide_iron_to_ingot4"
+        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },
   "chalcopyrite_extraction_crafting": {
-    "type": "item_display",
-    "items": [
+    "type": "crafting",
+    "recipes": [
       {
-        "item": "minecraft:apple"
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_chalcopyrite_shaped_ore_chunk_end_stone_chalcopyrite2"
       }
     ]
   }

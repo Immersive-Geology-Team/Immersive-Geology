@@ -1,17 +1,17 @@
 {
-  "saltpeter_preparation_crushing": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "minecraft:apple"
-      }
-    ]
-  },
   "saltpeter_synthesis_arcsmelting": {
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:arc_furnace"
+      }
+    ]
+  },
+  "saltpeter_preparation_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_rotarykiln"
       }
     ]
   },
@@ -27,7 +27,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
@@ -35,7 +35,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_chemicalvat"
       }
     ]
   }

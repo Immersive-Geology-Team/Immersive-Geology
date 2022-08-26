@@ -1,11 +1,10 @@
-Cobaltite Processing
+Processing
 Factoring Factories
-<&cobaltite_extraction_roasting> cobaltite
+<&cobaltite_extraction_cutting> cobaltiteMethod: end_stone_cobaltite
 <&cobaltite_extraction_crushing> cobaltite
-<&cobaltite_extraction_blasting> cobaltite can be processed into TranslatableComponent{key='item.immersive_geology.ingot_cobalt', args=[], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}}
-<&cobaltite_extraction_chemical> cobaltiteChemical Vat Recipe for TranslatableComponent{key='item.immersive_geology.compound_dust', args=[material.immersive_geology.platinum], siblings=[], style=Style{ color=null, bold=null, italic=null, underlined=null, strikethrough=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null, font=minecraft:default}} and fluid.immersive_geology.slurry
+<&cobaltite_extraction_crafting> cobaltiteCrafting Recipe for craft_ore_bit_end_stone_cobaltite_shaped_ore_chunk_end_stone_cobaltite
 <&cobaltite_extraction_separator> cobaltite
-<&cobaltite_extraction_cutting> cobaltite
-<&cobaltite_extraction_crushing> cobaltite
-<&cobaltite_extraction_crafting> cobaltiteCrafting Recipe for item.immersive_geology.ore_chunk_end_stone_cobaltite
-<&cobaltite_crystallization_crystalization> cobaltite
+<&cobaltite_crystallization_crystalization> cobaltiteMethod: slurryhydrochloric_acid_cobalt_to_crystal
+<&cobaltite_extraction_roasting> cobaltite
+<&cobaltite_extraction_blasting> cobaltiteMethod: slag_cobaltite_to_ingot
+<&cobaltite_extraction_chemical> cobaltiteMethod: dust_cobaltite_to_slurry

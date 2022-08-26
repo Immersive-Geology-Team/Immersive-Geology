@@ -1,9 +1,9 @@
 {
   "chalcocite_extraction_crafting": {
-    "type": "item_display",
-    "items": [
+    "type": "crafting",
+    "recipes": [
       {
-        "item": "minecraft:apple"
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_chalcocite_shaped_ore_chunk_end_stone_chalcocite2"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
@@ -27,7 +27,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
@@ -35,7 +35,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },
@@ -43,15 +43,15 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
   "chalcocite_blasting_blasting": {
-    "type": "crafting",
-    "recipes": [
+    "type": "item_display",
+    "items": [
       {
-        "recipe": "immersive_geology:blasting/blast_slag_chalcocite_to_metal2"
+        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },
@@ -59,7 +59,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_chemicalvat"
       }
     ]
   },
@@ -67,7 +67,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_crystallizer"
       }
     ]
   },
@@ -75,7 +75,7 @@
     "type": "item_display",
     "items": [
       {
-        "item": "minecraft:apple"
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   }

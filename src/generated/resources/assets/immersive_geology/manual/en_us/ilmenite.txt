@@ -1,4 +1,4 @@
-Ilmenite
+Generation
 RARE
 <&ilmenite_introduction> Ilmenite is a material found in the overworld.
 It Generates between Y1 and Y90, each deposit is between 4 and 8 blocks.

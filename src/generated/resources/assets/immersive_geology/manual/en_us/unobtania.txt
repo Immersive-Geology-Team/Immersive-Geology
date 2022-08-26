@@ -1,4 +1,4 @@
-Unobtania
+Generation
 EPIC
 <&unobtania_introduction> Unobtania is a material found in the overworld.
 It Generates between Y1 and Y60, each deposit is between 3 and 6 blocks.
