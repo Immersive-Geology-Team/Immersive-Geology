@@ -31,19 +31,19 @@
       }
     ]
   },
-  "anatase_extraction_separator": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
-      }
-    ]
-  },
   "anatase_leeching_crushing": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:crusher"
+      }
+    ]
+  },
+  "anatase_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   }

@@ -1,12 +1,12 @@
 Processing
 Factoring Factories
-<&monazite_purification_chemical> monazite Method: metal_oxide_neodymium_slurry
-<&monazite_purification_crystalization> monazite Method: slurry_hydrofluoric_acid_neodymium_to_crystal
-<&monazite_purification_arcsmelting> monazite Method: metal_oxide_monazite_to_dust
 <&monazite_refinement_crushing> monazite 
-<&monazite_refinement_chemical> monazite Method: slurry_neodymium_to_compound_dust
-<&monazite_refinement_calcination> monazite Method: compound_dust_neodymium_to_metal_oxide
-<&monazite_extraction_cutting> monazite Method: end_stone_monazite
+<&monazite_refinement_chemical> monazite 
+<&monazite_refinement_calcination> monazite 
+<&monazite_extraction_cutting> monazite 
 <&monazite_extraction_crushing> monazite 
-<&monazite_extraction_crafting> monazite Crafting Recipe for craft_ore_bit_end_stone_monazite_shaped_ore_chunk_end_stone_monazite
+<&monazite_extraction_crafting> monazite 
 <&monazite_extraction_separator> monazite 
+<&monazite_purification_chemical> monazite 
+<&monazite_purification_crystalization> monazite 
+<&monazite_purification_arcsmelting> monazite 

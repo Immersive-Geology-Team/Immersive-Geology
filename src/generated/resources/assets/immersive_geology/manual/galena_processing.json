@@ -31,6 +31,14 @@
       }
     ]
   },
+  "galena_blasting_blasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:blast_furnace"
+      }
+    ]
+  },
   "galena_refinement_arcsmelting": {
     "type": "item_display",
     "items": [
@@ -44,14 +52,6 @@
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_rotarykiln"
-      }
-    ]
-  },
-  "galena_blasting_blasting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },

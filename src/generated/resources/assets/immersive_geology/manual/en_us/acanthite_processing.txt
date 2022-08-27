@@ -1,12 +1,12 @@
 Processing
 Factoring Factories
+<&acanthite_blasting_blasting> acanthite 
 <&acanthite_roasting_roasting> acanthite 
-<&acanthite_extraction_cutting> acanthite Method: end_stone_acanthite
-<&acanthite_extraction_crushing> acanthite 
-<&acanthite_extraction_crafting> acanthite Crafting Recipe for craft_ore_bit_end_stone_acanthite_shaped_ore_chunk_end_stone_acanthite
-<&acanthite_extraction_separator> acanthite 
-<&acanthite_blasting_blasting> acanthite Method: slag_acanthite_to_metal
 <&acanthite_leeching_crushing> acanthite 
-<&acanthite_leeching_chemical> acanthite Method: dust_acanthite_to_slurry
-<&acanthite_leeching_crystalization> acanthite Method: slurryhydrochloric_acid_silver_to_crystal
+<&acanthite_leeching_chemical> acanthite 
+<&acanthite_leeching_crystalization> acanthite 
 <&acanthite_leeching_separator> acanthite 
+<&acanthite_extraction_cutting> acanthite 
+<&acanthite_extraction_crushing> acanthite 
+<&acanthite_extraction_crafting> acanthite 
+<&acanthite_extraction_separator> acanthite 

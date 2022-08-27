@@ -1,11 +1,11 @@
 Processing
 Factoring Factories
-<&hubnerite_extraction_cutting> hubnerite Method: end_stone_hubnerite
 <&hubnerite_extraction_crushing> hubnerite 
-<&hubnerite_extraction_crafting> hubnerite Crafting Recipe for craft_ore_bit_end_stone_hubnerite_shaped_ore_chunk_end_stone_hubnerite
+<&hubnerite_extraction_chemical> hubnerite 
+<&hubnerite_extraction_calcination> hubnerite 
+<&hubnerite_extraction_blasting> hubnerite 
+<&hubnerite_refinement_chemical> hubnerite 
+<&hubnerite_refinement_crystalization> hubnerite 
+<&hubnerite_extraction_cutting> hubnerite 
+<&hubnerite_extraction_crafting> hubnerite 
 <&hubnerite_extraction_separator> hubnerite 
-<&hubnerite_extraction_chemical> hubnerite Method: dust_hubnerite_to_slurry
-<&hubnerite_extraction_calcination> hubnerite Method: compound_dust_tungsten_to_metal_oxide
-<&hubnerite_extraction_blasting> hubnerite Method: metal_oxide_tungsten_to_ingot
-<&hubnerite_refinement_chemical> hubnerite Method: slurry_hydrochloric_acid_manganese_to_slurry
-<&hubnerite_refinement_crystalization> hubnerite Method: slurrysulfuric_acid_manganese_to_crystal

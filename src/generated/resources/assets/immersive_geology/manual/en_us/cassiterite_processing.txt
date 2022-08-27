@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&cassiterite_extraction_blasting> cassiterite Method: crushed_ore_cassiterite_to_ingot
-<&cassiterite_extraction_bloomery> cassiterite Method: crushed_ore_cassiterite_to_ingot
-<&cassiterite_extraction_cutting> cassiterite Method: end_stone_cassiterite
+<&cassiterite_extraction_cutting> cassiterite 
 <&cassiterite_extraction_crushing> cassiterite 
-<&cassiterite_extraction_crafting> cassiterite Crafting Recipe for craft_ore_bit_end_stone_cassiterite_shaped_ore_chunk_end_stone_cassiterite
+<&cassiterite_extraction_crafting> cassiterite 
 <&cassiterite_extraction_separator> cassiterite 
+<&cassiterite_extraction_blasting> cassiterite 
+<&cassiterite_extraction_bloomery> cassiterite 

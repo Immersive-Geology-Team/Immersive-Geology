@@ -1,6 +1,6 @@
 Processing
 Factoring Factories
-<&cryolite_extraction_cutting> cryolite Method: end_stone_cryolite
+<&cryolite_extraction_cutting> cryolite 
 <&cryolite_extraction_crushing> cryolite 
-<&cryolite_extraction_crafting> cryolite Crafting Recipe for craft_ore_bit_end_stone_cryolite_shaped_ore_chunk_end_stone_cryolite
+<&cryolite_extraction_crafting> cryolite 
 <&cryolite_extraction_separator> cryolite 
