@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&chalcopyrite_blasting_blasting> chalcopyriteMethod: oxide_iron_to_ingot
-<&chalcopyrite_roasting_roasting> chalcopyrite
-<&chalcopyrite_extraction_cutting> chalcopyriteMethod: end_stone_chalcopyrite
-<&chalcopyrite_extraction_crushing> chalcopyrite
-<&chalcopyrite_extraction_crafting> chalcopyriteCrafting Recipe for craft_ore_bit_end_stone_chalcopyrite_shaped_ore_chunk_end_stone_chalcopyrite
-<&chalcopyrite_extraction_separator> chalcopyrite
+<&chalcopyrite_extraction_crushing> chalcopyrite 
+<&chalcopyrite_extraction_separator> chalcopyrite 
+<&chalcopyrite_blasting_blasting> chalcopyrite Method: oxide_iron_to_ingot
+<&chalcopyrite_roasting_roasting> chalcopyrite 
+<&chalcopyrite_extraction_cutting> chalcopyrite Method: end_stone_chalcopyrite
+<&chalcopyrite_extraction_crafting> chalcopyrite Crafting Recipe for craft_ore_bit_end_stone_chalcopyrite_shaped_ore_chunk_end_stone_chalcopyrite

@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.IGApi;
 import igteam.api.processing.IGProcessingStage;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
@@ -49,6 +50,8 @@ public abstract class IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return null;
     }
+
+    public abstract ItemStack getGenericOutput();
 
     public abstract String getName();
 }

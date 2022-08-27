@@ -106,4 +106,9 @@ public class IGCrushingMethod extends IGProcessingMethod {
     public String getName() {
         return name;
     }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return output;
+    }
 }

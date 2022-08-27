@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&pyrolusite_extraction_cutting> pyrolusiteMethod: end_stone_pyrolusite
-<&pyrolusite_extraction_crushing> pyrolusite
-<&pyrolusite_extraction_crafting> pyrolusiteCrafting Recipe for craft_ore_bit_end_stone_pyrolusite_shaped_ore_chunk_end_stone_pyrolusite
-<&pyrolusite_extraction_separator> pyrolusite
-<&pyrolusite_extraction_chemical> pyrolusiteMethod: slag_pyrolusite_to_slurry
-<&pyrolusite_extraction_crystalization> pyrolusiteMethod: slurry_sulfuric_acid_manganese_to_crystal
+<&pyrolusite_extraction_crushing> pyrolusite 
+<&pyrolusite_extraction_chemical> pyrolusite Method: slag_pyrolusite_to_slurry
+<&pyrolusite_extraction_crystalization> pyrolusite Method: slurry_sulfuric_acid_manganese_to_crystal
+<&pyrolusite_extraction_cutting> pyrolusite Method: end_stone_pyrolusite
+<&pyrolusite_extraction_crafting> pyrolusite Crafting Recipe for craft_ore_bit_end_stone_pyrolusite_shaped_ore_chunk_end_stone_pyrolusite
+<&pyrolusite_extraction_separator> pyrolusite 

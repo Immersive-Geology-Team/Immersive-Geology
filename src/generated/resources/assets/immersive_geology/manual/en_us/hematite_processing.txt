@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&hematite_extraction_blasting> hematiteMethod: crushed_hematite_to_metal
-<&hematite_extraction_bloomery> hematiteMethod: crushed_ore_hematite_to_ingot
-<&hematite_extraction_cutting> hematiteMethod: end_stone_hematite
-<&hematite_extraction_crushing> hematite
-<&hematite_extraction_crafting> hematiteCrafting Recipe for craft_ore_bit_end_stone_hematite_shaped_ore_chunk_end_stone_hematite
-<&hematite_extraction_separator> hematite
+<&hematite_extraction_cutting> hematite Method: end_stone_hematite
+<&hematite_extraction_crushing> hematite 
+<&hematite_extraction_crafting> hematite Crafting Recipe for craft_ore_bit_end_stone_hematite_shaped_ore_chunk_end_stone_hematite
+<&hematite_extraction_separator> hematite 
+<&hematite_extraction_blasting> hematite Method: crushed_hematite_to_metal
+<&hematite_extraction_bloomery> hematite Method: crushed_ore_hematite_to_ingot

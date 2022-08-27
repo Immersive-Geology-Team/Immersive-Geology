@@ -1,9 +1,9 @@
 Processing
 Factoring Factories
-<&alumina_purification_crushing> alumina
-<&alumina_purification_chemical> aluminaMethod: chemical_recipe_aluminum_to_cryolite_dust
-<&alumina_purification_arcsmelting> aluminaMethod: dust_alumina_to_ingot
-<&alumina_extraction_cutting> aluminaMethod: end_stone_alumina
-<&alumina_extraction_crushing> alumina
-<&alumina_extraction_crafting> aluminaCrafting Recipe for craft_ore_bit_end_stone_alumina_shaped_ore_chunk_end_stone_alumina
-<&alumina_extraction_separator> alumina
+<&alumina_purification_crushing> alumina 
+<&alumina_purification_chemical> alumina Method: chemical_recipe_aluminum_to_cryolite_dust
+<&alumina_purification_arcsmelting> alumina Method: dust_alumina_to_ingot
+<&alumina_extraction_cutting> alumina Method: end_stone_alumina
+<&alumina_extraction_crushing> alumina 
+<&alumina_extraction_crafting> alumina Crafting Recipe for craft_ore_bit_end_stone_alumina_shaped_ore_chunk_end_stone_alumina
+<&alumina_extraction_separator> alumina 

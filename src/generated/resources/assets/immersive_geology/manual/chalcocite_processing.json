@@ -1,17 +1,17 @@
 {
-  "chalcocite_extraction_crafting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_chalcocite_shaped_ore_chunk_end_stone_chalcocite2"
-      }
-    ]
-  },
   "chalcocite_roasting_roasting": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
+      }
+    ]
+  },
+  "chalcocite_extraction_crafting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_chalcocite_shaped_ore_chunk_end_stone_chalcocite2"
       }
     ]
   },

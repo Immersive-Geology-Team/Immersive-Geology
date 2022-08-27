@@ -27,7 +27,6 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
     private ItemStack slag, output;
     private List<IngredientWithSize> additives;
     int energy, time;
-
     private String name;
 
     public IGArcSmeltingMethod create(String method_name, ITag<Item> input, int inputAmount, ItemStack output, @Nullable ItemStack iSlag, IngredientWithSize... additives){
@@ -94,6 +93,11 @@ public class IGArcSmeltingMethod extends IGProcessingMethod {
     @Override
     public ITag<?> getGenericInput(){
         return inputTag;
+    }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return output;
     }
 }
 

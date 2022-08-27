@@ -65,6 +65,7 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
 
         IGRegistryProvider.IG_BLOCK_REGISTRY.putIfAbsent(IGRegistrationHolder.getRegistryKey(this), this);
         IGRegistryProvider.IG_ITEM_REGISTRY.putIfAbsent(new ResourceLocation(IGLib.MODID, ItemPattern.block_item.getName() + "_" + getHolderKey()), itemBlock);
+
     }
 
     @Override

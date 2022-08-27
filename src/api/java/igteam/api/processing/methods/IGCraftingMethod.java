@@ -6,6 +6,7 @@ import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 
@@ -142,6 +143,11 @@ public class IGCraftingMethod extends IGProcessingMethod {
 
     public HashMap<Character, Item> getCharacterInputMap() {
         return inputMap;
+    }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return new ItemStack(result);
     }
 
 }

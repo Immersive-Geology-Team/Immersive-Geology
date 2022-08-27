@@ -51,4 +51,9 @@ public class IGBasicSmeltingMethod extends IGProcessingMethod {
     public String getName() {
         return toPath(output) + "_from_blasting";
     }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return new ItemStack(output.asItem());
+    }
 }

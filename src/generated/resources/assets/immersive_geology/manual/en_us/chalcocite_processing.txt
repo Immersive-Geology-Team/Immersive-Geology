@@ -1,12 +1,12 @@
 Processing
 Factoring Factories
-<&chalcocite_extraction_cutting> chalcociteMethod: end_stone_chalcocite
-<&chalcocite_extraction_crushing> chalcocite
-<&chalcocite_extraction_crafting> chalcociteCrafting Recipe for craft_ore_bit_end_stone_chalcocite_shaped_ore_chunk_end_stone_chalcocite
-<&chalcocite_extraction_separator> chalcocite
-<&chalcocite_blasting_blasting> chalcociteMethod: slag_chalcocite_to_metal
-<&chalcocite_roasting_roasting> chalcocite
-<&chalcocite_leeching_crushing> chalcocite
-<&chalcocite_leeching_chemical> chalcociteMethod: dust_chalcocite_to_slurry
-<&chalcocite_leeching_crystalization> chalcociteMethod: slurryhydrochloric_acid_copper_to_crystal
-<&chalcocite_leeching_separator> chalcocite
+<&chalcocite_roasting_roasting> chalcocite 
+<&chalcocite_blasting_blasting> chalcocite Method: slag_chalcocite_to_metal
+<&chalcocite_leeching_crushing> chalcocite 
+<&chalcocite_leeching_chemical> chalcocite Method: dust_chalcocite_to_slurry
+<&chalcocite_leeching_crystalization> chalcocite Method: slurryhydrochloric_acid_copper_to_crystal
+<&chalcocite_leeching_separator> chalcocite 
+<&chalcocite_extraction_cutting> chalcocite Method: end_stone_chalcocite
+<&chalcocite_extraction_crushing> chalcocite 
+<&chalcocite_extraction_crafting> chalcocite Crafting Recipe for craft_ore_bit_end_stone_chalcocite_shaped_ore_chunk_end_stone_chalcocite
+<&chalcocite_extraction_separator> chalcocite 

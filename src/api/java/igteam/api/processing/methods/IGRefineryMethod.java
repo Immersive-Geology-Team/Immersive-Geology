@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGProcessingMethod;
 import igteam.api.processing.helper.RecipeMethod;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -54,6 +55,11 @@ public class IGRefineryMethod extends IGProcessingMethod {
     @Override
     public String getName() {
         return methodName;
+    }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return null;
     }
 
 }

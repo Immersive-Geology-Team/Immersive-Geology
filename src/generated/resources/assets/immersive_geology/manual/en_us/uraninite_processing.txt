@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&uraninite_extraction_cutting> uraniniteMethod: end_stone_uraninite
-<&uraninite_extraction_crushing> uraninite
-<&uraninite_extraction_crafting> uraniniteCrafting Recipe for craft_ore_bit_end_stone_uraninite_shaped_ore_chunk_end_stone_uraninite
-<&uraninite_extraction_separator> uraninite
-<&uraninite_extraction_calcination> uraniniteMethod: crushed_oreuraninite_to_compound_dust
-<&uraninite_extraction_chemical> uraniniteMethod: slurryuraninite_to_metal_dust
+<&uraninite_extraction_calcination> uraninite Method: crushed_oreuraninite_to_compound_dust
+<&uraninite_extraction_chemical> uraninite Method: slurryuraninite_to_metal_dust
+<&uraninite_extraction_cutting> uraninite Method: end_stone_uraninite
+<&uraninite_extraction_crushing> uraninite 
+<&uraninite_extraction_crafting> uraninite Crafting Recipe for craft_ore_bit_end_stone_uraninite_shaped_ore_chunk_end_stone_uraninite
+<&uraninite_extraction_separator> uraninite 

@@ -23,19 +23,19 @@
       }
     ]
   },
-  "cassiterite_extraction_cutting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
-      }
-    ]
-  },
   "cassiterite_extraction_blasting": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:blast_furnace"
+      }
+    ]
+  },
+  "cassiterite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },
