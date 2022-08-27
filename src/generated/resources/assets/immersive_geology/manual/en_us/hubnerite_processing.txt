@@ -4,8 +4,8 @@ Factoring Factories
 <&hubnerite_extraction_chemical> hubnerite 
 <&hubnerite_extraction_calcination> hubnerite 
 <&hubnerite_extraction_blasting> hubnerite 
-<&hubnerite_refinement_chemical> hubnerite 
-<&hubnerite_refinement_crystalization> hubnerite 
 <&hubnerite_extraction_cutting> hubnerite 
 <&hubnerite_extraction_crafting> hubnerite 
 <&hubnerite_extraction_separator> hubnerite 
+<&hubnerite_refinement_chemical> hubnerite 
+<&hubnerite_refinement_crystalization> hubnerite 

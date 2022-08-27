@@ -1,20 +1,20 @@
 {
   "replace": false,
   "values": [
-    "immersive_geology:block_item_zinc_sheetmetal",
-    "immersive_geology:block_item_vanadium_sheetmetal",
-    "immersive_geology:block_item_thorium_sheetmetal",
-    "immersive_geology:block_item_sodium_sheetmetal",
-    "immersive_geology:block_item_titanium_sheetmetal",
-    "immersive_geology:block_item_unobtanium_sheetmetal",
     "immersive_geology:block_item_cobalt_sheetmetal",
     "immersive_geology:block_item_tin_sheetmetal",
-    "immersive_geology:block_item_chromium_sheetmetal",
-    "immersive_geology:block_item_bronze_sheetmetal",
-    "immersive_geology:block_item_osmium_sheetmetal",
-    "immersive_geology:block_item_platinum_sheetmetal",
-    "immersive_geology:block_item_tungsten_sheetmetal",
+    "immersive_geology:block_item_vanadium_sheetmetal",
     "immersive_geology:block_item_neodymium_sheetmetal",
-    "immersive_geology:block_item_manganese_sheetmetal"
+    "immersive_geology:block_item_osmium_sheetmetal",
+    "immersive_geology:block_item_titanium_sheetmetal",
+    "immersive_geology:block_item_manganese_sheetmetal",
+    "immersive_geology:block_item_chromium_sheetmetal",
+    "immersive_geology:block_item_unobtanium_sheetmetal",
+    "immersive_geology:block_item_thorium_sheetmetal",
+    "immersive_geology:block_item_tungsten_sheetmetal",
+    "immersive_geology:block_item_bronze_sheetmetal",
+    "immersive_geology:block_item_platinum_sheetmetal",
+    "immersive_geology:block_item_zinc_sheetmetal",
+    "immersive_geology:block_item_sodium_sheetmetal"
   ]
 }

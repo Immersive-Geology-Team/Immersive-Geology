@@ -1,5 +1,5 @@
 {
-  "fluorite_synthesis_crushing": {
+  "fluorite_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "fluorite_extraction_crushing": {
+  "fluorite_synthesis_crushing": {
     "type": "item_display",
     "items": [
       {

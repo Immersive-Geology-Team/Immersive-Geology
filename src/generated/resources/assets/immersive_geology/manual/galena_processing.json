@@ -7,14 +7,6 @@
       }
     ]
   },
-  "galena_roasting_roasting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
-      }
-    ]
-  },
   "galena_extraction_crushing": {
     "type": "item_display",
     "items": [
@@ -23,19 +15,19 @@
       }
     ]
   },
+  "galena_roasting_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
+      }
+    ]
+  },
   "galena_extraction_separator": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_gravityseparator"
-      }
-    ]
-  },
-  "galena_blasting_blasting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },
@@ -52,6 +44,14 @@
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_rotarykiln"
+      }
+    ]
+  },
+  "galena_blasting_blasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:blast_furnace"
       }
     ]
   },
