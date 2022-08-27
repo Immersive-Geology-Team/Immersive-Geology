@@ -119,4 +119,9 @@ public class IGChemicalMethod extends IGProcessingMethod {
         this.time = time;
         this.energy = energy;
     }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return itemResult;
+    }
 }

@@ -59,4 +59,9 @@ public class IGBloomeryMethod extends IGProcessingMethod {
     public String getName() {
         return methodName;
     }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return itemResult;
+    }
 }

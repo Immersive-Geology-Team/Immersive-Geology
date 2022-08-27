@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&fluorite_extraction_cutting> fluoriteMethod: end_stone_fluorite
-<&fluorite_extraction_crushing> fluorite
-<&fluorite_extraction_crafting> fluoriteCrafting Recipe for craft_ore_bit_end_stone_fluorite_shaped_ore_chunk_end_stone_fluorite
-<&fluorite_extraction_separator> fluorite
-<&fluorite_synthesis_crushing> fluorite
-<&fluorite_synthesis_chemical> fluoriteMethod: dust_fluorite_to_acid
+<&fluorite_synthesis_crushing> fluorite 
+<&fluorite_synthesis_chemical> fluorite Method: dust_fluorite_to_acid
+<&fluorite_extraction_cutting> fluorite Method: end_stone_fluorite
+<&fluorite_extraction_crushing> fluorite 
+<&fluorite_extraction_crafting> fluorite Crafting Recipe for craft_ore_bit_end_stone_fluorite_shaped_ore_chunk_end_stone_fluorite
+<&fluorite_extraction_separator> fluorite 

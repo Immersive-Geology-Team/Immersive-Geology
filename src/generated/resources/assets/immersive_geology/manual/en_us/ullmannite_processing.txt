@@ -1,9 +1,9 @@
 Processing
 Factoring Factories
-<&ullmannite_roasting_roasting> ullmannite
-<&ullmannite_leeching_chemical> ullmanniteMethod: metal_oxide_nickel_to_slurry
-<&ullmannite_leeching_crystalization> ullmanniteMethod: slurryhydrochloric_acid_nickel_to_crystal
-<&ullmannite_extraction_cutting> ullmanniteMethod: end_stone_ullmannite
-<&ullmannite_extraction_crushing> ullmannite
-<&ullmannite_extraction_crafting> ullmanniteCrafting Recipe for craft_ore_bit_end_stone_ullmannite_shaped_ore_chunk_end_stone_ullmannite
-<&ullmannite_extraction_separator> ullmannite
+<&ullmannite_extraction_cutting> ullmannite Method: end_stone_ullmannite
+<&ullmannite_extraction_crushing> ullmannite 
+<&ullmannite_extraction_crafting> ullmannite Crafting Recipe for craft_ore_bit_end_stone_ullmannite_shaped_ore_chunk_end_stone_ullmannite
+<&ullmannite_extraction_separator> ullmannite 
+<&ullmannite_roasting_roasting> ullmannite 
+<&ullmannite_leeching_chemical> ullmannite Method: metal_oxide_nickel_to_slurry
+<&ullmannite_leeching_crystalization> ullmannite Method: slurryhydrochloric_acid_nickel_to_crystal

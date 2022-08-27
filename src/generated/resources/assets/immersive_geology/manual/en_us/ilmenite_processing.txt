@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&ilmenite_purification_chemical> ilmeniteMethod: slurry_ilmenite_to_dust
-<&ilmenite_extraction_cutting> ilmeniteMethod: end_stone_ilmenite
-<&ilmenite_extraction_crushing> ilmenite
-<&ilmenite_extraction_crafting> ilmeniteCrafting Recipe for craft_ore_bit_end_stone_ilmenite_shaped_ore_chunk_end_stone_ilmenite
-<&ilmenite_extraction_separator> ilmenite
-<&ilmenite_refinement_blasting> ilmeniteMethod: crushed_ore_ilmenite_to_ingot_and_oxide
+<&ilmenite_extraction_cutting> ilmenite Method: end_stone_ilmenite
+<&ilmenite_extraction_crushing> ilmenite 
+<&ilmenite_extraction_crafting> ilmenite Crafting Recipe for craft_ore_bit_end_stone_ilmenite_shaped_ore_chunk_end_stone_ilmenite
+<&ilmenite_extraction_separator> ilmenite 
+<&ilmenite_purification_chemical> ilmenite Method: slurry_ilmenite_to_dust
+<&ilmenite_refinement_blasting> ilmenite Method: crushed_ore_ilmenite_to_ingot_and_oxide

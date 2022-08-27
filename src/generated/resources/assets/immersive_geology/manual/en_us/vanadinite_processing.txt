@@ -1,11 +1,11 @@
 Processing
 Factoring Factories
-<&vanadinite_extraction_cutting> vanadiniteMethod: end_stone_vanadinite
-<&vanadinite_extraction_crushing> vanadinite
-<&vanadinite_extraction_crafting> vanadiniteCrafting Recipe for craft_ore_bit_end_stone_vanadinite_shaped_ore_chunk_end_stone_vanadinite
-<&vanadinite_extraction_separator> vanadinite
-<&vanadinite_leeching_crushing> vanadinite
-<&vanadinite_leeching_chemical> vanadiniteMethod: dust_vanadinite_to_vanadium_compound_dust
-<&vanadinite_leeching_calcination> vanadiniteMethod: compound_dust_vanadium_to_metal_oxide
-<&vanadinite_leeching_arcsmelting> vanadiniteMethod: metal_oxide_vanadinite_to_dust
-<&vanadinite_reduction_blasting> vanadiniteMethod: crushed_ore_vanadinite_to_slag_and_lead
+<&vanadinite_reduction_blasting> vanadinite Method: crushed_ore_vanadinite_to_slag_and_lead
+<&vanadinite_leeching_crushing> vanadinite 
+<&vanadinite_leeching_chemical> vanadinite Method: dust_vanadinite_to_vanadium_compound_dust
+<&vanadinite_leeching_calcination> vanadinite Method: compound_dust_vanadium_to_metal_oxide
+<&vanadinite_leeching_arcsmelting> vanadinite Method: metal_oxide_vanadinite_to_dust
+<&vanadinite_extraction_cutting> vanadinite Method: end_stone_vanadinite
+<&vanadinite_extraction_crushing> vanadinite 
+<&vanadinite_extraction_crafting> vanadinite Crafting Recipe for craft_ore_bit_end_stone_vanadinite_shaped_ore_chunk_end_stone_vanadinite
+<&vanadinite_extraction_separator> vanadinite 

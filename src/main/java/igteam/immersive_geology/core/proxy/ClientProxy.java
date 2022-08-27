@@ -232,7 +232,7 @@ public class ClientProxy extends ServerProxy {
 
             builder.readFromFile(modLoc(wrapper.getName() + "_processing"));
             man.addEntry(IG_CATEGORY_SPECIFIC_MINERAL, builder.create(), priority);
-
+            
 
             index++;
         }

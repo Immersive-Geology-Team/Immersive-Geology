@@ -1,7 +1,7 @@
 Processing
 Factoring Factories
-<&saltpeter_synthesis_chemical> saltpeterMethod: dust_saltpeter_to_acid_and_salt
-<&saltpeter_synthesis_calcination> saltpeterMethod: compound_dust_sodium_to_metal_oxide
-<&saltpeter_synthesis_arcsmelting> saltpeterMethod: metal_oxide_saltpeter_to_dust
-<&saltpeter_preparation_crushing> saltpeter
-<&saltpeter_extraction_crushing> saltpeter
+<&saltpeter_preparation_crushing> saltpeter 
+<&saltpeter_synthesis_chemical> saltpeter Method: dust_saltpeter_to_acid_and_salt
+<&saltpeter_synthesis_calcination> saltpeter Method: compound_dust_sodium_to_metal_oxide
+<&saltpeter_synthesis_arcsmelting> saltpeter Method: metal_oxide_saltpeter_to_dust
+<&saltpeter_extraction_crushing> saltpeter 

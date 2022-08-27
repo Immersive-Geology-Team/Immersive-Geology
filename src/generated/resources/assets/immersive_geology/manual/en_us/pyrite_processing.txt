@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&pyrite_extraction_cutting> pyriteMethod: end_stone_pyrite
-<&pyrite_extraction_crushing> pyrite
-<&pyrite_extraction_crafting> pyriteCrafting Recipe for craft_ore_bit_end_stone_pyrite_shaped_ore_chunk_end_stone_pyrite
-<&pyrite_extraction_separator> pyrite
-<&pyrite_blasting_blasting> pyriteMethod: metal_oxide_pyrite_to_ingot
-<&pyrite_roasting_roasting> pyrite
+<&pyrite_roasting_roasting> pyrite 
+<&pyrite_extraction_cutting> pyrite Method: end_stone_pyrite
+<&pyrite_extraction_crushing> pyrite 
+<&pyrite_extraction_crafting> pyrite Crafting Recipe for craft_ore_bit_end_stone_pyrite_shaped_ore_chunk_end_stone_pyrite
+<&pyrite_extraction_separator> pyrite 
+<&pyrite_blasting_blasting> pyrite Method: metal_oxide_pyrite_to_ingot

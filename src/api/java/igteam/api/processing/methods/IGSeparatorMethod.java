@@ -58,4 +58,9 @@ public class IGSeparatorMethod extends IGProcessingMethod {
     public ITag<?> getGenericInput(){
         return input;
     }
+
+    @Override
+    public ItemStack getGenericOutput() {
+        return result;
+    }
 }

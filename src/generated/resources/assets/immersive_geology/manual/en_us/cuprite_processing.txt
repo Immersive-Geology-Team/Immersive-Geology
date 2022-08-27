@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&cuprite_extraction_cutting> cupriteMethod: end_stone_cuprite
-<&cuprite_extraction_crushing> cuprite
-<&cuprite_extraction_crafting> cupriteCrafting Recipe for craft_ore_bit_end_stone_cuprite_shaped_ore_chunk_end_stone_cuprite
-<&cuprite_extraction_separator> cuprite
-<&cuprite_refinement_blasting> cupriteMethod: crushed_ore_cuprite_to_ingot
-<&cuprite_refinement_bloomery> cupriteMethod: crushed_ore_cuprite_to_ingot
+<&cuprite_refinement_blasting> cuprite Method: crushed_ore_cuprite_to_ingot
+<&cuprite_refinement_bloomery> cuprite Method: crushed_ore_cuprite_to_ingot
+<&cuprite_extraction_cutting> cuprite Method: end_stone_cuprite
+<&cuprite_extraction_crushing> cuprite 
+<&cuprite_extraction_crafting> cuprite Crafting Recipe for craft_ore_bit_end_stone_cuprite_shaped_ore_chunk_end_stone_cuprite
+<&cuprite_extraction_separator> cuprite 

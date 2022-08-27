@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&ferberite_blasting_blasting> ferberiteMethod: metal_oxide_tungsten_to_ingot
-<&ferberite_extraction_blasting> ferberiteMethod: crushed_ore_ferberite_to_slag
-<&ferberite_extraction_crushing> ferberite
-<&ferberite_extraction_separator> ferberite
-<&ferberite_extraction_cutting> ferberiteMethod: end_stone_ferberite
-<&ferberite_extraction_crafting> ferberiteCrafting Recipe for craft_ore_bit_end_stone_ferberite_shaped_ore_chunk_end_stone_ferberite
+<&ferberite_blasting_blasting> ferberite Method: metal_oxide_tungsten_to_ingot
+<&ferberite_extraction_blasting> ferberite Method: crushed_ore_ferberite_to_slag
+<&ferberite_extraction_crushing> ferberite 
+<&ferberite_extraction_separator> ferberite 
+<&ferberite_extraction_cutting> ferberite Method: end_stone_ferberite
+<&ferberite_extraction_crafting> ferberite Crafting Recipe for craft_ore_bit_end_stone_ferberite_shaped_ore_chunk_end_stone_ferberite
