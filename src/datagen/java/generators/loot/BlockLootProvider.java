@@ -1,7 +1,9 @@
 package generators.loot;
 
+import blusunrize.immersiveengineering.common.util.loot.DropInventoryLootEntry;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import igteam.api.main.IGMultiblockProvider;
 import igteam.api.materials.MineralEnum;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.helper.MaterialTexture;
@@ -29,6 +31,9 @@ import net.minecraft.loot.conditions.SurvivesExplosion;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+
+//I feel bad for this, but either this or copy-paste class. My apologies, IE team, ~UnSchtalch
+import blusunrize.immersiveengineering.common.util.loot.MBOriginalBlockLootEntry;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -112,6 +117,7 @@ public class BlockLootProvider implements IDataProvider {
                 }
             }
 
+
             if(b instanceof IGGenericBlock){
                 IGGenericBlock genericBlock = (IGGenericBlock) b;
                 BlockPattern pattern = genericBlock.getPattern();
@@ -129,9 +135,33 @@ public class BlockLootProvider implements IDataProvider {
                 }
             }
 
+        registerMultiblockDrop(IGMultiblockProvider.chemicalvat);
+        registerMultiblockDrop(IGMultiblockProvider.crystallizer);
+        registerMultiblockDrop(IGMultiblockProvider.rotarykiln);
+        registerMultiblockDrop(IGMultiblockProvider.hydrojet_cutter);
+        registerMultiblockDrop(IGMultiblockProvider.reverberation_furnace);
 //                        functionTable.put(b, BlockLootProvider::genRegular);
 
         }
+    }
+
+    private LootPool.Builder createPoolBuilder() {
+        return LootPool.builder().acceptCondition(SurvivesExplosion.builder());
+    }
+
+    private LootPool.Builder dropOriginalBlock() {
+        return this.createPoolBuilder().addEntry(MBOriginalBlockLootEntry.builder());
+    }
+    private LootPool.Builder dropInv() {
+        return this.createPoolBuilder().addEntry(DropInventoryLootEntry.builder());
+    }
+
+    private void registerMultiblockDrop(Block b)
+    {
+        LootTable.Builder builder = LootTable.builder();
+        builder.addLootPool(dropOriginalBlock());
+        builder.addLootPool(dropInv());
+        functionTable.put(b, (block) -> builder);
     }
 
     @Override
