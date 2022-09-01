@@ -2,6 +2,12 @@ Processing
 Factoring Factories
 <&pyrolusite_extraction_cutting> pyrolusite 
 <&pyrolusite_extraction_crushing> pyrolusite 
+<<<<<<< HEAD
+=======
+<&pyrolusite_extraction_chemical> pyrolusite 
+<&pyrolusite_extraction_crystalization> pyrolusite 
+<&pyrolusite_extraction_cutting> pyrolusite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&pyrolusite_extraction_crafting> pyrolusite 
 <&pyrolusite_extraction_separator> pyrolusite 
 <&pyrolusite_extraction_chemical> pyrolusite 

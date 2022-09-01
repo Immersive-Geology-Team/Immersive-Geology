@@ -1,8 +1,13 @@
 Processing
 Factoring Factories
+<<<<<<< HEAD
 <&fluorite_synthesis_crushing> fluorite 
 <&fluorite_synthesis_chemical> fluorite 
+=======
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&fluorite_extraction_cutting> fluorite 
 <&fluorite_extraction_crushing> fluorite 
 <&fluorite_extraction_crafting> fluorite 
 <&fluorite_extraction_separator> fluorite 
+<&fluorite_synthesis_crushing> fluorite 
+<&fluorite_synthesis_chemical> fluorite 

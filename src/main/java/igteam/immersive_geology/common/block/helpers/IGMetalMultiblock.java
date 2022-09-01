@@ -2,6 +2,8 @@ package igteam.immersive_geology.common.block.helpers;
 
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
+import blusunrize.immersiveengineering.common.blocks.IEBaseTileEntity;
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileEntity;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalMultiblockBlock;
 import igteam.immersive_geology.common.item.IGGenericBlockItem;
@@ -16,15 +18,19 @@ import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.materials.pattern.MaterialPattern;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.loading.FMLLoader;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends MetalMultiblockBlock<T> implements IGBlockType {
@@ -103,4 +109,11 @@ public class IGMetalMultiblock<T extends MultiblockPartTileEntity<T>> extends Me
     public Block getBlock() {
         return this;
     }
+
+    @Override
+    public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity tile, ItemStack stack) {
+        super.harvestBlock(world, player, pos, state,tile, stack);
+    }
+
+
 }

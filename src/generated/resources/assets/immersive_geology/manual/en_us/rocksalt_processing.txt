@@ -1,8 +1,16 @@
 Processing
 Factoring Factories
 <&rocksalt_synthesis_chemical> rocksalt 
+<<<<<<< HEAD
 <&rocksalt_extraction_calcination> rocksalt 
 <&rocksalt_extraction_arcsmelting> rocksalt 
 <&rocksalt_synthesis_crushing> rocksalt 
 <&rocksalt_extraction_crushing> rocksalt 
 <&rocksalt_preparation_crushing> rocksalt 
+=======
+<&rocksalt_extraction_crushing> rocksalt 
+<&rocksalt_preparation_crushing> rocksalt 
+<&rocksalt_extraction_calcination> rocksalt 
+<&rocksalt_extraction_arcsmelting> rocksalt 
+<&rocksalt_synthesis_crushing> rocksalt 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f

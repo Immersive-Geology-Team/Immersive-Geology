@@ -4,8 +4,12 @@ Factoring Factories
 <&vanadinite_leeching_chemical> vanadinite 
 <&vanadinite_leeching_calcination> vanadinite 
 <&vanadinite_leeching_arcsmelting> vanadinite 
+<<<<<<< HEAD
 <&vanadinite_reduction_blasting> vanadinite 
+=======
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&vanadinite_extraction_cutting> vanadinite 
 <&vanadinite_extraction_crushing> vanadinite 
 <&vanadinite_extraction_crafting> vanadinite 
 <&vanadinite_extraction_separator> vanadinite 
+<&vanadinite_reduction_blasting> vanadinite 

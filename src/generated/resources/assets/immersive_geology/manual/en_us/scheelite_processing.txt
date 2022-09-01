@@ -2,6 +2,13 @@ Processing
 Factoring Factories
 <&scheelite_extraction_cutting> scheelite 
 <&scheelite_extraction_crushing> scheelite 
+<<<<<<< HEAD
+=======
+<&scheelite_extraction_chemical> scheelite 
+<&scheelite_extraction_calcination> scheelite 
+<&scheelite_extraction_blasting> scheelite 
+<&scheelite_extraction_cutting> scheelite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&scheelite_extraction_crafting> scheelite 
 <&scheelite_extraction_separator> scheelite 
 <&scheelite_extraction_chemical> scheelite 

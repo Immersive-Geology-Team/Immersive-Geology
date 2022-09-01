@@ -1,8 +1,15 @@
 Processing
 Factoring Factories
+<<<<<<< HEAD
 <&pyrite_roasting_roasting> pyrite 
+=======
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&pyrite_blasting_blasting> pyrite 
 <&pyrite_extraction_cutting> pyrite 
 <&pyrite_extraction_crushing> pyrite 
 <&pyrite_extraction_crafting> pyrite 
 <&pyrite_extraction_separator> pyrite 
+<<<<<<< HEAD
+=======
+<&pyrite_roasting_roasting> pyrite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f

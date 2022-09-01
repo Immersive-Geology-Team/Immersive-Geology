@@ -1,12 +1,24 @@
 Processing
 Factoring Factories
+<<<<<<< HEAD
 <&monazite_refinement_crushing> monazite 
 <&monazite_refinement_chemical> monazite 
 <&monazite_refinement_calcination> monazite 
+=======
+<&monazite_purification_chemical> monazite 
+<&monazite_purification_crystalization> monazite 
+<&monazite_purification_arcsmelting> monazite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&monazite_extraction_cutting> monazite 
 <&monazite_extraction_crushing> monazite 
 <&monazite_extraction_crafting> monazite 
 <&monazite_extraction_separator> monazite 
+<<<<<<< HEAD
 <&monazite_purification_chemical> monazite 
 <&monazite_purification_crystalization> monazite 
 <&monazite_purification_arcsmelting> monazite 
+=======
+<&monazite_refinement_crushing> monazite 
+<&monazite_refinement_chemical> monazite 
+<&monazite_refinement_calcination> monazite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f

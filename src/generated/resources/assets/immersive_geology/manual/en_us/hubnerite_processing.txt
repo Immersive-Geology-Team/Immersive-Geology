@@ -1,7 +1,10 @@
 Processing
 Factoring Factories
+<<<<<<< HEAD
 <&hubnerite_refinement_chemical> hubnerite 
 <&hubnerite_refinement_crystalization> hubnerite 
+=======
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&hubnerite_extraction_crushing> hubnerite 
 <&hubnerite_extraction_chemical> hubnerite 
 <&hubnerite_extraction_calcination> hubnerite 
@@ -9,3 +12,8 @@ Factoring Factories
 <&hubnerite_extraction_cutting> hubnerite 
 <&hubnerite_extraction_crafting> hubnerite 
 <&hubnerite_extraction_separator> hubnerite 
+<<<<<<< HEAD
+=======
+<&hubnerite_refinement_chemical> hubnerite 
+<&hubnerite_refinement_crystalization> hubnerite 
+>>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
