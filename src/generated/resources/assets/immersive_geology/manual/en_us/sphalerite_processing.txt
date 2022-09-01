@@ -1,12 +1,12 @@
 Processing
 Factoring Factories
+<&sphalerite_purification_chemical> sphalerite 
+<&sphalerite_purification_crystalization> sphalerite 
+<&sphalerite_extraction_cutting> sphalerite 
+<&sphalerite_extraction_crushing> sphalerite 
+<&sphalerite_extraction_crafting> sphalerite 
+<&sphalerite_extraction_separator> sphalerite 
 <&sphalerite_refinement_roasting> sphalerite 
 <&sphalerite_refinement_crushing> sphalerite 
 <&sphalerite_refinement_separator> sphalerite 
-<&sphalerite_refinement_blasting> sphalerite Method: oxide_iron_to_ingot
-<&sphalerite_extraction_cutting> sphalerite Method: end_stone_sphalerite
-<&sphalerite_extraction_crushing> sphalerite 
-<&sphalerite_extraction_crafting> sphalerite Crafting Recipe for craft_ore_bit_end_stone_sphalerite_shaped_ore_chunk_end_stone_sphalerite
-<&sphalerite_extraction_separator> sphalerite 
-<&sphalerite_purification_chemical> sphalerite Method: metal_oxide_zinc_to_slurry
-<&sphalerite_purification_crystalization> sphalerite Method: slurry_sulfuric_acid_zinc_to_crystal
+<&sphalerite_refinement_blasting> sphalerite 

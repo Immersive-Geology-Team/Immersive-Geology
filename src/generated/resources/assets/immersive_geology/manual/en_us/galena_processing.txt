@@ -1,10 +1,10 @@
 Processing
 Factoring Factories
-<&galena_refinement_arcsmelting> galena Method: slag_galena_to_metal_and_compound_dust
-<&galena_refinement_calcination> galena Method: compound_dust_silver_to_dust
+<&galena_blasting_blasting> galena 
 <&galena_roasting_roasting> galena 
-<&galena_extraction_cutting> galena Method: end_stone_galena
+<&galena_extraction_cutting> galena 
 <&galena_extraction_crushing> galena 
-<&galena_extraction_crafting> galena Crafting Recipe for craft_ore_bit_end_stone_galena_shaped_ore_chunk_end_stone_galena
+<&galena_extraction_crafting> galena 
 <&galena_extraction_separator> galena 
-<&galena_blasting_blasting> galena Method: slag_galena_to_ingot
+<&galena_refinement_arcsmelting> galena 
+<&galena_refinement_calcination> galena 

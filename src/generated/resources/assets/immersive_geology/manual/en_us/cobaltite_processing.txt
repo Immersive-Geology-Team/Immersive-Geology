@@ -2,9 +2,9 @@ Processing
 Factoring Factories
 <&cobaltite_extraction_roasting> cobaltite 
 <&cobaltite_extraction_crushing> cobaltite 
-<&cobaltite_extraction_blasting> cobaltite Method: slag_cobaltite_to_ingot
-<&cobaltite_extraction_chemical> cobaltite Method: dust_cobaltite_to_slurry
+<&cobaltite_extraction_blasting> cobaltite 
+<&cobaltite_extraction_chemical> cobaltite 
 <&cobaltite_extraction_separator> cobaltite 
-<&cobaltite_crystallization_crystalization> cobaltite Method: slurryhydrochloric_acid_cobalt_to_crystal
-<&cobaltite_extraction_cutting> cobaltite Method: end_stone_cobaltite
-<&cobaltite_extraction_crafting> cobaltite Crafting Recipe for craft_ore_bit_end_stone_cobaltite_shaped_ore_chunk_end_stone_cobaltite
+<&cobaltite_crystallization_crystalization> cobaltite 
+<&cobaltite_extraction_cutting> cobaltite 
+<&cobaltite_extraction_crafting> cobaltite 

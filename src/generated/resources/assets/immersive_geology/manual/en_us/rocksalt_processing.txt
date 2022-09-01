@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
-<&rocksalt_synthesis_chemical> rocksalt Method: sodium_oxide_to_hydroxide
-<&rocksalt_preparation_crushing> rocksalt 
-<&rocksalt_extraction_crushing> rocksalt 
+<&rocksalt_synthesis_chemical> rocksalt 
+<&rocksalt_extraction_calcination> rocksalt 
+<&rocksalt_extraction_arcsmelting> rocksalt 
 <&rocksalt_synthesis_crushing> rocksalt 
-<&rocksalt_extraction_calcination> rocksalt Method: compound_dust_sodium_to_metal_oxide
-<&rocksalt_extraction_arcsmelting> rocksalt Method: metal_oxide_rocksalt_to_dust
+<&rocksalt_extraction_crushing> rocksalt 
+<&rocksalt_preparation_crushing> rocksalt 

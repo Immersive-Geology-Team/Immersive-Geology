@@ -1,4 +1,4 @@
 Processing
 Factoring Factories
-<&kaolinite_preparation_crafting> kaolinite Crafting Recipe for craft_clay_kaolinite_shaped_block_item_kaolinite_storage
-<&kaolinite_preparation_basicsmelting> kaolinite Method: ingot_refractory_brick_from_blasting
+<&kaolinite_preparation_crafting> kaolinite 
+<&kaolinite_preparation_basicsmelting> kaolinite 

@@ -1,10 +1,10 @@
 Processing
 Factoring Factories
-<&chromite_extraction_calcination> chromite Method: compound_dust_iron_to_metal_oxide
-<&chromite_extraction_blasting> chromite Method: oxide_iron_to_ingot
-<&chromite_crystallization_crystalization> chromite Method: slurry_chromite_to_crystal
+<&chromite_crystallization_crystalization> chromite 
+<&chromite_extraction_calcination> chromite 
+<&chromite_extraction_blasting> chromite 
 <&chromite_extraction_crushing> chromite 
-<&chromite_extraction_chemical> chromite Method: slurry_chromite_to_slurry
-<&chromite_extraction_cutting> chromite Method: end_stone_chromite
-<&chromite_extraction_crafting> chromite Crafting Recipe for craft_ore_bit_end_stone_chromite_shaped_ore_chunk_end_stone_chromite
+<&chromite_extraction_chemical> chromite 
+<&chromite_extraction_cutting> chromite 
+<&chromite_extraction_crafting> chromite 
 <&chromite_extraction_separator> chromite 

@@ -15,19 +15,19 @@
       }
     ]
   },
-  "sphalerite_refinement_separator": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
-      }
-    ]
-  },
   "sphalerite_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:crusher"
+      }
+    ]
+  },
+  "sphalerite_refinement_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
@@ -47,19 +47,19 @@
       }
     ]
   },
-  "sphalerite_refinement_crushing": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersiveengineering:crusher"
-      }
-    ]
-  },
   "sphalerite_purification_crystalization": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_crystallizer"
+      }
+    ]
+  },
+  "sphalerite_refinement_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:crusher"
       }
     ]
   },
