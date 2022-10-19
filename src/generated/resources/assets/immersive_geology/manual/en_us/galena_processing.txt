@@ -1,20 +1,10 @@
 Processing
 Factoring Factories
-<<<<<<< HEAD
-<&galena_blasting_blasting> galena 
-<&galena_roasting_roasting> galena 
-=======
-<&galena_refinement_arcsmelting> galena 
-<&galena_refinement_calcination> galena 
->>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&galena_extraction_cutting> galena 
 <&galena_extraction_crushing> galena 
 <&galena_extraction_crafting> galena 
 <&galena_extraction_separator> galena 
-<<<<<<< HEAD
+<&galena_blasting_blasting> galena 
 <&galena_refinement_arcsmelting> galena 
 <&galena_refinement_calcination> galena 
-=======
 <&galena_roasting_roasting> galena 
-<&galena_blasting_blasting> galena 
->>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f

@@ -1,16 +1,8 @@
 Processing
 Factoring Factories
-<<<<<<< HEAD
-=======
 <&hematite_extraction_blasting> hematite 
 <&hematite_extraction_bloomery> hematite 
->>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f
 <&hematite_extraction_cutting> hematite 
 <&hematite_extraction_crushing> hematite 
 <&hematite_extraction_crafting> hematite 
 <&hematite_extraction_separator> hematite 
-<<<<<<< HEAD
-<&hematite_extraction_blasting> hematite 
-<&hematite_extraction_bloomery> hematite 
-=======
->>>>>>> c1efe688509bee2730941ee549e9cbc1d839ca7f

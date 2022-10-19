@@ -74,9 +74,11 @@ public class VatRecipeCategory extends  IGRecipeCategory<VatRecipe> {
         }
 
         guiFluidStacks.init(2, false, 93, 45);
-        guiFluidStacks.set (2, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+        if (ingredients.getOutputs(VanillaTypes.FLUID).size() != 0 && !recipe.getFluidOutputs().get(0).isEmpty()  ) {
+            guiFluidStacks.set(2, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+        }
 
-        if (ingredients.getOutputs(VanillaTypes.ITEM).size() != 0) {
+        if (ingredients.getOutputs(VanillaTypes.ITEM).size() != 0 && !recipe.getItemOutputs().get(0).isEmpty() ) {
             guiItemStacks.init(1, false, 92, 68);
             guiItemStacks.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
         }

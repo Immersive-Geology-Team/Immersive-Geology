@@ -366,7 +366,7 @@ public abstract class MaterialBaseMetal extends MaterialBase {
 
     @Override
     protected boolean hasCompoundDust() {
-        return true;
+        return false;
     }
 
     @Override
