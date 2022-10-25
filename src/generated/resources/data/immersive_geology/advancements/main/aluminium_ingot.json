@@ -1,0 +1,35 @@
+{
+  "parent": "immersive_geology:main/mb_rkiln",
+  "display": {
+    "icon": {
+      "item": "immersiveengineering:ingot_aluminum"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.aluminium_ingot"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.aluminium_ingot.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "aluminium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersiveengineering:ingot_aluminum"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "aluminium_ingot"
+    ]
+  ]
+}

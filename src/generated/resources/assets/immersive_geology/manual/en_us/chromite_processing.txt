@@ -5,6 +5,6 @@ Factoring Factories
 <&chromite_extraction_crushing> chromite 
 <&chromite_extraction_crafting> chromite 
 <&chromite_extraction_separator> chromite 
+<&chromite_extraction_chemical> chromite 
 <&chromite_extraction_calcination> chromite 
 <&chromite_extraction_blasting> chromite 
-<&chromite_extraction_chemical> chromite 

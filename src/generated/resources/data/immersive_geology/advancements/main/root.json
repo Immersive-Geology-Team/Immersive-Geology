@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "immersive_geology:clay_kaolinite"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.root"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.root.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "immersiveengineering:textures/block/wooden_decoration/treated_wood.png"
+  },
+  "criteria": {
+    "hclay": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:clay_kaolinite"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hclay"
+    ]
+  ]
+}

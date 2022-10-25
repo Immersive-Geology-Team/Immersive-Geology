@@ -1,0 +1,34 @@
+{
+  "parent": "immersive_geology:main/acid_sulfuric",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:block_item_machine_iron_chemicalvat"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.mb_vat"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.mb_vat.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mb_vat": {
+      "trigger": "immersiveengineering:multiblock_formed",
+      "conditions": {
+        "multiblock": "immersive_geology:multiblocks/chemicalvat",
+        "item": {
+          "item": "immersiveengineering:hammer"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mb_vat"
+    ]
+  ]
+}

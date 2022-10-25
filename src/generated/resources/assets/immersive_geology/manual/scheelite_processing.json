@@ -31,19 +31,19 @@
       }
     ]
   },
-  "scheelite_extraction_cutting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
-      }
-    ]
-  },
   "scheelite_extraction_chemical": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_chemicalvat"
+      }
+    ]
+  },
+  "scheelite_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },

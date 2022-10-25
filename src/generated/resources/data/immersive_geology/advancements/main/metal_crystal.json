@@ -1,0 +1,38 @@
+{
+  "parent": "immersive_geology:main/mb_crystallizer",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:crystal_silver"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.metal_crystal"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.metal_crystal.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "metal_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:crystal_silver"
+          },
+          {
+            "item": "immersive_geology:crystal_nickel"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "metal_crystal"
+    ]
+  ]
+}

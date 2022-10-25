@@ -1,0 +1,34 @@
+{
+  "parent": "immersive_geology:main/craft_bloomery",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.mb_hydrojet"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.mb_hydrojet.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mb_hydrojet": {
+      "trigger": "immersiveengineering:multiblock_formed",
+      "conditions": {
+        "multiblock": "immersive_geology:multiblocks/hydrojet_cutter",
+        "item": {
+          "item": "immersiveengineering:hammer"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mb_hydrojet"
+    ]
+  ]
+}

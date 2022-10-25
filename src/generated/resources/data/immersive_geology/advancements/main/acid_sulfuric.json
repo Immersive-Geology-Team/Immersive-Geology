@@ -1,0 +1,35 @@
+{
+  "parent": "immersive_geology:main/mb_rfurnace",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:flask_sulfuric_acid"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.acid_sulfuric"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.acid_sulfuric.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "acid_sulfuric": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:stone_chunk_netherrack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "acid_sulfuric"
+    ]
+  ]
+}

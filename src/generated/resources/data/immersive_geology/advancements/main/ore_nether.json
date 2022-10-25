@@ -1,0 +1,35 @@
+{
+  "parent": "immersive_geology:main/craft_bloomery",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:stone_chunk_netherrack"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.ore_nether"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.ore_nether.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ore_nether": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:stone_chunk_netherrack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ore_nether"
+    ]
+  ]
+}

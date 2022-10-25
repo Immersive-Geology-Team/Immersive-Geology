@@ -263,6 +263,31 @@
   "desc.immersiveengineering.info.mineral.copper_bearing_oxides" : "Copper-bearing Oxides",
   "desc.immersiveengineering.info.mineral.alluvial_sediment" : "Alluvial Sediments",
   "desc.immersiveengineering.info.mineral.deteriorated_igneous_rock" : "Deteriorated Radioactive Sediments",
-  "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments"
+  "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments",
 
+  "advancement.immersive_geology.root": "Immersive Geology",
+  "advancement.immersive_geology.root.desc": "Obtain refractory clay",
+  "advancement.immersive_geology.mb_bloomery": "Smelting Works",
+  "advancement.immersive_geology.mb_bloomery.desc": "Craft a bloomery",
+  "advancement.immersive_geology.mb_oreseparator": "Yellow River",
+  "advancement.immersive_geology.mb_oreseparator.desc": "Build Gravity Ore Separator",
+  "advancement.immersive_geology.mb_hydrojet": "Water Blade",
+  "advancement.immersive_geology.mb_hydrojet.desc": "Build Hydrojet Cutter",
+  "advancement.immersive_geology.ore_nether": "Otherworldy Treasure",
+  "advancement.immersive_geology.ore_nether.desc": "Mine any nether mineral",
+  "advancement.immersive_geology.mb_rfurnace": "Heat Resonance",
+  "advancement.immersive_geology.mb_rfurnace.desc": "Build Reverberation Furnace",
+  "advancement.immersive_geology.acid_sulfuric": "Etching Fluid",
+  "advancement.immersive_geology.acid_sulfuric.desc": "Obtain flask of sulfuric acid",
+  "advancement.immersive_geology.mb_vat": "VAT?!",
+  "advancement.immersive_geology.mb_vat.desc": "Build Chemical Vat",
+  "advancement.immersive_geology.mb_rkiln": "Rolling Hot",
+  "advancement.immersive_geology.mb_rkiln.desc": "Build Rotary Kiln",
+  "advancement.immersive_geology.mb_crystallizer": "Divide and Sediment",
+  "advancement.immersive_geology.mb_crystallizer.desc": "Build Crystallizer",
+  "advancement.immersive_geology.aluminium_ingot": "High-tech Metal",
+  "advancement.immersive_geology.aluminium_ingot.desc": "Obtain Aluminium Ingot",
+
+  "advancement.immersive_geology.metal_crystal": "Shinies?",
+  "advancement.immersive_geology.metal_crystal.desc": "Obtain any metal crystal"
 }

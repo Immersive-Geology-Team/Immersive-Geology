@@ -1,0 +1,35 @@
+{
+  "parent": "immersive_geology:main/root",
+  "display": {
+    "icon": {
+      "item": "immersive_geology:block_item_machine_stone_bloomery"
+    },
+    "title": {
+      "translate": "advancement.immersive_geology.mb_bloomery"
+    },
+    "description": {
+      "translate": "advancement.immersive_geology.mb_bloomery.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mb_bloomery": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "immersive_geology:block_item_machine_stone_bloomery"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mb_bloomery"
+    ]
+  ]
+}
