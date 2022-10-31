@@ -1,17 +1,17 @@
 {
-  "saltpeter_preparation_crushing": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersiveengineering:crusher"
-      }
-    ]
-  },
   "saltpeter_synthesis_arcsmelting": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:arc_furnace"
+      }
+    ]
+  },
+  "saltpeter_preparation_crushing": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersiveengineering:crusher"
       }
     ]
   },

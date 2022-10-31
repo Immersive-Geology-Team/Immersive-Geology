@@ -31,14 +31,6 @@
       }
     ]
   },
-  "vanadinite_extraction_separator": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
-      }
-    ]
-  },
   "vanadinite_leeching_calcination": {
     "type": "item_display",
     "items": [
@@ -52,6 +44,14 @@
     "items": [
       {
         "item": "immersiveengineering:arc_furnace"
+      }
+    ]
+  },
+  "vanadinite_extraction_separator": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },
