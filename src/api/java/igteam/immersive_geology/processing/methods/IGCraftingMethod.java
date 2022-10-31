@@ -6,6 +6,7 @@ import igteam.immersive_geology.processing.helper.IGProcessingMethod;
 import igteam.immersive_geology.processing.helper.RecipeMethod;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 
@@ -17,12 +18,12 @@ public class IGCraftingMethod extends IGProcessingMethod {
     }
 
     private String[] patterns;
-    private Tag<Item>[] shapelessInputs;
+    private TagKey<Item>[] shapelessInputs;
     private ItemLike result;
     private int amount;
     private String recipeGroup;
     private String criterionName;
-    private Tag<Item> criterionTriggerItem;
+    private TagKey<Item> criterionTriggerItem;
 
     /**
      * @param patternLines - input up to 3, 3 character long strings
@@ -35,14 +36,14 @@ public class IGCraftingMethod extends IGProcessingMethod {
         return this;
     }
 
-    public IGCraftingMethod shapeless(ItemLike result, int amount, Tag<Item>... inputs) {
+    public IGCraftingMethod shapeless(ItemLike result, int amount, TagKey<Item>... inputs) {
         this.result = result;
         this.amount = amount;
         this.shapelessInputs = inputs;
         return this;
     }
 
-    public IGCraftingMethod finializeRecipe(String group, String criterionName, Tag<Item> trigger){
+    public IGCraftingMethod finializeRecipe(String group, String criterionName, TagKey<Item> trigger){
         this.recipeGroup = group;
         this.criterionName = criterionName;
         this.criterionTriggerItem = trigger;
@@ -57,7 +58,7 @@ public class IGCraftingMethod extends IGProcessingMethod {
         return amount;
     }
 
-    public Tag<Item>[] getInputTags() {
+    public TagKey<Item>[] getInputTags() {
         return shapelessInputs;
     }
 
@@ -65,7 +66,7 @@ public class IGCraftingMethod extends IGProcessingMethod {
         return recipeGroup;
     }
 
-    public Tag<Item> getCriterionTrigger() {
+    public TagKey<Item> getCriterionTrigger() {
         return criterionTriggerItem;
     }
 

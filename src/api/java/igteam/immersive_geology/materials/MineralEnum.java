@@ -8,6 +8,7 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -115,7 +116,7 @@ public enum MineralEnum implements MaterialInterface {
     }
 
     @Override
-    public Tag.Named<?> getTag(MaterialPattern pattern) {
+    public TagKey<?> getTag(MaterialPattern pattern) {
         return material.getTag(pattern);
     }
 
@@ -145,22 +146,22 @@ public enum MineralEnum implements MaterialInterface {
     }
 
     @Override
-    public Tag.Named<Item> getItemTag(ItemPattern pattern) {
+    public TagKey<Item> getItemTag(ItemPattern pattern) {
         return material.getItemTag(pattern);
     }
 
     @Override
-    public Tag.Named<Block> getBlockTag(BlockPattern pattern) {
+    public TagKey<Block> getBlockTag(BlockPattern pattern) {
         return material.getBlockTag(pattern);
     }
 
     @Override
-    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
+    public TagKey<Item> getItemTag(ItemPattern pattern, MaterialBase... materials) {
         return material.getItemTag(pattern, materials);
     }
 
     @Override
-    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
+    public TagKey<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials) {
         return material.getBlockTag(pattern, materials);
     }
 

@@ -11,6 +11,7 @@ import igteam.immersive_geology.materials.pattern.MiscPattern;
 import igteam.immersive_geology.tags.IGTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -104,22 +105,22 @@ public abstract class MaterialBase {
         return new FluidStack(getFluid(pattern, secondaryMaterial), amount);
     }
 
-    public Tag.Named<?> getTag(MaterialPattern pattern) {
+    public TagKey<?> getTag(MaterialPattern pattern) {
         if(pattern instanceof ItemPattern i){
-            HashMap<String, Tag.Named<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
+            HashMap<String, TagKey<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
         if(pattern instanceof BlockPattern b){
-            HashMap<String, Tag.Named<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
+            HashMap<String, TagKey<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
 
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
 
         if(pattern instanceof MiscPattern f){
-            HashMap<String, Tag.Named<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
+            HashMap<String, TagKey<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             LinkedHashSet<MaterialBase> materials = new LinkedHashSet<>(List.of(this));
             return data_map.get(IGApi.getWrapFromSet(materials));
         }
@@ -127,9 +128,9 @@ public abstract class MaterialBase {
         return null;
     }
 
-    public Tag.Named<?> getTag(MaterialPattern pattern, MaterialBase... materials) {
+    public TagKey<?> getTag(MaterialPattern pattern, MaterialBase... materials) {
         if(pattern instanceof ItemPattern i){
-            HashMap<String, Tag.Named<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
+            HashMap<String, TagKey<Item>> data_map = IGTags.IG_ITEM_TAGS.get(i);
             List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
 
             materialList.add(this);
@@ -137,7 +138,7 @@ public abstract class MaterialBase {
             return data_map.get(IGApi.getWrapFromSet(matSet));
         }
         if(pattern instanceof BlockPattern b){
-            HashMap<String, Tag.Named<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
+            HashMap<String, TagKey<Block>> data_map = IGTags.IG_BLOCK_TAGS.get(b);
             List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
 
             materialList.add(this);
@@ -145,7 +146,7 @@ public abstract class MaterialBase {
             return data_map.get(IGApi.getWrapFromSet(matSet));
         }
         if(pattern instanceof MiscPattern f){
-            HashMap<String, Tag.Named<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
+            HashMap<String, TagKey<Fluid>> data_map = IGTags.IG_FLUID_TAGS.get(f);
             List<MaterialBase> materialList = new ArrayList<>(List.of(materials));
 
             materialList.add(this);
@@ -307,29 +308,29 @@ public abstract class MaterialBase {
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public Tag.Named<Item> getItemTag(ItemPattern pattern){
-        return (Tag.Named<Item>) getTag(pattern);
+    public TagKey<Item> getItemTag(ItemPattern pattern){
+        return (TagKey<Item>) getTag(pattern);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public Tag.Named<Block> getBlockTag(BlockPattern pattern){
-        return (Tag.Named<Block>) getTag(pattern);
+    public TagKey<Block> getBlockTag(BlockPattern pattern){
+        return (TagKey<Block>) getTag(pattern);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials){
-        return (Tag.Named<Item>) getTag(pattern, materials);
+    public TagKey<Item> getItemTag(ItemPattern pattern, MaterialBase... materials){
+        return (TagKey<Item>) getTag(pattern, materials);
     }
 
     /**
      * @apiNote Wrapped version of the normal @getTag used to reduce castings
      */
-    public Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials){
-        return (Tag.Named<Block>) getTag(pattern, materials);
+    public TagKey<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials){
+        return (TagKey<Block>) getTag(pattern, materials);
     }
 
     public CrystalFamily getCrystalFamily() {

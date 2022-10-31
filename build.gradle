@@ -10,6 +10,7 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
         classpath "org.jetbrains.gradle.plugin.idea-ext:org.jetbrains.gradle.plugin.idea-ext.gradle.plugin:1.1.1"
     }
 }
@@ -25,12 +26,14 @@ apply plugin: 'eclipse'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.jetbrains.gradle.plugin.idea-ext'
+apply plugin: 'org.spongepowered.mixin'
 
-version = '0.98v18'
-group = 'com.igteam.immersive_geology'
+version = version_ig
+group = 'igteam.immersive_geology'
 archivesBaseName = 'immersive_geology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+jar.enabled = false
 
 repositories {
     maven { // TOP (The one probe)
@@ -85,17 +88,19 @@ sourceSets {
 }
 
 def version_replaces = [
-        'version': version_ig,
-        'mc_version': minecraft_version_range,
-        'forge_version': forge_version_range,
+        'version': project.version,
+        'mc_version': version_minecraft,
+        'forge_version': version_forge,
         'ie_version': ie_version_range
 ]
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    inputs.properties(version_replaces)
     filesMatching("META-INF/mods.toml") {
         expand version_replaces
     }
+    exclude ".cache"
 }
 
 // When using "Run using IntelliJ" (the only option with well-working hotswapping) the used "resources" directory is
@@ -182,13 +187,12 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
-    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.61:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.61")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
 
-    compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145:api")
-    runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145")
+    compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:api")
+    runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}")
 
-    datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.18.1-7.1.0-145:datagen")
+    datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:datagen")
 
     testImplementation('junit:junit:4.13.2')
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

@@ -14,6 +14,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +49,7 @@ public class IGRecipeProvider extends RecipeProvider {
     private void buildCraftingMethods(IGCraftingMethod method, Consumer<FinishedRecipe> consumer){
         ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(method.getResult(), method.getResultAmount());
 
-        for (Tag<Item> tag : method.getInputTags()) {
+        for (TagKey<Item> tag : method.getInputTags()) {
             recipe.requires(tag);
         }
 

@@ -20,14 +20,15 @@ public class ServerProxy implements Proxy {
 
     @Override
     public void onCommonSetup(FMLCommonSetupEvent event) {
+        logger.log(Level.INFO, "Initializing Items and Blocks");
 
+        IGRegistrationHolder.initialize();
+        IGRegistrationHolder.buildRecipes();
+
+        logger.log(Level.INFO, "---Initial Setup Completed---");
     }
 
     @Override
     public void onFinishSetup(FMLLoadCompleteEvent event) {
-    }
-
-    @Override
-    public void onClientSetup(FMLClientSetupEvent event) {
     }
 }

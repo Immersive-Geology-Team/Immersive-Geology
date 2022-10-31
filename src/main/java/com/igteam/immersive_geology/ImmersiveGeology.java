@@ -35,14 +35,7 @@ public class ImmersiveGeology {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         logger.log(Level.INFO, "---Initial Setup for Immersive Geology---");
-
-        logger.log(Level.INFO, "Initializing Items and Blocks");
-
-        IGRegistrationHolder.initialize();
         IGTags.initialize();
-        IGRegistrationHolder.buildRecipes();
-
-        logger.log(Level.INFO, "---Initial Setup Completed---");
 
         modBus.addListener(this::setup);
         modBus.addListener(this::onClientSetup);
@@ -55,6 +48,7 @@ public class ImmersiveGeology {
     public void setup(final FMLCommonSetupEvent event)
     {
         logger.log(Level.INFO, "Common Setup of Immersive Geology");
+
         proxy.onCommonSetup(event);
     }
 
@@ -63,13 +57,11 @@ public class ImmersiveGeology {
         logger.log(Level.INFO, "Finishing Immersive Geology Setup");
         proxy.onFinishSetup(event);
     }
-
     private void onClientSetup(final FMLClientSetupEvent event)
     {
         logger.log(Level.INFO,"Setting up Client Stuff");
         proxy.onClientSetup(event);
     }
-
     public static Logger getNewLogger()
     {
         return LogManager.getLogger(StackLocatorUtil.getCallerClass(2));

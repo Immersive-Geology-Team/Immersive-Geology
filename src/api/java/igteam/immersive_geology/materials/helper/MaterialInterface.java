@@ -6,6 +6,7 @@ import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.MaterialPattern;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -36,13 +37,13 @@ public interface MaterialInterface {
     Block getBlock(MaterialPattern pattern, MaterialBase secondaryMaterial);
     Block getBlock(MaterialPattern pattern);
 
-    Tag.Named<?> getTag(MaterialPattern pattern);
-    Tag.Named<Item> getItemTag(ItemPattern pattern);
-    Tag.Named<Block> getBlockTag(BlockPattern pattern);
+    TagKey<?> getTag(MaterialPattern pattern);
+    TagKey<Item> getItemTag(ItemPattern pattern);
+    TagKey<Block> getBlockTag(BlockPattern pattern);
 
 
-    Tag.Named<Item> getItemTag(ItemPattern pattern, MaterialBase... materials);
-    Tag.Named<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials);
+    TagKey<Item> getItemTag(ItemPattern pattern, MaterialBase... materials);
+    TagKey<Block> getBlockTag(BlockPattern pattern, MaterialBase... materials);
 
     boolean hasPattern(MaterialPattern gear);
 
