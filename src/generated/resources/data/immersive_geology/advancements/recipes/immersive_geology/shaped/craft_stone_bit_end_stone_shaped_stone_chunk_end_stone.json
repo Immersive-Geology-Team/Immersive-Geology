@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shaped/craft_stone_bit_end_stone_shaped_stone_chunk_end_stone"
+    ]
+  },
+  "criteria": {
+    "has_bit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:stone_bits/end_stone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shaped/craft_stone_bit_end_stone_shaped_stone_chunk_end_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bit",
+      "has_the_recipe"
+    ]
+  ]
+}

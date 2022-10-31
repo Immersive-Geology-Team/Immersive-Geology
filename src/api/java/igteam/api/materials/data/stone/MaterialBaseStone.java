@@ -1,10 +1,14 @@
 package igteam.api.materials.data.stone;
 
 import igteam.api.IGApi;
+import igteam.api.materials.MetalEnum;
 import igteam.api.materials.data.MaterialBase;
 import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.materials.pattern.MaterialPattern;
+import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
+import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 
@@ -194,4 +198,21 @@ public abstract class MaterialBaseStone extends MaterialBase {
     public boolean isFluidPortable(ItemPattern pattern){
         return false;
     }
+
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+
+        new IGProcessingStage(this, IGStageDesignation.preparation) {
+            @Override
+            protected void describe() {
+                if (hasStoneBit() && hasStoneChunk() ){
+                    IRecipeBuilder.crafting(this).shaped(
+                           getItem(ItemPattern.stone_chunk), 1,
+                            "ccc", "ccc", "ccc").setInputToCharacter('c', getItem(ItemPattern.stone_bit))
+                            .finializeRecipe("general_crafting", "has_bit", getItemTag(ItemPattern.stone_bit));;
+                }
+            }
+        };
+    }
+
 }

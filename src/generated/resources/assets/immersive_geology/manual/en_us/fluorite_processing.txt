@@ -1,8 +1,8 @@
 Processing
 Factoring Factories
+<&fluorite_synthesis_crushing> fluorite 
+<&fluorite_synthesis_chemical> fluorite 
 <&fluorite_extraction_cutting> fluorite 
 <&fluorite_extraction_crushing> fluorite 
 <&fluorite_extraction_crafting> fluorite 
 <&fluorite_extraction_separator> fluorite 
-<&fluorite_synthesis_crushing> fluorite 
-<&fluorite_synthesis_chemical> fluorite 

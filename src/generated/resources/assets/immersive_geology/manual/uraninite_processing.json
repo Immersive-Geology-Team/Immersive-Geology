@@ -31,19 +31,19 @@
       }
     ]
   },
-  "uraninite_extraction_calcination": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_rotarykiln"
-      }
-    ]
-  },
   "uraninite_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:crusher"
+      }
+    ]
+  },
+  "uraninite_extraction_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_rotarykiln"
       }
     ]
   }

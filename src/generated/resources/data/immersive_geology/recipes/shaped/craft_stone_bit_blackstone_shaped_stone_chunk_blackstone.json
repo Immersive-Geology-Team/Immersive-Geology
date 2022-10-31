@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "immersive_geology:stone_bit_blackstone"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:stone_chunk_blackstone"
+  }
+}

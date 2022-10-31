@@ -8,6 +8,10 @@ import igteam.api.materials.helper.PeriodicTableElement;
 import igteam.api.materials.pattern.BlockPattern;
 import igteam.api.materials.pattern.ItemPattern;
 import igteam.api.materials.pattern.MaterialPattern;
+import igteam.api.processing.IGProcessingStage;
+import igteam.api.processing.helper.IGStageDesignation;
+import igteam.api.processing.helper.IRecipeBuilder;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collections;
@@ -46,6 +50,23 @@ public class MaterialNetherrack extends MaterialBaseStone {
             }
         }
         return null;
+    }
+
+
+    protected void setupProcessingStages() {
+        super.setupProcessingStages();
+
+        new IGProcessingStage(this, IGStageDesignation.preparation) {
+            @Override
+            protected void describe() {
+                if (hasStoneChunk() ){
+                    IRecipeBuilder.crafting(this).shaped(
+                                    Items.NETHERRACK, 1,
+                                    "ccc", "ccc", "ccc").setInputToCharacter('c', getItem(ItemPattern.stone_chunk))
+                            .finializeRecipe("general_crafting", "has_stone_chunk", getItemTag(ItemPattern.stone_chunk));
+                }
+            }
+        };
     }
 
     @Override

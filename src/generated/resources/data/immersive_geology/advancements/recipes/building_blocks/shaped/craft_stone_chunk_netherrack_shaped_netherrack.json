@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "immersive_geology:shaped/craft_stone_chunk_netherrack_shaped_netherrack"
+    ]
+  },
+  "criteria": {
+    "has_stone_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:stone_chunks/netherrack"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "immersive_geology:shaped/craft_stone_chunk_netherrack_shaped_netherrack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}
