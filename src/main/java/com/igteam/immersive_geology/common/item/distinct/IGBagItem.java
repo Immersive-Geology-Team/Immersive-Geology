@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.common.item.distinct;
 
 import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import com.igteam.immersive_geology.core.config.IGConfigurationHandler;
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
@@ -17,11 +18,12 @@ public class IGBagItem extends Item implements IGItemType
     protected ItemSubGroup subGroup;
     protected final MaterialPattern pattern;
 
-    public IGBagItem(MaterialPattern pattern, Properties properties)
+    public IGBagItem(MaterialPattern pattern)
     {
-        super(properties.group(IGItemGroup.IGGroup).maxStackSize(1).maxDamage(Math.min(27, Math.max(1, IGConfigurationHandler.Common.ROCK_BAG_STACKS.get()))*64));
+        super(new Properties().group(IGItemGroup.IGGroup).maxStackSize(1).maxDamage(Math.min(27, Math.max(1, IGConfigurationHandler.Common.ROCK_BAG_STACKS.get()))*64));
         this.subGroup = ItemSubGroup.misc;
         this.pattern = pattern;
+        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
     }
     @Override
     public ItemSubGroup getSubGroup() {

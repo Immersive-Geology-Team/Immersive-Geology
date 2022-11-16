@@ -1,7 +1,7 @@
 package com.igteam.immersive_geology.core.registration;
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersive_geology.ImmersiveGeology;
+import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGOreBlock;
 import com.igteam.immersive_geology.common.block.blocks.IGSlabBlock;
@@ -9,32 +9,26 @@ import com.igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import com.igteam.immersive_geology.common.fluid.IGFluid;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
+import com.igteam.immersive_geology.common.item.distinct.IGBagItem;
 import com.igteam.immersive_geology.common.item.distinct.IGBucketItem;
-import com.igteam.immersive_geology.common.world.feature.IGOreFeature;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.item.IGItemType;
-import igteam.immersive_geology.materials.*;
-import igteam.immersive_geology.materials.data.fluid.MaterialBaseFluid;
-import igteam.immersive_geology.materials.data.misc.MaterialMiscBase;
-import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.main.IGRegistryProvider;
+import igteam.immersive_geology.materials.*;
+import igteam.immersive_geology.materials.data.slurry.variants.MaterialSlurryWrapper;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
 import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
 import igteam.immersive_geology.materials.pattern.FluidPattern;
-import com.igteam.immersive_geology.client.menu.helper.IGItemGroup;
+import igteam.immersive_geology.materials.pattern.ItemPattern;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
@@ -51,6 +45,10 @@ public class IGRegistrationHolder {
         registerForInterface(MiscEnum.values());
         registerForInterface(FluidEnum.values());
 
+
+        IGBagItem bag = new IGBagItem(ItemPattern.bag);
+        logger.info("Immersive Geology: Registering Bag");
+        register(bag);
         logger.info("Immersive Geology: Internal Registration of Slurry Fluids");
         //This needs to be handled differently
         for(SlurryEnum slurryEnum : SlurryEnum.values()){
