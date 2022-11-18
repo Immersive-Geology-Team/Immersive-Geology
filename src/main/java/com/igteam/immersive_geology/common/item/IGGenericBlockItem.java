@@ -2,6 +2,11 @@ package com.igteam.immersive_geology.common.item;
 
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.api.item.IGItemType;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.helper.MaterialTexture;
+import igteam.api.materials.pattern.ItemFamily;
+import igteam.api.menu.ItemSubGroup;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
@@ -12,8 +17,8 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -22,10 +27,10 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
 
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
-    private final ItemPattern pattern;
+    private final ItemFamily pattern;
 
-    public IGGenericBlockItem(IGGenericBlock b, MaterialInterface m, ItemPattern p) {
-        super(b, new Properties().tab(IGItemGroup.IGGroup));
+    public IGGenericBlockItem(IGGenericBlock b, MaterialInterface m, ItemFamily p) {
+        super(b, new Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
     }
@@ -45,7 +50,7 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType {
         return new TranslatableComponent("item.immersive_geology." + pattern.getName(), materialList.toArray());
     }
 
-    public ItemPattern getPattern(){
+    public ItemFamily getPattern(){
         return this.pattern;
     }
 

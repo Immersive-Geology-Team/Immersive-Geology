@@ -1,11 +1,10 @@
 package igteam.immersive_geology.generators.tags;
 
 import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
+import igteam.api.materials.MetalEnum;
+import igteam.api.materials.StoneEnum;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.pattern.BlockFamily;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.item.Item;
@@ -21,12 +20,12 @@ public class IGBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         for (MaterialInterface metal : MetalEnum.values()) {
-            for (BlockPattern pattern : BlockPattern.values()) {
+            for (BlockFamily pattern : BlockFamily.values()) {
                 if (metal.hasPattern(pattern)) {
                     switch (pattern){
                         case ore -> {
                             for (MaterialInterface stone : StoneEnum.values()) {
-                                tag(metal.getBlockTag(pattern, stone.get())).add(metal.getBlock(pattern, stone));
+                                tag(metal.getBlockTag(pattern, stone.instance())).add(metal.getBlock(pattern, stone));
                             }
                         }
                         default -> {

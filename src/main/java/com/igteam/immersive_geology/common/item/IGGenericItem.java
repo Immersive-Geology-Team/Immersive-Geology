@@ -1,6 +1,10 @@
 package com.igteam.immersive_geology.common.item;
 
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.api.item.IGItemType;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.helper.MaterialTexture;
+import igteam.api.materials.pattern.ItemFamily;
 import igteam.immersive_geology.item.IGItemType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
 import igteam.immersive_geology.materials.helper.MaterialTexture;
@@ -20,9 +24,9 @@ public class IGGenericItem extends Item implements IGItemType {
 
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
-    private final ItemPattern pattern;
+    private final ItemFamily pattern;
 
-    public IGGenericItem(MaterialInterface m, ItemPattern p) {
+    public IGGenericItem(MaterialInterface m, ItemFamily p) {
         super(new Properties().tab(IGItemGroup.IGGroup));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);

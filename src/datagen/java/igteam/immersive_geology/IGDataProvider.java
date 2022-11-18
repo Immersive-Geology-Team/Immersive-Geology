@@ -3,7 +3,6 @@ package igteam.immersive_geology;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.generators.IGBlockStateProvider;
 import igteam.immersive_geology.generators.IGItemModelProvider;
-import igteam.immersive_geology.generators.recipes.IGRecipeProvider;
 import igteam.immersive_geology.generators.tags.IGBlockTagProvider;
 import igteam.immersive_geology.generators.tags.IGItemTagProvider;
 import igteam.immersive_geology.materials.pattern.ItemPattern;

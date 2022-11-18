@@ -4,6 +4,10 @@ import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.helper.MaterialTexture;
+import igteam.api.materials.pattern.BlockFamily;
+import igteam.api.materials.pattern.ItemFamily;
 import igteam.immersive_geology.IGApi;
 import igteam.immersive_geology.block.IGBlockType;
 import igteam.immersive_geology.materials.helper.MaterialInterface;
@@ -23,14 +27,17 @@ public class IGGenericBlock extends Block implements IGBlockType {
 
     private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
 
-    private final BlockPattern pattern;
+    private final BlockFamily pattern;
     private final IGGenericBlockItem itemBlock;
 
-    public IGGenericBlock(MaterialInterface m, BlockPattern p) {
+    private final MaterialInterface saved_interface;
+
+    public IGGenericBlock(MaterialInterface m, BlockFamily p) {
         super(Properties.of(Material.STONE, MaterialColor.STONE));
         this.pattern = p;
+        this.saved_interface = m;
         this.materialMap.put(MaterialTexture.base, m);
-        this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
+        this.itemBlock = new IGGenericBlockItem(this, m, ItemFamily.block_item);
 
         IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
@@ -40,7 +47,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
         return itemBlock;
     }
 
-    public BlockPattern getPattern(){
+    public BlockFamily getPattern(){
         return this.pattern;
     }
 

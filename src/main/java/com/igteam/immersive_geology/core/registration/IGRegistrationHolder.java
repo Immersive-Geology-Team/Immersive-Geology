@@ -5,19 +5,21 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import igteam.immersive_geology.materials.*;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.helper.MaterialTexture;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.materials.pattern.MiscPattern;
+import igteam.api.materials.*;
+import igteam.api.materials.helper.MaterialInterface;
+import igteam.api.materials.helper.MaterialTexture;
+import igteam.api.materials.pattern.BlockFamily;
+import igteam.api.materials.pattern.FluidFamily;
+import igteam.api.materials.pattern.ItemFamily;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -33,6 +35,8 @@ public class IGRegistrationHolder {
         registerForInterface(MineralEnum.values());
         registerForInterface(FluidEnum.values());
         registerForInterface(GasEnum.values());
+
+        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 
@@ -48,21 +52,21 @@ public class IGRegistrationHolder {
     private static void registerForInterface(MaterialInterface... material){
         Arrays.stream(material).iterator().forEachRemaining((m) -> {
             //Item Patterns
-            Arrays.stream(ItemPattern.values()).iterator().forEachRemaining((pattern) -> {
+            Arrays.stream(ItemFamily.values()).iterator().forEachRemaining((pattern) -> {
                 if(m.hasPattern(pattern)){
                     registerForItemPattern(m, pattern);
                 }
             });
 
             //Block Patterns
-            Arrays.stream(BlockPattern.values()).iterator().forEachRemaining((pattern) -> {
+            Arrays.stream(BlockFamily.values()).iterator().forEachRemaining((pattern) -> {
                 if(m.hasPattern(pattern)){
                     registerForBlockPattern(m, pattern);
                 }
             });
 
             //Misc Patterns
-            Arrays.stream(MiscPattern.values()).iterator().forEachRemaining((pattern) -> {
+            Arrays.stream(FluidFamily.values()).iterator().forEachRemaining((pattern) -> {
                 if(m.hasPattern(pattern)){
                     registerForMiscPattern(m, pattern);
                 }
@@ -70,7 +74,7 @@ public class IGRegistrationHolder {
         });
     }
 
-    private static void registerForItemPattern(MaterialInterface m, ItemPattern p){
+    private static void registerForItemPattern(MaterialInterface m, ItemFamily p){
         switch(p) {
             case ore_chunk, ore_bit, dirty_crushed_ore -> {
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
@@ -93,7 +97,7 @@ public class IGRegistrationHolder {
         }
     }
 
-    private static void registerForBlockPattern(MaterialInterface m, BlockPattern p){
+    private static void registerForBlockPattern(MaterialInterface m, BlockFamily p){
         switch(p) {
             case ore -> {
                 Arrays.stream(StoneEnum.values()).iterator().forEachRemaining((stone) -> {
@@ -119,6 +123,7 @@ public class IGRegistrationHolder {
     private static void registerForMiscPattern(MaterialInterface m, MiscPattern p){
 
     }
+    private static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, IGApi.MODID);
 
     private static void register(Item i){
         IGRegistryProvider.IG_ITEM_REGISTRY.put(i.getRegistryName(), i);
@@ -135,26 +140,25 @@ public class IGRegistrationHolder {
     @SubscribeEvent
     public static void itemRegistration(final RegistryEvent.Register<Item> event){
         logger.info("Applying Item Registration");
-
-        IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((item) -> {
-            event.getRegistry().register(item);
-        });
+//
+//        IGRegistryProvider.IG_ITEM_REGISTRY.values().forEach((item) -> {
+//            event.getRegistry().register(item);
+//        });
     }
+
+
 
     @SubscribeEvent
     public static void blockRegistration(final RegistryEvent.Register<Block> event){
         logger.info("Applying Block Registries");
 
-        IGRegistryProvider.IG_BLOCK_REGISTRY.values().forEach((block) ->{
-            event.getRegistry().register(block);
-        });
     }
 
     @SubscribeEvent
     public static void fluidRegistration(final RegistryEvent.Register<Fluid> event){
-        IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) ->{
-            event.getRegistry().register(fluid);
-        });
+//        IGRegistryProvider.IG_FLUID_REGISTRY.values().forEach((fluid) ->{
+//            event.getRegistry().register(fluid);
+//        });
     }
 
     public static ResourceLocation getRegistryKey(IGGenericBlockItem item){
