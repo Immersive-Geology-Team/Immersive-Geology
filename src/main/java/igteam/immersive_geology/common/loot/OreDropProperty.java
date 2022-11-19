@@ -22,6 +22,7 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 public class OreDropProperty extends LootFunction {
@@ -49,7 +50,9 @@ public class OreDropProperty extends LootFunction {
                 }
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.min(8, harvestLevel + 3));
+                Random rand = new Random();
+
+                itemStack.setCount(Math.min(6, harvestLevel+ rand.nextInt(harvestLevel + 1)));
             }
             return itemStack; //catch return if for some reason the item isn't IGGenericItem
         }

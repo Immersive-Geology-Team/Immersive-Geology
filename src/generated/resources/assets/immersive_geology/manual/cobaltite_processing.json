@@ -1,17 +1,17 @@
 {
-  "cobaltite_crystallization_crystalization": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_crystallizer"
-      }
-    ]
-  },
   "cobaltite_extraction_crafting": {
     "type": "crafting",
     "recipes": [
       {
         "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_cobaltite_shaped_ore_chunk_end_stone_cobaltite2"
+      }
+    ]
+  },
+  "cobaltite_crystallization_crystalization": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_crystallizer"
       }
     ]
   },

@@ -41,7 +41,8 @@ public class ChunkDropProperty extends LootFunction {
                 return ItemStack.EMPTY; //catch return if for some reason the item isn't IGGenericItem
             } else {
                 //Does not have silk touch
-                itemStack.setCount(Math.max(0, 8 - harvestLevel - 3));
+                int fortune = Math.min(5,enchantments.getOrDefault(Enchantments.FORTUNE, 0));
+                itemStack.setCount(Math.max(0, 8 - harvestLevel - fortune));
                 return itemStack;
             }
         }

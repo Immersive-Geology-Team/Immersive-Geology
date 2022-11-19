@@ -2,17 +2,48 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "main",
-      "rolls": 1,
+      "rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_geology:block_item_netherrack_ullmannite_ore"
+          "functions": [
+            {
+              "function": "immersive_geology:variable_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_chunk_netherrack_ullmannite"
         }
-      ],
-      "conditions": [
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0.5,
+        "max": 1.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
         {
-          "condition": "minecraft:survives_explosion"
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_secondary_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:ore_bit_netherrack_ullmannite"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_chunk_drops"
+            }
+          ],
+          "name": "immersive_geology:stone_chunk_netherrack"
         }
       ]
     }

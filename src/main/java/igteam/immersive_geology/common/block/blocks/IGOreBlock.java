@@ -34,7 +34,7 @@ public class IGOreBlock extends IGGenericBlock {
     @Override
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack tool) {
         super.harvestBlock(worldIn, player, pos, state, te, tool);
-        if (worldIn instanceof ServerWorld) {
+     /*   if (worldIn instanceof ServerWorld) {
             MaterialInterface<?> oreMaterial = this.getMaterial(MaterialTexture.overlay);
             if(!oreMaterial.instance().isSalt() && tool.canHarvestBlock(state))
             {
@@ -64,7 +64,7 @@ public class IGOreBlock extends IGGenericBlock {
                     } catch (Exception ignored){}
                 }
             }
-        }
+        }*/
 
     }
 }
