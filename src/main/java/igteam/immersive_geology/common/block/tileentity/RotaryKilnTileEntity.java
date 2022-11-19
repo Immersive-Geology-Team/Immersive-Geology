@@ -255,7 +255,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
     @Override
     public Set<BlockPos> getRedstonePos() {
         return ImmutableSet.of(
-                new BlockPos(2, 1, 5)
+                new BlockPos(0, 1, 5)
         );
     }
 
