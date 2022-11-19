@@ -51,8 +51,8 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
     private final LazyOptional<IItemHandler> insertionHandler;
     private final LazyOptional<IItemHandler> extractionHandler;
 
-    public BlockPos inputOffset = new BlockPos(0, 2, 1);
-    public BlockPos outputOffset = new BlockPos(7, 0, 1);
+    public BlockPos inputOffset = new BlockPos(1, 2, 0);
+    public BlockPos outputOffset = new BlockPos(1, 0, 7);
     public float activeTicks;
     public NonNullList<ItemStack> inventory;
 
@@ -135,7 +135,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
         final int bZ = posInMultiblock.getZ();
 
         List<AxisAlignedBB> stairShape = Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0), //Not actually sure if this is a stair shape...
-                                        new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 0.0));
+                                        new AxisAlignedBB(0.5, 0.5, 0.0, 0.0, 1.0, 1.0));
 
         //I would recommend having a variable for each shape type to make it easier to understand and modify later on.
 
@@ -149,7 +149,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
                 }
                 if (bZ == 7 && bX == 0) {
                     return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0),
-                            new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 1.0));
+                            new AxisAlignedBB(0.5, 0.5, 0.0, 1.0, 1.0, 1.0));
                 }
             }
         }
@@ -173,44 +173,46 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
 
             }
             if (bX == 0 && bZ == 7) {
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 0.5, 1.0));
+                return Arrays.asList(new AxisAlignedBB(0.5, 0.0, 0.0, 1.0, 0.5, 1.0));
             }
             if (bX == 2 && bZ == 7) {
-                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 0.5));
+                return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 0.5, 0.5, 1.0));
             }
         }
         if (bY == 1) {
             if (bZ == 7) {
                 if (bX == 0) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
+                    return Arrays.asList(new AxisAlignedBB(0.5, 0.0, 0.0, 1.0, 1.0, 1.0));
                 }
                 if (bX == 2) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.5));
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 0.5, 1.0, 1.0));
                 }
             }
             if (bZ == 5) {
                 if (bX == 2) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 1.0, 1.0, 1.0, 0.5));
+                    return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0,1.0 , 0.5,1.0 ),
+                            new AxisAlignedBB(0.0625, 0.5, 0.0, 0.5, 1.0, 1.0));
                 }
                 if (bX == 0) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 0.5, 0.9375),
-                            new AxisAlignedBB(0.0, 0.5, 0.9375, 1.0, 1.0, 0.5));
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 0.5, 1.0, 1.0));
+
                 }
             }
 
             if (bZ == 3) {
                 if (bX == 0) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.9375));
+                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0,0.0 , 0.9375, 0.5, 1.0),
+                            new AxisAlignedBB(0.5, 0.5,0.0 , 0.9375, 1.0, 1.0));
                 }
                 if (bX == 2) {
-                    return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0625, 1.0, 0.5, 1.0),
-                            new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 1.0, 0.0625));
+                    return Arrays.asList(new AxisAlignedBB(0.0625, 0.0, 0.0, 1.0, 1.0, 1.0));
+
                 }
             }
 
             if (bZ == 0) {
                 return Arrays.asList(new AxisAlignedBB(0.0, 0.5, 0.0, 1.0, 1.0, 1.0),
-                        new AxisAlignedBB(0.5, 0.5, 0.0, 1.0, 0.0, 1.0));
+                        new AxisAlignedBB(0.0, 0.5, 0.5, 1.0, 0.0, 1.0));
             }
         }
 
@@ -246,7 +248,7 @@ public class RotaryKilnTileEntity extends PoweredMultiblockTileEntity<RotaryKiln
     @Override
     public Set<BlockPos> getEnergyPos() {
         return ImmutableSet.of(
-                new BlockPos(0, 1, 3)
+                new BlockPos(2, 1, 3)
         );
     }
 
