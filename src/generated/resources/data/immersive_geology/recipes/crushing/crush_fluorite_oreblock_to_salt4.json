@@ -1,0 +1,20 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "forge:dusts/fluorite"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dust_fluorite",
+    "count": 5
+  },
+  "input": {
+    "tag": "forge:ores/blackstone_fluorite"
+  },
+  "time": 200,
+  "energy": 6000
+}

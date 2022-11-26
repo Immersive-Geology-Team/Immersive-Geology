@@ -15,19 +15,19 @@
       }
     ]
   },
-  "ullmannite_roasting_roasting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
-      }
-    ]
-  },
   "ullmannite_leeching_crystalization": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_crystallizer"
+      }
+    ]
+  },
+  "ullmannite_roasting_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
       }
     ]
   },

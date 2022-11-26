@@ -1,6 +1,4 @@
 Processing
 Factoring Factories
-<&cryolite_extraction_cutting> cryolite 
+<&cryolite_preparation_crushing> cryolite 
 <&cryolite_extraction_crushing> cryolite 
-<&cryolite_extraction_crafting> cryolite 
-<&cryolite_extraction_separator> cryolite 

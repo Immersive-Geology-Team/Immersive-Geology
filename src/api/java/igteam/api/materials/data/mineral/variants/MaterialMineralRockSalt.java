@@ -43,11 +43,11 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
         {
             @Override
             protected void describe(){
-                IRecipeBuilder.crushing(this).create(
+             /*   IRecipeBuilder.crushing(this).create(
                         "crushed_ore_to_dust",
                         getItemTag(ItemPattern.crushed_ore),
                         getStack(ItemPattern.dust),
-                        3000, 200);
+                        3000, 200);*/
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_brine",
@@ -149,4 +149,8 @@ public class MaterialMineralRockSalt extends MaterialBaseMineral {
 
     @Override
     protected boolean hasDirtyCrushedOre() { return false; }
+
+    @Override
+    protected boolean hasCrushedOre() { return false; }
+
 }

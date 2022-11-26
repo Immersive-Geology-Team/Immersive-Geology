@@ -21,6 +21,25 @@ public class MaterialMineralCryolite extends MaterialBaseMineral {
         initializeColorMap((p) -> 0xC5C5C5);
     }
 
+
+    @Override
+    public boolean isSalt() { return true; }
+
+    @Override
+    protected boolean hasCrystal() { return true; }
+
+    @Override
+    protected boolean hasOreBit() { return false; }
+
+    @Override
+    protected boolean hasOreChunk() { return false; }
+
+    @Override
+    protected boolean hasDirtyCrushedOre() { return false; }
+
+    @Override
+    protected boolean hasCrushedOre() { return false; }
+
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.MONOCLINIC;

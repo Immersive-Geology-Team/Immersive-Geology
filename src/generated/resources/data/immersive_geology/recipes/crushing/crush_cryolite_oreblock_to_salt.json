@@ -1,0 +1,20 @@
+{
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "forge:dusts/cryolite"
+      }
+    }
+  ],
+  "result": {
+    "item": "immersive_geology:dust_cryolite",
+    "count": 5
+  },
+  "input": {
+    "tag": "forge:ores/stone_cryolite"
+  },
+  "time": 200,
+  "energy": 6000
+}

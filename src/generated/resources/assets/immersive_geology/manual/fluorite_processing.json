@@ -7,35 +7,11 @@
       }
     ]
   },
-  "fluorite_synthesis_crushing": {
+  "fluorite_preparation_crushing": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:crusher"
-      }
-    ]
-  },
-  "fluorite_extraction_crafting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_fluorite_shaped_ore_chunk_end_stone_fluorite2"
-      }
-    ]
-  },
-  "fluorite_extraction_cutting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
-      }
-    ]
-  },
-  "fluorite_extraction_separator": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_gravityseparator"
       }
     ]
   },

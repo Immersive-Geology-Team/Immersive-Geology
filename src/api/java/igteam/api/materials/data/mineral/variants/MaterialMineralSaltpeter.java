@@ -11,11 +11,13 @@ import igteam.api.materials.data.mineral.MaterialBaseMineral;
 import igteam.api.materials.helper.CrystalFamily;
 import igteam.api.materials.helper.MaterialInterface;
 import igteam.api.materials.pattern.ItemPattern;
+import igteam.api.materials.pattern.MaterialPattern;
 import igteam.api.processing.IGProcessingStage;
 import igteam.api.processing.helper.IGStageDesignation;
 import igteam.api.processing.helper.IRecipeBuilder;
 import net.minecraft.item.Rarity;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
@@ -103,4 +105,7 @@ public class MaterialMineralSaltpeter extends MaterialBaseMineral {
 
     @Override
     protected boolean hasDirtyCrushedOre() { return false; }
+
+    @Override
+    protected boolean hasCrushedOre() { return false; }
 }

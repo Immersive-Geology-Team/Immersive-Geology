@@ -31,14 +31,6 @@
       }
     ]
   },
-  "rocksalt_synthesis_crushing": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersiveengineering:crusher"
-      }
-    ]
-  },
   "rocksalt_synthesis_chemical": {
     "type": "item_display",
     "items": [

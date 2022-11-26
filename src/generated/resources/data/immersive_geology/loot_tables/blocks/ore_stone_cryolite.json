@@ -8,10 +8,24 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "immersive_geology:variable_ore_drops"
+              "function": "immersive_geology:variable_dummy_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_chunk_stone_cryolite"
+          "name": "immersive_geology:block_item_stone_cryolite_ore"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "immersive_geology:variable_secondary_ore_drops"
+            }
+          ],
+          "name": "immersive_geology:crystal_cryolite"
         }
       ]
     },
@@ -29,7 +43,7 @@
               "function": "immersive_geology:variable_secondary_ore_drops"
             }
           ],
-          "name": "immersive_geology:ore_bit_stone_cryolite"
+          "name": "immersive_geology:dust_cryolite"
         }
       ]
     },

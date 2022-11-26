@@ -7,19 +7,19 @@
       }
     ]
   },
-  "ferberite_extraction_crafting": {
-    "type": "crafting",
-    "recipes": [
-      {
-        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_ferberite_shaped_ore_chunk_end_stone_ferberite2"
-      }
-    ]
-  },
   "ferberite_extraction_separator": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_gravityseparator"
+      }
+    ]
+  },
+  "ferberite_extraction_crafting": {
+    "type": "crafting",
+    "recipes": [
+      {
+        "recipe": "immersive_geology:shaped/craft_ore_bit_end_stone_ferberite_shaped_ore_chunk_end_stone_ferberite2"
       }
     ]
   },

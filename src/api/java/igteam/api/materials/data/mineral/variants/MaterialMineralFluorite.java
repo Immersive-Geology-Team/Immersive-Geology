@@ -40,11 +40,11 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
         new IGProcessingStage(this, IGStageDesignation.synthesis) {
             @Override
             protected void describe() {
-                IRecipeBuilder.crushing(this).create(
+           /*     IRecipeBuilder.crushing(this).create(
                         "crushed_ore_" + getName() + "_to_dust",
                         getItemTag(ItemPattern.crushed_ore),
                         getStack(ItemPattern.dust),
-                        6000, 200);
+                        6000, 200);*/
 
                 IRecipeBuilder.chemical(this).create(
                         "dust_" + getName() + "_to_acid",
@@ -67,6 +67,24 @@ public class MaterialMineralFluorite extends MaterialBaseMineral {
         )
         );
     }
+
+    @Override
+    public boolean isSalt() { return true; }
+
+    @Override
+    protected boolean hasCrystal() { return true; }
+
+    @Override
+    protected boolean hasOreBit() { return false; }
+
+    @Override
+    protected boolean hasOreChunk() { return false; }
+
+    @Override
+    protected boolean hasDirtyCrushedOre() { return false; }
+
+    @Override
+    protected boolean hasCrushedOre() { return false; }
 
     @Override
     public Rarity getRarity()
