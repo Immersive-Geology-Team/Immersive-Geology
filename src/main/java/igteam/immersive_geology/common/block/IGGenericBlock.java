@@ -61,6 +61,8 @@ public class IGGenericBlock extends Block implements IGBlockType {
 
     @Override
     public int getColourForIGBlock(int pass) {
+        if (pass >= materialMap.values().size()) pass = materialMap.values().size() - 1;
+        //let's use last available colour. map could not be empty
         return materialMap.get(MaterialTexture.values()[pass]).getColor(pattern);
     }
 

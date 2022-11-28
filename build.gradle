@@ -29,7 +29,7 @@ archivesBaseName = 'immersive_geology'
 repositories {
     maven {	name = "BlameJared";	url = "https://maven.blamejared.com/" }         // IE & CT Files
     maven { name = "DVS1 Maven FS"; url = "https://dvs1.progwml6.com/files/maven" } // JEI & Tinkers Files
-    maven { url = 'https://maven.latmod.com/' }                                     // Needed for JEI
+//    flatDir { dirs "flatdir" } // Uncomment for not maven-based mods.
 }
 
 sourceSets {
@@ -126,6 +126,7 @@ dependencies {
     datagenCompile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.1.0-148:datagen")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
+//    runtimeOnly fg.deobf("ignored:journeymap-1.16.5:5.8.5p5") //example for not maven-based mod
 }
 
 def version_replaces = [
