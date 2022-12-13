@@ -68,7 +68,7 @@ public class CalcinationRecipe extends IGMultiblockRecipe
 
     @Override
     public List<IngredientWithSize> getItemInputs() {
-        return NonNullList.from(itemInput);
+        return Arrays.asList(itemInput);
     }
 
     @Override
