@@ -2,87 +2,19 @@ package com.igteam.immersive_geology.common.block;
 
 import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
-import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import igteam.api.materials.helper.MaterialInterface;
-import igteam.api.materials.helper.MaterialTexture;
-import igteam.api.materials.pattern.BlockFamily;
-import igteam.api.materials.pattern.ItemFamily;
-import igteam.immersive_geology.IGApi;
-import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.materials.helper.MaterialInterface;
-import igteam.immersive_geology.materials.helper.MaterialTexture;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.menu.helper.IGItemGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import org.apache.logging.log4j.Level;
 
 import java.util.*;
 
-public class IGGenericBlock extends Block implements IGBlockType {
-
-    private final Map<MaterialTexture, MaterialInterface> materialMap = new HashMap<>();
-
-    private final BlockFamily pattern;
-    private final IGGenericBlockItem itemBlock;
-
-    private final MaterialInterface saved_interface;
-
-    public IGGenericBlock(MaterialInterface m, BlockFamily p) {
+public class IGGenericBlock extends Block {
+    public IGGenericBlock() {
         super(Properties.of(Material.STONE, MaterialColor.STONE));
-        this.pattern = p;
-        this.saved_interface = m;
-        this.materialMap.put(MaterialTexture.base, m);
-        this.itemBlock = new IGGenericBlockItem(this, m, ItemFamily.block_item);
 
         IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
 
-    @Override
-    public Item asItem() {
-        return itemBlock;
-    }
-
-    public BlockFamily getPattern(){
-        return this.pattern;
-    }
-
-    public void addMaterial(MaterialInterface material, MaterialTexture t){
-        materialMap.put(t, material);
-        itemBlock.addMaterial(t, material);
-    }
-
-    @Override
-    public int getColourForIGBlock(int pass) {
-        return materialMap.get(MaterialTexture.values()[pass]).getColor(pattern);
-    }
-
-    public Collection<MaterialInterface> getMaterials() {
-        return materialMap.values();
-    }
-
-    public String getHolderKey(){
-        StringBuilder data = new StringBuilder();
-
-        for(MaterialTexture t : MaterialTexture.values()){
-            if (materialMap.containsKey(t)) {
-                data.append("_").append(materialMap.get(t).getName());
-            }
-        }
-
-        return this.pattern + data.toString();
-    }
-
-    public void finalizeData(){
-        itemBlock.finalizeData();
-        setRegistryName(IGRegistrationHolder.getRegistryKey(this));
-    }
-
-    public MaterialInterface getMaterial(MaterialTexture t){
-        return materialMap.get(t);
-    }
 }
