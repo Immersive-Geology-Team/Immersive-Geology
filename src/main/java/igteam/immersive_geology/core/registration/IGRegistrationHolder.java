@@ -9,6 +9,7 @@ import igteam.immersive_geology.common.block.blocks.IGStairsBlock;
 import igteam.immersive_geology.common.fluid.IGFluid;
 import igteam.immersive_geology.common.item.IGGenericBlockItem;
 import igteam.immersive_geology.common.item.IGGenericItem;
+import igteam.immersive_geology.common.item.distinct.GeologistPouch;
 import igteam.immersive_geology.common.item.distinct.IGBucketItem;
 import igteam.immersive_geology.core.lib.IGLib;
 import igteam.api.block.IGBlockType;
@@ -25,6 +26,7 @@ import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -33,6 +35,7 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
+import slimeknights.mantle.registration.ItemProperties;
 
 import java.util.Arrays;
 
@@ -59,9 +62,13 @@ public class IGRegistrationHolder {
         logger.info("Immersive Geology: Internal Registration of Gas");
         registerForInterface(GasEnum.values());
 
+        distinctRegistration();
+
     }
-
-
+    public static void distinctRegistration(){
+        GeologistPouch pouch = new GeologistPouch(new Item.Properties().group(ItemGroup.MISC));
+        register(pouch);
+    }
     public static void buildRecipes() {
         logger.info("Immersive Geology: Building Internal Recipe Structures");
 

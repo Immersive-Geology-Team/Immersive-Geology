@@ -3,7 +3,7 @@ package igteam.immersive_geology.common.item.distinct;
 import igteam.immersive_geology.core.lib.IGLib;
 import net.minecraft.item.Item;
 
-public class GeologistPouch extends Item {
+public class GeologistPouch extends Item  {
 
     public GeologistPouch(Item.Properties props) {
         super(props);
