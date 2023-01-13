@@ -48,7 +48,7 @@ public class BloomeryRenderer extends TileEntityRenderer<BloomeryTileEntity> {
                             break;
                         case SOUTH:
                             transform.rotate(new Quaternion(0f, 90F, 0F, true));
-                            transform.translate(0,0,-1);
+                            transform.translate(-1,0,0);
                             break;
                     }
 
