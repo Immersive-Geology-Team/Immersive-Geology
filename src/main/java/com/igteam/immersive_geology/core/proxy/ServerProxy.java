@@ -2,11 +2,6 @@ package com.igteam.immersive_geology.core.proxy;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import igteam.immersive_geology.materials.MetalEnum;
-import igteam.immersive_geology.materials.StoneEnum;
-import igteam.immersive_geology.materials.pattern.BlockPattern;
-import igteam.immersive_geology.materials.pattern.ItemPattern;
-import igteam.immersive_geology.tags.IGTags;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -21,9 +16,6 @@ public class ServerProxy implements Proxy {
     @Override
     public void onCommonSetup(FMLCommonSetupEvent event) {
         logger.log(Level.INFO, "Initializing Items and Blocks");
-
-        IGRegistrationHolder.initialize();
-        IGRegistrationHolder.buildRecipes();
 
         logger.log(Level.INFO, "---Initial Setup Completed---");
     }

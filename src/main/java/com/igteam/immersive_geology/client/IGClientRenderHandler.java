@@ -1,9 +1,7 @@
 package com.igteam.immersive_geology.client;
 
+import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import com.mojang.blaze3d.pipeline.RenderTarget;
-import igteam.immersive_geology.block.IGBlockType;
-import igteam.immersive_geology.item.IGItemType;
-import igteam.immersive_geology.materials.helper.IGRegistryProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
@@ -35,16 +33,16 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     public static IGClientRenderHandler INSTANCE = new IGClientRenderHandler();
 
     public static void register(){
-        for(Item i : IGRegistryProvider.IG_ITEM_REGISTRY.values()){
-            if(i instanceof IGItemType){
-                Minecraft.getInstance().getItemColors().register(INSTANCE, i);
-            }
+        for(Item i : IGRegistrationHolder.getItemRegistry().values()){
+//            if(i instanceof IGItemType){
+//                Minecraft.getInstance().getItemColors().register(INSTANCE, i);
+//            }
         }
 
-        for(Block b : IGRegistryProvider.IG_BLOCK_REGISTRY.values()){
-            if(b instanceof IGBlockType){
-                Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
-            }
+        for(Block b : IGRegistrationHolder.getBlockRegistry().values()){
+//            if(b instanceof IGBlockType){
+//                Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
+//            }
         }
     }
 
@@ -73,15 +71,15 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
 
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
-        if(state.getBlock() instanceof IGBlockType type)
-            return type.getColourForIGBlock(index);
+//        if(state.getBlock() instanceof IGBlockType type)
+//            return type.getColourForIGBlock(index);
         return 0xffffff;
     }
 
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
-        if(stack.getItem() instanceof IGItemType type)
-            return type.getColourForIGItem(stack, tintIndex);
+//        if(stack.getItem() instanceof IGItemType type)
+//            return type.getColourForIGItem(stack, tintIndex);
         return 0xffffff;
     }
 

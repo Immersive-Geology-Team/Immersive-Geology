@@ -52,11 +52,11 @@ public class ImmersiveGeology {
     }
     private void onClientSetup(final FMLClientSetupEvent event)
     {
-        logger.log(Level.INFO,"Setting up Client Stuff");
+        logger.log(Level.INFO," ");
         proxy.onClientSetup(event);
     }
     public static Logger getNewLogger()
     {
-        return LogManager.getLogger(StackLocatorUtil.getCallerClass(2));
+        return LogManager.getLogger("Immersive Geology");
     }
 }
