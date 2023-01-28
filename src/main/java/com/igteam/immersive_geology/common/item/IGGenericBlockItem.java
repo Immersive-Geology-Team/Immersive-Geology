@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,7 @@ import java.util.*;
 
 public class IGGenericBlockItem extends BlockItem {
 
-    public IGGenericBlockItem(Block p_40565_, Properties p_40566_) {
-        super(p_40565_, p_40566_);
+    public IGGenericBlockItem(Block p_40565_) {
+        super(p_40565_, new Properties().tab(CreativeModeTab.TAB_MISC));
     }
 }

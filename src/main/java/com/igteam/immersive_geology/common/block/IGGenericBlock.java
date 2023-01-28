@@ -14,7 +14,7 @@ public class IGGenericBlock extends Block {
     public IGGenericBlock() {
         super(Properties.of(Material.STONE, MaterialColor.STONE));
 
-        IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
+        //IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
 
 }

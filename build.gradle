@@ -191,6 +191,7 @@ dependencies {
 
     compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:api")
     runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}")
 
     datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:datagen")
 
