@@ -2,10 +2,12 @@ package com.igteam.immersive_geology.core.registration;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.IGGenericBlock;
+import com.igteam.immersive_geology.common.block.IGOreBlock;
+import com.igteam.immersive_geology.common.block.IGSlabBlock;
+import com.igteam.immersive_geology.common.block.IGStairBlock;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.MetalEnum;
 import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
@@ -18,7 +20,6 @@ import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class IGRegistrationHolder {
@@ -59,10 +60,30 @@ public class IGRegistrationHolder {
             for(IFlagType<?> flags : IFlagType.getAllRegistryFlags()){
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
-                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK -> {
+                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK -> {
                             String registryKey = blockCategory.getRegistryKey(material);
-                            registerBlock(registryKey, IGGenericBlock::new);
-                            registerItem(registryKey, () -> new IGGenericBlockItem(getBlockRegistry().get(registryKey).get()));
+                            Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                        }
+                        case ORE_BLOCK -> {
+                            // for each stone type: stoneMaterial needs to be implemented for each ore block
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                        }
+                        case SLAB -> {
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                        }
+                        case STAIRS -> {
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
                         }
                     }
                 }

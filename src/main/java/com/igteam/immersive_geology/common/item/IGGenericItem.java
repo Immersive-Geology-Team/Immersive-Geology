@@ -6,8 +6,14 @@ import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -40,6 +46,4 @@ public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
     public List<MaterialInterface<?>> getMaterials() {
         return materials;
     }
-
-
 }

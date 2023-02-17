@@ -14,7 +14,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     }
 
     default ItemStack getStack(IFlagType<?> flag) {
-        ImmersiveGeology.getNewLogger().info("FLAG GET: " + flag.toString());
         return flag instanceof ItemCategoryFlags iflag ? getStack(iflag) : (flag instanceof BlockCategoryFlags bFlag ? getStack(bFlag) : null);
     }
 

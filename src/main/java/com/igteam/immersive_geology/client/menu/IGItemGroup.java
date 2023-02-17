@@ -6,6 +6,7 @@ import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -66,10 +67,10 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public void fillItemList(NonNullList<ItemStack> items) {
-        HashMap<ItemCategoryFlags, ArrayList<Item>> itemMap = new HashMap<>();
+        HashMap<IFlagType<?>, ArrayList<Item>> itemMap = new HashMap<>();
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
-            if(item instanceof IGFlagItem type){
-                ItemCategoryFlags pattern = type.getFlag();
+            if(item instanceof IGFlagItem type) {
+                IFlagType<?> pattern = type.getFlag();
                 List<ItemCategoryFlags> itemFlags = CommonConfiguration.ITEM_FLAGS.get(type.getMaterials().get(0).getName()).get();
                 List<BlockCategoryFlags> blockFlags = CommonConfiguration.BLOCK_FLAGS.get(type.getMaterials().get(0).getName()).get();
 
@@ -88,10 +89,10 @@ public class IGItemGroup extends CreativeModeTab {
             }
         }
 
-        ArrayList<ItemCategoryFlags> allPatternList = new ArrayList<>();
-        allPatternList.addAll(Arrays.asList(ItemCategoryFlags.values()));
+        ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
+        allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
 
-        for (ItemCategoryFlags pattern : allPatternList)
+        for (IFlagType<?> pattern : allPatternList)
         {
             if(itemMap.containsKey(pattern)){
                 ArrayList<Item> list = itemMap.get(pattern);

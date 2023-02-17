@@ -8,7 +8,7 @@ import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
 import java.util.List;
 
 public interface IGFlagItem {
-    ItemCategoryFlags getFlag();
+    IFlagType<?> getFlag();
 
     ItemSubGroup getSubGroup();
     List<MaterialInterface<?>> getMaterials();

@@ -25,6 +25,6 @@ public interface IFlagType<T extends Enum<T>> {
     }
 
     default ItemSubGroup getSubGroup() {
-        return ItemSubGroup.decoration;
+        return ItemSubGroup.values()[0];
     };
 }

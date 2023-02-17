@@ -3,28 +3,28 @@ package com.igteam.immersive_geology.core.material.helper;
 import com.igteam.immersive_geology.client.menu.ItemSubGroup;
 
 public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
-    INGOT(ItemSubGroup.processed),
-    WIRE(ItemSubGroup.processed),
-    GEAR(ItemSubGroup.processed),
-    ROD(ItemSubGroup.processed),
-    CLAY(ItemSubGroup.natural),
-    DUST(ItemSubGroup.processed),
-    FUEL(ItemSubGroup.processed),
-    SLAG(ItemSubGroup.processed),
-    PLATE(ItemSubGroup.processed),
-    RAW_ORE(ItemSubGroup.natural),
-    NUGGET(ItemSubGroup.processed),
-    CRYSTAL(ItemSubGroup.processed),
-    COMPOUND_DUST(ItemSubGroup.processed),
-    CRUSHED_ORE(ItemSubGroup.processed),
-    METAL_OXIDE(ItemSubGroup.processed),
-    DIRTY_CRUSHED_ORE(ItemSubGroup.processed),
-    BUCKET(ItemSubGroup.misc);
+    INGOT(1),
+    WIRE(1),
+    GEAR(1),
+    ROD(1),
+    CLAY(0),
+    DUST(1),
+    FUEL(1),
+    SLAG(1),
+    PLATE(1),
+    RAW_ORE(0),
+    NUGGET(1),
+    CRYSTAL(1),
+    COMPOUND_DUST(1),
+    CRUSHED_ORE(1),
+    METAL_OXIDE(1),
+    DIRTY_CRUSHED_ORE(1),
+    BUCKET(3);
 
-    private final ItemSubGroup subgroup;
+    private final int groupOrdinal;
 
-    ItemCategoryFlags(ItemSubGroup group){
-        subgroup = group;
+    ItemCategoryFlags(int group){
+        groupOrdinal = group;
     }
 
     @Override
@@ -34,6 +34,6 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
 
     @Override
     public ItemSubGroup getSubGroup() {
-        return subgroup;
+        return ItemSubGroup.values()[groupOrdinal];
     }
 }

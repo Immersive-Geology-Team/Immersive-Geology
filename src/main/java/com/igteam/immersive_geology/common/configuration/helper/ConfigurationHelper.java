@@ -35,8 +35,9 @@ public interface ConfigurationHelper {
         if(material instanceof MetalEnum metal) {
             // This sets things for the default items
             list.add(BlockCategoryFlags.STORAGE_BLOCK);
+            list.add(BlockCategoryFlags.SHEETMETAL_BLOCK);
             if(metal.instance() instanceof MaterialNativeMetal) {
-                list.add(BlockCategoryFlags.RAW_ORE);
+                list.add(BlockCategoryFlags.RAW_ORE_BLOCK);
                 list.add(BlockCategoryFlags.ORE_BLOCK);
             }
         }

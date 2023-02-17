@@ -1,28 +1,25 @@
 package com.igteam.immersive_geology.client.menu;
 
 import com.igteam.immersive_geology.core.material.MetalEnum;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
+import com.igteam.immersive_geology.core.material.helper.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public enum ItemSubGroup {
-    natural(ItemCategoryFlags.RAW_ORE, MetalEnum.Tin),
-    processed(ItemCategoryFlags.INGOT, MetalEnum.Platinum),
-    decoration(ItemCategoryFlags.PLATE, MetalEnum.Chromium),
-    misc(ItemCategoryFlags.GEAR, MetalEnum.Tin);
+    natural(BlockCategoryFlags.RAW_ORE_BLOCK, MetalEnum.Platinum),
+    processed(ItemCategoryFlags.INGOT, MetalEnum.Chromium),
+    decoration(BlockCategoryFlags.SHEETMETAL_BLOCK, MetalEnum.Tin),
+    misc(ItemCategoryFlags.CRYSTAL, MetalEnum.Tin);
 
-    private final ItemCategoryFlags flag;
+    private final IFlagType<?> flag;
     private final MaterialInterface<?> material;
 
-    ItemSubGroup(ItemCategoryFlags flag, MaterialInterface<?> material) {
+    ItemSubGroup(IFlagType<?> flag, MaterialInterface<?> material) {
         this.flag = flag;
         this.material = material;
     }
 
     @NonNull
-    ItemCategoryFlags getFlag() {
+    IFlagType<?> getFlag() {
         return flag;
     }
 

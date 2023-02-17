@@ -10,6 +10,7 @@
   "manual.immersive_geology.machines": "Machines",
   "manual.immersive_geology.minerals": "Minerals",
 
+  "item.immersive_geology.config.disabled": "Disabled by Configuration",
   "item.immersive_geology.metal_oxide": "%s Oxide",
   "item.immersive_geology.dirty_crushed_ore": "Dirty %s Crushed %s Ore",
   "item.immersive_geology.crushed_ore": "Crushed %s Ore",

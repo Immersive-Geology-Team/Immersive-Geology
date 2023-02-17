@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.client.menu;
 
+import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
@@ -66,8 +67,9 @@ public class CreativeMenuHandler {
             int i = (int) (gui.getGuiLeft() - Math.floor(136*1.425));
             int j = (gui.height - 195) / 2;
 
+            ItemSubGroup[] groups = ItemSubGroup.values();
             for(int iteration = 0; iteration < ItemSubGroup.values().length; iteration++) {
-                ItemSubGroup currentGroup = ItemSubGroup.values()[iteration];
+                ItemSubGroup currentGroup = groups[iteration];
 
                 CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 166 + 7, j + 46 + (23 * iteration),button1 -> {
                     IGItemGroup.updateSubGroup(currentGroup); //Update the sub-group
@@ -108,10 +110,8 @@ public class CreativeMenuHandler {
 
             GuiUtils.drawContinuousTexturedBox(poseStack,CEX_GUI_TEXTURES, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height, 256, 256,0, 0);
 
-            ItemCategoryFlags groupPattern = group.getFlag();
-            ItemStack stack;
-            stack = group.getMaterial().getStack(ItemCategoryFlags.INGOT);
-
+            IFlagType<?> groupPattern = group.getFlag();
+            ItemStack stack = group.getMaterial().getStack(groupPattern);
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
                 mc.getItemRenderer().renderGuiItem(stack, x + 1, y + 2);
@@ -124,9 +124,6 @@ public class CreativeMenuHandler {
                 String name = group.name();
                 String name_part = name.substring(0, 1).toUpperCase();
                 String corrected_name = name_part + name.substring(1);
-                List<Component> tooltip = new ArrayList<>();
-                tooltip.add(new TextComponent(corrected_name));
-
 
                 //we divide the width by four to force the tooltip to the left, as it's on a lower layer then the items in the creative menu.
                 screen.renderTooltip(poseStack, new TextComponent(corrected_name), mouseX, mouseY);
