@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersive_geology:block/default_block/default_block_chromium"
+    }
+  }
+}

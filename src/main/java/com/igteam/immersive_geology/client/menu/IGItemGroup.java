@@ -8,6 +8,7 @@ import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -71,8 +72,8 @@ public class IGItemGroup extends CreativeModeTab {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if(item instanceof IGFlagItem type) {
                 IFlagType<?> pattern = type.getFlag();
-                List<ItemCategoryFlags> itemFlags = CommonConfiguration.ITEM_FLAGS.get(type.getMaterials().get(0).getName()).get();
-                List<BlockCategoryFlags> blockFlags = CommonConfiguration.BLOCK_FLAGS.get(type.getMaterials().get(0).getName()).get();
+                List<ItemCategoryFlags> itemFlags = CommonConfiguration.ITEM_FLAGS.get(type.getMaterial(MaterialTexture.base).getName()).get();
+                List<BlockCategoryFlags> blockFlags = CommonConfiguration.BLOCK_FLAGS.get(type.getMaterial(MaterialTexture.base).getName()).get();
 
                 boolean isConfigured = itemFlags.toString().contains(pattern.toString()) || blockFlags.toString().contains(pattern.toString());
                 if(type.getSubGroup() == selectedGroup && isConfigured) {

@@ -8,8 +8,8 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class IGOreBlock extends IGGenericBlock {
-    public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?>... materials) {
-        super(flag, materials);
+    public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?> baseMaterial) {
+        super(flag, baseMaterial);
         IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
     }
 }

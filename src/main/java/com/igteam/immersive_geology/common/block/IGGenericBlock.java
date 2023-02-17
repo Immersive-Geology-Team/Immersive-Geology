@@ -1,28 +1,24 @@
 package com.igteam.immersive_geology.common.block;
 
-import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import com.igteam.immersive_geology.client.menu.ItemSubGroup;
-import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
+import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
-import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
-import net.minecraft.world.item.Item;
+import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 import java.util.*;
 
-public class IGGenericBlock extends Block {
-
-    private final List<MaterialInterface<?>> materials;
+public class IGGenericBlock extends Block implements IGBlockType {
+    private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     private final BlockCategoryFlags category;
 
-    public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?>... materials) {
+    public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
         super(Properties.of(Material.STONE, MaterialColor.STONE));
-        this.materials = List.of(materials);
+        this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }
 
@@ -34,7 +30,21 @@ public class IGGenericBlock extends Block {
         return category.getSubGroup();
     }
 
-    public List<MaterialInterface<?>> getMaterials() {
-        return materials;
+    @Override
+    public int getColor(int index) {
+        return materialMap.get(MaterialTexture.base).getColor(category);
+    }
+
+    public Collection<MaterialInterface<?>> getMaterials() {
+        return materialMap.values();
+    }
+
+    @Override
+    public MaterialInterface<?> getMaterial(MaterialTexture t) {
+        return materialMap.get(t);
+    }
+    @Override
+    public Block getBlock() {
+        return this;
     }
 }

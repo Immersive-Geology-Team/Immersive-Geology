@@ -17,10 +17,10 @@ public interface MaterialHelper {
     }
 
     default Item getItem(ItemCategoryFlags flag){
-        if(flag == null) flag = ItemCategoryFlags.INGOT;
-
-        ImmersiveGeology.getNewLogger().info("Flag: " + flag.name());
-        ImmersiveGeology.getNewLogger().info("Material: " + getName());
+        if(flag == null) {
+            flag = ItemCategoryFlags.INGOT;
+            ImmersiveGeology.getNewLogger().error("Attempted to grab an item from registry with a null flag, replacing with INGOT to prevent crash");
+        }
         return IGRegistrationHolder.ITEM_REGISTRY.get(flag.getRegistryKey(this)).get();
     }
 

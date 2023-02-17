@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.core.material.helper;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.material.GeologyMaterial;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Set;
@@ -32,4 +33,8 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default String getName() {
         return instance().getName();
     };
+
+    default ResourceLocation getTextureLocation(IFlagType<?> flag) {
+        return instance().getTextureLocation(flag);
+    }
 }

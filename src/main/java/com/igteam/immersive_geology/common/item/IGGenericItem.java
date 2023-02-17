@@ -6,30 +6,26 @@ import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.CreativeModeTab;
+import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
 
-    private final List<MaterialInterface<?>> materials;
+    private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     private final ItemCategoryFlags category;
 
-    public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?>... materials) {
+    public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material) {
         super(new Properties().tab(IGItemGroup.IGGroup));
-        this.materials = List.of(materials);
+        this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }
 
     public int getColor(int index) {
-        return materials.get(index % materials.size()).getColor(this.category);
+        if (index >= materialMap.values().size()) index = materialMap.values().size() - 1;
+        //let's use last available colour. map could not be empty
+        return materialMap.get(MaterialTexture.values()[index]).getColor(category);
     }
 
     @Override
@@ -43,7 +39,12 @@ public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
     }
 
     @Override
-    public List<MaterialInterface<?>> getMaterials() {
-        return materials;
+    public Collection<MaterialInterface<?>> getMaterials() {
+        return materialMap.values();
+    }
+
+    @Override
+    public MaterialInterface<?> getMaterial(MaterialTexture t) {
+        return materialMap.get(t);
     }
 }

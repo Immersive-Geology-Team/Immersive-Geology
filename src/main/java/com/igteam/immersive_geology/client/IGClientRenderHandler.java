@@ -1,5 +1,6 @@
 package com.igteam.immersive_geology.client;
 
+import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
@@ -37,11 +38,11 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             }
        }
 
-    //    for(Block b : IGRegistrationHolder.getBlockRegistry().values()){
-//            if(b instanceof IGBlockType){
-//                Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
-//            }
-    //    }
+        for(Block b : IGRegistrationHolder.getBlockRegistry().values().stream().map(RegistryObject::get).toList()){
+            if(b instanceof IGBlockType){
+                Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
+            }
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -69,8 +70,8 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
 
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
-//        if(state.getBlock() instanceof IGBlockType type)
-//            return type.getColourForIGBlock(index);
+        if(state.getBlock() instanceof IGBlockType type)
+            return type.getColor(index);
         return 0xffffff;
     }
 

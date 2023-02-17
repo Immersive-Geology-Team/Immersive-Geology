@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.IGOreBlock;
 import com.igteam.immersive_geology.common.block.IGSlabBlock;
 import com.igteam.immersive_geology.common.block.IGStairBlock;
+import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -81,9 +82,9 @@ public class IGRegistrationHolder {
                         }
                         case STAIRS -> {
                             String registryKey = blockCategory.getRegistryKey(material);
-                            Supplier<Block> blockProvider = () -> new IGStairBlock(blockCategory, material);
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> IGRegistrationHolder.getBlockRegistry().get(BlockCategoryFlags.STORAGE_BLOCK.getRegistryKey(material)).get().defaultBlockState(), material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
                         }
                     }
                 }
