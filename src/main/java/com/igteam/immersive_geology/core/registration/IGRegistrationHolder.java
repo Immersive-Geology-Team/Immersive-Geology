@@ -21,31 +21,38 @@ import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class IGRegistrationHolder {
-    private static Logger logger = ImmersiveGeology.getNewLogger();
+    private static final Logger logger = ImmersiveGeology.getNewLogger();
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IGLib.MODID);
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, IGLib.MODID);
 
-    public static HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY = new HashMap<>();
-    public static HashMap<String, RegistryObject<Item>> ITEM_REGISTRY = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
 
+    public static Function<String, Item> getItem = (key) -> {
+        return ITEM_REGISTRY_MAP.get(key).get();
+    };
+    public static Function<String, Block> getBlock = (key) -> {
+        return BLOCK_REGISTRY_MAP.get(key).get();
+    };
 
     public static void registerItem(String registry_name,  Supplier<Item> itemSupplier){
-        ITEM_REGISTRY.put(registry_name, ITEMS.register(registry_name, itemSupplier));
+        ITEM_REGISTRY_MAP.put(registry_name, ITEMS.register(registry_name, itemSupplier));
     }
 
     public static void registerBlock(String registry_name,  Supplier<Block> blockSupplier){
-        BLOCK_REGISTRY.put(registry_name, BLOCKS.register(registry_name, blockSupplier));
+        BLOCK_REGISTRY_MAP.put(registry_name, BLOCKS.register(registry_name, blockSupplier));
     }
 
-    public static HashMap<String, RegistryObject<Item>> getItemRegistry() {
-        return ITEM_REGISTRY;
+    public static HashMap<String, RegistryObject<Item>> getItemRegistryMap() {
+        return ITEM_REGISTRY_MAP;
     }
 
-    public static HashMap<String, RegistryObject<Block>> getBlockRegistry() {
-        return BLOCK_REGISTRY;
+    public static HashMap<String, RegistryObject<Block>> getBlockRegistryMap() {
+        return BLOCK_REGISTRY_MAP;
     }
 
     public static DeferredRegister<Item> getDeferredItems() {
@@ -65,26 +72,26 @@ public class IGRegistrationHolder {
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                         }
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                         }
                         case SLAB -> {
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                         }
                         case STAIRS -> {
                             String registryKey = blockCategory.getRegistryKey(material);
-                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> IGRegistrationHolder.getBlockRegistry().get(BlockCategoryFlags.STORAGE_BLOCK.getRegistryKey(material)).get().defaultBlockState(), material);
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply(BlockCategoryFlags.STORAGE_BLOCK.getRegistryKey(material)).defaultBlockState(), material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) IGRegistrationHolder.getBlockRegistry().get(registryKey).get()));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                     }
                 }

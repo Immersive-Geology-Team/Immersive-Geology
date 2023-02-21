@@ -1,4 +1,0 @@
-Silver
-Minerals
-<&silver>
-Mineral Test for silver

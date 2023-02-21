@@ -1,4 +1,0 @@
-Platinum
-Minerals
-<&platinum>
-Mineral Test for platinum

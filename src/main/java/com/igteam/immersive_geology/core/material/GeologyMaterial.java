@@ -74,7 +74,12 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
         ResourceLocation texture = new ResourceLocation(IGLib.MODID, "block/colored/" + getName() + "/" + flag.toString().toLowerCase());
 
+        if (flag instanceof ItemCategoryFlags iFlag) {
+            texture = new ResourceLocation(IGLib.MODID, "item/colored/" + this.name + "/" + iFlag.name());
+        }
+
         boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
+
         return exists ? texture : greyScaleTextures(flag);
     }
 

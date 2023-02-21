@@ -1,4 +1,0 @@
-Pyrite
-Minerals
-<&pyrite>
-Mineral Test for pyrite

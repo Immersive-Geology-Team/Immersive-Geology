@@ -1,8 +1,0 @@
-{
-"mineral_hubnerite": {
-  "type":"item_display",
-  "item": {
-     "item":"immersive_geology:ore_stone_vanilla_hubnerite"
-    }
-  }
-}

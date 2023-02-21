@@ -32,13 +32,13 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     public static IGClientRenderHandler INSTANCE = new IGClientRenderHandler();
 
     public static void register(){
-        for(Item i : IGRegistrationHolder.getItemRegistry().values().stream().map(RegistryObject::get).toList()){
+        for(Item i : IGRegistrationHolder.getItemRegistryMap().values().stream().map(RegistryObject::get).toList()){
             if(i instanceof IGItemType){
                 Minecraft.getInstance().getItemColors().register(INSTANCE, i);
             }
        }
 
-        for(Block b : IGRegistrationHolder.getBlockRegistry().values().stream().map(RegistryObject::get).toList()){
+        for(Block b : IGRegistrationHolder.getBlockRegistryMap().values().stream().map(RegistryObject::get).toList()){
             if(b instanceof IGBlockType){
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
             }

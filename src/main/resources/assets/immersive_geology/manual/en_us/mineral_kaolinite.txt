@@ -1,4 +1,0 @@
-Kaolinite
-Minerals
-<&kaolinite>
-Mineral Test for kaolinite

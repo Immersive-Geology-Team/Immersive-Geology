@@ -40,7 +40,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
     @Override
     protected void registerStatesAndModels() {
-        List<Block> igBlocks = IGRegistrationHolder.BLOCK_REGISTRY.values().stream().map(RegistryObject::get).toList();
+        List<Block> igBlocks = IGRegistrationHolder.getDeferredBlocks().getEntries().stream().map(RegistryObject::get).toList();
         for (Block block : igBlocks) {
             if(block instanceof IGBlockType igBlock) {
                 BlockCategoryFlags flag = (BlockCategoryFlags) igBlock.getFlag();
@@ -54,8 +54,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
         IGGenericBlock block = (IGGenericBlock) type;
+
+        log.info("Attempting Check for Texture Location: " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
+
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
-                                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + block.getRegistryName().getPath()).getPath(),
+                                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))
                         .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
                         .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag())))

@@ -21,11 +21,11 @@ public interface MaterialHelper {
             flag = ItemCategoryFlags.INGOT;
             ImmersiveGeology.getNewLogger().error("Attempted to grab an item from registry with a null flag, replacing with INGOT to prevent crash");
         }
-        return IGRegistrationHolder.ITEM_REGISTRY.get(flag.getRegistryKey(this)).get();
+        return IGRegistrationHolder.getItem.apply(flag.getRegistryKey(this));
     }
 
     default Item getItem(BlockCategoryFlags flag){
-        return IGRegistrationHolder.BLOCK_REGISTRY.get(flag.getRegistryKey(this)).get().asItem();
+        return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this)).asItem();
     }
     String getName();
 }

@@ -16,6 +16,10 @@
       "scale": [ 0.375, 0.375, 0.375 ]
     }
   },
+  "textures": {
+    "all": "immersive_geology:block/greyscale/stone/small_bricks",
+    "particle": "immersive_geology:block/greyscale/stone/small_bricks"
+  },
   "elements": [
     {   "from": [ 0, 0, 0 ],
       "to": [ 16, 8, 16 ],

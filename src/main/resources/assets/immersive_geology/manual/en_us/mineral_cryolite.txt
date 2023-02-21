@@ -1,4 +1,0 @@
-Cryolite
-Minerals
-<&cryolite>
-Mineral Test for cryolite
