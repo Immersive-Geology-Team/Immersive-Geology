@@ -40,16 +40,6 @@ public class IGWorldGeneration {
             }
         }
     }
-    @Deprecated
-    private static void fillFeatureBlacklist() { //Probably going the way of the DODO ~Muddykat
-        featureBlacklist.add(Features.ORE_GOLD);
-        featureBlacklist.add(Features.ORE_IRON);
-        featureBlacklist.add(Features.ORE_GOLD_EXTRA);
-        featureBlacklist.add(IEWorldGen.features.get("veins")); //Remove IE Ore Generation (We'll replace it later!) Also need to look at a way to do this without Internal Classes...
-        featureBlacklist.add(TinkerWorld.COPPER_ORE_FEATURE);   //We get rid of the Tinker Version of copper
-        featureBlacklist.add(TinkerWorld.COBALT_ORE_FEATURE_SMALL); //And cobalt
-        featureBlacklist.add(TinkerWorld.COBALT_ORE_FEATURE_LARGE);
-    }
 
     static Map<String, IFeatureConfig> configMap = new HashMap<>();
 
@@ -87,13 +77,6 @@ public class IGWorldGeneration {
         BiomeGenerationSettingsBuilder generation = ev.getGeneration();
 
         if(replaceOres) {
-            //We still allow Coal, Diamonds and Emeralds to spawn.
-            if (featureBlacklist.isEmpty()) {
-                IGApi.getNewLogger().warn("Blacklisting Metallic Ores from spawning. This includes ores from IE and TC - This is configurable this is a default IG process however");
-                fillFeatureBlacklist();
-            }
-
-            //TODO Make config option to remove ores
             //Most Overworld Ores use this
             generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).removeIf((suppliedFeature) -> {
                 ResourceLocation loc = suppliedFeature.get().feature.getRegistryName();

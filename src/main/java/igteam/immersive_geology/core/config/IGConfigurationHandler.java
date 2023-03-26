@@ -106,7 +106,7 @@ public class IGConfigurationHandler {
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
 
             ImmersiveGeology.getNewLogger().info("Generation Config Setup");
-            IGOreConfig clayGenerationConfig = new IGOreConfig(builder, MaterialSourceWorld.overworld, MineralEnum.Kaolinite.getName(), 30, 46, 30, 70, 3, 5000);
+            IGOreConfig clayGenerationConfig = new IGOreConfig(builder, MaterialSourceWorld.overworld, MineralEnum.Kaolinite.getName(), 30, 46, 30, 70, 12, 5000);
 
             for(MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
                 if(container.equals(MineralEnum.Kaolinite)){

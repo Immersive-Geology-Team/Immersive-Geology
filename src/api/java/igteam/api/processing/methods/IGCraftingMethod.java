@@ -11,6 +11,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -94,14 +95,24 @@ public class IGCraftingMethod extends IGProcessingMethod {
                 inputLoc = inputLoc.substring(startPos).replace("]", "");
             }
         } else {
+            StringBuilder locBuilder = new StringBuilder();
             List<Item> shapedArray = asList(getCharacterInputMap().values().toArray(new Item[getCharacterInputMap().size()]));
+            List<ITag.INamedTag<Item>> tagShapeArray = new ArrayList<>(getCharacterTagInputMap().values());
             if (!shapedArray.isEmpty()) {
-                StringBuilder locBuilder = new StringBuilder();
                 for (Item i : shapedArray) {
                     locBuilder.append(i.getRegistryName().getPath() + "_");
                 }
-                inputLoc = locBuilder.toString() + "shaped";
             }
+            if(!tagShapeArray.isEmpty()){
+                for (ITag.INamedTag<Item> i : tagShapeArray) {
+                    String sanitizedName = i.getName().getPath();
+                    int startPos = sanitizedName.indexOf('/') + 1;
+                    sanitizedName = sanitizedName.substring(startPos).replace("]", "");
+                    locBuilder.append(sanitizedName + "_");
+                }
+            }
+
+            inputLoc = locBuilder.toString() + "shaped";
         }
 
         String type = isShapeless ? "shapeless" : "shaped";
@@ -131,7 +142,7 @@ public class IGCraftingMethod extends IGProcessingMethod {
     }
 
     protected HashMap<Character, Item> inputMap = new HashMap<>();
-
+    protected HashMap<Character, ITag.INamedTag<Item>> tagInputMap = new HashMap<>();
     public IGCraftingMethod setInputToCharacter(Character c, Item item) {
         inputMap.putIfAbsent(c, item);
         return this;
@@ -145,9 +156,18 @@ public class IGCraftingMethod extends IGProcessingMethod {
         return inputMap;
     }
 
+
+    public HashMap<Character, ITag.INamedTag<Item>> getCharacterTagInputMap() {
+        return tagInputMap;
+    }
+
     @Override
     public ItemStack getGenericOutput() {
         return new ItemStack(result);
     }
 
+    public IGCraftingMethod setInputToCharacter(char c, ITag.INamedTag<Item> itemTag) {
+        tagInputMap.putIfAbsent(c, itemTag);
+        return this;
+    }
 }

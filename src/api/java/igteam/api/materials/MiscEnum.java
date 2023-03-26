@@ -77,7 +77,7 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
                             .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
 
                     IRecipeBuilder.crafting(this).shaped(MiscEnum.Reinforced_refractory.getBlock(BlockPattern.storage).asItem(), 5, "crc", "rrr", "crc")
-                            .setInputToCharacter('c', MetalEnum.Copper.getItem(ItemPattern.plate))
+                            .setInputToCharacter('c', MetalEnum.Copper.getItemTag(ItemPattern.plate))
                             .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
                             .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
 
@@ -88,6 +88,16 @@ public enum MiscEnum implements MaterialInterface<MaterialBase> {
                     IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.slab).asItem(), 6, "   ", "   ", "rrr")
                             .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())
                             .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem(), 1, "   ", "  r", "  r")
+                            .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.slab).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+                    IRecipeBuilder.crafting(this).shaped(MiscEnum.Reinforced_refractory.getBlock(BlockPattern.storage).asItem(), 1, "   ", "  r", "  r")
+                            .setInputToCharacter('r', MiscEnum.Reinforced_refractory.getBlock(BlockPattern.slab).asItem())
+                            .finializeRecipe("general_crafting", "refractory", MiscEnum.Refractory.getItemTag(ItemPattern.ingot));
+
+
 
                     IRecipeBuilder.crafting(this).shaped(MiscEnum.Refractory.getBlock(BlockPattern.stairs).asItem(), 4, "r  ", "rr ", "rrr")
                             .setInputToCharacter('r', MiscEnum.Refractory.getBlock(BlockPattern.storage).asItem())

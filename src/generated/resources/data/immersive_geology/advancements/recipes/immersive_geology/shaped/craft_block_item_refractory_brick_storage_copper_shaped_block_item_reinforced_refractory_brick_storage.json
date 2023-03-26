@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:shaped/craft_block_item_refractory_brick_storage_plate_copper_shaped_block_item_reinforced_refractory_brick_storage"
+      "immersive_geology:shaped/craft_block_item_refractory_brick_storage_copper_shaped_block_item_reinforced_refractory_brick_storage"
     ]
   },
   "criteria": {
@@ -17,7 +17,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:shaped/craft_block_item_refractory_brick_storage_plate_copper_shaped_block_item_reinforced_refractory_brick_storage"
+        "recipe": "immersive_geology:shaped/craft_block_item_refractory_brick_storage_copper_shaped_block_item_reinforced_refractory_brick_storage"
       }
     }
   },

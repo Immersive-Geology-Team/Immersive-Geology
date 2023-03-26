@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:smelting",
   "ingredient": {
     "item": "immersive_geology:clay_kaolinite"
   },

@@ -7,19 +7,19 @@
       }
     ]
   },
-  "galena_roasting_roasting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
-      }
-    ]
-  },
   "galena_extraction_crushing": {
     "type": "item_display",
     "items": [
       {
         "item": "immersiveengineering:crusher"
+      }
+    ]
+  },
+  "galena_roasting_roasting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_stone_reverberation_furnace"
       }
     ]
   },

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "general_crafting",
+  "pattern": [
+    "   ",
+    "  r",
+    "  r"
+  ],
+  "key": {
+    "r": {
+      "item": "immersive_geology:block_item_refractory_brick_slab"
+    }
+  },
+  "result": {
+    "item": "immersive_geology:block_item_refractory_brick_storage"
+  }
+}

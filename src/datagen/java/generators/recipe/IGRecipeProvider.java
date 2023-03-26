@@ -228,6 +228,11 @@ public class IGRecipeProvider extends RecipeProvider {
                 recipe.key(c, map.get(c));
             }
 
+            HashMap<Character, ITag.INamedTag<Item>> tagInputMap = method.getCharacterTagInputMap();
+            for (Character c : tagInputMap.keySet()) {
+                recipe.key(c, tagInputMap.get(c));
+            }
+
             recipe.setGroup(method.getRecipeGroup()).addCriterion(method.getCriterionName(), hasItem(method.getCriterionTrigger()));
             recipe.build(consumer, method.getLocation());
         } else {
