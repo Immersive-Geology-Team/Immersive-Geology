@@ -50,6 +50,7 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         } catch (Exception ex) {
             ImmersiveGeology.getNewLogger().log(Level.ERROR, "Attempted to generate a texture for the item type '" + item.getFlag().getName() + "' with material '" + item.getMaterial(MaterialTexture.base).getName() + "'");
+            ImmersiveGeology.getNewLogger().log(Level.ERROR, ex.getMessage());
         }
     }
 

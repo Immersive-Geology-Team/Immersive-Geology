@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
@@ -30,7 +31,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class IGRegistrationHolder {
-    private static final Logger logger = ImmersiveGeology.getNewLogger();
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IGLib.MODID);
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, IGLib.MODID);
 
@@ -42,8 +42,7 @@ public class IGRegistrationHolder {
 
     public static void initialize(){
         for (MaterialInterface<?> material : ImmersiveGeology.getGeologyMaterials()) {
-
-            for(Enum<?> flags : material.getFlags()){
+            for(IFlagType<?> flags : material.getFlags()){
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
                         case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK -> {

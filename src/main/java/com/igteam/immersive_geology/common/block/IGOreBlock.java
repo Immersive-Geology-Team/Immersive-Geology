@@ -13,6 +13,5 @@ public class IGOreBlock extends IGGenericBlock {
         super(flag, baseMaterial);
         this.materialMap.put(MaterialTexture.overlay, oreMaterial);
         IGClientRenderHandler.setRenderType(this, IGClientRenderHandler.RenderTypeSkeleton.TRANSLUCENT);
-
     }
 }

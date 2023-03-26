@@ -2,6 +2,7 @@ package com.igteam.immersive_geology.client.menu;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.lib.IGLib;
+import com.igteam.immersive_geology.core.material.MetalEnum;
 import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.client.gui.GuiUtils;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.apache.logging.log4j.Level;
 
 
 import java.util.ArrayList;

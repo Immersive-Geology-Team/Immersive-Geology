@@ -4,6 +4,7 @@ import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.apache.logging.log4j.Level;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public interface MaterialHelper {
@@ -21,6 +22,7 @@ public interface MaterialHelper {
             flag = ItemCategoryFlags.INGOT;
             ImmersiveGeology.getNewLogger().error("Attempted to grab an item from registry with a null flag, replacing with INGOT to prevent crash");
         }
+
         return IGRegistrationHolder.getItem.apply(flag.getRegistryKey(this));
     }
 

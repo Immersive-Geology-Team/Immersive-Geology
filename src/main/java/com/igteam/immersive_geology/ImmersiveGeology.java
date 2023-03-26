@@ -1,6 +1,5 @@
 package com.igteam.immersive_geology;
 
-import ca.weblite.objc.Client;
 import com.igteam.immersive_geology.common.configuration.ClientConfiguration;
 import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
 import com.igteam.immersive_geology.core.lib.IGLib;
@@ -80,10 +79,6 @@ public class ImmersiveGeology {
         CommonConfiguration.initialize();
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfiguration.SPEC, "immersive_geology-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfiguration.SPEC, "immersive_geology-common.toml");
-
-        for (MaterialInterface<?> material : ImmersiveGeology.getGeologyMaterials()) {
-            material.instance().initializeFlags(); // Used to Grab the Item and Block Flags from the Config File
-        }
     }
     public static List<MaterialInterface<?>> getGeologyMaterials(){
         ArrayList<MaterialInterface<?>> list = new ArrayList<>();

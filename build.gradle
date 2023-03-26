@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 buildscript {
     repositories {
         maven { url 'https://maven.minecraftforge.net' }
@@ -9,17 +11,11 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
-        classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
         classpath "org.jetbrains.gradle.plugin.idea-ext:org.jetbrains.gradle.plugin.idea-ext.gradle.plugin:1.1.1"
     }
 }
-
-plugins {
-    id 'java'
-    id 'idea'
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
@@ -34,36 +30,6 @@ archivesBaseName = 'immersive_geology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 jar.enabled = false
-
-repositories {
-    maven { // TOP (The one probe)
-        name 'tterrag maven'
-        url "https://maven.tterrag.com/"
-    }
-    maven { // JEI & Tinkers
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-    maven { // BlockModelSplitter
-        name 'Jared maven'
-        url 'https://maven.blamejared.com/'
-    }
-    maven {//Curse maven, in case some other maven goes offline and for mods that don't have a maven
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { // CC-Tweaked
-        url 'https://squiddev.cc/maven/'
-        content {
-            includeGroup 'org.squiddev'
-        }
-    }
-    maven { //Curious
-        url "https://maven.theillusivec4.top/"
-    }
-}
 
 sourceSets {
     api {
@@ -85,17 +51,28 @@ sourceSets {
         compileClasspath += main.output
         runtimeClasspath += main.output
     }
+    gametest {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+    test {
+        compileClasspath += api.output
+        runtimeClasspath += api.output
+    }
 }
 
 def version_replaces = [
-        'version': project.version,
-        'mc_version': version_minecraft,
+        'version'      : project.version,
+        'mc_version'   : version_minecraft,
         'forge_version': version_forge,
+        'jei_version'  : version_jei,
         'ie_version': ie_version_range
 ]
 
 processResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.FAIL
     inputs.properties(version_replaces)
     filesMatching("META-INF/mods.toml") {
         expand version_replaces
@@ -103,8 +80,6 @@ processResources {
     exclude ".cache"
 }
 
-// When using "Run using IntelliJ" (the only option with well-working hotswapping) the used "resources" directory is
-// different from the one used by gradle/the processResources task
 task copyModsTomlForIntelliJ(type: Copy) {
     from processResources.destinationDir
     into "$projectDir/out/production/resources"
@@ -117,35 +92,40 @@ afterEvaluate {
     prepareRuns.dependsOn copyModsTomlForIntelliJ
 }
 
-
 minecraft {
-    mappings channel: 'official', version: version_minecraft
+    mappings channel: 'parchment', version: version_parchment
 
     runs {
         client {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
-            property 'forge.logging.console.level', 'info'
-            property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN'
+            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+            ideaModule project.name + ".gametest"
             mods {
                 immersive_geology {
                     source sourceSets.main
                     source sourceSets.api
+                    source sourceSets.gametest
                 }
             }
         }
 
         server {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
-            property 'forge.logging.console.level', 'info'
-            property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', ''
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
+
+            // Disable GUI by default, the IDE console can be used to enter commands
             arg '-nogui'
 
             mods {
@@ -155,7 +135,6 @@ minecraft {
                 }
             }
         }
-
         data {
             workingDirectory project.file('run')
 
@@ -165,127 +144,84 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
             property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
 
             args '--mod', 'immersive_geology', '--all', '--output', file('src/generated/resources/'), '--validate',
                     '--existing', sourceSets.main.resources.srcDirs[0]
-
             ideaModule project.name+".datagen"
 
             mods {
                 immersive_geology {
                     source sourceSets.main
-                    source sourceSets.api
                     source sourceSets.datagen
+                    source sourceSets.api
+                }
+            }
+        }
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', ''
+
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
+
+            ideaModule project.name + ".gametest"
+
+            mods {
+                immersive_geology {
+                    source sourceSets.main
+                    source sourceSets.gametest
+                    source sourceSets.api
                 }
             }
         }
     }
 }
 
+repositories {
+    maven { // TOP (The one probe)
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+    maven { // JEI & Tinkers
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven { // BlockModelSplitter
+        name 'Jared maven'
+        url 'https://maven.blamejared.com/'
+    }
+    maven {//Curse maven, in case some other maven goes offline and for mods that don't have a maven
+        url "https://cfa2.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven { // CC-Tweaked
+        url 'https://squiddev.cc/maven/'
+        content {
+            includeGroup 'org.squiddev'
+        }
+    }
+    maven { //Curious
+        url "https://maven.theillusivec4.top/"
+    }
+}
+
 dependencies {
-    implementation project(path: ':')
     minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
 
     compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:api")
     runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}")
 
-    datagenCompileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:datagen")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.137")
+    compileOnly fg.deobf("org.squiddev:cc-tweaked-${version_minecraft}:${version_cctweaked}")
+    compileOnly fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18-5.0.2.4:api")
+    compileOnly fg.deobf("curse.maven:jade-324717:3551337")
+    compileOnly fg.deobf("curse.maven:opencomputers2-437654:3739469")
 
     testImplementation('junit:junit:4.13.2')
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "immersive_geology",
-                "Specification-Vendor"    : "ig_team",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "ig_team",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-// Example configuration to allow publishing using the maven-publish plugin
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-// publish.dependsOn('reobfJar')
-
-apply plugin: 'maven-publish'
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group
-            version = project.version
-            artifactId = project.archivesBaseName
-
-            artifact jar
-
-            pom {
-                name = project.archivesBaseName
-                description = project.archivesBaseName
-                url = 'https://www.curseforge.com/minecraft/mc-mods/immersive-geology'
-                scm {
-                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology/'
-                    connection = 'scm:git:git@github.com/Immersive-Geology-Team/Immersive-Geology.git'
-                    developerConnection = 'scm:git:git@github.com/Immersive-Geology-Team/Immersive-Geology.git'
-                }
-                issueManagement {
-                    system = 'github'
-                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology/issues'
-                }
-
-                developers {
-                    developer {
-                        id = 'Muddykat'
-                        name = 'Muddykat'
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-// Running this is equivalent to running genIntellijRuns, but it exists before afterEvaluate
-task genIntellijRunsDummy {}
-
-task speedUpPreRun {
-    doLast {
-        for (String s : new String[]{"Client", "Server", "Data"}) {
-            ant.replace(
-                    file: ".idea/runConfigurations/run"+s+".xml",
-                    // prepareRunX is prepareRuns + compile, but compiling is already handled by IntelliJ
-                    token: "prepareRun"+s,
-                    value: "prepareRuns"
-            )
-        }
-    }
-}
-
-tasks.withType(Task) {
-    if (it.name == "genIntellijRuns") {
-        it.finalizedBy speedUpPreRun
-        genIntellijRunsDummy.dependsOn it
-    }
-}
-
-idea.project.settings.taskTriggers {
-    afterSync genIntellijRunsDummy
-}

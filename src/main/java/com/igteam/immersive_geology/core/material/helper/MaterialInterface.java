@@ -26,7 +26,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getColor(flag);
     }
 
-    default Set<Enum<?>> getFlags() {
+    default Set<IFlagType<?>> getFlags() {
         return instance().getFlags();
     };
 
