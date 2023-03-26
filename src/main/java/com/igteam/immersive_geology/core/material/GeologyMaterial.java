@@ -10,6 +10,7 @@ import com.igteam.immersive_geology.core.material.helper.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.MaterialHelper;
 import net.minecraft.resources.ResourceLocation;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected Logger logger = ImmersiveGeology.getNewLogger();
     protected Function<IFlagType<?>, Integer> colorFunction; // in goes a category, returns the color white as a default
     protected Predicate<IFlagType<?>> applyColorTint = (flag) -> true;
-    private final Set<Enum<?>> materialFlags = Sets.newHashSet();
+    private final Set<Enum<?>> materialDataFlags = Sets.newHashSet();
 
     public GeologyMaterial(String name) {
         this.name = name;
@@ -41,18 +42,18 @@ public abstract class GeologyMaterial implements MaterialHelper {
     // Used to check properties of the material
     protected void addFlags(IFlagType<?>... flags) {
         for (IFlagType<?> flag : flags) {
-            materialFlags.add(flag.getValue());
+            materialDataFlags.add(flag.getValue());
         }
     }
 
     protected void removeMaterialFlags(IFlagType<?>... flags){
         for (IFlagType<?> flag : flags) {
-            materialFlags.remove(flag.getValue());
+            materialDataFlags.remove(flag.getValue());
         }
     }
 
     protected boolean hasFlag(IFlagType<?> flag) {
-        return materialFlags.contains(flag.getValue());
+        return materialDataFlags.contains(flag.getValue());
     }
     @Override
     public String getName() {
@@ -68,14 +69,16 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public Set<Enum<?>> getFlags() {
-        return materialFlags;
+        return materialDataFlags;
     }
 
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
         ResourceLocation texture = new ResourceLocation(IGLib.MODID, "block/colored/" + getName() + "/" + flag.toString().toLowerCase());
 
         if (flag instanceof ItemCategoryFlags iFlag) {
+            ImmersiveGeology.getNewLogger().log(Level.DEBUG, "Attempting to get custom texture for '" + this.name + "' at location: ");
             texture = new ResourceLocation(IGLib.MODID, "item/colored/" + this.name + "/" + iFlag.name());
+            ImmersiveGeology.getNewLogger().log(Level.DEBUG, texture.toString());
         }
 
         boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);

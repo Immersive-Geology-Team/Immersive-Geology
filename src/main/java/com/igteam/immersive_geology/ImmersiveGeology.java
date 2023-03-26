@@ -5,6 +5,7 @@ import com.igteam.immersive_geology.common.configuration.ClientConfiguration;
 import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.material.MetalEnum;
+import com.igteam.immersive_geology.core.material.StoneEnum;
 import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
@@ -25,6 +26,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mod(IGLib.MODID)
@@ -42,8 +44,8 @@ public class ImmersiveGeology {
 
         logger.info("Registering Items and Blocks");
         IGRegistrationHolder.initialize();
-        IGRegistrationHolder.getDeferredItems().register(modBus);
-        IGRegistrationHolder.getDeferredBlocks().register(modBus);
+        IGRegistrationHolder.getItemRegister().register(modBus);
+        IGRegistrationHolder.getBlockRegister().register(modBus);
 
         initializeConfiguration();
 
@@ -84,6 +86,10 @@ public class ImmersiveGeology {
         }
     }
     public static List<MaterialInterface<?>> getGeologyMaterials(){
-        return List.of(MetalEnum.values());
+        ArrayList<MaterialInterface<?>> list = new ArrayList<>();
+        list.addAll(List.of(StoneEnum.values()));
+        list.addAll(List.of(MetalEnum.values()));
+
+        return list;
     }
 }

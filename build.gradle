@@ -186,6 +186,7 @@ minecraft {
 }
 
 dependencies {
+    implementation project(path: ':')
     minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
 

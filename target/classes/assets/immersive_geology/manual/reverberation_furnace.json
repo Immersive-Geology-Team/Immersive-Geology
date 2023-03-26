@@ -1,0 +1,6 @@
+{
+  "reverberation_furnace0": {
+    "type": "multiblock",
+    "name": "immersive_geology:multiblocks/reverberation_furnace"
+  }
+}

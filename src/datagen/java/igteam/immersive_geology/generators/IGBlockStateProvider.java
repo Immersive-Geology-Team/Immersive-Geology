@@ -40,13 +40,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
     @Override
     protected void registerStatesAndModels() {
-        List<Block> igBlocks = IGRegistrationHolder.getDeferredBlocks().getEntries().stream().map(RegistryObject::get).toList();
+        List<Block> igBlocks = IGRegistrationHolder.supplyDeferredBlocks().get();
         for (Block block : igBlocks) {
             if(block instanceof IGBlockType igBlock) {
                 BlockCategoryFlags flag = (BlockCategoryFlags) igBlock.getFlag();
                 switch(flag){
                     case STAIRS -> registerStairsBlock(igBlock);
                     case DEFAULT_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
+                    case ORE_BLOCK -> registerOreBlock(igBlock);
                 }
             }
         }
@@ -143,5 +144,16 @@ public class IGBlockStateProvider extends BlockStateProvider {
                                                                         blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(0).uvLock(true).build() :
                                                                                 ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(180).uvLock(true).build()))
         );
+    }
+
+    private void registerOreBlock(IGBlockType block){
+        BlockModelBuilder baseModel;
+        baseModel = models().withExistingParent(
+                        new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()))
+                .texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag()))
+                .texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+
+        getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
     }
 }

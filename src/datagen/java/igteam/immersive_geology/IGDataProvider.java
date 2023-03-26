@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.common.block.helper.StaticTemplateManager;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.material.MetalEnum;
 import igteam.immersive_geology.generators.IGBlockStateProvider;
+import igteam.immersive_geology.generators.IGItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +26,7 @@ public class IGDataProvider {
 
         if(event.includeServer()){
             generator.addProvider(new IGBlockStateProvider(generator, exHelper));
+            generator.addProvider(new IGItemModelProvider(generator, exHelper));
         }
     }
 }

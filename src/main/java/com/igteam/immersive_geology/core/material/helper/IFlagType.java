@@ -1,7 +1,6 @@
 package com.igteam.immersive_geology.core.material.helper;
 
 import com.igteam.immersive_geology.client.menu.ItemSubGroup;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,4 +26,8 @@ public interface IFlagType<T extends Enum<T>> {
     default ItemSubGroup getSubGroup() {
         return ItemSubGroup.values()[0];
     };
+
+    default String getName(){
+        return getValue().name().toLowerCase();
+    }
 }

@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import java.util.*;
 
 public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
-
     private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     private final ItemCategoryFlags category;
 

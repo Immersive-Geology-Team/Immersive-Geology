@@ -13,8 +13,8 @@ import net.minecraft.world.level.material.MaterialColor;
 import java.util.*;
 
 public class IGGenericBlock extends Block implements IGBlockType {
-    private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
-    private final BlockCategoryFlags category;
+    protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
+    protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
         super(Properties.of(Material.STONE, MaterialColor.STONE));
