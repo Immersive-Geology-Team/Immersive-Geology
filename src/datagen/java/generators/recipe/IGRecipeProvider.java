@@ -155,7 +155,7 @@ public class IGRecipeProvider extends RecipeProvider {
         IItemProvider output = method.getOutput();
         float xp = 2;
         int smeltingTime = 200;
-        CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, method.getLocation());
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(input), output, xp, smeltingTime / 2).addCriterion("has_" + this.toPath(input), hasItem(input)).build(consumer, method.getLocation());
     }
 
     private void buildCrushingMethods(IGCrushingMethod method, Consumer<IFinishedRecipe> consumer) {
