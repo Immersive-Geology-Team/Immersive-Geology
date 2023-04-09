@@ -39,6 +39,7 @@ public interface ConfigurationHelper {
             // This sets things for the default items
             list.add(BlockCategoryFlags.STORAGE_BLOCK);
             list.add(BlockCategoryFlags.SHEETMETAL_BLOCK);
+            list.add(BlockCategoryFlags.STAIRS);
             if(metal instanceof MaterialNativeMetal) {
                 list.add(BlockCategoryFlags.RAW_ORE_BLOCK);
                 list.add(BlockCategoryFlags.ORE_BLOCK);

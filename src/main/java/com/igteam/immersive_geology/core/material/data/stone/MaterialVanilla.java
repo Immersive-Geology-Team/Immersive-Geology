@@ -17,6 +17,6 @@ public class MaterialVanilla extends MaterialStone {
 
     @Override
     protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x888c8d));
+        return ((p) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
     }
 }

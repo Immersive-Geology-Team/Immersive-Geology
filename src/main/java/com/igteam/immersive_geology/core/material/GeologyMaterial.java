@@ -6,10 +6,7 @@ import com.igteam.immersive_geology.common.block.helper.StaticTemplateManager;
 import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
 import com.igteam.immersive_geology.common.configuration.helper.ConfigurationHelper;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialHelper;
+import com.igteam.immersive_geology.core.material.helper.*;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -24,8 +21,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected String name;
     protected Logger logger = ImmersiveGeology.getNewLogger();
     protected Function<IFlagType<?>, Integer> colorFunction; // in goes a category, returns the color white as a default
-    protected Predicate<IFlagType<?>> applyColorTint;
-    private final Set<IFlagType<?>> materialDataFlags = Sets.newHashSet();
+    protected Predicate<IFlagType<?>> applyColorTint; // In a goes the flag, returns if it uses programmed color tint
+    private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
     public GeologyMaterial(String name) {
         this.name = name;
@@ -46,20 +43,17 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     // Used to check properties of the material
     protected void addFlags(IFlagType<?>... flags) {
-        for (IFlagType<?> flag : flags) {
-            materialDataFlags.add(flag);
-        }
+        materialDataFlags.addAll(Arrays.asList(flags));
     }
 
     protected void removeMaterialFlags(IFlagType<?>... flags){
-        for (IFlagType<?> flag : flags) {
-            materialDataFlags.remove(flag);
-        }
+        Arrays.asList(flags).forEach(materialDataFlags::remove);
     }
 
     protected boolean hasFlag(IFlagType<?> flag) {
         return materialDataFlags.contains(flag);
     }
+
     @Override
     public String getName() {
         return name.toLowerCase();
@@ -93,11 +87,12 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return exists ? texture : greyScaleTextures(flag);
     }
 
-    private ResourceLocation greyScaleTextures(IFlagType<?> pattern) {
+    protected ResourceLocation greyScaleTextures(IFlagType<?> pattern) {
         if (pattern.getValue() instanceof BlockCategoryFlags b){
             switch (b) {
                 case ORE_BLOCK:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/vanilla_normal");
+                    String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
+                    return new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
                 case STORAGE_BLOCK:
                     return new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case SLAB:
@@ -113,28 +108,29 @@ public abstract class GeologyMaterial implements MaterialHelper {
         }
 
         if (pattern.getValue() instanceof ItemCategoryFlags i) {
+
             switch (i) {
-                case RAW_ORE -> {
-                    String chunk_vein_name = "rock_chunk_vein";// + (getCrystalFamily() != null ? "_" + getCrystalFamily().getName() : "");
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/ore_chunk/" + chunk_vein_name);
-                }
-                case DIRTY_CRUSHED_ORE, CRUSHED_ORE -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/crushed_ore");
-                }
-                case CLAY, SLAG -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.name());
+                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG -> {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.getName());
                 }
                 case DUST, GEAR, INGOT, NUGGET, PLATE, ROD, WIRE, METAL_OXIDE, COMPOUND_DUST -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/" + i.name());
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/" + i.getName());
                 }
                 case CRYSTAL -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/raw_crystal_cubic");// + getCrystalFamily().getName());
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/" + getCrystalFamily().getName());
+                }
+                case RAW_ORE -> {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/raw_ore/" + i.getName() + "_" + getCrystalFamily().getName());
                 }
                 default -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/" + i.name());
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/" + i.getName());
                 }
             }
         }
         return null;
+    }
+
+    public CrystalFamily getCrystalFamily() {
+        return CrystalFamily.CUBIC;
     }
 }

@@ -149,7 +149,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void registerOreBlock(IGBlockType block){
         BlockModelBuilder baseModel;
         baseModel = models().withExistingParent(
-                        new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.base).getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName()).getPath(),
+                        new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName() + "_" + block.getMaterial(MaterialTexture.base).getName()).getPath(),
                         new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()))
                 .texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag()))
                 .texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));

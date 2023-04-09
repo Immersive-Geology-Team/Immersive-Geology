@@ -44,7 +44,7 @@ public class ClientProxy extends CommonProxy {
         for(MaterialInterface<?> i : ImmersiveGeology.getGeologyMaterials()) {
             GeologyMaterial base = i.instance();
             HashMap<IFlagType<?>, Boolean> colorCheckMap = new HashMap<>();
-            for (IFlagType<?> pattern : base.getFlags()) {
+            for (IFlagType<?> pattern : IFlagType.getAllRegistryFlags()) {
                 colorCheckMap.put(pattern, true);
                 if (base.getFlags().contains(pattern)) {
                     ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");

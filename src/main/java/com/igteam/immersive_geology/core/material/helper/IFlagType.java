@@ -19,8 +19,16 @@ public interface IFlagType<T extends Enum<T>> {
         return getValue().name().toLowerCase() + "_" + material.getName().toLowerCase();
     }
 
+    default String getRegistryKey(MaterialHelper ore, MaterialHelper stone) {
+        return getValue().name().toLowerCase() + "_" + ore.getName().toLowerCase() + "_" + stone.getName().toLowerCase();
+    }
+
     default String getRegistryKey(MaterialInterface<?> material) {
         return getRegistryKey(material.instance());
+    }
+
+    default String getRegistryKey(MaterialInterface<?> ore, MaterialInterface<?> stone) {
+        return getRegistryKey(ore.instance(), stone.instance());
     }
 
     default ItemSubGroup getSubGroup() {

@@ -64,6 +64,7 @@ public class ImmersiveGeology {
         logger.log(Level.INFO, "Finishing Immersive Geology Setup");
         proxy.onFinishSetup(event);
     }
+
     private void onClientSetup(final FMLClientSetupEvent event)
     {
         logger.log(Level.INFO," ");
@@ -80,6 +81,7 @@ public class ImmersiveGeology {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfiguration.SPEC, "immersive_geology-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfiguration.SPEC, "immersive_geology-common.toml");
     }
+
     public static List<MaterialInterface<?>> getGeologyMaterials(){
         ArrayList<MaterialInterface<?>> list = new ArrayList<>();
         list.addAll(List.of(StoneEnum.values()));

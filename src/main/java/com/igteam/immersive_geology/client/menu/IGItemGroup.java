@@ -73,11 +73,7 @@ public class IGItemGroup extends CreativeModeTab {
         for (Item item : ForgeRegistries.ITEMS.getValues()) {
             if(item instanceof IGFlagItem type) {
                 IFlagType<?> pattern = type.getFlag();
-                List<ItemCategoryFlags> itemFlags = ConfigurationHelper.defaultItemFlags.apply(type.getMaterial(MaterialTexture.base).instance());
-                List<BlockCategoryFlags> blockFlags = ConfigurationHelper.defaultBlockFlags.apply(type.getMaterial(MaterialTexture.base).instance());
-
-                boolean isConfigured = itemFlags.toString().contains(pattern.toString()) || blockFlags.toString().contains(pattern.toString());
-                if(type.getSubGroup() == selectedGroup && isConfigured) {
+                if(type.getSubGroup() == selectedGroup) {
                     if (itemMap.containsKey(pattern)) {
                         ArrayList<Item> list = itemMap.get(pattern);
                         list.add(item);

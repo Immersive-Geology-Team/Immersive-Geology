@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,13 +25,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IGClientRenderHandler implements ItemColor, BlockColor {
+    // Handles, IG Block and Item Tint Colors, Render Layering and Special Renders
+
+
     @OnlyIn(Dist.CLIENT)
     private static Map<RenderTypeSkeleton, RenderType> renderTypes;
+
     private static final Map<Block, RenderTypeSkeleton> mapping = new HashMap<>();
     private static final Map<Block, Block> inheritances = new HashMap<>();
 
     public static IGClientRenderHandler INSTANCE = new IGClientRenderHandler();
 
+    // Register This as the color handler for all IG Items and Blocks
     public static void register(){
         for(Item i : IGRegistrationHolder.getItemRegistryMap().values().stream().map(RegistryObject::get).toList()){
             if(i instanceof IGItemType){
@@ -45,6 +51,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         }
     }
 
+    // Initialize the keys and mappings for render layers
     @OnlyIn(Dist.CLIENT)
     public static void init(FMLClientSetupEvent event) {
         for(Block b : inheritances.keySet()) {
@@ -57,17 +64,11 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             ItemBlockRenderTypes.setRenderLayer(b, renderTypes.get(mapping.get(b)));
         }
 
-//        for(IGFluid fluid : IGFluid.IG_FLUIDS){
-//            if(!fluid.isSolidFluid()) {
-//                ItemBlockRenderTypes.setRenderLayer(fluid, RenderType.translucent());
-//                ItemBlockRenderTypes.setRenderLayer(fluid.getFlowingFluid(), RenderType.getTranslucent());
-//            }
-//        }
-
         inheritances.clear();
         mapping.clear();
     }
 
+    // Color Function for IG Blocks
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
         if(state.getBlock() instanceof IGBlockType type)
@@ -75,6 +76,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         return 0xffffff;
     }
 
+    // Color Function for IG Items
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
         if(stack.getItem() instanceof IGItemType type)

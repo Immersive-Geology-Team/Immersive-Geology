@@ -53,9 +53,9 @@ public class IGRegistrationHolder {
                         }
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
-                            for (StoneEnum type : StoneEnum.values()) {
-                                String registryKey = blockCategory.getRegistryKey(material);
-                                Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, type, material);
+                            for (StoneEnum base : StoneEnum.values()) {
+                                String registryKey = blockCategory.getRegistryKey(material, base);
+                                Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material);
                                 registerBlock(registryKey, blockProvider);
                                 registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                             }
@@ -68,7 +68,7 @@ public class IGRegistrationHolder {
                         }
                         case STAIRS -> {
                             String registryKey = blockCategory.getRegistryKey(material);
-                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply(BlockCategoryFlags.STORAGE_BLOCK.getRegistryKey(material)).defaultBlockState(), material);
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply(BlockCategoryFlags.SHEETMETAL_BLOCK.getRegistryKey(material)).defaultBlockState(), material);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
