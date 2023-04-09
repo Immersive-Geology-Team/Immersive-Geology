@@ -1,12 +1,9 @@
 package com.igteam.immersive_geology.common.block;
 
 import com.igteam.immersive_geology.client.IGClientRenderHandler;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
-import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
 
 public class IGOreBlock extends IGGenericBlock {
     public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?> baseMaterial, MaterialInterface<?> oreMaterial) {

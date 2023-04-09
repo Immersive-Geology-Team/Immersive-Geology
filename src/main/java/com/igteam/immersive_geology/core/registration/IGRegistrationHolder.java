@@ -9,26 +9,22 @@ import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.IGGenericItem;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.StoneEnum;
-import com.igteam.immersive_geology.core.material.data.types.MaterialStone;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
+import com.igteam.immersive_geology.core.material.data.enums.StoneEnum;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class IGRegistrationHolder {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IGLib.MODID);
@@ -43,6 +39,7 @@ public class IGRegistrationHolder {
     public static void initialize(){
         for (MaterialInterface<?> material : ImmersiveGeology.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
+                if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) break;
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
                         case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK -> {

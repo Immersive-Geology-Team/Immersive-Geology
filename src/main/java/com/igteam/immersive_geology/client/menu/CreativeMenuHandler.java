@@ -1,30 +1,22 @@
 package com.igteam.immersive_geology.client.menu;
 
-import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.MetalEnum;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.client.gui.GuiUtils;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.logging.log4j.Level;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreativeMenuHandler {
     private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_expansion.png");

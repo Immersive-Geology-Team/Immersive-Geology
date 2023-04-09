@@ -1,15 +1,13 @@
 package com.igteam.immersive_geology.core.material.data.types;
 
-import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.material.GeologyMaterial;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
 import net.minecraft.resources.ResourceLocation;
 
 public class MaterialStone extends GeologyMaterial {
 
-    public MaterialStone(String name) {
-        super(name);
+    public MaterialStone() {
+        super();
     }
 
     @Override

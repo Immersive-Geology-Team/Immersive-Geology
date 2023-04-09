@@ -1,0 +1,6 @@
+{
+  "parent": "immersive_geology:block/base/stairs_inner",
+  "textures": {
+    "all": "immersive_geology:block/colored/titanium/storage_block"
+  }
+}

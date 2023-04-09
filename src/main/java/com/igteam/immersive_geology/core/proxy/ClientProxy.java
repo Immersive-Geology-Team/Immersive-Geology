@@ -3,18 +3,18 @@ package com.igteam.immersive_geology.core.proxy;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.client.IGClientRenderHandler;
 import com.igteam.immersive_geology.client.menu.CreativeMenuHandler;
-import com.igteam.immersive_geology.common.configuration.helper.ConfigurationHelper;
 import com.igteam.immersive_geology.core.lib.IGLib;
 import com.igteam.immersive_geology.core.material.GeologyMaterial;
-import com.igteam.immersive_geology.core.material.helper.*;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 

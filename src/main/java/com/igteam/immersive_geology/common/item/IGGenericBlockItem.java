@@ -2,13 +2,12 @@ package com.igteam.immersive_geology.common.item;
 
 import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.client.menu.ItemSubGroup;
-import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
-import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.item.BlockItem;
 
 import java.util.*;

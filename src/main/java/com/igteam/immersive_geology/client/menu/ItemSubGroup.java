@@ -1,7 +1,10 @@
 package com.igteam.immersive_geology.client.menu;
 
-import com.igteam.immersive_geology.core.material.MetalEnum;
-import com.igteam.immersive_geology.core.material.helper.*;
+import com.igteam.immersive_geology.core.material.data.enums.MetalEnum;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public enum ItemSubGroup {

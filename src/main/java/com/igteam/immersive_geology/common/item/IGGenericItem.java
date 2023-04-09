@@ -4,9 +4,9 @@ import com.igteam.immersive_geology.client.menu.IGItemGroup;
 import com.igteam.immersive_geology.client.menu.ItemSubGroup;
 import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
 import com.igteam.immersive_geology.common.item.helper.IGItemType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
-import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.item.Item;
 
 import java.util.*;

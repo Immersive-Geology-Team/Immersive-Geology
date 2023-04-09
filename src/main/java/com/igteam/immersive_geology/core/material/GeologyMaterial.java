@@ -3,10 +3,13 @@ package com.igteam.immersive_geology.core.material;
 import com.google.common.collect.Sets;
 import com.igteam.immersive_geology.ImmersiveGeology;
 import com.igteam.immersive_geology.common.block.helper.StaticTemplateManager;
-import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
 import com.igteam.immersive_geology.common.configuration.helper.ConfigurationHelper;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.helper.*;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialHelper;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -24,8 +27,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected Predicate<IFlagType<?>> applyColorTint; // In a goes the flag, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
-    public GeologyMaterial(String name) {
-        this.name = name;
+    public GeologyMaterial() {
+        // As long as the class itself is named appropriately we do not need to specify a name in the class.
+        String className = this.getClass().getName().toLowerCase();
+        this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
+
         this.colorFunction = materialColorFunction();
         initializeColorTint((p) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();

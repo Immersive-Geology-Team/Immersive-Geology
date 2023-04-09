@@ -5,9 +5,9 @@ import com.igteam.immersive_geology.common.block.IGGenericBlock;
 import com.igteam.immersive_geology.common.block.IGStairBlock;
 import com.igteam.immersive_geology.common.block.helper.IGBlockType;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersive_geology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
@@ -20,12 +20,9 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class IGBlockStateProvider extends BlockStateProvider {
 

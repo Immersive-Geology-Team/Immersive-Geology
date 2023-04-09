@@ -1,15 +1,10 @@
 package com.igteam.immersive_geology.client.menu;
 
 import com.igteam.immersive_geology.ImmersiveGeology;
-import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
-import com.igteam.immersive_geology.common.configuration.helper.ConfigurationHelper;
-import com.igteam.immersive_geology.common.item.IGGenericBlockItem;
 import com.igteam.immersive_geology.common.item.helper.IGFlagItem;
-import com.igteam.immersive_geology.common.item.helper.IGItemType;
-import com.igteam.immersive_geology.core.material.helper.BlockCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.IFlagType;
-import com.igteam.immersive_geology.core.material.helper.ItemCategoryFlags;
-import com.igteam.immersive_geology.core.material.helper.MaterialTexture;
+import com.igteam.immersive_geology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
+import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -24,7 +19,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersive_geology", "textures/gui/ig_tab_menu.png");

@@ -3,9 +3,10 @@ package com.igteam.immersive_geology;
 import com.igteam.immersive_geology.common.configuration.ClientConfiguration;
 import com.igteam.immersive_geology.common.configuration.CommonConfiguration;
 import com.igteam.immersive_geology.core.lib.IGLib;
-import com.igteam.immersive_geology.core.material.MetalEnum;
-import com.igteam.immersive_geology.core.material.StoneEnum;
-import com.igteam.immersive_geology.core.material.helper.MaterialInterface;
+import com.igteam.immersive_geology.core.material.data.enums.MetalEnum;
+import com.igteam.immersive_geology.core.material.data.enums.MineralEnum;
+import com.igteam.immersive_geology.core.material.data.enums.StoneEnum;
+import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersive_geology.core.proxy.ClientProxy;
 import com.igteam.immersive_geology.core.proxy.Proxy;
 import com.igteam.immersive_geology.core.proxy.CommonProxy;
@@ -86,6 +87,7 @@ public class ImmersiveGeology {
         ArrayList<MaterialInterface<?>> list = new ArrayList<>();
         list.addAll(List.of(StoneEnum.values()));
         list.addAll(List.of(MetalEnum.values()));
+        list.addAll(List.of(MineralEnum.values()));
 
         return list;
     }
