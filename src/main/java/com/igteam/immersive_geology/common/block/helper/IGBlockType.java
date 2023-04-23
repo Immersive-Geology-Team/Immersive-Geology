@@ -7,6 +7,7 @@ import com.igteam.immersive_geology.core.material.helper.material.MaterialTextur
 import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface IGBlockType {
     Block getBlock();
@@ -17,5 +18,6 @@ public interface IGBlockType {
 
     ItemSubGroup getGroup();
 
+    Map<MaterialTexture, MaterialInterface<?>> getMaterialMap();
     int getColor(int index);
 }

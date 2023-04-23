@@ -51,6 +51,11 @@ public class IGStairBlock extends StairBlock implements IGBlockType {
     }
 
     @Override
+    public Map<MaterialTexture, MaterialInterface<?>> getMaterialMap() {
+        return materialMap;
+    }
+
+    @Override
     public int getColor(int index) {
         return materialMap.get(MaterialTexture.base).getColor(category);
     }

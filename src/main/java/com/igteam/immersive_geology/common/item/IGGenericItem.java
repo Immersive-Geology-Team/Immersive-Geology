@@ -7,7 +7,11 @@ import com.igteam.immersive_geology.common.item.helper.IGItemType;
 import com.igteam.immersive_geology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
@@ -25,6 +29,18 @@ public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
         if (index >= materialMap.values().size()) index = materialMap.values().size() - 1;
         //let's use last available colour. map could not be empty
         return materialMap.get(MaterialTexture.values()[index]).getColor(category);
+    }
+
+    @Override
+    public Component getName(ItemStack pStack) {
+        List<String> materialList = new ArrayList<>();
+        for(MaterialTexture t : MaterialTexture.values()){
+            if (materialMap.containsKey(t)) {
+                materialList.add(I18n.get("material.immersive_geology." + materialMap.get(t).getName()));
+            }
+        }
+
+        return new TranslatableComponent("item.immersive_geology." + category.getName(), materialList.toArray());
     }
 
     @Override

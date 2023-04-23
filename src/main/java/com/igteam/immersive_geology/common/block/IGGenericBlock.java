@@ -47,4 +47,9 @@ public class IGGenericBlock extends Block implements IGBlockType {
     public Block getBlock() {
         return this;
     }
+
+    @Override
+    public Map<MaterialTexture, MaterialInterface<?>> getMaterialMap() {
+        return materialMap;
+    }
 }
