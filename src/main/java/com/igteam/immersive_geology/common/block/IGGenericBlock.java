@@ -7,6 +7,8 @@ import com.igteam.immersive_geology.core.material.helper.flags.IFlagType;
 import com.igteam.immersive_geology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersive_geology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
@@ -17,7 +19,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
     protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        super(Properties.of(Material.STONE, MaterialColor.STONE));
+        super(BlockBehaviour.Properties.copy(Blocks.IRON_ORE));
         this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }

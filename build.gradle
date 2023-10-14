@@ -1,4 +1,7 @@
+import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import net.minecraftforge.gradle.common.tasks.SignJar
+import org.gradle.work.Incremental
 
 buildscript {
     repositories {
@@ -51,16 +54,6 @@ sourceSets {
         compileClasspath += main.output
         runtimeClasspath += main.output
     }
-    gametest {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-    }
-    test {
-        compileClasspath += api.output
-        runtimeClasspath += api.output
-    }
 }
 
 def version_replaces = [
@@ -71,6 +64,8 @@ def version_replaces = [
         'ie_version': ie_version_range
 ]
 
+def jsonPatterns = ["**/*.json", "**/*.mcmeta"]
+
 processResources {
     duplicatesStrategy = DuplicatesStrategy.FAIL
     inputs.properties(version_replaces)
@@ -78,6 +73,12 @@ processResources {
         expand version_replaces
     }
     exclude ".cache"
+    //Minify json resources
+    doLast {
+        fileTree(dir: getOutputs().getFiles().getAsPath(), includes: jsonPatterns).each {
+            File file -> file.setText(JsonOutput.toJson(new JsonSlurper().parse(file, 'UTF-8')))
+        }
+    }
 }
 
 task copyModsTomlForIntelliJ(type: Copy) {
@@ -110,11 +111,9 @@ minecraft {
                 immersive_geology {
                     source sourceSets.main
                     source sourceSets.api
-                    source sourceSets.gametest
                 }
             }
         }
-
         server {
             workingDirectory project.file('run')
 
@@ -153,23 +152,6 @@ minecraft {
                 immersive_geology {
                     source sourceSets.main
                     source sourceSets.datagen
-                    source sourceSets.api
-                }
-            }
-        }
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
-
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
-
-            ideaModule project.name + ".gametest"
-
-            mods {
-                immersive_geology {
-                    source sourceSets.main
-                    source sourceSets.gametest
                     source sourceSets.api
                 }
             }
@@ -225,3 +207,311 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
+
+def customGradle = rootProject.file('custom.gradle');
+if (customGradle.exists()) {
+    apply from: customGradle;
+}
+
+task signJar(type: SignJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    if (project.hasProperty('keyStore')) {
+        keyStore = project.keyStore
+        alias = project.storeAlias
+        storePass = project.storePass
+        keyPass = project.storePass
+        inputFile = shadowJar.archiveFile
+        outputFile = shadowJar.archiveFile
+    } else {
+        logger.warn("No key store found, not signing the output jar\n")
+    }
+}
+
+build.dependsOn signJar
+
+afterEvaluate {
+    signJar.dependsOn reobfShadowJar
+    reobfJar.enabled = false
+}
+
+task datagenJar(type: Jar, dependsOn: datagenClasses) {
+    classifier = 'datagen'
+    from sourceSets.datagen.output
+    manifest {
+        attributes "FMLModType": "GAMELIBRARY"
+    }
+}
+
+task apiJar(type: Jar, dependsOn: apiClasses) {
+    classifier = 'api'
+    from sourceSets.api.output
+}
+
+task buildJar(type: Jar, dependsOn: apiClasses) {
+    classifier = 'api'
+    from sourceSets.main.output
+    from sourceSets.api.output
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    from sourceSets.api.allSource
+    from sourceSets.datagen.allSource
+}
+
+artifacts {
+    archives sourcesJar
+    archives shadowJar
+    archives datagenJar
+    archives apiJar
+    archives buildJar
+}
+
+shadowJar {
+    classifier = ''
+    from(sourceSets.api.output)
+}
+
+reobf {
+    shadowJar {}
+}
+
+//Minimize/optimize all png files, requires optipng on the PATH
+// Credits: BrainStone
+void minimizePNGFile(File file) {
+    long size = file.length()
+    exec {
+        executable "optipng"
+        args "-q", "-o7", "-zm1-9", "-strip", "all", file
+    }
+    long newSize = file.length()
+    if (newSize < size) {
+        System.out.format("Reduced File size of %s from %d bytes to %d bytes (reduced by %.2f%%)\n",
+                file, size, newSize, ((double) (size - newSize)) / ((double) size) * 100.0)
+    }
+}
+
+task optimizePng {
+    def pngPatterns = ["**/*.png"]
+    doLast {
+        //Ensure the logo is minimized (we add this file to each jar)
+        //Minimize any PNGs in the source sets
+        for (dir in sourceSets.main.resources.srcDirs) {
+            fileTree(dir: dir, includes: pngPatterns).each { minimizePNGFile(it) }
+        }
+    }
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        maven {
+            url = "file://" + (System.getenv("local_maven") != null ? System.getenv("local_maven") : System.getenv("bamboo_local_maven"))
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            version = project.version
+            artifactId = project.archivesBaseName
+
+            artifact sourcesJar
+            artifact shadowJar
+            artifact datagenJar
+            artifact apiJar
+            artifact buildJar
+
+            pom {
+                name = project.archivesBaseName
+                description = project.archivesBaseName
+                url = 'https://www.curseforge.com/minecraft/mc-mods/immersive-geology'
+                scm {
+                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology'
+                    connection = 'scm:git:git@github.com/Muddykats/Immersive-Geology.git'
+                    developerConnection = 'scm:git:git@github.com/Muddykats/Immersive-Geology.git'
+                }
+                issueManagement {
+                    system = 'github'
+                    url = 'https://github.com/Immersive-Geology-Team/Immersive-Geology/issues'
+                }
+
+                developers {
+                    developer {
+                        id = 'Muddykats'
+                        name = 'Muddykats'
+                    }
+                }
+            }
+        }
+    }
+}
+
+publish.dependsOn build
+
+//Code for automatic update JSON generation
+abstract class GenerateUpdateJSON extends DefaultTask {
+    static def initVersions = { mcFromIEVersion ->
+        mcFromIEVersion.put("0.8", "1.8.9")
+        mcFromIEVersion.put("0.9", "1.9.4")
+        mcFromIEVersion.put("0.10", "1.10.2")
+        mcFromIEVersion.put("0.11", "1.11.2")
+        mcFromIEVersion.put("0.12", "1.12.2")
+        mcFromIEVersion.put("0.14", "1.14.4")
+        mcFromIEVersion.put("0.15", "1.15.2")
+        mcFromIEVersion.put("0.16", "1.16.1")
+    }
+    static def VERSION_PREFIX = "##### Version "
+    static def BUILT_SUFFIX = " - BUILT"
+    static def PRE_SUFFIX = "-pre"
+    static def RECOMMENDED = "-recommended"
+    static def LATEST = "-latest"
+    static def CF_URL = "https://minecraft.curseforge.com/projects/immersive-geology"
+    @Incremental
+    @PathSensitive(PathSensitivity.NAME_ONLY)
+    @InputFile
+    abstract RegularFileProperty getMarkdown()
+
+    @OutputFile
+    abstract RegularFileProperty getOnlineJSON()
+
+    @OutputFile
+    abstract RegularFileProperty getIncludedJSON()
+
+    static int compareVersions(String vA, String vB) {
+        String[] vPartsA = vA.split("[\\D]")
+        String[] vPartsB = vB.split("[\\D]")
+        if (vPartsA.length == 0 && vPartsB.length == 0)
+            return vA <=> vB
+        else if (vPartsA.length == 0)
+            return -1
+        else if (vPartsB.length == 0)
+            return 1
+
+        int length = Math.min(vPartsA.length, vPartsB.length)
+        for (int i = 0; i < length; i++) {
+            int pA = Integer.parseInt(vPartsA[i])
+            int pB = Integer.parseInt(vPartsB[i])
+            if (pA != pB) {
+                return pA <=> pB
+            }
+        }
+        if (vPartsA.length != vPartsB.length)
+            return vPartsA.length <=> vPartsB.length
+        return vA <=> vB
+    }
+
+    @TaskAction
+    def generate() {
+        Map<String, String> mcFromIEVersion = new HashMap<>()
+        initVersions(mcFromIEVersion)
+        File changelog = getMarkdown().get().asFile;
+        if (!changelog.exists())
+            println "Changelog does not exist! Aborting!"
+        else {
+            Map<String, Map<String, String>> changelogForVersions = new HashMap<>()
+            Map<String, String> promos = new TreeMap<>({ String s1, String s2 ->
+                compareVersions(s1, s2)
+            })
+            String currentVersion = null
+            String currentChangelog = ""
+            changelog.eachLine('ISO-8859-1', { line ->
+                if (line.startsWith(VERSION_PREFIX)) {
+                    if (currentVersion != null) {
+                        String mainVer = currentVersion.substring(0, currentVersion.indexOf('-'))
+                        String mcVer;
+                        // legacy versioning support
+                        if (mainVer.startsWith("0.")) {
+                            mcVer = mcFromIEVersion[mainVer]
+                        } else {
+                            mcVer = mainVer
+                        }
+                        if (mcVer == null) {
+                            throw new NullPointerException("Could not find MC version for " + currentVersion);
+                        } else if (mcVer == project.ext.version_minecraft) {
+                            if (!changelogForVersions.containsKey(mcVer)) {
+                                promos.put(mcVer + RECOMMENDED, currentVersion)
+                                promos.put(mcVer + LATEST, currentVersion)
+                                changelogForVersions[mcVer] = new TreeMap<>({ String s1, String s2 ->
+                                    compareVersions(s1, s2)
+                                })
+                            }
+                            changelogForVersions[mcVer][currentVersion] = currentChangelog
+                        }
+                    }
+                    if (line.endsWith(BUILT_SUFFIX)) {
+                        currentVersion = line.substring(VERSION_PREFIX.length(), line.length() - BUILT_SUFFIX.length())
+                    } else if (!line.endsWith(PRE_SUFFIX)) {
+                        currentVersion = line.substring(VERSION_PREFIX.length())
+                    } else {
+                        currentVersion = (String) null
+                    }
+                    currentChangelog = ""
+                } else if (!line.isEmpty()) {
+                    if (currentChangelog.length() == 0)
+                        currentChangelog += line
+                    else
+                        currentChangelog += "\n" + line
+                }
+                return null
+            })
+            Map<String, Object> mainMap = new TreeMap<>({ String s1, String s2 ->
+                compareVersions(s1, s2)
+            })
+            mainMap.putAll(changelogForVersions)
+            mainMap["homepage"] = CF_URL
+            mainMap["promos"] = promos
+            //JSON for the Forge update checker
+            def updateJson = JsonOutput.toJson(mainMap)
+            updateJson = JsonOutput.prettyPrint(updateJson)
+            File outF = getOnlineJSON().get().asFile;
+            outF.delete()
+            outF << updateJson
+        }
+    }
+}
+
+task updateJson(type: GenerateUpdateJSON) {
+    markdown = file("changelog.md")
+    includedJSON = file("src/main/resources/assets/immersive_geology/changelog.json")
+    onlineJSON = file("changelog.json")
+}
+
+processResources.dependsOn updateJson
+
+mixin {
+    add sourceSets.main, "${modid}.refmap.json"
+    config "${modid}.mixins.json"
+}
+
+// Running this is equivalent to running genIntellijRuns, but it exists before afterEvaluate
+task genIntellijRunsDummy {}
+
+task speedUpPreRun {
+    doLast {
+        for (String s : new String[]{"Client", "Server", "Data"}) {
+            ant.replace(
+                    file: ".idea/runConfigurations/run"+s+".xml",
+                    // prepareRunX is prepareRuns + compile, but compiling is already handled by IntelliJ
+                    token: "prepareRun"+s,
+                    value: "prepareRuns"
+            )
+        }
+    }
+}
+
+tasks.withType(Task) {
+    if (it.name == "genIntellijRuns") {
+        it.finalizedBy speedUpPreRun
+        genIntellijRunsDummy.dependsOn it
+    } else if (it.name == "runServer") {
+        it.standardInput = System.in
+    }
+}
+
+idea.project.settings.taskTriggers {
+    afterSync genIntellijRunsDummy
+}
