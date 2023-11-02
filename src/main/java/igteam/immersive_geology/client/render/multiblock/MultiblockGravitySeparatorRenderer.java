@@ -10,13 +10,16 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @OnlyIn(Dist.CLIENT)
@@ -56,13 +59,10 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
             float radius = 2;
             float ix, iy, iz;
             if(master != null){
-                Iterator<PoweredMultiblockTileEntity.MultiblockProcess<SeparatorRecipe>> queueIterator = master.processQueue.iterator();
-
-                while(queueIterator.hasNext()){
-                    PoweredMultiblockTileEntity.MultiblockProcessInWorld<SeparatorRecipe> wrapper = (PoweredMultiblockTileEntity.MultiblockProcessInWorld<SeparatorRecipe>) queueIterator.next();
-                    ItemStack item = wrapper.inputItems.get(0);
-                    float progress = (float) wrapper.processTick;
-                    float angle = (float) Math.toRadians((progress % (wrapper.maxTicks / 4)  / (wrapper.maxTicks / 4)) * 360f);
+                for (Pair<Item, Integer> pair : master.getInternalInventory()) {
+                    ItemStack item = new ItemStack(pair.getLeft(), 1);
+                    float progress = (float) pair.getRight() / 100;
+                    float angle = (float) Math.toRadians((progress % (100 / 4) / (100 / 4)) * 360f);
                     ix = (float) (Math.cos(angle) * radius);
                     iz = (float) (6 - (7 * (progress * 0.0045)));
                     iy = (float) (Math.sin(angle) * radius);

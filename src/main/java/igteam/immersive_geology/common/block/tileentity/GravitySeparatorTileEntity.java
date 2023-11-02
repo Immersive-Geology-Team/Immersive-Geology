@@ -18,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -59,12 +60,13 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     public final FluidTank tank = new FluidTank(16 * FluidAttributes.BUCKET_VOLUME);
     private final List<CapabilityReference<IFluidHandler>> fluidNeighbors;
-
+    private final ArrayList<Pair<Item, Integer>> item_processing_list;
+    private final ArrayList<ItemStack> output_list = new ArrayList<>();
     public GravitySeparatorTileEntity() {
         super(GravitySeparatorMultiblock.INSTANCE, 0, false, IGTileTypes.GRAVITY.get());
-        this.fluidNeighbors = new ArrayList();
+        this.fluidNeighbors = new ArrayList<>();
         this.fluidNeighbors.add(CapabilityReference.forNeighbor(this, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP));
-
+        this.item_processing_list = new ArrayList<>();
     }
 
 
@@ -72,28 +74,72 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
         nbt.put("tank_input", tank.writeToNBT(new CompoundNBT()));
+        NonNullList<ItemStack> items = NonNullList.create();
 
+        int items_to_process = this.item_processing_list.size()-1;
+        nbt.putInt("item_process_size", items_to_process);
+
+        for(int i = 0; i < items_to_process; ++i) {
+            Pair<Item, Integer> pair = this.item_processing_list.get(i);
+            ItemStack item = new ItemStack(pair.getLeft(), 1);
+            items.add(item);
+            nbt.putInt("process_" + Integer.toString(i), pair.getRight());
+        }
+        nbt.put("inventory", Utils.writeInventory(items));
     }
 
     @Override
     public void readCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.readCustomNBT(nbt, descPacket);
         tank.readFromNBT(nbt.getCompound("tank_input"));
+        int items_to_process = nbt.getInt("item_process_size");
+        ArrayList<Pair<Item, Integer>> item_to_process = new ArrayList<>();
+        NonNullList<ItemStack> items = Utils.readInventory(nbt.getList("inventory", 10), 1);
+        for(int i = 0; i < items_to_process; ++i) {
+            int process = nbt.getInt("process_" + Integer.toString(i));
+            item_to_process.add(Pair.of(items.get(i).getItem(), process));
+        }
+        this.item_processing_list.addAll(item_to_process);
     }
 
     @Override
     public TileEntityType<?> getType() {
         return IGTileTypes.GRAVITY.get();
     }
-
+    int processing_tick = 0;
     @Override
     public void tick() {
         super.tick();
         GravitySeparatorTileEntity master = this.master();
         if(master != null) { //TODO FIX THIS SO IT ISN'T SHIT
-            if (!master.processQueue.isEmpty()) {
+            if (!master.item_processing_list.isEmpty()) {
                 if (!master.tank.isEmpty()) {
-                    master.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                    if(processing_tick > master.item_processing_list.size()-1) processing_tick = 0;
+                    ArrayList<Pair<Item, Integer>> new_processing_list = new ArrayList<>();
+                    Pair<Item, Integer> pair = master.item_processing_list.get(processing_tick);
+                    if (pair.getRight() >= 100) {
+                        ItemStack stack = new ItemStack(pair.getLeft(), 1);
+                        SeparatorRecipe recipe = master.findRecipeForInsertion(stack);
+                        assert recipe != null;
+                        doProcessOutput(recipe.getRecipeOutput());
+                        Ingredient waste = recipe.waste;
+                        Optional<ItemStack> optionalWaste = Arrays.stream(waste.getMatchingStacks()).findFirst();
+
+                        ItemStack itemWaste = optionalWaste.orElse(ItemStack.EMPTY);
+                        itemWaste = Utils.insertStackIntoInventory(this.waste, itemWaste, false);
+                        if(!itemWaste.isEmpty())
+                            Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
+
+                        master.item_processing_list.remove(processing_tick);
+                    } else {
+                        Pair<Item, Integer> new_pair = Pair.of(pair.getLeft(), pair.getRight() + 1);
+                        new_processing_list.add(new_pair);
+                        master.tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                        master.item_processing_list.remove(processing_tick);
+                        master.item_processing_list.add(new_pair);
+                    }
+
+                    processing_tick += 1;
                 }
             }
         }
@@ -139,9 +185,9 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
                     return;
                 }
                 ItemStack displayStack = recipe.getDisplayStack(stack);
-                MultiblockProcessInWorld<SeparatorRecipe> process = new MultiblockProcessInWorld<SeparatorRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
-                if (master.addProcessToQueue(process, true, true)) {
-                    master.addProcessToQueue(process, false, true);
+                if(master.item_processing_list.size() <= 64) {
+                    Pair<Item, Integer> pair = Pair.of(stack.getItem(), 0);
+                    master.item_processing_list.add(pair);
                     stack.shrink(displayStack.getCount());
                     if (stack.getCount() <= 0)
                         entity.remove();
@@ -152,7 +198,10 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     protected boolean shouldRenderAsActiveImpl() {
-        return !processQueue.isEmpty();
+        GravitySeparatorTileEntity master = master();
+        if(master!=this&&master!=null)
+            return master.shouldRenderAsActiveImpl();
+        return !this.item_processing_list.isEmpty();
     }
 
     private CapabilityReference<IItemHandler> output = CapabilityReference.forTileEntityAt(this,
@@ -219,7 +268,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         GravitySeparatorTileEntity master = master();
         if(master!=this&&master!=null)
             return master.getCurrentProcessesStep();
-        int[] ia = new int[processQueue.size() > 0?1: 0];
+        int[] ia = new int[item_processing_list.size() > 0?1: 0];
         for(int i = 0; i < ia.length; i++)
             ia[i] = processQueue.get(i).processTick;
         return ia;
@@ -310,7 +359,16 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public NonNullList<ItemStack> getInventory() {
-        return null;
+        GravitySeparatorTileEntity master = master();
+        if(master!=this&&master!=null)
+            return master.getInventory();
+
+        NonNullList<ItemStack> items = NonNullList.create();
+        for(Pair<Item, Integer> pair : item_processing_list){
+            items.add(new ItemStack(pair.getLeft()));
+        }
+
+        return items;
     }
 
     @Override
@@ -392,5 +450,11 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         }
         return Arrays.asList(new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
 
+    }
+
+    public ArrayList<Pair<Item, Integer>> getInternalInventory() {
+        GravitySeparatorTileEntity master = master();
+
+        return this.item_processing_list;
     }
 }
