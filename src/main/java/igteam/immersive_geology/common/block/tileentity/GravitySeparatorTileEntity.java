@@ -73,14 +73,20 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     @Override
     public void writeCustomNBT(CompoundNBT nbt, boolean descPacket) {
         super.writeCustomNBT(nbt, descPacket);
-        nbt.put("tank_input", tank.writeToNBT(new CompoundNBT()));
+
+        GravitySeparatorTileEntity master = this.master();
+        if(master == null) return;
+
+        ArrayList<Pair<Item, Integer>> processList = master.item_processing_list;
+
+        nbt.put("tank_input", master.tank.writeToNBT(new CompoundNBT()));
         NonNullList<ItemStack> items = NonNullList.create();
 
-        int items_to_process = this.item_processing_list.size()-1;
+        int items_to_process = processList.size();
         nbt.putInt("item_process_size", items_to_process);
 
         for(int i = 0; i < items_to_process; ++i) {
-            Pair<Item, Integer> pair = this.item_processing_list.get(i);
+            Pair<Item, Integer> pair = processList.get(i);
             ItemStack item = new ItemStack(pair.getKey(), 1);
             items.add(item);
             nbt.putInt("process_" + Integer.toString(i), pair.getRight());
@@ -94,7 +100,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         tank.readFromNBT(nbt.getCompound("tank_input"));
         int items_to_process = nbt.getInt("item_process_size");
         ArrayList<Pair<Item, Integer>> item_to_process = new ArrayList<>();
-        NonNullList<ItemStack> items = Utils.readInventory(nbt.getList("inventory", 10), 1);
+        NonNullList<ItemStack> items = Utils.readInventory(nbt.getList("inventory", 10), items_to_process);
         for(int i = 0; i < items_to_process; ++i) {
             int process = nbt.getInt("process_" + Integer.toString(i));
             item_to_process.add(Pair.of(items.get(i).getItem(), process));
@@ -371,11 +377,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
     protected boolean canFillTankFrom(int iTank, Direction side, FluidStack resource) {
         if(inputOffset.contains(posInMultiblock) && resource.getFluid().equals(Fluids.WATER)) {
             GravitySeparatorTileEntity master = this.master();
-            if(master == null || master.tank.getFluidAmount() >= master.tank.getCapacity()){
-                return false;
-            }
-
-            return true;
+            return master != null && master.tank.getFluidAmount() < master.tank.getCapacity();
         }
 
         return false;
@@ -386,7 +388,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         return false;
     }
 
-    private static CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(GravitySeparatorTileEntity::getShape);
+    private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES = CachedShapesWithTransform.createForMultiblock(GravitySeparatorTileEntity::getShape);
 
     @Override
     public VoxelShape getBlockBounds(ISelectionContext ctx) {
@@ -427,8 +429,10 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     public ArrayList<Pair<Item, Integer>> getInternalInventory() {
         GravitySeparatorTileEntity master = master();
+        if(master!=this&&master!=null)
+            return master.getInternalInventory();
 
-        return this.item_processing_list;
+        return item_processing_list;
     }
 
     protected void processItems() {
@@ -437,6 +441,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         List<Pair<Item, Integer>> itemsToRemove = new ArrayList<>();
         List<Pair<Item, Integer>> itemsToAdd = new ArrayList<>();
 
+        assert master != null;
         for (Pair<Item, Integer> pair : master.item_processing_list) {
             int process_amount = pair.getRight();
 
