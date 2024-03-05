@@ -116,6 +116,11 @@
   "block.immersive_geology.stairs": "%s Stairs",
 
   "block.immersive_geology.storage": "Block of %s",
+  "block.immersive_geology.machine_iron_gravityseparator": "Gravity Separator",
+  "block.immersive_geology.machine_iron_crystallizer": "Crystallizer",
+  "block.immersive_geology.machine_iron_chemicalvat": "Chemical Vat",
+  "block.immersive_geology.machine_iron_rotarykiln": "Rotary Kiln",
+  "block.immersive_geology.machine_stone_reverberation_furnace": "Reverberation Furnace",
 
   "machine.immersive_geology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersive_geology.bloomery": "Bloomery",
@@ -239,6 +244,9 @@
   "material.immersive_geology.coal": "Coal",
   "material.immersive_geology.refractory": "Refractory",
   "material.immersive_geology.reinforced_refractory": "Reinforced Refractory",
+  "material.immersive_geology.blackstone": "Blackstone",
+  "material.immersive_geology.end_stone": "End Stone",
+
 
   "component.immersive_geology.hydrochloric_acid": "Chloride",
   "component.immersive_geology.sulfuric_acid": "Sulfate",
