@@ -32,7 +32,7 @@ public class MultiblockChemicalVatRenderer extends TileEntityRenderer<ChemicalVa
 
     @Override
     public boolean isGlobalRenderer(ChemicalVatTileEntity te) {
-        return true;
+        return false;
     }
 
     private static final Supplier<IGModel> stirrer = IGModels.getSupplier(ModelChemicalVat.ID);

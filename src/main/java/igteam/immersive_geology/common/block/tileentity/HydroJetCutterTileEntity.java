@@ -13,11 +13,13 @@ import igteam.api.processing.recipe.HydrojetRecipe;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.multiblocks.HydroJetCutterMultiblock;
 import igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
@@ -172,6 +174,45 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
                 getInternalTanks()[0].drain(1, IFluidHandler.FluidAction.EXECUTE);
             }
         }
+
+        if(this == master()) {
+            BlockPos particlePos = getPos();
+            switch(getFacing()){
+                case NORTH:
+                    particlePos.add(2f, 1.5f,0f);
+                    if(getIsMirrored()){
+                        particlePos.add(-4,0, 0);
+                    }
+                    break;
+                case SOUTH:
+                    if(getIsMirrored()){
+                        particlePos.add(-4,0, 0);
+                    }
+                    break;
+                case WEST:
+                    particlePos.add(4.5, -4.875f,0f);
+                    if(getIsMirrored()){
+                        particlePos.add(0.5,4, 0);
+                    }
+                    break;
+                case EAST:
+                    particlePos.add(-3.875, -1.75f,0f);
+                    if(getIsMirrored()){
+                        particlePos.add(4,-0.5, 0);
+                    }
+                    break;
+            }
+
+
+
+//            for (int i = 0; i < 360; i++) {
+//                if (i % 230 == 0) {
+//                    this.world.addParticle(ParticleTypes.BUBBLE_POP.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY() + 1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(i) * 0.25d, 0.1d, Math.sin(i) * 0.25d);
+//                }
+//            }
+//            this.world.addParticle(ParticleTypes.BUBBLE.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY() +1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+//            this.world.addParticle(ParticleTypes.FALLING_WATER.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY()+1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+        }
     }
 
     @Override
@@ -208,7 +249,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
                 if (master.getInventory().get(INPUT_SLOT).isEmpty()) {
                     if (stack.isEmpty())
                         return;
-                    HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, master.getInternalTanks()[0].getFluid());
+                    HydrojetRecipe recipe = HydrojetRecipe.findRecipe(stack, Objects.requireNonNull(master.getInternalTanks())[0].getFluid());
                     if (recipe == null) {
                         return;
                     }
@@ -355,5 +396,78 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public boolean interact(Direction direction, PlayerEntity playerEntity, Hand hand, ItemStack itemStack, float v, float v1, float v2) {
         return false;
+    }
+
+    // Animation information should go below this line!
+    public ItemStack item = ItemStack.EMPTY;
+    public ItemStack itemPile = ItemStack.EMPTY;
+    public PositionEnum currentState = PositionEnum.ONE;
+
+    public float machineProgress = 0f;
+    public float currentArmPosition = 2.125f;
+    public float newArmPosition = 2.125f;
+    public float headCurrentPosition = -0.03125f;
+    public float headNewPosition = -0.03125f;
+    public enum PositionEnum {
+        ZERO(0.30f, 2.125f, AnimationPart.ARM){ //16% of the progress is spent keeping arm in starting position when looping
+            @Override
+            public PositionEnum advance() {
+                return ONE;
+            }
+        },
+        ONE(0.52f, 1.8125f, AnimationPart.ARM){ //16% of progress is spent moving arm to this position
+            @Override
+            public PositionEnum advance() {
+                return TWO;
+            }
+        },
+        TWO(0.68f, -0.1875f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
+            @Override
+            public PositionEnum advance() {
+                return THREE;
+            }
+        },
+        THREE(0.74f, 0.125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
+            @Override
+            public PositionEnum advance() {
+                return FOUR;
+            }
+        },
+        FOUR(0.80f, -0.03125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
+            @Override
+            public PositionEnum advance() {
+                return FIVE;
+            }
+        },
+        FIVE(0.9f, 1.5f, AnimationPart.ARM){ // 20% of progress is spent moving head to position (this should be the starting position of the head)
+            @Override
+            public PositionEnum advance() {
+                return SIX;
+            }
+        },
+        SIX(1f, 2.125f, AnimationPart.ARM){
+            @Override
+            public PositionEnum advance() {
+                return ZERO;
+            }
+        };
+
+        public final float breakPercent;
+        public final float position;
+
+        public final AnimationPart component;
+
+        PositionEnum(float bp, float position, AnimationPart component){
+            this.breakPercent = bp;
+            this.position = position;
+            this.component = component;
+        }
+
+        public abstract PositionEnum advance();
+    }
+
+    public enum AnimationPart {
+        HEAD,
+        ARM;
     }
 }

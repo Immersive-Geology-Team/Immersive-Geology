@@ -23,7 +23,7 @@ public class MultiblockCrystallizerRenderer extends TileEntityRenderer<Crystalli
 
     @Override
     public boolean isGlobalRenderer(CrystallizerTileEntity te) {
-        return true;
+        return false;
     }
 
     @Override

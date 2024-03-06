@@ -23,7 +23,7 @@ public class BloomeryRenderer extends TileEntityRenderer<BloomeryTileEntity> {
 
     @Override
     public boolean isGlobalRenderer(BloomeryTileEntity te) {
-        return true;
+        return false;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package igteam.immersive_geology.client.render.multiblock;
 
+import igteam.immersive_geology.common.block.tileentity.GravitySeparatorTileEntity;
 import igteam.immersive_geology.common.block.tileentity.ReverberationFurnaceTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -16,7 +17,11 @@ public class MultiblockReverberationFurnaceRenderer extends TileEntityRenderer<R
         super(dispatcher);
     }
 
-    //Ripped from IP's Pumpjack
+    @Override
+    public boolean isGlobalRenderer(ReverberationFurnaceTileEntity p_188185_1_) {
+        return false;
+    }
+
     @Override
     public void render(ReverberationFurnaceTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         if(te != null && !te.isDummy()) {

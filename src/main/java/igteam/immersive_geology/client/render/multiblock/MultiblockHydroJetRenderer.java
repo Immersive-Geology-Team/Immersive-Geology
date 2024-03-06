@@ -1,5 +1,7 @@
 package igteam.immersive_geology.client.render.multiblock;
 
+import blusunrize.immersiveengineering.client.fx.CustomParticleManager;
+import blusunrize.immersiveengineering.client.fx.IEParticles;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
@@ -12,6 +14,9 @@ import igteam.api.IGApi;
 import igteam.api.main.IGMultiblockProvider;
 import io.netty.util.internal.MathUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -20,14 +25,19 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.TransformationMatrix;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.model.TransformationHelper;
 import net.minecraftforge.fml.common.Mod;
 
 import java.math.MathContext;
@@ -42,20 +52,24 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
     public static DynamicModel<Direction> HEAD;
 
+
     public MultiblockHydroJetRenderer(TileEntityRendererDispatcher dispatcher){
         super(dispatcher);
     }
 
     @Override
     public boolean isGlobalRenderer(HydroJetCutterTileEntity te) {
-        return true;
+        return false;
     }
 
-    ItemStack item = ItemStack.EMPTY;
-    ItemStack itemPile = ItemStack.EMPTY;
 
     @Override
     public void render(HydroJetCutterTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+        float machineProgress = 0.0f;
+        ItemStack item = te.item;
+        ItemStack itemPile = te.itemPile;
+
+
         //this is where we can put in special rendering things!
         if(te.formed && !te.isDummy()){
             HydroJetCutterTileEntity master = te.master();
@@ -63,11 +77,12 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 if(master.processQueue.stream().findFirst().isPresent() && master.shouldRenderAsActive()) {
                     PoweredMultiblockTileEntity.MultiblockProcess<HydrojetRecipe> wrapper = master.processQueue.stream().findFirst().get();
                     machineProgress = ((float) wrapper.processTick / (float) wrapper.maxTicks);
-                    item = wrapper.recipe.getItemInput().getRandomizedExampleStack(0);
-                    itemPile = item.copy();
-                    itemPile.setCount(master.processQueue.size());
+                    te.item = wrapper.recipe.getItemInput().getRandomizedExampleStack(0);
+                    te.itemPile = item.copy();
+                    te.itemPile.setCount(master.processQueue.size());
                 }
             }
+
             transform.push();
             {
                 transform.push();
@@ -81,14 +96,14 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                                     transform.rotate(new Quaternion(0, 180f,0, true));
                                     transform.translate(-3, 0, -7);
                                 }
-                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true);
+                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true, machineProgress);
                                 break;
                             case NORTH:
                                 if(master.getIsMirrored()) {
                                     transform.rotate(new Quaternion(0, 180f, 0, true));
                                     transform.translate(-1f,0f,-3f);
                                 }
-                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, false);
+                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, false, machineProgress);
                                 break;
                             case EAST:
                                 transform.translate(-3.5f, 0, 0f);
@@ -96,7 +111,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                                     transform.rotate(new Quaternion(0, 180f, 0, true));
                                     transform.translate(-6, 0, -1);
                                 }
-                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true);
+                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true, machineProgress);
                                 break;
                             case SOUTH:
                                 transform.translate(-3, 0, -3.5);
@@ -104,7 +119,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                                     transform.rotate(new Quaternion(0, 180f,0, true));
                                     transform.translate(-7, 0, -6);
                                 }
-                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, false);
+                                renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, false, machineProgress);
                                 break;
                         }
                     transform.pop();
@@ -125,7 +140,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                             break;
                     }
                     if(master.shouldRenderAsActive()) {
-                        animateItemProgress(transform, machineProgress, master, buffer, combinedLightIn, combinedOverlayIn);
+                        animateItemProgress(transform, machineProgress, master, buffer, combinedLightIn, combinedOverlayIn, item, itemPile);
                     }
                 transform.pop();
             }
@@ -133,7 +148,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         }
     }
 
-    private void animateItemProgress(MatrixStack transform, float machineProgress, HydroJetCutterTileEntity master, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn){
+    private void animateItemProgress(MatrixStack transform, float machineProgress, HydroJetCutterTileEntity master, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn, ItemStack item, ItemStack itemPile){
         ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
         Direction rotation = master.getFacing();
         if(machineProgress > 0.6f){
@@ -146,16 +161,27 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         transform.translate(1f, 4f, -2.2f);
         float mp = machineProgress;
         boolean changeTrack = false;
+        float x = master.getPos().getX();
+        float y = master.getPos().getY();
+        float z = master.getPos().getZ();
+
         switch(master.getFacing()){
             case NORTH:
                 transform.translate(2f, 1.5f,0f);
                 if(master.getIsMirrored()){
                     transform.translate(-4,0, 0);
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                } else {
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
                 }
+
                 break;
             case SOUTH:
                 if(master.getIsMirrored()){
                     transform.translate(-4,0, 0);
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                } else {
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
                 }
                 break;
             case WEST:
@@ -163,6 +189,9 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 changeTrack = true;
                 if(master.getIsMirrored()){
                     transform.translate(0.5,4, 0);
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                } else {
+                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
                 }
                 break;
             case EAST:
@@ -170,6 +199,15 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 transform.translate(-3.875, -1.75f,0f);
                 if(master.getIsMirrored()){
                     transform.translate(4,-0.5, 0);
+                    if(master.getWorld() != null && (machineProgress > 0.3f && machineProgress < 0.6f)) {
+                        master.getWorld().addParticle(ParticleTypes.SPLASH.getType(), (x+1) - master.currentArmPosition, y + 1.4f, (z - 0.5) - master.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                        master.getWorld().addParticle(ParticleTypes.BUBBLE_POP.getType(), (x+1) - master.currentArmPosition, y + 1.25, (z - 0.5) - master.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    }
+                } else {
+                    if(master.getWorld() != null && (machineProgress > 0.3f && machineProgress < 0.6f)) {
+                        master.getWorld().addParticle(ParticleTypes.SPLASH.getType(), (x-2) + master.currentArmPosition, y + 1.4f, (z+1.5) + master.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                        master.getWorld().addParticle(ParticleTypes.BUBBLE_POP.getType(), (x-2) + master.currentArmPosition, y + 1.25, (z+1.5) + master.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    }
                 }
                 break;
         }
@@ -178,64 +216,87 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         float startPoint = 0f;
         float midStart = -2.4f;
         float midEnd = -4.3f;
-        float endPoint = -6f;
+        float endPoint = -5.4f;
 
-        float[] Points = new float[4];
-        float[] ProgressBreaks = new float[4];
+        float[] Points = new float[6];
+        float[] ProgressBreaks = new float[6];
 
         Points[0] = startPoint;
         Points[1] = midStart;
-        Points[2] = midEnd;
-        Points[3] = endPoint;
+        Points[2] = midStart * 1.2f;
+        Points[3] = midEnd * 0.9f;
+        Points[4] = midEnd;
+        Points[5] = endPoint;
 
         ProgressBreaks[0] = 0f;
-        ProgressBreaks[1] = .4f;
-        ProgressBreaks[2] = .8f;
-        ProgressBreaks[3] = 1f;
+        ProgressBreaks[1] = .3f;
+        ProgressBreaks[2] = .4f;
+        ProgressBreaks[3] = .6f;
+        ProgressBreaks[4] = .7f;
+        ProgressBreaks[5] = 1f;
 
         float itemPosition = piecewiseLerp(ProgressBreaks, Points, mp);
+        float pos = piecewiseLerp(ProgressBreaks, Points, master.getFacing().equals(Direction.EAST) ? 1f : 0f);
+
+        transform.push();
+            transform.translate(changeTrack ? pos : -0.1f, !changeTrack ? pos : -0.2f, 0f);
+            itemRender.renderItem(itemPile, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+
+            transform.push();
+                transform.translate(0.5f,.4f,0f);
+                transform.rotate(new Quaternion(0.0f, 0.0f, 0.42f, 1.0f));
+                itemRender.renderItem(itemPile, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+            transform.pop();
+
+            transform.push();
+                transform.translate(-.63f,.2f,0f);
+                transform.rotate(new Quaternion(0.0f, 0.42f, 0.0f, 1.0f));
+                itemRender.renderItem(itemPile, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+            transform.pop();
+        transform.pop();
+
         transform.translate(changeTrack ? itemPosition : 0f, !changeTrack ? itemPosition : 0f, 0f);
         itemRender.renderItem(item, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
-
         transform.pop();
     }
 
 
-    private PositionEnum currentState = PositionEnum.ONE;
 
-    float machineProgress = 0f;
-    private float currentArmPosition = 2.125f;
-    private float newArmPosition = 2.125f;
-    private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed)
+    private void renderArm(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed, float machineProgress)
     {
+        float currentArmPos = te.currentArmPosition;
+        float newArmPosition = te.newArmPosition;
+        HydroJetCutterTileEntity.PositionEnum currentState = te.currentState;
+
+
         if(te.shouldRenderAsActive()) {
-            //IGApi.getNewLogger().warn("I'm Fucking rendering! " + currentArmPosition + " | " + machineProgress + " | " + currentState.name());
             if (machineProgress < .3) {
-                if (currentState != PositionEnum.ZERO) {
-                    currentState = PositionEnum.ZERO; // Needed hack because sometimes progress only gets to 98%
+                if (currentState != HydroJetCutterTileEntity.PositionEnum.ZERO) {
+                    te.currentState = HydroJetCutterTileEntity.PositionEnum.ZERO; // Needed hack because sometimes progress only gets to 98%
                 }
             }
-            if (currentState.component == AnimationPart.ARM) {
-                if (newArmPosition != currentState.position)
-                    newArmPosition = currentState.position;
+            if (te.currentState.component == HydroJetCutterTileEntity.AnimationPart.ARM) {
+                if (te.newArmPosition != te.currentState.position)
+                    te.newArmPosition = te.currentState.position;
 
-                if (currentArmPosition < (newArmPosition - 0.0825)) {
-                    currentArmPosition += 0.0825;
-                } else if (currentArmPosition > (newArmPosition + 0.0825)) {
-                    currentArmPosition -= 0.0825;
+                if (currentArmPos < (newArmPosition - 0.0825)) {
+                    te.currentArmPosition = currentArmPos + 0.0825f;
+
+                } else if (currentArmPos > (newArmPosition + 0.0825)) {
+                    te.currentArmPosition = currentArmPos - 0.0825f;
+
                 }
 
                 if (machineProgress > currentState.breakPercent) {
-                    float offAmount = Math.abs(currentArmPosition - currentState.position);
+                    float offAmount = Math.abs(currentArmPos - currentState.position);
                     if (offAmount > 0.0625) {
-                        //IGApi.getNewLogger().warn("Animation Position was off by: " + offAmount);
+                        IGApi.getNewLogger().warn("Animation Position was off by: " + offAmount);
                     }
                 }
             }
-            matrix.translate(isAnimReversed ? currentArmPosition : 1.5f, 0, isAnimReversed ? 1.5f : currentArmPosition);
+            matrix.translate(isAnimReversed ? currentArmPos : 1.5f, 0, isAnimReversed ? 1.5f : currentArmPos);
         } else {
-            // Needed to ensure that the machines arm doesn't look really odd when not active
-            // This is setup this way as it prevents the strange global behaviour of the arm movements.
+
             matrix.translate(isAnimReversed ? 1.8125f : 1.5f, 0, isAnimReversed ? 1.5f : 1.8125f);
         }
 
@@ -243,38 +304,37 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         RenderUtils.renderModelTESRFast(quads, bufferIn.getBuffer(RenderType.getSolid()), matrix, combinedLightIn, combinedOverlayIn);
 
             matrix.push();
-                renderHead(matrix, te, bufferIn, combinedLightIn, combinedOverlayIn, isAnimReversed);
+                renderHead(matrix, te, bufferIn, combinedLightIn, combinedOverlayIn, isAnimReversed, currentState, machineProgress);
             matrix.pop();
 
         if (machineProgress > currentState.breakPercent) {
-            machineProgress = currentState.breakPercent;
-            PositionEnum nextState = currentState.advance();
-            currentState = nextState;
+            te.machineProgress = currentState.breakPercent;
+            te.currentState = currentState.advance();
         }
+
     }
 
-    private float headCurrentPosition = -0.03125f;
-    private float headNewPosition = -0.03125f;
-    private void renderHead(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed) {
+
+    private void renderHead(MatrixStack matrix, HydroJetCutterTileEntity te, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, boolean isAnimReversed, HydroJetCutterTileEntity.PositionEnum currentState, float machineProgress) {
         matrix.push();
         List<BakedQuad> quads = HEAD.getNullQuads(te.getFacing(), IGMultiblockProvider.hydrojet_cutter.getDefaultState());
 
         if(te.shouldRenderAsActive()) {
-            if (currentState.component == AnimationPart.HEAD) {
-                if (headNewPosition != currentState.position)
-                    headNewPosition = currentState.position;
+            if (te.currentState.component == HydroJetCutterTileEntity.AnimationPart.HEAD) {
+                if (te.headNewPosition != currentState.position)
+                    te.headNewPosition = currentState.position;
 
-                if (headCurrentPosition < headNewPosition - 0.05) {
-                    headCurrentPosition += 0.05;
-                } else if (headCurrentPosition > headNewPosition + 0.05) {
-                    headCurrentPosition -= 0.05;
+                if (te.headCurrentPosition < te.headNewPosition - 0.05) {
+                    te.headCurrentPosition += 0.05F;
+                } else if (te.headCurrentPosition > te.headNewPosition + 0.05) {
+                    te.headCurrentPosition -= 0.05F;
                 }
 
                 if (machineProgress > currentState.breakPercent) {
-                    headCurrentPosition = currentState.position;
+                    te.headCurrentPosition = currentState.position;
                 }
             }
-            matrix.translate(isAnimReversed ? 0 : headCurrentPosition, 0, isAnimReversed ? headCurrentPosition : 0);
+            matrix.translate(isAnimReversed ? 0 : te.headCurrentPosition, 0, isAnimReversed ? te.headCurrentPosition : 0);
         }
         RenderUtils.renderModelTESRFast(quads, bufferIn.getBuffer(RenderType.getSolid()), matrix, combinedLightIn, combinedOverlayIn);
         matrix.pop();
@@ -284,68 +344,6 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         return new ResourceLocation(IGLib.MODID, name);
     }
 
-    //This system works but is not very good? Still fixing issues with it.
-    private enum PositionEnum {
-        ZERO(0.30f, 2.125f, AnimationPart.ARM){ //16% of the progress is spent keeping arm in starting position when looping
-            @Override
-            public PositionEnum advance() {
-                return ONE;
-            }
-        },
-        ONE(0.52f, 1.8125f, AnimationPart.ARM){ //16% of progress is spent moving arm to this position
-            @Override
-            public PositionEnum advance() {
-                return TWO;
-            }
-        },
-        TWO(0.68f, -0.1875f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
-            @Override
-            public PositionEnum advance() {
-                return THREE;
-            }
-        },
-        THREE(0.74f, 0.125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
-            @Override
-            public PositionEnum advance() {
-                return FOUR;
-            }
-        },
-        FOUR(0.80f, -0.03125f, AnimationPart.HEAD){ //16% of progress is spent moving head to position
-            @Override
-            public PositionEnum advance() {
-                return FIVE;
-            }
-        },
-        FIVE(0.9f, 1.5f, AnimationPart.ARM){ // 20% of progress is spent moving head to position (this should be the starting position of the head)
-            @Override
-            public PositionEnum advance() {
-                return SIX;
-            }
-        },
-        SIX(1f, 2.125f, AnimationPart.ARM){
-            @Override
-            public PositionEnum advance() {
-                return ZERO;
-            }
-        };
 
-        public final float breakPercent;
-        public final float position;
-
-        final AnimationPart component;
-
-        PositionEnum(float bp, float position, AnimationPart component){
-            this.breakPercent = bp;
-            this.position = position;
-            this.component = component;
-        }
-
-        public abstract PositionEnum advance();
-    }
-
-    private enum AnimationPart {
-        HEAD,
-        ARM;
-    }
 
 }

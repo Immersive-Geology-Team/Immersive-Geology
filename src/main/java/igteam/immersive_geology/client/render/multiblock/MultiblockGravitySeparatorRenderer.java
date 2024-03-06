@@ -39,8 +39,13 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
     }
 
     @Override
+    public boolean isGlobalRenderer(GravitySeparatorTileEntity p_188185_1_) {
+        return false;
+    }
+
+    @Override
     public void render(GravitySeparatorTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
-        if(te != null && !te.isDummy()) {
+        if(!te.isDummy()) {
             transform.push();
             Direction rotation = te.getFacing();
             switch (rotation) {
@@ -108,7 +113,6 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
                     float interpolatedY = startPoint.getY() + (endPoint.getY() - startPoint.getY()) * lerpFactor;
                     float interpolatedZ = startPoint.getZ() + (endPoint.getZ() - startPoint.getZ()) * lerpFactor;
 
-
                     ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
                     transform.push();
                     float scale = .625f;
@@ -123,6 +127,5 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
             }
             transform.pop();
         }
-
     }
 }
