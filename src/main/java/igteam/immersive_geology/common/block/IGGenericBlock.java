@@ -28,12 +28,12 @@ public class IGGenericBlock extends Block implements IGBlockType {
 
     public IGGenericBlock(MaterialInterface<?> m, BlockPattern p) {
 
-        super(Properties.create(m.hasPattern(ItemPattern.clay) ? Material.CLAY : (m.instance() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f).harvestTool(p == BlockPattern.dust_block || m.hasPattern(ItemPattern.clay) ? ToolType.SHOVEL : ToolType.PICKAXE));
+        super(Properties.create((m.hasPattern(ItemPattern.clay) || (p == BlockPattern.clay)) ? Material.CLAY : (m.instance() instanceof MaterialBaseMetal) ? Material.IRON : Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2f).harvestTool(p == BlockPattern.dust_block || m.hasPattern(ItemPattern.clay) ? ToolType.SHOVEL : ToolType.PICKAXE));
         this.pattern = p;
         this.materialMap.put(MaterialTexture.base, m);
         this.itemBlock = new IGGenericBlockItem(this, m, ItemPattern.block_item);
 
-        RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.TRANSLUCENT);
+        RenderLayerHandler.setRenderType(this, RenderLayerHandler.RenderTypeSkeleton.SOLID);
     }
 
     public IGGenericBlock(MaterialInterface<?> m, BlockPattern p, Properties properties) {

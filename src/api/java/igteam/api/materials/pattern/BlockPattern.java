@@ -7,6 +7,7 @@ public enum BlockPattern implements MaterialPattern {
     storage(ItemSubGroup.decoration), // used for storage, eg Block of Material (Iron, Gold, Copper, ...)
     sheetmetal(ItemSubGroup.decoration),
     ore, // used for igteam.immersive_geology.materials that generate like minerals
+    clay(ItemSubGroup.natural),
     geode, // used for igteam.immersive_geology.materials that generate like geodes
     stairs(ItemSubGroup.decoration),
     slab(ItemSubGroup.decoration),

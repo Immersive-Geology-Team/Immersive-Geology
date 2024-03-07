@@ -38,7 +38,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
 
             @Override
             protected void describe() {
-                IRecipeBuilder.crafting(this).shaped(getBlock(BlockPattern.storage).asItem(), 1, "xx", "xx")
+                IRecipeBuilder.crafting(this).shaped(getBlock(BlockPattern.clay).asItem(), 1, "xx", "xx")
                         .setInputToCharacter('x', getItem(ItemPattern.clay))
                         .finializeRecipe("general_crafting", "has_clay", getItemTag(ItemPattern.clay));
 
