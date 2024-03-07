@@ -71,7 +71,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
 
 
         //this is where we can put in special rendering things!
-        if(te.formed && !te.isDummy()){
+        if(te.formed && !te.isDummy()) {
             HydroJetCutterTileEntity master = te.master();
             if(master != null) {
                 if(master.processQueue.stream().findFirst().isPresent() && master.shouldRenderAsActive()) {
@@ -97,6 +97,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                                     transform.translate(-3, 0, -7);
                                 }
                                 renderArm(transform, te, buffer, combinedLightIn, combinedOverlayIn, true, machineProgress);
+
                                 break;
                             case NORTH:
                                 if(master.getIsMirrored()) {
@@ -115,7 +116,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                                 break;
                             case SOUTH:
                                 transform.translate(-3, 0, -3.5);
-                                if(master.getIsMirrored()){
+                                if(master.getIsMirrored()) {
                                     transform.rotate(new Quaternion(0, 180f,0, true));
                                     transform.translate(-7, 0, -6);
                                 }
@@ -124,7 +125,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                         }
                     transform.pop();
 
-                    switch (rotation){
+                    switch (rotation) {
                         case NORTH: {
                         }
                         case SOUTH: {
@@ -139,6 +140,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                         default:
                             break;
                     }
+
                     if(master.shouldRenderAsActive()) {
                         animateItemProgress(transform, machineProgress, master, buffer, combinedLightIn, combinedOverlayIn, item, itemPile);
                     }
@@ -170,16 +172,25 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                 transform.translate(2f, 1.5f,0f);
                 if(master.getIsMirrored()){
                     transform.translate(-4,0, 0);
-                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    if(master.getWorld() != null && (machineProgress > 0.3f && machineProgress < 0.6f)) {
+                        master.getWorld().addParticle(ParticleTypes.SPLASH.getType(), (x - 0.5f) - master.headCurrentPosition, y + 1.3f, (z + 3.3f) - master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                        master.getWorld().addParticle(ParticleTypes.BUBBLE_POP.getType(), (x- 0.5f) - master.headCurrentPosition, y + 1.1, (z + 3.3f) - master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    }
                 } else {
-                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    if(master.getWorld() != null) { // && (machineProgress > 0.3f && machineProgress < 0.6f)
+                        master.getWorld().addParticle(ParticleTypes.SPLASH.getType(), (x + 1.5f) + master.headCurrentPosition, y + 1.3f, (z - 0.3f) + master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                        master.getWorld().addParticle(ParticleTypes.BUBBLE_POP.getType(), (x + 1.5f) + master.headCurrentPosition, y + 1.1, (z - 0.3f) + master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    }
                 }
 
                 break;
             case SOUTH:
                 if(master.getIsMirrored()){
                     transform.translate(-4,0, 0);
-                    if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    if(master.getWorld() != null && (machineProgress > 0.3f && machineProgress < 0.6f)){
+                        master.getWorld().addParticle(ParticleTypes.SPLASH.getType(), (x + 1.5f) - master.headCurrentPosition, y + 1.4f, (z + 1) - master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                        master.getWorld().addParticle(ParticleTypes.BUBBLE_POP.getType(), (x + 1.5f) - master.headCurrentPosition, y + 1.25, (z + 1) - master.currentArmPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
+                    }
                 } else {
                     if(master.getWorld() != null) master.getWorld().addParticle(ParticleTypes.FIREWORK.getType(), x, y, z, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
                 }
@@ -236,7 +247,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
         ProgressBreaks[5] = 1f;
 
         float itemPosition = piecewiseLerp(ProgressBreaks, Points, mp);
-        float pos = piecewiseLerp(ProgressBreaks, Points, master.getFacing().equals(Direction.EAST) ? 1f : 0f);
+        float pos = piecewiseLerp(ProgressBreaks, Points, master.getFacing().equals(Direction.EAST) ? 0.9f : 0.1f);
 
         transform.push();
             transform.translate(changeTrack ? pos : -0.1f, !changeTrack ? pos : -0.2f, 0f);
