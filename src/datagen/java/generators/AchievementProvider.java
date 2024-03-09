@@ -112,7 +112,7 @@ public class AchievementProvider extends AdvancementProvider {
                     .register(consumer, "immersive_geology:main/mb_rfurnace");
 
             Advancement acid_sulfuric = AchievementProvider.advancement(mb_rfurnace, FluidEnum.SulfuricAcid.getItem(ItemPattern.flask),"acid_sulfuric", FrameType.TASK, true, true, false)
-                    .withCriterion("acid_sulfuric", InventoryChangeTrigger.Instance.forItems( StoneEnum.Netherrack.getItem(ItemPattern.stone_chunk))).register(consumer, "immersive_geology:main/acid_sulfuric");
+                    .withCriterion("acid_sulfuric", InventoryChangeTrigger.Instance.forItems(FluidEnum.SulfuricAcid.getItem(ItemPattern.flask))).register(consumer, "immersive_geology:main/acid_sulfuric");
 
             Advancement mb_vat = AchievementProvider.advancement(acid_sulfuric, (IItemProvider) IGMultiblockProvider.chemicalvat, "mb_vat", FrameType.TASK, true, true, false)
                     .withCriterion("mb_vat", MultiblockTrigger.create(new ResourceLocation("immersive_geology", "multiblocks/chemicalvat"), net.minecraft.advancements.criterion.ItemPredicate.Builder.create().item(IEItems.Tools.hammer).build()))
