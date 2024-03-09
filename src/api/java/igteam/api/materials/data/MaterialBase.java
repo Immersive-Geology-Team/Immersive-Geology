@@ -452,6 +452,9 @@ public abstract class MaterialBase {
                 case machine: {
                     return isMachine();
                 }
+                case clay: {
+                    return hasClay();
+                }
             };
         }
 

@@ -86,13 +86,14 @@
   "item.immersive_geology.stone_chunk": "%s Chunk",
   "item.immersive_geology.stone_bit": "%s Chunk",
   "item.immersive_geology.ore_crushed": "Crushed %s Ore",
-  "item.immersive_geology.clay": "%s Clay",
+  "item.immersive_geology.clay": "%s Clay Ball",
   "item.immersive_geology.compound_dust": "%s Compound Dust",
   "item.immersive_geology.slag": "%s Slag",
   "item.immersive_geology.brick": "%s Brick",
 
 
   "block.immersive_geology.storage_block": "%s Block",
+  "block.immersive_geology.clay": "%s",
   "block.immersive_geology.rock": "%s Stone",
   "block.immersive_geology.stone": "%s",
   "block.immersive_geology.cobblestone": "%s Cobblestone",

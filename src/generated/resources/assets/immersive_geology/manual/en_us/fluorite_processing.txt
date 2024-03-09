@@ -1,5 +1,5 @@
 Processing
 Factoring Factories
-<&fluorite_synthesis_chemical> fluorite 
 <&fluorite_preparation_crushing> fluorite 
+<&fluorite_synthesis_chemical> fluorite 
 <&fluorite_extraction_crushing> fluorite 

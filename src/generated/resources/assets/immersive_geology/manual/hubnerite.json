@@ -3,18 +3,6 @@
     "type": "item_display",
     "items": [
       {
-        "item": "immersive_geology:block_item_stone_hubnerite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_granite_hubnerite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_netherrack_hubnerite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_blackstone_hubnerite_ore"
-      },
-      {
         "item": "immersive_geology:block_item_end_stone_hubnerite_ore"
       }
     ]

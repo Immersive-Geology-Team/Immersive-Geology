@@ -7,15 +7,6 @@
       },
       {
         "item": "immersive_geology:block_item_granite_rocksalt_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_netherrack_rocksalt_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_blackstone_rocksalt_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_rocksalt_ore"
       }
     ]
   }

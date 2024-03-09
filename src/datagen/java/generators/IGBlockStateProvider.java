@@ -75,6 +75,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         case storage:
                         case sheetmetal:
                         case dust_block:
+                        case clay:
                             registerGenericBlock(type, pattern);
                             break;
                     }

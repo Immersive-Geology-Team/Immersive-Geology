@@ -11,7 +11,7 @@
     "type": "crafting",
     "recipes": [
       {
-        "recipe": "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_storage2"
+        "recipe": "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_clay2"
       }
     ]
   }

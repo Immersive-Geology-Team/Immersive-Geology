@@ -15,19 +15,19 @@
       }
     ]
   },
-  "monazite_refinement_calcination": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_rotarykiln"
-      }
-    ]
-  },
   "monazite_extraction_separator": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_gravityseparator"
+      }
+    ]
+  },
+  "monazite_refinement_calcination": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_rotarykiln"
       }
     ]
   },

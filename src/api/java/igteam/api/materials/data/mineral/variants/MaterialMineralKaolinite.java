@@ -65,17 +65,7 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     @Override
-    protected boolean hasCrystal() {
-        return false;
-    }
-
-    @Override
     protected boolean hasClay() {
-        return true;
-    }
-
-    @Override
-    protected boolean hasStorageBlock() {
         return true;
     }
 
@@ -119,6 +109,6 @@ public class MaterialMineralKaolinite extends MaterialBaseMineral {
     }
 
     public boolean generateForBlockPattern(BlockPattern p) {
-        return p.equals(BlockPattern.storage);
+        return p.equals(BlockPattern.clay);
     }
 }

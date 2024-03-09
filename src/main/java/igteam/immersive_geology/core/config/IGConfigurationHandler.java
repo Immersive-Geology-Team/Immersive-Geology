@@ -106,11 +106,16 @@ public class IGConfigurationHandler {
             builder.push("Ore Generation").comment("Ore Generation Configuration - START");
 
             ImmersiveGeology.getNewLogger().info("Generation Config Setup");
-            IGOreConfig clayGenerationConfig = new IGOreConfig(builder, MaterialSourceWorld.overworld, MineralEnum.Kaolinite.getName(), 30, 46, 30, 70, 12, 5000);
+            BlockState kaolinite = MineralEnum.Kaolinite.getBlock(BlockPattern.clay).getDefaultState();
+            BlockState clay = Blocks.CLAY.getDefaultState();
+            BlockState dirt = Blocks.DIRT.getDefaultState();
 
+            SphereReplaceConfig kaolinite_config = new SphereReplaceConfig(kaolinite, FeatureSpread.create(2, 1), 4, ImmutableList.of(kaolinite, clay, dirt));
+            
+            
             for(MaterialInterface<?> container : APIMaterials.generatedMaterials()) {
                 if(container.equals(MineralEnum.Kaolinite)){
-                    container.instance().setGenerationConfiguration(clayGenerationConfig);
+                    container.instance().setGenerationConfiguration(kaolinite_config);
                 } else {
                     int heightMod = container.getDimension().equals(MaterialSourceWorld.nether) ? 2 : 1;
                     switch (container.instance().getRarity()) {
@@ -128,7 +133,7 @@ public class IGConfigurationHandler {
                             break;
                         default:
                             ImmersiveGeology.getNewLogger().error("Null Rarity for material " + container.getName() + " setting as default Backup Rarity");
-                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 1));
+                            container.instance().setGenerationConfiguration(new IGOreConfig(builder, container.getDimension(), container.getName(), 140, 80, 1, 90, 1, 100));
                             break;
                     }
                 }

@@ -7,15 +7,6 @@
       },
       {
         "item": "immersive_geology:block_item_granite_cuprite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_netherrack_cuprite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_blackstone_cuprite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_cuprite_ore"
       }
     ]
   }

@@ -3,19 +3,10 @@
     "type": "item_display",
     "items": [
       {
-        "item": "immersive_geology:block_item_stone_sphalerite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_granite_sphalerite_ore"
-      },
-      {
         "item": "immersive_geology:block_item_netherrack_sphalerite_ore"
       },
       {
         "item": "immersive_geology:block_item_blackstone_sphalerite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_sphalerite_ore"
       }
     ]
   }

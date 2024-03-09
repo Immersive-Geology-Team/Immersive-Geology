@@ -92,9 +92,11 @@ public class IGManualProvider implements IDataProvider {
 
             for(StoneEnum stone : StoneEnum.values()) {
                 Block oreDisplay = stone.getBlock(BlockPattern.ore, mineral);
-                if (oreDisplay != null) {
-                    Item oreItem = oreDisplay.asItem();
-                    intro_display_list.add(oreDisplay.asItem().getRegistryName());
+                if(stone.generateOreFor(mineral)) {
+                    if (oreDisplay != null) {
+                        Item oreItem = oreDisplay.asItem();
+                        intro_display_list.add(oreItem.getRegistryName());
+                    }
                 }
             }
 

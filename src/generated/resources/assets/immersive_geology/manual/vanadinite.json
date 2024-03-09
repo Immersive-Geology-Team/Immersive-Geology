@@ -7,15 +7,6 @@
       },
       {
         "item": "immersive_geology:block_item_granite_vanadinite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_netherrack_vanadinite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_blackstone_vanadinite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_vanadinite_ore"
       }
     ]
   }

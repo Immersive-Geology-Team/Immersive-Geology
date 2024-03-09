@@ -1,17 +1,17 @@
 {
-  "unobtania_extraction_cutting": {
-    "type": "item_display",
-    "items": [
-      {
-        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
-      }
-    ]
-  },
   "unobtania_extraction_crystalization": {
     "type": "item_display",
     "items": [
       {
         "item": "immersive_geology:block_item_machine_iron_crystallizer"
+      }
+    ]
+  },
+  "unobtania_extraction_cutting": {
+    "type": "item_display",
+    "items": [
+      {
+        "item": "immersive_geology:block_item_machine_iron_hydrojet_cutter"
       }
     ]
   },

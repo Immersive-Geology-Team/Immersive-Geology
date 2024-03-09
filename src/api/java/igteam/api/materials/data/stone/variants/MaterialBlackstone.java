@@ -82,6 +82,6 @@ public class MaterialBlackstone extends MaterialBaseStone {
 
     @Override
     public boolean generateOreFor(MaterialInterface m) {
-        return getDimension().equals(MaterialSourceWorld.nether);
+        return m.getDimension().equals(MaterialSourceWorld.nether);
     }
 }

@@ -12,7 +12,6 @@ public class IGOreConfig implements IFeatureConfig {
     public IntValue maxY;
     public IntValue veinsPerChunk;
     public IntValue spawnChance;
-
     public ForgeConfigSpec.EnumValue<MaterialSourceWorld> sourceWorld;
 
 
@@ -25,7 +24,7 @@ public class IGOreConfig implements IFeatureConfig {
         maxY = builder.comment("The maximum Y Coordinate this ore can spawn at").defineInRange("max_y", defMaxY, Integer.MIN_VALUE, Integer.MAX_VALUE);
         veinsPerChunk = builder.comment("The average number of veins per chunk").defineInRange("avg_veins_per_chunk", defNumPerChunk, 0, Integer.MAX_VALUE);
         spawnChance = builder.comment("How likely it is to spawn per attempt (chance / 10000) Chance is normally set to between 50-100").defineInRange("spawn_chance", chance, 0, 9999);
-        sourceWorld = builder.comment("The Dimension this Ore will attempt to spawn in").defineEnum("allowed_dimension", MaterialSourceWorld.overworld);
+        sourceWorld = builder.comment("The Dimension this Ore will attempt to spawn in").defineEnum("allowed_dimension", dimWhitelist);
         builder.pop();
     }
 }

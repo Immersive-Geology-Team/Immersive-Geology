@@ -7,15 +7,6 @@
       },
       {
         "item": "immersive_geology:block_item_granite_smithsonite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_netherrack_smithsonite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_blackstone_smithsonite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_smithsonite_ore"
       }
     ]
   }

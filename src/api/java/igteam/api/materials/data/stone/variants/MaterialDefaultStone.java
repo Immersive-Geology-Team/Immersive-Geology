@@ -58,6 +58,7 @@ public class MaterialDefaultStone extends MaterialBaseStone {
 
     @Override
     public boolean generateOreFor(MaterialInterface m) {
-        return getDimension().equals(MaterialSourceWorld.overworld);
+        return m.getDimension().equals(MaterialSourceWorld.overworld);
     }
+
 }

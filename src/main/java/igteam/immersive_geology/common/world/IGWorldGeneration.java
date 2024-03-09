@@ -48,6 +48,7 @@ public class IGWorldGeneration {
         ConfiguredFeature<?, ?> feature;
         if(fc instanceof IGOreConfig) {
             IGOreConfig config = (IGOreConfig) fc;
+            IGApi.getNewLogger().info("Mapping "+ name +" Generation");
             feature = new IGOreFeature(OreFeatureConfig.CODEC, config.spawnChance.get()).withConfiguration(
                 new IGOreFeatureConfig(
                         oreType.getDimension(),
@@ -62,8 +63,9 @@ public class IGWorldGeneration {
         // TODO This method of 'switching' the ore config type is bad, need to refactor this at some point.
         // However this should be functional enough for now.
         if(fc instanceof SphereReplaceConfig) {
+            SphereReplaceConfig sphereReplaceConfig = (SphereReplaceConfig) fc;
             IGApi.getNewLogger().info("Mapping Kaolinite Generation");
-            feature = register("disk_kaolinite_clay", new SphereReplaceFeature(SphereReplaceConfig.CODEC).withConfiguration((SphereReplaceConfig) fc));
+            feature = register("disk_kaolinite_clay", Feature.DISK.withConfiguration(sphereReplaceConfig).withPlacement(Features.Placements.KELP_PLACEMENT));
             features.put(name, feature);
             configMap.put(feature.toString(), fc);
         }
@@ -106,9 +108,12 @@ public class IGWorldGeneration {
                 if (config.sourceWorld.get().equals(MaterialSourceWorld.nether)) {
                     generation.withFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, ore);
                 }
-            } else {
-                IGApi.getNewLogger().info("Generate Kaolinite?");
-                generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ore);
+                if (config.sourceWorld.get().equals(MaterialSourceWorld.end)) {
+                    generation.withFeature(GenerationStage.Decoration.RAW_GENERATION, ore);
+                }
+            }
+            if(fc instanceof SphereReplaceConfig){
+                generation.withFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, ore);
             }
         }
     }

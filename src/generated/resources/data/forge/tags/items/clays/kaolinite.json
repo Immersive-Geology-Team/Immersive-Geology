@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "immersive_geology:block_item_kaolinite_clay",
     "immersive_geology:clay_kaolinite"
   ]
 }

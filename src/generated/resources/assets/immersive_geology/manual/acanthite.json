@@ -3,19 +3,10 @@
     "type": "item_display",
     "items": [
       {
-        "item": "immersive_geology:block_item_stone_acanthite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_granite_acanthite_ore"
-      },
-      {
         "item": "immersive_geology:block_item_netherrack_acanthite_ore"
       },
       {
         "item": "immersive_geology:block_item_blackstone_acanthite_ore"
-      },
-      {
-        "item": "immersive_geology:block_item_end_stone_acanthite_ore"
       }
     ]
   }

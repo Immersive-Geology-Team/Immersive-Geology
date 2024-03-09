@@ -1,0 +1,7 @@
+{
+  "parent": "immersive_geology:block/base/block",
+  "textures": {
+    "all": "immersive_geology:block/colored/kaolinite/clay",
+    "particle": "immersive_geology:block/colored/kaolinite/clay"
+  }
+}

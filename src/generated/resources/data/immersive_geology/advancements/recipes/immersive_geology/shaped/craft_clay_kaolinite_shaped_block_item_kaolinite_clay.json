@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_storage"
+      "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_clay"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_storage"
+        "recipe": "immersive_geology:shaped/craft_clay_kaolinite_shaped_block_item_kaolinite_clay"
       }
     }
   },

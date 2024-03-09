@@ -82,6 +82,6 @@ public class MaterialEndstone extends MaterialBaseStone {
 
     @Override
     public boolean generateOreFor(MaterialInterface m) {
-        return getDimension().equals(MaterialSourceWorld.end);
+        return m.getDimension().equals(MaterialSourceWorld.end);
     }
 }
