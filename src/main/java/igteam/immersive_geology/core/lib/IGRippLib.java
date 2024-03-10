@@ -24,7 +24,7 @@ public class IGRippLib {
             final ResourceLocation texture = fluid.getAttributes().getStillTexture();
             final int[] color = unpackColor(fluid.getAttributes().getColor(world, pos));
             final TextureAtlasSprite sprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(texture);
-            renderBlockSprite(buffer.getBuffer(RenderType.getTranslucent()), matrix, sprite, light, overlay, color, scale, height);
+            renderBlockSprite(buffer.getBuffer(RenderType.getTranslucentNoCrumbling()), matrix, sprite, light, overlay, color, scale, height);
     }
 
     public static void renderFluid2(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, FluidStack fluidStack, float alpha, float heightPercentage, int combinedLight){

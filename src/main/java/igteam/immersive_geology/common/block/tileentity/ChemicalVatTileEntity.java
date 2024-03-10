@@ -41,6 +41,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
+import org.openjdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -253,8 +254,10 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
             this.markDirty();
             this.markContainingBlockForUpdate(null);
         }
-    }
 
+
+
+    }
     private static final CachedShapesWithTransform<BlockPos, Pair<Direction, Boolean>> SHAPES =
             CachedShapesWithTransform.createForMultiblock(ChemicalVatTileEntity::getShape);
 
@@ -509,6 +512,19 @@ public class ChemicalVatTileEntity extends PoweredMultiblockTileEntity<ChemicalV
     }
 
     public boolean interact(Direction side, PlayerEntity player, Hand hand, ItemStack heldItem, float hitX, float hitY, float hitZ) {
+        if(heldItem.isEmpty()){
+            try {
+                ItemStack internalItem = Objects.requireNonNull(Objects.requireNonNull(master()).getInventory()).get(0);
+                if (findRecipeForInsertion(internalItem) == null){
+                    player.setHeldItem(hand, internalItem);
+                    master().getInventory().set(0, ItemStack.EMPTY);
+                    return true;
+                }
+                return false;
+            } catch (Error ignore){
+                return false;
+            }
+        }
         return false;
     }
 
