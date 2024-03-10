@@ -28,14 +28,26 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @OnlyIn(Dist.CLIENT)
 public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<GravitySeparatorTileEntity> {
+
+    List<Vector3f> spiralPoints = new ArrayList<>();
+    int numPoints = 100;
     public MultiblockGravitySeparatorRenderer(TileEntityRendererDispatcher dispatcher){
         super(dispatcher);
+        float rotationOffset = (float) Math.toRadians(90);
+        // Generate spiral points
+        for (int i = 0; i < numPoints; i++) {
+            float progress = (float) i / numPoints;
+            float angle = (float) (progress * 4.33f * Math.PI + rotationOffset); // 3 full cycles
+            float radius = 1.65f;
+            float x = (float) (Math.cos(angle) * radius);
+            float y = (float) (Math.sin(angle) * radius);
+            float z = 5.5f - (9f * (progress * 0.5f)); // Control the height of the item
+            spiralPoints.add(new Vector3f(8.9f + x, y - 2.33f, z));
+        }
     }
 
     @Override
@@ -45,87 +57,67 @@ public class MultiblockGravitySeparatorRenderer extends TileEntityRenderer<Gravi
 
     @Override
     public void render(GravitySeparatorTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
-        if(!te.isDummy()) {
-            transform.push();
-            Direction rotation = te.getFacing();
-            switch (rotation) {
-                case NORTH:
-                    transform.rotate(new Quaternion(0, 90F, 0, true));
-                    transform.translate(-6, 0, -1);
-                    break;
-                case EAST:
-                    transform.translate(-5, 0, -1);
-                    break;
-                case SOUTH:
-                    transform.rotate(new Quaternion(0, 270F, 0, true));
-                    transform.translate(-5, 0, -2);
-                    break;
-                case WEST:
-                    transform.rotate(new Quaternion(0, 180F, 0, true));
-                    transform.translate(-6, 0, -2);
-                    break;
-                default:
-                    break;
-            }
+        if(te != te.master()) return;
 
-            // Define the list of points representing positions along the spiral
-            List<Vector3f> spiralPoints = new ArrayList<>();
-            int numPoints = 100; // Adjust as needed
-            float rotationOffset = (float) Math.toRadians(90);
-            // Generate spiral points
-            for (int i = 0; i < numPoints; i++) {
-                float progress = (float) i / numPoints;
-                float angle = (float) (progress * 4.33f * Math.PI + rotationOffset); // 3 full cycles
-                float radius = 1.65f;
-                float x = (float) (Math.cos(angle) * radius);
-                float y = (float) (Math.sin(angle) * radius);
-                float z = 5.5f - (9f * (progress * 0.5f)); // Control the height of the item
-                spiralPoints.add(new Vector3f(8.9f + x, y - 2.33f, z));
-            }
-
-
-            // Sometimes this is null, causing flickering, I'm not sure why this is the case at the moment.
-            GravitySeparatorTileEntity master = te.master();
-
-            if(master != null){
-                ArrayList<Pair<Item, Integer>> processList = master.getInternalInventory();
-
-                for (Pair<Item, Integer> pair : processList) {
-                    int itemProgress = pair.getValue();
-                    Item key = pair.getKey();
-                    ItemStack stack = new ItemStack(key, 1);
-                    SeparatorRecipe recipe = SeparatorRecipe.findRecipe(stack);
-                    if(recipe != null) {
-                        ItemStack output = recipe.getRecipeOutput();
-                        if(pair.getRight() > 50) stack = output;
-                    }
-
-                    float progress = ((float) itemProgress / 100);
-
-                    // Use the progress variable to interpolate between points
-                    int index = (int) (progress * (numPoints - 1));
-                    Vector3f startPoint = spiralPoints.get(index);
-                    Vector3f endPoint = spiralPoints.get(Math.min(numPoints-1, index+1));
-                    float lerpFactor = progress * (numPoints - 1) - index;
-
-                    // Interpolate between the start and end points using lerp
-                    float interpolatedX = startPoint.getX() + (endPoint.getX() - startPoint.getX()) * lerpFactor;
-                    float interpolatedY = startPoint.getY() + (endPoint.getY() - startPoint.getY()) * lerpFactor;
-                    float interpolatedZ = startPoint.getZ() + (endPoint.getZ() - startPoint.getZ()) * lerpFactor;
-
-                    ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
-                    transform.push();
-                    float scale = .625f;
-                    transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
-                    transform.scale(scale, scale, 1);
-                    transform.translate(0, 0, interpolatedZ);
-                    transform.translate(0, interpolatedY, 0);
-                    transform.translate(interpolatedX, 0, 0);
-                    itemRender.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
-                    transform.pop();
-                }
-            }
-            transform.pop();
+        transform.push();
+        Direction rotation = te.getFacing();
+        switch (rotation) {
+            case NORTH:
+                transform.rotate(new Quaternion(0, 90F, 0, true));
+                transform.translate(-6, 0, -1);
+                break;
+            case EAST:
+                transform.translate(-5, 0, -1);
+                break;
+            case SOUTH:
+                transform.rotate(new Quaternion(0, 270F, 0, true));
+                transform.translate(-5, 0, -2);
+                break;
+            case WEST:
+                transform.rotate(new Quaternion(0, 180F, 0, true));
+                transform.translate(-6, 0, -2);
+                break;
+            default:
+                break;
         }
+
+        ArrayList<Pair<ItemStack, Integer>> teInventory = te.getInternalInventory();
+        for (Pair<ItemStack, Integer> pair : teInventory) {
+            int itemProgress = pair.getValue();
+            ItemStack stack = pair.getKey();
+            SeparatorRecipe recipe = SeparatorRecipe.findRecipe(stack);
+            if (recipe != null) {
+                int maxTicks = recipe.getTotalProcessTime();
+                ItemStack output = recipe.getRecipeOutput();
+                if (pair.getRight() > (double) (maxTicks / 2)) stack = output;
+
+                float progress = ((float) itemProgress / maxTicks);
+
+                // Use the progress variable to interpolate between points
+                int index = (int) (progress * (numPoints - 1));
+                Vector3f startPoint = spiralPoints.get(index);
+                Vector3f endPoint = spiralPoints.get(Math.min(numPoints - 1, index + 1));
+                float lerpFactor = progress * (numPoints - 1) - index;
+
+                // Interpolate between the start and end points using lerp
+                float interpolatedX = startPoint.getX() + (endPoint.getX() - startPoint.getX()) * lerpFactor;
+                float interpolatedY = startPoint.getY() + (endPoint.getY() - startPoint.getY()) * lerpFactor;
+                float interpolatedZ = startPoint.getZ() + (endPoint.getZ() - startPoint.getZ()) * lerpFactor;
+
+                ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
+                transform.push();
+                float scale = .625f;
+                transform.rotate(new Quaternion(new Vector3f(1, 0, 0), -90, true));
+                transform.scale(scale, scale, 1);
+                transform.translate(0, 0, interpolatedZ);
+                transform.translate(0, interpolatedY, 0);
+                transform.translate(interpolatedX, 0, 0);
+                itemRender.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, transform, buffer);
+                transform.pop();
+            }
+        }
+
+        transform.pop();
+
     }
 }
