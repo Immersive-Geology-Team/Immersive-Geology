@@ -3,10 +3,17 @@ package com.igteam.immersivegeology.core.registration;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.ComparatorManager;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultiblockComponent;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -19,6 +26,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -39,39 +47,60 @@ public class IGRegistrationHolder {
         MOD_BUS_CALLBACKS.forEach(e -> e.accept(eventBus));
     }
 
-
-
     public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure){
+        return registerMetalMultiblock(name, logic, structure, null);
+    }
+
+    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras){
+        // @formatter:off
         BlockBehaviour.Properties prop = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL)
-                .strength(3,15)
+                .strength(3, 15)
                 .requiresCorrectToolForDrops()
                 .isViewBlocking((state, blockReader, pos) -> false)
                 .noOcclusion()
                 .dynamicShape()
                 .pushReaction(PushReaction.BLOCK);
+        // @formatter:on
 
-        return registerMultiblock(name, logic, structure, prop);
+        return registerMultiblock(name, logic, structure, extras, prop);
     }
 
-    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, BlockBehaviour.Properties prop){
-        final ResourceLocation rl = ResourceUtils.ig(name);
-
-        MultiblockBuilder<S> builder = new MultiblockBuilder<>(logic, rl)
+    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras, BlockBehaviour.Properties prop){
+        // @formatter:off
+        MultiblockBuilder<S> builder = new MultiblockBuilder<>(logic, name)
                 .structure(structure)
-                .defaultBEs(IGRegistrationHolder.TE_REGISTER)
-                .defaultBlock(IGRegistrationHolder.BLOCK_REGISTER, IGRegistrationHolder.ITEM_REGISTER, prop);
+                .defaultBEs(TE_REGISTER)
+                .defaultBlock(BLOCK_REGISTER, ITEM_REGISTER, prop);
+        // @formatter:on
 
-        return builder.build(IGRegistrationHolder.MOD_BUS_CALLBACKS::add);
+        if(extras != null){
+            extras.accept(builder);
+        }
+
+        return builder.build(MOD_BUS_CALLBACKS::add);
     }
 
-    private static class MultiblockBuilder<S extends IMultiblockState> extends MultiblockRegistrationBuilder<S, MultiblockBuilder<S>> {
-        public MultiblockBuilder(IMultiblockLogic<S> logic, ResourceLocation name){
-            super(logic, name);
+    protected static class MultiblockBuilder<S extends IMultiblockState> extends MultiblockRegistrationBuilder<S, MultiblockBuilder<S>>{
+        public MultiblockBuilder(IMultiblockLogic<S> logic, String name){
+            super(logic, ResourceUtils.ig(name));
+        }
+
+        public MultiblockBuilder<S> redstone(IMultiblockComponent.StateWrapper<S, RedstoneControl.RSState> getState, BlockPos... positions){
+            redstoneAware();
+            return selfWrappingComponent(new RedstoneControl<>(getState, positions));
+        }
+
+        public MultiblockBuilder<S> comparator(ComparatorManager<S> comparator){
+            withComparator();
+            return super.selfWrappingComponent(comparator);
         }
 
         @Override
         protected MultiblockBuilder<S> self(){
             return this;
         }
+    }
+    public static ResourceLocation getRegistryNameOf(Block block){
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 }

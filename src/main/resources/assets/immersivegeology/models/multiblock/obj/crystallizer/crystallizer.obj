@@ -1,7 +1,7 @@
 # Blender v3.2.0 OBJ File: ''
 # www.blender.org
 mtllib crystallizer.mtl
-o Cube_Cube.001
+o crystallizer
 v 1.001368 2.500000 0.998632
 v 2.001368 2.500000 0.999316
 v 2.002009 2.250000 0.061816
@@ -745,7 +745,7 @@ vn -0.4607 -0.3863 -0.7991
 vn -0.8150 -0.4100 0.4094
 vn 0.0005 0.7075 -0.7067
 vn 0.0006 -0.6485 -0.7612
-usemtl Material.004
+usemtl crystallizerMaterial
 s 1
 f 1/1/1 2/2/1 3/3/2 4/4/3
 f 5/5/4 6/6/5 7/7/6

@@ -10,6 +10,5 @@ public class CommonProxy implements Proxy {
         IGLib.IG_LOGGER.info("Starting Common Setup");
 
         IGContent.initialize(event);
-
     }
 }

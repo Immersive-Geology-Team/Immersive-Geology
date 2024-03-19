@@ -17,6 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Function;
 
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, IClientTickableComponent<CrystallizerLogic.State> {
+    public static final BlockPos REDSTONE_IN = new BlockPos(0, 0, 0);
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
@@ -30,7 +31,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> capability) {
-        return null;
+        return new CrystallizerLogic.State(capability);
     }
 
     @Override

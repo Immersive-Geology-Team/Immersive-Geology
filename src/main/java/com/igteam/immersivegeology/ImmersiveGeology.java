@@ -23,9 +23,8 @@ public class ImmersiveGeology {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
 
-        IGContent.modContruction(modEventBus);
-
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
+        IGContent.modContruction(modEventBus);
     }
 
     public void setup(final FMLCommonSetupEvent event){

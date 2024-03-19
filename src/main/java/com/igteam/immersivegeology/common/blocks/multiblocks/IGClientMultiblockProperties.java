@@ -2,12 +2,18 @@ package com.igteam.immersivegeology.common.blocks.multiblocks;
 
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class IGClientMultiblockProperties implements ClientMultiblocks.MultiblockManualData {
     private final IGTemplateMultiblock multiblock;
@@ -38,11 +44,27 @@ public class IGClientMultiblockProperties implements ClientMultiblocks.Multibloc
 
     @Override
     public boolean canRenderFormedStructure() {
-        return false;
+        return this.renderOffset != null;
+    }
+
+    public void renderExtras(PoseStack matrix, MultiBufferSource buffer){
+    }
+
+    public void renderCustomFormedStructure(PoseStack matrix, MultiBufferSource buffer){
     }
 
     @Override
-    public void renderFormedStructure(PoseStack poseStack, MultiBufferSource multiBufferSource) {
+    public void renderFormedStructure(PoseStack matrix, MultiBufferSource buffer) {        
+        Objects.requireNonNull(this.renderOffset);
 
+        ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();        
+        
+        matrix.translate(this.renderOffset.x, this.renderOffset.y, this.renderOffset.z);
+        renderer.renderStatic(renderStack, ItemDisplayContext.NONE, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, matrix, buffer, null, 0);
+        matrix.pushPose();
+        {
+            renderExtras(matrix, buffer);
+        }
+        matrix.popPose();
     }
 }
