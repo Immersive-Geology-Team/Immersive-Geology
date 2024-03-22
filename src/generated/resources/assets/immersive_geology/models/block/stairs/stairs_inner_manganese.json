@@ -1,6 +1,0 @@
-{
-  "parent": "immersive_geology:block/base/stairs_inner",
-  "textures": {
-    "all": "immersive_geology:block/colored/manganese/storage_block"
-  }
-}

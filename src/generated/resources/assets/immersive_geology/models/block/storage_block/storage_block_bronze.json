@@ -1,7 +1,0 @@
-{
-  "parent": "immersive_geology:block/base/block",
-  "textures": {
-    "all": "immersive_geology:block/colored/bronze/storage_block",
-    "particle": "immersive_geology:block/colored/bronze/storage_block"
-  }
-}

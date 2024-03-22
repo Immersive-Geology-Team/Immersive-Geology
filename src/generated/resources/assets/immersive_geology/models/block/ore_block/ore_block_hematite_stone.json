@@ -1,7 +1,0 @@
-{
-  "parent": "immersive_geology:block/base/ore_block",
-  "textures": {
-    "ore": "immersive_geology:block/greyscale/rock/ore_bearing/vanilla/hexagonal",
-    "base": "minecraft:block/stone"
-  }
-}
