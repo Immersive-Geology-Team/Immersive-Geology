@@ -28,8 +28,8 @@ apply plugin: 'org.jetbrains.gradle.plugin.idea-ext'
 apply plugin: 'org.spongepowered.mixin'
 
 version = version_ig
-group = 'igteam.immersive_geology'
-archivesBaseName = 'immersive_geology'
+group = 'igteam.immersivegeology'
+archivesBaseName = 'immersivegeology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 jar.enabled = false
@@ -58,10 +58,10 @@ sourceSets {
 
 def version_replaces = [
         'version'      : project.version,
-        'mc_version'   : version_minecraft,
+        'minecraft_version'   : version_minecraft,
         'forge_version': version_forge,
         'jei_version'  : version_jei,
-        'ie_version': ie_version_range
+        'ie_version_range': ie_version_range
 ]
 
 def jsonPatterns = ["**/*.json", "**/*.mcmeta"]
@@ -102,13 +102,13 @@ minecraft {
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN'
-            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
+            property 'forge.enabledGameTestNamespaces', 'immersivegeology'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
             ideaModule project.name + ".gametest"
             mods {
-                immersive_geology {
+                immersivegeology {
                     source sourceSets.main
                     source sourceSets.api
                 }
@@ -122,13 +122,13 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'immersive_geology'
+            property 'forge.enabledGameTestNamespaces', 'immersivegeology'
 
             // Disable GUI by default, the IDE console can be used to enter commands
             arg '-nogui'
 
             mods {
-                immersive_geology {
+                immersivegeology {
                     source sourceSets.main
                     source sourceSets.api
                 }
@@ -144,12 +144,12 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'fml.earlyprogresswindow', 'false'
 
-            args '--mod', 'immersive_geology', '--all', '--output', file('src/generated/resources/'), '--validate',
+            args '--mod', 'immersivegeology', '--all', '--output', file('src/generated/resources/'), '--validate',
                     '--existing', sourceSets.main.resources.srcDirs[0]
             ideaModule project.name+".datagen"
 
             mods {
-                immersive_geology {
+                immersivegeology {
                     source sourceSets.main
                     source sourceSets.datagen
                     source sourceSets.api
@@ -193,7 +193,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
 
     compileOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:api")
-    runtimeOnly  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}")
+    implementation  fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}")
+    datagenImplementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:datagen")
 
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.137")
@@ -476,7 +477,7 @@ abstract class GenerateUpdateJSON extends DefaultTask {
 
 task updateJson(type: GenerateUpdateJSON) {
     markdown = file("changelog.md")
-    includedJSON = file("src/main/resources/assets/immersive_geology/changelog.json")
+    includedJSON = file("src/main/resources/assets/immersivegeology/changelog.json")
     onlineJSON = file("changelog.json")
 }
 

@@ -1,8 +1,8 @@
 {
   "required": true,
-  "package": "igteam.immersive_geology.mixin",
+  "package": "igteam.immersivegeology.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "immersive_geology.refmap.json",
+  "refmap": "immersivegeology.refmap.json",
   "mixins": [
   ],
   "client": [

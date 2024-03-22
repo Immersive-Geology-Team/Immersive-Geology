@@ -1,6 +1,6 @@
 {
   "chemicalvat0": {
     "type": "multiblock",
-    "name": "immersive_geology:multiblocks/chemicalvat"
+    "name": "immersivegeology:multiblocks/chemicalvat"
   }
 }

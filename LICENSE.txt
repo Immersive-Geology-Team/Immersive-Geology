@@ -366,21 +366,21 @@ of these things:
     interface-compatible with the version that the work was made with.
 
     c) Accompany the work with a written offer, valid for at
-    least three years, to give the same user the igteam.immersive_geology.materials
+    least three years, to give the same user the igteam.immersivegeology.materials
     specified in Subsection 6a, above, for a charge no more
     than the cost of performing this distribution.
 
     d) If distribution of the work is made by offering access to copy
     from a designated place, offer equivalent access to copy the above
-    specified igteam.immersive_geology.materials from the same place.
+    specified igteam.immersivegeology.materials from the same place.
 
     e) Verify that the user has already received a copy of these
-    igteam.immersive_geology.materials or that you have already sent this user a copy.
+    igteam.immersivegeology.materials or that you have already sent this user a copy.
 
   For an executable, the required form of the "work that uses the
 Library" must include any data and utility programs needed for
 reproducing the executable from it.  However, as a special exception,
-the igteam.immersive_geology.materials to be distributed need not include anything that is
+the igteam.immersivegeology.materials to be distributed need not include anything that is
 normally distributed (in either source or binary form) with the major
 components (compiler, kernel, and so on) of the operating system on
 which the executable runs, unless that component itself accompanies

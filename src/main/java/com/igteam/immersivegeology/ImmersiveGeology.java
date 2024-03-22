@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.proxy.ClientProxy;
 import com.igteam.immersivegeology.core.proxy.Proxy;
 import com.igteam.immersivegeology.core.proxy.CommonProxy;
+import com.igteam.immersivegeology.core.registration.IGMultiblockHolder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,15 +40,18 @@ public class ImmersiveGeology {
     {
         logger.log(Level.INFO, "Starting Immersive Geology");
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         logger.info("Registering Items and Blocks");
-        IGRegistrationHolder.initialize();
+        IGMultiblockHolder.forceLoad();
+
         IGRegistrationHolder.getItemRegister().register(modBus);
         IGRegistrationHolder.getBlockRegister().register(modBus);
+        IGRegistrationHolder.getTeRegister().register(modBus);
+
 
         initializeConfiguration();
+        IGRegistrationHolder.initialize();
 
         modBus.addListener(this::setup);
         modBus.addListener(this::onClientSetup);
@@ -79,8 +83,8 @@ public class ImmersiveGeology {
 
     private void initializeConfiguration() {
         CommonConfiguration.initialize();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfiguration.SPEC, "immersive_geology-client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfiguration.SPEC, "immersive_geology-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfiguration.SPEC, "immersivegeology-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfiguration.SPEC, "immersivegeology-common.toml");
     }
 
     public static List<MaterialInterface<?>> getGeologyMaterials(){

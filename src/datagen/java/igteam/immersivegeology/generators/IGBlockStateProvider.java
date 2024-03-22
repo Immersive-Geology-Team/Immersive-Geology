@@ -43,10 +43,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private Logger log = ImmersiveGeology.getNewLogger();
     private final NongeneratedModels nongeneratedModels;
+    final ExistingFileHelper exFileHelper;
     public IGBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper)
     {
         super(gen, IGLib.MODID, exFileHelper);
-
+        this.exFileHelper = exFileHelper;
         this.nongeneratedModels = new NongeneratedModels(gen, exFileHelper);
     }
     @Override

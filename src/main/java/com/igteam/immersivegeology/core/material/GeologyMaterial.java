@@ -1,8 +1,8 @@
 package com.igteam.immersivegeology.core.material;
 
+import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
 import com.google.common.collect.Sets;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.common.block.helper.StaticTemplateManager;
 import com.igteam.immersivegeology.common.configuration.helper.ConfigurationHelper;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;

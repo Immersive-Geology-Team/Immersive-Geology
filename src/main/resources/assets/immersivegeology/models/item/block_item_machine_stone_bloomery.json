@@ -1,6 +1,6 @@
 {
   "loader": "forge:obj",
-  "model": "immersive_geology:models/multiblock/obj/bloomery/bloomery.obj",
+  "model": "immersivegeology:models/multiblock/obj/bloomery/bloomery.obj",
   "flip-v": true,
   "transform": {
     "thirdperson_righthand": {

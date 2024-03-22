@@ -1,7 +1,7 @@
 {
   "textures": {
-    "all": "immersive_geology:block/greyscale/metal/sheetmetal",
-    "particle": "immersive_geology:block/greyscale/metal/sheetmetal"
+    "all": "immersivegeology:block/greyscale/metal/sheetmetal",
+    "particle": "immersivegeology:block/greyscale/metal/sheetmetal"
   },
   "elements": [
     {   "from": [ 0, 0, 0 ],

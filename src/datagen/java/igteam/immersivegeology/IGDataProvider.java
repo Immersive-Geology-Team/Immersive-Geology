@@ -1,6 +1,7 @@
 package igteam.immersivegeology;
 
-import com.igteam.immersivegeology.common.block.helper.StaticTemplateManager;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.StaticTemplateManager;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import igteam.immersivegeology.generators.IGBlockStateProvider;
 import igteam.immersivegeology.generators.IGItemModelProvider;
@@ -18,7 +19,9 @@ public class IGDataProvider {
         ExistingFileHelper exHelper = event.getExistingFileHelper();
         StaticTemplateManager.EXISTING_HELPER = exHelper;
 
-        if(event.includeServer()){
+        ImmersiveGeology.getNewLogger().info("-============ Testing ============-");
+
+        if(event.includeClient()){
             generator.addProvider(new IGBlockStateProvider(generator, exHelper));
             generator.addProvider(new IGItemModelProvider(generator, exHelper));
         }

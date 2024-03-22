@@ -1,6 +1,8 @@
 package com.igteam.immersivegeology.core.proxy;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.core.registration.IGMultiblockHolder;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.apache.logging.log4j.Level;
@@ -12,6 +14,7 @@ public class CommonProxy implements Proxy {
     @Override
     public void onCommonSetup(FMLCommonSetupEvent event) {
         logger.log(Level.INFO, "Initializing Items and Blocks");
+        IGMultiblockHolder.initialize();
         logger.log(Level.INFO, "---Initial Setup Completed---");
     }
 

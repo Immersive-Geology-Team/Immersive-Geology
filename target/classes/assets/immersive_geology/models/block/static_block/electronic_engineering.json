@@ -14,6 +14,6 @@
     }
   ],
   "textures": {
-    "all": "immersive_geology:block/static_block/electronic_engineering"
+    "all": "immersivegeology:block/static_block/electronic_engineering"
   }
 }

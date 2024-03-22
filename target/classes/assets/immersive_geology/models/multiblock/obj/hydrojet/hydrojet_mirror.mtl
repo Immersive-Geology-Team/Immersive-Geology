@@ -2,7 +2,7 @@
 # www.blender.org
 
 newmtl Material.001
-map_Kd immersive_geology:multiblock/hydrojet
+map_Kd immersivegeology:multiblock/hydrojet
 
 newmtl Material.002
 map_Kd immersiveengineering:block/conveyor/conveyor

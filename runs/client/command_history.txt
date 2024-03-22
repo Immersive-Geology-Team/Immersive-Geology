@@ -1,0 +1,10 @@
+/effect give Dev minecraft:night_vision
+/effect give Dev minecraft:night_vision 9999
+/gamemode survival
+/gamemode creative
+/kill
+/time set day
+/gamerule doDaylightCycle false
+/give Dev minecraft:structure_block
+/setblock 8 56 14 immersivegeology:crystallizer
+/give Dev minecraft:structure_block

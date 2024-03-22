@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.common.item.helper.IGItemType;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -13,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -51,15 +53,20 @@ public class IGGenericBlockItem extends BlockItem implements IGItemType, IGFlagI
     }
 
     @Override
-    public Component getName(ItemStack pStack) {
+    public @NotNull Component getName(ItemStack pStack) {
         Map<MaterialTexture, MaterialInterface<?>> materialMap = block.getMaterialMap();
         List<String> materialList = new ArrayList<>();
-        for(MaterialTexture t : MaterialTexture.values()){
-            if (materialMap.containsKey(t)) {
-                materialList.add(I18n.get("block.immersive_geology." + materialMap.get(t).getName()));
+
+        if(getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) {
+            materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
+        } else {
+            for(MaterialTexture t : MaterialTexture.values()){
+                if (materialMap.containsKey(t)) {
+                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+                }
             }
         }
 
-        return new TranslatableComponent("block.immersive_geology." + block.getFlag().getName(), materialList.toArray());
+        return new TranslatableComponent("block.immersivegeology." + block.getFlag().getName(), materialList.toArray());
     }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "immersive_geology:block/base/ore_bearing/base",
+  "parent": "immersivegeology:block/base/ore_bearing/base",
   "textures": {
     "particle": "#base"
   },

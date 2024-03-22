@@ -21,11 +21,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class IGItemGroup extends CreativeModeTab {
-    private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersive_geology", "textures/gui/ig_tab_menu.png");
-    private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersive_geology", "textures/gui/ig_tabs.png");
+    private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tab_menu.png");
+    private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tabs.png");
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.natural;
-    public static final IGItemGroup IGGroup = new IGItemGroup("immersive_geology");
+    public static final IGItemGroup IGGroup = new IGItemGroup("immersivegeology");
 
     public IGItemGroup(String label) {
         super(label);
@@ -34,7 +34,7 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("itemGroup.immersive_geology." + selectedGroup.name());
+        return new TranslatableComponent("itemGroup.immersivegeology." + selectedGroup.name());
     }
 
     @Override

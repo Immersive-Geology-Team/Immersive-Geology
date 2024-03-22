@@ -15,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -38,7 +39,6 @@ public class ClientProxy extends CommonProxy {
         supplyMaterialTint();
     }
 
-
     private void supplyMaterialTint(){
         Minecraft minecraft = Minecraft.getInstance();
         for(MaterialInterface<?> i : ImmersiveGeology.getGeologyMaterials()) {
@@ -47,11 +47,7 @@ public class ClientProxy extends CommonProxy {
             for (IFlagType<?> pattern : IFlagType.getAllRegistryFlags()) {
                 colorCheckMap.put(pattern, true);
                 if (base.getFlags().contains(pattern)) {
-                    ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
-                    if (pattern.equals(BlockCategoryFlags.SLAB)) //crutch for sheetmetal slabs
-                    {
-                        test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.SHEETMETAL_BLOCK.getName() + ".png");
-                    }
+                    ResourceLocation test = getResourceLocationTest(pattern, base);
                     try {
                         boolean check = minecraft.getResourceManager().hasResource(test);
                         colorCheckMap.put(pattern, !check);
@@ -61,5 +57,15 @@ public class ClientProxy extends CommonProxy {
 
             base.initializeColorTint(colorCheckMap::get);
         }
+    }
+
+    @NotNull
+    private static ResourceLocation getResourceLocationTest(IFlagType<?> pattern, GeologyMaterial base) {
+        ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
+        if (pattern.equals(BlockCategoryFlags.SLAB)) //crutch for sheetmetal slabs
+        {
+            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.SHEETMETAL_BLOCK.getName() + ".png");
+        }
+        return test;
     }
 }

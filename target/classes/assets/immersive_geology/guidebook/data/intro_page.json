@@ -7,7 +7,7 @@
   },
   "page_details" : {
     "text": "This is a guide to help you progress in Immersive Geology or IG for short! [link_1], [link_2]",
-    "graphical": "immersive_geology:textures/gui/book/welcome_icon",
+    "graphical": "immersivegeology:textures/gui/book/welcome_icon",
     "link": {
         "link_1": {
             "name": "Click Here to go somewhere!",

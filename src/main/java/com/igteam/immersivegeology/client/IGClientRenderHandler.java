@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.client;
 
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.helper.IGItemType;
+import com.igteam.immersivegeology.core.registration.IGMultiblockHolder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
@@ -62,6 +63,8 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         for(Block b : mapping.keySet()) {
             ItemBlockRenderTypes.setRenderLayer(b, renderTypes.get(mapping.get(b)));
         }
+
+        ItemBlockRenderTypes.setRenderLayer(IGMultiblockHolder.CRYSTALLIZER.get(), RenderType.cutout());
 
         inheritances.clear();
         mapping.clear();

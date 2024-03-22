@@ -1,0 +1,242 @@
+[13Mar2024 12:28:38.100] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, 20.4.159-beta, --assetIndex, asset-index, --assetsDir, /home/muddykat/.gradle/caches/minecraft/assets/1.20.4, --gameDir, ., --fml.neoForgeVersion, 20.4.159-beta, --fml.fmlVersion, 2.0.11, --fml.mcVersion, 1.20.4, --fml.neoFormVersion, 20231207.154220]
+[13Mar2024 12:28:38.102] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.10 by Eclipse Adoptium; OS Linux arch amd64 version 5.15.0-97-generic
+[13Mar2024 12:28:38.149] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[13Mar2024 12:28:38.196] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[13Mar2024 12:28:38.342] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[13Mar2024 12:28:38.383] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/muddykat/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23173!/ Service=ModLauncher Env=CLIENT
+[13Mar2024 12:28:38.430] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce GTX 1070/PCIe/SSE2 GL version 4.6.0 NVIDIA 545.29.06, NVIDIA Corporation
+[13Mar2024 12:28:38.494] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-20.4.159-beta.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6ebd78d1
+[13Mar2024 12:28:38.494] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6ebd78d1
+[13Mar2024 12:28:38.494] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6ebd78d1
+[13Mar2024 12:28:38.507] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'neoforge'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:38.507] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'minecraft'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:38.517] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'neoforge'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:38.517] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'minecraft'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:38.519] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ImmersiveEngineering-1.20.4-10.0.1-pre.177.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.519] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "adastra-neoforge-1.20.4-1.16.5.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.519] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.20.4-neoforge-17.0.0.30.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.519] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "resourcefullib-neoforge-1.20.4-2.4.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "resourcefulconfig-neoforge-1.20.4-2.4.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "botarium-neoforge-1.20.4-3.0.7.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ImmersiveEngineering-1.20.4-10.0.1-pre.177.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "adastra-neoforge-1.20.4-1.16.5.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.20.4-neoforge-17.0.0.30.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "resourcefullib-neoforge-1.20.4-2.4.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "resourcefulconfig-neoforge-1.20.4-2.4.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "botarium-neoforge-1.20.4-3.0.7.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@3773862a
+[13Mar2024 12:28:38.572] [main/INFO] [net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 4 dependencies adding them to mods collection
+[13Mar2024 12:28:38.572] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "bytecodecs-1.0.2.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@341a8659
+[13Mar2024 12:28:38.572] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jlayer-1.0.1.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@341a8659
+[13Mar2024 12:28:38.572] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "yabn-1.0.3.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@341a8659
+[13Mar2024 12:28:38.573] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "mixinextras-neoforge-0.3.5.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@341a8659
+[13Mar2024 12:28:38.576] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'neoforge'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:38.576] [main/ERROR] [net.neoforged.fml.loading.moddiscovery.ModInfo/]: Mod 'resourcefulconfig' uses deprecated 'mandatory' field in the dependency declaration for 'minecraft'. Use the 'type' field and 'required'/'optional' instead
+[13Mar2024 12:28:39.055] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[13Mar2024 12:28:39.062] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, 20.4.159-beta, --gameDir, ., --assetsDir, /home/muddykat/.gradle/caches/minecraft/assets/1.20.4, --assetIndex, asset-index]
+[13Mar2024 12:28:39.090] [main/WARN] [mixin/]: Reference map 'immersiveengineering.refmap.json' for immersiveengineering.mixins.json could not be read. If this is a development environment you can ignore this message
+[13Mar2024 12:28:39.377] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[13Mar2024 12:28:41.229] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 198 Datafixer optimizations took 66 milliseconds
+[13Mar2024 12:28:42.242] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13Mar2024 12:28:42.243] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13Mar2024 12:28:42.244] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[13Mar2024 12:28:42.244] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[13Mar2024 12:28:42.245] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13Mar2024 12:28:42.298] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/muddykat/Documents/Github/Immersive-Geology/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.159-beta/neoforge-20.4.159-beta.jar%23182!/assets/.mcassetsroot' uses unexpected schema
+[13Mar2024 12:28:42.298] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/muddykat/Documents/Github/Immersive-Geology/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.159-beta/neoforge-20.4.159-beta.jar%23182!/data/.mcassetsroot' uses unexpected schema
+[13Mar2024 12:28:42.307] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[13Mar2024 12:28:42.311] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[13Mar2024 12:28:42.344] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.2+13
+[13Mar2024 12:28:42.611] [modloading-worker-0/INFO] [lib.core.com.igteam.immersivegeology.common.data.IGLib/]: Immersive Geology Starting
+[13Mar2024 12:28:42.611] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 20.4.159-beta, for MC 1.20.4 with MCP 20231207.154220
+[13Mar2024 12:28:42.656] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[13Mar2024 12:28:42.658] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 839.6 μs
+[13Mar2024 12:28:44.773] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[13Mar2024 12:28:44.904] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod:resourcefulconfig, mod:resourcefullib, mod:immersiveengineering, mod:botarium, mod:neoforge, mod:jei, mod:ad_astra, mod:immersivegeology
+[13Mar2024 12:28:44.927] [Worker-Main-7/INFO] [lib.core.com.igteam.immersivegeology.common.data.IGLib/]: Starting Common Setup
+[13Mar2024 12:28:44.927] [Worker-Main-7/INFO] [lib.core.com.igteam.immersivegeology.common.data.IGLib/]: Registering Multiblocks to Immersive Engineering
+[13Mar2024 12:28:44.929] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [immersiveengineering] Starting version check at https://raw.githubusercontent.com/BluSunrize/ImmersiveEngineering/1.20.4/changelog.json
+[13Mar2024 12:28:44.929] [Immersive Engineering Contributors Thread/INFO] [immersiveengineering/]: Attempting to download special revolvers from GitHub
+[13Mar2024 12:28:44.931] [Worker-Main-14/WARN] [net.minecraft.client.gui.font.FontManager/]: Unable to load font 'immersiveengineering:unicode' in fonts.json in resourcepack: 'mod:immersiveengineering'
+com.google.gson.JsonParseException: Unknown element name:legacy_unicode
+	at net.minecraft.Util.getOrThrow(Util.java:839) ~[neoforge-20.4.159-beta.jar%23182!/:?]
+	at net.minecraft.client.gui.font.FontManager.loadResourceStack(FontManager.java:196) ~[neoforge-20.4.159-beta.jar%23182!/:?]
+	at net.minecraft.client.gui.font.FontManager.lambda$prepare$4(FontManager.java:88) ~[neoforge-20.4.159-beta.jar%23182!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+[13Mar2024 12:28:44.934] [Worker-Main-8/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.04.hex, loading
+[13Mar2024 12:28:45.014] [Worker-Main-2/ERROR] [net.minecraft.Util/]: Invalid path in pack: immersivegeology:textures/block/static_block/reinforced_refractory_brick_CTM.png, ignoring
+[13Mar2024 12:28:45.092] [Worker-Main-20/INFO] [lib.core.com.igteam.immersivegeology.common.data.IGLib/]: Starting Client Setup
+[13Mar2024 12:28:45.245] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [immersiveengineering] Found status: BETA Current: 1.20.4-10.0.1-pre.177 Target: null
+[13Mar2024 12:28:45.245] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [ad_astra] Starting version check at https://api.modrinth.com/updates/3ufwT9JF/forge_updates.json
+[13Mar2024 12:28:45.518] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [ad_astra] Found status: BETA Current: 1.16.5 Target: null
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=east,mirrored=false,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=south,mirrored=false,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=west,mirrored=true,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=east,mirrored=true,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=south,mirrored=true,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=west,mirrored=false,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=west,mirrored=true,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=south,mirrored=false,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=west,mirrored=false,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=north,mirrored=true,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=north,mirrored=true,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=north,mirrored=false,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=east,mirrored=true,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=south,mirrored=true,multiblockslave=false'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=east,mirrored=false,multiblockslave=true'
+[13Mar2024 12:28:45.821] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'immersivegeology:blockstates/crystallizer.json' missing model for variant: 'immersivegeology:crystallizer#facing=north,mirrored=false,multiblockslave=true'
+[13Mar2024 12:28:45.826] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'immersivegeology:crystallizer#inventory' referenced from: immersivegeology:crystallizer#inventory: java.io.FileNotFoundException: immersivegeology:models/item/crystallizer.json
+[13Mar2024 12:28:46.666] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[13Mar2024 12:28:46.667] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[13Mar2024 12:28:46.667] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.generic.wind_burst
+[13Mar2024 12:28:46.676] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device Family 17h (Models 10h-1fh) HD Audio Controller Analogue Stereo
+[13Mar2024 12:28:46.676] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[13Mar2024 12:28:46.753] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[13Mar2024 12:28:46.760] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[13Mar2024 12:28:46.760] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[13Mar2024 12:28:46.760] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[13Mar2024 12:28:46.761] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[13Mar2024 12:28:46.762] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[13Mar2024 12:28:46.762] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[13Mar2024 12:28:46.762] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[13Mar2024 12:28:46.762] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[13Mar2024 12:28:46.812] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[13Mar2024 12:28:46.833] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[13Mar2024 12:28:46.834] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[13Mar2024 12:28:46.834] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[13Mar2024 12:28:46.834] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[13Mar2024 12:28:46.849] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 jei:textures/atlas/gui.png-atlas
+[13Mar2024 12:29:28.649] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 34 recipes
+[13Mar2024 12:29:28.737] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2438 advancements
+[13Mar2024 12:29:29.573] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver received class net.neoforged.neoforge.event.TagsUpdatedEvent too early, ignoring
+[13Mar2024 12:29:29.601] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.20.4
+[13Mar2024 12:29:29.601] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[13Mar2024 12:29:29.736] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[13Mar2024 12:29:30.428] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Mar2024 12:29:30.428] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Mar2024 12:29:30.753] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 35%
+[13Mar2024 12:29:30.868] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[13Mar2024 12:29:30.878] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 1126 ms
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:jet_suit_pants, missing knowledge for {1 ad_astra:netherite_space_pants=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:netherite_space_pants, missing knowledge for {1 minecraft:netherite_leggings=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:netherite_space_helmet, missing knowledge for {1 minecraft:netherite_helmet=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:jet_suit_boots, missing knowledge for {1 ad_astra:netherite_space_boots=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:netherite_space_suit, missing knowledge for {1 minecraft:netherite_chestplate=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:jet_suit_helmet, missing knowledge for {1 ad_astra:netherite_space_helmet=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:netherite_space_boots, missing knowledge for {1 minecraft:netherite_boots=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 ad_astra:jet_suit, missing knowledge for {1 ad_astra:netherite_space_suit=1.0}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 immersiveengineering:radiator, missing knowledge for {1 minecraft:water_bucket=0.25}
+[13Mar2024 12:29:30.896] [Server thread/INFO] [immersiveengineering/]: Finished recipe profiler for Arc Recycling, took 27 milliseconds
+[13Mar2024 12:29:30.933] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[13Mar2024 12:29:30.934] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[13Mar2024 12:29:31.201] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:f693ebb1] logged in with entity id 1 at (3.0218059509939033, 57.78351091432363, -1.9237648938366692)
+[13Mar2024 12:29:31.219] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver received class net.neoforged.neoforge.event.TagsUpdatedEvent
+[13Mar2024 12:29:31.231] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[13Mar2024 12:29:31.456] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver received class net.neoforged.neoforge.client.event.RecipesUpdatedEvent
+[13Mar2024 12:29:31.456] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver transitioning state from LISTENING to JEI_STARTED
+[13Mar2024 12:29:31.457] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[13Mar2024 12:29:31.459] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[13Mar2024 12:29:31.462] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 2.704 ms
+[13Mar2024 12:29:31.462] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[13Mar2024 12:29:31.463] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 532.0 μs
+[13Mar2024 12:29:31.463] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[13Mar2024 12:29:31.492] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 28.81 milliseconds
+[13Mar2024 12:29:31.493] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 29.26 ms
+[13Mar2024 12:29:31.495] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[13Mar2024 12:29:31.504] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 8.164 ms
+[13Mar2024 12:29:31.504] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[13Mar2024 12:29:31.504] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 520.4 μs
+[13Mar2024 12:29:31.505] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[13Mar2024 12:29:31.506] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 595.7 μs
+[13Mar2024 12:29:31.506] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[13Mar2024 12:29:31.507] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 217.7 μs
+[13Mar2024 12:29:31.507] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[13Mar2024 12:29:31.514] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 7.359 ms
+[13Mar2024 12:29:31.515] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[13Mar2024 12:29:31.613] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 98.13 milliseconds
+[13Mar2024 12:29:31.613] [Render thread/INFO] [immersiveengineering/]: Adding recipes to JEI!!
+[13Mar2024 12:29:31.628] [Render thread/INFO] [immersiveengineering/]: Recipes for potions: minecraft:strong_swiftness, minecraft:regeneration, minecraft:strong_strength, minecraft:long_poison, minecraft:long_swiftness, minecraft:harming, minecraft:water_breathing, minecraft:long_turtle_master, minecraft:long_regeneration, minecraft:long_fire_resistance, minecraft:water, minecraft:night_vision, minecraft:strong_slowness, minecraft:long_night_vision, minecraft:strong_harming, minecraft:swiftness, minecraft:long_strength, minecraft:long_water_breathing, minecraft:strong_leaping, minecraft:strong_healing, minecraft:healing, minecraft:slow_falling, minecraft:invisibility, minecraft:awkward, minecraft:long_invisibility, minecraft:fire_resistance, minecraft:strong_regeneration, minecraft:strong_poison, minecraft:long_slowness, minecraft:slowness, minecraft:strong_turtle_master, minecraft:poison, minecraft:long_weakness, minecraft:long_leaping, minecraft:leaping, minecraft:strength, minecraft:weakness, minecraft:turtle_master, minecraft:long_slow_falling
+[13Mar2024 12:29:31.632] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: immersiveengineering:main took 18.57 milliseconds
+[13Mar2024 12:29:31.636] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 120.7 ms
+[13Mar2024 12:29:31.637] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[13Mar2024 12:29:31.638] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 1.506 ms
+[13Mar2024 12:29:31.642] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[13Mar2024 12:29:31.644] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[13Mar2024 12:29:31.648] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 3.536 ms
+[13Mar2024 12:29:31.648] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[13Mar2024 12:29:31.649] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[13Mar2024 12:29:31.649] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[13Mar2024 12:29:31.651] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 1.386 ms
+[13Mar2024 12:29:31.651] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[13Mar2024 12:29:31.657] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
+[13Mar2024 12:29:31.726] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
+[13Mar2024 12:29:31.727] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 75.98 ms
+[13Mar2024 12:29:31.767] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:forge_gui took 118.2 milliseconds
+[13Mar2024 12:29:31.767] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 118.6 ms
+[13Mar2024 12:29:31.767] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 125.3 ms
+[13Mar2024 12:29:31.767] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[13Mar2024 12:29:31.768] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 218.4 μs
+[13Mar2024 12:29:31.768] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 311.1 ms
+[13Mar2024 12:29:31.876] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 18 advancements
+[13Mar2024 12:29:45.196] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[13Mar2024 12:29:45.209] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:overworld
+[13Mar2024 12:29:45.229] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mercury_orbit
+[13Mar2024 12:29:45.239] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:venus_orbit
+[13Mar2024 12:29:45.249] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mercury
+[13Mar2024 12:29:45.259] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:glacio_orbit
+[13Mar2024 12:29:45.269] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:moon_orbit
+[13Mar2024 12:29:45.279] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:moon
+[13Mar2024 12:29:45.289] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:glacio
+[13Mar2024 12:29:45.298] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:earth_orbit
+[13Mar2024 12:29:45.308] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mars_orbit
+[13Mar2024 12:29:45.319] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:the_nether
+[13Mar2024 12:29:45.329] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:the_end
+[13Mar2024 12:29:45.340] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mars
+[13Mar2024 12:29:45.350] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:venus
+[13Mar2024 12:29:45.896] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver received class net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent$LoggingOut
+[13Mar2024 12:29:45.896] [Render thread/INFO] [mezz.jei.neoforge.startup.StartEventObserver/]: JEI StartEventObserver transitioning state from JEI_STARTED to LISTENING
+[13Mar2024 12:29:45.896] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[13Mar2024 12:29:45.896] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[13Mar2024 12:29:45.896] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.ForgeGuiPlugin/]: Stopping JEI GUI
+[13Mar2024 12:29:45.898] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.544 ms
+[13Mar2024 12:29:45.948] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Disconnected
+[13Mar2024 12:29:45.948] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
+[13Mar2024 12:29:45.958] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[13Mar2024 12:29:46.004] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[13Mar2024 12:29:46.004] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[13Mar2024 12:29:46.004] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[13Mar2024 12:29:46.262] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:overworld
+[13Mar2024 12:29:46.296] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mercury_orbit
+[13Mar2024 12:29:46.301] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:venus_orbit
+[13Mar2024 12:29:46.306] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mercury
+[13Mar2024 12:29:46.312] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:glacio_orbit
+[13Mar2024 12:29:46.317] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:moon_orbit
+[13Mar2024 12:29:46.323] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:moon
+[13Mar2024 12:29:46.328] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:glacio
+[13Mar2024 12:29:46.333] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:earth_orbit
+[13Mar2024 12:29:46.338] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mars_orbit
+[13Mar2024 12:29:46.343] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:the_nether
+[13Mar2024 12:29:46.348] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/minecraft:the_end
+[13Mar2024 12:29:46.353] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:mars
+[13Mar2024 12:29:46.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Testing Grounds]'/ad_astra:venus
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (Testing Grounds): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mercury_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (venus_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mercury): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (glacio_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (moon_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (moon): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (glacio): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (earth_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mars_orbit): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (mars): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (venus): All chunks are saved
+[13Mar2024 12:29:46.371] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[13Mar2024 12:29:47.381] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

@@ -1,6 +1,6 @@
 {
   "hydrojet0": {
     "type": "multiblock",
-    "name": "immersive_geology:multiblocks/hydrojet_cutter"
+    "name": "immersivegeology:multiblocks/hydrojet_cutter"
   }
 }

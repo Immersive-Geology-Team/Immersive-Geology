@@ -14,6 +14,6 @@
     }
   ],
   "textures": {
-    "all": "immersive_geology:block/static_block/reinforced_refractory_brick"
+    "all": "immersivegeology:block/static_block/reinforced_refractory_brick"
   }
 }

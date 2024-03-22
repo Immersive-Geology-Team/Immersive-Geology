@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -32,15 +33,15 @@ public class IGGenericItem extends Item implements IGItemType, IGFlagItem {
     }
 
     @Override
-    public Component getName(ItemStack pStack) {
+    public @NotNull Component getName(ItemStack stack) {
         List<String> materialList = new ArrayList<>();
         for(MaterialTexture t : MaterialTexture.values()){
             if (materialMap.containsKey(t)) {
-                materialList.add(I18n.get("material.immersive_geology." + materialMap.get(t).getName()));
+                materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
             }
         }
 
-        return new TranslatableComponent("item.immersive_geology." + category.getName(), materialList.toArray());
+        return new TranslatableComponent("item.immersivegeology." + category.getName(), materialList.toArray());
     }
 
     @Override
