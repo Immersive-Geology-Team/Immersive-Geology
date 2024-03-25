@@ -1,11 +1,27 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.core.material.data.stone.MaterialVanilla;
+import com.igteam.immersivegeology.core.material.data.stone.compat.beyond_earth.*;
+import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
-    Stone(new MaterialVanilla());
+    Stone(new MaterialVanilla()),
+    Deepslate(new MaterialDeepslate()),
+    Andesite(new MaterialAndesite()),
+    Diorite(new MaterialDiorite()),
+    Granite(new MaterialGranite()),
+
+    // Compatibility Stones
+    MoonStone(new MaterialMoonStone()),
+
+    MarsStone(new MaterialMarsStone()),
+
+    MercuryStone(new MaterialMercuryStone()),
+
+    VenusStone(new MaterialVenusStone()),
+
+    GlacioStone(new MaterialGlacioStone());
 
     private final MaterialStone material;
     StoneEnum(MaterialStone m){

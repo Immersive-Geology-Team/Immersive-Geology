@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGStairBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblock.crystallizer.CrystallizerMultiblock;
+import com.igteam.immersivegeology.common.block.multiblock.gravityseparator.GravitySeparatorMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -31,6 +32,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -44,14 +46,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private Logger log = ImmersiveGeology.getNewLogger();
     private final NongeneratedModels nongeneratedModels;
     final ExistingFileHelper exFileHelper;
+    private final BlockModelProvider customModels;
     public IGBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper)
     {
         super(gen, IGLib.MODID, exFileHelper);
         this.exFileHelper = exFileHelper;
         this.nongeneratedModels = new NongeneratedModels(gen, exFileHelper);
+        this.customModels = new BlockModelProvider(gen, IGLib.MODID, exFileHelper) {
+
+            protected void registerModels() {
+
+            }
+        };
     }
     @Override
-    public String getName(){
+    public @NotNull String getName(){
         return "Block Model/States";
     }
     @Override
@@ -69,6 +78,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
 
         crystallizer();
+        gravityseparator();
     }
 
     private void crystallizer(){
@@ -80,6 +90,16 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.CRYSTALLIZER.get(), modelMirrored, texture, "_mirrored", CrystallizerMultiblock.INSTANCE, true);
 
         createMultiblock(IGMultiblockHolder.CRYSTALLIZER.get(), normal, mirrored, texture);
+    }
+    private void gravityseparator(){
+        ResourceLocation texture = modLoc("multiblock/gravityseparator");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/gravityseparator/gravityseparator.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/gravityseparator/gravityseparator_mirrored.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockHolder.GRAVITY_SEPARATOR.get(), modelNormal, texture, "", GravitySeparatorMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.GRAVITY_SEPARATOR.get(), modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockHolder.GRAVITY_SEPARATOR.get(), normal, mirrored, texture);
     }
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
@@ -175,13 +195,25 @@ public class IGBlockStateProvider extends BlockStateProvider {
         );
     }
 
+    public BlockModelProvider customModels() {
+        return this.customModels;
+    }
+
     private void registerOreBlock(IGBlockType block){
-        BlockModelBuilder baseModel;
-        baseModel = models().withExistingParent(
-                        new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName() + "_" + block.getMaterial(MaterialTexture.base).getName()).getPath(),
-                        new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()))
-                .texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag()))
-                .texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+        BlockModelBuilder baseModel = models().withExistingParent(
+                new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName() + "_" + block.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()));
+
+        try {
+            baseModel.texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag())).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+
+        } catch(IllegalArgumentException error) {
+            // DO NOT DO THIS, I've used an access transformer to FORCE it to add the base texture for modded content that fails to load in a data gen environment
+            // This is horrid, do not copy, please, it's bad practice, don't do as I do.
+            // NOTE: only needed as a data gen implementation for some mods are unavailable, which can cause it to crash.
+            baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+        }
+
 
         getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
     }

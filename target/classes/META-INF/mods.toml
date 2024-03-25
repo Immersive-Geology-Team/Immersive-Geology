@@ -24,12 +24,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 [[dependencies.immersivegeology]]
     modId="minecraft"
     mandatory=true
-    versionRange="${mc_version}"
+    versionRange="${minecraft_version}"
     ordering="NONE"
     side="BOTH"
 [[dependencies.immersivegeology]]
     modId="immersiveengineering"
     mandatory=true
-    versionRange="${ie_version}"
+    versionRange="${ie_version_range}"
     ordering="BEFORE"
     side="BOTH"

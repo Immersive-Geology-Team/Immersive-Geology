@@ -16,10 +16,7 @@ import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -32,6 +29,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
@@ -52,6 +50,11 @@ public class IGRegistrationHolder {
         for (MaterialInterface<?> material : ImmersiveGeology.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) break;
+
+                // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
+                if(Arrays.stream(ModFlags.values()).anyMatch(material.getFlags()::contains) && material.getFlags().stream().noneMatch(ModFlags::isLoaded)) continue;
+
+
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
                         case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK -> {
@@ -63,10 +66,15 @@ public class IGRegistrationHolder {
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
                             for (StoneEnum base : StoneEnum.values()) {
+
+                                // checks is the material has any ModFlags (e.g. Beyond Earth)
+                                if(Arrays.stream(ModFlags.values()).anyMatch(base.getFlags()::contains) && base.getFlags().stream().noneMatch(ModFlags::isLoaded)) continue;
+
                                 String registryKey = blockCategory.getRegistryKey(material, base);
                                 Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material);
                                 registerBlock(registryKey, blockProvider);
                                 registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
+
                             }
                         }
                         case SLAB -> {

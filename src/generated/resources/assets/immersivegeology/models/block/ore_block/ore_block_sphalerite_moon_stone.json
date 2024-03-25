@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/vanilla/cubic",
+    "base": "beyond_earth:blocks/moon_stone"
+  }
+}

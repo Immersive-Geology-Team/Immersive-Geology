@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology;
 
+import com.igteam.immersivegeology.api.IGApi;
 import com.igteam.immersivegeology.common.configuration.ClientConfiguration;
 import com.igteam.immersivegeology.common.configuration.CommonConfiguration;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -12,9 +13,12 @@ import com.igteam.immersivegeology.core.proxy.Proxy;
 import com.igteam.immersivegeology.core.proxy.CommonProxy;
 import com.igteam.immersivegeology.core.registration.IGMultiblockHolder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.machinezoo.noexception.optional.OptionalBoolean;
+import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -29,6 +33,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Mod(IGLib.MODID)
 public class ImmersiveGeology {
@@ -36,9 +41,15 @@ public class ImmersiveGeology {
     private final Logger logger = getNewLogger();
     private static final Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
+    private static boolean isRunningDatagen = false;
+
     public ImmersiveGeology()
     {
-        logger.log(Level.INFO, "Starting Immersive Geology");
+        logger.log(Level.INFO, "-Starting Immersive Geology-");
+
+        // As we need to know this during registration, I've used a system property to check, instead of ModLoader.isDataGenRunning()
+        Optional<String> optionalDatagen = Optional.ofNullable(System.getProperty("isRunningDatagen"));
+        optionalDatagen.ifPresent(s -> isRunningDatagen = s.equals("true"));
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -49,13 +60,13 @@ public class ImmersiveGeology {
         IGRegistrationHolder.getBlockRegister().register(modBus);
         IGRegistrationHolder.getTeRegister().register(modBus);
 
-
         initializeConfiguration();
         IGRegistrationHolder.initialize();
 
         modBus.addListener(this::setup);
         modBus.addListener(this::onClientSetup);
         modBus.addListener(this::onFinishSetup);
+
     }
 
     public void setup(final FMLCommonSetupEvent event)
@@ -94,5 +105,9 @@ public class ImmersiveGeology {
         list.addAll(List.of(MineralEnum.values()));
 
         return list;
+    }
+
+    public static boolean checkDataGeneration(){
+        return isRunningDatagen;
     }
 }
