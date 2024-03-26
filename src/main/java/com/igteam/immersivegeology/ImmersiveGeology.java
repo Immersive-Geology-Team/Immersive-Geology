@@ -58,6 +58,8 @@ public class ImmersiveGeology {
 
         IGRegistrationHolder.getItemRegister().register(modBus);
         IGRegistrationHolder.getBlockRegister().register(modBus);
+        IGRegistrationHolder.getFluidRegister().register(modBus);
+
         IGRegistrationHolder.getTeRegister().register(modBus);
 
         initializeConfiguration();

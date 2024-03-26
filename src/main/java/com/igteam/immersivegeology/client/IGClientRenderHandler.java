@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
@@ -42,7 +43,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             if(i instanceof IGItemType){
                 Minecraft.getInstance().getItemColors().register(INSTANCE, i);
             }
-       }
+        }
 
         for(Block b : IGRegistrationHolder.getBlockRegistryMap().values().stream().map(RegistryObject::get).toList()){
             if(b instanceof IGBlockType){

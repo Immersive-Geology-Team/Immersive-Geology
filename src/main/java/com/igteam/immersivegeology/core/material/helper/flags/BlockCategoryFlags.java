@@ -11,7 +11,8 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SLAB(2),
     DUST_BLOCK(1),
     SHEETMETAL_BLOCK(2),
-    STAIRS(2);
+    STAIRS(2),
+    FLUID(3);
 
     private final int groupOrdinal;
 

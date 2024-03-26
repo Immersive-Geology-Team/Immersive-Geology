@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.MultiblockBEType;
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.api.IGApi;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGSlabBlock;
@@ -12,18 +13,28 @@ import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IGClientTickableTile;
 import com.igteam.immersivegeology.common.block.helper.IGCommonTickableTile;
 import com.igteam.immersivegeology.common.block.helper.IGServerTickableTile;
+import com.igteam.immersivegeology.common.configuration.helper.ConfigurationHelper;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
+import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -38,13 +49,16 @@ import java.util.function.Supplier;
 public class IGRegistrationHolder {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IGLib.MODID);
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, IGLib.MODID);
+    private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, IGLib.MODID);
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, IGLib.MODID);
 
     private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
     private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
 
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
     public static Function<String, Block> getBlock = (key) -> BLOCK_REGISTRY_MAP.get(key).get();
+    public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
     public static void initialize(){
         for (MaterialInterface<?> material : ImmersiveGeology.getGeologyMaterials()) {
@@ -89,6 +103,16 @@ public class IGRegistrationHolder {
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
+                        case FLUID -> {
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            ForgeFlowingFluid.Properties flowingProperties = material.getFluidProperties();
+
+                            registerFluid(registryKey, () -> new ForgeFlowingFluid.Source(flowingProperties));
+                            registerFluid(registryKey + "_flowing", () -> new ForgeFlowingFluid.Flowing(flowingProperties));
+
+                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
+                            registerBlock(registryKey, () -> new LiquidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), BlockBehaviour.Properties.of(Material.WATER)));
+                        }
                     }
                 }
 
@@ -103,6 +127,10 @@ public class IGRegistrationHolder {
         }
     }
 
+    public static void registerFluid(String registry_name,  Supplier<Fluid> fluidSupplier){
+        FLUID_REGISTRY_MAP.put(registry_name, FLUIDS.register(registry_name, fluidSupplier));
+    }
+
     public static void registerItem(String registry_name,  Supplier<Item> itemSupplier){
         ITEM_REGISTRY_MAP.put(registry_name, ITEMS.register(registry_name, itemSupplier));
     }
@@ -111,6 +139,8 @@ public class IGRegistrationHolder {
         BLOCK_REGISTRY_MAP.put(registry_name, BLOCKS.register(registry_name, blockSupplier));
     }
 
+
+    // Mostly Multiblock stuff past this point
     public static <T extends BlockEntity & IEBlockInterfaces.IGeneralMultiblock> MultiblockBEType<T> registerMultiblock(String name, MultiblockBEType.BEWithTypeConstructor<T> factory, Supplier<? extends Block> valid){
         return new MultiblockBEType<>(name, TE_REGISTER, factory, valid, state -> state.hasProperty(IEProperties.MULTIBLOCKSLAVE) && !state.getValue(IEProperties.MULTIBLOCKSLAVE));
     }
@@ -137,6 +167,9 @@ public class IGRegistrationHolder {
     public static HashMap<String, RegistryObject<Block>> getBlockRegistryMap() {
         return BLOCK_REGISTRY_MAP;
     }
+    public static HashMap<String, RegistryObject<Fluid>> getFluidRegistryMap() {
+        return FLUID_REGISTRY_MAP;
+    }
 
     public static Supplier<List<Item>> supplyDeferredItems(){
         return () -> ITEMS.getEntries().stream().map(RegistryObject::get).toList();
@@ -144,6 +177,10 @@ public class IGRegistrationHolder {
 
     public static Supplier<List<Block>> supplyDeferredBlocks(){
         return () -> BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
+    }
+
+    public static Supplier<List<Fluid>> supplyDeferredFluids(){
+        return () -> FLUIDS.getEntries().stream().map(RegistryObject::get).toList();
     }
 
     public static DeferredRegister<Item> getItemRegister(){
@@ -156,6 +193,10 @@ public class IGRegistrationHolder {
 
     public static DeferredRegister<Block> getBlockRegister(){
         return BLOCKS;
+    }
+
+    public static DeferredRegister<Fluid> getFluidRegister(){
+        return FLUIDS;
     }
 
     @Nullable

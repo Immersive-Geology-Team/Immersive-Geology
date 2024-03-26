@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import java.util.Set;
 
@@ -39,4 +40,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default ResourceLocation getTextureLocation(IFlagType<?> flag) {
         return instance().getTextureLocation(flag);
     }
+
+    default ForgeFlowingFluid.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
 }

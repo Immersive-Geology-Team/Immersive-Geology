@@ -6,7 +6,6 @@ public enum MaterialFlags implements IFlagType<MaterialFlags> {
     IS_MACHINE,
     IS_SLURRY,
     IS_SALT,
-    IS_FLUID,
     IS_GAS,
     IS_METAL_ALLOY;
 

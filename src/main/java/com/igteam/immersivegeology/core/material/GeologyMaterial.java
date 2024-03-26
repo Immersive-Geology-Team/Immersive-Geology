@@ -10,7 +10,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.fml.ModLoader;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
@@ -87,29 +94,27 @@ public abstract class GeologyMaterial implements MaterialHelper {
             texture = new ResourceLocation(IGLib.MODID, "item/colored/" + this.name + "/" + iFlag.name().toLowerCase());
         }
 
-        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
+        // This function, is normally ONLY called during data generation
+        // And the Existing File Helper is only available during it, hence we default to greyscale textures during runtime
+        if(!ImmersiveGeology.checkDataGeneration()) return greyScaleTextures(flag);
 
+        boolean exists = StaticTemplateManager.EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
         return exists ? texture : greyScaleTextures(flag);
     }
 
     protected ResourceLocation greyScaleTextures(IFlagType<?> pattern) {
         if (pattern.getValue() instanceof BlockCategoryFlags b){
-            switch (b) {
-                case ORE_BLOCK:
+            return switch (b) {
+                case ORE_BLOCK -> {
                     String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
-                case STORAGE_BLOCK:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
-                case SLAB:
-                case SHEETMETAL_BLOCK:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
-                case DUST_BLOCK:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");
-                case GEODE_BLOCK:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/stone/geode");
-                default:
-                    return new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
-            }
+                    yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
+                }
+                case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
+                case SLAB, SHEETMETAL_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
+                case DUST_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");
+                case GEODE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/geode");
+                default -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
+            };
         }
 
         if (pattern.getValue() instanceof ItemCategoryFlags i) {
@@ -137,5 +142,14 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.CUBIC;
+    }
+
+    public ForgeFlowingFluid.Properties getFluidProperties(IFlagType<?> flag){
+        return new ForgeFlowingFluid.Properties(() -> IGRegistrationHolder.getFluid.apply(flag.getRegistryKey(this)), () -> IGRegistrationHolder.getFluid.apply(flag.getRegistryKey(this) + "_flowing"), FluidAttributes.builder(new ResourceLocation(IGLib.MODID, "block/fluid/default_still"), new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing"))
+                .color(getColor(flag))
+                .overlay(new ResourceLocation(IGLib.MODID, "block/fluid/default_still"))
+                .density(15)
+                .luminosity(15)
+                .sound(SoundEvents.LAVA_AMBIENT)).slopeFindDistance(2).levelDecreasePerBlock(2).block(() -> (LiquidBlock) IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this)));
     }
 }
