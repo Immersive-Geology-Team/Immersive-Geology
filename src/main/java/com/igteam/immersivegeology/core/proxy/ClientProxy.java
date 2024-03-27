@@ -1,5 +1,8 @@
 package com.igteam.immersivegeology.core.proxy;
 
+import blusunrize.immersiveengineering.api.ManualHelper;
+import blusunrize.lib.manual.ManualEntry;
+import blusunrize.lib.manual.ManualInstance;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
@@ -17,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ClientProxy extends CommonProxy {
@@ -37,6 +41,7 @@ public class ClientProxy extends CommonProxy {
         IGClientRenderHandler.init(event);
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
         supplyMaterialTint();
+        setupManualEntries();
     }
 
     private void supplyMaterialTint(){
@@ -67,5 +72,19 @@ public class ClientProxy extends CommonProxy {
             test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.SHEETMETAL_BLOCK.getName() + ".png");
         }
         return test;
+    }
+
+
+    public void setupManualEntries(){
+        coredrill(new ResourceLocation(IGLib.MODID, "coredrill"), 0);
+    }
+
+    private static void coredrill(ResourceLocation location, int priority){
+        ManualInstance man = ManualHelper.getManual();
+
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+        builder.readFromFile(location);
+
+        man.addEntry(man.getRoot().getOrCreateSubnode(new ResourceLocation(IGLib.MODID)), builder.create(), priority);
     }
 }

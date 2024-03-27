@@ -1,0 +1,13 @@
+{
+  "autoload_priority": 3,
+  "immersivegeology:geology": {
+    "category_weight": 100,
+    "entry_list": [
+      "immersivegeology:coredrill",
+      "immersivegeology:crystallizer",
+      "immersivegeology:gravityseparator",
+      "immersivegeology:ig_note"
+
+    ]
+  }
+}

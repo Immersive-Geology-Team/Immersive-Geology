@@ -204,7 +204,7 @@ dependencies {
     datagenImplementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_minecraft}-${version_ie}:datagen")
 
     // Beyond Earth Forge
-    implementation fg.deobf("curse.maven:beyond_earth-377448:3807783")
+    //implementation fg.deobf("curse.maven:beyond_earth-377448:3807783")
 
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:${version_jei}:api")
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.137")

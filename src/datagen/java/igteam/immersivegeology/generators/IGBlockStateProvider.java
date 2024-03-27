@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGStairBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.multiblock.coredrill.CoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.crystallizer.CrystallizerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.gravityseparator.GravitySeparatorMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -79,6 +80,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         crystallizer();
         gravityseparator();
+        coredrill();
     }
 
     private void crystallizer(){
@@ -100,6 +102,17 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.GRAVITY_SEPARATOR.get(), modelMirrored, texture, "_mirrored", GravitySeparatorMultiblock.INSTANCE, true);
 
         createMultiblock(IGMultiblockHolder.GRAVITY_SEPARATOR.get(), normal, mirrored, texture);
+    }
+
+    private void coredrill(){
+        ResourceLocation texture = modLoc("multiblock/coredrill");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/coredrill/temp_drill.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/coredrill/temp_drill.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockHolder.CORE_DRILL.get(), modelNormal, texture, "", CoreDrillMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.CORE_DRILL.get(), modelMirrored, texture, "_mirrored", CoreDrillMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockHolder.CORE_DRILL.get(), normal, mirrored, texture);
     }
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){

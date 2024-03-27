@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.client;
 
+import com.igteam.immersivegeology.client.render.MultiblockCoreDrillRenderer;
 import com.igteam.immersivegeology.client.render.MultiblockCrystallizerRenderer;
 import com.igteam.immersivegeology.client.render.MultiblockGravitySeparatorRenderer;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -20,6 +21,7 @@ public class IGClientEventHandler {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         registerBERender(event, IGTileTypes.CRYSTALLIZER.master(), MultiblockCrystallizerRenderer::new);
         registerBERender(event, IGTileTypes.GRAVITY_SEPARATOR.master(), MultiblockGravitySeparatorRenderer::new);
+        registerBERender(event, IGTileTypes.CORE_DRILL.master(), MultiblockCoreDrillRenderer::new);
     }
 
     private static <T extends BlockEntity> void registerBERender(EntityRenderersEvent.RegisterRenderers ev, BlockEntityType<T> type, Supplier<BlockEntityRenderer<T>> factory){
