@@ -52,7 +52,6 @@ public class IGRegistrationHolder {
     }
 
     public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras){
-        // @formatter:off
         BlockBehaviour.Properties prop = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL)
                 .strength(3, 15)
                 .requiresCorrectToolForDrops()
@@ -60,18 +59,15 @@ public class IGRegistrationHolder {
                 .noOcclusion()
                 .dynamicShape()
                 .pushReaction(PushReaction.BLOCK);
-        // @formatter:on
 
         return registerMultiblock(name, logic, structure, extras, prop);
     }
 
     public static <S extends IMultiblockState> MultiblockRegistration<S> registerMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras, BlockBehaviour.Properties prop){
-        // @formatter:off
         MultiblockBuilder<S> builder = new MultiblockBuilder<>(logic, name)
                 .structure(structure)
                 .defaultBEs(TE_REGISTER)
                 .defaultBlock(BLOCK_REGISTER, ITEM_REGISTER, prop);
-        // @formatter:on
 
         if(extras != null){
             extras.accept(builder);

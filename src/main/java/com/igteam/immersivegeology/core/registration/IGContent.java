@@ -9,7 +9,6 @@ import net.neoforged.fml.event.lifecycle.ParallelDispatchEvent;
 public class IGContent {
 
     public static void modContruction(IEventBus event){
-
         IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
         IGMultiblocks.initialize();
         IGMultiblockProvider.forceClassLoad();

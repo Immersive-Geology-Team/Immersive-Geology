@@ -21,6 +21,7 @@ public class IGDataProvider {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
+
         log.info("-===== Starting Data Generation for Immersive Geology =====-");
 
         if(event.includeServer()){

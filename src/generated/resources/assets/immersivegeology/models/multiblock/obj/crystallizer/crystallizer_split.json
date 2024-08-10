@@ -148,8 +148,5 @@
       1,
       2
     ]
-  ],
-  "textures": {
-    "particle": "immersivegeology:multiblock/crystallizer"
-  }
+  ]
 }

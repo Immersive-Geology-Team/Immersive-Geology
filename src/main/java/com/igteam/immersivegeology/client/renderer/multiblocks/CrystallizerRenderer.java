@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 public class CrystallizerRenderer extends IEMultiblockRenderer<CrystallizerLogic.State> {
+
+    public CrystallizerRenderer(){};
+
     @Override
     public void render(@NotNull IMultiblockContext<CrystallizerLogic.State> context, float v, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i, int i1) {
         boolean isValid = context.isValid().getAsBoolean();
