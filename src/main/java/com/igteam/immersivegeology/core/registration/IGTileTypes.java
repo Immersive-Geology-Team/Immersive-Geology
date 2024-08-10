@@ -8,5 +8,5 @@ import com.igteam.immersivegeology.common.block.multiblock.gravityseparator.Grav
 public class IGTileTypes {
     public static final MultiblockBEType<CrystallizerTileEntity> CRYSTALLIZER = IGRegistrationHolder.registerMultiblockTE("crystallizer", CrystallizerTileEntity::new, IGMultiblockHolder.CRYSTALLIZER);
     public static final MultiblockBEType<GravitySeparatorTileEntity> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMultiblockTE("gravity_separator", GravitySeparatorTileEntity::new, IGMultiblockHolder.GRAVITY_SEPARATOR);
-    public static final MultiblockBEType<CoreDrillTileEntity> CORE_DRILL = IGRegistrationHolder.registerMultiblockTE("coredrill", CoreDrillTileEntity::new, IGMultiblockHolder.CORE_DRILL);
+    public static final MultiblockBEType<CoreDrillTileEntity> CORE_DRILL = IGRegistrationHolder.registerMultiblockTE("coredrill", CoreDrillTileEntity::new, IGMultiblockHolder.COREDRILL);
 }

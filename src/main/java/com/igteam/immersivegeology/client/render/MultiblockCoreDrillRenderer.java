@@ -25,19 +25,19 @@ public class MultiblockCoreDrillRenderer implements BlockEntityRenderer<CoreDril
                     Direction rotation = te.getFacing();
                     switch (rotation) {
                         case NORTH -> {
-                            transform.translate(3, 0, 4);
+                            transform.translate(0, 0, 0);
                         }
                         case SOUTH -> {
                             transform.mulPose(new Quaternion(0F, 180F, 0F, true));
-                            transform.translate(2, 0, 3);
+                            transform.translate(0, 0, 0);
                         }
                         case EAST -> {
                             transform.mulPose(new Quaternion(0, 270F, 0, true));
-                            transform.translate(3, 0, 3);
+                            transform.translate(0, 0, 0);
                         }
                         case WEST -> {
                             transform.mulPose(new Quaternion(0, 90F, 0, true));
-                            transform.translate(2, 0, 4);
+                            transform.translate(0 ,0, 0);
                         }
                         default -> {
                         }

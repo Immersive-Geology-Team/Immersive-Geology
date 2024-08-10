@@ -106,19 +106,19 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void coredrill(){
         ResourceLocation texture = modLoc("multiblock/coredrill");
-        ResourceLocation modelNormal = modLoc("models/multiblock/obj/coredrill/temp_drill.obj");
-        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/coredrill/temp_drill.obj");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/coredrill/coredrill.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/coredrill/coredrill.obj");
 
-        BlockModelBuilder normal = multiblockModel(IGMultiblockHolder.CORE_DRILL.get(), modelNormal, texture, "", CoreDrillMultiblock.INSTANCE, false);
-        BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.CORE_DRILL.get(), modelMirrored, texture, "_mirrored", CoreDrillMultiblock.INSTANCE, true);
+        BlockModelBuilder normal = multiblockModel(IGMultiblockHolder.COREDRILL.get(), modelNormal, texture, "", CoreDrillMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.COREDRILL.get(), modelMirrored, texture, "_mirrored", CoreDrillMultiblock.INSTANCE, true);
 
-        createMultiblock(IGMultiblockHolder.CORE_DRILL.get(), normal, mirrored, texture);
+        createMultiblock(IGMultiblockHolder.COREDRILL.get(), normal, mirrored, texture);
     }
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
         IGGenericBlock block = (IGGenericBlock) type;
 
-        log.info("Attempting Check for Texture Location: " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
+        log.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
 
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
                                 new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
@@ -219,7 +219,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         try {
             baseModel.texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag())).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
-
         } catch(IllegalArgumentException error) {
             // DO NOT DO THIS, I've used an access transformer to FORCE it to add the base texture for modded content that fails to load in a data gen environment
             // This is horrid, do not copy, please, it's bad practice, don't do as I do.

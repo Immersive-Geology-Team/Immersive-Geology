@@ -3,7 +3,6 @@ package com.igteam.immersivegeology.common.block.multiblock.coredrill;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.api.crafting.CoreDrillRecipe;
-import com.igteam.immersivegeology.api.crafting.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockHolder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 public class CoreDrillRecipeSerializer extends IERecipeSerializer<CoreDrillRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(IGMultiblockHolder.CORE_DRILL.get());
+        return new ItemStack(IGMultiblockHolder.COREDRILL.get());
     }
 
     @Override

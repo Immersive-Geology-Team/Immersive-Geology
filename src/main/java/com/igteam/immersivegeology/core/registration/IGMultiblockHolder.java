@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class IGMultiblockHolder {
     public static final RegistryObject<CrystallizerBlock> CRYSTALLIZER = IGRegistrationHolder.registerMultiblockBlock("crystallizer", CrystallizerBlock::new);
     public static final RegistryObject<GravitySeparatorBlock> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMultiblockBlock("gravity_separator", GravitySeparatorBlock::new);
-    public static final RegistryObject<CoreDrillBlock> CORE_DRILL = IGRegistrationHolder.registerMultiblockBlock("coredrill", CoreDrillBlock::new);
+    public static final RegistryObject<CoreDrillBlock> COREDRILL = IGRegistrationHolder.registerMultiblockBlock("coredrill", CoreDrillBlock::new);
 
     public static void forceLoad(){};
 

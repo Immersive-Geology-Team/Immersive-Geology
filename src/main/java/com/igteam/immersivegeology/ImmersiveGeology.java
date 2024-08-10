@@ -41,7 +41,7 @@ public class ImmersiveGeology {
     private final Logger logger = getNewLogger();
     private static final Proxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
-    private static boolean isRunningDatagen = false;
+    private static boolean isRunningDatagen = false ;
 
     public ImmersiveGeology()
     {
