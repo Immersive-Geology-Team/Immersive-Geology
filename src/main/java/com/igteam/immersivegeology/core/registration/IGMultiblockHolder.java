@@ -1,6 +1,8 @@
 package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
+import com.igteam.immersivegeology.common.block.multiblock.chemicalvat.ChemicalVatBlock;
+import com.igteam.immersivegeology.common.block.multiblock.chemicalvat.ChemicalVatMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.coredrill.CoreDrillBlock;
 import com.igteam.immersivegeology.common.block.multiblock.coredrill.CoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.crystallizer.CrystallizerBlock;
@@ -13,6 +15,7 @@ public class IGMultiblockHolder {
     public static final RegistryObject<CrystallizerBlock> CRYSTALLIZER = IGRegistrationHolder.registerMultiblockBlock("crystallizer", CrystallizerBlock::new);
     public static final RegistryObject<GravitySeparatorBlock> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMultiblockBlock("gravity_separator", GravitySeparatorBlock::new);
     public static final RegistryObject<CoreDrillBlock> COREDRILL = IGRegistrationHolder.registerMultiblockBlock("coredrill", CoreDrillBlock::new);
+    public static final RegistryObject<ChemicalVatBlock> CHEMICALVAT = IGRegistrationHolder.registerMultiblockBlock("chemicalvat", ChemicalVatBlock::new);
 
     public static void forceLoad(){};
 
@@ -20,5 +23,6 @@ public class IGMultiblockHolder {
         MultiblockHandler.registerMultiblock(CrystallizerMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(GravitySeparatorMultiblock.INSTANCE);
         MultiblockHandler.registerMultiblock(CoreDrillMultiblock.INSTANCE);
+        MultiblockHandler.registerMultiblock(ChemicalVatMultiblock.INSTANCE);
     }
 }

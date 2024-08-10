@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:block/base/stairs",
   "textures": {
-    "all": "immersivegeology:block/colored/titanium/storage_block"
+    "all": "immersivegeology:block/greyscale/metal/storage"
   }
 }

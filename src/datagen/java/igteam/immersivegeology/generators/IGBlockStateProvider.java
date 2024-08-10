@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGStairBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.multiblock.chemicalvat.ChemicalVatMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.coredrill.CoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.crystallizer.CrystallizerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblock.gravityseparator.GravitySeparatorMultiblock;
@@ -81,6 +82,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         crystallizer();
         gravityseparator();
         coredrill();
+        chemicalvat();
     }
 
     private void crystallizer(){
@@ -114,6 +116,18 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         createMultiblock(IGMultiblockHolder.COREDRILL.get(), normal, mirrored, texture);
     }
+
+    private void chemicalvat(){
+        ResourceLocation texture = modLoc("multiblock/chemicalvat");
+        ResourceLocation modelNormal = modLoc("models/multiblock/obj/chemicalvat/chemicalvat.obj");
+        ResourceLocation modelMirrored = modLoc("models/multiblock/obj/chemicalvat/chemicalvat.obj");
+
+        BlockModelBuilder normal = multiblockModel(IGMultiblockHolder.CHEMICALVAT.get(), modelNormal, texture, "", ChemicalVatMultiblock.INSTANCE, false);
+        BlockModelBuilder mirrored = multiblockModel(IGMultiblockHolder.CHEMICALVAT.get(), modelMirrored, texture, "_mirrored", ChemicalVatMultiblock.INSTANCE, true);
+
+        createMultiblock(IGMultiblockHolder.CHEMICALVAT.get(), normal, mirrored, texture);
+    }
+
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
         IGGenericBlock block = (IGGenericBlock) type;

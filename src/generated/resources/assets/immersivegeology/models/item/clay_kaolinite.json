@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/colored/kaolinite/clay"
+    "layer0": "immersivegeology:item/greyscale/rock/clay"
   }
 }
