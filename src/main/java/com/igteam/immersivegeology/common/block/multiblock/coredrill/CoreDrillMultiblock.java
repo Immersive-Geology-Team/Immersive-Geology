@@ -16,8 +16,8 @@ public class CoreDrillMultiblock extends IGTemplateMultiblock {
     private CoreDrillMultiblock(){
         super(new ResourceLocation(IGLib.MODID, "multiblocks/coredrill"),
                 new BlockPos(7,7,7),
-                new BlockPos(1,1,1),
-                new BlockPos(9,11,9),
+                new BlockPos(1,1,7),
+                new BlockPos(9,12,9),
                 IGMultiblockHolder.COREDRILL);
     }
 
