@@ -14,7 +14,7 @@ public class IGCrystalizerMultiblock extends IGTemplateMultiblock {
     public static final IGCrystalizerMultiblock INSTANCE = new IGCrystalizerMultiblock();
 
     public IGCrystalizerMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"), new BlockPos(0,0,0), new BlockPos(1,2,1), new BlockPos(3,3,3), IGMultiblockProvider.CRYSTALLIZER);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"), new BlockPos(0,0,0), new BlockPos(1,2,1), new BlockPos(3,3,3), IGMultiblockProvider.MB_REG_MAP.get("Test"));
     }
 
     @Override

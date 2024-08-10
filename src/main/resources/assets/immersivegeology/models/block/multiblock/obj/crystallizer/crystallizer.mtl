@@ -2,4 +2,4 @@
 # Material Count: 1
 
 newmtl crystallizerMaterial
-map_Kd #texture
+map_Kd immersivegeology:block/multiblock/crystallizer

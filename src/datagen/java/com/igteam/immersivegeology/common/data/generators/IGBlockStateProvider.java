@@ -72,7 +72,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void crystallizer() {
         IGLib.IG_LOGGER.info("Generating Crystallizer Multiblock Model Data");
-        createMultiblock(innerObj("multiblock/obj/crystallizer/crystallizer.obj"), IGMultiblocks.CRYSTALLIZER);
+        createMultiblock(innerObj("block/multiblock/obj/crystallizer/crystallizer.obj"), IGMultiblocks.CRYSTALLIZER);
     }
 
     private void createMultiblock(NongeneratedModel unsplitModel, IGTemplateMultiblock multiblock)

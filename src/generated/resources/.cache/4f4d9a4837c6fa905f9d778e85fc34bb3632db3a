@@ -1,4 +1,4 @@
-// 1.20.4	2024-03-13T15:29:58.339827693	Block States: immersivegeology
-2429697ffcaaf9c44855920e657cc557dbc29f71 assets/immersivegeology/blockstates/crystallizer.json
-40aa922217df6509b01af6351d5c50e664bc55d7 assets/immersivegeology/models/multiblock/obj/crystallizer/crystallizer_mirrored_split.json
-e335519a35522714322c235d097b3a7f75d52d91 assets/immersivegeology/models/multiblock/obj/crystallizer/crystallizer_split.json
+// 1.20.4	2024-08-11T08:31:34.114916339	Block States: immersivegeology
+7e4969888bf6682125e1498a4da53946ab29e89c assets/immersivegeology/blockstates/crystallizer.json
+31d5346794462bc7016f2ce3c87bca1f8212c5cb assets/immersivegeology/models/block/multiblock/obj/crystallizer/crystallizer_mirrored_split.json
+fe573b0d0834997db1b60ab3cb58180c98a90856 assets/immersivegeology/models/block/multiblock/obj/crystallizer/crystallizer_split.json

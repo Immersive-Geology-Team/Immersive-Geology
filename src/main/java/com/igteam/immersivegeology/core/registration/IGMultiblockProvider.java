@@ -11,11 +11,18 @@ import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerL
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.HashMap;
+
 public class IGMultiblockProvider {
     public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = IGRegistrationHolder.registerMetalMultiblock("crystallizer", new CrystallizerLogic(), () -> IGMultiblocks.CRYSTALLIZER,
             builder -> {
                 builder.redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN);
             });
 
+    public static HashMap<String, MultiblockRegistration<?>> MB_REG_MAP = new HashMap<>();
+    static
+    {
+        MB_REG_MAP.put("Test", CRYSTALLIZER);
+    }
     public static void forceClassLoad(){};
 }

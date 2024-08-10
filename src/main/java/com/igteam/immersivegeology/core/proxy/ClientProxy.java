@@ -44,6 +44,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init(){
-        NeoForge.EVENT_BUS.register(new ClientEventHandler());
+        //NeoForge.EVENT_BUS.register(new ClientEventHandler());
     }
 }

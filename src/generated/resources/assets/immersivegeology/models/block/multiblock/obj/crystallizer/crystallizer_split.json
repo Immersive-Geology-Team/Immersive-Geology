@@ -2,51 +2,18 @@
   "parent": "minecraft:block/block",
   "dynamic": false,
   "inner_model": {
-    "inner_model": {
-      "parent": "minecraft:block/block",
-      "automatic_culling": false,
-      "flip_v": true,
-      "loader": "neoforge:obj",
-      "model": "immersivegeology:models/multiblock/obj/crystallizer/crystallizer.obj",
-      "textures": {
-        "particle": "immersivegeology:multiblock/crystallizer"
-      }
-    },
-    "loader": "immersiveengineering:mirror"
+    "parent": "minecraft:block/block",
+    "automatic_culling": false,
+    "flip_v": true,
+    "loader": "neoforge:obj",
+    "model": "immersivegeology:models/block/multiblock/obj/crystallizer/crystallizer.obj",
+    "textures": {
+      "particle": "immersivegeology:block/multiblock/crystallizer"
+    }
   },
   "loader": "immersiveengineering:basic_split",
   "split_parts": [
     [
-      2,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      1
-    ],
-    [
-      2,
-      0,
-      2
-    ],
-    [
-      1,
-      0,
-      0
-    ],
-    [
-      1,
-      0,
-      1
-    ],
-    [
-      1,
-      0,
-      2
-    ],
-    [
       0,
       0,
       0
@@ -62,24 +29,34 @@
       2
     ],
     [
-      2,
       1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      0,
       0
     ],
     [
       2,
-      1,
+      0,
       1
     ],
     [
       2,
-      1,
+      0,
       2
-    ],
-    [
-      1,
-      1,
-      0
     ],
     [
       0,
@@ -98,21 +75,41 @@
     ],
     [
       1,
-      2,
-      1
-    ],
-    [
-      2,
-      2,
+      1,
       0
     ],
     [
       2,
+      1,
+      0
+    ],
+    [
       2,
+      1,
       1
     ],
     [
       2,
+      1,
+      2
+    ],
+    [
+      1,
+      2,
+      1
+    ],
+    [
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      2,
+      1
+    ],
+    [
+      0,
       2,
       2
     ],
@@ -127,17 +124,17 @@
       2
     ],
     [
-      0,
+      2,
       2,
       0
     ],
     [
-      0,
+      2,
       2,
       1
     ],
     [
-      0,
+      2,
       2,
       2
     ],
@@ -151,5 +148,8 @@
       1,
       2
     ]
-  ]
+  ],
+  "textures": {
+    "particle": "immersivegeology:block/multiblock/crystallizer"
+  }
 }
