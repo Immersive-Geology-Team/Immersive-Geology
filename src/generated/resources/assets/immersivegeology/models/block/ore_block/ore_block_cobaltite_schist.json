@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/schist",
+    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/vanilla/orthorhombic"
+  }
+}

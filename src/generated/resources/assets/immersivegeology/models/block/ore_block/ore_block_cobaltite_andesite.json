@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/andesite",
+    "base": "tfc:block/rock/raw/andesite",
     "ore": "immersivegeology:block/greyscale/rock/ore_bearing/vanilla/orthorhombic"
   }
 }

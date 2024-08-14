@@ -6,7 +6,7 @@
       "parent": "minecraft:block/block",
       "automatic_culling": false,
       "flip_v": true,
-      "loader": "neoforge:obj",
+      "loader": "forge:obj",
       "model": "immersivegeology:models/block/multiblock/obj/crystallizer/crystallizer.obj",
       "textures": {
         "particle": "immersivegeology:block/multiblock/crystallizer"

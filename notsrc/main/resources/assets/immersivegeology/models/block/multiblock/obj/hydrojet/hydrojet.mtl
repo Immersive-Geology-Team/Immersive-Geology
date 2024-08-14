@@ -1,0 +1,11 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl Material.001
+map_Kd immersive_geology:multiblock/hydrojet
+
+newmtl Material.002
+map_Kd immersiveengineering:block/conveyor/conveyor
+
+newmtl Material.003
+map_Kd immersiveengineering:block/conveyor/casing_walls

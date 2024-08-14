@@ -9,21 +9,22 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.Redstone
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
+import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
 import com.igteam.immersivegeology.common.blocks.IGOreBlock;
 import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
 import com.igteam.immersivegeology.common.blocks.IGStairBlock;
 import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
-import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.metal.MaterialCobalt;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -32,15 +33,13 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.*;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -50,23 +49,27 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class IGRegistrationHolder {
-    private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.createBlocks(IGLib.MODID);
-    private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.createItems(IGLib.MODID);
+    private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
+    private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, IGLib.MODID);
     private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(Registries.FLUID, IGLib.MODID);
 
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
 
-    private static final HashMap<String, DeferredHolder<Block, Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, DeferredHolder<Item, Item>> ITEM_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, DeferredHolder<Fluid, Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
+
+    //TODO
+    //private static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
+
 
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
     public static Function<String, Block> getBlock = (key) -> BLOCK_REGISTRY_MAP.get(key).get();
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
-    public static final Holder<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
-            .icon(Items.GOLD_INGOT::getDefaultInstance)
+    public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new IGItemGroup.Builder(CreativeModeTab.Row.TOP, 0)
+            .icon(IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt))::getDefaultInstance)
             .title(Component.translatable("itemGroup.immersivegeology"))
             .displayItems(CreativeMenuHandler::fillIGTab)
             .build());
@@ -141,15 +144,15 @@ public class IGRegistrationHolder {
     }
 
     public static Supplier<List<? extends Item>> supplyDeferredItems(){
-        return () -> ITEM_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
+        return () -> ITEM_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
     }
 
     public static Supplier<List<? extends Block>> supplyDeferredBlocks(){
-        return () -> BLOCK_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
+        return () -> BLOCK_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
     }
 
     public static Supplier<List<? extends Fluid>> supplyDeferredFluids(){
-        return () -> FLUID_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
+        return () -> FLUID_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
     }
 
     public static void registerItem(String registry_name,  Supplier<Item> itemSupplier){
@@ -175,7 +178,7 @@ public class IGRegistrationHolder {
 
     public static List<Item> getIGItems()
     {
-        return ITEM_REGISTER.getEntries().stream().map(DeferredHolder::get).collect(Collectors.toList());
+        return ITEM_REGISTER.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
     }
 
     public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure){
@@ -204,14 +207,14 @@ public class IGRegistrationHolder {
             extras.accept(builder);
         }
 
-        return builder.build(MOD_BUS_CALLBACKS::add);
+        return builder.build();
     }
 
-    public static HashMap<String, DeferredHolder<Item, Item>> getItemRegistryMap() {
+    public static HashMap<String, RegistryObject<Item>> getItemRegistryMap() {
         return ITEM_REGISTRY_MAP;
     }
 
-    public static HashMap<String, DeferredHolder<Block, Block>> getBlockRegistryMap() {
+    public static HashMap<String, RegistryObject<Block>> getBlockRegistryMap() {
         return BLOCK_REGISTRY_MAP;
     }
 

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/ore_block/ore_block_cuprite_basalt"
+    }
+  }
+}

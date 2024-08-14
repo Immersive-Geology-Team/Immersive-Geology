@@ -1,0 +1,90 @@
+name: Check that generated data is up to date and update data for web manual
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            build/fg_cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Compile IE
+        run: ./gradlew compileJava
+      - name: Run unit tests
+        run: ./gradlew test
+      - name: Update APT cached
+        run: sudo apt update
+      - name: Install ffprobe
+        run: sudo apt install ffmpeg
+      - name: Check for stereo sound files
+        run: scripts/check_sounds.sh
+  datagen:
+    runs-on: ubuntu-latest
+    needs: test
+    defaults:
+      run:
+        working-directory: main-repo
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: main-repo
+      - uses: actions/checkout@v3
+        with:
+          path: manual-data
+      - name: Set up manual data repo
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref_name, '1.')}}
+        run: |
+          cd ../manual-data
+          MANUAL_BRANCH=manual-data/$(git branch --show-current)
+          echo Online manual data branch: $MANUAL_BRANCH
+          git fetch
+          git switch $MANUAL_BRANCH || git switch --orphan $MANUAL_BRANCH
+          cd ../main-repo
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            build/fg_cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Create list of existing generated resources
+        run: find src/generated/resources/ ! -path "**/.cache*" > resources.txt
+      - name: Run data generation
+        run: xvfb-run --auto-servernum bash -c "ie_manual_datagen_path=$(pwd)/../manual-data ./gradlew runData"
+      - name: Check that no files have changed
+        run: git update-index --really-refresh || (git diff && false)
+      - name: Create list of actual generated resources
+        run: find src/generated/resources/ ! -path "**/.cache*" > resources_new.txt
+      - name: Check that no new resources have been created
+        run: diff resources.txt resources_new.txt
+      - name: Commit and push manual data
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref_name, '1.')}}
+        run: |
+          cd ../manual-data/
+          git add --all
+          if ! git diff-index --quiet HEAD ; then
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git commit -m "Update generated manual data"
+            git push --set-upstream origin $(git branch --show-current)
+          fi

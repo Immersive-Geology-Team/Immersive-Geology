@@ -1,30 +1,58 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.core.material.data.stone.compat.beyond_earth.*;
-import com.igteam.immersivegeology.core.material.data.stone.sand.MaterialSand;
+import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
+import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialAndesite;
+import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialDiorite;
+import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
 
-    //===== Minecraft Stones =====\\
-    Stone(new MaterialVanilla()),
-    Deepslate(new MaterialDeepslate()),
+    //===== Terra Firma Craft =====\\
     Andesite(new MaterialAndesite()),
+    Basalt(new MaterialBasalt()),
+    Dacite(new MaterialDacite()),
+    Rhyolite(new MaterialRhyolite()),
+
     Diorite(new MaterialDiorite()),
+    Gabbro(new MaterialGabbro()),
     Granite(new MaterialGranite()),
 
+    Gneiss(new MaterialGneiss()),
+    Marble(new MaterialMarble()),
+    Phyllite(new MaterialPhyllite()),
+    Quartzite(new MaterialQuartzite()),
+    Schist(new MaterialSchist()),
+    Slate(new MaterialSlate()),
+
+    Chalk(new MaterialChalk()),
+    Chert(new MaterialChert()),
+    Claystone(new MaterialClaystone()),
+    Conglomerate(new MaterialConglomerate()),
+    Dolomite(new MaterialDolomite()),
+    Limestone(new MaterialLimestone()),
+    Shale(new MaterialShale());
+
+
+    //===== Minecraft Stones =====\\
+    //Stone(new MaterialVanilla()),
+    //Deepslate(new MaterialDeepslate()),
+    //Andesite(new MaterialAndesite()),
+    //Diorite(new MaterialDiorite()),
+    //Granite(new MaterialGranite()),
+
     //===== Minecraft Sands =====\\
-    Sand(new MaterialSand()),
+    //Sand(new MaterialSand()),
 
 
     //===== Beyond Earth =====\\
-    MoonStone(new MaterialMoonStone()),
-    MarsStone(new MaterialMarsStone()),
-    MercuryStone(new MaterialMercuryStone()),
-    VenusStone(new MaterialVenusStone()),
-    GlacioStone(new MaterialGlacioStone());
+//    MoonStone(new MaterialMoonStone()),
+//    MarsStone(new MaterialMarsStone()),
+//    MercuryStone(new MaterialMercuryStone()),
+//    VenusStone(new MaterialVenusStone()),
+//    GlacioStone(new MaterialGlacioStone());
 
     private final MaterialStone material;
     StoneEnum(MaterialStone m){

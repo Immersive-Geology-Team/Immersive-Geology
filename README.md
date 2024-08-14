@@ -1,28 +1,15 @@
+![Logo](https://raw.githubusercontent.com/BluSunrize/ImmersiveEngineering/master/src/main/resources/assets/immersiveengineering/logo.png)
+==============
 
-Installation information
-=======
+A retro-futuristic tech mod!
+Wires, transformers, capacitors!
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions at [github](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+# Downloads
+[CurseForge](https://minecraft.curseforge.com/projects/immersive-engineering/files) 
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
-
-> **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
-
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+# Asset Credits
+- Sound for the collapsible glider is by Iain McCurdy on [freesound.org](https://freesound.org/people/iainmccurdy/sounds/645974/), licensed under CC BY 4.0
+- Sound for the excavator ore conveyor is by tosha73 on [freesound.org](https://freesound.org/people/tosha73/sounds/584592/), licensed under CC BY 4.0
+- Sound for the electromagnet is by _MC5_ on [freesound.org](https://freesound.org/people/_MC5_/sounds/672082/), licensed under CC BY 4.0
+- Assets for several blocks are derived from @stfwi assets in [Engineer's Decor](https://github.com/stfwi/engineers-decor), licensed under MIT
+    - These assets include clinker bricks, slag bricks, and grit sand

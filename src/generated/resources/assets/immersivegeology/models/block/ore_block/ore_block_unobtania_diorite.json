@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/diorite",
+    "base": "tfc:block/rock/raw/diorite",
     "ore": "immersivegeology:block/greyscale/rock/ore_bearing/vanilla/triclinic"
   }
 }

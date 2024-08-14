@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/block",
+  "textures": {
+    "all": "immersivegeology:block/colored/tin/storage_block",
+    "particle": "immersivegeology:block/colored/tin/storage_block"
+  }
+}

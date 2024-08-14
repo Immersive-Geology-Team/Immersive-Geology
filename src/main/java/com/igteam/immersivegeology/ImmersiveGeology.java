@@ -19,14 +19,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.Event;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -39,7 +40,8 @@ public class ImmersiveGeology {
         return FMLLoader.getDist() == Dist.CLIENT ? new ClientProxy() : new CommonProxy();
     }
 
-    public ImmersiveGeology(IEventBus modEventBus){
+    public ImmersiveGeology(){
+        IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
         IGLib.IG_LOGGER.info("Immersive Geology Starting");
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
@@ -50,7 +52,7 @@ public class ImmersiveGeology {
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
-        NeoForge.EVENT_BUS.register(new CreativeMenuHandler());
+        MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
         supplyMaterialTint();
@@ -79,10 +81,11 @@ public class ImmersiveGeology {
     @NotNull
     private static ResourceLocation getResourceLocationTest(IFlagType<?> pattern, GeologyMaterial base) {
         ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
-        if (pattern.equals(BlockCategoryFlags.SLAB)) //crutch for sheetmetal slabs
+        if (pattern.equals(BlockCategoryFlags.STAIRS)) //crutch for sheetmetal slabs
         {
-            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.SHEETMETAL_BLOCK.getName() + ".png");
+            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
         }
+
         return test;
     }
 

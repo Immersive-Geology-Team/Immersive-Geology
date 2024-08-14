@@ -1,10 +1,11 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import net.minecraftforge.data.loading.DatagenModLoader;
+import net.minecraftforge.fml.ModList;
 
 public enum ModFlags implements IFlagType<ModFlags> {
-    BEYOND_EARTH;
+    BEYOND_EARTH,
+    TFC;
 
     @Override
     public ModFlags getValue() {

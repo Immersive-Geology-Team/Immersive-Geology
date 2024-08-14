@@ -1,0 +1,5 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl crystallizerMaterial
+map_Kd immersivegeology:block/multiblock/crystallizer

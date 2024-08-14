@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IEProperties;
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.data.DataGenUtils;
 import blusunrize.immersiveengineering.data.models.*;
 import blusunrize.immersiveengineering.data.models.NongeneratedModels.NongeneratedModel;
@@ -11,7 +12,6 @@ import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
 import com.igteam.immersivegeology.common.blocks.IGStairBlock;
 import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
 import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
-import com.igteam.immersivegeology.common.data.helper.CompatBlockModelProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -24,10 +24,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -35,10 +33,10 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.neoforged.neoforge.client.model.generators.*;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
-import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
+import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
@@ -49,7 +47,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -64,15 +61,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
     protected static final Map<ResourceLocation, String> generatedParticleTextures = new HashMap<>();
     protected final ExistingFileHelper existingFileHelper;
     protected final NongeneratedModels innerModels;
-    protected final CompatBlockModelProvider igBlockModels;
 
     protected Logger logger = IGLib.getNewLogger();
 
-    public IGBlockStateProvider(DataGenerator generator, ExistingFileHelper helper){
+    public IGBlockStateProvider(DataGenerator generator, ExistingFileHelper helper)
+    {
         super(generator.getPackOutput(), IGLib.MODID, helper);
         this.existingFileHelper = helper;
         this.innerModels = new NongeneratedModels(generator.getPackOutput(), existingFileHelper);
-        this.igBlockModels = new CompatBlockModelProvider(generator.getPackOutput(), existingFileHelper);
     }
 
     @Override
@@ -198,7 +194,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
             // Extended the normal Block Model Builder to include an unsafe method to add unknown texture locations.
             // NOTE: only needed as a data gen implementation if some mods are unavailable in the data generation, which would prevent the safe method from running.
             logger.error("Error: " + error.getMessage());
-            //baseModel.unsafeTexture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+            baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
         }
 
         VariantBlockStateBuilder builder = getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
@@ -322,10 +318,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         return split(name, partsStream.collect(Collectors.toList()), dynamic);
     }
 
-    private void loadTemplateFor(IGTemplateMultiblock multiblock)
+    private void loadTemplateFor(TemplateMultiblock multiblock)
     {
         final ResourceLocation name = multiblock.getUniqueName();
-        if(IGTemplateMultiblock.SYNCED_CLIENT_TEMPLATES.containsKey(name))
+        if(TemplateMultiblock.SYNCED_CLIENT_TEMPLATES.containsKey(name))
             return;
         final String filePath = "structures/"+name.getPath()+".nbt";
         int slash = filePath.indexOf('/');
@@ -339,10 +335,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
             final Resource resource = existingFileHelper.getResource(shortLoc, PackType.SERVER_DATA, "", prefix);
             try(final InputStream input = resource.open())
             {
-                final CompoundTag nbt = NbtIo.readCompressed(input, NbtAccounter.unlimitedHeap());
+                final CompoundTag nbt = NbtIo.readCompressed(input);
                 final StructureTemplate template = new StructureTemplate();
                 template.load(BuiltInRegistries.BLOCK.asLookup(), nbt);
-                IGTemplateMultiblock.SYNCED_CLIENT_TEMPLATES.put(name, template);
+                TemplateMultiblock.SYNCED_CLIENT_TEMPLATES.put(name, template);
             }
         } catch(IOException e)
         {
@@ -487,11 +483,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         Preconditions.checkArgument(loc.endsWith(".obj.ie"));
         return loc.substring(0, loc.length()-7);
-    }
-
-    protected CompatBlockModelProvider compatmodels()
-    {
-        return this.igBlockModels;
     }
 
     protected <T extends ModelBuilder<T>>

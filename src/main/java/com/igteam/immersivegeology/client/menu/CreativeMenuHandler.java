@@ -1,7 +1,10 @@
 package com.igteam.immersivegeology.client.menu;
 
+import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,20 +18,25 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.client.gui.CreativeTabsScreenPage;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
+import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
+import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
+
+import static com.igteam.immersivegeology.client.menu.IGItemGroup.selectedGroup;
 
 public class CreativeMenuHandler {
     private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_expansion.png");
     private static ArrayList<CreativeMenuButton> subGroupButtons = new ArrayList<CreativeMenuButton>();
+    boolean reset = true;
     Logger logger = IGLib.getNewLogger();
+
     @SubscribeEvent
     public void drawScreen(ScreenEvent.BackgroundRendered event) {
         Screen screen = event.getScreen();
@@ -37,8 +45,10 @@ public class CreativeMenuHandler {
             int i = (int) (gui.getGuiLeft() - Math.floor(136*1.425));
             CreativeModeTab selectedTab = CreativeModeInventoryScreen.selectedTab;
 
-            CreativeModeTab igTab = IGRegistrationHolder.IG_BASE_TAB.value();
+            CreativeModeTab igTab = IGRegistrationHolder.IG_BASE_TAB.get();
             if(selectedTab.equals(igTab)) {
+                if(reset) screen.resize(event.getScreen().getMinecraft(), screen.width, screen.height);
+
                 if(!subGroupButtons.isEmpty()) {
                     subGroupButtons.forEach((button) -> {
                         button.active = true;
@@ -56,6 +66,7 @@ public class CreativeMenuHandler {
                 pgui.blit(CEX_GUI_TEXTURES,i + 166, gui.getGuiTop(), 0, 0, 29, 136);
                 matrixStack.popPose();
             } else {
+                reset = true;
                 if(!subGroupButtons.isEmpty()) {
                     subGroupButtons.forEach((button) -> {
                         button.active = false;
@@ -66,11 +77,37 @@ public class CreativeMenuHandler {
         }
     }
 
-    public static void fillIGTab(CreativeModeTab.ItemDisplayParameters parms, CreativeModeTab.Output out)
+    public static void fillIGTab(IGItemGroup.ItemDisplayParameters parms, IGItemGroup.Output out)
     {
-        for(final Item item : IGRegistrationHolder.getIGItems())
+        HashMap<IFlagType<?>, ArrayList<Item>> itemMap = new HashMap<>();
+        for (Item item : IGRegistrationHolder.getIGItems()) {
+            if(item instanceof IGFlagItem type) {
+                IFlagType<?> pattern = type.getFlag();
+                if(type.getSubGroup() == selectedGroup) {
+                    if (itemMap.containsKey(pattern)) {
+                        ArrayList<Item> list = itemMap.get(pattern);
+                        list.add(item);
+                        itemMap.replace(pattern, list);
+                    } else {
+                        ArrayList<Item> list = new ArrayList<>();
+                        list.add(item);
+                        itemMap.put(pattern, list);
+                    }
+                }
+            }
+        }
+
+        ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
+        allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
+
+        for (IFlagType<?> pattern : allPatternList)
         {
-            out.accept(item);
+            if(itemMap.containsKey(pattern)){
+                ArrayList<Item> list = itemMap.get(pattern);
+                for (Item item : list) {
+                    out.accept(new ItemStack(item));
+                }
+            }
         }
     }
 
