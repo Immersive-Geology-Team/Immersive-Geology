@@ -1,16 +1,24 @@
 package com.igteam.immersivegeology.client;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CrystallizerRenderer;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 

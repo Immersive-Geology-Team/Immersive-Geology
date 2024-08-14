@@ -12,6 +12,7 @@ public class IGContent {
         IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
         IGMultiblocks.initialize();
         IGMultiblockProvider.forceClassLoad();
+        IGRegistrationHolder.initialize();
     }
 
     public static void initialize(ParallelDispatchEvent event){

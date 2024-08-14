@@ -1,24 +1,31 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IEProperties;
-import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.data.DataGenUtils;
 import blusunrize.immersiveengineering.data.models.*;
 import blusunrize.immersiveengineering.data.models.NongeneratedModels.NongeneratedModel;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
+import com.igteam.immersivegeology.common.blocks.IGStairBlock;
+import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
 import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.data.helper.CompatBlockModelProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGMultiblocks;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
@@ -26,24 +33,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -58,15 +64,31 @@ public class IGBlockStateProvider extends BlockStateProvider {
     protected static final Map<ResourceLocation, String> generatedParticleTextures = new HashMap<>();
     protected final ExistingFileHelper existingFileHelper;
     protected final NongeneratedModels innerModels;
+    protected final CompatBlockModelProvider igBlockModels;
+
+    protected Logger logger = IGLib.getNewLogger();
 
     public IGBlockStateProvider(DataGenerator generator, ExistingFileHelper helper){
         super(generator.getPackOutput(), IGLib.MODID, helper);
         this.existingFileHelper = helper;
         this.innerModels = new NongeneratedModels(generator.getPackOutput(), existingFileHelper);
+        this.igBlockModels = new CompatBlockModelProvider(generator.getPackOutput(), existingFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
+        List<? extends Block> igBlocks = IGRegistrationHolder.supplyDeferredBlocks().get();
+        for (Block block : igBlocks) {
+            if(block instanceof IGBlockType igBlock) {
+                BlockCategoryFlags flag = (BlockCategoryFlags) igBlock.getFlag();
+                switch(flag){
+                    case STAIRS -> registerStairsBlock(igBlock);
+                    case DEFAULT_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
+                    case ORE_BLOCK -> registerOreBlock(igBlock);
+                }
+            }
+        }
+
         crystallizer();
     }
 
@@ -147,6 +169,122 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 partialState.setModels(new ConfiguredModel(model, angleX, angleY, true));
             }
     }
+
+    private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
+        IGGenericBlock block = (IGGenericBlock) type;
+
+        logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
+
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
+                                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
+                                new ResourceLocation(IGLib.MODID, "block/base/block"))
+                        .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
+                        .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag())))
+                .build());
+    }
+
+    private void registerOreBlock(IGBlockType type){
+        IGGenericBlock block = (IGGenericBlock) type;
+        IFlagType<?> pattern = block.getFlag();
+
+        logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
+
+        BlockModelBuilder baseModel = models().withExistingParent(
+                new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName() + "_" + block.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()));
+        try {
+            baseModel.texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag())).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+        } catch(IllegalArgumentException error) {
+            // Extended the normal Block Model Builder to include an unsafe method to add unknown texture locations.
+            // NOTE: only needed as a data gen implementation if some mods are unavailable in the data generation, which would prevent the safe method from running.
+            logger.error("Error: " + error.getMessage());
+            //baseModel.unsafeTexture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+        }
+
+        VariantBlockStateBuilder builder = getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+        //IGLib.IG_LOGGER.info(builder.toJson().toString());
+    }
+
+    private void registerStairsBlock(IGBlockType blockType)
+    {
+        IGStairBlock stairsBlock = (IGStairBlock) blockType;
+        VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
+        String materialName = stairsBlock.getMaterials().stream().findAny().get().instance().getName();
+        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_" + materialName).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/stairs"));
+
+        BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_inner_" + materialName).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/stairs_inner"));
+
+        BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_outer_" +materialName).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/stairs_outer"));
+
+        baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+        innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+        outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+
+        builder.forAllStates(blockState ->
+                blockState.getValue(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?
+                        (blockState.getValue(stairsBlock.HALF) == Half.BOTTOM ?
+                                (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
+                                        blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build() :
+                                                blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
+                                                        ConfiguredModel.builder().modelFile(innerModel).uvLock(true).build()) :
+
+                                (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+                                        blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build() :
+                                                blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+                                                        ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
+
+                        blockState.getValue(stairsBlock.SHAPE) == StairsShape.INNER_RIGHT ?
+                                (blockState.getValue(stairsBlock.HALF) == Half.BOTTOM ?
+                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationY(270).uvLock(true).build() :
+                                                blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(180).uvLock(true).build() :
+                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationY(0).uvLock(true).build() :
+                                                                ConfiguredModel.builder().modelFile(innerModel).rotationY(90).uvLock(true).build()) :
+
+                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+                                                blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(90).uvLock(true).build() :
+                                                                ConfiguredModel.builder().modelFile(innerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
+
+                                blockState.getValue(stairsBlock.SHAPE) == StairsShape.OUTER_LEFT ?
+                                        (blockState.getValue(stairsBlock.HALF) == Half.BOTTOM ?
+                                                (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
+                                                        blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(90).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
+                                                                        ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build()) :
+
+                                                (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+                                                        blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+                                                                        ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build())) :
+
+                                        blockState.getValue(stairsBlock.SHAPE) == StairsShape.OUTER_RIGHT ?
+                                                (blockState.getValue(stairsBlock.HALF) == Half.BOTTOM ?
+                                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationY(270).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(180).uvLock(true).build() :
+                                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationY(0).uvLock(true).build() :
+                                                                                ConfiguredModel.builder().modelFile(outerModel).rotationY(90).build()) :
+
+                                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(0).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.WEST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(270).uvLock(true).build() :
+                                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(90).uvLock(true).build() :
+                                                                                ConfiguredModel.builder().modelFile(outerModel).rotationX(180).rotationY(180).uvLock(true).build())) :
+
+                                                (blockState.getValue(stairsBlock.HALF) == Half.BOTTOM ?
+                                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(270).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationY(90).uvLock(true).build() :
+                                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationY(0).uvLock(true).build() :
+                                                                                ConfiguredModel.builder().modelFile(baseModel).rotationY(180).build()) :
+
+                                                        (blockState.getValue(stairsBlock.FACING) == Direction.NORTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(270).uvLock(true).build() :
+                                                                blockState.getValue(stairsBlock.FACING) == Direction.SOUTH ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(90).uvLock(true).build() :
+                                                                        blockState.getValue(stairsBlock.FACING) == Direction.EAST ? ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(0).uvLock(true).build() :
+                                                                                ConfiguredModel.builder().modelFile(baseModel).rotationX(180).rotationY(180).uvLock(true).build()))
+        );
+    }
+
 
     private ModelFile split(NongeneratedModel loc, IGTemplateMultiblock mb)
     {
@@ -349,6 +487,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         Preconditions.checkArgument(loc.endsWith(".obj.ie"));
         return loc.substring(0, loc.length()-7);
+    }
+
+    protected CompatBlockModelProvider compatmodels()
+    {
+        return this.igBlockModels;
     }
 
     protected <T extends ModelBuilder<T>>

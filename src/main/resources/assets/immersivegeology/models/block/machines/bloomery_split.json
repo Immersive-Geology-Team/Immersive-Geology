@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "immersivegeology:multiblock/bloomery"
+  },
+  "loader": "immersiveengineering:basic_split",
+  "dynamic": true,
+  "base_model": "immersivegeology:block/machines/bloomery",
+  "split_parts": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ]
+  ]
+}

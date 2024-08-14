@@ -13,10 +13,25 @@ group = mod_group_id
 archivesBaseName = mod_name + '-' + mod_version
 
 repositories {
-    maven {	name = "BlameJared";	url = "https://maven.blamejared.com/" }
-    maven { name = "DVS1 Maven FS"; url = "https://dvs1.progwml6.com/files/maven" }
+    mavenCentral()
+    mavenLocal()
+    maven{
+        url  "https://dvs1.progwml6.com/files/maven/"
+    } // JEI
+    maven{
+        url "https://modmaven.k-4u.nl"
+    } // Mirror for JEI
+    maven{
+        url "https://maven.blamejared.com"
+    } // Patchouli
+    maven{
+        url "https://www.cursemaven.com"
+    }
     maven {
         url "https://maven.teamresourceful.com/repository/maven-public/"
+    }
+    flatDir {
+        dirs("libs")
     }
 }
 
@@ -63,6 +78,12 @@ processResources {
     exclude ".cache"
 }
 
+minecraft {
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+}
+
 runs {
     // applies to all the run configs below
     configureEach {
@@ -107,9 +128,11 @@ dependencies {
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}"
     datagenImplementation "blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}:datagen"
 
-    // Ad Astra
-    implementation "earth.terrarium.adastra:adastra-${mod_loader}-${minecraft_version}:${ad_astra_version}"
+    // Terra Firma Craft
 
+
+    // Ad Astra
+    //implementation "earth.terrarium.adastra:adastra-${mod_loader}-${minecraft_version}:${ad_astra_version}"
 }
 
 tasks.withType(JavaCompile).configureEach {
