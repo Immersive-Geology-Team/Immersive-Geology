@@ -1,15 +1,114 @@
-![Logo](https://raw.githubusercontent.com/BluSunrize/ImmersiveEngineering/master/src/main/resources/assets/immersiveengineering/logo.png)
-==============
+<p align="center"><img src="https://github.com/Immersive-Geology-Team/Immersive-Geology/blob/1.14/logos/logo.png?raw=true"></p>
+<hr>
+<blockquote>Immersive Geology is a mod in development for Minecraft 1.20.1<br />
+The mod requires Immersive Engineering for the appropriate Minecraft Version <br /></blockquote>
 
-A retro-futuristic tech mod!
-Wires, transformers, capacitors!
+**Immersive Geology** aims to make mining, resource processing and progression in minecraft more realistic, by using real world processes as a reference.<br />
+<br />
+**This mod is in development and not all features have been implemented**
+<br />
 
-# Downloads
-[CurseForge](https://minecraft.curseforge.com/projects/immersive-engineering/files) 
+If you want to help us out, you can donate with Liberapay!
 
-# Asset Credits
-- Sound for the collapsible glider is by Iain McCurdy on [freesound.org](https://freesound.org/people/iainmccurdy/sounds/645974/), licensed under CC BY 4.0
-- Sound for the excavator ore conveyor is by tosha73 on [freesound.org](https://freesound.org/people/tosha73/sounds/584592/), licensed under CC BY 4.0
-- Sound for the electromagnet is by _MC5_ on [freesound.org](https://freesound.org/people/_MC5_/sounds/672082/), licensed under CC BY 4.0
-- Assets for several blocks are derived from @stfwi assets in [Engineer's Decor](https://github.com/stfwi/engineers-decor), licensed under MIT
-    - These assets include clinker bricks, slag bricks, and grit sand
+<noscript><a href="https://liberapay.com/Immersive-Geology/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+<img src="https://img.shields.io/liberapay/patrons/Immersive-Geology.svg?logo=liberapay">
+
+Content that Immersive Geology will implement
+------------
+**Some of the new items that will be added:**
+
+**Metals**
+* Aluminium
+* Chromium
+* Copper
+* Gold
+* Iron
+* Lead
+* Manganese
+* Nickel
+* Platinum
+* Silver
+* Cobalt
+* Uranium
+* Tin
+* Titanium
+* Tungsten
+* Thorium
+* Vanadium
+* Zirconium
+* Zinc
+
+**Alloys**
+* Constantan
+* Electrum
+* Steel
+* VikingSteel
+* Bronze
+
+**Metalloid**
+* Arsenic
+* Antimony
+
+**Crystals**
+* Diamond
+* Phlebotinum
+* Glowstone
+* Quartz
+
+**Minerals**
+*These will replace the default ores in game (configurable)*
+* Anatase
+* Cuprite
+* Zircon
+* Ilmenite
+* Cobaltite
+* Casserite
+* Chalcopyrite
+* Chromite
+* Cryolite
+* Ferberite
+* Fluorite
+* Gypsum
+* Hematite
+* Hubnerite
+* Magnetite
+* Pyrolusite
+* RockSalt
+* Thorianite
+* Thorite
+* Uraninite
+* Sphalerite
+* Ullmannite
+* Galena
+* Pyrite
+* Wolframite
+* Vanadinite
+* Unobtainium
+
+**Liquids**
+* Brine
+* Sulfuric Acid
+* Nitric Acid
+* Sodium Hydroxide
+
+
+**Gases**
+* Hydrogen (WIP, will have compat with Mekanism)
+
+**Gravity Separator**
+* Separate the stone out of the ore chunks with a machine (used for ore recoverability efficiency)
+
+**Chemical Vat**
+* Used to process advanced ores that cannot be processed via normal means (usually when melting point is too high)
+* Used to mix two liquids and one item together!
+
+***More will be added in the future!***
+
+### Mod Authors and Contributors ###
+[Pabilo8](https://www.curseforge.com/members/pabilo8)<br />
+[CrimsonDragonRider](https://www.curseforge.com/members/crimsondragonrider)<br />
+[jstocke12](https://www.curseforge.com/members/jstocke12)<br />
+[Muddykats](https://www.curseforge.com/members/muddykats)<br />
+[UnSchtalch](https://github.com/UnSchtalch)<br />
+[Bootstrap22]<br/>
