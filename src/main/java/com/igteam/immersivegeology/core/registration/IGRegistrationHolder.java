@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.registration;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
@@ -15,13 +16,18 @@ import com.igteam.immersivegeology.common.blocks.IGOreBlock;
 import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
 import com.igteam.immersivegeology.common.blocks.IGStairBlock;
 import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
+import com.igteam.immersivegeology.common.blocks.multiblocks.IGCrystalizerMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.IGGravitySeparatorMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.IGRotaryKilnMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic;
+import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic.State;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.data.metal.MaterialCobalt;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
@@ -31,7 +37,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -60,12 +65,18 @@ public class IGRegistrationHolder {
     private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
     private static final HashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
 
-    //TODO
-    //private static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
-
+    public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
+    private static HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
+    private static <T extends MultiblockHandler.IMultiblock>
+    T registerMultiblock(T multiblock) {
+        MultiblockHandler.registerMultiblock(multiblock);
+        return multiblock;
+    }
 
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
     public static Function<String, Block> getBlock = (key) -> BLOCK_REGISTRY_MAP.get(key).get();
+
+    public static Function<String, TemplateMultiblock> getMBTemplate = (key) -> MB_TEMPLATE_MAP.get(key);
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
     public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new IGItemGroup.Builder(CreativeModeTab.Row.TOP, 0)
@@ -78,6 +89,7 @@ public class IGRegistrationHolder {
 
     public static void initialize()
     {
+        initializeMultiblocks();
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) break;
@@ -141,6 +153,23 @@ public class IGRegistrationHolder {
                 }
             }
         }
+
+    }
+
+    public static MultiblockRegistration<?> getMB(String key){
+        return MB_REGISTRY_MAP.get(key);
+    }
+
+    private static void initializeMultiblocks()
+    {
+        registerMB("crystallizer", new IGCrystalizerMultiblock(), IGMultiblockProvider.CRYSTALLIZER);
+        registerMB("gravityseparator", new IGGravitySeparatorMultiblock(), IGMultiblockProvider.GRAVITY_SEPARATOR);
+        registerMB("rotarykiln", new IGRotaryKilnMultiblock(), IGMultiblockProvider.ROTARYKILN);
+    }
+
+    private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){
+        registerMultiblockTemplate(registry_name, block);
+        MB_REGISTRY_MAP.put(registry_name, registration);
     }
 
     public static Supplier<List<? extends Item>> supplyDeferredItems(){
@@ -153,6 +182,11 @@ public class IGRegistrationHolder {
 
     public static Supplier<List<? extends Fluid>> supplyDeferredFluids(){
         return () -> FLUID_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
+    }
+
+    public static void registerMultiblockTemplate(String registry_name, TemplateMultiblock template)
+    {
+        MB_TEMPLATE_MAP.put(registry_name, registerMultiblock(template));
     }
 
     public static void registerItem(String registry_name,  Supplier<Item> itemSupplier){

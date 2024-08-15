@@ -2,4 +2,4 @@
 # Material Count: 1
 
 newmtl Material.003
-map_Kd #texture
+map_Kd immersivegeology:block/multiblock/rotarykiln

@@ -10,7 +10,7 @@ public class IGContent {
 
     public static void modContruction(IEventBus event){
         IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
-        IGMultiblocks.initialize();
+        //IGMultiblocks.initialize();
         IGMultiblockProvider.forceClassLoad();
         IGRegistrationHolder.initialize();
     }

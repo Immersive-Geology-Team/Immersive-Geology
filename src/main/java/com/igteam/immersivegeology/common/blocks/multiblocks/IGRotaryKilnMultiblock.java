@@ -3,16 +3,15 @@ package com.igteam.immersivegeology.common.blocks.multiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Consumer;
 
-public class IGCrystalizerMultiblock extends IGTemplateMultiblock {
+public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
 
-    public IGCrystalizerMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"), new BlockPos(0,0,0), new BlockPos(1,2,1), new BlockPos(3,3,3), IGMultiblockProvider.CRYSTALLIZER);
+    public IGRotaryKilnMultiblock() {
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(0,0,0), new BlockPos(1,2,7), new BlockPos(3,3, 8), IGMultiblockProvider.ROTARYKILN);
     }
 
     @Override

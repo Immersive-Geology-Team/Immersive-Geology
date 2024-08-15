@@ -63,7 +63,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             ItemBlockRenderTypes.setRenderLayer(b, renderTypes.get(mapping.get(b)));
         }
 
-        ItemBlockRenderTypes.setRenderLayer(IGMultiblockProvider.CRYSTALLIZER.block().get(), RenderType.cutoutMipped());
+        ItemBlockRenderTypes.setRenderLayer(IGRegistrationHolder.getMB("crystallizer").block().get(), RenderType.cutoutMipped());
 
         inheritances.clear();
         mapping.clear();

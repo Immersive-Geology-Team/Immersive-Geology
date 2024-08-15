@@ -12,12 +12,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.proxy.ClientProxy;
 import com.igteam.immersivegeology.core.proxy.CommonProxy;
 import com.igteam.immersivegeology.core.registration.IGContent;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import com.igteam.immersivegeology.core.registration.IGMultiblocks;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -81,7 +77,7 @@ public class ImmersiveGeology {
     @NotNull
     private static ResourceLocation getResourceLocationTest(IFlagType<?> pattern, GeologyMaterial base) {
         ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
-        if (pattern.equals(BlockCategoryFlags.STAIRS)) //crutch for sheetmetal slabs
+        if (pattern.equals(BlockCategoryFlags.STAIRS))
         {
             test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
         }

@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import com.igteam.immersivegeology.core.registration.IGMultiblocks;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -85,17 +84,30 @@ public class IGBlockStateProvider extends BlockStateProvider {
             }
         }
 
-        crystallizer();
+        genericmultiblock("crystallizer");
+        genericmultiblock("gravityseparator");
+        genericmultiblock("rotarykiln");
     }
 
-    private void crystallizer() {
-        IGLib.IG_LOGGER.info("Generating Crystallizer Multiblock Model Data");
-        createMultiblock(innerObj("block/multiblock/obj/crystallizer/crystallizer.obj"), IGMultiblocks.CRYSTALLIZER);
-    }
+//    private void crystallizer() {
+//        IGLib.IG_LOGGER.info("Generating Crystallizer Multiblock Model Data");
+//        createMultiblock(innerObj("block/multiblock/obj/crystallizer/crystallizer.obj"), IGRegistrationHolder.getMBTemplate.apply("crystallizer"));
+//    }
+//
+//    private void gravityseparator() {
+//        IGLib.IG_LOGGER.info("Generating Gravity Multiblock Model Data");
+//        createMultiblock(innerObj("block/multiblock/obj/gravityseparator/gravityseparator.obj"), IGRegistrationHolder.getMBTemplate.apply("gravityseparator"));
+//    }
 
-    private void createMultiblock(NongeneratedModel unsplitModel, IGTemplateMultiblock multiblock)
+    private void genericmultiblock(String registry_name)
     {
-        createMultiblock(unsplitModel, multiblock, false);
+        IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] Multiblock Model Data");
+        createMultiblock(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), IGRegistrationHolder.getMBTemplate.apply(registry_name));
+    }
+
+    private void createMultiblock(NongeneratedModel unsplitModel, TemplateMultiblock multiblock)
+    {
+        createMultiblock(unsplitModel, (IGTemplateMultiblock) multiblock, false);
     }
 
     private void createDynamicMultiblock(NongeneratedModel unsplitModel, IGTemplateMultiblock multiblock)
