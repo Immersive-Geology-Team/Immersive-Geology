@@ -1,0 +1,5 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl reverberation_furnace
+map_Kd immersivegeology:block/multiblock/reverberation_furnace

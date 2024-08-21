@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "type=bottom,waterlogged=false": {
+      "model": "immersivegeology:block/slab/slab_refractory_brick",
+      "uvlock": true
+    },
+    "type=bottom,waterlogged=true": {
+      "model": "immersivegeology:block/slab/slab_refractory_brick",
+      "uvlock": true
+    },
+    "type=double,waterlogged=false": {
+      "model": "immersivegeology:block/slab/slab_double_refractory_brick",
+      "uvlock": true
+    },
+    "type=double,waterlogged=true": {
+      "model": "immersivegeology:block/slab/slab_double_refractory_brick",
+      "uvlock": true
+    },
+    "type=top,waterlogged=false": {
+      "model": "immersivegeology:block/slab/slab_top_refractory_brick",
+      "uvlock": true
+    },
+    "type=top,waterlogged=true": {
+      "model": "immersivegeology:block/slab/slab_top_refractory_brick",
+      "uvlock": true
+    }
+  }
+}

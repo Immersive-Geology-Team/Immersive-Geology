@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/block",
-  "textures": {
-    "all": "immersivegeology:block/greyscale/stone/cobble",
-    "particle": "immersivegeology:block/greyscale/stone/cobble"
-  }
-}

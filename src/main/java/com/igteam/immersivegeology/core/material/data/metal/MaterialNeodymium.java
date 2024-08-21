@@ -1,12 +1,14 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
 import java.util.function.Function;
 
-public class MaterialNeodymium extends MaterialNativeMetal {
+public class MaterialNeodymium extends MaterialMetal
+{
 
     public MaterialNeodymium() {
         super();

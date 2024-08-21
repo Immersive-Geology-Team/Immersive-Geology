@@ -10,6 +10,7 @@ public class MaterialUraninite extends MaterialMineral {
 
     public MaterialUraninite() {
         super();
+        // in TFC is called 'PitchBlende'
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

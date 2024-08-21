@@ -48,6 +48,8 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
             }
         }
+
+        IGClientRenderHandler.setRenderType(IGMultiblockProvider.COREDRILL.block().get(), IGClientRenderHandler.RenderTypeSkeleton.CUTOUT_MIPPED);
     }
 
     // Initialize the keys and mappings for render layers

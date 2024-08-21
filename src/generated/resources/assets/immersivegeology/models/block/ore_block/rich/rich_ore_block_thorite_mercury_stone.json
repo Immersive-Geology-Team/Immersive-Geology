@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "ad_astra:block/mercury_stone",
+    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/metamorphic/metamorphic_rich"
+  }
+}

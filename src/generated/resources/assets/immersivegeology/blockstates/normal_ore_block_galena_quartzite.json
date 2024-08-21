@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/ore_block/normal/normal_ore_block_galena_quartzite"
+    }
+  }
+}

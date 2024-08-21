@@ -9,13 +9,17 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
+import com.igteam.immersivegeology.common.blocks.IGOreBlock;
+import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
 import com.igteam.immersivegeology.common.blocks.IGStairBlock;
 import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
 import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -30,6 +34,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraftforge.client.model.generators.*;
@@ -52,6 +57,9 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
+import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public class IGBlockStateProvider extends BlockStateProvider {
     protected static final List<Vec3i> COLUMN_THREE = ImmutableList.of(BlockPos.ZERO, BlockPos.ZERO.above(), BlockPos.ZERO.above(2));
@@ -78,7 +86,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 BlockCategoryFlags flag = (BlockCategoryFlags) igBlock.getFlag();
                 switch(flag){
                     case STAIRS -> registerStairsBlock(igBlock);
-                    case DEFAULT_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
+                    case SLAB ->  registerSlabBlock(igBlock);
+                    case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
                     case ORE_BLOCK -> registerOreBlock(igBlock);
                 }
             }
@@ -87,6 +96,51 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblock("crystallizer");
         genericmultiblock("gravityseparator");
         genericmultiblock("rotarykiln");
+        genericmultiblock("coredrill");
+        genericmultiblockMirror("reverberation_furnace");
+    }
+
+    private void registerSlabBlock(IGBlockType igBlock)
+    {
+        IGSlabBlock slabBlock = (IGSlabBlock) igBlock;
+        VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
+        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()));
+
+        BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_top_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()+ "_top"));
+
+        BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_double_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()+ "_double"));
+
+        ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
+        ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
+
+        baseModel.texture("particle", rTextureLocBase);
+        topModel.texture("particle", rTextureLocBase);
+        doubleModel.texture("particle", rTextureLocBase);
+
+        doubleModel.texture("all", rTextureLocBase);
+        topModel.texture("all", rTextureLocBase);
+        baseModel.texture("all", rTextureLocBase);
+
+
+        doubleModel.texture("side", rTextureLocSide);
+        doubleModel.texture("cover", rTextureLocBase);
+
+        topModel.texture("side", rTextureLocSide);
+        topModel.texture("cover", rTextureLocBase);
+
+        baseModel.texture("side", rTextureLocSide);
+        baseModel.texture("cover", rTextureLocBase);
+
+        builder.forAllStates(blockState ->
+                blockState.getValue(SlabBlock.TYPE) == SlabType.BOTTOM ?
+                        (ConfiguredModel.builder().modelFile(baseModel).uvLock(true).build()):
+                        blockState.getValue(SlabBlock.TYPE) == SlabType.TOP ?
+                                (ConfiguredModel.builder().modelFile(topModel).uvLock(true).build()):
+                                (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
+
     }
 
 //    private void crystallizer() {
@@ -105,14 +159,15 @@ public class IGBlockStateProvider extends BlockStateProvider {
         createMultiblock(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), IGRegistrationHolder.getMBTemplate.apply(registry_name));
     }
 
+    private void genericmultiblockMirror(String registry_name)
+    {
+        IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] with Custom Mirror Multiblock Model Data");
+        testCreateMultiblock(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+"_mirrored.obj"),  (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(registry_name), false);
+    }
+
     private void createMultiblock(NongeneratedModel unsplitModel, TemplateMultiblock multiblock)
     {
         createMultiblock(unsplitModel, (IGTemplateMultiblock) multiblock, false);
-    }
-
-    private void createDynamicMultiblock(NongeneratedModel unsplitModel, IGTemplateMultiblock multiblock)
-    {
-        createMultiblock(unsplitModel, multiblock, true);
     }
 
     private void createMultiblock(NongeneratedModel unsplitModel, IGTemplateMultiblock multiblock, boolean dynamic)
@@ -128,6 +183,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
         else
             createMultiblock(multiblock::getBlock, mainModel, null, IEProperties.FACING_HORIZONTAL, null);
     }
+
+    private void testCreateMultiblock(NongeneratedModel unsplitModel, NongeneratedModel mirror_model, IGTemplateMultiblock multiblock, boolean dynamic)
+    {
+        final ModelFile mainModel = split(unsplitModel, multiblock, false, dynamic);
+        if(multiblock.getBlock().getStateDefinition().getProperties().contains(IEProperties.MIRRORED))
+            createMultiblock(
+                    multiblock::getBlock,
+                    mainModel,
+                    split(mirror_model, multiblock, true, dynamic),
+                    IEProperties.FACING_HORIZONTAL, IEProperties.MIRRORED
+            );
+        else
+            createMultiblock(multiblock::getBlock, mainModel, null, IEProperties.FACING_HORIZONTAL, null);
+    }
+
 
     private void createMultiblock(Supplier<? extends Block> b, ModelFile masterModel)
     {
@@ -192,25 +262,73 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void registerOreBlock(IGBlockType type){
-        IGGenericBlock block = (IGGenericBlock) type;
+        IGOreBlock block = (IGOreBlock) type;
         IFlagType<?> pattern = block.getFlag();
-
+        String parent_name = block.getFlag().getName();
         logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
+        BlockModelBuilder baseModel;
 
-        BlockModelBuilder baseModel = models().withExistingParent(
-                new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getFlag().getName() + "_" + block.getMaterial(MaterialTexture.overlay).getName() + "_" + block.getMaterial(MaterialTexture.base).getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/base/" + block.getFlag().getName()));
+        if(block.getMaterial(MaterialTexture.base).instance() instanceof MaterialStone stoneMaterial)
+        {
+            StoneFormation stoneFormation = stoneMaterial.getStoneFormation();
+            switch(stoneFormation)
+            {
+                case SEDIMENTARY ->
+                {
+                    baseModel = models().withExistingParent(
+                            new ResourceLocation(IGLib.MODID, "block/ore_block/"+ block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
+                            new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_sedimentary"));
+                }
+                default ->
+                {
+                    baseModel = models().withExistingParent(
+                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
+                            new ResourceLocation(IGLib.MODID, "block/base/"+parent_name));
+
+                }
+            }
+
+            implementUnsafeOreTexture(baseModel, block, stoneFormation);
+            getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+        }
+    }
+
+    private void implementUnsafeOreTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation)
+    {
         try {
-            baseModel.texture("ore", block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag())).texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+            ResourceLocation default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/" + formation.name().toLowerCase()+"/" + formation.name().toLowerCase() + "_" + block.getOreRichness().name().toLowerCase());
+
+            baseModel.texture("ore", default_richness_ore);// block.getMaterial(MaterialTexture.overlay).getTextureLocation(block.getFlag()));
+            if(formation.equals(StoneFormation.SEDIMENTARY))
+            {
+                baseModel.texture("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+                baseModel.texture("base", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
+            }
+            else
+            {
+                baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+            }
         } catch(IllegalArgumentException error) {
             // Extended the normal Block Model Builder to include an unsafe method to add unknown texture locations.
             // NOTE: only needed as a data gen implementation if some mods are unavailable in the data generation, which would prevent the safe method from running.
             logger.error("Error: " + error.getMessage());
-            baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
-        }
 
-        VariantBlockStateBuilder builder = getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
-        //IGLib.IG_LOGGER.info(builder.toJson().toString());
+            if(formation.equals(StoneFormation.SEDIMENTARY))
+            {
+                baseModel.textures.put("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+
+                // As TFC only has two sedimentary rocks that have a 'top and side' texture, we need to check if these files are available to us.
+                boolean file_test = EXISTING_HELPER.exists(new ResourceLocation("tft",block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()+"_top"), CLIENT_RESOURCES);
+                if(file_test)
+                {
+                    baseModel.textures.put("base", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()+"_top").toString());
+                } else {
+                    baseModel.textures.put("base", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()).toString());
+                }
+            } else {
+                baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+            }
+        }
     }
 
     private void registerStairsBlock(IGBlockType blockType)

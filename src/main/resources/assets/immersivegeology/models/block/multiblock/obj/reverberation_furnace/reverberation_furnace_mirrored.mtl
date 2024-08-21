@@ -1,0 +1,5 @@
+# Blender 3.2.0 MTL File: 'None'
+# www.blender.org
+
+newmtl reverberation_furnace
+map_Kd immersivegeology:block/multiblock/reverberation_furnace

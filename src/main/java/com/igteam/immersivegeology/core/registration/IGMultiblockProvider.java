@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultibl
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.igteam.immersivegeology.common.blocks.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CoreDrillLogic;
 import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic;
 import com.igteam.immersivegeology.common.blocks.multiblocks.logic.GravitySeparatorLogic;
 import com.igteam.immersivegeology.common.blocks.multiblocks.logic.RotaryKilnLogic;
@@ -30,6 +31,17 @@ public class IGMultiblockProvider {
             builder -> {
                 builder.redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN);
             });
+
+    public static final MultiblockRegistration<CoreDrillLogic.State> COREDRILL = IGRegistrationHolder.registerMetalMultiblock("coredrill", new CoreDrillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("coredrill"),
+            builder -> {
+                builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);
+            });
+
+    public static final MultiblockRegistration<CoreDrillLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMetalMultiblock("reverberation_furnace", new CoreDrillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"),
+            builder -> {
+                builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);
+            });
+
 
     public static void forceClassLoad(){};
 }

@@ -13,22 +13,24 @@ import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
 import com.igteam.immersivegeology.common.blocks.IGOreBlock;
+import com.igteam.immersivegeology.common.blocks.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
 import com.igteam.immersivegeology.common.blocks.IGStairBlock;
 import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGCrystalizerMultiblock;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGGravitySeparatorMultiblock;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGRotaryKilnMultiblock;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.blocks.multiblocks.*;
 import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic;
 import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic.State;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
+import com.igteam.immersivegeology.common.item.IGGenericOreItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -87,20 +89,37 @@ public class IGRegistrationHolder {
 
     private static final List<Consumer<IEventBus>> MOD_BUS_CALLBACKS = new ArrayList<>();
 
+    private static boolean checkModFlagsForMaterial(StoneEnum stoneType, GeologyMaterial ore)
+    {
+        boolean bool = false;
+        Set<ModFlags> stoneModFlags = stoneType.getFlags().stream()
+                .filter(flag -> flag.getValue() instanceof ModFlags)
+                .map(flag -> (ModFlags) flag.getValue())
+                .collect(Collectors.toSet());
+
+        Set<ModFlags> oreModFlags = ore.getFlags().stream()
+                .filter(flag -> flag.getValue() instanceof ModFlags)
+                .map(flag -> (ModFlags) flag.getValue())
+                .collect(Collectors.toSet());
+
+        Set<ModFlags> intersection = new HashSet<>(stoneModFlags);
+        intersection.retainAll(oreModFlags);
+        return !intersection.isEmpty();
+    }
+
     public static void initialize()
     {
         initializeMultiblocks();
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
-                if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) break;
-
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
                 if(Arrays.stream(ModFlags.values()).anyMatch(material.getFlags()::contains) && material.getFlags().stream().noneMatch(ModFlags::isLoaded)) continue;
 
-
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
-                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, RAW_ORE_BLOCK -> {
+                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK -> {
+                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
@@ -110,24 +129,31 @@ public class IGRegistrationHolder {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
                             for (StoneEnum base : StoneEnum.values()) {
                                 // checks is the material has any ModFlags (e.g. Beyond Earth)
-                                if(Arrays.stream(ModFlags.values()).anyMatch(base.getFlags()::contains) && base.getFlags().stream().noneMatch(ModFlags::isLoaded)) continue;
-
-                                String registryKey = blockCategory.getRegistryKey(material, base);
-                                Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material);
-                                registerBlock(registryKey, blockProvider);
-                                registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
-
+                                if(!base.getFlags().contains(MaterialFlags.IS_ORE_BEARING)) continue;
+                                if(!material.instance().acceptableStoneType(base.instance())) continue;
+                                if(checkModFlagsForMaterial(base, material.instance())) continue;
+                                // After all checks, now we can generate the different ore levels
+                                for(OreRichness richness : OreRichness.values()){
+                                    String registryKey = blockCategory.getRegistryKey(material, base, richness);
+                                    Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material, richness);
+                                    registerBlock(registryKey, blockProvider);
+                                    registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType)getBlock.apply(registryKey)));
+                                }
                             }
                         }
                         case SLAB -> {
+                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
-                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case STAIRS -> {
+                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
-                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply(BlockCategoryFlags.SHEETMETAL_BLOCK.getRegistryKey(material)).defaultBlockState(), material);
+                            // A tad dirty of a hack, but this should cover 99% of cases for stairs at least
+                            boolean isSheetmetal = material.getFlags().contains(BlockCategoryFlags.SHEETMETAL_BLOCK);
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply((isSheetmetal ? BlockCategoryFlags.SHEETMETAL_BLOCK : BlockCategoryFlags.STORAGE_BLOCK).getRegistryKey(material)).defaultBlockState(), material);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
@@ -146,7 +172,12 @@ public class IGRegistrationHolder {
 
                 if(flags instanceof ItemCategoryFlags itemCategoryFlags) {
                     switch (itemCategoryFlags) {
-                        case INGOT, PLATE, CRYSTAL, DUST, COMPOUND_DUST, CLAY, CRUSHED_ORE, DIRTY_CRUSHED_ORE, GEAR, RAW_ORE, SLAG, ROD, WIRE, NUGGET, METAL_OXIDE -> {
+                        case POOR_ORE, NORMAL_ORE, RICH_ORE->
+                        {
+                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericOreItem(itemCategoryFlags, material));
+                        }
+                        case INGOT, PLATE, CRYSTAL, DUST, COMPOUND_DUST, CLAY, CRUSHED_ORE, DIRTY_CRUSHED_ORE, GEAR, SLAG, ROD, WIRE, NUGGET, METAL_OXIDE -> {
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material));
                         }
                     }
@@ -165,6 +196,8 @@ public class IGRegistrationHolder {
         registerMB("crystallizer", new IGCrystalizerMultiblock(), IGMultiblockProvider.CRYSTALLIZER);
         registerMB("gravityseparator", new IGGravitySeparatorMultiblock(), IGMultiblockProvider.GRAVITY_SEPARATOR);
         registerMB("rotarykiln", new IGRotaryKilnMultiblock(), IGMultiblockProvider.ROTARYKILN);
+        registerMB("coredrill", new IGCoreDrillMultiblock(), IGMultiblockProvider.COREDRILL);
+        registerMB("reverberation_furnace", new IGReverberationFurnaceMultiblock(), IGMultiblockProvider.REVERBERATION_FURNACE);
     }
 
     private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){

@@ -36,7 +36,7 @@ public class ImmersiveGeology {
         return FMLLoader.getDist() == Dist.CLIENT ? new ClientProxy() : new CommonProxy();
     }
 
-    public ImmersiveGeology(){
+    public ImmersiveGeology() {
         IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
         IGLib.IG_LOGGER.info("Immersive Geology Starting");
         modEventBus.addListener(this::setup);

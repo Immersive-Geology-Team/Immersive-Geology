@@ -1,9 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 
 import java.util.function.Function;
 
@@ -11,7 +9,8 @@ public class MaterialKaolinite extends MaterialMineral {
 
     public MaterialKaolinite() {
         super();
-        removeMaterialFlags(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.DIRTY_CRUSHED_ORE, BlockCategoryFlags.ORE_BLOCK, BlockCategoryFlags.RAW_ORE_BLOCK);
+        addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+        removeMaterialFlags(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.DIRTY_CRUSHED_ORE, BlockCategoryFlags.ORE_BLOCK);
         addFlags(ItemCategoryFlags.CLAY, BlockCategoryFlags.STORAGE_BLOCK);
     }
 

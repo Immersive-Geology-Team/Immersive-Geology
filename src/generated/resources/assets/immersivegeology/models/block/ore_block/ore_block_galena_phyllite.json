@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block",
-  "textures": {
-    "base": "tfc:block/rock/raw/phyllite",
-    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/vanilla/cubic"
-  }
-}

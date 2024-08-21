@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/granite",
+    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_intrusive/igneous_intrusive_rich"
+  }
+}

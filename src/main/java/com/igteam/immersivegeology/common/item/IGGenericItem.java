@@ -15,8 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class IGGenericItem extends Item implements IGFlagItem {
-    private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
-    private final ItemCategoryFlags category;
+    protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
+    protected final ItemCategoryFlags category;
 
     public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material) {
         super(new Properties());
@@ -25,7 +25,8 @@ public class IGGenericItem extends Item implements IGFlagItem {
     }
 
     public int getColor(int index) {
-        if (index >= materialMap.values().size()) index = materialMap.values().size() - 1;
+        if (index >= materialMap.values().size()) index = index % materialMap.values().size();
+
         //let's use last available colour. map could not be empty
         return materialMap.get(MaterialTexture.values()[index]).getColor(category);
     }

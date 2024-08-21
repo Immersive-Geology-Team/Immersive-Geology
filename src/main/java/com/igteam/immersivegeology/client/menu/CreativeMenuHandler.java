@@ -166,6 +166,7 @@ public class CreativeMenuHandler {
             pGuiGraphics.blit(CEX_GUI_TEXTURES, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height);
 
             IFlagType<?> groupPattern = group.getFlag();
+
             ItemStack stack = group.getMaterial().getStack(groupPattern);
 
             if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
@@ -173,6 +174,7 @@ public class CreativeMenuHandler {
             } else {
                 pGuiGraphics.renderItem(stack, x + 1, y + 1);
             }
+
 
             //Tool tip on hover
             if(hovered) {

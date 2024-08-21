@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Function;
@@ -13,6 +14,7 @@ public class MaterialDolomite extends MaterialTFCRawStone {
 
     public MaterialDolomite() {
         super();
+        this.STONE_FORMATION = StoneFormation.SEDIMENTARY;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
         addFlags(ModFlags.TFC);
     }

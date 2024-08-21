@@ -3,11 +3,13 @@ package com.igteam.immersivegeology.core.material;
 import com.google.common.collect.Sets;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
+import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
@@ -127,8 +129,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 case CRYSTAL -> {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/" + getCrystalFamily().getName());
                 }
-                case RAW_ORE -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/raw_ore/" + i.getName() + "_" + getCrystalFamily().getName());
+                case POOR_ORE, NORMAL_ORE, RICH_ORE -> {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.getName() + "_" + getCrystalFamily().getName());
                 }
                 default -> {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/" + i.getName());
@@ -136,6 +138,13 @@ public abstract class GeologyMaterial implements MaterialHelper {
             }
         }
         return null;
+    }
+
+    protected Set<StoneFormation> acceptableStoneTypes = new HashSet<>();
+
+    public boolean acceptableStoneType(MaterialStone stone)
+    {
+        return this.acceptableStoneTypes.contains(stone.getStoneFormation());
     }
 
     public CrystalFamily getCrystalFamily() {

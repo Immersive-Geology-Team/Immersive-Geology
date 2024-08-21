@@ -1,0 +1,20 @@
+# Made in Blockbench 4.10.3
+newmtl m_b394c4bc-7e2c-cbcd-364c-d8a537b5a11b
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st5
+newmtl m_d9db94f9-ca6e-c384-dfe8-8079f62d6c81
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st3_st4
+newmtl m_a8c0180c-1f6a-8f9a-48fa-e2282b22d76e
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st2
+newmtl m_ffef6f5e-259e-2875-6227-f459cf8a2fbe
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st1
+newmtl m_ccb49d2d-244d-88a6-ec7c-ed9c1bd618a3
+map_Kd immersivegeology:block/multiblock/coredrill/drill_engine
+newmtl m_94b4196a-c089-3a69-5405-cad817ad1e54
+map_Kd immersivegeology:block/multiblock/coredrill/big_cable
+newmtl m_a33f9317-4997-56e3-e6ef-1ba8f839b50e
+map_Kd immersivegeology:block/multiblock/coredrill/silver_coil
+newmtl m_4b4e3872-d340-0d7e-f59a-462889d3eeb6
+map_Kd immersivegeology:block/multiblock/coredrill/pasted
+newmtl m_a8fe57a6-e0cc-4449-9f7c-b4002403fe34
+map_Kd immersivegeology:block/multiblock/coredrill/common_concrete
+newmtl none

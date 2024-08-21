@@ -1,15 +1,14 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.material.data.stone.compat.adastra.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialAndesite;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialDiorite;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
-import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
-
     //===== Terra Firma Craft =====\\
     Andesite(new MaterialAndesite()),
     Basalt(new MaterialBasalt()),
@@ -33,7 +32,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     Conglomerate(new MaterialConglomerate()),
     Dolomite(new MaterialDolomite()),
     Limestone(new MaterialLimestone()),
-    Shale(new MaterialShale());
+    Shale(new MaterialShale()),
 
 
     //===== Minecraft Stones =====\\
@@ -47,12 +46,12 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //Sand(new MaterialSand()),
 
 
-    //===== Beyond Earth =====\\
-//    MoonStone(new MaterialMoonStone()),
-//    MarsStone(new MaterialMarsStone()),
-//    MercuryStone(new MaterialMercuryStone()),
-//    VenusStone(new MaterialVenusStone()),
-//    GlacioStone(new MaterialGlacioStone());
+    //===== Beyond Earth / Ad Astra =====\\
+    MoonStone(new MaterialMoonStone()),
+    MarsStone(new MaterialMarsStone()),
+    MercuryStone(new MaterialMercuryStone()),
+    VenusStone(new MaterialVenusStone()),
+    GlacioStone(new MaterialGlacioStone());
 
     private final MaterialStone material;
     StoneEnum(MaterialStone m){

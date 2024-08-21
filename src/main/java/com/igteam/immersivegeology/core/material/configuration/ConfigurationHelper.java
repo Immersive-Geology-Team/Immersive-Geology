@@ -24,14 +24,19 @@ public interface ConfigurationHelper {
             list.add(ItemCategoryFlags.CRYSTAL);
 
             if(metal instanceof MaterialNativeMetal) {
-                list.add(ItemCategoryFlags.RAW_ORE);
+                list.add(ItemCategoryFlags.NORMAL_ORE);
+                list.add(ItemCategoryFlags.POOR_ORE);
+                list.add(ItemCategoryFlags.RICH_ORE);
+
                 list.add(ItemCategoryFlags.DIRTY_CRUSHED_ORE);
                 list.add(ItemCategoryFlags.CRUSHED_ORE);
             }
         }
 
         if(material instanceof MaterialMineral) {
-            list.add(ItemCategoryFlags.RAW_ORE);
+            list.add(ItemCategoryFlags.NORMAL_ORE);
+            list.add(ItemCategoryFlags.POOR_ORE);
+            list.add(ItemCategoryFlags.RICH_ORE);
             list.add(ItemCategoryFlags.DIRTY_CRUSHED_ORE);
             list.add(ItemCategoryFlags.CRUSHED_ORE);
         }
@@ -48,13 +53,11 @@ public interface ConfigurationHelper {
             list.add(BlockCategoryFlags.STAIRS);
             list.add(BlockCategoryFlags.FLUID);
             if(metal instanceof MaterialNativeMetal) {
-                list.add(BlockCategoryFlags.RAW_ORE_BLOCK);
                 list.add(BlockCategoryFlags.ORE_BLOCK);
             }
         }
 
         if(material instanceof MaterialMineral) {
-            list.add(BlockCategoryFlags.RAW_ORE_BLOCK);
             list.add(BlockCategoryFlags.ORE_BLOCK);
         }
 

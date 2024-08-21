@@ -5,6 +5,7 @@ import net.minecraftforge.fml.ModList;
 
 public enum ModFlags implements IFlagType<ModFlags> {
     BEYOND_EARTH,
+    AD_ASTRA,
     TFC;
 
     @Override
