@@ -41,7 +41,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
-import org.openjdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

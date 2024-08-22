@@ -192,17 +192,59 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
     @Override
-    public void doProcessOutput(ItemStack output) {
-        output = Utils.insertStackIntoInventory(this.output, output, false);
+    public void doProcessOutput(ItemStack stack) {
+        ItemStack checkInsert = Utils.insertStackIntoInventory(this.output, stack, true);
 
-        if (!output.isEmpty()) {
-            Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), -2), output, getFacing().getOpposite());
-            this.updateMasterBlock(null, true);
+        if(checkInsert.isEmpty())
+        {
+            Utils.insertStackIntoInventory(this.output, stack, false);
+            this.updateMasterBlock(this.getBlockState(), true);
+            return;
         }
+
+        Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), -2), stack, getFacing());
+        this.updateMasterBlock(this.getBlockState(), true);
     }
 
     LazyOptional<IItemHandler> insertionHandler = registerConstantCap(
-            new MultiblockInventoryHandler_DirectProcessing<>(this).setProcessStacking(true)
+            new MultiblockInventoryHandler_DirectProcessing<GravitySeparatorTileEntity, SeparatorRecipe>(this){
+                @Override
+                public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+
+                    stack = stack.copy();
+                    SeparatorRecipe recipe = findRecipeForInsertion(stack);
+                    if (recipe == null) {
+                        return stack;
+                    } else {
+                        List<Pair<ItemStack, Integer>> copyList = new ArrayList<>(List.copyOf(master().item_processing_list));
+                        Pair<ItemStack, Integer> pair = Pair.of(new ItemStack(stack.getItem()), 0);
+                        int size = copyList.size();
+                        copyList.add(pair);
+
+                        if (size == copyList.size()-1) {
+                            if(simulate)
+                            {
+                                stack.shrink(1);
+                                if (stack.getCount() <= 0) {
+                                    stack = ItemStack.EMPTY;
+                                }
+                                return stack;
+                            }
+
+                            master().item_processing_list.add(pair);
+
+                            markDirty();
+                            markContainingBlockForUpdate(getBlockState());
+                            stack.shrink(1);
+                            if (stack.getCount() <= 0) {
+                                stack = ItemStack.EMPTY;
+                            }
+                        }
+
+                        return stack;
+                    }
+                }
+            }
     );
 
     @Nonnull
@@ -278,9 +320,14 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
         Optional<ItemStack> optionalWaste = Arrays.stream(waste.getMatchingStacks()).findFirst();
 
         ItemStack itemWaste = optionalWaste.orElse(ItemStack.EMPTY);
-        itemWaste = Utils.insertStackIntoInventory(this.waste, itemWaste, false);
-        if(!itemWaste.isEmpty())
-            Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
+        ItemStack checkInsert = Utils.insertStackIntoInventory(this.waste, itemWaste, true);
+        if(checkInsert.isEmpty())
+        {
+            Utils.insertStackIntoInventory(this.waste, itemWaste, false);
+            return;
+        }
+
+        Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
     }
 
     @Override
@@ -300,7 +347,7 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
 
     @Override
     public int getProcessQueueMaxLength() {
-        return 2048;
+        return 64;
     }
 
     @Override
@@ -453,17 +500,23 @@ public class GravitySeparatorTileEntity extends PoweredMultiblockTileEntity<Grav
                         Optional<ItemStack> optionalWaste = Arrays.stream(waste.getMatchingStacks()).findFirst();
 
                         ItemStack itemWaste = optionalWaste.orElse(ItemStack.EMPTY);
-                        itemWaste = Utils.insertStackIntoInventory(this.waste, itemWaste, false);
-                        if (!itemWaste.isEmpty()) {
-                            Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
+                        ItemStack checkInsert = Utils.insertStackIntoInventory(this.waste, itemWaste, true);
+                        if(checkInsert.isEmpty())
+                        {
+                            Utils.insertStackIntoInventory(this.waste, itemWaste, false);
                             iterator.remove();
+                            break;
                         }
+
+                        Utils.dropStackAtPos(world, getPos().add(0, 0, 0).offset(getFacing(), 2), itemWaste, getFacing());
+                        iterator.remove();
+
                     }
 
                     if (process_amount < max_process_ticks) {
                         Pair<ItemStack, Integer> newPair = Pair.of(pair.getKey(), pair.getValue() + 1);
                         master.item_processing_list.set(master.item_processing_list.indexOf(pair), newPair);
-                        this.updateMasterBlock((BlockState)null, true);
+                        this.updateMasterBlock(this.getBlockState(), true);
                     }
                 }
             }
