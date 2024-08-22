@@ -12,7 +12,9 @@ import com.google.common.collect.ImmutableSet;
 import igteam.api.processing.recipe.HydrojetRecipe;
 import igteam.immersive_geology.ImmersiveGeology;
 import igteam.immersive_geology.common.multiblocks.HydroJetCutterMultiblock;
+import igteam.immersive_geology.core.lib.IGLib;
 import igteam.immersive_geology.core.registration.IGTileTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
@@ -40,15 +42,13 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 //HydroJetCutterTileEntity - Used in IGTileTypes when linking it to it's BlockReference
 // This tile entity is dependent on the HydroJetRecipe which is defined in
@@ -71,14 +71,14 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     //Used In IGTileType - Dependent on HydroJetCutterMultiblock and HydroJetRecipe
     Logger log = ImmersiveGeology.getNewLogger();
     HydrojetRecipe currentRecipe;
-    private LazyOptional<IFluidHandler> insertionFluidHandler;
-    private LazyOptional<IItemHandler> insertionHandler;
+    private final LazyOptional<IFluidHandler> insertionFluidHandler;
+    private final LazyOptional<IItemHandler> insertionHandler;
 
     public HydroJetCutterTileEntity() {
         super(HydroJetCutterMultiblock.INSTANCE, 2000, true, IGTileTypes.HYDROJET.get());
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         insertionFluidHandler = LazyOptional.of(() -> tanks[0]);
-        insertionHandler = this.registerConstantCap(new PoweredMultiblockTileEntity.MultiblockInventoryHandler_DirectProcessing(this));
+        insertionHandler = this.registerConstantCap(new PoweredMultiblockTileEntity.MultiblockInventoryHandler_DirectProcessing<HydroJetCutterTileEntity, HydrojetRecipe>(this).setProcessStacking(true));
     }
 
     private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock) {
@@ -167,52 +167,27 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     @Override
     public void tick() {
         super.tick();
-        assert this.world != null;
-
-        if (!this.world.isRemote && !this.isDummy() && !this.isRSDisabled()) {
-            if (!processQueue.isEmpty() && energyStorage.getEnergyStored() > 0) {
-                getInternalTanks()[0].drain(1, IFluidHandler.FluidAction.EXECUTE);
-            }
-        }
-
-        if(this == master()) {
-            BlockPos particlePos = getPos();
-            switch(getFacing()){
-                case NORTH:
-                    particlePos.add(2f, 1.5f,0f);
-                    if(getIsMirrored()){
-                        particlePos.add(-4,0, 0);
-                    }
-                    break;
-                case SOUTH:
-                    if(getIsMirrored()){
-                        particlePos.add(-4,0, 0);
-                    }
-                    break;
-                case WEST:
-                    particlePos.add(4.5, -4.875f,0f);
-                    if(getIsMirrored()){
-                        particlePos.add(0.5,4, 0);
-                    }
-                    break;
-                case EAST:
-                    particlePos.add(-3.875, -1.75f,0f);
-                    if(getIsMirrored()){
-                        particlePos.add(4,-0.5, 0);
-                    }
-                    break;
-            }
-
-
-
-//            for (int i = 0; i < 360; i++) {
-//                if (i % 230 == 0) {
-//                    this.world.addParticle(ParticleTypes.BUBBLE_POP.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY() + 1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(i) * 0.25d, 0.1d, Math.sin(i) * 0.25d);
+//        if (!this.world.isRemote && !this.isDummy() && !this.isRSDisabled()) {
+//            ItemStack invStack = master().getInventory().get(OUTPUT_SLOT);
+//            if(currentRecipe != null) {
+//                ItemStack recipeOutput = currentRecipe.getRecipeOutput();
+//                if (!ItemHandlerHelper.canItemStacksStack(invStack, recipeOutput)) {
+//                    log.warn("Inventory Mismatch, Crude Fix implemented, If you see this message often, please contact Immersive Geology Development Team: Error is due to recipe output -> {} and inventory output slot being -> {}", recipeOutput.getItem().toString(), invStack.getItem().toString());
+//                    master().getInventory().set(OUTPUT_SLOT, recipeOutput);
+//                    updateMasterBlock(getBlockState(), true);
 //                }
 //            }
-//            this.world.addParticle(ParticleTypes.BUBBLE.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY() +1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
-//            this.world.addParticle(ParticleTypes.FALLING_WATER.getType(), 2f + particlePos.getX() - this.currentArmPosition, particlePos.getY()+1f, particlePos.getZ() + this.headCurrentPosition, Math.cos(1) * 0.25d, 0.1d, Math.sin(1) * 0.25d);
-        }
+//        }
+    }
+
+    public boolean shouldRenderActive()
+    {
+        return this.shouldRenderAsActiveImpl();
+    }
+
+    @Override
+    protected boolean shouldRenderAsActiveImpl() {
+        return super.shouldRenderAsActiveImpl() &! this.processQueue.isEmpty();
     }
 
     @Override
@@ -301,6 +276,12 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
 
             Utils.dropStackAtPos(world, new DirectionalBlockPos(pos.offset(shift_1, 1).up().offset(fw, -1), fw).getPosition(), output, fw.getOpposite());
             master().getInventory().get(OUTPUT_SLOT).shrink(output.getCount());
+            if(master().getInventory().get(INPUT_SLOT).isEmpty())
+            {
+                itemPile = ItemStack.EMPTY;
+                item = ItemStack.EMPTY;
+                this.currentRecipe = null;
+            }
         }
     }
 
@@ -308,6 +289,7 @@ public class HydroJetCutterTileEntity extends PoweredMultiblockTileEntity<HydroJ
     public void onProcessFinish(MultiblockProcess<HydrojetRecipe> process) {
         if (master() != null) {
             doProcessOutput(process.recipe.getRecipeOutput());
+            process.clearProcess = true;
             doGraphicalUpdates();
             markDirty();
         }

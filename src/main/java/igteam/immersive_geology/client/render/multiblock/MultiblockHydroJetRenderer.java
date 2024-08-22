@@ -12,32 +12,21 @@ import igteam.immersive_geology.core.lib.IGLib;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import igteam.api.IGApi;
 import igteam.api.main.IGMultiblockProvider;
-import io.netty.util.internal.MathUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.TransformationMatrix;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.model.TransformationHelper;
 import net.minecraftforge.fml.common.Mod;
 
 import java.math.MathContext;
@@ -66,22 +55,24 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
     @Override
     public void render(HydroJetCutterTileEntity te, float partialTicks, MatrixStack transform, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         float machineProgress = 0.0f;
-        ItemStack item = te.item;
-        ItemStack itemPile = te.itemPile;
-
 
         //this is where we can put in special rendering things!
         if(te.formed && !te.isDummy()) {
             HydroJetCutterTileEntity master = te.master();
             if(master != null) {
-                if(master.processQueue.stream().findFirst().isPresent() && master.shouldRenderAsActive()) {
+                if(master.processQueue.stream().findFirst().isPresent() && master.shouldRenderActive()) {
                     PoweredMultiblockTileEntity.MultiblockProcess<HydrojetRecipe> wrapper = master.processQueue.stream().findFirst().get();
                     machineProgress = ((float) wrapper.processTick / (float) wrapper.maxTicks);
                     te.item = wrapper.recipe.getItemInput().getRandomizedExampleStack(0);
-                    te.itemPile = item.copy();
+                    te.itemPile = te.item.copy();
                     te.itemPile.setCount(master.processQueue.size());
+                } else {
+                    te.item = ItemStack.EMPTY;
+                    te.itemPile = ItemStack.EMPTY;
                 }
             }
+            ItemStack item = te.item;
+            ItemStack itemPile = te.itemPile;
 
             transform.push();
             {
@@ -141,7 +132,7 @@ public class MultiblockHydroJetRenderer extends TileEntityRenderer<HydroJetCutte
                             break;
                     }
 
-                    if(master.shouldRenderAsActive()) {
+                    if(master.shouldRenderActive()) {
                         animateItemProgress(transform, machineProgress, master, buffer, combinedLightIn, combinedOverlayIn, item, itemPile);
                     }
                 transform.pop();
