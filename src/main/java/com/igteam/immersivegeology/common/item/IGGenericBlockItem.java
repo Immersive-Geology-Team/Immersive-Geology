@@ -1,9 +1,8 @@
 package com.igteam.immersivegeology.common.item;
 
-import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock;
-import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;

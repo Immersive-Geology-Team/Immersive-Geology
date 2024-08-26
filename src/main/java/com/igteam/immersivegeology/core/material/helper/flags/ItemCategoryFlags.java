@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 
 public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     INGOT(1),
@@ -37,5 +41,10 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     @Override
     public ItemSubGroup getSubGroup() {
         return ItemSubGroup.values()[groupOrdinal];
+    }
+
+    public String getTagPrefix()
+    {
+        return name().toLowerCase() + "s";
     }
 }

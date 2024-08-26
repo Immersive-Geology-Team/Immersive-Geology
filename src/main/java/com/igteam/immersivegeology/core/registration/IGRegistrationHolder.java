@@ -11,15 +11,13 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
-import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
-import com.igteam.immersivegeology.common.blocks.IGStairBlock;
-import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
-import com.igteam.immersivegeology.common.blocks.multiblocks.*;
-import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic;
-import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.IGGenericBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.IGStairBlock;
+import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
@@ -28,9 +26,7 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -91,20 +87,27 @@ public class IGRegistrationHolder {
 
     private static boolean checkModFlagsForMaterial(StoneEnum stoneType, GeologyMaterial ore)
     {
-        boolean bool = false;
-        Set<ModFlags> stoneModFlags = stoneType.getFlags().stream()
-                .filter(flag -> flag.getValue() instanceof ModFlags)
-                .map(flag -> (ModFlags) flag.getValue())
-                .collect(Collectors.toSet());
-
-        Set<ModFlags> oreModFlags = ore.getFlags().stream()
-                .filter(flag -> flag.getValue() instanceof ModFlags)
-                .map(flag -> (ModFlags) flag.getValue())
-                .collect(Collectors.toSet());
+        Set<ModFlags> stoneModFlags = new HashSet<>();
+        for(IFlagType<?> flag : stoneType.getFlags())
+        {
+            if(flag.getValue() instanceof ModFlags modFlag)
+            {
+                stoneModFlags.add(modFlag);
+            }
+        }
+        Set<ModFlags> oreModFlags = new HashSet<>();
+        for(IFlagType<?> flag : ore.getFlags())
+        {
+            if(flag.getValue() instanceof ModFlags modFlag)
+            {
+                oreModFlags.add(modFlag);
+            }
+        }
 
         Set<ModFlags> intersection = new HashSet<>(stoneModFlags);
         intersection.retainAll(oreModFlags);
-        return !intersection.isEmpty();
+        IGLib.IG_LOGGER.info("[{} {}]Retained Flags for {}, {}: Generate? {} intersection [{}]", stoneType.getName(), ore.getName(), stoneModFlags, oreModFlags, intersection.isEmpty(), intersection);
+        return intersection.isEmpty();
     }
 
     public static void initialize()
@@ -131,7 +134,7 @@ public class IGRegistrationHolder {
                                 // checks is the material has any ModFlags (e.g. Beyond Earth)
                                 if(!base.getFlags().contains(MaterialFlags.IS_ORE_BEARING)) continue;
                                 if(!material.instance().acceptableStoneType(base.instance())) continue;
-                                if(checkModFlagsForMaterial(base, material.instance())) continue;
+                                if(!checkModFlagsForMaterial(base, material.instance())) continue;
                                 // After all checks, now we can generate the different ore levels
                                 for(OreRichness richness : OreRichness.values()){
                                     String registryKey = blockCategory.getRegistryKey(material, base, richness);

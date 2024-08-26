@@ -1,0 +1,26 @@
+package com.igteam.immersivegeology.common.block.multiblocks;
+
+import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.function.Consumer;
+
+public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
+
+    public IGGravitySeparatorMultiblock() {
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseparator"), new BlockPos(1,0,1), new BlockPos(1,6,2), new BlockPos(3,7,3), IGMultiblockProvider.GRAVITY_SEPARATOR);
+    }
+
+    @Override
+    public float getManualScale() {
+        return 6;
+    }
+
+    @Override
+    public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
+        consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+    }
+}

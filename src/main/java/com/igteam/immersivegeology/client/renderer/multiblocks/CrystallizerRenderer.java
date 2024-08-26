@@ -3,16 +3,12 @@ package com.igteam.immersivegeology.client.renderer.multiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelperMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
 import blusunrize.immersiveengineering.client.render.tile.IEBlockEntityRenderer;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceLogic;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.mixer.MixerLogic;
-import com.igteam.immersivegeology.common.blocks.multiblocks.logic.CrystallizerLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 public class CrystallizerRenderer extends IEBlockEntityRenderer<MultiblockBlockEntityMaster<CrystallizerLogic.State>> {

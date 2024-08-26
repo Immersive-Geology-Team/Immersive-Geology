@@ -8,12 +8,12 @@ import blusunrize.immersiveengineering.data.models.NongeneratedModels.Nongenerat
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.igteam.immersivegeology.common.blocks.IGGenericBlock;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock;
-import com.igteam.immersivegeology.common.blocks.IGSlabBlock;
-import com.igteam.immersivegeology.common.blocks.IGStairBlock;
-import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.block.IGGenericBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.IGStairBlock;
+import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -95,7 +95,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         genericmultiblock("crystallizer");
         genericmultiblock("gravityseparator");
-        genericmultiblock("rotarykiln");
+        genericmultiblockMirror("rotarykiln");
         genericmultiblock("coredrill");
         genericmultiblockMirror("reverberation_furnace");
     }

@@ -1,0 +1,9 @@
+{
+  "parent": "immersivegeology:block/base/slab/slab",
+  "textures": {
+    "all": "immersivegeology:block/greyscale/metal/sheetmetal",
+    "cover": "immersivegeology:block/greyscale/metal/sheetmetal",
+    "particle": "immersivegeology:block/greyscale/metal/sheetmetal",
+    "side": "immersivegeology:block/greyscale/metal/sheetmetal"
+  }
+}

@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.client;
 
-import com.igteam.immersivegeology.common.blocks.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;

@@ -1,7 +1,5 @@
 package com.igteam.immersivegeology.core.registration;
 
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import com.igteam.immersivegeology.common.blocks.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;

@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 

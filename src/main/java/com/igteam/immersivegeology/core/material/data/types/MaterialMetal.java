@@ -7,5 +7,6 @@ public class MaterialMetal extends GeologyMaterial {
 
     public MaterialMetal(){
         super();
+        addFlags(BlockCategoryFlags.SLAB);
     }
 }

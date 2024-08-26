@@ -1,29 +1,23 @@
 package com.igteam.immersivegeology.common.data.generators;
 
-import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.apache.logging.log4j.Level;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.Set;
 
 public class IGItemModelProvider extends ItemModelProvider {
 

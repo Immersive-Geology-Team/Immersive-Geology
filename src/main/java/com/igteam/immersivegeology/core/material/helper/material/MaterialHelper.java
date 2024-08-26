@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
-import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.common.blocks.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
