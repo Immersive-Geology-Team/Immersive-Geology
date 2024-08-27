@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
@@ -89,6 +90,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SLAB ->  registerSlabBlock(igBlock);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
                     case ORE_BLOCK -> registerOreBlock(igBlock);
+                    case FLUID -> registerFluidBlock(igBlock, flag);
                 }
             }
         }
@@ -329,6 +331,15 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
             }
         }
+    }
+
+    private void registerFluidBlock(IGBlockType blockType, IFlagType<?> flag)
+    {
+        IGGenericBlock f = (IGGenericBlock) blockType;
+        ResourceLocation stillTexture = f.getMaterial(MaterialTexture.base).getTextureLocation(flag);
+        ModelFile model = models().getBuilder("block/fluid/"+flag.getRegistryKey(f.getMaterial(MaterialTexture.base)))
+                .texture("particle", stillTexture);
+        getVariantBuilder(f.getBlock()).partialState().setModels(new ConfiguredModel(model));
     }
 
     private void registerStairsBlock(IGBlockType blockType)

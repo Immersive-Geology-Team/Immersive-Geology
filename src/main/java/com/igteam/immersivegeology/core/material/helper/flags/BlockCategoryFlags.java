@@ -24,6 +24,12 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     }
 
     @Override
+    public String getTagPrefix()
+    {
+        return "";
+    }
+
+    @Override
     public ItemSubGroup getSubGroup() {
         return ItemSubGroup.values()[groupOrdinal];
     }

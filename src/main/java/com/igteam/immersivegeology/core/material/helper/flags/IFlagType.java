@@ -11,6 +11,8 @@ import java.util.List;
 public interface IFlagType<T extends Enum<T>> {
     T getValue();
 
+    String getTagPrefix();
+
     static List<IFlagType<?>> getAllRegistryFlags() {
         List<IFlagType<?>> list = new ArrayList<>();
         list.addAll(List.of(BlockCategoryFlags.values()));

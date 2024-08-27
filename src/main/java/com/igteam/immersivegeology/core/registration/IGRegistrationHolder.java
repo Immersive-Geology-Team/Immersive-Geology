@@ -11,14 +11,12 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
-import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.block.IGSlabBlock;
-import com.igteam.immersivegeology.common.block.IGStairBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
+import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -36,11 +34,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.*;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -132,7 +133,7 @@ public class IGRegistrationHolder {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
                             for (StoneEnum base : StoneEnum.values()) {
                                 // checks is the material has any ModFlags (e.g. Beyond Earth)
-                                if(!base.getFlags().contains(MaterialFlags.IS_ORE_BEARING)) continue;
+                                if(!base.hasFlag(MaterialFlags.IS_ORE_BEARING)) continue;
                                 if(!material.instance().acceptableStoneType(base.instance())) continue;
                                 if(!checkModFlagsForMaterial(base, material.instance())) continue;
                                 // After all checks, now we can generate the different ore levels
@@ -145,14 +146,14 @@ public class IGRegistrationHolder {
                             }
                         }
                         case SLAB -> {
-                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case STAIRS -> {
-                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             // A tad dirty of a hack, but this should cover 99% of cases for stairs at least
                             boolean isSheetmetal = material.getFlags().contains(BlockCategoryFlags.SHEETMETAL_BLOCK);
@@ -161,26 +162,27 @@ public class IGRegistrationHolder {
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case FLUID -> {
-//                            String registryKey = blockCategory.getRegistryKey(material);
-//                            FluidProperties flowingProperties = material.getFluidProperties();
-//
-//                            registerFluid(registryKey, LavaFluid.Source::new);
-//                            registerFluid(registryKey + "_flowing", LavaFluid.Flowing::new);
-//
-//                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
-//                            registerBlock(registryKey, () -> new LiquidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+                            String registryKey = blockCategory.getRegistryKey(material);
+
+                            registerFluid(registryKey, () -> new IGFluid.Source(material));
+                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
+
+                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
+                            registerBlock(registryKey, () -> new LiquidBlock(() -> (FlowingFluid) getFluid.apply(registryKey + "_flowing"), BlockBehaviour.Properties.copy(Blocks.LAVA)));
                         }
                     }
                 }
 
                 if(flags instanceof ItemCategoryFlags itemCategoryFlags) {
                     switch (itemCategoryFlags) {
-                        case POOR_ORE, NORMAL_ORE, RICH_ORE->
+                        case POOR_ORE, NORMAL_ORE, RICH_ORE ->
                         {
-                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericOreItem(itemCategoryFlags, material));
                         }
                         case INGOT, PLATE, CRYSTAL, DUST, COMPOUND_DUST, CLAY, CRUSHED_ORE, DIRTY_CRUSHED_ORE, GEAR, SLAG, ROD, WIRE, NUGGET, METAL_OXIDE -> {
+
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material));
                         }
                     }
@@ -240,6 +242,8 @@ public class IGRegistrationHolder {
     public static void addRegistersToEventBus(final IEventBus eventBus){
         BLOCK_REGISTER.register(eventBus);
         ITEM_REGISTER.register(eventBus);
+        FLUID_REGISTER.register(eventBus);
+
         TE_REGISTER.register(eventBus);
         TAB_REGISTER.register(eventBus);
 

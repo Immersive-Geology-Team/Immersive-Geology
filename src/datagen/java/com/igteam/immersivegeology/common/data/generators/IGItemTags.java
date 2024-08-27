@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -35,6 +36,22 @@ public class IGItemTags extends ItemTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		
+		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
+		{
+			for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
+			{
+				if(material.hasFlag(category))
+				{
+					if(category.getValue() instanceof ItemCategoryFlags itemFlag)
+					{
+						Item item = material.instance().getItem(itemFlag);
+						if(item != null) {
+							TagKey<Item> item_key = material.getItemTag(itemFlag);
+							tag(item_key).add(item);
+						}
+					}
+				}
+			}
+		}
 	}
 }

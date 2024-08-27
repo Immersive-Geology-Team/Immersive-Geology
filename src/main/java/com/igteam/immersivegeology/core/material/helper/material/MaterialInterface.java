@@ -5,7 +5,11 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.fluids.FluidType;
 
 import java.util.Properties;
 import java.util.Set;
@@ -41,5 +45,14 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getTextureLocation(flag);
     }
 
-    //default Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
+	default boolean hasFlag(IFlagType<?> category)
+    {
+        return getFlags().contains(category);
+    }
+
+    default TagKey<Item> getItemTag(IFlagType<ItemCategoryFlags> itemFlag) { return instance().getItemTag(itemFlag); }
+
+    default FluidType.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
+
+    default IClientFluidTypeExtensions getFluidExtendedProperties() {return instance().getFluidExtendedProperties(BlockCategoryFlags.FLUID);};
 }

@@ -14,4 +14,10 @@ public enum MaterialFlags implements IFlagType<MaterialFlags> {
     public MaterialFlags getValue() {
         return this;
     }
+
+    @Override
+    public String getTagPrefix()
+    {
+        return "";
+    }
 }

@@ -1,6 +1,9 @@
 package com.igteam.immersivegeology.core.material;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.api.IETags;
 import com.google.common.collect.Sets;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
@@ -9,10 +12,17 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
+import net.minecraftforge.fluids.FluidType;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -58,7 +68,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         Arrays.asList(flags).forEach(materialDataFlags::remove);
     }
 
-    protected boolean hasFlag(IFlagType<?> flag) {
+    public boolean hasFlag(IFlagType<?> flag) {
         return materialDataFlags.contains(flag);
     }
 
@@ -151,7 +161,76 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return CrystalFamily.CUBIC;
     }
 
-//    public FluidProperties getFluidProperties(IFlagType<?> flag){
-//        return FluidProperties.create().slopeFindDistance(2).dropOff(2).density(15).lightLevel(15).overlay(new ResourceLocation(IGLib.MODID, "block/fluid/default_still")).tintColor(getColor(flag)).build(new ResourceLocation(IGLib.MODID, "block/fluid/default_still"));
-//    }
+    public TagKey<Item> getItemTag(IFlagType<ItemCategoryFlags> itemFlag)
+    {
+        // Override for block items
+        try
+        {
+            EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
+            IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+
+            switch(itemFlag.getValue())
+            {
+                case INGOT ->
+                {
+                    return ieMetalTags.ingot;
+                }
+                case DUST ->
+                {
+                    return ieMetalTags.dust;
+                }
+                case NUGGET ->
+                {
+                    return ieMetalTags.nugget;
+                }
+                case PLATE ->
+                {
+                    return ieMetalTags.plate;
+                }
+            }
+        } catch(Exception ignored){};
+
+        HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(itemFlag);
+        LinkedHashSet<GeologyMaterial> material_set = new LinkedHashSet<>(Collections.singletonList(this));
+        String key = IGTags.getWrapFromSet(material_set);
+        IGLib.IG_LOGGER.info("Getting Tag: " + key);
+        return data_map.get(key);
+    }
+
+    public FluidType.Properties getFluidProperties(IFlagType<?> flag){
+        return FluidType.Properties.create().adjacentPathType(BlockPathTypes.LAVA).density(15).lightLevel(15).supportsBoating(false).canPushEntity(true).descriptionId("fluid.immersivegeology.fluid");
+    }
+
+    public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
+    {
+        GeologyMaterial material = this;
+        return new IClientFluidTypeExtensions()
+        {
+            @Override
+            public int getTintColor()
+            {
+                return material.getColor(flag);
+            }
+
+            @Override
+            public ResourceLocation getStillTexture()
+            {
+                return new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture()
+            {
+                return new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+            }
+
+            @Override
+            public @Nullable ResourceLocation getOverlayTexture()
+            {
+                return new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+            }
+
+
+        };
+    }
 }

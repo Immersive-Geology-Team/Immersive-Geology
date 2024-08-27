@@ -45,6 +45,11 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
 
     public String getTagPrefix()
     {
-        return name().toLowerCase() + "s";
+        switch(this){
+            case INGOT,DUST,GEAR,NUGGET,PLATE,ROD:
+                return "s";
+            default:
+                return "";
+        }
     }
 }

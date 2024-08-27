@@ -13,6 +13,12 @@ public enum ModFlags implements IFlagType<ModFlags> {
         return this;
     }
 
+    @Override
+    public String getTagPrefix()
+    {
+        return "";
+    }
+
     public static boolean isLoaded(IFlagType<?> flag){
         return DatagenModLoader.isRunningDataGen() || (flag instanceof ModFlags modFlags && ModList.get().isLoaded(modFlags.getName().toLowerCase()));
     }

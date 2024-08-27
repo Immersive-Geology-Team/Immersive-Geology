@@ -45,19 +45,21 @@ import java.util.function.Function;
 
 public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, IServerTickableComponent<CoreDrillLogic.State>, IClientTickableComponent<CoreDrillLogic.State>, MBOverlayText<CoreDrillLogic.State>
 {
-    public static final BlockPos REDSTONE_IN = new BlockPos(0, 0, 0);
+    public static final BlockPos REDSTONE_IN = new BlockPos(3, 1, 8);
 
     private static final int ENERGY_CAPACITY = 64000;
     private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(
-            new CapabilityPosition(4,0,8, RelativeBlockFace.FRONT),
-            new CapabilityPosition(4,1,8, RelativeBlockFace.FRONT),
-            new CapabilityPosition(4,2,8, RelativeBlockFace.FRONT));
+            new CapabilityPosition(4,0,8, RelativeBlockFace.BACK),
+            new CapabilityPosition(4,1,8, RelativeBlockFace.BACK),
+            new CapabilityPosition(4,2,8, RelativeBlockFace.BACK));
 
     private static final MultiblockFace FLUID_OUTPUT = new MultiblockFace(8,0,3, RelativeBlockFace.LEFT);
     private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(8,0,3, RelativeBlockFace.LEFT);
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(8,0,5, RelativeBlockFace.LEFT);
 
     public static final int TANK_VOLUME = 8*FluidType.BUCKET_VOLUME;
+
+    public static final int ENERGY_CONSUMPTION_RATE = 8192; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
@@ -70,6 +72,17 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         final State state = context.getState();
         if(state.output_tank.getFluidAmount() > 0){
             drainOutputTank(state, context);
+        }
+
+        if(!state.rsState.isEnabled(context))
+        {
+            if(state.energy.getEnergyStored() > ENERGY_CONSUMPTION_RATE)
+            {
+                if(state.energy.extractEnergy(ENERGY_CONSUMPTION_RATE, true) > 0)
+                {
+                    state.energy.extractEnergy(ENERGY_CONSUMPTION_RATE, false);
+                }
+            }
         }
     }
 
@@ -174,7 +187,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             // Allows us to 'fill' it
             this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
 
-            this.energyCap = new StoredCapability<>(energy);
+            this.energyCap = new StoredCapability<>(this.energy);
             Runnable changedAndSync = () -> {
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
