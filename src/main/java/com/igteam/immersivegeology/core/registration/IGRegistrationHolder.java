@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
+import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
@@ -43,6 +44,7 @@ import net.minecraft.world.level.material.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries.Keys;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -56,13 +58,18 @@ public class IGRegistrationHolder {
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, IGLib.MODID);
     private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(Registries.FLUID, IGLib.MODID);
+    private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(Keys.FLUID_TYPES, IGLib.MODID);
+
 
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
 
+
+
     private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
     private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
     private static final HashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
+    private static final HashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new HashMap<>();
 
     public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
     private static HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
@@ -164,11 +171,18 @@ public class IGRegistrationHolder {
                         case FLUID -> {
                             String registryKey = blockCategory.getRegistryKey(material);
 
+                            // Fluid Type Registration
+                            registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
+
+                            // Still
                             registerFluid(registryKey, () -> new IGFluid.Source(material));
+
+                            // Flowing
                             registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
 
                             registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
-                            registerBlock(registryKey, () -> new LiquidBlock(() -> (FlowingFluid) getFluid.apply(registryKey + "_flowing"), BlockBehaviour.Properties.copy(Blocks.LAVA)));
+
+                            registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
                         }
                     }
                 }
@@ -239,11 +253,16 @@ public class IGRegistrationHolder {
         FLUID_REGISTRY_MAP.put(registry_name, FLUID_REGISTER.register(registry_name, fluidSupplier));
     }
 
+    public static void registerFluidType(String registry_name, Supplier<FluidType> fluidTypeSupplier)
+    {
+        FLUID_TYPE_REGISTRY_MAP.put(registry_name, FLUIDTYPE_REGISTER.register(registry_name, fluidTypeSupplier));
+    }
+
     public static void addRegistersToEventBus(final IEventBus eventBus){
         BLOCK_REGISTER.register(eventBus);
         ITEM_REGISTER.register(eventBus);
         FLUID_REGISTER.register(eventBus);
-
+        FLUIDTYPE_REGISTER.register(eventBus);
         TE_REGISTER.register(eventBus);
         TAB_REGISTER.register(eventBus);
 

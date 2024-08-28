@@ -15,10 +15,12 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fluids.FluidType;
@@ -198,7 +200,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
-        return FluidType.Properties.create().adjacentPathType(BlockPathTypes.LAVA).density(15).lightLevel(15).supportsBoating(false).canPushEntity(true).descriptionId("fluid.immersivegeology.fluid");
+        return FluidType.Properties.create().descriptionId("block.immersivegeology.molten_metal").canSwim(false).canDrown(false).pathType(BlockPathTypes.LAVA).adjacentPathType((BlockPathTypes)null).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA).lightLevel(15).density(3000).viscosity(6000).temperature(1300);
     }
 
     public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
@@ -215,19 +217,13 @@ public abstract class GeologyMaterial implements MaterialHelper {
             @Override
             public ResourceLocation getStillTexture()
             {
-                return new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
+                return new ResourceLocation(IGLib.MODID, "block/fluid/molten_still");
             }
 
             @Override
             public ResourceLocation getFlowingTexture()
             {
-                return new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
-            }
-
-            @Override
-            public @Nullable ResourceLocation getOverlayTexture()
-            {
-                return new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+                return new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow");
             }
 
 

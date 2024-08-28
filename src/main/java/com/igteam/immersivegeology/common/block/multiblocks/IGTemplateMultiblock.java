@@ -1,12 +1,19 @@
 package com.igteam.immersivegeology.common.block.multiblocks;
 
 import blusunrize.immersiveengineering.api.IEProperties;
+import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
+import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks.MultiblockManualData;
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
+import blusunrize.immersiveengineering.client.utils.BasicClientProperties;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.util.IELogger;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -19,12 +26,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.function.Consumer;
 
-public abstract class IGTemplateMultiblock  extends IETemplateMultiblock{
+
+public abstract class IGTemplateMultiblock  extends TemplateMultiblock
+{
     private final MultiblockRegistration<?> logic;
 
     public IGTemplateMultiblock(ResourceLocation loc, BlockPos masterFromOrigin, BlockPos triggerFromOrigin, BlockPos size, MultiblockRegistration<?> logic){
-        super(loc, masterFromOrigin, triggerFromOrigin, size, logic);
+        super(loc, masterFromOrigin, triggerFromOrigin, size);
         this.logic = logic;
     }
 
@@ -71,7 +83,30 @@ public abstract class IGTemplateMultiblock  extends IETemplateMultiblock{
      * @deprecated Replaced by {@link #getBlock()}
      * @return
      */
+    @Deprecated
     public Block getBaseBlock(){
         return getBlock();
+    }
+
+    public Vec3i getSize(@Nullable Level world) {
+        return this.size;
+    }
+
+    @Nonnull
+    public TemplateMultiblock.TemplateData getTemplate(@Nonnull Level world) {
+        TemplateMultiblock.TemplateData result = super.getTemplate(world);
+        Vec3i resultSize = result.template().getSize();
+        Preconditions.checkState(resultSize.equals(this.size), "Wrong template size for multiblock %s, template size: %s", this.getTemplateLocation(), resultSize);
+        return result;
+    }
+
+    protected void prepareBlockForDisassembly(Level world, BlockPos pos) {
+        BlockEntity be = world.getBlockEntity(pos);
+        if (be instanceof IMultiblockBE<?> multiblockBE) {
+            multiblockBE.getHelper().markDisassembling();
+        } else if (be != null) {
+            IELogger.logger.error("Expected multiblock TE at {}, got {}", pos, be);
+        }
+
     }
 }

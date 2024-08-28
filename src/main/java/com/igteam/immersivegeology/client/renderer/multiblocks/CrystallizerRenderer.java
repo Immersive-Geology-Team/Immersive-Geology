@@ -7,11 +7,13 @@ import blusunrize.immersiveengineering.client.render.tile.IEBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import org.joml.Quaternionf;
 
-public class CrystallizerRenderer extends IEBlockEntityRenderer<MultiblockBlockEntityMaster<CrystallizerLogic.State>> {
+public class CrystallizerRenderer implements BlockEntityRenderer<MultiblockBlockEntityMaster<CrystallizerLogic.State>>
+{
 
     public CrystallizerRenderer(){};
 

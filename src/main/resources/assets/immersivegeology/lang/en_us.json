@@ -59,7 +59,7 @@
   "item.immersivegeology.dirty_crushed_ore": "Dirty Crushed %s Ore",
   "item.immersivegeology.crushed_ore": "Crushed %s Ore",
   "item.immersivegeology.cut_crystal": "Cut %s Crystal",
-  "item.immersivegeology.bucket": "Bucket of Molten %s %s",
+  "item.immersivegeology.bucket": "Bucket of Molten %s",
   "item.immersivegeology.flask": "Flask of %s %s",
   "item.immersivegeology.empty_flask": "Empty %s Flask",
   "item.immersivegeology.ingot": "%s Ingot",
@@ -142,6 +142,8 @@
   "fluid.immersivegeology.fluid": "%s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
+
+  "block.immersivegeology.molten_metal": "Molten %s",
 
   "material.immersivegeology.sulphur_dioxide": "Sulphur Dioxide",
   "material.immersivegeology.vanilla": "Stone",

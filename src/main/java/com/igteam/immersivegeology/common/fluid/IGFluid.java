@@ -6,7 +6,7 @@
  * Details can be found in the license file in the root folder of this project
  */
 
-package com.igteam.immersivegeology.common.block;
+package com.igteam.immersivegeology.common.fluid;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
@@ -20,7 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -38,7 +37,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.LavaFluid;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -46,6 +44,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -103,7 +102,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	@Override
 	public Block getBlock() {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_fluid_block");
+		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_block");
 	}
 
 	@Override
@@ -155,28 +154,13 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public boolean canConvertToSource(FluidState state, Level level, BlockPos pos)
 	{
-		return level.getGameRules().getBoolean(GameRules.RULE_LAVA_SOURCE_CONVERSION);
+		return false;
 	}
 
 	@Override
 	protected boolean canConvertToSource(Level level)
 	{
-		return level.getGameRules().getBoolean(GameRules.RULE_LAVA_SOURCE_CONVERSION);
-	}
-
-	@Override
-	protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState)
-	{
-		if (pDirection == Direction.DOWN) {
-			if (pBlockState.getBlock() instanceof LiquidBlock) {
-				pLevel.setBlock(pPos, ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, pPos, pPos, Blocks.STONE.defaultBlockState()), 3);
-			}
-
-			this.fizz(pLevel, pPos);
-			return;
-		}
-
-		super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState);
+		return false;
 	}
 
 	@Override
@@ -212,13 +196,19 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public BlockState createLegacyBlock(FluidState pState) {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_fluid_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
+		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
 	}
 
 	@Override
-	protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction)
+	protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockReader, BlockPos pos, Fluid fluidIn, Direction direction)
 	{
-		return fluidState.getHeight(blockGetter, blockPos) >= 0.44444445F && fluid.is(FluidTags.WATER);
+		return direction==Direction.DOWN&&!isSame(fluidIn);
+	}
+
+	@Override
+	public boolean isSame(@Nonnull Fluid fluidIn)
+	{
+		return fluidIn==IGRegistrationHolder.getFluid.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)))||fluidIn==IGRegistrationHolder.getFluid.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base))+ "_flowing");
 	}
 
 	@Override
@@ -248,14 +238,14 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> pBuilder) {
 			super.createFluidStateDefinition(pBuilder);
-			pBuilder.add(new Property[]{LEVEL});
+			pBuilder.add(LEVEL);
 		}
 
-		public int getAmount(FluidState pState) {
-			return (Integer)pState.getValue(LEVEL);
+		public int getAmount(FluidState state) {
+			return state.getValue(LEVEL);
 		}
 
-		public boolean isSource(FluidState pState) {
+		public boolean isSource(@NotNull FluidState state) {
 			return false;
 		}
 	}
