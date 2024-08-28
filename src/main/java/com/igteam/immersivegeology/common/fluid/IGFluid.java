@@ -20,10 +20,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +39,7 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.LavaFluid;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidType;
@@ -78,9 +82,16 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	public @NotNull FluidType getFluidType()
 	{
 		return new FluidType(getMaterial(MaterialTexture.base).getFluidProperties()){
-			@Override
-			public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer)
-			{
+			public double motionScale(Entity entity) {
+				return entity.level().dimensionType().ultraWarm() ? 0.007 : 0.0023333333333333335;
+			}
+
+			public void setItemMovement(ItemEntity entity) {
+				Vec3 vec3 = entity.getDeltaMovement();
+				entity.setDeltaMovement(vec3.x * 0.949999988079071, vec3.y + (double)(vec3.y < 0.05999999865889549 ? 5.0E-4F : 0.0F), vec3.z * 0.949999988079071);
+			}
+
+			public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
 				consumer.accept(getMaterial(MaterialTexture.base).getFluidExtendedProperties());
 			}
 		};
@@ -92,7 +103,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	@Override
 	public Block getBlock() {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)));
+		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_fluid_block");
 	}
 
 	@Override
@@ -157,15 +168,12 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState)
 	{
 		if (pDirection == Direction.DOWN) {
-			FluidState fluidstate = pLevel.getFluidState(pPos);
-			if (this.is(FluidTags.LAVA) && fluidstate.is(FluidTags.WATER)) {
-				if (pBlockState.getBlock() instanceof LiquidBlock) {
-					pLevel.setBlock(pPos, ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, pPos, pPos, Blocks.STONE.defaultBlockState()), 3);
-				}
-
-				this.fizz(pLevel, pPos);
-				return;
+			if (pBlockState.getBlock() instanceof LiquidBlock) {
+				pLevel.setBlock(pPos, ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, pPos, pPos, Blocks.STONE.defaultBlockState()), 3);
 			}
+
+			this.fizz(pLevel, pPos);
+			return;
 		}
 
 		super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState);
@@ -204,7 +212,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public BlockState createLegacyBlock(FluidState pState) {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base))).defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
+		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_fluid_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
 	}
 
 	@Override
