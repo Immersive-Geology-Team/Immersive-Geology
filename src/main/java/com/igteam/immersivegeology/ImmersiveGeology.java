@@ -9,8 +9,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.proxy.ClientProxy;
-import com.igteam.immersivegeology.core.proxy.CommonProxy;
 import com.igteam.immersivegeology.core.registration.IGContent;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
@@ -30,11 +28,6 @@ import java.util.HashMap;
 
 @Mod(IGLib.MODID)
 public class ImmersiveGeology {
-
-    public static final CommonProxy proxy = makeProxy();
-    private static CommonProxy makeProxy(){
-        return FMLLoader.getDist() == Dist.CLIENT ? new ClientProxy() : new CommonProxy();
-    }
 
     public ImmersiveGeology() {
         IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
@@ -86,17 +79,7 @@ public class ImmersiveGeology {
     }
 
     public void setup(final FMLCommonSetupEvent event){
-        proxy.setup();
-        proxy.preInit();
 
-        // Pre init for IG Content?
-
-        proxy.preInitEnd();
-        IGContent.initialize(event);
-
-        proxy.init();
-
-        proxy.postInit();
     }
 
 }

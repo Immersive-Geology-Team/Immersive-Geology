@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.client;
 
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.proxy.ClientProxy;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.level.block.entity.BlockEntity;
