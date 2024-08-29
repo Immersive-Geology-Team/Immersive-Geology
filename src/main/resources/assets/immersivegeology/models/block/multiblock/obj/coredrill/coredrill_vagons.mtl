@@ -1,0 +1,6 @@
+# Made in Blockbench 4.10.3
+newmtl m_cd4c468b-1ebe-5cd2-a6d4-ad6c1c92aeb7
+map_Kd immersivegeology:block/multiblock/coredrill/drillesupport
+newmtl m_fd61b9ea-1a45-8a62-c0dc-54e43fd39aba
+map_Kd immersivegeology:block/multiblock/coredrill/drileee_fin_maybe
+newmtl none

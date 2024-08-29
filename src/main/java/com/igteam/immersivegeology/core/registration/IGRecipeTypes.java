@@ -1,0 +1,42 @@
+/*
+ * BluSunrize
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ */
+
+package com.igteam.immersivegeology.core.registration;
+
+import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
+
+public class IGRecipeTypes
+{
+	private static final DeferredRegister<RecipeType<?>> REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, IGLib.MODID);
+
+	public static final TypeWithClass<CoreDrillRecipe> COREDRILL = register("coredrill", CoreDrillRecipe.class);
+
+	private static <T extends Recipe<?>>
+	TypeWithClass<T> register(String name, Class<T> type)
+	{
+		RegistryObject<RecipeType<T>> regObj = REGISTER.register(name, () -> new RecipeType<>()
+		{
+		});
+		return new TypeWithClass<>(regObj, type);
+	}
+
+	public static void init()
+	{
+		REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+	}
+}

@@ -13,11 +13,14 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.fluids.IEFluid;
 import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CoreDrillShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
@@ -38,6 +41,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
+import org.stringtemplate.v4.ST;
 
 import java.util.List;
 import java.util.Set;
@@ -62,14 +66,55 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
     public static final int ENERGY_CONSUMPTION_RATE = 8192; // Per tick
 
     @Override
-    public void tickClient(IMultiblockContext<State> iMultiblockContext) {
+    public void tickClient(IMultiblockContext<State> context) {
+        final State state = context.getState();
+        if(state.renderAsActive)
+        {
+            state.drill_angle = (state.drill_angle+18f)%360;
+            state.gear_clockwise_angle = (state.gear_clockwise_angle + (3f * (state.drill_direction ? -1 : 1)) % 360);
+            state.gear_counter_clockwise_angle = (state.gear_counter_clockwise_angle - (3f * (state.drill_direction ? -1 : 1))) % 360;
+            state.drill_height = adjustHeight(state.drill_height, -3, 0, 0.03125f, state);
+        }
+    }
 
+    private float adjustHeight(float current, float min, float max, float difference, State state)
+    {
+        boolean increase = state.drill_direction;
+        if(increase)
+        {
+            if((current+difference) < max)
+            {
+                return current + difference;
+            }
+            state.drill_direction = false;
+        }
+
+        if(current-difference > min)
+        {
+            return current-difference;
+        }
+        state.drill_direction = true;
+
+        return current;
     }
 
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         // Now to force the multiblock to output fluid in the tank
         final State state = context.getState();
+
+        final boolean wasActive = state.renderAsActive;
+        state.renderAsActive = (!state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;// state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+        if(wasActive != state.renderAsActive)
+        {
+            context.requestMasterBESync();
+        }
+
+        if(state.renderAsActive)
+        {
+            //Spawn particles here I suppose
+        }
+
         if(state.output_tank.getFluidAmount() > 0){
             drainOutputTank(state, context);
         }
@@ -170,23 +215,31 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         return null;
     }
 
-    public static class State implements IMultiblockState {
+    public static class State implements IMultiblockState, ProcessContextInWorld<CoreDrillRecipe> {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
         public final FluidTank acid_tank = new FluidTank(TANK_VOLUME);
         public final FluidTank output_tank = new FluidTank(TANK_VOLUME);
+
+        private final MultiblockProcessor<CoreDrillRecipe, ProcessContextInWorld<CoreDrillRecipe>> processor;
 
         private final CapabilityReference<IFluidHandler> fluidOutput;
         private final StoredCapability<IFluidHandler> fInputCap;
         private final StoredCapability<IFluidHandler> fOutputCap;
 
         private final StoredCapability<IEnergyStorage> energyCap;
+        private float drill_angle;
+        private float gear_clockwise_angle;
+        private float gear_counter_clockwise_angle;
+        private float drill_height;
+        private boolean drill_direction = false;
+        private boolean renderAsActive;
 
         public State(IInitialMultiblockContext<State> ctx){
             // This is selected the Block connected to the output side
             // Allows us to 'fill' it
             this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
-
+            this.processor = new MultiblockProcessor<>(2048, 0, 1, ctx.getMarkDirtyRunnable(), CoreDrillRecipe.RECIPES::getById);
             this.energyCap = new StoredCapability<>(this.energy);
             Runnable changedAndSync = () -> {
                 ctx.getSyncRunnable().run();
@@ -215,12 +268,45 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         public void writeSyncNBT(CompoundTag nbt)
         {
             writeSaveNBT(nbt);
+            nbt.putBoolean("renderActive", renderAsActive);
         }
 
         @Override
         public void readSyncNBT(CompoundTag nbt)
         {
             readSaveNBT(nbt);
+            renderAsActive = nbt.getBoolean("renderActive");
+        }
+
+        public boolean shouldRenderActive()
+        {
+            return renderAsActive;
+        }
+
+        public float getDrillAngle()
+        {
+            return drill_angle;
+        }
+
+        public float getDrillHeight()
+        {
+            return drill_height;
+        }
+
+        public float getGearClockwiseAngle()
+        {
+            return gear_clockwise_angle;
+        }
+
+        public float getGearCounterClockwiseAngle()
+        {
+            return gear_counter_clockwise_angle;
+        }
+
+        @Override
+        public AveragingEnergyStorage getEnergy()
+        {
+            return energy;
         }
     }
 

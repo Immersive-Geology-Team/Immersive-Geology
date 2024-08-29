@@ -41,7 +41,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
 
     public static class State implements IMultiblockState {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(12000);
-        public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
+        public final RedstoneControl.RSState rsState = RedstoneControl.RSState.disabledByDefault();
 
 
         public State(IInitialMultiblockContext<State> context){

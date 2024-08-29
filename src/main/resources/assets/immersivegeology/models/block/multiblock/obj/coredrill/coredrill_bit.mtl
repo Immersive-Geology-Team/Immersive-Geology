@@ -1,0 +1,14 @@
+# Blender 4.2.0 MTL File: 'None'
+# www.blender.org
+
+newmtl m_a8c0180c-1f6a-8f9a-48fa-e2282b22d76e
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st2
+
+newmtl m_b394c4bc-7e2c-cbcd-364c-d8a537b5a11b
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st5
+
+newmtl m_d9db94f9-ca6e-c384-dfe8-8079f62d6c81
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st3_st4
+
+newmtl m_ffef6f5e-259e-2875-6227-f459cf8a2fbe
+map_Kd immersivegeology:block/multiblock/coredrill/drill_st1

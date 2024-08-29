@@ -1,10 +1,7 @@
 package com.igteam.immersivegeology.common.data;
 
-import com.igteam.immersivegeology.common.data.generators.IGBlockTags;
-import com.igteam.immersivegeology.common.data.generators.IGItemModelProvider;
-import com.igteam.immersivegeology.common.data.generators.IGItemTags;
+import com.igteam.immersivegeology.common.data.generators.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.common.data.generators.IGBlockStateProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -31,11 +28,13 @@ public class IGDataProvider {
         log.info("-===== Starting Data Generation for Immersive Geology =====-");
 
         if(event.includeServer()){
-            generator.addProvider(true, new IGBlockStateProvider(generator, helper));
+            IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
+            generator.addProvider(true, blockStateProvider);
             generator.addProvider(true, new IGItemModelProvider(generator, helper));
             BlockTagsProvider blockTags = new IGBlockTags(generator.getPackOutput(), lookup, helper);
             generator.addProvider(true, blockTags);
             generator.addProvider(true, new IGItemTags(generator.getPackOutput(), lookup, blockTags.contentsGetter(), helper));
+            generator.addProvider(true, new IGDynamicModelProvider(blockStateProvider, generator.getPackOutput(), helper));
         }
     }
 

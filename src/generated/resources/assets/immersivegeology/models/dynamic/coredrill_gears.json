@@ -1,0 +1,5 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill_gears.obj"
+}

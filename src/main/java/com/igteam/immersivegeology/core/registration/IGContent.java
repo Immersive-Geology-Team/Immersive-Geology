@@ -12,6 +12,7 @@ public class IGContent {
         IGMultiblockProvider.forceClassLoad();
         IGRegistrationHolder.initialize();
         IGTags.initialize();
+        IGRecipeTypes.init();
     }
 
     public static void initialize(ParallelDispatchEvent event){
