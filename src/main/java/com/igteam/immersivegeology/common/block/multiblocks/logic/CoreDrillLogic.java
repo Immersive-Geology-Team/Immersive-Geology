@@ -23,6 +23,7 @@ import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CoreDrillShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -44,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import org.stringtemplate.v4.ST;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -68,12 +70,43 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         final State state = context.getState();
+        Random rand = new Random();
         if(state.renderAsActive)
         {
-            state.drill_angle = (state.drill_angle+18f)%360;
-            state.gear_clockwise_angle = (state.gear_clockwise_angle + (3f * (state.drill_direction ? -1 : 1)) % 360);
-            state.gear_counter_clockwise_angle = (state.gear_counter_clockwise_angle - (3f * (state.drill_direction ? -1 : 1))) % 360;
-            state.drill_height = adjustHeight(state.drill_height, -3, 0, 0.03125f, state);
+            if(state.spinDown && state.spinWait == 1)
+            {
+                state.drill_angle = (state.drill_angle+state.drill_spin_rate)%360;
+                state.gear_clockwise_angle = ((state.drill_height) / 4f) * 260;
+                state.gear_counter_clockwise_angle = ((state.drill_height * -1) / 4f) * 260;
+                state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state) + (rand.nextInt(0, 100) > 15 ? rand.nextFloat() * 0.05f: 0f);
+                state.drill_shake = rand.nextInt(0, 100) > 15 ? rand.nextFloat(0, 0.01f) : 0;
+            }
+            else
+            {
+                if(state.spinWait - 1 > 0)
+                {
+                    state.spinWait--;
+                    state.drill_spin_rate = 24f * ((float) (state.spinWaitReset - state.spinWait) / state.spinWaitReset );
+                    state.drill_angle = (state.drill_angle+state.drill_spin_rate) %360;
+                    state.drill_shake = rand.nextFloat(-((float) state.spinWait/ state.spinWaitReset),(float) state.spinWait/ state.spinWaitReset) * 0.0075f;
+                } else {
+                    state.spinDown = true;
+                }
+            }
+        } else {
+            if(state.drill_spin_rate != 0)
+            {
+                state.spinWait += 1;
+                state.drill_spin_rate = 24f * (1 - ((float) state.spinWait / state.spinWaitReset));
+                state.drill_angle = (state.drill_angle+state.drill_spin_rate)%360;
+                state.drill_direction = true;
+                if(state.drill_height < -0.03125f)
+                {
+                    state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state);
+                    state.gear_clockwise_angle = ((state.drill_height)/4f)*260;
+                    state.gear_counter_clockwise_angle = ((state.drill_height*-1)/4f)*260;
+                }
+            }
         }
     }
 
@@ -228,12 +261,18 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         private final StoredCapability<IFluidHandler> fOutputCap;
 
         private final StoredCapability<IEnergyStorage> energyCap;
+
         private float drill_angle;
         private float gear_clockwise_angle;
         private float gear_counter_clockwise_angle;
         private float drill_height;
         private boolean drill_direction = false;
         private boolean renderAsActive;
+        private float drill_shake;
+        private float drill_spin_rate;
+        private boolean spinDown = false;
+        private int spinWaitReset = 260;
+        private int spinWait = spinWaitReset;
 
         public State(IInitialMultiblockContext<State> ctx){
             // This is selected the Block connected to the output side
@@ -288,6 +327,11 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             return drill_angle;
         }
 
+        public float getDrillSpeed()
+        {
+            return drill_spin_rate;
+        }
+
         public float getDrillHeight()
         {
             return drill_height;
@@ -301,6 +345,11 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         public float getGearCounterClockwiseAngle()
         {
             return gear_counter_clockwise_angle;
+        }
+
+        public float getDrillShake()
+        {
+            return drill_shake;
         }
 
         @Override

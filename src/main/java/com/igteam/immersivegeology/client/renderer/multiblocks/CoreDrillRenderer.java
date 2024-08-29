@@ -22,6 +22,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.List;
+import java.util.Random;
 
 public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntityMaster<CoreDrillLogic.State>>
 {
@@ -45,18 +46,19 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         float drill_height = state.getDrillHeight();
         float gear_angle = state.getGearClockwiseAngle();
         float counter_gear_angle = state.getGearCounterClockwiseAngle();
+        float shake = state.getDrillShake();
+        Random rand = new Random();
         Direction dir = orientation.front();
 
         poseStack.pushPose();
-            boolean active = state.shouldRenderActive();
-            float angle = state.getDrillAngle() + (active?18*pPartialTick : 0);
+            float angle = state.getDrillAngle() + (state.getDrillSpeed()*pPartialTick);
             poseStack.translate(-2.5, -1.9375 + drill_height, -2.5);
             poseStack.mulPose(new Quaternionf().rotateAxis(-angle * Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));
             renderDynamicModel(DRILL_BIT, poseStack, buffer, dir, pPackedLight, pPackedOverlay);
         poseStack.popPose();
 
         poseStack.pushPose();
-            poseStack.translate(-4.5, -7.875 + drill_height, -4.5);
+            poseStack.translate(-4.5 + shake, -7.875 + drill_height, -4.5 + shake);
             renderDynamicModel(DRILL_ENGINE, poseStack, buffer, dir, pPackedLight, pPackedOverlay);
 
             poseStack.pushPose();
