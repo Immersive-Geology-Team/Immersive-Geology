@@ -57,7 +57,7 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         poseStack.pushPose();
             float angle = state.getDrillAngle() + (state.getDrillSpeed()*pPartialTick);
             poseStack.translate(-2.5, -1.9375 + drill_height, -2.5);
-            poseStack.mulPose(new Quaternionf().rotateAxis(-angle * Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+            poseStack.mulPose(new Quaternionf().rotateAxis(angle * Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));
             renderDynamicModel(DRILL_BIT, poseStack, buffer, dir, level, pos, pPackedLight, pPackedOverlay);
         poseStack.popPose();
 
