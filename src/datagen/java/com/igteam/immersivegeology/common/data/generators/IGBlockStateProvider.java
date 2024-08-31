@@ -98,7 +98,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblock("crystallizer");
         genericmultiblock("gravityseparator");
         genericmultiblockMirror("rotarykiln");
-        genericmultiblock("coredrill");
+        genericmultiblockMirror("coredrill");
         genericmultiblockMirror("reverberation_furnace");
     }
 

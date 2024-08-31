@@ -65,7 +65,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
 
     public static final int TANK_VOLUME = 8*FluidType.BUCKET_VOLUME;
 
-    public static final int ENERGY_CONSUMPTION_RATE = 8192; // Per tick
+    public static final int ENERGY_CONSUMPTION_RATE = 12000; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -78,7 +78,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 state.drill_angle = (state.drill_angle+state.drill_spin_rate)%360;
                 state.gear_clockwise_angle = ((state.drill_height) / 4f) * 260;
                 state.gear_counter_clockwise_angle = ((state.drill_height * -1) / 4f) * 260;
-                state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state) + (rand.nextInt(0, 100) > 15 ? rand.nextFloat() * 0.05f: 0f);
+                state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state) + (rand.nextInt(0, 100) > 15 ? rand.nextFloat() * 0.025f: 0f);
                 state.drill_shake = rand.nextInt(0, 100) > 15 ? rand.nextFloat(0, 0.01f) : 0;
             }
             else
@@ -86,7 +86,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 if(state.spinWait - 1 > 0)
                 {
                     state.spinWait--;
-                    state.drill_spin_rate = 24f * ((float) (state.spinWaitReset - state.spinWait) / state.spinWaitReset );
+                    state.drill_spin_rate = 6F * ((float) (state.spinWaitReset - state.spinWait) / state.spinWaitReset ) * 2f;
                     state.drill_angle = (state.drill_angle+state.drill_spin_rate) %360;
                     state.drill_shake = rand.nextFloat(-((float) state.spinWait/ state.spinWaitReset),(float) state.spinWait/ state.spinWaitReset) * 0.0075f;
                 } else {
@@ -356,6 +356,11 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         public AveragingEnergyStorage getEnergy()
         {
             return energy;
+        }
+
+        public boolean getDrillDirection()
+        {
+            return drill_direction;
         }
     }
 

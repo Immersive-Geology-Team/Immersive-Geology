@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-29T14:33:28.145123648	Block States: immersivegeology
+// 1.20.1	2024-08-31T20:59:28.139622442	Block States: immersivegeology
 f8403c7b4738b28efcfc063ee2e4058d59877317 assets/immersivegeology/blockstates/coredrill.json
 142c6946dd9f7f309812809921eea5870a69816d assets/immersivegeology/blockstates/crystallizer.json
 9320ebee8a0ce9865e36a2de61d7690d53dfc26c assets/immersivegeology/blockstates/gravityseparator.json
@@ -1182,7 +1182,7 @@ ba2aae8d823abd9f4ea4474637ac9d2823ac15da assets/immersivegeology/blockstates/sto
 80e16c9c79974061ed9e668916634cb46f284750 assets/immersivegeology/blockstates/storage_block_vanadium.json
 28030ed9ffe1164304e60868f320e0ab36f5f8df assets/immersivegeology/blockstates/storage_block_zinc.json
 763f49a2ea6f0b6f2be15477829896aadb63ee58 assets/immersivegeology/blockstates/storage_block_zirconium.json
-8b6047e6290a9fd2e04ab122381ce795f09507e0 assets/immersivegeology/models/block/multiblock/obj/coredrill/coredrill_mirrored_split.json
+4ac2a9fed3526d754bf6bc204731d71f3953d9fa assets/immersivegeology/models/block/multiblock/obj/coredrill/coredrill_mirrored_split.json
 034826fe6cafa8a292fa55582e821a465bc24357 assets/immersivegeology/models/block/multiblock/obj/coredrill/coredrill_split.json
 ac9fd71d8121893962851cc5154ee6e3d5cf046a assets/immersivegeology/models/block/multiblock/obj/crystallizer/crystallizer_split.json
 837a5049f65c1f8a356f4be12c7f37919c71b378 assets/immersivegeology/models/block/multiblock/obj/gravityseparator/gravityseparator_mirrored_split.json

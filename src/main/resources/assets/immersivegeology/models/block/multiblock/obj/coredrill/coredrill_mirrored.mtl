@@ -1,7 +1,7 @@
 # Blender 4.2.0 MTL File: 'None'
 # www.blender.org
 
-newmtl m_a8c0180c-1f6a-8f9a-48fa-e2282b22d76e
+newmtl m_94b4196a-c089-3a69-5405-cad817ad1e54.001
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -9,9 +9,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drill_st2
+map_Kd immersivegeology:block/multiblock/coredrill/bigcable
 
-newmtl m_b394c4bc-7e2c-cbcd-364c-d8a537b5a11b
+newmtl m_a8fe57a6-e0cc-4449-9f7c-b4002403fe34.001
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -19,9 +19,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drill_st5
+map_Kd immersivegeology:block/multiblock/coredrill/common_concrete
 
-newmtl m_d9db94f9-ca6e-c384-dfe8-8079f62d6c81
+newmtl m_cd4c468b-1ebe-5cd2-a6d4-ad6c1c92aeb7.001
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -29,9 +29,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drill_st3_st4
+map_Kd immersivegeology:block/multiblock/coredrill/drillesupport
 
-newmtl m_ffef6f5e-259e-2875-6227-f459cf8a2fbe
+newmtl m_fd61b9ea-1a45-8a62-c0dc-54e43fd39aba.001
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -39,4 +39,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drill_st1
+map_Kd immersivegeology:block/multiblock/coredrill/drileee_fin_maybe

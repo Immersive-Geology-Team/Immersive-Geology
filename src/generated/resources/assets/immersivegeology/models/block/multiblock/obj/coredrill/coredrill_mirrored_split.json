@@ -2,17 +2,14 @@
   "parent": "minecraft:block/block",
   "dynamic": false,
   "inner_model": {
-    "inner_model": {
-      "parent": "minecraft:block/block",
-      "automatic_culling": false,
-      "flip_v": true,
-      "loader": "forge:obj",
-      "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill.obj",
-      "textures": {
-        "particle": "immersivegeology:block/multiblock/coredrill/common_concrete"
-      }
-    },
-    "loader": "immersiveengineering:mirror"
+    "parent": "minecraft:block/block",
+    "automatic_culling": false,
+    "flip_v": true,
+    "loader": "forge:obj",
+    "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill_mirrored.obj",
+    "textures": {
+      "particle": "immersivegeology:block/multiblock/coredrill/common_concrete"
+    }
   },
   "loader": "immersiveengineering:basic_split",
   "split_parts": [
@@ -1161,5 +1158,8 @@
       -6,
       -2
     ]
-  ]
+  ],
+  "textures": {
+    "particle": "immersivegeology:block/multiblock/coredrill/common_concrete"
+  }
 }
