@@ -12,9 +12,7 @@ The mod requires Immersive Engineering for the appropriate Minecraft Version<br/
 <a href="https://github.com/Immersive-Geology-Team/Immersive-Geology/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/Immersive-Geology-Team/Immersive-Geology/forge-1.20.1" /></a>
  
-<br />
 **This mod is in development and not all features have been implemented**
-<br />
 
 If you want to help us out, you can donate with Liberapay!<br>
 <noscript><a href="https://liberapay.com/Immersive-Geology/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
