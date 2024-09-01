@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
+import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -34,6 +35,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -54,17 +56,16 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static com.igteam.immersivegeology.client.menu.IGItemGroup.selectedGroup;
+
 public class IGRegistrationHolder {
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, IGLib.MODID);
     private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(Registries.FLUID, IGLib.MODID);
     private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(Keys.FLUID_TYPES, IGLib.MODID);
 
-
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
-
-
 
     private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
     private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
@@ -72,7 +73,7 @@ public class IGRegistrationHolder {
     private static final HashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new HashMap<>();
 
     public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
-    private static HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
+    private static final HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
     private static <T extends MultiblockHandler.IMultiblock>
     T registerMultiblock(T multiblock) {
         MultiblockHandler.registerMultiblock(multiblock);
@@ -88,8 +89,43 @@ public class IGRegistrationHolder {
     public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new IGItemGroup.Builder(CreativeModeTab.Row.TOP, 0)
             .icon(IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt))::getDefaultInstance)
             .title(Component.translatable("itemGroup.immersivegeology"))
-            .displayItems(CreativeMenuHandler::fillIGTab)
+            .displayItems(IGRegistrationHolder::fillIGTab)
             .build());
+
+    private static void fillIGTab(IGItemGroup.ItemDisplayParameters parms, IGItemGroup.Output out)
+    {
+        HashMap<IFlagType<?>, ArrayList<Item>> itemMap = new HashMap<>();
+        for (Item item : IGRegistrationHolder.getIGItems()) {
+            if(item instanceof IGFlagItem type) {
+                IFlagType<?> pattern = type.getFlag();
+                if(type.getSubGroup() == selectedGroup) {
+                    if (itemMap.containsKey(pattern)) {
+                        ArrayList<Item> list = itemMap.get(pattern);
+                        list.add(item);
+                        itemMap.replace(pattern, list);
+                    } else {
+                        ArrayList<Item> list = new ArrayList<>();
+                        list.add(item);
+                        itemMap.put(pattern, list);
+                    }
+                }
+            }
+        }
+
+        ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
+        allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
+
+        for (IFlagType<?> pattern : allPatternList)
+        {
+            if(itemMap.containsKey(pattern)){
+                ArrayList<Item> list = itemMap.get(pattern);
+                for (Item item : list) {
+                    out.accept(new ItemStack(item));
+                }
+            }
+        }
+    }
+
 
     private static final List<Consumer<IEventBus>> MOD_BUS_CALLBACKS = new ArrayList<>();
 
@@ -148,7 +184,7 @@ public class IGRegistrationHolder {
                                     String registryKey = blockCategory.getRegistryKey(material, base, richness);
                                     Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material, richness);
                                     registerBlock(registryKey, blockProvider);
-                                    registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType)getBlock.apply(registryKey)));
+                                    registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                                 }
                             }
                         }

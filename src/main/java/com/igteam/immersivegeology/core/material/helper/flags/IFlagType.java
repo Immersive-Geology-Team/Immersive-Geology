@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
+import com.igteam.immersivegeology.client.IGClientRenderHandler.RenderTypeSkeleton;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -51,4 +52,6 @@ public interface IFlagType<T extends Enum<T>> {
     default String getName() {
         return getValue().name().toLowerCase();
     }
+
+	default RenderTypeSkeleton getRenderType() {return RenderTypeSkeleton.SOLID;};
 }

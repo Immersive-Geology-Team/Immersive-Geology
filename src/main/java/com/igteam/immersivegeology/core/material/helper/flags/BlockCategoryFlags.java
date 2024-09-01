@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
+import com.igteam.immersivegeology.client.IGClientRenderHandler.RenderTypeSkeleton;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 
 public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
@@ -32,5 +33,12 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     @Override
     public ItemSubGroup getSubGroup() {
         return ItemSubGroup.values()[groupOrdinal];
+    }
+
+    @Override
+    public RenderTypeSkeleton getRenderType()
+    {
+        if(this == ORE_BLOCK) return RenderTypeSkeleton.CUTOUT_MIPPED;
+        return IFlagType.super.getRenderType();
     }
 }

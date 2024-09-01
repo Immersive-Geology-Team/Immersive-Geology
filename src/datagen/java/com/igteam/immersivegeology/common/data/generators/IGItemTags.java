@@ -19,7 +19,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +47,9 @@ public class IGItemTags extends ItemTagsProvider
 					if(category.getValue() instanceof ItemCategoryFlags itemFlag)
 					{
 						Item item = material.instance().getItem(itemFlag);
-						if(item != null) {
+						// We use Cookie and Cake in cases where Items do not return a valid value.
+						assert item != null;
+						if(!(item.equals(Items.COOKIE) || item.equals(Blocks.CAKE.asItem()))) {
 							TagKey<Item> item_key = material.getItemTag(itemFlag);
 							tag(item_key).add(item);
 						}

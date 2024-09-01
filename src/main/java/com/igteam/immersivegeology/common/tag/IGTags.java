@@ -36,7 +36,7 @@ public class IGTags
 
 			for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 			{
-				if(materialInterface.hasFlag(itemFlag)){
+				if(materialInterface.hasFlag(itemFlag)) {
 					createWrapperForCategory(itemFlag, materialInterface.instance());
 				}
 			}

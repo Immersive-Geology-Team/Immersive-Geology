@@ -20,6 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
@@ -72,40 +74,6 @@ public class CreativeMenuHandler {
                         button.active = false;
                         button.visible = false;
                     });
-                }
-            }
-        }
-    }
-
-    public static void fillIGTab(IGItemGroup.ItemDisplayParameters parms, IGItemGroup.Output out)
-    {
-        HashMap<IFlagType<?>, ArrayList<Item>> itemMap = new HashMap<>();
-        for (Item item : IGRegistrationHolder.getIGItems()) {
-            if(item instanceof IGFlagItem type) {
-                IFlagType<?> pattern = type.getFlag();
-                if(type.getSubGroup() == selectedGroup) {
-                    if (itemMap.containsKey(pattern)) {
-                        ArrayList<Item> list = itemMap.get(pattern);
-                        list.add(item);
-                        itemMap.replace(pattern, list);
-                    } else {
-                        ArrayList<Item> list = new ArrayList<>();
-                        list.add(item);
-                        itemMap.put(pattern, list);
-                    }
-                }
-            }
-        }
-
-        ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
-        allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
-
-        for (IFlagType<?> pattern : allPatternList)
-        {
-            if(itemMap.containsKey(pattern)){
-                ArrayList<Item> list = itemMap.get(pattern);
-                for (Item item : list) {
-                    out.accept(new ItemStack(item));
                 }
             }
         }

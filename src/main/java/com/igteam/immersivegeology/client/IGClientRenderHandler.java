@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class IGClientRenderHandler implements ItemColor, BlockColor {
     // Handles, IG Block and Item Tint Colors, Render Layering and Special Renders
@@ -44,8 +45,9 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         }
 
         for(Block b : IGRegistrationHolder.getBlockRegistryMap().values().stream().map(RegistryObject::get).toList()){
-            if(b instanceof IGBlockType){
+            if(b instanceof IGBlockType igBlock){
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
+                setRenderType(b, igBlock.getFlag().getRenderType());
             }
         }
 
@@ -64,8 +66,6 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         for(Block b : mapping.keySet()) {
             ItemBlockRenderTypes.setRenderLayer(b, renderTypes.get(mapping.get(b)));
         }
-
-        ItemBlockRenderTypes.setRenderLayer(IGRegistrationHolder.getMB("crystallizer").block().get(), RenderType.cutoutMipped());
 
         inheritances.clear();
         mapping.clear();
