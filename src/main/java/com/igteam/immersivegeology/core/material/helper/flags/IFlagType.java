@@ -38,11 +38,31 @@ public interface IFlagType<T extends Enum<T>> {
     }
 
     default String getRegistryKey(MaterialInterface<?> ore, MaterialInterface<?> stone, OreRichness richness) {
-        return (richness.name().toLowerCase() + "_" + getRegistryKey(ore.instance(), stone.instance()));
+        String prefix = "";
+
+        for(ModFlags modflag : ModFlags.values())
+        {
+            if(stone.hasFlag(modflag))
+            {
+                prefix = modflag.name().toLowerCase() + "_";
+            }
+        }
+
+        return prefix + (richness.name().toLowerCase() + "_" + getRegistryKey(ore.instance(), stone.instance()));
     }
 
     default String getRegistryKey(MaterialHelper ore, MaterialInterface<?> stone, OreRichness richness) {
-        return (richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone.instance()));
+        String prefix = "";
+
+        for(ModFlags modflag : ModFlags.values())
+        {
+            if(stone.hasFlag(modflag))
+            {
+                prefix = modflag.name().toLowerCase() + "_";
+            }
+        }
+
+        return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone.instance()));
     }
 
     default ItemSubGroup getSubGroup() {

@@ -5,7 +5,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.Function;
 
-public class MaterialMoonStone extends MaterialAdAstraEarthStone
+public class MaterialMoonStone extends MaterialAdAstraStone
 {
 
     public MaterialMoonStone() {

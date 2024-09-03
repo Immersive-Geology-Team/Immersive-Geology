@@ -45,8 +45,6 @@ public interface MaterialHelper {
         }
 
         if(getBlockRegistryMap().containsKey(flag.getRegistryKey(this))) {
-
-
             return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this)).asItem();
         }
 

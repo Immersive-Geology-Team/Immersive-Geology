@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialAndesite;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialDiorite;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
+import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
@@ -36,11 +37,11 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
 
 
     //===== Minecraft Stones =====\\
-    //Stone(new MaterialVanilla()),
-    //Deepslate(new MaterialDeepslate()),
-    //Andesite(new MaterialAndesite()),
-    //Diorite(new MaterialDiorite()),
-    //Granite(new MaterialGranite()),
+    MCStone(new MaterialVanilla()),
+    MCDeepslate(new MaterialMCDeepslate()),
+    MCAndesite(new MaterialMCAndesite()),
+    MCDiorite(new MaterialMCDiorite()),
+    MCGranite(new MaterialMCGranite()),
 
     //===== Minecraft Sands =====\\
     //Sand(new MaterialSand()),

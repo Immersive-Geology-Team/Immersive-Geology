@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/ore_block/poor/tfc_poor_ore_block_cuprite_chalk"
+    }
+  }
+}

@@ -126,7 +126,6 @@ public class IGRegistrationHolder {
         }
     }
 
-
     private static final List<Consumer<IEventBus>> MOD_BUS_CALLBACKS = new ArrayList<>();
 
     private static boolean checkModFlagsForMaterial(StoneEnum stoneType, GeologyMaterial ore)

@@ -6,7 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.function.Function;
 
-public class MaterialGlacioStone extends MaterialAdAstraEarthStone
+public class MaterialGlacioStone extends MaterialAdAstraStone
 {
 
     public MaterialGlacioStone() {
