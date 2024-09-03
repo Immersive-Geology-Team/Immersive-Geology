@@ -95,6 +95,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
             }
         }
 
+        // All Multiblock Data generation code has been copied from the Immersive Engineering Codebase
+        // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
+        // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         genericmultiblock("crystallizer");
         genericmultiblock("gravityseparator");
         genericmultiblockMirror("rotarykiln");
@@ -144,17 +147,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                                 (ConfiguredModel.builder().modelFile(doubleModel).uvLock(true).build()));
 
     }
-
-//    private void crystallizer() {
-//        IGLib.IG_LOGGER.info("Generating Crystallizer Multiblock Model Data");
-//        createMultiblock(innerObj("block/multiblock/obj/crystallizer/crystallizer.obj"), IGRegistrationHolder.getMBTemplate.apply("crystallizer"));
-//    }
-//
-//    private void gravityseparator() {
-//        IGLib.IG_LOGGER.info("Generating Gravity Multiblock Model Data");
-//        createMultiblock(innerObj("block/multiblock/obj/gravityseparator/gravityseparator.obj"), IGRegistrationHolder.getMBTemplate.apply("gravityseparator"));
-//    }
-
+    
     private void genericmultiblock(String registry_name)
     {
         IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] Multiblock Model Data");
