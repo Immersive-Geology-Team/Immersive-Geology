@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -229,4 +230,17 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
         };
     }
+
+	public boolean checkLoadedModFlags()
+	{
+        boolean check = true;
+        for(ModFlags mflag : ModFlags.values())
+        {
+            if(hasFlag(mflag) &! mflag.isLoaded())
+            {
+                check = false;
+            }
+        }
+        return check;
+	}
 }

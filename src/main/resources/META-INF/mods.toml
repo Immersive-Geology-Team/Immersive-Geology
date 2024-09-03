@@ -18,7 +18,7 @@ credits = "All the great other Git Contributors"
 [[dependencies.immersivegeology]]
 modId="forge"
 mandatory=true
-versionRange="[${forge_version},)"
+versionRange="[47.1.54,)"
 ordering="NONE"
 side="BOTH"
 

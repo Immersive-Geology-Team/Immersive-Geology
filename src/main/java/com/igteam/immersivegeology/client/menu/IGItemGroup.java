@@ -124,8 +124,7 @@ public class IGItemGroup extends CreativeModeTab {
         public Builder(Row pRow, int pColumn)
         {
             super(pRow, pColumn);
-            // Use an access transformer to allow us to ensure our custom menu tab loads
-            tabFactory = IGItemGroup::new;
+            withTabFactory(IGItemGroup::new);
         }
     }
 }

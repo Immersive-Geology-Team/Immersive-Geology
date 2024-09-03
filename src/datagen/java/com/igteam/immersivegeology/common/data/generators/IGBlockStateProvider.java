@@ -324,7 +324,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 if(file_test)
                 {
                     baseModel.textures.put("base", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()+"_top").toString());
-                } else {
+                }
+                else
+                {
                     baseModel.textures.put("base", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()).toString());
                 }
             } else {

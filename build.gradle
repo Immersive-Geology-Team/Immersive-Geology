@@ -17,7 +17,7 @@ group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/gui
 archivesBaseName = 'ImmersiveGeology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-jar.enabled = false
+jar.enabled = true
 
 sourceSets {
     main {
@@ -233,7 +233,7 @@ task signJar(type: SignJar) {
 build.dependsOn signJar
 
 afterEvaluate {
-    reobfJar.enabled = false
+    reobfJar.enabled = true
 }
 
 task datagenJar(type: Jar, dependsOn: datagenClasses) {

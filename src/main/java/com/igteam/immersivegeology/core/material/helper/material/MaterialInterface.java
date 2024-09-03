@@ -55,4 +55,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default FluidType.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
 
     default IClientFluidTypeExtensions getFluidExtendedProperties() {return instance().getFluidExtendedProperties(BlockCategoryFlags.FLUID);};
+
+	default boolean checkLoadedModFlags() {return instance().checkLoadedModFlags();};
 }

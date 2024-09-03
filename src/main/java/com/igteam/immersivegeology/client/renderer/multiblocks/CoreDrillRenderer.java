@@ -117,8 +117,11 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
         rotateForFacing(matrix, facing);
 
-        // TODO Hook into game render setting to use fancy or fast TESR
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, level, pos, false, 0xF0F0F0, light);
+        // TODO Confirm if we can use a hardcoded value.
+        // Overlay only contains a few bits of info (0xA0000) so we need to format this into something that we can use
+        // This calculation creates '0xA0A0A0' which is about right for the color we need.
+        int overlayCol = ((overlay | (overlay >> 8) | (overlay >> 16)) << 4);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, level, pos, false, overlayCol, light);
         matrix.popPose();
     }
 

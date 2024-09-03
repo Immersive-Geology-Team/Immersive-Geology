@@ -19,7 +19,7 @@ public enum ModFlags implements IFlagType<ModFlags> {
         return "";
     }
 
-    public static boolean isLoaded(IFlagType<?> flag){
-        return DatagenModLoader.isRunningDataGen() || (flag instanceof ModFlags modFlags && ModList.get().isLoaded(modFlags.getName().toLowerCase()));
+    public boolean isLoaded(){
+        return ModList.get().isLoaded(getName().toLowerCase());
     }
 }

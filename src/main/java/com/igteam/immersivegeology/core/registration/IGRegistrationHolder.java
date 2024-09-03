@@ -150,7 +150,7 @@ public class IGRegistrationHolder {
 
         Set<ModFlags> intersection = new HashSet<>(stoneModFlags);
         intersection.retainAll(oreModFlags);
-        IGLib.IG_LOGGER.info("[{} {}]Retained Flags for {}, {}: Generate? {} intersection [{}]", stoneType.getName(), ore.getName(), stoneModFlags, oreModFlags, intersection.isEmpty(), intersection);
+        //IGLib.IG_LOGGER.info("[{} {}]Retained Flags for {}, {}: Generate? {} intersection [{}]", stoneType.getName(), ore.getName(), stoneModFlags, oreModFlags, intersection.isEmpty(), intersection);
         return intersection.isEmpty();
     }
 
@@ -160,12 +160,10 @@ public class IGRegistrationHolder {
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
-                if(Arrays.stream(ModFlags.values()).anyMatch(material.getFlags()::contains) && material.getFlags().stream().noneMatch(ModFlags::isLoaded)) continue;
-
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
                         case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK -> {
-                            if(material.getFlags().contains(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION) || !material.checkLoadedModFlags()) continue;
 
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
@@ -179,6 +177,8 @@ public class IGRegistrationHolder {
                                 if(!base.hasFlag(MaterialFlags.IS_ORE_BEARING)) continue;
                                 if(!material.instance().acceptableStoneType(base.instance())) continue;
                                 if(!checkModFlagsForMaterial(base, material.instance())) continue;
+                                if(!base.checkLoadedModFlags()) continue;
+
                                 // After all checks, now we can generate the different ore levels
                                 for(OreRichness richness : OreRichness.values()){
                                     String registryKey = blockCategory.getRegistryKey(material, base, richness);
@@ -189,14 +189,14 @@ public class IGRegistrationHolder {
                             }
                         }
                         case SLAB -> {
-                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION) || !material.checkLoadedModFlags()) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case STAIRS -> {
-                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+                            if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION) || !material.checkLoadedModFlags()) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             // A tad dirty of a hack, but this should cover 99% of cases for stairs at least
                             boolean isSheetmetal = material.getFlags().contains(BlockCategoryFlags.SHEETMETAL_BLOCK);
@@ -231,7 +231,6 @@ public class IGRegistrationHolder {
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericOreItem(itemCategoryFlags, material));
                         }
                         case INGOT, PLATE, CRYSTAL, DUST, COMPOUND_DUST, CLAY, CRUSHED_ORE, DIRTY_CRUSHED_ORE, GEAR, SLAG, ROD, WIRE, NUGGET, METAL_OXIDE -> {
-
                             if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material));
                         }
