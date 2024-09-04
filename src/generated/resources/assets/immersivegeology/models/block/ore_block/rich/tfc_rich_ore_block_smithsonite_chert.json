@@ -1,8 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_sedimentary",
   "textures": {
-    "base": "tfc:block/rock/raw/chert",
     "ore": "immersivegeology:block/greyscale/rock/ore_bearing/sedimentary/sedimentary_rich",
-    "sided": "tfc:block/rock/raw/chert"
+    "sided": "tfc:block/rock/raw/chert",
+    "top": "tfc:block/rock/raw/chert"
   }
 }

@@ -35,6 +35,7 @@ public class IGDataProvider {
             generator.addProvider(true, blockTags);
             generator.addProvider(true, new IGItemTags(generator.getPackOutput(), lookup, blockTags.contentsGetter(), helper));
             generator.addProvider(true, new IGDynamicModelProvider(blockStateProvider, generator.getPackOutput(), helper));
+            generator.addProvider(true, new IGRecipes(generator.getPackOutput()));
         }
     }
 

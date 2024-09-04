@@ -4,8 +4,10 @@ import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fml.ModList;
 
 public enum ModFlags implements IFlagType<ModFlags> {
+    MINECRAFT,
     BEYOND_EARTH,
     AD_ASTRA,
+    IMMERSIVEENGINEERING,
     TFC;
 
     @Override
@@ -20,6 +22,6 @@ public enum ModFlags implements IFlagType<ModFlags> {
     }
 
     public boolean isLoaded(){
-        return DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase());
+        return this.equals(MINECRAFT) || DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase());
     }
 }

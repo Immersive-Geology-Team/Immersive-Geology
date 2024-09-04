@@ -4,7 +4,9 @@ import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,6 +53,12 @@ public interface MaterialHelper {
         IGLib.IG_LOGGER.error("Attempting to get a missing block? {}", flag.getRegistryKey(this));
         return Items.CAKE;
     }
+
+
+    void addExistingFlag(ModFlags m, ItemCategoryFlags... f);
+    void addExistingFlag(ModFlags m, BlockCategoryFlags... f);
+
+    boolean checkExistingImplementation(IFlagType<?> h);
 
     String getName();
 }

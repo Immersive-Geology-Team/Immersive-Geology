@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 1000,
+  "input": {
+    "amount": 1000,
+    "tag": "minecraft:water"
+  },
+  "result": {
+    "tag": "forge:crystal/aluminium"
+  },
+  "time": 100
+}

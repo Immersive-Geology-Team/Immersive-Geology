@@ -1,8 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_sedimentary",
   "textures": {
-    "base": "tfc:block/rock/raw/claystone",
     "ore": "immersivegeology:block/greyscale/rock/ore_bearing/sedimentary/sedimentary_poor",
-    "sided": "tfc:block/rock/raw/claystone"
+    "sided": "tfc:block/rock/raw/claystone",
+    "top": "tfc:block/rock/raw/claystone_top"
   }
 }

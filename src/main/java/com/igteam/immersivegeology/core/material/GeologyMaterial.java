@@ -7,13 +7,9 @@ import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -25,7 +21,6 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fluids.FluidType;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -233,14 +228,60 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
 	public boolean checkLoadedModFlags()
 	{
-        boolean check = true;
         for(ModFlags mflag : ModFlags.values())
         {
-            if(hasFlag(mflag) &! mflag.isLoaded())
+            if(hasFlag(mflag))
             {
-                check = false;
+                if(!mflag.isLoaded()) return false;
+                return hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION);
             }
         }
-        return check;
+
+        return true;
 	}
+
+    private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> EXISTING_IMPLEMENTATION_MAP = new HashMap<>();
+
+    public Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> getExistingImplementationMap()
+    {
+        return EXISTING_IMPLEMENTATION_MAP;
+    }
+
+    @Override
+    public boolean checkExistingImplementation(IFlagType<?> h)
+    {
+        for(ModFlags m : ModFlags.values())
+        {
+            if(m.isLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m)) {
+                if(EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h)) return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addExistingFlag(ModFlags m, ItemCategoryFlags... f){
+        if(EXISTING_IMPLEMENTATION_MAP.containsKey(m))
+        {
+            for(ItemCategoryFlags flag : f) EXISTING_IMPLEMENTATION_MAP.get(m).put(flag, this);
+            return;
+        }
+
+        HashMap<IFlagType<?>, MaterialHelper> map = new HashMap<>();
+        for(ItemCategoryFlags flag : f) map.put(flag, this);
+        EXISTING_IMPLEMENTATION_MAP.put(m, map);
+    }
+
+    @Override
+    public void addExistingFlag(ModFlags m, BlockCategoryFlags... f){
+        if(EXISTING_IMPLEMENTATION_MAP.containsKey(m))
+        {
+            for(BlockCategoryFlags flag : f) EXISTING_IMPLEMENTATION_MAP.get(m).put(flag, this);
+            return;
+        }
+
+        HashMap<IFlagType<?>, MaterialHelper> map = new HashMap<>();
+        for(BlockCategoryFlags flag : f) map.put(flag, this);
+        EXISTING_IMPLEMENTATION_MAP.put(m, map);
+    }
 }
