@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cookie"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersivegeology:blocks/ad_astra_rich_ore_block_gold_venus_stone"
+}

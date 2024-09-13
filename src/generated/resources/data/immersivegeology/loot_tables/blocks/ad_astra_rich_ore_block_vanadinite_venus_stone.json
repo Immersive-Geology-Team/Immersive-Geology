@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:rich_ore_vanadinite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersivegeology:blocks/ad_astra_rich_ore_block_vanadinite_venus_stone"
+}

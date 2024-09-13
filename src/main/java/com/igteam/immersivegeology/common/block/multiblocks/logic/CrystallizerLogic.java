@@ -58,7 +58,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State>, IClientTickableComponent<CrystallizerLogic.State> {
+public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(0, 1, 1);
 
     private static final int ENERGY_CAPACITY = 16000;
@@ -69,19 +69,14 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 
     public static final int TANK_VOLUME = 4 *FluidType.BUCKET_VOLUME;
-    public static final int ENERGY_CONSUMPTION_RATE =  2048;
-
-    @Override
-    public void tickClient(IMultiblockContext<State> iMultiblockContext) {
-
-    }
 
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
+        final int tank_amount = state.tank.getFluidAmount();
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         tryRunRecipe(state, context.getLevel().getRawLevel());
-        if(state.processor.getQueueSize() > 0) context.requestMasterBESync();
+        if(tank_amount != state.tank.getFluidAmount()) context.requestMasterBESync();
     }
 
     private void tryRunRecipe(State state, Level level)
@@ -208,10 +203,11 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         {
             try {
                 CrystallizerRecipe recipe = process.getRecipe(level);
-				assert recipe!=null;
                 tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
-				recipe.getItemOutputs().forEach(o -> Utils.insertStackIntoInventory(this.output, o, false));
-            } catch(Exception ignored){};
+            } catch(Exception error)
+            {
+                IGLib.IG_LOGGER.error("Error: {}", error.getMessage());
+            }
         }
 
         @Override

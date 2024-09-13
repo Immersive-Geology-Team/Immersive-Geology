@@ -197,14 +197,14 @@ public class IGRegistrationHolder {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
 
-                            // Fluid Type Registration
-                            registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
-
                             // Still
                             registerFluid(registryKey, () -> new IGFluid.Source(material));
 
                             // Flowing
                             registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
+
+                            // Fluid Type Registration
+                            registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
 
                             registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
 

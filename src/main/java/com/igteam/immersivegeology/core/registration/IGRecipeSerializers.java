@@ -9,7 +9,9 @@
 package com.igteam.immersivegeology.core.registration;
 
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.CrystallizerRecipeSerializer;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.GravitySeparatorRecipeSerializer;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +23,7 @@ public class IGRecipeSerializers
 
 	static {
 		CrystallizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crystallizer", CrystallizerRecipeSerializer::new);
+		GravitySeparatorRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("gravityseparator", GravitySeparatorRecipeSerializer::new);
 	}
 
 }

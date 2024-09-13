@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -21,6 +22,7 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fluids.FluidType;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -213,16 +215,20 @@ public abstract class GeologyMaterial implements MaterialHelper {
             @Override
             public ResourceLocation getStillTexture()
             {
-                return new ResourceLocation(IGLib.MODID, "block/fluid/molten_still");
+                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
             }
 
             @Override
             public ResourceLocation getFlowingTexture()
             {
-                return new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow");
+                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
             }
 
-
+            @Override
+            public @Nullable ResourceLocation getOverlayTexture()
+            {
+                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+            }
         };
     }
 

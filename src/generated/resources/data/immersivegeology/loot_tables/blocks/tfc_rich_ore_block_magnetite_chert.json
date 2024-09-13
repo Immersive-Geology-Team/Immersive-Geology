@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:rich_ore_magnetite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersivegeology:blocks/tfc_rich_ore_block_magnetite_chert"
+}

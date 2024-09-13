@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
@@ -138,7 +139,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	protected ParticleOptions getDripParticle()
 	{
-		return ParticleTypes.DRIPPING_LAVA;
+		return this.getMaterial(MaterialTexture.base).hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? ParticleTypes.DRIPPING_LAVA : ParticleTypes.DRIPPING_WATER;
 	}
 
 	private void fizz(LevelAccessor pLevel, BlockPos pPos) {
@@ -178,7 +179,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public Optional<SoundEvent> getPickupSound()
 	{
-		return Optional.of(SoundEvents.BUCKET_EMPTY_LAVA);
+		return this.getMaterial(MaterialTexture.base).hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? Optional.of(SoundEvents.BUCKET_EMPTY_LAVA) : Optional.of(SoundEvents.BUCKET_EMPTY);
 	}
 
 	@Override

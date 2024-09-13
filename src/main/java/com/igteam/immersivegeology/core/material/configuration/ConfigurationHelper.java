@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
 import java.util.ArrayList;
 import java.util.List;

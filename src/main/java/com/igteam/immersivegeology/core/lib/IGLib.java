@@ -1,9 +1,6 @@
 package com.igteam.immersivegeology.core.lib;
 
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.logging.LogUtils;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +27,7 @@ public class IGLib {
         list.addAll(List.of(MetalEnum.values()));
         list.addAll(List.of(MineralEnum.values()));
         list.addAll(List.of(MiscEnum.values()));
+        list.addAll(List.of(ChemicalEnum.values()));
 
         return list;
     }

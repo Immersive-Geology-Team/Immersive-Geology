@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:normal_ore_scheelite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersivegeology:blocks/tfc_normal_ore_block_scheelite_chalk"
+}

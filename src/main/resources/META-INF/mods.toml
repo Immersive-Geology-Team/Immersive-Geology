@@ -9,11 +9,14 @@ license="Blu's License of Common Sense"
 modId = "immersivegeology"
 version = "${version}"
 displayName = "Immersive Geology"
-description = "An updated version of Immersive Geology, tailored for HardRock TerraFirmaCraft"
-authors = "muddykat-tech, UnSchtalch, Robota"
+description = "An updated in development version of Immersive Geology, tailored for HardRock TerraFirmaCraft."
+authors = "muddykat-tech, UnSchtalch"
 displayURL = "https://minecraft.curseforge.com/projects/immersive-geology/"
 logoFile = "logo.png"
-credits = "All the great other Git Contributors"
+credits = '''
+Robota for the amazing Multiblock Models!
+Steelblue8 for the some of the lovely Item and Block Textures.
+'''
 
 [[dependencies.immersivegeology]]
 modId="forge"
