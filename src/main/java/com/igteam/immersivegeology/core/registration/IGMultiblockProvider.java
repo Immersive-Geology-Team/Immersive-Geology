@@ -25,9 +25,7 @@ public class IGMultiblockProvider {
             });
 
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMetalMultiblock("reverberation_furnace", new RevFurnaceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"),
-            builder -> {
-                builder.redstone(state -> state.rsState, RevFurnaceLogic.REDSTONE_IN);
-            });
+            builder -> {});
 
 
     public static void forceClassLoad(){};

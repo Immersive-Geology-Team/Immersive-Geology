@@ -25,6 +25,7 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -199,16 +200,35 @@ public class IGRegistrationHolder {
 
                             // Still
                             registerFluid(registryKey, () -> new IGFluid.Source(material));
-
                             // Flowing
                             registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
 
                             // Fluid Type Registration
                             registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
-
-                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), ItemCategoryFlags.BUCKET, material));
-
+                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, blockCategory), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material));
                             registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+                        }
+                        case SLURRY ->
+                        {
+                            if(material.instance() instanceof MaterialChemical chemical)
+                            {
+                                for(MetalEnum metal : MetalEnum.values())
+                                {
+                                    if(!chemical.hasSlurryMetal(metal)) continue;
+                                    String registryKey = blockCategory.getRegistryKey(material, metal);
+
+                                    // Still
+                                    registerFluid(registryKey, () -> new IGFluid.Source(material));
+
+                                    // Flowing
+                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
+
+                                    // Fluid Type Registration
+                                    registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
+                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material));
+                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+                                }
+                            }
                         }
                     }
                 }

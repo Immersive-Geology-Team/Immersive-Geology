@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -40,7 +41,12 @@ public class IGRecipes extends RecipeProvider
 
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)
 	{
-		GravitySeparatorRecipeBuilder.builder(MineralEnum.Acanthite.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(MineralEnum.Acanthite.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/test_recipe"));
+		for(MineralEnum mineral : MineralEnum.values())
+		{
+			if(mineral.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && mineral.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) GravitySeparatorRecipeBuilder.builder(mineral.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(mineral.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ mineral.getName() + "_to_crushed"));
+		}
+
+		RevFurnaceRecipeBuilder.builder(MetalEnum.Unobtanium.getStack(ItemCategoryFlags.INGOT)).setTime(100).setWasteAmount(250).addInput(MineralEnum.Unobtania.getStack(ItemCategoryFlags.CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "reverberation_furnace/test_recipe"));
 		CrystallizerRecipeBuilder.builder(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.CRYSTAL), 1).setEnergy(1000).setTime(100).addInput(FluidTags.WATER, 1000).build(consumer, new ResourceLocation(IGLib.MODID, "crystallizer/test_recipe"));
 	}
 }

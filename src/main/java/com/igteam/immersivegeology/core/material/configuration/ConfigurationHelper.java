@@ -53,6 +53,7 @@ public interface ConfigurationHelper {
             list.add(BlockCategoryFlags.SHEETMETAL_BLOCK);
             list.add(BlockCategoryFlags.STAIRS);
             list.add(BlockCategoryFlags.FLUID);
+
             if(metal instanceof MaterialNativeMetal) {
                 list.add(BlockCategoryFlags.ORE_BLOCK);
             }

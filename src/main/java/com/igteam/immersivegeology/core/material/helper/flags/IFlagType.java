@@ -65,6 +65,10 @@ public interface IFlagType<T extends Enum<T>> {
         return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone.instance()));
     }
 
+    default String getRegistryKey(MaterialInterface<?> material, BlockCategoryFlags blockCategory){
+        return getValue().name().toLowerCase() + "_" + material.getName().toLowerCase() + "_" + blockCategory.getName().toLowerCase();
+    }
+
     default ItemSubGroup getSubGroup() {
         return ItemSubGroup.values()[0];
     };
@@ -74,4 +78,5 @@ public interface IFlagType<T extends Enum<T>> {
     }
 
 	default RenderTypeSkeleton getRenderType() {return RenderTypeSkeleton.SOLID;};
+
 }

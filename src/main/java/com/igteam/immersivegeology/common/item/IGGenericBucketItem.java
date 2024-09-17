@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.item;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -18,43 +19,51 @@ import java.util.function.Supplier;
 
 public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
     private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
-    private final ItemCategoryFlags category;
+    private final BlockCategoryFlags fluid_category;
 
-    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, ItemCategoryFlags flag, MaterialInterface<?> material) {
+    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, MaterialInterface<?> material) {
         super(fluid, new Properties());
         this.materialMap.put(MaterialTexture.base, material);
-        this.category = flag;
+        this.fluid_category = flag;
     }
 
     public int getColor(int index) {
         if(index == 0) return 0xffffffff;
         if (index >= materialMap.values().size()) index = materialMap.values().size() - 1;
         //let's use last available colour. map could not be empty
-        return materialMap.get(MaterialTexture.values()[index]).getColor(category);
+        return materialMap.get(MaterialTexture.values()[index]).getColor(ItemCategoryFlags.BUCKET);
     }
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
         List<String> materialList = new ArrayList<>();
+
+        if(fluid_category.equals(BlockCategoryFlags.FLUID)) materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
+
         for(MaterialTexture t : MaterialTexture.values()){
             if (materialMap.containsKey(t)) {
                 materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
             }
         }
 
-        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray());
+        if(fluid_category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.slurry"));
+
+        return Component.translatable("item.immersivegeology." + ItemCategoryFlags.BUCKET.getName(), materialList.toArray());
     }
-
-
 
     @Override
     public ItemCategoryFlags getFlag() {
-        return category;
+        return ItemCategoryFlags.BUCKET;
+    }
+
+    public BlockCategoryFlags getFluidCategory()
+    {
+        return fluid_category;
     }
 
     @Override
     public ItemSubGroup getSubGroup() {
-        return category.getSubGroup();
+        return ItemCategoryFlags.BUCKET.getSubGroup();
     }
 
     @Override

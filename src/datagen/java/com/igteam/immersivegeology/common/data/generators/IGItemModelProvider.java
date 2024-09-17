@@ -8,6 +8,8 @@ import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
@@ -86,7 +88,8 @@ public class IGItemModelProvider extends ItemModelProvider {
     }
 
     private void generateGenericBucketItem(IGFlagItem item){
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        if(!(item instanceof IGGenericBucketItem bucketItem)) return;
+        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + ItemCategoryFlags.BUCKET.getRegistryKey(bucketItem.getMaterial(MaterialTexture.base), bucketItem.getFluidCategory())).getPath();
 
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
