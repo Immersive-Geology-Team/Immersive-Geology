@@ -27,6 +27,11 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMetalMultiblock("reverberation_furnace", new RevFurnaceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"),
             builder -> {});
 
+    public static final MultiblockRegistration<IndSluiceLogic.State> INDUSTRIAL_SLUICE = IGRegistrationHolder.registerMetalMultiblock("industrial_sluice", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("industrial_sluice"),
+            builder -> {
+                builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
+            });
+
 
     public static void forceClassLoad(){};
 }
