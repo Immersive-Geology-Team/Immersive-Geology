@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "tfc:block/rock/raw/gneiss",
     "ore": "immersivegeology:block/greyscale/rock/ore_bearing/metamorphic/metamorphic_normal"
   }
 }

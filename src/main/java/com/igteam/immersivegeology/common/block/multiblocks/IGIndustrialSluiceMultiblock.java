@@ -20,7 +20,7 @@ public class IGIndustrialSluiceMultiblock extends IGTemplateMultiblock
 {
 	public IGIndustrialSluiceMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(0,0,0), new BlockPos(4,1,6), new BlockPos(8,5,10), IGMultiblockProvider.INDUSTRIAL_SLUICE);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(5,1,5), new BlockPos(5,1,5), new BlockPos(10,5,8), IGMultiblockProvider.INDUSTRIAL_SLUICE);
 	}
 
 	@Override

@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Function;
 
 public class IndSluiceLogic implements IMultiblockLogic<IndSluiceLogic.State>, IServerTickableComponent<IndSluiceLogic.State>, IClientTickableComponent<IndSluiceLogic.State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(4,1,6);
+    public static final BlockPos REDSTONE_IN = new BlockPos(6,1,4);
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
