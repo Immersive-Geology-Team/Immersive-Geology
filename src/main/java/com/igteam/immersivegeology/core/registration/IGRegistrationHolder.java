@@ -263,6 +263,7 @@ public class IGRegistrationHolder {
         registerMB("rotarykiln", new IGRotaryKilnMultiblock(), IGMultiblockProvider.ROTARYKILN);
         registerMB("coredrill", new IGCoreDrillMultiblock(), IGMultiblockProvider.COREDRILL);
         registerMB("reverberation_furnace", new IGReverberationFurnaceMultiblock(), IGMultiblockProvider.REVERBERATION_FURNACE);
+        registerMB("industrial_sluice", new IGIndustrialSluiceMultiblock(), IGMultiblockProvider.INDUSTRIAL_SLUICE);
     }
 
     private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){
