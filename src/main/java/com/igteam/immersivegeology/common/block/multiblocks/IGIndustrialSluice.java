@@ -8,7 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks;
 
-import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks.MultiblockManualData;
+import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -31,8 +31,7 @@ public class IGIndustrialSluice extends IGTemplateMultiblock
 	}
 
 	@Override
-	public void initializeClient(Consumer<MultiblockManualData> consumer)
-	{
-
+	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
+		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
 	}
 }
