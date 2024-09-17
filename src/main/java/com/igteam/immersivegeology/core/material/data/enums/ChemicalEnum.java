@@ -11,19 +11,15 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 
 public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
 {
-    SULFURIC_ACID(new MaterialSulfuricAcid()),
-    BRINE(new MaterialBrine()),
-    HYDROCHLORIC_ACID(new MaterialHydrochloricAcid()),
-    HYDROFLUORIC_ACID(new MaterialHydrofluoricAcid()),
-    NITRIC_ACID(new MaterialNitricAcid()),
-    SODIUM_HYDROXIDE(new MaterialSodiumHydroxide()),
+    SulfuricAcid(new MaterialSulfuricAcid()),
+    Brine(new MaterialBrine()),
+    HydrochloricAcid(new MaterialHydrochloricAcid()),
+    HydrofluoricAcid(new MaterialHydrofluoricAcid()),
+    NitricAcid(new MaterialNitricAcid()),
+    SodiumHydroxide(new MaterialSodiumHydroxide()),
 
-    // Mantle Fluids
-    MOLTEN_MANTLE(new MaterialMoltenMantle()),
-    IRON_MOLTEN_MANTLE(new MaterialIronRichMantle()),
-    COPPER_MOLTEN_MANTLE(new MaterialCopperRichMantle()),
-    GOLD_MOLTEN_MANTLE(new MaterialGoldRichMantle()),
-    ALUMINUM_MOLTEN_MANTLE(new MaterialAluminumRichMantle());
+    // Mantle Fluid
+    MoltenMantle(new MaterialMoltenMantle());
 
     private final MaterialChemical material;
     ChemicalEnum(MaterialChemical m){

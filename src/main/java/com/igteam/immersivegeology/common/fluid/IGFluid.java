@@ -185,7 +185,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public Item getBucket()
 	{
-		return IGRegistrationHolder.getItem.apply(ItemCategoryFlags.BUCKET.getRegistryKey(this.getMaterial(MaterialTexture.base)));
+		return IGRegistrationHolder.getItem.apply(ItemCategoryFlags.BUCKET.getRegistryKey(this.getMaterial(MaterialTexture.base), category));
 	}
 
 	public int getSlopeFindDistance(LevelReader pLevel) {
