@@ -28,6 +28,10 @@ public class IGMultiblockProvider {
             builder -> {
                 builder.redstone(state -> state.rsState, RevFurnaceLogic.REDSTONE_IN);
             });
+    public static final MultiblockRegistration<IndSluiceLogic.State> INDUSTRIAL_SLUICE = IGRegistrationHolder.registerMetalMultiblock("industrial_sluice", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("industrial_sluice"),
+            builder -> {
+                builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
+            });
 
 
     public static void forceClassLoad(){};
