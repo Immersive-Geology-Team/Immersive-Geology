@@ -38,7 +38,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
@@ -59,9 +58,6 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
-import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public class IGBlockStateProvider extends BlockStateProvider {
     protected static final List<Vec3i> COLUMN_THREE = ImmutableList.of(BlockPos.ZERO, BlockPos.ZERO.above(), BlockPos.ZERO.above(2));
@@ -101,6 +97,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         genericmultiblock("crystallizer");
         genericmultiblock("gravityseparator");
+        genericmultiblock("industrial_sluice");
         genericmultiblockMirror("rotarykiln");
         genericmultiblockMirror("coredrill");
         genericmultiblockMirror("reverberation_furnace");
