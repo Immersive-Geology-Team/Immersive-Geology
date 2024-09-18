@@ -12,12 +12,17 @@ import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
@@ -132,24 +137,24 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 		return active;
 	}
 
-	public Tag toNBT()
+	public Tag toNBT(int index)
 	{
 		final CompoundTag result = new CompoundTag();
-		result.putInt("process", process);
-		result.putInt("processMax", processMax);
-		result.putInt("burnTime", burnTime);
-		result.putInt("lastBurnTime", lastBurnTime);
+		result.putInt("process" + index, process);
+		result.putInt("processMax"+ index, processMax);
+		result.putInt("burnTime"+ index, burnTime);
+		result.putInt("lastBurnTime"+ index, lastBurnTime);
 		return result;
 	}
 
-	public void readNBT(Tag nbt)
+	public void readNBT(Tag nbt, int index)
 	{
 		if(!(nbt instanceof CompoundTag compound))
 			return;
-		process = compound.getInt("process");
-		processMax = compound.getInt("processMax");
-		burnTime = compound.getInt("burnTime");
-		lastBurnTime = compound.getInt("lastBurnTime");
+		process = compound.getInt("process"+ index);
+		processMax = compound.getInt("processMax"+ index);
+		burnTime = compound.getInt("burnTime"+ index);
+		lastBurnTime = compound.getInt("lastBurnTime"+ index);
 	}
 
 	private boolean isAnyInputEmpty(IItemHandler inv)
@@ -206,6 +211,13 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 					inv.getStackInSlot(slot.slotIndex).grow(result.getCount());
 				else
 					inv.setStackInSlot(slot.slotIndex, result.copy());
+			}
+		}
+		if(recipe instanceof RevFurnaceRecipe revRecipe)
+		{
+			if(env instanceof RevFurnaceLogic.State state)
+			{
+				state.addToTank(revRecipe.getWasteAmount());
 			}
 		}
 	}

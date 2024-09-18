@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
 {
     SulfuricAcid(new MaterialSulfuricAcid()),
+    SulfurDioxde(new MaterialSulfurDioxide()),
     Brine(new MaterialBrine()),
     HydrochloricAcid(new MaterialHydrochloricAcid()),
     HydrofluoricAcid(new MaterialHydrofluoricAcid()),

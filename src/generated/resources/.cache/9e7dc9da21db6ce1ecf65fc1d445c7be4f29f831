@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-15T16:20:17.778609038	Item Models: immersivegeology
+// 1.20.1	2024-09-17T21:02:12.030332829	Item Models: immersivegeology
 f37e1bb26f8726a922777a57c04cd2c659ba27d3 assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_mercury_stone.json
 5dd935115cfd4b3fa5503a79dcfab366dd01be03 assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_moon_stone.json
 ac6a8880d2daffba302d18ee50ee662c489531c5 assets/immersivegeology/models/item/ad_astra_normal_ore_block_anatase_mercury_stone.json
@@ -323,6 +323,7 @@ fd68cc21801cfcecdaebfeb884a6a0651d496417 assets/immersivegeology/models/item/ad_
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_platinum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_silver_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_sodiumhydroxide_fluid.json
+9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_sulfurdioxide_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_sulfuricacid_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_thorium_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_tin_fluid.json
