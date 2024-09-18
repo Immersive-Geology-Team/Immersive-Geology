@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.common.fluid;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -17,10 +19,12 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -41,6 +45,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,8 +75,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	@Override
 	public int getColor(int index) {
-		return materialMap.get(MaterialTexture.values()[index]).getColor(category);
+		return 0xff000000 | materialMap.get(MaterialTexture.values()[index]).getColor(category);
 	}
+
 
 	@Override
 	public MaterialInterface<?> getMaterial(MaterialTexture t) {
@@ -84,6 +90,46 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 		return new FluidType(getMaterial(MaterialTexture.base).getFluidProperties()){
 			public double motionScale(Entity entity) {
 				return entity.level().dimensionType().ultraWarm() ? 0.007 : 0.0023333333333333335;
+			}
+
+			@Override
+			public Component getDescription()
+			{
+				List<String> materialList = new ArrayList<>();
+				String molten = "";
+				if(materialMap.get(MaterialTexture.base) instanceof MaterialMetal){
+					materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
+					molten = "_molten";
+				}
+
+				for(MaterialTexture t : MaterialTexture.values()){
+					if (materialMap.containsKey(t)) {
+						materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+					}
+				}
+				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.slurry"));
+
+				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + molten, materialList.toArray());
+			}
+
+			@Override
+			public Component getDescription(FluidStack stack)
+			{
+				List<String> materialList = new ArrayList<>();
+				String molten = "";
+				if(materialMap.get(MaterialTexture.base) instanceof MetalEnum){
+					materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
+					molten = "_molten";
+				}
+
+				for(MaterialTexture t : MaterialTexture.values()){
+					if (materialMap.containsKey(t)) {
+						materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+					}
+				}
+				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.slurry"));
+
+				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + molten, materialList.toArray());
 			}
 
 			public void setItemMovement(ItemEntity entity) {

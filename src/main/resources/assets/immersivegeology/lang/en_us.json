@@ -123,6 +123,8 @@
   "block.immersivegeology.stairs": "%s Stairs",
   "block.immersivegeology.storage": "Block of %s",
 
+
+
   "material.immersivegeology.ore.poor": "Poor",
   "material.immersivegeology.ore.normal": "Normal",
   "material.immersivegeology.ore.rich": "Rich",
@@ -143,12 +145,12 @@
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
 
   "fluid.immersivegeology.fluid": "%s",
+  "fluid.immersivegeology.fluid_molten": "%s %s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
 
-  "block.immersivegeology.molten_metal": "Molten %s",
+  "material.immersivegeology.sulfurdioxide": "Sulfur Dioxide",
 
-  "material.immersivegeology.sulphur_dioxide": "Sulphur Dioxide",
   "material.immersivegeology.vanilla": "Stone",
   "material.immersivegeology.moon_stone": "Moon Stone",
   "material.immersivegeology.mars_stone": "Mars Stone",
@@ -214,12 +216,12 @@
   "material.immersivegeology.arsenic": "Arsenic",
   "material.immersivegeology.antimony": "Antimony",
   "material.immersivegeology.osmium": "Osmium",
-  "material.immersivegeology.nitric_acid": "Nitric Acid",
-  "material.immersivegeology.sulfuric_acid": "Sulfuric Acid",
-  "material.immersivegeology.hydrochloric_acid": "Hydrochloric Acid",
-  "material.immersivegeology.hydrofluoric_acid": "Hydrofluoric Acid",
+  "material.immersivegeology.nitricacid": "Nitric Acid",
+  "material.immersivegeology.sulfuricacid": "Sulfuric Acid",
+  "material.immersivegeology.hydrochloricacid": "Hydrochloric Acid",
+  "material.immersivegeology.hydrofluoricacid": "Hydrofluoric Acid",
   "material.immersivegeology.brine": "Brine",
-  "material.immersivegeology.sodium_hydroxide": "Sodium Hydroxide",
+  "material.immersivegeology.sodiumhydroxide": "Sodium Hydroxide",
 
   "material.immersivegeology.constantan": "Constantan",
   "material.immersivegeology.electrum": "Electrum",

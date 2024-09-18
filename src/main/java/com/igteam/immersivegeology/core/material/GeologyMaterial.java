@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
@@ -198,7 +199,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
-        return FluidType.Properties.create().descriptionId("block.immersivegeology.molten_metal").canSwim(false).canDrown(false).pathType(BlockPathTypes.LAVA).adjacentPathType((BlockPathTypes)null).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA).lightLevel(15).density(3000).viscosity(6000).temperature(1300);
+        return FluidType.Properties.create().descriptionId("fluid.immersivegeology." + flag.getName().toLowerCase()).canSwim(true).canDrown(false).pathType(BlockPathTypes.LAVA).adjacentPathType((BlockPathTypes)null).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA).lightLevel(15).density(3000).viscosity(6000).temperature(1300);
     }
 
     public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
@@ -225,9 +226,15 @@ public abstract class GeologyMaterial implements MaterialHelper {
             }
 
             @Override
+            public @Nullable ResourceLocation getRenderOverlayTexture(Minecraft mc)
+            {
+                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
+            }
+
+            @Override
             public @Nullable ResourceLocation getOverlayTexture()
             {
-                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
             }
         };
     }

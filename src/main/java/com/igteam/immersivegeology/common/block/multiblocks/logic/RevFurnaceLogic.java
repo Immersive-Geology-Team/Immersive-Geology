@@ -256,7 +256,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                     List.of(new InputSlot<>(r -> r.input, 0)),
                     List.of(new OutputSlot<>(r -> r.result, 2)),
                     r -> r.time,
-                    runTest
+                    ctx.getMarkDirtyRunnable()
             );
 
             furnace2 = new IGFurnaceHandler<>(
