@@ -1,5 +1,5 @@
 name: Bug Report
-description: If you experienced a bug while playing with Immersive Engineering
+description: If you experienced a bug while playing with Immersive Geology
 labels: ["bug"]
 body:
   - type: markdown
@@ -23,7 +23,7 @@ body:
 
   - type: input
     attributes:
-      label: Immersive Engineering Version
+      label: Immersive Geology Version
       description: The version of Immersive Engineering you are using.
       placeholder: "MAJOR.MINOR.PATCH-BUILDNUMBER"
     validations:
