@@ -1,5 +1,5 @@
 name: Bug Report
-description: If you experienced a bug while playing with Immersive Engineering
+description: If you experienced a bug while playing with Immersive Geology
 labels: ["bug"]
 body:
   - type: markdown
@@ -16,15 +16,15 @@ body:
 
         *If your version does not show up here, support for it has been ended.*
       options:
+        - '1.16.5'
         - '1.20.1'
-        - '1.20.4'
     validations:
       required: true
 
   - type: input
     attributes:
-      label: Immersive Engineering Version
-      description: The version of Immersive Engineering you are using.
+      label: Immersive Geology Version
+      description: The version of Immersive Geology you are using.
       placeholder: "MAJOR.MINOR.PATCH-BUILDNUMBER"
     validations:
       required: true
