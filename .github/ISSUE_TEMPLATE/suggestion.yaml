@@ -1,5 +1,5 @@
 name: Feature Suggestion
-description: If you have an idea or feature to add to Immersive Engineering
+description: If you have an idea or feature to add to Immersive Geology
 title: "[Suggestion] ... "
 labels: ["suggestion :bulb:"]
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         You have an idea or feature you would love to see ingame? That's awesome, we love hearing those!
         
-        Please check first if we don't already have it in IE. A lot of the suggestions we get are already in the mod.
+        Please check first if we don't already have it in IG. A lot of the suggestions we get are already in the mod.
         Additionally, a good few open requests are on this tracker, so use the search function to avoid duplicates.
 
   - type: textarea
@@ -18,10 +18,9 @@ body:
       description: |
         The things we look for in suggestions, in a rough order of priority:
         1) Useful gameplay feature
-        2) Matches IE's style (retrofuturist, turn of the century, maybe a little mad-science)
-        3) Can be visually interesting (we love when things look cool!)
-        4) Is viable to implement (this is hard to judge, I know!)
+        2) Can be visually interesting (we love when things look cool!)
+        3) Is viable to implement (this is hard to judge, I know!)
         
-        Bonus points if it ties into IE's existing machines, tech-tree and established recipes!
+        Bonus points if it ties into IG's existing machines, tech-tree and established recipes!
     validations:
       required: true
