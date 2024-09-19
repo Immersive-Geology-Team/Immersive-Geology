@@ -62,8 +62,10 @@
   "material.immersivegeology.fluid_type.molten": "Molten",
   "material.immersivegeology.fluid_type.slurry": "Slurry",
   "material.immersivegeology.fluid_type.chemical": "",
-  "item.immersivegeology.bucket": "Bucket of %s %s",
-  "item.immersivegeology.flask": "Flask of %s %s",
+  "item.immersivegeology.bucket_molten": "Bucket of Molten %s",
+  "item.immersivegeology.bucket": "Bucket of %",
+  "item.immersivegeology.flask_slurry": "Flask of %s %s",
+  "item.immersivegeology.flask": "Flask of %s",
   "item.immersivegeology.empty_flask": "Empty %s Flask",
   "item.immersivegeology.ingot": "%s Ingot",
   "item.immersivegeology.plate": "%s Plate",
@@ -145,7 +147,7 @@
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
 
   "fluid.immersivegeology.fluid": "%s",
-  "fluid.immersivegeology.fluid_molten": "%s %s",
+  "fluid.immersivegeology.fluid_molten": "Molten %s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
 
@@ -272,11 +274,11 @@
   "material.immersivegeology.refractory": "Refractory",
   "material.immersivegeology.reinforced_refractory": "Reinforced Refractory",
 
-  "component.immersivegeology.hydrochloric_acid": "Chloride",
-  "component.immersivegeology.sulfuric_acid": "Sulfate",
-  "component.immersivegeology.nitric_acid": "Nitrate",
-  "component.immersivegeology.hydrofluoric_acid": "Fluorite",
-  "component.immersivegeology.sodium_hydroxide": "Sodium Salt",
+  "component.immersivegeology.hydrochloricacid": "Chloride",
+  "component.immersivegeology.sulfuricacid": "Sulfate",
+  "component.immersivegeology.nitricacid": "Nitrate",
+  "component.immersivegeology.hydrofluoricacid": "Fluorite",
+  "component.immersivegeology.sodiumhydroxide": "Sodium Salt",
 
   "desc.immersiveengineering.info.multiblock.IE:ChemicalVat":"Chemical Vat",
   "desc.immersiveengineering.info.multiblock.IE:Crystallizer":"Crystallizer",

@@ -8,13 +8,18 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import com.igteam.immersivegeology.client.helper.TFCCollapseRecipeBuilder;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -22,7 +27,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
 
@@ -37,6 +44,18 @@ public class IGRecipes extends RecipeProvider
 	protected void buildRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		multiblockRecipes(consumer);
+		tfcCompatRecipes(consumer);
+	}
+
+	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
+		{
+			if(block.get() instanceof IGOreBlock oreBlock)
+			{
+				TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock)).copyInput(true).build(consumer, new ResourceLocation(IGLib.MODID, "collapse/" + block.getId().getPath()));
+			}
+		}
 	}
 
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)

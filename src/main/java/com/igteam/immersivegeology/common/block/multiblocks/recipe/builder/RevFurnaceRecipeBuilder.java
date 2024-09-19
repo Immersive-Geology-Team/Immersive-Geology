@@ -46,5 +46,4 @@ public class RevFurnaceRecipeBuilder extends IEFinishedRecipe<RevFurnaceRecipeBu
 			jsonObject.addProperty("waste", amount);
 		});
 	}
-
 }

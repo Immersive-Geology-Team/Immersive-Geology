@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.fluid;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -116,20 +117,25 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 			public Component getDescription(FluidStack stack)
 			{
 				List<String> materialList = new ArrayList<>();
-				String molten = "";
-				if(materialMap.get(MaterialTexture.base) instanceof MetalEnum){
-					materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
-					molten = "_molten";
+				String type = "fluid";
+				MaterialInterface<?> baseMaterial = getMaterial(MaterialTexture.base);
+				MaterialInterface<?> overlayMaterial = getMaterial(MaterialTexture.overlay);
+
+ 				if(baseMaterial instanceof MetalEnum)
+				{
+					type = "fluid_molten";
 				}
 
-				for(MaterialTexture t : MaterialTexture.values()){
-					if (materialMap.containsKey(t)) {
-						materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
-					}
+				if(baseMaterial instanceof ChemicalEnum && overlayMaterial != null)
+				{
+					type = "slurry";
+					materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
+					materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
+				} else {
+					materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
 				}
-				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.slurry"));
 
-				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + molten, materialList.toArray());
+				return Component.translatable("fluid.immersivegeology." + type, materialList.toArray());
 			}
 
 			public void setItemMovement(ItemEntity entity) {
@@ -265,8 +271,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Source extends IGFluid {
-		public Source(MaterialInterface<?> material) {
+		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra) {
 			super(BlockCategoryFlags.FLUID, material);
+			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 
 		public int getAmount(FluidState pState) {
@@ -279,8 +286,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Flowing extends IGFluid {
-		public Flowing(MaterialInterface<?> material) {
+		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra) {
 			super(BlockCategoryFlags.FLUID, material);
+			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 
 		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> pBuilder) {

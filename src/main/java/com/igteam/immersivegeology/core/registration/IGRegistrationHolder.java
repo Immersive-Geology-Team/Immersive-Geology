@@ -199,9 +199,9 @@ public class IGRegistrationHolder {
                             String registryKey = blockCategory.getRegistryKey(material);
 
                             // Still
-                            registerFluid(registryKey, () -> new IGFluid.Source(material));
+                            registerFluid(registryKey, () -> new IGFluid.Source(material, null));
                             // Flowing
-                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
+                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, null));
 
                             // Fluid Type Registration
                             registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
@@ -218,14 +218,14 @@ public class IGRegistrationHolder {
                                     String registryKey = blockCategory.getRegistryKey(material, metal);
 
                                     // Still
-                                    registerFluid(registryKey, () -> new IGFluid.Source(material));
+                                    registerFluid(registryKey, () -> new IGFluid.Source(material, metal));
 
                                     // Flowing
-                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material));
+                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, metal));
 
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
-                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material));
+                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material, metal));
                                     registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
                                 }
                             }

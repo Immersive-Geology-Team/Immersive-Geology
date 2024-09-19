@@ -46,6 +46,7 @@ public class IGBlockTags extends BlockTagsProvider
 				IGLib.IG_LOGGER.info("\"" + oreBlock.getDescriptionId().toLowerCase() + ".prospected\": \""+oreBlock.getMaterial(MaterialTexture.overlay).getName()+"\",");
 				tag(Blocks.CAN_COLLAPSE).add(oreBlock);
 				tag(Blocks.CAN_START_COLLAPSE).add(oreBlock);
+				tag(Blocks.CAN_TRIGGER_COLLAPSE).add(oreBlock);
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(oreBlock);
 				tag(BlockTags.NEEDS_STONE_TOOL).add(oreBlock);
 				tag(Blocks.POWDERKEG_BREAKING_BLOCKS).add(oreBlock);
