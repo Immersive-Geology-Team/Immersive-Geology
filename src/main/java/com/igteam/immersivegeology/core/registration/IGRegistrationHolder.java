@@ -73,7 +73,7 @@ public class IGRegistrationHolder {
     private static final HashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new HashMap<>();
 
     public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
+    public static final HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
     private static <T extends MultiblockHandler.IMultiblock>
     T registerMultiblock(T multiblock) {
         MultiblockHandler.registerMultiblock(multiblock);
@@ -258,12 +258,12 @@ public class IGRegistrationHolder {
 
     private static void initializeMultiblocks()
     {
-        registerMB("crystallizer", new IGCrystalizerMultiblock(), IGMultiblockProvider.CRYSTALLIZER);
-        registerMB("gravityseparator", new IGGravitySeparatorMultiblock(), IGMultiblockProvider.GRAVITY_SEPARATOR);
-        registerMB("rotarykiln", new IGRotaryKilnMultiblock(), IGMultiblockProvider.ROTARYKILN);
-        registerMB("coredrill", new IGCoreDrillMultiblock(), IGMultiblockProvider.COREDRILL);
-        registerMB("reverberation_furnace", new IGReverberationFurnaceMultiblock(), IGMultiblockProvider.REVERBERATION_FURNACE);
-        registerMB("industrial_sluice", new IGIndustrialSluiceMultiblock(), IGMultiblockProvider.INDUSTRIAL_SLUICE);
+        registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
+        registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
+        registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);
+        registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
+        registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE);
+        registerMB("industrial_sluice", IGIndustrialSluiceMultiblock.INSTANCE, IGMultiblockProvider.INDUSTRIAL_SLUICE);
     }
 
     private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){

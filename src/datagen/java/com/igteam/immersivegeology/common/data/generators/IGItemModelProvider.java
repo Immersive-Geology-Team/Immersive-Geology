@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.data.models.IEOBJBuilder;
+import blusunrize.immersiveengineering.data.models.TRSRModelBuilder;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
@@ -17,11 +19,19 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelBuilder;
+import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.joml.Vector3f;
 import org.slf4j.Logger;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class IGItemModelProvider extends ItemModelProvider {
 

@@ -44,6 +44,7 @@ public class ImmersiveGeology {
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
         supplyMaterialTint();
+        IGContent.initializeManualEntries();
     }
 
     private void supplyMaterialTint(){

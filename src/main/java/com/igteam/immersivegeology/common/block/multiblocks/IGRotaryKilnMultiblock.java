@@ -10,17 +10,19 @@ import java.util.function.Consumer;
 
 public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
 
+    public static final IGRotaryKilnMultiblock INSTANCE = new IGRotaryKilnMultiblock();
+
     public IGRotaryKilnMultiblock() {
         super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(0,0,0), new BlockPos(2,1,2), new BlockPos(8,3, 3), IGMultiblockProvider.ROTARYKILN);
     }
 
     @Override
     public float getManualScale() {
-        return 6;
+        return 8;
     }
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+        consumer.accept(new IGClientMultiblockProperties(this, 0.5, 0.5, 0.5));
     }
 }

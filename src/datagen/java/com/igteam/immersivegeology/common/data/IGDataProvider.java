@@ -40,6 +40,7 @@ public class IGDataProvider {
             IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
             generator.addProvider(true, blockStateProvider);
             generator.addProvider(true, new IGItemModelProvider(generator, helper));
+            generator.addProvider(true, new IGComplexItemModelProvider(out, helper));
             BlockTagsProvider blockTags = new IGBlockTags(out, lookup, helper);
             generator.addProvider(true, blockTags);
             generator.addProvider(true, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));

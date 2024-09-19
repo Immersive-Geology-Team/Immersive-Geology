@@ -10,17 +10,19 @@ import java.util.function.Consumer;
 
 public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
 
+    public static final IGGravitySeparatorMultiblock INSTANCE = new IGGravitySeparatorMultiblock();
+
     public IGGravitySeparatorMultiblock() {
         super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseparator"), new BlockPos(1,0,1), new BlockPos(1,6,2), new BlockPos(3,7,3), IGMultiblockProvider.GRAVITY_SEPARATOR);
     }
 
     @Override
     public float getManualScale() {
-        return 6;
+        return 8;
     }
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+        consumer.accept(new IGClientMultiblockProperties(this, 1.5, 0.5, 1.5));
     }
 }

@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 
 public class IGIndustrialSluiceMultiblock extends IGTemplateMultiblock
 {
+	public static final IGIndustrialSluiceMultiblock INSTANCE = new IGIndustrialSluiceMultiblock();
 	public IGIndustrialSluiceMultiblock()
 	{
 		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(5,1,5), new BlockPos(5,1,5), new BlockPos(10,5,8), IGMultiblockProvider.INDUSTRIAL_SLUICE);
@@ -26,7 +27,7 @@ public class IGIndustrialSluiceMultiblock extends IGTemplateMultiblock
 	@Override
 	public float getManualScale()
 	{
-		return 0;
+		return 12;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 
-public abstract class IGTemplateMultiblock  extends TemplateMultiblock
+public abstract class IGTemplateMultiblock extends TemplateMultiblock
 {
     private final MultiblockRegistration<?> logic;
 

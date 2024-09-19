@@ -126,42 +126,42 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
     }
 
     // Static Directional Offset Entries
-    private static final Map<Direction, Vector3fc> MIRRORED_OFFSETS = Map.of(
+    public static final Map<Direction, Vector3fc> MIRRORED_OFFSETS = Map.of(
             Direction.NORTH, new Vector3f(-6,0,0),
             Direction.EAST, new Vector3f(0,0,-6),
             Direction.SOUTH, new Vector3f(6,0,0),
             Direction.WEST, new Vector3f(0,0,6)
     );
 
-    private static final Map<Direction, Vec3> DRILL_BIT_OFFSETS = Map.of(
+    public static final Map<Direction, Vec3> DRILL_BIT_OFFSETS = Map.of(
             Direction.NORTH, new Vec3(-2.5,-1.9375,-2.5),
             Direction.EAST, new Vec3(3.5,-1.9375,-2.5),
             Direction.SOUTH, new Vec3(3.5,-1.9375,3.5),
             Direction.WEST, new Vec3(-2.5,-1.9375,3.5)
     );
 
-    private static final Map<Direction, Vec3> DRILL_ENGINE_OFFSETS = Map.of(
+    public static final Map<Direction, Vec3> DRILL_ENGINE_OFFSETS = Map.of(
             Direction.NORTH, new Vec3(-4.5,-7.875,-4.5),
             Direction.EAST, new Vec3(4.5,-7.875,-4.5),
             Direction.SOUTH, new Vec3(4.5,-7.875,4.5),
             Direction.WEST, new Vec3(-4.5,-7.875,4.5)
     );
 
-    private static final Map<Direction, Vec3> DRILL_SUPPORT_OFFSETS = Map.of(
+    public static final Map<Direction, Vec3> DRILL_SUPPORT_OFFSETS = Map.of(
             Direction.NORTH, new Vec3(-4, 1, 0),
             Direction.EAST, new Vec3(3, 1, -1),
             Direction.SOUTH, new Vec3(2, 1, 0),
             Direction.WEST, new Vec3(-3, 1, -1)
     );
 
-    private static final Map<Direction, Vector3fc> DRILL_GEAR_ROTATION_OFFSETS = Map.of(
+    public static final Map<Direction, Vector3fc> DRILL_GEAR_ROTATION_OFFSETS = Map.of(
             Direction.NORTH, new Vector3f(0, 0, 1),
             Direction.EAST, new Vector3f(0, 0, -1),
             Direction.SOUTH, new Vector3f(0, 0, -1),
             Direction.WEST, new Vector3f(0, 0, -1)
     );
 
-    private static final Map<Direction, Map<Integer, Vec3>> DRILL_GEAR_OFFSETS = Map.of(
+    public static final Map<Direction, Map<Integer, Vec3>> DRILL_GEAR_OFFSETS = Map.of(
             Direction.NORTH, Map.of(
                     0, new Vec3(-2.125, 6.2, 2),
                     1, new Vec3(2.25, 0, 0),

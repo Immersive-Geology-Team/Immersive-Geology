@@ -10,6 +10,8 @@ import java.util.function.Consumer;
 
 public class IGReverberationFurnaceMultiblock extends IGTemplateMultiblock {
 
+    public static final IGReverberationFurnaceMultiblock INSTANCE = new IGReverberationFurnaceMultiblock();
+
     public IGReverberationFurnaceMultiblock() {
         super(new ResourceLocation(IGLib.MODID, "multiblocks/reverberation_furnace"), new BlockPos(0,0,0), new BlockPos(1,1,5), new BlockPos(6,12,6), IGMultiblockProvider.REVERBERATION_FURNACE);
 
@@ -17,11 +19,11 @@ public class IGReverberationFurnaceMultiblock extends IGTemplateMultiblock {
 
     @Override
     public float getManualScale() {
-        return 9;
+        return 8;
     }
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+        consumer.accept(new IGClientMultiblockProperties(this, 0.5, 0.5, 0.5));
     }
 }
