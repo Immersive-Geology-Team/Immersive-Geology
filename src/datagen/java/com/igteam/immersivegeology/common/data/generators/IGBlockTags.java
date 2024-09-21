@@ -37,7 +37,7 @@ public class IGBlockTags extends BlockTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		IGLib.IG_LOGGER.info("testing ===============================");
+		IGLib.IG_LOGGER.info("IG Block Tags");
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
 			if(block.get() instanceof IGOreBlock oreBlock)

@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -11,9 +12,10 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
-import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.getBlockRegistryMap;
-import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.getItemRegistryMap;
+import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.*;
 
 public interface MaterialHelper {
 
@@ -38,6 +40,22 @@ public interface MaterialHelper {
 
         IGLib.IG_LOGGER.error("Attempting to get a missing Item? {}", flag.getRegistryKey(this));
         return Items.COOKIE;
+    }
+
+    default Fluid getFluid(BlockCategoryFlags flag)
+    {
+        if(flag == null)
+        {
+            flag = BlockCategoryFlags.FLUID;
+            IGLib.IG_LOGGER.warn("Null Flag Pass for fluid getter, defaulting to FLUID");
+        }
+
+        String id = flag.getRegistryKey(this);
+        if(getFluidRegistryMap().containsKey(id)){
+            return IGRegistrationHolder.getFluid.apply(id);
+        }
+        IGLib.IG_LOGGER.warn("Unable to find Fluid for material {}", id);
+        return Fluids.EMPTY;
     }
 
     default Item getItem(BlockCategoryFlags flag){

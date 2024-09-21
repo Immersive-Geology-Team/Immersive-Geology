@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
 
@@ -57,4 +58,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default IClientFluidTypeExtensions getFluidExtendedProperties() {return instance().getFluidExtendedProperties(BlockCategoryFlags.FLUID);};
 
 	default boolean checkLoadedModFlags() {return instance().checkLoadedModFlags();};
+
+	default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
 }

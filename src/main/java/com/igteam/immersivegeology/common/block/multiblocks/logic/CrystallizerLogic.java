@@ -59,7 +59,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(0, 1, 1);
+    public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
 
     private static final int ENERGY_CAPACITY = 16000;
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);

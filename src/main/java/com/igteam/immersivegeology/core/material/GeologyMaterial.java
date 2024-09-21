@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.SoundActions;
@@ -192,7 +193,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         } catch(Exception ignored){};
 
         HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(itemFlag);
-        LinkedHashSet<GeologyMaterial> material_set = new LinkedHashSet<>(Collections.singletonList(this));
+        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
         String key = IGTags.getWrapFromSet(material_set);
         IGLib.IG_LOGGER.info("Getting Tag: " + key);
         return data_map.get(key);
@@ -297,4 +298,12 @@ public abstract class GeologyMaterial implements MaterialHelper {
         for(BlockCategoryFlags flag : f) map.put(flag, this);
         EXISTING_IMPLEMENTATION_MAP.put(m, map);
     }
+
+	public TagKey<Fluid> getFluidTag()
+	{
+        HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
+        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
+        String key = IGTags.getWrapFromSet(material_set);
+        return data_map.get(key);
+	}
 }

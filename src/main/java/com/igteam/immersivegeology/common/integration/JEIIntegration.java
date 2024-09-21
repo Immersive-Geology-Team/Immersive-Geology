@@ -9,7 +9,9 @@
 package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.IModPlugin;
@@ -42,18 +44,24 @@ public class JEIIntegration implements IModPlugin
 	{
 		IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(new IGSeparatorCategory(guiHelper));
+		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
+		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 	}
 
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(JEIRecipeTypes.SEPARATOR, getRecipes(GravitySeparatorRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.CRYSTALLIZER, getRecipes(CrystallizerRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.REVERBERATION, getRecipes(RevFurnaceRecipe.RECIPES));
 	}
 
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(IGMultiblockProvider.GRAVITY_SEPARATOR.iconStack(), JEIRecipeTypes.SEPARATOR);
+		registration.addRecipeCatalyst(IGMultiblockProvider.CRYSTALLIZER.iconStack(), JEIRecipeTypes.CRYSTALLIZER);
+		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
 	}
 
 	@Override

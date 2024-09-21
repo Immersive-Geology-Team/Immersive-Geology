@@ -2,6 +2,7 @@ package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -10,6 +11,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGContent;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
+import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +39,7 @@ public class ImmersiveGeology {
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
 
         IGContent.modContruction(modEventBus);
+
     }
 
     private void clientSetup(FMLClientSetupEvent event) {

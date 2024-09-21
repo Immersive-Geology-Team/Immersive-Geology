@@ -354,6 +354,11 @@ public class IGRegistrationHolder {
         return ITEM_REGISTRY_MAP;
     }
 
+    public static HashMap<String, RegistryObject<Fluid>> getFluidRegistryMap()
+    {
+        return FLUID_REGISTRY_MAP;
+    }
+
     public static HashMap<String, RegistryObject<Block>> getBlockRegistryMap() {
         return BLOCK_REGISTRY_MAP;
     }
