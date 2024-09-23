@@ -48,7 +48,6 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 	}
 
-
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(JEIRecipeTypes.SEPARATOR, getRecipes(GravitySeparatorRecipe.RECIPES));

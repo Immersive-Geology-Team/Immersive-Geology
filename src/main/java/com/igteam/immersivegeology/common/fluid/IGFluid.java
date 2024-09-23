@@ -93,10 +93,6 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	public @NotNull FluidType getFluidType()
 	{
 		return new FluidType(getMaterial(MaterialTexture.base).getFluidProperties()){
-			public double motionScale(Entity entity) {
-				return entity.level().dimensionType().ultraWarm() ? 0.007 : 0.0023333333333333335;
-			}
-
 			@Override
 			public Component getDescription()
 			{
@@ -140,11 +136,6 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 				}
 
 				return Component.translatable("fluid.immersivegeology." + type, materialList.toArray());
-			}
-
-			public void setItemMovement(ItemEntity entity) {
-				Vec3 vec3 = entity.getDeltaMovement();
-				entity.setDeltaMovement(vec3.x * 0.949999988079071, vec3.y + (double)(vec3.y < 0.05999999865889549 ? 5.0E-4F : 0.0F), vec3.z * 0.949999988079071);
 			}
 
 			public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
@@ -286,10 +277,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 		return pLevel.dimensionType().ultraWarm() ? 1 : 2;
 	}
 
-	public BlockState createLegacyBlock(FluidState pState) {
+	public @NotNull BlockState createLegacyBlock(@NotNull FluidState pState) {
 		IFlagType<?> flag = getFlag();
 		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
-		IGLib.IG_LOGGER.info("Getting Fluid Block: {}", key);
 		return IGRegistrationHolder.getBlock.apply(key + "_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
 	}
 

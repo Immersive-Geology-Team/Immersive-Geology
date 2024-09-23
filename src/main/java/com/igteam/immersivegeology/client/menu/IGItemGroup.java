@@ -33,6 +33,7 @@ public class IGItemGroup extends CreativeModeTab {
     public IGItemGroup(CreativeModeTab.Builder builder)
     {
         super(builder);
+        ret.addAll(getSearchTabDisplayItems());
     }
 
     @Override
@@ -55,18 +56,13 @@ public class IGItemGroup extends CreativeModeTab {
         return CMT_TEXTURES;
     }
 
-    @Override
-    public void rebuildSearchTree()
-    {
-        super.rebuildSearchTree();
-    }
-
     public static void updateSubGroup(ItemSubGroup group) {
         selectedGroup = group;
         updateRet = true;
         ret.clear();
     }
     static Collection<ItemStack> ret = ItemStackLinkedSet.createTypeAndTagSet();
+    static Collection<ItemStack> dis = ItemStackLinkedSet.createTypeAndTagSet();
     private static boolean updateRet = true;
     @Override
     public @NotNull Collection<ItemStack> getDisplayItems()
@@ -115,16 +111,51 @@ public class IGItemGroup extends CreativeModeTab {
         return ret;
     }
 
-    public static ItemSubGroup getCurrentSubGroup() {
-        return selectedGroup;
+    @Override
+    public @NotNull Collection<ItemStack> getSearchTabDisplayItems()
+    {
+        if(dis.isEmpty())
+        {
+            HashMap<IFlagType<?>, ArrayList<Item>> itemMap = new HashMap<>();
+            for(Item item : IGRegistrationHolder.getIGItems())
+            {
+                if(item instanceof IGFlagItem type)
+                {
+                    IFlagType<?> pattern = type.getFlag();
+                    if(itemMap.containsKey(pattern))
+                    {
+                        ArrayList<Item> list = itemMap.get(pattern);
+                        list.add(item);
+                        itemMap.replace(pattern, list);
+                    }
+                    else
+                    {
+                        ArrayList<Item> list = new ArrayList<>();
+                        list.add(item);
+                        itemMap.put(pattern, list);
+                    }
+                }
+            }
+
+            ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
+            allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
+
+            for(IFlagType<?> pattern : allPatternList)
+            {
+                if(itemMap.containsKey(pattern))
+                {
+                    ArrayList<Item> list = itemMap.get(pattern);
+                    for(Item item : list)
+                    {
+                        dis.add(new ItemStack(item));
+                    }
+                }
+            }
+        }
+        return dis;
     }
 
-    public static class Builder extends CreativeModeTab.Builder {
-
-        public Builder(Row pRow, int pColumn)
-        {
-            super(pRow, pColumn);
-            withTabFactory(IGItemGroup::new);
-        }
+    public static ItemSubGroup getCurrentSubGroup() {
+        return selectedGroup;
     }
 }

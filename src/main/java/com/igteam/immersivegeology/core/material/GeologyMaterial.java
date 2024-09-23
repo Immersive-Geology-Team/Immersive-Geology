@@ -10,24 +10,20 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fluids.FluidType;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -195,12 +191,22 @@ public abstract class GeologyMaterial implements MaterialHelper {
         HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(itemFlag);
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
         String key = IGTags.getWrapFromSet(material_set);
-        IGLib.IG_LOGGER.info("Getting Tag: " + key);
         return data_map.get(key);
     }
 
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
-        return FluidType.Properties.create().descriptionId("fluid.immersivegeology." + flag.getName().toLowerCase()).canSwim(true).canPushEntity(true).motionScale(0.014D).density(1000).viscosity(1200).temperature(1300);
+        FluidType.Properties builder = FluidType.Properties.create()
+
+                .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY);
+        createBuildAttributes(100, 100, "fluid.immersivegeology."+flag.getName().toLowerCase()).accept(builder);
+
+        return builder;
+    }
+
+    public static Consumer<FluidType.Properties> createBuildAttributes(int density, int viscosity, String name)
+    {
+        return builder -> builder.descriptionId(name);
     }
 
     private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> EXISTING_IMPLEMENTATION_MAP = new HashMap<>();

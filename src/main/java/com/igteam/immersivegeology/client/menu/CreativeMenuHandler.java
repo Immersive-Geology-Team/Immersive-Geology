@@ -39,6 +39,8 @@ public class CreativeMenuHandler {
     boolean reset = true;
     Logger logger = IGLib.getNewLogger();
 
+    boolean jeiCompatUpdate = false;
+
     @SubscribeEvent
     public void drawScreen(ScreenEvent.BackgroundRendered event) {
         Screen screen = event.getScreen();
@@ -50,7 +52,13 @@ public class CreativeMenuHandler {
             CreativeModeTab igTab = IGRegistrationHolder.IG_BASE_TAB.get();
             if(selectedTab.equals(igTab)) {
                 if(reset) screen.resize(event.getScreen().getMinecraft(), screen.width, screen.height);
-
+                if(!jeiCompatUpdate) {
+                    // When JEI loads it takes the display items available by default.
+                    // We need all items for this cause, by the time it gets to here however we don't want to display
+                    // everything. So we force a quick update.
+                    IGItemGroup.updateSubGroup(ItemSubGroup.natural);
+                    jeiCompatUpdate = true;
+                }
                 if(!subGroupButtons.isEmpty()) {
                     subGroupButtons.forEach((button) -> {
                         button.active = true;

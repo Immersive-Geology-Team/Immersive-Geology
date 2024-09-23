@@ -29,6 +29,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import mezz.jei.library.runtime.JeiHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -88,10 +89,12 @@ public class IGRegistrationHolder {
     public static Function<String, TemplateMultiblock> getMBTemplate = (key) -> MB_TEMPLATE_MAP.get(key);
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
-    public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new IGItemGroup.Builder(CreativeModeTab.Row.TOP, 0)
+    public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
             .icon(IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt))::getDefaultInstance)
             .title(Component.translatable("itemGroup.immersivegeology"))
             .displayItems(IGRegistrationHolder::fillIGTab)
+            .withTabFactory(IGItemGroup::new)
+            .withSearchBar()
             .build());
 
     private static void fillIGTab(IGItemGroup.ItemDisplayParameters parms, IGItemGroup.Output out)
@@ -100,16 +103,14 @@ public class IGRegistrationHolder {
         for (Item item : IGRegistrationHolder.getIGItems()) {
             if(item instanceof IGFlagItem type) {
                 IFlagType<?> pattern = type.getFlag();
-                if(type.getSubGroup() == selectedGroup) {
-                    if (itemMap.containsKey(pattern)) {
-                        ArrayList<Item> list = itemMap.get(pattern);
-                        list.add(item);
-                        itemMap.replace(pattern, list);
-                    } else {
-                        ArrayList<Item> list = new ArrayList<>();
-                        list.add(item);
-                        itemMap.put(pattern, list);
-                    }
+                if (itemMap.containsKey(pattern)) {
+                    ArrayList<Item> list = itemMap.get(pattern);
+                    list.add(item);
+                    itemMap.replace(pattern, list);
+                } else {
+                    ArrayList<Item> list = new ArrayList<>();
+                    list.add(item);
+                    itemMap.put(pattern, list);
                 }
             }
         }
@@ -220,16 +221,16 @@ public class IGRegistrationHolder {
                                     if(!chemical.hasSlurryMetal(metal)) continue;
                                     String registryKey = blockCategory.getRegistryKey(material, metal);
                                     IGLib.IG_LOGGER.info("Slurry Key: {}", registryKey);
+                                    // Fluid Type Registration
+                                    registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
                                     // Still
                                     registerFluid(registryKey, () -> new IGFluid.Source(material, metal, blockCategory));
-
                                     // Flowing
                                     registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, metal, blockCategory));
 
-                                    // Fluid Type Registration
-                                    registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
-                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material, metal));
                                     registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
+                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material, metal));
                                 }
                             }
                         }
