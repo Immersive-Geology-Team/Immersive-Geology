@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:normal_ore/cuprite"
+  },
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:dirty_crushed_ore_cuprite"
+  },
+  "secondaries": [],
+  "time": 100
+}
