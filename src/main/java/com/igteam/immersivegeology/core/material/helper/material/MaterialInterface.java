@@ -19,15 +19,27 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     T instance();
 
     default ItemStack getStack(ItemCategoryFlags flag) {
-        return instance().getStack(flag);
+        return instance().getStack(flag, 1);
     }
 
     default ItemStack getStack(IFlagType<?> flag) {
-        return flag instanceof ItemCategoryFlags iflag ? getStack(iflag) : (flag instanceof BlockCategoryFlags bFlag ? getStack(bFlag) : null);
+        return flag instanceof ItemCategoryFlags iflag ? getStack(iflag, 1) : (flag instanceof BlockCategoryFlags bFlag ? getStack(bFlag, 1) : null);
     }
 
     default ItemStack getStack(BlockCategoryFlags flag) {
-        return instance().getStack(flag);
+        return instance().getStack(flag, 1);
+    }
+
+    default ItemStack getStack(ItemCategoryFlags flag, int amount) {
+        return instance().getStack(flag, amount);
+    }
+
+    default ItemStack getStack(IFlagType<?> flag, int amount) {
+        return flag instanceof ItemCategoryFlags iflag ? getStack(iflag, amount) : (flag instanceof BlockCategoryFlags bFlag ? getStack(bFlag, amount) : null);
+    }
+
+    default ItemStack getStack(BlockCategoryFlags flag, int amount) {
+        return instance().getStack(flag, amount);
     }
 
     default int getColor(IFlagType<?> flag) {
@@ -56,8 +68,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default FluidType.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
 
     default IClientFluidTypeExtensions getFluidExtendedProperties() {return instance().getFluidExtendedProperties(BlockCategoryFlags.FLUID);};
-
-	default boolean checkLoadedModFlags() {return instance().checkLoadedModFlags();};
 
 	default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
 }

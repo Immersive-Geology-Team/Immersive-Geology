@@ -7,7 +7,7 @@ license="Blu's License of Common Sense"
 
 [[mods]]
 modId = "immersivegeology"
-version = "${version}"
+version = "${version}-${build_number}"
 displayName = "Immersive Geology"
 description = "An updated in development version of Immersive Geology, tailored for HardRock TerraFirmaCraft."
 authors = "muddykat-tech, UnSchtalch"

@@ -9,16 +9,16 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.TFCTags.Blocks;
-import net.dries007.tfc.common.TFCTags.Fluids;
+
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -33,6 +33,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.concurrent.CompletableFuture;
+
+import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCFluidTag;
 
 public class IGFluidTags extends FluidTagsProvider
 {
@@ -60,8 +62,17 @@ public class IGFluidTags extends FluidTagsProvider
 					MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);
 					if(base instanceof MetalEnum metal)
 					{
-						tag(Fluids.LAVA_LIKE).add(fluid);
-						tag(Fluids.USABLE_IN_INGOT_MOLD).add(fluid);
+						if(ModFlags.TFC.isStrictlyLoaded())
+						{
+							try {
+								tag(getTFCFluidTag("LAVA_LIKE")).add(fluid);
+								tag(getTFCFluidTag("USABLE_IN_INGOT_MOLD")).add(fluid);
+							} catch(NullPointerException exception)
+							{
+								IGLib.IG_LOGGER.error("Cannot Load TFC Fluid Tag: {}", exception.getMessage());
+							}
+
+						}
 					}
 				}
 			}

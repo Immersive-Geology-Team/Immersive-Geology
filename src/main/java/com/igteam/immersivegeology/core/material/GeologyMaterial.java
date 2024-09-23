@@ -240,20 +240,6 @@ public abstract class GeologyMaterial implements MaterialHelper {
         };
     }
 
-	public boolean checkLoadedModFlags()
-	{
-        for(ModFlags mflag : ModFlags.values())
-        {
-            if(hasFlag(mflag))
-            {
-                if(!mflag.isLoaded()) return false;
-                return hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION);
-            }
-        }
-
-        return true;
-	}
-
     private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> EXISTING_IMPLEMENTATION_MAP = new HashMap<>();
 
     public Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> getExistingImplementationMap()
@@ -266,7 +252,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         for(ModFlags m : ModFlags.values())
         {
-            if(m.isLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m)) {
+            if(m.isStrictlyLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m)) {
                 if(EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h)) return true;
             }
         }

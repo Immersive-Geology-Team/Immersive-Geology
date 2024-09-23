@@ -19,12 +19,12 @@ import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder
 
 public interface MaterialHelper {
 
-    default ItemStack getStack(ItemCategoryFlags flag) {
-        return new ItemStack(getItem(flag));
+    default ItemStack getStack(ItemCategoryFlags flag, int amount) {
+        return new ItemStack(getItem(flag), amount);
     }
 
-    default ItemStack getStack(BlockCategoryFlags flag) {
-        return new ItemStack(getItem(flag));
+    default ItemStack getStack(BlockCategoryFlags flag, int amount) {
+        return new ItemStack(getItem(flag), amount);
     }
 
     default Item getItem(ItemCategoryFlags flag){

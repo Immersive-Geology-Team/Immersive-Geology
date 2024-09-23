@@ -12,7 +12,7 @@ plugins {
     id 'eclipse'
 }
 
-version = '1.0.0'
+version = '0.2.0'
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -38,6 +38,7 @@ sourceSets {
 
 def version_replaces = [
         'version'      : project.version,
+        'build_number' : version_buildnumber,
         'mc_version'   : version_minecraft,
         'forge_version': version_forge,
         'jei_version'  : version_jei,

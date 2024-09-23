@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.dries007.tfc.common.TFCTags.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 

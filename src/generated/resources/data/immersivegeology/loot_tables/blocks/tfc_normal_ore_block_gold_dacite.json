@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:cookie"
+          "name": "immersivegeology:normal_ore_gold"
         }
       ],
       "rolls": 1.0

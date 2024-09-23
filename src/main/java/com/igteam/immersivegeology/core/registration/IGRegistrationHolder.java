@@ -43,6 +43,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.*;
+import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -150,7 +151,7 @@ public class IGRegistrationHolder {
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
-                boolean hasExistingImplementation = material.instance().checkExistingImplementation(flags);
+                boolean hasExistingImplementation = material.instance().checkExistingImplementation(flags) &! DatagenModLoader.isRunningDataGen();
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
                         case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK -> {
@@ -167,6 +168,7 @@ public class IGRegistrationHolder {
                                 // checks is the material has any ModFlags (e.g. Beyond Earth)
                                 if(!base.hasFlag(MaterialFlags.IS_ORE_BEARING)) continue;
                                 if(!material.instance().acceptableStoneType(base.instance())) continue;
+                                if(Arrays.stream(ModFlags.values()).anyMatch((m) -> !m.isStrictlyLoaded() && base.hasFlag(m)) &! DatagenModLoader.isRunningDataGen()) continue;
                                 if(checkModMaterialsForOverlap(base, material.instance(), flags)) continue;
                                 // After all checks, now we can generate the different ore levels
                                 for(OreRichness richness : OreRichness.values()){
