@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.common.fluid;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
@@ -20,12 +22,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -144,7 +148,34 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 			}
 
 			public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-				consumer.accept(getMaterial(MaterialTexture.base).getFluidExtendedProperties());
+				consumer.accept(getFluidExtendedProperties(category));
+			}
+		};
+	}
+
+	public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
+	{
+		IGFluid fluid = this;
+		MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);
+		MaterialInterface<?> overlay = fluid.getMaterial(MaterialTexture.overlay);
+		return new IClientFluidTypeExtensions()
+		{
+			@Override
+			public int getTintColor()
+			{
+				return 0xFF000000 | (overlay != null ? overlay.getColor(flag) : base.getColor(flag));
+			}
+
+			@Override
+			public ResourceLocation getStillTexture()
+			{
+				return base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
+			}
+
+			@Override
+			public ResourceLocation getFlowingTexture()
+			{
+				return base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
 			}
 		};
 	}
@@ -155,7 +186,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	@Override
 	public Block getBlock() {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_block");
+		IFlagType<?> flag = getFlag();
+		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
+		return IGRegistrationHolder.getBlock.apply(key + "_block");
 	}
 
 	@Override
@@ -166,13 +199,17 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public Fluid getFlowing()
 	{
-		return IGRegistrationHolder.getFluid.apply(this.getFlag().getRegistryKey(this.getMaterial(MaterialTexture.base)) + "_flowing");
+		IFlagType<?> flag = getFlag();
+		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
+		return IGRegistrationHolder.getFluid.apply(key + "_flowing");
 	}
 
 	@Override
 	public Fluid getSource()
 	{
-		return IGRegistrationHolder.getFluid.apply(this.getFlag().getRegistryKey(this.getMaterial(MaterialTexture.base)));
+		IFlagType<?> flag = getFlag();
+		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
+		return IGRegistrationHolder.getFluid.apply(key);
 	}
 
 	@Override
@@ -237,7 +274,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public Item getBucket()
 	{
-		return IGRegistrationHolder.getItem.apply(ItemCategoryFlags.BUCKET.getRegistryKey(this.getMaterial(MaterialTexture.base), category));
+		String key = materialMap.size() > 1 ? ItemCategoryFlags.BUCKET.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : ItemCategoryFlags.BUCKET.getRegistryKey(getMaterial(MaterialTexture.base), category);
+		return IGRegistrationHolder.getItem.apply(key);
 	}
 
 	public int getSlopeFindDistance(LevelReader pLevel) {
@@ -249,7 +287,10 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public BlockState createLegacyBlock(FluidState pState) {
-		return IGRegistrationHolder.getBlock.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)) + "_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
+		IFlagType<?> flag = getFlag();
+		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
+		IGLib.IG_LOGGER.info("Getting Fluid Block: {}", key);
+		return IGRegistrationHolder.getBlock.apply(key + "_block").defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(pState));
 	}
 
 	@Override
@@ -261,7 +302,9 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public boolean isSame(@Nonnull Fluid fluidIn)
 	{
-		return fluidIn==IGRegistrationHolder.getFluid.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base)))||fluidIn==IGRegistrationHolder.getFluid.apply(getFlag().getRegistryKey(getMaterial(MaterialTexture.base))+ "_flowing");
+		IFlagType<?> flag = getFlag();
+		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
+		return fluidIn==IGRegistrationHolder.getFluid.apply(key)||fluidIn==IGRegistrationHolder.getFluid.apply(key + "_flowing");
 	}
 
 	@Override
@@ -271,8 +314,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Source extends IGFluid {
-		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra) {
-			super(BlockCategoryFlags.FLUID, material);
+		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag) {
+			super(flag, material);
 			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 
@@ -286,8 +329,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Flowing extends IGFluid {
-		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra) {
-			super(BlockCategoryFlags.FLUID, material);
+		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag) {
+			super(flag, material);
 			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 

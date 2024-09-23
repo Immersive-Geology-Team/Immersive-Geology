@@ -16,7 +16,6 @@ public class MaterialCopper extends MaterialNativeMetal {
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.WIRE, ItemCategoryFlags.DUST, ItemCategoryFlags.PLATE, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        addExistingFlag(ModFlags.TFC, ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE,  ItemCategoryFlags.ROD);
     }
 
     @Override

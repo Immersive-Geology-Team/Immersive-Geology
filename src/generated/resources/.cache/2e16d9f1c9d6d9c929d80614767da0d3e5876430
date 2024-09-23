@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-22T09:12:45.418235228	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2024-09-24T01:00:44.165379865	Tags for minecraft:fluid mod id immersivegeology
 bec09497998941e568466279888fde561d6b2d42 data/forge/tags/fluids/aluminium.json
 f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
 6d004a7a2e16f1bb517a2cab46e4f58a43bcb5e2 data/forge/tags/fluids/bronze.json
@@ -30,5 +30,5 @@ b8e04d1a760598e615fd5f05728d2ff3578b2be5 data/forge/tags/fluids/sulfuricacid.jso
 54e971e29f4cd4132b743c8d3bea360c93afccb3 data/forge/tags/fluids/vanadium.json
 1d09e1c3f05ef1b9b09080e07fb0665dd62a1343 data/forge/tags/fluids/zinc.json
 a5cd8cc8588f063a3110ed98e885aaacfdbc5511 data/forge/tags/fluids/zirconium.json
-157c0af49bc500165199ba98942e37724ffa039b data/minecraft/tags/fluids/lava.json
-157c0af49bc500165199ba98942e37724ffa039b data/tfc/tags/fluids/usable_in_ingot_mold.json
+64f9f42caf9667495c4a44c6b9efdc1331d2bcb1 data/minecraft/tags/fluids/lava.json
+64f9f42caf9667495c4a44c6b9efdc1331d2bcb1 data/tfc/tags/fluids/usable_in_ingot_mold.json

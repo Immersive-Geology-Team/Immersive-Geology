@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.common.block;
 
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -27,8 +29,6 @@ import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class IGFluidBlock extends LiquidBlock
@@ -61,5 +61,10 @@ public class IGFluidBlock extends LiquidBlock
 	T withCopiedValue(Property<S> prop, T oldState, StateHolder<?, ?> copyFrom)
 	{
 		return oldState.setValue(prop, copyFrom.getValue(prop));
+	}
+
+	public boolean isTranslucent()
+	{
+		return (this.material instanceof ChemicalEnum);
 	}
 }

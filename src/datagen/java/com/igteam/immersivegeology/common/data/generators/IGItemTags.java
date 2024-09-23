@@ -11,12 +11,10 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -53,6 +51,8 @@ public class IGItemTags extends ItemTagsProvider
 				{
 					if(category.getValue() instanceof ItemCategoryFlags itemFlag)
 					{
+						if(material.instance().checkExistingImplementation(ModFlags.MINECRAFT, itemFlag)) continue;
+						if(material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, itemFlag)) continue;
 						Item item = material.instance().getItem(itemFlag);
 						// We use Cookie and Cake in cases where Items do not return a valid value.
 						assert item != null;
@@ -61,6 +61,7 @@ public class IGItemTags extends ItemTagsProvider
 							tag(item_key).add(item);
 							if(itemFlag.equals(ItemCategoryFlags.INGOT))
 							{
+								if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
 								if(ModFlags.TFC.isStrictlyLoaded()) {
 									TagKey<Item> tagKey = getTFCItemTag("PILEABLE_INGOTS");
 									if(tagKey == null)

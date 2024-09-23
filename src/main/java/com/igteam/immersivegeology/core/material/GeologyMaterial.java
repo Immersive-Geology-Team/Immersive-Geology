@@ -200,44 +200,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
-        return FluidType.Properties.create().descriptionId("fluid.immersivegeology." + flag.getName().toLowerCase()).canSwim(true).canDrown(false).pathType(BlockPathTypes.LAVA).adjacentPathType((BlockPathTypes)null).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA).lightLevel(15).density(3000).viscosity(6000).temperature(1300);
-    }
-
-    public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
-    {
-        GeologyMaterial material = this;
-        return new IClientFluidTypeExtensions()
-        {
-            @Override
-            public int getTintColor()
-            {
-                return material.getColor(flag);
-            }
-
-            @Override
-            public ResourceLocation getStillTexture()
-            {
-                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
-            }
-
-            @Override
-            public ResourceLocation getFlowingTexture()
-            {
-                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
-            }
-
-            @Override
-            public @Nullable ResourceLocation getRenderOverlayTexture(Minecraft mc)
-            {
-                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
-            }
-
-            @Override
-            public @Nullable ResourceLocation getOverlayTexture()
-            {
-                return hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
-            }
-        };
+        return FluidType.Properties.create().descriptionId("fluid.immersivegeology." + flag.getName().toLowerCase()).canSwim(true).canPushEntity(true).motionScale(0.014D).density(1000).viscosity(1200).temperature(1300);
     }
 
     private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> EXISTING_IMPLEMENTATION_MAP = new HashMap<>();
@@ -257,6 +220,12 @@ public abstract class GeologyMaterial implements MaterialHelper {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean checkExistingImplementation(ModFlags m, IFlagType<?> h)
+    {
+        return m.isStrictlyLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m) && EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h);
     }
 
     @Override

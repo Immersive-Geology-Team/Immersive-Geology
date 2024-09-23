@@ -8,12 +8,10 @@ import blusunrize.immersiveengineering.data.models.NongeneratedModels.Nongenerat
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGSlabBlock;
-import com.igteam.immersivegeology.common.block.IGStairBlock;
+import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
@@ -38,10 +36,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.mutable.Mutable;
+import org.apache.commons.lang3.mutable.MutableObject;
 import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
@@ -87,9 +90,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SLAB ->  registerSlabBlock(igBlock);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
                     case ORE_BLOCK -> registerOreBlock(igBlock);
-                    case FLUID -> registerFluidBlock(igBlock, flag);
                 }
             }
+        }
+
+        List<? extends Fluid> igFluids = IGRegistrationHolder.supplyDeferredFluids().get();
+        for(Fluid fluid : igFluids)
+        {
+            registerFluidBlock(fluid);
         }
 
         // All Multiblock Data generation code has been copied from the Immersive Engineering Codebase
@@ -302,7 +310,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         } catch(IllegalArgumentException error) {
             // Extended the normal Block Model Builder to include an unsafe method to add unknown texture locations.
             // NOTE: only needed as a data gen implementation if some mods are unavailable in the data generation, which would prevent the safe method from running.
-            logger.error("Error: " + error.getMessage());
+            //logger.error("Error: " + error.getMessage());
 
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {
@@ -324,13 +332,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void registerFluidBlock(IGBlockType blockType, IFlagType<?> flag)
+    private void registerFluidBlock(Fluid fluid)
     {
-        IGGenericBlock f = (IGGenericBlock) blockType;
-        ResourceLocation stillTexture = f.getMaterial(MaterialTexture.base).getTextureLocation(flag);
-        ModelFile model = models().getBuilder("block/fluid/"+flag.getRegistryKey(f.getMaterial(MaterialTexture.base)))
-                .texture("particle", stillTexture);
-        getVariantBuilder(f.getBlock()).partialState().setModels(new ConfiguredModel(model));
+        if(fluid instanceof IGFluid still)
+        {
+            if(still != still.getSource()) return;
+            IFlagType<?> flag = still.getFlag();
+            Mutable<IClientFluidTypeExtensions> box = new MutableObject<>();
+            still.getFluidType().initializeClient(box::setValue);
+            ResourceLocation stillTexture = box.getValue().getStillTexture();
+            String registryName = (still.getMaterials().size() > 1) ? flag.getRegistryKey(still.getMaterial(MaterialTexture.base), still.getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(still.getMaterial(MaterialTexture.base));
+            String path = "block/fluid/"+ registryName;
+            ModelFile model = models().getBuilder(path)
+                    .texture("particle", stillTexture);
+            getVariantBuilder(still.getBlock()).partialState().setModels(new ConfiguredModel(model));
+        }
     }
 
     private void registerStairsBlock(IGBlockType blockType)

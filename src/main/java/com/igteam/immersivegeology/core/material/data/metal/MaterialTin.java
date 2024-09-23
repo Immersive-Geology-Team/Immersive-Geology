@@ -13,7 +13,6 @@ public class MaterialTin extends MaterialMetal {
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        addExistingFlag(ModFlags.TFC, ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE,  ItemCategoryFlags.ROD);
     }
 
     @Override

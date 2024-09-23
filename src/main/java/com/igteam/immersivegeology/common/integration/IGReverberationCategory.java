@@ -50,7 +50,7 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 
 		TagKey<Fluid> fluid = ChemicalEnum.SulfurDioxde.getFluidTag();
 		FluidTagInput taggedFluid = new FluidTagInput(fluid, recipe.getWasteAmount());
-		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  recipe.getWasteAmount());
+		int tankSize = Math.max(FluidType.BUCKET_VOLUME,  recipe.getWasteAmount());
 		builder.addSlot(RecipeIngredientRole.INPUT, 101, 27)
 				.setFluidRenderer(tankSize, false, 16, 47)
 				.addIngredients(ForgeTypes.FLUID_STACK, taggedFluid.getMatchingFluidStacks())

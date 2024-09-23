@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.client;
 
+import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -38,16 +39,29 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
 
     // Register This as the color handler for all IG Items and Blocks
     public static void register(){
-        for(Item i : IGRegistrationHolder.getItemRegistryMap().values().stream().map(RegistryObject::get).toList()){
+        for(RegistryObject<Item> holder : IGRegistrationHolder.getItemRegistryMap().values()){
+            Item i = holder.get();
             if(i instanceof IGFlagItem){
                 Minecraft.getInstance().getItemColors().register(INSTANCE, i);
             }
         }
 
-        for(Block b : IGRegistrationHolder.getBlockRegistryMap().values().stream().map(RegistryObject::get).toList()){
+        for(RegistryObject<Block> holder : IGRegistrationHolder.getBlockRegistryMap().values()){
+            Block b = holder.get();
             if(b instanceof IGBlockType igBlock){
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
                 setRenderType(b, igBlock.getFlag().getRenderType());
+            }
+
+            if(b instanceof IGFluidBlock fluidBlock)
+            {
+                if(fluidBlock.isTranslucent()){
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.translucent());
+                    continue;
+                }
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.solid());
             }
         }
 

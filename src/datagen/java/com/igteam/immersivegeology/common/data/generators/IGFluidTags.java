@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -60,6 +61,7 @@ public class IGFluidTags extends FluidTagsProvider
 				if(fluid_key != null) {
 					tag(fluid_key).add(fluid.getSource());
 					MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);
+					if(base.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
 					if(base instanceof MetalEnum metal)
 					{
 						if(ModFlags.TFC.isStrictlyLoaded())

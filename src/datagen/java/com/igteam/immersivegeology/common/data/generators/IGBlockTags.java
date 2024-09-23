@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -43,9 +44,12 @@ public class IGBlockTags extends BlockTagsProvider
 		IGLib.IG_LOGGER.info("IG Block Tags");
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
+			if(block.get() instanceof IGFluidBlock fluidBlock)
+			{
+				tag(BlockTags.REPLACEABLE).add(fluidBlock);
+			}
 			if(block.get() instanceof IGOreBlock oreBlock)
 			{
-
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(oreBlock);
 				tag(BlockTags.NEEDS_STONE_TOOL).add(oreBlock);
 				tag(Tags.Blocks.ORES).add(oreBlock);

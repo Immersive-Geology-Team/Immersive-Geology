@@ -47,6 +47,7 @@ import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -62,8 +63,8 @@ import static com.igteam.immersivegeology.client.menu.IGItemGroup.selectedGroup;
 public class IGRegistrationHolder {
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, IGLib.MODID);
-    private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(Registries.FLUID, IGLib.MODID);
-    private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(Keys.FLUID_TYPES, IGLib.MODID);
+    private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(ForgeRegistries.FLUIDS, IGLib.MODID);
+    private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, IGLib.MODID);
 
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
@@ -201,9 +202,9 @@ public class IGRegistrationHolder {
                             String registryKey = blockCategory.getRegistryKey(material);
 
                             // Still
-                            registerFluid(registryKey, () -> new IGFluid.Source(material, null));
+                            registerFluid(registryKey, () -> new IGFluid.Source(material, null, blockCategory));
                             // Flowing
-                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, null));
+                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, null, blockCategory));
 
                             // Fluid Type Registration
                             registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
@@ -218,12 +219,12 @@ public class IGRegistrationHolder {
                                 {
                                     if(!chemical.hasSlurryMetal(metal)) continue;
                                     String registryKey = blockCategory.getRegistryKey(material, metal);
-
+                                    IGLib.IG_LOGGER.info("Slurry Key: {}", registryKey);
                                     // Still
-                                    registerFluid(registryKey, () -> new IGFluid.Source(material, metal));
+                                    registerFluid(registryKey, () -> new IGFluid.Source(material, metal, blockCategory));
 
                                     // Flowing
-                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, metal));
+                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, metal, blockCategory));
 
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());

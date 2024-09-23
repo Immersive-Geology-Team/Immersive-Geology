@@ -77,6 +77,7 @@ public interface MaterialHelper {
     void addExistingFlag(ModFlags m, BlockCategoryFlags... f);
 
     boolean checkExistingImplementation(IFlagType<?> h);
+    boolean checkExistingImplementation(ModFlags m, IFlagType<?> h);
 
     String getName();
 }

@@ -127,6 +127,9 @@
 
 
 
+  "formatting.space": " ",
+  "material.immersivegeology.ore": "Ore",
+  "material.immersivegeology.native": "Native",
   "material.immersivegeology.ore.poor": "Poor",
   "material.immersivegeology.ore.normal": "Normal",
   "material.immersivegeology.ore.rich": "Rich",
