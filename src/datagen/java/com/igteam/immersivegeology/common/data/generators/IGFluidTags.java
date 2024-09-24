@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -55,9 +56,17 @@ public class IGFluidTags extends FluidTagsProvider
 				// Skip Flowing State Fluid
 				if(!fluid.getSource().equals(fluid)) continue;
 				// Skip Slurry Types for now.
-				if(fluid.getMaterial(MaterialTexture.overlay) != null) continue;
+				if(fluid.getMaterial(MaterialTexture.overlay) != null) {
+					TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(BlockCategoryFlags.SLURRY, fluid.getMaterial(MaterialTexture.overlay));
+					IGLib.IG_LOGGER.info("Tag? {}", fluid_key);
+					if(fluid_key != null)
+					{
+						tag(fluid_key).add(fluid.getSource());
+					}
+					continue;
+				}
 
-				TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag();
+				TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(BlockCategoryFlags.FLUID);
 				if(fluid_key != null) {
 					tag(fluid_key).add(fluid.getSource());
 					MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);

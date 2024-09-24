@@ -2,11 +2,11 @@
   "type": "immersivegeology:crystallizer",
   "energy": 1000,
   "input": {
-    "amount": 1000,
-    "tag": "minecraft:water"
+    "amount": 250,
+    "tag": "forge:hydrochloricacid_chromium"
   },
   "result": {
-    "tag": "forge:crystal/aluminium"
+    "tag": "forge:crystal/chromium"
   },
   "time": 100
 }

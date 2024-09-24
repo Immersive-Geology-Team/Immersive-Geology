@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySepara
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -48,7 +49,7 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 68, 41)
 				.addItemStack(recipe.result.get());
 
-		TagKey<Fluid> fluid = ChemicalEnum.SulfurDioxde.getFluidTag();
+		TagKey<Fluid> fluid = ChemicalEnum.SulfurDioxde.getFluidTag(BlockCategoryFlags.FLUID);
 		FluidTagInput taggedFluid = new FluidTagInput(fluid, recipe.getWasteAmount());
 		int tankSize = Math.max(FluidType.BUCKET_VOLUME,  recipe.getWasteAmount());
 		builder.addSlot(RecipeIngredientRole.INPUT, 101, 27)

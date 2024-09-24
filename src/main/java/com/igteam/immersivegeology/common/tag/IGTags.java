@@ -56,7 +56,9 @@ public class IGTags
 
 
 		FLUID_TAG_HOLDER.put(BlockCategoryFlags.FLUID, new HashMap<>());
-		HashMap<String, TagKey<Fluid>> map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
+		FLUID_TAG_HOLDER.put(BlockCategoryFlags.SLURRY, new HashMap<>());
+		HashMap<String, TagKey<Fluid>> fluid_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
+		HashMap<String, TagKey<Fluid>> slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY);
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 		{
 			if(materialInterface.hasFlag(BlockCategoryFlags.FLUID)) {
@@ -65,8 +67,18 @@ public class IGTags
 
 				MaterialHelper base = materialInterface.instance();
 				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase()));
-				IGLib.IG_LOGGER.info("Fluid Tag: {} | {}", getWrapFromSet(Set.of(base)), tag);
-				map.put(getWrapFromSet(Set.of(base)), tag);
+				fluid_map.put(getWrapFromSet(Set.of(base)), tag);
+			}
+
+			if(materialInterface.hasFlag(BlockCategoryFlags.SLURRY)) {
+				for(MetalEnum metal : MetalEnum.values()){
+					String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, metal);
+					if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) continue;
+
+					MaterialHelper base = materialInterface.instance();
+					TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase() + "_" + metal.getName().toLowerCase()));
+					slurry_map.put(getWrapFromSet(Set.of(base, metal.instance())), tag);
+				}
 			}
 
 		}

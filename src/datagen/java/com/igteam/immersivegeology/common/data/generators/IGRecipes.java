@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.common.data.helper.TFCCollapseRecipeBuilder;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
@@ -15,9 +16,12 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.Cryst
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -27,13 +31,16 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class IGRecipes extends RecipeProvider
@@ -80,7 +87,11 @@ public class IGRecipes extends RecipeProvider
 			}
 		}
 
+
+		String key = IGTags.getWrapFromSet(Set.of(ChemicalEnum.HydrochloricAcid.instance(), MetalEnum.Chromium.instance()));
+		TagKey<Fluid> fluidTag = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY).get(key);
+		CrystallizerRecipeBuilder.builder(MetalEnum.Chromium.getItemTag(ItemCategoryFlags.CRYSTAL), 1).setEnergy(1000).setTime(100).addInput(new FluidTagInput(fluidTag, 250)).build(consumer, new ResourceLocation(IGLib.MODID, "crystallizer/chromite_slurry_to_crystal"));
+
 		RevFurnaceRecipeBuilder.builder(MetalEnum.Unobtanium.getStack(ItemCategoryFlags.INGOT)).setTime(100).setWasteAmount(250).addInput(MineralEnum.Unobtania.getStack(ItemCategoryFlags.CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "reverberation_furnace/test_recipe"));
-		CrystallizerRecipeBuilder.builder(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.CRYSTAL), 1).setEnergy(1000).setTime(100).addInput(FluidTags.WATER, 1000).build(consumer, new ResourceLocation(IGLib.MODID, "crystallizer/test_recipe"));
 	}
 }

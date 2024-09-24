@@ -67,5 +67,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default FluidType.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
 
-	default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
+    default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag) { return instance().getFluidTag(flag);};
+    default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... extras) { return instance().getFluidTag(flag, extras);};
 }

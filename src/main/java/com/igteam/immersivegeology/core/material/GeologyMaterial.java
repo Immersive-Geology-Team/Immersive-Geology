@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +27,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
@@ -260,11 +262,24 @@ public abstract class GeologyMaterial implements MaterialHelper {
         EXISTING_IMPLEMENTATION_MAP.put(m, map);
     }
 
-	public TagKey<Fluid> getFluidTag()
+	public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag)
 	{
-        HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
+        HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
         String key = IGTags.getWrapFromSet(material_set);
         return data_map.get(key);
 	}
+
+    public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
+    {
+        Set<MaterialHelper> helpers = Arrays.stream(materials).map(MaterialInterface::instance).collect(Collectors.toSet());
+
+        HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
+        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Set.of(this));
+        material_set.addAll(helpers);
+
+        String key = IGTags.getWrapFromSet(material_set);
+        IGLib.IG_LOGGER.info("Getting Fluid Tag {}", key);
+        return data_map.get(key);
+    }
 }
