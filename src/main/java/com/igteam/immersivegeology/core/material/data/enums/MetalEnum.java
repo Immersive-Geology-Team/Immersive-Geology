@@ -19,6 +19,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     Osmium(new MaterialOsmium()),
     Platinum(new MaterialPlatinum()),
     Silver(new MaterialSilver()),
+    Steel(new MaterialSteel()),
     Thorium(new MaterialThorium()),
     Tin(new MaterialTin()),
     Titanium(new MaterialTitanium()),

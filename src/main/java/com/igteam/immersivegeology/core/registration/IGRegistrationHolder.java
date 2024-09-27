@@ -9,9 +9,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.BlastFurnaceMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.CokeOvenMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.ImprovedBlastfurnaceMultiblock;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
@@ -29,7 +26,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import mezz.jei.library.runtime.JeiHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -43,13 +39,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.*;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistries.Keys;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -58,8 +56,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import static com.igteam.immersivegeology.client.menu.IGItemGroup.selectedGroup;
 
 public class IGRegistrationHolder {
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
@@ -150,9 +146,8 @@ public class IGRegistrationHolder {
     public static void initialize()
     {
         initializeMultiblocks();
-        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 150, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 50, IGReverberationFurnaceMultiblock.class, BlastFurnaceMultiblock.class, CokeOvenMultiblock.class, ImprovedBlastfurnaceMultiblock.class));
-        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Titanium, 1000, IGCoreDrillMultiblock.class));
+        registerItem("ig_toolkit_0", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 10, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGReverberationFurnaceMultiblock.class));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
