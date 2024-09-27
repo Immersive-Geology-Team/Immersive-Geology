@@ -15,10 +15,7 @@ import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
-import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
-import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
-import com.igteam.immersivegeology.common.item.IGGenericItem;
-import com.igteam.immersivegeology.common.item.IGGenericOreItem;
+import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
@@ -150,6 +147,9 @@ public class IGRegistrationHolder {
     public static void initialize()
     {
         initializeMultiblocks();
+        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGReverberationFurnaceMultiblock.class));
+
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material

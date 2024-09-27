@@ -14,13 +14,17 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMulti
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.igteam.immersivegeology.common.item.IGMBFormationItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -38,6 +42,13 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock
     public IGTemplateMultiblock(ResourceLocation loc, BlockPos masterFromOrigin, BlockPos triggerFromOrigin, BlockPos size, MultiblockRegistration<?> logic){
         super(loc, masterFromOrigin, triggerFromOrigin, size);
         this.logic = logic;
+    }
+
+    @Override
+    public boolean createStructure(Level world, BlockPos pos, Direction side, Player player)
+    {
+        if(player.getMainHandItem().getItem() instanceof IGMBFormationItem) return super.createStructure(world, pos, side, player);
+        return false;
     }
 
     @Override

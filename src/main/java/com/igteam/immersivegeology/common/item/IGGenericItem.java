@@ -19,7 +19,11 @@ public class IGGenericItem extends Item implements IGFlagItem {
     protected final ItemCategoryFlags category;
 
     public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material) {
-        super(new Properties());
+        this(flag, material, new Properties());
+    }
+
+    public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material, Properties properties) {
+        super(properties);
         this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }

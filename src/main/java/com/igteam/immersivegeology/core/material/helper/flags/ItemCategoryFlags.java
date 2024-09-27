@@ -25,7 +25,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     CRUSHED_ORE(1),
     METAL_OXIDE(1),
     DIRTY_CRUSHED_ORE(1),
-    BUCKET(3);
+    BUCKET(3),
+    MISC(3);
 
     private final int groupOrdinal;
 

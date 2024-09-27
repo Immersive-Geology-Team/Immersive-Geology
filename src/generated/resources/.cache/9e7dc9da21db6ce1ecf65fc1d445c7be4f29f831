@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-24T11:03:21.289854939	Item Models: immersivegeology
+// 1.20.1	2024-09-27T12:00:03.180701807	Item Models: immersivegeology
 f37e1bb26f8726a922777a57c04cd2c659ba27d3 assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_mercury_stone.json
 5dd935115cfd4b3fa5503a79dcfab366dd01be03 assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_moon_stone.json
 ac6a8880d2daffba302d18ee50ee662c489531c5 assets/immersivegeology/models/item/ad_astra_normal_ore_block_anatase_mercury_stone.json
@@ -523,6 +523,7 @@ b668841af336f46dc8ba249be32b246f06b26004 assets/immersivegeology/models/item/ing
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_vanadium.json
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_zinc.json
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_zirconium.json
+92f1acfae837a2f38740bc27e1b35b462ce0e59e assets/immersivegeology/models/item/misc_bronze.json
 32940deded19f59a791d18ce2d4973b06114c010 assets/immersivegeology/models/item/normal_ore_acanthite.json
 32940deded19f59a791d18ce2d4973b06114c010 assets/immersivegeology/models/item/normal_ore_alumina.json
 32940deded19f59a791d18ce2d4973b06114c010 assets/immersivegeology/models/item/normal_ore_anatase.json

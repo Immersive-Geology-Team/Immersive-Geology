@@ -8,7 +8,7 @@
     "loader": "forge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/industrial_sluice/industrial_sluice.obj",
     "textures": {
-      "particle": "immersivegeology:block/multiblock/crystallizer"
+      "particle": "immersivegeology:block/multiblock/industrial_sluice"
     }
   },
   "loader": "immersiveengineering:basic_split",
@@ -635,6 +635,6 @@
     ]
   ],
   "textures": {
-    "particle": "immersivegeology:block/multiblock/crystallizer"
+    "particle": "immersivegeology:block/multiblock/industrial_sluice"
   }
 }
