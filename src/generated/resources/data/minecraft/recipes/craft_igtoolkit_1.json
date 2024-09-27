@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/bronze"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " BS",
+    " WB",
+    "W  "
+  ],
+  "result": {
+    "item": "immersivegeology:ig_toolkit_1"
+  },
+  "show_notification": true
+}

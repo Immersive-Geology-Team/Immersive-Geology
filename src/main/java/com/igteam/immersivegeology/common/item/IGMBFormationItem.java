@@ -8,15 +8,12 @@
 
 package com.igteam.immersivegeology.common.item;
 
-import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
-import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -25,11 +22,9 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
@@ -55,11 +50,14 @@ public class IGMBFormationItem extends IGGenericItem
 		return 1;
 	}
 
-	@Override
-	public int getMaxDamage(ItemStack stack)
-	{
-		return 5;
-	}
+	// TODO allow setting by Configuration.
+	/*
+		@Override
+		public int getMaxDamage(ItemStack stack)
+		{
+			return 5;
+		}
+	*/
 
 	@Override
 	public Component getName(ItemStack pStack) {

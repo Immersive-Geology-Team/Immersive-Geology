@@ -26,12 +26,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -55,6 +57,18 @@ public class IGRecipes extends RecipeProvider
 	{
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
+		itemRecipes(consumer);
+	}
+
+	private void itemRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		// Bronze Hammer
+		Item toolkit = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
+		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit);
+		  recipe.pattern(" BS")
+				.pattern(" WB")
+				.pattern("W  ").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(Items.STICK)).define('S', Ingredient.of(Items.STRING))
+				  .group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_1");
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
@@ -86,7 +100,6 @@ public class IGRecipes extends RecipeProvider
 				GravitySeparatorRecipeBuilder.builder(mineral.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(mineral.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ mineral.getName() + "_to_crushed"));
 			}
 		}
-
 
 		String key = IGTags.getWrapFromSet(Set.of(ChemicalEnum.HydrochloricAcid.instance(), MetalEnum.Chromium.instance()));
 		TagKey<Fluid> fluidTag = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY).get(key);

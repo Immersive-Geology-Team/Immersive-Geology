@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-24T11:18:54.060279523	Recipes
+// 1.20.1	2024-09-27T21:17:32.904355425	Recipes
 6e122ab8a1bc2b15486140401cb9e9007b1c95fc data/immersivegeology/recipes/collapse/ad_astra_normal_ore_block_acanthite_mercury_stone.json
 a36c0ab0120ffd3fe09e3469514ef0f693b64e5b data/immersivegeology/recipes/collapse/ad_astra_normal_ore_block_acanthite_moon_stone.json
 d8b3ccebf3eed1737ecf28787187f6cdd22f5489 data/immersivegeology/recipes/collapse/ad_astra_normal_ore_block_anatase_mercury_stone.json
@@ -1721,3 +1721,5 @@ f699192f07c023c8955a80e70b7537dcafd7d9bc data/immersivegeology/recipes/gravityse
 a9132bb40d99bae6b0b561e19b050d2b6e59884b data/immersivegeology/recipes/gravityseparator/dirty_crushed_wolframite_to_crushed.json
 bb78da592c7a42940b380e6ef7b47073c004039e data/immersivegeology/recipes/gravityseparator/dirty_crushed_zircon_to_crushed.json
 ba64cec9291beee540082cdfbab3a158704c2625 data/immersivegeology/recipes/reverberation_furnace/test_recipe.json
+e5c2259c673b5c083f0de00e6e4a6917a73b671b data/minecraft/advancements/recipes/tools/craft_igtoolkit_1.json
+3d5cbdba376c82aacc65011b1a3f1b38094a907a data/minecraft/recipes/craft_igtoolkit_1.json

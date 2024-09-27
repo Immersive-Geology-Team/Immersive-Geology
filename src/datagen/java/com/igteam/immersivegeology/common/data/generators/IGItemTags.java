@@ -8,12 +8,14 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.api.IETags;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -43,6 +45,8 @@ public class IGItemTags extends ItemTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
+		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_0"));
+		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_1"));
 		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
 		{
 			for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
