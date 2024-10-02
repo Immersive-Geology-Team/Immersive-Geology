@@ -1,3 +1,10 @@
+/*
+ * Muddykat
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
 package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
@@ -73,6 +80,7 @@ public class IGRegistrationHolder {
 
     public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
     public static final HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
+
     private static <T extends MultiblockHandler.IMultiblock>
     T registerMultiblock(T multiblock) {
         MultiblockHandler.registerMultiblock(multiblock);
@@ -82,7 +90,7 @@ public class IGRegistrationHolder {
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
     public static Function<String, Block> getBlock = (key) -> BLOCK_REGISTRY_MAP.get(key).get();
 
-    public static Function<String, TemplateMultiblock> getMBTemplate = (key) -> MB_TEMPLATE_MAP.get(key);
+    public static Function<String, TemplateMultiblock> getMBTemplate = MB_TEMPLATE_MAP::get;
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
     public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
@@ -146,8 +154,9 @@ public class IGRegistrationHolder {
     public static void initialize()
     {
         initializeMultiblocks();
-        registerItem("ig_toolkit_0", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 10, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGReverberationFurnaceMultiblock.class));
+        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 10, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class));
+        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 15, IGBloomeryMultiblock.class));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
@@ -252,7 +261,6 @@ public class IGRegistrationHolder {
                 }
             }
         }
-
     }
 
     public static MultiblockRegistration<?> getMB(String key){
@@ -262,6 +270,7 @@ public class IGRegistrationHolder {
     private static void initializeMultiblocks()
     {
         registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
+        registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY);
         registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);

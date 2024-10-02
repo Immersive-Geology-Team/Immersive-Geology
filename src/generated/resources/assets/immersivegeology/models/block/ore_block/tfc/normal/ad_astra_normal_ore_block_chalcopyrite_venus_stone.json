@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_sedimentary",
-  "textures": {
-    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/sedimentary/sedimentary_normal",
-    "sided": "ad_astra:block/venus_stone",
-    "top": "ad_astra:block/venus_stone"
-  }
-}

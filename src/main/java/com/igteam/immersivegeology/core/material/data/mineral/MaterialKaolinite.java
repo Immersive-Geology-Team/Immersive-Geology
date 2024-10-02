@@ -1,8 +1,11 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
+import java.util.Set;
 import java.util.function.Function;
 
 public class MaterialKaolinite extends MaterialMineral {
@@ -17,5 +20,11 @@ public class MaterialKaolinite extends MaterialMineral {
     @Override
     protected Function<IFlagType<?>, Integer> materialColorFunction() {
         return ((p) -> (0xE5DFD1));
+    }
+
+    @Override
+    public Set<MaterialInterface<?>> getSourceMaterials()
+    {
+        return Set.of();
     }
 }

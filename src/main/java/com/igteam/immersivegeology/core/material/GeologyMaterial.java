@@ -1,3 +1,11 @@
+/*
+ * Muddykat
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
 package com.igteam.immersivegeology.core.material;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
@@ -8,10 +16,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
-import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
@@ -38,6 +43,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected Function<IFlagType<?>, Integer> colorFunction; // in goes a category, returns the color white as a default
     protected Predicate<IFlagType<?>> applyColorTint; // In a goes the flag, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
+
+    private LinkedHashSet<IGRecipeStage> recipeStageSet = new LinkedHashSet<>();
 
     public GeologyMaterial() {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.

@@ -1,8 +1,8 @@
 /*
- * BluSunrize
+ * Muddykat
  * Copyright (c) 2024
  *
- * This code is licensed under "Blu's License of Common Sense"
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
  * Details can be found in the license file in the root folder of this project
  */
 
@@ -16,12 +16,12 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Consumer;
 
-public class IGIndustrialSluiceMultiblock extends IGTemplateMultiblock
+public class IGBloomeryMultiblock extends IGTemplateMultiblock
 {
-	public static final IGIndustrialSluiceMultiblock INSTANCE = new IGIndustrialSluiceMultiblock();
-	public IGIndustrialSluiceMultiblock()
+	public static final IGBloomeryMultiblock INSTANCE = new IGBloomeryMultiblock();
+	public IGBloomeryMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(5,1,5), new BlockPos(5,1,5), new BlockPos(10,5,8), IGMultiblockProvider.INDUSTRIAL_SLUICE);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/bloomery"), new BlockPos(0,0,0), new BlockPos(0,1,0), new BlockPos(1,2,1), IGMultiblockProvider.BLOOMERY);
 	}
 
 	@Override

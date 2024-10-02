@@ -1,3 +1,11 @@
+/*
+ * Muddykat
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
 package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
 import net.minecraft.core.BlockPos;
@@ -7,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrystallizerShape extends GenericShape {
+public class BloomeryShape extends GenericShape {
 
-    public static final CrystallizerShape GETTER = new CrystallizerShape();
+    public static final BloomeryShape GETTER = new BloomeryShape();
 
-    private CrystallizerShape(){};
+    private BloomeryShape(){};
 
     @NotNull
     @Override

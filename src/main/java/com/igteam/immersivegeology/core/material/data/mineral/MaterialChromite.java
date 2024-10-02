@@ -1,9 +1,12 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
             
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
+import java.util.Set;
 import java.util.function.Function;
 
 public class MaterialChromite extends MaterialMineral {
@@ -17,5 +20,11 @@ public class MaterialChromite extends MaterialMineral {
     @Override
     protected Function<IFlagType<?>, Integer> materialColorFunction() {
         return ((p) -> (0x615964));
+    }
+
+    @Override
+    public Set<MaterialInterface<?>> getSourceMaterials()
+    {
+        return Set.of(MetalEnum.Chromium, MetalEnum.Iron);
     }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/rich/ad_astra_rich_ore_block_galena_mercury_stone"
+      "model": "immersivegeology:block/ore_block/ad_astra/rich/ad_astra_rich_ore_block_galena_mercury_stone"
     }
   }
 }

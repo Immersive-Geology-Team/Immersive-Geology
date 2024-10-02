@@ -3,8 +3,11 @@ package com.igteam.immersivegeology.core.material.data.types;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.Set;
 
 public class MaterialStone extends GeologyMaterial {
 
@@ -26,4 +29,5 @@ public class MaterialStone extends GeologyMaterial {
     {
         return this.STONE_FORMATION;
     }
+
 }

@@ -12,7 +12,9 @@ import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
@@ -31,6 +33,7 @@ import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class IGItemModelProvider extends ItemModelProvider {
@@ -132,10 +135,21 @@ public class IGItemModelProvider extends ItemModelProvider {
         {
             if(item instanceof IGGenericBlockItem blockItem)
             {
+
                 if(blockItem.getBlock() instanceof IGOreBlock igOreBlock){
+                    String prefix = "minecraft";
+                    Set<IFlagType<?>> flags = igOreBlock.getMaterial(MaterialTexture.base).getFlags();
+                    for(ModFlags mod : ModFlags.values())
+                    {
+                        if(flags.contains(mod))
+                        {
+                            prefix = mod.name().toLowerCase();
+                        }
+                    }
+
                     OreRichness richness = igOreBlock.getOreRichness();
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/ore_block/"+ igOreBlock.getOreRichness().name().toLowerCase() + "/"+igOreBlock.getFlag().getRegistryKey(igOreBlock.getMaterial(MaterialTexture.overlay), igOreBlock.getMaterial(MaterialTexture.base), richness));
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + igOreBlock.getOreRichness().name().toLowerCase() + "/"+igOreBlock.getFlag().getRegistryKey(igOreBlock.getMaterial(MaterialTexture.overlay), igOreBlock.getMaterial(MaterialTexture.base), richness));
 
                     withExistingParent(itemLocation, parentLocation);
                     return;

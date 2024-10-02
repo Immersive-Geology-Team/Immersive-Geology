@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="${USER}&#10;Copyright (c) &amp;#36;today.year&#10;&#10;This code is licensed under &quot;GNU LESSER GENERAL PUBLIC LICENSE&quot;&#10;Details can be found in the license file in the root folder of this project" />
+    <option name="myName" value="IG" />
+  </copyright>
+</component>

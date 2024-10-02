@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -69,4 +71,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag) { return instance().getFluidTag(flag);};
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... extras) { return instance().getFluidTag(flag, extras);};
+
+    default Set<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};
+
 }

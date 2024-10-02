@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/normal/ad_astra_normal_ore_block_fluorite_moon_stone"
+      "model": "immersivegeology:block/ore_block/ad_astra/normal/ad_astra_normal_ore_block_fluorite_moon_stone"
     }
   }
 }

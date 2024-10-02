@@ -1,3 +1,11 @@
+/*
+ * Muddykat
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
 package com.igteam.immersivegeology.core.material.helper.material;
 
 import blusunrize.immersiveengineering.common.register.IEItems;
@@ -14,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+
+import java.util.Set;
 
 import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.*;
 
@@ -80,4 +90,9 @@ public interface MaterialHelper {
     boolean checkExistingImplementation(ModFlags m, IFlagType<?> h);
 
     String getName();
+
+    default Set<MaterialInterface<?>> getSourceMaterials()
+    {
+        return Set.of();
+    };
 }
