@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-02T12:48:02.452447465	Item Models: immersivegeology
+// 1.20.1	2024-10-02T11:22:21.5855699	Item Models: immersivegeology
 d492b38e96165dc1fe3bedfda639d8a0728e8d5d assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_mercury_stone.json
 d768812472f1b8f748bc9870b84799c551aad003 assets/immersivegeology/models/item/ad_astra_normal_ore_block_acanthite_moon_stone.json
 6d02d7efdc3829e0aee49a216e36431be96641ca assets/immersivegeology/models/item/ad_astra_normal_ore_block_anatase_mercury_stone.json
@@ -2086,7 +2086,6 @@ d624eb069d5fda78a1042644fea5a8ec12a2e911 assets/immersivegeology/models/item/tfc
 94650da29c29d869a38e0d86d6ce253d6ccaaa08 assets/immersivegeology/models/item/tfc_rich_ore_block_zircon_diorite.json
 72e2723badb1c261bd9e831372e42318596acf49 assets/immersivegeology/models/item/tfc_rich_ore_block_zircon_gabbro.json
 7cc8dc78cdabbfb2162aca64ea964752b1d660d6 assets/immersivegeology/models/item/tfc_rich_ore_block_zircon_granite.json
-bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f assets/immersivegeology/models/item/unused_bronze.json
 668f014cb52440e787ed6830e47cc8deaabacb34 assets/immersivegeology/models/item/wire_aluminium.json
 668f014cb52440e787ed6830e47cc8deaabacb34 assets/immersivegeology/models/item/wire_bronze.json
 668f014cb52440e787ed6830e47cc8deaabacb34 assets/immersivegeology/models/item/wire_chromium.json

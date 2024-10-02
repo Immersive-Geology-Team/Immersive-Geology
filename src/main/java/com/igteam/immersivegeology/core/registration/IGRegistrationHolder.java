@@ -154,9 +154,9 @@ public class IGRegistrationHolder {
     public static void initialize()
     {
         initializeMultiblocks();
-        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 15, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 10, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class));
-        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 15, IGBloomeryMultiblock.class));
+        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class));
+        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, IGBloomeryMultiblock.class));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){

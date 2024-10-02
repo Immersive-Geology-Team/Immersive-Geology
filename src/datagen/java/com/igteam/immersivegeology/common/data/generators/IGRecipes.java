@@ -8,40 +8,36 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
-import com.igteam.immersivegeology.common.data.helper.TFCCollapseRecipeBuilder;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -64,12 +60,38 @@ public class IGRecipes extends RecipeProvider
 	private void itemRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		// Bronze Hammer
-		Item toolkit = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
-		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit);
-		  recipe.pattern(" BS")
+		Item toolkit_0 = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_0)
+				.pattern(" BS")
 				.pattern(" WB")
-				.pattern("W  ").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(Items.STICK)).define('S', Ingredient.of(Items.STRING))
-				  .group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_1");
+				.pattern("W  ").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_0");
+		// Steel Hammer
+		Item toolkit_1 = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
+				.pattern(" BS")
+				.pattern(" WB")
+				.pattern("W  ").define('B', MetalEnum.Steel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_1");
+		// Stone Hammer
+		Item toolkit_2 = IGRegistrationHolder.getItem.apply("ig_toolkit_2");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_2)
+				.pattern(" BS")
+				.pattern(" WB")
+				.pattern("W  ").define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_2");
+		// Refractory Brick Block
+		Item refractory = MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, refractory)
+				.pattern("BB")
+				.pattern("BB").define('B', Ingredient.of(MiscEnum.Refractory.getItemTag(ItemCategoryFlags.INGOT)))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_refractory_bricks");
+		// Reinforced Refractory Brick Block
+		Item reinforced_refractory = MiscEnum.ReinforcedRefractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, reinforced_refractory)
+				.requires(MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem())
+				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_reinforced_refractory_bricks");
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
