@@ -33,4 +33,10 @@ public class MaterialChemical extends GeologyMaterial {
 	{
 		return slurryMetalSet.contains(metal);
 	}
+
+	@Override
+	public void setupRecipeStages()
+	{
+
+	}
 }

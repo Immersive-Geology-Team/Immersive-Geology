@@ -74,4 +74,9 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default Set<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};
 
+	default void buildRecipe()
+    {
+        instance().buildRecipe();
+    };
+
 }

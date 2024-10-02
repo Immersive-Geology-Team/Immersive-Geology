@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelp
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;

@@ -19,4 +19,10 @@ public class MaterialMetal extends GeologyMaterial {
         super();
         addFlags(BlockCategoryFlags.SLAB, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.DUST, MaterialFlags.IS_MOLTEN_METAL, MaterialFlags.HAS_SLURRY);
     }
+
+    @Override
+    public void setupRecipeStages()
+    {
+
+    }
 }

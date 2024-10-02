@@ -11,11 +11,14 @@ package com.igteam.immersivegeology.core.material.helper.material;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +26,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.*;
@@ -94,5 +98,27 @@ public interface MaterialHelper {
     default Set<MaterialInterface<?>> getSourceMaterials()
     {
         return Set.of();
+    };
+
+
+    Set<IGRecipeStage> stage_set = new HashSet<>();
+
+    default void addStage(IGRecipeStage stage)
+    {
+        stage_set.add(stage);
+    }
+
+    default Set<IGRecipeStage> getStageSet()
+    {
+        return IGStageProvider.get(this);
+    }
+
+    void setupRecipeStages();
+
+    default void buildRecipe()
+    {
+        IGLib.IG_LOGGER.debug("Building {} Recipe Stages", getName());
+        setupRecipeStages();
+        IGStageProvider.add(this, stage_set);
     };
 }

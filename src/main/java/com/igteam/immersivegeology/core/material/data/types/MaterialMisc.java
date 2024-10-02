@@ -17,4 +17,10 @@ public class MaterialMisc extends GeologyMaterial {
         // If we want to add support for other mods this will need to change
         return new ResourceLocation("minecraft", "block/"+getName());
     }
+
+    @Override
+    public void setupRecipeStages()
+    {
+
+    }
 }

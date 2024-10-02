@@ -375,6 +375,11 @@ public class IGRegistrationHolder {
         return BLOCK_REGISTRY_MAP;
     }
 
+    public static void buildMaterialRecipes()
+    {
+        IGLib.getGeologyMaterials().forEach(MaterialInterface::buildRecipe);
+    }
+
     protected static class MultiblockBuilder<S extends IMultiblockState> extends MultiblockRegistrationBuilder<S, MultiblockBuilder<S>>{
         public MultiblockBuilder(IMultiblockLogic<S> logic, String name){
             super(logic, ResourceUtils.ig(name));

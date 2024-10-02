@@ -30,4 +30,9 @@ public class MaterialStone extends GeologyMaterial {
         return this.STONE_FORMATION;
     }
 
+    @Override
+    public void setupRecipeStages()
+    {
+
+    }
 }
