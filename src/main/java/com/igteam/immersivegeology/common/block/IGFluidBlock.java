@@ -1,25 +1,17 @@
 /*
- * BluSunrize
+ * Muddykat
  * Copyright (c) 2024
  *
- * This code is licensed under "Blu's License of Common Sense"
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
  * Details can be found in the license file in the root folder of this project
  */
 
 package com.igteam.immersivegeology.common.block;
-
-import com.igteam.immersivegeology.common.fluid.IGFluid;
-import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateHolder;

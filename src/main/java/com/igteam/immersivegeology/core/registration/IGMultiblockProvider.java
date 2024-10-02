@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class IGMultiblockProvider {
     public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = IGRegistrationHolder.registerMetalMultiblock("crystallizer", new CrystallizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"),
@@ -24,13 +26,14 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);
             });
 
-    public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMetalMultiblock("reverberation_furnace", new RevFurnaceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"),
-            builder -> {});
+    public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMultiblock("reverberation_furnace", new RevFurnaceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"), builder -> {}, Properties.copy(Blocks.STONE));
 
     public static final MultiblockRegistration<IndSluiceLogic.State> INDUSTRIAL_SLUICE = IGRegistrationHolder.registerMetalMultiblock("industrial_sluice", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("industrial_sluice"),
             builder -> {
                 builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
             });
+
+    public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = IGRegistrationHolder.registerMultiblock("bloomery", new BloomeryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("bloomery"), builder -> {}, Properties.copy(Blocks.STONE));
 
 
     public static void forceClassLoad(){};

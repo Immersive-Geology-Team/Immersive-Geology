@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/rich/tfc_rich_ore_block_lead_shale"
+      "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_lead_shale"
     }
   }
 }

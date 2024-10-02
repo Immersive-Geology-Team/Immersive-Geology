@@ -48,6 +48,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "industrial_sluice");
         multiblockEntry(instance, multiblock_category, "rotarykiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
+        multiblockEntry(instance, multiblock_category, "bloomery");
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/normal/normal_ore_block_chromite_deepslate"
+      "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_chromite_deepslate"
     }
   }
 }

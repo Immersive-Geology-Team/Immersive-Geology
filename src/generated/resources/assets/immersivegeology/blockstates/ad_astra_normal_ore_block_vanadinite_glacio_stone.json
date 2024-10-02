@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/normal/ad_astra_normal_ore_block_vanadinite_glacio_stone"
+      "model": "immersivegeology:block/ore_block/ad_astra/normal/ad_astra_normal_ore_block_vanadinite_glacio_stone"
     }
   }
 }

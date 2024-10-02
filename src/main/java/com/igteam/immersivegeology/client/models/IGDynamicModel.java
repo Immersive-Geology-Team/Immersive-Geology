@@ -1,8 +1,8 @@
 /*
- * BluSunrize
+ * Muddykat
  * Copyright (c) 2024
  *
- * This code is licensed under "Blu's License of Common Sense"
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
  * Details can be found in the license file in the root folder of this project
  */
 

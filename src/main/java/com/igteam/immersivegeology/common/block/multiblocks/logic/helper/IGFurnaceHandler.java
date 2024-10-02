@@ -2,8 +2,9 @@
  * BluSunrize
  * Copyright (c) 2024
  *
- * This code is licensed under "Blu's License of Common Sense"
- * Details can be found in the license file in the root folder of this project
+ * This code is partially licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the Immersive Engineering Github
+ * This class is a modified version of the FurnaceHandler found in the Immersive Engineering Github.
  */
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;

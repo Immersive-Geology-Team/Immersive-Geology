@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/poor/tfc_poor_ore_block_ullmannite_gabbro"
+      "model": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_ullmannite_gabbro"
     }
   }
 }

@@ -1,33 +1,18 @@
-/*
- * BluSunrize
- * Copyright (c) 2024
- *
- * This code is licensed under "Blu's License of Common Sense"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
-import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.concurrent.CompletableFuture;
 
 import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCBlockTag;

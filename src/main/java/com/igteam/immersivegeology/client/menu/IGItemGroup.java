@@ -1,28 +1,23 @@
+/*
+ * Muddykat
+ * Copyright (c) 2024
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
 package com.igteam.immersivegeology.client.menu;
 
-import com.ibm.icu.impl.Row;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.CreativeModeTab.Builder;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tab_menu.png");

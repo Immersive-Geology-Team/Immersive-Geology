@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "immersivegeology:block/ore_block/normal/tfc_normal_ore_block_galena_andesite"
+      "model": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_galena_andesite"
     }
   }
 }

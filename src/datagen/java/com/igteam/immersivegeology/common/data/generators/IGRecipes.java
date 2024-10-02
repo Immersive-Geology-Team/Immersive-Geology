@@ -1,8 +1,8 @@
 /*
- * BluSunrize
+ * Muddykat
  * Copyright (c) 2024
  *
- * This code is licensed under "Blu's License of Common Sense"
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
  * Details can be found in the license file in the root folder of this project
  */
 
@@ -25,6 +25,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -98,6 +99,10 @@ public class IGRecipes extends RecipeProvider
 				}
 
 				GravitySeparatorRecipeBuilder.builder(mineral.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(mineral.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ mineral.getName() + "_to_crushed"));
+
+
+				//RevFurnaceRecipeBuilder.builder(mineral.getSmeltMaterial().getStack(ItemCategoryFlags.INGOT)).setTime(100).setWasteAmount(250).addInput(mineral.getStack(ItemCategoryFlags.CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "reverberation_furnace/crushed_" + mineral.getName() + "_to_ingot"));
+
 			}
 		}
 
@@ -105,6 +110,5 @@ public class IGRecipes extends RecipeProvider
 		TagKey<Fluid> fluidTag = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY).get(key);
 		CrystallizerRecipeBuilder.builder(MetalEnum.Chromium.getItemTag(ItemCategoryFlags.CRYSTAL), 1).setEnergy(1000).setTime(100).addInput(new FluidTagInput(fluidTag, 250)).build(consumer, new ResourceLocation(IGLib.MODID, "crystallizer/chromite_slurry_to_crystal"));
 
-		RevFurnaceRecipeBuilder.builder(MetalEnum.Unobtanium.getStack(ItemCategoryFlags.INGOT)).setTime(100).setWasteAmount(250).addInput(MineralEnum.Unobtania.getStack(ItemCategoryFlags.CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "reverberation_furnace/test_recipe"));
 	}
 }

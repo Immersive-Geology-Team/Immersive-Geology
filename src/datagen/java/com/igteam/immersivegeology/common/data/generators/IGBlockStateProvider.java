@@ -17,6 +17,9 @@ import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
@@ -51,9 +54,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -104,6 +105,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         genericmultiblock("crystallizer");
+        genericmultiblock("bloomery");
         genericmultiblock("gravityseparator");
         genericmultiblock("industrial_sluice");
         genericmultiblockMirror("rotarykiln");
@@ -266,7 +268,15 @@ public class IGBlockStateProvider extends BlockStateProvider {
         IGOreBlock block = (IGOreBlock) type;
         String parent_name = block.getFlag().getName();
         BlockModelBuilder baseModel;
-
+        String prefix = "minecraft";
+        Set<IFlagType<?>> flags = block.getMaterial(MaterialTexture.base).getFlags();
+        for(ModFlags mod : ModFlags.values())
+        {
+            if(flags.contains(mod))
+            {
+                prefix = mod.name().toLowerCase();
+            }
+        }
         if(block.getMaterial(MaterialTexture.base).instance() instanceof MaterialStone stoneMaterial)
         {
             StoneFormation stoneFormation = stoneMaterial.getStoneFormation();
@@ -275,13 +285,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 case SEDIMENTARY ->
                 {
                     baseModel = models().withExistingParent(
-                            new ResourceLocation(IGLib.MODID, "block/ore_block/"+ block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
+                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
                             new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_sedimentary"));
                 }
                 default ->
                 {
                     baseModel = models().withExistingParent(
-                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
+                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
                             new ResourceLocation(IGLib.MODID, "block/base/"+parent_name));
 
                 }
