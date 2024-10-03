@@ -51,29 +51,6 @@ public abstract class IGRecipeStage
 		return methods;
 	}
 
-	public HashSet<IGRecipeMethod> getMethodTree(){
-		return new HashSet<>(buildProcessingTree());
-	}
-
-	private ArrayList<IGRecipeMethod> buildProcessingTree(){
-		ArrayList<IGRecipeMethod> tree = new ArrayList<>();
-
-		Set<IGRecipeMethod> methods = getMethods();
-		for (IGRecipeMethod method : methods) {
-			ITag<?> inputTag = method.getGenericInput();
-			if(inputTag != null)
-				IGLib.getNewLogger().info("Input: " + inputTag.toString());
-
-			ItemStack output = method.getGenericOutput();
-			if (output != null) {
-				String testString = Component.translatable(output.getItem().getDescriptionId()).getString();
-				IGLib.getNewLogger().info("Output: " + testString);
-			}
-		}
-
-		return tree;
-	}
-
 	public void addMethod(IGRecipeMethod m) {
 		methods.add(m);
 	}

@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class IGClientRenderHandler implements ItemColor, BlockColor {
@@ -47,7 +48,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
 
     // Register This as the color handler for all IG Items and Blocks
     public static void register(){
-        for(RegistryObject<Item> holder : IGRegistrationHolder.getItemRegistryMap().values()){
+        for(Supplier<Item> holder : IGRegistrationHolder.getItemRegistryMap().values()){
             Item i = holder.get();
             if(i instanceof IGFlagItem){
                 Minecraft.getInstance().getItemColors().register(INSTANCE, i);

@@ -25,6 +25,9 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod.RecipeMethod;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -40,6 +43,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -54,11 +58,31 @@ public class IGRecipes extends RecipeProvider
 	}
 
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> consumer)
+	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer)
 	{
+		IGRegistrationHolder.buildMaterialRecipes();
+
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
 		itemRecipes(consumer);
+		methodRecipes(consumer);
+	}
+
+	private void methodRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		for(MaterialInterface<?> entry : IGLib.getGeologyMaterials())
+		{
+			IGLib.IG_LOGGER.info("Entry: {}", entry.getName());
+			for(IGRecipeStage stage : entry.getStageSet())
+			{
+				IGLib.IG_LOGGER.info("Stage: {}", stage.getStageName());
+				for(IGRecipeMethod recipe_method : stage.getMethods())
+				{
+					IGLib.IG_LOGGER.info("Building Method {}", recipe_method.getMethod().getMethodName());
+					if(!recipe_method.build(consumer)) IGLib.IG_LOGGER.warn("Failed to build Recipe Method [{}] for material [{}]", recipe_method.getMethod().getMethodName(), entry.getName());
+				}
+			}
+		}
 	}
 
 	private void itemRecipes(Consumer<FinishedRecipe> consumer)

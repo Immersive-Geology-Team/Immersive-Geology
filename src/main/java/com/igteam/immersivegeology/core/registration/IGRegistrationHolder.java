@@ -228,7 +228,6 @@ public class IGRegistrationHolder {
                                 {
                                     if(!chemical.hasSlurryMetal(metal)) continue;
                                     String registryKey = blockCategory.getRegistryKey(material, metal);
-                                    IGLib.IG_LOGGER.info("Slurry Key: {}", registryKey);
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
                                     // Still

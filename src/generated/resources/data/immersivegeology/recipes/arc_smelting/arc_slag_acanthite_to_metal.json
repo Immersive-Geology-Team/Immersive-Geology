@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:ingots/silver"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:slag_acanthite"
+    }
+  ],
+  "slag": {
+    "item": "immersivegeology:slag_acanthite"
+  },
+  "time": 0
+}

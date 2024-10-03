@@ -8,17 +8,37 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 public class IGCalcinationMethod extends IGRecipeMethod
 {
+	private int energy, time;
+
+	private IngredientWithSize input;
+	private ItemStack output;
+	private String name;
+
 	public IGCalcinationMethod(IGRecipeStage stage)
 	{
 		super(stage);
+	}
+
+	public void create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int energy){
+		this.name = name;
+		this.output = output;
+		this.input = new IngredientWithSize(inputTag, itemAmount);
+		this.time = time;
+		this.energy = energy;
 	}
 
 	@NotNull
@@ -31,18 +51,26 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	@Override
 	public ResourceLocation getLocation()
 	{
-		return null;
-	}
-
-	@Override
-	public ItemStack getGenericOutput()
-	{
-		return null;
+		return toRL("calcination/decompose_" + getName());
 	}
 
 	@Override
 	public String getName()
 	{
-		return "";
+		return name;
+	}
+
+	@Override
+	public boolean build(Consumer<FinishedRecipe> consumer)
+	{
+		try
+		{
+			
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 }

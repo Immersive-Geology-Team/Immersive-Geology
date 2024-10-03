@@ -1,7 +1,7 @@
-# Blender 4.2.1 LTS MTL File: 'None'
+# Blender 4.2.0 MTL File: 'None'
 # www.blender.org
 
-newmtl m_08362c9a-773c-5722-cc05-91d3049dbd80
+newmtl m_08362c9a-773c-5722-cc05-91d3049dbd80.006
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -11,7 +11,7 @@ d 1.000000
 illum 1
 map_Kd immersivegeology:block/multiblock/rotarykiln/rotarykiln
 
-newmtl m_2702f440-225c-ded7-caee-bfb68c8c66ce
+newmtl m_2702f440-225c-ded7-caee-bfb68c8c66ce.006
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000

@@ -45,7 +45,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected Predicate<IFlagType<?>> applyColorTint; // In a goes the flag, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
-    private LinkedHashSet<IGRecipeStage> recipeStageSet = new LinkedHashSet<>();
+    private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();
 
     public GeologyMaterial() {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.
@@ -169,41 +169,6 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return CrystalFamily.CUBIC;
     }
 
-    public TagKey<Item> getItemTag(IFlagType<ItemCategoryFlags> itemFlag)
-    {
-        // Override for block items
-        try
-        {
-            EnumMetals IEMetal = EnumMetals.valueOf(this.name.toUpperCase());
-            IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
-
-            switch(itemFlag.getValue())
-            {
-                case INGOT ->
-                {
-                    return ieMetalTags.ingot;
-                }
-                case DUST ->
-                {
-                    return ieMetalTags.dust;
-                }
-                case NUGGET ->
-                {
-                    return ieMetalTags.nugget;
-                }
-                case PLATE ->
-                {
-                    return ieMetalTags.plate;
-                }
-            }
-        } catch(Exception ignored){};
-
-        HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(itemFlag);
-        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
-        String key = IGTags.getWrapFromSet(material_set);
-        return data_map.get(key);
-    }
-
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
         FluidType.Properties builder = FluidType.Properties.create()
 
@@ -287,7 +252,18 @@ public abstract class GeologyMaterial implements MaterialHelper {
         material_set.addAll(helpers);
 
         String key = IGTags.getWrapFromSet(material_set);
-        IGLib.IG_LOGGER.info("Getting Fluid Tag {}", key);
         return data_map.get(key);
+    }
+
+    @Override
+    public Set<IGRecipeStage> getMaterialStageSet()
+    {
+        return stage_set;
+    }
+
+    @Override
+    public void addStage(IGRecipeStage stage)
+    {
+        this.stage_set.add(stage);
     }
 }

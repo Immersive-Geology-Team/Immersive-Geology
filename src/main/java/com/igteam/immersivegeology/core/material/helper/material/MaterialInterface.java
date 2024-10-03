@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -78,5 +79,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     {
         instance().buildRecipe();
     };
+
+	default Set<IGRecipeStage> getStageSet() { return instance().getStageSet();};
 
 }

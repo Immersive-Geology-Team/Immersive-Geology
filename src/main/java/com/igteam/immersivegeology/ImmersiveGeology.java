@@ -33,13 +33,10 @@ public class ImmersiveGeology {
         IGLib.IG_LOGGER.info("Immersive Geology Starting");
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
-
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
-
         IGContent.modContruction(modEventBus);
-
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
@@ -81,8 +78,8 @@ public class ImmersiveGeology {
         return test;
     }
 
-    public void setup(final FMLCommonSetupEvent event){
-
+    public void setup(final FMLCommonSetupEvent event)
+    {
     }
 
 }

@@ -48,7 +48,6 @@ public class IGFluidTags extends FluidTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		IGLib.IG_LOGGER.info("testing ===============================");
 		for(RegistryObject<Fluid> holder : IGRegistrationHolder.getFluidRegistryMap().values())
 		{
 			if(holder.get() instanceof IGFluid fluid)
@@ -58,7 +57,6 @@ public class IGFluidTags extends FluidTagsProvider
 				// Skip Slurry Types for now.
 				if(fluid.getMaterial(MaterialTexture.overlay) != null) {
 					TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(BlockCategoryFlags.SLURRY, fluid.getMaterial(MaterialTexture.overlay));
-					IGLib.IG_LOGGER.info("Tag? {}", fluid_key);
 					if(fluid_key != null)
 					{
 						tag(fluid_key).add(fluid.getSource());
@@ -82,7 +80,6 @@ public class IGFluidTags extends FluidTagsProvider
 							{
 								IGLib.IG_LOGGER.error("Cannot Load TFC Fluid Tag: {}", exception.getMessage());
 							}
-
 						}
 					}
 				}

@@ -8,13 +8,20 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -24,6 +31,7 @@ public class MaterialAcanthite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        addFlags(ItemCategoryFlags.SLAG);
     }
 
     @Override
@@ -40,5 +48,25 @@ public class MaterialAcanthite extends MaterialMineral {
     public Set<MaterialInterface<?>> getSourceMaterials()
     {
 		return Set.of(MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium);
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
+
+        new IGRecipeStage(this, IGStageDesignation.REFINEMENT)
+        {
+            @Override
+            protected void describe()
+            {
+                IGMethodBuilder.arcSmelting(this)
+                        .create("slag_" + getName() + "_to_metal", MetalEnum.Silver.getItemTag(ItemCategoryFlags.INGOT), 1,
+                                getStack(ItemCategoryFlags.SLAG, 1),
+                                getParentMaterial().getStack(ItemCategoryFlags.SLAG,1));
+            }
+        };
+
+        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

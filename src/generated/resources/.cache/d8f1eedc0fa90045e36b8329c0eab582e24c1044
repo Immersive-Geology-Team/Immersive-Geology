@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-28T21:18:57.976961535	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2024-10-03T12:48:54.403976304	Tags for minecraft:item mod id immersivegeology
 2455092491cf23f5d710ee1073ecfc465fe1327d data/forge/tags/items/clay/kaolinite.json
 d3a41c90350ec668b6a5be41ad220e9467e5f627 data/forge/tags/items/crushed_ore/acanthite.json
 f30776f816b47279440ed51c20c4ed1d146e9788 data/forge/tags/items/crushed_ore/alumina.json
@@ -343,6 +343,40 @@ b78fae51960e722817403fcc79c0afd8b5f0666f data/forge/tags/items/rods/uranium.json
 17390eecff0cab9a9facba8cb626c82b0caaa3e6 data/forge/tags/items/rods/vanadium.json
 badfc2bdc77bd289139617a0f7495c7346aeaa84 data/forge/tags/items/rods/zinc.json
 b802d95d20a58ac1e1f2bb714ef62875bf42922c data/forge/tags/items/rods/zirconium.json
+9cc06381331b08cee2e243503d35d0c1b6d90cc6 data/forge/tags/items/slag/acanthite.json
+948ff5ffba37df4598230ee6ce87928c456e84b9 data/forge/tags/items/slag/alumina.json
+3f8b8a44806ed033f873f5d2b9afc2b1316876e3 data/forge/tags/items/slag/anatase.json
+651010fdc5064eb7f3b356fdb51cebb3daa5ff5f data/forge/tags/items/slag/bauxite.json
+1cd69349b6fe8946cb8af5a7ac337e72baa7751e data/forge/tags/items/slag/cassiterite.json
+838d38d7b0162b258498fcf1f221e8a98290d82f data/forge/tags/items/slag/chalcocite.json
+7281811a5e7c1bb5d2aee638408392506d9f3a82 data/forge/tags/items/slag/chalcopyrite.json
+6ee5abb462115bdff6c10cac6e2968a87ca81b33 data/forge/tags/items/slag/chromite.json
+b931a3905853d3a9b760a45e695e5d3c6d1d9473 data/forge/tags/items/slag/cobaltite.json
+a4916bc368ddb84d2231ea384684776fae8315da data/forge/tags/items/slag/cryolite.json
+807516dc45f192b5a9c56ff69a683c51488418ef data/forge/tags/items/slag/cuprite.json
+1759237fb376ef1b14049c0c5f0c54395dfa02db data/forge/tags/items/slag/ferberite.json
+1501b902988be6f4c1e03f2215cc33609cd9d7d3 data/forge/tags/items/slag/fluorite.json
+93aa7234df1fa255980ff7aa0c0c72ef219e0553 data/forge/tags/items/slag/galena.json
+b4b057ca5607b26a3b86c5fca3d5bdc982d06a85 data/forge/tags/items/slag/gypsum.json
+9ab18e89a2ed1d5d37f985121c8601c85c1225be data/forge/tags/items/slag/hematite.json
+f895b5859dae80ddc65d77941473901add5a460d data/forge/tags/items/slag/hubnerite.json
+250a6f54c965e7e34eb13896c1850ac8f52252cd data/forge/tags/items/slag/ilmenite.json
+46dac1aa5acd8466f71c6c1bdfcdbcd8ca586f57 data/forge/tags/items/slag/kaolinite.json
+a0a4223750136aebd634d3dd02e90c2ad5879b46 data/forge/tags/items/slag/magnetite.json
+3958f6d6b21cc62f3a99ba1be4666344e1931c2b data/forge/tags/items/slag/monazite.json
+1217380305aaaafb5b8a5ec507bc1114522de59f data/forge/tags/items/slag/pyrite.json
+1cbad4281555d7ae3cccbaca440f034ab1fdc315 data/forge/tags/items/slag/pyrolusite.json
+158ae7d99f430b6560380633481fc848a1a95433 data/forge/tags/items/slag/scheelite.json
+ffb6ec3972818cbd18fa0d9e17a8f2256512fa41 data/forge/tags/items/slag/smithsonite.json
+ec64c23c849821d655d4ae6004d8336371a45d7f data/forge/tags/items/slag/sphalerite.json
+ec1b97789ca4bdcaccf62d007e6511475dee55e7 data/forge/tags/items/slag/thorianite.json
+c46c65da6c49b603666dde4d070962624f41851e data/forge/tags/items/slag/thorite.json
+b912fe0ad5403e8bdf34768f1e9c89abb44bfeda data/forge/tags/items/slag/ullmannite.json
+41ee707e6e1eadc0e11ea33a9ad54a753c21ecb8 data/forge/tags/items/slag/unobtania.json
+f6c7a4e0e52e4065298870e116af614856ec9b42 data/forge/tags/items/slag/uraninite.json
+2d757c9167a902c7de3bae3b5bbede03a20cfa20 data/forge/tags/items/slag/vanadinite.json
+b76def7025d8a6298e373b9bfd8446556fbc657f data/forge/tags/items/slag/wolframite.json
+c8c5407963ec8305074c9c95741e165082bfd88e data/forge/tags/items/slag/zircon.json
 1c3aa091b8a221b8f51ce42fb23b77561a1af4a5 data/forge/tags/items/wire/bronze.json
 960233fa18922158f0d7493ecac936aed11ddfe4 data/forge/tags/items/wire/chromium.json
 40f635e3536199ac82359278b2fdcc108304ebbc data/forge/tags/items/wire/cobalt.json

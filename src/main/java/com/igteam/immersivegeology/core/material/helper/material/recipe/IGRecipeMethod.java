@@ -8,14 +8,13 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe;
 
-import blusunrize.immersiveengineering.api.IEApi;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.tags.ITag;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 public abstract class IGRecipeMethod
 {
@@ -47,13 +46,9 @@ public abstract class IGRecipeMethod
 		PATH_COUNT.clear();
 	}
 
-	public ITag<?> getGenericInput(){
-		return null;
-	}
-
-	public abstract ItemStack getGenericOutput();
-
 	public abstract String getName();
+
+	public abstract boolean build(Consumer<FinishedRecipe> consumer);
 
 	public enum RecipeMethod
 	{

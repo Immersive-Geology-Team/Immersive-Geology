@@ -8,8 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -20,14 +23,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.*;
 
@@ -100,13 +103,8 @@ public interface MaterialHelper {
         return Set.of();
     };
 
-
-    Set<IGRecipeStage> stage_set = new HashSet<>();
-
-    default void addStage(IGRecipeStage stage)
-    {
-        stage_set.add(stage);
-    }
+    void addStage(IGRecipeStage stage);
+    Set<IGRecipeStage> getMaterialStageSet();
 
     default Set<IGRecipeStage> getStageSet()
     {
@@ -119,6 +117,41 @@ public interface MaterialHelper {
     {
         IGLib.IG_LOGGER.debug("Building {} Recipe Stages", getName());
         setupRecipeStages();
-        IGStageProvider.add(this, stage_set);
+        IGStageProvider.add(this, getMaterialStageSet());
+    };
+
+    default TagKey<Item> getItemTag(IFlagType<ItemCategoryFlags> flag) {
+        // Override for block items
+        try
+        {
+            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
+            IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+
+            switch(flag.getValue())
+            {
+                case INGOT ->
+                {
+                    return ieMetalTags.ingot;
+                }
+                case DUST ->
+                {
+                    return ieMetalTags.dust;
+                }
+                case NUGGET ->
+                {
+                    return ieMetalTags.nugget;
+                }
+                case PLATE ->
+                {
+                    return ieMetalTags.plate;
+                }
+            }
+        } catch(Exception ignored){};
+
+        HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(flag);
+        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
+        String key = IGTags.getWrapFromSet(material_set);
+        IGLib.IG_LOGGER.warn("Key: {} | Flag: {}", key, flag);
+        return data_map.get(key);
     };
 }

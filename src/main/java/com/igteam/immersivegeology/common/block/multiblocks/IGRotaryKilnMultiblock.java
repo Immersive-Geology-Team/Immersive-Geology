@@ -21,7 +21,7 @@ public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
     public static final IGRotaryKilnMultiblock INSTANCE = new IGRotaryKilnMultiblock();
 
     public IGRotaryKilnMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(0,0,0), new BlockPos(2,1,2), new BlockPos(8,3, 3), IGMultiblockProvider.ROTARYKILN);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(6,1,1), new BlockPos(2,1,2), new BlockPos(8,3, 3), IGMultiblockProvider.ROTARYKILN);
     }
 
     @Override

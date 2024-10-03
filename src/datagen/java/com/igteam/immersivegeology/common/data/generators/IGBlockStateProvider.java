@@ -10,6 +10,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.multiblocks.IGRotaryKilnMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -190,11 +191,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
     private void testCreateMultiblock(NongeneratedModel unsplitModel, NongeneratedModel mirror_model, IGTemplateMultiblock multiblock, boolean dynamic)
     {
         final ModelFile mainModel = split(unsplitModel, multiblock, false, dynamic);
+        final ModelFile mirrorModel = split(mirror_model, multiblock, true, dynamic);
         if(multiblock.getBlock().getStateDefinition().getProperties().contains(IEProperties.MIRRORED))
             createMultiblock(
                     multiblock::getBlock,
-                    mainModel,
-                    split(mirror_model, multiblock, true, dynamic),
+                    mainModel,mirrorModel,
                     IEProperties.FACING_HORIZONTAL, IEProperties.MIRRORED
             );
         else
@@ -457,7 +458,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         {
             loadTemplateFor(mb);
             Vec3i size = mb.getSize(null);
-            transform = p -> new BlockPos(size.getX()-p.getX()-1, p.getY(), p.getZ());
+            transform = p -> new BlockPos(size.getX() - p.getX() - 1, p.getY(), p.getZ());
         }
         return split(loc, mb, transform, dynamic);
     }
@@ -656,7 +657,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     protected <T extends ModelBuilder<T>> T mirror(NongeneratedModel inner, ModelProvider<T> provider)
     {
-        return provider.getBuilder(inner.getLocation().getPath()+"_mirrored")
+        String path = inner.getLocation().getPath()+"_mirrored";
+        return provider.getBuilder(path)
                 .customLoader(MirroredModelBuilder::begin)
                 .inner(inner)
                 .end();
