@@ -4,13 +4,13 @@
   "group": "ig_tools",
   "key": {
     "B": {
-      "tag": "forge:ingots/bronze"
+      "tag": "forge:ingots/steel"
     },
     "S": {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     "W": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/treated_wood"
     }
   },
   "pattern": [
