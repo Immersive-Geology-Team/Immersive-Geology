@@ -17,7 +17,7 @@ public class MaterialMetal extends GeologyMaterial {
 
     public MaterialMetal(){
         super();
-        addFlags(BlockCategoryFlags.SLAB, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.DUST, MaterialFlags.IS_MOLTEN_METAL, MaterialFlags.HAS_SLURRY);
+        addFlags(BlockCategoryFlags.SLAB, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.DUST, ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST, MaterialFlags.IS_MOLTEN_METAL, MaterialFlags.HAS_SLURRY);
     }
 
     @Override

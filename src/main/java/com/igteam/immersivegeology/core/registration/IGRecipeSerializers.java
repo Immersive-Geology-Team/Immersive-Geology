@@ -11,9 +11,11 @@ package com.igteam.immersivegeology.core.registration;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.CrystallizerRecipeSerializer;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.GravitySeparatorRecipeSerializer;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.RevFurnaceRecipeSerializer;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.RotaryKilnRecipeSerializer;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,6 +29,7 @@ public class IGRecipeSerializers
 		CrystallizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crystallizer", CrystallizerRecipeSerializer::new);
 		GravitySeparatorRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("gravityseparator", GravitySeparatorRecipeSerializer::new);
 		RevFurnaceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("reverberation_furnace", RevFurnaceRecipeSerializer::new);
+		RotaryKilnRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("rotarykiln", RotaryKilnRecipeSerializer::new);
 	}
 
 }

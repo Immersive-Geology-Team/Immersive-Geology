@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/refractory_brick"
+    }
+  },
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "result": {
+    "item": "immersivegeology:storage_block_refractory_brick"
+  },
+  "show_notification": true
+}

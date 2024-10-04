@@ -56,7 +56,6 @@ public class IGRecipes extends RecipeProvider
 	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer)
 	{
 		IGRegistrationHolder.buildMaterialRecipes();
-
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
 		itemRecipes(consumer);

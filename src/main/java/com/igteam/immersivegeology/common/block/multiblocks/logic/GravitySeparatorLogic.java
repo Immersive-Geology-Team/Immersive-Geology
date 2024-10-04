@@ -202,13 +202,13 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             final Runnable sync = ctx.getSyncRunnable();
-
-            this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.secondary = new DroppingMultiblockOutput(SECONDARY_OUTPUT_POS, ctx);
             Runnable changedAndSync = () -> {
                 markDirty.run();
                 sync.run();
             };
+            this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
+            this.secondary = new DroppingMultiblockOutput(SECONDARY_OUTPUT_POS, ctx);
+
 
             this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
 

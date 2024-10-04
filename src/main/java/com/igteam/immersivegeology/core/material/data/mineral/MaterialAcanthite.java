@@ -60,10 +60,7 @@ public class MaterialAcanthite extends MaterialMineral {
             @Override
             protected void describe()
             {
-                IGMethodBuilder.arcSmelting(this)
-                        .create("slag_" + getName() + "_to_metal", MetalEnum.Silver.getItemTag(ItemCategoryFlags.INGOT), 1,
-                                getStack(ItemCategoryFlags.SLAG, 1),
-                                getParentMaterial().getStack(ItemCategoryFlags.SLAG,1));
+
             }
         };
 

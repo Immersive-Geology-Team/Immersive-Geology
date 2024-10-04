@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -65,7 +66,11 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	{
 		try
 		{
-			
+			RotaryKilnRecipeBuilder builder = RotaryKilnRecipeBuilder.builder(output);
+			builder.addInput(input);
+			builder.setEnergy(energy);
+			builder.setTime(time);
+			builder.build(consumer, getLocation());
 			return true;
 		}
 		catch(Exception e)
