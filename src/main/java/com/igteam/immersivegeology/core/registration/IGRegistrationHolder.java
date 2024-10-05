@@ -155,7 +155,7 @@ public class IGRegistrationHolder {
     {
         initializeMultiblocks();
         registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class, IGChemicalReactorMultiblock.class));
         registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, IGBloomeryMultiblock.class));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
@@ -275,6 +275,7 @@ public class IGRegistrationHolder {
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
         registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE);
         registerMB("industrial_sluice", IGIndustrialSluiceMultiblock.INSTANCE, IGMultiblockProvider.INDUSTRIAL_SLUICE);
+        registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR);
     }
 
     private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){

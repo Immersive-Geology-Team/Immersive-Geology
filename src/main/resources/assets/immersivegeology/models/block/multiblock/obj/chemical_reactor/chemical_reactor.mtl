@@ -1,0 +1,12 @@
+# Blender 4.2.0 MTL File: 'None'
+# www.blender.org
+
+newmtl m_c3e9bea0-a1ed-b481-8ce7-818a353b3d6c
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/chemical_reactor

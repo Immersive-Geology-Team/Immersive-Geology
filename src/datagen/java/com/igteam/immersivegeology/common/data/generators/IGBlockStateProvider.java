@@ -109,6 +109,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblock("bloomery");
         genericmultiblock("gravityseparator");
         genericmultiblock("industrial_sluice");
+        genericmultiblock("chemical_reactor");
         genericmultiblockMirror("rotarykiln");
         genericmultiblockMirror("coredrill");
         genericmultiblockMirror("reverberation_furnace");

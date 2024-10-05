@@ -50,6 +50,8 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateMultiblockModel("industrial_sluice", IGMultiblockProvider.INDUSTRIAL_SLUICE.block());
 		generateMultiblockModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
+		generateReverberationFurnaceModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
+		generateReverberationFurnaceModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
 	}
 
 	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale){

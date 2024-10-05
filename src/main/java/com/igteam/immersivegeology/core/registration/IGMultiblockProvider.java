@@ -32,9 +32,12 @@ public class IGMultiblockProvider {
             builder -> {
                 builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
             });
-
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = IGRegistrationHolder.registerMultiblock("bloomery", new BloomeryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("bloomery"), builder -> {}, Properties.copy(Blocks.STONE));
 
+    public static final MultiblockRegistration<ChemicalReactorLogic.State> CHEMICAL_REACTOR = IGRegistrationHolder.registerMetalMultiblock("chemical_reactor", new ChemicalReactorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("chemical_reactor"),
+            builder -> {
+                builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
+            });
 
     public static void forceClassLoad(){};
 }
