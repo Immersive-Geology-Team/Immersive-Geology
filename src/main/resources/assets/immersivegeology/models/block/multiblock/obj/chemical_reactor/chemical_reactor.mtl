@@ -1,7 +1,7 @@
 # Blender 4.2.0 MTL File: 'None'
 # www.blender.org
 
-newmtl m_c3e9bea0-a1ed-b481-8ce7-818a353b3d6c
+newmtl m_3f6293b0-ad57-fa5e-3a62-36b30b9060a7.001
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -9,4 +9,34 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/chemical_reactor
+map_Kd immersivegeology:block/multiblock/chemical_reactor/tank-passthrough
+
+newmtl m_9434c62a-1a88-224a-00eb-56253989aaff.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/chemical_reactor/chem-pipes
+
+newmtl m_9e4d2822-1e46-6212-fab0-303e44be6933.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/chemical_reactor/chem-tank
+
+newmtl m_bd8b1946-9b76-4e69-6f07-a9ba338288ca.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/chemical_reactor/chem-reactor-base

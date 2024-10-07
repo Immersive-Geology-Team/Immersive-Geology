@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.IModPlugin;
@@ -25,7 +26,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -46,6 +46,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGSeparatorCategory(guiHelper));
 		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
+		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
 	}
 
 	@Override
@@ -53,6 +54,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.SEPARATOR, getRecipes(GravitySeparatorRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CRYSTALLIZER, getRecipes(CrystallizerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.REVERBERATION, getRecipes(RevFurnaceRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.ROTARYKILN, getRecipes(RotaryKilnRecipe.RECIPES));
 	}
 
 
@@ -61,6 +63,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.GRAVITY_SEPARATOR.iconStack(), JEIRecipeTypes.SEPARATOR);
 		registration.addRecipeCatalyst(IGMultiblockProvider.CRYSTALLIZER.iconStack(), JEIRecipeTypes.CRYSTALLIZER);
 		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
+		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
 	}
 
 	@Override

@@ -74,7 +74,8 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             }
         }
 
-        setRenderType(IGMultiblockProvider.COREDRILL.block().get(), IGClientRenderHandler.RenderTypeSkeleton.CUTOUT_MIPPED);
+        setRenderType(IGMultiblockProvider.COREDRILL.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
+        setRenderType(IGMultiblockProvider.CHEMICAL_REACTOR.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
     }
 
     // Initialize the keys and mappings for render layers

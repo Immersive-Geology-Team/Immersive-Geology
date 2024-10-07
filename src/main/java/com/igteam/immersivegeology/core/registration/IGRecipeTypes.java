@@ -29,6 +29,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<GravitySeparatorRecipe> GRAVITYSEPARATOR = register("gravityseparator", GravitySeparatorRecipe.class);
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
+	public static final TypeWithClass<ChemicalRecipe> CHEMICALREACTOR = register("chemical_reactor", ChemicalRecipe.class);
 
 
 

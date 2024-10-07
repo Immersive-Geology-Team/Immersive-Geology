@@ -21,7 +21,7 @@ public class IGChemicalReactorMultiblock extends IGTemplateMultiblock
 	public static final IGChemicalReactorMultiblock INSTANCE = new IGChemicalReactorMultiblock();
 	public IGChemicalReactorMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/chemical_reactor"), new BlockPos(4,0,4), new BlockPos(2,1,5), new BlockPos(9,6,9), IGMultiblockProvider.CHEMICAL_REACTOR);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/chemical_reactor"), new BlockPos(4,0,4), new BlockPos(5,1,6), new BlockPos(9,6,9), IGMultiblockProvider.CHEMICAL_REACTOR);
 	}
 
 	@Override
