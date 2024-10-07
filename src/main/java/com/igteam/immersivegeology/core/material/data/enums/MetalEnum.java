@@ -22,6 +22,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     Iron(new MaterialIron()),
     Lead(new MaterialLead()),
     Manganese(new MaterialManganese()),
+    Molybdenum(new MaterialMolybdenum()),
     Neodymium(new MaterialNeodymium()),
     Nickel(new MaterialNickel()),
     Osmium(new MaterialOsmium()),

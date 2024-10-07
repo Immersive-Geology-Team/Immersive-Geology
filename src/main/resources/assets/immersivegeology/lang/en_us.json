@@ -149,7 +149,7 @@
   "block.immersivegeology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",
   "block.immersivegeology.crystallizer" : "Crystalizer",
   "block.immersivegeology.gravityseparator" : "Gravity Ore Separator",
-  "block.immersivegeology.chemicalvat" : "Vat",
+  "block.immersivegeology.chemical_reactor" : "Chemical Reactor",
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
 
   "fluid.immersivegeology.fluid": "%s",
@@ -195,6 +195,7 @@
   "material.immersivegeology.gold": "Gold",
   "material.immersivegeology.hastelloy": "Hastelloy",
   "material.immersivegeology.bronze": "Bronze",
+  "material.immersivegeology.molybdenum": "Molybdenum",
   "material.immersivegeology.viking_steel": "Ashbone Steel",
   "material.immersivegeology.glowstone": "Glowstone",
   "material.immersivegeology.iron": "Iron",

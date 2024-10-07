@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
-import com.igteam.immersivegeology.common.block.multiblocks.temp.TechPortalLogic;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
@@ -39,8 +38,6 @@ public class IGMultiblockProvider {
             builder -> {
                 builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
             });
-
-    public static final MultiblockRegistration<TechPortalLogic.State> HRHTPortal = IGRegistrationHolder.registerMultiblock("techportal", new TechPortalLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("techportal"), builder -> {}, Properties.copy(Blocks.IRON_BLOCK));
 
     public static void forceClassLoad(){};
 }

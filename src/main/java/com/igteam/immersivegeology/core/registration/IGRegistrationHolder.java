@@ -21,7 +21,6 @@ import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
-import com.igteam.immersivegeology.common.block.multiblocks.temp.HRHTPortalMultiblock;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
@@ -156,7 +155,7 @@ public class IGRegistrationHolder {
     {
         initializeMultiblocks();
         registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class, IGChemicalReactorMultiblock.class, HRHTPortalMultiblock.class));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class, IGChemicalReactorMultiblock.class));
         registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, IGBloomeryMultiblock.class));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
@@ -271,7 +270,6 @@ public class IGRegistrationHolder {
     {
         registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
         registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY);
-        registerMB("techportal", HRHTPortalMultiblock.INSTANCE, IGMultiblockProvider.HRHTPortal);
         registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);

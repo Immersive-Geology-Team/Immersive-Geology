@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-08T00:48:37.832500471	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2024-10-08T05:14:23.223305658	Tags for minecraft:fluid mod id immersivegeology
 bec09497998941e568466279888fde561d6b2d42 data/forge/tags/fluids/aluminium.json
 f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
 6d004a7a2e16f1bb517a2cab46e4f58a43bcb5e2 data/forge/tags/fluids/bronze.json
@@ -8,21 +8,38 @@ f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
 a5c565a4b8b2994ee464351bc9777a3854b03ff5 data/forge/tags/fluids/gold.json
 7ce2dd3d4af36d65170633b7cdbecd06e383c83f data/forge/tags/fluids/hastelloy.json
 d35867617a3b2e10548a8c856397b20392dc81e8 data/forge/tags/fluids/hydrochloricacid.json
+41650bc0a506c811e07da7ffeafbead435559e2e data/forge/tags/fluids/hydrochloricacid_chromium.json
+e5e3c8d6bddc6d4792d39a5edce9908fe2ebfe81 data/forge/tags/fluids/hydrochloricacid_cobalt.json
+b67fca6bfaab331c5df28ae60bbbbb4867fe6851 data/forge/tags/fluids/hydrochloricacid_copper.json
+2e0461de21b50ef11fbbe75bfdc3ee1e8981c9b5 data/forge/tags/fluids/hydrochloricacid_manganese.json
+e89dc5e82c1cfdbb3e4ae7ebf306748c19067ee8 data/forge/tags/fluids/hydrochloricacid_neodymium.json
+e8b9b9792116ad340d57c587cc6fc0414ae203ff data/forge/tags/fluids/hydrochloricacid_nickel.json
+2d2ad1219be3a31d6ae13decc66a34b212d1acfa data/forge/tags/fluids/hydrochloricacid_silver.json
+14f9dba885c2870a11c453f63a659ee228f1d2b0 data/forge/tags/fluids/hydrochloricacid_titanium.json
+9a2068fb5386bf1373fc19008ce3b26d3fc76f5d data/forge/tags/fluids/hydrochloricacid_uranium.json
+11441a28c7b3f3a17dd3d03ccc9bbf89ee982ff5 data/forge/tags/fluids/hydrochloricacid_zinc.json
 eae26ffd0a714af07180ad3fb7c3b0786d258ce6 data/forge/tags/fluids/hydrofluoricacid.json
+566665317dbe03c81082f3ce8051d7fc41d5c1f2 data/forge/tags/fluids/hydrofluoricacid_neodymium.json
+fd2b1b6b853c2f77af7ce2a256d6624e834bf49e data/forge/tags/fluids/hydrofluoricacid_uranium.json
 56c3fba5f3db76951ee4183fdc39b35b36fe49a9 data/forge/tags/fluids/iron.json
 c66b82f24bbfa085f69edb0fc8784a0f43f4102b data/forge/tags/fluids/lead.json
 6861ad721d51475beb0f251d691f63dcb8d3c555 data/forge/tags/fluids/manganese.json
 dc644e44caabf5251660876a6f03b734c578f80d data/forge/tags/fluids/moltenmantle.json
+e54801d98820d203f6575a449f5efb79a966515b data/forge/tags/fluids/molybdenum.json
 c1c6df8f2b6be00ed5b3908d615da37674d39610 data/forge/tags/fluids/neodymium.json
 59457eadc8ff39becabc3f2c57a4f9e788b11e75 data/forge/tags/fluids/nickel.json
 b2fe58a69b222b27fd1baaae3b70208664ba4c95 data/forge/tags/fluids/nitricacid.json
+229dbce72edb5e586ec85f5dad76593548f5d9a4 data/forge/tags/fluids/nitricacid_chromium.json
+d13b733761e699c917e2827aac48d330bd4377b9 data/forge/tags/fluids/nitricacid_unobtanium.json
 5dfdb7d714e423a7222f513c99a8749fa54d48c2 data/forge/tags/fluids/osmium.json
 9de866a7937ae0b2a7f888c59b043d29b58a8f99 data/forge/tags/fluids/platinum.json
 c316386cfb7aa77cafa7c9e7842acd3cf4808dd2 data/forge/tags/fluids/silver.json
 3399e301e355a173e16a3bf50e2a5da70076adde data/forge/tags/fluids/sodiumhydroxide.json
+0fe7acf3d5df46ac1aa4de82edb2e5014d253268 data/forge/tags/fluids/sodiumhydroxide_unobtanium.json
 fb8a1cff33b21edfbc0b4815ff642114f48bc29f data/forge/tags/fluids/steel.json
 327b40754d876232b8f1071d89ad8b8d496730fb data/forge/tags/fluids/sulfurdioxide.json
 b8e04d1a760598e615fd5f05728d2ff3578b2be5 data/forge/tags/fluids/sulfuricacid.json
+6643471e1cde7bbe283c9bb1f6a8121fbfbc8754 data/forge/tags/fluids/sulfuricacid_zinc.json
 65e32568170ef1155b607c50f14f89a515e3748f data/forge/tags/fluids/thorium.json
 36b31366f313c0671d83f8f929c3f26b5b047545 data/forge/tags/fluids/tin.json
 18c2191f81c78d59d3129e1546c5ed19a2ba0560 data/forge/tags/fluids/titanium.json
@@ -32,5 +49,5 @@ b8e04d1a760598e615fd5f05728d2ff3578b2be5 data/forge/tags/fluids/sulfuricacid.jso
 54e971e29f4cd4132b743c8d3bea360c93afccb3 data/forge/tags/fluids/vanadium.json
 1d09e1c3f05ef1b9b09080e07fb0665dd62a1343 data/forge/tags/fluids/zinc.json
 a5cd8cc8588f063a3110ed98e885aaacfdbc5511 data/forge/tags/fluids/zirconium.json
-eb7e82ef96cddc41c2c641ef8738ba0aa8ee9aea data/minecraft/tags/fluids/lava.json
-eb7e82ef96cddc41c2c641ef8738ba0aa8ee9aea data/tfc/tags/fluids/usable_in_ingot_mold.json
+8c55955da4b6f705304d971d732e4883ce465cc0 data/minecraft/tags/fluids/lava.json
+8c55955da4b6f705304d971d732e4883ce465cc0 data/tfc/tags/fluids/usable_in_ingot_mold.json

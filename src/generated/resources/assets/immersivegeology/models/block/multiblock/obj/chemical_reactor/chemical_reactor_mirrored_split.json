@@ -9,7 +9,7 @@
       "loader": "forge:obj",
       "model": "immersivegeology:models/block/multiblock/obj/chemical_reactor/chemical_reactor.obj",
       "textures": {
-        "particle": "immersivegeology:block/multiblock/chemical_reactor/chem-pipes"
+        "particle": "immersivegeology:block/multiblock/chemical_reactor/chemical_reactor"
       }
     },
     "loader": "immersiveengineering:mirror"
@@ -645,6 +645,11 @@
       1,
       0,
       -3
+    ],
+    [
+      1,
+      0,
+      2
     ],
     [
       0,
