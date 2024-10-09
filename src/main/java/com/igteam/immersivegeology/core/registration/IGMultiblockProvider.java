@@ -36,7 +36,7 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<ChemicalReactorLogic.State> CHEMICAL_REACTOR = IGRegistrationHolder.registerMetalMultiblock("chemical_reactor", new ChemicalReactorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("chemical_reactor"),
             builder -> {
-                builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
+                builder.redstone(state -> state.rsState, ChemicalReactorLogic.REDSTONE_IN);
             });
 
     public static void forceClassLoad(){};
