@@ -1,8 +1,12 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
@@ -11,6 +15,8 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -51,6 +57,13 @@ public class MaterialVanadinite extends MaterialMineral {
                         1,
                         300,
                         153600);
+
+                IGMethodBuilder.chemical(this).create("dust_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemCategoryFlags.COMPOUND_DUST.getName(),
+                        MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
+                        new FluidStack(Fluids.WATER, 250),
+                        IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
+                        new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getFluidTag(BlockCategoryFlags.FLUID), 250), null,
+                        200, 51200);
             }
         };
 

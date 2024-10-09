@@ -67,7 +67,13 @@ public class MaterialAcanthite extends MaterialMineral {
             @Override
             protected void describe()
             {
-                IGMethodBuilder.chemical(this).create("dust_" + getName() + "_to_slurry", MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST), ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 250), IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)), new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), null, null, 200, 51200);
+
+                IGMethodBuilder.chemical(this).create("dust_" + getName() + "_to_slurry",
+                        MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST),
+                        ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 250),
+                        IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
+                        new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), null, null,
+                        200, 51200);
             }
         };
 

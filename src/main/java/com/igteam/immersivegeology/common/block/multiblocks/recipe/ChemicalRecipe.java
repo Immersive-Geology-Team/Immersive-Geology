@@ -103,17 +103,26 @@ public class ChemicalRecipe extends MultiblockRecipe
 	public static ChemicalRecipe findRecipe(Level level, FluidStack inputA, FluidStack inputB, FluidStack inputC, ItemStack itemInput)
 	{
 		// TODO: Ensure this is tested a LOT.
-		List<FluidStack> inputFluids = List.of(inputA, inputB, inputC);
+		List<FluidStack> tankedFluids = List.of(inputA, inputB, inputC);
+		ChemicalRecipe bestMatch = null;
 		for(ChemicalRecipe recipe : RECIPES.getRecipes(level))
 		{
-			for(FluidStack inputF : inputFluids)
+			if(!recipe.itemInput.test(itemInput)) continue;
+
+			Set<FluidTagInput> recipeFluids = recipe.fluidIn;
+
+			boolean allFluidsAvailable = recipeFluids.stream().allMatch(rf -> tankedFluids.stream().anyMatch(rf));
+
+			if(allFluidsAvailable)
 			{
-				if(inputFluids.size() > recipe.fluidIn.size() && inputF.isEmpty()) continue;
-				if(recipe.fluidIn.stream().noneMatch((f) -> f.test(inputF))) return null;
+				if(bestMatch == null || recipeFluids.size() > bestMatch.fluidIn.size())
+				{
+					bestMatch = recipe;
+				}
 			}
-			if(recipe.itemInput.test(itemInput)) return recipe;
 		}
-		return null;
+
+		return bestMatch;
 	}
 
 	@Override

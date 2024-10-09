@@ -219,6 +219,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	@Override
 	public List<Component> getOverlayText(State state, Player player, boolean b)
 	{
+
 		if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
 			return List.of(TextUtils.formatFluidStack(state.tanks.leftInput.getFluid()),
 					TextUtils.formatFluidStack(state.tanks.backInput.getFluid()),
