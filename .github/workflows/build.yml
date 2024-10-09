@@ -1,10 +1,11 @@
 name: Build
 
-on: [push, pull_request]
+on: [ push ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,3 +23,23 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
+
+  notify-discord:
+    continue-on-error: true
+    name: Notify Discord
+    runs-on: ubuntu-latest
+    concurrency:
+      group: discord
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Notify Discord
+        env:
+          COMMIT_FROM: ${{ github.event.before }}
+          COMMIT_TO: ${{ github.event.after }}
+          WEBHOOK: ${{ secrets.WH_PUSH_PUBLIC }}
+          REPO: ${{ github.repository }}
+          REPO_NAME: ${{ github.event.repository.custom_properties.project_pretty_name }}
+        run: cd ./.github/workflows/ ; chmod +rx discord_commit.sh ; bash discord_commit.sh -i
