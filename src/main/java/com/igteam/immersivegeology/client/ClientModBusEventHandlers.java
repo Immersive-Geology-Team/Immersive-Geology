@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.client;
 
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
+import com.igteam.immersivegeology.client.renderer.multiblocks.ChemicalReactorRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.IGClientMultiblockProperties;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -48,6 +49,7 @@ public class ClientModBusEventHandlers {
 	public static void registerBlockEntityRenderers(RegisterRenderers event)
 	{
 		registerBERenderNoContext(event, IGMultiblockProvider.COREDRILL.masterBE(), CoreDrillRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.CHEMICAL_REACTOR.masterBE(), ChemicalReactorRenderer::new);
 	}
 
 	private static <T extends BlockEntity>

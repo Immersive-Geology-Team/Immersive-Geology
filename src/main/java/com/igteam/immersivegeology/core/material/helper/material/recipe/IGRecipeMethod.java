@@ -74,7 +74,7 @@ public abstract class IGRecipeMethod
 				case CUTTING -> { return ig("hydrojet"); }
 				case BLASTING -> {return ie("crude_blast_furnace");}
 				case BLOOMERY -> {return ig("bloomery");}
-				case CHEMICAL -> {return ig("chemicalreactor");}
+				case CHEMICAL -> {return ig("chemical_reactor");}
 				case CRUSHING -> {return ie("crusher");}
 				case ROASTING -> {return ig("reverberation_furnace");}
 				case SYNETHESIS -> {return ie("refinery");}

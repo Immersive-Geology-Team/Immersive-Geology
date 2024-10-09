@@ -48,6 +48,7 @@ public interface ConfigurationHelper {
             list.add(ItemCategoryFlags.RICH_ORE);
             list.add(ItemCategoryFlags.DIRTY_CRUSHED_ORE);
             list.add(ItemCategoryFlags.CRUSHED_ORE);
+            list.add(ItemCategoryFlags.DUST);
         }
 
         return list;

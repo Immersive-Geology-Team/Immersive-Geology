@@ -75,6 +75,21 @@ public interface MaterialHelper {
         return Fluids.EMPTY;
     }
 
+    default Fluid getFluid(BlockCategoryFlags flag, MaterialInterface<?> secondary)
+    {
+        if(flag == null)
+        {
+            flag = BlockCategoryFlags.SLURRY;
+            IGLib.IG_LOGGER.warn("Null Flag Pass for slurry fluid getter, defaulting to SLURRY");
+        }
+
+        String id = flag.getRegistryKey(this, secondary.instance());
+        if(getFluidRegistryMap().containsKey(id)){
+            return IGRegistrationHolder.getFluid.apply(id);
+        }
+        IGLib.IG_LOGGER.warn("Unable to find Fluid/Slurry for material {}, {}", this, secondary);
+        return Fluids.EMPTY;
+    }
     default Item getItem(BlockCategoryFlags flag){
         // Check for edge cases, like in the menu where this can be used to get an Ore Block
         if(flag.equals(BlockCategoryFlags.ORE_BLOCK)){
@@ -151,7 +166,6 @@ public interface MaterialHelper {
         HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(flag);
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
         String key = IGTags.getWrapFromSet(material_set);
-        IGLib.IG_LOGGER.warn("Key: {} | Flag: {}", key, flag);
         return data_map.get(key);
     };
 }

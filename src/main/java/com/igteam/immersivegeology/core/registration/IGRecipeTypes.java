@@ -18,8 +18,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
-
 public class IGRecipeTypes
 {
 	private static final DeferredRegister<RecipeType<?>> REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, IGLib.MODID);
@@ -29,7 +27,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<GravitySeparatorRecipe> GRAVITYSEPARATOR = register("gravityseparator", GravitySeparatorRecipe.class);
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
-	public static final TypeWithClass<ChemicalRecipe> CHEMICALREACTOR = register("chemical_reactor", ChemicalRecipe.class);
+	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 
 
 

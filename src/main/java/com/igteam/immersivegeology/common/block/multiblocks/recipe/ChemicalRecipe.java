@@ -13,11 +13,11 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -28,31 +28,58 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ChemicalRecipe extends MultiblockRecipe
 {
 	public static RegistryObject<IERecipeSerializer<ChemicalRecipe>> SERIALIZER;
-	public static final CachedRecipeList<ChemicalRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CHEMICALREACTOR);
-	public final Lazy<ItemStack> itemOutput;
-	public final Lazy<FluidStack> fluidOutput;
+	public static final CachedRecipeList<ChemicalRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CHEMICAL_REACTOR);
+	public final ItemStack itemOutput;
+	public final FluidStack fluidOutput;
 	public final Set<FluidTagInput> fluidIn;
 	public final IngredientWithSize itemInput;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> ChemicalRecipe(ResourceLocation id, IngredientWithSize inputItem, Set<FluidTagInput> fluidInputSet, Lazy<ItemStack> itemOutput, Lazy<FluidStack> fluidOutput, int energy, int time)
+	public <T extends Recipe<?>> ChemicalRecipe(ResourceLocation id, IngredientWithSize inputItem, Set<FluidTagInput> fluidInputSet, ItemStack itemOutput, FluidStack fluidOutput, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.CRYSTALLIZER, id);
+		super(LAZY_EMPTY, IGRecipeTypes.CHEMICAL_REACTOR, id);
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
 		this.fluidIn = fluidInputSet;
 		this.itemInput = inputItem;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
-
+		this.outputList = Lazy.of(() -> NonNullList.of(this.itemOutput));
+		this.fluidOutputList = List.of(fluidOutput);
+		this.fluidInputList = fluidIn.stream().toList();
+		this.setInputList(List.of(itemInput.getBaseIngredient()));
 		if(this.fluidIn.isEmpty() || this.fluidIn.size() > 3) IGLib.IG_LOGGER.error("Chemical Recipe {} has either NO or more than 3 Fluid Tag inputs in the set.", id);
+	}
+
+	public static boolean acceptableCatalyst(Level level, ItemStack stack)
+	{
+		for(ChemicalRecipe recipe : RECIPES.getRecipes(level))
+		{
+			if(recipe.itemInput.test(stack)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public NonNullList<ItemStack> getActualItemOutputs()
+	{
+		NonNullList<ItemStack> list = NonNullList.create();
+		list.add(this.itemOutput);
+		return list;
+	}
+
+	// Required for normal IE Multiblock Processor to access recipe info. Used in Server Tick.
+	@Override
+	public List<FluidStack> getActualFluidOutputs()
+	{
+		return List.of(fluidOutput);
 	}
 
 	@Override

@@ -249,11 +249,6 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                     RevFurnaceRecipe::findRecipe, getLevel, () -> inventory2.getStackInSlot(0)
             );
 
-            Runnable runTest = () -> {
-                if(cachedRecipe1.get() != null) addToTank(cachedRecipe1.get().getWasteAmount());
-                ctx.getMarkDirtyRunnable().run();
-            };
-
             furnace1 = new IGFurnaceHandler<>(
                     1,
                     List.of(new InputSlot<>(r -> r.input, 0)),
