@@ -9,6 +9,8 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 
@@ -18,9 +20,11 @@ import java.util.function.Consumer;
 
 public abstract class IGRecipeMethod
 {
+	protected final MaterialHelper parentMaterial;
 	public IGRecipeMethod(IGRecipeStage stage)
 	{
 		stage.addMethod(this);
+		this.parentMaterial = stage.getParentMaterial();
 	}
 
 	public abstract @Nonnull RecipeMethod getMethod();
@@ -100,5 +104,10 @@ public abstract class IGRecipeMethod
 	private static String mc(String suffix)
 	{
 		return "minecraft:" + suffix;
+	}
+
+	protected String create_basic_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
+	{
+		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + output_form.getName().toLowerCase();
 	}
 }

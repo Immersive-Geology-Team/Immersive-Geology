@@ -29,6 +29,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -52,9 +53,10 @@ public class MaterialAcanthite extends MaterialMineral {
     }
 
     @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-		return Set.of(MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium);
+
+		return new LinkedHashSet<>(Set.of(MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium));
     }
 
     @Override
@@ -62,20 +64,20 @@ public class MaterialAcanthite extends MaterialMineral {
     {
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
-        new IGRecipeStage(this, IGStageDesignation.LEECHING)
-        {
-            @Override
-            protected void describe()
-            {
+        IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
+                ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
+                ItemCategoryFlags.SLAG, 1,         // Output
+                1000,                                          // Roasting Time
+                200                                            // Sulfur Dioxide Output Amount
+        );
 
-                IGMethodBuilder.chemical(this).create("dust_" + getName() + "_to_slurry",
-                        MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST),
-                        ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 250),
-                        IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
-                        new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), null, null,
-                        200, 51200);
-            }
-        };
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+                "grit_to_silver_slurry",
+                MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 250),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), null, null,
+                200, 51200);
 
         IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }

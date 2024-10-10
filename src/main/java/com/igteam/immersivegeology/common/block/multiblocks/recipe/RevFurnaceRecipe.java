@@ -27,18 +27,19 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 
 	public static RegistryObject<IERecipeSerializer<RevFurnaceRecipe>> SERIALIZER;
 	public static final CachedRecipeList<RevFurnaceRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.REVFURNACE);
-	public int time;
-	public int waste;
+	public int waste, time;
 	public IngredientWithSize input;
 	public Lazy<ItemStack> result;
+	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> RevFurnaceRecipe(ResourceLocation id, Ingredient input, Lazy<ItemStack> result, int waste_amount, int time)
+	public <T extends Recipe<?>> RevFurnaceRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> result, int waste_amount, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.REVFURNACE, id);
-		this.input = new IngredientWithSize(input);
+		this.input = input;
 		this.result = result;
-		this.time = time;
 		this.waste = waste_amount;
+		this.time = time;
+		totalProcessTime = Lazy.of(() -> time);
 	}
 
 	public static RevFurnaceRecipe findRecipe(Level level, ItemStack input)
@@ -64,6 +65,12 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 	private boolean matches(ItemStack input)
 	{
 		return this.input.test(input);
+	}
+
+	@Override
+	public int getTotalProcessTime()
+	{
+		return totalProcessTime.get();
 	}
 
 	@Override

@@ -26,10 +26,4 @@ public class MaterialGypsum extends MaterialMineral {
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.MONOCLINIC;
     }
-
-    @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
-    {
-        return Set.of();
-    }
 }

@@ -3,11 +3,11 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -29,8 +29,8 @@ public class MaterialBauxite extends MaterialMineral {
     }
 
     @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return Set.of(MetalEnum.Aluminum);
+        return new LinkedHashSet<>(Set.of(MetalEnum.Aluminum));
     }
 }

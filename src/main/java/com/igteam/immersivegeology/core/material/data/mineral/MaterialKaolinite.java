@@ -21,10 +21,4 @@ public class MaterialKaolinite extends MaterialMineral {
     protected Function<IFlagType<?>, Integer> materialColorFunction() {
         return ((p) -> (0xE5DFD1));
     }
-
-    @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
-    {
-        return Set.of();
-    }
 }

@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -23,8 +24,8 @@ public class MaterialUraninite extends MaterialMineral {
     }
 
     @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return Set.of(MetalEnum.Uranium);
+        return new LinkedHashSet<>(Set.of(MetalEnum.Uranium));
     }
 }

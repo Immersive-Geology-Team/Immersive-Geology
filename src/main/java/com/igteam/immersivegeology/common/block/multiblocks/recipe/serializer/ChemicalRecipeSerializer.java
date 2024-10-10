@@ -15,7 +15,9 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -65,9 +67,12 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 		ItemStack output = buffer.readItem();
 		FluidStack fluidOut = FluidStack.readFromPacket(buffer);
 		IngredientWithSize itemInput = IngredientWithSize.read(buffer);
-		Set<FluidTagInput> fluidSet = new HashSet<>();
+		HashSet<FluidTagInput> fluidSet = new HashSet<>();
 		int fluid_input_size = buffer.readInt();
-		for(int i = 0; i < fluid_input_size; i++) fluidSet.add(FluidTagInput.read(buffer));
+		for(int i = 0; i < fluid_input_size; i++) {
+			FluidTagInput fluid = FluidTagInput.read(buffer);
+			fluidSet.add(fluid);
+		}
 
 		int energy = buffer.readInt();
 		int time = buffer.readInt();
@@ -83,6 +88,8 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 		buffer.writeInt(recipe.fluidIn.size());
 		recipe.fluidIn.forEach(f -> f.write(buffer));
 		buffer.writeInt(recipe.getTotalProcessEnergy());
-		buffer.writeInt(recipe.getTotalProcessTime());
+		int time = recipe.getTotalProcessTime();
+		IGLib.IG_LOGGER.info("Time: {}", time);
+		buffer.writeInt(time);
 	}
 }

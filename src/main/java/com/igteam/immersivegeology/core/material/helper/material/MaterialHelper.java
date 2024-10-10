@@ -36,12 +36,11 @@ import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder
 
 public interface MaterialHelper {
 
-    default ItemStack getStack(ItemCategoryFlags flag, int amount) {
-        return new ItemStack(getItem(flag), amount);
-    }
-
-    default ItemStack getStack(BlockCategoryFlags flag, int amount) {
-        return new ItemStack(getItem(flag), amount);
+    default ItemStack getStack(IFlagType<?> unknownFlag, int amount) {
+        if(unknownFlag instanceof ItemCategoryFlags flag)return new ItemStack(getItem(flag), amount);
+        if(unknownFlag instanceof BlockCategoryFlags flag)return new ItemStack(getItem(flag), amount);
+        IGLib.IG_LOGGER.error("{} is not an Item or Block Flag", unknownFlag.getName());
+        return ItemStack.EMPTY;
     }
 
     default Item getItem(ItemCategoryFlags flag){
@@ -113,9 +112,9 @@ public interface MaterialHelper {
 
     String getName();
 
-    default Set<MaterialInterface<?>> getSourceMaterials()
+    default LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return Set.of();
+        return new LinkedHashSet<>();
     };
 
     void addStage(IGRecipeStage stage);
@@ -135,37 +134,48 @@ public interface MaterialHelper {
         IGStageProvider.add(this, getMaterialStageSet());
     };
 
-    default TagKey<Item> getItemTag(IFlagType<ItemCategoryFlags> flag) {
-        // Override for block items
+    default TagKey<Item> getItemTag(IFlagType<?> unknownFlag)
+    {
         try
         {
-            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
-            IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+            if(!(unknownFlag instanceof ItemCategoryFlags))
+                throw (new IllegalArgumentException("Non Item Category Flag Parsed to getItemTag"));
+            ItemCategoryFlags flag = (ItemCategoryFlags)unknownFlag;
 
-            switch(flag.getValue())
+            try
             {
-                case INGOT ->
+                EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
+                IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
+                switch(flag.getValue())
                 {
-                    return ieMetalTags.ingot;
+                    case INGOT ->
+                    {
+                        return ieMetalTags.ingot;
+                    }
+                    case DUST ->
+                    {
+                        return ieMetalTags.dust;
+                    }
+                    case NUGGET ->
+                    {
+                        return ieMetalTags.nugget;
+                    }
+                    case PLATE ->
+                    {
+                        return ieMetalTags.plate;
+                    }
                 }
-                case DUST ->
-                {
-                    return ieMetalTags.dust;
-                }
-                case NUGGET ->
-                {
-                    return ieMetalTags.nugget;
-                }
-                case PLATE ->
-                {
-                    return ieMetalTags.plate;
-                }
-            }
-        } catch(Exception ignored){};
+            } catch(Exception ignored){}
 
-        HashMap<String,TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(flag);
-        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
-        String key = IGTags.getWrapFromSet(material_set);
-        return data_map.get(key);
-    };
+            HashMap<String, TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(flag);
+            LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
+            String key = IGTags.getWrapFromSet(material_set);
+            return data_map.get(key);
+        } catch(Exception e)
+        {
+            IGLib.IG_LOGGER.error(e.getLocalizedMessage());
+        }
+        IGLib.IG_LOGGER.warn("Null Tag Returned for {} {}", getName(), unknownFlag);
+        return null;
+    }
 }

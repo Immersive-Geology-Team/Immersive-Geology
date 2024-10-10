@@ -45,7 +45,7 @@ public abstract class IGRecipeStage
 		return material;
 	}
 
-	protected abstract void describe();
+	protected void describe(){};
 
 	public Set<IGRecipeMethod> getMethods(){
 		return methods;

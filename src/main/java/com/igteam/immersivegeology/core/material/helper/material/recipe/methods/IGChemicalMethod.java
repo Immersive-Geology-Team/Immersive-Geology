@@ -13,9 +13,13 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.ChemicalRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
+import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -35,9 +39,9 @@ public class IGChemicalMethod extends IGRecipeMethod
 	private int energy, time;
 	private String name;
 
-	public IGChemicalMethod(IGRecipeStage stage)
+	public IGChemicalMethod(MaterialHelper material, IGStageDesignation stage)
 	{
-		super(stage);
+		super(new IGRecipeStage(material, stage){});
 	}
 
 	@NotNull
@@ -47,8 +51,8 @@ public class IGChemicalMethod extends IGRecipeMethod
 		return RecipeMethod.CHEMICAL;
 	}
 
-
 	public void create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+		this.name = parentMaterial.getName() + "_" + name;
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
 		this.itemIn = itemIn;
@@ -57,7 +61,18 @@ public class IGChemicalMethod extends IGRecipeMethod
 		this.fluidInC = fluidInC;
 		this.energy = energy;
 		this.time = time;
-		this.name = name;
+	}
+
+	public void create(IFlagType<?> inputFlag, IFlagType<?> outputFlag, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+		this.name = create_basic_method_name(inputFlag, outputFlag);
+		this.itemOutput = itemOutput;
+		this.fluidOutput = fluidOutput;
+		this.itemIn = itemIn;
+		this.fluidInA = fluidInA;
+		this.fluidInB = fluidInB;
+		this.fluidInC = fluidInC;
+		this.energy = energy;
+		this.time = time;
 	}
 
 	@Override

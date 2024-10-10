@@ -9,10 +9,7 @@
 package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.IModPlugin;
@@ -47,6 +44,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
+		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
 	}
 
 	@Override
@@ -55,6 +53,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.CRYSTALLIZER, getRecipes(CrystallizerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.REVERBERATION, getRecipes(RevFurnaceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.ROTARYKILN, getRecipes(RotaryKilnRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.CHEMICAL, getRecipes(ChemicalRecipe.RECIPES));
 	}
 
 
@@ -64,6 +63,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.CRYSTALLIZER.iconStack(), JEIRecipeTypes.CRYSTALLIZER);
 		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
 		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
+		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
 	}
 
 	@Override

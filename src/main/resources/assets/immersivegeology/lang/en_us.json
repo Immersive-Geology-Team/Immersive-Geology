@@ -140,10 +140,6 @@
   "machine.immersivegeology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersivegeology.bloomery": "Bloomery",
   "machine.immersivegeology.hydrojet": "Hydrojet Cutter",
-  "machine.immersivegeology.machine_steel_crystallizer" : "Crystalizer",
-  "machine.immersivegeology.machine_steel_gravityseparator" : "Gravity Ore Separator",
-  "machine.immersivegeology.machine_steel_chemicalvat" : "Vat",
-  "machine.immersivegeology.machine_steel_reverberation_furnace" : "Reverberation Furnace",
 
   "block.immersivegeology.rotarykiln": "Rotary Kiln",
   "block.immersivegeology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",

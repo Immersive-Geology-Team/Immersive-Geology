@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -58,22 +59,23 @@ public class MaterialVanadinite extends MaterialMineral {
                         300,
                         153600);
 
-                IGMethodBuilder.chemical(this).create("dust_" + getName() + "_to_" + MetalEnum.Vanadium.getName() + "_" + ItemCategoryFlags.COMPOUND_DUST.getName(),
-                        MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
-                        new FluidStack(Fluids.WATER, 250),
-                        IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
-                        new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getFluidTag(BlockCategoryFlags.FLUID), 250), null,
-                        200, 51200);
+
             }
         };
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(ItemCategoryFlags.DUST, ItemCategoryFlags.COMPOUND_DUST,
+                MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
+                new FluidStack(Fluids.WATER, 250),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
+                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getFluidTag(BlockCategoryFlags.FLUID), 250), null,
+                200, 51200);
 
         IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 
     @Override
-    public Set<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return Set.of(MetalEnum.Lead, MetalEnum.Vanadium);
+        return new LinkedHashSet<>(Set.of(MetalEnum.Vanadium, MetalEnum.Lead));
     }
 
 }
