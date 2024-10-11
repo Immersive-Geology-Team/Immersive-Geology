@@ -11,8 +11,10 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -29,9 +31,9 @@ public class IGBlastingMethod extends IGRecipeMethod
 	private String name;
 	private ItemStack slag;
 
-	public IGBlastingMethod(IGRecipeStage stage)
+	public IGBlastingMethod(MaterialHelper parentMaterial, IGStageDesignation stage)
 	{
-		super(stage);
+		super(new IGRecipeStage(parentMaterial, stage){});
 	}
 
 	public void create(String method_name, TagKey<Item> input, ItemStack output){

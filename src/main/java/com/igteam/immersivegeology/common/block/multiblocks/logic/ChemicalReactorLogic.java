@@ -10,16 +10,21 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelper;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
+import blusunrize.immersiveengineering.client.BlockOverlayUtils;
+import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
@@ -32,6 +37,8 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGPositionalOverlayText;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.ChemicalReactorShape;
 import net.minecraft.core.BlockPos;
@@ -39,6 +46,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -56,13 +64,15 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLogic.State>, IServerTickableComponent<ChemicalReactorLogic.State>, MBOverlayText<ChemicalReactorLogic.State>
+public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLogic.State>, IGPositionalOverlayText<State>, IServerTickableComponent<ChemicalReactorLogic.State>
 {
 	public static final BlockPos REDSTONE_IN = new BlockPos(5, 1, 6);
 	private static final Set<CapabilityPosition> ENERGY_POS;
@@ -72,6 +82,12 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	private static final Set<CapabilityPosition> FLUID_INPUT_CAPS;
 	private static final Set<BlockPos> FLUID_INPUTS;
 	private static final BlockPos ITEM_INPUT;
+
+	private static final Set<BlockPos> TANK_LEFT_POSITIONS;
+	private static final Set<BlockPos> TANK_BACK_POSITIONS;
+	private static final Set<BlockPos> TANK_RIGHT_POSITIONS;
+	private static final Set<BlockPos> TANK_FRONT_POSITIONS;
+	private static final Set<BlockPos> REACTOR_CHAMBER_POSITIONS;
 
 	static
 	{
@@ -85,6 +101,11 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 				new CapabilityPosition(8, 0, 3, RelativeBlockFace.RIGHT),
 				new CapabilityPosition(3, 0, 0, RelativeBlockFace.BACK));
 		FLUID_INPUTS = FLUID_INPUT_CAPS.stream().map(CapabilityPosition::posInMultiblock).collect(Collectors.toSet());
+		TANK_LEFT_POSITIONS = generateBlockPositions(new BlockPos(0,1,3), new BlockPos(1,3,4));
+		TANK_BACK_POSITIONS = generateBlockPositions(new BlockPos(4,1,0), new BlockPos(5,3,1));
+		TANK_RIGHT_POSITIONS = generateBlockPositions(new BlockPos(7,1,4), new BlockPos(8,3,5));
+		TANK_FRONT_POSITIONS = generateBlockPositions(new BlockPos(3,1,7), new BlockPos(4,3,8));
+		REACTOR_CHAMBER_POSITIONS = generateBlockPositions(new BlockPos(3,1,3), new BlockPos(5,4,5));
 	}
 
 	@Override
@@ -211,20 +232,34 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 	@Nullable
 	@Override
-	public List<Component> getOverlayText(State state, Player player, boolean b)
+	public List<Component> getOverlayText(State state, Player player, IMultiblockBEHelper<ChemicalReactorLogic.State> helper)
 	{
-		if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
-			return List.of(TextUtils.formatFluidStack(state.tanks.leftInput.getFluid()),
-					TextUtils.formatFluidStack(state.tanks.backInput.getFluid()),
-					TextUtils.formatFluidStack(state.tanks.rightInput.getFluid()),
-					TextUtils.formatFluidStack(state.tanks.output.getFluid()));
-		if(state == null) return List.of();
-		ItemStack inputStack = state.inventory.getStackInSlot(0);
-		ItemStack outputStack = state.inventory.getStackInSlot(1);
-		String input = inputStack.getDisplayName().getString() + " x" + inputStack.getCount();
-		String output = outputStack.getDisplayName().getString() + " x" + outputStack.getCount();;
 
-		return List.of(Component.literal(input), Component.literal(output));
+		BlockPos posInMultiblock = helper.getPositionInMB();
+
+		if(TANK_LEFT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.leftInput.getFluid()));
+		if(TANK_BACK_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.backInput.getFluid()));
+		if(TANK_RIGHT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.rightInput.getFluid()));
+		if(TANK_FRONT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.output.getFluid()));
+		if(REACTOR_CHAMBER_POSITIONS.contains(posInMultiblock)) {
+			ItemStack input = state.inventory.getStackInSlot(0);
+			if(!input.isEmpty()) return List.of(Component.literal(input.toString()));
+		}
+		return List.of();
+	}
+
+	private static Set<BlockPos> generateBlockPositions(BlockPos bottomLeft, BlockPos topRight) {
+		Set<BlockPos> positions = new HashSet<>();
+
+		for (int x = bottomLeft.getX(); x <= topRight.getX(); x++) {
+			for (int y = bottomLeft.getY(); y <= topRight.getY(); y++) {
+				for (int z = bottomLeft.getZ(); z <= topRight.getZ(); z++) {
+					positions.add(new BlockPos(x, y, z));
+				}
+			}
+		}
+
+		return positions;
 	}
 
 	public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<ChemicalRecipe>

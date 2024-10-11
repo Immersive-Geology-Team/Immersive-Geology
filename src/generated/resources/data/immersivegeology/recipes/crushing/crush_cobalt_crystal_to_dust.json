@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/cobalt"
+  },
+  "result": {
+    "item": "immersivegeology:dust_cobalt"
+  },
+  "secondaries": [],
+  "time": 200
+}

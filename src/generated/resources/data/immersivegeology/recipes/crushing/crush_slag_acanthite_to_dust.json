@@ -1,0 +1,20 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:slag/acanthite"
+  },
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:dust_acanthite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:dusts/acanthite"
+      }
+    }
+  ],
+  "time": 200
+}

@@ -8,8 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -24,7 +27,9 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGBlastingMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGChemicalMethod;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -64,6 +69,7 @@ public class MaterialAcanthite extends MaterialMineral {
     {
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
+
         IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
                 ItemCategoryFlags.SLAG, 1,         // Output
@@ -71,13 +77,22 @@ public class MaterialAcanthite extends MaterialMineral {
                 200                                            // Sulfur Dioxide Output Amount
         );
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("slag_" + getName() + "_to_metal", getItemTag(ItemCategoryFlags.SLAG), new ItemStack(Metals.INGOTS.get(EnumMetals.SILVER).asItem()));
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create("slag_"+getName() +"_to_dust", getItemTag(ItemCategoryFlags.SLAG), getStack(ItemCategoryFlags.DUST, 1), getItemTag(ItemCategoryFlags.DUST), 3000, 200, 0.25f);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "grit_to_silver_slurry",
                 MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST),
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 250),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 750),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), null, null,
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 750), null, null,
                 200, 51200);
+
+        IGMethodBuilder.crystalize(this, IGStageDesignation.CRYSTALLIZATION).create("slurry_silver_to_crystal", MetalEnum.Silver.getStack(ItemCategoryFlags.CRYSTAL), ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Silver), 250, 300, 38400);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(MetalEnum.Platinum.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
+                MetalEnum.Platinum.getStack(ItemCategoryFlags.DUST), MetalEnum.Osmium.getStack(ItemCategoryFlags.DUST), 0.2f, 60, 100);
 
         IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }

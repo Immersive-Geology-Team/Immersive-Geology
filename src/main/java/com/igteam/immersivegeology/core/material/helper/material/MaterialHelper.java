@@ -11,9 +11,11 @@ package com.igteam.immersivegeology.core.material.helper.material;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -48,6 +50,28 @@ public interface MaterialHelper {
             flag = ItemCategoryFlags.INGOT;
             IGLib.getNewLogger().error("Attempted to grab an item from registry with a null flag, replacing with INGOT to prevent crash");
         }
+
+        try
+        {
+            if(Arrays.stream(EnumMetals.values()).anyMatch(e -> e.name().equalsIgnoreCase(getName())))
+            {
+                switch(flag)
+                {
+                    case INGOT ->
+                    {
+
+                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                    }
+                    case DUST ->
+                    {
+                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                    }
+                }
+            }
+        } catch(Exception e) {
+            IGLib.IG_LOGGER.info("Unable to find an IE variant for {}", flag.getName());
+            IGLib.IG_LOGGER.error("Exception: {}", e.getMessage());
+        };
 
         if(getItemRegistryMap().containsKey(flag.getRegistryKey(this)))
         {

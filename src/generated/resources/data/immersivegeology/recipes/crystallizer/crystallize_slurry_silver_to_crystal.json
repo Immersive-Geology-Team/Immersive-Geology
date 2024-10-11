@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "input": {
+    "amount": 250,
+    "tag": "forge:hydrochloricacid_silver"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_silver"
+  },
+  "time": 300
+}

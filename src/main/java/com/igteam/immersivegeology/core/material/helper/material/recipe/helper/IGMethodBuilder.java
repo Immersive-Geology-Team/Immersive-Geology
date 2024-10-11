@@ -16,7 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.
 public class IGMethodBuilder
 {
 	public static IGCraftingMethod crafting(IGRecipeStage parentStage) { return new IGCraftingMethod(parentStage);}
-	public static IGSeparatorMethod separating(IGRecipeStage parentStage) { return new IGSeparatorMethod(parentStage);}
+	public static IGSeparatorMethod separating(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGSeparatorMethod(parentMaterial, stage);}
 
 	public static IGBloomeryMethod bloomery(IGRecipeStage parentStage) {return new IGBloomeryMethod(parentStage);}
 
@@ -25,10 +25,10 @@ public class IGMethodBuilder
 
 	public static IGCalcinationMethod decompose(IGRecipeStage parentStage) {return new IGCalcinationMethod(parentStage);}
 
-	public static IGCrystallizationMethod crystalize(IGRecipeStage parentStage) {return new IGCrystallizationMethod(parentStage);}
-	public static IGBlastingMethod blasting(IGRecipeStage parentStage) { return new IGBlastingMethod(parentStage); }
-	public static IGCrushingMethod crushing(IGRecipeStage parentStage) {
-		return new IGCrushingMethod(parentStage);
+	public static IGCrystallizationMethod crystalize(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCrystallizationMethod(parentMaterial, stage);}
+	public static IGBlastingMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGBlastingMethod(parentMaterial, stage); }
+	public static IGCrushingMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage) {
+		return new IGCrushingMethod(parentMaterial, stage);
 	}
 
 	public static IGRefineryMethod synthesis (IGRecipeStage parentStage) {return new IGRefineryMethod(parentStage);}

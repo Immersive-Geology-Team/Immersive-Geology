@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/lead"
+  },
+  "result": {
+    "item": "immersiveengineering:dust_lead"
+  },
+  "secondaries": [],
+  "time": 200
+}

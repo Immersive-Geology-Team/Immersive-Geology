@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/tin"
+  },
+  "result": {
+    "item": "immersivegeology:dust_tin"
+  },
+  "secondaries": [],
+  "time": 200
+}

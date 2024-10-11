@@ -2,11 +2,11 @@
   "type": "immersivegeology:chemical_reactor",
   "energy": 51200,
   "fluidInputA": {
-    "amount": 250,
+    "amount": 750,
     "tag": "forge:hydrochloricacid"
   },
   "fluidResult": {
-    "amount": 250,
+    "amount": 750,
     "fluid": "immersivegeology:slurry_hydrochloricacid_silver"
   },
   "itemInput": {

@@ -20,12 +20,16 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
@@ -129,29 +133,25 @@ public class IGRecipes extends RecipeProvider
 
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)
 	{
-		for(MaterialInterface<?> mineral : IGLib.getGeologyMaterials())
+		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
-
-			if(mineral.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && mineral.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
-
+			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
 				for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
 				{
 					int amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 2 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 3 : 5);
 					int time = 100;
 					int energy = 100;
-					CrusherRecipeBuilder.builder(mineral.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, amount)).addInput(mineral.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + mineral.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
+					CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, amount)).addInput(material.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + material.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
 				}
-
-				GravitySeparatorRecipeBuilder.builder(mineral.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(mineral.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ mineral.getName() + "_to_crushed"));
-
-
-				//RevFurnaceRecipeBuilder.builder(mineral.getSmeltMaterial().getStack(ItemCategoryFlags.INGOT)).setTime(100).setWasteAmount(250).addInput(mineral.getStack(ItemCategoryFlags.CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "reverberation_furnace/crushed_" + mineral.getName() + "_to_ingot"));
-
+				GravitySeparatorRecipeBuilder.builder(material.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(material.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ material.getName() + "_to_crushed"));
+			}
+			if(material instanceof MetalEnum)
+			{
+				if(material.hasFlag(ItemCategoryFlags.CRYSTAL) && material.hasFlag(ItemCategoryFlags.DUST) &! (material.instance() instanceof MaterialMetalAlloy))
+				{
+					IGMethodBuilder.crushing(material.instance(), IGStageDesignation.EXTRACTION).create(material.getName() + "_crystal_to_dust", material.getItemTag(ItemCategoryFlags.CRYSTAL), material.getStack(ItemCategoryFlags.DUST, 1), 3000, 200);
+				}
 			}
 		}
-
-		String key = IGTags.getWrapFromSet(Set.of(ChemicalEnum.HydrochloricAcid.instance(), MetalEnum.Chromium.instance()));
-		TagKey<Fluid> fluidTag = IGTags.FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY).get(key);
-		CrystallizerRecipeBuilder.builder(MetalEnum.Chromium.getItemTag(ItemCategoryFlags.CRYSTAL), 1).setEnergy(1000).setTime(100).addInput(new FluidTagInput(fluidTag, 250)).build(consumer, new ResourceLocation(IGLib.MODID, "crystallizer/chromite_slurry_to_crystal"));
 	}
 }

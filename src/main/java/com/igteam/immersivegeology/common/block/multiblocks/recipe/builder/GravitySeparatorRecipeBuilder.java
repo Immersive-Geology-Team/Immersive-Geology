@@ -68,8 +68,13 @@ public class GravitySeparatorRecipeBuilder extends IEFinishedRecipe<GravitySepar
 	}
 
 
-	public GravitySeparatorRecipeBuilder setByproduct(Item byproduct)
+	public GravitySeparatorRecipeBuilder setByproduct(ItemStack byproduct)
 	{
 		return this.addItem("byproduct", byproduct);
+	}
+
+	public GravitySeparatorRecipeBuilder setByproduct(Item byproduct)
+	{
+		return this.addItem("byproduct", new ItemStack(byproduct));
 	}
 }

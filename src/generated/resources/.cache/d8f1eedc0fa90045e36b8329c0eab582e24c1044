@@ -1,6 +1,6 @@
-// 1.20.1	2024-10-09T12:03:06.079445303	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2024-10-12T01:50:20.327762847	Tags for minecraft:item mod id immersivegeology
 2455092491cf23f5d710ee1073ecfc465fe1327d data/forge/tags/items/clay/kaolinite.json
-86cad6a591ab8e38c3f7e290502e6ff5a1ac0cfd data/forge/tags/items/compound_dust/aluminium.json
+a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
 f84e009ee715037e0d32c9dc9e31f52efeb7302f data/forge/tags/items/compound_dust/chromium.json
 f461a0a225b665028c185738ad2c8905245fb1c9 data/forge/tags/items/compound_dust/cobalt.json
@@ -66,7 +66,7 @@ c57f9c5650e3b0db884017bf75190fbbdd441b2d data/forge/tags/items/crushed_ore/urani
 535925feca4bed2be24fb55896134c379443692a data/forge/tags/items/crushed_ore/vanadinite.json
 45add208a3798c2af994f207b3185eda963ebb8f data/forge/tags/items/crushed_ore/wolframite.json
 b979e04551b1cacd09f758e0f483e5721d83625d data/forge/tags/items/crushed_ore/zircon.json
-579d5b9fcb7ca552f4895bac85714d7cef5acfcd data/forge/tags/items/crystal/aluminium.json
+61fb308b1d9ace57aa5da0c185c7a841125e8c2d data/forge/tags/items/crystal/aluminum.json
 a1359fa40e5a2aa1cdce8824b81b73009b6f9da2 data/forge/tags/items/crystal/chromium.json
 90e4bd36f2421069e820c763403730b5993c1be5 data/forge/tags/items/crystal/cobalt.json
 f740eb816493d66d37e539bd6fec5daaffb40211 data/forge/tags/items/crystal/copper.json
@@ -158,7 +158,7 @@ fba9406981c693d4b8a5ec3e7772a8b876e55696 data/forge/tags/items/dusts/manganese.j
 48518c77d4923c120a48cbe6190fc1356a7a5498 data/forge/tags/items/dusts/molybdenum.json
 1a0ad532d4f040494edf0cca9a074b2483b24874 data/forge/tags/items/dusts/monazite.json
 b329a29097139927f15ab80b9283a5c5eb75e1ff data/forge/tags/items/dusts/neodymium.json
-38b9c728de9158aac48cd38424af7d5fe203df65 data/forge/tags/items/dusts/nickel.json
+89b5625e0f8b2734026868008c692034297f8161 data/forge/tags/items/dusts/nickel.json
 32aa7b05554226cdf8d3bcf5ce2efec7afd03cb1 data/forge/tags/items/dusts/osmium.json
 203a872e8b0a05e0542f8f520b2ebf9f98e3906e data/forge/tags/items/dusts/platinum.json
 7bcd8fa22337e05477b5eb9fa02af8e2a24ad30a data/forge/tags/items/dusts/pyrite.json
@@ -176,14 +176,14 @@ f2dcc365db19a4af7be943f364bb883b866ff8ce data/forge/tags/items/dusts/thorite.jso
 4c43bc1736f7e0f1aaba405b7cacfe7dba10b32e data/forge/tags/items/dusts/unobtania.json
 9e41512fb1606e76564d13f1a5c2b2a02b660dbf data/forge/tags/items/dusts/unobtanium.json
 ac65ab69c3214cd9e7710ba1dc47eff5b179e541 data/forge/tags/items/dusts/uraninite.json
-eed9a6967c7540582ca7d073cc4cd0a57c1d8f2f data/forge/tags/items/dusts/uranium.json
+2c530c0c5f49ab8605659bb6af4f9ccfa07fccd8 data/forge/tags/items/dusts/uranium.json
 7722acb5c7785a23acc32ae4102486d4757b7559 data/forge/tags/items/dusts/vanadinite.json
 be5403d0840ffd4c07de746b5bb9ca8e50889a09 data/forge/tags/items/dusts/vanadium.json
 d0f9a944f940d037f3aacf6d472e6ec4a642acf2 data/forge/tags/items/dusts/wolframite.json
 9dc98edd605df568c88c45b3867d0b588545b293 data/forge/tags/items/dusts/zinc.json
 3643778c74d9cd0083330dec9e1b1ee46c6a9bd9 data/forge/tags/items/dusts/zircon.json
 613f42e40766ebc42952a03e83e1369cee19aff5 data/forge/tags/items/dusts/zirconium.json
-5494bc294d5a5fb6ad1552cc25faba4598b73c21 data/forge/tags/items/gears/aluminium.json
+4ab12f04184af3b9d376caf06e59ed641e511358 data/forge/tags/items/gears/aluminum.json
 50746772605852f126d2884d5991b5deae343e81 data/forge/tags/items/gears/bronze.json
 87f995eca1418f6eb399cdc3cdebc1732c8a387c data/forge/tags/items/gears/chromium.json
 0101c5bb769af495a8a7306e273e5748a1c1c658 data/forge/tags/items/gears/cobalt.json
@@ -215,7 +215,7 @@ bc1e702c7a1ab3a1f769bb26d43a04b7baaa5e38 data/forge/tags/items/ingots/hastelloy.
 3c9029eed285a18ae44bfbca4f70cde2424336ff data/forge/tags/items/ingots/manganese.json
 74d8577c0329f681529430e3aae345490383994f data/forge/tags/items/ingots/molybdenum.json
 bdf9aabeeb6c01566df50a8d87d1055672c16d23 data/forge/tags/items/ingots/neodymium.json
-55673c8c7cd2d86ad1696d6881cb99e6d40a465c data/forge/tags/items/ingots/nickel.json
+c7830ab5b74668345fc41b7847ca07e04a455e47 data/forge/tags/items/ingots/nickel.json
 81a58ac5d16c232e76f7105e4cac0c66d71e445f data/forge/tags/items/ingots/osmium.json
 2361efb066af12f662001e45d47d68ac00700fa6 data/forge/tags/items/ingots/platinum.json
 ac9e7de1e4abcd84ca185877b7a974dde37c25d9 data/forge/tags/items/ingots/refractory_brick.json
@@ -224,11 +224,11 @@ ac9e7de1e4abcd84ca185877b7a974dde37c25d9 data/forge/tags/items/ingots/refractory
 15eb0433ddc56a5abf84704d43743db7dd0d27dd data/forge/tags/items/ingots/titanium.json
 1fc960a0de66899572e5031efc38adf0b4255b52 data/forge/tags/items/ingots/tungsten.json
 9506f74f1464d8336e9f8dfb7c3d593aa8555977 data/forge/tags/items/ingots/unobtanium.json
-30d621ae9be180cd688da8ff2811213df26977e5 data/forge/tags/items/ingots/uranium.json
+39ff89de0d3c114b91e49075b67aa042a43eec65 data/forge/tags/items/ingots/uranium.json
 79f71a6af580b12762d3a9f66b1d240d11d19b0f data/forge/tags/items/ingots/vanadium.json
 7dccf9cca09a119e4b57d829d4705e5728bb2d86 data/forge/tags/items/ingots/zinc.json
 686dac9f15fc26b4a3367cf736c61ba885cbc6a5 data/forge/tags/items/ingots/zirconium.json
-1eb2c7d051cae6cb77e5463298bce50e536f85a9 data/forge/tags/items/metal_oxide/aluminium.json
+cb80cd2f5b23451de62e3920a1a0f1da31765040 data/forge/tags/items/metal_oxide/aluminum.json
 bdd68a16d1c2aae299cff47a125f09a91d2cb517 data/forge/tags/items/metal_oxide/chromium.json
 d0ad2bd97cd7dba404100eda755b38c7c9f4710c data/forge/tags/items/metal_oxide/cobalt.json
 90468d215f8f6a4604004ef75ef81783a7dc6f69 data/forge/tags/items/metal_oxide/copper.json
@@ -488,4 +488,4 @@ de4e36a2b59605f65c14af501ad5c29cee8ab8ae data/forge/tags/items/wire/unobtanium.j
 a8aeb8ea26795f7f0b5c300c657dbca091598d52 data/forge/tags/items/wire/zinc.json
 fdbfccc9746e4044bde943f8591e5f5cd1e34e7c data/forge/tags/items/wire/zirconium.json
 88ebb99fefcd2d037370f05a8300b686c957bec8 data/immersiveengineering/tags/items/toolbox/tools.json
-3392a0d0e51bf90d7a8821451c130ac2b8977eef data/tfc/tags/items/pileable_ingots.json
+6c71858759c470ae582af7650dda50fb5f73534c data/tfc/tags/items/pileable_ingots.json

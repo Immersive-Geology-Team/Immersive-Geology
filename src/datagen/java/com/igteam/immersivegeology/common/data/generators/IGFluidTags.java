@@ -23,6 +23,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 
+import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -38,6 +39,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.concurrent.CompletableFuture;
 
+import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCBlockTag;
 import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCFluidTag;
 
 public class IGFluidTags extends FluidTagsProvider

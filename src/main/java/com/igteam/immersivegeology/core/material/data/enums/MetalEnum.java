@@ -13,7 +13,7 @@ import com.igteam.immersivegeology.core.material.data.metal.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 public enum MetalEnum implements MaterialInterface<MaterialMetal> {
-    Aluminum(new MaterialAluminium()),
+    Aluminum(new MaterialAluminum()),
     Bronze(new MaterialBronze()),
     Chromium(new MaterialChromium()),
     Cobalt(new MaterialCobalt()),

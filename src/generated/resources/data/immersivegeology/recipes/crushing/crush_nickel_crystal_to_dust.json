@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/nickel"
+  },
+  "result": {
+    "item": "immersiveengineering:dust_nickel"
+  },
+  "secondaries": [],
+  "time": 200
+}

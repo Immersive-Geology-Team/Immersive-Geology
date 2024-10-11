@@ -21,9 +21,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,8 +50,9 @@ public class IGSeparatorCategory extends IGRecipeCategory<GravitySeparatorRecipe
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 42)
 				.addItemStack(recipe.itemOutput.get());
 
+		String chance = (recipe.getChance() * 100) + "%" + " Output Chance";
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 62)
 				.addItemStack(recipe.itemByproduct.get())
-				.setSlotName("Chance: " + recipe.getChance());
+				.addTooltipCallback((a,b) -> b.add(Component.literal(chance)));
 	}
 }

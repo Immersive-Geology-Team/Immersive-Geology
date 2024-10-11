@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology;
 
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
+import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -39,6 +40,7 @@ public class ImmersiveGeology {
 
     private void clientSetup(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
+        MinecraftForge.EVENT_BUS.register(new IGOverlayHandler());
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
         supplyMaterialTint();
