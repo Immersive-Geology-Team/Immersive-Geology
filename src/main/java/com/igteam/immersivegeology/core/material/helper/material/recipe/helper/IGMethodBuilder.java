@@ -31,10 +31,10 @@ public class IGMethodBuilder
 		return new IGCrushingMethod(parentMaterial, stage);
 	}
 
-	public static IGRefineryMethod synthesis (IGRecipeStage parentStage) {return new IGRefineryMethod(parentStage);}
-	public static IGBasicSmeltingMethod basicSmelting(IGRecipeStage parentStage){ return new IGBasicSmeltingMethod(parentStage); }
+	public static IGRefineryMethod synthesis (MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGRefineryMethod(parentMaterial, stage);}
+	public static IGBasicSmeltingMethod basicSmelting(MaterialHelper parentMaterial, IGStageDesignation stage){ return new IGBasicSmeltingMethod(parentMaterial, stage); }
 
-	public static IGArcSmeltingMethod arcSmelting(IGRecipeStage parentStage) { return new IGArcSmeltingMethod(parentStage);};
+	public static IGArcSmeltingMethod arcSmelting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGArcSmeltingMethod(parentMaterial, stage);};
 
-	public static IGHydrojetMethod cutting(IGRecipeStage parentStage) { return new IGHydrojetMethod(parentStage); };
+	public static IGHydrojetMethod cutting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGHydrojetMethod(parentMaterial, stage); };
 }

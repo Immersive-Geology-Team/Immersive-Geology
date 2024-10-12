@@ -25,14 +25,7 @@ public class MaterialMineral extends GeologyMaterial {
     public void setupRecipeStages()
     {
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-        new IGRecipeStage(this, IGStageDesignation.PREPARATION)
-        {
-            @Override
-            protected void describe()
-            {
-                //IGMethodBuilder.crushing(this).create();
-            }
-        };
+
         IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

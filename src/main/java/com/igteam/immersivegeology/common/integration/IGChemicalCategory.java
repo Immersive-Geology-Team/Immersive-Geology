@@ -57,11 +57,13 @@ public class IGChemicalCategory extends IGRecipeCategory<ChemicalRecipe>
 			i = i + 2;
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 79, 137)
-				.setFluidRenderer(FluidType.BUCKET_VOLUME * 2, false, 16, 44)
-				.addFluidStack(recipe.fluidOutput.getFluid(), recipe.fluidOutput.getAmount())
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
-
+		if(!recipe.fluidOutput.isEmpty())
+		{
+			builder.addSlot(RecipeIngredientRole.OUTPUT, 79, 137)
+					.setFluidRenderer(FluidType.BUCKET_VOLUME*2, false, 16, 44)
+					.addFluidStack(recipe.fluidOutput.getFluid(), recipe.fluidOutput.getAmount())
+					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+		}
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 35, 163)
 				.addItemStack(recipe.itemOutput);
 	}

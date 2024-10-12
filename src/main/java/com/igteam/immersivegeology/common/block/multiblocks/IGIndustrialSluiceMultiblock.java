@@ -21,7 +21,7 @@ public class IGIndustrialSluiceMultiblock extends IGTemplateMultiblock
 	public static final IGIndustrialSluiceMultiblock INSTANCE = new IGIndustrialSluiceMultiblock();
 	public IGIndustrialSluiceMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(5,1,5), new BlockPos(5,1,5), new BlockPos(10,5,8), IGMultiblockProvider.INDUSTRIAL_SLUICE);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/industrial_sluice"), new BlockPos(1,3,2), new BlockPos(2,1,9), new BlockPos(15,6,10), IGMultiblockProvider.INDUSTRIAL_SLUICE);
 	}
 
 	@Override

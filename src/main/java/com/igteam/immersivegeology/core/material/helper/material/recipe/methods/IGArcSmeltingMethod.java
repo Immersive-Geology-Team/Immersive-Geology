@@ -11,8 +11,10 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -32,7 +34,12 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		super(stage);
 	}
 
-	public IGArcSmeltingMethod create(String method_name, TagKey<Item> input, int inputAmount, ItemStack output, ItemStack iSlag, IngredientWithSize... additives){
+	public IGArcSmeltingMethod(MaterialHelper material, IGStageDesignation stage)
+	{
+		super(new IGRecipeStage(material, stage){});
+	}
+
+	public IGArcSmeltingMethod create(String method_name, TagKey<Item> input, int inputAmount, ItemStack output, ItemStack iSlag, float chance, IngredientWithSize... additives){
 		this.input = new IngredientWithSize(input, inputAmount);
 		this.output = output;
 		this.slag = iSlag;
@@ -41,13 +48,18 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		return this;
 	}
 
-	public IGArcSmeltingMethod create(String method_name, TagKey<Item> input, int inputAmount, ItemStack output, ItemStack iSlag){
+	public IGArcSmeltingMethod create(String method_name, TagKey<Item> input, int inputAmount, ItemStack output, float chance, ItemStack iSlag){
 		this.input = new IngredientWithSize(input, inputAmount);
 		this.output = output;
 		this.slag = iSlag;
 		this.additives = List.of();
 		this.method_name = method_name;
 		return this;
+	}
+
+	public void setTimeAndEnergy(int time, int energy){
+		this.time = time;
+		this.energy = energy;
 	}
 
 	private String method_name;

@@ -8,8 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -31,6 +33,11 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	private ItemLike input, output;
 	private int smeltingTime;
 	private float xp;
+
+	public IGBasicSmeltingMethod(MaterialHelper material, IGStageDesignation stage)
+	{
+		super(new IGRecipeStage(material, stage){});
+	}
 
 	public IGBasicSmeltingMethod create(ItemLike inputProvider, ItemLike output){
 		this.input = inputProvider;

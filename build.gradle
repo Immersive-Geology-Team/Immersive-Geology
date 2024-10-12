@@ -12,7 +12,7 @@ plugins {
     id 'eclipse'
 }
 
-version = '0.2.1'
+version = '0.2.2'
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 

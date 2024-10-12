@@ -62,7 +62,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(1,0,3, RelativeBlockFace.FRONT);
-    private static final MultiblockFace SECONDARY_OUTPUT_POS = new MultiblockFace(1,0,0, RelativeBlockFace.BACK);
+    private static final MultiblockFace SECONDARY_OUTPUT_POS = new MultiblockFace(1,0,-1, RelativeBlockFace.BACK);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 
     public static final int TANK_VOLUME = 8 * FluidType.BUCKET_VOLUME;
