@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.LinkedHashSet;
@@ -72,6 +73,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default FluidType.Properties getFluidProperties() { return instance().getFluidProperties(BlockCategoryFlags.FLUID);}
 
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag) { return instance().getFluidTag(flag);};
+    default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... extras) { return instance().getFluidTag(flag, extras);};
 
     default LinkedHashSet<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};
@@ -82,5 +84,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     };
 
 	default Set<IGRecipeStage> getStageSet() { return instance().getStageSet();};
+
+    default Fluid getFluid(BlockCategoryFlags flag) {return instance().getFluid(flag);};
 
 }

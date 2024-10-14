@@ -35,20 +35,20 @@ public class IGDataProvider {
         EXISTING_HELPER = helper;
         
         log.info("-===== Starting Data Generation for Immersive Geology =====-");
+        boolean runServer = event.includeServer();
 
-        if(event.includeServer()){
-            IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
-            generator.addProvider(true, blockStateProvider);
-            generator.addProvider(true, new IGItemModelProvider(generator, helper));
-            generator.addProvider(true, new IGComplexItemModelProvider(out, helper));
-            BlockTagsProvider blockTags = new IGBlockTags(out, lookup, helper);
-            generator.addProvider(true, blockTags);
-            generator.addProvider(true, new IGFluidTags(out, lookup, helper));
-            generator.addProvider(true, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
-            generator.addProvider(true, new IGDynamicModelProvider(blockStateProvider, out, helper));
-            generator.addProvider(true, new IGRecipes(out));
-            generator.addProvider(true, new LootTableProvider(out, Collections.emptySet(), List.of(new SubProviderEntry(IGBlockLootProvider::new, LootContextParamSets.BLOCK))));
-        }
+        IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
+        generator.addProvider(runServer, blockStateProvider);
+        generator.addProvider(runServer, new IGItemModelProvider(generator, helper));
+        generator.addProvider(runServer, new IGComplexItemModelProvider(out, helper));
+        BlockTagsProvider blockTags = new IGBlockTags(out, lookup, helper);
+        generator.addProvider(runServer, blockTags);
+        generator.addProvider(runServer, new IGFluidTags(out, lookup, helper));
+        generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
+        generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
+        generator.addProvider(runServer, new LootTableProvider(out, Collections.emptySet(), List.of(new SubProviderEntry(IGBlockLootProvider::new, LootContextParamSets.BLOCK))));
+        generator.addProvider(runServer, new IGRecipes(out));
+
     }
 
 }

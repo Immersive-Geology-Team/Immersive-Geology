@@ -51,8 +51,10 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateRotaryKilnModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
-		generateReverberationFurnaceModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
+		generateMultiblockModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
+
 	}
+
 
 	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale){
 		ModelBuilder<?>.TransformsBuilder.TransformVecBuilder trans = transform.transform(type);
@@ -119,7 +121,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
 		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0, -3, 0), new Vector3f(30, 225, 0), 0.095f);
-		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(0, 3, 0), null, 0.0625F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 

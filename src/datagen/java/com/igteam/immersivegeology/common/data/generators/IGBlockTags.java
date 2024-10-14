@@ -3,7 +3,11 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -13,7 +17,11 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCBlockTag;
 
@@ -28,14 +36,34 @@ public class IGBlockTags extends BlockTagsProvider
 	protected void addTags(Provider provider)
 	{
 		IGLib.IG_LOGGER.info("IG Block Tags");
+		boolean shouldSkip = false;
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
 			if(block.get() instanceof IGFluidBlock fluidBlock)
 			{
+				//TODO prevent mod only added fluids from being tagged.
 				tag(BlockTags.REPLACEABLE).add(fluidBlock);
 			}
 			if(block.get() instanceof IGOreBlock oreBlock)
 			{
+				List<MaterialInterface<?>> materials = List.copyOf(oreBlock.getMaterials());
+
+				for(Set<IFlagType<?>> flag_sets : materials.stream().map(MaterialInterface::getFlags).collect(Collectors.toSet()))
+				{
+					for(IFlagType<?> flag : flag_sets)
+					{
+						if(flag instanceof ModFlags mod)
+						{
+							if(!mod.isStrictlyLoaded()) shouldSkip = true;
+						}
+					}
+				}
+
+				if(shouldSkip) {
+					shouldSkip = false;
+					continue;
+				}
+
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(oreBlock);
 				tag(BlockTags.NEEDS_STONE_TOOL).add(oreBlock);
 				tag(Tags.Blocks.ORES).add(oreBlock);

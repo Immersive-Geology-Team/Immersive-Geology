@@ -59,10 +59,10 @@ public class IGRecipes extends RecipeProvider
 	@Override
 	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer)
 	{
-		IGRegistrationHolder.buildMaterialRecipes();
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
 		itemRecipes(consumer);
+		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
 	}
 

@@ -23,9 +23,9 @@ public class IGMethodBuilder
 	public static IGRoastingMethod roast(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGRoastingMethod(parentMaterial, stage);}
 	public static IGChemicalMethod chemical(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGChemicalMethod(parentMaterial, stage);}
 
-	public static IGCalcinationMethod decompose(IGRecipeStage parentStage) {return new IGCalcinationMethod(parentStage);}
+	public static IGCalcinationMethod decompose(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCalcinationMethod(parentMaterial, stage);}
 
-	public static IGCrystallizationMethod crystalize(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCrystallizationMethod(parentMaterial, stage);}
+	public static IGCrystallizationMethod crystallize(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCrystallizationMethod(parentMaterial, stage);}
 	public static IGBlastingMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGBlastingMethod(parentMaterial, stage); }
 	public static IGCrushingMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage) {
 		return new IGCrushingMethod(parentMaterial, stage);

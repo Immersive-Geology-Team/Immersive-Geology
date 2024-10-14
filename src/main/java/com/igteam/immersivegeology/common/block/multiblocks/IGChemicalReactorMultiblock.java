@@ -27,11 +27,11 @@ public class IGChemicalReactorMultiblock extends IGTemplateMultiblock
 	@Override
 	public float getManualScale()
 	{
-		return 12;
+		return 10;
 	}
 
 	@Override
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+		consumer.accept(new IGClientMultiblockProperties(this, 4.5, 0.5, 4.5));
 	}
 }

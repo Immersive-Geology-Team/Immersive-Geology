@@ -62,7 +62,7 @@ public class MaterialAlumina extends MaterialMineral {
                 .create("crushed_ore" + getName() + "_to_dust",getItemTag(ItemCategoryFlags.CRUSHED_ORE), getStack(ItemCategoryFlags.DUST, 1), 10000, 100);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
-                .create("hall_heroult_alumina_to_aluminum", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST), FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.DUST), 1), new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), 125), null, null, 200, 51200);
+                .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST), FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.DUST), IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT), null, null, 200, 51200);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "dust_"+getName()+"_to_ingot",

@@ -5,12 +5,12 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 public class MaterialChemical extends GeologyMaterial {
 

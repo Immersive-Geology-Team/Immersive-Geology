@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.metal.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -30,6 +31,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     Hastelloy(new MaterialHastelloy()),
     Silver(new MaterialSilver()),
     Steel(new MaterialSteel()),
+    Sodium(new MaterialSodium()),
     Thorium(new MaterialThorium()),
     Tin(new MaterialTin()),
     Titanium(new MaterialTitanium()),
@@ -38,7 +40,9 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     Uranium(new MaterialUranium()),
     Vanadium(new MaterialVanadium()),
     Zinc(new MaterialZinc()),
-    Zirconium(new MaterialZirconium());
+    Zirconium(new MaterialZirconium()),
+    // Mantle Fluid
+    MoltenMantle(new MaterialMoltenMantle());
 
     private final MaterialMetal material;
     MetalEnum(MaterialMetal m){

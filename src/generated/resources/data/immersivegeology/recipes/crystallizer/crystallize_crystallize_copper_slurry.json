@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "input": {
+    "amount": 100,
+    "tag": "forge:hydrochloricacid_copper"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_copper"
+  },
+  "time": 300
+}

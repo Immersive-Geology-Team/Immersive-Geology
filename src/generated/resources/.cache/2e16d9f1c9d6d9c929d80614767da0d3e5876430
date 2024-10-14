@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-12T01:50:20.339953808	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2024-10-15T05:07:55.666122293	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
 6d004a7a2e16f1bb517a2cab46e4f58a43bcb5e2 data/forge/tags/fluids/bronze.json
@@ -34,6 +34,7 @@ d13b733761e699c917e2827aac48d330bd4377b9 data/forge/tags/fluids/nitricacid_unobt
 5dfdb7d714e423a7222f513c99a8749fa54d48c2 data/forge/tags/fluids/osmium.json
 9de866a7937ae0b2a7f888c59b043d29b58a8f99 data/forge/tags/fluids/platinum.json
 c316386cfb7aa77cafa7c9e7842acd3cf4808dd2 data/forge/tags/fluids/silver.json
+9738721dcecf3b5f5341060225cc2a6c161ad0b3 data/forge/tags/fluids/sodium.json
 3399e301e355a173e16a3bf50e2a5da70076adde data/forge/tags/fluids/sodiumhydroxide.json
 0fe7acf3d5df46ac1aa4de82edb2e5014d253268 data/forge/tags/fluids/sodiumhydroxide_unobtanium.json
 fb8a1cff33b21edfbc0b4815ff642114f48bc29f data/forge/tags/fluids/steel.json
@@ -49,5 +50,3 @@ b8e04d1a760598e615fd5f05728d2ff3578b2be5 data/forge/tags/fluids/sulfuricacid.jso
 54e971e29f4cd4132b743c8d3bea360c93afccb3 data/forge/tags/fluids/vanadium.json
 1d09e1c3f05ef1b9b09080e07fb0665dd62a1343 data/forge/tags/fluids/zinc.json
 a5cd8cc8588f063a3110ed98e885aaacfdbc5511 data/forge/tags/fluids/zirconium.json
-8c55955da4b6f705304d971d732e4883ce465cc0 data/minecraft/tags/fluids/lava.json
-8c55955da4b6f705304d971d732e4883ce465cc0 data/tfc/tags/fluids/usable_in_ingot_mold.json

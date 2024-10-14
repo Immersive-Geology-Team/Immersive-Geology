@@ -23,6 +23,24 @@ public class IGLib {
 
     public static final Logger IG_LOGGER = LogUtils.getLogger();
 
+    // These should probably stay the same
+    public static final int SLURRY_TO_CRYSTAL_MB = 100;
+    public static final int ACID_TO_SLURRY_AMOUNT = 100;
+    public static final int SLURRY_FROM_ACID_AMOUNT = 100;
+
+    public static final float TWO_ACID_USED_MULTIPLIER = 0.5f;
+    public static final float THREE_ACID_USED_MULTIPLIER = 0.5f;
+
+    // Should we change these baselines?
+    public static final int DUST_TO_SLURRY_AMOUNT = 1;
+    public static final int COMPOUND_FROM_ACID_AMOUNT = 1;
+    public static final int ACID_TO_COMPOUND_AMOUNT = 125;
+
+    // Cryolite process uses these mostly.
+    public static final int COMPOUND_ACID_TO_DUST_AMOUNT = 1;
+    public static final int ACID_TO_DUST_AMOUNT = 125;
+    public static final int DUST_FROM_COMPOUND_ACID_AMOUNT = 1;
+
 
     public static Logger getNewLogger()
     {

@@ -10,8 +10,10 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -29,9 +31,9 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	private ItemStack output;
 	private String name;
 
-	public IGCalcinationMethod(IGRecipeStage stage)
+	public IGCalcinationMethod(MaterialHelper parent, IGStageDesignation stage)
 	{
-		super(stage);
+		super(new IGRecipeStage(parent, stage){});
 	}
 
 	public void create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int energy){

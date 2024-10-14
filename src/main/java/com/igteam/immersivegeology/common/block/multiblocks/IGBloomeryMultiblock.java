@@ -27,11 +27,11 @@ public class IGBloomeryMultiblock extends IGTemplateMultiblock
 	@Override
 	public float getManualScale()
 	{
-		return 12;
+		return 20;
 	}
 
 	@Override
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+		consumer.accept(new IGClientMultiblockProperties(this, 0.5, 0.5, 0.5));
 	}
 }

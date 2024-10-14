@@ -8,12 +8,11 @@
 
 package com.igteam.immersivegeology.core.material;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.api.IETags;
 import com.google.common.collect.Sets;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
@@ -21,7 +20,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -235,6 +233,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         EXISTING_IMPLEMENTATION_MAP.put(m, map);
     }
 
+    public TagKey<Fluid> getFluidTag()
+    {
+        return getFluidTag(BlockCategoryFlags.FLUID);
+    }
+
 	public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag)
 	{
         HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
@@ -266,4 +269,40 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         this.stage_set.add(stage);
     }
+
+    protected MaterialInterface<?> getProductionMaterial()
+    {
+        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        if(set.isEmpty()) {
+            IGLib.IG_LOGGER.error("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
+            return MetalEnum.Unobtanium;
+        }
+
+        List<MaterialInterface<?>> list = set.stream().toList();
+        return list.get(0);
+    }
+
+    protected MaterialInterface<?> getByproductMaterial()
+    {
+        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        if(set.size() < 2) {
+            IGLib.IG_LOGGER.error("Called a Secondary Source (Byproduct) Material with no Entry [{}]", getName());
+            return MetalEnum.Unobtanium;
+        }
+
+        List<MaterialInterface<?>> list = set.stream().toList();
+        return list.get(1);
+    }
+
+    protected MaterialInterface<?> getTraceMaterials(int index)
+    {
+        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        if(set.size() < (index + 1)) {
+            IGLib.IG_LOGGER.error("Called a Trace Material with no Entry [{}]", getName());
+            return MetalEnum.Unobtanium;
+        }
+        List<MaterialInterface<?>> list = set.stream().toList();
+        return list.get(index);
+    }
+
 }

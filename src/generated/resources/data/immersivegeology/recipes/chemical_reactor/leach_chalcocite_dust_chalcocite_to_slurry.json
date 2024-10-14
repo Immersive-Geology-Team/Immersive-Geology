@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 100,
+    "tag": "forge:hydrochloricacid"
+  },
+  "fluidResult": {
+    "amount": 100,
+    "fluid": "immersivegeology:slurry_hydrochloricacid_copper"
+  },
+  "itemInput": {
+    "tag": "forge:dusts/chalcocite"
+  },
+  "itemResult": [],
+  "time": 200
+}

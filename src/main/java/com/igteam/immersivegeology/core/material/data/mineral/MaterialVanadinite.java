@@ -45,23 +45,13 @@ public class MaterialVanadinite extends MaterialMineral {
     {
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
-        new IGRecipeStage(this, IGStageDesignation.LEECHING)
-        {
-            @Override
-            protected void describe()
-            {
-                // crushing
-                // chemical
-                IGMethodBuilder.decompose(this).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
-                        MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
-                        MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
-                        1,
-                        300,
-                        153600);
+        IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
+                MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
+                MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
+                1,
+                300,
+                153600);
 
-
-            }
-        };
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(ItemCategoryFlags.DUST, ItemCategoryFlags.COMPOUND_DUST,
                 MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
                 new FluidStack(Fluids.WATER, 250),

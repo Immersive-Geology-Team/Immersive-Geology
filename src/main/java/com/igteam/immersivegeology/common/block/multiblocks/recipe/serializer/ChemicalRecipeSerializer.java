@@ -45,7 +45,11 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 	public ChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
 		IngredientWithSize outgredient = IngredientWithSize.deserialize(json.get("itemResult"));
-		ItemStack output = IEApi.getPreferredStackbyMod(outgredient.getMatchingStacks());
+		ItemStack output = ItemStack.EMPTY;
+		if(!outgredient.hasNoMatchingItems())
+		{
+			output = IEApi.getPreferredStackbyMod(outgredient.getMatchingStacks());
+		}
 
 		FluidStack fluidOut = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
 		IngredientWithSize itemInput =IngredientWithSize.deserialize(json.get("itemInput"));

@@ -49,13 +49,14 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>, IServerTickableComponent<RotaryKilnLogic.State>, IClientTickableComponent<RotaryKilnLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 2);
     private static final int ENERGY_CAPACITY = 256000;
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(4,0, 0, RelativeBlockFace.FRONT);
+    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(4,0, 0, RelativeBlockFace.FRONT), new CapabilityPosition(4,1, 0, RelativeBlockFace.FRONT));
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(-1,0,1, RelativeBlockFace.LEFT);
     private static final MultiblockFace INPUT_POS = new MultiblockFace(7,2,1, RelativeBlockFace.UP);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
@@ -101,7 +102,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         final RotaryKilnLogic.State state = ctx.getState();
         if(cap == ForgeCapabilities.ENERGY)
         {
-            if((position.side()==null || ENERGY_INPUT.equals(position))) return state.energyCap.cast(ctx);
+            if((position.side()==null || ENERGY_INPUTS.contains(position))) return state.energyCap.cast(ctx);
         }
 
         if(cap == ForgeCapabilities.ITEM_HANDLER && ITEM_INPUT_CAP.equals(position))

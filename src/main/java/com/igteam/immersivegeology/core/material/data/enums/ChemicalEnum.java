@@ -31,10 +31,7 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     HydrochloricAcid(new MaterialHydrochloricAcid()),
     HydrofluoricAcid(new MaterialHydrofluoricAcid()),
     NitricAcid(new MaterialNitricAcid()),
-    SodiumHydroxide(new MaterialSodiumHydroxide()),
-
-    // Mantle Fluid
-    MoltenMantle(new MaterialMoltenMantle());
+    SodiumHydroxide(new MaterialSodiumHydroxide());
 
     private final MaterialChemical material;
     ChemicalEnum(MaterialChemical m){
@@ -45,17 +42,17 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         return material;
     }
 
-    public Fluid getSlurryWith(MetalEnum metalEnum)
+    public Fluid getSlurryWith(MaterialInterface<?> metalEnum)
     {
         return material.getFluid(BlockCategoryFlags.SLURRY, metalEnum);
     }
 
-    public FluidStack getSlurryWith(MetalEnum metalEnum, int amount)
+    public FluidStack getSlurryWith(MaterialInterface<?> metalEnum, int amount)
     {
         return new FluidStack(getSlurryWith(metalEnum), amount);
     }
 
-    public TagKey<Fluid> getSlurryTagWith(MetalEnum metalEnum)
+    public TagKey<Fluid> getSlurryTagWith(MaterialInterface<?> metalEnum)
     {
         return getFluidTag(BlockCategoryFlags.SLURRY, metalEnum);
     }

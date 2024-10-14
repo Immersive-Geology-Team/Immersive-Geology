@@ -52,7 +52,7 @@ public class IGFluidTags extends FluidTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-
+		IGLib.IG_LOGGER.info("Starting IG Fluid Tag Registration");
 		for(RegistryObject<Fluid> holder : IGRegistrationHolder.getFluidRegistryMap().values())
 		{
 			if(holder.get() instanceof IGFluid fluid)
