@@ -25,11 +25,11 @@ public class IGRecipeTypes
 	public static final TypeWithClass<CoreDrillRecipe> COREDRILL = register("coredrill", CoreDrillRecipe.class);
 	public static final TypeWithClass<CrystallizerRecipe> CRYSTALLIZER = register("crystallizer", CrystallizerRecipe.class);
 	public static final TypeWithClass<GravitySeparatorRecipe> GRAVITYSEPARATOR = register("gravityseparator", GravitySeparatorRecipe.class);
+	public static final TypeWithClass<IndustrialSluiceRecipe> SLUICE = register("industrial_sluice", IndustrialSluiceRecipe.class);
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
-
-
+	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
 
 	private static <T extends Recipe<?>>
 	TypeWithClass<T> register(String name, Class<T> type)

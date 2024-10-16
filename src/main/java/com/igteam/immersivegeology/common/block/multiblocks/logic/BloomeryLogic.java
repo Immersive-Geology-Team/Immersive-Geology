@@ -17,12 +17,19 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BloomeryShape;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GenericShape;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.IndSluiceShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -49,9 +56,11 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         return BloomeryShape.GETTER;
     }
 
-    public static class State implements IMultiblockState {
+    public static class State implements IMultiblockState, IGFurnaceHandler.IFurnaceEnvironment<BloomeryRecipe>
+	{
 
-        public State(IInitialMultiblockContext<State> context){
+        public State(IInitialMultiblockContext<BloomeryLogic.State> ctx)
+        {
 
         }
 
@@ -63,6 +72,24 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         @Override
         public void writeSaveNBT(CompoundTag nbt){
 
+        }
+
+        @Override
+        public IItemHandlerModifiable getInventory(int furnaceIndex)
+        {
+            return null;
+        }
+
+        @Override
+        public @Nullable BloomeryRecipe getRecipeForInput(int furnaceIndex)
+        {
+            return null;
+        }
+
+        @Override
+        public int getBurnTimeOf(Level level, ItemStack fuel)
+        {
+            return 0;
         }
     }
 
