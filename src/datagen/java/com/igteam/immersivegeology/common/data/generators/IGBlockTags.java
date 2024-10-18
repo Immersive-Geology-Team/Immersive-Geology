@@ -11,6 +11,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -61,6 +62,11 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(shouldSkip) {
 					shouldSkip = false;
+					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
+					String id = name.substring(name.lastIndexOf('.') +1);
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(Tags.Blocks.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
 					continue;
 				}
 
@@ -70,11 +76,13 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(ModFlags.TFC.isStrictlyLoaded())
 				{
-					tag(getTFCBlockTag("CAN_COLLAPSE")).add(oreBlock);
-					tag(getTFCBlockTag("CAN_START_COLLAPSE")).add(oreBlock);
-					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).add(oreBlock);
-					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).add(oreBlock);
-					tag(getTFCBlockTag("PROSPECTABLE")).add(oreBlock);
+					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
+					String id = name.substring(name.lastIndexOf('.') +1);
+					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation("tfc", id));
+					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation("tfc", id));
+					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(new ResourceLocation("tfc", id));
+					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(new ResourceLocation("tfc", id));
+					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(new ResourceLocation("tfc", id));
 				}
 			}
 		}

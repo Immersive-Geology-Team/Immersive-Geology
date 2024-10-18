@@ -1,0 +1,22 @@
+{
+  "values": [
+    "immersivegeology:ingot_bronze",
+    "immersivegeology:ingot_chromium",
+    "immersivegeology:ingot_cobalt",
+    "immersivegeology:ingot_manganese",
+    "immersivegeology:ingot_molybdenum",
+    "immersivegeology:ingot_neodymium",
+    "immersivegeology:ingot_osmium",
+    "immersivegeology:ingot_platinum",
+    "immersivegeology:ingot_hastelloy",
+    "immersivegeology:ingot_sodium",
+    "immersivegeology:ingot_thorium",
+    "immersivegeology:ingot_titanium",
+    "immersivegeology:ingot_tungsten",
+    "immersivegeology:ingot_unobtanium",
+    "immersivegeology:ingot_vanadium",
+    "immersivegeology:ingot_zinc",
+    "immersivegeology:ingot_zirconium",
+    "immersivegeology:ingot_refractory_brick"
+  ]
+}

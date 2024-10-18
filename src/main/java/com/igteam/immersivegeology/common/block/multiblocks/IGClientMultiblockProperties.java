@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.block.multiblocks;
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.utils.IERenderTypes;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
@@ -44,22 +45,22 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class IGClientMultiblockProperties implements ClientMultiblocks.MultiblockManualData {
-    private final IGTemplateMultiblock multiblock;
+    private final TemplateMultiblock multiblock;
     @Nullable
     private NonNullList<ItemStack> materials;
     private final ItemStack renderStack;
     @Nullable
     private final Vec3 renderOffset;
 
-    public IGClientMultiblockProperties(IGTemplateMultiblock multiblock){
+    public IGClientMultiblockProperties(TemplateMultiblock multiblock){
         this(multiblock, null);
     }
 
-    public IGClientMultiblockProperties(IGTemplateMultiblock multiblock, double offX, double offY, double offZ){
+    public IGClientMultiblockProperties(TemplateMultiblock multiblock, double offX, double offY, double offZ){
         this(multiblock, new Vec3(offX, offY, offZ));
     }
 
-    private IGClientMultiblockProperties(IGTemplateMultiblock multiblock, @Nullable Vec3 renderOffset){
+    private IGClientMultiblockProperties(TemplateMultiblock multiblock, @Nullable Vec3 renderOffset){
         this.multiblock = multiblock;
         this.renderStack = new ItemStack(multiblock.getBlock());
         this.renderOffset = renderOffset;

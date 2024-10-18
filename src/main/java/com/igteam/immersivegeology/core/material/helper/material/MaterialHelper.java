@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -29,6 +30,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -113,18 +116,9 @@ public interface MaterialHelper {
         IGLib.IG_LOGGER.warn("Unable to find Fluid/Slurry for material {}, {}", this, secondary);
         return Fluids.EMPTY;
     }
+
     default Item getItem(BlockCategoryFlags flag){
-        // Check for edge cases, like in the menu where this can be used to get an Ore Block
-        if(flag.equals(BlockCategoryFlags.ORE_BLOCK)){
-            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this, StoneEnum.Shale, OreRichness.RICH)).asItem();
-        }
-
-        if(getBlockRegistryMap().containsKey(flag.getRegistryKey(this))) {
-            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this)).asItem();
-        }
-
-        IGLib.IG_LOGGER.error("Attempting to get a missing block? {}", flag.getRegistryKey(this));
-        return Items.CAKE;
+        return this.getBlock(flag).asItem();
     }
 
 
@@ -201,5 +195,30 @@ public interface MaterialHelper {
         }
         IGLib.IG_LOGGER.warn("Null Tag Returned for {} {}", getName(), unknownFlag);
         return null;
+    }
+
+	default Block getBlock(BlockCategoryFlags flag){
+        // Check for edge cases, like in the menu where this can be used to get an Ore Block
+        if(flag.equals(BlockCategoryFlags.ORE_BLOCK)){
+            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this, StoneEnum.Shale, OreRichness.RICH));
+        }
+
+        if(getBlockRegistryMap().containsKey(flag.getRegistryKey(this))) {
+            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this));
+        }
+
+        IGLib.IG_LOGGER.error("Attempting to get a missing block? {}", flag.getRegistryKey(this));
+        return Blocks.AIR;
+    }
+
+    default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    {
+        try
+        {
+            return (IGOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
+        } catch(Exception ignored)
+        {
+            return null;
+        }
     }
 }

@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.crafting.Recipe;
 public class JEIRecipeTypes
 {
 	public static final RecipeType<GravitySeparatorRecipe> SEPARATOR = create(IGRecipeTypes.GRAVITYSEPARATOR);
+	public static final RecipeType<IndustrialSluiceRecipe> SLUICE = create(IGRecipeTypes.SLUICE);
 	public static final RecipeType<RevFurnaceRecipe> REVERBERATION = create(IGRecipeTypes.REVFURNACE);
 	public static final RecipeType<CrystallizerRecipe> CRYSTALLIZER = create(IGRecipeTypes.CRYSTALLIZER);
 	public static final RecipeType<RotaryKilnRecipe> ROTARYKILN = create(IGRecipeTypes.ROTARYKILN);

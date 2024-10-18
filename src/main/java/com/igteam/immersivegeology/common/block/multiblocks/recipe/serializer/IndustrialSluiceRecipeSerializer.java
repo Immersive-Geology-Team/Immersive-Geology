@@ -9,6 +9,8 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
+import blusunrize.immersiveengineering.api.crafting.StackWithChance;
+import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
@@ -37,31 +39,27 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 	@Override
 	public IndustrialSluiceRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
-
 		Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
 
 		Lazy<ItemStack> primary = readOutput(json.get("result"));
 
-		NonNullList<ItemStack> byproducts = readByproductsFromJson(json);
-		NonNullList<Float> chances = null;
+		NonNullList<StackWithChance> byproducts = readByproductsFromJson(json);
 
 		int time = GsonHelper.getAsInt(json, "time");
 		int water = GsonHelper.getAsInt(json, "water");
-		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, chances, water, time);
+		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time);
 	}
 
-	private NonNullList<ItemStack> readByproductsFromJson(JsonObject obj)
-	{
+	private NonNullList<StackWithChance> readByproductsFromJson(JsonObject obj) {
 		// Probably not the most effective way to store the information, but if it works -\('-')/- ~Muddykat
 		int amount_of_byproducts = GsonHelper.getAsInt(obj, "amount_of_byproducts");
-		NonNullList<ItemStack> list = NonNullList.createWithCapacity(amount_of_byproducts);
+		NonNullList<StackWithChance> list = NonNullList.createWithCapacity(amount_of_byproducts);
 
 		JsonArray jsonArray = GsonHelper.getAsJsonArray(obj, "byproducts");
-		JsonObject itemObjectArray = jsonArray.getAsJsonObject();
 
-		for(int index = 0; index < amount_of_byproducts; index++)
-		{
-			list.add(ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(itemObjectArray, "byproduct_" + index).getAsJsonObject()));
+		for (int index = 0; index < amount_of_byproducts; index++) {
+			JsonObject byproductObject = jsonArray.get(index).getAsJsonObject();
+			list.add(readConditionalStackWithChance(byproductObject, IContext.EMPTY));
 		}
 
 		return list;
@@ -72,43 +70,36 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 	{
 		Lazy<ItemStack> primary = readLazyStack(buffer);
 
-		Pair<NonNullList<Float>, NonNullList<ItemStack>> pair = readByproducts(buffer);
-		NonNullList<Float> chances = pair.first();
-		NonNullList<ItemStack> byproducts = pair.second();
+		NonNullList<StackWithChance> byproducts = readByproducts(buffer);
 
 		Ingredient input = Ingredient.fromNetwork(buffer);
 		int time = buffer.readInt();
 		int water = buffer.readInt();
-		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, chances, water, time);
+		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time);
 	}
 
-	private Pair<NonNullList<Float>, NonNullList<ItemStack>> readByproducts(FriendlyByteBuf buffer)
+	private NonNullList<StackWithChance> readByproducts(FriendlyByteBuf buffer)
 	{
 		int size = buffer.readInt();
-		NonNullList<ItemStack> item_list = NonNullList.createWithCapacity(size);
-		NonNullList<Float> chance_list = NonNullList.createWithCapacity(size);
+		NonNullList<StackWithChance> item_list = NonNullList.createWithCapacity(size);
 		for(int index = 0; index < size; index++)
 		{
-			item_list.add(buffer.readItem());
-			chance_list.add(buffer.readFloat());
+			item_list.add(StackWithChance.read(buffer));
 		}
 
-		return new Pair<>(chance_list, item_list);
+		return item_list;
 	}
 
 	private void writeByproducts(FriendlyByteBuf buffer, IndustrialSluiceRecipe recipe)
 	{
-		NonNullList<ItemStack> byproducts = recipe.getByproducts();
-		NonNullList<Float> chances = recipe.getByproductChance();
+		NonNullList<StackWithChance> byproducts = recipe.getByproducts();
 
-		int chance_amount = chances.size();
 		int size = byproducts.size();
 
 		buffer.writeInt(size);
 		for(int index = 0; index < size; index++)
 		{
-			buffer.writeItem(byproducts.get(index));
-			buffer.writeFloat(chances.get(index % chance_amount));
+			byproducts.get(index).write(buffer);
 		}
 	}
 

@@ -278,7 +278,7 @@ public class IGRegistrationHolder {
         registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR);
     }
 
-    private static void registerMB(String registry_name, IGTemplateMultiblock block, MultiblockRegistration<?> registration){
+    private static void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration){
         registerMultiblockTemplate(registry_name, block);
         MB_REGISTRY_MAP.put(registry_name, registration);
     }

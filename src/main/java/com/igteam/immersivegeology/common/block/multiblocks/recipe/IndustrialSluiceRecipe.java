@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
@@ -22,6 +23,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class IndustrialSluiceRecipe extends MultiblockRecipe
 {
 	public static RegistryObject<IERecipeSerializer<IndustrialSluiceRecipe>> SERIALIZER;
@@ -30,22 +34,21 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 	public final Ingredient itemIn;
 	Lazy<Integer> totalProcessWater;
 	Lazy<Integer> totalProcessTime;
-	Lazy<NonNullList<Float>> byproductChance;
-	Lazy<NonNullList<ItemStack>> byproducts;
+	Lazy<NonNullList<StackWithChance>> byproducts;
 
-	public <T extends Recipe<?>> IndustrialSluiceRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, NonNullList<ItemStack> byproducts, NonNullList<Float> chances, int water, int time)
+	public <T extends Recipe<?>> IndustrialSluiceRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, NonNullList<StackWithChance> byproducts, int water, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.SLUICE, id);
 		this.itemOutput = output;
 		this.itemIn = itemIn;
 		this.byproducts = Lazy.of(() -> byproducts);
-		this.byproductChance = Lazy.of(() -> chances);
 		this.totalProcessWater = Lazy.of(() -> water);
 		this.totalProcessTime = Lazy.of(() -> time);
 
 		NonNullList<ItemStack> outputs = NonNullList.createWithCapacity(byproducts.size() + 1);
+		List<ItemStack> stacks = byproducts.stream().map((s) -> s.stack().get()).toList();
 		outputs.add(output.get());
-		outputs.addAll(byproducts);
+		outputs.addAll(stacks);
 
 		this.outputList = Lazy.of(() -> outputs);
 	}
@@ -88,14 +91,9 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 		return 64;
 	}
 
-	public NonNullList<ItemStack> getByproducts()
+	public NonNullList<StackWithChance> getByproducts()
 	{
 		return byproducts.get();
-	}
-
-	public NonNullList<Float> getByproductChance()
-	{
-		return byproductChance.get();
 	}
 
 	public int getTotalProcessWater()

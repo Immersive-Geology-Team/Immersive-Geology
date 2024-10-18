@@ -77,6 +77,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         tryRunRecipe(state, context.getLevel().getRawLevel());
         if(tank_amount != state.tank.getFluidAmount()) context.requestMasterBESync();
+
     }
 
     private void tryRunRecipe(State state, Level level)

@@ -1,8 +1,11 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -11,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
@@ -86,5 +90,11 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 	default Set<IGRecipeStage> getStageSet() { return instance().getStageSet();};
 
     default Fluid getFluid(BlockCategoryFlags flag) {return instance().getFluid(flag);};
+
+	default Block getBlock(BlockCategoryFlags flag) {return instance().getBlock(flag);};
+
+    default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness) {
+        return instance().getOreBlock(stone, richness);
+    };
 
 }

@@ -1,0 +1,38 @@
+{
+  "type": "immersivegeology:industrial_sluice",
+  "amount_of_byproducts": 4,
+  "byproducts": [
+    {
+      "chance": 0.4,
+      "output": {
+        "item": "immersiveengineering:dust_gold"
+      }
+    },
+    {
+      "chance": 0.22,
+      "output": {
+        "item": "immersiveengineering:dust_silver"
+      }
+    },
+    {
+      "chance": 0.321,
+      "output": {
+        "item": "immersivegeology:dust_chromium"
+      }
+    },
+    {
+      "chance": 0.121,
+      "output": {
+        "item": "immersiveengineering:dust_copper"
+      }
+    }
+  ],
+  "input": {
+    "tag": "forge:dirty_crushed_ore/gold"
+  },
+  "result": {
+    "item": "immersivegeology:crushed_ore_gold"
+  },
+  "time": 100,
+  "water": 100
+}
