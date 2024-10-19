@@ -1,0 +1,6244 @@
+{
+  "values": [
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_osmium_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcopyrite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ilmenite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gypsum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_gold_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_ilmenite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_scheelite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_lead_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_scheelite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_hubnerite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_wolframite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cassiterite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_hubnerite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcopyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_copper_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_platinum_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_platinum_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_osmium_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrolusite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hematite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_copper_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_copper_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_osmium_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_acanthite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_hubnerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_copper_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chromite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_lead_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_osmium_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_vanadinite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_vanadinite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_anatase_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_vanadinite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_anatase_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_galena_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_smithsonite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_scheelite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_vanadinite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_monazite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hematite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cassiterite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cuprite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_hubnerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_platinum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_sphalerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_monazite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorianite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_pyrite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gold_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_silver_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_galena_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_sphalerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hematite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_magnetite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_pyrite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ilmenite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_galena_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cryolite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_gold_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cryolite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chromite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_scheelite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_iron_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_copper_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_silver_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcopyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_smithsonite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cuprite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_bauxite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_anatase_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrolusite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_hubnerite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_anatase_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hematite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_smithsonite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcopyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_osmium_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ferberite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_silver_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cuprite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_lead_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gypsum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_scheelite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcopyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cassiterite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_anatase_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_bauxite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hematite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hematite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrolusite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chromite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_ullmannite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_lead_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_scheelite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_vanadinite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorianite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrolusite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_hubnerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_ullmannite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_ilmenite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_lead_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_unobtania_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chromite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcocite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gold_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_monazite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_copper_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gypsum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_magnetite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrolusite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cuprite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_bauxite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_smithsonite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cuprite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_unobtania_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_anatase_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cryolite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_fluorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_monazite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_copper_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcocite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_galena_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_vanadinite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_iron_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_magnetite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcocite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_iron_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_silver_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cassiterite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_iron_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_anatase_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_acanthite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_iron_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cassiterite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_magnetite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_galena_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cuprite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cuprite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_bauxite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_ferberite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_silver_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cobaltite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_iron_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gold_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_magnetite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_iron_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_copper_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_scheelite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_platinum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chromite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_osmium_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_scheelite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cuprite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrolusite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcopyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_ilmenite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_silver_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_copper_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cobaltite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcocite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_acanthite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorianite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_sphalerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cobaltite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_silver_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_wolframite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_lead_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_platinum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_smithsonite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cobaltite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cryolite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_bauxite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcopyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_galena_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ullmannite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cassiterite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_monazite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorianite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorianite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cobaltite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cryolite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_platinum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_hubnerite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hematite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cobaltite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_monazite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorianite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_iron_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_lead_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chromite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_osmium_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_copper_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hubnerite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcocite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cuprite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorianite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrolusite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_platinum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_iron_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_zircon_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_iron_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ullmannite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcopyrite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gypsum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_acanthite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_magnetite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_acanthite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hematite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_bauxite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_magnetite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_platinum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gold_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_pyrite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_hubnerite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_bauxite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorianite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chromite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_scheelite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_scheelite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_scheelite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_vanadinite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ilmenite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cassiterite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_osmium_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cuprite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_fluorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_vanadinite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chromite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cryolite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hematite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chalcocite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_wolframite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_platinum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hubnerite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chalcocite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gypsum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_lead_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_silver_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_galena_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_acanthite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_bauxite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_iron_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_hubnerite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gold_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hematite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_iron_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_silver_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hematite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_ferberite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_anatase_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_osmium_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorianite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_osmium_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ullmannite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_lead_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrolusite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrolusite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cobaltite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_unobtania_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gold_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ferberite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_lead_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_fluorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcopyrite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrolusite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_copper_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_vanadinite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_copper_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_copper_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_unobtania_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_acanthite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_anatase_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gold_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_ilmenite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_monazite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_hubnerite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_platinum_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_scheelite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_cassiterite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_unobtania_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_unobtania_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_ferberite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_silver_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_lead_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_galena_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_acanthite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_anatase_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_galena_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_smithsonite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ferberite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_monazite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_smithsonite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_osmium_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_hubnerite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_galena_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_galena_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_chromite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hubnerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ullmannite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcocite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_anatase_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_silver_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cassiterite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cuprite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_magnetite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_anatase_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcopyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_sphalerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_sphalerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_platinum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_ullmannite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_osmium_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_silver_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cassiterite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cryolite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_monazite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_pyrolusite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_sphalerite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gold_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cuprite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gypsum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_lead_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_anatase_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_copper_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_platinum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gold_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gold_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chromite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_gypsum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chalcocite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cobaltite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_galena_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_magnetite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ullmannite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_vanadinite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_silver_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_vanadinite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_smithsonite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cassiterite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_magnetite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_unobtania_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrolusite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_galena_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_chromite_slate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_monazite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_anatase_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_acanthite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_osmium_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_pyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gypsum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_bauxite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_ferberite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_monazite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_platinum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_pyrite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hubnerite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_gypsum_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_acanthite_schist",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_galena_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcocite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_silver_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorianite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hubnerite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_bauxite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_sphalerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cassiterite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_iron_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_galena_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorianite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_scheelite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_monazite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_chalcocite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cuprite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_anatase_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_vanadinite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_hubnerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_hubnerite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_hubnerite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_magnetite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_galena_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_smithsonite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_vanadinite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcocite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cobaltite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_gold_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_scheelite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_hubnerite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_zircon_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_monazite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_unobtania_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_bauxite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hematite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_thorianite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_anatase_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_wolframite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_chromite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_platinum_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_platinum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_anatase_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_thorianite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_vanadinite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_galena_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_thorianite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_sphalerite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_galena_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_cuprite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_cryolite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_lead_basalt",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_ilmenite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcopyrite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_smithsonite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ilmenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_iron_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_cassiterite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_monazite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_acanthite_deepslate",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_gypsum_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_zircon_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_silver_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_gypsum_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_thorianite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_wolframite_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gypsum_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_cassiterite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_chalk",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_copper_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_normal_ore_block_chalcocite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cuprite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_scheelite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_ilmenite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_iron_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_ferberite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_smithsonite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_ilmenite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_wolframite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_gneiss",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrolusite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_lead_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_magnetite_mars_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_thorianite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_pyrolusite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_cassiterite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_pyrolusite_chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_monazite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_gold_dacite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_wolframite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_smithsonite_limestone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_vanadinite_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_chalcopyrite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_rich_ore_block_thorite_mercury_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_chromite_quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_bauxite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_wolframite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_vanadinite_shale",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_normal_ore_block_gold_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_hubnerite_gabbro",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_acanthite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_rich_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_pyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "tfc:ad_astra_poor_ore_block_vanadinite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "tfc:tfc_poor_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_hubnerite_granite",
+      "required": false
+    }
+  ]
+}

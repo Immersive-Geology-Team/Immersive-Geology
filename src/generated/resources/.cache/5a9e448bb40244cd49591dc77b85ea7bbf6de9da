@@ -1,5 +1,10 @@
-// 1.20.1	2024-10-19T04:43:39.885267421	Tags for minecraft:block mod id immersivegeology
-354722b0d13d6c9f52a5ce92ea6ec128bd07a8a2 data/forge/tags/blocks/ores.json
-354722b0d13d6c9f52a5ce92ea6ec128bd07a8a2 data/minecraft/tags/blocks/mineable/pickaxe.json
-354722b0d13d6c9f52a5ce92ea6ec128bd07a8a2 data/minecraft/tags/blocks/needs_stone_tool.json
+// 1.20.1	2024-10-19T07:12:11.628280158	Tags for minecraft:block mod id immersivegeology
+e47101db77e9a8d2aaee1fc8ca5ebd2142ed081c data/forge/tags/blocks/ores.json
+e47101db77e9a8d2aaee1fc8ca5ebd2142ed081c data/minecraft/tags/blocks/mineable/pickaxe.json
+e47101db77e9a8d2aaee1fc8ca5ebd2142ed081c data/minecraft/tags/blocks/needs_stone_tool.json
 c71933898683fcba39cadb04f34b550b5de2a3da data/minecraft/tags/blocks/replaceable.json
+2df015904ea254cf993624225e420a5f88caafe2 data/tfc/tags/blocks/can_collapse.json
+2df015904ea254cf993624225e420a5f88caafe2 data/tfc/tags/blocks/can_start_collapse.json
+2df015904ea254cf993624225e420a5f88caafe2 data/tfc/tags/blocks/can_trigger_collapse.json
+2df015904ea254cf993624225e420a5f88caafe2 data/tfc/tags/blocks/powderkeg_breaking_blocks.json
+2df015904ea254cf993624225e420a5f88caafe2 data/tfc/tags/blocks/prospectable.json

@@ -52,9 +52,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
 		generateMultiblockModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
-
 	}
-
 
 	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale){
 		ModelBuilder<?>.TransformsBuilder.TransformVecBuilder trans = transform.transform(type);

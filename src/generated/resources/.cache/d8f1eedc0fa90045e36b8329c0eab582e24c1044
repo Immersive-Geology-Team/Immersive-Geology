@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-19T05:12:30.933797396	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2024-10-19T07:12:11.622375107	Tags for minecraft:item mod id immersivegeology
 2455092491cf23f5d710ee1073ecfc465fe1327d data/forge/tags/items/clay/kaolinite.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
@@ -314,7 +314,7 @@ e7527c777f1d67a32ad11fe47d6e3f2b8f064a7a data/forge/tags/items/nuggets/unobtaniu
 8e51b346ab1a03d5f6eb541c9ad8cbf2c344abbf data/forge/tags/items/nuggets/vanadium.json
 7ab9ea822b8e1bb8385c319fb8dd8238ebd9d22d data/forge/tags/items/nuggets/zinc.json
 46791e64a1a9a20fcd7d1cc1a95c6582cc1a82ce data/forge/tags/items/nuggets/zirconium.json
-979e0243f28bfeac0338f2a05e3455f448b9cf4a data/forge/tags/items/ores.json
+7830bac99aa3366d47c675f74eb74c59028b0724 data/forge/tags/items/ores.json
 f6d65d4eefb1afc125c7e0a0330a28bd12cb88df data/forge/tags/items/plates/bronze.json
 d0e68915ed8ac8b9cacfb034a2c438b9518cb5c2 data/forge/tags/items/plates/chromium.json
 3806790a762db38c181859db87ea54e4d66a5e0b data/forge/tags/items/plates/cobalt.json
@@ -488,3 +488,4 @@ de4e36a2b59605f65c14af501ad5c29cee8ab8ae data/forge/tags/items/wire/unobtanium.j
 a8aeb8ea26795f7f0b5c300c657dbca091598d52 data/forge/tags/items/wire/zinc.json
 fdbfccc9746e4044bde943f8591e5f5cd1e34e7c data/forge/tags/items/wire/zirconium.json
 88ebb99fefcd2d037370f05a8300b686c957bec8 data/immersiveengineering/tags/items/toolbox/tools.json
+8aa7bc5dca3876643dfa42cf83ae99a6c934c4b7 data/tfc/tags/items/pileable_ingots.json

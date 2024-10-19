@@ -24,6 +24,7 @@ public class IGRecipeTypes
 
 	public static final TypeWithClass<CoreDrillRecipe> COREDRILL = register("coredrill", CoreDrillRecipe.class);
 	public static final TypeWithClass<CrystallizerRecipe> CRYSTALLIZER = register("crystallizer", CrystallizerRecipe.class);
+	public static final TypeWithClass<CentrifugeRecipe> CENTRIFUGE = register("centrifuge", CentrifugeRecipe.class);
 	public static final TypeWithClass<GravitySeparatorRecipe> GRAVITYSEPARATOR = register("gravityseparator", GravitySeparatorRecipe.class);
 	public static final TypeWithClass<IndustrialSluiceRecipe> SLUICE = register("industrial_sluice", IndustrialSluiceRecipe.class);
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);

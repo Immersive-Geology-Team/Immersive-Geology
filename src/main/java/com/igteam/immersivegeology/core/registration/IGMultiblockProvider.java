@@ -39,5 +39,10 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, ChemicalReactorLogic.REDSTONE_IN);
             });
 
+    public static final MultiblockRegistration<CentrifugeLogic.State> CENTRIFUGE = IGRegistrationHolder.registerMetalMultiblock("centrifuge", new CentrifugeLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("centrifuge"),
+            builder -> {
+                builder.redstone(state -> state.rsState, CentrifugeLogic.REDSTONE_IN).notMirrored();
+            });
+
     public static void forceClassLoad(){};
 }

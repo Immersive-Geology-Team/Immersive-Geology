@@ -197,13 +197,13 @@ dependencies {
 
     implementation fg.deobf("curse.maven:immersive-engineering-231951:5224387")
 
-    //implementation fg.deobf("curse.maven:resourceful-config-714059:5020441")
-    //implementation fg.deobf("curse.maven:botarium-704113:5486070")
-    //implementation fg.deobf("curse.maven:resourceful-lib-570073:5568216")
-    //implementation fg.deobf("curse.maven:ad-astra-635042:4894852")
+    implementation fg.deobf("curse.maven:resourceful-config-714059:5020441")
+    implementation fg.deobf("curse.maven:botarium-704113:5486070")
+    implementation fg.deobf("curse.maven:resourceful-lib-570073:5568216")
+    implementation fg.deobf("curse.maven:ad-astra-635042:4894852")
 
-    //implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
-    //implementation fg.deobf("curse.maven:terrafirmacraft-302973:5571484")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
+    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5571484")
 
     datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
 
