@@ -11,34 +11,24 @@ package com.igteam.immersivegeology.common.data.generators;
 import blusunrize.immersiveengineering.api.IETags;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
-import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.checkerframework.checker.units.qual.C;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -105,7 +95,7 @@ public class IGItemTags extends ItemTagsProvider
 		}
 	}
 
-	boolean shouldSkip = false;
+	boolean useOptionalTag = false;
 	private void generateOreBlockTags(MaterialInterface<?> material)
 	{
 		for(StoneEnum stone : StoneEnum.values())
@@ -122,14 +112,14 @@ public class IGItemTags extends ItemTagsProvider
 					{
 						if(flag instanceof ModFlags mod)
 						{
-							if(!mod.isStrictlyLoaded()) shouldSkip = true;
+							if(!(mod.equals(ModFlags.MINECRAFT) || mod.equals(ModFlags.IMMERSIVEENGINEERING))) useOptionalTag = true;
 						}
 					}
 				}
 
-				if(shouldSkip)
+				if(useOptionalTag)
 				{
-					shouldSkip = false;
+					useOptionalTag = false;
 					String name = oreBlock.getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));

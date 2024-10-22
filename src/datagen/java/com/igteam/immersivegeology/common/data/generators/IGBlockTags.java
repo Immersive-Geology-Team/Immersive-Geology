@@ -37,7 +37,7 @@ public class IGBlockTags extends BlockTagsProvider
 	protected void addTags(Provider provider)
 	{
 		IGLib.IG_LOGGER.info("IG Block Tags");
-		boolean shouldSkip = false;
+		boolean useOptionalTag = false;
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
 			if(block.get() instanceof IGFluidBlock fluidBlock)
@@ -55,13 +55,13 @@ public class IGBlockTags extends BlockTagsProvider
 					{
 						if(flag instanceof ModFlags mod)
 						{
-							if(!mod.isStrictlyLoaded()) shouldSkip = true;
+							if(!(mod.equals(ModFlags.MINECRAFT) || mod.equals(ModFlags.IMMERSIVEENGINEERING))) useOptionalTag = true;
 						}
 					}
 				}
 
-				if(shouldSkip) {
-					shouldSkip = false;
+				if(useOptionalTag) {
+					useOptionalTag = false;
 					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));

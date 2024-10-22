@@ -21,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -28,7 +29,7 @@ import java.util.function.Consumer;
 public class IGCrystallizationMethod extends IGRecipeMethod
 {
 	private ItemStack itemResult;
-	private FluidTagInput fluidInput;
+	private Lazy<FluidTagInput> fluidInput;
 	private int time;
 	private int energy;
 	private String name;
@@ -38,13 +39,12 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		super(new IGRecipeStage(material, stage){});
 	}
 
-	public void create(String name, ItemStack output, TagKey<Fluid> fluidInput, int fluidAmount, int time, int energy)
+	public void create(String name, ItemStack output, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
 
 		this.itemResult = output;
-		IGLib.IG_LOGGER.debug("Fluid Tag? {}", fluidInput.toString());
-		this.fluidInput = new FluidTagInput(fluidInput, fluidAmount);
+		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
 		this.time = time;
 		this.energy = energy;
 	}
@@ -73,7 +73,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	{
 		try
 		{
-			CrystallizerRecipeBuilder builder = CrystallizerRecipeBuilder.builder(this.itemResult).addInput(this.fluidInput).setEnergy(energy).setTime(time);
+			CrystallizerRecipeBuilder builder = CrystallizerRecipeBuilder.builder(this.itemResult).addInput(this.fluidInput.get()).setEnergy(energy).setTime(time);
 			builder.build(consumer, getLocation());
 			return true;
 		} catch(Exception e)

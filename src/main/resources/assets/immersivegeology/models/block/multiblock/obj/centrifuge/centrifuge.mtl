@@ -1,10 +1,42 @@
-# Made in Blockbench 4.11.1
-newmtl m_c325d954-4989-09d5-9a8e-95ef56167798
-map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_base
-newmtl m_d336763d-a314-c4d5-0008-edbb76633e81
-map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_deco
+# Blender 4.2.2 LTS MTL File: 'None'
+# www.blender.org
+
 newmtl m_72f7b279-98f9-6ee8-96e7-6d82ff6e52cb
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
 map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_tanks
+
 newmtl m_af27fd8c-8e96-b030-18ef-7a749048d5b2
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
 map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_connectors
-newmtl none
+
+newmtl m_c325d954-4989-09d5-9a8e-95ef56167798
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_base
+
+newmtl m_d336763d-a314-c4d5-0008-edbb76633e81
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_deco
