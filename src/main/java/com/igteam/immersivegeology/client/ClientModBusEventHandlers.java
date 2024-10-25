@@ -15,6 +15,7 @@ import blusunrize.immersiveengineering.client.BlockOverlayUtils;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
+import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.ChemicalReactorRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGPositionalOverlayText;
@@ -56,6 +57,7 @@ public class ClientModBusEventHandlers {
 		CoreDrillRenderer.DRILL_ENGINE = new IGDynamicModel(CoreDrillRenderer.DRILL_ENGINE_NAME);
 		CoreDrillRenderer.DRILL_ENGINE_SUPPORT = new IGDynamicModel(CoreDrillRenderer.DRILL_ENGINE_SUPPORT_NAME);
 		CoreDrillRenderer.DRILL_GEARSET = new IGDynamicModel(CoreDrillRenderer.DRILL_GEARSET_NAME);
+		BallmillRenderer.CHAMBER = new IGDynamicModel(BallmillRenderer.CHAMBER_NAME);
 	}
 
 	@SubscribeEvent
@@ -67,6 +69,7 @@ public class ClientModBusEventHandlers {
 	public static void registerBlockEntityRenderers(RegisterRenderers event)
 	{
 		registerBERenderNoContext(event, IGMultiblockProvider.COREDRILL.masterBE(), CoreDrillRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.BALLMILL.masterBE(), BallmillRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CHEMICAL_REACTOR.masterBE(), ChemicalReactorRenderer::new);
 	}
 

@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-22T18:38:04.609291258	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2024-10-25T23:59:33.919465226	Tags for minecraft:item mod id immersivegeology
 2455092491cf23f5d710ee1073ecfc465fe1327d data/forge/tags/items/clay/kaolinite.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
@@ -50,6 +50,7 @@ fff6866c0979223c0ee12eae5f836d35c487b020 data/forge/tags/items/crushed_ore/ilmen
 4a761bdc7797fb371ba443c181a9a58a1e13ab2c data/forge/tags/items/crushed_ore/iron.json
 ed98eba5ffb80926e37563669ea8d64ab2df0d65 data/forge/tags/items/crushed_ore/lead.json
 70671216fcd80b9242d34272e888d0e16aa425bb data/forge/tags/items/crushed_ore/magnetite.json
+9e7b630246fcf3756d5036112a7c32e0705b8163 data/forge/tags/items/crushed_ore/molybenite.json
 3b1dee7e8ff40494a135cc0f967cf691ecc46272 data/forge/tags/items/crushed_ore/monazite.json
 17d10af70e28a54898159f785e81d716565db62d data/forge/tags/items/crushed_ore/osmium.json
 9750c8dfe25c92a921d9c2e516e6e74a16b60b33 data/forge/tags/items/crushed_ore/platinum.json
@@ -115,6 +116,7 @@ b7c8bd855591acb14e21c7cb92cc4bf51e9cc022 data/forge/tags/items/dirty_crushed_ore
 b7e0f7ba404288c103b4a72331267677596c4637 data/forge/tags/items/dirty_crushed_ore/iron.json
 fddb87555a0f5db7ca6827a45ea8ab184cb12930 data/forge/tags/items/dirty_crushed_ore/lead.json
 9dd714d561b5b66410eddb5a4204de00e6244fec data/forge/tags/items/dirty_crushed_ore/magnetite.json
+de0a70f11a98ee0579f6323644641f6903efb017 data/forge/tags/items/dirty_crushed_ore/molybenite.json
 d67a3baf00e5eb729a7e1e0a9a0f161de7566dda data/forge/tags/items/dirty_crushed_ore/monazite.json
 a23666327a7ec713f9033c3938268c4e9ed846c8 data/forge/tags/items/dirty_crushed_ore/osmium.json
 dbc7f83cbfdbc33d58aa82f4dfef4438f34eda48 data/forge/tags/items/dirty_crushed_ore/platinum.json
@@ -158,6 +160,7 @@ a7c9ec9bc1a8edd793b9a728ebc1b01358a836c2 data/forge/tags/items/dusts/ilmenite.js
 5ce46429c3699d377d96fbc5797c125dac14b099 data/forge/tags/items/dusts/magnetite.json
 fba9406981c693d4b8a5ec3e7772a8b876e55696 data/forge/tags/items/dusts/manganese.json
 48518c77d4923c120a48cbe6190fc1356a7a5498 data/forge/tags/items/dusts/molybdenum.json
+2da9e233ea0a9307683e0ae0c11f91162ffbda88 data/forge/tags/items/dusts/molybenite.json
 1a0ad532d4f040494edf0cca9a074b2483b24874 data/forge/tags/items/dusts/monazite.json
 b329a29097139927f15ab80b9283a5c5eb75e1ff data/forge/tags/items/dusts/neodymium.json
 32aa7b05554226cdf8d3bcf5ce2efec7afd03cb1 data/forge/tags/items/dusts/osmium.json
@@ -279,6 +282,7 @@ ba284e6caf7abf48ca99bec7446df2477d29b81b data/forge/tags/items/normal_ore/hubner
 20334bbfe9f256fc720ba863797a9b14db8a4045 data/forge/tags/items/normal_ore/kaolinite.json
 89cf9461221baea57b6980d6850b48056403141a data/forge/tags/items/normal_ore/lead.json
 86c00edbaf43509c20145cbbf8e389c1686e0da1 data/forge/tags/items/normal_ore/magnetite.json
+d4dcfad53f243a37ccba93c0d3e6dddfa98d4096 data/forge/tags/items/normal_ore/molybenite.json
 4f3635add9ef185fabd4ae978333f473de8966d8 data/forge/tags/items/normal_ore/monazite.json
 0bb5c550983f37321e7dab155c32032bc6043820 data/forge/tags/items/normal_ore/osmium.json
 4d917cf390c9d8f15fd1520468b0599b8c37beba data/forge/tags/items/normal_ore/platinum.json
@@ -314,7 +318,7 @@ e7527c777f1d67a32ad11fe47d6e3f2b8f064a7a data/forge/tags/items/nuggets/unobtaniu
 8e51b346ab1a03d5f6eb541c9ad8cbf2c344abbf data/forge/tags/items/nuggets/vanadium.json
 7ab9ea822b8e1bb8385c319fb8dd8238ebd9d22d data/forge/tags/items/nuggets/zinc.json
 46791e64a1a9a20fcd7d1cc1a95c6582cc1a82ce data/forge/tags/items/nuggets/zirconium.json
-979e0243f28bfeac0338f2a05e3455f448b9cf4a data/forge/tags/items/ores.json
+1e164d465252b9f9d426f61a60a94fe8af8ca107 data/forge/tags/items/ores.json
 f6d65d4eefb1afc125c7e0a0330a28bd12cb88df data/forge/tags/items/plates/bronze.json
 d0e68915ed8ac8b9cacfb034a2c438b9518cb5c2 data/forge/tags/items/plates/chromium.json
 3806790a762db38c181859db87ea54e4d66a5e0b data/forge/tags/items/plates/cobalt.json
@@ -357,6 +361,7 @@ d91eec6868b3d27dc6afc926beb3d183937ecbca data/forge/tags/items/poor_ore/gypsum.j
 05cc407c2dfd4783916cdab1e6baa25816619afe data/forge/tags/items/poor_ore/kaolinite.json
 48c044f83adb18110e826ea1c5ceb67639b2e18d data/forge/tags/items/poor_ore/lead.json
 37c82dd49e88bec6510da9bc9300ca90c8b81fde data/forge/tags/items/poor_ore/magnetite.json
+abf0277fbd04845bd3d58a8c5b1931d690f06d56 data/forge/tags/items/poor_ore/molybenite.json
 3b176d3ae1ecd223b8f756fa970575135437c1ec data/forge/tags/items/poor_ore/monazite.json
 c7500e58edb66b4fb8cd54457a44aff65b720973 data/forge/tags/items/poor_ore/osmium.json
 f1b3c3abea0ff5d0feb03541416738d68644db1a data/forge/tags/items/poor_ore/platinum.json
@@ -398,6 +403,7 @@ dc102bab763dd8ed7799275918dfe4c21a54093e data/forge/tags/items/rich_ore/hubnerit
 126c6fe8e320cf52a24da9611332fa189311213a data/forge/tags/items/rich_ore/kaolinite.json
 fdfab5a832cf88c5ccb791369b314218eac32629 data/forge/tags/items/rich_ore/lead.json
 0eac43e6839fd97ddf82962a79a85d883199d288 data/forge/tags/items/rich_ore/magnetite.json
+8b9d4e8dd4bbaefa53f3faf751b8cb79dab3c6a9 data/forge/tags/items/rich_ore/molybenite.json
 4af4ac28e1cfa68282a03d3c7d1028aca35f08de data/forge/tags/items/rich_ore/monazite.json
 6869092a9483db2037aca3e8ef597c178eac693f data/forge/tags/items/rich_ore/osmium.json
 dd664999ebce582a919d34fa444c8e9fae002677 data/forge/tags/items/rich_ore/platinum.json
@@ -454,6 +460,7 @@ f895b5859dae80ddc65d77941473901add5a460d data/forge/tags/items/slag/hubnerite.js
 250a6f54c965e7e34eb13896c1850ac8f52252cd data/forge/tags/items/slag/ilmenite.json
 46dac1aa5acd8466f71c6c1bdfcdbcd8ca586f57 data/forge/tags/items/slag/kaolinite.json
 a0a4223750136aebd634d3dd02e90c2ad5879b46 data/forge/tags/items/slag/magnetite.json
+1fa0993aef889b3a698f9253c8eb4ec45d26a88d data/forge/tags/items/slag/molybenite.json
 3958f6d6b21cc62f3a99ba1be4666344e1931c2b data/forge/tags/items/slag/monazite.json
 1217380305aaaafb5b8a5ec507bc1114522de59f data/forge/tags/items/slag/pyrite.json
 1cbad4281555d7ae3cccbaca440f034ab1fdc315 data/forge/tags/items/slag/pyrolusite.json

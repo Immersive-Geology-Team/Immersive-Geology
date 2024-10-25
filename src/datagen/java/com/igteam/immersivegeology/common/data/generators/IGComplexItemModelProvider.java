@@ -47,7 +47,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateCrystallizerModel("crystallizer", IGMultiblockProvider.CRYSTALLIZER.block());
 		generateMultiblockModel("coredrill", IGMultiblockProvider.COREDRILL.block());
 		generateSeparatorModel("gravityseparator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
-		generateSluiceModel("industrial_sluice", IGMultiblockProvider.INDUSTRIAL_SLUICE.block());
+		generateSluiceModel("trommel", IGMultiblockProvider.TROMMEL.block());
 		generateRotaryKilnModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());

@@ -10,20 +10,16 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.IndustrialSluiceRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.core.util.Pair;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
 import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +29,7 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 	@Override
 	public ItemStack getIcon()
 	{
-		return IGMultiblockProvider.INDUSTRIAL_SLUICE.iconStack();
+		return IGMultiblockProvider.TROMMEL.iconStack();
 	}
 
 	@Override

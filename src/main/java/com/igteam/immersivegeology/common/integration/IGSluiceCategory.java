@@ -12,7 +12,6 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.IndustrialSluiceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -23,7 +22,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
@@ -37,7 +35,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 128).setTextureSize(128,128).build();
 		setBackground(back);
-		setIcon(IGMultiblockProvider.INDUSTRIAL_SLUICE.iconStack());
+		setIcon(IGMultiblockProvider.TROMMEL.iconStack());
 	}
 
 	@Override

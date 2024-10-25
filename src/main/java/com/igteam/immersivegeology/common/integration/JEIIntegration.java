@@ -66,7 +66,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
 		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
 		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
-		registration.addRecipeCatalyst(IGMultiblockProvider.INDUSTRIAL_SLUICE.iconStack(), JEIRecipeTypes.SLUICE);
+		registration.addRecipeCatalyst(IGMultiblockProvider.TROMMEL.iconStack(), JEIRecipeTypes.SLUICE);
 	}
 
 	@Override

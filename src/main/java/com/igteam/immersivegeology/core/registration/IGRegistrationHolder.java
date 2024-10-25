@@ -150,13 +150,41 @@ public class IGRegistrationHolder {
 
         return false;
     }
+    static
+    {
+        stone_mb = new Class[] {
+                IGBloomeryMultiblock.class
+        };
+
+        bronze_mb = new Class[] {
+                IGReverberationFurnaceMultiblock.class,
+                IGBloomeryMultiblock.class
+        };
+
+        steel_mb = new Class[] {
+                IGCrystalizerMultiblock.class,
+                IGGravitySeparatorMultiblock.class,
+                IGCoreDrillMultiblock.class,
+                IGRotaryKilnMultiblock.class,
+                IGTrommelMultiblock.class,
+                IGBloomeryMultiblock.class,
+                IGReverberationFurnaceMultiblock.class,
+                IGChemicalReactorMultiblock.class,
+                IGCentrifugeMultiblock.class,
+                IGBallmillMultiblock.class
+        };
+    }
+
+    private static final Class<? extends IGTemplateMultiblock>[] stone_mb;
+	private static final Class<? extends IGTemplateMultiblock>[] bronze_mb;
+	private static final Class<? extends IGTemplateMultiblock>[] steel_mb;
 
     public static void initialize()
     {
         initializeMultiblocks();
-        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, IGReverberationFurnaceMultiblock.class, IGBloomeryMultiblock.class));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, IGCrystalizerMultiblock.class, IGGravitySeparatorMultiblock.class, IGCoreDrillMultiblock.class, IGRotaryKilnMultiblock.class, IGIndustrialSluiceMultiblock.class, IGBloomeryMultiblock.class, IGReverberationFurnaceMultiblock.class, IGChemicalReactorMultiblock.class, IGCentrifugeMultiblock.class));
-        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, IGBloomeryMultiblock.class));
+        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, bronze_mb));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, steel_mb));
+        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, stone_mb));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
@@ -274,9 +302,10 @@ public class IGRegistrationHolder {
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
         registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE);
-        registerMB("industrial_sluice", IGIndustrialSluiceMultiblock.INSTANCE, IGMultiblockProvider.INDUSTRIAL_SLUICE);
+        registerMB("trommel", IGTrommelMultiblock.INSTANCE, IGMultiblockProvider.TROMMEL);
         registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
+        registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
     }
 
     private static void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration){

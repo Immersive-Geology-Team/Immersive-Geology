@@ -34,6 +34,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Kaolinite(new MaterialKaolinite()),
     Magnetite(new MaterialMagnetite()),
     Monazite(new MaterialMonazite()),
+    Molybenite(new MaterialMolybenite()),
     Pyrite(new MaterialPyrite()),
     Pyrolusite(new MaterialPyrolusite()),
     Scheelite(new MaterialScheelite()),

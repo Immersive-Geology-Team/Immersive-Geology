@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.data.blockstates.MultiblockStates;
+import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.common.data.generators.IGDynamicModelProvider.SimpleModelBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -56,6 +57,12 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 		getBuilder(CoreDrillRenderer.DRILL_GEARSET_NAME)
 				.customLoader(ObjModelBuilder::begin)
 				.modelLocation(rl("models/block/multiblock/obj/coredrill/coredrill_gears.obj"))
+				.flipV(true)
+				.end();
+
+		getBuilder(BallmillRenderer.CHAMBER_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/ballmill/ballmill_chamber.obj"))
 				.flipV(true)
 				.end();
 

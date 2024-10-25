@@ -45,7 +45,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "crystallizer");
         multiblockEntry(instance, multiblock_category, "coredrill");
         multiblockEntry(instance, multiblock_category, "gravityseparator");
-        multiblockEntry(instance, multiblock_category, "industrial_sluice");
+        multiblockEntry(instance, multiblock_category, "trommel");
         multiblockEntry(instance, multiblock_category, "rotarykiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
         multiblockEntry(instance, multiblock_category, "bloomery");

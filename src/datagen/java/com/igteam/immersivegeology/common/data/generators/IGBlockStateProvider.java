@@ -108,12 +108,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblock("crystallizer");
         genericmultiblock("bloomery");
         genericmultiblock("gravityseparator");
-        genericmultiblock("industrial_sluice");
+        genericmultiblock("trommel");
         genericmultiblock("chemical_reactor");
         genericmultiblockMirror("rotarykiln");
         genericmultiblockMirror("coredrill");
         genericmultiblockMirror("reverberation_furnace");
         genericmultiblock("centrifuge");
+        genericmultiblock("ballmill");
     }
 
     private void registerSlabBlock(IGBlockType igBlock)

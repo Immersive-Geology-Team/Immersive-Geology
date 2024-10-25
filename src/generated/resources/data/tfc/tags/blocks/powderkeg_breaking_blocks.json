@@ -309,6 +309,10 @@
       "required": false
     },
     {
+      "id": "tfc:poor_ore_block_molybenite_granite",
+      "required": false
+    },
+    {
       "id": "tfc:poor_ore_block_galena_stone",
       "required": false
     },
@@ -317,7 +321,19 @@
       "required": false
     },
     {
+      "id": "tfc:normal_ore_block_molybenite_granite",
+      "required": false
+    },
+    {
       "id": "tfc:poor_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "tfc:poor_ore_block_molybenite_diorite",
+      "required": false
+    },
+    {
+      "id": "tfc:normal_ore_block_molybenite_diorite",
       "required": false
     },
     {
@@ -677,6 +693,10 @@
       "required": false
     },
     {
+      "id": "tfc:rich_ore_block_molybenite_granite",
+      "required": false
+    },
+    {
       "id": "tfc:normal_ore_block_thorite_granite",
       "required": false
     },
@@ -746,6 +766,10 @@
     },
     {
       "id": "tfc:rich_ore_block_hubnerite_andesite",
+      "required": false
+    },
+    {
+      "id": "tfc:rich_ore_block_molybenite_diorite",
       "required": false
     },
     {

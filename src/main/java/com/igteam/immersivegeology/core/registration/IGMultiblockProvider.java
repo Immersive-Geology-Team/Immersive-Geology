@@ -28,7 +28,7 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = IGRegistrationHolder.registerMultiblock("reverberation_furnace", new RevFurnaceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"), builder -> {}, Properties.copy(Blocks.STONE));
 
-    public static final MultiblockRegistration<IndSluiceLogic.State> INDUSTRIAL_SLUICE = IGRegistrationHolder.registerMetalMultiblock("industrial_sluice", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("industrial_sluice"),
+    public static final MultiblockRegistration<IndSluiceLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
             builder -> {
                 builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
             });
@@ -42,6 +42,11 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<CentrifugeLogic.State> CENTRIFUGE = IGRegistrationHolder.registerMetalMultiblock("centrifuge", new CentrifugeLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("centrifuge"),
             builder -> {
                 builder.redstone(state -> state.rsState, CentrifugeLogic.REDSTONE_IN).notMirrored();
+            });
+
+    public static final MultiblockRegistration<BallmillLogic.State> BALLMILL = IGRegistrationHolder.registerMetalMultiblock("ballmill", new BallmillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("ballmill"),
+            builder -> {
+                builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN).notMirrored();
             });
 
     public static void forceClassLoad(){};
