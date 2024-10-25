@@ -52,7 +52,7 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         Direction dir = orientation.front();
         boolean isActive = state.rsState.isEnabled(context);
         poseStack.pushPose();
-        poseStack.translate(0.5,2,2.21875);
+        poseStack.translate(0.5,2,2.425);
         float angle = isActive ? (state.getRotation() * 3) + pPartialTick : 0;
         poseStack.mulPose(new Quaternionf().rotateAxis(angle * Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
         renderDynamicModel(CHAMBER, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);

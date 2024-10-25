@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 100,
+    "tag": "forge:hydrochloricacid_titanium"
+  },
+  "fluidInputB": {
+    "amount": 150,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 250,
+    "fluid": "immersivegeology:fluid_brine"
+  },
+  "itemInput": {
+    "tag": "forge:dusts/sodium"
+  },
+  "itemResult": {
+    "item": "immersivegeology:dust_titanium"
+  },
+  "time": 200
+}
