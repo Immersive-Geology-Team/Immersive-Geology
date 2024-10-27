@@ -16,6 +16,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.AlloySmelterMultiblock;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.BlastFurnaceMultiblock;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
@@ -150,41 +152,46 @@ public class IGRegistrationHolder {
 
         return false;
     }
-    static
+
+
+    private static Class<? extends TemplateMultiblock>[] formationFormat(List<Class<? extends TemplateMultiblock>> list)
     {
-        stone_mb = new Class[] {
-                IGBloomeryMultiblock.class
-        };
-
-        bronze_mb = new Class[] {
-                IGReverberationFurnaceMultiblock.class,
-                IGBloomeryMultiblock.class
-        };
-
-        steel_mb = new Class[] {
-                IGCrystalizerMultiblock.class,
-                IGGravitySeparatorMultiblock.class,
-                IGCoreDrillMultiblock.class,
-                IGRotaryKilnMultiblock.class,
-                IGTrommelMultiblock.class,
-                IGBloomeryMultiblock.class,
-                IGReverberationFurnaceMultiblock.class,
-                IGChemicalReactorMultiblock.class,
-                IGCentrifugeMultiblock.class,
-                IGBallmillMultiblock.class
-        };
+        Class<? extends TemplateMultiblock>[] array = new Class[list.size()];
+        array = list.toArray(array);
+        return array;
     }
 
-    private static final Class<? extends IGTemplateMultiblock>[] stone_mb;
-	private static final Class<? extends IGTemplateMultiblock>[] bronze_mb;
-	private static final Class<? extends IGTemplateMultiblock>[] steel_mb;
+    private static void setupFormationLists()
+    {
+        stone_mb.add(IGBloomeryMultiblock.class);
+        stone_mb.add(AlloySmelterMultiblock.class);
+
+        bronze_mb.addAll(stone_mb);
+        bronze_mb.add(IGReverberationFurnaceMultiblock.class);
+        bronze_mb.add(BlastFurnaceMultiblock.class);
+
+        steel_mb.addAll(bronze_mb);
+        steel_mb.add(IGGravitySeparatorMultiblock.class);
+        steel_mb.add(IGCoreDrillMultiblock.class);
+        steel_mb.add(IGRotaryKilnMultiblock.class);
+        steel_mb.add(IGTrommelMultiblock.class);
+        steel_mb.add(IGChemicalReactorMultiblock.class);
+        steel_mb.add(IGCentrifugeMultiblock.class);
+        steel_mb.add(IGBallmillMultiblock.class);
+        steel_mb.add(IGCrystalizerMultiblock.class);
+    }
+
+    private static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();
+	private static final List<Class<? extends TemplateMultiblock>> bronze_mb = new ArrayList<>();
+	private static final List<Class<? extends TemplateMultiblock>> steel_mb = new ArrayList<>();
 
     public static void initialize()
     {
         initializeMultiblocks();
-        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, bronze_mb));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, steel_mb));
-        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, stone_mb));
+        setupFormationLists();
+        registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, formationFormat(steel_mb)));
+        registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, formationFormat(stone_mb)));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){

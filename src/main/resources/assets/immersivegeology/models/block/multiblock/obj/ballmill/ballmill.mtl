@@ -1,12 +1,4 @@
-# Blender 4.2.2 LTS MTL File: 'None'
-# www.blender.org
-
-newmtl m_ab0baea9-ffd5-7a4c-560f-60907980d75a
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
+# Made in Blockbench 4.11.1
+newmtl m_2afd59c2-767e-0fd0-44e0-788d7eef89d3
 map_Kd immersivegeology:block/multiblock/ballmill/base
+newmtl none
