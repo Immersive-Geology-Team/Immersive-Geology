@@ -17,7 +17,6 @@ import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -35,9 +34,10 @@ import java.util.List;
 
 public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntityMaster<BallmillLogic.State>>
 {
-    public static final String CHAMBER_NAME = "ballmill_chamber";
+    public static final String DRUM_NAME = "drum";
+    public static final String AXLE_NAME = "axle";
 
-    public static IGDynamicModel CHAMBER;
+    public static IGDynamicModel DRUM, AXLE;
 
     @Override
     public void render(MultiblockBlockEntityMaster<BallmillLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
@@ -47,15 +47,26 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
 
         final MultiblockOrientation orientation = context.getLevel().getOrientation();
         final BallmillLogic.State state = context.getState();
+        float rot = state.getRotation();
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();
         boolean isActive = state.rsState.isEnabled(context);
         poseStack.pushPose();
-        poseStack.translate(0.5,2,2.425);
-        float angle = isActive ? (state.getRotation() * 3) + pPartialTick : 0;
-        poseStack.mulPose(new Quaternionf().rotateAxis(angle * Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-        renderDynamicModel(CHAMBER, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
+            poseStack.translate(0.905,2.125,0.5);
+            float angleDrum = isActive ? (rot) + pPartialTick : 0;
+
+            float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : 0;
+            poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+            renderDynamicModel(DRUM, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+            // poseStack.translate(1.34375,0.875,0.9375);
+            poseStack.translate(1.34375,0.775,0.9375);
+            poseStack.mulPose(new Quaternionf().rotateAxis(-angleAxle * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+
+            renderDynamicModel(AXLE, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
         poseStack.popPose();
     }
 

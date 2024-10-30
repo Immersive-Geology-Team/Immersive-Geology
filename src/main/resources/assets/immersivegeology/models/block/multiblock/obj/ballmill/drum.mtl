@@ -1,0 +1,8 @@
+# Blender 4.2.2 LTS MTL File: 'None'
+# www.blender.org
+
+newmtl drum
+map_Kd immersivegeology:block/multiblock/ballmill/drum
+
+newmtl gear
+map_Kd immersivegeology:block/multiblock/ballmill/gear

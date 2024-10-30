@@ -14,7 +14,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     STAIRS(2),
     FLUID(3),
     SLURRY(3),
-    UNUSED(3);
+    MISC(3);
 
     private final int groupOrdinal;
 

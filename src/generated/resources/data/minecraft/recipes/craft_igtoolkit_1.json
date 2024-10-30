@@ -4,7 +4,7 @@
   "group": "ig_tools",
   "key": {
     "B": {
-      "tag": "forge:ingots/steel"
+      "tag": "forge:ingots/stainlesssteel"
     },
     "S": {
       "tag": "forge:string"

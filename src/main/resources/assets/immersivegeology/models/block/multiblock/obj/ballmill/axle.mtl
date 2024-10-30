@@ -1,0 +1,8 @@
+# Blender 4.2.2 LTS MTL File: 'None'
+# www.blender.org
+
+newmtl axle
+map_Kd immersivegeology:block/multiblock/ballmill/axle
+
+newmtl gear
+map_Kd immersivegeology:block/multiblock/ballmill/gear

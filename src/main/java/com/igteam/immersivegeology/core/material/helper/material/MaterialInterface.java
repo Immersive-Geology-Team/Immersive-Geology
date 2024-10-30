@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -96,5 +97,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness) {
         return instance().getOreBlock(stone, richness);
     };
+
+	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
 
 }

@@ -96,13 +96,13 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" WB")
 				.pattern("W  ").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_0");
-		// Steel Hammer
+		// Stainless Steel Hammer
 		Item toolkit_1 = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
 				.pattern(" BS")
 				.pattern(" WB")
-				.pattern("W  ").define('B', MetalEnum.Steel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
-				.group("ig_tools").unlockedBy("has_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_1");
+				.pattern("W  ").define('B', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_stainless_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT))).save(consumer, "craft_igtoolkit_1");
 		// Stone Hammer
 		Item toolkit_2 = IGRegistrationHolder.getItem.apply("ig_toolkit_2");
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_2)

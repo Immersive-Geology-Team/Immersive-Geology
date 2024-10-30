@@ -42,9 +42,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, IServerTickableComponent<BallmillLogic.State>, IClientTickableComponent<BallmillLogic.State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(2,1,6);
+    public static final BlockPos REDSTONE_IN = new BlockPos(4,1,3);
     private static final int ENERGY_CAPACITY = 256000;
-    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0,0, 6, RelativeBlockFace.FRONT), new CapabilityPosition(0,1, 6, RelativeBlockFace.FRONT));
+    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0,1, 3, RelativeBlockFace.UP));
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2,2,0, RelativeBlockFace.BACK);
     private static final MultiblockFace INPUT_POS = new MultiblockFace(2,3,6, RelativeBlockFace.FRONT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
@@ -54,8 +54,8 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         final BallmillLogic.State state = context.getState();
-        int rot = state.rotation;
-        state.rotation = rot + 1 % 360;
+        float rot = state.rotation;
+        state.rotation = (float)((rot + 2.5) % 360);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
         private final DroppingMultiblockOutput output;
         private final StoredCapability<IItemHandler> itemInputCap;
-        private int rotation;
+        private float rotation;
         private final StoredCapability<IEnergyStorage> energyCap;
         private final MultiblockProcessor<RotaryKilnRecipe, ProcessContextInWorld<RotaryKilnRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;

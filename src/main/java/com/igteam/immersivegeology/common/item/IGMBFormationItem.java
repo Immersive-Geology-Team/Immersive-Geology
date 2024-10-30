@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
+import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
@@ -93,7 +94,10 @@ public class IGMBFormationItem extends IGGenericItem
 		else
 			multiblockSide = side;
 		for(MultiblockHandler.IMultiblock mb : MultiblockHandler.getMultiblocks())
-			if(mb.isBlockTrigger(world.getBlockState(pos), multiblockSide, world) && formableMultiblocks.stream().anyMatch((allowed) -> allowed.isInstance(mb)))
+		{
+			boolean allowDefault = false;
+			if(mb instanceof IGTemplateMultiblock igmb) allowDefault = igmb.canFormWithDefaultHammer();
+			if(mb.isBlockTrigger(world.getBlockState(pos), multiblockSide, world) && (allowDefault || formableMultiblocks.stream().anyMatch((allowed) -> allowed.isInstance(mb))))
 			{
 				boolean isAllowed;
 				if(permittedMultiblocks!=null)
@@ -112,10 +116,12 @@ public class IGMBFormationItem extends IGGenericItem
 						IEAdvancements.TRIGGER_MULTIBLOCK.trigger(sPlayer, mb, stack);
 
 
-					stack.hurtAndBreak(1, player, (p) -> {});
+					stack.hurtAndBreak(1, player, (p) -> {
+					});
 					return InteractionResult.SUCCESS;
 				}
 			}
+		}
 
 		return InteractionResult.PASS;
 	}

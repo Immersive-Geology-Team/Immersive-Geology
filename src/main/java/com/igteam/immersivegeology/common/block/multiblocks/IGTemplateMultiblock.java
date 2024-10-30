@@ -59,6 +59,11 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock
         return false;
     }
 
+    public boolean canFormWithDefaultHammer()
+    {
+        return false;
+    }
+
     @Override
     protected void replaceStructureBlock(StructureTemplate.StructureBlockInfo info, Level world, BlockPos actualPos, boolean mirrored, Direction clickDirection, Vec3i offsetFromMaster){
         BlockState newState = ((MultiblockPartBlock<?>)this.logic.block().get()).defaultBlockState();

@@ -63,7 +63,7 @@
   "material.immersivegeology.fluid_type.slurry": "Slurry",
   "material.immersivegeology.fluid_type.chemical": "",
   "item.immersivegeology.ig_toolkit_0": "Bronze Work Hammer",
-  "item.immersivegeology.ig_toolkit_1": "Steel Work Hammer",
+  "item.immersivegeology.ig_toolkit_1": "Stainless Steel Work Hammer",
   "item.immersivegeology.ig_toolkit_2": "Stone Work Hammer",
   "item.immersivegeology.bucket_molten": "Bucket of Molten %s",
   "item.immersivegeology.bucket": "Bucket of %",
@@ -235,6 +235,7 @@
   "material.immersivegeology.constantan": "Constantan",
   "material.immersivegeology.electrum": "Electrum",
   "material.immersivegeology.steel": "Steel",
+  "material.immersivegeology.stainlesssteel": "Stainless Steel",
 
   "material.immersivegeology.monazite": "Monazite",
   "material.immersivegeology.diamond": "Diamond",
@@ -331,6 +332,8 @@
 
   "advancement.immersivegeology.metal_crystal": "Shinies?",
   "advancement.immersivegeology.metal_crystal.desc": "Obtain any metal crystal",
+
+  "block.immersivegeology.chemical_engineering": "Chemical Engineering Block",
 
   "block.immersivegeology.tfc_poor_ore_block_iron_chalk.prospected": "Native Iron",
   "block.immersivegeology.normal_ore_block_osmium_stone.prospected": "Native Osmium",

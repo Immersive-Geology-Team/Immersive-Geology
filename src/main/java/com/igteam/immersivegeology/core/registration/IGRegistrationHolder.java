@@ -31,15 +31,18 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.metal.MaterialHastelloy;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -58,6 +61,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -185,13 +189,28 @@ public class IGRegistrationHolder {
 	private static final List<Class<? extends TemplateMultiblock>> bronze_mb = new ArrayList<>();
 	private static final List<Class<? extends TemplateMultiblock>> steel_mb = new ArrayList<>();
 
+    private static void registerBlockAndItem(String registryKey, BlockCategoryFlags blockCategory, MaterialInterface<?> material)
+    {
+        Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
+        registerBlock(registryKey, blockProvider);
+        registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)){
+            @Override
+            public @NotNull Component getName(ItemStack pStack)
+            {
+                return Component.translatable(this.getDescriptionId(pStack));
+            }
+        });
+    }
+
     public static void initialize()
     {
         initializeMultiblocks();
         setupFormationLists();
         registerItem("ig_toolkit_0", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
-        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.Steel, 2048, 6, 2.4f, formationFormat(steel_mb)));
+        registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
         registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, formationFormat(stone_mb)));
+
+        registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
