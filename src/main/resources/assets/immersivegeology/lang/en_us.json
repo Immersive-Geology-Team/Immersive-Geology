@@ -334,6 +334,7 @@
   "advancement.immersivegeology.metal_crystal.desc": "Obtain any metal crystal",
 
   "block.immersivegeology.chemical_engineering": "Chemical Engineering Block",
+  "block.immersivegeology.computational_engineering": "Computational Engineering Block",
 
   "block.immersivegeology.tfc_poor_ore_block_iron_chalk.prospected": "Native Iron",
   "block.immersivegeology.normal_ore_block_osmium_stone.prospected": "Native Osmium",

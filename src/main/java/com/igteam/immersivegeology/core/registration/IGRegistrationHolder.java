@@ -31,18 +31,15 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.data.metal.MaterialHastelloy;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -211,6 +208,7 @@ public class IGRegistrationHolder {
         registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, formationFormat(stone_mb)));
 
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
+        registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){

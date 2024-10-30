@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/static_block/computational_engineering"
+    }
+  }
+}
