@@ -14,9 +14,11 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -134,7 +136,7 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 		}
 
 		if(!active)
-			env.turnOff(ctx.getLevel());
+			env.turnOff(ctx.getLevel(), furnaceIndex);
 		return active;
 	}
 
@@ -242,7 +244,7 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 			return 1;
 		}
 
-		default void turnOff(IMultiblockLevel level)
+		default void turnOff(IMultiblockLevel level, int furnaceIndex)
 		{
 		}
 	}
