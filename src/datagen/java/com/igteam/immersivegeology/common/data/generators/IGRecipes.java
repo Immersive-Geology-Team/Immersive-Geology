@@ -9,22 +9,24 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
+import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceFuelBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.common.crafting.serializers.BlastFurnaceFuelSerializer;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
-import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -38,19 +40,15 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class IGRecipes extends RecipeProvider
@@ -157,6 +155,10 @@ public class IGRecipes extends RecipeProvider
 				}
 			}
 		}
+
+		BloomeryRecipeBuilder.builder(MetalEnum.Copper.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cuprite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cuprite_to_ingot"));
+		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(300).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
+
 		NonNullList<StackWithChance> list = NonNullList.create();
 		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.DUST, 1), 0.4f));
 		list.add(1, new StackWithChance(MetalEnum.Silver.getStack(ItemCategoryFlags.DUST, 1), 0.22f));

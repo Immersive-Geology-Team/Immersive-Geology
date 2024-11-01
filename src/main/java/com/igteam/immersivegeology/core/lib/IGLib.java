@@ -8,9 +8,11 @@
 
 package com.igteam.immersivegeology.core.lib;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 
@@ -40,9 +42,10 @@ public class IGLib {
     public static final int COMPOUND_ACID_TO_DUST_AMOUNT = 1;
     public static final int ACID_TO_DUST_AMOUNT = 125;
     public static final int DUST_FROM_COMPOUND_ACID_AMOUNT = 1;
+	public static final String GUIID_Bloomery = "bloomery";
 
 
-    public static Logger getNewLogger()
+	public static Logger getNewLogger()
     {
         return  LogUtils.getLogger();
     }
@@ -56,5 +59,14 @@ public class IGLib {
         list.addAll(List.of(ChemicalEnum.values()));
 
         return list;
+    }
+
+    public static ResourceLocation rl(String name)
+    {
+        return new ResourceLocation(IGLib.MODID, name);
+    }
+
+    public static ResourceLocation makeTextureLocation(String name) {
+        return rl("textures/gui/" + name + ".png");
     }
 }

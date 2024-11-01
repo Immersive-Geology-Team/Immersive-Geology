@@ -12,7 +12,9 @@ import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 import java.util.function.Consumer;
 
@@ -28,6 +30,12 @@ public class IGBloomeryMultiblock extends IGTemplateMultiblock
 	public float getManualScale()
 	{
 		return 20;
+	}
+
+	@Override
+	public void disassemble(Level world, BlockPos origin, boolean mirrored, Direction clickDirectionAtCreation)
+	{
+		super.disassemble(world, origin, mirrored, clickDirectionAtCreation);
 	}
 
 	@Override

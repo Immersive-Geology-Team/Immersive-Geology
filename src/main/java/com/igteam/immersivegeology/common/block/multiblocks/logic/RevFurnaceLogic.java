@@ -8,10 +8,13 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
@@ -26,21 +29,32 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RevFurnaceShape;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.Util;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.SmokeParticle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -61,7 +75,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>, MBOverlayText<RevFurnaceLogic.State>, IServerTickableComponent<RevFurnaceLogic.State>
+public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>, MBOverlayText<RevFurnaceLogic.State>, IServerTickableComponent<RevFurnaceLogic.State>, IClientTickableComponent<RevFurnaceLogic.State>
 {
     static final int TANK_CAPACITY = 128*FluidType.BUCKET_VOLUME;
 
@@ -77,8 +91,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     @Override
     public void tickServer(IMultiblockContext<RevFurnaceLogic.State> context) {
         final State state = context.getState();
-        state.furnace1.tickServer(context, 0);
-        state.furnace2.tickServer(context, 1);
+        state.active_left = state.furnace1.tickServer(context, 0);
+        state.active_right = state.furnace2.tickServer(context, 1);
         outputItems(state);
         if(state.tank.getFluidAmount() > 0)
         {
@@ -90,6 +104,9 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         context.requestMasterBESync();
     }
     private static final int[] OUTPUT_SLOTS = Util.make(new int[1], slots -> {slots[0] = 2;});
+
+    private boolean leftChimneyUsed = false;
+    private boolean rightChimneyUsed = false;
 
     private void outputItems(RevFurnaceLogic.State state)
     {
@@ -148,16 +165,19 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         {
             if(SLOT_1_INPUT_POSITION.equals(position)) return state.invCap1.cast(ctx);
             if(SLOT_2_INPUT_POSITION.equals(position)) return state.invCap2.cast(ctx);
-            if(SLOT_1_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock())) {
+            if(SLOT_1_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
+            {
                 return state.outputHandler1.cast(ctx);
             }
-            if(SLOT_2_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock())) {
+            if(SLOT_2_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
+            {
                 return state.outputHandler2.cast(ctx);
             }
         }
         else if(cap==ForgeCapabilities.FLUID_HANDLER)
+        {
             if(SLOT_1_OUTPUT_FLUID.equals(position) || SLOT_2_OUTPUT_FLUID.equals(position)) return state.fluidCap.cast(ctx);
-
+        }
         return LazyOptional.empty();
     }
 
@@ -186,6 +206,38 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
         return List.of();
     }
+    private double particleXZSpeed()
+    {
+        return ApiUtils.RANDOM.nextDouble(-0.015625, 0.015625);
+    }
+    private static final Vec3 SMOKE_POSITION_LEFT = new Vec3(4.5,12,1.5);
+    private static final Vec3 SMOKE_POSITION_RIGHT = new Vec3(4.5,12,4.5);
+    @Override
+    public void tickClient(IMultiblockContext<State> context)
+    {
+        final State state = context.getState();
+        if(context.getLevel().shouldTickModulo(2))
+        {
+            if(((state.active_left &! state.fluidOutput1.isPresent())))
+            {
+                spawnSmoke(context, SMOKE_POSITION_LEFT);
+            }
+            if(((state.active_right &! state.fluidOutput2.isPresent())))
+            {
+                spawnSmoke(context, SMOKE_POSITION_RIGHT);
+            }
+        }
+    }
+
+    private void spawnSmoke(IMultiblockContext<State> context, Vec3 position)
+    {
+        final Vec3 absoluteSmokePosition = context.getLevel().toAbsolute(position);
+        context.getLevel().getRawLevel().addAlwaysVisibleParticle(
+                ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                absoluteSmokePosition.x, absoluteSmokePosition.y, absoluteSmokePosition.z,
+                particleXZSpeed(), 0.0625, particleXZSpeed()
+        );
+    }
 
     public static class State implements IMultiblockState, IGFurnaceHandler.IFurnaceEnvironment<RevFurnaceRecipe>
     {
@@ -193,6 +245,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         private final SlotwiseItemHandler inventory2;
         final IGFurnaceHandler<RevFurnaceRecipe> furnace1;
         final IGFurnaceHandler<RevFurnaceRecipe> furnace2;
+        private boolean active_left = false;
+        private boolean active_right = false;
 
         private final Supplier<RevFurnaceRecipe> cachedRecipe1;
         private final Supplier<RevFurnaceRecipe> cachedRecipe2;
@@ -290,6 +344,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             nbt.put("inventory2", inventory2.serializeNBT());
             nbt.put("furnace1", furnace1.toNBT(0));
             nbt.put("furnace2", furnace2.toNBT(1));
+            nbt.putBoolean("active_left", active_left);
+            nbt.putBoolean("active_right", active_right);
         }
 
         @Override
@@ -300,6 +356,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             furnace1.readNBT(nbt.getCompound("furnace1"), 0);
             furnace2.readNBT(nbt.getCompound("furnace2"), 1);
             tank.readFromNBT(nbt.getCompound("tank"));
+            active_left = nbt.getBoolean("active_left");
+            active_right = nbt.getBoolean("active_right");
         }
 
         @Override
@@ -312,6 +370,11 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         public void writeSyncNBT(CompoundTag nbt)
         {
             writeSaveNBT(nbt);
+        }
+
+        public boolean isActive(int furnaceIndex)
+        {
+            return furnaceIndex == 0 ? active_left : active_right;
         }
 
         @Override
@@ -330,6 +393,13 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         public int getBurnTimeOf(Level level, ItemStack fuel)
         {
             return BlastFurnaceFuel.getBlastFuelTime(level, fuel);
+        }
+
+        @Override
+        public void turnOff(IMultiblockLevel level, int furnaceIndex)
+        {
+            if(furnaceIndex == 0) active_left = false;
+            if(furnaceIndex == 1) active_right = false;
         }
     }
 }
