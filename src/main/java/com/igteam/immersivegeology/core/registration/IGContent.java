@@ -8,12 +8,14 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
+import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
@@ -30,6 +32,11 @@ public class IGContent {
         IGRegistrationHolder.initialize();
         IGTags.initialize();
         IGRecipeTypes.init();
+    }
+
+    public static void registerContainersAndScreens()
+    {
+        MenuScreens.register(IGMenuTypes.BLOOMERY.getType(), BloomeryScreen::new);
     }
 
     public static void initializeManualEntries()
@@ -50,6 +57,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
         multiblockEntry(instance, multiblock_category, "bloomery");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");
+        multiblockEntry(instance, multiblock_category, "ballmill");
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

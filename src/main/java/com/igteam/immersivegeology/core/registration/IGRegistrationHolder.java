@@ -23,6 +23,7 @@ import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
@@ -91,6 +92,21 @@ public class IGRegistrationHolder {
     T registerMultiblock(T multiblock) {
         MultiblockHandler.registerMultiblock(multiblock);
         return multiblock;
+    }
+
+    public static DeferredRegister<Block> getBlockRegister()
+    {
+        return BLOCK_REGISTER;
+    }
+
+    public static DeferredRegister<Item> getItemRegister()
+    {
+        return ITEM_REGISTER;
+    }
+
+    public static DeferredRegister<BlockEntityType<?>> getTeRegister()
+    {
+        return TE_REGISTER;
     }
 
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
@@ -380,6 +396,7 @@ public class IGRegistrationHolder {
         FLUIDTYPE_REGISTER.register(eventBus);
         TE_REGISTER.register(eventBus);
         TAB_REGISTER.register(eventBus);
+        IGMenuTypes.REGISTER.register(eventBus);
 
         MOD_BUS_CALLBACKS.forEach(e -> e.accept(eventBus));
     }
@@ -393,7 +410,7 @@ public class IGRegistrationHolder {
         return registerMetalMultiblock(name, logic, structure, null);
     }
 
-    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras){
+    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<IGMultiblockBuilder<S>> extras){
         BlockBehaviour.Properties prop = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL)
                 .strength(3, 15)
                 .requiresCorrectToolForDrops()
@@ -405,8 +422,8 @@ public class IGRegistrationHolder {
         return registerMultiblock(name, logic, structure, extras, prop);
     }
 
-    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<MultiblockBuilder<S>> extras, BlockBehaviour.Properties prop){
-        MultiblockBuilder<S> builder = new MultiblockBuilder<>(logic, name)
+    public static <S extends IMultiblockState> MultiblockRegistration<S> registerMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure, @Nullable Consumer<IGMultiblockBuilder<S>> extras, BlockBehaviour.Properties prop){
+        IGMultiblockBuilder<S> builder = new IGMultiblockBuilder<>(logic, name)
                 .structure(structure)
                 .defaultBEs(TE_REGISTER)
                 .defaultBlock(BLOCK_REGISTER, ITEM_REGISTER, prop);

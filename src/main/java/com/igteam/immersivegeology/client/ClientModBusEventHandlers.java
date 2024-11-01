@@ -8,12 +8,16 @@
 
 package com.igteam.immersivegeology.client;
 
+import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.ChemicalReactorRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
+import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.registration.IGMenuTypes;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

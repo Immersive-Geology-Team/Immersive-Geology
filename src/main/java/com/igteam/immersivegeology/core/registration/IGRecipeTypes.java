@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +32,9 @@ public class IGRecipeTypes
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
+
+
+	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
 
 	private static <T extends Recipe<?>>
 	TypeWithClass<T> register(String name, Class<T> type)
