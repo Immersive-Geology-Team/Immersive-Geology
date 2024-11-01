@@ -1,21 +1,40 @@
 {
   "variants": {
-    "facing=east": {
+    "active=false,facing=east": {
       "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_split",
       "uvlock": true,
       "y": 90
     },
-    "facing=north": {
+    "active=false,facing=north": {
       "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_split",
       "uvlock": true
     },
-    "facing=south": {
+    "active=false,facing=south": {
       "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_split",
       "uvlock": true,
       "y": 180
     },
-    "facing=west": {
+    "active=false,facing=west": {
       "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "active=true,facing=east": {
+      "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_active_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_active_split",
+      "uvlock": true
+    },
+    "active=true,facing=south": {
+      "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_active_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "active=true,facing=west": {
+      "model": "immersivegeology:block/multiblock/obj/bloomery/bloomery_active_split",
       "uvlock": true,
       "y": 270
     }

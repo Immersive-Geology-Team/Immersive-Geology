@@ -23,6 +23,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -106,7 +107,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         genericmultiblock("crystallizer");
-        genericmultiblock("bloomery");
+        genericActiveMultiblock(IGMultiblockProvider.BLOOMERY.block(), "bloomery");
         genericmultiblock("gravityseparator");
         genericmultiblock("trommel");
         genericmultiblock("chemical_reactor");
@@ -115,6 +116,22 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblockMirror("reverberation_furnace");
         genericmultiblock("centrifuge");
         genericmultiblock("ballmill");
+    }
+
+    private void genericActiveMultiblock(Supplier<? extends Block> block, String registry_name)
+    {
+        IGLib.IG_LOGGER.info("Generating ["+registry_name+"] Active Multiblock Model Data");
+        try
+        {
+            IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(registry_name);
+            ModelFile off = split(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), template, false, false);
+            ModelFile active = split(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+"_active.obj"), template, false, false);
+
+            createMultiblock(block, off, active, IEProperties.ACTIVE);
+        } catch(Exception e)
+        {
+            IGLib.IG_LOGGER.error(e.getLocalizedMessage());
+        }
     }
 
     private void registerSlabBlock(IGBlockType igBlock)
