@@ -85,6 +85,17 @@ public class IGBlockTags extends BlockTagsProvider
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(oreBlock);
 				tag(BlockTags.NEEDS_STONE_TOOL).add(oreBlock);
 				tag(Tags.Blocks.ORES).add(oreBlock);
+
+				if(ModFlags.TFC.isStrictlyLoaded())
+				{
+					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
+					String id = name.substring(name.lastIndexOf('.') +1);
+					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+				}
 			} else if(block.get() instanceof IGGenericBlock genericBlock)
 			{
 				List<MaterialInterface<?>> materials = List.copyOf(genericBlock.getMaterials());
