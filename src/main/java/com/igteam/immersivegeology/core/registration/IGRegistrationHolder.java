@@ -239,7 +239,6 @@ public class IGRegistrationHolder {
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                         }
-
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
                             for (StoneEnum base : StoneEnum.values()) {
@@ -257,7 +256,6 @@ public class IGRegistrationHolder {
                                 }
                             }
                         }
-
                         case SLAB -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
