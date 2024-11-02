@@ -19,8 +19,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 
-public record IGMultiblockGUI<S extends IMultiblockState>(
-		IGMenuTypes.MultiblockContainer<S, ?> menu) implements IMultiblockComponent<S>
+public record IGMultiblockGUI<S extends IMultiblockState>(IGMenuTypes.MultiblockContainer<S, ?> menu) implements IMultiblockComponent<S>
 {
 	public IGMultiblockGUI(IGMenuTypes.MultiblockContainer<S, ?> menu) {
 		this.menu = menu;
@@ -34,7 +33,7 @@ public record IGMultiblockGUI<S extends IMultiblockState>(
 		return InteractionResult.SUCCESS;
 	}
 
-	public IGMenuTypes.MultiblockContainer<S, ?> menu() {
+	public IGMenuTypes.MultiblockContainer<S, ?> getMenu() {
 		return this.menu;
 	}
 }
