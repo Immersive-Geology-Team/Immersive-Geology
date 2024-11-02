@@ -8,17 +8,23 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MBInventoryUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
+import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
@@ -26,15 +32,19 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurna
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BloomeryShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.AccessibleObject;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -44,14 +54,40 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
     public static final int NUM_SLOTS = 3;
 
     @Override
-    public void tickClient(IMultiblockContext<State> iMultiblockContext) {
+    public void tickClient(IMultiblockContext<State> context) {
+        final Boolean wasActive = context.getLevel().getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(NonMirrorableWithActiveBlock.ACTIVE);
+        if(context.getLevel().shouldTickModulo(2))
+        {
+            if(wasActive) spawnSmoke(context, SMOKE_POSITION);
+        }
+    }
 
+    private static final Vec3 SMOKE_POSITION = new Vec3(0.5,1.5,0.5);
+
+    private double particleXZSpeed()
+    {
+        return ApiUtils.RANDOM.nextDouble(-0.015625, 0.015625);
+    }
+    private void spawnSmoke(IMultiblockContext<BloomeryLogic.State> context, Vec3 position)
+    {
+        final Vec3 absoluteSmokePosition = context.getLevel().toAbsolute(position);
+        context.getLevel().getRawLevel().addAlwaysVisibleParticle(
+                ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                absoluteSmokePosition.x, absoluteSmokePosition.y, absoluteSmokePosition.z,
+                particleXZSpeed(), 0.0625, particleXZSpeed()
+        );
     }
 
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
-        state.furnace.tickServer(context, 0);
+        final IMultiblockLevel level = context.getLevel();
+        final Boolean wasActive = level.getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(NonMirrorableWithActiveBlock.ACTIVE);
+        final boolean active = state.furnace.tickServer(context, 0);
+        if(active != wasActive)
+        {
+            NonMirrorableWithActiveBlock.setActive(level, IGBloomeryMultiblock.INSTANCE, active);
+        }
     }
 
     @Override
