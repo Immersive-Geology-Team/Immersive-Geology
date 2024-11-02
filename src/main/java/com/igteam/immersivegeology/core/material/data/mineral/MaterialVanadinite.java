@@ -43,6 +43,7 @@ public class MaterialVanadinite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",

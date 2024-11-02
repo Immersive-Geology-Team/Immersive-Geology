@@ -47,6 +47,7 @@ public class MaterialCassiterite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",

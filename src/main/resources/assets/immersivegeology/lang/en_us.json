@@ -148,6 +148,7 @@
   "block.immersivegeology.gravityseparator" : "Gravity Ore Separator",
   "block.immersivegeology.chemical_reactor" : "Chemical Reactor",
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
+  "block.immersivegeology.bloomery": "Crude Bloomery",
 
   "fluid.immersivegeology.fluid": "%s",
   "fluid.immersivegeology.fluid_molten": "Molten %s",

@@ -56,6 +56,7 @@ public class MaterialAlumina extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)

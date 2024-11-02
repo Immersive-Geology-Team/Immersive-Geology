@@ -50,6 +50,7 @@ public class MaterialBauxite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(

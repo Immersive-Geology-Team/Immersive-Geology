@@ -46,6 +46,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
 		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
 		registration.addRecipeCategories(new IGSluiceCategory(guiHelper));
+		registration.addRecipeCategories(new IGBloomeryCategory(guiHelper));
 	}
 
 	@Override
@@ -56,6 +57,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.ROTARYKILN, getRecipes(RotaryKilnRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CHEMICAL, getRecipes(ChemicalRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.SLUICE, getRecipes(IndustrialSluiceRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
 	}
 
 
@@ -67,6 +69,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
 		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.TROMMEL.iconStack(), JEIRecipeTypes.SLUICE);
+		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
 	}
 
 	@Override

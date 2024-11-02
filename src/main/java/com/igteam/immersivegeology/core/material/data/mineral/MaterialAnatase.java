@@ -59,6 +59,7 @@ public class MaterialAnatase extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create( "crushed_ore_" +getName() + "_to_dust",

@@ -9,12 +9,9 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
-import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceFuelBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
-import blusunrize.immersiveengineering.common.crafting.serializers.BlastFurnaceFuelSerializer;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
@@ -63,7 +60,7 @@ public class IGRecipes extends RecipeProvider
 	{
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
-		itemRecipes(consumer);
+		manualRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
 	}
@@ -85,7 +82,7 @@ public class IGRecipes extends RecipeProvider
 		}
 	}
 
-	private void itemRecipes(Consumer<FinishedRecipe> consumer)
+	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		// Bronze Hammer
 		Item toolkit_0 = IGRegistrationHolder.getItem.apply("ig_toolkit_0");

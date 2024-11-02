@@ -22,6 +22,7 @@ public class JEIRecipeTypes
 	public static final RecipeType<RevFurnaceRecipe> REVERBERATION = create(IGRecipeTypes.REVFURNACE);
 	public static final RecipeType<CrystallizerRecipe> CRYSTALLIZER = create(IGRecipeTypes.CRYSTALLIZER);
 	public static final RecipeType<RotaryKilnRecipe> ROTARYKILN = create(IGRecipeTypes.ROTARYKILN);
+	public static final RecipeType<BloomeryRecipe> BLOOMERY = create(IGRecipeTypes.BLOOMERY);
 	public static final RecipeType<ChemicalRecipe> CHEMICAL = create(IGRecipeTypes.CHEMICAL_REACTOR);
 
 	private static <T extends Recipe<?>>

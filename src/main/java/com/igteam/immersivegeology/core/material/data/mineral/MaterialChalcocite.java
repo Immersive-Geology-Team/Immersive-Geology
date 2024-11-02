@@ -49,6 +49,7 @@ public class MaterialChalcocite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        super.setupRecipeStages();
         IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
                 ItemCategoryFlags.SLAG, 1,         // Output
