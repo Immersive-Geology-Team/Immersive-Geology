@@ -25,6 +25,12 @@ public class IGTrommelMultiblock extends IGTemplateMultiblock
 	}
 
 	@Override
+	public boolean canFormWithDefaultHammer()
+	{
+		return true;
+	}
+
+	@Override
 	public float getManualScale()
 	{
 		return 12;

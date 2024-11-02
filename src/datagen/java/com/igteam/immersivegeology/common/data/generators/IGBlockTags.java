@@ -1,7 +1,10 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
+import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
@@ -83,6 +86,62 @@ public class IGBlockTags extends BlockTagsProvider
 					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(new ResourceLocation("tfc", id));
 					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(new ResourceLocation("tfc", id));
 					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(new ResourceLocation("tfc", id));
+				}
+			} else if(block.get() instanceof IGGenericBlock genericBlock)
+			{
+				List<MaterialInterface<?>> materials = List.copyOf(genericBlock.getMaterials());
+				boolean hasExistingImplementation = false;
+				for(MaterialInterface<?> material : materials)
+				{
+					Set<IFlagType<?>> flag_sets = material.getFlags();
+					hasExistingImplementation = material.instance().checkExistingImplementation(genericBlock.getFlag());
+					for(IFlagType<?> flag : flag_sets)
+					{
+						if(flag instanceof ModFlags)
+						{
+							useOptionalTag = true;
+						}
+					}
+				}
+
+				if(useOptionalTag)
+				{
+					useOptionalTag = false;
+					String name = genericBlock.getBlock().getDescriptionId().toLowerCase();
+					String id = name.substring(name.lastIndexOf('.')+1);
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
+				}
+				else
+				{
+					if(!hasExistingImplementation) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(genericBlock);
+				}
+			} else if(block.get() instanceof IGSlabBlock slab)
+			{
+				List<MaterialInterface<?>> materials = List.copyOf(slab.getMaterials());
+				boolean hasExistingImplementation = false;
+				for(MaterialInterface<?> material : materials)
+				{
+					Set<IFlagType<?>> flag_sets = material.getFlags();
+					hasExistingImplementation = material.instance().checkExistingImplementation(slab.getFlag());
+					for(IFlagType<?> flag : flag_sets)
+					{
+						if(flag instanceof ModFlags)
+						{
+							useOptionalTag = true;
+						}
+					}
+				}
+
+				if(useOptionalTag)
+				{
+					useOptionalTag = false;
+					String name = slab.getBlock().getDescriptionId().toLowerCase();
+					String id = name.substring(name.lastIndexOf('.')+1);
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
+				}
+				else
+				{
+					if(!hasExistingImplementation) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(slab);
 				}
 			}
 		}

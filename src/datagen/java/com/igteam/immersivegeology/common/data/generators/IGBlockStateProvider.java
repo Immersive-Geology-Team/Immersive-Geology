@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
-import com.igteam.immersivegeology.common.block.multiblocks.IGRotaryKilnMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -19,8 +18,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -41,7 +38,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.client.model.generators.*;
@@ -107,7 +103,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         genericmultiblock("crystallizer");
-        genericActiveMultiblock(IGMultiblockProvider.BLOOMERY.block(), "bloomery");
+        genericActiveNonMirrorMultiblock(IGMultiblockProvider.BLOOMERY.block(), "bloomery");
         genericmultiblock("gravityseparator");
         genericmultiblock("trommel");
         genericmultiblock("chemical_reactor");
@@ -118,7 +114,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblock("ballmill");
     }
 
-    private void genericActiveMultiblock(Supplier<? extends Block> block, String registry_name)
+    private void genericActiveNonMirrorMultiblock(Supplier<? extends Block> block, String registry_name)
     {
         IGLib.IG_LOGGER.info("Generating ["+registry_name+"] Active Multiblock Model Data");
         try

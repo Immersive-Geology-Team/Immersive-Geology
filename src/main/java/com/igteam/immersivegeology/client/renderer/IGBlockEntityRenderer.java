@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.client.renderer;
 
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -32,6 +33,14 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 	protected static void rotateForFacingNoCentering(PoseStack stack, Direction facing)
 	{
 		stack.mulPose(ROTATE_FOR_FACING.get(facing));
+	}
+
+	@Override
+	public int getViewDistance()
+	{
+
+		double distanceMod = IGClientConfig.multiblockSpecialRenderDistanceModifier.get();
+		return (int)(BlockEntityRenderer.super.getViewDistance() * distanceMod);
 	}
 
 	protected static void rotateForFacing(PoseStack stack, Direction facing)

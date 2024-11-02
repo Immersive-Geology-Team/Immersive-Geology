@@ -1,12 +1,13 @@
 package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.common.data.generators.*;
+import com.igteam.immersivegeology.common.data.generators.loot.IGBlockLootProvider;
+import com.igteam.immersivegeology.common.data.generators.loot.IGLootProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -46,7 +47,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGFluidTags(out, lookup, helper));
         generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
-        generator.addProvider(runServer, new LootTableProvider(out, Collections.emptySet(), List.of(new SubProviderEntry(IGBlockLootProvider::new, LootContextParamSets.BLOCK))));
+        generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
 
     }

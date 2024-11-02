@@ -3,6 +3,7 @@ package com.igteam.immersivegeology;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -16,7 +17,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,6 +36,8 @@ public class ImmersiveGeology {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(Type.CLIENT, IGClientConfig.CONFIG_SPEC);
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
         IGContent.modContruction(modEventBus);

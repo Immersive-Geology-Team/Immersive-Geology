@@ -30,6 +30,12 @@ public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
     }
 
     @Override
+    public boolean canFormWithDefaultHammer()
+    {
+        return true;
+    }
+
+    @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
         consumer.accept(new IGClientMultiblockProperties(this, 1.5, 0.5, 1.5));
     }
