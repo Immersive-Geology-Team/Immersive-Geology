@@ -13,7 +13,7 @@ public class MaterialVanilla extends MaterialStone {
     public MaterialVanilla() {
         super();
         this.STONE_FORMATION = StoneFormation.IGNEOUS_EXTRUSIVE;
-        this.name = "stone"; // Special Case as we need to override the deafult name assignment method
+        this.name = "stone"; // Special Case as we need to override the default name assignment method
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.tag.IGTags;
+import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
@@ -32,6 +33,7 @@ public class IGContent {
         IGRegistrationHolder.initialize();
         IGTags.initialize();
         IGRecipeTypes.init();
+        IGWorldGen.init();
     }
 
     public static void registerContainersAndScreens()

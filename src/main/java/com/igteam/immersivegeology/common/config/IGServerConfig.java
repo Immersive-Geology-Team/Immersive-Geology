@@ -8,6 +8,73 @@
 
 package com.igteam.immersivegeology.common.config;
 
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
+import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores;
+import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.OreDistribution;
+import com.igteam.immersivegeology.common.world.MineralEntry;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+
+@EventBusSubscriber(modid = IGLib.MODID, bus = Bus.MOD)
 public class IGServerConfig
 {
+	public static final ForgeConfigSpec CONFIG_SPEC;
+	public static final Ores ORES;
+
+	static {
+		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ORES = new IGServerConfig.Ores(builder);
+		CONFIG_SPEC = builder.build();
+	}
+
+	public static class Ores
+	{
+		public final Map<MineralEntry, OreConfig> ores = new HashMap<>();
+
+		Ores(ForgeConfigSpec.Builder builder)
+		{
+			builder.push("ores");
+			ArrayList<MineralEntry> minerals = MineralEntry.values();
+
+			for(MineralEntry mineral : minerals)
+			{
+				this.ores.put(mineral, new OreConfig(builder, mineral));
+
+			}
+
+			builder.pop();
+		}
+
+		public static class OreConfig
+		{
+
+			public final ForgeConfigSpec.DoubleValue airExposure;
+			public final ForgeConfigSpec.IntValue veinSize;
+			public final ForgeConfigSpec.IntValue minY;
+			public final ForgeConfigSpec.IntValue maxY;
+			public final ForgeConfigSpec.IntValue veinsPerChunk;
+
+			private OreConfig(ForgeConfigSpec.Builder builder, MineralEntry entry)
+			{
+				String name = entry.getName();
+				builder.comment("Ore Generation Config - "+name).push(name);
+				MineralEnum mineral = entry.getMineral();
+				this.airExposure = builder.comment("Chance for ores to NOT generate if they are exposed to air. 0 means ignore air exposure, 1 requires being burried.").defineInRange("air_exposure", 0, 0.0, 1.0);
+				this.veinSize = builder.comment("The maximum size of a vein. Set to 0 to disable generation").defineInRange("vein_size", mineral.getVeinSize(), 0, Integer.MAX_VALUE);
+				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
+
+				builder.pop();
+			}
+		}
+	}
 }

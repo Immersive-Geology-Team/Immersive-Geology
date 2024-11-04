@@ -8,9 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.serialization.Codec;
 
 public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Acanthite(new MaterialAcanthite()),
@@ -56,5 +58,30 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     @Override
     public MaterialMineral instance() {
         return material;
+    }
+
+	public int getVeinSize()
+	{
+        return 24;
+	}
+
+    public int getMinY()
+    {
+        return 32;
+    }
+
+    public int getMaxY()
+    {
+        return 112;
+    }
+
+    public int veinsPerChunk()
+    {
+        return 16;
+    }
+
+    public double airExposure()
+    {
+        return 0.5;
     }
 }

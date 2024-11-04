@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:bloomery_fuel",
-  "input": {
-    "item": "minecraft:charcoal"
-  },
-  "time": 300
-}

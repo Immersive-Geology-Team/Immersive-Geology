@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.common.data.generators.loot.IGBlockLootProvid
 import com.igteam.immersivegeology.common.data.generators.loot.IGLootProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
@@ -49,7 +50,8 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
-
+        for(final DataProvider provider : IGWorldGenerationProvider.makeProviders(out, lookup, helper))
+            generator.addProvider(true, provider);
     }
 
 }
