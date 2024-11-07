@@ -1,0 +1,30 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "type": {
+      "mineral": "Wolframite",
+      "richness": "NORMAL",
+      "stone": "MCAndesite"
+    },
+    "targets": [
+      {
+        "state": {
+          "Name": "immersivegeology:normal_ore_block_wolframite_andesite"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "immersivegeology:normal_ore_block_wolframite_andesite"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

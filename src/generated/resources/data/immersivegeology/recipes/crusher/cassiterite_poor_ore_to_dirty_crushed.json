@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:poor_ore/cassiterite"
+  },
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:dirty_crushed_ore_cassiterite"
+  },
+  "secondaries": [],
+  "time": 100
+}

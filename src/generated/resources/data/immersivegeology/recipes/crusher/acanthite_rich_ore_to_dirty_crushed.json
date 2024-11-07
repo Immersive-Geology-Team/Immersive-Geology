@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:rich_ore/acanthite"
+  },
+  "result": {
+    "count": 5,
+    "item": "immersivegeology:dirty_crushed_ore_acanthite"
+  },
+  "secondaries": [],
+  "time": 100
+}

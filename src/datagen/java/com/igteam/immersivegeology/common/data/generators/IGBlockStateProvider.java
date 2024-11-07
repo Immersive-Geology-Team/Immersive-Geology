@@ -80,6 +80,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        IGLib.IG_LOGGER.info("-===== Starting Registration of Immersive Geology Block States =====-");
         List<? extends Block> igBlocks = IGRegistrationHolder.supplyDeferredBlocks().get();
         for (Block block : igBlocks) {
             if(block instanceof IGBlockType igBlock) {
@@ -112,11 +113,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblockMirror("reverberation_furnace");
         genericmultiblock("centrifuge");
         genericmultiblock("ballmill");
+
+        IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }
 
     private void genericActiveNonMirrorMultiblock(Supplier<? extends Block> block, String registry_name)
     {
-        IGLib.IG_LOGGER.info("Generating ["+registry_name+"] Active Multiblock Model Data");
+        //IGLib.IG_LOGGER.info("Generating ["+registry_name+"] Active Multiblock Model Data");
         try
         {
             IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(registry_name);
@@ -175,13 +178,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
     
     private void genericmultiblock(String registry_name)
     {
-        IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] Multiblock Model Data");
+        //IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] Multiblock Model Data");
         createMultiblock(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), IGRegistrationHolder.getMBTemplate.apply(registry_name));
     }
 
     private void genericmultiblockMirror(String registry_name)
     {
-        IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] with Custom Mirror Multiblock Model Data");
+        //IGLib.IG_LOGGER.info("Generating ["+ registry_name +"] with Custom Mirror Multiblock Model Data");
         testCreateMultiblock(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+"_mirrored.obj"),  (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(registry_name), false);
     }
 
@@ -270,9 +273,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
         IGGenericBlock block = (IGGenericBlock) type;
-
-        logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
-
+        //logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
                                 new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))

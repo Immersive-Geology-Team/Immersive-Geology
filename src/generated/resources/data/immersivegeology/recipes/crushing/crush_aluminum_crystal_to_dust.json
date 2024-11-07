@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/aluminum"
+  },
+  "result": {
+    "item": "immersiveengineering:dust_aluminum"
+  },
+  "secondaries": [],
+  "time": 200
+}

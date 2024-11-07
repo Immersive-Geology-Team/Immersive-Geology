@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/chromium"
+  },
+  "result": {
+    "item": "immersivegeology:dust_chromium"
+  },
+  "secondaries": [],
+  "time": 200
+}

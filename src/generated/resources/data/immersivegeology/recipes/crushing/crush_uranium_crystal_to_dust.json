@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/uranium"
+  },
+  "result": {
+    "item": "immersiveengineering:dust_uranium"
+  },
+  "secondaries": [],
+  "time": 200
+}

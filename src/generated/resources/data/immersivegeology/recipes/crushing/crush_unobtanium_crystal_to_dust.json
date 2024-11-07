@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/unobtanium"
+  },
+  "result": {
+    "item": "immersivegeology:dust_unobtanium"
+  },
+  "secondaries": [],
+  "time": 200
+}

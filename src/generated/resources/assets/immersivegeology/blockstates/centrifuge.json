@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersivegeology:block/multiblock/obj/centrifuge/centrifuge_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersivegeology:block/multiblock/obj/centrifuge/centrifuge_split",
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "immersivegeology:block/multiblock/obj/centrifuge/centrifuge_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersivegeology:block/multiblock/obj/centrifuge/centrifuge_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

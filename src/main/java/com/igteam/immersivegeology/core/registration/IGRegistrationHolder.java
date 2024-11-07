@@ -446,7 +446,9 @@ public class IGRegistrationHolder {
 
     public static void buildMaterialRecipes()
     {
+        IGLib.IG_LOGGER.info("- Building Material Recipes");
         IGLib.getGeologyMaterials().forEach(MaterialInterface::buildRecipe);
+        IGLib.IG_LOGGER.info("- Complete");
     }
 
     protected static class MultiblockBuilder<S extends IMultiblockState> extends MultiblockRegistrationBuilder<S, MultiblockBuilder<S>>{

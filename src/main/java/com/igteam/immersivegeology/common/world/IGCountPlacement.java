@@ -8,12 +8,7 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
-import blusunrize.immersiveengineering.common.world.IECountPlacement;
-import blusunrize.immersiveengineering.common.world.IEWorldGen;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -34,7 +29,7 @@ public class IGCountPlacement extends RepeatingPlacement
 	}
 
 	public PlacementModifierType<?> type() {
-		return IGWorldGen.IG_COUNT_PLACEMENT.get();
+		return null;//IGWorldGen.IG_COUNT_PLACEMENT.get();
 	}
 
 	static {

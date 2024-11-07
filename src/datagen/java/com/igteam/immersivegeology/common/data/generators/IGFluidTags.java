@@ -45,7 +45,7 @@ public class IGFluidTags extends FluidTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		IGLib.IG_LOGGER.info("Starting IG Fluid Tag Registration");
+		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Fluid Tags");
 		for(RegistryObject<Fluid> holder : IGRegistrationHolder.getFluidRegistryMap().values())
 		{
 			if(holder.get() instanceof IGFluid fluid)
@@ -82,5 +82,6 @@ public class IGFluidTags extends FluidTagsProvider
 				}
 			}
 		}
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Fluid Tags");
 	}
 }

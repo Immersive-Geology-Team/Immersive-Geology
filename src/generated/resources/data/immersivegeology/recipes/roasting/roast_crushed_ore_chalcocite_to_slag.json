@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:crushed_ore/chalcocite"
+  },
+  "result": {
+    "item": "immersivegeology:slag_chalcocite"
+  },
+  "time": 1000,
+  "waste": 200
+}

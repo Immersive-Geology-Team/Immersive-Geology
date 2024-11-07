@@ -39,7 +39,7 @@ public class IGBlockTags extends BlockTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		IGLib.IG_LOGGER.info("IG Block Tags");
+		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Block Tags");
 		boolean useOptionalTag = false;
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
@@ -154,5 +154,7 @@ public class IGBlockTags extends BlockTagsProvider
 				}
 			}
 		}
+
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");
 	}
 }

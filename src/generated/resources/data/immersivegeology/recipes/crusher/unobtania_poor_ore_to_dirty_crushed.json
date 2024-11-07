@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:poor_ore/unobtania"
+  },
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:dirty_crushed_ore_unobtania"
+  },
+  "secondaries": [],
+  "time": 100
+}

@@ -38,6 +38,8 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 	@Override
 	protected void registerModels()
 	{
+		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Dynamic Multiblock Model Parts");
+
 		getBuilder(CoreDrillRenderer.DRILL_BIT_NAME)
 				.customLoader(ObjModelBuilder::begin)
 				.modelLocation(rl("models/block/multiblock/obj/coredrill/coredrill_bit.obj"))
@@ -73,6 +75,9 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 
 		for(Entry<Block, ModelFile> multiblock : multiblocks.unsplitModels.entrySet())
 			withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
+
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Dynamic Multiblock Model Parts");
+
 	}
 
 	public static ResourceLocation rl(String path) {

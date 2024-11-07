@@ -33,6 +33,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
@@ -43,7 +44,10 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
+import net.minecraftforge.registries.holdersets.AnyHolderSet;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -58,34 +62,38 @@ public class IGWorldGenerationProvider
 			PackOutput output, CompletableFuture<Provider> vanillaRegistries, ExistingFileHelper exFiles
 	)
 	{
+		IGLib.IG_LOGGER.info("Making Providers for IGWorldGenerationProvider");
+		// Create a map to hold the features you want to register
 		final Map<MineralEntry, FeatureRegistration> oreFeatures = new HashMap<>();
-		for(MineralEntry type : MineralEntry.VALUES)
-		{
+		for (MineralEntry type : MineralEntry.VALUES) {
+			// You can also add biome arguments here if necessary
 			final FeatureRegistration typeReg = new FeatureRegistration(IGLib.rl(type.getName()));
-			IGLib.IG_LOGGER.info("Name of Registration: {}", type.getName());
 			oreFeatures.put(type, typeReg);
 		}
 
-		final Registrations registrations = new Registrations(
-				oreFeatures,
-				new FeatureRegistration(IGLib.rl("mineral_veins"), null)
-		);
+		// Create the registry builder to register features, placed features, and biome modifiers
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, ctx -> bootstrapConfiguredFeatures(ctx, registrations));
-		registryBuilder.add(Registries.PLACED_FEATURE, ctx -> bootstrapPlacedFeatures(ctx, registrations));
-		return List.of(
-				new DatapackBuiltinEntriesProvider(output, vanillaRegistries, registryBuilder, Set.of(IGLib.MODID))
-		);
+
+		// Register ConfiguredFeatures
+		registryBuilder.add(Registries.CONFIGURED_FEATURE, ctx -> bootstrapConfiguredFeatures(ctx, oreFeatures));
+		// Register PlacedFeatures
+		registryBuilder.add(Registries.PLACED_FEATURE, ctx -> bootstrapPlacedFeatures(ctx, oreFeatures));
+		// Register BiomeModifiers
+		registryBuilder.add(Keys.BIOME_MODIFIERS, ctx -> bootstrapBiomeModifiers(ctx, oreFeatures));
+
+		IGLib.IG_LOGGER.info("Finished");
+		// Return the list of providers with the DatapackBuiltinEntriesProvider
+		return List.of(new DatapackBuiltinEntriesProvider(output, vanillaRegistries, registryBuilder, Set.of(IGLib.MODID)));
 	}
 
 	private static void bootstrapConfiguredFeatures(
-			BootstapContext<ConfiguredFeature<?, ?>> ctx, Registrations registrations
-	)
-	{
+			BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures
+	) {
 		final TagMatchTest replaceDeepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 		final TagMatchTest replaceStone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
-		for(final Entry<MineralEntry, FeatureRegistration> entry : registrations.oreFeatures.entrySet())
-		{
+
+		// Register all configured features for the ores
+		for (final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet()) {
 			final MineralEnum mineral = entry.getKey().getMineral();
 			final OreRichness richness = entry.getKey().getRichness();
 			final StoneEnum stone = entry.getKey().getStone();
@@ -95,81 +103,79 @@ public class IGWorldGenerationProvider
 					OreConfiguration.target(replaceDeepslate, mineral.getOreBlock(stone, richness).defaultBlockState())
 			);
 
+			// Register the configured feature
 			entry.getValue().registerConfigured(
 					ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(targetList, entry.getKey()))
 			);
-
 		}
 	}
 
-	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Registrations registrations)
-	{
-		for(final Entry<MineralEntry, FeatureRegistration> entry : registrations.oreFeatures.entrySet())
-		{
+	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures) {
+		// Register all placed features for the ores
+		for (final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet()) {
 			final MineralEntry type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
 					InSquarePlacement.spread(),
 					new IGCountPlacement(type)
 			);
+			// Register the placed feature
 			entry.getValue().registerPlaced(ctx, placements);
 		}
-		registrations.mineralVeins.registerPlaced(ctx, List.of());
 	}
 
+	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures) {
+		final HolderGetter<Biome> biomeReg = ctx.lookup(Registries.BIOME);
+		// Register all biome modifiers for the features
+		for (final FeatureRegistration entry : oreFeatures.values()) {
+			final HolderSet<Biome> biomes;
+			if (entry.inBiomes != null) {
+				biomes = biomeReg.getOrThrow(entry.inBiomes);
+			} else {
+				biomes = new AnyHolderSet<>(new DummyRegistryLookup<>(biomeReg, Registries.BIOME));
+			}
+			final AddFeaturesBiomeModifier modifier = new AddFeaturesBiomeModifier(
+					biomes, HolderSet.direct(entry.placed), Decoration.UNDERGROUND_ORES
+			);
+			ctx.register(ResourceKey.create(Keys.BIOME_MODIFIERS, entry.name), modifier);
+		}
+	}
 
-	private static class FeatureRegistration
-	{
+	// Feature registration class
+	private static class FeatureRegistration {
 		public Reference<ConfiguredFeature<?, ?>> configured;
 		public Reference<PlacedFeature> placed;
 		public final ResourceLocation name;
 		@Nullable
 		public final TagKey<Biome> inBiomes;
 
-		private FeatureRegistration(ResourceLocation name)
-		{
-			this(name, BiomeTags.IS_OVERWORLD);
+		private FeatureRegistration(ResourceLocation name) {
+			this(name, BiomeTags.IS_OVERWORLD);  // Ensure that BiomeTags.IS_OVERWORLD is not null
 		}
 
-		private FeatureRegistration(ResourceLocation name, @Nullable TagKey<Biome> inBiomes)
-		{
-			this.name = name;
+		private FeatureRegistration(ResourceLocation name, @Nullable TagKey<Biome> inBiomes) {
+			this.name = name != null ? name : new ResourceLocation("default:feature_name");
 			this.inBiomes = inBiomes;
 		}
 
-		private void registerConfigured(
-				BootstapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured
-		)
-		{
-			this.configured = ctx.register(ResourceKey.create(Registries.CONFIGURED_FEATURE, this.name), configured);
+		private void registerConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured) {
+			if (configured != null) {
+				this.configured = ctx.register(ResourceKey.create(Registries.CONFIGURED_FEATURE, this.name), configured);
+			} else {
+				IGLib.IG_LOGGER.info("ConfiguredFeature is null for {}",this.name);
+			}
 		}
 
-		private void registerPlaced(BootstapContext<PlacedFeature> ctx, List<PlacementModifier> placement)
-		{
-			this.placed = ctx.register(
-					ResourceKey.create(Registries.PLACED_FEATURE, this.name), new PlacedFeature(configured, placement)
-			);
-		}
-	}
-
-	private record Registrations(
-			List<FeatureRegistration> allFeatures,
-			Map<MineralEntry, FeatureRegistration> oreFeatures,
-			FeatureRegistration mineralVeins
-	)
-	{
-		public Registrations(
-				Map<MineralEntry, FeatureRegistration> oreFeatures, FeatureRegistration mineralVeins
-		)
-		{
-			this(
-					Util.make(new ArrayList<>(oreFeatures.values()), l -> l.add(mineralVeins)),
-					oreFeatures,
-					mineralVeins
-			);
+		private void registerPlaced(BootstapContext<PlacedFeature> ctx, List<PlacementModifier> placement) {
+			if (placement != null) {
+				this.placed = ctx.register(ResourceKey.create(Registries.PLACED_FEATURE, this.name), new PlacedFeature(configured, placement));
+			} else {
+				IGLib.IG_LOGGER.info("PlacementModifier is null for {}",this.name);
+			}
 		}
 	}
 
+	// Helper class for handling registry lookups
 	private record DummyRegistryLookup<T>(
 			HolderGetter<T> getter, ResourceKey<? extends Registry<? extends T>> key
 	) implements RegistryLookup<T>

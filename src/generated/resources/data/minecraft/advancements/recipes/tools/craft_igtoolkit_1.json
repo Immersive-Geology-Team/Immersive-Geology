@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stainless_steel_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:ingot_stainlesssteel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:craft_igtoolkit_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stainless_steel_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:craft_igtoolkit_1"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "ig_tools",
+  "ingredients": [
+    {
+      "item": "immersivegeology:storage_block_refractory_brick"
+    },
+    {
+      "tag": "forge:plates/bronze"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:storage_block_reinforced_refractory_brick"
+  }
+}

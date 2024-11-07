@@ -58,24 +58,24 @@ public class IGRecipes extends RecipeProvider
 	@Override
 	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Recipes");
 		multiblockRecipes(consumer);
 		tfcCompatRecipes(consumer);
 		manualRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Recipes");
 	}
 
 	private void methodRecipes(Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("- Method Recipe Registration");
 		for(MaterialInterface<?> entry : IGLib.getGeologyMaterials())
 		{
-			IGLib.IG_LOGGER.info("Entry: {}", entry.getName());
 			for(IGRecipeStage stage : entry.getStageSet())
 			{
-				IGLib.IG_LOGGER.info("Stage: {}", stage.getStageName());
 				for(IGRecipeMethod recipe_method : stage.getMethods())
 				{
-					IGLib.IG_LOGGER.info("Building Method {}", recipe_method.getMethod().getMethodName());
 					if(!recipe_method.build(consumer)) IGLib.IG_LOGGER.warn("Failed to build Recipe Method [{}] for material [{}]", recipe_method.getMethod().getMethodName(), entry.getName());
 				}
 			}
@@ -84,6 +84,7 @@ public class IGRecipes extends RecipeProvider
 
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
 		// Bronze Hammer
 		Item toolkit_0 = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_0)
@@ -121,6 +122,12 @@ public class IGRecipes extends RecipeProvider
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("- Terra Firma Craft Recipe Registration");
+		if(!ModFlags.TFC.isStrictlyLoaded())
+		{
+			IGLib.IG_LOGGER.info("- SKIPPED [TFC Not Loaded]");
+			return;
+		}
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
 			if(block.get() instanceof IGOreBlock oreBlock)
@@ -132,6 +139,7 @@ public class IGRecipes extends RecipeProvider
 
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("- Multiblock Test Recipe Registration");
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {

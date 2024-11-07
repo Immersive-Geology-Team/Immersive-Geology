@@ -7,16 +7,8 @@
  */
 
 package com.igteam.immersivegeology.common.world;
-
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
-import blusunrize.immersiveengineering.common.world.IEOreFeature;
-import blusunrize.immersiveengineering.common.world.IEOreFeature.IEOreFeatureConfig;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -25,7 +17,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,13 +35,11 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	public record IGOreFeatureConfig(List<TargetBlockState> targetList, MineralEntry type) implements FeatureConfiguration
 	{
 		public static final Codec<IGOreFeatureConfig> CODEC = RecordCodecBuilder.create((app) -> {
-			return app.group(Codec.list(TargetBlockState.CODEC).fieldOf("targets").forGetter((cfg) -> {
-				return cfg.targetList;
-			}), MineralEntry.CODEC.fieldOf("type").forGetter((cfg) -> {
-				return cfg.type;
-			})).apply(app, IGOreFeatureConfig::new);
+			return app.group(
+					Codec.list(TargetBlockState.CODEC).fieldOf("targets").forGetter((cfg) -> cfg.targetList),
+					MineralEntry.CODEC.fieldOf("type").forGetter((cfg) -> cfg.type)
+			).apply(app, IGOreFeatureConfig::new);
 		});
-
 
 		public int getSize() {
 			return IGServerConfig.ORES.ores.get(type).veinSize.get();

@@ -45,6 +45,8 @@ public class IGItemTags extends ItemTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
+		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Item Tags");
+
 		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_0"));
 		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_1"));
 		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
@@ -93,6 +95,7 @@ public class IGItemTags extends ItemTagsProvider
 				}
 			}
 		}
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Fluid Tags");
 	}
 
 	boolean useOptionalTag = false;

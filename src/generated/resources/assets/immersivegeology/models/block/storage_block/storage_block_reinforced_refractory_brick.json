@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/block",
+  "textures": {
+    "all": "immersivegeology:block/static_block/reinforced_refractory_brick",
+    "particle": "immersivegeology:block/static_block/reinforced_refractory_brick"
+  }
+}

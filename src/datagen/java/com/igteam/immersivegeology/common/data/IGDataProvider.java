@@ -29,13 +29,14 @@ public class IGDataProvider {
     public static Logger log = LogManager.getLogger(IGLib.MODID + "/DataGenerator");
 
     @SubscribeEvent
-    public static void generate(GatherDataEvent event){
+    public static void generate(GatherDataEvent event)
+    {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
         PackOutput out = generator.getPackOutput();
         final var lookup = event.getLookupProvider();
         EXISTING_HELPER = helper;
-        
+
         log.info("-===== Starting Data Generation for Immersive Geology =====-");
         boolean runServer = event.includeServer();
 
@@ -50,8 +51,12 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
+
+        // God I hate this system. ~Muddykat
         for(final DataProvider provider : IGWorldGenerationProvider.makeProviders(out, lookup, helper))
-            generator.addProvider(true, provider);
+        {
+            generator.addProvider(runServer, provider);
+        }
     }
 
 }

@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravityseparator",
+  "byproduct": {
+    "item": "immersivegeology:dust_osmium"
+  },
+  "byproduct_chance": 0.2,
+  "input": {
+    "tag": "forge:compound_dust/platinum"
+  },
+  "result": {
+    "item": "immersivegeology:dust_platinum"
+  },
+  "time": 60,
+  "water": 100
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:item/base/ig_base_item",
+  "textures": {
+    "layer0": "immersivegeology:item/greyscale/rock/poor_rock",
+    "layer1": "immersivegeology:item/greyscale/rock/poor_ore"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "type": {
+      "mineral": "Smithsonite",
+      "richness": "RICH",
+      "stone": "Chert"
+    },
+    "targets": [
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_rich_ore_block_smithsonite_chert"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_rich_ore_block_smithsonite_chert"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

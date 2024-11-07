@@ -1,0 +1,30 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "type": {
+      "mineral": "Cobaltite",
+      "richness": "RICH",
+      "stone": "Schist"
+    },
+    "targets": [
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_rich_ore_block_cobaltite_schist"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_rich_ore_block_cobaltite_schist"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

@@ -8,12 +8,7 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.OreDistribution;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
-import blusunrize.immersiveengineering.common.world.IEWorldGen;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -21,7 +16,6 @@ import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
-import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraftforge.common.util.Lazy;
 
 public class IGHeightProvider extends HeightProvider
@@ -49,7 +43,7 @@ public class IGHeightProvider extends HeightProvider
 	}
 
 	public HeightProviderType<?> getType() {
-		return IGWorldGen.IG_HEIGHT_PROVIDER.get();
+		return null;//IGWorldGen.IG_HEIGHT_PROVIDER.get();
 	}
 
 	static {

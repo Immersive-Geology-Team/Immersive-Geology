@@ -44,6 +44,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 	@Override
 	protected void registerModels()
 	{
+		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Complex Item Models");
 		generateCrystallizerModel("crystallizer", IGMultiblockProvider.CRYSTALLIZER.block());
 		generateMultiblockModel("coredrill", IGMultiblockProvider.COREDRILL.block());
 		generateSeparatorModel("gravityseparator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
@@ -52,6 +53,8 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
 		generateMultiblockModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
+
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Complex Item Models");
 	}
 
 	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale){

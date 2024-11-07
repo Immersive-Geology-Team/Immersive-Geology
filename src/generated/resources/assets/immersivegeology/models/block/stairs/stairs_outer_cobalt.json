@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/stairs_outer",
+  "textures": {
+    "all": "immersivegeology:block/colored/cobalt/storage_block"
+  }
+}

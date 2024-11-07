@@ -147,7 +147,6 @@ public interface MaterialHelper {
 
     default void buildRecipe()
     {
-        IGLib.IG_LOGGER.debug("Building {} Recipe Stages", getName());
         setupRecipeStages();
         IGStageProvider.add(this, getMaterialStageSet());
     };

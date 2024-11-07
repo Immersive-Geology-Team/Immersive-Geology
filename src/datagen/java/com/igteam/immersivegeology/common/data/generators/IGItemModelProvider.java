@@ -1,7 +1,5 @@
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.data.models.IEOBJBuilder;
-import blusunrize.immersiveengineering.data.models.TRSRModelBuilder;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
@@ -11,7 +9,6 @@ import com.igteam.immersivegeology.common.item.IGGenericOreItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -21,20 +18,12 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.joml.Vector3f;
 import org.slf4j.Logger;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class IGItemModelProvider extends ItemModelProvider {
 
@@ -46,6 +35,8 @@ public class IGItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+
+        IGLib.IG_LOGGER.info("-===== Starting Registration of Immersive Geology Simple Item Models =====-");
         List<? extends Item> itemList = IGRegistrationHolder.supplyDeferredItems().get();
 
         for (Item item : itemList) {
@@ -65,6 +56,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                 generateGenericItem(i);
             }
         }
+        IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Simple Item Models =====-");
     }
 
     private void generateGenericItem(IGFlagItem item){
@@ -97,7 +89,7 @@ public class IGItemModelProvider extends ItemModelProvider {
             withExistingParent(itemLocation, parentLocation).texture("layer0", new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + flag_name + "_rock"));
             getBuilder(itemLocation).texture("layer1", new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" +item.getFlag().getName()));
         } catch (Exception ex) {
-            logger.error("Attempted to generate a texture for the item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
+            logger.error("Attempted to generate a texture for the ore item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error(ex.getMessage());
         }
     }

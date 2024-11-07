@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/zirconium"
+  },
+  "result": {
+    "item": "immersivegeology:dust_zirconium"
+  },
+  "secondaries": [],
+  "time": 200
+}

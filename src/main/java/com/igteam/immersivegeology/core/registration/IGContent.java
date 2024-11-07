@@ -32,8 +32,8 @@ public class IGContent {
         IGMultiblockProvider.forceClassLoad();
         IGRegistrationHolder.initialize();
         IGTags.initialize();
-        IGRecipeTypes.init();
         IGWorldGen.init();
+        IGRecipeTypes.init();
     }
 
     public static void registerContainersAndScreens()

@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:normal_ore/osmium"
+  },
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:dirty_crushed_ore_osmium"
+  },
+  "secondaries": [],
+  "time": 100
+}

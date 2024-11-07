@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravityseparator",
+  "byproduct": {
+    "item": "minecraft:gravel"
+  },
+  "byproduct_chance": 0.5,
+  "input": {
+    "tag": "forge:dirty_crushed_ore/pyrolusite"
+  },
+  "result": {
+    "tag": "forge:crushed_ore/pyrolusite"
+  },
+  "time": 100,
+  "water": 100
+}

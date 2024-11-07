@@ -62,7 +62,6 @@ public class IndustrialSluiceRecipeBuilder extends IEFinishedRecipe<IndustrialSl
 
 	public IndustrialSluiceRecipeBuilder setByproducts(NonNullList<StackWithChance> byproducts)
 	{
-		IGLib.IG_LOGGER.info("Stack checker ====== {}", byproducts.size());
 		return this.addWriter(obj -> writeByproductsToJson(obj, byproducts));
 	}
 

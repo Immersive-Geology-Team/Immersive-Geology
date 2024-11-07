@@ -1,0 +1,30 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "type": {
+      "mineral": "Cassiterite",
+      "richness": "POOR",
+      "stone": "MarsStone"
+    },
+    "targets": [
+      {
+        "state": {
+          "Name": "immersivegeology:ad_astra_poor_ore_block_cassiterite_mars_stone"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "immersivegeology:ad_astra_poor_ore_block_cassiterite_mars_stone"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "type": {
+      "mineral": "Hubnerite",
+      "richness": "NORMAL",
+      "stone": "Andesite"
+    },
+    "targets": [
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_normal_ore_block_hubnerite_andesite"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "immersivegeology:tfc_normal_ore_block_hubnerite_andesite"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

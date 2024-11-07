@@ -24,8 +24,8 @@ public class MaterialMineral extends GeologyMaterial {
     @Override
     public void setupRecipeStages()
     {
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
+        //IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
+        //IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

@@ -1,0 +1,24 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "forge:dusts/coal_coke"
+    },
+    {
+      "tag": "forge:dusts/cryolite"
+    }
+  ],
+  "energy": 10240,
+  "input": {
+    "tag": "forge:metal_oxide/aluminum"
+  },
+  "results": [
+    {
+      "item": "immersiveengineering:ingot_aluminum"
+    }
+  ],
+  "slag": {
+    "item": "immersivegeology:dust_cryolite"
+  },
+  "time": 200
+}

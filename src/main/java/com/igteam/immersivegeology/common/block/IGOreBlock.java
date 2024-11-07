@@ -9,12 +9,14 @@
 package com.igteam.immersivegeology.common.block;
 
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.mojang.serialization.Codec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
@@ -57,6 +59,7 @@ public class IGOreBlock extends IGGenericBlock {
         NORMAL,
         RICH;
 
+        public static final Codec<OreRichness> CODEC = Codec.STRING.xmap(OreRichness::valueOf, Enum::name);
         public ItemCategoryFlags toCategory()
         {
             return this == POOR ? ItemCategoryFlags.POOR_ORE : (this == NORMAL ? ItemCategoryFlags.NORMAL_ORE : ItemCategoryFlags.RICH_ORE);

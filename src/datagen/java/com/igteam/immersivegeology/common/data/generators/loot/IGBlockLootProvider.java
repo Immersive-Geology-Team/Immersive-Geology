@@ -68,12 +68,15 @@ public class IGBlockLootProvider implements LootTableSubProvider
 	@Override
 	public void generate(BiConsumer<ResourceLocation, LootTable.Builder> out)
 	{
+		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Block Loot");
 		this.out = out;
 
 		registerOres();
 		registerMultiblocks();
 		registerSlabs();
 		registerAllRemainingAsDefault();
+
+		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Loot");
 	}
 
 	private void registerOres()

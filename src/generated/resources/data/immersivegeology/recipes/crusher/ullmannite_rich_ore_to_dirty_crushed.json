@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:rich_ore/ullmannite"
+  },
+  "result": {
+    "count": 5,
+    "item": "immersivegeology:dirty_crushed_ore_ullmannite"
+  },
+  "secondaries": [],
+  "time": 100
+}

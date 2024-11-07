@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialG
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.serialization.Codec;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //===== Terra Firma Craft =====\\
@@ -61,6 +62,8 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MercuryStone(new MaterialMercuryStone()),
     VenusStone(new MaterialVenusStone()),
     GlacioStone(new MaterialGlacioStone());
+
+    public static final Codec<StoneEnum> CODEC = Codec.STRING.xmap(StoneEnum::valueOf, Enum::name);
 
     private final MaterialStone material;
     StoneEnum(MaterialStone m){

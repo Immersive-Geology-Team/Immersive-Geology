@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:sulfuricacid"
+  },
+  "fluidInputB": {
+    "amount": 250,
+    "tag": "forge:brine"
+  },
+  "fluidResult": {
+    "amount": 250,
+    "fluid": "minecraft:water"
+  },
+  "itemInput": {
+    "item": "immersivegeology:dust_vanadinite"
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_vanadium"
+  },
+  "time": 200
+}

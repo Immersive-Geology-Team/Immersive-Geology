@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "tag": "forge:crystal/manganese"
+  },
+  "result": {
+    "item": "immersivegeology:dust_manganese"
+  },
+  "secondaries": [],
+  "time": 200
+}

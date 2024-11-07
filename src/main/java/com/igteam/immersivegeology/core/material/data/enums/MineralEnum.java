@@ -51,6 +51,8 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Wolframite(new MaterialWolframite()),
     Zircon(new MaterialZircon());
 
+    public static final Codec<MineralEnum> CODEC = Codec.STRING.xmap(MineralEnum::valueOf, Enum::name);
+
     private final MaterialMineral material;
     MineralEnum(MaterialMineral m){
         this.material = m;

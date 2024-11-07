@@ -11,28 +11,31 @@ package com.igteam.immersivegeology.common.world;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.mojang.serialization.Codec;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.ArrayList;
 
-public class MineralEntry
-{
+public class MineralEntry {
 	MineralEnum mineral;
 	StoneEnum stone;
 	OreRichness richness;
 
-	public MineralEntry(MineralEnum mineral, StoneEnum stone, OreRichness richness)
-	{
+	public MineralEntry(MineralEnum mineral, StoneEnum stone, OreRichness richness) {
 		this.mineral = mineral;
 		this.stone = stone;
 		this.richness = richness;
 	}
 
 	public static final ArrayList<MineralEntry> VALUES = values();
-	public static final Codec<MineralEntry> CODEC = Codec.INT.xmap(
-			VALUES::get,
-			VALUES::indexOf
-	);
+
+	// Define the Codec for MineralEntry
+	public static final Codec<MineralEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			MineralEnum.CODEC.fieldOf("mineral").forGetter(MineralEntry::getMineral),
+			StoneEnum.CODEC.fieldOf("stone").forGetter(MineralEntry::getStone),
+			OreRichness.CODEC.fieldOf("richness").forGetter(MineralEntry::getRichness)
+	).apply(instance, MineralEntry::new));
 
 	public static ArrayList<MineralEntry> values()
 	{
@@ -51,7 +54,6 @@ public class MineralEntry
 					for(OreRichness richness : richnessValues)
 					{
 						MineralEntry entry = new MineralEntry(mineral, stone, richness);
-						if(entries.stream().anyMatch(e -> e.getName().equals(entry.getName()))) continue;
 						entries.add(entry);
 					}
 				}
@@ -63,7 +65,9 @@ public class MineralEntry
 
 	public String getName()
 	{
-		return this.mineral.getName().toLowerCase() + "_" + this.stone.getName().toLowerCase() + "_" + this.richness.name().toLowerCase();
+		String className = stone.instance().getClass().getSimpleName().toLowerCase();
+		String stone_name = className.replace("material", "");
+		return this.mineral.getName().toLowerCase() + "_" + stone_name + "_" + this.richness.name().toLowerCase();
 	}
 
 	public MineralEnum getMineral()
