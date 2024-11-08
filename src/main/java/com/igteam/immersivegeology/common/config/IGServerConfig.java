@@ -63,19 +63,16 @@ public class IGServerConfig
 
 	public static class Ores
 	{
-		public final Map<MineralEntry, OreConfig> ores = new HashMap<>();
-
-		public MineralCombination combination = new MineralCombination(List.of(MineralEnum.values()), List.of(StoneEnum.values()));
-
+		public final Map<MineralEnum, OreConfig> ores = new HashMap<>();
 		Ores(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("ores");
 
-			for(MineralEntry entry : combination.entries())
+			for(MineralEnum num : MineralEnum.values())
 			{
 				try
 				{
-					this.ores.put(entry, new OreConfig(builder, entry));
+					this.ores.put(num, new OreConfig(builder, num));
 				} catch(Exception ex)
 				{
 					IGLib.IG_LOGGER.info("Exception In Config Creation? {}", ex.getMessage());
@@ -93,18 +90,17 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue minY;
 			public final ForgeConfigSpec.IntValue maxY;
 			public final ForgeConfigSpec.IntValue veinsPerChunk;
+			public final ForgeConfigSpec.IntValue generationChance;
 
-			private OreConfig(ForgeConfigSpec.Builder builder, MineralEntry entry)
+			private OreConfig(ForgeConfigSpec.Builder builder, MineralEnum mineral)
 			{
-				String name = entry.getName();
-				builder.comment("Ore Generation Config - "+name).push(name);
-				MineralEnum mineral = entry.getMineral();
+				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
 				this.airExposure = builder.comment("Chance for ores to NOT generate if they are exposed to air. 0 means ignore air exposure, 1 requires being burried.").defineInRange("air_exposure", 0, 0.0, 1.0);
 				this.veinSize = builder.comment("The maximum size of a vein. Set to 0 to disable generation").defineInRange("vein_size", mineral.getVeinSize(), 0, Integer.MAX_VALUE);
 				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
-
+				this.generationChance = builder.comment("").defineInRange("generation_chance",mineral.rarity(), 0, 100);
 				builder.pop();
 			}
 		}

@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.world;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -26,16 +27,15 @@ import java.util.Objects;
 
 public class IGHeightProvider extends HeightProvider
 {
-	public static final Codec<IGHeightProvider> CODEC = MineralEntry.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
+	public static final Codec<IGHeightProvider> CODEC = MineralEnum.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
 
-	private final MineralEntry entry;
+	private final MineralEnum entry;
 	private final Lazy<HeightProvider> internalProvider;
 
-	public IGHeightProvider(MineralEntry entry) {
+	public IGHeightProvider(MineralEnum entry) {
 		this.entry = entry;
 		this.internalProvider = Lazy.of(() -> {
-			Entry<MineralEntry, OreConfig> entry_matched = IGServerConfig.ORES.ores.entrySet().stream().filter((e -> e.getKey().getName().equalsIgnoreCase(entry.getName()))).findFirst().get();
-			IGServerConfig.Ores.OreConfig config = entry_matched.getValue();
+			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			VerticalAnchor vaMin = (pContext) -> {
 				return (Integer)config.minY.get();
 			};

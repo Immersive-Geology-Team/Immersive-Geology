@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:sphalerite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Sphalerite"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Sphalerite"
+    }
+  ]
+}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "immersivegeology:cassiterite_conglomerate",
-  "step": "underground_ores"
-}

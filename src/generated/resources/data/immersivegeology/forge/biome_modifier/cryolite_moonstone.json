@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "immersivegeology:cryolite_moonstone",
-  "step": "underground_ores"
-}

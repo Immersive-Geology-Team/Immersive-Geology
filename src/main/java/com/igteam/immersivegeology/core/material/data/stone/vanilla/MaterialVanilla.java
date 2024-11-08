@@ -39,13 +39,9 @@ public class MaterialVanilla extends MaterialStone {
     @Override
     public List<TargetBlockState> getTargets(MineralEnum mineral)
     {
-        IGLib.IG_LOGGER.info("Is Acceptable? {}", mineral.instance().acceptableStoneType(this));
         BlockState poor = mineral.getOreBlock(this, OreRichness.POOR).defaultBlockState();
         BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).defaultBlockState();
         BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).defaultBlockState();
-        return List.of(
-                OreConfiguration.target(new TagMatchTest(Blocks.STONE), poor),
-                OreConfiguration.target(new TagMatchTest(Blocks.STONE), normal),
-                OreConfiguration.target(new TagMatchTest(Blocks.STONE), rich));
+        return List.of(OreConfiguration.target(new TagMatchTest(Blocks.STONE), normal));
     }
 }

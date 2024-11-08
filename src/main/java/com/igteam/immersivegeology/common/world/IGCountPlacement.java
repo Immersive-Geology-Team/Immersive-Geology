@@ -8,28 +8,32 @@
 
 package com.igteam.immersivegeology.common.world;
 
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.placement.RepeatingPlacement;
 
 import java.util.Map.Entry;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class IGCountPlacement extends RepeatingPlacement
 {
 	public static final Codec<IGCountPlacement> CODEC;
-	private final MineralEntry type;
+	private final MineralEnum type;
 
-	public IGCountPlacement(MineralEntry type) {
+	public IGCountPlacement(MineralEnum type) {
 		this.type = type;
 	}
 
 	protected int count(RandomSource source, BlockPos pos) {
-		Entry<MineralEntry, OreConfig> entry_matched = IGServerConfig.ORES.ores.entrySet().stream().filter((e -> e.getKey().getName().equalsIgnoreCase(type.getName()))).findFirst().get();
-		IGServerConfig.Ores.OreConfig config = entry_matched.getValue();
+		IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(type);
 		return config.veinsPerChunk.get();
 	}
 
@@ -38,7 +42,7 @@ public class IGCountPlacement extends RepeatingPlacement
 	}
 
 	static {
-		CODEC = MineralEntry.CODEC.xmap(IGCountPlacement::new, (p) -> {
+		CODEC = MineralEnum.CODEC.xmap(IGCountPlacement::new, (p) -> {
 			return p.type;
 		});
 	}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "immersivegeology:vanadinite_venusstone",
-  "step": "underground_ores"
-}

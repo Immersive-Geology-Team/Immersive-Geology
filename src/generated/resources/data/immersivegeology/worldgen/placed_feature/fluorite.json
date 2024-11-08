@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:fluorite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Fluorite"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Fluorite"
+    }
+  ]
+}

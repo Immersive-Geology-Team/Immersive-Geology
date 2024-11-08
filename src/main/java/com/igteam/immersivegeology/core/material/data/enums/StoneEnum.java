@@ -17,8 +17,12 @@ import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
@@ -72,6 +76,23 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     StoneEnum(MaterialStone m){
         this.material = m;
     }
+
+    public static StoneEnum selectWorldState(BlockState stoneState)
+    {
+        String stoneName = capitalizeFirstLetter(stoneState.getBlock().getName().getString().toLowerCase());
+        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
+        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
+        return null;
+    }
+
+    private static String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input; // Return input as is if it's null or empty
+        }
+        // Convert first character to uppercase and concatenate with the rest of the string
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+
     @Override
     public MaterialStone instance() {
         return material;
@@ -81,4 +102,9 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
 	{
         return instance().getTargets(mineral);
 	}
+
+    public boolean isWorldState(BlockState stoneState)
+    {
+        return stoneState.getBlock().getName().getString().equalsIgnoreCase(material.getName());
+    }
 }

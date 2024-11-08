@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:pyrite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Pyrite"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Pyrite"
+    }
+  ]
+}

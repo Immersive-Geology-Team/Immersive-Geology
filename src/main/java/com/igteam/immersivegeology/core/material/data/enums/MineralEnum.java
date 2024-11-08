@@ -79,11 +79,16 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
 
     public int veinsPerChunk()
     {
-        return 16;
+        return 1;
     }
 
     public double airExposure()
     {
         return 0.5;
+    }
+
+    public int rarity()
+    {
+        return 50;
     }
 }

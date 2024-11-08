@@ -14,6 +14,7 @@ public class MaterialAndesite extends MaterialTFCRawStone {
 
     public MaterialAndesite() {
         super();
+        this.name="andesite";
         this.STONE_FORMATION = StoneFormation.IGNEOUS_EXTRUSIVE;
     }
 

@@ -69,8 +69,8 @@ public class IGWorldGenerationProvider
 		IGLib.IG_LOGGER.info("Generating Data for IGWorldGenerationProvider");
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
 
-		final Map<MineralEntry, FeatureRegistration> mineral_features = new HashMap<>();
-		for(MineralEntry entry : IGServerConfig.ORES.ores.keySet())
+		final Map<MineralEnum, FeatureRegistration> mineral_features = new HashMap<>();
+		for(MineralEnum entry : IGServerConfig.ORES.ores.keySet())
 		{
 			final FeatureRegistration type_registration = new FeatureRegistration(IGLib.rl(entry.getName()));
 			mineral_features.put(entry, type_registration);
@@ -83,21 +83,20 @@ public class IGWorldGenerationProvider
 		return List.of(new DatapackBuiltinEntriesProvider(output, vanillaRegistries, registryBuilder, Set.of(IGLib.MODID)));
 	}
 
-	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures)
+	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures)
 	{
-		for(final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet())
+		for(final Entry<MineralEnum, FeatureRegistration> entry : oreFeatures.entrySet())
 		{
-			MineralEntry data = entry.getKey();
-			List<TargetBlockState> targetList = data.getTargetList(data.getMineral());
+			MineralEnum data = entry.getKey();
 			// Register the configured feature
-			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(targetList, data)));
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data)));
 		}
 	}
 
-	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures) {
+	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures) {
 		// Register all placed features for the ores
-		for (final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet()) {
-			final MineralEntry type = entry.getKey();
+		for (final Entry<MineralEnum, FeatureRegistration> entry : oreFeatures.entrySet()) {
+			final MineralEnum type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
 					InSquarePlacement.spread(),
@@ -108,7 +107,7 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures) {
+	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures) {
 		final HolderGetter<Biome> biomeReg = ctx.lookup(Registries.BIOME);
 		// Register all biome modifiers for the features
 		for (final FeatureRegistration entry : oreFeatures.values()) {

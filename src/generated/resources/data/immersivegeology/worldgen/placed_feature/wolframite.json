@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:wolframite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Wolframite"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Wolframite"
+    }
+  ]
+}
