@@ -11,48 +11,44 @@ import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.dries007.tfc.common.fluids.FluidHelpers;
-import net.dries007.tfc.util.EnvironmentHelpers;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.feature.vein.IVein;
-import net.dries007.tfc.world.feature.vein.IVeinConfig;
-import net.dries007.tfc.world.feature.vein.Indicator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
+import net.minecraft.world.level.levelgen.RandomSupport;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Blocks;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.function.Function;
 
 public class IGOreFeature extends Feature<IGOreFeatureConfig>
 {
 	public IGOreFeature(){
-		super(IGOreFeature.IGOreFeatureConfig.CODEC);
+		super(IGOreFeature.IGOreFeatureConfig.CODEC.codec());
 	}
 
 	@Override
@@ -64,14 +60,66 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		RandomSource random = ctx.random();
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
-		this.place(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), pos, config);
-		return false;
+		List<Vein> veins = this.getNearbyVeins(level, chunkPos, config.getSize(), config, level::getBiome);
+		if (veins.isEmpty()) {
+			return false;
+		} else {
+			Iterator<Vein> iter = veins.iterator();
+
+			while(iter.hasNext()) {
+				Vein vein = iter.next();
+				this.place(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), vein, config);
+			}
+
+			return true;
+		}
 	}
 
-	protected void place(WorldGenLevel level, RandomSource random, int blockX, int blockZ, BlockPos pos, IGOreFeatureConfig config)
+
+	public final List<Vein> getNearbyVeins(WorldGenLevel level, ChunkPos pos, int radius, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
+		List<Vein> veins = new ArrayList();
+
+		for(int x = pos.x - radius; x <= pos.x + radius; ++x) {
+			for(int z = pos.z - radius; z <= pos.z + radius; ++z) {
+				this.getVeinsAtChunk(level, x, z, veins, config, biomeQuery);
+			}
+		}
+
+		return veins;
+	}
+
+	public final void getVeinsAtChunk(WorldGenLevel level, int chunkPosX, int chunkPosZ, List<Vein> veins, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
+		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPosX * 61728364132L, config.seed ^ (long)chunkPosZ * 16298364123L);
+		if(config.getChanceToGenerate(config.entry) > random.nextInt(100))
+		{
+			OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
+			Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
+			if(config.canSpawnAt(vein.pos(), biomeQuery))
+			{
+				veins.add(vein);
+			}
+		}
+	}
+
+	private Vein createVein(int chunkX, int chunkZ, RandomSource random, OreConfig config)
+	{
+		return new Vein(this.defaultPosRespectingHeight(chunkX, chunkZ, random, config));
+	}
+
+	private BlockPos defaultPosRespectingHeight(int chunkX, int chunkZ, RandomSource random, OreConfig config) {
+		return new BlockPos(chunkX + random.nextInt(16), this.defaultYPos(config.veinSize.get(), random, config), chunkZ + random.nextInt(16));
+	}
+
+	protected final int defaultYPos(int verticalShrinkRange, RandomSource random, OreConfig config) {
+		int actualRange = config.maxY.get() - config.minY.get() - 2 * verticalShrinkRange;
+		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
+	}
+
+	protected void place(WorldGenLevel level, RandomSource random, int blockX, int blockZ, Vein vein, IGOreFeatureConfig config)
 	{
 		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-		BoundingBox box = new BoundingBox(pos).inflatedBy(config.getSize());
+		BlockPos pos = vein.pos();
+		BoundingBox box = new BoundingBox(pos).inflatedBy(6);
 		int offsetX;
 		int offsetZ;
 		offsetX = random.nextInt(16) - random.nextInt(16);
@@ -87,17 +135,18 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		int maxZ = Math.min(blockZ + 15, box.maxZ());
 		IGServerConfig.Ores.OreConfig cng = IGServerConfig.ORES.ores.get(config.entry);
 		int chance = cng.generationChance.get();
-
+		random.setSeed(config.seed);
 		if (chance > random.nextInt(100)) {
 			for(int x = minX; x <= maxX; ++x) {
 				for(int z = minZ; z <= maxZ; ++z) {
-					int projectedY = level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z);
+					int projectedY = (int) Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25);
 					for(int y = minY; y <= maxY; ++y) {
 						cursor.set(x, y + projectedY, z);
 						BlockState stoneState = level.getBlockState(cursor);
 						BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
 						if (oreState != null) {
 							level.setBlock(cursor, oreState, 3);
+							projectedY++;
 						}
 					}
 				}
@@ -119,15 +168,22 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	}
 
 
-	public record IGOreFeatureConfig(MineralEnum entry) implements FeatureConfiguration
+	public record IGOreFeatureConfig(MineralEnum entry, long seed, Optional<TagKey<Biome>> biomes) implements FeatureConfiguration
 	{
-		public static final Codec<IGOreFeatureConfig> CODEC = RecordCodecBuilder.create((app) -> {
-			return app.group(MineralEnum.CODEC.fieldOf("entry").forGetter((cfg) -> cfg.entry)).apply(app, IGOreFeatureConfig::new);
+		public static final MapCodec<IGOreFeatureConfig> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+			return instance.group(MineralEnum.CODEC.fieldOf("entry").forGetter((c) -> c.entry),
+					Codec.either(Codec.STRING, Codec.LONG).xmap((e) -> e.map(IGOreFeatureConfig::hash, (l) -> l), Either::right).fieldOf("random_name").forGetter((c) -> c.seed),
+					CodecHelper.optionalFieldOf(TagKey.hashedCodec(Registries.BIOME), "biomes").forGetter((c) -> c.biomes)).apply(instance, IGOreFeatureConfig::new);
 		});
 
 		public int getSize() {
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.veinSize.get();
+		}
+
+		public static long hash(String name) {
+			RandomSupport.Seed128bit seed128 = RandomSupport.seedFromHashOf(name);
+			return seed128.seedLo() ^ seed128.seedHi();
 		}
 
 		public double getAirExposure() {
@@ -141,7 +197,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, int xFromCenter, int yFromCenter, int zFromCenter)
 		{
-
 			MineralEnum mineral = config.entry;
 			TagMatchTest validStone = new TagMatchTest(Blocks.STONE);
 			if(!validStone.test(stoneState, random)) return null;
@@ -185,10 +240,24 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			}
 		}
 
-		public float getChanceToGenerate(int i, int i1, int i2, MineralEntry entry)
+		public int getChanceToGenerate(MineralEnum entry)
 		{
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.generationChance.get();
+		}
+
+		boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
+			return true;
+		}
+	}
+
+	protected record Vein(BlockPos pos) {
+		protected Vein(BlockPos pos) {
+			this.pos = pos;
+		}
+
+		public BlockPos pos() {
+			return this.pos;
 		}
 	}
 }

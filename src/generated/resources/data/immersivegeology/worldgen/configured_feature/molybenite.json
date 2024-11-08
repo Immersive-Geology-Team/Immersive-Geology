@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "entry": "Molybenite"
+    "entry": "Molybenite",
+    "random_name": -6441057448272742155
   }
 }

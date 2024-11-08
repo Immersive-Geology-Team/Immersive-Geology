@@ -64,12 +64,12 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
 
 	public int getVeinSize()
 	{
-        return 24;
+        return 16;
 	}
 
     public int getMinY()
     {
-        return 32;
+        return -32;
     }
 
     public int getMaxY()

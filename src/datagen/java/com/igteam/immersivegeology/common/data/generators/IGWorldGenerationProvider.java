@@ -89,7 +89,7 @@ public class IGWorldGenerationProvider
 		{
 			MineralEnum data = entry.getKey();
 			// Register the configured feature
-			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data)));
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), Optional.empty())));
 		}
 	}
 

@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "entry": "Hubnerite"
+    "entry": "Hubnerite",
+    "random_name": -7949784402790782688
   }
 }
