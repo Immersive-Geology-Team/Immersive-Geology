@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.world.*;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -35,6 +36,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
@@ -54,6 +57,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IGWorldGenerationProvider
@@ -62,51 +66,31 @@ public class IGWorldGenerationProvider
 			PackOutput output, CompletableFuture<Provider> vanillaRegistries, ExistingFileHelper exFiles
 	)
 	{
-		IGLib.IG_LOGGER.info("Making Providers for IGWorldGenerationProvider");
-		// Create a map to hold the features you want to register
-		final Map<MineralEntry, FeatureRegistration> oreFeatures = new HashMap<>();
-		for (MineralEntry type : MineralEntry.VALUES) {
-			// You can also add biome arguments here if necessary
-			final FeatureRegistration typeReg = new FeatureRegistration(IGLib.rl(type.getName()));
-			oreFeatures.put(type, typeReg);
-		}
-
-		// Create the registry builder to register features, placed features, and biome modifiers
+		IGLib.IG_LOGGER.info("Generating Data for IGWorldGenerationProvider");
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
 
-		// Register ConfiguredFeatures
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, ctx -> bootstrapConfiguredFeatures(ctx, oreFeatures));
-		// Register PlacedFeatures
-		registryBuilder.add(Registries.PLACED_FEATURE, ctx -> bootstrapPlacedFeatures(ctx, oreFeatures));
-		// Register BiomeModifiers
-		registryBuilder.add(Keys.BIOME_MODIFIERS, ctx -> bootstrapBiomeModifiers(ctx, oreFeatures));
+		final Map<MineralEntry, FeatureRegistration> mineral_features = new HashMap<>();
+		for(MineralEntry entry : IGServerConfig.ORES.ores.keySet())
+		{
+			final FeatureRegistration type_registration = new FeatureRegistration(IGLib.rl(entry.getName()));
+			mineral_features.put(entry, type_registration);
+		}
 
-		IGLib.IG_LOGGER.info("Finished");
-		// Return the list of providers with the DatapackBuiltinEntriesProvider
+		registryBuilder.add(Registries.CONFIGURED_FEATURE, ctx -> bootstrapConfiguredFeatures(ctx, mineral_features));
+		registryBuilder.add(Registries.PLACED_FEATURE, ctx -> bootstrapPlacedFeatures(ctx, mineral_features));
+		registryBuilder.add(Keys.BIOME_MODIFIERS, ctx -> bootstrapBiomeModifiers(ctx, mineral_features));
+
 		return List.of(new DatapackBuiltinEntriesProvider(output, vanillaRegistries, registryBuilder, Set.of(IGLib.MODID)));
 	}
 
-	private static void bootstrapConfiguredFeatures(
-			BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures
-	) {
-		final TagMatchTest replaceDeepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-		final TagMatchTest replaceStone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
-
-		// Register all configured features for the ores
-		for (final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet()) {
-			final MineralEnum mineral = entry.getKey().getMineral();
-			final OreRichness richness = entry.getKey().getRichness();
-			final StoneEnum stone = entry.getKey().getStone();
-
-			List<TargetBlockState> targetList = ImmutableList.of(
-					OreConfiguration.target(replaceStone, mineral.getOreBlock(stone, richness).defaultBlockState()),
-					OreConfiguration.target(replaceDeepslate, mineral.getOreBlock(stone, richness).defaultBlockState())
-			);
-
+	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEntry, FeatureRegistration> oreFeatures)
+	{
+		for(final Entry<MineralEntry, FeatureRegistration> entry : oreFeatures.entrySet())
+		{
+			MineralEntry data = entry.getKey();
+			List<TargetBlockState> targetList = data.getTargetList(data.getMineral());
 			// Register the configured feature
-			entry.getValue().registerConfigured(
-					ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(targetList, entry.getKey()))
-			);
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(targetList, data)));
 		}
 	}
 
@@ -141,7 +125,6 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	// Feature registration class
 	private static class FeatureRegistration {
 		public Reference<ConfiguredFeature<?, ?>> configured;
 		public Reference<PlacedFeature> placed;
@@ -175,7 +158,6 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	// Helper class for handling registry lookups
 	private record DummyRegistryLookup<T>(
 			HolderGetter<T> getter, ResourceKey<? extends Registry<? extends T>> key
 	) implements RegistryLookup<T>

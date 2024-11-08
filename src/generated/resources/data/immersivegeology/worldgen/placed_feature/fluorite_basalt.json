@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:fluorite_basalt",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Fluorite",
+          "stone": "Basalt"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Fluorite",
+        "stone": "Basalt"
+      }
+    }
+  ]
+}

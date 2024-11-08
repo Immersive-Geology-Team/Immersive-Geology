@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:cassiterite_glaciostone",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Cassiterite",
+          "stone": "GlacioStone"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Cassiterite",
+        "stone": "GlacioStone"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:galena_dolomite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Galena",
+          "stone": "Dolomite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Galena",
+        "stone": "Dolomite"
+      }
+    }
+  ]
+}

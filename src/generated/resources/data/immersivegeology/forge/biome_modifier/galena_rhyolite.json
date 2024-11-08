@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "immersivegeology:galena_rhyolite",
+  "step": "underground_ores"
+}

@@ -304,5 +304,4 @@ public abstract class GeologyMaterial implements MaterialHelper {
         List<MaterialInterface<?>> list = set.stream().toList();
         return list.get(index);
     }
-
 }

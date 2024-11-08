@@ -1,12 +1,15 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
+import java.util.List;
 import java.util.Set;
 
 public class MaterialStone extends GeologyMaterial {
@@ -34,5 +37,10 @@ public class MaterialStone extends GeologyMaterial {
     public void setupRecipeStages()
     {
 
+    }
+
+    public List<TargetBlockState> getTargets(MineralEnum mineral)
+    {
+        return List.of();
     }
 }

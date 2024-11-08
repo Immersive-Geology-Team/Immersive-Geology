@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:wolframite_andesite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Wolframite",
+          "stone": "Andesite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Wolframite",
+        "stone": "Andesite"
+      }
+    }
+  ]
+}

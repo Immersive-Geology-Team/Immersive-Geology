@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:hubnerite_andesite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Hubnerite",
+          "stone": "Andesite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Hubnerite",
+        "stone": "Andesite"
+      }
+    }
+  ]
+}

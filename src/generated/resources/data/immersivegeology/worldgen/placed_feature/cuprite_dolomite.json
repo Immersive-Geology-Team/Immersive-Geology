@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:cuprite_dolomite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Cuprite",
+          "stone": "Dolomite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Cuprite",
+        "stone": "Dolomite"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:gypsum_limestone",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Gypsum",
+          "stone": "Limestone"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Gypsum",
+        "stone": "Limestone"
+      }
+    }
+  ]
+}

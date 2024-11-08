@@ -65,6 +65,20 @@ public interface IFlagType<T extends Enum<T>> {
         return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone.instance()));
     }
 
+    default String getRegistryKey(MaterialHelper ore, MaterialHelper stone, OreRichness richness) {
+        String prefix = "";
+
+        for(ModFlags modflag : ModFlags.values())
+        {
+            if(stone.hasFlag(modflag))
+            {
+                prefix = modflag.name().toLowerCase() + "_";
+            }
+        }
+
+        return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone));
+    }
+
     default String getRegistryKey(MaterialInterface<?> material, BlockCategoryFlags blockCategory){
         return getValue().name().toLowerCase() + "_" + material.getName().toLowerCase() + "_" + blockCategory.getName().toLowerCase();
     }

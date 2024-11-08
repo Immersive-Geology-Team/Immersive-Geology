@@ -48,14 +48,11 @@ public class MaterialCassiterite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                 MetalEnum.Tin.getStack(ItemCategoryFlags.INGOT));
 
         //TODO Setup Bloomery Recipe 2 crushed ore -> 1 tin ingot
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

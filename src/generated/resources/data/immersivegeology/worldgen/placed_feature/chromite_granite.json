@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:chromite_granite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Chromite",
+          "stone": "Granite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Chromite",
+        "stone": "Granite"
+      }
+    }
+  ]
+}

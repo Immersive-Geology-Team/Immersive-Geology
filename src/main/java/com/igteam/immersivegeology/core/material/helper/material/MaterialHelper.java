@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -32,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -121,7 +123,7 @@ public interface MaterialHelper {
         return this.getBlock(flag).asItem();
     }
 
-
+    boolean hasFlag(IFlagType<?> category);
     void addExistingFlag(ModFlags m, ItemCategoryFlags... f);
     void addExistingFlag(ModFlags m, BlockCategoryFlags... f);
 
@@ -149,9 +151,22 @@ public interface MaterialHelper {
     {
         setupRecipeStages();
         IGStageProvider.add(this, getMaterialStageSet());
-    };
+    }
 
-    default TagKey<Item> getItemTag(IFlagType<?> unknownFlag)
+    Set<String> logged_recipes = new HashSet<>();
+	static void logRecipeStages()
+	{
+        final int CHUNK_SIZE = 10; // Number of recipes per row
+        List<String> recipesList = new ArrayList<>(logged_recipes); // Convert Set to List for indexing
+        IGLib.IG_LOGGER.info("Finished Stages for the following Minerals:");
+        for (int i = 0; i < recipesList.size(); i += CHUNK_SIZE) {
+            int end = Math.min(i + CHUNK_SIZE, recipesList.size()); // Ensure we don't go out of bounds
+            List<String> chunk = recipesList.subList(i, end); // Get the chunk
+            IGLib.IG_LOGGER.info(" {}", chunk);
+        }
+	}
+
+	default TagKey<Item> getItemTag(IFlagType<?> unknownFlag)
     {
         try
         {
@@ -211,6 +226,17 @@ public interface MaterialHelper {
     }
 
     default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    {
+        try
+        {
+            return (IGOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
+        } catch(Exception ignored)
+        {
+            return null;
+        }
+    }
+
+    default IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
     {
         try
         {

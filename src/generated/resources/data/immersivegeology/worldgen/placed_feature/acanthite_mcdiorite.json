@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:acanthite_mcdiorite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Acanthite",
+          "stone": "MCDiorite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Acanthite",
+        "stone": "MCDiorite"
+      }
+    }
+  ]
+}

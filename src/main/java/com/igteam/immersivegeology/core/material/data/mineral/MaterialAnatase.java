@@ -60,7 +60,6 @@ public class MaterialAnatase extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
 
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create( "crushed_ore_" +getName() + "_to_dust",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
@@ -86,7 +85,5 @@ public class MaterialAnatase extends MaterialMineral {
                 null,
                 200, 51200);
 
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

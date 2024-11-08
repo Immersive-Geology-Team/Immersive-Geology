@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "immersivegeology:scheelite_granite",
+  "step": "underground_ores"
+}

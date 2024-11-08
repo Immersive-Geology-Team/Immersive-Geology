@@ -33,6 +33,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -448,6 +449,7 @@ public class IGRegistrationHolder {
     {
         IGLib.IG_LOGGER.info("- Building Material Recipes");
         IGLib.getGeologyMaterials().forEach(MaterialInterface::buildRecipe);
+        MaterialHelper.logRecipeStages();
         IGLib.IG_LOGGER.info("- Complete");
     }
 

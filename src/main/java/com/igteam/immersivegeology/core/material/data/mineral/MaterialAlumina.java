@@ -57,8 +57,6 @@ public class MaterialAlumina extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
                 .create("crushed_ore" + getName() + "_to_dust",getItemTag(ItemCategoryFlags.CRUSHED_ORE), getStack(ItemCategoryFlags.DUST, 1), 10000, 100);
 
@@ -74,7 +72,5 @@ public class MaterialAlumina extends MaterialMineral {
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.DUST), 1))
                 .setTimeAndEnergy(200, 10240);
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

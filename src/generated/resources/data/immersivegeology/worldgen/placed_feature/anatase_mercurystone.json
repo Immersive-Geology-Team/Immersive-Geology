@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:anatase_mercurystone",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Anatase",
+          "stone": "MercuryStone"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Anatase",
+        "stone": "MercuryStone"
+      }
+    }
+  ]
+}

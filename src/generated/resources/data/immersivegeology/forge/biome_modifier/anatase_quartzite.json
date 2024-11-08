@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "immersivegeology:anatase_quartzite",
+  "step": "underground_ores"
+}

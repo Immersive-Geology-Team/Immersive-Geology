@@ -44,8 +44,6 @@ public class MaterialVanadinite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-
         IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
                 MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
                 MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
@@ -59,8 +57,6 @@ public class MaterialVanadinite extends MaterialMineral {
                 IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, 1)),
                 new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getFluidTag(BlockCategoryFlags.FLUID), 250), null,
                 200, 51200);
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 
     @Override

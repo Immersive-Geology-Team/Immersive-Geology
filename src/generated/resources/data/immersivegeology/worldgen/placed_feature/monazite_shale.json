@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:monazite_shale",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Monazite",
+          "stone": "Shale"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Monazite",
+        "stone": "Shale"
+      }
+    }
+  ]
+}

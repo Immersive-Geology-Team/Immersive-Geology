@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:galena_mcgranite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Galena",
+          "stone": "MCGranite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Galena",
+        "stone": "MCGranite"
+      }
+    }
+  ]
+}

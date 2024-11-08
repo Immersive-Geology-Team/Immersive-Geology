@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:ilmenite_basalt",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Ilmenite",
+          "stone": "Basalt"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Ilmenite",
+        "stone": "Basalt"
+      }
+    }
+  ]
+}

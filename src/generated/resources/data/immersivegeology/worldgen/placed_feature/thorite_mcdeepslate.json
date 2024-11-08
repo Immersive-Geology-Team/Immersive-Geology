@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:thorite_mcdeepslate",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Thorite",
+          "stone": "MCDeepslate"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Thorite",
+        "stone": "MCDeepslate"
+      }
+    }
+  ]
+}

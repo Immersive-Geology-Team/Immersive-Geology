@@ -1,0 +1,10 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "entry": {
+      "mineral": "Cryolite",
+      "stone": "MCDiorite"
+    },
+    "targets": []
+  }
+}

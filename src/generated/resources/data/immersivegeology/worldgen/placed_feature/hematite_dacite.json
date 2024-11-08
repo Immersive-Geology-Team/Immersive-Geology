@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:hematite_dacite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Hematite",
+          "stone": "Dacite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Hematite",
+        "stone": "Dacite"
+      }
+    }
+  ]
+}

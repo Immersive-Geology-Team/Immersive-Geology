@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "immersivegeology:hematite_basalt",
+  "step": "underground_ores"
+}

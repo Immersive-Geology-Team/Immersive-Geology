@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:fluorite_andesite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Fluorite",
+          "stone": "Andesite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Fluorite",
+        "stone": "Andesite"
+      }
+    }
+  ]
+}

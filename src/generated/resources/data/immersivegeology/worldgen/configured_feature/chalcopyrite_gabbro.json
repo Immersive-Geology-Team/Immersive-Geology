@@ -1,0 +1,10 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "entry": {
+      "mineral": "Chalcopyrite",
+      "stone": "Gabbro"
+    },
+    "targets": []
+  }
+}

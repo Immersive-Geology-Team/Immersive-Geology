@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:gypsum_conglomerate",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Gypsum",
+          "stone": "Conglomerate"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Gypsum",
+        "stone": "Conglomerate"
+      }
+    }
+  ]
+}

@@ -51,8 +51,6 @@ public class MaterialBauxite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
                 "crushed_ore_" + getName() + "_to_oxide",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.METAL_OXIDE),
@@ -72,7 +70,5 @@ public class MaterialBauxite extends MaterialMineral {
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.DUST), 1))
                 .setTimeAndEnergy(200, 10240);
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

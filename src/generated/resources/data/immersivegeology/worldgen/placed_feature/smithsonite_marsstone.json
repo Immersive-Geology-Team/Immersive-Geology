@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:smithsonite_marsstone",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Smithsonite",
+          "stone": "MarsStone"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Smithsonite",
+        "stone": "MarsStone"
+      }
+    }
+  ]
+}

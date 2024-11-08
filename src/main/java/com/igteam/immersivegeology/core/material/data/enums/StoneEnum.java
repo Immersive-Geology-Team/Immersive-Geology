@@ -17,6 +17,9 @@ import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
+
+import java.util.List;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //===== Terra Firma Craft =====\\
@@ -73,4 +76,9 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     public MaterialStone instance() {
         return material;
     }
+
+	public List<TargetBlockState> getTargets(MineralEnum mineral)
+	{
+        return instance().getTargets(mineral);
+	}
 }

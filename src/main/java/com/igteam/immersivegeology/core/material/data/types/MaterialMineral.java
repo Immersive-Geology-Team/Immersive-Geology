@@ -18,14 +18,11 @@ public class MaterialMineral extends GeologyMaterial {
     public MaterialMineral(){
         super();
         addFlags(MaterialFlags.HAS_SLURRY, ItemCategoryFlags.SLAG);
-
     }
 
     @Override
     public void setupRecipeStages()
     {
-        //IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-
-        //IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
+        logged_recipes.add(getName());
     }
 }

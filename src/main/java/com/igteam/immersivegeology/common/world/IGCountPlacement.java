@@ -9,11 +9,14 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.placement.RepeatingPlacement;
+
+import java.util.Map.Entry;
 
 public class IGCountPlacement extends RepeatingPlacement
 {
@@ -24,12 +27,14 @@ public class IGCountPlacement extends RepeatingPlacement
 		this.type = type;
 	}
 
-	protected int count(RandomSource p_191913_, BlockPos p_191914_) {
-		return IGServerConfig.ORES.ores.get(this.type).veinsPerChunk.get();
+	protected int count(RandomSource source, BlockPos pos) {
+		Entry<MineralEntry, OreConfig> entry_matched = IGServerConfig.ORES.ores.entrySet().stream().filter((e -> e.getKey().getName().equalsIgnoreCase(type.getName()))).findFirst().get();
+		IGServerConfig.Ores.OreConfig config = entry_matched.getValue();
+		return config.veinsPerChunk.get();
 	}
 
 	public PlacementModifierType<?> type() {
-		return null;//IGWorldGen.IG_COUNT_PLACEMENT.get();
+		return IGWorldGen.IG_COUNT_PLACEMENT.get();
 	}
 
 	static {

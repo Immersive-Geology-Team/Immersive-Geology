@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:scheelite_diorite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Scheelite",
+          "stone": "Diorite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Scheelite",
+        "stone": "Diorite"
+      }
+    }
+  ]
+}

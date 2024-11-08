@@ -8,29 +8,16 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
-import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.profiling.jfr.event.ChunkGenerationEvent;
-import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class IGWorldGen
 {

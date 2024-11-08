@@ -63,8 +63,6 @@ public class MaterialAcanthite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGLib.IG_LOGGER.info("Setting up Stages for Material {}", getName());
-
 
         IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
@@ -89,7 +87,5 @@ public class MaterialAcanthite extends MaterialMineral {
 
         IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(getByproductMaterial().getItemTag(ItemCategoryFlags.COMPOUND_DUST),
                 getByproductMaterial().getStack(ItemCategoryFlags.DUST), getTraceMaterials(2).getStack(ItemCategoryFlags.DUST), 0.2f, 60, 100);
-
-        IGLib.IG_LOGGER.info("Final Stages for Material {}", getName());
     }
 }

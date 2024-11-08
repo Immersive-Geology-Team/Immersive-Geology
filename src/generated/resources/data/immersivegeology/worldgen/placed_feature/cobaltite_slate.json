@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:cobaltite_slate",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Cobaltite",
+          "stone": "Slate"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Cobaltite",
+        "stone": "Slate"
+      }
+    }
+  ]
+}

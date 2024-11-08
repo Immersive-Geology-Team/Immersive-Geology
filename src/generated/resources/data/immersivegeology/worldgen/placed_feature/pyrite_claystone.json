@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:pyrite_claystone",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Pyrite",
+          "stone": "Claystone"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Pyrite",
+        "stone": "Claystone"
+      }
+    }
+  ]
+}

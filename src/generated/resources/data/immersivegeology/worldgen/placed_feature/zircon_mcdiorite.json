@@ -1,0 +1,25 @@
+{
+  "feature": "immersivegeology:zircon_mcdiorite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": {
+          "mineral": "Zircon",
+          "stone": "MCDiorite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": {
+        "mineral": "Zircon",
+        "stone": "MCDiorite"
+      }
+    }
+  ]
+}

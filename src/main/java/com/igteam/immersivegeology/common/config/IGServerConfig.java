@@ -11,17 +11,22 @@ package com.igteam.immersivegeology.common.config;
 import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores;
 import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.OreDistribution;
+import com.electronwill.nightconfig.core.Config;
+import com.google.common.base.Preconditions;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.world.MineralCombination;
 import com.igteam.immersivegeology.common.world.MineralEntry;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @EventBusSubscriber(modid = IGLib.MODID, bus = Bus.MOD)
 public class IGServerConfig
@@ -35,19 +40,46 @@ public class IGServerConfig
 		CONFIG_SPEC = builder.build();
 	}
 
+	private static Config rawConfig;
+
+	public static Config getRawConfig()
+	{
+		return Preconditions.checkNotNull(rawConfig);
+	}
+
+	@SubscribeEvent
+	public static void onConfigReload(ModConfigEvent ev)
+	{
+		if(CONFIG_SPEC==ev.getConfig().getSpec())
+		{
+			rawConfig = ev.getConfig().getConfigData();
+		}
+	}
+
+	public static int getOrDefault(IntValue value)
+	{
+		return CONFIG_SPEC.isLoaded()?value.get(): value.getDefault();
+	}
+
 	public static class Ores
 	{
 		public final Map<MineralEntry, OreConfig> ores = new HashMap<>();
 
+		public MineralCombination combination = new MineralCombination(List.of(MineralEnum.values()), List.of(StoneEnum.values()));
+
 		Ores(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("ores");
-			ArrayList<MineralEntry> minerals = MineralEntry.values();
 
-			for(MineralEntry mineral : minerals)
+			for(MineralEntry entry : combination.entries())
 			{
-				this.ores.put(mineral, new OreConfig(builder, mineral));
-
+				try
+				{
+					this.ores.put(entry, new OreConfig(builder, entry));
+				} catch(Exception ex)
+				{
+					IGLib.IG_LOGGER.info("Exception In Config Creation? {}", ex.getMessage());
+				}
 			}
 
 			builder.pop();

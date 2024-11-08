@@ -98,6 +98,10 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getOreBlock(stone, richness);
     };
 
+    default IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness) {
+        return instance().getOreBlock(stone, richness);
+    };
+
 	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
 
 }

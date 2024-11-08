@@ -9,6 +9,8 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -18,16 +20,22 @@ import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraftforge.common.util.Lazy;
 
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Objects;
+
 public class IGHeightProvider extends HeightProvider
 {
-	public static final Codec<IGHeightProvider> CODEC;
-	private final MineralEntry type;
+	public static final Codec<IGHeightProvider> CODEC = MineralEntry.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
+
+	private final MineralEntry entry;
 	private final Lazy<HeightProvider> internalProvider;
 
-	public IGHeightProvider(MineralEntry type) {
-		this.type = type;
+	public IGHeightProvider(MineralEntry entry) {
+		this.entry = entry;
 		this.internalProvider = Lazy.of(() -> {
-			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(type);
+			Entry<MineralEntry, OreConfig> entry_matched = IGServerConfig.ORES.ores.entrySet().stream().filter((e -> e.getKey().getName().equalsIgnoreCase(entry.getName()))).findFirst().get();
+			IGServerConfig.Ores.OreConfig config = entry_matched.getValue();
 			VerticalAnchor vaMin = (pContext) -> {
 				return (Integer)config.minY.get();
 			};
@@ -43,12 +51,7 @@ public class IGHeightProvider extends HeightProvider
 	}
 
 	public HeightProviderType<?> getType() {
-		return null;//IGWorldGen.IG_HEIGHT_PROVIDER.get();
+		return IGWorldGen.IG_HEIGHT_PROVIDER.get();
 	}
 
-	static {
-		CODEC = MineralEntry.CODEC.xmap(IGHeightProvider::new, (p) -> {
-			return p.type;
-		});
-	}
 }
