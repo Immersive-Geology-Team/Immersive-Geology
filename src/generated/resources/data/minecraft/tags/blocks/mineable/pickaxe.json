@@ -4,7 +4,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_iron_chalk",
       "required": false
     },
-    "immersivegeology:normal_ore_block_osmium_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_pyrite_slate",
       "required": false
@@ -18,9 +17,13 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_cobaltite_diorite",
-    "immersivegeology:normal_ore_block_ilmenite_stone",
     "immersivegeology:sheetmetal_block_gold",
     "immersivegeology:rich_ore_block_ilmenite_diorite",
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_phyllite",
+      "required": false
+    },
+    "immersivegeology:normal_ore_block_cuprite_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_iron_basalt",
       "required": false
@@ -41,7 +44,6 @@
       "id": "immersivegeology:tfc_normal_ore_block_bauxite_limestone",
       "required": false
     },
-    "immersivegeology:poor_ore_block_gold_stone",
     {
       "id": "immersivegeology:rich_ore_block_chalcopyrite_granite",
       "required": false
@@ -80,6 +82,10 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_scheelite_moon_stone",
       "required": false
     },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_gneiss",
+      "required": false
+    },
     "immersivegeology:storage_block_vanadium",
     {
       "id": "immersivegeology:normal_ore_block_chalcopyrite_diorite",
@@ -90,6 +96,7 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_unobtania_granite",
+    "immersivegeology:rich_ore_block_osmium_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorite_shale",
       "required": false
@@ -98,7 +105,6 @@
       "id": "immersivegeology:tfc_rich_ore_block_osmium_claystone",
       "required": false
     },
-    "immersivegeology:poor_ore_block_wolframite_stone",
     "immersivegeology:poor_ore_block_zircon_granite",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_cassiterite_mars_stone",
@@ -182,14 +188,13 @@
       "id": "immersivegeology:tfc_rich_ore_block_wolframite_granite",
       "required": false
     },
-    "immersivegeology:rich_ore_block_copper_stone",
-    "immersivegeology:rich_ore_block_platinum_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_anatase_slate",
       "required": false
     },
+    "immersivegeology:normal_ore_block_iron_sandstone",
+    "immersivegeology:rich_ore_block_iron_sandstone",
     "immersivegeology:slab_neodymium",
-    "immersivegeology:normal_ore_block_platinum_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_chalcocite_limestone",
       "required": false
@@ -230,7 +235,9 @@
       "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_conglomerate",
       "required": false
     },
+    "immersivegeology:poor_ore_block_thorite_sandstone",
     "immersivegeology:rich_ore_block_gold_andesite",
+    "immersivegeology:rich_ore_block_lead_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_acanthite_phyllite",
       "required": false
@@ -239,9 +246,12 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_molybenite_mars_stone",
       "required": false
     },
-    "immersivegeology:poor_ore_block_copper_stone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_copper_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_chalcopyrite_sandstone",
       "required": false
     },
     {
@@ -277,6 +287,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_bauxite_shale",
       "required": false
     },
+    "immersivegeology:normal_ore_block_platinum_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_unobtania_granite",
       "required": false
@@ -292,7 +303,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_ilmenite_andesite",
       "required": false
     },
-    "immersivegeology:rich_ore_block_lead_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_chromite_gabbro",
       "required": false
@@ -366,10 +376,12 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_anatase_deepslate",
+    "immersivegeology:poor_ore_block_smithsonite_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_anatase_schist",
       "required": false
     },
+    "immersivegeology:normal_ore_block_bauxite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cuprite_rhyolite",
       "required": false
@@ -398,6 +410,10 @@
     },
     "immersivegeology:normal_ore_block_anatase_deepslate",
     {
+      "id": "immersivegeology:normal_ore_block_cassiterite_dripstone_block",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_normal_ore_block_fluorite_granite",
       "required": false
     },
@@ -405,10 +421,13 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_galena_venus_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_thorianite_dripstone_block",
+    "immersivegeology:poor_ore_block_gypsum_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_smithsonite_glacio_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_thorianite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_acanthite_slate",
       "required": false
@@ -455,6 +474,11 @@
       "id": "immersivegeology:tfc_normal_ore_block_osmium_claystone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_silver_dripstone_block",
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_schist",
+      "required": false
+    },
     "immersivegeology:normal_ore_block_chromite_granite",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_molybenite_glacio_stone",
@@ -482,6 +506,14 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_iron_andesite",
+    {
+      "id": "immersivegeology:poor_ore_block_cassiterite_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:ad_astra_normal_ore_block_unobtania_mercury_stone",
+      "required": false
+    },
     {
       "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_chalk",
       "required": false
@@ -556,6 +588,10 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_pyrite_deepslate",
+    {
+      "id": "immersivegeology:poor_ore_block_chalcopyrite_dripstone_block",
+      "required": false
+    },
     "immersivegeology:slab_titanium",
     {
       "id": "immersivegeology:tfc_normal_ore_block_magnetite_chalk",
@@ -579,11 +615,17 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_thorite_andesite",
+    "immersivegeology:rich_ore_block_pyrolusite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_silver_venus_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_unobtania_deepslate",
     "immersivegeology:sheetmetal_block_stainlesssteel",
+    {
+      "id": "immersivegeology:rich_ore_block_cassiterite_dripstone_block",
+      "required": false
+    },
     "immersivegeology:storage_block_osmium",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cassiterite_granite",
@@ -591,6 +633,10 @@
     },
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_galena_mars_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_magnetite_sandstone",
       "required": false
     },
     {
@@ -621,6 +667,10 @@
       "id": "immersivegeology:tfc_rich_ore_block_hematite_basalt",
       "required": false
     },
+    {
+      "id": "immersivegeology:rich_ore_block_magnetite_stone",
+      "required": false
+    },
     "immersivegeology:normal_ore_block_wolframite_andesite",
     "immersivegeology:poor_ore_block_chromite_diorite",
     {
@@ -628,7 +678,6 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_pyrite_deepslate",
-    "immersivegeology:rich_ore_block_ilmenite_stone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_galena_mercury_stone",
       "required": false
@@ -672,7 +721,6 @@
       "id": "immersivegeology:tfc_rich_ore_block_zircon_granite",
       "required": false
     },
-    "immersivegeology:normal_ore_block_gold_stone",
     "immersivegeology:rich_ore_block_vanadinite_granite",
     "immersivegeology:poor_ore_block_galena_deepslate",
     {
@@ -689,6 +737,10 @@
     },
     {
       "id": "immersivegeology:tfc_rich_ore_block_platinum_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_gneiss",
       "required": false
     },
     {
@@ -736,6 +788,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:rich_ore_block_cassiterite_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_normal_ore_block_hubnerite_basalt",
       "required": false
     },
@@ -753,6 +809,10 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_iron_mars_stone",
       "required": false
     },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_schist",
+      "required": false
+    },
     "immersivegeology:rich_ore_block_copper_andesite",
     {
       "id": "immersivegeology:tfc_normal_ore_block_smithsonite_chert",
@@ -767,6 +827,7 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_anatase_andesite",
+    "immersivegeology:rich_ore_block_thorianite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorianite_gabbro",
       "required": false
@@ -789,6 +850,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_hubnerite_chert",
       "required": false
     },
+    "immersivegeology:rich_ore_block_gypsum_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hubnerite_claystone",
       "required": false
@@ -900,6 +962,7 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_vanadinite_diorite",
+    "immersivegeology:normal_ore_block_galena_sandstone",
     "immersivegeology:slab_manganese",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cobaltite_gabbro",
@@ -911,10 +974,6 @@
     },
     {
       "id": "immersivegeology:tfc_poor_ore_block_cassiterite_basalt",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:poor_ore_block_hematite_stone",
       "required": false
     },
     {
@@ -939,6 +998,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_platinum_rhyolite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_copper_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_monazite_andesite",
       "required": false
@@ -961,9 +1021,14 @@
       "required": false
     },
     {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_gneiss",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_rich_ore_block_galena_marble",
       "required": false
     },
+    "immersivegeology:normal_ore_block_galena_dripstone_block",
     "immersivegeology:poor_ore_block_thorianite_diorite",
     {
       "id": "immersivegeology:tfc_normal_ore_block_gold_rhyolite",
@@ -982,8 +1047,13 @@
       "id": "immersivegeology:tfc_normal_ore_block_molybenite_granite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_galena_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_slate",
       "required": false
     },
     {
@@ -991,6 +1061,7 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_galena_granite",
+    "immersivegeology:poor_ore_block_pyrite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cobaltite_granite",
       "required": false
@@ -1037,10 +1108,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:normal_ore_block_magnetite_stone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_poor_ore_block_galena_schist",
       "required": false
     },
-    "immersivegeology:poor_ore_block_lead_stone",
+    {
+      "id": "immersivegeology:poor_ore_block_chalcocite_sandstone",
+      "required": false
+    },
+    "immersivegeology:normal_ore_block_molybenite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_gypsum_glacio_stone",
       "required": false
@@ -1068,6 +1147,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_galena_granite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_pyrolusite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_scheelite_moon_stone",
       "required": false
@@ -1092,10 +1172,12 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_chalcopyrite_glacio_stone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_bauxite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hematite_andesite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_gypsum_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_gold_limestone",
       "required": false
@@ -1132,6 +1214,11 @@
       "id": "immersivegeology:tfc_rich_ore_block_smithsonite_conglomerate",
       "required": false
     },
+    "immersivegeology:normal_ore_block_hubnerite_sandstone",
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_schist",
+      "required": false
+    },
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_bauxite_venus_stone",
       "required": false
@@ -1148,6 +1235,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_cassiterite_dacite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_bauxite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_gabbro",
       "required": false
@@ -1160,6 +1248,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_monazite_rhyolite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_thorite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hematite_dacite",
       "required": false
@@ -1192,6 +1281,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_thorite_granite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_scheelite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_lead_shale",
       "required": false
@@ -1221,6 +1311,7 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_zircon_diorite",
+    "immersivegeology:rich_ore_block_osmium_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_lead_mars_stone",
       "required": false
@@ -1280,6 +1371,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_magnetite_dripstone_block",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_normal_ore_block_gold_dacite",
       "required": false
     },
@@ -1287,6 +1382,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_chromite_schist",
       "required": false
     },
+    "immersivegeology:normal_ore_block_hubnerite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_wolframite_rhyolite",
       "required": false
@@ -1313,6 +1409,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_hubnerite_moon_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_hubnerite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hubnerite_dolomite",
       "required": false
@@ -1351,7 +1448,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_thorite_basalt",
       "required": false
     },
-    "immersivegeology:normal_ore_block_lead_stone",
     "immersivegeology:storage_block_reinforced_refractory_brick",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_unobtania_moon_stone",
@@ -1408,6 +1504,7 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_monazite_andesite",
+    "immersivegeology:rich_ore_block_vanadinite_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_galena_gabbro",
       "required": false
@@ -1421,8 +1518,13 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_ullmannite_granite",
+    "immersivegeology:rich_ore_block_unobtania_deepslate",
     {
       "id": "immersivegeology:tfc_rich_ore_block_galena_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_chalcocite_sandstone",
       "required": false
     },
     {
@@ -1482,7 +1584,6 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_molybenite_glacio_stone",
       "required": false
     },
-    "immersivegeology:normal_ore_block_fluorite_stone",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_gypsum_venus_stone",
       "required": false
@@ -1499,6 +1600,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_cassiterite_dolomite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_thorite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_magnetite_venus_stone",
       "required": false
@@ -1552,6 +1654,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_chalcocite_shale",
       "required": false
     },
+    "immersivegeology:poor_ore_block_monazite_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_anatase_phyllite",
       "required": false
@@ -1606,6 +1709,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:rich_ore_block_chalcopyrite_stone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_poor_ore_block_thorianite_conglomerate",
       "required": false
     },
@@ -1639,6 +1746,7 @@
       "id": "immersivegeology:normal_ore_block_sphalerite_granite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_copper_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_gold_conglomerate",
       "required": false
@@ -1651,6 +1759,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_unobtania_moon_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_platinum_sandstone",
     "immersivegeology:slab_stainlesssteel",
     {
       "id": "immersivegeology:poor_ore_block_cassiterite_diorite",
@@ -1661,6 +1770,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_anatase_diorite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_cuprite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_molybenite_chalk",
       "required": false
@@ -1685,6 +1795,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_acanthite_gneiss",
       "required": false
     },
+    "immersivegeology:poor_ore_block_iron_dripstone_block",
     "immersivegeology:poor_ore_block_molybenite_granite",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_anatase_moon_stone",
@@ -1719,6 +1830,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_galena_gneiss",
       "required": false
     },
+    "immersivegeology:poor_ore_block_lead_sandstone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_monazite_venus_stone",
       "required": false
@@ -1776,6 +1888,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_bauxite_dolomite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_smithsonite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_iron_chalk",
       "required": false
@@ -1812,6 +1925,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_chalcocite_mars_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_hubnerite_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_cassiterite_claystone",
       "required": false
@@ -1820,10 +1934,12 @@
       "id": "immersivegeology:tfc_normal_ore_block_sphalerite_diorite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_vanadinite_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorite_diorite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_hubnerite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_iron_mars_stone",
       "required": false
@@ -1850,10 +1966,12 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_cassiterite_glacio_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_cuprite_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_wolframite_andesite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_smithsonite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_osmium_chalk",
       "required": false
@@ -1874,6 +1992,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_iron_chalk",
       "required": false
     },
+    "immersivegeology:poor_ore_block_bauxite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorianite_chert",
       "required": false
@@ -1894,12 +2013,11 @@
       "id": "immersivegeology:tfc_poor_ore_block_cuprite_conglomerate",
       "required": false
     },
-    "immersivegeology:rich_ore_block_iron_stone",
-    "immersivegeology:rich_ore_block_anatase_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cuprite_limestone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_scheelite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_acanthite_mercury_stone",
       "required": false
@@ -1910,6 +2028,10 @@
     },
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_iron_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_chalcocite_sandstone",
       "required": false
     },
     {
@@ -1990,6 +2112,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_galena_glacio_stone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_pyrolusite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_lead_basalt",
       "required": false
@@ -1998,6 +2121,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_cuprite_mars_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_iron_dripstone_block",
     "immersivegeology:rich_ore_block_cuprite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cassiterite_andesite",
@@ -2048,6 +2172,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_thorite_andesite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_thorite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_pyrolusite_conglomerate",
       "required": false
@@ -2057,6 +2182,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_ferberite_moon_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_gold_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_silver_glacio_stone",
       "required": false
@@ -2100,6 +2226,7 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_hubnerite_andesite",
+    "immersivegeology:rich_ore_block_monazite_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_magnetite_shale",
       "required": false
@@ -2125,6 +2252,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_cuprite_rhyolite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_scheelite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_magnetite_claystone",
       "required": false
@@ -2145,6 +2273,8 @@
       "id": "immersivegeology:tfc_rich_ore_block_scheelite_granite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_bauxite_dripstone_block",
+    "immersivegeology:rich_ore_block_smithsonite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_iron_limestone",
       "required": false
@@ -2154,10 +2284,13 @@
       "required": false
     },
     {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_quartzite",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_poor_ore_block_anatase_andesite",
       "required": false
     },
-    "immersivegeology:poor_ore_block_fluorite_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_platinum_dolomite",
       "required": false
@@ -2174,12 +2307,10 @@
       "id": "immersivegeology:tfc_rich_ore_block_thorite_slate",
       "required": false
     },
-    "immersivegeology:rich_ore_block_fluorite_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_cassiterite_diorite",
       "required": false
     },
-    "immersivegeology:normal_ore_block_copper_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_chalcocite_rhyolite",
       "required": false
@@ -2203,6 +2334,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_vanadinite_chert",
       "required": false
     },
+    "immersivegeology:poor_ore_block_cuprite_sandstone",
     "immersivegeology:normal_ore_block_unobtania_diorite",
     {
       "id": "immersivegeology:tfc_poor_ore_block_platinum_conglomerate",
@@ -2276,6 +2408,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:rich_ore_block_chalcopyrite_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_rich_ore_block_thorianite_claystone",
       "required": false
     },
@@ -2346,6 +2482,7 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_thorite_stone",
+    "immersivegeology:rich_ore_block_molybenite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_galena_diorite",
       "required": false
@@ -2405,6 +2542,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_gabbro",
       "required": false
     },
+    "immersivegeology:poor_ore_block_osmium_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_molybenite_shale",
       "required": false
@@ -2413,6 +2551,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_fluorite_diorite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_osmium_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_galena_chert",
       "required": false
@@ -2453,11 +2592,11 @@
       "id": "immersivegeology:tfc_normal_ore_block_lead_limestone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_pyrite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_zircon_gabbro",
       "required": false
     },
-    "immersivegeology:normal_ore_block_silver_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorite_slate",
       "required": false
@@ -2466,10 +2605,12 @@
       "id": "immersivegeology:tfc_normal_ore_block_magnetite_claystone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_thorianite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_copper_glacio_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_lead_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_ullmannite_granite",
       "required": false
@@ -2478,6 +2619,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_vanadinite_chalk",
       "required": false
     },
+    "immersivegeology:poor_ore_block_vanadinite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_cobaltite_mercury_stone",
       "required": false
@@ -2509,6 +2651,11 @@
     },
     {
       "id": "immersivegeology:tfc_rich_ore_block_vanadinite_chalk",
+      "required": false
+    },
+    "immersivegeology:normal_ore_block_smithsonite_sandstone",
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_marble",
       "required": false
     },
     {
@@ -2552,6 +2699,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_platinum_dacite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_gypsum_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hubnerite_rhyolite",
       "required": false
@@ -2647,6 +2795,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_cassiterite_rhyolite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_scheelite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_wolframite_moon_stone",
       "required": false
@@ -2657,6 +2806,10 @@
     },
     {
       "id": "immersivegeology:tfc_poor_ore_block_ilmenite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_marble",
       "required": false
     },
     {
@@ -2723,6 +2876,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_galena_chalk",
       "required": false
     },
+    "immersivegeology:normal_ore_block_pyrite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_cryolite_moon_stone",
       "required": false
@@ -2731,6 +2885,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_monazite_shale",
       "required": false
     },
+    "immersivegeology:normal_ore_block_thorianite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorite_rhyolite",
       "required": false
@@ -2754,6 +2909,10 @@
     },
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_bauxite_venus_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_phyllite",
       "required": false
     },
     "immersivegeology:poor_ore_block_platinum_andesite",
@@ -2787,6 +2946,7 @@
     },
     "immersivegeology:slab_zinc",
     "immersivegeology:rich_ore_block_thorianite_diorite",
+    "immersivegeology:poor_ore_block_silver_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_gold_rhyolite",
       "required": false
@@ -2849,6 +3009,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_lead_chert",
       "required": false
     },
+    "immersivegeology:poor_ore_block_platinum_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_pyrite_shale",
       "required": false
@@ -2866,6 +3027,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_zircon_diorite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_lead_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_thorite_venus_stone",
       "required": false
@@ -2895,6 +3057,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_zircon_diorite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_scheelite_sandstone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_molybenite_glacio_stone",
       "required": false
@@ -2935,6 +3098,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_hubnerite_mars_stone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_lead_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_fluorite_dacite",
       "required": false
@@ -2999,7 +3163,6 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_chromite_granite",
-    "immersivegeology:normal_ore_block_iron_stone",
     "immersivegeology:rich_ore_block_acanthite_diorite",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_lead_glacio_stone",
@@ -3056,7 +3219,6 @@
       "id": "immersivegeology:tfc_rich_ore_block_thorite_chert",
       "required": false
     },
-    "immersivegeology:rich_ore_block_hubnerite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_shale",
       "required": false
@@ -3144,6 +3306,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_monazite_dacite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_thorite_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_pyrite_gneiss",
       "required": false
@@ -3178,6 +3341,7 @@
       "required": false
     },
     "immersivegeology:rich_ore_block_wolframite_andesite",
+    "immersivegeology:rich_ore_block_silver_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_lead_shale",
       "required": false
@@ -3186,6 +3350,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_cryolite_granite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_galena_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cuprite_shale",
       "required": false
@@ -3199,7 +3364,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_thorite_marble",
       "required": false
     },
-    "immersivegeology:poor_ore_block_iron_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_vanadinite_diorite",
       "required": false
@@ -3208,6 +3372,7 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_thorite_moon_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_iron_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorite_schist",
       "required": false
@@ -3233,6 +3398,8 @@
       "id": "immersivegeology:tfc_normal_ore_block_cassiterite_gabbro",
       "required": false
     },
+    "immersivegeology:poor_ore_block_smithsonite_dripstone_block",
+    "immersivegeology:normal_ore_block_thorianite_stone",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_iron_mars_stone",
       "required": false
@@ -3274,8 +3441,13 @@
       "id": "immersivegeology:tfc_poor_ore_block_osmium_andesite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_pyrite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_thorianite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_quartzite",
       "required": false
     },
     {
@@ -3400,6 +3572,11 @@
       "required": false
     },
     {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_marble",
+      "required": false
+    },
+    "immersivegeology:poor_ore_block_copper_sandstone",
+    {
       "id": "immersivegeology:tfc_normal_ore_block_bauxite_chalk",
       "required": false
     },
@@ -3448,6 +3625,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_anatase_marble",
       "required": false
     },
+    "immersivegeology:poor_ore_block_molybenite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_osmium_dolomite",
       "required": false
@@ -3486,6 +3664,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_acanthite_diorite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_monazite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_thorite_mars_stone",
       "required": false
@@ -3524,6 +3703,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_cuprite_chalk",
       "required": false
     },
+    "immersivegeology:poor_ore_block_bauxite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_scheelite_mars_stone",
       "required": false
@@ -3532,14 +3712,17 @@
       "id": "immersivegeology:tfc_normal_ore_block_smithsonite_conglomerate",
       "required": false
     },
+    "immersivegeology:normal_ore_block_gypsum_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_scheelite_glacio_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_osmium_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_ilmenite_gabbro",
       "required": false
     },
+    "immersivegeology:normal_ore_block_pyrite_dripstone_block",
     "immersivegeology:storage_block_chromium",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_scheelite_mars_stone",
@@ -3590,7 +3773,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_wolframite_diorite",
       "required": false
     },
-    "immersivegeology:poor_ore_block_ilmenite_stone",
+    "immersivegeology:normal_ore_block_gypsum_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_pyrite_gneiss",
       "required": false
@@ -3615,6 +3798,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_pyrolusite_conglomerate",
       "required": false
     },
+    "immersivegeology:poor_ore_block_monazite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_bauxite_conglomerate",
       "required": false
@@ -3643,6 +3827,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_galena_conglomerate",
       "required": false
     },
+    "immersivegeology:rich_ore_block_scheelite_stone",
     {
       "id": "immersivegeology:rich_ore_block_cassiterite_diorite",
       "required": false
@@ -3659,6 +3844,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_molybenite_moon_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_bauxite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_galena_basalt",
       "required": false
@@ -3745,6 +3931,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:normal_ore_block_chalcopyrite_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_poor_ore_block_cassiterite_conglomerate",
       "required": false
     },
@@ -3757,7 +3947,7 @@
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_hematite_stone",
+      "id": "immersivegeology:normal_ore_block_magnetite_dripstone_block",
       "required": false
     },
     {
@@ -3804,7 +3994,6 @@
       "id": "immersivegeology:tfc_normal_ore_block_cassiterite_diorite",
       "required": false
     },
-    "immersivegeology:normal_ore_block_hubnerite_stone",
     "immersivegeology:normal_ore_block_fluorite_diorite",
     {
       "id": "immersivegeology:poor_ore_block_chalcocite_stone",
@@ -3831,6 +4020,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_magnetite_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_rich_ore_block_pyrite_chert",
       "required": false
     },
@@ -3842,8 +4035,13 @@
       "id": "immersivegeology:tfc_poor_ore_block_cobaltite_phyllite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_gypsum_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_cassiterite_sandstone",
       "required": false
     },
     {
@@ -3922,6 +4120,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_sphalerite_granite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_platinum_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorite_gneiss",
       "required": false
@@ -3947,16 +4146,16 @@
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_hematite_stone",
-      "required": false
-    },
-    {
       "id": "immersivegeology:tfc_poor_ore_block_iron_dolomite",
       "required": false
     },
     "immersivegeology:sheetmetal_block_titanium",
     {
       "id": "immersivegeology:tfc_normal_ore_block_wolframite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_phyllite",
       "required": false
     },
     "immersivegeology:poor_ore_block_thorite_deepslate",
@@ -3968,9 +4167,11 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_ferberite_moon_stone",
       "required": false
     },
+    {
+      "id": "immersivegeology:normal_ore_block_magnetite_sandstone",
+      "required": false
+    },
     "immersivegeology:sheetmetal_block_zirconium",
-    "immersivegeology:normal_ore_block_anatase_stone",
-    "immersivegeology:poor_ore_block_osmium_stone",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_thorianite_venus_stone",
       "required": false
@@ -4028,6 +4229,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_osmium_conglomerate",
       "required": false
     },
+    "immersivegeology:poor_ore_block_scheelite_sandstone",
     "immersivegeology:poor_ore_block_galena_diorite",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorite_dolomite",
@@ -4072,6 +4274,7 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_pyrolusite_mars_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_molybenite_sandstone",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_cobaltite_mercury_stone",
       "required": false
@@ -4086,6 +4289,10 @@
     },
     {
       "id": "immersivegeology:tfc_rich_ore_block_magnetite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_chalcocite_dripstone_block",
       "required": false
     },
     {
@@ -4108,6 +4315,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_cassiterite_basalt",
       "required": false
     },
+    "immersivegeology:rich_ore_block_silver_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_magnetite_limestone",
       "required": false
@@ -4137,6 +4345,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_anatase_phyllite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_gypsum_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_anatase_phyllite",
       "required": false
@@ -4157,6 +4366,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_galena_dacite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_scheelite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_scheelite_limestone",
       "required": false
@@ -4235,10 +4445,14 @@
       "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_shale",
       "required": false
     },
+    "immersivegeology:poor_ore_block_galena_sandstone",
+    "immersivegeology:rich_ore_block_platinum_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_chromite_diorite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_copper_dripstone_block",
+    "immersivegeology:rich_ore_block_gold_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_cassiterite_limestone",
       "required": false
@@ -4251,6 +4465,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_ullmannite_granite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_lead_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_cassiterite_gabbro",
       "required": false
@@ -4299,6 +4514,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_magnetite_stone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:ad_astra_poor_ore_block_gold_glacio_stone",
       "required": false
     },
@@ -4324,7 +4543,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_monazite_claystone",
       "required": false
     },
-    "immersivegeology:poor_ore_block_platinum_stone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_cobaltite_quartzite",
       "required": false
@@ -4363,6 +4581,10 @@
     },
     "immersivegeology:rich_ore_block_thorite_diorite",
     {
+      "id": "immersivegeology:poor_ore_block_chalcocite_dripstone_block",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_normal_ore_block_unobtania_gabbro",
       "required": false
     },
@@ -4398,9 +4620,12 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_ferberite_moon_stone",
       "required": false
     },
-    "immersivegeology:poor_ore_block_silver_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_thorite_moon_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_magnetite_dripstone_block",
       "required": false
     },
     {
@@ -4411,6 +4636,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_cobaltite_slate",
       "required": false
     },
+    "immersivegeology:rich_ore_block_pyrite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_lead_claystone",
       "required": false
@@ -4475,8 +4701,13 @@
       "required": false
     },
     "immersivegeology:storage_block_tin",
+    "immersivegeology:rich_ore_block_pyrolusite_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_galena_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_chalcopyrite_stone",
       "required": false
     },
     {
@@ -4487,12 +4718,19 @@
       "id": "immersivegeology:tfc_poor_ore_block_chalcocite_dacite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_thorite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_wolframite_diorite",
       "required": false
     },
     "immersivegeology:slab_zirconium",
     "immersivegeology:storage_block_tungsten",
+    {
+      "id": "immersivegeology:ad_astra_rich_ore_block_unobtania_mercury_stone",
+      "required": false
+    },
+    "immersivegeology:rich_ore_block_gypsum_dripstone_block",
+    "immersivegeology:rich_ore_block_cuprite_sandstone",
     {
       "id": "immersivegeology:rich_ore_block_hematite_andesite",
       "required": false
@@ -4505,6 +4743,7 @@
       "id": "immersivegeology:ad_astra_rich_ore_block_galena_glacio_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_galena_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_smithsonite_mars_stone",
       "required": false
@@ -4517,6 +4756,11 @@
       "id": "immersivegeology:tfc_normal_ore_block_platinum_andesite",
       "required": false
     },
+    {
+      "id": "immersivegeology:rich_ore_block_chalcopyrite_dripstone_block",
+      "required": false
+    },
+    "immersivegeology:normal_ore_block_iron_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_ferberite_gabbro",
       "required": false
@@ -4534,6 +4778,7 @@
       "required": false
     },
     "immersivegeology:slab_iron",
+    "immersivegeology:normal_ore_block_pyrolusite_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_osmium_shale",
       "required": false
@@ -4573,6 +4818,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_lead_claystone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_gold_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_monazite_chalk",
       "required": false
@@ -4584,6 +4830,7 @@
     "immersivegeology:poor_ore_block_hubnerite_granite",
     "immersivegeology:normal_ore_block_gold_andesite",
     "immersivegeology:rich_ore_block_ullmannite_granite",
+    "immersivegeology:poor_ore_block_pyrolusite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_smithsonite_claystone",
       "required": false
@@ -4593,6 +4840,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_chalcocite_dolomite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_gold_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_chalcocite_glacio_stone",
       "required": false
@@ -4614,6 +4862,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_molybenite_venus_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_copper_sandstone",
     {
       "id": "immersivegeology:poor_ore_block_hematite_andesite",
       "required": false
@@ -4679,6 +4928,11 @@
     },
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorianite_granite",
+      "required": false
+    },
+    "immersivegeology:normal_ore_block_monazite_sandstone",
+    {
+      "id": "immersivegeology:ad_astra_poor_ore_block_unobtania_mercury_stone",
       "required": false
     },
     {
@@ -4777,6 +5031,7 @@
       "id": "immersivegeology:poor_ore_block_cryolite_granite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_pyrolusite_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_pyrolusite_dolomite",
       "required": false
@@ -4789,8 +5044,13 @@
       "id": "immersivegeology:tfc_poor_ore_block_iron_conglomerate",
       "required": false
     },
+    "immersivegeology:normal_ore_block_gold_sandstone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_pyrolusite_glacio_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_unobtania_slate",
       "required": false
     },
     {
@@ -4829,6 +5089,10 @@
     },
     "immersivegeology:slab_tungsten",
     {
+      "id": "immersivegeology:poor_ore_block_cassiterite_dripstone_block",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_rich_ore_block_cuprite_andesite",
       "required": false
     },
@@ -4850,6 +5114,10 @@
       "id": "immersivegeology:tfc_rich_ore_block_smithsonite_chalk",
       "required": false
     },
+    {
+      "id": "immersivegeology:normal_ore_block_chalcopyrite_dripstone_block",
+      "required": false
+    },
     "immersivegeology:slab_hastelloy",
     {
       "id": "immersivegeology:tfc_rich_ore_block_thorianite_diorite",
@@ -4863,7 +5131,6 @@
       "id": "immersivegeology:tfc_poor_ore_block_osmium_chert",
       "required": false
     },
-    "immersivegeology:poor_ore_block_anatase_stone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_pyrite_mars_stone",
       "required": false
@@ -4872,6 +5139,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_diorite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_smithsonite_stone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_copper_mars_stone",
       "required": false
@@ -4900,6 +5168,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_gold_conglomerate",
       "required": false
     },
+    "immersivegeology:normal_ore_block_unobtania_deepslate",
     "immersivegeology:normal_ore_block_lead_andesite",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_thorite_mars_stone",
@@ -4927,6 +5196,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_thorite_diorite",
       "required": false
     },
+    "immersivegeology:poor_ore_block_pyrite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_thorianite_diorite",
       "required": false
@@ -4955,6 +5225,8 @@
       "id": "immersivegeology:tfc_normal_ore_block_acanthite_schist",
       "required": false
     },
+    "immersivegeology:normal_ore_block_pyrolusite_dripstone_block",
+    "immersivegeology:poor_ore_block_bauxite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_cobaltite_gneiss",
       "required": false
@@ -4980,6 +5252,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:normal_ore_block_chalcocite_dripstone_block",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_rich_ore_block_lead_claystone",
       "required": false
     },
@@ -4992,10 +5268,12 @@
       "id": "immersivegeology:tfc_rich_ore_block_gold_basalt",
       "required": false
     },
+    "immersivegeology:rich_ore_block_copper_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_ullmannite_diorite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_vanadinite_sandstone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_vanadinite_glacio_stone",
       "required": false
@@ -5034,6 +5312,11 @@
     },
     {
       "id": "immersivegeology:tfc_normal_ore_block_molybenite_chalk",
+      "required": false
+    },
+    "immersivegeology:poor_ore_block_pyrolusite_sandstone",
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_unobtania_slate",
       "required": false
     },
     {
@@ -5092,6 +5375,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_claystone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_bauxite_sandstone",
     "immersivegeology:rich_ore_block_hubnerite_diorite",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_cassiterite_venus_stone",
@@ -5111,6 +5395,10 @@
       "required": false
     },
     {
+      "id": "immersivegeology:normal_ore_block_chalcopyrite_stone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_normal_ore_block_molybenite_chert",
       "required": false
     },
@@ -5122,6 +5410,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_pyrolusite_venus_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_thorianite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_hubnerite_basalt",
       "required": false
@@ -5130,6 +5419,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_monazite_andesite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_pyrite_stone",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_galena_mars_stone",
       "required": false
@@ -5166,7 +5456,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_acanthite_marble",
       "required": false
     },
-    "immersivegeology:rich_ore_block_osmium_stone",
+    "immersivegeology:rich_ore_block_molybenite_sandstone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_pyrite_venus_stone",
       "required": false
@@ -5202,10 +5492,12 @@
       "id": "immersivegeology:tfc_rich_ore_block_acanthite_marble",
       "required": false
     },
+    "immersivegeology:normal_ore_block_osmium_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_magnetite_shale",
       "required": false
     },
+    "immersivegeology:rich_ore_block_platinum_dripstone_block",
     "immersivegeology:normal_ore_block_galena_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_iron_shale",
@@ -5229,6 +5521,8 @@
       "id": "immersivegeology:tfc_normal_ore_block_ilmenite_andesite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_hubnerite_sandstone",
+    "immersivegeology:rich_ore_block_cuprite_dripstone_block",
     {
       "id": "immersivegeology:tfc_poor_ore_block_molybenite_conglomerate",
       "required": false
@@ -5243,6 +5537,7 @@
       "required": false
     },
     "immersivegeology:poor_ore_block_cobaltite_granite",
+    "immersivegeology:normal_ore_block_vanadinite_dripstone_block",
     {
       "id": "immersivegeology:tfc_rich_ore_block_acanthite_schist",
       "required": false
@@ -5337,6 +5632,7 @@
       "id": "immersivegeology:tfc_rich_ore_block_galena_dolomite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_scheelite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_thorianite_moon_stone",
       "required": false
@@ -5380,7 +5676,6 @@
       "required": false
     },
     "immersivegeology:normal_ore_block_hubnerite_granite",
-    "immersivegeology:poor_ore_block_hubnerite_stone",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_hubnerite_glacio_stone",
       "required": false
@@ -5418,6 +5713,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_chalcocite_venus_stone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_thorianite_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_pyrite_dolomite",
       "required": false
@@ -5431,15 +5727,17 @@
       "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_dolomite",
       "required": false
     },
-    "immersivegeology:rich_ore_block_gold_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_scheelite_chalk",
       "required": false
     },
+    "immersivegeology:rich_ore_block_thorianite_sandstone",
+    "immersivegeology:normal_ore_block_silver_sandstone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_hubnerite_rhyolite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_silver_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cobaltite_diorite",
       "required": false
@@ -5452,10 +5750,12 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_monazite_mars_stone",
       "required": false
     },
+    "immersivegeology:rich_ore_block_smithsonite_sandstone",
     {
       "id": "immersivegeology:tfc_poor_ore_block_unobtania_diorite",
       "required": false
     },
+    "immersivegeology:rich_ore_block_vanadinite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_cryolite_diorite",
       "required": false
@@ -5489,7 +5789,6 @@
       "id": "immersivegeology:tfc_rich_ore_block_anatase_gneiss",
       "required": false
     },
-    "immersivegeology:normal_ore_block_wolframite_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_chromite_marble",
       "required": false
@@ -5511,6 +5810,7 @@
       "id": "immersivegeology:ad_astra_normal_ore_block_thorianite_mars_stone",
       "required": false
     },
+    "immersivegeology:normal_ore_block_smithsonite_dripstone_block",
     "immersivegeology:poor_ore_block_vanadinite_granite",
     {
       "id": "immersivegeology:ad_astra_poor_ore_block_galena_glacio_stone",
@@ -5528,6 +5828,7 @@
       "id": "immersivegeology:tfc_normal_ore_block_galena_chert",
       "required": false
     },
+    "immersivegeology:normal_ore_block_molybenite_sandstone",
     {
       "id": "immersivegeology:ad_astra_rich_ore_block_cuprite_mars_stone",
       "required": false
@@ -5568,6 +5869,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_pyrolusite_diorite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_monazite_dripstone_block",
     {
       "id": "immersivegeology:ad_astra_normal_ore_block_smithsonite_mars_stone",
       "required": false
@@ -5605,7 +5907,6 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_zircon_moon_stone",
       "required": false
     },
-    "immersivegeology:rich_ore_block_silver_stone",
     {
       "id": "immersivegeology:tfc_normal_ore_block_pyrolusite_chalk",
       "required": false
@@ -5620,7 +5921,7 @@
       "id": "immersivegeology:tfc_poor_ore_block_molybenite_diorite",
       "required": false
     },
-    "immersivegeology:rich_ore_block_wolframite_stone",
+    "immersivegeology:rich_ore_block_gold_sandstone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_gypsum_chert",
       "required": false
@@ -5713,6 +6014,7 @@
       "id": "immersivegeology:ad_astra_poor_ore_block_thorianite_glacio_stone",
       "required": false
     },
+    "immersivegeology:poor_ore_block_vanadinite_dripstone_block",
     {
       "id": "immersivegeology:tfc_normal_ore_block_pyrolusite_claystone",
       "required": false
@@ -5795,6 +6097,7 @@
       "id": "immersivegeology:normal_ore_block_cassiterite_andesite",
       "required": false
     },
+    "immersivegeology:normal_ore_block_vanadinite_stone",
     {
       "id": "immersivegeology:tfc_rich_ore_block_osmium_dolomite",
       "required": false
@@ -5808,9 +6111,15 @@
       "required": false
     },
     {
+      "id": "immersivegeology:tfc_normal_ore_block_unobtania_quartzite",
+      "required": false
+    },
+    {
       "id": "immersivegeology:tfc_poor_ore_block_fluorite_granite",
       "required": false
     },
-    "immersivegeology:rich_ore_block_hubnerite_granite"
+    "immersivegeology:poor_ore_block_pyrite_sandstone",
+    "immersivegeology:rich_ore_block_hubnerite_granite",
+    "immersivegeology:rich_ore_block_vanadinite_stone"
   ]
 }

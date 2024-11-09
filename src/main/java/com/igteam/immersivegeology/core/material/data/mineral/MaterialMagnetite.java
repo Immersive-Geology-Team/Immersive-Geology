@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -17,7 +18,9 @@ public class MaterialMagnetite extends MaterialMineral {
     public MaterialMagnetite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+        CONFIG = new MineralConfig(15,35,2,0,180,50, Optional.empty());
     }
 
     @Override

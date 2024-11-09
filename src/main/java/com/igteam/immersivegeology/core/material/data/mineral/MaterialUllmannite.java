@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -15,6 +16,7 @@ public class MaterialUllmannite extends MaterialMineral {
     public MaterialUllmannite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        CONFIG = new MineralConfig(10,90,1,-64,20,3, Optional.empty());
     }
 
     @Override

@@ -108,6 +108,9 @@
   "block.immersivegeology.storage_block": "%s Block",
   "block.immersivegeology.rock": "%s Stone",
   "block.immersivegeology.stone": "%s",
+  "block.immersivegeology.sandstone": "%s",
+  "block.immersivegeology.dripstone_block": "%s",
+  "block.immersivegeology.dripstone": "%s",
   "block.immersivegeology.cobblestone": "%s Cobblestone",
   "block.immersivegeology.gravel": "%s Gravel",
   "block.immersivegeology.column": "%s Column",
@@ -158,6 +161,9 @@
   "material.immersivegeology.sulfurdioxide": "Sulfur Dioxide",
 
   "material.immersivegeology.vanilla": "Stone",
+  "material.immersivegeology.sandstone": "Sandstone",
+  "material.immersivegeology.dripstone": "Dripstone",
+  "material.immersivegeology.dripstone_block": "Dripstone",
   "material.immersivegeology.deepslate": "Deepslate",
   "material.immersivegeology.moon_stone": "Moon Stone",
   "material.immersivegeology.mars_stone": "Mars Stone",
@@ -203,6 +209,7 @@
 
   "material.immersivegeology.stone": "Stone",
   "material.immersivegeology.wolframite": "Wolframite",
+  "material.immersivegeology.molybenite": "Molybenite",
   "material.immersivegeology.unobtainium": "Unobtainium",
   "material.immersivegeology.aluminum": "Aluminium",
   "material.immersivegeology.copper": "Copper",

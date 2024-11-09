@@ -14,5 +14,5 @@ public enum StoneFormation
 	IGNEOUS_EXTRUSIVE,
 	METAMORPHIC,
 	SEDIMENTARY,
-	MAGIC // Used for Minecraft Stone which is every stone type
+	MINECRAFT_STONE
 }

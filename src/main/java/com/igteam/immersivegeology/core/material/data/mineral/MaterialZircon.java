@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -16,6 +17,7 @@ public class MaterialZircon extends MaterialMineral {
     public MaterialZircon() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        CONFIG = new MineralConfig(6,60,3,-64,40,18, Optional.empty());
     }
 
     @Override

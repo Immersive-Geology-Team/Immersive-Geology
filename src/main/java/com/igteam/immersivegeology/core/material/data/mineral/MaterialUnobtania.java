@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -16,6 +17,8 @@ public class MaterialUnobtania extends MaterialMineral {
     public MaterialUnobtania() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
+        CONFIG = new MineralConfig(3,95,1,-64,-16,2, Optional.empty());
     }
 
     @Override

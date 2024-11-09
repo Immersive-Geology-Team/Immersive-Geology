@@ -99,6 +99,7 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue maxY;
 			public final ForgeConfigSpec.IntValue veinsPerChunk;
 			public final ForgeConfigSpec.IntValue generationChance;
+			public final ForgeConfigSpec.IntValue rarity;
 
 			private OreConfig(ForgeConfigSpec.Builder builder, MineralEnum mineral)
 			{
@@ -108,7 +109,8 @@ public class IGServerConfig
 				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
-				this.generationChance = builder.comment("").defineInRange("generation_chance",mineral.rarity(), 0, 100);
+				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate").defineInRange("generation_chance",mineral.rarity(), 0, 100);
+				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
 				builder.pop();
 			}
 		}

@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.world.item.ItemStack;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -26,8 +27,10 @@ public class MaterialChalcocite extends MaterialMineral {
     public MaterialChalcocite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+        CONFIG = new MineralConfig(14,40,1,-32,200,50, Optional.empty());
     }
 
     @Override

@@ -28,6 +28,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -38,6 +39,9 @@ public class MaterialAnatase extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+
+        CONFIG = new MineralConfig(8,70,1,-80,70,30, Optional.empty());
     }
 
     @Override

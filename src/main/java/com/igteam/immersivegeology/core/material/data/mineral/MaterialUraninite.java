@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -16,6 +17,7 @@ public class MaterialUraninite extends MaterialMineral {
         super();
         // in TFC is called 'PitchBlende'
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        CONFIG = new MineralConfig(6,80,2,20,180,10, Optional.empty());
     }
 
     @Override

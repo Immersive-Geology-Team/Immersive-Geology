@@ -13,6 +13,10 @@ import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
+
+import java.util.Optional;
 
 public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Acanthite(new MaterialAcanthite()),
@@ -64,31 +68,31 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
 
 	public int getVeinSize()
 	{
-        return 16;
+        return material.CONFIG.veinSize();
 	}
 
     public int getMinY()
     {
-        return -32;
+        return material.CONFIG.minY();
     }
 
     public int getMaxY()
     {
-        return 112;
+        return material.CONFIG.maxY();
     }
 
     public int veinsPerChunk()
     {
-        return 1;
-    }
-
-    public double airExposure()
-    {
-        return 0.5;
+        return material.CONFIG.veinsPerChunk();
     }
 
     public int rarity()
     {
-        return 50;
+        return material.CONFIG.rarity();
+    }
+
+    public Optional<TagKey<Biome>> getPreferredBiome()
+    {
+        return material.CONFIG.preferredBiome();
     }
 }

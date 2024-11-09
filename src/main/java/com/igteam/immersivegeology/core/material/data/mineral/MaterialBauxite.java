@@ -21,6 +21,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -29,6 +30,9 @@ public class MaterialBauxite extends MaterialMineral {
     public MaterialBauxite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+
+        CONFIG = new MineralConfig(8,50,1,-16,200,25, Optional.empty());
     }
 
     @Override

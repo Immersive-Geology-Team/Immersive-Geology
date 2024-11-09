@@ -163,6 +163,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return this.acceptableStoneTypes.contains(stone.getStoneFormation());
     }
 
+    public boolean isValidStoneFormation(StoneFormation formation)
+    {
+        return this.acceptableStoneTypes.contains(formation);
+    }
+
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.CUBIC;
     }

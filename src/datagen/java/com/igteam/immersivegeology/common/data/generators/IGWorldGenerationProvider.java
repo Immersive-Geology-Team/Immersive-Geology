@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.Util;
 import net.minecraft.core.*;
@@ -28,6 +29,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
@@ -35,6 +37,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -73,6 +77,7 @@ public class IGWorldGenerationProvider
 		for(MineralEnum entry : IGServerConfig.ORES.ores.keySet())
 		{
 			final FeatureRegistration type_registration = new FeatureRegistration(IGLib.rl(entry.getName()));
+			type_registration.setSedimentary(entry.instance().isValidStoneFormation(StoneFormation.SEDIMENTARY));
 			mineral_features.put(entry, type_registration);
 		}
 
@@ -89,7 +94,7 @@ public class IGWorldGenerationProvider
 		{
 			MineralEnum data = entry.getKey();
 			// Register the configured feature
-			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), Optional.empty())));
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getPreferredBiome())));
 		}
 	}
 
@@ -110,17 +115,27 @@ public class IGWorldGenerationProvider
 	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures) {
 		final HolderGetter<Biome> biomeReg = ctx.lookup(Registries.BIOME);
 		// Register all biome modifiers for the features
-		for (final FeatureRegistration entry : oreFeatures.values()) {
+		for (final FeatureRegistration entry : oreFeatures.values())
+		{
 			final HolderSet<Biome> biomes;
-			if (entry.inBiomes != null) {
+			if(entry.inBiomes!=null)
+			{
 				biomes = biomeReg.getOrThrow(entry.inBiomes);
-			} else {
+			}
+			else
+			{
 				biomes = new AnyHolderSet<>(new DummyRegistryLookup<>(biomeReg, Registries.BIOME));
 			}
 			final AddFeaturesBiomeModifier modifier = new AddFeaturesBiomeModifier(
 					biomes, HolderSet.direct(entry.placed), Decoration.UNDERGROUND_ORES
 			);
+
+			final AddFeaturesBiomeModifier sedimentary = new AddFeaturesBiomeModifier(
+					biomes, HolderSet.direct(entry.placed), Decoration.SURFACE_STRUCTURES
+			);
+
 			ctx.register(ResourceKey.create(Keys.BIOME_MODIFIERS, entry.name), modifier);
+			ctx.register(ResourceKey.create(Keys.BIOME_MODIFIERS, new ResourceLocation(IGLib.MODID, entry.name.getPath() + "_sedimentary")), sedimentary);
 		}
 	}
 
@@ -130,6 +145,7 @@ public class IGWorldGenerationProvider
 		public final ResourceLocation name;
 		@Nullable
 		public final TagKey<Biome> inBiomes;
+		private boolean isSedimentaryFeature = false;
 
 		private FeatureRegistration(ResourceLocation name) {
 			this(name, BiomeTags.IS_OVERWORLD);  // Ensure that BiomeTags.IS_OVERWORLD is not null
@@ -154,6 +170,16 @@ public class IGWorldGenerationProvider
 			} else {
 				IGLib.IG_LOGGER.info("PlacementModifier is null for {}",this.name);
 			}
+		}
+
+		public boolean isSedimentary()
+		{
+			return isSedimentaryFeature;
+		}
+
+		public void setSedimentary(boolean valid)
+		{
+			isSedimentaryFeature = valid;
 		}
 	}
 

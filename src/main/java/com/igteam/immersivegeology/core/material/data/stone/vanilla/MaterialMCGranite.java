@@ -12,7 +12,7 @@ public class MaterialMCGranite extends MaterialStone {
 
     public MaterialMCGranite() {
         super();
-        this.name = "granite"; // Special Case as we need to override the deafult name assignment method
+        this.name = "granite"; // Special Case as we need to override the default name assignment method
         this.STONE_FORMATION = StoneFormation.IGNEOUS_INTRUSIVE;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
 

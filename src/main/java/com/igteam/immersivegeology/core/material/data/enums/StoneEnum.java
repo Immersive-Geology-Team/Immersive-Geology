@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.stone.compat.adastra.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialAndesite;
@@ -18,6 +19,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -58,6 +60,8 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MCAndesite(new MaterialMCAndesite()),
     MCDiorite(new MaterialMCDiorite()),
     MCGranite(new MaterialMCGranite()),
+    Dripstone(new MaterialMCDripstone()),
+    Sandstone(new MaterialMCSandstone()),
 
     //===== Minecraft Sands =====\\
     //Sand(new MaterialSand()),
@@ -82,6 +86,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
         String stoneName = capitalizeFirstLetter(stoneState.getBlock().getName().getString().toLowerCase());
         if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
         if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
+        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("_block", "")))) return valueOf(stoneName);
         return null;
     }
 

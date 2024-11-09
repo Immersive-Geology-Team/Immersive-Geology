@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -17,11 +18,12 @@ public class MaterialMolybenite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        CONFIG = new MineralConfig(6,80,1,-64,112,10, Optional.empty());
     }
 
     @Override
     protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xC21E56));
+        return ((p) -> (0xb3cbe4));
     }
 
     @Override

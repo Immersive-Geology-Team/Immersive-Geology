@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -16,6 +17,8 @@ public class MaterialSmithsonite extends MaterialMineral {
     public MaterialSmithsonite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(8,50,2,30,70,25, Optional.empty());
     }
 
     @Override

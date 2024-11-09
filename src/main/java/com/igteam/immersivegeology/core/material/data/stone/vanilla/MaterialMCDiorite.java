@@ -13,7 +13,7 @@ public class MaterialMCDiorite extends MaterialStone {
     public MaterialMCDiorite() {
         super();
         this.STONE_FORMATION = StoneFormation.IGNEOUS_INTRUSIVE;
-        this.name = "diorite"; // Special Case as we need to override the deafult name assignment method
+        this.name = "diorite"; // Special Case as we need to override the default name assignment method
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

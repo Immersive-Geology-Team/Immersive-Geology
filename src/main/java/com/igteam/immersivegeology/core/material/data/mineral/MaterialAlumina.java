@@ -27,6 +27,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -35,6 +36,9 @@ public class MaterialAlumina extends MaterialMineral {
     public MaterialAlumina() {
         super();
         removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
+
+        // Does not spawn
+        CONFIG = new MineralConfig(0,0,0,0,1,0, Optional.empty());
     }
 
     @Override

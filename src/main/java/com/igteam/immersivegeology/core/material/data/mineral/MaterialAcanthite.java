@@ -27,6 +27,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.world.item.ItemStack;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -37,6 +38,7 @@ public class MaterialAcanthite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         addFlags(ItemCategoryFlags.SLAG);
+        CONFIG = new MineralConfig(8,30,1,-70,128,12, Optional.empty());
     }
 
     @Override

@@ -13,11 +13,11 @@ import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.dries007.tfc.world.feature.vein.IVein;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Holder;
@@ -118,19 +118,19 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	protected void place(WorldGenLevel level, RandomSource random, int blockX, int blockZ, Vein vein, IGOreFeatureConfig config)
 	{
 		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+		MineralEnum mineral = config.entry;
+		OreConfig oreConfig = IGServerConfig.ORES.ores.get(mineral);
 		BlockPos pos = vein.pos();
-		BoundingBox box = new BoundingBox(pos).inflatedBy(6);
+		BoundingBox box = new BoundingBox(pos).inflatedBy((Math.max(2,oreConfig.veinSize.get()) / 2));
 		int offsetX;
 		int offsetZ;
 		offsetX = random.nextInt(16) - random.nextInt(16);
 		offsetZ = random.nextInt(16) - random.nextInt(16);
 
-		MineralEnum mineral = config.entry;
-
 		int minX = Math.max(blockX, box.minX());
 		int maxX = Math.min(blockX + 15, box.maxX());
-		int minY = Math.max(mineral.getMinY(), box.minY());
-		int maxY = Math.min(mineral.getMaxY(), box.maxY());
+		int minY = Math.max(oreConfig.minY.get(), box.minY());
+		int maxY = Math.min(oreConfig.maxY.get(), box.maxY());
 		int minZ = Math.max(blockZ, box.minZ());
 		int maxZ = Math.min(blockZ + 15, box.maxZ());
 		IGServerConfig.Ores.OreConfig cng = IGServerConfig.ORES.ores.get(config.entry);
@@ -139,14 +139,13 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		if (chance > random.nextInt(100)) {
 			for(int x = minX; x <= maxX; ++x) {
 				for(int z = minZ; z <= maxZ; ++z) {
-					int projectedY = (int) Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25);
+					int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));
 					for(int y = minY; y <= maxY; ++y) {
 						cursor.set(x, y + projectedY, z);
 						BlockState stoneState = level.getBlockState(cursor);
 						BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
 						if (oreState != null) {
 							level.setBlock(cursor, oreState, 3);
-							projectedY++;
 						}
 					}
 				}
@@ -177,8 +176,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		});
 
 		public int getSize() {
-			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
-			return config.veinSize.get();
+			return getConfig().veinSize.get();
 		}
 
 		public static long hash(String name) {
@@ -186,9 +184,13 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return seed128.seedLo() ^ seed128.seedHi();
 		}
 
-		public double getAirExposure() {
-			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
-			return config.airExposure.get();
+		public int getRarity() {
+			return getConfig().rarity.get();
+		}
+
+		private OreConfig getConfig()
+		{
+			return IGServerConfig.ORES.ores.get(entry);
 		}
 
 		public MineralEnum type() {
@@ -201,8 +203,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			TagMatchTest validStone = new TagMatchTest(Blocks.STONE);
 			if(!validStone.test(stoneState, random)) return null;
 			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
-			if(stone == null) return null;
-			if(!mineral.instance().acceptableStoneType(stone.instance())) return null;
+			if(stone == null) {
+				return null;
+			}
+			if(!mineral.instance().acceptableStoneType(stone.instance())) {
+				return null;
+			}
 
 			// List of blocks for each ore richness
 			List<BlockState> blocks = List.of(
@@ -213,6 +219,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 			// Get the size of the ore deposit (it's assumed to be a cubic or spherical region)
 			int size = config.getSize();
+
+			// Rarity 0 ~ 100, higher the rarity the more often POOR ore will be in the distribution, the lower the rarity more RICH ore will be in the distribution.
+			int rarity = config.getRarity();
 
 			// Calculate the distance from the center (0, 0, 0)
 			double distance = Math.sqrt(xFromCenter * xFromCenter + yFromCenter * yFromCenter + zFromCenter * zFromCenter);
@@ -229,9 +238,18 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			// Normalize the probability to ensure it's between 0 and 1
 			gaussianProbability = Math.max(0.0, Math.min(1.0, gaussianProbability));
 
+			double rarityAdjustment = 0.5 - (rarity / 100.0);
+
+			// Adjust probability based on rarity (scale it toward poorer ore as rarity increases)
+			gaussianProbability = Math.max(0.0, Math.min(1.0, gaussianProbability + rarityAdjustment));
+
 			// Now decide which ore block to return based on the probability
 			// Use weighted probability based on the Gaussian distribution
-			if (gaussianProbability < 0.33) {
+
+			if(gaussianProbability < 0.2)
+			{
+				return random.nextInt(1) == 0 ? null : blocks.get(0);
+			} else if (gaussianProbability < 0.33) {
 				return blocks.get(0); // Poor Ore
 			} else if (gaussianProbability < 0.66) {
 				return blocks.get(1); // Normal Ore
