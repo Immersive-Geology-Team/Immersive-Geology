@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#forge:is_sparse/overworld",
   "features": "immersivegeology:chromite",
   "step": "underground_ores"
 }

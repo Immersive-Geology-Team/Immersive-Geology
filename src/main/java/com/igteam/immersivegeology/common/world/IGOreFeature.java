@@ -90,10 +90,11 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	public final void getVeinsAtChunk(WorldGenLevel level, int chunkPosX, int chunkPosZ, List<Vein> veins, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
 		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPosX * 61728364132L, config.seed ^ (long)chunkPosZ * 16298364123L);
-		if(config.getChanceToGenerate(config.entry) > random.nextInt(100))
+		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
+		Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
+
+		if(config.getChanceToGenerate(config.entry) > random.nextInt(5000))
 		{
-			OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-			Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
 			if(config.canSpawnAt(vein.pos(), biomeQuery))
 			{
 				veins.add(vein);
@@ -118,10 +119,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	protected void place(WorldGenLevel level, RandomSource random, int blockX, int blockZ, Vein vein, IGOreFeatureConfig config)
 	{
 		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-		MineralEnum mineral = config.entry;
+		IWorldGenConfig mineral = config.entry;
 		OreConfig oreConfig = IGServerConfig.ORES.ores.get(mineral);
 		BlockPos pos = vein.pos();
-		BoundingBox box = new BoundingBox(pos).inflatedBy((Math.max(2,oreConfig.veinSize.get()) / 2));
+		BoundingBox box = new BoundingBox(pos).inflatedBy(random.nextInt(Math.floorDiv((Math.max(4,oreConfig.veinSize.get())), 4)) + (Math.max(2,oreConfig.veinSize.get()) / 2));
 		int offsetX;
 		int offsetZ;
 		offsetX = random.nextInt(16) - random.nextInt(16);
@@ -136,21 +137,20 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		IGServerConfig.Ores.OreConfig cng = IGServerConfig.ORES.ores.get(config.entry);
 		int chance = cng.generationChance.get();
 		random.setSeed(config.seed);
-		if (chance > random.nextInt(100)) {
-			for(int x = minX; x <= maxX; ++x) {
-				for(int z = minZ; z <= maxZ; ++z) {
-					int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));
-					for(int y = minY; y <= maxY; ++y) {
-						cursor.set(x, y + projectedY, z);
-						BlockState stoneState = level.getBlockState(cursor);
-						BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
-						if (oreState != null) {
-							level.setBlock(cursor, oreState, 3);
-						}
+		for(int x = minX; x <= maxX; ++x) {
+			for(int z = minZ; z <= maxZ; ++z) {
+				int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));
+				for(int y = minY; y <= maxY; ++y) {
+					cursor.set(x, y + projectedY, z);
+					BlockState stoneState = level.getBlockState(cursor);
+					BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
+					if (oreState != null) {
+						level.setBlock(cursor, oreState, 3);
 					}
 				}
 			}
 		}
+
 	}
 
 	private boolean isNearLava(WorldGenLevel level, MutableBlockPos cursor, int x, int z)
@@ -167,10 +167,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	}
 
 
-	public record IGOreFeatureConfig(MineralEnum entry, long seed, Optional<TagKey<Biome>> biomes) implements FeatureConfiguration
+	public record IGOreFeatureConfig(IWorldGenConfig entry, long seed, Optional<TagKey<Biome>> biomes) implements FeatureConfiguration
 	{
 		public static final MapCodec<IGOreFeatureConfig> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-			return instance.group(MineralEnum.CODEC.fieldOf("entry").forGetter((c) -> c.entry),
+			return instance.group(IWorldGenConfig.CODEC.fieldOf("entry").forGetter((c) -> c.entry),
 					Codec.either(Codec.STRING, Codec.LONG).xmap((e) -> e.map(IGOreFeatureConfig::hash, (l) -> l), Either::right).fieldOf("random_name").forGetter((c) -> c.seed),
 					CodecHelper.optionalFieldOf(TagKey.hashedCodec(Registries.BIOME), "biomes").forGetter((c) -> c.biomes)).apply(instance, IGOreFeatureConfig::new);
 		});
@@ -193,13 +193,13 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return IGServerConfig.ORES.ores.get(entry);
 		}
 
-		public MineralEnum type() {
+		public IWorldGenConfig type() {
 			return this.entry;
 		}
 
 		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, int xFromCenter, int yFromCenter, int zFromCenter)
 		{
-			MineralEnum mineral = config.entry;
+			IWorldGenConfig mineral = config.entry;
 			TagMatchTest validStone = new TagMatchTest(Blocks.STONE);
 			if(!validStone.test(stoneState, random)) return null;
 			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
@@ -246,9 +246,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			// Now decide which ore block to return based on the probability
 			// Use weighted probability based on the Gaussian distribution
 
-			if(gaussianProbability < 0.2)
+			if(gaussianProbability < 0.11)
 			{
-				return random.nextInt(1) == 0 ? null : blocks.get(0);
+				return random.nextInt(6) < 5 ? null : blocks.get(0);
 			} else if (gaussianProbability < 0.33) {
 				return blocks.get(0); // Poor Ore
 			} else if (gaussianProbability < 0.66) {
@@ -258,7 +258,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			}
 		}
 
-		public int getChanceToGenerate(MineralEnum entry)
+		public int getChanceToGenerate(IWorldGenConfig entry)
 		{
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.generationChance.get();

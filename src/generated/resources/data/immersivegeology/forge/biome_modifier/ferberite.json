@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#forge:is_mountain",
   "features": "immersivegeology:ferberite",
   "step": "underground_ores"
 }

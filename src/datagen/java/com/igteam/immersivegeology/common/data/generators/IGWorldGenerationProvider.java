@@ -49,6 +49,7 @@ import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -61,6 +62,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,10 +75,10 @@ public class IGWorldGenerationProvider
 		IGLib.IG_LOGGER.info("Generating Data for IGWorldGenerationProvider");
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
 
-		final Map<MineralEnum, FeatureRegistration> mineral_features = new HashMap<>();
-		for(MineralEnum entry : IGServerConfig.ORES.ores.keySet())
+		final Map<IWorldGenConfig, FeatureRegistration> mineral_features = new HashMap<>();
+		for(IWorldGenConfig entry : IGServerConfig.ORES.ores.keySet())
 		{
-			final FeatureRegistration type_registration = new FeatureRegistration(IGLib.rl(entry.getName()));
+			final FeatureRegistration type_registration = new FeatureRegistration(IGLib.rl(entry.getName()), entry.getPreferredBiome());
 			type_registration.setSedimentary(entry.instance().isValidStoneFormation(StoneFormation.SEDIMENTARY));
 			mineral_features.put(entry, type_registration);
 		}
@@ -88,20 +90,20 @@ public class IGWorldGenerationProvider
 		return List.of(new DatapackBuiltinEntriesProvider(output, vanillaRegistries, registryBuilder, Set.of(IGLib.MODID)));
 	}
 
-	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures)
+	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures)
 	{
-		for(final Entry<MineralEnum, FeatureRegistration> entry : oreFeatures.entrySet())
+		for(final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet())
 		{
-			MineralEnum data = entry.getKey();
+			IWorldGenConfig data = entry.getKey();
 			// Register the configured feature
 			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getPreferredBiome())));
 		}
 	}
 
-	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures) {
+	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures) {
 		// Register all placed features for the ores
-		for (final Entry<MineralEnum, FeatureRegistration> entry : oreFeatures.entrySet()) {
-			final MineralEnum type = entry.getKey();
+		for (final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet()) {
+			final IWorldGenConfig type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
 					InSquarePlacement.spread(),
@@ -112,7 +114,7 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<MineralEnum, FeatureRegistration> oreFeatures) {
+	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures) {
 		final HolderGetter<Biome> biomeReg = ctx.lookup(Registries.BIOME);
 		// Register all biome modifiers for the features
 		for (final FeatureRegistration entry : oreFeatures.values())
@@ -130,12 +132,7 @@ public class IGWorldGenerationProvider
 					biomes, HolderSet.direct(entry.placed), Decoration.UNDERGROUND_ORES
 			);
 
-			final AddFeaturesBiomeModifier sedimentary = new AddFeaturesBiomeModifier(
-					biomes, HolderSet.direct(entry.placed), Decoration.SURFACE_STRUCTURES
-			);
-
 			ctx.register(ResourceKey.create(Keys.BIOME_MODIFIERS, entry.name), modifier);
-			ctx.register(ResourceKey.create(Keys.BIOME_MODIFIERS, new ResourceLocation(IGLib.MODID, entry.name.getPath() + "_sedimentary")), sedimentary);
 		}
 	}
 
@@ -146,14 +143,10 @@ public class IGWorldGenerationProvider
 		@Nullable
 		public final TagKey<Biome> inBiomes;
 		private boolean isSedimentaryFeature = false;
-
-		private FeatureRegistration(ResourceLocation name) {
-			this(name, BiomeTags.IS_OVERWORLD);  // Ensure that BiomeTags.IS_OVERWORLD is not null
-		}
-
-		private FeatureRegistration(ResourceLocation name, @Nullable TagKey<Biome> inBiomes) {
+		
+		private FeatureRegistration(ResourceLocation name, Optional<TagKey<Biome>> holder) {
 			this.name = name != null ? name : new ResourceLocation("default:feature_name");
-			this.inBiomes = inBiomes;
+			this.inBiomes = holder.orElse(BiomeTags.IS_OVERWORLD);
 		}
 
 		private void registerConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured) {

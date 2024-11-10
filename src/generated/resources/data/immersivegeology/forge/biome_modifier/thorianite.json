@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#forge:is_sandy",
   "features": "immersivegeology:thorianite",
   "step": "underground_ores"
 }

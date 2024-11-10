@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#minecraft:is_mountain",
   "features": "immersivegeology:hubnerite",
   "step": "underground_ores"
 }

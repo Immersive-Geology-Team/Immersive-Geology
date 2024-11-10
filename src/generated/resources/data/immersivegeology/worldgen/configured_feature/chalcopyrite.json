@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
+    "biomes": "#forge:is_mountain",
     "entry": "Chalcopyrite",
     "random_name": -8034466402700951896
   }

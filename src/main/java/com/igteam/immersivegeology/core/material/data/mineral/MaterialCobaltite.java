@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -18,7 +19,8 @@ public class MaterialCobaltite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
-        CONFIG = new MineralConfig(8,60,1,-72,16,30, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(18,60,1,-64,24,100, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

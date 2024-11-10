@@ -28,12 +28,12 @@ import java.util.Objects;
 
 public class IGHeightProvider extends HeightProvider
 {
-	public static final Codec<IGHeightProvider> CODEC = MineralEnum.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
+	public static final Codec<IGHeightProvider> CODEC = IWorldGenConfig.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
 
-	private final MineralEnum entry;
+	private final IWorldGenConfig entry;
 	private final Lazy<HeightProvider> internalProvider;
 
-	public IGHeightProvider(MineralEnum entry) {
+	public IGHeightProvider(IWorldGenConfig entry) {
 		this.entry = entry;
 		this.internalProvider = Lazy.of(() -> {
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);

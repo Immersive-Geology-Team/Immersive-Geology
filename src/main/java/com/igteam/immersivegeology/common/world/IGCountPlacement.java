@@ -26,9 +26,9 @@ import java.util.stream.Stream;
 public class IGCountPlacement extends RepeatingPlacement
 {
 	public static final Codec<IGCountPlacement> CODEC;
-	private final MineralEnum type;
+	private final IWorldGenConfig type;
 
-	public IGCountPlacement(MineralEnum type) {
+	public IGCountPlacement(IWorldGenConfig type) {
 		this.type = type;
 	}
 
@@ -42,7 +42,7 @@ public class IGCountPlacement extends RepeatingPlacement
 	}
 
 	static {
-		CODEC = MineralEnum.CODEC.xmap(IGCountPlacement::new, (p) -> {
+		CODEC = IWorldGenConfig.CODEC.xmap(IGCountPlacement::new, (p) -> {
 			return p.type;
 		});
 	}

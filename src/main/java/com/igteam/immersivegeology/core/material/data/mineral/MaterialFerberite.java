@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -17,7 +18,8 @@ public class MaterialFerberite extends MaterialMineral {
     public MaterialFerberite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(6,70,1,-64,0,20, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(14,60,2,-12,180,120, Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

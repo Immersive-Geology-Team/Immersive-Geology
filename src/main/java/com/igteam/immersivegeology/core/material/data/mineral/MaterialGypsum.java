@@ -6,6 +6,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
 import java.util.Set;
@@ -17,7 +19,7 @@ public class MaterialGypsum extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(14,30,3,40,80,20, Optional.empty());
+        CONFIG = new MineralConfig(14,30,3,40,80,40, Optional.of(Biomes.IS_DESERT));
     }
 
     @Override

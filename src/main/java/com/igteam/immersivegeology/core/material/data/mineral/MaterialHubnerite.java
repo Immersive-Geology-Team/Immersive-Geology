@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -19,7 +20,8 @@ public class MaterialHubnerite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        CONFIG = new MineralConfig(6,75,1,-64,120,15, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(16,75,1,-64,120,125, Optional.of(BiomeTags.IS_MOUNTAIN));
     }
 
     @Override

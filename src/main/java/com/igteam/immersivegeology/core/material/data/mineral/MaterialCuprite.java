@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -16,9 +17,9 @@ public class MaterialCuprite extends MaterialMineral {
     public MaterialCuprite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
-        CONFIG = new MineralConfig(12,50,1,-8,200,40, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(40,50,4,0,175,25, Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override

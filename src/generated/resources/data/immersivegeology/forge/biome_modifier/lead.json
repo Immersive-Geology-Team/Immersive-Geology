@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_wet",
+  "features": "immersivegeology:lead",
+  "step": "underground_ores"
+}

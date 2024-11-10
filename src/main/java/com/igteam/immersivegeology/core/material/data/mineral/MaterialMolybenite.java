@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -18,7 +19,10 @@ public class MaterialMolybenite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(6,80,1,-64,112,10, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+
+        this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
+        CONFIG = new MineralConfig(12,80,1,-64,82,5, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

@@ -8,33 +8,20 @@
 
 package com.igteam.immersivegeology.common.config;
 
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores;
-import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.OreDistribution;
 import com.electronwill.nightconfig.core.Config;
 import com.google.common.base.Preconditions;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.world.MineralCombination;
-import com.igteam.immersivegeology.common.world.MineralEntry;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import java.util.*;
-import java.util.function.Function;
 
 @EventBusSubscriber(modid = IGLib.MODID, bus = Bus.MOD)
 public class IGServerConfig
@@ -71,12 +58,12 @@ public class IGServerConfig
 
 	public static class Ores
 	{
-		public final Map<MineralEnum, OreConfig> ores = new HashMap<>();
+		public final Map<IWorldGenConfig, OreConfig> ores = new HashMap<>();
 		Ores(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("ores");
 
-			for(MineralEnum num : MineralEnum.values())
+			for(IWorldGenConfig num : generatedValues())
 			{
 				try
 				{
@@ -90,6 +77,13 @@ public class IGServerConfig
 			builder.pop();
 		}
 
+		private List<IWorldGenConfig> generatedValues()
+		{
+			List<IWorldGenConfig> v = new ArrayList<>(Arrays.asList(MineralEnum.values()));
+			v.addAll(MetalEnum.nativeMetals());
+			return v;
+		}
+
 		public static class OreConfig
 		{
 
@@ -101,7 +95,7 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue generationChance;
 			public final ForgeConfigSpec.IntValue rarity;
 
-			private OreConfig(ForgeConfigSpec.Builder builder, MineralEnum mineral)
+			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
 				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
 				this.airExposure = builder.comment("Chance for ores to NOT generate if they are exposed to air. 0 means ignore air exposure, 1 requires being burried.").defineInRange("air_exposure", 0, 0.0, 1.0);
@@ -109,7 +103,7 @@ public class IGServerConfig
 				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
-				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate").defineInRange("generation_chance",mineral.rarity(), 0, 100);
+				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate in a chunk, 5000 is a guaranteed spawn 0 prevents spawns").defineInRange("generation_chance",mineral.rarity(), 0, 5000);
 				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
 				builder.pop();
 			}

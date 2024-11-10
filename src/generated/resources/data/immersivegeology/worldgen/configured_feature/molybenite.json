@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
+    "biomes": "#forge:is_hot",
     "entry": "Molybenite",
     "random_name": -6441057448272742155
   }

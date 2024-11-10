@@ -25,6 +25,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
@@ -41,7 +42,7 @@ public class MaterialAnatase extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(8,70,1,-80,70,30, Optional.empty());
+        CONFIG = new MineralConfig(18,70,1,-64,70,5, Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

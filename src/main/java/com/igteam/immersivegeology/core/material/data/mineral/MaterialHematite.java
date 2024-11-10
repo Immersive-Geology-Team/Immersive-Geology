@@ -8,6 +8,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -20,7 +22,8 @@ public class MaterialHematite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(15,30,2,0,160,50, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(15,30,2,0,160,120, Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override

@@ -16,7 +16,8 @@ public class MaterialUllmannite extends MaterialMineral {
     public MaterialUllmannite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(10,90,1,-64,20,3, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(10,50,2,0,120,3, Optional.empty());
     }
 
     @Override

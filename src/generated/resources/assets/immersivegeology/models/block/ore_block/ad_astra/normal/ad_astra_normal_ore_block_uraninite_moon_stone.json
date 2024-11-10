@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "ad_astra:block/moon_stone",
+    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/igneous_intrusive/igneous_intrusive_normal"
+  }
+}

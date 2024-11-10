@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
+    "biomes": "#forge:is_wet",
     "entry": "Fluorite",
     "random_name": 7028174912511785934
   }

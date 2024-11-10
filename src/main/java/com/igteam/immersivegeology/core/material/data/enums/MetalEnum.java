@@ -8,12 +8,25 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.metal.*;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.serialization.Codec;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
-public enum MetalEnum implements MaterialInterface<MaterialMetal> {
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConfig
+{
     Aluminum(new MaterialAluminum()),
     Bronze(new MaterialBronze()),
     Chromium(new MaterialChromium()),
@@ -45,6 +58,11 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     // Mantle Fluid
     MoltenMantle(new MaterialMoltenMantle());
 
+    public static List<? extends IWorldGenConfig> nativeMetals()
+    {
+        return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.ORE_BLOCK)).toList();
+    }
+
     private final MaterialMetal material;
     MetalEnum(MaterialMetal m){
         this.material = m;
@@ -52,5 +70,59 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal> {
     @Override
     public MaterialMetal instance() {
         return material;
+    }
+
+    @Override
+    public String getName()
+    {
+        return material.getName();
+    }
+
+    @Override
+    public int getVeinSize()
+    {
+        return material.CONFIG.veinSize();
+    }
+
+    @Override
+    public int getMinY()
+    {
+        return material.CONFIG.minY();
+    }
+
+    @Override
+    public int getMaxY()
+    {
+        return material.CONFIG.maxY();
+    }
+
+    @Override
+    public int veinsPerChunk()
+    {
+        return material.CONFIG.veinsPerChunk();
+    }
+
+    @Override
+    public int rarity()
+    {
+        return material.CONFIG.rarity();
+    }
+
+    @Override
+    public Optional<TagKey<Biome>> getPreferredBiome()
+    {
+        return material.CONFIG.preferredBiome();
+    }
+
+    @Override
+    public IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    {
+        return material.getOreBlock(stone, richness);
+    }
+
+    @Override
+    public IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
+    {
+        return material.getOreBlock(stone, richness);
     }
 }

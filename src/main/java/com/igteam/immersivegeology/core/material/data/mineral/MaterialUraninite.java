@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -17,6 +18,10 @@ public class MaterialUraninite extends MaterialMineral {
         super();
         // in TFC is called 'PitchBlende'
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+
         CONFIG = new MineralConfig(6,80,2,20,180,10, Optional.empty());
     }
 

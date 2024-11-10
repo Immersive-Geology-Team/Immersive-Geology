@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:osmium",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Osmium"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Osmium"
+    }
+  ]
+}

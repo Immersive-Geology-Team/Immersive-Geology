@@ -9,8 +9,12 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
 import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
@@ -18,7 +22,8 @@ import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
 
-public enum MineralEnum implements MaterialInterface<MaterialMineral> {
+public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGenConfig
+{
     Acanthite(new MaterialAcanthite()),
     Alumina(new MaterialAlumina()),
     Anatase(new MaterialAnatase()),
@@ -39,8 +44,8 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Ilmenite(new MaterialIlmenite()),
     Kaolinite(new MaterialKaolinite()),
     Magnetite(new MaterialMagnetite()),
-    Monazite(new MaterialMonazite()),
     Molybenite(new MaterialMolybenite()),
+    Monazite(new MaterialMonazite()),
     Pyrite(new MaterialPyrite()),
     Pyrolusite(new MaterialPyrolusite()),
     Scheelite(new MaterialScheelite()),
@@ -55,8 +60,6 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
     Wolframite(new MaterialWolframite()),
     Zircon(new MaterialZircon());
 
-    public static final Codec<MineralEnum> CODEC = Codec.STRING.xmap(MineralEnum::valueOf, Enum::name);
-
     private final MaterialMineral material;
     MineralEnum(MaterialMineral m){
         this.material = m;
@@ -66,7 +69,25 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral> {
         return material;
     }
 
-	public int getVeinSize()
+    @Override
+    public String getName()
+    {
+        return material.getName();
+    }
+
+    @Override
+    public IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    {
+        return material.getOreBlock(stone, richness);
+    }
+
+    @Override
+    public IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
+    {
+        return material.getOreBlock(stone, richness);
+    }
+
+    public int getVeinSize()
 	{
         return material.CONFIG.veinSize();
 	}

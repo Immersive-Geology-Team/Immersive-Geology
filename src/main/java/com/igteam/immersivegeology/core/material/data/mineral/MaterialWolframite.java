@@ -18,7 +18,9 @@ public class MaterialWolframite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(8,75,2,-64,64,12, Optional.empty());
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+
+        CONFIG = new MineralConfig(8,75,2,0,128,12, Optional.empty());
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -18,8 +19,9 @@ public class MaterialSphalerite extends MaterialMineral {
     public MaterialSphalerite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(10,45,3,-64,32,30, Optional.empty());
+        CONFIG = new MineralConfig(10,45,3,0,140,15, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

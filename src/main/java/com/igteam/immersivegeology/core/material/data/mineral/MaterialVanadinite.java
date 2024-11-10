@@ -16,6 +16,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
@@ -30,7 +32,7 @@ public class MaterialVanadinite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(10,70,2,20,140,10, Optional.empty());
+        CONFIG = new MineralConfig(10,70,2,20,140,3, Optional.of(Biomes.IS_HOT));
     }
 
     @Override
