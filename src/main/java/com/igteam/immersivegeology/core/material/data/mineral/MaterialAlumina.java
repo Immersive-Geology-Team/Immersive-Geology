@@ -38,7 +38,7 @@ public class MaterialAlumina extends MaterialMineral {
         removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 
         // Does not spawn
-        CONFIG = new MineralConfig(0,0,0,0,1,0, Optional.empty());
+        CONFIG = new MineralConfig(0,0,0,0,1,0, false,Optional.empty());
     }
 
     @Override

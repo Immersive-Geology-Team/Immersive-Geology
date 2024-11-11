@@ -27,7 +27,7 @@ public class MaterialOsmium extends MaterialNativeMetal
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
-        this.CONFIG = new MaterialMineral.MineralConfig(10,50,1,-40,40,1, Optional.of(Biomes.IS_MOUNTAIN));
+        this.CONFIG = new MaterialMineral.MineralConfig(10,99,1,0,150,1, true, Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

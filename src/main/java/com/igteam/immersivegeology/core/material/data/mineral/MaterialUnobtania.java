@@ -21,7 +21,8 @@ public class MaterialUnobtania extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(20,50,1,-64,-16,1, Optional.of(Biomes.IS_RARE));
+
+        CONFIG = new MineralConfig(20,50,1,-64,32,1, true,Optional.of(Biomes.IS_RARE));
     }
 
     @Override

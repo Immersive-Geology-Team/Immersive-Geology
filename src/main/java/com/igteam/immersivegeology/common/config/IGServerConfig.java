@@ -94,6 +94,7 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue veinsPerChunk;
 			public final ForgeConfigSpec.IntValue generationChance;
 			public final ForgeConfigSpec.IntValue rarity;
+			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
 
 			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
@@ -105,6 +106,7 @@ public class IGServerConfig
 				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
 				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate in a chunk, 5000 is a guaranteed spawn 0 prevents spawns").defineInRange("generation_chance",mineral.rarity(), 0, 5000);
 				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
+				this.useSparsePlacement = builder.comment("If enabled, mineral vein will only have a chance to spawn once every [16] chunks on average, inplace of every chunk.").define("useSparsePlacement", mineral.useSparsePlacement());
 				builder.pop();
 			}
 		}

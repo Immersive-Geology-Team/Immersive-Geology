@@ -30,7 +30,7 @@ public class MaterialCassiterite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(18,50,1,30,150,100, Optional.of(BiomeTags.IS_OVERWORLD));
+        CONFIG = new MineralConfig(18,50,2,30,150,50, false,Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override

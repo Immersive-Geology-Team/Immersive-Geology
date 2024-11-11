@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_sparse/overworld",
+  "biomes": "#forge:is_cold",
   "features": "immersivegeology:cryolite",
   "step": "underground_ores"
 }

@@ -234,9 +234,6 @@
       "id": "immersivegeology:tfc_rich_ore_block_gold_shale",
       "required": false
     },
-    "immersivegeology:poor_ore_block_gold_stone",
-    "immersivegeology:normal_ore_block_gold_stone",
-    "immersivegeology:rich_ore_block_gold_stone",
     "immersivegeology:poor_ore_block_gold_andesite",
     "immersivegeology:normal_ore_block_gold_andesite",
     "immersivegeology:rich_ore_block_gold_andesite",
@@ -1497,6 +1494,9 @@
       "id": "immersivegeology:tfc_rich_ore_block_acanthite_slate",
       "required": false
     },
+    "immersivegeology:poor_ore_block_acanthite_stone",
+    "immersivegeology:normal_ore_block_acanthite_stone",
+    "immersivegeology:rich_ore_block_acanthite_stone",
     "immersivegeology:poor_ore_block_acanthite_deepslate",
     "immersivegeology:normal_ore_block_acanthite_deepslate",
     "immersivegeology:rich_ore_block_acanthite_deepslate",

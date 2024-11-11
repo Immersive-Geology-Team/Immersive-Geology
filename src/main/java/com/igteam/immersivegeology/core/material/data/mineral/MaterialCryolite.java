@@ -22,7 +22,8 @@ public class MaterialCryolite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(14,90,1,0,120,1, Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+
+        CONFIG = new MineralConfig(14,90,1,0,120,1, true,Optional.of(Biomes.IS_COLD));
     }
 
     @Override

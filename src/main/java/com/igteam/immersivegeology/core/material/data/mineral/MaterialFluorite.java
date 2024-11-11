@@ -21,7 +21,8 @@ public class MaterialFluorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(14,60,2,10,120,50, Optional.of(Biomes.IS_WET));
+
+        CONFIG = new MineralConfig(14,60,2,10,120,1000, true,Optional.of(Biomes.IS_WET));
     }
 
     @Override

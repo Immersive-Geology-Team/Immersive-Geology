@@ -20,7 +20,10 @@ public class MaterialMonazite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
-        CONFIG = new MineralConfig(14,90,1,20,120,5, Optional.of(Biomes.IS_MOUNTAIN));
+
+        // TODO Only Allow touchy of open Air.
+        // TODO Monazite Sands
+        CONFIG = new MineralConfig(14,90,1,20,120,100, false,Optional.of(Biomes.IS_DRY));
     }
 
     @Override

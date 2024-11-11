@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "immersivegeology:rich_ore_gold"
+              "name": "immersivegeology:normal_ore_acanthite"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "immersivegeology:rich_ore_gold"
+              "name": "immersivegeology:normal_ore_acanthite"
             }
           ]
         }
@@ -46,5 +46,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/rich_ore_block_gold_stone"
+  "random_sequence": "immersivegeology:blocks/normal_ore_block_acanthite_stone"
 }

@@ -23,7 +23,9 @@ public class MaterialGalena extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(12,45,2,5,60,90, Optional.of(Biomes.IS_SLOPE));
+
+        // TODO Goto Nether
+        CONFIG = new MineralConfig(12,45,2,5,60,90,false, Optional.of(Biomes.IS_SLOPE));
     }
 
     @Override

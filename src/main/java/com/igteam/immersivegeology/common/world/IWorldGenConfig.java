@@ -34,6 +34,7 @@ public interface IWorldGenConfig
 	int getMaxY();
 	int veinsPerChunk();
 	int rarity();
+	boolean useSparsePlacement();
 
 	Optional<TagKey<Biome>> getPreferredBiome();
 

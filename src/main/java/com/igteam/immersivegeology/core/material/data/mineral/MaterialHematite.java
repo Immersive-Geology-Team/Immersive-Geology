@@ -23,7 +23,9 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(15,30,2,0,160,120, Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+
+        // TODO disk like spawn type
+        CONFIG = new MineralConfig(15,30,2,0,160,220, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override

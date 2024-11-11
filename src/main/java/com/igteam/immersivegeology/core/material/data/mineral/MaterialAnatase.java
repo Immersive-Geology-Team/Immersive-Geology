@@ -42,7 +42,7 @@ public class MaterialAnatase extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(18,70,1,-64,70,5, Optional.of(Biomes.IS_MOUNTAIN));
+        CONFIG = new MineralConfig(18,70,1,-64,70,1000, true,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

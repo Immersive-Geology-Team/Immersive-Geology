@@ -29,7 +29,7 @@ public class MaterialSilver extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(3,20,2,10,50,2, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(12,95,2,10,50,10, false,Optional.empty());
     }
 
     @Override

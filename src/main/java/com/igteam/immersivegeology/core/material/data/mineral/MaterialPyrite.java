@@ -19,7 +19,9 @@ public class MaterialPyrite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(12,30,3,-64,112,50, Optional.of(Biomes.IS_COLD));
+
+        // TODO Banished to the Nether and Lava! ~UnSchtalch
+        CONFIG = new MineralConfig(12,30,3,-64,112,500, false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

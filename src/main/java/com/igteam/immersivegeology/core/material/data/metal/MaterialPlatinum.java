@@ -23,7 +23,7 @@ public class MaterialPlatinum extends MaterialNativeMetal {
         super();
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(3,90,1,10,40,1, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(12,90,1,10,150,1, true,Optional.empty());
     }
 
     @Override

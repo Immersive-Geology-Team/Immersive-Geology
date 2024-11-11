@@ -30,7 +30,7 @@ public class MaterialCopper extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(10,70,1,0,128,1, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(10,70,1,0,128,1000, true,Optional.empty());
     }
 
     @Override

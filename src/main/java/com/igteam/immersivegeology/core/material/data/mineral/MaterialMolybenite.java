@@ -22,7 +22,9 @@ public class MaterialMolybenite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
-        CONFIG = new MineralConfig(12,80,1,-64,82,5, Optional.of(Biomes.IS_HOT));
+
+        // TODO Banished to the Nether! ~UnSchtalch
+        CONFIG = new MineralConfig(12,70,1,-64,82,100, false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

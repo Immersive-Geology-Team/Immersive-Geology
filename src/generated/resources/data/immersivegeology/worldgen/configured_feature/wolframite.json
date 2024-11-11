@@ -1,6 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
+    "biomes": "#forge:is_peak",
     "entry": "Wolframite",
     "random_name": -3570864644397327685
   }

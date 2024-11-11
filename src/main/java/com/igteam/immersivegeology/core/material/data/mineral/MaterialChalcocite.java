@@ -32,7 +32,7 @@ public class MaterialChalcocite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(24,40,1,-32,200,20, Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(24,40,1,-32,200,20, false, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

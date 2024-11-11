@@ -20,7 +20,8 @@ public class MaterialThorianite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(12,80,1,0,120,5, Optional.of(Biomes.IS_SANDY));
+
+        CONFIG = new MineralConfig(12,80,1,0,120,150, false,Optional.of(Biomes.IS_SANDY));
     }
 
     @Override

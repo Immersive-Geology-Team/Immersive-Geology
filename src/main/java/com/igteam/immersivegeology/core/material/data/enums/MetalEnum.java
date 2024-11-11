@@ -97,6 +97,12 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     }
 
     @Override
+    public boolean useSparsePlacement()
+    {
+        return material.CONFIG.useSparsePlacement();
+    }
+
+    @Override
     public int veinsPerChunk()
     {
         return material.CONFIG.veinsPerChunk();

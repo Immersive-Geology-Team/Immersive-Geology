@@ -5,6 +5,8 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -17,7 +19,8 @@ public class MaterialUllmannite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(10,50,2,0,120,3, Optional.empty());
+
+        CONFIG = new MineralConfig(17,20,2,0,120,300, false,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

@@ -19,7 +19,8 @@ public class MaterialSmithsonite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(8,50,2,30,70,25, Optional.of(Biomes.IS_DESERT));
+
+        CONFIG = new MineralConfig(8,50,2,30,70,250, false,Optional.of(Biomes.IS_DESERT));
     }
 
     @Override

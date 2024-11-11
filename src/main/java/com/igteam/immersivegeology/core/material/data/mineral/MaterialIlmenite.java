@@ -21,7 +21,8 @@ public class MaterialIlmenite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(15,40,2,5,140,45, Optional.of(Biomes.IS_HOT));
+
+        CONFIG = new MineralConfig(15,40,2,5,140,200, false,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override
@@ -37,6 +38,6 @@ public class MaterialIlmenite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Tungsten));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Titanium));
     }
 }

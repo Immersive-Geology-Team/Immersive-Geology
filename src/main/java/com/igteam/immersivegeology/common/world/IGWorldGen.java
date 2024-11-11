@@ -27,6 +27,7 @@ public class IGWorldGen
 	private static final DeferredRegister<HeightProviderType<?>> HEIGHT_REGISTER;
 	public static RegistryObject<HeightProviderType<IGHeightProvider>> IG_HEIGHT_PROVIDER;
 	public static RegistryObject<PlacementModifierType<IGCountPlacement>> IG_COUNT_PLACEMENT;
+	public static RegistryObject<PlacementModifierType<IGSparsePlacement>> IG_SPARSE_PLACEMENT;
 
 	public static void init()
 	{
@@ -44,6 +45,12 @@ public class IGWorldGen
 		IG_COUNT_PLACEMENT = PLACEMENT_REGISTER.register("ig_count", () -> {
 			return () -> {
 				return IGCountPlacement.CODEC;
+			};
+		});
+		IG_SPARSE_PLACEMENT = PLACEMENT_REGISTER.register("ig_sparse", () -> {
+			return () ->
+			{
+				return IGSparsePlacement.CODEC;
 			};
 		});
 		HEIGHT_REGISTER = DeferredRegister.create(Registries.HEIGHT_PROVIDER_TYPE, IGLib.MODID);

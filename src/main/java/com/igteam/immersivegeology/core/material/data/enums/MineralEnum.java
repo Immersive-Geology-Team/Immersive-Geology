@@ -112,6 +112,12 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
         return material.CONFIG.rarity();
     }
 
+    @Override
+    public boolean useSparsePlacement()
+    {
+        return material.CONFIG.useSparsePlacement();
+    }
+
     public Optional<TagKey<Biome>> getPreferredBiome()
     {
         return material.CONFIG.preferredBiome();

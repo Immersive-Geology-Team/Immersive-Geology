@@ -19,7 +19,7 @@ public class MaterialCuprite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(40,50,4,0,175,25, Optional.of(BiomeTags.IS_OVERWORLD));
+        CONFIG = new MineralConfig(40,50,2,0,175,100, false,Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override

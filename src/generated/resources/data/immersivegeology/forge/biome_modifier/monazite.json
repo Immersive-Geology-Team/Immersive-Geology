@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_mountain",
+  "biomes": "#forge:is_dry",
   "features": "immersivegeology:monazite",
   "step": "underground_ores"
 }

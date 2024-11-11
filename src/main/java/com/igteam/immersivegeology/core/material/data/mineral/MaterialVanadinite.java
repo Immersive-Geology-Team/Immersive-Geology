@@ -32,7 +32,8 @@ public class MaterialVanadinite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(10,70,2,20,140,3, Optional.of(Biomes.IS_HOT));
+
+        CONFIG = new MineralConfig(10,70,2,20,140,300, false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

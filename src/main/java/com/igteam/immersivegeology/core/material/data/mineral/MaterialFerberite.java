@@ -19,7 +19,8 @@ public class MaterialFerberite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(14,60,2,-12,180,120, Optional.of(Biomes.IS_MOUNTAIN));
+
+        CONFIG = new MineralConfig(14,60,2,-12,180,120, false,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

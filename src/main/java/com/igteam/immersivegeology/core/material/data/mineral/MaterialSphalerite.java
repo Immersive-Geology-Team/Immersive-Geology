@@ -21,7 +21,8 @@ public class MaterialSphalerite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(10,45,3,0,140,15, Optional.of(Biomes.IS_HOT));
+
+        CONFIG = new MineralConfig(10,45,3,0,140,300, false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

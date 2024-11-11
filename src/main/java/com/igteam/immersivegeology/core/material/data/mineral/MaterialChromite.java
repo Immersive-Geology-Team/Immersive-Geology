@@ -20,7 +20,7 @@ public class MaterialChromite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(12,45,1,-64,24,135, Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+        CONFIG = new MineralConfig(12,45,1,-64,24,135, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override

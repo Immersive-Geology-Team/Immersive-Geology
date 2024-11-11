@@ -23,7 +23,8 @@ public class MaterialThorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(12,70,1,-64,72,4, Optional.of(Biomes.IS_DRY));
+
+        CONFIG = new MineralConfig(12,70,1,-64,72,700, false,Optional.of(Biomes.IS_DRY));
     }
 
     @Override

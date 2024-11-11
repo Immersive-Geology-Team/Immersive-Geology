@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_cold",
+  "biomes": "#forge:is_hot",
   "features": "immersivegeology:pyrite",
   "step": "underground_ores"
 }

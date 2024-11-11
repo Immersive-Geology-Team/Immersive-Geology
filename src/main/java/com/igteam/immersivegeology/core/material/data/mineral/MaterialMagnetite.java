@@ -23,7 +23,8 @@ public class MaterialMagnetite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(15,35,4,0,180,50, Optional.empty());
+
+        CONFIG = new MineralConfig(15,35,2,0,180,100, false,Optional.empty());
     }
 
     @Override

@@ -106,7 +106,7 @@ public class IGWorldGenerationProvider
 			final IWorldGenConfig type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
-					InSquarePlacement.spread(),
+					type.useSparsePlacement() ? IGSparsePlacement.spread() : InSquarePlacement.spread(),
 					new IGCountPlacement(type)
 			);
 			// Register the placed feature

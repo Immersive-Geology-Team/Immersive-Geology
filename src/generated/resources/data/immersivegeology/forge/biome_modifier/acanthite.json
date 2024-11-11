@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_hot",
+  "biomes": "#forge:is_hot/nether",
   "features": "immersivegeology:acanthite",
   "step": "underground_ores"
 }

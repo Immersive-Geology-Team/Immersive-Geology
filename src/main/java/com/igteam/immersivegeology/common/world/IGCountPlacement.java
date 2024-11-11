@@ -37,6 +37,14 @@ public class IGCountPlacement extends RepeatingPlacement
 		return config.veinsPerChunk.get();
 	}
 
+	@Override
+	public Stream<BlockPos> getPositions(PlacementContext ctx, RandomSource rnd, BlockPos pos)
+	{
+		return IntStream.range(0, this.count(rnd, pos)).mapToObj((p_191912_) -> {
+			return pos;
+		});
+	}
+
 	public PlacementModifierType<?> type() {
 		return IGWorldGen.IG_COUNT_PLACEMENT.get();
 	}

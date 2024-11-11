@@ -26,7 +26,7 @@ public class MaterialVanilla extends MaterialStone {
 
     public MaterialVanilla() {
         super();
-        this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE; // IGNEOUS_EXTRUSIVE and Sedimentary
+        this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE; // IGNEOUS and Sedimentary
         this.name = "stone"; // Special Case as we need to override the default name assignment method
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }

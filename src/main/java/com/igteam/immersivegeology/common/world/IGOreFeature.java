@@ -93,7 +93,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
 		Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
 
-		if(config.getChanceToGenerate(config.entry) > random.nextInt(5000))
+		if(config.getChanceToGenerate(config.entry) > random.nextInt(10000))
 		{
 			if(config.canSpawnAt(vein.pos(), biomeQuery))
 			{
@@ -134,9 +134,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		int maxY = Math.min(oreConfig.maxY.get(), box.maxY());
 		int minZ = Math.max(blockZ, box.minZ());
 		int maxZ = Math.min(blockZ + 15, box.maxZ());
-		IGServerConfig.Ores.OreConfig cng = IGServerConfig.ORES.ores.get(config.entry);
-		int chance = cng.generationChance.get();
-		random.setSeed(config.seed);
 		for(int x = minX; x <= maxX; ++x) {
 			for(int z = minZ; z <= maxZ; ++z) {
 				int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));

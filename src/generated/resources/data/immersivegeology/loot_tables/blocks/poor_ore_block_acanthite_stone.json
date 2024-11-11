@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "immersivegeology:poor_ore_gold"
+              "name": "immersivegeology:poor_ore_acanthite"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "immersivegeology:poor_ore_gold"
+              "name": "immersivegeology:poor_ore_acanthite"
             }
           ]
         }
@@ -46,5 +46,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/poor_ore_block_gold_stone"
+  "random_sequence": "immersivegeology:blocks/poor_ore_block_acanthite_stone"
 }
