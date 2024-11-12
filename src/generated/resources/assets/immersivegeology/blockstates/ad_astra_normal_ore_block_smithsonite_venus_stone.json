@@ -1,12 +1,6 @@
 {
   "variants": {
-    "oxidation=oxidized": {
-      "model": "immersivegeology:block/ore_block/ad_astra/normal/ad_astra_normal_ore_block_smithsonite_venus_stone"
-    },
-    "oxidation=pristine": {
-      "model": "immersivegeology:block/ore_block/ad_astra/normal/ad_astra_normal_ore_block_smithsonite_venus_stone"
-    },
-    "oxidation=tarnished": {
+    "": {
       "model": "immersivegeology:block/ore_block/ad_astra/normal/ad_astra_normal_ore_block_smithsonite_venus_stone"
     }
   }

@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -23,26 +24,41 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class IGOreBlock extends IGGenericBlock {
 
     protected final OreRichness richness;
-    public static final EnumProperty<MineralOxidation> OXIDATION;
+    public static final EnumProperty<MineralOxidation> OXIDATION_UP, OXIDATION_DOWN, OXIDATION_EAST, OXIDATION_WEST, OXIDATION_NORTH, OXIDATION_SOUTH;
     static
     {
-        OXIDATION = EnumProperty.create("oxidation", MineralOxidation.class);
+        OXIDATION_UP = EnumProperty.create("oxidation_up", MineralOxidation.class);
+        OXIDATION_DOWN = EnumProperty.create("oxidation_down", MineralOxidation.class);
+        OXIDATION_EAST = EnumProperty.create("oxidation_east", MineralOxidation.class);
+        OXIDATION_WEST = EnumProperty.create("oxidation_west", MineralOxidation.class);
+        OXIDATION_NORTH = EnumProperty.create("oxidation_north", MineralOxidation.class);
+        OXIDATION_SOUTH = EnumProperty.create("oxidation_south", MineralOxidation.class);
     }
 
     public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?> baseMaterial, MaterialInterface<?> oreMaterial) {
         this(flag, baseMaterial, oreMaterial, OreRichness.POOR);
-        this.registerDefaultState(this.defaultBlockState().setValue(OXIDATION, MineralOxidation.PRISTINE));
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(OXIDATION_UP, MineralOxidation.PRISTINE)
+                .setValue(OXIDATION_DOWN, MineralOxidation.PRISTINE)
+                .setValue(OXIDATION_EAST, MineralOxidation.PRISTINE)
+                .setValue(OXIDATION_WEST, MineralOxidation.PRISTINE)
+                .setValue(OXIDATION_NORTH, MineralOxidation.PRISTINE)
+                .setValue(OXIDATION_SOUTH, MineralOxidation.PRISTINE));
     }
 
     public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?> baseMaterial, MaterialInterface<?> oreMaterial, OreRichness richness) {
@@ -53,8 +69,13 @@ public class IGOreBlock extends IGGenericBlock {
 
     @Override
     public int getColor(int index, BlockState state) {
-        MineralOxidation mineralOxidation = state.getValue(OXIDATION);
-        return materialMap.get(MaterialTexture.values()[index]).getColor(category, mineralOxidation.ordinal());
+        if(index > 0)
+        {
+            MineralOxidation mineralOxidation = state.getValue(OXIDATION_PROPERTIES.get(index-1));
+            return materialMap.get(MaterialTexture.values()[index > 0 ? 1: 0]).getColor(category, mineralOxidation.ordinal());
+        } else {
+            return materialMap.get(MaterialTexture.values()[0]).getColor(category, 0);
+        }
     }
 
     @Override
@@ -63,31 +84,49 @@ public class IGOreBlock extends IGGenericBlock {
         return materialMap.values().stream().anyMatch(MaterialInterface::hasOxidationOverTime);
     }
 
+    public static List<EnumProperty<MineralOxidation>> OXIDATION_PROPERTIES;
+    static
+    {
+        OXIDATION_PROPERTIES = List.of(OXIDATION_DOWN, OXIDATION_UP,  OXIDATION_NORTH, OXIDATION_SOUTH, OXIDATION_WEST, OXIDATION_EAST);
+    }
+
+    private static final Direction[] DIRECTIONS = Direction.values();
+
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rnd)
     {
         if (!level.isClientSide)
         {
-            if(hasExposedFace(level, pos))
-            {
-                MineralOxidation currentOxidation = state.getValue(OXIDATION);
-                if (currentOxidation == MineralOxidation.PRISTINE && rnd.nextFloat() < 0.2) {
-                    level.setBlock(pos, state.setValue(OXIDATION, MineralOxidation.TARNISHED), 2);
-                } else if (currentOxidation == MineralOxidation.TARNISHED && rnd.nextFloat() < 0.1) {
-                    level.setBlock(pos, state.setValue(OXIDATION, MineralOxidation.OXIDIZED), 2);
-                }
+            // Iterate over directions and corresponding oxidation properties
+            for (int i = 0; i < DIRECTIONS.length; i++) {
+                Direction direction = DIRECTIONS[i];
+                EnumProperty<MineralOxidation> oxidationProperty = OXIDATION_PROPERTIES.get(i);
+                BlockPos adjacentPos = pos.offset(direction.getNormal());
+
+                handleOxidation(state, level, pos, rnd, oxidationProperty, adjacentPos);
             }
         }
     }
 
-    private boolean hasExposedFace(ServerLevel level, BlockPos pos)
+    private void handleOxidation(BlockState state, ServerLevel level, BlockPos pos, RandomSource rnd, EnumProperty<MineralOxidation> oxidationProperty, BlockPos adjacentPos)
     {
-        return level.getBlockState(pos.above()).isAir() ||
-                level.getBlockState(pos.below()).isAir() ||
-                level.getBlockState(pos.north()).isAir() ||
-                level.getBlockState(pos.south()).isAir() ||
-                level.getBlockState(pos.east()).isAir() ||
-                level.getBlockState(pos.west()).isAir();
+        if (level.getBlockState(adjacentPos).isAir()) {
+            MineralOxidation currentOxidation = state.getValue(oxidationProperty);
+
+            if (currentOxidation == MineralOxidation.PRISTINE && rnd.nextFloat() < 0.2) {
+                level.setBlock(pos, state.setValue(oxidationProperty, MineralOxidation.TARNISHED), 2);
+            } else if (currentOxidation == MineralOxidation.TARNISHED && rnd.nextFloat() < 0.1) {
+                level.setBlock(pos, state.setValue(oxidationProperty, MineralOxidation.OXIDIZED), 2);
+            }
+        }
+
+        if (level.getBlockState(adjacentPos).is(Blocks.WATER)) {
+            MineralOxidation currentOxidation = state.getValue(oxidationProperty);
+
+            if (currentOxidation == MineralOxidation.PRISTINE && rnd.nextFloat() < 0.2) {
+                level.setBlock(pos, state.setValue(oxidationProperty, MineralOxidation.TARNISHED), 2);
+            }
+        }
     }
 
     public OreRichness getOreRichness()
@@ -96,7 +135,7 @@ public class IGOreBlock extends IGGenericBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{OXIDATION});
+        builder.add(new Property[]{OXIDATION_DOWN, OXIDATION_UP, OXIDATION_EAST, OXIDATION_WEST, OXIDATION_NORTH, OXIDATION_SOUTH});
     }
 
     public StoneFormation getStoneFormation()

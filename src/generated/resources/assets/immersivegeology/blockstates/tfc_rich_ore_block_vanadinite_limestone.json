@@ -1,12 +1,6 @@
 {
   "variants": {
-    "oxidation=oxidized": {
-      "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_vanadinite_limestone"
-    },
-    "oxidation=pristine": {
-      "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_vanadinite_limestone"
-    },
-    "oxidation=tarnished": {
+    "": {
       "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_vanadinite_limestone"
     }
   }

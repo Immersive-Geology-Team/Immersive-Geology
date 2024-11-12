@@ -1,12 +1,6 @@
 {
   "variants": {
-    "oxidation=oxidized": {
-      "model": "immersivegeology:block/ore_block/minecraft/rich/rich_ore_block_molybenite_deepslate"
-    },
-    "oxidation=pristine": {
-      "model": "immersivegeology:block/ore_block/minecraft/rich/rich_ore_block_molybenite_deepslate"
-    },
-    "oxidation=tarnished": {
+    "": {
       "model": "immersivegeology:block/ore_block/minecraft/rich/rich_ore_block_molybenite_deepslate"
     }
   }

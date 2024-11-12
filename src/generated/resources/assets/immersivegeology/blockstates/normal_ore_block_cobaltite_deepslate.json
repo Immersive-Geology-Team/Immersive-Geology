@@ -1,12 +1,6 @@
 {
   "variants": {
-    "oxidation=oxidized": {
-      "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_cobaltite_deepslate"
-    },
-    "oxidation=pristine": {
-      "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_cobaltite_deepslate"
-    },
-    "oxidation=tarnished": {
+    "": {
       "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_cobaltite_deepslate"
     }
   }

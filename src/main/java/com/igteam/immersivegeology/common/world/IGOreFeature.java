@@ -22,14 +22,18 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.RandomSupport;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
@@ -152,21 +156,39 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	}
 
+	private static final Direction[] DIRECTIONS = Direction.values();
+
 	private BlockState oxidizeExposed(WorldGenLevel level, BlockPos.MutableBlockPos cursor, BlockState oreState)
 	{
+		// Check if the ore block is randomly ticking
 		if(((IGOreBlock)oreState.getBlock()).isRandomlyTicking(oreState))
 		{
-			if(level.getBlockState(cursor.above()).isAir()||
-				level.getBlockState(cursor.below()).isAir()||
-				level.getBlockState(cursor.east()).isAir()||
-				level.getBlockState(cursor.west()).isAir()||
-				level.getBlockState(cursor.north()).isAir()||
-				level.getBlockState(cursor.south()).isAir())
+			// Iterate over directions and corresponding oxidation properties
+			for(int i = 0; i < DIRECTIONS.length; i++)
 			{
-				return oreState.setValue(IGOreBlock.OXIDATION, MineralOxidation.OXIDIZED);
+				Direction direction = DIRECTIONS[i];
+				EnumProperty<MineralOxidation> oxidationProperty = IGOreBlock.OXIDATION_PROPERTIES.get(i);
+				BlockPos adjacentPos = cursor.offset(direction.getNormal());
+
+				// Set the exposed side to OXIDIZED based on the direction
+				oreState = handleOxidation(oreState, level, adjacentPos, oxidationProperty);
 			}
 		}
+
 		return oreState;
+	}
+
+	private BlockState handleOxidation(BlockState state, WorldGenLevel level, BlockPos adjacentPos, EnumProperty<MineralOxidation> oxidationProperty)
+	{
+		if (level.getBlockState(adjacentPos).isAir())
+		{
+			return state.setValue(oxidationProperty, MineralOxidation.OXIDIZED);
+		}
+		if (level.getBlockState(adjacentPos).is(Blocks.WATER))
+		{
+			return state.setValue(oxidationProperty, MineralOxidation.TARNISHED);
+		}
+		return state;
 	}
 
 	private boolean isNearLava(WorldGenLevel level, MutableBlockPos cursor, int x, int z)

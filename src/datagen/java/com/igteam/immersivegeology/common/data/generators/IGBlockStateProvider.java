@@ -316,7 +316,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
             }
 
             implementUnsafeOreTexture(baseModel, block, stoneFormation);
-            getVariantBuilder(block.getBlock()).forAllStates(blockState -> ConfiguredModel.builder().modelFile(baseModel).build());
+            getVariantBuilder(block).partialState().modelForState().modelFile(baseModel).addModel();
         }
     }
 

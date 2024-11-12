@@ -1,12 +1,6 @@
 {
   "variants": {
-    "oxidation=oxidized": {
-      "model": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_chalcocite_dolomite"
-    },
-    "oxidation=pristine": {
-      "model": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_chalcocite_dolomite"
-    },
-    "oxidation=tarnished": {
+    "": {
       "model": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_chalcocite_dolomite"
     }
   }
