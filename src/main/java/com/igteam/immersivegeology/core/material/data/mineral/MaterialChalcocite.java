@@ -22,7 +22,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class MaterialChalcocite extends MaterialMineral {
 
@@ -36,8 +36,8 @@ public class MaterialChalcocite extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x3D5E67));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x3D5E67));
     }
 
     @Override

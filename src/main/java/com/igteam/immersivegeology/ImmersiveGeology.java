@@ -27,6 +27,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 @Mod(IGLib.MODID)
 public class ImmersiveGeology {
@@ -58,21 +60,43 @@ public class ImmersiveGeology {
 
     private void supplyMaterialTint(){
         Minecraft minecraft = Minecraft.getInstance();
-        for(MaterialInterface<?> i : IGLib.getGeologyMaterials()) {
-            GeologyMaterial base = i.instance();
+
+        // Define the BiPredicate to check if a material has a specific flag
+        BiPredicate<GeologyMaterial, IFlagType<?>> needsColorCheck = (material, flagType) ->
+                material.getFlags().contains(flagType);
+
+        // Define the BiFunction to determine if a resource is present for a given flagType and material
+        BiFunction<IFlagType<?>, GeologyMaterial, Boolean> resourceExists = (flagType, material) -> {
+            ResourceLocation testLocation = getResourceLocationTest(flagType, material);
+            try {
+                return minecraft.getResourceManager().getResource(testLocation).isPresent();
+            } catch (Exception e) {
+                return false;
+            }
+        };
+
+        for (MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials()) {
+            GeologyMaterial base = materialInterface.instance();
             HashMap<IFlagType<?>, Boolean> colorCheckMap = new HashMap<>();
-            for (IFlagType<?> pattern : IFlagType.getAllRegistryFlags()) {
-                colorCheckMap.put(pattern, true);
-                if (base.getFlags().contains(pattern)) {
-                    ResourceLocation test = getResourceLocationTest(pattern, base);
-                    try {
-                        boolean check = minecraft.getResourceManager().getResource(test).isPresent();
-                        colorCheckMap.put(pattern, !check);
-                    } catch (Exception ignored) {}
+
+            for (IFlagType<?> flagType : IFlagType.getAllRegistryFlags()) {
+                // Apply the BiPredicate to check if the flagType needs color checking
+                if (needsColorCheck.test(base, flagType)) {
+                    // Use the BiFunction to see if the resource exists and update colorCheckMap accordingly
+                    colorCheckMap.put(flagType, !resourceExists.apply(flagType, base));
+                } else {
+                    colorCheckMap.put(flagType, true);
                 }
             }
 
-            base.initializeColorTint(colorCheckMap::get);
+            // Define a BiPredicate<IFlagType<?>, Integer> to handle the color tint check
+            BiPredicate<IFlagType<?>, Integer> colorTintPredicate = (flagType, tintIndex) -> {
+                // Return the value from colorCheckMap based on the flagType
+                return colorCheckMap.getOrDefault(flagType, true);
+            };
+
+            // Initialize color tint using the BiPredicate with Integer parameter
+            base.initializeColorTint(colorTintPredicate);
         }
     }
 

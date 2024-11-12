@@ -12,6 +12,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialThorite extends MaterialMineral {
@@ -28,8 +29,8 @@ public class MaterialThorite extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xaa7547));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xaa7547));
     }
 
     @Override

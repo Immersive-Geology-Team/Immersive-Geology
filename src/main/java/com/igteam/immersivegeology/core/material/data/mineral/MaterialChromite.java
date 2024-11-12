@@ -10,6 +10,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialChromite extends MaterialMineral {
@@ -24,8 +25,8 @@ public class MaterialChromite extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x615964));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x615964));
     }
 
     @Override

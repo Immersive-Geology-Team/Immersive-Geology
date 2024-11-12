@@ -7,6 +7,8 @@
  */
 
 package com.igteam.immersivegeology.common.world;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralOxidation;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
@@ -39,7 +41,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.Tags.Blocks;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -142,12 +143,30 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					BlockState stoneState = level.getBlockState(cursor);
 					BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
 					if (oreState != null) {
+						oreState = oxidizeExposed(level, cursor, oreState);
 						level.setBlock(cursor, oreState, 3);
 					}
 				}
 			}
 		}
 
+	}
+
+	private BlockState oxidizeExposed(WorldGenLevel level, BlockPos.MutableBlockPos cursor, BlockState oreState)
+	{
+		if(((IGOreBlock)oreState.getBlock()).isRandomlyTicking(oreState))
+		{
+			if(level.getBlockState(cursor.above()).isAir()||
+				level.getBlockState(cursor.below()).isAir()||
+				level.getBlockState(cursor.east()).isAir()||
+				level.getBlockState(cursor.west()).isAir()||
+				level.getBlockState(cursor.north()).isAir()||
+				level.getBlockState(cursor.south()).isAir())
+			{
+				return oreState.setValue(IGOreBlock.OXIDATION, MineralOxidation.OXIDIZED);
+			}
+		}
+		return oreState;
 	}
 
 	private boolean isNearLava(WorldGenLevel level, MutableBlockPos cursor, int x, int z)
@@ -197,7 +216,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, int xFromCenter, int yFromCenter, int zFromCenter)
 		{
 			IWorldGenConfig mineral = config.entry;
-			TagMatchTest validStone = new TagMatchTest(Blocks.STONE);
+			TagMatchTest validStone = new TagMatchTest(Tags.Blocks.STONE);
 			if(!validStone.test(stoneState, random)) return null;
 			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
 			if(stone == null) {

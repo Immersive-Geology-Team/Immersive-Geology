@@ -18,7 +18,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class MaterialCassiterite extends MaterialMineral {
 
@@ -30,12 +30,12 @@ public class MaterialCassiterite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(18,50,2,30,150,50, false,Optional.of(BiomeTags.IS_OVERWORLD));
+        CONFIG = new MineralConfig(40,50,2,0,175,75, false,Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x8f8b96));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x5A4D4D));
     }
 
     @Override

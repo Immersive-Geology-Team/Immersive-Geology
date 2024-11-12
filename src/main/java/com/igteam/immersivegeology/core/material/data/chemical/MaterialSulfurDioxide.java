@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialSulfurDioxide extends MaterialChemical
@@ -25,7 +26,7 @@ public class MaterialSulfurDioxide extends MaterialChemical
 	}
 
 	@Override
-	protected Function<IFlagType<?>, Integer> materialColorFunction() {
-		return ((p) -> (0x444444));
+	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+		return ((p, i) -> (0x444444));
 	}
 }

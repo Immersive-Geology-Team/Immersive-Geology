@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialKaolinite extends MaterialMineral {
@@ -18,7 +19,7 @@ public class MaterialKaolinite extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xE5DFD1));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xE5DFD1));
     }
 }

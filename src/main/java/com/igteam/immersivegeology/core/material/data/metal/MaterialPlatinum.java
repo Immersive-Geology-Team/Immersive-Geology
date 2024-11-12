@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialPlatinum extends MaterialNativeMetal {
@@ -27,7 +28,7 @@ public class MaterialPlatinum extends MaterialNativeMetal {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xe7e7f7));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xe7e7f7));
     }
 }

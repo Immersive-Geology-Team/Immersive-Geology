@@ -1,6 +1,12 @@
 {
   "variants": {
-    "": {
+    "oxidation=oxidized": {
+      "model": "immersivegeology:block/ore_block/ad_astra/poor/ad_astra_poor_ore_block_thorite_mercury_stone"
+    },
+    "oxidation=pristine": {
+      "model": "immersivegeology:block/ore_block/ad_astra/poor/ad_astra_poor_ore_block_thorite_mercury_stone"
+    },
+    "oxidation=tarnished": {
       "model": "immersivegeology:block/ore_block/ad_astra/poor/ad_astra_poor_ore_block_thorite_mercury_stone"
     }
   }

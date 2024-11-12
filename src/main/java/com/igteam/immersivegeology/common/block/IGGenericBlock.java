@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,8 +42,10 @@ public class IGGenericBlock extends Block implements IGBlockType {
     }
 
     @Override
-    public int getColor(int index) {
-        return materialMap.get(MaterialTexture.values()[index]).getColor(category);
+    public int getColor(int index, BlockState state) {
+        // By default, we don't need any additional information; the secondaryColors are used for mineral oxidation
+        // or other state based color changes
+        return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
     }
 
     public Collection<MaterialInterface<?>> getMaterials() {

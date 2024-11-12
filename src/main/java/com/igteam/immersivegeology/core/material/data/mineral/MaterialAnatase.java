@@ -31,7 +31,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class MaterialAnatase extends MaterialMineral {
 
@@ -46,8 +46,8 @@ public class MaterialAnatase extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x475B74));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x475B74));
     }
 
     @Override

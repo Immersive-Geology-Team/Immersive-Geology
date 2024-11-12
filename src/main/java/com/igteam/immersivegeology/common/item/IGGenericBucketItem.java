@@ -58,7 +58,7 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
         if(index == 0) return 0xffffffff;
         if (index >= materialMap.values().size()) index = materialMap.values().size() - 1;
         //let's use last available colour. map could not be empty
-        return materialMap.get(MaterialTexture.values()[index]).getColor(ItemCategoryFlags.BUCKET);
+        return materialMap.get(MaterialTexture.values()[index]).getColor(ItemCategoryFlags.BUCKET, 0);
     }
 
     @Override

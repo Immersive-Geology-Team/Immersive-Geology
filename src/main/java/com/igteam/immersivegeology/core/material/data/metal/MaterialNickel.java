@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialNickel extends MaterialMetal
@@ -26,8 +27,8 @@ public class MaterialNickel extends MaterialMetal
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x7FFFD4));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x7FFFD4));
     }
 
 }

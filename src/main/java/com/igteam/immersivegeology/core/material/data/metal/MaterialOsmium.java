@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialOsmium extends MaterialNativeMetal
@@ -31,8 +32,8 @@ public class MaterialOsmium extends MaterialNativeMetal
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x8A9A9A));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x8A9A9A));
     }
 
     @Override

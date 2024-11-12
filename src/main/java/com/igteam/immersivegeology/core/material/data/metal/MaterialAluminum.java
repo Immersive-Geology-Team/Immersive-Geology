@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialAluminum extends MaterialMetal {
@@ -25,7 +26,7 @@ public class MaterialAluminum extends MaterialMetal {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xd0d5db));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xd0d5db));
     }
 }

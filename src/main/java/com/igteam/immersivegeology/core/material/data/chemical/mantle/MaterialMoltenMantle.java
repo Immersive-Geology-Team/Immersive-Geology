@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialMoltenMantle extends MaterialMetal
@@ -36,7 +37,7 @@ public class MaterialMoltenMantle extends MaterialMetal
 	}
 
 	@Override
-	protected Function<IFlagType<?>, Integer> materialColorFunction() {
-		return ((p) -> (p.equals(BlockCategoryFlags.FLUID) || p.equals(ItemCategoryFlags.BUCKET)) ? 0xEE5024 : 0x222222);
+	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+		return ((p, i) -> (p.equals(BlockCategoryFlags.FLUID) || p.equals(ItemCategoryFlags.BUCKET)) ? 0xEE5024 : 0x222222);
 	}
 }

@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialUranium extends MaterialMetal {
@@ -26,8 +27,8 @@ public class MaterialUranium extends MaterialMetal {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x759068));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x759068));
     }
 
     @Override

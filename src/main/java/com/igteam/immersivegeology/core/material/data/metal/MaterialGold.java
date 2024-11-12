@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialGold extends MaterialNativeMetal {
@@ -27,11 +28,11 @@ public class MaterialGold extends MaterialNativeMetal {
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.DUST);
 
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(14,25,4,0,80,2000, false, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(14,25,8,0,120,2000, false, Optional.empty());
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xFFD700));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xFFD700));
     }
 }

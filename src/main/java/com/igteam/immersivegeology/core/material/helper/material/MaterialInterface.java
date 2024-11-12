@@ -52,8 +52,8 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getStack(flag, amount);
     }
 
-    default int getColor(IFlagType<?> flag) {
-        return instance().getColor(flag);
+    default int getColor(IFlagType<?> flag, int secondaryColors) {
+        return instance().getColor(flag, secondaryColors);
     }
 
     default Set<IFlagType<?>> getFlags() {
@@ -103,5 +103,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     };
 
 	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
+
+    default boolean hasOxidationOverTime() {return instance().hasOxidationOverTime();};
 
 }

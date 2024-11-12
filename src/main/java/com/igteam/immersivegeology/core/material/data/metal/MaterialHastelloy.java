@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialHastelloy extends MaterialMetalAlloy
@@ -23,7 +24,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xb6afa9));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xb6afa9));
     }
 }

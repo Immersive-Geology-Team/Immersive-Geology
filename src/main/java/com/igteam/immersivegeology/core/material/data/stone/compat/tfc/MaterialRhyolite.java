@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialRhyolite extends MaterialTFCRawStone {
@@ -20,7 +21,7 @@ public class MaterialRhyolite extends MaterialTFCRawStone {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
     }
 }

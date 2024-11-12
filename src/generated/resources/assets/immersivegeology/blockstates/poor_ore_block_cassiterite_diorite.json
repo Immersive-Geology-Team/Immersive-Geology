@@ -1,6 +1,12 @@
 {
   "variants": {
-    "": {
+    "oxidation=oxidized": {
+      "model": "immersivegeology:block/ore_block/minecraft/poor/poor_ore_block_cassiterite_diorite"
+    },
+    "oxidation=pristine": {
+      "model": "immersivegeology:block/ore_block/minecraft/poor/poor_ore_block_cassiterite_diorite"
+    },
+    "oxidation=tarnished": {
       "model": "immersivegeology:block/ore_block/minecraft/poor/poor_ore_block_cassiterite_diorite"
     }
   }

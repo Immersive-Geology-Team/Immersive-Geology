@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
 import java.util.Map;
@@ -27,5 +28,5 @@ public interface IGBlockType {
     ItemSubGroup getGroup();
 
     Map<MaterialTexture, MaterialInterface<?>> getMaterialMap();
-    int getColor(int index);
+    int getColor(int index, BlockState state);
 }

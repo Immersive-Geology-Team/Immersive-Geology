@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.core.material.data.stone.compat.adastra;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialMoonStone extends MaterialAdAstraStone
@@ -14,7 +15,7 @@ public class MaterialMoonStone extends MaterialAdAstraStone
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
     }
 }

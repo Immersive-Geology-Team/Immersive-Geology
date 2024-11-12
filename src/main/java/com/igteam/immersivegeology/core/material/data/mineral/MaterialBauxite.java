@@ -23,7 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class MaterialBauxite extends MaterialMineral {
 
@@ -36,8 +36,8 @@ public class MaterialBauxite extends MaterialMineral {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x999FAF));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x999FAF));
     }
 
     @Override

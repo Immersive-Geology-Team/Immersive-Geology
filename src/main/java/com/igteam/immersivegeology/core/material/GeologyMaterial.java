@@ -28,9 +28,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.slf4j.Logger;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
 
 import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
@@ -39,8 +37,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public static ExistingFileHelper EXISTING_HELPER;
     protected String name;
     protected Logger logger = IGLib.getNewLogger();
-    protected Function<IFlagType<?>, Integer> colorFunction; // in goes a category, returns the color white as a default
-    protected Predicate<IFlagType<?>> applyColorTint; // In a goes the flag, returns if it uses programmed color tint
+    protected BiFunction<IFlagType<?>, Integer, Integer> colorFunction; // in goes a category, returns the color white as a default
+    protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
     private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();
@@ -51,7 +49,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
 
         this.colorFunction = materialColorFunction();
-        initializeColorTint((p) -> true); //default will be overridden later on in ClientProxy
+        initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
     }
 
@@ -83,16 +81,16 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return name.toLowerCase();
     }
 
-    public int getColor(IFlagType<?> p) {
-        return applyColorTint.test(p) ? colorFunction.apply(p) : 0xFFFFFF;
+    public int getColor(IFlagType<?> p, Integer secondaryColors) {
+        return applyColorTint.test(p, secondaryColors) ? colorFunction.apply(p, secondaryColors) : 0xFFFFFF;
     }
 
-    public void initializeColorTint(Predicate<IFlagType<?>> predicate) {
+    public void initializeColorTint(BiPredicate<IFlagType<?>, Integer> predicate) {
         applyColorTint = predicate;
     }
 
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return (flag) -> (0xffffff);
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return (flag, integer) -> (0xffffff);
     }
 
     public Set<IFlagType<?>> getFlags() {

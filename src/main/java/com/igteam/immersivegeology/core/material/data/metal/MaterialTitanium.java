@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialTitanium extends MaterialMetal {
@@ -21,8 +22,8 @@ public class MaterialTitanium extends MaterialMetal {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x878681));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x878681));
     }
 
     @Override

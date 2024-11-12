@@ -58,7 +58,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
 
     @Override
     public int getColor(int index) {
-        return this.block.getColor(index);
+        return this.block.getColor(index, this.block.getBlock().defaultBlockState());
     }
 
     @Override

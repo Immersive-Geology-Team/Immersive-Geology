@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialLead extends MaterialNativeMetal
@@ -34,7 +35,7 @@ public class MaterialLead extends MaterialNativeMetal
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x444f53));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0x444f53));
     }
 }

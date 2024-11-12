@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialNeodymium extends MaterialMetal
@@ -23,8 +24,8 @@ public class MaterialNeodymium extends MaterialMetal
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xAB9CA3));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xAB9CA3));
     }
 
     @Override

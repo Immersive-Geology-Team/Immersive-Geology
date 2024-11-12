@@ -1,6 +1,12 @@
 {
   "variants": {
-    "": {
+    "oxidation=oxidized": {
+      "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_bauxite_shale"
+    },
+    "oxidation=pristine": {
+      "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_bauxite_shale"
+    },
+    "oxidation=tarnished": {
       "model": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_bauxite_shale"
     }
   }

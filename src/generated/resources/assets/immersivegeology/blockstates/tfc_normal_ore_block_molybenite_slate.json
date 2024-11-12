@@ -1,6 +1,12 @@
 {
   "variants": {
-    "": {
+    "oxidation=oxidized": {
+      "model": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_molybenite_slate"
+    },
+    "oxidation=pristine": {
+      "model": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_molybenite_slate"
+    },
+    "oxidation=tarnished": {
       "model": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_molybenite_slate"
     }
   }

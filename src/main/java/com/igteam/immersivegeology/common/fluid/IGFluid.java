@@ -79,8 +79,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	@Override
-	public int getColor(int index) {
-		return 0xff000000 | materialMap.get(MaterialTexture.values()[index]).getColor(category);
+	public int getColor(int index, BlockState state) {
+		return 0xff000000 | materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
 	}
 
 
@@ -154,7 +154,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 			@Override
 			public int getTintColor()
 			{
-				return 0xFF000000 | (overlay != null ? overlay.getColor(flag) : base.getColor(flag));
+				return 0xFF000000 | (overlay != null ? overlay.getColor(flag, 0) : base.getColor(flag, 0));
 			}
 
 			@Override

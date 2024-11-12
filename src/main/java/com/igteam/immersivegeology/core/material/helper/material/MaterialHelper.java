@@ -50,6 +50,11 @@ public interface MaterialHelper {
         return ItemStack.EMPTY;
     }
 
+    default boolean hasOxidationOverTime()
+    {
+        return false;
+    }
+
     default Item getItem(ItemCategoryFlags flag){
         if(flag == null) {
             flag = ItemCategoryFlags.INGOT;

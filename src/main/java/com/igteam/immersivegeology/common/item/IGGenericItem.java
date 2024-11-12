@@ -39,7 +39,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
         if (index >= materialMap.values().size()) index = index % materialMap.values().size();
 
         //let's use last available colour. map could not be empty
-        return materialMap.get(MaterialTexture.values()[index]).getColor(category);
+        return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
     }
 
     @Override

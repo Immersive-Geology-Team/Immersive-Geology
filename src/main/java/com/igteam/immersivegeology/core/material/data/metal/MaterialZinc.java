@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialZinc extends MaterialMetal {
@@ -21,8 +22,8 @@ public class MaterialZinc extends MaterialMetal {
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0xd0d5db));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (0xd0d5db));
     }
 
     @Override

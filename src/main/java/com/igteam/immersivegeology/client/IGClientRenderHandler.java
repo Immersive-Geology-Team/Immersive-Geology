@@ -101,7 +101,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
         if(state.getBlock() instanceof IGBlockType type)
-            return type.getColor(index);
+            return type.getColor(index, state);
         return 0xffffff;
     }
 

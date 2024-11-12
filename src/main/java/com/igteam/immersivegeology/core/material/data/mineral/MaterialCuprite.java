@@ -10,6 +10,7 @@ import net.minecraft.tags.BiomeTags;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialCuprite extends MaterialMineral {
@@ -19,12 +20,17 @@ public class MaterialCuprite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        CONFIG = new MineralConfig(40,50,2,0,175,100, false,Optional.of(BiomeTags.IS_OVERWORLD));
+        CONFIG = new MineralConfig(40,50,1,0,175,100, false,Optional.of(BiomeTags.IS_OVERWORLD));
+    }
+
+    public boolean hasOxidationOverTime()
+    {
+        return true;
     }
 
     @Override
-    protected Function<IFlagType<?>, Integer> materialColorFunction() {
-        return ((p) -> (0x830922));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+        return ((p, i) -> (i == 0 ? 0x810921 : i == 1 ? 0x89743d : 0x3B7460));
     }
 
     @Override

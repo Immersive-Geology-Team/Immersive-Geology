@@ -28,9 +28,9 @@ public class MaterialRefractoryBlock extends MaterialMisc
 	}
 
 	@Override
-	public int getColor(IFlagType<?> p)
+	public int getColor(IFlagType<?> p, Integer i)
 	{
-		return p == ItemCategoryFlags.INGOT ? 0xD7C8A7 : super.getColor(p);
+		return p == ItemCategoryFlags.INGOT ? 0xD7C8A7 : super.getColor(p, i);
 	}
 
 	@Override

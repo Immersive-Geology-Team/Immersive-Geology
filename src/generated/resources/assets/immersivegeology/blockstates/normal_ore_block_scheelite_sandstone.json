@@ -1,6 +1,12 @@
 {
   "variants": {
-    "": {
+    "oxidation=oxidized": {
+      "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_scheelite_sandstone"
+    },
+    "oxidation=pristine": {
+      "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_scheelite_sandstone"
+    },
+    "oxidation=tarnished": {
       "model": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_scheelite_sandstone"
     }
   }
