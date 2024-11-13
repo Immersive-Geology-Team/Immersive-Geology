@@ -1,28 +1,22 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.LinkedHashSet;
-import java.util.Properties;
 import java.util.Set;
 
 public interface MaterialInterface<T extends GeologyMaterial> {
@@ -104,6 +98,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
 	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
 
-    default boolean hasOxidationOverTime() {return instance().hasOxidationOverTime();};
+    default boolean hasOxidationOverTime() {return instance().willTarnishOverTime();};
 
 }

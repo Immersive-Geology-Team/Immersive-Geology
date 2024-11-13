@@ -8,11 +8,14 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -34,8 +37,19 @@ public class MaterialCopper extends MaterialNativeMetal {
         this.CONFIG = new MaterialMineral.MineralConfig(10,70,1,0,128,1000, true,Optional.empty());
     }
 
+    Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xB66E3D),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x3D8B8B)));
+
     @Override
-    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xe39919));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
+    {
+        return ((p, i) -> coloredWeathering.apply(i));
+    }
+
+    @Override
+    public boolean willTarnishOverTime()
+    {
+        return true;
     }
 }

@@ -113,6 +113,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblockMirror("reverberation_furnace");
         genericmultiblock("centrifuge");
         genericmultiblock("ballmill");
+        genericmultiblock("pelletizer");
 
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }

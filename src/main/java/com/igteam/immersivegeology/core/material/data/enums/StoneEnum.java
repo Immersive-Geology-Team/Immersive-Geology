@@ -87,6 +87,11 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
         if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
         if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
         if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("_block", "")))) return valueOf(stoneName);
+
+        // Now for TFC Compat checks
+        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))) return valueOf(stoneName);
+
+
         return null;
     }
 

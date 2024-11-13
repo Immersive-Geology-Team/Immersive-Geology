@@ -190,6 +190,7 @@ public class IGRegistrationHolder {
 
         steel_mb.addAll(bronze_mb);
         steel_mb.add(IGGravitySeparatorMultiblock.class);
+        steel_mb.add(IGPelletizerMultiblock.class);
         steel_mb.add(IGCoreDrillMultiblock.class);
         steel_mb.add(IGRotaryKilnMultiblock.class);
         steel_mb.add(IGTrommelMultiblock.class);
@@ -345,6 +346,8 @@ public class IGRegistrationHolder {
         registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
+        registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER);
+
     }
 
     private static void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration){

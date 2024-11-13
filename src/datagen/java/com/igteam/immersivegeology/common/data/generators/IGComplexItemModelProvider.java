@@ -53,6 +53,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
 		generateMultiblockModel("bloomery", IGMultiblockProvider.BLOOMERY.block());
+		generateMultiblockModel("pelletizer", IGMultiblockProvider.PELLETIZER.block());
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Complex Item Models");
 	}

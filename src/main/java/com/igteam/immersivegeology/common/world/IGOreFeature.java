@@ -8,14 +8,12 @@
 
 package com.igteam.immersivegeology.common.world;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.MineralOxidation;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -25,18 +23,15 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.RandomSupport;
-import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -47,7 +42,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.function.Function;
 
 public class IGOreFeature extends Feature<IGOreFeatureConfig>
@@ -167,7 +161,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			for(int i = 0; i < DIRECTIONS.length; i++)
 			{
 				Direction direction = DIRECTIONS[i];
-				EnumProperty<MineralOxidation> oxidationProperty = IGOreBlock.OXIDATION_PROPERTIES.get(i);
+				EnumProperty<MineralWeathering> oxidationProperty = IGOreBlock.OXIDATION_PROPERTIES.get(i);
 				BlockPos adjacentPos = cursor.offset(direction.getNormal());
 
 				// Set the exposed side to OXIDIZED based on the direction
@@ -178,16 +172,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return oreState;
 	}
 
-	private BlockState handleOxidation(BlockState state, WorldGenLevel level, BlockPos adjacentPos, EnumProperty<MineralOxidation> oxidationProperty)
+	private BlockState handleOxidation(BlockState state, WorldGenLevel level, BlockPos adjacentPos, EnumProperty<MineralWeathering> oxidationProperty)
 	{
 		if (level.getBlockState(adjacentPos).isAir())
 		{
-			return state.setValue(oxidationProperty, MineralOxidation.OXIDIZED);
+			return state.setValue(oxidationProperty, MineralWeathering.TARNISHED);
 		}
-		if (level.getBlockState(adjacentPos).is(Blocks.WATER))
-		{
-			return state.setValue(oxidationProperty, MineralOxidation.TARNISHED);
-		}
+//		if (level.getBlockState(adjacentPos).is(Blocks.WATER))
+//		{
+//			return state.setValue(oxidationProperty, MineralOxidation.TARNISHED);
+//		}
 		return state;
 	}
 

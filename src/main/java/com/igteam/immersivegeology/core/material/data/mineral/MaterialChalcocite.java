@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -11,6 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
@@ -20,9 +22,11 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class MaterialChalcocite extends MaterialMineral {
 
@@ -35,9 +39,14 @@ public class MaterialChalcocite extends MaterialMineral {
         CONFIG = new MineralConfig(24,40,1,-32,200,20, false, Optional.of(Biomes.IS_HOT));
     }
 
+    Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0x4A4A4A),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x2D7C6E)));
+
     @Override
-    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x3D5E67));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
+    {
+        return ((p, i) -> coloredWeathering.apply(i));
     }
 
     @Override
@@ -91,5 +100,11 @@ public class MaterialChalcocite extends MaterialMineral {
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Copper),
                 IGLib.SLURRY_TO_CRYSTAL_MB,
                 300, 38400);
+    }
+
+    @Override
+    public boolean willTarnishOverTime()
+    {
+        return true;
     }
 }

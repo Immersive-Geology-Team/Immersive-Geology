@@ -5,10 +5,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockItem;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
-import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -38,9 +36,9 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = mirroredStone(new RevFurnaceLogic(), "reverberation_furnace", false)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace")).build();
 
-    public static final MultiblockRegistration<IndSluiceLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new IndSluiceLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
+    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
             builder -> {
-                builder.redstone(state -> state.rsState, IndSluiceLogic.REDSTONE_IN);
+                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
             });
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone(new BloomeryLogic(), "bloomery", false)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
@@ -60,6 +58,11 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<BallmillLogic.State> BALLMILL = IGRegistrationHolder.registerMetalMultiblock("ballmill", new BallmillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("ballmill"),
             builder -> {
                 builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN).notMirrored();
+            });
+
+    public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = IGRegistrationHolder.registerMetalMultiblock("pelletizer", new PelletizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"),
+            builder -> {
+                builder.redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN);
             });
 
     private static <S extends IMultiblockState> IGMultiblockBuilder<S> stone(IMultiblockLogic<S> logic, String name, boolean solid)

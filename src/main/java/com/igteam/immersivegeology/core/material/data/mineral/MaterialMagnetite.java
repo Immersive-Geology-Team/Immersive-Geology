@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.tags.BiomeTags;
@@ -12,6 +14,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -28,14 +31,25 @@ public class MaterialMagnetite extends MaterialMineral {
         CONFIG = new MineralConfig(15,35,2,0,180,100, false,Optional.empty());
     }
 
+    Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0x2A2A2A),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x9C5A33)));
+
     @Override
-    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x27292B));
+    protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
+    {
+        return ((p, i) -> coloredWeathering.apply(i));
     }
 
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
+    }
+
+    @Override
+    public boolean willTarnishOverTime()
+    {
+        return true;
     }
 }
