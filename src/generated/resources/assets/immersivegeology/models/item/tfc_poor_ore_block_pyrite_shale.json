@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_pyrite_shale"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_pristine",
+    "sided": "tfc:block/rock/raw/shale",
+    "top": "tfc:block/rock/raw/shale_top"
+  }
 }

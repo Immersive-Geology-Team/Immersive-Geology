@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
@@ -30,6 +31,12 @@ public class MaterialHematite extends MaterialMineral {
     }
 
     @Override
+    public boolean willTarnishOverTime()
+    {
+        return true;
+    }
+
+    @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
         return ((p, i) -> (0x4B2F2C));
     }
@@ -43,5 +50,11 @@ public class MaterialHematite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
+    }
+
+    @Override
+    public String getVeinType()
+    {
+        return OrePattern.LAYERED.getName();
     }
 }

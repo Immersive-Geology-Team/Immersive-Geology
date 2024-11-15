@@ -8,15 +8,21 @@ import blusunrize.immersiveengineering.data.models.NongeneratedModels.Nongenerat
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
@@ -29,6 +35,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.resources.ResourceLocation;
@@ -52,6 +59,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
@@ -283,10 +291,18 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 .build());
     }
 
+    private BlockModelBuilder buildOreBlockBase(String prefix, IGOreBlock block, String suffix, String parent_name, MineralWeathering mineralWeathering, Direction direction)
+    {
+        BlockModelBuilder model = models().withExistingParent(
+            new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+mineralWeathering.getSerializedName() + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_" + block.getMaterial(MaterialTexture.base).getName().toLowerCase() + "_variation_" + suffix +"_"+ direction.getName().toLowerCase()).getPath(),
+            new ResourceLocation(IGLib.MODID, parent_name + "_" + direction));
+        return model;
+    }
+
     private void registerOreBlock(IGBlockType type){
         IGOreBlock block = (IGOreBlock) type;
         String parent_name = block.getFlag().getName();
-        BlockModelBuilder baseModel;
+
         String prefix = "minecraft";
         Set<IFlagType<?>> flags = block.getMaterial(MaterialTexture.base).getFlags();
         for(ModFlags mod : ModFlags.values())
@@ -299,34 +315,25 @@ public class IGBlockStateProvider extends BlockStateProvider {
         if(block.getMaterial(MaterialTexture.base).instance() instanceof MaterialStone stoneMaterial)
         {
             StoneFormation stoneFormation = stoneMaterial.getStoneFormation();
-            switch(stoneFormation)
+            MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+            for(Direction block_face : Direction.values())
             {
-                case SEDIMENTARY ->
+                for(MineralWeathering weathering_state : MineralWeathering.values())
                 {
-                    baseModel = models().withExistingParent(
-                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
-                            new ResourceLocation(IGLib.MODID, "block/base/ore_bearing/ore_bearing_sedimentary"));
-                }
-                default ->
-                {
-                    baseModel = models().withExistingParent(
-                            new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+block.getFlag().getRegistryKey(block.getMaterial(MaterialTexture.overlay), block.getMaterial(MaterialTexture.base), block.getOreRichness())).getPath(),
-                            new ResourceLocation(IGLib.MODID, "block/base/"+parent_name));
-
+                    BlockModelBuilder model = buildOreBlockBase(prefix, block, "1", "block/base/"+ parent_name+ "/"+parent_name, weathering_state, block_face);
+                    implementUnsafeOreTexture(model, block, stoneFormation, 1, weathering_state, block_face);
+                    builder.part().modelFile(model).addModel().condition(IGOreBlock.OXIDATION_PROPERTIES.get(block_face.get3DDataValue()), weathering_state).end();
                 }
             }
-
-            implementUnsafeOreTexture(baseModel, block, stoneFormation);
-            getVariantBuilder(block).partialState().modelForState().modelFile(baseModel).addModel();
         }
     }
 
-    private void implementUnsafeOreTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation)
+    public static void implementUnsafeOreTexture(ModelBuilder<?> baseModel, IGOreBlock block, StoneFormation formation, int variant, MineralWeathering weathering, Direction direction)
     {
-        try {
-            ResourceLocation default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/" + formation.name().toLowerCase()+"/" + formation.name().toLowerCase() + "_" + block.getOreRichness().name().toLowerCase());
+        ResourceLocation default_richness_ore;
 
-            baseModel.texture("ore", default_richness_ore);
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + block.getMaterial(MaterialTexture.overlay).getVeinType() +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
+        try {
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {
                 baseModel.texture("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
@@ -336,11 +343,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
             {
                 baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
             }
-        } catch(IllegalArgumentException error) {
-            // Extended the normal Block Model Builder to include an unsafe method to add unknown texture locations.
-            // NOTE: only needed as a data gen implementation if some mods are unavailable in the data generation, which would prevent the safe method from running.
-            //logger.error("Error: " + error.getMessage());
-
+        } catch(Exception error) {
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {
                 baseModel.textures.put("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
@@ -359,6 +362,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
             }
         }
+
+        baseModel.textures.put("ore_" + direction.getName().toLowerCase(), default_richness_ore.toString());
     }
 
     private void registerFluidBlock(Fluid fluid)

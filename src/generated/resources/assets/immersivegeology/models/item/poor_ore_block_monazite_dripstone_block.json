@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/minecraft/poor/poor_ore_block_monazite_dripstone_block"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_monazite_pristine",
+    "sided": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
 }

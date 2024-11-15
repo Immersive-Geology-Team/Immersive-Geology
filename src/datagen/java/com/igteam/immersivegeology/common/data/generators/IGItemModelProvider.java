@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
@@ -15,9 +16,11 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
@@ -141,9 +144,9 @@ public class IGItemModelProvider extends ItemModelProvider {
 
                     OreRichness richness = igOreBlock.getOreRichness();
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + igOreBlock.getOreRichness().name().toLowerCase() + "/"+igOreBlock.getFlag().getRegistryKey(igOreBlock.getMaterial(MaterialTexture.overlay), igOreBlock.getMaterial(MaterialTexture.base), richness));
-
-                    withExistingParent(itemLocation, parentLocation);
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block");
+                    ItemModelBuilder builder = withExistingParent(itemLocation, parentLocation);
+                    for(Direction direction : Direction.values()) IGBlockStateProvider.implementUnsafeOreTexture(builder, igOreBlock, igOreBlock.getStoneFormation(), 1, MineralWeathering.PRISTINE, direction);
                     return;
                 }
 

@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_lead_dripstone_block"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_lead_pristine",
+    "sided": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
 }

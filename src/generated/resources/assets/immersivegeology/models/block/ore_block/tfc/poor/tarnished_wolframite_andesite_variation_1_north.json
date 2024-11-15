@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
+  "textures": {
+    "base": "tfc:block/rock/raw/andesite",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_wolframite_tarnished"
+  }
+}

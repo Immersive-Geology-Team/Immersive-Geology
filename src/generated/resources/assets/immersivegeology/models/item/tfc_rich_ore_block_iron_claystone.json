@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/tfc/rich/tfc_rich_ore_block_iron_claystone"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_iron_pristine",
+    "sided": "tfc:block/rock/raw/claystone",
+    "top": "tfc:block/rock/raw/claystone_top"
+  }
 }

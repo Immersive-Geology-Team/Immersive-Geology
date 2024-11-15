@@ -1,3 +1,12 @@
 {
-  "parent": "immersivegeology:block/ore_block/ad_astra/poor/ad_astra_poor_ore_block_ullmannite_moon_stone"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "ad_astra:block/moon_stone",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_ullmannite_pristine"
+  }
 }

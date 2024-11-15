@@ -1,3 +1,12 @@
 {
-  "parent": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_vanadinite_granite"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/granite",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_vanadinite_pristine"
+  }
 }

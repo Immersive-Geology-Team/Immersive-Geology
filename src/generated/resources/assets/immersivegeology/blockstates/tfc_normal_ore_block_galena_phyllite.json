@@ -1,7 +1,100 @@
 {
-  "variants": {
-    "": {
-      "model": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_galena_phyllite"
+  "multipart": [
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_down"
+      },
+      "when": {
+        "oxidation_down": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_down"
+      },
+      "when": {
+        "oxidation_down": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_up"
+      },
+      "when": {
+        "oxidation_up": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_up"
+      },
+      "when": {
+        "oxidation_up": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_north"
+      },
+      "when": {
+        "oxidation_north": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_north"
+      },
+      "when": {
+        "oxidation_north": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_south"
+      },
+      "when": {
+        "oxidation_south": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_south"
+      },
+      "when": {
+        "oxidation_south": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_west"
+      },
+      "when": {
+        "oxidation_west": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_west"
+      },
+      "when": {
+        "oxidation_west": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/pristine_galena_phyllite_variation_1_east"
+      },
+      "when": {
+        "oxidation_east": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/tfc/normal/tarnished_galena_phyllite_variation_1_east"
+      },
+      "when": {
+        "oxidation_east": "tarnished"
+      }
     }
-  }
+  ]
 }

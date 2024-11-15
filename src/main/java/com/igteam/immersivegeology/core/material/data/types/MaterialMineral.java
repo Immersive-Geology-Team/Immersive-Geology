@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
@@ -31,4 +32,10 @@ public class MaterialMineral extends GeologyMaterial {
     public MineralConfig CONFIG = new MineralConfig(8,50,1,-48,112,50, false,Optional.empty());
     public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, boolean useSparsePlacement, Optional<TagKey<Biome>> preferredBiome)
     {}
+
+    @Override
+    public String getVeinType()
+    {
+        return OrePattern.MINERAL.getName();
+    }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
+  "textures": {
+    "base": "tfc:block/rock/raw/quartzite",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_chromite_pristine"
+  }
+}

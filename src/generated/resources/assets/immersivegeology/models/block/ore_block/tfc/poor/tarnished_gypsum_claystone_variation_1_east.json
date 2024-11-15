@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
+  "textures": {
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_gypsum_tarnished",
+    "sided": "tfc:block/rock/raw/claystone",
+    "top": "tfc:block/rock/raw/claystone_top"
+  }
+}

@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/minecraft/normal/normal_ore_block_gold_sandstone"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "sided": "minecraft:block/sandstone",
+    "top": "minecraft:block/sandstone_top"
+  }
 }

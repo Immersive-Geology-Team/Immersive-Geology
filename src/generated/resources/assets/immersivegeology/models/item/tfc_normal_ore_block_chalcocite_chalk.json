@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/tfc/normal/tfc_normal_ore_block_chalcocite_chalk"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_pristine",
+    "sided": "tfc:block/rock/raw/chalk",
+    "top": "tfc:block/rock/raw/chalk"
+  }
 }

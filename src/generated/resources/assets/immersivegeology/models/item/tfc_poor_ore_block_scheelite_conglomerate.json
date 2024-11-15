@@ -1,3 +1,13 @@
 {
-  "parent": "immersivegeology:block/ore_block/tfc/poor/tfc_poor_ore_block_scheelite_conglomerate"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "sided": "tfc:block/rock/raw/conglomerate",
+    "top": "tfc:block/rock/raw/conglomerate"
+  }
 }

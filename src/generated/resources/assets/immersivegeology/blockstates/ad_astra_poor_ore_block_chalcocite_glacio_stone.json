@@ -1,7 +1,100 @@
 {
-  "variants": {
-    "": {
-      "model": "immersivegeology:block/ore_block/ad_astra/poor/ad_astra_poor_ore_block_chalcocite_glacio_stone"
+  "multipart": [
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_down"
+      },
+      "when": {
+        "oxidation_down": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_down"
+      },
+      "when": {
+        "oxidation_down": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_up"
+      },
+      "when": {
+        "oxidation_up": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_up"
+      },
+      "when": {
+        "oxidation_up": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_north"
+      },
+      "when": {
+        "oxidation_north": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_north"
+      },
+      "when": {
+        "oxidation_north": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_south"
+      },
+      "when": {
+        "oxidation_south": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_south"
+      },
+      "when": {
+        "oxidation_south": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_west"
+      },
+      "when": {
+        "oxidation_west": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_west"
+      },
+      "when": {
+        "oxidation_west": "tarnished"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/pristine_chalcocite_glacio_stone_variation_1_east"
+      },
+      "when": {
+        "oxidation_east": "pristine"
+      }
+    },
+    {
+      "apply": {
+        "model": "immersivegeology:block/ore_block/ad_astra/poor/tarnished_chalcocite_glacio_stone_variation_1_east"
+      },
+      "when": {
+        "oxidation_east": "tarnished"
+      }
     }
-  }
+  ]
 }

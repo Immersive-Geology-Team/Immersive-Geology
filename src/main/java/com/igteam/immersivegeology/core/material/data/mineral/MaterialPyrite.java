@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -48,5 +49,11 @@ public class MaterialPyrite extends MaterialMineral {
     public boolean willTarnishOverTime()
     {
         return true;
+    }
+
+    @Override
+    public String getVeinType()
+    {
+        return OrePattern.CRYSTAL.getName();
     }
 }

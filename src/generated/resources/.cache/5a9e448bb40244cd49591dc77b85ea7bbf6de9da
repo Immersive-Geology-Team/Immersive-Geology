@@ -1,5 +1,5 @@
-// 1.20.1	2024-11-14T01:20:37.774633529	Tags for minecraft:block mod id immersivegeology
-ec5364c4559479cb522a0cc5cd87618ccd39c79a data/forge/tags/blocks/ores.json
-6ff45fba61e61ae426b42036868eac991d9662f4 data/minecraft/tags/blocks/mineable/pickaxe.json
-ec5364c4559479cb522a0cc5cd87618ccd39c79a data/minecraft/tags/blocks/needs_stone_tool.json
+// 1.20.1	2024-11-16T03:17:31.214090453	Tags for minecraft:block mod id immersivegeology
+0d37edd2705197087efd81078ad2e631f6608e9f data/forge/tags/blocks/ores.json
+870ca2bdd6ac6aaa05d02f2391cfc88c4cba9d37 data/minecraft/tags/blocks/mineable/pickaxe.json
+0d37edd2705197087efd81078ad2e631f6608e9f data/minecraft/tags/blocks/needs_stone_tool.json
 5ef9b273b7e93f70ebff9bf835ef07344fba15e1 data/minecraft/tags/blocks/replaceable.json

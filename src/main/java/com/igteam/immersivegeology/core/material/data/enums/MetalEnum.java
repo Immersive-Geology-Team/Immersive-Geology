@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
@@ -21,6 +22,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +63,20 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public static List<? extends IWorldGenConfig> nativeMetals()
     {
         return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.ORE_BLOCK)).toList();
+    }
+
+    public static List<String> getAtlasPermutations()
+    {
+        List<String> permutations = new ArrayList<>();
+        nativeMetals().forEach((e) ->
+        {
+            for(MineralWeathering weathering : MineralWeathering.values())
+            {
+                permutations.add(weathering.name().toLowerCase() + "/" + e.getName());
+            }
+        });
+
+        return permutations;
     }
 
     private final MaterialMetal material;

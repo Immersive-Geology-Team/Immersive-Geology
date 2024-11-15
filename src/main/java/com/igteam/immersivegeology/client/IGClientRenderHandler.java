@@ -10,7 +10,9 @@ package com.igteam.immersivegeology.client;
 
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.client.Minecraft;
@@ -101,7 +103,10 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     @Override
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
         if(state.getBlock() instanceof IGBlockType type)
+        {
+            if(type.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
             return type.getColor(index, state);
+        }
         return 0xffffff;
     }
 
@@ -109,7 +114,13 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
         if(stack.getItem() instanceof IGFlagItem type)
+        {
+            if(stack.getItem() instanceof IGGenericBlockItem b)
+            {
+                if(b.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
+            }
             return type.getColor(tintIndex);
+        }
         return 0xffffff;
     }
 

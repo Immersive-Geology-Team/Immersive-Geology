@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
+  "textures": {
+    "base": "tfc:block/rock/raw/schist",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_acanthite_pristine"
+  }
+}

@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.enums;
 
 import blusunrize.immersiveengineering.common.config.IEServerConfig.Ores.VeinType;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
@@ -20,6 +21,9 @@ import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGenConfig
@@ -64,7 +68,25 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     MineralEnum(MaterialMineral m){
         this.material = m;
     }
-    @Override
+
+	public static List<String> getAtlasPermutations()
+	{
+        List<String> permutations = new ArrayList<>();
+        Arrays.stream(values()).forEach((e) ->
+        {
+            if(!e.equals(Kaolinite))
+            {
+                for(MineralWeathering weathering : MineralWeathering.values())
+                {
+                    permutations.add(weathering.name().toLowerCase()+"/"+e.getName());
+                }
+            }
+        });
+
+        return permutations;
+	}
+
+	@Override
     public MaterialMineral instance() {
         return material;
     }

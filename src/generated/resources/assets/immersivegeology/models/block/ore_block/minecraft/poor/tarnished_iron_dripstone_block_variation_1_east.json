@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
+  "textures": {
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/poor_1_iron_tarnished",
+    "sided": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_bearing/ore_bearing_sedimentary",
-  "textures": {
-    "ore": "immersivegeology:block/greyscale/rock/ore_bearing/sedimentary/sedimentary_rich",
-    "sided": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
-  }
-}

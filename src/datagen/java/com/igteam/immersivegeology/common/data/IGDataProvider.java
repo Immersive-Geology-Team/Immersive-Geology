@@ -40,6 +40,9 @@ public class IGDataProvider {
         log.info("-===== Starting Data Generation for Immersive Geology =====-");
         boolean runServer = event.includeServer();
 
+        generator.addProvider(event.includeClient(), new IGAtlasProvider(out));
+
+
         IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
         generator.addProvider(runServer, blockStateProvider);
         generator.addProvider(runServer, new IGItemModelProvider(generator, helper));
@@ -51,6 +54,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
+
 
         // God I hate this system. ~Muddykat
         for(final DataProvider provider : IGWorldGenerationProvider.makeProviders(out, lookup, helper))

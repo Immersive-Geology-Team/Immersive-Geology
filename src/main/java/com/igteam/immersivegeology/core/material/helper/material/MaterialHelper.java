@@ -246,4 +246,6 @@ public interface MaterialHelper {
             return null;
         }
     }
+
+    default String getVeinType() {return "metallic";}
 }

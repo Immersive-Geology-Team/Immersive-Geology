@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral.Mine
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
@@ -29,6 +30,12 @@ public class MaterialMetal extends GeologyMaterial {
     public void setupRecipeStages()
     {
 
+    }
+
+    @Override
+    public CrystalFamily getCrystalFamily()
+    {
+        return super.getCrystalFamily();
     }
 
     public MaterialMineral.MineralConfig CONFIG = new MaterialMineral.MineralConfig(0,50,0,-48,112,0, false, Optional.empty());

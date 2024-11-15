@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public interface MaterialInterface<T extends GeologyMaterial> {
@@ -99,5 +100,10 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
 
     default boolean hasOxidationOverTime() {return instance().willTarnishOverTime();};
+
+	default String getVeinType()
+    {
+        return instance().getVeinType();
+    }
 
 }

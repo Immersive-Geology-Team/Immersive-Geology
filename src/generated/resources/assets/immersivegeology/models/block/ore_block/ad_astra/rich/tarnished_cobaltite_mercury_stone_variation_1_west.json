@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
+  "textures": {
+    "base": "ad_astra:block/mercury_stone",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_cobaltite_tarnished"
+  }
+}

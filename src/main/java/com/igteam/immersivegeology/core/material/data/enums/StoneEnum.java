@@ -60,6 +60,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MCAndesite(new MaterialMCAndesite()),
     MCDiorite(new MaterialMCDiorite()),
     MCGranite(new MaterialMCGranite()),
+    Netherrack(new MaterialMCNetherrack()),
     Dripstone(new MaterialMCDripstone()),
     Sandstone(new MaterialMCSandstone()),
 
