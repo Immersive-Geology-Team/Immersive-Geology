@@ -32,6 +32,7 @@ import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
@@ -48,6 +49,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.client.model.generators.ConfiguredModel.Builder;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder.PartBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -261,7 +264,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 if(facing.getPossibleValues().contains(Direction.UP))
                 {
                     angleX = -90*dir.getStepY();
-                    if(dir.getAxis()!= Direction.Axis.Y)
+                    if(dir.getAxis()!= Axis.Y)
                         angleY = getAngle(dir, 180);
                     else
                         angleY = 0;
@@ -316,14 +319,24 @@ public class IGBlockStateProvider extends BlockStateProvider {
         {
             StoneFormation stoneFormation = stoneMaterial.getStoneFormation();
             MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+            int[] texture_variations = {1,2};
+
             for(Direction block_face : Direction.values())
             {
                 for(MineralWeathering weathering_state : MineralWeathering.values())
                 {
-                    BlockModelBuilder model = buildOreBlockBase(prefix, block, "1", "block/base/"+ parent_name+ "/"+parent_name, weathering_state, block_face);
-                    implementUnsafeOreTexture(model, block, stoneFormation, 1, weathering_state, block_face);
-                    builder.part().modelFile(model).addModel().condition(IGOreBlock.OXIDATION_PROPERTIES.get(block_face.get3DDataValue()), weathering_state).end();
+                    Builder<PartBuilder> holder = builder.part();
+                    for(int v : texture_variations)
+                    {
+                        BlockModelBuilder model = buildOreBlockBase(prefix, block, String.valueOf(v), "block/base/"+parent_name+"/"+parent_name, weathering_state, block_face);
+                        implementUnsafeOreTexture(model, block, stoneFormation, v, weathering_state, block_face);
+
+                        holder = holder.modelFile(model);
+                        if(v != texture_variations.length) holder = holder.nextModel();
+                    }
+                    holder.addModel().condition(IGOreBlock.OXIDATION_PROPERTIES.get(block_face.get3DDataValue()), weathering_state).end();
                 }
+                
             }
         }
     }

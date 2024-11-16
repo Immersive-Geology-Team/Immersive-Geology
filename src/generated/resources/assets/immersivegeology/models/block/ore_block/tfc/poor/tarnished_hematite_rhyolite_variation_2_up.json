@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
+  "textures": {
+    "base": "tfc:block/rock/raw/rhyolite",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_hematite_tarnished"
+  }
+}

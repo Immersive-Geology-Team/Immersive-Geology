@@ -67,7 +67,6 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //===== Minecraft Sands =====\\
     //Sand(new MaterialSand()),
 
-
     //===== Beyond Earth / Ad Astra =====\\
     MoonStone(new MaterialMoonStone()),
     MarsStone(new MaterialMarsStone()),

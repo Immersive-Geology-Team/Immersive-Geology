@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
+  "textures": {
+    "base": "tfc:block/rock/raw/phyllite",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_unobtania_pristine"
+  }
+}

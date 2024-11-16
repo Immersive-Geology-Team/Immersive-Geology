@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_down",
+  "textures": {
+    "base": "ad_astra:block/mercury_stone",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_thorite_pristine"
+  }
+}
