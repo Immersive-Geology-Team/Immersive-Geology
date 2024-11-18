@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
+  "textures": {
+    "base": "tfc:block/rock/raw/schist",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/crystal/normal_2_pyrite_corroded"
+  }
+}

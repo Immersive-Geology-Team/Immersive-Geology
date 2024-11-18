@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
+  "textures": {
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_pyrolusite_corroded",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
+}

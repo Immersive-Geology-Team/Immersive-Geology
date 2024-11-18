@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
+  "textures": {
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/crystal/poor_2_pyrite_corroded",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
+}

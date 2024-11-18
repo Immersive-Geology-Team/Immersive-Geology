@@ -29,6 +29,19 @@
     {
       "apply": [
         {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_down"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_down"
+        }
+      ],
+      "when": {
+        "oxidation_down": "corroded"
+      }
+    },
+    {
+      "apply": [
+        {
           "model": "immersivegeology:block/ore_block/minecraft/poor/pristine_bauxite_sandstone_variation_1_up"
         },
         {
@@ -50,6 +63,19 @@
       ],
       "when": {
         "oxidation_up": "tarnished"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_up"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_up"
+        }
+      ],
+      "when": {
+        "oxidation_up": "corroded"
       }
     },
     {
@@ -81,6 +107,19 @@
     {
       "apply": [
         {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_north"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_north"
+        }
+      ],
+      "when": {
+        "oxidation_north": "corroded"
+      }
+    },
+    {
+      "apply": [
+        {
           "model": "immersivegeology:block/ore_block/minecraft/poor/pristine_bauxite_sandstone_variation_1_south"
         },
         {
@@ -102,6 +141,19 @@
       ],
       "when": {
         "oxidation_south": "tarnished"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_south"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_south"
+        }
+      ],
+      "when": {
+        "oxidation_south": "corroded"
       }
     },
     {
@@ -133,6 +185,19 @@
     {
       "apply": [
         {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_west"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_west"
+        }
+      ],
+      "when": {
+        "oxidation_west": "corroded"
+      }
+    },
+    {
+      "apply": [
+        {
           "model": "immersivegeology:block/ore_block/minecraft/poor/pristine_bauxite_sandstone_variation_1_east"
         },
         {
@@ -154,6 +219,19 @@
       ],
       "when": {
         "oxidation_east": "tarnished"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_1_east"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/corroded_bauxite_sandstone_variation_2_east"
+        }
+      ],
+      "when": {
+        "oxidation_east": "corroded"
       }
     }
   ]

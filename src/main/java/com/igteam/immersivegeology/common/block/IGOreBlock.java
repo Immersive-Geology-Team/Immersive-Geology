@@ -116,24 +116,24 @@ public class IGOreBlock extends IGGenericBlock {
 
     private void handleOxidation(BlockState state, ServerLevel level, BlockPos pos, RandomSource rnd, EnumProperty<MineralWeathering> oxidationProperty, BlockPos adjacentPos)
     {
-        if (level.getBlockState(adjacentPos).isAir()) {
-            MineralWeathering currentOxidation = state.getValue(oxidationProperty);
-
-            if (currentOxidation == MineralWeathering.PRISTINE && rnd.nextFloat() < 0.2) {
-                level.setBlock(pos, state.setValue(oxidationProperty, MineralWeathering.TARNISHED), 2);
+        if (level.getBlockState(adjacentPos).isAir())
+        {
+            MineralWeathering current = state.getValue(oxidationProperty);
+            MineralWeathering next = nextWeatherStage(current);
+            if(current.equals(next)) return;
+            if(rnd.nextFloat() < 0.2)
+            {
+                level.setBlock(pos, state.setValue(oxidationProperty, next), 2);
             }
-//            else if (currentOxidation == MineralOxidation.TARNISHED && rnd.nextFloat() < 0.1) {
-//                level.setBlock(pos, state.setValue(oxidationProperty, MineralOxidation.OXIDIZED), 2);
-//            }
         }
+    }
 
-//        if (level.getBlockState(adjacentPos).is(Blocks.WATER)) {
-//            MineralOxidation currentOxidation = state.getValue(oxidationProperty);
-//
-//            if (currentOxidation == MineralOxidation.PRISTINE && rnd.nextFloat() < 0.2) {
-//                level.setBlock(pos, state.setValue(oxidationProperty, MineralOxidation.TARNISHED), 2);
-//            }
-//        }
+    private MineralWeathering nextWeatherStage(MineralWeathering currentStage)
+    {
+        int ord = currentStage.ordinal();
+        MineralWeathering[] values = MineralWeathering.values();
+        if(ord+1 >= values.length) return currentStage;
+        return values[ord + 1];
     }
 
     public OreRichness getOreRichness()
@@ -174,7 +174,8 @@ public class IGOreBlock extends IGGenericBlock {
     public enum MineralWeathering implements StringRepresentable
     {
         PRISTINE,
-        TARNISHED;
+        TARNISHED,
+        CORRODED;
 
         @Override
         public @NotNull String getSerializedName()

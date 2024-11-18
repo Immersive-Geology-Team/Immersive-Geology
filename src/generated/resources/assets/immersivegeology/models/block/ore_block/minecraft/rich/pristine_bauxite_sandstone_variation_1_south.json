@@ -1,8 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
     "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_bauxite_pristine",
-    "sided": "minecraft:block/sandstone",
+    "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }
 }

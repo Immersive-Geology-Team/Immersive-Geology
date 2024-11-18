@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
+  "textures": {
+    "base": "minecraft:block/stone",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_bauxite_corroded"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
+  "textures": {
+    "base": "minecraft:block/andesite",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/metallic/poor_2_copper_corroded"
+  }
+}

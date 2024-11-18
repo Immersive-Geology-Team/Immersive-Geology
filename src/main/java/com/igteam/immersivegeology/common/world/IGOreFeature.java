@@ -28,6 +28,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
@@ -63,13 +64,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		if (veins.isEmpty()) {
 			return false;
 		} else {
-			Iterator<Vein> iter = veins.iterator();
-
-			while(iter.hasNext()) {
-				Vein vein = iter.next();
+			for(Vein vein : veins)
+			{
 				this.place(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), vein, config);
 			}
-
 			return true;
 		}
 	}
@@ -92,7 +90,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
 		Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
 
-		if(config.getChanceToGenerate(config.entry) > random.nextInt(10000))
+		if(config.getChanceToGenerate(config.entry) > random.nextInt(9000))
 		{
 			if(config.canSpawnAt(vein.pos(), biomeQuery))
 			{
@@ -176,12 +174,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	{
 		if (level.getBlockState(adjacentPos).isAir())
 		{
+			return state.setValue(oxidationProperty, MineralWeathering.CORRODED);
+		}
+		if (level.getBlockState(adjacentPos).is(Blocks.WATER))
+		{
 			return state.setValue(oxidationProperty, MineralWeathering.TARNISHED);
 		}
-//		if (level.getBlockState(adjacentPos).is(Blocks.WATER))
-//		{
-//			return state.setValue(oxidationProperty, MineralOxidation.TARNISHED);
-//		}
 		return state;
 	}
 

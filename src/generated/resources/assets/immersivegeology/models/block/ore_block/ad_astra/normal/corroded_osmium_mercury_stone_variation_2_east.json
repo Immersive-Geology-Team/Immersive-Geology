@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
+  "textures": {
+    "base": "ad_astra:block/mercury_stone",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_2_osmium_corroded"
+  }
+}

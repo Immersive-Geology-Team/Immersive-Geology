@@ -296,9 +296,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private BlockModelBuilder buildOreBlockBase(String prefix, IGOreBlock block, String suffix, String parent_name, MineralWeathering mineralWeathering, Direction direction)
     {
+        boolean isSedimentary = ((MaterialStone) block.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY);
         BlockModelBuilder model = models().withExistingParent(
             new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+mineralWeathering.getSerializedName() + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_" + block.getMaterial(MaterialTexture.base).getName().toLowerCase() + "_variation_" + suffix +"_"+ direction.getName().toLowerCase()).getPath(),
-            new ResourceLocation(IGLib.MODID, parent_name + "_" + direction));
+            new ResourceLocation(IGLib.MODID, "block/base/"+parent_name+ (isSedimentary ? "_sedimentary" : "") + "/" +parent_name + "_" + direction));
         return model;
     }
 
@@ -328,7 +329,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     Builder<PartBuilder> holder = builder.part();
                     for(int v : texture_variations)
                     {
-                        BlockModelBuilder model = buildOreBlockBase(prefix, block, String.valueOf(v), "block/base/"+parent_name+"/"+parent_name, weathering_state, block_face);
+                        BlockModelBuilder model = buildOreBlockBase(prefix, block, String.valueOf(v), parent_name, weathering_state, block_face);
                         implementUnsafeOreTexture(model, block, stoneFormation, v, weathering_state, block_face);
 
                         holder = holder.modelFile(model);
@@ -349,7 +350,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {
-                baseModel.texture("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+                baseModel.texture("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
                 baseModel.texture("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
             }
             else
@@ -359,7 +360,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         } catch(Exception error) {
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {
-                baseModel.textures.put("sided", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+                baseModel.textures.put("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
 
                 // As TFC only has two sedimentary rocks that have a 'top and side' texture, as we can't use the EXISTING_HELPER, we manually check the stone type for now.
                 boolean manual_test = block.getMaterial(MaterialTexture.base).equals(StoneEnum.Claystone) || block.getMaterial(MaterialTexture.base).equals(StoneEnum.Shale);

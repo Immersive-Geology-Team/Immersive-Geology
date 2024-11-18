@@ -1,5 +1,5 @@
 {
-  "parent": "immersivegeology:block/base/ore_block",
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
     "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_vanadinite_pristine",
     "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_vanadinite_pristine",
@@ -7,7 +7,7 @@
     "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_vanadinite_pristine",
     "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_vanadinite_pristine",
     "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_vanadinite_pristine",
-    "sided": "tfc:block/rock/raw/chert",
+    "side": "tfc:block/rock/raw/chert",
     "top": "tfc:block/rock/raw/chert"
   }
 }

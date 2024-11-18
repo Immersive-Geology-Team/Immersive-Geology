@@ -1,0 +1,31 @@
+{
+  "parent": "immersivegeology:block/base/ore_bearing/base",
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "from": [0,0,0],
+      "to": [16,16,16],
+      "faces": {
+        "east": {
+          "uv": [0, 0, 16, 16],
+          "texture": "#side",
+          "tintindex": 0,
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [0,0,0],
+      "to": [16,16,16],
+      "faces": {
+        "east": {
+          "uv": [0, 0, 16, 16],
+          "texture": "#ore_east",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "parent": "immersivegeology:block/base/ore_block",
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
     "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_osmium_pristine",
     "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_osmium_pristine",
@@ -7,7 +7,7 @@
     "ore_south": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_osmium_pristine",
     "ore_up": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_osmium_pristine",
     "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_osmium_pristine",
-    "sided": "minecraft:block/dripstone_block",
+    "side": "minecraft:block/dripstone_block",
     "top": "minecraft:block/dripstone_block"
   }
 }

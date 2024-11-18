@@ -1,5 +1,5 @@
 {
-  "parent": "immersivegeology:block/base/ore_block",
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
     "ore_down": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine",
     "ore_east": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine",
@@ -7,7 +7,7 @@
     "ore_south": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine",
     "ore_up": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine",
     "ore_west": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine",
-    "sided": "ad_astra:block/glacio_stone",
+    "side": "ad_astra:block/glacio_stone",
     "top": "ad_astra:block/glacio_stone"
   }
 }

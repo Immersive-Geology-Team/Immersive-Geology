@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
+  "textures": {
+    "base": "tfc:block/rock/raw/phyllite",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_chromite_corroded"
+  }
+}
