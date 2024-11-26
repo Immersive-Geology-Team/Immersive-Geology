@@ -26,7 +26,7 @@ public class MaterialPyrite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO Banished to the Nether and Lava! ~UnSchtalch
-        CONFIG = new MineralConfig(12,30,3,-64,112,500, false,Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(12,30,3,-64,112,900, false,Optional.of(Biomes.IS_HOT));
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

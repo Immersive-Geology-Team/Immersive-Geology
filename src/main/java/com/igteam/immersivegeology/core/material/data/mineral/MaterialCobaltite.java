@@ -23,7 +23,7 @@ public class MaterialCobaltite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         //TODO Nether and Lava
-        CONFIG = new MineralConfig(18,60,1,-64,24,100,false, Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(18,60,1,-64,24,1000,false, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

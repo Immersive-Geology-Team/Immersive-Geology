@@ -43,7 +43,7 @@ public class IGHeightProvider extends HeightProvider
 			VerticalAnchor vaMax = (pContext) -> {
 				return (Integer)config.maxY.get();
 			};
-			return TrapezoidHeight.of(vaMin, vaMax);
+			return UniformHeight.of(vaMin, vaMax);
 		});
 	}
 

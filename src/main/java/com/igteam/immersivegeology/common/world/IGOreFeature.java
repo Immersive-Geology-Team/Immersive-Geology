@@ -90,7 +90,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
 		Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
 
-		if(config.getChanceToGenerate(config.entry) > random.nextInt(9000))
+		if(config.getChanceToGenerate(config.entry) > random.nextInt(7500))
 		{
 			if(config.canSpawnAt(vein.pos(), biomeQuery))
 			{

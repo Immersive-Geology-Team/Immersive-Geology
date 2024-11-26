@@ -28,7 +28,7 @@ public class MaterialChalcopyrite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         //TODO near Lava or nether
-        CONFIG = new MineralConfig(14,35,1,10,120,100, false, Optional.of(Biomes.IS_MOUNTAIN));
+        CONFIG = new MineralConfig(14,35,1,10,120,1000, false, Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

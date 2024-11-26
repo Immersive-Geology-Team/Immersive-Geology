@@ -28,7 +28,7 @@ public class MaterialMagnetite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
-        CONFIG = new MineralConfig(15,35,2,0,180,100, false,Optional.empty());
+        CONFIG = new MineralConfig(15,35,2,0,180,1000, false,Optional.empty());
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

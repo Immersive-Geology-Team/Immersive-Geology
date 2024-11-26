@@ -21,7 +21,7 @@ public class MaterialGypsum extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(14,30,3,40,80,90, false,Optional.of(Biomes.IS_DESERT));
+        CONFIG = new MineralConfig(14,30,3,40,80,900, false,Optional.of(Biomes.IS_DESERT));
     }
 
     @Override

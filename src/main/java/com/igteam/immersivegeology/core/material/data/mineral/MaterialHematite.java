@@ -27,7 +27,7 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO disk like spawn type
-        CONFIG = new MineralConfig(15,30,2,0,160,220, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+        CONFIG = new MineralConfig(15,30,2,0,160,2200, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override
