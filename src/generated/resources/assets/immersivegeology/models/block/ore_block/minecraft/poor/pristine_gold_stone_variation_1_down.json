@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_down",
+  "textures": {
+    "base": "minecraft:block/stone",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/poor_1_gold_pristine"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_desert",
+  "biomes": "#forge:is_hot",
   "features": "immersivegeology:smithsonite",
   "step": "underground_ores"
 }

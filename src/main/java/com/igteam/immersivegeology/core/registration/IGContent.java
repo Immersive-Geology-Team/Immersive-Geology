@@ -27,7 +27,7 @@ import java.util.List;
 
 public class IGContent {
 
-    public static void modContruction(IEventBus event){
+    public static void modContruction(IEventBus event) {
         IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
         IGMultiblockProvider.forceClassLoad();
         IGRegistrationHolder.initialize();

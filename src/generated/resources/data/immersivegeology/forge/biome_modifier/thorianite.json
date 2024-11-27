@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_sandy",
+  "biomes": "#forge:is_hot",
   "features": "immersivegeology:thorianite",
   "step": "underground_ores"
 }

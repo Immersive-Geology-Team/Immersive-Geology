@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_peak",
+  "biomes": "#forge:is_mountain",
   "features": "immersivegeology:wolframite",
   "step": "underground_ores"
 }

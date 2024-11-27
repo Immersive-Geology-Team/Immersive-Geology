@@ -52,6 +52,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGFluidTags(out, lookup, helper));
         generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
+        generator.addProvider(runServer, new IGFeatureRemovalProvider(out));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
 

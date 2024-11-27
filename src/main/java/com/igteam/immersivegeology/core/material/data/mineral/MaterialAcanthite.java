@@ -41,7 +41,7 @@ public class MaterialAcanthite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ItemCategoryFlags.SLAG);
-        CONFIG = new MineralConfig(24,30,1,-64,128,120, false, Optional.of(Biomes.IS_HOT_NETHER));
+        CONFIG = new MineralConfig(24,30,1,-64,128,120, false, Optional.of(Biomes.IS_HOT));
     }
 
     @Override

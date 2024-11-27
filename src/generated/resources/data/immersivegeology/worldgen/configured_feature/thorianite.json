@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_sandy",
+    "biomes": "#forge:is_hot",
     "entry": "Thorianite",
     "random_name": -4091130734907189052
   }

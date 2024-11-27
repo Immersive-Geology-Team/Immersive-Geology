@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_desert",
+    "biomes": "#forge:is_hot",
     "entry": "Gypsum",
     "random_name": 4171440887114315450
   }

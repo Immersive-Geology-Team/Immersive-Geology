@@ -23,7 +23,7 @@ public class MaterialWolframite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(14,60,2,100,300,1200, false,Optional.of(Biomes.IS_PEAK));
+        CONFIG = new MineralConfig(14,60,2,100,300,1200, false,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override
