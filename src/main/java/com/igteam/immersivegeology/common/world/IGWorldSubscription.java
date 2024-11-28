@@ -8,56 +8,80 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import net.minecraft.client.Minecraft;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
+import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
+import com.igteam.immersivegeology.common.world.IGOreFeature.Vein;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.profiling.jfr.event.ChunkGenerationEvent;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
+import net.minecraft.core.SectionPos;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.OreVeinifier;
-import net.minecraftforge.common.Tags;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.Map.Entry;
 
-@EventBusSubscriber
 public class IGWorldSubscription
 {
-	private static final List<Block> removeList = List.of(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK, Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.RAW_COPPER_BLOCK);
-	private static final Predicate<Block> remove = removeList::contains;
+	private static final List<Block> removeListIron = List.of(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK);
+	private static final List<Block> removeListCopper = List.of(Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.RAW_COPPER_BLOCK);
 
-	@SubscribeEvent
-	public void forceRemoveVanillaVeins(ChunkEvent event)
+	private static Boolean removeIron = null;
+	private static Boolean removeCopper = null;
+	private static Ores oreConfigs = null;
+
+
+	public static void getConfigValues()
 	{
+		removeIron = IGServerConfig.REMOVAL.shouldRemoveIron.get();
+		removeCopper = IGServerConfig.REMOVAL.shouldRemoveCopper.get();
+		oreConfigs = IGServerConfig.ORES;
+	}
+
+	// This is somewhat of a dirty method to remove the ore veins, I think it may be possible to set their size to zero
+	// But I've had a lot of trouble finding information on this.
+	@SubscribeEvent
+	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
+	{
+		if(removeCopper==null||removeIron==null||oreConfigs==null) getConfigValues();
+		ChunkAccess access = event.getChunk();
 		LevelAccessor level = event.getLevel();
-		ChunkPos pos = event.getChunk().getPos();
-		int maxZ = pos.getMaxBlockZ();
-		int maxX = pos.getMaxBlockX();
-		int minZ = pos.getMinBlockZ();
-		int minX = pos.getMinBlockX();
-
-		int minY = level.getMinBuildHeight();
-		int maxY = level.getMaxBuildHeight();
-
-		for(int x = minX; x < maxX; x++)
+		if(event.isNewChunk())
 		{
-			for(int z = minZ; z < maxZ; z++)
+			if(!removeIron&&!removeCopper) return;
+			BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+			for(int i = access.getMinSection(); i < access.getMaxSection(); ++i)
 			{
-				for(int y = minY; y < maxY; y++)
+				LevelChunkSection levelchunksection = access.getSection(access.getSectionIndexFromSectionY(i));
+				BlockPos blockpos = SectionPos.of(access.getPos(), i).origin();
+				for(int j = 0; j < 16; ++j)
 				{
-					BlockPos bpos = new BlockPos(x,y,z);
-					BlockState block = level.getBlockState(bpos);
-					if(remove.test(block.getBlock()))
+					for(int k = 0; k < 16; ++k)
 					{
-						level.setBlock(bpos, y > 0 ? Blocks.STONE.defaultBlockState() : Blocks.DEEPSLATE.defaultBlockState(), 3);
+						for(int l = 0; l < 16; ++l)
+						{
+							BlockState blockstate = levelchunksection.getBlockState(l, j, k);
+							cursor.setWithOffset(blockpos, l, j, k);
+							if((removeIron && removeListIron.contains(blockstate.getBlock())||(removeCopper && removeListCopper.contains(blockstate.getBlock()))))
+							{
+								event.getChunk().setBlockState(cursor, j > 0?Blocks.STONE.defaultBlockState(): Blocks.DEEPSLATE.defaultBlockState(), true);
+							}
+						}
 					}
 				}
 			}

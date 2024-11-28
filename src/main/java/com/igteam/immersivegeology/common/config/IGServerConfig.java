@@ -28,10 +28,12 @@ public class IGServerConfig
 {
 	public static final ForgeConfigSpec CONFIG_SPEC;
 	public static final Ores ORES;
+	public static final VanillaOreRemoval REMOVAL;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ORES = new IGServerConfig.Ores(builder);
+		REMOVAL = new IGServerConfig.VanillaOreRemoval(builder);
 		CONFIG_SPEC = builder.build();
 	}
 
@@ -54,6 +56,19 @@ public class IGServerConfig
 	public static int getOrDefault(IntValue value)
 	{
 		return CONFIG_SPEC.isLoaded()?value.get(): value.getDefault();
+	}
+
+	public static class VanillaOreRemoval
+	{
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIron;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveCopper;
+		VanillaOreRemoval(ForgeConfigSpec.Builder builder)
+		{
+			builder.push("remove_minecraft_ore_veins").comment("These are the Rare but large veins of minecrafts Copper and Iron (includes Raw Ore Blocks)");
+			shouldRemoveIron = builder.comment("Should IG remove Minecrafts Iron Ore Veins?").define("remove_iron", true);
+			shouldRemoveCopper = builder.comment("Should IG remove Minecrafts Copper Ore Veins?").define("remove_copper", true);
+			builder.pop();
+		}
 	}
 
 	public static class Ores

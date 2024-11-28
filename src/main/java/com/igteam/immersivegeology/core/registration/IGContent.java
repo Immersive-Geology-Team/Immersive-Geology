@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultibloc
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IGWorldGen;
+import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;

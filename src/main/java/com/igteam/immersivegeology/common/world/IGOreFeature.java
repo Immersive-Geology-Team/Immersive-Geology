@@ -22,10 +22,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -66,7 +69,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		} else {
 			for(Vein vein : veins)
 			{
-				this.place(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), vein, config);
+				IGOreFeature.placeVein(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), vein, config);
 			}
 			return true;
 		}
@@ -74,21 +77,21 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 
 	public final List<Vein> getNearbyVeins(WorldGenLevel level, ChunkPos pos, int radius, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
-		List<Vein> veins = new ArrayList();
+		List<Vein> veins = new ArrayList<>();
 
 		for(int x = pos.x - radius; x <= pos.x + radius; ++x) {
 			for(int z = pos.z - radius; z <= pos.z + radius; ++z) {
-				this.getVeinsAtChunk(level, x, z, veins, config, biomeQuery);
+				getVeinsAtChunk(level, x, z, veins, config, biomeQuery);
 			}
 		}
 
 		return veins;
 	}
 
-	public final void getVeinsAtChunk(WorldGenLevel level, int chunkPosX, int chunkPosZ, List<Vein> veins, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
+	public static void getVeinsAtChunk(WorldGenLevel level, int chunkPosX, int chunkPosZ, List<Vein> veins, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
 		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPosX * 61728364132L, config.seed ^ (long)chunkPosZ * 16298364123L);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-		Vein vein = this.createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
+		Vein vein = createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
 
 		if(config.getChanceToGenerate(config.entry) > random.nextInt(7500))
 		{
@@ -99,21 +102,21 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		}
 	}
 
-	private Vein createVein(int chunkX, int chunkZ, RandomSource random, OreConfig config)
+	private static Vein createVein(int chunkX, int chunkZ, RandomSource random, OreConfig config)
 	{
-		return new Vein(this.defaultPosRespectingHeight(chunkX, chunkZ, random, config));
+		return new Vein(defaultPosRespectingHeight(chunkX, chunkZ, random, config));
 	}
 
-	private BlockPos defaultPosRespectingHeight(int chunkX, int chunkZ, RandomSource random, OreConfig config) {
-		return new BlockPos(chunkX + random.nextInt(16), this.defaultYPos(config.veinSize.get(), random, config), chunkZ + random.nextInt(16));
+	private static BlockPos defaultPosRespectingHeight(int chunkX, int chunkZ, RandomSource random, OreConfig config) {
+		return new BlockPos(chunkX + random.nextInt(16), defaultYPos(config.veinSize.get(), random, config), chunkZ + random.nextInt(16));
 	}
 
-	protected final int defaultYPos(int verticalShrinkRange, RandomSource random, OreConfig config) {
+	protected static int defaultYPos(int verticalShrinkRange, RandomSource random, OreConfig config) {
 		int actualRange = config.maxY.get() - config.minY.get() - 2 * verticalShrinkRange;
 		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
 	}
 
-	protected void place(WorldGenLevel level, RandomSource random, int blockX, int blockZ, Vein vein, IGOreFeatureConfig config)
+	public static void placeVein(LevelAccessor level, RandomSource random, int chunkX, int chunkZ, Vein vein, IGOreFeatureConfig config)
 	{
 		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
 		IWorldGenConfig mineral = config.entry;
@@ -125,12 +128,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		offsetX = random.nextInt(16) - random.nextInt(16);
 		offsetZ = random.nextInt(16) - random.nextInt(16);
 
-		int minX = Math.max(blockX, box.minX());
-		int maxX = Math.min(blockX + 15, box.maxX());
+		int minX = Math.max(chunkX, box.minX());
+		int maxX = Math.min(chunkX + 15, box.maxX());
 		int minY = Math.max(oreConfig.minY.get(), box.minY());
 		int maxY = Math.min(oreConfig.maxY.get(), box.maxY());
-		int minZ = Math.max(blockZ, box.minZ());
-		int maxZ = Math.min(blockZ + 15, box.maxZ());
+		int minZ = Math.max(chunkZ, box.minZ());
+		int maxZ = Math.min(chunkZ + 15, box.maxZ());
 		for(int x = minX; x <= maxX; ++x) {
 			for(int z = minZ; z <= maxZ; ++z) {
 				int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));
@@ -140,17 +143,17 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
 					if (oreState != null) {
 						oreState = oxidizeExposed(level, cursor, oreState);
-						level.setBlock(cursor, oreState, 3);
+
+						level.getChunk(SectionPos.blockToSectionCoord(chunkX), SectionPos.blockToSectionCoord(chunkZ)).setBlockState(cursor, oreState, true);
 					}
 				}
 			}
 		}
-
 	}
 
 	private static final Direction[] DIRECTIONS = Direction.values();
 
-	private BlockState oxidizeExposed(WorldGenLevel level, BlockPos.MutableBlockPos cursor, BlockState oreState)
+	private static BlockState oxidizeExposed(LevelAccessor level, BlockPos.MutableBlockPos cursor, BlockState oreState)
 	{
 		// Check if the ore block is randomly ticking
 		if(((IGOreBlock)oreState.getBlock()).isRandomlyTicking(oreState))
@@ -170,7 +173,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return oreState;
 	}
 
-	private BlockState handleOxidation(BlockState state, WorldGenLevel level, BlockPos adjacentPos, EnumProperty<MineralWeathering> oxidationProperty)
+	private static BlockState handleOxidation(BlockState state, LevelAccessor level, BlockPos adjacentPos, EnumProperty<MineralWeathering> oxidationProperty)
 	{
 		if (level.getBlockState(adjacentPos).isAir())
 		{
@@ -231,7 +234,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		{
 			IWorldGenConfig mineral = config.entry;
 			TagMatchTest validStone = new TagMatchTest(Tags.Blocks.STONE);
-			if(!validStone.test(stoneState, random)) return null;
+			if(!validStone.test(stoneState, random) &! stoneState.is(Blocks.DRIPSTONE_BLOCK) &! stoneState.is(Blocks.SANDSTONE)) return null;
 			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
 			if(stone == null) {
 				return null;

@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -39,6 +40,7 @@ public class ImmersiveGeology {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        MinecraftForge.EVENT_BUS.register(new IGWorldSubscription());
 
         ModLoadingContext.get().registerConfig(Type.CLIENT, IGClientConfig.CONFIG_SPEC);
         ModLoadingContext.get().registerConfig(Type.SERVER, IGServerConfig.CONFIG_SPEC);

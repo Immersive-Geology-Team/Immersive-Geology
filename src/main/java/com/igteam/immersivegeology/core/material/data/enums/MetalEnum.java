@@ -147,4 +147,10 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     {
         return material.getOreBlock(stone, richness);
     }
+
+    @Override
+    public int generationChance()
+    {
+        return material.CONFIG.generationChance();
+    }
 }

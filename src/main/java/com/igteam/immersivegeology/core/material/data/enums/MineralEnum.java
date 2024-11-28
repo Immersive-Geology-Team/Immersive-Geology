@@ -135,6 +135,12 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     }
 
     @Override
+    public int generationChance()
+    {
+        return material.CONFIG.generationChance();
+    }
+
+    @Override
     public boolean useSparsePlacement()
     {
         return material.CONFIG.useSparsePlacement();
