@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.item;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -143,5 +145,22 @@ public class IGMBFormationItem extends IGGenericItem
 			result.add(asRL);
 		}
 		return result;
+	}
+
+	@Override
+	public boolean hasCraftingRemainingItem(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Nonnull
+	@Override
+	public ItemStack getCraftingRemainingItem(@Nonnull ItemStack stack)
+	{
+		ItemStack container = stack.copy();
+		if(container.hurt(1, ApiUtils.RANDOM_SOURCE, null))
+			return ItemStack.EMPTY;
+		else
+			return container;
 	}
 }
