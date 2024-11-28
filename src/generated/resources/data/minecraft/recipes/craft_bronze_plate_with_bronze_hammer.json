@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "ig_plate_from_ingot_hammer",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/bronze"
+    },
+    {
+      "item": "immersivegeology:ig_toolkit_0"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:plate_bronze"
+  }
+}

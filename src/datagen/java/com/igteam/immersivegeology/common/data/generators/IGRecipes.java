@@ -118,6 +118,14 @@ public class IGRecipes extends RecipeProvider
 				.requires(MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem())
 				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_reinforced_refractory_bricks");
+
+
+		// Bronze Plate
+		Item bronze_plate = MetalEnum.Bronze.getItem(ItemCategoryFlags.PLATE);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bronze_plate)
+				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT))
+				.requires(toolkit_0)
+				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_bronze_plate_with_bronze_hammer");
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
