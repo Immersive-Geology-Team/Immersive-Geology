@@ -225,6 +225,9 @@ public class IGRegistrationHolder {
         registerItem("ig_toolkit_1", () -> new IGHeftyWrenchItem(ItemCategoryFlags.MISC, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
         registerItem("ig_toolkit_2", () -> new IGMBFormationItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 16, formationFormat(stone_mb)));
 
+        registerItem("raw_refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_refractory_brick"));
+        registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_refractory_brick"));
+
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
         registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
 

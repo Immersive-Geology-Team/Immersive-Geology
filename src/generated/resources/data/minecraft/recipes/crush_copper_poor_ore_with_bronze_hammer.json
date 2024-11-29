@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:poor_ore/copper"
+    },
+    {
+      "tag": "forge:poor_ore/copper"
+    },
+    {
+      "item": "immersivegeology:ig_toolkit_0"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_copper"
+  }
+}

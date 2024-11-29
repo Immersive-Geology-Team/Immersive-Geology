@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:poor_ore/molybenite"
+    },
+    {
+      "tag": "forge:poor_ore/molybenite"
+    },
+    {
+      "item": "immersivegeology:ig_toolkit_2"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_molybenite"
+  }
+}

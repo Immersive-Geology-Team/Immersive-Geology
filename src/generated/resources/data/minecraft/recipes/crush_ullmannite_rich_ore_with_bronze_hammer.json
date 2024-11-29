@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:rich_ore/ullmannite"
+    },
+    {
+      "tag": "forge:rich_ore/ullmannite"
+    },
+    {
+      "item": "immersivegeology:ig_toolkit_0"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:dirty_crushed_ore_ullmannite"
+  }
+}

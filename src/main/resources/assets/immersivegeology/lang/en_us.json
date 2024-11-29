@@ -344,6 +344,9 @@
   "block.immersivegeology.chemical_engineering": "Chemical Engineering Block",
   "block.immersivegeology.computational_engineering": "Computational Engineering Block",
 
+  "item.immersivegeology.raw_refractory_brick": "Raw Refractory Brick",
+  "item.immersivegeology.refractory_brick": "Refractory Brick",
+
   "block.immersivegeology.tfc_poor_ore_block_iron_chalk.prospected": "Native Iron",
   "block.immersivegeology.normal_ore_block_osmium_stone.prospected": "Native Osmium",
   "block.immersivegeology.tfc_rich_ore_block_pyrite_slate.prospected": "Pyrite",

@@ -3025,10 +3025,6 @@
       "required": false
     },
     {
-      "id": "immersivegeology:storage_block_kaolinite",
-      "required": false
-    },
-    {
       "id": "immersivegeology:ad_astra_poor_ore_block_thorianite_mars_stone",
       "required": false
     },

@@ -46,7 +46,6 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Hematite(new MaterialHematite()),
     Hubnerite(new MaterialHubnerite()),
     Ilmenite(new MaterialIlmenite()),
-    Kaolinite(new MaterialKaolinite()),
     Magnetite(new MaterialMagnetite()),
     Molybenite(new MaterialMolybenite()),
     Monazite(new MaterialMonazite()),
@@ -74,12 +73,9 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
         List<String> permutations = new ArrayList<>();
         Arrays.stream(values()).forEach((e) ->
         {
-            if(!e.equals(Kaolinite))
+            for(MineralWeathering weathering : MineralWeathering.values())
             {
-                for(MineralWeathering weathering : MineralWeathering.values())
-                {
-                    permutations.add(weathering.name().toLowerCase()+"/"+e.getName());
-                }
+                permutations.add(weathering.name().toLowerCase()+"/"+e.getName());
             }
         });
 

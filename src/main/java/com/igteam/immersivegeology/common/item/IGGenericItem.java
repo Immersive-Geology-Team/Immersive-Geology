@@ -24,7 +24,8 @@ import java.util.*;
 public class IGGenericItem extends Item implements IGFlagItem {
     protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     protected final ItemCategoryFlags category;
-
+    protected String customLang = "";
+    boolean hasCustomLang = false;
     public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material) {
         this(flag, material, new Properties());
     }
@@ -44,6 +45,11 @@ public class IGGenericItem extends Item implements IGFlagItem {
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
+        if(hasCustomLang)
+        {
+            return Component.translatable("item.immersivegeology." + customLang);
+        }
+
         List<String> materialList = new ArrayList<>();
         for(MaterialTexture t : MaterialTexture.values()){
             if (materialMap.containsKey(t)) {
@@ -73,4 +79,11 @@ public class IGGenericItem extends Item implements IGFlagItem {
     public MaterialInterface<?> getMaterial(MaterialTexture t) {
         return materialMap.get(t);
     }
+
+	public Item setCustomLangString(String rawRefractoryBrick)
+	{
+        hasCustomLang = true;
+        customLang = rawRefractoryBrick;
+        return this;
+	}
 }

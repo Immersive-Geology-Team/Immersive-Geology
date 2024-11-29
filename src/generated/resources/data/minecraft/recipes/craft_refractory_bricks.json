@@ -4,7 +4,7 @@
   "group": "ig_tools",
   "key": {
     "B": {
-      "tag": "forge:ingots/refractory_brick"
+      "item": "immersivegeology:refractory_brick"
     }
   },
   "pattern": [

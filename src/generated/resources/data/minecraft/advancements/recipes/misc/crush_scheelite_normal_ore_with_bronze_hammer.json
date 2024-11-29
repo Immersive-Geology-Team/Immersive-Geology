@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bronze_work_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:ig_toolkit_2"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crush_scheelite_normal_ore_with_bronze_hammer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze_work_hammer",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crush_scheelite_normal_ore_with_bronze_hammer"
+    ]
+  },
+  "sends_telemetry_event": false
+}

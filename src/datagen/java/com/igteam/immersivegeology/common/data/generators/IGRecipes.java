@@ -37,6 +37,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -85,13 +86,16 @@ public class IGRecipes extends RecipeProvider
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
+
+		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
+
 		// Bronze Hammer
 		Item toolkit_0 = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_0)
 				.pattern(" BS")
 				.pattern(" WB")
-				.pattern("W  ").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
-				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_0");
+				.pattern("W  ").define('B', bronze_ingot).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_0");
 		// Stainless Steel Hammer
 		Item toolkit_1 = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
@@ -105,19 +109,36 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" BS")
 				.pattern(" WB")
 				.pattern("W  ").define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
-				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_igtoolkit_2");
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_2");
 		// Refractory Brick Block
+
+		Item refractory_brick = IGRegistrationHolder.getItem.apply("refractory_brick");
 		Item refractory = MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, refractory)
 				.pattern("BB")
-				.pattern("BB").define('B', Ingredient.of(MiscEnum.Refractory.getItemTag(ItemCategoryFlags.INGOT)))
-				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_refractory_bricks");
+				.pattern("BB").define('B', refractory_brick)
+				.group("ig_tools").unlockedBy("has_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(refractory_brick)).save(consumer, "craft_refractory_bricks");
+
+		Item refractory_slab = MiscEnum.Refractory.getStack(BlockCategoryFlags.SLAB).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, refractory_slab, 6)
+				.pattern("BBB").define('B', refractory)
+				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, "craft_refractory_bricks_slab");
+
 		// Reinforced Refractory Brick Block
 		Item reinforced_refractory = MiscEnum.ReinforcedRefractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, reinforced_refractory)
 				.requires(MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem())
 				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE))
-				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_reinforced_refractory_bricks");
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_reinforced_refractory_bricks");
+
+		Item reinforced_refractory_slab = MiscEnum.ReinforcedRefractory.getStack(BlockCategoryFlags.SLAB).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, reinforced_refractory_slab, 6)
+				.pattern("BBB").define('B', reinforced_refractory)
+				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, "craft_reinforced_refractory_bricks_slab");
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, reinforced_refractory_slab, 2)
+				.pattern("SBS").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE)).define('S', refractory_slab)
+				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, "craft_reinforced_refractory_bricks_slab_alt");
 
 
 		// Bronze Plate
@@ -126,6 +147,18 @@ public class IGRecipes extends RecipeProvider
 				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT))
 				.requires(toolkit_0)
 				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_bronze_plate_with_bronze_hammer");
+
+
+		Item raw_refractory_brick = IGRegistrationHolder.getItem.apply("raw_refractory_brick");
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_refractory_brick, 4)
+				.requires(Items.CLAY_BALL)
+				.requires(Items.CHARCOAL)
+				.requires(ItemTags.SAND)
+				.requires(Items.COBBLESTONE)
+				.group("raw_refractory_brick").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, "craft_raw_refractory_brick");
+
+
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_refractory_brick), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_refractory_brick)).save(consumer, "cook_raw_refractory_brick");
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
@@ -148,16 +181,22 @@ public class IGRecipes extends RecipeProvider
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Multiblock Test Recipe Registration");
+		Item stone_work_hammer = IGRegistrationHolder.getItem.apply("ig_toolkit_2");
+		Item bronze_work_hammer = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
 				for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
 				{
 					int amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 2 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 3 : 5);
+					int nerfed_amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 1 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 2 : 3);
 					int time = 100;
 					int energy = 100;
+					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(stone_work_hammer).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_stone_hammer");
+					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(bronze_work_hammer).unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_bronze_hammer");
 					CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, amount)).addInput(material.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + material.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
 				}
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer, "wash_dirty_crushed_" + material.getName().toLowerCase());
 				GravitySeparatorRecipeBuilder.builder(material.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(material.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ material.getName() + "_to_crushed"));
 			}
 			if(material instanceof MetalEnum)
@@ -170,7 +209,9 @@ public class IGRecipes extends RecipeProvider
 		}
 
 		BloomeryRecipeBuilder.builder(MetalEnum.Copper.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cuprite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cuprite_to_ingot"));
-		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(300).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
+		BloomeryRecipeBuilder.builder(MetalEnum.Tin.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cassiterite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cassiterite_to_ingot"));
+		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
+		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
 
 		NonNullList<StackWithChance> list = NonNullList.create();
 		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.DUST, 1), 0.4f));
