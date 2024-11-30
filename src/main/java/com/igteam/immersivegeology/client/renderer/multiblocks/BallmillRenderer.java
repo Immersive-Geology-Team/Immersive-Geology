@@ -62,7 +62,6 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         poseStack.popPose();
 
         poseStack.pushPose();
-            // poseStack.translate(1.34375,0.875,0.9375);
             poseStack.translate(1.34375,0.775,0.9375);
             poseStack.mulPose(new Quaternionf().rotateAxis(-angleAxle * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
 

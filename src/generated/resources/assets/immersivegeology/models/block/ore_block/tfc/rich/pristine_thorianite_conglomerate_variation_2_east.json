@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_thorianite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_thorianite_pristine",
     "side": "tfc:block/rock/raw/conglomerate",
     "top": "tfc:block/rock/raw/conglomerate"
   }

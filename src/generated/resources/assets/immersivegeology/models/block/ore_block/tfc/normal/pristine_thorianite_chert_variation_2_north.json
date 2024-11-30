@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
   "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_thorianite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_thorianite_pristine",
     "side": "tfc:block/rock/raw/chert",
     "top": "tfc:block/rock/raw/chert"
   }

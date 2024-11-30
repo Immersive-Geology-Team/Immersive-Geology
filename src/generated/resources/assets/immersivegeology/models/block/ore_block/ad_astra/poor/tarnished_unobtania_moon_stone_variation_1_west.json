@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
-  "textures": {
-    "base": "ad_astra:block/moon_stone",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_unobtania_tarnished"
-  }
-}

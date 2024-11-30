@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_monazite_corroded",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_monazite_corroded",
     "side": "tfc:block/rock/raw/conglomerate",
     "top": "tfc:block/rock/raw/conglomerate"
   }

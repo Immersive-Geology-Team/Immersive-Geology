@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
-  "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_hubnerite_corroded",
-    "side": "ad_astra:block/glacio_stone",
-    "top": "ad_astra:block/glacio_stone"
-  }
-}

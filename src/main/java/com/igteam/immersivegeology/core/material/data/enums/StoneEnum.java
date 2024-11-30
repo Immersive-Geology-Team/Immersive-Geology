@@ -62,17 +62,17 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MCGranite(new MaterialMCGranite()),
     Netherrack(new MaterialMCNetherrack()),
     Dripstone(new MaterialMCDripstone()),
-    Sandstone(new MaterialMCSandstone()),
+    Sandstone(new MaterialMCSandstone());
 
     //===== Minecraft Sands =====\\
     //Sand(new MaterialSand()),
 
     //===== Beyond Earth / Ad Astra =====\\
-    MoonStone(new MaterialMoonStone()),
-    MarsStone(new MaterialMarsStone()),
-    MercuryStone(new MaterialMercuryStone()),
-    VenusStone(new MaterialVenusStone()),
-    GlacioStone(new MaterialGlacioStone());
+    //MoonStone(new MaterialMoonStone()),
+    //MarsStone(new MaterialMarsStone()),
+    //MercuryStone(new MaterialMercuryStone()),
+    //VenusStone(new MaterialVenusStone()),
+    //GlacioStone(new MaterialGlacioStone());
 
     public static final Codec<StoneEnum> CODEC = Codec.STRING.xmap(StoneEnum::valueOf, Enum::name);
 

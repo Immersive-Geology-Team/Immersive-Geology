@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
   "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_gypsum_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_gypsum_pristine",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

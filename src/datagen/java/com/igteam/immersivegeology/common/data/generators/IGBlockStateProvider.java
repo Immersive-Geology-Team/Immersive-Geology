@@ -9,6 +9,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
@@ -337,7 +338,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     }
                     holder.addModel().condition(IGOreBlock.OXIDATION_PROPERTIES.get(block_face.get3DDataValue()), weathering_state).end();
                 }
-                
             }
         }
     }
@@ -346,7 +346,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         ResourceLocation default_richness_ore;
 
-        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + block.getMaterial(MaterialTexture.overlay).getVeinType() +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinType()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY))
             {

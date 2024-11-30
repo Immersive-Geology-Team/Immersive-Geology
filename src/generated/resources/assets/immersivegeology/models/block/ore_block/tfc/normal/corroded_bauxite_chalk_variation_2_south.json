@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_bauxite_corroded",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_bauxite_corroded",
     "side": "tfc:block/rock/raw/chalk",
     "top": "tfc:block/rock/raw/chalk"
   }

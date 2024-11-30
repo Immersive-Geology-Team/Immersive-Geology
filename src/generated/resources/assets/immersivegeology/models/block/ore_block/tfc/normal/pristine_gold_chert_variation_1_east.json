@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_gold_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/normal_1_gold_pristine",
     "side": "tfc:block/rock/raw/chert",
     "top": "tfc:block/rock/raw/chert"
   }

@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
   "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_gold_corroded",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_gold_corroded",
     "side": "tfc:block/rock/raw/conglomerate",
     "top": "tfc:block/rock/raw/conglomerate"
   }

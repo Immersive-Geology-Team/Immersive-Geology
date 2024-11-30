@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
   "textures": {
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_chalcocite_corroded",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_chalcocite_corroded",
     "side": "tfc:block/rock/raw/claystone",
     "top": "tfc:block/rock/raw/claystone_top"
   }

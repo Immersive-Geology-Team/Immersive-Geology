@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
   "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_chalcocite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_chalcocite_pristine",
     "side": "minecraft:block/dripstone_block",
     "top": "minecraft:block/dripstone_block"
   }

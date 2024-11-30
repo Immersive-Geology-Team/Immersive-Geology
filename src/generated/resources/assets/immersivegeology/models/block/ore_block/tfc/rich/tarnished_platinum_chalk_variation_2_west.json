@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
   "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/rich_2_platinum_tarnished",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_platinum_tarnished",
     "side": "tfc:block/rock/raw/chalk",
     "top": "tfc:block/rock/raw/chalk"
   }

@@ -61,6 +61,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "bloomery");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");
         multiblockEntry(instance, multiblock_category, "ballmill");
+        multiblockEntry(instance, multiblock_category, "centrifuge");
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
   "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_cassiterite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_cassiterite_pristine",
     "side": "tfc:block/rock/raw/limestone",
     "top": "tfc:block/rock/raw/limestone"
   }

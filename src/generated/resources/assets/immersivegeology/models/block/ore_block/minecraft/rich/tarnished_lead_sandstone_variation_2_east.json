@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/rich_2_lead_tarnished",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_lead_tarnished",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

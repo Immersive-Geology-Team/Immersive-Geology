@@ -12,12 +12,16 @@ plugins {
     id 'eclipse'
 }
 
-version = '0.2.3'
+version = '0.3.0'
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 jar.enabled = true
+tasks.withType(Jar) {
+    // Enable ZIP64 for regular Jar task
+    zip64 true
+}
 
 sourceSets {
     main {
@@ -93,7 +97,6 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-            // TODO not really ideal, is it?
             ideaModule project.name + ".gametest"
             mods {
                 immersivegeology {
@@ -201,9 +204,9 @@ dependencies {
 //    implementation fg.deobf("curse.maven:botarium-704113:5486070")
 //    implementation fg.deobf("curse.maven:resourceful-lib-570073:5568216")
 //    implementation fg.deobf("curse.maven:ad-astra-635042:4894852")
-//
+
 //    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
-//    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5571484")
+//    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 
     datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
 

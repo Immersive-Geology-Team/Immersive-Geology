@@ -1,12 +1,12 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_scheelite_pristine",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_scheelite_pristine",
     "side": "tfc:block/rock/raw/claystone",
     "top": "tfc:block/rock/raw/claystone_top"
   }

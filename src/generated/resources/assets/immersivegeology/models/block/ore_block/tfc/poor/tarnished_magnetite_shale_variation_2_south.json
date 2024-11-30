@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_magnetite_tarnished",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_magnetite_tarnished",
     "side": "tfc:block/rock/raw/shale",
     "top": "tfc:block/rock/raw/shale_top"
   }

@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_monazite_tarnished",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_monazite_tarnished",
     "side": "tfc:block/rock/raw/chalk",
     "top": "tfc:block/rock/raw/chalk"
   }

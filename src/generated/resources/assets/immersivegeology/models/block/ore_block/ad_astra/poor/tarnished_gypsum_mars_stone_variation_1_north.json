@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
-  "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_gypsum_tarnished",
-    "side": "ad_astra:block/mars_stone",
-    "top": "ad_astra:block/mars_stone"
-  }
-}

@@ -261,6 +261,7 @@ public class IGRegistrationHolder {
                                 }
                             }
                         }
+
                         case SLAB -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);

@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
   "textures": {
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_molybenite_tarnished",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_molybenite_tarnished",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

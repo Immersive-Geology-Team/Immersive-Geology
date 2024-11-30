@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
   "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_chalcocite_tarnished",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_chalcocite_tarnished",
     "side": "tfc:block/rock/raw/dolomite",
     "top": "tfc:block/rock/raw/dolomite"
   }

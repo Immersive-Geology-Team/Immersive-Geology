@@ -1,12 +1,12 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_pyrolusite_pristine",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
+    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
+    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrolusite_pristine",
     "side": "tfc:block/rock/raw/chalk",
     "top": "tfc:block/rock/raw/chalk"
   }

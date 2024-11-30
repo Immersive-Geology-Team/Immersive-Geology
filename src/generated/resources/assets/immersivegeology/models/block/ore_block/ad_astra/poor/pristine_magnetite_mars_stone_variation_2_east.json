@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
-  "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_magnetite_pristine",
-    "side": "ad_astra:block/mars_stone",
-    "top": "ad_astra:block/mars_stone"
-  }
-}

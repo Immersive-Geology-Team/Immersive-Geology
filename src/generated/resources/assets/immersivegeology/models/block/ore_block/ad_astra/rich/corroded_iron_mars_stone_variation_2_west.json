@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
-  "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/rich_2_iron_corroded",
-    "side": "ad_astra:block/mars_stone",
-    "top": "ad_astra:block/mars_stone"
-  }
-}

@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.helper.material;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
@@ -247,5 +248,5 @@ public interface MaterialHelper {
         }
     }
 
-    default String getVeinType() {return "metallic";}
+    default String getVeinType() {return IGVeinTextureType.METALLIC.getSanitizedName();}
 }

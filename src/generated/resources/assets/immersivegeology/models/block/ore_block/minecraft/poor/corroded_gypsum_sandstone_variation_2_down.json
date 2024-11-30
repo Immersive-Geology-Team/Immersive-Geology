@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_gypsum_corroded",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_gypsum_corroded",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

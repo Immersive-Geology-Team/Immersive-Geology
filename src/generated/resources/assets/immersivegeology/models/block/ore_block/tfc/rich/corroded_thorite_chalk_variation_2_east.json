@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_thorite_corroded",
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_thorite_corroded",
     "side": "tfc:block/rock/raw/chalk",
     "top": "tfc:block/rock/raw/chalk"
   }

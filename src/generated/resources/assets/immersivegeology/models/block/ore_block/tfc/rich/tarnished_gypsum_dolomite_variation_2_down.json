@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_gypsum_tarnished",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_gypsum_tarnished",
     "side": "tfc:block/rock/raw/dolomite",
     "top": "tfc:block/rock/raw/dolomite"
   }

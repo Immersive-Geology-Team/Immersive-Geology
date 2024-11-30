@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
-  "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_osmium_pristine",
-    "side": "ad_astra:block/venus_stone",
-    "top": "ad_astra:block/venus_stone"
-  }
-}

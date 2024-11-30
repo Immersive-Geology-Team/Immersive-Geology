@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
-  "textures": {
-    "base": "ad_astra:block/moon_stone",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/poor_1_gold_corroded"
-  }
-}

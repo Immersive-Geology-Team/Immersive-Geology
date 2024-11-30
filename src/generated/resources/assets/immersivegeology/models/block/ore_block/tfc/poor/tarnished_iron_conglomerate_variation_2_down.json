@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/metallic/poor_2_iron_tarnished",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_iron_tarnished",
     "side": "tfc:block/rock/raw/conglomerate",
     "top": "tfc:block/rock/raw/conglomerate"
   }

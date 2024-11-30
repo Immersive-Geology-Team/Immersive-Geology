@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
   "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/normal_2_platinum_pristine",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_platinum_pristine",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

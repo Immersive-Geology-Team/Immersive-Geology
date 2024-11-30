@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_tarnished",
+    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_pyrite_tarnished",
     "side": "minecraft:block/dripstone_block",
     "top": "minecraft:block/dripstone_block"
   }
