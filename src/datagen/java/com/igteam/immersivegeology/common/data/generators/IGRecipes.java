@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
@@ -148,7 +149,6 @@ public class IGRecipes extends RecipeProvider
 				.requires(toolkit_0)
 				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_bronze_plate_with_bronze_hammer");
 
-
 		Item raw_refractory_brick = IGRegistrationHolder.getItem.apply("raw_refractory_brick");
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_refractory_brick, 4)
 				.requires(Items.CLAY_BALL)
@@ -159,6 +159,26 @@ public class IGRecipes extends RecipeProvider
 
 
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_refractory_brick), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_refractory_brick)).save(consumer, "cook_raw_refractory_brick");
+		//Computational Engineering Block
+		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
+		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
+				.pattern("ABA")
+				.pattern("CPC")
+				.pattern("ABA")
+				.define('A', Ingredient.of(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.INGOT)))
+				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
+				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
+				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering");
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
+				.pattern("ACA")
+				.pattern("BPB")
+				.pattern("ACA")
+				.define('A', Ingredient.of(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.INGOT)))
+				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
+				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
+				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering_2");
+
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
