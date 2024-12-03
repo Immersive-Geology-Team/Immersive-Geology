@@ -1,21 +1,13 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
-import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGArcSmeltingMethod;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 public class MaterialMineral extends GeologyMaterial {
 
@@ -34,8 +26,8 @@ public class MaterialMineral extends GeologyMaterial {
     {}
 
     @Override
-    public String getVeinType()
+    public IGVeinTextureType getVeinType()
     {
-        return OrePattern.MINERAL.getName();
+        return IGVeinTextureType.MINERAL;
     }
 }

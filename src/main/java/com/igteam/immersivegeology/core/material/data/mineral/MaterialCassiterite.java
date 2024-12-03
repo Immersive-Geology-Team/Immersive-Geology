@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.BiomeTags;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -30,7 +29,7 @@ public class MaterialCassiterite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(40,50,2,0,175,500, false,Optional.of(BiomeTags.IS_OVERWORLD));
+        CONFIG = new MineralConfig(40,50,2,0,175,700, false,Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override

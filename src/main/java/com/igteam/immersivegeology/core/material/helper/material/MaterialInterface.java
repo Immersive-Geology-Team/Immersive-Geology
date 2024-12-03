@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -101,7 +102,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default boolean hasOxidationOverTime() {return instance().willTarnishOverTime();};
 
-	default String getVeinType()
+	default IGVeinTextureType getVeinType()
     {
         return instance().getVeinType();
     }

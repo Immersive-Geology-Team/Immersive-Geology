@@ -7,17 +7,25 @@
  */
 
 package com.igteam.immersivegeology.common.world;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
+import com.igteam.immersivegeology.common.world.noise.INoise3D;
+import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +34,7 @@ import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.datafix.fixes.LeavesFix.Section;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -34,14 +43,21 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkStatus;
+import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraft.world.level.levelgen.RandomSupport;
-import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
+import net.minecraft.world.level.levelgen.NoiseChunk.NoiseInterpolator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
+import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 
@@ -54,61 +70,42 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		super(IGOreFeature.IGOreFeatureConfig.CODEC.codec());
 	}
 
+	private static final float THRESHOLD = 0.3f;
+
 	@Override
 	public boolean place(FeaturePlaceContext<IGOreFeatureConfig> ctx)
 	{
 		IGOreFeatureConfig config = ctx.config();
 		WorldGenLevel level = ctx.level();
 		BlockPos pos = ctx.origin();
-		RandomSource random = ctx.random();
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
-		List<Vein> veins = this.getNearbyVeins(level, chunkPos, config.getSize(), config, level::getBiome);
-		if (veins.isEmpty()) {
-			return false;
-		} else {
-			for(Vein vein : veins)
-			{
-				IGOreFeature.placeVein(level, random, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), vein, config);
-			}
+		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
+		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
+
+		if((random.nextInt(50000) < rConfig.generationChance.get()))
+		{
+			IGOreFeature.placeVein(level, random, chunkPos, createVein(random, rConfig, config.seed()), config);
 			return true;
 		}
+
+		return false;
 	}
 
-
-	public final List<Vein> getNearbyVeins(WorldGenLevel level, ChunkPos pos, int radius, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
-		List<Vein> veins = new ArrayList<>();
-
-		for(int x = pos.x - radius; x <= pos.x + radius; ++x) {
-			for(int z = pos.z - radius; z <= pos.z + radius; ++z) {
-				getVeinsAtChunk(level, x, z, veins, config, biomeQuery);
-			}
-		}
-
-		return veins;
-	}
-
-	public static void getVeinsAtChunk(WorldGenLevel level, int chunkPosX, int chunkPosZ, List<Vein> veins, IGOreFeatureConfig config, Function<BlockPos, Holder<Biome>> biomeQuery) {
-		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPosX * 61728364132L, config.seed ^ (long)chunkPosZ * 16298364123L);
-		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-		Vein vein = createVein(chunkPosX<<4, chunkPosZ<<4, random, rConfig);
-
-		if(config.getChanceToGenerate(config.entry) > random.nextInt(7500))
-		{
-			if(config.canSpawnAt(vein.pos(), biomeQuery))
-			{
-				veins.add(vein);
-			}
-		}
-	}
-
-	private static Vein createVein(int chunkX, int chunkZ, RandomSource random, OreConfig config)
+	private static Vein createVein(RandomSource random, OreConfig config, long seed)
 	{
-		return new Vein(defaultPosRespectingHeight(chunkX, chunkZ, random, config));
+		SimplexNoise3D simplex = new SimplexNoise3D(seed);
+
+		int FEATURE_SIZE = config.veinSize.get();
+		INoise3D noise = (x,y,z) ->
+		{
+			return simplex.flattened(0f, 1f).octaves(1,0.75f).noise(x/FEATURE_SIZE,y/FEATURE_SIZE,z/FEATURE_SIZE);
+		};
+		return new Vein(defaultPosRespectingHeight(random, config), random, noise);
 	}
 
-	private static BlockPos defaultPosRespectingHeight(int chunkX, int chunkZ, RandomSource random, OreConfig config) {
-		return new BlockPos(chunkX + random.nextInt(16), defaultYPos(config.veinSize.get(), random, config), chunkZ + random.nextInt(16));
+	private static BlockPos defaultPosRespectingHeight(RandomSource random, OreConfig config) {
+		return new BlockPos(random.nextInt(16), defaultYPos(config.veinSize.get(), random, config), random.nextInt(16));
 	}
 
 	protected static int defaultYPos(int verticalShrinkRange, RandomSource random, OreConfig config) {
@@ -116,39 +113,74 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
 	}
 
-	public static void placeVein(LevelAccessor level, RandomSource random, int chunkX, int chunkZ, Vein vein, IGOreFeatureConfig config)
+	public static void placeVein(LevelAccessor level, RandomSource random, ChunkPos chunk, Vein vein, IGOreFeatureConfig config)
 	{
-		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-		IWorldGenConfig mineral = config.entry;
-		OreConfig oreConfig = IGServerConfig.ORES.ores.get(mineral);
-		BlockPos pos = vein.pos();
-		BoundingBox box = new BoundingBox(pos).inflatedBy(random.nextInt(Math.floorDiv((Math.max(4,oreConfig.veinSize.get())), 4)) + (Math.max(2,oreConfig.veinSize.get()) / 2));
-		int offsetX;
-		int offsetZ;
-		offsetX = random.nextInt(16) - random.nextInt(16);
-		offsetZ = random.nextInt(16) - random.nextInt(16);
+		// Get the noise generator from the vein
+		INoise3D noiseGenerator = vein.noise;
 
-		int minX = Math.max(chunkX, box.minX());
-		int maxX = Math.min(chunkX + 15, box.maxX());
-		int minY = Math.max(oreConfig.minY.get(), box.minY());
-		int maxY = Math.min(oreConfig.maxY.get(), box.maxY());
-		int minZ = Math.max(chunkZ, box.minZ());
-		int maxZ = Math.min(chunkZ + 15, box.maxZ());
-		for(int x = minX; x <= maxX; ++x) {
-			for(int z = minZ; z <= maxZ; ++z) {
-				int projectedY = (int) Math.min(10,Math.round(level.getHeight(Types.OCEAN_FLOOR_WG, offsetX + x, offsetZ + z) * 0.25));
-				for(int y = minY; y <= maxY; ++y) {
-					cursor.set(x, y + projectedY, z);
-					BlockState stoneState = level.getBlockState(cursor);
-					BlockState oreState = config.getStateToGenerate(stoneState, random, config, x - pos.getX(), y - pos.getY(), z - pos.getZ());
-					if (oreState != null) {
-						oreState = oxidizeExposed(level, cursor, oreState);
+		// Get the chunk's world position (bottom-left corner)
+		BlockPos chunkOrigin = chunk.getWorldPosition();
 
-						level.getChunk(SectionPos.blockToSectionCoord(chunkX), SectionPos.blockToSectionCoord(chunkZ)).setBlockState(cursor, oreState, true);
+		// Get the vein's center position
+		BlockPos veinCenter = chunkOrigin.offset(vein.pos);
+
+		// MutableBlockPos for iterating over positions
+		MutableBlockPos cursor = new MutableBlockPos();
+		int veinMinY = config.entry().getMinY();
+		int veinMaxY = config.entry().getMaxY();
+
+		// Iterate over every block in the chunk
+		for (int x = -16; x < 32; x++) {         // Chunk local x with 1 chunk radius
+			for (int y = veinMinY; y < veinMaxY; y++) {
+				for (int z = -16; z < 32; z++) { // Chunk local z with 1 chunk radius
+
+					// Calculate world coordinates
+					int worldX = chunkOrigin.getX() + x;
+					int worldZ = chunkOrigin.getZ() + z;
+
+					// Set the position for the cursor
+					cursor.set(worldX, y, worldZ);
+
+					// Generate noise for the current block position
+					double noiseValue = noiseGenerator.noise(worldX, y, worldZ);
+
+					// Determine proximity to chunk boundaries we can't iterate in
+					for(int boundary = 1; boundary <= 3; boundary++)
+					{
+						if(isNearNonIterableBoundary(x, z, boundary))
+						{
+							// Reduce the noise value if near boundary
+							noiseValue *= 0.9;
+						}
+					}
+
+					// Custom logic for ore placement
+					if (shouldPlaceOre(noiseValue, vein, config)) {
+						BlockState stoneState = level.getBlockState(cursor);
+						BlockState oreState = config.getStateToGenerate(stoneState, random, config, noiseValue);
+						if (oreState != null) {
+							oreState = oxidizeExposed(level, cursor, oreState);
+							level.setBlock(cursor, oreState, 3);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	//Checks if the current position is near a chunk boundary we can't iterate in.
+	private static boolean isNearNonIterableBoundary(int x, int z, int threshold) {
+		// Boundaries for this iteration (-16 to 32 inclusive)
+		int minBoundary = -16;
+		int maxBoundary = 32;
+
+		// Check proximity to boundaries
+		return (x < minBoundary + threshold || x > maxBoundary - threshold ||
+				z < minBoundary + threshold || z > maxBoundary - threshold);
+	}
+
+	private static boolean shouldPlaceOre(double noiseValue, Vein vein, IGOreFeatureConfig config) {
+		return noiseValue > THRESHOLD;
 	}
 
 	private static final Direction[] DIRECTIONS = Direction.values();
@@ -230,7 +262,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return this.entry;
 		}
 
-		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, int xFromCenter, int yFromCenter, int zFromCenter)
+		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, double noiseValue)
 		{
 			IWorldGenConfig mineral = config.entry;
 			TagMatchTest validStone = new TagMatchTest(Tags.Blocks.STONE);
@@ -250,45 +282,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					mineral.getOreBlock(stone, OreRichness.RICH).defaultBlockState()
 			);
 
-			// Get the size of the ore deposit (it's assumed to be a cubic or spherical region)
-			int size = config.getSize();
+			int selectedBlock = noiseValue > (THRESHOLD+0.2) ? 2 : (noiseValue > (THRESHOLD+0.1) ? 1 : 0);
 
-			// Rarity 0 ~ 100, higher the rarity the more often POOR ore will be in the distribution, the lower the rarity more RICH ore will be in the distribution.
-			int rarity = config.getRarity();
-
-			// Calculate the distance from the center (0, 0, 0)
-			double distance = Math.sqrt(xFromCenter * xFromCenter + yFromCenter * yFromCenter + zFromCenter * zFromCenter);
-
-			// Normalize the distance based on the size of the deposit
-			double normalizedDistance = distance / (size / 2.0);  // Assuming the size is the diameter
-
-			// You can tweak the Gaussian standard deviation factor to control the spread
-			double standardDeviation = 0.5; // Lower values give more concentration near the center
-
-			// Calculate the Gaussian probability based on the normalized distance
-			double gaussianProbability = Math.exp(-0.5 * (normalizedDistance * normalizedDistance) / (standardDeviation * standardDeviation));
-
-			// Normalize the probability to ensure it's between 0 and 1
-			gaussianProbability = Math.max(0.0, Math.min(1.0, gaussianProbability));
-
-			double rarityAdjustment = 0.5 - (rarity / 100.0);
-
-			// Adjust probability based on rarity (scale it toward poorer ore as rarity increases)
-			gaussianProbability = Math.max(0.0, Math.min(1.0, gaussianProbability + rarityAdjustment));
-
-			// Now decide which ore block to return based on the probability
-			// Use weighted probability based on the Gaussian distribution
-
-			if(gaussianProbability < 0.11)
-			{
-				return random.nextInt(6) < 5 ? null : blocks.get(0);
-			} else if (gaussianProbability < 0.33) {
-				return blocks.get(0); // Poor Ore
-			} else if (gaussianProbability < 0.66) {
-				return blocks.get(1); // Normal Ore
-			} else {
-				return blocks.get(2); // Rich Ore
-			}
+			return blocks.get(selectedBlock);
 		}
 
 		public int getChanceToGenerate(IWorldGenConfig entry)
@@ -302,9 +298,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		}
 	}
 
-	protected record Vein(BlockPos pos) {
-		protected Vein(BlockPos pos) {
+	protected record Vein(BlockPos pos, RandomSource random, INoise3D noise) {
+		protected Vein(BlockPos pos, RandomSource random, INoise3D noise) {
 			this.pos = pos;
+			this.random = random;
+			this.noise = noise;
+		}
+
+		public INoise3D getNoise()
+		{
+			return this.noise;
 		}
 
 		public BlockPos pos() {

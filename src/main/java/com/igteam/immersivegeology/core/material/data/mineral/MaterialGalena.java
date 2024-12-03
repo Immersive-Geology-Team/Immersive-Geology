@@ -26,7 +26,7 @@ public class MaterialGalena extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO Goto Nether
-        CONFIG = new MineralConfig(12,45,2,5,60,900,false, Optional.of(Biomes.IS_COLD));
+        CONFIG = new MineralConfig(12,45,2,-64,60,750,false, Optional.of(Biomes.IS_COLD));
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral.MineralConfig;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
 
@@ -17,11 +14,5 @@ public class MaterialNativeMetal extends MaterialMetal {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.CONFIG = new MaterialMineral.MineralConfig(8,50,1,-48,112,10, false, Optional.empty());
-    }
-
-    @Override
-    public String getVeinType()
-    {
-        return OrePattern.METALLIC.getName();
     }
 }

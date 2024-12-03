@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -7,16 +8,13 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialHematite extends MaterialMineral {
 
@@ -27,7 +25,7 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO disk like spawn type
-        CONFIG = new MineralConfig(15,30,2,0,160,2200, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+        CONFIG = new MineralConfig(15,30,2,0,160,1000, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override
@@ -53,8 +51,8 @@ public class MaterialHematite extends MaterialMineral {
     }
 
     @Override
-    public String getVeinType()
+    public IGVeinTextureType getVeinType()
     {
-        return OrePattern.LAYERED.getName();
+        return IGVeinTextureType.LAYERED;
     }
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_clay": {
+    "has_raw_refractory_brick": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:clay_ball"
+              "immersivegeology:raw_fire_clay"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:craft_raw_refractory_brick"
+        "recipe": "minecraft:cook_refractory_brick"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_clay",
+      "has_raw_refractory_brick",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:craft_raw_refractory_brick"
+      "minecraft:cook_refractory_brick"
     ]
   },
   "sends_telemetry_event": false

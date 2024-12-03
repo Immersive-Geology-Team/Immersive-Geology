@@ -11,14 +11,11 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -42,7 +39,7 @@ public class IGAtlasProvider implements DataProvider {
 		JsonArray sourcesArray = new JsonArray();
 
 		List<String> textures = new ArrayList<>();
-		List<String> vein_types = Arrays.stream(OrePattern.values()).map(OrePattern::getName).toList();
+		List<String> vein_types = Arrays.stream(IGVeinTextureType.values()).map(IGVeinTextureType::getSanitizedName).toList();
 		for(String  vein_type : vein_types)
 		{
 			for(OreRichness richness : OreRichness.values())

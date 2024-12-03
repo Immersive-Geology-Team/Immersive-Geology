@@ -53,19 +53,22 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         Direction dir = orientation.front();
         boolean isActive = state.rsState.isEnabled(context);
         poseStack.pushPose();
-            poseStack.translate(0.905,2.125,0.5);
-            float angleDrum = isActive ? (rot) + pPartialTick : 0;
+            rotateForFacing(poseStack, dir);
+            poseStack.pushPose();
+                poseStack.translate(0.905,2.125,0.5);
+                float angleDrum = isActive ? (rot) + pPartialTick : 0;
 
-            float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : 0;
-            poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
-            renderDynamicModel(DRUM, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
-        poseStack.popPose();
+                float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : 0;
+                poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+                renderDynamicModel(DRUM, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
+            poseStack.popPose();
 
-        poseStack.pushPose();
-            poseStack.translate(1.34375,0.775,0.9375);
-            poseStack.mulPose(new Quaternionf().rotateAxis(-angleAxle * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+            poseStack.pushPose();
+                poseStack.translate(1.34375,0.775,0.9375);
+                poseStack.mulPose(new Quaternionf().rotateAxis(-angleAxle * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
 
-            renderDynamicModel(AXLE, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
+                renderDynamicModel(AXLE, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
+            poseStack.popPose();
         poseStack.popPose();
     }
 

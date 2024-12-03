@@ -1,12 +1,12 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.OrePattern;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -52,8 +52,8 @@ public class MaterialPyrite extends MaterialMineral {
     }
 
     @Override
-    public String getVeinType()
+    public IGVeinTextureType getVeinType()
     {
-        return OrePattern.CRYSTAL.getName();
+        return IGVeinTextureType.CRYSTAL;
     }
 }

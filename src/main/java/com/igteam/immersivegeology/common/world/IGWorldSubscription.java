@@ -12,7 +12,6 @@ import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
-import com.igteam.immersivegeology.common.world.IGOreFeature.Vein;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -23,10 +22,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.jfr.event.ChunkGenerationEvent;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -55,12 +56,14 @@ public class IGWorldSubscription
 
 	// This is somewhat of a dirty method to remove the ore veins, I think it may be possible to set their size to zero
 	// But I've had a lot of trouble finding information on this.
+		
 	@SubscribeEvent
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
 	{
 		if(removeCopper==null||removeIron==null||oreConfigs==null) getConfigValues();
 		ChunkAccess access = event.getChunk();
 		LevelAccessor level = event.getLevel();
+
 		if(event.isNewChunk())
 		{
 			if(!removeIron&&!removeCopper) return;

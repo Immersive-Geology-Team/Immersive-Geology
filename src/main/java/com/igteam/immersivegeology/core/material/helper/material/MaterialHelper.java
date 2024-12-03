@@ -248,5 +248,5 @@ public interface MaterialHelper {
         }
     }
 
-    default String getVeinType() {return IGVeinTextureType.METALLIC.getSanitizedName();}
+    default IGVeinTextureType getVeinType() {return IGVeinTextureType.METALLIC;}
 }

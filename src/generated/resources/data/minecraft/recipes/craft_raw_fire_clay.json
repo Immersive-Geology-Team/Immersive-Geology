@@ -1,23 +1,20 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "raw_refractory_brick",
+  "group": "raw_fire_clay",
   "ingredients": [
     {
       "item": "minecraft:clay_ball"
     },
     {
-      "item": "minecraft:charcoal"
+      "item": "minecraft:flint"
     },
     {
       "tag": "minecraft:sand"
-    },
-    {
-      "item": "minecraft:cobblestone"
     }
   ],
   "result": {
-    "count": 4,
-    "item": "immersivegeology:raw_refractory_brick"
+    "count": 2,
+    "item": "immersivegeology:raw_fire_clay"
   }
 }

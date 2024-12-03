@@ -149,16 +149,15 @@ public class IGRecipes extends RecipeProvider
 				.requires(toolkit_0)
 				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_bronze_plate_with_bronze_hammer");
 
-		Item raw_refractory_brick = IGRegistrationHolder.getItem.apply("raw_refractory_brick");
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_refractory_brick, 4)
+		Item raw_fire_clay = IGRegistrationHolder.getItem.apply("raw_fire_clay");
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_fire_clay, 2)
 				.requires(Items.CLAY_BALL)
-				.requires(Items.CHARCOAL)
+				.requires(Items.FLINT)
 				.requires(ItemTags.SAND)
-				.requires(Items.COBBLESTONE)
-				.group("raw_refractory_brick").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, "craft_raw_refractory_brick");
+				.group("raw_fire_clay").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, "craft_raw_fire_clay");
 
 
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_refractory_brick), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_refractory_brick)).save(consumer, "cook_raw_refractory_brick");
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_fire_clay), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_fire_clay)).save(consumer, "cook_refractory_brick");
 		//Computational Engineering Block
 		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
 		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
@@ -178,7 +177,6 @@ public class IGRecipes extends RecipeProvider
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
 				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering_2");
-
 	}
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
