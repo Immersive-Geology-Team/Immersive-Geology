@@ -21,22 +21,29 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Set;
 
+import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
+import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
+
 public class IGItemModelProvider extends ItemModelProvider {
 
 
+    private static ExistingFileHelper HELPER;
     private final Logger logger = IGLib.getNewLogger();
     public IGItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator.getPackOutput(), IGLib.MODID, existingFileHelper);
+        HELPER = existingFileHelper;
     }
 
     @Override
@@ -88,16 +95,24 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-
-            // TODO implement a better version of this, that supports 'colored' variants of the item textures, using the item flag system
-            String flag_name = item.getFlag().getName();
-            flag_name = flag_name.substring(0, flag_name.indexOf("_"));
-            withExistingParent(itemLocation, parentLocation).texture("layer0", new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + flag_name + "_rock"));
-            getBuilder(itemLocation).texture("layer1", new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" +item.getFlag().getName()));
+            ItemModelBuilder builder = withExistingParent(itemLocation, parentLocation);
+            setItemTexture(builder, (IGGenericOreItem) item);
         } catch (Exception ex) {
             logger.error("Attempted to generate a texture for the ore item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error(ex.getMessage());
         }
+    }
+
+    private void setItemTexture(ModelBuilder<?> model, IGGenericOreItem item)
+    {
+        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase() + "/" + item.getOreRichness().getSanitizedName());
+        IGLib.IG_LOGGER.info("Testing: {}", coloredTexture);
+        if(EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES))
+        {
+            model.texture("layer0", coloredTexture);
+            return;
+        }
+        model.texture("layer0", new ResourceLocation(IGLib.MODID, "item/greyscale/raw_ore/" + item.getOreRichness().getSanitizedName()));
     }
 
     private void generateGenericBucketItem(IGFlagItem item){

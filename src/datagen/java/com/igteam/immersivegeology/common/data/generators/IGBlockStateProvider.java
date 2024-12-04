@@ -317,6 +317,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 prefix = mod.name().toLowerCase();
             }
         }
+
         if(block.getMaterial(MaterialTexture.base).instance() instanceof MaterialStone stoneMaterial)
         {
             StoneFormation stoneFormation = stoneMaterial.getStoneFormation();

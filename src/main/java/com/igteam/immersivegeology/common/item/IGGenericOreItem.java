@@ -8,36 +8,34 @@
 
 package com.igteam.immersivegeology.common.item;
 
+import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class IGGenericOreItem extends IGGenericItem
 {
+	private final OreRichness oreRichness;
 	public IGGenericOreItem(ItemCategoryFlags flag, MaterialInterface<?> material)
 	{
 		super(flag, material);
+		this.oreRichness = flag.equals(ItemCategoryFlags.RICH_ORE) ? OreRichness.RICH : (flag.equals(ItemCategoryFlags.NORMAL_ORE) ? OreRichness.NORMAL : OreRichness.POOR);
 	}
 
 	@Override
 	public int getColor(int index) {
-		if(index == 0) return 0xffffff;
 		return super.getColor(index);
 	}
 
 	@Override
 	public @NotNull Component getName(ItemStack stack) {
-		List<String> materialList = new ArrayList<>();
 		String grade = getFlag().equals(ItemCategoryFlags.NORMAL_ORE) ? "normal" : (getFlag().equals(ItemCategoryFlags.RICH_ORE) ? "rich" : "poor");
 		MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + grade).append(Component.translatable("formatting.space"));
 		for(MaterialTexture t : MaterialTexture.values()){
@@ -52,5 +50,10 @@ public class IGGenericOreItem extends IGGenericItem
 			}
 		}
 		return normalName;
+	}
+
+	public OreRichness getOreRichness()
+	{
+		return this.oreRichness;
 	}
 }

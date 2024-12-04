@@ -43,8 +43,7 @@ public class IGFeatureRemovalProvider implements DataProvider {
 
 	private void init()
 	{
-		List<ResourceKey<ConfiguredFeature<?,?>>> features = List.of(OreFeatures.ORE_COPPER_LARGE, OreFeatures.ORE_COAL,
-				OreFeatures.ORE_COAL_BURIED, OreFeatures.ORE_COPPPER_SMALL, OreFeatures.ORE_GOLD, OreFeatures.ORE_GOLD_BURIED,
+		List<ResourceKey<ConfiguredFeature<?,?>>> features = List.of(OreFeatures.ORE_COPPPER_SMALL, OreFeatures.ORE_GOLD, OreFeatures.ORE_GOLD_BURIED,
 				OreFeatures.ORE_IRON, OreFeatures.ORE_IRON_SMALL, OreFeatures.ORE_NETHER_GOLD);
 
 		for(ResourceKey<ConfiguredFeature<?,?>> feature : features)

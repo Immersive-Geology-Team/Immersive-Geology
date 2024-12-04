@@ -169,6 +169,11 @@ public class IGOreBlock extends IGGenericBlock {
         {
             return this == POOR ? ItemCategoryFlags.POOR_ORE : (this == NORMAL ? ItemCategoryFlags.NORMAL_ORE : ItemCategoryFlags.RICH_ORE);
         }
+
+        public String getSanitizedName()
+        {
+            return name().toLowerCase();
+        }
     }
 
     public enum MineralWeathering implements StringRepresentable

@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/rock/rich_rock",
-    "layer1": "immersivegeology:item/greyscale/rock/rich_ore"
+    "layer0": "immersivegeology:item/greyscale/raw_ore/rich"
   }
 }
