@@ -21,19 +21,19 @@ public class EmptySerializer extends IERecipeSerializer<EmptyRecipe>
 	@Override
 	public ItemStack getIcon()
 	{
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public EmptyRecipe readFromJson(ResourceLocation resourceLocation, JsonObject jsonObject, IContext iContext)
 	{
-		return new EmptyRecipe(null);
+		return new EmptyRecipe(resourceLocation);
 	}
 
 	@Override
 	public @Nullable EmptyRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf friendlyByteBuf)
 	{
-		return new EmptyRecipe(null);
+		return new EmptyRecipe(resourceLocation);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -45,7 +46,7 @@ public class IGBlockTags extends BlockTagsProvider
 				//TODO prevent mod only added fluids from being tagged.
 				tag(BlockTags.REPLACEABLE).add(fluidBlock);
 			}
-			if(block.get() instanceof IGWeatheringOreBlock oreBlock)
+			if(block.get() instanceof IOreBlock oreBlock)
 			{
 				List<MaterialInterface<?>> materials = List.copyOf(oreBlock.getMaterials());
 
@@ -62,7 +63,7 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(useOptionalTag) {
 					useOptionalTag = false;
-					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
+					String name = oreBlock.getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -79,13 +80,13 @@ public class IGBlockTags extends BlockTagsProvider
 					continue;
 				}
 
-				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(oreBlock);
-				tag(BlockTags.NEEDS_STONE_TOOL).add(oreBlock);
-				tag(Tags.Blocks.ORES).add(oreBlock);
+				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block.get());
+				tag(BlockTags.NEEDS_STONE_TOOL).add(block.get());
+				tag(Tags.Blocks.ORES).add(block.get() );
 
 				if(ModFlags.TFC.isStrictlyLoaded())
 				{
-					String name = oreBlock.getBlock().getDescriptionId().toLowerCase();
+					String name = oreBlock.getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
