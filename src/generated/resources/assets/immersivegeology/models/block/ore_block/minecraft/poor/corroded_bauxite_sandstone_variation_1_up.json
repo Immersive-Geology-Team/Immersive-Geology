@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
-  "textures": {
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_bauxite_corroded",
-    "side": "minecraft:block/sandstone",
-    "top": "minecraft:block/sandstone_top"
-  }
-}

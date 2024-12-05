@@ -8,24 +8,17 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
-import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface IWorldGenConfig
@@ -42,7 +35,7 @@ public interface IWorldGenConfig
 
 	GeologyMaterial instance();
 
-	Block getOreBlock(StoneEnum stone, OreRichness oreRichness);
+	IOreBlock getOreBlock(StoneEnum stone, OreRichness oreRichness);
 
 	String name();
 

@@ -1,8 +1,10 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -18,7 +20,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 public interface MaterialInterface<T extends GeologyMaterial> {
@@ -90,11 +91,11 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
 	default Block getBlock(BlockCategoryFlags flag) {return instance().getBlock(flag);};
 
-    default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness) {
+    default IOreBlock getOreBlock(StoneEnum stone, OreRichness richness) {
         return instance().getOreBlock(stone, richness);
     };
 
-    default IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness) {
+    default IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness) {
         return instance().getOreBlock(stone, richness);
     };
 

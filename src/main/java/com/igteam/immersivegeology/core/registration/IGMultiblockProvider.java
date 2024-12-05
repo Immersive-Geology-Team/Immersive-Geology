@@ -34,7 +34,9 @@ public class IGMultiblockProvider {
             });
 
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = mirroredStone(new RevFurnaceLogic(), "reverberation_furnace", false)
-            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace")).build();
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"))
+            .gui(IGMenuTypes.REVERBERATION_FURNACE)
+            .build();
 
     public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
             builder -> {

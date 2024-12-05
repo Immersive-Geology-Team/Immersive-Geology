@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
-  "textures": {
-    "base": "tfc:block/rock/raw/dacite",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/metallic/normal_1_platinum_tarnished"
-  }
-}

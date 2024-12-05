@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
-  "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_lead_corroded",
-    "side": "tfc:block/rock/raw/chalk",
-    "top": "tfc:block/rock/raw/chalk"
-  }
-}

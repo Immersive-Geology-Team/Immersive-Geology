@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/andesite",
+    "ore": "immersivegeology:block/greyscale/rock/vein/metallic/normal_2_lead_pristine"
+  }
+}

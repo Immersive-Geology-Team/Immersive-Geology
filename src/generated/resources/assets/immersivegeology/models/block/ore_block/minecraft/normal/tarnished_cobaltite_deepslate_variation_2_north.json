@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
-  "textures": {
-    "base": "minecraft:block/deepslate",
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_cobaltite_tarnished"
-  }
-}

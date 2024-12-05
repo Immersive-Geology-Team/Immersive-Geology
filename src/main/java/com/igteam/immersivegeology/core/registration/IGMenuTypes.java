@@ -19,7 +19,9 @@ import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainerC
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContainerConstructor;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.MultiblockContainer;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
+import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -42,6 +44,7 @@ public class IGMenuTypes
 {
 	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
+	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
 
 	public static <S extends IMultiblockState, C extends IEContainerMenu> MultiblockContainer<S, C> registerMultiblock(String name, ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> container, ClientContainerConstructor<C> client) {
 		RegistryObject<MenuType<C>> typeRef = registerType(name, client);

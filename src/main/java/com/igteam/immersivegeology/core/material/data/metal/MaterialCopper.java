@@ -8,7 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
+
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;

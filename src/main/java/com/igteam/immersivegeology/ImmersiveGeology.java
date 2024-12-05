@@ -3,9 +3,11 @@ package com.igteam.immersivegeology;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
 import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -13,7 +15,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGContent;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
@@ -54,6 +55,7 @@ public class ImmersiveGeology {
     private void clientSetup(FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
         MinecraftForge.EVENT_BUS.register(new IGOverlayHandler());
+        MinecraftForge.EVENT_BUS.register(new IGCommonForgeEvents());
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
         supplyMaterialTint();
@@ -115,7 +117,7 @@ public class ImmersiveGeology {
         if(pattern.equals(ItemCategoryFlags.NORMAL_ORE) || pattern.equals(ItemCategoryFlags.RICH_ORE) || pattern.equals(ItemCategoryFlags.POOR_ORE))
         {
             OreRichness richness = pattern.equals(ItemCategoryFlags.NORMAL_ORE) ? OreRichness.NORMAL : (pattern.equals(ItemCategoryFlags.RICH_ORE) ? OreRichness.RICH : OreRichness.POOR);
-            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase()+"/"+richness.getSanitizedName());
+            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase()+"/"+richness.getSanitizedName() + ".png");
         }
         return test;
     }

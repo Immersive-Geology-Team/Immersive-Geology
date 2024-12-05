@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
+  "textures": {
+    "ore": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_cassiterite_pristine",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
+  }
+}

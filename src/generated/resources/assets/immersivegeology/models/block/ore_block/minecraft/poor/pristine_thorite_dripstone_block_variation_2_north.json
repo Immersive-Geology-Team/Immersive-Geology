@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
-  "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_thorite_pristine",
-    "side": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
-  }
-}

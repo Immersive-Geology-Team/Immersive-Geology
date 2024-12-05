@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_down",
-  "textures": {
-    "base": "tfc:block/rock/raw/granite",
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_pyrolusite_pristine"
-  }
-}

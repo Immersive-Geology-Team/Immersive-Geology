@@ -9,8 +9,10 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IETags;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -105,7 +107,7 @@ public class IGItemTags extends ItemTagsProvider
 		{
 			for(OreRichness richness : OreRichness.values())
 			{
-				IGOreBlock oreBlock = material.getOreBlock(stone, richness);
+				IOreBlock oreBlock = material.getOreBlock(stone, richness);
 				if(oreBlock == null) continue;
 
 				Collection<MaterialInterface<?>> materials = oreBlock.getMaterials();

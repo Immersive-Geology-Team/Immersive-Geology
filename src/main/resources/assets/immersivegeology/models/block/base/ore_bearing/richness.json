@@ -52,32 +52,32 @@
       "faces": {
         "down": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_down",
+          "texture": "#ore",
           "cullface": "down"
         },
         "up": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_up",
+          "texture": "#ore",
           "cullface": "up"
         },
         "north": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_north",
+          "texture": "#ore",
           "cullface": "north"
         },
         "south": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_south",
+          "texture": "#ore",
           "cullface": "south"
         },
         "west": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_west",
+          "texture": "#ore",
           "cullface": "west"
         },
         "east": {
           "uv": [0, 0, 16, 16],
-          "texture": "#ore_east",
+          "texture": "#ore",
           "cullface": "east"
         }
       }

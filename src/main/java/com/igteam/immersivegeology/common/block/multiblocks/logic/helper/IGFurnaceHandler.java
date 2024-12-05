@@ -36,10 +36,12 @@ import java.util.function.ToIntFunction;
 
 public class IGFurnaceHandler<R extends IESerializableRecipe>
 {
+	// Used for simple furnace types
 	private int process = 0;
 	private int processMax = 0;
 	private int burnTime = 0;
 	private int lastBurnTime = 0;
+
 	public final StateView stateView = new StateView();
 
 	private final int fuelSlot;

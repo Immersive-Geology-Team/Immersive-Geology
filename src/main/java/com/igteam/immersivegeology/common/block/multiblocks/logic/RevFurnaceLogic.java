@@ -32,12 +32,16 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurna
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevInputSlot;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevOutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RevFurnaceShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
@@ -52,6 +56,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -78,7 +83,7 @@ import java.util.function.Supplier;
 public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>, MBOverlayText<RevFurnaceLogic.State>, IServerTickableComponent<RevFurnaceLogic.State>, IClientTickableComponent<RevFurnaceLogic.State>
 {
     static final int TANK_CAPACITY = 128*FluidType.BUCKET_VOLUME;
-
+    public static final int NUM_SLOTS = 6;
     CapabilityPosition SLOT_1_INPUT_POSITION = new CapabilityPosition(1,1,1, RelativeBlockFace.UP);
     CapabilityPosition SLOT_2_INPUT_POSITION = new CapabilityPosition(1,1,4, RelativeBlockFace.UP);
 
@@ -91,8 +96,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     @Override
     public void tickServer(IMultiblockContext<RevFurnaceLogic.State> context) {
         final State state = context.getState();
-        state.active_left = state.furnace1.tickServer(context, 0);
-        state.active_right = state.furnace2.tickServer(context, 1);
+        state.active_left = state.furnace.tickServerLeft(context);
+        state.active_right = state.furnace.tickServerRight(context);
         outputItems(state);
         if(state.tank.getFluidAmount() > 0)
         {
@@ -103,35 +108,37 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         // But a sync request should be alright for this purpose for now.
         context.requestMasterBESync();
     }
-    private static final int[] OUTPUT_SLOTS = Util.make(new int[1], slots -> {slots[0] = 2;});
+
+    private static final int[] OUTPUT_SLOTS_LEFT = Util.make(new int[1], slots -> {slots[0] = 2;});
+    private static final int[] OUTPUT_SLOTS_RIGHT = Util.make(new int[1], slots -> {slots[0] = 4;});
 
     private boolean leftChimneyUsed = false;
     private boolean rightChimneyUsed = false;
 
     private void outputItems(RevFurnaceLogic.State state)
     {
-        IItemHandler outputHandler = state.output1.getNullable();
-        if(outputHandler!=null)
-            for(int j : OUTPUT_SLOTS)
+        IItemHandler outputHandlerLeft = state.outputLeft.getNullable();
+        if(outputHandlerLeft!=null)
+            for(int j : OUTPUT_SLOTS_LEFT)
             {
-                final ItemStack nextStack = state.inventory1.getStackInSlot(j);
+                final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
                 ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
-                stack = ItemHandlerHelper.insertItem(outputHandler, stack, false);
+                stack = ItemHandlerHelper.insertItem(outputHandlerLeft, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
             }
 
-        outputHandler = state.output2.getNullable();
-        if(outputHandler!=null)
-            for(int j : OUTPUT_SLOTS)
+        IItemHandler outputHandlerRight = state.outputRight.getNullable();
+        if(outputHandlerRight!=null)
+            for(int j : OUTPUT_SLOTS_RIGHT)
             {
-                final ItemStack nextStack = state.inventory2.getStackInSlot(j);
+                final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
                 ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
-                stack = ItemHandlerHelper.insertItem(outputHandler, stack, false);
+                stack = ItemHandlerHelper.insertItem(outputHandlerRight, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
             }
@@ -161,17 +168,18 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
     {
         final State state = ctx.getState();
+        final boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
         if(cap==ForgeCapabilities.ITEM_HANDLER)
         {
-            if(SLOT_1_INPUT_POSITION.equals(position)) return state.invCap1.cast(ctx);
-            if(SLOT_2_INPUT_POSITION.equals(position)) return state.invCap2.cast(ctx);
+            if(SLOT_1_INPUT_POSITION.equals(position)) return (isMirrored ? state.invCapRight.cast(ctx) : state.invCapLeft.cast(ctx));
+            if(SLOT_2_INPUT_POSITION.equals(position)) return (isMirrored ? state.invCapLeft.cast(ctx) : state.invCapRight.cast(ctx) );
             if(SLOT_1_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
             {
-                return state.outputHandler1.cast(ctx);
+                return isMirrored ? state.outputHandlerRight.cast(ctx) : state.outputHandlerLeft.cast(ctx);
             }
             if(SLOT_2_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
             {
-                return state.outputHandler2.cast(ctx);
+                return isMirrored ? state.outputHandlerLeft.cast(ctx) : state.outputHandlerRight.cast(ctx);
             }
         }
         else if(cap==ForgeCapabilities.FLUID_HANDLER)
@@ -184,8 +192,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     @Override
     public void dropExtraItems(State state, Consumer<ItemStack> drop)
     {
-        MBInventoryUtils.dropItems(state.inventory1, drop);
-        MBInventoryUtils.dropItems(state.inventory2, drop);
+        MBInventoryUtils.dropItems(state.inventory, drop);
     }
 
     @Override
@@ -216,15 +223,16 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     public void tickClient(IMultiblockContext<State> context)
     {
         final State state = context.getState();
+        final boolean isMirrored = context.getLevel().getOrientation().mirrored();
         if(context.getLevel().shouldTickModulo(2))
         {
             if(((state.active_left &! state.fluidOutput1.isPresent())))
             {
-                spawnSmoke(context, SMOKE_POSITION_LEFT);
+                spawnSmoke(context, isMirrored ? SMOKE_POSITION_RIGHT : SMOKE_POSITION_LEFT);
             }
             if(((state.active_right &! state.fluidOutput2.isPresent())))
             {
-                spawnSmoke(context, SMOKE_POSITION_RIGHT);
+                spawnSmoke(context, isMirrored ? SMOKE_POSITION_LEFT : SMOKE_POSITION_RIGHT);
             }
         }
     }
@@ -239,27 +247,24 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         );
     }
 
-    public static class State implements IMultiblockState, IGFurnaceHandler.IFurnaceEnvironment<RevFurnaceRecipe>
+    public static class State implements IMultiblockState, IGRevFurnaceHandler.IRevFurnaceEnvironment<RevFurnaceRecipe>
     {
-        private final SlotwiseItemHandler inventory1;
-        private final SlotwiseItemHandler inventory2;
-        final IGFurnaceHandler<RevFurnaceRecipe> furnace1;
-        final IGFurnaceHandler<RevFurnaceRecipe> furnace2;
+        private final SlotwiseItemHandler inventory;
+        final IGRevFurnaceHandler<RevFurnaceRecipe> furnace;
         private boolean active_left = false;
         private boolean active_right = false;
 
-        private final Supplier<RevFurnaceRecipe> cachedRecipe1;
-        private final Supplier<RevFurnaceRecipe> cachedRecipe2;
+        private final Supplier<RevFurnaceRecipe> cachedRecipeLeft;
+        private final Supplier<RevFurnaceRecipe> cachedRecipeRight;
 
         private final FluidTank tank = new FluidTank(TANK_CAPACITY);
-        private final StoredCapability<IItemHandler> invCap1;
-        private final StoredCapability<IItemHandler> invCap2;
+        private final StoredCapability<IItemHandler> invCapLeft;
+        private final StoredCapability<IItemHandler> invCapRight;
+        private final StoredCapability<IItemHandler> outputHandlerLeft;
+        private final StoredCapability<IItemHandler> outputHandlerRight;
 
-        private final StoredCapability<IItemHandler> outputHandler1;
-        private final StoredCapability<IItemHandler> outputHandler2;
-
-        private final CapabilityReference<IItemHandler> output1;
-        private final CapabilityReference<IItemHandler> output2;
+        private final CapabilityReference<IItemHandler> outputLeft;
+        private final CapabilityReference<IItemHandler> outputRight;
 
         private final CapabilityReference<IFluidHandler> fluidOutput1;
         private final CapabilityReference<IFluidHandler> fluidOutput2;
@@ -268,60 +273,58 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         public State(IInitialMultiblockContext<?> ctx)
         {
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
-            inventory1 = new SlotwiseItemHandler(List.of(
+            inventory = new SlotwiseItemHandler(List.of(
+                    // Left
+                    new IOConstraint(true, i -> RevFurnaceRecipe.findRecipe(getLevel.get(), i, null)!=null),
+                    new IOConstraint(true, i -> BlastFurnaceFuel.isValidBlastFuel(getLevel.get(), i)),
+                    IOConstraint.OUTPUT,
+                    // Right
                     new IOConstraint(true, i -> RevFurnaceRecipe.findRecipe(getLevel.get(), i, null)!=null),
                     new IOConstraint(true, i -> BlastFurnaceFuel.isValidBlastFuel(getLevel.get(), i)),
                     IOConstraint.OUTPUT
             ), ctx.getMarkDirtyRunnable());
 
-            inventory2 = new SlotwiseItemHandler(List.of(
-                    new IOConstraint(true, i -> RevFurnaceRecipe.findRecipe(getLevel.get(), i, null)!=null),
-                    new IOConstraint(true, i -> BlastFurnaceFuel.isValidBlastFuel(getLevel.get(), i)),
-                    IOConstraint.OUTPUT
-            ), ctx.getMarkDirtyRunnable());
-
-
-            this.output1 = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_1_OUTPUT_POSITION);
-            this.output2 = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_2_OUTPUT_POSITION);
+            this.outputLeft = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_1_OUTPUT_POSITION);
+            this.outputRight = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_2_OUTPUT_POSITION);
 
             this.fluidOutput1 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_1_OUTPUT_FLUID.side(), SLOT_1_OUTPUT_FLUID.posInMultiblock().above()));
             this.fluidOutput2 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_2_OUTPUT_FLUID.side(), SLOT_2_OUTPUT_FLUID.posInMultiblock().above()));
 
-            this.outputHandler1 = new StoredCapability<>(new WrappingItemHandler(
-                    inventory1, false, true, new IntRange(2,3)
+            this.outputHandlerLeft = new StoredCapability<>(new WrappingItemHandler(
+                    inventory, false, true, new IntRange(2,3)
             ));
 
-            this.outputHandler2 = new StoredCapability<>(new WrappingItemHandler(
-                    inventory2, false, true, new IntRange(2,3)
+            this.outputHandlerRight = new StoredCapability<>(new WrappingItemHandler(
+                    inventory, false, true, new IntRange(5,6)
             ));
 
-            cachedRecipe1 = CachedRecipe.cached(
-                    RevFurnaceRecipe::findRecipe, getLevel, () -> inventory1.getStackInSlot(0)
+            cachedRecipeLeft = CachedRecipe.cached(
+                    RevFurnaceRecipe::findRecipe, getLevel, () -> inventory.getStackInSlot(0)
             );
 
-            cachedRecipe2 = CachedRecipe.cached(
-                    RevFurnaceRecipe::findRecipe, getLevel, () -> inventory2.getStackInSlot(0)
+            cachedRecipeRight = CachedRecipe.cached(
+                    RevFurnaceRecipe::findRecipe, getLevel, () -> inventory.getStackInSlot(3)
             );
 
-            furnace1 = new IGFurnaceHandler<>(
+            furnace = new IGRevFurnaceHandler<>(
                     1,
-                    List.of(new InputSlot<>(r -> r.input, 0)),
-                    List.of(new OutputSlot<>(r -> r.result, 2)),
+                    List.of(new RevInputSlot<>(r -> r.input, 0)),
+                    List.of(new RevOutputSlot<>(r -> r.result, 2)),
+                    r -> r.time,
+                    4,
+                    List.of(new RevInputSlot<>(r -> r.input, 3)),
+                    List.of(new RevOutputSlot<>(r -> r.result, 5)),
                     r -> r.time,
                     ctx.getMarkDirtyRunnable()
             );
 
-            furnace2 = new IGFurnaceHandler<>(
-                    1,
-                    List.of(new InputSlot<>(r -> r.input, 0)),
-                    List.of(new OutputSlot<>(r -> r.result, 2)),
-                    r -> r.time,
-                    ctx.getMarkDirtyRunnable()
-            );
+            this.invCapLeft = new StoredCapability<>(new WrappingItemHandler(
+                    inventory, true, true, new IntRange(0,2)
+            ));
 
-
-            this.invCap1 = new StoredCapability<>(this.inventory1);
-            this.invCap2 = new StoredCapability<>(this.inventory2);
+            this.invCapRight = new StoredCapability<>(new WrappingItemHandler(
+                    inventory, true, true, new IntRange(3,5)
+            ));
             this.fluidCap = new StoredCapability<>(
                     new ArrayFluidHandler(new IFluidTank[]{tank}, true, false, ctx.getMarkDirtyRunnable())
             );
@@ -340,10 +343,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         public void writeSaveNBT(CompoundTag nbt)
         {
             nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-            nbt.put("inventory1", inventory1.serializeNBT());
-            nbt.put("inventory2", inventory2.serializeNBT());
-            nbt.put("furnace1", furnace1.toNBT(0));
-            nbt.put("furnace2", furnace2.toNBT(1));
+            nbt.put("inventory", inventory.serializeNBT());
+            nbt.put("furnace", furnace.toNBT());
             nbt.putBoolean("active_left", active_left);
             nbt.putBoolean("active_right", active_right);
         }
@@ -351,10 +352,8 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         @Override
         public void readSaveNBT(CompoundTag nbt)
         {
-            inventory1.deserializeNBT(nbt.getCompound("inventory1"));
-            inventory2.deserializeNBT(nbt.getCompound("inventory2"));
-            furnace1.readNBT(nbt.getCompound("furnace1"), 0);
-            furnace2.readNBT(nbt.getCompound("furnace2"), 1);
+            inventory.deserializeNBT(nbt.getCompound("inventory"));
+            furnace.readNBT(nbt.getCompound("furnace"));
             tank.readFromNBT(nbt.getCompound("tank"));
             active_left = nbt.getBoolean("active_left");
             active_right = nbt.getBoolean("active_right");
@@ -378,15 +377,15 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         }
 
         @Override
-        public IItemHandlerModifiable getInventory(int furnaceIndex)
+        public IItemHandlerModifiable getInventory()
         {
-            return furnaceIndex == 0 ? inventory1 : inventory2;
+            return inventory;
         }
 
         @Override
-        public @Nullable RevFurnaceRecipe getRecipeForInput(int furnaceIndex)
+        public @Nullable RevFurnaceRecipe getRecipeForInput(boolean isLeft)
         {
-            return furnaceIndex == 0 ? cachedRecipe1.get() : cachedRecipe2.get();
+            return isLeft ? cachedRecipeLeft.get() : cachedRecipeRight.get();
         }
 
         @Override
@@ -396,10 +395,17 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         }
 
         @Override
-        public void turnOff(IMultiblockLevel level, int furnaceIndex)
+        public void turnOff(IMultiblockLevel level, boolean isLeft)
         {
-            if(furnaceIndex == 0) active_left = false;
-            if(furnaceIndex == 1) active_right = false;
+            if(isLeft)
+            {
+                active_left = false;
+                return;
+            }
+            active_right = false;
+        }
+        public ContainerData getStateView() {
+            return this.furnace.stateView;
         }
     }
 }

@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.gui.helper;
 
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,6 +38,21 @@ public abstract class IGSlot extends Slot
 
 		public boolean mayPlace(ItemStack itemStack) {
 			return BloomeryFuel.isValidBloomeryFuel(this.level, itemStack);
+		}
+	}
+
+
+	public static class ReverberationSlot extends SlotItemHandler
+	{
+		private final Level level;
+
+		public ReverberationSlot(IItemHandler inv, int id, int x, int y, Level level) {
+			super(inv, id, x, y);
+			this.level = level;
+		}
+
+		public boolean mayPlace(ItemStack itemStack) {
+			return BlastFurnaceFuel.isValidBlastFuel(this.level, itemStack);
 		}
 	}
 }

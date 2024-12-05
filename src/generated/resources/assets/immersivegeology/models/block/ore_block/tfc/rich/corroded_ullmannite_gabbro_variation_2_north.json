@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
-  "textures": {
-    "base": "tfc:block/rock/raw/gabbro",
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_ullmannite_corroded"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
-  "textures": {
-    "base": "tfc:block/rock/raw/dacite",
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_cassiterite_tarnished"
-  }
-}

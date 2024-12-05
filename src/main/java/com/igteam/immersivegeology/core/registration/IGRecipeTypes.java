@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -32,7 +33,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
-
+	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
 	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
 

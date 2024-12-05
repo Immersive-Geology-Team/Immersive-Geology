@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
+  "textures": {
+    "ore": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_monazite_pristine",
+    "side": "tfc:block/rock/raw/dolomite",
+    "top": "tfc:block/rock/raw/dolomite"
+  }
+}

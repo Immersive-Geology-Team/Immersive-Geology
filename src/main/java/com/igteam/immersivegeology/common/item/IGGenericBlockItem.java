@@ -9,8 +9,9 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -67,7 +68,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
         List<String> materialList = new ArrayList<>();
 
         if(getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) {
-            if(getBlock() instanceof IGOreBlock oreBlock){
+            if(getBlock() instanceof IOreBlock oreBlock){
                 materialList.add(I18n.get("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase()));
                 materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
                 materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));

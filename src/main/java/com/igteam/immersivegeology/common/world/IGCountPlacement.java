@@ -8,10 +8,7 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -19,7 +16,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.placement.RepeatingPlacement;
 
-import java.util.Map.Entry;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 

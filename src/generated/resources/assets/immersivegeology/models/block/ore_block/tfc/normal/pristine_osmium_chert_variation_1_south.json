@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
-  "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/normal_1_osmium_pristine",
-    "side": "tfc:block/rock/raw/chert",
-    "top": "tfc:block/rock/raw/chert"
-  }
-}

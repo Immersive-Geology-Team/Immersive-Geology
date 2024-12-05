@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
-  "textures": {
-    "base": "tfc:block/rock/raw/granite",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/metallic/normal_2_lead_corroded"
-  }
-}

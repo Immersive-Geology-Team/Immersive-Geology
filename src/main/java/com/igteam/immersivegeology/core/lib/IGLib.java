@@ -42,7 +42,8 @@ public class IGLib {
     public static final int COMPOUND_ACID_TO_DUST_AMOUNT = 1;
     public static final int ACID_TO_DUST_AMOUNT = 125;
     public static final int DUST_FROM_COMPOUND_ACID_AMOUNT = 1;
-	public static final String GUIID_Bloomery = "bloomery";
+    public static final String GUIID_Bloomery = "bloomery";
+    public static final String GUIID_RevFurnace= "reverberation_furnace";
 
 
 	public static Logger getNewLogger()

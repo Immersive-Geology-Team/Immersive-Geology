@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
-  "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/normal_1_pyrolusite_corroded",
-    "side": "tfc:block/rock/raw/conglomerate",
-    "top": "tfc:block/rock/raw/conglomerate"
-  }
-}

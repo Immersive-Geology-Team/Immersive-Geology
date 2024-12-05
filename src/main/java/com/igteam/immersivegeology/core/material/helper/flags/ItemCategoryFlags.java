@@ -47,7 +47,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     public String getTagPrefix()
     {
         switch(this){
-            case INGOT,DUST,GEAR,NUGGET,PLATE,ROD:
+            case INGOT,DUST,GEAR,NUGGET,PLATE,ROD,WIRE:
                 return "s";
             default:
                 return "";

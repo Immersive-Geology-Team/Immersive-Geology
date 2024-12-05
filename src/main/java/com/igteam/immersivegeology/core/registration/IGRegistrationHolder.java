@@ -20,8 +20,8 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.AlloySmelterMul
 import blusunrize.immersiveengineering.common.blocks.multiblocks.BlastFurnaceMultiblock;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
@@ -33,7 +33,6 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -255,7 +254,7 @@ public class IGRegistrationHolder {
                                 // After all checks, now we can generate the different ore levels
                                 for(OreRichness richness : OreRichness.values()){
                                     String registryKey = blockCategory.getRegistryKey(material, base, richness);
-                                    Supplier<Block> blockProvider = () -> new IGOreBlock(blockCategory, base, material, richness);
+                                    Supplier<Block> blockProvider = () -> (material.hasOxidationOverTime() ? new IGWeatheringOreBlock(blockCategory, base, material, richness) : new IGOreBlock(blockCategory, base, material, richness));
                                     registerBlock(registryKey, blockProvider);
                                     registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                                 }

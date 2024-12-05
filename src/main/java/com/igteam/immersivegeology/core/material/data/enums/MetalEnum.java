@@ -8,9 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
@@ -18,7 +19,6 @@ import com.igteam.immersivegeology.core.material.data.metal.*;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
@@ -137,13 +137,13 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     }
 
     @Override
-    public IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    public IOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
     {
         return material.getOreBlock(stone, richness);
     }
 
     @Override
-    public IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
+    public IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
     {
         return material.getOreBlock(stone, richness);
     }

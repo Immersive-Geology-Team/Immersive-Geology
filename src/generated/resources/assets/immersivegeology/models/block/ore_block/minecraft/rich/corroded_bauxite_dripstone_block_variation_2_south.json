@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
-  "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_bauxite_corroded",
-    "side": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
-  }
-}

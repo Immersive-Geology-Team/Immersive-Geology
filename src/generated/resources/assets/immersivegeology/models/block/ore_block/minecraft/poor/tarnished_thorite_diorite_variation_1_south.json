@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
-  "textures": {
-    "base": "minecraft:block/diorite",
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_thorite_tarnished"
-  }
-}

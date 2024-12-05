@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
-  "textures": {
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_molybenite_tarnished",
-    "side": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
-  }
-}

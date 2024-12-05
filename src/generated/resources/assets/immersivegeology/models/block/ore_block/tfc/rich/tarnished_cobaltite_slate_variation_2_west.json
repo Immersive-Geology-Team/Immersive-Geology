@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
-  "textures": {
-    "base": "tfc:block/rock/raw/slate",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_cobaltite_tarnished"
-  }
-}

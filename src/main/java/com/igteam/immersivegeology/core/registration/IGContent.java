@@ -9,6 +9,7 @@ import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
+import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.tag.IGTags;
@@ -40,6 +41,7 @@ public class IGContent {
     public static void registerContainersAndScreens()
     {
         MenuScreens.register(IGMenuTypes.BLOOMERY.getType(), BloomeryScreen::new);
+        MenuScreens.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
     }
 
     public static void initializeManualEntries()

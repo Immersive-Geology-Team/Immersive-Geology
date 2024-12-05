@@ -2,14 +2,11 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.IGSlabBlock;
-import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
@@ -48,7 +45,7 @@ public class IGBlockTags extends BlockTagsProvider
 				//TODO prevent mod only added fluids from being tagged.
 				tag(BlockTags.REPLACEABLE).add(fluidBlock);
 			}
-			if(block.get() instanceof IGOreBlock oreBlock)
+			if(block.get() instanceof IGWeatheringOreBlock oreBlock)
 			{
 				List<MaterialInterface<?>> materials = List.copyOf(oreBlock.getMaterials());
 

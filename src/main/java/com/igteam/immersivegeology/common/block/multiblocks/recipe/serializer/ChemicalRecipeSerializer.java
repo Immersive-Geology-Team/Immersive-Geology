@@ -93,7 +93,6 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 		recipe.fluidIn.forEach(f -> f.write(buffer));
 		buffer.writeInt(recipe.getTotalProcessEnergy());
 		int time = recipe.getTotalProcessTime();
-		IGLib.IG_LOGGER.info("Time: {}", time);
 		buffer.writeInt(time);
 	}
 }

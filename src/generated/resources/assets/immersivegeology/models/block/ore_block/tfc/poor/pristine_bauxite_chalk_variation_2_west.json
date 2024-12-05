@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
-  "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/poor_2_bauxite_pristine",
-    "side": "tfc:block/rock/raw/chalk",
-    "top": "tfc:block/rock/raw/chalk"
-  }
-}

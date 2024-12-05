@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/stone",
+    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_scheelite_pristine"
+  }
+}

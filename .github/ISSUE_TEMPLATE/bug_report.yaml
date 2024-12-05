@@ -28,7 +28,13 @@ body:
       placeholder: "MAJOR.MINOR.PATCH-BUILDNUMBER"
     validations:
       required: true
-
+  - type: textarea
+    id: mods
+    attributes:
+      label: Additional Mods Installed
+      description: Please list any additional mods installed when you found this bug.
+    validations:
+      required: true
   - type: textarea
     id: expected
     attributes:

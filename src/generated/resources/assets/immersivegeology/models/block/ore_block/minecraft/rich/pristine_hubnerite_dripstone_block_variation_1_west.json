@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
-  "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_hubnerite_pristine",
-    "side": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
-  }
-}

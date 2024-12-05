@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
-  "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_thorianite_corroded",
-    "side": "tfc:block/rock/raw/claystone",
-    "top": "tfc:block/rock/raw/claystone_top"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
-  "textures": {
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_molybenite_corroded",
-    "side": "tfc:block/rock/raw/shale",
-    "top": "tfc:block/rock/raw/shale_top"
-  }
-}

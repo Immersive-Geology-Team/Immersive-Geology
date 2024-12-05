@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/diorite",
+    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_chromite_pristine"
+  }
+}

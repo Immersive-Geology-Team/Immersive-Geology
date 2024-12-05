@@ -12,8 +12,10 @@ import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -226,24 +228,26 @@ public interface MaterialHelper {
         return Blocks.AIR;
     }
 
-    default IGOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
+    default IOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
     {
         try
         {
-            return (IGOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
-        } catch(Exception ignored)
+            return (IOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
+        } catch(Exception exception)
         {
+
             return null;
         }
     }
 
-    default IGOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
+    default IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
     {
         try
         {
-            return (IGOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
-        } catch(Exception ignored)
+            return (IOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
+        } catch(Exception exception)
         {
+            IGLib.IG_LOGGER.error("Unable to get Ore Block: {}", exception.getMessage());
             return null;
         }
     }

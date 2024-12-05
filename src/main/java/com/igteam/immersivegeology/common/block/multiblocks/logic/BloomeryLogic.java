@@ -93,7 +93,6 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
     @Override
     public void dropExtraItems(State state, Consumer<ItemStack> drop)
     {
-        IGLib.IG_LOGGER.info("Drop?");
         MBInventoryUtils.dropItems(state.inventory, drop);
     }
 

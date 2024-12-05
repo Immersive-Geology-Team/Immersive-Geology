@@ -7,57 +7,38 @@
  */
 
 package com.igteam.immersivegeology.common.world;
-import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
-import com.igteam.immersivegeology.common.block.IGOreBlock.OreRichness;
+import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.datafix.fixes.LeavesFix.Section;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkStatus;
-import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraft.world.level.levelgen.NoiseChunk.NoiseInterpolator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
-import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 
@@ -159,7 +140,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 						BlockState stoneState = level.getBlockState(cursor);
 						BlockState oreState = config.getStateToGenerate(stoneState, random, config, noiseValue);
 						if (oreState != null) {
-							oreState = oxidizeExposed(level, cursor, oreState);
+							if(oreState.getBlock() instanceof IGWeatheringOreBlock) oreState = oxidizeExposed(level, cursor, oreState);
 							level.setBlock(cursor, oreState, 3);
 						}
 					}
@@ -188,13 +169,13 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	private static BlockState oxidizeExposed(LevelAccessor level, BlockPos.MutableBlockPos cursor, BlockState oreState)
 	{
 		// Check if the ore block is randomly ticking
-		if(((IGOreBlock)oreState.getBlock()).isRandomlyTicking(oreState))
+		if(oreState.getBlock().isRandomlyTicking(oreState))
 		{
 			// Iterate over directions and corresponding oxidation properties
 			for(int i = 0; i < DIRECTIONS.length; i++)
 			{
 				Direction direction = DIRECTIONS[i];
-				EnumProperty<MineralWeathering> oxidationProperty = IGOreBlock.OXIDATION_PROPERTIES.get(i);
+				EnumProperty<MineralWeathering> oxidationProperty = IGWeatheringOreBlock.OXIDATION_PROPERTIES.get(i);
 				BlockPos adjacentPos = cursor.offset(direction.getNormal());
 
 				// Set the exposed side to OXIDIZED based on the direction
@@ -277,9 +258,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 			// List of blocks for each ore richness
 			List<BlockState> blocks = List.of(
-					mineral.getOreBlock(stone, OreRichness.POOR).defaultBlockState(),
-					mineral.getOreBlock(stone, OreRichness.NORMAL).defaultBlockState(),
-					mineral.getOreBlock(stone, OreRichness.RICH).defaultBlockState()
+					mineral.getOreBlock(stone, OreRichness.POOR).getDefaultBlockState(),
+					mineral.getOreBlock(stone, OreRichness.NORMAL).getDefaultBlockState(),
+					mineral.getOreBlock(stone, OreRichness.RICH).getDefaultBlockState()
 			);
 
 			int selectedBlock = noiseValue > (THRESHOLD+0.2) ? 2 : (noiseValue > (THRESHOLD+0.1) ? 1 : 0);

@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
-  "textures": {
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_cassiterite_tarnished",
-    "side": "minecraft:block/sandstone",
-    "top": "minecraft:block/sandstone_top"
-  }
-}

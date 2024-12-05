@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
-  "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_platinum_corroded",
-    "side": "tfc:block/rock/raw/dolomite",
-    "top": "tfc:block/rock/raw/dolomite"
-  }
-}

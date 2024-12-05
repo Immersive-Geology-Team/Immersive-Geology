@@ -8,7 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.helper.material;
 
-import com.igteam.immersivegeology.common.block.IGOreBlock.MineralWeathering;
+
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.mojang.datafixers.util.Pair;
 
 import java.util.ArrayList;
