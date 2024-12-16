@@ -21,5 +21,5 @@ If you want to help us out, you can donate with Liberapay!<br>
 > [CrimsonTwilight](https://www.curseforge.com/members/crimsontwilight): Team Immersive Geology Founder, Texture Artist and Developer<br/>
 > [Muddykats](https://www.curseforge.com/members/muddykats): Lead Immersive Geology Developer <br/>
 > [UnSchtalch](https://github.com/UnSchtalch): Developer and 3D Model Artist <br/>
-> Peter: Multiblock 3D-Modellierer und Künstler<br/>
+> [Peter](https://github.com/Cordyceps22): Multiblock 3D-Modellierer und Künstler<br/>
 > SteelBlue8: Item and Block Texture Artist<br/>
