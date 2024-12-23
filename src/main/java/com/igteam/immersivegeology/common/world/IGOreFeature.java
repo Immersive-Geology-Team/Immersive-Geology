@@ -41,6 +41,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Function;
@@ -78,11 +79,32 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		SimplexNoise3D simplex = new SimplexNoise3D(seed);
 
 		int FEATURE_SIZE = config.veinSize.get();
-		INoise3D noise = (x,y,z) ->
-		{
-			return simplex.flattened(0f, 1f).octaves(1,0.75f).noise(x/FEATURE_SIZE,y/FEATURE_SIZE,z/FEATURE_SIZE);
-		};
+		INoise3D noise = getiNoise3D(FEATURE_SIZE, seed);
 		return new Vein(defaultPosRespectingHeight(random, config), random, noise);
+	}
+
+	// Took awhile but this seems to be a fairly stable noise setup, larger feature size increases intensity
+	private static @NotNull INoise3D getiNoise3D(int featureSize, long seed)
+	{
+		SimplexNoise3D simplex = new SimplexNoise3D(seed);
+		SimplexNoise3D warpSimplex = new SimplexNoise3D(seed-1);
+
+		// Warp noise generator for spacing
+		INoise3D warp = (x, y, z) -> warpSimplex
+				.octaves(2, 1f)
+				.sinWarp(2,1)
+				.flattened(-1,1)
+				.bias(-.5f)
+				.noise(x / 24, y / 24, z / 24);
+
+		float spreadFactor = (90 - (float)featureSize/ 1000);
+		// Primary noise generator
+		return (x, y, z) -> simplex
+				.bias(-0.5f + (Math.max(0, Math.min(0.5f, (float)featureSize/ 100))))
+				.flattened(-1,1)
+				.octaves(2, 1f)
+				.add(warp)
+				.noise(x / 24, y /24, z /24);
 	}
 
 	private static BlockPos defaultPosRespectingHeight(RandomSource random, OreConfig config) {

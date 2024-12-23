@@ -83,14 +83,15 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
 
     public static StoneEnum selectWorldState(BlockState stoneState)
     {
-        String stoneName = capitalizeFirstLetter(stoneState.getBlock().getName().getString().toLowerCase());
-        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
-        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
-        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
-
-        // Now for TFC Compat checks
-        if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))) return valueOf(stoneName);
-
+        try
+        {
+            String stoneName = capitalizeFirstLetter(stoneState.getBlock().getName().getString().toLowerCase());
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
+            // Now for TFC Compat checks
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))) return valueOf(stoneName);
+        } catch(Exception ignored) {}
 
         return null;
     }

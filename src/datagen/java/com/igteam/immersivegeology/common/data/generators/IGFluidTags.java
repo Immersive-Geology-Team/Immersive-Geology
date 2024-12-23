@@ -66,7 +66,7 @@ public class IGFluidTags extends FluidTagsProvider
 						if(ModFlags.TFC.isStrictlyLoaded())
 						{
 							try {
-								tag(getTFCFluidTag("LAVA_LIKE")).add(fluid);
+								//tag(getTFCFluidTag("LAVA_LIKE")).add(fluid);
 								tag(getTFCFluidTag("USABLE_IN_INGOT_MOLD")).add(fluid);
 							} catch(NullPointerException exception)
 							{

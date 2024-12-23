@@ -17,6 +17,18 @@ public interface INoise3D
 	{
 		return octaves(octaves, 0.5f);
 	}
+	default INoise3D min(INoise3D other) {
+		return (x, y, z) -> Math.min(INoise3D.this.noise(x, y, z), other.noise(x, y, z));
+	}
+
+
+	default INoise3D subtractAndMin(INoise3D other) {
+		return (x, y, z) -> {
+			float original = INoise3D.this.noise(x, y, z);
+			float subtracted = original - other.noise(x, y, z);
+			return Math.min(original, subtracted);
+		};
+	}
 
 	default INoise3D octaves(int octaves, float persistence)
 	{
@@ -78,8 +90,57 @@ public interface INoise3D
 		};
 	}
 
+	default INoise3D scale(float factor) {
+		return (x, y, z) -> INoise3D.this.noise(x, y, z) * factor;
+	}
+
+	default INoise3D gap(INoise3D other) {
+		return (x, y, z) -> other.noise(x,y,z) > 0 ? -1 : INoise3D.this.noise(x, y, z) - other.noise(x,y,z);
+	}
+
+	default INoise3D bias(float offset) {
+		return (x, y, z) -> INoise3D.this.noise(x, y, z) + offset;
+	}
 	default INoise3D add(INoise3D other)
 	{
 		return (x, y, z) -> INoise3D.this.noise(x, y, z)+other.noise(x, y, z);
 	}
+	default INoise3D abs() {
+		return (x, y, z) -> Math.abs(INoise3D.this.noise(x, y, z));
+	}
+	default INoise3D invert() {
+		return (x, y, z) -> -INoise3D.this.noise(x, y, z);
+	}
+	default INoise3D power(float exponent) {
+		return (x, y, z) -> (float) Math.pow(INoise3D.this.noise(x, y, z), exponent);
+	}
+	default INoise3D multiply(INoise3D other) {
+		return (x, y, z) -> INoise3D.this.noise(x, y, z) * other.noise(x, y, z);
+	}
+	default INoise3D blend(INoise3D other, float alpha) {
+		return (x, y, z) -> {
+			float thisNoise = INoise3D.this.noise(x, y, z);
+			float otherNoise = other.noise(x, y, z);
+			return thisNoise * (1 - alpha) + otherNoise * alpha;
+		};
+	}
+	default INoise3D sub(INoise3D other)
+	{
+		return (x, y, z) -> INoise3D.this.noise(x, y, z)-other.noise(x, y, z);
+	}
+	default INoise3D sinWarp(float frequency, float amplitude) {
+		return (x, y, z) -> {
+			float noise = INoise3D.this.noise(x, y, z);
+			return (float) Math.sin(noise * frequency) * amplitude;
+		};
+	}
+	default INoise3D mirror(float planeX, float planeY, float planeZ) {
+		return (x, y, z) -> {
+			float mirroredX = 2 * planeX - x;
+			float mirroredY = 2 * planeY - y;
+			float mirroredZ = 2 * planeZ - z;
+			return INoise3D.this.noise(mirroredX, mirroredY, mirroredZ);
+		};
+	}
+
 }
