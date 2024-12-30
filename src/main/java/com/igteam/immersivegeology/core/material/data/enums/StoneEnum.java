@@ -80,7 +80,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     StoneEnum(MaterialStone m){
         this.material = m;
     }
-
+    private static boolean hasWarned = false;
     public static StoneEnum selectWorldState(BlockState stoneState)
     {
         try
@@ -90,8 +90,16 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
             // Now for TFC Compat checks
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))) return valueOf(stoneName);
-        } catch(Exception ignored) {}
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))){
+                return valueOf(stoneName);
+            }
+        } catch(Exception ex) {
+            if(!hasWarned)
+            {
+                IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone");
+                hasWarned = true;
+            }
+        }
 
         return null;
     }
@@ -117,5 +125,10 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     public boolean isWorldState(BlockState stoneState)
     {
         return stoneState.getBlock().getName().getString().equalsIgnoreCase(material.getName());
+    }
+
+    public String getTFCStoneLoc()
+    {
+        return instance().getTFCStoneLoc();
     }
 }

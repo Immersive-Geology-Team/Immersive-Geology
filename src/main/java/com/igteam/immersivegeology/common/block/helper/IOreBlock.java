@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
@@ -29,6 +30,7 @@ public interface IOreBlock
 	String getDescriptionId();
 
 	Item asItem();
+	Block asBlock();
 
 	MaterialInterface<?> getMaterial(MaterialTexture t);
 

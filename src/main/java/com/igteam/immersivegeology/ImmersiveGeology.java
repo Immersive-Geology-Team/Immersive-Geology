@@ -35,7 +35,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 @Mod(IGLib.MODID)
-public class ImmersiveGeology {
+public class  ImmersiveGeology {
 
     public ImmersiveGeology() {
         IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();

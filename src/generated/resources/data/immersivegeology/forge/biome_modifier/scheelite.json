@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_sparse",
+  "biomes": {
+    "type": "forge:any"
+  },
   "features": "immersivegeology:scheelite",
   "step": "underground_ores"
 }

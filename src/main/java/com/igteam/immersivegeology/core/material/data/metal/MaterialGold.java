@@ -27,10 +27,11 @@ public class MaterialGold extends MaterialNativeMetal {
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.DUST);
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        this.CONFIG = new MaterialMineral.MineralConfig(8,25,1,0,120,125, false, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(8,25,1,0,120,125,0.5, false, Optional.empty());
     }
 
     @Override

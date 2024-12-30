@@ -38,7 +38,7 @@ public class MaterialMetal extends GeologyMaterial {
         return super.getCrystalFamily();
     }
 
-    public MaterialMineral.MineralConfig CONFIG = new MaterialMineral.MineralConfig(0,50,0,-48,112,0, false, Optional.empty());
+    public MaterialMineral.MineralConfig CONFIG = new MaterialMineral.MineralConfig(0,50,0,-48,112,0,0.5, false, Optional.empty());
     public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, Optional<TagKey<Biome>> preferredBiome)
     {}
 }

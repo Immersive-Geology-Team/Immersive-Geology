@@ -23,7 +23,7 @@ public class MaterialIlmenite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(15,40,2,5,140,2000, false,Optional.of(Biomes.IS_MOUNTAIN));
+        CONFIG = new MineralConfig(15,40,2,5,140,2000, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN));
     }
 
     @Override

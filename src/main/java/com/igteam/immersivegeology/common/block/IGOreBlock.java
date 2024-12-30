@@ -19,8 +19,10 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -63,6 +65,12 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
     public BlockState getDefaultBlockState()
     {
         return defaultBlockState();
+    }
+
+    @Override
+    public @NotNull Block asBlock()
+    {
+        return this;
     }
 
     public OreRichness getOreRichness()

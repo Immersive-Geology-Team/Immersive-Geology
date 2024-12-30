@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -24,6 +25,7 @@ import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.RemoveFeaturesBiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -36,6 +38,7 @@ public class IGWorldGen
 {
 	public static final RegistryObject<IGOreFeature> IG_CONFIG_ORE;
 	private static final DeferredRegister<Feature<?>> FEATURE_REGISTER;
+	private static final DeferredRegister<Feature<?>> TFC_FEATURE_REGISTER; // Used for inbuilt compat to prevent crashing when TFC not loaded.
 	private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_REGISTER;
 	private static final DeferredRegister<HeightProviderType<?>> HEIGHT_REGISTER;
 	public static RegistryObject<HeightProviderType<IGHeightProvider>> IG_HEIGHT_PROVIDER;
@@ -46,6 +49,7 @@ public class IGWorldGen
 	{
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		FEATURE_REGISTER.register(bus);
+		TFC_FEATURE_REGISTER.register(bus);
 		PLACEMENT_REGISTER.register(bus);
 		HEIGHT_REGISTER.register(bus);
 	}
@@ -53,8 +57,14 @@ public class IGWorldGen
 	static
 	{
 		FEATURE_REGISTER = DeferredRegister.create(ForgeRegistries.FEATURES, IGLib.MODID);
+		TFC_FEATURE_REGISTER = DeferredRegister.create(ForgeRegistries.FEATURES, "tfc");
 		IG_CONFIG_ORE = FEATURE_REGISTER.register("ig_ore", IGOreFeature::new);
+
+
+		if(!ModFlags.TFC.isLoaded()) TFC_FEATURE_REGISTER.register("cluster_vein", IGPlaceholderFeature::new);
+
 		PLACEMENT_REGISTER = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, IGLib.MODID);
+
 		IG_COUNT_PLACEMENT = PLACEMENT_REGISTER.register("ig_count", () -> {
 			return () -> {
 				return IGCountPlacement.CODEC;

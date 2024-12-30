@@ -9,8 +9,11 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.world.IGOreFeature;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -30,10 +33,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class IGMineralTestingItem extends IGGenericItem
 {
@@ -48,34 +48,32 @@ public class IGMineralTestingItem extends IGGenericItem
 		Level level = context.getLevel();
 		BlockPos usedPos = context.getClickedPos();
 		Holder<Biome> biome = level.getBiome(usedPos);
-		if(biome.is(BiomeTags.IS_RIVER))
-		{
-			Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
-			ChunkAccess centreChunk = level.getChunk(usedPos);
-			ChunkPos usedChunk = centreChunk.getPos();
-			BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
 
-			int height = centreChunk.getHeight();
-			for(int x = -64; x < (16+64); ++x)
+		Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
+		ChunkAccess centreChunk = level.getChunk(usedPos);
+		ChunkPos usedChunk = centreChunk.getPos();
+		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
+
+		int height = centreChunk.getHeight();
+		for(int x = -64; x < (16+64); ++x)
+		{
+			for(int z = -64; z < (16+64); ++z)
 			{
-				for(int z = -64; z < (16+64); ++z)
+				for(int y = -60; y < height; ++y)
 				{
-					for(int y = -60; y < height; ++y)
+					BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
+					BlockState check = level.getBlockState(cursor);
+					if(check.getBlock() instanceof IOreBlock ore)
 					{
-						BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
-						BlockState check = level.getBlockState(cursor);
-						if(check.getBlock() instanceof IOreBlock ore)
-						{
-							MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
-							int amount = queryMap.getOrDefault(material, 1);
-							queryMap.put(material, (amount+1));
-						}
+						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
+						int amount = queryMap.getOrDefault(material, 1);
+						queryMap.put(material, (amount+1));
 					}
 				}
-
 			}
-			IGLib.IG_LOGGER.info(queryMap.toString());
+
 		}
+		IGLib.IG_LOGGER.info(queryMap.toString());
 
 		return InteractionResult.SUCCESS;
 	}

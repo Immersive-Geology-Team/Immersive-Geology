@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -24,7 +25,9 @@ public class MaterialCryolite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
-        CONFIG = new MineralConfig(14,90,1,0,120,1, true,Optional.of(Biomes.IS_COLD));
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
+
+        CONFIG = new MineralConfig(14,90,1,0,120,1, 0.5,true,Optional.of(Biomes.IS_COLD));
     }
 
     @Override

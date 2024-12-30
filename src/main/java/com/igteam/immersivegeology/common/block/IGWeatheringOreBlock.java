@@ -191,4 +191,10 @@ public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
     {
         return defaultBlockState();
     }
+
+    @Override
+    public @NotNull Block asBlock()
+    {
+        return this;
+    }
 }

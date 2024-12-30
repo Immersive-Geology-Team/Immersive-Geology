@@ -43,4 +43,9 @@ public class MaterialStone extends GeologyMaterial {
     {
         return List.of();
     }
+
+    public String getTFCStoneLoc()
+    {
+        return "tfc:rock/raw/" + getName().toLowerCase();
+    }
 }

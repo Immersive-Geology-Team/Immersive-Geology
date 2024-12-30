@@ -1,0 +1,12 @@
+{
+  "type": "tfc:cluster_vein",
+  "config": {
+    "blocks": [],
+    "density": 0.5,
+    "max_y": 140,
+    "min_y": 0,
+    "random_name": "sphalerite_tfc",
+    "rarity": 45,
+    "size": 10
+  }
+}

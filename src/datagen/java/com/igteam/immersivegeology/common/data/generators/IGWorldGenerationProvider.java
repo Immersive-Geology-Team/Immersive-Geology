@@ -153,7 +153,7 @@ public class IGWorldGenerationProvider
 		
 		private FeatureRegistration(ResourceLocation name, Optional<TagKey<Biome>> optional) {
 			this.name = name != null ? name : new ResourceLocation("default:feature_name");
-			this.inBiomes = optional.orElse(BiomeTags.IS_OVERWORLD);
+			this.inBiomes = null;
 			IGLib.IG_LOGGER.info("Name: {}", name) ;
 		}
 

@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_rare",
+  "biomes": {
+    "type": "forge:any"
+  },
   "features": "immersivegeology:unobtania",
   "step": "underground_ores"
 }

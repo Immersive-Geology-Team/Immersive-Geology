@@ -205,6 +205,18 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     @Override
+    public boolean weakCheckExistingImplementation(IFlagType<?> h)
+    {
+        for(ModFlags m : ModFlags.values())
+        {
+            if(EXISTING_IMPLEMENTATION_MAP.containsKey(m)) {
+                if(EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h)) return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean checkExistingImplementation(ModFlags m, IFlagType<?> h)
     {
         return m.isStrictlyLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m) && EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h);

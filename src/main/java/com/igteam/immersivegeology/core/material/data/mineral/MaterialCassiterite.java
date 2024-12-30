@@ -3,10 +3,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
@@ -29,7 +26,8 @@ public class MaterialCassiterite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(40,50,2,0,175,700, false,Optional.of(BiomeTags.IS_OVERWORLD));
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
+        CONFIG = new MineralConfig(40,50,2,0,175,700, 0.5,false,Optional.of(BiomeTags.IS_OVERWORLD));
     }
 
     @Override

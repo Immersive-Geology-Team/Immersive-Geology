@@ -29,6 +29,7 @@ public interface IWorldGenConfig
 	int veinsPerChunk();
 	int rarity();
 	int generationChance();
+	double density();
 	boolean useSparsePlacement();
 
 	Optional<TagKey<Biome>> getPreferredBiome();

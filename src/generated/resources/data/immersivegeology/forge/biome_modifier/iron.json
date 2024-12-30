@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_cold",
+  "biomes": {
+    "type": "forge:any"
+  },
   "features": "immersivegeology:iron",
   "step": "underground_ores"
 }

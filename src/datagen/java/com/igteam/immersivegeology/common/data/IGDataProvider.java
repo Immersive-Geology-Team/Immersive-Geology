@@ -55,6 +55,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGFeatureRemovalProvider(out));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
+        generator.addProvider(runServer, new TFCCompatOreProvider(out));
 
 
         // God I hate this system. ~Muddykat

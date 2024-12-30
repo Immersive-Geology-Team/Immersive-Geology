@@ -21,8 +21,8 @@ public class MaterialMineral extends GeologyMaterial {
     {
         logged_recipes.add(getName());
     }
-    public MineralConfig CONFIG = new MineralConfig(8,50,1,-48,112,50, false,Optional.empty());
-    public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, boolean useSparsePlacement, Optional<TagKey<Biome>> preferredBiome)
+    public MineralConfig CONFIG = new MineralConfig(8,50,1,-48,112,50, 0.5,false,Optional.empty());
+    public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, double density, boolean useSparsePlacement, Optional<TagKey<Biome>> preferredBiome)
     {}
 
     @Override

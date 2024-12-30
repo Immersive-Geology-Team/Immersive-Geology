@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "#forge:is_hot",
+  "biomes": {
+    "type": "forge:any"
+  },
   "features": "immersivegeology:cobaltite",
   "step": "underground_ores"
 }

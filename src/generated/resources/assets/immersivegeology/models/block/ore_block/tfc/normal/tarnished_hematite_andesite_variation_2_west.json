@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
-  "textures": {
-    "base": "tfc:block/rock/raw/andesite",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_hematite_tarnished"
-  }
-}

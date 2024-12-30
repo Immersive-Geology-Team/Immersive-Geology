@@ -97,7 +97,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				.bias(-.5f)
 				.noise(x / 24, y / 24, z / 24);
 
-		float spreadFactor = (90 - (float)featureSize/ 1000);
 		// Primary noise generator
 		return (x, y, z) -> simplex
 				.bias(-0.5f + (Math.max(0, Math.min(0.5f, (float)featureSize/ 100))))

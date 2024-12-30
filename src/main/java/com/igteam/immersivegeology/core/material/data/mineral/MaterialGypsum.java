@@ -2,7 +2,9 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
@@ -21,7 +23,8 @@ public class MaterialGypsum extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(14,30,3,40,80,900, false,Optional.of(Biomes.IS_HOT));
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
+        CONFIG = new MineralConfig(14,30,3,40,80,900, 0.5,false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

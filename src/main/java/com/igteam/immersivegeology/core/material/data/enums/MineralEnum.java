@@ -140,6 +140,12 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     }
 
     @Override
+    public double density()
+    {
+        return material.CONFIG.density();
+    }
+
+    @Override
     public boolean useSparsePlacement()
     {
         return material.CONFIG.useSparsePlacement();

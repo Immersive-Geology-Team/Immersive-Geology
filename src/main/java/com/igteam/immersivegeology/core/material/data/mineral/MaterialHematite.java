@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -24,8 +25,9 @@ public class MaterialHematite extends MaterialMineral {
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
         // TODO disk like spawn type
-        CONFIG = new MineralConfig(15,30,2,0,160,1000, false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+        CONFIG = new MineralConfig(15,30,2,0,160,1000, 0.5,false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
     }
 
     @Override

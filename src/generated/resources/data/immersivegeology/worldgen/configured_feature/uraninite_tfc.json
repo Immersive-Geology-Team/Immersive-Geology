@@ -1,0 +1,70 @@
+{
+  "type": "tfc:cluster_vein",
+  "config": {
+    "blocks": [
+      {
+        "replace": [
+          "tfc:rock/raw/diorite"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_uraninite_diorite",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_uraninite_diorite",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_uraninite_diorite",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/gabbro"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_uraninite_gabbro",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_uraninite_gabbro",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_uraninite_gabbro",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/granite"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_uraninite_granite",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_uraninite_granite",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_uraninite_granite",
+            "weight": 25
+          }
+        ]
+      }
+    ],
+    "density": 0.5,
+    "max_y": 180,
+    "min_y": 20,
+    "random_name": "uraninite_tfc",
+    "rarity": 80,
+    "size": 13
+  }
+}

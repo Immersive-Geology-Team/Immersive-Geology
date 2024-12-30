@@ -24,7 +24,7 @@ public class MaterialHubnerite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
 
-        CONFIG = new MineralConfig(16,75,1,0,175,1000, false,Optional.of(BiomeTags.IS_MOUNTAIN));
+        CONFIG = new MineralConfig(16,75,1,0,175,1000, 0.5,false,Optional.of(BiomeTags.IS_MOUNTAIN));
     }
 
     @Override

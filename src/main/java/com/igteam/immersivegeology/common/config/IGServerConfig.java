@@ -102,7 +102,7 @@ public class IGServerConfig
 		public static class OreConfig
 		{
 
-			public final ForgeConfigSpec.DoubleValue airExposure;
+			public final ForgeConfigSpec.DoubleValue density;
 			public final ForgeConfigSpec.IntValue veinSize;
 			public final ForgeConfigSpec.IntValue minY;
 			public final ForgeConfigSpec.IntValue maxY;
@@ -114,7 +114,7 @@ public class IGServerConfig
 			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
 				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
-				this.airExposure = builder.comment("Chance for ores to NOT generate if they are exposed to air. 0 means ignore air exposure, 1 requires being burried.").defineInRange("air_exposure", 0, 0.0, 1.0);
+				this.density = builder.comment("how dense is the vein? 0 for all stone, 1 for all ore").defineInRange("density", 0.5, 0.0, 1.0);
 				this.veinSize = builder.comment("The maximum size of a vein. Set to 0 to disable generation").defineInRange("vein_size", mineral.getVeinSize(), 0, Integer.MAX_VALUE);
 				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);

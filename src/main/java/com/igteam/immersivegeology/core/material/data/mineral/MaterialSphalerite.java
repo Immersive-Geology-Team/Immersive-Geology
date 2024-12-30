@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -22,8 +23,9 @@ public class MaterialSphalerite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+        addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
-        CONFIG = new MineralConfig(10,45,3,0,140,600, false,Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(10,45,3,0,140,600, 0.5,false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override

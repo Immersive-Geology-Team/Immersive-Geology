@@ -153,4 +153,10 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     {
         return material.CONFIG.generationChance();
     }
+
+    @Override
+    public double density()
+    {
+        return material.CONFIG.density();
+    }
 }
