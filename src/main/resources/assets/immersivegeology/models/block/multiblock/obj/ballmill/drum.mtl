@@ -1,8 +1,4 @@
-# Blender 4.2.3 LTS MTL File: 'None'
-# www.blender.org
-
-newmtl drum
-map_Kd immersivegeology:block/multiblock/ballmill/drum
-
-newmtl gear
-map_Kd immersivegeology:block/multiblock/ballmill/gear
+# Made in Blockbench 4.11.1
+newmtl m_a5736c04-ae9e-ecd1-e2f5-2454776d30ef
+map_Kd immersivegeology:block/multiblock/ballmill/ballmill_drum
+newmtl none

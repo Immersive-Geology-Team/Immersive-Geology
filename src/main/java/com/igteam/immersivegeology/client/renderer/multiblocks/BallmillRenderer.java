@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -51,14 +52,14 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();
-        boolean isActive = state.rsState.isEnabled(context);
+        boolean isActive = state.shouldRenderActive();
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
                 poseStack.translate(0.905,2.125,0.5);
-                float angleDrum = isActive ? (rot) + pPartialTick : 0;
+                float angleDrum = isActive ? (rot) + pPartialTick : rot;
 
-                float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : 0;
+                float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : (((rot * 2f) + 12) % 360);
                 poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
                 renderDynamicModel(DRUM, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
             poseStack.popPose();
@@ -78,10 +79,6 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
         rotateForFacing(matrix, facing);
 
-        // TODO Confirm if we can use a hardcoded value.
-        // Overlay only contains a few bits of info (0xA0000) so we need to format this into something that we can use
-        // This calculation creates '0xA0A0A0' which is about right for the color we need.
-        int overlayCol = ((overlay | (overlay >> 8) | (overlay >> 16)) << 4);
         RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, level, pos, false, 0xf0f0f0, light);
         matrix.popPose();
     }

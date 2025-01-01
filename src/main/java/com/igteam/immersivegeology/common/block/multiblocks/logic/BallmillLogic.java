@@ -50,17 +50,29 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
     private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(2,3,6, RelativeBlockFace.FRONT);
 
+    public static final int ENERGY_CONSUMPTION_RATE = 100; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         final BallmillLogic.State state = context.getState();
-        float rot = state.rotation;
-        state.rotation = (float)((rot + 2.5) % 360);
+        if(state.renderAsActive)
+        {
+            float rot = state.rotation;
+            state.rotation = (float)((rot+2.5)%360);
+        }
     }
 
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final BallmillLogic.State state = context.getState();
+
+        final boolean wasActive = state.renderAsActive;
+        state.renderAsActive = (!state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;
+        if(wasActive != state.renderAsActive)
+        {
+            context.requestMasterBESync();
+        }
+
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
     }
 
@@ -115,6 +127,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         private final DroppingMultiblockOutput output;
         private final StoredCapability<IItemHandler> itemInputCap;
         private float rotation;
+        private boolean renderAsActive;
         private final StoredCapability<IEnergyStorage> energyCap;
         private final MultiblockProcessor<RotaryKilnRecipe, ProcessContextInWorld<RotaryKilnRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;
@@ -158,6 +171,11 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
             nbt.put("processor", processor.toNBT());
         }
 
+        public boolean shouldRenderActive()
+        {
+            return renderAsActive;
+        }
+
         @Override
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
@@ -167,12 +185,14 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         public void writeSyncNBT(CompoundTag nbt)
         {
             writeSaveNBT(nbt);
+            nbt.putBoolean("renderActive", renderAsActive);
         }
 
         @Override
         public void readSyncNBT(CompoundTag nbt)
         {
             readSaveNBT(nbt);
+            renderAsActive = nbt.getBoolean("renderActive");
         }
 
         @Override

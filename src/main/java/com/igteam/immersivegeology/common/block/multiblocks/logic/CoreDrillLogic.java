@@ -145,7 +145,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         final State state = context.getState();
 
         final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = (!state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;// state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+        state.renderAsActive = (!state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;
         if(wasActive != state.renderAsActive)
         {
             context.requestMasterBESync();
