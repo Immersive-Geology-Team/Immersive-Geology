@@ -88,6 +88,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	private static final Set<BlockPos> TANK_RIGHT_POSITIONS;
 	private static final Set<BlockPos> TANK_FRONT_POSITIONS;
 	private static final Set<BlockPos> REACTOR_CHAMBER_POSITIONS;
+	private static final int ENERGY_CAPACITY;
 
 	static
 	{
@@ -106,6 +107,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		TANK_RIGHT_POSITIONS = generateBlockPositions(new BlockPos(7,1,4), new BlockPos(8,3,5));
 		TANK_FRONT_POSITIONS = generateBlockPositions(new BlockPos(3,1,7), new BlockPos(4,3,8));
 		REACTOR_CHAMBER_POSITIONS = generateBlockPositions(new BlockPos(3,1,3), new BlockPos(5,4,5));
+		ENERGY_CAPACITY = 64000;
 	}
 
 	@Override
@@ -264,7 +266,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 	public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<ChemicalRecipe>
 	{
-		public final AveragingEnergyStorage energy = new AveragingEnergyStorage(8192);
+		public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
 		public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 		public final ChemicalReactorTanks tanks = new ChemicalReactorTanks();
 		private final MultiblockProcessor.InMachineProcessor<ChemicalRecipe> processor;

@@ -23,7 +23,7 @@ public class MaterialUnobtania extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(20,50,1,-64,32,1, 0.5,true,Optional.of(Biomes.IS_RARE));
+        CONFIG = new MineralConfig(20,300,1,-64,32,1, 0.5,true,Optional.of(Biomes.IS_RARE));
     }
 
     @Override

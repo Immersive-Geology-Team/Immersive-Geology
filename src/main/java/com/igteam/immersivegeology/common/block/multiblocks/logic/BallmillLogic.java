@@ -43,14 +43,14 @@ import java.util.function.Supplier;
 
 public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, IServerTickableComponent<BallmillLogic.State>, IClientTickableComponent<BallmillLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(4,1,3);
-    private static final int ENERGY_CAPACITY = 256000;
+    private static final int ENERGY_CAPACITY = 64000;
     private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0,1, 3, RelativeBlockFace.UP));
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2,2,0, RelativeBlockFace.BACK);
     private static final MultiblockFace INPUT_POS = new MultiblockFace(2,3,6, RelativeBlockFace.FRONT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
     private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(2,3,6, RelativeBlockFace.FRONT);
 
-    public static final int ENERGY_CONSUMPTION_RATE = 100; // Per tick
+    public static final int ENERGY_CONSUMPTION_RATE = 80; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {

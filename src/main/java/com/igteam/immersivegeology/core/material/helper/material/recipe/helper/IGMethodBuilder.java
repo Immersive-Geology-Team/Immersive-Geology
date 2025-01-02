@@ -18,7 +18,7 @@ public class IGMethodBuilder
 	public static IGCraftingMethod crafting(IGRecipeStage parentStage) { return new IGCraftingMethod(parentStage);}
 	public static IGSeparatorMethod separating(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGSeparatorMethod(parentMaterial, stage);}
 
-	public static IGBloomeryMethod bloomery(IGRecipeStage parentStage) {return new IGBloomeryMethod(parentStage);}
+	public static IGBloomeryMethod bloomery(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGBloomeryMethod(parentMaterial, stage);}
 
 	public static IGRoastingMethod roast(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGRoastingMethod(parentMaterial, stage);}
 	public static IGChemicalMethod chemical(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGChemicalMethod(parentMaterial, stage);}

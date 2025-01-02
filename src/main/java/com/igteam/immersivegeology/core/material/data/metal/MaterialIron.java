@@ -33,7 +33,7 @@ public class MaterialIron extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,10,1,0,60,1,0.5, true, Optional.of(Biomes.IS_COLD));
+        this.CONFIG = new MaterialMineral.MineralConfig(12,550,1,0,60,1,0.1, true, Optional.of(Biomes.IS_COLD));
     }
 
     @Override

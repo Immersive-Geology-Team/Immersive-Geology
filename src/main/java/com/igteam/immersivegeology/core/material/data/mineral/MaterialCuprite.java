@@ -1,13 +1,22 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGBloomeryMethod;
 import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
@@ -42,6 +51,13 @@ public class MaterialCuprite extends MaterialMineral
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
 	{
 		return ((p, i) -> coloredWeathering.apply(i));
+	}
+
+	@Override
+	public void setupRecipeStages()
+	{
+		super.setupRecipeStages();
+		IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2,  ItemCategoryFlags.INGOT, 1, 400);
 	}
 
 	@Override

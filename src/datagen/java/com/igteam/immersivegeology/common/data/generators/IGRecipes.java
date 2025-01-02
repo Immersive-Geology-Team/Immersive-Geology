@@ -157,7 +157,6 @@ public class IGRecipes extends RecipeProvider
 				.requires(ItemTags.SAND)
 				.group("raw_fire_clay").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, "craft_raw_fire_clay");
 
-
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_fire_clay), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_fire_clay)).save(consumer, "cook_refractory_brick");
 		//Computational Engineering Block
 		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
@@ -227,7 +226,6 @@ public class IGRecipes extends RecipeProvider
 			}
 		}
 
-		BloomeryRecipeBuilder.builder(MetalEnum.Copper.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cuprite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cuprite_to_ingot"));
 		BloomeryRecipeBuilder.builder(MetalEnum.Tin.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cassiterite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cassiterite_to_ingot"));
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));

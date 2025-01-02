@@ -26,6 +26,7 @@ import java.util.function.Function;
 
 public class TrommelLogic implements IMultiblockLogic<TrommelLogic.State>, IServerTickableComponent<TrommelLogic.State>, IClientTickableComponent<TrommelLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(6,1,0);
+    public static final int ENERGY_CAPACITY = 24000;
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
@@ -48,7 +49,7 @@ public class TrommelLogic implements IMultiblockLogic<TrommelLogic.State>, IServ
     }
 
     public static class State implements IMultiblockState {
-        public final AveragingEnergyStorage energy = new AveragingEnergyStorage(12000);
+        public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
 

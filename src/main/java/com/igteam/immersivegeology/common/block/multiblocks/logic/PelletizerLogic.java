@@ -27,6 +27,7 @@ import java.util.function.Function;
 
 public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>, IServerTickableComponent<PelletizerLogic.State>, IClientTickableComponent<PelletizerLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(0,0,1);
+    public static final int ENERGY_CAPACITY = 12000;
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
@@ -49,7 +50,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     }
 
     public static class State implements IMultiblockState {
-        public final AveragingEnergyStorage energy = new AveragingEnergyStorage(12000);
+        public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
 

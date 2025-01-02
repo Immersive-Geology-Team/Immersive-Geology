@@ -65,7 +65,7 @@ public class TFCCompatOreProvider implements DataProvider {
 			}
 			if(wConfig.getVeinSize() > 0)
 			{
-				generateVein(wConfig.name().toLowerCase()+"_tfc", wConfig.rarity() + 100, wConfig.density(), wConfig.getMinY(), wConfig.getMaxY(), wConfig.getVeinSize(), "", ore);
+				generateVein(wConfig.name().toLowerCase()+"_tfc", wConfig.rarity(), wConfig.density(), wConfig.getMinY(), wConfig.getMaxY(), wConfig.getVeinSize(), "", ore);
 				entries.add("immersivegeology:"+wConfig.name().toLowerCase()+"_tfc");
 			}
 		}

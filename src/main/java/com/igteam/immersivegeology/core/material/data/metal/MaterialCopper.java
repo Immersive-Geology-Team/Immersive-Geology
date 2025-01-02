@@ -15,6 +15,8 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +48,14 @@ public class MaterialCopper extends MaterialNativeMetal {
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
     {
         return ((p, i) -> coloredWeathering.apply(i));
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2, this, ItemCategoryFlags.INGOT, 1, 400);
     }
 
     @Override

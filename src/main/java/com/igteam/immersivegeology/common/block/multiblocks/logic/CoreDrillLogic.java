@@ -72,8 +72,8 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(8,0,5, RelativeBlockFace.LEFT);
 
     public static final int TANK_VOLUME = 8*FluidType.BUCKET_VOLUME;
-
-    public static final int ENERGY_CONSUMPTION_RATE = 12000; // Per tick
+    //TODO implement sister system to the Excavator, all 'core fluids' show as the same until processed.
+    public static final int ENERGY_CONSUMPTION_RATE = 2048; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
