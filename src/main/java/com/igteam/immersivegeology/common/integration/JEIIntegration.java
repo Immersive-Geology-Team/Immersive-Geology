@@ -47,6 +47,8 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
 		registration.addRecipeCategories(new IGSluiceCategory(guiHelper));
 		registration.addRecipeCategories(new IGBloomeryCategory(guiHelper));
+		registration.addRecipeCategories(new IGBallmillCategory(guiHelper));
+		registration.addRecipeCategories(new IGPelletizerCategory(guiHelper));
 	}
 
 	@Override
@@ -58,6 +60,8 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.CHEMICAL, getRecipes(ChemicalRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.SLUICE, getRecipes(IndustrialSluiceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.BALLMILL, getRecipes(BallmillRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.PELLETIZER, getRecipes(PelletizerRecipe.RECIPES));
 	}
 
 
@@ -70,6 +74,8 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.TROMMEL.iconStack(), JEIRecipeTypes.SLUICE);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
+		registration.addRecipeCatalyst(IGMultiblockProvider.BALLMILL.iconStack(), JEIRecipeTypes.BALLMILL);
+		registration.addRecipeCatalyst(IGMultiblockProvider.PELLETIZER.iconStack(), JEIRecipeTypes.PELLETIZER);
 	}
 
 	@Override

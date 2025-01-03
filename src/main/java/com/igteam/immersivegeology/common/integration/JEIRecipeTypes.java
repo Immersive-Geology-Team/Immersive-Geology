@@ -24,6 +24,8 @@ public class JEIRecipeTypes
 	public static final RecipeType<RotaryKilnRecipe> ROTARYKILN = create(IGRecipeTypes.ROTARYKILN);
 	public static final RecipeType<BloomeryRecipe> BLOOMERY = create(IGRecipeTypes.BLOOMERY);
 	public static final RecipeType<ChemicalRecipe> CHEMICAL = create(IGRecipeTypes.CHEMICAL_REACTOR);
+	public static final RecipeType<BallmillRecipe> BALLMILL = create(IGRecipeTypes.BALLMILL);
+	public static final RecipeType<PelletizerRecipe> PELLETIZER = create(IGRecipeTypes.PELLETIZER);
 
 	private static <T extends Recipe<?>>
 	RecipeType<T> create(IERecipeTypes.TypeWithClass<T> type)

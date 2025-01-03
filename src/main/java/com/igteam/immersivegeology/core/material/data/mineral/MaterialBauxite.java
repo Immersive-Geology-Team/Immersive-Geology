@@ -73,6 +73,6 @@ public class MaterialBauxite extends MaterialMineral {
                         0.25f,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.DUST), 1))
-                .setTimeAndEnergy(200, 10240);
+                .setTimeAndEnergy(400, 204800);
     }
 }
