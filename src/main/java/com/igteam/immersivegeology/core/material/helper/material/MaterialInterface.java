@@ -108,4 +108,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getVeinType();
     }
 
+    default MaterialInterface<?> getProductionMaterial() {return instance().getProductionMaterial();}
+    default MaterialInterface<?> getByproductMaterial() {return instance().getByproductMaterial();}
+    default MaterialInterface<?> getProductionMaterial(int index) {return instance().getTraceMaterials(index);}
 }

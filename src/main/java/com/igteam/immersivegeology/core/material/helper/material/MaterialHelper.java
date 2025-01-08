@@ -255,9 +255,7 @@ public interface MaterialHelper {
     }
 
     default IGVeinTextureType getVeinType() {return IGVeinTextureType.METALLIC;}
-
-    default Optional<MaterialInterface<?>> getPrimaryMaterial()
-    {
-        return getSourceMaterials().stream().findFirst();
-    };
+    MaterialInterface<?> getProductionMaterial();
+    MaterialInterface<?> getByproductMaterial();
+    MaterialInterface<?> getTraceMaterials(int index);
 }

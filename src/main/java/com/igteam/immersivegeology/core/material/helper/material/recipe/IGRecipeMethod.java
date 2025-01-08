@@ -110,4 +110,11 @@ public abstract class IGRecipeMethod
 	{
 		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + output_form.getName().toLowerCase();
 	}
+
+	protected String create_advanced_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
+	{
+		if(parentMaterial.getPrimaryMaterial().isPresent()) return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryMaterial().get().getName() + output_form.getName().toLowerCase();
+		IGLib.IG_LOGGER.warn("Unable to create Advanced Method Name, no Primary Material Source for {}", parentMaterial.getName());
+		return create_basic_method_name(starting_form, output_form);
+	}
 }

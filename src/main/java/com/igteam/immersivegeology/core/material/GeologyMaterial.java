@@ -285,7 +285,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.stage_set.add(stage);
     }
 
-    protected MaterialInterface<?> getProductionMaterial()
+    public MaterialInterface<?> getProductionMaterial()
     {
         LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
         if(set.isEmpty()) {
@@ -297,7 +297,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return list.get(0);
     }
 
-    protected MaterialInterface<?> getByproductMaterial()
+    public MaterialInterface<?> getByproductMaterial()
     {
         LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
         if(set.size() < 2) {
@@ -309,7 +309,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return list.get(1);
     }
 
-    protected MaterialInterface<?> getTraceMaterials(int index)
+    public MaterialInterface<?> getTraceMaterials(int index)
     {
         LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
         if(set.size() < (index + 1)) {

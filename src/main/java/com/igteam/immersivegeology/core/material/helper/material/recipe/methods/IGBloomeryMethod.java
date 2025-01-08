@@ -47,12 +47,7 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	public void create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time){
 		this.name = create_basic_method_name(input, output);
 
-		MaterialInterface<?> outputMaterial = parentMaterial.getPrimaryMaterial().isPresent() ? parentMaterial.getPrimaryMaterial().get() : null;
-		if(outputMaterial == null)
-		{
-			IGLib.IG_LOGGER.info("Null Primary Material for {}", parentMaterial.getName());
-			return;
-		}
+		MaterialInterface<?> outputMaterial = parentMaterial.getProductionMaterial();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;
