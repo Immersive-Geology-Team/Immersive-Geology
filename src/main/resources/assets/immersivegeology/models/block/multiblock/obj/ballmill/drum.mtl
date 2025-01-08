@@ -9,4 +9,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd C:/Users/Admin/work/Immersive-Geology/src/main/resources/assets/immersivegeology/textures/block/multiblock/ballmill/ballmill_drum.png
+map_Kd immersivegeology:block/multiblock/ballmill/ballmill_drum
