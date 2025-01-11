@@ -62,19 +62,19 @@ public class MaterialAlumina extends MaterialMineral {
     {
         super.setupRecipeStages();
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
-                .create("crushed_ore" + getName() + "_to_dust",getItemTag(ItemCategoryFlags.CRUSHED_ORE), getStack(ItemCategoryFlags.DUST, 1), 10000, 100);
+                .create("crushed_ore" + getName() + "_to_dust",getItemTag(ItemCategoryFlags.CRUSHED_ORE), getStack(ItemCategoryFlags.POWDER, 1), 10000, 100);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
-                .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST), FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.DUST), IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT), null, null, 200, 51200);
+                .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST), FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT), null, null, 200, 51200);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "dust_"+getName()+"_to_ingot",
-                        getItemTag(ItemCategoryFlags.DUST), 1,
+                        getItemTag(ItemCategoryFlags.POWDER), 1,
                         MetalEnum.Aluminum.getStack(ItemCategoryFlags.INGOT),
-                        MineralEnum.Cryolite.getStack(ItemCategoryFlags.DUST),
+                        MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER),
                         0.25f,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
-                        new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.DUST), 1))
+                        new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 1))
                 .setTimeAndEnergy(200, 10240);
     }
 }

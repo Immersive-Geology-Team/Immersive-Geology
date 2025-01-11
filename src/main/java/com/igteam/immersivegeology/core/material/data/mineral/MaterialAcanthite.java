@@ -71,25 +71,22 @@ public class MaterialAcanthite extends MaterialMineral {
                 200                                            // Sulfur Dioxide Output Amount
         );
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.SLAG, ItemCategoryFlags.DUST, 100, 100);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.SLAG, 2, ItemCategoryFlags.DUST, 4, 100, 100);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.SLAG, 2, getProductionMaterial().instance(), ItemCategoryFlags.DUST, 3, 100, 100);
+        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("slag_" + getName() + "_to_metal",
+                getItemTag(ItemCategoryFlags.SLAG), getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
 
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("slag_" + getName() + "_to_metal", getItemTag(ItemCategoryFlags.SLAG), getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
-
-        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create("slag_"+getName() +"_to_dust", getItemTag(ItemCategoryFlags.SLAG), getStack(ItemCategoryFlags.DUST, 1), getItemTag(ItemCategoryFlags.DUST), 3000, 200, 0.25f);
+        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create("slag_"+getName() +"_to_dust", getItemTag(ItemCategoryFlags.SLAG), getStack(ItemCategoryFlags.POWDER, 1), getItemTag(ItemCategoryFlags.POWDER), 3000, 200, 0.25f);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "grit_to_silver_slurry",
                 getByproductMaterial().getStack(ItemCategoryFlags.COMPOUND_DUST),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(getProductionMaterial(), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                IngredientWithSize.of(getStack(ItemCategoryFlags.DUST, IGLib.DUST_TO_SLURRY_AMOUNT)),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, IGLib.DUST_TO_SLURRY_AMOUNT)),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT), null, null,
                 200, 51200);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create("slurry_" + getProductionMaterial().getName() + "_to_crystal", getProductionMaterial().getStack(ItemCategoryFlags.CRYSTAL), ChemicalEnum.HydrochloricAcid.getSlurryTagWith(getProductionMaterial()), IGLib.SLURRY_TO_CRYSTAL_MB, 300, 38400);
 
         IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(getByproductMaterial().getItemTag(ItemCategoryFlags.COMPOUND_DUST),
-                getByproductMaterial().getStack(ItemCategoryFlags.DUST), getTraceMaterials(2).getStack(ItemCategoryFlags.DUST), 0.2f, 60, 100);
+                getByproductMaterial().getStack(ItemCategoryFlags.POWDER), getTraceMaterials(2).getStack(ItemCategoryFlags.POWDER), 0.2f, 60, 100);
     }
 }

@@ -36,7 +36,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	}
 
 	public void create(IFlagType<?> input_form) {
-		this.name = create_advanced_method_name(input_form, null);
+		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(input_form, 1);
 		this.input = new IngredientWithSize( parentMaterial.getItemTag(input_form), 1);
 		this.time = 800;

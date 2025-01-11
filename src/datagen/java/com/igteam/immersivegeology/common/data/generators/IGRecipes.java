@@ -13,7 +13,6 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
@@ -219,9 +218,9 @@ public class IGRecipes extends RecipeProvider
 			}
 			if(material instanceof MetalEnum)
 			{
-				if(material.hasFlag(ItemCategoryFlags.CRYSTAL) && material.hasFlag(ItemCategoryFlags.DUST) &! (material.instance() instanceof MaterialMetalAlloy))
+				if(material.hasFlag(ItemCategoryFlags.CRYSTAL) && material.hasFlag(ItemCategoryFlags.POWDER) &! (material.instance() instanceof MaterialMetalAlloy))
 				{
-					IGMethodBuilder.crushing(material.instance(), IGStageDesignation.EXTRACTION).create(material.getName() + "_crystal_to_dust", material.getItemTag(ItemCategoryFlags.CRYSTAL), material.getStack(ItemCategoryFlags.DUST, 1), 3000, 200);
+					IGMethodBuilder.crushing(material.instance(), IGStageDesignation.EXTRACTION).create(material.getName() + "_crystal_to_dust", material.getItemTag(ItemCategoryFlags.CRYSTAL), material.getStack(ItemCategoryFlags.POWDER, 1), 3000, 200);
 				}
 			}
 		}
@@ -231,10 +230,10 @@ public class IGRecipes extends RecipeProvider
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
 
 		NonNullList<StackWithChance> list = NonNullList.create();
-		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.DUST, 1), 0.4f));
-		list.add(1, new StackWithChance(MetalEnum.Silver.getStack(ItemCategoryFlags.DUST, 1), 0.22f));
-		list.add(2, new StackWithChance(MetalEnum.Chromium.getStack(ItemCategoryFlags.DUST, 1), 0.321f));
-		list.add(3, new StackWithChance(MetalEnum.Copper.getStack(ItemCategoryFlags.DUST, 1), 0.121f));
+		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.POWDER, 1), 0.4f));
+		list.add(1, new StackWithChance(MetalEnum.Silver.getStack(ItemCategoryFlags.POWDER, 1), 0.22f));
+		list.add(2, new StackWithChance(MetalEnum.Chromium.getStack(ItemCategoryFlags.POWDER, 1), 0.321f));
+		list.add(3, new StackWithChance(MetalEnum.Copper.getStack(ItemCategoryFlags.POWDER, 1), 0.121f));
 
 		IndustrialSluiceRecipeBuilder.builder(MetalEnum.Gold.getStack(ItemCategoryFlags.CRUSHED_ORE)).addInput(MetalEnum.Gold.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).setByproducts(list).setTime(100).setWater(100).build(consumer, new ResourceLocation(IGLib.MODID, "sluice/test_recipe"));
 	}

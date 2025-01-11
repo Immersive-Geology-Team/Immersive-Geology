@@ -1,10 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 
 public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     INGOT(1),
@@ -12,9 +8,12 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     GEAR(1),
     ROD(1),
     CLAY(0),
-    DUST(1),
+    POWDER(1),
+    GRIT (1),
     FUEL(1),
     SLAG(1),
+    PELLET(1),
+    POWDERED_SLAG(1),
     PLATE(1),
     POOR_ORE(0),
     NORMAL_ORE(0),
@@ -47,7 +46,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     public String getTagPrefix()
     {
         switch(this){
-            case INGOT,DUST,GEAR,NUGGET,PLATE,ROD,WIRE:
+            case INGOT, POWDER, GRIT, GEAR,NUGGET,PLATE,ROD,WIRE,PELLET:
                 return "s";
             default:
                 return "";

@@ -80,7 +80,7 @@ public class MaterialChalcocite extends MaterialMineral {
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(
                 "slag_to_dust",
                 getItemTag(ItemCategoryFlags.SLAG),
-                getStack(ItemCategoryFlags.DUST, 1),
+                getStack(ItemCategoryFlags.POWDER, 1),
                 3000,
                 200
         );
@@ -88,7 +88,7 @@ public class MaterialChalcocite extends MaterialMineral {
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("dust_" + getName() + "_to_slurry",
                 ItemStack.EMPTY,
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Copper, IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new IngredientWithSize(getItemTag(ItemCategoryFlags.DUST), IGLib.DUST_TO_SLURRY_AMOUNT),
+                new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.DUST_TO_SLURRY_AMOUNT),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null,
                 null,

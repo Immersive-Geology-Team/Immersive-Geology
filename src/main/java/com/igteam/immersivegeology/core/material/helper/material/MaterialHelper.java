@@ -12,13 +12,11 @@ import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -35,7 +33,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -72,7 +69,7 @@ public interface MaterialHelper {
 
                         return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
                     }
-                    case DUST ->
+                    case POWDER ->
                     {
                         return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
                     }
@@ -189,7 +186,7 @@ public interface MaterialHelper {
                     {
                         return ieMetalTags.ingot;
                     }
-                    case DUST ->
+                    case POWDER ->
                     {
                         return ieMetalTags.dust;
                     }

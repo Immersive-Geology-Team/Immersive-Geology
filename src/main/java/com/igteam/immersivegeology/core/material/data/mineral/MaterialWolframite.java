@@ -41,4 +41,11 @@ public class MaterialWolframite extends MaterialMineral {
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Manganese, MetalEnum.Tungsten));
     }
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+    }
+
 }
