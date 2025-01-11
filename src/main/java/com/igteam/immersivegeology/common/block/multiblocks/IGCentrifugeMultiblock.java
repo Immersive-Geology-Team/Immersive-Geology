@@ -35,6 +35,12 @@ public class IGCentrifugeMultiblock extends IGTemplateMultiblock
         consumer.accept(new CentrifugeClientData(INSTANCE, 0.5, 0.5, 0.5));
     }
 
+    @Override
+    public String getName()
+    {
+        return "Centrifuge";
+    }
+
     public static class CentrifugeClientData extends IGClientMultiblockProperties {
         public CentrifugeClientData(TemplateMultiblock multiblock, double offX, double offY, double offZ){
             super(multiblock, offX, offY, offZ);

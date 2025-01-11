@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/anatase"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_anatase"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_anatase"
+      }
+    }
+  ],
   "time": 100
 }

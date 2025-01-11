@@ -66,7 +66,7 @@ public class MaterialAnatase extends MaterialMineral {
         super.setupRecipeStages();
 
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create( "crushed_ore_" +getName() + "_to_dust",
-                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                getStack(ItemCategoryFlags.CRUSHED_ORE, 1),
                 getStack(ItemCategoryFlags.POWDER, 1), 6000, 200);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(

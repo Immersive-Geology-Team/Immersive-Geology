@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/hematite"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_hematite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_hematite"
+      }
+    }
+  ],
   "time": 100
 }

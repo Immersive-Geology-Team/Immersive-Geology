@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/osmium"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_osmium"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_osmium"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_osmium"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_osmium"
+      }
+    }
+  ],
   "time": 100
 }

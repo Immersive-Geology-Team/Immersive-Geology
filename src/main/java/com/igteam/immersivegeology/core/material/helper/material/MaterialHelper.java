@@ -234,7 +234,7 @@ public interface MaterialHelper {
             return (IOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
         } catch(Exception exception)
         {
-            IGLib.IG_LOGGER.warn("No Ore for this combination exists currently: see Mineral[{}] and Stone[{}] and Ore Grade[{}]", getName(), stone.getName(), richness.getSanitizedName());
+            //IGLib.IG_LOGGER.warn("No Ore for this combination exists currently: see Mineral[{}] and Stone[{}] and Ore Grade[{}]", getName(), stone.getName(), richness.getSanitizedName());
             return null;
         }
     }

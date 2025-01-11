@@ -39,4 +39,10 @@ public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
         consumer.accept(new IGClientMultiblockProperties(this, 6.5, 1.5, 1.5));
     }
+
+    @Override
+    public String getName()
+    {
+        return "Rotary Kiln";
+    }
 }

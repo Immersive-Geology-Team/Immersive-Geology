@@ -40,4 +40,10 @@ public class IGTrommelMultiblock extends IGTemplateMultiblock
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
 		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "Trommel";
+	}
 }

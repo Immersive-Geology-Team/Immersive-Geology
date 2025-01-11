@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/thorite"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_thorite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_thorite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_thorite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_thorite"
+      }
+    }
+  ],
   "time": 100
 }

@@ -34,16 +34,18 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 	public final Ingredient itemIn;
 	Lazy<Integer> totalProcessWater;
 	Lazy<Integer> totalProcessTime;
+	Lazy<Integer> totalProcessEnergy;
 	Lazy<NonNullList<StackWithChance>> byproducts;
 
-	public <T extends Recipe<?>> IndustrialSluiceRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, NonNullList<StackWithChance> byproducts, int water, int time)
+	public <T extends Recipe<?>> IndustrialSluiceRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, NonNullList<StackWithChance> byproducts, int water, int time, int energy)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.SLUICE, id);
 		this.itemOutput = output;
 		this.itemIn = itemIn;
 		this.byproducts = Lazy.of(() -> byproducts);
 		this.totalProcessWater = Lazy.of(() -> water);
-		this.totalProcessTime = Lazy.of(() -> time);
+		this.totalProcessTime = Lazy.of(() -> time);;
+		this.totalProcessEnergy = Lazy.of(() -> energy);
 
 		NonNullList<ItemStack> outputs = NonNullList.createWithCapacity(byproducts.size() + 1);
 		List<ItemStack> stacks = byproducts.stream().map((s) -> s.stack().get()).toList();

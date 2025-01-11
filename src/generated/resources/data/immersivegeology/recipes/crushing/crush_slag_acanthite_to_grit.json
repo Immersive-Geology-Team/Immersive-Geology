@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:slag_acanthite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_acanthite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:grit_acanthite"
+      }
+    }
+  ],
+  "time": 50
+}

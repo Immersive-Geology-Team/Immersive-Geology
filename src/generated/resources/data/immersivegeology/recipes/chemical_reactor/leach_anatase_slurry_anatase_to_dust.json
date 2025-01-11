@@ -2,7 +2,7 @@
   "type": "immersivegeology:chemical_reactor",
   "energy": 51200,
   "fluidInputA": {
-    "amount": 100,
+    "amount": 216,
     "tag": "forge:hydrochloricacid_titanium"
   },
   "fluidInputB": {
@@ -14,10 +14,10 @@
     "fluid": "immersivegeology:fluid_brine"
   },
   "itemInput": {
-    "tag": "forge:dusts/sodium"
+    "tag": "forge:powders/sodium"
   },
   "itemResult": {
-    "item": "immersivegeology:dust_titanium"
+    "item": "immersivegeology:powder_titanium"
   },
   "time": 200
 }

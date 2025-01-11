@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "energy": 6000,
   "input": {
-    "tag": "forge:crushed_ore/anatase"
+    "item": "immersivegeology:crushed_ore_anatase"
   },
   "result": {
-    "item": "immersivegeology:dust_anatase"
+    "item": "immersivegeology:powder_anatase"
   },
   "secondaries": [],
   "time": 200

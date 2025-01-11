@@ -40,6 +40,12 @@ public class IGCrystalizerMultiblock extends IGTemplateMultiblock
         consumer.accept(new CrystallizerClientData(INSTANCE, 0.5, 0.5, 0.5));
     }
 
+    @Override
+    public String getName()
+    {
+        return "Crystallizer";
+    }
+
     public static class CrystallizerClientData extends IGClientMultiblockProperties {
         public CrystallizerClientData(TemplateMultiblock multiblock, double offX, double offY, double offZ){
             super(multiblock, offX, offY, offZ);

@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_vanadium"
+  },
+  "result": {
+    "item": "immersivegeology:grit_vanadium"
+  },
+  "secondaries": [],
+  "time": 200
+}

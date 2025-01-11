@@ -5,9 +5,21 @@
     "tag": "forge:normal_ore/lead"
   },
   "result": {
-    "count": 3,
     "item": "immersivegeology:dirty_crushed_ore_lead"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_lead"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_lead"
+      }
+    }
+  ],
   "time": 100
 }

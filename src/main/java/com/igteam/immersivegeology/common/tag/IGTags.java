@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -37,10 +38,13 @@ public class IGTags
 	public static HashMap<IFlagType<?>, HashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new HashMap<>();
 	public static HashMap<IFlagType<?>, HashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new HashMap<>();
 
-
+	private static boolean initialized = false;
 	public static void initialize()
 	{
-		IGLib.IG_LOGGER.info("Initializing Immersive Geology Tags");
+		if (initialized) return;  // Prevent reinitialization
+		initialized = true;
+
+		IGLib.IG_LOGGER.info("======== Initializing Immersive Geology Tags ========");
 		for(ItemCategoryFlags itemFlag : ItemCategoryFlags.values())
 		{
 			ITEM_TAG_HOLDER.put(itemFlag, new HashMap<>());
@@ -63,7 +67,10 @@ public class IGTags
 		{
 			if(materialInterface.hasFlag(BlockCategoryFlags.FLUID)) {
 				String registryKey = BlockCategoryFlags.FLUID.getRegistryKey(materialInterface);
-				if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) continue;
+				if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) {
+					IGLib.IG_LOGGER.info("Skipping Fluid name {} as it is not in the Fluid Registration Map", registryKey);
+					continue;
+				}
 
 				MaterialHelper base = materialInterface.instance();
 				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase()));
@@ -72,17 +79,25 @@ public class IGTags
 
 			if(materialInterface.hasFlag(BlockCategoryFlags.SLURRY)) {
 				for(MetalEnum metal : MetalEnum.values()){
-					String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, metal);
-					if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) continue;
+					if(materialInterface.instance() instanceof MaterialChemical chemical)
+					{
+						if(!chemical.hasSlurryMetal(metal)) {
+							//IGLib.IG_LOGGER.info("Slurry don't exist? {} -> {}", chemical.getName(), metal.getName());
+							continue;
+						}
+						String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, metal);
+						if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) {
+							IGLib.IG_LOGGER.info("Skipping Slurry name {} as it is not in the Fluid Registration Map", registryKey);
+							continue;
+						}
 
-					MaterialHelper base = materialInterface.instance();
-					TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase() + "_" + metal.getName().toLowerCase()));
-					slurry_map.put(getWrapFromSet(Set.of(base, metal.instance())), tag);
+						MaterialHelper base = materialInterface.instance();
+						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase() + "_" + metal.getName().toLowerCase()));
+						slurry_map.put(getWrapFromSet(Set.of(base, metal.instance())), tag);
+					}
 				}
 			}
-
 		}
-
 	}
 
 	private static void createWrapperForCategory(IFlagType<?> category, GeologyMaterial... materials)
@@ -106,7 +121,10 @@ public class IGTags
 		return new ResourceLocation("forge", category.getName() + category.getTagPrefix() + "/" + material_set_name);
 	}
 
-
+	public static boolean isInitialized()
+	{
+		return initialized;
+	}
 
 	public static String getWrapFromSet(Set<MaterialHelper> matSet){
 		StringJoiner value = new StringJoiner(",");

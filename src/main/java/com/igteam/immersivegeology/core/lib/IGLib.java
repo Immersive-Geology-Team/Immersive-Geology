@@ -26,9 +26,9 @@ public class IGLib {
     public static final Logger IG_LOGGER = LogUtils.getLogger();
 
     // These should probably stay the same
-    public static final int SLURRY_TO_CRYSTAL_MB = 100;
-    public static final int ACID_TO_SLURRY_AMOUNT = 100;
-    public static final int SLURRY_FROM_ACID_AMOUNT = 100;
+    public static final int SLURRY_TO_CRYSTAL_MB = 144;
+    public static final int ACID_TO_SLURRY_AMOUNT = 250;
+    public static final int SLURRY_FROM_ACID_AMOUNT = 216;
 
     public static final float TWO_ACID_USED_MULTIPLIER = 0.5f;
     public static final float THREE_ACID_USED_MULTIPLIER = 0.5f;

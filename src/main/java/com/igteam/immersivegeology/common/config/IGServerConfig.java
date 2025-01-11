@@ -8,12 +8,17 @@
 
 package com.igteam.immersivegeology.common.config;
 
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.electronwill.nightconfig.core.Config;
 import com.google.common.base.Preconditions;
+import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
+import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,11 +33,13 @@ public class IGServerConfig
 {
 	public static final ForgeConfigSpec CONFIG_SPEC;
 	public static final Ores ORES;
+	public static final Machines MACHINES;
 	public static final VanillaOreRemoval REMOVAL;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ORES = new IGServerConfig.Ores(builder);
+		MACHINES = new IGServerConfig.Machines(builder);
 		REMOVAL = new IGServerConfig.VanillaOreRemoval(builder);
 		CONFIG_SPEC = builder.build();
 	}
@@ -68,6 +75,43 @@ public class IGServerConfig
 			shouldRemoveIron = builder.comment("Should IG remove Minecrafts Iron Ore Veins?").define("remove_iron", true);
 			shouldRemoveCopper = builder.comment("Should IG remove Minecrafts Copper Ore Veins?").define("remove_copper", true);
 			builder.pop();
+		}
+	}
+
+	public static class Machines
+	{
+		public final Map<IGConfigurableMachine, MachineConfig> machines = new HashMap<>();
+
+		Machines(ForgeConfigSpec.Builder builder)
+		{
+			builder.push("machines");
+				for(TemplateMultiblock mb : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
+				{
+					if(mb instanceof IGConfigurableMachine config)
+					{
+						IGLib.IG_LOGGER.info("MB: {}", mb.getUniqueName().getNamespace().toLowerCase());
+						machines.put(config, new MachineConfig(builder, config));
+					}
+				}
+			builder.pop();
+		}
+
+		public static class MachineConfig
+		{
+			public final ForgeConfigSpec.IntValue input_batch_size;
+			public final ForgeConfigSpec.IntValue output_batch_size;
+			public final ForgeConfigSpec.IntValue default_time;
+			public final ForgeConfigSpec.IntValue default_energy;
+
+			public MachineConfig(ForgeConfigSpec.Builder builder, IGConfigurableMachine machine)
+			{
+				this.input_batch_size = builder.comment("What should the default input batch size be").defineInRange("input_batch_size", machine.getDefaultBatchInput(), 1, 64);
+				{
+					this.output_batch_size = builder.comment("What should the default output batch size be").defineInRange("output_batch_size", machine.getDefaultBatchOutput(), 1, 64);
+					this.default_energy = builder.comment("The default Total Energy Cost for a Recipe made with this machine").defineInRange("energy", machine.getDefaultEnergy(), 0, 999999);
+					this.default_time = builder.comment("he default time for a Recipe to complete with this machine").defineInRange("time", machine.getDefaultTime(), 0, 999999);
+				}
+			}
 		}
 	}
 

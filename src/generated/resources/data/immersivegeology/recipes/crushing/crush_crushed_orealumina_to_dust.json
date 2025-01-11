@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "energy": 10000,
   "input": {
-    "tag": "forge:crushed_ore/alumina"
+    "item": "immersivegeology:crushed_ore_alumina"
   },
   "result": {
-    "item": "immersivegeology:dust_alumina"
+    "item": "immersivegeology:powder_alumina"
   },
   "secondaries": [],
   "time": 100

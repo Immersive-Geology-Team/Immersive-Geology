@@ -105,7 +105,7 @@ public class IGItemModelProvider extends ItemModelProvider {
     private void setItemTexture(ModelBuilder<?> model, IGGenericOreItem item)
     {
         ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase() + "/" + item.getOreRichness().getSanitizedName());
-        IGLib.IG_LOGGER.info("Testing: {}", coloredTexture);
+        //IGLib.IG_LOGGER.info("Testing: {}", coloredTexture);
         if(EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES))
         {
             model.texture("layer0", coloredTexture);

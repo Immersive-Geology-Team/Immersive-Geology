@@ -34,4 +34,10 @@ public class IGChemicalReactorMultiblock extends IGTemplateMultiblock
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
 		consumer.accept(new IGClientMultiblockProperties(this, 4.5, 0.5, 4.5));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "Chemical Reactor";
+	}
 }

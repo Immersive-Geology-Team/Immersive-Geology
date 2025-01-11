@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/chalcopyrite"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_chalcopyrite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_chalcopyrite"
+      }
+    }
+  ],
   "time": 100
 }

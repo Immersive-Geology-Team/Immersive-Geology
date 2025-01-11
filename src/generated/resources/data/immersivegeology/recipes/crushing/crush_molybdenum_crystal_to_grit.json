@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_molybdenum"
+  },
+  "result": {
+    "item": "immersivegeology:grit_molybdenum"
+  },
+  "secondaries": [],
+  "time": 200
+}

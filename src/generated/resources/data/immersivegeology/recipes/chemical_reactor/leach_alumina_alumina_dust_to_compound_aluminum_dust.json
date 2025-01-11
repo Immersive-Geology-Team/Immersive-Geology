@@ -10,7 +10,7 @@
     "fluid": "minecraft:empty"
   },
   "itemInput": {
-    "tag": "forge:dusts/alumina"
+    "tag": "forge:powders/alumina"
   },
   "itemResult": {
     "item": "immersivegeology:compound_dust_aluminum"

@@ -5,9 +5,21 @@
     "tag": "forge:normal_ore/thorite"
   },
   "result": {
-    "count": 3,
     "item": "immersivegeology:dirty_crushed_ore_thorite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_thorite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_thorite"
+      }
+    }
+  ],
   "time": 100
 }

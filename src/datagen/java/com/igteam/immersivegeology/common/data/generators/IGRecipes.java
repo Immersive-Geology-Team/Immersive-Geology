@@ -205,35 +205,41 @@ public class IGRecipes extends RecipeProvider
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
 				for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
 				{
-					int amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 2 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 3 : 5);
+					float chance = 0.66f;
 					int nerfed_amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 1 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 2 : 3);
 					int time = 100;
 					int energy = 100;
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(stone_work_hammer).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_stone_hammer");
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(bronze_work_hammer).unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_bronze_hammer");
-					CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, amount)).addInput(material.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + material.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
+
+					CrusherRecipeBuilder builder = CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1));
+					builder.addSecondary(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance);
+					if(ore.equals(ItemCategoryFlags.NORMAL_ORE) || ore.equals(ItemCategoryFlags.RICH_ORE)) builder.addSecondary(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance / 2);
+					if(ore.equals(ItemCategoryFlags.RICH_ORE)) builder.addSecondary(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance / 2);
+
+					builder.addInput(material.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + material.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
 				}
 				ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer, "wash_dirty_crushed_" + material.getName().toLowerCase());
 				GravitySeparatorRecipeBuilder.builder(material.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(material.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ material.getName() + "_to_crushed"));
 			}
+
 			if(material instanceof MetalEnum)
 			{
-				if(material.hasFlag(ItemCategoryFlags.CRYSTAL) && material.hasFlag(ItemCategoryFlags.POWDER) &! (material.instance() instanceof MaterialMetalAlloy))
+				if(material.hasFlag(ItemCategoryFlags.CRYSTAL) && material.hasFlag(ItemCategoryFlags.GRIT) &! (material.instance() instanceof MaterialMetalAlloy))
 				{
-					IGMethodBuilder.crushing(material.instance(), IGStageDesignation.EXTRACTION).create(material.getName() + "_crystal_to_dust", material.getItemTag(ItemCategoryFlags.CRYSTAL), material.getStack(ItemCategoryFlags.POWDER, 1), 3000, 200);
+					IGMethodBuilder.crushing(material.instance(), IGStageDesignation.EXTRACTION).create(material.getName() + "_crystal_to_grit", material.getStack(ItemCategoryFlags.CRYSTAL), material.getStack(ItemCategoryFlags.GRIT, 1), 3000, 200);
 				}
 			}
 		}
 
-		BloomeryRecipeBuilder.builder(MetalEnum.Tin.getStack(ItemCategoryFlags.INGOT)).addInput(new IngredientWithSize(MineralEnum.Cassiterite.getItemTag(ItemCategoryFlags.CRUSHED_ORE), 2)).setTime(400).build(consumer, IGLib.rl("bloomery/cassiterite_to_ingot"));
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
 
 		NonNullList<StackWithChance> list = NonNullList.create();
-		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.POWDER, 1), 0.4f));
-		list.add(1, new StackWithChance(MetalEnum.Silver.getStack(ItemCategoryFlags.POWDER, 1), 0.22f));
-		list.add(2, new StackWithChance(MetalEnum.Chromium.getStack(ItemCategoryFlags.POWDER, 1), 0.321f));
-		list.add(3, new StackWithChance(MetalEnum.Copper.getStack(ItemCategoryFlags.POWDER, 1), 0.121f));
+		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.GRIT, 1), 0.4f));
+		list.add(1, new StackWithChance(MetalEnum.Silver.getStack(ItemCategoryFlags.GRIT, 1), 0.22f));
+		list.add(2, new StackWithChance(MetalEnum.Chromium.getStack(ItemCategoryFlags.GRIT, 1), 0.321f));
+		list.add(3, new StackWithChance(MetalEnum.Copper.getStack(ItemCategoryFlags.GRIT, 1), 0.121f));
 
 		IndustrialSluiceRecipeBuilder.builder(MetalEnum.Gold.getStack(ItemCategoryFlags.CRUSHED_ORE)).addInput(MetalEnum.Gold.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).setByproducts(list).setTime(100).setWater(100).build(consumer, new ResourceLocation(IGLib.MODID, "sluice/test_recipe"));
 	}

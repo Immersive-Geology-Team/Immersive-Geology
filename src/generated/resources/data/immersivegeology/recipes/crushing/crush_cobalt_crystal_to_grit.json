@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_cobalt"
+  },
+  "result": {
+    "item": "immersivegeology:grit_cobalt"
+  },
+  "secondaries": [],
+  "time": 200
+}

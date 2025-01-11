@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/bauxite"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_bauxite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_bauxite"
+      }
+    }
+  ],
   "time": 100
 }

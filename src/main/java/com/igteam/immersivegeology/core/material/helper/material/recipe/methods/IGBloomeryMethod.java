@@ -38,14 +38,14 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	private ItemStack itemResult;
 
 	public void create(IFlagType<?> input, int inputAmount, MaterialHelper outputMaterial, IFlagType<?> output, int outputAmount, int time){
-		this.name = create_basic_method_name(input, output);
+		this.name = input.getName().toLowerCase() + "_" + parentMaterial.getName().toLowerCase() + "_to_" + output.getName().toLowerCase() + "_" + outputMaterial.getName().toLowerCase();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;
 	}
 
 	public void create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time){
-		this.name = create_basic_method_name(input, output);
+		this.name = create_advanced_method_name(input, output);
 
 		MaterialInterface<?> outputMaterial = parentMaterial.getProductionMaterial();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
@@ -75,6 +75,7 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
+		IGLib.IG_LOGGER.info("Attempting Build for Bloomery Method {}", name);
 		try {
 			BloomeryRecipeBuilder builder = BloomeryRecipeBuilder.builder(itemResult);
 			builder.addInput(itemInput);
@@ -84,7 +85,7 @@ public class IGBloomeryMethod extends IGRecipeMethod
 		} catch(Exception e)
 		{
 			IGLib.IG_LOGGER.error("Exception Building Immersive Geology Crude Bloomery Recipe: {}", e.getMessage());
+			return false;
 		}
-		return false;
 	}
 }

@@ -98,4 +98,35 @@ public class IGBallmillMultiblock extends IGTemplateMultiblock {
             }
         });
     }
+
+    @Override
+    public String getName()
+    {
+        return "Ballmill";
+    }
+
+
+    @Override
+    public int getDefaultBatchInput()
+    {
+        return 4;
+    }
+
+    @Override
+    public int getDefaultBatchOutput()
+    {
+        return 4;
+    };
+
+    @Override
+    public int getDefaultTime()
+    {
+        return 800;
+    };
+
+    @Override
+    public int getDefaultEnergy()
+    {
+        return 64000;
+    };
 }

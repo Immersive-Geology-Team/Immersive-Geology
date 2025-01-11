@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "energy": 3000,
   "input": {
-    "tag": "forge:slag/chalcocite"
+    "item": "immersivegeology:slag_chalcocite"
   },
   "result": {
-    "item": "immersivegeology:dust_chalcocite"
+    "item": "immersivegeology:powder_chalcocite"
   },
   "secondaries": [],
   "time": 200

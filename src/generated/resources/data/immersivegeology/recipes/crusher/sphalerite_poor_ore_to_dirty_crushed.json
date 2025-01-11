@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/sphalerite"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_sphalerite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_sphalerite"
+      }
+    }
+  ],
   "time": 100
 }

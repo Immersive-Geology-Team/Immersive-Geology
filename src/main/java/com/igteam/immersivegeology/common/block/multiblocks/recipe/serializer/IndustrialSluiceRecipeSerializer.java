@@ -43,7 +43,8 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 
 		int time = GsonHelper.getAsInt(json, "time");
 		int water = GsonHelper.getAsInt(json, "water");
-		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time);
+		int energy = GsonHelper.getAsInt(json, "energy");
+		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time, energy);
 	}
 
 	private NonNullList<StackWithChance> readByproductsFromJson(JsonObject obj) {
@@ -71,7 +72,8 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 		Ingredient input = Ingredient.fromNetwork(buffer);
 		int time = buffer.readInt();
 		int water = buffer.readInt();
-		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time);
+		int energy = buffer.readInt();
+		return new IndustrialSluiceRecipe(resourceLocation, input, primary, byproducts, water, time, energy);
 	}
 
 	private NonNullList<StackWithChance> readByproducts(FriendlyByteBuf buffer)
@@ -107,5 +109,6 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 		recipe.itemIn.toNetwork(buffer);
 		buffer.writeInt(recipe.getTotalProcessTime());
 		buffer.writeInt(recipe.getTotalProcessWater());
+		buffer.writeInt(recipe.getTotalProcessEnergy());
 	}
 }

@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -33,12 +34,12 @@ public class IGCrushingMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parentMaterial, stage) {});
 	}
 	private ItemStack output;
-	private TagKey<Item> input, secondary;
+	private IngredientWithSize input, secondary;
 	private float chance = 0;
 	private int energy, time;
 	private String name;
 
-	public void create(String method_name, TagKey<Item> input,ItemStack output, int energy, int time){
+	public void create(String method_name, IngredientWithSize input, ItemStack output, int energy, int time){
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
@@ -46,13 +47,31 @@ public class IGCrushingMethod extends IGRecipeMethod
 		this.time = time;
 	}
 
-	public void create(String method_name, TagKey<Item> input, ItemStack output, TagKey<Item> secondary, int energy, int time, float chance){
+	public void create(String method_name, ItemStack input, ItemStack output, int energy, int time){
+		this.input = IngredientWithSize.of(input);
+		this.output = output;
+		this.name = method_name;
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(String method_name, IngredientWithSize input, ItemStack output, IngredientWithSize secondary, int energy, int time, float chance){
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
 		this.energy = energy;
 		this.time = time;
 		this.secondary = secondary;
+		this.chance = chance;
+	}
+
+	public void create(String method_name, ItemStack input, ItemStack output, ItemStack secondary, int energy, int time, float chance){
+		this.input = IngredientWithSize.of(input);
+		this.output = output;
+		this.name = method_name;
+		this.energy = energy;
+		this.time = time;
+		this.secondary = IngredientWithSize.of(secondary);
 		this.chance = chance;
 	}
 
@@ -81,7 +100,7 @@ public class IGCrushingMethod extends IGRecipeMethod
 		try
 		{
 			CrusherRecipeBuilder builder = CrusherRecipeBuilder.builder(output).addInput(input).setTime(time).setEnergy(energy);
-			if(secondary != null) builder.addSecondary(secondary, chance);
+			if(chance > 0) builder.addSecondary(secondary, chance);
 			builder.build(consumer, getLocation());
 			return true;
 		}catch(Exception e)

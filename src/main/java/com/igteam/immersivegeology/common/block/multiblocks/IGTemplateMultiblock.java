@@ -22,6 +22,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMulti
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
 import com.igteam.immersivegeology.common.item.IGMBFormationItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +44,7 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 
-public abstract class IGTemplateMultiblock extends TemplateMultiblock
+public abstract class IGTemplateMultiblock extends TemplateMultiblock implements IGConfigurableMachine
 {
     private final MultiblockRegistration<?> logic;
 
@@ -131,6 +132,29 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock
         } else if (be != null) {
             IELogger.logger.error("Expected multiblock TE at {}, got {}", pos, be);
         }
-
     }
+
+    @Override
+    public int getDefaultBatchInput()
+    {
+        return 1;
+    }
+
+    @Override
+    public int getDefaultBatchOutput()
+    {
+        return 1;
+    };
+
+    @Override
+    public int getDefaultTime()
+    {
+        return 100;
+    };
+
+    @Override
+    public int getDefaultEnergy()
+    {
+        return 100;
+    };
 }

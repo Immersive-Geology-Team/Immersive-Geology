@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/scheelite"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_scheelite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_scheelite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_scheelite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_scheelite"
+      }
+    }
+  ],
   "time": 100
 }

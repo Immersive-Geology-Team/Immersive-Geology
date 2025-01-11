@@ -5,9 +5,15 @@
     "tag": "forge:poor_ore/pyrolusite"
   },
   "result": {
-    "count": 2,
     "item": "immersivegeology:dirty_crushed_ore_pyrolusite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_pyrolusite"
+      }
+    }
+  ],
   "time": 100
 }

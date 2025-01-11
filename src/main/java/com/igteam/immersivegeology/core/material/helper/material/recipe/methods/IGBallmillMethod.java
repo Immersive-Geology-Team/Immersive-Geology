@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BallmillRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -40,7 +41,7 @@ public class IGBallmillMethod extends IGRecipeMethod
 
 	public void create(IFlagType<?> input_form, IFlagType<?> output_form) {
 		this.name = create_advanced_method_name(input_form, output_form);
-		this.output = parentMaterial.getStack(input_form, 1);
+		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize( parentMaterial.getItemTag(input_form), 1);
 		this.time = 800;
 		this.energy = 64000;
@@ -48,7 +49,7 @@ public class IGBallmillMethod extends IGRecipeMethod
 
 	public void create(IFlagType<?> input_form, IFlagType<?> output_form, int time, int energy) {
 		this.name = create_advanced_method_name(input_form, output_form);
-		this.output = parentMaterial.getStack(input_form, 1);
+		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize( parentMaterial.getItemTag(input_form), 1);
 		this.time = time;
 		this.energy = energy;
@@ -56,7 +57,7 @@ public class IGBallmillMethod extends IGRecipeMethod
 
 	public void create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, int output_amount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
-		this.output = parentMaterial.getStack(input_form, input_amount);
+		this.output = parentMaterial.getStack(output_form, input_amount);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), output_amount);
 		this.time = time;
 		this.energy = energy;
@@ -64,7 +65,7 @@ public class IGBallmillMethod extends IGRecipeMethod
 
 	public void create(MaterialHelper input_mat, IFlagType<?> input_form, int input_amount, MaterialHelper output_mat, IFlagType<?> output_form, int output_amount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
-		this.output = input_mat.getStack(input_form, input_amount);
+		this.output = output_mat.getStack(output_form, input_amount);
 		this.input = new IngredientWithSize(output_mat.getItemTag(input_form), output_amount);
 		this.time = time;
 		this.energy = energy;
@@ -94,7 +95,7 @@ public class IGBallmillMethod extends IGRecipeMethod
 	{
 		try
 		{
-			RotaryKilnRecipeBuilder builder = RotaryKilnRecipeBuilder.builder(output);
+			BallmillRecipeBuilder builder = BallmillRecipeBuilder.builder(output);
 			builder.addInput(input);
 			builder.setEnergy(energy);
 			builder.setTime(time);

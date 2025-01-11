@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_stainlesssteel"
+  },
+  "result": {
+    "item": "immersivegeology:grit_stainlesssteel"
+  },
+  "secondaries": [],
+  "time": 200
+}

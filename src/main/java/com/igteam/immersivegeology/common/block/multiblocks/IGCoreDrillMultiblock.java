@@ -57,6 +57,12 @@ public class IGCoreDrillMultiblock extends IGTemplateMultiblock {
         consumer.accept(new CoredrillClientData(this, 7.5, 7.5, 7.5));
     }
 
+    @Override
+    public String getName()
+    {
+        return "Core Drill";
+    }
+
     public static class CoredrillClientData extends IGClientMultiblockProperties {
         public CoredrillClientData(IGTemplateMultiblock multiblock, double offX, double offY, double offZ){
             super(multiblock, offX, offY, offZ);

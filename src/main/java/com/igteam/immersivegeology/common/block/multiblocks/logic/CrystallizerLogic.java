@@ -65,10 +65,11 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,1,2, RelativeBlockFace.BACK);
+    private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(1,0,1, RelativeBlockFace.DOWN);
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(1,1,-1, RelativeBlockFace.BACK);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 
-    public static final int TANK_VOLUME = 4 *FluidType.BUCKET_VOLUME;
+    public static final int TANK_VOLUME = 4 * FluidType.BUCKET_VOLUME;
 
     @Override
     public void tickServer(IMultiblockContext<State> context) {
@@ -113,6 +114,10 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             {
                 return state.fInputCap.cast(ctx);
             }
+            if(FLUID_OUTPUT_CAP.equals(position))
+            {
+                return state.fOutputCap.cast(ctx);
+            }
         }
 
         if(cap==ForgeCapabilities.ITEM_HANDLER)
@@ -147,7 +152,9 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         public final FluidTank tank = new FluidTank(TANK_VOLUME);
+        public final FluidTank output_tank = new FluidTank(TANK_VOLUME);
         private final StoredCapability<IFluidHandler> fInputCap;
+        private final StoredCapability<IFluidHandler> fOutputCap;
         private final StoredCapability<IEnergyStorage> energyCap;
         private final CapabilityReference<IItemHandler> output;
         private final StoredCapability<IItemHandler> itemOutputCap;
@@ -170,6 +177,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
                     inventory, false, true, new IntRange(0, 1)
             ));
             this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
+            this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, false, changedAndSync));
         }
 
         @Override
@@ -177,6 +185,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             nbt.put("energy", energy.serializeNBT());
             nbt.put("processor", processor.toNBT());
             nbt.put("tank", tank.writeToNBT(new CompoundTag()));
+            nbt.put("output_tank", output_tank.writeToNBT(new CompoundTag()));
             nbt.put("inventory", inventory.serializeNBT());
         }
 
@@ -184,6 +193,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
             tank.readFromNBT(nbt.getCompound("tank"));
+            output_tank.readFromNBT(nbt.getCompound("output_tank"));
             inventory.deserializeNBT(nbt.getCompound("inventory"));
         }
 

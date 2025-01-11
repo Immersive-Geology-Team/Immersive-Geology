@@ -2,15 +2,15 @@
   "type": "immersivegeology:chemical_reactor",
   "energy": 51200,
   "fluidInputA": {
-    "amount": 100,
+    "amount": 250,
     "tag": "forge:hydrochloricacid"
   },
   "fluidResult": {
-    "amount": 100,
+    "amount": 216,
     "fluid": "immersivegeology:slurry_hydrochloricacid_titanium"
   },
   "itemInput": {
-    "tag": "forge:dusts/anatase"
+    "tag": "forge:powders/anatase"
   },
   "itemResult": [],
   "time": 200

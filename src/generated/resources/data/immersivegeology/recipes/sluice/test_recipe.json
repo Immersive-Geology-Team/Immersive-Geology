@@ -5,25 +5,25 @@
     {
       "chance": 0.4,
       "output": {
-        "item": "immersiveengineering:dust_gold"
+        "item": "immersivegeology:grit_gold"
       }
     },
     {
       "chance": 0.22,
       "output": {
-        "item": "immersiveengineering:dust_silver"
+        "item": "immersivegeology:grit_silver"
       }
     },
     {
       "chance": 0.321,
       "output": {
-        "item": "immersivegeology:dust_chromium"
+        "item": "immersivegeology:grit_chromium"
       }
     },
     {
       "chance": 0.121,
       "output": {
-        "item": "immersiveengineering:dust_copper"
+        "item": "immersivegeology:grit_copper"
       }
     }
   ],

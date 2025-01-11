@@ -74,7 +74,9 @@
   "item.immersivegeology.plate": "%s Plate",
   "item.immersivegeology.rough_ingot": "Rough %s Ingot",
   "item.immersivegeology.rough_plate": "Rough %s Plate",
-  "item.immersivegeology.dust": "%s Grit",
+  "item.immersivegeology.grit": "%s Grit",
+  "item.immersivegeology.powder": "%s Powder",
+  "item.immersivegeology.powdered_slag": "%s Slag Powder",
   "item.immersivegeology.nugget": "%s Nugget",
   "item.immersivegeology.rod": "%s Rod",
   "item.immersivegeology.gear": "%s Gear",
@@ -144,6 +146,7 @@
   "machine.immersivegeology.machine_steel_rotarykiln": "Rotary Kiln",
   "machine.immersivegeology.bloomery": "Bloomery",
   "machine.immersivegeology.hydrojet": "Hydrojet Cutter",
+  "machine.immersivegeology.ballmill": "Ballmill",
 
   "block.immersivegeology.rotarykiln": "Rotary Kiln",
   "block.immersivegeology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",
@@ -152,6 +155,7 @@
   "block.immersivegeology.chemical_reactor" : "Chemical Reactor",
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
   "block.immersivegeology.bloomery": "Crude Bloomery",
+  "block.immersivegeology.ballmill": "Ballmill",
 
   "fluid.immersivegeology.fluid": "%s",
   "fluid.immersivegeology.fluid_molten": "Molten %s",

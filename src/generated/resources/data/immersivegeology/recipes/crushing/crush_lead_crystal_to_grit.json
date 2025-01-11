@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_lead"
+  },
+  "result": {
+    "item": "immersivegeology:grit_lead"
+  },
+  "secondaries": [],
+  "time": 200
+}

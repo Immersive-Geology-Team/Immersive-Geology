@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/gold"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_gold"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_gold"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_gold"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_gold"
+      }
+    }
+  ],
   "time": 100
 }

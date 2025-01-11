@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/hubnerite"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_hubnerite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_hubnerite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_hubnerite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_hubnerite"
+      }
+    }
+  ],
   "time": 100
 }

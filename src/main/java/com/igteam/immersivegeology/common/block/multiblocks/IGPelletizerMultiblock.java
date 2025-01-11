@@ -40,4 +40,34 @@ public class IGPelletizerMultiblock extends IGTemplateMultiblock
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
 		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "Pelletizer";
+	}
+
+	@Override
+	public int getDefaultBatchInput()
+	{
+		return 8;
+	}
+
+	@Override
+	public int getDefaultBatchOutput()
+	{
+		return 8;
+	};
+
+	@Override
+	public int getDefaultTime()
+	{
+		return 800;
+	};
+
+	@Override
+	public int getDefaultEnergy()
+	{
+		return 64000;
+	};
 }

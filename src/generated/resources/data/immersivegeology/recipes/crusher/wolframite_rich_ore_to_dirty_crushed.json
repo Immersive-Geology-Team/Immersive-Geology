@@ -5,9 +5,27 @@
     "tag": "forge:rich_ore/wolframite"
   },
   "result": {
-    "count": 5,
     "item": "immersivegeology:dirty_crushed_ore_wolframite"
   },
-  "secondaries": [],
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_wolframite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_wolframite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_wolframite"
+      }
+    }
+  ],
   "time": 100
 }

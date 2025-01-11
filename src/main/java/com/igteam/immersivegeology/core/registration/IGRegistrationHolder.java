@@ -219,6 +219,7 @@ public class IGRegistrationHolder {
 
     public static void initialize()
     {
+        IGLib.IG_LOGGER.info("Starting Registration of IG Multiblocks, Items, Blocks and Fluids");
         initializeMultiblocks();
         setupFormationLists();
 
@@ -284,7 +285,7 @@ public class IGRegistrationHolder {
                         case FLUID -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
-
+                            IGLib.IG_LOGGER.info("Registration of Fluid for {}", registryKey);
                             // Still
                             registerFluid(registryKey, () -> new IGFluid.Source(material, null, blockCategory));
                             // Flowing
@@ -303,6 +304,7 @@ public class IGRegistrationHolder {
                                 {
                                     if(!chemical.hasSlurryMetal(metal)) continue;
                                     String registryKey = blockCategory.getRegistryKey(material, metal);
+                                    IGLib.IG_LOGGER.info("Registration of Slurry for {}", registryKey);
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
                                     // Still
@@ -335,6 +337,7 @@ public class IGRegistrationHolder {
                 }
             }
         }
+        IGLib.IG_LOGGER.info("Completed Registration of IG Multiblocks, Items, Blocks and Fluids");
     }
 
     public static MultiblockRegistration<?> getMB(String key){

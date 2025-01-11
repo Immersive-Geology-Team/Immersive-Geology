@@ -39,4 +39,10 @@ public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
         consumer.accept(new IGClientMultiblockProperties(this, 1.5, 0.5, 1.5));
     }
+
+    @Override
+    public String getName()
+    {
+        return "Gravity Separator";
+    }
 }

@@ -11,8 +11,12 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
@@ -30,6 +34,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 {
 	private ItemStack itemResult;
 	private Lazy<FluidTagInput> fluidInput;
+	private TagKey<Fluid> fluid_tag;
 	private int time;
 	private int energy;
 	private String name;
@@ -42,11 +47,28 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	public void create(String name, ItemStack output, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
+		if(fluid_tag == null) throw new RuntimeException("Fluid Tag is NULL... why?");
 
 		this.itemResult = output;
+		this.fluid_tag = fluidTag;
 		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
 		this.time = time;
 		this.energy = energy;
+	}
+
+	public void create(String name, ItemStack output, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
+	{
+		this.name = name;
+		if(slurry_base.instance() instanceof MaterialChemical chemical){
+			this.itemResult = output;
+			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
+			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
+			this.time = time;
+			this.energy = energy;
+			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
+		} else {
+			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
+		}
 	}
 
 	@NotNull
@@ -79,6 +101,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		} catch(Exception e)
 		{
 			IGLib.IG_LOGGER.error("Exception in Crystallizer Recipe Builder: {}", e.getMessage());
+			IGLib.IG_LOGGER.error("Fluid Tag was {}", fluid_tag.toString());
 			return false;
 		}
 	}

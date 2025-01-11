@@ -5,12 +5,12 @@
       "tag": "forge:dusts/coal_coke"
     },
     {
-      "tag": "forge:dusts/cryolite"
+      "tag": "forge:powders/cryolite"
     }
   ],
   "energy": 10240,
   "input": {
-    "tag": "forge:dusts/alumina"
+    "tag": "forge:powders/alumina"
   },
   "results": [
     {
@@ -18,7 +18,7 @@
     }
   ],
   "slag": {
-    "item": "immersivegeology:dust_cryolite"
+    "item": "immersivegeology:powder_cryolite"
   },
   "time": 200
 }

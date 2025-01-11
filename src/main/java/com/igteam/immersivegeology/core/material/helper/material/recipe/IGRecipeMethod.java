@@ -69,7 +69,8 @@ public abstract class IGRecipeMethod
 		ARC_SMELTING,
 		SYNETHESIS,
 		CUTTING,
-		REFINING;
+		REFINING,
+		PELLETIZE;
 
 		public String getMethodName()
 		{
@@ -87,6 +88,7 @@ public abstract class IGRecipeMethod
 				case CALCINATION -> {return ig("rotarykiln");}
 				case BASIC_SMELTING -> {return mc("furnace");}
 				case REFINING -> {return ig("ballmill");}
+				case PELLETIZE -> {return ig("pelletizer");}
 				case CRYSTALLIZATION -> {return ig("crystallizer");}
 			}
 			return "unknown";
