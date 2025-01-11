@@ -24,7 +24,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -68,13 +67,13 @@ public class MaterialAnatase extends MaterialMineral {
 
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create( "crushed_ore_" +getName() + "_to_dust",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getStack(ItemCategoryFlags.DUST, 1), 6000, 200);
+                getStack(ItemCategoryFlags.POWDER, 1), 6000, 200);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "dust_" + getName()+"_to_slurry",
                 ItemStack.EMPTY,
                 new FluidStack(ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Titanium), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new IngredientWithSize(getItemTag(ItemCategoryFlags.DUST), IGLib.DUST_TO_SLURRY_AMOUNT),
+                new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.DUST_TO_SLURRY_AMOUNT),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null,
                 null,
@@ -82,9 +81,9 @@ public class MaterialAnatase extends MaterialMineral {
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "slurry_" + getName()+"_to_dust",
-                MetalEnum.Titanium.getStack(ItemCategoryFlags.DUST, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
+                MetalEnum.Titanium.getStack(ItemCategoryFlags.POWDER, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
                 new FluidStack(ChemicalEnum.Brine.getFluid(BlockCategoryFlags.FLUID), 250),
-                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemCategoryFlags.DUST), 1),
+                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemCategoryFlags.POWDER), 1),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium), IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, 150),
                 null,

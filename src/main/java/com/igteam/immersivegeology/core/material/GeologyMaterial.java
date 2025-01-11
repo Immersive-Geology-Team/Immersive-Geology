@@ -134,10 +134,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
         if (pattern.getValue() instanceof ItemCategoryFlags i) {
 
             switch (i) {
-                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG -> {
+                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG, POWDERED_SLAG -> {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.getName());
                 }
-                case DUST, GEAR, INGOT, NUGGET, PLATE, ROD, WIRE, METAL_OXIDE, COMPOUND_DUST -> {
+                case GEAR, INGOT, NUGGET, PLATE, ROD, WIRE, METAL_OXIDE, COMPOUND_DUST -> {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/" + i.getName());
                 }
                 case CRYSTAL -> {

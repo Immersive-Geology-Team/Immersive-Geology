@@ -54,6 +54,7 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		this.slag = iSlag;
 		this.additives = List.of();
 		this.method_name = method_name;
+		this.chance = chance;
 		return this;
 	}
 
@@ -69,6 +70,7 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 	private List<IngredientWithSize> additives;
 	int energy, time;
 
+	private  float chance;
 	@NotNull
 	@Override
 	public RecipeMethod getMethod()

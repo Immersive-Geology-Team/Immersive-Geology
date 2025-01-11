@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical.mantle;
 
-import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -16,7 +15,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMoltenMantle extends MaterialMetal
 {
@@ -26,7 +24,7 @@ public class MaterialMoltenMantle extends MaterialMetal
 		removeMaterialFlags(BlockCategoryFlags.SLAB,
 				ItemCategoryFlags.ROD,
 				ItemCategoryFlags.WIRE,
-				ItemCategoryFlags.DUST,
+				ItemCategoryFlags.POWDER,
 				ItemCategoryFlags.METAL_OXIDE,
 				ItemCategoryFlags.COMPOUND_DUST,
 				MaterialFlags.HAS_SLURRY, ItemCategoryFlags.INGOT,

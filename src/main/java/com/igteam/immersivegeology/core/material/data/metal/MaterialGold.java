@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.common.world.FeatureMineralVein;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -16,7 +15,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialGold extends MaterialNativeMetal {
 
@@ -26,7 +24,7 @@ public class MaterialGold extends MaterialNativeMetal {
 
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);
-        addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.DUST);
+        addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);

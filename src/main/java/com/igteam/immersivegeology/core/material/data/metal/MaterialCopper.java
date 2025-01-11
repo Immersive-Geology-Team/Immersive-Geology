@@ -32,7 +32,7 @@ public class MaterialCopper extends MaterialNativeMetal {
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB);
-        addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.WIRE, ItemCategoryFlags.DUST, ItemCategoryFlags.PLATE, ItemCategoryFlags.NUGGET);
+        addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.WIRE, ItemCategoryFlags.POWDER, ItemCategoryFlags.PLATE, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);

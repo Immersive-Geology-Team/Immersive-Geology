@@ -14,7 +14,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ public interface ConfigurationHelper {
             list.add(ItemCategoryFlags.RICH_ORE);
             list.add(ItemCategoryFlags.DIRTY_CRUSHED_ORE);
             list.add(ItemCategoryFlags.CRUSHED_ORE);
-            list.add(ItemCategoryFlags.DUST);
+            list.add(ItemCategoryFlags.POWDER);
         }
 
         return list;
