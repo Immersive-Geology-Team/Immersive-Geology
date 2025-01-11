@@ -68,7 +68,8 @@ public abstract class IGRecipeMethod
 		BASIC_SMELTING,
 		ARC_SMELTING,
 		SYNETHESIS,
-		CUTTING;
+		CUTTING,
+		REFINING;
 
 		public String getMethodName()
 		{
@@ -85,6 +86,7 @@ public abstract class IGRecipeMethod
 				case ARC_SMELTING -> {return ie("arc_furnace");}
 				case CALCINATION -> {return ig("rotarykiln");}
 				case BASIC_SMELTING -> {return mc("furnace");}
+				case REFINING -> {return ig("ballmill");}
 				case CRYSTALLIZATION -> {return ig("crystallizer");}
 			}
 			return "unknown";
@@ -113,8 +115,6 @@ public abstract class IGRecipeMethod
 
 	protected String create_advanced_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
 	{
-		if(parentMaterial.getPrimaryMaterial().isPresent()) return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryMaterial().get().getName() + output_form.getName().toLowerCase();
-		IGLib.IG_LOGGER.warn("Unable to create Advanced Method Name, no Primary Material Source for {}", parentMaterial.getName());
-		return create_basic_method_name(starting_form, output_form);
+		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getProductionMaterial().getName() + output_form.getName().toLowerCase();
 	}
 }

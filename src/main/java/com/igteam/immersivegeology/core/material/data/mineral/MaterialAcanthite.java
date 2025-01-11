@@ -8,10 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -24,14 +22,11 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialAcanthite extends MaterialMineral {
 
@@ -75,6 +70,10 @@ public class MaterialAcanthite extends MaterialMineral {
                 1000,                                          // Roasting Time
                 200                                            // Sulfur Dioxide Output Amount
         );
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.SLAG, ItemCategoryFlags.DUST, 100, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.SLAG, 2, ItemCategoryFlags.DUST, 4, 100, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.SLAG, 2, getProductionMaterial().instance(), ItemCategoryFlags.DUST, 3, 100, 100);
 
         IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("slag_" + getName() + "_to_metal", getItemTag(ItemCategoryFlags.SLAG), getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
 
