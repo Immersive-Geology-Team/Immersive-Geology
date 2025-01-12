@@ -3,13 +3,12 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -56,5 +55,25 @@ public class MaterialHematite extends MaterialMineral {
     public IGVeinTextureType getVeinType()
     {
         return IGVeinTextureType.LAYERED;
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        // Straight up
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+
+        //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
+
+        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER);
+
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.PELLET),
+                getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
     }
 }

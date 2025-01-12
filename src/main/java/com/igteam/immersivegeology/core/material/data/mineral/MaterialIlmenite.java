@@ -3,9 +3,13 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -40,5 +44,29 @@ public class MaterialIlmenite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Titanium));
+    }
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        // Becher process, simplified
+
+        IGMethodBuilder.decompose(this, IGStageDesignation.PURIFICATION).create(
+                "crushed_ore_"+getName()+"_to_slag", getStack( ItemCategoryFlags.SLAG, 1),
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PURIFICATION).create(ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000);
+
+        //Important - NO WATER in reactions!
+
+        //TODO Titanium extraction. Hunter process (Sodium) OR Kroll process (Magnesium)
+
+
     }
 }

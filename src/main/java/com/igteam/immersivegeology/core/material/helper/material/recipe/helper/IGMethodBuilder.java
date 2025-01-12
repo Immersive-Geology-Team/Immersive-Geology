@@ -27,6 +27,8 @@ public class IGMethodBuilder
 
 	public static IGCrystallizationMethod crystallize(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCrystallizationMethod(parentMaterial, stage);}
 	public static IGBlastingMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGBlastingMethod(parentMaterial, stage); }
+
+	public  static  IGPelletizerMethod pelletize (MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGPelletizerMethod(parentMaterial, stage); }
 	public static IGCrushingMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage) {
 		return new IGCrushingMethod(parentMaterial, stage);
 	}

@@ -6,9 +6,13 @@ import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.dries007.tfc.util.Metal;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -56,5 +60,18 @@ public class MaterialPyrite extends MaterialMineral {
     public IGVeinTextureType getVeinType()
     {
         return IGVeinTextureType.CRYSTAL;
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create("crushed_ore_"+getName() + "_to_oxide",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 800, 250);
+
+        //TODO Iron Oxide Blasting
+
+
     }
 }
