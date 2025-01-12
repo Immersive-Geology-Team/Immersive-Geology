@@ -241,6 +241,6 @@ public class IGRecipes extends RecipeProvider
 		list.add(2, new StackWithChance(MetalEnum.Chromium.getStack(ItemCategoryFlags.GRIT, 1), 0.321f));
 		list.add(3, new StackWithChance(MetalEnum.Copper.getStack(ItemCategoryFlags.GRIT, 1), 0.121f));
 
-		IndustrialSluiceRecipeBuilder.builder(MetalEnum.Gold.getStack(ItemCategoryFlags.CRUSHED_ORE)).addInput(MetalEnum.Gold.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).setByproducts(list).setTime(100).setWater(100).build(consumer, new ResourceLocation(IGLib.MODID, "sluice/test_recipe"));
+		IndustrialSluiceRecipeBuilder.builder(MetalEnum.Gold.getStack(ItemCategoryFlags.CRUSHED_ORE)).setEnergy(1000).addInput(MetalEnum.Gold.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).setByproducts(list).setTime(100).setWater(100).build(consumer, new ResourceLocation(IGLib.MODID, "sluice/test_recipe"));
 	}
 }

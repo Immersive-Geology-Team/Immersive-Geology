@@ -26,6 +26,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -38,6 +39,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	private int time;
 	private int energy;
 	private String name;
+	private FluidStack fluid_out;
 
 	public IGCrystallizationMethod(MaterialHelper material, IGStageDesignation stage)
 	{
@@ -52,6 +54,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		this.itemResult = output;
 		this.fluid_tag = fluidTag;
 		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
+		this.fluid_out = FluidStack.EMPTY;
 		this.time = time;
 		this.energy = energy;
 	}
@@ -63,6 +66,36 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 			this.itemResult = output;
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
 			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
+			this.time = time;
+			this.fluid_out = FluidStack.EMPTY;
+			this.energy = energy;
+			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
+		} else {
+			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
+		}
+	}
+
+	public void create(String name, ItemStack output, FluidStack fluid_out, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
+	{
+		this.name = name;
+		if(fluid_tag == null) throw new RuntimeException("Fluid Tag is NULL... why?");
+
+		this.itemResult = output;
+		this.fluid_tag = fluidTag;
+		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
+		this.fluid_out = fluid_out;
+		this.time = time;
+		this.energy = energy;
+	}
+
+	public void create(String name, ItemStack output, FluidStack fluid_out, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
+	{
+		this.name = name;
+		if(slurry_base.instance() instanceof MaterialChemical chemical){
+			this.itemResult = output;
+			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
+			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
+			this.fluid_out = fluid_out;
 			this.time = time;
 			this.energy = energy;
 			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
@@ -95,7 +128,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	{
 		try
 		{
-			CrystallizerRecipeBuilder builder = CrystallizerRecipeBuilder.builder(this.itemResult).addInput(this.fluidInput.get()).setEnergy(energy).setTime(time);
+			CrystallizerRecipeBuilder builder = CrystallizerRecipeBuilder.builder(this.itemResult, this.fluid_out).addInput(this.fluidInput.get()).setEnergy(energy).setTime(time);
 			builder.build(consumer, getLocation());
 			return true;
 		} catch(Exception e)

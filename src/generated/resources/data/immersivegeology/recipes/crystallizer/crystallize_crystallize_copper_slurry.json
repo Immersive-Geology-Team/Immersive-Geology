@@ -1,6 +1,10 @@
 {
   "type": "immersivegeology:crystallizer",
   "energy": 38400,
+  "fluidResult": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
   "input": {
     "amount": 144,
     "tag": "forge:hydrochloricacid_copper"

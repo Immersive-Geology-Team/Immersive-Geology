@@ -28,17 +28,19 @@ public class CrystallizerRecipe extends MultiblockRecipe
 	public static RegistryObject<IERecipeSerializer<CrystallizerRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CrystallizerRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CRYSTALLIZER);
 	public final Lazy<ItemStack> itemOutput;
+	public final Lazy<FluidStack> fluidOutput;
 	public final FluidTagInput fluidIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> CrystallizerRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, int energy, int time)
+	public <T extends Recipe<?>> CrystallizerRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, Lazy<FluidStack> fluid_output, int energy, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.CRYSTALLIZER, id);
 		this.itemOutput = output;
 		this.fluidIn = fluidInput;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
+		this.fluidOutput = fluid_output;
 		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
 	}
 

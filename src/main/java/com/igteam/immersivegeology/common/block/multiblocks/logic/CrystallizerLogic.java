@@ -78,7 +78,29 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         tryRunRecipe(state, context.getLevel().getRawLevel());
         if(tank_amount != state.tank.getFluidAmount()) context.requestMasterBESync();
+        if(state.output_tank.getFluid().getAmount() > 0)
+        {
+            drainOutputTank(state, context, state.fluidOutput);
+        }
+    }
 
+    private void drainOutputTank(State state, IMultiblockContext<State> context, CapabilityReference<IFluidHandler> output_reference)
+    {
+        int outSize = Math.min(FluidType.BUCKET_VOLUME, state.output_tank.getFluidAmount());
+        FluidStack out = Utils.copyFluidStackWithAmount(state.output_tank.getFluid(), outSize, false);
+        IFluidHandler output = output_reference.getNullable();
+
+        if(output==null)
+            return;
+
+        int accepted = output.fill(out, FluidAction.SIMULATE);
+        if(accepted > 0)
+        {
+            int drained = output.fill(Utils.copyFluidStackWithAmount(out, Math.min(out.getAmount(), accepted), false), FluidAction.EXECUTE);
+            state.output_tank.drain(drained, FluidAction.EXECUTE);
+            context.markMasterDirty();
+            context.requestMasterBESync();
+        }
     }
 
     private void tryRunRecipe(State state, Level level)
@@ -139,7 +161,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
-            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
+            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.output_tank.getFluid()));
         return null;
     }
 
@@ -158,6 +180,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         private final StoredCapability<IEnergyStorage> energyCap;
         private final CapabilityReference<IItemHandler> output;
         private final StoredCapability<IItemHandler> itemOutputCap;
+        private final CapabilityReference<IFluidHandler> fluidOutput;
 
         public State(IInitialMultiblockContext<State> ctx)
         {
@@ -178,6 +201,8 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             ));
             this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
             this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, false, changedAndSync));
+
+            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().below()));
         }
 
         @Override
@@ -215,6 +240,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             try {
                 CrystallizerRecipe recipe = process.getRecipe(level);
                 tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
+                output_tank.fill(recipe.fluidOutput.get(), FluidAction.EXECUTE);
             } catch(Exception error)
             {
                 IGLib.IG_LOGGER.error("Error: {}", error.getMessage());
@@ -230,7 +256,13 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         @Override
         public IFluidTank[] getInternalTanks()
         {
-            return new FluidTank[]{tank};
+            return new FluidTank[]{tank, output_tank};
+        }
+
+        @Override
+        public int[] getOutputTanks()
+        {
+            return new int[]{1};
         }
 
         @Override

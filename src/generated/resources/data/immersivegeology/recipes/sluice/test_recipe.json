@@ -27,6 +27,7 @@
       }
     }
   ],
+  "energy": 1000,
   "input": {
     "tag": "forge:dirty_crushed_ore/gold"
   },

@@ -86,7 +86,7 @@ public class MaterialAcanthite extends MaterialMineral {
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT), null, null,
                 200, 51200);
 
-        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create("slurry_" + getProductionMaterial().getName() + "_to_crystal", getProductionMaterial().getStack(ItemCategoryFlags.CRYSTAL), ChemicalEnum.HydrochloricAcid, getProductionMaterial(), IGLib.SLURRY_TO_CRYSTAL_MB, 300, 38400);
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create("slurry_" + getProductionMaterial().getName() + "_to_crystal", getProductionMaterial().getStack(ItemCategoryFlags.CRYSTAL), ChemicalEnum.HydrochloricAcid.getFluidStack((int)Math.floor((IGLib.SLURRY_TO_CRYSTAL_MB * 0.75))), ChemicalEnum.HydrochloricAcid, getProductionMaterial(), IGLib.SLURRY_TO_CRYSTAL_MB, 300, 38400);
 
         IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(getByproductMaterial().getItemTag(ItemCategoryFlags.COMPOUND_DUST),
                 getByproductMaterial().getStack(ItemCategoryFlags.POWDER), getTraceMaterials(2).getStack(ItemCategoryFlags.POWDER), 0.2f, 60, 100);

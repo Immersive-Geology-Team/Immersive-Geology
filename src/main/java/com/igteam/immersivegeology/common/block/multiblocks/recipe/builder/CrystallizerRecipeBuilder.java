@@ -16,6 +16,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class CrystallizerRecipeBuilder extends IEFinishedRecipe<CrystallizerRecipeBuilder>
 {
@@ -24,19 +25,19 @@ public class CrystallizerRecipeBuilder extends IEFinishedRecipe<CrystallizerReci
 		super(CrystallizerRecipe.SERIALIZER.get());
 	}
 
-	public static CrystallizerRecipeBuilder builder(Item result)
+	public static CrystallizerRecipeBuilder builder(Item result, FluidStack fluid_out)
 	{
-		return new CrystallizerRecipeBuilder().addResult(result);
+		return new CrystallizerRecipeBuilder().addResult(result).addFluid("fluidResult", fluid_out);
 	}
 
-	public static CrystallizerRecipeBuilder builder(ItemStack result)
+	public static CrystallizerRecipeBuilder builder(ItemStack result, FluidStack fluid_out)
 	{
-		return new CrystallizerRecipeBuilder().addResult(result);
+		return new CrystallizerRecipeBuilder().addResult(result).addFluid("fluidResult", fluid_out);
 	}
 
-	public static CrystallizerRecipeBuilder builder(TagKey<Item> result, int count)
+	public static CrystallizerRecipeBuilder builder(TagKey<Item> result, int count, FluidStack fluid_out)
 	{
-		return new CrystallizerRecipeBuilder().addResult(new IngredientWithSize(result, count));
+		return new CrystallizerRecipeBuilder().addResult(new IngredientWithSize(result, count)).addFluid("fluidResult", fluid_out);
 	}
 
 	public CrystallizerRecipeBuilder addInput(FluidTagInput fluidTag)

@@ -98,6 +98,8 @@ public class IGTags
 				}
 			}
 		}
+
+		IGLib.IG_LOGGER.info("======== Immersive Geology Tags Initialized ========");
 	}
 
 	private static void createWrapperForCategory(IFlagType<?> category, GeologyMaterial... materials)

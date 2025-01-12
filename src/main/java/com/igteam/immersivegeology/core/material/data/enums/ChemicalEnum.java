@@ -61,4 +61,9 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     {
         return instance().hasSlurryMetal(metal);
     }
+
+    public FluidStack getFluidStack(int i)
+    {
+        return new FluidStack(getFluid(BlockCategoryFlags.FLUID), i);
+    }
 }
