@@ -11,6 +11,8 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -54,6 +56,27 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		this.slag = iSlag;
 		this.additives = List.of();
 		this.method_name = method_name;
+		this.chance = chance;
+		return this;
+	}
+
+	public IGArcSmeltingMethod create(IFlagType<?> input_form, int inputAmount, IFlagType<?> output_form, int output_amount, float chance, int slag_amount){
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), inputAmount);
+		this.output = parentMaterial.getStack(output_form, output_amount);
+		this.slag = slag_amount == 0 ? ItemStack.EMPTY : parentMaterial.getStack(ItemCategoryFlags.SLAG, slag_amount);
+		this.additives = List.of();
+		this.method_name = create_advanced_method_name(input_form, output_form);
+		this.chance = chance;
+		return this;
+	}
+
+
+	public IGArcSmeltingMethod create(IFlagType<?> input_form, int inputAmount, IFlagType<?> output_form, int output_amount, float chance, int slag_amount, IngredientWithSize... additives){
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), inputAmount);
+		this.output = parentMaterial.getStack(output_form, output_amount);
+		this.slag = slag_amount == 0 ? ItemStack.EMPTY : parentMaterial.getStack(ItemCategoryFlags.SLAG, slag_amount);
+		this.additives = List.of(additives);
+		this.method_name = create_advanced_method_name(input_form, output_form);
 		this.chance = chance;
 		return this;
 	}

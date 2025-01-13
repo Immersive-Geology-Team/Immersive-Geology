@@ -52,7 +52,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 	}
 
 	public void create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
-		this.name = parentMaterial.getName() + "_" + name;
+		this.name = name;
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
 		this.itemIn = itemIn;

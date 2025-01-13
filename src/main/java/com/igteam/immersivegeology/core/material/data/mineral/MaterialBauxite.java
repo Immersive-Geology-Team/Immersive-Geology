@@ -59,6 +59,12 @@ public class MaterialBauxite extends MaterialMineral {
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.METAL_OXIDE),
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
 
+
+        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.METAL_OXIDE,
+                ItemCategoryFlags.CRUSHED_ORE,
+                1, 300, 153600);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_" + getName() + "_to_compound_dust",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0), new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE)), new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT), null, null, 200, 51200);
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("compound_dust_" + MetalEnum.Aluminum.getName() + "_to_cryolite",

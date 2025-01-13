@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -65,7 +66,9 @@ public class MaterialHematite extends MaterialMineral {
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 600);
+
+        ChemicalEnum.HydrochloricAcid.getSlurryWith(ChemicalEnum.Brine);
 
         //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);

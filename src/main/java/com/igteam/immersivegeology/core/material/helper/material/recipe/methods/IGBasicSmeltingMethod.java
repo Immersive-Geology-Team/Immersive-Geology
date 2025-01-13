@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -39,15 +40,39 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 		super(new IGRecipeStage(material, stage){});
 	}
 
-	public IGBasicSmeltingMethod create(ItemLike inputProvider, ItemLike output){
-		this.input = inputProvider;
+	public IGBasicSmeltingMethod create(ItemLike input, ItemLike output){
+		this.input = input;
 		this.output = output;
 		this.smeltingTime = 100;
 		this.xp = 1;
 		return this;
 	}
 
-	public void setAdditionalData(int smeltingTime, float xp){
+	public IGBasicSmeltingMethod create(IFlagType<?> input, IFlagType<?> output){
+		this.input = parentMaterial.getStack(input, 1).getItem();
+		this.output = parentMaterial.getStack(output, 1).getItem();
+		this.smeltingTime = 100;
+		this.xp = 1;
+		return this;
+	}
+
+	public IGBasicSmeltingMethod create(IFlagType<?> input, IFlagType<?> output, int time){
+		this.input = parentMaterial.getStack(input, 1).getItem();
+		this.output = parentMaterial.getStack(output, 1).getItem();
+		this.smeltingTime = time;
+		this.xp = 1;
+		return this;
+	}
+
+	public IGBasicSmeltingMethod create(IFlagType<?> input, IFlagType<?> output, int time, int xp){
+		this.input = parentMaterial.getStack(input, 1).getItem();
+		this.output = parentMaterial.getStack(output, 1).getItem();
+		this.smeltingTime = time;
+		this.xp = xp;
+		return this;
+	}
+
+	public void setTimeAndXP(int smeltingTime, float xp){
 		this.smeltingTime = smeltingTime;
 		this.xp = xp;
 	}

@@ -16,6 +16,8 @@ import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialD
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
 import net.minecraft.tags.BlockTags;
@@ -26,6 +28,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //===== Terra Firma Craft =====\\
@@ -96,7 +99,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
         } catch(Exception ex) {
             if(!hasWarned)
             {
-                IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone");
+                IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone {}", ex.getMessage());
                 hasWarned = true;
             }
         }
@@ -130,5 +133,18 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     public String getTFCStoneLoc()
     {
         return instance().getTFCStoneLoc();
+    }
+
+    public boolean isStoneTypeValid()
+    {
+        List<ModFlags> list = getFlags().stream().filter(f -> f instanceof ModFlags).map(flag -> (ModFlags) flag).toList();
+
+        boolean pass = false;
+        for(ModFlags flag : list)
+        {
+            pass = flag.isStrictlyLoaded();
+        }
+
+        return pass;
     }
 }

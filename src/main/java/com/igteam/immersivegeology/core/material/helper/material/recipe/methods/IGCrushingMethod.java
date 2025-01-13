@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -43,6 +44,46 @@ public class IGCrushingMethod extends IGRecipeMethod
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(IFlagType<?> input_form, IFlagType<?> output_form, int energy, int time){
+		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
+		this.output = parentMaterial.getStack(output_form, 1);
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int output_amount, int energy, int time){
+		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
+		this.output = output_material.getStack(output_form, output_amount);
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(MaterialHelper input_material, IFlagType<?> input_form, int input_amount, MaterialHelper output_material,  IFlagType<?> output_form, int output_amount, int energy, int time){
+		this.input = IngredientWithSize.of(input_material.getStack(input_form, input_amount));
+		this.output = output_material.getStack(output_form, output_amount);
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int energy, int time){
+		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
+		this.output = output_material.getStack(output_form, 1);
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.energy = energy;
+		this.time = time;
+	}
+
+	public void create(MaterialHelper input_material, IFlagType<?> input_form, MaterialHelper output_material,  IFlagType<?> output_form, int energy, int time){
+		this.input = IngredientWithSize.of(input_material.getStack(input_form, 1));
+		this.output = output_material.getStack(output_form, 1);
+		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
 	}

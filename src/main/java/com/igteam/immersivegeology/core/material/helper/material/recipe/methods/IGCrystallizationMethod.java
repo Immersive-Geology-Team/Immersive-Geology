@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
@@ -46,17 +47,36 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		super(new IGRecipeStage(material, stage){});
 	}
 
-	public void create(String name, ItemStack output, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
+	public void create(MaterialInterface<?> slurry_base, IFlagType<?> output_form)
 	{
-		this.name = name;
-		if(fluid_tag == null) throw new RuntimeException("Fluid Tag is NULL... why?");
+		this.name = create_advanced_method_name(ItemCategoryFlags.CRYSTAL);
+		if(slurry_base.instance() instanceof MaterialChemical chemical){
+			this.itemResult = parentMaterial.getProductionMaterial().getStack(output_form, 1);
+			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, parentMaterial.getProductionMaterial());
+			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
+			this.time = 300;
+			this.fluid_out = FluidStack.EMPTY;
+			this.energy = 38400;
+			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
+		} else {
+			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
+		}
+	}
 
-		this.itemResult = output;
-		this.fluid_tag = fluidTag;
-		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
-		this.fluid_out = FluidStack.EMPTY;
-		this.time = time;
-		this.energy = energy;
+	public void create(MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product)
+	{
+		this.name = create_advanced_method_name(ItemCategoryFlags.CRYSTAL);
+		if(slurry_base.instance() instanceof MaterialChemical chemical){
+			this.itemResult = slurry_product.getStack(ItemCategoryFlags.CRYSTAL, 1);
+			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
+			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
+			this.time = 300;
+			this.fluid_out = FluidStack.EMPTY;
+			this.energy = 38400;
+			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
+		} else {
+			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
+		}
 	}
 
 	public void create(String name, ItemStack output, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)

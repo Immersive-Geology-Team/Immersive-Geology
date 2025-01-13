@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -40,6 +41,30 @@ public class IGCalcinationMethod extends IGRecipeMethod
 		this.name = name;
 		this.output = output;
 		this.input = new IngredientWithSize(inputTag, itemAmount);
+		this.time = time;
+		this.energy = energy;
+	}
+
+	public void create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int energy){
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.output = parentMaterial.getStack(output_form, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
+		this.time = time;
+		this.energy = energy;
+	}
+
+	public void create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int energy){
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.output = output_material.getStack(output_form, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
+		this.time = time;
+		this.energy = energy;
+	}
+
+	public void create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int energy){
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.output = output_material.getStack(output_form, output_amount);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), input_amount);
 		this.time = time;
 		this.energy = energy;
 	}

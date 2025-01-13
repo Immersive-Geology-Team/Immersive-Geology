@@ -279,6 +279,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				return null;
 			}
 
+			// Checks if the stone is a MOD only type, and if so, is it available?
+			if(stone.isStoneTypeValid())
+			{
+				return null;
+			}
+
 			// List of blocks for each ore richness
 			List<BlockState> blocks = List.of(
 					mineral.getOreBlock(stone, OreRichness.POOR).getDefaultBlockState(),
