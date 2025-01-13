@@ -9,8 +9,6 @@
 package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -22,12 +20,10 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 {
@@ -45,21 +41,15 @@ public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 	{
 		assert Minecraft.getInstance().level!=null;
 
-		builder.addSlot(RecipeIngredientRole.INPUT, 35, 26)
+		builder.addSlot(RecipeIngredientRole.INPUT, 35, 40)
 				.addItemStacks(Arrays.asList(recipe.itemIn.getMatchingStacks()));
 
-		ArrayList<ItemStack> fuels = new ArrayList<>();
-		PelletizerFuel.RECIPES.getRecipes(Minecraft.getInstance().level).forEach(f -> fuels.addAll(Arrays.stream(f.input.getItems()).toList()));
-
-		builder.addSlot(RecipeIngredientRole.INPUT, 11, 74)
-				.addItemStacks(fuels);
-
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 11, 23)
-				.setFluidRenderer(500, false, 16, 47)
+				.setFluidRenderer(500, false, 16, 55)
 				.addFluidStack(Fluids.WATER, 500)
 				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 71, 48)
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 71, 62)
 				.addItemStack(recipe.itemOutput.get());
 	}
 }

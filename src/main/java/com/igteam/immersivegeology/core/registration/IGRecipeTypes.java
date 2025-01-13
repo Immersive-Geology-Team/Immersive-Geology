@@ -38,7 +38,6 @@ public class IGRecipeTypes
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
 	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
-	public static final TypeWithClass<? extends Recipe<?>> PELLETIZER_FUEL = register("pelletizer_fuel", PelletizerFuel.class);
 
 	private static <T extends Recipe<?>>
 	TypeWithClass<T> register(String name, Class<T> type)
