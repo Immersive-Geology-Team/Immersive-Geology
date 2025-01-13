@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
@@ -125,7 +126,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 		// Get the vein's center position
 		BlockPos veinCenter = chunkOrigin.offset(vein.pos);
-
 		// MutableBlockPos for iterating over positions
 		MutableBlockPos cursor = new MutableBlockPos();
 		int veinMinY = config.entry().getMinY();
@@ -156,8 +156,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 						}
 					}
 
+					float distance_from_centre_as_percentage = (float) (cursor.distToCenterSqr(veinCenter.getX(), veinCenter.getY(), veinCenter.getZ()) / chunkOrigin.distSqr(chunkOrigin.offset(32,vein.pos.getY(),32)));
+					float passRate = (float) (config.getDensity() * (1 - distance_from_centre_as_percentage));
 					// Custom logic for ore placement
-					if (shouldPlaceOre(noiseValue, vein, config)) {
+					if (shouldPlaceOre(noiseValue, vein, config) && random.nextFloat() > passRate) {
 						BlockState stoneState = level.getBlockState(cursor);
 						BlockState oreState = config.getStateToGenerate(stoneState, random, config, noiseValue);
 						if (oreState != null) {
@@ -297,6 +299,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 		boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
 			return true;
+		}
+
+		public double getDensity()
+		{
+			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
+			return config.density.get();
 		}
 	}
 

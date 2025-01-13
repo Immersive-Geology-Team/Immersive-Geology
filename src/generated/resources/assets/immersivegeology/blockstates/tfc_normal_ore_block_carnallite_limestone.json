@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/carnallite_limestone_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/carnallite_limestone_variation_2"
+        }
+      ]
+    }
+  ]
+}

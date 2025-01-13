@@ -1,0 +1,7 @@
+{
+  "type": "immersivegeology:pelletizer_fuel",
+  "input": {
+    "item": "immersivegeology:raw_fire_clay"
+  },
+  "time": 960
+}

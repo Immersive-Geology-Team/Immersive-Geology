@@ -38,6 +38,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     Iron(new MaterialIron()),
     Lead(new MaterialLead()),
     Manganese(new MaterialManganese()),
+    Magnesium(new MaterialMagnesium()),
     Molybdenum(new MaterialMolybdenum()),
     Neodymium(new MaterialNeodymium()),
     Nickel(new MaterialNickel()),

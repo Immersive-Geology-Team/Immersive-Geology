@@ -13,6 +13,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     FUEL(1),
     SLAG(1),
     PELLET(1),
+    OXIDE_PELLET(1),
     POWDERED_SLAG(1),
     PLATE(1),
     POOR_ORE(0),

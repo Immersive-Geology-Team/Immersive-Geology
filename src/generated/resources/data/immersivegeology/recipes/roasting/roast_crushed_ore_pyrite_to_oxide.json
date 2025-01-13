@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:crushed_ore/pyrite"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_iron"
+  },
+  "time": 800,
+  "waste": 250
+}

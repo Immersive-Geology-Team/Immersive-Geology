@@ -1,0 +1,31 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:rich_ore/carnallite"
+  },
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_carnallite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.66,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_carnallite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_carnallite"
+      }
+    },
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_carnallite"
+      }
+    }
+  ],
+  "time": 100
+}

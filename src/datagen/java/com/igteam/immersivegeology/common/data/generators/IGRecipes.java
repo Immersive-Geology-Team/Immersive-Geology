@@ -14,10 +14,7 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -234,6 +231,8 @@ public class IGRecipes extends RecipeProvider
 
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
+		PelletizerFuelBuilder.builder(Items.CLAY_BALL).setTime(1920).build(consumer, IGLib.rl("pelletizer/pelletizer_fuel_clay"));
+		PelletizerFuelBuilder.builder(IGRegistrationHolder.getItem.apply("raw_fire_clay")).setTime(2400).build(consumer, IGLib.rl("pelletizer/pelletizer_fuel_fire_clay"));
 
 		NonNullList<StackWithChance> list = NonNullList.create();
 		list.add(0, new StackWithChance(MetalEnum.Gold.getStack(ItemCategoryFlags.GRIT, 1), 0.4f));

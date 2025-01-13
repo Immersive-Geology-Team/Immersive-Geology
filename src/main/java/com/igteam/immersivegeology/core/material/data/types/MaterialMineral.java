@@ -13,7 +13,7 @@ public class MaterialMineral extends GeologyMaterial {
 
     public MaterialMineral(){
         super();
-        addFlags(MaterialFlags.HAS_SLURRY, ItemCategoryFlags.SLAG, ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER);
+        addFlags(MaterialFlags.HAS_SLURRY, ItemCategoryFlags.SLAG, ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET, ItemCategoryFlags.POWDERED_SLAG);
     }
 
     @Override
