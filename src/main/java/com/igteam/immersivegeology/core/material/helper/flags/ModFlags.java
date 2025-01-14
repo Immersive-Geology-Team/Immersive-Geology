@@ -21,7 +21,8 @@ public enum ModFlags implements IFlagType<ModFlags> {
         return "";
     }
 
-    public boolean isLoaded(){
+    public boolean isLoaded()
+    {
         return this.equals(MINECRAFT) || DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase());
     }
 

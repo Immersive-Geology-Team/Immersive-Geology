@@ -261,7 +261,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return data_map.get(key);
 	}
 
-    public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
+    public synchronized TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
     {
         if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
         Set<MaterialHelper> helpers = Arrays.stream(materials).map(MaterialInterface::instance).collect(Collectors.toSet());
@@ -273,6 +273,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         String key = IGTags.getWrapFromSet(material_set);
         IGLib.IG_LOGGER.info("Fluid Key Requested: {}", key);
         IGLib.IG_LOGGER.info("Has Data Map been Initialized? {}", data_map.containsKey(key));
+        if(!data_map.containsKey(key))
+        {
+            IGLib.IG_LOGGER.info("Initialization [{}]", data_map.containsKey(key) ? "Successful" : "Failed");
+            if(!data_map.containsKey(key)) throw new RuntimeException("Failed to initialize Fluid Tags");
+        }
         return data_map.get(key);
     }
 

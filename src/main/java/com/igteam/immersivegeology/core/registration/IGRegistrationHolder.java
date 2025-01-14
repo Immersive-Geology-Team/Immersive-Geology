@@ -217,7 +217,7 @@ public class IGRegistrationHolder {
         });
     }
 
-    public static void initialize()
+    public static synchronized void initialize()
     {
         IGLib.IG_LOGGER.info("Starting Registration of IG Multiblocks, Items, Blocks and Fluids");
         initializeMultiblocks();

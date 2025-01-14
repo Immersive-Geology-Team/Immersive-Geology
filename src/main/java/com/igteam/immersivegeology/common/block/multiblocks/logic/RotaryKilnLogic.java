@@ -72,7 +72,6 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
     public void tickServer(IMultiblockContext<State> context) {
         final RotaryKilnLogic.State state = context.getState();
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-
     }
 
     private static boolean tryRunRecipe(ItemStack input, State state, Level level)

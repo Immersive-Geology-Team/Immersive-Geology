@@ -39,11 +39,8 @@ public class IGTags
 	public static HashMap<IFlagType<?>, HashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new HashMap<>();
 
 	private static boolean initialized = false;
-	public static void initialize()
+	public static synchronized void initialize()
 	{
-		if (initialized) return;  // Prevent reinitialization
-		initialized = true;
-
 		IGLib.IG_LOGGER.info("======== Initializing Immersive Geology Tags ========");
 		for(ItemCategoryFlags itemFlag : ItemCategoryFlags.values())
 		{
@@ -53,6 +50,7 @@ public class IGTags
 			{
 				if(materialInterface.hasFlag(itemFlag))
 				{
+					if(initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {}", materialInterface.getName(), itemFlag);
 					createWrapperForCategory(itemFlag, materialInterface.instance());
 				}
 			}
@@ -74,6 +72,8 @@ public class IGTags
 
 				MaterialHelper base = materialInterface.instance();
 				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase()));
+
+				if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} Fluid", materialInterface.getName());
 				fluid_map.put(getWrapFromSet(Set.of(base)), tag);
 			}
 
@@ -93,12 +93,13 @@ public class IGTags
 
 						MaterialHelper base = materialInterface.instance();
 						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase() + "_" + metal.getName().toLowerCase()));
+						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} Slurry", materialInterface.getName(), metal.getName());
 						slurry_map.put(getWrapFromSet(Set.of(base, metal.instance())), tag);
 					}
 				}
 			}
 		}
-
+		initialized = true;
 		IGLib.IG_LOGGER.info("======== Immersive Geology Tags Initialized ========");
 	}
 

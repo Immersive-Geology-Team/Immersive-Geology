@@ -124,4 +124,9 @@ public abstract class IGRecipeMethod
 	{
 		return parentMaterial.getName() + "_to_" + parentMaterial.getProductionMaterial().getName() + output_form.getName().toLowerCase();
 	}
+
+	protected String create_basic_method_name(IFlagType<?> output_form)
+	{
+		return "create_" + parentMaterial.getName() + "_" + output_form.getName();
+	}
 }

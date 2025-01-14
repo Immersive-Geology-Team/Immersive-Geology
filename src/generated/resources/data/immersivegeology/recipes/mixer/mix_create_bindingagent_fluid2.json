@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:mixer",
+  "energy": 3200,
+  "fluid": {
+    "amount": 6000,
+    "tag": "minecraft:water"
+  },
+  "inputs": [
+    {
+      "item": "immersivegeology:raw_fire_clay"
+    }
+  ],
+  "result": {
+    "amount": 6000,
+    "fluid": "immersivegeology:fluid_bindingagent"
+  }
+}

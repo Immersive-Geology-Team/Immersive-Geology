@@ -23,8 +23,11 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Multibl
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -45,10 +48,10 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     public static final BlockPos REDSTONE_IN = new BlockPos(4,1,3);
     private static final int ENERGY_CAPACITY = 64000;
     private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0,1, 3, RelativeBlockFace.UP));
-    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2,2,0, RelativeBlockFace.BACK);
-    private static final MultiblockFace INPUT_POS = new MultiblockFace(2,3,6, RelativeBlockFace.FRONT);
+    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2,0,4, RelativeBlockFace.FRONT);
+    private static final MultiblockFace INPUT_POS = new MultiblockFace(0,0,1, RelativeBlockFace.FRONT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
-    private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(2,3,6, RelativeBlockFace.FRONT);
+    private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0,0,1, RelativeBlockFace.RIGHT);
 
     public static final int ENERGY_CONSUMPTION_RATE = 80; // Per tick
 
@@ -67,7 +70,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         final BallmillLogic.State state = context.getState();
 
         final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = (!state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;
+        state.renderAsActive = (state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;
         if(wasActive != state.renderAsActive)
         {
             context.requestMasterBESync();
@@ -83,11 +86,11 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
         if(input.isEmpty()) return false;
 
-        RotaryKilnRecipe recipe = RotaryKilnRecipe.findRecipe(level, input);
+        BallmillRecipe recipe = BallmillRecipe.findRecipe(level, input);
 
         if(recipe == null) return false;
 
-        MultiblockProcessInWorld<RotaryKilnRecipe> process = new MultiblockProcessInWorld<>(recipe, input);
+        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, input);
         input.shrink(1);
         return state.processor.addProcessToQueue(process, level, false);
     }
@@ -119,7 +122,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         return RotaryKilnShape.GETTER;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInWorld<RotaryKilnRecipe>
+    public static class State implements IMultiblockState, ProcessContextInWorld<BallmillRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
@@ -129,13 +132,13 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         private float rotation;
         private boolean renderAsActive;
         private final StoredCapability<IEnergyStorage> energyCap;
-        private final MultiblockProcessor<RotaryKilnRecipe, ProcessContextInWorld<RotaryKilnRecipe>> processor;
+        private final MultiblockProcessor<BallmillRecipe, ProcessContextInWorld<BallmillRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;
         public State(IInitialMultiblockContext<State> ctx){
             this.rotation = 0;
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(16, 0, 1, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
+            this.processor = new MultiblockProcessor<>(IGServerConfig.MACHINES.machines.get(IGBallmillMultiblock.INSTANCE).input_batch_size.get(), 0, IGServerConfig.MACHINES.machines.get(IGBallmillMultiblock.INSTANCE).input_batch_size.get(), ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             final Runnable sync = ctx.getSyncRunnable();

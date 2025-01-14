@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-13T20:04:20.942552914	Block States: immersivegeology
+// 1.20.1	2025-01-14T19:17:59.17151457	Block States: immersivegeology
 01cec67fdea1699fd71ed6df0d3d3647d9ff9ac7 assets/immersivegeology/blockstates/ballmill.json
 59fb2631821d01fd8040903aac4f61ca2b53a18e assets/immersivegeology/blockstates/bloomery.json
 bf8fcd0c0c272d873d612bbd8e41a0c4ce0bb196 assets/immersivegeology/blockstates/centrifuge.json
@@ -6,6 +6,7 @@ bf8fcd0c0c272d873d612bbd8e41a0c4ce0bb196 assets/immersivegeology/blockstates/cen
 f8403c7b4738b28efcfc063ee2e4058d59877317 assets/immersivegeology/blockstates/coredrill.json
 142c6946dd9f7f309812809921eea5870a69816d assets/immersivegeology/blockstates/crystallizer.json
 6b5f8c4323f880acc54af1afa6b10309cea6c3a1 assets/immersivegeology/blockstates/fluid_aluminum_block.json
+db9836e7d9d81efbdff9358a954c317869f2b1ae assets/immersivegeology/blockstates/fluid_bindingagent_block.json
 6816538efe21c3f7572ff4d6eb9f539b3854fa57 assets/immersivegeology/blockstates/fluid_brine_block.json
 2fc51dc37499d4ebeaa33917f6c8fbf2e1912334 assets/immersivegeology/blockstates/fluid_bronze_block.json
 9ce466312c5e1f59125160c79873538cb37b422b assets/immersivegeology/blockstates/fluid_chromium_block.json
@@ -1764,6 +1765,7 @@ e24cfa06d3b93ac210a8876bce7175c06497b058 assets/immersivegeology/blockstates/tfc
 969acde431a05bd323a2c6692d4d2ab17e84bd72 assets/immersivegeology/blockstates/tfc_rich_ore_block_zircon_granite.json
 7dccd5eb4e55fb379a9c01334577445115e71e1e assets/immersivegeology/blockstates/trommel.json
 e27ea0969100cf2c745a7e6670151e128aeb6857 assets/immersivegeology/models/block/fluid/fluid_aluminum.json
+69dd5058633be381575ba3d4de5ba369b76e5376 assets/immersivegeology/models/block/fluid/fluid_bindingagent.json
 69dd5058633be381575ba3d4de5ba369b76e5376 assets/immersivegeology/models/block/fluid/fluid_brine.json
 e27ea0969100cf2c745a7e6670151e128aeb6857 assets/immersivegeology/models/block/fluid/fluid_bronze.json
 e27ea0969100cf2c745a7e6670151e128aeb6857 assets/immersivegeology/models/block/fluid/fluid_chromium.json

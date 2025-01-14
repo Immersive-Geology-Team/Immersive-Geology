@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:pelletizer_fuel",
-  "input": {
-    "item": "minecraft:clay_ball"
-  },
-  "time": 800
-}

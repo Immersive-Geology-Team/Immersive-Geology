@@ -28,6 +28,7 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     SulfuricAcid(new MaterialSulfuricAcid()),
     SulfurDioxde(new MaterialSulfurDioxide()),
     Brine(new MaterialBrine()),
+    BindingAgent(new MaterialBindingAgent()),
     HydrochloricAcid(new MaterialHydrochloricAcid()),
     HydrofluoricAcid(new MaterialHydrofluoricAcid()),
     NitricAcid(new MaterialNitricAcid()),

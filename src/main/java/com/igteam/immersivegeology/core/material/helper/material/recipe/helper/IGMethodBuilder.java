@@ -24,6 +24,7 @@ public class IGMethodBuilder
 	public static IGChemicalMethod chemical(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGChemicalMethod(parentMaterial, stage);}
 
 	public static IGCalcinationMethod decompose(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCalcinationMethod(parentMaterial, stage);}
+	public static IEMixingMethod mixing(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IEMixingMethod(parentMaterial, stage);}
 
 	public static IGCrystallizationMethod crystallize(MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCrystallizationMethod(parentMaterial, stage);}
 	public static IGBlastingMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGBlastingMethod(parentMaterial, stage); }

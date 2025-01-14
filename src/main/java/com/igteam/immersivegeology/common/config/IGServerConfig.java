@@ -99,18 +99,14 @@ public class IGServerConfig
 		public static class MachineConfig
 		{
 			public final ForgeConfigSpec.IntValue input_batch_size;
-			public final ForgeConfigSpec.IntValue output_batch_size;
 			public final ForgeConfigSpec.IntValue default_time;
 			public final ForgeConfigSpec.IntValue default_energy;
 
 			public MachineConfig(ForgeConfigSpec.Builder builder, IGConfigurableMachine machine)
 			{
-				this.input_batch_size = builder.comment("What should the default input batch size be").defineInRange("input_batch_size", machine.getDefaultBatchInput(), 1, 64);
-				{
-					this.output_batch_size = builder.comment("What should the default output batch size be").defineInRange("output_batch_size", machine.getDefaultBatchOutput(), 1, 64);
-					this.default_energy = builder.comment("The default Total Energy Cost for a Recipe made with this machine").defineInRange("energy", machine.getDefaultEnergy(), 0, 999999);
-					this.default_time = builder.comment("he default time for a Recipe to complete with this machine").defineInRange("time", machine.getDefaultTime(), 0, 999999);
-				}
+				this.input_batch_size = builder.comment("What should the default batch size be for this machine").defineInRange("input_batch_size", machine.getDefaultBatchInput(), 1, 64);
+				this.default_energy = builder.comment("The default Total Energy Cost for a Recipe made with this machine").defineInRange("energy", machine.getDefaultEnergy(), 0, 999999);
+				this.default_time = builder.comment("he default time for a Recipe to complete with this machine").defineInRange("time", machine.getDefaultTime(), 0, 999999);
 			}
 		}
 	}
