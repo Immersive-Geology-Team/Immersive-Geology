@@ -30,8 +30,10 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     public static final int ENERGY_CAPACITY = 12000;
 
     @Override
-    public void tickClient(IMultiblockContext<State> iMultiblockContext) {
-
+    public void tickClient(IMultiblockContext<State> context) {
+        final PelletizerLogic.State state = context.getState();
+        float rot = state.rotation;
+        state.rotation = (float)((rot-2.5)%360);
     }
 
     @Override
@@ -53,9 +55,10 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
+        private float rotation;
 
         public State(IInitialMultiblockContext<State> context){
-
+            rotation = 0;
         }
 
         @Override
@@ -66,6 +69,16 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
         @Override
         public void writeSaveNBT(CompoundTag nbt){
 
+        }
+
+        public float getRotation()
+        {
+            return rotation;
+        }
+
+        public boolean shouldRenderActive()
+        {
+            return true;
         }
     }
 

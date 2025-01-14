@@ -275,6 +275,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         IGLib.IG_LOGGER.info("Has Data Map been Initialized? {}", data_map.containsKey(key));
         if(!data_map.containsKey(key))
         {
+            IGTags.initialize();
             IGLib.IG_LOGGER.info("Initialization [{}]", data_map.containsKey(key) ? "Successful" : "Failed");
             if(!data_map.containsKey(key)) throw new RuntimeException("Failed to initialize Fluid Tags");
         }

@@ -68,8 +68,6 @@ public class MaterialHematite extends MaterialMineral {
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                 getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 600);
 
-        ChemicalEnum.HydrochloricAcid.getSlurryWith(ChemicalEnum.Brine);
-
         //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
 

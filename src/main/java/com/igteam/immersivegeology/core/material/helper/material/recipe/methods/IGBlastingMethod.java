@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -143,6 +144,7 @@ public class IGBlastingMethod extends IGRecipeMethod
 		}
 		catch(Exception e)
 		{
+			IGLib.IG_LOGGER.info("Failed To build due to {}", e.getMessage());
 			return false;
 		}
 	}

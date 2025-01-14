@@ -30,7 +30,7 @@ public class MaterialCopper extends MaterialNativeMetal {
 
     public MaterialCopper() {
         super();
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ItemCategoryFlags.OXIDE_PELLET);
 
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);

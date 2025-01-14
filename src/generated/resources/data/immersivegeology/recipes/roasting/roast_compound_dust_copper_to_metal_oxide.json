@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:compound_dust/copper"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_copper"
+  },
+  "time": 1000,
+  "waste": 250
+}

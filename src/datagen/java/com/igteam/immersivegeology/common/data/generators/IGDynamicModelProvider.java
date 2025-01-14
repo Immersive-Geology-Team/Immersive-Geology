@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
+import com.igteam.immersivegeology.client.renderer.multiblocks.PelletizerRenderer;
 import com.igteam.immersivegeology.common.data.generators.IGDynamicModelProvider.SimpleModelBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -73,6 +74,11 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 				.flipV(true)
 				.end();
 
+		getBuilder(PelletizerRenderer.DISH_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/pelletizer/pelletizer_dish.obj"))
+				.flipV(true)
+				.end();
 		for(Entry<Block, ModelFile> multiblock : multiblocks.unsplitModels.entrySet())
 			withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
 

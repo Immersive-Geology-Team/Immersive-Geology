@@ -70,7 +70,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         final BallmillLogic.State state = context.getState();
 
         final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = (state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE;
+        state.renderAsActive = (state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE && state.processor.getQueueSize() > 0;
         if(wasActive != state.renderAsActive)
         {
             context.requestMasterBESync();
@@ -138,7 +138,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
             this.rotation = 0;
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(IGServerConfig.MACHINES.machines.get(IGBallmillMultiblock.INSTANCE).input_batch_size.get(), 0, IGServerConfig.MACHINES.machines.get(IGBallmillMultiblock.INSTANCE).input_batch_size.get(), ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
+            this.processor = new MultiblockProcessor<>(8, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             final Runnable sync = ctx.getSyncRunnable();

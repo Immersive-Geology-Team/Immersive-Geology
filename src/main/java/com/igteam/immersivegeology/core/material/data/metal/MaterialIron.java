@@ -25,7 +25,7 @@ public class MaterialIron extends MaterialNativeMetal {
 
     public MaterialIron() {
         super();
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ItemCategoryFlags.OXIDE_PELLET);
 
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.AD_ASTRA, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE);

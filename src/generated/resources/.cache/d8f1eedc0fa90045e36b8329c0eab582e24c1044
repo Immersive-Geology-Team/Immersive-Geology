@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-13T20:04:20.922340202	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-01-14T22:11:36.089423811	Tags for minecraft:item mod id immersivegeology
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
 f84e009ee715037e0d32c9dc9e31f52efeb7302f data/forge/tags/items/compound_dust/chromium.json
@@ -343,6 +343,8 @@ e7527c777f1d67a32ad11fe47d6e3f2b8f064a7a data/forge/tags/items/nuggets/unobtaniu
 7ab9ea822b8e1bb8385c319fb8dd8238ebd9d22d data/forge/tags/items/nuggets/zinc.json
 46791e64a1a9a20fcd7d1cc1a95c6582cc1a82ce data/forge/tags/items/nuggets/zirconium.json
 40b9a01dde498befb9d8a618c2e2d98c6760651f data/forge/tags/items/ores.json
+5038493f31414ed2600686c79a73c4901e373e20 data/forge/tags/items/oxide_pellet/copper.json
+918bfdc3becaa473907572313d11010eee22e45b data/forge/tags/items/oxide_pellet/iron.json
 0bee4fb69d04927d7b151a7e8b9e4b9863442861 data/forge/tags/items/pellets/acanthite.json
 4ef18729e145367f4cb0f24b43cd36dc04377238 data/forge/tags/items/pellets/alumina.json
 f41d1b8cee4a3f8a9ddb6c89a1b9433346925f6f data/forge/tags/items/pellets/anatase.json

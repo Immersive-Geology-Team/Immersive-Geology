@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4800,
+  "input": {
+    "base_ingredient": {
+      "tag": "forge:metal_oxide/copper"
+    },
+    "count": 8
+  },
+  "result": {
+    "count": 8,
+    "item": "immersivegeology:oxide_pellet_copper"
+  },
+  "time": 240
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-14T19:17:59.151412452	Item Models: immersivegeology
+// 1.20.1	2025-01-14T22:11:36.092062088	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_bindingagent_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_brine_fluid.json
@@ -612,6 +612,8 @@ ed0c9f203339300150397111b53695906cb881e3 assets/immersivegeology/models/item/nug
 ed0c9f203339300150397111b53695906cb881e3 assets/immersivegeology/models/item/nugget_vanadium.json
 ed0c9f203339300150397111b53695906cb881e3 assets/immersivegeology/models/item/nugget_zinc.json
 ed0c9f203339300150397111b53695906cb881e3 assets/immersivegeology/models/item/nugget_zirconium.json
+605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_copper.json
+605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_iron.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_acanthite.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_alumina.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_anatase.json
