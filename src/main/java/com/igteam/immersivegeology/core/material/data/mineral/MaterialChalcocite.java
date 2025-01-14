@@ -76,14 +76,10 @@ public class MaterialChalcocite extends MaterialMineral {
                 getItemTag(ItemCategoryFlags.SLAG),
                 MetalEnum.Copper.getStack(ItemCategoryFlags.INGOT)
         );
-
-        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(
-                "slag_to_dust",
-                getStack(ItemCategoryFlags.SLAG, 1),
-                getStack(ItemCategoryFlags.POWDER, 1),
-                3000,
-                200
-        );
+//TODO rework for byproducts extraction
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDER );
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("dust_" + getName() + "_to_slurry",
                 ItemStack.EMPTY,

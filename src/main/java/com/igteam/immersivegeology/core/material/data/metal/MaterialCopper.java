@@ -9,7 +9,9 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -17,6 +19,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHe
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +58,23 @@ public class MaterialCopper extends MaterialNativeMetal {
     {
         super.setupRecipeStages();
 
-        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2, this, ItemCategoryFlags.INGOT, 1, 400);
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, 2,
+                this, ItemCategoryFlags.INGOT, 1, 400);
+
+        IGMethodBuilder.roast(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.COMPOUND_DUST, 1,
+                ItemCategoryFlags.METAL_OXIDE, 1,
+                1000, 250);
+
+        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.METAL_OXIDE,
+                ItemCategoryFlags.OXIDE_PELLET);
+
+        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create(
+                ItemCategoryFlags.OXIDE_PELLET,
+                ItemCategoryFlags.INGOT,
+                new ItemStack(Ingredients.SLAG), 200);
     }
 
     @Override

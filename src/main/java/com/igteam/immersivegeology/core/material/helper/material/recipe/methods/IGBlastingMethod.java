@@ -115,7 +115,7 @@ public class IGBlastingMethod extends IGRecipeMethod
 	@Override
 	public RecipeMethod getMethod()
 	{
-		return RecipeMethod.BLOOMERY;
+		return RecipeMethod.BLASTING;
 	}
 
 	@Override

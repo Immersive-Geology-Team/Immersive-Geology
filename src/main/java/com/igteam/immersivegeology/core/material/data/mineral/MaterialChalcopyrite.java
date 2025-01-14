@@ -5,12 +5,15 @@ import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -57,5 +60,26 @@ public class MaterialChalcopyrite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Iron));
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
+               ItemCategoryFlags.CRUSHED_ORE, 1,
+               ItemCategoryFlags.SLAG, 1, 800, 250);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
+           ItemCategoryFlags.SLAG,
+           ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(
+            getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+            MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
+            MetalEnum.Copper.getStack(ItemCategoryFlags.COMPOUND_DUST),
+            0.75f, 200, 1000);
+
     }
 }

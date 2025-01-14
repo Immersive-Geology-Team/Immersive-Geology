@@ -67,11 +67,9 @@ public class MaterialPyrite extends MaterialMineral {
     {
         super.setupRecipeStages();
 
-        IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create("crushed_ore_"+getName() + "_to_oxide",
-                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 800, 250);
-
-        //TODO Iron Oxide Blasting
-
-
+        IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
+                "crushed_ore_"+getName() + "_to_oxide",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1,
+                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 800, 250);
     }
 }
