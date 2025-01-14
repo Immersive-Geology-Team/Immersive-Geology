@@ -70,6 +70,14 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.energy = 4800;
 	}
 
+	public void create(IFlagType<?> input_form, IFlagType<?> output_form)
+	{
+		this.name = create_advanced_method_name(input_form, output_form);
+		this.output = parentMaterial.getStack(output_form, 8);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 8);
+		this.time = 240;
+		this.energy = 4800;
+	}
 	@NotNull
 	@Override
 	public IGRecipeMethod.RecipeMethod getMethod()
