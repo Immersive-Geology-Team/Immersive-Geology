@@ -1,4 +1,4 @@
-# Blender 4.2.3 LTS MTL File: 'ball_mill.blend'
+# Blender 4.2.3 LTS MTL File: 'None'
 # www.blender.org
 
 newmtl m_a5736c04-ae9e-ecd1-e2f5-2454776d30ef
@@ -9,4 +9,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/ballmill_drum
+map_Kd ballmill_drum.png
