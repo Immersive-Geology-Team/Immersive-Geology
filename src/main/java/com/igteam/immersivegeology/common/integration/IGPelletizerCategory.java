@@ -11,6 +11,8 @@ package com.igteam.immersivegeology.common.integration;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -46,7 +48,7 @@ public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 11, 23)
 				.setFluidRenderer(500, false, 16, 55)
-				.addFluidStack(Fluids.WATER, 500)
+				.addFluidStack(ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), 500)
 				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 71, 62)

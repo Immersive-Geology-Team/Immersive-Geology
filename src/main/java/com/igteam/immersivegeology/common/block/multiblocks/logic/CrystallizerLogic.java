@@ -21,6 +21,7 @@ import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -220,6 +221,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             tank.readFromNBT(nbt.getCompound("tank"));
             output_tank.readFromNBT(nbt.getCompound("output_tank"));
             inventory.deserializeNBT(nbt.getCompound("inventory"));
+            processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
         }
 
         @Override

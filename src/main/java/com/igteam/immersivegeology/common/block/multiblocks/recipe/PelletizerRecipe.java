@@ -22,6 +22,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 public class PelletizerRecipe extends MultiblockRecipe
 {
 	public static RegistryObject<IERecipeSerializer<PelletizerRecipe>> SERIALIZER;
@@ -54,6 +56,12 @@ public class PelletizerRecipe extends MultiblockRecipe
 	}
 
 	@Override
+	public List<IngredientWithSize> getItemInputs()
+	{
+		return List.of(this.itemIn);
+	}
+
+	@Override
 	public int getTotalProcessTime()
 	{
 		return totalProcessTime.get();
@@ -65,6 +73,12 @@ public class PelletizerRecipe extends MultiblockRecipe
 			if(recipe.itemIn.test(input))
 				return recipe;
 		return null;
+	}
+
+	@Override
+	public ItemStack getDisplayStack(ItemStack input)
+	{
+		return new ItemStack(input.getItem(), input.getCount());
 	}
 
 	@Override

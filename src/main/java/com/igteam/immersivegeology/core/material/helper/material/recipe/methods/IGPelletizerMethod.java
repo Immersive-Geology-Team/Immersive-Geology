@@ -40,32 +40,32 @@ public class IGPelletizerMethod extends IGRecipeMethod
 
 	public void create() {
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
-		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 8); //TODO Later Configurable
-		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 8);//TODO Later Configurable
+		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1); //TODO Later Configurable
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);//TODO Later Configurable
 		this.time = 240;//TODO Later Configurable
 		this.energy = 4800;//TODO Later Configurable
 	}
 
 	public void create(MaterialHelper output_material) {
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
-		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 8);
-		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 8);
+		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);
 		this.time = 240;
 		this.energy = 4800;
 	}
 
 	public void create(IFlagType<?> input_form) {
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
-		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 8);
-		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 8);
+		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
 		this.time = 240;
-		this.energy = 4800;
+		this.energy = 4100;
 	}
 
 	public void create(IFlagType<?> input_form, MaterialHelper output_material) {
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
-		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 8);
-		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 8);
+		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
 		this.time = 240;
 		this.energy = 4800;
 	}
@@ -73,8 +73,8 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	public void create(IFlagType<?> input_form, IFlagType<?> output_form)
 	{
 		this.name = create_advanced_method_name(input_form, output_form);
-		this.output = parentMaterial.getStack(output_form, 8);
-		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 8);
+		this.output = parentMaterial.getStack(output_form, 1);
+		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
 		this.time = 240;
 		this.energy = 4800;
 	}

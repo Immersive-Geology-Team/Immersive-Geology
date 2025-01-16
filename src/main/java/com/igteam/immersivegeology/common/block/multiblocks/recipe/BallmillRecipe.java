@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
+import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
@@ -68,6 +69,12 @@ public class BallmillRecipe extends MultiblockRecipe
 	}
 
 	@Override
+	public ItemStack getDisplayStack(ItemStack input)
+	{
+		return new ItemStack(input.getItem(), 1);
+	}
+
+	@Override
 	protected IERecipeSerializer<?> getIESerializer()
 	{
 		return SERIALIZER.get();
@@ -76,6 +83,6 @@ public class BallmillRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 4;
+		return 1;
 	}
 }

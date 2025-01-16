@@ -21,6 +21,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -301,6 +302,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             nbt.put("energy", energy.serializeNBT());
             nbt.put("acid_tank", acid_tank.writeToNBT(new CompoundTag()));
             nbt.put("output_tank", output_tank.writeToNBT(new CompoundTag()));
+            nbt.put("processor", this.processor.toNBT());
         }
 
 
@@ -309,6 +311,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             energy.deserializeNBT(nbt.get("energy"));
             acid_tank.readFromNBT(nbt.getCompound("acid_tank"));
             output_tank.readFromNBT(nbt.getCompound("output_tank"));
+            processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
         }
 
         @Override

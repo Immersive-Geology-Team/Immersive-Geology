@@ -2,13 +2,9 @@
   "type": "immersivegeology:pelletizer",
   "energy": 4800,
   "input": {
-    "base_ingredient": {
-      "tag": "forge:metal_oxide/iron"
-    },
-    "count": 8
+    "tag": "forge:metal_oxide/iron"
   },
   "result": {
-    "count": 8,
     "item": "immersivegeology:oxide_pellet_iron"
   },
   "time": 240

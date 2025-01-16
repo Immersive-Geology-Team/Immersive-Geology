@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
@@ -18,18 +19,25 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLev
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.DirectProcessingItemHandler;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
+import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -38,6 +46,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -70,29 +79,12 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         final BallmillLogic.State state = context.getState();
 
         final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = (state.rsState.isEnabled(context)) && state.getEnergy().getEnergyStored() > ENERGY_CONSUMPTION_RATE && state.processor.getQueueSize() > 0;
+        state.renderAsActive = state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+
         if(wasActive != state.renderAsActive)
         {
             context.requestMasterBESync();
         }
-
-        state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-    }
-
-    private static boolean tryRunRecipe(ItemStack input, State state, Level level)
-    {
-        if(state.energy.getEnergyStored() <= 0 || state.processor.getQueueSize() >= state.processor.getMaxQueueSize())
-            return false;
-
-        if(input.isEmpty()) return false;
-
-        BallmillRecipe recipe = BallmillRecipe.findRecipe(level, input);
-
-        if(recipe == null) return false;
-
-        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, input);
-        input.shrink(1);
-        return state.processor.addProcessToQueue(process, level, false);
     }
 
     @Override
@@ -111,7 +103,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
         if(cap == ForgeCapabilities.ITEM_HANDLER && ITEM_INPUT_CAP.equals(position))
         {
-            return state.itemInputCap.cast(ctx);
+            return state.insertionHandler.cast(ctx);
         }
 
         return LazyOptional.empty();
@@ -128,7 +120,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> itemInputCap;
+        private final StoredCapability<IItemHandler> insertionHandler;
         private float rotation;
         private boolean renderAsActive;
         private final StoredCapability<IEnergyStorage> energyCap;
@@ -138,7 +130,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
             this.rotation = 0;
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(8, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
+            this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             final Runnable sync = ctx.getSyncRunnable();
@@ -147,17 +139,24 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
                 sync.run();
             };
 
-            this.itemInputCap = new StoredCapability<>(new InsertOnlyInventory()
+            this.insertionHandler = new StoredCapability<>(new InsertOnlyInventory()
             {
                 @Override
                 protected ItemStack insert(ItemStack toInsert, boolean simulate)
                 {
-                    toInsert = toInsert.copy();
-                    if(tryRunRecipe(toInsert, BallmillLogic.State.this, levelGetter.get()))
-                    {
-                        changedAndSync.run();
+                    ItemStack stack = toInsert.copy();
+                    BallmillRecipe recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
+                    if (recipe == null) {
+                        return stack;
+                    } else {
+                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+
+                        if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
+                            stack.shrink(stack.getCount());
+                        }
+
+                        return stack;
                     }
-                    return toInsert;
                 }
             });
         }
@@ -181,7 +180,8 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
         @Override
         public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
+            this.energy.deserializeNBT(nbt.get("energy"));
+            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
         }
 
         @Override

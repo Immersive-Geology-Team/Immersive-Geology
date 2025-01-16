@@ -32,6 +32,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -46,6 +47,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -62,7 +64,6 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
     private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(7,2,1, RelativeBlockFace.UP);
 
-
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
 
@@ -74,7 +75,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
     }
 
-    private static boolean tryRunRecipe(ItemStack input, State state, Level level)
+    private static boolean tryRunRecipe(ItemStack input, State state, Level level, boolean simulate)
     {
         if(state.energy.getEnergyStored() <= 0 || state.processor.getQueueSize() >= state.processor.getMaxQueueSize())
             return false;
@@ -86,8 +87,9 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         if(recipe == null) return false;
 
         MultiblockProcessInWorld<RotaryKilnRecipe> process = new MultiblockProcessInWorld<>(recipe, input);
-        input.shrink(1);
-        return state.processor.addProcessToQueue(process, level, false);
+
+        if(!simulate) input.shrink(1);
+        return state.processor.addProcessToQueue(process, level, simulate);
     }
 
     @Override
@@ -145,12 +147,19 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
                 @Override
                 protected ItemStack insert(ItemStack toInsert, boolean simulate)
                 {
-                    toInsert = toInsert.copy();
-                    if(tryRunRecipe(toInsert, RotaryKilnLogic.State.this, levelGetter.get()))
-                    {
-                        changedAndSync.run();
+                    ItemStack stack = toInsert.copy();
+                    RotaryKilnRecipe recipe = RotaryKilnRecipe.findRecipe(levelGetter.get(), stack);
+                    if (recipe == null) {
+                        return stack;
+                    } else {
+                        MultiblockProcessInWorld<RotaryKilnRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+
+                        if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
+                            stack.shrink(stack.getCount());
+                        }
+
+                        return stack;
                     }
-                    return toInsert;
                 }
             });
         }
@@ -170,6 +179,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         @Override
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
+            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
         }
 
         @Override

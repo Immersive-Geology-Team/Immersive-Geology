@@ -208,8 +208,6 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
             };
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.secondary = new DroppingMultiblockOutput(SECONDARY_OUTPUT_POS, ctx);
-
-
             this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
 
             this.insertionHandler = new StoredCapability<>(new InsertOnlyInventory()

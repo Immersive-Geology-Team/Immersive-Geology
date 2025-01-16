@@ -29,7 +29,7 @@ public class PelletizerShape extends GenericShape {
         final int bZ = posInMultiblock.getZ();
 
         List<AABB> main = new ArrayList<>();
-        main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
         return main;
     }
 }
