@@ -152,7 +152,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
                         MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
 
                         if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
-                            stack.shrink(stack.getCount());
+                            stack.shrink(recipe.itemIn.getCount());
                         }
 
                         return stack;

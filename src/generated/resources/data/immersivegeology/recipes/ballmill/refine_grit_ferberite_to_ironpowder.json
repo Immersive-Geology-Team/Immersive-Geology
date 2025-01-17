@@ -2,10 +2,10 @@
   "type": "immersivegeology:ballmill",
   "energy": 16000,
   "input": {
-    "tag": "forge:grits/acanthite"
+    "tag": "forge:grits/ferberite"
   },
   "result": {
-    "item": "immersivegeology:powder_acanthite"
+    "item": "immersivegeology:powder_ferberite"
   },
   "time": 200
 }

@@ -75,23 +75,6 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
     }
 
-    private static boolean tryRunRecipe(ItemStack input, State state, Level level, boolean simulate)
-    {
-        if(state.energy.getEnergyStored() <= 0 || state.processor.getQueueSize() >= state.processor.getMaxQueueSize())
-            return false;
-
-        if(input.isEmpty()) return false;
-
-        RotaryKilnRecipe recipe = RotaryKilnRecipe.findRecipe(level, input);
-
-        if(recipe == null) return false;
-
-        MultiblockProcessInWorld<RotaryKilnRecipe> process = new MultiblockProcessInWorld<>(recipe, input);
-
-        if(!simulate) input.shrink(1);
-        return state.processor.addProcessToQueue(process, level, simulate);
-    }
-
     @Override
     public State createInitialState(IInitialMultiblockContext<State> capability) {
         return new RotaryKilnLogic.State(capability);
@@ -130,7 +113,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         private final StoredCapability<IEnergyStorage> energyCap;
         private final MultiblockProcessor<RotaryKilnRecipe, ProcessContextInWorld<RotaryKilnRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;
-        public State(IInitialMultiblockContext<State> ctx){
+        public State(IInitialMultiblockContext<State> ctx) {
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(16, 0, 1, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
@@ -155,7 +138,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
                         MultiblockProcessInWorld<RotaryKilnRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
 
                         if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
-                            stack.shrink(stack.getCount());
+                            stack.shrink(recipe.itemIn.getCount());
                         }
 
                         return stack;

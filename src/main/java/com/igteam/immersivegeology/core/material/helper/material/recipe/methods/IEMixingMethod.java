@@ -36,29 +36,29 @@ public class IEMixingMethod extends IGRecipeMethod
 	private FluidStack fluid_result;
 	private TagKey<Fluid> input_fluid;
 	private String name;
-	private ItemStack[] input_list;
+	private TagKey<Item> input;
 
 	public IEMixingMethod(MaterialHelper parent, IGStageDesignation stage)
 	{
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-	public void create(Item input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
+	public void create(TagKey<Item> input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
 		this.fluid_result = new FluidStack(parentMaterial.getFluid(BlockCategoryFlags.FLUID), fluid_out_amount);
 		this.input_fluid = input_fluid;
 		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
-		this.input_list = new ItemStack[]{new ItemStack(input)};
+		this.input = input;
 		this.input_fluid_amount = input_fluid_amount;
-		this.energy = 3200;
+		this.energy = 1600;
 	}
 
-	public void create(ItemStack input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
+	public void create(IFlagType<?> input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
 		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
 		this.fluid_result = new FluidStack(parentMaterial.getFluid(BlockCategoryFlags.FLUID), fluid_out_amount);
 		this.input_fluid = input_fluid;
-		this.input_list = new ItemStack[]{input};
+		this.input = parentMaterial.getItemTag(input);
 		this.input_fluid_amount = input_fluid_amount;
-		this.energy = 3200;
+		this.energy = 1600;
 	}
 
 	@NotNull
@@ -87,7 +87,7 @@ public class IEMixingMethod extends IGRecipeMethod
 		{
 			MixerRecipeBuilder builder = MixerRecipeBuilder.builder(fluid_result);
 			builder.addFluidTag(input_fluid, input_fluid_amount);
-			builder.addInput(input_list);
+			builder.addInput(input);
 			builder.setEnergy(energy);
 			builder.build(consumer, getLocation());
 			return true;

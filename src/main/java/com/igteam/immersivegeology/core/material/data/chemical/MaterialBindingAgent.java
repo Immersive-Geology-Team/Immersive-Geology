@@ -35,9 +35,9 @@ public class MaterialBindingAgent extends MaterialChemical
 	public void setupRecipeStages()
 	{
 		logged_recipes.add(getName());
-
-		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(Items.CLAY_BALL, FluidTags.WATER, 4000, 4000);
-		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(IGRegistrationHolder.getItem.apply("raw_fire_clay"), FluidTags.WATER, 6000, 6000);
+		//		TODO FIX This shit
+		//		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(Items.CLAY_BALL, FluidTags.WATER, 4000, 4000);
+		//		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(IGRegistrationHolder.getItem.apply("raw_fire_clay"), FluidTags.WATER, 6000, 6000);
 	}
 
 	@Override

@@ -209,7 +209,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), PelletizerRecipe.RECIPES::getById);
 
-            DirectProcessingItemHandler<PelletizerRecipe> insertionHandler = (new DirectProcessingItemHandler<>(ctx.levelSupplier(), this.processor, PelletizerRecipe::findRecipe)).setProcessStacking(true);
+            DirectProcessingItemHandler<PelletizerRecipe> insertionHandler = (new DirectProcessingItemHandler<>(ctx.levelSupplier(), this.processor, PelletizerRecipe::findRecipe));
             this.insertionHandler = new StoredCapability<>(insertionHandler);
 
             this.rotation = 0;

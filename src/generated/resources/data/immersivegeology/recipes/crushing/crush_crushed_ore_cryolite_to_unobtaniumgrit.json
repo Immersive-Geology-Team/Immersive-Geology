@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_cryolite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_cryolite"
+  },
+  "secondaries": [],
+  "time": 50
+}

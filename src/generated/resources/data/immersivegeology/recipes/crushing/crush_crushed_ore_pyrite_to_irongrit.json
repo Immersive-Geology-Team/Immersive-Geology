@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_pyrite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_pyrite"
+  },
+  "secondaries": [],
+  "time": 50
+}

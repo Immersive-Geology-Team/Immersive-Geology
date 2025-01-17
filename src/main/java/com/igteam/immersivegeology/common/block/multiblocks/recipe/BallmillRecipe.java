@@ -69,12 +69,6 @@ public class BallmillRecipe extends MultiblockRecipe
 	}
 
 	@Override
-	public ItemStack getDisplayStack(ItemStack input)
-	{
-		return new ItemStack(input.getItem(), 1);
-	}
-
-	@Override
 	protected IERecipeSerializer<?> getIESerializer()
 	{
 		return SERIALIZER.get();

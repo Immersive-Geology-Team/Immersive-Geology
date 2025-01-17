@@ -1,11 +1,11 @@
 {
   "type": "immersivegeology:ballmill",
-  "energy": 16000,
+  "energy": 32000,
   "input": {
     "tag": "forge:grits/acanthite"
   },
   "result": {
     "item": "immersivegeology:powder_acanthite"
   },
-  "time": 200
+  "time": 400
 }

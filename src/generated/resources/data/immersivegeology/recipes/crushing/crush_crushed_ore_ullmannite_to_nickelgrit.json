@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_ullmannite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_ullmannite"
+  },
+  "secondaries": [],
+  "time": 50
+}

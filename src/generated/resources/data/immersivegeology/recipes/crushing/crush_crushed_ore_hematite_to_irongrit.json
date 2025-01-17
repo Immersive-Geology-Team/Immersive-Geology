@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_hematite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_hematite"
+  },
+  "secondaries": [],
+  "time": 50
+}

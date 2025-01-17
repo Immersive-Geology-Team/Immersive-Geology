@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_acanthite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_acanthite"
+  },
+  "secondaries": [],
+  "time": 50
+}

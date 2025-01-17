@@ -68,13 +68,5 @@ public class MaterialHematite extends MaterialMineral {
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                 getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 600);
 
-        //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
-
-        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER);
-
-        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
-                getItemTag(ItemCategoryFlags.PELLET),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
     }
 }
