@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,6 +19,7 @@ public class MaterialTungsten extends MaterialMetal {
 
     public MaterialTungsten() {
         super();
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
     }
 
     @Override

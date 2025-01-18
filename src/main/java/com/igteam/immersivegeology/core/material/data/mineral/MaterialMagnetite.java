@@ -64,6 +64,9 @@ public class MaterialMagnetite extends MaterialMineral {
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
 
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
+                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
+                MetalEnum.Nickel.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
         //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
     }
 }

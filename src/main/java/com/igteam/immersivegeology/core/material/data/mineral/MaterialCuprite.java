@@ -60,6 +60,10 @@ public class MaterialCuprite extends MaterialMineral
 	{
 		super.setupRecipeStages();
 		IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2,  ItemCategoryFlags.INGOT, 1, 400);
+
+		IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
+				MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),
+				MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
 	}
 
 	@Override

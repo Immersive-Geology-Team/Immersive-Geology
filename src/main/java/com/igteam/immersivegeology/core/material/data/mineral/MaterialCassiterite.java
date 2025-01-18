@@ -60,5 +60,10 @@ public class MaterialCassiterite extends MaterialMineral {
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                 MetalEnum.Tin.getStack(ItemCategoryFlags.INGOT));
 
+
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
+                MetalEnum.Tin.getStack(ItemCategoryFlags.METAL_OXIDE),
+                MetalEnum.Tungsten.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
+
     }
 }

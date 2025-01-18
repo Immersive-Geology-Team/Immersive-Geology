@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,6 +20,8 @@ public class MaterialManganese extends MaterialMetal {
 
     public MaterialManganese() {
         super();
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
+
     }
 
     @Override
