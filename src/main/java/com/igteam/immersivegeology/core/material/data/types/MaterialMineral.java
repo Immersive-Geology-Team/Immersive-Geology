@@ -15,6 +15,7 @@ public class MaterialMineral extends GeologyMaterial {
 
     public MaterialMineral(){
         super();
+        //TODO Remove Generalization category flags and set them up for proper minerals.
         addFlags(MaterialFlags.HAS_SLURRY, ItemCategoryFlags.SLAG, ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET, ItemCategoryFlags.POWDERED_SLAG);
     }
 
