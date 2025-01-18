@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
@@ -43,6 +44,7 @@ public class MaterialMetal extends GeologyMaterial {
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.OXIDE_PELLET),
                     getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+
         }
     }
 

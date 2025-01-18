@@ -2,7 +2,7 @@
   "type": "immersiveengineering:mixer",
   "energy": 3200,
   "fluid": {
-    "amount": 500,
+    "amount": 2000,
     "tag": "minecraft:water"
   },
   "inputs": [
@@ -11,7 +11,7 @@
     }
   ],
   "result": {
-    "amount": 500,
+    "amount": 2000,
     "fluid": "immersivegeology:fluid_bindingagent"
   }
 }
