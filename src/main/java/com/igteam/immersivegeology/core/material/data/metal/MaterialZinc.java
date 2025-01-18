@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
 import java.util.function.BiFunction;
@@ -19,6 +20,7 @@ public class MaterialZinc extends MaterialMetal {
 
     public MaterialZinc() {
         super();
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
     }
 
     @Override

@@ -13,6 +13,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
@@ -28,7 +30,13 @@ public class MaterialMetal extends GeologyMaterial {
     @Override
     public void setupRecipeStages()
     {
-
+        if (hasFlag(ItemCategoryFlags.OXIDE_PELLET))
+        {
+            IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);
+            IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
+                    getItemTag(ItemCategoryFlags.OXIDE_PELLET),
+                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+        }
     }
 
     @Override

@@ -35,6 +35,8 @@ public class MaterialCuprite extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
 		this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+		addFlags(ItemCategoryFlags.PELLET);
+
 		CONFIG = new MineralConfig(40, 50, 1, 0, 200, 1000, 0.5,false, Optional.of(BiomeTags.IS_OVERWORLD));
 	}
 

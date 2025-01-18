@@ -22,6 +22,7 @@ public class MaterialTin extends MaterialMetal {
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
     }
 
     @Override
