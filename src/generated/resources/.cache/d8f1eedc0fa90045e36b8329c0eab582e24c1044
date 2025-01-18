@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-19T03:21:11.74261256	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-01-19T04:52:41.020342408	Tags for minecraft:item mod id immersivegeology
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
 f84e009ee715037e0d32c9dc9e31f52efeb7302f data/forge/tags/items/compound_dust/chromium.json
@@ -346,8 +346,10 @@ e7527c777f1d67a32ad11fe47d6e3f2b8f064a7a data/forge/tags/items/nuggets/unobtaniu
 d344b62a8dcf12745817bb1ad079b1375651a88e data/forge/tags/items/oxide_pellet/chromium.json
 5038493f31414ed2600686c79a73c4901e373e20 data/forge/tags/items/oxide_pellet/copper.json
 918bfdc3becaa473907572313d11010eee22e45b data/forge/tags/items/oxide_pellet/iron.json
+ccb8735938ef3a8effa73d38913aa8fac7c86030 data/forge/tags/items/oxide_pellet/manganese.json
 54110c98849f7355df785856f8d929c0ae8f8594 data/forge/tags/items/oxide_pellet/nickel.json
 0015d94cdba254f0d3772bda44ed271f320d7fd8 data/forge/tags/items/oxide_pellet/tin.json
+19373fbb1efc88de97fc16acc7af568a22bedf10 data/forge/tags/items/oxide_pellet/tungsten.json
 21591d56db2d931eb147d3b9a0fff1ed3f1bfd31 data/forge/tags/items/oxide_pellet/zinc.json
 bf0fc1c8a21a0e1ff7e36a68ffb8a52c668f14f7 data/forge/tags/items/pellets/cassiterite.json
 176cd76721a273a5cae7032058f9cb4cddd7b311 data/forge/tags/items/pellets/cuprite.json

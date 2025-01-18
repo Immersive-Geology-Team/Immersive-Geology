@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-19T01:17:21.981213497	Item Models: immersivegeology
+// 1.20.1	2025-01-19T04:52:41.024637155	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_bindingagent_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_brine_fluid.json
@@ -615,8 +615,10 @@ ed0c9f203339300150397111b53695906cb881e3 assets/immersivegeology/models/item/nug
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_chromium.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_copper.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_iron.json
+605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_manganese.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_nickel.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_tin.json
+605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_tungsten.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_zinc.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_cassiterite.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_cuprite.json

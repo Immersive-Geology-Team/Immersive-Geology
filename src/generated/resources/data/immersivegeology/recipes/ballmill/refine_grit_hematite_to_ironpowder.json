@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/hematite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_hematite"
+  },
+  "time": 200
+}

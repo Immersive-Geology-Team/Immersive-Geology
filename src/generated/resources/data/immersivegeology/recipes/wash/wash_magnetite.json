@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravityseparator",
+  "byproduct": {
+    "item": "immersivegeology:metal_oxide_nickel"
+  },
+  "byproduct_chance": 0.075,
+  "input": {
+    "tag": "forge:powders/magnetite"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_iron"
+  },
+  "time": 200,
+  "water": 1000
+}

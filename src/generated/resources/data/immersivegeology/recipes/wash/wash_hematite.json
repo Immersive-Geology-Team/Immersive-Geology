@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravityseparator",
+  "byproduct": {
+    "item": "immersivegeology:metal_oxide_chromium"
+  },
+  "byproduct_chance": 0.075,
+  "input": {
+    "tag": "forge:powders/hematite"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_iron"
+  },
+  "time": 200,
+  "water": 1000
+}

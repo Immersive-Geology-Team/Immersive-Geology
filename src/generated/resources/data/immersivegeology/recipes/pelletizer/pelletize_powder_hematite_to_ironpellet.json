@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/hematite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_hematite"
+  },
+  "time": 600
+}

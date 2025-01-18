@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:slag/chalcocite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_chalcocite"
+  },
+  "time": 800
+}
