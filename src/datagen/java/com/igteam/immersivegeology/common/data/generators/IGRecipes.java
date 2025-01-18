@@ -202,7 +202,7 @@ public class IGRecipes extends RecipeProvider
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
 				for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
 				{
-					float chance = 0.66f;
+					float chance = 0.33f;
 					int nerfed_amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 1 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 2 : 3);
 					int time = 100;
 					int energy = 100;

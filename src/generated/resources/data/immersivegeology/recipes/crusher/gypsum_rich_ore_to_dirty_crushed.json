@@ -9,19 +9,19 @@
   },
   "secondaries": [
     {
-      "chance": 0.66,
-      "output": {
-        "item": "immersivegeology:dirty_crushed_ore_gypsum"
-      }
-    },
-    {
       "chance": 0.33,
       "output": {
         "item": "immersivegeology:dirty_crushed_ore_gypsum"
       }
     },
     {
-      "chance": 0.33,
+      "chance": 0.165,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_gypsum"
+      }
+    },
+    {
+      "chance": 0.165,
       "output": {
         "item": "immersivegeology:dirty_crushed_ore_gypsum"
       }

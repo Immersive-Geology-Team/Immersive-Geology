@@ -34,6 +34,7 @@ public class IGCrushingMethod extends IGRecipeMethod
 	{
 		super(new IGRecipeStage(parentMaterial, stage) {});
 	}
+
 	private ItemStack output;
 	private IngredientWithSize input, secondary;
 	private float chance = 0;

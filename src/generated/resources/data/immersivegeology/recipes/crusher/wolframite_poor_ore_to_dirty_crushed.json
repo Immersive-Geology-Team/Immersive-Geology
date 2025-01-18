@@ -9,7 +9,7 @@
   },
   "secondaries": [
     {
-      "chance": 0.66,
+      "chance": 0.33,
       "output": {
         "item": "immersivegeology:dirty_crushed_ore_wolframite"
       }

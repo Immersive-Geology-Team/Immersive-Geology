@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/cassiterite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_cassiterite"
+  },
+  "time": 300
+}

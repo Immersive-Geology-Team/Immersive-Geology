@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4800,
+  "input": {
+    "tag": "forge:metal_oxide/nickel"
+  },
+  "result": {
+    "item": "immersivegeology:oxide_pellet_nickel"
+  },
+  "time": 300
+}

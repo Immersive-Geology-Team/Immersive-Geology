@@ -62,7 +62,7 @@ public class MaterialMagnetite extends MaterialMineral {
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-               getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+               getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 900);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
