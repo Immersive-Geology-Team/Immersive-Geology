@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.PelletizerRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -42,7 +43,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1); //TODO Later Configurable
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);//TODO Later Configurable
-		this.time = 300;//TODO Later Configurable
+		this.time = IGLib.PELLETIZER_DEFAULT_TIME;//TODO Later Configurable
 		this.energy = 4800;//TODO Later Configurable
 	}
 
@@ -50,7 +51,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
 		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);
-		this.time = 300;
+		this.time = IGLib.PELLETIZER_DEFAULT_TIME;
 		this.energy = 4800;
 	}
 
@@ -58,7 +59,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 300;
+		this.time = IGLib.PELLETIZER_DEFAULT_TIME;
 		this.energy = 4100;
 	}
 
@@ -66,7 +67,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
 		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 300;
+		this.time = IGLib.PELLETIZER_DEFAULT_TIME;
 		this.energy = 4800;
 	}
 
@@ -75,7 +76,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 300;
+		this.time = IGLib.PELLETIZER_DEFAULT_TIME;
 		this.energy = 4800;
 	}
 	@NotNull
