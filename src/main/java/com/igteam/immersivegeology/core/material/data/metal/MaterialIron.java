@@ -43,18 +43,4 @@ public class MaterialIron extends MaterialNativeMetal {
         return ((p, i) -> (0xd8dada));
     }
 
-    @Override
-    public void setupRecipeStages()
-    {
-        super.setupRecipeStages();
-
-        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(
-                ItemCategoryFlags.METAL_OXIDE,
-                ItemCategoryFlags.OXIDE_PELLET);
-
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create(
-                ItemCategoryFlags.OXIDE_PELLET,
-                ItemCategoryFlags.INGOT,
-                new ItemStack(Ingredients.SLAG), 100);
-    }
 }

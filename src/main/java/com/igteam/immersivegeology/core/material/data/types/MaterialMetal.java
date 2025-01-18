@@ -9,10 +9,12 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.TagKey;
@@ -27,6 +29,11 @@ public class MaterialMetal extends GeologyMaterial {
         addFlags(BlockCategoryFlags.SLAB, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST, MaterialFlags.IS_MOLTEN_METAL, MaterialFlags.HAS_SLURRY);
     }
 
+    @Override
+    public MaterialInterface<?> getProductionMaterial()
+    {
+        return MetalEnum.valueOf(getName().substring(0, 1).toUpperCase() + getName().substring(1));
+    }
     @Override
     public void setupRecipeStages()
     {
