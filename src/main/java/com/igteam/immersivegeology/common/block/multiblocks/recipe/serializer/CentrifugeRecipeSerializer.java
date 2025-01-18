@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CentrifugeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +44,7 @@ public class CentrifugeRecipeSerializer extends IERecipeSerializer<CentrifugeRec
 	@Override
 	public @Nullable CentrifugeRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
+		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		FluidTagInput input = FluidTagInput.read(buffer);
 		int energy = buffer.readInt();
@@ -53,6 +55,7 @@ public class CentrifugeRecipeSerializer extends IERecipeSerializer<CentrifugeRec
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, CentrifugeRecipe recipe)
 	{
+		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		writeLazyStack(buffer, recipe.itemOutput);
 		recipe.fluidIn.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessEnergy());

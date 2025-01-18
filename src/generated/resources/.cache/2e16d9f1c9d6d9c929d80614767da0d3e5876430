@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-14T19:17:59.161298535	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-01-19T03:21:11.748170656	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 acd0e1939cf7655b58c67b56be5980a3eb0be432 data/forge/tags/fluids/bindingagent.json
 f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
@@ -53,4 +53,3 @@ b8e04d1a760598e615fd5f05728d2ff3578b2be5 data/forge/tags/fluids/sulfuricacid.jso
 54e971e29f4cd4132b743c8d3bea360c93afccb3 data/forge/tags/fluids/vanadium.json
 1d09e1c3f05ef1b9b09080e07fb0665dd62a1343 data/forge/tags/fluids/zinc.json
 a5cd8cc8588f063a3110ed98e885aaacfdbc5511 data/forge/tags/fluids/zirconium.json
-6efb2deeb46fd232f4c4175caae7fde4bb5ec991 data/tfc/tags/fluids/usable_in_ingot_mold.json

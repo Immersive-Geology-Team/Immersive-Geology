@@ -68,6 +68,7 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 	@Override
 	public @Nullable ChemicalRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
+		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		ItemStack output = buffer.readItem();
 		FluidStack fluidOut = FluidStack.readFromPacket(buffer);
 		IngredientWithSize itemInput = IngredientWithSize.read(buffer);
@@ -86,6 +87,7 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, ChemicalRecipe recipe)
 	{
+		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		buffer.writeItemStack(recipe.itemOutput, false);
 		recipe.fluidOutput.writeToPacket(buffer);
 		recipe.itemInput.write(buffer);

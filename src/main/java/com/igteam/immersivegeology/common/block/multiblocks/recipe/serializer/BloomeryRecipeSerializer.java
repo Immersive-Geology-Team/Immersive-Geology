@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -42,6 +43,7 @@ public class BloomeryRecipeSerializer extends IERecipeSerializer<BloomeryRecipe>
 	@Override
 	public @Nullable BloomeryRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
+		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		IngredientWithSize input = IngredientWithSize.read(buffer);
 		int time = buffer.readInt();
@@ -51,6 +53,7 @@ public class BloomeryRecipeSerializer extends IERecipeSerializer<BloomeryRecipe>
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, BloomeryRecipe recipe)
 	{
+		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		writeLazyStack(buffer, recipe.result);
 		recipe.input.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessTime());

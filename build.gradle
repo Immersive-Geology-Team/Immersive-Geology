@@ -211,8 +211,8 @@ dependencies {
 //    implementation fg.deobf("curse.maven:quark-243121:5594847")
 
     // TFC
-    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
-    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
+//    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
+//    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 
     datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
 

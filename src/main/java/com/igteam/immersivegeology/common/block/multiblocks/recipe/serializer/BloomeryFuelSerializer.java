@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -39,12 +40,14 @@ public class BloomeryFuelSerializer extends IERecipeSerializer<BloomeryFuel>
 
 	@Nullable
 	public BloomeryFuel fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		Ingredient input = Ingredient.fromNetwork(buffer);
 		int time = buffer.readInt();
 		return new BloomeryFuel(recipeId, input, time);
 	}
 
 	public void toNetwork(FriendlyByteBuf buffer, BloomeryFuel recipe) {
+		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		recipe.input.toNetwork(buffer);
 		buffer.writeInt(recipe.burnTime);
 	}

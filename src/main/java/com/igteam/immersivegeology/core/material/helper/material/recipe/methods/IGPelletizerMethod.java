@@ -38,7 +38,6 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-
 	public void create() {
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1); //TODO Later Configurable

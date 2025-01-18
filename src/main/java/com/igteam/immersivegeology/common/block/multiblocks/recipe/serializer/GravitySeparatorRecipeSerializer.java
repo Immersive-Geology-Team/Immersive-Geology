@@ -47,6 +47,7 @@ public class GravitySeparatorRecipeSerializer extends IERecipeSerializer<Gravity
 	@Override
 	public @Nullable GravitySeparatorRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
+		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		Lazy<ItemStack> byproduct = readLazyStack(buffer);
 		float chance = buffer.readFloat();
@@ -59,6 +60,7 @@ public class GravitySeparatorRecipeSerializer extends IERecipeSerializer<Gravity
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, GravitySeparatorRecipe recipe)
 	{
+		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		writeLazyStack(buffer, recipe.itemOutput);
 		writeLazyStack(buffer, recipe.itemByproduct);
 		buffer.writeFloat(recipe.getChance());
