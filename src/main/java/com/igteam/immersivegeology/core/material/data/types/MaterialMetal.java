@@ -9,13 +9,16 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
@@ -36,7 +39,14 @@ public class MaterialMetal extends GeologyMaterial {
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.OXIDE_PELLET),
                     getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+
         }
+    }
+
+    @Override
+    public MaterialInterface<?> getProductionMaterial()
+    {
+        return MetalEnum.valueOf(getName());
     }
 
     @Override

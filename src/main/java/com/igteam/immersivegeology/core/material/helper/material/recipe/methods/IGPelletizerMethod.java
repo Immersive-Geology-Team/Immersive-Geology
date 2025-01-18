@@ -42,7 +42,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1); //TODO Later Configurable
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);//TODO Later Configurable
-		this.time = 240;//TODO Later Configurable
+		this.time = 300;//TODO Later Configurable
 		this.energy = 4800;//TODO Later Configurable
 	}
 
@@ -50,7 +50,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET);
 		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(ItemCategoryFlags.POWDER), 1);
-		this.time = 240;
+		this.time = 300;
 		this.energy = 4800;
 	}
 
@@ -58,7 +58,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
 		this.output = parentMaterial.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 240;
+		this.time = 300;
 		this.energy = 4100;
 	}
 
@@ -66,7 +66,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, ItemCategoryFlags.PELLET);
 		this.output = output_material.getStack(ItemCategoryFlags.PELLET, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 240;
+		this.time = 300;
 		this.energy = 4800;
 	}
 
@@ -75,7 +75,7 @@ public class IGPelletizerMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), 1);
-		this.time = 240;
+		this.time = 300;
 		this.energy = 4800;
 	}
 	@NotNull

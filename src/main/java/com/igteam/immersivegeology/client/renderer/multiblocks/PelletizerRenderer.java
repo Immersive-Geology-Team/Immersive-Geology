@@ -57,7 +57,7 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
                 poseStack.translate(-0.5,1.90625,0.21875);
-                float angleDrum = (rot) - pPartialTick;
+                float angleDrum = isActive ? (rot) - pPartialTick : rot;
                 poseStack.mulPose(new Quaternionf().rotateAxis(30 * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
                 poseStack.pushPose();
                     poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));

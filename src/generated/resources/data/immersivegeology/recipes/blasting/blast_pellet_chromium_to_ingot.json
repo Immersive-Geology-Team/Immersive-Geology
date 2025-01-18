@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:oxide_pellet/chromium"
+  },
+  "result": {
+    "item": "immersivegeology:ingot_unobtanium"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "time": 200
+}

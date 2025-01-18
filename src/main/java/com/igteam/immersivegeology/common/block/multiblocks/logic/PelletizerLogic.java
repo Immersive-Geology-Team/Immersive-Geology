@@ -78,7 +78,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     public void tickClient(IMultiblockContext<State> context) {
         final PelletizerLogic.State state = context.getState();
         float rot = state.rotation;
-        state.rotation = (float)((rot-2.5)%360);
+        if(state.shouldRenderActive()) state.rotation = (float)((rot-2.5)%360);
     }
 
     @Override

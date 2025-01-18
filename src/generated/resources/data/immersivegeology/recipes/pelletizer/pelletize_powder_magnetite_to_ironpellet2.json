@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:pelletizer",
-  "energy": 4100,
+  "energy": 4800,
   "input": {
     "tag": "forge:powders/magnetite"
   },

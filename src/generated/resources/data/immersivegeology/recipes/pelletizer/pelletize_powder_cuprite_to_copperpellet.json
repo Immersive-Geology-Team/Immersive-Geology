@@ -2,10 +2,10 @@
   "type": "immersivegeology:pelletizer",
   "energy": 4100,
   "input": {
-    "tag": "forge:powders/magnetite"
+    "tag": "forge:powders/cuprite"
   },
   "result": {
-    "item": "immersivegeology:pellet_magnetite"
+    "item": "immersivegeology:pellet_cuprite"
   },
   "time": 240
 }
