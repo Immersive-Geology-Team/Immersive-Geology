@@ -81,5 +81,10 @@ public class MaterialChalcopyrite extends MaterialMineral {
             MetalEnum.Copper.getStack(ItemCategoryFlags.COMPOUND_DUST),
             0.75f, 200, 1000);
 
+        //TODO -- Move it somewhere?
+        IGMethodBuilder.roast(this, IGStageDesignation.PURIFICATION).create("roast_copper_sulfide_to_oxide",
+                MetalEnum.Copper.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1,
+                MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),  800, 120);
+
     }
 }

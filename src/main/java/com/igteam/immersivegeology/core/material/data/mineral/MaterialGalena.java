@@ -46,22 +46,25 @@ public class MaterialGalena extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        //IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create("dust_"+getName() + "");
 
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("pellet" + getName() + "_to_metal",
-                getItemTag(ItemCategoryFlags.PELLET), getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+        //TODO -- direct blasting of ore?
+        IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
+                ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
+                ItemCategoryFlags.SLAG, 1,         // Output
+                1000,                                          // Roasting Time
+                200                                            // Sulfur Dioxide Output Amount
+        );
 
-        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2, ItemCategoryFlags.INGOT, 1, 400);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG );
+        //TODO rework for byproducts extraction
 
-        //loss of SO2
-        //loss of silver
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                0.075f, 200, 1000);
 
-        //roast it -> So2 + SLAG
-
-        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(
-                getItemTag(ItemCategoryFlags.POWDERED_SLAG), getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getByproductMaterial().getStack(ItemCategoryFlags.GRIT), 0.33f, 100, 100);
-
-        //TODO arcSmelting with bones!
     }
 }

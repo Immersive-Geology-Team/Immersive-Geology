@@ -54,8 +54,9 @@ public class MaterialAcanthite extends MaterialMineral {
     {
         LinkedHashSet<MaterialInterface<?>> materials = new LinkedHashSet<>();
         materials.add(MetalEnum.Silver);
-        materials.add(MetalEnum.Platinum);
-        materials.add(MetalEnum.Osmium);
+        materials.add(MetalEnum.Lead);
+    //    materials.add(MetalEnum.Platinum);
+    //    materials.add(MetalEnum.Osmium);
 		return materials;
     }
 
@@ -71,24 +72,16 @@ public class MaterialAcanthite extends MaterialMineral {
                 200                                            // Sulfur Dioxide Output Amount
         );
 
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create("slag_" + getName() + "_to_metal",
-                getItemTag(ItemCategoryFlags.SLAG), getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG );
+        //TODO rework for byproducts extraction
 
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create("slag_"+getName() +"_to_grit", IngredientWithSize.of(getStack(ItemCategoryFlags.SLAG, 1)), getStack(ItemCategoryFlags.GRIT, 1), IngredientWithSize.of(getStack(ItemCategoryFlags.GRIT, 1)), 6000, 50, 0.33f);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.SLAG, ItemCategoryFlags.POWDER);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 400, 32000);
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                0.075f, 200, 1000);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
-                "powder_to_silver_slurry",
-                getByproductMaterial().getStack(ItemCategoryFlags.COMPOUND_DUST),
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(getProductionMaterial(), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, IGLib.DUST_TO_SLURRY_AMOUNT)),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT), null, null,
-                200, 51200);
-
-        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create("slurry_" + getProductionMaterial().getName() + "_to_crystal", getProductionMaterial().getStack(ItemCategoryFlags.CRYSTAL), ChemicalEnum.HydrochloricAcid.getFluidStack((int)Math.floor((IGLib.SLURRY_TO_CRYSTAL_MB * 0.75))), ChemicalEnum.HydrochloricAcid, getProductionMaterial(), IGLib.SLURRY_TO_CRYSTAL_MB, 300, 38400);
-
-        IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(getByproductMaterial().getItemTag(ItemCategoryFlags.COMPOUND_DUST),
-                getByproductMaterial().getStack(ItemCategoryFlags.POWDER), getTraceMaterials(2).getStack(ItemCategoryFlags.POWDER), 0.2f, 60, 100);
     }
 }

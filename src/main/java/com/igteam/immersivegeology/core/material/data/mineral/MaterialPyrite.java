@@ -12,7 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.dries007.tfc.util.Metal;
+//import net.dries007.tfc.util.Metal;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -47,7 +47,7 @@ public class MaterialPyrite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Molybdenum));
     }
 
     @Override
@@ -70,6 +70,16 @@ public class MaterialPyrite extends MaterialMineral {
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                 "crushed_ore_"+getName() + "_to_oxide",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1,
-                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 800, 250);
+                getStack(ItemCategoryFlags.SLAG,1), 800, 250);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+           getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+           getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+           getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+           0.075f, 200, 1000);
     }
 }

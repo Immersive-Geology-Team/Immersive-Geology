@@ -57,7 +57,8 @@ public class MaterialChalcocite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Platinum, MetalEnum.Osmium));
+        //MetalEnum.Platinum, MetalEnum.Osmium -- Think about it?
+        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Manganese));
     }
 
     @Override
@@ -71,32 +72,16 @@ public class MaterialChalcocite extends MaterialMineral {
                 200                                            // Sulfur Dioxide Output Amount
         );
 
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create(
-                "slag_" + getName() + "_to_metal",
-                getItemTag(ItemCategoryFlags.SLAG),
-                MetalEnum.Copper.getStack(ItemCategoryFlags.INGOT)
-        );
-//TODO rework for byproducts extraction
         IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.POWDER );
+                ItemCategoryFlags.POWDERED_SLAG );
+        //TODO rework for byproducts extraction
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("dust_" + getName() + "_to_slurry",
-                ItemStack.EMPTY,
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Copper, IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.DUST_TO_SLURRY_AMOUNT),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(), IGLib.ACID_TO_SLURRY_AMOUNT),
-                null,
-                null,
-                200,
-                51200);
-
-        IGMethodBuilder.crystallize(this, IGStageDesignation.PURIFICATION).create("crystallize_copper_slurry",
-                MetalEnum.Copper.getStack(ItemCategoryFlags.CRYSTAL),
-                ChemicalEnum.HydrochloricAcid,
-                MetalEnum.Copper,
-                IGLib.SLURRY_TO_CRYSTAL_MB,
-                300, 38400);
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                0.075f, 200, 1000);
     }
 
     @Override
