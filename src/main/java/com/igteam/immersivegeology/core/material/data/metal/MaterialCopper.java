@@ -66,15 +66,6 @@ public class MaterialCopper extends MaterialNativeMetal {
                 ItemCategoryFlags.COMPOUND_DUST, 1,
                 ItemCategoryFlags.METAL_OXIDE, 1,
                 1000, 250);
-
-        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(
-                ItemCategoryFlags.METAL_OXIDE,
-                ItemCategoryFlags.OXIDE_PELLET);
-
-        IGMethodBuilder.blasting(this, IGStageDesignation.BLASTING).create(
-                ItemCategoryFlags.OXIDE_PELLET,
-                ItemCategoryFlags.INGOT,
-                new ItemStack(Ingredients.SLAG), 200);
     }
 
     @Override

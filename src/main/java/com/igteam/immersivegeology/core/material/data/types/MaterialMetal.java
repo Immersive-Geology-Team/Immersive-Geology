@@ -31,6 +31,11 @@ public class MaterialMetal extends GeologyMaterial {
     }
 
     @Override
+    public MaterialInterface<?> getProductionMaterial()
+    {
+        return MetalEnum.valueOf(getName().substring(0, 1).toUpperCase() + getName().substring(1));
+    }
+    @Override
     public void setupRecipeStages()
     {
         if (hasFlag(ItemCategoryFlags.OXIDE_PELLET))
