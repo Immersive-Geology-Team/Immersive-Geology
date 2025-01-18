@@ -4,7 +4,7 @@
     "tag": "forge:oxide_pellet/tin"
   },
   "result": {
-    "item": "immersivegeology:ingot_unobtanium"
+    "item": "immersivegeology:ingot_tin"
   },
   "slag": {
     "item": "immersiveengineering:slag"

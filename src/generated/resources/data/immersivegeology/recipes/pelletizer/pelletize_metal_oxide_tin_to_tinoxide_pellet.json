@@ -2,10 +2,10 @@
   "type": "immersivegeology:pelletizer",
   "energy": 4800,
   "input": {
-    "tag": "forge:powders/magnetite"
+    "tag": "forge:metal_oxide/tin"
   },
   "result": {
-    "item": "immersivegeology:pellet_magnetite"
+    "item": "immersivegeology:oxide_pellet_tin"
   },
-  "time": 240
+  "time": 300
 }

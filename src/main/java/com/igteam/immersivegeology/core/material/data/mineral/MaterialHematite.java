@@ -67,7 +67,7 @@ public class MaterialHematite extends MaterialMineral {
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 600);
+                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 900);
 
     }
 }

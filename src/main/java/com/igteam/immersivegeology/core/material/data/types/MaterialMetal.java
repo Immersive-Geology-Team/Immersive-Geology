@@ -49,12 +49,6 @@ public class MaterialMetal extends GeologyMaterial {
     }
 
     @Override
-    public MaterialInterface<?> getProductionMaterial()
-    {
-        return MetalEnum.valueOf(getName());
-    }
-
-    @Override
     public CrystalFamily getCrystalFamily()
     {
         return super.getCrystalFamily();

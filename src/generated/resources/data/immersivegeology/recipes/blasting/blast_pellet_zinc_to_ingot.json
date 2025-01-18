@@ -4,7 +4,7 @@
     "tag": "forge:oxide_pellet/zinc"
   },
   "result": {
-    "item": "immersivegeology:ingot_unobtanium"
+    "item": "immersivegeology:ingot_zinc"
   },
   "slag": {
     "item": "immersiveengineering:slag"

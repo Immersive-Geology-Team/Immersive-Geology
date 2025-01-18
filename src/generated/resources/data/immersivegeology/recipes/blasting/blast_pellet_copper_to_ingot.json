@@ -4,7 +4,7 @@
     "tag": "forge:oxide_pellet/copper"
   },
   "result": {
-    "item": "immersivegeology:ingot_unobtanium"
+    "item": "minecraft:copper_ingot"
   },
   "slag": {
     "item": "immersiveengineering:slag"
