@@ -16,8 +16,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.AlloySmelterMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.BlastFurnaceMultiblock;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
@@ -78,13 +77,13 @@ public class IGRegistrationHolder {
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
 
-    private static final HashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new HashMap<>();
-    private static final HashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new HashMap<>();
+    private static final LinkedHashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new LinkedHashMap<>();
 
-    public static HashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new HashMap<>();
-    public static final HashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new HashMap<>();
+    public static LinkedHashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new LinkedHashMap<>();
+    public static final LinkedHashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new LinkedHashMap<>();
 
     private static <T extends MultiblockHandler.IMultiblock>
     T registerMultiblock(T multiblock) {
@@ -198,6 +197,11 @@ public class IGRegistrationHolder {
         steel_mb.add(IGCentrifugeMultiblock.class);
         steel_mb.add(IGBallmillMultiblock.class);
         steel_mb.add(IGCrystalizerMultiblock.class);
+
+        steel_mb.add(ImprovedBlastfurnaceMultiblock.class);
+        steel_mb.add(MixerMultiblock.class);
+        steel_mb.add(RefineryMultiblock.class);
+        steel_mb.add(DieselGeneratorMultiblock.class);
     }
 
     private static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();

@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -75,6 +77,16 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), inputAmount);
 		this.output = parentMaterial.getStack(output_form, output_amount);
 		this.slag = slag_amount == 0 ? ItemStack.EMPTY : parentMaterial.getStack(ItemCategoryFlags.SLAG, slag_amount);
+		this.additives = List.of(additives);
+		this.method_name = create_advanced_method_name(input_form, output_form);
+		this.chance = chance;
+		return this;
+	}
+
+	public IGArcSmeltingMethod create(MaterialHelper input_mat, IFlagType<?> input_form, int inputAmount, IFlagType<?> output_form, int output_amount, float chance, int slag_amount, IngredientWithSize... additives){
+		this.input = new IngredientWithSize(input_mat.getItemTag(input_form), inputAmount);
+		this.output = parentMaterial.getStack(output_form, output_amount);
+		this.slag = slag_amount == 0 ? ItemStack.EMPTY : new ItemStack(Ingredients.SLAG.asItem(), slag_amount);
 		this.additives = List.of(additives);
 		this.method_name = create_advanced_method_name(input_form, output_form);
 		this.chance = chance;

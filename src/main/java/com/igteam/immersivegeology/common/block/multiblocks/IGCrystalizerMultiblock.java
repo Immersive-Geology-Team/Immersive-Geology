@@ -31,6 +31,12 @@ public class IGCrystalizerMultiblock extends IGTemplateMultiblock
     }
 
     @Override
+    public boolean canFormWithDefaultHammer()
+    {
+        return true;
+    }
+
+    @Override
     public float getManualScale() {
         return 12.0f;
     }

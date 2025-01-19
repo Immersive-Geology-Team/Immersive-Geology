@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:crushed_ore/galena"
+  },
+  "result": {
+    "item": "immersivegeology:slag_galena"
+  },
+  "time": 1000,
+  "waste": 200
+}

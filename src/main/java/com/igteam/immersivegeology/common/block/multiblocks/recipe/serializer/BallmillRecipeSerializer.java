@@ -44,7 +44,7 @@ public class BallmillRecipeSerializer extends IERecipeSerializer<BallmillRecipe>
 	@Override
 	public @Nullable BallmillRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
-		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
+		
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		IngredientWithSize input = IngredientWithSize.read(buffer);
 		int energy = buffer.readInt();
@@ -55,7 +55,7 @@ public class BallmillRecipeSerializer extends IERecipeSerializer<BallmillRecipe>
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, BallmillRecipe recipe)
 	{
-		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
+		
 		writeLazyStack(buffer, recipe.itemOutput);
 		recipe.itemIn.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessEnergy());

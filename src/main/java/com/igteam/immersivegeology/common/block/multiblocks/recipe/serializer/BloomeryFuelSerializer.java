@@ -40,14 +40,12 @@ public class BloomeryFuelSerializer extends IERecipeSerializer<BloomeryFuel>
 
 	@Nullable
 	public BloomeryFuel fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
 		Ingredient input = Ingredient.fromNetwork(buffer);
 		int time = buffer.readInt();
 		return new BloomeryFuel(recipeId, input, time);
 	}
 
 	public void toNetwork(FriendlyByteBuf buffer, BloomeryFuel recipe) {
-		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
 		recipe.input.toNetwork(buffer);
 		buffer.writeInt(recipe.burnTime);
 	}

@@ -1,0 +1,37 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "base_ingredient": {
+        "item": "immersivegeology:metal_oxide_chromium"
+      },
+      "count": 4
+    },
+    {
+      "base_ingredient": {
+        "item": "immersivegeology:metal_oxide_molybdenum"
+      },
+      "count": 2
+    },
+    {
+      "item": "immersivegeology:metal_oxide_iron"
+    },
+    {
+      "item": "immersivegeology:metal_oxide_tungsten"
+    }
+  ],
+  "energy": 819200,
+  "input": {
+    "base_ingredient": {
+      "tag": "forge:metal_oxide/nickel"
+    },
+    "count": 8
+  },
+  "results": [
+    {
+      "count": 8,
+      "item": "immersivegeology:ingot_hastelloy"
+    }
+  ],
+  "time": 1600
+}

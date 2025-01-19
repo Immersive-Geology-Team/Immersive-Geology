@@ -1,0 +1,203 @@
+{
+  "type": "tfc:cluster_vein",
+  "config": {
+    "blocks": [
+      {
+        "replace": [
+          "tfc:rock/raw/diorite"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_diorite",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_diorite",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_diorite",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/gabbro"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_gabbro",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_gabbro",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_gabbro",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/granite"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_granite",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_granite",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_granite",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/chalk"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_chalk",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_chalk",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_chalk",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/chert"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_chert",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_chert",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_chert",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/claystone"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_claystone",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_claystone",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_claystone",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/conglomerate"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_conglomerate",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_conglomerate",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_conglomerate",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/dolomite"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_dolomite",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_dolomite",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_dolomite",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/limestone"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_limestone",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_limestone",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_limestone",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfc:rock/raw/shale"
+        ],
+        "with": [
+          {
+            "block": "immersivegeology:tfc_poor_ore_block_chalcopyrite_shale",
+            "weight": 35
+          },
+          {
+            "block": "immersivegeology:tfc_normal_ore_block_chalcopyrite_shale",
+            "weight": 40
+          },
+          {
+            "block": "immersivegeology:tfc_rich_ore_block_chalcopyrite_shale",
+            "weight": 25
+          }
+        ]
+      }
+    ],
+    "density": 0.5,
+    "max_y": 120,
+    "min_y": 10,
+    "random_name": "chalcopyrite_tfc",
+    "rarity": 35,
+    "size": 14
+  }
+}

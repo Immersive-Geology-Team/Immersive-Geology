@@ -1,15 +1,15 @@
 {
   "type": "immersivegeology:gravityseparator",
   "byproduct": {
-    "item": "immersivegeology:grit_silver"
+    "item": "immersivegeology:metal_oxide_silver"
   },
-  "byproduct_chance": 0.33,
+  "byproduct_chance": 0.075,
   "input": {
     "tag": "forge:powdered_slag/galena"
   },
   "result": {
     "item": "immersivegeology:metal_oxide_lead"
   },
-  "time": 100,
-  "water": 100
+  "time": 200,
+  "water": 1000
 }

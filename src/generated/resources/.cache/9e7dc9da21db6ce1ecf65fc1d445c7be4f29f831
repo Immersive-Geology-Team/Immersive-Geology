@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-19T04:52:41.024637155	Item Models: immersivegeology
+// 1.20.1	2025-01-20T01:21:15.470969763	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_bindingagent_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/bucket_brine_fluid.json
@@ -315,6 +315,7 @@ b668841af336f46dc8ba249be32b246f06b26004 assets/immersivegeology/models/item/ing
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_vanadium.json
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_zinc.json
 5f5860111346200c58eed527e70475f19e63cf79 assets/immersivegeology/models/item/ingot_zirconium.json
+c91c789dcbbe5a0a6b89cd4dd3463ca0729226d2 assets/immersivegeology/models/item/mechanical_component_hastelloy.json
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_aluminum.json
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_chromium.json
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_cobalt.json

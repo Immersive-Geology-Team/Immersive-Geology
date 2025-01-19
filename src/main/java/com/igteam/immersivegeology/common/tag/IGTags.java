@@ -35,8 +35,8 @@ import java.util.*;
 
 public class IGTags
 {
-	public static HashMap<IFlagType<?>, HashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new HashMap<>();
-	public static HashMap<IFlagType<?>, HashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new HashMap<>();
+	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new LinkedHashMap<>();
+	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new LinkedHashMap<>();
 
 	private static boolean initialized = false;
 	public static synchronized void initialize()
@@ -44,7 +44,7 @@ public class IGTags
 		IGLib.IG_LOGGER.info("======== Initializing Immersive Geology Tags ========");
 		for(ItemCategoryFlags itemFlag : ItemCategoryFlags.values())
 		{
-			ITEM_TAG_HOLDER.put(itemFlag, new HashMap<>());
+			ITEM_TAG_HOLDER.put(itemFlag, new LinkedHashMap<>());
 
 			for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 			{
@@ -57,8 +57,8 @@ public class IGTags
 		}
 
 
-		FLUID_TAG_HOLDER.put(BlockCategoryFlags.FLUID, new HashMap<>());
-		FLUID_TAG_HOLDER.put(BlockCategoryFlags.SLURRY, new HashMap<>());
+		FLUID_TAG_HOLDER.put(BlockCategoryFlags.FLUID, new LinkedHashMap<>());
+		FLUID_TAG_HOLDER.put(BlockCategoryFlags.SLURRY, new LinkedHashMap<>());
 		HashMap<String, TagKey<Fluid>> fluid_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
 		HashMap<String, TagKey<Fluid>> slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY);
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())

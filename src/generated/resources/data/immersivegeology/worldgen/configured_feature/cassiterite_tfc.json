@@ -1,0 +1,12 @@
+{
+  "type": "tfc:cluster_vein",
+  "config": {
+    "blocks": [],
+    "density": 0.5,
+    "max_y": 175,
+    "min_y": 0,
+    "random_name": "cassiterite_tfc",
+    "rarity": 50,
+    "size": 40
+  }
+}

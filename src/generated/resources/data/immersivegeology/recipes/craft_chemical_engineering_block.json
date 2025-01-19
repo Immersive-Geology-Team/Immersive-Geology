@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "c": {
+      "item": "immersivegeology:mechanical_component_hastelloy"
+    },
+    "o": {
+      "item": "immersiveengineering:ingot_silver"
+    },
+    "s": {
+      "item": "immersivegeology:sheetmetal_block_hastelloy"
+    }
+  },
+  "pattern": [
+    "scs",
+    "coc",
+    "scs"
+  ],
+  "result": {
+    "item": "immersivegeology:chemical_engineering"
+  },
+  "show_notification": true
+}

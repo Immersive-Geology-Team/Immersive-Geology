@@ -82,6 +82,7 @@
   "item.immersivegeology.rod": "%s Rod",
   "item.immersivegeology.gear": "%s Gear",
   "item.immersivegeology.wire": "%s Wire",
+  "item.immersivegeology.mechanical_component": "%s Mechanical Component",
   "item.immersivegeology.rough_rod": "Rough %s Rod",
   "item.immersivegeology.rough_gear": "Rough %s Gear",
   "item.immersivegeology.rough_wire": "Rough %s Wire",
@@ -231,7 +232,9 @@
   "material.immersivegeology.thorianite": "Thorianite",
   "material.immersivegeology.chromium": "Chromium",
   "material.immersivegeology.manganese": "Manganese",
+  "material.immersivegeology.magnesium": "Magnesium",
   "material.immersivegeology.tin": "Tin",
+  "material.immersivegeology.carnallite": "Carnallite",
   "material.immersivegeology.zinc": "Zinc",
   "material.immersivegeology.zirconium": "Zirconium",
   "material.immersivegeology.vanadium": "Vanadium",
@@ -303,6 +306,7 @@
   "component.immersivegeology.hydrofluoricacid": "Fluorite",
   "component.immersivegeology.sodiumhydroxide": "Sodium Salt",
 
+  "immersivegeology.multiblock.formation.failed": "This tool isn't able to form this Multiblock.",
   "desc.immersiveengineering.info.multiblock.IE:ChemicalVat":"Chemical Vat",
   "desc.immersiveengineering.info.multiblock.IE:Crystallizer":"Crystallizer",
   "desc.immersiveengineering.info.multiblock.IE:GravitySeparator":"Gravity Separator",
@@ -358,7 +362,6 @@
   "block.immersivegeology.tfc_rich_ore_block_molybenite_marble.prospected": "Molybenite",
   "block.immersivegeology.tfc_normal_ore_block_molybenite_marble.prospected": "Molybenite",
   "block.immersivegeology.tfc_poor_ore_block_molybenite_marble.prospected": "Molybenite",
-
   "block.immersivegeology.tfc_poor_ore_block_iron_chalk.prospected": "Native Iron",
   "block.immersivegeology.normal_ore_block_osmium_stone.prospected": "Native Osmium",
   "block.immersivegeology.tfc_rich_ore_block_pyrite_slate.prospected": "Pyrite",

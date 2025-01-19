@@ -84,6 +84,10 @@ public class IGItemTags extends ItemTagsProvider
 								}
 								tag(Tags.Items.INGOTS).add(item);
 							}
+							if(itemFlag.equals(ItemCategoryFlags.PLATE))
+							{
+
+							}
 						}
 					}
 

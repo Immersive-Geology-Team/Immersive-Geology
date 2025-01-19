@@ -44,7 +44,7 @@ public class CentrifugeRecipeSerializer extends IERecipeSerializer<CentrifugeRec
 	@Override
 	public @Nullable CentrifugeRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
-		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
+		
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		FluidTagInput input = FluidTagInput.read(buffer);
 		int energy = buffer.readInt();
@@ -55,7 +55,7 @@ public class CentrifugeRecipeSerializer extends IERecipeSerializer<CentrifugeRec
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, CentrifugeRecipe recipe)
 	{
-		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
+		
 		writeLazyStack(buffer, recipe.itemOutput);
 		recipe.fluidIn.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessEnergy());

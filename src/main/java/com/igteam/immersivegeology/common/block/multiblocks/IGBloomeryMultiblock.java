@@ -27,6 +27,12 @@ public class IGBloomeryMultiblock extends IGTemplateMultiblock
 	}
 
 	@Override
+	public boolean canFormWithDefaultHammer()
+	{
+		return true;
+	}
+
+	@Override
 	public float getManualScale()
 	{
 		return 20;

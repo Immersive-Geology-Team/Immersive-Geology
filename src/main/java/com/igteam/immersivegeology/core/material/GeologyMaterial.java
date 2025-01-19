@@ -35,7 +35,7 @@ import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public abstract class GeologyMaterial implements MaterialHelper {
     public static ExistingFileHelper EXISTING_HELPER;
-    protected String name;
+    protected String name, unserialized_name;
     protected Logger logger = IGLib.getNewLogger();
     protected BiFunction<IFlagType<?>, Integer, Integer> colorFunction; // in goes a category, returns the color white as a default
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
@@ -46,7 +46,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public GeologyMaterial() {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.
         String className = this.getClass().getName().toLowerCase();
+        String classNameNormal = this.getClass().getName();
         this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
+        this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
@@ -222,6 +224,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return m.isStrictlyLoaded() && EXISTING_IMPLEMENTATION_MAP.containsKey(m) && EXISTING_IMPLEMENTATION_MAP.get(m).containsKey(h);
     }
 
+    public boolean hasExistingFlag(IFlagType<?> h)
+    {
+        return EXISTING_IMPLEMENTATION_MAP.entrySet().stream().anyMatch((e) -> e.getValue().containsKey(h));
+    }
+
     @Override
     public void addExistingFlag(ModFlags m, ItemCategoryFlags... f){
         if(EXISTING_IMPLEMENTATION_MAP.containsKey(m))
@@ -266,7 +273,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
         Set<MaterialHelper> helpers = Arrays.stream(materials).map(MaterialInterface::instance).collect(Collectors.toSet());
 
-        HashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
+        LinkedHashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Set.of(this));
         material_set.addAll(helpers);
 

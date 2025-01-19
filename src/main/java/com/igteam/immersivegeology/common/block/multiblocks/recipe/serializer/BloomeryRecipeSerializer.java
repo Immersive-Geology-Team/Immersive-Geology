@@ -43,7 +43,7 @@ public class BloomeryRecipeSerializer extends IERecipeSerializer<BloomeryRecipe>
 	@Override
 	public @Nullable BloomeryRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
-		IGLib.IG_LOGGER.info("Getting {} Data", getClass().getSimpleName());
+		
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		IngredientWithSize input = IngredientWithSize.read(buffer);
 		int time = buffer.readInt();
@@ -53,7 +53,7 @@ public class BloomeryRecipeSerializer extends IERecipeSerializer<BloomeryRecipe>
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, BloomeryRecipe recipe)
 	{
-		IGLib.IG_LOGGER.info("Sending {} Data", getClass().getSimpleName());
+		
 		writeLazyStack(buffer, recipe.result);
 		recipe.input.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessTime());

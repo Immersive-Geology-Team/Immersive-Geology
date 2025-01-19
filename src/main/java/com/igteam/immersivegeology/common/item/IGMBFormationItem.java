@@ -97,30 +97,38 @@ public class IGMBFormationItem extends IGGenericItem
 			multiblockSide = side;
 		for(MultiblockHandler.IMultiblock mb : MultiblockHandler.getMultiblocks())
 		{
-			boolean allowDefault = false;
-			if(mb instanceof IGTemplateMultiblock igmb) allowDefault = igmb.canFormWithDefaultHammer();
-			if(mb.isBlockTrigger(world.getBlockState(pos), multiblockSide, world) && (allowDefault || formableMultiblocks.stream().anyMatch((allowed) -> allowed.isInstance(mb))))
+			boolean isValid = formableMultiblocks.stream().anyMatch((allowed) -> allowed.isInstance(mb));
+			boolean isBlockTrigger = mb.isBlockTrigger(world.getBlockState(pos), multiblockSide, world);
+
+			if (isBlockTrigger)
 			{
-				boolean isAllowed;
-				if(permittedMultiblocks!=null)
-					isAllowed = permittedMultiblocks.contains(mb.getUniqueName());
-				else if(interdictedMultiblocks!=null)
-					isAllowed = !interdictedMultiblocks.contains(mb.getUniqueName());
-				else
-					isAllowed = true;
-				if(!isAllowed)
-					continue;
-				if(MultiblockHandler.postMultiblockFormationEvent(player, mb, pos, stack).isCanceled())
-					continue;
-				if(mb.createStructure(world, pos, multiblockSide, player))
+				if(player!=null&&!isValid)
 				{
-					if(player instanceof ServerPlayer sPlayer)
-						IEAdvancements.TRIGGER_MULTIBLOCK.trigger(sPlayer, mb, stack);
+					player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
+				}
+				if(isValid)
+				{
+					boolean isAllowed;
+					if(permittedMultiblocks!=null)
+						isAllowed = permittedMultiblocks.contains(mb.getUniqueName());
+					else if(interdictedMultiblocks!=null)
+						isAllowed = !interdictedMultiblocks.contains(mb.getUniqueName());
+					else
+						isAllowed = true;
+					if(!isAllowed)
+						continue;
+					if(MultiblockHandler.postMultiblockFormationEvent(player, mb, pos, stack).isCanceled())
+						continue;
+					if(mb.createStructure(world, pos, multiblockSide, player))
+					{
+						if(player instanceof ServerPlayer sPlayer)
+							IEAdvancements.TRIGGER_MULTIBLOCK.trigger(sPlayer, mb, stack);
 
 
-					stack.hurtAndBreak(1, player, (p) -> {
-					});
-					return InteractionResult.SUCCESS;
+						stack.hurtAndBreak(1, player, (p) -> {
+						});
+						return InteractionResult.SUCCESS;
+					}
 				}
 			}
 		}

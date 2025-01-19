@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingot_molybdenum": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:plate_molybdenum"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:plate_to_sheetmetal_molybdenum"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_molybdenum",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:plate_to_sheetmetal_molybdenum"
+    ]
+  },
+  "sends_telemetry_event": false
+}

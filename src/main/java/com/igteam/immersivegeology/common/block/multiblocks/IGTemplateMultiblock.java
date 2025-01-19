@@ -41,12 +41,14 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.function.Consumer;
 
 
 public abstract class IGTemplateMultiblock extends TemplateMultiblock implements IGConfigurableMachine
 {
     private final MultiblockRegistration<?> logic;
+    private int formTime = 0;
 
     public IGTemplateMultiblock(ResourceLocation loc, BlockPos masterFromOrigin, BlockPos triggerFromOrigin, BlockPos size, MultiblockRegistration<?> logic){
         super(loc, masterFromOrigin, triggerFromOrigin, size);
@@ -56,7 +58,11 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
     @Override
     public boolean createStructure(Level world, BlockPos pos, Direction side, Player player)
     {
-        if(player.getMainHandItem().getItem() instanceof IGMBFormationItem) return super.createStructure(world, pos, side, player);
+        if(player.getMainHandItem().getItem() instanceof IGMBFormationItem || canFormWithDefaultHammer())
+        {
+            return super.createStructure(world, pos, side, player);
+        }
+        player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
         return false;
     }
 

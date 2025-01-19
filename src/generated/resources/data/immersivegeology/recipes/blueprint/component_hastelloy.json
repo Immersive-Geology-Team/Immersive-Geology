@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "components",
+  "inputs": [
+    {
+      "base_ingredient": {
+        "tag": "forge:plates/hastelloy"
+      },
+      "count": 2
+    },
+    {
+      "tag": "forge:ingots/electrum"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:mechanical_component_hastelloy"
+  }
+}

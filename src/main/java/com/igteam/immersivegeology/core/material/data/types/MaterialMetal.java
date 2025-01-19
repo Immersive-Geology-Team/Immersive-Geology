@@ -33,7 +33,7 @@ public class MaterialMetal extends GeologyMaterial {
     @Override
     public MaterialInterface<?> getProductionMaterial()
     {
-        return MetalEnum.valueOf(getName().substring(0, 1).toUpperCase() + getName().substring(1));
+        return MetalEnum.valueOf(this.unserialized_name);
     }
     @Override
     public void setupRecipeStages()
