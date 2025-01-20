@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
+  "textures": {
+    "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/poor_1_cuprite_tarnished",
+    "side": "minecraft:block/basalt",
+    "top": "minecraft:block/basalt"
+  }
+}

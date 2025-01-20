@@ -49,6 +49,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_copper_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_copper_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_copper_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_copper_dripstone_block",
       "required": false
     },
@@ -118,6 +130,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_gold_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_gold_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_gold_basalt",
       "required": false
     },
     {
@@ -361,6 +385,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_iron_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_iron_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_iron_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_iron_dripstone_block",
       "required": false
     },
@@ -598,6 +634,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_lead_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_lead_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_lead_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_lead_basalt",
       "required": false
     },
     {
@@ -925,6 +973,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_osmium_netherrack",
       "required": false
     },
@@ -1177,6 +1237,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_platinum_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_platinum_dripstone_block",
       "required": false
     },
@@ -1246,6 +1318,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_silver_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_silver_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_silver_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_silver_basalt",
       "required": false
     },
     {
@@ -1657,6 +1741,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_anatase_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_anatase_netherrack",
       "required": false
     },
@@ -1834,6 +1930,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_cassiterite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_cassiterite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_cassiterite_basalt",
       "required": false
     },
     {
@@ -2134,6 +2242,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_chalcocite_basalt",
       "required": false
     },
     {
@@ -2869,6 +2989,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_cuprite_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_cuprite_dripstone_block",
       "required": false
     },
@@ -3094,6 +3226,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_fluorite_basalt",
       "required": false
     },
     {
@@ -3397,6 +3541,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_galena_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_galena_netherrack",
       "required": false
     },
@@ -3490,6 +3646,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_hematite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_hematite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_hematite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_hematite_basalt",
       "required": false
     },
     {
@@ -3709,6 +3877,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_hubnerite_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_hubnerite_dripstone_block",
       "required": false
     },
@@ -3862,6 +4042,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_ilmenite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_ilmenite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_ilmenite_basalt",
       "required": false
     },
     {
@@ -4330,6 +4522,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_monazite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_monazite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_monazite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_monazite_basalt",
       "required": false
     },
     {
@@ -5569,6 +5773,18 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_thorite_netherrack",
       "required": false
     },
@@ -6226,6 +6442,18 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_wolframite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_wolframite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_wolframite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_wolframite_basalt",
       "required": false
     },
     {

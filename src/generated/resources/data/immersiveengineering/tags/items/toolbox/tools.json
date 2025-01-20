@@ -1,6 +1,7 @@
 {
   "values": [
-    "immersivegeology:ig_toolkit_0",
-    "immersivegeology:ig_toolkit_1"
+    "immersivegeology:hammer_stone",
+    "immersivegeology:hammer_bronze",
+    "immersivegeology:hammer_stainlesssteel"
   ]
 }

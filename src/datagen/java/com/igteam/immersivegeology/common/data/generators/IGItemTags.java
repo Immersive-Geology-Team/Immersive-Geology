@@ -14,6 +14,8 @@ import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -49,8 +51,9 @@ public class IGItemTags extends ItemTagsProvider
 	{
 		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Item Tags");
 
-		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_0"));
-		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("ig_toolkit_1"));
+		tag(IETags.toolboxTools).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
+		tag(IETags.toolboxTools).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
+		tag(IETags.toolboxTools).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
 		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
 		{
 			for(MaterialInterface<?> material : IGLib.getGeologyMaterials())

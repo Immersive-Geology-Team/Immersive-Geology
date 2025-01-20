@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
@@ -22,11 +23,11 @@ import net.minecraft.world.item.Items;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialStainlessSteel extends MaterialMetal {
+public class MaterialStainlessSteel extends MaterialMetalAlloy
+{
 
     public MaterialStainlessSteel() {
         super();
-        addFlags(MaterialFlags.IS_METAL_ALLOY);
     }
 
     @Override

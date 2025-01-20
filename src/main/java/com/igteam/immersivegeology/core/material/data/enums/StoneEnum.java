@@ -63,6 +63,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MCAndesite(new MaterialMCAndesite()),
     MCDiorite(new MaterialMCDiorite()),
     MCGranite(new MaterialMCGranite()),
+    MCBasalt(new MaterialMCBasalt()),
     Netherrack(new MaterialMCNetherrack()),
     Dripstone(new MaterialMCDripstone()),
     Sandstone(new MaterialMCSandstone());
@@ -97,11 +98,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
                 return valueOf(stoneName);
             }
         } catch(Exception ex) {
-            if(!hasWarned)
-            {
-                IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone {}", ex.getMessage());
-                hasWarned = true;
-            }
+            IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone {}", ex.getMessage());
         }
 
         return null;

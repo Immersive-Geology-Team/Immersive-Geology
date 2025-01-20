@@ -8,11 +8,13 @@
 
 package com.igteam.immersivegeology.client.menu;
 
-import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,24 +23,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
-import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Set;
-
-import static com.igteam.immersivegeology.client.menu.IGItemGroup.selectedGroup;
 
 public class CreativeMenuHandler {
     private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_expansion.png");
@@ -63,7 +55,7 @@ public class CreativeMenuHandler {
                     // When JEI loads it takes the display items available by default.
                     // We need all items for this cause, by the time it gets to here however we don't want to display
                     // everything. So we force a quick update.
-                    IGItemGroup.updateSubGroup(ItemSubGroup.natural);
+                    IGItemGroup.updateSubGroup(ItemSubGroup.geologic);
                     jeiCompatUpdate = true;
                 }
                 if(!subGroupButtons.isEmpty()) {
@@ -80,7 +72,7 @@ public class CreativeMenuHandler {
                 //int pX, int pY, int pUOffset, int pVOffset, int pUWidth, int pVHeight
                 //  int x, int y, int u, int v, int width, int height,
                 //
-                pgui.blit(CEX_GUI_TEXTURES,i + 166, gui.getGuiTop(), 0, 0, 29, 136);
+                //pgui.blit(CEX_GUI_TEXTURES,i + 166, gui.getGuiTop(), 0, 0, 29, 136);
                 matrixStack.popPose();
             } else {
                 reset = true;
@@ -106,7 +98,7 @@ public class CreativeMenuHandler {
             for(int iteration = 0; iteration < ItemSubGroup.values().length; iteration++) {
                 ItemSubGroup currentGroup = groups[iteration];
 
-                CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 166 + 7, j + 46 + (23 * iteration), button1 -> {
+                CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 165, j + 32 + (27 * iteration), button1 -> {
                     IGItemGroup.updateSubGroup(currentGroup); //Update the sub-group
                     gui.resize(gui.getMinecraft(), gui.width, gui.height); //resize the gui to the same size, quick way to get it to update the content
                 }, narration -> {
@@ -125,9 +117,9 @@ public class CreativeMenuHandler {
         public CreativeModeInventoryScreen.ItemPickerMenu contained;
         public ItemSubGroup group;
         public CreativeMenuButton(CreativeModeInventoryScreen screen, ItemSubGroup group, int x, int y, OnPress onPress, CreateNarration narration) {
-            super(18,18,x, y, Component.translatable(""), onPress, narration);
-            this.width = 18;
-            this.height = 18;
+            super(28,24, x, y, Component.translatable(""), onPress, narration);
+            this.width = 28;
+            this.height = 24;
             this.setX(x);
             this.setY(y);
             this.contained = screen.getMenu();
@@ -145,17 +137,36 @@ public class CreativeMenuHandler {
             int x = this.getX();
             int y = this.getY();
 
+            int normalX = 29;
+            int normalY = 19;
+
             boolean hovered = pMouseX >= x && pMouseY >= y && pMouseX < x + width && pMouseY < y + height;
-            pGuiGraphics.blit(CEX_GUI_TEXTURES, x, y, ((hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) ? 29 : 47), 0, width, height);
+            boolean isSelected = IGItemGroup.getCurrentSubGroup().equals(group);
+            int variant = isSelected ? 0 : (hovered ? 1 : 2);
+
+            pGuiGraphics.blit(CEX_GUI_TEXTURES, x + (isSelected ? 3 : 0), y, normalX + (width * variant), normalY + (height * group.ordinal()), width, height);
 
             IFlagType<?> groupPattern = group.getFlag();
-
-            ItemStack stack = group.getMaterial().getStack(groupPattern);
-
-            if(hovered || (IGItemGroup.getCurrentSubGroup().equals(group))) {
-                pGuiGraphics.renderItem(stack, x + 1, y + 2);
+            ItemStack stack;
+            if(groupPattern.equals(ItemCategoryFlags.BUCKET) && group.getMaterial() instanceof ChemicalEnum chemical_base)
+            {
+                if(group.getSecondary().equals(group.getMaterial())) {
+                    stack = new ItemStack(chemical_base.getFluid(BlockCategoryFlags.FLUID).getBucket().asItem());
+                } else {
+                    stack = new ItemStack(chemical_base.getSlurryWith(group.getSecondary()).getBucket().asItem());
+                }
+            } else
+            {
+                stack = group.getMaterial().getStack(groupPattern);
+            }
+            int offset = 4;
+            if(isSelected)
+            {
+                pGuiGraphics.renderItem(stack, x + 10, y+offset);
+            } else if(hovered) {
+                pGuiGraphics.renderItem(stack, x + 7, y + offset);
             } else {
-                pGuiGraphics.renderItem(stack, x + 1, y + 1);
+                pGuiGraphics.renderItem(stack, x + 8, y + offset);
             }
 
 

@@ -26,6 +26,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -95,21 +96,21 @@ public class IGRecipes extends RecipeProvider
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
 
 		// Bronze Hammer
-		Item toolkit_0 = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
+		Item toolkit_0 = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_0)
 				.pattern(" BS")
 				.pattern(" WB")
 				.pattern("W  ").define('B', bronze_ingot).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_0");
 		// Stainless Steel Hammer
-		Item toolkit_1 = IGRegistrationHolder.getItem.apply("ig_toolkit_1");
+		Item toolkit_1 = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
 				.pattern(" BS")
 				.pattern(" WB")
 				.pattern("W  ").define('B', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_stainless_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT))).save(consumer, "craft_igtoolkit_1");
 		// Stone Hammer
-		Item toolkit_2 = IGRegistrationHolder.getItem.apply("ig_toolkit_2");
+		Item toolkit_2 = StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_2)
 				.pattern(" BS")
 				.pattern(" WB")
@@ -202,8 +203,8 @@ public class IGRecipes extends RecipeProvider
 	private void multiblockRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Multiblock Test Recipe Registration");
-		Item stone_work_hammer = IGRegistrationHolder.getItem.apply("ig_toolkit_2");
-		Item bronze_work_hammer = IGRegistrationHolder.getItem.apply("ig_toolkit_0");
+		Item stone_work_hammer = StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);
+		Item bronze_work_hammer = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
@@ -247,7 +248,7 @@ public class IGRecipes extends RecipeProvider
 
 		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT)).addInput(new IngredientWithSize(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 2)).addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/component_hastelloy"));
 		MetalPressRecipeBuilder.builder(Molds.MOLD_PLATE, MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 1).addInput(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_plate_"+MetalEnum.Hastelloy.getName()));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, IGRegistrationHolder.getBlock.apply("chemical_engineering"))
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, IGRegistrationHolder.getBlock.apply("chemical_engineering"), 4)
 				.unlockedBy("has_hastelloy_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
 						.define('s', MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', MetalEnum.Silver.getItem(ItemCategoryFlags.INGOT))
 						.pattern("scs").pattern("coc").pattern("scs").save(consumer, new ResourceLocation(IGLib.MODID, "craft_chemical_engineering_block"));

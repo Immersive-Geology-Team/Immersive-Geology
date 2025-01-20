@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -26,7 +27,8 @@ public class MaterialStone extends GeologyMaterial {
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
         // As this should always be a default stone we use the id minecraft and default it to whatever it is.
         // If we want to add support for other mods this will need to change
-        return new ResourceLocation("minecraft", "block/"+getName());
+        if(flag instanceof BlockCategoryFlags) return new ResourceLocation("minecraft", "block/"+getName());
+        return super.getTextureLocation(flag);
     }
 
     public StoneFormation getStoneFormation()
@@ -37,6 +39,7 @@ public class MaterialStone extends GeologyMaterial {
     @Override
     public void setupRecipeStages()
     {
+
 
     }
 

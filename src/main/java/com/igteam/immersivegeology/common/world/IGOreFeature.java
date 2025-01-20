@@ -285,12 +285,25 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				return null;
 			}
 
-			// List of blocks for each ore richness
 			List<BlockState> blocks = List.of(
-					mineral.getOreBlock(stone, OreRichness.POOR).getDefaultBlockState(),
-					mineral.getOreBlock(stone, OreRichness.NORMAL).getDefaultBlockState(),
-					mineral.getOreBlock(stone, OreRichness.RICH).getDefaultBlockState()
+					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.POOR).getDefaultBlockState(),
+					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).getDefaultBlockState(),
+					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.RICH).getDefaultBlockState()
 			);
+
+			// List of blocks for each ore richness
+			try
+			{
+				blocks = List.of(
+						mineral.getOreBlock(stone, OreRichness.POOR).getDefaultBlockState(),
+						mineral.getOreBlock(stone, OreRichness.NORMAL).getDefaultBlockState(),
+						mineral.getOreBlock(stone, OreRichness.RICH).getDefaultBlockState()
+				);
+			}
+			catch(Exception e)
+			{
+				return null;
+			}
 
 			int selectedBlock = noiseValue > (THRESHOLD+0.2) ? 2 : (noiseValue > (THRESHOLD+0.1) ? 1 : 0);
 

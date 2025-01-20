@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.stone.vanilla.MaterialMCBasalt;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -393,7 +394,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation default_richness_ore;
         default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
         try {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.texture("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
                 baseModel.texture("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
@@ -403,7 +404,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
             }
         } catch(Exception error) {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.textures.put("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
 
@@ -430,7 +431,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation default_richness_ore;
         default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
         try {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.texture("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
                 baseModel.texture("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
@@ -440,7 +441,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
             }
         } catch(Exception error) {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.textures.put("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
 
@@ -468,7 +469,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
         default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
         try {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.texture("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
                 baseModel.texture("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
@@ -478,7 +479,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
             }
         } catch(Exception error) {
-            if(formation.equals(StoneFormation.SEDIMENTARY))
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).instance() instanceof MaterialMCBasalt)
             {
                 baseModel.textures.put("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
 

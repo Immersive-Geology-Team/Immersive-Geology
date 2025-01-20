@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IGOreFeature;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -54,26 +55,31 @@ public class IGMineralTestingItem extends IGGenericItem
 		ChunkPos usedChunk = centreChunk.getPos();
 		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
 
+		StoneEnum stone = StoneEnum.selectWorldState(level.getBlockState(usedPos));
 		int height = centreChunk.getHeight();
-		for(int x = -64; x < (16+64); ++x)
-		{
-			for(int z = -64; z < (16+64); ++z)
-			{
-				for(int y = -60; y < height; ++y)
-				{
-					BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
-					BlockState check = level.getBlockState(cursor);
-					if(check.getBlock() instanceof IOreBlock ore)
-					{
-						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
-						int amount = queryMap.getOrDefault(material, 1);
-						queryMap.put(material, (amount+1));
-					}
-				}
-			}
+		if(stone != null) level.setBlock(usedPos, MineralEnum.Acanthite.getOreBlock(stone, OreRichness.RICH).getDefaultBlockState(), 3);
+		//IGLib.IG_LOGGER.info(queryMap.toString());
 
-		}
-		IGLib.IG_LOGGER.info(queryMap.toString());
+//		for(int x = -64; x < (16+64); ++x)
+//		{
+//			for(int z = -64; z < (16+64); ++z)
+//			{
+//				for(int y = -60; y < height; ++y)
+//				{
+//					BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
+//					BlockState check = level.getBlockState(cursor);
+//					if(check.getBlock() instanceof IOreBlock ore)
+//					{
+//						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
+//						int amount = queryMap.getOrDefault(material, 1);
+//						queryMap.put(material, (amount+1));
+//					} else {
+//						StoneEnum stone = StoneEnum.selectWorldState(check);
+//
+//					}
+//				}
+//			}
+//		}
 
 		return InteractionResult.SUCCESS;
 	}

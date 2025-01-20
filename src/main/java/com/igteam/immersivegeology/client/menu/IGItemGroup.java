@@ -23,7 +23,10 @@ public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tab_menu.png");
     private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tabs.png");
 
-    public static ItemSubGroup selectedGroup = ItemSubGroup.natural;
+    private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_background.png");
+    private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_tab.png");
+
+    public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
 
     public IGItemGroup(CreativeModeTab.Builder builder)
     {
@@ -33,21 +36,23 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public @NotNull ResourceLocation getBackgroundLocation() {
+        if(selectedGroup == ItemSubGroup.geologic) return GEOLOGIC_BACKGROUND_TEXTURES;
         return CMB_TEXTURES;
     }
 
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("itemGroup.immersivegeology." + selectedGroup.name());
+    public @NotNull Component getDisplayName() {
+        return Component.literal(" Geologic");//Component.translatable("itemGroup.immersivegeology." + selectedGroup.name());
     }
 
     @Override
     public int getLabelColor() {
-        return 0xffd700;
+        return 0x2e6c26;
     }
 
     @Override
     public @NotNull ResourceLocation getTabsImage() {
+        if(selectedGroup == ItemSubGroup.geologic) return GEOLOGIC_TAB_TEXTURES;
         return CMT_TEXTURES;
     }
 
@@ -56,6 +61,7 @@ public class IGItemGroup extends CreativeModeTab {
         updateRet = true;
         ret.clear();
     }
+
     static Collection<ItemStack> ret = ItemStackLinkedSet.createTypeAndTagSet();
     static Collection<ItemStack> dis = ItemStackLinkedSet.createTypeAndTagSet();
     private static boolean updateRet = true;
@@ -148,6 +154,12 @@ public class IGItemGroup extends CreativeModeTab {
             }
         }
         return dis;
+    }
+
+    @Override
+    public boolean hasSearchBar()
+    {
+        return true;
     }
 
     public static ItemSubGroup getCurrentSubGroup() {

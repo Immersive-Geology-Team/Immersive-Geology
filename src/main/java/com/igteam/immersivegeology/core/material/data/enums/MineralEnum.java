@@ -100,12 +100,14 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     @Override
     public IOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
     {
+        if(material.getOreBlock(stone, richness) == null) return material.getOreBlock(StoneEnum.MCStone, richness);
         return material.getOreBlock(stone, richness);
     }
 
     @Override
     public IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
     {
+        if(material.getOreBlock(stone, richness) == null) return material.getOreBlock(StoneEnum.MCStone, richness);
         return material.getOreBlock(stone, richness);
     }
 

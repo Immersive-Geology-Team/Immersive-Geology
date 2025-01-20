@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
+  "textures": {
+    "ore_east": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_hematite_pristine",
+    "side": "minecraft:block/basalt",
+    "top": "minecraft:block/basalt"
+  }
+}
