@@ -41,6 +41,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReacto
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGPositionalOverlayText;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.ChemicalReactorShape;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -368,7 +369,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 				}
 			}
 
-			boolean item_pass = getInventory().insertItem(1, recipe.itemOutput, true) != ItemStack.EMPTY;
+			boolean item_pass = recipe.itemOutput.equals(ItemStack.EMPTY) || getInventory().insertItem(1, recipe.itemOutput, true) != ItemStack.EMPTY;
 
 			return fluid_pass && item_pass;
 		}

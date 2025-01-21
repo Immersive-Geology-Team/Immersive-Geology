@@ -67,7 +67,7 @@ public abstract class IGRecipeMethod
 		CRUSHING,
 		BASIC_SMELTING,
 		ARC_SMELTING,
-		SYNETHESIS,
+		SYNTHESIS,
 		CUTTING,
 		REFINING,
 		PELLETIZE;
@@ -83,7 +83,7 @@ public abstract class IGRecipeMethod
 				case CHEMICAL -> {return ig("chemical_reactor");}
 				case CRUSHING -> {return ie("crusher");}
 				case ROASTING -> {return ig("reverberation_furnace");}
-				case SYNETHESIS -> {return ie("refinery");}
+				case SYNTHESIS -> {return ie("refinery");}
 				case ARC_SMELTING -> {return ie("arc_furnace");}
 				case CALCINATION -> {return ig("rotarykiln");}
 				case BASIC_SMELTING -> {return mc("furnace");}
