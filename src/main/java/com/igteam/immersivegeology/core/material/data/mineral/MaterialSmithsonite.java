@@ -3,9 +3,12 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -38,5 +41,13 @@ public class MaterialSmithsonite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Zinc));
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,1,
+                ItemCategoryFlags.METAL_OXIDE, MetalEnum.Zinc.instance(), 1, 300, 153600);
+
     }
 }
