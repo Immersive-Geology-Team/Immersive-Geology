@@ -55,7 +55,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, parentMaterial.getProductionMaterial());
 			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
 			this.time = 300;
-			this.fluid_out = FluidStack.EMPTY;
+			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = 38400;
 			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
 		} else {
@@ -71,7 +71,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
 			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
 			this.time = 300;
-			this.fluid_out = FluidStack.EMPTY;
+			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = 38400;
 			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
 		} else {
@@ -87,7 +87,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
 			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
 			this.time = time;
-			this.fluid_out = FluidStack.EMPTY;
+			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = energy;
 			if(fluid_tag == null) throw new RuntimeException("Fluid Tag Returned Was Null, IDK why.");
 		} else {

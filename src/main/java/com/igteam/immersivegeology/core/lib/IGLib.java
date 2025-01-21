@@ -27,6 +27,7 @@ public class IGLib {
 
     // These should probably stay the same
     public static final int SLURRY_TO_CRYSTAL_MB = 144;
+    public static final int ACID_RECOVERED_FROM_SLURRY = 120;
     public static final int ACID_TO_SLURRY_AMOUNT = 250;
     public static final int SLURRY_FROM_ACID_AMOUNT = 216;
 
