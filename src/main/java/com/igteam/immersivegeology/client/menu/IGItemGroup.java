@@ -24,7 +24,13 @@ public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tabs.png");
 
     private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_background.png");
+    private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/product_background.png");
+    private static final ResourceLocation PYROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/pyrometallurgy_background.png");
+    private static final ResourceLocation HYDROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/hydrometallurgy_background.png");
+    private static final ResourceLocation STRUCTURAL_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/structural_background.png");
+
     private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_tab.png");
+
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
 
@@ -36,7 +42,14 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public @NotNull ResourceLocation getBackgroundLocation() {
-        if(selectedGroup == ItemSubGroup.geologic) return GEOLOGIC_BACKGROUND_TEXTURES;
+        switch(selectedGroup)
+        {
+            case geologic: return GEOLOGIC_BACKGROUND_TEXTURES;
+            case components: return PRODUCT_BACKGROUND_TEXTURES;
+            case pyrometallurgy: return PYROMETALLURGY_BACKGROUND_TEXTURES;
+            case hydrometallurgy:return HYDROMETALLURGY_BACKGROUND_TEXTURES;
+            case structural: return STRUCTURAL_BACKGROUND_TEXTURES;
+        }
         return CMB_TEXTURES;
     }
 

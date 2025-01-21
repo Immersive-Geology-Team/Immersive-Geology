@@ -116,7 +116,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         public State(IInitialMultiblockContext<State> ctx) {
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(16, 0, 1, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
+            this.processor = new MultiblockProcessor<>(16, 0, 8, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             final Runnable sync = ctx.getSyncRunnable();
