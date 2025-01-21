@@ -118,7 +118,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         if(!(item instanceof IGGenericBucketItem bucketItem)) return;
         MaterialInterface<?> baseMaterial = bucketItem.getMaterial(MaterialTexture.base);
         MaterialInterface<?> overlayMaterial = bucketItem.getMaterial(MaterialTexture.overlay);
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + ItemCategoryFlags.BUCKET.getRegistryKey(baseMaterial, bucketItem.getFluidCategory())).getPath();
+        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial, bucketItem.getFluidCategory())).getPath();
         boolean chemical = false;
 
         if(baseMaterial instanceof ChemicalEnum)
@@ -126,7 +126,7 @@ public class IGItemModelProvider extends ItemModelProvider {
            chemical = true;
            if(overlayMaterial != null)
            {
-               itemLocation = new ResourceLocation(IGLib.MODID, "item/" + ItemCategoryFlags.BUCKET.getRegistryKey(baseMaterial,overlayMaterial)).getPath();
+               itemLocation = new ResourceLocation(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial,overlayMaterial)).getPath();
            }
         }
 

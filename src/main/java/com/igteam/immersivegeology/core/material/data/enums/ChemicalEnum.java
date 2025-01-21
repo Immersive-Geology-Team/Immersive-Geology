@@ -8,15 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.material.data.chemical.*;
-import com.igteam.immersivegeology.core.material.data.chemical.mantle.*;
-import com.igteam.immersivegeology.core.material.data.stone.compat.adastra.*;
-import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
-import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
@@ -53,14 +46,29 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         return new FluidStack(getSlurryWith(metalEnum), amount);
     }
 
+    public TagKey<Fluid> getCloudySlurryTagWith(MaterialInterface<?> metalEnum)
+    {
+        return getFluidTag(BlockCategoryFlags.CLOUDY_SLURRY, metalEnum);
+    }
+
+    public Fluid getCloudySlurryWith(MaterialInterface<?> metalEnum)
+    {
+        return material.getFluid(BlockCategoryFlags.CLOUDY_SLURRY, metalEnum);
+    }
+
+    public FluidStack getCloudySlurryWith(MaterialInterface<?> metalEnum, int amount)
+    {
+        return new FluidStack(getCloudySlurryWith(metalEnum), amount);
+    }
+
     public TagKey<Fluid> getSlurryTagWith(MaterialInterface<?> metalEnum)
     {
         return getFluidTag(BlockCategoryFlags.SLURRY, metalEnum);
     }
 
-    public boolean hasSlurryMetal(MetalEnum metal)
+    public boolean hasSlurryWith(MaterialInterface<?> material)
     {
-        return instance().hasSlurryMetal(metal);
+        return instance().hasSlurryWith(material);
     }
 
     public FluidStack getFluidStack(int i)

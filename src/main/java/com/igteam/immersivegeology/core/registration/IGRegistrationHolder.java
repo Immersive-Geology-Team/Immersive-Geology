@@ -30,7 +30,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -239,6 +239,9 @@ public class IGRegistrationHolder {
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
         registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
 
+        HashSet<MaterialInterface<?>> slurry_material_set = new HashSet<>(List.of(MetalEnum.values()));
+        slurry_material_set.addAll(List.of(MineralEnum.values()));
+
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
@@ -290,35 +293,64 @@ public class IGRegistrationHolder {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             IGLib.IG_LOGGER.info("Registration of Fluid for {}", registryKey);
+                            ItemCategoryFlags bucket_type = material instanceof MetalEnum ? ItemCategoryFlags.BUCKET : ItemCategoryFlags.CLEAN_FLASK;
                             // Still
-                            registerFluid(registryKey, () -> new IGFluid.Source(material, null, blockCategory));
+                            registerFluid(registryKey, () -> new IGFluid.Source(material, null, blockCategory, bucket_type));
                             // Flowing
-                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, null, blockCategory));
+                            registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, null, blockCategory, bucket_type));
 
                             // Fluid Type Registration
                             registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
-                            registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, blockCategory), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material));
+                            registerItem(bucket_type.getRegistryKey(material, blockCategory), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, bucket_type, material));
                             registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
                         }
                         case SLURRY ->
                         {
                             if(material.instance() instanceof MaterialChemical chemical)
                             {
-                                for(MetalEnum metal : MetalEnum.values())
+                                for(MaterialInterface<?> slurry_material : slurry_material_set)
                                 {
-                                    if(!chemical.hasSlurryMetal(metal)) continue;
-                                    String registryKey = blockCategory.getRegistryKey(material, metal);
+                                    if(!chemical.hasSlurryWith(slurry_material)) continue;
+
+                                    String registryKey = blockCategory.getRegistryKey(material, slurry_material);
                                     IGLib.IG_LOGGER.info("Registration of Slurry for {}", registryKey);
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
+
                                     // Still
-                                    registerFluid(registryKey, () -> new IGFluid.Source(material, metal, blockCategory));
+                                    registerFluid(registryKey, () -> new IGFluid.Source(material, slurry_material, blockCategory, ItemCategoryFlags.CLEAN_FLASK));
+
                                     // Flowing
-                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, metal, blockCategory));
+                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, slurry_material, blockCategory, ItemCategoryFlags.CLEAN_FLASK));
 
                                     registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-                                    registerItem(ItemCategoryFlags.BUCKET.getRegistryKey(material, metal), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, material, metal));
+                                    registerItem(ItemCategoryFlags.CLEAN_FLASK.getRegistryKey(material, slurry_material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, ItemCategoryFlags.CLEAN_FLASK, material, slurry_material));
+                                }
+                            }
+                        }
+                        case CLOUDY_SLURRY ->
+                        {
+                            if(material.instance() instanceof MaterialChemical chemical)
+                            {
+                                for(MaterialInterface<?> slurry_material : slurry_material_set)
+                                {
+                                    if(!chemical.hasSlurryWith(slurry_material) || slurry_material instanceof MetalEnum) continue;
+
+                                    String registryKey = blockCategory.getRegistryKey(material, slurry_material);
+                                    IGLib.IG_LOGGER.info("Registration of Cloudy Slurry for {}", registryKey);
+                                    // Fluid Type Registration
+                                    registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
+
+                                    // Still
+                                    registerFluid(registryKey, () -> new IGFluid.Source(material, slurry_material, blockCategory, ItemCategoryFlags.CLOUDY_FLASK));
+
+                                    // Flowing
+                                    registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, slurry_material, blockCategory, ItemCategoryFlags.CLOUDY_FLASK));
+
+                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
+                                    registerItem(ItemCategoryFlags.CLOUDY_FLASK.getRegistryKey(material, slurry_material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, ItemCategoryFlags.CLOUDY_FLASK, material, slurry_material));
                                 }
                             }
                         }

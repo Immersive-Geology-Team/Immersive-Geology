@@ -8,19 +8,18 @@
 
 package com.igteam.immersivegeology.common.tag;
 
-import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
@@ -28,8 +27,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.tags.ITag;
 
 import java.util.*;
 
@@ -59,8 +56,14 @@ public class IGTags
 
 		FLUID_TAG_HOLDER.put(BlockCategoryFlags.FLUID, new LinkedHashMap<>());
 		FLUID_TAG_HOLDER.put(BlockCategoryFlags.SLURRY, new LinkedHashMap<>());
+		FLUID_TAG_HOLDER.put(BlockCategoryFlags.CLOUDY_SLURRY, new LinkedHashMap<>());
 		HashMap<String, TagKey<Fluid>> fluid_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.FLUID);
 		HashMap<String, TagKey<Fluid>> slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY);
+		HashMap<String, TagKey<Fluid>> cloud_slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.CLOUDY_SLURRY);
+
+		HashSet<MaterialInterface<?>> slurry_material_set = new HashSet<>(List.of(MetalEnum.values()));
+		slurry_material_set.addAll(List.of(MineralEnum.values()));
+
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 		{
 			if(materialInterface.hasFlag(BlockCategoryFlags.FLUID)) {
@@ -77,24 +80,47 @@ public class IGTags
 				fluid_map.put(getWrapFromSet(Set.of(base)), tag);
 			}
 
+
 			if(materialInterface.hasFlag(BlockCategoryFlags.SLURRY)) {
-				for(MetalEnum metal : MetalEnum.values()){
+				for(MaterialInterface<?> slurry_material : slurry_material_set){
 					if(materialInterface.instance() instanceof MaterialChemical chemical)
 					{
-						if(!chemical.hasSlurryMetal(metal)) {
+						if(!chemical.hasSlurryWith(slurry_material)) {
 							//IGLib.IG_LOGGER.info("Slurry don't exist? {} -> {}", chemical.getName(), metal.getName());
 							continue;
 						}
-						String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, metal);
+						String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, slurry_material);
 						if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) {
 							IGLib.IG_LOGGER.info("Skipping Slurry name {} as it is not in the Fluid Registration Map", registryKey);
 							continue;
 						}
 
 						MaterialHelper base = materialInterface.instance();
-						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase() + "_" + metal.getName().toLowerCase()));
-						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} Slurry", materialInterface.getName(), metal.getName());
-						slurry_map.put(getWrapFromSet(Set.of(base, metal.instance())), tag);
+						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "clean_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
+						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} Slurry", materialInterface.getName(), slurry_material.getName());
+						slurry_map.put(getWrapFromSet(BlockCategoryFlags.SLURRY, Set.of(base, slurry_material.instance())), tag);
+					}
+				}
+			}
+
+			if(materialInterface.hasFlag(BlockCategoryFlags.CLOUDY_SLURRY)) {
+				for(MaterialInterface<?> slurry_material : MineralEnum.values()){
+					if(materialInterface.instance() instanceof MaterialChemical chemical)
+					{
+						if(!chemical.hasSlurryWith(slurry_material)) {
+							//IGLib.IG_LOGGER.info("Slurry don't exist? {} -> {}", chemical.getName(), metal.getName());
+							continue;
+						}
+						String registryKey = BlockCategoryFlags.CLOUDY_SLURRY.getRegistryKey(materialInterface, slurry_material);
+						if(!IGRegistrationHolder.getFluidRegistryMap().containsKey(registryKey)) {
+							IGLib.IG_LOGGER.info("Skipping CLOUDY_SLURRY name {} as it is not in the Fluid Registration Map", registryKey);
+							continue;
+						}
+
+						MaterialHelper base = materialInterface.instance();
+						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "cloudy_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
+						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} CLOUDY_SLURRY", materialInterface.getName(), slurry_material.getName());
+						cloud_slurry_map.put(getWrapFromSet(BlockCategoryFlags.CLOUDY_SLURRY, Set.of(base, slurry_material.instance())), tag);
 					}
 				}
 			}
@@ -132,6 +158,15 @@ public class IGTags
 	public static String getWrapFromSet(Set<MaterialHelper> matSet){
 		StringJoiner value = new StringJoiner(",");
 
+		for (MaterialHelper m : matSet) {
+			value.add(m.getName());
+		}
+		return "[" + value + "]";
+	}
+
+	public static String getWrapFromSet(IFlagType<?> base, Set<MaterialHelper> matSet){
+		StringJoiner value = new StringJoiner(",");
+		value.add(base.getName().toLowerCase());
 		for (MaterialHelper m : matSet) {
 			value.add(m.getName());
 		}

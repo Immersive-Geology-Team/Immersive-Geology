@@ -47,11 +47,16 @@ public class IGFluidTags extends FluidTagsProvider
 			{
 				// Skip Flowing State Fluid
 				if(!fluid.getSource().equals(fluid)) continue;
-				if(fluid.getMaterial(MaterialTexture.overlay) != null) {
-					TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(BlockCategoryFlags.SLURRY, fluid.getMaterial(MaterialTexture.overlay));
-					if(fluid_key != null)
+				if(fluid.getMaterial(MaterialTexture.overlay) != null)
+				{
+					if(fluid.getFlag() instanceof BlockCategoryFlags fluid_flag)
 					{
-						tag(fluid_key).add(fluid.getSource());
+						TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(fluid_flag, fluid.getMaterial(MaterialTexture.overlay));
+						if(fluid_key!=null)
+						{
+							IGLib.IG_LOGGER.info("Tag for Fluid {} of type {}", fluid_key, fluid_flag.getName());
+							tag(fluid_key).add(fluid.getSource());
+						}
 					}
 					continue;
 				}

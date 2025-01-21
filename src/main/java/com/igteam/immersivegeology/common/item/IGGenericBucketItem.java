@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -42,15 +43,17 @@ import java.util.function.Supplier;
 public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
     private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     private final BlockCategoryFlags fluid_category;
+    private final ItemCategoryFlags bucket_type;
 
-    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, MaterialInterface<?> material) {
+    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material) {
         super(fluid, new Properties());
         this.materialMap.put(MaterialTexture.base, material);
         this.fluid_category = flag;
+        this.bucket_type = bucket_type;
     }
 
-    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, MaterialInterface<?> material, MaterialInterface<?> extra) {
-        this(fluid, flag, material);
+    public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material, MaterialInterface<?> extra) {
+        this(fluid, flag, bucket_type, material);
         this.materialMap.put(MaterialTexture.overlay, extra);
     }
 
@@ -68,14 +71,15 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
         MaterialInterface<?> baseMaterial = getMaterial(MaterialTexture.base);
         MaterialInterface<?> overlayMaterial = getMaterial(MaterialTexture.overlay);
 
-        if(baseMaterial instanceof MetalEnum)
+        if(bucket_type.equals(ItemCategoryFlags.BUCKET))
         {
             type = "bucket_molten";
+            materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
         }
 
-        if(baseMaterial instanceof ChemicalEnum)
+        if(bucket_type.equals(ItemCategoryFlags.CLEAN_FLASK))
         {
-            type = "flask_slurry";
+            type = "clean_flask_slurry";
 
             if(overlayMaterial != null) {
                 materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
@@ -84,8 +88,19 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
                 type = "flask";
                 materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
             }
-        } else {
-            materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+        }
+
+        if(bucket_type.equals(ItemCategoryFlags.CLOUDY_FLASK))
+        {
+            type = "cloudy_flask_slurry";
+
+            if(overlayMaterial != null) {
+                materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
+                materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
+            } else {
+                type = "flask";
+                materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+            }
         }
 
         return Component.translatable("item.immersivegeology." + type, materialList.toArray());
@@ -121,6 +136,11 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt)
     {
         return new FluidHandler(stack);
+    }
+
+    public IFlagType<?> getBucketType()
+    {
+        return bucket_type;
     }
 
     private static class FluidHandler implements IFluidHandlerItem, ICapabilityProvider

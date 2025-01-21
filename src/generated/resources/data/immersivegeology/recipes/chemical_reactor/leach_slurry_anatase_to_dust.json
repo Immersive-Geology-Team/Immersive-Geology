@@ -3,7 +3,7 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 216,
-    "tag": "forge:hydrochloricacid_titanium"
+    "tag": "forge:clean_hydrochloricacid_titanium"
   },
   "fluidInputB": {
     "amount": 150,

@@ -47,12 +47,12 @@ public class MaterialVanadinite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
-                MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
-                MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
-                1,
-                300,
-                153600);
+//        IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
+//                MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
+//                MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
+//                1,
+//                300,
+//                153600);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(ItemCategoryFlags.POWDER, ItemCategoryFlags.COMPOUND_DUST,
                 MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),

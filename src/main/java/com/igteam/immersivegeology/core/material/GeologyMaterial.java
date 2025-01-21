@@ -25,6 +25,7 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fluids.FluidType;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -268,6 +269,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return data_map.get(key);
 	}
 
+    @Nullable
     public synchronized TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
     {
         if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
@@ -277,9 +279,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Set.of(this));
         material_set.addAll(helpers);
 
-        String key = IGTags.getWrapFromSet(material_set);
+        String key = IGTags.getWrapFromSet(flag, material_set);
         IGLib.IG_LOGGER.info("Fluid Key Requested: {}", key);
-        IGLib.IG_LOGGER.info("Has Data Map been Initialized? {}", data_map.containsKey(key));
+        IGLib.IG_LOGGER.info("Has Data Map been Initialized? {} Method: {}", data_map.containsKey(key), IGTags.isInitialized());
         if(!data_map.containsKey(key))
         {
             IGTags.initialize();

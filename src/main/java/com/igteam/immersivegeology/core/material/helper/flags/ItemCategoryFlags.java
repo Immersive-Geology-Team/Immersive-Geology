@@ -26,6 +26,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     METAL_OXIDE(3),
     DIRTY_CRUSHED_ORE(2),
     BUCKET(3),
+    CLEAN_FLASK(3),
+    CLOUDY_FLASK(3),
     MECHANICAL_COMPONENT(1),
     HAMMER(4),
     MISC(4);

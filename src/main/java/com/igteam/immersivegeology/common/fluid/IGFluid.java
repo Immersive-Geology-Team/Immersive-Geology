@@ -63,11 +63,12 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 {
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final BlockCategoryFlags category;
-
-	public IGFluid(BlockCategoryFlags flag, MaterialInterface<?> material)
+	protected final ItemCategoryFlags bucket_type;
+	public IGFluid(BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material)
 	{
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = flag;
+		this.bucket_type = bucket_type;
 	}
 
 	public IFlagType<?> getFlag() {
@@ -82,7 +83,6 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	public int getColor(int index, BlockState state) {
 		return 0xff000000 | materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
 	}
-
 
 	@Override
 	public MaterialInterface<?> getMaterial(MaterialTexture t) {
@@ -108,7 +108,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 						materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
 					}
 				}
-				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.slurry"));
+				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.clean_slurry"));
+				if(category.equals(BlockCategoryFlags.CLOUDY_SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.cloudy_slurry"));
 
 				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + molten, materialList.toArray());
 			}
@@ -265,7 +266,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public Item getBucket()
 	{
-		String key = materialMap.size() > 1 ? ItemCategoryFlags.BUCKET.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : ItemCategoryFlags.BUCKET.getRegistryKey(getMaterial(MaterialTexture.base), category);
+		String key = materialMap.size() > 1 ? bucket_type.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : bucket_type.getRegistryKey(getMaterial(MaterialTexture.base), category);
 		return IGRegistrationHolder.getItem.apply(key);
 	}
 
@@ -304,8 +305,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Source extends IGFluid {
-		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag) {
-			super(flag, material);
+		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag, ItemCategoryFlags bucket_type) {
+			super(flag, bucket_type, material);
 			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 
@@ -319,8 +320,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public static class Flowing extends IGFluid {
-		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag) {
-			super(flag, material);
+		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag, ItemCategoryFlags bucket_type) {
+			super(flag, bucket_type, material);
 			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
 		}
 

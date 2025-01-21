@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -76,6 +77,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag) { return instance().getFluidTag(flag);};
     default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
+    @Nullable
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... extras) { return instance().getFluidTag(flag, extras);};
 
     default LinkedHashSet<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};

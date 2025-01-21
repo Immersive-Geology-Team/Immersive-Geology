@@ -721,114 +721,6 @@
       "required": false
     },
     {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_gabbro",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_gabbro",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_gabbro",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_granite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_granite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_granite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_gneiss",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_gneiss",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_gneiss",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_marble",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_marble",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_marble",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_phyllite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_phyllite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_phyllite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_quartzite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_quartzite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_quartzite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_schist",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_schist",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_schist",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_poor_ore_block_osmium_slate",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_normal_ore_block_osmium_slate",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:tfc_rich_ore_block_osmium_slate",
-      "required": false
-    },
-    {
       "id": "immersivegeology:tfc_poor_ore_block_osmium_chalk",
       "required": false
     },
@@ -913,30 +805,6 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_osmium_stone",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_osmium_stone",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_osmium_stone",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:poor_ore_block_osmium_deepslate",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_osmium_deepslate",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_osmium_deepslate",
-      "required": false
-    },
-    {
       "id": "immersivegeology:poor_ore_block_osmium_andesite",
       "required": false
     },
@@ -949,30 +817,6 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_osmium_diorite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:poor_ore_block_osmium_granite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_osmium_granite",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_osmium_granite",
-      "required": false
-    },
-    {
       "id": "immersivegeology:poor_ore_block_osmium_basalt",
       "required": false
     },
@@ -982,18 +826,6 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_osmium_basalt",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:poor_ore_block_osmium_netherrack",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_osmium_netherrack",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_osmium_netherrack",
       "required": false
     },
     {

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-21T05:19:53.779761927	Feature Data Generator
+// 1.20.1	2025-01-21T23:58:30.874965037	Feature Data Generator
 83b66b76b5ea488746acf1b2c3b8daed94bc6bce data/immersivegeology/worldgen/configured_feature/acanthite_tfc.json
 16f6013d13ea2786e53fb3b8c2a94f258699e4ee data/immersivegeology/worldgen/configured_feature/anatase_tfc.json
 d6dc3caa8a293e19fe48727e00abde888fb4df4d data/immersivegeology/worldgen/configured_feature/bauxite_tfc.json
@@ -24,7 +24,7 @@ ca529e39e7dcdf35195dc048abede9888c651bd1 data/immersivegeology/worldgen/configur
 8bb6d3be2a816f6955c2011c1005f6e2bd4ed617 data/immersivegeology/worldgen/configured_feature/magnetite_tfc.json
 1234176724e5a95864ccfd4377f85a521ade45c1 data/immersivegeology/worldgen/configured_feature/molybenite_tfc.json
 d00887ed286ec96441aac31d8bcddf5ce19162e8 data/immersivegeology/worldgen/configured_feature/monazite_tfc.json
-2147eb965cba832c989190426a94b4000a0dfc58 data/immersivegeology/worldgen/configured_feature/osmium_tfc.json
+0fddb53830a2350859847d5db0d407ccba7bf209 data/immersivegeology/worldgen/configured_feature/osmium_tfc.json
 56121e1460359ca5937ccb0d5d289d2251fd2f0a data/immersivegeology/worldgen/configured_feature/platinum_tfc.json
 16a44f247773bd479d542ecf66cec5ace54e8abc data/immersivegeology/worldgen/configured_feature/pyrite_tfc.json
 8062b7dc79192f2b1adba2962961c382554836b9 data/immersivegeology/worldgen/configured_feature/pyrolusite_tfc.json
@@ -81,4 +81,4 @@ c8e0ce42afebb58748fc7e25913f130dda86ca7e data/immersivegeology/worldgen/placed_f
 52b73ad01662d270b19230b7a54cf96dece2abdc data/immersivegeology/worldgen/placed_feature/vanadinite_tfc.json
 b3aee01d3176d8ba1be444b30e952b02a7bd18ca data/immersivegeology/worldgen/placed_feature/wolframite_tfc.json
 5f0bdf30001819d5d402769779906dda3a183bfd data/immersivegeology/worldgen/placed_feature/zircon_tfc.json
-ef9c8c9aed4779ac7de6971224572b43ba5299f0 data/tfc/tags/worldgen/placed_feature/in_biome/veins.json
+a2e54b609e0ca7a36907356395210b7cabb19631 data/tfc/tags/worldgen/placed_feature/in_biome/veins.json
