@@ -144,7 +144,7 @@ public class CreativeMenuHandler {
             boolean isSelected = IGItemGroup.getCurrentSubGroup().equals(group);
             int variant = isSelected ? 0 : (hovered ? 1 : 2);
 
-            pGuiGraphics.blit(CEX_GUI_TEXTURES, x + (isSelected ? 3 : 0), y, normalX + (width * variant), normalY + (height * group.ordinal()), width, height);
+            pGuiGraphics.blit(CEX_GUI_TEXTURES, x + (isSelected ? 1 : 0), y, normalX + (width * variant), normalY + (height * group.ordinal()), width, height);
 
             IFlagType<?> groupPattern = group.getFlag();
             ItemStack stack;
