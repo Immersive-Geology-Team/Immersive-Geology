@@ -8,17 +8,13 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
-
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
@@ -60,7 +56,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Sphalerite(new MaterialSphalerite()),
     Thorianite(new MaterialThorianite()),
     Thorite(new MaterialThorite()),
-    Ullmannite(new MaterialUllmannite()),
+    Millerite(new MaterialMillerite()),
     Unobtania(new MaterialUnobtania()),
     Uraninite(new MaterialUraninite()),
     Vanadinite(new MaterialVanadinite()),
