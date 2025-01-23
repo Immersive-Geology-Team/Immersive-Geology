@@ -56,9 +56,9 @@ public class IGAtlasProvider implements DataProvider {
 
 
 		List<String> scaffolding_textures = new ArrayList<>();
-		scaffolding_textures.add("block/scaffolding/scaffolding");
-		scaffolding_textures.add("block/scaffolding/scaffolding_top_grate_top");
-		scaffolding_textures.add("block/scaffolding/scaffolding_top_wooden_top");
+		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding");
+		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_grate_top");
+		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_wooden_top");
 		addPalettedPermutations(sourcesArray, "metals", MetalEnum.getAtlasScaffoldingPermutations(), scaffolding_textures);
 
 		atlasJson.add("sources", sourcesArray);

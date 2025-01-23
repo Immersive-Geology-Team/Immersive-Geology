@@ -197,9 +197,9 @@
         "tungsten_pristine": "immersivegeology:color_palettes/metals/pristine/tungsten"
       },
       "textures": [
-        "immersivegeology:block/scaffolding/scaffolding",
-        "immersivegeology:block/scaffolding/scaffolding_top_grate_top",
-        "immersivegeology:block/scaffolding/scaffolding_top_wooden_top"
+        "immersivegeology:block/greyscale/scaffolding/scaffolding",
+        "immersivegeology:block/greyscale/scaffolding/scaffolding_top_grate_top",
+        "immersivegeology:block/greyscale/scaffolding/scaffolding_top_wooden_top"
       ]
     }
   ]

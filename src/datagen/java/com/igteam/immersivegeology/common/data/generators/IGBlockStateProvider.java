@@ -287,6 +287,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void registerScaffolding(IGBlockType type){
+        logger.info("Creating Scaffolding");
         IGScaffoldingBlock block = (IGScaffoldingBlock) type;
         MetalScaffoldingType scaffolding_type = block.getScaffoldingType();
         MaterialInterface<?> base_material = block.getMaterial(MaterialTexture.base);
@@ -297,7 +298,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         new ResourceLocation(IGLib.MODID, "block/base/scaffolding/scaffolding_"+block.getScaffoldingType().name().toLowerCase()));
 
         ResourceLocation texture = new ResourceLocation(IGLib.MODID, "block/colored/" + base_material.getName().toLowerCase() + "/scaffolding/scaffolding_" + scaffolding_type.name().toLowerCase());
-
+        logger.info("Checking for colored variations: {}", texture.getPath());
         boolean exists = existingFileHelper.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
         if(!exists)
         {
