@@ -15,6 +15,6 @@ public class MaterialHydrochloricAcid extends MaterialChemical
 {
 	public MaterialHydrochloricAcid()
 	{
-		super(MetalEnum.Zinc, MetalEnum.Titanium, MetalEnum.Cobalt, MetalEnum.Nickel, MetalEnum.Chromium, MetalEnum.Manganese, MetalEnum.Copper, MetalEnum.Silver, MetalEnum.Neodymium, MetalEnum.Uranium);
+		super(MetalEnum.Zinc, MetalEnum.Titanium, MetalEnum.Cobalt, MetalEnum.Nickel, MetalEnum.Chromium, MetalEnum.Manganese, MetalEnum.Copper, MetalEnum.Silver, MetalEnum.Neodymium, MetalEnum.Tungsten,MetalEnum.Uranium);
 	}
 }
