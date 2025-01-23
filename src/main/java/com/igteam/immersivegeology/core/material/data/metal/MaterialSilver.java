@@ -10,11 +10,14 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +54,15 @@ public class MaterialSilver extends MaterialNativeMetal {
     public boolean willTarnishOverTime()
     {
         return true;
+    }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                ChemicalEnum.HydrochloricAcid,
+                ItemCategoryFlags.CRYSTAL);
     }
 }

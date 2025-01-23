@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -55,8 +56,8 @@ public class MaterialAcanthite extends MaterialMineral {
         LinkedHashSet<MaterialInterface<?>> materials = new LinkedHashSet<>();
         materials.add(MetalEnum.Silver);
         materials.add(MetalEnum.Lead);
-    //    materials.add(MetalEnum.Platinum);
-    //    materials.add(MetalEnum.Osmium);
+        materials.add(MetalEnum.Platinum);
+        materials.add(MetalEnum.Osmium);
 		return materials;
     }
 
@@ -82,6 +83,22 @@ public class MaterialAcanthite extends MaterialMineral {
                 getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.075f, 200, 1000);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+                ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MineralEnum.Acanthite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                MetalEnum.Silver.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Lead, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Acanthite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
+                300, 38400);
+
 
     }
 }

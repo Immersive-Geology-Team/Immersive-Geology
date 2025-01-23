@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -38,7 +39,14 @@ public class MaterialLead extends MaterialNativeMetal
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2, ItemCategoryFlags.INGOT, 1, 60);
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, 2,
+                ItemCategoryFlags.INGOT, 1, 60);
+
+        //HANDWAVE
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                ChemicalEnum.HydrochloricAcid,
+                ItemCategoryFlags.CRYSTAL);
     }
 
     @Override
