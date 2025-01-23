@@ -98,7 +98,7 @@ public class CreativeMenuHandler {
             for(int iteration = 0; iteration < ItemSubGroup.values().length; iteration++) {
                 ItemSubGroup currentGroup = groups[iteration];
 
-                CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 165, j + 32 + (27 * iteration), button1 -> {
+                CreativeMenuButton button = new CreativeMenuButton(gui, currentGroup, i + 166, j + 32 + (27 * iteration), button1 -> {
                     IGItemGroup.updateSubGroup(currentGroup); //Update the sub-group
                     gui.resize(gui.getMinecraft(), gui.width, gui.height); //resize the gui to the same size, quick way to get it to update the content
                 }, narration -> {
@@ -144,7 +144,7 @@ public class CreativeMenuHandler {
             boolean isSelected = IGItemGroup.getCurrentSubGroup().equals(group);
             int variant = isSelected ? 0 : (hovered ? 1 : 2);
 
-            pGuiGraphics.blit(CEX_GUI_TEXTURES, x + (isSelected ? 1 : 0), y, normalX + (width * variant), normalY + (height * group.ordinal()), width, height);
+            pGuiGraphics.blit(CEX_GUI_TEXTURES, x, y, normalX + (width * variant), normalY + (height * group.ordinal()), width, height);
 
             IFlagType<?> groupPattern = group.getFlag();
             ItemStack stack;
@@ -159,14 +159,14 @@ public class CreativeMenuHandler {
             {
                 stack = group.getMaterial().getStack(groupPattern);
             }
-            int offset = 4;
+            int offset = 3;
             if(isSelected)
             {
-                pGuiGraphics.renderItem(stack, x + 10, y+offset);
+                pGuiGraphics.renderItem(stack, x + 7, y+offset);
             } else if(hovered) {
-                pGuiGraphics.renderItem(stack, x + 7, y + offset);
+                pGuiGraphics.renderItem(stack, x + 6, y + offset);
             } else {
-                pGuiGraphics.renderItem(stack, x + 8, y + offset);
+                pGuiGraphics.renderItem(stack, x + 6, y + offset);
             }
 
 

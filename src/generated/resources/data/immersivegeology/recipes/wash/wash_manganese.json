@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravityseparator",
+  "byproduct": {
+    "item": "immersivegeology:metal_oxide_iron"
+  },
+  "byproduct_chance": 0.8,
+  "input": {
+    "tag": "forge:compound_dust/manganese"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_manganese"
+  },
+  "time": 200,
+  "water": 1000
+}

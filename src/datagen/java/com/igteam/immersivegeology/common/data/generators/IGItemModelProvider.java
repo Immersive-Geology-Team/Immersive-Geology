@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.common.block.IGOreBlock;
+import com.igteam.immersivegeology.common.block.IGScaffoldingBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
@@ -147,7 +148,6 @@ public class IGItemModelProvider extends ItemModelProvider {
         {
             if(item instanceof IGGenericBlockItem blockItem)
             {
-
                 if(blockItem.getBlock() instanceof IOreBlock igOreBlock){
                     String prefix = "minecraft";
                     Set<IFlagType<?>> flags = igOreBlock.getMaterial(MaterialTexture.base).getFlags();
@@ -159,7 +159,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                         }
                     }
 
-                    boolean isSedimentary = ((MaterialStone)igOreBlock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY);
+                    boolean isSedimentary = ((MaterialStone)igOreBlock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY) || igOreBlock.getMaterial(MaterialTexture.base).useSedimentaryTextures();
                     OreRichness richness = igOreBlock.getOreRichness();
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
                     ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : ""));
@@ -168,23 +168,11 @@ public class IGItemModelProvider extends ItemModelProvider {
                     return;
                 }
 
-                if(blockItem.getBlock() instanceof IGOreBlock oreblock){
-                    String prefix = "minecraft";
-                    Set<IFlagType<?>> flags = oreblock.getMaterial(MaterialTexture.base).getFlags();
-                    for(ModFlags mod : ModFlags.values())
-                    {
-                        if(flags.contains(mod))
-                        {
-                            prefix = mod.name().toLowerCase();
-                        }
-                    }
+                if(blockItem.getBlock() instanceof IGScaffoldingBlock scaffoldingBlock){
+                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/scaffolding_" + scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase() + "_" + scaffoldingBlock.getScaffoldingType().name().toLowerCase()).getPath();
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/scaffolding/"+scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase()+"_scaffolding_"+scaffoldingBlock.getScaffoldingType().name().toLowerCase());
 
-                    boolean isSedimentary = ((MaterialStone)oreblock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY);
-                    OreRichness richness = oreblock.getOreRichness();
-                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : ""));
-                    ItemModelBuilder builder = withExistingParent(itemLocation, parentLocation);
-                    IGBlockStateProvider.implementUnsafeOreTexture(builder, oreblock, oreblock.getStoneFormation(), 1);
+                    withExistingParent(itemLocation, parentLocation);
                     return;
                 }
 

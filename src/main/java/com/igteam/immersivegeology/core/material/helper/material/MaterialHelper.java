@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -255,4 +256,10 @@ public interface MaterialHelper {
     MaterialInterface<?> getProductionMaterial();
     MaterialInterface<?> getByproductMaterial();
     MaterialInterface<?> getTraceMaterials(int index);
+
+    default boolean useSedimentaryTextures() { return false;};
+
+    default ScaffoldingHelper getScaffoldingBlock() {
+        return new ScaffoldingHelper(this);
+    }
 }

@@ -49,6 +49,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGBloomeryCategory(guiHelper));
 		registration.addRecipeCategories(new IGBallmillCategory(guiHelper));
 		registration.addRecipeCategories(new IGPelletizerCategory(guiHelper));
+		registration.addRecipeCategories(new IGCentrifugeCategory(guiHelper));
 	}
 
 	@Override
@@ -62,6 +63,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BALLMILL, getRecipes(BallmillRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.PELLETIZER, getRecipes(PelletizerRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.CENTRIFUGE, getRecipes(CentrifugeRecipe.RECIPES));
 	}
 
 

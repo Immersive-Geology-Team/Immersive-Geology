@@ -1,0 +1,24 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 144,
+    "tag": "forge:clean_hydrochloricacid_tungsten"
+  },
+  "fluidInputB": {
+    "amount": 144,
+    "tag": "forge:sodiumhydroxide"
+  },
+  "fluidResult": {
+    "amount": 250,
+    "fluid": "minecraft:water"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_tungsten"
+  },
+  "time": 200
+}

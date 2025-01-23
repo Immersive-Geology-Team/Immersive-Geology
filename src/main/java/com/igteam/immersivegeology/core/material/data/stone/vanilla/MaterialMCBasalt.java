@@ -21,4 +21,10 @@ public class MaterialMCBasalt extends MaterialStone {
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
         return ((p, i) -> (p == BlockCategoryFlags.ORE_BLOCK ? 0xffffff : 0x888c8d));
     }
+
+    @Override
+    public boolean useSedimentaryTextures()
+    {
+        return true;
+    }
 }

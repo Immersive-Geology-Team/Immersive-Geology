@@ -16,6 +16,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
@@ -279,6 +280,18 @@ public class IGRegistrationHolder {
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
+                        }
+                        case SCAFFOLDING ->
+                        {
+                            if(hasExistingImplementation) continue;
+                            for(MetalScaffoldingType type : MetalScaffoldingType.values())
+                            {
+                                String registryKey = blockCategory.getRegistryKey(material) + "_" + type.name().toLowerCase();
+                                Supplier<Block> blockProvider = () -> new IGScaffoldingBlock(type, material);
+                                registerBlock(registryKey, blockProvider);
+                                registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
+                            }
+
                         }
                         case STAIRS -> {
                             if(hasExistingImplementation) continue;

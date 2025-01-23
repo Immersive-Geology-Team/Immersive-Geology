@@ -29,16 +29,23 @@ public class CentrifugeRecipe extends MultiblockRecipe
 	public static final CachedRecipeList<CentrifugeRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CENTRIFUGE);
 	public final Lazy<ItemStack> itemOutput;
 	public final FluidTagInput fluidIn;
+
+	public final Lazy<FluidStack> primaryFluidOutput;
+	public final Lazy<FluidStack> secondaryFluidOutput;
+
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> CentrifugeRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, int energy, int time)
+	public <T extends Recipe<?>> CentrifugeRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, Lazy<FluidStack> primaryFluidOutput, Lazy<FluidStack> secondaryFluidOutput, int energy, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.CENTRIFUGE, id);
 		this.itemOutput = output;
 		this.fluidIn = fluidInput;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
+		this.primaryFluidOutput = primaryFluidOutput;
+		this.secondaryFluidOutput = secondaryFluidOutput;
+
 		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
 	}
 

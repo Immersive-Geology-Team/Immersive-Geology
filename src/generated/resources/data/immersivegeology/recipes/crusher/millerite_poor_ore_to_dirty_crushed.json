@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:poor_ore/millerite"
+  },
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_millerite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_millerite"
+      }
+    }
+  ],
+  "time": 100
+}

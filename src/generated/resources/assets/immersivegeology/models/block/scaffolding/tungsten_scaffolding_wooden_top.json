@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/scaffolding/scaffolding_wooden_top",
+  "textures": {
+    "bottom": "immersivegeology:block/colored/tungsten/scaffolding/scaffolding",
+    "side": "immersivegeology:block/colored/tungsten/scaffolding/scaffolding",
+    "top": "immersivegeology:block/colored/tungsten/scaffolding/scaffolding_wooden_top"
+  }
+}

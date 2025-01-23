@@ -1,0 +1,8 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "biomes": "#forge:is_mountain",
+    "entry": "Millerite",
+    "random_name": -1378954184258771592
+  }
+}

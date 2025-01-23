@@ -32,7 +32,7 @@ public class MaterialTungsten extends MaterialMetal {
 
     public MaterialTungsten() {
         super();
-        addFlags(ItemCategoryFlags.OXIDE_PELLET);
+        addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING);
     }
 
     @Override
@@ -44,7 +44,6 @@ public class MaterialTungsten extends MaterialMetal {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-
         //Direct Leaching in HCL
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"slurry_to_compound_dust",
                 getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT),

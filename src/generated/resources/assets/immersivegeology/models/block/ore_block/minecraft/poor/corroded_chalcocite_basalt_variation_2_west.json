@@ -2,7 +2,7 @@
   "parent": "immersivegeology:block/base/ore_block/ore_block_west",
   "textures": {
     "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_chalcocite_corroded",
-    "side": "minecraft:block/basalt",
-    "top": "minecraft:block/basalt"
+    "side": "minecraft:block/basalt_side",
+    "top": "minecraft:block/basalt_top"
   }
 }

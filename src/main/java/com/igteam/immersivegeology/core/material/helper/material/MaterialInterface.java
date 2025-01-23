@@ -113,4 +113,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default MaterialInterface<?> getProductionMaterial() {return instance().getProductionMaterial();}
     default MaterialInterface<?> getByproductMaterial() {return instance().getByproductMaterial();}
     default MaterialInterface<?> getProductionMaterial(int index) {return instance().getTraceMaterials(index);}
+
+    default boolean useSedimentaryTextures() {return instance().useSedimentaryTextures();}
 }

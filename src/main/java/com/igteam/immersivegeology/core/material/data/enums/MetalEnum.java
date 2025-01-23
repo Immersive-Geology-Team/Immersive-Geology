@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -16,6 +15,7 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.metal.*;
+import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -58,12 +58,18 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     Vanadium(new MaterialVanadium()),
     Zinc(new MaterialZinc()),
     Zirconium(new MaterialZirconium()),
+    TungstenCarbide(new MaterialTungstenCarbide()),
     // Mantle Fluid
     MoltenMantle(new MaterialMoltenMantle());
 
     public static List<? extends IWorldGenConfig> nativeMetals()
     {
         return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.ORE_BLOCK)).toList();
+    }
+
+    public static List<? extends IWorldGenConfig> scaffoldingMetals()
+    {
+        return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.SCAFFOLDING)).toList();
     }
 
     public static List<String> getAtlasPermutations()
@@ -75,6 +81,17 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
             {
                 permutations.add(weathering.name().toLowerCase() + "/" + e.getName());
             }
+        });
+
+        return permutations;
+    }
+
+    public static List<String> getAtlasScaffoldingPermutations()
+    {
+        List<String> permutations = new ArrayList<>();
+        scaffoldingMetals().forEach((e) ->
+        {
+            permutations.add(MineralWeathering.PRISTINE.name().toLowerCase() + "/" + e.getName());
         });
 
         return permutations;
@@ -159,5 +176,9 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public double density()
     {
         return material.CONFIG.density();
+    }
+
+    public ScaffoldingHelper getScaffoldingBlock(){
+        return instance().getScaffoldingBlock();
     }
 }

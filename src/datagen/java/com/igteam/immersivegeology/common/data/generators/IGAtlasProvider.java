@@ -49,9 +49,17 @@ public class IGAtlasProvider implements DataProvider {
 				textures.add("block/greyscale/rock/vein/" + vein_type + "/" + richness.name().toLowerCase() + "_2");
 			}
 		}
+
 		// Add paletted permutations for metals and minerals
 		addPalettedPermutations(sourcesArray, "metals", MetalEnum.getAtlasPermutations(), textures);
 		addPalettedPermutations(sourcesArray, "minerals", MineralEnum.getAtlasPermutations(), textures);
+
+
+		List<String> scaffolding_textures = new ArrayList<>();
+		scaffolding_textures.add("block/scaffolding/scaffolding");
+		scaffolding_textures.add("block/scaffolding/scaffolding_top_grate_top");
+		scaffolding_textures.add("block/scaffolding/scaffolding_top_wooden_top");
+		addPalettedPermutations(sourcesArray, "metals", MetalEnum.getAtlasScaffoldingPermutations(), scaffolding_textures);
 
 		atlasJson.add("sources", sourcesArray);
 		elements.put("atlas", () -> atlasJson);

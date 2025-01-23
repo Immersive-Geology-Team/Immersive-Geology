@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "immersivegeology:block/scaffolding/tungsten_scaffolding_standard"
+    },
+    "waterlogged=true": {
+      "model": "immersivegeology:block/scaffolding/tungsten_scaffolding_standard"
+    }
+  }
+}

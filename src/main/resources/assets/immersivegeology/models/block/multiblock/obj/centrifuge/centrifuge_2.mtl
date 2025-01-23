@@ -1,0 +1,6 @@
+# Blender 4.2.3 LTS MTL File: 'centrifuge.blend'
+# www.blender.org
+
+newmtl none
+illum 1
+map_Kd immersivegeology:block/multiblock/centrifuge/temp_centrifuge_tanks

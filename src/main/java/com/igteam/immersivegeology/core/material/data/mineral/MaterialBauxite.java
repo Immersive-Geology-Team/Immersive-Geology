@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.level.ClipContext.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -64,6 +65,8 @@ public class MaterialBauxite extends MaterialMineral {
 //                ItemCategoryFlags.METAL_OXIDE,
 //                ItemCategoryFlags.CRUSHED_ORE,
 //                1, 300, 153600);
+
+        IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MineralEnum.Bauxite), 250, MetalEnum.Aluminum, ItemCategoryFlags.INGOT, 1, Fluids.WATER, 1, Fluids.LAVA, 1, 10, 100);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_" + getName() + "_to_compound_dust",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),

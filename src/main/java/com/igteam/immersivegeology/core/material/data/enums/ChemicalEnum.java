@@ -25,7 +25,10 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     HydrochloricAcid(new MaterialHydrochloricAcid()),
     HydrofluoricAcid(new MaterialHydrofluoricAcid()),
     NitricAcid(new MaterialNitricAcid()),
-    SodiumHydroxide(new MaterialSodiumHydroxide());
+    SodiumHydroxide(new MaterialSodiumHydroxide()),
+    AquaRegia(new MaterialAquaRegia()),
+    Ammonia(new MaterialAmmoniaSolution()),
+    ChemicalWaste(new MaterialChemicalWaste());
 
     private final MaterialChemical material;
     ChemicalEnum(MaterialChemical m){
@@ -61,9 +64,14 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         return new FluidStack(getCloudySlurryWith(metalEnum), amount);
     }
 
-    public TagKey<Fluid> getSlurryTagWith(MaterialInterface<?> metalEnum)
+    public TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialInterface<?> material)
     {
-        return getFluidTag(BlockCategoryFlags.SLURRY, metalEnum);
+        return getFluidTag(type, material);
+    }
+
+    public TagKey<Fluid> getSlurryTagWith(MaterialInterface<?> material)
+    {
+        return getFluidTag(BlockCategoryFlags.SLURRY, material);
     }
 
     public boolean hasSlurryWith(MaterialInterface<?> material)
@@ -74,5 +82,10 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     public FluidStack getFluidStack(int i)
     {
         return new FluidStack(getFluid(BlockCategoryFlags.FLUID), i);
+    }
+
+    public boolean hasComplexNamingScheme()
+    {
+        return instance().hasComplexNamingScheme();
     }
 }

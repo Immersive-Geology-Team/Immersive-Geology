@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:slag/millerite"
+  },
+  "result": {
+    "item": "immersivegeology:powdered_slag_millerite"
+  },
+  "time": 800
+}

@@ -32,6 +32,11 @@ public class MaterialChemical extends GeologyMaterial {
 		return slurry_material_set.contains(material);
 	}
 
+	public boolean hasComplexNamingScheme()
+	{
+		return false;
+	}
+
 	@Override
 	public void setupRecipeStages()
 	{

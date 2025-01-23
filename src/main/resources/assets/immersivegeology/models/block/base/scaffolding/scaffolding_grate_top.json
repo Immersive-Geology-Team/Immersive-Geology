@@ -1,0 +1,4 @@
+{
+  "parent": "immersivegeology:block/base/scaffolding/ig_scaffolding_base",
+  "render_type": "minecraft:cutout"
+}

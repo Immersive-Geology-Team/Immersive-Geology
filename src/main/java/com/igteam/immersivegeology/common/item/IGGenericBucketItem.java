@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.item;
 import blusunrize.immersiveengineering.api.utils.CapabilityUtils;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -82,8 +83,20 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
             type = "clean_flask_slurry";
 
             if(overlayMaterial != null) {
-                materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
-                materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
+                if(baseMaterial instanceof ChemicalEnum chemical_base) {
+                    if(chemical_base.hasComplexNamingScheme())
+                    {
+                        materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
+                        materialList.add(I18n.get("component.immersivegeology." + overlayMaterial.getName()));
+                        return Component.translatable("item.immersivegeology.complex_" + type, materialList.toArray());
+                    } else
+                    {
+                        materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
+                        materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
+                    }
+                } else {
+                    IGLib.IG_LOGGER.warn("Clean Slurry Flask being used for non ChemicalEnum Base Material see {} {}", baseMaterial.getName(), overlayMaterial.getName());
+                }
             } else {
                 type = "flask";
                 materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));

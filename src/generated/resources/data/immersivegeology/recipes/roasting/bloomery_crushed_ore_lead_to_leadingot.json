@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:bloomery",
+  "input": {
+    "base_ingredient": {
+      "tag": "forge:crushed_ore/lead"
+    },
+    "count": 2
+  },
+  "result": {
+    "item": "immersiveengineering:ingot_lead"
+  },
+  "time": 60
+}

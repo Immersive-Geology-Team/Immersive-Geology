@@ -62,11 +62,14 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
     public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
 
     private static final int ENERGY_CAPACITY = 32000;
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(2,2,0, RelativeBlockFace.BACK);
 
-    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,1,2, RelativeBlockFace.BACK);
+    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(4,0,4, RelativeBlockFace.BACK);
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(1,1,-1, RelativeBlockFace.BACK);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
+
+    private static final CapabilityPosition FLUID_PRIMARY_OUTPUT_CAP = new CapabilityPosition(0,2,0, RelativeBlockFace.UP);
+    private static final CapabilityPosition FLUID_SECONDARY_OUTPUT_CAP = new CapabilityPosition(4,2,0, RelativeBlockFace.UP);
 
     public static final int TANK_VOLUME = 4 *FluidType.BUCKET_VOLUME;
 
@@ -113,6 +116,15 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
             {
                 return state.fInputCap.cast(ctx);
             }
+
+            if(FLUID_PRIMARY_OUTPUT_CAP.equals(position))
+            {
+                return state.fPrimaryOutput.cast(ctx);
+            }
+            if(FLUID_SECONDARY_OUTPUT_CAP.equals(position))
+            {
+                return state.fSecondaryOutput.cast(ctx);
+            }
         }
 
         if(cap==ForgeCapabilities.ITEM_HANDLER)
@@ -152,6 +164,12 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         private final CapabilityReference<IItemHandler> output;
         private final StoredCapability<IItemHandler> itemOutputCap;
 
+
+        private final StoredCapability<IFluidHandler> fPrimaryOutput, fSecondaryOutput;
+
+        public final FluidTank primary_output_tank = new FluidTank(TANK_VOLUME);
+        public final FluidTank secondary_output_tank = new FluidTank(TANK_VOLUME);
+
         public State(IInitialMultiblockContext<State> ctx)
         {
             this.energyCap = new StoredCapability<>(this.energy);
@@ -170,6 +188,9 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
                     inventory, false, true, new IntRange(0, 1)
             ));
             this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
+
+            this.fPrimaryOutput = new StoredCapability<>(new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync));
+            this.fSecondaryOutput = new StoredCapability<>(new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync));
         }
 
         @Override
@@ -177,6 +198,8 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
             nbt.put("energy", energy.serializeNBT());
             nbt.put("processor", processor.toNBT());
             nbt.put("tank", tank.writeToNBT(new CompoundTag()));
+            nbt.put("primary_output_tank", primary_output_tank.writeToNBT(new CompoundTag()));
+            nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(new CompoundTag()));
             nbt.put("inventory", inventory.serializeNBT());
         }
 
@@ -184,6 +207,8 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
             tank.readFromNBT(nbt.getCompound("tank"));
+            primary_output_tank.readFromNBT(nbt.getCompound("primary_output_tank"));
+            secondary_output_tank.readFromNBT(nbt.getCompound("secondary_output_tank"));
             inventory.deserializeNBT(nbt.getCompound("inventory"));
         }
 

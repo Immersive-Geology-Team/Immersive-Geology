@@ -1,8 +1,0 @@
-{
-  "type": "immersivegeology:ig_ore",
-  "config": {
-    "biomes": "#forge:is_mountain",
-    "entry": "Ullmannite",
-    "random_name": -6618334013603977282
-  }
-}

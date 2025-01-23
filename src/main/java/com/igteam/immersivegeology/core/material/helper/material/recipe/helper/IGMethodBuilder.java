@@ -36,6 +36,8 @@ public class IGMethodBuilder
 	public static IGBallmillMethod pulverization(MaterialHelper parentMaterial, IGStageDesignation stage) {
 		return new IGBallmillMethod(parentMaterial, stage);
 	}
+	public static IGCentrifugeMethod centrifuge (MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGCentrifugeMethod(parentMaterial, stage);}
+
 	public static IGRefineryMethod synthesis (MaterialHelper parentMaterial, IGStageDesignation stage) {return new IGRefineryMethod(parentMaterial, stage);}
 	public static IGBasicSmeltingMethod basicSmelting(MaterialHelper parentMaterial, IGStageDesignation stage){ return new IGBasicSmeltingMethod(parentMaterial, stage); }
 

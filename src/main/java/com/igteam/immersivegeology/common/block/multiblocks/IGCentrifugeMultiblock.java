@@ -22,7 +22,7 @@ public class IGCentrifugeMultiblock extends IGTemplateMultiblock
 
 	public static final IGCentrifugeMultiblock INSTANCE = new IGCentrifugeMultiblock();
 	public IGCentrifugeMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/centrifuge"), new BlockPos(1,1,1), new BlockPos(1,3,1), new BlockPos(3,4,3), IGMultiblockProvider.CENTRIFUGE);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/centrifuge"), new BlockPos(1,1,1), new BlockPos(2,1,3), new BlockPos(5,3,5), IGMultiblockProvider.CENTRIFUGE);
     }
 
     @Override

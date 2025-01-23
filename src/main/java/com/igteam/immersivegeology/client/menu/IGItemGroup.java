@@ -36,7 +36,7 @@ public class IGItemGroup extends CreativeModeTab {
 
     public IGItemGroup(CreativeModeTab.Builder builder)
     {
-        super(builder);
+        super(builder.withSearchBar(89));
         ret.addAll(getSearchTabDisplayItems());
     }
 
@@ -55,7 +55,7 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.literal(" Geologic");//Component.translatable("itemGroup.immersivegeology." + selectedGroup.name());
+        return Component.translatable("itemGroup.immersivegeology." + selectedGroup.name());
     }
 
     @Override
@@ -167,12 +167,6 @@ public class IGItemGroup extends CreativeModeTab {
             }
         }
         return dis;
-    }
-
-    @Override
-    public boolean hasSearchBar()
-    {
-        return true;
     }
 
     public static ItemSubGroup getCurrentSubGroup() {

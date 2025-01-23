@@ -117,6 +117,9 @@
         "magnetite_corroded": "immersivegeology:color_palettes/minerals/corroded/magnetite",
         "magnetite_pristine": "immersivegeology:color_palettes/minerals/pristine/magnetite",
         "magnetite_tarnished": "immersivegeology:color_palettes/minerals/tarnished/magnetite",
+        "millerite_corroded": "immersivegeology:color_palettes/minerals/corroded/millerite",
+        "millerite_pristine": "immersivegeology:color_palettes/minerals/pristine/millerite",
+        "millerite_tarnished": "immersivegeology:color_palettes/minerals/tarnished/millerite",
         "molybenite_corroded": "immersivegeology:color_palettes/minerals/corroded/molybenite",
         "molybenite_pristine": "immersivegeology:color_palettes/minerals/pristine/molybenite",
         "molybenite_tarnished": "immersivegeology:color_palettes/minerals/tarnished/molybenite",
@@ -144,9 +147,6 @@
         "thorite_corroded": "immersivegeology:color_palettes/minerals/corroded/thorite",
         "thorite_pristine": "immersivegeology:color_palettes/minerals/pristine/thorite",
         "thorite_tarnished": "immersivegeology:color_palettes/minerals/tarnished/thorite",
-        "ullmannite_corroded": "immersivegeology:color_palettes/minerals/corroded/ullmannite",
-        "ullmannite_pristine": "immersivegeology:color_palettes/minerals/pristine/ullmannite",
-        "ullmannite_tarnished": "immersivegeology:color_palettes/minerals/tarnished/ullmannite",
         "unobtania_corroded": "immersivegeology:color_palettes/minerals/corroded/unobtania",
         "unobtania_pristine": "immersivegeology:color_palettes/minerals/pristine/unobtania",
         "unobtania_tarnished": "immersivegeology:color_palettes/minerals/tarnished/unobtania",
@@ -188,6 +188,18 @@
         "immersivegeology:block/greyscale/rock/vein/mineral/normal_2",
         "immersivegeology:block/greyscale/rock/vein/mineral/rich_1",
         "immersivegeology:block/greyscale/rock/vein/mineral/rich_2"
+      ]
+    },
+    {
+      "type": "paletted_permutations",
+      "palette_key": "immersivegeology:color_palettes/metals",
+      "permutations": {
+        "tungsten_pristine": "immersivegeology:color_palettes/metals/pristine/tungsten"
+      },
+      "textures": [
+        "immersivegeology:block/scaffolding/scaffolding",
+        "immersivegeology:block/scaffolding/scaffolding_top_grate_top",
+        "immersivegeology:block/scaffolding/scaffolding_top_wooden_top"
       ]
     }
   ]
