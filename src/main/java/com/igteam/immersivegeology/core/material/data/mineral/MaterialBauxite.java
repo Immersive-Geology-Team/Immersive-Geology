@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -54,6 +55,10 @@ public class MaterialBauxite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
+        //        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
+//                ItemCategoryFlags.METAL_OXIDE,
+//                ItemCategoryFlags.CRUSHED_ORE,
+//                1, 300, 153600);
         super.setupRecipeStages();
 //        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
 //                "crushed_ore_" + getName() + "_to_oxide",
@@ -61,19 +66,31 @@ public class MaterialBauxite extends MaterialMineral {
 //                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
 //
 //
-//        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
-//                ItemCategoryFlags.METAL_OXIDE,
-//                ItemCategoryFlags.CRUSHED_ORE,
-//                1, 300, 153600);
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+               "ore_powder_" + getName() + "_to_slurry",
+                ItemStack.EMPTY, //STACK
+                new FluidStack(ChemicalEnum.SodiumHydroxide.getCloudySlurryWith(MineralEnum.Bauxite), IGLib.SLURRY_FROM_ACID_AMOUNT),
+                new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), 1),
+                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
 
-        IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MineralEnum.Bauxite), 250, MetalEnum.Aluminum, ItemCategoryFlags.INGOT, 1, Fluids.WATER, 1, Fluids.LAVA, 1, 10, 100);
+        IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(
+                ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite),
+                IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Aluminum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
+                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite),
+                IGLib.ACID_TO_SLURRY_AMOUNT, null, 0, 1200, 614400);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_" + getName() + "_to_compound_dust",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE)),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT), null, null, 200, 51200);
+                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
+                null, null, 200, 51200);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("compound_dust_" + MetalEnum.Aluminum.getName() + "_to_cryolite",
-                MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER, IGLib.DUST_FROM_COMPOUND_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0), new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.COMPOUND_DUST), IGLib.COMPOUND_ACID_TO_DUST_AMOUNT), new FluidTagInput(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_DUST_AMOUNT), null, null, 200, 51200);
+                MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER, IGLib.DUST_FROM_COMPOUND_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
+                new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.COMPOUND_DUST), IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
+                new FluidTagInput(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_DUST_AMOUNT),
+                null, null, 200, 51200);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "aluminium_oxide_to_ingot",

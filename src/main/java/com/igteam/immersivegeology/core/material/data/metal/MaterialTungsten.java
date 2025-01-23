@@ -47,7 +47,7 @@ public class MaterialTungsten extends MaterialMetal {
         //Direct Leaching in HCL
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"slurry_to_compound_dust",
                 getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT),
-                new FluidStack(Fluids.WATER, 250), //TODO -- Chemical waste
+                ChemicalEnum.ChemicalWaste.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 IngredientWithSize.of (ItemStack.EMPTY),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Tungsten), IGLib.SLURRY_TO_CRYSTAL_MB),
                 //TODO AMMONIA

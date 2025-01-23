@@ -47,8 +47,22 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		this.name = create_advanced_method_name(item_output_form);
 		this.input = new FluidTagInput(input_fluid_tag, input_amount);
 		this.output = output_material.getStack(item_output_form, item_output_amount);
-		this.primary_out = new FluidStack(primary_fluid_output, primary_fluid_amount);
-		this.secondary_out = new FluidStack(secondary_fluid_output, secondary_fluid_amount);
+		if (primary_fluid_output == null)
+		{
+			this.primary_out = FluidStack.EMPTY;
+		}
+		else
+		{
+			this.primary_out = new FluidStack(primary_fluid_output, primary_fluid_amount);
+		}
+		if (secondary_fluid_output == null)
+		{
+			this.secondary_out = FluidStack.EMPTY;
+		}
+		else
+		{
+			this.secondary_out = new FluidStack(secondary_fluid_output, primary_fluid_amount);
+		}
 		this.time = time;
 		this.energy = energy;
 	}
