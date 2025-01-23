@@ -34,7 +34,7 @@ public class IGScaffoldingBlock extends ScaffoldingBlock implements IGBlockType
 	protected final MetalScaffoldingType type;
 	public IGScaffoldingBlock(MetalScaffoldingType type, MaterialInterface<?> material)
 	{
-		super(Properties.copy(MetalDecoration.ALU_SCAFFOLDING.get(type).get()));
+		super(Properties.copy(MetalDecoration.ALU_SCAFFOLDING.get(type).get()).explosionResistance(1200).destroyTime(50));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = BlockCategoryFlags.SCAFFOLDING;
 		this.type = type;

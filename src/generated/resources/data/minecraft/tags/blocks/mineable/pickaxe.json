@@ -840,6 +840,9 @@
     "immersivegeology:storage_block_zirconium",
     "immersivegeology:sheetmetal_block_zirconium",
     "immersivegeology:slab_zirconium",
+    "immersivegeology:storage_block_tungstencarbide",
+    "immersivegeology:sheetmetal_block_tungstencarbide",
+    "immersivegeology:slab_tungstencarbide",
     "immersivegeology:storage_block_moltenmantle",
     "immersivegeology:sheetmetal_block_moltenmantle",
     {
