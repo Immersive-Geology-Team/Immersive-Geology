@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersivegeology.crystal_zinc": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:crystal_zinc"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_zinc_to_item.immersivegeology.ingot_zinc_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.immersivegeology.crystal_zinc",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/item.immersivegeology.crystal_zinc_to_item.immersivegeology.ingot_zinc_from_blasting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

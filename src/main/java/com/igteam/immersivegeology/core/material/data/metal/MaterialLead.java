@@ -51,7 +51,7 @@ public class MaterialLead extends MaterialNativeMetal
         IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
                 ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
+        IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.GRIT, ItemCategoryFlags.INGOT);
     }
 

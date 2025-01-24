@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersivegeology.grit_cobalt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:grit_cobalt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/item.immersivegeology.grit_cobalt_to_item.immersivegeology.ingot_cobalt_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.immersivegeology.grit_cobalt",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/item.immersivegeology.grit_cobalt_to_item.immersivegeology.ingot_cobalt_from_blasting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

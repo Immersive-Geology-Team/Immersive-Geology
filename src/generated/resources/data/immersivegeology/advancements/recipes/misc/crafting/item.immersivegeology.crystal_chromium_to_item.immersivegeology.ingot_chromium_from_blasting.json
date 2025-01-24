@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.crystal_lead": {
+    "has_item.immersivegeology.crystal_chromium": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:crystal_lead"
+              "immersivegeology:crystal_chromium"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersiveengineering:ingot_lead"
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_chromium_to_item.immersivegeology.ingot_chromium_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.crystal_lead",
+      "has_item.immersivegeology.crystal_chromium",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersiveengineering:ingot_lead"
+      "immersivegeology:crafting/item.immersivegeology.crystal_chromium_to_item.immersivegeology.ingot_chromium_from_blasting"
     ]
   },
   "sends_telemetry_event": false

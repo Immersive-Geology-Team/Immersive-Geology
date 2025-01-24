@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.crystal_silver": {
+    "has_item.immersivegeology.crystal_lead": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:crystal_silver"
+              "immersivegeology:crystal_lead"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersiveengineering:ingot_silver"
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_lead_to_item.immersiveengineering.ingot_lead_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.crystal_silver",
+      "has_item.immersivegeology.crystal_lead",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersiveengineering:ingot_silver"
+      "immersivegeology:crafting/item.immersivegeology.crystal_lead_to_item.immersiveengineering.ingot_lead_from_blasting"
     ]
   },
   "sends_telemetry_event": false

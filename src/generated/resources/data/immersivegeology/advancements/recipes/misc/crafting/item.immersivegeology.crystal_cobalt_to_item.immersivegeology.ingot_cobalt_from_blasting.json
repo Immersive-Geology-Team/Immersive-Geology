@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.crystal_zinc": {
+    "has_item.immersivegeology.crystal_cobalt": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:crystal_zinc"
+              "immersivegeology:crystal_cobalt"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersivegeology:ingot_zinc"
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_cobalt_to_item.immersivegeology.ingot_cobalt_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.crystal_zinc",
+      "has_item.immersivegeology.crystal_cobalt",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersivegeology:ingot_zinc"
+      "immersivegeology:crafting/item.immersivegeology.crystal_cobalt_to_item.immersivegeology.ingot_cobalt_from_blasting"
     ]
   },
   "sends_telemetry_event": false

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.crystal_chromium": {
+    "has_item.immersivegeology.grit_silver": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:crystal_chromium"
+              "immersivegeology:grit_silver"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersivegeology:ingot_chromium"
+        "recipe": "immersivegeology:crafting/item.immersivegeology.grit_silver_to_item.immersiveengineering.ingot_silver_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.crystal_chromium",
+      "has_item.immersivegeology.grit_silver",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersivegeology:ingot_chromium"
+      "immersivegeology:crafting/item.immersivegeology.grit_silver_to_item.immersiveengineering.ingot_silver_from_blasting"
     ]
   },
   "sends_telemetry_event": false
