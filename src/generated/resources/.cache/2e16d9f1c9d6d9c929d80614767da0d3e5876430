@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-24T03:01:19.181320345	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-01-24T19:50:45.57864079	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -9,9 +9,12 @@ f82dc3901dcae323238abf2c81f125a9e801fa3f data/forge/tags/fluids/brine.json
 3d378b93df4523d2544aea625e7ac61507a9bf7f data/forge/tags/fluids/chromium.json
 793baa0ba0190114172a41d7241f857876027f7b data/forge/tags/fluids/clean_aquaregia_gold.json
 7fff60c4dbbd0ef6d1cbb33d898528dbefe6bb6f data/forge/tags/fluids/clean_aquaregia_platinum.json
+6902720f4b3521148a0e45e4545927d61fb47149 data/forge/tags/fluids/clean_hydrochloricacid_acanthite.json
 41650bc0a506c811e07da7ffeafbead435559e2e data/forge/tags/fluids/clean_hydrochloricacid_chromium.json
 e5e3c8d6bddc6d4792d39a5edce9908fe2ebfe81 data/forge/tags/fluids/clean_hydrochloricacid_cobalt.json
 b67fca6bfaab331c5df28ae60bbbbb4867fe6851 data/forge/tags/fluids/clean_hydrochloricacid_copper.json
+3a489616348bd3d1290202cf8899d5d35d1b2875 data/forge/tags/fluids/clean_hydrochloricacid_galena.json
+4a7abe3b805619c7a05a00af1b9bb015e4c55962 data/forge/tags/fluids/clean_hydrochloricacid_lead.json
 2e0461de21b50ef11fbbe75bfdc3ee1e8981c9b5 data/forge/tags/fluids/clean_hydrochloricacid_manganese.json
 e89dc5e82c1cfdbb3e4ae7ebf306748c19067ee8 data/forge/tags/fluids/clean_hydrochloricacid_neodymium.json
 e8b9b9792116ad340d57c587cc6fc0414ae203ff data/forge/tags/fluids/clean_hydrochloricacid_nickel.json
@@ -28,6 +31,8 @@ d13b733761e699c917e2827aac48d330bd4377b9 data/forge/tags/fluids/clean_nitricacid
 0fe7acf3d5df46ac1aa4de82edb2e5014d253268 data/forge/tags/fluids/clean_sodiumhydroxide_unobtanium.json
 6643471e1cde7bbe283c9bb1f6a8121fbfbc8754 data/forge/tags/fluids/clean_sulfuricacid_zinc.json
 d36935635e8dbab5195c5ce002b71a326681dd96 data/forge/tags/fluids/cloudy_chemicalwaste_bauxite.json
+201a8cd7a36db63de9997c41ee03aefa86f85bc2 data/forge/tags/fluids/cloudy_hydrochloricacid_acanthite.json
+1d378971e1c2953ce52331afb02e31ccf47bfcf8 data/forge/tags/fluids/cloudy_hydrochloricacid_galena.json
 4088f6b257ce8e074c2a2a21198c040b9c34d6e1 data/forge/tags/fluids/cloudy_sodiumhydroxide_bauxite.json
 9b890b1cf9b57ef75925b66da11dfd261bfec236 data/forge/tags/fluids/cobalt.json
 6f3c533d3ba62e460e57dfb429071cd7708f5c31 data/forge/tags/fluids/copper.json

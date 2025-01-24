@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:centrifuge",
+  "energy": 614400,
+  "fluid_input": {
+    "amount": 144,
+    "tag": "forge:cloudy_sodiumhydroxide_bauxite"
+  },
+  "item_output": {
+    "item": "immersivegeology:compound_dust_aluminum"
+  },
+  "primary_fluid_out": {
+    "amount": 250,
+    "fluid": "immersivegeology:cloudy_slurry_chemicalwaste_bauxite"
+  },
+  "secondary_fluid_out": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "time": 1200
+}

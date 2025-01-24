@@ -10,8 +10,8 @@
     "tag": "forge:sodiumhydroxide"
   },
   "fluidResult": {
-    "amount": 250,
-    "fluid": "minecraft:water"
+    "amount": 120,
+    "fluid": "immersivegeology:fluid_chemicalwaste"
   },
   "itemInput": {
     "base_ingredient": [],

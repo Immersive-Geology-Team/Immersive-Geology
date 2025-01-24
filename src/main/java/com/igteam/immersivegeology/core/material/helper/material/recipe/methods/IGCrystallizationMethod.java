@@ -98,7 +98,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	public void create(String name, ItemStack output, FluidStack fluid_out, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
-		if(fluid_tag == null) throw new RuntimeException("Fluid Tag is NULL... why?");
+		if(fluidTag == null) throw new RuntimeException("Fluid Tag is NULL... why? for Method: " + name);
 
 		this.itemResult = output;
 		this.fluid_tag = fluidTag;

@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "fluid": "immersivegeology:fluid_hydrochloricacid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "forge:clean_hydrochloricacid_silver"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_silver"
+  },
+  "time": 300
+}

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotarykiln",
+  "energy": 153600,
+  "input": {
+    "tag": "forge:compound_dust/aluminum"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_aluminum"
+  },
+  "time": 300
+}
