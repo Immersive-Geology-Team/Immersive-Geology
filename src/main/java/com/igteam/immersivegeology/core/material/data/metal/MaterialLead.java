@@ -47,6 +47,12 @@ public class MaterialLead extends MaterialNativeMetal
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.HydrochloricAcid,
                 ItemCategoryFlags.CRYSTAL);
+
+        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
+                ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
+
+        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
+                ItemCategoryFlags.GRIT, ItemCategoryFlags.INGOT);
     }
 
     @Override
