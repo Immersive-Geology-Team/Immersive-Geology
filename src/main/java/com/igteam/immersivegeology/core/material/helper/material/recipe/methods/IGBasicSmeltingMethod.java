@@ -89,13 +89,13 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	@Override
 	public ResourceLocation getLocation()
 	{
-		return toRL(output.asItem().getDescriptionId() + "_from_blasting");
+		return toRL(input.asItem().getDescriptionId() + "_to_" + output.asItem().getDescriptionId() + "_from_blasting");
 	}
 
 	@Override
 	public String getName()
 	{
-		return output.asItem().getDescriptionId() + "_from_blasting";
+		return input.asItem().getDescriptionId() + "_to_" + output.asItem().getDescriptionId() + "_from_blasting";
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	{
 		try
 		{
-			SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), RecipeCategory.MISC, output, xp, smeltingTime).unlockedBy("has_"+input.asItem().getDescriptionId(), InventoryChangeTrigger.TriggerInstance.hasItems(input)).save(consumer);
+			SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), RecipeCategory.MISC, output, xp, smeltingTime).unlockedBy("has_"+input.asItem().getDescriptionId(), InventoryChangeTrigger.TriggerInstance.hasItems(input)).save(consumer, getLocation());
 			return true;
 		} catch(Exception exception)
 		{
