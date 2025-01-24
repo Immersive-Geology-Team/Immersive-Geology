@@ -84,7 +84,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
-        if(state.mbLevelGetter == null) state.mbLevelGetter = () -> context.getLevel();
+        if(state.mbLevelGetter == null) state.mbLevelGetter = context::getLevel;
 
         if(!state.tank.isEmpty()) tryRunRecipe(state, context.getLevel().getRawLevel());
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
@@ -218,7 +218,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(
-                1, 0, 1, ctx.getMarkDirtyRunnable(), CentrifugeRecipe.RECIPES::getById
+                16, 0, 8, ctx.getMarkDirtyRunnable(), CentrifugeRecipe.RECIPES::getById
             );
             this.inventory = SlotwiseItemHandler.makeWithGroups(
                 List.of(new IOConstraintGroup(IOConstraint.NO_CONSTRAINT, 1)), ctx.getMarkDirtyRunnable()

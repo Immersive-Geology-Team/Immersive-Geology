@@ -25,6 +25,7 @@ public class MaterialOsmium extends MaterialNativeMetal
 
     public MaterialOsmium() {
         super();
+        this.CONFIG = new MaterialMineral.MineralConfig(0,0,0,0,0,0,0, false, Optional.empty());
     }
 
     @Override

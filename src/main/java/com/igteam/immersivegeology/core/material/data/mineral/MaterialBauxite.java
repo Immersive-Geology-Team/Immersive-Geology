@@ -55,17 +55,14 @@ public class MaterialBauxite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
-        //        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
-//                ItemCategoryFlags.METAL_OXIDE,
-//                ItemCategoryFlags.CRUSHED_ORE,
-//                1, 300, 153600);
         super.setupRecipeStages();
-//        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
-//                "crushed_ore_" + getName() + "_to_oxide",
-//                MetalEnum.Aluminum.getStack(ItemCategoryFlags.METAL_OXIDE),
-//                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
-//
-//
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.POWDER);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 400, 32000);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                "ore_powder_" + getName() + "_to_slurry",
                 ItemStack.EMPTY, //STACK
@@ -78,7 +75,7 @@ public class MaterialBauxite extends MaterialMineral {
                 ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite),
                 IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Aluminum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
                 ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite),
-                IGLib.ACID_TO_SLURRY_AMOUNT, null, 0, 1200, 614400);
+                IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_" + getName() + "_to_compound_dust",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 32000,
+  "input": {
+    "tag": "forge:grits/bauxite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_bauxite"
+  },
+  "time": 400
+}

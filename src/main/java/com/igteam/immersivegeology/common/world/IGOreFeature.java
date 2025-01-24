@@ -285,11 +285,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				return null;
 			}
 
-			List<BlockState> blocks = List.of(
-					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.POOR).getDefaultBlockState(),
-					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).getDefaultBlockState(),
-					mineral.getOreBlock(StoneEnum.MCStone, OreRichness.RICH).getDefaultBlockState()
-			);
+			List<BlockState> blocks;
 
 			// List of blocks for each ore richness
 			try

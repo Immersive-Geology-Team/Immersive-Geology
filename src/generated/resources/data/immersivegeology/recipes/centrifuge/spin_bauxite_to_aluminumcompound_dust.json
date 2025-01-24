@@ -9,7 +9,7 @@
     "item": "immersivegeology:compound_dust_aluminum"
   },
   "primary_fluid_out": {
-    "amount": 250,
+    "amount": 120,
     "fluid": "immersivegeology:cloudy_slurry_chemicalwaste_bauxite"
   },
   "secondary_fluid_out": {

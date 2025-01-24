@@ -200,6 +200,7 @@ public class IGRegistrationHolder {
         steel_mb.add(IGCrystalizerMultiblock.class);
 
         steel_mb.add(ImprovedBlastfurnaceMultiblock.class);
+        steel_mb.add(CrusherMultiblock.class);
         steel_mb.add(MixerMultiblock.class);
         steel_mb.add(RefineryMultiblock.class);
         steel_mb.add(DieselGeneratorMultiblock.class);

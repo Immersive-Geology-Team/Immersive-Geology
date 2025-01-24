@@ -304,7 +304,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			));
 
 			this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side(), FLUID_OUTPUT_CAP.posInMultiblock().south()));
-			this.processor = new InMachineProcessor<>(1, 0, 1, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
+			this.processor = new InMachineProcessor<>(16, 0, 8, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
 
 			this.inputCapLeft = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.leftInput));
 			this.inputCapBack = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.backInput));
