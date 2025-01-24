@@ -1,0 +1,22 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:nitricacid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:slurry_nitricacid_cobalt"
+  },
+  "itemInput": {
+    "base_ingredient": {
+      "item": "immersivegeology:powdered_slag_cobaltite"
+    },
+    "count": 3
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}

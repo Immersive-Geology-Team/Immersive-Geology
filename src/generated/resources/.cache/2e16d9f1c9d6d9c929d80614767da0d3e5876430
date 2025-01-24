@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-24T19:50:45.57864079	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-01-24T13:32:17.9599805	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -26,6 +26,7 @@ e8b9b9792116ad340d57c587cc6fc0414ae203ff data/forge/tags/fluids/clean_hydrochlor
 566665317dbe03c81082f3ce8051d7fc41d5c1f2 data/forge/tags/fluids/clean_hydrofluoricacid_neodymium.json
 fd2b1b6b853c2f77af7ce2a256d6624e834bf49e data/forge/tags/fluids/clean_hydrofluoricacid_uranium.json
 229dbce72edb5e586ec85f5dad76593548f5d9a4 data/forge/tags/fluids/clean_nitricacid_chromium.json
+041c303f93415c08d66432e1c4a18848ce4554e4 data/forge/tags/fluids/clean_nitricacid_cobalt.json
 d13b733761e699c917e2827aac48d330bd4377b9 data/forge/tags/fluids/clean_nitricacid_unobtanium.json
 7ba9035992403ea4aa55a91f682ea83a1d5a4205 data/forge/tags/fluids/clean_sodiumhydroxide_bauxite.json
 0fe7acf3d5df46ac1aa4de82edb2e5014d253268 data/forge/tags/fluids/clean_sodiumhydroxide_unobtanium.json

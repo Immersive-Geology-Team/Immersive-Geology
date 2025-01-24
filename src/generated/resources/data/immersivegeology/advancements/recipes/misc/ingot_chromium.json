@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersivegeology.crystal_chromium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:crystal_chromium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:ingot_chromium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.immersivegeology.crystal_chromium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:ingot_chromium"
+    ]
+  },
+  "sends_telemetry_event": false
+}

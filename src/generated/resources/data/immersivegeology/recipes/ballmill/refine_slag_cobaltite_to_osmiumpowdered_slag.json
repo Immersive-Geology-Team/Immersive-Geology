@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:slag/cobaltite"
+  },
+  "result": {
+    "item": "immersivegeology:powdered_slag_cobaltite"
+  },
+  "time": 800
+}

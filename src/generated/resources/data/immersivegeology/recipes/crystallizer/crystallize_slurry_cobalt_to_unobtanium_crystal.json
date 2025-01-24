@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "fluid": "immersivegeology:fluid_nitricacid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "forge:clean_nitricacid_cobalt"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_cobalt"
+  },
+  "time": 300
+}

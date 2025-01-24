@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:crushed_ore/cobaltite"
+  },
+  "result": {
+    "item": "immersivegeology:slag_cobaltite"
+  },
+  "time": 800,
+  "waste": 250
+}
