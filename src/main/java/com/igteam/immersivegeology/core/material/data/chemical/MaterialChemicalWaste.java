@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
 public class MaterialChemicalWaste extends MaterialChemical
 {
 	public MaterialChemicalWaste() {
-		super(MineralEnum.Bauxite);
+		super(MineralEnum.Bauxite, MineralEnum.Molybenite);
 		removeMaterialFlags(BlockCategoryFlags.SLURRY);
 	}
 

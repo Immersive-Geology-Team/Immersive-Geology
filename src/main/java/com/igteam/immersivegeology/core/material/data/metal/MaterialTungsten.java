@@ -50,8 +50,7 @@ public class MaterialTungsten extends MaterialMetal {
                 ChemicalEnum.ChemicalWaste.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 IngredientWithSize.of (ItemStack.EMPTY),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Tungsten), IGLib.SLURRY_TO_CRYSTAL_MB),
-                //TODO AMMONIA
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 null,200, 51200);
 
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create( ItemCategoryFlags.METAL_OXIDE,
