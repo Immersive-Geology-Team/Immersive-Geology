@@ -7,7 +7,7 @@
   },
   "fluidInputB": {
     "amount": 144,
-    "tag": "forge:sodiumhydroxide"
+    "tag": "forge:ammoniasolution"
   },
   "fluidResult": {
     "amount": 120,
