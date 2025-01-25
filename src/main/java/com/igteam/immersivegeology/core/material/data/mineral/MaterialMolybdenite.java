@@ -22,11 +22,10 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
-public class MaterialMolybenite extends MaterialMineral {
+public class MaterialMolybdenite extends MaterialMineral {
 
-    public MaterialMolybenite() {
+    public MaterialMolybdenite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
@@ -58,11 +57,21 @@ public class MaterialMolybenite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+        IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
+                ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
+                ItemCategoryFlags.SLAG, 1,         // Output
+                1000,                                          // Roasting Time
+                200                                            // Sulfur Dioxide Output Amount
+        );
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG );
 
         //Direct Leaching in Ammonia
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
                 ItemStack.EMPTY,
-                ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybenite, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybdenite, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 1)),
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);

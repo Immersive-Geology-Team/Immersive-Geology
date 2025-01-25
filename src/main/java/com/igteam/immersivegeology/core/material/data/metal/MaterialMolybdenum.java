@@ -20,12 +20,12 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMolybdenum extends MaterialMetal {
 
     public MaterialMolybdenum() {
         super();
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
         removeMaterialFlags(ItemCategoryFlags.WIRE, ItemCategoryFlags.GEAR);
     }
 
@@ -39,14 +39,14 @@ public class MaterialMolybdenum extends MaterialMetal {
     {
         super.setupRecipeStages();
         IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
-                ChemicalEnum.Ammonia.getCloudySlurryTagWith(MineralEnum.Molybenite),
+                ChemicalEnum.Ammonia.getCloudySlurryTagWith(MineralEnum.Molybdenite),
                 IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Molybdenum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
-                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Molybenite),
+                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Molybdenite),
                 IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400);
 
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
-            ItemCategoryFlags.COMPOUND_DUST,
                 ItemCategoryFlags.METAL_OXIDE,
+                ItemCategoryFlags.COMPOUND_DUST,
                 1, 300, 153600);
     }
 }

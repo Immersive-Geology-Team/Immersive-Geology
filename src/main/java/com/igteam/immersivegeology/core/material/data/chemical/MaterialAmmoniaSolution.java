@@ -8,10 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.BiFunction;
@@ -19,7 +17,7 @@ import java.util.function.BiFunction;
 public class MaterialAmmoniaSolution extends MaterialChemical
 {
 	public MaterialAmmoniaSolution() {
-		super(MineralEnum.Molybenite);
+		super(MineralEnum.Molybdenite);
 	}
 
 	@Override

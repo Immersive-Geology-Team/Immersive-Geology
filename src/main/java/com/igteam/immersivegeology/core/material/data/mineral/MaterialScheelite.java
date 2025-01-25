@@ -55,6 +55,13 @@ public class MaterialScheelite extends MaterialMineral {
     {
         super.setupRecipeStages();
 
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 200, 16000);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.POWDER);
+
         //Direct Leaching in HCL
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
                 ItemStack.EMPTY, //TODO - Sand
