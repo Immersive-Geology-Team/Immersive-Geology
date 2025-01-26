@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/pyrolusite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_pyrolusite"
+  },
+  "time": 600
+}

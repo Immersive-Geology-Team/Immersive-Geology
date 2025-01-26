@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotarykiln",
+  "energy": 153600,
+  "input": {
+    "tag": "forge:compound_dust/molybdenum"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_molybdenum"
+  },
+  "time": 300
+}

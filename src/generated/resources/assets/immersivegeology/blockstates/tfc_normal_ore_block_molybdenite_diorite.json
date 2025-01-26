@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/molybdenite_diorite_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/molybdenite_diorite_variation_2"
+        }
+      ]
+    }
+  ]
+}

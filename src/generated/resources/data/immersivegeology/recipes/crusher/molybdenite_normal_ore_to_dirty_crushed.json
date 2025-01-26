@@ -1,0 +1,25 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 100,
+  "input": {
+    "tag": "forge:normal_ore/molybdenite"
+  },
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_molybdenite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_molybdenite"
+      }
+    },
+    {
+      "chance": 0.165,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_molybdenite"
+      }
+    }
+  ],
+  "time": 100
+}

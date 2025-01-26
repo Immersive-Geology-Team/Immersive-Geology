@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:ammoniasolution"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:cloudy_slurry_ammoniasolution_molybdenite"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powdered_slag_molybdenite"
+  },
+  "itemResult": [],
+  "time": 200
+}

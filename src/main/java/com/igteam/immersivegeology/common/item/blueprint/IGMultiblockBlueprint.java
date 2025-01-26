@@ -82,7 +82,7 @@ public class IGMultiblockBlueprint extends IGGenericItem
 				Rotation rot = player.getDirection().equals(Direction.NORTH) ? Rotation.NONE : (player.getDirection().equals(Direction.EAST) ? Rotation.CLOCKWISE_90 : (player.getDirection().equals(Direction.WEST) ? Rotation.COUNTERCLOCKWISE_90 : Rotation.CLOCKWISE_180));
 				settings.setRotation(rot);
 				settings.applyTo(stack);
-				settings.sendPacketToServer(hand);
+				//settings.sendPacketToServer(hand);
 				player.displayClientMessage(settings.getMode().getTranslated(), true);
 			}
 			return InteractionResult.SUCCESS;
@@ -93,7 +93,7 @@ public class IGMultiblockBlueprint extends IGGenericItem
 		settings.setPos(pos);
 		settings.setPlaced(true);
 		settings.applyTo(stack);
-		settings.sendPacketToServer(hand);
+		//settings.sendPacketToServer(hand);
 		player.displayClientMessage(settings.getMode().getTranslated(), true);
 
 		return InteractionResult.SUCCESS;

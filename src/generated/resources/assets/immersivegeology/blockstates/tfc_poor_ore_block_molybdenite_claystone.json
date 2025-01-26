@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/tfc/poor/molybdenite_claystone_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/tfc/poor/molybdenite_claystone_variation_2"
+        }
+      ]
+    }
+  ]
+}

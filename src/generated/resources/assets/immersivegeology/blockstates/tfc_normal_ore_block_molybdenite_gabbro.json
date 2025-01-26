@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/molybdenite_gabbro_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/molybdenite_gabbro_variation_2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:centrifuge",
+  "energy": 614400,
+  "fluid_input": {
+    "amount": 144,
+    "tag": "forge:cloudy_ammoniasolution_molybdenite"
+  },
+  "item_output": {
+    "item": "immersivegeology:compound_dust_molybdenum"
+  },
+  "primary_fluid_out": {
+    "amount": 120,
+    "fluid": "immersivegeology:cloudy_slurry_chemicalwaste_molybdenite"
+  },
+  "secondary_fluid_out": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "time": 1200
+}

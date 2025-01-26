@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/granite",
+    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_molybdenite_pristine"
+  }
+}
