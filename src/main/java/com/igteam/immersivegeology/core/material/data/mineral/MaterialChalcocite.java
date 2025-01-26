@@ -58,7 +58,7 @@ public class MaterialChalcocite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         //MetalEnum.Platinum, MetalEnum.Osmium -- Think about it?
-        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Manganese));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Nickel));
     }
 
     @Override
