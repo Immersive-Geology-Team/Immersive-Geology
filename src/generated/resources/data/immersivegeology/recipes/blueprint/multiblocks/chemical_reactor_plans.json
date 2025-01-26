@@ -1,0 +1,16 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "Advanced Multiblock Plans",
+  "inputs": [
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:blueprint_multiblock_plans",
+    "nbt": "{settings:{mirror:0b,mode:1,multiblock:\"immersivegeology:multiblocks/chemical_reactor\",placed:0b,rotation:0}}"
+  }
+}

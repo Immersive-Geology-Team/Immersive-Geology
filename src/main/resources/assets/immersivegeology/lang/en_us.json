@@ -4,11 +4,11 @@
   "language.region": "United States",
 
   "itemGroup.immersivegeology": "Immersive Geology",
-  "itemGroup.immersivegeology.geologic": "Geologic",
-  "itemGroup.immersivegeology.pyrometallurgy": "Pyrometallurgy",
-  "itemGroup.immersivegeology.hydrometallurgy": "Hydrometallurgy",
-  "itemGroup.immersivegeology.components": "Components",
-  "itemGroup.immersivegeology.structural": "Structural",
+  "itemGroup.immersivegeology.geologic": " Geologic",
+  "itemGroup.immersivegeology.pyrometallurgy": " Pyrometallurgy",
+  "itemGroup.immersivegeology.hydrometallurgy": " Hydrometallurgy",
+  "itemGroup.immersivegeology.components": " Components",
+  "itemGroup.immersivegeology.structural": " Structural",
 
   "immersivegeology.config.title": "",
   "generator.immersive": "Immersive",
@@ -161,6 +161,9 @@
 
   "block.immersivegeology.pelletizer": "Pelletizer",
   "block.immersivegeology.rotarykiln": "Rotary Kiln",
+  "block.immersivegeology.coredrill": "Core Drill",
+  "block.immersivegeology.centrifuge": "Centrifuge",
+  "block.immersivegeology.trommel": "Trommel",
   "block.immersivegeology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",
   "block.immersivegeology.crystallizer" : "Crystalizer",
   "block.immersivegeology.gravityseparator" : "Gravity Ore Separator",
@@ -330,6 +333,11 @@
   "desc.immersiveengineering.info.multiblock.IE:HydroJetCutter":"Hydrojet Cutter",
   "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace":"Reverberation Furnace",
   "desc.immersiveengineering.info.multiblock.IE:RotaryKiln":"Rotary Kiln",
+
+  "item.immersivegeology.blueprint_multiblock_plans.specific": "%s Schematics",
+  "desc.immersivegeology.info.blueprint.build0": "Size Required: %s",
+  "desc.immersivegeology.info.blueprint.build1": "Hold [%s] for Materials",
+  "desc.immersivegeology.info.blueprint.noMultiblock": "Empty Schematics",
 
   "desc.immersiveengineering.info.mineral.lead_bearing_sulfide" : "Lead-bearing Sulfides",
   "desc.immersiveengineering.info.mineral.copper_bearing_sulfide" : "Copper-bearing Sulfides",

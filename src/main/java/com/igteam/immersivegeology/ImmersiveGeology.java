@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
+import com.igteam.immersivegeology.common.network.IGPacketHandler;
 import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -49,6 +50,7 @@ public class  ImmersiveGeology {
         ModLoadingContext.get().registerConfig(Type.SERVER, IGServerConfig.CONFIG_SPEC);
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
+        IGPacketHandler.initialize();
         IGContent.modContruction(modEventBus);
     }
 

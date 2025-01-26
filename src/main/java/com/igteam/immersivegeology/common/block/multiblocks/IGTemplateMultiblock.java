@@ -9,19 +9,17 @@
 package com.igteam.immersivegeology.common.block.multiblocks;
 
 import blusunrize.immersiveengineering.api.IEProperties;
-import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
-import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks.MultiblockManualData;
+import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
-import blusunrize.immersiveengineering.client.utils.BasicClientProperties;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
+import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
 import com.igteam.immersivegeology.common.item.IGMBFormationItem;
 import net.minecraft.core.BlockPos;
@@ -37,12 +35,14 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
-import java.util.function.Consumer;
+import java.util.Iterator;
+import java.util.List;
 
 
 public abstract class IGTemplateMultiblock extends TemplateMultiblock implements IGConfigurableMachine
@@ -62,7 +62,7 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
         {
             return super.createStructure(world, pos, side, player);
         }
-        player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
+        if(IGMBFormationItem.confirmMBStructure(this, world, pos, side, player)) player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
         return false;
     }
 

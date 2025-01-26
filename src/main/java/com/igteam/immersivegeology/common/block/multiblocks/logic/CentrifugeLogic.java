@@ -114,7 +114,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         if(recipe == null) return;
         MultiblockProcessInMachine<CentrifugeRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(0);
-        if( state.processor.addProcessToQueue(process, level, true)) state.processor.addProcessToQueue(process, level, false);
+        if(state.processor.addProcessToQueue(process, level, true)) state.processor.addProcessToQueue(process, level, false);
     }
 
     private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, CapabilityReference<IFluidHandler> outputRef, FluidTank tank)
@@ -278,8 +278,6 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
                 tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
                 primary_output_tank.fill(recipe.primaryFluidOutput.get(), FluidAction.EXECUTE);
                 secondary_output_tank.fill(recipe.secondaryFluidOutput.get(), FluidAction.EXECUTE);
-                this.output.insertOrDrop(recipe.itemOutput.get(), mbLevelGetter.get());
-
             } catch(Exception error)
             {
                 IGLib.IG_LOGGER.error("Error: {}", error.getMessage());

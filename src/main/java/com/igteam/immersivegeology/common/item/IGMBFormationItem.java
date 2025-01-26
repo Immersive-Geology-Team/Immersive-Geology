@@ -9,10 +9,14 @@
 package com.igteam.immersivegeology.common.item;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
+import blusunrize.immersiveengineering.api.utils.DirectionUtils;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
+import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -29,10 +33,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -52,15 +63,6 @@ public class IGMBFormationItem extends IGGenericItem
 	{
 		return 1;
 	}
-
-	// TODO allow setting by Configuration.
-	/*
-		@Override
-		public int getMaxDamage(ItemStack stack)
-		{
-			return 5;
-		}
-	*/
 
 	@Override
 	public Component getName(ItemStack pStack) {
@@ -102,23 +104,19 @@ public class IGMBFormationItem extends IGGenericItem
 
 			if (isBlockTrigger)
 			{
-				if(player!=null&&!isValid)
-				{
-					player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
-				}
+				boolean isAllowed;
+				if(permittedMultiblocks!=null)
+					isAllowed = permittedMultiblocks.contains(mb.getUniqueName());
+				else if(interdictedMultiblocks!=null)
+					isAllowed = !interdictedMultiblocks.contains(mb.getUniqueName());
+				else
+					isAllowed = true;
+				if(!isAllowed)
+					continue;
+				if(MultiblockHandler.postMultiblockFormationEvent(player, mb, pos, stack).isCanceled())
+					continue;
 				if(isValid)
 				{
-					boolean isAllowed;
-					if(permittedMultiblocks!=null)
-						isAllowed = permittedMultiblocks.contains(mb.getUniqueName());
-					else if(interdictedMultiblocks!=null)
-						isAllowed = !interdictedMultiblocks.contains(mb.getUniqueName());
-					else
-						isAllowed = true;
-					if(!isAllowed)
-						continue;
-					if(MultiblockHandler.postMultiblockFormationEvent(player, mb, pos, stack).isCanceled())
-						continue;
 					if(mb.createStructure(world, pos, multiblockSide, player))
 					{
 						if(player instanceof ServerPlayer sPlayer)
@@ -129,11 +127,48 @@ public class IGMBFormationItem extends IGGenericItem
 						});
 						return InteractionResult.SUCCESS;
 					}
+				} else if(player!=null)
+				{
+					if(confirmMBStructure((TemplateMultiblock) mb, world, pos, side, player)) player.displayClientMessage(Component.translatable("immersivegeology.multiblock.formation.failed"), true);
 				}
 			}
 		}
 
 		return InteractionResult.PASS;
+	}
+
+	public static boolean confirmMBStructure(TemplateMultiblock mb, Level world, BlockPos pos, Direction side, Player player) {
+		Rotation rot = DirectionUtils.getRotationBetweenFacings(Direction.NORTH, side.getOpposite());
+		if (rot == null) {
+			return false;
+		} else {
+			List<StructureBlockInfo> structure = mb.getStructure(world);
+			List<Mirror> mirror_states = mb.canBeMirrored() ? ImmutableList.of(Mirror.NONE, Mirror.FRONT_BACK) : ImmutableList.of(Mirror.NONE);
+			Iterator<Mirror> var7 = mirror_states.iterator();
+
+			label29:
+			while(var7.hasNext()) {
+				Mirror mirror = (Mirror)var7.next();
+				StructurePlaceSettings placeSet = (new StructurePlaceSettings()).setMirror(mirror).setRotation(rot);
+				BlockPos origin = pos.subtract(StructureTemplate.calculateRelativePosition(placeSet, mb.getTriggerOffset()));
+				Iterator var11 = structure.iterator();
+
+				while(var11.hasNext()) {
+					StructureTemplate.StructureBlockInfo info = (StructureTemplate.StructureBlockInfo)var11.next();
+					BlockPos realRelPos = StructureTemplate.calculateRelativePosition(placeSet, info.pos());
+					BlockPos here = origin.offset(realRelPos);
+					BlockState expected = info.state().mirror(mirror).rotate(rot);
+					BlockState inWorld = world.getBlockState(here);
+					if (!BlockMatcher.matches(expected, inWorld, world, here).isAllow()) {
+						continue label29;
+					}
+				}
+
+				return true;
+			}
+
+			return false;
+		}
 	}
 
 	@Nullable

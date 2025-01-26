@@ -31,6 +31,6 @@ public class MaterialCarnallite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Chromium, MetalEnum.Iron));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Magnesium, MetalEnum.Titanium));
     }
 }

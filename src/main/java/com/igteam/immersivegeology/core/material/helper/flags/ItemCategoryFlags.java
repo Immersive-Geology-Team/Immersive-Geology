@@ -30,7 +30,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     CLOUDY_FLASK(3),
     MECHANICAL_COMPONENT(1),
     HAMMER(4),
-    MISC(4);
+    MISC(4),
+    BLUEPRINT(4);
 
     private final int groupOrdinal;
 

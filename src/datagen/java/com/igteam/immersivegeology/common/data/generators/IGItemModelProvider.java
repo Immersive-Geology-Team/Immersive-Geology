@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
+import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -54,6 +55,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         List<? extends Item> itemList = IGRegistrationHolder.supplyDeferredItems().get();
 
         for (Item item : itemList) {
+            if(item instanceof IGMultiblockBlueprint) continue;
             if(item instanceof IGGenericOreItem i){
                 generateGenericOreItem(i);
                 continue;

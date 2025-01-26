@@ -4,6 +4,9 @@
     <JavaCodeStyleSettings>
       <option name="INSERT_INNER_CLASS_IMPORTS" value="true" />
     </JavaCodeStyleSettings>
+    <codeStyleSettings language="Glsl">
+      <option name="SPACE_BEFORE_COLON" value="false" />
+    </codeStyleSettings>
     <codeStyleSettings language="JAVA">
       <option name="BRACE_STYLE" value="2" />
       <option name="CLASS_BRACE_STYLE" value="2" />

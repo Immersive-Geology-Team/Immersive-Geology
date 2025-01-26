@@ -26,12 +26,14 @@ import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.*;
+import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -206,9 +208,9 @@ public class IGRegistrationHolder {
         steel_mb.add(DieselGeneratorMultiblock.class);
     }
 
-    private static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();
-	private static final List<Class<? extends TemplateMultiblock>> bronze_mb = new ArrayList<>();
-	private static final List<Class<? extends TemplateMultiblock>> steel_mb = new ArrayList<>();
+    public static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();
+    public static final List<Class<? extends TemplateMultiblock>> bronze_mb = new ArrayList<>();
+    public static final List<Class<? extends TemplateMultiblock>> steel_mb = new ArrayList<>();
 
     private static void registerBlockAndItem(String registryKey, BlockCategoryFlags blockCategory, MaterialInterface<?> material)
     {
@@ -234,6 +236,8 @@ public class IGRegistrationHolder {
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32, formationFormat(stone_mb)));
+
+        registerItem(ItemCategoryFlags.BLUEPRINT.getRegistryKey(MiscEnum.Blueprint), () -> new IGMultiblockBlueprint(ItemCategoryFlags.BLUEPRINT, MiscEnum.Blueprint));
 
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
@@ -378,6 +382,10 @@ public class IGRegistrationHolder {
                         {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericOreItem(itemCategoryFlags, material));
+                        }
+                        case BLUEPRINT ->
+                        {
+
                         }
                         default -> {
                             if(hasExistingImplementation) continue;

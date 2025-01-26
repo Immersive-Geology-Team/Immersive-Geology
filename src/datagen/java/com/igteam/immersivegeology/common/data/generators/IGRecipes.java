@@ -16,12 +16,16 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.BlueprintCraftingRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
+import blusunrize.immersiveengineering.common.util.compat.crafttweaker.managers.BlueprintCraftingRecipeManager;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
+import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
+import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings.Mode;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -36,6 +40,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.NonNullList;
@@ -48,6 +53,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -165,6 +171,41 @@ public class IGRecipes extends RecipeProvider
 		//Computational Engineering Block
 		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
 		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
+
+
+		for(TemplateMultiblock multiblock : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
+		{
+			ItemStack blueprint = new ItemStack(MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT));
+			IGBlueprintSettings settings = new IGBlueprintSettings(blueprint);
+			settings.setMultiblock(multiblock);
+			settings.setMode(Mode.PROJECTION);
+			settings.setMirror(false);
+			settings.setRotation(Rotation.NONE);
+			settings.setPlaced(false);
+			settings.applyTo(blueprint);
+			if(IGRegistrationHolder.stone_mb.contains(multiblock.getClass()))
+			{
+				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Simple Multiblock Plans", blueprint);
+				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
+						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
+				continue;
+			}
+			if(IGRegistrationHolder.bronze_mb.contains(multiblock.getClass()))
+			{
+				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Basic Multiblock Plans", blueprint);
+				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
+						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
+				continue;
+			}
+			if(IGRegistrationHolder.steel_mb.contains(multiblock.getClass()))
+			{
+				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Advanced Multiblock Plans", blueprint);
+				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
+						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
+			}
+		}
+
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
 				.pattern("ABA")
 				.pattern("CPC")
