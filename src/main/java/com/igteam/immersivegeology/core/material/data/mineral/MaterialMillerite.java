@@ -33,7 +33,7 @@ public class MaterialMillerite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Nickel, MetalEnum.Manganese));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Nickel, MetalEnum.Chromium));
     }
 
     @Override
