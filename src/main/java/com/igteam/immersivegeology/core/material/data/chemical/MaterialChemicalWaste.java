@@ -12,14 +12,13 @@ import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.function.BiFunction;
 
 public class MaterialChemicalWaste extends MaterialChemical
 {
 	public MaterialChemicalWaste() {
-		super(MineralEnum.Bauxite);
+		super(MineralEnum.Bauxite, MineralEnum.Molybdenite);
 		removeMaterialFlags(BlockCategoryFlags.SLURRY);
 	}
 

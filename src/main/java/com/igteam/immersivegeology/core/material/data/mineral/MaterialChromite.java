@@ -34,4 +34,11 @@ public class MaterialChromite extends MaterialMineral {
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Chromium, MetalEnum.Iron));
     }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+    }
 }

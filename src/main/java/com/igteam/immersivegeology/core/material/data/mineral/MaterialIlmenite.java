@@ -52,11 +52,12 @@ public class MaterialIlmenite extends MaterialMineral {
 
         // Becher process, simplified
 
-//        IGMethodBuilder.decompose(this, IGStageDesignation.PURIFICATION).create(
-//                "crushed_ore_"+getName()+"_to_slag", getStack( ItemCategoryFlags.SLAG, 1),
-//                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
+        IGMethodBuilder.decompose(this, IGStageDesignation.PURIFICATION).create(
+                "crushed_ore_"+getName()+"_to_slag", getStack( ItemCategoryFlags.SLAG, 1),
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PURIFICATION).create(ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PURIFICATION).create(
+                ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),

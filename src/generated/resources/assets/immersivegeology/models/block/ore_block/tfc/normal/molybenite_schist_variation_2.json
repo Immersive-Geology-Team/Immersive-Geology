@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block",
-  "textures": {
-    "base": "tfc:block/rock/raw/schist",
-    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_molybenite_pristine"
-  }
-}

@@ -62,6 +62,13 @@ public class MaterialWolframite extends MaterialMineral {
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 2*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 200, 16000);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.POWDER);
     }
 
 }

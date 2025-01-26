@@ -47,7 +47,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Hubnerite(new MaterialHubnerite()),
     Ilmenite(new MaterialIlmenite()),
     Magnetite(new MaterialMagnetite()),
-    Molybenite(new MaterialMolybenite()),
+    Molybdenite(new MaterialMolybdenite()),
     Monazite(new MaterialMonazite()),
     Pyrite(new MaterialPyrite()),
     Pyrolusite(new MaterialPyrolusite()),

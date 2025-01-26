@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -21,53 +22,58 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
-public class MaterialScheelite extends MaterialMineral {
+public class MaterialMolybdenite extends MaterialMineral {
 
-    public MaterialScheelite() {
+    public MaterialMolybdenite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(8,60,1,30,160,400, 0.5,false,Optional.of(Biomes.IS_SPARSE));
+        this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
+
+        // TODO Banished to the Nether! ~UnSchtalch
+        CONFIG = new MineralConfig(12,70,1,-64,82,1000, 0.5,false,Optional.of(Biomes.IS_HOT));
     }
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x32332E));
+        return ((p, i) -> (0xb3cbe4));
     }
 
     @Override
     public CrystalFamily getCrystalFamily() {
-        return CrystalFamily.TETRAGONAL;
+        return CrystalFamily.HEXAGONAL;
     }
 
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Tungsten));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Molybdenum));
     }
 
     @Override
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+        IGMethodBuilder.roast(this, IGStageDesignation.ROASTING).create(
+                ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
+                ItemCategoryFlags.SLAG, 1,         // Output
+                1000,                                          // Roasting Time
+                200                                            // Sulfur Dioxide Output Amount
+        );
 
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
-                ItemCategoryFlags.GRIT, 6000, 100);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
-                ItemCategoryFlags.POWDER, 200, 16000);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
-                ItemCategoryFlags.POWDER);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG );
 
-        //Direct Leaching in HCL
+        //Direct Leaching in Ammonia
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
-                ItemStack.EMPTY, //TODO - Sand
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Tungsten, IGLib.SLURRY_FROM_ACID_AMOUNT),
-                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
-               null,null,200, 51200);
+                ItemStack.EMPTY,
+                ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybdenite, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 1)),
+                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null,200, 51200);
     }
 }
