@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic": true,
+  "inner_model": {
+    "parent": "minecraft:block/block",
+    "callbacks": "immersivegeology:drawing_table",
+    "loader": "immersiveengineering:ie_obj",
+    "model": "immersivegeology:models/block/drawing_table/drawing_table.obj",
+    "textures": {
+      "particle": "immersiveengineering:block/multiblocks/autoworkbench_blueprint"
+    }
+  },
+  "loader": "immersiveengineering:basic_split",
+  "split_parts": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ]
+  ],
+  "textures": {
+    "particle": "immersiveengineering:block/multiblocks/autoworkbench_blueprint"
+  }
+}
