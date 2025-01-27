@@ -20,11 +20,11 @@ import net.minecraft.world.inventory.ContainerData;
 
 import javax.annotation.Nonnull;
 
-public class BloomeryScreen extends IEContainerScreen<BloomeryMenu>
+public class SchematicsScreen extends IEContainerScreen<BloomeryMenu>
 {
 	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("bloomery");
 
-	public BloomeryScreen(BloomeryMenu inventorySlotsIn, Inventory inv, Component title)
+	public SchematicsScreen(BloomeryMenu inventorySlotsIn, Inventory inv, Component title)
 	{
 		super(inventorySlotsIn, inv, title, TEXTURE);
 	}
