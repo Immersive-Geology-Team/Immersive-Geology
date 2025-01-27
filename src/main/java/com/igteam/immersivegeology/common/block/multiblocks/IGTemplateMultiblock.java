@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
 import com.igteam.immersivegeology.common.item.IGMBFormationItem;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -43,6 +44,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 
 public abstract class IGTemplateMultiblock extends TemplateMultiblock implements IGConfigurableMachine
@@ -163,4 +165,15 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
     {
         return 100;
     };
+
+	public int getFormationTier()
+	{
+        Function<Boolean, Integer> t = (b) -> (b ? 1 : 0);
+        Boolean canFormStone = IGRegistrationHolder.stone_mb.contains(this.getClass());
+        Boolean canFormBronze = IGRegistrationHolder.bronze_mb.contains(this.getClass());
+        Boolean canFormIron = canFormWithDefaultHammer();
+        Boolean canFormStainlessSteel = IGRegistrationHolder.steel_mb.contains(this.getClass());
+
+        return 3 - (t.apply(canFormStone) + t.apply(canFormBronze) + t.apply(canFormIron) + t.apply(canFormStainlessSteel));
+	}
 }

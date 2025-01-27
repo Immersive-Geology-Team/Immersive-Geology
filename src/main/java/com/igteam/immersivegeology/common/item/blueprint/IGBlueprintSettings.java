@@ -21,14 +21,12 @@ public class IGBlueprintSettings
 {
 	public static final String KEY_SELF = "settings";
 	public static final String KEY_BLOCKS = "blocks";
-	public static final String KEY_MODE = "mode";
 	public static final String KEY_MULTIBLOCK = "multiblock";
 	public static final String KEY_MIRROR = "mirror";
 	public static final String KEY_PLACED = "placed";
 	public static final String KEY_ROTATION = "rotation";
 	public static final String KEY_POSITION = "pos";
 
-	private Mode mode;
 	private Rotation rotation;
 	private BlockPos pos = null;
 	private IMultiblock multiblock = null;
@@ -51,12 +49,10 @@ public class IGBlueprintSettings
 
 	public IGBlueprintSettings(CompoundTag settingsNbt){
 		if(settingsNbt == null || settingsNbt.isEmpty()){
-			this.mode = Mode.MULTIBLOCK_SELECTION;
 			this.rotation = Rotation.NONE;
 			this.mirror = false;
 			this.isPlaced = false;
 		}else{
-			this.mode = Mode.values()[Mth.clamp(settingsNbt.getInt(KEY_MODE), 0, Mode.values().length - 1)];
 			this.rotation = Rotation.values()[settingsNbt.contains(KEY_ROTATION) ? settingsNbt.getInt(KEY_ROTATION) : 0];
 			this.mirror = settingsNbt.getBoolean(KEY_MIRROR);
 			this.isPlaced = settingsNbt.getBoolean(KEY_PLACED);
@@ -90,25 +86,8 @@ public class IGBlueprintSettings
 		this.mirror = !this.mirror;
 	}
 
-	public void switchMode(){
-		int id = this.mode.ordinal() + 1;
-		this.mode = Mode.values()[id % Mode.values().length];
-	}
-
-	public void sendPacketToServer(InteractionHand hand){
-		BlueprintMessage.sendToServer(this, hand);
-	}
-
-	public void sendPacketToClient(Player player, InteractionHand hand){
-		BlueprintMessage.sendToClient(player, this, hand);
-	}
-
 	public void setRotation(Rotation rotation){
 		this.rotation = rotation;
-	}
-
-	public void setMode(Mode mode){
-		this.mode = mode;
 	}
 
 	public void setMultiblock(@Nullable MultiblockHandler.IMultiblock multiblock){
@@ -139,10 +118,6 @@ public class IGBlueprintSettings
 		return this.isPlaced;
 	}
 
-	public IGBlueprintSettings.Mode getMode(){
-		return this.mode;
-	}
-
 	/**
 	 * May return null to indicate that the projection has not been placed yet
 	 */
@@ -159,7 +134,6 @@ public class IGBlueprintSettings
 
 	public CompoundTag toNbt(){
 		CompoundTag nbt = new CompoundTag();
-		nbt.putInt(KEY_MODE, this.mode.ordinal());
 		nbt.putInt(KEY_ROTATION, this.rotation.ordinal());
 		nbt.putBoolean(KEY_MIRROR, this.mirror);
 		nbt.putBoolean(KEY_PLACED, this.isPlaced);

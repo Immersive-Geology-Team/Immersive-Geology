@@ -14,7 +14,6 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Mirror;
@@ -213,6 +212,16 @@ public class BlueprintProjection{
 		int x = ((rotation.ordinal() % 2 == 0) ? size.getX() : size.getZ()) / 2;
 		int z = ((rotation.ordinal() % 2 == 0) ? size.getZ() : size.getX()) / 2;
 		this.offset.setWithOffset(this.offset, x, 0, z);
+	}
+
+	public BlockPos getRealPos(BlockPos offset)
+	{
+		List<StructureTemplate.StructureBlockInfo> blocks = this.layers.get(0);
+		for(StructureTemplate.StructureBlockInfo info:blocks){
+			Info inf = new Info(this, info);
+			return inf.tPos.offset(offset);
+		}
+		return offset;
 	}
 
 	// STATIC CLASSES

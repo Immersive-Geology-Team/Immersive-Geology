@@ -7,6 +7,8 @@
 
 package com.igteam.immersivegeology.client;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.igteam.immersivegeology.client.renderer.IGRenderTypes;
 import com.igteam.immersivegeology.common.item.blueprint.BlueprintProjection;
 import com.igteam.immersivegeology.common.item.blueprint.BlueprintProjection.Info;
@@ -37,6 +39,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -72,31 +75,62 @@ public class BlueprintRenderHandler {
 	private static void renderMultiblockBlueprint(RenderLevelStageEvent event)
 	{
 		Minecraft mc = Minecraft.getInstance();
-
 		if(mc.player == null) return;
+
+		ItemStack mainItem = mc.player.getMainHandItem();
+		ItemStack secondItem = mc.player.getOffhandItem();
 		PoseStack matrix = event.getPoseStack();
 		matrix.pushPose();
 		{
 			Vec3 renderView = mc.gameRenderer.getMainCamera().getPosition();
 			matrix.translate(-renderView.x, -renderView.y, -renderView.z);
-
-			ItemStack secondItem = mc.player.getOffhandItem();
 			if(secondItem.getTag()!=null)
 			{
 				Item blueprint = MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT);
-				boolean off = secondItem.is(blueprint) && secondItem.hasTag() && secondItem.getTag().contains("settings", Tag.TAG_COMPOUND);
+				// Allows multiple schematics to be visible at once as long as they're in the hot bar.
 				for(int i = 0;i <= 10;i++){
 					ItemStack stack = (i == 10 ? secondItem : mc.player.getInventory().getItem(i));
 					if(stack.is(blueprint) && secondItem.hasTag() && secondItem.getTag().contains("settings", Tag.TAG_COMPOUND))
 					{
-						IGBlueprintSettings settings =  new IGBlueprintSettings(stack);
 						matrix.pushPose();
 						{
-							boolean renderMoving = i == mc.player.getInventory().selected || (i == 10 && off);
-							renderSchematic(matrix, settings, mc.player, mc.player.level(), event.getPartialTick(), renderMoving);
+							IGBlueprintSettings settings =  new IGBlueprintSettings(stack);
+							renderSchematic(matrix, settings, mc.player, mc.player.level(), event.getPartialTick());
 						}
 						matrix.popPose();
 					}
+				}
+			} else
+			if(mainItem.getTag() != null)
+			{
+				Item blueprint = MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT);
+				boolean off = mainItem.is(blueprint) && mainItem.hasTag() && mainItem.getTag().contains("settings", Tag.TAG_COMPOUND);
+				if(off)
+				{
+					MultiBufferSource.BufferSource buffer = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+					matrix.pushPose();
+					{
+						IGBlueprintSettings settings = new IGBlueprintSettings(mainItem);
+						IMultiblock mb = settings.getMultiblock();
+						if(mb!=null)
+						{
+							Vec3i mb_size = mb.getSize(mc.level);
+							final MutableBlockPos hit = new MutableBlockPos(FULL_MAX.getX(), FULL_MAX.getY(), FULL_MAX.getZ());
+							if(settings.getPos() != null)
+							{
+								hit.set(settings.getPos());
+							}
+							BlueprintProjection projection = new BlueprintProjection(mc.level, settings.getMultiblock());
+							projection.setRotation(settings.getRotation());
+							projection.setFlip(settings.isMirrored());
+							BlockPos pos = projection.getRealPos(hit);
+							matrix.translate(pos.getX(), pos.getY(), pos.getZ());
+							matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
+							renderGrid(buffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, 0xffffff);
+						}
+					}
+					matrix.popPose();
+					buffer.endBatch();
 				}
 			}
 		}
@@ -107,10 +141,9 @@ public class BlueprintRenderHandler {
 		ALL, BAD, PERFECT
 	}
 	static final MutableBlockPos FULL_MAX = new MutableBlockPos(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-	public static void renderSchematic(PoseStack matrix, IGBlueprintSettings settings, Player player, Level world, float partialTicks, boolean renderMoving){
+	public static void renderSchematic(PoseStack matrix, IGBlueprintSettings settings, Player player, Level world, float partialTicks){
 		if(settings.getMultiblock() == null) return;
 		ItemStack heldStack = player.getMainHandItem();
-		Vec3i size = settings.getMultiblock().getSize(world);
 		final MutableBlockPos hit = new MutableBlockPos(FULL_MAX.getX(), FULL_MAX.getY(), FULL_MAX.getZ());
 		final MutableBoolean isPlaced = new MutableBoolean(false);
 		if(settings.getPos() != null)
@@ -121,7 +154,6 @@ public class BlueprintRenderHandler {
 
 		if(!hit.equals(FULL_MAX))
 		{
-			ResourceLocation name = settings.getMultiblock().getUniqueName();
 			BlueprintProjection projection = new BlueprintProjection(world, settings.getMultiblock());
 			projection.setRotation(settings.getRotation());
 			projection.setFlip(settings.isMirrored());
@@ -170,10 +202,7 @@ public class BlueprintRenderHandler {
 			projection.processAll(bipred);
 			boolean perfect = (goodBlocks.getValue() == projection.getBlockCount());
 			int current_layer = currentLayer.getValue();
-			int current_layer_block_total = projection.getLayerSize(current_layer);
-
-			int total_blocks_available = current_layer_block_total;
-
+			int total_blocks_available = projection.getLayerSize(current_layer);
 			for(int i = 0; i < current_layer; i++)
 			{
 				total_blocks_available += projection.getLayerSize(i);
@@ -202,9 +231,19 @@ public class BlueprintRenderHandler {
 			{
 				if(!perfect)
 				{
-					matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
-					matrix.translate(0, currentLayer.getValue(), 0);
-					renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, hasImperfection ? 0xff0000 : 0xffffff, flicker);
+					if(settings.getRotation().equals(Rotation.CLOCKWISE_180) || settings.getRotation().equals(Rotation.NONE))
+					{
+						matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
+						matrix.translate(0, currentLayer.getValue(), 0);
+						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, hasImperfection ? 0xff0000 : 0xffffff);
+					}
+					else
+					{
+						matrix.translate(-(Math.floorDiv(mb_size.getZ(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getX(),2)));
+						matrix.translate(0, currentLayer.getValue(), 0);
+						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getZ(), mb_size.getY(), mb_size.getX()), 16, 0.25f, hasImperfection ? 0xff0000 : 0xffffff);
+					}
+
 				}
 			}
 			matrix.popPose();
@@ -331,8 +370,7 @@ public class BlueprintRenderHandler {
 			Vec3 normal,
 			float gridSize,
 			float stepSize,
-			int rgb,
-			float flicker
+			int rgb
 	) {
 		VertexConsumer builder = buffer.getBuffer(RenderType.LINES);
 		float alpha = 0.3f;

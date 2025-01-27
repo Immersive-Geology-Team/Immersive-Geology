@@ -8,6 +8,9 @@
 
 package com.igteam.immersivegeology.client.menu;
 
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
+import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
+import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings.Mode;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -16,6 +19,7 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
@@ -117,7 +121,25 @@ public class IGItemGroup extends CreativeModeTab {
                     ArrayList<Item> list = itemMap.get(pattern);
                     for(Item item : list)
                     {
-                        ret.add(new ItemStack(item));
+                        // A special case for Blueprints, to ensure they have the correct NBT data.
+                        if(pattern.equals(ItemCategoryFlags.BLUEPRINT))
+                        {
+                            for(TemplateMultiblock mb : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
+                            {
+                                ItemStack blueprint = new ItemStack(item);
+                                IGBlueprintSettings settings = new IGBlueprintSettings(blueprint);
+                                settings.setMultiblock(mb);
+                                settings.setMirror(false);
+                                settings.setRotation(Rotation.NONE);
+                                settings.setPlaced(false);
+                                settings.applyTo(blueprint);
+                                ret.add(blueprint);
+                            }
+                            continue;
+                        }
+
+                        ItemStack stack = new ItemStack(item);
+                        ret.add(stack);
                     }
                 }
             }
