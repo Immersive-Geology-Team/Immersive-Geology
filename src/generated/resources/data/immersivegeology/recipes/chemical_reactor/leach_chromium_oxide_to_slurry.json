@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:sulfuricacid"
+  },
+  "fluidInputB": {
+    "amount": 250,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_sulfuricacid_chromium"
+  },
+  "itemInput": {
+    "item": "immersivegeology:compound_dust_chromium"
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_sodium"
+  },
+  "time": 200
+}

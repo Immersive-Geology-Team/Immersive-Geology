@@ -1,0 +1,21 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "forge:dusts/coal_coke"
+    },
+    {
+      "tag": "forge:compound_dust/sodium"
+    }
+  ],
+  "energy": 204800,
+  "input": {
+    "tag": "forge:powders/chromite"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:compound_dust_chromium"
+    }
+  ],
+  "time": 400
+}

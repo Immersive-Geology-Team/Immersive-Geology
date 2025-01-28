@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-28T21:26:01.932712283	Item Models: immersivegeology
+// 1.20.1	2025-01-29T09:49:18.262588672	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_bronze_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_chromium_fluid.json
@@ -64,6 +64,7 @@ fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/cle
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sodiumhydroxide_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sodiumhydroxide_unobtanium.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sulfurdioxide_fluid.json
+fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sulfuricacid_chromium.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sulfuricacid_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_sulfuricacid_zinc.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/cloudy_flask_ammoniasolution_molybdenite.json
