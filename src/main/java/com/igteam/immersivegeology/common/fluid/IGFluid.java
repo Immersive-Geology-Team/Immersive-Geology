@@ -172,7 +172,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 		};
 	}
 
-	public Collection<MaterialInterface<?>> getMaterials() {
+	public @NotNull Collection<MaterialInterface<?>> getMaterials() {
 		return materialMap.values();
 	}
 

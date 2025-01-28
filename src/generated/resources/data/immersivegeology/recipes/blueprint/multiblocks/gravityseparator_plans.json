@@ -11,6 +11,6 @@
   ],
   "result": {
     "item": "immersivegeology:blueprint_multiblock_plans",
-    "nbt": "{settings:{mirror:0b,mode:1,multiblock:\"immersivegeology:multiblocks/gravityseparator\",placed:0b,rotation:0}}"
+    "nbt": "{settings:{mirror:0b,multiblock:\"immersivegeology:multiblocks/gravityseparator\",placed:0b,rotation:0}}"
   }
 }

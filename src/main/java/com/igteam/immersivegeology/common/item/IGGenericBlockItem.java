@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -105,4 +106,12 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
 
         return Component.translatable("block.immersivegeology." + block.getFlag().getName(), materialList.toArray());
     }
+
+    public boolean cancelDatagen()
+    {
+        // For now, this is used to prevent some items from running in the data generation stage,
+        // as this may cause issues if we don't have a flag or material.
+        if(block.getMaterials().isEmpty()) IGLib.IG_LOGGER.warn("Block for Item has no Material (Assuming Manual Model Files) [{}]", getDescriptionId());
+		return block.getMaterials().isEmpty();
+	}
 }

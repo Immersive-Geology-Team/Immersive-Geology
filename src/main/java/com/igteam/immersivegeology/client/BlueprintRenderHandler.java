@@ -100,41 +100,63 @@ public class BlueprintRenderHandler {
 						matrix.popPose();
 					}
 				}
-			} else
+			}
+			else
 			if(mainItem.getTag() != null)
 			{
 				Item blueprint = MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT);
 				boolean off = mainItem.is(blueprint) && mainItem.hasTag() && mainItem.getTag().contains("settings", Tag.TAG_COMPOUND);
 				if(off)
 				{
-					MultiBufferSource.BufferSource buffer = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 					matrix.pushPose();
 					{
-						IGBlueprintSettings settings = new IGBlueprintSettings(mainItem);
-						IMultiblock mb = settings.getMultiblock();
-						if(mb!=null)
-						{
-							Vec3i mb_size = mb.getSize(mc.level);
-							final MutableBlockPos hit = new MutableBlockPos(FULL_MAX.getX(), FULL_MAX.getY(), FULL_MAX.getZ());
-							if(settings.getPos() != null)
-							{
-								hit.set(settings.getPos());
-							}
-							BlueprintProjection projection = new BlueprintProjection(mc.level, settings.getMultiblock());
-							projection.setRotation(settings.getRotation());
-							projection.setFlip(settings.isMirrored());
-							BlockPos pos = projection.getRealPos(hit);
-							matrix.translate(pos.getX(), pos.getY(), pos.getZ());
-							matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
-							renderGrid(buffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, 0xffffff);
-						}
+						IGBlueprintSettings settings =  new IGBlueprintSettings(mainItem);
+						renderSchematicGrid(matrix, settings, mc.player.level());
 					}
 					matrix.popPose();
-					buffer.endBatch();
 				}
 			}
 		}
 		matrix.popPose();
+	}
+
+	public static void renderSchematicGrid(PoseStack matrix, IGBlueprintSettings settings, Level world)
+	{
+		if(settings.getMultiblock() == null) return;
+		final MutableBlockPos hit = new MutableBlockPos(FULL_MAX.getX(), FULL_MAX.getY(), FULL_MAX.getZ());
+		final MutableBoolean isPlaced = new MutableBoolean(false);
+		if(settings.getPos() != null)
+		{
+			hit.set(settings.getPos());
+			isPlaced.setTrue();
+		}
+
+		if(!hit.equals(FULL_MAX))
+		{
+			BlueprintProjection projection = new BlueprintProjection(world, settings.getMultiblock());
+			projection.setRotation(settings.getRotation());
+			projection.setFlip(settings.isMirrored());
+			Vec3i mb_size = settings.getMultiblock().getSize(world);
+			matrix.translate(hit.getX(), hit.getY(), hit.getZ());
+
+			MultiBufferSource.BufferSource mainBuffer = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+			matrix.pushPose();
+			{
+					if(settings.getRotation().equals(Rotation.CLOCKWISE_180) || settings.getRotation().equals(Rotation.NONE))
+					{
+						matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
+						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, 0xffffff);
+					}
+					else
+					{
+						matrix.translate(-(Math.floorDiv(mb_size.getZ(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getX(),2)));
+						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getZ(), mb_size.getY(), mb_size.getX()), 16, 0.25f, 0xffffff);
+					}
+			}
+			matrix.popPose();
+
+			mainBuffer.endBatch();
+		}
 	}
 
 	public enum RenderLayer{
@@ -158,6 +180,7 @@ public class BlueprintRenderHandler {
 			projection.setRotation(settings.getRotation());
 			projection.setFlip(settings.isMirrored());
 			Vec3i mb_size = settings.getMultiblock().getSize(world);
+
 			final List<Pair<RenderLayer, Info>> toRender = new ArrayList<>();
 			final MutableInt currentLayer = new MutableInt();
 			final MutableInt badBlocks = new MutableInt();
@@ -200,8 +223,10 @@ public class BlueprintRenderHandler {
 				return false;
 			};
 			projection.processAll(bipred);
+
 			boolean perfect = (goodBlocks.getValue() == projection.getBlockCount());
 			int current_layer = currentLayer.getValue();
+
 			int total_blocks_available = projection.getLayerSize(current_layer);
 			for(int i = 0; i < current_layer; i++)
 			{

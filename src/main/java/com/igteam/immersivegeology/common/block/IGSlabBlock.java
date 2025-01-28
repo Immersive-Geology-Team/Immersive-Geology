@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class IGSlabBlock extends SlabBlock implements IGBlockType
         return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
     }
 
-    public Collection<MaterialInterface<?>> getMaterials() {
+    public @NotNull Collection<MaterialInterface<?>> getMaterials() {
         return materialMap.values();
     }
 

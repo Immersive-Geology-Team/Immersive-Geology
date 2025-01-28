@@ -34,6 +34,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -53,7 +54,7 @@ public class IGDeskBlock<T extends BlockEntity> extends DeskBlock<T> implements 
 	}
 
 	@Override
-	public Collection<MaterialInterface<?>> getMaterials()
+	public @NotNull Collection<MaterialInterface<?>> getMaterials()
 	{
 		return List.of();
 	}

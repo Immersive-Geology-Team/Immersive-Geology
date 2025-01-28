@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.Map;
 public interface IGBlockType {
     Block getBlock();
 
-    Collection<MaterialInterface<?>> getMaterials();
+    @NotNull Collection<MaterialInterface<?>> getMaterials();
     MaterialInterface<?> getMaterial(MaterialTexture t);
     IFlagType<?> getFlag();
 

@@ -150,6 +150,7 @@ public class IGItemModelProvider extends ItemModelProvider {
         {
             if(item instanceof IGGenericBlockItem blockItem)
             {
+                if(blockItem.cancelDatagen()) return;
                 if(blockItem.getBlock() instanceof IOreBlock igOreBlock){
                     String prefix = "minecraft";
                     Set<IFlagType<?>> flags = igOreBlock.getMaterial(MaterialTexture.base).getFlags();
@@ -189,7 +190,7 @@ public class IGItemModelProvider extends ItemModelProvider {
             }
         } catch(Exception err)
         {
-            logger.error("Wrong input parse in generateGenericBlockItem, used normal item as input see: {} and {}", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
+            if(item.getFlag() != null && item.getMaterial(MaterialTexture.base) != null) logger.error("Wrong input parse in generateGenericBlockItem, used normal item as input see: {} and {}", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error("Error {}", err.getMessage());
         }
 

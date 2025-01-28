@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
 import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu.SchematicSlot;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.ChatFormatting;
@@ -49,6 +50,7 @@ public class SchematicOutputArea extends InfoArea
 		settings.setRotation(Rotation.NONE);
 		settings.setPlaced(false);
 		settings.applyTo(blueprint);
+
 		tooltip.add(TextUtils.applyFormat(blueprint.getHoverName().copy(), ChatFormatting.AQUA));
 
 	}
@@ -65,9 +67,11 @@ public class SchematicOutputArea extends InfoArea
 		settings.setRotation(Rotation.NONE);
 		settings.setPlaced(false);
 		settings.applyTo(blueprint);
-
-		if(blueprint.isEmpty()||slot.hasItem())
+		if(slot.hasItem())
+		{
 			return;
+		}
+
 		graphics.renderItem(blueprint, area.getX(), area.getY());
 		graphics.fill(RenderType.guiGhostRecipeOverlay(), area.getX(), area.getY(), area.getX()+area.getWidth(), area.getY()+area.getHeight(), 0xbb333333);
 	}

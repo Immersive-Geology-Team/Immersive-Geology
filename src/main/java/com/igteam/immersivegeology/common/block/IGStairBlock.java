@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class IGStairBlock extends StairBlock implements IGBlockType {
     }
 
     @Override
-    public Collection<MaterialInterface<?>> getMaterials() {
+    public @NotNull Collection<MaterialInterface<?>> getMaterials() {
         return materialMap.values();
     }
 

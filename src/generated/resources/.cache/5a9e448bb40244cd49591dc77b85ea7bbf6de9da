@@ -1,8 +1,8 @@
-// 1.20.1	2025-01-27T09:20:13.725529476	Tags for minecraft:block mod id immersivegeology
+// 1.20.1	2025-01-28T21:26:01.929521444	Tags for minecraft:block mod id immersivegeology
 a4278929279d24f1b0d1795da59bf60df9e1bbe7 data/forge/tags/blocks/ores.json
 4ae6eac4f7c3500340f99c428fb8a019b600bda2 data/minecraft/tags/blocks/mineable/pickaxe.json
 a4278929279d24f1b0d1795da59bf60df9e1bbe7 data/minecraft/tags/blocks/needs_stone_tool.json
-4ac7f05588bdde2ae3cde49a1def524fce62dc1c data/minecraft/tags/blocks/replaceable.json
+da2a6dc10329bd879932120ef3a82b11dd0aa0f7 data/minecraft/tags/blocks/replaceable.json
 fc2ddf118969bcd66a78a88e461010b896899430 data/tfc/tags/blocks/can_collapse.json
 fc2ddf118969bcd66a78a88e461010b896899430 data/tfc/tags/blocks/can_start_collapse.json
 fc2ddf118969bcd66a78a88e461010b896899430 data/tfc/tags/blocks/can_trigger_collapse.json
