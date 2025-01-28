@@ -72,7 +72,6 @@ public class MaterialAlumina extends MaterialMineral {
                         getItemTag(ItemCategoryFlags.POWDER), 1,
                         MetalEnum.Aluminum.getStack(ItemCategoryFlags.INGOT),
                         MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER),
-                        0.25f,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 1))
                 .setTimeAndEnergy(200, 10240);

@@ -17,5 +17,13 @@
       "item": "immersivegeology:compound_dust_chromium"
     }
   ],
+  "secondaries": [
+    {
+      "chance": 0.8,
+      "output": {
+        "tag": "forge:ingots/iron"
+      }
+    }
+  ],
   "time": 400
 }

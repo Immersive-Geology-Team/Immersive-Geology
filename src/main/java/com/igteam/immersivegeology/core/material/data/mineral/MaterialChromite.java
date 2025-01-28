@@ -58,10 +58,9 @@ public class MaterialChromite extends MaterialMineral {
                         getItemTag(ItemCategoryFlags.POWDER), 1,
                         MetalEnum.Chromium.getStack(ItemCategoryFlags.COMPOUND_DUST),
                         ItemStack.EMPTY,
-                        0.80f,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1))
-                .addExtras(MetalEnum.Iron.getItemTag(ItemCategoryFlags.INGOT))
+                .addExtras(MetalEnum.Iron.getItemTag(ItemCategoryFlags.INGOT), 0.8f)
                 .setTimeAndEnergy(400, 204800);
 
 

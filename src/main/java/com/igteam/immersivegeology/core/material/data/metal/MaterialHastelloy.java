@@ -10,18 +10,13 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGArcSmeltingMethod;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialHastelloy extends MaterialMetalAlloy
 {
@@ -40,7 +35,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(MetalEnum.Nickel.instance(), ItemCategoryFlags.METAL_OXIDE, 8, ItemCategoryFlags.INGOT, 8, 0f, 0,
+        IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(MetalEnum.Nickel.instance(), ItemCategoryFlags.METAL_OXIDE, 8, ItemCategoryFlags.INGOT, 8, 0,
                 IngredientWithSize.of(MetalEnum.Chromium.getStack(ItemCategoryFlags.METAL_OXIDE, 4)),
                 IngredientWithSize.of(MetalEnum.Molybdenum.getStack(ItemCategoryFlags.METAL_OXIDE, 2)),
                 IngredientWithSize.of(MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE, 1)),
