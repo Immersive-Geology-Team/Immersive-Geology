@@ -83,13 +83,20 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 		return this;
 	}
 
-	public IGArcSmeltingMethod create(MaterialHelper input_mat, IFlagType<?> input_form, int inputAmount, IFlagType<?> output_form, int output_amount, float chance, int slag_amount, IngredientWithSize... additives){
+	public IGArcSmeltingMethod create(MaterialHelper input_mat, IFlagType<?> input_form, int inputAmount, IFlagType<?> output_form, int output_amount, float chance, int slag_amount, IngredientWithSize... additives)
+	{
 		this.input = new IngredientWithSize(input_mat.getItemTag(input_form), inputAmount);
 		this.output = parentMaterial.getStack(output_form, output_amount);
 		this.slag = slag_amount == 0 ? ItemStack.EMPTY : new ItemStack(Ingredients.SLAG.asItem(), slag_amount);
 		this.additives = List.of(additives);
 		this.method_name = create_advanced_method_name(input_form, output_form);
 		this.chance = chance;
+		return this;
+	}
+
+	public IGArcSmeltingMethod addExtras(TagKey<Item>  extra)
+	{
+		this.extra = extra;
 		return this;
 	}
 
@@ -102,6 +109,7 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 	private IngredientWithSize input;
 
 	private ItemStack slag, output;
+	private TagKey<Item> extra;
 	private List<IngredientWithSize> additives;
 	int energy, time;
 
@@ -136,6 +144,10 @@ public class IGArcSmeltingMethod extends IGRecipeMethod
 			builder.setTime(time);
 			builder.addIngredient("input", input);
 			additives.forEach(builder::addMultiInput);
+			if (chance != 0.0f)
+			{
+				builder.addSecondary(extra, chance);
+			}
 			builder.build(consumer, getLocation());
 			return true;
 		} catch(Exception e)
