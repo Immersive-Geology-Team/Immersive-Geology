@@ -9,10 +9,8 @@ package com.igteam.immersivegeology.common.item.blueprint;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.utils.TemplateWorldCreator;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
@@ -55,8 +53,7 @@ public class BlueprintProjection{
 		this.realWorld = world;
 
 		List<StructureTemplate.StructureBlockInfo> blocks = multiblock.getStructure(world);
-		this.templateWorld = TemplateWorldCreator.CREATOR.getValue().makeWorld(blocks, pos -> true, ImmersiveGeology.proxy.getClientWorld().registryAccess());
-
+		this.templateWorld = TemplateWorldCreator.CREATOR.getValue().makeWorld(blocks, pos -> true, world.registryAccess());
 		this.blockcount = blocks.size();
 		for(StructureTemplate.StructureBlockInfo info:blocks){
 			List<StructureTemplate.StructureBlockInfo> list = this.layers.get(info.pos().getY());
