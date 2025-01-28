@@ -1,18 +1,17 @@
 package com.igteam.immersivegeology;
 
-import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallback;
-import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 
-import com.igteam.immersivegeology.client.models.DrawingTableCallbacks;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
 import com.igteam.immersivegeology.common.network.IGPacketHandler;
 import com.igteam.immersivegeology.common.world.IGWorldSubscription;
+import com.igteam.immersivegeology.core.ClientProxy;
+import com.igteam.immersivegeology.core.CommonProxy;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -22,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.registration.IGContent;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,6 +32,7 @@ import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -40,6 +41,12 @@ import java.util.function.BiPredicate;
 
 @Mod(IGLib.MODID)
 public class  ImmersiveGeology {
+
+    public static CommonProxy proxy = Util.make(() ->
+    {
+        if(FMLLoader.getDist().isClient()) return new ClientProxy();
+        return new CommonProxy();
+    });
 
     public ImmersiveGeology() {
         IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
@@ -54,7 +61,7 @@ public class  ImmersiveGeology {
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
         IGPacketHandler.initialize();
-        IGContent.modContruction(modEventBus);
+        proxy.modConstruction();
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
@@ -68,7 +75,6 @@ public class  ImmersiveGeology {
         IGContent.registerContainersAndScreens();
         IGContent.initializeManualEntries();
 
-        IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "drawing_table"), DrawingTableCallbacks.INSTANCE);
     }
 
     private void supplyMaterialTint(){

@@ -1,11 +1,3 @@
-/*
- * Muddykat
- * Copyright (c) 2025
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.menu;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
@@ -13,9 +5,6 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.common.gui.IEBaseContainerOld;
 import blusunrize.immersiveengineering.common.gui.IESlot;
-import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
-import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
-import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import blusunrize.immersiveengineering.mixin.accessors.ContainerAccess;
 import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -243,7 +232,7 @@ public class SchematicsContainerMenu extends IEBaseContainerOld<DrawingTableBloc
 
 		@Override
 		public void onTake(Player player, ItemStack stack) {
-			((SchematicInventory)this.container).reduceIputs(this.inputInventory, stack);
+			((SchematicInventory)this.container).reduceInputs(this.inputInventory, stack);
 			super.onTake(player, stack);
 		}
 	}

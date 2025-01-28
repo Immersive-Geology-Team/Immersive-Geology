@@ -1,15 +1,5 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.core.registration;
 
-
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.common.gui.IEBaseContainerOld;
@@ -17,6 +7,7 @@ import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu.MultiblockMenuContext;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainerConstructor;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContainerConstructor;
+import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
@@ -24,7 +15,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
 import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -53,6 +43,17 @@ public class IGMenuTypes
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
 	public static final ArgContainer<DrawingTableBlockEntity, SchematicsContainerMenu> SCHEMATICS = register(IGLib.GUIID_Schematics, SchematicsContainerMenu::new);
 
+
+	public static <T, C extends IEContainerMenu>
+	ArgContainer<T, C> registerArg(
+			String name, ArgContainerConstructor<T, C> container, ClientContainerConstructor<C> client
+	)
+	{
+		RegistryObject<MenuType<C>> typeRef = registerType(name, client);
+		return new ArgContainer<>(typeRef, container);
+	}
+
+
 	public static <T extends BlockEntity, C extends IEBaseContainerOld<? super T>>
 	ArgContainer<T, C> register(String name, ArgContainerConstructor<T, C> container)
 	{
@@ -60,7 +61,7 @@ public class IGMenuTypes
 				name, () -> {
 					Mutable<MenuType<C>> typeBox = new MutableObject<>();
 					MenuType<C> type = new MenuType<>((IContainerFactory<C>)(windowId, inv, data) -> {
-						Level world = FMLLoader.getDist().isClient() ? Minecraft.getInstance().level : null;
+						Level world = ImmersiveGeology.proxy.getClientWorld();
 						BlockPos pos = data.readBlockPos();
 						BlockEntity te = world.getBlockEntity(pos);
 						return container.construct(typeBox.getValue(), windowId, inv, (T)te);
@@ -84,7 +85,7 @@ public class IGMenuTypes
 		}
 
 		public MenuProvider provide(IMultiblockContext<S> ctx, BlockPos relativeClicked) {
-			return this.provide(new IEContainerMenu.MultiblockMenuContext(ctx, ctx.getLevel().toAbsolute(relativeClicked)));
+			return this.provide(new IEContainerMenu.MultiblockMenuContext<>(ctx, ctx.getLevel().toAbsolute(relativeClicked)));
 		}
 	}
 
@@ -122,8 +123,8 @@ public class IGMenuTypes
 
 	private static <C extends IEContainerMenu> RegistryObject<MenuType<C>> registerType(String name, ClientContainerConstructor<C> client) {
 		return REGISTER.register(name, () -> {
-			Mutable<MenuType<C>> typeBox = new MutableObject();
-			MenuType<C> type = new MenuType((id, inv) -> {
+			Mutable<MenuType<C>> typeBox = new MutableObject<>();
+			MenuType<C> type = new MenuType<>((id, inv) -> {
 				return client.construct(typeBox.getValue(), id, inv);
 			}, FeatureFlagSet.of());
 			typeBox.setValue(type);

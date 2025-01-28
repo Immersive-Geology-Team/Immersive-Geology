@@ -92,7 +92,7 @@ public class SchematicInventory extends SimpleContainer
 		return query;
 	}
 
-	public void reduceIputs(Container inputInventory, ItemStack taken)
+	public void reduceInputs(Container inputInventory, ItemStack taken)
 	{
 		//Get input items
 		NonNullList<ItemStack> inputs = NonNullList.withSize(inputInventory.getContainerSize()-1, ItemStack.EMPTY);
