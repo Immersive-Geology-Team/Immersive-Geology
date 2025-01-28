@@ -8,9 +8,9 @@ uniform vec4 ColorModulator; // Color modulator
 uniform vec4 FogColor; // Fog color
 uniform float FogStart; // Start of the fog
 uniform float FogEnd; // End of the fog
-uniform float Alpha; // Transparency passed by callback
 uniform float Time; // Time variable for animations or effects
 uniform float GridThickness; // Control the thickness of grid lines
+uniform vec3 ColorTint;
 uniform vec4 TextureMat;
 
 in vec3 fPosition; // The local position passed from the vertex shader
@@ -40,7 +40,7 @@ void main() {
     float gridAlpha = smoothstep(0.0, GridThickness, dist);
 
     vec4 textureColor = texture(Sampler0, texCoord0) * fColor * ColorModulator;
-    vec4 gridOverlay = vec4(vec3(0.2, 0.5, 1.0), gridAlpha); // Blueprint-style blue grid
+    vec4 gridOverlay = vec4(ColorTint, gridAlpha); // Blueprint-style blue grid
 
     fragColor = mix(textureColor, gridOverlay, gridOverlay.a);
     fragColor = linear_fog(fragColor, length(fPosition), FogStart, FogEnd, FogColor);

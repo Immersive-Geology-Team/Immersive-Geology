@@ -178,7 +178,6 @@ public class IGRecipes extends RecipeProvider
 			ItemStack blueprint = new ItemStack(MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT));
 			IGBlueprintSettings settings = new IGBlueprintSettings(blueprint);
 			settings.setMultiblock(multiblock);
-			settings.setMode(Mode.PROJECTION);
 			settings.setMirror(false);
 			settings.setRotation(Rotation.NONE);
 			settings.setPlaced(false);

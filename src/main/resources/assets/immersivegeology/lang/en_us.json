@@ -333,7 +333,9 @@
   "desc.immersiveengineering.info.multiblock.IE:HydroJetCutter":"Hydrojet Cutter",
   "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace":"Reverberation Furnace",
   "desc.immersiveengineering.info.multiblock.IE:RotaryKiln":"Rotary Kiln",
+  "desc.immersivegeology.schematic_table": "Schematic Table",
 
+  "item.immersivegeology.drawing_table": "Schematic Table",
   "item.immersivegeology.blueprint_multiblock_plans.specific": "%s Schematics",
   "desc.immersivegeology.info.blueprint.size": "%s",
   "desc.immersivegeology.info.blueprint.block_info": "Hold [%s] for Materials",

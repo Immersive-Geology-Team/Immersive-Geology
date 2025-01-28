@@ -174,6 +174,6 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
         Boolean canFormIron = canFormWithDefaultHammer();
         Boolean canFormStainlessSteel = IGRegistrationHolder.steel_mb.contains(this.getClass());
 
-        return 3 - (t.apply(canFormStone) + t.apply(canFormBronze) + t.apply(canFormIron) + t.apply(canFormStainlessSteel));
+        return 5 - (t.apply(canFormStone) + t.apply(canFormBronze) + t.apply(canFormIron) + t.apply(canFormStainlessSteel));
 	}
 }

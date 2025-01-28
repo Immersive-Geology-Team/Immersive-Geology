@@ -1,3 +1,205 @@
 {
-  "parent": "immersivegeology:block/static_block/computational_engineering"
+  "display": {
+    "firstperson_lefthand": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "fixed": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "ground": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "gui": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "head": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "none": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        37.50001,
+        45.000004,
+        0.0000024148362
+      ],
+      "scale": [
+        0.5000001,
+        0.49999994,
+        0.49999997
+      ],
+      "translation": [
+        -3,
+        -3,
+        0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        99.99999,
+        45.000004,
+        0
+      ],
+      "scale": [
+        0.30000004,
+        0.29999998,
+        0.29999998
+      ],
+      "translation": [
+        -1.8000001,
+        2.3688526,
+        -1.5966196
+      ]
+    },
+    "thirdperson_righthand": {
+      "right_rotation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        99.99999,
+        45.000004,
+        0
+      ],
+      "scale": [
+        0.30000004,
+        0.29999998,
+        0.29999998
+      ],
+      "translation": [
+        -1.8000001,
+        2.3688526,
+        -1.5966196
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "immersivegeology:models/block/drawing_table/drawing_table.obj"
 }

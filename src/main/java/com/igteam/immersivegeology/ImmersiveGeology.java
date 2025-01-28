@@ -1,9 +1,12 @@
 package com.igteam.immersivegeology;
 
+import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallback;
+import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 
+import com.igteam.immersivegeology.client.models.DrawingTableCallbacks;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
@@ -64,6 +67,8 @@ public class  ImmersiveGeology {
 
         IGContent.registerContainersAndScreens();
         IGContent.initializeManualEntries();
+
+        IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "drawing_table"), DrawingTableCallbacks.INSTANCE);
     }
 
     private void supplyMaterialTint(){

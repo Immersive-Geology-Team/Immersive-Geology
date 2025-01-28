@@ -11,7 +11,6 @@ in vec3 Normal;    // The normal of the vertex
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform vec3 ChunkOffset; // Position offset for chunks
-uniform float Time;       // Time variable for animations
 
 out vec3 fPosition;  // Output world position
 out vec4 fColor;     // Output color

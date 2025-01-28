@@ -9,20 +9,22 @@
 package com.igteam.immersivegeology.core.registration;
 
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.common.gui.IEBaseContainerOld;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu.MultiblockMenuContext;
-import blusunrize.immersiveengineering.common.register.IEMenuTypes;
-import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainer;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainerConstructor;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContainerConstructor;
-import blusunrize.immersiveengineering.common.register.IEMenuTypes.MultiblockContainer;
+import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
+import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -31,6 +33,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -45,6 +51,26 @@ public class IGMenuTypes
 	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
+	public static final ArgContainer<DrawingTableBlockEntity, SchematicsContainerMenu> SCHEMATICS = register(IGLib.GUIID_Schematics, SchematicsContainerMenu::new);
+
+	public static <T extends BlockEntity, C extends IEBaseContainerOld<? super T>>
+	ArgContainer<T, C> register(String name, ArgContainerConstructor<T, C> container)
+	{
+		RegistryObject<MenuType<C>> typeRef = REGISTER.register(
+				name, () -> {
+					Mutable<MenuType<C>> typeBox = new MutableObject<>();
+					MenuType<C> type = new MenuType<>((IContainerFactory<C>)(windowId, inv, data) -> {
+						Level world = FMLLoader.getDist().isClient() ? Minecraft.getInstance().level : null;
+						BlockPos pos = data.readBlockPos();
+						BlockEntity te = world.getBlockEntity(pos);
+						return container.construct(typeBox.getValue(), windowId, inv, (T)te);
+					}, FeatureFlagSet.of());
+					typeBox.setValue(type);
+					return type;
+				}
+		);
+		return new ArgContainer<>(typeRef, container);
+	}
 
 	public static <S extends IMultiblockState, C extends IEContainerMenu> MultiblockContainer<S, C> registerMultiblock(String name, ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> container, ClientContainerConstructor<C> client) {
 		RegistryObject<MenuType<C>> typeRef = registerType(name, client);

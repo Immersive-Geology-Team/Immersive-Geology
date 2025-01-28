@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
+import com.igteam.immersivegeology.common.block.IGDeskBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -21,6 +22,9 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -63,6 +67,19 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
     }
 
     @Override
+    protected boolean placeBlock(@NotNull BlockPlaceContext context, @NotNull BlockState state)
+    {
+        Block b = state.getBlock();
+        if(b instanceof IGDeskBlock<?> desk)
+        {
+            boolean ret = super.placeBlock(context, state);
+            if(ret) desk.onIEBlockPlacedBy(context, state);
+            return ret;
+        }
+        return super.placeBlock(context, state);
+    }
+
+    @Override
     public @NotNull Component getName(ItemStack pStack) {
         Map<MaterialTexture, MaterialInterface<?>> materialMap = block.getMaterialMap();
         List<String> materialList = new ArrayList<>();
@@ -79,6 +96,11 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
                     materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
                 }
             }
+        }
+
+        if(getBlock() instanceof IGDeskBlock<?> desk)
+        {
+            return Component.translatable("item.immersivegeology.drawing_table");
         }
 
         return Component.translatable("block.immersivegeology." + block.getFlag().getName(), materialList.toArray());

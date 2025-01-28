@@ -256,11 +256,11 @@ public class BlueprintRenderHandler {
 				{
 					case ALL ->
 					{
-						float alpha = held ? 1.0F : 0.50F;
+						float[] color = held ? new float[]{0.2f, 1.0f, 0.5f} : new float[]{0.2f, 0.5f, 1.0f};
 
 						matrix.pushPose();
 						{
-							renderPhantom(matrix, world, rInfo, settings.isMirrored(), flicker, alpha, partialTicks);
+							renderPhantom(matrix, world, rInfo, settings.isMirrored(), flicker, color, partialTicks);
 
 							if(held)
 							{
@@ -303,7 +303,7 @@ public class BlueprintRenderHandler {
 	}
 
 	private static final Tesselator PHANTOM_TESSELATOR = new Tesselator();
-	private static void renderPhantom(PoseStack matrix, Level realWorld, BlueprintProjection.Info rInfo, boolean mirror, float flicker, float alpha, float partialTicks){
+	private static void renderPhantom(PoseStack matrix, Level realWorld, BlueprintProjection.Info rInfo, boolean mirror, float flicker, float[] color, float partialTicks){
 		BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
 		ModelBlockRenderer blockRenderer = dispatcher.getModelRenderer();
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
@@ -333,7 +333,7 @@ public class BlueprintRenderHandler {
 				float blue = (i & 0xFF) / 255F;
 
 				modelData = ibakedmodel.getModelData(rInfo.templateWorld, rInfo.tBlockInfo.pos(), state, modelData);
-				IGShaders.setBlueprintData(alpha, partialTicks);
+				IGShaders.setBlueprintData(partialTicks, color[0],color[1],color[2]);
 				VertexConsumer vc = buffer.getBuffer(IGRenderTypes.BLUEPRINT);
 				matrix.scale(0.5f, 0.5f,0.5f);
 				matrix.translate(0.5f,0.5f,0.5f);

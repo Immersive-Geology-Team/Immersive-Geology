@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersivegeology:block/drawing_table/drawing_table_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersivegeology:block/drawing_table/drawing_table_split",
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "immersivegeology:block/drawing_table/drawing_table_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersivegeology:block/drawing_table/drawing_table_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

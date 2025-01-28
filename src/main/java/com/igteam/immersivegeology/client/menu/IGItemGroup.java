@@ -35,7 +35,6 @@ public class IGItemGroup extends CreativeModeTab {
 
     private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_tab.png");
 
-
     public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
 
     public IGItemGroup(CreativeModeTab.Builder builder)
@@ -113,7 +112,6 @@ public class IGItemGroup extends CreativeModeTab {
 
             ArrayList<IFlagType<?>> allPatternList = new ArrayList<>(Arrays.asList(ItemCategoryFlags.values()));
             allPatternList.addAll(Arrays.asList(BlockCategoryFlags.values()));
-
             for(IFlagType<?> pattern : allPatternList)
             {
                 if(itemMap.containsKey(pattern))

@@ -7,7 +7,7 @@
     "loader": "immersiveengineering:ie_obj",
     "model": "immersivegeology:models/block/drawing_table/drawing_table.obj",
     "textures": {
-      "particle": "immersiveengineering:block/multiblocks/autoworkbench_blueprint"
+      "particle": "immersiveengineering:block/wooden_decoration/fiberboard"
     }
   },
   "loader": "immersiveengineering:basic_split",
@@ -24,6 +24,6 @@
     ]
   ],
   "textures": {
-    "particle": "immersiveengineering:block/multiblocks/autoworkbench_blueprint"
+    "particle": "immersiveengineering:block/wooden_decoration/fiberboard"
   }
 }

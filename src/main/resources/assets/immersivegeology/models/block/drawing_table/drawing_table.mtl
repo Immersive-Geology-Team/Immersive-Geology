@@ -1,4 +1,2 @@
-# Made in Blockbench 4.11.1
 newmtl m_c7deacf5-878b-46da-d1fa-bb208a08039e
-map_Kd drawing_table.png
-newmtl none
+map_Kd immersivegeology:block/static_block/drawing_table

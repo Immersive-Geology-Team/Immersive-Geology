@@ -13,11 +13,13 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.mojang.blaze3d.shaders.AbstractUniform;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.core.Vec3i;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import org.joml.Vector3f;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -28,14 +30,14 @@ public class IGShaders
 	private static ShaderInstance shader_blueprint;
 
 
-	private static AbstractUniform projection_alpha;
 	private static AbstractUniform projection_time;
 	private static AbstractUniform projection_grid;
-	public static void setBlueprintData(float alpha, float time)
+	private static AbstractUniform color_tint;
+	public static void setBlueprintData(float time, float red, float green, float blue)
 	{
-		IGShaders.projection_alpha.set(alpha);
 		IGShaders.projection_time.set(time);
 		IGShaders.projection_grid.set(0.9f);
+		IGShaders.color_tint.set(red, green, blue);
 	}
 
 	@SubscribeEvent
@@ -47,9 +49,9 @@ public class IGShaders
 			IGLib.IG_LOGGER.info("Render Type Blueprint Shader Loaded");
 			shader_blueprint = s;
 
-			projection_alpha = shader_blueprint.safeGetUniform("Alpha");
 			projection_time = shader_blueprint.safeGetUniform("Time");
 			projection_grid = shader_blueprint.safeGetUniform("GridThickness");
+			color_tint = shader_blueprint.safeGetUniform("ColorTint");
 		});
 	}
 

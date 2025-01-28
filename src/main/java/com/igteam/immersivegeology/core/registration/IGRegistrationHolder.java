@@ -18,8 +18,14 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
+import blusunrize.immersiveengineering.common.blocks.wooden.DeskBlock;
+import blusunrize.immersiveengineering.common.blocks.wooden.ModWorkbenchBlockEntity;
+import blusunrize.immersiveengineering.common.register.IEBlockEntities;
+import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
+import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
@@ -50,8 +56,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
@@ -225,6 +233,23 @@ public class IGRegistrationHolder {
         });
     }
 
+
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> makeType(BlockEntityType.BlockEntitySupplier<T> create, Supplier<? extends Block> valid)
+    {
+        return makeTypeMultipleBlocks(create, ImmutableSet.of(valid));
+    }
+
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> makeTypeMultipleBlocks(
+            BlockEntityType.BlockEntitySupplier<T> create, Collection<? extends Supplier<? extends Block>> valid
+    )
+    {
+        return () -> new BlockEntityType<>(
+                create, ImmutableSet.copyOf(valid.stream().map(Supplier::get).collect(Collectors.toList())), null
+        );
+    }
+
+    public static RegistryObject<BlockEntityType<DrawingTableBlockEntity>> DRAWING_TABLE;
+
     public static synchronized void initialize()
     {
         IGLib.IG_LOGGER.info("Starting Registration of IG Multiblocks, Items, Blocks and Fluids");
@@ -244,6 +269,12 @@ public class IGRegistrationHolder {
 
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
         registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
+
+        registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
+        registerItem("drawing_table", () -> new IGGenericBlockItem((IGBlockType) getBlock.apply("drawing_table")));
+
+        DRAWING_TABLE = TE_REGISTER.register("drawing_table_type", makeType(DrawingTableBlockEntity::new, BLOCK_REGISTRY_MAP.get("drawing_table")));
+
 
         HashSet<MaterialInterface<?>> slurry_material_set = new HashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
