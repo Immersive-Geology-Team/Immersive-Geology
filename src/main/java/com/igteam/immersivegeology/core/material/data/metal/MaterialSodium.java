@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -20,6 +21,7 @@ public class MaterialSodium extends MaterialMetal
 	public MaterialSodium()
 	{
 		super();
+		addFlags(ItemCategoryFlags.COMPOUND_DUST);
 	}
 
 	@Override

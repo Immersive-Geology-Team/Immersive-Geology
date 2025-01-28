@@ -15,6 +15,6 @@ public class MaterialSulfuricAcid extends MaterialChemical
 {
 	public MaterialSulfuricAcid()
 	{
-		super(MetalEnum.Zinc);
+		super(MetalEnum.Zinc, MetalEnum.Chromium);
 	}
 }
