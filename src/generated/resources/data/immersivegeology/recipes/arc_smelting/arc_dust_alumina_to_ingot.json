@@ -17,8 +17,13 @@
       "item": "immersiveengineering:ingot_aluminum"
     }
   ],
-  "slag": {
-    "item": "immersivegeology:powder_cryolite"
-  },
+  "secondaries": [
+    {
+      "chance": 0.4,
+      "output": {
+        "tag": "forge:powders/cryolite"
+      }
+    }
+  ],
   "time": 200
 }

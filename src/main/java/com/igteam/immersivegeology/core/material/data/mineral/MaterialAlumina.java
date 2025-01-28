@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
@@ -71,9 +72,10 @@ public class MaterialAlumina extends MaterialMineral {
                         "dust_"+getName()+"_to_ingot",
                         getItemTag(ItemCategoryFlags.POWDER), 1,
                         MetalEnum.Aluminum.getStack(ItemCategoryFlags.INGOT),
-                        MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER),
+                        ItemStack.EMPTY,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 1))
+                .addExtras(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 0.4f)
                 .setTimeAndEnergy(200, 10240);
     }
 }
