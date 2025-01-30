@@ -29,7 +29,11 @@ public class IGGenericBlock extends Block implements IGBlockType {
     protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        super(BlockBehaviour.Properties.copy(Blocks.IRON_ORE));
+        this(flag, material, Properties.copy(Blocks.IRON_ORE));
+    }
+
+    public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {
+        super(props);
         this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }

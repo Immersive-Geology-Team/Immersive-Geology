@@ -21,7 +21,7 @@ public class MaterialBrine extends MaterialChemical
 
 	public MaterialBrine()
 	{
-		super(MineralEnum.Carnallite);
+		super(MineralEnum.Carnallite, MineralEnum.Rocksalt, MineralEnum.Saltpeter);
 		removeMaterialFlags(BlockCategoryFlags.FLUID);
 	}
 

@@ -11,12 +11,10 @@ package com.igteam.immersivegeology.client.menu.multiblock;
 import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
-import blusunrize.immersiveengineering.client.gui.elements.GuiButtonBoolean;
-import blusunrize.immersiveengineering.client.gui.elements.GuiButtonCheckbox;
-import blusunrize.immersiveengineering.client.gui.elements.GuiButtonIE;
-import blusunrize.immersiveengineering.client.gui.elements.GuiButtonState;
+import blusunrize.immersiveengineering.client.gui.elements.*;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import blusunrize.immersiveengineering.client.utils.GuiHelper;
+import com.ibm.icu.impl.coll.BOCSU;
 import com.igteam.immersivegeology.common.menu.SchematicOutputArea;
 import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu;
 import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu.SchematicSlot;
@@ -25,10 +23,14 @@ import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.datafixers.types.Func;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -38,6 +40,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.gui.widget.ScrollPanel;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +48,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
@@ -54,6 +59,9 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 
 	private GuiButtonCheckbox mirrorSchematicBtn;
 	private GuiButtonSchematic next, back;
+	private SchematicScrollPanel selectionPanel;
+	private Float scrollAmount = 0f;
+
 	public SchematicsScreen(SchematicsContainerMenu inventorySlotsIn, Inventory inv, Component title)
 	{
 		super(inventorySlotsIn, inv, title, TEXTURE);
@@ -77,22 +85,18 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 			handleMirrorButtonClick(tag);
 		}));
 
-		this.next = this.addRenderableWidget(GuiButtonSchematic.create(leftPos + 106, topPos + 23, 0, Component.literal(""), btn -> {
-			this.minecraft.tell(menu::nextSchematic);
+		this.selectionPanel = this.addRenderableWidget(new SchematicScrollPanel(minecraft, 110, 92, topPos + 20, leftPos + 9, menu.availableMultiblocks, (index) -> {
+			this.minecraft.tell(() -> menu.jumpToSchematic(index));
 			CompoundTag nbt = new CompoundTag();
-			nbt.putInt("instruction", 1);
+			nbt.putInt("index", index);
 			sendUpdateToServer(nbt);
+			return true;
+		}, (index) -> index == menu.selected_schematic, (amount) -> {
+			scrollAmount = amount;
+			return true;
 		}));
 
-		this.back = this.addRenderableWidget(GuiButtonSchematic.create(leftPos + 106, topPos + 43, 19, Component.literal(""), btn -> {
-			// Should help against Concurrent Modification
-			this.minecraft.tell(menu::previousSchematic);	// This updates Client Side stuff
-
-			// Tell the Menu to update Server Side stuff
-			CompoundTag nbt = new CompoundTag();
-			nbt.putInt("instruction", 2);
-			sendUpdateToServer(nbt);
-		}));
+		this.selectionPanel.setScrollAmount(scrollAmount);
 	}
 
 	@Override
@@ -105,14 +109,20 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 		float renderPosX = leftPos + 174.5f - (8 * scale);
 		float renderPosY = topPos + 54.5f - (8 * scale);
 
+
 		if(!menu.availableMultiblocks.isEmpty())
 		{
 			TemplateMultiblock mb = menu.availableMultiblocks.get(menu.selected_schematic);
 
 			Vec3i structureSize = mb.getSize(Minecraft.getInstance().level);
 			ItemStack renderStack = new ItemStack(mb.getBlock().asItem());
+			float mbOriginalScale = this.font.width(mb.getDisplayName().getVisualOrderText());
+			float maxScale = 80;
+			float mbFontScale = (mbOriginalScale > maxScale) ? (maxScale / mbOriginalScale) : 1.0f;
+
 			pose.pushPose();
 			pose.translate(leftPos + 174, topPos + 8.75f, 0);
+			pose.scale(mbFontScale,mbFontScale,mbFontScale);
 			graphics.drawString(this.font, mb.getDisplayName(), -this.font.width(mb.getDisplayName().getVisualOrderText()) / 2,0, 0x666666,false);
 			pose.popPose();
 
@@ -170,71 +180,91 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 		return areas;
 	}
 
-	public enum SchematicState
+	public static class SchematicScrollPanel extends ScrollPanel
 	{
-		NORMAL,
-		MIRRORED;
-
-		public MutableComponent getDescription()
+		private final List<TemplateMultiblock> schematics;
+		private final int entryHeight;
+		private final Minecraft client;
+		private final Function<Integer, Boolean> callback;
+		private final Function<Integer, Boolean> isSelectedCallback;
+		private final Function<Float, Boolean> updateScroller;
+		public SchematicScrollPanel(Minecraft client, int width, int height, int top, int left, List<TemplateMultiblock> schematics, Function<Integer, Boolean> select_callback, Function<Integer, Boolean> isSelectedCallback, Function<Float, Boolean> updateScroller)
 		{
-			return Component.translatable("immersivegeology.gui.schematic_table.mirror_state_" + ordinal());
-		}
-	}
-
-	public static class GuiButtonSchematic extends Button
-	{
-		protected final ResourceLocation texture;
-		protected final int texU;
-		protected final int texV;
-
-		public static GuiButtonSchematic create(int x, int y, int vOffset, Component name, Button.OnPress onPress)
-		{
-			return new GuiButtonSchematic(x,y,18,18, name, TEXTURE, 231,1 + vOffset, onPress);
+			super(client, width, height, top, left);
+			this.schematics = schematics;
+			this.entryHeight = 20;
+			this.client = client;
+			this.callback = select_callback;
+			this.isSelectedCallback = isSelectedCallback;
+			this.updateScroller = updateScroller;
 		}
 
-		public GuiButtonSchematic(int x, int y, int w, int h, Component name, ResourceLocation texture, int u, int v, Button.OnPress handler)
+		public void setScrollAmount(float scroll)
 		{
-			super(x, y, w, h, name, handler, DEFAULT_NARRATION);
-			this.texture = texture;
-			this.texU = u;
-			this.texV = v;
-		}
-
-		int[] hoverOffset;
-
-		public GuiButtonSchematic setHoverOffset(int x, int y)
-		{
-			this.hoverOffset = new int[]{x, y};
-			return this;
-		}
-
-		private boolean isPressable(double mouseX, double mouseY)
-		{
-			return this.active&&this.visible&&mouseX >= this.getX()&&mouseY >= this.getY()&&mouseX < this.getX()+this.width&&mouseY < this.getY()+this.height;
+			this.scrollDistance = scroll;
 		}
 
 		@Override
-		public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
+		protected int getContentHeight()
 		{
-			Minecraft mc = Minecraft.getInstance();
-			Font fontrenderer = mc.font;
-			this.isHovered = isPressable(mouseX, mouseY);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
-			RenderSystem.blendFunc(770, 771);
-			if(hoverOffset!=null&&this.isHovered)
-				graphics.blit(texture, getX(), getY(), texU+hoverOffset[0], texV+hoverOffset[1], width, height);
-			else
-				graphics.blit(texture, getX(), getY(), texU, texV, width, height);
-			if(!getMessage().getString().isEmpty())
-			{
-				int txtCol = 0xE0E0E0;
-				if(!this.active)
-					txtCol = 0xA0A0A0;
-				else if(this.isHovered)
-					txtCol = Lib.COLOUR_I_ImmersiveOrange;
-				graphics.drawCenteredString(fontrenderer, getMessage(), this.getX()+this.width/2, this.getY()+(this.height-8)/2, txtCol);
+			return schematics.size() * entryHeight;
+		}
+
+		@Override
+		public boolean mouseClicked(double mouseX, double mouseY, int button)
+		{
+			if(mouseX < left || mouseY < top || mouseX > (left+width) || mouseY > (top + height)) return false;
+
+			int y = (int)(mouseY - top + scrollDistance);
+			int index = y / entryHeight;
+			if(index >= 0 && index < schematics.size()) {
+				updateScroller.apply(scrollDistance);
+				return callback.apply(index);
 			}
+			return false;
+		}
+
+		@Override
+		protected void drawPanel(GuiGraphics graphics, int entryRight, int scrollY, Tesselator tesselator, int mouseX, int mouseY)
+		{
+			int y = scrollY;
+			for (int i = 0; i < schematics.size(); i++)
+			{
+				TemplateMultiblock template = schematics.get(i);
+				int entryTop = y+i*entryHeight;
+				int entryBottom = entryTop+entryHeight;
+
+				graphics.fill(left, entryTop, entryRight, entryBottom-1, 0xFFb4a99c);
+				boolean hover = mouseY > entryTop && mouseY < entryBottom && isMouseOver(mouseX, mouseY);
+				int color = isSelectedCallback.apply(i) ? 0xFFFFFF : (hover ? 0xAAFFAA : 0x666666);
+				// Draw text
+				graphics.drawString(client.font, template.getDisplayName().getString(), left+5, entryTop+5, color, false);
+			}
+		}
+
+		@Override
+		public NarrationPriority narrationPriority()
+		{
+			return NarrationPriority.NONE;
+		}
+
+		@Override
+		public void updateNarration(@NotNull NarrationElementOutput narrationElementOutput) {}
+	}
+
+	public static class GuiButtonSchematic implements GuiEventListener
+	{
+
+		@Override
+		public void setFocused(boolean b)
+		{
+
+		}
+
+		@Override
+		public boolean isFocused()
+		{
+			return false;
 		}
 	}
 }

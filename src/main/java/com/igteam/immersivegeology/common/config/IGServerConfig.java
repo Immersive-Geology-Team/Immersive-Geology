@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -33,12 +34,14 @@ public class IGServerConfig
 {
 	public static final ForgeConfigSpec CONFIG_SPEC;
 	public static final Ores ORES;
+	public static final Evaporates EVAPORITES;
 	public static final Machines MACHINES;
 	public static final VanillaOreRemoval REMOVAL;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ORES = new IGServerConfig.Ores(builder);
+		EVAPORITES = new IGServerConfig.Evaporates(builder);
 		MACHINES = new IGServerConfig.Machines(builder);
 		REMOVAL = new IGServerConfig.VanillaOreRemoval(builder);
 		CONFIG_SPEC = builder.build();
@@ -111,6 +114,70 @@ public class IGServerConfig
 		}
 	}
 
+	public static class Evaporates
+	{
+		public final Map<IWorldGenConfig, EvaporateConfig> evaporates = new HashMap<>();
+		Evaporates(ForgeConfigSpec.Builder builder)
+		{
+			builder.push("evaporates");
+
+			for(IWorldGenConfig num : generatedValues())
+			{
+				try
+				{
+					this.evaporates.put(num, new EvaporateConfig(builder, num));
+				} catch(Exception ex)
+				{
+					IGLib.IG_LOGGER.info("Exception In Config Creation? {}", ex.getMessage());
+				}
+			}
+
+			builder.pop();
+		}
+
+		private List<IWorldGenConfig> generatedValues()
+		{
+			List<IWorldGenConfig> list = new ArrayList<>();
+
+			for(MineralEnum m : MineralEnum.values())
+			{
+				if(m.instance() instanceof MaterialEvaporateMineral)
+				{
+					list.add(m);
+				}
+			}
+
+			return list;
+		}
+
+		public static class EvaporateConfig
+		{
+
+			public final ForgeConfigSpec.DoubleValue density;
+			public final ForgeConfigSpec.IntValue veinSize;
+			public final ForgeConfigSpec.IntValue minY;
+			public final ForgeConfigSpec.IntValue maxY;
+			public final ForgeConfigSpec.IntValue veinsPerChunk;
+			public final ForgeConfigSpec.IntValue generationChance;
+			public final ForgeConfigSpec.IntValue rarity;
+			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
+
+			private EvaporateConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
+			{
+				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
+				this.density = builder.comment("how dense is the vein? 0 for all stone, 1 for all ore").defineInRange("density", 0.5, 0.0, 1.0);
+				this.veinSize = builder.comment("The maximum size of a vein. Set to 0 to disable generation").defineInRange("vein_size", mineral.getVeinSize(), 0, Integer.MAX_VALUE);
+				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				this.minY = builder.comment("The minimum Y coordinate this ore can spawn at").defineInRange("min_y", mineral.getMinY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				this.veinsPerChunk = builder.comment("The number of veins attempted to be generated per chunk").defineInRange("attempts_per_chunk", mineral.veinsPerChunk(), 0, Integer.MAX_VALUE);
+				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate in a chunk, 5000 is a guaranteed spawn 0 prevents spawns").defineInRange("generation_chance",mineral.rarity(), 0, 5000);
+				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
+				this.useSparsePlacement = builder.comment("If enabled, mineral vein will only have a chance to spawn once every [16] chunks on average, inplace of every chunk.").define("useSparsePlacement", mineral.useSparsePlacement());
+				builder.pop();
+			}
+		}
+	}
+
 	public static class Ores
 	{
 		public final Map<IWorldGenConfig, OreConfig> ores = new HashMap<>();
@@ -134,7 +201,16 @@ public class IGServerConfig
 
 		private List<IWorldGenConfig> generatedValues()
 		{
-			List<IWorldGenConfig> v = new ArrayList<>(Arrays.asList(MineralEnum.values()));
+			List<IWorldGenConfig> v = new ArrayList<>();
+
+			for(MineralEnum m : MineralEnum.values())
+			{
+				if(!(m.instance() instanceof MaterialEvaporateMineral))
+				{
+					v.add(m);
+				}
+			}
+
 			v.addAll(MetalEnum.nativeMetals());
 			return v;
 		}

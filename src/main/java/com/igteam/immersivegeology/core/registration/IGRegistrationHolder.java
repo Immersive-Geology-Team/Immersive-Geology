@@ -18,10 +18,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
-import blusunrize.immersiveengineering.common.blocks.wooden.DeskBlock;
-import blusunrize.immersiveengineering.common.blocks.wooden.ModWorkbenchBlockEntity;
-import blusunrize.immersiveengineering.common.register.IEBlockEntities;
-import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
@@ -285,10 +281,24 @@ public class IGRegistrationHolder {
                 boolean hasExistingImplementation = material.instance().checkExistingImplementation(flags) &! DatagenModLoader.isRunningDataGen();
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
-                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, EVAPORATE -> {
+                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
+                        }
+                        case EVAPORATE_CRYSTAL ->
+                        {
+                            String registryKey = BlockCategoryFlags.EVAPORATE_CRYSTAL.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGCrystalBlock(BlockCategoryFlags.EVAPORATE_CRYSTAL, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
+                        }
+                        case EVAPORATE -> {
+                            if(hasExistingImplementation) continue;
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGEvaporateMineralBlock(blockCategory, material, () -> {return (IGCrystalBlock) material.getBlock(BlockCategoryFlags.EVAPORATE_CRYSTAL);});
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
                         }

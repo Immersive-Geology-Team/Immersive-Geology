@@ -15,10 +15,12 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,6 +57,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Scheelite(new MaterialScheelite()),
     Smithsonite(new MaterialSmithsonite()),
     Sphalerite(new MaterialSphalerite()),
+    Rocksalt(new MaterialRocksalt()),
     Thorianite(new MaterialThorianite()),
     Thorite(new MaterialThorite()),
     Millerite(new MaterialMillerite()),
@@ -99,6 +102,12 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     {
         if(material.getOreBlock(stone, richness) == null) return material.getOreBlock(StoneEnum.MCStone, richness);
         return material.getOreBlock(stone, richness);
+    }
+
+    @Override
+    public BlockState getDefaultBlockstate()
+    {
+        return material.getBlock(BlockCategoryFlags.EVAPORATE).defaultBlockState();
     }
 
     @Override

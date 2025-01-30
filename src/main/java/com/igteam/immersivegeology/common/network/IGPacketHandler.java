@@ -26,7 +26,7 @@ public class IGPacketHandler
 
 	public static void initialize()
 	{
-		registerMessage(BlueprintMessage.class, BlueprintMessage::new);
+
 	}
 	private static int id = 0;
 	public static <T extends INetMessage> void registerMessage(Class<T> type, Function<FriendlyByteBuf, T> decoder){

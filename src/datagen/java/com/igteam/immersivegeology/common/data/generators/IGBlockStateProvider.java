@@ -103,6 +103,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SLAB ->  registerSlabBlock(igBlock);
                     case SCAFFOLDING -> registerScaffolding(igBlock);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE -> registerGenericBlock(igBlock, flag);
+                    case EVAPORATE_CRYSTAL -> registerEvaporateCrystal(igBlock, flag);
                     case ORE_BLOCK -> registerOre(igBlock);
                 }
             }
@@ -321,6 +322,27 @@ public class IGBlockStateProvider extends BlockStateProvider {
                         .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
                         .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag())))
                 .build());
+    }
+
+    private void registerEvaporateCrystal(IGBlockType type, IFlagType<?> pattern){
+        assert type instanceof IGCrystalBlock;
+
+        IGCrystalBlock block = (IGCrystalBlock) type;
+        this.stageBlock(block, block.getAgeProperty());
+    }
+
+    public void stageBlock(IGCrystalBlock block, IntegerProperty ageProperty, Property<?>... ignored) {
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> {
+                    int ageSuffix = state.getValue(ageProperty);
+                    String stageName = "growth_stage_" + ageSuffix;
+                    if(ageSuffix == block.getMaxAge()){
+                        return ConfiguredModel.builder()
+                                .modelFile(models().withExistingParent("block/evaporate_crystal/" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/greyscale/" + block.getFlag().getName().toLowerCase() + "/" + stageName)).build();
+                    }
+                    return ConfiguredModel.builder()
+                            .modelFile(models().withExistingParent("block/evaporate_crystal/" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/greyscale/" + block.getFlag().getName().toLowerCase() + "/" + stageName)).build();
+                }, ignored);
     }
 
     private BlockModelBuilder buildOreBlockBase(String prefix, IGWeatheringOreBlock block, String suffix, String parent_name, MineralWeathering mineralWeathering, Direction direction)

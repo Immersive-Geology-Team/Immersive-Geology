@@ -149,6 +149,7 @@
   "block.immersivegeology.bricks": "%s Bricks",
   "block.immersivegeology.stairs": "%s Stairs",
   "block.immersivegeology.storage": "Block of %s",
+  "block.immersivegeology.evaporate": "%s Sediment",
 
 
 
@@ -342,6 +343,7 @@
 
   "item.immersivegeology.drawing_table": "Schematic Table",
   "item.immersivegeology.blueprint_multiblock_plans.specific": "%s Schematics",
+  "item.immersivegeology.blueprint_multiblock_plans": "Blank Schematic",
   "desc.immersivegeology.info.blueprint.size": "%s",
   "desc.immersivegeology.info.blueprint.block_info": "Hold [%s] for Materials",
   "desc.immersivegeology.info.blueprint.no_multiblock": "Blank Schematics",

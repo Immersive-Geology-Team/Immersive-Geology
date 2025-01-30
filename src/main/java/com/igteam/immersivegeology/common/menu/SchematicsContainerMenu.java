@@ -129,29 +129,13 @@ public class SchematicsContainerMenu extends IEBaseContainerOld<DrawingTableBloc
 	@Override
 	public void receiveMessageFromScreen(CompoundTag nbt)
 	{
-		if(nbt.contains("instruction"))
+		if(nbt.contains("index"))
 		{
-			int instruction = nbt.getInt("instruction");
-			switch(instruction)
-			{
-				case 1 ->
-				{
-					// Next Schematic
-					nextSchematic();
-					this.rebindSlots();
-				}
-				case 2 ->
-				{
-					// Previous Schematic
-					previousSchematic();
-					this.rebindSlots();
-				}
-				default ->
-				{
-					IGLib.IG_LOGGER.info("Unknown Instruction from Schematic Screen {}", instruction);
-				}
-			}
+			int index = nbt.getInt("index");
+			jumpToSchematic(index);
+			this.rebindSlots();
 		}
+
 		if(nbt.contains("mirrored"))
 		{
 			this.isMirroredSchematic = nbt.getBoolean("mirrored");
@@ -162,6 +146,14 @@ public class SchematicsContainerMenu extends IEBaseContainerOld<DrawingTableBloc
 	public Boolean getSchematicMirrorState()
 	{
 		return this.isMirroredSchematic;
+	}
+
+	public void jumpToSchematic(Integer index)
+	{
+		int toSelect = index;
+		if(toSelect < 0) toSelect = availableMultiblocks.size() -1;
+		this.selected_schematic = toSelect % availableMultiblocks.size();
+		this.inventorySchematic = new SchematicInventory(this, List.of(availableMultiblocks.get(selected_schematic)));
 	}
 
 	public static class SchematicInputSlot extends IESlot

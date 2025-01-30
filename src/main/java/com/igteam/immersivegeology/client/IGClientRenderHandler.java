@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.client;
 
+import com.igteam.immersivegeology.common.block.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;

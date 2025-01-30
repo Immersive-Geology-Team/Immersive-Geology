@@ -1,9 +1,6 @@
 package com.igteam.immersivegeology.common.data.generators;
 
-import com.igteam.immersivegeology.common.block.IGFluidBlock;
-import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
-import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -45,6 +42,14 @@ public class IGBlockTags extends BlockTagsProvider
 			{
 				//TODO prevent mod only added fluids from being tagged.
 				tag(BlockTags.REPLACEABLE).add(fluidBlock);
+			}
+			if(block.get() instanceof IGEvaporateMineralBlock crystal)
+			{
+				tag(BlockTags.MINEABLE_WITH_SHOVEL).add(crystal);
+			}
+			if(block.get() instanceof IGCrystalBlock crystal)
+			{
+				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(crystal);
 			}
 			if(block.get() instanceof IOreBlock oreBlock)
 			{

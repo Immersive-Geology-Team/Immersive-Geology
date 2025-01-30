@@ -10,10 +10,7 @@ package com.igteam.immersivegeology.common.event;
 
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
-import blusunrize.immersiveengineering.common.register.IEItems.Misc;
 import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
-import com.igteam.immersivegeology.common.network.BlueprintMessage;
-import com.igteam.immersivegeology.common.network.IGPacketHandler;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -22,11 +19,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
-import net.minecraft.network.protocol.game.ClientboundSetCarriedItemPacket;
-import net.minecraft.network.protocol.game.ServerboundSetCreativeModeSlotPacket;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

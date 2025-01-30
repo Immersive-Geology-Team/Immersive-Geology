@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
@@ -37,6 +38,8 @@ public interface IWorldGenConfig
 	GeologyMaterial instance();
 
 	IOreBlock getOreBlock(StoneEnum stone, OreRichness oreRichness);
+
+	BlockState getDefaultBlockstate();
 
 	String name();
 

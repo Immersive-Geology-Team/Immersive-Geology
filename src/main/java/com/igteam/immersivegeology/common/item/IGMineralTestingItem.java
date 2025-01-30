@@ -8,31 +8,19 @@
 
 package com.igteam.immersivegeology.common.item;
 
-import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.common.world.IGOreFeature;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.*;
 

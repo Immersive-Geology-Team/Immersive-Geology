@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-29T11:29:59.640034032	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-01-30T18:41:30.654763115	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -10,6 +10,8 @@ acd0e1939cf7655b58c67b56be5980a3eb0be432 data/forge/tags/fluids/bindingagent.jso
 793baa0ba0190114172a41d7241f857876027f7b data/forge/tags/fluids/clean_aquaregia_gold.json
 7fff60c4dbbd0ef6d1cbb33d898528dbefe6bb6f data/forge/tags/fluids/clean_aquaregia_platinum.json
 5ad5700383ffb953dd21d5dabc1262f5e818bb6e data/forge/tags/fluids/clean_brine_carnallite.json
+e3746db70d7ebd0c79204fd32c79cd3a05def7bd data/forge/tags/fluids/clean_brine_rocksalt.json
+d671a30742ffd0719955656d8b1a0d95deac2cc4 data/forge/tags/fluids/clean_brine_saltpeter.json
 6902720f4b3521148a0e45e4545927d61fb47149 data/forge/tags/fluids/clean_hydrochloricacid_acanthite.json
 41650bc0a506c811e07da7ffeafbead435559e2e data/forge/tags/fluids/clean_hydrochloricacid_chromium.json
 e5e3c8d6bddc6d4792d39a5edce9908fe2ebfe81 data/forge/tags/fluids/clean_hydrochloricacid_cobalt.json
@@ -36,6 +38,8 @@ c69d7743794c2b31a4145f716eea94a43abf8783 data/forge/tags/fluids/clean_sulfuricac
 6643471e1cde7bbe283c9bb1f6a8121fbfbc8754 data/forge/tags/fluids/clean_sulfuricacid_zinc.json
 f3ca3d2547e62546893434e0afd95ccc40c8db7e data/forge/tags/fluids/cloudy_ammoniasolution_molybdenite.json
 d9f17a7fa61e9e8c758187c2ea24e1eec02bcc57 data/forge/tags/fluids/cloudy_brine_carnallite.json
+2d4e2618b2ce1784dc4f98e0ef73ba5732975d86 data/forge/tags/fluids/cloudy_brine_rocksalt.json
+e520a424be1075ed565d5f5825ed0d5cb9dfba33 data/forge/tags/fluids/cloudy_brine_saltpeter.json
 d36935635e8dbab5195c5ce002b71a326681dd96 data/forge/tags/fluids/cloudy_chemicalwaste_bauxite.json
 44b144574ecc3cd877609713a397905390ac59ee data/forge/tags/fluids/cloudy_chemicalwaste_molybdenite.json
 201a8cd7a36db63de9997c41ee03aefa86f85bc2 data/forge/tags/fluids/cloudy_hydrochloricacid_acanthite.json

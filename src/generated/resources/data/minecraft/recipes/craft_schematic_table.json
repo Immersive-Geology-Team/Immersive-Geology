@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ig_schematics",
+  "key": {
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "F": {
+      "tag": "forge:fences/wooden"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "C F"
+  ],
+  "result": {
+    "item": "immersivegeology:drawing_table"
+  },
+  "show_notification": true
+}

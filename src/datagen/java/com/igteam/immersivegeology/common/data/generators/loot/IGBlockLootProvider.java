@@ -15,9 +15,7 @@ import blusunrize.immersiveengineering.data.loot.LootUtils;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
-import com.igteam.immersivegeology.common.block.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -98,6 +96,14 @@ public class IGBlockLootProvider implements LootTableSubProvider
 				if(block instanceof IOreBlock ore)
 				{
 					this.registerOre(block_object, ore.getItemDrop());
+				}
+				if(block instanceof IGCrystalBlock crystal)
+				{
+					this.register(block_object, this.singleItem(crystal.getItemDrop()));
+				}
+				if(block instanceof IGEvaporateMineralBlock mineral)
+				{
+					this.registerOre(block_object, mineral.getItemDrop());
 				}
 				continue;
 			}

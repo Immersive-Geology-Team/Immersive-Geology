@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-29T11:25:17.502654921	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-01-31T00:30:59.317915492	Tags for minecraft:item mod id immersivegeology
 ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint/multiblock_plans.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
@@ -71,6 +71,7 @@ c57f9c5650e3b0db884017bf75190fbbdd441b2d data/forge/tags/items/crushed_ore/urani
 45add208a3798c2af994f207b3185eda963ebb8f data/forge/tags/items/crushed_ore/wolframite.json
 b979e04551b1cacd09f758e0f483e5721d83625d data/forge/tags/items/crushed_ore/zircon.json
 61fb308b1d9ace57aa5da0c185c7a841125e8c2d data/forge/tags/items/crystal/aluminum.json
+1161edc323695f0fcecf0d206d269be13191d691 data/forge/tags/items/crystal/carnallite.json
 a1359fa40e5a2aa1cdce8824b81b73009b6f9da2 data/forge/tags/items/crystal/chromium.json
 90e4bd36f2421069e820c763403730b5993c1be5 data/forge/tags/items/crystal/cobalt.json
 f740eb816493d66d37e539bd6fec5daaffb40211 data/forge/tags/items/crystal/copper.json
@@ -84,6 +85,8 @@ c6e1ff5132a4bc2b0baf738e737a04697329904f data/forge/tags/items/crystal/molybdenu
 ca4d310668c41168106ac40b3806e313939caff5 data/forge/tags/items/crystal/nickel.json
 612d69a608eb8a46c7f0cd429a2dc21a05b59ef8 data/forge/tags/items/crystal/osmium.json
 7e353cccd568286fab9ca1b7170f3be306f24151 data/forge/tags/items/crystal/platinum.json
+885b92ab9f9fa86a0c91a57c8190d22bc6ae98bf data/forge/tags/items/crystal/rocksalt.json
+02e25e18c57603a1c77082acd86a151795c8c692 data/forge/tags/items/crystal/saltpeter.json
 9cb1ea78d8bcc1c450ae4a1465dd2a595cd90b64 data/forge/tags/items/crystal/silver.json
 2d162e5e7179e30a103a751e0d508bdde52827ba data/forge/tags/items/crystal/sodium.json
 31b69c1ba03f382c122d0250013f7007b826be73 data/forge/tags/items/crystal/steel.json
@@ -208,6 +211,7 @@ f88f66aed1dd7d57ec04d34d0ce499aa2d97df89 data/forge/tags/items/grits/osmium.json
 aec40e89a0772fdf383bf7d47109dfd6691fab52 data/forge/tags/items/grits/platinum.json
 cebbf53d63513370f2626057be2adb7a1cf87a77 data/forge/tags/items/grits/pyrite.json
 51891e9814de0cd4d5219522d7751d327b2d67dc data/forge/tags/items/grits/pyrolusite.json
+8f38579b93f0ce6a287416a505ccedfe399dca80 data/forge/tags/items/grits/rocksalt.json
 430540026627f65cbf323f24dbc385e0682e104f data/forge/tags/items/grits/saltpeter.json
 866542f62a3e43629bfe6ab8c1297e5635b63f4b data/forge/tags/items/grits/scheelite.json
 4454220f1a0a9293f06504a732a17e1cb51ebbf0 data/forge/tags/items/grits/silver.json
@@ -490,6 +494,7 @@ a189704f22a4abde6859795ca48f6a3418ffb949 data/forge/tags/items/powders/molybdeni
 1e97ef3bbc506c3cdf498c05d595a373837324c4 data/forge/tags/items/powders/platinum.json
 6788325c81aaf691e3fa7c45f0e63ee9b146724a data/forge/tags/items/powders/pyrite.json
 489554bed667df07dbd5070bc9d82f73ab6e5967 data/forge/tags/items/powders/pyrolusite.json
+8bbae3248a05de8c72043b5dc0e3a97f8437ada5 data/forge/tags/items/powders/rocksalt.json
 122ef2ed7340dcd67e68e09cf9e1a0d3def26c94 data/forge/tags/items/powders/saltpeter.json
 86a6343635464c6243b7233749921feea798d1f8 data/forge/tags/items/powders/scheelite.json
 94a72ee7d67da807a4f4071492cca24d3cfe9dd4 data/forge/tags/items/powders/smithsonite.json

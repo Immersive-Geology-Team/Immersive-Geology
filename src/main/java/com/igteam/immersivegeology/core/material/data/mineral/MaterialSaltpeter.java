@@ -9,6 +9,9 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+
+import java.util.function.BiFunction;
 
 public class MaterialSaltpeter extends MaterialEvaporateMineral
 {
@@ -16,4 +19,9 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 	{
 		super();
 	}
+	@Override
+	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
+		return ((p, i) -> (0xc1fffa));
+	}
+
 }

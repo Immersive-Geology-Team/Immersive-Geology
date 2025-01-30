@@ -37,13 +37,31 @@ public class IGHeightProvider extends HeightProvider
 		this.entry = entry;
 		this.internalProvider = Lazy.of(() -> {
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
-			VerticalAnchor vaMin = (pContext) -> {
-				return (Integer)config.minY.get();
-			};
-			VerticalAnchor vaMax = (pContext) -> {
-				return (Integer)config.maxY.get();
-			};
-			return UniformHeight.of(vaMin, vaMax);
+			if(config != null)
+			{
+				VerticalAnchor vaMin = (pContext) -> {
+					return (Integer)config.minY.get();
+				};
+				VerticalAnchor vaMax = (pContext) -> {
+					return (Integer)config.maxY.get();
+				};
+
+				return UniformHeight.of(vaMin, vaMax);
+			}
+			IGServerConfig.Evaporates.EvaporateConfig evaporateConfig  = IGServerConfig.EVAPORITES.evaporates.get(entry);
+			if(evaporateConfig != null)
+			{
+				VerticalAnchor vaMin = (pContext) -> {
+					return (Integer)evaporateConfig.minY.get();
+				};
+				VerticalAnchor vaMax = (pContext) -> {
+					return (Integer)evaporateConfig.maxY.get();
+				};
+
+				return UniformHeight.of(vaMin, vaMax);
+			}
+			IGLib.IG_LOGGER.error("Unable to find config for spawn height for spawner: {}", entry.getName());
+			return UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.absolute(0));
 		});
 	}
 

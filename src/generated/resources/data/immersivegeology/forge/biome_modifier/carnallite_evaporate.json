@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "features": "immersivegeology:carnallite_evaporate",
+  "step": "surface_structures"
+}

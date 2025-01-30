@@ -1,0 +1,112 @@
+/*
+ * Muddykat
+ * Copyright (c) 2025
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
+package com.igteam.immersivegeology.common.block;
+
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BuddingAmethystBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams.Builder;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+public class IGEvaporateMineralBlock extends IGGenericBlock
+{
+
+	private final Supplier<IGCrystalBlock> clusters;
+
+	public IGEvaporateMineralBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Supplier<IGCrystalBlock> clusterType)
+	{
+		super(flag, material, BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks());
+		this.clusters = clusterType;
+	}
+
+	@Override
+	public @Nullable PushReaction getPistonPushReaction(BlockState state)
+	{
+		return PushReaction.DESTROY;
+	}
+
+	public static boolean canGrowIn(BlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isRandomlyTicking(BlockState pState)
+	{
+		return super.isRandomlyTicking(pState);
+	}
+
+	@Override
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean moved)
+	{
+		super.neighborChanged(state, level, pos, neighborBlock, neighborPos, moved);
+
+		// Check if the block is adjacent to water (a water source or flowing water)
+		for (Direction direction : Direction.values()) {
+			BlockPos adjacentPos = pos.relative(direction);
+			BlockState adjacentState = level.getBlockState(adjacentPos);
+
+			if (adjacentState.is(Blocks.WATER)) {
+				level.destroyBlock(pos, false); // Break the block
+				break; // Once water is found, break the loop
+			}
+		}
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random)
+	{
+		if(random.nextInt(5)==0)
+		{
+			Direction direction = Direction.UP;
+			BlockPos blockPos = pos.offset(direction.getNormal());
+			BlockState blockState = world.getBlockState(blockPos);
+			IGCrystalBlock nextBlock = null;
+
+			if(canGrowIn(blockState) && blockState.isAir())
+			{
+				nextBlock = clusters.get();
+			}
+
+			if(nextBlock!=null)
+			{
+				BlockState toSet = nextBlock.defaultBlockState();
+
+				world.setBlockAndUpdate(blockPos, toSet);
+			}
+		}
+	}
+
+	public ItemLike getItemDrop()
+	{
+		return getMaterial(MaterialTexture.base).getItem(ItemCategoryFlags.CRYSTAL);
+	}
+}

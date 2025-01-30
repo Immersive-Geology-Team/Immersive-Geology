@@ -17,6 +17,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     CLOUDY_SLURRY(3),
     SCAFFOLDING(4),
     EVAPORATE(0),
+    EVAPORATE_CRYSTAL(0),
     MISC(4);
 
     private final int groupOrdinal;
@@ -43,7 +44,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     @Override
     public RenderTypeSkeleton getRenderType()
     {
-        if(this == ORE_BLOCK) return RenderTypeSkeleton.CUTOUT_MIPPED;
+        if(this == ORE_BLOCK || this == EVAPORATE_CRYSTAL) return RenderTypeSkeleton.CUTOUT_MIPPED;
         return IFlagType.super.getRenderType();
     }
 }

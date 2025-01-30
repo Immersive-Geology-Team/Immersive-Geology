@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -158,6 +159,12 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public IOreBlock getOreBlock(StoneEnum stone, OreRichness richness)
     {
         return material.getOreBlock(stone, richness);
+    }
+
+    @Override
+    public BlockState getDefaultBlockstate()
+    {
+        return null;
     }
 
     @Override

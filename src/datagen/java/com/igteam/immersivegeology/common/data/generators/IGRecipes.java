@@ -53,6 +53,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
@@ -122,8 +123,14 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" WB")
 				.pattern("W  ").define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_2");
-		// Refractory Brick Block
 
+		Item schematic_table = IGRegistrationHolder.getBlock.apply("drawing_table").asItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, schematic_table)
+				.pattern("SSS")
+				.pattern("C F").define('C', Ingredient.of(Blocks.CRAFTING_TABLE)).define('S', Ingredient.of(ItemTags.WOODEN_SLABS)).define('F', Ingredient.of(Tags.Items.FENCES_WOODEN))
+				.group("ig_schematics").unlockedBy("has_crafting_table", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CRAFTING_TABLE)).save(consumer, "craft_schematic_table");
+
+		// Refractory Brick Block
 		Item refractory_brick = IGRegistrationHolder.getItem.apply("refractory_brick");
 		Item refractory = MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, refractory)
@@ -171,39 +178,6 @@ public class IGRecipes extends RecipeProvider
 		//Computational Engineering Block
 		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
 		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
-
-
-		for(TemplateMultiblock multiblock : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
-		{
-			ItemStack blueprint = new ItemStack(MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT));
-			IGBlueprintSettings settings = new IGBlueprintSettings(blueprint);
-			settings.setMultiblock(multiblock);
-			settings.setMirror(false);
-			settings.setRotation(Rotation.NONE);
-			settings.setPlaced(false);
-			settings.applyTo(blueprint);
-			if(IGRegistrationHolder.stone_mb.contains(multiblock.getClass()))
-			{
-				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Simple Multiblock Plans", blueprint);
-				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
-						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
-				continue;
-			}
-			if(IGRegistrationHolder.bronze_mb.contains(multiblock.getClass()))
-			{
-				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Basic Multiblock Plans", blueprint);
-				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
-						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
-				continue;
-			}
-			if(IGRegistrationHolder.steel_mb.contains(multiblock.getClass()))
-			{
-				BlueprintCraftingRecipeBuilder builder = BlueprintCraftingRecipeBuilder.builder("Advanced Multiblock Plans", blueprint);
-				builder.addInput(Items.INK_SAC).addInput(Items.PAPER)
-						.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/" + multiblock.getUniqueName().getPath().toLowerCase() + "_plans"));
-			}
-		}
-
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
 				.pattern("ABA")

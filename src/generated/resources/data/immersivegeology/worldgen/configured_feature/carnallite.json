@@ -1,8 +1,0 @@
-{
-  "type": "immersivegeology:ig_ore",
-  "config": {
-    "biomes": "#forge:is_sandy",
-    "entry": "Carnallite",
-    "random_name": 3343065944278360919
-  }
-}

@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -58,7 +59,7 @@ public class MaterialVanadinite extends MaterialMineral {
                 MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
                 new FluidStack(Fluids.WATER, 250),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getFluidTag(BlockCategoryFlags.FLUID), 250), null,
+                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(MineralEnum.Rocksalt), 250), null,
                 200, 51200);
     }
 
