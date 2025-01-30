@@ -11,76 +11,81 @@ package com.igteam.immersivegeology.common.network;
 import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkEvent.Context;
 
 import java.util.function.Supplier;
+public class BlueprintMessage implements INetMessage {
+	private final BlockPos blockPos;
 
-public class BlueprintMessage implements INetMessage
-{
-
-	public static void sendToServer(IGBlueprintSettings settings, InteractionHand hand){
-		IGPacketHandler.sendToServer(new BlueprintMessage(settings, hand, true));
+	// Constructor that takes the block position
+	public BlueprintMessage(BlockPos blockPos) {
+		this.blockPos = blockPos;
 	}
 
-	public static void sendToClient(Player player, IGBlueprintSettings settings, InteractionHand hand){
-		IGPacketHandler.sendToPlayer(player, new BlueprintMessage(settings, hand, false));
+	// For decoding the packet from the network (from bytes)
+	public BlueprintMessage(FriendlyByteBuf buf) {
+		this.blockPos = buf.readBlockPos();
 	}
 
-	boolean forServer;
-	CompoundTag nbt;
-	InteractionHand hand;
-
-	public BlueprintMessage(IGBlueprintSettings settings, InteractionHand hand, boolean toServer)
-	{
-		this(settings.toNbt(), hand, toServer);
-	}
-
-	public BlueprintMessage(CompoundTag nbt, InteractionHand hand, boolean toServer){
-		this.nbt = nbt;
-		this.forServer = toServer;
-		this.hand = hand;
-	}
-
-	public BlueprintMessage(FriendlyByteBuf buf){
-		this.nbt = buf.readNbt();
-		this.forServer = buf.readBoolean();
-		this.hand = InteractionHand.values()[buf.readByte()];
-	}
-
+	// For encoding the packet to be sent over the network
 	@Override
-	public void toBytes(FriendlyByteBuf buf)
-	{
-		buf.writeNbt(this.nbt);
-		buf.writeBoolean(this.forServer);
-		buf.writeByte(this.hand.ordinal());
+	public void toBytes(FriendlyByteBuf buf) {
+		buf.writeBlockPos(blockPos);
 	}
 
+	// For handling the packet on the server side
 	@Override
-	public void process(Supplier<Context> context)
-	{
-		context.get().enqueueWork(() -> {
-			NetworkEvent.Context con = context.get();
-
-			if(con.getDirection().getReceptionSide() == getSide() && con.getSender() != null){
-				Player player = con.getSender();
-				ItemStack held = player.getItemInHand(this.hand);
-
-				if(held.is(MiscEnum.Blueprint.getItem(ItemCategoryFlags.BLUEPRINT))){
-					IGBlueprintSettings settings = new IGBlueprintSettings(this.nbt);
-					settings.applyTo(held);
-				}
+	public void process(Supplier<Context> context) {
+		Context ctx = context.get();
+		ctx.enqueueWork(() -> {
+			// Handle the logic on the server side
+			ServerPlayer player = ctx.getSender();
+			if (player != null) {
+				handleServerSide(player);
 			}
 		});
+		ctx.setPacketHandled(true);
 	}
 
-	LogicalSide getSide(){
-		return this.forServer ? LogicalSide.SERVER : LogicalSide.CLIENT;
+	// This method is called on the server side to handle the received packet
+	private void handleServerSide(ServerPlayer player) {
+		// Handle the block position (e.g., update the inventory or select the block)
+		Level world = player.level();
+		BlockState state = world.getBlockState(blockPos);
+		ItemStack stack = new ItemStack(state.getBlock().asItem());
+
+		// If the item is valid, update the inventory
+		if (!stack.isEmpty()) {
+			Inventory inventory = player.getInventory();
+			int existingSlot = inventory.findSlotMatchingItem(stack);
+
+			if (existingSlot != -1) {
+				// Select the existing item instead of adding a duplicate
+				inventory.selected = existingSlot;
+			} else if (player.getAbilities().instabuild) {
+				// Creative Mode: Add to hotbar if not already present
+				for (int i = 0; i < 9; i++) {
+					if (inventory.getItem(i).isEmpty()) {
+						inventory.setItem(i, stack);
+						inventory.selected = i;
+						break;
+					}
+				}
+				// Force server synchronization
+				player.containerMenu.broadcastChanges();
+			}
+		}
 	}
 }

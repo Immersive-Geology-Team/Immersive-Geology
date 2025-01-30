@@ -74,7 +74,6 @@ public class  ImmersiveGeology {
 
         IGContent.registerContainersAndScreens();
         IGContent.initializeManualEntries();
-
     }
 
     private void supplyMaterialTint(){

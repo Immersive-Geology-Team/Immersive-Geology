@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-27T09:20:13.728945486	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-01-29T11:25:17.502654921	Tags for minecraft:item mod id immersivegeology
 ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint/multiblock_plans.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
@@ -33,7 +33,6 @@ d3a41c90350ec668b6a5be41ad220e9467e5f627 data/forge/tags/items/crushed_ore/acant
 f30776f816b47279440ed51c20c4ed1d146e9788 data/forge/tags/items/crushed_ore/alumina.json
 ab9efb762a1d4249d92c9761bad261921330c2fe data/forge/tags/items/crushed_ore/anatase.json
 75e73d46c0a840ff4d5155921d29cfb17f62a32b data/forge/tags/items/crushed_ore/bauxite.json
-3cb598b8638b553bc4a69358d06374f4aeb184b7 data/forge/tags/items/crushed_ore/carnallite.json
 2873bb37a7cabc27cfc0a22f23869b4e88a41cec data/forge/tags/items/crushed_ore/cassiterite.json
 d68609dc63779bc3cfac74e6c63e0b83a8bf2d98 data/forge/tags/items/crushed_ore/chalcocite.json
 d63e5b6c83942216eab87a139b69c4df2b3f394a data/forge/tags/items/crushed_ore/chalcopyrite.json
@@ -101,7 +100,6 @@ fa88eb75c08e0708c9240c6f2d1ac63c1ada0e01 data/forge/tags/items/dirty_crushed_ore
 99d2150957a1afd0a3e0c47bb4f5ef263b5d5248 data/forge/tags/items/dirty_crushed_ore/alumina.json
 52b1a4723f36200088be9b355a7917646fad1e89 data/forge/tags/items/dirty_crushed_ore/anatase.json
 0d90df70e21e777c0e0254e67208f321c6dc060d data/forge/tags/items/dirty_crushed_ore/bauxite.json
-e51502901ac19580b40f527eec66d9a0e553f822 data/forge/tags/items/dirty_crushed_ore/carnallite.json
 bbd403e2b77d3406c71a0a2ad2d6caba78cb0be1 data/forge/tags/items/dirty_crushed_ore/cassiterite.json
 21cdb49af26c1e8ef1166c6bf2711f1db6a345ba data/forge/tags/items/dirty_crushed_ore/chalcocite.json
 8b51db42065511b2294dd68beb2bf44f44d3da72 data/forge/tags/items/dirty_crushed_ore/chalcopyrite.json
@@ -210,6 +208,7 @@ f88f66aed1dd7d57ec04d34d0ce499aa2d97df89 data/forge/tags/items/grits/osmium.json
 aec40e89a0772fdf383bf7d47109dfd6691fab52 data/forge/tags/items/grits/platinum.json
 cebbf53d63513370f2626057be2adb7a1cf87a77 data/forge/tags/items/grits/pyrite.json
 51891e9814de0cd4d5219522d7751d327b2d67dc data/forge/tags/items/grits/pyrolusite.json
+430540026627f65cbf323f24dbc385e0682e104f data/forge/tags/items/grits/saltpeter.json
 866542f62a3e43629bfe6ab8c1297e5635b63f4b data/forge/tags/items/grits/scheelite.json
 4454220f1a0a9293f06504a732a17e1cb51ebbf0 data/forge/tags/items/grits/silver.json
 6af13014d5c6ea83df8f092b54ac9203986ec6e9 data/forge/tags/items/grits/smithsonite.json
@@ -286,7 +285,6 @@ b3782b11d0446fb76751da4589742572d48bd7de data/forge/tags/items/metal_oxide/zinc.
 503a01f4632571fb2525432b69f6fbc119b3775b data/forge/tags/items/normal_ore/alumina.json
 29d0bd3a4e1ea878c588e661e10d6a63cb31d80b data/forge/tags/items/normal_ore/anatase.json
 8e0e05e3ebb69eea72a62865efb16313fa63ecdd data/forge/tags/items/normal_ore/bauxite.json
-0d336532da31340dbca00c040a1e2f4b1dbce440 data/forge/tags/items/normal_ore/carnallite.json
 24b480491999837df8863fb0f729e25f1c377dad data/forge/tags/items/normal_ore/cassiterite.json
 067876778e876466047e80dc86fad25e691c9580 data/forge/tags/items/normal_ore/chalcocite.json
 bd34a279141812af3779b7d391429fd1856afea1 data/forge/tags/items/normal_ore/chalcopyrite.json
@@ -345,7 +343,7 @@ e7527c777f1d67a32ad11fe47d6e3f2b8f064a7a data/forge/tags/items/nuggets/unobtaniu
 8e51b346ab1a03d5f6eb541c9ad8cbf2c344abbf data/forge/tags/items/nuggets/vanadium.json
 7ab9ea822b8e1bb8385c319fb8dd8238ebd9d22d data/forge/tags/items/nuggets/zinc.json
 46791e64a1a9a20fcd7d1cc1a95c6582cc1a82ce data/forge/tags/items/nuggets/zirconium.json
-4d1972b64eb607fbc13a538ae8b57cbc9dfffb86 data/forge/tags/items/ores.json
+a30d91e6206f52113506b78873d435f2bdfb7795 data/forge/tags/items/ores.json
 d344b62a8dcf12745817bb1ad079b1375651a88e data/forge/tags/items/oxide_pellet/chromium.json
 5038493f31414ed2600686c79a73c4901e373e20 data/forge/tags/items/oxide_pellet/copper.json
 918bfdc3becaa473907572313d11010eee22e45b data/forge/tags/items/oxide_pellet/iron.json
@@ -386,7 +384,6 @@ d8281198dd284a154adc884a184fddd0d570b193 data/forge/tags/items/plates/vanadium.j
 06fbcacc4b1e5ef514a841fc24cdc6ecacca2e32 data/forge/tags/items/poor_ore/alumina.json
 2872fde5f42792235935afc7d7cd6f6dacdf53d0 data/forge/tags/items/poor_ore/anatase.json
 b6194e818a18e342061884ba7f9500061a402748 data/forge/tags/items/poor_ore/bauxite.json
-dc3035d6b49883f43e553a36e4eafaeaf1685e40 data/forge/tags/items/poor_ore/carnallite.json
 9ddaeaa609e8e4e0c23c9bf8aebb22edef3f36f3 data/forge/tags/items/poor_ore/cassiterite.json
 f00e040ceef9ec4a78f550995f08b34b729c6383 data/forge/tags/items/poor_ore/chalcocite.json
 5fb4276ba5edf8ea3b9baf6280fa8677f44a4a22 data/forge/tags/items/poor_ore/chalcopyrite.json
@@ -428,7 +425,6 @@ ced1a0f0979c907e07425a2d92d4ef7aaa179ae1 data/forge/tags/items/poor_ore/uraninit
 c3fc6b2f44a05fe7a91abcaaa48297cfc181f0f3 data/forge/tags/items/powdered_slag/alumina.json
 c662cd6dce72431c7f017950625e993a14508284 data/forge/tags/items/powdered_slag/anatase.json
 66789fe89311f6620cfe4656676b57cdb2b10892 data/forge/tags/items/powdered_slag/bauxite.json
-07785656fd02072ad56a0f92ce6cf3c279b28ec1 data/forge/tags/items/powdered_slag/carnallite.json
 8c6838754eb6d03fe99f72a310bf8bf85ed0071d data/forge/tags/items/powdered_slag/cassiterite.json
 a596e6a450962812b28dee6616ae652e9ed74cff data/forge/tags/items/powdered_slag/chalcocite.json
 ff90ffd5272877e58f0527f52d8809232659c788 data/forge/tags/items/powdered_slag/chalcopyrite.json
@@ -494,6 +490,7 @@ a189704f22a4abde6859795ca48f6a3418ffb949 data/forge/tags/items/powders/molybdeni
 1e97ef3bbc506c3cdf498c05d595a373837324c4 data/forge/tags/items/powders/platinum.json
 6788325c81aaf691e3fa7c45f0e63ee9b146724a data/forge/tags/items/powders/pyrite.json
 489554bed667df07dbd5070bc9d82f73ab6e5967 data/forge/tags/items/powders/pyrolusite.json
+122ef2ed7340dcd67e68e09cf9e1a0d3def26c94 data/forge/tags/items/powders/saltpeter.json
 86a6343635464c6243b7233749921feea798d1f8 data/forge/tags/items/powders/scheelite.json
 94a72ee7d67da807a4f4071492cca24d3cfe9dd4 data/forge/tags/items/powders/smithsonite.json
 f30be6e293301a0464ebfebcb0c311fb544acd8c data/forge/tags/items/powders/sodium.json
@@ -518,7 +515,6 @@ d46e201bc5089238a8ad860f38ac73d2d3c4e888 data/forge/tags/items/rich_ore/acanthit
 6609676ada947a05caebb24a70e19f122f60fb6c data/forge/tags/items/rich_ore/alumina.json
 2ec6c6adccc689b61452db9142e6314319e82c96 data/forge/tags/items/rich_ore/anatase.json
 2e6f3ef77c180b43b0ec68ba1cbd5bddc3d65ceb data/forge/tags/items/rich_ore/bauxite.json
-a08e2e8903fb305766da2293bbdc3fe9e9552c9c data/forge/tags/items/rich_ore/carnallite.json
 4ec598c412ef0d02502955d4493e447450543cd7 data/forge/tags/items/rich_ore/cassiterite.json
 7bb84d32b2c5192acc319d905aefe836548d943f data/forge/tags/items/rich_ore/chalcocite.json
 d8d962267cec072cb0e5346dda9cf708cae94e98 data/forge/tags/items/rich_ore/chalcopyrite.json
@@ -582,7 +578,6 @@ b802d95d20a58ac1e1f2bb714ef62875bf42922c data/forge/tags/items/rods/zirconium.js
 948ff5ffba37df4598230ee6ce87928c456e84b9 data/forge/tags/items/slag/alumina.json
 3f8b8a44806ed033f873f5d2b9afc2b1316876e3 data/forge/tags/items/slag/anatase.json
 651010fdc5064eb7f3b356fdb51cebb3daa5ff5f data/forge/tags/items/slag/bauxite.json
-3152cd05c98547a5a1ac2cf38849a19dd97bff6d data/forge/tags/items/slag/carnallite.json
 1cd69349b6fe8946cb8af5a7ac337e72baa7751e data/forge/tags/items/slag/cassiterite.json
 838d38d7b0162b258498fcf1f221e8a98290d82f data/forge/tags/items/slag/chalcocite.json
 7281811a5e7c1bb5d2aee638408392506d9f3a82 data/forge/tags/items/slag/chalcopyrite.json

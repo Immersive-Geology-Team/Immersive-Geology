@@ -16,6 +16,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SLURRY(3),
     CLOUDY_SLURRY(3),
     SCAFFOLDING(4),
+    EVAPORATE(0),
     MISC(4);
 
     private final int groupOrdinal;

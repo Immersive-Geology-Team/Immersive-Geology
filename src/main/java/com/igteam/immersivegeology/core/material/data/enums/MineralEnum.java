@@ -51,6 +51,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Monazite(new MaterialMonazite()),
     Pyrite(new MaterialPyrite()),
     Pyrolusite(new MaterialPyrolusite()),
+    Saltpeter(new MaterialSaltpeter()),
     Scheelite(new MaterialScheelite()),
     Smithsonite(new MaterialSmithsonite()),
     Sphalerite(new MaterialSphalerite()),

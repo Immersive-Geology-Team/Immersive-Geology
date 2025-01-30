@@ -8,7 +8,9 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.BiFunction;
@@ -16,6 +18,12 @@ import java.util.function.Function;
 
 public class MaterialBrine extends MaterialChemical
 {
+
+	public MaterialBrine()
+	{
+		super(MineralEnum.Carnallite);
+		removeMaterialFlags(BlockCategoryFlags.FLUID);
+	}
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {

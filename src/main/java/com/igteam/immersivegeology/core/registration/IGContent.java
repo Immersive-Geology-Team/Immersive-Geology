@@ -15,14 +15,20 @@ import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.SchematicsScreen;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -43,22 +49,74 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.loading.FMLLoader;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 public class IGContent {
 
-    public static void modContruction(IEventBus event) {
-        IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
-        IGMultiblockProvider.forceClassLoad();
-        IGRegistrationHolder.initialize();
-        IGTags.initialize();
-        IGWorldGen.init();
-        IGRecipeTypes.init();
-        initializeIETweaks();
+    @NotNull
+    private static ResourceLocation getResourceLocationTest(IFlagType<?> pattern, GeologyMaterial base) {
+        ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
+        if (pattern.equals(BlockCategoryFlags.STAIRS))
+        {
+            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
+        }
+
+        if(pattern.equals(ItemCategoryFlags.NORMAL_ORE) || pattern.equals(ItemCategoryFlags.RICH_ORE) || pattern.equals(ItemCategoryFlags.POOR_ORE))
+        {
+            OreRichness richness = pattern.equals(ItemCategoryFlags.NORMAL_ORE) ? OreRichness.NORMAL : (pattern.equals(ItemCategoryFlags.RICH_ORE) ? OreRichness.RICH : OreRichness.POOR);
+            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase()+"/"+richness.getSanitizedName() + ".png");
+        }
+        return test;
+    }
+
+    public static void supplyMaterialTint(){
+        Minecraft minecraft = Minecraft.getInstance();
+
+        // Define the BiPredicate to check if a material has a specific flag
+        BiPredicate<GeologyMaterial, IFlagType<?>> needsColorCheck = (material, flagType) ->
+                material.getFlags().contains(flagType);
+
+        // Define the BiFunction to determine if a resource is present for a given flagType and material
+        BiFunction<IFlagType<?>, GeologyMaterial, Boolean> resourceExists = (flagType, material) -> {
+            ResourceLocation testLocation = getResourceLocationTest(flagType, material);
+            try {
+                return minecraft.getResourceManager().getResource(testLocation).isPresent();
+            } catch (Exception e) {
+                return false;
+            }
+        };
+
+        for (MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials()) {
+            GeologyMaterial base = materialInterface.instance();
+            HashMap<IFlagType<?>, Boolean> colorCheckMap = new HashMap<>();
+
+            for (IFlagType<?> flagType : IFlagType.getAllRegistryFlags()) {
+                // Apply the BiPredicate to check if the flagType needs color checking
+                if (needsColorCheck.test(base, flagType)) {
+                    // Use the BiFunction to see if the resource exists and update colorCheckMap accordingly
+                    colorCheckMap.put(flagType, !resourceExists.apply(flagType, base));
+                } else {
+                    colorCheckMap.put(flagType, true);
+                }
+            }
+
+            // Define a BiPredicate<IFlagType<?>, Integer> to handle the color tint check
+            BiPredicate<IFlagType<?>, Integer> colorTintPredicate = (flagType, tintIndex) -> {
+                // Return the value from colorCheckMap based on the flagType
+                return colorCheckMap.getOrDefault(flagType, true);
+            };
+
+            // Initialize color tint using the BiPredicate with Integer parameter
+            base.initializeColorTint(colorTintPredicate);
+        }
     }
 
     public static void initializeIETweaks()

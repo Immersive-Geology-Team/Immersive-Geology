@@ -102,7 +102,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case STAIRS -> registerStairsBlock(igBlock);
                     case SLAB ->  registerSlabBlock(igBlock);
                     case SCAFFOLDING -> registerScaffolding(igBlock);
-                    case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK -> registerGenericBlock(igBlock, flag);
+                    case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE -> registerGenericBlock(igBlock, flag);
                     case ORE_BLOCK -> registerOre(igBlock);
                 }
             }

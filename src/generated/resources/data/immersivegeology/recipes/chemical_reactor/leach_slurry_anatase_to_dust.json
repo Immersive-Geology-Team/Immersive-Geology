@@ -10,8 +10,8 @@
     "tag": "minecraft:water"
   },
   "fluidResult": {
-    "amount": 250,
-    "fluid": "immersivegeology:fluid_brine"
+    "amount": 0,
+    "fluid": "minecraft:empty"
   },
   "itemInput": {
     "tag": "forge:powders/sodium"

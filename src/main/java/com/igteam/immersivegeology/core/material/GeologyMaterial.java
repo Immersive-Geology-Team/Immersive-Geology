@@ -127,6 +127,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                     yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
                 }
                 case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
+                case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SLAB, SHEETMETAL_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
                 case DUST_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");
                 case GEODE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/geode");
