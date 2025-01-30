@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -93,9 +94,10 @@ public class MaterialBauxite extends MaterialMineral {
                         "aluminium_oxide_to_ingot",
                         MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE), 1,
                         MetalEnum.Aluminum.getStack(ItemCategoryFlags.INGOT),
-                        MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER),
+                        ItemStack.EMPTY,
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 1))
+                .addExtras(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 0.5f)
                 .setTimeAndEnergy(400, 204800);
     }
 }

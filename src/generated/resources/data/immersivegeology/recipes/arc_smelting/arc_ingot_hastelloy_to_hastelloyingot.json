@@ -3,27 +3,27 @@
   "additives": [
     {
       "base_ingredient": {
-        "item": "immersivegeology:metal_oxide_chromium"
+        "item": "immersivegeology:ingot_chromium"
       },
       "count": 4
     },
     {
       "base_ingredient": {
-        "item": "immersivegeology:metal_oxide_molybdenum"
+        "item": "immersivegeology:ingot_molybdenum"
       },
       "count": 2
     },
     {
-      "item": "immersivegeology:metal_oxide_iron"
+      "item": "minecraft:iron_ingot"
     },
     {
-      "item": "immersivegeology:metal_oxide_tungsten"
+      "item": "immersivegeology:ingot_tungsten"
     }
   ],
   "energy": 819200,
   "input": {
     "base_ingredient": {
-      "tag": "forge:metal_oxide/nickel"
+      "tag": "forge:ingots/nickel"
     },
     "count": 8
   },
