@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -25,7 +26,7 @@ public class MaterialThorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(12,70,1,-64,72,800, 0.5,false,Optional.of(Biomes.IS_DRY));
+        CONFIG = new MineralConfig(12,70,1,-64,72,800, 0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
     }
 
     @Override

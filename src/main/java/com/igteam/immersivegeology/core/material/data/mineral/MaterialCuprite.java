@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -37,7 +38,7 @@ public class MaterialCuprite extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 		addFlags(ItemCategoryFlags.PELLET);
 
-		CONFIG = new MineralConfig(40, 50, 1, 0, 200, 1000, 0.5,false, Optional.of(BiomeTags.IS_OVERWORLD));
+		CONFIG = new MineralConfig(40, 50, 1, 0, 200, 1000, 0.5,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
 	}
 
 	public boolean willTarnishOverTime()

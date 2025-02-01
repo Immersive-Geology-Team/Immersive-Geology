@@ -1,105 +1,111 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
+import com.igteam.immersivegeology.common.world.features.helper.GenerationBandedNoise;
+import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
-import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
-import org.jetbrains.annotations.NotNull;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
+import javax.imageio.*;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.util.*;
+import java.util.List;
 
-public class NoiseTester
-{
+public class NoiseTester {
 	public static void main(String[] args) {
-		// Base settings
-		final int WIDTH = 128;          // Image width
-		final int HEIGHT = 128;         // Image height
-		final int FEATURE_SIZE_MIN = 10; // Minimum feature size
-		final int FEATURE_SIZE_MAX = 50; // Maximum feature size
-		final int FEATURE_SIZE_STEP = 10; // Step for feature size
-		final int WARPED_FEATURE_SIZE_MIN = 5; // Minimum warped feature size
-		final int WARPED_FEATURE_SIZE_MAX = 30; // Maximum warped feature size
-		final int WARPED_FEATURE_SIZE_STEP = 5; // Step for warped feature size
-		final int OCTAVES_MIN = 1;       // Minimum octaves
-		final int OCTAVES_MAX = 4;       // Maximum octaves
-		final String OUTPUT_DIR = "noise_images";
-
-		// Loop through settings
-		for(int seed = 1; seed < 5; seed++)
-		{
-			for(int featureSize = FEATURE_SIZE_MIN; featureSize <= FEATURE_SIZE_MAX; featureSize += FEATURE_SIZE_STEP)
-			{
-				generateAndSaveImage(WIDTH, HEIGHT, featureSize, seed, 2, OUTPUT_DIR);
-			}
-		}
-		System.out.println("Batch image generation complete!");
+		// Generate the noise images and compile them into a .gif
+		new NoiseTester().generateGif();
 	}
 
-	private static void generateAndSaveImage(int width, int height, int featureSize, int seed, int octaves, String outputDir) {
-		INoise3D noiseGen = getiNoise3D(featureSize, seed, octaves);
 
-		// Create a BufferedImage to store the noise map
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	public void generateGif() {
+		// List to hold generated images
+		List<BufferedImage> images = new ArrayList<>();
+		IGenerationPattern handler = new GenerationBandedNoise();
+		// Example 3D noise generator (replace with your actual noise generator)
+		INoise3D noise = handler.getiNoise3D(4, 0);
 
-		// Generate noise values and map them to image pixels
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				// Generate a noise value
-				double value = noiseGen.noise(x, y, 0);
+		// Generate 128 images and store them in the list
+		for (int i = 0; i < 128; i++) {
+			BufferedImage image = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB);
+			for (int x = 0; x < 128; x++) {
+				for (int z = 0; z < 128; z++) {
+					// Get noise value between -1 and 1
+					float value = noise.noise(x, z, i);
 
-				// Map the noise value to a grayscale color
-				int grayscale = (int) ((value + 1) / 2 * 255); // Normalize to [0, 255]
-				grayscale = Math.max(0, Math.min(255, grayscale)); // Clamp values
-
-				// Set the pixel color
-				int rgb = (grayscale << 16) | (grayscale << 8) | grayscale;
-				image.setRGB(x, y, rgb);
+					// Normalize value from [-1, 1] to [0, 255]
+					int grayValue = (int)(((value + 1) / 2) * 255);
+					if(grayValue < 0) grayValue = 0;
+					if(grayValue > 255)
+					{
+						grayValue = 255;
+					}
+					// Create grayscale color (R = G = B = grayValue)
+					Color color = new Color(grayValue, grayValue, grayValue);
+					image.setRGB(x, z, color.getRGB());
+				}
 			}
+			images.add(image);
 		}
 
-		// Save the image to a file
+		// Save images as a GIF
 		try {
-
-			String filename = String.format("noise_f%d_o%d.png", featureSize, octaves);
-
-			File outputFile = new File(outputDir + "/seed_" + String.valueOf(seed), filename);
-			if (!outputFile.exists()) {
-				outputFile.mkdirs();
-			}
-			outputFile = new File(outputDir + "/seed_" + String.valueOf(seed), filename);
-			ImageIO.write(image, "png", outputFile);
-			System.out.println("Saved: " + filename);
-		} catch (Exception e) {
+			File outputGif = new File("output_noise.gif");
+			createGif(images, outputGif);
+			System.out.println("GIF saved to: " + outputGif.getAbsolutePath());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static @NotNull INoise3D getiNoise3D(int featureSize, int seed, int octaves)
-	{
-		SimplexNoise3D simplex = new SimplexNoise3D(seed);
-		SimplexNoise3D warpSimplex = new SimplexNoise3D(seed-1);
+	// Create GIF from list of images
+	private void createGif(List<BufferedImage> images, File outputFile) throws IOException {
+		// Create an output stream to save the GIF
+		try (GifSequenceWriter writer = new GifSequenceWriter(
+				ImageIO.createImageOutputStream(outputFile),
+				BufferedImage.TYPE_INT_RGB,
+				100, true)) {
+			// Add all images to the GIF
+			for (BufferedImage image : images) {
+				writer.writeToSequence(image);
+			}
+		}
+	}
 
-		// Warp noise generator for spacing
-		INoise3D warp = (x, y, z) -> warpSimplex
-				.octaves(2, 1f)
-				.sinWarp(2,1)
-				.flattened(-1,1)
-				.bias(-.5f)
-				.noise(x / 24, y / 24, z / 24);
+	// GifSequenceWriter (to write the .gif file)
+	public class GifSequenceWriter implements AutoCloseable {
+		private ImageWriter writer;
+		private ImageWriteParam param;
+		private ImageOutputStream output;
 
-		float spreadFactor = (90 - (float)featureSize/ 1000);
-		// Primary noise generator
-		return (x, y, z) -> simplex
-				.bias(-0.5f + (Math.max(0, Math.min(0.5f, (float)featureSize/ 100))))
-				.flattened(-1,1)
-				.octaves(octaves, 1f)
-				.add(warp)
-				.noise(x / 24, y /24, z /24);
+		public GifSequenceWriter(ImageOutputStream output, int imageType, int timeBetweenFramesMS, boolean loopContinuously) throws IOException {
+			this.output = output;
+
+			writer = ImageIO.getImageWritersByFormatName("gif").next();
+			param = writer.getDefaultWriteParam();
+			writer.setOutput(output);
+			writer.prepareWriteSequence(null);
+
+			// Use DirectColorModel and SinglePixelPackedSampleModel for compatibility
+			ColorModel colorModel = new DirectColorModel(24, 0x00FF0000, 0x0000FF00, 0x000000FF);
+			SampleModel sampleModel = new SinglePixelPackedSampleModel(DataBuffer.TYPE_INT, 128, 128, new int[]{0x00FF0000, 0x0000FF00, 0x000000FF});
+			ImageTypeSpecifier typeSpecifier = new ImageTypeSpecifier(colorModel, sampleModel);
+
+			// Add loop extension if required (GIF loop control via ImageWriteParam)
+			if (loopContinuously) {
+				param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+				param.setCompressionType("LZW");
+				param.setProgressiveMode(ImageWriteParam.MODE_DISABLED);
+			}
+		}
+
+		public void writeToSequence(BufferedImage img) throws IOException {
+			writer.writeToSequence(new IIOImage(img, null, null), param);
+		}
+
+		@Override
+		public void close() throws IOException {
+			writer.endWriteSequence();
+			output.close();
+		}
 	}
 }

@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -29,7 +30,7 @@ public class MaterialGold extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        this.CONFIG = new MaterialMineral.MineralConfig(8,25,1,0,120,125,0.5, false, Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(8,75,1,0,120,500,0.5, false, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

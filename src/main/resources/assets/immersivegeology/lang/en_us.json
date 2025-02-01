@@ -13,6 +13,9 @@
   "immersivegeology.config.title": "",
   "generator.immersive": "Immersive",
 
+  "immersivegeology.prospecting_pick.found": "%s",
+  "immersivegeology.prospecting_pick.nothing": "Found Nothing",
+
   "manual.immersivegeology.main": "Immersive Geology",
   "manual.immersivegeology.ig_multiblocks": "Multiblocks",
   "manual.immersivegeology.minerals": "Minerals",

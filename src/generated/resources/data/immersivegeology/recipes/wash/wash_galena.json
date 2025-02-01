@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:gravityseparator",
   "byproduct": {
-    "item": "immersivegeology:metal_oxide_silver"
+    "item": "immersivegeology:metal_oxide_platinum"
   },
   "byproduct_chance": 0.075,
   "input": {

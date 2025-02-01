@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
@@ -40,7 +41,7 @@ public class MaterialCopper extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(10,70,1,0,128,1000,0.5, true,Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(10,70,1,0,128,250,0.5, true,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

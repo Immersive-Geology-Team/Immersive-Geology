@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
@@ -32,7 +33,7 @@ public class MaterialLead extends MaterialNativeMetal
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(24,99,1,0,50,5,0.5, true, Optional.of(Biomes.IS_WET));
+        this.CONFIG = new MaterialMineral.MineralConfig(12,99,1,0,50,5,0.5, true, Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
     }
 
     @Override

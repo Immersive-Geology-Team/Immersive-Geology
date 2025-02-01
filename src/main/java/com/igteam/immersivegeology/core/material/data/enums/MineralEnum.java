@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -41,12 +42,10 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Cobaltite(new MaterialCobaltite()),
     Cryolite(new MaterialCryolite()),
     Cuprite(new MaterialCuprite()),
-    Ferberite(new MaterialFerberite()),
     Fluorite(new MaterialFluorite()),
     Galena(new MaterialGalena()),
     Gypsum(new MaterialGypsum()),
     Hematite(new MaterialHematite()),
-    Hubnerite(new MaterialHubnerite()),
     Ilmenite(new MaterialIlmenite()),
     Magnetite(new MaterialMagnetite()),
     Molybdenite(new MaterialMolybdenite()),
@@ -163,5 +162,11 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     public Optional<TagKey<Biome>> getPreferredBiome()
     {
         return material.CONFIG.preferredBiome();
+    }
+
+    @Override
+    public IGGenerationType getGenerationType()
+    {
+        return material.CONFIG.generationType();
     }
 }

@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -35,7 +36,7 @@ public class MaterialIron extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,550,1,0,60,1,0.1, true, Optional.of(Biomes.IS_COLD));
+        this.CONFIG = new MaterialMineral.MineralConfig(6,550,1,0,60,1,0.1, true, Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
     }
 
     @Override

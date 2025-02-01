@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -25,7 +26,7 @@ public class MaterialUraninite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(13,80,2,20,180,100, 0.5,true,Optional.of(Biomes.IS_COLD));
+        CONFIG = new MineralConfig(13,80,2,20,180,100, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
     }
 
     @Override

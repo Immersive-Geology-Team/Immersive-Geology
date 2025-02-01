@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -41,7 +42,7 @@ public class MaterialAnatase extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(18,70,1,-64,70,2000,0.5, true,Optional.of(Biomes.IS_MOUNTAIN));
+        CONFIG = new MineralConfig(18,70,1,-64,70,2000,0.5, true,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
     }
 
     @Override

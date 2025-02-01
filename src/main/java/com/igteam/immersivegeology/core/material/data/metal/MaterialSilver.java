@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
@@ -37,7 +38,7 @@ public class MaterialSilver extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,95,1,10,50,10,0.5,false,Optional.empty());
+        this.CONFIG = new MaterialMineral.MineralConfig(12,95,1,10,50,16,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

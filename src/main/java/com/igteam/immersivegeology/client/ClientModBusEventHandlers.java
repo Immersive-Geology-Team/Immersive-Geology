@@ -10,10 +10,7 @@ package com.igteam.immersivegeology.client;
 
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
-import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.ChemicalReactorRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.PelletizerRenderer;
+import com.igteam.immersivegeology.client.renderer.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMenuTypes;
@@ -51,6 +48,8 @@ public class ClientModBusEventHandlers {
 		BallmillRenderer.DRUM = new IGDynamicModel(BallmillRenderer.DRUM_NAME);
 		BallmillRenderer.AXLE = new IGDynamicModel(BallmillRenderer.AXLE_NAME);
 		PelletizerRenderer.DISH = new IGDynamicModel(PelletizerRenderer.DISH_NAME);
+
+		CentrifugeRenderer.DRUM = new IGDynamicModel(CentrifugeRenderer.DRUM_NAME);
 	}
 
 	@SubscribeEvent
@@ -66,6 +65,7 @@ public class ClientModBusEventHandlers {
 		registerBERenderNoContext(event, IGMultiblockProvider.BALLMILL.masterBE(), BallmillRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.PELLETIZER.masterBE(), PelletizerRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CHEMICAL_REACTOR.masterBE(), ChemicalReactorRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.CENTRIFUGE.masterBE(), CentrifugeRenderer::new);
 	}
 
 	private static <T extends BlockEntity>

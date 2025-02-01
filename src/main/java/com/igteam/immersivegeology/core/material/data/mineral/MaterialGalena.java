@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -33,7 +34,7 @@ public class MaterialGalena extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO Goto Nether
-        CONFIG = new MineralConfig(12,45,2,-64,60,750,0.5,false, Optional.of(Biomes.IS_COLD));
+        CONFIG = new MineralConfig(12,45,2,-64,60,750,0.5,false, Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
         this.addFlags(ItemCategoryFlags.POWDERED_SLAG);
     }
 

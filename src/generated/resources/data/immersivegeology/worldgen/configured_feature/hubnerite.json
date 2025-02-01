@@ -1,8 +1,0 @@
-{
-  "type": "immersivegeology:ig_ore",
-  "config": {
-    "biomes": "#minecraft:is_mountain",
-    "entry": "Hubnerite",
-    "random_name": -7949784402790782688
-  }
-}

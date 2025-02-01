@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -31,7 +32,7 @@ public class MaterialVanadinite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(10,70,2,20,140,600, 0.5,false,Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(10,70,2,20,140,600, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 
     @Override

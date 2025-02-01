@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -29,7 +30,7 @@ public class MaterialMagnetite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(15,35,1,0,180,1000, 0.5,false,Optional.empty());
+        CONFIG = new MineralConfig(15,35,1,0,180,1250, 0.5,false,Optional.empty(), IGGenerationType.BANDED);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

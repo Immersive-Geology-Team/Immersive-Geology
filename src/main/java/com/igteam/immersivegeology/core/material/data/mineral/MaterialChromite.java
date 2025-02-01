@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
             
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -28,7 +29,7 @@ public class MaterialChromite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(12,45,1,-64,24,1350,0.5,false,Optional.of(Biomes.IS_SPARSE_OVERWORLD));
+        CONFIG = new MineralConfig(12,45,1,-64,24,1350,0.5,false,Optional.of(Biomes.IS_SPARSE_OVERWORLD), IGGenerationType.DEFAULT);
     }
 
     @Override

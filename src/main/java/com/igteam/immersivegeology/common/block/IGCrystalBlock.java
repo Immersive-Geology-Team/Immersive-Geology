@@ -79,15 +79,28 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 	@Override
 	public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom)
 	{
-		if (pLevel.isAreaLoaded(pPos, 1)) {
-			if (pLevel.getRawBrightness(pPos, 0) >= 9) {
-				int i = this.getAge(pState);
-				if (i < this.getMaxAge()) {
-					float f = 1.0f;
-					if (ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int)(25.0F / f) + 1) == 0)) {
-						pLevel.setBlock(pPos, this.getStateForAge(i + 1), 2);
-						ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
-					}
+		if (pLevel.isAreaLoaded(pPos, 1))
+		{
+			int i = this.getAge(pState);
+			int stageIncrement = 1;
+			if(pLevel.isRaining()&&pLevel.canSeeSky(pPos.above()))
+			{
+				if(i > 0) {
+					stageIncrement = -1;
+				}
+				if(i == 0)
+				{
+					stageIncrement = 0;
+				}
+			}
+
+			if(i < this.getMaxAge() || stageIncrement < 0)
+			{
+				float f = 1.0f;
+				if(ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int)(25.0F/f)+1)==0))
+				{
+					pLevel.setBlock(pPos, this.getStateForAge(i+stageIncrement), 2);
+					ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
 				}
 			}
 		}

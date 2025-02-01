@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -20,7 +21,7 @@ public class MaterialZircon extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(10,60,3,0,128,180, 0.5,true,Optional.empty());
+        CONFIG = new MineralConfig(10,60,3,0,128,180, 0.5,true,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

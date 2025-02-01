@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -69,4 +70,6 @@ public interface IWorldGenConfig
 	}
 
 	String getName();
+
+	default IGGenerationType getGenerationType() {return IGGenerationType.DEFAULT;};
 }

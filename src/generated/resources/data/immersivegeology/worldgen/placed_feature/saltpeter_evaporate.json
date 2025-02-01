@@ -9,7 +9,7 @@
       }
     },
     {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_sparse"
     },
     {
       "type": "immersivegeology:ig_count",

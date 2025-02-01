@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
+import com.igteam.immersivegeology.client.renderer.multiblocks.CentrifugeRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.client.renderer.multiblocks.PelletizerRenderer;
 import com.igteam.immersivegeology.common.data.generators.IGDynamicModelProvider.SimpleModelBuilder;
@@ -79,6 +80,13 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 				.modelLocation(rl("models/block/multiblock/obj/pelletizer/pelletizer_dish.obj"))
 				.flipV(true)
 				.end();
+
+		getBuilder(CentrifugeRenderer.DRUM_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/centrifuge/centrifuge_spinner.obj"))
+				.flipV(true)
+				.end();
+
 		for(Entry<Block, ModelFile> multiblock : multiblocks.unsplitModels.entrySet())
 			withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
 

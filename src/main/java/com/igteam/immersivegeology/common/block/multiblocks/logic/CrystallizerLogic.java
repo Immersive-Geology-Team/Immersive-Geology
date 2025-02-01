@@ -114,7 +114,13 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         if(recipe == null) return;
         MultiblockProcessInMachine<CrystallizerRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(1);
-        state.processor.addProcessToQueue(process, level, false);
+        int drainSimulation = state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.SIMULATE).getAmount();
+        int drainAmount = recipe.fluidIn.getAmount();
+        if(state.processor.addProcessToQueue(process, level, true) && drainSimulation == drainAmount)
+        {
+            state.processor.addProcessToQueue(process, level, false);
+            state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE).getAmount();
+        }
     }
 
     @Override
@@ -241,7 +247,6 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         {
             try {
                 CrystallizerRecipe recipe = process.getRecipe(level);
-                tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
                 output_tank.fill(recipe.fluidOutput.get(), FluidAction.EXECUTE);
             } catch(Exception error)
             {

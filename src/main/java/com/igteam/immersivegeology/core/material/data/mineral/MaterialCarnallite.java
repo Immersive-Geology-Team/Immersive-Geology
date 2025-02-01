@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
             
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -20,7 +21,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
     public MaterialCarnallite() {
         super();
 
-        CONFIG = new MineralConfig(12,45,1,24,128,1350,0.5,false,Optional.of(Biomes.IS_SANDY));
+        CONFIG = new MineralConfig(12,45,1,24,128,1350,0.5,false,Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
     }
 
     @Override

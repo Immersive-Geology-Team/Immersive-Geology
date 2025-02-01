@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -54,7 +55,7 @@ public class MaterialMetal extends GeologyMaterial {
         return super.getCrystalFamily();
     }
 
-    public MaterialMineral.MineralConfig CONFIG = new MaterialMineral.MineralConfig(0,50,0,-48,112,0,0.5, false, Optional.empty());
+    public MaterialMineral.MineralConfig CONFIG = new MaterialMineral.MineralConfig(0,50,0,-48,112,0,0.5, false, Optional.empty(), IGGenerationType.DEFAULT);
     public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, Optional<TagKey<Biome>> preferredBiome)
     {}
 }

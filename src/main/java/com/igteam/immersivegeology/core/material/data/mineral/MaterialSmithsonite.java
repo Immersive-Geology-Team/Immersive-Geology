@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -26,7 +27,7 @@ public class MaterialSmithsonite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ItemCategoryFlags.PELLET);
-        CONFIG = new MineralConfig(8,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(8,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 
     @Override

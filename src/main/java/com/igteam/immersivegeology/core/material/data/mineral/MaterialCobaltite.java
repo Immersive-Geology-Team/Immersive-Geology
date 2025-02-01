@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -35,7 +36,7 @@ public class MaterialCobaltite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         //TODO Nether and Lava
-        CONFIG = new MineralConfig(18,60,1,-64,24,1000,0.5,false, Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(18,60,1,-64,24,1000,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 
     @Override

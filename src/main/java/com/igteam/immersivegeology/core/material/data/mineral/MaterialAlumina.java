@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -39,7 +40,7 @@ public class MaterialAlumina extends MaterialMineral {
         removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 
         // Does not spawn
-        CONFIG = new MineralConfig(0,0,0,0,1,0, 0.5,false,Optional.empty());
+        CONFIG = new MineralConfig(0,0,0,0,1,0, 0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

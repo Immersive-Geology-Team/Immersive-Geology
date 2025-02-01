@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -24,7 +25,7 @@ public class MaterialMonazite extends MaterialMineral {
 
         // TODO Only Allow touchy of open Air.
         // TODO Monazite Sands
-        CONFIG = new MineralConfig(14,90,1,20,120,1000, 0.5,false,Optional.of(Biomes.IS_DRY));
+        CONFIG = new MineralConfig(14,90,1,20,120,1000, 0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
     }
 
     @Override

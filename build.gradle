@@ -190,7 +190,8 @@ repositories {
         }
     }
 }
-
+project.ext.lwjglVersion = "3.3.6"
+project.ext.lwjglNatives = "natives-linux"
 dependencies {
     minecraft "net.neoforged:forge:${version_minecraft}-${version_forge}"
 

@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -23,7 +24,7 @@ public class MaterialUnobtania extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(20,300,1,-64,32,1, 0.5,true,Optional.of(Biomes.IS_RARE));
+        CONFIG = new MineralConfig(20,300,1,-64,32,1, 0.5,true,Optional.of(Biomes.IS_RARE), IGGenerationType.DEFAULT);
     }
 
     @Override

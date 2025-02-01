@@ -81,7 +81,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		SimplexNoise3D simplex = new SimplexNoise3D(seed);
 
 		int FEATURE_SIZE = config.veinSize.get();
-		INoise3D noise = getiNoise3D(FEATURE_SIZE, seed);
+		INoise3D noise = config.generationPattern.get().getPattern().getiNoise3D(FEATURE_SIZE, seed);
 		return new Vein(defaultPosRespectingHeight(random, config), random, noise);
 	}
 

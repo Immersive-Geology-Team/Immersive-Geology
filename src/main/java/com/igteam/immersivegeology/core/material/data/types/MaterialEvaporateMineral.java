@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -30,6 +31,6 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int minSea = 62;
 		int maxSea = 72;
 
-		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,50, 0.5,true, Optional.of(Biomes.IS_SANDY));
+		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,50, 0.5,true, Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
 	}
 }

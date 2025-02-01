@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
@@ -65,7 +66,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickableComponent<State>, MBOverlayText<State> {
+public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickableComponent<State>, IClientTickableComponent<State>, MBOverlayText<State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
 
     private static final int ENERGY_CAPACITY = 32000;
@@ -87,9 +88,14 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         if(state.mbLevelGetter == null) state.mbLevelGetter = context::getLevel;
 
         if(!state.tank.isEmpty()) tryRunRecipe(state, context.getLevel().getRawLevel());
-        state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-
+        final boolean wasActive = state.isActive;
+        state.isActive = state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         if(state.processor.getQueueSize() > 0) context.requestMasterBESync();
+
+        if((wasActive != state.isActive))
+        {
+            context.requestMasterBESync();
+        }
 
         if(!state.primary_output_tank.isEmpty())
         {
@@ -114,7 +120,12 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         if(recipe == null) return;
         MultiblockProcessInMachine<CentrifugeRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(0);
-        if(state.processor.addProcessToQueue(process, level, true)) state.processor.addProcessToQueue(process, level, false);
+
+        if(state.processor.addProcessToQueue(process, level, true))
+        {
+            state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
+            state.processor.addProcessToQueue(process, level, false);
+        }
     }
 
     private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, CapabilityReference<IFluidHandler> outputRef, FluidTank tank)
@@ -186,8 +197,16 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
-            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.primary_output_tank.getFluid()), TextUtils.formatFluidStack(state.secondary_output_tank.getFluid()));
+            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.primary_output_tank.getFluid()), TextUtils.formatFluidStack(state.secondary_output_tank.getFluid()), Component.literal("Processes: " + state.processor.getQueueSize()));
         return null;
+    }
+
+    @Override
+    public void tickClient(IMultiblockContext<State> context)
+    {
+        final State state = context.getState();
+        float rot = state.rotation;
+        if(state.shouldRenderActive()) state.rotation = (float)((rot-3.5)%360);
     }
 
     public static class State implements IMultiblockState, ProcessContextInMachine<CentrifugeRecipe>
@@ -211,10 +230,13 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public final FluidTank secondary_output_tank = new FluidTank(TANK_VOLUME);
 
         private Supplier<IMultiblockLevel> mbLevelGetter;
+        public float rotation;
+        public boolean isActive;
 
         public State(IInitialMultiblockContext<State> ctx)
         {
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
+            this.rotation = 0;
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(
@@ -237,25 +259,30 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
 
             this.fluidOutputPrimary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
             this.fluidOutputSecondary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
+
+            this.isActive = false;
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
+        public void writeSaveNBT(CompoundTag nbt) {
             nbt.put("energy", energy.serializeNBT());
             nbt.put("processor", processor.toNBT());
             nbt.put("tank", tank.writeToNBT(new CompoundTag()));
             nbt.put("primary_output_tank", primary_output_tank.writeToNBT(new CompoundTag()));
             nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(new CompoundTag()));
             nbt.put("inventory", inventory.serializeNBT());
+            nbt.putBoolean("isActive", isActive);
         }
 
         @Override
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
+            processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
             tank.readFromNBT(nbt.getCompound("tank"));
             primary_output_tank.readFromNBT(nbt.getCompound("primary_output_tank"));
             secondary_output_tank.readFromNBT(nbt.getCompound("secondary_output_tank"));
             inventory.deserializeNBT(nbt.getCompound("inventory"));
+            isActive = nbt.getBoolean("isActive");
         }
 
         @Override
@@ -275,7 +302,6 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         {
             try {
                 CentrifugeRecipe recipe = process.getRecipe(level);
-                tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
                 primary_output_tank.fill(recipe.primaryFluidOutput.get(), FluidAction.EXECUTE);
                 secondary_output_tank.fill(recipe.secondaryFluidOutput.get(), FluidAction.EXECUTE);
             } catch(Exception error)
@@ -283,8 +309,6 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
                 IGLib.IG_LOGGER.error("Error: {}", error.getMessage());
             }
         }
-
-
 
         @Override
         public int[] getOutputSlots()
@@ -314,6 +338,16 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public AveragingEnergyStorage getEnergy()
         {
             return energy;
+        }
+
+		public float getRotation()
+		{
+            return rotation;
+		}
+
+        public boolean shouldRenderActive()
+        {
+            return isActive;
         }
     }
 

@@ -14,6 +14,7 @@ import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -225,6 +226,7 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue veinsPerChunk;
 			public final ForgeConfigSpec.IntValue generationChance;
 			public final ForgeConfigSpec.IntValue rarity;
+			public final ForgeConfigSpec.EnumValue<IGGenerationType> generationPattern;
 			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
 
 			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
@@ -238,6 +240,7 @@ public class IGServerConfig
 				this.generationChance = builder.comment("The chance that this mineral is selected for a vein to generate in a chunk, 5000 is a guaranteed spawn 0 prevents spawns").defineInRange("generation_chance",mineral.rarity(), 0, 5000);
 				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
 				this.useSparsePlacement = builder.comment("If enabled, mineral vein will only have a chance to spawn once every [16] chunks on average, inplace of every chunk.").define("useSparsePlacement", mineral.useSparsePlacement());
+				this.generationPattern = builder.comment("The type of generation that is used for this mineral").defineEnum("generationPattern", mineral.getGenerationType());
 				builder.pop();
 			}
 		}

@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
@@ -35,9 +36,10 @@ public class MaterialMineral extends GeologyMaterial {
         }
     }
 
-    public MineralConfig CONFIG = new MineralConfig(8,50,1,-48,112,50, 0.5,false,Optional.empty());
-    public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, double density, boolean useSparsePlacement, Optional<TagKey<Biome>> preferredBiome)
-    {}
+    public MineralConfig CONFIG = new MineralConfig(8,50,1,-48,112,50, 0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
+    public record MineralConfig(int veinSize, int rarity, int veinsPerChunk, int minY, int maxY, int generationChance, double density, boolean useSparsePlacement, Optional<TagKey<Biome>> preferredBiome, IGGenerationType generationType)
+    {
+    }
 
     @Override
     public IGVeinTextureType getVeinType()

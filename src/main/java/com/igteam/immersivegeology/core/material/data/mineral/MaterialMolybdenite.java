@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -34,7 +35,7 @@ public class MaterialMolybdenite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
 
         // TODO Banished to the Nether! ~UnSchtalch
-        CONFIG = new MineralConfig(12,70,1,-64,82,1000, 0.5,false,Optional.of(Biomes.IS_HOT));
+        CONFIG = new MineralConfig(12,70,1,-64,82,1000, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 
     @Override
