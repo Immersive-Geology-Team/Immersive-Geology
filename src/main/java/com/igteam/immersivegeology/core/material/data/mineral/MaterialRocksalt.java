@@ -42,10 +42,10 @@ public class MaterialRocksalt extends MaterialEvaporateMineral
 		 */
 		IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
 				MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST),
-				ChemicalEnum.HydrochloricAcid.getFluidStack(80),
+				ChemicalEnum.HydrochloricAcid.getFluidStack(125),
 				IngredientWithSize.of(ItemStack.EMPTY),
-				new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 80),
-				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 80),
+				new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
+				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
 				null,
 				200, 51200);
 	}
