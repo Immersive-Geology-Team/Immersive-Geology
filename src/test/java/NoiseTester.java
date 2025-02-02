@@ -24,7 +24,7 @@ public class NoiseTester {
 		List<BufferedImage> images = new ArrayList<>();
 		IGenerationPattern handler = new GenerationTubedNoise();
 		// Example 3D noise generator (replace with your actual noise generator)
-		INoise3D noise = handler.getiNoise3D(4, 0);
+		INoise3D noise = handler.getiNoise3D(24, 1);
 
 		// Generate 128 images and store them in the list
 		for (int i = 0; i < 128; i++) {

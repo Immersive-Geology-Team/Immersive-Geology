@@ -307,8 +307,8 @@
         ]
       }
     ],
-    "density": 0.5,
-    "max_y": 82,
+    "density": 0.75,
+    "max_y": 212,
     "min_y": -64,
     "random_name": "molybdenite_tfc",
     "rarity": 70,

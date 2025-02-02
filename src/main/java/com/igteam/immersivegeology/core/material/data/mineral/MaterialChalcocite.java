@@ -8,7 +8,9 @@ import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
@@ -29,7 +31,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialChalcocite extends MaterialMineral {
+public class MaterialChalcocite extends MaterialSulphideMineral
+{
 
     public MaterialChalcocite() {
         super();
@@ -37,7 +40,11 @@ public class MaterialChalcocite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
-        CONFIG = new MineralConfig(24,40,1,-32,200,200, 0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+
+
+        setAsocialMaterialChance(1f);
+        addGenerationFriend(() -> MineralEnum.Chalcopyrite.instance(), 50);
+        CONFIG = new MineralConfig(24,40,1,-32,200,1200, 0.75,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

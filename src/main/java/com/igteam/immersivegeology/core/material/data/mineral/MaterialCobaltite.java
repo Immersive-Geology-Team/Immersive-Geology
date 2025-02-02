@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -27,7 +28,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialCobaltite extends MaterialMineral {
+public class MaterialCobaltite extends MaterialSulphideMineral
+{
 
     public MaterialCobaltite() {
         super();
@@ -36,7 +38,7 @@ public class MaterialCobaltite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         //TODO Nether and Lava
-        CONFIG = new MineralConfig(18,60,1,-64,24,1000,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(18,60,1,-64,72,1200,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override

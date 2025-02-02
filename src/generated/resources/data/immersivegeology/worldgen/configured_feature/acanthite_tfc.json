@@ -174,8 +174,8 @@
         ]
       }
     ],
-    "density": 0.5,
-    "max_y": 128,
+    "density": 0.85,
+    "max_y": 212,
     "min_y": -64,
     "random_name": "acanthite_tfc",
     "rarity": 30,

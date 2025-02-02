@@ -14,7 +14,8 @@ public enum IGGenerationType
 {
 	DEFAULT(new GenerationDefaultNoise()),
 	BANDED(new GenerationBandedNoise()),
-	EVAPORATE(new GenerationDefaultNoise());
+	EVAPORATE(new GenerationDefaultNoise()),
+	TUBE(new GenerationTubedNoise());
 
 	final IGenerationPattern pattern;
 

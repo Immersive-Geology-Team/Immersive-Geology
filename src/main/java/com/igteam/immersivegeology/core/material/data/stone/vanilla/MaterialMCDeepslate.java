@@ -14,7 +14,7 @@ public class MaterialMCDeepslate extends MaterialStone {
     public MaterialMCDeepslate() {
         super();
         this.name = "deepslate"; // Special Case as we need to override the default name assignment method
-        this.STONE_FORMATION = StoneFormation.METAMORPHIC;
+        this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

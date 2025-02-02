@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
@@ -48,6 +49,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Biomes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -164,6 +166,15 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Supplier<MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
+		//Check biome before we even think about this.
+		if(!config.biomes.isEmpty())
+		{
+			if(level.getBiome(cursor).getTagKeys().noneMatch(b -> b.equals(config.biomes.get())))
+			{
+				return;
+			}
+		}
+
 		// Iterate over every block in the chunk
 		for (int x = -16; x < 32; x++) {         // Chunk local x with 1 chunk radius
 			for (int y = veinMinY; y < veinMaxY; y++) {
@@ -189,16 +200,21 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 						}
 					}
 					MaterialHelper useMaterial = parentMaterial.instance();
-					if(useFriendMaterials)
-					{
-						useMaterial = getFriendMaterial(random, friends);
-					}
 
 					float distance_from_centre_as_percentage = (float) (cursor.distToCenterSqr(veinCenter.getX(), veinCenter.getY(), veinCenter.getZ()) / chunkOrigin.distSqr(chunkOrigin.offset(32,vein.pos.getY(),32)));
 					float passRate = (float) (config.getDensity() * (1 - distance_from_centre_as_percentage));
 					// Custom logic for ore placement
 					if (shouldPlaceOre(noiseValue, vein, config) && random.nextFloat() > passRate) {
+						if(useFriendMaterials)
+						{
+							useMaterial = getFriendMaterial(random, friends);
+						}
 						BlockState stoneState = level.getBlockState(cursor);
+						if(config.biomes.stream().anyMatch(Biomes.IS_HOT::equals))
+						{
+
+						}
+						if(stoneState.is(Blocks.AIR)) continue;
 						BlockState oreState = config.getStateToGenerate(stoneState, random, noiseValue, useMaterial);
 						if (oreState != null) {
 							if(oreState.getBlock() instanceof IGWeatheringOreBlock) oreState = oxidizeExposed(level, cursor, oreState);
@@ -307,11 +323,28 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, double noiseValue, MaterialHelper mineral)
 		{
 			TagMatchTest validStone = new TagMatchTest(Tags.Blocks.STONE);
-			if(!validStone.test(stoneState, random) &! stoneState.is(Blocks.DRIPSTONE_BLOCK) &! stoneState.is(Blocks.SANDSTONE)) return null;
-			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
+
+			if(stoneState.is(Blocks.DRIPSTONE_BLOCK) &! stoneState.is(Blocks.SANDSTONE)) return null;
+
+			StoneEnum stone = null;
+
+			if(stoneState.is(Blocks.NETHERRACK))
+			{
+				stone = StoneEnum.Netherrack;
+			}
+			if(stoneState.is(Blocks.BASALT))
+			{
+				stone = StoneEnum.MCBasalt;
+			}
+			if(stone == null)
+			{
+				stone = StoneEnum.selectWorldState(stoneState);
+			}
+
 			if(stone == null) {
 				return null;
 			}
+
 			if(!mineral.acceptableStoneType(stone.instance())) {
 				return null;
 			}

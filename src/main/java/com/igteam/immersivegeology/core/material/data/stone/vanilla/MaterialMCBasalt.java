@@ -13,7 +13,7 @@ public class MaterialMCBasalt extends MaterialStone {
     public MaterialMCBasalt() {
         super();
         this.name = "basalt"; // Special Case as we need to override the default name assignment method
-        this.STONE_FORMATION = StoneFormation.IGNEOUS_EXTRUSIVE;
+        this.STONE_FORMATION = StoneFormation.NETHER_STONE;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

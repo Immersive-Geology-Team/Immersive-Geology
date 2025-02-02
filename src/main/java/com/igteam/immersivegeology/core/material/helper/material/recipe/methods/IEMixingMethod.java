@@ -14,6 +14,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.MixerRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BallmillRecipeBuilder;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -43,20 +44,21 @@ public class IEMixingMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
+	public void create(IFlagType<?> input, TagKey<Fluid> input_fluid, int input_fluid_amount, Fluid slurryWith, int fluid_out_amount)
+	{
+		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
+		this.fluid_result = new FluidStack(slurryWith, fluid_out_amount);
+		this.input_fluid = input_fluid;
+		this.input = parentMaterial.getItemTag(input);
+		this.input_fluid_amount = input_fluid_amount;
+		this.energy = 1600;
+	}
+
 	public void create(TagKey<Item> input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
 		this.fluid_result = new FluidStack(parentMaterial.getFluid(BlockCategoryFlags.FLUID), fluid_out_amount);
 		this.input_fluid = input_fluid;
 		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
 		this.input = input;
-		this.input_fluid_amount = input_fluid_amount;
-		this.energy = 1600;
-	}
-
-	public void create(IFlagType<?> input, TagKey<Fluid> input_fluid, int input_fluid_amount, int fluid_out_amount) {
-		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
-		this.fluid_result = new FluidStack(parentMaterial.getFluid(BlockCategoryFlags.FLUID), fluid_out_amount);
-		this.input_fluid = input_fluid;
-		this.input = parentMaterial.getItemTag(input);
 		this.input_fluid_amount = input_fluid_amount;
 		this.energy = 1600;
 	}
@@ -97,4 +99,6 @@ public class IEMixingMethod extends IGRecipeMethod
 			return false;
 		}
 	}
+
+
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/deepslate",
+    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_fluorite_pristine"
+  }
+}

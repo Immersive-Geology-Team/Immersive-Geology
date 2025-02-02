@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
@@ -25,7 +26,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialChalcopyrite extends MaterialMineral {
+public class MaterialChalcopyrite extends MaterialSulphideMineral
+{
 
     public MaterialChalcopyrite() {
         super();
@@ -39,7 +41,7 @@ public class MaterialChalcopyrite extends MaterialMineral {
         addGenerationFriend(() -> MineralEnum.Chalcocite.instance(), 50);
 
         //TODO near Lava or nether
-        CONFIG = new MineralConfig(14,35,1,10,120,1000, 0.5,false, Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(14,35,1,-60,256,2000, 0.75,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

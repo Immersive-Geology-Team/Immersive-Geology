@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -30,7 +31,7 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
-public class MaterialAcanthite extends MaterialMineral {
+public class MaterialAcanthite extends MaterialSulphideMineral {
 
     public MaterialAcanthite() {
         super();
@@ -38,7 +39,7 @@ public class MaterialAcanthite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ItemCategoryFlags.SLAG);
-        CONFIG = new MineralConfig(24,30,1,-64,128,120,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override

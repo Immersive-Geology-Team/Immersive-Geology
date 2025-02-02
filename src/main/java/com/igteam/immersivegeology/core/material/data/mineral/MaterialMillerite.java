@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -16,14 +17,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-public class MaterialMillerite extends MaterialMineral {
+public class MaterialMillerite extends MaterialSulphideMineral
+{
 
     public MaterialMillerite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(17,20,2,0,120,400, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(17,20,2,-60,120,2000, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override

@@ -92,7 +92,6 @@ public class IGMineralTestingItem extends IGGenericItem
 			}
 		}
 
-
 		List<MaterialInterface<?>> found = queryMap.entrySet().stream()
 				.sorted(Map.Entry.<MaterialInterface<?>, Integer>comparingByValue().reversed())
 				.limit(3)

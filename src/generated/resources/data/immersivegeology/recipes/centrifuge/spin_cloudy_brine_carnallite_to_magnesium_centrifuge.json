@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:centrifuge",
+  "energy": 614400,
+  "fluid_input": {
+    "amount": 1000,
+    "tag": "forge:cloudy_brine_carnallite"
+  },
+  "item_output": {
+    "item": "minecraft:sand"
+  },
+  "primary_fluid_out": {
+    "amount": 1000,
+    "fluid": "immersivegeology:slurry_brine_carnallite"
+  },
+  "secondary_fluid_out": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "time": 1200
+}

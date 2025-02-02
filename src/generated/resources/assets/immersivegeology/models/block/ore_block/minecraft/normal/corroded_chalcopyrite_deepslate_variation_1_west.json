@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
+  "textures": {
+    "base": "minecraft:block/deepslate",
+    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcopyrite_corroded"
+  }
+}

@@ -5,7 +5,9 @@ import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
@@ -22,7 +24,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialPyrite extends MaterialMineral {
+public class MaterialPyrite extends MaterialSulphideMineral
+{
 
     public MaterialPyrite() {
         super();
@@ -30,8 +33,11 @@ public class MaterialPyrite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
+        setAsocialMaterialChance(1f);
+        addGenerationFriend(() -> MineralEnum.Chalcopyrite.instance(), 50);
+
         // TODO Banished to the Nether and Lava! ~UnSchtalch
-        CONFIG = new MineralConfig(12,30,3,-64,112,900, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(12,30,3,-64,112,900, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

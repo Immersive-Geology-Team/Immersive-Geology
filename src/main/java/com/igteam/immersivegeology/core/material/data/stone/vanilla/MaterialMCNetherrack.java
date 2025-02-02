@@ -13,7 +13,7 @@ public class MaterialMCNetherrack extends MaterialStone {
     public MaterialMCNetherrack() {
         super();
         this.name = "netherrack"; // Special Case as we need to override the default name assignment method
-        this.STONE_FORMATION = StoneFormation.METAMORPHIC;
+        this.STONE_FORMATION = StoneFormation.NETHER_STONE;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
     }
 

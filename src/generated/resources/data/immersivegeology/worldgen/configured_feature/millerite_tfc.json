@@ -62,7 +62,7 @@
     ],
     "density": 0.5,
     "max_y": 120,
-    "min_y": 0,
+    "min_y": -60,
     "random_name": "millerite_tfc",
     "rarity": 20,
     "size": 17

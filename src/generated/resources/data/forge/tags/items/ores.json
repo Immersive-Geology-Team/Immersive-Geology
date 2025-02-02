@@ -3,6 +3,9 @@
     "immersivegeology:poor_ore_block_copper_stone",
     "immersivegeology:normal_ore_block_copper_stone",
     "immersivegeology:rich_ore_block_copper_stone",
+    "immersivegeology:poor_ore_block_copper_deepslate",
+    "immersivegeology:normal_ore_block_copper_deepslate",
+    "immersivegeology:rich_ore_block_copper_deepslate",
     "immersivegeology:poor_ore_block_copper_andesite",
     "immersivegeology:normal_ore_block_copper_andesite",
     "immersivegeology:rich_ore_block_copper_andesite",
@@ -24,6 +27,9 @@
     "immersivegeology:poor_ore_block_gold_stone",
     "immersivegeology:normal_ore_block_gold_stone",
     "immersivegeology:rich_ore_block_gold_stone",
+    "immersivegeology:poor_ore_block_gold_deepslate",
+    "immersivegeology:normal_ore_block_gold_deepslate",
+    "immersivegeology:rich_ore_block_gold_deepslate",
     "immersivegeology:poor_ore_block_gold_andesite",
     "immersivegeology:normal_ore_block_gold_andesite",
     "immersivegeology:rich_ore_block_gold_andesite",
@@ -213,6 +219,9 @@
     "immersivegeology:poor_ore_block_iron_stone",
     "immersivegeology:normal_ore_block_iron_stone",
     "immersivegeology:rich_ore_block_iron_stone",
+    "immersivegeology:poor_ore_block_iron_deepslate",
+    "immersivegeology:normal_ore_block_iron_deepslate",
+    "immersivegeology:rich_ore_block_iron_deepslate",
     "immersivegeology:poor_ore_block_iron_andesite",
     "immersivegeology:normal_ore_block_iron_andesite",
     "immersivegeology:rich_ore_block_iron_andesite",
@@ -402,6 +411,9 @@
     "immersivegeology:poor_ore_block_lead_stone",
     "immersivegeology:normal_ore_block_lead_stone",
     "immersivegeology:rich_ore_block_lead_stone",
+    "immersivegeology:poor_ore_block_lead_deepslate",
+    "immersivegeology:normal_ore_block_lead_deepslate",
+    "immersivegeology:rich_ore_block_lead_deepslate",
     "immersivegeology:poor_ore_block_lead_andesite",
     "immersivegeology:normal_ore_block_lead_andesite",
     "immersivegeology:rich_ore_block_lead_andesite",
@@ -735,6 +747,9 @@
     "immersivegeology:poor_ore_block_platinum_stone",
     "immersivegeology:normal_ore_block_platinum_stone",
     "immersivegeology:rich_ore_block_platinum_stone",
+    "immersivegeology:poor_ore_block_platinum_deepslate",
+    "immersivegeology:normal_ore_block_platinum_deepslate",
+    "immersivegeology:rich_ore_block_platinum_deepslate",
     "immersivegeology:poor_ore_block_platinum_andesite",
     "immersivegeology:normal_ore_block_platinum_andesite",
     "immersivegeology:rich_ore_block_platinum_andesite",
@@ -756,6 +771,9 @@
     "immersivegeology:poor_ore_block_silver_stone",
     "immersivegeology:normal_ore_block_silver_stone",
     "immersivegeology:rich_ore_block_silver_stone",
+    "immersivegeology:poor_ore_block_silver_deepslate",
+    "immersivegeology:normal_ore_block_silver_deepslate",
+    "immersivegeology:rich_ore_block_silver_deepslate",
     "immersivegeology:poor_ore_block_silver_andesite",
     "immersivegeology:normal_ore_block_silver_andesite",
     "immersivegeology:rich_ore_block_silver_andesite",
@@ -1137,9 +1155,9 @@
     "immersivegeology:poor_ore_block_anatase_basalt",
     "immersivegeology:normal_ore_block_anatase_basalt",
     "immersivegeology:rich_ore_block_anatase_basalt",
-    "immersivegeology:poor_ore_block_anatase_netherrack",
-    "immersivegeology:normal_ore_block_anatase_netherrack",
-    "immersivegeology:rich_ore_block_anatase_netherrack",
+    "immersivegeology:poor_ore_block_anatase_stone",
+    "immersivegeology:normal_ore_block_anatase_stone",
+    "immersivegeology:rich_ore_block_anatase_stone",
     "immersivegeology:poor_ore_block_anatase_stone",
     "immersivegeology:normal_ore_block_anatase_stone",
     "immersivegeology:rich_ore_block_anatase_stone",
@@ -1272,9 +1290,9 @@
     "immersivegeology:poor_ore_block_bauxite_stone",
     "immersivegeology:normal_ore_block_bauxite_stone",
     "immersivegeology:rich_ore_block_bauxite_stone",
-    "immersivegeology:poor_ore_block_bauxite_stone",
-    "immersivegeology:normal_ore_block_bauxite_stone",
-    "immersivegeology:rich_ore_block_bauxite_stone",
+    "immersivegeology:poor_ore_block_bauxite_deepslate",
+    "immersivegeology:normal_ore_block_bauxite_deepslate",
+    "immersivegeology:rich_ore_block_bauxite_deepslate",
     "immersivegeology:poor_ore_block_bauxite_stone",
     "immersivegeology:normal_ore_block_bauxite_stone",
     "immersivegeology:rich_ore_block_bauxite_stone",
@@ -1549,15 +1567,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_cassiterite_stone",
+      "id": "immersivegeology:poor_ore_block_cassiterite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_cassiterite_stone",
+      "id": "immersivegeology:normal_ore_block_cassiterite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_cassiterite_stone",
+      "id": "immersivegeology:rich_ore_block_cassiterite_deepslate",
       "required": false
     },
     {
@@ -1897,15 +1915,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_chalcocite_stone",
+      "id": "immersivegeology:poor_ore_block_chalcocite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_chalcocite_stone",
+      "id": "immersivegeology:normal_ore_block_chalcocite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_chalcocite_stone",
+      "id": "immersivegeology:rich_ore_block_chalcocite_deepslate",
       "required": false
     },
     {
@@ -1957,15 +1975,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_chalcocite_stone",
+      "id": "immersivegeology:poor_ore_block_chalcocite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_chalcocite_stone",
+      "id": "immersivegeology:normal_ore_block_chalcocite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_chalcocite_stone",
+      "id": "immersivegeology:rich_ore_block_chalcocite_netherrack",
       "required": false
     },
     {
@@ -2245,15 +2263,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:poor_ore_block_chalcopyrite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:normal_ore_block_chalcopyrite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:rich_ore_block_chalcopyrite_deepslate",
       "required": false
     },
     {
@@ -2305,15 +2323,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:poor_ore_block_chalcopyrite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:normal_ore_block_chalcopyrite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_chalcopyrite_stone",
+      "id": "immersivegeology:rich_ore_block_chalcopyrite_netherrack",
       "required": false
     },
     {
@@ -2499,9 +2517,9 @@
     "immersivegeology:poor_ore_block_chromite_stone",
     "immersivegeology:normal_ore_block_chromite_stone",
     "immersivegeology:rich_ore_block_chromite_stone",
-    "immersivegeology:poor_ore_block_chromite_netherrack",
-    "immersivegeology:normal_ore_block_chromite_netherrack",
-    "immersivegeology:rich_ore_block_chromite_netherrack",
+    "immersivegeology:poor_ore_block_chromite_stone",
+    "immersivegeology:normal_ore_block_chromite_stone",
+    "immersivegeology:rich_ore_block_chromite_stone",
     "immersivegeology:poor_ore_block_chromite_stone",
     "immersivegeology:normal_ore_block_chromite_stone",
     "immersivegeology:rich_ore_block_chromite_stone",
@@ -2929,15 +2947,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_cryolite_stone",
+      "id": "immersivegeology:poor_ore_block_cryolite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_cryolite_stone",
+      "id": "immersivegeology:normal_ore_block_cryolite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_cryolite_stone",
+      "id": "immersivegeology:rich_ore_block_cryolite_deepslate",
       "required": false
     },
     {
@@ -3186,9 +3204,9 @@
     "immersivegeology:poor_ore_block_cuprite_stone",
     "immersivegeology:normal_ore_block_cuprite_stone",
     "immersivegeology:rich_ore_block_cuprite_stone",
-    "immersivegeology:poor_ore_block_cuprite_stone",
-    "immersivegeology:normal_ore_block_cuprite_stone",
-    "immersivegeology:rich_ore_block_cuprite_stone",
+    "immersivegeology:poor_ore_block_cuprite_deepslate",
+    "immersivegeology:normal_ore_block_cuprite_deepslate",
+    "immersivegeology:rich_ore_block_cuprite_deepslate",
     "immersivegeology:poor_ore_block_cuprite_andesite",
     "immersivegeology:normal_ore_block_cuprite_andesite",
     "immersivegeology:rich_ore_block_cuprite_andesite",
@@ -3201,9 +3219,9 @@
     "immersivegeology:poor_ore_block_cuprite_basalt",
     "immersivegeology:normal_ore_block_cuprite_basalt",
     "immersivegeology:rich_ore_block_cuprite_basalt",
-    "immersivegeology:poor_ore_block_cuprite_stone",
-    "immersivegeology:normal_ore_block_cuprite_stone",
-    "immersivegeology:rich_ore_block_cuprite_stone",
+    "immersivegeology:poor_ore_block_cuprite_netherrack",
+    "immersivegeology:normal_ore_block_cuprite_netherrack",
+    "immersivegeology:rich_ore_block_cuprite_netherrack",
     "immersivegeology:poor_ore_block_cuprite_dripstone_block",
     "immersivegeology:normal_ore_block_cuprite_dripstone_block",
     "immersivegeology:rich_ore_block_cuprite_dripstone_block",
@@ -3336,9 +3354,9 @@
     "immersivegeology:poor_ore_block_fluorite_stone",
     "immersivegeology:normal_ore_block_fluorite_stone",
     "immersivegeology:rich_ore_block_fluorite_stone",
-    "immersivegeology:poor_ore_block_fluorite_stone",
-    "immersivegeology:normal_ore_block_fluorite_stone",
-    "immersivegeology:rich_ore_block_fluorite_stone",
+    "immersivegeology:poor_ore_block_fluorite_deepslate",
+    "immersivegeology:normal_ore_block_fluorite_deepslate",
+    "immersivegeology:rich_ore_block_fluorite_deepslate",
     "immersivegeology:poor_ore_block_fluorite_andesite",
     "immersivegeology:normal_ore_block_fluorite_andesite",
     "immersivegeology:rich_ore_block_fluorite_andesite",
@@ -3690,9 +3708,9 @@
     "immersivegeology:poor_ore_block_gypsum_stone",
     "immersivegeology:normal_ore_block_gypsum_stone",
     "immersivegeology:rich_ore_block_gypsum_stone",
-    "immersivegeology:poor_ore_block_gypsum_stone",
-    "immersivegeology:normal_ore_block_gypsum_stone",
-    "immersivegeology:rich_ore_block_gypsum_stone",
+    "immersivegeology:poor_ore_block_gypsum_deepslate",
+    "immersivegeology:normal_ore_block_gypsum_deepslate",
+    "immersivegeology:rich_ore_block_gypsum_deepslate",
     "immersivegeology:poor_ore_block_gypsum_stone",
     "immersivegeology:normal_ore_block_gypsum_stone",
     "immersivegeology:rich_ore_block_gypsum_stone",
@@ -3967,15 +3985,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_hematite_stone",
+      "id": "immersivegeology:poor_ore_block_hematite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_hematite_stone",
+      "id": "immersivegeology:normal_ore_block_hematite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_hematite_stone",
+      "id": "immersivegeology:rich_ore_block_hematite_deepslate",
       "required": false
     },
     {
@@ -4188,9 +4206,9 @@
     "immersivegeology:poor_ore_block_ilmenite_stone",
     "immersivegeology:normal_ore_block_ilmenite_stone",
     "immersivegeology:rich_ore_block_ilmenite_stone",
-    "immersivegeology:poor_ore_block_ilmenite_stone",
-    "immersivegeology:normal_ore_block_ilmenite_stone",
-    "immersivegeology:rich_ore_block_ilmenite_stone",
+    "immersivegeology:poor_ore_block_ilmenite_deepslate",
+    "immersivegeology:normal_ore_block_ilmenite_deepslate",
+    "immersivegeology:rich_ore_block_ilmenite_deepslate",
     "immersivegeology:poor_ore_block_ilmenite_andesite",
     "immersivegeology:normal_ore_block_ilmenite_andesite",
     "immersivegeology:rich_ore_block_ilmenite_andesite",
@@ -4465,15 +4483,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_magnetite_stone",
+      "id": "immersivegeology:poor_ore_block_magnetite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_magnetite_stone",
+      "id": "immersivegeology:normal_ore_block_magnetite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_magnetite_stone",
+      "id": "immersivegeology:rich_ore_block_magnetite_deepslate",
       "required": false
     },
     {
@@ -4953,9 +4971,9 @@
     "immersivegeology:poor_ore_block_monazite_stone",
     "immersivegeology:normal_ore_block_monazite_stone",
     "immersivegeology:rich_ore_block_monazite_stone",
-    "immersivegeology:poor_ore_block_monazite_stone",
-    "immersivegeology:normal_ore_block_monazite_stone",
-    "immersivegeology:rich_ore_block_monazite_stone",
+    "immersivegeology:poor_ore_block_monazite_deepslate",
+    "immersivegeology:normal_ore_block_monazite_deepslate",
+    "immersivegeology:rich_ore_block_monazite_deepslate",
     "immersivegeology:poor_ore_block_monazite_andesite",
     "immersivegeology:normal_ore_block_monazite_andesite",
     "immersivegeology:rich_ore_block_monazite_andesite",
@@ -5334,9 +5352,9 @@
     "immersivegeology:poor_ore_block_pyrolusite_stone",
     "immersivegeology:normal_ore_block_pyrolusite_stone",
     "immersivegeology:rich_ore_block_pyrolusite_stone",
-    "immersivegeology:poor_ore_block_pyrolusite_stone",
-    "immersivegeology:normal_ore_block_pyrolusite_stone",
-    "immersivegeology:rich_ore_block_pyrolusite_stone",
+    "immersivegeology:poor_ore_block_pyrolusite_deepslate",
+    "immersivegeology:normal_ore_block_pyrolusite_deepslate",
+    "immersivegeology:rich_ore_block_pyrolusite_deepslate",
     "immersivegeology:poor_ore_block_pyrolusite_stone",
     "immersivegeology:normal_ore_block_pyrolusite_stone",
     "immersivegeology:rich_ore_block_pyrolusite_stone",
@@ -5511,9 +5529,9 @@
     "immersivegeology:poor_ore_block_scheelite_stone",
     "immersivegeology:normal_ore_block_scheelite_stone",
     "immersivegeology:rich_ore_block_scheelite_stone",
-    "immersivegeology:poor_ore_block_scheelite_stone",
-    "immersivegeology:normal_ore_block_scheelite_stone",
-    "immersivegeology:rich_ore_block_scheelite_stone",
+    "immersivegeology:poor_ore_block_scheelite_deepslate",
+    "immersivegeology:normal_ore_block_scheelite_deepslate",
+    "immersivegeology:rich_ore_block_scheelite_deepslate",
     "immersivegeology:poor_ore_block_scheelite_stone",
     "immersivegeology:normal_ore_block_scheelite_stone",
     "immersivegeology:rich_ore_block_scheelite_stone",
@@ -5661,9 +5679,9 @@
     "immersivegeology:poor_ore_block_smithsonite_stone",
     "immersivegeology:normal_ore_block_smithsonite_stone",
     "immersivegeology:rich_ore_block_smithsonite_stone",
-    "immersivegeology:poor_ore_block_smithsonite_stone",
-    "immersivegeology:normal_ore_block_smithsonite_stone",
-    "immersivegeology:rich_ore_block_smithsonite_stone",
+    "immersivegeology:poor_ore_block_smithsonite_deepslate",
+    "immersivegeology:normal_ore_block_smithsonite_deepslate",
+    "immersivegeology:rich_ore_block_smithsonite_deepslate",
     "immersivegeology:poor_ore_block_smithsonite_stone",
     "immersivegeology:normal_ore_block_smithsonite_stone",
     "immersivegeology:rich_ore_block_smithsonite_stone",
@@ -5938,15 +5956,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_sphalerite_stone",
+      "id": "immersivegeology:poor_ore_block_sphalerite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_sphalerite_stone",
+      "id": "immersivegeology:normal_ore_block_sphalerite_deepslate",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_sphalerite_stone",
+      "id": "immersivegeology:rich_ore_block_sphalerite_deepslate",
       "required": false
     },
     {
@@ -5998,15 +6016,15 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_sphalerite_stone",
+      "id": "immersivegeology:poor_ore_block_sphalerite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:normal_ore_block_sphalerite_stone",
+      "id": "immersivegeology:normal_ore_block_sphalerite_netherrack",
       "required": false
     },
     {
-      "id": "immersivegeology:rich_ore_block_sphalerite_stone",
+      "id": "immersivegeology:rich_ore_block_sphalerite_netherrack",
       "required": false
     },
     {
@@ -6186,9 +6204,9 @@
     "immersivegeology:poor_ore_block_thorianite_stone",
     "immersivegeology:normal_ore_block_thorianite_stone",
     "immersivegeology:rich_ore_block_thorianite_stone",
-    "immersivegeology:poor_ore_block_thorianite_stone",
-    "immersivegeology:normal_ore_block_thorianite_stone",
-    "immersivegeology:rich_ore_block_thorianite_stone",
+    "immersivegeology:poor_ore_block_thorianite_deepslate",
+    "immersivegeology:normal_ore_block_thorianite_deepslate",
+    "immersivegeology:rich_ore_block_thorianite_deepslate",
     "immersivegeology:poor_ore_block_thorianite_stone",
     "immersivegeology:normal_ore_block_thorianite_stone",
     "immersivegeology:rich_ore_block_thorianite_stone",
@@ -6468,9 +6486,9 @@
     "immersivegeology:poor_ore_block_thorite_basalt",
     "immersivegeology:normal_ore_block_thorite_basalt",
     "immersivegeology:rich_ore_block_thorite_basalt",
-    "immersivegeology:poor_ore_block_thorite_netherrack",
-    "immersivegeology:normal_ore_block_thorite_netherrack",
-    "immersivegeology:rich_ore_block_thorite_netherrack",
+    "immersivegeology:poor_ore_block_thorite_stone",
+    "immersivegeology:normal_ore_block_thorite_stone",
+    "immersivegeology:rich_ore_block_thorite_stone",
     "immersivegeology:poor_ore_block_thorite_dripstone_block",
     "immersivegeology:normal_ore_block_thorite_dripstone_block",
     "immersivegeology:rich_ore_block_thorite_dripstone_block",
@@ -6567,9 +6585,9 @@
     "immersivegeology:poor_ore_block_millerite_stone",
     "immersivegeology:normal_ore_block_millerite_stone",
     "immersivegeology:rich_ore_block_millerite_stone",
-    "immersivegeology:poor_ore_block_millerite_stone",
-    "immersivegeology:normal_ore_block_millerite_stone",
-    "immersivegeology:rich_ore_block_millerite_stone",
+    "immersivegeology:poor_ore_block_millerite_deepslate",
+    "immersivegeology:normal_ore_block_millerite_deepslate",
+    "immersivegeology:rich_ore_block_millerite_deepslate",
     "immersivegeology:poor_ore_block_millerite_stone",
     "immersivegeology:normal_ore_block_millerite_stone",
     "immersivegeology:rich_ore_block_millerite_stone",
@@ -6582,9 +6600,9 @@
     "immersivegeology:poor_ore_block_millerite_stone",
     "immersivegeology:normal_ore_block_millerite_stone",
     "immersivegeology:rich_ore_block_millerite_stone",
-    "immersivegeology:poor_ore_block_millerite_stone",
-    "immersivegeology:normal_ore_block_millerite_stone",
-    "immersivegeology:rich_ore_block_millerite_stone",
+    "immersivegeology:poor_ore_block_millerite_netherrack",
+    "immersivegeology:normal_ore_block_millerite_netherrack",
+    "immersivegeology:rich_ore_block_millerite_netherrack",
     "immersivegeology:poor_ore_block_millerite_stone",
     "immersivegeology:normal_ore_block_millerite_stone",
     "immersivegeology:rich_ore_block_millerite_stone",
@@ -6750,9 +6768,9 @@
     "immersivegeology:poor_ore_block_unobtania_stone",
     "immersivegeology:normal_ore_block_unobtania_stone",
     "immersivegeology:rich_ore_block_unobtania_stone",
-    "immersivegeology:poor_ore_block_unobtania_netherrack",
-    "immersivegeology:normal_ore_block_unobtania_netherrack",
-    "immersivegeology:rich_ore_block_unobtania_netherrack",
+    "immersivegeology:poor_ore_block_unobtania_stone",
+    "immersivegeology:normal_ore_block_unobtania_stone",
+    "immersivegeology:rich_ore_block_unobtania_stone",
     "immersivegeology:poor_ore_block_unobtania_stone",
     "immersivegeology:normal_ore_block_unobtania_stone",
     "immersivegeology:rich_ore_block_unobtania_stone",
@@ -6849,9 +6867,9 @@
     "immersivegeology:poor_ore_block_uraninite_stone",
     "immersivegeology:normal_ore_block_uraninite_stone",
     "immersivegeology:rich_ore_block_uraninite_stone",
-    "immersivegeology:poor_ore_block_uraninite_stone",
-    "immersivegeology:normal_ore_block_uraninite_stone",
-    "immersivegeology:rich_ore_block_uraninite_stone",
+    "immersivegeology:poor_ore_block_uraninite_deepslate",
+    "immersivegeology:normal_ore_block_uraninite_deepslate",
+    "immersivegeology:rich_ore_block_uraninite_deepslate",
     "immersivegeology:poor_ore_block_uraninite_stone",
     "immersivegeology:normal_ore_block_uraninite_stone",
     "immersivegeology:rich_ore_block_uraninite_stone",
@@ -7026,9 +7044,9 @@
     "immersivegeology:poor_ore_block_vanadinite_stone",
     "immersivegeology:normal_ore_block_vanadinite_stone",
     "immersivegeology:rich_ore_block_vanadinite_stone",
-    "immersivegeology:poor_ore_block_vanadinite_stone",
-    "immersivegeology:normal_ore_block_vanadinite_stone",
-    "immersivegeology:rich_ore_block_vanadinite_stone",
+    "immersivegeology:poor_ore_block_vanadinite_deepslate",
+    "immersivegeology:normal_ore_block_vanadinite_deepslate",
+    "immersivegeology:rich_ore_block_vanadinite_deepslate",
     "immersivegeology:poor_ore_block_vanadinite_stone",
     "immersivegeology:normal_ore_block_vanadinite_stone",
     "immersivegeology:rich_ore_block_vanadinite_stone",
@@ -7176,9 +7194,9 @@
     "immersivegeology:poor_ore_block_wolframite_stone",
     "immersivegeology:normal_ore_block_wolframite_stone",
     "immersivegeology:rich_ore_block_wolframite_stone",
-    "immersivegeology:poor_ore_block_wolframite_stone",
-    "immersivegeology:normal_ore_block_wolframite_stone",
-    "immersivegeology:rich_ore_block_wolframite_stone",
+    "immersivegeology:poor_ore_block_wolframite_deepslate",
+    "immersivegeology:normal_ore_block_wolframite_deepslate",
+    "immersivegeology:rich_ore_block_wolframite_deepslate",
     "immersivegeology:poor_ore_block_wolframite_andesite",
     "immersivegeology:normal_ore_block_wolframite_andesite",
     "immersivegeology:rich_ore_block_wolframite_andesite",
@@ -7290,9 +7308,9 @@
     "immersivegeology:poor_ore_block_zircon_stone",
     "immersivegeology:normal_ore_block_zircon_stone",
     "immersivegeology:rich_ore_block_zircon_stone",
-    "immersivegeology:poor_ore_block_zircon_stone",
-    "immersivegeology:normal_ore_block_zircon_stone",
-    "immersivegeology:rich_ore_block_zircon_stone",
+    "immersivegeology:poor_ore_block_zircon_deepslate",
+    "immersivegeology:normal_ore_block_zircon_deepslate",
+    "immersivegeology:rich_ore_block_zircon_deepslate",
     "immersivegeology:poor_ore_block_zircon_stone",
     "immersivegeology:normal_ore_block_zircon_stone",
     "immersivegeology:rich_ore_block_zircon_stone",
