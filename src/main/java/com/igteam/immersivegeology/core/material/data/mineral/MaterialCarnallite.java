@@ -32,6 +32,13 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Magnesium, MetalEnum.Titanium));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Magnesium));
     }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+    }
+
 }

@@ -108,18 +108,28 @@ public interface MaterialHelper {
 
     default Fluid getFluid(BlockCategoryFlags flag, MaterialInterface<?> secondary)
     {
+        return getFluid(flag, secondary.instance());
+    }
+
+    default Fluid getFluid(BlockCategoryFlags flag, MaterialHelper secondary)
+    {
         if(flag == null)
         {
             flag = BlockCategoryFlags.SLURRY;
             IGLib.IG_LOGGER.warn("Null Flag Pass for slurry fluid getter, defaulting to SLURRY");
         }
 
-        String id = flag.getRegistryKey(this, secondary.instance());
+        String id = flag.getRegistryKey(this, secondary);
         if(getFluidRegistryMap().containsKey(id)){
             return IGRegistrationHolder.getFluid.apply(id);
         }
         IGLib.IG_LOGGER.warn("Unable to find Fluid/Slurry for material {}, {}", this, secondary);
         return Fluids.EMPTY;
+    }
+
+    default TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper helper)
+    {
+        return getFluidTag(type, helper);
     }
 
     default Item getItem(BlockCategoryFlags flag){

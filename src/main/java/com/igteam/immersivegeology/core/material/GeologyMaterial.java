@@ -275,6 +275,14 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
         Set<MaterialHelper> helpers = Arrays.stream(materials).map(MaterialInterface::instance).collect(Collectors.toSet());
+        return  getFluidTag(flag, helpers.toArray(new MaterialHelper[helpers.size()]));
+    }
+
+    @Nullable
+    public synchronized TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialHelper... materials)
+    {
+        if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
+        Set<MaterialHelper> helpers = Arrays.stream(materials).collect(Collectors.toSet());
 
         LinkedHashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
         LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Set.of(this));

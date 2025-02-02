@@ -10,9 +10,14 @@ package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
@@ -32,5 +37,24 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int maxSea = 72;
 
 		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,50, 0.5,true, Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
+	}
+
+	@Override
+	public void setupRecipeStages()
+	{
+		super.setupRecipeStages();
+
+		IGMethodBuilder.mixing(this, IGStageDesignation.PREPARATION).create(
+				ItemCategoryFlags.SEDIMENT, FluidTags.WATER, 64, ChemicalEnum.Brine.getCloudySlurryWith(this), 64);
+
+		IGMethodBuilder.mixing(this, IGStageDesignation.PREPARATION).create(
+				ItemCategoryFlags.CRYSTAL, FluidTags.WATER, 64, ChemicalEnum.Brine.getSlurryWith(this), 64);
+		//	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialInterface<?> output_material,
+		//	IFlagType<?> item_output_form,
+		//	int item_output_amount, Fluid primary_fluid_output,
+		//	int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+	/*	IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
+				ChemicalEnum.Brine.getCloudySlurryTagWith(this), 1000,
+		);*/
 	}
 }

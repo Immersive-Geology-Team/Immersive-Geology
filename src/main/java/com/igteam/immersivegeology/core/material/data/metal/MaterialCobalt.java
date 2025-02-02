@@ -42,7 +42,7 @@ public class MaterialCobalt extends MaterialMetal {
     {
         super.setupRecipeStages();
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
-                "slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                "slurry_"+getName() +"_to_" + getName() + "_crystal",
                 getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.NitricAcid.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.NitricAcid.getSlurryTagWith(MetalEnum.Cobalt), IGLib.SLURRY_TO_CRYSTAL_MB,

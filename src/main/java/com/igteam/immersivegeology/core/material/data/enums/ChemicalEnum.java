@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.enums;
 import com.igteam.immersivegeology.core.material.data.chemical.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -49,14 +50,29 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         return new FluidStack(getSlurryWith(metalEnum), amount);
     }
 
+    public Fluid getSlurryWith(MaterialHelper helper)
+    {
+        return material.getFluid(BlockCategoryFlags.SLURRY, helper);
+    }
+
     public TagKey<Fluid> getCloudySlurryTagWith(MaterialInterface<?> metalEnum)
     {
         return getFluidTag(BlockCategoryFlags.CLOUDY_SLURRY, metalEnum);
     }
 
+    public TagKey<Fluid> getCloudySlurryTagWith(MaterialHelper helper)
+    {
+        return getFluidTag(BlockCategoryFlags.CLOUDY_SLURRY, helper);
+    }
+
     public Fluid getCloudySlurryWith(MaterialInterface<?> metalEnum)
     {
         return material.getFluid(BlockCategoryFlags.CLOUDY_SLURRY, metalEnum);
+    }
+
+    public Fluid getCloudySlurryWith(MaterialHelper helper)
+    {
+        return material.getFluid(BlockCategoryFlags.SLURRY, helper);
     }
 
     public FluidStack getCloudySlurryWith(MaterialInterface<?> metalEnum, int amount)
@@ -68,6 +84,12 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     {
         return getFluidTag(type, material);
     }
+
+    public TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper helper)
+    {
+        return getFluidTag(type, helper);
+    }
+
 
     public TagKey<Fluid> getSlurryTagWith(MaterialInterface<?> material)
     {
