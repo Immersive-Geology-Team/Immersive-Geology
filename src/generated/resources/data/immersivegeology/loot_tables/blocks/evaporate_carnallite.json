@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "immersivegeology:crystal_carnallite"
+              "name": "immersivegeology:sediment_carnallite"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "immersivegeology:crystal_carnallite"
+              "name": "immersivegeology:sediment_carnallite"
             }
           ]
         }

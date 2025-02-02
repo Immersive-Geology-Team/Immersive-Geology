@@ -107,6 +107,6 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 
 	public ItemLike getItemDrop()
 	{
-		return getMaterial(MaterialTexture.base).getItem(ItemCategoryFlags.CRYSTAL);
+		return getMaterial(MaterialTexture.base).getItem(ItemCategoryFlags.SEDIMENT);
 	}
 }

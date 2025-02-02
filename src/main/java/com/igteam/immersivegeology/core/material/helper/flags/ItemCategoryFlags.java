@@ -31,7 +31,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     MECHANICAL_COMPONENT(1),
     HAMMER(4),
     MISC(4),
-    BLUEPRINT(4);
+    BLUEPRINT(4),
+    SEDIMENT(0);
 
     private final int groupOrdinal;
 

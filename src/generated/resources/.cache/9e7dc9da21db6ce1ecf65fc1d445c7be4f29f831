@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-31T19:30:40.201292052	Item Models: immersivegeology
+// 1.20.1	2025-02-02T22:18:58.437685561	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_bronze_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_chromium_fluid.json
@@ -1285,6 +1285,9 @@ a33aa9e3f96d1b494d7fab5b748a68fe9bb6beb2 assets/immersivegeology/models/item/rod
 ae6fcbfe711117409a06c400409e1bfbaa233023 assets/immersivegeology/models/item/scaffolding_tungsten_grate_top.json
 ca2f8136c1360c5012c08cb6b3fd154d4328e597 assets/immersivegeology/models/item/scaffolding_tungsten_standard.json
 a19c5052d4b80052979b0bf7af5a6dcc2fa14ae1 assets/immersivegeology/models/item/scaffolding_tungsten_wooden_top.json
+a44b2a23bda2b6e893d3b0d8bb8c429f02a5f867 assets/immersivegeology/models/item/sediment_carnallite.json
+a44b2a23bda2b6e893d3b0d8bb8c429f02a5f867 assets/immersivegeology/models/item/sediment_rocksalt.json
+a44b2a23bda2b6e893d3b0d8bb8c429f02a5f867 assets/immersivegeology/models/item/sediment_saltpeter.json
 96e2246f38b2d57d024c6adf156982040731abf3 assets/immersivegeology/models/item/sheetmetal_block_aluminum.json
 11193b446ffe1d8ccc096c107e26e0abb0346722 assets/immersivegeology/models/item/sheetmetal_block_bronze.json
 f54266293025b86cfa88e0e56b57204af0b58aa4 assets/immersivegeology/models/item/sheetmetal_block_chromium.json

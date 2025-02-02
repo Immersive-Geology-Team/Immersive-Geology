@@ -66,7 +66,9 @@
   "immersivegeology.gui.schematic_table.button_1": "Next Schematic",
   "immersivegeology.gui.schematic_table.mirror": "Mirrored",
 
+  "item.immersivegeology.prospector_pick": "Geologist Pick",
   "item.immersivegeology.metal_oxide": "%s Oxide",
+  "item.immersivegeology.sediment": "%s Sediment",
   "item.immersivegeology.dirty_crushed_ore": "Dirty Crushed %s Ore",
   "item.immersivegeology.crushed_ore": "Crushed %s Ore",
   "item.immersivegeology.cut_crystal": "Cut %s Crystal",

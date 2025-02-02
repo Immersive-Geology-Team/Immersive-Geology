@@ -24,7 +24,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 	public MaterialEvaporateMineral()
 	{
 		super();
-		addFlags(BlockCategoryFlags.EVAPORATE, BlockCategoryFlags.EVAPORATE_CRYSTAL, ItemCategoryFlags.CRYSTAL);
+		addFlags(BlockCategoryFlags.EVAPORATE, BlockCategoryFlags.EVAPORATE_CRYSTAL, ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.SEDIMENT);
 		removeMaterialFlags(ItemCategoryFlags.SLAG, ItemCategoryFlags.POWDERED_SLAG,
 				ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.POOR_ORE,ItemCategoryFlags.RICH_ORE,
 				ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.ORE_BLOCK);
