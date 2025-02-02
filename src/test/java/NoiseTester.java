@@ -1,4 +1,5 @@
 import com.igteam.immersivegeology.common.world.features.helper.GenerationBandedNoise;
+import com.igteam.immersivegeology.common.world.features.helper.GenerationTubedNoise;
 import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 
@@ -13,14 +14,15 @@ import java.util.List;
 public class NoiseTester {
 	public static void main(String[] args) {
 		// Generate the noise images and compile them into a .gif
-		new NoiseTester().generateGif();
+		new NoiseTester().generateGif(false);
+		new NoiseTester().generateGif(true);
 	}
 
 
-	public void generateGif() {
+	public void generateGif(boolean sliceY) {
 		// List to hold generated images
 		List<BufferedImage> images = new ArrayList<>();
-		IGenerationPattern handler = new GenerationBandedNoise();
+		IGenerationPattern handler = new GenerationTubedNoise();
 		// Example 3D noise generator (replace with your actual noise generator)
 		INoise3D noise = handler.getiNoise3D(4, 0);
 
@@ -30,7 +32,7 @@ public class NoiseTester {
 			for (int x = 0; x < 128; x++) {
 				for (int z = 0; z < 128; z++) {
 					// Get noise value between -1 and 1
-					float value = noise.noise(x, z, i);
+					float value = sliceY ? noise.noise(x, i, z) : noise.noise(x, z, i);
 
 					// Normalize value from [-1, 1] to [0, 255]
 					int grayValue = (int)(((value + 1) / 2) * 255);
@@ -49,7 +51,7 @@ public class NoiseTester {
 
 		// Save images as a GIF
 		try {
-			File outputGif = new File("output_noise.gif");
+			File outputGif = new File("output_noise_" + (sliceY ? "sliced_y" : "sliced_z") + ".gif");
 			createGif(images, outputGif);
 			System.out.println("GIF saved to: " + outputGif.getAbsolutePath());
 		} catch (IOException e) {

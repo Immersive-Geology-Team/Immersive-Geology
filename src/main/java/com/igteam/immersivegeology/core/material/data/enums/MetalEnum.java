@@ -19,14 +19,12 @@ import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConfig
 {
@@ -111,6 +109,18 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public String getName()
     {
         return material.getName();
+    }
+
+    @Override
+    public double getAssociateMaterialChance()
+    {
+        return material.getAssociateMaterialChance();
+    }
+
+    @Override
+    public Set<Pair<MaterialHelper, Integer>> getAssociateMaterialSet()
+    {
+        return instance().getAssociateMaterialSet();
     }
 
     @Override

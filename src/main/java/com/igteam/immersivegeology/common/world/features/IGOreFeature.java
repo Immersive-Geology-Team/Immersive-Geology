@@ -17,8 +17,13 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -117,6 +122,28 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
 	}
 
+	private static MaterialHelper getFriendMaterial(RandomSource random, Set<Pair<MaterialHelper, Integer>> friends)
+	{
+		float totalWeight = 0;
+		// Calculate total weight
+		for (Pair<MaterialHelper, Integer> entry : friends) {
+			totalWeight += entry.getSecond();
+		}
+
+		// Get a random value in range [0, totalWeight)
+		float randomValue = random.nextFloat() * totalWeight;
+
+		// Iterate and select the weighted material
+		for (Pair<MaterialHelper, Integer> entry : friends) {
+			randomValue -= entry.getSecond();
+			if (randomValue <= 0) {
+				return entry.getFirst();
+			}
+		}
+
+		return null;
+	}
+
 	public static void placeVein(LevelAccessor level, RandomSource random, ChunkPos chunk, Vein vein, IGOreFeatureConfig config)
 	{
 		// Get the noise generator from the vein
@@ -131,6 +158,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		MutableBlockPos cursor = new MutableBlockPos();
 		int veinMinY = config.entry().getMinY();
 		int veinMaxY = config.entry().getMaxY();
+		double associateChance = config.getConfig().associateChance.get();
+		boolean useFriendMaterials = associateChance > random.nextDouble();
+		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
+		Set<Pair<MaterialHelper, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
 		// Iterate over every block in the chunk
 		for (int x = -16; x < 32; x++) {         // Chunk local x with 1 chunk radius
@@ -156,13 +187,18 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 							noiseValue *= 0.9;
 						}
 					}
+					MaterialHelper useMaterial = parentMaterial.instance();
+					if(useFriendMaterials)
+					{
+						useMaterial = getFriendMaterial(random, friends);
+					}
 
 					float distance_from_centre_as_percentage = (float) (cursor.distToCenterSqr(veinCenter.getX(), veinCenter.getY(), veinCenter.getZ()) / chunkOrigin.distSqr(chunkOrigin.offset(32,vein.pos.getY(),32)));
 					float passRate = (float) (config.getDensity() * (1 - distance_from_centre_as_percentage));
 					// Custom logic for ore placement
 					if (shouldPlaceOre(noiseValue, vein, config) && random.nextFloat() > passRate) {
 						BlockState stoneState = level.getBlockState(cursor);
-						BlockState oreState = config.getStateToGenerate(stoneState, random, config, noiseValue);
+						BlockState oreState = config.getStateToGenerate(stoneState, random, noiseValue, useMaterial);
 						if (oreState != null) {
 							if(oreState.getBlock() instanceof IGWeatheringOreBlock) oreState = oxidizeExposed(level, cursor, oreState);
 							level.setBlock(cursor, oreState, 3);
@@ -267,16 +303,15 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return this.entry;
 		}
 
-		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, IGOreFeatureConfig config, double noiseValue)
+		public BlockState getStateToGenerate(BlockState stoneState, RandomSource random, double noiseValue, MaterialHelper mineral)
 		{
-			IWorldGenConfig mineral = config.entry;
 			TagMatchTest validStone = new TagMatchTest(Tags.Blocks.STONE);
 			if(!validStone.test(stoneState, random) &! stoneState.is(Blocks.DRIPSTONE_BLOCK) &! stoneState.is(Blocks.SANDSTONE)) return null;
 			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
 			if(stone == null) {
 				return null;
 			}
-			if(!mineral.instance().acceptableStoneType(stone.instance())) {
+			if(!mineral.acceptableStoneType(stone.instance())) {
 				return null;
 			}
 

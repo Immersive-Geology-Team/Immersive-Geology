@@ -44,6 +44,10 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	}
 
 	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialInterface<?> output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+		create(input_fluid_tag, input_amount, output_material.instance(), item_output_form, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
+	}
+
+	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
 		this.name = create_advanced_method_name(item_output_form);
 		this.input = new FluidTagInput(input_fluid_tag, input_amount);
 		this.output = output_material.getStack(item_output_form, item_output_amount);
@@ -66,6 +70,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		this.time = time;
 		this.energy = energy;
 	}
+
 
 	@NotNull
 	@Override

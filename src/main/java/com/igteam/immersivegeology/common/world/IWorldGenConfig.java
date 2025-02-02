@@ -16,12 +16,16 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface IWorldGenConfig
 {
@@ -72,4 +76,8 @@ public interface IWorldGenConfig
 	String getName();
 
 	default IGGenerationType getGenerationType() {return IGGenerationType.DEFAULT;};
+
+	double getAssociateMaterialChance();
+
+	Set<Pair<MaterialHelper, Integer>> getAssociateMaterialSet();
 }

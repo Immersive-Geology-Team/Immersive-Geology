@@ -61,6 +61,16 @@ public class IEMixingMethod extends IGRecipeMethod
 		this.energy = 1600;
 	}
 
+	public void create(IFlagType<?> input, TagKey<Fluid> input_fluid, int input_fluid_amount, Fluid fluid_result, int fluid_out_amount) {
+		this.name = create_basic_method_name(BlockCategoryFlags.FLUID);
+		this.fluid_result = new FluidStack(fluid_result, fluid_out_amount);
+		this.input_fluid = input_fluid;
+		this.input = parentMaterial.getItemTag(input);
+		this.input_fluid_amount = input_fluid_amount;
+		this.energy = 1600;
+	}
+
+
 	@NotNull
 	@Override
 	public IGRecipeMethod.RecipeMethod getMethod()

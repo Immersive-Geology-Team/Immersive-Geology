@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -108,13 +109,18 @@ public interface MaterialHelper {
 
     default Fluid getFluid(BlockCategoryFlags flag, MaterialInterface<?> secondary)
     {
+        return getFluid(flag, secondary.instance());
+    }
+
+    default Fluid getFluid(BlockCategoryFlags flag, MaterialHelper secondary)
+    {
         if(flag == null)
         {
             flag = BlockCategoryFlags.SLURRY;
             IGLib.IG_LOGGER.warn("Null Flag Pass for slurry fluid getter, defaulting to SLURRY");
         }
 
-        String id = flag.getRegistryKey(this, secondary.instance());
+        String id = flag.getRegistryKey(this, secondary);
         if(getFluidRegistryMap().containsKey(id)){
             return IGRegistrationHolder.getFluid.apply(id);
         }
@@ -262,4 +268,6 @@ public interface MaterialHelper {
     default ScaffoldingHelper getScaffoldingBlock() {
         return new ScaffoldingHelper(this);
     }
+
+    boolean acceptableStoneType(MaterialStone instance);
 }

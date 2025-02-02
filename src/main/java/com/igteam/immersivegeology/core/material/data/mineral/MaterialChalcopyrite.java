@@ -4,6 +4,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -32,6 +33,11 @@ public class MaterialChalcopyrite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+
+        setAsocialMaterialChance(1f);
+        addGenerationFriend(MineralEnum.Pyrite, 50);
+        addGenerationFriend(MineralEnum.Chalcocite, 50);
+
         //TODO near Lava or nether
         CONFIG = new MineralConfig(14,35,1,10,120,1000, 0.5,false, Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
     }

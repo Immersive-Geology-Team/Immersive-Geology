@@ -220,6 +220,7 @@ public class IGServerConfig
 		{
 
 			public final ForgeConfigSpec.DoubleValue density;
+			public final ForgeConfigSpec.DoubleValue associateChance;
 			public final ForgeConfigSpec.IntValue veinSize;
 			public final ForgeConfigSpec.IntValue minY;
 			public final ForgeConfigSpec.IntValue maxY;
@@ -241,6 +242,7 @@ public class IGServerConfig
 				this.rarity = builder.comment("Controls ore quality distribution. Lower values favor richer ores, while higher values increase the likelihood of poorer ores. 50 is balanced.").defineInRange("rarity",mineral.rarity(), 0, 100);
 				this.useSparsePlacement = builder.comment("If enabled, mineral vein will only have a chance to spawn once every [16] chunks on average, inplace of every chunk.").define("useSparsePlacement", mineral.useSparsePlacement());
 				this.generationPattern = builder.comment("The type of generation that is used for this mineral").defineEnum("generationPattern", mineral.getGenerationType());
+				this.associateChance = builder.comment("The chance that this material will generate with any additional 'friend' materials").defineInRange("associateChance", mineral.getAssociateMaterialChance(), 0.0f, 1.0f);
 				builder.pop();
 			}
 		}

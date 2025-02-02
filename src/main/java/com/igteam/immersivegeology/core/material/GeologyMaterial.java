@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
@@ -42,6 +43,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
+    Set<Pair<MaterialHelper, Integer>> generation_group = new HashSet<>();
     private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();
 
     public GeologyMaterial() {
@@ -50,6 +52,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
         String classNameNormal = this.getClass().getName();
         this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
+
+        this.generation_group.add(Pair.of(this, 100));
 
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
@@ -341,5 +345,31 @@ public abstract class GeologyMaterial implements MaterialHelper {
         }
         List<MaterialInterface<?>> list = set.stream().toList();
         return list.get(index);
+    }
+
+    private float asocialMaterialChance = 1f;
+    public void setAsocialMaterialChance(float chance)
+    {
+        asocialMaterialChance = chance;
+    }
+
+    public float getAssociateMaterialChance()
+    {
+        return asocialMaterialChance;
+    }
+
+    public void addGenerationFriend(MaterialHelper material, int chance)
+    {
+        generation_group.add(Pair.of(material, chance));
+    }
+
+    public void addGenerationFriend(MaterialInterface<?> material, int chance)
+    {
+        generation_group.add(Pair.of(material.instance(), chance));
+    }
+
+    public Set<Pair<MaterialHelper, Integer>> getAssociateMaterialSet()
+    {
+        return generation_group;
     }
 }

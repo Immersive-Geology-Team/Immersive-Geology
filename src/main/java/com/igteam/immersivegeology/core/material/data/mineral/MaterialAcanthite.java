@@ -99,7 +99,5 @@ public class MaterialAcanthite extends MaterialMineral {
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Lead, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Acanthite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
                 300, 38400);
-
-
     }
 }

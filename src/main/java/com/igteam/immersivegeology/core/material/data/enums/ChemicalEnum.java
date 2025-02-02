@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.enums;
 import com.igteam.immersivegeology.core.material.data.chemical.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -42,6 +43,11 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     public Fluid getSlurryWith(MaterialInterface<?> metalEnum)
     {
         return material.getFluid(BlockCategoryFlags.SLURRY, metalEnum);
+    }
+
+    public Fluid getSlurryWith(MaterialHelper helper)
+    {
+        return material.getFluid(BlockCategoryFlags.SLURRY, helper);
     }
 
     public FluidStack getSlurryWith(MaterialInterface<?> metalEnum, int amount)
