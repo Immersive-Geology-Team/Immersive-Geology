@@ -13,7 +13,9 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BallmillRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CentrifugeRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
@@ -22,6 +24,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -48,9 +51,14 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	}
 
 	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
-		this.name = create_advanced_method_name(item_output_form);
+		Item item = item_output_form instanceof ItemCategoryFlags ? output_material.getItem((ItemCategoryFlags) item_output_form) : output_material.getItem((BlockCategoryFlags) item_output_form);
+		create(input_fluid_tag, input_amount, output_material, item, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
+	}
+
+	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, Item output_item, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+		this.name = input_fluid_tag.toString().toLowerCase() + "_to_" + output_material.getProductionMaterial().getName() + "_centrifuge";
 		this.input = new FluidTagInput(input_fluid_tag, input_amount);
-		this.output = output_material.getStack(item_output_form, item_output_amount);
+		this.output = new ItemStack(output_item, item_output_amount);
 		if (primary_fluid_output == null)
 		{
 			this.primary_out = FluidStack.EMPTY;
