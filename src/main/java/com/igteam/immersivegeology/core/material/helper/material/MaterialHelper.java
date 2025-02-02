@@ -133,7 +133,7 @@ public interface MaterialHelper {
     default TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper... helper)
     {
         return getFluidTag(type, helper);
-    }*/
+    }
 
     default Item getItem(BlockCategoryFlags flag){
         return this.getBlock(flag).asItem();

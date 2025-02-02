@@ -8,8 +8,17 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.BiFunction;
 
@@ -22,6 +31,25 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
 		return ((p, i) -> (0xc1fffa));
+	}
+
+	@Override
+	public void setupRecipeStages()
+	{
+		super.setupRecipeStages();
+		/*
+			public void create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn,
+			FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+
+		 */
+		IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
+				MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST),
+				ChemicalEnum.NitricAcid.getFluidStack(125),
+				IngredientWithSize.of(ItemStack.EMPTY),
+				new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
+				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+				null,
+				200, 51200);
 	}
 
 }
