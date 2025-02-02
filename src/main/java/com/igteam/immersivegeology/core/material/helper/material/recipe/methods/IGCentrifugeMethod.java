@@ -77,7 +77,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		}
 		else
 		{
-			this.secondary_out = new FluidStack(secondary_fluid_output, primary_fluid_amount);
+			this.secondary_out = new FluidStack(secondary_fluid_output, secondary_fluid_amount);
 		}
 		this.time = time;
 		this.energy = energy;

@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
@@ -49,12 +50,13 @@ public class MaterialEvaporateMineral extends MaterialMineral
 
 		IGMethodBuilder.mixing(this, IGStageDesignation.PREPARATION).create(
 				ItemCategoryFlags.CRYSTAL, FluidTags.WATER, 64, ChemicalEnum.Brine.getSlurryWith(this), 64);
-		//	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialInterface<?> output_material,
-		//	IFlagType<?> item_output_form,
-		//	int item_output_amount, Fluid primary_fluid_output,
-		//	int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
-	/*	IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
-				ChemicalEnum.Brine.getCloudySlurryTagWith(this), 1000,
-		);*/
+
+		IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
+			ChemicalEnum.Brine.getCloudySlurryTagWith(this), 1000,  this,Items.SAND, 1,
+				ChemicalEnum.Brine.getSlurryWith(this), 1000,
+				null, 0, 1200, 614400);
+
+
+
 	}
 }
