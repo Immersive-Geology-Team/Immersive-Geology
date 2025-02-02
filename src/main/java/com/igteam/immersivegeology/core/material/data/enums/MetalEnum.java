@@ -25,6 +25,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConfig
 {
@@ -118,7 +119,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     }
 
     @Override
-    public Set<Pair<MaterialHelper, Integer>> getAssociateMaterialSet()
+    public Set<Pair<Supplier<MaterialHelper>, Integer>> getAssociateMaterialSet()
     {
         return instance().getAssociateMaterialSet();
     }

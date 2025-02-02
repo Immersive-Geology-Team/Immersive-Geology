@@ -55,11 +55,6 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         return new FluidStack(getSlurryWith(metalEnum), amount);
     }
 
-    public Fluid getSlurryWith(MaterialHelper helper)
-    {
-        return material.getFluid(BlockCategoryFlags.SLURRY, helper);
-    }
-
     public TagKey<Fluid> getCloudySlurryTagWith(MaterialInterface<?> metalEnum)
     {
         return getFluidTag(BlockCategoryFlags.CLOUDY_SLURRY, metalEnum);

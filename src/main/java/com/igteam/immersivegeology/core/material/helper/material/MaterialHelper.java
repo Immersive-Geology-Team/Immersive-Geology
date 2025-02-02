@@ -128,7 +128,9 @@ public interface MaterialHelper {
         return Fluids.EMPTY;
     }
 
-    default TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper helper)
+    TagKey<Fluid> getFluidTag(BlockCategoryFlags type, MaterialHelper... helper);
+
+    default TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper... helper)
     {
         return getFluidTag(type, helper);
     }

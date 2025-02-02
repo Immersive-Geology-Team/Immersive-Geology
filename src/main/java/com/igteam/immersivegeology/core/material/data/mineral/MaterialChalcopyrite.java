@@ -35,8 +35,8 @@ public class MaterialChalcopyrite extends MaterialMineral {
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
         setAsocialMaterialChance(1f);
-        addGenerationFriend(MineralEnum.Pyrite, 50);
-        addGenerationFriend(MineralEnum.Chalcocite, 50);
+        addGenerationFriend(() -> MineralEnum.Pyrite.instance(), 50);
+        addGenerationFriend(() -> MineralEnum.Chalcocite.instance(), 50);
 
         //TODO near Lava or nether
         CONFIG = new MineralConfig(14,35,1,10,120,1000, 0.5,false, Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);

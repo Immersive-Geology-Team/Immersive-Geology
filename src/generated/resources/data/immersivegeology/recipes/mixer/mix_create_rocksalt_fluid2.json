@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:mixer",
+  "energy": 1600,
+  "fluid": {
+    "amount": 64,
+    "tag": "minecraft:water"
+  },
+  "inputs": [
+    {
+      "tag": "forge:crystal/rocksalt"
+    }
+  ],
+  "result": {
+    "amount": 64,
+    "fluid": "immersivegeology:slurry_brine_rocksalt"
+  }
+}

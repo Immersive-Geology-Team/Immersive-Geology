@@ -56,7 +56,11 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	}
 
 	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, Item output_item, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
-		this.name = input_fluid_tag.toString().toLowerCase() + "_to_" + output_material.getProductionMaterial().getName() + "_centrifuge";
+
+		String tag_name = input_fluid_tag.toString().toLowerCase();
+		String serialized_tag_name = tag_name.substring(tag_name.lastIndexOf(":") + 1, tag_name.lastIndexOf("]"));
+
+		this.name = serialized_tag_name + "_to_" + output_material.getProductionMaterial().getName() + "_centrifuge";
 		this.input = new FluidTagInput(input_fluid_tag, input_amount);
 		this.output = new ItemStack(output_item, item_output_amount);
 		if (primary_fluid_output == null)
@@ -78,7 +82,6 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		this.time = time;
 		this.energy = energy;
 	}
-
 
 	@NotNull
 	@Override
