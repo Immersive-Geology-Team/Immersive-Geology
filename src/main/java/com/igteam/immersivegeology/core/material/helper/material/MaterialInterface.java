@@ -79,6 +79,8 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default TagKey<Fluid> getFluidTag() { return instance().getFluidTag();};
     @Nullable
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... extras) { return instance().getFluidTag(flag, extras);};
+    @Nullable
+    default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialHelper... extras) { return instance().getFluidTag(flag, extras);};
 
     default LinkedHashSet<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};
 
