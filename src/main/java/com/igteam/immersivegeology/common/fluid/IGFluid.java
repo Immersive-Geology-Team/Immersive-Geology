@@ -129,7 +129,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 				if(baseMaterial instanceof ChemicalEnum && overlayMaterial != null)
 				{
-					type = "slurry";
+					type = category.getName().toLowerCase();
 					materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
 					materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
 				} else {

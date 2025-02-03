@@ -347,7 +347,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private BlockModelBuilder buildOreBlockBase(String prefix, IGWeatheringOreBlock block, String suffix, String parent_name, MineralWeathering mineralWeathering, Direction direction)
     {
-        boolean isSedimentary = ((MaterialStone) block.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY);
+        boolean isSedimentary = ((MaterialStone) block.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures();
         BlockModelBuilder model = models().withExistingParent(
             new ResourceLocation(IGLib.MODID, "block/ore_block/" + prefix + "/" + block.getOreRichness().name().toLowerCase() + "/"+mineralWeathering.getSerializedName() + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_" + block.getMaterial(MaterialTexture.base).getName().toLowerCase() + "_variation_" + suffix +"_"+ direction.getName().toLowerCase()).getPath(),
             new ResourceLocation(IGLib.MODID, "block/base/"+parent_name+ (isSedimentary ? "_sedimentary" : "") + "/" +parent_name + "_" + direction));

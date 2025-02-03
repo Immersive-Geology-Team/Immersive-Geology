@@ -1,0 +1,24 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "forge:clean_brine_saltpeter"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "forge:sulfuricacid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "fluid": "immersivegeology:fluid_nitricacid"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_sodium"
+  },
+  "time": 200
+}

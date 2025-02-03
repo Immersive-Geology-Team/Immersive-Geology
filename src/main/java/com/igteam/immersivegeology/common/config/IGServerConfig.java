@@ -153,7 +153,6 @@ public class IGServerConfig
 
 		public static class EvaporateConfig
 		{
-
 			public final ForgeConfigSpec.DoubleValue density;
 			public final ForgeConfigSpec.IntValue veinSize;
 			public final ForgeConfigSpec.IntValue minY;
@@ -218,7 +217,7 @@ public class IGServerConfig
 
 		public static class OreConfig
 		{
-
+			public final ForgeConfigSpec.BooleanValue canSpawn;
 			public final ForgeConfigSpec.DoubleValue density;
 			public final ForgeConfigSpec.DoubleValue associateChance;
 			public final ForgeConfigSpec.IntValue veinSize;
@@ -233,6 +232,7 @@ public class IGServerConfig
 			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
 				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
+				this.canSpawn = builder.comment("Can this Mineral / Ore generate in world, if set to false this mineral will not spawn in world, unless a secondary mineral happens to include it as an assoicate mineral for spawning.").define("canSpawn", true);
 				this.density = builder.comment("how dense is the vein? 0 for all stone, 1 for all ore").defineInRange("density", 0.5, 0.0, 1.0);
 				this.veinSize = builder.comment("The maximum size of a vein. Set to 0 to disable generation").defineInRange("vein_size", mineral.getVeinSize(), 0, Integer.MAX_VALUE);
 				this.maxY = builder.comment("The maximum Y coordinate this ore can spawn at").defineInRange("max_y", mineral.getMaxY(), Integer.MIN_VALUE, Integer.MAX_VALUE);

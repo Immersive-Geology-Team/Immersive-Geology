@@ -1,14 +1,14 @@
 {
   "type": "immersivegeology:gravityseparator",
   "byproduct": {
-    "item": "immersivegeology:metal_oxide_silver"
+    "item": "immersivegeology:metal_oxide_platinum"
   },
   "byproduct_chance": 0.075,
   "input": {
     "tag": "forge:powdered_slag/galena"
   },
   "result": {
-    "item": "immersivegeology:metal_oxide_osmium"
+    "item": "immersivegeology:metal_oxide_silver"
   },
   "time": 200,
   "water": 1000

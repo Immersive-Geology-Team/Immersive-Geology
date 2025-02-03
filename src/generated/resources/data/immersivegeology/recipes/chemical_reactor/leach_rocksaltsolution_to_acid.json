@@ -2,15 +2,15 @@
   "type": "immersivegeology:chemical_reactor",
   "energy": 51200,
   "fluidInputA": {
-    "amount": 80,
+    "amount": 125,
     "tag": "forge:clean_brine_rocksalt"
   },
   "fluidInputB": {
-    "amount": 80,
+    "amount": 125,
     "tag": "forge:sulfuricacid"
   },
   "fluidResult": {
-    "amount": 80,
+    "amount": 125,
     "fluid": "immersivegeology:fluid_hydrochloricacid"
   },
   "itemInput": {

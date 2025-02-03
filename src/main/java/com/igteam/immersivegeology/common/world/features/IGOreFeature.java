@@ -15,6 +15,8 @@ import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.CodecHelper;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -68,14 +70,18 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	public boolean place(FeaturePlaceContext<IGOreFeatureConfig> ctx)
 	{
 		IGOreFeatureConfig config = ctx.config();
+		if(!config.canSpawn()) return false;
+
 		WorldGenLevel level = ctx.level();
 		BlockPos pos = ctx.origin();
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
 
-		if((random.nextInt(50000) < rConfig.generationChance.get()))
+		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
+		int chance_max = 50000;
+
+		if((random.nextInt(chance_max) < rConfig.generationChance.get()))
 		{
 			IGOreFeature.placeVein(level, random, chunkPos, createVein(random, rConfig, config.seed()), config);
 			return true;
@@ -86,8 +92,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	private static Vein createVein(RandomSource random, OreConfig config, long seed)
 	{
-		SimplexNoise3D simplex = new SimplexNoise3D(seed);
-
 		int FEATURE_SIZE = config.veinSize.get();
 		INoise3D noise = config.generationPattern.get().getPattern().getiNoise3D(FEATURE_SIZE, seed);
 		return new Vein(defaultPosRespectingHeight(random, config), random, noise);
@@ -166,14 +170,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Supplier<MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
-		//Check biome before we even think about this.
-		if(!config.biomes.isEmpty())
-		{
-			if(level.getBiome(cursor).getTagKeys().noneMatch(b -> b.equals(config.biomes.get())))
-			{
-				return;
-			}
-		}
+		boolean isTube = config.getConfig().generationPattern.get().equals(IGGenerationType.TUBE);
 
 		// Iterate over every block in the chunk
 		for (int x = -16; x < 32; x++) {         // Chunk local x with 1 chunk radius
@@ -201,7 +198,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					}
 					MaterialHelper useMaterial = parentMaterial.instance();
 
-					float distance_from_centre_as_percentage = (float) (cursor.distToCenterSqr(veinCenter.getX(), veinCenter.getY(), veinCenter.getZ()) / chunkOrigin.distSqr(chunkOrigin.offset(32,vein.pos.getY(),32)));
+					float distance_from_centre_as_percentage = (float) (cursor.distToCenterSqr(veinCenter.getX(), isTube ? 0 : veinCenter.getY(), veinCenter.getZ()) / chunkOrigin.distSqr(chunkOrigin.offset(32,isTube ? 0 : vein.pos.getY(),32)));
 					float passRate = (float) (config.getDensity() * (1 - distance_from_centre_as_percentage));
 					// Custom logic for ore placement
 					if (shouldPlaceOre(noiseValue, vein, config) && random.nextFloat() > passRate) {
@@ -390,6 +387,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		{
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.density.get();
+		}
+
+		public boolean canSpawn()
+		{
+			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
+			return config.canSpawn.get();
 		}
 	}
 

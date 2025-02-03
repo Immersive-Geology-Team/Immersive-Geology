@@ -28,7 +28,7 @@ public class MaterialSphalerite extends MaterialSulphideMineral
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
-        CONFIG = new MineralConfig(10,45,3,0,140,600, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(10,45,3,0,140,800, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override

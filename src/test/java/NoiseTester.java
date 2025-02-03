@@ -18,7 +18,6 @@ public class NoiseTester {
 		new NoiseTester().generateGif(true);
 	}
 
-
 	public void generateGif(boolean sliceY) {
 		// List to hold generated images
 		List<BufferedImage> images = new ArrayList<>();

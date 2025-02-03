@@ -1,5 +1,5 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
     "ore_south": "immersivegeology:block/greyscale/rock/vein/mineral/normal_2_chalcopyrite_corroded",
     "side": "minecraft:block/basalt_side",

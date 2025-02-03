@@ -187,6 +187,7 @@
   "fluid.immersivegeology.fluid_molten": "Molten %s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
+  "fluid.immersivegeology.cloudy_slurry": "Cloudy %s %s",
 
   "material.immersivegeology.vanilla": "Stone",
   "material.immersivegeology.sandstone": "Sandstone",
@@ -333,6 +334,7 @@
   "component.immersivegeology.chemicalwaste": "Waste Complex",
   "component.immersivegeology.ammoniasolution": "Amide",
   "component.immersivegeology.aquaregia": "Chloro",
+  "component.immersivegeology.brine": "Brine",
 
   "component.immersivegeology.gold": "auric",
   "component.immersivegeology.platinum": "platinous",
