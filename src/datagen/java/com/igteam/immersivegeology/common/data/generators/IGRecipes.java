@@ -19,6 +19,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBui
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import blusunrize.immersiveengineering.common.util.compat.crafttweaker.managers.BlueprintCraftingRecipeManager;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -166,6 +167,13 @@ public class IGRecipes extends RecipeProvider
 				.requires(MetalEnum.Bronze.getItemTag(ItemCategoryFlags.INGOT))
 				.requires(toolkit_0)
 				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_bronze_plate_with_bronze_hammer");
+
+		Item copper_plate = Metals.PLATES.get(EnumMetals.COPPER).asItem();
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, copper_plate)
+				.requires(Items.COPPER_INGOT)
+				.requires(toolkit_0)
+				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, "craft_copper_plate_with_bronze_hammer");
+
 
 		Item raw_fire_clay = IGRegistrationHolder.getItem.apply("raw_fire_clay");
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_fire_clay, 2)

@@ -98,7 +98,7 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-            ideaModule project.name + ".gametest"
+            ideaModule project.name + ".main"
             mods {
                 immersivegeology {
                     source sourceSets.main

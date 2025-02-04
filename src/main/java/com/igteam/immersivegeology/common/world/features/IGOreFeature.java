@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -77,9 +78,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-
-		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
 		int chance_max = 50000;
+		if(config.entry.instance().equals(MineralEnum.Unobtania.instance()))
+		{
+			chance_max = 1000000;
+		}
+		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
 
 		if((random.nextInt(chance_max) < rConfig.generationChance.get()))
 		{

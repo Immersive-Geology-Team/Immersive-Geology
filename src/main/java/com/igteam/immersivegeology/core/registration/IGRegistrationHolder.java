@@ -194,6 +194,7 @@ public class IGRegistrationHolder {
         bronze_mb.addAll(stone_mb);
         bronze_mb.add(IGReverberationFurnaceMultiblock.class);
         bronze_mb.add(BlastFurnaceMultiblock.class);
+        bronze_mb.add(CokeOvenMultiblock.class);
 
         steel_mb.addAll(bronze_mb);
         steel_mb.add(IGGravitySeparatorMultiblock.class);
