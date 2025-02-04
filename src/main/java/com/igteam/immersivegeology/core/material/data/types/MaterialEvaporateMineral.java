@@ -53,7 +53,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 
 		IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
 			ChemicalEnum.Brine.getCloudySlurryTagWith(this), 1000,  this,Items.SAND, 1,
-				ChemicalEnum.Brine.getSlurryWith(this), 1000,
+				ChemicalEnum.Brine.getSlurryWith(this), 976,
 				null, 0, 1200, 614400);
 
 

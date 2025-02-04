@@ -73,6 +73,69 @@ public class TFCCompatOreProvider implements DataProvider {
 		tfc_veins.addProperty("replace", false);
 		tfc_veins.add("values", entries);
 		elements.put(new ResourceLocation("tfc", "tags/worldgen/placed_feature/in_biome/veins"), () -> tfc_veins);
+
+		// --- New soil disc generation ---
+		// Define the list of state mappings for soil disc changes.
+		List<StateMapping> stateMappings = new ArrayList<>();
+		stateMappings.add(new StateMapping("tfc:dirt/sandy_loam", MineralEnum.Carnallite.getBlock(BlockCategoryFlags.EVAPORATE).getDescriptionId()));
+		stateMappings.add(new StateMapping("tfc:dirt/silty_loam", "tfc:clay/silty_loam"));
+		stateMappings.add(new StateMapping("tfc:grass/sandy_loam", "tfc:clay_grass/sandy_loam"));
+
+		// Define parameters for the soil disc feature.
+		int minRadius = 3;
+		int maxRadius = 5;
+		int height = 3;
+		// You can change "soil_disc_example" to any identifier you wish.
+		generateSoilDisc("soil_disc_example", minRadius, maxRadius, height, stateMappings);
+	}
+
+	// --- New soil disc generation method ---
+	/**
+	 * Generates a JSON file for a soil disc feature.
+	 *
+	 * @param name         The name (used in the file path and as an identifier).
+	 * @param minRadius    Minimum radius for the disc.
+	 * @param maxRadius    Maximum radius for the disc.
+	 * @param height       Height of the disc.
+	 * @param stateMapping A list of state mappings, each with a "replace" and "with" value.
+	 */
+	public void generateSoilDisc(String name, int minRadius, int maxRadius, int height, List<StateMapping> stateMapping) {
+		JsonObject root = new JsonObject();
+
+		// Optional comment (note that comments in JSON are not officially supported
+		// but some parsers ignore them)
+		root.addProperty("__comment__", "This file was automatically created by mcresources");
+		root.addProperty("type", "tfc:soil_disc");
+
+		JsonObject config = new JsonObject();
+		config.addProperty("min_radius", minRadius);
+		config.addProperty("max_radius", maxRadius);
+		config.addProperty("height", height);
+
+		JsonArray states = new JsonArray();
+		for (StateMapping mapping : stateMapping) {
+			JsonObject stateObj = new JsonObject();
+			stateObj.addProperty("replace", mapping.replace);
+			stateObj.addProperty("with", mapping.with);
+			states.add(stateObj);
+		}
+		config.add("states", states);
+		root.add("config", config);
+
+		// Save the generated JSON file under an appropriate path.
+		// Replace "immersivegeology" with your mod namespace if needed.
+		elements.put(new ResourceLocation("immersivegeology", "worldgen/soil_disc/" + name), () -> root);
+	}
+
+	// --- Helper class for state mapping ---
+	private static class StateMapping {
+		public final String replace;
+		public final String with;
+
+		public StateMapping(String replace, String with) {
+			this.replace = replace;
+			this.with = with;
+		}
 	}
 
 	// Updated generateVein method using MineralEnum

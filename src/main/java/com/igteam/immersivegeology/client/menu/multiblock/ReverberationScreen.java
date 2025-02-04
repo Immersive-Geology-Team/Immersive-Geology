@@ -29,6 +29,7 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceM
 	public ReverberationScreen(ReverberationFurnaceMenu inventorySlotsIn, Inventory inv, Component title)
 	{
 		super(inventorySlotsIn, inv, title, TEXTURE);
+
 	}
 
 	@Override

@@ -9,7 +9,7 @@
     "item": "minecraft:sand"
   },
   "primary_fluid_out": {
-    "amount": 1000,
+    "amount": 976,
     "fluid": "immersivegeology:slurry_brine_carnallite"
   },
   "secondary_fluid_out": {

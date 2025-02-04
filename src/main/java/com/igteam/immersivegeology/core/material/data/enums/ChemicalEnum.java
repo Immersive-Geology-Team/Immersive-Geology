@@ -72,7 +72,7 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
 
     public Fluid getCloudySlurryWith(MaterialHelper helper)
     {
-        return material.getFluid(BlockCategoryFlags.SLURRY, helper);
+        return material.getFluid(BlockCategoryFlags.CLOUDY_SLURRY, helper);
     }
 
     public FluidStack getCloudySlurryWith(MaterialInterface<?> metalEnum, int amount)

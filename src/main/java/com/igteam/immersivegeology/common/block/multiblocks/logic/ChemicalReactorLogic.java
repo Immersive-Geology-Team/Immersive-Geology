@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
@@ -31,6 +32,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Multibl
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor.InMachineProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
@@ -115,24 +117,50 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	public void tickServer(IMultiblockContext<State> ctx)
 	{
 		State state = ctx.getState();
+
+		insertRecipeToProcess(state, ctx);
+
 		state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
-		insertRecipeToProcess(state, ctx.getLevel());
 
 		if(state.tanks.output.getFluid().getAmount() > 0)
 		{
 			drainOutputTank(state, ctx, state.fluidOutput);
 		}
 
-		ctx.markDirtyAndSync();
+		if(!state.rsState.isEnabled(ctx))
+		{
+			// If we have no valid recipe, we attempt to 'output' the items in the input inventory, just in case the user put wrong items for a recipe in.
+			// E.G wanted to switch recipe without pumping fluid out.
+			ItemStack itemStack = state.inventory.getStackInSlot(0);
+			if(!itemStack.isEmpty() && state.processor.getQueue().stream().noneMatch((q) ->
+			{
+				ChemicalRecipe rec = q.getRecipe(ctx.getLevel().getRawLevel());
+				if(rec != null) return rec.itemInput.testIgnoringSize(itemStack);
+				return true;
+			}))
+			{
+				ItemStack stack = Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), true);
+				if(stack.isEmpty())
+				{
+					Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), false);
+					itemStack.shrink(1);
+				}
+			}
+		}
+
+		ctx.requestMasterBESync();
 	}
 
-	private static void insertRecipeToProcess(State state, IMultiblockLevel level)
+	private static void insertRecipeToProcess(State state, IMultiblockContext<State>  ctx)
 	{
+		IMultiblockLevel mbLevel = ctx.getLevel();
+		Level level = mbLevel.getRawLevel();
 		ChemicalReactorTanks fluidTanks = state.tanks;
-		ChemicalRecipe recipe = state.getRecipeForInputs(level.getRawLevel());
+		ChemicalRecipe recipe = state.getRecipeForInputs(level);
 		if(recipe!=null)
 		{
 			MultiblockProcessInMachine<ChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0);
+			process.setInputAmounts(recipe.itemInput.getCount());
 			int size = (fluidTanks.leftInput.isEmpty()?0: 1)
 					+(fluidTanks.backInput.isEmpty()?0: 1)
 					+(fluidTanks.rightInput.isEmpty()?0: 1);
@@ -143,22 +171,31 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			if(!fluidTanks.leftInput.isEmpty()) intArray[index++] = 0;
 			if(!fluidTanks.backInput.isEmpty()) intArray[index++] = 1;
 			if(!fluidTanks.rightInput.isEmpty()) intArray[index] = 2;
+			ItemStack inputStack = state.inventory.getStackInSlot(0).copy();
+			int recipeInputRequirements = 0;
+			List<MultiblockProcess<ChemicalRecipe, ProcessContextInMachine<ChemicalRecipe>>> processQueue = state.processor.getQueue();
 
-			process.setInputTanks(intArray);
-			state.processor.addProcessToQueue(process, level.getRawLevel(), false);
-		}
-		if(!state.inventory.getStackInSlot(1).isEmpty()){
-			state.processOutput(state.inventory.getStackInSlot(1), level);
-		}
-
-		ItemStack itemStack = state.inventory.getStackInSlot(0);
-		if(!itemStack.isEmpty() && state.processor.getQueue().stream().noneMatch((q) -> state.additionalCanProcessCheck(q, level.getRawLevel())))
-		{
-			ItemStack stack = Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), true);
-			if(stack.isEmpty())
+			for(MultiblockProcess<ChemicalRecipe, ProcessContextInMachine<ChemicalRecipe>> p : processQueue)
 			{
-				Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), false);
-				itemStack.shrink(1);
+				ChemicalRecipe checkRecipe = p.getRecipe(level);
+				if(checkRecipe == null) continue;
+				IngredientWithSize input = checkRecipe.itemInput;
+				if(input.testIgnoringSize(inputStack))
+				{
+					recipeInputRequirements += input.getCount();
+				}
+			}
+
+			boolean hasInputForNewRecipe = inputStack.getCount() >= (recipeInputRequirements + recipe.itemInput.getCount());
+
+			if(hasInputForNewRecipe)
+			{
+				process.setInputTanks(intArray);
+				if(state.processor.addProcessToQueue(process, level, true))
+				{
+					state.processor.addProcessToQueue(process, level, false);
+					ctx.markMasterDirty();
+				}
 			}
 		}
 	}
@@ -237,6 +274,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	@Override
 	public List<Component> getOverlayText(State state, Player player, IMultiblockBEHelper<ChemicalReactorLogic.State> helper)
 	{
+		if(state == null) return List.of();
 
 		BlockPos posInMultiblock = helper.getPositionInMB();
 
@@ -246,9 +284,9 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		if(TANK_FRONT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.output.getFluid()));
 		if(REACTOR_CHAMBER_POSITIONS.contains(posInMultiblock)) {
 			ItemStack input = state.inventory.getStackInSlot(0);
-			if(!input.isEmpty()) return List.of(Component.literal(input.toString()));
+			if(!input.isEmpty()) return List.of(Component.literal(input.toString()), Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 		}
-		return List.of();
+		return List.of(Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 	}
 
 	private static Set<BlockPos> generateBlockPositions(BlockPos bottomLeft, BlockPos topRight) {
@@ -304,7 +342,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			));
 
 			this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side(), FLUID_OUTPUT_CAP.posInMultiblock().south()));
-			this.processor = new InMachineProcessor<>(16, 0, 8, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
+			this.processor = new InMachineProcessor<>(16, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
 
 			this.inputCapLeft = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.leftInput));
 			this.inputCapBack = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.backInput));
@@ -377,14 +415,13 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		@Override
 		public void onProcessFinish(MultiblockProcess<ChemicalRecipe, ?> process, Level level)
 		{
-		}
+			ItemStack itemoutput = this.inventory.getStackInSlot(1);
 
-		public void processOutput(ItemStack itemStack, IMultiblockLevel level){
-			ItemStack stack = Utils.insertStackIntoInventory(this.output, itemStack.copyWithCount(1), true);
+			ItemStack stack = Utils.insertStackIntoInventory(this.output, itemoutput, true);
 			if (stack.isEmpty()) {
-				Utils.insertStackIntoInventory(this.output, itemStack.copyWithCount(1), false);
-				itemStack.shrink(1);
+				Utils.insertStackIntoInventory(this.output, itemoutput, false);
 			}
+			itemoutput.shrink(itemoutput.getCount());
 		}
 
 		@Override

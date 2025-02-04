@@ -58,7 +58,7 @@ public class ReverberationFurnaceMenu extends IEContainerMenu
 		int leftInputX = 36;
 		int leftFuelX = 36;
 		int leftOutputX = 67;
-
+		
 		this.addSlot(new SlotItemHandler(inv, 0, leftInputX, 17)
 		{
 			@Override

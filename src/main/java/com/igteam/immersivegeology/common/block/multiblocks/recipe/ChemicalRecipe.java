@@ -60,11 +60,17 @@ public class ChemicalRecipe extends MultiblockRecipe
 	{
 		for(ChemicalRecipe recipe : RECIPES.getRecipes(level))
 		{
-			if(recipe.itemInput.test(stack)){
+			if(recipe.itemInput.testIgnoringSize(stack)){
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean shouldCheckItemAvailability()
+	{
+		return !itemInput.hasNoMatchingItems();
 	}
 
 	@Override
