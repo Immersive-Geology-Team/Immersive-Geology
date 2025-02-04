@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.configuration;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -59,12 +60,15 @@ public interface ConfigurationHelper {
             // This sets things for the default items
             list.add(BlockCategoryFlags.STORAGE_BLOCK);
             list.add(BlockCategoryFlags.SHEETMETAL_BLOCK);
+            list.add(BlockCategoryFlags.SHEETMETAL_SLAB);
+            list.add(BlockCategoryFlags.SHEETMETAL_STAIRS);
             list.add(BlockCategoryFlags.STAIRS);
             list.add(BlockCategoryFlags.FLUID);
 
             if(metal instanceof MaterialNativeMetal) {
                 list.add(BlockCategoryFlags.ORE_BLOCK);
             }
+
         }
 
         if(material instanceof MaterialMineral) {

@@ -99,8 +99,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
             if(block instanceof IGBlockType igBlock) {
                 BlockCategoryFlags flag = (BlockCategoryFlags) igBlock.getFlag();
                 switch(flag){
-                    case STAIRS -> registerStairsBlock(igBlock);
-                    case SLAB ->  registerSlabBlock(igBlock);
+                    case STAIRS, SHEETMETAL_STAIRS -> registerStairsBlock(igBlock);
+                    case SLAB, SHEETMETAL_SLAB ->  registerSlabBlock(igBlock);
                     case SCAFFOLDING -> registerScaffolding(igBlock);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE -> registerGenericBlock(igBlock, flag);
                     case EVAPORATE_CRYSTAL -> registerEvaporateCrystal(igBlock, flag);
@@ -152,14 +152,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         IGSlabBlock slabBlock = (IGSlabBlock) igBlock;
         VariantBlockStateBuilder builder = getVariantBuilder(slabBlock);
-        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()));
+        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+slabBlock.getFlag().getName() +"/" + slabBlock.getFlag().getName() + "_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/slab"));
 
-        BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_top_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()+ "_top"));
+        BlockModelBuilder topModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+slabBlock.getFlag().getName() +"/" + slabBlock.getFlag().getName() + "_top_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/slab_top"));
 
-        BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/slab/" + slabBlock.getFlag().getName() + "_double_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
-                new ResourceLocation(IGLib.MODID, "block/base/slab/" + slabBlock.getFlag().getName()+ "_double"));
+        BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+slabBlock.getFlag().getName() +"/" + slabBlock.getFlag().getName() + "_double_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/slab/slab_double"));
 
         ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
         ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
@@ -578,18 +578,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
         IGStairBlock stairsBlock = (IGStairBlock) blockType;
         VariantBlockStateBuilder builder = getVariantBuilder(stairsBlock);
         String materialName = stairsBlock.getMaterials().stream().findAny().get().instance().getName();
-        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_" + materialName).getPath(),
+        BlockModelBuilder baseModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+blockType.getFlag().getName()+"/"+blockType.getFlag().getName()+"_" + materialName).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/base/stairs"));
 
-        BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_inner_" + materialName).getPath(),
+        BlockModelBuilder innerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+blockType.getFlag().getName()+"/"+blockType.getFlag().getName()+"_inner_" + materialName).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/base/stairs_inner"));
 
-        BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/stairs/stairs_outer_" +materialName).getPath(),
+        BlockModelBuilder outerModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+blockType.getFlag().getName()+"/"+blockType.getFlag().getName()+"_outer_" +materialName).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/base/stairs_outer"));
 
-        baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
-        innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
-        outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+        // A system overhaul would be needed to allow for a 'Primary or Parent' Flag type, with some SubTypes, such as the Storage and Sheetmetal Variations
+        IFlagType<?> parentFlag = stairsBlock.getFlag().equals(BlockCategoryFlags.STAIRS) ? BlockCategoryFlags.STORAGE_BLOCK : BlockCategoryFlags.SHEETMETAL_BLOCK;
+
+        baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+        innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+        outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
 
         builder.forAllStates(blockState ->
                 blockState.getValue(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?

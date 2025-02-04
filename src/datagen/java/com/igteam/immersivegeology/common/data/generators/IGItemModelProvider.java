@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.common.data.generators;
 
+import com.igteam.immersivegeology.common.block.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGScaffoldingBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
@@ -178,6 +179,18 @@ public class IGItemModelProvider extends ItemModelProvider {
                     withExistingParent(itemLocation, parentLocation);
                     return;
                 }
+
+                if(blockItem.getBlock() instanceof IGCrystalBlock crystalBlock)
+                {
+                    boolean complexItem = blockItem.getMaterials().size() > 1;
+                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/evaporate_crystal/growth_stage_3");
+
+                    withExistingParent(itemLocation, parentLocation);
+                    return;
+                }
+
+
 
                 boolean complexItem = blockItem.getMaterials().size() > 1;
 

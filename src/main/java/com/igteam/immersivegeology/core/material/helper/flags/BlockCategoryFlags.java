@@ -11,6 +11,8 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SLAB(4),
     DUST_BLOCK(1),
     SHEETMETAL_BLOCK(4),
+    SHEETMETAL_SLAB(4),
+    SHEETMETAL_STAIRS(4),
     STAIRS(4),
     FLUID(3),
     SLURRY(3),

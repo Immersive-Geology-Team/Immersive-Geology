@@ -111,7 +111,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
     {
         // For now, this is used to prevent some items from running in the data generation stage,
         // as this may cause issues if we don't have a flag or material.
-        if(block.getMaterials().isEmpty()) IGLib.IG_LOGGER.warn("Block for Item has no Material (Assuming Manual Model Files) [{}]", getDescriptionId());
+        if(block.getMaterials().isEmpty()) IGLib.IG_LOGGER.warn("Block for Item has no Material (Are we using a pre defined model?) [{}]", getDescriptionId());
 		return block.getMaterials().isEmpty();
 	}
 }

@@ -16,10 +16,12 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMin
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.LinkedHashSet;
 import java.util.function.BiFunction;
 
 public class MaterialSaltpeter extends MaterialEvaporateMineral
@@ -52,4 +54,11 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 				200, 51200);
 	}
 
+	@Override
+	public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+	{
+		LinkedHashSet<MaterialInterface<?>> set = new LinkedHashSet<>();
+		set.add(MetalEnum.Sodium);
+		return set;
+	}
 }

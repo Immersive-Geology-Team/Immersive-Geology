@@ -61,64 +61,6 @@ import java.util.function.BiPredicate;
 
 public class IGContent {
 
-    @NotNull
-    private static ResourceLocation getResourceLocationTest(IFlagType<?> pattern, GeologyMaterial base) {
-        ResourceLocation test = new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags? "item" : "block") + "/colored/" + base.getName() + "/" + pattern.getName() + ".png");
-        if (pattern.equals(BlockCategoryFlags.STAIRS))
-        {
-            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
-        }
-
-        if(pattern.equals(ItemCategoryFlags.NORMAL_ORE) || pattern.equals(ItemCategoryFlags.RICH_ORE) || pattern.equals(ItemCategoryFlags.POOR_ORE))
-        {
-            OreRichness richness = pattern.equals(ItemCategoryFlags.NORMAL_ORE) ? OreRichness.NORMAL : (pattern.equals(ItemCategoryFlags.RICH_ORE) ? OreRichness.RICH : OreRichness.POOR);
-            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase()+"/"+richness.getSanitizedName() + ".png");
-        }
-        return test;
-    }
-
-    public static void supplyMaterialTint(){
-        Minecraft minecraft = Minecraft.getInstance();
-
-        // Define the BiPredicate to check if a material has a specific flag
-        BiPredicate<GeologyMaterial, IFlagType<?>> needsColorCheck = (material, flagType) ->
-                material.getFlags().contains(flagType);
-
-        // Define the BiFunction to determine if a resource is present for a given flagType and material
-        BiFunction<IFlagType<?>, GeologyMaterial, Boolean> resourceExists = (flagType, material) -> {
-            ResourceLocation testLocation = getResourceLocationTest(flagType, material);
-            try {
-                return minecraft.getResourceManager().getResource(testLocation).isPresent();
-            } catch (Exception e) {
-                return false;
-            }
-        };
-
-        for (MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials()) {
-            GeologyMaterial base = materialInterface.instance();
-            HashMap<IFlagType<?>, Boolean> colorCheckMap = new HashMap<>();
-
-            for (IFlagType<?> flagType : IFlagType.getAllRegistryFlags()) {
-                // Apply the BiPredicate to check if the flagType needs color checking
-                if (needsColorCheck.test(base, flagType)) {
-                    // Use the BiFunction to see if the resource exists and update colorCheckMap accordingly
-                    colorCheckMap.put(flagType, !resourceExists.apply(flagType, base));
-                } else {
-                    colorCheckMap.put(flagType, true);
-                }
-            }
-
-            // Define a BiPredicate<IFlagType<?>, Integer> to handle the color tint check
-            BiPredicate<IFlagType<?>, Integer> colorTintPredicate = (flagType, tintIndex) -> {
-                // Return the value from colorCheckMap based on the flagType
-                return colorCheckMap.getOrDefault(flagType, true);
-            };
-
-            // Initialize color tint using the BiPredicate with Integer parameter
-            base.initializeColorTint(colorTintPredicate);
-        }
-    }
-
     public static void initializeIETweaks()
     {
         ChemthrowerHandler.registerEffect(ChemicalEnum.ChemicalWaste.getFluidTag(), new ChemthrowerEffect()

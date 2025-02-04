@@ -20,8 +20,11 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
+import blusunrize.immersiveengineering.common.blocks.metal.BlastFurnacePreheaterBlockEntity;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.AdvBlastFurnaceLogic;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
+import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
@@ -33,6 +36,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurna
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.IRevFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevInputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevOutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
@@ -59,6 +63,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -82,10 +87,12 @@ import java.util.function.Supplier;
 
 public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>, MBOverlayText<RevFurnaceLogic.State>, IServerTickableComponent<RevFurnaceLogic.State>, IClientTickableComponent<RevFurnaceLogic.State>
 {
-    static final int TANK_CAPACITY = 128*FluidType.BUCKET_VOLUME;
+    public static final int TANK_CAPACITY = 24*FluidType.BUCKET_VOLUME;
     public static final int NUM_SLOTS = 6;
     CapabilityPosition SLOT_1_INPUT_POSITION = new CapabilityPosition(1,1,1, RelativeBlockFace.UP);
     CapabilityPosition SLOT_2_INPUT_POSITION = new CapabilityPosition(1,1,4, RelativeBlockFace.UP);
+
+    private static final BlockPos[] HEATER_OFFSETS = new BlockPos[]{new BlockPos(1, 0, -1), new BlockPos(1, 0, 6)};
 
     public static final MultiblockFace SLOT_1_OUTPUT_POSITION = new MultiblockFace(0,0,1, RelativeBlockFace.LEFT);
     public static final MultiblockFace SLOT_2_OUTPUT_POSITION = new MultiblockFace(0,0,4, RelativeBlockFace.RIGHT);
@@ -104,6 +111,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             drainOutputTank(state, context, state.fluidOutput1);
             drainOutputTank(state, context, state.fluidOutput2);
         }
+
         // Not the most optimal way to solve this issue.
         // But a sync request should be alright for this purpose for now.
         context.requestMasterBESync();
@@ -389,6 +397,43 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         }
 
         @Override
+        public int getProcessSpeed(IMultiblockLevel level)
+        {
+            int i = 1;
+            BlockPos[] var3 = RevFurnaceLogic.HEATER_OFFSETS;
+            int var4 = var3.length;
+
+            for(int var5 = 0; var5 < var4; ++var5) {
+                BlockPos offset = var3[var5];
+                BlastFurnacePreheaterBlockEntity preheater = this.getPreheater(level, offset);
+                if (preheater != null) {
+                    i += preheater.doSpeedup();
+                }
+            }
+
+            return i;
+        }
+
+        public @Nullable BlastFurnacePreheaterBlockEntity getPreheater(IMultiblockLevel level, BlockPos pos) {
+            BlockEntity te = level.getBlockEntity(pos);
+            BlastFurnacePreheaterBlockEntity var10000;
+            if (te instanceof BlastFurnacePreheaterBlockEntity heater) {
+                var10000 = heater;
+            } else {
+                var10000 = null;
+            }
+
+            return var10000;
+        }
+
+        public GetterAndSetter<Boolean> preheaterActive(IMultiblockLevel level, int index) {
+            return GetterAndSetter.getterOnly(() -> {
+                BlastFurnacePreheaterBlockEntity heater = this.getPreheater(level, RevFurnaceLogic.HEATER_OFFSETS[index]);
+                return heater != null && heater.active;
+            });
+        }
+
+        @Override
         public int getBurnTimeOf(Level level, ItemStack fuel)
         {
             return BlastFurnaceFuel.getBlastFuelTime(level, fuel);
@@ -397,6 +442,17 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         @Override
         public void turnOff(IMultiblockLevel level, boolean isLeft)
         {
+            BlockPos[] var2 = RevFurnaceLogic.HEATER_OFFSETS;
+            int var3 = var2.length;
+
+            for(int var4 = 0; var4 < var3; ++var4) {
+                BlockPos offset = var2[var4];
+                BlastFurnacePreheaterBlockEntity preheater = this.getPreheater(level, offset);
+                if (preheater != null) {
+                    preheater.turnOff();
+                }
+            }
+
             if(isLeft)
             {
                 active_left = false;
@@ -404,8 +460,14 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             }
             active_right = false;
         }
+
         public ContainerData getStateView() {
             return this.furnace.stateView;
         }
-    }
+
+		public FluidTank getTank()
+		{
+            return this.tank;
+		}
+	}
 }

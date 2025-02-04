@@ -55,6 +55,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -320,7 +321,7 @@ public class IGRegistrationHolder {
                             }
                         }
 
-                        case SLAB -> {
+                        case SLAB, SHEETMETAL_SLAB -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGSlabBlock(blockCategory, material);
@@ -339,12 +340,13 @@ public class IGRegistrationHolder {
                             }
 
                         }
-                        case STAIRS -> {
+                        case STAIRS, SHEETMETAL_STAIRS -> {
                             if(hasExistingImplementation) continue;
+
                             String registryKey = blockCategory.getRegistryKey(material);
-                            // A tad dirty of a hack, but this should cover 99% of cases for stairs at least
-                            boolean isSheetmetal = material.getFlags().contains(BlockCategoryFlags.SHEETMETAL_BLOCK);
-                            Supplier<Block> blockProvider = () -> new IGStairBlock(() -> getBlock.apply((isSheetmetal ? BlockCategoryFlags.SHEETMETAL_BLOCK : BlockCategoryFlags.STORAGE_BLOCK).getRegistryKey(material)).defaultBlockState(), material);
+
+                            Supplier<BlockState> stateSupplier = Blocks.IRON_BLOCK::defaultBlockState;
+                            Supplier<Block> blockProvider = () -> new IGStairBlock(stateSupplier, material, blockCategory);
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }

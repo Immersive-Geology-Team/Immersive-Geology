@@ -147,7 +147,7 @@
   "block.immersivegeology.slab": "%s Slab",
   "block.immersivegeology.sheetmetal_stairs": "%s Sheetmetal Stairs",
   "block.immersivegeology.sheetmetal_block": "%s Sheetmetal",
-  "block.immersivegeology.sheetmetal.slab": "%s Sheetmetal Slab",
+  "block.immersivegeology.sheetmetal_slab": "%s Sheetmetal Slab",
   "block.immersivegeology.dust_block": "%s Dust Block",
   "block.immersivegeology.ore_block": "%s %s %s",
   "block.immersivegeology.geode": "%s Geode",
@@ -269,6 +269,7 @@
   "material.immersivegeology.electrum": "Electrum",
   "material.immersivegeology.steel": "Steel",
   "material.immersivegeology.stainlesssteel": "Stainless Steel",
+  "material.immersivegeology.tungstencarbide": "Tungsten Carbide",
 
   "material.immersivegeology.monazite": "Monazite",
   "material.immersivegeology.diamond": "Diamond",

@@ -9,18 +9,26 @@
 package com.igteam.immersivegeology.client.menu.multiblock;
 
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
+import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
+import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
+import blusunrize.immersiveengineering.client.gui.info.InfoArea;
+import blusunrize.immersiveengineering.common.gui.SqueezerMenu;
+import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.StateView;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevStateView;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceMenu>
 {
@@ -39,7 +47,6 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceM
 		this.inventoryLabelY = this.imageHeight - 95;
 		this.inventoryLabelX = 9;
 	}
-
 
 	static int leftArrowX = 42;
 	static int rightArrowX = 122;
@@ -81,11 +88,29 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceM
 	}
 
 	@Override
+	protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY)
+	{
+		super.renderLabels(graphics, mouseX, mouseY);
+	}
+
+	@Override
+	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
+	{
+		super.render(graphics, mouseX, mouseY, partialTicks);
+		graphics.blit(TEXTURE, leftPos+11, topPos+16, 180, 126, 20, 51);
+	}
+
+	@Override
 	protected void drawContainerBackgroundPre(@Nonnull GuiGraphics graphics, float f, int mx, int my)
 	{
 		drawFlameAndArrowLeft(menu.state, graphics, leftPos, topPos);
 		drawFlameAndArrowRight(menu.state, graphics, leftPos, topPos);
 	}
 
-
+	@NotNull
+	@Override
+	protected List<InfoArea> makeInfoAreas()
+	{
+		return ImmutableList.of(new FluidInfoArea(this.menu.tank, new Rect2i(this.leftPos + 13, this.topPos + 18, 16, 47), 177, 31, 20, 51, TEXTURE));
+	}
 }

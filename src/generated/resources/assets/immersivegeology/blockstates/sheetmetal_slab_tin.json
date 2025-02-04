@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "type=bottom,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_tin",
+      "uvlock": true
+    },
+    "type=bottom,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_tin",
+      "uvlock": true
+    },
+    "type=double,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_double_tin",
+      "uvlock": true
+    },
+    "type=double,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_double_tin",
+      "uvlock": true
+    },
+    "type=top,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_top_tin",
+      "uvlock": true
+    },
+    "type=top,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_top_tin",
+      "uvlock": true
+    }
+  }
+}

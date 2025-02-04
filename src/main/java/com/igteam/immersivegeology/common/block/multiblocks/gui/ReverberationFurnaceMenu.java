@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.gui;
 
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.IESlot;
+import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevStateView;
@@ -22,6 +23,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -29,6 +31,7 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ReverberationFurnaceMenu extends IEContainerMenu
 {
 	public final ContainerData state;
+	public final FluidTank tank;
 
 	public static ReverberationFurnaceMenu makeServer(MenuType<?> type, int id, Inventory invPlayer, MultiblockMenuContext<RevFurnaceLogic.State> ctx
 	)
@@ -36,7 +39,7 @@ public class ReverberationFurnaceMenu extends IEContainerMenu
 		final RevFurnaceLogic.State state = ctx.mbContext().getState();
 		return new ReverberationFurnaceMenu(
 				multiblockCtx(type, id, ctx), invPlayer,
-				state.getInventory(), state.getStateView());
+				state.getInventory(), state.getStateView(), state.getTank());
 	}
 
 
@@ -45,11 +48,12 @@ public class ReverberationFurnaceMenu extends IEContainerMenu
 		return new ReverberationFurnaceMenu(
 				clientCtx(type, id), invPlayer,
 				new ItemStackHandler(RevFurnaceLogic.NUM_SLOTS),
-				new SimpleContainerData(RevStateView.NUM_SLOTS)
+				new SimpleContainerData(RevStateView.NUM_SLOTS),
+				new FluidTank(RevFurnaceLogic.TANK_CAPACITY)
 		);
 	}
 
-	private ReverberationFurnaceMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, ContainerData state)
+	private ReverberationFurnaceMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, ContainerData state, FluidTank tank)
 	{
 		super(ctx);
 		Level level = inventoryPlayer.player.level();
@@ -58,7 +62,7 @@ public class ReverberationFurnaceMenu extends IEContainerMenu
 		int leftInputX = 36;
 		int leftFuelX = 36;
 		int leftOutputX = 67;
-		
+		this.tank = tank;
 		this.addSlot(new SlotItemHandler(inv, 0, leftInputX, 17)
 		{
 			@Override
@@ -96,5 +100,6 @@ public class ReverberationFurnaceMenu extends IEContainerMenu
 
 		this.state = state;
 		addDataSlots(state);
+		this.addGenericData(GenericContainerData.fluid(tank));
 	}
 }

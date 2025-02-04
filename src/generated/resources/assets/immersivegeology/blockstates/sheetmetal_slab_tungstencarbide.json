@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "type=bottom,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_tungstencarbide",
+      "uvlock": true
+    },
+    "type=bottom,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_tungstencarbide",
+      "uvlock": true
+    },
+    "type=double,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_double_tungstencarbide",
+      "uvlock": true
+    },
+    "type=double,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_double_tungstencarbide",
+      "uvlock": true
+    },
+    "type=top,waterlogged=false": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_top_tungstencarbide",
+      "uvlock": true
+    },
+    "type=top,waterlogged=true": {
+      "model": "immersivegeology:block/sheetmetal_slab/sheetmetal_slab_top_tungstencarbide",
+      "uvlock": true
+    }
+  }
+}
