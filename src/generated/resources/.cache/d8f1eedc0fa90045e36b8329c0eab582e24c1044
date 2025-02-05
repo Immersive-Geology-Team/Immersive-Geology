@@ -1,7 +1,8 @@
-// 1.20.1	2025-02-03T07:21:07.037773017	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-02-05T11:37:55.1747773	Tags for minecraft:item mod id immersivegeology
 ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint/multiblock_plans.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
+24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
 f84e009ee715037e0d32c9dc9e31f52efeb7302f data/forge/tags/items/compound_dust/chromium.json
 f461a0a225b665028c185738ad2c8905245fb1c9 data/forge/tags/items/compound_dust/cobalt.json
 7d6288d6bdde0544f6d6366f4b462312cb49a81e data/forge/tags/items/compound_dust/copper.json
@@ -254,6 +255,7 @@ cc3328f05f2d737f1da9bb081a7cda46a6842b58 data/forge/tags/items/ingots/stainlesss
 686dac9f15fc26b4a3367cf736c61ba885cbc6a5 data/forge/tags/items/ingots/zirconium.json
 1487bab9edb5d22f5e54451ad8aa27e493ce7588 data/forge/tags/items/mechanical_component/hastelloy.json
 cb80cd2f5b23451de62e3920a1a0f1da31765040 data/forge/tags/items/metal_oxide/aluminum.json
+47f0e610169b319bcb07252a5e5075245f8fe64d data/forge/tags/items/metal_oxide/calcium.json
 bdd68a16d1c2aae299cff47a125f09a91d2cb517 data/forge/tags/items/metal_oxide/chromium.json
 d0ad2bd97cd7dba404100eda755b38c7c9f4710c data/forge/tags/items/metal_oxide/cobalt.json
 90468d215f8f6a4604004ef75ef81783a7dc6f69 data/forge/tags/items/metal_oxide/copper.json
@@ -419,6 +421,7 @@ ced1a0f0979c907e07425a2d92d4ef7aaa179ae1 data/forge/tags/items/poor_ore/uraninit
 c3fc6b2f44a05fe7a91abcaaa48297cfc181f0f3 data/forge/tags/items/powdered_slag/alumina.json
 c662cd6dce72431c7f017950625e993a14508284 data/forge/tags/items/powdered_slag/anatase.json
 66789fe89311f6620cfe4656676b57cdb2b10892 data/forge/tags/items/powdered_slag/bauxite.json
+5e03d0db5e7b3f8d6118266f74b30f2fe5774373 data/forge/tags/items/powdered_slag/calcium.json
 8c6838754eb6d03fe99f72a310bf8bf85ed0071d data/forge/tags/items/powdered_slag/cassiterite.json
 a596e6a450962812b28dee6616ae652e9ed74cff data/forge/tags/items/powdered_slag/chalcocite.json
 ff90ffd5272877e58f0527f52d8809232659c788 data/forge/tags/items/powdered_slag/chalcopyrite.json
@@ -570,6 +573,7 @@ dc68b153844a135f505ac8b39a1844368ec56c6d data/forge/tags/items/sediment/rocksalt
 948ff5ffba37df4598230ee6ce87928c456e84b9 data/forge/tags/items/slag/alumina.json
 3f8b8a44806ed033f873f5d2b9afc2b1316876e3 data/forge/tags/items/slag/anatase.json
 651010fdc5064eb7f3b356fdb51cebb3daa5ff5f data/forge/tags/items/slag/bauxite.json
+1a5eaca3be3b8a11bc159d3300b87170e87660c7 data/forge/tags/items/slag/calcium.json
 1cd69349b6fe8946cb8af5a7ac337e72baa7751e data/forge/tags/items/slag/cassiterite.json
 838d38d7b0162b258498fcf1f221e8a98290d82f data/forge/tags/items/slag/chalcocite.json
 7281811a5e7c1bb5d2aee638408392506d9f3a82 data/forge/tags/items/slag/chalcopyrite.json

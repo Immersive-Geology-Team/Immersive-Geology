@@ -1,9 +1,10 @@
-// 1.20.1	2025-01-30T18:41:30.654763115	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-02-05T11:37:55.1977977	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
 acd0e1939cf7655b58c67b56be5980a3eb0be432 data/forge/tags/fluids/bindingagent.json
 6d004a7a2e16f1bb517a2cab46e4f58a43bcb5e2 data/forge/tags/fluids/bronze.json
+66d925f66b7b5cd827b0652b495724a7ba4d1bfe data/forge/tags/fluids/calcium.json
 546205e3b48816e3990f891214f8d837c9e3b7f5 data/forge/tags/fluids/chemicalwaste.json
 3d378b93df4523d2544aea625e7ac61507a9bf7f data/forge/tags/fluids/chromium.json
 6fbd2f2b16191d5a278e36ba6a21bf0e2a92f161 data/forge/tags/fluids/clean_ammoniasolution_molybdenite.json
@@ -80,4 +81,4 @@ e5fc8696a509d520fc367504754efa912ba5da0d data/forge/tags/fluids/tungstencarbide.
 54e971e29f4cd4132b743c8d3bea360c93afccb3 data/forge/tags/fluids/vanadium.json
 1d09e1c3f05ef1b9b09080e07fb0665dd62a1343 data/forge/tags/fluids/zinc.json
 a5cd8cc8588f063a3110ed98e885aaacfdbc5511 data/forge/tags/fluids/zirconium.json
-852a56321eab19a66836c164eee83d22ad5d8c05 data/tfc/tags/fluids/usable_in_ingot_mold.json
+374837e40a69db48cae73e675c3b0730b4f4ca96 data/tfc/tags/fluids/usable_in_ingot_mold.json

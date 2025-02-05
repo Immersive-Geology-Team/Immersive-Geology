@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "forge:dusts/coal_coke"
+    }
+  ],
+  "energy": 0,
+  "input": {
+    "tag": "forge:metal_oxide/calcium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:slag_calcium"
+    }
+  ],
+  "time": 0
+}

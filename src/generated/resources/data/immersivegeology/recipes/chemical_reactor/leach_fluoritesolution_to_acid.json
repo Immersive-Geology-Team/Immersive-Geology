@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "forge:sulfuricacid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "fluid": "immersivegeology:fluid_hydrofluoricacid"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powder_fluorite"
+  },
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_calcium"
+  },
+  "time": 200
+}

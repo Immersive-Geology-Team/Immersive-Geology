@@ -31,6 +31,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
 {
     Aluminum(new MaterialAluminum()),
     Bronze(new MaterialBronze()),
+    Calcium(new MaterialCalcium()),
     Chromium(new MaterialChromium()),
     Cobalt(new MaterialCobalt()),
     Copper(new MaterialCopper()),
