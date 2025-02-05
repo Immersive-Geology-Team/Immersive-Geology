@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:pellets/chalcocite"
+  },
+  "result": {
+    "item": "minecraft:copper_ingot"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "time": 200
+}

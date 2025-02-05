@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:pellets/pyrite"
+  },
+  "result": {
+    "item": "minecraft:iron_ingot"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "time": 200
+}

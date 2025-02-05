@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:pellets/acanthite"
+  },
+  "result": {
+    "item": "immersiveengineering:ingot_silver"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "time": 200
+}

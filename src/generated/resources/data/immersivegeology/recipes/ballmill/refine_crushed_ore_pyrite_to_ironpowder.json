@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:crushed_ore/pyrite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_pyrite"
+  },
+  "time": 800
+}

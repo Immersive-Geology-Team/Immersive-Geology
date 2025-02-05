@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_millerite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_millerite"
+  },
+  "secondaries": [],
+  "time": 100
+}

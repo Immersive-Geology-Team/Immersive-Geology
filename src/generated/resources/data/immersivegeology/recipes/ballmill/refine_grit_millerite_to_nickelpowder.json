@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/millerite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_millerite"
+  },
+  "time": 200
+}

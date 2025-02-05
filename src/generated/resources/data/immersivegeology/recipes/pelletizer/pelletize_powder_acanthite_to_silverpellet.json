@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/acanthite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_acanthite"
+  },
+  "time": 600
+}

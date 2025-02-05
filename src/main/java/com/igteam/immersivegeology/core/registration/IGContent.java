@@ -129,9 +129,8 @@ public class IGContent {
                 new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"), 10);
 
         // Build the manual entry for the contributors
-        ManualEntry.ManualEntryBuilder contributorsEntry = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        contributorsEntry.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
-        instance.addEntry(contributors_category, contributorsEntry.create());
+        builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
+        instance.addEntry(contributors_category, builder.create());
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

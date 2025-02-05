@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/galena"
+  },
+  "result": {
+    "item": "immersivegeology:powder_galena"
+  },
+  "time": 200
+}

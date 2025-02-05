@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/pyrite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_pyrite"
+  },
+  "time": 600
+}

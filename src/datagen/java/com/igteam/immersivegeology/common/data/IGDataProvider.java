@@ -57,7 +57,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
 
-        // Not working, needs a full rework sadly.
+        // Not working, needs a full rework sadly.g
         // generator.addProvider(event.includeClient(), new IGManualProvider(out, helper, IGLib.MODID));
         if(ModFlags.TFC.isStrictlyLoaded()) {
             generator.addProvider(runServer, new TFCCompatOreProvider(out));
@@ -72,5 +72,4 @@ public class IGDataProvider {
             generator.addProvider(runServer, provider);
         }
     }
-
 }

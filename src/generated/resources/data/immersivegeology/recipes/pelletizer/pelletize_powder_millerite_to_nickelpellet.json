@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/millerite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_millerite"
+  },
+  "time": 600
+}
