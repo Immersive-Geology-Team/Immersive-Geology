@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.common.data;
 import com.igteam.immersivegeology.common.data.generators.*;
 import com.igteam.immersivegeology.common.data.generators.loot.IGBlockLootProvider;
 import com.igteam.immersivegeology.common.data.generators.loot.IGLootProvider;
+import com.igteam.immersivegeology.common.data.generators.manual.IGManualProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import net.minecraft.data.DataGenerator;
@@ -43,7 +44,6 @@ public class IGDataProvider {
 
         generator.addProvider(event.includeClient(), new IGAtlasProvider(out));
 
-
         IGBlockStateProvider blockStateProvider = new IGBlockStateProvider(generator, helper);
         generator.addProvider(runServer, blockStateProvider);
         generator.addProvider(runServer, new IGItemModelProvider(generator, helper));
@@ -56,13 +56,15 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGFeatureRemovalProvider(out));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
+
+        // Not working, needs a full rework sadly.
+        // generator.addProvider(event.includeClient(), new IGManualProvider(out, helper, IGLib.MODID));
         if(ModFlags.TFC.isStrictlyLoaded()) {
             generator.addProvider(runServer, new TFCCompatOreProvider(out));
         } else
         {
             IGLib.IG_LOGGER.error("\n============ WARNING =============\nTFC is NOT loaded, this will result in missing TFC Ore Generation\n============ WARNING =============");
         }
-
 
         // God I hate this system. ~Muddykat
         for(final DataProvider provider : IGWorldGenerationProvider.makeProviders(out, lookup, helper))

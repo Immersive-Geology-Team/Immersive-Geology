@@ -189,6 +189,7 @@
   "fluid.immersivegeology.slurry": "%s %s",
   "fluid.immersivegeology.cloudy_slurry": "Cloudy %s %s",
 
+  "material.immersivegeology.millerite": "Millerite",
   "material.immersivegeology.vanilla": "Stone",
   "material.immersivegeology.sandstone": "Sandstone",
   "material.immersivegeology.dripstone": "Dripstone",
