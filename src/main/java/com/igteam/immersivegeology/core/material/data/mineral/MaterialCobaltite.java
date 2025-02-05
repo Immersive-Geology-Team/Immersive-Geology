@@ -84,9 +84,5 @@ public class MaterialCobaltite extends MaterialSulphideMineral
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
                 new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null, 200, 51200);
-
-
-
-
     }
 }

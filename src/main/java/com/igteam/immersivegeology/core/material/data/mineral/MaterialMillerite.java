@@ -24,7 +24,7 @@ public class MaterialMillerite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-
+        addFlags(ItemCategoryFlags.PELLET);
         CONFIG = new MineralConfig(17,20,2,-60,120,2000, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
