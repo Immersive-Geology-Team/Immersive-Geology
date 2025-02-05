@@ -2,10 +2,10 @@
   "type": "immersiveengineering:crusher",
   "energy": 6000,
   "input": {
-    "item": "immersivegeology:crushed_ore_wolframite"
+    "item": "immersivegeology:crushed_ore_fluorite"
   },
   "result": {
-    "item": "immersivegeology:grit_wolframite"
+    "item": "immersivegeology:grit_fluorite"
   },
   "secondaries": [],
   "time": 100

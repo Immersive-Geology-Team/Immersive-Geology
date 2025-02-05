@@ -1,12 +1,20 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -36,5 +44,20 @@ public class MaterialFluorite extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
         return new LinkedHashSet<>(Set.of(ChemicalEnum.HydrofluoricAcid));
+    }
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
+                MetalEnum.Calcium.getStack(ItemCategoryFlags.COMPOUND_DUST),
+                ChemicalEnum.HydrofluoricAcid.getFluidStack(125),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
+                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+                null, null,
+                200, 51200);
     }
 }
