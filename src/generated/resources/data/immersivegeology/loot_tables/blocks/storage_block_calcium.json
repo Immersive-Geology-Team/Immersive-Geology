@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersivegeology:sheetmetal_block_iron"
+          "name": "immersivegeology:storage_block_calcium"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/sheetmetal_block_iron"
+  "random_sequence": "immersivegeology:blocks/storage_block_calcium"
 }

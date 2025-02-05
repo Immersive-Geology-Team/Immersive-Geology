@@ -7,6 +7,9 @@
     "immersivegeology:sheetmetal_block_bronze",
     "immersivegeology:sheetmetal_slab_bronze",
     "immersivegeology:slab_bronze",
+    "immersivegeology:storage_block_calcium",
+    "immersivegeology:sheetmetal_block_calcium",
+    "immersivegeology:sheetmetal_slab_calcium",
     "immersivegeology:storage_block_chromium",
     "immersivegeology:sheetmetal_block_chromium",
     "immersivegeology:sheetmetal_slab_chromium",
@@ -61,8 +64,6 @@
     "immersivegeology:normal_ore_block_gold_sandstone",
     "immersivegeology:rich_ore_block_gold_sandstone",
     "immersivegeology:slab_gold",
-    "immersivegeology:sheetmetal_block_iron",
-    "immersivegeology:sheetmetal_slab_iron",
     {
       "id": "immersivegeology:tfc_poor_ore_block_iron_andesite",
       "required": false

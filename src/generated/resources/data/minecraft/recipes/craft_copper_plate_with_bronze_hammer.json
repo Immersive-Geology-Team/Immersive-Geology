@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "ig_plate_from_ingot_hammer",
+  "ingredients": [
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "immersivegeology:hammer_bronze"
+    }
+  ],
+  "result": {
+    "item": "immersiveengineering:plate_copper"
+  }
+}

@@ -5,10 +5,14 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.dries007.tfc.util.Metal;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -36,5 +40,13 @@ public class MaterialGypsum extends MaterialMineral {
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.MONOCLINIC;
+    }
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
+                "crushed_ore_"+getName()+"_to_metal_oxide", MetalEnum.Calcium.getStack(ItemCategoryFlags.METAL_OXIDE),
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
     }
 }
