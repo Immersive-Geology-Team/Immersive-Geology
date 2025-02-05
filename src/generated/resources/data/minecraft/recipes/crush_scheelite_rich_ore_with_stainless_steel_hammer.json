@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:rich_ore/scheelite"
+    },
+    {
+      "tag": "forge:rich_ore/scheelite"
+    },
+    {
+      "item": "immersivegeology:hammer_stainlesssteel"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:dirty_crushed_ore_scheelite"
+  }
+}

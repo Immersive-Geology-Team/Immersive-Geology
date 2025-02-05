@@ -274,7 +274,7 @@ public class IGRegistrationHolder {
         DRAWING_TABLE = TE_REGISTER.register("drawing_table_type", makeType(DrawingTableBlockEntity::new, BLOCK_REGISTRY_MAP.get("drawing_table")));
 
 
-        HashSet<MaterialInterface<?>> slurry_material_set = new HashSet<>(List.of(MetalEnum.values()));
+        LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
 
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
@@ -547,11 +547,11 @@ public class IGRegistrationHolder {
         return builder.build();
     }
 
-    public static HashMap<String, RegistryObject<Item>> getItemRegistryMap() {
+    public static LinkedHashMap<String, RegistryObject<Item>> getItemRegistryMap() {
         return ITEM_REGISTRY_MAP;
     }
 
-    public static HashMap<String, RegistryObject<Fluid>> getFluidRegistryMap()
+    public static LinkedHashMap<String, RegistryObject<Fluid>> getFluidRegistryMap()
     {
         return FLUID_REGISTRY_MAP;
     }

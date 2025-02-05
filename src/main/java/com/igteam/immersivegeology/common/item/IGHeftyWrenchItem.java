@@ -29,6 +29,7 @@ public class IGHeftyWrenchItem extends IGMBFormationItem
 	public IGHeftyWrenchItem(ItemCategoryFlags flag, MaterialInterface<?> material, int max_durability, int pAttackDamageModifier, float pAttackSpeedModifier, Class<? extends TemplateMultiblock>... multiblocks)
 	{
 		super(flag, material, max_durability, multiblocks);
+
 		this.attackDamage = (float)pAttackDamageModifier;
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.attackDamage, AttributeModifier.Operation.ADDITION));

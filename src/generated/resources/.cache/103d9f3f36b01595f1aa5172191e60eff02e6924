@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-03T07:21:07.055058515	Registries
+// 1.20.1	2025-02-05T17:56:32.896565533	Registries
 ec4f0cf9453c946d13c82d306c65787f5b3d9e83 data/immersivegeology/forge/biome_modifier/acanthite.json
 64543f48e1e515d67b4ccd1c1e96c40e4cae482b data/immersivegeology/forge/biome_modifier/alumina.json
 72bf2e3bbe052c41d2e9b2b2ba3f1497d846bbf5 data/immersivegeology/forge/biome_modifier/anatase.json
@@ -49,7 +49,7 @@ c90f177642166bc536bfa37b12c47fcee56d1d92 data/immersivegeology/worldgen/configur
 bc17069dd46b2d78fa670763b03b9fe3ccf02022 data/immersivegeology/worldgen/configured_feature/cassiterite.json
 21da72aea4dc4e0cd57286afcd99fe9fc12fd675 data/immersivegeology/worldgen/configured_feature/chalcocite.json
 fdf143c8598d06bab08d96c35db34951efd349d7 data/immersivegeology/worldgen/configured_feature/chalcopyrite.json
-b2b8000558a657c4c48e8bb2d9487a371f61804f data/immersivegeology/worldgen/configured_feature/chromite.json
+8d8ddc9297752399e3bad54281851486b41ec99f data/immersivegeology/worldgen/configured_feature/chromite.json
 e01db11b4d99d7af2747aad444efd47389f1468d data/immersivegeology/worldgen/configured_feature/cobaltite.json
 9df9e6bc7be3522d9e23d1a94fbebecb0598e094 data/immersivegeology/worldgen/configured_feature/copper.json
 67da25e2bacdf8f9a657f44275a98a05edb63616 data/immersivegeology/worldgen/configured_feature/cryolite.json

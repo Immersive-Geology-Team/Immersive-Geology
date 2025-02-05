@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class IGLib {
@@ -54,8 +55,8 @@ public class IGLib {
         return  LogUtils.getLogger();
     }
 
-    public static List<MaterialInterface<?>> getGeologyMaterials(){
-        ArrayList<MaterialInterface<?>> list = new ArrayList<>();
+    public static LinkedList<MaterialInterface<?>> getGeologyMaterials(){
+        LinkedList<MaterialInterface<?>> list = new LinkedList<>();
         list.addAll(List.of(StoneEnum.values()));
         list.addAll(List.of(MetalEnum.values()));
         list.addAll(List.of(MineralEnum.values()));
