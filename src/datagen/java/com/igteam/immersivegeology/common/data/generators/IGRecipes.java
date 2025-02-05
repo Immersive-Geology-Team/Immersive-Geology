@@ -42,6 +42,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.NonNullList;
@@ -100,6 +101,9 @@ public class IGRecipes extends RecipeProvider
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
+
+		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
+				.save(consumer, IGLib.MODID+":ig_item_repair");
 
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
 
@@ -227,6 +231,7 @@ public class IGRecipes extends RecipeProvider
 		IGLib.IG_LOGGER.info("- Multiblock Test Recipe Registration");
 		Item stone_work_hammer = StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);
 		Item bronze_work_hammer = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
+		Item stainless_work_hammer = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
@@ -238,6 +243,7 @@ public class IGRecipes extends RecipeProvider
 					int energy = 100;
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(stone_work_hammer).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_stone_hammer");
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(bronze_work_hammer).unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_bronze_hammer");
+					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(stainless_work_hammer).unlockedBy("has_stainless_steel_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,"crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_stainless_steel_hammer");
 
 					CrusherRecipeBuilder builder = CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1));
 					builder.addSecondary(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance);

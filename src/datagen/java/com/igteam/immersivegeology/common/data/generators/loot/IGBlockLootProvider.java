@@ -130,7 +130,7 @@ public class IGBlockLootProvider implements LootTableSubProvider
 			RegistryObject<Block> block = iterator.next();
 			if(block.get() instanceof IGSlabBlock slab)
 			{
-				if(slab.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(BlockCategoryFlags.SLAB)) continue;
+				if(slab.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(slab.getFlag())) continue;
 				LootItemConditionalFunction.Builder<?> doubleSlabFunction = SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(this.propertyIs(block, SlabBlock.TYPE, SlabType.DOUBLE));
 				LootTable.Builder lootBuilder = LootTable.lootTable().withPool(this.singleItem(slab).apply(doubleSlabFunction));
 				this.register(block, lootBuilder);

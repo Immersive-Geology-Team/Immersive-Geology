@@ -43,6 +43,11 @@ public class IGGenericItem extends Item implements IGFlagItem {
         return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
     }
 
+    public boolean isIGRepairable(ItemStack stack)
+    {
+        return false;
+    }
+
     @Override
     public @NotNull Component getName(ItemStack stack) {
         if(hasCustomLang)

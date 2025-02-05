@@ -18,8 +18,10 @@ import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -32,13 +34,17 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
+import net.minecraftforge.common.Tags.Items;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -195,15 +201,29 @@ public class IGMBFormationItem extends IGGenericItem
 	{
 		return true;
 	}
+	public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
+		return true;
+	}
+
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+		return enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
+	}
+
+	@Override
+	public boolean isIGRepairable(ItemStack stack)
+	{
+		return true;
+	}
 
 	@Nonnull
 	@Override
-	public ItemStack getCraftingRemainingItem(@Nonnull ItemStack stack)
-	{
+	public ItemStack getCraftingRemainingItem(@Nonnull ItemStack stack) {
 		ItemStack container = stack.copy();
-		if(container.hurt(1, ApiUtils.RANDOM_SOURCE, null))
-			return ItemStack.EMPTY;
-		else
-			return container;
+		return container.hurt(1, ApiUtils.RANDOM_SOURCE, (ServerPlayer)null) ? ItemStack.EMPTY : container;
+	}
+
+	public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
+		if(materialMap.get(MaterialTexture.base) instanceof StoneEnum) return repairCandidate.is(Items.COBBLESTONE);
+		return repairCandidate.is(materialMap.get(MaterialTexture.base).getItem(ItemCategoryFlags.INGOT));
 	}
 }

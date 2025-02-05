@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersivegeology:sheetmetal_slab_iron"
+          "name": "immersivegeology:sheetmetal_slab_uranium"
         }
       ],
       "functions": [
@@ -19,7 +19,7 @@
           "add": false,
           "conditions": [
             {
-              "block": "immersivegeology:sheetmetal_slab_iron",
+              "block": "immersivegeology:sheetmetal_slab_uranium",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "type": "double"
@@ -33,5 +33,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/sheetmetal_slab_iron"
+  "random_sequence": "immersivegeology:blocks/sheetmetal_slab_uranium"
 }
