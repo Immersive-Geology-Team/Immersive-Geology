@@ -78,7 +78,7 @@ public class SchematicInventory extends SimpleContainer
 			if(paper.is(Items.PAPER))
 			{
 				int count = paper.getCount() - crafted;
-				if(0 > count) query.set(0, ItemStack.EMPTY);
+				if(0 == count) query.set(0, ItemStack.EMPTY);
 				if(count > 0){
 					paper.setCount(count);
 					query.set(0, paper.copy());

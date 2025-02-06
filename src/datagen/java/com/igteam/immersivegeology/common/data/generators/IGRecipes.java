@@ -114,6 +114,7 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" WB")
 				.pattern("W  ").define('B', bronze_ingot).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_0");
+
 		// Stainless Steel Hammer
 		Item toolkit_1 = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
@@ -121,13 +122,21 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" WB")
 				.pattern("W  ").define('B', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_stainless_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT))).save(consumer, "craft_igtoolkit_1");
+
+		Item geologist_pick = IGRegistrationHolder.getItem.apply("prospector_kit");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, geologist_pick)
+				.pattern("SBF")
+				.pattern("BW ")
+				.pattern(" W ").define('F', Items.FLINT).define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Ingredients.STICK_TREATED)).define('S', Ingredient.of(Tags.Items.STRING))
+				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COBBLESTONE)).save(consumer, "craft_geologist_pick");
+
 		// Stone Hammer
 		Item toolkit_2 = StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_2)
 				.pattern(" BS")
 				.pattern(" WB")
 				.pattern("W  ").define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
-				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, "craft_igtoolkit_2");
+				.group("ig_tools").unlockedBy("has_stone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COBBLESTONE)).save(consumer, "craft_igtoolkit_2");
 
 		Item schematic_table = IGRegistrationHolder.getBlock.apply("drawing_table").asItem();
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, schematic_table)
