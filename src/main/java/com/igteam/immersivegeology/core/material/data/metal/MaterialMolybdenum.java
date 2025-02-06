@@ -37,7 +37,11 @@ public class MaterialMolybdenum extends MaterialMetal {
     @Override
     public void setupRecipeStages()
     {
-        super.setupRecipeStages();
+        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.OXIDE_PELLET),
+                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 1800);
+
         IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
                 ChemicalEnum.Ammonia.getCloudySlurryTagWith(MineralEnum.Molybdenite),
                 IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Molybdenum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
