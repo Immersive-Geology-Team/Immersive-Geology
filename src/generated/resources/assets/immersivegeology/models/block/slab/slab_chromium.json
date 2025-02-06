@@ -1,9 +1,9 @@
 {
   "parent": "immersivegeology:block/base/slab/slab",
   "textures": {
-    "all": "immersivegeology:block/greyscale/metal/storage",
-    "cover": "immersivegeology:block/greyscale/metal/storage",
-    "particle": "immersivegeology:block/greyscale/metal/storage",
-    "side": "immersivegeology:block/greyscale/metal/storage"
+    "all": "immersivegeology:block/colored/chromium/storage_block",
+    "cover": "immersivegeology:block/colored/chromium/storage_block",
+    "particle": "immersivegeology:block/colored/chromium/storage_block",
+    "side": "immersivegeology:block/colored/chromium/storage_block"
   }
 }

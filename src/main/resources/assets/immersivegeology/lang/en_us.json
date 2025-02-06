@@ -188,6 +188,8 @@
   "fluid.immersivegeology.fluid_molten": "Molten %s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
+  "fluid.immersivegeology.complex_slurry": "%s%s Acid",
+  "fluid.immersivegeology.cloudy_complex_slurry": "Cloudy %s%s Acid",
   "fluid.immersivegeology.cloudy_slurry": "Cloudy %s %s",
 
   "material.immersivegeology.millerite": "Millerite",

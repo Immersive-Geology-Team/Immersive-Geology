@@ -161,8 +161,11 @@ public class IGBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder doubleModel = models().withExistingParent(new ResourceLocation(IGLib.MODID, "block/"+slabBlock.getFlag().getName() +"/" + slabBlock.getFlag().getName() + "_double_" + slabBlock.getMaterial(MaterialTexture.base).getName()).getPath(),
                 new ResourceLocation(IGLib.MODID, "block/base/slab/slab_double"));
 
-        ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
-        ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(slabBlock.getFlag());
+        // A system overhaul would be needed to allow for a 'Primary or Parent' Flag type, with some SubTypes, such as the Storage and Sheetmetal Variations
+        IFlagType<?> parentFlag = slabBlock.getFlag().equals(BlockCategoryFlags.SLAB) ? BlockCategoryFlags.STORAGE_BLOCK : BlockCategoryFlags.SHEETMETAL_BLOCK;
+
+        ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag);
+        ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag);
 
         baseModel.texture("particle", rTextureLocBase);
         topModel.texture("particle", rTextureLocBase);

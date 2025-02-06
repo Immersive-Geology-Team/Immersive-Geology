@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:sheetmetal_block_thorium"
+    }
+  },
+  "pattern": [
+    "iii"
+  ],
+  "result": {
+    "count": 6,
+    "item": "immersivegeology:sheetmetal_slab_thorium"
+  },
+  "show_notification": true
+}

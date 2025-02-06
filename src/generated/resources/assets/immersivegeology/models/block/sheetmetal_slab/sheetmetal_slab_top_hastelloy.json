@@ -1,9 +1,9 @@
 {
   "parent": "immersivegeology:block/base/slab/slab_top",
   "textures": {
-    "all": "immersivegeology:block/greyscale/metal/sheetmetal",
-    "cover": "immersivegeology:block/greyscale/metal/sheetmetal",
-    "particle": "immersivegeology:block/greyscale/metal/sheetmetal",
-    "side": "immersivegeology:block/greyscale/metal/sheetmetal"
+    "all": "immersivegeology:block/colored/hastelloy/sheetmetal_block",
+    "cover": "immersivegeology:block/colored/hastelloy/sheetmetal_block",
+    "particle": "immersivegeology:block/colored/hastelloy/sheetmetal_block",
+    "side": "immersivegeology:block/colored/hastelloy/sheetmetal_block"
   }
 }

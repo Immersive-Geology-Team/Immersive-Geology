@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sheetmetal_cobalt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:sheetmetal_block_cobalt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sheetmetal_to_slab_cobalt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sheetmetal_cobalt",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sheetmetal_to_slab_cobalt"
+    ]
+  },
+  "sends_telemetry_event": false
+}

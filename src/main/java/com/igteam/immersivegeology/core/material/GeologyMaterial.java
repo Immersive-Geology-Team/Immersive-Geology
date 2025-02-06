@@ -105,6 +105,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
+
         ResourceLocation texture = new ResourceLocation(IGLib.MODID, "block/colored/" + getName() + "/" + flag.toString().toLowerCase());
 
         if (flag.getValue() instanceof ItemCategoryFlags iFlag) {

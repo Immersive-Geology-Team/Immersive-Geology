@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams.Builder;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -74,7 +76,7 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 			BlockPos adjacentPos = pos.relative(direction);
 			BlockState adjacentState = level.getBlockState(adjacentPos);
 
-			if (adjacentState.is(Blocks.WATER)) {
+			if (adjacentState.getFluidState().is(FluidTags.WATER)) {
 				level.destroyBlock(pos, false); // Break the block
 				break; // Once water is found, break the loop
 			}
