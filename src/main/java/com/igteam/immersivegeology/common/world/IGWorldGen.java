@@ -54,7 +54,11 @@ public class IGWorldGen
 		TFC_FEATURE_REGISTER = DeferredRegister.create(ForgeRegistries.FEATURES, "tfc");
 		IG_CONFIG_ORE = FEATURE_REGISTER.register("ig_ore", IGOreFeature::new);
 
-		if(!ModFlags.TFC.isLoaded()) TFC_FEATURE_REGISTER.register("cluster_vein", IGPlaceholderFeature::new);
+		if(!ModFlags.TFC.isLoaded())
+		{
+			TFC_FEATURE_REGISTER.register("cluster_vein", IGPlaceholderFeature::new);
+			TFC_FEATURE_REGISTER.register("soil_disc", IGPlaceholderFeature::new);
+		}
 
 		PLACEMENT_REGISTER = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, IGLib.MODID);
 
