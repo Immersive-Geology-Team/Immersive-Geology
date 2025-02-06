@@ -48,10 +48,5 @@ public class MaterialCobalt extends MaterialMetal {
                 ChemicalEnum.NitricAcid.getSlurryTagWith(MetalEnum.Cobalt), IGLib.SLURRY_TO_CRYSTAL_MB,
                 300, 38400);
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
-
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(
-                ItemCategoryFlags.GRIT, ItemCategoryFlags.INGOT);
     }
 }
