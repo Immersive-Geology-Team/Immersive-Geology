@@ -1,0 +1,27 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "forge:ammoniasolution"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "forge:hydrochloricacid"
+  },
+  "fluidInputC": {
+    "amount": 125,
+    "tag": "forge:nitricacid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:fluid_chemicalwaste"
+  },
+  "itemInput": {
+    "item": "immersivegeology:compound_dust_platinum"
+  },
+  "itemResult": {
+    "item": "immersivegeology:grit_platinum"
+  },
+  "time": 200
+}

@@ -7,15 +7,15 @@
     "states": [
       {
         "replace": "tfc:dirt/sandy_loam",
-        "with": "block.immersivegeology.evaporate_carnallite"
+        "with": "immersivegeology:evaporate_carnallite"
       },
       {
         "replace": "tfc:dirt/silty_loam",
-        "with": "tfc:clay/silty_loam"
+        "with": "immersivegeology:evaporate_carnallite"
       },
       {
         "replace": "tfc:grass/sandy_loam",
-        "with": "tfc:clay_grass/sandy_loam"
+        "with": "immersivegeology:evaporate_carnallite"
       }
     ]
   }

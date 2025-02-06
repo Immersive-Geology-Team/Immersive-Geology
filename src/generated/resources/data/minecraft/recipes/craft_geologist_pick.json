@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "tag": "forge:cobblestone"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "W": {
+      "item": "immersiveengineering:stick_treated"
+    }
+  },
+  "pattern": [
+    "SBF",
+    "BW ",
+    " W "
+  ],
+  "result": {
+    "item": "immersivegeology:prospector_kit"
+  },
+  "show_notification": true
+}

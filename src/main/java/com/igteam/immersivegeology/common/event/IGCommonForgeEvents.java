@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.event;
 
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
+import com.igteam.immersivegeology.common.item.blueprint.BlueprintProjection;
 import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
@@ -23,6 +24,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 import net.minecraft.world.phys.BlockHitResult;
@@ -32,6 +34,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class IGCommonForgeEvents
 {
@@ -54,75 +57,66 @@ public class IGCommonForgeEvents
 
 				IMultiblock multiblock = settings.getMultiblock();
 				Vec3i size = multiblock.getSize(world);
-				Vec3i offset = new Vec3i(-size.getX() / 2, 0, -size.getZ() / 2);
-				BlockPos structure_placed_at = settings.getPos().offset(offset);
+				BlockPos structure_placed_at = settings.getPos();
 
-				List<StructureBlockInfo> structure_info = multiblock.getStructure(world);
+				BlueprintProjection projection = new BlueprintProjection(world, multiblock);
+				projection.setFlip(settings.isMirrored());
+				projection.setRotation(settings.getRotation());
 
 				// Find the current working layer by checking from bottom-up
 				int workingLayer = 0;
-				boolean layerFound = false;
 
 				for (int y = 0; y < size.getY(); y++) {
-					boolean layerComplete = true;
-
-					for (StructureBlockInfo info : structure_info) {
-						BlockPos structure_block_world_position = structure_placed_at.offset(info.pos());
+					int finalY = y;
+					boolean layerComplete = projection.process(y, p ->
+					{
+						BlockPos structure_block_world_position = structure_placed_at.offset(p.tPos);
 
 						// If this block is at the current height level
-						if (structure_block_world_position.getY() == (structure_placed_at.getY() + y)) {
+						if (structure_block_world_position.getY() == (structure_placed_at.getY() + finalY)) {
 							BlockState worldState = world.getBlockState(structure_block_world_position);
-							if (!worldState.getBlock().equals(info.state().getBlock())) {
-								layerComplete = false;
-								break; // Stop checking once we find the first mismatch
-							}
+							return !worldState.getBlock().equals(p.tBlockInfo.state().getBlock());
 						}
-					}
 
-					if (!layerComplete) {
+						return false;
+					});
+
+					if (layerComplete) {
 						workingLayer = y;
-						layerFound = true;
 						break;
 					}
 				}
 
-				if (!layerFound) return; // If somehow no working layer was found, exit early.
-				// Find the block in the correct layer to pick
-				ItemStack stack = ItemStack.EMPTY;
-				for (StructureBlockInfo info : structure_info) {
-					// Check if we're in the working layer
-					if (info.pos().getY() == workingLayer) {
-						BlockPos structure_block_world_position = structure_placed_at.offset(info.pos());
-						// If the hit block is the same as the structure block
-						if (structure_block_world_position.equals(hit.getBlockPos().above())) {
-							// Find the structure block directly above
-							for (StructureBlockInfo aboveInfo : structure_info) {
-								if (structure_placed_at.offset(aboveInfo.pos()).equals(structure_block_world_position) && world.getBlockState(structure_block_world_position).isAir()) {
-									stack = new ItemStack(aboveInfo.state().getBlock().asItem()).copy();
-									break;
-								}
-							}
-							break;
-						}
-					}
-				}
+				projection.process(workingLayer, p ->
+				{
+					ItemStack stack = ItemStack.EMPTY;
+					BlockPos structure_block_world_position = structure_placed_at.offset(p.tPos);
 
-				// Ensure missing parts of the structure aren't picked
-				if (!stack.isEmpty()) {
-					Inventory inventory = player.getInventory();
-					int i = inventory.findSlotMatchingItem(stack);
-					if (player.getAbilities().instabuild) {
-						inventory.setPickedItem(stack);
-						mc.gameMode.handleCreativeModeItemAdd(player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inventory.selected);
-					} else if (i != -1) {
-						if (Inventory.isHotbarSlot(i)) {
-							inventory.selected = i;
-						} else {
-							mc.gameMode.handlePickItem(i);
-						}
+					// If the hit block is the same as the structure block
+					if (structure_block_world_position.equals(hit.getBlockPos().above()) && world.getBlockState(structure_block_world_position).isAir()) {
+						// Find the structure block directly above
+						stack = new ItemStack(p.tBlockInfo.state().getBlock().asItem()).copy();
 					}
-					event.setCanceled(true);
-				}
+
+					// Ensure missing parts of the structure aren't picked
+					if (!stack.isEmpty()) {
+						Inventory inventory = player.getInventory();
+						int i = inventory.findSlotMatchingItem(stack);
+						if (player.getAbilities().instabuild) {
+							inventory.setPickedItem(stack);
+							mc.gameMode.handleCreativeModeItemAdd(player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inventory.selected);
+						} else if (i != -1) {
+							if (Inventory.isHotbarSlot(i)) {
+								inventory.selected = i;
+							} else {
+								mc.gameMode.handlePickItem(i);
+							}
+						}
+						event.setCanceled(true);
+						return true;
+					}
+					return false;
+				});
 			}
 		}
 	}

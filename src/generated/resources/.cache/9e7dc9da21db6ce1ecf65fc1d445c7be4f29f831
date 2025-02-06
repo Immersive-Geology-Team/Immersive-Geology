@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-05T22:44:30.558440049	Item Models: immersivegeology
+// 1.20.1	2025-02-06T21:36:13.604765953	Item Models: immersivegeology
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_bronze_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_calcium_fluid.json
@@ -33,6 +33,7 @@
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_zirconium_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_ammoniasolution_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_ammoniasolution_molybdenite.json
+fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_ammoniasolution_osmium.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_aquaregia_fluid.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_aquaregia_gold.json
 fc30e9c1cf8a467311dff43a98dc5cce749e43e3 assets/immersivegeology/models/item/clean_flask_aquaregia_platinum.json

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "immersivegeology:scaffolding_tungsten_grate_top"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:scaffolding_tungsten_wooden_top"
+  }
+}

@@ -16,6 +16,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -141,10 +142,15 @@ public class IGBlockLootProvider implements LootTableSubProvider
 	private void registerAllRemainingAsDefault() {
 		for(RegistryObject<Block> b : IGRegistrationHolder.getBlockRegister().getEntries())
 		{
-			if(b.get() instanceof IGGenericBlock block)
+			if(b.get() instanceof IGBlockType block)
 			{
 				if(!this.generatedTables.contains(this.toTableLoc(b.getId())))
 				{
+					if(block.getMaterial(MaterialTexture.base) == null )
+					{
+						this.registerSelfDropping(b);
+						continue;
+					}
 					if(block.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(block.getFlag()))
 						continue;
 					this.registerSelfDropping(b);

@@ -17,6 +17,7 @@
   "immersivegeology.prospecting_pick.nothing": "Found Nothing",
 
   "manual.immersivegeology.main": "Immersive Geology",
+  "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_multiblocks": "Multiblocks",
   "manual.immersivegeology.minerals": "Minerals",
   "manual.immersivegeology.common": "Common Minerals",
@@ -187,6 +188,8 @@
   "fluid.immersivegeology.fluid_molten": "Molten %s",
   "fluid.immersivegeology.gas": "%s",
   "fluid.immersivegeology.slurry": "%s %s",
+  "fluid.immersivegeology.complex_slurry": "%s%s Acid",
+  "fluid.immersivegeology.cloudy_complex_slurry": "Cloudy %s%s Acid",
   "fluid.immersivegeology.cloudy_slurry": "Cloudy %s %s",
 
   "material.immersivegeology.millerite": "Millerite",

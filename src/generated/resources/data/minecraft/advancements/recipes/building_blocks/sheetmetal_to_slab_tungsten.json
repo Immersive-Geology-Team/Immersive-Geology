@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sheetmetal_tungsten": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:sheetmetal_block_tungsten"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sheetmetal_to_slab_tungsten"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sheetmetal_tungsten",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sheetmetal_to_slab_tungsten"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-05T11:37:55.1977977	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-02-06T21:36:13.612310173	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -8,6 +8,7 @@ acd0e1939cf7655b58c67b56be5980a3eb0be432 data/forge/tags/fluids/bindingagent.jso
 546205e3b48816e3990f891214f8d837c9e3b7f5 data/forge/tags/fluids/chemicalwaste.json
 3d378b93df4523d2544aea625e7ac61507a9bf7f data/forge/tags/fluids/chromium.json
 6fbd2f2b16191d5a278e36ba6a21bf0e2a92f161 data/forge/tags/fluids/clean_ammoniasolution_molybdenite.json
+4b77522a5f12275511d0c313ccbfc93cacc98b6c data/forge/tags/fluids/clean_ammoniasolution_osmium.json
 793baa0ba0190114172a41d7241f857876027f7b data/forge/tags/fluids/clean_aquaregia_gold.json
 7fff60c4dbbd0ef6d1cbb33d898528dbefe6bb6f data/forge/tags/fluids/clean_aquaregia_platinum.json
 5ad5700383ffb953dd21d5dabc1262f5e818bb6e data/forge/tags/fluids/clean_brine_carnallite.json

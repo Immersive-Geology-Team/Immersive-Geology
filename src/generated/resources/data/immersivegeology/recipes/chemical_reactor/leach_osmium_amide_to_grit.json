@@ -1,0 +1,28 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "forge:clean_ammoniasolution_osmium"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "forge:hydrochloricacid"
+  },
+  "fluidInputC": {
+    "amount": 125,
+    "tag": "forge:nitricacid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:fluid_chemicalwaste"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "itemResult": {
+    "item": "immersivegeology:grit_osmium"
+  },
+  "time": 200
+}

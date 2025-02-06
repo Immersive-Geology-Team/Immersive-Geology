@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:sheetmetal_block_tungsten"
+    },
+    "r": {
+      "item": "immersivegeology:rod_tungsten"
+    }
+  },
+  "pattern": [
+    "iii",
+    " r ",
+    "r r"
+  ],
+  "result": {
+    "item": "immersivegeology:scaffolding_tungsten_standard"
+  },
+  "show_notification": true
+}

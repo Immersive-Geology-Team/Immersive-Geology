@@ -124,13 +124,9 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "ballmill");
         multiblockEntry(instance, multiblock_category, "centrifuge");
 
-        // Create a new subnode for "Bug Bounty Contributors"
-        InnerNode<ResourceLocation, ManualEntry> contributors_category = parent_category.getOrCreateSubnode(
-                new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"), 10);
-
         // Build the manual entry for the contributors
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
-        instance.addEntry(contributors_category, builder.create());
+        instance.addEntry(parent_category, builder.create());
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

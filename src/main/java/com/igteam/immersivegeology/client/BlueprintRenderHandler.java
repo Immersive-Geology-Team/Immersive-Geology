@@ -56,9 +56,9 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 
 @OnlyIn(Dist.CLIENT)
@@ -183,6 +183,10 @@ public class BlueprintRenderHandler {
 			projection.setFlip(settings.isMirrored());
 			Vec3i mb_size = settings.getMultiblock().getSize(world);
 
+			Map<BlockPos, Boolean> badStates = new HashMap<>();
+
+			AtomicInteger imperfection_layer = new AtomicInteger(-1);
+
 			final List<Pair<RenderLayer, Info>> toRender = new ArrayList<>();
 			final MutableInt currentLayer = new MutableInt();
 			final MutableInt badBlocks = new MutableInt();
@@ -210,6 +214,14 @@ public class BlueprintRenderHandler {
 							if(!toCompare.isAir()){
 								toRender.add(Pair.of(RenderLayer.BAD, info));
 								skip = true;
+								if(tState.getBlock().defaultBlockState().equals(toCompare.getBlock().defaultBlockState()))
+								{
+									badStates.put(info.tPos, true);
+								} else
+								{
+									badStates.put(info.tPos, false);
+								}
+								imperfection_layer.set(layer);
 							}else{
 								badBlocks.increment();
 							}
@@ -225,18 +237,13 @@ public class BlueprintRenderHandler {
 				return false;
 			};
 			projection.processAll(bipred);
-
 			boolean perfect = (goodBlocks.getValue() == projection.getBlockCount());
-			int current_layer = currentLayer.getValue();
+			boolean hasImperfection = imperfection_layer.get() != -1;
 
-			int total_blocks_available = projection.getLayerSize(current_layer);
-			for(int i = 0; i < current_layer; i++)
+			if(hasImperfection)
 			{
-				total_blocks_available += projection.getLayerSize(i);
+				currentLayer.setValue(imperfection_layer.get());
 			}
-
-			int block_left = total_blocks_available - badBlocks.getValue();
-			boolean hasImperfection = (goodBlocks.getValue() != block_left);
 
 			MutableBlockPos min = new MutableBlockPos(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			MutableBlockPos max = new MutableBlockPos(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
@@ -283,10 +290,14 @@ public class BlueprintRenderHandler {
 				{
 					case ALL ->
 					{
-						float[] color = held ? new float[]{0.2f, 1.0f, 0.5f} : new float[]{0.2f, 0.5f, 1.0f};
+						float[] color;
+
+						color = held ? new float[]{0.2f, 1.0f, 0.5f} : new float[]{0.2f, 0.5f, 1.0f};
+
 
 						matrix.pushPose();
 						{
+							if(hasImperfection) continue;
 							renderPhantom(matrix, world, rInfo, settings.isMirrored(), flicker, color, partialTicks);
 
 							if(held)
@@ -302,7 +313,7 @@ public class BlueprintRenderHandler {
 						{
 							matrix.translate(rInfo.tPos.getX(), rInfo.tPos.getY(), rInfo.tPos.getZ());
 
-							renderCenteredOutlineBox(mainBuffer, matrix, 0xFF0000);
+							renderCenteredOutlineBox(mainBuffer, matrix, badStates.get(rInfo.tPos) ? 0xFFFF00 : 0xFF0000);
 						}
 						matrix.popPose();
 					}

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bronze_ingot": {
+    "has_stone": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:ingot_bronze"
+              "minecraft:cobblestone"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_bronze_ingot",
+      "has_stone",
       "has_the_recipe"
     ]
   ],
