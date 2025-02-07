@@ -73,11 +73,21 @@ public class IGServerConfig
 	{
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIron;
 		public final ForgeConfigSpec.BooleanValue shouldRemoveCopper;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIEBauxite;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIELead;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIESilver;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIEUranium;
+		public final ForgeConfigSpec.BooleanValue shouldRemoveIENickel;
 		VanillaOreRemoval(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("remove_minecraft_ore_veins").comment("These are the Rare but large veins of minecrafts Copper and Iron (includes Raw Ore Blocks)");
 			shouldRemoveIron = builder.comment("Should IG remove Minecrafts Iron Ore Veins?").define("remove_iron", true);
 			shouldRemoveCopper = builder.comment("Should IG remove Minecrafts Copper Ore Veins?").define("remove_copper", true);
+			shouldRemoveIEBauxite = builder.comment("Should IG remove Immersive Engineering Bauxite Ore?").define("remove_ie_bauxite", true);
+			shouldRemoveIELead = builder.comment("Should IG remove Immersive Engineering Lead Ore?").define("remove_ie_lead", true);
+			shouldRemoveIESilver = builder.comment("Should IG remove Immersive Engineering Silver Ore?S").define("remove_ie_silver", true);
+			shouldRemoveIEUranium = builder.comment("Should IG remove Immersive Engineering Uranium Ore?").define("remove_ie_uranium", true);
+			shouldRemoveIENickel = builder.comment("Should IG remove Immersive Engineering Nickel Ore?").define("remove_ie_nickel", true);
 			builder.pop();
 		}
 	}

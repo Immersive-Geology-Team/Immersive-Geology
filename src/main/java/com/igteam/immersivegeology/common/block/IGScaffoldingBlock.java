@@ -28,6 +28,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static blusunrize.immersiveengineering.common.register.IEBlocks.METAL_PROPERTIES_NO_OCCLUSION;
+
 public class IGScaffoldingBlock extends ScaffoldingBlock implements IGBlockType
 {
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
@@ -35,7 +37,7 @@ public class IGScaffoldingBlock extends ScaffoldingBlock implements IGBlockType
 	protected final MetalScaffoldingType type;
 	public IGScaffoldingBlock(MetalScaffoldingType type, MaterialInterface<?> material)
 	{
-		super(Properties.copy(MetalDecoration.ALU_SCAFFOLDING.get(type).get()).explosionResistance(1200).destroyTime(50));
+		super(METAL_PROPERTIES_NO_OCCLUSION.get().explosionResistance(1200).destroyTime(50));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = BlockCategoryFlags.SCAFFOLDING;
 		this.type = type;

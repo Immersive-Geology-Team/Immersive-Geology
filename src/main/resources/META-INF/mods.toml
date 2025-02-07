@@ -35,6 +35,13 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.immersivegeology]]
+modId="immersiveengineering"
+mandatory=true
+versionRange="[${version_ie},]"
+ordering="BEFORE"
+side="BOTH"
+
+[[dependencies.immersivegeology]]
 modId="jei"
 mandatory=false
 versionRange="[${jei_version},)"

@@ -12,7 +12,7 @@ plugins {
     id 'eclipse'
 }
 
-version = '0.5.0-b' + version_buildnumber
+version = '0.5.2-b' + version_buildnumber
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -49,7 +49,8 @@ def version_replaces = [
         'mod_license'  : mod_license,
         'mod_name'  : mod_name,
         'mod_authors' : mod_authors,
-        'mod_description': mod_description
+        'mod_description': mod_description,
+        'version_ie': version_ie
 ]
 
 def jsonPatterns = ["**/*.json", "**/*.mcmeta"]
