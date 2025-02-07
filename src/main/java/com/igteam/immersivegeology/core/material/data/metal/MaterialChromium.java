@@ -46,11 +46,6 @@ public class MaterialChromium extends MaterialMetal {
     {
         super.setupRecipeStages();
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
-
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.GRIT, ItemCategoryFlags.INGOT);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"_oxide_to_slurry",
                 MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST),
@@ -63,8 +58,6 @@ public class MaterialChromium extends MaterialMetal {
                 ChemicalEnum.SulfuricAcid,
                 ItemCategoryFlags.CRYSTAL);
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
 
     }
 }
