@@ -86,8 +86,8 @@ public class MaterialGalena extends MaterialSulphideMineral
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
-                MetalEnum.Lead.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                MetalEnum.Silver.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Lead, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Galena), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
                 300, 38400);
 

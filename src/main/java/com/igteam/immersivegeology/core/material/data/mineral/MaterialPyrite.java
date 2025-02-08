@@ -1,13 +1,18 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
@@ -87,5 +92,20 @@ public class MaterialPyrite extends MaterialSulphideMineral
            getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
            getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
            0.075f, 200, 1000);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+                ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
+                ChemicalEnum.SulfuricAcid.getSlurryWith(MineralEnum.Pyrite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
+                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                MetalEnum.Molybdenum.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
+                ChemicalEnum.SulfuricAcid.getSlurryWith(MetalEnum.Iron, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                ChemicalEnum.SulfuricAcid.getSlurryTagWith(MineralEnum.Pyrite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
+                300, 38400);
     }
 }

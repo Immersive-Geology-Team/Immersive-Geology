@@ -64,7 +64,13 @@ public class MaterialAlumina extends MaterialMineral {
     {
         super.setupRecipeStages();
         IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
-                .create("crushed_ore" + getName() + "_to_dust", getStack(ItemCategoryFlags.CRUSHED_ORE, 1), getStack(ItemCategoryFlags.POWDER, 1), 10000, 100);
+                .create("crushed_ore" + getName() + "_to_dust", getStack(ItemCategoryFlags.CRUSHED_ORE, 1), getStack(ItemCategoryFlags.GRIT, 1), 10000, 100);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 200, 16000);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION)
+                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
                 .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST),

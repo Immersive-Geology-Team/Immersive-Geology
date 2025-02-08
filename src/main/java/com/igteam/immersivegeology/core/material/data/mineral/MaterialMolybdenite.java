@@ -73,10 +73,10 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
 
         //Direct Leaching in Ammonia
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
-                ItemStack.EMPTY,
-                ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybdenite, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
+                ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybdenite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 1)),
-                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);
     }
 }

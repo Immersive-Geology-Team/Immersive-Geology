@@ -20,6 +20,6 @@ public class MaterialHydrochloricAcid extends MaterialChemical
 				MetalEnum.Nickel, MetalEnum.Chromium, MetalEnum.Manganese,
 				MetalEnum.Copper, MetalEnum.Silver, MetalEnum.Neodymium, MetalEnum.Tungsten,MetalEnum.Uranium,
 				MetalEnum.Lead,
-				MineralEnum.Acanthite, MineralEnum.Galena);
+				MineralEnum.Acanthite, MineralEnum.Galena, MineralEnum.Chalcocite);
 	}
 }
