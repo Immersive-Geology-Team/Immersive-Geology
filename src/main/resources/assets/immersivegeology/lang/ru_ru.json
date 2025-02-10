@@ -215,7 +215,6 @@
   "fluid.immersivegeology.cloudy_complex_slurry": "Мутный %s%s кислота",
   "fluid.immersivegeology.cloudy_slurry": "Мутный %s %s",
 
-  "material.immersivegeology.millerite": "Миллерит",
   "material.immersivegeology.vanilla": "Камень",
   "material.immersivegeology.sandstone": "Песчаник",
   "material.immersivegeology.dripstone": "Натёчный камень",
@@ -360,7 +359,6 @@
   "material.immersivegeology.sulfuricacid": "Серная кислота",
   "material.immersivegeology.hydrochloricacid": "Соляная кислота",
   "material.immersivegeology.hydrofluoricacid": "Плавиковая кислота",
-  "material.immersivegeology.brine": "Рапа",
   "material.immersivegeology.sodiumhydroxide": "Гидроксид натрия",
 
 
@@ -442,10 +440,10 @@
   "advancement.immersivegeology.mb_rkiln.desc": "Build Rotary Kiln",
   "advancement.immersivegeology.mb_crystallizer": "Разделяй и осаждай",
   "advancement.immersivegeology.mb_crystallizer.desc": "Построить кристаллизатор",
-  "advancement.immersivegeology.aluminium_ingot": «Хай-тек металл»,
+  "advancement.immersivegeology.aluminium_ingot": "Хай-тек металл",
   "advancement.immersivegeology.aluminium_ingot.desc": "Получить алюминиевый слиток",
 
-  "advancement.immersivegeology.metal_crystal": "Блестяшки?",         Блестки?
+  "advancement.immersivegeology.metal_crystal": "Блестяшки?",
   "advancement.immersivegeology.metal_crystal.desc": "Получите любой металлический кристалл",
 
   "block.immersivegeology.chemical_engineering": "Химический инженерный блок",
