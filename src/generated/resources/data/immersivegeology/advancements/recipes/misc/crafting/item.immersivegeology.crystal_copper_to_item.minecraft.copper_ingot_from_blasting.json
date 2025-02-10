@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersivegeology.crystal_copper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:crystal_copper"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_copper_to_item.minecraft.copper_ingot_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.immersivegeology.crystal_copper",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/item.immersivegeology.crystal_copper_to_item.minecraft.copper_ingot_from_blasting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

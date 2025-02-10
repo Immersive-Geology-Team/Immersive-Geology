@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/gold"
+  },
+  "results": [
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "time": 0
+}

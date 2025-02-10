@@ -40,7 +40,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 @Mod(IGLib.MODID)
-public class  ImmersiveGeology {
+public class ImmersiveGeology {
 
     public static CommonProxy proxy = Util.make(() ->
     {

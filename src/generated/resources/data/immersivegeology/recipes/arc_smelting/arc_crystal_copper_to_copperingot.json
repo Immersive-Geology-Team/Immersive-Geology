@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/copper"
+  },
+  "results": [
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "time": 0
+}

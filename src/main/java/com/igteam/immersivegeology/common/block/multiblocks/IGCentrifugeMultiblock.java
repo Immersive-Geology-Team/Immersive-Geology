@@ -32,7 +32,7 @@ public class IGCentrifugeMultiblock extends IGTemplateMultiblock
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new CentrifugeClientData(INSTANCE, 0.5, 0.5, 0.5));
+        consumer.accept(new CentrifugeClientData(INSTANCE, 1.5, 1.5, 1.5));
     }
 
     @Override

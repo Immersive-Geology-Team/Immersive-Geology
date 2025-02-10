@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/unobtanium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_unobtanium"
+    }
+  ],
+  "time": 0
+}

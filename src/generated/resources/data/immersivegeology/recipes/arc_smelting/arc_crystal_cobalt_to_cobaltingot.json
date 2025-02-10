@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/cobalt"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_cobalt"
+    }
+  ],
+  "time": 0
+}

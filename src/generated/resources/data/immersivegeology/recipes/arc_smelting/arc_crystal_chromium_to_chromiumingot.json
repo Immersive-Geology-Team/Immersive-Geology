@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/chromium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_chromium"
+    }
+  ],
+  "time": 0
+}

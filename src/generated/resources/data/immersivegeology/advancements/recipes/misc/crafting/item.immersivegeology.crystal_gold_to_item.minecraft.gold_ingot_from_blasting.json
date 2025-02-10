@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersivegeology.crystal_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:crystal_gold"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/item.immersivegeology.crystal_gold_to_item.minecraft.gold_ingot_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.immersivegeology.crystal_gold",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/item.immersivegeology.crystal_gold_to_item.minecraft.gold_ingot_from_blasting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

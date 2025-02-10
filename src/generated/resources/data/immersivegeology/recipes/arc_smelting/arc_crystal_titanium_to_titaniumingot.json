@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/titanium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_titanium"
+    }
+  ],
+  "time": 0
+}

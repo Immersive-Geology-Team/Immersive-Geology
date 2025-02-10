@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/thorium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_thorium"
+    }
+  ],
+  "time": 0
+}

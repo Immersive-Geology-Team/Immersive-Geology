@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:grits/neodymium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_neodymium"
+    }
+  ],
+  "time": 0
+}

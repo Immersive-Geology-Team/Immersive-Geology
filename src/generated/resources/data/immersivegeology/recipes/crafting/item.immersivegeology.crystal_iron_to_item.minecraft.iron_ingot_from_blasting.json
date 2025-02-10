@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 120,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "immersivegeology:crystal_iron"
+  },
+  "result": "minecraft:iron_ingot"
+}

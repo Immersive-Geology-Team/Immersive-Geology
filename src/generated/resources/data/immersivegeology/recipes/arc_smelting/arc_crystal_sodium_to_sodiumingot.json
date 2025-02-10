@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:crystal/sodium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_sodium"
+    }
+  ],
+  "time": 0
+}

@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:grits/nickel"
+  },
+  "results": [
+    {
+      "item": "immersiveengineering:ingot_nickel"
+    }
+  ],
+  "time": 0
+}

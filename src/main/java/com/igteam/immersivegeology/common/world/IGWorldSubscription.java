@@ -14,14 +14,22 @@ import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
 import blusunrize.immersiveengineering.common.register.IEBlocks.Metals;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
+import net.minecraft.data.worldgen.DimensionTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -29,13 +37,21 @@ import java.util.*;
 
 public class IGWorldSubscription
 {
-	private static final List<Block> removeListIron = List.of(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK);
-	private static final List<Block> removeListCopper = List.of(Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.RAW_COPPER_BLOCK);
+	private static final List<Block> REMOVE_LIST_IRON = List.of(
+			Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK);
+	private static final List<Block> REMOVE_LIST_COPPER = List.of(
+			Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.RAW_COPPER_BLOCK);
 
-	private static final List<Map<EnumMetals, BlockEntry<Block>>> ieOreMetals = List.of(Metals.ORES, Metals.DEEPSLATE_ORES, Metals.RAW_ORES);
+	private static final List<Block> REMOVE_LIST_GOLD = List.of(
+			Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, Blocks.NETHER_GOLD_ORE);
 
+	// List of maps for IE metal ores
+	private static final List<Map<EnumMetals, BlockEntry<Block>>> IE_ORE_METALS =
+			List.of(Metals.ORES, Metals.DEEPSLATE_ORES, Metals.RAW_ORES);
 
+	// Config flags (loaded on first chunk event)
 	private static Boolean removeIron = null;
+	private static Boolean removeGold = null;
 	private static Boolean removeCopper = null;
 	private static Boolean removeIEBauxite = null;
 	private static Boolean removeIELead = null;
@@ -44,60 +60,127 @@ public class IGWorldSubscription
 	private static Boolean removeIENickel = null;
 	private static Ores oreConfigs = null;
 
+	// Set of blocks to remove (built from the above flags)
+	private static final Set<Block> removalBlocks = new HashSet<>();
 
-	public static void getConfigValues()
-	{
+	/**
+	 * Loads the configuration values and precomputes the set of blocks to remove.
+	 */
+	public static void getConfigValues() {
 		removeIron = IGServerConfig.REMOVAL.shouldRemoveIron.get();
 		removeCopper = IGServerConfig.REMOVAL.shouldRemoveCopper.get();
+		removeGold = IGServerConfig.REMOVAL.shouldRemoveGold.get();
+
 		removeIEBauxite = IGServerConfig.REMOVAL.shouldRemoveIEBauxite.get();
 		removeIELead = IGServerConfig.REMOVAL.shouldRemoveIELead.get();
 		removeIESilver = IGServerConfig.REMOVAL.shouldRemoveIESilver.get();
 		removeIEUranium = IGServerConfig.REMOVAL.shouldRemoveIEUranium.get();
-		removeIENickel = IGServerConfig.REMOVAL.shouldRemoveIEUranium.get();
+		removeIENickel = IGServerConfig.REMOVAL.shouldRemoveIENickel.get();
 		oreConfigs = IGServerConfig.ORES;
+
+		// Rebuild the removal set based on the config flags.
+		removalBlocks.clear();
+		if (Boolean.TRUE.equals(removeIron)) {
+			removalBlocks.addAll(REMOVE_LIST_IRON);
+		}
+		if (Boolean.TRUE.equals(removeCopper)) {
+			removalBlocks.addAll(REMOVE_LIST_COPPER);
+		}
+		if(Boolean.TRUE.equals(removeGold))
+		{
+			removalBlocks.addAll(REMOVE_LIST_GOLD);
+		}
+		if (Boolean.TRUE.equals(removeIEUranium)) {
+			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
+				removalBlocks.add(map.get(EnumMetals.URANIUM).get());
+			}
+		}
+		if (Boolean.TRUE.equals(removeIEBauxite)) {
+			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
+				removalBlocks.add(map.get(EnumMetals.ALUMINUM).get());
+			}
+		}
+		if (Boolean.TRUE.equals(removeIELead)) {
+			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
+				removalBlocks.add(map.get(EnumMetals.LEAD).get());
+			}
+		}
+		if (Boolean.TRUE.equals(removeIENickel)) {
+			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
+				removalBlocks.add(map.get(EnumMetals.NICKEL).get());
+			}
+		}
+		if (Boolean.TRUE.equals(removeIESilver)) {
+			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
+				removalBlocks.add(map.get(EnumMetals.SILVER).get());
+			}
+		}
 	}
 
-	// This is somewhat of a dirty method to remove the ore veins, I think it may be possible to set their size to zero
-	// But I've had a lot of trouble finding information on this.
-		
+	private static final BlockState stoneState = Blocks.STONE.defaultBlockState();
+	private static final BlockState deepslateState = Blocks.DEEPSLATE.defaultBlockState();
+	private static final BlockState netherStone = Blocks.NETHERRACK.defaultBlockState();
+
 	@SubscribeEvent
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
 	{
-		if(removeCopper==null||removeIron==null||oreConfigs==null) getConfigValues();
-		ChunkAccess access = event.getChunk();
+		if(!event.isNewChunk()) return;
+		boolean isNether = false;
+		// Ensure config values are loaded.
+		if(removeCopper==null||removeIron==null||oreConfigs==null)
+		{
+			getConfigValues();
+		}
+
+		// If no removal flags are set, exit early.
+		if(!(Boolean.TRUE.equals(removeIron)||
+				Boolean.TRUE.equals(removeCopper)||
+				Boolean.TRUE.equals(removeIEUranium)||
+				Boolean.TRUE.equals(removeIEBauxite)||
+				Boolean.TRUE.equals(removeIELead)||
+				Boolean.TRUE.equals(removeIENickel)||
+				Boolean.TRUE.equals(removeIESilver)))
+		{
+			return;
+		}
 		LevelAccessor level = event.getLevel();
 
+		if(level instanceof ServerLevel slevel)
+		{
+			isNether = slevel.dimension().equals(Level.NETHER);
+		}
+
+		ChunkAccess chunk = event.getChunk();
 		if(event.isNewChunk())
 		{
-			if(!removeIron&&!removeCopper) return;
 			BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-			for(int i = access.getMinSection(); i < access.getMaxSection(); ++i)
+			// Loop over all sections in the chunk.
+			for(int sectionY = chunk.getMinSection(); sectionY < chunk.getMaxSection(); ++sectionY)
 			{
-				LevelChunkSection levelchunksection = access.getSection(access.getSectionIndexFromSectionY(i));
-				BlockPos blockpos = SectionPos.of(access.getPos(), i).origin();
-				for(int j = 0; j < 16; ++j)
+				LevelChunkSection section = chunk.getSection(chunk.getSectionIndexFromSectionY(sectionY));
+				if(section==null)
 				{
-					for(int k = 0; k < 16; ++k)
+					continue;
+				}
+				BlockPos sectionOrigin = SectionPos.of(chunk.getPos(), sectionY).origin();
+				// Iterate over all 16x16x16 block positions in this section.
+				for(int y = 0; y < 16; y++)
+				{
+					for(int x = 0; x < 16; x++)
 					{
-						for(int l = 0; l < 16; ++l)
+						for(int z = 0; z < 16; z++)
 						{
-							BlockState blockstate = levelchunksection.getBlockState(l, j, k);
-							cursor.setWithOffset(blockpos, l, j, k);
-							if((removeIron && removeListIron.contains(blockstate.getBlock())) ||
-								(removeCopper && removeListCopper.contains(blockstate.getBlock())) ||
-								(removeIEUranium && ieOreMetals.stream().anyMatch((entry) -> entry.get(EnumMetals.URANIUM).get().equals(blockstate.getBlock()))) ||
-								(removeIEBauxite && ieOreMetals.stream().anyMatch((entry) -> entry.get(EnumMetals.ALUMINUM).get().equals(blockstate.getBlock()))) ||
-								(removeIELead && ieOreMetals.stream().anyMatch((entry) -> entry.get(EnumMetals.LEAD).get().equals(blockstate.getBlock()))) ||
-								(removeIENickel && ieOreMetals.stream().anyMatch((entry) -> entry.get(EnumMetals.NICKEL).get().equals(blockstate.getBlock()))) ||
-								(removeIESilver && ieOreMetals.stream().anyMatch((entry) -> entry.get(EnumMetals.SILVER).get().equals(blockstate.getBlock()))))
+							BlockState currentState = section.getBlockState(x, y, z);
+							if(removalBlocks.contains(currentState.getBlock()))
 							{
-								event.getChunk().setBlockState(cursor, j > 0?Blocks.STONE.defaultBlockState(): Blocks.DEEPSLATE.defaultBlockState(), true);
+								cursor.setWithOffset(sectionOrigin, x, y, z);
+								// Use deepslate for the bottom layer (y == 0), stone otherwise.
+								chunk.setBlockState(cursor, (isNether ? netherStone : (y > 0?stoneState: deepslateState)), true);
 							}
 						}
 					}
 				}
 			}
 		}
-
 	}
 }
