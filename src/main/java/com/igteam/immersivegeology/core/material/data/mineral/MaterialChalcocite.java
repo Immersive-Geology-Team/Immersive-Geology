@@ -11,10 +11,7 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -84,13 +81,27 @@ public class MaterialChalcocite extends MaterialSulphideMineral
         IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG );
-        //TODO rework for byproducts extraction
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.075f, 200, 1000);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+                ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MineralEnum.Chalcocite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                MetalEnum.Copper.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Nickel, IGLib.ACID_RECOVERED_FROM_SLURRY),
+                ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Chalcocite), IGLib.SLURRY_TO_CRYSTAL_MB,
+                300, 38400);
     }
 
     @Override
