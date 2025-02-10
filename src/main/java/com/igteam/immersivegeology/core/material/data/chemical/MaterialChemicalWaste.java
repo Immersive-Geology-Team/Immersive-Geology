@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -18,7 +19,7 @@ import java.util.function.BiFunction;
 public class MaterialChemicalWaste extends MaterialChemical
 {
 	public MaterialChemicalWaste() {
-		super(MineralEnum.Bauxite, MineralEnum.Molybdenite);
+		super(MineralEnum.Bauxite, MineralEnum.Molybdenite, MineralEnum.Monazite);
 		removeMaterialFlags(BlockCategoryFlags.SLURRY);
 	}
 
