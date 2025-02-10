@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 32000,
+  "input": {
+    "tag": "forge:grits/uraninite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_uraninite"
+  },
+  "time": 400
+}

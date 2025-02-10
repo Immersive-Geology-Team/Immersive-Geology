@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "fluid": "immersivegeology:slurry_hydrochloricacid_nickel"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "forge:clean_hydrochloricacid_chalcocite"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_copper"
+  },
+  "time": 300
+}

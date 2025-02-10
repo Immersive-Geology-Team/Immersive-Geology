@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 32000,
+  "input": {
+    "tag": "forge:grits/monazite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_monazite"
+  },
+  "time": 400
+}

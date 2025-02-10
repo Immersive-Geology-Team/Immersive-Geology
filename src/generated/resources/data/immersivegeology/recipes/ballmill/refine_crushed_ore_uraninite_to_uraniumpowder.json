@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:crushed_ore/uraninite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_uraninite"
+  },
+  "time": 800
+}

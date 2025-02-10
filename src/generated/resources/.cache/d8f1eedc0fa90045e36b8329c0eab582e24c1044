@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-05T22:44:30.556061359	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-02-10T20:24:15.8865106	Tags for minecraft:item mod id immersivegeology
 ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint/multiblock_plans.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
@@ -572,6 +572,7 @@ ecf09d3a69f44dea90d2f62bf48172e6dbf66602 data/forge/tags/items/rods/unobtanium.j
 badfc2bdc77bd289139617a0f7495c7346aeaa84 data/forge/tags/items/rods/zinc.json
 b802d95d20a58ac1e1f2bb714ef62875bf42922c data/forge/tags/items/rods/zirconium.json
 c4fe6f59011d7ba984c76866c820f959ee425aa7 data/forge/tags/items/sediment/carnallite.json
+53e38f4905d6abb25a92fb9227d4ee21811f418b data/forge/tags/items/sediment/monazite.json
 dc68b153844a135f505ac8b39a1844368ec56c6d data/forge/tags/items/sediment/rocksalt.json
 368613ba35fbc48162368eb644a0cd9b79682eb5 data/forge/tags/items/sediment/saltpeter.json
 9cc06381331b08cee2e243503d35d0c1b6d90cc6 data/forge/tags/items/slag/acanthite.json

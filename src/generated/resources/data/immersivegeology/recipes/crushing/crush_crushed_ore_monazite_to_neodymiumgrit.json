@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_monazite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_monazite"
+  },
+  "secondaries": [],
+  "time": 100
+}

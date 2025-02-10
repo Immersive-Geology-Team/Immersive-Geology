@@ -22,7 +22,7 @@
   "manual.immersivegeology.ig_multiblocks": "Машины",
   "manual.immersivegeology.minerals": "Минералы",
   "manual.immersivegeology.common": "Общие минералы",
-  "manual.immersivegeology.uncommon": "Необычный минералы"
+  "manual.immersivegeology.uncommon": "Необычный минералы",
   "manual.immersivegeology.rare": "Редкие минералы",
   "manual.immersivegeology.epic": "Очень редкие минералы",
   "manual.immersivegeology.metals": "Метталы",
@@ -365,7 +365,7 @@
    "component.immersivegeology.hydrochloric_acid": "Хлорид",
    "component.immersivegeology.sulfuric_acid": "Сульфат",
    "component.immersivegeology.nitric_acid": "Нитрат",
-   "component.immersivegeology.hydrofluoric_acid": "Фторид"
+   "component.immersivegeology.hydrofluoric_acid": "Фторид",
   
   "component.immersivegeology.hydrochloricacid": "Хлорид",
   "component.immersivegeology.sulfuricacid": "Сульфат",
@@ -467,7 +467,7 @@
   "block.immersivegeology.tfc_rich_ore_block_cobaltite_marble.prospected": "Кобальтит",
   "block.immersivegeology.tfc_normal_ore_block_chalcocite_claystone.prospected": "Халькозин",
   "block.immersivegeology.ad_astra_normal_ore_block_gypsum_mars_stone.prospected": "Гипс",
-  "block.immersivegeology.tfc_normal_ore_block_bauxite_limestone.prospected": "Боксит""Thorite,
+  "block.immersivegeology.tfc_normal_ore_block_bauxite_limestone.prospected": "Боксит",
   "block.immersivegeology.poor_ore_block_gold_stone.prospected": "Самородное золото",
   "block.immersivegeology.rich_ore_block_chalcopyrite_granite.prospected": "Халькопирит",
   "block.immersivegeology.tfc_rich_ore_block_cobaltite_slate.prospected": "Кобальтит",
