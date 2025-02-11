@@ -36,6 +36,11 @@ public class MaterialCobaltite extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        removeMaterialFlags(ItemCategoryFlags.GRIT);
+        removeMaterialFlags(ItemCategoryFlags.POWDER);
+
+        addFlags(ItemCategoryFlags.SLAG);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         //TODO Nether and Lava
         CONFIG = new MineralConfig(18,60,1,-64,72,1200,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);

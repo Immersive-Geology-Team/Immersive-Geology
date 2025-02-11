@@ -4,12 +4,12 @@ import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -28,7 +28,11 @@ public class MaterialSphalerite extends MaterialSulphideMineral
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
-        CONFIG = new MineralConfig(10,45,3,0,140,800, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        addFlags(ItemCategoryFlags.SLAG);
+        addFlags(ItemCategoryFlags.PELLET);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
+
+        CONFIG = new MineralConfig(10,45,3,0,140,800, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     @Override
@@ -41,4 +45,26 @@ public class MaterialSphalerite extends MaterialSulphideMineral
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Zinc, MetalEnum.Iron));
     }
+
+    @Override
+    public void setupRecipeStages()
+    {
+        super.setupRecipeStages();
+
+        IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.CRUSHED_ORE, 1,
+                ItemCategoryFlags.SLAG, 1, 800, 250);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                MetalEnum.Zinc.getStack(ItemCategoryFlags.METAL_OXIDE),
+                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
+                0.75f, 200, 1000);
+
+    }
+
 }

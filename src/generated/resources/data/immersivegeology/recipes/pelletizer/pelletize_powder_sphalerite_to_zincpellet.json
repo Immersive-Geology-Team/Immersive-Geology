@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/sphalerite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_sphalerite"
+  },
+  "time": 600
+}

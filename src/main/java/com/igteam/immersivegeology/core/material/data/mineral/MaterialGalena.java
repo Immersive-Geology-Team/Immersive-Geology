@@ -34,11 +34,13 @@ public class MaterialGalena extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        addFlags(ItemCategoryFlags.SLAG);
+        addFlags(ItemCategoryFlags.PELLET);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         // TODO Goto Nether
         CONFIG = new MineralConfig(12,45,2,-64,128,1250,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
-        this.addFlags(ItemCategoryFlags.POWDERED_SLAG);
-        this.addFlags(ItemCategoryFlags.PELLET);
+
     }
 
     @Override

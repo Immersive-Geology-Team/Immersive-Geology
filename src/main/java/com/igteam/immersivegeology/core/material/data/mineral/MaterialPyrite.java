@@ -40,7 +40,11 @@ public class MaterialPyrite extends MaterialSulphideMineral
 
         setAsocialMaterialChance(1f);
         addGenerationFriend(() -> MineralEnum.Chalcopyrite.instance(), 50);
+
+        addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
+
         // TODO Banished to the Nether and Lava! ~UnSchtalch
         CONFIG = new MineralConfig(12,30,3,-64,112,900, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }

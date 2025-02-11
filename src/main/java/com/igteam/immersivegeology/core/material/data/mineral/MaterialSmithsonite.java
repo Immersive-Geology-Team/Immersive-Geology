@@ -26,7 +26,11 @@ public class MaterialSmithsonite extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+
+        addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
+
         CONFIG = new MineralConfig(8,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 

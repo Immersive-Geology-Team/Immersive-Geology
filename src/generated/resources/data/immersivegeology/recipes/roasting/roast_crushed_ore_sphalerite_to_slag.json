@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "forge:crushed_ore/sphalerite"
+  },
+  "result": {
+    "item": "immersivegeology:slag_sphalerite"
+  },
+  "time": 800,
+  "waste": 250
+}
