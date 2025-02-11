@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "minecraft:block/netherrack",
+    "ore": "immersivegeology:block/greyscale/rock/vein/metallic/rich_1_gold_pristine"
+  }
+}

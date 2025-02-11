@@ -36,6 +36,11 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
+        removeMaterialFlags(ItemCategoryFlags.GRIT);
+        removeMaterialFlags(ItemCategoryFlags.POWDER);
+
+        addFlags(ItemCategoryFlags.SLAG);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         setAsocialMaterialChance(1f);
         addGenerationFriend(() -> MineralEnum.Pyrite.instance(), 50);

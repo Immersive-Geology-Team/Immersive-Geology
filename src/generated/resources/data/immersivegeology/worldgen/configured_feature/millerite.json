@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_hot",
+    "biomes": "#minecraft:is_nether",
     "entry": "Millerite",
     "random_name": -1378954184258771592
   }

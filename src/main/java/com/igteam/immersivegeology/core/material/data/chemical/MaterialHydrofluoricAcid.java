@@ -16,7 +16,7 @@ public class MaterialHydrofluoricAcid extends MaterialChemical
 
 	public MaterialHydrofluoricAcid()
 	{
-		super(MetalEnum.Neodymium, MetalEnum.Uranium);
+		super(MetalEnum.Neodymium, MetalEnum.Uranium, MetalEnum.Thorium, MetalEnum.Neodymium);
 	}
 
 }

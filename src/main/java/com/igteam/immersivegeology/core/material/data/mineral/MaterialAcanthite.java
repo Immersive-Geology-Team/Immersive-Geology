@@ -42,6 +42,9 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
+
+        CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
                 MetalEnum.Lead.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
-                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Lead, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Acanthite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
                 300, 38400);
     }

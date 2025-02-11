@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/sphalerite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_sphalerite"
+  },
+  "time": 200
+}

@@ -53,15 +53,19 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         Level level = tile.getLevel();
         Direction dir = orientation.front();
         boolean isActive = state.shouldRenderActive();
-
         poseStack.pushPose();
         {
-            poseStack.translate(1.5, -.4, 1.5);
-            float angleDrum = isActive? rot + pPartialTick : rot;
+            rotateForFacing(poseStack, dir);
             poseStack.pushPose();
             {
-                poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum*Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));
-                renderDynamicModel(DRUM, poseStack, buffer, dir, level, pos, pPackedLight, pPackedOverlay);
+                poseStack.translate(1.5, -.4, 1.5);
+                float angleDrum = isActive?rot+pPartialTick: rot;
+                poseStack.pushPose();
+                {
+                    poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum*Mth.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+                    renderDynamicModel(DRUM, poseStack, buffer, dir, level, pos, pPackedLight, pPackedOverlay);
+                }
+                poseStack.popPose();
             }
             poseStack.popPose();
         }
@@ -72,7 +76,7 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     {
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
-        rotateForFacing(matrix, facing);
+        //rotateForFacing(matrix, facing);
 
         RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, level, pos, false, 0xf0f0f0, light);
         matrix.popPose();

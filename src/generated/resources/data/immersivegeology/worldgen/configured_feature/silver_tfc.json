@@ -4,7 +4,7 @@
     "blocks": [],
     "density": 0.5,
     "max_y": 50,
-    "min_y": 10,
+    "min_y": -32,
     "random_name": "silver_tfc",
     "rarity": 95,
     "size": 12

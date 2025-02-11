@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "tfc"
+        }
+      ],
+      "recipe": {
+        "type": "tfc:collapse",
+        "copy_input": true,
+        "ingredient": "immersivegeology:poor_ore_block_vanadinite_basalt"
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "recipe": {
+        "type": "immersivegeology:empty"
+      }
+    }
+  ]
+}

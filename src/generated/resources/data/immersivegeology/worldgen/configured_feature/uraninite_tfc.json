@@ -61,8 +61,8 @@
       }
     ],
     "density": 0.5,
-    "max_y": 180,
-    "min_y": 20,
+    "max_y": 32,
+    "min_y": -64,
     "random_name": "uraninite_tfc",
     "rarity": 80,
     "size": 13

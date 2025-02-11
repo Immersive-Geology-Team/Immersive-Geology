@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:sodiumhydroxide"
+  },
+  "fluidResult": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "itemInput": {
+    "item": "immersivegeology:sediment_monazite"
+  },
+  "itemResult": {
+    "item": "immersivegeology:metal_oxide_thorium"
+  },
+  "time": 200
+}

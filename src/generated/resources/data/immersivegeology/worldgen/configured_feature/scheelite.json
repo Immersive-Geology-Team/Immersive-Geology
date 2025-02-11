@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_sparse",
+    "biomes": "#forge:is_mountain",
     "entry": "Scheelite",
     "random_name": 412773644477761860
   }
