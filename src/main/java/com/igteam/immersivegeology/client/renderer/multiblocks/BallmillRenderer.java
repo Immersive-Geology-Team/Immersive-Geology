@@ -53,20 +53,29 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         Level level = tile.getLevel();
         Direction dir = orientation.front();
         boolean isActive = state.shouldRenderActive();
+        boolean isMirrored = context.getLevel().getOrientation().mirrored();
+        float rotationDir = isMirrored ? -1 : 1;
+        if(isMirrored)
+        {
+            dir = dir.getOpposite();
+        }
+
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
                 poseStack.translate(0.905,2.125,0.5);
                 float angleDrum = isActive ? (rot) + pPartialTick : rot;
 
-                float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : (((rot * 2f) + 12) % 360);
-                poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+                poseStack.mulPose(new Quaternionf().rotateAxis((angleDrum * rotationDir) * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
                 renderDynamicModel(DRUM, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
             poseStack.popPose();
 
             poseStack.pushPose();
-                poseStack.translate(1.34375,0.775,0.9375);
-                poseStack.mulPose(new Quaternionf().rotateAxis(-angleAxle * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+                float z = isMirrored ? 0.0625f : 0.9375f;
+                poseStack.translate(1.34375,0.775, z);
+
+                float angleAxle = isActive ? (((rot * 2f) + 12) % 360) + pPartialTick : (((rot * 2f) + 12) % 360);
+                poseStack.mulPose(new Quaternionf().rotateAxis((angleAxle * -rotationDir) * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
 
                 renderDynamicModel(AXLE, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay);
             poseStack.popPose();

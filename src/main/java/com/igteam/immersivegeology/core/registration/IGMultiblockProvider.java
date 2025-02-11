@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 public class IGMultiblockProvider {
     public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = IGRegistrationHolder.registerMetalMultiblock("crystallizer", new CrystallizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"),
             builder -> {
-                builder.redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN).notMirrored();
+                builder.redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN);
             });
 
     public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMetalMultiblock("gravityseparator", new GravitySeparatorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("gravityseparator"),
@@ -54,12 +54,12 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<CentrifugeLogic.State> CENTRIFUGE = IGRegistrationHolder.registerMetalMultiblock("centrifuge", new CentrifugeLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("centrifuge"),
             builder -> {
-                builder.redstone(state -> state.rsState, CentrifugeLogic.REDSTONE_IN).notMirrored();
+                builder.redstone(state -> state.rsState, CentrifugeLogic.REDSTONE_IN);
             });
 
     public static final MultiblockRegistration<BallmillLogic.State> BALLMILL = IGRegistrationHolder.registerMetalMultiblock("ballmill", new BallmillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("ballmill"),
             builder -> {
-                builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN).notMirrored();
+                builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN);
             });
 
     public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = IGRegistrationHolder.registerMetalMultiblock("pelletizer", new PelletizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"),
