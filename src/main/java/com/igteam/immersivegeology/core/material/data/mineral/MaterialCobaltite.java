@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags.Biomes;
@@ -38,7 +39,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         //TODO Nether and Lava
-        CONFIG = new MineralConfig(18,60,1,-64,72,1200,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(18,60,1,-64,72,1200,0.5,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     @Override

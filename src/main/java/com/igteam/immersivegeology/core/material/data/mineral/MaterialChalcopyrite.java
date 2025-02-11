@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -41,7 +42,7 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
         addGenerationFriend(() -> MineralEnum.Chalcocite.instance(), 50);
 
         //TODO near Lava or nether
-        CONFIG = new MineralConfig(14,35,1,-60,256,2000, 0.75,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(14,35,1,-60,256,2000, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/alumina"
+  },
+  "result": {
+    "item": "immersivegeology:powder_alumina"
+  },
+  "time": 200
+}

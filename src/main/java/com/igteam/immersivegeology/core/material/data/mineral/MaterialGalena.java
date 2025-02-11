@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -36,7 +37,7 @@ public class MaterialGalena extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         // TODO Goto Nether
-        CONFIG = new MineralConfig(12,45,2,-64,128,1250,0.5,false, Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,45,2,-64,128,1250,0.5,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
         this.addFlags(ItemCategoryFlags.POWDERED_SLAG);
         this.addFlags(ItemCategoryFlags.PELLET);
     }

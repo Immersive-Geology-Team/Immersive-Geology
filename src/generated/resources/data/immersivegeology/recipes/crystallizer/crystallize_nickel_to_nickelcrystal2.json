@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "fluid": "immersivegeology:fluid_sulfuricacid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "forge:clean_sulfuricacid_nickel"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_nickel"
+  },
+  "time": 300
+}

@@ -56,7 +56,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateMultiblockModel("pelletizer", IGMultiblockProvider.PELLETIZER.block());
 		generateBallmillModel("ballmill", IGMultiblockProvider.BALLMILL.block());
 		generateSluiceModel("trommel", IGMultiblockProvider.TROMMEL.block());
-		generateMultiblockModel("centrifuge", IGMultiblockProvider.CENTRIFUGE.block());
+		generateCentrifugeMultiblock("centrifuge", IGMultiblockProvider.CENTRIFUGE.block());
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Complex Item Models");
 	}
 
@@ -82,6 +82,21 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private String name(ItemLike item){
 		return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+	}
+
+	private void generateCentrifugeMultiblock(String id, Supplier<? extends ItemLike> block)
+	{
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+
+		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0f,2,0), new Vector3f(30, -45, 0), 0.175F);
+		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
 	private void generateMultiblockModel(String id, Supplier<? extends ItemLike> block)

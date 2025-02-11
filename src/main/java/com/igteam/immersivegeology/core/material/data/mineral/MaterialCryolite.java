@@ -9,6 +9,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -27,8 +28,8 @@ public class MaterialCryolite extends MaterialMineral {
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-
-        CONFIG = new MineralConfig(14,90,1,0,120,1, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
+        // TODO Banished to the END of time
+        CONFIG = new MineralConfig(14,90,1,0,120,500, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
 
     @Override

@@ -20,8 +20,8 @@ public class MaterialZircon extends MaterialMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-
-        CONFIG = new MineralConfig(10,60,3,0,128,180, 0.5,true,Optional.empty(), IGGenerationType.DEFAULT);
+        // TODO Remove fully probably
+        CONFIG = new MineralConfig(0,0,0,0,0,0, 0.5,true,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

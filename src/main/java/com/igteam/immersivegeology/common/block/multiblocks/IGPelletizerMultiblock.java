@@ -38,7 +38,7 @@ public class IGPelletizerMultiblock extends IGTemplateMultiblock
 
 	@Override
 	public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 2.5));
+		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 0.5, 1.5));
 	}
 
 	@Override

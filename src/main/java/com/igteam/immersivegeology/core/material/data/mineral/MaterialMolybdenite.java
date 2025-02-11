@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -37,7 +38,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
 
         // TODO Banished to the Nether! ~UnSchtalch
-        CONFIG = new MineralConfig(12,70,1,-64,212,2400, 0.75,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,70,1,-64,212,2400, 0.75,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     @Override

@@ -28,6 +28,7 @@ public class MaterialGold extends MaterialNativeMetal {
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 
+        this.acceptableStoneTypes.add(StoneFormation.NETHER_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.CONFIG = new MaterialMineral.MineralConfig(8,75,1,0,120,500,0.5, false, Optional.empty(), IGGenerationType.DEFAULT);

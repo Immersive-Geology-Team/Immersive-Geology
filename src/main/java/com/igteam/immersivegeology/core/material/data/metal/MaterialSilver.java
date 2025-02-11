@@ -38,7 +38,7 @@ public class MaterialSilver extends MaterialNativeMetal {
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,95,1,10,50,16,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(12,95,1,-32,50,500,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -42,7 +43,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
         addGenerationFriend(() -> MineralEnum.Chalcopyrite.instance(), 50);
         addFlags(ItemCategoryFlags.PELLET);
         // TODO Banished to the Nether and Lava! ~UnSchtalch
-        CONFIG = new MineralConfig(12,30,3,-64,112,900, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,30,3,-64,112,900, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

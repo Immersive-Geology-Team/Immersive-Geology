@@ -37,6 +37,11 @@ import java.util.*;
 
 public class IGWorldSubscription
 {
+
+	private static final BlockState stoneState = Blocks.STONE.defaultBlockState();
+	private static final BlockState deepslateState = Blocks.DEEPSLATE.defaultBlockState();
+	private static final BlockState netherStone = Blocks.NETHERRACK.defaultBlockState();
+
 	private static final List<Block> REMOVE_LIST_IRON = List.of(
 			Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK);
 	private static final List<Block> REMOVE_LIST_COPPER = List.of(
@@ -116,10 +121,6 @@ public class IGWorldSubscription
 			}
 		}
 	}
-
-	private static final BlockState stoneState = Blocks.STONE.defaultBlockState();
-	private static final BlockState deepslateState = Blocks.DEEPSLATE.defaultBlockState();
-	private static final BlockState netherStone = Blocks.NETHERRACK.defaultBlockState();
 
 	@SubscribeEvent
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)

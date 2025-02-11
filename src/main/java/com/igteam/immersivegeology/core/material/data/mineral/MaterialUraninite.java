@@ -26,7 +26,7 @@ public class MaterialUraninite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(13,80,2,20,180,100, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(13,80,1,-64,32,800, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
     }
 
     @Override
@@ -37,6 +37,6 @@ public class MaterialUraninite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Uranium));
+        return new LinkedHashSet<>(Set.of(MetalEnum.Uranium, MetalEnum.Thorium));
     }
 }
