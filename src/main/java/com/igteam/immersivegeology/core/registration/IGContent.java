@@ -12,6 +12,7 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
+import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.SchematicsScreen;
@@ -25,6 +26,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -34,6 +36,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -106,6 +109,14 @@ public class IGContent {
     public static void initializeManualEntries()
     {
         ManualInstance instance = ManualHelper.getManual();
+
+        instance.registerSpecialElement(new ResourceLocation(IGLib.MODID, "recipe_overview"), s ->
+        {
+            String mineral_name = GsonHelper.getAsString(s, "mineral");
+            GeologyMaterial material = MineralEnum.valueOf(mineral_name).instance();
+            return new IGRecipeOverview(instance, material);
+        });
+
         InnerNode<ResourceLocation, ManualEntry> parent_category = instance.getRoot().getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "main"), 99);
 
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
@@ -128,6 +139,18 @@ public class IGContent {
         // Build the manual entry for the contributors
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
+
+
+        InnerNode<ResourceLocation, ManualEntry> mineral_entries = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_recipe_overview"), 1);
+        mineralTreeEntry(instance, mineral_entries, "cuprite");
+        mineralTreeEntry(instance, mineral_entries, "chalcocite");
+    }
+
+    private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id)
+    {
+        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
+        mineral.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        instance.addEntry(category, mineral.create());
     }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){

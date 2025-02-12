@@ -9,6 +9,8 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -18,6 +20,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -37,20 +41,22 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	private IngredientWithSize itemInput;
 	private ItemStack itemResult;
 
-	public void create(IFlagType<?> input, int inputAmount, MaterialHelper outputMaterial, IFlagType<?> output, int outputAmount, int time){
+	public IGBloomeryMethod create(IFlagType<?> input, int inputAmount, MaterialHelper outputMaterial, IFlagType<?> output, int outputAmount, int time){
 		this.name = input.getName().toLowerCase() + "_" + parentMaterial.getName().toLowerCase() + "_to_" + output.getName().toLowerCase() + "_" + outputMaterial.getName().toLowerCase();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;
+		return this;
 	}
 
-	public void create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time){
+	public IGBloomeryMethod create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time){
 		this.name = create_advanced_method_name(input, output);
 
 		MaterialInterface<?> outputMaterial = parentMaterial.getProductionMaterial();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;
+		return this;
 	}
 
 	@NotNull
@@ -70,6 +76,26 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return this.name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.BLOOMERY.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x, y, mx, my);
+//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+//		renderItemStack(graphics, itemResult, x + 48, y, mx,my);
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

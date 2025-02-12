@@ -7,10 +7,15 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
+import java.util.Set;
 
 public class MaterialMineral extends GeologyMaterial {
 
@@ -20,19 +25,27 @@ public class MaterialMineral extends GeologyMaterial {
         addFlags(MaterialFlags.HAS_SLURRY, ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER);
     }
 
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(basic_processing);
+    }
+
     @Override
     public void setupRecipeStages()
     {
         logged_recipes.add(getName());
         if (hasFlag(ItemCategoryFlags.PELLET))
         {
-            IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
-            IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000);
-            IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
-            IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER);
+            IGRecipeNode crushed_ore = IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100).addToTree(basic_processing);
+            IGRecipeNode grit = IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(basic_processing);
+
+            IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000).addToTree(basic_processing, grit);
+            IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER).addToTree(basic_processing, crushed_ore);
+            IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER).joinBranches(basic_processing, powder_a, powder_b);
+
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.PELLET),
-                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
+                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT)).addToTree(basic_processing);
         }
     }
 

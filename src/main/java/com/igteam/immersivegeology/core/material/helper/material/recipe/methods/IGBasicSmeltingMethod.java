@@ -8,18 +8,23 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -78,6 +83,25 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	}
 
 
+	@Override
+	public ItemStack getIconStack()
+	{
+		return new ItemStack(Blocks.FURNACE);
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, new ItemStack(input.asItem()), x, y, mx, my);
+//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+//		renderItemStack(graphics, new ItemStack(output.asItem()), x + 48, y, mx,my);
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
+	}
 
 	@NotNull
 	@Override

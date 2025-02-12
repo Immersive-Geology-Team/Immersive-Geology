@@ -91,9 +91,12 @@ public class IGCommonForgeEvents
 				{
 					ItemStack stack = ItemStack.EMPTY;
 					BlockPos structure_block_world_position = structure_placed_at.offset(p.tPos);
+					BlockPos hitPos = hit.getBlockPos();
+					Vec3i offset = hit.getDirection().getNormal();
+					hitPos = hitPos.offset(offset);
 
 					// If the hit block is the same as the structure block
-					if (structure_block_world_position.equals(hit.getBlockPos().above()) && world.getBlockState(structure_block_world_position).isAir()) {
+					if (structure_block_world_position.equals(hitPos) && world.getBlockState(structure_block_world_position).isAir()) {
 						// Find the structure block directly above
 						stack = new ItemStack(p.tBlockInfo.state().getBlock().asItem()).copy();
 					}

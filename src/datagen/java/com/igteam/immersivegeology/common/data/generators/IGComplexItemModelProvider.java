@@ -46,7 +46,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 	{
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Complex Item Models");
 		generateCrystallizerModel("crystallizer", IGMultiblockProvider.CRYSTALLIZER.block());
-		generateMultiblockModel("coredrill", IGMultiblockProvider.COREDRILL.block());
+		generateCoredrillMultiblock("coredrill", IGMultiblockProvider.COREDRILL.block());
 		generateSeparatorModel("gravityseparator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
 		generateRotaryKilnModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
@@ -95,6 +95,21 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
 		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0f,2,0), new Vector3f(30, -45, 0), 0.175F);
+		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
+		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+	}
+
+	private void generateCoredrillMultiblock(String id, Supplier<? extends ItemLike> block)
+	{
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+
+		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(6.5f, 3, 0), new Vector3f(30, 45, 0), 0.09375F);
 		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}

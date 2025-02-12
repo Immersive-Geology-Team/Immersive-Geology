@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -21,6 +22,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -47,7 +50,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		super(new IGRecipeStage(material, stage){});
 	}
 
-	public void create(MaterialInterface<?> slurry_base, IFlagType<?> output_form)
+	public IGCrystallizationMethod create(MaterialInterface<?> slurry_base, IFlagType<?> output_form)
 	{
 		this.name = create_advanced_method_name(ItemCategoryFlags.CRYSTAL);
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
@@ -61,9 +64,11 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		} else {
 			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
 		}
+
+		return this;
 	}
 
-	public void create(MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product)
+	public IGCrystallizationMethod create(MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product)
 	{
 		this.name = create_advanced_method_name(ItemCategoryFlags.CRYSTAL);
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
@@ -77,9 +82,10 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		} else {
 			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
 		}
+		return this;
 	}
 
-	public void create(String name, ItemStack output, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
+	public IGCrystallizationMethod create(String name, ItemStack output, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
@@ -93,9 +99,10 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		} else {
 			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
 		}
+		return this;
 	}
 
-	public void create(String name, ItemStack output, FluidStack fluid_out, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
+	public IGCrystallizationMethod create(String name, ItemStack output, FluidStack fluid_out, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
 		if(fluidTag == null) throw new RuntimeException("Fluid Tag is NULL... why? for Method: " + name);
@@ -106,9 +113,10 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		this.fluid_out = fluid_out;
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(String name, ItemStack output, FluidStack fluid_out, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
+	public IGCrystallizationMethod create(String name, ItemStack output, FluidStack fluid_out, MaterialInterface<?> slurry_base, MaterialInterface<?> slurry_product, int fluidAmount, int time, int energy)
 	{
 		this.name = name;
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
@@ -122,6 +130,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		} else {
 			throw new RuntimeException("Slurry Base Chemical IS Not of Chemical Type");
 		}
+		return this;
 	}
 
 	@NotNull
@@ -141,6 +150,24 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return this.name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.CRYSTALLIZER.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

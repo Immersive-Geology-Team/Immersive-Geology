@@ -49,6 +49,7 @@ public class MaterialMetal extends GeologyMaterial {
                     getProductionMaterial().getStack(ItemCategoryFlags.INGOT));
 
         }
+
         if (hasFlag(ItemCategoryFlags.CRYSTAL) && hasFlag(ItemCategoryFlags.INGOT))
         {
             IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRYSTAL,
@@ -64,8 +65,6 @@ public class MaterialMetal extends GeologyMaterial {
             IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT,
                     ItemCategoryFlags.INGOT, 120);
         }
-
-
 
     }
 

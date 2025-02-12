@@ -171,12 +171,6 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 	protected List<InfoArea> makeInfoAreas()
 	{
 		List<InfoArea> areas = new ArrayList<>();
-//		for(int i = 0; i < menu.ownSlotCount; i++)
-//		{
-//			Slot s = menu.getSlot(i);
-//			if(s instanceof SchematicSlot schematicSlot)
-//				areas.add(new SchematicOutputArea(schematicSlot, leftPos, topPos));
-//		}
 		return areas;
 	}
 

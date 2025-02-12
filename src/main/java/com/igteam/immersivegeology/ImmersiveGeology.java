@@ -151,6 +151,7 @@ public class ImmersiveGeology {
 
     public void setup(final FMLCommonSetupEvent event)
     {
+        IGRegistrationHolder.buildMaterialRecipes();
     }
 
 }

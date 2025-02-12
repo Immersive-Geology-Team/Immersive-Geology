@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BallmillRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CentrifugeRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -21,6 +22,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -46,16 +49,16 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialInterface<?> output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
-		create(input_fluid_tag, input_amount, output_material.instance(), item_output_form, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
+	public IGCentrifugeMethod create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialInterface<?> output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+		return create(input_fluid_tag, input_amount, output_material.instance(), item_output_form, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
 	}
 
-	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+	public IGCentrifugeMethod create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, IFlagType<?> item_output_form, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
 		Item item = item_output_form instanceof ItemCategoryFlags ? output_material.getItem((ItemCategoryFlags) item_output_form) : output_material.getItem((BlockCategoryFlags) item_output_form);
-		create(input_fluid_tag, input_amount, output_material, item, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
+		return create(input_fluid_tag, input_amount, output_material, item, item_output_amount, primary_fluid_output, primary_fluid_amount, secondary_fluid_output, secondary_fluid_amount, time, energy);
 	}
 
-	public void create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, Item output_item, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
+	public IGCentrifugeMethod create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, Item output_item, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
 
 		String tag_name = input_fluid_tag.toString().toLowerCase();
 		String serialized_tag_name = tag_name.substring(tag_name.lastIndexOf(":") + 1, tag_name.lastIndexOf("]"));
@@ -81,6 +84,8 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		}
 		this.time = time;
 		this.energy = energy;
+
+		return this;
 	}
 
 	@NotNull
@@ -100,6 +105,24 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.CENTRIFUGE.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class IGTags
 		HashMap<String, TagKey<Fluid>> slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.SLURRY);
 		HashMap<String, TagKey<Fluid>> cloud_slurry_map = FLUID_TAG_HOLDER.get(BlockCategoryFlags.CLOUDY_SLURRY);
 
-		HashSet<MaterialInterface<?>> slurry_material_set = new HashSet<>(List.of(MetalEnum.values()));
+		LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
 		slurry_material_set.addAll(List.of(MineralEnum.values()));
 
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
@@ -77,7 +77,9 @@ public class IGTags
 				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase()));
 
 				if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} Fluid", materialInterface.getName());
-				fluid_map.put(getWrapFromSet(Set.of(base)), tag);
+				LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
+				base_set.add(base);
+				fluid_map.put(getWrapFromSet(base_set), tag);
 			}
 
 
@@ -86,7 +88,6 @@ public class IGTags
 					if(materialInterface.instance() instanceof MaterialChemical chemical)
 					{
 						if(!chemical.hasSlurryWith(slurry_material)) {
-							//IGLib.IG_LOGGER.info("Slurry don't exist? {} -> {}", chemical.getName(), metal.getName());
 							continue;
 						}
 						String registryKey = BlockCategoryFlags.SLURRY.getRegistryKey(materialInterface, slurry_material);
@@ -98,7 +99,10 @@ public class IGTags
 						MaterialHelper base = materialInterface.instance();
 						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "clean_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
 						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} Slurry", materialInterface.getName(), slurry_material.getName());
-						slurry_map.put(getWrapFromSet(BlockCategoryFlags.SLURRY, Set.of(base, slurry_material.instance())), tag);
+						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
+						base_set.add(base);
+						base_set.add(slurry_material.instance());
+						slurry_map.put(getWrapFromSet(BlockCategoryFlags.SLURRY, base_set), tag);
 					}
 				}
 			}
@@ -108,7 +112,6 @@ public class IGTags
 					if(materialInterface.instance() instanceof MaterialChemical chemical)
 					{
 						if(!chemical.hasSlurryWith(slurry_material)) {
-							//IGLib.IG_LOGGER.info("Slurry don't exist? {} -> {}", chemical.getName(), metal.getName());
 							continue;
 						}
 						String registryKey = BlockCategoryFlags.CLOUDY_SLURRY.getRegistryKey(materialInterface, slurry_material);
@@ -120,7 +123,10 @@ public class IGTags
 						MaterialHelper base = materialInterface.instance();
 						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "cloudy_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
 						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} CLOUDY_SLURRY", materialInterface.getName(), slurry_material.getName());
-						cloud_slurry_map.put(getWrapFromSet(BlockCategoryFlags.CLOUDY_SLURRY, Set.of(base, slurry_material.instance())), tag);
+						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
+						base_set.add(base);
+						base_set.add(slurry_material.instance());
+						cloud_slurry_map.put(getWrapFromSet(BlockCategoryFlags.CLOUDY_SLURRY, base_set), tag);
 					}
 				}
 			}
@@ -142,7 +148,7 @@ public class IGTags
 		}
 	}
 
-	private static ResourceLocation wrapCategory(IFlagType<?> category, Set<MaterialHelper> materialSet)
+	private static ResourceLocation wrapCategory(IFlagType<?> category, HashSet<MaterialHelper> materialSet)
 	{
 		StringJoiner material_set_name = new StringJoiner("_");
 		materialSet.forEach((m -> material_set_name.add(m.getName())));
@@ -155,7 +161,7 @@ public class IGTags
 		return initialized;
 	}
 
-	public static String getWrapFromSet(Set<MaterialHelper> matSet){
+	public static String getWrapFromSet(LinkedHashSet<MaterialHelper> matSet){
 		StringJoiner value = new StringJoiner(",");
 
 		for (MaterialHelper m : matSet) {
@@ -164,7 +170,7 @@ public class IGTags
 		return "[" + value + "]";
 	}
 
-	public static String getWrapFromSet(IFlagType<?> base, Set<MaterialHelper> matSet){
+	public static String getWrapFromSet(IFlagType<?> base, LinkedHashSet<MaterialHelper> matSet){
 		StringJoiner value = new StringJoiner(",");
 		value.add(base.getName().toLowerCase());
 		for (MaterialHelper m : matSet) {

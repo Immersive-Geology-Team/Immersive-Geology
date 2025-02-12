@@ -17,6 +17,8 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -43,6 +45,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
+    protected IGRecipeChain basic_processing = new IGRecipeChain(this, "basic_processing", 0);
+    protected IGRecipeChain advanced_processing = new IGRecipeChain(this, "advanced_processing", 1);
+
     Set<Pair<Supplier<MaterialHelper>, Integer>> generation_group = new HashSet<>();
     private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();
 
@@ -59,6 +64,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
     }
+
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of();
+    };
 
     public void initializeFlags(){
         ArrayList<IFlagType<?>> flagList = new ArrayList<>();
@@ -276,37 +286,60 @@ public abstract class GeologyMaterial implements MaterialHelper {
 	}
 
     @Nullable
-    public synchronized TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
+    public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialInterface<?>... materials)
     {
         if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
-        Set<MaterialHelper> helpers = Arrays.stream(materials).map(MaterialInterface::instance).collect(Collectors.toSet());
-        return  getFluidTag(flag, helpers.toArray(new MaterialHelper[helpers.size()]));
+        Set<MaterialHelper> helpers = Arrays.stream(materials)
+                .map(MaterialInterface::instance)
+                .collect(Collectors.toSet());
+
+        return getFluidTag(flag, helpers.toArray(MaterialHelper[]::new));
     }
 
     @Nullable
-    public synchronized TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialHelper... materials)
+    public TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialHelper... materials)
     {
-        if(!IGTags.isInitialized()) throw new RuntimeException("Called getFluidTag before Tags have been Initialized");
-        Set<MaterialHelper> helpers = Arrays.stream(materials).collect(Collectors.toSet());
+        if (!IGTags.isInitialized()) {
+            throw new IllegalStateException("Called getFluidTag before Tags have been initialized");
+        }
 
-        LinkedHashMap<String,TagKey<Fluid>> data_map = IGTags.FLUID_TAG_HOLDER.get(flag);
-        LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Set.of(this));
-        material_set.addAll(helpers);
+        // Convert the materials array into a Set of MaterialHelper
+		HashSet<MaterialHelper> helpers = new HashSet<>(Arrays.asList(materials));
 
-        String key = IGTags.getWrapFromSet(flag, material_set);
+        // Get the mapping of fluid tags for the given flag
+        Map<String, TagKey<Fluid>> fluidTagMap = IGTags.FLUID_TAG_HOLDER.get(flag);
+
+        // Combine 'this' with the helper materials into a LinkedHashSet (preserves insertion order)
+        LinkedHashSet<MaterialHelper> materialSet = new LinkedHashSet<>();
+        materialSet.add(this);
+        materialSet.addAll(helpers);
+
+        // Create the lookup key based on the flag and material set
+        String key = IGTags.getWrapFromSet(flag, materialSet);
+
         IGLib.IG_LOGGER.info("Fluid Key Requested: {}", key);
-        IGLib.IG_LOGGER.info("Has Data Map been Initialized? {} Method: {}", data_map.containsKey(key), IGTags.isInitialized());
-        if(!data_map.containsKey(key))
-        {
+        IGLib.IG_LOGGER.info("Data map contains key? {}. Tags initialized? {}.", fluidTagMap.containsKey(key), IGTags.isInitialized());
+
+        // If the fluid tag for this key is not present, try initializing
+        if (!fluidTagMap.containsKey(key)) {
             IGTags.initialize();
-            IGLib.IG_LOGGER.info("Initialization [{}]", data_map.containsKey(key) ? "Successful" : "Failed");
-            if(!data_map.containsKey(key))
-            {
-                String exception_string = String.format("[Probably a False Flag, Try again.] Failed to initialize Fluid Tags " + flag.name() + " " + material_set.stream().map(MaterialHelper::getName).collect(Collectors.toSet()));
-                throw new RuntimeException(exception_string);
+            boolean initializationSuccessful = fluidTagMap.containsKey(key);
+            IGLib.IG_LOGGER.info("Initialization {}", initializationSuccessful ? "Successful" : "Failed");
+
+            if (!initializationSuccessful) {
+                String materialNames = materialSet.stream()
+                        .map(MaterialHelper::getName)
+                        .collect(Collectors.joining(", "));
+                String errorMsg = String.format(
+                        "[Probably a False Flag, Try again.] Failed to initialize Fluid Tags: %s %s",
+                        flag.name(),
+                        materialNames
+                );
+                throw new IllegalStateException(errorMsg);
             }
         }
-        return data_map.get(key);
+
+        return fluidTagMap.get(key);
     }
 
     @Override

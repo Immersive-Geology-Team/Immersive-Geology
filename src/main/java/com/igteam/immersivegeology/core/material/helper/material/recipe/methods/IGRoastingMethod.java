@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -18,6 +19,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -40,7 +43,7 @@ public class IGRoastingMethod extends IGRecipeMethod
 	private int time, waste_amount;
 	private String name;
 
-	public void create(String name, TagKey<Item> itemInput, int inputAmount, ItemStack output, int time, int waste_amount){
+	public IGRoastingMethod create(String name, TagKey<Item> itemInput, int inputAmount, ItemStack output, int time, int waste_amount){
 		this.name = name;
 
 		this.itemTag = itemInput;
@@ -49,9 +52,10 @@ public class IGRoastingMethod extends IGRecipeMethod
 
 		this.time = time;
 		this.waste_amount = waste_amount;
+		return this;
 	}
 
-	public void create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time, int waste_amount){
+	public IGRoastingMethod create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time, int waste_amount){
 		this.name = create_basic_method_name(input, output);
 
 		this.itemTag = parentMaterial.getItemTag(input);
@@ -60,6 +64,8 @@ public class IGRoastingMethod extends IGRecipeMethod
 
 		this.time = time;
 		this.waste_amount = waste_amount;
+
+		return this;
 	}
 
 	@Override
@@ -78,6 +84,26 @@ public class IGRoastingMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return this.name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.REVERBERATION_FURNACE.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, itemResult, x, y, mx, my);
+//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+//		renderItemStack(graphics, itemResult, x + 48, y, mx,my);
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

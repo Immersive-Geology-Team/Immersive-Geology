@@ -3,12 +3,12 @@
   "byproduct": {
     "item": "minecraft:gravel"
   },
-  "byproduct_chance": 0.5,
+  "byproduct_chance": 0.33,
   "input": {
-    "tag": "forge:dirty_crushed_ore/acanthite"
+    "tag": "forge:dirty_crushed_ore/pyrite"
   },
   "result": {
-    "tag": "forge:crushed_ore/acanthite"
+    "item": "immersivegeology:crushed_ore_pyrite"
   },
   "time": 100,
   "water": 100

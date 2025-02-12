@@ -8,17 +8,22 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -44,7 +49,7 @@ public class IGSeparatorMethod extends IGRecipeMethod
 	private String name;
 	private float waste_chance;
 	private int time, water_amount;
-	public void create(TagKey<Item> input, ItemStack output, ItemStack waste, float waste_chance, int time, int water){
+	public IGSeparatorMethod create(TagKey<Item> input, ItemStack output, ItemStack waste, float waste_chance, int time, int water){
 		this.name = input.toString().substring(input.toString().lastIndexOf("/")+1, input.toString().indexOf("]"));
 		this.result = output;
 		this.input = input;
@@ -52,6 +57,18 @@ public class IGSeparatorMethod extends IGRecipeMethod
 		this.waste_chance = waste_chance;
 		this.time = time;
 		this.water_amount = water;
+		return this;
+	}
+
+	public IGSeparatorMethod create(ItemCategoryFlags input, ItemCategoryFlags output, ItemStack waste, float waste_chance, int time, int water){
+		this.name = create_basic_method_name(input, output);
+		this.result = parentMaterial.getStack(output, 1);
+		this.input = parentMaterial.getItemTag(input);
+		this.waste = waste;
+		this.waste_chance = waste_chance;
+		this.time = time;
+		this.water_amount = water;
+		return this;
 	}
 
 	@Override
@@ -63,6 +80,31 @@ public class IGSeparatorMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.GRAVITY_SEPARATOR.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		Ingredient ingredient = Ingredient.of(input);
+		renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
+		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+		renderItemStack(graphics, result, x + 48, y, mx,my);
+		renderItemStack(graphics, waste, x + 72, y, mx,my);
+
+		render_x_space = 96;
+	}
+
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

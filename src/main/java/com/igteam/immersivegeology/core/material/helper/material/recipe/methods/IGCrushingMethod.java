@@ -11,12 +11,15 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -41,63 +44,70 @@ public class IGCrushingMethod extends IGRecipeMethod
 	private int energy, time;
 	private String name;
 
-	public void create(String method_name, IngredientWithSize input, ItemStack output, int energy, int time){
+	public IGCrushingMethod create(String method_name, IngredientWithSize input, ItemStack output, int energy, int time){
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, IFlagType<?> output_form, int energy, int time){
+	public IGCrushingMethod create(IFlagType<?> input_form, IFlagType<?> output_form, int energy, int time){
 		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int output_amount, int energy, int time){
+	public IGCrushingMethod create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int output_amount, int energy, int time){
 		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
 		this.output = output_material.getStack(output_form, output_amount);
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(MaterialHelper input_material, IFlagType<?> input_form, int input_amount, MaterialHelper output_material,  IFlagType<?> output_form, int output_amount, int energy, int time){
+	public IGCrushingMethod create(MaterialHelper input_material, IFlagType<?> input_form, int input_amount, MaterialHelper output_material,  IFlagType<?> output_form, int output_amount, int energy, int time){
 		this.input = IngredientWithSize.of(input_material.getStack(input_form, input_amount));
 		this.output = output_material.getStack(output_form, output_amount);
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int energy, int time){
+	public IGCrushingMethod create(IFlagType<?> input_form, MaterialHelper output_material, IFlagType<?> output_form, int energy, int time){
 		this.input = IngredientWithSize.of(parentMaterial.getStack(input_form, 1));
 		this.output = output_material.getStack(output_form, 1);
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(MaterialHelper input_material, IFlagType<?> input_form, MaterialHelper output_material,  IFlagType<?> output_form, int energy, int time){
+	public IGCrushingMethod create(MaterialHelper input_material, IFlagType<?> input_form, MaterialHelper output_material,  IFlagType<?> output_form, int energy, int time){
 		this.input = IngredientWithSize.of(input_material.getStack(input_form, 1));
 		this.output = output_material.getStack(output_form, 1);
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(String method_name, ItemStack input, ItemStack output, int energy, int time){
+	public IGCrushingMethod create(String method_name, ItemStack input, ItemStack output, int energy, int time){
 		this.input = IngredientWithSize.of(input);
 		this.output = output;
 		this.name = method_name;
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(String method_name, IngredientWithSize input, ItemStack output, IngredientWithSize secondary, int energy, int time, float chance){
+	public IGCrushingMethod create(String method_name, IngredientWithSize input, ItemStack output, IngredientWithSize secondary, int energy, int time, float chance){
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
@@ -105,9 +115,10 @@ public class IGCrushingMethod extends IGRecipeMethod
 		this.time = time;
 		this.secondary = secondary;
 		this.chance = chance;
+		return this;
 	}
 
-	public void create(String method_name, ItemStack input, ItemStack output, ItemStack secondary, int energy, int time, float chance){
+	public IGCrushingMethod create(String method_name, ItemStack input, ItemStack output, ItemStack secondary, int energy, int time, float chance){
 		this.input = IngredientWithSize.of(input);
 		this.output = output;
 		this.name = method_name;
@@ -115,6 +126,7 @@ public class IGCrushingMethod extends IGRecipeMethod
 		this.time = time;
 		this.secondary = IngredientWithSize.of(secondary);
 		this.chance = chance;
+		return this;
 	}
 
 	@NotNull
@@ -134,6 +146,27 @@ public class IGCrushingMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IEMultiblocks.CRUSHER.getBlock().asItem().getDefaultInstance();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
+		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+		renderItemStack(graphics, output, x + 48, y, mx,my);
+		render_x_space = 72;
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

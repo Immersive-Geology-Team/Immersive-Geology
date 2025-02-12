@@ -9,6 +9,8 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BallmillRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -17,6 +19,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod.RecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -39,36 +43,40 @@ public class IGBallmillMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-	public void create(IFlagType<?> input_form, IFlagType<?> output_form) {
+	public IGBallmillMethod create(IFlagType<?> input_form, IFlagType<?> output_form) {
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize( parentMaterial.getItemTag(input_form), 1);
 		this.time = 800;
 		this.energy = 64000;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, IFlagType<?> output_form, int time, int energy) {
+	public IGBallmillMethod create(IFlagType<?> input_form, IFlagType<?> output_form, int time, int energy) {
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize( parentMaterial.getItemTag(input_form), 1);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, int output_amount, int time, int energy){
+	public IGBallmillMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, int output_amount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, input_amount);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), output_amount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(MaterialHelper input_mat, IFlagType<?> input_form, int input_amount, MaterialHelper output_mat, IFlagType<?> output_form, int output_amount, int time, int energy){
+	public IGBallmillMethod create(MaterialHelper input_mat, IFlagType<?> input_form, int input_amount, MaterialHelper output_mat, IFlagType<?> output_form, int output_amount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_mat.getStack(output_form, input_amount);
 		this.input = new IngredientWithSize(output_mat.getItemTag(input_form), output_amount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
 	@NotNull
@@ -88,6 +96,27 @@ public class IGBallmillMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.BALLMILL.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
+//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
+//		renderItemStack(graphics, output, x + 48, y, mx,my);
+		render_x_space = 72;
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, output, x, y, mx,my);
 	}
 
 	@Override

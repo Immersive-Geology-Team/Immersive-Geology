@@ -9,12 +9,15 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -37,36 +40,40 @@ public class IGCalcinationMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-	public void create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int energy){
 		this.name = name;
 		this.output = output;
 		this.input = new IngredientWithSize(inputTag, itemAmount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
-	public void create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int energy){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, output_amount);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), input_amount);
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
 	@NotNull
@@ -86,6 +93,26 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.ROTARYKILN.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
+//		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
+//		renderItemStack(graphics, output, x + 72, y,mx,my);
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

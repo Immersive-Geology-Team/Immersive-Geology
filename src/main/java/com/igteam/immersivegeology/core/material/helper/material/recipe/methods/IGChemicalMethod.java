@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.ChemicalRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
@@ -20,6 +21,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -51,7 +54,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 		return RecipeMethod.CHEMICAL;
 	}
 
-	public void create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+	public IGChemicalMethod create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
 		this.name = name;
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
@@ -61,9 +64,10 @@ public class IGChemicalMethod extends IGRecipeMethod
 		this.fluidInC = fluidInC;
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
-	public void create(IFlagType<?> inputFlag, IFlagType<?> outputFlag, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+	public IGChemicalMethod create(IFlagType<?> inputFlag, IFlagType<?> outputFlag, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
 		this.name = create_basic_method_name(inputFlag, outputFlag);
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
@@ -73,12 +77,31 @@ public class IGChemicalMethod extends IGRecipeMethod
 		this.fluidInC = fluidInC;
 		this.energy = energy;
 		this.time = time;
+		return this;
 	}
 
 	@Override
 	public ResourceLocation getLocation()
 	{
 		return toRL("chemical_reactor/leach_" + getName());
+	}
+
+	@Override
+	public ItemStack getIconStack()
+	{
+		return IGMultiblockProvider.CHEMICAL_REACTOR.iconStack();
+	}
+
+	@Override
+	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
+	@Override
+	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	{
+
 	}
 
 	@Override

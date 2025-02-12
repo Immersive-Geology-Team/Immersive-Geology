@@ -18,6 +18,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGBloomeryMethod;
 import net.minecraft.tags.BiomeTags;
 
@@ -28,7 +30,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialCuprite extends MaterialSulphideMineral
+public class MaterialCuprite extends MaterialMineral
 {
 
 	public MaterialCuprite()
@@ -58,14 +60,22 @@ public class MaterialCuprite extends MaterialSulphideMineral
 	}
 
 	@Override
+	public Set<IGRecipeChain> getRecipeChains()
+	{
+		return Set.of(basic_processing);
+	}
+
+	@Override
 	public void setupRecipeStages()
 	{
 		super.setupRecipeStages();
-		IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2,  ItemCategoryFlags.INGOT, 1, 400);
 
 		IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
 				MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),
 				MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
+
+		IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE, 2,  ItemCategoryFlags.INGOT, 1, 400);
+
 	}
 
 	@Override
