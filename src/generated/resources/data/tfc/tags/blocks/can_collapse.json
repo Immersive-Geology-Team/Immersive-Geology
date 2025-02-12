@@ -2797,30 +2797,6 @@
       "required": false
     },
     {
-      "id": "immersivegeology:poor_ore_block_cuprite_basalt",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_cuprite_basalt",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_cuprite_basalt",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:poor_ore_block_cuprite_netherrack",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:normal_ore_block_cuprite_netherrack",
-      "required": false
-    },
-    {
-      "id": "immersivegeology:rich_ore_block_cuprite_netherrack",
-      "required": false
-    },
-    {
       "id": "immersivegeology:poor_ore_block_cuprite_dripstone_block",
       "required": false
     },

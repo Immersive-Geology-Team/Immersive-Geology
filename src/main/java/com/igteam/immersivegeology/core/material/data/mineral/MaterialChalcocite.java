@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
@@ -82,7 +83,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
                 200                                            // Sulfur Dioxide Output Amount
         ).addToTree(advanced_processing);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+        IGRecipeNode powdered_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG).addToTree(advanced_processing);
 
@@ -90,22 +91,22 @@ public class MaterialChalcocite extends MaterialSulphideMineral
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.075f, 200, 1000).addToTree(advanced_processing);
+                0.075f, 200, 1000).addToTree(advanced_processing, powdered_slag);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+        IGRecipeNode slurry = IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,
                 MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MineralEnum.Chalcocite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
-                null, null, 200, 51200).addToTree(advanced_processing);
+                null, null, 200, 51200).addToTree(advanced_processing, powdered_slag);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
                 MetalEnum.Copper.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Nickel, IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Chalcocite), IGLib.SLURRY_TO_CRYSTAL_MB,
-                300, 38400).addToTree(advanced_processing);
+                300, 38400).addToTree(advanced_processing, slurry);
     }
 
     @Override
