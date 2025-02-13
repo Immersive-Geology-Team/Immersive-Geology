@@ -4,7 +4,7 @@
     "tag": "forge:crushed_ore/pyrolusite"
   },
   "result": {
-    "item": "immersivegeology:ingot_manganese"
+    "item": "minecraft:iron_ingot"
   },
   "slag": {
     "item": "immersiveengineering:slag"

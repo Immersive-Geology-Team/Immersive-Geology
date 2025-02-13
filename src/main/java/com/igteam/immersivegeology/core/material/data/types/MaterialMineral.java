@@ -27,7 +27,7 @@ public class MaterialMineral extends GeologyMaterial {
 
     public Set<IGRecipeChain> getRecipeChains()
     {
-        return Set.of(basic_processing);
+        return Set.of(directBlasting);
     }
 
     @Override
@@ -36,16 +36,16 @@ public class MaterialMineral extends GeologyMaterial {
         logged_recipes.add(getName());
         if (hasFlag(ItemCategoryFlags.PELLET))
         {
-            IGRecipeNode crushed_ore = IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100).addToTree(basic_processing);
-            IGRecipeNode grit = IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(basic_processing);
+            IGRecipeNode crushed_ore = IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100).addToTree(directBlasting);
+            IGRecipeNode grit = IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(directBlasting);
 
-            IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000).addToTree(basic_processing, grit);
-            IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER).addToTree(basic_processing, crushed_ore);
-            IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER).joinBranches(basic_processing, powder_a, powder_b);
+            IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000).addToTree(directBlasting, grit);
+            IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER).addToTree(directBlasting, crushed_ore);
+            IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.POWDER).joinBranches(directBlasting, powder_a, powder_b);
 
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.PELLET),
-                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT)).addToTree(basic_processing);
+                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT)).addToTree(directBlasting);
         }
     }
 

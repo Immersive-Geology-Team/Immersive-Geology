@@ -90,7 +90,7 @@ public class IGRecipeOverview extends SpecialManualElements
 				}
 
 				// For now, assume the nodes already have valid x, y positions. The above method should have set them correctly.
-				int baseX = x + (screen.getManual().pageWidth / 2) - 24;
+				int baseX = x + (screen.getManual().pageWidth / 2) - 10;
 				int baseY = y + 16;
 				// Render the entire chain tree.
 				graphics.pose().pushPose();

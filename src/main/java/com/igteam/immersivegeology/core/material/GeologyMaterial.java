@@ -18,7 +18,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -45,8 +44,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
-    protected IGRecipeChain basic_processing = new IGRecipeChain(this, "basic_processing", 0);
-    protected IGRecipeChain advanced_processing = new IGRecipeChain(this, "advanced_processing", 1);
+    protected IGRecipeChain directBlasting = new IGRecipeChain(this, "direct_blasting", 0);
+    protected IGRecipeChain sulphideElectrowining = new IGRecipeChain(this, "sulphide_electrowining", 1);
 
     Set<Pair<Supplier<MaterialHelper>, Integer>> generation_group = new HashSet<>();
     private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();

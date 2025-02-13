@@ -1,16 +1,10 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryRecipeBuilder;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHelper;
@@ -19,8 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGBloomeryMethod;
 import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
@@ -62,7 +54,7 @@ public class MaterialCuprite extends MaterialMineral
 	@Override
 	public Set<IGRecipeChain> getRecipeChains()
 	{
-		return Set.of(basic_processing);
+		return Set.of(directBlasting);
 	}
 
 	@Override

@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
@@ -19,10 +20,16 @@ import java.util.Set;
 public class MaterialSulphideMineral extends MaterialMineral
 {
 
-	protected IGRecipeChain deep_sulphide_processing = new IGRecipeChain(this, "sulphide_processing", 2);
 	public MaterialSulphideMineral()
 	{
 		super();
 		acceptableStoneTypes.add(StoneFormation.NETHER_STONE);
+	}
+
+	@Override
+	public Set<IGRecipeChain> getRecipeChains()
+	{
+		if(hasFlag(ItemCategoryFlags.PELLET)) return Set.of(this.directBlasting);
+		return Set.of();
 	}
 }

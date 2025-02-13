@@ -17,6 +17,8 @@
   "immersivegeology.prospecting_pick.nothing": "Found Nothing",
 
   "manual.immersivegeology.main": "Immersive Geology",
+  "manual.immersivegeology.direct_blasting.subtext": "Direct Blasting",
+  "manual.immersivegeology.sulphide_electrowining.subtext": "Sulphide Electrowining",
   "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_recipe_overview": "Processing Chains",
   "manual.immersivegeology.ig_multiblocks": "Multiblocks",
