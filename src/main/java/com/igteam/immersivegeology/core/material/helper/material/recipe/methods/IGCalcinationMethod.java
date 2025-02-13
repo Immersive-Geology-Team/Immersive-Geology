@@ -102,17 +102,11 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
 //		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
 //		renderItemStack(graphics, output, x + 72, y,mx,my);
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
 	}
 
 	@Override

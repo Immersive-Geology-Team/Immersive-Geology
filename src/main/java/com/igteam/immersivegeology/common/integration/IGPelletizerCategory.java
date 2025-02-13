@@ -46,7 +46,7 @@ public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 		builder.addSlot(RecipeIngredientRole.INPUT, 35, 40)
 				.addItemStacks(Arrays.asList(recipe.itemIn.getMatchingStacks()));
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 11, 23)
+		builder.addSlot(RecipeIngredientRole.INPUT, 11, 23)
 				.setFluidRenderer(500, false, 16, 55)
 				.addFluidStack(ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), 500)
 				.addTooltipCallback(JEIHelper.fluidTooltipCallback);

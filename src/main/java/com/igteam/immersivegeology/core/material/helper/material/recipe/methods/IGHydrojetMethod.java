@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -60,14 +59,9 @@ public class IGHydrojetMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 
 	}
 
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
-	}
 }

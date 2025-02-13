@@ -126,4 +126,14 @@ public class IGRecipeChain
 
 		return centerX;
 	}
+
+	public int getPriority()
+	{
+		return priority;
+	}
+
+	public String getName()
+	{
+		return chainName.toLowerCase();
+	}
 }

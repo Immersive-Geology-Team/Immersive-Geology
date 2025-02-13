@@ -9,6 +9,7 @@ import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDevices;
 import blusunrize.lib.manual.ManualEntry;
+import blusunrize.lib.manual.ManualEntry.EntryData;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
@@ -31,9 +32,11 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -55,12 +58,10 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 
 public class IGContent {
 
@@ -114,7 +115,8 @@ public class IGContent {
         {
             String mineral_name = GsonHelper.getAsString(s, "mineral");
             GeologyMaterial material = MineralEnum.valueOf(mineral_name).instance();
-            return new IGRecipeOverview(instance, material);
+            int priority = GsonHelper.getAsInt(s, "priority");
+            return new IGRecipeOverview(instance, material, priority);
         });
 
         InnerNode<ResourceLocation, ManualEntry> parent_category = instance.getRoot().getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "main"), 99);
@@ -140,18 +142,49 @@ public class IGContent {
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
 
-
         InnerNode<ResourceLocation, ManualEntry> mineral_entries = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_recipe_overview"), 1);
-        mineralTreeEntry(instance, mineral_entries, "cuprite");
-        mineralTreeEntry(instance, mineral_entries, "chalcocite");
+        for(MineralEnum m : MineralEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
+        for(MetalEnum m : MetalEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
     }
 
-    private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id)
+    private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
     {
         ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        mineral.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
+        mineral.setContent(() -> createMineralContent(material));
+
         instance.addEntry(category, mineral.create());
     }
+
+    protected static EntryData createMineralContent(MaterialInterface<?> material)
+    {
+        ArrayList<SpecialElementData> itemList = new ArrayList<>();
+        StringBuilder contentBuilder = new StringBuilder();
+
+        createRecipeChainPage(contentBuilder, itemList, material);
+
+        String translatedTitle = I18n.get("manual.immersivegeology." + material.getName());
+        String formattedContent = contentBuilder.toString().replaceAll("\r\n|\r|\n", "\n");
+        return new EntryData(translatedTitle, "", formattedContent, itemList);
+    }
+
+    private static void createRecipeChainPage(StringBuilder contentBuilder, ArrayList<SpecialElementData> itemList, MaterialInterface<?> material)
+    {
+        List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
+
+        for(int i = 0; i < recipe_chain_data.size(); i++)
+        {
+            IGRecipeChain chain = recipe_chain_data.get(i);
+            IGLib.IG_LOGGER.info("Creating Manual Entry for {}", chain.getName());
+
+            contentBuilder.append("<&").append(chain.getName()).append(">");
+            if(i < (recipe_chain_data.size() - 1))
+                contentBuilder.append("<np>");
+
+            itemList.add(new SpecialElementData(chain.getName(), 0, new IGRecipeOverview(ManualHelper.getManual(), material.instance(), chain)));
+        }
+    }
+
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
         ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
@@ -161,7 +194,6 @@ public class IGContent {
 
     ChemthrowerEffect acidic = new ChemthrowerEffect()
     {
-
         @Override
         public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, ItemStack itemStack, Fluid fluid)
         {

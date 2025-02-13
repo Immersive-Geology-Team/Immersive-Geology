@@ -14,7 +14,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -90,17 +89,11 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		renderItemStack(graphics, new ItemStack(input.asItem()), x, y, mx, my);
 //		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
 //		renderItemStack(graphics, new ItemStack(output.asItem()), x + 48, y, mx,my);
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
 	}
 
 	@NotNull

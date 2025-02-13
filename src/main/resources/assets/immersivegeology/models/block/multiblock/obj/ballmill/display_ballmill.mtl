@@ -1,0 +1,42 @@
+# Blender 4.2.3 LTS MTL File: 'None'
+# www.blender.org
+
+newmtl axle.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/ballmill/axle
+
+newmtl gear.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/ballmill/gear
+
+newmtl m_179a1da9-5b8a-1d17-b625-5c252dc26d72.002
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd immersivegeology:block/multiblock/ballmill/base
+
+newmtl m_a5736c04-ae9e-ecd1-e2f5-2454776d30ef.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd C:/Users/Casper Areskoug/Documents/GitHub/Immersive-Geology/src/main/resources/assets/immersivegeology/textures/block/multiblock/ballmill/drum.png

@@ -8,11 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.ArcFurnaceRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.ArcFurnaceMultiblock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -30,7 +27,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -143,7 +139,7 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
 		for(IngredientWithSize ingredient : additives)
@@ -156,12 +152,6 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 //		renderItemStack(graphics, slag, x + 96,y,mx,my);
 
 		render_x_space = 120;
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
 	}
 
 	@Override

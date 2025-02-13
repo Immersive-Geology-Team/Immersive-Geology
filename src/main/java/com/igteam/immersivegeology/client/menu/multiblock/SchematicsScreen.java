@@ -54,7 +54,7 @@ import java.util.function.Supplier;
 
 public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 {
-	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("drawing_table");
+	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("blockentity/drawing_table");
 
 
 	private GuiButtonCheckbox mirrorSchematicBtn;
@@ -140,6 +140,7 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 			pose.pushPose();
 			pose.scale(scale,scale,scale);
 			pose.translate(renderPosX / scale, renderPosY / scale, 0);
+
 			graphics.renderItem(renderStack, 0, 0);
 			pose.popPose();
 		}

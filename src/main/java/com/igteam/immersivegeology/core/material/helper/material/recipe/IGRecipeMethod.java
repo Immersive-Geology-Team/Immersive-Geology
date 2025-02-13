@@ -96,7 +96,7 @@ public abstract class IGRecipeMethod
 		return ItemStack.EMPTY;
 	}
 
-	public abstract void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
+	public abstract void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
 
 	public void renderItemStack(GuiGraphics graphics, ItemStack stack, int x, int y, int mx, int my)
 	{
@@ -107,13 +107,25 @@ public abstract class IGRecipeMethod
 		}
 	}
 
-	public void renderFluidStack(GuiGraphics graphics, Fluid stack, int x, int y, int mx, int my)
+	public void renderFluidStack(GuiGraphics graphics, Fluid stack, int x, int y, int w, int h, int mx, int my)
 	{
 		FluidTank tank = new FluidTank(128);
 		tank.setFluid(new FluidStack(stack, 128));
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, 16, 16), 0,0, 0,0, IGLib.makeTextureLocation("reverberation_furnace"));
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
-		if(mx > x && (x+16) > mx && my > y && (y+16) > my)
+		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
+		{
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+		}
+	}
+
+	public void renderFluidStack(GuiGraphics graphics, Fluid stack, int amount, int x, int y, int w, int h, int mx, int my)
+	{
+		FluidTank tank = new FluidTank(amount);
+		tank.setFluid(new FluidStack(stack, amount));
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		fluid.draw(graphics);
+		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
 			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
 		}
@@ -132,12 +144,6 @@ public abstract class IGRecipeMethod
 	{
 		return render_x_space;
 	}
-
-	public abstract void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my);
-
-	public void renderAdditionalInputs(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-	};
 
 	public boolean hasAdditionalInputRenders()
 	{
@@ -171,6 +177,7 @@ public abstract class IGRecipeMethod
 				case BLASTING -> {return ie("crude_blast_furnace");}
 				case BLOOMERY -> {return ig("bloomery");}
 				case CHEMICAL -> {return ig("chemical_reactor");}
+				case SEPARATOR -> {return ig("gravity_separator");}
 				case CRUSHING -> {return ie("crusher");}
 				case ROASTING -> {return ig("reverberation_furnace");}
 				case SYNTHESIS -> {return ie("refinery");}
@@ -179,9 +186,32 @@ public abstract class IGRecipeMethod
 				case BASIC_SMELTING -> {return mc("furnace");}
 				case REFINING -> {return ig("ballmill");}
 				case PELLETIZE -> {return ig("pelletizer");}
-				case CRYSTALLIZATION -> {return ig("crystallizer");}
+				case CRYSTALLIZATION -> {return ig("crystalizer");}
 			}
 			return "unknown";
+		}
+
+		public ResourceLocation getGuiLocation()
+		{
+			switch(this)
+			{
+				case CRAFTING -> {return IGLib.makeTextureLocation("jei/crafting_table");}
+				case CUTTING -> { return IGLib.makeTextureLocation("jei/hydrojet"); }
+				case BLASTING -> {return IGLib.makeTextureLocation("jei/crude_blast_furnace");}
+				case BLOOMERY -> {return IGLib.makeTextureLocation("jei/bloomery");}
+				case CHEMICAL -> {return IGLib.makeTextureLocation("jei/vat");}
+				case CRUSHING -> {return IGLib.makeTextureLocation("jei/crusher");}
+				case ROASTING -> {return IGLib.makeTextureLocation("jei/reverberation_furnace");}
+				case SYNTHESIS -> {return IGLib.makeTextureLocation("jei/refinery");}
+				case ARC_SMELTING -> {return IGLib.makeTextureLocation("jei/arc_furnace");}
+				case CALCINATION -> {return IGLib.makeTextureLocation("jei/rotarykiln");}
+				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("jei/furnace");}
+				case REFINING -> {return IGLib.makeTextureLocation("jei/ballmill");}
+				case SEPARATOR -> {return IGLib.makeTextureLocation("jei/gravity_separator");}
+				case PELLETIZE -> {return IGLib.makeTextureLocation("jei/pelletizer");}
+				case CRYSTALLIZATION -> {return IGLib.makeTextureLocation("jei/crystalizer");}
+			}
+			return IGLib.makeTextureLocation("unknown");
 		}
 	}
 

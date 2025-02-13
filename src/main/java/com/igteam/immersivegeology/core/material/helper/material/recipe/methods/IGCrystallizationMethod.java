@@ -12,7 +12,6 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -159,13 +158,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
-	{
-
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 
 	}

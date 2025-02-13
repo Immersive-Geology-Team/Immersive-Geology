@@ -12,9 +12,9 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RevFurnaceRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -93,17 +93,11 @@ public class IGRoastingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, itemResult, x, y, mx, my);
-//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
-//		renderItemStack(graphics, itemResult, x + 48, y, mx,my);
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
+		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x + 4, y + 41, mx, my);
+		renderItemStack(graphics, itemResult, x + 55, y + 41, mx,my);
+		renderFluidStack(graphics, ChemicalEnum.SulfurDioxde.getFluid(BlockCategoryFlags.FLUID), 91, 27, 16, 47, mx, my);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public class BloomeryScreen extends IEContainerScreen<BloomeryMenu>
 {
-	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("bloomery");
+	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("multiblocks/bloomery");
 
 	public BloomeryScreen(BloomeryMenu inventorySlotsIn, Inventory inv, Component title)
 	{

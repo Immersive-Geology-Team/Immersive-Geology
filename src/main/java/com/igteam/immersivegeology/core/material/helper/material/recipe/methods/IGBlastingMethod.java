@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
-import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -20,12 +19,9 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -154,19 +150,13 @@ public class IGBlastingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		Ingredient ingredient = Ingredient.of(input);
 		ItemStack inputStack = ingredient.getItems()[0];
 		renderItemStack(graphics, inputStack, x, y, mx, my);
 //		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
 //		renderItemStack(graphics, output, x + 48, y, mx,my);
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int x, int y, int mx, int my)
-	{
-		renderItemStack(graphics, output, x, y, mx,my);
 	}
 
 	@Override

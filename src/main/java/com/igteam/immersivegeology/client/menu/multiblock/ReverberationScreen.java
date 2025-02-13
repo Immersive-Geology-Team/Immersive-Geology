@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceMenu>
 {
-	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("reverberation_furnace");
+	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("multiblocks/reverberation_furnace");
 
 	public ReverberationScreen(ReverberationFurnaceMenu inventorySlotsIn, Inventory inv, Component title)
 	{

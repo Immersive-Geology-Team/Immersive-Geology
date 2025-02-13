@@ -316,22 +316,16 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
         // Create the lookup key based on the flag and material set
         String key = IGTags.getWrapFromSet(flag, materialSet);
-
-        IGLib.IG_LOGGER.info("Fluid Key Requested: {}", key);
-        IGLib.IG_LOGGER.info("Data map contains key? {}. Tags initialized? {}.", fluidTagMap.containsKey(key), IGTags.isInitialized());
-
         // If the fluid tag for this key is not present, try initializing
         if (!fluidTagMap.containsKey(key)) {
             IGTags.initialize();
             boolean initializationSuccessful = fluidTagMap.containsKey(key);
-            IGLib.IG_LOGGER.info("Initialization {}", initializationSuccessful ? "Successful" : "Failed");
-
             if (!initializationSuccessful) {
                 String materialNames = materialSet.stream()
                         .map(MaterialHelper::getName)
                         .collect(Collectors.joining(", "));
                 String errorMsg = String.format(
-                        "[Probably a False Flag, Try again.] Failed to initialize Fluid Tags: %s %s",
+                        "Failed to initialize Fluid Tags: %s %s",
                         flag.name(),
                         materialNames
                 );

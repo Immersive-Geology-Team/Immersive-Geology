@@ -111,7 +111,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     @Override
     public Set<IGRecipeChain> getRecipeChains()
     {
-        return Set.of(advanced_processing);
+        return Set.of(basic_processing, advanced_processing);
     }
 
     @Override

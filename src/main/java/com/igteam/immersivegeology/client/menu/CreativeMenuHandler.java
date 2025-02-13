@@ -33,7 +33,7 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 
 public class CreativeMenuHandler {
-    private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_expansion.png");
+    private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_tabs/creative_expansion.png");
     private static ArrayList<CreativeMenuButton> subGroupButtons = new ArrayList<CreativeMenuButton>();
     boolean reset = true;
     Logger logger = IGLib.getNewLogger();

@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class IGItemGroup extends CreativeModeTab {
-    private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tab_menu.png");
-    private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/ig_tabs.png");
+    private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/ig_tab_menu.png");
+    private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/ig_tabs.png");
 
     private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_background.png");
     private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/product_background.png");

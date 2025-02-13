@@ -35,7 +35,7 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 	{
 		super(helper, JEIRecipeTypes.REVERBERATION, "block.immersivegeology.reverberation_furnace");
 		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/reverberation_furnace.png");
-		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 101).setTextureSize(128,101).build();
+		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack());
 	}
@@ -43,16 +43,16 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, RevFurnaceRecipe recipe, IFocusGroup focuses)
 	{
-		builder.addSlot(RecipeIngredientRole.INPUT, 17, 41)
+		builder.addSlot(RecipeIngredientRole.INPUT, 4, 41)
 				.addItemStacks(recipe.input.getMatchingStackList());
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 68, 41)
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 54, 41)
 				.addItemStack(recipe.result.get());
 
 		TagKey<Fluid> fluid = ChemicalEnum.SulfurDioxde.getFluidTag(BlockCategoryFlags.FLUID);
 		FluidTagInput taggedFluid = new FluidTagInput(fluid, recipe.getWasteAmount());
 		int tankSize = Math.max(FluidType.BUCKET_VOLUME,  recipe.getWasteAmount());
-		builder.addSlot(RecipeIngredientRole.INPUT, 101, 27)
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 81, 27)
 				.setFluidRenderer(tankSize, false, 16, 47)
 				.addIngredients(ForgeTypes.FLUID_STACK, taggedFluid.getMatchingFluidStacks())
 				.addTooltipCallback(JEIHelper.fluidTooltipCallback);

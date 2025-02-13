@@ -9,14 +9,9 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.PelletizerRecipeBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.RotaryKilnRecipeBuilder;
-import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -24,20 +19,12 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class IGPelletizerMethod extends IGRecipeMethod
@@ -123,26 +110,13 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 24, y, mx, my);
 //		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
 //		renderItemStack(graphics, output, x + 72, y, mx,my);
 //		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x,y,mx,my);
 //		render_x_space = 120;
-	}
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int x, int y, int mx, int my)
-	{
-		renderItemStack(graphics, output, x, y, mx,my);
-	}
-
-	@Override
-	public void renderAdditionalInputs(GuiGraphics graphics, ItemStack iconStack, int x, int y, int mx, int my)
-	{
-		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x,y,mx,my);
-		render_x_space = 16;
 	}
 
 	@Override

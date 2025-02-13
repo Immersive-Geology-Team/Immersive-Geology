@@ -26,7 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class IGSeparatorMethod extends IGRecipeMethod
@@ -89,23 +88,14 @@ public class IGSeparatorMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public void basicRender(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		Ingredient ingredient = Ingredient.of(input);
-		renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
-		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
-		renderItemStack(graphics, result, x + 48, y, mx,my);
-		renderItemStack(graphics, waste, x + 72, y, mx,my);
-
-		render_x_space = 96;
+		renderItemStack(graphics, ingredient.getItems()[0], x + 16, y + 33, mx, my);
+		renderItemStack(graphics, result, x + 67, y + 42, mx,my);
+		renderItemStack(graphics, waste, x + 67, y + 62, mx,my);
 	}
 
-
-	@Override
-	public void renderOutput(GuiGraphics graphics, ItemStack iconStack, int methodNameX, int methodNameY, int mx, int my)
-	{
-
-	}
 
 	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)

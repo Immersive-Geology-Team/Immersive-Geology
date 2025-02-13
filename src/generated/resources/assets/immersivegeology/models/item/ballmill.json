@@ -61,17 +61,17 @@
     "gui": {
       "rotation": [
         30,
-        225,
+        45,
         0
       ],
       "scale": [
-        0.1875,
-        0.1875,
-        0.1875
+        0.15,
+        0.15,
+        0.15
       ],
       "translation": [
-        6,
-        -6,
+        0,
+        -2,
         0
       ]
     },
@@ -124,5 +124,5 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/ballmill/ballmill.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/ballmill/display_ballmill.obj"
 }
