@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -48,13 +47,13 @@ public class MaterialHematite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
     }
 
     @Override
-    public IGVeinTextureType getVeinType()
+    public IGVeinTextureType getVeinTextureType()
     {
         return IGVeinTextureType.LAYERED;
     }
@@ -67,7 +66,7 @@ public class MaterialHematite extends MaterialMineral {
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 900);
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 900);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),

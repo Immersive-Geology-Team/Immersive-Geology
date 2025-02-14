@@ -120,6 +120,12 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
+	}
+
+	@Override
 	public boolean hasAdditionalInputRenders()
 	{
 		return true;

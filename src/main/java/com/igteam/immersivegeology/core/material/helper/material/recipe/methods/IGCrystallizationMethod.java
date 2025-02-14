@@ -53,8 +53,8 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	{
 		this.name = create_advanced_method_name(ItemCategoryFlags.CRYSTAL);
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
-			this.itemResult = parentMaterial.getProductionMaterial().getStack(output_form, 1);
-			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, parentMaterial.getProductionMaterial());
+			this.itemResult = parentMaterial.getPrimaryProduct().getStack(output_form, 1);
+			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, parentMaterial.getPrimaryProduct());
 			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
 			this.time = 300;
 			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
@@ -160,7 +160,18 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
+		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x+15, y+27, 16, 47, mx, my);
+		if(fluid_out!=null&&!fluid_out.isEmpty())
+		{
+			renderFluidStack(graphics, fluid_out.getFluid(), x+41, y+71, 16, 20, mx, my);
+		}
+		renderItemStack(graphics, itemResult, x + 66,y + 49,mx,my);
+	}
 
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x, y, 16, 16, mx, my);
 	}
 
 	@Override

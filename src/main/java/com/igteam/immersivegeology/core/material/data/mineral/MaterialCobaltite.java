@@ -6,8 +6,6 @@ import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -20,14 +18,11 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags.Biomes;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialCobaltite extends MaterialSulphideMineral
 {
@@ -58,7 +53,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Cobalt, MetalEnum.Platinum, MetalEnum.Osmium));
     }
@@ -79,7 +74,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
-                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 new ItemStack(Items.SAND),
                 0.075f, 200, 1000);
 

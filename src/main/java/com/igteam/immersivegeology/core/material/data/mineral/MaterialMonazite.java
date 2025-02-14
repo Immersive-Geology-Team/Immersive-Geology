@@ -49,7 +49,7 @@ public class MaterialMonazite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Neodymium, MetalEnum.Thorium));
     }

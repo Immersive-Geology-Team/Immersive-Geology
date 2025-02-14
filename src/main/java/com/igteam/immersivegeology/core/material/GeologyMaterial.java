@@ -347,9 +347,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.stage_set.add(stage);
     }
 
-    public MaterialInterface<?> getProductionMaterial()
+    public MaterialInterface<?> getPrimaryProduct()
     {
-        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        LinkedHashSet<MaterialInterface<?>> set =  getDerivedMaterials();
         if(set.isEmpty()) {
             IGLib.IG_LOGGER.error("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
             return MetalEnum.Unobtanium;
@@ -359,9 +359,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return list.get(0);
     }
 
-    public MaterialInterface<?> getByproductMaterial()
+    public MaterialInterface<?> getSecondaryProduct()
     {
-        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        LinkedHashSet<MaterialInterface<?>> set =  getDerivedMaterials();
         if(set.size() < 2) {
             IGLib.IG_LOGGER.error("Called a Secondary Source (Byproduct) Material with no Entry [{}]", getName());
             return MetalEnum.Unobtanium;
@@ -371,9 +371,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return list.get(1);
     }
 
-    public MaterialInterface<?> getTraceMaterials(int index)
+    public MaterialInterface<?> getTraceProduct(int index)
     {
-        LinkedHashSet<MaterialInterface<?>> set =  getSourceMaterials();
+        LinkedHashSet<MaterialInterface<?>> set =  getDerivedMaterials();
         if(set.size() < (index + 1)) {
             IGLib.IG_LOGGER.error("Called a Trace Material with no Entry [{}]", getName());
             return MetalEnum.Unobtanium;

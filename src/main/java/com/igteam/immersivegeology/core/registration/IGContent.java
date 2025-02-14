@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.client.manual.IEManualInstance;
 import blusunrize.immersiveengineering.client.manual.ManualElementMultiblock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDevices;
+import blusunrize.lib.manual.ManualElementItem;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualEntry.EntryData;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
@@ -28,6 +29,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -38,6 +40,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
@@ -171,18 +174,38 @@ public class IGContent {
     private static void createRecipeChainPage(StringBuilder contentBuilder, ArrayList<SpecialElementData> itemList, MaterialInterface<?> material)
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
+        String process_info = I18n.get("manual.immersivegeology." + material.getName() + ".desc");
+        contentBuilder.append("<&item_display>").append(process_info);
 
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
             IGRecipeChain chain = recipe_chain_data.get(i);
             IGLib.IG_LOGGER.info("Creating Manual Entry for {}", chain.getName());
-
-            contentBuilder.append("<&").append(chain.getName()).append(">");
+            contentBuilder.append("<np>").append("<&").append(chain.getName()).append(">");
             if(i < (recipe_chain_data.size() - 1))
                 contentBuilder.append("<np>");
 
             itemList.add(new SpecialElementData(chain.getName(), 0, new IGRecipeOverview(ManualHelper.getManual(), material.instance(), chain)));
         }
+
+        NonNullList<ItemStack> displayStacks = NonNullList.create();
+
+        if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+        {
+            displayStacks.add(material.getStack(ItemCategoryFlags.POOR_ORE));
+            displayStacks.add(material.getStack(ItemCategoryFlags.NORMAL_ORE));
+            displayStacks.add(material.getStack(ItemCategoryFlags.RICH_ORE));
+        }
+
+        if(material.hasFlag(ItemCategoryFlags.INGOT))
+        {
+            displayStacks.add(material.getStack(ItemCategoryFlags.INGOT));
+            material.getOriginMaterials();
+
+
+        }
+
+        itemList.add(new SpecialElementData("item_display", 0, new ManualElementItem(ManualHelper.getManual(), displayStacks)));
     }
 
 

@@ -51,7 +51,7 @@ public class MaterialApatite extends MaterialSulphideMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         LinkedHashSet<MaterialInterface<?>> materials = new LinkedHashSet<>();
         materials.add(MetalEnum.Calcium);

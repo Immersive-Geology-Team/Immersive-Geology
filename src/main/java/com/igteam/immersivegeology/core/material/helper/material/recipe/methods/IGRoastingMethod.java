@@ -101,6 +101,12 @@ public class IGRoastingMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x, y, mx, my);
+	}
+
+	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
 		try {

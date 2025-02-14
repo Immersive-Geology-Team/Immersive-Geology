@@ -55,7 +55,7 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 	}
 
 	@Override
-	public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+	public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
 	{
 		LinkedHashSet<MaterialInterface<?>> set = new LinkedHashSet<>();
 		set.add(MetalEnum.Sodium);

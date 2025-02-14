@@ -13,20 +13,15 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialTungsten extends MaterialMetal {
 
@@ -46,7 +41,7 @@ public class MaterialTungsten extends MaterialMetal {
         IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.OXIDE_PELLET),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 1800);
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 1800);
         //Direct Leaching in HCL
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"slurry_to_compound_dust",
                 getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT),

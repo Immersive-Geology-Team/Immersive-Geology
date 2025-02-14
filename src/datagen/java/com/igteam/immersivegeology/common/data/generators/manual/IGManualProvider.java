@@ -12,7 +12,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
@@ -31,8 +30,6 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
@@ -121,7 +118,7 @@ public class IGManualProvider implements DataProvider
 
 		StringBuilder source_metals_builder = new StringBuilder();
 
-		for(MaterialInterface<?> metal : mineral.getSourceMaterials()) {
+		for(MaterialInterface<?> metal : mineral.getDerivedMaterials()) {
 			source_metals_builder.append(metal.getName() + ", ");
 		}
 

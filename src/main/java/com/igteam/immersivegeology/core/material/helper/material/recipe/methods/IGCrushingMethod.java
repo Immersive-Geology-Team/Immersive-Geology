@@ -156,7 +156,12 @@ public class IGCrushingMethod extends IGRecipeMethod
 		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
 		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
 		renderItemStack(graphics, output, x + 48, y, mx,my);
-		render_x_space = 72;
+	}
+
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
 	}
 
 	@Override

@@ -150,8 +150,12 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 //		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
 //		renderItemStack(graphics, output, x + 72, y,mx,my);
 //		renderItemStack(graphics, slag, x + 96,y,mx,my);
+	}
 
-		render_x_space = 120;
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
 	}
 
 	@Override

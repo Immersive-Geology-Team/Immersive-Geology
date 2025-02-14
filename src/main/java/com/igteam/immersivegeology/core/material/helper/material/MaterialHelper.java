@@ -148,7 +148,7 @@ public interface MaterialHelper {
     boolean weakCheckExistingImplementation(IFlagType<?> h);
     String getName();
 
-    default LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    default LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>();
     };
@@ -265,10 +265,10 @@ public interface MaterialHelper {
         }
     }
 
-    default IGVeinTextureType getVeinType() {return IGVeinTextureType.METALLIC;}
-    MaterialInterface<?> getProductionMaterial();
-    MaterialInterface<?> getByproductMaterial();
-    MaterialInterface<?> getTraceMaterials(int index);
+    default IGVeinTextureType getVeinTextureType() {return IGVeinTextureType.METALLIC;}
+    MaterialInterface<?> getPrimaryProduct();
+    MaterialInterface<?> getSecondaryProduct();
+    MaterialInterface<?> getTraceProduct(int index);
 
     default boolean useSedimentaryTextures() { return false;};
 
@@ -277,4 +277,8 @@ public interface MaterialHelper {
     }
 
     boolean acceptableStoneType(MaterialStone instance);
+
+	default Set<MaterialHelper> getOriginMaterials() {
+        return Set.of();
+    };
 }

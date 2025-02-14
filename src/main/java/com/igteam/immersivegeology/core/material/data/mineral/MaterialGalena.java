@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -17,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.BiomeTags;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -49,7 +47,7 @@ public class MaterialGalena extends MaterialSulphideMineral
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Lead, MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium));
     }
@@ -74,8 +72,8 @@ public class MaterialGalena extends MaterialSulphideMineral
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
-                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.075f, 200, 1000);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
@@ -87,7 +85,7 @@ public class MaterialGalena extends MaterialSulphideMineral
                 null, null, 200, 51200);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
-                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                "mineral_slurry_"+getName() +"_to_" + getSecondaryProduct().getName() + "_crystal",
                 MetalEnum.Silver.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Lead, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Galena), 2*IGLib.SLURRY_TO_CRYSTAL_MB,

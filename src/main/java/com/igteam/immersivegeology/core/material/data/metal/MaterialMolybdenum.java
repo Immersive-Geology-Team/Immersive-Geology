@@ -40,7 +40,7 @@ public class MaterialMolybdenum extends MaterialMetal {
         IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.OXIDE_PELLET),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 1800);
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 1800);
 
         IGMethodBuilder.centrifuge(this, IGStageDesignation.PURIFICATION).create(
                 ChemicalEnum.Ammonia.getCloudySlurryTagWith(MineralEnum.Molybdenite),

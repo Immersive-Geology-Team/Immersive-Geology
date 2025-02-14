@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -92,6 +93,7 @@ public class IGRecipeOverview extends SpecialManualElements
 				// For now, assume the nodes already have valid x, y positions. The above method should have set them correctly.
 				int baseX = x + (screen.getManual().pageWidth / 2) - 10;
 				int baseY = y + 16;
+
 				// Render the entire chain tree.
 				graphics.pose().pushPose();
 				if(selectedNode == null) renderChain(graphics, screen, root, baseX, baseY, mx, my, 0xff121212);
@@ -155,7 +157,6 @@ public class IGRecipeOverview extends SpecialManualElements
 		}
 
 		method.renderMB(graphics, method.getIconStack(), nodeX, nodeY, mx, my);
-
 
 		for (IGRecipeNode child : node.getChildren()) {
 			int childX = baseX + child.getX();

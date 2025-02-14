@@ -50,7 +50,7 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	public IGBloomeryMethod create(IFlagType<?> input, int inputAmount, IFlagType<?> output, int outputAmount, int time){
 		this.name = create_advanced_method_name(input, output);
 
-		MaterialInterface<?> outputMaterial = parentMaterial.getProductionMaterial();
+		MaterialInterface<?> outputMaterial = parentMaterial.getPrimaryProduct();
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;
@@ -88,6 +88,12 @@ public class IGBloomeryMethod extends IGRecipeMethod
 		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x, y, mx, my);
 //		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
 //		renderItemStack(graphics, itemResult, x + 48, y, mx,my);
+	}
+
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
 	}
 
 	@Override

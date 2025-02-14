@@ -86,6 +86,12 @@ public class IGTrommelMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
+	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
 		try

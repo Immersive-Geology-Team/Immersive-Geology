@@ -63,7 +63,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         //MetalEnum.Platinum, MetalEnum.Osmium -- Think about it?
         return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Nickel));
@@ -86,8 +86,8 @@ public class MaterialChalcocite extends MaterialSulphideMineral
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
-                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.075f, 200, 1000).addToTree(sulphideElectrowining, powdered_slag);
 
         IGRecipeNode slurry = IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
@@ -99,7 +99,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
                 null, null, 200, 51200).addToTree(sulphideElectrowining, powdered_slag);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
-                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                "mineral_slurry_"+getName() +"_to_" + getSecondaryProduct().getName() + "_crystal",
                 MetalEnum.Copper.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Nickel, IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Chalcocite), IGLib.SLURRY_TO_CRYSTAL_MB,

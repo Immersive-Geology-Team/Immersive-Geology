@@ -19,6 +19,11 @@
   "manual.immersivegeology.main": "Immersive Geology",
   "manual.immersivegeology.direct_blasting.subtext": "Direct Blasting",
   "manual.immersivegeology.sulphide_electrowining.subtext": "Sulphide Electrowining",
+
+  "manual.immersivegeology.cuprite.desc": "Testing the Cuprite description for something using the manual",
+  "manual.immersivegeology.chalcocite.desc": "Testing the Chalcocite description for something using the manual",
+
+
   "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_recipe_overview": "Processing Chains",
   "manual.immersivegeology.ig_multiblocks": "Multiblocks",

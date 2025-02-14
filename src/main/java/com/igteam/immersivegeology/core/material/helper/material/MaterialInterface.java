@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -82,7 +81,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     @Nullable
     default TagKey<Fluid> getFluidTag(BlockCategoryFlags flag, MaterialHelper... extras) { return instance().getFluidTag(flag, extras);};
 
-    default LinkedHashSet<MaterialInterface<?>> getSourceMaterials() {return instance().getSourceMaterials();};
+    default LinkedHashSet<MaterialInterface<?>> getDerivedMaterials() {return instance().getDerivedMaterials();};
 
 	default void buildRecipe()
     {
@@ -107,14 +106,16 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default boolean hasOxidationOverTime() {return instance().willTarnishOverTime();};
 
-	default IGVeinTextureType getVeinType()
+	default IGVeinTextureType getVeinTextureType()
     {
-        return instance().getVeinType();
+        return instance().getVeinTextureType();
     }
 
-    default MaterialInterface<?> getProductionMaterial() {return instance().getProductionMaterial();}
-    default MaterialInterface<?> getByproductMaterial() {return instance().getByproductMaterial();}
-    default MaterialInterface<?> getProductionMaterial(int index) {return instance().getTraceMaterials(index);}
+    default MaterialInterface<?> getPrimaryProduct() {return instance().getPrimaryProduct();}
+    default MaterialInterface<?> getSecondaryProduct() {return instance().getSecondaryProduct();}
+    default MaterialInterface<?> getTraceProduct(int index) {return instance().getTraceProduct(index);}
 
     default boolean useSedimentaryTextures() {return instance().useSedimentaryTextures();}
+
+    default Set<MaterialHelper> getOriginMaterials() {return instance().getOriginMaterials();};
 }

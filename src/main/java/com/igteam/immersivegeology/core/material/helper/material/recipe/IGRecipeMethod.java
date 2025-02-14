@@ -97,6 +97,7 @@ public abstract class IGRecipeMethod
 	}
 
 	public abstract void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
+	public abstract void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
 
 	public void renderItemStack(GuiGraphics graphics, ItemStack stack, int x, int y, int mx, int my)
 	{
@@ -237,12 +238,12 @@ public abstract class IGRecipeMethod
 
 	protected String create_advanced_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
 	{
-		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getProductionMaterial().getName() + output_form.getName().toLowerCase();
+		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase();
 	}
 
 	protected String create_advanced_method_name(IFlagType<?> output_form)
 	{
-		return parentMaterial.getName() + "_to_" + parentMaterial.getProductionMaterial().getName() + output_form.getName().toLowerCase();
+		return parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase();
 	}
 
 	protected String create_basic_method_name(IFlagType<?> output_form)

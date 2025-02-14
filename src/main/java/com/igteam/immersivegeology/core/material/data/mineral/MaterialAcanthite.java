@@ -15,7 +15,6 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -58,7 +57,7 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         LinkedHashSet<MaterialInterface<?>> materials = new LinkedHashSet<>();
         materials.add(MetalEnum.Silver);
@@ -87,8 +86,8 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
-                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.075f, 200, 1000);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
@@ -100,7 +99,7 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
                 null, null, 200, 51200);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
-                "mineral_slurry_"+getName() +"_to_" + getByproductMaterial().getName() + "_crystal",
+                "mineral_slurry_"+getName() +"_to_" + getSecondaryProduct().getName() + "_crystal",
                 MetalEnum.Lead.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Acanthite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,

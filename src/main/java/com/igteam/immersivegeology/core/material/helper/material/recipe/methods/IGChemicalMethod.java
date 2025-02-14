@@ -94,6 +94,15 @@ public class IGChemicalMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		if(itemIn!=null && !itemIn.hasNoMatchingItems())
+		{
+			renderItemStack(graphics, itemIn.getRandomizedExampleStack(0), x, y, mx, my);
+		}
+	}
+
+	@Override
 	public String getName()
 	{
 		return this.name;

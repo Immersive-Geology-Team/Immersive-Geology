@@ -54,7 +54,7 @@ public class MaterialAlumina extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Aluminum));
     }

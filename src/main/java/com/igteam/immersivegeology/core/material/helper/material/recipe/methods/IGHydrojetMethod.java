@@ -64,4 +64,10 @@ public class IGHydrojetMethod extends IGRecipeMethod
 
 	}
 
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
 }

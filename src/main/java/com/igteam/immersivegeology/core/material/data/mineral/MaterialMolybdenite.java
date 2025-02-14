@@ -58,7 +58,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Molybdenum));
     }

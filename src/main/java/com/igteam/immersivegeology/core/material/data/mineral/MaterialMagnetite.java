@@ -11,9 +11,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGPelletizerMethod;
 import net.minecraft.tags.BiomeTags;
-import net.minecraftforge.common.Tags;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -46,7 +44,7 @@ public class MaterialMagnetite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
     }
@@ -65,7 +63,7 @@ public class MaterialMagnetite extends MaterialMineral {
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-               getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 900);
+               getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 900);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),

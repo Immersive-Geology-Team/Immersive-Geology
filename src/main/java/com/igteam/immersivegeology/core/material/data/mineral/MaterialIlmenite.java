@@ -10,15 +10,12 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialIlmenite extends MaterialMineral {
 
@@ -45,7 +42,7 @@ public class MaterialIlmenite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Titanium));
     }
@@ -65,8 +62,8 @@ public class MaterialIlmenite extends MaterialMineral {
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
-                getProductionMaterial().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getByproductMaterial().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000);
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000);
 
         //Important - NO WATER in reactions!
 

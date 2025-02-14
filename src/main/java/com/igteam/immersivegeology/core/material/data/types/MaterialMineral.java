@@ -45,7 +45,7 @@ public class MaterialMineral extends GeologyMaterial {
 
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.PELLET),
-                    getProductionMaterial().getStack(ItemCategoryFlags.INGOT)).addToTree(directBlasting);
+                    getPrimaryProduct().getStack(ItemCategoryFlags.INGOT)).addToTree(directBlasting);
         }
     }
 
@@ -55,7 +55,7 @@ public class MaterialMineral extends GeologyMaterial {
     }
 
     @Override
-    public IGVeinTextureType getVeinType()
+    public IGVeinTextureType getVeinTextureType()
     {
         return IGVeinTextureType.MINERAL;
     }

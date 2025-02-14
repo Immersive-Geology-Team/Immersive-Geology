@@ -160,6 +160,13 @@ public class IGBlastingMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		Ingredient ingredient = Ingredient.of(input);
+		renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
+	}
+
+	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
 		try {

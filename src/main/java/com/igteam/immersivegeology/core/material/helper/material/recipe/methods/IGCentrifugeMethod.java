@@ -61,7 +61,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		String tag_name = input_fluid_tag.toString().toLowerCase();
 		String serialized_tag_name = tag_name.substring(tag_name.lastIndexOf(":") + 1, tag_name.lastIndexOf("]"));
 
-		this.name = serialized_tag_name + "_to_" + output_material.getProductionMaterial().getName() + "_centrifuge";
+		this.name = serialized_tag_name + "_to_" + output_material.getPrimaryProduct().getName() + "_centrifuge";
 		this.input = new FluidTagInput(input_fluid_tag, input_amount);
 		this.output = new ItemStack(output_item, item_output_amount);
 		if (primary_fluid_output == null)
@@ -113,6 +113,12 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+
+	}
+
+	@Override
+	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 
 	}

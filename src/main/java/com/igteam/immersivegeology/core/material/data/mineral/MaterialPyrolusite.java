@@ -16,7 +16,6 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialPyrolusite extends MaterialMineral {
 
@@ -40,7 +39,7 @@ public class MaterialPyrolusite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Manganese, MetalEnum.Iron));
     }
@@ -50,7 +49,7 @@ public class MaterialPyrolusite extends MaterialMineral {
         super.setupRecipeStages();
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getProductionMaterial().getStack(ItemCategoryFlags.INGOT), 900);
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 900);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE),

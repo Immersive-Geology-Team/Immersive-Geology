@@ -18,7 +18,6 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialSmithsonite extends MaterialMineral {
 
@@ -44,7 +43,7 @@ public class MaterialSmithsonite extends MaterialMineral {
     }
 
     @Override
-    public LinkedHashSet<MaterialInterface<?>> getSourceMaterials()
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(Set.of(MetalEnum.Zinc));
     }
@@ -66,12 +65,12 @@ public class MaterialSmithsonite extends MaterialMineral {
 
         //No byproducts and zinc is evaporated
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.SLAG,
-                getProductionMaterial().instance(),ItemCategoryFlags.INGOT, new ItemStack(Ingredients.SLAG), 900);
+                getPrimaryProduct().instance(),ItemCategoryFlags.INGOT, new ItemStack(Ingredients.SLAG), 900);
 
         //No byproducts and most of the zinc is evaporated
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getProductionMaterial().getStack(ItemCategoryFlags.NUGGET, 5));
+                getPrimaryProduct().getStack(ItemCategoryFlags.NUGGET, 5));
 
     }
 }
