@@ -155,8 +155,6 @@ public class IGBlastingMethod extends IGRecipeMethod
 		Ingredient ingredient = Ingredient.of(input);
 		ItemStack inputStack = ingredient.getItems()[0];
 		renderItemStack(graphics, inputStack, x, y, mx, my);
-//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
-//		renderItemStack(graphics, output, x + 48, y, mx,my);
 	}
 
 	@Override
@@ -164,6 +162,12 @@ public class IGBlastingMethod extends IGRecipeMethod
 	{
 		Ingredient ingredient = Ingredient.of(input);
 		renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
+	}
+
+	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, output, x, y, mx, my);
 	}
 
 	@Override

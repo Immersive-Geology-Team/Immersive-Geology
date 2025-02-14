@@ -94,6 +94,12 @@ public class IGChemicalMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int baseX, int baseY, int mx, int my)
+	{
+
+	}
+
+	@Override
 	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		if(itemIn!=null && !itemIn.hasNoMatchingItems())

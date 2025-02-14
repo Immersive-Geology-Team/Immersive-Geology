@@ -12,10 +12,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class IGRecipeChain
 {
@@ -24,7 +21,8 @@ public class IGRecipeChain
 	private final int priority;
 
 	// The root node of the chain.
-	private IGRecipeNode root;
+	private final List<IGRecipeNode> rootNodes = new ArrayList<>();
+
 
 	public IGRecipeChain(GeologyMaterial material, String chainName, int priority) {
 		this.material = material;
@@ -38,12 +36,20 @@ public class IGRecipeChain
 	public void addMethod(IGRecipeMethod method) {
 		IGRecipeNode newNode = new IGRecipeNode(method);
 		method.setNode(newNode);
-		if (root == null) {
-			root = newNode;
+		if (rootNodes.isEmpty()) {
+			rootNodes.add(newNode);
 		} else {
-			IGRecipeNode last = getLastNode(root);
+			// For linear chains, assume the first root is used.
+			IGRecipeNode last = getLastNode(rootNodes.get(0));
 			last.addChild(newNode);
 		}
+	}
+
+	public IGRecipeNode addOptionalRoot(IGRecipeMethod method) {
+		IGRecipeNode newNode = new IGRecipeNode(method);
+		method.setNode(newNode);
+		rootNodes.add(newNode);
+		return newNode;
 	}
 
 	/**
@@ -52,16 +58,22 @@ public class IGRecipeChain
 	public void addChild(IGRecipeMethod parentMethod, IGRecipeMethod childMethod) {
 		IGRecipeNode parentNode = parentMethod.getNode();
 		if (parentNode == null) {
-			// If not already registered, add the parent as the root.
 			parentNode = new IGRecipeNode(parentMethod);
 			parentMethod.setNode(parentNode);
-			if (root == null) {
-				root = parentNode;
+			if (rootNodes.isEmpty()) {
+				rootNodes.add(parentNode);
 			}
 		}
 		IGRecipeNode childNode = new IGRecipeNode(childMethod);
 		childMethod.setNode(childNode);
 		parentNode.addChild(childNode);
+	}
+
+	public void promoteOptionalRoot(IGRecipeNode optionalRoot, IGRecipeMethod newParentMethod) {
+		// Remove the optional root from the list.
+		rootNodes.remove(optionalRoot);
+		// Add it as a child of newParentMethod.
+		addChild(newParentMethod, optionalRoot.getMethod());
 	}
 
 	public void join(IGRecipeNode branch1, IGRecipeNode branch2, IGRecipeMethod joinMethod) {
@@ -78,13 +90,12 @@ public class IGRecipeChain
 		if (node.getChildren().isEmpty()) {
 			return node;
 		} else {
-			// Assumes a linear chain (only one child per node).
 			return getLastNode(node.getChildren().get(0));
 		}
 	}
 
-	public IGRecipeNode getRoot() {
-		return root;
+	public List<IGRecipeNode> getRootNodes() {
+		return rootNodes;
 	}
 
 	public void layoutRecipeChain(IGRecipeNode root, int startX, int startY, int verticalSpacing, int horizontalSpacing) {

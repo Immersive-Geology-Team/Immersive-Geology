@@ -175,6 +175,12 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, itemResult, x,y,mx,my);
+	}
+
+	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("Attempting to build Crystallizer Method {}", this.name);

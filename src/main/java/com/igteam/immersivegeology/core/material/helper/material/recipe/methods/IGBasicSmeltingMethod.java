@@ -92,8 +92,12 @@ public class IGBasicSmeltingMethod extends IGRecipeMethod
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		renderItemStack(graphics, new ItemStack(input.asItem()), x, y, mx, my);
-//		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
-//		renderItemStack(graphics, new ItemStack(output.asItem()), x + 48, y, mx,my);
+	}
+
+	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int baseX, int baseY, int mx, int my)
+	{
+
 	}
 
 	@Override

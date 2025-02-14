@@ -124,6 +124,12 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	}
 
 	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int baseX, int baseY, int mx, int my)
+	{
+
+	}
+
+	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("Attempting to build Centrifuge Recipe");

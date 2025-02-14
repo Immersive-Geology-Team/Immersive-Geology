@@ -78,25 +78,40 @@ public class IGRecipeOverview extends SpecialManualElements
 	{
 		if(chain_to_display != null) {
 			IGRecipeChain chain = chain_to_display;
-			IGRecipeNode root = chain.getRoot();
+			List<IGRecipeNode> roots = chain.getRootNodes();
 
 			drawHackySubtext(graphics, screen);
 
 			// Check if the chain has a root node.
-			if(root != null) {
+			if(!roots.isEmpty()) {
 				if(!setChainPositions)
 				{
-					chain.layoutRecipeChain(root, x, y, 32, 48);
+					int offsetX = x; // starting X position for the first root
+					for(IGRecipeNode root : roots)
+					{
+						chain.layoutRecipeChain(root, offsetX, y, 32, 48);
+						offsetX += 48;
+					}
 					setChainPositions = true;
 				}
 
 				// For now, assume the nodes already have valid x, y positions. The above method should have set them correctly.
-				int baseX = x + (screen.getManual().pageWidth / 2) - 10;
-				int baseY = y + 16;
+				int baseX = x + (screen.getManual().pageWidth / 2) - (roots.size() * 16);
+				int baseY = y + 32;
 
 				// Render the entire chain tree.
 				graphics.pose().pushPose();
-				if(selectedNode == null) renderChain(graphics, screen, root, baseX, baseY, mx, my, 0xff121212);
+				if(selectedNode == null)
+				{
+					int offsetX = baseX; // starting X position for the first root
+					for(IGRecipeNode root : roots)
+					{
+						root.getMethod().renderDisplayStack(graphics, screen, offsetX, baseY-32, mx, my);
+						drawDirectLine(graphics, offsetX+8, baseY-24, offsetX+8, baseY+8, 0xff121212);
+						renderChain(graphics, screen, root, baseX, baseY, mx, my, 0xff121212);
+						offsetX += 48;
+					}
+				}
 				graphics.pose().popPose();
 
 				if(selectedNode != null)
@@ -132,7 +147,6 @@ public class IGRecipeOverview extends SpecialManualElements
 						}
 						graphics.renderTooltip(manual.fontRenderer(), Component.literal("Close"), mx, my);
 					}
-
 				}
 			}
 		}
@@ -168,6 +182,12 @@ public class IGRecipeOverview extends SpecialManualElements
 
 			// Recursively render the child node.
 			renderChain(graphics, screen, child, baseX, baseY, mx, my, color);
+		}
+
+		if(node.getChildren().isEmpty())
+		{
+			drawDirectLine(graphics, nodeX + 8, nodeY + 8, nodeX + 8, nodeY + 36, color);
+			method.renderFinalStack(graphics, screen, nodeX, nodeY + 32, mx, my);
 		}
 	}
 

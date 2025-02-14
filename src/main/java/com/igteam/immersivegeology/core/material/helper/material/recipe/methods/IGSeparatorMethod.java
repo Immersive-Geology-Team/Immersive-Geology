@@ -103,6 +103,13 @@ public class IGSeparatorMethod extends IGRecipeMethod
 		renderItemStack(graphics, ingredient.getItems()[0], x, y,mx,my);
 	}
 
+	@Override
+	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
+	{
+		renderItemStack(graphics, result, x - 7, y,mx,my);
+		renderItemStack(graphics, waste, x + 8, y,mx,my);
+	}
+
 
 	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)

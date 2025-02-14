@@ -54,6 +54,10 @@ public abstract class IGRecipeMethod
 		return this.getNode();
 	}
 
+	public IGRecipeNode addOptionalToTree(IGRecipeChain chain) {
+		return chain.addOptionalRoot(this);
+	}
+
 	public IGRecipeNode addToTree(IGRecipeChain chain, IGRecipeNode parent) {
 		chain.addChild(parent.getMethod(), this);
 		return this.getNode();
@@ -98,6 +102,7 @@ public abstract class IGRecipeMethod
 
 	public abstract void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
 	public abstract void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my);
+	public abstract void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int baseX, int baseY, int mx, int my);
 
 	public void renderItemStack(GuiGraphics graphics, ItemStack stack, int x, int y, int mx, int my)
 	{

@@ -175,13 +175,13 @@ public class IGContent {
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
         String process_info = I18n.get("manual.immersivegeology." + material.getName() + ".desc");
-        contentBuilder.append("<&item_display>").append(process_info);
+        contentBuilder.append("<&item_display>").append(process_info).append("<np>");
 
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
             IGRecipeChain chain = recipe_chain_data.get(i);
             IGLib.IG_LOGGER.info("Creating Manual Entry for {}", chain.getName());
-            contentBuilder.append("<np>").append("<&").append(chain.getName()).append(">");
+            contentBuilder.append("<&").append(chain.getName()).append(">");
             if(i < (recipe_chain_data.size() - 1))
                 contentBuilder.append("<np>");
 
