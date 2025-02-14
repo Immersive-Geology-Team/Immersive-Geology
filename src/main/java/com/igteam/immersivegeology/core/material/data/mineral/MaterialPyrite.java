@@ -65,7 +65,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
     }
 
     @Override
-    public boolean willTarnishOverTime()
+    public boolean canTarnish()
     {
         return true;
     }

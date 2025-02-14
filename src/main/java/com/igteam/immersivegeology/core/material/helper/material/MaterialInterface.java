@@ -104,7 +104,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
 	default Item getItem(ItemCategoryFlags itemCategoryFlags) {return instance().getItem(itemCategoryFlags);};
 
-    default boolean hasOxidationOverTime() {return instance().willTarnishOverTime();};
+    default boolean canTarnish() {return instance().canTarnish();};
 
 	default IGVeinTextureType getVeinTextureType()
     {

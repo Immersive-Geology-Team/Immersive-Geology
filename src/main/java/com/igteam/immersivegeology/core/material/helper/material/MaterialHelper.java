@@ -49,7 +49,7 @@ public interface MaterialHelper {
         return ItemStack.EMPTY;
     }
 
-    default boolean willTarnishOverTime()
+    default boolean canTarnish()
     {
         return false;
     }

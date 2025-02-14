@@ -31,7 +31,7 @@ public class MaterialHematite extends MaterialMineral {
     }
 
     @Override
-    public boolean willTarnishOverTime()
+    public boolean canTarnish()
     {
         return true;
     }

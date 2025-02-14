@@ -50,7 +50,7 @@ public class MaterialMagnetite extends MaterialMineral {
     }
 
     @Override
-    public boolean willTarnishOverTime()
+    public boolean canTarnish()
     {
         return true;
     }

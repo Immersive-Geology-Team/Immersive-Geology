@@ -71,7 +71,7 @@ public class MaterialCopper extends MaterialNativeMetal {
     }
 
     @Override
-    public boolean willTarnishOverTime()
+    public boolean canTarnish()
     {
         return true;
     }

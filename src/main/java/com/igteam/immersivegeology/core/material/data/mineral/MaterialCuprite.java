@@ -36,7 +36,7 @@ public class MaterialCuprite extends MaterialMineral
 		CONFIG = new MineralConfig(30, 50, 1, 0, 200, 5000, 0.5,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
 	}
 
-	public boolean willTarnishOverTime()
+	public boolean canTarnish()
 	{
 		return true;
 	}

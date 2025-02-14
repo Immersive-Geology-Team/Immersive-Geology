@@ -14,7 +14,6 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -23,7 +22,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -91,7 +89,7 @@ public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
     @Override
     public boolean isRandomlyTicking(BlockState state)
     {
-        return materialMap.values().stream().anyMatch(MaterialInterface::hasOxidationOverTime);
+        return materialMap.values().stream().anyMatch(MaterialInterface::canTarnish);
     }
 
     public static List<EnumProperty<MineralWeathering>> OXIDATION_PROPERTIES;

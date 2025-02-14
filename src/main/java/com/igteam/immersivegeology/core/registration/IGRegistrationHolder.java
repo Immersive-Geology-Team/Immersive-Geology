@@ -315,7 +315,7 @@ public class IGRegistrationHolder {
                                 // After all checks, now we can generate the different ore levels
                                 for(OreRichness richness : OreRichness.values()){
                                     String registryKey = blockCategory.getRegistryKey(material, base, richness);
-                                    Supplier<Block> blockProvider = () -> (material.hasOxidationOverTime() ? new IGWeatheringOreBlock(blockCategory, base, material, richness) : new IGOreBlock(blockCategory, base, material, richness));
+                                    Supplier<Block> blockProvider = () -> (material.canTarnish() ? new IGWeatheringOreBlock(blockCategory, base, material, richness) : new IGOreBlock(blockCategory, base, material, richness));
                                     registerBlock(registryKey, blockProvider);
                                     registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                                 }

@@ -113,7 +113,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     }
 
     @Override
-    public boolean willTarnishOverTime()
+    public boolean canTarnish()
     {
         return true;
     }

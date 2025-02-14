@@ -58,7 +58,7 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
     @Override
     public boolean isRandomlyTicking(BlockState state)
     {
-        return materialMap.values().stream().anyMatch(MaterialInterface::hasOxidationOverTime);
+        return materialMap.values().stream().anyMatch(MaterialInterface::canTarnish);
     }
 
     @Override
