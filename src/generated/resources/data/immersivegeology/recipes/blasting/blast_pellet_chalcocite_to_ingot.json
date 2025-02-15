@@ -4,7 +4,7 @@
     "tag": "forge:pellets/chalcocite"
   },
   "result": {
-    "item": "immersiveengineering:ingot_nickel"
+    "item": "minecraft:copper_ingot"
   },
   "slag": {
     "item": "immersiveengineering:slag"

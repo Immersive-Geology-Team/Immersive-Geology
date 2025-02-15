@@ -45,8 +45,10 @@ public class MaterialGypsum extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+
         IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                 "crushed_ore_"+getName()+"_to_metal_oxide", MetalEnum.Calcium.getStack(ItemCategoryFlags.METAL_OXIDE),
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
+
     }
 }

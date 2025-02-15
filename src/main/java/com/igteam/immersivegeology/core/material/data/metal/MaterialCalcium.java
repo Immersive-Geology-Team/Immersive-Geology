@@ -21,10 +21,13 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialCalcium extends MaterialMetal {
@@ -50,6 +53,8 @@ public class MaterialCalcium extends MaterialMetal {
         return ((p, i) -> (0xadbfaa));
     }
 
+    protected IGRecipeChain ammonia_synthesis = new IGRecipeChain(this, "ammonia_synthesis", 0);
+
     //metal oxide - CaO
     // Powdered Slag - CaCN
     //compound dust - CaCO3
@@ -57,24 +62,32 @@ public class MaterialCalcium extends MaterialMetal {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(
+        IGRecipeNode smelting = IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(
                 ItemCategoryFlags.METAL_OXIDE, 1,
                 ItemCategoryFlags.SLAG, 1, 0,
-                new IngredientWithSize(IETags.coalCokeDust, 1));
+                new IngredientWithSize(IETags.coalCokeDust, 1)).addToTree(ammonia_synthesis);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+        IGRecipeNode powder = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.POWDERED_SLAG);
+                ItemCategoryFlags.POWDERED_SLAG).addToTree(ammonia_synthesis);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.SYNTHESIS).create("ammonia_synthesis_from_"+getName(),
                 getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
                 ChemicalEnum.Ammonia.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY/2),
                 new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDERED_SLAG), 8),
                 new FluidTagInput(FluidTags.WATER, IGLib.ACID_TO_COMPOUND_AMOUNT/2),
-                null,null,200, 51200);
+                null,null,200, 51200).addToTree(ammonia_synthesis);
 
-        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
+        IGRecipeNode decompose = IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                  ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST,1,
-                300, 153600);
+                300, 153600).addToTree(ammonia_synthesis);
+
+        decompose.addChild(smelting);
+    }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(ammonia_synthesis);
     }
 }

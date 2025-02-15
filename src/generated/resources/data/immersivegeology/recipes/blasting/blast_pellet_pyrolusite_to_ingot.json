@@ -4,7 +4,7 @@
     "tag": "forge:pellets/pyrolusite"
   },
   "result": {
-    "item": "minecraft:iron_ingot"
+    "item": "immersivegeology:ingot_manganese"
   },
   "slag": {
     "item": "immersiveengineering:slag"

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.grit_aluminum": {
+    "has_item.immersiveengineering.dust_gold": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:grit_aluminum"
+              "immersiveengineering:dust_gold"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersivegeology:crafting/item.immersivegeology.grit_aluminum_to_item.immersiveengineering.ingot_aluminum_from_blasting"
+        "recipe": "immersivegeology:crafting/item.immersiveengineering.dust_gold_to_item.minecraft.gold_ingot_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.grit_aluminum",
+      "has_item.immersiveengineering.dust_gold",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersivegeology:crafting/item.immersivegeology.grit_aluminum_to_item.immersiveengineering.ingot_aluminum_from_blasting"
+      "immersivegeology:crafting/item.immersiveengineering.dust_gold_to_item.minecraft.gold_ingot_from_blasting"
     ]
   },
   "sends_telemetry_event": false

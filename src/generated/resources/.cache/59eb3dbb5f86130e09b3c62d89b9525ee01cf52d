@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-13T17:01:25.409637912	Loot Tables
+// 1.20.1	2025-02-16T01:08:14.60604554	Loot Tables
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 ef1d4f6a27a5c3687b84ec9b7d99b47f30e41eba data/immersivegeology/loot_tables/blocks/chemical_engineering.json
 6f5bc3941be14bd92268a1130c7f3ad48da36db7 data/immersivegeology/loot_tables/blocks/chemical_reactor.json
@@ -695,7 +695,6 @@ ee1b12a63340dbaf5a1af579c68ed74ae05a5995 data/immersivegeology/loot_tables/block
 1e8374515f5e0de480d1715a26d132eac887bb6f data/immersivegeology/loot_tables/blocks/sheetmetal_block_vanadium.json
 867974e6ff5ce5d3d0f6e220e2933c0115d0ad7b data/immersivegeology/loot_tables/blocks/sheetmetal_block_zinc.json
 d7f2ed96394bcdd68881afd587beb430dfb9556e data/immersivegeology/loot_tables/blocks/sheetmetal_block_zirconium.json
-7b1044e80b4487e630f8088ca73a6444b2490c0c data/immersivegeology/loot_tables/blocks/sheetmetal_slab_aluminum.json
 d7aff958a81af66aa78e734e86cecad3b4c70f3c data/immersivegeology/loot_tables/blocks/sheetmetal_slab_bronze.json
 38158b953fe9142ab8c9b002d5a777e94703f347 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_calcium.json
 c45c798c5b825e4cb32f6525d663ae6ddf7fb9ff data/immersivegeology/loot_tables/blocks/sheetmetal_slab_chromium.json

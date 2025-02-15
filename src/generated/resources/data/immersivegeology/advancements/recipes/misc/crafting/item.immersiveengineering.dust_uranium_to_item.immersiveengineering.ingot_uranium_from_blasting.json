@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.immersivegeology.grit_copper": {
+    "has_item.immersiveengineering.dust_uranium": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:grit_copper"
+              "immersiveengineering:dust_uranium"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersivegeology:crafting/item.immersivegeology.grit_copper_to_item.minecraft.copper_ingot_from_blasting"
+        "recipe": "immersivegeology:crafting/item.immersiveengineering.dust_uranium_to_item.immersiveengineering.ingot_uranium_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item.immersivegeology.grit_copper",
+      "has_item.immersiveengineering.dust_uranium",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "immersivegeology:crafting/item.immersivegeology.grit_copper_to_item.minecraft.copper_ingot_from_blasting"
+      "immersivegeology:crafting/item.immersiveengineering.dust_uranium_to_item.immersiveengineering.ingot_uranium_from_blasting"
     ]
   },
   "sends_telemetry_event": false

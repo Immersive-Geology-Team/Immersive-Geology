@@ -4,7 +4,7 @@
   "cookingtime": 120,
   "experience": 1.0,
   "ingredient": {
-    "item": "immersivegeology:grit_gold"
+    "item": "immersiveengineering:dust_uranium"
   },
-  "result": "minecraft:gold_ingot"
+  "result": "immersiveengineering:ingot_uranium"
 }

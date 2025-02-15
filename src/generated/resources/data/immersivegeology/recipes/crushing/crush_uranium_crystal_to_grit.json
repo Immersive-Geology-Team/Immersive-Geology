@@ -5,7 +5,7 @@
     "item": "immersivegeology:crystal_uranium"
   },
   "result": {
-    "item": "immersivegeology:grit_uranium"
+    "item": "immersiveengineering:dust_uranium"
   },
   "secondaries": [],
   "time": 200

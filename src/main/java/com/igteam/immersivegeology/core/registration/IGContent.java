@@ -148,6 +148,7 @@ public class IGContent {
         InnerNode<ResourceLocation, ManualEntry> mineral_entries = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_recipe_overview"), 1);
         for(MineralEnum m : MineralEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
         for(MetalEnum m : MetalEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
+        for(ChemicalEnum m : ChemicalEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
     }
 
     private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)

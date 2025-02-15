@@ -5,7 +5,7 @@
     "item": "immersivegeology:crystal_nickel"
   },
   "result": {
-    "item": "immersivegeology:grit_nickel"
+    "item": "immersiveengineering:dust_nickel"
   },
   "secondaries": [],
   "time": 200

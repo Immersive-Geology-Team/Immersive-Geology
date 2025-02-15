@@ -5,7 +5,7 @@
     "item": "immersivegeology:crystal_copper"
   },
   "result": {
-    "item": "immersivegeology:grit_copper"
+    "item": "immersiveengineering:dust_copper"
   },
   "secondaries": [],
   "time": 200

@@ -4,7 +4,7 @@
   "cookingtime": 120,
   "experience": 1.0,
   "ingredient": {
-    "item": "immersivegeology:grit_iron"
+    "item": "immersiveengineering:dust_silver"
   },
-  "result": "minecraft:iron_ingot"
+  "result": "immersiveengineering:ingot_silver"
 }

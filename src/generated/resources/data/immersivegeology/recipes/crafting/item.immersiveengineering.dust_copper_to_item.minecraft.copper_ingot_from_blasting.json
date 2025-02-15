@@ -4,7 +4,7 @@
   "cookingtime": 120,
   "experience": 1.0,
   "ingredient": {
-    "item": "immersivegeology:grit_aluminum"
+    "item": "immersiveengineering:dust_copper"
   },
-  "result": "immersiveengineering:ingot_aluminum"
+  "result": "minecraft:copper_ingot"
 }

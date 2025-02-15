@@ -202,7 +202,6 @@ public class IGRecipeChain
 		boolean madeAdjustments;
 		int maxDepth = 12;
 		do {
-
 			madeAdjustments = false;
 
 			// Check each node's position
@@ -344,51 +343,6 @@ public class IGRecipeChain
 		}
 
 		return width;
-	}
-
-	private void placeNodesInGrid(IGRecipeNode[][] grid, Map<IGRecipeNode, GridPosition> nodePositions) {
-		// First, place root nodes
-		int currentCol = grid[0].length / 2;  // Start in middle column
-
-		for (IGRecipeNode root : rootNodes) {
-			placeNodeInGrid(root, 0, currentCol, grid, nodePositions, new HashSet<>());
-			currentCol += 2;  // Leave space between root branches
-		}
-	}
-
-	private void placeNodeInGrid(IGRecipeNode node, int row, int col,
-								 IGRecipeNode[][] grid,
-								 Map<IGRecipeNode, GridPosition> nodePositions,
-								 Set<IGRecipeNode> visited) {
-		if (!visited.add(node)) {
-			return;
-		}
-
-		// Ensure we're within grid bounds
-		if (row >= grid.length || col >= grid[0].length || col < 0) {
-			return;
-		}
-
-		// Place node in grid
-		grid[row][col] = node;
-		nodePositions.put(node, new GridPosition(row, col));
-
-		// Handle children
-		if (node.getChildren().size() == 1) {
-			// Single child - place directly below
-			placeNodeInGrid(node.getChildren().get(0), row + 1, col,
-					grid, nodePositions, visited);
-		} else if (node.getChildren().size() > 1) {
-			// Multiple children - distribute across columns
-			int numChildren = node.getChildren().size();
-			int startCol = col - (numChildren - 1);  // Start left of current position
-
-			for (IGRecipeNode child : node.getChildren()) {
-				placeNodeInGrid(child, row + 1, startCol,
-						grid, nodePositions, visited);
-				startCol += 2;  // Leave space between branches
-			}
-		}
 	}
 
 	public int getPriority()
