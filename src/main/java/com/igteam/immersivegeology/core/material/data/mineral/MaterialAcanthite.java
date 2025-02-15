@@ -24,11 +24,14 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialAcanthite extends MaterialSulphideMineral {
@@ -77,32 +80,39 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
                 ItemCategoryFlags.SLAG, 1,         // Output
                 1000,                                          // Roasting Time
                 200                                            // Sulfur Dioxide Output Amount
-        );
+        ).addToTree(sulphideElectrowining);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+        IGRecipeNode powdered_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.POWDERED_SLAG );
-        //TODO rework for byproducts extraction
+                ItemCategoryFlags.POWDERED_SLAG ).addToTree(sulphideElectrowining);
+
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.075f, 200, 1000);
+                0.075f, 200, 1000).addToTree(sulphideElectrowining, powdered_slag);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+        IGRecipeNode slurry = IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,
                 MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MineralEnum.Acanthite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 3)),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
-                null, null, 200, 51200);
+                null, null, 200, 51200).addToTree(sulphideElectrowining, powdered_slag);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 "mineral_slurry_"+getName() +"_to_" + getSecondaryProduct().getName() + "_crystal",
                 MetalEnum.Lead.getStack(ItemCategoryFlags.CRYSTAL, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MineralEnum.Acanthite), 2*IGLib.SLURRY_TO_CRYSTAL_MB,
-                300, 38400);
+                300, 38400).addToTree(sulphideElectrowining, slurry);
     }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(directBlasting, sulphideElectrowining);
+    }
+
 }

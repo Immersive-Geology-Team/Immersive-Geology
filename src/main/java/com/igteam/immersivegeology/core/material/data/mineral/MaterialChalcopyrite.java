@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -84,22 +85,28 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
 
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                ItemCategoryFlags.CRUSHED_ORE, 1,
-               ItemCategoryFlags.SLAG, 1, 800, 250);
+               ItemCategoryFlags.SLAG, 1, 800, 250).addToTree(sulphideElectrowining);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
            ItemCategoryFlags.SLAG,
-           ItemCategoryFlags.POWDERED_SLAG);
+           ItemCategoryFlags.POWDERED_SLAG).addToTree(sulphideElectrowining);
 
         IGMethodBuilder.separating(this, IGStageDesignation.PURIFICATION).create(
             getItemTag(ItemCategoryFlags.POWDERED_SLAG),
             MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
             MetalEnum.Copper.getStack(ItemCategoryFlags.COMPOUND_DUST),
-            0.75f, 200, 1000);
+            0.75f, 200, 1000).addToTree(sulphideElectrowining);
 
         //TODO -- Move it somewhere?
         IGMethodBuilder.roast(this, IGStageDesignation.PURIFICATION).create("roast_copper_sulfide_to_oxide",
                 MetalEnum.Copper.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1,
-                MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),  800, 120);
+                MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),  800, 120).addToTree(sulphideElectrowining);
 
+    }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(sulphideElectrowining);
     }
 }
