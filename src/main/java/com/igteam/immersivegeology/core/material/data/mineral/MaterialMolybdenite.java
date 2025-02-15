@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
@@ -72,11 +73,11 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
                 ItemCategoryFlags.SLAG, 1,         // Output
                 1000,                                          // Roasting Time
                 200                                            // Sulfur Dioxide Output Amount
-        );
+        ).addToTree(sulphideElectrowining);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.POWDERED_SLAG );
+                ItemCategoryFlags.POWDERED_SLAG ).addToTree(sulphideElectrowining);
 
         //Direct Leaching in Ammonia
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
@@ -84,6 +85,12 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
                 ChemicalEnum.Ammonia.getCloudySlurryWith(MineralEnum.Molybdenite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDERED_SLAG, 1)),
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
-                null, null,200, 51200);
+                null, null,200, 51200).addToTree(sulphideElectrowining);
+    }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(sulphideElectrowining);
     }
 }
