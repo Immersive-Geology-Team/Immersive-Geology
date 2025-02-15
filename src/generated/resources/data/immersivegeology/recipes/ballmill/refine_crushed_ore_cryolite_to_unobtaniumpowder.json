@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:crushed_ore/cryolite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_cryolite"
+  },
+  "time": 800
+}

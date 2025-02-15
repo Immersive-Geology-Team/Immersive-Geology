@@ -1,7 +1,7 @@
 {
   "type": "immersivegeology:gravityseparator",
   "byproduct": {
-    "item": "immersivegeology:metal_oxide_lead"
+    "item": "immersivegeology:metal_oxide_osmium"
   },
   "byproduct_chance": 0.075,
   "input": {

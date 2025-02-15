@@ -67,7 +67,7 @@ public class MaterialCalcium extends MaterialMetal {
                 ItemCategoryFlags.SLAG, 1, 0,
                 new IngredientWithSize(IETags.coalCokeDust, 1)).addToTree(ammonia_synthesis);
 
-        IGRecipeNode powder = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
+        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG).addToTree(ammonia_synthesis);
 

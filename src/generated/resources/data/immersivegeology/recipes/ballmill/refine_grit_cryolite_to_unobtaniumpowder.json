@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 32000,
+  "input": {
+    "tag": "forge:grits/cryolite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_cryolite"
+  },
+  "time": 400
+}

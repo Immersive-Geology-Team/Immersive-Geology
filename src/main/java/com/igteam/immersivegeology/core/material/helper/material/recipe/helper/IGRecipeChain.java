@@ -200,7 +200,7 @@ public class IGRecipeChain
 
 	private void adjustForAdjacency(GridCell[][] grid, Map<IGRecipeNode, GridPosition> nodePositions) {
 		boolean madeAdjustments;
-		int maxDepth = 12;
+		int maxDepth = 15;
 		do {
 			madeAdjustments = false;
 
@@ -230,7 +230,7 @@ public class IGRecipeChain
 
 				if(maxDepth < 0)
 				{
-					maxDepth = 12;
+					maxDepth = 15;
 					madeAdjustments = false;
 				}
 				maxDepth--;
@@ -267,7 +267,7 @@ public class IGRecipeChain
 	private boolean adjustNodePosition(IGRecipeNode node, GridPosition pos,
 									   GridCell[][] grid,
 									   Map<IGRecipeNode, GridPosition> nodePositions) {
-		int[][] directions = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+		int[][] directions = {{0,1}, {0,-1}, {1,0}, {-1,0}, {-1,1}, {-1,-1}, {1,-1}, {1,1}};
 
 		// Try each direction
 		for (int[] dir : directions) {
@@ -288,6 +288,7 @@ public class IGRecipeChain
 	private boolean isValidPosition(int row, int col, GridCell[][] grid) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
 	}
+
 	private int calculateMaxDepth() {
 		Set<IGRecipeNode> visited = new HashSet<>();
 		int maxDepth = 0;
