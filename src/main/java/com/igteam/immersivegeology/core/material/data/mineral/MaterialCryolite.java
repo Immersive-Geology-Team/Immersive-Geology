@@ -60,7 +60,7 @@ public class MaterialCryolite extends MaterialMineral {
         IGRecipeNode crushing =  IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(basic_preparation);
         IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
-                ItemCategoryFlags.POWDER).addToTree(basic_preparation);
+                ItemCategoryFlags.POWDER).addOptionalToTree(basic_preparation);
         IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
                 ItemCategoryFlags.POWDER, 400, 32000).addToTree(basic_preparation, crushing);
 
