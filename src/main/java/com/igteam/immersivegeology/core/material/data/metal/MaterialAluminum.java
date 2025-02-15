@@ -27,14 +27,13 @@ public class MaterialAluminum extends MaterialMetal {
                 ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.STORAGE_BLOCK,
                 BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_STAIRS,
-                BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB);
+                BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB, BlockCategoryFlags.SHEETMETAL_SLAB);
     }
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
         return ((p, i) -> (0xd0d5db));
     }
-
 
     @Override
     public void setupRecipeStages()

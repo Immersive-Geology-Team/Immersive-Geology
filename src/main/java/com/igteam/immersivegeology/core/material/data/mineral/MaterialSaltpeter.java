@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMin
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
@@ -29,6 +30,7 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 	public MaterialSaltpeter()
 	{
 		super();
+		addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.POWDER);
 	}
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {

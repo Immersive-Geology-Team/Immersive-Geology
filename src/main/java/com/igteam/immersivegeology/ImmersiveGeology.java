@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.ClientProxy;
 import com.igteam.immersivegeology.core.CommonProxy;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -24,6 +25,8 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -152,6 +155,12 @@ public class ImmersiveGeology {
     public void setup(final FMLCommonSetupEvent event)
     {
         IGRegistrationHolder.buildMaterialRecipes();
+
+        Item IEItem = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
+        if(IEItem != null)
+        {
+            IGLib.IG_LOGGER.info("Got IE TagItem? {}", IEItem.toString());
+        }
     }
 
 }

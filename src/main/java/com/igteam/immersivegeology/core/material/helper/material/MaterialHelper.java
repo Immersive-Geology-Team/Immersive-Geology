@@ -10,6 +10,10 @@ package com.igteam.immersivegeology.core.material.helper.material;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
@@ -17,6 +21,8 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
@@ -71,9 +77,28 @@ public interface MaterialHelper {
 
                         return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
                     }
-                    case POWDER ->
+                    case GRIT ->
                     {
                         return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                    }
+                    case PLATE ->
+                    {
+                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                    }
+                    case NUGGET ->
+                    {
+                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                    }
+                    case WIRE ->
+                    {
+                        if(this.equals(MetalEnum.Aluminum.instance())) return Ingredients.WIRE_ALUMINUM.get();
+                        if(this.equals(MetalEnum.Copper.instance())) return Ingredients.WIRE_COPPER.get();
+                        if(this.equals(MetalEnum.Lead.instance())) return Ingredients.WIRE_LEAD.get();
+                        if(this.equals(MetalEnum.Steel.instance())) return Ingredients.WIRE_STEEL.get();
+                    }
+                    case POWDER ->
+                    {
+                        if(this.equals(MineralEnum.Saltpeter.instance())) return Ingredients.DUST_SALTPETER.get();
                     }
                 }
             }
@@ -229,9 +254,27 @@ public interface MaterialHelper {
 
 	default Block getBlock(BlockCategoryFlags flag){
         // Check for edge cases, like in the menu where this can be used to get an Ore Block
+        try
+        {
+            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
+            switch(flag.getValue())
+            {
+                case STORAGE_BLOCK ->
+                {
+                    return IEBlocks.Metals.STORAGE.get(IEMetal).get();
+                }
+                case SCAFFOLDING ->
+                {
+                    return IEBlocks.Metals.SHEETMETAL.get(IEMetal).get();
+                }
+            }
+        } catch(Exception ignored){}
+
         if(flag.equals(BlockCategoryFlags.ORE_BLOCK)){
             return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this, StoneEnum.Shale, OreRichness.RICH));
         }
+
+
 
         if(getBlockRegistryMap().containsKey(flag.getRegistryKey(this))) {
             return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this));
