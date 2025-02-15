@@ -18,6 +18,7 @@ public class IGRecipeNode
 	private IGRecipeMethod method;
 	private final List<IGRecipeNode> children = new ArrayList<>();
 	private final List<IGRecipeNode> parents = new ArrayList<>();
+	public boolean shouldRender = true;
 
 	// Layout coordinates (for rendering)
 	private int x;
@@ -46,6 +47,15 @@ public class IGRecipeNode
 
 	public void addParent(IGRecipeNode parent) {
 		parents.add(parent);
+	}
+
+	public void resetRender()
+	{
+		shouldRender = true;
+		for(IGRecipeNode c : children)
+		{
+			c.resetRender();
+		}
 	}
 
 	// Getters and setters for layout coordinates.

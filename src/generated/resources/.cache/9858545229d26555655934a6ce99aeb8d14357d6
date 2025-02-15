@@ -1,9 +1,9 @@
-// 1.20.1	2025-02-13T19:24:31.289391708	IGComplexItemModelProvider
-63d8edf19a20d27bcda05346567da7302c71505d assets/immersivegeology/models/item/ballmill.json
+// 1.20.1	2025-02-15T22:57:03.146405825	IGComplexItemModelProvider
+6d820c2770f6dbd3dde161966bed0487bfa02519 assets/immersivegeology/models/item/ballmill.json
 6803bfbc5eb389242cec6a26f509b498a51305ea assets/immersivegeology/models/item/bloomery.json
 7084d307c773fa166970d3e6a394397e5862064c assets/immersivegeology/models/item/centrifuge.json
 2bf4e86118bdb93e20de73f9a8cdd50d2384f3d8 assets/immersivegeology/models/item/chemical_reactor.json
-2a44213f7ef66a69014ac829acce28f237d530d1 assets/immersivegeology/models/item/coredrill.json
+68d8ed3ade68787d5cd3db2e64f81ae675364f35 assets/immersivegeology/models/item/coredrill.json
 3a89162c09ad2fad1e869484120c92c7b558b71e assets/immersivegeology/models/item/crystallizer.json
 25823583ba7aa7b8a5839aad725f57d51b64f793 assets/immersivegeology/models/item/gravityseparator.json
 38f50decc8819d5440b97213c63dde621decdab2 assets/immersivegeology/models/item/pelletizer.json

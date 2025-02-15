@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -86,30 +87,25 @@ public class IGRecipeOverview extends SpecialManualElements
 			if(!roots.isEmpty()) {
 				if(!setChainPositions)
 				{
-					int offsetX = x; // starting X position for the first root
-					for(IGRecipeNode root : roots)
-					{
-						chain.layoutRecipeChain(root, offsetX, y, 32, 48);
-						offsetX += 48;
-					}
+					chain.layoutRecipeChain(x,y, 32, 24);
 					setChainPositions = true;
 				}
 
-				// For now, assume the nodes already have valid x, y positions. The above method should have set them correctly.
-				int baseX = x + (screen.getManual().pageWidth / 2) - (roots.size() * 16);
+				int baseX = x;
 				int baseY = y + 32;
 
 				// Render the entire chain tree.
 				graphics.pose().pushPose();
 				if(selectedNode == null)
 				{
-					int offsetX = baseX; // starting X position for the first root
 					for(IGRecipeNode root : roots)
 					{
-						root.getMethod().renderDisplayStack(graphics, screen, offsetX, baseY-32, mx, my);
-						drawDirectLine(graphics, offsetX+8, baseY-24, offsetX+8, baseY+8, 0xff121212);
-						renderChain(graphics, screen, root, baseX, baseY, mx, my, 0xff121212);
-						offsetX += 48;
+						renderChain(graphics, screen, root, baseX, baseY, mx, my, 0x66666666);
+					}
+
+					for(IGRecipeNode root : roots)
+					{
+						root.resetRender();
 					}
 				}
 				graphics.pose().popPose();
@@ -145,7 +141,6 @@ public class IGRecipeOverview extends SpecialManualElements
 						{
 							selectedNode = null;
 						}
-						graphics.renderTooltip(manual.fontRenderer(), Component.literal("Close"), mx, my);
 					}
 				}
 			}
@@ -162,10 +157,9 @@ public class IGRecipeOverview extends SpecialManualElements
 		IGRecipeMethod method = node.getMethod();
 
 		// Render the main body of the recipe method.
-		if(mx > nodeX-24 && mx < (nodeX + (24 + 16)) && my > nodeY-8 && my < (nodeY + 24))
+		if(mx > nodeX&&(nodeX+16) > mx && my > nodeY&&(nodeY+16) > my)
 		{
-			if(GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS)
-			{
+			if (GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS) {
 				selectedNode = node;
 			}
 		}
@@ -176,36 +170,44 @@ public class IGRecipeOverview extends SpecialManualElements
 			int childX = baseX + child.getX();
 			int childY = baseY + child.getY();
 
-			// For example, assume the parent's output is at (nodeX + 70, nodeY + 15)
-			// and the child's input is at (childX, childY + 15). Adjust offsets as needed.
-			drawDirectLine(graphics, nodeX + 8, nodeY + 8, childX + 8, childY + 8, color);
+			drawDirectLine(graphics, nodeX+8, nodeY+8, childX+8, childY+8, color);
 
-			// Recursively render the child node.
-			renderChain(graphics, screen, child, baseX, baseY, mx, my, color);
-		}
-
-		if(node.getChildren().isEmpty())
-		{
-			drawDirectLine(graphics, nodeX + 8, nodeY + 8, nodeX + 8, nodeY + 36, color);
-			method.renderFinalStack(graphics, screen, nodeX, nodeY + 32, mx, my);
+			if(child.shouldRender) {
+				renderChain(graphics, screen, child, baseX, baseY, mx, my, color);
+				child.shouldRender = false;
+			}
 		}
 	}
 
 	private void drawDirectLine(GuiGraphics graphics, int x1, int y1, int x2, int y2, int color) {
+		PoseStack pose = graphics.pose();
+		int pY = y1+Math.abs((y1-y2)/2)-4;
 		if (x1 == x2) {
 			// Vertical line
 			graphics.vLine(x1, y1, y2, color);
-			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, x1 - 4, y1 + 12, 9,10, 10/32f, 0, 20/32f, 10/32f);
+			float u1 = 5	/ 16f;
+			float u2 = 13	/ 16f;
+			float v1 = 0;
+			float v2 = 5	/ 16f;
+
+			pose.pushPose();
+			pose.translate(x1 - 1.5f, pY,-1);
+			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
+			pose.popPose();
+
 		} else if (y1 == y2) {
 			// Horizontal line
 			graphics.hLine(x1, x2, y1, color);
 
-			int midX = (x1 + x2) / 2;
-			graphics.pose().pushPose();
-			graphics.pose().translate(0,-0.5f,0);
+			float u1 = 5	/ 16f;
+			float u2 = 13	/ 16f;
+			float v1 = 0;
+			float v2 = 5	/ 16f;
 
-			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, midX-2, y1-4, 9,10, 0, 9/32f,0, 10/32f);
-			graphics.pose().popPose();
+			pose.pushPose();
+			pose.translate(x1 - 1.5f, pY,-1);
+			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
+			pose.popPose();
 		} else {
 			// L-shaped connector
 			int midX = (x1 + x2) / 2;
@@ -214,7 +216,15 @@ public class IGRecipeOverview extends SpecialManualElements
 			graphics.vLine(midX, y1, y2, color); // Vertical from (midX, y1) to (midX, y2)
 			graphics.hLine(midX, x2, y2, color); // Horizontal from (midX, y2) to (x2, y2)
 
-			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, midX - 4, y1 + 12, 9,10, 10/32f, 0, 20/32f, 10/32f);
+			float u1 = 5	/ 16f;
+			float u2 = 13	/ 16f;
+			float v1 = 0;
+			float v2 = 5	/ 16f;
+
+			pose.pushPose();
+			pose.translate(midX - 1.5f, pY,-1);
+			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
+			pose.popPose();
 		}
 	}
 

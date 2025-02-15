@@ -12,6 +12,8 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.PelletizerRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -112,11 +114,9 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 24, y, mx, my);
-//		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
-//		renderItemStack(graphics, output, x + 72, y, mx,my);
-//		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x,y,mx,my);
-//		render_x_space = 120;
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 34, y + 5, mx, my);
+		renderItemStack(graphics, output, x + 68, y + 5, mx, my);
+		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x + 16, y + 5, 16,16, mx, my);
 	}
 
 	@Override

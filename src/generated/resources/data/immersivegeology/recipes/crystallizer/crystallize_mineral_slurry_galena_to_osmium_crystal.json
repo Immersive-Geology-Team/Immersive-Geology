@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 240,
+    "fluid": "immersivegeology:slurry_hydrochloricacid_lead"
+  },
+  "input": {
+    "amount": 288,
+    "tag": "forge:clean_hydrochloricacid_galena"
+  },
+  "result": {
+    "item": "immersivegeology:crystal_silver"
+  },
+  "time": 300
+}

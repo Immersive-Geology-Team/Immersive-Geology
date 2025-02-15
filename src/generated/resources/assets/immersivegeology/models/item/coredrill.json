@@ -60,8 +60,8 @@
     },
     "gui": {
       "rotation": [
-        30,
-        45,
+        25,
+        -25,
         0
       ],
       "scale": [
@@ -70,8 +70,8 @@
         0.09375
       ],
       "translation": [
-        6.5,
-        3,
+        2.5,
+        0,
         0
       ]
     },
@@ -124,5 +124,5 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill_item.obj"
 }

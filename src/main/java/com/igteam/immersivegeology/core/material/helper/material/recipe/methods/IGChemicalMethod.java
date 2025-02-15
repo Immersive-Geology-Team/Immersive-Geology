@@ -90,7 +90,14 @@ public class IGChemicalMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
+		if(fluidInA != null && (fluidInA.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInA.getRandomizedExampleStack(0), x + 15,y + 3,16,16,mx,my);
+		if(fluidInB != null && (fluidInB.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInB.getRandomizedExampleStack(0), x + 15,y + 23,16,16,mx,my);
+		if(fluidInC != null && (fluidInC.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInC.getRandomizedExampleStack(0), x + 15,y + 43,16,16,mx,my);
 
+		if(itemIn != null && !itemIn.hasNoMatchingItems()) renderItemStack(graphics, itemIn.getRandomizedExampleStack(0), x + 34, y + 23, mx, my);
+
+		if(itemOutput != null && !itemOutput.isEmpty()) renderItemStack(graphics, itemOutput, x + 70, y + 14, mx, my);
+		if(fluidOutput != null && !fluidOutput.isEmpty()) renderFluidStack(graphics, fluidOutput, x + 70,y + 33,16,16,mx,my);
 	}
 
 	@Override

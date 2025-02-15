@@ -11,9 +11,11 @@ package com.igteam.immersivegeology.core.material.data.metal;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialIron extends MaterialNativeMetal {
@@ -45,6 +48,11 @@ public class MaterialIron extends MaterialNativeMetal {
         return ((p, i) -> (0xd8dada));
     }
 
+    @Override
+    public Set<MaterialHelper> getOriginMaterials()
+    {
+        return Set.of(MineralEnum.Hematite.instance(), MineralEnum.Magnetite.instance());
+    }
 
     @Override
     public void setupRecipeStages()

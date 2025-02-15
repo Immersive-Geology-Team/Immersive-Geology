@@ -125,6 +125,20 @@ public abstract class IGRecipeMethod
 		}
 	}
 
+	public void renderFluidStack(GuiGraphics graphics, FluidStack originStack, int x, int y, int w, int h, int mx, int my)
+	{
+		FluidStack stack = originStack.copy();
+		FluidTank tank = new FluidTank(128);
+		stack.setAmount(128);
+		tank.setFluid(stack);
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		fluid.draw(graphics);
+		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
+		{
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+		}
+	}
+
 	public void renderFluidStack(GuiGraphics graphics, Fluid stack, int amount, int x, int y, int w, int h, int mx, int my)
 	{
 		FluidTank tank = new FluidTank(amount);
@@ -205,7 +219,7 @@ public abstract class IGRecipeMethod
 				case CUTTING -> { return IGLib.makeTextureLocation("jei/hydrojet"); }
 				case BLASTING -> {return IGLib.makeTextureLocation("jei/crude_blast_furnace");}
 				case BLOOMERY -> {return IGLib.makeTextureLocation("jei/bloomery");}
-				case CHEMICAL -> {return IGLib.makeTextureLocation("jei/vat");}
+				case CHEMICAL -> {return IGLib.makeTextureLocation("manual/vat");}
 				case CRUSHING -> {return IGLib.makeTextureLocation("jei/crusher");}
 				case ROASTING -> {return IGLib.makeTextureLocation("jei/reverberation_furnace");}
 				case SYNTHESIS -> {return IGLib.makeTextureLocation("jei/refinery");}
@@ -214,7 +228,7 @@ public abstract class IGRecipeMethod
 				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("jei/furnace");}
 				case REFINING -> {return IGLib.makeTextureLocation("jei/ballmill");}
 				case SEPARATOR -> {return IGLib.makeTextureLocation("jei/gravity_separator");}
-				case PELLETIZE -> {return IGLib.makeTextureLocation("jei/pelletizer");}
+				case PELLETIZE -> {return IGLib.makeTextureLocation("manual/pelletizer");}
 				case CRYSTALLIZATION -> {return IGLib.makeTextureLocation("jei/crystalizer");}
 			}
 			return IGLib.makeTextureLocation("unknown");
