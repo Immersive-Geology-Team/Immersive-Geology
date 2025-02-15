@@ -100,9 +100,10 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 		return this;
 	}
 
-	public void setTimeAndEnergy(int time, int energy){
+	public IEArcSmeltingMethod setTimeAndEnergy(int time, int energy){
 		this.time = time;
 		this.energy = energy;
+		return this;
 	}
 
 	private String method_name;
