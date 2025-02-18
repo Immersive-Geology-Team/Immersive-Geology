@@ -8,10 +8,14 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.common.world.IEOreFeature;
+import blusunrize.immersiveengineering.common.world.IEOreFeature.IEOreFeatureConfig;
+import blusunrize.immersiveengineering.common.world.IEWorldGen;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.world.*;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
+import com.igteam.immersivegeology.common.world.modifiers.IGOreRemovalModifier;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
@@ -104,6 +108,7 @@ public class IGWorldGenerationProvider
 
 			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getPreferredBiome())));
 		}
+
 		for (Map.Entry<IWorldGenConfig, FeatureRegistration> entry : evaporiteFeatures.entrySet())
 		{
 			IWorldGenConfig data = entry.getKey();

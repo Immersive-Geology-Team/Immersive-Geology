@@ -27,7 +27,7 @@ public class IGRecipeChain
 
 	public IGRecipeChain(GeologyMaterial material, String chainName, int priority) {
 		this.material = material;
-		this.chainName = chainName;
+		this.chainName = chainName.toLowerCase().replace(' ', '_');
 		this.priority = priority;
 	}
 
@@ -200,7 +200,7 @@ public class IGRecipeChain
 
 	private void adjustForAdjacency(GridCell[][] grid, Map<IGRecipeNode, GridPosition> nodePositions) {
 		boolean madeAdjustments;
-		int maxDepth = 15;
+		int maxDepth = 9;
 		do {
 			madeAdjustments = false;
 
@@ -230,7 +230,6 @@ public class IGRecipeChain
 
 				if(maxDepth < 0)
 				{
-					maxDepth = 15;
 					madeAdjustments = false;
 				}
 				maxDepth--;

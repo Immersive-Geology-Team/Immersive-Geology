@@ -79,9 +79,10 @@ public class IGServerConfig
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIESilver;
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIEUranium;
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIENickel;
+
 		VanillaOreRemoval(ForgeConfigSpec.Builder builder)
 		{
-			builder.push("remove_non_ig_ore_types").comment("Settings for the configuration of default Ore Spawning for IE and Minecraft, this includes 'Raw Ore Blocks'");
+			builder.push("remove_non_ig_ore_types").comment("Settings for the configuration of default Ore Spawning for IE and Minecraft, this includes 'Raw Ore Blocks', Reload the world to apply changes");
 			shouldRemoveIron = builder.comment("Should IG remove Minecrafts Iron Ore?").define("remove_iron", true);
 			shouldRemoveCopper = builder.comment("Should IG remove Minecrafts Copper Ore?").define("remove_copper", true);
 			shouldRemoveGold = builder.comment("Should IG remove Minecraft Gold Ore?").define("remove_gold", true);

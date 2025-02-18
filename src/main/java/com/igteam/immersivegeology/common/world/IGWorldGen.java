@@ -10,20 +10,30 @@ package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.world.features.IGEvaporateFeature;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature;
+import com.igteam.immersivegeology.common.world.modifiers.IGOreRemovalModifier;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.common.world.placements.IGPlaceholderFeature;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
 
 public class IGWorldGen
 {
@@ -32,12 +42,14 @@ public class IGWorldGen
 	private static final DeferredRegister<Feature<?>> TFC_FEATURE_REGISTER; // Used for inbuilt compat to prevent crashing when TFC not loaded.
 	private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_REGISTER;
 	private static final DeferredRegister<HeightProviderType<?>> HEIGHT_REGISTER;
+
 	public static RegistryObject<HeightProviderType<IGHeightProvider>> IG_HEIGHT_PROVIDER;
 	public static RegistryObject<PlacementModifierType<IGCountPlacement>> IG_COUNT_PLACEMENT;
 	public static RegistryObject<PlacementModifierType<IGSparsePlacement>> IG_SPARSE_PLACEMENT;
-
 	public static final RegistryObject<Feature<BlockStateConfiguration>> EVAPORITE_FEATURE;
 
+	public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;
+	public static final RegistryObject<Codec<IGOreRemovalModifier>> ORE_MODIFIER_CODEC;
 
 	public static void init()
 	{
@@ -46,6 +58,7 @@ public class IGWorldGen
 		TFC_FEATURE_REGISTER.register(bus);
 		PLACEMENT_REGISTER.register(bus);
 		HEIGHT_REGISTER.register(bus);
+		BIOME_MODIFIER_SERIALIZERS.register(bus);
 	}
 
 	static
@@ -59,6 +72,11 @@ public class IGWorldGen
 			TFC_FEATURE_REGISTER.register("cluster_vein", IGPlaceholderFeature::new);
 			TFC_FEATURE_REGISTER.register("soil_disc", IGPlaceholderFeature::new);
 		}
+
+		BIOME_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, IGLib.MODID);
+
+		ORE_MODIFIER_CODEC = BIOME_MODIFIER_SERIALIZERS.register("ore_removal", () ->Codec.unit(IGOreRemovalModifier::new));
+
 
 		PLACEMENT_REGISTER = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, IGLib.MODID);
 

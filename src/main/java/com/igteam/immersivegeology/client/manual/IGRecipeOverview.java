@@ -88,7 +88,7 @@ public class IGRecipeOverview extends SpecialManualElements
 
 			// Check if the chain has a root node.
 			if(!roots.isEmpty()) {
-				if(!setChainPositions)
+				//if(!setChainPositions)
 				{
 					chain.layoutRecipeChain(x,y, 32, 24);
 					setChainPositions = true;

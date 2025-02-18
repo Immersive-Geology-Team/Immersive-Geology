@@ -62,7 +62,7 @@ public class IGFeatureRemovalProvider implements DataProvider {
 	// Method to create and add a feature removal entry
 	public void removeFeature(ResourceLocation location) {
 		JsonObject featureRemovalJson = new JsonObject();
-		featureRemovalJson.addProperty("type", "minecraft:no_op");
+		featureRemovalJson.addProperty("type", "immersivegeology:ore_removal");
 
 		// Handling single biome or tag
 		featureRemovalJson.add("config", new JsonObject());

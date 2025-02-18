@@ -38,7 +38,7 @@ side="BOTH"
 modId="immersiveengineering"
 mandatory=true
 versionRange="[${version_ie},]"
-ordering="AFTER"
+ordering="NONE"
 side="BOTH"
 
 [[dependencies.immersivegeology]]

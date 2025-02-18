@@ -15,6 +15,8 @@ import blusunrize.immersiveengineering.common.register.IEBlocks.Metals;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.telemetry.events.WorldLoadEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.data.worldgen.DimensionTypes;
@@ -22,6 +24,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,9 +34,11 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.level.ChunkEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class IGWorldSubscription
 {
@@ -42,31 +47,19 @@ public class IGWorldSubscription
 	private static final BlockState deepslateState = Blocks.DEEPSLATE.defaultBlockState();
 	private static final BlockState netherStone = Blocks.NETHERRACK.defaultBlockState();
 
-	private static final List<Block> REMOVE_LIST_IRON = List.of(
-			Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.RAW_IRON_BLOCK);
-	private static final List<Block> REMOVE_LIST_COPPER = List.of(
-			Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.RAW_COPPER_BLOCK);
+	private static final List<BlockState> REMOVE_LIST_IRON = List.of(
+			Blocks.IRON_ORE.defaultBlockState(), Blocks.DEEPSLATE_IRON_ORE.defaultBlockState(), Blocks.RAW_IRON_BLOCK.defaultBlockState());
+	private static final List<BlockState> REMOVE_LIST_COPPER = List.of(
+			Blocks.COPPER_ORE.defaultBlockState(), Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState(), Blocks.RAW_COPPER_BLOCK.defaultBlockState());
 
-	private static final List<Block> REMOVE_LIST_GOLD = List.of(
-			Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, Blocks.NETHER_GOLD_ORE);
-
-	// List of maps for IE metal ores
-	private static final List<Map<EnumMetals, BlockEntry<Block>>> IE_ORE_METALS =
-			List.of(Metals.ORES, Metals.DEEPSLATE_ORES, Metals.RAW_ORES);
+	private static final List<BlockState> REMOVE_LIST_GOLD = List.of(
+			Blocks.GOLD_ORE.defaultBlockState(), Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(), Blocks.RAW_GOLD_BLOCK.defaultBlockState(), Blocks.NETHER_GOLD_ORE.defaultBlockState());
 
 	// Config flags (loaded on first chunk event)
-	private static Boolean removeIron = null;
-	private static Boolean removeGold = null;
-	private static Boolean removeCopper = null;
-	private static Boolean removeIEBauxite = null;
-	private static Boolean removeIELead = null;
-	private static Boolean removeIESilver = null;
-	private static Boolean removeIEUranium = null;
-	private static Boolean removeIENickel = null;
+	private static Boolean removeIron = false;
+	private static Boolean removeGold = false;
+	private static Boolean removeCopper = false;
 	private static Ores oreConfigs = null;
-
-	// Set of blocks to remove (built from the above flags)
-	private static final Set<Block> removalBlocks = new HashSet<>();
 
 	/**
 	 * Loads the configuration values and precomputes the set of blocks to remove.
@@ -75,113 +68,135 @@ public class IGWorldSubscription
 		removeIron = IGServerConfig.REMOVAL.shouldRemoveIron.get();
 		removeCopper = IGServerConfig.REMOVAL.shouldRemoveCopper.get();
 		removeGold = IGServerConfig.REMOVAL.shouldRemoveGold.get();
-
-		removeIEBauxite = IGServerConfig.REMOVAL.shouldRemoveIEBauxite.get();
-		removeIELead = IGServerConfig.REMOVAL.shouldRemoveIELead.get();
-		removeIESilver = IGServerConfig.REMOVAL.shouldRemoveIESilver.get();
-		removeIEUranium = IGServerConfig.REMOVAL.shouldRemoveIEUranium.get();
-		removeIENickel = IGServerConfig.REMOVAL.shouldRemoveIENickel.get();
 		oreConfigs = IGServerConfig.ORES;
-
-		// Rebuild the removal set based on the config flags.
-		removalBlocks.clear();
-		if (Boolean.TRUE.equals(removeIron)) {
-			removalBlocks.addAll(REMOVE_LIST_IRON);
-		}
-		if (Boolean.TRUE.equals(removeCopper)) {
-			removalBlocks.addAll(REMOVE_LIST_COPPER);
-		}
-		if(Boolean.TRUE.equals(removeGold))
-		{
-			removalBlocks.addAll(REMOVE_LIST_GOLD);
-		}
-		if (Boolean.TRUE.equals(removeIEUranium)) {
-			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
-				removalBlocks.add(map.get(EnumMetals.URANIUM).get());
-			}
-		}
-		if (Boolean.TRUE.equals(removeIEBauxite)) {
-			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
-				removalBlocks.add(map.get(EnumMetals.ALUMINUM).get());
-			}
-		}
-		if (Boolean.TRUE.equals(removeIELead)) {
-			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
-				removalBlocks.add(map.get(EnumMetals.LEAD).get());
-			}
-		}
-		if (Boolean.TRUE.equals(removeIENickel)) {
-			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
-				removalBlocks.add(map.get(EnumMetals.NICKEL).get());
-			}
-		}
-		if (Boolean.TRUE.equals(removeIESilver)) {
-			for (Map<EnumMetals, BlockEntry<Block>> map : IE_ORE_METALS) {
-				removalBlocks.add(map.get(EnumMetals.SILVER).get());
-			}
-		}
 	}
 
+	private final Predicate<BlockState> isReplaceable = (blockState)->(removeIron && REMOVE_LIST_IRON.contains(blockState)) || (removeCopper && REMOVE_LIST_COPPER.contains(blockState)) || removeGold && REMOVE_LIST_GOLD.contains(blockState);
+
+	private static int chunksProcessed = 0;
+
+	@SubscribeEvent
+	public void levelLoad(LevelEvent.Load event)
+	{
+		chunksProcessed = 0;
+		getConfigValues();
+	}
+
+	// Okay, so, this event NEEDS to be optimized, as extra over head here, means slower chunk generation
 	@SubscribeEvent
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
 	{
 		if(!event.isNewChunk()) return;
-		boolean isNether = false;
-		// Ensure config values are loaded.
-		if(removeCopper==null||removeIron==null||oreConfigs==null)
-		{
-			getConfigValues();
-		}
+		long startTime = System.nanoTime();
 
-		// If no removal flags are set, exit early.
-		if(!(Boolean.TRUE.equals(removeIron)||
-				Boolean.TRUE.equals(removeCopper)||
-				Boolean.TRUE.equals(removeIEUranium)||
-				Boolean.TRUE.equals(removeIEBauxite)||
-				Boolean.TRUE.equals(removeIELead)||
-				Boolean.TRUE.equals(removeIENickel)||
-				Boolean.TRUE.equals(removeIESilver)))
-		{
-			return;
-		}
+		// Initialize Variables
+		boolean isNether = false;
+		boolean chunkModified = false;
+
+		// Holder for the type of 'stone' to replace removed ore with
+		BlockState replaceState = null;
+
+		// Setup Accessors
+		ChunkAccess chunk = event.getChunk();
 		LevelAccessor level = event.getLevel();
 
+		// If no removal flags are set, exit straight away
+		if(!(removeIron||removeCopper||removeGold)) return;
+
+		// Check if we're in the nether
 		if(level instanceof ServerLevel slevel)
 		{
 			isNether = slevel.dimension().equals(Level.NETHER);
+			replaceState = isNether ? netherStone : null;
 		}
 
-		ChunkAccess chunk = event.getChunk();
-		if(event.isNewChunk())
+		// Loop over all sections in the chunk.
+		for(int sectionY = chunk.getMinSection(); sectionY < chunk.getMaxSection(); ++sectionY)
 		{
-			BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-			// Loop over all sections in the chunk.
-			for(int sectionY = chunk.getMinSection(); sectionY < chunk.getMaxSection(); ++sectionY)
+			// Get the LevelChunkSection
+			int sectionIndex = chunk.getSectionIndexFromSectionY(sectionY);
+			LevelChunkSection section = chunk.getSection(sectionIndex);
+
+			// Check for early exits asap
+
+			// Is this section only air blocks?
+			if(section.hasOnlyAir()) continue;
+
+			// Does the section contain any blocks that we can replace?
+			if(!section.maybeHas(isReplaceable)) continue;
+
+			// We're now past early exits, so we know we're modifying this chunk
+			chunkModified = true;
+
+			// Now, we need to know if we're in the deepslate layer, or not
+			// To optimize this we're checking the Min and Max positions for a section
+			// This gives us about 0.01ms of extra performance per chunk.
+			int minY = SectionPos.of(chunk.getPos(), sectionY).minBlockY();
+			if(!isNether)
 			{
-				LevelChunkSection section = chunk.getSection(chunk.getSectionIndexFromSectionY(sectionY));
-				if(section==null)
+				if((minY + 16) < 0) replaceState = deepslateState;
+				if(minY > 0) replaceState = stoneState;
+			}
+
+			for(int y = 0; y < 16; y++)
+			{
+				// Seems like we're in a section that has blocks below and above 0, so we need to check the section in detail.
+				if(replaceState == null)
 				{
-					continue;
+					int worldY = minY+y;
+					replaceState = worldY < 0?deepslateState: stoneState;
 				}
-				BlockPos sectionOrigin = SectionPos.of(chunk.getPos(), sectionY).origin();
-				// Iterate over all 16x16x16 block positions in this section.
-				for(int y = 0; y < 16; y++)
+
+				for(int x = 0; x < 16; x++)
 				{
-					for(int x = 0; x < 16; x++)
+					for(int z = 0; z < 16; z++)
 					{
-						for(int z = 0; z < 16; z++)
+						BlockState currentState = section.getBlockState(x, y, z);
+						boolean replace = isReplaceable.test(currentState);
+						if(replace)
 						{
-							BlockState currentState = section.getBlockState(x, y, z);
-							if(removalBlocks.contains(currentState.getBlock()))
-							{
-								cursor.setWithOffset(sectionOrigin, x, y, z);
-								// Use deepslate for the bottom layer (y == 0), stone otherwise.
-								chunk.setBlockState(cursor, (isNether ? netherStone : (y > 0?stoneState: deepslateState)), true);
-							}
+							section.setBlockState(x,y,z, replaceState);
 						}
 					}
 				}
 			}
 		}
+
+		if(chunkModified)
+		{
+			chunk.setUnsaved(true);
+		}
+
+
+		long endTime = System.nanoTime();
+		long processingTime = endTime - startTime;
+		chunksProcessed++;
+
+		// Maintain a rolling list of the last 100 processing times
+		if (last100ProcessingTimes.size() >= 100) {
+			last100ProcessingTimes.pollFirst(); // Remove the oldest entry
+		}
+		last100ProcessingTimes.addLast(processingTime);
+
+		// Log every 100 chunks
+		if (chunksProcessed % 100 == 0) {
+			List<Long> sortedTimes = new ArrayList<>(last100ProcessingTimes);
+			Collections.sort(sortedTimes);
+
+			double medianTimeMs;
+			int size = sortedTimes.size();
+			if (size % 2 == 0) {
+				// Even number of elements: average the two middle values
+				medianTimeMs = ((sortedTimes.get(size / 2 - 1) + sortedTimes.get(size / 2)) / 2.0) / 1_000_000.0;
+			} else {
+				// Odd number of elements: take the middle value
+				medianTimeMs = (sortedTimes.get(size / 2) / 1_000_000.0);
+			}
+
+			IGLib.IG_LOGGER.info("Processed {} chunks. Median processing time for last 100 chunks: {} ms per chunk",
+					chunksProcessed, String.format("%.6f", medianTimeMs));
+		}
 	}
+	private final ArrayDeque<Long> last100ProcessingTimes = new ArrayDeque<>(100);
+
 }
