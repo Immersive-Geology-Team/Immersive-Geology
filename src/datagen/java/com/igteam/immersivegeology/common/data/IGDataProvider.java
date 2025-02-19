@@ -55,7 +55,6 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
-        //generator.addProvider(runServer, new IGFeatureRemovalProvider(out));
 
         if(ModFlags.TFC.isStrictlyLoaded()) {
             generator.addProvider(runServer, new TFCCompatOreProvider(out));

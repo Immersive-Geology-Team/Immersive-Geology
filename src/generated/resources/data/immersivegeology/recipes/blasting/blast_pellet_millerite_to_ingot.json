@@ -4,7 +4,7 @@
     "tag": "forge:pellets/millerite"
   },
   "result": {
-    "item": "immersivegeology:ingot_chromium"
+    "item": "immersiveengineering:ingot_nickel"
   },
   "slag": {
     "item": "immersiveengineering:slag"
