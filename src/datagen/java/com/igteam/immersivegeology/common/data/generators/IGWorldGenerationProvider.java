@@ -116,7 +116,6 @@ public class IGWorldGenerationProvider
 				IGLib.IG_LOGGER.error("Cannot use default block state on this world spawning material");
 				continue;
 			}
-			IGLib.IG_LOGGER.info("Key? {}", data.getName());
 			// Register the configured feature using EvaporateFeature and its config
 			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(
 					IGWorldGen.EVAPORITE_FEATURE.get(),
@@ -171,7 +170,6 @@ public class IGWorldGenerationProvider
 					biomes, HolderSet.direct(entry.placed), Decoration.UNDERGROUND_ORES
 			);
 			ResourceKey<BiomeModifier> key = ResourceKey.create(Keys.BIOME_MODIFIERS, entry.name);
-			IGLib.IG_LOGGER.info("Key: {}", key);
 			ctx.register(key, modifier);
 		}
 		// Register all biome modifiers for the features

@@ -54,7 +54,6 @@ public class IGFluidTags extends FluidTagsProvider
 						TagKey<Fluid> fluid_key = fluid.getMaterial(MaterialTexture.base).getFluidTag(fluid_flag, fluid.getMaterial(MaterialTexture.overlay));
 						if(fluid_key!=null)
 						{
-							IGLib.IG_LOGGER.info("Tag for Fluid {} of type {}", fluid_key, fluid_flag.getName());
 							tag(fluid_key).add(fluid.getSource());
 						}
 					}

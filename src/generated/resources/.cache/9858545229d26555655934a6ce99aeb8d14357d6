@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-15T22:58:22.800661564	IGComplexItemModelProvider
+// 1.20.1	2025-02-20T00:43:55.859423898	IGComplexItemModelProvider
 6d820c2770f6dbd3dde161966bed0487bfa02519 assets/immersivegeology/models/item/ballmill.json
 6803bfbc5eb389242cec6a26f509b498a51305ea assets/immersivegeology/models/item/bloomery.json
 7084d307c773fa166970d3e6a394397e5862064c assets/immersivegeology/models/item/centrifuge.json
@@ -6,7 +6,7 @@
 15a25a26fd5ad0bf2db8d7157cbc56e4f55a4f37 assets/immersivegeology/models/item/coredrill.json
 3a89162c09ad2fad1e869484120c92c7b558b71e assets/immersivegeology/models/item/crystallizer.json
 25823583ba7aa7b8a5839aad725f57d51b64f793 assets/immersivegeology/models/item/gravityseparator.json
-38f50decc8819d5440b97213c63dde621decdab2 assets/immersivegeology/models/item/pelletizer.json
+0282c658364e8e26d9c3de507fbb5be19d5fd3cd assets/immersivegeology/models/item/pelletizer.json
 91258994cf6209018d1761774c77043d10bf4816 assets/immersivegeology/models/item/reverberation_furnace.json
 8fc9dec2eca1f1a9f1e020d54e839dc0a30febee assets/immersivegeology/models/item/rotarykiln.json
 ab1903e584ec7d7a75cda168cebe058469af175d assets/immersivegeology/models/item/trommel.json

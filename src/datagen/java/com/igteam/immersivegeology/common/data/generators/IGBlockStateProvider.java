@@ -288,7 +288,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void registerScaffolding(IGBlockType type){
-        logger.info("Creating Scaffolding");
         IGScaffoldingBlock block = (IGScaffoldingBlock) type;
         MetalScaffoldingType scaffolding_type = block.getScaffoldingType();
         MaterialInterface<?> base_material = block.getMaterial(MaterialTexture.base);

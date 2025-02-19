@@ -87,7 +87,8 @@ public class IGWorldSubscription
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
 	{
 		if(!event.isNewChunk()) return;
-		long startTime = System.nanoTime();
+		long startTime = 0;
+		if(IGServerConfig.REMOVAL.logProcess.get()) startTime = System.nanoTime();
 
 		// Initialize Variables
 		boolean isNether = false;
@@ -167,36 +168,42 @@ public class IGWorldSubscription
 			chunk.setUnsaved(true);
 		}
 
+		if(IGServerConfig.REMOVAL.logProcess.get())
+		{
+			long endTime = System.nanoTime();
+			long processingTime = endTime-startTime;
+			chunksProcessed++;
 
-		long endTime = System.nanoTime();
-		long processingTime = endTime - startTime;
-		chunksProcessed++;
-
-		// Maintain a rolling list of the last 100 processing times
-		if (last100ProcessingTimes.size() >= 100) {
-			last100ProcessingTimes.pollFirst(); // Remove the oldest entry
-		}
-		last100ProcessingTimes.addLast(processingTime);
-
-		// Log every 100 chunks
-		if (chunksProcessed % 100 == 0) {
-			List<Long> sortedTimes = new ArrayList<>(last100ProcessingTimes);
-			Collections.sort(sortedTimes);
-
-			double medianTimeMs;
-			int size = sortedTimes.size();
-			if (size % 2 == 0) {
-				// Even number of elements: average the two middle values
-				medianTimeMs = ((sortedTimes.get(size / 2 - 1) + sortedTimes.get(size / 2)) / 2.0) / 1_000_000.0;
-			} else {
-				// Odd number of elements: take the middle value
-				medianTimeMs = (sortedTimes.get(size / 2) / 1_000_000.0);
+			// Maintain a rolling list of the last 100 processing times
+			if(last100ProcessingTimes.size() >= 100)
+			{
+				last100ProcessingTimes.pollFirst(); // Remove the oldest entry
 			}
+			last100ProcessingTimes.addLast(processingTime);
 
-			IGLib.IG_LOGGER.info("Processed {} chunks. Median processing time for last 100 chunks: {} ms per chunk",
-					chunksProcessed, String.format("%.6f", medianTimeMs));
+			// Log every 100 chunks
+			if(chunksProcessed%100==0)
+			{
+				List<Long> sortedTimes = new ArrayList<>(last100ProcessingTimes);
+				Collections.sort(sortedTimes);
+
+				double medianTimeMs;
+				int size = sortedTimes.size();
+				if(size%2==0)
+				{
+					// Even number of elements: average the two middle values
+					medianTimeMs = ((sortedTimes.get(size/2-1)+sortedTimes.get(size/2))/2.0)/1_000_000.0;
+				}
+				else
+				{
+					// Odd number of elements: take the middle value
+					medianTimeMs = (sortedTimes.get(size/2)/1_000_000.0);
+				}
+
+				IGLib.IG_LOGGER.info("Processed {} chunks. Median processing time for last 100 chunks: {} ms per chunk",
+						chunksProcessed, String.format("%.6f", medianTimeMs));
+			}
 		}
 	}
 	private final ArrayDeque<Long> last100ProcessingTimes = new ArrayDeque<>(100);
-
 }

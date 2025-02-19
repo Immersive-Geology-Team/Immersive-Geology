@@ -68,11 +68,6 @@
         0.1875,
         0.1875,
         0.1875
-      ],
-      "translation": [
-        6,
-        -6,
-        0
       ]
     },
     "head": {
@@ -124,5 +119,5 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer_item.obj"
 }

@@ -47,7 +47,6 @@ public class IGTags
 			{
 				if(materialInterface.hasFlag(itemFlag))
 				{
-					if(initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {}", materialInterface.getName(), itemFlag);
 					createWrapperForCategory(itemFlag, materialInterface.instance());
 				}
 			}
@@ -76,7 +75,6 @@ public class IGTags
 				MaterialHelper base = materialInterface.instance();
 				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase()));
 
-				if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} Fluid", materialInterface.getName());
 				LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 				base_set.add(base);
 				fluid_map.put(getWrapFromSet(base_set), tag);
@@ -98,7 +96,6 @@ public class IGTags
 
 						MaterialHelper base = materialInterface.instance();
 						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "clean_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
-						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} Slurry", materialInterface.getName(), slurry_material.getName());
 						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 						base_set.add(base);
 						base_set.add(slurry_material.instance());
@@ -122,7 +119,6 @@ public class IGTags
 
 						MaterialHelper base = materialInterface.instance();
 						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "cloudy_"+base.getName().toLowerCase() + "_" + slurry_material.getName().toLowerCase()));
-						if(!initialized) IGLib.IG_LOGGER.info("Creating Tag for {} {} CLOUDY_SLURRY", materialInterface.getName(), slurry_material.getName());
 						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 						base_set.add(base);
 						base_set.add(slurry_material.instance());
