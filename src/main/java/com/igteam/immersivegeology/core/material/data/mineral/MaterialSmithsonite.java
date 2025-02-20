@@ -11,6 +11,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -51,26 +53,32 @@ public class MaterialSmithsonite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
-        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.CRUSHED_ORE, 1,300, 153600);
+        super.setupRecipeStages();
+        IGRecipeNode slag =  IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.CRUSHED_ORE, 1,300, 153600).addOptionalToTree(directBlasting);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.POWDERED_SLAG);
+        IGRecipeNode p_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG).addToTree(directBlasting, slag);
 
         //It has blue tint, so copper is present
-        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+       IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 MetalEnum.Zinc.getStack(ItemCategoryFlags.METAL_OXIDE),
                 MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.075f, 200, 1000);
+                0.075f, 200, 1000).addToTree(directBlasting, p_slag);
 
         //No byproducts and zinc is evaporated
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.SLAG,
-                getPrimaryProduct().instance(),ItemCategoryFlags.INGOT, new ItemStack(Ingredients.SLAG), 900);
+                getPrimaryProduct().instance(),ItemCategoryFlags.INGOT, new ItemStack(Ingredients.SLAG), 900).addToTree(directBlasting, slag);
 
         //No byproducts and most of the zinc is evaporated
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getPrimaryProduct().getStack(ItemCategoryFlags.NUGGET, 5));
+                getPrimaryProduct().getStack(ItemCategoryFlags.NUGGET, 5)).addOptionalToTree(directBlasting);
 
+    }
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(directBlasting);
     }
 }
