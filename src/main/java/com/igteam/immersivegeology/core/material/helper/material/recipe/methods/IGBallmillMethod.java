@@ -102,8 +102,8 @@ public class IGBallmillMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 16, y + 33, mx, my);
-		renderItemStack(graphics, output, x + 67, y + 42, mx,my);
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 25, y + 2, mx, my);
+		renderItemStack(graphics, output, x + 59, y + 2, mx, my);
 	}
 
 	@Override

@@ -145,13 +145,35 @@ public class IGContent {
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
 
-        InnerNode<ResourceLocation, ManualEntry> mineral_entries = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_recipe_overview"), 1);
+        InnerNode<ResourceLocation, ManualEntry> processing_chains = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_processing_chains"), 1);
+        InnerNode<ResourceLocation, ManualEntry> metal_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_metal_chains"), 1);
+        InnerNode<ResourceLocation, ManualEntry> mineral_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_mineral_chains"), 2);
+        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
+
         for(MineralEnum m : MineralEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
-        for(MetalEnum m : MetalEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
-        for(ChemicalEnum m : ChemicalEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
+        for(MetalEnum m : MetalEnum.values())  metalTreeEntry(instance, metal_entries, m);
+        for(ChemicalEnum m : ChemicalEnum.values())  chemicalTreeEntry(instance, chemical_entries, m);
     }
 
     private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
+    {
+        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
+        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
+        mineral.setContent(() -> createMineralContent(material));
+
+        instance.addEntry(category, mineral.create());
+    }
+
+    private static void metalTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
+    {
+        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
+        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
+        mineral.setContent(() -> createMineralContent(material));
+
+        instance.addEntry(category, mineral.create());
+    }
+
+    private static void chemicalTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
     {
         ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
         mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));

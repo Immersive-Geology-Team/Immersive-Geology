@@ -68,7 +68,7 @@ public class IEMixingMethod extends IGRecipeMethod
 	@Override
 	public IGRecipeMethod.RecipeMethod getMethod()
 	{
-		return RecipeMethod.REFINING;
+		return RecipeMethod.MIXING;
 	}
 
 	@Override

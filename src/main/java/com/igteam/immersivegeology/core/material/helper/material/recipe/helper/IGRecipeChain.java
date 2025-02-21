@@ -200,7 +200,7 @@ public class IGRecipeChain
 
 	private void adjustForAdjacency(GridCell[][] grid, Map<IGRecipeNode, GridPosition> nodePositions) {
 		boolean madeAdjustments;
-		int maxDepth = 9;
+		int maxDepth = 10;
 		do {
 			madeAdjustments = false;
 
@@ -209,13 +209,13 @@ public class IGRecipeChain
 				IGRecipeNode node = entry.getKey();
 				GridPosition pos = entry.getValue();
 
-				// Check parent adjacency
-				if (!node.getParents().isEmpty() && !hasAdjacentParent(node, grid, pos)) {
-					// Try to move node to be adjacent to a parent
-					if (adjustNodePosition(node, pos, grid, nodePositions)) {
-						madeAdjustments = true;
-					}
-				}
+//				// Check parent adjacency
+//				if (!node.getParents().isEmpty() && !hasAdjacentParent(node, grid, pos)) {
+//					// Try to move node to be adjacent to a parent
+//					if (adjustNodePosition(node, pos, grid, nodePositions)) {
+//						madeAdjustments = true;
+//					}
+//				}
 
 				// Check child adjacency
 				if (!node.getChildren().isEmpty() && !hasAdjacentChild(node, grid, pos)) {

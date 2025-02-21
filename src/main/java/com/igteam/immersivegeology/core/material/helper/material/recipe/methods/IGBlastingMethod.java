@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
@@ -152,22 +153,21 @@ public class IGBlastingMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		Ingredient ingredient = Ingredient.of(input);
-		ItemStack inputStack = ingredient.getItems()[0];
-		renderItemStack(graphics, inputStack, x, y, mx, my);
+		IngredientWithSize ingredient = new IngredientWithSize(Ingredient.of(input));
+		renderItemStack(graphics, ingredient.getRandomizedExampleStack(0), x + 25, y + 2, mx, my);
+		renderItemStack(graphics, output, x + 59, y + 2, mx, my);
 	}
 
 	@Override
 	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		Ingredient ingredient = Ingredient.of(input);
-		renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
+		//renderItemStack(graphics, ingredient.getItems()[0], x, y, mx, my);
 	}
 
 	@Override
 	public void renderFinalStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, output, x, y, mx, my);
+		//renderItemStack(graphics, output, x, y, mx, my);
 	}
 
 	@Override

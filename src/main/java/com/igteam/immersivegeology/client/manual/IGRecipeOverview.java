@@ -15,6 +15,7 @@ import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGGraphLayoutManager;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -27,6 +28,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.*;
@@ -76,6 +79,8 @@ public class IGRecipeOverview extends SpecialManualElements
 
 	private final HashSet<IGRecipeNode> rendered_nodes = new HashSet<>();
 
+	IGGraphLayoutManager manager = new IGGraphLayoutManager();
+
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
@@ -88,9 +93,9 @@ public class IGRecipeOverview extends SpecialManualElements
 
 			// Check if the chain has a root node.
 			if(!roots.isEmpty()) {
-				//if(!setChainPositions)
+				if(!setChainPositions)
 				{
-					chain.layoutRecipeChain(x,y, 32, 24);
+					manager.layoutChain(chain);
 					setChainPositions = true;
 				}
 
@@ -159,8 +164,8 @@ public class IGRecipeOverview extends SpecialManualElements
 			return;
 		}
 
-		int nodeX = baseX + node.getX();
-		int nodeY = baseY + node.getY();
+		int nodeX = baseX + (node.getX() * 32);
+		int nodeY = baseY + (node.getY() * 32);
 
 		// Retrieve the method wrapped by this node.
 		IGRecipeMethod method = node.getMethod();
@@ -168,12 +173,6 @@ public class IGRecipeOverview extends SpecialManualElements
 		// Render the main body of the recipe method.
 		if(mx > nodeX&&(nodeX+16) > mx && my > nodeY&&(nodeY+16) > my)
 		{
-			StringBuilder p = new StringBuilder();
-//			for(IGRecipeNode n : node.getParents())
-//			{
-//				p.append(n.getMethod().getName());
-//			}
-			p.append("X:").append(nodeX).append("|Y:").append(nodeY);
 			//graphics.renderTooltip(screen.getMinecraft().font, Component.literal("P: " + p), mx, my);
 			if (GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS) {
 				selectedNode = node;
@@ -183,17 +182,8 @@ public class IGRecipeOverview extends SpecialManualElements
 		method.renderMB(graphics, method.getIconStack(), nodeX, nodeY, mx, my);
 
 		for (IGRecipeNode child : node.getChildren()) {
-			int childX = baseX + child.getX();
-			int childY = baseY + child.getY();
 
-			drawDirectLine(graphics, nodeX+8, nodeY+8, childX+8, childY+8, color);
-			//
-//			if(mx > nodeX&&(nodeX+16) > mx && my > nodeY&&(nodeY+16) > my)
-//			{
-//
-//				graphics.renderTooltip(screen.getMinecraft().font, Component.literal("Drawing Line from "+node.getMethod().getName()), mx, my);
-//				graphics.renderTooltip(screen.getMinecraft().font, Component.literal("to "+child.getMethod().getName()), mx, my + 12);
-//			}
+			drawConnectionLine(graphics, baseX, baseY, node, child, color);
 
 			if(child.shouldRender) {
 				renderChain(graphics, screen, child, baseX, baseY, mx, my, color, visited);
@@ -202,94 +192,51 @@ public class IGRecipeOverview extends SpecialManualElements
 		}
 	}
 
-	private void drawDirectLine(GuiGraphics graphics, int x1, int y1, int x2, int y2, int color) {
+	private final int NODE_SIZE = 16;
+	private void drawConnectionLine(GuiGraphics graphics, int baseX, int baseY, IGRecipeNode from, IGRecipeNode to, int color) {
+		// Get center points of nodes
+		int x1 = baseX + (from.getX() + (NODE_SIZE / 2) * 32);
+		int y1 = baseY + (from.getY() + (NODE_SIZE / 2) * 32);
+		int x2 = baseX + (to.getX() + (NODE_SIZE / 2) * 32);
+		int y2 = baseY + (to.getY() + (NODE_SIZE / 2) * 32);
+
+		// Calculate angle between points
+		double deltaX = x2 - x1;
+		double deltaY = y2 - y1;
+		float angle = (float) Math.atan2(deltaY, deltaX);
+
+		// Calculate direct distance between points
+		double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) * 32;
+		drawDirectLine(graphics, baseX + (from.getX() * 32) + (NODE_SIZE / 2) , baseY + (from.getY() * 32)+ (NODE_SIZE / 2) , angle, (int)distance, color);
+	}
+
+
+	private void drawDirectLine(GuiGraphics graphics, int x1, int y1, float angle, int length, int color) {
 		PoseStack pose = graphics.pose();
-
-		// Is Parent above the Child
-		if(y1 < y2)
+		pose.pushPose();
 		{
-			// Is Parent to the LEFT of the Child
-			if(x1 < x2)
+			pose.translate(x1, y1, 0);
+			pose.pushPose();
 			{
-				graphics.hLine(x1, x2, y1, color);
-				graphics.vLine(x2, y1, y2, color);
-			}
-			// Directly in line
-			if(x1 == x2)
-			{
-				graphics.vLine(x2, y1, y2, color);
-			}
+				pose.mulPose(new Quaternionf().rotateAxis(angle, new Vector3f(0, 0, 1)));
+				graphics.fill(0, -1, length, 1, color);
 
-			if(x1 > x2)
-			{
-				graphics.hLine(x1, x2, y1, color);
-				graphics.vLine(x2, y1, y2, color);
 			}
+			pose.popPose();
 		}
+		pose.popPose();
 
-		// if Child is Above the Parent (mostly for cycles)
-		if(y1 > y2)
-		{
-			if(x1 > x2)
-			{
-				graphics.vLine(x2-24, y2, y1, color);
-				graphics.hLine(x1, x2 -24, y1, color);
-				graphics.hLine(x2-24, x2, y2, color);
-			}
-		}
+		// Rotate to point towards end point
 
-		if(y1 == y2)
-		{
-			graphics.hLine(x1, x2, y1, color);
-		}
+		// Draw the line
 
-//
-//
-//		int pY = y1+Math.abs((y1-y2)/2)-4;
-//		if (x1 == x2) {
-//			// Vertical line
-//			graphics.vLine(x1, y1, y2, color);
-//			float u1 = 5	/ 16f;
-//			float u2 = 13	/ 16f;
-//			float v1 = 0;
-//			float v2 = 5	/ 16f;
-//
-//			pose.pushPose();
-//			pose.translate(x1 - 1.5f, pY,-1);
-//			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
-//			pose.popPose();
-//
-//		} else if (y1 == y2) {
-//			// Horizontal line
-//			graphics.hLine(x1, x2, y1, color);
-//
-//			float u1 = 5	/ 16f;
-//			float u2 = 13	/ 16f;
-//			float v1 = 0;
-//			float v2 = 5	/ 16f;
-//
-//			pose.pushPose();
-//			pose.translate(x1 - 1.5f, pY,-1);
-//			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
-//			pose.popPose();
-//		} else {
-//			// L-shaped connector
-//			int midX = (x1 + x2) / 2;
-//
-//			graphics.hLine(x1, midX, y1, color); // Horizontal from (x1, y1) to (midX, y1)
-//			graphics.vLine(midX, y1, y2, color); // Vertical from (midX, y1) to (midX, y2)
-//			graphics.hLine(midX, x2, y2, color); // Horizontal from (midX, y2) to (x2, y2)
-//
-//			float u1 = 5	/ 16f;
-//			float u2 = 13	/ 16f;
-//			float v1 = 0;
-//			float v2 = 5	/ 16f;
-//
-//			pose.pushPose();
-//			pose.translate(midX - 1.5f, pY,-1);
-//			ManualUtils.drawTexturedRect(graphics, TEXTURE_ARROWS, 0,0, 4,8, u1,u2,v1,v2);
-//			pose.popPose();
+//		// Draw arrow head
+//		if (length > 10) { // Only draw arrow if line is long enough
+//			int arrowSize = 4;
+//			graphics.fill(length - arrowSize, -arrowSize, length, 0, color);
+//			graphics.fill(length - arrowSize, 0, length, arrowSize, color);
 //		}
+
 	}
 
 	@Override

@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import blusunrize.lib.manual.ManualUtils;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -20,10 +21,12 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -153,15 +156,18 @@ public class IGCrushingMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
-		renderMB(graphics, getIconStack(), x + 24, y, mx, my);
-		renderItemStack(graphics, output, x + 48, y, mx,my);
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 25, y + 11, mx, my);
+		renderItemStack(graphics, output, x + 59, y + 2, mx,my);
+		if(secondary != null && !secondary.hasNoMatchingItems())
+		{
+			renderItemStack(graphics, secondary.getRandomizedExampleStack(0), x + 59, y + 20, mx,my);
+			ManualUtils.drawSplitString(graphics, screen.getManual().fontRenderer(), List.of(String.format("%.1f", (chance * 100)) + "%"), x+79, y+24, 0xff777777);
+		}
 	}
 
 	@Override
 	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
 	}
 
 	@Override

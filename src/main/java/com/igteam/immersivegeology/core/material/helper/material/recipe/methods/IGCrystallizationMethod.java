@@ -160,12 +160,12 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x+15, y+27, 16, 47, mx, my);
+		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x+24, y+11, 16, 16, mx, my);
 		if(fluid_out!=null&&!fluid_out.isEmpty())
 		{
-			renderFluidStack(graphics, fluid_out.getFluid(), x+41, y+71, 16, 20, mx, my);
+			renderFluidStack(graphics, fluid_out.getFluid(), x+61, y+21, 16, 16, mx, my);
 		}
-		renderItemStack(graphics, itemResult, x + 66,y + 49,mx,my);
+		renderItemStack(graphics, itemResult, x + 61,y + 2,mx,my);
 	}
 
 	@Override

@@ -114,9 +114,9 @@ public class IGPelletizerMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 34, y + 5, mx, my);
-		renderItemStack(graphics, output, x + 68, y + 5, mx, my);
-		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x + 16, y + 5, 16,16, mx, my);
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 34, y + 3, mx, my);
+		renderItemStack(graphics, output, x + 68, y + 3, mx, my);
+		renderFluidStack(graphics, ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), x + 16, y + 3, 16,16, mx, my);
 	}
 
 	@Override

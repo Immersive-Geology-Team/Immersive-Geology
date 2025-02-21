@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.lib.manual.ManualUtils;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -24,8 +25,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class IGSeparatorMethod extends IGRecipeMethod
@@ -91,9 +94,15 @@ public class IGSeparatorMethod extends IGRecipeMethod
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
 		Ingredient ingredient = Ingredient.of(input);
-		renderItemStack(graphics, ingredient.getItems()[0], x + 16, y + 33, mx, my);
-		renderItemStack(graphics, result, x + 67, y + 42, mx,my);
-		renderItemStack(graphics, waste, x + 67, y + 62, mx,my);
+		renderItemStack(graphics, ingredient.getItems()[0], x + 25, y + 11, mx, my);
+		renderItemStack(graphics, result, x + 59, y + 2, mx,my);
+		if(!waste.isEmpty())
+		{
+			renderItemStack(graphics, waste, x + 59, y + 20, mx,my);
+			ManualUtils.drawSplitString(graphics, screen.getManual().fontRenderer(), List.of(String.format("%.1f", (waste_chance * 100)) + "%"), x + 79, y + 24, 0xff777777);
+		}
+
+		renderFluidStack(graphics, Fluids.WATER, x + 7, y + 11, 16, 16, mx, my);
 	}
 
 	@Override

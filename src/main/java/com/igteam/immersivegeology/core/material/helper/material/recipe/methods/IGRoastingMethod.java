@@ -95,9 +95,10 @@ public class IGRoastingMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x + 4, y + 41, mx, my);
-		renderItemStack(graphics, itemResult, x + 55, y + 41, mx,my);
-		renderFluidStack(graphics, ChemicalEnum.SulfurDioxde.getFluid(BlockCategoryFlags.FLUID), 91, 27, 16, 47, mx, my);
+		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x + 24, y + 11, mx, my);
+		renderItemStack(graphics, itemResult, x + 60, y + 2, mx,my);
+
+		renderFluidStack(graphics, ChemicalEnum.SulfurDioxde.getFluid(BlockCategoryFlags.FLUID), 70, 21, 16, 16, mx, my);
 	}
 
 	@Override

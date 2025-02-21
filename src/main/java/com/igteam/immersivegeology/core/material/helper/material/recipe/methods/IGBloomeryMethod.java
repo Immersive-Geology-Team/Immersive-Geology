@@ -85,7 +85,8 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x, y, mx, my);
+		renderItemStack(graphics, itemInput.getRandomizedExampleStack(0), x + 25, y + 2, mx, my);
+		renderItemStack(graphics, itemResult, x + 59, y + 2, mx, my);
 	}
 
 	@Override

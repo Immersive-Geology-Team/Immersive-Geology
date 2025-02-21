@@ -142,15 +142,14 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderItemStack(graphics, input.getRandomizedExampleStack(0), x, y, mx, my);
+		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 25, y + 2, mx, my);
+
 		for(IngredientWithSize ingredient : additives)
 		{
-			renderItemStack(graphics, ingredient.getRandomizedExampleStack(0), x + 24, y, mx, my);
+			renderItemStack(graphics, ingredient.getRandomizedExampleStack(0), (x + 7), (y + 2) + (18 * additives.indexOf(ingredient)), mx, my);
 		}
-//
-//		renderMB(graphics, getIconStack(), x + 48, y, mx, my);
-//		renderItemStack(graphics, output, x + 72, y,mx,my);
-//		renderItemStack(graphics, slag, x + 96,y,mx,my);
+		renderItemStack(graphics, output, x + 59,y + 2,mx,my);
+		if(!slag.isEmpty()) renderItemStack(graphics, slag, x + 59,y + 20,mx,my);
 	}
 
 	@Override

@@ -186,7 +186,8 @@ public abstract class IGRecipeMethod
 		SYNTHESIS,
 		CUTTING,
 		REFINING,
-		PELLETIZE;
+		PELLETIZE,
+		MIXING;
 
 		public String getMethodName()
 		{
@@ -204,6 +205,7 @@ public abstract class IGRecipeMethod
 				case ARC_SMELTING -> {return ie("arc_furnace");}
 				case CALCINATION -> {return ig("rotarykiln");}
 				case BASIC_SMELTING -> {return mc("furnace");}
+				case MIXING -> {return ie("mixer");}
 				case REFINING -> {return ig("ballmill");}
 				case PELLETIZE -> {return ig("pelletizer");}
 				case CRYSTALLIZATION -> {return ig("crystalizer");}
@@ -215,21 +217,22 @@ public abstract class IGRecipeMethod
 		{
 			switch(this)
 			{
-				case CRAFTING -> {return IGLib.makeTextureLocation("jei/crafting_table");}
-				case CUTTING -> { return IGLib.makeTextureLocation("jei/hydrojet"); }
-				case BLASTING -> {return IGLib.makeTextureLocation("jei/crude_blast_furnace");}
-				case BLOOMERY -> {return IGLib.makeTextureLocation("jei/bloomery");}
+				case CRAFTING -> {return IGLib.makeTextureLocation("manual/crafting_table");}
+				case CUTTING -> { return IGLib.makeTextureLocation("manual/hydrojet"); }
+				case BLASTING -> {return IGLib.makeTextureLocation("manual/blast_furnace");}
+				case BLOOMERY -> {return IGLib.makeTextureLocation("manual/bloomery");}
 				case CHEMICAL -> {return IGLib.makeTextureLocation("manual/vat");}
-				case CRUSHING -> {return IGLib.makeTextureLocation("jei/crusher");}
-				case ROASTING -> {return IGLib.makeTextureLocation("jei/reverberation_furnace");}
-				case SYNTHESIS -> {return IGLib.makeTextureLocation("jei/refinery");}
-				case ARC_SMELTING -> {return IGLib.makeTextureLocation("jei/arc_furnace");}
-				case CALCINATION -> {return IGLib.makeTextureLocation("jei/rotarykiln");}
-				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("jei/furnace");}
-				case REFINING -> {return IGLib.makeTextureLocation("jei/ballmill");}
-				case SEPARATOR -> {return IGLib.makeTextureLocation("jei/gravity_separator");}
+				case CRUSHING -> {return IGLib.makeTextureLocation("manual/crusher");}
+				case ROASTING -> {return IGLib.makeTextureLocation("manual/reverberation_furnace");}
+				case SYNTHESIS -> {return IGLib.makeTextureLocation("manual/refinery");}
+				case MIXING -> {return IGLib.makeTextureLocation("manual/mixer");}
+				case ARC_SMELTING -> {return IGLib.makeTextureLocation("manual/arc_furnace");}
+				case CALCINATION -> {return IGLib.makeTextureLocation("manual/rotarykiln");}
+				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("manual/furnace");}
+				case REFINING -> {return IGLib.makeTextureLocation("manual/ballmill");}
+				case SEPARATOR -> {return IGLib.makeTextureLocation("manual/gravity_separator");}
 				case PELLETIZE -> {return IGLib.makeTextureLocation("manual/pelletizer");}
-				case CRYSTALLIZATION -> {return IGLib.makeTextureLocation("jei/crystalizer");}
+				case CRYSTALLIZATION -> {return IGLib.makeTextureLocation("manual/crystallizer");}
 			}
 			return IGLib.makeTextureLocation("unknown");
 		}
