@@ -17,8 +17,10 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -48,7 +50,7 @@ public class MaterialScheelite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Tungsten));
+        return new LinkedHashSet<>(List.of(MetalEnum.Tungsten));
     }
 
     @Override

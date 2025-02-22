@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -47,7 +48,7 @@ public class MaterialIlmenite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Titanium));
+        return new LinkedHashSet<>(List.of(MetalEnum.Iron, MetalEnum.Titanium));
     }
     @Override
     public void setupRecipeStages()

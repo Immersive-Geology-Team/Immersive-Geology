@@ -10,9 +10,11 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.client.renderer.RenderStateShard.LightmapStateShard;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -41,7 +43,7 @@ public class MaterialPyrolusite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Manganese, MetalEnum.Iron));
+        return new LinkedHashSet<>(List.of(MetalEnum.Manganese, MetalEnum.Iron));
     }
     @Override
     public void setupRecipeStages()

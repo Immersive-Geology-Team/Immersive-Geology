@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -49,7 +50,7 @@ public class MaterialHematite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
+        return new LinkedHashSet<>(List.of(MetalEnum.Iron,MetalEnum.Chromium));
     }
 
     @Override

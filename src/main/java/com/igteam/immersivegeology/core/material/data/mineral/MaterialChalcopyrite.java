@@ -75,7 +75,7 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Iron));
+        return new LinkedHashSet<>(List.of(MetalEnum.Copper, MetalEnum.Iron));
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -73,6 +74,6 @@ public class MaterialCuprite extends MaterialMineral
 	@Override
 	public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
 	{
-		return new LinkedHashSet<>(Set.of(MetalEnum.Copper));
+		return new LinkedHashSet<>(List.of(MetalEnum.Copper, MetalEnum.Manganese));
 	}
 }

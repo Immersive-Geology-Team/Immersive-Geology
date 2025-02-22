@@ -46,7 +46,7 @@ public class MaterialMagnetite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron));
+        return new LinkedHashSet<>(List.of(MetalEnum.Iron, MetalEnum.Nickel));
     }
 
     @Override
