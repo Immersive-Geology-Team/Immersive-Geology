@@ -125,7 +125,7 @@ public class IGRecipeOverview extends SpecialManualElements
 
 					graphics.pose().pushPose();
 					graphics.pose().translate(0,0,999);
-					graphics.renderItem( new ItemStack(Items.BARRIER), -8,0);
+					graphics.renderItem( new ItemStack(Items.BARRIER), -32,0);
 
 					graphics.pose().pushPose();
 					{
@@ -144,7 +144,7 @@ public class IGRecipeOverview extends SpecialManualElements
 
 					graphics.pose().popPose();
 
-					if(mx > -8 && mx < 16 && my > -8 && my < 16)
+					if(mx > -32 && mx < -16 && my > -8 && my < 16)
 					{
 						if(GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1)==GLFW.GLFW_PRESS)
 						{
