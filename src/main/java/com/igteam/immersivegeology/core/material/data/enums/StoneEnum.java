@@ -95,7 +95,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
             // Now for TFC Compat checks
             String input = stoneState.getBlock().getName().getString().toLowerCase();
-            String rockType = capitalizeFirstLetter(input.substring(4));
+            String rockType = capitalizeFirstLetter(input.replace("raw ",""));
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equals(rockType))){
                 return valueOf(rockType);
             }
@@ -137,6 +137,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     public boolean isStoneTypeValid()
     {
         List<ModFlags> list = getFlags().stream().filter(f -> f instanceof ModFlags).map(flag -> (ModFlags) flag).toList();
+        if(list.isEmpty()) return true;
 
         boolean pass = false;
         for(ModFlags flag : list)

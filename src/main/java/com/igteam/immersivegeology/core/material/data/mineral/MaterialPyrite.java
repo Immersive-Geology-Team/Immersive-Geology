@@ -63,7 +63,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Iron, MetalEnum.Molybdenum));
+        return new LinkedHashSet<>(List.of(MetalEnum.Iron, MetalEnum.Molybdenum));
     }
 
     @Override

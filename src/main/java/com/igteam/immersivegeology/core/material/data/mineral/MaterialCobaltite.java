@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -57,7 +58,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Cobalt, MetalEnum.Platinum, MetalEnum.Osmium));
+        return new LinkedHashSet<>(List.of(MetalEnum.Cobalt, MetalEnum.Platinum, MetalEnum.Osmium));
     }
 
     @Override

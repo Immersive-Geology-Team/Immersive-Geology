@@ -73,6 +73,6 @@ public class MaterialCuprite extends MaterialMineral
 	@Override
 	public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
 	{
-		return new LinkedHashSet<>(Set.of(MetalEnum.Copper));
+		return new LinkedHashSet<>(List.of(MetalEnum.Copper));
 	}
 }

@@ -12,7 +12,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.dries007.tfc.util.Metal;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 

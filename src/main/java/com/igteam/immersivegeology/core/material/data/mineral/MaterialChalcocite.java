@@ -66,7 +66,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         //MetalEnum.Platinum, MetalEnum.Osmium -- Think about it?
-        return new LinkedHashSet<>(Set.of(MetalEnum.Copper, MetalEnum.Nickel));
+        return new LinkedHashSet<>(List.of(MetalEnum.Copper, MetalEnum.Nickel));
     }
 
     @Override

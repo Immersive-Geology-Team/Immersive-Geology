@@ -34,6 +34,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -64,7 +65,7 @@ public class MaterialAnatase extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Titanium));
+        return new LinkedHashSet<>(List.of(MetalEnum.Titanium));
     }
 
     @Override

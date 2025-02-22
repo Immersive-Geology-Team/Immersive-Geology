@@ -11,6 +11,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -40,6 +41,6 @@ public class MaterialUnobtania extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Platinum));
+        return new LinkedHashSet<>(List.of(MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Platinum));
     }
 }

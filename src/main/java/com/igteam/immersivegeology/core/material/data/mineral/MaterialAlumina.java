@@ -31,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -60,7 +61,7 @@ public class MaterialAlumina extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Aluminum));
+        return new LinkedHashSet<>(List.of(MetalEnum.Aluminum));
     }
 
     @Override

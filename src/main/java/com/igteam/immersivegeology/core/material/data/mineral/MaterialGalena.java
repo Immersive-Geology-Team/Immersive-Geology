@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -51,7 +52,7 @@ public class MaterialGalena extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Lead, MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium));
+        return new LinkedHashSet<>(List.of(MetalEnum.Lead, MetalEnum.Silver, MetalEnum.Platinum, MetalEnum.Osmium));
     }
 
     @Override

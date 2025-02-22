@@ -12,7 +12,7 @@ plugins {
     id 'eclipse'
 }
 
-version = '0.5.2-b' + version_buildnumber
+version = '0.5.3-b' + version_buildnumber
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -217,8 +217,8 @@ dependencies {
 //    implementation fg.deobf("curse.maven:terrablender-563928:5068218")
 //    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:4617259")
     // TFC
-    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
-    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
+    //implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
+    //implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 
     datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
 

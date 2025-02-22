@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -47,7 +48,7 @@ public class MaterialSmithsonite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(Set.of(MetalEnum.Zinc));
+        return new LinkedHashSet<>(List.of(MetalEnum.Zinc));
     }
 
     @Override
