@@ -1,0 +1,22 @@
+{
+  "type": "tfc:soil_disc",
+  "config": {
+    "height": 3,
+    "max_radius": 5,
+    "min_radius": 3,
+    "states": [
+      {
+        "replace": "tfc:dirt/sandy_loam",
+        "with": "immersivegeology:evaporate_saltpeter"
+      },
+      {
+        "replace": "tfc:dirt/silty_loam",
+        "with": "immersivegeology:evaporate_saltpeter"
+      },
+      {
+        "replace": "tfc:grass/sandy_loam",
+        "with": "immersivegeology:evaporate_saltpeter"
+      }
+    ]
+  }
+}
