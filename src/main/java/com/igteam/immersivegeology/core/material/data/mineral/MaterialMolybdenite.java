@@ -24,6 +24,7 @@ import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.List;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -62,7 +63,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Molybdenum));
+        return new LinkedHashSet<>(List.of(MetalEnum.Molybdenum, MetalEnum.Osmium, MetalEnum.Platinum));
     }
 
     @Override

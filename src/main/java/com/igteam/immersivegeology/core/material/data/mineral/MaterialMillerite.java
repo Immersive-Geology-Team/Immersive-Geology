@@ -47,7 +47,7 @@ public class MaterialMillerite extends MaterialSulphideMineral
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Nickel, MetalEnum.Chromium));
+        return new LinkedHashSet<>(List.of(MetalEnum.Nickel, MetalEnum.Chromium, MetalEnum.Osmium, MetalEnum.Platinum));
     }
 
     @Override

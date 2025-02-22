@@ -58,7 +58,7 @@ public class MaterialBauxite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Aluminum));
+        return new LinkedHashSet<>(List.of(MetalEnum.Aluminum, MetalEnum.Iron));
     }
 
     @Override

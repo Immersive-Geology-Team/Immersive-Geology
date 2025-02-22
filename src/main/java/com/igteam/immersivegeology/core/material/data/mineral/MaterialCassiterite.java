@@ -47,7 +47,7 @@ public class MaterialCassiterite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Tin));
+        return new LinkedHashSet<>(List.of(MetalEnum.Tin, MetalEnum.Tungsten));
     }
 
     @Override

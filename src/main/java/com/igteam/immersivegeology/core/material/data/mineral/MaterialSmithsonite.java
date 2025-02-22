@@ -48,7 +48,7 @@ public class MaterialSmithsonite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Zinc));
+        return new LinkedHashSet<>(List.of(MetalEnum.Zinc, MetalEnum.Copper));
     }
 
     @Override

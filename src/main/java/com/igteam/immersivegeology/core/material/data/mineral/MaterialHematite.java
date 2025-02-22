@@ -50,7 +50,7 @@ public class MaterialHematite extends MaterialMineral {
     @Override
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
-        return new LinkedHashSet<>(List.of(MetalEnum.Iron));
+        return new LinkedHashSet<>(List.of(MetalEnum.Iron,MetalEnum.Chromium));
     }
 
     @Override

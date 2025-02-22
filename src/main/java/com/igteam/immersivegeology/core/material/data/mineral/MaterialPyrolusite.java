@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.client.renderer.RenderStateShard.LightmapStateShard;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
