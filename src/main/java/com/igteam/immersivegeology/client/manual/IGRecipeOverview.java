@@ -100,7 +100,7 @@ public class IGRecipeOverview extends SpecialManualElements
 				}
 
 				int baseX = x;
-				int baseY = y + 32;
+				int baseY = y;
 
 				// Render the entire chain tree.
 				graphics.pose().pushPose();
