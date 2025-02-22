@@ -207,7 +207,6 @@ public class IGContent {
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
             IGRecipeChain chain = recipe_chain_data.get(i);
-            IGLib.IG_LOGGER.info("Creating Manual Entry for {}", chain.getName());
             contentBuilder.append("<&").append(chain.getName()).append(">");
             if(i < (recipe_chain_data.size() - 1))
                 contentBuilder.append("<np>");

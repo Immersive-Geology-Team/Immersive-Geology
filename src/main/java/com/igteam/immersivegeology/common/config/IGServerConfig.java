@@ -261,10 +261,10 @@ public class IGServerConfig
 				this.associateChance = builder.comment("The chance that this material will generate with any additional 'friend' materials").defineInRange("associateChance", mineral.getAssociateMaterialChance(), 0.0f, 1.0f);
 
 
-				this.min_temp = builder.comment("The minimum temperature that this material can spawn in").defineInRange("min_temp", mineral.getAssociateMaterialChance(), -2.0f, 2.0f);
-				this.max_temp = builder.comment("The maximum temperature that this material can spawn in").defineInRange("max_temp", mineral.getAssociateMaterialChance(), -2.0f, 2.0f);
-				this.min_downfall = builder.comment("The minimum downfall that this material can spawn in").defineInRange("min_downfall", mineral.getAssociateMaterialChance(), 0.0f, 1.0f);
-				this.max_downfall = builder.comment("The maximum downfall that this material can spawn in").defineInRange("max_downfall", mineral.getAssociateMaterialChance(), 0.0f, 1.0f);
+				this.min_temp = builder.comment("The minimum temperature that this material can spawn in").defineInRange("min_temp", mineral.getMinSpawnTemp(), -2.0f, 2.0f);
+				this.max_temp = builder.comment("The maximum temperature that this material can spawn in").defineInRange("max_temp", mineral.getMaxSpawnTemp(), -2.0f, 2.0f);
+				this.min_downfall = builder.comment("The minimum downfall that this material can spawn in").defineInRange("min_downfall", mineral.getMinDownfall(), 0.0f, 1.0f);
+				this.max_downfall = builder.comment("The maximum downfall that this material can spawn in").defineInRange("max_downfall", mineral.getMaxDownfall(), 0.0f, 1.0f);
 
 				builder.pop();
 			}

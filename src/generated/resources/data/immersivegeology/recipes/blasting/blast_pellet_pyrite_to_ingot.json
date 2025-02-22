@@ -4,7 +4,7 @@
     "tag": "forge:pellets/pyrite"
   },
   "result": {
-    "item": "immersivegeology:ingot_molybdenum"
+    "item": "minecraft:iron_ingot"
   },
   "slag": {
     "item": "immersiveengineering:slag"
