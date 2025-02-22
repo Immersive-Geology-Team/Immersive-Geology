@@ -22,6 +22,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -43,6 +44,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiFunction<IFlagType<?>, Integer, Integer> colorFunction; // in goes a category, returns the color white as a default
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
+
+    private Rarity materialRarity = Rarity.COMMON;
 
     protected IGRecipeChain directBlasting = new IGRecipeChain(this, "direct_blasting", 0);
     protected IGRecipeChain sulphideElectrowining = new IGRecipeChain(this, "sulphide_electrowining", 1);
@@ -68,6 +71,16 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         return Set.of();
     };
+
+    public void setRarity(Rarity rarity)
+    {
+        this.materialRarity = rarity;
+    }
+
+    public Rarity getRarity()
+    {
+        return materialRarity;
+    }
 
     public void initializeFlags(){
         ArrayList<IFlagType<?>> flagList = new ArrayList<>();

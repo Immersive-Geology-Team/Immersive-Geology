@@ -23,7 +23,6 @@ public class CommonProxy
 
 	public void modConstruction()
 	{
-		IGLib.IG_LOGGER.info("Registering Multiblocks to Immersive Engineering");
 		IGMultiblockProvider.forceClassLoad();
 		IGRegistrationHolder.initialize();
 		IGTags.initialize();

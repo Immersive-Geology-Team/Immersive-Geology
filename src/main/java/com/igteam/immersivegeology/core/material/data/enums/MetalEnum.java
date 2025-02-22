@@ -161,6 +161,8 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
         return material.CONFIG.rarity();
     }
 
+
+
     @Override
     public Optional<TagKey<Biome>> getPreferredBiome()
     {
@@ -199,5 +201,29 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
 
     public ScaffoldingHelper getScaffoldingBlock(){
         return instance().getScaffoldingBlock();
+    }
+
+    @Override
+    public double getMinSpawnTemp()
+    {
+        return -1;
+    }
+
+    @Override
+    public double getMaxSpawnTemp()
+    {
+        return 2;
+    }
+
+    @Override
+    public double getMinDownfall()
+    {
+        return 0;
+    }
+
+    @Override
+    public double getMaxDownfall()
+    {
+        return 1;
     }
 }

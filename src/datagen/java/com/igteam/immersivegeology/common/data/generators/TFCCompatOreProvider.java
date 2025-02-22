@@ -16,6 +16,8 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.features.IGOreFeature;
+import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -49,35 +51,8 @@ public class TFCCompatOreProvider implements DataProvider {
 	}
 
 	private void init() {
-		// Example usage of the generateVein method with MineralEnum
-
-		JsonArray entries = new JsonArray();
-
-		for(IWorldGenConfig wConfig : IGServerConfig.ORES.ores.keySet())
-		{
-			MaterialInterface<?> ore;
-			try
-			{
-				ore = MineralEnum.valueOf(wConfig.name());
-			} catch(Exception ex)
-			{
-				ore = MetalEnum.valueOf(wConfig.name());
-			}
-			if(wConfig.getVeinSize() > 0)
-			{
-				generateVein(wConfig.name().toLowerCase()+"_tfc", wConfig.rarity(), wConfig.density(), wConfig.getMinY(), wConfig.getMaxY(), wConfig.getVeinSize(), "", ore);
-				entries.add("immersivegeology:"+wConfig.name().toLowerCase()+"_tfc");
-			}
-		}
-		JsonObject tfc_veins = new JsonObject();
-		tfc_veins.addProperty("replace", false);
-		tfc_veins.add("values", entries);
-		elements.put(new ResourceLocation("tfc", "tags/worldgen/placed_feature/in_biome/veins"), () -> tfc_veins);
-
 		// --- New soil disc generation ---
 		// Define the list of state mappings for soil disc changes.
-
-
 		// Define parameters for the soil disc feature.
 		int minRadius = 3;
 		int maxRadius = 5;
@@ -144,53 +119,52 @@ public class TFCCompatOreProvider implements DataProvider {
 	}
 
 	// Updated generateVein method using MineralEnum
-	public void generateVein(String name, int rarity, double density, int minY, int maxY, int size, String biomes, MaterialInterface<?> mineral) {
+	public void generateVein(String name, MaterialInterface<?> mineral, long random_name) {
 		JsonObject veinConfigJson = new JsonObject();
-		veinConfigJson.addProperty("type", "tfc:cluster_vein");
+		veinConfigJson.addProperty("type", "immersivegeology:ig_ore");
 
 		JsonObject config = new JsonObject();
-		config.addProperty("rarity", rarity);
-		config.addProperty("density", density);
-		config.addProperty("min_y", minY);
-		config.addProperty("max_y", maxY);
-		config.addProperty("size", size);
-		config.addProperty("random_name", name);
-		if(!biomes.isEmpty()) config.addProperty("biomes", biomes);
+		config.addProperty("entry", mineral.getName());
+		config.addProperty("temp_range_min", mineral.getName());
+		config.addProperty("temp_range_max", mineral.getName());
+		config.addProperty("downfall_min", mineral.getName());
+		config.addProperty("downfall_max", mineral.getName());
+		config.addProperty("random_name", random_name);
 
-		JsonArray blocksArray = new JsonArray();
+		//JsonArray blocksArray = new JsonArray();
 
 		// Loop over all StoneEnum values to determine block replacements
-		for (StoneEnum stone : StoneEnum.values()) {
-			if(!stone.hasFlag(ModFlags.TFC)) continue;
-			if (!mineral.instance().acceptableStoneType(stone.instance()) || mineral.instance().checkExistingImplementation(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK)) {
-				continue; // Skip if not acceptable
-			}
+//		for (StoneEnum stone : StoneEnum.values()) {
+//			if(!stone.hasFlag(ModFlags.TFC)) continue;
+//			if (!mineral.instance().acceptableStoneType(stone.instance()) || mineral.instance().checkExistingImplementation(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK)) {
+//				continue; // Skip if not acceptable
+//			}
+//
+//			// Get the blocks for the different ore richness types
+//			List<Block> blocks = List.of(
+//					mineral.getOreBlock(stone, OreRichness.POOR).asBlock(),
+//					mineral.getOreBlock(stone, OreRichness.NORMAL).asBlock(),
+//					mineral.getOreBlock(stone, OreRichness.RICH).asBlock()
+//			);
+//
+//			// Create a block replacement entry for this stone type
+//			JsonObject blockObj = new JsonObject();
+//			JsonArray replaceArray = new JsonArray();
+//			replaceArray.add(stone.getTFCStoneLoc());
+//			blockObj.add("replace", replaceArray);
+//
+//			JsonArray withArray = new JsonArray();
+//			for (Block block : blocks) {
+//				JsonObject weightObj = new JsonObject();
+//				weightObj.addProperty("block", block.getDescriptionId().replaceFirst("block\\.", "").replaceFirst("\\.", ":")); // Get the block's registry name
+//				weightObj.addProperty("weight", getWeightForOreRichness(block)); // Use a custom method to calculate weight
+//				withArray.add(weightObj);
+//			}
+//			blockObj.add("with", withArray);
+//			blocksArray.add(blockObj);
+//		}
 
-			// Get the blocks for the different ore richness types
-			List<Block> blocks = List.of(
-					mineral.getOreBlock(stone, OreRichness.POOR).asBlock(),
-					mineral.getOreBlock(stone, OreRichness.NORMAL).asBlock(),
-					mineral.getOreBlock(stone, OreRichness.RICH).asBlock()
-			);
-
-			// Create a block replacement entry for this stone type
-			JsonObject blockObj = new JsonObject();
-			JsonArray replaceArray = new JsonArray();
-			replaceArray.add(stone.getTFCStoneLoc());
-			blockObj.add("replace", replaceArray);
-
-			JsonArray withArray = new JsonArray();
-			for (Block block : blocks) {
-				JsonObject weightObj = new JsonObject();
-				weightObj.addProperty("block", block.getDescriptionId().replaceFirst("block\\.", "").replaceFirst("\\.", ":")); // Get the block's registry name
-				weightObj.addProperty("weight", getWeightForOreRichness(block)); // Use a custom method to calculate weight
-				withArray.add(weightObj);
-			}
-			blockObj.add("with", withArray);
-			blocksArray.add(blockObj);
-		}
-
-		config.add("blocks", blocksArray);
+		//config.add("blocks", blocksArray);
 		veinConfigJson.add("config", config);
 
 		JsonObject placedConfigJson = new JsonObject();

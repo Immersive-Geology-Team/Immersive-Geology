@@ -183,7 +183,6 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	@Override
 	public boolean build(Consumer<FinishedRecipe> consumer)
 	{
-		IGLib.IG_LOGGER.info("Attempting to build Crystallizer Method {}", this.name);
 		try
 		{
 			CrystallizerRecipeBuilder builder = CrystallizerRecipeBuilder.builder(this.itemResult, this.fluid_out).addInput(this.fluidInput.get()).setEnergy(energy).setTime(time);

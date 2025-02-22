@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.Multibloc
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -106,5 +107,8 @@ public class IGMultiblockProvider {
                 .defaultBlock(IGRegistrationHolder.getBlockRegister(), IGRegistrationHolder.getItemRegister(), properties);
     }
 
-    public static void forceClassLoad(){};
+    public static void forceClassLoad()
+    {
+        IGLib.IG_LOGGER.info("- Providing Multiblocks to Immersive Engineering -");
+    };
 }

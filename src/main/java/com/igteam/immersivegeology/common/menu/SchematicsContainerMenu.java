@@ -61,6 +61,8 @@ public class SchematicsContainerMenu extends IEBaseContainerOld<DrawingTableBloc
 		}
 	}
 
+
+
 	public void rebindSlots()
 	{
 		this.slots.clear();

@@ -94,8 +94,10 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
             if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
             // Now for TFC Compat checks
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.substring(stoneName.lastIndexOf('/')+1)))){
-                return valueOf(stoneName);
+            String input = stoneState.getBlock().getName().getString().toLowerCase();
+            String rockType = capitalizeFirstLetter(input.substring(4));
+            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equals(rockType))){
+                return valueOf(rockType);
             }
         } catch(Exception ex) {
             IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone {}", ex.getMessage());

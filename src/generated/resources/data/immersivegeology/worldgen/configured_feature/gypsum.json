@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_wet",
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Gypsum",
-    "random_name": 4171440887114315450
+    "random_name": 4171440887114315450,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

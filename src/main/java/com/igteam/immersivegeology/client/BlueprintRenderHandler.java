@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.client;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.igteam.immersivegeology.client.renderer.IGRenderTypes;
+import com.igteam.immersivegeology.client.renderer.IGSchematicRenderer;
 import com.igteam.immersivegeology.common.item.blueprint.BlueprintProjection;
 import com.igteam.immersivegeology.common.item.blueprint.BlueprintProjection.Info;
 import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
@@ -97,7 +98,7 @@ public class BlueprintRenderHandler {
 						matrix.pushPose();
 						{
 							IGBlueprintSettings settings =  new IGBlueprintSettings(stack);
-							renderSchematic(matrix, settings, mc.player, mc.player.level(), event.getPartialTick());
+							IGSchematicRenderer.renderSchematic(matrix, settings, mc.player, mc.player.level());
 						}
 						matrix.popPose();
 					}
@@ -165,183 +166,9 @@ public class BlueprintRenderHandler {
 		ALL, BAD, PERFECT
 	}
 	static final MutableBlockPos FULL_MAX = new MutableBlockPos(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-	public static void renderSchematic(PoseStack matrix, IGBlueprintSettings settings, Player player, Level world, float partialTicks){
-		if(settings.getMultiblock() == null) return;
-		ItemStack heldStack = player.getMainHandItem();
-		final MutableBlockPos hit = new MutableBlockPos(FULL_MAX.getX(), FULL_MAX.getY(), FULL_MAX.getZ());
-		final MutableBoolean isPlaced = new MutableBoolean(false);
-		if(settings.getPos() != null)
-		{
-			hit.set(settings.getPos());
-			isPlaced.setTrue();
-		}
-
-		if(!hit.equals(FULL_MAX))
-		{
-			BlueprintProjection projection = new BlueprintProjection(world, settings.getMultiblock());
-			projection.setRotation(settings.getRotation());
-			projection.setFlip(settings.isMirrored());
-			Vec3i mb_size = settings.getMultiblock().getSize(world);
-
-			Map<BlockPos, Boolean> badStates = new HashMap<>();
-
-			AtomicInteger imperfection_layer = new AtomicInteger(-1);
-
-			final List<Pair<RenderLayer, Info>> toRender = new ArrayList<>();
-			final MutableInt currentLayer = new MutableInt();
-			final MutableInt badBlocks = new MutableInt();
-			final MutableInt goodBlocks = new MutableInt();
-			BiPredicate<Integer, Info> bipred = (layer, info) -> {
-				if(badBlocks.getValue() == 0 && layer > currentLayer.getValue()){
-					currentLayer.setValue(layer);
-				}else if(!Objects.equals(layer, currentLayer.getValue())){
-					return true; // breaks the internal loop
-				}
-				if(isPlaced.booleanValue()){ // Render only slices when placed
-					if(Objects.equals(layer, currentLayer.getValue())){
-						BlockPos realPos = info.tPos.offset(hit);
-						BlockState toCompare = world.getBlockState(realPos);
-						BlockState tState = info.getModifiedState(world, realPos);
-
-						boolean skip = false;
-						if(tState == toCompare){
-							toRender.add(Pair.of(RenderLayer.PERFECT, info));
-							goodBlocks.increment();
-							skip = true;
-						}else{
-							// Making it this far only needs an air check,
-							// the other already proved to be false.
-							if(!toCompare.isAir()){
-								toRender.add(Pair.of(RenderLayer.BAD, info));
-								skip = true;
-								if(tState.getBlock().defaultBlockState().equals(toCompare.getBlock().defaultBlockState()))
-								{
-									badStates.put(info.tPos, true);
-								} else
-								{
-									badStates.put(info.tPos, false);
-								}
-								imperfection_layer.set(layer);
-							}else{
-								badBlocks.increment();
-							}
-						}
-
-						if(skip){
-							return false;
-						}
-					}
-				}
-
-				toRender.add(Pair.of(RenderLayer.ALL, info));
-				return false;
-			};
-			projection.processAll(bipred);
-			boolean perfect = (goodBlocks.getValue() == projection.getBlockCount());
-			boolean hasImperfection = imperfection_layer.get() != -1;
-
-			if(hasImperfection)
-			{
-				currentLayer.setValue(imperfection_layer.get());
-			}
-
-			MutableBlockPos min = new MutableBlockPos(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-			MutableBlockPos max = new MutableBlockPos(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
-			float flicker = world.random.nextFloat() / 2F + 0.25F;
-			matrix.translate(hit.getX(), hit.getY(), hit.getZ());
-			toRender.sort((a, b) -> {
-				int ao = a.getFirst().ordinal();
-				int bo = b.getFirst().ordinal();
-				if(ao > bo){
-					return 1;
-				}else if(ao < bo){
-					return -1;
-				}
-				return 0;
-			});
-			MultiBufferSource.BufferSource mainBuffer = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-
-			matrix.pushPose();
-			{
-				if(!perfect)
-				{
-					if(settings.getRotation().equals(Rotation.CLOCKWISE_180) || settings.getRotation().equals(Rotation.NONE))
-					{
-						matrix.translate(-(Math.floorDiv(mb_size.getX(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getZ(),2)));
-						matrix.translate(0, currentLayer.getValue(), 0);
-						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getX(), mb_size.getY(), mb_size.getZ()), 16, 0.25f, hasImperfection ? 0xff0000 : 0xffffff);
-					}
-					else
-					{
-						matrix.translate(-(Math.floorDiv(mb_size.getZ(),2)), -mb_size.getY(), -(Math.floorDiv(mb_size.getX(),2)));
-						matrix.translate(0, currentLayer.getValue(), 0);
-						renderGrid(mainBuffer, matrix, Vec3.ZERO, new Vec3(mb_size.getZ(), mb_size.getY(), mb_size.getX()), 16, 0.25f, hasImperfection ? 0xff0000 : 0xffffff);
-					}
-
-				}
-			}
-			matrix.popPose();
-
-			for(Pair<RenderLayer, BlueprintProjection.Info> pair:toRender)
-			{
-				BlueprintProjection.Info rInfo = pair.getSecond();
-				boolean held = heldStack.getItem() == rInfo.getRawState().getBlock().asItem();
-				switch(pair.getFirst())
-				{
-					case ALL ->
-					{
-						float[] color;
-
-						color = held ? new float[]{0.2f, 1.0f, 0.5f} : new float[]{0.2f, 0.5f, 1.0f};
-
-
-						matrix.pushPose();
-						{
-							if(hasImperfection) continue;
-							renderPhantom(matrix, world, rInfo, settings.isMirrored(), flicker, color, partialTicks);
-
-							if(held)
-							{
-								renderCenteredOutlineBox(mainBuffer, matrix, 0x44ff44);
-							}
-						}
-						matrix.popPose();
-					}
-					case BAD ->
-					{
-						matrix.pushPose();
-						{
-							matrix.translate(rInfo.tPos.getX(), rInfo.tPos.getY(), rInfo.tPos.getZ());
-
-							renderCenteredOutlineBox(mainBuffer, matrix, badStates.get(rInfo.tPos) ? 0xFFFF00 : 0xFF0000);
-						}
-						matrix.popPose();
-					}
-					case PERFECT ->
-					{
-						int x = rInfo.tPos.getX();
-						int y = rInfo.tPos.getY();
-						int z = rInfo.tPos.getZ();
-
-						min.set(Math.min(x, min.getX()), Math.min(y, min.getY()), Math.min(z, min.getZ()));
-						max.set(Math.max(x, max.getX()), Math.max(y, max.getY()), Math.max(z, max.getZ()));
-					}
-				}
-			}
-			if(perfect)
-			{
-				matrix.pushPose();
-				{
-					renderOutlineBox(mainBuffer, matrix, min, max, 0x00BF00);
-				}
-				matrix.popPose();
-			}
-			mainBuffer.endBatch();
-		}
-	}
 
 	private static final Tesselator PHANTOM_TESSELATOR = new Tesselator();
-	private static void renderPhantom(PoseStack matrix, Level realWorld, BlueprintProjection.Info rInfo, boolean mirror, float flicker, float[] color, float partialTicks){
+	public static void renderPhantom(PoseStack matrix, Level realWorld, BlueprintProjection.Info rInfo, float[] color, float partialTicks){
 		BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
 		ModelBlockRenderer blockRenderer = dispatcher.getModelRenderer();
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
@@ -393,15 +220,15 @@ public class BlueprintRenderHandler {
 		buffer.endBatch();
 	}
 
-	private static void renderCenteredOutlineBox(MultiBufferSource buffer, PoseStack matrix, int rgb){
+	public static void renderCenteredOutlineBox(MultiBufferSource buffer, PoseStack matrix, int rgb){
 		renderBox(buffer, matrix, Vec3.ZERO, new Vec3(1, 1, 1), rgb);
 	}
 
-	private static void renderOutlineBox(MultiBufferSource buffer, PoseStack matrix, Vec3i min, Vec3i max, int rgb){
+	public static void renderOutlineBox(MultiBufferSource buffer, PoseStack matrix, Vec3i min, Vec3i max, int rgb){
 		renderBox(buffer, matrix, Vec3.atLowerCornerOf(min), Vec3.atLowerCornerOf(max).add(1, 1, 1), rgb);
 	}
 
-	private static void renderGrid(
+	public static void renderGrid(
 			MultiBufferSource buffer,
 			PoseStack matrix,
 			Vec3 origin,

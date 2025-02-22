@@ -53,29 +53,45 @@ public class ImmersiveGeology {
 
     public ImmersiveGeology() {
         IEventBus modEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
-        IGLib.IG_LOGGER.info("Immersive Geology Starting");
+        IGLib.IG_LOGGER.info("======== Starting Immersive Geology ========");
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
+        IGLib.IG_LOGGER.info("- Recipe Serializer Registration");
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+
+        IGLib.IG_LOGGER.info("- World Event Handler Registration");
         MinecraftForge.EVENT_BUS.register(new IGWorldSubscription());
 
+        IGLib.IG_LOGGER.info("- Client Configuration Registration");
         ModLoadingContext.get().registerConfig(Type.CLIENT, IGClientConfig.CONFIG_SPEC);
+
+        IGLib.IG_LOGGER.info("- Server Configuration Registration");
         ModLoadingContext.get().registerConfig(Type.SERVER, IGServerConfig.CONFIG_SPEC);
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
+        IGLib.IG_LOGGER.info("- Network Packet Handler Registration");
         IGPacketHandler.initialize();
+
         proxy.modConstruction();
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
+        IGLib.IG_LOGGER.info("- Custom Creative Menu Registration");
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
+        IGLib.IG_LOGGER.info("- Custom Multiblock Overlay Registration");
         MinecraftForge.EVENT_BUS.register(new IGOverlayHandler());
-        MinecraftForge.EVENT_BUS.register(new IGCommonForgeEvents());
+
+        IGLib.IG_LOGGER.info("- Client Render Handler Registration");
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
+
+        IGLib.IG_LOGGER.info("- Color Tint Registration");
         supplyMaterialTint();
 
+        IGLib.IG_LOGGER.info("- Container And Screen Registration");
         IGContent.registerContainersAndScreens();
+
+        IGLib.IG_LOGGER.info("- Custom IE Manual Entry Registration");
         IGContent.initializeManualEntries();
     }
 
@@ -155,12 +171,8 @@ public class ImmersiveGeology {
     public void setup(final FMLCommonSetupEvent event)
     {
         IGRegistrationHolder.buildMaterialRecipes();
-
-        Item IEItem = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
-        if(IEItem != null)
-        {
-            IGLib.IG_LOGGER.info("Got IE TagItem? {}", IEItem.toString());
-        }
+        IGLib.IG_LOGGER.info("- Event Handler Registration");
+        MinecraftForge.EVENT_BUS.register(new IGCommonForgeEvents());
     }
 
 }

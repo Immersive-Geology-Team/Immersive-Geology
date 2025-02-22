@@ -180,4 +180,28 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     {
         return instance().getAssociateMaterialSet();
     }
+
+    @Override
+    public double getMinSpawnTemp()
+    {
+        return -1;
+    }
+
+    @Override
+    public double getMaxSpawnTemp()
+    {
+        return 2;
+    }
+
+    @Override
+    public double getMinDownfall()
+    {
+        return 0;
+    }
+
+    @Override
+    public double getMaxDownfall()
+    {
+        return 1;
+    }
 }

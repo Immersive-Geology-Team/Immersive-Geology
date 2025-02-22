@@ -53,12 +53,19 @@ public class IGWorldGen
 
 	public static void init()
 	{
+		IGLib.IG_LOGGER.info("======== Registration of Immersive Geology World Generation ========");
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		IGLib.IG_LOGGER.info("- Features");
 		FEATURE_REGISTER.register(bus);
+		IGLib.IG_LOGGER.info("- TFC Compat Features");
 		TFC_FEATURE_REGISTER.register(bus);
+		IGLib.IG_LOGGER.info("- Placement");
 		PLACEMENT_REGISTER.register(bus);
+		IGLib.IG_LOGGER.info("- Height");
 		HEIGHT_REGISTER.register(bus);
+		IGLib.IG_LOGGER.info("- Biome Modifiers");
 		BIOME_MODIFIER_SERIALIZERS.register(bus);
+		IGLib.IG_LOGGER.info("Finished");
 	}
 
 	static

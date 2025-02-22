@@ -46,7 +46,7 @@ public class IGShaders
 		ShaderInstance instance = new ShaderInstance(event.getResourceProvider(), ResourceUtils.ig("rendertype_blueprint"), DefaultVertexFormat.POSITION_COLOR_TEX);
 
 		event.registerShader(instance,  s -> {
-			IGLib.IG_LOGGER.info("Render Type Blueprint Shader Loaded");
+			IGLib.IG_LOGGER.info("- Render Type Blueprint Shader Loaded");
 			shader_blueprint = s;
 
 			projection_time = shader_blueprint.safeGetUniform("Time");

@@ -1,7 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Alumina",
-    "random_name": 230390466647192666
+    "random_name": 230390466647192666,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

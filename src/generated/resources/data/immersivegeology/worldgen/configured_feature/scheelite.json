@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_mountain",
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Scheelite",
-    "random_name": 412773644477761860
+    "random_name": 412773644477761860,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

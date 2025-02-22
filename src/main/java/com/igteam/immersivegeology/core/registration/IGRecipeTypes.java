@@ -50,6 +50,8 @@ public class IGRecipeTypes
 
 	public static void init()
 	{
+		IGLib.IG_LOGGER.info("======== Registration of Immersive Geology Recipe Types ========");
 		REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+		IGLib.IG_LOGGER.info("Finished");
 	}
 }

@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#minecraft:is_overworld",
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Magnetite",
-    "random_name": -2783928071267860389
+    "random_name": -2783928071267860389,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

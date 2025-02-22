@@ -80,4 +80,12 @@ public interface IWorldGenConfig
 	double getAssociateMaterialChance();
 
 	Set<Pair<Supplier<MaterialHelper>, Integer>> getAssociateMaterialSet();
+
+	double getMinSpawnTemp();
+
+	double getMaxSpawnTemp();
+
+	double getMinDownfall();
+
+	double getMaxDownfall();
 }

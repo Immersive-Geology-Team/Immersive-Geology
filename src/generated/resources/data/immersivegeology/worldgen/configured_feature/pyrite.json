@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#minecraft:is_nether",
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Pyrite",
-    "random_name": -4259105351839840617
+    "random_name": -4259105351839840617,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

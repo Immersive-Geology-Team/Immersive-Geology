@@ -147,6 +147,16 @@ public class SchematicsScreen extends IEContainerScreen<SchematicsContainerMenu>
 	}
 
 	@Override
+	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
+	{
+		// Sometimes we get a Concurrent Modification error, this should prevent it from being an issue.
+		try
+		{
+			super.render(graphics, mouseX, mouseY, partialTicks);
+		} catch(Exception ignored){};
+	}
+
+	@Override
 	protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
 		graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x666666, false);
 		graphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0x666666, false);

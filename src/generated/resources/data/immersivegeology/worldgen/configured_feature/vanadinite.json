@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:ig_ore",
   "config": {
-    "biomes": "#forge:is_hot",
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
     "entry": "Vanadinite",
-    "random_name": 5057906446439222496
+    "random_name": 5057906446439222496,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

@@ -12,18 +12,12 @@ import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
-import com.igteam.immersivegeology.common.world.CodecHelper;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
-import com.igteam.immersivegeology.common.world.noise.SimplexNoise3D;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Either;
@@ -35,16 +29,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -52,8 +47,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.Tags.Biomes;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Function;
@@ -72,12 +65,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	{
 		IGOreFeatureConfig config = ctx.config();
 		if(!config.canSpawn()) return false;
+		ChunkGenerator chunkGenerator = ctx.chunkGenerator();
+		BiomeSource biomeSource = chunkGenerator.getBiomeSource();
 
 		WorldGenLevel level = ctx.level();
 		BlockPos pos = ctx.origin();
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
+		if(rConfig.veinSize.get() <= 0) return false;
+
 		int chance_max = 50000;
 		if(config.entry.instance().equals(MineralEnum.Unobtania.instance()))
 		{
@@ -87,6 +84,15 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 		if((random.nextInt(chance_max) < rConfig.generationChance.get()))
 		{
+			boolean noValidChunks = true;
+			if(!biomeSource.possibleBiomes().isEmpty())
+			{
+				if(config.canSpawnAt(pos, (p) -> biomeSource.getNoiseBiome(p.getX(), p.getY(), p.getZ(), Climate.empty())))
+				{
+					noValidChunks = false;
+				}
+			}
+			if(noValidChunks) return false;
 			IGOreFeature.placeVein(level, random, chunkPos, createVein(random, rConfig, config.seed()), config);
 			return true;
 		}
@@ -99,29 +105,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		int FEATURE_SIZE = config.veinSize.get();
 		INoise3D noise = config.generationPattern.get().getPattern().getiNoise3D(FEATURE_SIZE, seed);
 		return new Vein(defaultPosRespectingHeight(random, config), random, noise);
-	}
-
-	// Took awhile but this seems to be a fairly stable noise setup, larger feature size increases intensity
-	private static @NotNull INoise3D getiNoise3D(int featureSize, long seed)
-	{
-		SimplexNoise3D simplex = new SimplexNoise3D(seed);
-		SimplexNoise3D warpSimplex = new SimplexNoise3D(seed-1);
-
-		// Warp noise generator for spacing
-		INoise3D warp = (x, y, z) -> warpSimplex
-				.octaves(2, 1f)
-				.sinWarp(2,1)
-				.flattened(-1,1)
-				.bias(-.5f)
-				.noise(x / 24, y / 24, z / 24);
-
-		// Primary noise generator
-		return (x, y, z) -> simplex
-				.bias(-0.5f + (Math.max(0, Math.min(0.5f, (float)featureSize/ 100))))
-				.flattened(-1,1)
-				.octaves(2, 1f)
-				.add(warp)
-				.noise(x / 24, y /24, z /24);
 	}
 
 	private static BlockPos defaultPosRespectingHeight(RandomSource random, OreConfig config) {
@@ -211,10 +194,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 							useMaterial = getFriendMaterial(random, friends);
 						}
 						BlockState stoneState = level.getBlockState(cursor);
-						if(config.biomes.stream().anyMatch(Biomes.IS_HOT::equals))
-						{
 
-						}
 						if(stoneState.is(Blocks.AIR)) continue;
 						BlockState oreState = config.getStateToGenerate(stoneState, random, noiseValue, useMaterial);
 						if (oreState != null) {
@@ -291,12 +271,19 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	}
 
 
-	public record IGOreFeatureConfig(IWorldGenConfig entry, long seed, Optional<TagKey<Biome>> biomes) implements FeatureConfiguration
+	public record IGOreFeatureConfig(IWorldGenConfig entry, long seed, double temp_range_min, double temp_range_max, double downfall_min, double downfall_max) implements FeatureConfiguration
 	{
 		public static final MapCodec<IGOreFeatureConfig> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-			return instance.group(IWorldGenConfig.CODEC.fieldOf("entry").forGetter((c) -> c.entry),
-					Codec.either(Codec.STRING, Codec.LONG).xmap((e) -> e.map(IGOreFeatureConfig::hash, (l) -> l), Either::right).fieldOf("random_name").forGetter((c) -> c.seed),
-					CodecHelper.optionalFieldOf(TagKey.hashedCodec(Registries.BIOME), "biomes").forGetter((c) -> c.biomes)).apply(instance, IGOreFeatureConfig::new);
+			return instance.group(
+					IWorldGenConfig.CODEC.fieldOf("entry").forGetter((c) -> c.entry),
+					Codec.either(Codec.STRING, Codec.LONG)
+							.xmap((e) -> e.map(IGOreFeatureConfig::hash, (l) -> l), Either::right)
+							.fieldOf("random_name").forGetter((c) -> c.seed),
+					Codec.DOUBLE.fieldOf("temp_range_min").forGetter((c) -> c.temp_range_min),
+					Codec.DOUBLE.fieldOf("temp_range_max").forGetter((c) -> c.temp_range_max),
+					Codec.DOUBLE.fieldOf("downfall_min").forGetter((c) -> c.downfall_min),
+					Codec.DOUBLE.fieldOf("downfall_max").forGetter((c) -> c.downfall_max)
+			).apply(instance, IGOreFeatureConfig::new);
 		});
 
 		public int getSize() {
@@ -306,6 +293,20 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		public static long hash(String name) {
 			RandomSupport.Seed128bit seed128 = RandomSupport.seedFromHashOf(name);
 			return seed128.seedLo() ^ seed128.seedHi();
+		}
+
+		public boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
+			Holder<Biome> biome = biomeQuery.apply(pos);
+			// Get biome temperature and downfall
+			float biomeTemp = biome.value().getBaseTemperature();
+			float biomeDownfall = biome.value().getModifiedClimateSettings().downfall();
+			OreConfig config = IGServerConfig.ORES.ores.get(entry);
+
+			// Check if the biome's temperature and downfall are within the configured ranges
+			return biomeTemp >= config.min_downfall.get() &&
+					biomeTemp <= config.max_downfall.get() &&
+					biomeDownfall >= config.min_downfall.get() &&
+					biomeDownfall <= config.max_downfall.get();
 		}
 
 		public int getRarity() {
@@ -351,7 +352,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			}
 
 			// Checks if the stone is a MOD only type, and if so, is it available?
-			if(stone.isStoneTypeValid())
+			if(!stone.isStoneTypeValid())
 			{
 				return null;
 			}
@@ -381,10 +382,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		{
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.generationChance.get();
-		}
-
-		boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
-			return true;
 		}
 
 		public double getDensity()

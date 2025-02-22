@@ -70,6 +70,9 @@ public class IGContent {
 
     public static void initializeIETweaks()
     {
+        IGLib.IG_LOGGER.info("======== Registration of Immersive Geology IE Tweaks ========");
+        IGLib.IG_LOGGER.info("- Custom Chemical Thrower Recipes and Effects");
+
         ChemthrowerHandler.registerEffect(ChemicalEnum.ChemicalWaste.getFluidTag(), new ChemthrowerEffect()
         {
             @Override
@@ -101,6 +104,7 @@ public class IGContent {
                 }
             }
         });
+        IGLib.IG_LOGGER.info("Finished");
     }
 
     public static void registerContainersAndScreens()

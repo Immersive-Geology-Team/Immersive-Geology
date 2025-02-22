@@ -104,9 +104,7 @@ public class IGWorldGenerationProvider
 		for(final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet())
 		{
 			IWorldGenConfig data = entry.getKey();
-			// Register the configured feature
-
-			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getPreferredBiome())));
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getMinSpawnTemp(), data.getMaxSpawnTemp(), data.getMinDownfall(), data.getMaxDownfall())));
 		}
 
 		for (Map.Entry<IWorldGenConfig, FeatureRegistration> entry : evaporiteFeatures.entrySet())
@@ -129,7 +127,6 @@ public class IGWorldGenerationProvider
 		IGLib.IG_LOGGER.info("Starting Placement Registration");
 		for (final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet()) {
 			final IWorldGenConfig type = entry.getKey();
-			IGLib.IG_LOGGER.info("[" + type.name() + "]");
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
 					type.useSparsePlacement() ? IGSparsePlacement.spread() : InSquarePlacement.spread(),
@@ -141,7 +138,6 @@ public class IGWorldGenerationProvider
 
 		for (final Entry<IWorldGenConfig, FeatureRegistration> entry : evaporateFeatures.entrySet()) {
 			final IWorldGenConfig type = entry.getKey();
-			IGLib.IG_LOGGER.info("[" + type.name() + "]");
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
 					type.useSparsePlacement() ? IGSparsePlacement.spread() : InSquarePlacement.spread(),
@@ -203,7 +199,6 @@ public class IGWorldGenerationProvider
 		private FeatureRegistration(ResourceLocation name, Optional<TagKey<Biome>> optional) {
 			this.name = name != null ? name : new ResourceLocation("default:feature_name");
 			this.inBiomes = null;
-			IGLib.IG_LOGGER.info("Name: {}", name) ;
 		}
 
 		private void registerConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured) {

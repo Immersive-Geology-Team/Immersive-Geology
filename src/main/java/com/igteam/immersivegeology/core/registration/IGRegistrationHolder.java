@@ -188,6 +188,7 @@ public class IGRegistrationHolder {
 
     private static void setupFormationLists()
     {
+        IGLib.IG_LOGGER.info("- Custom Multiblock Formation Data");
         stone_mb.add(IGBloomeryMultiblock.class);
         stone_mb.add(AlloySmelterMultiblock.class);
 
@@ -263,18 +264,14 @@ public class IGRegistrationHolder {
 
     public static synchronized void initialize()
     {
-        IGLib.IG_LOGGER.info("Starting Registration of IG Multiblocks, Items, Blocks and Fluids");
         initializeMultiblocks();
         setupFormationLists();
-
+        IGLib.IG_LOGGER.info("- Static Items and Blocks");
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
-
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32, formationFormat(stone_mb)));
-
         registerItem(ItemCategoryFlags.BLUEPRINT.getRegistryKey(MiscEnum.Blueprint), () -> new IGMultiblockBlueprint(ItemCategoryFlags.BLUEPRINT, MiscEnum.Blueprint));
-
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
 
@@ -287,10 +284,10 @@ public class IGRegistrationHolder {
 
         DRAWING_TABLE = TE_REGISTER.register("drawing_table_type", makeType(DrawingTableBlockEntity::new, BLOCK_REGISTRY_MAP.get("drawing_table")));
 
-
         LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
 
+        IGLib.IG_LOGGER.info("- Material Based Items, Blocks and Fluids");
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){
                 // checks is the material has any ModFlags (e.g. Beyond Earth), if it does, check if none are loaded, if so skip material
@@ -368,7 +365,6 @@ public class IGRegistrationHolder {
                         case FLUID -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
-                            IGLib.IG_LOGGER.info("Registration of Fluid for {}", registryKey);
                             ItemCategoryFlags bucket_type = material instanceof MetalEnum ? ItemCategoryFlags.BUCKET : ItemCategoryFlags.CLEAN_FLASK;
                             // Still
                             registerFluid(registryKey, () -> new IGFluid.Source(material, null, blockCategory, bucket_type));
@@ -389,7 +385,6 @@ public class IGRegistrationHolder {
                                     if(!chemical.hasSlurryWith(slurry_material)) continue;
 
                                     String registryKey = blockCategory.getRegistryKey(material, slurry_material);
-                                    IGLib.IG_LOGGER.info("Registration of Slurry for {}", registryKey);
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
 
@@ -414,7 +409,6 @@ public class IGRegistrationHolder {
                                     if(!chemical.hasSlurryWith(slurry_material) || slurry_material instanceof MetalEnum) continue;
 
                                     String registryKey = blockCategory.getRegistryKey(material, slurry_material);
-                                    IGLib.IG_LOGGER.info("Registration of Cloudy Slurry for {}", registryKey);
                                     // Fluid Type Registration
                                     registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
 
@@ -453,7 +447,8 @@ public class IGRegistrationHolder {
                 }
             }
         }
-        IGLib.IG_LOGGER.info("Completed Registration of IG Multiblocks, Items, Blocks and Fluids");
+
+        IGLib.IG_LOGGER.info("Finished");
     }
 
     public static MultiblockRegistration<?> getMB(String key){
@@ -462,6 +457,7 @@ public class IGRegistrationHolder {
 
     private static void initializeMultiblocks()
     {
+        IGLib.IG_LOGGER.info("- Multiblocks");
         registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
         registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY);
         registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
@@ -516,12 +512,22 @@ public class IGRegistrationHolder {
     }
 
     public static void addRegistersToEventBus(final IEventBus eventBus){
+
+        IGLib.IG_LOGGER.info("======== Registration of Immersive Geology Items, Blocks and Fluids ========");
+        IGLib.IG_LOGGER.info("- Block Registration");
         BLOCK_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Item Registration");
         ITEM_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Fluid Registration");
         FLUID_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Fluid Type Registration");
         FLUIDTYPE_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Tile Entity Registration");
         TE_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Custom Creative Tab Registration");
         TAB_REGISTER.register(eventBus);
+
+        IGLib.IG_LOGGER.info("- Custom Menu Type Registration");
         IGMenuTypes.REGISTER.register(eventBus);
 
         MOD_BUS_CALLBACKS.forEach(e -> e.accept(eventBus));

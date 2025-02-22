@@ -197,14 +197,7 @@ public interface MaterialHelper {
     Set<String> logged_recipes = new HashSet<>();
 	static void logRecipeStages()
 	{
-        final int CHUNK_SIZE = 10; // Number of recipes per row
-        List<String> recipesList = new ArrayList<>(logged_recipes); // Convert Set to List for indexing
-        IGLib.IG_LOGGER.info("Finished Stages for the following Minerals:");
-        for (int i = 0; i < recipesList.size(); i += CHUNK_SIZE) {
-            int end = Math.min(i + CHUNK_SIZE, recipesList.size()); // Ensure we don't go out of bounds
-            List<String> chunk = recipesList.subList(i, end); // Get the chunk
-            IGLib.IG_LOGGER.info(" {}", chunk);
-        }
+        IGLib.IG_LOGGER.info("{} Recipe Stages have been registered", logged_recipes.size());
 	}
 
 	default TagKey<Item> getItemTag(IFlagType<?> unknownFlag)
