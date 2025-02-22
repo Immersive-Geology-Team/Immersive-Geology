@@ -225,18 +225,6 @@ public class IGRecipeOverview extends SpecialManualElements
 			pose.popPose();
 		}
 		pose.popPose();
-
-		// Rotate to point towards end point
-
-		// Draw the line
-
-//		// Draw arrow head
-//		if (length > 10) { // Only draw arrow if line is long enough
-//			int arrowSize = 4;
-//			graphics.fill(length - arrowSize, -arrowSize, length, 0, color);
-//			graphics.fill(length - arrowSize, 0, length, arrowSize, color);
-//		}
-
 	}
 
 	@Override
