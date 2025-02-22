@@ -19,6 +19,9 @@
   "manual.immersivegeology.main": "Immersive Geology",
   "manual.immersivegeology.direct_blasting.subtext": "Direct Blasting",
   "manual.immersivegeology.sulphide_electrowining.subtext": "Sulphide Electrowining",
+  "manual.immersivegeology.hunter_process.subtext": "Hunter Process",
+  "manual.immersivegeology.becher_process.subtext": "Becher Process",
+
 
   "manual.immersivegeology.cuprite.desc": "Testing the Cuprite description for something using the manual",
   "manual.immersivegeology.chalcocite.desc": "Testing the Chalcocite description for something using the manual",

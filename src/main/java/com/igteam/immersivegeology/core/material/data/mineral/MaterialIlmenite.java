@@ -10,6 +10,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
@@ -18,6 +19,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialIlmenite extends MaterialMineral {
+
+    protected IGRecipeChain becher_process = new IGRecipeChain(this, "Becher process", 0);
 
     public MaterialIlmenite() {
         super();
@@ -55,20 +58,24 @@ public class MaterialIlmenite extends MaterialMineral {
 
         IGMethodBuilder.decompose(this, IGStageDesignation.PURIFICATION).create(
                 "crushed_ore_"+getName()+"_to_slag", getStack( ItemCategoryFlags.SLAG, 1),
-                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600).addToTree(becher_process);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG);
+                ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG).addToTree(becher_process);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000);
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000)
+                .addToTree(becher_process);
 
         //Important - NO WATER in reactions!
 
-        //TODO Titanium extraction. Hunter process (Sodium) OR Kroll process (Magnesium)
+    }
 
-
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(becher_process);
     }
 }
