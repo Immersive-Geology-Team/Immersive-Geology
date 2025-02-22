@@ -4,7 +4,7 @@
     "tag": "forge:pellets/sphalerite"
   },
   "result": {
-    "item": "immersivegeology:ingot_zinc"
+    "item": "minecraft:iron_ingot"
   },
   "slag": {
     "item": "immersiveengineering:slag"

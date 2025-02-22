@@ -1,14 +1,14 @@
 {
   "type": "immersivegeology:gravityseparator",
   "byproduct": {
-    "item": "immersivegeology:metal_oxide_molybdenum"
+    "item": "immersivegeology:metal_oxide_iron"
   },
   "byproduct_chance": 0.075,
   "input": {
     "tag": "forge:powdered_slag/pyrite"
   },
   "result": {
-    "item": "immersivegeology:metal_oxide_iron"
+    "item": "immersivegeology:metal_oxide_molybdenum"
   },
   "time": 200,
   "water": 1000

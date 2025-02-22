@@ -1,10 +1,10 @@
 {
   "type": "immersiveengineering:blast_furnace",
   "input": {
-    "tag": "forge:pellets/pyrolusite"
+    "tag": "forge:pellets/smithsonite"
   },
   "result": {
-    "item": "minecraft:iron_ingot"
+    "item": "immersivegeology:ingot_zinc"
   },
   "slag": {
     "item": "immersiveengineering:slag"
