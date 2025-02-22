@@ -25,6 +25,8 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -34,6 +36,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialAlumina extends MaterialMineral {
+
+    protected IGRecipeChain bayer_process = new IGRecipeChain(this, "Bayer process", 0);
 
     public MaterialAlumina() {
         super();
@@ -63,20 +67,25 @@ public class MaterialAlumina extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
-                .create("crushed_ore" + getName() + "_to_dust", getStack(ItemCategoryFlags.CRUSHED_ORE, 1), getStack(ItemCategoryFlags.GRIT, 1), 10000, 100);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
-                ItemCategoryFlags.POWDER, 200, 16000);
+        IGRecipeNode prep = IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
+                .create("crushed_ore" + getName() + "_to_dust", getStack(ItemCategoryFlags.CRUSHED_ORE, 1),
+                        getStack(ItemCategoryFlags.GRIT, 1), 10000, 100).addToTree(bayer_process);
 
-        IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION)
-                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
+        IGRecipeNode grit = IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100).addToTree(bayer_process, prep);
+        IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER).addToTree(bayer_process, prep);
+
+        IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000).addToTree(bayer_process, grit);
+
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
                 .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST),
                         FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT),
                         new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
-                        null, null, 200, 51200);
+                        null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "dust_"+getName()+"_to_ingot",
@@ -86,6 +95,13 @@ public class MaterialAlumina extends MaterialMineral {
                         new IngredientWithSize(IETags.coalCokeDust, 1),
                         new IngredientWithSize(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 1))
                 .addExtras(MineralEnum.Cryolite.getItemTag(ItemCategoryFlags.POWDER), 0.4f)
-                .setTimeAndEnergy(200, 10240);
+                .setTimeAndEnergy(200, 10240).joinBranches(bayer_process, powder_a, powder_b);
+
+    }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(bayer_process);
     }
 }

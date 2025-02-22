@@ -5,8 +5,8 @@
     "item": "immersivegeology:crushed_ore_anatase"
   },
   "result": {
-    "item": "immersivegeology:powder_anatase"
+    "item": "immersivegeology:grit_anatase"
   },
   "secondaries": [],
-  "time": 200
+  "time": 100
 }

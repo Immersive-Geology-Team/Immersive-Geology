@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -23,9 +24,12 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -45,6 +49,7 @@ public class MaterialAnatase extends MaterialMineral {
         // TODO: Banish to the END of time
         CONFIG = new MineralConfig(18,70,1,-64,70,2000,0.5, true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
+    protected IGRecipeChain hunter_process = new IGRecipeChain(this, "Hunter Process", 0);
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
@@ -65,31 +70,45 @@ public class MaterialAnatase extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
-        super.setupRecipeStages();
+        IGRecipeNode prep = IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE,
+                ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100).addToTree(hunter_process);
 
-        IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create( "crushed_ore_" +getName() + "_to_dust",
-                getStack(ItemCategoryFlags.CRUSHED_ORE, 1),
-                getStack(ItemCategoryFlags.POWDER, 1), 6000, 200);
+        IGRecipeNode grit = IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100).addToTree(hunter_process, prep);
+        IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER).addToTree(hunter_process, prep);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
-                "dust_" + getName()+"_to_slurry",
+        IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000).addToTree(hunter_process, grit);
+
+        IGRecipeNode ticl = IGMethodBuilder.chemical(this, IGStageDesignation.PREPARATION).create(getName()+"_metal_oxide_to_slurry",
                 ItemStack.EMPTY,
-                new FluidStack(ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Titanium), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.DUST_TO_SLURRY_AMOUNT),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
-                null,
-                null,
-                200, 51200);
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Titanium, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200).joinBranches(hunter_process, powder_a, powder_b);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "slurry_" + getName()+"_to_dust",
                 MetalEnum.Titanium.getStack(ItemCategoryFlags.POWDER, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
-                new FluidStack(ChemicalEnum.Brine.getFluid(BlockCategoryFlags.FLUID), 250),
-                new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemCategoryFlags.POWDER), 1),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(FluidTags.WATER, 150),
-                null,
-                200, 51200);
+                ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
+                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
+                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                null, 200, 51200).addToTree(hunter_process, ticl);
 
+        IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
+                MetalEnum.Titanium.getStack(ItemCategoryFlags.POWDER, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
+                ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
+                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
+                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                null, 200, 51200).addToTree(hunter_process, ticl);
+    }
+
+    @Override
+    public Set<IGRecipeChain> getRecipeChains()
+    {
+        return Set.of(hunter_process);
     }
 }

@@ -11,13 +11,13 @@
   },
   "fluidResult": {
     "amount": 360,
-    "fluid": "immersivegeology:slurry_brine_rocksalt"
+    "fluid": "immersivegeology:slurry_brine_carnallite"
   },
   "itemInput": {
     "base_ingredient": {
-      "item": "immersivegeology:grit_sodium"
+      "item": "immersivegeology:grit_magnesium"
     },
-    "count": 4
+    "count": 3
   },
   "itemResult": {
     "item": "immersivegeology:powder_titanium"
