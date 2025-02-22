@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.material.helper.flags;
 
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLLoader;
 
 public enum ModFlags implements IFlagType<ModFlags> {
     MINECRAFT,

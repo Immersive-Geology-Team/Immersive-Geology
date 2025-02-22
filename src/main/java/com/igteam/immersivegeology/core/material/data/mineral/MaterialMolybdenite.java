@@ -22,6 +22,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
+import java.util.List;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
