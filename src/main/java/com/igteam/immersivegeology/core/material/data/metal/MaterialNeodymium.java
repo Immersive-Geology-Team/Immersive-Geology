@@ -31,6 +31,7 @@ public class MaterialNeodymium extends MaterialMetal
 
     public MaterialNeodymium() {
         super();
+        removeMaterialFlags(ItemCategoryFlags.WIRE);
     }
 
     @Override

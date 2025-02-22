@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "forge:powders/smithsonite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_smithsonite"
+  },
+  "time": 600
+}

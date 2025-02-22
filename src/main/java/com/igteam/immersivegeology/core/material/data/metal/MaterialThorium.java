@@ -28,6 +28,7 @@ public class MaterialThorium extends MaterialMetal {
 
     public MaterialThorium() {
         super();
+        removeMaterialFlags(ItemCategoryFlags.WIRE);
     }
 
     @Override

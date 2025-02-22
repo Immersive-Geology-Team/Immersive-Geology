@@ -10,26 +10,22 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.BlueprintCraftingRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.BlueprintCraftingRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
-import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
+import blusunrize.immersiveengineering.common.register.IEBlocks.StoneDecoration;
+import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
-import blusunrize.immersiveengineering.common.util.compat.crafttweaker.managers.BlueprintCraftingRecipeManager;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
-import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings;
-import com.igteam.immersivegeology.common.item.blueprint.IGBlueprintSettings.Mode;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
@@ -41,7 +37,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -51,13 +46,10 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -197,6 +189,18 @@ public class IGRecipes extends RecipeProvider
 				.group("raw_fire_clay").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, "craft_raw_fire_clay");
 
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_fire_clay), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_fire_clay)).save(consumer, "cook_refractory_brick");
+		// Titanium Reinforced Concrete
+		Block trconcrete = IGRegistrationHolder.getBlock.apply("trconcrete");
+		Item titanium_ingot = MetalEnum.Titanium.getItem(ItemCategoryFlags.INGOT);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, trconcrete, 9)
+				.pattern("PWP")
+				.pattern("RCR")
+				.pattern("PWP")
+				.define('P', Ingredient.of(MetalEnum.Titanium.getItemTag(ItemCategoryFlags.PLATE)))
+				.define('W', Ingredient.of(MetalEnum.Titanium.getItemTag(ItemCategoryFlags.WIRE)))
+				.define('R', Ingredient.of(MetalEnum.Titanium.getItemTag(ItemCategoryFlags.ROD)))
+				.define('C', Ingredient.of(IEFluids.CONCRETE.getBucket())).group("ig_engineering").unlockedBy("has_titanium", InventoryChangeTrigger.TriggerInstance.hasItems(titanium_ingot)).save(consumer, "craft_titanium_concrete");
+
 		//Computational Engineering Block
 		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
 		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
@@ -209,6 +213,7 @@ public class IGRecipes extends RecipeProvider
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
 				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering");
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
 				.pattern("ACA")
 				.pattern("BPB")
@@ -217,7 +222,26 @@ public class IGRecipes extends RecipeProvider
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
 				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering_2");
+
+		for(MetalEnum metal : MetalEnum.values())
+		{
+			if(metal.hasFlag(ItemCategoryFlags.PLATE) && !metal.instance().hasExistingFlag(ItemCategoryFlags.PLATE) && plates_and_rods_to_register.contains(metal))
+			{
+				MetalPressRecipeBuilder.builder(Molds.MOLD_PLATE, metal.getItemTag(ItemCategoryFlags.PLATE), 1).addInput(metal.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_plate_"+metal.getName()));
+			}
+			if(metal.hasFlag(ItemCategoryFlags.WIRE) && !metal.instance().hasExistingFlag(ItemCategoryFlags.WIRE) && wires_to_register.contains(metal))
+			{
+				MetalPressRecipeBuilder.builder(Molds.MOLD_WIRE, metal.getItemTag(ItemCategoryFlags.WIRE), 2).addInput(metal.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_wire_"+metal.getName()));
+			}
+			if(metal.hasFlag(ItemCategoryFlags.ROD) && !metal.instance().hasExistingFlag(ItemCategoryFlags.ROD) && plates_and_rods_to_register.contains(metal))
+			{
+				MetalPressRecipeBuilder.builder(Molds.MOLD_ROD, metal.getItemTag(ItemCategoryFlags.ROD), 2).addInput(metal.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_rod_"+metal.getName()));
+			}
+		}
 	}
+
+	private static final List<MetalEnum> plates_and_rods_to_register = List.of(MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium, MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);
+	private static final List<MetalEnum> wires_to_register = List.of(MetalEnum.Neodymium, MetalEnum.Titanium);
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
 	{
@@ -296,7 +320,6 @@ public class IGRecipes extends RecipeProvider
 		}
 
 		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT)).addInput(new IngredientWithSize(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 2)).addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/component_hastelloy"));
-		MetalPressRecipeBuilder.builder(Molds.MOLD_PLATE, MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 1).addInput(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_plate_"+MetalEnum.Hastelloy.getName()));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, IGRegistrationHolder.getBlock.apply("chemical_engineering"), 4)
 				.unlockedBy("has_hastelloy_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
 						.define('s', MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', MetalEnum.Silver.getItem(ItemCategoryFlags.INGOT))

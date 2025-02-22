@@ -4,7 +4,7 @@
     "tag": "forge:pellets/galena"
   },
   "result": {
-    "item": "immersivegeology:ingot_osmium"
+    "item": "immersiveengineering:ingot_lead"
   },
   "slag": {
     "item": "immersiveengineering:slag"

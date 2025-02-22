@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 
@@ -22,6 +23,8 @@ public class MaterialSodium extends MaterialMetal
 	{
 		super();
 		addFlags(ItemCategoryFlags.COMPOUND_DUST);
+		removeMaterialFlags(ItemCategoryFlags.WIRE, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.GEAR);
+		removeMaterialFlags(BlockCategoryFlags.SHEETMETAL_BLOCK,BlockCategoryFlags.SHEETMETAL_SLAB, BlockCategoryFlags.SHEETMETAL_STAIRS);
 	}
 
 	@Override

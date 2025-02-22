@@ -231,6 +231,19 @@ public class IGRegistrationHolder {
         });
     }
 
+    private static void registerBlockAndItem(String registryKey, BlockCategoryFlags blockCategory, MaterialInterface<?> material, BlockBehaviour.Properties properties)
+    {
+        Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material, properties);
+        registerBlock(registryKey, blockProvider);
+        registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)){
+            @Override
+            public @NotNull Component getName(ItemStack pStack)
+            {
+                return Component.translatable(this.getDescriptionId(pStack));
+            }
+        });
+    }
+
 
     public static <T extends BlockEntity> Supplier<BlockEntityType<T>> makeType(BlockEntityType.BlockEntitySupplier<T> create, Supplier<? extends Block> valid)
     {
@@ -267,6 +280,7 @@ public class IGRegistrationHolder {
 
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
         registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
+        registerBlockAndItem("trconcrete", BlockCategoryFlags.MISC, MetalEnum.Titanium, BlockBehaviour.Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(55, 1200));
 
         registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
         registerItem("drawing_table", () -> new IGGenericBlockItem((IGBlockType) getBlock.apply("drawing_table")));

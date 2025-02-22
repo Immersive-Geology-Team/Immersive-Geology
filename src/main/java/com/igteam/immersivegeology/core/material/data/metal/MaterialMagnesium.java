@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 
 import java.util.function.BiFunction;
 
@@ -17,6 +18,7 @@ public class MaterialMagnesium extends MaterialMetal {
 
     public MaterialMagnesium() {
         super();
+        removeMaterialFlags(ItemCategoryFlags.WIRE);
     }
 
     @Override

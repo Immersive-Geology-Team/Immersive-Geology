@@ -474,6 +474,8 @@
   "advancement.immersivegeology.metal_crystal.desc": "Obtain any metal crystal",
 
   "block.immersivegeology.chemical_engineering": "Chemical Engineering Block",
+  "block.immersivegeology.srconcrete": "Steel Reinforced Concrete",
+  "block.immersivegeology.trconcrete": "Titanium Reinforced Concrete",
   "block.immersivegeology.computational_engineering": "Computational Engineering Block",
 
   "item.immersivegeology.raw_fire_clay": "Fire Clay Ball",

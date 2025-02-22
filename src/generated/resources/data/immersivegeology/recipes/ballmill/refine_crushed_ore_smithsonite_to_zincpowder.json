@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:crushed_ore/smithsonite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_smithsonite"
+  },
+  "time": 800
+}
