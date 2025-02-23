@@ -9,9 +9,13 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -19,6 +23,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialColorHe
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,10 +71,14 @@ public class MaterialSilver extends MaterialNativeMetal {
                 ChemicalEnum.HydrochloricAcid,
                 ItemCategoryFlags.CRYSTAL);
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
-                ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
+        IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
+                ItemStack.EMPTY,
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Silver, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
 
-        IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(
-                ItemCategoryFlags.GRIT, ItemCategoryFlags.INGOT);
+
     }
 }

@@ -23,6 +23,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
@@ -55,5 +56,15 @@ public class MaterialPlatinum extends MaterialNativeMetal {
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125), 200, 51200);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST),
+                ChemicalEnum.AquaRegia.getSlurryWith(MetalEnum.Platinum, 2*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, 200, 51200);
+
     }
 }

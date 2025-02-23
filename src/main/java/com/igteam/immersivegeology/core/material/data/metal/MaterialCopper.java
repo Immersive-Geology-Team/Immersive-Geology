@@ -9,10 +9,15 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -68,6 +73,21 @@ public class MaterialCopper extends MaterialNativeMetal {
                 ItemCategoryFlags.COMPOUND_DUST, 1,
                 ItemCategoryFlags.METAL_OXIDE, 1,
                 1000, 250);
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create( ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT ,6000, 100);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
+                ItemStack.EMPTY,
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Copper, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
+                ChemicalEnum.HydrochloricAcid, ItemCategoryFlags.CRYSTAL);
+
     }
 
     @Override
