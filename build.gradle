@@ -12,7 +12,7 @@ plugins {
     id 'eclipse'
 }
 
-version = '0.5.3-b' + version_buildnumber
+version = '0.5.4-b' + version_buildnumber
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -33,6 +33,12 @@ sourceSets {
         }
     }
     datagen {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+    gametest {
         compileClasspath += main.compileClasspath
         runtimeClasspath += main.runtimeClasspath
         compileClasspath += main.output
@@ -149,16 +155,23 @@ minecraft {
         }
         gameTestServer {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
 
+            // Recommended logging data for a gametest environment
+            property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+
+            // Enable GameTest for your mod
             property 'forge.enabledGameTestNamespaces', 'immersivegeology'
+
+            // Disable GUI for test server
+            arg '-nogui'
 
             ideaModule project.name + ".gametest"
 
             mods {
                 immersivegeology {
                     source sourceSets.main
+                    source sourceSets.gametest
                 }
             }
         }
@@ -223,6 +236,22 @@ dependencies {
     datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+// Add test configuration
+tasks.named('test') {
+    useJUnitPlatform()
+
+    // Always run tests
+    outputs.upToDateWhen { false }
+
+    // Show test output
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 def customGradle = rootProject.file('custom.gradle');
