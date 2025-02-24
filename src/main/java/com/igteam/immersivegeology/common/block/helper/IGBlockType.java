@@ -30,4 +30,6 @@ public interface IGBlockType {
 
     Map<MaterialTexture, MaterialInterface<?>> getMaterialMap();
     int getColor(int index, BlockState state);
+
+	default boolean usePickaxeToMine() {return true;};
 }

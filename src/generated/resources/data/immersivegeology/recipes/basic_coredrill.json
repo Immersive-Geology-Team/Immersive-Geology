@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:coredrill",
+  "fluidResult": {
+    "amount": 1,
+    "fluid": "immersivegeology:fluid_moltenmantle"
+  },
+  "input": {
+    "amount": 1,
+    "tag": "minecraft:water"
+  }
+}

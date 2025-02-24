@@ -267,6 +267,7 @@ public class IGRegistrationHolder {
         initializeMultiblocks();
         setupFormationLists();
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
+        registerItem("firestarter", IGFireStarter::new);
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
@@ -277,7 +278,7 @@ public class IGRegistrationHolder {
 
         registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
         registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
-        registerBlockAndItem("trconcrete", BlockCategoryFlags.MISC, MetalEnum.Titanium, BlockBehaviour.Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(55, 1200));
+        registerBlockAndItem("trconcrete", BlockCategoryFlags.MISC, MetalEnum.Titanium, BlockBehaviour.Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200));
 
         registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
         registerItem("drawing_table", () -> new IGGenericBlockItem((IGBlockType) getBlock.apply("drawing_table")));

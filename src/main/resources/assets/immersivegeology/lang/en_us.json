@@ -37,6 +37,8 @@
   "manual.immersivegeology.hall-heroit_process.subtext": "Hall-Heroit Process",
   "manual.immersivegeology.bayer_process.subtext": "Bayer Process",
 
+
+
   "manual.immersivegeology.minerals": "Minerals",
   "manual.immersivegeology.common": "Common Minerals",
   "manual.immersivegeology.uncommon": "Uncommon Minerals",
@@ -136,6 +138,7 @@
 
   "item.immersivegeology.prospector_pick": "Geologist Pick",
   "item.immersivegeology.metal_oxide": "%s Oxide",
+  "item.immersivegeology.firestarter": "Firestarter",
   "item.immersivegeology.sediment": "%s Sediment",
   "item.immersivegeology.dirty_crushed_ore": "Dirty Crushed %s Ore",
   "item.immersivegeology.crushed_ore": "Crushed %s Ore",

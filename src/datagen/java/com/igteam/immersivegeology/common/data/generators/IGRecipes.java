@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.BlueprintCraftingRecipeBuilder;
@@ -25,6 +26,7 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -44,12 +46,14 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -95,10 +99,18 @@ public class IGRecipes extends RecipeProvider
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
 
+
+		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
+
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
 				.save(consumer, IGLib.MODID+":ig_item_repair");
 
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
+		Item firestarter = IGRegistrationHolder.getItem.apply("firestarter");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, firestarter)
+				.pattern("S ")
+				.pattern(" S")
+				.define('S', Items.STICK).group("firestarter").unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, "craft_firestarter");
 
 		// Bronze Hammer
 		Item toolkit_0 = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);

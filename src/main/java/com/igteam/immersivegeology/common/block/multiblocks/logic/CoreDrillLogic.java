@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
@@ -27,6 +28,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Process
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.fluids.IEFluid;
 import blusunrize.immersiveengineering.common.register.IEFluids;
+import blusunrize.immersiveengineering.common.register.IEParticles;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
@@ -35,11 +37,13 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -74,30 +78,90 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
 
     public static final int TANK_VOLUME = 8*FluidType.BUCKET_VOLUME;
     //TODO implement sister system to the Excavator, all 'core fluids' show as the same until processed.
-    public static final int ENERGY_CONSUMPTION_RATE = 2048; // Per tick
+    public static final int ENERGY_CONSUMPTION_RATE = 4092; // Per tick
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         final State state = context.getState();
-        Random rand = new Random();
+        // Particles
         if(state.renderAsActive)
         {
             if(state.spinDown && state.spinWait == 1)
             {
-                state.drill_angle = (state.drill_angle+state.drill_spin_rate)%360;
-                state.gear_clockwise_angle = ((state.drill_height) / 4f) * 260;
-                state.gear_counter_clockwise_angle = ((state.drill_height * -1) / 4f) * 260;
-                state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state) + (rand.nextInt(0, 100) > 15 ? rand.nextFloat() * 0.025f: 0f);
-                state.drill_shake = rand.nextInt(0, 100) > 15 ? rand.nextFloat(0, 0.01f) : 0;
+                Vec3 position = new Vec3(4.5f, 0, 4.5f);
+
+                double xSpeed = ApiUtils.RANDOM.nextDouble(-0.25f, 0.25f);
+                double zSpeed = ApiUtils.RANDOM.nextDouble(-0.25f, 0.25f);
+
+                if(!state.drill_direction)
+                {
+                    final Vec3 absoluteSmokePosition = context.getLevel().toAbsolute(position);
+                    context.getLevel().getRawLevel().addAlwaysVisibleParticle(
+                            ParticleTypes.POOF,
+                            absoluteSmokePosition.x, absoluteSmokePosition.y, absoluteSmokePosition.z,
+                            xSpeed, 0.0625, zSpeed);
+
+                }
+
+                for(int i = 0; i < 4; i++)
+                {
+                    Vec3 exhaust = context.getLevel().toAbsolute(new Vec3(2.75f, (8.25f+state.drill_height)-(i*0.6f), 4.5f));
+                    zSpeed = ApiUtils.RANDOM.nextDouble(-0.2, -0.015625);
+                    xSpeed = ApiUtils.RANDOM.nextDouble(-0.015625, 0.005625);
+                    context.getLevel().getRawLevel().addAlwaysVisibleParticle(
+                            ParticleTypes.SMOKE,
+                            exhaust.x, exhaust.y, exhaust.z,
+                            zSpeed, 0.0625, xSpeed);
+                }
+            }
+        }
+    }
+
+    // Constants to improve readability and maintenance
+    private static final float GEAR_RATIO = 260f / 4f;
+    private static final float MAX_DRILL_SHAKE = 0.01f;
+    private static final float DRILL_HEIGHT_INCREMENT = 0.03125f;
+    private static final float MAX_DRILL_HEIGHT = -4f;
+    private static final int SHAKE_PROBABILITY = 85;  // 100 - 15
+    private void animateDrill(IMultiblockContext<State> context)
+    {
+        final State state = context.getState();
+        Random rand = null;
+        if(state.renderAsActive)
+        {
+            if(state.spinDown && state.spinWait == 1)
+            {
+                // Initialize Random only when needed
+                rand = new Random();
+
+                state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
+
+                // Combine drill height calculations
+                float newDrillHeight = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
+                if (rand.nextInt(100) > SHAKE_PROBABILITY) {
+                    newDrillHeight += rand.nextFloat() * 0.025f;
+                }
+                state.drill_height = newDrillHeight;
+
+                // Calculate gear angles once
+                float gearAngle = state.drill_height * GEAR_RATIO;
+                state.gear_clockwise_angle = gearAngle;
+                state.gear_counter_clockwise_angle = -gearAngle;
+
+                state.drill_shake = rand.nextInt(100) > SHAKE_PROBABILITY ?
+                        rand.nextFloat(0, MAX_DRILL_SHAKE) : 0;
             }
             else
             {
-                if(state.spinWait - 1 > 0)
-                {
+                if (state.spinWait - 1 > 0) {
                     state.spinWait--;
-                    state.drill_spin_rate = 6F * ((float) (state.spinWaitReset - state.spinWait) / state.spinWaitReset ) * 2f;
-                    state.drill_angle = (state.drill_angle+state.drill_spin_rate) %360;
-                    state.drill_shake = rand.nextFloat(-((float) state.spinWait/ state.spinWaitReset),(float) state.spinWait/ state.spinWaitReset) * 0.0075f;
+                    float spinProgress = (float)(state.spinWaitReset - state.spinWait) / state.spinWaitReset;
+                    state.drill_spin_rate = 12F * spinProgress;  // Simplified 6F * progress * 2f
+                    state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
+
+                    rand = new Random();
+                    float shakeRange = (float)state.spinWait / state.spinWaitReset * 0.0075f;
+                    state.drill_shake = rand.nextFloat(-shakeRange, shakeRange);
                 } else {
                     state.spinDown = true;
                 }
@@ -106,17 +170,19 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             if(state.drill_spin_rate != 0)
             {
                 state.spinWait += 1;
-                state.drill_spin_rate = 24f * (1 - ((float) state.spinWait / state.spinWaitReset));
-                state.drill_angle = (state.drill_angle+state.drill_spin_rate)%360;
+                state.drill_spin_rate = 24f * (1 - ((float)state.spinWait / state.spinWaitReset));
+                state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
                 state.drill_direction = true;
-                if(state.drill_height < -0.03125f)
-                {
-                    state.drill_height = adjustHeight(state.drill_height, -4f, 0, 0.03125f, state);
-                    state.gear_clockwise_angle = ((state.drill_height)/4f)*260;
-                    state.gear_counter_clockwise_angle = ((state.drill_height*-1)/4f)*260;
+
+                if (state.drill_height < -DRILL_HEIGHT_INCREMENT) {
+                    state.drill_height = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
+                    float gearAngle = state.drill_height * GEAR_RATIO;
+                    state.gear_clockwise_angle = gearAngle;
+                    state.gear_counter_clockwise_angle = -gearAngle;
                 }
             }
         }
+        context.requestMasterBESync();
     }
 
     private float adjustHeight(float current, float min, float max, float difference, State state)
@@ -152,11 +218,6 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             context.requestMasterBESync();
         }
 
-        if(state.renderAsActive)
-        {
-            //Spawn particles here I suppose
-        }
-
         if(state.output_tank.getFluidAmount() > 0){
             drainOutputTank(state, context);
         }
@@ -168,9 +229,25 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 if(state.energy.extractEnergy(ENERGY_CONSUMPTION_RATE, true) > 0)
                 {
                     state.energy.extractEnergy(ENERGY_CONSUMPTION_RATE, false);
+                    CoreDrillRecipe recipe = CoreDrillRecipe.get(context.getLevel().getRawLevel(), state.acid_tank.getFluid());
+
+                    if(recipe != null && !state.drill_direction && state.spinDown)
+                    {
+                        int amount = recipe.getInput().getAmount();
+                        if(!state.acid_tank.drain(amount, FluidAction.SIMULATE).isEmpty())
+                        {
+                            FluidStack toFill = new FluidStack(recipe.getOutput(), 1);
+                            if(state.output_tank.fill(toFill, FluidAction.SIMULATE) > 0)
+                            {
+                                state.acid_tank.drain(amount, FluidAction.EXECUTE);
+                                state.output_tank.fill(toFill, FluidAction.EXECUTE);
+                            }
+                        }
+                    }
                 }
             }
         }
+        animateDrill(context);
     }
 
     private void drainOutputTank(State state, IMultiblockContext<State> context)
@@ -318,7 +395,18 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         public void writeSyncNBT(CompoundTag nbt)
         {
             writeSaveNBT(nbt);
+            // Animation Data
             nbt.putBoolean("renderActive", renderAsActive);
+            nbt.putBoolean("drillDirection", drill_direction);
+            nbt.putBoolean("spinDown", spinDown);
+            nbt.putFloat("clockwiseAngle", gear_clockwise_angle);
+            nbt.putFloat("counterAngle", gear_counter_clockwise_angle);
+            nbt.putFloat("drillHeight", drill_height);
+            nbt.putFloat("drillAngle", drill_angle);
+            nbt.putFloat("drillSpinRate", drill_spin_rate);
+            nbt.putFloat("drillShake", drill_shake);
+            nbt.putInt("spinWaitReset", spinWaitReset);
+            nbt.putInt("spinWait", spinWait);
         }
 
         @Override
@@ -326,6 +414,16 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         {
             readSaveNBT(nbt);
             renderAsActive = nbt.getBoolean("renderActive");
+            drill_direction = nbt.getBoolean("drillDirection");
+            spinDown = nbt.getBoolean("spinDown");
+            gear_clockwise_angle = nbt.getFloat("clockwiseAngle");
+            gear_counter_clockwise_angle = nbt.getFloat("counterAngle");
+            drill_height = nbt.getFloat("drillHeight");
+            drill_angle = nbt.getFloat("drillAngle");
+            drill_spin_rate = nbt.getFloat("drillSpinRate");
+            drill_shake = nbt.getFloat("drillShake");
+            spinWaitReset = nbt.getInt("spinWaitReset");
+            spinWait = nbt.getInt("spinWait");
         }
 
         public boolean shouldRenderActive()

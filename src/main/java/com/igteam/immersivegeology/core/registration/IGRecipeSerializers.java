@@ -46,6 +46,7 @@ public class IGRecipeSerializers
 		BloomeryFuel.SERIALIZER = RECIPE_SERIALIZERS.register("bloomery_fuel", BloomeryFuelSerializer::new);
 		BallmillRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("ballmill", BallmillRecipeSerializer::new);
 		PelletizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("pelletizer", PelletizerRecipeSerializer::new);
+		CoreDrillRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("coredrill", CoreDrillSerializer::new);
 
 		IG_REPAIR_SERIALIZER = RECIPE_SERIALIZERS.register("ig_item_repair", special(IGRepairItemRecipe::new));
 

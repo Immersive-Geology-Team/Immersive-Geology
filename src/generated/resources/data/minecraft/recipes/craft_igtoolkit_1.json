@@ -4,13 +4,13 @@
   "group": "ig_tools",
   "key": {
     "B": {
-      "tag": "forge:ingots/stainlesssteel"
+      "item": "immersivegeology:ingot_bronze"
     },
     "S": {
       "tag": "forge:string"
     },
     "W": {
-      "tag": "forge:rods/treated_wood"
+      "tag": "forge:rods/wooden"
     }
   },
   "pattern": [
@@ -19,7 +19,7 @@
     "W  "
   ],
   "result": {
-    "item": "immersivegeology:hammer_stainlesssteel"
+    "item": "immersivegeology:hammer_bronze"
   },
   "show_notification": true
 }

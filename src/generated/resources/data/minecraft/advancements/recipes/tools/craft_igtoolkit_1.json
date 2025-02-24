@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stainless_steel_ingot": {
+    "has_bronze_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:ingot_stainlesssteel"
+              "immersivegeology:ingot_bronze"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_stainless_steel_ingot",
+      "has_bronze_ingot",
       "has_the_recipe"
     ]
   ],

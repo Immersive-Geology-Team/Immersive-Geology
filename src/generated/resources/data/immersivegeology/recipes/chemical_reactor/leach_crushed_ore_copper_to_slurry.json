@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:hydrochloricacid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_hydrochloricacid_copper"
+  },
+  "itemInput": {
+    "item": "immersivegeology:crushed_ore_copper"
+  },
+  "itemResult": [],
+  "time": 200
+}
