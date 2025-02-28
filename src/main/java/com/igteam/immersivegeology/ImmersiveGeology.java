@@ -9,6 +9,8 @@ import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
 import com.igteam.immersivegeology.common.network.IGPacketHandler;
+import com.igteam.immersivegeology.common.particle.IGParticles;
+import com.igteam.immersivegeology.common.particle.providers.FlowingWaterParticleProvider;
 import com.igteam.immersivegeology.common.world.IGWorldSubscription;
 import com.igteam.immersivegeology.core.ClientProxy;
 import com.igteam.immersivegeology.core.CommonProxy;

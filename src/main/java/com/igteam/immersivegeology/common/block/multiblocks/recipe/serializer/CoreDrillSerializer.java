@@ -53,7 +53,5 @@ public class CoreDrillSerializer extends IERecipeSerializer<CoreDrillRecipe>
 	{
 		buffer.writeFluidStack(new FluidStack(recipe.getOutput(), 1));
 		recipe.getInput().write(buffer);
-		buffer.writeInt(recipe.getTotalProcessEnergy());
-		buffer.writeInt(recipe.getTotalProcessTime());
 	}
 }

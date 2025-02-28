@@ -13,6 +13,8 @@ import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.models.DrawingTableCallbacks;
+import com.igteam.immersivegeology.common.particle.IGParticles;
+import com.igteam.immersivegeology.common.particle.providers.FlowingWaterParticleProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGContent;
 import net.minecraft.client.Minecraft;

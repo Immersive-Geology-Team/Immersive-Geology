@@ -30,6 +30,7 @@ import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -527,6 +528,8 @@ public class IGRegistrationHolder {
         TE_REGISTER.register(eventBus);
         IGLib.IG_LOGGER.info("- Custom Creative Tab Registration");
         TAB_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Custom Particle Type Registration");
+        IGParticles.register(eventBus);
 
         IGLib.IG_LOGGER.info("- Custom Menu Type Registration");
         IGMenuTypes.REGISTER.register(eventBus);

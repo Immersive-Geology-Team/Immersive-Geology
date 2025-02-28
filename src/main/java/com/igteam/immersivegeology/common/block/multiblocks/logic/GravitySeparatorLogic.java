@@ -55,9 +55,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(1, 6, 1);
+    public static final BlockPos REDSTONE_IN = new BlockPos(1, 1, 1);
 
-    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,6,1, RelativeBlockFace.UP);
+    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,5,1, RelativeBlockFace.UP);
 
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
@@ -113,7 +113,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
             return;
         final State state = ctx.getState();
         final IMultiblockLevel level = ctx.getLevel();
-        final AABB internalBB = new AABB(-2, 4, -2, 5, 7, 5);
+        final AABB internalBB = new AABB(-2, 3, -2, 5, 6, 5);
         final AABB separatorInternal = level.toAbsolute(internalBB);
         if(collided instanceof ItemEntity itemEntity)
         {

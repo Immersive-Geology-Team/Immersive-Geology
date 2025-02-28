@@ -120,6 +120,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericActiveNonMirrorMultiblock(IGMultiblockProvider.BLOOMERY.block(), "bloomery");
         genericmultiblock("gravityseparator");
         genericmultiblock("trommel");
+
         genericmultiblock("chemical_reactor");
         genericmultiblockMirror("rotarykiln");
         genericmultiblockMirror("coredrill");

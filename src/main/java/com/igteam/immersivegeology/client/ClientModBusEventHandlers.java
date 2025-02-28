@@ -12,6 +12,9 @@ import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
+import com.igteam.immersivegeology.common.particle.IGParticles;
+import com.igteam.immersivegeology.common.particle.providers.FlowingWaterParticleProvider;
+import com.igteam.immersivegeology.common.particle.types.FlowingWaterParticle;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMenuTypes;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -58,12 +61,19 @@ public class ClientModBusEventHandlers {
 		registerBlockEntityRenderers(event);
 	}
 
+	@SubscribeEvent
+	public static void registerParticleFactories(RegisterParticleProvidersEvent event)
+	{
+		event.registerSpriteSet(IGParticles.FLOWING_WATER.get(), FlowingWaterParticleProvider::new);
+	}
+
 	public static void registerBlockEntityRenderers(RegisterRenderers event)
 	{
 
 		registerBERenderNoContext(event, IGMultiblockProvider.COREDRILL.masterBE(), CoreDrillRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.BALLMILL.masterBE(), BallmillRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.PELLETIZER.masterBE(), PelletizerRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.GRAVITY_SEPARATOR.masterBE(), SeparatorRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CHEMICAL_REACTOR.masterBE(), ChemicalReactorRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CENTRIFUGE.masterBE(), CentrifugeRenderer::new);
 	}
