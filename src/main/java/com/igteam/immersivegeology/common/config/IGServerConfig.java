@@ -90,7 +90,7 @@ public class IGServerConfig
 
 			shouldRemoveIEBauxite = builder.comment("Should IG remove Immersive Engineering Bauxite Ore?").define("remove_ie_bauxite", true);
 			shouldRemoveIELead = builder.comment("Should IG remove Immersive Engineering Lead Ore?").define("remove_ie_lead", true);
-			shouldRemoveIESilver = builder.comment("Should IG remove Immersive Engineering Silver Ore?S").define("remove_ie_silver", true);
+			shouldRemoveIESilver = builder.comment("Should IG remove Immersive Engineering Silver Ore?").define("remove_ie_silver", true);
 			shouldRemoveIEUranium = builder.comment("Should IG remove Immersive Engineering Uranium Ore?").define("remove_ie_uranium", true);
 			shouldRemoveIENickel = builder.comment("Should IG remove Immersive Engineering Nickel Ore?").define("remove_ie_nickel", true);
 			logProcess = builder.comment("Should we log the performance of the removal algorithm?").define("log_process", false);

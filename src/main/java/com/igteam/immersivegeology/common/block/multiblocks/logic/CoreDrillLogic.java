@@ -115,6 +115,8 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 }
             }
         }
+
+        animateDrill(context);
     }
 
     // Constants to improve readability and maintenance
@@ -137,7 +139,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
 
                 // Combine drill height calculations
-                float newDrillHeight = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
+                float newDrillHeight = state.drill_height;
                 if (rand.nextInt(100) > SHAKE_PROBABILITY) {
                     newDrillHeight += rand.nextFloat() * 0.025f;
                 }
@@ -154,35 +156,25 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             else
             {
                 if (state.spinWait - 1 > 0) {
-                    state.spinWait--;
-                    float spinProgress = (float)(state.spinWaitReset - state.spinWait) / state.spinWaitReset;
-                    state.drill_spin_rate = 12F * spinProgress;  // Simplified 6F * progress * 2f
                     state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
 
                     rand = new Random();
                     float shakeRange = (float)state.spinWait / state.spinWaitReset * 0.0075f;
                     state.drill_shake = rand.nextFloat(-shakeRange, shakeRange);
-                } else {
-                    state.spinDown = true;
                 }
             }
         } else {
             if(state.drill_spin_rate != 0)
             {
-                state.spinWait += 1;
-                state.drill_spin_rate = 24f * (1 - ((float)state.spinWait / state.spinWaitReset));
                 state.drill_angle = (state.drill_angle + state.drill_spin_rate) % 360;
-                state.drill_direction = true;
 
                 if (state.drill_height < -DRILL_HEIGHT_INCREMENT) {
-                    state.drill_height = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
                     float gearAngle = state.drill_height * GEAR_RATIO;
                     state.gear_clockwise_angle = gearAngle;
                     state.gear_counter_clockwise_angle = -gearAngle;
                 }
             }
         }
-        context.requestMasterBESync();
     }
 
     private float adjustHeight(float current, float min, float max, float difference, State state)
@@ -247,7 +239,45 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 }
             }
         }
-        animateDrill(context);
+        //move to func later
+        Random rand = null;
+        if(state.renderAsActive)
+        {
+            if(state.spinDown && state.spinWait == 1)
+            {
+                // Initialize Random only when needed
+                rand = new Random();
+
+                // Combine drill height calculations
+                float newDrillHeight = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
+                if (rand.nextInt(100) > SHAKE_PROBABILITY) {
+                    newDrillHeight += rand.nextFloat() * 0.025f;
+                }
+                state.drill_height = newDrillHeight;
+            }
+            else
+            {
+                if (state.spinWait - 1 > 0) {
+                    state.spinWait--;
+                    float spinProgress = (float)(state.spinWaitReset - state.spinWait) / state.spinWaitReset;
+                    state.drill_spin_rate = 12F * spinProgress;  // Simplified 6F * progress * 2f
+                } else {
+                    state.spinDown = true;
+                }
+            }
+        } else {
+            if(state.drill_spin_rate != 0)
+            {
+                state.spinWait += 1;
+                state.drill_spin_rate = 24f * (1 - ((float)state.spinWait / state.spinWaitReset));
+                state.drill_direction = true;
+
+                if (state.drill_height < -DRILL_HEIGHT_INCREMENT) {
+                    state.drill_height = adjustHeight(state.drill_height, MAX_DRILL_HEIGHT, 0, DRILL_HEIGHT_INCREMENT, state);
+                }
+            }
+        }
+        context.requestMasterBESync();
     }
 
     private void drainOutputTank(State state, IMultiblockContext<State> context)
@@ -399,12 +429,12 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             nbt.putBoolean("renderActive", renderAsActive);
             nbt.putBoolean("drillDirection", drill_direction);
             nbt.putBoolean("spinDown", spinDown);
-            nbt.putFloat("clockwiseAngle", gear_clockwise_angle);
-            nbt.putFloat("counterAngle", gear_counter_clockwise_angle);
-            nbt.putFloat("drillHeight", drill_height);
-            nbt.putFloat("drillAngle", drill_angle);
+//            nbt.putFloat("clockwiseAngle", gear_clockwise_angle);
+//            nbt.putFloat("counterAngle", gear_counter_clockwise_angle);
+             nbt.putFloat("drillHeight", drill_height);
+//            nbt.putFloat("drillAngle", drill_angle);
             nbt.putFloat("drillSpinRate", drill_spin_rate);
-            nbt.putFloat("drillShake", drill_shake);
+//            nbt.putFloat("drillShake", drill_shake);
             nbt.putInt("spinWaitReset", spinWaitReset);
             nbt.putInt("spinWait", spinWait);
         }
@@ -416,12 +446,12 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
             renderAsActive = nbt.getBoolean("renderActive");
             drill_direction = nbt.getBoolean("drillDirection");
             spinDown = nbt.getBoolean("spinDown");
-            gear_clockwise_angle = nbt.getFloat("clockwiseAngle");
-            gear_counter_clockwise_angle = nbt.getFloat("counterAngle");
+//            gear_clockwise_angle = nbt.getFloat("clockwiseAngle");
+//            gear_counter_clockwise_angle = nbt.getFloat("counterAngle");
             drill_height = nbt.getFloat("drillHeight");
-            drill_angle = nbt.getFloat("drillAngle");
+//            drill_angle = nbt.getFloat("drillAngle");
             drill_spin_rate = nbt.getFloat("drillSpinRate");
-            drill_shake = nbt.getFloat("drillShake");
+//            drill_shake = nbt.getFloat("drillShake");
             spinWaitReset = nbt.getInt("spinWaitReset");
             spinWait = nbt.getInt("spinWait");
         }

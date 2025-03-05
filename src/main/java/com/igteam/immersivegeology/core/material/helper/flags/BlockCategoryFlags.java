@@ -20,6 +20,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SCAFFOLDING(4),
     EVAPORATE(0),
     EVAPORATE_CRYSTAL(0),
+    ENGINEERING_BLOCK(4),
     MISC(4);
 
     private final int groupOrdinal;

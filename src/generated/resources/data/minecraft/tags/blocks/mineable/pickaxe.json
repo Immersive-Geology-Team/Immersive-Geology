@@ -1,8 +1,7 @@
 {
   "values": [
-    "immersivegeology:chemical_engineering",
-    "immersivegeology:computational_engineering",
     "immersivegeology:trconcrete",
+    "immersivegeology:engineering_block_aluminum",
     "immersivegeology:storage_block_bronze",
     "immersivegeology:sheetmetal_block_bronze",
     "immersivegeology:sheetmetal_slab_bronze",
@@ -809,6 +808,7 @@
     "immersivegeology:sheetmetal_block_hastelloy",
     "immersivegeology:sheetmetal_slab_hastelloy",
     "immersivegeology:slab_hastelloy",
+    "immersivegeology:engineering_block_hastelloy",
     "immersivegeology:sheetmetal_slab_silver",
     "immersivegeology:poor_ore_block_silver_stone",
     "immersivegeology:normal_ore_block_silver_stone",
@@ -836,6 +836,7 @@
     "immersivegeology:sheetmetal_block_stainlesssteel",
     "immersivegeology:sheetmetal_slab_stainlesssteel",
     "immersivegeology:slab_stainlesssteel",
+    "immersivegeology:engineering_block_stainlesssteel",
     "immersivegeology:storage_block_sodium",
     "immersivegeology:slab_sodium",
     "immersivegeology:storage_block_thorium",

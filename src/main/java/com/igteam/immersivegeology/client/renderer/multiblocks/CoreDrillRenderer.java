@@ -60,7 +60,7 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         boolean isMirrored = orientation.mirrored();
 
         // magic numbers quarter pixel and half pixel respectively
-        float drill_height = state.getDrillHeight() + (active ? ((0.015051525f * pPartialTick) * (state.getDrillDirection() ? 1 : -1)) : 0);
+        float drill_height = state.getDrillHeight() + (active ? ((0.015051525f) * (state.getDrillDirection() ? 1 : -1)) : 0);
         float gear_angle = state.getGearClockwiseAngle() + ((0.03125f * pPartialTick) * (state.getDrillDirection() ? -1 : 1));
         float counter_gear_angle = state.getGearCounterClockwiseAngle() + ((0.03125f * pPartialTick) * (state.getDrillDirection() ? 1 : -1));
         float shake = state.getDrillShake();

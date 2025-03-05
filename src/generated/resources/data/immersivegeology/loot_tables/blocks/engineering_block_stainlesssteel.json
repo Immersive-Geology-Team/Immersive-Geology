@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersivegeology:chemical_engineering"
+          "name": "immersivegeology:engineering_block_stainlesssteel"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/chemical_engineering"
+  "random_sequence": "immersivegeology:blocks/engineering_block_stainlesssteel"
 }

@@ -1,4 +1,3 @@
-import com.igteam.immersivegeology.common.world.features.helper.GenerationBandedNoise;
 import com.igteam.immersivegeology.common.world.features.helper.GenerationTubedNoise;
 import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
@@ -14,10 +13,57 @@ import java.util.List;
 public class NoiseTester {
 	public static void main(String[] args) {
 		// Generate the noise images and compile them into a .gif
-		new NoiseTester().generateGif(false);
-		new NoiseTester().generateGif(true);
+		int N = 999999999;
+		long startTime = System.nanoTime();
+		boolean p = isPrimeA(N);
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+		System.out.println("Time: " + String.valueOf(duration));
+		System.out.println("Prime: " + String.valueOf(p));
+
+		long startTime2 = System.nanoTime();
+		boolean p2 = isPrimeC(N);
+		long endTime2 = System.nanoTime();
+		long duration2 = (endTime2- startTime2);  //divide by 1000000 to get milliseconds.
+		System.out.println("Time: " + String.valueOf(duration2));
+		System.out.println("Prime: " + String.valueOf(p2));
 	}
 
+	public static boolean isPrimeA(int n)
+	{
+		double size = Math.round(Math.sqrt(n));
+		for(int i = 2; i <= size; i++)
+		{
+			if(n % i == 0) return false;
+		}
+		return true;
+	}
+
+	public static ArrayList<Integer> factors = new ArrayList<>();
+	public static boolean isPrimeB(int n)
+	{
+		factors.clear();
+		for(int i = 2; i < n; i++)
+		{
+			factors.add(i);
+		}
+		ArrayList<Integer> cpy = new ArrayList<Integer>(factors);
+		for(Integer i : cpy)
+		{
+			if(n % i != 0) factors.remove(i);
+		}
+
+		return factors.isEmpty();
+	}
+
+	public static boolean isPrimeC(int n)
+	{
+		for(int i = 1; i <=n; i++)
+		{
+			if(i != 1 && i != n && n % i == 0) return false;
+		}
+		return true;
+	}
 	public void generateGif(boolean sliceY) {
 		// List to hold generated images
 		List<BufferedImage> images = new ArrayList<>();

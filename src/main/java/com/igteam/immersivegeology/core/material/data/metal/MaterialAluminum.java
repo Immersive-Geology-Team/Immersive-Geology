@@ -29,7 +29,7 @@ public class MaterialAluminum extends MaterialMetal {
     public MaterialAluminum()
     {
         super();
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, BlockCategoryFlags.ENGINEERING_BLOCK);
 
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT,
                 ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE,

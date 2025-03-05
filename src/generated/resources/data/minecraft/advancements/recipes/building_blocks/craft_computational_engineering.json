@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_aluminium": {
+    "has_stainlesssteel": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersiveengineering:ingot_aluminum"
+              "immersivegeology:ingot_stainlesssteel"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_aluminium",
+      "has_stainlesssteel",
       "has_the_recipe"
     ]
   ],

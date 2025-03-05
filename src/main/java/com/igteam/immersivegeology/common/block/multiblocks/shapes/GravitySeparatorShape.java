@@ -45,7 +45,7 @@ public class GravitySeparatorShape extends GenericShape {
         }
         if(bZ == 1 && bX == 1)
         {
-            //main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
         }
 //
 //        if(bZ == 0 && bX == 1)
@@ -83,14 +83,7 @@ public class GravitySeparatorShape extends GenericShape {
                 float yEnd = 0.625f-(0.125f) -  xP * 0.125f;
                 main.add(new AABB(0.5, yStart, xStart, 1, yEnd, xEnd));
             }
-
-
         }
-//
-//        if(bZ == 1 && bX == 2)
-//        {
-//            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-//        }
 
         return main;
     }

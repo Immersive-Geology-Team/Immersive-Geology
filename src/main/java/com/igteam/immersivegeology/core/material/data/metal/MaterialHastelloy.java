@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
@@ -23,7 +24,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
 
     public MaterialHastelloy() {
         super();
-        addFlags(ItemCategoryFlags.MECHANICAL_COMPONENT);
+        addFlags(ItemCategoryFlags.MECHANICAL_COMPONENT, BlockCategoryFlags.ENGINEERING_BLOCK);
     }
 
     @Override

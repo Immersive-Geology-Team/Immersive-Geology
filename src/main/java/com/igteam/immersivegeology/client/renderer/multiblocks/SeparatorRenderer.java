@@ -15,6 +15,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOri
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.GravitySeparatorLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -60,6 +61,13 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
                 poseStack.translate(0.5f,4.5f,.5f);
+                if(true) level.addParticle(IGParticles.FLOWING_WATER.get(),
+                        pos.getX()+0.5f+rand.nextFloat(-0.25f, 0.25f), // Adjusted for block position
+                        (pos.getY())+5.25f+rand.nextFloat(-0.25f, 0.25f),
+                        pos.getZ()+1.05f,
+                        0, -0.06f, 0.0f
+                );
+
                 float twists = 11;
                 float sin, cos;
                 Quaternionf rotationY = new Quaternionf();
@@ -91,15 +99,27 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
 
                     itemRenderer.renderStatic(renderStack, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, poseStack, buffer, level, 0);
                     poseStack.popPose();
-                    if (level.getGameTime() % 8 == 0) {
+                    if (level.getGameTime() % 2 == 0 && hasWater) {
+                        //Primary Ramp
                         level.addParticle(IGParticles.FLOWING_WATER.get(),
+                                pos.getX()+az+0.4f, // Adjusted for block position
+                                (pos.getY()+ay)+4.5f,
+                                pos.getZ()-ax+0.4f,
+                                ax * 0.05f,
+                                -0.001f,
+                                az* 0.05f
+                        );
+                        // Secondary
+                        /*
+                        level.addParticle(ParticleTypes.END_ROD,
                                 pos.getX()-az+0.5, // Adjusted for block position
-                                (pos.getY()+ay)+4.9f,
+                                (pos.getY()+ay)+4.8f,
                                 pos.getZ()+ax+0.5,
                                 (rand.nextDouble() - 0.5) * 0.02,
-                                0, // Slight downward drift
+                                -0.0025f, // Slight downward drift
                                 (rand.nextDouble() - 0.5) * 0.02
                         );
+                         */
                     }
                 }
             poseStack.popPose();

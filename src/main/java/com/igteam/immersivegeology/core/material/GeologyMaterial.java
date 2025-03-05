@@ -153,7 +153,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                     String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
                     yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
                 }
-                case STORAGE_BLOCK, STAIRS, SLAB -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
+                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
                 case DUST_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");

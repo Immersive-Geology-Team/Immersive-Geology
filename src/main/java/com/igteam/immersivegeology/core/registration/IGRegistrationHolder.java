@@ -277,8 +277,6 @@ public class IGRegistrationHolder {
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
 
-        registerBlockAndItem("chemical_engineering", BlockCategoryFlags.MISC, MetalEnum.Hastelloy);
-        registerBlockAndItem("computational_engineering", BlockCategoryFlags.MISC, MetalEnum.Aluminum);
         registerBlockAndItem("trconcrete", BlockCategoryFlags.MISC, MetalEnum.Titanium, BlockBehaviour.Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200));
 
         registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
@@ -296,7 +294,7 @@ public class IGRegistrationHolder {
                 boolean hasExistingImplementation = material.instance().checkExistingImplementation(flags) &! DatagenModLoader.isRunningDataGen();
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
-                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK -> {
+                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, ENGINEERING_BLOCK -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);

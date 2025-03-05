@@ -76,6 +76,12 @@ public class IGMBFormationItem extends IGGenericItem
 	}
 
 	@Override
+	public int getColor(int index)
+	{
+		return 0xffffff;
+	}
+
+	@Override
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context)
 	{
 		Level world = context.getLevel();

@@ -125,7 +125,7 @@ public class IGRecipes extends RecipeProvider
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)
 				.pattern(" BS")
 				.pattern(" WB")
-				.pattern("W  ").define('B', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.INGOT)).define('W', Ingredient.of(IETags.treatedStick)).define('S', Ingredient.of(Tags.Items.STRING))
+				.pattern("W  ").define('B', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.INGOT)).define('W', MetalEnum.StainlessSteel.getItemTag(ItemCategoryFlags.ROD)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_stainless_steel_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT))).save(consumer, "craft_igtoolkit_1");
 
 		Item geologist_pick = IGRegistrationHolder.getItem.apply("prospector_kit");
@@ -214,8 +214,8 @@ public class IGRecipes extends RecipeProvider
 				.define('C', Ingredient.of(IEFluids.CONCRETE.getBucket())).group("ig_engineering").unlockedBy("has_titanium", InventoryChangeTrigger.TriggerInstance.hasItems(titanium_ingot)).save(consumer, "craft_titanium_concrete");
 
 		//Computational Engineering Block
-		Item computational_engineering = IGRegistrationHolder.getBlock.apply("computational_engineering").asItem();
-		Item aluminium_ingot = MetalEnum.Aluminum.getItem(ItemCategoryFlags.INGOT);
+		Item computational_engineering = MetalEnum.StainlessSteel.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK).asItem();
+		Item stainlesssteel_ingot = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
 				.pattern("ABA")
@@ -224,7 +224,7 @@ public class IGRecipes extends RecipeProvider
 				.define('A', Ingredient.of(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.INGOT)))
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
-				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering");
+				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_stainlesssteel", InventoryChangeTrigger.TriggerInstance.hasItems(stainlesssteel_ingot)).save(consumer, "craft_computational_engineering");
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, computational_engineering)
 				.pattern("ACA")
@@ -233,7 +233,7 @@ public class IGRecipes extends RecipeProvider
 				.define('A', Ingredient.of(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.INGOT)))
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
-				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_aluminium", InventoryChangeTrigger.TriggerInstance.hasItems(aluminium_ingot)).save(consumer, "craft_computational_engineering_2");
+				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_stainlesssteel", InventoryChangeTrigger.TriggerInstance.hasItems(stainlesssteel_ingot)).save(consumer, "craft_computational_engineering_2");
 
 		for(MetalEnum metal : MetalEnum.values())
 		{
@@ -332,7 +332,7 @@ public class IGRecipes extends RecipeProvider
 		}
 
 		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT)).addInput(new IngredientWithSize(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 2)).addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/component_hastelloy"));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, IGRegistrationHolder.getBlock.apply("chemical_engineering"), 4)
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK), 4)
 				.unlockedBy("has_hastelloy_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
 						.define('s', MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', MetalEnum.Silver.getItem(ItemCategoryFlags.INGOT))
 						.pattern("scs").pattern("coc").pattern("scs").save(consumer, new ResourceLocation(IGLib.MODID, "craft_chemical_engineering_block"));

@@ -10,7 +10,7 @@
       "tag": "forge:string"
     },
     "W": {
-      "tag": "forge:rods/treated_wood"
+      "tag": "forge:rods/stainlesssteel"
     }
   },
   "pattern": [

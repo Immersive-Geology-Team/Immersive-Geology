@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersivegeology:computational_engineering"
+          "name": "immersivegeology:engineering_block_aluminum"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "immersivegeology:blocks/computational_engineering"
+  "random_sequence": "immersivegeology:blocks/engineering_block_aluminum"
 }

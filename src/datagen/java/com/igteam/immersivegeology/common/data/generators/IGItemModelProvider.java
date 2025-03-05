@@ -206,6 +206,5 @@ public class IGItemModelProvider extends ItemModelProvider {
             if(item.getFlag() != null && item.getMaterial(MaterialTexture.base) != null) logger.error("Wrong input parse in generateGenericBlockItem, used normal item as input see: {} and {}", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error("Error {}", err.getMessage());
         }
-
     }
 }
