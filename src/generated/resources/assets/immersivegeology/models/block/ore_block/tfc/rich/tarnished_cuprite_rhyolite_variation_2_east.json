@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_east",
-  "textures": {
-    "base": "tfc:block/rock/raw/rhyolite",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_cuprite_tarnished"
-  }
+  "parent": "immersivegeology:block/base/ore_block/ore_block_east"
 }

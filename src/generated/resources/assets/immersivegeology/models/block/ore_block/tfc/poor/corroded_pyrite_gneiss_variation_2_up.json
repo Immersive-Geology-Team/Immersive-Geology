@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
-  "textures": {
-    "base": "tfc:block/rock/raw/gneiss",
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/crystal/poor_2_pyrite_corroded"
-  }
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up"
 }

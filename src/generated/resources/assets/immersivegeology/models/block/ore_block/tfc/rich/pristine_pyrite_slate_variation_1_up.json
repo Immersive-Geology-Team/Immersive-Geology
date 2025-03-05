@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
-  "textures": {
-    "base": "tfc:block/rock/raw/slate",
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_pristine"
-  }
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up"
 }

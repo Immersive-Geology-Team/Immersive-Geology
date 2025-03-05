@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
   "textures": {
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/crystal/poor_1_pyrite_corroded",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

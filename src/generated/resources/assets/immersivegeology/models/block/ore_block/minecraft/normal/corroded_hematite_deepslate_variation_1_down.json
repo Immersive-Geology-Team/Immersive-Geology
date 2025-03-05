@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_down",
   "textures": {
-    "base": "minecraft:block/deepslate",
-    "ore_down": "immersivegeology:block/greyscale/rock/vein/layered/normal_1_hematite_corroded"
+    "base": "minecraft:block/deepslate"
   }
 }

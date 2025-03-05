@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
   "textures": {
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_chalcopyrite_pristine",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

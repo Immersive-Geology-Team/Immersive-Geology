@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_up",
   "textures": {
-    "base": "minecraft:block/andesite",
-    "ore_up": "immersivegeology:block/greyscale/rock/vein/metallic/poor_1_silver_corroded"
+    "base": "minecraft:block/andesite"
   }
 }

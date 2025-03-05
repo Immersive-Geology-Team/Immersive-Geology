@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
-  "textures": {
-    "base": "tfc:block/rock/raw/rhyolite",
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/mineral/normal_1_chalcocite_corroded"
-  }
+  "parent": "immersivegeology:block/base/ore_block/ore_block_west"
 }

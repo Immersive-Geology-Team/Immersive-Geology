@@ -16,17 +16,17 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.BlueprintCraftingRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
-import blusunrize.immersiveengineering.common.register.IEBlocks.StoneDecoration;
 import blusunrize.immersiveengineering.common.register.IEFluids;
-import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BloomeryFuelBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CoreDrillRecipeBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GravitySeparatorRecipeBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -53,7 +53,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -234,6 +233,15 @@ public class IGRecipes extends RecipeProvider
 				.define('B', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC))
 				.define('C', Ingredient.of(Ingredients.COMPONENT_ELECTRONIC_ADV))
 				.define('P', Ingredient.of(Ingredients.CIRCUIT_BOARD)).group("ig_engineering").unlockedBy("has_stainlesssteel", InventoryChangeTrigger.TriggerInstance.hasItems(stainlesssteel_ingot)).save(consumer, "craft_computational_engineering_2");
+
+		//Hastelloy Component
+		Item hastelloy_component = MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hastelloy_component)
+				.pattern("P P")
+				.pattern(" I ")
+				.pattern("P P")
+				.define('P', Ingredient.of(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE)))
+				.define('I', Ingredient.of(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).group("ig_hastelloy_component").unlockedBy("has_hastelloy", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.INGOT))).save(consumer, "craft_hastelloy_component");
 
 		for(MetalEnum metal : MetalEnum.values())
 		{

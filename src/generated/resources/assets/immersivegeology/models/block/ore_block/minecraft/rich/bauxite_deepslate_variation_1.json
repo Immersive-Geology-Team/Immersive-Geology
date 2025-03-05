@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/deepslate",
-    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/rich_1_bauxite_pristine"
+    "base": "minecraft:block/deepslate"
   }
 }
