@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
-    "ore": "immersivegeology:block/greyscale/rock/vein/layered/rich_1_cuprite_pristine",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

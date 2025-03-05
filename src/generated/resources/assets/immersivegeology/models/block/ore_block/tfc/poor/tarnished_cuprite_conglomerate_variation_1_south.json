@@ -1,8 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
-  "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/poor_1_cuprite_tarnished",
-    "side": "tfc:block/rock/raw/conglomerate",
-    "top": "tfc:block/rock/raw/conglomerate"
-  }
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south"
 }

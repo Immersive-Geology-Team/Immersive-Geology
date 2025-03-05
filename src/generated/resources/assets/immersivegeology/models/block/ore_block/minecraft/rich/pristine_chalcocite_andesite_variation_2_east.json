@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_east",
   "textures": {
-    "base": "minecraft:block/andesite",
-    "ore_east": "immersivegeology:block/greyscale/rock/vein/mineral/rich_2_chalcocite_pristine"
+    "base": "minecraft:block/andesite"
   }
 }

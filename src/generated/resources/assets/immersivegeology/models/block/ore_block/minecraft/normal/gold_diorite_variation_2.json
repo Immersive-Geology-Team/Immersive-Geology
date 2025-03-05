@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/diorite",
-    "ore": "immersivegeology:block/greyscale/rock/vein/metallic/normal_2_gold_pristine"
+    "base": "minecraft:block/diorite"
   }
 }

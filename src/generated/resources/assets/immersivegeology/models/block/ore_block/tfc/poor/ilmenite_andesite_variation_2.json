@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block",
-  "textures": {
-    "base": "tfc:block/rock/raw/andesite",
-    "ore": "immersivegeology:block/greyscale/rock/vein/mineral/poor_2_ilmenite_pristine"
-  }
+  "parent": "immersivegeology:block/base/ore_block"
 }

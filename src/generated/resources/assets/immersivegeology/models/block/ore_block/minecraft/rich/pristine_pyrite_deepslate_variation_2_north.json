@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_north",
   "textures": {
-    "base": "minecraft:block/deepslate",
-    "ore_north": "immersivegeology:block/greyscale/rock/vein/crystal/rich_2_pyrite_pristine"
+    "base": "minecraft:block/deepslate"
   }
 }

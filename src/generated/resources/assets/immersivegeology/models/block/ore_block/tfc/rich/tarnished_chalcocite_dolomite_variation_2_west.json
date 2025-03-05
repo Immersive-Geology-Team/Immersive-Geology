@@ -1,8 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
-  "textures": {
-    "ore_west": "immersivegeology:block/greyscale/rock/vein/layered/rich_2_chalcocite_tarnished",
-    "side": "tfc:block/rock/raw/dolomite",
-    "top": "tfc:block/rock/raw/dolomite"
-  }
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west"
 }

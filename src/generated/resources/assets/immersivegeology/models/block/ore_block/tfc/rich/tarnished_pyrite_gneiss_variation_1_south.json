@@ -1,7 +1,3 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
-  "textures": {
-    "base": "tfc:block/rock/raw/gneiss",
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/crystal/rich_1_pyrite_tarnished"
-  }
+  "parent": "immersivegeology:block/base/ore_block/ore_block_south"
 }

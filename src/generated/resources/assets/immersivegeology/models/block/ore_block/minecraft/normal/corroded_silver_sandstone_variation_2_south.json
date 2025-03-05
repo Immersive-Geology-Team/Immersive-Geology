@@ -1,7 +1,6 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
-    "ore_south": "immersivegeology:block/greyscale/rock/vein/layered/normal_2_silver_corroded",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }
