@@ -28,7 +28,7 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(23,50,2,0,160,4000, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(23,50,2,0,160,4000, 0.20,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.BANDED);
     }
 
     @Override

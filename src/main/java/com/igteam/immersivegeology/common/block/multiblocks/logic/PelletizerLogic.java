@@ -125,14 +125,17 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
                 if(stack.isEmpty())
                     return;
                 stack = stack.copy();
-                if(insertItemToProcess(stack, itemEntity, false, state, level.getRawLevel()))
-                    ctx.markDirtyAndSync();
-                if(stack.getCount() <= 0)
-                    itemEntity.discard();
-                else
+                if(insertItemToProcess(stack, itemEntity, true, state, level.getRawLevel()))
                 {
-                    stack.shrink(1);
-                    itemEntity.setItem(stack);
+                    if(insertItemToProcess(stack, itemEntity, false, state, level.getRawLevel()))
+                        ctx.markDirtyAndSync();
+                    if(stack.getCount() <= 0)
+                        itemEntity.discard();
+                    else
+                    {
+                        stack.shrink(1);
+                        itemEntity.setItem(stack);
+                    }
                 }
             }
         }
@@ -148,8 +151,8 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
 
     private static boolean insertItemToProcess(ItemStack stack, ItemEntity itemEntity, boolean simulate, State state, Level rawLevel)
     {
-        state.insertionHandler.getValue().insertItem(0, new ItemStack(stack.getItem()) , simulate);
-        return true;
+        ItemStack remaining = state.insertionHandler.getValue().insertItem(0, new ItemStack(stack.getItem()) , simulate);
+        return remaining.isEmpty();
     }
 
     @Override
