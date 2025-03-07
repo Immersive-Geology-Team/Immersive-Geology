@@ -77,7 +77,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
         {
             for(MineralWeathering weathering : MineralWeathering.values())
             {
-                permutations.add(weathering.name().toLowerCase()+"/"+e.getName());
+                permutations.add(e.getName() + "/" + weathering.name().toLowerCase());
             }
         });
 

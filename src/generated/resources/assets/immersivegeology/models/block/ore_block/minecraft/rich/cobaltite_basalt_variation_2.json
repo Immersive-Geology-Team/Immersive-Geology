@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_2_pristine_cobaltite",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

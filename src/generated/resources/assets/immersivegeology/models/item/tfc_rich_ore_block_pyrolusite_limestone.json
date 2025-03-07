@@ -1,3 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block_sedimentary"
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
+  "textures": {
+    "ore": "immersivegeology:palette/block/ore_bearing/layered/rich_1_pristine_pyrolusite",
+    "side": "tfc:block/rock/raw/limestone",
+    "top": "tfc:block/rock/raw/limestone"
+  }
 }

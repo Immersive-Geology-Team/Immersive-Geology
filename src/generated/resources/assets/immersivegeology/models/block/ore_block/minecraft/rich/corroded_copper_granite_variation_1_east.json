@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_east",
   "textures": {
-    "base": "minecraft:block/granite"
+    "base": "minecraft:block/granite",
+    "ore_east": "immersivegeology:palette/block/ore_bearing/metallic/rich_1_corroded_copper"
   }
 }

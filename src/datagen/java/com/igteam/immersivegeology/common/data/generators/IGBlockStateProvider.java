@@ -292,8 +292,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
         IGScaffoldingBlock block = (IGScaffoldingBlock) type;
         MetalScaffoldingType scaffolding_type = block.getScaffoldingType();
         MaterialInterface<?> base_material = block.getMaterial(MaterialTexture.base);
-        String top_texture_standard = "immersivegeology:block/greyscale/scaffolding/scaffolding_" + base_material.getName().toLowerCase() + "_pristine";
-        String top_texture = "immersivegeology:block/greyscale/scaffolding/scaffolding_top_" + scaffolding_type.name().toLowerCase() + "_" + base_material.getName().toLowerCase() + "_pristine";
+        String top_texture_standard = "immersivegeology:block/greyscale/scaffolding/scaffolding_" + "_pristine_"+base_material.getName().toLowerCase();
+        String top_texture = "immersivegeology:block/greyscale/scaffolding/scaffolding_top_" + scaffolding_type.name().toLowerCase() + "_pristine_" + base_material.getName().toLowerCase();
         BlockModelBuilder builder = models().withExistingParent(
                         new ResourceLocation(IGLib.MODID, "block/scaffolding/"+base_material.getName().toLowerCase()+"_scaffolding_"+scaffolding_type.name().toLowerCase()).getPath(),
                         new ResourceLocation(IGLib.MODID, "block/base/scaffolding/scaffolding_"+block.getScaffoldingType().name().toLowerCase()));
@@ -303,9 +303,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
         boolean exists = existingFileHelper.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
         if(!exists)
         {
-            builder.textures.put("side", "immersivegeology:block/greyscale/scaffolding/scaffolding_"+block.getMaterial(MaterialTexture.base).getName().toLowerCase()+"_pristine");
+            builder.textures.put("side", "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_"+block.getMaterial(MaterialTexture.base).getName().toLowerCase());
             builder.textures.put("top", scaffolding_type.equals(MetalScaffoldingType.STANDARD)?top_texture_standard: top_texture);
-            builder.textures.put("bottom", "immersivegeology:block/greyscale/scaffolding/scaffolding_"+block.getMaterial(MaterialTexture.base).getName().toLowerCase()+"_pristine");
+            builder.textures.put("bottom", "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_"+block.getMaterial(MaterialTexture.base).getName().toLowerCase());
         } else {
             builder.texture("side", new ResourceLocation(IGLib.MODID, "block/colored/" + base_material.getName().toLowerCase() + "/scaffolding/scaffolding"));
             builder.texture("top", texture);
@@ -448,7 +448,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         MineralWeathering weathering = MineralWeathering.PRISTINE;
         ResourceLocation default_richness_ore;
-        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + weathering.name().toLowerCase() + "_"+ block.getMaterial(MaterialTexture.overlay).getName().toLowerCase());
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
             {
@@ -485,7 +485,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         MineralWeathering weathering = MineralWeathering.PRISTINE;
         ResourceLocation default_richness_ore;
-        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + weathering.name().toLowerCase() + "_"+  block.getMaterial(MaterialTexture.overlay).getName().toLowerCase());
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
             {
@@ -523,7 +523,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         ResourceLocation default_richness_ore;
 
-        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/greyscale/rock/vein/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + block.getMaterial(MaterialTexture.overlay).getName().toLowerCase() + "_"+ weathering.name().toLowerCase());
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" +weathering.name().toLowerCase() +"_"+ block.getMaterial(MaterialTexture.overlay).getName().toLowerCase());
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
             {

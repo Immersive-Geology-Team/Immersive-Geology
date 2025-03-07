@@ -82,26 +82,34 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
 
     @Override
     public @NotNull Component getName(ItemStack pStack) {
-        Map<MaterialTexture, MaterialInterface<?>> materialMap = block.getMaterialMap();
-        List<String> materialList = new ArrayList<>();
-
-        if(getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) {
-            if(getBlock() instanceof IOreBlock oreBlock){
-                materialList.add(I18n.get("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase()));
-                materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
-                materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
-            }
-        } else {
-            for(MaterialTexture t : MaterialTexture.values()){
-                if (materialMap.containsKey(t)) {
-                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
-                }
-            }
-        }
-
-        if(getBlock() instanceof IGDeskBlock<?> desk)
+        if(getBlock() instanceof IGDeskBlock<?>)
         {
             return Component.translatable("item.immersivegeology.drawing_table");
+        }
+
+        Map<MaterialTexture, MaterialInterface<?>> materialMap = block.getMaterialMap();
+        List<String> materialList = new ArrayList<>();
+        BlockCategoryFlags flag = (BlockCategoryFlags) getFlag();
+        switch(flag)
+        {
+            case ORE_BLOCK -> {
+                if(getBlock() instanceof IOreBlock oreBlock){
+                    materialList.add(I18n.get("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase()));
+                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
+                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
+                }
+            }
+            case ENGINEERING_BLOCK -> {
+                materialList.add(I18n.get("material.immersivegeology.engineering." + materialMap.get(MaterialTexture.base).getName()));
+            }
+            default ->
+            {
+                for(MaterialTexture t : MaterialTexture.values()){
+                    if (materialMap.containsKey(t)) {
+                        materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+                    }
+                }
+            }
         }
 
         return Component.translatable("block.immersivegeology." + block.getFlag().getName(), materialList.toArray());

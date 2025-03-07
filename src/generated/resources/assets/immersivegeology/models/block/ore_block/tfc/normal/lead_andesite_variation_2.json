@@ -1,3 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/andesite",
+    "ore": "immersivegeology:palette/block/ore_bearing/metallic/normal_2_pristine_lead"
+  }
 }

@@ -10,10 +10,12 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidType;
@@ -118,4 +120,6 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default boolean useSedimentaryTextures() {return instance().useSedimentaryTextures();}
 
     default Set<MaterialHelper> getOriginMaterials() {return instance().getOriginMaterials();};
+
+    default Rarity getRarity() {return instance().getRarity();};
 }

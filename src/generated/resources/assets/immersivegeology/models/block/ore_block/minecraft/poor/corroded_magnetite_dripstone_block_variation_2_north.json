@@ -1,6 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_north",
   "textures": {
-    "side": "minecraft:block/dripstone_block"
+    "ore_north": "immersivegeology:palette/block/ore_bearing/layered/poor_2_corroded_magnetite",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
   }
 }

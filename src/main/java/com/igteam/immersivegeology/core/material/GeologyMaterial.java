@@ -45,7 +45,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
-    private Rarity materialRarity = Rarity.COMMON;
+    protected Rarity materialRarity = Rarity.COMMON;
 
     protected IGRecipeChain directBlasting = new IGRecipeChain(this, "direct_blasting", 0);
     protected IGRecipeChain sulphideElectrowining = new IGRecipeChain(this, "sulphide_electrowining", 1);
@@ -146,43 +146,64 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return exists ? texture : greyScaleTextures(flag);
     }
 
-    protected ResourceLocation greyScaleTextures(IFlagType<?> pattern) {
-        if (pattern.getValue() instanceof BlockCategoryFlags b){
-            return switch (b) {
-                case ORE_BLOCK -> {
-                    String ore_overlay = getCrystalFamily() != null ? getCrystalFamily().getName() : "vanilla_normal";
-                    yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/" + ore_overlay);
+    protected ResourceLocation greyScaleTextures(IFlagType<?> pattern)
+    {
+        if(pattern.getValue() instanceof BlockCategoryFlags b)
+        {
+            return switch(b)
+            {
+                case ORE_BLOCK ->
+                {
+                    String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
+                    yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
                 }
-                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
+                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK ->
+                        new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
-                case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
+                case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK ->
+                        new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
                 case DUST_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");
                 case GEODE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/geode");
                 default -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
             };
         }
 
-        if (pattern.getValue() instanceof ItemCategoryFlags i) {
-
-            switch (i) {
-                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG, POWDERED_SLAG -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.getName());
+        if(pattern.getValue() instanceof ItemCategoryFlags i)
+        {
+            switch(i)
+            {
+                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG, POWDERED_SLAG ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE, ROD, WIRE, METAL_OXIDE, COMPOUND_DUST -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/" + i.getName());
+                case GEAR, INGOT, NUGGET, PLATE ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
                 }
-                case CRYSTAL -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/" + getCrystalFamily().getName());
+                case ROD, WIRE, METAL_OXIDE, COMPOUND_DUST ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/"+i.getName());
                 }
-                case POOR_ORE, NORMAL_ORE, RICH_ORE -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/" + i.getName() + "_" + getCrystalFamily().getName());
+                case CRYSTAL ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/"+getCrystalFamily().getName());
                 }
-                default -> {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/" + i.getName());
+                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
+                }
+                default ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "item/greyscale/"+i.getName());
                 }
             }
         }
         return null;
+    }
+    static Random rand = new Random(0);
+    public int getPaletteVariation(ItemCategoryFlags flag){
+        if(flag.equals(ItemCategoryFlags.INGOT)) return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
+        return 1+(rand.nextInt(flag.getVariations()))%flag.getVariations();
     }
 
     protected Set<StoneFormation> acceptableStoneTypes = new HashSet<>();

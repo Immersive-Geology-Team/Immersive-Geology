@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
+    "ore_east": "immersivegeology:palette/block/ore_bearing/crystal/normal_1_pristine_pyrite",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

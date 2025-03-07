@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -37,6 +38,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
     }
 
     public int getColor(int index) {
+        if(getFlag().hasPalette()) return 0xffffff;
         if (index >= materialMap.values().size()) index = index % materialMap.values().size();
 
         //let's use last available colour. map could not be empty
@@ -52,7 +54,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
     public @NotNull Component getName(ItemStack stack) {
         if(hasCustomLang)
         {
-            return Component.translatable("item.immersivegeology." + customLang);
+            return Component.translatable("item.immersivegeology." + customLang).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
         }
 
         List<String> materialList = new ArrayList<>();
@@ -62,7 +64,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
             }
         }
 
-        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray());
+        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray()).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
     }
 
     @Override

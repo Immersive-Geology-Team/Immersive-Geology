@@ -85,6 +85,11 @@ public class GravitySeparatorShape extends GenericShape {
             }
         }
 
+        if(bY == 0)
+        {
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        }
+
         return main;
     }
 }

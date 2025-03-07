@@ -1,6 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_east",
   "textures": {
-    "side": "minecraft:block/dripstone_block"
+    "ore_east": "immersivegeology:palette/block/ore_bearing/layered/poor_2_corroded_chalcocite",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
   }
 }

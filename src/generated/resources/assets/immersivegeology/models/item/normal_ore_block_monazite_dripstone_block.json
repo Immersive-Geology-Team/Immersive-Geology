@@ -1,6 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
-    "side": "minecraft:block/dripstone_block"
+    "ore": "immersivegeology:palette/block/ore_bearing/layered/normal_1_pristine_monazite",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
   }
 }

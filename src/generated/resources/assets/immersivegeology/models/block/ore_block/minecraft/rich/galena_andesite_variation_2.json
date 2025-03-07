@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/andesite"
+    "base": "minecraft:block/andesite",
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_2_pristine_galena"
   }
 }

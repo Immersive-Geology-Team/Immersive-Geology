@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/deepslate"
+    "base": "minecraft:block/deepslate",
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_1_pristine_pyrolusite"
   }
 }

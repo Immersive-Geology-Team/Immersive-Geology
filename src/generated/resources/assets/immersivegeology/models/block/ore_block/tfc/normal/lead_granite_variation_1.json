@@ -1,3 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/granite",
+    "ore": "immersivegeology:palette/block/ore_bearing/metallic/normal_1_pristine_lead"
+  }
 }

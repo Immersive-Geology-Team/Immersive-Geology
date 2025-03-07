@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.data.types.MaterialRadioactiveMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -17,8 +18,8 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
 import java.util.function.BiFunction;
 
-public class MaterialUranium extends MaterialMetal {
-
+public class MaterialUranium extends MaterialRadioactiveMetal
+{
     public MaterialUranium() {
         super();
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);

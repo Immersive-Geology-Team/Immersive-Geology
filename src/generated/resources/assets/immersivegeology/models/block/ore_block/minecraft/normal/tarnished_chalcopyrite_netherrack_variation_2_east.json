@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_east",
   "textures": {
-    "base": "minecraft:block/netherrack"
+    "base": "minecraft:block/netherrack",
+    "ore_east": "immersivegeology:palette/block/ore_bearing/mineral/normal_2_tarnished_chalcopyrite"
   }
 }

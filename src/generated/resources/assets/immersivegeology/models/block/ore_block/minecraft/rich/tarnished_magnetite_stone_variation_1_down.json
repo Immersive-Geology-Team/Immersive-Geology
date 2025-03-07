@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_down",
   "textures": {
-    "base": "minecraft:block/stone"
+    "base": "minecraft:block/stone",
+    "ore_down": "immersivegeology:palette/block/ore_bearing/mineral/rich_1_tarnished_magnetite"
   }
 }

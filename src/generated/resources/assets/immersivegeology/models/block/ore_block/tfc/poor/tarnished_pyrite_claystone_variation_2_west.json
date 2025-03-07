@@ -1,3 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west"
+  "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_west",
+  "textures": {
+    "ore_west": "immersivegeology:palette/block/ore_bearing/layered/poor_2_tarnished_pyrite",
+    "side": "tfc:block/rock/raw/claystone",
+    "top": "tfc:block/rock/raw/claystone_top"
+  }
 }

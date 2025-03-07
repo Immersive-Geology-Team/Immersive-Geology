@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 
+import javax.print.DocFlavor.READER;
+
 public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     INGOT(1),
     WIRE(1),
@@ -58,5 +60,24 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
             default:
                 return "";
         }
+    }
+
+	public int getVariations()
+	{
+		return switch(this)
+		{
+			case INGOT -> 7;
+			case GEAR, NUGGET -> 6;
+			default -> 1;
+		};
+	}
+
+    public boolean hasPalette()
+    {
+        return switch(this)
+        {
+            case INGOT, GEAR, NUGGET, PLATE -> true;
+            default -> false;
+        };
     }
 }

@@ -1,17 +1,12 @@
 package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.common.data.generators.*;
-import com.igteam.immersivegeology.common.data.generators.loot.IGBlockLootProvider;
 import com.igteam.immersivegeology.common.data.generators.loot.IGLootProvider;
-import com.igteam.immersivegeology.common.data.generators.manual.IGManualProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -20,9 +15,6 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-import java.util.Collections;
-import java.util.List;
 
 import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
 

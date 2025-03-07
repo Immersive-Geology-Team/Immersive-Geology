@@ -1,3 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west"
+  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
+  "textures": {
+    "base": "tfc:block/rock/raw/dacite",
+    "ore_west": "immersivegeology:palette/block/ore_bearing/mineral/poor_2_pristine_chalcocite"
+  }
 }

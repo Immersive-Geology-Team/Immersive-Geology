@@ -56,6 +56,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     Tungsten(new MaterialTungsten()),
     Unobtanium(new MaterialUnobtanium()),
     Uranium(new MaterialUranium()),
+    RefinedUranium(new MaterialRefinedUranium()),
     Vanadium(new MaterialVanadium()),
     Zinc(new MaterialZinc()),
     Zirconium(new MaterialZirconium()),
@@ -76,13 +77,17 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public static List<String> getAtlasPermutations()
     {
         List<String> permutations = new ArrayList<>();
-        nativeMetals().forEach((e) ->
-        {
-            for(MineralWeathering weathering : MineralWeathering.values())
+        for(MetalEnum metal : values()) {
+            if(nativeMetals().contains(metal))
             {
-                permutations.add(weathering.name().toLowerCase() + "/" + e.getName());
+                for(MineralWeathering weathering : MineralWeathering.values())
+                {
+                    permutations.add(metal.getName()+"/"+weathering.name().toLowerCase());
+                }
+                continue;
             }
-        });
+            permutations.add(metal.getName()+"/"+MineralWeathering.PRISTINE.name().toLowerCase());
+        }
 
         return permutations;
     }
@@ -92,7 +97,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
         List<String> permutations = new ArrayList<>();
         scaffoldingMetals().forEach((e) ->
         {
-            permutations.add(MineralWeathering.PRISTINE.name().toLowerCase() + "/" + e.getName());
+            permutations.add(e.getName() +"/"+ MineralWeathering.PRISTINE.name().toLowerCase());
         });
 
         return permutations;

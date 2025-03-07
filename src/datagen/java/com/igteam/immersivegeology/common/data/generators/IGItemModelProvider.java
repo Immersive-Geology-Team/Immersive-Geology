@@ -87,8 +87,14 @@ public class IGItemModelProvider extends ItemModelProvider {
                 getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
             }
         } catch (Exception ex) {
-            logger.error("Attempted to generate a texture for the item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
-            logger.error(ex.getMessage());
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
+            }
+//            logger.error("Attempted to generate a texture for the item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
+//            logger.error(ex.getMessage());
         }
     }
 

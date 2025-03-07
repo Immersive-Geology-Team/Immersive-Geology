@@ -56,17 +56,21 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         Direction dir = orientation.front();
         boolean isActive = state.shouldRenderActive();
 
-        if(level == null) return;
+        if(level == null && !isActive) return;
+        assert level!=null;
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
                 poseStack.translate(0.5f,4.5f,.5f);
-                if(true) level.addParticle(IGParticles.FLOWING_WATER.get(),
-                        pos.getX()+0.5f+rand.nextFloat(-0.25f, 0.25f), // Adjusted for block position
-                        (pos.getY())+5.25f+rand.nextFloat(-0.25f, 0.25f),
-                        pos.getZ()+1.05f,
-                        0, -0.06f, 0.0f
-                );
+                if(hasWater &! processList.isEmpty())
+				{
+					level.addParticle(IGParticles.FLOWING_WATER.get(),
+							pos.getX()+0.5f+rand.nextFloat(-0.25f, 0.25f), // Adjusted for block position
+							(pos.getY())+5.25f+rand.nextFloat(-0.25f, 0.25f),
+							pos.getZ()+1.05f,
+							0, -0.06f, 0.0f
+					);
+				}
 
                 float twists = 11;
                 float sin, cos;
@@ -102,12 +106,12 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
                     if (level.getGameTime() % 2 == 0 && hasWater) {
                         //Primary Ramp
                         level.addParticle(IGParticles.FLOWING_WATER.get(),
-                                pos.getX()+az+0.4f, // Adjusted for block position
-                                (pos.getY()+ay)+4.5f,
-                                pos.getZ()-ax+0.4f,
-                                ax * 0.05f,
+                                pos.getX()+az+0.4f+rand.nextFloat(-0.2f, 0.2f), // Adjusted for block position
+                                (pos.getY()+ay)+4.5f + rand.nextFloat(-0.2f, 0.2f),
+                                pos.getZ()-ax+0.4f+rand.nextFloat(-0.2f, 0.2f),
+                                ax*0.05f,
                                 -0.001f,
-                                az* 0.05f
+                                az*0.05f
                         );
                         // Secondary
                         /*

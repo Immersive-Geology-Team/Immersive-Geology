@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/granite"
+    "base": "minecraft:block/granite",
+    "ore": "immersivegeology:palette/block/ore_bearing/metallic/rich_2_pristine_iron"
   }
 }

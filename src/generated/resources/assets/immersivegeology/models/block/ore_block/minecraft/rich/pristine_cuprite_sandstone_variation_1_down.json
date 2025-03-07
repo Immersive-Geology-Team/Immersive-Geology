@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_down",
   "textures": {
+    "ore_down": "immersivegeology:palette/block/ore_bearing/layered/rich_1_pristine_cuprite",
     "side": "minecraft:block/sandstone",
     "top": "minecraft:block/sandstone_top"
   }

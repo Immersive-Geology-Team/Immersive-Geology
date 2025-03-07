@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "base": "minecraft:block/diorite"
+    "base": "minecraft:block/diorite",
+    "ore": "immersivegeology:palette/block/ore_bearing/metallic/normal_2_pristine_platinum"
   }
 }

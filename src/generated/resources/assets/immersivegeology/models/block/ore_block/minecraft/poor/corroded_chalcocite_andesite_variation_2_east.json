@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block/ore_block_east",
   "textures": {
-    "base": "minecraft:block/andesite"
+    "base": "minecraft:block/andesite",
+    "ore_east": "immersivegeology:palette/block/ore_bearing/mineral/poor_2_corroded_chalcocite"
   }
 }

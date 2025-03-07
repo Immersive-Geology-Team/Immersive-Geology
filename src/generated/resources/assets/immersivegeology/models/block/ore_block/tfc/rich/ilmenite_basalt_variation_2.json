@@ -1,3 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block"
+  "parent": "immersivegeology:block/base/ore_block",
+  "textures": {
+    "base": "tfc:block/rock/raw/basalt",
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_2_pristine_ilmenite"
+  }
 }

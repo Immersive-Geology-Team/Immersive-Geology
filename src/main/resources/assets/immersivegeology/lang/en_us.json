@@ -309,6 +309,7 @@
   "material.immersivegeology.iron": "Iron",
   "material.immersivegeology.quartz": "Quartz",
   "material.immersivegeology.phlebotinum": "Phlebotinum",
+  "material.immersivegeology.refineduranium": "Refined Uranium",
 
   "material.immersivegeology.stone": "Stone",
   "material.immersivegeology.wolframite": "Wolframite",
@@ -479,10 +480,12 @@
   "advancement.immersivegeology.metal_crystal": "Shinies?",
   "advancement.immersivegeology.metal_crystal.desc": "Obtain any metal crystal",
 
-  "block.immersivegeology.chemical_engineering": "Chemical Engineering Block",
+  "material.immersivegeology.engineering.stainlesssteel": "Basic Computational",
+  "material.immersivegeology.engineering.aluminum": "Advanced Computational",
+  "material.immersivegeology.engineering.hastelloy": "Chemical",
+  "block.immersivegeology.engineering_block": "%s Engineering Block",
   "block.immersivegeology.srconcrete": "Steel Reinforced Concrete",
   "block.immersivegeology.trconcrete": "Titanium Reinforced Concrete",
-  "block.immersivegeology.computational_engineering": "Computational Engineering Block",
 
   "item.immersivegeology.raw_fire_clay": "Fire Clay Ball",
   "item.immersivegeology.refractory_brick": "Refractory Brick",

@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.data.types.MaterialRadioactiveMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -24,8 +25,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MaterialThorium extends MaterialMetal {
-
+public class MaterialThorium extends MaterialRadioactiveMetal
+{
     public MaterialThorium() {
         super();
         removeMaterialFlags(ItemCategoryFlags.WIRE);

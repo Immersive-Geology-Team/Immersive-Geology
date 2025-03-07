@@ -1,6 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_south",
   "textures": {
+    "ore_south": "immersivegeology:palette/block/ore_bearing/mineral/poor_1_corroded_chalcopyrite",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

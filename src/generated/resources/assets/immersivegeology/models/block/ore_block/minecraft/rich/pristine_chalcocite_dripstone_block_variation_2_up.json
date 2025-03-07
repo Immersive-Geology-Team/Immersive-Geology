@@ -1,6 +1,8 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary/ore_block_up",
   "textures": {
-    "side": "minecraft:block/dripstone_block"
+    "ore_up": "immersivegeology:palette/block/ore_bearing/layered/rich_2_pristine_chalcocite",
+    "side": "minecraft:block/dripstone_block",
+    "top": "minecraft:block/dripstone_block"
   }
 }

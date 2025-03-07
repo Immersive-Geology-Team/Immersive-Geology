@@ -1,3 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_up"
+  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
+  "textures": {
+    "base": "tfc:block/rock/raw/granite",
+    "ore_up": "immersivegeology:palette/block/ore_bearing/mineral/normal_2_tarnished_chalcopyrite"
+  }
 }
