@@ -37,9 +37,7 @@ public class MaterialIron extends MaterialNativeMetal {
         addExistingFlag(ModFlags.AD_ASTRA, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE);
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);
-
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        acceptableStoneTypes.clear();
         this.CONFIG = new MaterialMineral.MineralConfig(0, 550,0,0,60,0,0.1, true, Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
     }
 

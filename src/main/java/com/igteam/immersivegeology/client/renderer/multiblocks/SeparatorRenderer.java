@@ -50,7 +50,7 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         boolean hasWater = !state.tank.isEmpty();
         ArrayList<SeparatorProcess> processList = state.separatorProcessesQueue;
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        //if(processList.isEmpty()) return;
+        if(processList.isEmpty()) return;
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();
@@ -61,14 +61,14 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
-                poseStack.translate(0.5f,4.5f,.5f);
-                if(hasWater &! processList.isEmpty())
+                poseStack.translate(.5f,4.5f,.5f);
+                if(hasWater && level.getGameTime() % 5 == 0)
 				{
 					level.addParticle(IGParticles.FLOWING_WATER.get(),
 							pos.getX()+0.5f+rand.nextFloat(-0.25f, 0.25f), // Adjusted for block position
 							(pos.getY())+5.25f+rand.nextFloat(-0.25f, 0.25f),
 							pos.getZ()+1.05f,
-							0, -0.06f, 0.0f
+							0, -0.06f, 0.1f
 					);
 				}
 
@@ -103,7 +103,7 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
 
                     itemRenderer.renderStatic(renderStack, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, poseStack, buffer, level, 0);
                     poseStack.popPose();
-                    if (level.getGameTime() % 2 == 0 && hasWater) {
+                    if (level.getGameTime() % 10 == 0 && hasWater) {
                         //Primary Ramp
                         level.addParticle(IGParticles.FLOWING_WATER.get(),
                                 pos.getX()+az+0.4f+rand.nextFloat(-0.2f, 0.2f), // Adjusted for block position

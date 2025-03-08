@@ -9,17 +9,18 @@ license="LGPL-3.0"
 modId = "immersivegeology"
 version = "${version}"
 displayName = "Immersive Geology"
-description = "An updated in development version of Immersive Geology."
-authors = "Muddykat-Tech, UnSchtalch and Crimson Twilight"
+description = '''
+An updated in development version of Immersive Geology.
+
+- Big thanks to Steelblue8 for the beautiful item and block textures.
+- Special thanks to Peter and UnSchtalch for the fantastic multiblock models.
+- Appreciation to UnSchtalch, Peter, and Crimson Twilight for their excellent work on the multiblock textures.
+- Additional thanks to Peter for creating new item textures.
+'''
+authors = "Muddykat-Tech and UnSchtalch"
 displayURL = "https://minecraft.curseforge.com/projects/immersive-geology/"
 logoFile = "logo.png"
-credits = '''
-A big thanks to Steelblue8 for the beautiful item and block textures.
-Special thanks to Peter and UnSchtalch for the fantastic multiblock models.
-We also appreciate UnSchtalch, Peter, and Crimson Twilight for their great work on the multiblock textures.
-And once again, thanks to Peter for creating some new item textures.
-'''
-
+credits = "Crimson Twilight, Peter"
 [[dependencies.immersivegeology]]
 modId="forge"
 mandatory=true

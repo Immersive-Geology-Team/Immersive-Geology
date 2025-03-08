@@ -28,15 +28,11 @@ import java.io.IOException;
 public class IGShaders
 {
 	private static ShaderInstance shader_blueprint;
-
-
 	private static AbstractUniform projection_time;
-	private static AbstractUniform projection_grid;
 	private static AbstractUniform color_tint;
 	public static void setBlueprintData(float time, float red, float green, float blue)
 	{
 		IGShaders.projection_time.set(time);
-		IGShaders.projection_grid.set(0.9f);
 		IGShaders.color_tint.set(red, green, blue);
 	}
 
@@ -50,7 +46,6 @@ public class IGShaders
 			shader_blueprint = s;
 
 			projection_time = shader_blueprint.safeGetUniform("Time");
-			projection_grid = shader_blueprint.safeGetUniform("GridThickness");
 			color_tint = shader_blueprint.safeGetUniform("ColorTint");
 		});
 	}
