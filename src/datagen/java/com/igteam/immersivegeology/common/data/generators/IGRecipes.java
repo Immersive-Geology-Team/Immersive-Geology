@@ -111,6 +111,12 @@ public class IGRecipes extends RecipeProvider
 				.pattern(" S")
 				.define('S', Items.STICK).group("firestarter").unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK)).save(consumer, ig("craft_firestarter"));
 
+		Item bucket = Items.BUCKET;
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, bucket)
+				.pattern("I I")
+				.pattern(" I ")
+				.define('I', bronze_ingot).unlockedBy("has_bronze_ingot",InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, ig("craft_bucket_extra"));
+
 		// Bronze Hammer
 		Item toolkit_0 = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_0)
