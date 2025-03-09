@@ -16,10 +16,13 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
@@ -53,5 +56,16 @@ public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 71, 62)
 				.addItemStack(recipe.itemOutput.get());
+	}
+
+	@Override
+	public void draw(PelletizerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+	{
+		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+		int time = recipe.getTotalProcessTime();
+		int timeInSeconds = time / 20;
+		int energyPt = recipe.getTotalProcessEnergy() / time;
+		guiGraphics.drawString(this.font, timeInSeconds + " Seconds", 32, 8, 0xffffffff);
+		guiGraphics.drawString(this.font, energyPt + " FE/t", 32, 18, 0xffffffff);
 	}
 }

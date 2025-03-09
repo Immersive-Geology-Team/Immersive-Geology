@@ -79,9 +79,8 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
                 Quaternionf rotationX = new Quaternionf().rotateAxis(-80 * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0));
 
                 for (SeparatorProcess process : processList) {
-                    renderStack = process.getInput(); // Direct reference instead of copy()
                     float progress = process.getRelativeProcessStep(level);
-
+                    renderStack = progress > 0.66f ? process.getCurrentOutput() : process.getInput();
                     // Precompute trigonometric functions
                     sin = Mth.sin(progress * twists);
                     cos = Mth.cos(progress * twists);

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/crush_zircon_poor_ore_with_work_hammer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_work_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:hammer_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_work_hammer",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/crush_zircon_poor_ore_with_work_hammer"
+    ]
+  },
+  "sends_telemetry_event": false
+}

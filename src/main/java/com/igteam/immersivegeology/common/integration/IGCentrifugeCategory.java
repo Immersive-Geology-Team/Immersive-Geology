@@ -16,9 +16,13 @@ import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidType;
 
@@ -60,5 +64,16 @@ public class IGCentrifugeCategory extends IGRecipeCategory<CentrifugeRecipe>
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 42, 76)
 				.addItemStack(recipe.itemOutput.get());
+	}
+
+	@Override
+	public void draw(CentrifugeRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+	{
+		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+		int time = recipe.getTotalProcessTime();
+		int timeInSeconds = time / 20;
+		int energyPt = recipe.getTotalProcessEnergy() / time;
+		guiGraphics.drawString(this.font, timeInSeconds + " Seconds", 4, 4, 0xffffffff);
+		guiGraphics.drawString(this.font, energyPt + " FE/t", 4, 14, 0xffffffff);
 	}
 }

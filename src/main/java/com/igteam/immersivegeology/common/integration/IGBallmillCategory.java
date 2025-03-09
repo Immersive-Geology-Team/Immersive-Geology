@@ -8,15 +8,20 @@
 
 package com.igteam.immersivegeology.common.integration;
 
+import blusunrize.lib.manual.ManualUtils;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
@@ -40,5 +45,16 @@ public class IGBallmillCategory extends IGRecipeCategory<BallmillRecipe>
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 42)
 				.addItemStack(recipe.itemOutput.get());
+	}
+
+	@Override
+	public void draw(BallmillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+	{
+		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+		int time = recipe.getTotalProcessTime();
+		int timeInSeconds = time / 20;
+		int energyPt = recipe.getTotalProcessEnergy() / time;
+		guiGraphics.drawString(this.font, timeInSeconds + " Seconds", 12, 72, 0xffffffff);
+		guiGraphics.drawString(this.font, energyPt + " FE/t", 12, 84, 0xffffffff);
 	}
 }

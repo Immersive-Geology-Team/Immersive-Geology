@@ -34,6 +34,8 @@ public class IGTags
 {
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new LinkedHashMap<>();
+	public static LinkedHashMap<ItemCategoryFlags, TagKey<Item>> ITEM_CATEGORY_FLAGS = new LinkedHashMap<>();
+
 
 	private static boolean initialized = false;
 	public static synchronized void initialize()
@@ -50,6 +52,8 @@ public class IGTags
 					createWrapperForCategory(itemFlag, materialInterface.instance());
 				}
 			}
+			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge",itemFlag.getName().toLowerCase() + itemFlag.getTagPrefix()));
+			ITEM_CATEGORY_FLAGS.put(itemFlag, key);
 		}
 
 

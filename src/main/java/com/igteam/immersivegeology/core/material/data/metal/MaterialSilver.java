@@ -71,6 +71,14 @@ public class MaterialSilver extends MaterialNativeMetal {
                 ChemicalEnum.HydrochloricAcid,
                 ItemCategoryFlags.CRYSTAL);
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT));
+
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, 2,
+                ItemCategoryFlags.INGOT, 1, 60);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
                 ItemStack.EMPTY,

@@ -25,6 +25,7 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags.Biomes;
 
@@ -54,6 +55,8 @@ public class MaterialOsmium extends MaterialNativeMetal
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.COMPOUND_DUST, 1, 140,1024);
+
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.SLURRY,
                 MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),

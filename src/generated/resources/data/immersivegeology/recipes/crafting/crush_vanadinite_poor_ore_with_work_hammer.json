@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:poor_ore/vanadinite"
+    },
+    {
+      "tag": "forge:poor_ore/vanadinite"
+    },
+    {
+      "tag": "forge:hammer"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_vanadinite"
+  }
+}

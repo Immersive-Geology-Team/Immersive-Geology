@@ -19,9 +19,13 @@ import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -46,5 +50,14 @@ public class IGBloomeryCategory extends IGRecipeCategory<BloomeryRecipe>
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 68, 41)
 				.addItemStack(recipe.result.get());
+	}
+
+	@Override
+	public void draw(BloomeryRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+	{
+		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+		int time = recipe.getTotalProcessTime();
+		int timeInSeconds = time / 20;
+		guiGraphics.drawString(this.font, timeInSeconds + " Seconds", 12, 72, 0xffffffff);
 	}
 }

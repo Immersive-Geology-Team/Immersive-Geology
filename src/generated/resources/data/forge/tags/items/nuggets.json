@@ -1,0 +1,25 @@
+{
+  "values": [
+    "immersivegeology:nugget_bronze",
+    "immersivegeology:nugget_chromium",
+    "immersivegeology:nugget_cobalt",
+    "immersivegeology:nugget_manganese",
+    "immersivegeology:nugget_magnesium",
+    "immersivegeology:nugget_molybdenum",
+    "immersivegeology:nugget_neodymium",
+    "immersivegeology:nugget_osmium",
+    "immersivegeology:nugget_platinum",
+    "immersivegeology:nugget_hastelloy",
+    "immersivegeology:nugget_stainlesssteel",
+    "immersivegeology:nugget_sodium",
+    "immersivegeology:nugget_thorium",
+    "immersivegeology:nugget_tin",
+    "immersivegeology:nugget_titanium",
+    "immersivegeology:nugget_tungsten",
+    "immersivegeology:nugget_unobtanium",
+    "immersivegeology:nugget_vanadium",
+    "immersivegeology:nugget_zinc",
+    "immersivegeology:nugget_zirconium",
+    "immersivegeology:nugget_tungstencarbide"
+  ]
+}

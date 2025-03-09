@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotarykiln",
+  "energy": 1024,
+  "input": {
+    "tag": "forge:compound_dust/osmium"
+  },
+  "result": {
+    "item": "immersivegeology:crushed_ore_osmium"
+  },
+  "time": 140
+}

@@ -8,10 +8,13 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -33,5 +36,11 @@ public class MaterialTin extends MaterialMetal {
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.TETRAGONAL;
+    }
+
+    @Override
+    public Set<MaterialHelper> getOriginMaterials()
+    {
+        return Set.of(MineralEnum.Cassiterite.instance());
     }
 }

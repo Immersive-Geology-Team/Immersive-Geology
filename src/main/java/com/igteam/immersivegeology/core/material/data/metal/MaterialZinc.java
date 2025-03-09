@@ -13,15 +13,18 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -61,5 +64,12 @@ public class MaterialZinc extends MaterialMetal {
         IGMethodBuilder.basicSmelting(this, IGStageDesignation.PURIFICATION).create(
                 ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.INGOT);
 
+    }
+
+
+    @Override
+    public Set<MaterialHelper> getOriginMaterials()
+    {
+        return Set.of(MineralEnum.Smithsonite.instance(), MineralEnum.Sphalerite.instance());
     }
 }

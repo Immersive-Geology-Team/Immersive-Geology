@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/craft_titanium_concrete"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_titanium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:ingot_titanium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_titanium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/craft_titanium_concrete"
+    ]
+  },
+  "sends_telemetry_event": false
+}

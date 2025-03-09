@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sheetmetal_osmium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:sheetmetal_block_osmium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/sheetmetal_to_stair_osmium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sheetmetal_osmium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/sheetmetal_to_stair_osmium"
+    ]
+  },
+  "sends_telemetry_event": false
+}

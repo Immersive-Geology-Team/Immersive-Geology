@@ -2,5 +2,30 @@
   "multiblock": {
     "type": "multiblock",
     "name": "immersivegeology:multiblocks/bloomery"
+  },
+  "refractory_bricks":
+  {
+    "type":"crafting",
+    "recipes":
+    [
+      [
+        {"recipe":"immersivegeology:crafting/craft_raw_fire_clay"},
+        {"recipe":"immersivegeology:crafting/craft_refractory_bricks"},
+        {"recipe":"immersivegeology:crafting/craft_refractory_bricks_slab"}
+      ]
+    ]
+  },
+  "bloomery_metals":
+  {
+    "type":"item_display",
+    "items":
+    [
+      {"item":"immersivegeology:ingot_zinc"},
+      {"item":"immersivegeology:ingot_tin"},
+      {"item":"immersiveengineering:ingot_lead"},
+      {"item":"immersiveengineering:ingot_silver"},
+      {"item":"minecraft:gold_ingot"},
+      {"item":"minecraft:copper_ingot"}
+    ]
   }
 }

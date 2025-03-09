@@ -14,6 +14,8 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -27,12 +29,13 @@ public abstract class IGRecipeCategory<T> implements IRecipeCategory<T>
 	public MutableComponent title;
 	private IDrawableStatic background;
 	private IDrawable icon;
-
+	protected final Font font;
 	public IGRecipeCategory(IGuiHelper guiHelper, RecipeType<T> type, String localKey)
 	{
 		this.guiHelper = guiHelper;
 		this.type = type;
 		this.title = Component.translatable(localKey);
+		this.font = Minecraft.getInstance().font;
 	}
 
 	@Override

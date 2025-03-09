@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:normal_ore/platinum"
+    },
+    {
+      "tag": "forge:normal_ore/platinum"
+    },
+    {
+      "tag": "forge:hammer"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:dirty_crushed_ore_platinum"
+  }
+}

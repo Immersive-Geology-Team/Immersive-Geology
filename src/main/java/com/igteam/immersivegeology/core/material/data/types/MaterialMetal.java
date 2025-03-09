@@ -44,7 +44,6 @@ public class MaterialMetal extends GeologyMaterial {
             IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                     getItemTag(ItemCategoryFlags.OXIDE_PELLET),
                     getPrimaryProduct().getStack(ItemCategoryFlags.INGOT));
-
         }
 
         if (hasFlag(ItemCategoryFlags.CRYSTAL) && hasFlag(ItemCategoryFlags.INGOT))

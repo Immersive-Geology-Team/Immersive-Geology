@@ -5,6 +5,9 @@ import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,5 +95,4 @@ public interface IFlagType<T extends Enum<T>> {
     }
 
 	default RenderTypeSkeleton getRenderType() {return RenderTypeSkeleton.SOLID;};
-
 }

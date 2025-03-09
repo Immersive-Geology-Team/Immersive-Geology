@@ -51,9 +51,15 @@ public class IGItemTags extends ItemTagsProvider
 	{
 		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Item Tags");
 
+		TagKey<Item> hammer_tag = ItemCategoryFlags.HAMMER.getCategoryTag();
 		tag(IETags.toolboxTools).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
+
+		tag(hammer_tag).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
+		tag(hammer_tag).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
+		tag(hammer_tag).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
+
 		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
 		{
 			for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
@@ -69,7 +75,10 @@ public class IGItemTags extends ItemTagsProvider
 						assert item != null;
 						if(!(item.equals(Items.COOKIE) || item.equals(Blocks.CAKE.asItem()))) {
 							TagKey<Item> item_key = material.getItemTag(itemFlag);
+							TagKey<Item> category_tag = itemFlag.getCategoryTag();
 							tag(item_key).add(item);
+							tag(category_tag).add(item);
+
 							if(itemFlag.equals(ItemCategoryFlags.INGOT))
 							{
 								if(material.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;

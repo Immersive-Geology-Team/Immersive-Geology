@@ -1,0 +1,20 @@
+{
+  "values": [
+    "immersivegeology:wire_bronze",
+    "immersivegeology:wire_cobalt",
+    "immersivegeology:wire_gold",
+    "immersivegeology:wire_iron",
+    "immersivegeology:wire_manganese",
+    "immersivegeology:wire_osmium",
+    "immersivegeology:wire_platinum",
+    "immersivegeology:wire_hastelloy",
+    "immersivegeology:wire_stainlesssteel",
+    "immersivegeology:wire_tin",
+    "immersivegeology:wire_titanium",
+    "immersivegeology:wire_tungsten",
+    "immersivegeology:wire_unobtanium",
+    "immersivegeology:wire_vanadium",
+    "immersivegeology:wire_zinc",
+    "immersivegeology:wire_zirconium"
+  ]
+}

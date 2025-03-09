@@ -435,10 +435,12 @@ public class IGRegistrationHolder {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericOreItem(itemCategoryFlags, material));
                         }
-                        case BLUEPRINT ->
+                        case PELLET,OXIDE_PELLET ->
                         {
-
+                            if(hasExistingImplementation) continue;
+                            registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGItemPellet(itemCategoryFlags, material));
                         }
+                        case BLUEPRINT -> {}
                         default -> {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material));
@@ -469,7 +471,6 @@ public class IGRegistrationHolder {
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
         registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER);
-
     }
 
     private static void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration){

@@ -1,0 +1,24 @@
+{
+  "values": [
+    "immersivegeology:plate_bronze",
+    "immersivegeology:plate_chromium",
+    "immersivegeology:plate_cobalt",
+    "immersivegeology:plate_manganese",
+    "immersivegeology:plate_magnesium",
+    "immersivegeology:plate_molybdenum",
+    "immersivegeology:plate_neodymium",
+    "immersivegeology:plate_osmium",
+    "immersivegeology:plate_platinum",
+    "immersivegeology:plate_hastelloy",
+    "immersivegeology:plate_stainlesssteel",
+    "immersivegeology:plate_thorium",
+    "immersivegeology:plate_tin",
+    "immersivegeology:plate_titanium",
+    "immersivegeology:plate_tungsten",
+    "immersivegeology:plate_unobtanium",
+    "immersivegeology:plate_vanadium",
+    "immersivegeology:plate_zinc",
+    "immersivegeology:plate_zirconium",
+    "immersivegeology:plate_tungstencarbide"
+  ]
+}

@@ -43,6 +43,10 @@ public class MaterialLead extends MaterialNativeMetal
                 ItemCategoryFlags.CRUSHED_ORE, 2,
                 ItemCategoryFlags.INGOT, 1, 60);
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT));
+
         //HANDWAVE
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.HydrochloricAcid,

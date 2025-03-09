@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:rich_ore/thorite"
+    },
+    {
+      "tag": "forge:rich_ore/thorite"
+    },
+    {
+      "tag": "forge:hammer"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:dirty_crushed_ore_thorite"
+  }
+}
