@@ -63,6 +63,9 @@ public class MaterialHematite extends MaterialMineral {
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, 4,
+                ItemCategoryFlags.INGOT, 1, 1100);
 
         // Straight up
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",

@@ -73,7 +73,7 @@ public class MaterialSilver extends MaterialNativeMetal {
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
-                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT));
+                getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 200);
 
         IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, 2,
