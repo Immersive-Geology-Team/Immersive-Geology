@@ -40,6 +40,11 @@ public class MaterialSodium extends MaterialMetal
 	@Override
 	public void setupRecipeStages()
 	{
+		IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
+				ItemCategoryFlags.METAL_OXIDE,
+				ItemCategoryFlags.COMPOUND_DUST,
+				1, 300, 153600);
+
 		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(ItemCategoryFlags.METAL_OXIDE,
 				FluidTags.WATER, 64, ChemicalEnum.SodiumHydroxide.getFluid(BlockCategoryFlags.FLUID), 64);
 	}
