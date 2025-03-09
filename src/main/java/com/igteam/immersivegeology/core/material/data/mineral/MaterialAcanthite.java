@@ -86,6 +86,9 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG ).addToTree(sulphideElectrowining);
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                MetalEnum.Silver.getStack(ItemCategoryFlags.INGOT), 900);
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),

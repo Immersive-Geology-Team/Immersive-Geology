@@ -67,6 +67,10 @@ public class MaterialGalena extends MaterialSulphideMineral
                 200                                            // Sulfur Dioxide Output Amount
         ).addToTree(sulphideElectrowining);
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                MetalEnum.Lead.getStack(ItemCategoryFlags.INGOT), 900);
+
         IGRecipeNode powdered_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG ).addToTree(sulphideElectrowining);
