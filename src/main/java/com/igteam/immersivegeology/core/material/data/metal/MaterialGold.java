@@ -68,6 +68,14 @@ public class MaterialGold extends MaterialNativeMetal {
                 new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                  null, 200, 51200);
 
+        IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
+                ItemStack.EMPTY,
+                ChemicalEnum.AquaRegia.getSlurryWith(MetalEnum.Gold, 2*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
+                new FluidTagInput(ChemicalEnum.AquaRegia.getFluidTag(BlockCategoryFlags.FLUID), 2*IGLib.ACID_TO_SLURRY_AMOUNT),
+         null,null, 200, 51200);
+
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.AquaRegia, ItemCategoryFlags.CRYSTAL);
     }

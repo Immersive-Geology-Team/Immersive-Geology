@@ -268,7 +268,6 @@ public class IGRegistrationHolder {
         initializeMultiblocks();
         setupFormationLists();
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
-        registerItem("firestarter", IGFireStarter::new);
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));

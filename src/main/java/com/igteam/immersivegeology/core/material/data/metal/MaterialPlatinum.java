@@ -66,5 +66,13 @@ public class MaterialPlatinum extends MaterialNativeMetal {
                 new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, 200, 51200);
 
+        IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,
+                MetalEnum.Osmium.getStack(ItemCategoryFlags.COMPOUND_DUST),
+                ChemicalEnum.AquaRegia.getSlurryWith(MetalEnum.Platinum, 2*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
+                new FluidTagInput(ChemicalEnum.AquaRegia.getFluidTag(BlockCategoryFlags.FLUID), 2*IGLib.ACID_TO_SLURRY_AMOUNT),
+                null, null, 200, 51200);
+
     }
 }

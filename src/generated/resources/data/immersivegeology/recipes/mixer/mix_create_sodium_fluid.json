@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:mixer",
+  "energy": 1600,
+  "fluid": {
+    "amount": 64,
+    "tag": "minecraft:water"
+  },
+  "inputs": [
+    {
+      "tag": "forge:metal_oxide/sodium"
+    }
+  ],
+  "result": {
+    "amount": 64,
+    "fluid": "immersivegeology:fluid_sodiumhydroxide"
+  }
+}

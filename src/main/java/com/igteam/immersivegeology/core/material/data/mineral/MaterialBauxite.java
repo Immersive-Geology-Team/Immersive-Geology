@@ -88,6 +88,16 @@ public class MaterialBauxite extends MaterialMineral {
                 IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400)
                 .addToTree(bayer_process);
 
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
+                "waste_"+getName()+"_to_oxide",
+                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
+                ChemicalEnum.ChemicalWaste.getFluidStack(IGLib.ACID_TO_SLURRY_AMOUNT),
+                new IngredientWithSize(MetalEnum.Calcium.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                new FluidTagInput(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MineralEnum.Bauxite),IGLib.SLURRY_TO_CRYSTAL_MB),
+                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                200, 51200).addToTree(bayer_process);
+
     }
     @Override
     public Set<IGRecipeChain> getRecipeChains()
