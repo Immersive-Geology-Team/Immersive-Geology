@@ -57,7 +57,7 @@ public class MaterialGold extends MaterialNativeMetal {
 
         IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, 2,
-                ItemCategoryFlags.INGOT, 1, 60);
+                ItemCategoryFlags.INGOT, 1, 200);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, BlockCategoryFlags.SLURRY,

@@ -67,7 +67,7 @@ public class MaterialCopper extends MaterialNativeMetal {
 
         IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, 2,
-                this, ItemCategoryFlags.INGOT, 1, 400);
+                this, ItemCategoryFlags.INGOT, 1, 200);
 
         IGMethodBuilder.roast(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.COMPOUND_DUST, 1,

@@ -41,7 +41,7 @@ public class MaterialLead extends MaterialNativeMetal
         super.setupRecipeStages();
         IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(
                 ItemCategoryFlags.CRUSHED_ORE, 2,
-                ItemCategoryFlags.INGOT, 1, 60);
+                ItemCategoryFlags.INGOT, 1, 200);
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),

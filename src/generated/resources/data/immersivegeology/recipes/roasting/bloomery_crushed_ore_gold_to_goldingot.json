@@ -2,12 +2,12 @@
   "type": "immersivegeology:bloomery",
   "input": {
     "base_ingredient": {
-      "tag": "forge:crushed_ore/lead"
+      "tag": "forge:crushed_ore/gold"
     },
     "count": 2
   },
   "result": {
-    "item": "immersiveengineering:ingot_lead"
+    "item": "minecraft:gold_ingot"
   },
   "time": 200
 }
