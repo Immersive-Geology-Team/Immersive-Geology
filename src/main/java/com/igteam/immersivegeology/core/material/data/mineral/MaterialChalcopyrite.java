@@ -44,11 +44,11 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         setAsocialMaterialChance(1f);
-        addGenerationFriend(() -> MineralEnum.Pyrite.instance(), 50);
-        addGenerationFriend(() -> MineralEnum.Chalcocite.instance(), 50);
+        addGenerationFriend((h) -> MineralEnum.Pyrite.instance(), 50);
+        addGenerationFriend((h) -> MineralEnum.Chalcocite.instance(), 50);
 
         //TODO near Lava or nether
-        CONFIG = new MineralConfig(14,35,1,-60,256,2000, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(14,35,1,-60,256,350, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

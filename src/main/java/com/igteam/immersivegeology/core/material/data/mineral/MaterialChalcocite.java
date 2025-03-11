@@ -43,8 +43,8 @@ public class MaterialChalcocite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         setAsocialMaterialChance(1f);
-        addGenerationFriend(() -> MineralEnum.Chalcopyrite.instance(), 50);
-        CONFIG = new MineralConfig(24,40,1,-32,200,1200, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        addGenerationFriend((h) -> MineralEnum.Chalcopyrite.instance(), 50);
+        CONFIG = new MineralConfig(24,40,1,-32,200,700, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ig_ore",
+  "config": {
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
+    "entry": "Lignite",
+    "random_name": -5247577841367759350,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
+  }
+}

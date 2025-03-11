@@ -41,7 +41,7 @@ public class MaterialCryolite extends MaterialMineral {
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
         // TODO Banished to the END of time
-        CONFIG = new MineralConfig(14,90,1,0,120,500, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(14,90,1,0,120,1, 0.5,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
 
     @Override

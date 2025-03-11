@@ -14,9 +14,11 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.BlueprintCraftingRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.builders.CokeOvenRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.api.crafting.builders.MetalPressRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEFluids;
+import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
@@ -28,6 +30,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.Indus
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
@@ -341,6 +344,10 @@ public class IGRecipes extends RecipeProvider
 
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
+
+		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 1).setOil(500).addInput(IngredientWithSize.of(MineralEnum.Bituminous.getStack(ItemCategoryFlags.POOR_ORE, 2))).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/poor_bituminous_to_coke"));
+		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 1).setOil(500).addInput(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.NORMAL_ORE)).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_bituminous_to_coke"));
+		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 2).setOil(800).addInput(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.RICH_ORE)).setTime(1400).build(consumer, new ResourceLocation(IGLib.MODID, "coking/rich_bituminous_to_coke"));
 	}
 
 	private ResourceLocation ig(String crafting)

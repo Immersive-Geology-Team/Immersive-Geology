@@ -122,4 +122,14 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default Set<MaterialHelper> getOriginMaterials() {return instance().getOriginMaterials();};
 
     default Rarity getRarity() {return instance().getRarity();};
+
+	default boolean hasBurnTime()
+    {
+        return instance().canBurn();
+    };
+
+    default int getBurnTime()
+    {
+        return instance().getBurntime();
+    }
 }

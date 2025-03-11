@@ -28,7 +28,7 @@ public class MaterialGypsum extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(14,30,3,40,80,900, 0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(14,30,3,40,80,450, 0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
     }
 
     @Override

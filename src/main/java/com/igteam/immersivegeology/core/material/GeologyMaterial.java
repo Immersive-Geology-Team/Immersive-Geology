@@ -50,7 +50,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected IGRecipeChain directBlasting = new IGRecipeChain(this, "direct_blasting", 0);
     protected IGRecipeChain sulphideElectrowining = new IGRecipeChain(this, "sulphide_electrowining", 1);
 
-    Set<Pair<Supplier<MaterialHelper>, Integer>> generation_group = new HashSet<>();
+    Set<Pair<Function<Integer, MaterialHelper>, Integer>> generation_group = new HashSet<>();
     private final LinkedHashSet<IGRecipeStage> stage_set = new LinkedHashSet<>();
 
     public GeologyMaterial() {
@@ -60,7 +60,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
-        this.generation_group.add(Pair.of(() -> this, 100));
+        this.generation_group.add(Pair.of((i) -> this, 100));
 
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
@@ -427,13 +427,29 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return asocialMaterialChance;
     }
 
-    public void addGenerationFriend(Supplier<MaterialHelper> material, int chance)
+    public void addGenerationFriend(Function<Integer, MaterialHelper> material, int chance)
     {
         generation_group.add(Pair.of(material, chance));
     }
 
-    public Set<Pair<Supplier<MaterialHelper>, Integer>> getAssociateMaterialSet()
+    public Set<Pair<Function<Integer, MaterialHelper>, Integer>> getAssociateMaterialSet()
     {
         return generation_group;
+    }
+
+    private int burntime = 0;
+
+    public void setBurntime(int burntime){
+        this.burntime = burntime;
+    }
+
+    public int getBurntime()
+    {
+        return burntime;
+    }
+
+    public boolean canBurn()
+    {
+        return burntime > 0;
     }
 }

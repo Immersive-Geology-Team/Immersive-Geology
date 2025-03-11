@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface IWorldGenConfig
@@ -79,7 +80,7 @@ public interface IWorldGenConfig
 
 	double getAssociateMaterialChance();
 
-	Set<Pair<Supplier<MaterialHelper>, Integer>> getAssociateMaterialSet();
+	Set<Pair<Function<Integer, MaterialHelper>, Integer>> getAssociateMaterialSet();
 
 	double getMinSpawnTemp();
 

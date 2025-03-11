@@ -116,11 +116,11 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
 	}
 
-	private static MaterialHelper getFriendMaterial(RandomSource random, Set<Pair<Supplier<MaterialHelper>, Integer>> friends)
+	private static MaterialHelper getFriendMaterial(RandomSource random, int height, Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends)
 	{
 		float totalWeight = 0;
 		// Calculate total weight
-		for (Pair<Supplier<MaterialHelper>, Integer> entry : friends) {
+		for (Pair<Function<Integer, MaterialHelper>, Integer> entry : friends) {
 			totalWeight += entry.getSecond();
 		}
 
@@ -128,10 +128,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		float randomValue = random.nextFloat() * totalWeight;
 
 		// Iterate and select the weighted material
-		for (Pair<Supplier<MaterialHelper>, Integer> entry : friends) {
+		for (Pair<Function<Integer, MaterialHelper>, Integer> entry : friends) {
 			randomValue -= entry.getSecond();
 			if (randomValue <= 0) {
-				return entry.getFirst().get();
+				return entry.getFirst().apply(height);
 			}
 		}
 
@@ -155,13 +155,13 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		double associateChance = config.getConfig().associateChance.get();
 		boolean useFriendMaterials = associateChance > random.nextDouble();
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
-		Set<Pair<Supplier<MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
+		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
 		boolean isTube = config.getConfig().generationPattern.get().equals(IGGenerationType.TUBE);
 
 		// Iterate over every block in the chunk
-		for (int x = -16; x < 32; x++) {         // Chunk local x with 1 chunk radius
-			for (int y = veinMinY; y < veinMaxY; y++) {
+		for (int y = veinMinY; y < veinMaxY; y++) {
+			for (int x = -16; x < 32; x++) { // Chunk local x with 1 chunk radius
 				for (int z = -16; z < 32; z++) { // Chunk local z with 1 chunk radius
 
 					// Calculate world coordinates
@@ -191,7 +191,11 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					if (shouldPlaceOre(noiseValue, vein, config) && random.nextFloat() > passRate) {
 						if(useFriendMaterials)
 						{
-							useMaterial = getFriendMaterial(random, friends);
+							// TODO see if we can remove this from the internal loop for x and y...
+							useMaterial = getFriendMaterial(random, y, friends);
+							if(useMaterial == null){
+								useMaterial = parentMaterial.instance();
+							}
 						}
 						BlockState stoneState = level.getBlockState(cursor);
 

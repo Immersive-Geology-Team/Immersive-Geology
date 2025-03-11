@@ -16,7 +16,10 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class IGGenericOreItem extends IGGenericItem
@@ -31,6 +34,12 @@ public class IGGenericOreItem extends IGGenericItem
 	@Override
 	public int getColor(int index) {
 		return super.getColor(index);
+	}
+
+	@Override
+	public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType)
+	{
+		return (super.getBurnTime(itemStack, recipeType) * (oreRichness.ordinal() + 1));
 	}
 
 	@Override

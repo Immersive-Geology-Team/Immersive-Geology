@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:bituminous",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Bituminous"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Bituminous"
+    }
+  ]
+}

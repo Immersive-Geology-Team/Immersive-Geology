@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:coke_oven",
+  "creosote": 500,
+  "input": {
+    "base_ingredient": {
+      "item": "immersivegeology:poor_ore_bituminous"
+    },
+    "count": 2
+  },
+  "result": {
+    "tag": "forge:coal_coke"
+  },
+  "time": 1800
+}

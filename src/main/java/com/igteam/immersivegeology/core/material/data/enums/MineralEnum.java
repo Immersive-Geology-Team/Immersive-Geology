@@ -25,7 +25,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGenConfig
 {
@@ -33,6 +33,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Alumina(new MaterialAlumina()),
     Anatase(new MaterialAnatase()),
     Bauxite(new MaterialBauxite()),
+    Bituminous(new MaterialBituminous()),
     Cassiterite(new MaterialCassiterite()),
     Carnallite(new MaterialCarnallite()),
     Chalcocite(new MaterialChalcocite()),
@@ -46,6 +47,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Gypsum(new MaterialGypsum()),
     Hematite(new MaterialHematite()),
     Ilmenite(new MaterialIlmenite()),
+    Lignite(new MaterialLignite()),
     Magnetite(new MaterialMagnetite()),
     Molybdenite(new MaterialMolybdenite()),
     Monazite(new MaterialMonazite()),
@@ -176,7 +178,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     }
 
     @Override
-    public Set<Pair<Supplier<MaterialHelper>, Integer>> getAssociateMaterialSet()
+    public Set<Pair<Function<Integer, MaterialHelper>, Integer>> getAssociateMaterialSet()
     {
         return instance().getAssociateMaterialSet();
     }

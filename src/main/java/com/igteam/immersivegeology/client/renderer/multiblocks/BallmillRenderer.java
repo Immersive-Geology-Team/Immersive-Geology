@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEH
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
+import blusunrize.immersiveengineering.client.render.tile.CrusherRenderer;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
@@ -39,6 +40,8 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
     public static final String AXLE_NAME = "axle";
 
     public static IGDynamicModel DRUM, AXLE;
+
+    public BallmillRenderer() {}
 
     @Override
     public void render(MultiblockBlockEntityMaster<BallmillLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
@@ -85,10 +88,9 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
     private void renderDynamicModel(IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, Direction facing, Level level, BlockPos pos, int light, int overlay)
     {
         matrix.pushPose();
-        List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
+        List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, (RenderType)null);
         rotateForFacing(matrix, facing);
-
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, level, pos, false, 0xf0f0f0, light);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, true, 0xffffff, light);
         matrix.popPose();
     }
 

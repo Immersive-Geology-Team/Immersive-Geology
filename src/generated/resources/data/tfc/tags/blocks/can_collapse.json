@@ -1477,6 +1477,54 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_bituminous_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_bituminous_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_bituminous_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_bituminous_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_bituminous_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_bituminous_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_bituminous_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_bituminous_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_bituminous_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_bituminous_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_bituminous_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_bituminous_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_cassiterite_stone",
       "required": false
     },
@@ -3286,6 +3334,54 @@
     },
     {
       "id": "immersivegeology:rich_ore_block_ilmenite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_lignite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_lignite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_lignite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_lignite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_lignite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_lignite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_lignite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_lignite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_lignite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_lignite_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_lignite_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_lignite_sandstone",
       "required": false
     },
     {
