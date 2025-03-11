@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "immersivegeology:poor_ore_bituminous"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "c",
+    "s"
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:torch"
+  },
+  "show_notification": true
+}

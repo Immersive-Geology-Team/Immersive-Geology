@@ -345,9 +345,17 @@ public class IGRecipes extends RecipeProvider
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(1200).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(500).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
 
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH).define('s', Items.STICK).define('c', MineralEnum.Lignite.getItem(ItemCategoryFlags.POOR_ORE)).pattern("c").pattern("s").unlockedBy("has_lignite_poor", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Lignite.getItem(ItemCategoryFlags.POOR_ORE))).save(consumer, "torch_from_poor_lignite");
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH, 2).define('s', Items.STICK).define('c', MineralEnum.Lignite.getItem(ItemCategoryFlags.POOR_ORE)).pattern("c").pattern("s").unlockedBy("has_lignite_normal", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Lignite.getItem(ItemCategoryFlags.NORMAL_ORE))).save(consumer, "torch_from_normal_lignite");
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH, 4).define('s', Items.STICK).define('c', MineralEnum.Lignite.getItem(ItemCategoryFlags.POOR_ORE)).pattern("c").pattern("s").unlockedBy("has_lignite_rich", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Lignite.getItem(ItemCategoryFlags.RICH_ORE))).save(consumer, "torch_from_rich_lignite");
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH).define('s', Items.STICK).define('c', MineralEnum.Bituminous.getItem(ItemCategoryFlags.POOR_ORE)).pattern("c").pattern("s").unlockedBy("has_bituminous_poor", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Bituminous.getItem(ItemCategoryFlags.POOR_ORE))).save(consumer, "torch_from_poor_bituminous");
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH, 2).define('s', Items.STICK).define('c', MineralEnum.Bituminous.getItem(ItemCategoryFlags.NORMAL_ORE)).pattern("c").pattern("s").unlockedBy("has_bituminous_normal", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Bituminous.getItem(ItemCategoryFlags.NORMAL_ORE))).save(consumer, "torch_from_normal_bituminous");
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH, 4).define('s', Items.STICK).define('c', MineralEnum.Bituminous.getItem(ItemCategoryFlags.RICH_ORE)).pattern("c").pattern("s").unlockedBy("has_bituminous_rich", InventoryChangeTrigger.TriggerInstance.hasItems(MineralEnum.Bituminous.getItem(ItemCategoryFlags.RICH_ORE))).save(consumer, "torch_from_rich_bituminous");
+
 		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 1).setOil(500).addInput(IngredientWithSize.of(MineralEnum.Bituminous.getStack(ItemCategoryFlags.POOR_ORE, 2))).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/poor_bituminous_to_coke"));
-		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 1).setOil(500).addInput(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.NORMAL_ORE)).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_bituminous_to_coke"));
-		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 2).setOil(800).addInput(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.RICH_ORE)).setTime(1400).build(consumer, new ResourceLocation(IGLib.MODID, "coking/rich_bituminous_to_coke"));
+		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 1).setOil(500).addInput(MineralEnum.Bituminous.getItem(ItemCategoryFlags.NORMAL_ORE)).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_bituminous_to_coke"));
+		CokeOvenRecipeBuilder.builder(IETags.coalCoke, 2).setOil(800).addInput(MineralEnum.Bituminous.getItem(ItemCategoryFlags.RICH_ORE)).setTime(1400).build(consumer, new ResourceLocation(IGLib.MODID, "coking/rich_bituminous_to_coke"));gi
 	}
 
 	private ResourceLocation ig(String crafting)

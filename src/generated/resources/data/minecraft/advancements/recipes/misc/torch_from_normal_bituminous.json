@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bituminous_normal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:normal_ore_bituminous"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:torch_from_normal_bituminous"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bituminous_normal",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:torch_from_normal_bituminous"
+    ]
+  },
+  "sends_telemetry_event": false
+}
