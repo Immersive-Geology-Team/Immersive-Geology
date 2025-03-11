@@ -146,6 +146,9 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "pelletizer");
 
         // Build the manual entry for the contributors
+        builder.readFromFile(new ResourceLocation(IGLib.MODID, "getting_started"));
+        instance.addEntry(parent_category, builder.create());
+
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
 
