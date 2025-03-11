@@ -2,7 +2,7 @@
   "type": "immersiveengineering:coke_oven",
   "creosote": 800,
   "input": {
-    "tag": "forge:rich_ore/bituminous"
+    "item": "immersivegeology:rich_ore_bituminous"
   },
   "result": {
     "base_ingredient": {
