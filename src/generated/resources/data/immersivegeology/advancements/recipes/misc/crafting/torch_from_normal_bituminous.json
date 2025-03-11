@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_lignite_normal": {
+    "has_bituminous_normal": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:normal_ore_lignite"
+              "immersivegeology:normal_ore_bituminous"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:torch_from_normal_lignite"
+        "recipe": "immersivegeology:crafting/torch_from_normal_bituminous"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_lignite_normal",
+      "has_bituminous_normal",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:torch_from_normal_lignite"
+      "immersivegeology:crafting/torch_from_normal_bituminous"
     ]
   },
   "sends_telemetry_event": false

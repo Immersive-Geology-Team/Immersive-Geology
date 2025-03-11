@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "c": {
-      "item": "immersivegeology:poor_ore_lignite"
+      "item": "immersivegeology:rich_ore_lignite"
     },
     "s": {
       "item": "minecraft:stick"
@@ -14,7 +14,7 @@
     "s"
   ],
   "result": {
-    "count": 2,
+    "count": 4,
     "item": "minecraft:torch"
   },
   "show_notification": true

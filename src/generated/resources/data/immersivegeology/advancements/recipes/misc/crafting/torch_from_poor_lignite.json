@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_lignite_rich": {
+    "has_lignite_poor": {
       "conditions": {
         "items": [
           {
             "items": [
-              "immersivegeology:rich_ore_lignite"
+              "immersivegeology:poor_ore_lignite"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:torch_from_rich_lignite"
+        "recipe": "immersivegeology:crafting/torch_from_poor_lignite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_lignite_rich",
+      "has_lignite_poor",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:torch_from_rich_lignite"
+      "immersivegeology:crafting/torch_from_poor_lignite"
     ]
   },
   "sends_telemetry_event": false

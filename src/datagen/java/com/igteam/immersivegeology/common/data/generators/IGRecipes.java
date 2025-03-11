@@ -52,6 +52,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -335,6 +336,8 @@ public class IGRecipes extends RecipeProvider
 				}
 			}
 		}
+
+		GravitySeparatorRecipeBuilder.builder(ItemStack.EMPTY).setByproduct(Items.FLINT).setChance(0.5f).addInput(Items.GRAVEL).build(consumer, ig("wash/gravel_for_flint"));
 
 		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT)).addInput(new IngredientWithSize(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 2)).addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/component_hastelloy"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK), 4)

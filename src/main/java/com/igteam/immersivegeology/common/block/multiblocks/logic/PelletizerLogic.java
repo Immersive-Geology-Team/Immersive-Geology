@@ -63,7 +63,7 @@ import java.util.function.Supplier;
 
 public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>, IServerTickableComponent<PelletizerLogic.State>, IClientTickableComponent<PelletizerLogic.State>, MBOverlayText<PelletizerLogic.State>
 {
-    public static final BlockPos REDSTONE_IN = new BlockPos(0,0,1);
+    public static final BlockPos REDSTONE_IN = new BlockPos(2,0,0);
     public static final int ENERGY_CAPACITY = 12000;
 
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(1,0,4, RelativeBlockFace.FRONT);
@@ -84,15 +84,15 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final PelletizerLogic.State state = context.getState();
-
+        final boolean isEnabled = state.rsState.isEnabled(context);
         final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = state.rsState.isEnabled(context) && (!state.tank.isEmpty()) && state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+        state.renderAsActive = isEnabled && (!state.tank.isEmpty()) && state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         if((wasActive != state.renderAsActive))
         {
             context.requestMasterBESync();
         }
 
-        if(state.processor.getQueueSize() > 0 && !state.tank.isEmpty())
+        if(state.processor.getQueueSize() > 0 && !state.tank.isEmpty() && isEnabled)
         {
             state.tank.drain(2, FluidAction.EXECUTE);
             context.requestMasterBESync();
