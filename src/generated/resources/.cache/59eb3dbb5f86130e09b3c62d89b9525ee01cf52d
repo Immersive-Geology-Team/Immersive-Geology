@@ -1,8 +1,7 @@
-// 1.20.1	2025-03-12T12:22:05.981513258	Loot Tables
+// 1.20.1	2025-03-16T06:40:05.941787278	Loot Tables
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 6f5bc3941be14bd92268a1130c7f3ad48da36db7 data/immersivegeology/loot_tables/blocks/chemical_reactor.json
 1107089b96bdf669232bb19fab2dc6c340913f92 data/immersivegeology/loot_tables/blocks/crystallizer.json
-fb4f4b8d2cf7bd06d7ed2ce8352e1b3ac3b5ef4a data/immersivegeology/loot_tables/blocks/drawing_table.json
 80b633a11f303bb24945d5f930a72a011c788465 data/immersivegeology/loot_tables/blocks/energy_pipe_high_voltage_cable.json
 332f48215b41a391547b1d6f22699388b5c115bc data/immersivegeology/loot_tables/blocks/engineering_block_aluminum.json
 75c00ba649cfada152e014726fd05c95f5cda376 data/immersivegeology/loot_tables/blocks/engineering_block_hastelloy.json

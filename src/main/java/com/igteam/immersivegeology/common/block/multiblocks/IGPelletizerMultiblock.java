@@ -33,7 +33,7 @@ public class IGPelletizerMultiblock extends IGTemplateMultiblock
 	@Override
 	public float getManualScale()
 	{
-		return 12;
+		return 17;
 	}
 
 	@Override

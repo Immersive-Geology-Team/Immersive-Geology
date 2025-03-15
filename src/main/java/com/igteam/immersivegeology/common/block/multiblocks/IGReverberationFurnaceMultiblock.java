@@ -33,7 +33,7 @@ public class IGReverberationFurnaceMultiblock extends IGTemplateMultiblock {
 
     @Override
     public float getManualScale() {
-        return 8;
+        return 6.5f;
     }
 
     @Override

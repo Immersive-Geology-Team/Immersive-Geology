@@ -15,6 +15,7 @@ import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDecoration;
 import blusunrize.immersiveengineering.common.register.IEBlocks.WoodenDecoration;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -46,6 +47,12 @@ public class IGScaffoldingBlock extends ScaffoldingBlock implements IGBlockType
 			return input == this;
 		});
 		FluidPipeBlockEntity.climbablePipeCovers.add((input) -> {
+			return input == this;
+		});
+		IGEnergyPipeEntity.validPipeCovers.add((input) -> {
+			return input == this;
+		});
+		IGEnergyPipeEntity.climbablePipeCovers.add((input) -> {
 			return input == this;
 		});
 	}

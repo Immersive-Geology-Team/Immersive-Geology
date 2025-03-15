@@ -32,7 +32,7 @@ public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
 
     @Override
     public float getManualScale() {
-        return 8;
+        return 11;
     }
 
     @Override

@@ -1,18 +1,14 @@
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDevices;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
-import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
 import com.igteam.immersivegeology.common.item.IGGenericOreItem;
-import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -20,21 +16,17 @@ import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -62,7 +54,6 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
         List<? extends Item> itemList = IGRegistrationHolder.supplyDeferredItems().get();
 
         for (Item item : itemList) {
-            if(item instanceof IGMultiblockBlueprint) continue;
             if(item instanceof IGGenericOreItem i){
                 generateGenericOreItem(i);
                 continue;

@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-16T04:10:25.912170737	Block States: immersivegeology
+// 1.20.1	2025-03-16T06:57:40.552541708	Block States: immersivegeology
 8d6072517ffd29aa8fe4c02bbfb3a68ed3798e26 assets/immersivegeology/blockstates/ballmill.json
 7bd1826c87de3278a612fde7b34686c403a23450 assets/immersivegeology/blockstates/bloomery.json
 30d2e15c71436f6c98175abf0d8103fe3affdf1a assets/immersivegeology/blockstates/centrifuge.json
@@ -1962,8 +1962,8 @@ e27ea0969100cf2c745a7e6670151e128aeb6857 assets/immersivegeology/models/block/fl
 69dd5058633be381575ba3d4de5ba369b76e5376 assets/immersivegeology/models/block/fluid/slurry_sulfuricacid_zinc.json
 e7d013eca089b5aa1cdf63e53f3d427695a608d1 assets/immersivegeology/models/block/multiblock/obj/ballmill/ballmill_mirrored_split.json
 5dee06efc3ea135221c6d82cc5208393239491ef assets/immersivegeology/models/block/multiblock/obj/ballmill/ballmill_split.json
-810a78301d8fba915fcda83ae72f93a0fd03e0f4 assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_mirrored_split.json
-45419f2e4b056a34aa6733c2c602a107b2766c5d assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_split.json
+ef89c482cda6eeb46b800214bf9339a7aa33339b assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_mirrored_split.json
+5f2bf12956a1fd18bf773f2380ac260a1132a0e1 assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_split.json
 cdde4d1db9273a34917057b9b770e9dbc79cfb7a assets/immersivegeology/models/block/multiblock/obj/chemical_reactor/chemical_reactor_mirrored_split.json
 7e3fcd22f55ba8dfcdc565bb175957c721500780 assets/immersivegeology/models/block/multiblock/obj/chemical_reactor/chemical_reactor_split.json
 af1fc344c78bf7da00063c79b74ecccb3b24a649 assets/immersivegeology/models/block/multiblock/obj/coredrill/coredrill_mirrored_split.json

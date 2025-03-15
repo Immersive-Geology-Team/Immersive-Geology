@@ -38,12 +38,12 @@ public class IGCrystalizerMultiblock extends IGTemplateMultiblock
 
     @Override
     public float getManualScale() {
-        return 12.0f;
+        return 20.0f;
     }
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new CrystallizerClientData(INSTANCE, 0.5, 0.5, 0.5));
+        consumer.accept(new CrystallizerClientData(INSTANCE, 1.5, 0.5, 1.5));
     }
 
     @Override

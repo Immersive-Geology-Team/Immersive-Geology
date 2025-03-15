@@ -141,12 +141,6 @@ public class IGRecipes extends RecipeProvider
 				.pattern("W  ").define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_stone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COBBLESTONE)).save(consumer, ig("craft_igtoolkit_2"));
 
-		Item schematic_table = IGRegistrationHolder.getBlock.apply("drawing_table").asItem();
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, schematic_table)
-				.pattern("SSS")
-				.pattern("C F").define('C', Ingredient.of(Blocks.CRAFTING_TABLE)).define('S', Ingredient.of(ItemTags.WOODEN_SLABS)).define('F', Ingredient.of(Tags.Items.FENCES_WOODEN))
-				.group("ig_schematics").unlockedBy("has_crafting_table", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CRAFTING_TABLE)).save(consumer, ig("craft_schematic_table"));
-
 		// Refractory Brick Block
 		Item refractory_brick = IGRegistrationHolder.getItem.apply("refractory_brick");
 		Item refractory = MiscEnum.Refractory.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();

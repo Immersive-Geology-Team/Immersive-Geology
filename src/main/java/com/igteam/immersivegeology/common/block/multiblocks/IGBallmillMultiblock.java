@@ -56,7 +56,7 @@ public class IGBallmillMultiblock extends IGTemplateMultiblock {
 
     @Override
     public float getManualScale() {
-        return 8;
+        return 12;
     }
 
     @Override

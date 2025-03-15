@@ -29,7 +29,7 @@ public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
 
     @Override
     public float getManualScale() {
-        return 8;
+        return 12;
     }
 
     @Override

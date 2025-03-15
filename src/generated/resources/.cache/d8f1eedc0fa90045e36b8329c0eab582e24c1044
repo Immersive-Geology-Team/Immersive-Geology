@@ -1,6 +1,4 @@
-// 1.20.1	2025-03-12T17:40:55.134090462	Tags for minecraft:item mod id immersivegeology
-ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint.json
-ea6501991a639151afc6b8dc57ca8fad319940ae data/forge/tags/items/blueprint/multiblock_plans.json
+// 1.20.1	2025-03-16T06:40:05.935948386	Tags for minecraft:item mod id immersivegeology
 fa09c4d271b356fa9b19efef0bb28c2e777ac5e7 data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 1154d909987a31aa5a1ae56daa2325156fc6f8ae data/forge/tags/items/compound_dust/bronze.json
