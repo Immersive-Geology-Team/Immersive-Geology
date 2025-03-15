@@ -142,6 +142,11 @@ public class ImmersiveGeology {
             test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
         }
 
+        if (pattern.equals(BlockCategoryFlags.FENCE))
+        {
+            test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");
+        }
+
         if (pattern.equals(BlockCategoryFlags.SLAB))
         {
             test =  new ResourceLocation(IGLib.MODID, "textures/" + (pattern instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + base.getName() + "/" + BlockCategoryFlags.STORAGE_BLOCK.getName() + ".png");

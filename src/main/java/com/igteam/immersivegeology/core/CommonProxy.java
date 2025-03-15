@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core;
 
+import com.igteam.immersivegeology.common.block.energypipe.IGIMCHandler;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -17,6 +18,7 @@ import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.InterModComms;
 
 public class CommonProxy
 {
@@ -29,6 +31,8 @@ public class CommonProxy
 		IGWorldGen.init();
 		IGRecipeTypes.init();
 		IGContent.initializeIETweaks();
+		IGIMCHandler.init();
+		IGIMCHandler.handleIMCMessages(InterModComms.getMessages(IGLib.MODID));
 	}
 
 	public void reinitializeGUI(){}

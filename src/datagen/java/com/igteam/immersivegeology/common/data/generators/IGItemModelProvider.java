@@ -1,12 +1,13 @@
 package com.igteam.immersivegeology.common.data.generators;
 
-import com.igteam.immersivegeology.common.block.IGCrystalBlock;
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGScaffoldingBlock;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDevices;
+import com.google.common.base.Preconditions;
+import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
 import com.igteam.immersivegeology.common.item.IGGenericItem;
@@ -15,7 +16,9 @@ import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -24,12 +27,16 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder;
+import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
@@ -39,13 +46,12 @@ import java.util.Set;
 import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
 import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
-public class IGItemModelProvider extends ItemModelProvider {
-
-
+public class IGItemModelProvider extends IGTRSRItemModelProvider
+{
     private static ExistingFileHelper HELPER;
     private final Logger logger = IGLib.getNewLogger();
     public IGItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator.getPackOutput(), IGLib.MODID, existingFileHelper);
+        super(generator.getPackOutput(), existingFileHelper);
         HELPER = existingFileHelper;
     }
 
@@ -74,8 +80,23 @@ public class IGItemModelProvider extends ItemModelProvider {
             }
         }
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Simple Item Models =====-");
+
+
+        this.obj(MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE), IGLib.rl("block/obj/energy_cable_centre.obj")).transforms(IGLib.rl("item/block"));
     }
 
+    private TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
+        Preconditions.checkArgument(this.existingFileHelper.exists(model, PackType.CLIENT_RESOURCES, "", "models"));
+        return (TRSRModelBuilder)((ObjModelBuilder)this.getBuilder(item).customLoader(ObjModelBuilder::begin)).flipV(true).modelLocation(new ResourceLocation(model.getNamespace(), "models/" + model.getPath())).end();
+    }
+
+    private TRSRModelBuilder getBuilder(ItemLike item) {
+        return (TRSRModelBuilder)this.getBuilder(this.name(item));
+    }
+
+    private String name(ItemLike item) {
+        return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
+    }
     private void generateGenericItem(IGFlagItem item){
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
 
@@ -104,7 +125,7 @@ public class IGItemModelProvider extends ItemModelProvider {
 
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-            ItemModelBuilder builder = withExistingParent(itemLocation, parentLocation);
+            TRSRModelBuilder builder = withExistingParent(itemLocation, parentLocation);
             setItemTexture(builder, (IGGenericOreItem) item);
         } catch (Exception ex) {
             logger.error("Attempted to generate a texture for the ore item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
@@ -173,7 +194,7 @@ public class IGItemModelProvider extends ItemModelProvider {
                     OreRichness richness = igOreBlock.getOreRichness();
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
                     ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : ""));
-                    ItemModelBuilder builder = withExistingParent(itemLocation, parentLocation);
+                    TRSRModelBuilder builder = withExistingParent(itemLocation, parentLocation);
                     IGBlockStateProvider.implementUnsafeOreTexture(builder, igOreBlock, igOreBlock.getStoneFormation(), 1);
                     return;
                 }
@@ -197,6 +218,13 @@ public class IGItemModelProvider extends ItemModelProvider {
                 }
 
 
+                if(blockItem.getBlock() instanceof IGFenceBlock fence)
+                {
+                    withExistingParent(BuiltInRegistries.BLOCK.getKey(fence).getPath(), new ResourceLocation(IGLib.MODID,"block/base/fence_inventory"))
+                                    .texture("texture", fence.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+                    return;
+                }
+
 
                 boolean complexItem = blockItem.getMaterials().size() > 1;
 
@@ -212,5 +240,11 @@ public class IGItemModelProvider extends ItemModelProvider {
             if(item.getFlag() != null && item.getMaterial(MaterialTexture.base) != null) logger.error("Wrong input parse in generateGenericBlockItem, used normal item as input see: {} and {}", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error("Error {}", err.getMessage());
         }
+    }
+
+    @Override
+    public String getName()
+    {
+        return "Item models";
     }
 }

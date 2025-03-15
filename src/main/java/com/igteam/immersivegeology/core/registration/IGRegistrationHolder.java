@@ -21,6 +21,8 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -262,6 +264,7 @@ public class IGRegistrationHolder {
     }
 
     public static RegistryObject<BlockEntityType<DrawingTableBlockEntity>> DRAWING_TABLE;
+    public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
 
     public static synchronized void initialize()
     {
@@ -276,11 +279,8 @@ public class IGRegistrationHolder {
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
 
-        registerBlockAndItem("trconcrete", BlockCategoryFlags.MISC, MetalEnum.Titanium, BlockBehaviour.Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200));
-
         registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
         registerItem("drawing_table", () -> new IGGenericBlockItem((IGBlockType) getBlock.apply("drawing_table")));
-
         DRAWING_TABLE = TE_REGISTER.register("drawing_table_type", makeType(DrawingTableBlockEntity::new, BLOCK_REGISTRY_MAP.get("drawing_table")));
 
         LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
@@ -313,6 +313,12 @@ public class IGRegistrationHolder {
                             Supplier<Block> blockProvider = () -> new IGEvaporateMineralBlock(blockCategory, material, () -> {return (IGCrystalBlock) material.getBlock(BlockCategoryFlags.EVAPORATE_CRYSTAL);});
                             registerBlock(registryKey, blockProvider);
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGGenericBlock) getBlock.apply(registryKey)));
+                        }
+                        case ENERGY_PIPE ->
+                        {
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            registerBlock(registryKey, () -> new IGEnergyPipe(blockCategory, material));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
@@ -350,6 +356,14 @@ public class IGRegistrationHolder {
                                 registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                             }
 
+                        }
+                        case FENCE ->
+                        {
+                            if(hasExistingImplementation) continue;
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            Supplier<Block> blockProvider = () -> new IGFenceBlock(blockCategory, material);
+                            registerBlock(registryKey, blockProvider);
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case STAIRS, SHEETMETAL_STAIRS -> {
                             if(hasExistingImplementation) continue;
@@ -448,6 +462,8 @@ public class IGRegistrationHolder {
                 }
             }
         }
+
+        ENERGY_PIPE = TE_REGISTER.register("energy_pipe_type", makeType(IGEnergyPipeEntity::new, () -> MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE)));
 
         IGLib.IG_LOGGER.info("Finished");
     }

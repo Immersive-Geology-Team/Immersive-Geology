@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.models.DrawingTableCallbacks;
+import com.igteam.immersivegeology.common.block.energypipe.EnergyPipeCallback;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.common.particle.providers.FlowingWaterParticleProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -43,6 +44,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.modConstruction();
 		IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "drawing_table"), DrawingTableCallbacks.INSTANCE);
+		IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "energy_pipe"), EnergyPipeCallback.INSTANCE);
 	}
 
 	@Override

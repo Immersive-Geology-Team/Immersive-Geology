@@ -993,6 +993,18 @@
     "immersivegeology:poor_ore_block_bituminous_sandstone",
     "immersivegeology:normal_ore_block_bituminous_sandstone",
     "immersivegeology:rich_ore_block_bituminous_sandstone",
+    "immersivegeology:poor_ore_block_anthracite_stone",
+    "immersivegeology:normal_ore_block_anthracite_stone",
+    "immersivegeology:rich_ore_block_anthracite_stone",
+    "immersivegeology:poor_ore_block_anthracite_deepslate",
+    "immersivegeology:normal_ore_block_anthracite_deepslate",
+    "immersivegeology:rich_ore_block_anthracite_deepslate",
+    "immersivegeology:poor_ore_block_anthracite_dripstone_block",
+    "immersivegeology:normal_ore_block_anthracite_dripstone_block",
+    "immersivegeology:rich_ore_block_anthracite_dripstone_block",
+    "immersivegeology:poor_ore_block_anthracite_sandstone",
+    "immersivegeology:normal_ore_block_anthracite_sandstone",
+    "immersivegeology:rich_ore_block_anthracite_sandstone",
     {
       "id": "immersivegeology:poor_ore_block_cassiterite_stone",
       "required": false

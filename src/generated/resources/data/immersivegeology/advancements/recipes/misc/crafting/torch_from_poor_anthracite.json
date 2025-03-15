@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_anthracite_poor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:poor_ore_anthracite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/torch_from_poor_anthracite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_anthracite_poor",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/torch_from_poor_anthracite"
+    ]
+  },
+  "sends_telemetry_event": false
+}

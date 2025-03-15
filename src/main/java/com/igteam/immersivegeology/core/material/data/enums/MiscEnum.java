@@ -8,9 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import com.igteam.immersivegeology.core.material.data.misc.MaterialBlueprint;
-import com.igteam.immersivegeology.core.material.data.stone.special.MaterialRefractoryBlock;
-import com.igteam.immersivegeology.core.material.data.stone.special.MaterialReinforcedRefractoryBlock;
+import com.igteam.immersivegeology.core.material.data.misc.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 
@@ -18,7 +16,11 @@ public enum MiscEnum implements MaterialInterface<MaterialMisc> {
     //===== IG Special Materials =====\\
     Refractory(new MaterialRefractoryBlock()),
     ReinforcedRefractory(new MaterialReinforcedRefractoryBlock()),
-    Blueprint(new MaterialBlueprint());
+    TitaniumConcrete(new MaterialTitaniumConcrete()),
+    ReinforceConcrete(new MaterialSteelConcrete()),
+    Blueprint(new MaterialBlueprint()),
+    Cable(new MaterialHighVoltageCable()),
+    EHVInsulation(new MaterialEHVInsulation());
 
     private final MaterialMisc material;
     MiscEnum(MaterialMisc m){

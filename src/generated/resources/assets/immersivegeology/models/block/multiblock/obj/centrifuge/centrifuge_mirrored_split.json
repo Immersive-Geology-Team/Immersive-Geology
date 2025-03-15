@@ -2,17 +2,14 @@
   "parent": "minecraft:block/block",
   "dynamic": false,
   "inner_model": {
-    "inner_model": {
-      "parent": "minecraft:block/block",
-      "automatic_culling": false,
-      "flip_v": true,
-      "loader": "forge:obj",
-      "model": "immersivegeology:models/block/multiblock/obj/centrifuge/centrifuge.obj",
-      "textures": {
-        "particle": "immersivegeology:block/multiblock/centrifuge/centrifuge_base"
-      }
-    },
-    "loader": "immersiveengineering:mirror"
+    "parent": "minecraft:block/block",
+    "automatic_culling": false,
+    "flip_v": true,
+    "loader": "forge:obj",
+    "model": "immersivegeology:models/block/multiblock/obj/centrifuge/centrifuge_mirrored.obj",
+    "textures": {
+      "particle": "immersivegeology:block/multiblock/centrifuge/centrifuge_base"
+    }
   },
   "loader": "immersiveengineering:basic_split",
   "split_parts": [
@@ -271,5 +268,8 @@
       1,
       2
     ]
-  ]
+  ],
+  "textures": {
+    "particle": "immersivegeology:block/multiblock/centrifuge/centrifuge_base"
+  }
 }

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sheetmetal_srconcrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:storage_block_srconcrete"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/block_to_stair_srconcrete"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sheetmetal_srconcrete",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/block_to_stair_srconcrete"
+    ]
+  },
+  "sends_telemetry_event": false
+}

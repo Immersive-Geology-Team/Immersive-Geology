@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "immersivegeology:powder_tungsten"
+    },
+    {
+      "item": "immersiveengineering:dust_hop_graphite"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:powder_tungstencarbide"
+  }
+}

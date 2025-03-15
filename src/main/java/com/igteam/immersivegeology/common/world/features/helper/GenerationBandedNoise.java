@@ -18,30 +18,30 @@ public class GenerationBandedNoise implements IGenerationPattern
 		SimplexNoise3D simplex = new SimplexNoise3D(seed);
 		SimplexNoise3D warpSimplex = new SimplexNoise3D(seed - 1);
 
-		// Warp noise generator for band distortion
+		// Warp noise generator for subtle band distortion
 		INoise3D warp = (x, y, z) -> warpSimplex
-				.octaves(3, 0.8f)  // More octaves for finer details
-				.sinWarp(2, 1)     // Add sine warping to create wave-like distortions
-				.flattened(-1, 1)
-				.bias(-0.3f)
-				.noise(x / 72, y / 48, z / 72);  // Slightly stretched in Y for subtle distortion
+				.bias(-0.6f)
+				.octaves(2, 0.7f)  // Fewer octaves, reducing finer distortion
+				.sinWarp(1.5f, 0.75f)  // Lower warping intensity
+				.flattened(-0.8f, 0.8f)  // Slightly lower amplitude
+				.noise(x / 80, y / 50, z / 80);  // Gentle stretch in Y-axis
 
 		// Primary noise generator
 		return (x, y, z) -> {
-			// Apply the base noise with a stretch on Y for a more banded effect
+			// Base noise with slight Y stretch for banding
 			float baseNoise = simplex
-					.bias(-0.5f)
 					.flattened(-1, 1)
-					.octaves(3, 1f)
+					.octaves(3, 0.9f)
 					.add(warp)  // Apply the warp to distort layers
-					.noise(x / featureSize, y / 8, z / featureSize); // Stretched Y-axis for more subtle variations
+					.noise(x / featureSize, y / 10, z / featureSize); // Stretched Y for more controlled banding
 
-			// Create a band-like effect on the Y-axis by applying a sine function
-			// The sine function causes a smooth fade in and out along the Y-axis
-			float bandEffect = (float) Math.sin(y / (5 * (1.25f+warp.noise(x,y,z) * 0.25f)) - (warp.noise(x,y,z) * 0.25f)); // Smooth fading in and out along Y
+			// More structured banding with less erratic warping
+			float bandEffect = (float) Math.sin(
+					(y / (5.5f + warp.noise(x, y, z) * 0.2f))  // Less influence from warp
+							- (warp.noise(x, y, z) * 0.15f)  // Reduce phase shift from warp
+			);
 
-			// Combine the base noise with the band effect
-			return (baseNoise * bandEffect) * -1; // Apply the Y-axis fading to the overall noise
+			return (baseNoise * bandEffect) * -1; // Apply banding effect to noise
 		};
 	}
 }

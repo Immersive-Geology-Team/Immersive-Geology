@@ -2,6 +2,10 @@ package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.IGClientRenderHandler.RenderTypeSkeleton;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
+import com.igteam.immersivegeology.common.tag.IGTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     STORAGE_BLOCK(4),
@@ -13,6 +17,8 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SHEETMETAL_BLOCK(4),
     SHEETMETAL_SLAB(4),
     SHEETMETAL_STAIRS(4),
+    FENCE(4),
+    ENERGY_PIPE(4),
     STAIRS(4),
     FLUID(3),
     SLURRY(3),
@@ -48,6 +54,12 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     public RenderTypeSkeleton getRenderType()
     {
         if(this == ORE_BLOCK || this == EVAPORATE_CRYSTAL) return RenderTypeSkeleton.CUTOUT_MIPPED;
+        if(this == ENERGY_PIPE) return RenderTypeSkeleton.TRANSLUCENT;
         return IFlagType.super.getRenderType();
+    }
+
+    public TagKey<Block> getCategoryTag()
+    {
+        return IGTags.BLOCK_CATEGORY_FLAGS.get(this);
     }
 }

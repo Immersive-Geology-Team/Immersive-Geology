@@ -38,6 +38,8 @@ public class MaterialTitanium extends MaterialMetal {
 
     public MaterialTitanium() {
         super();
+        addFlags(BlockCategoryFlags.FENCE);
+
     }
 
     @Override

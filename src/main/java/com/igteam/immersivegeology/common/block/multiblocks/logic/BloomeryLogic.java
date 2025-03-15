@@ -58,11 +58,11 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         final Boolean wasActive = context.getLevel().getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(NonMirrorableWithActiveBlock.ACTIVE);
         if(context.getLevel().shouldTickModulo(2))
         {
-            if(wasActive) spawnSmoke(context, SMOKE_POSITION);
+            if(wasActive) spawnSmoke(context, new Vec3(1,2.75,1));
         }
     }
 
-    private static final Vec3 SMOKE_POSITION = new Vec3(0.5,1.5,0.5);
+    private static final Vec3 SMOKE_POSITION = new Vec3(1,2.75,1);
 
     private double particleXZSpeed()
     {

@@ -1,0 +1,7 @@
+{
+  "type": "immersivegeology:bloomery_fuel",
+  "input": {
+    "item": "immersivegeology:rich_ore_lignite"
+  },
+  "time": 450
+}

@@ -1,0 +1,31 @@
+{
+  "values": [
+    "immersivegeology:storage_block_bronze",
+    "immersivegeology:storage_block_calcium",
+    "immersivegeology:storage_block_chromium",
+    "immersivegeology:storage_block_cobalt",
+    "immersivegeology:storage_block_manganese",
+    "immersivegeology:storage_block_magnesium",
+    "immersivegeology:storage_block_molybdenum",
+    "immersivegeology:storage_block_neodymium",
+    "immersivegeology:storage_block_osmium",
+    "immersivegeology:storage_block_platinum",
+    "immersivegeology:storage_block_hastelloy",
+    "immersivegeology:storage_block_stainlesssteel",
+    "immersivegeology:storage_block_sodium",
+    "immersivegeology:storage_block_thorium",
+    "immersivegeology:storage_block_tin",
+    "immersivegeology:storage_block_titanium",
+    "immersivegeology:storage_block_tungsten",
+    "immersivegeology:storage_block_unobtanium",
+    "immersivegeology:storage_block_vanadium",
+    "immersivegeology:storage_block_zinc",
+    "immersivegeology:storage_block_zirconium",
+    "immersivegeology:storage_block_tungstencarbide",
+    "immersivegeology:storage_block_moltenmantle",
+    "immersivegeology:storage_block_refractory_brick",
+    "immersivegeology:storage_block_reinforced_refractory_brick",
+    "immersivegeology:storage_block_trconcrete",
+    "immersivegeology:storage_block_srconcrete"
+  ]
+}

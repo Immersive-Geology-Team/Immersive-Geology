@@ -8,6 +8,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.tags.BiomeTags;
 
@@ -29,11 +30,18 @@ public class MaterialBituminous extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(800);
-		CONFIG = new MineralConfig(30, 50, 1, 30, 120, 1000, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, 20, 120, 1000, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0x242227;
-		Random rand = new Random();
-		addGenerationFriend((h) -> (h > 65) ? (rand.nextBoolean() ? MineralEnum.Lignite.instance() : null) : null, 300);
+		addGenerationFriend(MaterialBituminous::getFriends, 300);
 	}
+
+	private static MaterialHelper getFriends(int height){
+		MaterialHelper selected = null;
+		if(height > 55) selected = MineralEnum.Lignite.instance();
+
+		return selected;
+	}
+
 
 	@Override
 	public IGVeinTextureType getVeinTextureType()

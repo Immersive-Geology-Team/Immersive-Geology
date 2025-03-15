@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.energypipe.EnergyPipeCallback;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
@@ -42,6 +43,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -53,6 +55,7 @@ import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder.Par
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.slf4j.Logger;
@@ -73,8 +76,6 @@ import java.util.stream.Stream;
 import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public class IGBlockStateProvider extends BlockStateProvider {
-    protected static final List<Vec3i> COLUMN_THREE = ImmutableList.of(BlockPos.ZERO, BlockPos.ZERO.above(), BlockPos.ZERO.above(2));
-
     public final Map<Block, ModelFile> unsplitModels = new HashMap<>();
     protected static final Map<ResourceLocation, String> generatedParticleTextures = new HashMap<>();
     protected final ExistingFileHelper existingFileHelper;
@@ -100,6 +101,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case STAIRS, SHEETMETAL_STAIRS -> registerStairsBlock(igBlock);
                     case SLAB, SHEETMETAL_SLAB ->  registerSlabBlock(igBlock);
                     case SCAFFOLDING -> registerScaffolding(igBlock);
+                    case FENCE -> registerFenceBlock(igBlock);
+                    case ENERGY_PIPE -> registerCable(block);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE, ENGINEERING_BLOCK -> registerGenericBlock(igBlock, flag);
                     case EVAPORATE_CRYSTAL -> registerEvaporateCrystal(igBlock, flag);
                     case ORE_BLOCK -> registerOre(igBlock);
@@ -116,35 +119,32 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // All Multiblock Data generation code has been copied from the Immersive Engineering Codebase
         // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
-        genericmultiblock("crystallizer");
-        genericActiveNonMirrorMultiblock(IGMultiblockProvider.BLOOMERY.block(), "bloomery");
+        genericmultiblockMirror("crystallizer");
+        generateBloomeryMultiblock();
         genericmultiblock("gravityseparator");
         genericmultiblock("trommel");
-
         genericmultiblock("chemical_reactor");
         genericmultiblockMirror("rotarykiln");
         genericmultiblockMirror("coredrill");
         genericmultiblockMirror("reverberation_furnace");
-        genericmultiblock("centrifuge");
+        genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
         genericmultiblock("pelletizer");
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }
 
-    private void genericActiveNonMirrorMultiblock(Supplier<? extends Block> block, String registry_name)
+    private void generateBloomeryMultiblock()
     {
-        //IGLib.IG_LOGGER.info("Generating ["+registry_name+"] Active Multiblock Model Data");
-        try
-        {
-            IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(registry_name);
-            ModelFile off = split(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+".obj"), template, false, false);
-            ModelFile active = split(innerObj("block/multiblock/obj/"+registry_name+"/"+registry_name+"_active.obj"), template, false, false);
+        ModelFile bloomery = bloomeryModel("bloomery", rl("block/multiblock/bloomery/bloomery"));
+        ModelFile bloomery_active = bloomeryModel("bloomery_active", rl("block/multiblock/bloomery/bloomery_burning"));
+        createMultiblock(IGMultiblockProvider.BLOOMERY.block(), bloomery, bloomery_active, IEProperties.ACTIVE);
+    }
 
-            createMultiblock(block, off, active, IEProperties.ACTIVE);
-        } catch(Exception e)
-        {
-            IGLib.IG_LOGGER.error(e.getLocalizedMessage());
-        }
+    private ModelFile bloomeryModel(String name, ResourceLocation texture)
+    {
+        NongeneratedModel m = obj(name, rl("block/multiblock/obj/bloomery/bloomery.obj"), ImmutableMap.of("bloomery", texture), innerModels);
+        IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply("bloomery");
+        return split(m, template);
     }
 
     private void registerSlabBlock(IGBlockType igBlock)
@@ -288,6 +288,17 @@ public class IGBlockStateProvider extends BlockStateProvider {
             }
     }
 
+    private void registerFenceBlock(IGBlockType type)
+    {
+        IGFenceBlock fence = (IGFenceBlock) type;
+        igFenceBlock(fence, fence.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+    }
+
+    private void registerCable(Block type)
+    {
+        this.simpleBlock(type, ieObjBuilder("block/obj/energy_cable.obj").callback(EnergyPipeCallback.INSTANCE).layer(new RenderType[]{RenderType.cutout()}).end());
+    }
+
     private void registerScaffolding(IGBlockType type){
         IGScaffoldingBlock block = (IGScaffoldingBlock) type;
         MetalScaffoldingType scaffolding_type = block.getScaffoldingType();
@@ -366,6 +377,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
         if(type instanceof IGOreBlock) {
             registerOreBlock(type);
         }
+    }
+
+    private void igFenceBlock(FenceBlock block, ResourceLocation texture) {
+        ResourceLocation key =  ForgeRegistries.BLOCKS.getKey(block);
+		assert key!=null;
+		String baseName = key.getNamespace() + ":block/fence/" + key.getPath();
+        this.fourWayBlock(block, igFencePost(baseName + "_post", texture), igFenceSide(baseName + "_side", texture));
+    }
+
+    public ModelFile igFencePost(String name, ResourceLocation texture) {
+        return this.models().singleTexture(name, new ResourceLocation(IGLib.MODID, "block/base/fence_post"), texture);
+    }
+
+    public ModelFile igFenceSide(String name, ResourceLocation texture) {
+        return this.models().singleTexture(name, new ResourceLocation(IGLib.MODID, "block/base/fence_side"), texture);
     }
 
     private void registerOreBlock(IGBlockType type)
@@ -857,8 +883,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
     private static String getAutoNameIEOBJ(String loc)
     {
-        Preconditions.checkArgument(loc.endsWith(".obj.ie"));
-        return loc.substring(0, loc.length()-7);
+        Preconditions.checkArgument(loc.endsWith(".obj"));
+        return loc.substring(0, loc.length()-4);
     }
 
     protected <T extends ModelBuilder<T>>
@@ -997,5 +1023,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
             for(final ModelBuilder<?> model : builders)
                 model.renderType(typeName);
         }
+    }
+
+    private ResourceLocation rl(String path)
+    {
+        return new ResourceLocation(IGLib.MODID, path);
     }
 }

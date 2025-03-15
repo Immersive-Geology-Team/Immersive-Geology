@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/fence_inventory",
+  "textures": {
+    "texture": "immersivegeology:block/colored/bronze/storage_block"
+  }
+}

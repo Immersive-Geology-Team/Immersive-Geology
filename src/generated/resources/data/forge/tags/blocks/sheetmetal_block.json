@@ -1,0 +1,27 @@
+{
+  "values": [
+    "immersivegeology:sheetmetal_block_bronze",
+    "immersivegeology:sheetmetal_block_calcium",
+    "immersivegeology:sheetmetal_block_chromium",
+    "immersivegeology:sheetmetal_block_cobalt",
+    "immersivegeology:sheetmetal_block_gold",
+    "immersivegeology:sheetmetal_block_manganese",
+    "immersivegeology:sheetmetal_block_magnesium",
+    "immersivegeology:sheetmetal_block_molybdenum",
+    "immersivegeology:sheetmetal_block_neodymium",
+    "immersivegeology:sheetmetal_block_osmium",
+    "immersivegeology:sheetmetal_block_platinum",
+    "immersivegeology:sheetmetal_block_hastelloy",
+    "immersivegeology:sheetmetal_block_stainlesssteel",
+    "immersivegeology:sheetmetal_block_thorium",
+    "immersivegeology:sheetmetal_block_tin",
+    "immersivegeology:sheetmetal_block_titanium",
+    "immersivegeology:sheetmetal_block_tungsten",
+    "immersivegeology:sheetmetal_block_unobtanium",
+    "immersivegeology:sheetmetal_block_vanadium",
+    "immersivegeology:sheetmetal_block_zinc",
+    "immersivegeology:sheetmetal_block_zirconium",
+    "immersivegeology:sheetmetal_block_tungstencarbide",
+    "immersivegeology:sheetmetal_block_moltenmantle"
+  ]
+}

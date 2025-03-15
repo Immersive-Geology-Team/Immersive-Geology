@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hastelloy_component": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:mechanical_component_hastelloy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/craft_chemical_engineering_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_hastelloy_component",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/craft_chemical_engineering_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -8,11 +8,14 @@
 
 package com.igteam.immersivegeology.client;
 
+import blusunrize.immersiveengineering.common.register.IEItems.Misc;
 import com.igteam.immersivegeology.common.block.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.IGFluidBlock;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;

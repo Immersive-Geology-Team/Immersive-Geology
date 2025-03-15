@@ -27,7 +27,7 @@ public class MaterialTungsten extends MaterialMetal {
 
     public MaterialTungsten() {
         super();
-        addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING);
+        addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.FENCE);
     }
 
     @Override

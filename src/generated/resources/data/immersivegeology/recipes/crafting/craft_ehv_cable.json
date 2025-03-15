@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "immersivegeology:wire_tungstencarbide"
+    },
+    "C": {
+      "item": "immersiveengineering:storage_electrum"
+    },
+    "R": {
+      "item": "immersivegeology:plate_ehv_insulation"
+    }
+  },
+  "pattern": [
+    "RAR",
+    "ACA",
+    "RAR"
+  ],
+  "result": {
+    "item": "immersivegeology:energy_pipe_high_voltage_cable"
+  },
+  "show_notification": true
+}

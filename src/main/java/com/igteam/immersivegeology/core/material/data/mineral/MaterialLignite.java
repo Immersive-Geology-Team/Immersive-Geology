@@ -41,7 +41,7 @@ public class MaterialLignite extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(500);
-		CONFIG = new MineralConfig(30, 50, 1, 40, 200, 2000, 0.9,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, 55, 200, 2000, 0.9,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0x3b3f2e;
 	}
 

@@ -50,8 +50,8 @@ public class MaterialMetal extends GeologyMaterial {
         {
             IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRYSTAL,
                     1, ItemCategoryFlags.INGOT, 1, 0);
-            IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRYSTAL,
-                    ItemCategoryFlags.INGOT, 120);
+
+            IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(getName() + "_crystal_to_grit", getStack(ItemCategoryFlags.CRYSTAL, 1), getStack(ItemCategoryFlags.GRIT, 1), 3000, 200);
         }
 
         if (hasFlag(ItemCategoryFlags.GRIT) && hasFlag(ItemCategoryFlags.INGOT))

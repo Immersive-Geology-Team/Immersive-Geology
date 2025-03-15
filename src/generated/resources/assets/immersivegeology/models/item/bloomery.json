@@ -65,9 +65,9 @@
         0
       ],
       "scale": [
-        0.5,
-        0.5,
-        0.5
+        0.25,
+        0.25,
+        0.25
       ],
       "translation": [
         0,
@@ -124,5 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/bloomery/bloomery.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/bloomery/bloomery.obj",
+  "textures": {
+    "bloomery": "immersivegeology:block/multiblock/bloomery/bloomery"
+  }
 }

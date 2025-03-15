@@ -3,9 +3,11 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -42,6 +44,10 @@ public class IGBlockTags extends BlockTagsProvider
 			{
 				//TODO prevent mod only added fluids from being tagged.
 				tag(BlockTags.REPLACEABLE).add(fluidBlock);
+			}
+			if(block.get() instanceof IGFenceBlock fence)
+			{
+				tag(BlockTags.FENCES).add(fence);
 			}
 			if(block.get() instanceof IGEvaporateMineralBlock crystal)
 			{
@@ -102,6 +108,11 @@ public class IGBlockTags extends BlockTagsProvider
 			} else if(block.get() instanceof IGGenericBlock genericBlock)
 			{
 				List<MaterialInterface<?>> materials = List.copyOf(genericBlock.getMaterials());
+				BlockCategoryFlags blockFlag = (BlockCategoryFlags) genericBlock.getFlag();
+				if(!genericBlock.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(blockFlag)) {
+					 tag(blockFlag.getCategoryTag()).add(genericBlock);
+				}
+
 				boolean hasExistingImplementation = false;
 				for(MaterialInterface<?> material : materials)
 				{

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/craft_tungsten_carbide_powder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tungsten_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:powder_tungsten"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_powder",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/craft_tungsten_carbide_powder"
+    ]
+  },
+  "sends_telemetry_event": false
+}

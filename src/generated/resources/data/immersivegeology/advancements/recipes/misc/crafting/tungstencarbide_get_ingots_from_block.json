@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/tungstencarbide_get_ingots_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "tungstencarbidehas_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:storage_block_tungstencarbide"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "tungstencarbidehas_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/tungstencarbide_get_ingots_from_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

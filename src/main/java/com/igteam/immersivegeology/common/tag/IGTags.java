@@ -22,10 +22,12 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.*;
@@ -35,6 +37,7 @@ public class IGTags
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<ItemCategoryFlags, TagKey<Item>> ITEM_CATEGORY_FLAGS = new LinkedHashMap<>();
+	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
 
 
 	private static boolean initialized = false;
@@ -54,6 +57,12 @@ public class IGTags
 			}
 			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge",itemFlag.getName().toLowerCase() + itemFlag.getTagPrefix()));
 			ITEM_CATEGORY_FLAGS.put(itemFlag, key);
+		}
+
+		for(BlockCategoryFlags blockFlag : BlockCategoryFlags.values())
+		{
+			TagKey<Block> key = BlockTags.create(new ResourceLocation("forge",blockFlag.getName().toLowerCase() + blockFlag.getTagPrefix()));
+			BLOCK_CATEGORY_FLAGS.put(blockFlag, key);
 		}
 
 

@@ -23,13 +23,19 @@ public class IGBloomeryMultiblock extends IGTemplateMultiblock
 	public static final IGBloomeryMultiblock INSTANCE = new IGBloomeryMultiblock();
 	public IGBloomeryMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/bloomery"), new BlockPos(0,0,0), new BlockPos(0,1,0), new BlockPos(1,2,1), IGMultiblockProvider.BLOOMERY);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/bloomery"), new BlockPos(0,0,0), new BlockPos(0,1,1), new BlockPos(2,3,2), IGMultiblockProvider.BLOOMERY);
 	}
 
 	@Override
 	public boolean canFormWithDefaultHammer()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean canBeMirrored()
+	{
+		return false;
 	}
 
 	@Override

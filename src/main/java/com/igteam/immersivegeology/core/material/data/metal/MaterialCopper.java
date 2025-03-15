@@ -69,11 +69,6 @@ public class MaterialCopper extends MaterialNativeMetal {
                 ItemCategoryFlags.CRUSHED_ORE, 2,
                 this, ItemCategoryFlags.INGOT, 1, 200);
 
-        IGMethodBuilder.roast(this, IGStageDesignation.REFINEMENT).create(
-                ItemCategoryFlags.COMPOUND_DUST, 1,
-                ItemCategoryFlags.METAL_OXIDE, 1,
-                1000, 250);
-
         IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create( ItemCategoryFlags.CRUSHED_ORE,
                 ItemCategoryFlags.GRIT ,6000, 100);
 

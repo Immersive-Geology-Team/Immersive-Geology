@@ -1,4 +1,6 @@
+import com.igteam.immersivegeology.common.world.features.helper.GenerationBandedNoise;
 import com.igteam.immersivegeology.common.world.features.helper.GenerationTubedNoise;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 
@@ -7,69 +9,41 @@ import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class NoiseTester {
 	public static void main(String[] args) {
 		// Generate the noise images and compile them into a .gif
-		int N = 999999999;
-		long startTime = System.nanoTime();
-		boolean p = isPrimeA(N);
-		long endTime = System.nanoTime();
-		long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-		System.out.println("Time: " + String.valueOf(duration));
-		System.out.println("Prime: " + String.valueOf(p));
+		Instant start = Instant.now();
 
-		long startTime2 = System.nanoTime();
-		boolean p2 = isPrimeC(N);
-		long endTime2 = System.nanoTime();
-		long duration2 = (endTime2- startTime2);  //divide by 1000000 to get milliseconds.
-		System.out.println("Time: " + String.valueOf(duration2));
-		System.out.println("Prime: " + String.valueOf(p2));
+		new NoiseTester().generateGif(false, IGGenerationType.BANDED);
+		new NoiseTester().generateGif(true, IGGenerationType.BANDED);
+
+		Instant end = Instant.now();  // End time
+
+		// Calculate duration
+		Duration duration = Duration.between(start, end);
+
+		// Format and print the duration
+		System.out.printf("Elapsed time: %d seconds, %d milliseconds, %d microseconds%n",
+				duration.toSeconds(),
+				duration.toMillisPart(),
+				duration.toNanosPart() / 1_000);
 	}
 
-	public static boolean isPrimeA(int n)
-	{
-		double size = Math.round(Math.sqrt(n));
-		for(int i = 2; i <= size; i++)
-		{
-			if(n % i == 0) return false;
-		}
-		return true;
-	}
+	private static final float THRESHOLD = 0.5f;
+	static int[] color = {0x27ed09, 0xbfed09, 0xf27210};
 
-	public static ArrayList<Integer> factors = new ArrayList<>();
-	public static boolean isPrimeB(int n)
-	{
-		factors.clear();
-		for(int i = 2; i < n; i++)
-		{
-			factors.add(i);
-		}
-		ArrayList<Integer> cpy = new ArrayList<Integer>(factors);
-		for(Integer i : cpy)
-		{
-			if(n % i != 0) factors.remove(i);
-		}
-
-		return factors.isEmpty();
-	}
-
-	public static boolean isPrimeC(int n)
-	{
-		for(int i = 1; i <=n; i++)
-		{
-			if(i != 1 && i != n && n % i == 0) return false;
-		}
-		return true;
-	}
-	public void generateGif(boolean sliceY) {
+	public void generateGif(boolean sliceY, IGGenerationType type) {
 		// List to hold generated images
 		List<BufferedImage> images = new ArrayList<>();
-		IGenerationPattern handler = new GenerationTubedNoise();
+		IGenerationPattern handler = type.getPattern();
 		// Example 3D noise generator (replace with your actual noise generator)
-		INoise3D noise = handler.getiNoise3D(24, 1);
+		INoise3D noise = handler.getiNoise3D(24, 2);
 
 		// Generate 128 images and store them in the list
 		for (int i = 0; i < 128; i++) {
@@ -87,8 +61,11 @@ public class NoiseTester {
 						grayValue = 255;
 					}
 					// Create grayscale color (R = G = B = grayValue)
-					Color color = new Color(grayValue, grayValue, grayValue);
-					image.setRGB(x, z, color.getRGB());
+					//Color color = new Color(grayValue, grayValue, grayValue);
+					int selectedBlock = value > (0.99) ? 0 : (value > (0.7) ? 1 : 2);
+					int selC = color[selectedBlock];
+					if(value < 0.4) selC = 0x000000;
+					image.setRGB(x, z, selC);
 				}
 			}
 			images.add(image);

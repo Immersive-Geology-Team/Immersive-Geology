@@ -23,6 +23,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -66,6 +68,8 @@ public abstract class GeologyMaterial implements MaterialHelper {
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
     }
+
+    public BlockBehaviour.Properties getProperties(){return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);};
 
     public Set<IGRecipeChain> getRecipeChains()
     {
@@ -157,7 +161,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                     String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
                     yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
                 }
-                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK ->
+                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK, FENCE ->
                         new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK ->

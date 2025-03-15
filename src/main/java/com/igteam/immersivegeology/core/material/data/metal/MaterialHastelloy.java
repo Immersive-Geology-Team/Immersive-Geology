@@ -24,7 +24,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
 
     public MaterialHastelloy() {
         super();
-        addFlags(ItemCategoryFlags.MECHANICAL_COMPONENT, BlockCategoryFlags.ENGINEERING_BLOCK);
+        addFlags(ItemCategoryFlags.MECHANICAL_COMPONENT, BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE);
     }
 
     @Override

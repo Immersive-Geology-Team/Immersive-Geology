@@ -1,0 +1,158 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic": false,
+  "inner_model": {
+    "parent": "minecraft:block/block",
+    "automatic_culling": false,
+    "flip_v": true,
+    "loader": "forge:obj",
+    "model": "immersivegeology:models/block/multiblock/obj/neoie/fancycube.obj",
+    "textures": {
+      "front": "immersivegeology:block/multiblock/neoie/peters_coke_oven_front_off",
+      "particle": "immersivegeology:block/multiblock/neoie/peters_coke_oven_front_off",
+      "side": "immersivegeology:block/multiblock/neoie/peters_coke_oven_side",
+      "top": "immersivegeology:block/multiblock/neoie/peters_coke_oven_top"
+    }
+  },
+  "loader": "immersiveengineering:basic_split",
+  "split_parts": [
+    [
+      -1,
+      -1,
+      -1
+    ],
+    [
+      0,
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      -1
+    ],
+    [
+      -1,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      -1
+    ],
+    [
+      1,
+      0,
+      -1
+    ],
+    [
+      -1,
+      1,
+      -1
+    ],
+    [
+      0,
+      1,
+      -1
+    ],
+    [
+      1,
+      1,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      0
+    ],
+    [
+      0,
+      -1,
+      0
+    ],
+    [
+      1,
+      -1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      -1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      -1,
+      -1,
+      1
+    ],
+    [
+      0,
+      -1,
+      1
+    ],
+    [
+      1,
+      -1,
+      1
+    ],
+    [
+      -1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      -1,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "textures": {
+    "particle": "immersivegeology:block/multiblock/neoie/peters_coke_oven_front_off"
+  }
+}

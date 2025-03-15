@@ -34,6 +34,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     Anatase(new MaterialAnatase()),
     Bauxite(new MaterialBauxite()),
     Bituminous(new MaterialBituminous()),
+    Anthracite(new MaterialAnthracite()),
     Cassiterite(new MaterialCassiterite()),
     Carnallite(new MaterialCarnallite()),
     Chalcocite(new MaterialChalcocite()),

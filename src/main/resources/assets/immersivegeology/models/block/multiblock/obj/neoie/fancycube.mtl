@@ -1,0 +1,8 @@
+# Made in Blockbench 4.11.1
+newmtl m_602076eb-b715-d179-4377-d812a4711b91
+map_Kd #front
+newmtl m_c2ba056d-2c6d-7e9d-b15f-77575e87bf88
+map_Kd #side
+newmtl m_940190a8-a504-dc7c-ddcd-a3910b73b144
+map_Kd #top
+newmtl none

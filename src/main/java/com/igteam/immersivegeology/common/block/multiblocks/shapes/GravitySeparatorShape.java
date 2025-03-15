@@ -33,25 +33,37 @@ public class GravitySeparatorShape extends GenericShape {
         if (bY == 5) {
             if (bZ == 1 && bX == 2) {
                 main.add(new AABB(0.0, 0.75, 0.0, 0.5, 1.0, 1.0));
-            } else if (bZ == 2 && bX == 1) {
+            }
+            if (bZ == 2 && bX == 1) {
                 main.add(new AABB(0.0, 0.75, 0.0, 1.0, 1.0, 0.5));
-            } else if (bZ == 0 && bX == 1) {
+            }
+            if (bZ == 0 && bX == 1) {
                 main.add(new AABB(0.0, 0.75, 0.5, 1.0, 1.0, 1.0));
-            } else if (bZ == 1 && bX == 0) {
+            }
+            if (bZ == 1 && bX == 0) {
                 main.add(new AABB(0.5, 0.75, 0.0, 1.0, 1.0, 1.0));
-            } else {
-                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+            }
+            if(bZ == 0 && bX == 0)
+            {
+                main.add(new AABB(0.5, 0.75, 0.5, 1.0, 1.0, 1.0));
+            }
+            if(bZ == 2 && bX == 2)
+            {
+                main.add(new AABB(0, 0.75, 0, .5, 1.0, .5));
+            }
+            if(bZ == 0 && bX == 2)
+            {
+                main.add(new AABB(0, 0.75, 0.5, .5, 1.0, 1));
+            }
+            if(bZ == 2 && bX == 0)
+            {
+                main.add(new AABB(0.5, 0.75, 0, 1, 1.0, 0.5));
             }
         }
         if(bZ == 1 && bX == 1)
         {
             main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
         }
-//
-//        if(bZ == 0 && bX == 1)
-//        {
-//            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-//        }
 
         if(bZ == 2 && bX == 1 && bY > 0 && bY < 4)
         {
@@ -72,9 +84,6 @@ public class GravitySeparatorShape extends GenericShape {
 
         if(bZ == 1 && bX == 0 && bY > 0 && bY < 5)
         {
-//            main.add(new AABB(0.5, 0.6875, 0.0, 1, 0.6875-(0.1875), .5));
-//            main.add(new AABB(0.5, 0.6875-(0.1875), .5, 1, 0.6875-(0.1875*2), 1));
-
             for(int xP = 0; xP < 4; xP++)
             {
                 float xStart = xP * 0.25f;
@@ -88,6 +97,73 @@ public class GravitySeparatorShape extends GenericShape {
         if(bY == 0)
         {
             main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        }
+
+        if(bY > 0)
+        {
+            if(bY < 5)
+            {
+                if(bX == 0 && bZ == 0)
+                {
+                    main.add(new AABB(0.0, 0.0, 0.0, 0.5, 1.0, 0.5));
+                }
+                if(bX == 0 && bZ == 2)
+                {
+                    main.add(new AABB(0, 0.0, 0.5, 0.5, 1.0, 1));
+                }
+                if(bX == 2 && bZ == 0)
+                {
+                    main.add(new AABB(0.5, 0.0, 0, 1, 1.0, .5));
+                }
+                if(bX == 2 && bZ == 2)
+                {
+                    main.add(new AABB(0.5, 0.0, 0.5, 1, 1.0, 1));
+                }
+            }
+
+            if(bY < 4)
+            {
+                if(bZ==2)
+                {
+                    main.add(new AABB(0, 0.0, 0.6875, 1, 1.0, 0.75));
+                }
+                if(bZ==0)
+                {
+                    main.add(new AABB(0, 0.0, 0.25, 1, 1.0, 0.3125));
+                }
+                if(bX==2)
+                {
+                    main.add(new AABB(0.6875, 0.0, 0.0, 0.75, 1.0, 1.0));
+                }
+                if(bX==0)
+                {
+                    main.add(new AABB(0.25, 0.0, 0, 0.31251, 1.0, 1));
+                }
+            }
+            if(bY == 4)
+            {
+                if(bZ==2)
+                {
+                    main.add(new AABB(0, 0.0, 0.6875, 1, .5, 0.75));
+                    main.add(new AABB(0, 0.375, 0.6875, 1, .5, 0.8125));
+                }
+                if(bZ==0)
+                {
+                    main.add(new AABB(0, 0.0, 0.25, 1, .5, 0.3125));
+                    main.add(new AABB(0, 0.375, 0.1875, 1, .5, 0.3125));
+                }
+                if(bX==2)
+                {
+                    main.add(new AABB(0.6875, 0.0, 0.0, 0.75, .5, 1.0));
+                    main.add(new AABB(0.6875, 0.375, 0, 0.8125, .5, 1));
+                }
+                if(bX==0)
+                {
+                    main.add(new AABB(0.25, 0.0, 0, 0.31251, .5, 1));
+                    main.add(new AABB(0.1875, 0.375, 0, 0.31251, .5, 1));
+                }
+            }
+
         }
 
         return main;

@@ -1,0 +1,9 @@
+{
+  "parent": "immersivegeology:block/base/slab/slab_double",
+  "textures": {
+    "all": "immersivegeology:block/static_block/concrete_reinforced",
+    "cover": "immersivegeology:block/static_block/concrete_reinforced",
+    "particle": "immersivegeology:block/static_block/concrete_reinforced",
+    "side": "immersivegeology:block/static_block/concrete_reinforced"
+  }
+}

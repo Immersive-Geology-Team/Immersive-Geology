@@ -58,7 +58,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		super(IGOreFeature.IGOreFeatureConfig.CODEC.codec());
 	}
 
-	private static final float THRESHOLD = 0.3f;
+	private static final float THRESHOLD = 0.4f;
 
 	@Override
 	public boolean place(FeaturePlaceContext<IGOreFeatureConfig> ctx)
@@ -175,7 +175,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					double noiseValue = noiseGenerator.noise(worldX, y, worldZ);
 
 					// Determine proximity to chunk boundaries we can't iterate in
-					for(int boundary = 1; boundary <= 3; boundary++)
+					for(int boundary = 1; boundary <= 8; boundary++)
 					{
 						if(isNearNonIterableBoundary(x, z, boundary))
 						{
@@ -250,7 +250,8 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	private static BlockState handleOxidation(BlockState state, LevelAccessor level, BlockPos adjacentPos, EnumProperty<MineralWeathering> oxidationProperty)
 	{
-		if (level.getBlockState(adjacentPos).isAir())
+		BlockState adjState = level.getBlockState(adjacentPos);
+		if (!adjState.isCollisionShapeFullBlock(level, adjacentPos))
 		{
 			return state.setValue(oxidationProperty, MineralWeathering.CORRODED);
 		}
@@ -307,8 +308,8 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			OreConfig config = IGServerConfig.ORES.ores.get(entry);
 
 			// Check if the biome's temperature and downfall are within the configured ranges
-			return biomeTemp >= config.min_downfall.get() &&
-					biomeTemp <= config.max_downfall.get() &&
+			return biomeTemp >= config.min_temp.get() &&
+					biomeTemp <= config.max_temp.get() &&
 					biomeDownfall >= config.min_downfall.get() &&
 					biomeDownfall <= config.max_downfall.get();
 		}
@@ -377,7 +378,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				return null;
 			}
 
-			int selectedBlock = noiseValue > (THRESHOLD+0.2) ? 2 : (noiseValue > (THRESHOLD+0.1) ? 1 : 0);
+			int selectedBlock = noiseValue > (0.99) ? 2 : (noiseValue > (0.7) ? 1 : 0);
 
 			return blocks.get(selectedBlock);
 		}

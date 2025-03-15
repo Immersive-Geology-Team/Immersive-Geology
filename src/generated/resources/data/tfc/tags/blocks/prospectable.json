@@ -1525,6 +1525,54 @@
       "required": false
     },
     {
+      "id": "immersivegeology:poor_ore_block_anthracite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_anthracite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_anthracite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_anthracite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_anthracite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_anthracite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_anthracite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_anthracite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_anthracite_dripstone_block",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:poor_ore_block_anthracite_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:normal_ore_block_anthracite_sandstone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:rich_ore_block_anthracite_sandstone",
+      "required": false
+    },
+    {
       "id": "immersivegeology:poor_ore_block_cassiterite_stone",
       "required": false
     },

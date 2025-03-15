@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 100,
+    "tag": "forge:phenolic_resin"
+  },
+  "fluidResult": {
+    "amount": 100,
+    "fluid": "immersivegeology:fluid_ehv_insulation"
+  },
+  "itemInput": {
+    "item": "immersivegeology:metal_oxide_aluminum"
+  },
+  "itemResult": [],
+  "time": 200
+}

@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.SchematicsScreen;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCrystalizerMultiblock;
@@ -104,6 +105,9 @@ public class IGContent {
                 }
             }
         });
+
+        IGEnergyPipeEntity.initCovers();
+
         IGLib.IG_LOGGER.info("Finished");
     }
 
@@ -113,6 +117,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
         MenuScreens.register(IGMenuTypes.SCHEMATICS.getType(), SchematicsScreen::new);
     }
+
 
     public static void initializeManualEntries()
     {

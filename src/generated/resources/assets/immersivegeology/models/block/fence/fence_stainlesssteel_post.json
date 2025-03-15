@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/fence_post",
+  "textures": {
+    "texture": "immersivegeology:block/greyscale/metal/storage"
+  }
+}

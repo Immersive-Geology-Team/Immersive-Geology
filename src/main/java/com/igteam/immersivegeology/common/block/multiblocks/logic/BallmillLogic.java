@@ -32,6 +32,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogi
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.shapes.BallmillShape;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -111,7 +112,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType shapeType) {
-        return RotaryKilnShape.GETTER;
+        return BallmillShape.GETTER;
     }
 
     public static class State implements IMultiblockState, ProcessContextInWorld<BallmillRecipe>
