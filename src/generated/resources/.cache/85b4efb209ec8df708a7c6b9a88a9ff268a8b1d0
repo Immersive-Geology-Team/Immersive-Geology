@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-15T06:12:15.60628804	Item models
+// 1.20.1	2025-03-16T06:24:46.240068948	Item models
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_bronze_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_calcium_fluid.json
@@ -396,6 +396,7 @@ c91c789dcbbe5a0a6b89cd4dd3463ca0729226d2 assets/immersivegeology/models/item/mec
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_vanadium.json
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_zinc.json
 8afe12804019bd219e1a9ea38ff9f696b5c9574a assets/immersivegeology/models/item/metal_oxide_zirconium.json
+42f6dcb8af7ae252402275fc1b7ca4c3a8f468b4 assets/immersivegeology/models/item/misc_refractory_brick.json
 b94accc6427864c4bd2da8b68a11fa1d79aa045b assets/immersivegeology/models/item/misc_stone.json
 be3611b07d793abf9d226266af9bc66dc38ac032 assets/immersivegeology/models/item/normal_ore_acanthite.json
 991f14aac7ef3cb622f972fc115fcd52f1ac83ac assets/immersivegeology/models/item/normal_ore_alumina.json

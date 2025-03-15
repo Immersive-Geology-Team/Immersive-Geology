@@ -74,20 +74,19 @@ public interface MaterialHelper {
                 {
                     case INGOT ->
                     {
-
-                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
                     }
                     case GRIT ->
                     {
-                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
                     }
                     case PLATE ->
                     {
-                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
                     }
                     case NUGGET ->
                     {
-                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase())).asItem();
+                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
                     }
                     case WIRE ->
                     {

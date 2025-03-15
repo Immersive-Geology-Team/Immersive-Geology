@@ -17,7 +17,6 @@ import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
-import com.igteam.immersivegeology.client.menu.multiblock.SchematicsScreen;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.IGCoreDrillMultiblock;
@@ -115,7 +114,6 @@ public class IGContent {
     {
         MenuScreens.register(IGMenuTypes.BLOOMERY.getType(), BloomeryScreen::new);
         MenuScreens.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
-        MenuScreens.register(IGMenuTypes.SCHEMATICS.getType(), SchematicsScreen::new);
     }
 
 

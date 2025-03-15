@@ -8,12 +8,10 @@ import blusunrize.immersiveengineering.common.gui.IEContainerMenu.MultiblockMenu
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainerConstructor;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContainerConstructor;
 import com.igteam.immersivegeology.ImmersiveGeology;
-import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
-import com.igteam.immersivegeology.common.menu.SchematicsContainerMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -25,7 +23,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -41,8 +38,6 @@ public class IGMenuTypes
 	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
-	public static final ArgContainer<DrawingTableBlockEntity, SchematicsContainerMenu> SCHEMATICS = register(IGLib.GUIID_Schematics, SchematicsContainerMenu::new);
-
 
 	public static <T, C extends IEContainerMenu>
 	ArgContainer<T, C> registerArg(

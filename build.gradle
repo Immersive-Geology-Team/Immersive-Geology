@@ -4,12 +4,13 @@ import net.minecraftforge.gradle.common.tasks.SignJar
 import org.gradle.work.Incremental
 
 plugins {
-    id 'net.neoforged.gradle' version '6.0.+'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.6'
     id 'eclipse'
+    id 'idea'
 }
 
 version = '0.5.6-b' + version_buildnumber
@@ -207,38 +208,23 @@ repositories {
 project.ext.lwjglVersion = "3.3.6"
 project.ext.lwjglNatives = "natives-linux"
 dependencies {
-    minecraft "net.neoforged:forge:${version_minecraft}-${version_forge}"
+    minecraft "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
 
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${version_jei}")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${version_jei}")
 
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:${version_jei}")
+    implementation fg.deobf("curse.maven:immersive-engineering-231951:6206989")
+    datagenImplementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen"
 
-    implementation fg.deobf("curse.maven:immersive-engineering-231951:5224387")
+    implementation fg.deobf("curse.maven:terrafirmacraft-302973:6187491")
+    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
 
-    // Ad Astra
-//    implementation fg.deobf("curse.maven:resourceful-config-714059:5020441")
-//    implementation fg.deobf("curse.maven:botarium-704113:5486070")
-//    implementation fg.deobf("curse.maven:resourceful-lib-570073:5568216")
-//    implementation fg.deobf("curse.maven:ad-astra-635042:4894852")
-
-// Quark
-//    implementation fg.deobf("curse.maven:zeta-968868:5597406")
-//    implementation fg.deobf("curse.maven:quark-243121:5594847")
-//
-//    //BoP
-//    implementation fg.deobf("curse.maven:terrablender-563928:5068218")
-//    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:4617259")
-    // TFC
-    implementation fg.deobf("vazkii.patchouli:Patchouli:$version_minecraft-$version_patchouli-FORGE")
-    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
-
-    datagenImplementation("blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen")
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation fg.deobf("curse.maven:engineered-schematics-1207780:6293337")
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 // Add test configuration
@@ -324,11 +310,6 @@ task optimizePng {
             fileTree(dir: dir, includes: pngPatterns).each { minimizePNGFile(it) }
         }
     }
-}
-
-mixin {
-    add sourceSets.main, "${modid}.refmap.json"
-    config "${modid}.mixins.json"
 }
 
 // Running this is equivalent to running genIntellijRuns, but it exists before afterEvaluate

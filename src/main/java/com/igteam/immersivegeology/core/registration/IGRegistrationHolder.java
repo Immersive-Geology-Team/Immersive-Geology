@@ -23,14 +23,12 @@ import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
-import com.igteam.immersivegeology.common.block.entity.DrawingTableBlockEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.item.*;
-import com.igteam.immersivegeology.common.item.blueprint.IGMultiblockBlueprint;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -59,7 +57,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
@@ -263,7 +260,6 @@ public class IGRegistrationHolder {
         );
     }
 
-    public static RegistryObject<BlockEntityType<DrawingTableBlockEntity>> DRAWING_TABLE;
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
 
     public static synchronized void initialize()
@@ -275,13 +271,8 @@ public class IGRegistrationHolder {
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32, formationFormat(stone_mb)));
-        registerItem(ItemCategoryFlags.BLUEPRINT.getRegistryKey(MiscEnum.Blueprint), () -> new IGMultiblockBlueprint(ItemCategoryFlags.BLUEPRINT, MiscEnum.Blueprint));
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
-        registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
-
-        registerBlock("drawing_table", ()-> new IGDeskBlock<DrawingTableBlockEntity>(DRAWING_TABLE, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).strength(2.0F, 5.0F).noOcclusion()));
-        registerItem("drawing_table", () -> new IGGenericBlockItem((IGBlockType) getBlock.apply("drawing_table")));
-        DRAWING_TABLE = TE_REGISTER.register("drawing_table_type", makeType(DrawingTableBlockEntity::new, BLOCK_REGISTRY_MAP.get("drawing_table")));
+        registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, MiscEnum.Refractory, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
 
         LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
@@ -453,7 +444,6 @@ public class IGRegistrationHolder {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGItemPellet(itemCategoryFlags, material));
                         }
-                        case BLUEPRINT -> {}
                         default -> {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material));
