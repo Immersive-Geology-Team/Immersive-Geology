@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -55,6 +56,7 @@ public class IGItemTags extends ItemTagsProvider
 		tag(IETags.toolboxTools).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
+		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("prospector_kit"));
 
 		tag(hammer_tag).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
 		tag(hammer_tag).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));

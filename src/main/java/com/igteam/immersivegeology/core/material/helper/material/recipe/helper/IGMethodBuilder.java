@@ -30,9 +30,15 @@ public class IGMethodBuilder
 	public static IGBlastingMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGBlastingMethod(parentMaterial, stage); }
 
 	public  static  IGPelletizerMethod pelletize (MaterialHelper parentMaterial, IGStageDesignation stage) { return new IGPelletizerMethod(parentMaterial, stage); }
-	public static IGCrushingMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage) {
-		return new IGCrushingMethod(parentMaterial, stage);
+
+	public static IECrushingMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage) {
+		return new IECrushingMethod(parentMaterial, stage);
 	}
+
+	public static IESqueezingMethod squeezing(MaterialHelper parentMaterial, IGStageDesignation stage) {
+		return new IESqueezingMethod(parentMaterial, stage);
+	}
+
 	public static IGBallmillMethod pulverization(MaterialHelper parentMaterial, IGStageDesignation stage) {
 		return new IGBallmillMethod(parentMaterial, stage);
 	}

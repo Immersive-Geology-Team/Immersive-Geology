@@ -201,12 +201,11 @@ public class IGRecipes extends RecipeProvider
 				.requires(toolkit_0)
 				.group("ig_plate_from_ingot_hammer").unlockedBy("has_bronze_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(toolkit_0)).save(consumer, ig("craft_copper_plate_with_bronze_hammer"));
 
-
 		Item raw_fire_clay = IGRegistrationHolder.getItem.apply("raw_fire_clay");
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_fire_clay, 2)
-				.requires(Items.CLAY_BALL)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw_fire_clay, 4)
+				.requires(Items.CLAY_BALL, 2)
 				.requires(Items.FLINT)
-				.requires(ItemTags.SAND)
+				.requires(Ingredient.of(ItemTags.SAND), 2)
 				.group("raw_fire_clay").unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, ig("craft_raw_fire_clay"));
 
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw_fire_clay), RecipeCategory.MISC, refractory_brick, 0, 120).group("refractory_brick_cooking").unlockedBy("has_raw_refractory_brick", InventoryChangeTrigger.TriggerInstance.hasItems(raw_fire_clay)).save(consumer, ig("cook_refractory_brick"));
@@ -374,6 +373,8 @@ public class IGRecipes extends RecipeProvider
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(BASE_CHARCOAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Ingredients.COAL_COKE).setTime(BASE_COAL_COKE_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coke"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(BASE_COAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));
+
+		CokeOvenRecipeBuilder.builder(Ingredients.COAL_COKE.asItem()).setOil(500).addInput(MineralEnum.Lignite.getItem(ItemCategoryFlags.INGOT)).setTime(1800).build(consumer, new ResourceLocation(IGLib.MODID, "coking/lignite_brick_to_coal_coke"));
 
 		// Helper method to register mineral fuels for bloomery with different qualities
 		registerMineralBloomeryFuels(consumer, MineralEnum.Lignite, BASE_LIGNITE_TIME);

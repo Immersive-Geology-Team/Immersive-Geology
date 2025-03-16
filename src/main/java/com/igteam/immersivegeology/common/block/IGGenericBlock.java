@@ -14,10 +14,13 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -29,7 +32,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
     protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        this(flag, material, material.instance().getProperties());
+        this(flag, material, material.instance().getProperties().mapColor(MapColor.COLOR_GRAY));
     }
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {
