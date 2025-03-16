@@ -28,6 +28,7 @@ public class MaterialTungsten extends MaterialMetal {
     public MaterialTungsten() {
         super();
         addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.FENCE);
+        removeMaterialFlags(ItemCategoryFlags.GRIT, ItemCategoryFlags.SLAG);
     }
 
     @Override
@@ -56,6 +57,14 @@ public class MaterialTungsten extends MaterialMetal {
                 ItemCategoryFlags.COMPOUND_DUST,
                 1, 300, 153600);
 
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.INGOT,
+                ItemCategoryFlags.POWDER,
+                1600,
+                128000);
+
+        IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.POWDER,
+                1, ItemCategoryFlags.INGOT, 1, 0);
 
     }
 }
