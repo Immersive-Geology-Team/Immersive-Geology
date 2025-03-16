@@ -129,7 +129,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         genericmultiblockMirror("reverberation_furnace");
         genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
-        genericmultiblock("pelletizer");
+        genericmultiblockMirror("pelletizer");
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }
 
@@ -303,7 +303,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         IGScaffoldingBlock block = (IGScaffoldingBlock) type;
         MetalScaffoldingType scaffolding_type = block.getScaffoldingType();
         MaterialInterface<?> base_material = block.getMaterial(MaterialTexture.base);
-        String top_texture_standard = "immersivegeology:block/greyscale/scaffolding/scaffolding_" + "_pristine_"+base_material.getName().toLowerCase();
+        String top_texture_standard = "immersivegeology:block/greyscale/scaffolding/scaffolding_" + "pristine_"+base_material.getName().toLowerCase();
         String top_texture = "immersivegeology:block/greyscale/scaffolding/scaffolding_top_" + scaffolding_type.name().toLowerCase() + "_pristine_" + base_material.getName().toLowerCase();
         BlockModelBuilder builder = models().withExistingParent(
                         new ResourceLocation(IGLib.MODID, "block/scaffolding/"+base_material.getName().toLowerCase()+"_scaffolding_"+scaffolding_type.name().toLowerCase()).getPath(),

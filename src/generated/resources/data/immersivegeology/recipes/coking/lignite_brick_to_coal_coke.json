@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:coke_oven",
+  "creosote": 500,
+  "input": {
+    "item": "immersivegeology:ingot_lignite"
+  },
+  "result": {
+    "item": "immersiveengineering:coal_coke"
+  },
+  "time": 1800
+}

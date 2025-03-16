@@ -28,7 +28,7 @@ import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
@@ -51,6 +51,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -64,6 +65,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0,0,1, RelativeBlockFace.RIGHT);
 
     public static final int ENERGY_CONSUMPTION_RATE = 80; // Per tick
+
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -91,6 +93,13 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     @Override
     public State createInitialState(IInitialMultiblockContext<State> capability) {
         return new BallmillLogic.State(capability);
+    }
+
+
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop)
+    {
+        MBInventoryUtils.dropItems(state.getInventory(), drop);
     }
 
     @Override
@@ -161,6 +170,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
                 }
             });
         }
+
 
         @Override
         public void doProcessOutput(ItemStack result, IMultiblockLevel level)

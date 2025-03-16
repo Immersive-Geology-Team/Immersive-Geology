@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 2400,
+  "input": {
+    "item": "immersivegeology:poor_ore_lignite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_lignite"
+  },
+  "secondaries": [],
+  "time": 200
+}

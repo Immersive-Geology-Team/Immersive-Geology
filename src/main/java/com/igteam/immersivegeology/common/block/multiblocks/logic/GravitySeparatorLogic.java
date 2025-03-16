@@ -23,6 +23,7 @@ import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GravitySeparatorShape;
@@ -51,6 +52,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -70,6 +72,11 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
 
+    }
+
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop)
+    {
     }
 
     @Override

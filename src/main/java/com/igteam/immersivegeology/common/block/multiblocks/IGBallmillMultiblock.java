@@ -45,7 +45,7 @@ public class IGBallmillMultiblock extends IGTemplateMultiblock {
     public static final IGBallmillMultiblock INSTANCE = new IGBallmillMultiblock();
 
     public IGBallmillMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/ballmill"), new BlockPos(2,0,1), new BlockPos(4,1,3), new BlockPos(5,3, 4), IGMultiblockProvider.BALLMILL);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/ballmill"), new BlockPos(2,0,1), new BlockPos(4,1,3), new BlockPos(5,4, 4), IGMultiblockProvider.BALLMILL);
     }
 
     @Override

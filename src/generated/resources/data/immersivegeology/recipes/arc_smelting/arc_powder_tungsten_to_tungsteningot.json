@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 0,
+  "input": {
+    "tag": "forge:powders/tungsten"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_tungsten"
+    }
+  ],
+  "time": 0
+}

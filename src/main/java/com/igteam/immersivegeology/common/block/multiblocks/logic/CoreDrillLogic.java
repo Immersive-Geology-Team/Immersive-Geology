@@ -42,6 +42,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -60,6 +61,7 @@ import org.stringtemplate.v4.ST;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, IServerTickableComponent<CoreDrillLogic.State>, IClientTickableComponent<CoreDrillLogic.State>, MBOverlayText<CoreDrillLogic.State>
@@ -79,6 +81,13 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
     public static final int TANK_VOLUME = 8*FluidType.BUCKET_VOLUME;
     //TODO implement sister system to the Excavator, all 'core fluids' show as the same until processed.
     public static final int ENERGY_CONSUMPTION_RATE = 4092; // Per tick
+
+    
+    @Override
+	public void dropExtraItems(State state, Consumer<ItemStack> drop)
+	{
+		MBInventoryUtils.dropItems(state.getInventory(), drop);
+	}
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {

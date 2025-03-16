@@ -7,14 +7,20 @@
       "item": "minecraft:clay_ball"
     },
     {
+      "item": "minecraft:clay_ball"
+    },
+    {
       "item": "minecraft:flint"
+    },
+    {
+      "tag": "minecraft:sand"
     },
     {
       "tag": "minecraft:sand"
     }
   ],
   "result": {
-    "count": 2,
+    "count": 4,
     "item": "immersivegeology:raw_fire_clay"
   }
 }

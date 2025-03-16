@@ -45,6 +45,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -63,6 +64,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -108,6 +110,12 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
             drainOutputTank(context, state.fluidOutputSecondary, state.secondary_output_tank);
             context.requestMasterBESync();
         }
+    }
+
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop)
+    {
+        MBInventoryUtils.dropItems(state.getInventory(), drop);
     }
 
     private void tryRunRecipe(State state, Level level)

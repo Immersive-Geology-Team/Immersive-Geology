@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.common.data.generators;
 
+import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
+import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -8,9 +10,11 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +40,7 @@ public class IGBlockTags extends BlockTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
+
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Block Tags");
 		boolean useOptionalTag = false;
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
@@ -169,6 +174,29 @@ public class IGBlockTags extends BlockTagsProvider
 			}
 		}
 
+		IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag = this.tag(BlockTags.MINEABLE_WITH_PICKAXE);
+		this.registerMineable(tag, IGMultiblockProvider.BALLMILL,
+				IGMultiblockProvider.BLOOMERY,
+				IGMultiblockProvider.CENTRIFUGE,
+				IGMultiblockProvider.COREDRILL,
+				IGMultiblockProvider.CRYSTALLIZER,
+				IGMultiblockProvider.CHEMICAL_REACTOR,
+				IGMultiblockProvider.GRAVITY_SEPARATOR,
+				IGMultiblockProvider.PELLETIZER,
+				IGMultiblockProvider.REVERBERATION_FURNACE,
+				IGMultiblockProvider.ROTARYKILN,
+				IGMultiblockProvider.TROMMEL);
+
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");
+	}
+
+	private void registerMineable(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag, MultiblockRegistration<?>... entries) {
+		MultiblockRegistration[] var3 = entries;
+		int var4 = entries.length;
+
+		for(int var5 = 0; var5 < var4; ++var5) {
+			MultiblockRegistration<?> entry = var3[var5];
+			tag.add((Block)entry.block().get());
+		}
 	}
 }

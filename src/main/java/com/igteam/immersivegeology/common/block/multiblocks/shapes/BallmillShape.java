@@ -109,6 +109,10 @@ public class BallmillShape extends GenericShape {
                 main.add(new AABB(0.5, 0.0, 0.5, 1, 0.375, 1.0));
             }
         }
+        if(bY == 3)
+        {
+
+        }
         return main;
     }
 }

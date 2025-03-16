@@ -32,6 +32,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
@@ -52,6 +53,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -67,6 +69,11 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
 
+    }
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop)
+    {
+        MBInventoryUtils.dropItems(state.getInventory(), drop);
     }
 
     @Override

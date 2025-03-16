@@ -28,7 +28,7 @@ public class MaterialStainlessSteel extends MaterialMetalAlloy
 
     public MaterialStainlessSteel() {
         super();
-        addFlags(BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE);
+        addFlags(BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE, BlockCategoryFlags.SCAFFOLDING);
     }
 
     @Override

@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/scaffolding/scaffolding_standard",
+  "textures": {
+    "bottom": "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_stainlesssteel",
+    "side": "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_stainlesssteel",
+    "top": "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_stainlesssteel"
+  }
+}

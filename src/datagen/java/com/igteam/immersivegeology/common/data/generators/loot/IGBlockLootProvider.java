@@ -116,11 +116,15 @@ public class IGBlockLootProvider implements LootTableSubProvider
 	private void registerMultiblocks()
 	{
 		this.registerMultiblock(IGMultiblockProvider.BLOOMERY);
+		this.registerMultiblock(IGMultiblockProvider.BALLMILL);
+		this.registerMultiblock(IGMultiblockProvider.PELLETIZER);
 		this.registerMultiblock(IGMultiblockProvider.REVERBERATION_FURNACE);
 		this.registerMultiblock(IGMultiblockProvider.ROTARYKILN);
 		this.registerMultiblock(IGMultiblockProvider.CHEMICAL_REACTOR);
 		this.registerMultiblock(IGMultiblockProvider.GRAVITY_SEPARATOR);
 		this.registerMultiblock(IGMultiblockProvider.CRYSTALLIZER);
+		this.registerMultiblock(IGMultiblockProvider.COREDRILL);
+		this.registerMultiblock(IGMultiblockProvider.CENTRIFUGE);
 	}
 
 	private void registerSlabs() {
