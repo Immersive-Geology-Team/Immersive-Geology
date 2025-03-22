@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
+import blusunrize.immersiveengineering.client.models.obj.callback.block.PipeCallbacks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
@@ -74,9 +75,9 @@ public class BallmillShape extends GenericShape {
         {
             if(bX > 0 && bX < 4)
             {
-                if(bZ ==0) main.add(new AABB(0.0, 0, 0.375, 1, 1, 1.0));
+                if(bZ ==0) main.add(new AABB(0.0, 0, 0.375, 1, 0.95, 1.0));
                 if(bZ == 1) main.add(new AABB(0.0, 0, 0, 1, 1, 1.0));
-                if(bZ == 2) main.add(new AABB(0.0, 0, 0, 1, 1, 0.625));
+                if(bZ == 2) main.add(new AABB(0.0, 0, 0, 1, 0.95, 0.625));
             }
             if(bX == 0 && bZ == 0)
             {
@@ -111,7 +112,10 @@ public class BallmillShape extends GenericShape {
         }
         if(bY == 3)
         {
-
+            if(bX > 0 && bX < 4)
+            {
+                if(bZ == 1) main.add(new AABB(0, 0, 0, 1, .25, 1));
+            }
         }
         return main;
     }

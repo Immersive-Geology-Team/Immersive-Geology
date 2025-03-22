@@ -72,7 +72,7 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
         rotateForFacing(matrix, facing);
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, true, 0xffffff, light);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
         matrix.popPose();
     }
 

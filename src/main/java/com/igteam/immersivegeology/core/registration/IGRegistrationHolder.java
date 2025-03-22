@@ -266,6 +266,7 @@ public class IGRegistrationHolder {
     {
         initializeMultiblocks();
         setupFormationLists();
+
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
@@ -443,6 +444,10 @@ public class IGRegistrationHolder {
                         {
                             if(hasExistingImplementation) continue;
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGItemPellet(itemCategoryFlags, material));
+                        }
+                        case DRILL_HEAD ->
+                        {
+                            registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericDrillHead(itemCategoryFlags, material));
                         }
                         default -> {
                             if(hasExistingImplementation) continue;

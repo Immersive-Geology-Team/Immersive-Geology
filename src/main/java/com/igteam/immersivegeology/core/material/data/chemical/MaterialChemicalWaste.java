@@ -20,7 +20,7 @@ public class MaterialChemicalWaste extends MaterialChemical
 {
 	public MaterialChemicalWaste() {
 		super(MineralEnum.Bauxite, MineralEnum.Molybdenite, MineralEnum.Monazite);
-		removeMaterialFlags(BlockCategoryFlags.SLURRY);
+
 	}
 
 	@Override

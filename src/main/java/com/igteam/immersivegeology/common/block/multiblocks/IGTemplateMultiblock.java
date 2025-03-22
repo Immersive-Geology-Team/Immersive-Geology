@@ -17,11 +17,16 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.Multibloc
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Tools;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
 import com.igteam.immersivegeology.common.item.IGMBFormationItem;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,6 +34,8 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -176,4 +183,17 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
 
         return 5 - (t.apply(canFormStone) + t.apply(canFormBronze) + t.apply(canFormIron) + t.apply(canFormStainlessSteel));
 	}
+
+    public ItemStack getFormationItem()
+    {
+        ItemStack stack =  new ItemStack(Tools.HAMMER);
+        Boolean canFormStone = IGRegistrationHolder.stone_mb.contains(this.getClass());
+        Boolean canFormBronze = IGRegistrationHolder.bronze_mb.contains(this.getClass());
+        Boolean canFormStainlessSteel = IGRegistrationHolder.steel_mb.contains(this.getClass());
+
+        if(canFormStainlessSteel) stack = MetalEnum.StainlessSteel.getStack(ItemCategoryFlags.HAMMER);
+        if(canFormBronze) stack = MetalEnum.Bronze.getStack(ItemCategoryFlags.HAMMER);
+        if(canFormStone) stack = StoneEnum.MCStone.getStack(ItemCategoryFlags.HAMMER);
+        return stack;
+    }
 }

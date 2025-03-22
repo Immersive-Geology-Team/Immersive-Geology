@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -25,21 +26,19 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialTitanium extends MaterialMetal {
-
-
     protected IGRecipeChain hunter_process = new IGRecipeChain(this, "Hunter Process", 0);
-
 
     public MaterialTitanium() {
         super();
-        addFlags(BlockCategoryFlags.FENCE);
-
+        addFlags(BlockCategoryFlags.FENCE, ItemCategoryFlags.DRILL_HEAD);
     }
 
     @Override
@@ -87,5 +86,11 @@ public class MaterialTitanium extends MaterialMetal {
     public Set<IGRecipeChain> getRecipeChains()
     {
         return Set.of(hunter_process);
+    }
+
+    @Override
+    public DrillHeadProps drillHeadInstance()
+    {
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 21.0f, 10, 10000, getTextureLocation(ItemCategoryFlags.DRILL_HEAD));
     }
 }

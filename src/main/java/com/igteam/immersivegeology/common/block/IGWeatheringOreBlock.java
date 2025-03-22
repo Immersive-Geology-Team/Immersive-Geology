@@ -177,10 +177,9 @@ public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
     }
 
     @Override
-    public ItemLike getItemDrop()
+    public ItemStack getItemDrop()
     {
-        ItemStack stack = this.getMaterial(MaterialTexture.overlay).getStack(this.getOreRichness().toCategory());
-        return stack.getItem();
+		return this.getMaterial(MaterialTexture.overlay).getStack(this.getOreRichness().toCategory());
     }
 
 

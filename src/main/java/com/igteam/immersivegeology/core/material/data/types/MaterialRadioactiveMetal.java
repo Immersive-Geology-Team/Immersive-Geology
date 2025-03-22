@@ -21,4 +21,9 @@ public class MaterialRadioactiveMetal extends MaterialMetal
 		if(flag.equals(ItemCategoryFlags.INGOT)) return 7;
 		return super.getPaletteVariation(flag);
 	}
+
+	public int heatValue()
+	{
+		return 2000;
+	}
 }

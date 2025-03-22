@@ -1,8 +1,8 @@
 {
   "parent": "immersivegeology:block/base/scaffolding/scaffolding_wooden_top",
   "textures": {
-    "bottom": "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_stainlesssteel",
-    "side": "immersivegeology:block/greyscale/scaffolding/scaffolding_pristine_stainlesssteel",
-    "top": "immersivegeology:block/greyscale/scaffolding/scaffolding_top_wooden_top_pristine_stainlesssteel"
+    "bottom": "immersivegeology:block/colored/stainlesssteel/scaffolding/scaffolding",
+    "side": "immersivegeology:block/colored/stainlesssteel/scaffolding/scaffolding",
+    "top": "immersivegeology:block/colored/stainlesssteel/scaffolding/scaffolding_wooden_top"
   }
 }

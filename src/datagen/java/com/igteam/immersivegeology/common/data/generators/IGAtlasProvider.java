@@ -55,8 +55,13 @@ public class IGAtlasProvider implements DataProvider {
 		}
 		for(ItemCategoryFlags flag : ItemCategoryFlags.values())
 		{
-			if(flag.hasPalette())
+			if(flag.hasPalette() &! flag.equals(ItemCategoryFlags.DRILL_HEAD))
 				for(int variation = 1; variation <= flag.getVariations(); variation++) textures.add("palette/item/" + flag.getName() + "/type_" + variation);
+			if(flag.hasPalette() && flag.equals(ItemCategoryFlags.DRILL_HEAD))
+			{
+				textures.add("palette/item/" + flag.getName() + "/drill");
+				textures.add("palette/item/" + flag.getName() + "/drillhead");
+			}
 		}
 		List<String> scaffolding_textures = new ArrayList<>();
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding");

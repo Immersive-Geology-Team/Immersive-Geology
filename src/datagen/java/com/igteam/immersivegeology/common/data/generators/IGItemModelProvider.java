@@ -5,10 +5,7 @@ import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
-import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
-import com.igteam.immersivegeology.common.item.IGGenericBucketItem;
-import com.igteam.immersivegeology.common.item.IGGenericItem;
-import com.igteam.immersivegeology.common.item.IGGenericOreItem;
+import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -66,6 +63,11 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                 generateGenericBlockItem(i);
                 continue;
             }
+            if(item instanceof IGGenericDrillHead i)
+            {
+                generateDrillHead(i);
+                continue;
+            }
             if(item instanceof IGGenericItem i){
                 generateGenericItem(i);
             }
@@ -74,6 +76,19 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
 
         this.obj(MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE), IGLib.rl("block/obj/energy_cable_centre.obj")).transforms(IGLib.rl("item/block"));
+    }
+
+    private void generateDrillHead(IGGenericDrillHead item)
+    {
+        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drillhead_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase());
+        try {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).texture("layer0", texture);
+        } catch (Exception ex) {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).textures.put("layer0", texture.toString());
+        }
     }
 
     private TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {

@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/grit"
+    "layer0": "immersivegeology:palette/item/grit/type_1_pristine_bronze"
   }
 }
