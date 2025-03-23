@@ -49,12 +49,14 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         final MultiblockOrientation orientation = context.getLevel().getOrientation();
         final PelletizerLogic.State state = context.getState();
         float rot = state.getRotation();
+        boolean isMirrored = orientation.mirrored();
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();
         boolean isActive = state.shouldRenderActive();
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
+            if(isMirrored) poseStack.translate(1,0,0);
             poseStack.pushPose();
                 poseStack.translate(-0.5,1.90625,0.21875);
                 float angleDrum = isActive ? (rot) - pPartialTick : rot;

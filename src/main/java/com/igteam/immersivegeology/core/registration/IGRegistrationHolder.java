@@ -207,6 +207,7 @@ public class IGRegistrationHolder {
         steel_mb.add(IGCentrifugeMultiblock.class);
         steel_mb.add(IGBallmillMultiblock.class);
         steel_mb.add(IGCrystalizerMultiblock.class);
+        steel_mb.add(IGFoundryMultiblock.class);
 
         steel_mb.add(ImprovedBlastfurnaceMultiblock.class);
         steel_mb.add(CrusherMultiblock.class);
@@ -471,6 +472,7 @@ public class IGRegistrationHolder {
     {
         IGLib.IG_LOGGER.info("- Multiblocks");
         registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
+        registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);
         registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY);
         registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);

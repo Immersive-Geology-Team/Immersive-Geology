@@ -42,7 +42,7 @@ public class MaterialBauxite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(14,50,1,0,180,1400,0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(18,50,1,0,180,1400,0.8,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
     }
 
     @Override
