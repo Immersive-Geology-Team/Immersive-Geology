@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.api.crafting.StackWithChance;
 import blusunrize.immersiveengineering.api.crafting.builders.*;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDecoration;
+import blusunrize.immersiveengineering.common.register.IEBlocks.StoneDecoration;
 import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
@@ -103,8 +104,6 @@ public class IGRecipes extends RecipeProvider
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
-
-
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
@@ -247,6 +246,22 @@ public class IGRecipes extends RecipeProvider
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MiscEnum.ReinforceConcrete.getBlock(BlockCategoryFlags.STAIRS), 4).define('i', MiscEnum.ReinforceConcrete.getBlock(BlockCategoryFlags.STORAGE_BLOCK)).pattern("i  ").pattern("ii ").pattern("iii").unlockedBy("has_sheetmetal_" + MiscEnum.ReinforceConcrete.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(MiscEnum.ReinforceConcrete.getBlock(BlockCategoryFlags.STORAGE_BLOCK))).save(consumer, ig("block_to_stair_" + MiscEnum.ReinforceConcrete.getName().toLowerCase()));
 
 
+		Block bituminous_coal_block = MineralEnum.Bituminous.getBlock(BlockCategoryFlags.STORAGE_BLOCK);
+		Item bituminous_coal = MineralEnum.Bituminous.getItem(ItemCategoryFlags.NORMAL_ORE);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bituminous_coal_block, 1).define('i', bituminous_coal).pattern("iii").pattern("iii").pattern("iii").unlockedBy("has_coal_" + MineralEnum.Bituminous.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(bituminous_coal)).save(consumer, ig("coal_to_block_" + MineralEnum.Bituminous.getName().toLowerCase()));
+
+
+		Block lignite_coal_block = MineralEnum.Lignite.getBlock(BlockCategoryFlags.STORAGE_BLOCK);
+		Item lignite_coal = MineralEnum.Lignite.getItem(ItemCategoryFlags.NORMAL_ORE);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, lignite_coal_block, 1).define('i', lignite_coal).pattern("iii").pattern("iii").pattern("iii").unlockedBy("has_coal_" + MineralEnum.Lignite.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(lignite_coal)).save(consumer, ig("coal_to_block_" + MineralEnum.Lignite.getName().toLowerCase()));
+
+		Block anthracite_coal_block = MineralEnum.Anthracite.getBlock(BlockCategoryFlags.STORAGE_BLOCK);
+		Item anthracite_coal = MineralEnum.Anthracite.getItem(ItemCategoryFlags.NORMAL_ORE);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, anthracite_coal_block, 1).define('i', anthracite_coal).pattern("iii").pattern("iii").pattern("iii").unlockedBy("has_coal_" + MineralEnum.Anthracite.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(anthracite_coal)).save(consumer, "coal_to_block_" + MineralEnum.Anthracite.getName().toLowerCase());
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, anthracite_coal, 9).requires(Ingredient.of(new ItemStack(anthracite_coal_block)), 1).unlockedBy("has_anthracite_block", InventoryChangeTrigger.TriggerInstance.hasItems(anthracite_coal_block)).save(consumer, ig("anthracite_from_storage_block"));
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bituminous_coal, 9).requires(Ingredient.of(new ItemStack(bituminous_coal_block)), 1).unlockedBy("has_bituminous_block", InventoryChangeTrigger.TriggerInstance.hasItems(bituminous_coal_block)).save(consumer, ig("bituminous_from_storage_block"));
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, lignite_coal, 9).requires(Ingredient.of(new ItemStack(lignite_coal_block)), 1).unlockedBy("has_lignite_block", InventoryChangeTrigger.TriggerInstance.hasItems(lignite_coal_block)).save(consumer, ig("lignite_from_storage_block"));
+
 		//Computational Engineering Block
 		Item computational_engineering = MetalEnum.StainlessSteel.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK).asItem();
 		Item stainlesssteel_ingot = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT);
@@ -371,7 +386,6 @@ public class IGRecipes extends RecipeProvider
 				}
 				if(material.hasFlag(BlockCategoryFlags.SHEETMETAL_BLOCK) && material.hasFlag(ItemCategoryFlags.PLATE) && !material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.PLATE))
 				{
-
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK), 4).define('i', material.getItem(ItemCategoryFlags.PLATE)).pattern(" i ").pattern("i i").pattern(" i ").unlockedBy("has_ingot_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getItem(ItemCategoryFlags.PLATE))).save(consumer, ig("plate_to_sheetmetal_" + material.getName().toLowerCase()));
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_slab_" + material.getName().toLowerCase()));
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_STAIRS), 4).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("i  ").pattern("ii ").pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_stair_" + material.getName().toLowerCase()));
@@ -441,6 +455,10 @@ public class IGRecipes extends RecipeProvider
 		BloomeryFuelBuilder.builder(mineral.getItem(ItemCategoryFlags.NORMAL_ORE))
 				.setTime(baseTime * NORMAL_QUALITY_MULTIPLIER)
 				.build(consumer, IGLib.rl("bloomery/bloomery_fuel_" + mineralName + "_normal"));
+
+		BloomeryFuelBuilder.builder(mineral.getBlock(BlockCategoryFlags.STORAGE_BLOCK))
+				.setTime((baseTime * NORMAL_QUALITY_MULTIPLIER) * 10)
+				.build(consumer, IGLib.rl("bloomery/bloomery_fuel_block_" + mineralName + "_normal"));
 	}
 
 	// Helper method to register blast furnace fuels
@@ -449,6 +467,10 @@ public class IGRecipes extends RecipeProvider
 		BlastFurnaceFuelBuilder.builder(mineral.getItem(ItemCategoryFlags.NORMAL_ORE))
 				.setTime(baseTime * NORMAL_QUALITY_MULTIPLIER)
 				.build(consumer, IGLib.rl("blastfuel/normal_" + mineralName));
+
+		BlastFurnaceFuelBuilder.builder(mineral.getBlock(BlockCategoryFlags.STORAGE_BLOCK))
+				.setTime((baseTime * NORMAL_QUALITY_MULTIPLIER) * 10)
+				.build(consumer, IGLib.rl("blastfuel/normal_block_" + mineralName));
 	}
 
 	// Helper method to register torch recipes
@@ -471,6 +493,11 @@ public class IGRecipes extends RecipeProvider
 				.addInput(mineral.getItem(ItemCategoryFlags.NORMAL_ORE))
 				.setTime(1800)
 				.build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_" + mineralName + "_to_coke"));
+
+		CokeOvenRecipeBuilder.builder(IETags.getItemTag(IETags.coalCokeBlock), 1)
+				.addInput(mineral.getItem(ItemCategoryFlags.NORMAL_ORE))
+				.setOil(5000).setTime(16200)
+				.build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_block_" + mineralName + "_to_coke"));
 	}
 
 	private ResourceLocation ig(String crafting)

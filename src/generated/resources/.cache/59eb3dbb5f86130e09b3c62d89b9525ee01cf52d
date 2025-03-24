@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-22T10:17:14.056698185	Loot Tables
+// 1.20.1	2025-03-24T19:48:51.388318434	Loot Tables
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
@@ -9,6 +9,7 @@ c69c0f3a94ded8cf37ac8c0197371baacc5f0e15 data/immersivegeology/loot_tables/block
 332f48215b41a391547b1d6f22699388b5c115bc data/immersivegeology/loot_tables/blocks/engineering_block_aluminum.json
 75c00ba649cfada152e014726fd05c95f5cda376 data/immersivegeology/loot_tables/blocks/engineering_block_hastelloy.json
 3d076388a9d2622c924c4972211b8710dd6bba74 data/immersivegeology/loot_tables/blocks/engineering_block_stainlesssteel.json
+5c4cc547276a53b85de6abd695577451551f2c92 data/immersivegeology/loot_tables/blocks/engineering_block_tungsten.json
 e22ec2838f3412090b0ca20e319f9580e4894178 data/immersivegeology/loot_tables/blocks/evaporate_carnallite.json
 7db63af6af99c37039fadca9b081b97955427c6c data/immersivegeology/loot_tables/blocks/evaporate_crystal_carnallite.json
 65b46ea47d40d9ba90e3f968379096c42a0a870f data/immersivegeology/loot_tables/blocks/evaporate_crystal_rocksalt.json

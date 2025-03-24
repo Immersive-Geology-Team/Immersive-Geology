@@ -63,7 +63,6 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.generation_group.add(Pair.of((i) -> this, 100));
-
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();

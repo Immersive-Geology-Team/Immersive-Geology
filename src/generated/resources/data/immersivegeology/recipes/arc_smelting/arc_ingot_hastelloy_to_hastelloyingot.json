@@ -29,9 +29,13 @@
   },
   "results": [
     {
-      "count": 8,
+      "count": 12,
       "item": "immersivegeology:ingot_hastelloy"
     }
   ],
+  "slag": {
+    "count": 4,
+    "item": "immersiveengineering:slag"
+  },
   "time": 1600
 }

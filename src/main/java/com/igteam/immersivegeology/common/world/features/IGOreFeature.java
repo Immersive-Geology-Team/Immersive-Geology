@@ -82,7 +82,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		}
 		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
 
-		if((random.nextInt(chance_max) < rConfig.generationChance.get()))
+		if((random.nextInt(chance_max) < config.getChanceToGenerate()))
 		{
 			boolean noValidChunks = true;
 			if(!biomeSource.possibleBiomes().isEmpty())
@@ -383,9 +383,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return blocks.get(selectedBlock);
 		}
 
-		public int getChanceToGenerate(IWorldGenConfig entry)
+		public int getChanceToGenerate()
 		{
-			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
+			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(this.entry);
 			return config.generationChance.get();
 		}
 

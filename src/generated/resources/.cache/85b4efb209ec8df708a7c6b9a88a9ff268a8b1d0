@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-22T10:17:14.049164306	Item models
+// 1.20.1	2025-03-24T19:57:46.536931432	Item models
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_bronze_fluid.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_calcium_fluid.json
@@ -240,6 +240,7 @@ eab8ed78e539b3a3eb24f08328cd0f80a9addfd2 assets/immersivegeology/models/item/ene
 ebdd81fad7ab4dc475263d1e0fa3839b6f62bfcf assets/immersivegeology/models/item/engineering_block_aluminum.json
 f323f6a34043f9a24736eed8b3cd25e36f0cf257 assets/immersivegeology/models/item/engineering_block_hastelloy.json
 a6db67d29916ec1519aeb81a3b5e8eb35afe26d6 assets/immersivegeology/models/item/engineering_block_stainlesssteel.json
+1272756f4fb22c12ed00dcf513afe1e4bd4753a3 assets/immersivegeology/models/item/engineering_block_tungsten.json
 885c1e834c3cbbab4e34ba0cb7bfece2a71946b6 assets/immersivegeology/models/item/evaporate_carnallite.json
 5573a885ffec56e3e879e58754d28258292ef0d9 assets/immersivegeology/models/item/evaporate_crystal_carnallite.json
 5573a885ffec56e3e879e58754d28258292ef0d9 assets/immersivegeology/models/item/evaporate_crystal_rocksalt.json
@@ -248,7 +249,7 @@ a6db67d29916ec1519aeb81a3b5e8eb35afe26d6 assets/immersivegeology/models/item/eng
 64fd02c100c9c4e6a5cd1991490021ad05e9e53c assets/immersivegeology/models/item/evaporate_saltpeter.json
 fc3f204777a8f7034463f20a5ca76af8c0447bd5 assets/immersivegeology/models/item/fence_bronze.json
 77a19e60ff6b741624119ed9f0df4c3f6f74a1a8 assets/immersivegeology/models/item/fence_hastelloy.json
-bf6b1321690af525731ab5a9aa10b9a120e39f77 assets/immersivegeology/models/item/fence_stainlesssteel.json
+ba6657ad7e5411c67462ad43b5f4cec2eec4ae63 assets/immersivegeology/models/item/fence_stainlesssteel.json
 01ca1e5d5117fb6b7c161d6bd3470a8347d2bead assets/immersivegeology/models/item/fence_titanium.json
 3da7df86b4b1cb6f4316327aa182365a686b1d61 assets/immersivegeology/models/item/fence_tungsten.json
 01fa418ede330dc32e3596b5a9d4a63062111c28 assets/immersivegeology/models/item/gear_aluminum.json

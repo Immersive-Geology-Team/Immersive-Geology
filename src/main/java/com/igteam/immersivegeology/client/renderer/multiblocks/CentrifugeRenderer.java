@@ -56,6 +56,7 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         poseStack.pushPose();
         {
             rotateForFacing(poseStack, dir);
+            if(orientation.mirrored()) poseStack.translate(-2,0,0);
             poseStack.pushPose();
             {
                 poseStack.translate(1.5, -.4, 1.5);
