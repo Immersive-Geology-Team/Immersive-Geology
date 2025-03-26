@@ -89,22 +89,6 @@ public class MaterialAnatase extends MaterialMineral {
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null, 200, 51200).joinBranches(hunter_process, powder_a, powder_b);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
-                "slurry_" + getName()+"_to_dust",
-                MetalEnum.Titanium.getStack(ItemCategoryFlags.POWDER, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
-                ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
-                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
-                null, 200, 51200).addToTree(hunter_process, ticl);
-
-        IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
-                MetalEnum.Titanium.getStack(ItemCategoryFlags.POWDER, IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
-                ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
-                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
-                null, 200, 51200).addToTree(hunter_process, ticl);
     }
 
     @Override
