@@ -71,6 +71,7 @@
   "manual.immersivegeology.silver": "Silver",
   "manual.immersivegeology.steel": "Steel",
   "manual.immersivegeology.stainlesssteel": "Stainless Steel",
+  "manual.immersivegeology.highspeedsteel": "High Speed Steel",
   "manual.immersivegeology.sodium": "Sodium",
   "manual.immersivegeology.thorium": "Thorium",
   "manual.immersivegeology.tin": "Tin",
@@ -351,6 +352,7 @@
   "material.immersivegeology.electrum": "Electrum",
   "material.immersivegeology.steel": "Steel",
   "material.immersivegeology.stainlesssteel": "Stainless Steel",
+  "material.immersivegeology.highspeedsteel": "High Speed Steel",
   "material.immersivegeology.tungstencarbide": "Tungsten Carbide",
 
   "material.immersivegeology.monazite": "Monazite",

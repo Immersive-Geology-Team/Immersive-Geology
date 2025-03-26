@@ -64,11 +64,10 @@ public class MaterialTitanium extends MaterialMetal {
                 null, null, 200, 51200).addToTree(hunter_process);
 
         //water is only to dissolve concentrated brine for future electrolysis
-
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
+                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST, 4)), //TODO Changed it from GRIT to COMPOUND DUST temp solution.
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
@@ -76,7 +75,7 @@ public class MaterialTitanium extends MaterialMetal {
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
+                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)), // TODO We can't gain access to Magnesium in any form.
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);

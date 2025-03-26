@@ -44,7 +44,7 @@ public class IGChemicalCategory extends IGRecipeCategory<ChemicalRecipe>
 	{
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 42, 40)
-				.addIngredients(recipe.itemInput.getBaseIngredient());
+				.addItemStack(recipe.itemInput.getRandomizedExampleStack(0));
 
 		List<Integer> tank_pos_list = List.of(29, 8, 45, 8, 61, 8);
 		int i = 0;

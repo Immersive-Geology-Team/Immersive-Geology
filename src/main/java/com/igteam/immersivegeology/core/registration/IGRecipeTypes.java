@@ -35,6 +35,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
 	public static final TypeWithClass<BallmillRecipe> BALLMILL = register("ballmill", BallmillRecipe.class);
 	public static final TypeWithClass<PelletizerRecipe> PELLETIZER = register("pelletizer",PelletizerRecipe.class);
+	public static final TypeWithClass<FoundryRecipe> FOUNDRY = register("foundry",FoundryRecipe.class);
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
 	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);

@@ -8,7 +8,7 @@
     "loader": "forge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/foundry/foundry.obj",
     "textures": {
-      "particle": "immersivegeology:block/multiblock/foundry/foundry"
+      "particle": "immersivegeology:block/multiblock/foundry/conveyor"
     }
   },
   "loader": "immersiveengineering:basic_split",
@@ -85,6 +85,6 @@
     ]
   ],
   "textures": {
-    "particle": "immersivegeology:block/multiblock/foundry/foundry"
+    "particle": "immersivegeology:block/multiblock/foundry/conveyor"
   }
 }

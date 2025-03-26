@@ -102,9 +102,9 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		ITEM_OUTPUT = new MultiblockFace(3, 0, 9, RelativeBlockFace.BACK);
 		ITEM_INPUT_OUTPUT = new MultiblockFace(4, -1, 4, RelativeBlockFace.UP);
 		FLUID_OUTPUT_CAP = new CapabilityPosition(5, 0, 8, RelativeBlockFace.BACK);
-		FLUID_INPUT_CAPS = Set.of(new CapabilityPosition(0, 0, 5, RelativeBlockFace.LEFT),
-				new CapabilityPosition(8, 0, 3, RelativeBlockFace.RIGHT),
-				new CapabilityPosition(3, 0, 0, RelativeBlockFace.BACK));
+		FLUID_INPUT_CAPS = Set.of(new CapabilityPosition(0, 0, 5, RelativeBlockFace.RIGHT),
+				new CapabilityPosition(8, 0, 3, RelativeBlockFace.LEFT),
+				new CapabilityPosition(3, 0, 0, RelativeBlockFace.FRONT));
 		FLUID_INPUTS = FLUID_INPUT_CAPS.stream().map(CapabilityPosition::posInMultiblock).collect(Collectors.toSet());
 		TANK_LEFT_POSITIONS = generateBlockPositions(new BlockPos(0,1,3), new BlockPos(1,3,4));
 		TANK_BACK_POSITIONS = generateBlockPositions(new BlockPos(4,1,0), new BlockPos(5,3,1));
@@ -224,14 +224,14 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 		if(cap==ForgeCapabilities.FLUID_HANDLER)
 		{
-			if(FLUID_INPUTS.contains(position.posInMultiblock()))
+			if(FLUID_INPUT_CAPS.contains(position))
 			{
 				if(position.side()!=null)
 				{
 					// Things are strange, it detects things BACKWARDS, so RIGHT is the 'LEFT' Input and so on.
+					if(position.side().equals(RelativeBlockFace.LEFT)) return state.inputCapRight.cast(ctx);
 					if(position.side().equals(RelativeBlockFace.RIGHT)) return state.inputCapLeft.cast(ctx);
 					if(position.side().equals(RelativeBlockFace.FRONT)) return state.inputCapBack.cast(ctx);
-					if(position.side().equals(RelativeBlockFace.LEFT)) return state.inputCapRight.cast(ctx);
 				}
 			}
 

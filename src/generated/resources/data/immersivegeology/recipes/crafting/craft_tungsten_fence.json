@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:ingot_tungsten"
+    },
+    "r": {
+      "item": "immersivegeology:rod_tungsten"
+    }
+  },
+  "pattern": [
+    "iri",
+    "iri"
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:fence_tungsten"
+  },
+  "show_notification": true
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-24T19:48:51.388318434	Loot Tables
+// 1.20.1	2025-03-26T11:14:07.345159814	Loot Tables
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
@@ -844,6 +844,7 @@ c8ae424e1e26acba4201a8325f72b91b878e75c1 data/immersivegeology/loot_tables/block
 370230c133782cdcdeb6523261681f9b1415f137 data/immersivegeology/loot_tables/blocks/storage_block_chromium.json
 f0c23a7a6d22b37eca992e84e0c79e0ddadb4087 data/immersivegeology/loot_tables/blocks/storage_block_cobalt.json
 1fb159563126b39375b66b28ddc71c8789bbac1f data/immersivegeology/loot_tables/blocks/storage_block_hastelloy.json
+e5784106d3c6be823b59628cda7e11d2cf1359e0 data/immersivegeology/loot_tables/blocks/storage_block_highspeedsteel.json
 d84fdd303f7de238ec084faa554951dd301271c0 data/immersivegeology/loot_tables/blocks/storage_block_lignite.json
 02b496f0463ae033d9afc9a788ba8dbdeafc0ecb data/immersivegeology/loot_tables/blocks/storage_block_magnesium.json
 22311d24c1a526a1880b91d95cfdf6f580d29fe2 data/immersivegeology/loot_tables/blocks/storage_block_manganese.json

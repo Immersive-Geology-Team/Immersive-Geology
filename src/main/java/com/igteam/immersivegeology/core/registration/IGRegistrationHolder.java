@@ -8,6 +8,7 @@
 package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
@@ -209,11 +210,14 @@ public class IGRegistrationHolder {
         steel_mb.add(IGCrystalizerMultiblock.class);
         steel_mb.add(IGFoundryMultiblock.class);
 
-        steel_mb.add(ImprovedBlastfurnaceMultiblock.class);
-        steel_mb.add(CrusherMultiblock.class);
-        steel_mb.add(MixerMultiblock.class);
-        steel_mb.add(RefineryMultiblock.class);
-        steel_mb.add(DieselGeneratorMultiblock.class);
+        for(IMultiblock m : IEMultiblocks.IE_MULTIBLOCKS)
+        {
+            if(m instanceof TemplateMultiblock t)
+            {
+                steel_mb.add(t.getClass());
+            }
+        }
+
     }
 
     public static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();

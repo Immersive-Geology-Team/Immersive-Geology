@@ -47,7 +47,7 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
     private final ItemCategoryFlags bucket_type;
 
     public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material) {
-        super(fluid, new Properties());
+        super(fluid, new Properties().stacksTo(1).craftRemainder(Items.BUCKET));
         this.materialMap.put(MaterialTexture.base, material);
         this.fluid_category = flag;
         this.bucket_type = bucket_type;

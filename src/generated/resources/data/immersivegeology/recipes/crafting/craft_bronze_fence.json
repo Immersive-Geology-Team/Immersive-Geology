@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:ingot_bronze"
+    },
+    "r": {
+      "item": "immersivegeology:rod_bronze"
+    }
+  },
+  "pattern": [
+    "iri",
+    "iri"
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:fence_bronze"
+  },
+  "show_notification": true
+}

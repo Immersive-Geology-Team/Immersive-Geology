@@ -307,6 +307,13 @@ public class IGRecipes extends RecipeProvider
 			{
 				MetalPressRecipeBuilder.builder(Molds.MOLD_ROD, metal.getItemTag(ItemCategoryFlags.ROD), 2).addInput(metal.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_rod_"+metal.getName()));
 			}
+			if(metal.hasFlag(BlockCategoryFlags.FENCE))
+			{
+				assert(metal.hasFlag(ItemCategoryFlags.ROD));
+				assert(metal.hasFlag(ItemCategoryFlags.INGOT));
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, metal.getBlock(BlockCategoryFlags.FENCE), 3).pattern("iri").pattern("iri").define('i', metal.getItem(ItemCategoryFlags.INGOT)).define('r', metal.getItem(ItemCategoryFlags.ROD)).unlockedBy("has_rod_and_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.ROD), metal.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_"+metal.getName()+"_fence"));
+			}
+
 			if(metal.hasFlag(ItemCategoryFlags.DRILL_HEAD) && metal.hasFlag(BlockCategoryFlags.STORAGE_BLOCK) && metal.hasFlag(ItemCategoryFlags.INGOT))
 			{
 				ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, metal.getItem(ItemCategoryFlags.DRILL_HEAD)).unlockedBy("has_ingot_" + metal.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.INGOT)))
