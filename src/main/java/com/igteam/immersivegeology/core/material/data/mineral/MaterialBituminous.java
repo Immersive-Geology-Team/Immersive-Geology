@@ -25,8 +25,8 @@ public class MaterialBituminous extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 		removeMaterialFlags(ItemCategoryFlags.values());
 		removeMaterialFlags(BlockCategoryFlags.values());
-		addFlags(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE);
-		addFlags(BlockCategoryFlags.ORE_BLOCK);
+		addFlags(ItemCategoryFlags.NORMAL_ORE);
+		addFlags(BlockCategoryFlags.ORE_BLOCK, BlockCategoryFlags.STORAGE_BLOCK);
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(800);

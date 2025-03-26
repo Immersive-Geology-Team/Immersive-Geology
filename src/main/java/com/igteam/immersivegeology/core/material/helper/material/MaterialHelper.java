@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
@@ -19,6 +20,7 @@ import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -37,6 +39,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
@@ -316,4 +319,6 @@ public interface MaterialHelper {
 	default Set<MaterialHelper> getOriginMaterials() {
         return Set.of();
     };
+
+	default DrillHeadProps drillHeadInstance() {return new DrillHeadProps(getName(), IETags.getTagsFor(EnumMetals.STEEL).ingot, 3, 1, Tiers.DIAMOND, 10.0F, 7, 10000, ImmersiveEngineering.rl("item/drill_diesel"));};
 }

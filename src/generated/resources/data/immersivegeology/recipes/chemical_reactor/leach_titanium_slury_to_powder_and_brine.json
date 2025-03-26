@@ -15,7 +15,7 @@
   },
   "itemInput": {
     "base_ingredient": {
-      "item": "immersivegeology:grit_sodium"
+      "item": "immersivegeology:compound_dust_sodium"
     },
     "count": 4
   },

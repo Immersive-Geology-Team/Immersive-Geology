@@ -36,7 +36,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(MetalEnum.Nickel.instance(), ItemCategoryFlags.INGOT, 8, ItemCategoryFlags.INGOT, 8, 0,
+        IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS).create(MetalEnum.Nickel.instance(), ItemCategoryFlags.INGOT, 8, ItemCategoryFlags.INGOT, 12, 4,
                 IngredientWithSize.of(MetalEnum.Chromium.getStack(ItemCategoryFlags.INGOT, 4)),
                 IngredientWithSize.of(MetalEnum.Molybdenum.getStack(ItemCategoryFlags.INGOT, 2)),
                 IngredientWithSize.of(MetalEnum.Iron.getStack(ItemCategoryFlags.INGOT, 1)),

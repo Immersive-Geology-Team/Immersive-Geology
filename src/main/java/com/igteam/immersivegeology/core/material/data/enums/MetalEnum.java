@@ -47,6 +47,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     Osmium(new MaterialOsmium()),
     Platinum(new MaterialPlatinum()),
     Hastelloy(new MaterialHastelloy()),
+    HighSpeedSteel(new MaterialHighSpeedSteel()),
     Silver(new MaterialSilver()),
     Steel(new MaterialSteel()),
     StainlessSteel(new MaterialStainlessSteel()),

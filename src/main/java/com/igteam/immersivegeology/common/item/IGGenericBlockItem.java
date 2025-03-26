@@ -24,9 +24,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -122,4 +124,12 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
         if(block.getMaterials().isEmpty()) IGLib.IG_LOGGER.warn("Block for Item has no Material (Are we using a pre defined model?) [{}]", getDescriptionId());
 		return block.getMaterials().isEmpty();
 	}
+
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType)
+    {
+        MaterialInterface<?> base = getMaterial(MaterialTexture.base);
+        if(base.hasBurnTime()) return ((base.getBurnTime() * 2) * 10);
+        return super.getBurnTime(itemStack, recipeType);
+    }
 }

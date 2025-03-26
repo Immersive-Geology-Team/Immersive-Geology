@@ -63,7 +63,6 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.generation_group.add(Pair.of((i) -> this, 100));
-
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
@@ -176,15 +175,19 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             switch(i)
             {
-                case DIRTY_CRUSHED_ORE, CRUSHED_ORE, CLAY, SLAG, POWDERED_SLAG ->
+                case DIRTY_CRUSHED_ORE, CLAY, POWDERED_SLAG, CRUSHED_ORE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE ->
+                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST, METAL_OXIDE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
                 }
-                case ROD, WIRE, METAL_OXIDE, COMPOUND_DUST ->
+                case DRILL_HEAD ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/drill_pristine_"+getName().toLowerCase());
+                }
+                case ROD, WIRE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/"+i.getName());
                 }

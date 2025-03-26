@@ -25,7 +25,7 @@ public class MaterialRefinedUranium extends MaterialRadioactiveMetal
         // Remove Everything
         removeMaterialFlags(ItemCategoryFlags.values());
         removeMaterialFlags(BlockCategoryFlags.values());
-        addFlags(ItemCategoryFlags.INGOT);
+        addFlags(ItemCategoryFlags.INGOT, BlockCategoryFlags.STORAGE_BLOCK);
         this.materialRarity = Rarity.EPIC;
     }
 
@@ -37,5 +37,11 @@ public class MaterialRefinedUranium extends MaterialRadioactiveMetal
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.ORTHORHOMBIC;
+    }
+
+    @Override
+    public int heatValue()
+    {
+        return 2500;
     }
 }

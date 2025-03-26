@@ -53,4 +53,10 @@ public class MaterialThorium extends MaterialRadioactiveMetal
                 ChemicalEnum.HydrofluoricAcid,
                 ItemCategoryFlags.CRYSTAL);
     }
+
+    @Override
+    public int heatValue()
+    {
+        return 1800;
+    }
 }

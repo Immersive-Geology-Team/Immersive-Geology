@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-12T17:40:55.137358197	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-03-17T04:57:05.055758175	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -14,6 +14,9 @@ acd0e1939cf7655b58c67b56be5980a3eb0be432 data/forge/tags/fluids/bindingagent.jso
 5ad5700383ffb953dd21d5dabc1262f5e818bb6e data/forge/tags/fluids/clean_brine_carnallite.json
 e3746db70d7ebd0c79204fd32c79cd3a05def7bd data/forge/tags/fluids/clean_brine_rocksalt.json
 d671a30742ffd0719955656d8b1a0d95deac2cc4 data/forge/tags/fluids/clean_brine_saltpeter.json
+8ae26ec00deba8e6b5b9ab844fee0ddffa038237 data/forge/tags/fluids/clean_chemicalwaste_bauxite.json
+7487364bf966e9e5682cae9d41342302b01b3977 data/forge/tags/fluids/clean_chemicalwaste_molybdenite.json
+f301367a984c6dd999dd01247cee862c383777ff data/forge/tags/fluids/clean_chemicalwaste_monazite.json
 6902720f4b3521148a0e45e4545927d61fb47149 data/forge/tags/fluids/clean_hydrochloricacid_acanthite.json
 ae1c580093ac158bad05e1e903f158bfac3cdad2 data/forge/tags/fluids/clean_hydrochloricacid_chalcocite.json
 41650bc0a506c811e07da7ffeafbead435559e2e data/forge/tags/fluids/clean_hydrochloricacid_chromium.json

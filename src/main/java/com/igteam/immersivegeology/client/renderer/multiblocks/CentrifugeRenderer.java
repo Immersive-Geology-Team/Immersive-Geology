@@ -56,6 +56,7 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         poseStack.pushPose();
         {
             rotateForFacing(poseStack, dir);
+            if(orientation.mirrored()) poseStack.translate(-2,0,0);
             poseStack.pushPose();
             {
                 poseStack.translate(1.5, -.4, 1.5);
@@ -76,7 +77,7 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     {
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, true, 0xffffff, light);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
         matrix.popPose();
     }
 

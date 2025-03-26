@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -132,4 +133,9 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     {
         return instance().getBurntime();
     }
+
+    default DrillHeadProps drillHeadInstance()
+    {
+        return instance().drillHeadInstance();
+    };
 }

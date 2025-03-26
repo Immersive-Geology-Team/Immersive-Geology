@@ -2,6 +2,7 @@
   "values": [
     "immersivegeology:engineering_block_aluminum",
     "immersivegeology:engineering_block_hastelloy",
-    "immersivegeology:engineering_block_stainlesssteel"
+    "immersivegeology:engineering_block_stainlesssteel",
+    "immersivegeology:engineering_block_tungsten"
   ]
 }

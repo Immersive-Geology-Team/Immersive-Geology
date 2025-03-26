@@ -71,6 +71,7 @@
   "manual.immersivegeology.silver": "Silver",
   "manual.immersivegeology.steel": "Steel",
   "manual.immersivegeology.stainlesssteel": "Stainless Steel",
+  "manual.immersivegeology.highspeedsteel": "High Speed Steel",
   "manual.immersivegeology.sodium": "Sodium",
   "manual.immersivegeology.thorium": "Thorium",
   "manual.immersivegeology.tin": "Tin",
@@ -161,6 +162,7 @@
 
   "item.immersivegeology.ingot": "%s Ingot",
   "item.immersivegeology.plate": "%s Plate",
+  "item.immersivegeology.drill_head": "%s Drill Head",
   "item.immersivegeology.rough_ingot": "Rough %s Ingot",
   "item.immersivegeology.rough_plate": "Rough %s Plate",
   "item.immersivegeology.grit": "%s Grit",
@@ -350,6 +352,7 @@
   "material.immersivegeology.electrum": "Electrum",
   "material.immersivegeology.steel": "Steel",
   "material.immersivegeology.stainlesssteel": "Stainless Steel",
+  "material.immersivegeology.highspeedsteel": "High Speed Steel",
   "material.immersivegeology.tungstencarbide": "Tungsten Carbide",
 
   "material.immersivegeology.monazite": "Monazite",
@@ -489,6 +492,7 @@
 
   "material.immersivegeology.engineering.stainlesssteel": "Basic Computational",
   "material.immersivegeology.engineering.aluminum": "Advanced Computational",
+  "material.immersivegeology.engineering.tungsten": "Thermal",
   "material.immersivegeology.engineering.hastelloy": "Chemical",
   "block.immersivegeology.engineering_block": "%s Engineering Block",
   "block.immersivegeology.srconcrete": "Steel Reinforced Concrete",

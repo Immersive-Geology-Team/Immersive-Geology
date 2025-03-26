@@ -56,7 +56,7 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         poseStack.pushPose();
             rotateForFacing(poseStack, dir);
             poseStack.pushPose();
-                poseStack.translate(-0.5,1.90625,0.21875);
+                poseStack.translate(.5,1.90625,0.21875);
                 float angleDrum = isActive ? (rot) - pPartialTick : rot;
                 poseStack.mulPose(new Quaternionf().rotateAxis(30 * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
                 poseStack.pushPose();
@@ -72,7 +72,7 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
         rotateForFacing(matrix, facing);
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, true, 0xffffff, light);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
         matrix.popPose();
     }
 

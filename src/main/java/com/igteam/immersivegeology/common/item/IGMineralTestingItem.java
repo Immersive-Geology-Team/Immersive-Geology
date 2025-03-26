@@ -29,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
 
 public class IGMineralTestingItem extends IGGenericItem
 {
+	private final HashMap<ChunkPos, MineralCacheEntry> cached_test = new HashMap<>();
 	public IGMineralTestingItem(ItemCategoryFlags flag, MaterialInterface<?> material)
 	{
 		super(flag, material, new Properties().durability(128));
@@ -62,31 +64,46 @@ public class IGMineralTestingItem extends IGGenericItem
 	@Override
 	public InteractionResult useOn(UseOnContext context)
 	{
+		long s = System.currentTimeMillis();
 		Level level = context.getLevel();
 		BlockPos usedPos = context.getClickedPos();
 		Player player = context.getPlayer();
 		ItemStack stack = context.getItemInHand();
 		if(!stack.getItem().equals(this)) return InteractionResult.FAIL;
 		if(player == null) return InteractionResult.FAIL;
-		Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
 		ChunkAccess centreChunk = level.getChunk(usedPos);
-		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
-
-		int height = centreChunk.getHeight();
-
-		for(int x = -16; x < (16+16); ++x)
+		boolean hasCache = cached_test.containsKey(centreChunk.getPos());
+		if(hasCache)
 		{
-			for(int z = -16; z < (16+16); ++z)
+			MineralCacheEntry cached_entry = cached_test.get(centreChunk.getPos());
+			long current_timestamp = System.currentTimeMillis();
+			if((current_timestamp - cached_entry.timestamp) > MineralCacheEntry.CACHE_EXPIRY)
 			{
-				for(int y = -48; y < height; ++y)
+				cached_test.clear();
+			}
+
+			player.displayClientMessage(Component.literal(cached_entry.message), true);
+
+			long e = System.currentTimeMillis();
+			long d = (e - s) / 1000;
+			IGLib.IG_LOGGER.info("T: {}", d);
+			return InteractionResult.SUCCESS;
+		}
+
+		Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
+		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
+		int height = centreChunk.getHeight();
+		for(int y = 0; y < height; ++y)
+		{
+			for(int x = -16; x < 32; ++x)
+			{
+				for(int z = -16; z < 32; ++z)
 				{
 					BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
 					BlockState check = level.getBlockState(cursor);
-					if(check.getBlock() instanceof IOreBlock ore)
-					{
+					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
-						int amount = queryMap.getOrDefault(material, 1);
-						queryMap.put(material, (amount+1));
+						queryMap.merge(material, 1, Integer::sum);
 					}
 				}
 			}
@@ -116,9 +133,27 @@ public class IGMineralTestingItem extends IGGenericItem
 		}
 
 		String status = found.isEmpty() ? "nothing" : "found";
-		player.displayClientMessage(Component.translatable("immersivegeology.prospecting_pick." + status, string_found), true);
+		Component comp = Component.translatable("immersivegeology.prospecting_pick." + status, string_found);
+		player.displayClientMessage(comp, true);
 		stack.hurtAndBreak(1, player, (p) -> {
 		});
+		cached_test.put(centreChunk.getPos(), new MineralCacheEntry(comp.getString()));
+
+
+		long e = System.currentTimeMillis();
+		long d = (e - s);
+		IGLib.IG_LOGGER.info("T: {}", d);
 		return InteractionResult.SUCCESS;
+	}
+
+	private static class MineralCacheEntry {
+		public static final long CACHE_EXPIRY = 10 * 1000;
+		final String message;
+		final long timestamp;
+
+		public MineralCacheEntry(String message) {
+			this.message = message;
+			this.timestamp = System.currentTimeMillis();
+		}
 	}
 }

@@ -228,17 +228,16 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		return LootPool.lootPool().when(ExplosionCondition.survivesExplosion());
 	}
 
-	private void registerOre(Supplier<Block> ore, ItemLike rawOre) {
+	private void registerOre(Supplier<Block> ore, ItemStack rawOre) {
 		LootPool.Builder pool_builder = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F));
-		pool_builder.add((LootItem.lootTableItem(rawOre)
+		pool_builder.add((LootItem.lootTableItem(rawOre.getItem())
 						.when(MatchTool.toolMatches(net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
 								.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, Ints.atLeast(1))))))
-						.otherwise(LootItem.lootTableItem(rawOre).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+						.otherwise(LootItem.lootTableItem(rawOre.getItem()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(rawOre.getCount()))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
 								.apply(ApplyExplosionDecay.explosionDecay())));
 
 		LootTable.Builder ret = LootTable.lootTable()
 				.withPool(pool_builder);
-
 		this.register(ore, ret);
 	}
 

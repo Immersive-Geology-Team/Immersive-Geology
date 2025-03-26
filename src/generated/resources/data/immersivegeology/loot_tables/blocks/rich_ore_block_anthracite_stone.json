@@ -24,11 +24,16 @@
                   }
                 }
               ],
-              "name": "immersivegeology:rich_ore_anthracite"
+              "name": "immersivegeology:normal_ore_anthracite"
             },
             {
               "type": "minecraft:item",
               "functions": [
+                {
+                  "add": false,
+                  "count": 3.0,
+                  "function": "minecraft:set_count"
+                },
                 {
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:ore_drops",
@@ -38,7 +43,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "immersivegeology:rich_ore_anthracite"
+              "name": "immersivegeology:normal_ore_anthracite"
             }
           ]
         }

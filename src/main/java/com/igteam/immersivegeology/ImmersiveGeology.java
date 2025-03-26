@@ -1,10 +1,12 @@
 package com.igteam.immersivegeology;
 
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
@@ -19,18 +21,23 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGContent;
+import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
@@ -53,6 +60,7 @@ public class ImmersiveGeology {
         IGLib.IG_LOGGER.info("======== Starting Immersive Geology ========");
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
+        modEventBus.addListener(this::enqueueIMC);
         IGLib.IG_LOGGER.info("- Recipe Serializer Registration");
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
@@ -90,6 +98,19 @@ public class ImmersiveGeology {
 
         IGLib.IG_LOGGER.info("- Custom IE Manual Entry Registration");
         IGContent.initializeManualEntries();
+    }
+
+    private void enqueueIMC(final InterModEnqueueEvent event)
+    {
+        for(TemplateMultiblock template : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
+        {
+            if(template instanceof IGTemplateMultiblock ig)
+            {
+                ResourceLocation id = ig.getUniqueName();
+                ItemStack formation = ig.getFormationItem();
+                InterModComms.sendTo("engineered_schematics", "formation_item", () -> Pair.of(id, formation));
+            }
+        }
     }
 
     private void supplyMaterialTint(){

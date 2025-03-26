@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -25,21 +26,19 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MaterialTitanium extends MaterialMetal {
-
-
     protected IGRecipeChain hunter_process = new IGRecipeChain(this, "Hunter Process", 0);
-
 
     public MaterialTitanium() {
         super();
-        addFlags(BlockCategoryFlags.FENCE);
-
+        addFlags(BlockCategoryFlags.FENCE, ItemCategoryFlags.DRILL_HEAD);
     }
 
     @Override
@@ -65,11 +64,10 @@ public class MaterialTitanium extends MaterialMetal {
                 null, null, 200, 51200).addToTree(hunter_process);
 
         //water is only to dissolve concentrated brine for future electrolysis
-
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
+                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST, 4)), //TODO Changed it from GRIT to COMPOUND DUST temp solution.
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
@@ -77,7 +75,7 @@ public class MaterialTitanium extends MaterialMetal {
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
+                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)), // TODO We can't gain access to Magnesium in any form.
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
@@ -87,5 +85,11 @@ public class MaterialTitanium extends MaterialMetal {
     public Set<IGRecipeChain> getRecipeChains()
     {
         return Set.of(hunter_process);
+    }
+
+    @Override
+    public DrillHeadProps drillHeadInstance()
+    {
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 21.0f, 10, 10000, getTextureLocation(ItemCategoryFlags.DRILL_HEAD));
     }
 }

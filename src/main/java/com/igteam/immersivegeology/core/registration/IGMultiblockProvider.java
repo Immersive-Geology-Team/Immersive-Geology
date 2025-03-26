@@ -29,6 +29,11 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN);
             });
 
+    public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),
+            builder -> {
+                builder.redstone(state -> state.rsState, FoundryLogic.REDSTONE_IN);
+            });
+
     public static final MultiblockRegistration<CoreDrillLogic.State> COREDRILL = IGRegistrationHolder.registerMetalMultiblock("coredrill", new CoreDrillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("coredrill"),
             builder -> {
                 builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);

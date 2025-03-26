@@ -36,6 +36,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     CLOUDY_FLASK(3),
     MECHANICAL_COMPONENT(1),
     HAMMER(4),
+    DRILL_HEAD(4),
     MISC(4),
     BLUEPRINT(4),
     SEDIMENT(0);
@@ -72,6 +73,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
 		{
 			case INGOT -> 7;
 			case GEAR, NUGGET -> 6;
+            case PLATE -> 2;
 			default -> 1;
 		};
 	}
@@ -80,7 +82,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     {
         return switch(this)
         {
-            case INGOT, GEAR, NUGGET, PLATE -> true;
+            case INGOT, GEAR, NUGGET, PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD -> true;
             default -> false;
         };
     }

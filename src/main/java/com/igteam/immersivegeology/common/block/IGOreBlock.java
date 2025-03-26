@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -108,9 +109,13 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
     }
 
     @Override
-    public ItemLike getItemDrop()
+    public ItemStack getItemDrop()
     {
-        ItemStack stack = this.getMaterial(MaterialTexture.overlay).getStack(this.getOreRichness().toCategory());
-        return stack.getItem();
+        MaterialInterface<?> ore_mat = getMaterial(MaterialTexture.overlay);
+        if(ore_mat.hasFlag(ItemCategoryFlags.POOR_ORE) && ore_mat.hasFlag(ItemCategoryFlags.RICH_ORE))
+        {
+			return ore_mat.getStack(this.getOreRichness().toCategory());
+        }
+		return ore_mat.getStack(ItemCategoryFlags.NORMAL_ORE, 1 + this.getOreRichness().ordinal());
     }
 }

@@ -47,7 +47,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         // TODO Banished to the Nether! ~UnSchtalch
-        CONFIG = new MineralConfig(12,70,1,-64,212,2400, 0.75,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,70,1,-64,212,1000, 0.75,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     @Override

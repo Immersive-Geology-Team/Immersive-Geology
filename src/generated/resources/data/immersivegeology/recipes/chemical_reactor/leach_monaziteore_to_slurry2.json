@@ -6,8 +6,8 @@
     "tag": "forge:sodiumhydroxide"
   },
   "fluidResult": {
-    "amount": 0,
-    "fluid": "minecraft:empty"
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_chemicalwaste_monazite"
   },
   "itemInput": {
     "item": "immersivegeology:sediment_monazite"

@@ -619,6 +619,7 @@
     "immersivegeology:sheetmetal_slab_hastelloy",
     "immersivegeology:slab_hastelloy",
     "immersivegeology:engineering_block_hastelloy",
+    "immersivegeology:storage_block_highspeedsteel",
     "immersivegeology:sheetmetal_slab_silver",
     "immersivegeology:poor_ore_block_silver_stone",
     "immersivegeology:normal_ore_block_silver_stone",
@@ -665,10 +666,12 @@
     "immersivegeology:sheetmetal_block_tungsten",
     "immersivegeology:sheetmetal_slab_tungsten",
     "immersivegeology:slab_tungsten",
+    "immersivegeology:engineering_block_tungsten",
     "immersivegeology:storage_block_unobtanium",
     "immersivegeology:sheetmetal_block_unobtanium",
     "immersivegeology:sheetmetal_slab_unobtanium",
     "immersivegeology:slab_unobtanium",
+    "immersivegeology:storage_block_refineduranium",
     "immersivegeology:storage_block_vanadium",
     "immersivegeology:sheetmetal_block_vanadium",
     "immersivegeology:sheetmetal_slab_vanadium",
@@ -1093,6 +1096,7 @@
     "immersivegeology:poor_ore_block_bituminous_sandstone",
     "immersivegeology:normal_ore_block_bituminous_sandstone",
     "immersivegeology:rich_ore_block_bituminous_sandstone",
+    "immersivegeology:storage_block_bituminous",
     "immersivegeology:poor_ore_block_anthracite_stone",
     "immersivegeology:normal_ore_block_anthracite_stone",
     "immersivegeology:rich_ore_block_anthracite_stone",
@@ -1105,6 +1109,7 @@
     "immersivegeology:poor_ore_block_anthracite_sandstone",
     "immersivegeology:normal_ore_block_anthracite_sandstone",
     "immersivegeology:rich_ore_block_anthracite_sandstone",
+    "immersivegeology:storage_block_anthracite",
     {
       "id": "immersivegeology:poor_ore_block_cassiterite_stone",
       "required": false
@@ -2590,6 +2595,7 @@
     "immersivegeology:poor_ore_block_lignite_sandstone",
     "immersivegeology:normal_ore_block_lignite_sandstone",
     "immersivegeology:rich_ore_block_lignite_sandstone",
+    "immersivegeology:storage_block_lignite",
     {
       "id": "immersivegeology:poor_ore_block_magnetite_stone",
       "required": false

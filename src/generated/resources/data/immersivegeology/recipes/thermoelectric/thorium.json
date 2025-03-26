@@ -1,0 +1,5 @@
+{
+  "type": "immersiveengineering:thermoelectric_source",
+  "singleBlock": "immersivegeology:storage_block_thorium",
+  "tempKelvin": 1800
+}

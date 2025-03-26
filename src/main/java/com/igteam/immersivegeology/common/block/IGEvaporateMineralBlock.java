@@ -17,6 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -97,8 +98,8 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 		}
 	}
 
-	public ItemLike getItemDrop()
+	public ItemStack getItemDrop()
 	{
-		return getMaterial(MaterialTexture.base).getItem(ItemCategoryFlags.SEDIMENT);
+		return new ItemStack(getMaterial(MaterialTexture.base).getItem(ItemCategoryFlags.SEDIMENT));
 	}
 }
