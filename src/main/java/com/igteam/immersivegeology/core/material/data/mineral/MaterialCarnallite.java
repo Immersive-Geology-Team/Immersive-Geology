@@ -68,7 +68,6 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
                 new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 null,
                 200, 51200);
-
     }
 
 }
