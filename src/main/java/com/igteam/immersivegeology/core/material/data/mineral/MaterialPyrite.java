@@ -37,7 +37,6 @@ public class MaterialPyrite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         setAsocialMaterialChance(1f);
         addGenerationFriend((h) -> MineralEnum.Chalcopyrite.instance(), 50);
@@ -45,8 +44,6 @@ public class MaterialPyrite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-
-        // TODO Banished to the Nether and Lava! ~UnSchtalch
         CONFIG = new MineralConfig(12,30,3,-64,112,400, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 

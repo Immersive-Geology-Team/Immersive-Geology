@@ -225,6 +225,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return this.acceptableStoneTypes.contains(formation);
     }
 
+    public Set<StoneFormation> getValidStoneFormations()
+    {
+        return acceptableStoneTypes;
+    }
+
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.CUBIC;
     }

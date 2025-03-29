@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.world;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
@@ -21,7 +20,7 @@ import java.util.stream.Stream;
 public class IGSparsePlacement extends PlacementModifier
 {
 	private static final IGSparsePlacement INSTANCE = new IGSparsePlacement();
-	public static final Codec<IGSparsePlacement> CODEC = Codec.unit(() -> {
+	public static final Codec<IGSparsePlacement> PLACEMENT_CODEC = Codec.unit(() -> {
 		return INSTANCE;
 	});
 
@@ -35,7 +34,7 @@ public class IGSparsePlacement extends PlacementModifier
 	public Stream<BlockPos> getPositions(PlacementContext ctx, RandomSource rnd, BlockPos pos) {
 		int $$3 = rnd.nextInt(16) + pos.getX();
 		int $$4 = rnd.nextInt(16) + pos.getZ();
-		return rnd.nextInt(16) == 0 ? Stream.of(new BlockPos($$3, pos.getY(), $$4)) : Stream.of();
+		return rnd.nextInt(32) == 0 ? Stream.of(new BlockPos($$3, pos.getY(), $$4)) : Stream.of();
 	}
 
 	public PlacementModifierType<?> type() {

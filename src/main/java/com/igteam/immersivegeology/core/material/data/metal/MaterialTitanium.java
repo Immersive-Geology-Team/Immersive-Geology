@@ -67,7 +67,7 @@ public class MaterialTitanium extends MaterialMetal {
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST, 4)), //TODO Changed it from GRIT to COMPOUND DUST temp solution.
+                IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
@@ -75,7 +75,7 @@ public class MaterialTitanium extends MaterialMetal {
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)), // TODO We can't gain access to Magnesium in any form.
+                IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
                 new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
@@ -90,6 +90,6 @@ public class MaterialTitanium extends MaterialMetal {
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 21.0f, 10, 10000, getTextureLocation(ItemCategoryFlags.DRILL_HEAD));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 5, 1, Tiers.NETHERITE, 9f, 10, 24000, getTextureLocation(ItemCategoryFlags.DRILL_HEAD));
     }
 }

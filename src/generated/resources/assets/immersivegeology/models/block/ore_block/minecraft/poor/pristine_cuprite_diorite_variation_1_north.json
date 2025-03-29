@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/ore_block/ore_block_north",
+  "textures": {
+    "base": "minecraft:block/diorite",
+    "ore_north": "immersivegeology:palette/block/ore_bearing/mineral/poor_1_pristine_cuprite"
+  }
+}

@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.function.BiFunction;
@@ -14,8 +15,8 @@ public class MaterialMCGranite extends MaterialStone {
     public MaterialMCGranite() {
         super();
         this.name = "granite"; // Special Case as we need to override the default name assignment method
-        this.STONE_FORMATION = StoneFormation.IGNEOUS_INTRUSIVE;
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE;
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
 
     }
 

@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block",
-  "textures": {
-    "base": "minecraft:block/stone",
-    "ore": "immersivegeology:palette/block/ore_bearing/crystal/normal_1_pristine_pyrite"
-  }
-}

@@ -17,6 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.placement.RepeatingPlacement;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -38,14 +39,14 @@ public class IGCountPlacement extends RepeatingPlacement
 	}
 
 	@Override
-	public Stream<BlockPos> getPositions(PlacementContext ctx, RandomSource rnd, BlockPos pos)
+	public @NotNull Stream<BlockPos> getPositions(PlacementContext ctx, RandomSource rnd, BlockPos pos)
 	{
 		return IntStream.range(0, this.count(rnd, pos)).mapToObj((p_191912_) -> {
 			return pos;
 		});
 	}
 
-	public PlacementModifierType<?> type() {
+	public @NotNull PlacementModifierType<?> type() {
 		return IGWorldGen.IG_COUNT_PLACEMENT.get();
 	}
 

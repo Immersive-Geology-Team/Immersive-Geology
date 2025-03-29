@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:crystal_sodium"
+  },
+  "result": {
+    "item": "immersivegeology:grit_sodium"
+  },
+  "secondaries": [],
+  "time": 200
+}

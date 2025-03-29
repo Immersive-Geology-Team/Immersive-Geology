@@ -48,6 +48,9 @@ public class MaterialSphalerite extends MaterialSulphideMineral
     {
         super.setupRecipeStages();
 
+        IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE,
+                2, ItemCategoryFlags.INGOT, 1, 400);
+
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, 1,
                 ItemCategoryFlags.SLAG, 1, 800, 250);

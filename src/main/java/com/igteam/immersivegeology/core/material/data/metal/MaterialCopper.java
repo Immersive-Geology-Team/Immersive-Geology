@@ -83,6 +83,9 @@ public class MaterialCopper extends MaterialNativeMetal {
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.HydrochloricAcid, ItemCategoryFlags.CRYSTAL);
 
+        IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.INGOT, 120);
+
     }
 
     @Override

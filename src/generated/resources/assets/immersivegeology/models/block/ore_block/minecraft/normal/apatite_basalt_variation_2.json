@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/ore_block_sedimentary",
+  "textures": {
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/normal_2_pristine_apatite",
+    "side": "minecraft:block/basalt_side",
+    "top": "minecraft:block/basalt_top"
+  }
+}

@@ -40,10 +40,12 @@ import java.util.List;
 public class CommonTests
 {
 
+	private static final String TEST_AREA = IGLib.MODID + ":test_area";
 	public static List<TestFunction> all()
 	{
 		List<TestFunction> all = new ArrayList<>();
 		all.addAll(multiblockTests());
+		all.add(new TestFunction("ore_feature_testing", "mapping", TEST_AREA, 1200, 20, true, SpawnChunkCapture::captureSpawnChunks));
 		return all;
 	}
 
@@ -56,7 +58,7 @@ public class CommonTests
 			{
 				tests.add(new TestFunction(
 						"multiblock", igMultiblock.getUniqueName().getPath(), igMultiblock.getUniqueName().toString(),
-						400, 100, true, helper -> formAndDisassemble(helper, igMultiblock)
+						400, 80, true, helper -> formAndDisassemble(helper, igMultiblock)
 				));
 			}
 		}

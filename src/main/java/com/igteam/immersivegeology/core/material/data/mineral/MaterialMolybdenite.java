@@ -36,17 +36,11 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
-
         removeMaterialFlags(ItemCategoryFlags.GRIT);
         removeMaterialFlags(ItemCategoryFlags.POWDER);
-
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-
-        // TODO Banished to the Nether! ~UnSchtalch
         CONFIG = new MineralConfig(12,70,1,-64,212,1000, 0.75,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 

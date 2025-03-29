@@ -25,6 +25,7 @@ public class MaterialCobalt extends MaterialMetal {
 
     public MaterialCobalt() {
         super();
+        addFlags(ItemCategoryFlags.OXIDE_PELLET);
     }
 
     @Override

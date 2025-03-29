@@ -315,6 +315,10 @@ public interface MaterialHelper {
     }
 
     boolean acceptableStoneType(MaterialStone instance);
+    default boolean acceptableStoneType(StoneEnum stone)
+    {
+        return acceptableStoneType(stone.instance());
+    };
 
 	default Set<MaterialHelper> getOriginMaterials() {
         return Set.of();

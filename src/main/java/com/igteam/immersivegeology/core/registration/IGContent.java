@@ -13,13 +13,17 @@ import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
+import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -34,6 +38,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -124,7 +129,6 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "crystallizer");
         multiblockEntry(instance, multiblock_category, "coredrill");
         multiblockEntry(instance, multiblock_category, "gravityseparator");
-        multiblockEntry(instance, multiblock_category, "trommel");
         multiblockEntry(instance, multiblock_category, "rotarykiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
         multiblockEntry(instance, multiblock_category, "bloomery");
@@ -139,15 +143,16 @@ public class IGContent {
 
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
+        InnerNode<ResourceLocation, ManualEntry> geology = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_geology"), 2);
 
-        InnerNode<ResourceLocation, ManualEntry> processing_chains = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_processing_chains"), 1);
-        InnerNode<ResourceLocation, ManualEntry> metal_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_metal_chains"), 1);
-        InnerNode<ResourceLocation, ManualEntry> mineral_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_mineral_chains"), 2);
-        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
+        InnerNode<ResourceLocation, ManualEntry> minerals = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_minerals"), 0);
+        InnerNode<ResourceLocation, ManualEntry> native_metals = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_native_metals"), 1);
 
-        for(MineralEnum m : MineralEnum.values())  mineralTreeEntry(instance, mineral_entries, m);
-        for(MetalEnum m : MetalEnum.values())  metalTreeEntry(instance, metal_entries, m);
-        for(ChemicalEnum m : ChemicalEnum.values())  chemicalTreeEntry(instance, chemical_entries, m);
+        for(MineralEnum mineral : MineralEnum.values()) mineralTreeEntry(instance, minerals, mineral);
+//        InnerNode<ResourceLocation, ManualEntry> processing_chains = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_processing_chains"), 1);
+//        InnerNode<ResourceLocation, ManualEntry> metal_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_metal_chains"), 1);
+//        InnerNode<ResourceLocation, ManualEntry> mineral_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_mineral_chains"), 2);
+//        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
     }
 
     private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
@@ -188,15 +193,16 @@ public class IGContent {
         String formattedContent = contentBuilder.toString().replaceAll("\r\n|\r|\n", "\n");
         return new EntryData(translatedTitle, "", formattedContent, itemList);
     }
-
+    static List<MaterialInterface<?>> metals = List.of(MetalEnum.values());
     private static void createRecipeChainPage(StringBuilder contentBuilder, ArrayList<SpecialElementData> itemList, MaterialInterface<?> material)
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
         String process_info = I18n.get("manual.immersivegeology." + material.getName() + ".desc");
-        contentBuilder.append("<&item_display>").append(process_info).append("<np>");
+        contentBuilder.append("<&item_display>").append(process_info);
 
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
+            if(i == 0) contentBuilder.append("<np>");
             IGRecipeChain chain = recipe_chain_data.get(i);
             contentBuilder.append("<&").append(chain.getName()).append(">");
             if(i < (recipe_chain_data.size() - 1))
@@ -209,17 +215,20 @@ public class IGContent {
 
         if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
         {
-            displayStacks.add(material.getStack(ItemCategoryFlags.POOR_ORE));
-            displayStacks.add(material.getStack(ItemCategoryFlags.NORMAL_ORE));
-            displayStacks.add(material.getStack(ItemCategoryFlags.RICH_ORE));
+            for(StoneEnum stone : StoneEnum.values())
+            {
+                if(!material.instance().acceptableStoneType(stone.instance())) continue;
+                if(!stone.isVanilla()) continue;
+                IOreBlock ore = material.getOreBlock(stone, OreRichness.NORMAL);
+                if(ore == null) continue;
+                displayStacks.add(new ItemStack(ore.asItem(), 1));
+            }
         }
 
-        if(material.hasFlag(ItemCategoryFlags.INGOT))
+        if(material.hasFlag(ItemCategoryFlags.INGOT) && metals.contains(material))
         {
             displayStacks.add(material.getStack(ItemCategoryFlags.INGOT));
             material.getOriginMaterials();
-
-
         }
 
         itemList.add(new SpecialElementData("item_display", 0, new ManualElementItem(ManualHelper.getManual(), displayStacks)));

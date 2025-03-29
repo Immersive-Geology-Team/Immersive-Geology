@@ -78,5 +78,8 @@ public class MaterialGold extends MaterialNativeMetal {
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.AquaRegia, ItemCategoryFlags.CRYSTAL);
+
+        IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT,
+                    ItemCategoryFlags.INGOT, 120);
     }
 }

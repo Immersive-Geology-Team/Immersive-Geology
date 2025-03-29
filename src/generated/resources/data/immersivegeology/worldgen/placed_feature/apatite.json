@@ -1,0 +1,19 @@
+{
+  "feature": "immersivegeology:apatite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "immersivegeology:ig_range",
+        "value": "Apatite"
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "immersivegeology:ig_count",
+      "value": "Apatite"
+    }
+  ]
+}

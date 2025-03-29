@@ -28,7 +28,7 @@ public class MaterialSodium extends MaterialMetal
 	{
 		super();
 		addFlags(ItemCategoryFlags.COMPOUND_DUST);
-		removeMaterialFlags(ItemCategoryFlags.WIRE, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.GEAR);
+		removeMaterialFlags(ItemCategoryFlags.WIRE, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.GEAR, ItemCategoryFlags.INGOT);
 		removeMaterialFlags(BlockCategoryFlags.SHEETMETAL_BLOCK,BlockCategoryFlags.SHEETMETAL_SLAB, BlockCategoryFlags.SHEETMETAL_STAIRS);
 	}
 
@@ -40,6 +40,7 @@ public class MaterialSodium extends MaterialMetal
 	@Override
 	public void setupRecipeStages()
 	{
+		super.setupRecipeStages();
 		IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
 				ItemCategoryFlags.METAL_OXIDE,
 				ItemCategoryFlags.COMPOUND_DUST,

@@ -64,7 +64,6 @@ public class IGMineralTestingItem extends IGGenericItem
 	@Override
 	public InteractionResult useOn(UseOnContext context)
 	{
-		long s = System.currentTimeMillis();
 		Level level = context.getLevel();
 		BlockPos usedPos = context.getClickedPos();
 		Player player = context.getPlayer();
@@ -83,10 +82,6 @@ public class IGMineralTestingItem extends IGGenericItem
 			}
 
 			player.displayClientMessage(Component.literal(cached_entry.message), true);
-
-			long e = System.currentTimeMillis();
-			long d = (e - s) / 1000;
-			IGLib.IG_LOGGER.info("T: {}", d);
 			return InteractionResult.SUCCESS;
 		}
 
@@ -104,11 +99,12 @@ public class IGMineralTestingItem extends IGGenericItem
 					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
+					} else {
+						level.removeBlock(cursor,false);
 					}
 				}
 			}
 		}
-
 		List<MaterialInterface<?>> found = queryMap.entrySet().stream()
 				.sorted(Map.Entry.<MaterialInterface<?>, Integer>comparingByValue().reversed())
 				.limit(3)
@@ -138,11 +134,6 @@ public class IGMineralTestingItem extends IGGenericItem
 		stack.hurtAndBreak(1, player, (p) -> {
 		});
 		cached_test.put(centreChunk.getPos(), new MineralCacheEntry(comp.getString()));
-
-
-		long e = System.currentTimeMillis();
-		long d = (e - s);
-		IGLib.IG_LOGGER.info("T: {}", d);
 		return InteractionResult.SUCCESS;
 	}
 

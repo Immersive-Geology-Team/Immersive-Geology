@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:ingot_magnesium"
+  },
+  "result": {
+    "item": "immersivegeology:grit_magnesium"
+  },
+  "secondaries": [],
+  "time": 200
+}

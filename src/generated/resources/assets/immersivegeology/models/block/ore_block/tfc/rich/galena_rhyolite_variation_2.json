@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block",
-  "textures": {
-    "base": "tfc:block/rock/raw/rhyolite",
-    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_2_pristine_galena"
-  }
-}

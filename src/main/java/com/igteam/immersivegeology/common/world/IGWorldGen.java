@@ -16,15 +16,10 @@ import com.igteam.immersivegeology.common.world.placements.IGPlaceholderFeature;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,8 +27,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.List;
 
 public class IGWorldGen
 {
@@ -46,6 +39,7 @@ public class IGWorldGen
 	public static RegistryObject<HeightProviderType<IGHeightProvider>> IG_HEIGHT_PROVIDER;
 	public static RegistryObject<PlacementModifierType<IGCountPlacement>> IG_COUNT_PLACEMENT;
 	public static RegistryObject<PlacementModifierType<IGSparsePlacement>> IG_SPARSE_PLACEMENT;
+	public static RegistryObject<PlacementModifierType<IGDefaultPlacement>> IG_DEFAULT_PLACEMENT;
 	public static final RegistryObject<Feature<BlockStateConfiguration>> EVAPORITE_FEATURE;
 
 	public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;
@@ -98,7 +92,13 @@ public class IGWorldGen
 		IG_SPARSE_PLACEMENT = PLACEMENT_REGISTER.register("ig_sparse", () -> {
 			return () ->
 			{
-				return IGSparsePlacement.CODEC;
+				return IGSparsePlacement.PLACEMENT_CODEC;
+			};
+		});
+		IG_DEFAULT_PLACEMENT = PLACEMENT_REGISTER.register("ig_default", () -> {
+			return () ->
+			{
+				return IGDefaultPlacement.PLACEMENT_CODEC;
 			};
 		});
 		HEIGHT_REGISTER = DeferredRegister.create(Registries.HEIGHT_PROVIDER_TYPE, IGLib.MODID);

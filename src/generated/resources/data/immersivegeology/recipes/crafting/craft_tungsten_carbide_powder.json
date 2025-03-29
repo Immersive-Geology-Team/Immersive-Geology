@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:powder_tungsten"
+      "item": "immersivegeology:grit_tungsten"
     },
     {
       "item": "immersiveengineering:dust_hop_graphite"
     }
   ],
   "result": {
-    "item": "immersivegeology:powder_tungstencarbide"
+    "item": "minecraft:cookie"
   }
 }

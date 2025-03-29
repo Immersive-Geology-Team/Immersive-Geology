@@ -1,8 +1,7 @@
 {
-  "parent": "immersivegeology:block/base/ore_block_sedimentary",
+  "parent": "immersivegeology:block/base/ore_block",
   "textures": {
-    "ore": "immersivegeology:palette/block/ore_bearing/layered/rich_2_pristine_galena",
-    "side": "minecraft:block/dripstone_block",
-    "top": "minecraft:block/dripstone_block"
+    "base": "minecraft:block/dripstone_block",
+    "ore": "immersivegeology:palette/block/ore_bearing/mineral/rich_2_pristine_galena"
   }
 }

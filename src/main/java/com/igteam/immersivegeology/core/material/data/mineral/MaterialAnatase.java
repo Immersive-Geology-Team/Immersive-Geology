@@ -46,9 +46,8 @@ public class MaterialAnatase extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        // TODO: Banish to the END of time
-        CONFIG = new MineralConfig(18,70,1,-64,70,2000,0.5, true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        this.acceptableStoneTypes.add(StoneFormation.END_STONE);
+        CONFIG = new MineralConfig(32,70,3,-64,70,5500,0.5, true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
     protected IGRecipeChain hunter_process = new IGRecipeChain(this, "Hunter Process", 0);
 

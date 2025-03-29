@@ -40,12 +40,9 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
         super();
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
-        CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-
         CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 

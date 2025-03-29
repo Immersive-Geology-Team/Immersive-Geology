@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/bauxite_granite_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/poor/bauxite_granite_variation_2"
+        }
+      ]
+    }
+  ]
+}

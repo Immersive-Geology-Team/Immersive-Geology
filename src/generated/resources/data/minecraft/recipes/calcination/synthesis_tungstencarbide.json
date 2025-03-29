@@ -2,7 +2,7 @@
   "type": "immersivegeology:rotarykiln",
   "energy": 614400,
   "input": {
-    "tag": "forge:powders/tungstencarbide"
+    "tag": "forge:grits/tungstencarbide"
   },
   "result": {
     "item": "immersivegeology:ingot_tungstencarbide"

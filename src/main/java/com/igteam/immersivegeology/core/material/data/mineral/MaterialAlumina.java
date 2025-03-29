@@ -23,10 +23,12 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -42,10 +44,8 @@ public class MaterialAlumina extends MaterialMineral {
 
     public MaterialAlumina() {
         super();
-        removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
-
-        // Does not spawn
-        CONFIG = new MineralConfig(0,0,0,0,1,0, 0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
+        this.acceptableStoneTypes.add(StoneFormation.END_STONE);
+        CONFIG = new MineralConfig(33,20,2,-64,256,3400, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.BANDED);
     }
 
     @Override

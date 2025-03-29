@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:bloomery",
+  "input": {
+    "base_ingredient": {
+      "tag": "forge:crushed_ore/sphalerite"
+    },
+    "count": 2
+  },
+  "result": {
+    "item": "immersivegeology:ingot_zinc"
+  },
+  "time": 400
+}

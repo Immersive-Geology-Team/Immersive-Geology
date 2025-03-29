@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/apatite_schist_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/tfc/normal/apatite_schist_variation_2"
+        }
+      ]
+    }
+  ]
+}

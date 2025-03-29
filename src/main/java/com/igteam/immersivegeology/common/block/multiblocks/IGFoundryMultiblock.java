@@ -21,7 +21,7 @@ public class IGFoundryMultiblock extends IGTemplateMultiblock {
 	public static final IGFoundryMultiblock INSTANCE = new IGFoundryMultiblock();
 
 	public IGFoundryMultiblock() {
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/foundry"), new BlockPos(2,0,0), new BlockPos(1,1,0), new BlockPos(3,3, 2), IGMultiblockProvider.FOUNDRY);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/foundry"), new BlockPos(2,0,0), new BlockPos(1,1,0), new BlockPos(3,3, 3), IGMultiblockProvider.FOUNDRY);
 	}
 
 	@Override

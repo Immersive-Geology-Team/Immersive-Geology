@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block/ore_block_south",
-  "textures": {
-    "base": "minecraft:block/stone",
-    "ore_south": "immersivegeology:palette/block/ore_bearing/crystal/rich_2_corroded_pyrite"
-  }
-}

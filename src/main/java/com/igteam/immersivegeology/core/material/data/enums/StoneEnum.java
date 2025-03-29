@@ -16,18 +16,25 @@ import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialD
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.locale.Language;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum StoneEnum implements MaterialInterface<MaterialStone> {
@@ -64,9 +71,10 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     MCDiorite(new MaterialMCDiorite()),
     MCGranite(new MaterialMCGranite()),
     MCBasalt(new MaterialMCBasalt()),
-    Netherrack(new MaterialMCNetherrack()),
-    Dripstone(new MaterialMCDripstone()),
-    Sandstone(new MaterialMCSandstone());
+    MCEndStone(new MaterialMCEndStone()),
+    MCNetherrack(new MaterialMCNetherrack()),
+    MCDripstone(new MaterialMCDripstone()),
+    MCSandstone(new MaterialMCSandstone());
 
     //===== Minecraft Sands =====\\
     //Sand(new MaterialSand()),
@@ -79,28 +87,37 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     //GlacioStone(new MaterialGlacioStone());
 
     public static final Codec<StoneEnum> CODEC = Codec.STRING.xmap(StoneEnum::valueOf, Enum::name);
+    private static final Map<String, StoneEnum> stoneEnumMap = new HashMap<>();
 
+    static {
+        for (StoneEnum stoneEnum : values()) {
+            stoneEnumMap.put(stoneEnum.name().toLowerCase(), stoneEnum);
+        }
+    }
     private final MaterialStone material;
     StoneEnum(MaterialStone m){
         this.material = m;
     }
-    private static boolean hasWarned = false;
-    public static StoneEnum selectWorldState(BlockState stoneState)
-    {
+    public static StoneEnum selectWorldState(BlockState stoneState) {
         try
         {
-            String stoneName = capitalizeFirstLetter(stoneState.getBlock().getName().getString().toLowerCase());
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase("MC" + stoneName))) return valueOf("MC" + stoneName);
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName))) return valueOf(stoneName);
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equalsIgnoreCase(stoneName.replace("Block", "").trim()))) return valueOf(stoneName.replace("Block", "").trim());
-            // Now for TFC Compat checks
-            String input = stoneState.getBlock().getName().getString().toLowerCase();
-            String rockType = capitalizeFirstLetter(input.replace("raw ",""));
-            if(Arrays.stream(values()).anyMatch(stoneEnum -> stoneEnum.name().equals(rockType))){
-                return valueOf(rockType);
+            String name = stoneState.getBlock().getDescriptionId().toLowerCase();
+            String stoneName = capitalizeFirstLetter(name.substring(name.lastIndexOf('.')+1));
+
+            // Check for Minecraft stones first
+            if(name.contains(ModFlags.MINECRAFT.getName()))
+            {
+                return stoneEnumMap.get("mc"+stoneName.toLowerCase());
+            }
+
+            // Try direct lookup of the stone name
+            StoneEnum result = stoneEnumMap.get(stoneName.toLowerCase());
+            if(result!=null)
+            {
+                return result;
             }
         } catch(Exception ex) {
-            IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore, using minecraft vanilla stone {}", ex.getMessage());
+            IGLib.IG_LOGGER.warn("Unable to find matching stone type for ore {}", ex.getMessage());
         }
 
         return null;
@@ -119,7 +136,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
         return material;
     }
 
-	public List<TargetBlockState> getTargets(MineralEnum mineral)
+    public List<TargetBlockState> getTargets(MineralEnum mineral)
 	{
         return instance().getTargets(mineral);
 	}
@@ -146,5 +163,10 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
         }
 
         return pass;
+    }
+
+    public boolean isVanilla()
+    {
+        return getFlags().contains(ModFlags.MINECRAFT);
     }
 }

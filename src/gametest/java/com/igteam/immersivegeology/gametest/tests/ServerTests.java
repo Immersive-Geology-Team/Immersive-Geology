@@ -40,6 +40,7 @@ public class ServerTests
 				"server", "connection", TEST_AREA,
 				200, 0, true, ServerTests::testNetworkConnectivity
 		));
+
 		return tests;
 	}
 

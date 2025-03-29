@@ -35,7 +35,6 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
         removeMaterialFlags(ItemCategoryFlags.GRIT);
         removeMaterialFlags(ItemCategoryFlags.POWDER);

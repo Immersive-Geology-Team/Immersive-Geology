@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.function.BiFunction;
@@ -15,7 +16,7 @@ public class MaterialMCDeepslate extends MaterialStone {
         super();
         this.name = "deepslate"; // Special Case as we need to override the default name assignment method
         this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE;
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
     }
 
     @Override

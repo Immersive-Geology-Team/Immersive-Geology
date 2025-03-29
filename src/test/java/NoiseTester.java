@@ -20,8 +20,8 @@ public class NoiseTester {
 		// Generate the noise images and compile them into a .gif
 		Instant start = Instant.now();
 
-		new NoiseTester().generateGif(false, IGGenerationType.TUBE);
-		new NoiseTester().generateGif(true, IGGenerationType.TUBE);
+		new NoiseTester().generateGif(false, IGGenerationType.DEFAULT);
+		new NoiseTester().generateGif(true, IGGenerationType.DEFAULT);
 
 		Instant end = Instant.now();  // End time
 

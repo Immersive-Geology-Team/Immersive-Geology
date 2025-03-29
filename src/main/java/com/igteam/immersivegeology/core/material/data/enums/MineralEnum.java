@@ -30,6 +30,7 @@ import java.util.function.Function;
 public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGenConfig
 {
     Acanthite(new MaterialAcanthite()),
+    Apatite(new MaterialApatite()),
     Alumina(new MaterialAlumina()),
     Anatase(new MaterialAnatase()),
     Bauxite(new MaterialBauxite()),

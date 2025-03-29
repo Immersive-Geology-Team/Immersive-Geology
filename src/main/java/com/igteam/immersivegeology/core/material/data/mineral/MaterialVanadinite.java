@@ -31,7 +31,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
 
     public MaterialVanadinite() {
         super();
-        this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
