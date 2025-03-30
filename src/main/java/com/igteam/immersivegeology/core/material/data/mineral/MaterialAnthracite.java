@@ -30,16 +30,14 @@ public class MaterialAnthracite extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(1600);
-		CONFIG = new MineralConfig(30, 50, 1, -40, 120, 500, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, -64, 32, 500, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0x242227;
 		addGenerationFriend(MaterialAnthracite::getFriends, 300);
 	}
 
 	private static MaterialHelper getFriends(int height){
 		MaterialHelper selected = null;
-		if(height > 20) selected = MineralEnum.Bituminous.instance();
-		if(height > 55) selected = MineralEnum.Lignite.instance();
-
+		if(height > 0) selected = MineralEnum.Bituminous.instance();
 		return selected;
 	}
 

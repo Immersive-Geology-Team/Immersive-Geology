@@ -16,8 +16,6 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -30,10 +28,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
@@ -44,21 +40,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.function.BiPredicate;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class IGOreFeature extends Feature<IGOreFeatureConfig>
 {
@@ -66,7 +58,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		super(IGOreFeature.IGOreFeatureConfig.CODEC.codec());
 	}
 
-	private static final float THRESHOLD = 0.4f;
+	public static final float THRESHOLD = 0.4f;
 	@Override
 	public boolean place(FeaturePlaceContext<IGOreFeatureConfig> ctx)
 	{
@@ -97,7 +89,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		return String.format("%d seconds, %d milliseconds, %d microseconds", seconds, milliseconds, microseconds);
 	}
 
-	private static Vein createVein(RandomSource random, OreConfig config, long seed)
+	public static Vein createVein(RandomSource random, OreConfig config, long seed)
 	{
 		int FEATURE_SIZE = config.veinSize.get();
 		INoise3D noise = config.generationPattern.get().getPattern().getiNoise3D(FEATURE_SIZE, seed);
@@ -360,19 +352,21 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return getConfig().veinSize.get();
 		}
 
+		private static final Map<String, Long> HASH_CACHE = new ConcurrentHashMap<>();
+
 		public static long hash(String name) {
-			RandomSupport.Seed128bit seed128 = RandomSupport.seedFromHashOf(name);
-			return seed128.seedLo() ^ seed128.seedHi();
+			return HASH_CACHE.computeIfAbsent(name, k -> {
+				RandomSupport.Seed128bit seed128 = RandomSupport.seedFromHashOf(k);
+				return seed128.seedLo() ^ seed128.seedHi();
+			});
 		}
 
 		public boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
 			Holder<Biome> biome = biomeQuery.apply(pos);
-			// Get biome temperature and downfall
 			float biomeTemp = biome.value().getBaseTemperature();
 			float biomeDownfall = biome.value().getModifiedClimateSettings().downfall();
-			OreConfig config = IGServerConfig.ORES.ores.get(entry);
 
-			// Check if the biome's temperature and downfall are within the configured ranges
+			OreConfig config = getConfig();
 			return biomeTemp >= config.min_temp.get() &&
 					biomeTemp <= config.max_temp.get() &&
 					biomeDownfall >= config.min_downfall.get() &&
@@ -392,89 +386,135 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return this.entry;
 		}
 
-		public BlockState getStateToGenerate(BlockState stoneState, double noiseValue, MaterialHelper mineral)
-		{
+		public Pair<Integer, Double> findOptimalYLevelWithMedian(Vein vein, BlockPos p, int maxY, int minY) {
+			BlockPos pos = vein.pos();
+			INoise3D noise = vein.getNoise();
+
+			// Initial coarse search to narrow down the range
+			final int SAMPLE_RADIUS = 48;  // Radius for sampling
+			final int SAMPLE_STEP = 1;  // Skip some points for performance during sampling
+
+			// Data structures to track the best Y level and store all noise values
+			int bestY = minY;
+			double bestMedianNoiseZero = 0.0d;
+			List<Double> allNoiseValues = new ArrayList<>();
+			Map<Integer, List<Double>> noiseByYLevel = new HashMap<>();
+
+			for (int y = minY; y <= maxY; y += SAMPLE_STEP) {
+				// Skip Y levels we've already processed in first pass
+				if (noiseByYLevel.containsKey(y)) {
+					continue;
+				}
+
+				// More detailed sampling for fine-grained search
+				List<Double> noiseValues = sampleNoiseAround(p, y, SAMPLE_RADIUS, vein);
+				List<Double> noiseValuesWthZero = sampleNoiseAroundZero(p, y, SAMPLE_RADIUS, vein);
+				double medianNoiseZero = calculateMedian(noiseValuesWthZero);
+
+				// Store and update best if needed
+				noiseByYLevel.put(y, noiseValuesWthZero);
+				allNoiseValues.addAll(noiseValues);
+				if (medianNoiseZero > bestMedianNoiseZero) {
+					bestMedianNoiseZero = medianNoiseZero;
+					bestY = y;
+				}
+			}
+
+			// Calculate the median of ALL noise values across the entire range
+			double overallMedian = calculateMedian(allNoiseValues);
+
+			return Pair.of(bestY, overallMedian);
+		}
+
+		private List<Double> sampleNoiseAround(BlockPos p, int y, int radius, Vein vein) {
+			List<Double> noiseValues = new ArrayList<>();
+			ChunkPos chunkPos = new ChunkPos(p);
+			int chunkXPos = p.getX() - 16;
+			int chunkZPos = p.getZ() - 16;
+			for (int x = 0; x < radius; x++)
+			{
+				for(int z = 0; z < radius; z++)
+				{
+					int xPos = chunkXPos + x;
+					int zPos = chunkZPos + z;
+					double noiseVal = noise(chunkPos, xPos, y, zPos, vein);
+					noiseValues.add(noiseVal);
+				}
+			}
+
+
+			return noiseValues;
+		}
+		private List<Double> sampleNoiseAroundZero(BlockPos p, int y, int radius, Vein vein) {
+			List<Double> noiseValues = new ArrayList<>();
+			ChunkPos chunkPos = new ChunkPos(p);
+			int chunkXPos = p.getX() - 16;
+			int chunkZPos = p.getZ() - 16;
+			for (int x = 0; x < radius; x++)
+			{
+				for(int z = 0; z < radius; z++)
+				{
+					int xPos = chunkXPos + x;
+					int zPos = chunkZPos + z;
+					double noiseVal = noise(chunkPos, xPos, y, zPos, vein);
+					if(noiseVal >= 0)
+					{
+						noiseValues.add(noiseVal);
+					}
+				}
+			}
+
+			return noiseValues;
+		}
+
+		private double calculateMedian(List<Double> values) {
+			if (values.isEmpty()) {
+				return 0.0;
+			}
+
+			List<Double> sortedValues = new ArrayList<>(values);
+			Collections.sort(sortedValues);
+
+			int size = sortedValues.size();
+			if (size % 2 == 0) {
+				return (sortedValues.get(size / 2 - 1) + sortedValues.get(size / 2)) / 2.0;
+			} else {
+				return sortedValues.get(size / 2);
+			}
+		}
+
+		public BlockState getStateToGenerate(BlockState stoneState, double noiseValue, MaterialHelper mineral) {
 			StoneEnum stone = null;
-			if(stoneState.is(Blocks.NETHERRACK))
-			{
-				stone = StoneEnum.MCNetherrack;
-			}
-			if(stoneState.is(Blocks.BASALT))
-			{
-				stone = StoneEnum.MCBasalt;
-			}
-			if(stoneState.is(Blocks.END_STONE))
-			{
-				stone = StoneEnum.MCEndStone;
-			}
-			if(stone == null)
-			{
-				stone = StoneEnum.selectWorldState(stoneState);
-			}
+			if (stoneState.is(Blocks.NETHERRACK)) stone = StoneEnum.MCNetherrack;
+			else if (stoneState.is(Blocks.BASALT)) stone = StoneEnum.MCBasalt;
+			else if (stoneState.is(Blocks.END_STONE)) stone = StoneEnum.MCEndStone;
+			else stone = StoneEnum.selectWorldState(stoneState);
 
-			if(stone == null) {
+			if (stone == null || !stone.isStoneTypeValid() || !mineral.acceptableStoneType(stone.instance())) {
 				return null;
 			}
 
-			if(!mineral.acceptableStoneType(stone.instance())) {
+			try {
+				OreRichness richness = noiseValue > 0.99 ? OreRichness.RICH :
+						(noiseValue > 0.7 ? OreRichness.NORMAL : OreRichness.POOR);
+				return mineral.getOreBlock(stone, richness).getDefaultBlockState();
+			} catch (Exception e) {
 				return null;
 			}
-
-			// Checks if the stone is a MOD only type, and if so, is it available?
-			if(!stone.isStoneTypeValid())
-			{
-				return null;
-			}
-
-			List<BlockState> blocks;
-
-			// List of blocks for each ore richness
-			try
-			{
-				blocks = List.of(
-						mineral.getOreBlock(stone, OreRichness.POOR).getDefaultBlockState(),
-						mineral.getOreBlock(stone, OreRichness.NORMAL).getDefaultBlockState(),
-						mineral.getOreBlock(stone, OreRichness.RICH).getDefaultBlockState()
-				);
-			}
-			catch(Exception e)
-			{
-				return null;
-			}
-
-			int selectedBlock = noiseValue > (0.99) ? 2 : (noiseValue > (0.7) ? 1 : 0);
-
-			return blocks.get(selectedBlock);
 		}
 
 		public boolean canStateGenerate(BlockState stoneState) {
 			MaterialHelper mineral = entry().instance();
-			StoneEnum stone;
 
-			// Directly check for specific blocks first for faster matching
-			if (stoneState.is(Blocks.STONE)) {
-				return mineral.acceptableStoneType(StoneEnum.MCStone);
-			}
-			if (stoneState.is(Blocks.NETHERRACK)) {
-				return mineral.acceptableStoneType(StoneEnum.MCNetherrack);
-			}
-			if (stoneState.is(Blocks.BASALT)) {
-				return mineral.acceptableStoneType(StoneEnum.MCBasalt);
-			}
-			if (stoneState.is(Blocks.END_STONE)) {
-				return mineral.acceptableStoneType(StoneEnum.MCEndStone);
-			}
+			// Fast path for common blocks
+			if (stoneState.is(Blocks.STONE)) return mineral.acceptableStoneType(StoneEnum.MCStone);
+			if (stoneState.is(Blocks.NETHERRACK)) return mineral.acceptableStoneType(StoneEnum.MCNetherrack);
+			if (stoneState.is(Blocks.BASALT)) return mineral.acceptableStoneType(StoneEnum.MCBasalt);
+			if (stoneState.is(Blocks.END_STONE)) return mineral.acceptableStoneType(StoneEnum.MCEndStone);
 
-			// If we're not looking for some vanilla stone, let's try and handle a match for the name.
-			stone = StoneEnum.selectWorldState(stoneState);
-
-			// Return false if no stone is selected or if it's not acceptable
-			if (stone == null || !mineral.acceptableStoneType(stone.instance())) {
-				return false;
-			}
-
-			// Return whether the stone is a valid type
-			return stone.isStoneTypeValid();
+			// Try to match other stone types
+			StoneEnum stone = StoneEnum.selectWorldState(stoneState);
+			return stone != null && stone.isStoneTypeValid() && mineral.acceptableStoneType(stone.instance());
 		}
 
 		public int getChanceToGenerate()
@@ -495,25 +535,40 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return config.canSpawn.get();
 		}
 
-		public boolean canPlaceVein(ChunkPos pos, long level_seed, Holder<Biome> biome)
-		{
-			OreConfig rConfig = IGServerConfig.ORES.ores.get(entry);
-			if(rConfig.veinSize.get() <= 0) return false;
+		private RandomSource getChunkRandom(ChunkPos pos, long level_seed) {
+			return new XoroshiroRandomSource(
+					level_seed ^ (long)pos.x * 61728364132L,
+					seed ^ (long)pos.z * 16298364123L
+			);
+		}
+
+		public boolean canPlaceVein(ChunkPos pos, long level_seed, Holder<Biome> biome) {
+			OreConfig config = getConfig();
+			if (config.veinSize.get() <= 0) return false;
+			RandomSource random = getChunkRandom(pos, level_seed);
 			int chance_max = 2_000_000;
-			RandomSource random = new XoroshiroRandomSource(level_seed ^ (long)pos.x * 61728364132L, seed ^ (long)pos.z * 16298364123L);
 
-			if((random.nextInt(chance_max) < getChanceToGenerate()))
-			{
-				boolean noValidChunks = !canSpawnAt(pos.getWorldPosition(), (p) -> biome);
+			return random.nextInt(chance_max) < getChanceToGenerate() &&
+					canSpawnAt(pos.getWorldPosition(), (p) -> biome);
+		}
 
-				return !noValidChunks;
-			}
-			return false;
+		public double noise(ChunkPos pos, int x, int y, int z, @NotNull Vein vein) {
+			INoise3D noiseGen = vein.noise;
+
+			int middleX = pos.getMinBlockX() + 16;
+			int middleZ = pos.getMinBlockZ() + 16;
+
+			// Calculate distance and multiplier
+			double distToBoundary = Math.hypot(Math.abs(middleX-x), Math.abs(middleZ-z));
+			double multiplier = distToBoundary > 24 ? 0.33 :
+					(distToBoundary > 20 ? 0.66 : 1.0);
+
+			return noiseGen.noise(x, y, z) * multiplier;
 		}
 	}
 
-	protected record Vein(BlockPos pos, RandomSource random, INoise3D noise) {
-		protected Vein(BlockPos pos, RandomSource random, INoise3D noise) {
+	public record Vein(BlockPos pos, RandomSource random, INoise3D noise) {
+		public Vein(BlockPos pos, RandomSource random, INoise3D noise) {
 			this.pos = pos;
 			this.random = random;
 			this.noise = noise;

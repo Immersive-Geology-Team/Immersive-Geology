@@ -34,7 +34,7 @@ public class MaterialCuprite extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 		addFlags(ItemCategoryFlags.PELLET);
 
-		CONFIG = new MineralConfig(30, 50, 1, 0, 200, 5000, 0.5,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+		CONFIG = new MineralConfig(30, 50, 1, 0, 200, 2500, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
 	}
 
 	public boolean canTarnish()
