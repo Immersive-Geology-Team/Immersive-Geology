@@ -39,7 +39,7 @@ public class MaterialGold extends MaterialNativeMetal {
         this.acceptableStoneTypes.add(StoneFormation.NETHER_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-        this.CONFIG = new MaterialMineral.MineralConfig(8,75,1,0,120,500,0.5, false, Optional.empty(), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(33,60,1,-32,64,3108,0.66, false, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

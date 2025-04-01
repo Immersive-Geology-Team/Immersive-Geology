@@ -30,7 +30,7 @@ public class MaterialMagnetite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(18,35,1,0,180,1750, 0.60,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(18,35,1,0,180,950, 0.60,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

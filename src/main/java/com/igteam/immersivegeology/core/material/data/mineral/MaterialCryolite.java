@@ -36,12 +36,11 @@ public class MaterialCryolite extends MaterialMineral {
     public MaterialCryolite() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        this.acceptableStoneTypes.add(StoneFormation.END_STONE);
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        // TODO Banished to the END of time
-        CONFIG = new MineralConfig(14,90,1,0,120,1, 0.5,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,90,1,0,120,1300, 0.8,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
 
     @Override

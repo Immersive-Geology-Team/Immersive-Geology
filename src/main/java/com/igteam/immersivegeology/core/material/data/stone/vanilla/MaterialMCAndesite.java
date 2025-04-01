@@ -15,7 +15,7 @@ public class MaterialMCAndesite extends MaterialStone {
     public MaterialMCAndesite() {
         super();
         this.name = "andesite"; // Special Case as we need to override the default name assignment method
-        this.STONE_FORMATION = StoneFormation.IGNEOUS_EXTRUSIVE;
+        this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE;
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
     }
 

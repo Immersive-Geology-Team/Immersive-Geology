@@ -25,10 +25,10 @@ public class MaterialThorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
-        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        this.acceptableStoneTypes.add(StoneFormation.END_STONE);
 
         // TODO BANISH FROM EXISTENCE or to the END
-        CONFIG = new MineralConfig(0,0,0,0,0,0, 0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,20,1,-32,128,512,0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
     }
 
     @Override

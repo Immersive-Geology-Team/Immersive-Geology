@@ -36,7 +36,7 @@ public class MaterialMillerite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-		CONFIG = new MineralConfig(17,20,2,-60,120,2000, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+		CONFIG = new MineralConfig(20,20,1,-60,120,1750, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
 	}
 
     @Override

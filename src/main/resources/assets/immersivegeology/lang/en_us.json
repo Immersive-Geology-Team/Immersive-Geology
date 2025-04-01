@@ -31,13 +31,15 @@
   "manual.immersivegeology.ig_processing_chains": "Processing Chains",
   "manual.immersivegeology.ig_metal_chains": "Metals",
   "manual.immersivegeology.ig_mineral_chains": "Minerals",
+  "manual.immersivegeology.ig_geology": "Geology",
   "manual.immersivegeology.ig_chemical_chains": "Chemicals",
   "manual.immersivegeology.ig_multiblocks": "Multiblocks",
+  "manual.immersivegeology.overworld": "Overworld",
+  "manual.immersivegeology.nether": "Nether",
+  "manual.immersivegeology.the_end": "The End",
 
   "manual.immersivegeology.hall-heroit_process.subtext": "Hall-Heroit Process",
   "manual.immersivegeology.bayer_process.subtext": "Bayer Process",
-
-
 
   "manual.immersivegeology.minerals": "Minerals",
   "manual.immersivegeology.common": "Common Minerals",
@@ -130,10 +132,10 @@
   "manual.immersivegeology.ferberite": "Ferberite",
   "manual.immersivegeology.hubnerite": "Hubnerite",
   "manual.immersivegeology.pyrolusite": "Pyrolusite",
-
+  "manual.immersivegeology.apatite": "Apatite",
+  "manual.immersivegeology.lignite": "Lignite",
   "manual.immersivegeology.cryolite": "Cryolite",
   "manual.immersivegeology.unobtania": "Unobtania",
-
 
   "immersivegeology.gui.schematic_table.button_0": "Previous Schematic",
   "immersivegeology.gui.schematic_table.button_1": "Next Schematic",
@@ -196,7 +198,7 @@
   "item.immersivegeology.brick": "%s Brick",
   "item.immersivegeology.raw_ore": "Raw %s",
   "item.immersivegeology.poor_ore": "Poor %s",
-  "item.immersivegeology.normal_ore": "Normal %s",
+  "item.immersivegeology.normal_ore": "%s",
   "item.immersivegeology.rich_ore": "Rich %s",
   "item.immersivegeology.pellet": "%s Pellet",
   "item.immersivegeology.oxide_pellet": "%s Oxide Pellet",
@@ -238,7 +240,7 @@
   "material.immersivegeology.ore": "Ore",
   "material.immersivegeology.native": "Native",
   "material.immersivegeology.ore.poor": "Poor",
-  "material.immersivegeology.ore.normal": "Normal",
+  "material.immersivegeology.ore.normal": "",
   "material.immersivegeology.ore.rich": "Rich",
 
   "machine.immersivegeology.machine_steel_rotarykiln": "Rotary Kiln",
@@ -302,10 +304,11 @@
   "material.immersivegeology.granite": "Granite",
   "material.immersivegeology.diorite": "Diorite",
   "material.immersivegeology.andesite": "Andesite",
-  "material.immersivegeology.endstone": "Endstone",
+  "material.immersivegeology.end_stone": "End Stone",
   "material.immersivegeology.netherrack": "Netherrack",
 
   "material.immersivegeology.gold": "Gold",
+  "material.immersivegeology.apatite": "Apatite",
   "material.immersivegeology.hastelloy": "Hastelloy",
   "material.immersivegeology.bronze": "Bronze",
   "material.immersivegeology.bituminous": "Bituminous Coal",
@@ -465,6 +468,18 @@
   "desc.immersiveengineering.info.mineral.alluvial_sediment" : "Alluvial Sediments",
   "desc.immersiveengineering.info.mineral.deteriorated_igneous_rock" : "Deteriorated Radioactive Sediments",
   "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments",
+
+  "manual.immersivegeology.generic.desc": "The list below contains the generation information for %1$s",
+  "manual.immersivegeology.min_y": "Min Y",
+  "manual.immersivegeology.max_y": "Max Y",
+  "manual.immersivegeology.min_temp": "Min Temperature",
+  "manual.immersivegeology.max_temp": "Max Temperature",
+  "manual.immersivegeology.min_rainfall": "Min Rainfall",
+  "manual.immersivegeology.max_rainfall": "Max Rainfall",
+  "manual.immersivegeology.generation_type": "Generation Type",
+  "manual.immersivegeology.vein_size": "Common Vein Size",
+  "manual.immersivegeology.can_spawn": "Can Spawn",
+  "manual.immersivegeology.density": "Vein Density",
 
   "advancement.immersivegeology.root": "Immersive Geology",
   "advancement.immersivegeology.root.desc": "Obtain refractory clay",

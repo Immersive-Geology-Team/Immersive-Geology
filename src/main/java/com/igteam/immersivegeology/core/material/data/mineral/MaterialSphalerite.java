@@ -29,7 +29,7 @@ public class MaterialSphalerite extends MaterialSulphideMineral
 		addFlags(ItemCategoryFlags.PELLET);
 		addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-		CONFIG = new MineralConfig(10,45,3,0,140,800, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+		CONFIG = new MineralConfig(21,45,3,0,140,800, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
 	}
 
     @Override

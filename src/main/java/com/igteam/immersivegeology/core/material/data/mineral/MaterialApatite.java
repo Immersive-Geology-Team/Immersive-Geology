@@ -34,9 +34,11 @@ public class MaterialApatite extends MaterialSulphideMineral {
 
     public MaterialApatite() {
         super();
+        this.acceptableStoneTypes.remove(StoneFormation.NETHER_STONE);
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        CONFIG = new MineralConfig(24,30,1,-64,212,1200,0.85,false,Optional.of(Biomes.IS_COLD), IGGenerationType.TUBE);
+        this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
+        CONFIG = new MineralConfig(24,30,1,-64,212,600,0.85,false,Optional.of(Biomes.IS_COLD), IGGenerationType.TUBE);
     }
 
     @Override

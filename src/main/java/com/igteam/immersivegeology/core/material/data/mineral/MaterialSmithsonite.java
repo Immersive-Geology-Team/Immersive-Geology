@@ -32,7 +32,7 @@ public class MaterialSmithsonite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-		CONFIG = new MineralConfig(8,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+		CONFIG = new MineralConfig(33,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
 	}
 
     @Override

@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler.ChemthrowerEffect;
 import blusunrize.lib.manual.ManualElementItem;
+import blusunrize.lib.manual.ManualElementTable;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualEntry.EntryData;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
@@ -15,6 +16,9 @@ import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
+import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -22,14 +26,13 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
@@ -38,23 +41,18 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
-import net.minecraftforge.fml.loading.FMLLoader;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
-import java.util.stream.Collectors;
+import java.util.Map.Entry;
 
 public class IGContent {
 
@@ -145,13 +143,18 @@ public class IGContent {
         instance.addEntry(parent_category, builder.create());
         InnerNode<ResourceLocation, ManualEntry> geology = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_geology"), 2);
 
-        InnerNode<ResourceLocation, ManualEntry> minerals = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_minerals"), 0);
-        InnerNode<ResourceLocation, ManualEntry> native_metals = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_native_metals"), 1);
+        InnerNode<ResourceLocation, ManualEntry> overworld = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "overworld"), 0);
+        InnerNode<ResourceLocation, ManualEntry> nether = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "nether"), 1);
+        InnerNode<ResourceLocation, ManualEntry> the_end = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "the_end"), 2);
 
-        for(MineralEnum mineral : MineralEnum.values()) mineralTreeEntry(instance, minerals, mineral);
-//        InnerNode<ResourceLocation, ManualEntry> processing_chains = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_processing_chains"), 1);
-//        InnerNode<ResourceLocation, ManualEntry> metal_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_metal_chains"), 1);
-//        InnerNode<ResourceLocation, ManualEntry> mineral_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_mineral_chains"), 2);
+        List<MaterialInterface<?>> materials = IGLib.getGeneratedMaterials();
+        for(MaterialInterface<?> mineral : materials)
+        {
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCStone)) mineralTreeEntry(instance, overworld, mineral);
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCNetherrack)) mineralTreeEntry(instance, nether, mineral);
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCEndStone)) mineralTreeEntry(instance, the_end, mineral);
+        }
+
 //        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
     }
 
@@ -197,9 +200,22 @@ public class IGContent {
     private static void createRecipeChainPage(StringBuilder contentBuilder, ArrayList<SpecialElementData> itemList, MaterialInterface<?> material)
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
-        String process_info = I18n.get("manual.immersivegeology." + material.getName() + ".desc");
-        contentBuilder.append("<&item_display>").append(process_info);
+        OreConfig config = IGServerConfig.ORES.ores.get(material.getConfig());
 
+        int minY = config.minY.get();
+        int maxY = config.maxY.get();
+        double minTemp = config.min_temp.get();
+        double maxTemp= config.max_temp.get();
+        double minRainfall = config.min_downfall.get();
+        double maxRainfall = config.max_downfall.get();
+        IGGenerationType pattern = config.generationPattern.get();
+        String process_info = Component.translatable("manual.immersivegeology.generic.desc", material.getTranslationName()).getString();
+        contentBuilder.append("<&item_display>").append(process_info);
+        contentBuilder.append("<&list>");
+        itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config), ""), true)));
+//        ManualHelper.DYNAMIC_TABLES.put("ore_configuration_" + material.getName().toLowerCase(), () -> {
+//            return formatTable(getOreConfigTable(config), "Value");
+//        });
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
             if(i == 0) contentBuilder.append("<np>");
@@ -225,15 +241,66 @@ public class IGContent {
             }
         }
 
-        if(material.hasFlag(ItemCategoryFlags.INGOT) && metals.contains(material))
-        {
-            displayStacks.add(material.getStack(ItemCategoryFlags.INGOT));
-            material.getOriginMaterials();
-        }
-
         itemList.add(new SpecialElementData("item_display", 0, new ManualElementItem(ManualHelper.getManual(), displayStacks)));
     }
 
+    public static HashMap<Component, Double> getOreConfigTable(OreConfig config) {
+        LinkedHashMap<Component, Double> map = new LinkedHashMap<>();
+
+        map.put(Component.translatable("manual.immersivegeology.can_spawn"), config.canSpawn.get() ? 1.0 : 0.0);
+
+        map.put(Component.translatable("manual.immersivegeology.min_y"), Double.valueOf(config.minY.get()));
+        map.put(Component.translatable("manual.immersivegeology.max_y"), Double.valueOf(config.maxY.get()));
+
+        map.put(Component.translatable("manual.immersivegeology.min_temp"), config.min_temp.get());
+        map.put(Component.translatable("manual.immersivegeology.max_temp"), config.max_temp.get());
+
+        map.put(Component.translatable("manual.immersivegeology.min_rainfall"), config.min_downfall.get());
+        map.put(Component.translatable("manual.immersivegeology.max_rainfall"), config.max_downfall.get());
+
+        map.put(Component.translatable("manual.immersivegeology.density"), config.density.get());
+        map.put(Component.translatable("manual.immersivegeology.vein_size"), config.veinSize.get().doubleValue());
+        map.put(Component.translatable("manual.immersivegeology.generation_type"), (double)config.generationPattern.get().ordinal());
+
+        return map;
+    }
+
+    static Component[][] formatTable(Map<Component, Double> map, String valueType) {
+        List<Map.Entry<Component, Double>> sortedMapArray = new ArrayList<>(map.entrySet());
+        ArrayList<Component[]> list = new ArrayList<>();
+
+        try {
+
+			for(Entry<Component, Double> entry : sortedMapArray)
+			{
+				Component item = entry.getKey();
+				if(item==null)
+				{
+					item = Component.nullToEmpty((entry.getKey()).toString());
+				}
+
+				String bt = String.valueOf(entry.getValue());
+                if(item.toString().contains("manual.immersivegeology.generation_type"))
+                {
+                    int ordinal = entry.getValue().intValue();
+                    bt = IGGenerationType.values()[ordinal].name();
+                }
+                if(item.toString().contains("can_spawn"))
+                {
+                    bt = entry.getValue().intValue() == 0 ? "False" : "True";
+                }
+                if(item.toString().contains("density"))
+                {
+                    bt = new DecimalFormat("###.##").format((entry.getValue() * 100)) + "%";
+                }
+
+				Component am = Component.nullToEmpty(""+bt+" "+valueType);
+				list.add(new Component[]{item, am});
+			}
+        } catch (Exception var9) {
+        }
+        return (Component[][])list.toArray(new Component[0][]);
+    }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
         ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());

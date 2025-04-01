@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-29T20:24:39.495935916	Registries
+// 1.20.1	2025-03-31T16:28:21.826529874	Registries
 ec4f0cf9453c946d13c82d306c65787f5b3d9e83 data/immersivegeology/forge/biome_modifier/acanthite.json
 64543f48e1e515d67b4ccd1c1e96c40e4cae482b data/immersivegeology/forge/biome_modifier/alumina.json
 72bf2e3bbe052c41d2e9b2b2ba3f1497d846bbf5 data/immersivegeology/forge/biome_modifier/anatase.json
@@ -115,7 +115,7 @@ eab0917e2254da85675d0189ed6ad85232343811 data/immersivegeology/worldgen/placed_f
 8d8e1b7ec724562114e04d8f65e97f697ad3013f data/immersivegeology/worldgen/placed_feature/ilmenite.json
 c9a4df9114049e5ae318f4e03ecdc84d353de201 data/immersivegeology/worldgen/placed_feature/iron.json
 a53e91e95fea82f960b1e37393dcd90b5e87e4a2 data/immersivegeology/worldgen/placed_feature/lead.json
-01d4aa5e8f67ed5c780b1f5e7eb8bb16e5360c1f data/immersivegeology/worldgen/placed_feature/lignite.json
+26cfe14179e44b546dafbc9369a5da09b5c79a3f data/immersivegeology/worldgen/placed_feature/lignite.json
 3d41d0b1a3fe0209dc00c1b649eacd9f514434fb data/immersivegeology/worldgen/placed_feature/magnetite.json
 d64d6d8b81181839af3e1c43e7c400bf28384496 data/immersivegeology/worldgen/placed_feature/millerite.json
 ef645a0761761688be4075801ae3559457e23c32 data/immersivegeology/worldgen/placed_feature/molybdenite.json

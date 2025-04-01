@@ -45,7 +45,8 @@ public class IGGenericOreItem extends IGGenericItem
 	@Override
 	public @NotNull Component getName(ItemStack stack) {
 		String grade = getFlag().equals(ItemCategoryFlags.NORMAL_ORE) ? "normal" : (getFlag().equals(ItemCategoryFlags.RICH_ORE) ? "rich" : "poor");
-		MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + grade).append(Component.translatable("formatting.space"));
+		MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + grade);
+		if(!grade.equals("normal")) normalName.append(Component.translatable("formatting.space"));
 		for(MaterialTexture t : MaterialTexture.values()){
 			if (materialMap.containsKey(t)) {
 				MaterialInterface<?> base = materialMap.get(t);

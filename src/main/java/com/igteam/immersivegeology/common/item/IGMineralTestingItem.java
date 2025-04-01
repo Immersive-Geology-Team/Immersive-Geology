@@ -99,8 +99,6 @@ public class IGMineralTestingItem extends IGGenericItem
 					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
-					} else {
-						level.removeBlock(cursor,false);
 					}
 				}
 			}

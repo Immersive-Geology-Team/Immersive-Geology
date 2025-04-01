@@ -5,6 +5,7 @@ import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -12,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -137,5 +139,15 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default DrillHeadProps drillHeadInstance()
     {
         return instance().drillHeadInstance();
+    };
+
+    default IWorldGenConfig getConfig()
+    {
+        return null;
+    }
+
+    default String getTranslationName()
+    {
+        return Component.translatable("material.immersivegeology." + getName().toLowerCase()).getString();
     };
 }

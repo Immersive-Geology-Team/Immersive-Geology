@@ -27,7 +27,7 @@ public class MaterialPyrolusite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         addFlags(ItemCategoryFlags.PELLET);
-        CONFIG = new MineralConfig(10,40,2,-64,112,350, 0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(32,40,2,-64,112,350, 0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
     }
 
     @Override

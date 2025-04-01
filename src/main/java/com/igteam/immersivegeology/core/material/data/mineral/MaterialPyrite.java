@@ -44,7 +44,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-        CONFIG = new MineralConfig(12,30,3,-64,112,400, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,30,3,-64,112,2000, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

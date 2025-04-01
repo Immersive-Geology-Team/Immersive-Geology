@@ -208,4 +208,10 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     {
         return 1;
     }
+
+    @Override
+    public IWorldGenConfig getConfig()
+    {
+        return this;
+    }
 }

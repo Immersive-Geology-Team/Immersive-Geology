@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/normal/apatite_deepslate_variation_1"
+        },
+        {
+          "model": "immersivegeology:block/ore_block/minecraft/normal/apatite_deepslate_variation_2"
+        }
+      ]
+    }
+  ]
+}

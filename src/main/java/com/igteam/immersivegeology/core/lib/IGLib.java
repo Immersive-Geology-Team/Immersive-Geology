@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.lib;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.logging.LogUtils;
@@ -17,9 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class IGLib {
     public static final String MODID = "immersivegeology";
@@ -62,6 +61,16 @@ public class IGLib {
         list.addAll(List.of(MineralEnum.values()));
         list.addAll(List.of(MiscEnum.values()));
         list.addAll(List.of(ChemicalEnum.values()));
+
+        return list;
+    }
+
+    public static LinkedList<MaterialInterface<?>> getGeneratedMaterials(){
+        LinkedList<MaterialInterface<?>> list = new LinkedList<>();
+        List<MetalEnum> metals = MetalEnum.generatedNativeMetals();
+        List<MineralEnum> minerals = Arrays.stream(MineralEnum.values()).toList();
+		list.addAll(metals);
+		list.addAll(minerals);
 
         return list;
     }

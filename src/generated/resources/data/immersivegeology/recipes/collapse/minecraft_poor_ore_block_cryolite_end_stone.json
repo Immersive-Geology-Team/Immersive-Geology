@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "tfc"
+        }
+      ],
+      "recipe": {
+        "type": "tfc:collapse",
+        "copy_input": true,
+        "ingredient": "immersivegeology:minecraft_poor_ore_block_cryolite_end_stone"
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "recipe": {
+        "type": "immersivegeology:empty"
+      }
+    }
+  ]
+}

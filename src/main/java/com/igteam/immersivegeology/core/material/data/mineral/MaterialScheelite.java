@@ -34,7 +34,7 @@ public class MaterialScheelite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(8,60,1,30,160,800, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(33,60,1,30,160,800, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
     }
 
     @Override

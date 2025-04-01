@@ -31,7 +31,7 @@ public class MaterialCassiterite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(40,50,2,0,175,700, 0.5,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(40,50,1,0,175,2590, 0.5,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
     }
 
     @Override

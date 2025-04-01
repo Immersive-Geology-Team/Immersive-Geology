@@ -10,13 +10,16 @@ package com.igteam.immersivegeology.gametest.tests;
 
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.Vein;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -47,14 +50,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 public class SpawnChunkCapture {
 	// Constants
 	private static final int CHUNK_SIZE = 16;
-	private static final int MAP_SIZE_IN_CHUNKS = 128;
+	private static final int MAP_SIZE_IN_CHUNKS = 64;
 	private static final int IMAGE_SIZE = CHUNK_SIZE * MAP_SIZE_IN_CHUNKS;
 	private static final String BASE_PATH = "../src/main/resources/assets/immersivegeology/textures/";
 	private static final double NOISE_THRESHOLD_HIGH = 0.8;
@@ -92,16 +98,71 @@ public class SpawnChunkCapture {
 
 		BlockPos spawnPos = level.getSharedSpawnPos();
 		try {
+			checkMineralDistributionProps(helper);
+
 			BufferedImage image = generateMapImage(level, spawnPos);
-			saveImage(image, helper);
+			saveImage(image, helper, server.getServerDirectory(), "World Map");
+			helper.succeed();
 		} catch (Exception e) {
 			helper.fail("Error generating map: " + e.getMessage());
 		}
 	}
+	public static HashMap<MaterialInterface<?>, Double> probability_map = new HashMap<>();
+	private static void checkMineralDistributionProps(GameTestHelper helper) throws IOException
+	{
+		File dir = Path.of(server.getServerDirectory().getPath()+"/noise_maps/").toFile();
+		int processed = 0;
+		int total_materials = IGLib.getGeneratedMaterials().size();
+		for(MaterialInterface<?> material : IGLib.getGeneratedMaterials())
+		{
+			IWorldGenConfig data = material.getConfig();
+			if(data == null)
+			{
+				continue;
+			}
+			OreConfig rConfig = IGServerConfig.ORES.ores.get(data);
+			if(rConfig == null)
+			{
+				continue;
+			}
+			if(data.getVeinSize() == 0) continue;
+			String name = data.name().toLowerCase()+"chunk_noise";
+			File outputFile = new File(dir, name+".png");
+			if(!outputFile.exists())
+			{
+				BufferedImage noiseDistribution = pregenNoiseDistribution(new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getMinSpawnTemp(), data.getMaxSpawnTemp(), data.getMinDownfall(), data.getMaxDownfall()));
+				saveImage(noiseDistribution, helper, dir, name);
+			}
+			File cachedFile = new File(dir, name+".png");
+			BufferedImage cached = ImageIO.read(cachedFile);
+			int width = cached.getWidth();
+			int height = cached.getHeight();
+			int black = 0;
+			for(int x = 0; x < width; x++)
+			{
+				for(int y = 0; y < height; y++)
+				{
+					Color packed_color = new Color(cached.getRGB(x, y));
+					if(packed_color.equals(Color.BLACK)) black++;
+				}
+			}
+			int total = (width*height);
+			float noise_probability = 1-((float)black/total);
+			double chunk_probability = (0.3333*((double)data.generationChance()/2_000_000));
+			double finalProb = noise_probability*chunk_probability*(MAP_SIZE_IN_CHUNKS * MAP_SIZE_IN_CHUNKS);
+			probability_map.put(material, (finalProb * 100));
+			float process = ((float) processed / total_materials) * 100;
+			IGLib.IG_LOGGER.info("Processing {}%", process);
+			processed++;
+		}
+		probability_map.forEach((m,p) -> {
+			IGLib.IG_LOGGER.info("Spawn Chance in a 64x64 chunk area for {} is {}", m.getName(), new DecimalFormat("###.##").format(p) + "%");
+		});
+	}
 
 	private static BufferedImage generateMapImage(Level level, BlockPos spawnPos) {
-		int spawnChunkX = (spawnPos.getX() / CHUNK_SIZE) + 32;
-		int spawnChunkZ = (spawnPos.getZ() / CHUNK_SIZE);
+		int spawnChunkX = (spawnPos.getX() / CHUNK_SIZE);
+		int spawnChunkZ = (spawnPos.getZ() / CHUNK_SIZE) - 64;
 
 		BufferedImage image = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = image.createGraphics();
@@ -112,6 +173,54 @@ public class SpawnChunkCapture {
 
 		g2d.dispose();
 		return image;
+	}
+
+	private static BufferedImage pregenNoiseDistribution(IGOreFeatureConfig config) {
+		BufferedImage image = new BufferedImage(MAP_SIZE_IN_CHUNKS, MAP_SIZE_IN_CHUNKS, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = image.createGraphics();
+		configureGraphics(g2d);
+		renderNoiseDistribution(g2d, config);
+		g2d.dispose();
+		return image;
+	}
+
+	private static void renderNoiseDistribution(Graphics2D g2d, IGOreFeatureConfig config) {
+		int size = MAP_SIZE_IN_CHUNKS;
+		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry());
+		int y = config.entry().getMinY() + 8;
+		if(rConfig == null) return;
+		for (int chunkX = -size; chunkX < size; chunkX++) {
+			for (int chunkZ = -size; chunkZ < size; chunkZ++) {
+				RandomSource random = new XoroshiroRandomSource(seed ^ (long)chunkX * 61728364132L, config.seed() ^ (long)chunkZ * 16298364123L);
+				Vein vein = IGOreFeature.createVein(random, rConfig, config.seed());
+				INoise3D noiseGen = vein.getNoise();
+				boolean hasSpawn = false;
+				for (int x = 0; x < CHUNK_SIZE; x++)
+				{
+					for(int z = 0; z < CHUNK_SIZE; z++)
+					{
+						int xPos = (chunkX * CHUNK_SIZE) + x;
+						int zPos = (chunkZ * CHUNK_SIZE) + z;
+						double noise = noiseGen.noise(xPos, y, zPos);
+
+						if (noise > NOISE_THRESHOLD) {
+							hasSpawn = true;
+							break;
+						}
+					}
+					if(hasSpawn) break;
+				}
+				if(hasSpawn)
+				{
+					ChunkPos pos = new ChunkPos(chunkX, chunkZ);
+					int bestY = config.findOptimalYLevel(vein, pos.getMiddleBlockPosition(0), rConfig.maxY.get(), rConfig.minY.get());
+					boolean goodVein = config.isVeinWorthwhile(pos, bestY, vein);
+					if(!goodVein) hasSpawn = false;
+				}
+				g2d.setColor(hasSpawn ? Color.white : Color.BLACK);
+				g2d.drawRect(chunkX, chunkZ, 1, 1); // Use relative coordinates for drawing
+			}
+		}
 	}
 
 	private static void configureGraphics(Graphics2D g2d) {
@@ -157,7 +266,7 @@ public class SpawnChunkCapture {
 				// Calculate color
 				int col = blockState.is(Blocks.WATER)
 						? biome.getWaterColor()
-						: blockState.getBlock().defaultMapColor().calculateRGBColor(Brightness.NORMAL);
+						: blockState.getBlock().defaultMapColor().calculateRGBColor(Brightness.HIGH);
 				Color blockColor = new Color(col);
 
 				// Check for ore feature
@@ -193,14 +302,12 @@ public class SpawnChunkCapture {
 			OreConfig rConfig = IGServerConfig.ORES.ores.get(feature.entry());
 			RandomSource random = new XoroshiroRandomSource(seed ^ (long)chunkPos.x * 61728364132L, feature.seed() ^ (long)chunkPos.z * 16298364123L);
 			Vein vein = IGOreFeature.createVein(random, rConfig, feature.seed());
-			Pair<Integer, Double> analysis = feature.findOptimalYLevelWithMedian(vein, p, chunk.getHeight(Heightmap.Types.WORLD_SURFACE, 8, 8), rConfig.minY.get());
-			int bestY = analysis.getFirst();
+			Integer bestY = timeFunction(() -> feature.findOptimalYLevel(vein, p, chunk.getHeight(Heightmap.Types.WORLD_SURFACE, 8, 8), rConfig.minY.get()), "Best Y Analysis");
 			int bestYSection = chunk.getSectionIndex(bestY);
+			boolean goodVein = timeFunction(() -> feature.isVeinWorthwhile(chunkPos, bestY, vein), "Worthy Vein Check");
+			if(!goodVein) continue;
 			if(chunk.getSection(bestYSection).hasOnlyAir()) continue;
 			if(!chunk.getSection(bestYSection).maybeHas((s) -> s.is(Blocks.STONE))) continue;
-			double medianNoise = analysis.getSecond();
-			//if the median noise of the entire deposit is lower than 0.3 (poor ore is 0.4) we discard it.
-			if(medianNoise < 0.001) continue;
 
 			int chunkXPos = p.getX() - CHUNK_SIZE;
 			int chunkZPos = p.getZ() - CHUNK_SIZE;
@@ -209,39 +316,65 @@ public class SpawnChunkCapture {
 			g2d.setColor(Color.RED);
 			g2d.setStroke(new BasicStroke(1));
 			g2d.drawRect(chunkXPos, chunkZPos, depositWidth, depositHeight);
-			renderDepositDetails(g2d, feature, p, chunkXPos, chunkZPos, depositWidth, depositHeight, analysis, vein);
+			renderDepositDetails(g2d, feature, p, chunkXPos, chunkZPos, depositWidth, depositHeight, bestY, vein);
 
 			String oreName = material.getName();
 			BufferedImage materialImage = mapOreItemImageToPalette(oreName);
 			if (materialImage != null) {
-				g2d.drawImage(materialImage, chunkXPos-8, chunkZPos-8, null);
+				g2d.drawImage(materialImage, chunkXPos-8, chunkZPos, null);
 			}
-			g2d.drawString(oreName, chunkXPos, chunkZPos-8);
+			g2d.drawString(oreName, chunkXPos+8, chunkZPos);
+		}
+		printFormatedTime(calculateMedian(functionTimes));
+	}
+
+	private static long calculateMedian(List<Long> values) {
+		if (values == null || values.isEmpty()) {
+			return 0;
+		}
+
+		List<Long> sortedValues = new ArrayList<>(values);
+		Collections.sort(sortedValues);
+
+		int size = sortedValues.size();
+		if (size % 2 == 0) {
+			return (long)((sortedValues.get(size / 2 - 1) + sortedValues.get(size / 2)) / 2.0);
+		} else {
+			return sortedValues.get(size / 2);
 		}
 	}
-	public static void timeVoidFunction(Runnable function, String functionName) {
+
+	private static final List<Long> functionTimes = new ArrayList<>();
+	public static <T> T timeFunction(Supplier<T> function, String functionName) {
 		long startTime = System.nanoTime();
-		function.run();
+		T result = function.get();
 		long endTime = System.nanoTime();
 
 		long durationNanos = endTime - startTime;
 
+		functionTimes.add(durationNanos);
+		return result;
+	}
+
+	private static void printFormatedTime(Long nanos)
+	{
+
 		String formattedTime;
-		if (durationNanos < 1_000) {
-			formattedTime = durationNanos + " ns";
-		} else if (durationNanos < 1_000_000) {
-			formattedTime = String.format("%.2f μs", durationNanos / 1000.0);
-		} else if (durationNanos < 1_000_000_000) {
-			formattedTime = String.format("%.2f ms", durationNanos / 1000000.0);
+		if (nanos < 1_000) {
+			formattedTime = nanos + " ns";
+		} else if (nanos < 1_000_000) {
+			formattedTime = String.format("%.2f μs", nanos / 1000.0);
+		} else if (nanos < 1_000_000_000) {
+			formattedTime = String.format("%.2f ms", nanos / 1000000.0);
 		} else {
-			formattedTime = String.format("%.2f s", durationNanos / 1000000000.0);
+			formattedTime = String.format("%.2f s", nanos / 1000000000.0);
 		}
 
-		System.out.println("Function '" + functionName + "' executed in: " + formattedTime);
+		IGLib.IG_LOGGER.info("Function Time: {}", formattedTime);
 	}
 
 	private static void renderDepositDetails(Graphics2D g2d, IGOreFeatureConfig feature, BlockPos p,
-											 int chunkXPos, int chunkZPos, int width, int height, Pair<Integer, Double> analysis, Vein vein) {
+											 int chunkXPos, int chunkZPos, int width, int height, int bestY, Vein vein) {
 
 		// Constants for noise thresholds
 		final double NOISE_THRESHOLD = 0.3;
@@ -249,7 +382,6 @@ public class SpawnChunkCapture {
 		final double NOISE_THRESHOLD_HIGH = 0.8;
 
 		ChunkPos chunkPos = new ChunkPos(p);
-		int bestY = analysis.getFirst();
 		for (int x = 0; x < width; x++) {
 			for (int z = 0; z < height; z++) {
 				int xPos = chunkXPos + x;
@@ -272,11 +404,11 @@ public class SpawnChunkCapture {
 
 		// Optionally display the Y level found
 		g2d.setColor(Color.WHITE);
-		g2d.drawString("Y("+bestY+")",  chunkXPos ,  chunkZPos);
+		g2d.drawString(bestY+"",  chunkXPos,  chunkZPos-16);
 	}
 
-	private static void saveImage(BufferedImage image, GameTestHelper helper) {
-		File outputFile = new File(server.getServerDirectory(), "spawn_chunks.png");
+	private static void saveImage(BufferedImage image, GameTestHelper helper, File dir, String name) {
+		File outputFile = new File(dir, name + ".png");
 		try {
 			ImageIO.write(image, "PNG", outputFile);
 			helper.succeed();
@@ -343,7 +475,8 @@ public class SpawnChunkCapture {
 	}
 
 	private static void loadOrePalettes() throws IOException {
-		Set<String> oreNames = Arrays.stream(MineralEnum.values())
+		List<MaterialInterface<?>> toGenerate = IGLib.getGeneratedMaterials();
+		Set<String> oreNames = toGenerate.stream()
 				.map(e -> e.getName().toLowerCase())
 				.collect(Collectors.toSet());
 

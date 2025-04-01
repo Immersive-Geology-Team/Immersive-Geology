@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.core.material.data.chemical.MaterialNitricAcid;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.metal.*;
@@ -67,6 +68,11 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     MoltenMantle(new MaterialMoltenMantle());
 
     public static List<? extends IWorldGenConfig> nativeMetals()
+    {
+        return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.ORE_BLOCK)).toList();
+    }
+
+    public static List<MetalEnum> generatedNativeMetals()
     {
         return Arrays.stream(values()).filter(v -> v.hasFlag(BlockCategoryFlags.ORE_BLOCK)).toList();
     }
@@ -232,5 +238,11 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public double getMaxDownfall()
     {
         return 1;
+    }
+
+    @Override
+    public IWorldGenConfig getConfig()
+    {
+        return this;
     }
 }

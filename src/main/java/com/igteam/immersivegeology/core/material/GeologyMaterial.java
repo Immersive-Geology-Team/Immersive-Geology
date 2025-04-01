@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material;
 
 import com.google.common.collect.Sets;
 import com.igteam.immersivegeology.common.tag.IGTags;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;

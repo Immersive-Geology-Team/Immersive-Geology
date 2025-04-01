@@ -38,7 +38,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
         removeMaterialFlags(ItemCategoryFlags.POWDER);
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-        CONFIG = new MineralConfig(18,60,1,-64,72,1200,0.5,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(21,60,1,-64,72,1200,0.5,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     @Override

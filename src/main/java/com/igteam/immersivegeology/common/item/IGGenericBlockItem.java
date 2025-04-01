@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.IGDeskBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -21,6 +22,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -96,9 +98,12 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
         {
             case ORE_BLOCK -> {
                 if(getBlock() instanceof IOreBlock oreBlock){
-                    materialList.add(I18n.get("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase()));
-                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
-                    materialList.add(I18n.get("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
+                    MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase());
+                    if(!oreBlock.getOreRichness().equals(OreRichness.NORMAL)) normalName.append(Component.translatable("formatting.space"));
+                    normalName.append(Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
+                    normalName.append(Component.translatable("formatting.space"));
+                    normalName.append(Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
+                    return normalName;
                 }
             }
             case ENGINEERING_BLOCK -> {

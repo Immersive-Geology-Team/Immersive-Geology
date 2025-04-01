@@ -28,6 +28,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
@@ -49,8 +50,12 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 public class IGOreFeature extends Feature<IGOreFeatureConfig>
 {
@@ -73,9 +78,15 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
 		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
+
 		if(config.canPlaceVein(chunkPos, level.getSeed(), biomeSource.getNoiseBiome(pos.getX(), pos.getY(), pos.getZ(), Climate.empty())))
 		{
-			IGOreFeature.placeVein(level, random, chunkPos, createVein(random, rConfig, config.seed()), config);
+			Vein vein = createVein(random, rConfig, config.seed());
+			int bestY = config.findOptimalYLevel(vein, pos, rConfig.maxY.get(), rConfig.minY.get());
+			if(config.isVeinWorthwhile(chunkPos, bestY, vein))
+			{
+				IGOreFeature.placeVein(level, random, chunkPos, vein, config);
+			}
 		}
 
 		return false;
@@ -385,102 +396,91 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		public IWorldGenConfig type() {
 			return this.entry;
 		}
-
-		public Pair<Integer, Double> findOptimalYLevelWithMedian(Vein vein, BlockPos p, int maxY, int minY) {
-			BlockPos pos = vein.pos();
-			INoise3D noise = vein.getNoise();
-
-			// Initial coarse search to narrow down the range
-			final int SAMPLE_RADIUS = 48;  // Radius for sampling
-			final int SAMPLE_STEP = 1;  // Skip some points for performance during sampling
-
-			// Data structures to track the best Y level and store all noise values
+		private static final int WORTHWHILE = 175;
+		public int findOptimalYLevel(Vein vein, BlockPos p, int maxY, int minY) {
 			int bestY = minY;
-			double bestMedianNoiseZero = 0.0d;
-			List<Double> allNoiseValues = new ArrayList<>();
-			Map<Integer, List<Double>> noiseByYLevel = new HashMap<>();
+			int bestAverage = 0;
+			int step = 10;
 
-			for (int y = minY; y <= maxY; y += SAMPLE_STEP) {
-				// Skip Y levels we've already processed in first pass
-				if (noiseByYLevel.containsKey(y)) {
-					continue;
-				}
-
-				// More detailed sampling for fine-grained search
-				List<Double> noiseValues = sampleNoiseAround(p, y, SAMPLE_RADIUS, vein);
-				List<Double> noiseValuesWthZero = sampleNoiseAroundZero(p, y, SAMPLE_RADIUS, vein);
-				double medianNoiseZero = calculateMedian(noiseValuesWthZero);
-
-				// Store and update best if needed
-				noiseByYLevel.put(y, noiseValuesWthZero);
-				allNoiseValues.addAll(noiseValues);
-				if (medianNoiseZero > bestMedianNoiseZero) {
-					bestMedianNoiseZero = medianNoiseZero;
+			for (int y = minY; y < maxY; y += step) {
+				int ave = calculateOverallAverage(vein, p, y);
+				if (ave > bestAverage) {
+					bestAverage = ave;
 					bestY = y;
 				}
-			}
-
-			// Calculate the median of ALL noise values across the entire range
-			double overallMedian = calculateMedian(allNoiseValues);
-
-			return Pair.of(bestY, overallMedian);
-		}
-
-		private List<Double> sampleNoiseAround(BlockPos p, int y, int radius, Vein vein) {
-			List<Double> noiseValues = new ArrayList<>();
-			ChunkPos chunkPos = new ChunkPos(p);
-			int chunkXPos = p.getX() - 16;
-			int chunkZPos = p.getZ() - 16;
-			for (int x = 0; x < radius; x++)
-			{
-				for(int z = 0; z < radius; z++)
-				{
-					int xPos = chunkXPos + x;
-					int zPos = chunkZPos + z;
-					double noiseVal = noise(chunkPos, xPos, y, zPos, vein);
-					noiseValues.add(noiseVal);
+				if (bestAverage > WORTHWHILE) {
+					return bestY;
 				}
 			}
 
+			for (int y = bestY - step; y <= bestY + step && y < maxY; y++) {
+				if (y < minY) continue; // Skip if below minY
+				int ave = calculateOverallAverage(vein, p, y);
+				if (ave > bestAverage) {
+					bestAverage = ave;
+					bestY = y;
+				}
+				if (bestAverage > WORTHWHILE) {
+					return bestY;
+				}
+			}
 
-			return noiseValues;
+			for (int y = bestY - 1; y <= bestY + 1 && y < maxY; y++) {
+				if (y < minY) continue; // Skip if below minY
+				int ave = calculateOverallAverage(vein, p, y);
+				if (ave > bestAverage) {
+					bestAverage = ave;
+					bestY = y;
+				}
+				if (bestAverage > WORTHWHILE) {
+					return bestY;
+				}
+			}
+
+			return bestY;
 		}
-		private List<Double> sampleNoiseAroundZero(BlockPos p, int y, int radius, Vein vein) {
-			List<Double> noiseValues = new ArrayList<>();
+
+		public int calculateOverallAverage(Vein vein, BlockPos p, int optimalY) {
+			final int SAMPLE_RADIUS = 48;
+			int[] noiseValues = sampleNoiseAround(p, optimalY, SAMPLE_RADIUS, vein);
+			return calculateAverage(noiseValues);
+		}
+
+		private int[] sampleNoiseAround(BlockPos p, int y, int radius, Vein vein) {
+			int total = radius * radius;
+			int[] noiseValues = new int[total];
 			ChunkPos chunkPos = new ChunkPos(p);
 			int chunkXPos = p.getX() - 16;
 			int chunkZPos = p.getZ() - 16;
-			for (int x = 0; x < radius; x++)
-			{
-				for(int z = 0; z < radius; z++)
-				{
-					int xPos = chunkXPos + x;
-					int zPos = chunkZPos + z;
-					double noiseVal = noise(chunkPos, xPos, y, zPos, vein);
-					if(noiseVal >= 0)
-					{
-						noiseValues.add(noiseVal);
+
+			IntStream.range(0, total).parallel().forEach(index -> {
+				int x = index % radius;
+				int z = index / radius;
+
+				final int xPos = chunkXPos + x;
+				final int zPos = chunkZPos + z;
+				double noiseVal = noise(chunkPos, xPos, y, zPos, vein);
+				int intVal = (int) (noiseVal * 1000);
+
+				if (intVal >= 0) {
+					// Use atomic or thread-safe operations to modify the array safely
+					synchronized (noiseValues) {
+						noiseValues[index] = intVal;
 					}
 				}
-			}
+			});
 
-			return noiseValues;
+			int[] trimmedNoiseValues = Arrays.stream(noiseValues)
+					.filter(val -> val >= 0)
+					.toArray();
+
+			return trimmedNoiseValues;
 		}
-
-		private double calculateMedian(List<Double> values) {
-			if (values.isEmpty()) {
-				return 0.0;
-			}
-
-			List<Double> sortedValues = new ArrayList<>(values);
-			Collections.sort(sortedValues);
-
-			int size = sortedValues.size();
-			if (size % 2 == 0) {
-				return (sortedValues.get(size / 2 - 1) + sortedValues.get(size / 2)) / 2.0;
-			} else {
-				return sortedValues.get(size / 2);
-			}
+		private int calculateAverage(int[] values) {
+			int num = values.length;
+			if (num == 0) return 0;
+			int sum = Arrays.stream(values).sum();
+			return sum / num;
 		}
 
 		public BlockState getStateToGenerate(BlockState stoneState, double noiseValue, MaterialHelper mineral) {
@@ -564,6 +564,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					(distToBoundary > 20 ? 0.66 : 1.0);
 
 			return noiseGen.noise(x, y, z) * multiplier;
+		}
+
+		public boolean isVeinWorthwhile(ChunkPos centerChunk, int y, Vein vein)
+		{
+			int averageNoise = calculateOverallAverage(vein, centerChunk.getWorldPosition(), y);
+			return averageNoise >= WORTHWHILE;
 		}
 	}
 

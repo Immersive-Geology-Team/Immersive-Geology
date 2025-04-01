@@ -36,7 +36,7 @@ public class MaterialMonazite extends MaterialMineral {
         addFlags(ItemCategoryFlags.SEDIMENT);
         // TODO Only Allow touchy of open Air.
         // TODO Monazite Sands
-        CONFIG = new MineralConfig(14,90,1,20,120,300, 0.5,true,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(14,90,1,20,120,900, 0.5,true,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
     }
 
     @Override

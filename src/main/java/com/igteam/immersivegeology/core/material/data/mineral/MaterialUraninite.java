@@ -30,7 +30,7 @@ public class MaterialUraninite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(13,80,1,-64,32,800, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(33,80,1,-64,32,800, 0.5,true,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class CommonTests
 	{
 		List<TestFunction> all = new ArrayList<>();
 		all.addAll(multiblockTests());
-		all.add(new TestFunction("ore_feature_testing", "mapping", TEST_AREA, 1200, 20, true, SpawnChunkCapture::captureSpawnChunks));
+		all.add(new TestFunction("ore_feature_testing", "mapping", TEST_AREA, 999999, 20, true, SpawnChunkCapture::captureSpawnChunks));
 		return all;
 	}
 
