@@ -37,4 +37,10 @@ public class MaterialThorianite extends MaterialMineral {
     {
         return new LinkedHashSet<>(List.of(MetalEnum.Thorium));
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.16003418f;
+    }
 }

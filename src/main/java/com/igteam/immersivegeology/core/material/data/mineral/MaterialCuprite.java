@@ -80,4 +80,10 @@ public class MaterialCuprite extends MaterialMineral
 	{
 		return new LinkedHashSet<>(List.of(MetalEnum.Copper, MetalEnum.Manganese));
 	}
+
+	@Override
+	public float getNoiseProbability()
+	{
+		return 0.19122314f;
+	}
 }

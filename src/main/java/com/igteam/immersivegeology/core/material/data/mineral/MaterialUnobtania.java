@@ -43,4 +43,10 @@ public class MaterialUnobtania extends MaterialMineral {
     {
         return new LinkedHashSet<>(List.of(MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Platinum));
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.3126831f;
+    }
 }

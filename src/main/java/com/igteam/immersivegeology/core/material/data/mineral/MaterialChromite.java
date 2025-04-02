@@ -64,9 +64,11 @@ public class MaterialChromite extends MaterialMineral {
                         new IngredientWithSize(MetalEnum.Sodium.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1))
                 .addExtras(MetalEnum.Iron.getItemTag(ItemCategoryFlags.INGOT), 0.8f)
                 .setTimeAndEnergy(400, 204800);
+    }
 
-
-
-
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.105895996f;
     }
 }

@@ -73,6 +73,11 @@ public class MaterialPlatinum extends MaterialNativeMetal {
                 IngredientWithSize.of(getStack(ItemCategoryFlags.CRUSHED_ORE, 1)),
                 new FluidTagInput(ChemicalEnum.AquaRegia.getFluidTag(BlockCategoryFlags.FLUID), 2*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null, 200, 51200);
+    }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.025939941f;
     }
 }

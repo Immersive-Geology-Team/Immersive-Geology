@@ -93,4 +93,10 @@ public class MaterialCopper extends MaterialNativeMetal {
     {
         return true;
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.047180176f;
+    }
 }

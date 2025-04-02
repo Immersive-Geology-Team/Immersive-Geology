@@ -82,4 +82,10 @@ public class MaterialSmithsonite extends MaterialMineral {
     {
         return Set.of(directBlasting);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.14581299f;
+    }
 }

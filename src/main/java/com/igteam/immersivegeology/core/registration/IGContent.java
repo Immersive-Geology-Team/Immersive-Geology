@@ -201,21 +201,38 @@ public class IGContent {
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
         OreConfig config = IGServerConfig.ORES.ores.get(material.getConfig());
-
-        int minY = config.minY.get();
-        int maxY = config.maxY.get();
-        double minTemp = config.min_temp.get();
-        double maxTemp= config.max_temp.get();
-        double minRainfall = config.min_downfall.get();
-        double maxRainfall = config.max_downfall.get();
-        IGGenerationType pattern = config.generationPattern.get();
         String process_info = Component.translatable("manual.immersivegeology.generic.desc", material.getTranslationName()).getString();
         contentBuilder.append("<&item_display>").append(process_info);
+        StringBuilder derivedString = new StringBuilder();
+        List<MaterialInterface<?>> derivedMaterials = material.getDerivedMaterials().stream().toList();
+        int size = material.getDerivedMaterials().size();
+        for(int index = 0; index < size; index++)
+        {
+            MaterialInterface<?> derived = derivedMaterials.get(index);
+            derivedString.append(derived.getTranslationName());
+            if(size > 1)
+            {
+                if(index==(size-2))
+                {
+                    derivedString.append(Component.translatable("formatting.space").getString());
+                    derivedString.append(Component.translatable("formatting.and").getString());
+                    derivedString.append(Component.translatable("formatting.space").getString());
+                }
+                else if(index < size-1)
+                {
+                    derivedString.append(", ");
+                }
+            }
+        }
+
         contentBuilder.append("<&list>");
-        itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config), ""), true)));
-//        ManualHelper.DYNAMIC_TABLES.put("ore_configuration_" + material.getName().toLowerCase(), () -> {
-//            return formatTable(getOreConfigTable(config), "Value");
-//        });
+        if(!derivedString.isEmpty())
+        {
+            String finalDerived = derivedString.toString();
+            contentBuilder.append("<np>").append(Component.translatable("manual.immersivegeology.generic.pre_chain_desc", material.getTranslationName(), finalDerived).getString());
+        }
+        itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config, material.getDefaultNoiseProbability()), ""), true)));
+
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
             if(i == 0) contentBuilder.append("<np>");
@@ -244,10 +261,14 @@ public class IGContent {
         itemList.add(new SpecialElementData("item_display", 0, new ManualElementItem(ManualHelper.getManual(), displayStacks)));
     }
 
-    public static HashMap<Component, Double> getOreConfigTable(OreConfig config) {
+    public static HashMap<Component, Double> getOreConfigTable(OreConfig config, float noise_probability) {
         LinkedHashMap<Component, Double> map = new LinkedHashMap<>();
 
         map.put(Component.translatable("manual.immersivegeology.can_spawn"), config.canSpawn.get() ? 1.0 : 0.0);
+
+        double chunk_probability = (0.3333*((double)config.generationChance.get()/2_000_000));
+        double finalProb = noise_probability*chunk_probability*(64 * 64);
+        map.put(Component.translatable("manual.immersivegeology.generation_probability"), finalProb);
 
         map.put(Component.translatable("manual.immersivegeology.min_y"), Double.valueOf(config.minY.get()));
         map.put(Component.translatable("manual.immersivegeology.max_y"), Double.valueOf(config.maxY.get()));
@@ -289,7 +310,7 @@ public class IGContent {
                 {
                     bt = entry.getValue().intValue() == 0 ? "False" : "True";
                 }
-                if(item.toString().contains("density"))
+                if(item.toString().contains("density") || item.toString().contains("generation_probability"))
                 {
                     bt = new DecimalFormat("###.##").format((entry.getValue() * 100)) + "%";
                 }

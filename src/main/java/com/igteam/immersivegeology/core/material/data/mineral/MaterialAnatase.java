@@ -95,4 +95,10 @@ public class MaterialAnatase extends MaterialMineral {
     {
         return Set.of(hunter_process);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.07171631f;
+    }
 }

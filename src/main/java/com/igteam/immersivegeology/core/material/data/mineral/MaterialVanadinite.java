@@ -72,4 +72,9 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         return new LinkedHashSet<>(List.of(MetalEnum.Vanadium, MetalEnum.Lead));
     }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.019104004f;
+    }
 }

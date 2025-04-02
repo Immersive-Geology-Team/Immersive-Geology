@@ -73,4 +73,10 @@ public class MaterialScheelite extends MaterialMineral {
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                null,null,200, 51200);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.13775635f;
+    }
 }

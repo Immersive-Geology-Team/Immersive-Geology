@@ -81,4 +81,10 @@ public class MaterialCryolite extends MaterialMineral {
     {
         return Set.of(basic_preparation, al_synthesis);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.22589111f;
+    }
 }

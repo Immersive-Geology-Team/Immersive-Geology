@@ -73,4 +73,10 @@ public class MaterialMagnetite extends MaterialMineral {
                 MetalEnum.Nickel.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
         //TODO Think about byproducts, MAYBE add grav separation after pulverization to get 7.5% of nickel/chrome oxide ?
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.97540283f;
+    }
 }

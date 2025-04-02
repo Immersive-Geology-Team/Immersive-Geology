@@ -61,4 +61,10 @@ public class MaterialFluorite extends MaterialMineral {
                 null, null,
                 200, 51200);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.10491943f;
+    }
 }

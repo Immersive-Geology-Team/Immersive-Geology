@@ -79,7 +79,11 @@ public class MaterialMonazite extends MaterialMineral {
                 IngredientWithSize.of(getStack(ItemCategoryFlags.SEDIMENT, 1)),
                 new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);
+    }
 
-
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.05505371f;
     }
 }

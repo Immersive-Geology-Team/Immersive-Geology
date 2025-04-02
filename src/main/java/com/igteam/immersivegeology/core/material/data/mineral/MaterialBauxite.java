@@ -104,4 +104,10 @@ public class MaterialBauxite extends MaterialMineral {
     {
         return Set.of(bayer_process);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.20800781f;
+    }
 }

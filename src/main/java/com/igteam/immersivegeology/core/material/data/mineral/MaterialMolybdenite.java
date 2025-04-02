@@ -89,4 +89,10 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
     {
         return Set.of(sulphideElectrowining);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.05895996f;
+    }
 }

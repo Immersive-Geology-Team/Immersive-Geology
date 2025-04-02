@@ -79,4 +79,10 @@ public class MaterialIlmenite extends MaterialMineral {
     {
         return Set.of(becher_process);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.08856201f;
+    }
 }

@@ -55,4 +55,10 @@ public class MaterialUraninite extends MaterialMineral {
                 ItemCategoryFlags.POWDER, 400, 32000);
 
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.15179443f;
+    }
 }

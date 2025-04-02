@@ -46,4 +46,10 @@ public class MaterialAnthracite extends MaterialMineral
 	{
 		return IGVeinTextureType.LAYERED;
 	}
+
+	@Override
+	public float getNoiseProbability()
+	{
+		return 0.5071411f;
+	}
 }

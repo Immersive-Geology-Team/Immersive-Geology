@@ -63,4 +63,10 @@ public class MaterialLignite extends MaterialMineral
 		IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.NORMAL_ORE, 1, this, ItemCategoryFlags.GRIT, 1, 2400, 200);
 		IGMethodBuilder.squeezing(this, IGStageDesignation.REFINEMENT).create(this, ItemCategoryFlags.GRIT, 4, this, ItemCategoryFlags.INGOT, 1, new FluidStack(Fluids.WATER, 250), 19200, 80);
 	}
+
+	@Override
+	public float getNoiseProbability()
+	{
+		return 0.14013672f;
+	}
 }

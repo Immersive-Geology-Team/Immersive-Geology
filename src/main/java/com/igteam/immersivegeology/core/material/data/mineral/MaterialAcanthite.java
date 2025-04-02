@@ -115,4 +115,9 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
         return Set.of(directBlasting, sulphideElectrowining);
     }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.30578613f;
+    }
 }

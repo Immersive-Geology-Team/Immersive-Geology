@@ -150,4 +150,9 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     {
         return Component.translatable("material.immersivegeology." + getName().toLowerCase()).getString();
     };
+
+    default float getDefaultNoiseProbability()
+    {
+        return instance().getNoiseProbability();
+    };
 }

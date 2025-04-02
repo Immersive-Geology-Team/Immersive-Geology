@@ -465,4 +465,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         return burntime > 0;
     }
+
+	public float getNoiseProbability()
+	{
+        return 0;
+	}
 }

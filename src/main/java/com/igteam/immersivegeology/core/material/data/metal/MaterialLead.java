@@ -58,4 +58,10 @@ public class MaterialLead extends MaterialNativeMetal
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
         return ((p, i) -> (0x444f53));
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.04425049f;
+    }
 }

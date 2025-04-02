@@ -115,4 +115,10 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     {
         return true;
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.19604492f;
+    }
 }

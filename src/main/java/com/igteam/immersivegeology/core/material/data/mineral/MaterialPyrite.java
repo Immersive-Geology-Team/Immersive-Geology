@@ -117,4 +117,10 @@ public class MaterialPyrite extends MaterialSulphideMineral
         return Set.of(directBlasting, sulphideElectrowining);
     }
 
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.089660645f;
+    }
 }

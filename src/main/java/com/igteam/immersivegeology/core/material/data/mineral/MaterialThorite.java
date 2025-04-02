@@ -46,4 +46,10 @@ public class MaterialThorite extends MaterialMineral {
     {
         return new LinkedHashSet<>(List.of(MetalEnum.Thorium, MetalEnum.Uranium));
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.2475586f;
+    }
 }

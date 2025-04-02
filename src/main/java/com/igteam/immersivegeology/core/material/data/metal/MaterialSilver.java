@@ -91,4 +91,10 @@ public class MaterialSilver extends MaterialNativeMetal {
         IGMethodBuilder.basicSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT,
                 ItemCategoryFlags.INGOT, 120);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.42559814f;
+    }
 }

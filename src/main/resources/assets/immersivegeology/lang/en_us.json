@@ -158,10 +158,10 @@
   "item.immersivegeology.hammer_stone": "Stone Work Hammer",
   "item.immersivegeology.bucket_molten": "Bucket of Molten %s",
   "item.immersivegeology.bucket": "Bucket of %",
-  "item.immersivegeology.clean_flask_slurry": "Flask of %s %s",
+  "item.immersivegeology.clean_flask_slurry": "Flask of %1$s %2$s",
   "item.immersivegeology.complex_clean_flask_slurry": "Flask of %s%s Acid",
   "item.immersivegeology.flask": "Flask of %s",
-  "item.immersivegeology.cloudy_flask_slurry": "Flask of Cloudy %s %s",
+  "item.immersivegeology.cloudy_flask_slurry": "Flask of Cloudy %1$s %2$s",
   "item.immersivegeology.empty_flask": "Empty %s Flask",
 
   "item.immersivegeology.ingot": "%s Ingot",
@@ -233,10 +233,9 @@
   "block.immersivegeology.stairs": "%s Stairs",
   "block.immersivegeology.storage": "Block of %s",
   "block.immersivegeology.evaporate": "%s Sediment",
-
-
-
   "formatting.space": " ",
+  "formatting.or": "or",
+  "formatting.and": "and",
   "material.immersivegeology.ore": "Ore",
   "material.immersivegeology.native": "Native",
   "material.immersivegeology.ore.poor": "Poor",
@@ -469,7 +468,8 @@
   "desc.immersiveengineering.info.mineral.deteriorated_igneous_rock" : "Deteriorated Radioactive Sediments",
   "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments",
 
-  "manual.immersivegeology.generic.desc": "The list below contains the generation information for %1$s",
+  "manual.immersivegeology.generic.desc": "The Spawning Properties of %1$s can be found on the next page.",
+  "manual.immersivegeology.generic.pre_chain_desc": "%1$s can be processed into %2$s, the processing chains available are detailed on the next page.",
   "manual.immersivegeology.min_y": "Min Y",
   "manual.immersivegeology.max_y": "Max Y",
   "manual.immersivegeology.min_temp": "Min Temperature",
@@ -480,6 +480,7 @@
   "manual.immersivegeology.vein_size": "Common Vein Size",
   "manual.immersivegeology.can_spawn": "Can Spawn",
   "manual.immersivegeology.density": "Vein Density",
+  "manual.immersivegeology.generation_probability": "64^2ca Probability",
 
   "advancement.immersivegeology.root": "Immersive Geology",
   "advancement.immersivegeology.root.desc": "Obtain refractory clay",

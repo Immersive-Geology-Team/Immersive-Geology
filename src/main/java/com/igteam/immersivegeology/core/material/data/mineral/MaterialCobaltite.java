@@ -90,4 +90,10 @@ public class MaterialCobaltite extends MaterialSulphideMineral
     {
         return Set.of(sulphideElectrowining);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.11743164f;
+    }
 }

@@ -64,7 +64,11 @@ public class MaterialSphalerite extends MaterialSulphideMineral
                 MetalEnum.Zinc.getStack(ItemCategoryFlags.METAL_OXIDE),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.75f, 200, 1000);
-
     }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.203125f;
+    }
 }

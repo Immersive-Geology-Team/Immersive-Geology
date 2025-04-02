@@ -73,4 +73,9 @@ public class MaterialWolframite extends MaterialMineral {
                 ItemCategoryFlags.POWDER);
     }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.12322998f;
+    }
 }

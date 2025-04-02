@@ -148,6 +148,7 @@ public class SpawnChunkCapture {
 			}
 			int total = (width*height);
 			float noise_probability = 1-((float)black/total);
+			IGLib.IG_LOGGER.info("{} Noise Probability: {}", data.name(), noise_probability);
 			double chunk_probability = (0.3333*((double)data.generationChance()/2_000_000));
 			double finalProb = noise_probability*chunk_probability*(MAP_SIZE_IN_CHUNKS * MAP_SIZE_IN_CHUNKS);
 			probability_map.put(material, (finalProb * 100));

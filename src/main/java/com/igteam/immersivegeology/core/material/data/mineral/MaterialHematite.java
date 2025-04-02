@@ -77,5 +77,9 @@ public class MaterialHematite extends MaterialMineral {
                 MetalEnum.Chromium.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
     }
 
-
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.96429443f;
+    }
 }

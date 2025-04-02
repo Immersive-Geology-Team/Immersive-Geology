@@ -97,4 +97,10 @@ public class MaterialGalena extends MaterialSulphideMineral
     {
         return Set.of(directBlasting, sulphideElectrowining);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.49456787f;
+    }
 }

@@ -64,4 +64,10 @@ public class MaterialApatite extends MaterialSulphideMineral {
     {
         super.setupRecipeStages();
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.30493164f;
+    }
 }

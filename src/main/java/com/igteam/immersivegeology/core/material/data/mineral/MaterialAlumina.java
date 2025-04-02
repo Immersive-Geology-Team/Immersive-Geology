@@ -105,4 +105,10 @@ public class MaterialAlumina extends MaterialMineral {
     {
         return Set.of(bayer_process);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.8157959f;
+    }
 }

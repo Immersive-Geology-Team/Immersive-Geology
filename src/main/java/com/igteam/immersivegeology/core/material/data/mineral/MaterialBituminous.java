@@ -49,4 +49,10 @@ public class MaterialBituminous extends MaterialMineral
 	{
 		return IGVeinTextureType.LAYERED;
 	}
+
+	@Override
+	public float getNoiseProbability()
+	{
+		return 0.17510986f;
+	}
 }

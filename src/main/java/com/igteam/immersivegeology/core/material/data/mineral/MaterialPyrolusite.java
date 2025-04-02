@@ -58,4 +58,9 @@ public class MaterialPyrolusite extends MaterialMineral {
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
     }
 
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.15496826f;
+    }
 }

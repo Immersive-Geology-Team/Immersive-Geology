@@ -108,4 +108,10 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
     {
         return Set.of(sulphideElectrowining);
     }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.124816895f;
+    }
 }
