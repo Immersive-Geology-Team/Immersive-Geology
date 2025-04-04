@@ -2,14 +2,8 @@
   "feature": "immersivegeology:iron",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Iron"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Iron"
     },
     {
       "type": "immersivegeology:ig_count",

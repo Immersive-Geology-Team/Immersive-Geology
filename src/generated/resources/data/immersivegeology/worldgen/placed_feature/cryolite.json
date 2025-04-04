@@ -2,14 +2,8 @@
   "feature": "immersivegeology:cryolite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Cryolite"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Cryolite"
     },
     {
       "type": "immersivegeology:ig_count",

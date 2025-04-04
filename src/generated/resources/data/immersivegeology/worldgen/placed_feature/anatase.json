@@ -2,14 +2,8 @@
   "feature": "immersivegeology:anatase",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Anatase"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Anatase"
     },
     {
       "type": "immersivegeology:ig_count",

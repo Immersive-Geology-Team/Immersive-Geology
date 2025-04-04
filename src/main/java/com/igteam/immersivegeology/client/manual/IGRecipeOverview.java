@@ -125,7 +125,6 @@ public class IGRecipeOverview extends SpecialManualElements
 
 					graphics.pose().pushPose();
 					graphics.pose().translate(0,0,999);
-					graphics.renderItem( new ItemStack(Items.BARRIER), -32,0);
 
 					graphics.pose().pushPose();
 					{
@@ -143,14 +142,17 @@ public class IGRecipeOverview extends SpecialManualElements
 					method.render(graphics,screen,renderX,renderY, mx, my);
 
 					graphics.pose().popPose();
-
-					if(mx > -32 && mx < -16 && my > -8 && my < 16)
+					if(mx > -8 && mx < 8 && my > -20 && my < -4)
 					{
+
 						if(GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1)==GLFW.GLFW_PRESS)
 						{
 							selectedNode = null;
 						}
+						graphics.setColor(.75f,.75f,.75f,1);
 					}
+					graphics.renderItem( new ItemStack(Items.BARRIER), -8,-20);
+					graphics.setColor(1,1,1,1);
 				}
 			}
 		}

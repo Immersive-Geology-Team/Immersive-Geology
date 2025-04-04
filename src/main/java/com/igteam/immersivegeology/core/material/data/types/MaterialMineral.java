@@ -27,7 +27,7 @@ public class MaterialMineral extends GeologyMaterial {
 
     public Set<IGRecipeChain> getRecipeChains()
     {
-        return Set.of(directBlasting);
+        return directBlasting.getRootNodes().isEmpty() ? Set.of() : Set.of(directBlasting);
     }
 
     @Override

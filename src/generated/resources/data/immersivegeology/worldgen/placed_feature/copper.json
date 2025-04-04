@@ -2,14 +2,8 @@
   "feature": "immersivegeology:copper",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Copper"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Copper"
     },
     {
       "type": "immersivegeology:ig_count",

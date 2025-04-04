@@ -92,4 +92,6 @@ public interface IWorldGenConfig
 	double getMinDownfall();
 
 	double getMaxDownfall();
+
+	long seed();
 }

@@ -2,14 +2,8 @@
   "feature": "immersivegeology:molybdenite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Molybdenite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Molybdenite"
     },
     {
       "type": "immersivegeology:ig_count",

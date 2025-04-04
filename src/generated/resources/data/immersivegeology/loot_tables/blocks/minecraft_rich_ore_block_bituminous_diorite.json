@@ -46,6 +46,23 @@
               "name": "immersivegeology:normal_ore_bituminous"
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.075,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "immersiveengineering:dust_sulfur"
         }
       ],
       "rolls": 1.0

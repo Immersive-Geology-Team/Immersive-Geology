@@ -2,14 +2,8 @@
   "feature": "immersivegeology:monazite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Monazite"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Monazite"
     },
     {
       "type": "immersivegeology:ig_count",

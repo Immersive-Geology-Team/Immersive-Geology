@@ -2,14 +2,8 @@
   "feature": "immersivegeology:thorite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Thorite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Thorite"
     },
     {
       "type": "immersivegeology:ig_count",

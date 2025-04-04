@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.MaterialNitricAcid;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
@@ -244,5 +245,11 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public IWorldGenConfig getConfig()
     {
         return this;
+    }
+
+    @Override
+    public long seed()
+    {
+        return IGOreFeatureConfig.hash(name());
     }
 }

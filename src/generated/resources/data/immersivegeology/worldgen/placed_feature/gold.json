@@ -2,14 +2,8 @@
   "feature": "immersivegeology:gold",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Gold"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Gold"
     },
     {
       "type": "immersivegeology:ig_count",

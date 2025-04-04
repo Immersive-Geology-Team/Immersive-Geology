@@ -29,7 +29,7 @@ public class MaterialSulphideMineral extends MaterialMineral
 	@Override
 	public Set<IGRecipeChain> getRecipeChains()
 	{
-		if(hasFlag(ItemCategoryFlags.PELLET)) return Set.of(this.directBlasting);
+		if(hasFlag(ItemCategoryFlags.PELLET) &! this.directBlasting.getRootNodes().isEmpty()) return Set.of(this.directBlasting);
 		return Set.of();
 	}
 }

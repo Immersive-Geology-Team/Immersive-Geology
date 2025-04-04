@@ -124,8 +124,8 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	public void tickServer(IMultiblockContext<State> ctx)
 	{
 		State state = ctx.getState();
-
-		insertRecipeToProcess(state, ctx);
+		boolean isEnabled = state.rsState.isEnabled(ctx);
+		if(isEnabled) insertRecipeToProcess(state, ctx);
 
 		state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
 
@@ -152,6 +152,10 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 					Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), false);
 					itemStack.shrink(1);
 				}
+			}
+			if(state.processor.getQueueSize() > 0)
+			{
+				state.clearProcessor();
 			}
 		}
 
@@ -203,6 +207,13 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 					state.processor.addProcessToQueue(process, level, false);
 					ctx.markMasterDirty();
 				}
+			}
+		}
+		else
+		{
+			if(state.processor.getQueueSize() > 0)
+			{
+				state.clearProcessor();
 			}
 		}
 	}
@@ -291,7 +302,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		if(TANK_FRONT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.output.getFluid()));
 		if(REACTOR_CHAMBER_POSITIONS.contains(posInMultiblock)) {
 			ItemStack input = state.inventory.getStackInSlot(0);
-			if(!input.isEmpty()) return List.of(Component.literal(input.toString()), Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
+			if(!input.isEmpty()) return List.of(Component.translatable(input.getDescriptionId()), Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 		}
 		return List.of(Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 	}
@@ -332,6 +343,8 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 		private final CapabilityReference<IFluidHandler> fluidOutput;
 
+		private final MultiblockProcessor.InMachineProcessor<ChemicalRecipe> dummy;
+
 		public State(IInitialMultiblockContext<State> ctx)
 		{
 			final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
@@ -357,6 +370,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			this.outputCap = new StoredCapability<>(ArrayFluidHandler.drainOnly(this.tanks.output, markDirty));
 			cachedRecipe = () -> ChemicalRecipe.findRecipe(getLevel.get(), tanks.leftInput.getFluid(), tanks.backInput.getFluid(), tanks.rightInput.getFluid(), inventory.getStackInSlot(0));
 			this.itemInputCap = new StoredCapability<>(this.inventory);
+			this.dummy = new InMachineProcessor<>(16, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
 		}
 
 		@Override
@@ -366,6 +380,11 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			this.tanks.readNBT(nbt.getCompound("tanks"));
 			this.inventory.deserializeNBT(nbt.getCompound("inventory"));
 			this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
+		}
+
+		public void clearProcessor()
+		{
+			this.processor.fromNBT(dummy.toNBT(), MultiblockProcessInMachine::new);
 		}
 
 		@Override

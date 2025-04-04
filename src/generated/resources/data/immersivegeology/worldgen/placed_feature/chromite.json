@@ -2,14 +2,8 @@
   "feature": "immersivegeology:chromite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Chromite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Chromite"
     },
     {
       "type": "immersivegeology:ig_count",

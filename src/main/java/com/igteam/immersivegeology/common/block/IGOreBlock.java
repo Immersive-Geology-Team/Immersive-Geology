@@ -8,8 +8,11 @@
 
 package com.igteam.immersivegeology.common.block;
 
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -18,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +30,7 @@ import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -117,5 +122,13 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
 			return ore_mat.getStack(this.getOreRichness().toCategory());
         }
 		return ore_mat.getStack(ItemCategoryFlags.NORMAL_ORE, 1 + this.getOreRichness().ordinal());
+    }
+
+    @Override
+    public List<Pair<ItemStack, Float>> getExtraDrops()
+    {
+        MaterialInterface<?> ore_mat = getMaterial(MaterialTexture.overlay);
+        if(ore_mat.equals(MineralEnum.Bituminous)) return List.of(Pair.of(new ItemStack(Ingredients.DUST_SULFUR), 0.075f));
+        return List.of();
     }
 }

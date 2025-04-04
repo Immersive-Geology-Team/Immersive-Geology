@@ -2,14 +2,8 @@
   "feature": "immersivegeology:cobaltite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Cobaltite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Cobaltite"
     },
     {
       "type": "immersivegeology:ig_count",

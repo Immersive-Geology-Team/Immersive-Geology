@@ -2,14 +2,8 @@
   "feature": "immersivegeology:scheelite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Scheelite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Scheelite"
     },
     {
       "type": "immersivegeology:ig_count",

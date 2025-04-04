@@ -88,7 +88,7 @@ public class IGMineralTestingItem extends IGGenericItem
 		Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
 		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
 		int height = centreChunk.getHeight();
-		for(int y = 0; y < height; ++y)
+		for(int y = -64; y < height; ++y)
 		{
 			for(int x = -16; x < 32; ++x)
 			{
@@ -99,6 +99,10 @@ public class IGMineralTestingItem extends IGGenericItem
 					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
+					}
+					else
+					{
+						level.removeBlock(cursor, false);
 					}
 				}
 			}

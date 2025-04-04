@@ -2,14 +2,8 @@
   "feature": "immersivegeology:acanthite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Acanthite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Acanthite"
     },
     {
       "type": "immersivegeology:ig_count",

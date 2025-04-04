@@ -266,7 +266,7 @@ public class IGContent {
 
         map.put(Component.translatable("manual.immersivegeology.can_spawn"), config.canSpawn.get() ? 1.0 : 0.0);
 
-        double chunk_probability = (0.3333*((double)config.generationChance.get()/2_000_000));
+        double chunk_probability = (double) config.generationChance.get()/2_000_000;
         double finalProb = noise_probability*chunk_probability*(64 * 64);
         map.put(Component.translatable("manual.immersivegeology.generation_probability"), finalProb);
 

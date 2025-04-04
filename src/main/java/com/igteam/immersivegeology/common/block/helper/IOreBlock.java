@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface IOreBlock
 {
@@ -44,4 +46,6 @@ public interface IOreBlock
 	ModFlags getModFlag();
 
 	ItemStack getItemDrop();
+
+	List<Pair<ItemStack, Float>> getExtraDrops();
 }

@@ -2,14 +2,8 @@
   "feature": "immersivegeology:smithsonite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Smithsonite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Smithsonite"
     },
     {
       "type": "immersivegeology:ig_count",

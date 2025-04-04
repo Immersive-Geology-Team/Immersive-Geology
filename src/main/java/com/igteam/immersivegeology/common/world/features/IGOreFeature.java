@@ -7,6 +7,7 @@
  */
 
 package com.igteam.immersivegeology.common.world.features;
+import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -17,6 +18,7 @@ import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatu
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Either;
@@ -31,11 +33,13 @@ import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -68,28 +72,22 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	public boolean place(FeaturePlaceContext<IGOreFeatureConfig> ctx)
 	{
 		IGOreFeatureConfig config = ctx.config();
-		if(!config.canSpawn()) return false;
-		ChunkGenerator chunkGenerator = ctx.chunkGenerator();
-		BiomeSource biomeSource = chunkGenerator.getBiomeSource();
-
 		WorldGenLevel level = ctx.level();
 		BlockPos pos = ctx.origin();
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry);
-		RandomSource random = new XoroshiroRandomSource(level.getSeed() ^ (long)chunkPos.x * 61728364132L, config.seed ^ (long)chunkPos.z * 16298364123L);
+		RandomSource random = config.getChunkRandom(chunkPos, level.getSeed());
 
-		if(config.canPlaceVein(chunkPos, level.getSeed(), biomeSource.getNoiseBiome(pos.getX(), pos.getY(), pos.getZ(), Climate.empty())))
-		{
-			Vein vein = createVein(random, rConfig, config.seed());
-			int bestY = config.findOptimalYLevel(vein, pos, rConfig.maxY.get(), rConfig.minY.get());
-			if(config.isVeinWorthwhile(chunkPos, bestY, vein))
-			{
-				IGOreFeature.placeVein(level, random, chunkPos, vein, config);
-			}
-		}
+		Vein vein = createVein(random, rConfig, config.seed());
+		int bestY = config.findOptimalYLevel(vein, pos, rConfig.maxY.get(), rConfig.minY.get());
+		//if(config.isVeinWorthwhile(chunkPos, bestY, vein))
+		//{
+			IGOreFeature.placeVein(level, random, chunkPos, vein, config);
+			return true;
+		//}
 
-		return false;
+		//return false;
 	}
 
 	public static String formatTime(long timeInNanoSeconds) {
@@ -251,7 +249,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					// Generate noise with boundary adjustment
 					// This prevents harsh edges on chunk boundaries when generating our ours.
 					double noiseValue = noiseGenerator.noise(worldX, y, worldZ) * boundaryMultiplier;
-					if (shouldPlaceOre(noiseValue, vein, config)) {
+					if (noiseValue > THRESHOLD) {
 						BlockState stoneState = chunk.getBlockState(cursor);
 						if (stoneState.isAir()) continue;
 
@@ -288,10 +286,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		}
 
 		return 1.0;
-	}
-
-	private static boolean shouldPlaceOre(double noiseValue, Vein vein, IGOreFeatureConfig config) {
-		return noiseValue > THRESHOLD;
 	}
 
 	private static final Direction[] DIRECTIONS = Direction.values();
@@ -370,18 +364,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 				RandomSupport.Seed128bit seed128 = RandomSupport.seedFromHashOf(k);
 				return seed128.seedLo() ^ seed128.seedHi();
 			});
-		}
-
-		public boolean canSpawnAt(BlockPos pos, Function<BlockPos, Holder<Biome>> biomeQuery) {
-			Holder<Biome> biome = biomeQuery.apply(pos);
-			float biomeTemp = biome.value().getBaseTemperature();
-			float biomeDownfall = biome.value().getModifiedClimateSettings().downfall();
-
-			OreConfig config = getConfig();
-			return biomeTemp >= config.min_temp.get() &&
-					biomeTemp <= config.max_temp.get() &&
-					biomeDownfall >= config.min_downfall.get() &&
-					biomeDownfall <= config.max_downfall.get();
 		}
 
 		public int getRarity() {
@@ -483,6 +465,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			return sum / num;
 		}
 
+
 		public BlockState getStateToGenerate(BlockState stoneState, double noiseValue, MaterialHelper mineral) {
 			StoneEnum stone = null;
 			if (stoneState.is(Blocks.NETHERRACK)) stone = StoneEnum.MCNetherrack;
@@ -540,16 +523,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					level_seed ^ (long)pos.x * 61728364132L,
 					seed ^ (long)pos.z * 16298364123L
 			);
-		}
-
-		public boolean canPlaceVein(ChunkPos pos, long level_seed, Holder<Biome> biome) {
-			OreConfig config = getConfig();
-			if (config.veinSize.get() <= 0) return false;
-			RandomSource random = getChunkRandom(pos, level_seed);
-			int chance_max = 2_000_000;
-
-			return random.nextInt(chance_max) < getChanceToGenerate() &&
-					canSpawnAt(pos.getWorldPosition(), (p) -> biome);
 		}
 
 		public double noise(ChunkPos pos, int x, int y, int z, @NotNull Vein vein) {

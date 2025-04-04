@@ -2,14 +2,8 @@
   "feature": "immersivegeology:chalcocite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Chalcocite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Chalcocite"
     },
     {
       "type": "immersivegeology:ig_count",

@@ -2,14 +2,8 @@
   "feature": "immersivegeology:gypsum",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Gypsum"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Gypsum"
     },
     {
       "type": "immersivegeology:ig_count",

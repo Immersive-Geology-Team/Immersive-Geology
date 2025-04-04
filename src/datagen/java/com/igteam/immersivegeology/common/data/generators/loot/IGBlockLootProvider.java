@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.data.generators.loot;
 
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.common.util.loot.BEDropLootEntry;
 import blusunrize.immersiveengineering.common.util.loot.DropInventoryLootEntry;
@@ -19,11 +20,13 @@ import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds.Ints;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -51,13 +54,12 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.*;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -96,7 +98,7 @@ public class IGBlockLootProvider implements LootTableSubProvider
 				Block block = block_object.get();
 				if(block instanceof IOreBlock ore)
 				{
-					this.registerOre(block_object, ore.getItemDrop());
+					this.registerOreSpecial(block_object, ore.getItemDrop(), ore.getExtraDrops());
 				}
 				if(block instanceof IGCrystalBlock crystal)
 				{
@@ -231,10 +233,34 @@ public class IGBlockLootProvider implements LootTableSubProvider
 	private void registerOre(Supplier<Block> ore, ItemStack rawOre) {
 		LootPool.Builder pool_builder = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F));
 		pool_builder.add((LootItem.lootTableItem(rawOre.getItem())
-						.when(MatchTool.toolMatches(net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
-								.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, Ints.atLeast(1))))))
-						.otherwise(LootItem.lootTableItem(rawOre.getItem()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(rawOre.getCount()))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-								.apply(ApplyExplosionDecay.explosionDecay())));
+				.when(MatchTool.toolMatches(net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
+						.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, Ints.atLeast(1))))))
+				.otherwise(LootItem.lootTableItem(rawOre.getItem()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(rawOre.getCount()))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+						.apply(ApplyExplosionDecay.explosionDecay())));
+
+		LootTable.Builder ret = LootTable.lootTable()
+				.withPool(pool_builder);
+		this.register(ore, ret);
+	}
+
+	private void registerOreSpecial(Supplier<Block> ore, ItemStack rawOre, List<Pair<ItemStack, Float>> extras) {
+		LootPool.Builder pool_builder = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F));
+		pool_builder.add((LootItem.lootTableItem(rawOre.getItem())
+				.when(MatchTool.toolMatches(net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
+						.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, Ints.atLeast(1))))))
+				.otherwise(LootItem.lootTableItem(rawOre.getItem()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(rawOre.getCount()))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+						.apply(ApplyExplosionDecay.explosionDecay())));
+
+		for(Pair<ItemStack, Float> entry : extras)
+		{
+			ItemStack item = entry.getFirst();
+
+			float chance = entry.getSecond();
+			pool_builder.add(LootItem.lootTableItem(item.getItem())
+					.apply(SetItemCountFunction.setCount(ConstantValue.exactly(item.getCount())))
+					.when(LootItemRandomChanceCondition.randomChance(chance))  // Chance from the extras
+			);
+		}
 
 		LootTable.Builder ret = LootTable.lootTable()
 				.withPool(pool_builder);

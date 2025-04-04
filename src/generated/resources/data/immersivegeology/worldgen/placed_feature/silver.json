@@ -2,14 +2,8 @@
   "feature": "immersivegeology:silver",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Silver"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Silver"
     },
     {
       "type": "immersivegeology:ig_count",

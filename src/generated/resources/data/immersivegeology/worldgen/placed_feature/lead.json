@@ -2,14 +2,8 @@
   "feature": "immersivegeology:lead",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Lead"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Lead"
     },
     {
       "type": "immersivegeology:ig_count",

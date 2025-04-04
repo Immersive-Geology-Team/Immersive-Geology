@@ -36,10 +36,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -104,7 +101,7 @@ public class IGWorldGenerationProvider
 		for(final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet())
 		{
 			IWorldGenConfig data = entry.getKey();
-			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, IGOreFeatureConfig.hash(data.name()), data.getMinSpawnTemp(), data.getMaxSpawnTemp(), data.getMinDownfall(), data.getMaxDownfall())));
+			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(IGWorldGen.IG_CONFIG_ORE.get(), new IGOreFeatureConfig(data, data.seed(), data.getMinSpawnTemp(), data.getMaxSpawnTemp(), data.getMinDownfall(), data.getMaxDownfall())));
 		}
 
 		for (Map.Entry<IWorldGenConfig, FeatureRegistration> entry : evaporiteFeatures.entrySet())
@@ -128,8 +125,7 @@ public class IGWorldGenerationProvider
 		for (final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet()) {
 			final IWorldGenConfig type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
-					HeightRangePlacement.of(new IGHeightProvider(type)),
-					type.useSparsePlacement() ? IGSparsePlacement.spread() : InSquarePlacement.spread(),
+					new IGDefaultPlacement(type),
 					new IGCountPlacement(type)
 			);
 			// Register the placed feature
@@ -140,7 +136,7 @@ public class IGWorldGenerationProvider
 			final IWorldGenConfig type = entry.getKey();
 			final List<PlacementModifier> placements = List.of(
 					HeightRangePlacement.of(new IGHeightProvider(type)),
-					type.useSparsePlacement() ? IGSparsePlacement.spread() : IGDefaultPlacement.spread(),
+					InSquarePlacement.spread(),
 					new IGCountPlacement(type)
 			);
 			// Register the placed feature

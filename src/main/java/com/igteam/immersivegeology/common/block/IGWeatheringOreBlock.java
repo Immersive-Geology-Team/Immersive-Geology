@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -180,6 +181,12 @@ public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
     public ItemStack getItemDrop()
     {
 		return this.getMaterial(MaterialTexture.overlay).getStack(this.getOreRichness().toCategory());
+    }
+
+    @Override
+    public List<Pair<ItemStack, Float>> getExtraDrops()
+    {
+        return List.of();
     }
 
 

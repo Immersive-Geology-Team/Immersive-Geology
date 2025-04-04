@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.mineral.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -210,8 +211,15 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     }
 
     @Override
+    public long seed()
+    {
+        return IGOreFeatureConfig.hash(name());
+    }
+
+    @Override
     public IWorldGenConfig getConfig()
     {
         return this;
     }
+
 }

@@ -2,14 +2,8 @@
   "feature": "immersivegeology:unobtania",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Unobtania"
-      }
-    },
-    {
-      "type": "immersivegeology:ig_sparse"
+      "type": "immersivegeology:ig_default",
+      "value": "Unobtania"
     },
     {
       "type": "immersivegeology:ig_count",

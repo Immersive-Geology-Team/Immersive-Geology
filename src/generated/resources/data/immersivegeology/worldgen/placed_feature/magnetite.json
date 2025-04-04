@@ -2,14 +2,8 @@
   "feature": "immersivegeology:magnetite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Magnetite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Magnetite"
     },
     {
       "type": "immersivegeology:ig_count",

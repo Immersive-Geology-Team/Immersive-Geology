@@ -2,14 +2,8 @@
   "feature": "immersivegeology:thorianite",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Thorianite"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Thorianite"
     },
     {
       "type": "immersivegeology:ig_count",

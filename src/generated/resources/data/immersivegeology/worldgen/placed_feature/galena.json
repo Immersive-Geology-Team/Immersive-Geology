@@ -2,14 +2,8 @@
   "feature": "immersivegeology:galena",
   "placement": [
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "immersivegeology:ig_range",
-        "value": "Galena"
-      }
-    },
-    {
-      "type": "minecraft:in_square"
+      "type": "immersivegeology:ig_default",
+      "value": "Galena"
     },
     {
       "type": "immersivegeology:ig_count",
