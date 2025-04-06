@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialSphalerite extends MaterialSulphideMineral

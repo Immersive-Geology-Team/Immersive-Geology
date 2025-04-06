@@ -504,7 +504,7 @@ public class IGRecipes extends RecipeProvider
 				.build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_" + mineralName + "_to_coke"));
 
 		CokeOvenRecipeBuilder.builder(IETags.getItemTag(IETags.coalCokeBlock), 1)
-				.addInput(mineral.getItem(ItemCategoryFlags.NORMAL_ORE))
+				.addInput(mineral.getBlock(BlockCategoryFlags.STORAGE_BLOCK))
 				.setOil(5000).setTime(16200)
 				.build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_block_" + mineralName + "_to_coke"));
 	}

@@ -2,9 +2,8 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -34,7 +33,7 @@ public class MaterialCuprite extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 		addFlags(ItemCategoryFlags.PELLET);
 
-		CONFIG = new MineralConfig(30, 50, 1, 0, 200, 3570, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+		CONFIG = new MineralConfig(30, 50, 1, -64, 200, 3570, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
 	}
 
 	public boolean canTarnish()

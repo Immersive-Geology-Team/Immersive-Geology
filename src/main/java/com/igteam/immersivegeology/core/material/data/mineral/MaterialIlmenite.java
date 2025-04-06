@@ -1,6 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -32,7 +32,7 @@ public class MaterialIlmenite extends MaterialMineral {
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-        CONFIG = new MineralConfig(22,40,2,5,140,2000, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(33,40,2,5,140,2000, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
     }
 
     @Override

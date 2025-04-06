@@ -6,7 +6,7 @@
  * Details can be found in the license file in the root folder of this project
  */
 
-package com.igteam.immersivegeology.common.world.features.helper;
+package com.igteam.immersivegeology.common.world.features.helper.noise;
 
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 

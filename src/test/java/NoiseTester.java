@@ -1,19 +1,15 @@
-import com.igteam.immersivegeology.common.world.features.helper.GenerationBandedNoise;
-import com.igteam.immersivegeology.common.world.features.helper.GenerationTubedNoise;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.common.world.features.helper.IGenerationPattern;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
 
 import javax.imageio.*;
 import javax.imageio.stream.ImageOutputStream;
-import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class NoiseTester {
 	public static void main(String[] args) {

@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -15,7 +14,6 @@ import net.minecraft.tags.BiomeTags;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialCassiterite extends MaterialMineral {
@@ -31,7 +29,7 @@ public class MaterialCassiterite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(40,50,1,0,175,2590, 0.5,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(40,50,1,-64,175,2590, 0.5,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
     }
 
     @Override

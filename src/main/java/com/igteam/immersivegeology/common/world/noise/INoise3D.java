@@ -8,10 +8,16 @@
 
 package com.igteam.immersivegeology.common.world.noise;
 
+import net.minecraft.core.BlockPos;
+
 @FunctionalInterface
 public interface INoise3D
 {
 	float noise(float x, float y, float z);
+	default float noise(BlockPos pos)
+	{
+		return noise(pos.getX(), pos.getY(), pos.getZ());
+	}
 
 	default INoise3D octaves(int octaves)
 	{

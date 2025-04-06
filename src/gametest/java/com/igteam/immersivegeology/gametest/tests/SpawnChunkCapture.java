@@ -12,12 +12,11 @@ import com.igteam.immersivegeology.common.block.IGOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
-import com.igteam.immersivegeology.common.world.IWorldGenConfig;
+import com.igteam.immersivegeology.common.world.IGDefaultPlacement;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.Vein;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
-import com.igteam.immersivegeology.common.world.noise.INoise3D;
+import com.igteam.immersivegeology.common.world.features.helper.IGOreGenUtils;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -28,7 +27,6 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -37,7 +35,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.material.MapColor.Brightness;
@@ -47,11 +44,8 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -62,7 +56,7 @@ import java.util.stream.Collectors;
 public class SpawnChunkCapture {
 	// Constants
 	private static final int CHUNK_SIZE = 16;
-	private static final int MAP_SIZE_IN_CHUNKS = 32;
+	private static final int MAP_SIZE_IN_CHUNKS = 64; // MUST ALWAYS BE A POWER OF 2
 	private static final int IMAGE_SIZE = CHUNK_SIZE * MAP_SIZE_IN_CHUNKS;
 	private static final String BASE_PATH = "../src/main/resources/assets/immersivegeology/textures/";
 	private static final double NOISE_THRESHOLD = IGOreFeature.THRESHOLD;
@@ -104,7 +98,6 @@ public class SpawnChunkCapture {
 
 		server = level.getServer();
 		seed = level.getSeed();
-
 		BlockPos spawnPos = level.getSharedSpawnPos();
 		try {
 			BufferedImage image = generateMapImage(level, spawnPos);
@@ -112,19 +105,6 @@ public class SpawnChunkCapture {
 			helper.succeed();
 		} catch (Exception e) {
 			helper.fail("Error generating map: " + e.getMessage());
-		}
-	}
-
-	/**
-	 * Analyzes the probability distribution of mineral spawns
-	 */
-	@GameTest
-	public static void analyzeMineralDistribution(GameTestHelper helper) {
-		try {
-			checkMineralDistributionProps(helper);
-			helper.succeed();
-		} catch (Exception e) {
-			helper.fail("Error analyzing mineral distribution: " + e.getMessage());
 		}
 	}
 
@@ -170,26 +150,25 @@ public class SpawnChunkCapture {
 			for (int chunkZ = -size; chunkZ < size; chunkZ++) {
 				ChunkPos chunkPos = new ChunkPos(spawnChunkX + chunkX, spawnChunkZ + chunkZ);
 				LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
-
-				renderChunkToImage(chunk, g2d, chunkX + size, chunkZ + size);
-
-				// Check for custom ore features
 				Holder<Biome> biomeHolder = chunk.getNoiseBiome(8, 64, 8);
-				isCustomOreFeaturePresent(biomeHolder, chunkPos);
+				isCustomOreFeaturePresent(biomeHolder, chunkPos, g2d);
+				renderChunkToImage(chunk, g2d);
 
 				processed++;
-				if (processed % MAP_SIZE_IN_CHUNKS == 0) {
+				if ((processed & (MAP_SIZE_IN_CHUNKS-1)) == 0) {
 					double percentComplete = (processed * 100.0) / totalChunks;
 					IGLib.IG_LOGGER.info("Map Generation: {}%", percentComplete);
 				}
 			}
 		}
+
+		printFormattedTime(calculateMedian(functionTimes));
 	}
 
 	/**
 	 * Renders a single chunk to the image
 	 */
-	private static void renderChunkToImage(LevelChunk chunk, Graphics2D g2d, int chunkXOffset, int chunkZOffset) {
+	private static void renderChunkToImage(LevelChunk chunk, Graphics2D g2d) {
 		final int blockSize = 1;
 		for (int x = 0; x < CHUNK_SIZE; x++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
@@ -203,17 +182,46 @@ public class SpawnChunkCapture {
 				int col = blockState.is(Blocks.WATER)
 						? biome.getWaterColor()
 						: blockState.getBlock().defaultMapColor().calculateRGBColor(Brightness.HIGH);
-				Color blockColor = new Color(col);
 
+				// Extract components
+				int red = (col >> 16) & 0xFF;
+				int green = (col >> 8) & 0xFF;
+				int blue = col & 0xFF;
+
+				// Swap red and blue
+				int swappedColor = (blue << 16) | (green << 8) | red;
+				Color blockColor = new Color(blockState.is(Blocks.WATER) ? col : swappedColor);
+				ChunkPos pos = chunk.getPos();
 				// Draw block
-				int xPos = (chunkXOffset * CHUNK_SIZE) + x;
-				int zPos = (chunkZOffset * CHUNK_SIZE) + z;
+				int xPos = ((pos.x + (MAP_SIZE_IN_CHUNKS/2)) * CHUNK_SIZE) + x;
+				int zPos = ((pos.z + (MAP_SIZE_IN_CHUNKS/2)) * CHUNK_SIZE) + z;
 				g2d.setColor(blockColor);
 				g2d.fillRect(xPos, zPos, blockSize, blockSize);
+				for(int y = -64; y < 320; y++)
+				{
+					blockState = chunk.getBlockState(new BlockPos(xPos, y, zPos));
+					if(blockState.isAir()) continue;
+					if(blockState.getBlock() instanceof IGOreBlock block)
+					{
+						OreRichness grade = block.getOreRichness();
+
+						// Color based on ore richness
+						switch(grade)
+						{
+							case POOR -> g2d.setColor(Color.RED);
+							case NORMAL -> g2d.setColor(Color.YELLOW);
+							case RICH -> g2d.setColor(Color.GREEN);
+						}
+
+						g2d.drawRect(xPos, zPos, 1, 1);
+						break;
+					}
+				}
 			}
 		}
 	}
 
+	static int MAP_BLOCK_SIZE = (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE);
 	/**
 	 * Renders all mineral deposits on the map
 	 */
@@ -228,76 +236,79 @@ public class SpawnChunkCapture {
 			if(material==null) continue;
 
 			ChunkPos p = entry.getKey();
-			int depositWidth = CHUNK_SIZE;
-			int depositHeight = CHUNK_SIZE;
+			int radius = 48;
 			BlockPos centerPos = p.getMiddleBlockPosition(0);
-			boolean render = renderDepositDetails(level, g2d, feature, centerPos, depositWidth, depositHeight);
-
-			if(render)
-			{
-				int mapX = (centerPos.getX() + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE);
-				int mapZ = (centerPos.getZ() + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE);
-				g2d.setColor(Color.red);
-				g2d.setStroke(new BasicStroke(1));
-				g2d.drawRect(mapX,mapZ,depositWidth,depositHeight);
-				g2d.setColor(Color.white);
-				g2d.drawString(material.getName(), mapX, mapZ);
-			}
+			centerPos = centerPos.offset(-24,0,-24);
+			int mapX = (centerPos.getX() + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % MAP_BLOCK_SIZE;
+			int mapZ = (centerPos.getZ() + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % MAP_BLOCK_SIZE;
+			g2d.setColor(Color.DARK_GRAY);
+			g2d.setStroke(new BasicStroke(1));
+			g2d.drawRect(mapX,mapZ,radius,radius);
+			g2d.setColor(Color.green);
+			g2d.setStroke(new BasicStroke(1));
+			g2d.drawRect(mapX + CHUNK_SIZE,mapZ + CHUNK_SIZE,CHUNK_SIZE,CHUNK_SIZE);
+			g2d.setColor(Color.white);
+			OreConfig rConfig = IGServerConfig.ORES.ores.get(feature.entry());
+			int maxY =  rConfig.maxY.get();
+			int minY =  rConfig.minY.get();
+			RandomSource random = IGOreGenUtils.getReuseRandom(feature.entry(), level.getSeed(), p);
+			Vein vein = IGOreFeature.createVein(random, rConfig, feature.entry());
+			renderDepositDetails(level, g2d, feature, p, 48);
+			float worthyness =  IGOreGenUtils.getWorthwhileCount(level, p,  maxY, minY, vein, g2d);
+			String worthString = String.format("%.2f", Math.floor(worthyness * 100));
+			g2d.drawString(worthString, mapX, mapZ+48);
 		}
-
-		// Log median performance time
-		printFormattedTime(calculateMedian(functionTimes));
 	}
 
 	/**
 	 * Renders detailed information about a specific deposit
 	 */
-	private static boolean renderDepositDetails(ServerLevel level, Graphics2D g2d, IGOreFeatureConfig feature,
-												BlockPos p, int width, int height) {
-		boolean oreFound = false;
-		int worldX = p.getX();
-		int worldZ = p.getZ();
+	private static void renderDepositDetails(ServerLevel level, Graphics2D g2d, IGOreFeatureConfig feature,
+											 ChunkPos chunkPos, int radius) {
+		int total = radius * radius;
+		BlockPos worldPos = chunkPos.getWorldPosition();
+		int chunkXPos = worldPos.getX() - 16;
+		int chunkZPos = worldPos.getZ() - 16;
+		int mapX = (chunkXPos + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % MAP_BLOCK_SIZE;
+		int mapZ = (chunkZPos + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % MAP_BLOCK_SIZE;
 
-		// Convert world coordinates to map coordinates
-		int mapX = (worldX + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE);
-		int mapZ = (worldZ + (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE) / 2) % (MAP_SIZE_IN_CHUNKS * CHUNK_SIZE);
+		for(int index = 0; index < total; index++)
+		{
+			int x = index%radius;
+			int z = index/radius;
+			final int xPos = chunkXPos+x;
+			final int zPos = chunkZPos+z;
 
-		// Scan for ore blocks
-		for (int x = 0; x < width; x++) {
-			for (int z = 0; z < height; z++) {
-				for (int y = -64; y < 192; y++) {
-					int xPos = worldX + x - width/2;
-					int zPos = worldZ + z - height/2;
+			for(int y = -64; y < 320; y++)
+			{
+				BlockState blockState = level.getBlockState(new BlockPos(xPos, y, zPos));
+				if(blockState.isAir()) continue;
 
-					BlockState blockState = level.getBlockState(new BlockPos(xPos, y, zPos));
-					if (blockState.isAir()) continue;
+				if(blockState.getBlock() instanceof IGOreBlock block)
+				{
+					OreRichness grade = block.getOreRichness();
 
-					if (blockState.getBlock() instanceof IGOreBlock block) {
-						OreRichness grade = block.getOreRichness();
+					// Color based on ore richness
+					switch(grade)
+					{
+						case POOR -> g2d.setColor(new Color(255,0,0,30));
+						case NORMAL -> g2d.setColor(new Color(255, 255, 0, 30));
+						case RICH -> g2d.setColor(new Color(0, 255, 0, 30));
+					}
 
-						// Color based on ore richness
-						switch (grade) {
-							case POOR -> g2d.setColor(Color.RED);
-							case NORMAL -> g2d.setColor(Color.YELLOW);
-							case RICH -> g2d.setColor(Color.GREEN);
-						}
+					// Draw the ore location
+					int drawX = mapX+x;
+					int drawZ = mapZ+z;
 
-						// Draw the ore location
-						int drawX = mapX + x - width/2;
-						int drawZ = mapZ + z - height/2;
-
-						// Ensure we're drawing within bounds
-						if (drawX >= 0 && drawX < IMAGE_SIZE && drawZ >= 0 && drawZ < IMAGE_SIZE) {
-							g2d.drawRect(drawX, drawZ, 1, 1);
-							oreFound = true;
-						}
-						break;
+					// Ensure we're drawing within bounds
+					if(drawX >= 0&&drawX < IMAGE_SIZE&&drawZ >= 0&&drawZ < IMAGE_SIZE)
+					{
+						g2d.drawRect(drawX, drawZ, 1, 1);
 					}
 				}
 			}
 		}
-
-		return oreFound;
+		g2d.setColor(Color.WHITE);
 	}
 
 	// ===============================
@@ -309,206 +320,23 @@ public class SpawnChunkCapture {
 	/**
 	 * Checks if a custom ore feature is present in the given biome at the position
 	 */
-	private static void isCustomOreFeaturePresent(Holder<Biome> biomeHolder, ChunkPos pos) {
+	private static void isCustomOreFeaturePresent(Holder<Biome> biomeHolder, ChunkPos pos, Graphics2D g2d) {
 		Biome biome = biomeHolder.get();
 		List<HolderSet<PlacedFeature>> features = biome.getGenerationSettings().features();
-
 		for (HolderSet<PlacedFeature> featureSet : features) {
 			for (Holder<PlacedFeature> featureHolder : featureSet) {
 				ConfiguredFeature<?, ?> feature = featureHolder.value().feature().get();
 				if (feature.config() instanceof IGOreFeatureConfig igConfig) {
-					toRender.put(pos, igConfig);
+					IGDefaultPlacement t = new IGDefaultPlacement(igConfig.entry());
+					if(t.exposedPlace(seed, server.overworld(), pos, g2d))
+					{
+						toRender.put(pos, igConfig);
+						return;
+					}
 				}
 			}
 		}
 	}
-
-	// ===============================
-	// Noise Map Generation Methods
-	// ===============================
-
-	/**
-	 * Generates a noise distribution image for the given ore config
-	 */
-	private static BufferedImage pregenNoiseDistribution(IGOreFeatureConfig config) {
-		BufferedImage image = new BufferedImage(MAP_SIZE_IN_CHUNKS, MAP_SIZE_IN_CHUNKS, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2d = image.createGraphics();
-		configureGraphics(g2d);
-		renderNoiseDistribution(g2d, config);
-		g2d.dispose();
-		return image;
-	}
-
-	/**
-	 * Renders noise distribution for ore veins
-	 */
-	private static void renderNoiseDistribution(Graphics2D g2d, IGOreFeatureConfig config) {
-		int size = MAP_SIZE_IN_CHUNKS / 2;
-		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry());
-		int y = config.entry().getMinY() + 8;
-
-		if (rConfig == null) return;
-
-		for (int chunkX = -size; chunkX < size; chunkX++) {
-			for (int chunkZ = -size; chunkZ < size; chunkZ++) {
-				ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
-
-				// Create deterministic random based on chunk position and config seed
-				RandomSource random = new XoroshiroRandomSource(
-						seed ^ (long)chunkPos.x * 61728364132L,
-						config.seed() ^ (long)chunkPos.z * 16298364123L
-				);
-
-				// Create and evaluate vein
-				Vein vein = IGOreFeature.createVein(random, rConfig, config.seed());
-				boolean hasSpawn = scanChunkForOre(chunkPos, y, vein);
-
-				// Verify vein is worthwhile
-				if (hasSpawn) {
-					BlockPos centerPos = chunkPos.getMiddleBlockPosition(0);
-					int bestY = config.findOptimalYLevel(
-							vein,
-							centerPos,
-							rConfig.maxY.get(),
-							rConfig.minY.get()
-					);
-					hasSpawn = config.isVeinWorthwhile(chunkPos, bestY, vein);
-				}
-
-				// Draw result
-				g2d.setColor(hasSpawn ? Color.WHITE : Color.BLACK);
-				g2d.drawRect(chunkX + size, chunkZ + size, 1, 1);
-			}
-		}
-	}
-
-	/**
-	 * Scans a chunk to check if it contains ore above the noise threshold
-	 */
-	private static boolean scanChunkForOre(ChunkPos chunkPos, int y, Vein vein) {
-		INoise3D noiseGen = vein.getNoise();
-
-		for (int x = 0; x < CHUNK_SIZE; x++) {
-			for (int z = 0; z < CHUNK_SIZE; z++) {
-				int worldX = (chunkPos.x * CHUNK_SIZE) + x;
-				int worldZ = (chunkPos.z * CHUNK_SIZE) + z;
-				double noise = noiseGen.noise(worldX, y, worldZ);
-
-				if (noise > NOISE_THRESHOLD) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	// ===============================
-	// Material Analysis Methods
-	// ===============================
-
-	public static HashMap<MaterialInterface<?>, Double> probability_map = new HashMap<>();
-
-	/**
-	 * Analyzes all materials for spawn probability
-	 */
-	private static void checkMineralDistributionProps(GameTestHelper helper) throws IOException {
-		File dir = Path.of(server.getServerDirectory().getPath() + "/noise_maps/").toFile();
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-
-		int processed = 0;
-		int total_materials = IGLib.getGeneratedMaterials().size();
-
-		for (MaterialInterface<?> material : IGLib.getGeneratedMaterials()) {
-			IWorldGenConfig data = material.getConfig();
-			if (data == null || data.getVeinSize() == 0) {
-				continue;
-			}
-
-			OreConfig rConfig = IGServerConfig.ORES.ores.get(data);
-			if (rConfig == null) {
-				continue;
-			}
-
-			String name = data.name().toLowerCase() + "chunk_noise";
-			File outputFile = new File(dir, name + ".png");
-
-			// Generate noise map if it doesn't exist
-			if (!outputFile.exists()) {
-				IGOreFeatureConfig oreConfig = new IGOreFeatureConfig(
-						data,
-						IGOreFeatureConfig.hash(data.name()),
-						data.getMinSpawnTemp(),
-						data.getMaxSpawnTemp(),
-						data.getMinDownfall(),
-						data.getMaxDownfall()
-				);
-
-				BufferedImage noiseDistribution = pregenNoiseDistribution(oreConfig);
-				saveImage(noiseDistribution, helper, dir, name);
-			}
-
-			// Analyze noise map for spawn probability
-			analyzeNoiseMapProbability(dir, name, material, data);
-
-			// Log progress
-			processed++;
-			float progress = ((float) processed / total_materials) * 100;
-			IGLib.IG_LOGGER.info("Processing {}%", progress);
-		}
-
-		// Log all probabilities
-		logProbabilities();
-	}
-
-	/**
-	 * Analyzes a noise map to calculate spawn probability
-	 */
-	private static void analyzeNoiseMapProbability(File dir, String name, MaterialInterface<?> material, IWorldGenConfig data)
-			throws IOException {
-		File cachedFile = new File(dir, name + ".png");
-		BufferedImage cached = ImageIO.read(cachedFile);
-
-		// Count black pixels (no spawn)
-		int width = cached.getWidth();
-		int height = cached.getHeight();
-		int blackPixels = 0;
-
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				Color pixelColor = new Color(cached.getRGB(x, y));
-				if (pixelColor.equals(Color.BLACK)) {
-					blackPixels++;
-				}
-			}
-		}
-
-		// Calculate probability
-		int totalPixels = width * height;
-		float noiseProbability = 1 - ((float)blackPixels / totalPixels);
-		IGLib.IG_LOGGER.info("{} Noise Probability: {}", data.name(), noiseProbability);
-
-		// Calculate final probability factoring in chunk generation chance
-		double chunkProbability = (0.3333 * ((double)data.generationChance() / 2_000_000));
-		double finalProb = noiseProbability * chunkProbability * (MAP_SIZE_IN_CHUNKS * MAP_SIZE_IN_CHUNKS);
-		probability_map.put(material, (finalProb * 100));
-	}
-
-	/**
-	 * Logs the probability map for all materials
-	 */
-	private static void logProbabilities() {
-		for (Entry<MaterialInterface<?>, Double> entry : probability_map.entrySet()) {
-			String formattedProb = new DecimalFormat("###.##").format(entry.getValue()) + "%";
-			IGLib.IG_LOGGER.info(
-					"Spawn Chance in a 64x64 chunk area for {} is {}",
-					entry.getKey().getName(),
-					formattedProb
-			);
-		}
-	}
-
 	// ===============================
 	// Utility Methods
 	// ===============================
@@ -649,8 +477,24 @@ public class SpawnChunkCapture {
 		Collections.sort(sortedValues);
 
 		int size = sortedValues.size();
-		if (size % 2 == 0) {
+		if ((size & 1) == 0) {
 			return (long)((sortedValues.get(size / 2 - 1) + sortedValues.get(size / 2)) / 2.0);
+		} else {
+			return sortedValues.get(size / 2);
+		}
+	}
+
+	private static Float calculateMedianFloat(List<Float> values) {
+		if (values == null || values.isEmpty()) {
+			return 0f;
+		}
+
+		List<Float> sortedValues = new ArrayList<>(values);
+		Collections.sort(sortedValues);
+
+		int size = sortedValues.size();
+		if ((size & 1) == 0) {
+			return (float)((sortedValues.get(size / 2 - 1) + sortedValues.get(size / 2)) / 2.0);
 		} else {
 			return sortedValues.get(size / 2);
 		}

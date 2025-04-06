@@ -2,7 +2,7 @@
   "type": "immersiveengineering:coke_oven",
   "creosote": 5000,
   "input": {
-    "item": "immersivegeology:normal_ore_bituminous"
+    "item": "immersivegeology:storage_block_bituminous"
   },
   "result": {
     "tag": "forge:storage_blocks/coal_coke"

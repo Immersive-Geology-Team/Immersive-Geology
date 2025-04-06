@@ -14,6 +14,7 @@ import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
 import blusunrize.immersiveengineering.common.register.IEBlocks.Metals;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
+import com.igteam.immersivegeology.common.world.features.helper.IGOreGenUtils;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.telemetry.events.WorldLoadEvent;

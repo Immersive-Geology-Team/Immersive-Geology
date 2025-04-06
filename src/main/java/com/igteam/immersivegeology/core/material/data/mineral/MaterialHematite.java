@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
@@ -15,7 +15,6 @@ import net.minecraftforge.common.Tags.Biomes;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialHematite extends MaterialMineral {
@@ -28,7 +27,7 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(15,50,2,0,160,1000, 0.66,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(15,50,2,-64,320,1000, 0.66,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.BANDED);
     }
 
     @Override

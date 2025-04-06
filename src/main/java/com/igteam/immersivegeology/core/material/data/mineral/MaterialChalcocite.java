@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -42,7 +42,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
 
         setAsocialMaterialChance(1f);
         addGenerationFriend((h) -> MineralEnum.Chalcopyrite.instance(), 50);
-        CONFIG = new MineralConfig(24,40,1,-32,200,400, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(24,40,1,-64,200,400, 0.75,false, Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

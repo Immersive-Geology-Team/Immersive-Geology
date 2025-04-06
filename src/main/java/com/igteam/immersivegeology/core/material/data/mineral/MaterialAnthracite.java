@@ -2,7 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.tags.BiomeTags;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class MaterialAnthracite extends MaterialMineral
 {
@@ -30,7 +29,7 @@ public class MaterialAnthracite extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(1600);
-		CONFIG = new MineralConfig(30, 50, 1, -64, 32, 250, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, -64, 32, 750, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0x242227;
 		addGenerationFriend(MaterialAnthracite::getFriends, 300);
 	}

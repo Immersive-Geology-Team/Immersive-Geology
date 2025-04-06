@@ -2,7 +2,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersivegeology.common.world.features.helper.IGGenerationType;
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -36,7 +36,7 @@ public class MaterialMillerite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-		CONFIG = new MineralConfig(20,20,1,-60,120,1750, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+		CONFIG = new MineralConfig(28,20,1,-64,120,1750, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
 	}
 
     @Override
