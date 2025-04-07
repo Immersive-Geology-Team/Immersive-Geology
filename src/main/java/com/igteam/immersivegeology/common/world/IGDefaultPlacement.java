@@ -117,7 +117,7 @@ public class IGDefaultPlacement extends PlacementFilter
 			{
 				int maxY = config.maxY.get();
 				int minY =  config.minY.get();
-				return IGOreGenUtils.isVeinWorthwhile(level, chunkPos,  maxY, minY, vein, g2d);
+				return IGOreGenUtils.isVeinWorthwhile(level, chunkPos,  maxY, minY, vein);
 			}
 		}
 		else
@@ -126,10 +126,8 @@ public class IGDefaultPlacement extends PlacementFilter
 			Vein vein = IGOreFeature.createVein(random, config, entry);
 			int maxY = config.maxY.get();
 			int minY =  config.minY.get();
-			return IGOreGenUtils.isVeinWorthwhile(level, chunkPos,  maxY, minY, vein, g2d);
+			return IGOreGenUtils.isVeinWorthwhile(level, chunkPos,  maxY, minY, vein);
 		}
-		// Some other Dimension or TFC
-
 		return false;
 	}
 	@Override

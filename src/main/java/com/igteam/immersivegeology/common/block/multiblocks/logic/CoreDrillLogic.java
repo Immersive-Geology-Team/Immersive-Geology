@@ -105,7 +105,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
                 if(!state.drill_direction)
                 {
                     final Vec3 absoluteSmokePosition = context.getLevel().toAbsolute(position);
-                    context.getLevel().getRawLevel().addAlwaysVisibleParticle(
+                    context.getLevel().getRawLevel().addParticle(
                             ParticleTypes.POOF,
                             absoluteSmokePosition.x, absoluteSmokePosition.y, absoluteSmokePosition.z,
                             xSpeed, 0.0625, zSpeed);

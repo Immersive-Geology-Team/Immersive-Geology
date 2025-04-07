@@ -126,6 +126,8 @@ public class SpawnChunkCapture {
 		renderChunks(level, g2d, spawnChunkX, spawnChunkZ);
 		renderMineralDeposits(g2d);
 
+		printFormattedTime(calculateMedian(functionTimes));
+
 		g2d.dispose();
 		return image;
 	}
@@ -161,8 +163,6 @@ public class SpawnChunkCapture {
 				}
 			}
 		}
-
-		printFormattedTime(calculateMedian(functionTimes));
 	}
 
 	/**
@@ -254,7 +254,12 @@ public class SpawnChunkCapture {
 			RandomSource random = IGOreGenUtils.getReuseRandom(feature.entry(), level.getSeed(), p);
 			Vein vein = IGOreFeature.createVein(random, rConfig, feature.entry());
 			renderDepositDetails(level, g2d, feature, p, 48);
-			float worthyness =  IGOreGenUtils.getWorthwhileCount(level, p,  maxY, minY, vein, g2d);
+			float worthyness =  timeFunction(() -> IGOreGenUtils.getWorthwhileCount(level, p,  maxY, minY, vein), "Vein Estimation");
+			g2d.setColor(Color.DARK_GRAY);
+			g2d.setStroke(new BasicStroke(1));
+			g2d.drawRect(mapX, mapZ, 48, 48);
+			g2d.drawString(vein.material().name(), mapX, mapZ+12);
+
 			String worthString = String.format("%.2f", Math.floor(worthyness * 100));
 			g2d.drawString(worthString, mapX, mapZ+48);
 		}

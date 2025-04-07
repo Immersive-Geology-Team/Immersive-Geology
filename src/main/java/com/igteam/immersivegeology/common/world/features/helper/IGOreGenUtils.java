@@ -20,9 +20,11 @@ import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -105,99 +107,111 @@ public class IGOreGenUtils
 	}
 
 
-	public static float getWorthwhileCount(LevelAccessor level, ChunkPos centerChunk, int maxY, int minY, Vein vein, @Nullable Graphics2D g2d) {
+	static TagKey<Block> stoneTag = Tags.Blocks.STONE;
+	static TagKey<Block> endStoneTag = Tags.Blocks.END_STONES;
+	static TagKey<Block> netherackTag = Tags.Blocks.NETHERRACK;
+	public static float getWorthwhileCount(LevelAccessor level, ChunkPos centerChunk, int maxY, int minY, Vein vein) {
 		int totalViableLocations = 0;
 		// Use the same 3x3 chunk area approach
+		int sectionMin = level.getMinSection();
+		int sectionMax = level.getMaxSection();
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
 				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
 
 				// Calculate section indices
-				int minSection = level.getSectionIndex(minY);
-				int maxSection = level.getSectionIndex(maxY - 1);
+				int minSection = Math.max(sectionMin, level.getSectionIndex(minY));
+				int maxSection = Math.min(sectionMax, level.getSectionIndex(maxY - 1));
 
 				for (int sectionY = minSection; sectionY <= maxSection; sectionY++) {
 					LevelChunkSection section = currentChunk.getSection(sectionY);
-
 					// Skip if section is empty or doesn't have potential viable blocks
-					if (section.hasOnlyAir()) {
+					if (section.hasOnlyAir() || !section.maybeHas(b -> b.is(stoneTag) || b.is(netherackTag) || b.is(endStoneTag))) {
 						continue;
 					}
-
 					// Calculate Y bounds for this section
 					int sectionMinY = Math.max(sectionY * 16, minY);
 					int sectionMaxY = Math.min((sectionY + 1) * 16, maxY);
 
 					// Process this section to count viable locations
-					totalViableLocations += countViableLocationsInSection(section,
-							currentChunk, sectionMinY, sectionMaxY, vein, g2d
-					);
+					totalViableLocations += countViableLocationsInSection(currentChunk, sectionMinY, sectionMaxY, vein, centerChunk);
 				}
 			}
-		}
-
-		// Draw the overall area if graphics are provided
-		if (g2d != null) {
-			BlockPos centerPos = centerChunk.getMiddleBlockPosition(0);
-			centerPos = centerPos.offset(-24, 0, -24);
-			int mapX = (centerPos.getX() + (64 * 16) / 2) % (64 * 16);
-			int mapZ = (centerPos.getZ() + (64 * 16) / 2) % (64 * 16);
-			g2d.setColor(Color.DARK_GRAY);
-			g2d.setStroke(new BasicStroke(1));
-			g2d.drawRect(mapX, mapZ, 48, 48);
-			g2d.drawString(vein.material().name(), mapX, mapZ+12);
 		}
 		// Calculate the total volume of blocks in the 3x3 chunk area within the Y range
 		int totalBlocks = 48 * 48 * (Math.abs(maxY - minY));
 		return (float) totalViableLocations / totalBlocks;
 	}
-
-	private static int countViableLocationsInSection(LevelChunkSection section, ChunkAccess chunk,
-			int minY, int maxY, Vein vein, @Nullable Graphics2D g2d) {
-
+	static BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+	private static int countViableLocationsInSection(ChunkAccess chunk,int minY, int maxY, Vein vein, ChunkPos centreChunk) {
 		int viablePositions = 0;
 		ChunkPos chunkPos = chunk.getPos();
-
 		for (int y = minY; y < maxY; y++) {
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
-					BlockPos pos = chunkPos.getBlockAt(x,y,z);
-					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein);
+					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein, centreChunk);
 					if (noiseValue > IGOreFeature.THRESHOLD) {
-						BlockState state = chunk.getBlockState(new BlockPos(x,y,z));
-						boolean viable = state.is(Tags.Blocks.STONE) || state.is(Tags.Blocks.END_STONES) || state.is(Tags.Blocks.NETHERRACK) || (state.getBlock() instanceof IGOreBlock);
+						mutablePos.set(x,y,z);
+						BlockState state = chunk.getBlockState(mutablePos);
+						boolean viable = state.is(stoneTag) || state.is(endStoneTag) || state.is(netherackTag) || state.getBlock() instanceof IGOreBlock;
 						if (viable) {
 							viablePositions += 1;
-							// Visualization if g2d is provided
-							if (g2d != null) {
-								// Calculate map position (assuming 2D top-down view at this Y level)
-								// MAP Must be 64x64 chunks.
-								int mapX = (pos.getX() + 512) % 1024;
-								int mapZ = (pos.getZ() + 512) % 1024;
-								g2d.setColor(new Color(0, 0, 200, 30));
-								g2d.fillRect(mapX, mapZ, 1, 1);
-								g2d.setColor(Color.DARK_GRAY);
-							}
 						}
 					}
 				}
 			}
 		}
-
-
 		return viablePositions;
 	}
 
-	public static double noise(ChunkPos pos, int x, int y, int z, @NotNull Vein vein) {
+	public static double noise(ChunkPos pos, int x, int y, int z, @NotNull Vein vein, ChunkPos centerChunkPos) {
 		INoise3D noiseGen = vein.noise();
-		BlockPos b = pos.getBlockAt(x,y,z);
-		return noiseGen.noise(b);
+		BlockPos middleBlockPosition = centerChunkPos.getMiddleBlockPosition(0);
+		BlockPos currentBlockPosition = pos.getBlockAt(x,y,z);
+
+		// Calculate horizontal distance (creates cylindrical shape)
+		double dx = currentBlockPosition.getX() - middleBlockPosition.getX();
+		double dz = currentBlockPosition.getZ() - middleBlockPosition.getZ();
+		double horizontalDistance = Math.hypot(dx, dz);
+
+		// Define cylinder radius and thresholds
+		double radius = 24.0; // Total radius
+		double outerThreshold = 16.0; // 8 blocks from edge (24-8=16)
+		double boundaryMultiplication = getBoundaryMultiplication(horizontalDistance, outerThreshold, radius);
+
+		return noiseGen.noise(currentBlockPosition) * boundaryMultiplication;
 	}
 
-	public static boolean isVeinWorthwhile(LevelAccessor level, ChunkPos chunk, int maxY, int minY, Vein vein, @Nullable Graphics2D g2d)
+	private static double getBoundaryMultiplication(double horizontalDistance, double outerThreshold, double radius)
 	{
-		float totalViableLocations = getWorthwhileCount(level, chunk, maxY, minY, vein, g2d);
+		double middleThreshold = 20.0; // 4 blocks from edge (24-4=20)
+
+		// Calculate boundary multiplication with steeper falloff
+		double boundaryMultiplication = 1.0; // Default is full strength
+
+		if (horizontalDistance > outerThreshold) {
+			if (horizontalDistance > middleThreshold) {
+				// Between middleThreshold and radius (4 blocks from edge to edge)
+				// Goes from 50% to 0%
+				double t = (horizontalDistance- middleThreshold) / (radius- middleThreshold);
+				boundaryMultiplication = 0.5 * (1.0 - t);
+			} else {
+				// Between outerThreshold and middleThreshold (8 blocks from edge to 4 blocks from edge)
+				// Goes from 75% to 50%
+				double t = (horizontalDistance-outerThreshold) / (middleThreshold -outerThreshold);
+				boundaryMultiplication = 0.75 - 0.25 * t;
+			}
+		}
+
+		// Make sure multiplier is at least 0
+		boundaryMultiplication = Math.max(0.0, boundaryMultiplication);
+		return boundaryMultiplication;
+	}
+
+	public static boolean isVeinWorthwhile(LevelAccessor level, ChunkPos chunk, int maxY, int minY, Vein vein)
+	{
+		float totalViableLocations = getWorthwhileCount(level, chunk, maxY, minY, vein);
 		return Math.floor(totalViableLocations * 100) > 0f;
 	}
 

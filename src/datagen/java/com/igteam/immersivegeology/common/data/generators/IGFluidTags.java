@@ -21,8 +21,11 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Fluids;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -55,6 +58,10 @@ public class IGFluidTags extends FluidTagsProvider
 						if(fluid_key!=null)
 						{
 							tag(fluid_key).add(fluid.getSource());
+							if(fluid.getMaterial(MaterialTexture.base).hasFlag(MaterialFlags.IS_GAS) && fluid.getMaterial(MaterialTexture.overlay).hasFlag(MaterialFlags.IS_GAS))
+							{
+								tag(Fluids.GASEOUS).add(fluid);
+							}
 						}
 					}
 					continue;
@@ -65,12 +72,12 @@ public class IGFluidTags extends FluidTagsProvider
 					tag(fluid_key).add(fluid.getSource());
 					MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);
 					if(base.hasFlag(MaterialFlags.EXISTING_IMPLEMENTATION)) continue;
+					if(base.hasFlag(MaterialFlags.IS_GAS)) tag(Fluids.GASEOUS).add(fluid);
 					if(base instanceof MetalEnum metal)
 					{
 						if(ModFlags.TFC.isStrictlyLoaded())
 						{
 							try {
-								//tag(getTFCFluidTag("LAVA_LIKE")).add(fluid);
 								tag(getTFCFluidTag("USABLE_IN_INGOT_MOLD")).add(fluid);
 							} catch(NullPointerException exception)
 							{

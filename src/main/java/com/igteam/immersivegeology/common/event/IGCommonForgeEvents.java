@@ -61,19 +61,17 @@ public class IGCommonForgeEvents
 	@SubscribeEvent
 	public void updateMapData(TickEvent.LevelTickEvent event)
 	{
-		if(event.side.isClient()) return;
-		Level level = event.level;
-		List<? extends Player> players = event.level.players();
-		for(Player player : players)
-		{
-			if(player!=null)
-			{
-				ItemStack mainHand = player.getMainHandItem();
-				ItemStack offHand = player.getOffhandItem();
-				checkAndRenderMap(mainHand, level, player);
-				checkAndRenderMap(offHand, level, player);
-			}
-		}
+//		if(event.side.isClient()) return;
+//		Level level = event.level;
+//		List<? extends Player> players = event.level.players();
+//		for(Player player : players)
+//		{
+//			if(player!=null)
+//			{
+//				ItemStack mainHand = player.getMainHandItem();
+//				ItemStack offHand = player.getOffhandItem();
+//			}
+//		}
 	}
 
 	private static void checkAndRenderMap(ItemStack stack, Level level, Player player)

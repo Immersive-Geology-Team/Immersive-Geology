@@ -217,7 +217,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
 
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), PelletizerRecipe.RECIPES::getById);
+            this.processor = new MultiblockProcessor<>(128, 0, 8, ctx.getMarkDirtyRunnable(), PelletizerRecipe.RECIPES::getById);
 
             DirectProcessingItemHandler<PelletizerRecipe> insertionHandler = (new DirectProcessingItemHandler<>(ctx.levelSupplier(), this.processor, PelletizerRecipe::findRecipe));
             this.insertionHandler = new StoredCapability<>(insertionHandler);

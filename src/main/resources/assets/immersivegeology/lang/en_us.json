@@ -22,11 +22,6 @@
   "manual.immersivegeology.hunter_process.subtext": "Hunter Process",
   "manual.immersivegeology.becher_process.subtext": "Becher Process",
 
-
-  "manual.immersivegeology.cuprite.desc": "Testing the Cuprite description for something using the manual",
-  "manual.immersivegeology.chalcocite.desc": "Testing the Chalcocite description for something using the manual",
-
-
   "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_processing_chains": "Processing Chains",
   "manual.immersivegeology.ig_metal_chains": "Metals",
@@ -469,7 +464,7 @@
   "desc.immersiveengineering.info.mineral.evaporite_sediment" : "Evaporite Sediments",
 
   "manual.immersivegeology.generic.desc": "The Spawning Properties of %1$s can be found on the next page.",
-  "manual.immersivegeology.generic.pre_chain_desc": "%1$s can be processed into %2$s, the processing chains available are detailed on the next page.",
+  "manual.immersivegeology.generic.pre_chain_desc": "%1$s can be processed into %2$s, the processing chains available are detailed on the next page. Please Note the 64^2 Chunk Area Probability is an estimation and some terrain conditions can affect generation.",
   "manual.immersivegeology.min_y": "Min Y",
   "manual.immersivegeology.max_y": "Max Y",
   "manual.immersivegeology.min_temp": "Min Temperature",

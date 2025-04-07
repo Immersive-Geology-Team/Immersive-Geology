@@ -348,13 +348,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(block)
                 .forAllStatesExcept(state -> {
                     int ageSuffix = state.getValue(ageProperty);
-                    String stageName = "growth_stage_" + ageSuffix;
+                    String stageName = "stage_" + ageSuffix;
                     if(ageSuffix == block.getMaxAge()){
                         return ConfiguredModel.builder()
-                                .modelFile(models().withExistingParent("block/evaporate_crystal/" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/greyscale/" + block.getFlag().getName().toLowerCase() + "/" + stageName)).build();
+                                .modelFile(models().withExistingParent("block/evaporate_crystal/" +  block.getMaterial(MaterialTexture.base).getName() + "_" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/colored/" + block.getMaterial(MaterialTexture.base).getName() + "/crystal_growth/" + stageName)).build();
                     }
                     return ConfiguredModel.builder()
-                            .modelFile(models().withExistingParent("block/evaporate_crystal/" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/greyscale/" + block.getFlag().getName().toLowerCase() + "/" + stageName)).build();
+                            .modelFile(models().withExistingParent("block/evaporate_crystal/" + block.getMaterial(MaterialTexture.base).getName() + "_" + stageName, new ResourceLocation(IGLib.MODID, "block/base/evaporate_crystal_cross")).texture("cross", "block/colored/" + block.getMaterial(MaterialTexture.base).getName() + "/crystal_growth/" + stageName)).build();
                 }, ignored);
     }
 

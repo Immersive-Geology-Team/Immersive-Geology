@@ -217,7 +217,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                 {
                     boolean complexItem = blockItem.getMaterials().size() > 1;
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/evaporate_crystal/growth_stage_3");
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/evaporate_crystal/"+item.getMaterial(MaterialTexture.base).getName()+"_stage_2");
 
                     withExistingParent(itemLocation, parentLocation);
                     return;

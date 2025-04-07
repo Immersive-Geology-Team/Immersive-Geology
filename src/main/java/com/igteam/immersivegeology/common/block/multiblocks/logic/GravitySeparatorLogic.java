@@ -63,7 +63,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
 
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
-    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.RIGHT);
+    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.LEFT);
     private static final MultiblockFace SECONDARY_OUTPUT_POS = new MultiblockFace(-1,0,1, RelativeBlockFace.LEFT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 

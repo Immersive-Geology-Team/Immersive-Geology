@@ -29,7 +29,22 @@ public class CrystallizerShape extends GenericShape {
         final int bZ = posInMultiblock.getZ();
 
         List<AABB> main = new ArrayList<>();
-        main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+
+        if(bY == 2)
+        {
+            if(bZ==1&&bX==bZ)
+            {
+                main.add(new AABB(0.0, 0.0, 0.0, 1.0, .5, 1.0));
+                main.add(new AABB(0.125, .5, 0.125, 0.875, .75, 0.875));
+                main.add(new AABB(0.25, .75, 0.25, .75, 1, .75));
+            }
+            else {
+                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+            }
+        }
+        else {
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        }
         return main;
     }
 }

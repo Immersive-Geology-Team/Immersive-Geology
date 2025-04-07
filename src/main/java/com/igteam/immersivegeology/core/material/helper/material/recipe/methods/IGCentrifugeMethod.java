@@ -90,7 +90,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	@Override
 	public IGRecipeMethod.RecipeMethod getMethod()
 	{
-		return RecipeMethod.REFINING;
+		return RecipeMethod.CENTRIFUGE;
 	}
 
 	@Override
@@ -114,7 +114,10 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-
+		renderFluidStack(graphics, input.getRandomizedExampleStack(0), x + 25,y + 23,16,16,mx,my);
+		if(primary_out!=null && !primary_out.isEmpty())renderFluidStack(graphics, primary_out, x + 61, y + 3, 16,16, mx, my);
+		if(output != null && !output.isEmpty()) renderItemStack(graphics, output, x + 61, y + 23, mx, my);
+		if(secondary_out!=null && !secondary_out.isEmpty()) renderFluidStack(graphics, secondary_out, x + 61, y + 43, 16,16, mx, my);
 	}
 
 	@Override

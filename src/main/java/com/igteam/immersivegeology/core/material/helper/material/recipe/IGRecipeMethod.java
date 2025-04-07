@@ -187,7 +187,8 @@ public abstract class IGRecipeMethod
 		CUTTING,
 		REFINING,
 		PELLETIZE,
-		MIXING;
+		MIXING,
+		CENTRIFUGE;
 
 		public String getMethodName()
 		{
@@ -198,6 +199,7 @@ public abstract class IGRecipeMethod
 				case BLASTING -> {return ie("crude_blast_furnace");}
 				case BLOOMERY -> {return ig("bloomery");}
 				case CHEMICAL -> {return ig("chemical_reactor");}
+				case CENTRIFUGE -> {return ig("centrifuge");}
 				case SEPARATOR -> {return ig("gravity_separator");}
 				case CRUSHING -> {return ie("crusher");}
 				case ROASTING -> {return ig("reverberation_furnace");}
@@ -229,6 +231,7 @@ public abstract class IGRecipeMethod
 				case ARC_SMELTING -> {return IGLib.makeTextureLocation("manual/arc_furnace");}
 				case CALCINATION -> {return IGLib.makeTextureLocation("manual/rotarykiln");}
 				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("manual/furnace");}
+				case CENTRIFUGE -> {return IGLib.makeTextureLocation("manual/centrifuge");}
 				case REFINING -> {return IGLib.makeTextureLocation("manual/ballmill");}
 				case SEPARATOR -> {return IGLib.makeTextureLocation("manual/gravity_separator");}
 				case PELLETIZE -> {return IGLib.makeTextureLocation("manual/pelletizer");}

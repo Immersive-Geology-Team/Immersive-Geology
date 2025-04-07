@@ -133,7 +133,7 @@ public class IGRecipes extends RecipeProvider
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, geologist_pick)
 				.pattern("SBF")
 				.pattern("BW ")
-				.pattern(" W ").define('F', Items.FLINT).define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Ingredients.STICK_TREATED)).define('S', Ingredient.of(Tags.Items.STRING))
+				.pattern(" W ").define('F', Items.FLINT).define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COBBLESTONE)).save(consumer, ig("craft_geologist_pick"));
 
 		// Stone Hammer

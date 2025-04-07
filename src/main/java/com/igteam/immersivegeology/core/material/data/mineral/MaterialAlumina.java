@@ -44,7 +44,7 @@ public class MaterialAlumina extends MaterialMineral {
     public MaterialAlumina() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
-        CONFIG = new MineralConfig(33,20,2,-64,256,3400, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(33,20,2,0,80,12000, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
 
     @Override

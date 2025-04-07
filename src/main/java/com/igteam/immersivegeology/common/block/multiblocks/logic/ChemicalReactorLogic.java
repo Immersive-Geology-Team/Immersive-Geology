@@ -34,6 +34,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Multibl
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
+import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
@@ -170,7 +171,14 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		ChemicalRecipe recipe = state.getRecipeForInputs(level);
 		if(recipe!=null)
 		{
-			MultiblockProcessInMachine<ChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0);
+			MultiblockProcessInMachine<ChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0)
+			{
+				@Override
+				protected void outputItem(ProcessContextInMachine<ChemicalRecipe> context, ItemStack output, IMultiblockLevel level)
+				{
+					state.output.insertOrDrop(output, level);
+				}
+			};
 			process.setInputAmounts(recipe.itemInput.getCount());
 			int size = (fluidTanks.leftInput.isEmpty()?0: 1)
 					+(fluidTanks.backInput.isEmpty()?0: 1)
@@ -302,7 +310,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		if(TANK_FRONT_POSITIONS.contains(posInMultiblock)) return List.of(TextUtils.formatFluidStack(state.tanks.output.getFluid()));
 		if(REACTOR_CHAMBER_POSITIONS.contains(posInMultiblock)) {
 			ItemStack input = state.inventory.getStackInSlot(0);
-			if(!input.isEmpty()) return List.of(Component.translatable(input.getDescriptionId()), Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
+			if(!input.isEmpty()) return List.of(Component.literal(input.getCount() + " " + input.getHoverName().getString()), Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 		}
 		return List.of(Component.literal("Processing: " + state.processor.getQueueSize() + " / " + state.processor.getMaxQueueSize()));
 	}
@@ -332,7 +340,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 		public final SlotwiseItemHandler inventory;
 		private final StoredCapability<IItemHandler> itemInputCap;
-		private final CapabilityReference<IItemHandler> output;
+		private final DroppingMultiblockOutput output;
 		private final CapabilityReference<IItemHandler> input_output;
 		private final StoredCapability<IItemHandler> outputHandler;
 
@@ -354,7 +362,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 					new IOConstraint(true, i -> ChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),
 					IOConstraint.OUTPUT), ctx.getMarkDirtyRunnable());
 
-			this.output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_OUTPUT);
+			this.output = new DroppingMultiblockOutput(ITEM_OUTPUT, ctx);
 			this.input_output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_INPUT_OUTPUT);
 
 			this.outputHandler = new StoredCapability<>(new WrappingItemHandler(
@@ -436,18 +444,6 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			boolean item_pass = recipe.itemOutput.equals(ItemStack.EMPTY) || getInventory().insertItem(1, recipe.itemOutput, true) != ItemStack.EMPTY;
 
 			return fluid_pass && item_pass;
-		}
-
-		@Override
-		public void onProcessFinish(MultiblockProcess<ChemicalRecipe, ?> process, Level level)
-		{
-			ItemStack itemoutput = this.inventory.getStackInSlot(1);
-
-			ItemStack stack = Utils.insertStackIntoInventory(this.output, itemoutput, true);
-			if (stack.isEmpty()) {
-				Utils.insertStackIntoInventory(this.output, itemoutput, false);
-			}
-			itemoutput.shrink(itemoutput.getCount());
 		}
 
 		@Override

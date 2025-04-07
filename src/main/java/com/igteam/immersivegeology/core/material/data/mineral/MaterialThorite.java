@@ -25,7 +25,7 @@ public class MaterialThorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
 
         // TODO BANISH FROM EXISTENCE or to the END
-        CONFIG = new MineralConfig(31,20,1,-32,128,512,0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,20,1,0,80,7000,0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
     }
 
     @Override

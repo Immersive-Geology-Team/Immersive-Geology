@@ -49,7 +49,7 @@ import java.util.Map;
 public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 {
 
-	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+	public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final BlockCategoryFlags category;
 
@@ -63,7 +63,7 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 
 	public int getMaxAge()
 	{
-		return 3;
+		return 2;
 	}
 
 	public BlockState getStateForAge(int pAge) {

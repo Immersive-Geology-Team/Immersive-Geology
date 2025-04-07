@@ -35,7 +35,7 @@ public class MaterialCryolite extends MaterialMineral {
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(31,90,1,-64,120,1300, 0.8,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,90,1,0,80,10000, 0.8,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
     }
 
     @Override

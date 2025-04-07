@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/evaporate_crystal_cross",
+  "textures": {
+    "cross": "immersivegeology:block/colored/carnallite/crystal_growth/stage_0"
+  }
+}

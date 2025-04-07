@@ -128,15 +128,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		boolean useFriendMaterials = associateChance > random.nextDouble();
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
-
+		int sectionMin = level.getMinSection();
+		int sectionMax = level.getMaxSection();
 		// Iterate over the 3x3 chunk area
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
 				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
 				// Iterate through relevant chunk sections
-				int minSection = level.getSectionIndex(veinMinY);
-				int maxSection = level.getSectionIndex(veinMaxY - 1);
+				int minSection = Math.max(sectionMin, level.getSectionIndex(veinMinY));
+				int maxSection = Math.min(sectionMax, level.getSectionIndex(veinMaxY - 1));
 
 				for (int sectionY = minSection; sectionY <= maxSection; sectionY++) {
 					LevelChunkSection section = currentChunk.getSection(sectionY);
@@ -153,7 +154,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					// Process this section
 					processChunkSection(
 							level, random, currentChunk, sectionMinY, sectionMaxY,
-							vein, useFriendMaterials, parentMaterial, friends
+							vein, useFriendMaterials, parentMaterial, friends, centerChunk
 					);
 				}
 			}
@@ -162,7 +163,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	private static void processChunkSection(
 			LevelAccessor level, RandomSource random, ChunkAccess chunk, int minY, int maxY, Vein vein, boolean useFriendMaterials,
-			MaterialInterface<?> parentMaterial, Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends) {
+			MaterialInterface<?> parentMaterial, Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends, ChunkPos centerChunkPos) {
 		ChunkPos chunkPos = chunk.getPos();
 
 		for (int y = minY; y < maxY; y++) {
@@ -170,7 +171,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
 					BlockPos pos = chunkPos.getBlockAt(x,y,z);
-					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein);
+					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein, centerChunkPos);
 					if (noiseValue > THRESHOLD) {
 						BlockState stoneState = chunk.getBlockState(new BlockPos(x,y,z));
 						if (stoneState.isAir()) continue;

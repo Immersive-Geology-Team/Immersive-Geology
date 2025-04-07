@@ -31,6 +31,7 @@ public class MaterialSulfurDioxide extends MaterialChemical
 	{
 		super();
 		removeMaterialFlags(BlockCategoryFlags.SLURRY, MaterialFlags.IS_CHEMICAL);
+		addFlags(MaterialFlags.IS_GAS);
 	}
 
 	@Override

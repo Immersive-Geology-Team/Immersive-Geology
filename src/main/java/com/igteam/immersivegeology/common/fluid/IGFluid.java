@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.fluid;
 
+import blusunrize.immersiveengineering.common.register.IEFluids;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -23,7 +24,9 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ScreenEffectRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,6 +52,7 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
@@ -59,17 +63,25 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class IGFluid extends FlowingFluid implements IGBlockType
 {
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final BlockCategoryFlags category;
 	protected final ItemCategoryFlags bucket_type;
-	public IGFluid(BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material)
+	protected final Supplier<FluidType> type;
+	private FluidType cached;
+	public IGFluid(BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material, MaterialInterface<?> overlay)
 	{
 		this.materialMap.put(MaterialTexture.base, material);
+		if(overlay != null)
+		{
+			this.materialMap.put(MaterialTexture.overlay, overlay);
+		}
 		this.category = flag;
 		this.bucket_type = bucket_type;
+		this.type = () -> new IGFluidType(this, material, overlay, category);
 	}
 
 	public IFlagType<?> getFlag() {
@@ -90,115 +102,16 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 		return materialMap.get(t);
 	}
 
+	// So I'm sure there are better ways to do this.
+	// Originally I was kinda just 'creating' it every time, which caused small issues
+	// This just caches the first attempt at getting it, this works, but I think a more elegant method is available.
 	@Override
 	public @NotNull FluidType getFluidType()
 	{
-		return new FluidType(getMaterial(MaterialTexture.base).getFluidProperties()){
-			@Override
-			public Component getDescription()
-			{
-				List<String> materialList = new ArrayList<>();
-				String type = "";
-
-				MaterialInterface<?> baseMaterial = materialMap.get(MaterialTexture.base);
-				MaterialInterface<?> overlayMaterial = materialMap.get(MaterialTexture.overlay);
-
-				if(materialMap.get(MaterialTexture.base) instanceof MaterialMetal){
-					materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
-					type = "_molten";
-				}
-
-				if(baseMaterial instanceof MaterialChemical chemical_base)
-				{
-					if(chemical_base.hasComplexNamingScheme())
-					{
-						materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
-						materialList.add(I18n.get("component.immersivegeology." + overlayMaterial.getName()));
-						return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + type, materialList.toArray());
-					} else
-					{
-						materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
-						materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
-					}
-				}
-
-				for(MaterialTexture t : MaterialTexture.values()){
-					if (materialMap.containsKey(t)) {
-						materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
-					}
-				}
-				if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.clean_slurry"));
-				if(category.equals(BlockCategoryFlags.CLOUDY_SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.cloudy_slurry"));
-
-				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + type, materialList.toArray());
-			}
-
-			@Override
-			public Component getDescription(FluidStack stack)
-			{
-				List<String> materialList = new ArrayList<>();
-				String type = "fluid";
-				MaterialInterface<?> baseMaterial = getMaterial(MaterialTexture.base);
-				MaterialInterface<?> overlayMaterial = getMaterial(MaterialTexture.overlay);
-
- 				if(baseMaterial instanceof MetalEnum)
-				{
-					type = "fluid_molten";
-				}
-
-				if(baseMaterial instanceof ChemicalEnum chemical_base && overlayMaterial != null)
-				{
-					type = category.getName().toLowerCase();
-					if(chemical_base.hasComplexNamingScheme())
-					{
-						materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
-						materialList.add(I18n.get("component.immersivegeology."+overlayMaterial.getName()));
-						type = category.equals(BlockCategoryFlags.CLOUDY_SLURRY) ? "cloudy_complex_slurry" : "complex_slurry";
-					}
-					else
-					{
-						materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
-						materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
-					}
-				} else {
-					materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
-				}
-
-				return Component.translatable("fluid.immersivegeology." + type, materialList.toArray());
-			}
-
-			public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-				consumer.accept(getFluidExtendedProperties(category));
-			}
-		};
+		if(cached == null) cached = this.type.get();
+		return cached;
 	}
 
-	public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
-	{
-		IGFluid fluid = this;
-		MaterialInterface<?> base = fluid.getMaterial(MaterialTexture.base);
-		MaterialInterface<?> overlay = fluid.getMaterial(MaterialTexture.overlay);
-		return new IClientFluidTypeExtensions()
-		{
-			@Override
-			public int getTintColor()
-			{
-				return 0xFF000000 | (overlay != null ? overlay.getColor(flag, 0) : base.getColor(flag, 0));
-			}
-
-			@Override
-			public ResourceLocation getStillTexture()
-			{
-				return base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
-			}
-
-			@Override
-			public ResourceLocation getFlowingTexture()
-			{
-				return base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
-			}
-		};
-	}
 
 	public @NotNull Collection<MaterialInterface<?>> getMaterials() {
 		return materialMap.values();
@@ -225,7 +138,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	@Override
-	public Fluid getSource()
+	public @NotNull Fluid getSource()
 	{
 		IFlagType<?> flag = getFlag();
 		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
@@ -299,7 +212,10 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	public int getSlopeFindDistance(LevelReader pLevel) {
-		return pLevel.dimensionType().ultraWarm() ? 4 : 2;
+		MaterialInterface<?> base = getMaterial(MaterialTexture.base);
+		int slopeFind = base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 4 : 8;
+		if(pLevel.dimensionType().ultraWarm()) slopeFind = slopeFind / 2;
+		return slopeFind;
 	}
 
 	public int getDropOff(LevelReader pLevel) {
@@ -329,13 +245,30 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	@Override
 	public int getTickDelay(LevelReader level)
 	{
-		return level.dimensionType().ultraWarm() ? 10 : 30;
+		MaterialInterface<?> base = getMaterial(MaterialTexture.base);
+		int delay = base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 10 : 5;
+		if(level.dimensionType().ultraWarm()) delay = delay /2;
+		return delay;
+	}
+
+	@Override
+	public void tick(Level level, BlockPos pos, FluidState state)
+	{
+		super.tick(level, pos, state);
+		getMaterial(MaterialTexture.base).fluidTick(level, pos, state);
+
+	}
+
+	@Override
+	protected void spreadTo(LevelAccessor level, BlockPos pos, BlockState state, Direction direction, FluidState fluidState)
+	{
+		if(getMaterial(MaterialTexture.base).fluidSpreadEvent(level, pos, state, direction, fluidState)) return;
+		super.spreadTo(level, pos, state, direction, fluidState);
 	}
 
 	public static class Source extends IGFluid {
 		public Source(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag, ItemCategoryFlags bucket_type) {
-			super(flag, bucket_type, material);
-			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
+			super(flag, bucket_type, material, extra);
 		}
 
 		public int getAmount(FluidState pState) {
@@ -349,8 +282,8 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	public static class Flowing extends IGFluid {
 		public Flowing(MaterialInterface<?> material, @Nullable MaterialInterface<?> extra, BlockCategoryFlags flag, ItemCategoryFlags bucket_type) {
-			super(flag, bucket_type, material);
-			if(extra != null) this.materialMap.put(MaterialTexture.overlay, extra);
+			super(flag, bucket_type, material, extra);
+
 		}
 
 		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> pBuilder) {

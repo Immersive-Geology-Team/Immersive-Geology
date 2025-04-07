@@ -12,15 +12,23 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 
@@ -155,4 +163,19 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     {
         return instance().getNoiseProbability();
     };
+
+    default void fluidTick(Level level, BlockPos pos, FluidState state) {
+        instance().fluidTick(level, pos, state);
+    };
+
+    default void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
+    {
+        instance().entityInside(state,level,pos,entity);
+    };
+
+    default boolean fluidSpreadEvent(LevelAccessor level, BlockPos pos, BlockState state, Direction direction, FluidState fluidState)
+    {
+        return instance().fluidSpreadEvent(level, pos, state, direction, fluidState);
+    };
+
 }

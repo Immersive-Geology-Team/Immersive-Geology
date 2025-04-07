@@ -1,16 +1,13 @@
 {
   "variants": {
     "age=0": {
-      "model": "immersivegeology:block/evaporate_crystal/growth_stage_0"
+      "model": "immersivegeology:block/evaporate_crystal/carnallite_stage_0"
     },
     "age=1": {
-      "model": "immersivegeology:block/evaporate_crystal/growth_stage_1"
+      "model": "immersivegeology:block/evaporate_crystal/carnallite_stage_1"
     },
     "age=2": {
-      "model": "immersivegeology:block/evaporate_crystal/growth_stage_2"
-    },
-    "age=3": {
-      "model": "immersivegeology:block/evaporate_crystal/growth_stage_3"
+      "model": "immersivegeology:block/evaporate_crystal/carnallite_stage_2"
     }
   }
 }

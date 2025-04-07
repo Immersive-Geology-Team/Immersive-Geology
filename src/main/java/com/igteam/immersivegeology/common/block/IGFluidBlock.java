@@ -10,8 +10,11 @@ package com.igteam.immersivegeology.common.block;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateHolder;
@@ -48,6 +51,13 @@ public class IGFluidBlock extends LiquidBlock
 			if(state.hasProperty(prop))
 				baseState = withCopiedValue(prop, baseState, state);
 		return baseState;
+	}
+
+	@Override
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
+	{
+		super.entityInside(state, level, pos, entity);
+		material.entityInside(state, level, pos, entity);
 	}
 
 	public static <T extends StateHolder<?, T>, S extends Comparable<S>>

@@ -20,13 +20,23 @@ import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.loading.DatagenModLoader;
@@ -235,19 +245,26 @@ public abstract class GeologyMaterial implements MaterialHelper {
         return CrystalFamily.CUBIC;
     }
 
+
+    // is chemical temp is to prevent acids from being viable in wooden barrels.
     public FluidType.Properties getFluidProperties(IFlagType<?> flag){
-        FluidType.Properties builder = FluidType.Properties.create()
-
+		return FluidType.Properties.create()
+                .temperature(hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 2000 : hasFlag(MaterialFlags.IS_CHEMICAL) ? 600 : 0)
+                .canSwim(true)
+                .canDrown(false)
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
-                .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY);
-        createBuildAttributes(100, 100, "fluid.immersivegeology."+flag.getName().toLowerCase()).accept(builder);
-
-        return builder;
+                .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                .viscosity(100)
+                .density(hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 3000 : (hasFlag(MaterialFlags.IS_GAS) ? -100 : 1000))
+                .canPushEntity(true)
+                .motionScale(hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 0.025f : 0.05f)
+                .fallDistanceModifier(0.25f)
+                .descriptionId("fluid.immersivegeology."+flag.getName().toLowerCase());
     }
 
     public static Consumer<FluidType.Properties> createBuildAttributes(int density, int viscosity, String name)
     {
-        return builder -> builder.descriptionId(name);
+        return builder -> builder.descriptionId(name).density(density).viscosity(viscosity);
     }
 
     private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> EXISTING_IMPLEMENTATION_MAP = new HashMap<>();
@@ -470,4 +487,22 @@ public abstract class GeologyMaterial implements MaterialHelper {
 	{
         return 0;
 	}
+
+    public void fluidTick(Level level, BlockPos pos, FluidState state)
+    {
+
+    }
+
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
+    {
+        if(hasFlag(MaterialFlags.IS_MOLTEN_METAL))
+        {
+            if(!entity.fireImmune()) entity.setSecondsOnFire(2);
+        }
+    }
+
+    public boolean fluidSpreadEvent(LevelAccessor level, BlockPos pos, BlockState state, Direction direction, FluidState fluidState)
+    {
+        return false;
+    }
 }
