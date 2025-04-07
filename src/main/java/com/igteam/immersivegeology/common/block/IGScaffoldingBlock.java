@@ -81,7 +81,7 @@ public class IGScaffoldingBlock extends ScaffoldingBlock implements IGBlockType
 		return materialMap.get(t);
 	}
 	@Override
-	public Block getBlock() {
+	public Block getIGBlock() {
 		return this;
 	}
 

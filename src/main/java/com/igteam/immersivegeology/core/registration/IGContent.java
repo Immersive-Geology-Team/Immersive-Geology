@@ -253,7 +253,7 @@ public class IGContent {
                 if(!stone.isVanilla()) continue;
                 IOreBlock ore = material.getOreBlock(stone, OreRichness.NORMAL);
                 if(ore == null) continue;
-                displayStacks.add(new ItemStack(ore.asItem(), 1));
+                displayStacks.add(new ItemStack(ore.asIGItem(), 1));
             }
         }
 

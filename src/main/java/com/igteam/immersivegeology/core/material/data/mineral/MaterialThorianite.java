@@ -21,7 +21,7 @@ public class MaterialThorianite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
         // TODO BANISH FROM EXISTENCE or to the END
-        CONFIG = new MineralConfig(31,20,1,-32,128,512,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,20,1,-32,128,1024,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
     }
 
     @Override

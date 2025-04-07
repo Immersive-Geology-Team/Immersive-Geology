@@ -36,7 +36,7 @@ public class IGStairBlock extends StairBlock implements IGBlockType {
     }
 
     @Override
-    public Block getBlock() {
+    public Block getIGBlock() {
         return this;
     }
 

@@ -43,7 +43,7 @@ public class IGEnergyPipe extends IEEntityBlock<IGEnergyPipeEntity> implements I
 	}
 
 	@Override
-	public Block getBlock()
+	public Block getIGBlock()
 	{
 		return this;
 	}

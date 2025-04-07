@@ -7,7 +7,6 @@ import blusunrize.immersiveengineering.data.DataGenUtils;
 import blusunrize.immersiveengineering.data.models.*;
 import blusunrize.immersiveengineering.data.models.NongeneratedModels.NongeneratedModel;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.block.*;
@@ -597,7 +596,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
             String path = "block/fluid/"+ registryName;
             ModelFile model = models().getBuilder(path)
                     .texture("particle", stillTexture);
-            getVariantBuilder(still.getBlock()).partialState().setModels(new ConfiguredModel(model));
+            getVariantBuilder(still.getIGBlock()).partialState().setModels(new ConfiguredModel(model));
         }
     }
 

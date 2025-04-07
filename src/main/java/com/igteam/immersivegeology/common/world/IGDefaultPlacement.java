@@ -65,6 +65,13 @@ public class IGDefaultPlacement extends PlacementFilter
 		return random.nextInt(chance_max) < config.generationChance.get();
 	}
 
+	public boolean canPlaceVeinEnd(ChunkPos pos, long level_seed, OreConfig config) {
+		if (config.veinSize.get() <= 0) return false;
+		int chance_max = 1_000_000;
+		RandomSource random = IGOreGenUtils.getReuseRandom(entry, level_seed, pos);
+		return random.nextInt(chance_max) < config.generationChance.get();
+	}
+
 	public boolean canSpawnAt(Holder<Biome> biome) {
 		float biomeTemp = biome.value().getBaseTemperature();
 		float biomeDownfall = biome.value().getModifiedClimateSettings().downfall();
@@ -105,7 +112,7 @@ public class IGDefaultPlacement extends PlacementFilter
 		boolean isNether = biome.containsTag(BiomeTags.IS_NETHER);
 		if(isOverworld || isNether || isEnd)
 		{
-			boolean possiblePlace = canPlaceVein(chunkPos, seed, config) && canSpawnAt(biome);
+			boolean possiblePlace = (isEnd ? canPlaceVeinEnd(chunkPos, seed, config) : canPlaceVein(chunkPos, seed, config)) && canSpawnAt(biome);
 			if(!possiblePlace) return false;
 			MaterialHelper material = entry.instance();
 			boolean canSpawnOverworld = material.acceptableStoneType(StoneEnum.MCStone);
@@ -122,6 +129,8 @@ public class IGDefaultPlacement extends PlacementFilter
 		}
 		else
 		{
+			boolean possiblePlace = canPlaceVein(chunkPos, seed, config) && canSpawnAt(biome);
+			if(!possiblePlace) return false;
 			RandomSource random = IGOreGenUtils.getReuseRandom(entry, level.getSeed(), chunkPos);
 			Vein vein = IGOreFeature.createVein(random, config, entry);
 			int maxY = config.maxY.get();

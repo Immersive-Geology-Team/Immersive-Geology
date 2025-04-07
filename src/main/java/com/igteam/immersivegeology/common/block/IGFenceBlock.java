@@ -42,7 +42,7 @@ public class IGFenceBlock extends FenceBlock implements IGBlockType
 	}
 
 	@Override
-	public Block getBlock()
+	public Block getIGBlock()
 	{
 		return this;
 	}

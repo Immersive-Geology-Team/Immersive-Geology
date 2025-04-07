@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
-import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -79,7 +78,7 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(useOptionalTag) {
 					useOptionalTag = false;
-					String name = oreBlock.getDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -102,7 +101,7 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(ModFlags.TFC.isStrictlyLoaded())
 				{
-					String name = oreBlock.getDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -135,7 +134,7 @@ public class IGBlockTags extends BlockTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = genericBlock.getBlock().getDescriptionId().toLowerCase();
+					String name = genericBlock.getIGBlock().getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 				}
@@ -163,7 +162,7 @@ public class IGBlockTags extends BlockTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = slab.getBlock().getDescriptionId().toLowerCase();
+					String name = slab.getIGBlock().getDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 				}

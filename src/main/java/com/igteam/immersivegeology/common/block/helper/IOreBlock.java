@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.helper;
 
-import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -17,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -26,14 +24,15 @@ import java.util.List;
 
 public interface IOreBlock
 {
-	BlockState getDefaultBlockState();
+	// We use IG in the name of these methods to prevent shadowing of Obfuscated Methods.
+	BlockState getIGDefaultBlockState();
 
 	Collection<MaterialInterface<?>> getMaterials();
 
-	String getDescriptionId();
+	String getIGDescriptionId();
 
-	Item asItem();
-	Block asBlock();
+	Item asIGItem();
+	Block asIGBlock();
 
 	MaterialInterface<?> getMaterial(MaterialTexture t);
 

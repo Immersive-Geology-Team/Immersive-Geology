@@ -65,7 +65,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
         return materialMap.get(t);
     }
     @Override
-    public Block getBlock() {
+    public Block getIGBlock() {
         return this;
     }
 

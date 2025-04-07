@@ -118,7 +118,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	}
 
 	@Override
-	public Block getBlock() {
+	public Block getIGBlock() {
 		IFlagType<?> flag = getFlag();
 		String key = materialMap.size() > 1 ? flag.getRegistryKey(getMaterial(MaterialTexture.base), getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(getMaterial(MaterialTexture.base));
 		return IGRegistrationHolder.getBlock.apply(key + "_block");

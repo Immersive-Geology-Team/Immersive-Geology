@@ -48,7 +48,7 @@ public class IGDeskBlock<T extends BlockEntity> extends DeskBlock<T> implements 
 	}
 
 	@Override
-	public Block getBlock()
+	public Block getIGBlock()
 	{
 		return this;
 	}

@@ -33,9 +33,6 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
 
 public class IGOreGenUtils
 {
@@ -55,7 +52,7 @@ public class IGOreGenUtils
 		try {
 			OreRichness richness = noiseValue > 0.99 ? OreRichness.RICH :
 					(noiseValue > 0.7 ? OreRichness.NORMAL : OreRichness.POOR);
-			return mineral.getOreBlock(stone, richness).getDefaultBlockState();
+			return mineral.getOreBlock(stone, richness).getIGDefaultBlockState();
 		} catch (Exception e) {
 			return null;
 		}

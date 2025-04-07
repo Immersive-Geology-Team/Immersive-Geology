@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.IGDeskBlock;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -42,7 +41,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
     private final IGBlockType block;
 
     public IGGenericBlockItem(IGBlockType block) {
-        super(block.getBlock(), new Properties());
+        super(block.getIGBlock(), new Properties());
         this.block = block;
     }
 
@@ -68,7 +67,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
 
     @Override
     public int getColor(int index) {
-        return this.block.getColor(index > 0 ? 1 : 0, this.block.getBlock().defaultBlockState());
+        return this.block.getColor(index > 0 ? 1 : 0, this.block.getIGBlock().defaultBlockState());
     }
 
     @Override

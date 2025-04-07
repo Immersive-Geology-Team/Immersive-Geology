@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public interface IGBlockType {
-    Block getBlock();
+    Block getIGBlock();
 
     @NotNull Collection<MaterialInterface<?>> getMaterials();
     MaterialInterface<?> getMaterial(MaterialTexture t);

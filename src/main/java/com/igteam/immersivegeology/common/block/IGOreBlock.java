@@ -22,6 +22,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -68,15 +69,27 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
     }
 
     @Override
-    public BlockState getDefaultBlockState()
+    public BlockState getIGDefaultBlockState()
     {
         return defaultBlockState();
     }
 
     @Override
-    public @NotNull Block asBlock()
+    public String getIGDescriptionId()
     {
-        return this;
+        return getDescriptionId();
+    }
+
+    @Override
+    public Item asIGItem()
+    {
+        return asItem();
+    }
+
+    @Override
+    public @NotNull Block asIGBlock()
+    {
+        return asBlock();
     }
 
     public OreRichness getOreRichness()

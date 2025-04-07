@@ -9,17 +9,14 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.IETags;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -143,12 +140,12 @@ public class IGItemTags extends ItemTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = oreBlock.getDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase();
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
 					continue;
 				}
-				tag(Tags.Items.ORES).add(oreBlock.asItem());
+				tag(Tags.Items.ORES).add(oreBlock.asIGItem());
 			}
 		}
 	}
