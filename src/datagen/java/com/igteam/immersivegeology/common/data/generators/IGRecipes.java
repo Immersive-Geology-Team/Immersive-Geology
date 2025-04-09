@@ -59,6 +59,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -297,6 +298,11 @@ public class IGRecipes extends RecipeProvider
 
 		for(MetalEnum metal : MetalEnum.values())
 		{
+			if(metal.hasFlag(ItemCategoryFlags.NUGGET) && metal.hasFlag(ItemCategoryFlags.INGOT))
+			{
+				ShapedRecipeBuilder.shaped(RecipeCategory.MISC, metal.getItem(ItemCategoryFlags.INGOT),1).define('n', metal.getItem(ItemCategoryFlags.NUGGET)).pattern("nnn").pattern("nnn").pattern("nnn").unlockedBy("has_nugget_"+metal.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.NUGGET))).save(consumer, ig("get_ingot_from_"+metal.getName()+"_nuggets"));
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metal.getItem(ItemCategoryFlags.NUGGET), 9).requires(metal.getItem(ItemCategoryFlags.INGOT)).unlockedBy("has_ingot_"+metal.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("get_nuggets_from_"+metal.getName()+"_ingot"));
+			}
 			if(metal.hasFlag(ItemCategoryFlags.PLATE) && !metal.instance().hasExistingFlag(ItemCategoryFlags.PLATE) && plates_and_rods_to_register.contains(metal))
 			{
 				MetalPressRecipeBuilder.builder(Molds.MOLD_PLATE, metal.getItemTag(ItemCategoryFlags.PLATE), 1).addInput(metal.getItemTag(ItemCategoryFlags.INGOT)).setEnergy(2400).build(consumer, new ResourceLocation(IGLib.MODID, "metal_press/ingot_to_plate_"+metal.getName()));

@@ -49,7 +49,7 @@ public class MaterialOsmium extends MaterialNativeMetal
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.COMPOUND_DUST, 1, 140,1024);
+        //IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST, 1, 140,1024);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.SLURRY,

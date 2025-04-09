@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingot_unobtanium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:ingot_unobtanium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/get_nuggets_from_unobtanium_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_unobtanium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/get_nuggets_from_unobtanium_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -125,7 +125,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public int getColor(IFlagType<?> p, Integer secondaryColors) {
-        return applyColorTint.test(p, secondaryColors) ? colorFunction.apply(p, secondaryColors) : 0xFFFFFF;
+        return applyColorTint.test(p, secondaryColors) ? colorFunction.apply(p, secondaryColors) : 0xFFFFFFFF;
     }
 
     public void initializeColorTint(BiPredicate<IFlagType<?>, Integer> predicate) {

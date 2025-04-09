@@ -13,7 +13,7 @@ plugins {
     id 'idea'
 }
 
-version = '0.6.5-b' + version_buildnumber
+version = '0.6.6-b' + version_buildnumber
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -220,6 +220,7 @@ dependencies {
     implementation fg.deobf("curse.maven:terrafirmacraft-302973:6187491")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:engineered-schematics-1207780:6338665")
+    implementation fg.deobf("curse.maven:mekanism-268560:6258796")
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
