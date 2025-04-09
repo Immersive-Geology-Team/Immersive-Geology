@@ -33,6 +33,7 @@ public class MaterialOsmium extends MaterialNativeMetal
     public MaterialOsmium() {
         super();
         this.CONFIG = new MaterialMineral.MineralConfig(0,0,0,0,0,0,0, false, Optional.empty(), IGGenerationType.DEFAULT);
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.METAL_OXIDE);
     }
 
     @Override
@@ -49,8 +50,6 @@ public class MaterialOsmium extends MaterialNativeMetal
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
-        //IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST, 1, 140,1024);
-
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.SLURRY,
                 MetalEnum.Platinum.getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
@@ -67,8 +66,6 @@ public class MaterialOsmium extends MaterialNativeMetal
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 200, 51200);
-
-
     }
 
 

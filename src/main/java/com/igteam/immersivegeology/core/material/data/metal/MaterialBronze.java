@@ -23,6 +23,7 @@ public class MaterialBronze extends MaterialMetalAlloy
     public MaterialBronze() {
         super();
         addFlags(BlockCategoryFlags.FENCE);
+
     }
 
     @Override

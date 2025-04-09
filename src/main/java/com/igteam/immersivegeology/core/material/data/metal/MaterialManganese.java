@@ -30,6 +30,7 @@ public class MaterialManganese extends MaterialMetal {
         super();
         addFlags(ItemCategoryFlags.OXIDE_PELLET);
         addFlags(ItemCategoryFlags.COMPOUND_DUST);
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL);
     }
 
     @Override

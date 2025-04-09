@@ -10,6 +10,6 @@ public class MaterialMetalAlloy extends MaterialMetal {
     public MaterialMetalAlloy(){
         super();
         addFlags(MaterialFlags.IS_METAL_ALLOY);
-        removeMaterialFlags(ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.METAL_OXIDE);
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST);
     }
 }

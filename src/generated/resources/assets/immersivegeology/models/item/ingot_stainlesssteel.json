@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/ingot/type_4_pristine_stainlesssteel"
+    "layer0": "immersivegeology:palette/item/ingot/type_6_pristine_stainlesssteel"
   }
 }

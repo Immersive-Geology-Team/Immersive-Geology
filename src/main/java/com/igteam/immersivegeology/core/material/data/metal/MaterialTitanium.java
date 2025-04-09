@@ -39,6 +39,7 @@ public class MaterialTitanium extends MaterialMetal {
     public MaterialTitanium() {
         super();
         addFlags(BlockCategoryFlags.FENCE, ItemCategoryFlags.DRILL_HEAD);
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL,ItemCategoryFlags.COMPOUND_DUST);
     }
 
     @Override

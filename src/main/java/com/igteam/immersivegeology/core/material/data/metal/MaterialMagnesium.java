@@ -22,6 +22,7 @@ public class MaterialMagnesium extends MaterialMetal {
     public MaterialMagnesium() {
         super();
         removeMaterialFlags(ItemCategoryFlags.WIRE);
+        removeMaterialFlags(ItemCategoryFlags.METAL_OXIDE);
     }
 
     @Override

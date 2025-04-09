@@ -31,9 +31,12 @@ public class MaterialAluminum extends MaterialMetal {
         super();
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, BlockCategoryFlags.ENGINEERING_BLOCK);
 
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL);
+
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT,
                 ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE,
                 ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);
+
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.STORAGE_BLOCK,
                 BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_STAIRS,
                 BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB, BlockCategoryFlags.SHEETMETAL_SLAB);

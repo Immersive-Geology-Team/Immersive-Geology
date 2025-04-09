@@ -23,7 +23,7 @@ public class MaterialTin extends MaterialMetal {
     public MaterialTin() {
         super();
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
-
+        removeMaterialFlags(ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.COMPOUND_DUST);
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
         addFlags(ItemCategoryFlags.OXIDE_PELLET);
     }

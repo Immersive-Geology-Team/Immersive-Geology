@@ -29,6 +29,7 @@ public class MaterialNickel extends MaterialMetal
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB);
         addFlags(ItemCategoryFlags.OXIDE_PELLET);
+        removeMaterialFlags(ItemCategoryFlags.COMPOUND_DUST);
     }
 
     @Override
