@@ -33,7 +33,7 @@ public class MaterialSphalerite extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x6F8070));
+        return ((p, i) -> (0xff6F8070));
     }
 
     @Override

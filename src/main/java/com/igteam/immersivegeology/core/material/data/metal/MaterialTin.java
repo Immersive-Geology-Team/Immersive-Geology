@@ -30,7 +30,7 @@ public class MaterialTin extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xd3d4d5));
+        return ((p, i) -> (0xffd3d4d5));
     }
 
     @Override

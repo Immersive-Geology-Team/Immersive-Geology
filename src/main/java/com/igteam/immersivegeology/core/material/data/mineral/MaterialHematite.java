@@ -38,7 +38,7 @@ public class MaterialHematite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x4B2F2C));
+        return ((p, i) -> (0xff4B2F2C));
     }
 
     @Override

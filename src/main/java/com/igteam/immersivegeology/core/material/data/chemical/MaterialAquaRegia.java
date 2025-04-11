@@ -29,7 +29,7 @@ public class MaterialAquaRegia extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xf16b02));
+		return ((p, i) -> (0xfff16b02));
 	}
 
 	@Override

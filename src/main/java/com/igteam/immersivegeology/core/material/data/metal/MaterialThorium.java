@@ -34,7 +34,7 @@ public class MaterialThorium extends MaterialRadioactiveMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x45484b));
+        return ((p, i) -> (0xff45484b));
     }
 
     @Override

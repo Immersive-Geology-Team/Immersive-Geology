@@ -37,7 +37,7 @@ public class MaterialSmithsonite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x81D1DC));
+        return ((p, i) -> (0xff81D1DC));
     }
 
     @Override

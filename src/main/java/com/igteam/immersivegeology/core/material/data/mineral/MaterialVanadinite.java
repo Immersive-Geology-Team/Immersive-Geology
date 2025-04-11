@@ -37,7 +37,7 @@ public class MaterialVanadinite extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xEF2161));
+        return ((p, i) -> (0xffEF2161));
     }
 
     @Override

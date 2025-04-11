@@ -41,7 +41,7 @@ public class MaterialMillerite extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x484742));
+        return ((p, i) -> (0xff484742));
     }
 
     @Override

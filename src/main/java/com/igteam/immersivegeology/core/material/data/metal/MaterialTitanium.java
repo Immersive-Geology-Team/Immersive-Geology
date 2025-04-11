@@ -44,7 +44,7 @@ public class MaterialTitanium extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x878681));
+        return ((p, i) -> (0xff878681));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x939AC4));
+        return ((p, i) -> (0xff939AC4));
     }
 
     @Override

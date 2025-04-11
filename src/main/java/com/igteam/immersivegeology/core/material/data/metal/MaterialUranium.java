@@ -28,7 +28,7 @@ public class MaterialUranium extends MaterialRadioactiveMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x759068));
+        return ((p, i) -> (0xff759068));
     }
 
     @Override

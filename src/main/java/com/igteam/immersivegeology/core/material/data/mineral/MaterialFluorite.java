@@ -33,7 +33,7 @@ public class MaterialFluorite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x329870));
+        return ((p, i) -> (0xff329870));
     }
 
     @Override

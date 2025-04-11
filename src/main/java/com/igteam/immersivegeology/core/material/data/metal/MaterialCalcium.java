@@ -50,7 +50,7 @@ public class MaterialCalcium extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xadbfaa));
+        return ((p, i) -> (0xffadbfaa));
     }
 
     protected IGRecipeChain ammonia_synthesis = new IGRecipeChain(this, "ammonia_synthesis", 0);

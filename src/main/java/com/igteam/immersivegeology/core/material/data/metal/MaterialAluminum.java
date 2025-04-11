@@ -44,7 +44,7 @@ public class MaterialAluminum extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xd0d5db));
+        return ((p, i) -> (0xffd0d5db));
     }
 
     @Override

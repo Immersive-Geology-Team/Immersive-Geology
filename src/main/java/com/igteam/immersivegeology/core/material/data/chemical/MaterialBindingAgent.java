@@ -39,6 +39,6 @@ public class MaterialBindingAgent extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0x826548));
+		return ((p, i) -> (0xff826548));
 	}
 }

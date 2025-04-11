@@ -36,6 +36,6 @@ public class MaterialTungstenCarbide extends MaterialMetalAlloy
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x264e4c));
+        return ((p, i) -> (0xff264e4c));
     }
 }

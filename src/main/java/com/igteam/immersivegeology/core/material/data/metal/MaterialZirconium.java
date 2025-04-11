@@ -23,7 +23,7 @@ public class MaterialZirconium extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xeaeded));
+        return ((p, i) -> (0xffeaeded));
     }
 
     @Override

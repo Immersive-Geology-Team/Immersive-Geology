@@ -36,7 +36,7 @@ public class MaterialNeodymium extends MaterialMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xAB9CA3));
+        return ((p, i) -> (0xffAB9CA3));
     }
 
     @Override

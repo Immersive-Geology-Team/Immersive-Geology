@@ -94,7 +94,7 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 
 	@Override
 	public int getColor(int index, BlockState state) {
-		return 0xff000000 | materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
+		return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
 	}
 
 	@Override

@@ -134,7 +134,7 @@ public class IGFluidType extends FluidType
 			@Override
 			public int getTintColor()
 			{
-				return 0xFF000000 | (fluid.overlay != null ? fluid.overlay.getColor(flag, 0) : fluid.base.getColor(flag, 0));
+				return (fluid.overlay != null ? fluid.overlay.getColor(flag, 0) : fluid.base.getColor(flag, 0));
 			}
 
 			@Override

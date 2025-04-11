@@ -45,7 +45,7 @@ public class MaterialGold extends MaterialNativeMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xFFD700));
+        return ((p, i) -> (0xffFFD700));
     }
 
     @Override

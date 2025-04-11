@@ -42,7 +42,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xb3cbe4));
+        return ((p, i) -> (0xffb3cbe4));
     }
 
     @Override

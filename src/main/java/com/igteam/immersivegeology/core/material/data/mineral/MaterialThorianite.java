@@ -26,7 +26,7 @@ public class MaterialThorianite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x485560));
+        return ((p, i) -> (0xff485560));
     }
 
     @Override

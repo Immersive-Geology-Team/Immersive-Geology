@@ -29,6 +29,6 @@ public class MaterialAmmoniaSolution extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0x7e87dc));
+		return ((p, i) -> (0xff7e87dc));
 	}
 }

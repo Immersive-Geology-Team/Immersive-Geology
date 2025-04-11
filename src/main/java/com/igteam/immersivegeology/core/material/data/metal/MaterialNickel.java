@@ -34,7 +34,7 @@ public class MaterialNickel extends MaterialMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x7FFFD4));
+        return ((p, i) -> (0xff7FFFD4));
     }
 
     @Override

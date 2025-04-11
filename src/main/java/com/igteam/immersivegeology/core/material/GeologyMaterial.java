@@ -135,7 +135,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return (flag, integer) -> (0xffffff);
+        return (flag, integer) -> (0xffffffff);
     }
 
     public Set<IFlagType<?>> getFlags() {

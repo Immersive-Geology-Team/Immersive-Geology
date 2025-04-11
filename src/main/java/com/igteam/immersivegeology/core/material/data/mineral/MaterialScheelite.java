@@ -36,7 +36,7 @@ public class MaterialScheelite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x32332E));
+        return ((p, i) -> (0xff32332E));
     }
 
     @Override

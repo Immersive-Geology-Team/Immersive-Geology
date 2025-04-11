@@ -30,7 +30,7 @@ public class MaterialRocksalt extends MaterialEvaporateMineral
 {
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xF3E9FB));
+		return ((p, i) -> (0xffF3E9FB));
 	}
 
 	@Override

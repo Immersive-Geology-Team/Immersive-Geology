@@ -40,7 +40,7 @@ public class MaterialIron extends MaterialNativeMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xd8dada));
+        return ((p, i) -> (0xffd8dada));
     }
 
     @Override

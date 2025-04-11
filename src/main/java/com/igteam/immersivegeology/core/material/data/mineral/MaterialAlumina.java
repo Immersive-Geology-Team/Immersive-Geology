@@ -49,7 +49,7 @@ public class MaterialAlumina extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x999FAF));
+        return ((p, i) -> (0xff999FAF));
     }
 
     @Override

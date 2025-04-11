@@ -47,8 +47,8 @@ public class MaterialSilver extends MaterialNativeMetal {
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
-            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xC0C0C0),
-                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x2E2E2E)));
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xffC0C0C0),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0xff2E2E2E)));
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()

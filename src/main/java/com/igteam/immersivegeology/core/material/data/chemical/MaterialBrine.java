@@ -27,6 +27,6 @@ public class MaterialBrine extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xBCA271));
+		return ((p, i) -> (0xffBCA271));
 	}
 }

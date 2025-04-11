@@ -35,7 +35,15 @@ public class MaterialMoltenMantle extends MaterialMetal
 	}
 
 	@Override
-	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (p!=null && (p.equals(BlockCategoryFlags.FLUID) || p.equals(ItemCategoryFlags.BUCKET))) ? 0xEE5024 : 0x222222);
+	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
+	{
+		return (p, i) -> {
+			if(p!=null&&(p.equals(BlockCategoryFlags.FLUID)||p.equals(BlockCategoryFlags.SLURRY)||p.equals(ItemCategoryFlags.BUCKET)))
+			{
+				return 0xffEE5024;
+			}
+			if(p == null) return 0xffEE5024;
+			return 0xff222222;
+		};
 	}
 }

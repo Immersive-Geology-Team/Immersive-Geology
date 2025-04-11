@@ -31,6 +31,6 @@ public class MaterialChemicalWaste extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xCF3C27));
+		return ((p, i) -> (0xffCF3C27));
 	}
 }

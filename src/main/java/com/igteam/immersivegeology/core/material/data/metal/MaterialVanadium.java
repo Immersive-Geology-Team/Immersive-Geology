@@ -22,6 +22,6 @@ public class MaterialVanadium extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x8e1e1d));
+        return ((p, i) -> (0xff8e1e1d));
     }
 }

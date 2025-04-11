@@ -43,6 +43,6 @@ public class MaterialSulfurDioxide extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0x444444));
+		return ((p, i) -> (0xff444444));
 	}
 }

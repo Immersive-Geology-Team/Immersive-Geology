@@ -47,7 +47,7 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x83C4EA));
+        return ((p, i) -> (0xff83C4EA));
     }
 
     @Override

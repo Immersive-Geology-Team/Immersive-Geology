@@ -40,7 +40,7 @@ public class MaterialCryolite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xC5C5C5));
+        return ((p, i) -> (0xffC5C5C5));
     }
 
     @Override

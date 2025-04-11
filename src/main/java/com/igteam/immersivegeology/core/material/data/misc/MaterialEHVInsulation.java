@@ -34,7 +34,7 @@ public class MaterialEHVInsulation extends MaterialMisc
 		this.name = "ehv_insulation";
 		addFlags(ItemCategoryFlags.PLATE, BlockCategoryFlags.FLUID);
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
-		this.colorFunction = (i,p) -> 0xD7C8A7;
+		this.colorFunction = (i,p) -> 0xffD7C8A7;
 	}
 
 	@Override

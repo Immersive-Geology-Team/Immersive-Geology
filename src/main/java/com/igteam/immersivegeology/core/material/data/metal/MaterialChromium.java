@@ -39,7 +39,7 @@ public class MaterialChromium extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xD7B4F3));
+        return ((p, i) -> (0xffD7B4F3));
     }
 
     @Override

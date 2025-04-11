@@ -24,7 +24,7 @@ public class MaterialRefractoryBlock extends MaterialMisc
 		this.name = "refractory_brick";
 		addFlags(BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.SLAB, BlockCategoryFlags.STAIRS);
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
-		this.colorFunction = (f,i) -> 0xffffff;
+		this.colorFunction = (f,i) -> 0xffffffff;
 	}
 
 	@Override

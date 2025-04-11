@@ -29,7 +29,7 @@ public class MaterialHastelloy extends MaterialMetalAlloy
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xb6afa9));
+        return ((p, i) -> (0xffb6afa9));
     }
 
     @Override

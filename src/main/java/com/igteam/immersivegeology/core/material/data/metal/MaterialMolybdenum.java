@@ -31,7 +31,7 @@ public class MaterialMolybdenum extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xa1a8b2));
+        return ((p, i) -> (0xffa1a8b2));
     }
 
     @Override

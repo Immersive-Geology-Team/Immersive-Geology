@@ -34,7 +34,7 @@ public class MaterialApatite extends MaterialSulphideMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x87CEEB));
+        return ((p, i) -> (0xff87CEEB));
     }
 
     @Override

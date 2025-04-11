@@ -39,7 +39,7 @@ public class MaterialPlatinum extends MaterialNativeMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xe7e7f7));
+        return ((p, i) -> (0xffe7e7f7));
     }
 
     @Override

@@ -37,7 +37,7 @@ public class MaterialIlmenite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x4A3E3E));
+        return ((p, i) -> (0xff4A3E3E));
     }
 
     @Override

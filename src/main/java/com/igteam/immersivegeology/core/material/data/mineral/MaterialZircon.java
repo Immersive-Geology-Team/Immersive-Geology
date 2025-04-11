@@ -25,7 +25,7 @@ public class MaterialZircon extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x8B2E1D));
+        return ((p, i) -> (0xff8B2E1D));
     }
 
     @Override

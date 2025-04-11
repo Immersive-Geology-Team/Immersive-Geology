@@ -49,7 +49,7 @@ public class MaterialAnatase extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x475B74));
+        return ((p, i) -> (0xff475B74));
     }
 
     @Override

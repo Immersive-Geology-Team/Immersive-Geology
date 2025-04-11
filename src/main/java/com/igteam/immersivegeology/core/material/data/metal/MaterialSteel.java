@@ -26,6 +26,6 @@ public class MaterialSteel extends MaterialMetalAlloy
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x85888C));
+        return ((p, i) -> (0xff85888C));
     }
 }

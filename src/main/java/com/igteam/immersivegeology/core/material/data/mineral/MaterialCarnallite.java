@@ -31,7 +31,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xFEDD9E));
+        return ((p, i) -> (0xffFEDD9E));
     }
 
     @Override

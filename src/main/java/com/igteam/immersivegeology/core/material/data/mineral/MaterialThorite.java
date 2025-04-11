@@ -30,7 +30,7 @@ public class MaterialThorite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xaa7547));
+        return ((p, i) -> (0xffaa7547));
     }
 
     @Override

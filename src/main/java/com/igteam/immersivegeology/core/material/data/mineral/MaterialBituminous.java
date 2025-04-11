@@ -30,7 +30,7 @@ public class MaterialBituminous extends MaterialMineral
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(800);
 		CONFIG = new MineralConfig(30, 50, 1, -64, 320, 1000, 0.75,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
-		this.colorFunction = (flag,v) -> 0x242227;
+		this.colorFunction = (flag,v) -> 0xff242227;
 		addGenerationFriend(MaterialBituminous::getFriends, 300);
 	}
 

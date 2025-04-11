@@ -31,7 +31,7 @@ public class MaterialCobalt extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x1A79FF));
+        return ((p, i) -> (0xff1A79FF));
     }
 
     @Override

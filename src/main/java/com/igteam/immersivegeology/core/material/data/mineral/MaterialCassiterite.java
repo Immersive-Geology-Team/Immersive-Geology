@@ -34,7 +34,7 @@ public class MaterialCassiterite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x5A4D4D));
+        return ((p, i) -> (0xff5A4D4D));
     }
 
     @Override

@@ -32,7 +32,7 @@ public class MaterialChromite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x615964));
+        return ((p, i) -> (0xff615964));
     }
 
     @Override

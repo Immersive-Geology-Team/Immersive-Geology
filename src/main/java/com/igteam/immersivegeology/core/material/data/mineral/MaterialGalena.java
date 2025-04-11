@@ -40,7 +40,7 @@ public class MaterialGalena extends MaterialSulphideMineral
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x857F83));
+        return ((p, i) -> (0xff857F83));
     }
 
     @Override

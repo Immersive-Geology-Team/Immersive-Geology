@@ -39,7 +39,7 @@ public class MaterialMonazite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xC21E56));
+        return ((p, i) -> (0xffC21E56));
     }
 
     @Override

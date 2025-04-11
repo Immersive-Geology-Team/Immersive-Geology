@@ -32,7 +32,7 @@ public class MaterialSodiumHydroxide extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xe3ce77));
+		return ((p, i) -> (0xffe3ce77));
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class MaterialLead extends MaterialNativeMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x444f53));
+        return ((p, i) -> (0xff444f53));
     }
 
     @Override

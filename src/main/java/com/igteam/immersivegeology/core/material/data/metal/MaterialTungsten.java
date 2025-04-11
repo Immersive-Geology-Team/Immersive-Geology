@@ -33,7 +33,7 @@ public class MaterialTungsten extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x444D6A));
+        return ((p, i) -> (0xff444D6A));
     }
 
     @Override

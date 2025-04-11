@@ -38,7 +38,7 @@ public class MaterialOsmium extends MaterialNativeMetal
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x8A9A9A));
+        return ((p, i) -> (0xff8A9A9A));
     }
 
     @Override

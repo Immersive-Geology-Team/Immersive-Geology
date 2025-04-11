@@ -29,7 +29,7 @@ public class MaterialGypsum extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x90AB8C));
+        return ((p, i) -> (0xff90AB8C));
     }
 
     @Override

@@ -30,7 +30,7 @@ public class MaterialAnthracite extends MaterialMineral
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(1600);
 		CONFIG = new MineralConfig(30, 50, 1, -64, 32, 750, 0.6,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
-		this.colorFunction = (flag,v) -> 0x242227;
+		this.colorFunction = (flag,v) -> 0xff242227;
 		addGenerationFriend(MaterialAnthracite::getFriends, 300);
 	}
 

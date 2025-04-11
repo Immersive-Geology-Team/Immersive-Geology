@@ -35,7 +35,7 @@ public class MaterialManganese extends MaterialMetal {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xaaa9ad));
+        return ((p, i) -> (0xffaaa9ad));
     }
 
     @Override

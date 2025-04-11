@@ -35,7 +35,7 @@ public class MaterialWolframite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0x3A3E49));
+        return ((p, i) -> (0xff3A3E49));
     }
 
     @Override

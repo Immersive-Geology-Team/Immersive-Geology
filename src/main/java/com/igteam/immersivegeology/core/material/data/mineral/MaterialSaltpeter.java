@@ -34,7 +34,7 @@ public class MaterialSaltpeter extends MaterialEvaporateMineral
 	}
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xc1fffa));
+		return ((p, i) -> (0xffc1fffa));
 	}
 
 	@Override

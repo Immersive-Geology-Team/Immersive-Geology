@@ -32,7 +32,7 @@ public class MaterialUraninite extends MaterialMineral {
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-        return ((p, i) -> (0xB2BEB5));
+        return ((p, i) -> (0xffB2BEB5));
     }
 
     @Override
