@@ -122,7 +122,7 @@ public class IGRegistrationHolder {
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
     public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
-            .icon(IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt))::getDefaultInstance)
+            .icon(() -> IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt)).getDefaultInstance())
             .title(Component.translatable("itemGroup.immersivegeology"))
             .displayItems(IGRegistrationHolder::fillIGTab)
             .withTabFactory(IGItemGroup::new)
@@ -180,49 +180,12 @@ public class IGRegistrationHolder {
     }
 
 
-    private static Class<? extends TemplateMultiblock>[] formationFormat(List<Class<? extends TemplateMultiblock>> list)
+    private static IMultiblock[] formationFormat(List<IMultiblock> list)
     {
-        Class<? extends TemplateMultiblock>[] array = new Class[list.size()];
+        IMultiblock[] array = new IMultiblock[list.size()];
         array = list.toArray(array);
         return array;
     }
-
-    private static void setupFormationLists()
-    {
-        IGLib.IG_LOGGER.info("- Custom Multiblock Formation Data");
-        stone_mb.add(IGBloomeryMultiblock.class);
-        stone_mb.add(AlloySmelterMultiblock.class);
-
-        bronze_mb.addAll(stone_mb);
-        bronze_mb.add(IGReverberationFurnaceMultiblock.class);
-        bronze_mb.add(BlastFurnaceMultiblock.class);
-        bronze_mb.add(CokeOvenMultiblock.class);
-
-        steel_mb.addAll(bronze_mb);
-        steel_mb.add(IGGravitySeparatorMultiblock.class);
-        steel_mb.add(IGPelletizerMultiblock.class);
-        steel_mb.add(IGCoreDrillMultiblock.class);
-        steel_mb.add(IGRotaryKilnMultiblock.class);
-        steel_mb.add(IGTrommelMultiblock.class);
-        steel_mb.add(IGChemicalReactorMultiblock.class);
-        steel_mb.add(IGCentrifugeMultiblock.class);
-        steel_mb.add(IGBallmillMultiblock.class);
-        steel_mb.add(IGCrystalizerMultiblock.class);
-        steel_mb.add(IGFoundryMultiblock.class);
-
-        for(IMultiblock m : IEMultiblocks.IE_MULTIBLOCKS)
-        {
-            if(m instanceof TemplateMultiblock t)
-            {
-                steel_mb.add(t.getClass());
-            }
-        }
-
-    }
-
-    public static final List<Class<? extends TemplateMultiblock>> stone_mb = new ArrayList<>();
-    public static final List<Class<? extends TemplateMultiblock>> bronze_mb = new ArrayList<>();
-    public static final List<Class<? extends TemplateMultiblock>> steel_mb = new ArrayList<>();
 
     private static void registerBlockAndItem(String registryKey, BlockCategoryFlags blockCategory, MaterialInterface<?> material)
     {
@@ -267,16 +230,15 @@ public class IGRegistrationHolder {
 
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
 
-    public static synchronized void initialize()
+    public static void initialize()
     {
         initializeMultiblocks();
-        setupFormationLists();
 
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
-        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
-        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, formationFormat(steel_mb)));
-        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32, formationFormat(stone_mb)));
+        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256));
+        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048));
+        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32));
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, MiscEnum.Refractory, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
 

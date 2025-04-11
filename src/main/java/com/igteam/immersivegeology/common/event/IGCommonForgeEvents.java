@@ -8,14 +8,15 @@
 
 package com.igteam.immersivegeology.common.event;
 
+import com.igteam.immersivegeology.common.commands.IGFindMineralVeinCommand;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
-import net.minecraft.client.Minecraft;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,12 +29,10 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.TickEvent.RenderTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +55,14 @@ public class IGCommonForgeEvents
 				event.setCanceled(true);
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public void onRegisterCommands(RegisterCommandsEvent event)
+	{
+		IGLib.IG_LOGGER.info("Registered Custom Commands");
+		CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+		IGFindMineralVeinCommand.register(dispatcher);
 	}
 
 	@SubscribeEvent

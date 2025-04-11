@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -24,6 +28,10 @@ public class MaterialVanilla extends MaterialStone {
         this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE; // IGNEOUS and Sedimentary
         this.name = "stone"; // Special Case as we need to override the default name assignment method
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
+        validMultiblocks.add(() -> IEMultiblocks.ALLOY_SMELTER);
+        validMultiblocks.add(() -> IEMultiblocks.COKE_OVEN);
+        validMultiblocks.add(() -> IEMultiblocks.BLAST_FURNACE);
+        validMultiblocks.add(() -> IGBloomeryMultiblock.INSTANCE);
     }
 
     @Override
@@ -38,5 +46,11 @@ public class MaterialVanilla extends MaterialStone {
         BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
         BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
         return List.of(OreConfiguration.target(new TagMatchTest(Blocks.STONE), normal));
+    }
+
+    @Override
+    public boolean canFormMB(IMultiblock multiblock)
+    {
+        return super.canFormMB(multiblock);
     }
 }

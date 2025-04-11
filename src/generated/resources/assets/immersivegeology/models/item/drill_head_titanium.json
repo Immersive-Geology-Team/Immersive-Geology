@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/drill_head/drillhead_pristine_titanium"
+    "layer0": "immersivegeology:palette/item/drill_head/drill_head_pristine_titanium"
   }
 }

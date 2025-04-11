@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import com.google.common.collect.Sets;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
@@ -58,6 +59,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     protected BiPredicate<IFlagType<?>, Integer> applyColorTint; // In a goes the flag and int, returns if it uses programmed color tint
     private final LinkedHashSet<IFlagType<?>> materialDataFlags = Sets.newLinkedHashSet();
 
+    protected final List<Supplier<IMultiblock>> validMultiblocks = new ArrayList<>();
     protected Rarity materialRarity = Rarity.COMMON;
 
     protected IGRecipeChain directBlasting = new IGRecipeChain(this, "direct_blasting", 0);
@@ -504,5 +506,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public boolean fluidSpreadEvent(LevelAccessor level, BlockPos pos, BlockState state, Direction direction, FluidState fluidState)
     {
         return false;
+    }
+
+    public boolean canFormMB(IMultiblock multiblock)
+    {
+        return validMultiblocks.stream().anyMatch(s -> s.get().equals(multiblock));
     }
 }

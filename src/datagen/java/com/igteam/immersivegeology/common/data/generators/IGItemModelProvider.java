@@ -81,10 +81,12 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     private void generateDrillHead(IGGenericDrillHead item)
     {
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drillhead_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase());
+        ResourceLocation coloredTexture =  new ResourceLocation(IGLib.MODID, "item/colored/" + item.getMaterial(MaterialTexture.base).getName() + "/" + item.getFlag().name().toLowerCase());
+        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drill_head_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase());
+        boolean colored = this.existingFileHelper.exists(coloredTexture, PackType.CLIENT_RESOURCES);
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-            withExistingParent(itemLocation, parentLocation).texture("layer0", texture);
+            withExistingParent(itemLocation, parentLocation).texture("layer0", colored ? coloredTexture : texture);
         } catch (Exception ex) {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).textures.put("layer0", texture.toString());

@@ -60,7 +60,7 @@ public class IGAtlasProvider implements DataProvider {
 			if(flag.hasPalette() && flag.equals(ItemCategoryFlags.DRILL_HEAD))
 			{
 				textures.add("palette/item/" + flag.getName() + "/drill");
-				textures.add("palette/item/" + flag.getName() + "/drillhead");
+				textures.add("palette/item/" + flag.getName() + "/drill_head");
 			}
 		}
 		List<String> scaffolding_textures = new ArrayList<>();

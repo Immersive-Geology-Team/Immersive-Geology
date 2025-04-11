@@ -174,7 +174,7 @@ public class IGRecipes extends RecipeProvider
 				.pattern("SBS").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE)).define('S', refractory_slab)
 				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, ig("craft_reinforced_refractory_bricks_slab_alt"));
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.POWDER))
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.GRIT))
 				.requires(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT))
 				.requires(Ingredients.DUST_HOP_GRAPHITE)
 				.unlockedBy("has_tungsten_powder", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT)))

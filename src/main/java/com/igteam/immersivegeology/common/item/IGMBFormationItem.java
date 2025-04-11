@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.item;
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
@@ -18,6 +19,7 @@ import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
 import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -52,16 +54,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class IGMBFormationItem extends IGGenericItem
 {
-	private final Set<Class<? extends TemplateMultiblock>> formableMultiblocks;
-
-	@SafeVarargs
-	public IGMBFormationItem(ItemCategoryFlags flag, MaterialInterface<?> material, int max_durability, Class<? extends TemplateMultiblock>... multiblocks)
+	BiPredicate<IMultiblock, MaterialInterface<?>> validPredicate = (multiblock, material) -> material.canFormMB(multiblock);
+	public IGMBFormationItem(ItemCategoryFlags flag, MaterialInterface<?> material, int max_durability)
 	{
 		super(flag, material, new Properties().defaultDurability(max_durability));
-		formableMultiblocks = Set.of(multiblocks);
 	}
 
 	@Override
@@ -111,7 +113,7 @@ public class IGMBFormationItem extends IGGenericItem
 			multiblockSide = side;
 		for(MultiblockHandler.IMultiblock mb : MultiblockHandler.getMultiblocks())
 		{
-			boolean isValid = formableMultiblocks.stream().anyMatch((allowed) -> allowed.isInstance(mb));
+			boolean isValid = validPredicate.test(mb,getMaterial(MaterialTexture.base));
 			boolean isBlockTrigger = mb.isBlockTrigger(world.getBlockState(pos), multiblockSide, world);
 
 			if (isBlockTrigger)
@@ -231,5 +233,10 @@ public class IGMBFormationItem extends IGGenericItem
 	public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
 		if(materialMap.get(MaterialTexture.base) instanceof StoneEnum) return repairCandidate.is(Items.COBBLESTONE);
 		return repairCandidate.is(materialMap.get(MaterialTexture.base).getItem(ItemCategoryFlags.INGOT));
+	}
+
+	public boolean canFormMB(MaterialInterface<?> material, IGTemplateMultiblock igTemplateMultiblock)
+	{
+		return validPredicate.test(igTemplateMultiblock, material);
 	}
 }

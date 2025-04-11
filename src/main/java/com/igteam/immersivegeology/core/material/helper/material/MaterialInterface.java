@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.helper.material;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -12,8 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -176,6 +175,11 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default boolean fluidSpreadEvent(LevelAccessor level, BlockPos pos, BlockState state, Direction direction, FluidState fluidState)
     {
         return instance().fluidSpreadEvent(level, pos, state, direction, fluidState);
+    };
+
+	default boolean canFormMB(IMultiblock multiblock)
+    {
+        return instance().canFormMB(multiblock);
     };
 
 }
