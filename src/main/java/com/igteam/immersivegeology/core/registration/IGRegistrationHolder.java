@@ -275,7 +275,7 @@ public class IGRegistrationHolder {
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256, formationFormat(bronze_mb)));
-        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGHeftyWrenchItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, 6, 2.4f, formationFormat(steel_mb)));
+        registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048, formationFormat(steel_mb)));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32, formationFormat(stone_mb)));
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, MiscEnum.Refractory, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
