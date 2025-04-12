@@ -111,7 +111,7 @@ public class IGOreGenUtils
 		int totalViableLocations = 0;
 		// Use the same 3x3 chunk area approach
 		int sectionMin = level.getMinSection();
-		int sectionMax = level.getMaxSection()-1;
+		int sectionMax = level.getMaxSection();
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);

@@ -102,7 +102,7 @@ public class IGMineralTestingItem extends IGGenericItem
 					}
 					else
 					{
-						//level.removeBlock(cursor, false);
+						level.removeBlock(cursor, false);
 					}
 				}
 			}

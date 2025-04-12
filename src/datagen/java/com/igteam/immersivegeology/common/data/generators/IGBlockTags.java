@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -60,6 +61,10 @@ public class IGBlockTags extends BlockTagsProvider
 			if(block.get() instanceof IGCrystalBlock crystal)
 			{
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(crystal);
+			}
+			if(block.get() instanceof IGEnergyPipe pipe)
+			{
+				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pipe);
 			}
 			if(block.get() instanceof IOreBlock oreBlock)
 			{

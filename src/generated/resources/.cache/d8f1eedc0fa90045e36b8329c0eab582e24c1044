@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-09T23:32:39.971976164	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-04-12T18:27:40.31730022	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -439,7 +439,7 @@ f461dd9e74cfb903e4176f769ee6161588b17560 data/forge/tags/items/powdered_slag/ilm
 76f38a2af54c2b6f68f6446523b9473e4febd57a data/forge/tags/items/powdered_slag/pyrite.json
 b976dacc3a206e218bd75c373a000d98fb5078c9 data/forge/tags/items/powdered_slag/smithsonite.json
 c9fc5fc34fd86658faca7528de3e3066b23735e3 data/forge/tags/items/powdered_slag/sphalerite.json
-dfcbabd2bf60d44c2748de461cd3a07c78e2ee20 data/forge/tags/items/powders.json
+32c387f3c87cadeac243957011987436a771a9e2 data/forge/tags/items/powders.json
 6baba74f408008a032c95e17fcd9723199a9f602 data/forge/tags/items/powders/acanthite.json
 57b5bbc88bbf9d33f21a5e9c2eb6ba78eb2b89be data/forge/tags/items/powders/alumina.json
 41162608401c369bea357b20372ee1bb5b138f86 data/forge/tags/items/powders/anatase.json
@@ -467,6 +467,7 @@ a2f750af51b36f78395bec143373de29d7aabf05 data/forge/tags/items/powders/magnetite
 f0600d64285c375ed131d02a5a092870988bb561 data/forge/tags/items/powders/sphalerite.json
 62f104a10f891bd2c0a8291f2d317215401f706c data/forge/tags/items/powders/thorianite.json
 56fad6a81eb95fd6bdb13f2882e181e3a2e77552 data/forge/tags/items/powders/thorite.json
+4189a5ca7178576a3101bc3cb481e9946068f9a6 data/forge/tags/items/powders/tungstencarbide.json
 ef7f425fc7a492ae86399ef9aea1d05db895ba81 data/forge/tags/items/powders/unobtania.json
 a1adff6ee9ddef9e37adaf27f18b31f7baff44cb data/forge/tags/items/powders/uraninite.json
 60379cf3729583b6f9c0ad3f530366b4eb9f3eca data/forge/tags/items/powders/vanadinite.json

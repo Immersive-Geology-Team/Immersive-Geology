@@ -25,6 +25,7 @@ public class MaterialTungstenCarbide extends MaterialMetalAlloy
     public MaterialTungstenCarbide() {
         super();
         removeMaterialFlags(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.SLURRY);
+        addFlags(ItemCategoryFlags.POWDER);
         addFlags(ItemCategoryFlags.DRILL_HEAD);
     }
 

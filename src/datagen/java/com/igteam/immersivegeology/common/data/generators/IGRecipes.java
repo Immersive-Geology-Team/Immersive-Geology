@@ -174,14 +174,14 @@ public class IGRecipes extends RecipeProvider
 				.pattern("SBS").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE)).define('S', refractory_slab)
 				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, ig("craft_reinforced_refractory_bricks_slab_alt"));
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.GRIT))
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.POWDER))
 				.requires(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT))
 				.requires(Ingredients.DUST_HOP_GRAPHITE)
 				.unlockedBy("has_tungsten_powder", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT)))
 				.save(consumer, ig("craft_tungsten_carbide_powder"));
 
 		RotaryKilnRecipeBuilder.builder(MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.INGOT))
-				.addInput(MetalEnum.TungstenCarbide.getItemTag(ItemCategoryFlags.GRIT)).setTime(1200).setEnergy(614400)
+				.addInput(MetalEnum.TungstenCarbide.getItemTag(ItemCategoryFlags.POWDER)).setTime(1200).setEnergy(614400)
 				.build(consumer, new ResourceLocation("calcination/synthesis_tungstencarbide"));
 
 		Item ehv_cable = MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE).asItem();

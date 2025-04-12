@@ -129,7 +129,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 		int sectionMin = level.getMinSection();
-		int sectionMax = level.getMaxSection();
+		int sectionMax = level.getMaxSection()-1;
 		// Iterate over the 3x3 chunk area
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
