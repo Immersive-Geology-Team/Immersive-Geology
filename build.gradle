@@ -13,7 +13,7 @@ plugins {
     id 'idea'
 }
 
-version = '0.6.7-b' + version_buildnumber
+version = '0.6.8-b' + version_buildnumber
 group = 'com.igteam.immersivegeology' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveGeology'
 
@@ -245,7 +245,6 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.20.1-forge:${version_jei}")
     implementation fg.deobf("curse.maven:immersive-engineering-231951:6206989")
     datagenImplementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen"
-
     implementation fg.deobf("curse.maven:terrafirmacraft-302973:6187491")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:engineered-schematics-1207780:6338665")

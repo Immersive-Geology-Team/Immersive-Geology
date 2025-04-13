@@ -29,6 +29,7 @@ public class MaterialTungsten extends MaterialMetal {
         super();
         addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.FENCE, BlockCategoryFlags.ENGINEERING_BLOCK);
         removeMaterialFlags(ItemCategoryFlags.SLAG, ItemCategoryFlags.CRYSTAL);
+        addFlags(ItemCategoryFlags.POWDER);
     }
 
     @Override
@@ -39,6 +40,10 @@ public class MaterialTungsten extends MaterialMetal {
     @Override
     public void setupRecipeStages()
     {
+        IGMethodBuilder.crushing(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.INGOT, ItemCategoryFlags.GRIT, 6000, 100);
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 6000, 51200);
+
         IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.OXIDE_PELLET),

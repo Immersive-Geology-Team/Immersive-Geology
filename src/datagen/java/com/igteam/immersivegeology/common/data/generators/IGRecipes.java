@@ -175,7 +175,7 @@ public class IGRecipes extends RecipeProvider
 				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, ig("craft_reinforced_refractory_bricks_slab_alt"));
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.POWDER))
-				.requires(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT))
+				.requires(MetalEnum.Tungsten.getItem(ItemCategoryFlags.POWDER))
 				.requires(Ingredients.DUST_HOP_GRAPHITE)
 				.unlockedBy("has_tungsten_powder", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.GRIT)))
 				.save(consumer, ig("craft_tungsten_carbide_powder"));
@@ -378,7 +378,7 @@ public class IGRecipes extends RecipeProvider
 					float chance = 0.33f;
 					int nerfed_amount = ore.equals(ItemCategoryFlags.POOR_ORE) ? 1 : (ore.equals(ItemCategoryFlags.NORMAL_ORE) ? 2 : 3);
 					int time = 100;
-					int energy = 100;
+					int energy = 6000;
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE), nerfed_amount).requires(material.getItemTag(ore)).requires(material.getItemTag(ore)).requires(ItemCategoryFlags.HAMMER.getCategoryTag()).unlockedBy("has_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer,ig("crush_" + material.getName().toLowerCase() + "_"+ ore.getName().toLowerCase() + "_with_work_hammer"));
 
 					CrusherRecipeBuilder builder = CrusherRecipeBuilder.builder(material.getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1));

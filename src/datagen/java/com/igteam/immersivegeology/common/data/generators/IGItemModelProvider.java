@@ -68,6 +68,14 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                 generateDrillHead(i);
                 continue;
             }
+            if(item instanceof IGFlagItem i)
+            {
+                if(i instanceof IGMineralTestingItem||i instanceof IGMBFormationItem)
+                {
+                    generateToolItem(i);
+                    continue;
+                }
+            }
             if(item instanceof IGGenericItem i){
                 generateGenericItem(i);
             }
@@ -122,8 +130,26 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
             if(item.getMaterial(MaterialTexture.overlay) != null) {
                 getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
             }
-//            logger.error("Attempted to generate a texture for the item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
-//            logger.error(ex.getMessage());
+        }
+    }
+
+    private void generateToolItem(IGFlagItem item){
+        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+
+        try {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_tool_item");
+            withExistingParent(itemLocation, parentLocation).texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()));
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
+            }
+        } catch (Exception ex) {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_tool_item");
+            withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
+            }
         }
     }
 

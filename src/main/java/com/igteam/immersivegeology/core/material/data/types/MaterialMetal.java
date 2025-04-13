@@ -57,7 +57,6 @@ public class MaterialMetal extends GeologyMaterial {
             IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.GRIT,
                     1, ItemCategoryFlags.INGOT, 1, 0);
             IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.INGOT, ItemCategoryFlags.GRIT, 3000, 200);
-
         }
 
         if (hasFlag(ItemCategoryFlags.GRIT) && hasFlag(ItemCategoryFlags.CRYSTAL))

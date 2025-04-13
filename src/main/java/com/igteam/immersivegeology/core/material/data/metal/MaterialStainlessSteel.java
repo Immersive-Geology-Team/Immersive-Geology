@@ -77,9 +77,9 @@ public class MaterialStainlessSteel extends MaterialMetalAlloy
         super.setupRecipeStages();
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT).create(MetalEnum.Chromium.instance(),
-                ItemCategoryFlags.INGOT, 1, ItemCategoryFlags.INGOT,
-                2,1, IngredientWithSize.of(new ItemStack(Items.IRON_INGOT)),
-                IngredientWithSize.of(new ItemStack(Ingredients.DUST_COKE))).setTimeAndEnergy(400, 204800);
+                ItemCategoryFlags.INGOT, 2, ItemCategoryFlags.INGOT,
+                8,1, IngredientWithSize.of(new ItemStack(Items.IRON_INGOT, 6)),
+                IngredientWithSize.of(new ItemStack(Ingredients.DUST_COKE, 1))).setTimeAndEnergy(400, 204800);
     }
 
     @Override

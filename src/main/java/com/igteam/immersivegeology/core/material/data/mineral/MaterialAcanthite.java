@@ -90,7 +90,7 @@ public class MaterialAcanthite extends MaterialSulphideMineral {
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.075f, 200, 1000).addToTree(sulphideElectrowining, powdered_slag);
+                0.075f, 200, 250).addToTree(sulphideElectrowining, powdered_slag);
 
         IGRecipeNode slurry = IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,

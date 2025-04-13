@@ -75,7 +75,7 @@ public class MaterialCobaltite extends MaterialSulphideMineral
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 new ItemStack(Items.SAND),
-                0.075f, 200, 1000).addToTree(sulphideElectrowining, powdered_slag);
+                0.075f, 200, 250).addToTree(sulphideElectrowining, powdered_slag);
 
         IGRecipeNode slurry = IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 ItemCategoryFlags.POWDERED_SLAG, BlockCategoryFlags.SLURRY,

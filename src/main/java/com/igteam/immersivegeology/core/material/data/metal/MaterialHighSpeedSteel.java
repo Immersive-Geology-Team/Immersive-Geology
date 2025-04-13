@@ -41,12 +41,12 @@ public class MaterialHighSpeedSteel extends MaterialMetalAlloy
     {
         super.setupRecipeStages();
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.REFINEMENT)
-                .create(MetalEnum.Tungsten.instance(), ItemCategoryFlags.INGOT, 8,
+                .create(MetalEnum.Steel.instance(), ItemCategoryFlags.INGOT, 12, //75%
                         ItemCategoryFlags.INGOT, 16, 2,
-                        IngredientWithSize.of(MetalEnum.Steel.getStack(ItemCategoryFlags.INGOT, 1)),
-                        IngredientWithSize.of(MetalEnum.Vanadium.getStack(ItemCategoryFlags.INGOT, 3)),
-                        IngredientWithSize.of(MetalEnum.Molybdenum.getStack(ItemCategoryFlags.INGOT, 4)),
-                        IngredientWithSize.of(MetalEnum.Chromium.getStack(ItemCategoryFlags.INGOT, 2))
+                        IngredientWithSize.of(MetalEnum.Tungsten.getStack(ItemCategoryFlags.INGOT, 1)), // 5-6%
+                        IngredientWithSize.of(MetalEnum.Vanadium.getStack(ItemCategoryFlags.INGOT, 1)), // 3-4%
+                        IngredientWithSize.of(MetalEnum.Molybdenum.getStack(ItemCategoryFlags.INGOT, 1)), // 4-5%
+                        IngredientWithSize.of(MetalEnum.Manganese.getStack(ItemCategoryFlags.INGOT, 1))
                 ).setTimeAndEnergy(400, 204800);
     }
 

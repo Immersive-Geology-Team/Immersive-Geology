@@ -27,6 +27,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GravitySeparatorShape;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -63,7 +64,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
 
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
-    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.LEFT);
+    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.RIGHT);
     private static final MultiblockFace SECONDARY_OUTPUT_POS = new MultiblockFace(-1,0,1, RelativeBlockFace.LEFT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 
@@ -189,6 +190,10 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
+        if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
+        {
+            return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));
+        }
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
         return List.of();

@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
@@ -35,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class IGMineralTestingItem extends IGGenericItem
+public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 {
 	private final HashMap<ChunkPos, MineralCacheEntry> cached_test = new HashMap<>();
 	public IGMineralTestingItem(ItemCategoryFlags flag, MaterialInterface<?> material)
@@ -99,10 +100,6 @@ public class IGMineralTestingItem extends IGGenericItem
 					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
-					}
-					else
-					{
-						level.removeBlock(cursor, false);
 					}
 				}
 			}

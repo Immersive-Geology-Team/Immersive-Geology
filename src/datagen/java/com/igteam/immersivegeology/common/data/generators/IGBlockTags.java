@@ -52,7 +52,11 @@ public class IGBlockTags extends BlockTagsProvider
 			}
 			if(block.get() instanceof IGFenceBlock fence)
 			{
-				tag(BlockTags.FENCES).add(fence);
+				if(!fence.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(BlockCategoryFlags.FENCE))
+				{
+					tag(BlockTags.FENCES).add(fence);
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).add(fence);
+				}
 			}
 			if(block.get() instanceof IGEvaporateMineralBlock crystal)
 			{
@@ -62,9 +66,21 @@ public class IGBlockTags extends BlockTagsProvider
 			{
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(crystal);
 			}
+			if(block.get() instanceof IGStairBlock stair)
+			{
+				if(!stair.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(BlockCategoryFlags.STAIRS)) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(stair);
+			}
+			if(block.get() instanceof IGSlabBlock slab)
+			{
+				if(!slab.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(slab.getFlag())) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(slab);
+			}
 			if(block.get() instanceof IGEnergyPipe pipe)
 			{
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pipe);
+			}
+			if(block.get() instanceof IGScaffoldingBlock scaffoldingBlock)
+			{
+				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(scaffoldingBlock);
 			}
 			if(block.get() instanceof IOreBlock oreBlock)
 			{

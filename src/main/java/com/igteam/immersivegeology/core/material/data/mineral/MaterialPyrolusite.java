@@ -53,7 +53,7 @@ public class MaterialPyrolusite extends MaterialMineral {
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE),
-                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
+                MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 250);
     }
 
     @Override

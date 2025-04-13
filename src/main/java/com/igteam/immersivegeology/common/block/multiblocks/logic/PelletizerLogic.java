@@ -34,6 +34,9 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRec
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.PelletizerShape;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.TrommelShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -43,12 +46,14 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
@@ -115,7 +120,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType shapeType) {
         return PelletizerShape.GETTER;
     }
-
+    private static Fluid bindingAgent = ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID);
     @Override
     public void onEntityCollision(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Entity collided)
     {
@@ -128,9 +133,14 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
         if(collided instanceof ItemEntity itemEntity)
         {
             if (collided.getBoundingBox().intersects(pelletizerHopper)) {
+                bindingAgent = ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID);
                 ItemStack stack = itemEntity.getItem();
                 if(stack.isEmpty())
                     return;
+                if(!bindingAgent.isSame(state.tank.getFluid().getFluid()))
+                {
+                    return;
+                }
                 stack = stack.copy();
                 if(insertItemToProcess(stack, itemEntity, true, state, level.getRawLevel()))
                 {
@@ -187,6 +197,10 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
+        if(!state.tank.getFluid().getFluid().equals(ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID)))
+        {
+            return List.of(Component.literal("No Binding Agent Available").withStyle(ChatFormatting.RED), TextUtils.formatFluidStack(state.tank.getFluid()));
+        }
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
         return null;

@@ -1,6 +1,6 @@
 {
   "type": "immersiveengineering:crusher",
-  "energy": 100,
+  "energy": 6000,
   "input": {
     "tag": "forge:normal_ore/molybdenite"
   },

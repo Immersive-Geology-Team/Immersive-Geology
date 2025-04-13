@@ -92,7 +92,7 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
             getItemTag(ItemCategoryFlags.POWDERED_SLAG),
             MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
             MetalEnum.Copper.getStack(ItemCategoryFlags.COMPOUND_DUST),
-            0.75f, 200, 1000).addToTree(sulphideElectrowining);
+            0.75f, 200, 250).addToTree(sulphideElectrowining);
 
         //TODO -- Move it somewhere?
         IGMethodBuilder.roast(this, IGStageDesignation.PURIFICATION).create("roast_copper_sulfide_to_oxide",

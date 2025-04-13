@@ -46,6 +46,6 @@ public class MaterialManganese extends MaterialMetal {
         IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(
                 getItemTag(ItemCategoryFlags.COMPOUND_DUST), getStack(ItemCategoryFlags.METAL_OXIDE, 1),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE, 1),
-                0.8f, 200, 1000);
+                0.8f, 200, 250);
     }
 }

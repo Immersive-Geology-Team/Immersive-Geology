@@ -135,7 +135,7 @@
   "immersivegeology.gui.schematic_table.button_0": "Previous Schematic",
   "immersivegeology.gui.schematic_table.button_1": "Next Schematic",
   "immersivegeology.gui.schematic_table.mirror": "Mirrored",
-
+  "immersivegeology.machine.low_water": "Low Water Halting Process",
   "item.immersivegeology.prospector_pick": "Geologist Pick",
   "item.immersivegeology.metal_oxide": "%s Oxide",
   "item.immersivegeology.firestarter": "Firestarter",

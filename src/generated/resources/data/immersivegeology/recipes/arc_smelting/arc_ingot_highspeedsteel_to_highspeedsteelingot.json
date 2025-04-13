@@ -2,33 +2,24 @@
   "type": "immersiveengineering:arc_furnace",
   "additives": [
     {
-      "item": "immersiveengineering:ingot_steel"
+      "item": "immersivegeology:ingot_tungsten"
     },
     {
-      "base_ingredient": {
-        "item": "immersivegeology:ingot_vanadium"
-      },
-      "count": 3
+      "item": "immersivegeology:ingot_vanadium"
     },
     {
-      "base_ingredient": {
-        "item": "immersivegeology:ingot_molybdenum"
-      },
-      "count": 4
+      "item": "immersivegeology:ingot_molybdenum"
     },
     {
-      "base_ingredient": {
-        "item": "immersivegeology:ingot_chromium"
-      },
-      "count": 2
+      "item": "immersivegeology:ingot_manganese"
     }
   ],
   "energy": 204800,
   "input": {
     "base_ingredient": {
-      "tag": "forge:ingots/tungsten"
+      "tag": "forge:ingots/steel"
     },
-    "count": 8
+    "count": 12
   },
   "results": [
     {

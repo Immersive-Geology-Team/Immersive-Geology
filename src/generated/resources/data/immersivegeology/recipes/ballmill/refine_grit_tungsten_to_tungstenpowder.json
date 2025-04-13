@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 51200,
+  "input": {
+    "tag": "forge:grits/tungsten"
+  },
+  "result": {
+    "item": "immersivegeology:powder_tungsten"
+  },
+  "time": 6000
+}

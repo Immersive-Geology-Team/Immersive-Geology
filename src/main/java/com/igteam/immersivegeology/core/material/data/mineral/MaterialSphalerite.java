@@ -62,7 +62,7 @@ public class MaterialSphalerite extends MaterialSulphideMineral
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 MetalEnum.Zinc.getStack(ItemCategoryFlags.METAL_OXIDE),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.75f, 200, 1000);
+                0.75f, 200, 250);
     }
 
     @Override

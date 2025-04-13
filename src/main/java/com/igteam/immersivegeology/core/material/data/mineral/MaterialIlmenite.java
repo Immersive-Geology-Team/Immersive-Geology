@@ -67,7 +67,7 @@ public class MaterialIlmenite extends MaterialMineral {
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
-                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 1000)
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE), 0.5f, 300, 250)
                 .addToTree(becher_process);
 
         //Important - NO WATER in reactions!

@@ -2,7 +2,10 @@
   "type": "immersiveengineering:arc_furnace",
   "additives": [
     {
-      "item": "minecraft:iron_ingot"
+      "base_ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 6
     },
     {
       "item": "immersiveengineering:dust_coke"
@@ -10,11 +13,14 @@
   ],
   "energy": 204800,
   "input": {
-    "tag": "forge:ingots/chromium"
+    "base_ingredient": {
+      "tag": "forge:ingots/chromium"
+    },
+    "count": 2
   },
   "results": [
     {
-      "count": 2,
+      "count": 8,
       "item": "immersivegeology:ingot_stainlesssteel"
     }
   ],

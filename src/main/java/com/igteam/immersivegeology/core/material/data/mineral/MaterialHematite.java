@@ -73,7 +73,7 @@ public class MaterialHematite extends MaterialMineral {
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
-                MetalEnum.Chromium.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
+                MetalEnum.Chromium.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 250);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class MaterialSmithsonite extends MaterialMineral {
        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 MetalEnum.Zinc.getStack(ItemCategoryFlags.METAL_OXIDE),
                 MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),
-                0.075f, 200, 1000).addToTree(directBlasting, p_slag);
+                0.075f, 200, 250).addToTree(directBlasting, p_slag);
 
         //No byproducts and zinc is evaporated
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.SLAG,

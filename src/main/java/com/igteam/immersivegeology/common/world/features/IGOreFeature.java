@@ -167,9 +167,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		ChunkPos chunkPos = chunk.getPos();
 
 		for (int y = minY; y < maxY; y++) {
-			MaterialHelper reusableFriendMaterial = useFriendMaterials ? getFriendMaterial(random, y, friends) : null;
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
+					MaterialHelper reusableFriendMaterial = useFriendMaterials ? getFriendMaterial(random, y, friends) : null;
 					BlockPos pos = chunkPos.getBlockAt(x,y,z);
 					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein, centerChunkPos);
 					if (noiseValue > THRESHOLD) {

@@ -64,7 +64,7 @@ public class MaterialCuprite extends MaterialMineral
 
 		IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(getItemTag(ItemCategoryFlags.POWDER),
 				MetalEnum.Copper.getStack(ItemCategoryFlags.METAL_OXIDE),
-				MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 1000);
+				MetalEnum.Manganese.getStack(ItemCategoryFlags.METAL_OXIDE), 0.075f, 200, 250);
 
 		IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("crushed_ore_"+getName()+"_to_ingot",
 				getItemTag(ItemCategoryFlags.CRUSHED_ORE),
