@@ -28,6 +28,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.SectionPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
@@ -128,19 +129,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		boolean useFriendMaterials = associateChance > random.nextDouble();
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
-		int sectionMin = level.getMinSection();
-		int sectionMax = level.getMaxSection()-1;
+
+		int sectionMin = level.getSectionIndex(Math.max(veinMinY, level.getMinBuildHeight()));
+		int sectionMax = level.getSectionIndex(Math.min(veinMaxY, level.getMaxBuildHeight()));
 		// Iterate over the 3x3 chunk area
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
 				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
-				// Iterate through relevant chunk sections
-				int minSection = Math.max(sectionMin, level.getSectionIndex(veinMinY));
-				int maxSection = Math.min(sectionMax, level.getSectionIndex(veinMaxY - 1));
-
-				for (int sectionY = minSection; sectionY <= maxSection; sectionY++) {
-					LevelChunkSection section = currentChunk.getSection(sectionY);
+				for (int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++) {
+					LevelChunkSection section = currentChunk.getSection(sectionIndex);
 
 					// Skip if section is empty or doesn't have replaceable blocks
 					if (section.hasOnlyAir() || !section.maybeHas((b) -> IGOreGenUtils.canStateGenerate(b, parentMaterial.instance()))) {
@@ -148,8 +146,8 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					}
 
 					// Calculate Y bounds for this section
-					int sectionMinY = Math.max(sectionY * 16, veinMinY);
-					int sectionMaxY = Math.min((sectionY + 1) * 16, veinMaxY);
+					int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+					int sectionMaxY = sectionMinY + 15;
 
 					// Process this section
 					processChunkSection(

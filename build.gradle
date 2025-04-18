@@ -249,7 +249,7 @@ dependencies {
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:engineered-schematics-1207780:6338665")
     implementation fg.deobf("curse.maven:mekanism-268560:6258796")
-
+    implementation fg.deobf("curse.maven:the-twilight-forest-227639:5468648")
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

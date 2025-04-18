@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -242,6 +243,7 @@ public class IGServerConfig
 			public final ForgeConfigSpec.EnumValue<IGGenerationType> generationPattern;
 			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
 			public final ForgeConfigSpec.DoubleValue min_temp, max_temp, min_downfall, max_downfall;
+			public final ForgeConfigSpec.ConfigValue<List<? extends String>> dimension_whitelist;
 
 			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
@@ -262,6 +264,11 @@ public class IGServerConfig
 				this.max_temp = builder.comment("The maximum temperature that this material can spawn in").defineInRange("max_temp", mineral.getMaxSpawnTemp(), -2.0f, 2.0f);
 				this.min_downfall = builder.comment("The minimum downfall that this material can spawn in").defineInRange("min_downfall", mineral.getMinDownfall(), 0.0f, 1.0f);
 				this.max_downfall = builder.comment("The maximum downfall that this material can spawn in").defineInRange("max_downfall", mineral.getMaxDownfall(), 0.0f, 1.0f);
+
+				this.dimension_whitelist = builder.comment("A List of dimensions that this ore can generate in.").defineListAllowEmpty("dimension_whitelist",
+						mineral.getDefaultDimensions(),
+						obj -> obj instanceof String && ResourceLocation.isValidResourceLocation((String) obj)
+				);
 
 				builder.pop();
 			}

@@ -23,6 +23,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -90,4 +91,9 @@ public interface IWorldGenConfig
 	double getMaxDownfall();
 
 	long seed();
+
+	default List<String> getDefaultDimensions()
+	{
+		return List.of("minecraft:overworld", "minecraft:the_nether","minecraft:the_end");
+	};
 }

@@ -235,7 +235,8 @@ public class IGRegistrationHolder {
         initializeMultiblocks();
 
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
-        registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone));
+        registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 128));
+        registerItem("prospector_kit_steel", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, MetalEnum.StainlessSteel, 4096));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.StainlessSteel), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel, 2048));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32));

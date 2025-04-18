@@ -21,6 +21,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
@@ -46,7 +48,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IGDefaultPlacement extends PlacementFilter
@@ -142,7 +146,18 @@ public class IGDefaultPlacement extends PlacementFilter
 	@Override
 	protected boolean shouldPlace(PlacementContext ctx, RandomSource rnd, BlockPos pos)
 	{
-		ServerLevel level = ctx.getLevel().getLevel();
-		return exposedPlace(level.getSeed(), ctx.getLevel(), new ChunkPos(pos), null);
+		WorldGenLevel level = ctx.getLevel();
+		ServerLevel serverLevel = level.getLevel();
+		ResourceKey<Level> dimensionKey = serverLevel.dimension();
+		ResourceLocation dimensionID = dimensionKey.location();
+		Set<ResourceLocation> dimension_whitelist = getWhitelistedDimensions();
+		if(dimension_whitelist.contains(dimensionID)) return exposedPlace(serverLevel.getSeed(), ctx.getLevel(), new ChunkPos(pos), null);
+		return false;
+	}
+
+	private Set<ResourceLocation> getWhitelistedDimensions()
+	{
+		OreConfig config = IGServerConfig.ORES.ores.get(entry);
+		return config.dimension_whitelist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
 	}
 }

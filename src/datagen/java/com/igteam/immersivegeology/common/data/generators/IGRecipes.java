@@ -47,6 +47,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.dries007.tfc.util.Metal;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
@@ -136,6 +137,14 @@ public class IGRecipes extends RecipeProvider
 				.pattern("BW ")
 				.pattern(" W ").define('F', Items.FLINT).define('B', Ingredient.of(Tags.Items.COBBLESTONE)).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COBBLESTONE)).save(consumer, ig("craft_geologist_pick"));
+
+		Item steel_geologist_pick = IGRegistrationHolder.getItem.apply("prospector_kit_steel");
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, steel_geologist_pick)
+				.pattern("FBF")
+				.pattern("SWS")
+				.pattern(" W ").define('F', MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.PLATE)).define('B', MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT)).define('W', MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.ROD)).define('S', MetalEnum.Steel.getItem(ItemCategoryFlags.WIRE))
+				.group("ig_tools").unlockedBy("has_stainless_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_steel_geologist_pick"));
+
 
 		// Stone Hammer
 		Item toolkit_2 = StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);

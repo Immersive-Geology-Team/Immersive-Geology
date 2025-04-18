@@ -16,10 +16,12 @@ import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.Vein;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.SectionPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -110,35 +112,52 @@ public class IGOreGenUtils
 	public static float getWorthwhileCount(LevelAccessor level, ChunkPos centerChunk, int maxY, int minY, Vein vein) {
 		int totalViableLocations = 0;
 		// Use the same 3x3 chunk area approach
-		int sectionMin = level.getMinSection();
-		int sectionMax = level.getMaxSection();
-		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
-			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
-				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
-				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
+		try
+		{
+			int sectionMin = level.getSectionIndex(Math.max(minY, level.getMinBuildHeight()));
+			int sectionMax = level.getSectionIndex(Math.min(maxY, level.getMaxBuildHeight()));
+			if(sectionMin < 0)
+			{
+				throw(new IllegalArgumentException("Section Min is Negative, this should be impossible. \n" +
+						"Please report to Immerisve Geology Github or Discord. \n" +
+						"Include the Dimension and Biome you're in when triggering this message"));
+			}
+			for(int chunkDX = -1; chunkDX <= 1; chunkDX++)
+			{
+				for(int chunkDZ = -1; chunkDZ <= 1; chunkDZ++)
+				{
+					ChunkPos currentChunkPos = new ChunkPos(centerChunk.x+chunkDX, centerChunk.z+chunkDZ);
+					ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
+					for(int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++)
+					{
+						LevelChunkSection section = currentChunk.getSection(sectionIndex);
+						// Skip if section is empty or doesn't have potential viable blocks
+						if(section.hasOnlyAir()||!section.maybeHas(b -> b.is(stoneTag)||b.is(netherackTag)||b.is(endStoneTag)))
+						{
+							continue;
+						}
+						// Calculate Y bounds for this section
+						int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+						int sectionMaxY = sectionMinY + 15;
 
-				// Calculate section indices
-				int minSection = Math.max(sectionMin, level.getSectionIndex(minY));
-				int maxSection = Math.min(sectionMax, level.getSectionIndex(maxY - 1));
-
-				for (int sectionY = minSection; sectionY <= maxSection; sectionY++) {
-					LevelChunkSection section = currentChunk.getSection(sectionY);
-					// Skip if section is empty or doesn't have potential viable blocks
-					if (section.hasOnlyAir() || !section.maybeHas(b -> b.is(stoneTag) || b.is(netherackTag) || b.is(endStoneTag))) {
-						continue;
+						// Process this section to count viable locations
+						totalViableLocations += countViableLocationsInSection(currentChunk, sectionMinY, sectionMaxY, vein, centerChunk);
 					}
-					// Calculate Y bounds for this section
-					int sectionMinY = Math.max(sectionY * 16, minY);
-					int sectionMaxY = Math.min((sectionY + 1) * 16, maxY);
-
-					// Process this section to count viable locations
-					totalViableLocations += countViableLocationsInSection(currentChunk, sectionMinY, sectionMaxY, vein, centerChunk);
 				}
 			}
+			// Calculate the total volume of blocks in the 3x3 chunk area within the Y range
+			int areaMinY = SectionPos.sectionToBlockCoord(sectionMin);
+			int areaMaxY = SectionPos.sectionToBlockCoord(sectionMax);
+			int totalBlocks = 48*48*(Math.abs(areaMinY-areaMaxY));
+			return (float)totalViableLocations/totalBlocks;
+		} catch(Exception ex)
+		{
+			if(ex.getMessage() != null)
+			{
+				IGLib.IG_LOGGER.info("Error in vein estimation: {}", ex.getMessage());
+			}
 		}
-		// Calculate the total volume of blocks in the 3x3 chunk area within the Y range
-		int totalBlocks = 48 * 48 * (Math.abs(maxY - minY));
-		return (float) totalViableLocations / totalBlocks;
+		return 0;
 	}
 	static BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 	private static int countViableLocationsInSection(ChunkAccess chunk,int minY, int maxY, Vein vein, ChunkPos centreChunk) {
@@ -153,7 +172,7 @@ public class IGOreGenUtils
 						BlockState state = chunk.getBlockState(mutablePos);
 						boolean viable = state.is(stoneTag) || state.is(endStoneTag) || state.is(netherackTag) || state.getBlock() instanceof IGOreBlock;
 						if (viable) {
-							viablePositions += 1;
+							viablePositions++;
 						}
 					}
 				}

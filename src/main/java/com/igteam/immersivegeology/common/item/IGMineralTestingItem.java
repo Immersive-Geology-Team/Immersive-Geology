@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.SectionPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -39,9 +40,9 @@ import java.util.stream.Collectors;
 public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 {
 	private final HashMap<ChunkPos, MineralCacheEntry> cached_test = new HashMap<>();
-	public IGMineralTestingItem(ItemCategoryFlags flag, MaterialInterface<?> material)
+	public IGMineralTestingItem(ItemCategoryFlags flag, MaterialInterface<?> material, int durability)
 	{
-		super(flag, material, new Properties().durability(128));
+		super(flag, material, new Properties().durability(durability));
 	}
 
 	@Override
@@ -73,6 +74,7 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		if(player == null) return InteractionResult.FAIL;
 		ChunkAccess centreChunk = level.getChunk(usedPos);
 		boolean hasCache = cached_test.containsKey(centreChunk.getPos());
+
 		if(hasCache)
 		{
 			MineralCacheEntry cached_entry = cached_test.get(centreChunk.getPos());
@@ -100,6 +102,10 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 					if (check.getBlock() instanceof IOreBlock ore) {
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
+					}
+					else
+					{
+						//level.removeBlock(cursor, false);
 					}
 				}
 			}
