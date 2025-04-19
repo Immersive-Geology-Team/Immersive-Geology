@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/block",
+  "textures": {
+    "all": "immersivegeology:block/colored/steel/crate",
+    "particle": "immersivegeology:block/colored/steel/crate"
+  }
+}

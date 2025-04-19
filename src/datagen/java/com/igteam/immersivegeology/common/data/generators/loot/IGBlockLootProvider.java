@@ -17,6 +17,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.entity.IGCrateEntity;
+import com.igteam.immersivegeology.common.block.entity.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -84,6 +86,7 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		registerOres();
 		registerMultiblocks();
 		registerSlabs();
+		registerCrates();
 		registerAllRemainingAsDefault();
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Loot");
@@ -127,6 +130,17 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		this.registerMultiblock(IGMultiblockProvider.CRYSTALLIZER);
 		this.registerMultiblock(IGMultiblockProvider.COREDRILL);
 		this.registerMultiblock(IGMultiblockProvider.CENTRIFUGE);
+	}
+
+	private void registerCrates()
+	{
+		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegister().getEntries())
+		{
+			if(block.get() instanceof IGCrateEntityType)
+			{
+				this.register(block, tileDrop());
+			}
+		}
 	}
 
 	private void registerSlabs() {

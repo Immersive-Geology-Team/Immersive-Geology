@@ -77,6 +77,11 @@ processResources {
     }
 }
 
+mixin {
+    add sourceSets.main, "${modid}.refmap.json"
+    config "${modid}.mixins.json"
+}
+
 // When using "Run using IntelliJ" (the only option with well-working hotswapping) the used "resources" directory is
 // different from the one used by gradle/the processResources task
 task copyModsTomlForIntelliJ(type: Copy) {

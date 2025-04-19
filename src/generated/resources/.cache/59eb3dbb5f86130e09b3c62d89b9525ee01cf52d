@@ -1,9 +1,11 @@
-// 1.20.1	2025-04-02T22:40:25.940901256	Loot Tables
+// 1.20.1	2025-04-19T04:59:39.885912276	Loot Tables
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
 6f5bc3941be14bd92268a1130c7f3ad48da36db7 data/immersivegeology/loot_tables/blocks/chemical_reactor.json
 c69c0f3a94ded8cf37ac8c0197371baacc5f0e15 data/immersivegeology/loot_tables/blocks/coredrill.json
+15fb37170dadf68198a5f4c819f8fe8abc2ec3fd data/immersivegeology/loot_tables/blocks/crate_stainlesssteel.json
+24b468a7f3760279c8570a7942bd8c0fa130615e data/immersivegeology/loot_tables/blocks/crate_steel.json
 1107089b96bdf669232bb19fab2dc6c340913f92 data/immersivegeology/loot_tables/blocks/crystallizer.json
 80b633a11f303bb24945d5f930a72a011c788465 data/immersivegeology/loot_tables/blocks/energy_pipe_high_voltage_cable.json
 332f48215b41a391547b1d6f22699388b5c115bc data/immersivegeology/loot_tables/blocks/engineering_block_aluminum.json

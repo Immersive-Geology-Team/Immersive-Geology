@@ -17,13 +17,17 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.common.blocks.IEEntityBlock;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
+import blusunrize.immersiveengineering.common.register.IEBlockEntities;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
+import com.igteam.immersivegeology.common.block.entity.IGCrateEntity;
+import com.igteam.immersivegeology.common.block.entity.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
@@ -87,6 +91,7 @@ public class IGRegistrationHolder {
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
 
     private static final LinkedHashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, RegistryObject<BlockEntityType<?>>> TE_REGISTRY_MAP = new LinkedHashMap<>();
     private static final LinkedHashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new LinkedHashMap<>();
     private static final LinkedHashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new LinkedHashMap<>();
     private static final LinkedHashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new LinkedHashMap<>();
@@ -117,12 +122,13 @@ public class IGRegistrationHolder {
 
     public static Function<String, Item> getItem = (key) -> ITEM_REGISTRY_MAP.get(key).get();
     public static Function<String, Block> getBlock = (key) -> BLOCK_REGISTRY_MAP.get(key).get();
+    public static Function<String, BlockEntityType<?>> getTE = (key) -> TE_REGISTRY_MAP.get(key).get();
 
     public static Function<String, TemplateMultiblock> getMBTemplate = MB_TEMPLATE_MAP::get;
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
     public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> IGRegistrationHolder.getItem.apply(ItemCategoryFlags.GEAR.getRegistryKey(MetalEnum.Cobalt)).getDefaultInstance())
+            .icon(() -> IGRegistrationHolder.getItem.apply("prospector_kit").getDefaultInstance())
             .title(Component.translatable("itemGroup.immersivegeology"))
             .displayItems(IGRegistrationHolder::fillIGTab)
             .withTabFactory(IGItemGroup::new)
@@ -229,7 +235,6 @@ public class IGRegistrationHolder {
     }
 
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
-
     public static void initialize()
     {
         initializeMultiblocks();
@@ -242,7 +247,6 @@ public class IGRegistrationHolder {
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(StoneEnum.MCStone), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, StoneEnum.MCStone, 32));
         registerItem("raw_fire_clay", () -> new IGGenericItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, new Item.Properties().fireResistant()).setCustomLangString("raw_fire_clay"));
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, MiscEnum.Refractory, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
-
         LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
 
@@ -279,6 +283,20 @@ public class IGRegistrationHolder {
                             String registryKey = blockCategory.getRegistryKey(material);
                             registerBlock(registryKey, () -> new IGEnergyPipe(blockCategory, material));
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
+                        }
+                        case CRATE ->
+                        {
+                            String registryKey = blockCategory.getRegistryKey(material);
+
+                            RegistryObject<BlockEntityType<IGCrateEntity>> TYPE = TE_REGISTER.register(material.getName() + "_crate_entity_type", makeType(IGCrateEntity::new, ()-> getBlock.apply(registryKey)));
+                            // Because RegistryObject is invariant in its type parameter we need to do this hack
+                            // basically we just need to explicitly tell the compiler that yes this is what you're looking for.
+                            @SuppressWarnings("unchecked")
+                            RegistryObject<BlockEntityType<?>> typeCast = (RegistryObject<BlockEntityType<?>>)(Object) TYPE;
+                            TE_REGISTRY_MAP.put(registryKey, typeCast);
+
+                            registerBlock(registryKey, () -> new IGCrateEntityType(blockCategory, material, TYPE));
+                            registerItem(registryKey, () -> new IGBlockContainerItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case ORE_BLOCK -> {
                             // for each stone type: stoneMaterial needs to be implemented for each ore block
@@ -427,7 +445,6 @@ public class IGRegistrationHolder {
         }
 
         ENERGY_PIPE = TE_REGISTER.register("energy_pipe_type", makeType(IGEnergyPipeEntity::new, () -> MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE)));
-
         IGLib.IG_LOGGER.info("Finished");
     }
 

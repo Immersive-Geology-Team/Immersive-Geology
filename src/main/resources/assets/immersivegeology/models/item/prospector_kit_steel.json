@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:item/base/ig_tool_item",
+  "textures": {
+    "layer0": "immersivegeology:item/colored/misc/steel_geologist_pick"
+  }
+}

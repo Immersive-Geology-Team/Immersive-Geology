@@ -36,6 +36,7 @@ import net.minecraft.world.phys.HitResult;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 {
@@ -113,7 +114,7 @@ public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 	}
 
 	public ResourceLocation getDrillTexture(ItemStack drill, ItemStack head) {
-		return this.perms.texture;
+		return this.perms.texture.get();
 	}
 
 	public int getBarWidth(@Nonnull ItemStack stack) {
@@ -196,9 +197,9 @@ public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 		final float drillSpeed;
 		final float drillAttack;
 		final int maxDamage;
-		public final ResourceLocation texture;
+		public final Supplier<ResourceLocation> texture;
 
-		public DrillHeadProps(String name, TagKey<Item> repairMaterial, int drillSize, int drillDepth, Tier drillLevel, float drillSpeed, int drillAttack, int maxDamage, ResourceLocation texture) {
+		public DrillHeadProps(String name, TagKey<Item> repairMaterial, int drillSize, int drillDepth, Tier drillLevel, float drillSpeed, int drillAttack, int maxDamage, Supplier<ResourceLocation> texture) {
 			this.name = name;
 			this.repairMaterial = repairMaterial;
 			this.drillSize = drillSize;

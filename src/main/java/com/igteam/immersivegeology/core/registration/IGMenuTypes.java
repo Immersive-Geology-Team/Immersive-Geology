@@ -7,11 +7,13 @@ import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu.MultiblockMenuContext;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ArgContainerConstructor;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContainerConstructor;
+import blusunrize.immersiveengineering.common.register.IEMenuTypes.SimpleContainerConstructor;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
+import com.igteam.immersivegeology.common.menu.IGCrateMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -32,12 +34,28 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class IGMenuTypes
 {
 	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
+
+	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
+
+	public static <M extends AbstractContainerMenu>
+	RegistryObject<MenuType<M>> registerSimple(String name, SimpleContainerConstructor<M> factory)
+	{
+		return REGISTER.register(
+				name, () -> {
+					Mutable<MenuType<M>> typeBox = new MutableObject<>();
+					MenuType<M> type = new MenuType<>((id, inv) -> factory.construct(typeBox.getValue(), id, inv), FeatureFlagSet.of());
+					typeBox.setValue(type);
+					return type;
+				}
+		);
+	}
 
 	public static <T, C extends IEContainerMenu>
 	ArgContainer<T, C> registerArg(

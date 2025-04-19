@@ -18,10 +18,10 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public enum ItemSubGroup {
-    geologic(ItemCategoryFlags.NORMAL_ORE, MineralEnum.Chalcopyrite),
-    components(ItemCategoryFlags.GEAR, MetalEnum.Manganese),
+    geologic(ItemCategoryFlags.NORMAL_ORE, MetalEnum.Gold),
+    components(ItemCategoryFlags.PLATE, MetalEnum.Zirconium),
     pyrometallurgy(ItemCategoryFlags.PELLET, MineralEnum.Cuprite),
-    hydrometallurgy(ItemCategoryFlags.BUCKET, ChemicalEnum.HydrochloricAcid, MetalEnum.Cobalt),
+    hydrometallurgy(ItemCategoryFlags.CRYSTAL, MineralEnum.Saltpeter),
     structural(ItemCategoryFlags.HAMMER, MetalEnum.StainlessSteel);
 
     private final IFlagType<?> flag;

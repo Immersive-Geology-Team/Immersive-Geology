@@ -22,22 +22,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class IGItemGroup extends CreativeModeTab {
-    private static final ResourceLocation CMB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/ig_tab_menu.png");
-    private static final ResourceLocation CMT_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/ig_tabs.png");
+    private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/geologic.png");
+    private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/product.png");
+    private static final ResourceLocation PYROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/pyrometallurgy.png");
+    private static final ResourceLocation HYDROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/hydrometallurgy.png");
+    private static final ResourceLocation STRUCTURAL_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/structural.png");
 
-    private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_background.png");
-    private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/product_background.png");
-    private static final ResourceLocation PYROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/pyrometallurgy_background.png");
-    private static final ResourceLocation HYDROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/hydrometallurgy_background.png");
-    private static final ResourceLocation STRUCTURAL_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/structural_background.png");
-
-    private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/geologic_tab.png");
+    private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/geologic.png");
+    private static final ResourceLocation COMPONENT_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/component.png");
+    private static final ResourceLocation PYRO_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/pyro.png");
+    private static final ResourceLocation HYDRO_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/hydro.png");
+    private static final ResourceLocation STRUCTURAL_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/structural.png");
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
 
     public IGItemGroup(CreativeModeTab.Builder builder)
     {
-        super(builder.withSearchBar(65));
+        super(builder.withSearchBar(62));
         ret.addAll(getSearchTabDisplayItems());
     }
 
@@ -51,7 +52,7 @@ public class IGItemGroup extends CreativeModeTab {
             case hydrometallurgy:return HYDROMETALLURGY_BACKGROUND_TEXTURES;
             case structural: return STRUCTURAL_BACKGROUND_TEXTURES;
         }
-        return CMB_TEXTURES;
+        return GEOLOGIC_BACKGROUND_TEXTURES;
     }
 
     @Override
@@ -61,13 +62,17 @@ public class IGItemGroup extends CreativeModeTab {
 
     @Override
     public int getLabelColor() {
-        return 0x2e6c26;
+        return super.getLabelColor();//0x2e6c26;
     }
 
     @Override
     public @NotNull ResourceLocation getTabsImage() {
         if(selectedGroup == ItemSubGroup.geologic) return GEOLOGIC_TAB_TEXTURES;
-        return CMT_TEXTURES;
+        if(selectedGroup == ItemSubGroup.components) return COMPONENT_TAB_TEXTURES;
+        if(selectedGroup == ItemSubGroup.pyrometallurgy) return PYRO_TAB_TEXTURES;
+        if(selectedGroup == ItemSubGroup.hydrometallurgy) return HYDRO_TAB_TEXTURES;
+        if(selectedGroup == ItemSubGroup.structural) return STRUCTURAL_TAB_TEXTURES;
+        return GEOLOGIC_TAB_TEXTURES;
     }
 
     public static void updateSubGroup(ItemSubGroup group) {

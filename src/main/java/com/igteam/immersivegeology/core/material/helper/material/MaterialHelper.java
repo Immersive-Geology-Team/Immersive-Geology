@@ -324,5 +324,5 @@ public interface MaterialHelper {
         return Set.of();
     };
 
-	default DrillHeadProps drillHeadInstance() {return new DrillHeadProps(getName(), IETags.getTagsFor(EnumMetals.STEEL).ingot, 3, 1, Tiers.DIAMOND, 10.0F, 7, 10000, ImmersiveEngineering.rl("item/drill_diesel"));};
+	default DrillHeadProps drillHeadInstance() {return new DrillHeadProps(getName(), IETags.getTagsFor(EnumMetals.STEEL).ingot, 3, 1, Tiers.DIAMOND, 10.0F, 7, 10000, () -> ImmersiveEngineering.rl("item/drill_diesel"));};
 }

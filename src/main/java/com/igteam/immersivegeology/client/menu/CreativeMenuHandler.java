@@ -137,8 +137,8 @@ public class CreativeMenuHandler {
             int x = this.getX();
             int y = this.getY();
 
-            int normalX = 29;
-            int normalY = 19;
+            int normalX = 0;
+            int normalY = 0;
 
             boolean hovered = pMouseX >= x && pMouseY >= y && pMouseX < x + width && pMouseY < y + height;
             boolean isSelected = IGItemGroup.getCurrentSubGroup().equals(group);

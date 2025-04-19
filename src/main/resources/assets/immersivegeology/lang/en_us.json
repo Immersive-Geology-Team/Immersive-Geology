@@ -35,7 +35,6 @@
 
   "manual.immersivegeology.hall-heroit_process.subtext": "Hall-Heroit Process",
   "manual.immersivegeology.bayer_process.subtext": "Bayer Process",
-
   "manual.immersivegeology.minerals": "Minerals",
   "manual.immersivegeology.common": "Common Minerals",
   "manual.immersivegeology.uncommon": "Uncommon Minerals",
@@ -211,6 +210,7 @@
   "block.immersivegeology.column": "%s Column",
   "block.immersivegeology.normal_bricks": "%s Bricks",
   "block.immersivegeology.pillar": "%s Pillar",
+  "block.immersivegeology.crate": "%s Crate",
   "block.immersivegeology.polished_stone": "Polished %s",
   "block.immersivegeology.road_bricks": "%s Road Bricks",
   "block.immersivegeology.rough_bricks": "Rough %s Bricks",

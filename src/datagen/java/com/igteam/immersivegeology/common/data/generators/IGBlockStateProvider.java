@@ -102,7 +102,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SCAFFOLDING -> registerScaffolding(igBlock);
                     case FENCE -> registerFenceBlock(igBlock);
                     case ENERGY_PIPE -> registerCable(block);
-                    case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE, ENGINEERING_BLOCK -> registerGenericBlock(igBlock, flag);
+                    case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE, ENGINEERING_BLOCK, CRATE -> registerGenericBlock(igBlock, flag);
                     case EVAPORATE_CRYSTAL -> registerEvaporateCrystal(igBlock, flag);
                     case ORE_BLOCK -> registerOre(igBlock);
                 }
@@ -325,10 +325,10 @@ public class IGBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(builder).build());
     }
 
-    private void registerGenericBlock(IGBlockType type, IFlagType<?> pattern){
-        IGGenericBlock block = (IGGenericBlock) type;
+    private void registerGenericBlock(IGBlockType block, IFlagType<?> pattern){
+        //IGGenericBlock block = (IGGenericBlock) type;
         //logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
-        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
+        getVariantBuilder((Block)block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
                                 new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))
                         .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))

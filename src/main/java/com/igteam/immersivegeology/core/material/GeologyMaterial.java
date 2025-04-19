@@ -143,12 +143,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
-
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "block/colored/" + getName() + "/" + flag.toString().toLowerCase());
-
-        if (flag.getValue() instanceof ItemCategoryFlags iFlag) {
-            texture = new ResourceLocation(IGLib.MODID, "item/colored/" + this.name + "/" + iFlag.name().toLowerCase());
-        }
+        ResourceLocation texture = new ResourceLocation(IGLib.MODID, (flag instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + getName() + "/" + flag.toString().toLowerCase());
 
         // This function, is normally ONLY called during data generation
         // And the Existing File Helper is only available during it, hence we default to greyscale textures during runtime

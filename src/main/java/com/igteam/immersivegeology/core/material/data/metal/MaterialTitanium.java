@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -91,6 +92,6 @@ public class MaterialTitanium extends MaterialMetal {
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 5, 1, Tiers.NETHERITE, 9f, 10, 24000, getTextureLocation(ItemCategoryFlags.DRILL_HEAD));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 5, 1, Tiers.NETHERITE, 9f, 10, 24000, () -> new ResourceLocation(IGLib.MODID, "item/colored/" + getName() + "/drill"));
     }
 }

@@ -74,7 +74,7 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		if(player == null) return InteractionResult.FAIL;
 		ChunkAccess centreChunk = level.getChunk(usedPos);
 		boolean hasCache = cached_test.containsKey(centreChunk.getPos());
-
+		stack.hurtAndBreak(1, player, (p) -> {});
 		if(hasCache)
 		{
 			MineralCacheEntry cached_entry = cached_test.get(centreChunk.getPos());
@@ -103,13 +103,10 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
 						queryMap.merge(material, 1, Integer::sum);
 					}
-					else
-					{
-						//level.removeBlock(cursor, false);
-					}
 				}
 			}
 		}
+
 		List<MaterialInterface<?>> found = queryMap.entrySet().stream()
 				.sorted(Map.Entry.<MaterialInterface<?>, Integer>comparingByValue().reversed())
 				.limit(3)
@@ -136,8 +133,6 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		String status = found.isEmpty() ? "nothing" : "found";
 		Component comp = Component.translatable("immersivegeology.prospecting_pick." + status, string_found);
 		player.displayClientMessage(comp, true);
-		stack.hurtAndBreak(1, player, (p) -> {
-		});
 		cached_test.put(centreChunk.getPos(), new MineralCacheEntry(comp.getString()));
 		return InteractionResult.SUCCESS;
 	}

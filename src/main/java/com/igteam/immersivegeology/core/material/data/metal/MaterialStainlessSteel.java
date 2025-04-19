@@ -33,7 +33,7 @@ public class MaterialStainlessSteel extends MaterialMetalAlloy
 {
     public MaterialStainlessSteel() {
         super();
-        addFlags(BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE, BlockCategoryFlags.SCAFFOLDING);
+        addFlags(BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.CRATE);
         validMultiblocks.add(() -> IGReverberationFurnaceMultiblock.INSTANCE);
         validMultiblocks.add(() -> IGBloomeryMultiblock.INSTANCE);
         validMultiblocks.add(() -> IGGravitySeparatorMultiblock.INSTANCE);
