@@ -11,7 +11,7 @@ package com.igteam.immersivegeology.core;
 
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
-import com.igteam.immersivegeology.common.block.energypipe.EnergyPipeCallback;
+import com.igteam.immersivegeology.common.block.entity.cable.EnergyPipeCallback;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

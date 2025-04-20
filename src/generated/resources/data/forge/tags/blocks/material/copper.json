@@ -1,0 +1,19 @@
+{
+  "values": [
+    "immersivegeology:minecraft_poor_ore_block_copper_stone",
+    "immersivegeology:minecraft_normal_ore_block_copper_stone",
+    "immersivegeology:minecraft_rich_ore_block_copper_stone",
+    "immersivegeology:minecraft_poor_ore_block_copper_deepslate",
+    "immersivegeology:minecraft_normal_ore_block_copper_deepslate",
+    "immersivegeology:minecraft_rich_ore_block_copper_deepslate",
+    "immersivegeology:minecraft_poor_ore_block_copper_andesite",
+    "immersivegeology:minecraft_normal_ore_block_copper_andesite",
+    "immersivegeology:minecraft_rich_ore_block_copper_andesite",
+    "immersivegeology:minecraft_poor_ore_block_copper_diorite",
+    "immersivegeology:minecraft_normal_ore_block_copper_diorite",
+    "immersivegeology:minecraft_rich_ore_block_copper_diorite",
+    "immersivegeology:minecraft_poor_ore_block_copper_granite",
+    "immersivegeology:minecraft_normal_ore_block_copper_granite",
+    "immersivegeology:minecraft_rich_ore_block_copper_granite"
+  ]
+}

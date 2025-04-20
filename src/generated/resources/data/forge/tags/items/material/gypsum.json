@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_gypsum",
+    "immersivegeology:grit_gypsum",
+    "immersivegeology:poor_ore_gypsum",
+    "immersivegeology:normal_ore_gypsum",
+    "immersivegeology:rich_ore_gypsum",
+    "immersivegeology:crushed_ore_gypsum",
+    "immersivegeology:dirty_crushed_ore_gypsum"
+  ]
+}

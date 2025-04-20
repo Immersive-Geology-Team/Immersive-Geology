@@ -1,0 +1,12 @@
+{
+  "values": [
+    "immersivegeology:powder_cassiterite",
+    "immersivegeology:grit_cassiterite",
+    "immersivegeology:pellet_cassiterite",
+    "immersivegeology:poor_ore_cassiterite",
+    "immersivegeology:normal_ore_cassiterite",
+    "immersivegeology:rich_ore_cassiterite",
+    "immersivegeology:crushed_ore_cassiterite",
+    "immersivegeology:dirty_crushed_ore_cassiterite"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_vanadinite",
+    "immersivegeology:grit_vanadinite",
+    "immersivegeology:poor_ore_vanadinite",
+    "immersivegeology:normal_ore_vanadinite",
+    "immersivegeology:rich_ore_vanadinite",
+    "immersivegeology:crushed_ore_vanadinite",
+    "immersivegeology:dirty_crushed_ore_vanadinite"
+  ]
+}

@@ -71,6 +71,7 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 		this.slag = slag_amount == 0 ? ItemStack.EMPTY : parentMaterial.getStack(ItemCategoryFlags.SLAG, slag_amount);
 		this.additives = List.of();
 		this.method_name = create_advanced_method_name(input_form, output_form);
+		this.setTimeAndEnergy(400, 204800);
 		return this;
 	}
 
@@ -81,6 +82,7 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 		this.slag = slag_amount == 0 ? ItemStack.EMPTY : parentMaterial.getStack(ItemCategoryFlags.SLAG, slag_amount);
 		this.additives = List.of(additives);
 		this.method_name = create_advanced_method_name(input_form, output_form);
+		this.setTimeAndEnergy(400, 204800);
 		return this;
 	}
 

@@ -87,15 +87,10 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     {
         List<String> permutations = new ArrayList<>();
         for(MetalEnum metal : values()) {
-            if(nativeMetals().contains(metal))
+            for(MineralWeathering weathering : MineralWeathering.values())
             {
-                for(MineralWeathering weathering : MineralWeathering.values())
-                {
-                    permutations.add(metal.getName()+"/"+weathering.name().toLowerCase());
-                }
-                continue;
+                permutations.add(metal.getName()+"/"+weathering.name().toLowerCase());
             }
-            permutations.add(metal.getName()+"/"+MineralWeathering.PRISTINE.name().toLowerCase());
         }
 
         return permutations;

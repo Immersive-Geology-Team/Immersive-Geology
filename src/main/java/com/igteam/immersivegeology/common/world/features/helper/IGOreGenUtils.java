@@ -8,8 +8,8 @@
 
 package com.igteam.immersivegeology.common.world.features.helper;
 
-import com.igteam.immersivegeology.common.block.IGOreBlock;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
+import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
+import com.igteam.immersivegeology.common.block.ore.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
@@ -128,7 +128,7 @@ public class IGOreGenUtils
 				{
 					ChunkPos currentChunkPos = new ChunkPos(centerChunk.x+chunkDX, centerChunk.z+chunkDZ);
 					ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
-					for(int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++)
+					for(int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++)
 					{
 						LevelChunkSection section = currentChunk.getSection(sectionIndex);
 						// Skip if section is empty or doesn't have potential viable blocks

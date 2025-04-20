@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_wolframite",
+    "immersivegeology:grit_wolframite",
+    "immersivegeology:poor_ore_wolframite",
+    "immersivegeology:normal_ore_wolframite",
+    "immersivegeology:rich_ore_wolframite",
+    "immersivegeology:crushed_ore_wolframite",
+    "immersivegeology:dirty_crushed_ore_wolframite"
+  ]
+}

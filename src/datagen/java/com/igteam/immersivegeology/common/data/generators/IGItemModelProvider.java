@@ -1,9 +1,11 @@
 package com.igteam.immersivegeology.common.data.generators;
 
 import com.google.common.base.Preconditions;
-import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
+import com.igteam.immersivegeology.common.block.structural.IGFenceBlock;
+import com.igteam.immersivegeology.common.block.structural.IGScaffoldingBlock;
 import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
 import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;

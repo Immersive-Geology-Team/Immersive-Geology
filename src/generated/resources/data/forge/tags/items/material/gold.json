@@ -1,0 +1,13 @@
+{
+  "values": [
+    "immersivegeology:wire_gold",
+    "immersivegeology:gear_gold",
+    "immersiveengineering:dust_gold",
+    "immersivegeology:poor_ore_gold",
+    "immersivegeology:normal_ore_gold",
+    "immersivegeology:rich_ore_gold",
+    "immersivegeology:crystal_gold",
+    "immersivegeology:crushed_ore_gold",
+    "immersivegeology:dirty_crushed_ore_gold"
+  ]
+}

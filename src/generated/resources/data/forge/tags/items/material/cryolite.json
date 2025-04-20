@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_cryolite",
+    "immersivegeology:grit_cryolite",
+    "immersivegeology:poor_ore_cryolite",
+    "immersivegeology:normal_ore_cryolite",
+    "immersivegeology:rich_ore_cryolite",
+    "immersivegeology:crushed_ore_cryolite",
+    "immersivegeology:dirty_crushed_ore_cryolite"
+  ]
+}

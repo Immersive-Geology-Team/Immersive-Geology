@@ -2,10 +2,16 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.*;
-import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipe;
-import com.igteam.immersivegeology.common.block.entity.IGCrateEntity;
-import com.igteam.immersivegeology.common.block.entity.IGCrateEntityType;
+import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipe;
+import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
+import com.igteam.immersivegeology.common.block.ore.IGEvaporateMineralBlock;
+import com.igteam.immersivegeology.common.block.structural.IGFenceBlock;
+import com.igteam.immersivegeology.common.block.structural.IGScaffoldingBlock;
+import com.igteam.immersivegeology.common.block.structural.IGSlabBlock;
+import com.igteam.immersivegeology.common.block.structural.IGStairBlock;
+import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -19,6 +25,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -90,6 +97,7 @@ public class IGBlockTags extends BlockTagsProvider
 			}
 			if(block.get() instanceof IOreBlock oreBlock)
 			{
+				Block ore = block.get();
 				List<MaterialInterface<?>> materials = List.copyOf(oreBlock.getMaterials());
 
 				for(Set<IFlagType<?>> flag_sets : materials.stream().map(MaterialInterface::getFlags).collect(Collectors.toSet()))
@@ -102,6 +110,9 @@ public class IGBlockTags extends BlockTagsProvider
 						}
 					}
 				}
+
+				TagKey<Block> ore_material_tag = oreBlock.getOreMaterial().getBlockMaterialTag();
+				tag(ore_material_tag).add(ore);
 
 				if(useOptionalTag) {
 					useOptionalTag = false;
@@ -122,9 +133,9 @@ public class IGBlockTags extends BlockTagsProvider
 					continue;
 				}
 
-				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block.get());
-				tag(BlockTags.NEEDS_STONE_TOOL).add(block.get());
-				tag(Tags.Blocks.ORES).add(block.get() );
+				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ore);
+				tag(BlockTags.NEEDS_STONE_TOOL).add(ore);
+				tag(Tags.Blocks.ORES).add(ore);
 
 				if(ModFlags.TFC.isStrictlyLoaded())
 				{

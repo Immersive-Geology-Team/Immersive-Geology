@@ -78,7 +78,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,0,0, RelativeBlockFace.FRONT);
     private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
 
-    public static final int ENERGY_CONSUMPTION_RATE = 20; // Per tick
+    public static final int ENERGY_CONSUMPTION_RATE = 20; // Per ticke
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {

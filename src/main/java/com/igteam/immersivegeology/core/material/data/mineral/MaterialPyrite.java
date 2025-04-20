@@ -48,8 +48,8 @@ public class MaterialPyrite extends MaterialSulphideMineral
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
-            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xFFD700),
-                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x8B6B3D)));
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xffFFD700),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0xff8B6B3D)));
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()

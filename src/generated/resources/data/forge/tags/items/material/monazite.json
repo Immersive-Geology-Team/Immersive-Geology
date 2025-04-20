@@ -1,0 +1,12 @@
+{
+  "values": [
+    "immersivegeology:powder_monazite",
+    "immersivegeology:grit_monazite",
+    "immersivegeology:poor_ore_monazite",
+    "immersivegeology:normal_ore_monazite",
+    "immersivegeology:rich_ore_monazite",
+    "immersivegeology:crushed_ore_monazite",
+    "immersivegeology:dirty_crushed_ore_monazite",
+    "immersivegeology:sediment_monazite"
+  ]
+}

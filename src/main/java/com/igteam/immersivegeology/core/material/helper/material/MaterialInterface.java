@@ -182,4 +182,14 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().canFormMB(multiblock);
     };
 
+    default TagKey<Block> getBlockMaterialTag()
+    {
+        return instance().getBlockMaterialTag();
+    };
+
+    default TagKey<Item> getItemMaterialTag()
+    {
+        return instance().getItemMaterialTag();
+    };
+
 }

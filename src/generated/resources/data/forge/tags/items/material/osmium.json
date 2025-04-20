@@ -1,0 +1,17 @@
+{
+  "values": [
+    "immersivegeology:ingot_osmium",
+    "immersivegeology:wire_osmium",
+    "immersivegeology:gear_osmium",
+    "immersivegeology:rod_osmium",
+    "immersivegeology:grit_osmium",
+    "immersivegeology:plate_osmium",
+    "immersivegeology:poor_ore_osmium",
+    "immersivegeology:normal_ore_osmium",
+    "immersivegeology:rich_ore_osmium",
+    "immersivegeology:nugget_osmium",
+    "immersivegeology:compound_dust_osmium",
+    "immersivegeology:crushed_ore_osmium",
+    "immersivegeology:dirty_crushed_ore_osmium"
+  ]
+}

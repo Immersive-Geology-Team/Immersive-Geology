@@ -18,13 +18,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Item.class)
+@Mixin(ItemStack.class)
 public class MixinContainerMenu
 {
 	@Inject(method = "getMaxStackSize", at = @At("HEAD"), cancellable = true)
 	private void overrideMaxStackSize(CallbackInfoReturnable<Integer> cir) {
-//		if (IGCrateMenu.ACTIVE.get()) {
-//			cir.setReturnValue(1024); // Any large enough value, or your own logic here
-//		}
+
 	}
 }

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "immersivegeology:gear_copper",
+    "immersivegeology:rod_copper",
+    "immersiveengineering:dust_copper",
+    "immersivegeology:oxide_pellet_copper",
+    "immersivegeology:poor_ore_copper",
+    "immersivegeology:normal_ore_copper",
+    "immersivegeology:rich_ore_copper",
+    "immersivegeology:crystal_copper",
+    "immersivegeology:compound_dust_copper",
+    "immersivegeology:crushed_ore_copper",
+    "immersivegeology:metal_oxide_copper",
+    "immersivegeology:dirty_crushed_ore_copper"
+  ]
+}

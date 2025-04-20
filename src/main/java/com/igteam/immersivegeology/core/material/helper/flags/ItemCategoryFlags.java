@@ -91,4 +91,5 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     {
         return IGTags.ITEM_CATEGORY_FLAGS.get(this);
     }
+
 }

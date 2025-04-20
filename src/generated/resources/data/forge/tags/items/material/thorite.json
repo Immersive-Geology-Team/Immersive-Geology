@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_thorite",
+    "immersivegeology:grit_thorite",
+    "immersivegeology:poor_ore_thorite",
+    "immersivegeology:normal_ore_thorite",
+    "immersivegeology:rich_ore_thorite",
+    "immersivegeology:crushed_ore_thorite",
+    "immersivegeology:dirty_crushed_ore_thorite"
+  ]
+}

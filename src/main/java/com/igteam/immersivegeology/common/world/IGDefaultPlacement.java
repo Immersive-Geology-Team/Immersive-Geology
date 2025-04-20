@@ -71,7 +71,7 @@ public class IGDefaultPlacement extends PlacementFilter
 
 	public boolean canPlaceVeinEnd(ChunkPos pos, long level_seed, OreConfig config) {
 		if (config.veinSize.get() <= 0) return false;
-		int chance_max = 500_000;
+		int chance_max = 750_000;
 		RandomSource random = IGOreGenUtils.getReuseRandom(entry, level_seed, pos);
 		return random.nextInt(chance_max) < config.generationChance.get();
 	}

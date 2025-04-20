@@ -33,7 +33,7 @@ public class IGBlockContainerItem extends IGGenericBlockItem
 {
 	public IGBlockContainerItem(IGBlockType block)
 	{
-		super(block);
+		super(block, new Properties().fireResistant());
 	}
 
 	@Override

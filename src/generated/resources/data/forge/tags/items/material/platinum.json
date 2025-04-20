@@ -1,0 +1,18 @@
+{
+  "values": [
+    "immersivegeology:ingot_platinum",
+    "immersivegeology:wire_platinum",
+    "immersivegeology:gear_platinum",
+    "immersivegeology:rod_platinum",
+    "immersivegeology:grit_platinum",
+    "immersivegeology:plate_platinum",
+    "immersivegeology:poor_ore_platinum",
+    "immersivegeology:normal_ore_platinum",
+    "immersivegeology:rich_ore_platinum",
+    "immersivegeology:nugget_platinum",
+    "immersivegeology:crystal_platinum",
+    "immersivegeology:compound_dust_platinum",
+    "immersivegeology:crushed_ore_platinum",
+    "immersivegeology:dirty_crushed_ore_platinum"
+  ]
+}

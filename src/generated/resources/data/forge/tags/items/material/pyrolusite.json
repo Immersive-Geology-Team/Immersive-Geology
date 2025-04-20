@@ -1,0 +1,12 @@
+{
+  "values": [
+    "immersivegeology:powder_pyrolusite",
+    "immersivegeology:grit_pyrolusite",
+    "immersivegeology:pellet_pyrolusite",
+    "immersivegeology:poor_ore_pyrolusite",
+    "immersivegeology:normal_ore_pyrolusite",
+    "immersivegeology:rich_ore_pyrolusite",
+    "immersivegeology:crushed_ore_pyrolusite",
+    "immersivegeology:dirty_crushed_ore_pyrolusite"
+  ]
+}

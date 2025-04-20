@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_galena",
+    "immersivegeology:grit_galena",
+    "immersivegeology:slag_galena",
+    "immersivegeology:pellet_galena",
+    "immersivegeology:powdered_slag_galena",
+    "immersivegeology:poor_ore_galena",
+    "immersivegeology:normal_ore_galena",
+    "immersivegeology:rich_ore_galena",
+    "immersivegeology:crushed_ore_galena",
+    "immersivegeology:dirty_crushed_ore_galena"
+  ]
+}

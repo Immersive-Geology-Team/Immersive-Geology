@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_apatite",
+    "immersivegeology:grit_apatite",
+    "immersivegeology:poor_ore_apatite",
+    "immersivegeology:normal_ore_apatite",
+    "immersivegeology:rich_ore_apatite",
+    "immersivegeology:crushed_ore_apatite",
+    "immersivegeology:dirty_crushed_ore_apatite"
+  ]
+}

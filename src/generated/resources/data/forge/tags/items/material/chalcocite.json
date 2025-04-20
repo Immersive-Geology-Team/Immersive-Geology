@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_chalcocite",
+    "immersivegeology:grit_chalcocite",
+    "immersivegeology:slag_chalcocite",
+    "immersivegeology:pellet_chalcocite",
+    "immersivegeology:powdered_slag_chalcocite",
+    "immersivegeology:poor_ore_chalcocite",
+    "immersivegeology:normal_ore_chalcocite",
+    "immersivegeology:rich_ore_chalcocite",
+    "immersivegeology:crushed_ore_chalcocite",
+    "immersivegeology:dirty_crushed_ore_chalcocite"
+  ]
+}

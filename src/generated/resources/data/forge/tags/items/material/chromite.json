@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_chromite",
+    "immersivegeology:grit_chromite",
+    "immersivegeology:poor_ore_chromite",
+    "immersivegeology:normal_ore_chromite",
+    "immersivegeology:rich_ore_chromite",
+    "immersivegeology:crushed_ore_chromite",
+    "immersivegeology:dirty_crushed_ore_chromite"
+  ]
+}

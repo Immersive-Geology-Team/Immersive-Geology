@@ -27,9 +27,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -187,9 +189,13 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST, METAL_OXIDE ->
+                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST ->
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
+                }
+                case METAL_OXIDE ->
+                {
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_corroded_"+getName().toLowerCase());
                 }
                 case DRILL_HEAD ->
                 {
@@ -506,5 +512,15 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public boolean canFormMB(IMultiblock multiblock)
     {
         return validMultiblocks.stream().anyMatch(s -> s.get().equals(multiblock));
+    }
+
+    public TagKey<Item> getItemMaterialTag()
+    {
+        return IGTags.ITEM_MATERIAL_HOLDER.get(this);
+    }
+
+    public TagKey<Block> getBlockMaterialTag()
+    {
+        return IGTags.BLOCK_MATERIAL_HOLDER.get(this);
     }
 }

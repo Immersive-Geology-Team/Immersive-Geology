@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_pyrite",
+    "immersivegeology:grit_pyrite",
+    "immersivegeology:slag_pyrite",
+    "immersivegeology:pellet_pyrite",
+    "immersivegeology:powdered_slag_pyrite",
+    "immersivegeology:poor_ore_pyrite",
+    "immersivegeology:normal_ore_pyrite",
+    "immersivegeology:rich_ore_pyrite",
+    "immersivegeology:crushed_ore_pyrite",
+    "immersivegeology:dirty_crushed_ore_pyrite"
+  ]
+}

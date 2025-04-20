@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_millerite",
+    "immersivegeology:grit_millerite",
+    "immersivegeology:slag_millerite",
+    "immersivegeology:pellet_millerite",
+    "immersivegeology:powdered_slag_millerite",
+    "immersivegeology:poor_ore_millerite",
+    "immersivegeology:normal_ore_millerite",
+    "immersivegeology:rich_ore_millerite",
+    "immersivegeology:crushed_ore_millerite",
+    "immersivegeology:dirty_crushed_ore_millerite"
+  ]
+}

@@ -36,6 +36,16 @@ public interface IOreBlock
 
 	MaterialInterface<?> getMaterial(MaterialTexture t);
 
+	default MaterialInterface<?> getOreMaterial()
+	{
+		return getMaterial(MaterialTexture.overlay);
+	}
+
+	default MaterialInterface<?> getStoneMaterial()
+	{
+		return getMaterial(MaterialTexture.base);
+	}
+
 	OreRichness getOreRichness();
 
 	StoneFormation getStoneFormation();

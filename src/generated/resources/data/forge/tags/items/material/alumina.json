@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_alumina",
+    "immersivegeology:grit_alumina",
+    "immersivegeology:poor_ore_alumina",
+    "immersivegeology:normal_ore_alumina",
+    "immersivegeology:rich_ore_alumina",
+    "immersivegeology:crushed_ore_alumina",
+    "immersivegeology:dirty_crushed_ore_alumina"
+  ]
+}

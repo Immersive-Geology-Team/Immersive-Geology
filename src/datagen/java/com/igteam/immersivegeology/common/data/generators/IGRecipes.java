@@ -307,6 +307,10 @@ public class IGRecipes extends RecipeProvider
 
 		for(MetalEnum metal : MetalEnum.values())
 		{
+			if(metal.hasFlag(ItemCategoryFlags.PLATE) && metal.hasFlag(BlockCategoryFlags.CRATE))
+			{
+				ShapedRecipeBuilder.shaped(RecipeCategory.MISC, metal.getBlock(BlockCategoryFlags.CRATE)).define('p', metal.getItem(ItemCategoryFlags.PLATE)).pattern("ppp").pattern("p p").pattern("ppp").unlockedBy("has_plate_" + metal.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.PLATE))).save(consumer, ig("get_crate_from_" + metal.getName() + "_plates"));
+			}
 			if(metal.hasFlag(ItemCategoryFlags.NUGGET) && metal.hasFlag(ItemCategoryFlags.INGOT))
 			{
 				ShapedRecipeBuilder.shaped(RecipeCategory.MISC, metal.getItem(ItemCategoryFlags.INGOT),1).define('n', metal.getItem(ItemCategoryFlags.NUGGET)).pattern("nnn").pattern("nnn").pattern("nnn").unlockedBy("has_nugget_"+metal.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(metal.getItem(ItemCategoryFlags.NUGGET))).save(consumer, ig("get_ingot_from_"+metal.getName()+"_nuggets"));

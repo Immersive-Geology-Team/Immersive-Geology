@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_sphalerite",
+    "immersivegeology:grit_sphalerite",
+    "immersivegeology:slag_sphalerite",
+    "immersivegeology:pellet_sphalerite",
+    "immersivegeology:powdered_slag_sphalerite",
+    "immersivegeology:poor_ore_sphalerite",
+    "immersivegeology:normal_ore_sphalerite",
+    "immersivegeology:rich_ore_sphalerite",
+    "immersivegeology:crushed_ore_sphalerite",
+    "immersivegeology:dirty_crushed_ore_sphalerite"
+  ]
+}

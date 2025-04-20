@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -74,7 +73,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
         List<String> materialList = new ArrayList<>();
         for(MaterialTexture t : MaterialTexture.values()){
             if (materialMap.containsKey(t)) {
-                materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+                materialList.add(Component.translatable("material.immersivegeology." + materialMap.get(t).getName()).getString());
             }
         }
 

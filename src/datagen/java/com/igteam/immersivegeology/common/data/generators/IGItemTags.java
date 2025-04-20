@@ -54,14 +54,14 @@ public class IGItemTags extends ItemTagsProvider
 		tag(IETags.toolboxTools).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
 		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("prospector_kit"));
+		tag(IETags.toolboxTools).add(IGRegistrationHolder.getItem.apply("prospector_kit_steel"));
 
 		tag(hammer_tag).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
 		tag(hammer_tag).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
 		tag(hammer_tag).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
-
-		for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
+		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
-			for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
+			for(IFlagType<?> category : IFlagType.getAllRegistryFlags())
 			{
 				if(material.hasFlag(category))
 				{
@@ -74,9 +74,11 @@ public class IGItemTags extends ItemTagsProvider
 						assert item != null;
 						if(!(item.equals(Items.COOKIE) || item.equals(Blocks.CAKE.asItem()))) {
 							TagKey<Item> item_key = material.getItemTag(itemFlag);
+							TagKey<Item> material_tag = material.getItemMaterialTag();
 							TagKey<Item> category_tag = itemFlag.getCategoryTag();
 							tag(item_key).add(item);
 							tag(category_tag).add(item);
+							tag(material_tag).add(item);
 
 							if(itemFlag.equals(ItemCategoryFlags.INGOT))
 							{

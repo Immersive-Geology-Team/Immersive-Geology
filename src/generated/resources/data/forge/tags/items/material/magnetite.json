@@ -1,0 +1,12 @@
+{
+  "values": [
+    "immersivegeology:powder_magnetite",
+    "immersivegeology:grit_magnetite",
+    "immersivegeology:pellet_magnetite",
+    "immersivegeology:poor_ore_magnetite",
+    "immersivegeology:normal_ore_magnetite",
+    "immersivegeology:rich_ore_magnetite",
+    "immersivegeology:crushed_ore_magnetite",
+    "immersivegeology:dirty_crushed_ore_magnetite"
+  ]
+}

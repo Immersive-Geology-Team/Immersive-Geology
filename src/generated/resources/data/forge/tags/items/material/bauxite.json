@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_bauxite",
+    "immersivegeology:grit_bauxite",
+    "immersivegeology:poor_ore_bauxite",
+    "immersivegeology:normal_ore_bauxite",
+    "immersivegeology:rich_ore_bauxite",
+    "immersivegeology:crushed_ore_bauxite",
+    "immersivegeology:dirty_crushed_ore_bauxite"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:slag_chalcopyrite",
+    "immersivegeology:powdered_slag_chalcopyrite",
+    "immersivegeology:poor_ore_chalcopyrite",
+    "immersivegeology:normal_ore_chalcopyrite",
+    "immersivegeology:rich_ore_chalcopyrite",
+    "immersivegeology:crushed_ore_chalcopyrite",
+    "immersivegeology:dirty_crushed_ore_chalcopyrite"
+  ]
+}

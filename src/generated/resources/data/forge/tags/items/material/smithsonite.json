@@ -1,0 +1,14 @@
+{
+  "values": [
+    "immersivegeology:powder_smithsonite",
+    "immersivegeology:grit_smithsonite",
+    "immersivegeology:slag_smithsonite",
+    "immersivegeology:pellet_smithsonite",
+    "immersivegeology:powdered_slag_smithsonite",
+    "immersivegeology:poor_ore_smithsonite",
+    "immersivegeology:normal_ore_smithsonite",
+    "immersivegeology:rich_ore_smithsonite",
+    "immersivegeology:crushed_ore_smithsonite",
+    "immersivegeology:dirty_crushed_ore_smithsonite"
+  ]
+}

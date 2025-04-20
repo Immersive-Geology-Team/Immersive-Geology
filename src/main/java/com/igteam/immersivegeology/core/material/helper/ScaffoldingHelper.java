@@ -9,7 +9,7 @@
 package com.igteam.immersivegeology.core.material.helper;
 
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
-import com.igteam.immersivegeology.common.block.IGScaffoldingBlock;
+import com.igteam.immersivegeology.common.block.structural.IGScaffoldingBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;

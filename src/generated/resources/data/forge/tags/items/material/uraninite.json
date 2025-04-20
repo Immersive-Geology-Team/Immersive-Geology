@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_uraninite",
+    "immersivegeology:grit_uraninite",
+    "immersivegeology:poor_ore_uraninite",
+    "immersivegeology:normal_ore_uraninite",
+    "immersivegeology:rich_ore_uraninite",
+    "immersivegeology:crushed_ore_uraninite",
+    "immersivegeology:dirty_crushed_ore_uraninite"
+  ]
+}

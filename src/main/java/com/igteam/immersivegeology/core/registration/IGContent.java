@@ -14,7 +14,7 @@ import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
-import com.igteam.immersivegeology.common.block.energypipe.IGEnergyPipeEntity;
+import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.config.IGServerConfig;

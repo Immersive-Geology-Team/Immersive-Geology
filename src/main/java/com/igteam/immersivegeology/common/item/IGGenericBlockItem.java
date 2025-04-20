@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.block.IGDeskBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -19,7 +18,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
@@ -41,7 +39,11 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
     private final IGBlockType block;
 
     public IGGenericBlockItem(IGBlockType block) {
-        super(block.getIGBlock(), new Properties());
+        this(block, new Properties());
+    }
+
+    public IGGenericBlockItem(IGBlockType block, Properties properties) {
+        super(block.getIGBlock(), properties);
         this.block = block;
     }
 
@@ -74,21 +76,13 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
     protected boolean placeBlock(@NotNull BlockPlaceContext context, @NotNull BlockState state)
     {
         Block b = state.getBlock();
-        if(b instanceof IGDeskBlock<?> desk)
-        {
-            boolean ret = super.placeBlock(context, state);
-            if(ret) desk.onIEBlockPlacedBy(context, state);
-            return ret;
-        }
+
         return super.placeBlock(context, state);
     }
 
     @Override
     public @NotNull Component getName(ItemStack pStack) {
-        if(getBlock() instanceof IGDeskBlock<?>)
-        {
-            return Component.translatable("item.immersivegeology.drawing_table");
-        }
+
 
         Map<MaterialTexture, MaterialInterface<?>> materialMap = block.getMaterialMap();
         List<String> materialList = new ArrayList<>();
@@ -106,13 +100,13 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
                 }
             }
             case ENGINEERING_BLOCK -> {
-                materialList.add(I18n.get("material.immersivegeology.engineering." + materialMap.get(MaterialTexture.base).getName()));
+                materialList.add(Component.translatable("material.immersivegeology.engineering." + materialMap.get(MaterialTexture.base).getName()).getString());
             }
             default ->
             {
                 for(MaterialTexture t : MaterialTexture.values()){
                     if (materialMap.containsKey(t)) {
-                        materialList.add(I18n.get("material.immersivegeology." + materialMap.get(t).getName()));
+                        materialList.add(Component.translatable("material.immersivegeology." + materialMap.get(t).getName()).getString());
                     }
                 }
             }

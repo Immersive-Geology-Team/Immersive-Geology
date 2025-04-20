@@ -1,0 +1,12 @@
+{
+  "values": [
+    "immersivegeology:powder_hematite",
+    "immersivegeology:grit_hematite",
+    "immersivegeology:pellet_hematite",
+    "immersivegeology:poor_ore_hematite",
+    "immersivegeology:normal_ore_hematite",
+    "immersivegeology:rich_ore_hematite",
+    "immersivegeology:crushed_ore_hematite",
+    "immersivegeology:dirty_crushed_ore_hematite"
+  ]
+}

@@ -8,7 +8,7 @@
 
 package com.igteam.immersivegeology.core;
 
-import com.igteam.immersivegeology.common.block.energypipe.IGIMCHandler;
+import com.igteam.immersivegeology.common.block.entity.cable.IGIMCHandler;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.core.lib.IGLib;

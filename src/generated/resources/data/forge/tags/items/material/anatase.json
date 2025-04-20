@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_anatase",
+    "immersivegeology:grit_anatase",
+    "immersivegeology:poor_ore_anatase",
+    "immersivegeology:normal_ore_anatase",
+    "immersivegeology:rich_ore_anatase",
+    "immersivegeology:crushed_ore_anatase",
+    "immersivegeology:dirty_crushed_ore_anatase"
+  ]
+}

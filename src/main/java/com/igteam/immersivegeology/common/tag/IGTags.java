@@ -37,6 +37,8 @@ public class IGTags
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Item>>> ITEM_TAG_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<IFlagType<?>, LinkedHashMap<String, TagKey<Fluid>>> FLUID_TAG_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<ItemCategoryFlags, TagKey<Item>> ITEM_CATEGORY_FLAGS = new LinkedHashMap<>();
+	public static LinkedHashMap<GeologyMaterial, TagKey<Item>> ITEM_MATERIAL_HOLDER = new LinkedHashMap<>();
+	public static LinkedHashMap<GeologyMaterial, TagKey<Block>> BLOCK_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
 
 
@@ -57,6 +59,14 @@ public class IGTags
 			}
 			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge",itemFlag.getName().toLowerCase() + itemFlag.getTagPrefix()));
 			ITEM_CATEGORY_FLAGS.put(itemFlag, key);
+		}
+
+		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
+		{
+			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge","material/"+materialInterface.getName().toLowerCase()));
+			ITEM_MATERIAL_HOLDER.put(materialInterface.instance(), key);
+			TagKey<Block> blockKey = BlockTags.create(new ResourceLocation("forge", "material/"+materialInterface.getName().toLowerCase()));
+			BLOCK_MATERIAL_HOLDER.put(materialInterface.instance(), blockKey);
 		}
 
 		for(BlockCategoryFlags blockFlag : BlockCategoryFlags.values())

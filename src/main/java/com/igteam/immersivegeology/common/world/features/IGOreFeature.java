@@ -7,17 +7,13 @@
  */
 
 package com.igteam.immersivegeology.common.world.features;
-import com.igteam.immersivegeology.common.block.IGWeatheringOreBlock;
-import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
-import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.ore.IGWeatheringOreBlock;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGOreGenUtils;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.datafixers.util.Either;
@@ -26,28 +22,19 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -137,7 +124,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
 				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
-				for (int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++) {
+				for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++) {
 					LevelChunkSection section = currentChunk.getSection(sectionIndex);
 
 					// Skip if section is empty or doesn't have replaceable blocks

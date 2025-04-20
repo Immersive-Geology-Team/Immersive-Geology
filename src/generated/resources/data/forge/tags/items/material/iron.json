@@ -1,0 +1,15 @@
+{
+  "values": [
+    "immersivegeology:wire_iron",
+    "immersivegeology:gear_iron",
+    "immersiveengineering:dust_iron",
+    "immersivegeology:oxide_pellet_iron",
+    "immersivegeology:poor_ore_iron",
+    "immersivegeology:normal_ore_iron",
+    "immersivegeology:rich_ore_iron",
+    "immersivegeology:crystal_iron",
+    "immersivegeology:crushed_ore_iron",
+    "immersivegeology:metal_oxide_iron",
+    "immersivegeology:dirty_crushed_ore_iron"
+  ]
+}

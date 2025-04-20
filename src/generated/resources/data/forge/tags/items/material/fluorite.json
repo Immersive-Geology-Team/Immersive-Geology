@@ -1,0 +1,11 @@
+{
+  "values": [
+    "immersivegeology:powder_fluorite",
+    "immersivegeology:grit_fluorite",
+    "immersivegeology:poor_ore_fluorite",
+    "immersivegeology:normal_ore_fluorite",
+    "immersivegeology:rich_ore_fluorite",
+    "immersivegeology:crushed_ore_fluorite",
+    "immersivegeology:dirty_crushed_ore_fluorite"
+  ]
+}

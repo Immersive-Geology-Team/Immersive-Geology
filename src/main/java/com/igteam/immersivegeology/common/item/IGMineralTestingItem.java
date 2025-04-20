@@ -22,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,9 +30,11 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -40,6 +43,7 @@ import java.util.stream.Collectors;
 public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 {
 	private final HashMap<ChunkPos, MineralCacheEntry> cached_test = new HashMap<>();
+
 	public IGMineralTestingItem(ItemCategoryFlags flag, MaterialInterface<?> material, int durability)
 	{
 		super(flag, material, new Properties().durability(durability));
@@ -63,78 +67,107 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		return Component.translatable("item.immersivegeology.prospector_pick");
 	}
 
+	private static final List<MaterialInterface<?>> generateMaterials = IGLib.getGeneratedMaterials();
+
 	@Override
 	public InteractionResult useOn(UseOnContext context)
 	{
-		Level level = context.getLevel();
-		BlockPos usedPos = context.getClickedPos();
 		Player player = context.getPlayer();
 		ItemStack stack = context.getItemInHand();
-		if(!stack.getItem().equals(this)) return InteractionResult.FAIL;
-		if(player == null) return InteractionResult.FAIL;
-		ChunkAccess centreChunk = level.getChunk(usedPos);
-		boolean hasCache = cached_test.containsKey(centreChunk.getPos());
-		stack.hurtAndBreak(1, player, (p) -> {});
-		if(hasCache)
-		{
-			MineralCacheEntry cached_entry = cached_test.get(centreChunk.getPos());
-			long current_timestamp = System.currentTimeMillis();
-			if((current_timestamp - cached_entry.timestamp) > MineralCacheEntry.CACHE_EXPIRY)
-			{
-				cached_test.clear();
-			}
+		if (player == null || !stack.getItem().equals(this)) return InteractionResult.FAIL;
+		Level level = context.getLevel();
+		BlockPos usedPos = context.getClickedPos();
+		ChunkPos centreChunkPos = new ChunkPos(usedPos);
 
-			player.displayClientMessage(Component.literal(cached_entry.message), true);
-			return InteractionResult.SUCCESS;
+		MineralCacheEntry cachedEntry = cached_test.get(centreChunkPos);
+		if (cachedEntry != null) {
+			long currentTimestamp = System.currentTimeMillis();
+			if ((currentTimestamp - cachedEntry.timestamp) > MineralCacheEntry.CACHE_EXPIRY) {
+				cached_test.clear();
+			} else {
+				player.displayClientMessage(Component.literal(cachedEntry.message), true);
+				return InteractionResult.SUCCESS;
+			}
 		}
 
-		Map<MaterialInterface<?>, Integer> queryMap = new HashMap<>();
-		BlockPos chunkWorldPosition = centreChunk.getPos().getWorldPosition();
-		int height = centreChunk.getHeight();
-		for(int y = -64; y < height; ++y)
-		{
-			for(int x = -16; x < 32; ++x)
-			{
-				for(int z = -16; z < 32; ++z)
-				{
-					BlockPos cursor = new BlockPos(chunkWorldPosition).offset(x, y, z);
-					BlockState check = level.getBlockState(cursor);
-					if (check.getBlock() instanceof IOreBlock ore) {
-						MaterialInterface<?> material = ore.getMaterial(MaterialTexture.overlay);
-						queryMap.merge(material, 1, Integer::sum);
+		int centreChunkX = centreChunkPos.x;
+		int centreChunkZ = centreChunkPos.z;
+
+		int minBuildHeight = level.getMinBuildHeight();
+		int maxBuildHeight = level.getMaxBuildHeight();
+		int sectionMin = level.getSectionIndex(minBuildHeight);
+		int sectionMax = level.getSectionIndex(maxBuildHeight);
+
+		Set<MaterialInterface<?>> oreSet = new HashSet<>();
+		Set<MaterialInterface<?>> materialsToFind = new HashSet<>(generateMaterials);
+
+		TagKey<Block> allOresTag = Tags.Blocks.ORES;
+		chunkScan: for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) {
+				ChunkAccess chunk = level.getChunk(centreChunkX + dx, centreChunkZ + dz);
+
+				// Scan through sections first
+				for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++) {
+					LevelChunkSection section = chunk.getSection(sectionIndex);
+
+					// Skip empty sections
+					if (section.hasOnlyAir()) continue;
+
+					// Broad check - if the section doesn't have any ores at all, skip it entirely
+					if (!section.maybeHas(b -> b.is(allOresTag))) continue;
+
+					// Since this section potentially has ores, check for each specific material
+					Iterator<MaterialInterface<?>> materialIterator = materialsToFind.iterator();
+					while (materialIterator.hasNext()) {
+						MaterialInterface<?> material = materialIterator.next();
+
+						if (section.maybeHas(b -> b.is(material.getBlockMaterialTag()))) {
+							oreSet.add(material);
+							materialIterator.remove();
+
+							// If we found 3 materials, we can stop scanning completely
+							if (oreSet.size() >= 3) break chunkScan;
+						}
 					}
 				}
 			}
 		}
 
-		List<MaterialInterface<?>> found = queryMap.entrySet().stream()
-				.sorted(Map.Entry.<MaterialInterface<?>, Integer>comparingByValue().reversed())
-				.limit(3)
-				.map(Map.Entry::getKey)
-				.collect(Collectors.toList());
+		Component message = getMessage(oreSet);
 
-		String string_found = "";
-		if(!found.isEmpty())
-		{
-			if(found.size() == 1)
-			{
-				string_found = "Found Traces of " + found.get(0);
-			}
-			if(found.size() == 2)
-			{
-				string_found = "Found Traces of "+ found.get(0) +" and " + found.get(1) ;
-			}
-			if(found.size() == 3)
-			{
-				string_found = "Found Cluster of "+ found.get(0) +", "+ found.get(1) +" and "+ found.get(2);
-			}
-		}
+		// Update cache and display message
+		player.displayClientMessage(message, true);
+		cached_test.put(centreChunkPos, new MineralCacheEntry(message.getString()));
 
-		String status = found.isEmpty() ? "nothing" : "found";
-		Component comp = Component.translatable("immersivegeology.prospecting_pick." + status, string_found);
-		player.displayClientMessage(comp, true);
-		cached_test.put(centreChunk.getPos(), new MineralCacheEntry(comp.getString()));
+		stack.hurtAndBreak(1, player, (p) -> {});
 		return InteractionResult.SUCCESS;
+	}
+
+	private static @NotNull Component getMessage(Set<MaterialInterface<?>> oreSet)
+	{
+		Component message;
+		if (oreSet.isEmpty()) {
+			message = Component.translatable("immersivegeology.prospecting_pick.nothing");
+		} else {
+			List<MaterialInterface<?>> found = new ArrayList<>(oreSet);
+			String messageKey = "immersivegeology.prospecting_pick.found";
+			String materialsText;
+
+			switch (found.size()) {
+				case 1:
+					materialsText = "Found Traces of " + found.get(0);
+					break;
+				case 2:
+					materialsText = "Found Traces of " + found.get(0) + " and " + found.get(1);
+					break;
+				default: // 3 or more
+					materialsText = "Found Cluster of " + found.get(0) + ", " + found.get(1) + " and " + found.get(2);
+					break;
+			}
+
+			message = Component.translatable(messageKey, materialsText);
+		}
+		return message;
 	}
 
 	private static class MineralCacheEntry {
