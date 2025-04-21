@@ -16,6 +16,7 @@
   "immersivegeology.prospecting_pick.found": "%s",
   "immersivegeology.prospecting_pick.nothing": "Found Nothing",
 
+  "command.immersivegeology.veinlocate": "Located %s ore vein at %s (%s blocks away)",
   "manual.immersivegeology.main": "Immersive Geology",
   "manual.immersivegeology.direct_blasting.subtext": "Direct Blasting",
   "manual.immersivegeology.sulphide_electrowining.subtext": "Sulphide Electrowining",

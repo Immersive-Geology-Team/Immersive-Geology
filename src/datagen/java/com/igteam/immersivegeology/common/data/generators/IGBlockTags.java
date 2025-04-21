@@ -112,7 +112,9 @@ public class IGBlockTags extends BlockTagsProvider
 				}
 
 				TagKey<Block> ore_material_tag = oreBlock.getOreMaterial().getBlockMaterialTag();
+				TagKey<Block> ore_block = BlockCategoryFlags.ORE_BLOCK.getCategoryTag();
 				tag(ore_material_tag).add(ore);
+				tag(ore_block).add(ore);
 
 				if(useOptionalTag) {
 					useOptionalTag = false;

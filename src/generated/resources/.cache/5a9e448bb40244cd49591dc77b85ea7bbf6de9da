@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-21T05:36:36.98620485	Tags for minecraft:block mod id immersivegeology
+// 1.20.1	2025-04-21T22:44:05.424785759	Tags for minecraft:block mod id immersivegeology
 3c47486e8a899e1788bceacca8b9aab9d31e85f3 data/forge/tags/blocks/engineering_block.json
 a3cf156f511e6cd5e4e48c785c1a701475a96170 data/forge/tags/blocks/evaporate.json
 4d078a81179ed345dbdb4f453620dfc7abb8f640 data/forge/tags/blocks/evaporate_crystal.json
@@ -44,6 +44,7 @@ a72a11c231cabf553ede89634547f926320932f7 data/forge/tags/blocks/material/unobtan
 cdfaa3de33f107a6639ac5c308b3d2531f774dc7 data/forge/tags/blocks/material/vanadinite.json
 95d4b4d0167fdc4d1eed3682e02fa60d50ea990d data/forge/tags/blocks/material/wolframite.json
 80036a7d5a4d435ec4ee7bc16ee11a1c1cfd4a20 data/forge/tags/blocks/material/zircon.json
+218564249f7222afd6efddee9c4099bf227fcab6 data/forge/tags/blocks/ore_block.json
 20c4ac684a8b9d7b107ee8316cbbcb523fa6e5c1 data/forge/tags/blocks/ores.json
 7fca198f561d60a3101c403183700d6c44f3bcc3 data/forge/tags/blocks/sheetmetal_block.json
 c0d3ecb7b09c943902f2f261a1d810e889a4a37b data/forge/tags/blocks/storage_block.json

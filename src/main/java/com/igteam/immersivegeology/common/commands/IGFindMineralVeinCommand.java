@@ -17,6 +17,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -24,14 +25,22 @@ import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.server.level.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.server.command.EnumArgument;
@@ -55,21 +64,22 @@ public class IGFindMineralVeinCommand
 	{
 
 		dispatcher.register(
-				Commands.literal("locateMineralVein")
-						.requires(source -> source.hasPermission(2)) // OPs only
+				Commands.literal("locate")
+						.requires(source -> source.hasPermission(2))
+						.then(Commands.literal("mineral")
 						.then(Commands.argument("type", EnumArgument.enumArgument(MineralEnum.class))
-								.then(Commands.argument("radius", IntegerArgumentType.integer(0, 16))
+								.then(Commands.argument("radius", IntegerArgumentType.integer(0, 32))
 										.executes(context -> {
 											MineralEnum mineral = context.getArgument("type", MineralEnum.class);
 											int radius = IntegerArgumentType.getInteger(context, "radius");
 											findMineralVienAsync(context.getSource(), mineral, radius);
 											return 1;
-										})))
+										}))))
 		);
 	}
 
 	public static void findMineralVienAsync(CommandSourceStack source, MineralEnum type, int radius) {
-		source.sendSuccess(() -> Component.literal("Please note that this command is WIP and is NOT 100% accurate; known issues include inability to find Hematite or Magnetite"), false);
+		source.sendSuccess(() -> Component.literal("Locating Mineral Vein..."), false);
 		source.getServer().submit(() -> {
 			try {
 				findMineralVien(source, type, radius);
@@ -87,54 +97,46 @@ public class IGFindMineralVeinCommand
 		// Get the current level (world)
 		ServerLevel level = player.serverLevel();
 
+		int minBuildHeight = level.getMinBuildHeight();
+		int maxBuildHeight = level.getMaxBuildHeight();
+		int sectionMin = level.getSectionIndex(minBuildHeight);
+		int sectionMax = level.getSectionIndex(maxBuildHeight);
+		TagKey<Block> materialTag = type.getBlockMaterialTag();
 		// Loop over the chunks in the specified radius around the player
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = -radius; z <= radius; z++) {
 				ChunkPos currentChunk = new ChunkPos(playerPos.x + x, playerPos.z + z);
 				// Get chunk
 				LevelChunk chunk = level.getChunk(currentChunk.x, currentChunk.z);
-				Holder<Biome> biomeHolder = chunk.getNoiseBiome(8, 64, 8);
+				for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++)
+				{
+					LevelChunkSection section = chunk.getSection(sectionIndex);
+					// Skip empty sections
+					if (section.hasOnlyAir()) continue;
 
-				//source.sendSuccess(() -> Component.literal("Checking Chunk at " +currentChunk.getWorldPosition().toShortString()), false);
+					// Broad check - if the section doesn't have any ores at all, skip it entirely
+					if (!section.maybeHas(b -> b.is(materialTag))) continue;
 
-				if (isCustomOreFeaturePresent(biomeHolder, type, chunk.getPos(), level)) {
-					source.sendSuccess(() -> Component.literal("Found " + type.name() + " ore vein at " + chunk.getPos().getWorldPosition().toShortString()), false);
+					BlockPos orePosition = chunk.getPos().getWorldPosition();
+					int distance = Mth.floor(Mth.sqrt((float)source.getPosition().distanceToSqr(orePosition.getX(), orePosition.getY(), orePosition.getZ())));
+
+					Component coordinates = ComponentUtils.wrapInSquareBrackets(
+							Component.translatable("chat.coordinates", orePosition.getX(), orePosition.getY(), orePosition.getZ())
+					).withStyle((style) -> {
+						return style.withColor(ChatFormatting.GREEN)
+								.withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+										"/tp @s " + orePosition.getX() + " ~ " + orePosition.getZ()))
+								.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+										Component.translatable("chat.coordinates.tooltip")));
+					});
+
+					source.sendSuccess(() -> Component.translatable("command.immersivegeology.veinlocate",
+							type.name(), coordinates, distance), false);
 					return;
 				}
 			}
 		}
-
 		// If no matching feature is found, send a message to the player
 		source.sendFailure(Component.literal("No " + type.name() + " ore vein found within " + radius + " chunk radius."));
-	}
-
-	private static boolean isCustomOreFeaturePresent(Holder<Biome> biomeHolder, MineralEnum type, ChunkPos pos, ServerLevel server) {
-		Biome biome = biomeHolder.get();
-		List<HolderSet<PlacedFeature>> features = biome.getGenerationSettings().features();
-
-
-		// Check each feature set in the biome
-		for (HolderSet<PlacedFeature> featureSet : features) {
-			// Iterate over all placed features in this set
-			for (Holder<PlacedFeature> featureHolder : featureSet) {
-				ConfiguredFeature<?, ?> feature = featureHolder.value().feature().get();
-
-				// Check if the feature config is an instance of IGOreFeatureConfig
-				if (feature.config() instanceof IGOreFeatureConfig igConfig) {
-					IGDefaultPlacement placement = new IGDefaultPlacement(igConfig.entry());
-
-					// Perform the actual check for ore feature placement
-					if (placement.exposedPlace(server.getSeed(), server, pos, null)) {
-
-						if(type.seed()==igConfig.seed())
-						{
-							// Check if the feature matches the desired mineral type
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false; // No matching feature found
 	}
 }

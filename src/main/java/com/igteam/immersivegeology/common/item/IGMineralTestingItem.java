@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
@@ -22,6 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +33,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -67,8 +70,6 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		return Component.translatable("item.immersivegeology.prospector_pick");
 	}
 
-	private static final List<MaterialInterface<?>> generateMaterials = IGLib.getGeneratedMaterials();
-
 	@Override
 	public InteractionResult useOn(UseOnContext context)
 	{
@@ -90,18 +91,16 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 			}
 		}
 
+		long startTime = System.nanoTime();
 		int centreChunkX = centreChunkPos.x;
 		int centreChunkZ = centreChunkPos.z;
-
 		int minBuildHeight = level.getMinBuildHeight();
 		int maxBuildHeight = level.getMaxBuildHeight();
 		int sectionMin = level.getSectionIndex(minBuildHeight);
 		int sectionMax = level.getSectionIndex(maxBuildHeight);
 
 		Set<MaterialInterface<?>> oreSet = new HashSet<>();
-		Set<MaterialInterface<?>> materialsToFind = new HashSet<>(generateMaterials);
-
-		TagKey<Block> allOresTag = Tags.Blocks.ORES;
+		TagKey<Block> allOresTag = BlockCategoryFlags.ORE_BLOCK.getCategoryTag();
 		chunkScan: for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
 				ChunkAccess chunk = level.getChunk(centreChunkX + dx, centreChunkZ + dz);
@@ -116,28 +115,40 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 					// Broad check - if the section doesn't have any ores at all, skip it entirely
 					if (!section.maybeHas(b -> b.is(allOresTag))) continue;
 
-					// Since this section potentially has ores, check for each specific material
-					Iterator<MaterialInterface<?>> materialIterator = materialsToFind.iterator();
-					while (materialIterator.hasNext()) {
-						MaterialInterface<?> material = materialIterator.next();
-
-						if (section.maybeHas(b -> b.is(material.getBlockMaterialTag()))) {
-							oreSet.add(material);
-							materialIterator.remove();
-
-							// If we found 3 materials, we can stop scanning completely
-							if (oreSet.size() >= 3) break chunkScan;
+					for (int x = 0; x < 16; x++)
+					{
+						for(int y = 0; y < 16; y++)
+						{
+							for(int z = 0; z < 16; z++)
+							{
+								BlockState blockState = section.getBlockState(x, y, z);
+								if(blockState.is(allOresTag))
+								{
+									IOreBlock ore = (IOreBlock) blockState.getBlock();
+									oreSet.add(ore.getOreMaterial());
+									if (oreSet.size() >= 3) break chunkScan;
+								}
+							}
 						}
 					}
 				}
 			}
 		}
 
+		long endTime = System.nanoTime();
+		double milliseconds = (endTime - startTime) / 1_000_000.0;
+
+		// Print scan results and performance metrics
+		System.out.println("--- Ore Scan Performance ---");
+		System.out.println("Sections scanned: " + (sectionMax - sectionMin));
+		System.out.println("Ores found: " + oreSet.size() + " [" + String.join(", ", oreSet.stream().map(MaterialInterface::getName).toList()) + "]");
+		System.out.println("Execution time: " + String.format("%.2f", milliseconds) + " ms");
+		System.out.println("--------------------------");
 		Component message = getMessage(oreSet);
 
 		// Update cache and display message
 		player.displayClientMessage(message, true);
-		cached_test.put(centreChunkPos, new MineralCacheEntry(message.getString()));
+		cached_test.replace(centreChunkPos, new MineralCacheEntry(message.getString()));
 
 		stack.hurtAndBreak(1, player, (p) -> {});
 		return InteractionResult.SUCCESS;
