@@ -135,7 +135,7 @@
   "immersivegeology.gui.schematic_table.button_0": "上一示意图纸",
   "immersivegeology.gui.schematic_table.button_1": "下一示意图纸",
   "immersivegeology.gui.schematic_table.mirror": "镜像",
-  "immersivegeology.machine.low_water": "供水不足时加工暂停",
+  "immersivegeology.machine.low_water": "供水不足导致加工暂停",
   "item.immersivegeology.prospector_pick": "地质学家镐",
   "item.immersivegeology.metal_oxide": "氧化%s",
   "item.immersivegeology.firestarter": "点火装置",
