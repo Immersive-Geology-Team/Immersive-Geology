@@ -509,9 +509,9 @@
   "material.immersivegeology.engineering.tungsten": "热力",
   "material.immersivegeology.engineering.hastelloy": "化学",
   "block.immersivegeology.engineering_block": "%s工程块",
-  "block.immersivegeology.srconcrete": "钢筋混凝土",
+  "block.immersivegeology.srconcrete": "钢强化混凝土",
   "block.immersivegeology.energy_pipe": "超高压接地线缆",
-  "block.immersivegeology.trconcrete": "钛筋混凝土",
+  "block.immersivegeology.trconcrete": "钛强化混凝土",
 
   "item.immersivegeology.raw_fire_clay": "耐火黏土球",
   "item.immersivegeology.refractory_brick": "反射炉砖",
