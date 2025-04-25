@@ -111,7 +111,7 @@ public class IGRecipes extends RecipeProvider
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
-				.save(consumer, IGLib.MODID+":ig_item_repair");
+				.save(consumer, IGLib.MODID+"ig_item_repair");
 
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
 
@@ -411,6 +411,15 @@ public class IGRecipes extends RecipeProvider
 				{
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.STORAGE_BLOCK), 1).define('i', material.getItem(ItemCategoryFlags.INGOT)).pattern("iii").pattern("iii").pattern("iii").unlockedBy("has_ingot_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getItem(ItemCategoryFlags.INGOT))).save(consumer, "ingot_to_block_" + material.getName().toLowerCase());
 					ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.INGOT), 9).requires(material.getBlock(BlockCategoryFlags.STORAGE_BLOCK)).unlockedBy(material.getName()+"has_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.STORAGE_BLOCK))).save(consumer, ig(material.getName()+"_get_ingots_from_block"));
+
+					if(material.hasFlag(BlockCategoryFlags.STAIRS) && !material.instance().hasExistingFlag(BlockCategoryFlags.STAIRS))
+					{
+						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.STAIRS), 4).define('i', material.getBlock(BlockCategoryFlags.STORAGE_BLOCK)).pattern("i  ").pattern("ii ").pattern("iii").unlockedBy("has_storage_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("storage_to_stair_" + material.getName().toLowerCase()));
+					}
+					if(material.hasFlag(BlockCategoryFlags.SLAB) && !material.instance().hasExistingFlag(BlockCategoryFlags.SLAB))
+					{
+						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.STORAGE_BLOCK)).pattern("iii").unlockedBy("has_storage_"+material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("storage_to_slab_"+material.getName().toLowerCase()));
+					}
 				}
 				if(material.hasFlag(BlockCategoryFlags.SHEETMETAL_BLOCK) && material.hasFlag(ItemCategoryFlags.PLATE) && !material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.PLATE))
 				{
@@ -418,6 +427,7 @@ public class IGRecipes extends RecipeProvider
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_slab_" + material.getName().toLowerCase()));
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_STAIRS), 4).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("i  ").pattern("ii ").pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_stair_" + material.getName().toLowerCase()));
 				}
+
 				if(material.hasFlag(BlockCategoryFlags.SCAFFOLDING))
 				{
 					ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ((MetalEnum)material).getScaffoldingBlock().getDefault()).define('r', material.getItem(ItemCategoryFlags.ROD)).define('i', material.getItem(ItemCategoryFlags.INGOT)).pattern("iii").pattern(" r ").pattern("r r").unlockedBy("has_ingot_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_scaffolding_" + material.getName().toLowerCase()));

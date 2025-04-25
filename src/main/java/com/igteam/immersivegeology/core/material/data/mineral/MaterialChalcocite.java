@@ -46,8 +46,8 @@ public class MaterialChalcocite extends MaterialSulphideMineral
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
-            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0x4A4A4A),
-                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x2D7C6E)));
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xff4A4A4A),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0xff2D7C6E)));
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()

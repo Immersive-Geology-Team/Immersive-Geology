@@ -10,7 +10,7 @@ package com.igteam.immersivegeology.client.menu.multiblock;
 
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.StateView;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IGFurnaceStateView;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -41,14 +41,14 @@ public class BloomeryScreen extends IEContainerScreen<BloomeryMenu>
 			ContainerData state, GuiGraphics graphics, int leftPos, int topPos, int arrowXOffset
 	)
 	{
-		if(StateView.getLastBurnTime(state) > 0)
+		if(IGFurnaceStateView.getLastBurnTime(state) > 0)
 		{
-			int h = (int)(12*(StateView.getBurnTime(state)/(float)StateView.getLastBurnTime(state)));
+			int h = (int)(12*(IGFurnaceStateView.getBurnTime(state)/(float)IGFurnaceStateView.getLastBurnTime(state)));
 			graphics.blit(TEXTURE, leftPos+54, topPos+37+12-h, 179, 1+12-h, 9, h);
 		}
-		if(StateView.getMaxProcess(state) > 0)
+		if(IGFurnaceStateView.getMaxProcess(state) > 0)
 		{
-			int w = (int)(22*(1-StateView.getProcess(state)/(float)StateView.getMaxProcess(state)));
+			int w = (int)(22*(1-IGFurnaceStateView.getProcess(state)/(float)IGFurnaceStateView.getMaxProcess(state)));
 			graphics.blit(TEXTURE, leftPos+arrowXOffset, topPos+13, 177, 14, w, 16);
 		}
 	}

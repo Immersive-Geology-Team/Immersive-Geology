@@ -1,67 +1,256 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_thorite_andesite",
-    "immersivegeology:tfc_normal_ore_block_thorite_andesite",
-    "immersivegeology:tfc_rich_ore_block_thorite_andesite",
-    "immersivegeology:tfc_poor_ore_block_thorite_basalt",
-    "immersivegeology:tfc_normal_ore_block_thorite_basalt",
-    "immersivegeology:tfc_rich_ore_block_thorite_basalt",
-    "immersivegeology:tfc_poor_ore_block_thorite_dacite",
-    "immersivegeology:tfc_normal_ore_block_thorite_dacite",
-    "immersivegeology:tfc_rich_ore_block_thorite_dacite",
-    "immersivegeology:tfc_poor_ore_block_thorite_rhyolite",
-    "immersivegeology:tfc_normal_ore_block_thorite_rhyolite",
-    "immersivegeology:tfc_rich_ore_block_thorite_rhyolite",
-    "immersivegeology:tfc_poor_ore_block_thorite_diorite",
-    "immersivegeology:tfc_normal_ore_block_thorite_diorite",
-    "immersivegeology:tfc_rich_ore_block_thorite_diorite",
-    "immersivegeology:tfc_poor_ore_block_thorite_gabbro",
-    "immersivegeology:tfc_normal_ore_block_thorite_gabbro",
-    "immersivegeology:tfc_rich_ore_block_thorite_gabbro",
-    "immersivegeology:tfc_poor_ore_block_thorite_granite",
-    "immersivegeology:tfc_normal_ore_block_thorite_granite",
-    "immersivegeology:tfc_rich_ore_block_thorite_granite",
-    "immersivegeology:tfc_poor_ore_block_thorite_gneiss",
-    "immersivegeology:tfc_normal_ore_block_thorite_gneiss",
-    "immersivegeology:tfc_rich_ore_block_thorite_gneiss",
-    "immersivegeology:tfc_poor_ore_block_thorite_marble",
-    "immersivegeology:tfc_normal_ore_block_thorite_marble",
-    "immersivegeology:tfc_rich_ore_block_thorite_marble",
-    "immersivegeology:tfc_poor_ore_block_thorite_phyllite",
-    "immersivegeology:tfc_normal_ore_block_thorite_phyllite",
-    "immersivegeology:tfc_rich_ore_block_thorite_phyllite",
-    "immersivegeology:tfc_poor_ore_block_thorite_quartzite",
-    "immersivegeology:tfc_normal_ore_block_thorite_quartzite",
-    "immersivegeology:tfc_rich_ore_block_thorite_quartzite",
-    "immersivegeology:tfc_poor_ore_block_thorite_schist",
-    "immersivegeology:tfc_normal_ore_block_thorite_schist",
-    "immersivegeology:tfc_rich_ore_block_thorite_schist",
-    "immersivegeology:tfc_poor_ore_block_thorite_slate",
-    "immersivegeology:tfc_normal_ore_block_thorite_slate",
-    "immersivegeology:tfc_rich_ore_block_thorite_slate",
-    "immersivegeology:tfc_poor_ore_block_thorite_chalk",
-    "immersivegeology:tfc_normal_ore_block_thorite_chalk",
-    "immersivegeology:tfc_rich_ore_block_thorite_chalk",
-    "immersivegeology:tfc_poor_ore_block_thorite_chert",
-    "immersivegeology:tfc_normal_ore_block_thorite_chert",
-    "immersivegeology:tfc_rich_ore_block_thorite_chert",
-    "immersivegeology:tfc_poor_ore_block_thorite_claystone",
-    "immersivegeology:tfc_normal_ore_block_thorite_claystone",
-    "immersivegeology:tfc_rich_ore_block_thorite_claystone",
-    "immersivegeology:tfc_poor_ore_block_thorite_conglomerate",
-    "immersivegeology:tfc_normal_ore_block_thorite_conglomerate",
-    "immersivegeology:tfc_rich_ore_block_thorite_conglomerate",
-    "immersivegeology:tfc_poor_ore_block_thorite_dolomite",
-    "immersivegeology:tfc_normal_ore_block_thorite_dolomite",
-    "immersivegeology:tfc_rich_ore_block_thorite_dolomite",
-    "immersivegeology:tfc_poor_ore_block_thorite_limestone",
-    "immersivegeology:tfc_normal_ore_block_thorite_limestone",
-    "immersivegeology:tfc_rich_ore_block_thorite_limestone",
-    "immersivegeology:tfc_poor_ore_block_thorite_shale",
-    "immersivegeology:tfc_normal_ore_block_thorite_shale",
-    "immersivegeology:tfc_rich_ore_block_thorite_shale",
-    "immersivegeology:minecraft_poor_ore_block_thorite_end_stone",
-    "immersivegeology:minecraft_normal_ore_block_thorite_end_stone",
-    "immersivegeology:minecraft_rich_ore_block_thorite_end_stone"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_thorite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_thorite_end_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_thorite_end_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_thorite_end_stone",
+      "required": false
+    }
   ]
 }

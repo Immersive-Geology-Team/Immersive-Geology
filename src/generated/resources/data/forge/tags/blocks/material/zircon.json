@@ -1,28 +1,100 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_zircon_diorite",
-    "immersivegeology:tfc_normal_ore_block_zircon_diorite",
-    "immersivegeology:tfc_rich_ore_block_zircon_diorite",
-    "immersivegeology:tfc_poor_ore_block_zircon_gabbro",
-    "immersivegeology:tfc_normal_ore_block_zircon_gabbro",
-    "immersivegeology:tfc_rich_ore_block_zircon_gabbro",
-    "immersivegeology:tfc_poor_ore_block_zircon_granite",
-    "immersivegeology:tfc_normal_ore_block_zircon_granite",
-    "immersivegeology:tfc_rich_ore_block_zircon_granite",
-    "immersivegeology:minecraft_poor_ore_block_zircon_stone",
-    "immersivegeology:minecraft_normal_ore_block_zircon_stone",
-    "immersivegeology:minecraft_rich_ore_block_zircon_stone",
-    "immersivegeology:minecraft_poor_ore_block_zircon_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_zircon_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_zircon_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_zircon_andesite",
-    "immersivegeology:minecraft_normal_ore_block_zircon_andesite",
-    "immersivegeology:minecraft_rich_ore_block_zircon_andesite",
-    "immersivegeology:minecraft_poor_ore_block_zircon_diorite",
-    "immersivegeology:minecraft_normal_ore_block_zircon_diorite",
-    "immersivegeology:minecraft_rich_ore_block_zircon_diorite",
-    "immersivegeology:minecraft_poor_ore_block_zircon_granite",
-    "immersivegeology:minecraft_normal_ore_block_zircon_granite",
-    "immersivegeology:minecraft_rich_ore_block_zircon_granite"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_zircon_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_zircon_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_zircon_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_zircon_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_zircon_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_zircon_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_zircon_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_zircon_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_zircon_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_zircon_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_zircon_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_zircon_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_zircon_granite",
+      "required": false
+    }
   ]
 }

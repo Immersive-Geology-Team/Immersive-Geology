@@ -1,19 +1,64 @@
 {
   "values": [
-    "immersivegeology:minecraft_poor_ore_block_magnetite_stone",
-    "immersivegeology:minecraft_normal_ore_block_magnetite_stone",
-    "immersivegeology:minecraft_rich_ore_block_magnetite_stone",
-    "immersivegeology:minecraft_poor_ore_block_magnetite_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_magnetite_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_magnetite_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_magnetite_andesite",
-    "immersivegeology:minecraft_normal_ore_block_magnetite_andesite",
-    "immersivegeology:minecraft_rich_ore_block_magnetite_andesite",
-    "immersivegeology:minecraft_poor_ore_block_magnetite_diorite",
-    "immersivegeology:minecraft_normal_ore_block_magnetite_diorite",
-    "immersivegeology:minecraft_rich_ore_block_magnetite_diorite",
-    "immersivegeology:minecraft_poor_ore_block_magnetite_granite",
-    "immersivegeology:minecraft_normal_ore_block_magnetite_granite",
-    "immersivegeology:minecraft_rich_ore_block_magnetite_granite"
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_magnetite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_magnetite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_magnetite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_magnetite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_magnetite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_magnetite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_magnetite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_magnetite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_magnetite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_magnetite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_magnetite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_magnetite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_magnetite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_magnetite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_magnetite_granite",
+      "required": false
+    }
   ]
 }

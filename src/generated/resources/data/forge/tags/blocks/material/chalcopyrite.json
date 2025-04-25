@@ -1,40 +1,148 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_diorite",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_diorite",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_diorite",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_gabbro",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_gabbro",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_gabbro",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_granite",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_granite",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_granite",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_chalk",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_chalk",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_chalk",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_chert",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_chert",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_chert",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_claystone",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_claystone",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_claystone",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_conglomerate",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_conglomerate",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_conglomerate",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_dolomite",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_dolomite",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_dolomite",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_limestone",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_limestone",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_limestone",
-    "immersivegeology:tfc_poor_ore_block_chalcopyrite_shale",
-    "immersivegeology:tfc_normal_ore_block_chalcopyrite_shale",
-    "immersivegeology:tfc_rich_ore_block_chalcopyrite_shale",
-    "immersivegeology:minecraft_poor_ore_block_chalcopyrite_basalt",
-    "immersivegeology:minecraft_normal_ore_block_chalcopyrite_basalt",
-    "immersivegeology:minecraft_rich_ore_block_chalcopyrite_basalt",
-    "immersivegeology:minecraft_poor_ore_block_chalcopyrite_netherrack",
-    "immersivegeology:minecraft_normal_ore_block_chalcopyrite_netherrack",
-    "immersivegeology:minecraft_rich_ore_block_chalcopyrite_netherrack"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcopyrite_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_chalcopyrite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_chalcopyrite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_chalcopyrite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_chalcopyrite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_chalcopyrite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_chalcopyrite_netherrack",
+      "required": false
+    }
   ]
 }

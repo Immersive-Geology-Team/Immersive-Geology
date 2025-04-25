@@ -10,8 +10,12 @@ import blusunrize.immersiveengineering.common.register.IEMenuTypes.ClientContain
 import blusunrize.immersiveengineering.common.register.IEMenuTypes.SimpleContainerConstructor;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
+import com.igteam.immersivegeology.common.block.multiblocks.gui.ChemicalReactorMenu;
+import com.igteam.immersivegeology.common.block.multiblocks.gui.CrystallizerMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
 import com.igteam.immersivegeology.common.menu.IGCrateMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -41,6 +45,8 @@ public class IGMenuTypes
 	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
+	public static final MultiblockContainer<CrystallizerLogic.State, CrystallizerMenu> CRYSTALLIZER = registerMultiblock(IGLib.GUIID_Crystallizer, CrystallizerMenu::makeServer, CrystallizerMenu::makeClient);
+	public static final MultiblockContainer<ChemicalReactorLogic.State, ChemicalReactorMenu> CHEMICAL_REACTOR = registerMultiblock(IGLib.GUIID_ChemicalReactor, ChemicalReactorMenu::makeServer, ChemicalReactorMenu::makeClient);
 
 	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
 

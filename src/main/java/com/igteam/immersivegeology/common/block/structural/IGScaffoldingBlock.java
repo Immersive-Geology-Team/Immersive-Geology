@@ -8,9 +8,17 @@
 
 package com.igteam.immersivegeology.common.block.structural;
 
+import blusunrize.immersiveengineering.api.tool.conveyor.ConveyorHandler;
+import blusunrize.immersiveengineering.api.tool.conveyor.IConveyorBelt;
+import blusunrize.immersiveengineering.api.tool.conveyor.IConveyorType;
 import blusunrize.immersiveengineering.common.blocks.generic.ScaffoldingBlock;
+import blusunrize.immersiveengineering.common.blocks.metal.ConveyorBeltBlockEntity;
+import blusunrize.immersiveengineering.common.blocks.metal.ConveyorBlock;
 import blusunrize.immersiveengineering.common.blocks.metal.FluidPipeBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDevices;
+import blusunrize.immersiveengineering.common.util.loot.ConveyorCoverLootFunction;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
@@ -24,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static blusunrize.immersiveengineering.common.register.IEBlocks.METAL_PROPERTIES_NO_OCCLUSION;

@@ -13,7 +13,7 @@ import blusunrize.immersiveengineering.common.gui.IESlot;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.StateView;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IGFurnaceStateView;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
@@ -45,7 +45,7 @@ public class BloomeryMenu extends IEContainerMenu
 		return new BloomeryMenu(
 				clientCtx(type, id), invPlayer,
 				new ItemStackHandler(BloomeryLogic.NUM_SLOTS),
-				new SimpleContainerData(StateView.NUM_SLOTS)
+				new SimpleContainerData(IGFurnaceStateView.NUM_SLOTS)
 		);
 	}
 

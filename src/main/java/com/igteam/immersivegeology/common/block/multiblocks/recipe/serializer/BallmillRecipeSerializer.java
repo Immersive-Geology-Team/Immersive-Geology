@@ -34,7 +34,7 @@ public class BallmillRecipeSerializer extends IERecipeSerializer<BallmillRecipe>
 	@Override
 	public BallmillRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
-		Lazy<ItemStack> output = readOutput(json.get("result"));
+		IngredientWithSize output = IngredientWithSize.deserialize(GsonHelper.getAsJsonObject(json, "result"));
 		IngredientWithSize input = IngredientWithSize.deserialize(GsonHelper.getAsJsonObject(json, "input"));
 		int energy = GsonHelper.getAsInt(json, "energy");
 		int time = GsonHelper.getAsInt(json, "time");
@@ -44,8 +44,7 @@ public class BallmillRecipeSerializer extends IERecipeSerializer<BallmillRecipe>
 	@Override
 	public @Nullable BallmillRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
-		
-		Lazy<ItemStack> output = readLazyStack(buffer);
+		IngredientWithSize output = IngredientWithSize.read(buffer);
 		IngredientWithSize input = IngredientWithSize.read(buffer);
 		int energy = buffer.readInt();
 		int time = buffer.readInt();
@@ -55,8 +54,7 @@ public class BallmillRecipeSerializer extends IERecipeSerializer<BallmillRecipe>
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, BallmillRecipe recipe)
 	{
-		
-		writeLazyStack(buffer, recipe.itemOutput);
+		recipe.itemOutput.write(buffer);
 		recipe.itemIn.write(buffer);
 		buffer.writeInt(recipe.getTotalProcessEnergy());
 		buffer.writeInt(recipe.getTotalProcessTime());

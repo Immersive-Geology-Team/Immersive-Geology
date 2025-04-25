@@ -1,46 +1,172 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_apatite_diorite",
-    "immersivegeology:tfc_normal_ore_block_apatite_diorite",
-    "immersivegeology:tfc_rich_ore_block_apatite_diorite",
-    "immersivegeology:tfc_poor_ore_block_apatite_gabbro",
-    "immersivegeology:tfc_normal_ore_block_apatite_gabbro",
-    "immersivegeology:tfc_rich_ore_block_apatite_gabbro",
-    "immersivegeology:tfc_poor_ore_block_apatite_granite",
-    "immersivegeology:tfc_normal_ore_block_apatite_granite",
-    "immersivegeology:tfc_rich_ore_block_apatite_granite",
-    "immersivegeology:tfc_poor_ore_block_apatite_gneiss",
-    "immersivegeology:tfc_normal_ore_block_apatite_gneiss",
-    "immersivegeology:tfc_rich_ore_block_apatite_gneiss",
-    "immersivegeology:tfc_poor_ore_block_apatite_marble",
-    "immersivegeology:tfc_normal_ore_block_apatite_marble",
-    "immersivegeology:tfc_rich_ore_block_apatite_marble",
-    "immersivegeology:tfc_poor_ore_block_apatite_phyllite",
-    "immersivegeology:tfc_normal_ore_block_apatite_phyllite",
-    "immersivegeology:tfc_rich_ore_block_apatite_phyllite",
-    "immersivegeology:tfc_poor_ore_block_apatite_quartzite",
-    "immersivegeology:tfc_normal_ore_block_apatite_quartzite",
-    "immersivegeology:tfc_rich_ore_block_apatite_quartzite",
-    "immersivegeology:tfc_poor_ore_block_apatite_schist",
-    "immersivegeology:tfc_normal_ore_block_apatite_schist",
-    "immersivegeology:tfc_rich_ore_block_apatite_schist",
-    "immersivegeology:tfc_poor_ore_block_apatite_slate",
-    "immersivegeology:tfc_normal_ore_block_apatite_slate",
-    "immersivegeology:tfc_rich_ore_block_apatite_slate",
-    "immersivegeology:minecraft_poor_ore_block_apatite_stone",
-    "immersivegeology:minecraft_normal_ore_block_apatite_stone",
-    "immersivegeology:minecraft_rich_ore_block_apatite_stone",
-    "immersivegeology:minecraft_poor_ore_block_apatite_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_apatite_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_apatite_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_apatite_andesite",
-    "immersivegeology:minecraft_normal_ore_block_apatite_andesite",
-    "immersivegeology:minecraft_rich_ore_block_apatite_andesite",
-    "immersivegeology:minecraft_poor_ore_block_apatite_diorite",
-    "immersivegeology:minecraft_normal_ore_block_apatite_diorite",
-    "immersivegeology:minecraft_rich_ore_block_apatite_diorite",
-    "immersivegeology:minecraft_poor_ore_block_apatite_granite",
-    "immersivegeology:minecraft_normal_ore_block_apatite_granite",
-    "immersivegeology:minecraft_rich_ore_block_apatite_granite"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_apatite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_apatite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_apatite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_apatite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_apatite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_apatite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_apatite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_apatite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_apatite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_apatite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_apatite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_apatite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_apatite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_apatite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_apatite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_apatite_granite",
+      "required": false
+    }
   ]
 }

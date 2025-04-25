@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:storage_block_tungsten"
+    }
+  },
+  "pattern": [
+    "iii"
+  ],
+  "result": {
+    "count": 6,
+    "item": "immersivegeology:slab_tungsten"
+  },
+  "show_notification": true
+}

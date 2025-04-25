@@ -9,14 +9,10 @@
 package com.igteam.immersivegeology.client.menu.multiblock;
 
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
-import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
-import blusunrize.immersiveengineering.common.gui.SqueezerMenu;
 import com.google.common.collect.ImmutableList;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.StateView;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevStateView;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.GuiGraphics;

@@ -17,6 +17,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = IGRegistrationHolder.registerMetalMultiblock("crystallizer", new CrystallizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"),
             builder -> {
                 builder.redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN);
+                builder.gui(IGMenuTypes.CRYSTALLIZER);
             });
 
     public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMetalMultiblock("gravityseparator", new GravitySeparatorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("gravityseparator"),
@@ -56,6 +57,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<ChemicalReactorLogic.State> CHEMICAL_REACTOR = IGRegistrationHolder.registerMetalMultiblock("chemical_reactor", new ChemicalReactorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("chemical_reactor"),
             builder -> {
                 builder.redstone(state -> state.rsState, ChemicalReactorLogic.REDSTONE_IN);
+                builder.gui(IGMenuTypes.CHEMICAL_REACTOR);
             });
 
     public static final MultiblockRegistration<CentrifugeLogic.State> CENTRIFUGE = IGRegistrationHolder.registerMetalMultiblock("centrifuge", new CentrifugeLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("centrifuge"),

@@ -80,6 +80,8 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		BlockPos usedPos = context.getClickedPos();
 		ChunkPos centreChunkPos = new ChunkPos(usedPos);
 
+		stack.hurtAndBreak(1, player, (p) -> {});
+
 		MineralCacheEntry cachedEntry = cached_test.get(centreChunkPos);
 		if (cachedEntry != null) {
 			long currentTimestamp = System.currentTimeMillis();
@@ -91,7 +93,6 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 			}
 		}
 
-		long startTime = System.nanoTime();
 		int centreChunkX = centreChunkPos.x;
 		int centreChunkZ = centreChunkPos.z;
 		int minBuildHeight = level.getMinBuildHeight();
@@ -135,23 +136,19 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 			}
 		}
 
-		long endTime = System.nanoTime();
-		double milliseconds = (endTime - startTime) / 1_000_000.0;
-
-		// Print scan results and performance metrics
-		System.out.println("--- Ore Scan Performance ---");
-		System.out.println("Sections scanned: " + (sectionMax - sectionMin));
-		System.out.println("Ores found: " + oreSet.size() + " [" + String.join(", ", oreSet.stream().map(MaterialInterface::getName).toList()) + "]");
-		System.out.println("Execution time: " + String.format("%.2f", milliseconds) + " ms");
-		System.out.println("--------------------------");
 		Component message = getMessage(oreSet);
 
 		// Update cache and display message
 		player.displayClientMessage(message, true);
-		cached_test.replace(centreChunkPos, new MineralCacheEntry(message.getString()));
+		cached_test.put(centreChunkPos, new MineralCacheEntry(message.getString()));
 
-		stack.hurtAndBreak(1, player, (p) -> {});
 		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public boolean isIGRepairable(ItemStack stack)
+	{
+		return true;
 	}
 
 	private static @NotNull Component getMessage(Set<MaterialInterface<?>> oreSet)

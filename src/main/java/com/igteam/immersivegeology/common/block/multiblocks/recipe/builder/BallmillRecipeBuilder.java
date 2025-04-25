@@ -26,12 +26,12 @@ public class BallmillRecipeBuilder extends IEFinishedRecipe<BallmillRecipeBuilde
 
 	public static BallmillRecipeBuilder builder(Item result)
 	{
-		return new BallmillRecipeBuilder().addResult(result);
+		return new BallmillRecipeBuilder().addResult(IngredientWithSize.of(new ItemStack(result)));
 	}
 
 	public static BallmillRecipeBuilder builder(ItemStack result)
 	{
-		return new BallmillRecipeBuilder().addResult(result);
+		return new BallmillRecipeBuilder().addResult(IngredientWithSize.of(result));
 	}
 
 	public static BallmillRecipeBuilder builder(TagKey<Item> result, int count)

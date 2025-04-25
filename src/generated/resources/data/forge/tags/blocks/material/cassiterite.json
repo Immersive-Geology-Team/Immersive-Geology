@@ -1,19 +1,64 @@
 {
   "values": [
-    "immersivegeology:minecraft_poor_ore_block_cassiterite_stone",
-    "immersivegeology:minecraft_normal_ore_block_cassiterite_stone",
-    "immersivegeology:minecraft_rich_ore_block_cassiterite_stone",
-    "immersivegeology:minecraft_poor_ore_block_cassiterite_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_cassiterite_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_cassiterite_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_cassiterite_andesite",
-    "immersivegeology:minecraft_normal_ore_block_cassiterite_andesite",
-    "immersivegeology:minecraft_rich_ore_block_cassiterite_andesite",
-    "immersivegeology:minecraft_poor_ore_block_cassiterite_diorite",
-    "immersivegeology:minecraft_normal_ore_block_cassiterite_diorite",
-    "immersivegeology:minecraft_rich_ore_block_cassiterite_diorite",
-    "immersivegeology:minecraft_poor_ore_block_cassiterite_granite",
-    "immersivegeology:minecraft_normal_ore_block_cassiterite_granite",
-    "immersivegeology:minecraft_rich_ore_block_cassiterite_granite"
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cassiterite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cassiterite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cassiterite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cassiterite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cassiterite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cassiterite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cassiterite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cassiterite_granite",
+      "required": false
+    }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:storage_block_magnesium"
+    }
+  },
+  "pattern": [
+    "iii"
+  ],
+  "result": {
+    "count": 6,
+    "item": "immersivegeology:slab_magnesium"
+  },
+  "show_notification": true
+}

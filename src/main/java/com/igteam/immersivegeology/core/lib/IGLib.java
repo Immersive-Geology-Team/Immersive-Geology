@@ -45,6 +45,8 @@ public class IGLib {
     public static final int DUST_FROM_COMPOUND_ACID_AMOUNT = 1;
     public static final String GUIID_Bloomery = "bloomery";
     public static final String GUIID_RevFurnace= "reverberation_furnace";
+    public static final String GUIID_Crystallizer= "crystallizer";
+    public static final String GUIID_ChemicalReactor= "chemical_reactor";
     public static final String GUIID_Crate = "crate_menu";
 	public static final int PELLETIZER_DEFAULT_TIME = 600;
 
