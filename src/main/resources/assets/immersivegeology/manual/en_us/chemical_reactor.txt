@@ -12,7 +12,7 @@ If a tank contains §lleftover fluid§r, it can be extracted using a <link;fluid
 §lOutputs§r
 Both outputs are located at the §lfront§r of the machine:
 - The §lfluid output§r will automatically flow into connected tanks. Without a pump, it will only drain into tanks that are positioned §llower§r than the machine.
-- The §litem output§r attempts to insert items into an attached inventory. If no valid container is available, items will be dropped in front of the machine as loose entities.
+- The §litem output§r are not automatic. You must use an <link;conveyors;Extracting Conveyor Belt;conveyor_extract_recipe>.
 <np>
 §lRedstone Control§r
 Powering the redstone input will §ldisable§r the machine, halting any recipe currently in progress.
