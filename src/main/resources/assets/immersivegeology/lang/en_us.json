@@ -34,6 +34,41 @@
   "manual.immersivegeology.nether": "Nether",
   "manual.immersivegeology.the_end": "The End",
 
+  "skin.immersivegeology.muddykat": "Muddykat's",
+  "skin.immersivegeology.peter": "Peter's",
+  "skin.immersivegeology.steelblue8": "SteelBlue8's",
+  "skin.immersivegeology.crimsontwilight": "Crimson Twilight's",
+
+  "skin.immersivegeology.gravityseparator.default": "Old Faithful",
+  "skin.immersivegeology.gravityseparator.hazard": "Hazard",
+  "skin.immersivegeology.gravityseparator.legacy": "Legacy",
+  "skin.immersivegeology.gravityseparator.green": "Eco Friendly",
+
+  "skin.immersivegeology.chemical_reactor.default": "Old Faithful",
+  "skin.immersivegeology.chemical_reactor.legacy": "Legacy",
+  "skin.immersivegeology.chemical_reactor.hazard": "Hazard",
+  "skin.immersivegeology.chemical_reactor.rusted": "Rusted",
+
+  "skin.immersivegeology.bloomery.default": "Old Faithful",
+  "skin.immersivegeology.bloomery.legacy": "Legacy",
+
+
+  "skin.immersivegeology.reverberation_furnace.default": "Old Faithful",
+  "skin.immersivegeology.reverberation_furnace.legacy": "Legacy",
+
+  "skin.immersivegeology.crystallizer.default": "Old Faithful",
+  "skin.immersivegeology.crystallizer.rusted": "Rusted",
+
+  "skin.immersivegeology.description": "%s %s %s",
+  "skin.immersivegeology.description.skin": "Skin: %s",
+
+  "skin.immersivegeology.credit.developer": "Developer Skin",
+  "skin.immersivegeology.credit.artist": "Artist Skin",
+  "skin.immersivegeology.credit.peter": "Künstler Skin",
+  "skin.immersivegeology.credit.creator": "Creator Skin",
+  "skin.immersivegeology.credit.bughunter": "Bug Hunter ",
+  "skin.immersivegeology.credit.supporter": "Supporter Skin",
+
   "manual.immersivegeology.hall-heroit_process.subtext": "Hall-Heroit Process",
   "manual.immersivegeology.bayer_process.subtext": "Bayer Process",
   "manual.immersivegeology.minerals": "Minerals",
@@ -160,6 +195,8 @@
   "item.immersivegeology.empty_flask": "Empty %s Flask",
 
   "item.immersivegeology.ingot": "%s Ingot",
+  "item.immersivegeology.skin_component": "%s Mod Kit",
+  "item.immersivegeology.skin_component.description": "%s %s",
   "item.immersivegeology.plate": "%s Plate",
   "item.immersivegeology.drill_head": "%s Drill Head",
   "item.immersivegeology.rough_ingot": "Rough %s Ingot",

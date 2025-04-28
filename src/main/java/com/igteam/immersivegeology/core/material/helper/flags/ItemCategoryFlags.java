@@ -39,6 +39,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     DRILL_HEAD(4),
     MISC(4),
     BLUEPRINT(4),
+    SKIN_COMPONENT(4),
     SEDIMENT(0);
 
     private final int groupOrdinal;

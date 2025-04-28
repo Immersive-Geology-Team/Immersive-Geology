@@ -113,7 +113,8 @@ public class ImmersiveGeology {
         }
     }
 
-    private void supplyMaterialTint(){
+    private void supplyMaterialTint()
+    {
         Minecraft minecraft = Minecraft.getInstance();
 
         // Define the BiPredicate to check if a material has a specific flag

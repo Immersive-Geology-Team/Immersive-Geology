@@ -42,7 +42,7 @@ public class ChemicalReactorScreen extends IEContainerScreen<ChemicalReactorMenu
 	{
 		super.init();
 		this.inventoryLabelY = this.imageHeight - 94;
-		this.inventoryLabelX = 8;
+		this.inventoryLabelX = 24;
 	}
 
 	@Override
@@ -61,7 +61,6 @@ public class ChemicalReactorScreen extends IEContainerScreen<ChemicalReactorMenu
 	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
 	{
 		super.render(graphics, mouseX, mouseY, partialTicks);
-		graphics.blit(TEXTURE, leftPos+11, topPos+16, 180, 126, 20, 51);
 	}
 
 	@Override

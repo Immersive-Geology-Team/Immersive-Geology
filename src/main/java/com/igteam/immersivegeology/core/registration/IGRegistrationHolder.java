@@ -29,6 +29,8 @@ import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.*;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.ore.IGEvaporateMineralBlock;
 import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
@@ -58,6 +60,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -461,20 +464,29 @@ public class IGRegistrationHolder {
     private static void initializeMultiblocks()
     {
         IGLib.IG_LOGGER.info("- Multiblocks");
-        registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER);
-        registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);
-        registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY);
-        registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR);
+        registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR, IGGravitySeparatorSkins.class);
+        registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER, IGCrystallizerSkins.class);
+        registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY, IGBloomerySkins.class);
+        registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR, IGChemicalReactorSkins.class);
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN);
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
-        registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE);
+        registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE, IGRevFurnaceSkins.class);
         registerMB("trommel", IGTrommelMultiblock.INSTANCE, IGMultiblockProvider.TROMMEL);
-        registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
         registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER);
+        registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);
     }
 
+    private static <T extends Enum<T> & IIGMultiSkinHelper & StringRepresentable> void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration, Class<T> skins){
+
+        for(T skin : skins.getEnumConstants())
+        {
+            registerItem(registry_name + "_multiblock_skin_" + skin.getSerializedName(), () -> new IGMultiblockSkinItem<>(ItemCategoryFlags.SKIN_COMPONENT, MetalEnum.Cobalt, skin, registry_name + "_multiblock_skin_" + skin.getSerializedName()));
+        }
+
+        registerMB(registry_name, block, registration);
+    }
     private static void registerMB(String registry_name, TemplateMultiblock block, MultiblockRegistration<?> registration){
         registerMultiblockTemplate(registry_name, block);
         MB_REGISTRY_MAP.put(registry_name, registration);

@@ -23,12 +23,17 @@ import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.multiblocks.IGGravitySeparatorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
+import com.igteam.immersivegeology.common.block.multiblocks.part.SkinableMultiblockPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GravitySeparatorShape;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGGravitySeparatorSkins;
+import com.igteam.immersivegeology.common.item.IGMultiblockSkinItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -117,6 +122,22 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     }
 
     @Override
+    public InteractionResult click(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient)
+    {
+        ItemStack stack = player.getItemInHand(hand);
+        if(stack.getItem() instanceof IGMultiblockSkinItem<?> skin && skin.getSkin() instanceof IGGravitySeparatorSkins)
+        {
+            boolean success = SkinableMultiblockPart.setSkin(ctx.getLevel(), IGGravitySeparatorMultiblock.INSTANCE, (IGGravitySeparatorSkins)skin.getSkin());
+            if(success)
+            {
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        return InteractionResult.FAIL;
+    }
+
+    @Override
     public void onEntityCollision(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Entity collided)
     {
         if(collided.level().isClientSide)
@@ -192,6 +213,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
+        if(state == null) return List.of();
         if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
         {
             return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));

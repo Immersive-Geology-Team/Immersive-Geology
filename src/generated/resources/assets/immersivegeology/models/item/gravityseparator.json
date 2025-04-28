@@ -124,5 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/gravityseparator/gravityseparator.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/gravityseparator/gravityseparator.obj",
+  "textures": {
+    "gravityseparator": "immersivegeology:block/multiblock/gravityseparator/default"
+  }
 }

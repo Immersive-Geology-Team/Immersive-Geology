@@ -164,18 +164,15 @@ public abstract class IGTemplateMultiblock extends TemplateMultiblock implements
 
     public ItemStack getFormationItem()
     {
-        ItemStack stack =  new ItemStack(Tools.HAMMER);
-        if(stack.getItem() instanceof IGMBFormationItem hammer)
-        {
-            boolean canFormStone = hammer.canFormMB(StoneEnum.MCStone, this);
-            boolean canFormBronze = hammer.canFormMB(MetalEnum.Bronze, this);
-            boolean canFormStainlessSteel = hammer.canFormMB(MetalEnum.StainlessSteel, this);
-
-            if(canFormStainlessSteel) stack = MetalEnum.StainlessSteel.getStack(ItemCategoryFlags.HAMMER);
-            if(canFormBronze) stack = MetalEnum.Bronze.getStack(ItemCategoryFlags.HAMMER);
-            if(canFormStone) stack = StoneEnum.MCStone.getStack(ItemCategoryFlags.HAMMER);
-            return stack;
-        }
+        IGMBFormationItem stoneHammer = (IGMBFormationItem) StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER);
+        IGMBFormationItem bronzeHammer = (IGMBFormationItem) MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
+        IGMBFormationItem stainlessSteelHammer = (IGMBFormationItem) MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
+        boolean canFormStone = stoneHammer.canFormMB(StoneEnum.MCStone, this);
+        boolean canFormBronze = bronzeHammer.canFormMB(MetalEnum.Bronze, this);
+        boolean canFormStainlessSteel = stainlessSteelHammer.canFormMB(MetalEnum.StainlessSteel, this);
+        if(canFormStone) return StoneEnum.MCStone.getStack(ItemCategoryFlags.HAMMER);
+        if(canFormBronze) return MetalEnum.Bronze.getStack(ItemCategoryFlags.HAMMER);
+        if(canFormStainlessSteel) return MetalEnum.StainlessSteel.getStack(ItemCategoryFlags.HAMMER);
         return new ItemStack(Tools.HAMMER);
     }
 }

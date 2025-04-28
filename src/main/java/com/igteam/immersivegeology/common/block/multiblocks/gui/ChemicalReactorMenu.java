@@ -68,9 +68,9 @@ public class ChemicalReactorMenu extends IEContainerMenu
 
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 9; j++)
-				addSlot(new Slot(inventoryPlayer, j+i*9+9, 7+j*18, 128+i*18));
+				addSlot(new Slot(inventoryPlayer, j+i*9+9, 23+j*18, 128+i*18));
 		for(int i = 0; i < 9; i++)
-			addSlot(new Slot(inventoryPlayer, i, 7+i*18, 186));
+			addSlot(new Slot(inventoryPlayer, i, 23+i*18, 186));
 
 		this.addGenericData(GenericContainerData.energy(energy));
 		this.addGenericData(GenericContainerData.fluid(tanks.backInput()));

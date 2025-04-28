@@ -66,7 +66,6 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
 
     public static final int ENERGY_CONSUMPTION_RATE = 80; // Per tick
 
-
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         final BallmillLogic.State state = context.getState();

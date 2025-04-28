@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
@@ -16,7 +17,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MBInventoryUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
@@ -24,15 +24,12 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BloomeryShape;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -44,7 +41,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.AccessibleObject;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -82,7 +78,7 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
         final IMultiblockLevel level = context.getLevel();
-        final Boolean wasActive = level.getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(NonMirrorableWithActiveBlock.ACTIVE);
+        final Boolean wasActive = level.getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(IEProperties.ACTIVE);
         final boolean active = state.furnace.tickServer(context, 0);
         if(active != wasActive)
         {
