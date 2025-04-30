@@ -23,10 +23,10 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN)
             .build();
 
-    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = IGRegistrationHolder.registerMetalMultiblock("rotarykiln", new RotaryKilnLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"),
-            builder -> {
-                builder.redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotarykiln", false, RotaryKilnPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"))
+            .redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN)
+            .build();
 
     public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),
             builder -> {

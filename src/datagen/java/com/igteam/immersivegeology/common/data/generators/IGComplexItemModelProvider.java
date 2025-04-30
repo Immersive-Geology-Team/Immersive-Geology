@@ -162,7 +162,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 	private void generateRotaryKilnModel(String id, Supplier<? extends ItemLike> block)
 	{
 		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
-		//model.texture("rotarykiln", "block/multiblock/rotarykiln/default");
+		model.texture("rotarykiln", "block/multiblock/rotarykiln/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
@@ -235,11 +235,10 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
-
 	private void generateReverberationFurnaceModel(String id, Supplier<? extends ItemLike> block)
 	{
 		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
-
+		model.texture("reverberation_furnace", "block/multiblock/reverberation_furnace/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);

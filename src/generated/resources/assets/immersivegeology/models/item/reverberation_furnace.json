@@ -124,5 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/reverberation_furnace/reverberation_furnace.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/reverberation_furnace/reverberation_furnace.obj",
+  "textures": {
+    "reverberation_furnace": "immersivegeology:block/multiblock/reverberation_furnace/default"
+  }
 }

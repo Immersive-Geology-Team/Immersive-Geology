@@ -32,7 +32,8 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
@@ -57,7 +58,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>, IServerTickableComponent<RotaryKilnLogic.State>, IClientTickableComponent<RotaryKilnLogic.State> {
+public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServerTickableComponent<RotaryKilnLogic.State>, IClientTickableComponent<RotaryKilnLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 2);
     private static final int ENERGY_CAPACITY = 64000;
     private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(4,0, 0, RelativeBlockFace.FRONT), new CapabilityPosition(4,1, 0, RelativeBlockFace.FRONT));
@@ -68,7 +69,8 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
-
+        State state = iMultiblockContext.getState();
+        state.tube_rotation-=0.5f;
     }
     @Override
     public void dropExtraItems(State state, Consumer<ItemStack> drop)
@@ -116,6 +118,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
 
         private final DroppingMultiblockOutput output;
         private final StoredCapability<IItemHandler> itemInputCap;
+        private float tube_rotation;
 
         private final StoredCapability<IEnergyStorage> energyCap;
         private final MultiblockProcessor<RotaryKilnRecipe, ProcessContextInWorld<RotaryKilnRecipe>> processor;
@@ -123,6 +126,7 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         public State(IInitialMultiblockContext<State> ctx) {
             this.energyCap = new StoredCapability<>(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
+            this.tube_rotation = 0.0f;
             this.processor = new MultiblockProcessor<>(16, 0, 8, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
@@ -164,12 +168,14 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         public void writeSaveNBT(CompoundTag nbt){
             nbt.put("energy", energy.serializeNBT());
             nbt.put("processor", processor.toNBT());
+            nbt.putFloat("tube_rotation", tube_rotation);
         }
 
         @Override
         public void readSaveNBT(CompoundTag nbt){
             energy.deserializeNBT(nbt.get("energy"));
             this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
+            this.tube_rotation = nbt.getFloat("tube_rotation");
         }
 
         @Override
@@ -188,6 +194,11 @@ public class RotaryKilnLogic implements IMultiblockLogic<RotaryKilnLogic.State>,
         public AveragingEnergyStorage getEnergy()
         {
             return energy;
+        }
+
+        public float getRotation()
+        {
+            return tube_rotation;
         }
     }
 

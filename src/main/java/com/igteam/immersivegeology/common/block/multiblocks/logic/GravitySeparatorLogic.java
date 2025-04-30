@@ -25,6 +25,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGravitySeparatorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.part.SkinableMultiblockPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
@@ -64,11 +65,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
+public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(1, 1, 1);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,5,1, RelativeBlockFace.UP);
-
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.RIGHT);
@@ -119,22 +119,6 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
 
             if(wasActive != state.renderAsActive) context.requestMasterBESync();
         }
-    }
-
-    @Override
-    public InteractionResult click(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient)
-    {
-        ItemStack stack = player.getItemInHand(hand);
-        if(stack.getItem() instanceof IGMultiblockSkinItem<?> skin && skin.getSkin() instanceof IGGravitySeparatorSkins)
-        {
-            boolean success = SkinableMultiblockPart.setSkin(ctx.getLevel(), IGGravitySeparatorMultiblock.INSTANCE, (IGGravitySeparatorSkins)skin.getSkin());
-            if(success)
-            {
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.FAIL;
     }
 
     @Override

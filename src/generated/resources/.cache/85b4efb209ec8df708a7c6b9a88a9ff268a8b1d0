@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-28T09:24:38.171083906	Item models
+// 1.20.1	2025-04-29T12:06:17.409685767	Item models
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
@@ -1219,6 +1219,8 @@ a33aa9e3f96d1b494d7fab5b748a68fe9bb6beb2 assets/immersivegeology/models/item/rod
 a33aa9e3f96d1b494d7fab5b748a68fe9bb6beb2 assets/immersivegeology/models/item/rod_vanadium.json
 a33aa9e3f96d1b494d7fab5b748a68fe9bb6beb2 assets/immersivegeology/models/item/rod_zinc.json
 a33aa9e3f96d1b494d7fab5b748a68fe9bb6beb2 assets/immersivegeology/models/item/rod_zirconium.json
+48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/rotarykiln_multiblock_skin_default.json
+48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/rotarykiln_multiblock_skin_legacy.json
 58eb0c058e6d9f63679bd6ce70110b9b14e4c450 assets/immersivegeology/models/item/scaffolding_stainlesssteel_grate_top.json
 334aa6fc0474a39d6032a0b44ec719626574898a assets/immersivegeology/models/item/scaffolding_stainlesssteel_standard.json
 cf9cdbbb5d6f5e96a8c341f3a8a56d751147e8fc assets/immersivegeology/models/item/scaffolding_stainlesssteel_wooden_top.json
