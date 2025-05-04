@@ -111,7 +111,8 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         public State(IInitialMultiblockContext<BloomeryLogic.State> ctx)
         {
             Supplier<Level> getLevel = ctx.levelSupplier();
-            this.inventory = new SlotwiseItemHandler(List.of(new SlotwiseItemHandler.IOConstraint(true, (i) -> {
+            this.inventory = new SlotwiseItemHandler(
+                    List.of(new SlotwiseItemHandler.IOConstraint(true, (i) -> {
                 return BloomeryRecipe.findRecipe((Level)getLevel.get(), i, (BloomeryRecipe)null) != null;
             }), new SlotwiseItemHandler.IOConstraint(true, (i) -> {
                 return BloomeryFuel.isValidBloomeryFuel((Level)getLevel.get(), i);

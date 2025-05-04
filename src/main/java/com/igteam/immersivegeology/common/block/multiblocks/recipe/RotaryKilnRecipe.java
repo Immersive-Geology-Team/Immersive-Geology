@@ -65,7 +65,7 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	public static RotaryKilnRecipe findRecipe(Level level, ItemStack input)
 	{
 		for(RotaryKilnRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(input))
+			if(recipe.itemIn.testIgnoringSize(input))
 				return recipe;
 		return null;
 	}
@@ -79,6 +79,6 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 4;
+		return 1;
 	}
 }

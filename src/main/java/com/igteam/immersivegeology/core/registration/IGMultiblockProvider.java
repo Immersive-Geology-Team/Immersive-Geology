@@ -26,6 +26,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotarykiln", false, RotaryKilnPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"))
             .redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.ROTARY_KILN)
             .build();
 
     public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),

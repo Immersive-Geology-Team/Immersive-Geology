@@ -22,7 +22,7 @@ public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
 
     public IGRotaryKilnMultiblock()
     {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(2,0,1), new BlockPos(2,1,2), new BlockPos(8,3, 3), IGMultiblockProvider.ROTARYKILN);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/rotarykiln"), new BlockPos(2,1,1), new BlockPos(3,1,2), new BlockPos(8,3, 3), IGMultiblockProvider.ROTARYKILN);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class IGRotaryKilnMultiblock extends IGTemplateMultiblock {
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer)
     {
-        consumer.accept(new IGClientMultiblockProperties(this, 6.5, 1.5, 1.5));
+        consumer.accept(new IGClientMultiblockProperties(this, 2.5f, 1.5f, 1.5f));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class MaterialTungsten extends MaterialMetal {
         super();
         addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.FENCE, BlockCategoryFlags.ENGINEERING_BLOCK);
         removeMaterialFlags(ItemCategoryFlags.SLAG, ItemCategoryFlags.CRYSTAL);
-        addFlags(ItemCategoryFlags.POWDER);
+        addFlags(ItemCategoryFlags.POWDER, ItemCategoryFlags.MECHANICAL_COMPONENT);
     }
 
     @Override

@@ -9,8 +9,13 @@
 package com.igteam.immersivegeology.common.block.multiblocks.gui.helper;
 
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceProcess;
+import blusunrize.immersiveengineering.common.gui.ArcFurnaceMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
@@ -42,6 +47,34 @@ public abstract class IGSlot extends Slot
 		}
 	}
 
+	public static record RotarySlot(int slot, int processStep) {
+		public RotarySlot(int slot, int processStep) {
+			this.slot = slot;
+			this.processStep = processStep;
+		}
+
+		public static RotarySlot fromCtx(RotaryKilnProcess process, Level level) {
+			float mod = (float)process.processTick / (float)process.getMaxTicks(level);
+			int h = (int)Math.max(1.0F, mod * 23.0F);
+			return new RotarySlot(process.getSlot(), h);
+		}
+
+		public static RotarySlot from(FriendlyByteBuf buffer) {
+			return new RotarySlot(buffer.readByte(), buffer.readByte());
+		}
+
+		public static void writeTo(FriendlyByteBuf out, RotarySlot slot) {
+			out.writeByte(slot.slot).writeByte(slot.processStep);
+		}
+
+		public int slot() {
+			return this.slot;
+		}
+
+		public int processStep() {
+			return this.processStep;
+		}
+	}
 
 	public static class ReverberationSlot extends SlotItemHandler
 	{

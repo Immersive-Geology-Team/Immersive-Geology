@@ -70,16 +70,14 @@ public class RotaryKilnRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         Level level = tile.getLevel();
         Direction dir = orientation.front();
         boolean isMirror = orientation.mirrored();
-        boolean isActive = false;
 
         poseStack.pushPose();
         rotateForFacing(poseStack, dir);
         poseStack.pushPose();
-        poseStack.translate(1.4375, 1.8, .5);
-        float angleDrum = 0;//isActive ? (rot) - pPartialTick : rot;
-        poseStack.mulPose(new Quaternionf().rotateAxis((5f * (isMirror ? 1 : -1)) * Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+        poseStack.translate((isMirror ? -0.59375 : 1.4375), 0.8, .5);
+		poseStack.mulPose(new Quaternionf().rotateAxis((5f * (isMirror ? 1 : -1)) * Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
         poseStack.pushPose();
-        poseStack.mulPose(new Quaternionf().rotateAxis(angleDrum * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+        poseStack.mulPose(new Quaternionf().rotateAxis(rot * Mth.DEG_TO_RAD, new Vector3f(1, 0, 0)));
         poseStack.scale(1.015625f,1.015625f,1.015625f);
         renderDynamicModel(TUBE, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay, skin);
         poseStack.popPose();
@@ -87,7 +85,7 @@ public class RotaryKilnRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         poseStack.popPose();
     }
 
-    private void renderDynamicModel(IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, Direction facing, Level level, BlockPos pos, int light, int overlay, IGRotaryKilnSkins skin)
+    public void renderDynamicModel(IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, Direction facing, Level level, BlockPos pos, int light, int overlay, IGRotaryKilnSkins skin)
     {
         matrix.pushPose();
 

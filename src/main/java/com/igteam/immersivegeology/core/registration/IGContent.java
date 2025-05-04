@@ -12,10 +12,7 @@ import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
-import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
-import com.igteam.immersivegeology.client.menu.multiblock.ChemicalReactorScreen;
-import com.igteam.immersivegeology.client.menu.multiblock.CrystallizerScreen;
-import com.igteam.immersivegeology.client.menu.multiblock.ReverberationScreen;
+import com.igteam.immersivegeology.client.menu.multiblock.*;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -106,6 +103,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
         MenuScreens.register(IGMenuTypes.CRYSTALLIZER.getType(), CrystallizerScreen::new);
         MenuScreens.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
+        MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
     }
 
