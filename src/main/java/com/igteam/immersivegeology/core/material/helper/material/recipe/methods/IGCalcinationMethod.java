@@ -29,7 +29,7 @@ import java.util.function.Consumer;
 
 public class IGCalcinationMethod extends IGRecipeMethod
 {
-	private int energy, time;
+	private int time, heat;
 
 	private IngredientWithSize input;
 	private ItemStack output;
@@ -40,39 +40,39 @@ public class IGCalcinationMethod extends IGRecipeMethod
 		super(new IGRecipeStage(parent, stage){});
 	}
 
-	public IGCalcinationMethod create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int heat){
 		this.name = name;
 		this.output = output;
 		this.input = new IngredientWithSize(inputTag, itemAmount);
 		this.time = time;
-		this.energy = energy;
+		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int heat){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
-		this.energy = energy;
+		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int heat){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
-		this.energy = energy;
+		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int energy){
+	public IGCalcinationMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int heat){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, output_amount);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), input_amount);
 		this.time = time;
-		this.energy = energy;
+		this.heat = heat;
 		return this;
 	}
 
@@ -127,8 +127,8 @@ public class IGCalcinationMethod extends IGRecipeMethod
 		{
 			RotaryKilnRecipeBuilder builder = RotaryKilnRecipeBuilder.builder(output);
 			builder.addInput(input);
-			builder.setEnergy(energy);
 			builder.setTime(time);
+			builder.setHeat(heat);
 			builder.build(consumer, getLocation());
 			return true;
 		}

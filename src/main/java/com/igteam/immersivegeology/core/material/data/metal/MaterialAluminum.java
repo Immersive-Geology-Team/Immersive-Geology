@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
@@ -54,7 +55,7 @@ public class MaterialAluminum extends MaterialMetal {
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, 153600).addToTree(hall_heroit_process);
+                1, 300, RotaryKilnLogic.MV_HEAT_CAP).addToTree(hall_heroit_process);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "aluminium_oxide_to_ingot",

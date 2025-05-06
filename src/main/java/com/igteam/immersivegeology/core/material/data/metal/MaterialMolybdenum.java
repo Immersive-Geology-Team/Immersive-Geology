@@ -9,6 +9,7 @@ M
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -51,6 +52,6 @@ public class MaterialMolybdenum extends MaterialMetal {
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, 153600);
+                1, 300, RotaryKilnLogic.HV_HEAT_CAP);
     }
 }

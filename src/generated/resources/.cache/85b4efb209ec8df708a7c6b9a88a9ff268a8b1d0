@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-29T12:06:17.409685767	Item models
+// 1.20.1	2025-05-05T15:48:30.976393925	Item models
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
@@ -379,6 +379,7 @@ a4ad6981e8549ecde4357d55d1e8c4c8740e601c assets/immersivegeology/models/item/ing
 50f68d006395f4a76750dcecc9a4307e31125927 assets/immersivegeology/models/item/ingot_zinc.json
 c0fbd1b1925007f56195aece204693ba8326504d assets/immersivegeology/models/item/ingot_zirconium.json
 497e276c70bf2e970f2fe97b821fea473ba9ca62 assets/immersivegeology/models/item/mechanical_component_hastelloy.json
+c91c789dcbbe5a0a6b89cd4dd3463ca0729226d2 assets/immersivegeology/models/item/mechanical_component_tungsten.json
 e001540a6fcd83e74b1f2518484fa502f940b434 assets/immersivegeology/models/item/metal_oxide_aluminum.json
 c4d84e34a4d806a194f595a6915ea90e314e08b4 assets/immersivegeology/models/item/metal_oxide_calcium.json
 5af8459e6ad1cb40871a84d0adf6128ef9d07d89 assets/immersivegeology/models/item/metal_oxide_chromium.json

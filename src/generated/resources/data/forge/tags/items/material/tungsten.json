@@ -10,6 +10,7 @@
     "immersivegeology:plate_tungsten",
     "immersivegeology:nugget_tungsten",
     "immersivegeology:compound_dust_tungsten",
-    "immersivegeology:metal_oxide_tungsten"
+    "immersivegeology:metal_oxide_tungsten",
+    "immersivegeology:mechanical_component_tungsten"
   ]
 }

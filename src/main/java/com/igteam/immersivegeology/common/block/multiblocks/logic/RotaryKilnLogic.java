@@ -14,39 +14,28 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerT
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
-import blusunrize.immersiveengineering.api.wires.localhandlers.EnergyTransferHandler;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor.InMachineProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
-import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
-import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
-import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.RotaryKilnHeatState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.machinezoo.noexception.throwing.ThrowingIntSupplier;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -55,13 +44,11 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -78,14 +65,15 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
     private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0,2,1, RelativeBlockFace.UP);
     public static final int NUM_SLOTS = 15;
 
-    private static final int LV_HEAT_CAP = 30;
-    private static final int MV_HEAT_CAP = 75;
-    private static final int HV_HEAT_CAP = 145;
-    private static final int EHV_HEAT_CAP = 165;
+    public static final int LV_HEAT_CAP  =  30;
+    public static final int MV_HEAT_CAP  =  75;
+    public static final int HV_HEAT_CAP  = 120;
+    public static final int EHV_HEAT_CAP = 165;
 
-    private static final int MAX_LV_ENERGY = 750;
-    private static final int MAX_MV_ENERGY = 3000;
-    private static final int MAX_HV_ENERGY = 12000;
+    private static final int BASE_LV_ENERGY  =  50;
+    private static final int BASE_MV_ENERGY  = 750;
+    private static final int BASE_HV_ENERGY  = 3000;
+    private static final int BASE_EHV_ENERGY = 12000;
 
     @Override
     public void tickClient(IMultiblockContext<State> iMultiblockContext) {
@@ -124,43 +112,8 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-        int avePow = state.getAveragePower();
-        float heatLevel = state.heatLevel;
-        if(avePow == 0)
-        {
-            if(heatLevel != 0) state.heatLevel = Mth.lerp(0.25f, heatLevel, 0);
-        }
-        if(avePow < MAX_LV_ENERGY && avePow > 0)
-        {
-            if(heatLevel != LV_HEAT_CAP)
-            {
-                state.heatLevel = Mth.lerp(0.25f, heatLevel, LV_HEAT_CAP);
-            }
-        }
 
-        if(avePow > MAX_LV_ENERGY && avePow < MAX_MV_ENERGY)
-        {
-            if(heatLevel != MV_HEAT_CAP)
-            {
-                state.heatLevel = Mth.lerp(0.25f, heatLevel, MV_HEAT_CAP);
-            }
-        }
-
-        if(avePow > MAX_MV_ENERGY && avePow < MAX_HV_ENERGY)
-        {
-            if(heatLevel != HV_HEAT_CAP)
-            {
-                state.heatLevel = Mth.lerp(0.25f, heatLevel, HV_HEAT_CAP);
-            }
-        }
-
-        if(avePow > MAX_HV_ENERGY)
-        {
-            if(heatLevel != EHV_HEAT_CAP)
-            {
-                state.heatLevel = Mth.lerp(0.25f, heatLevel, EHV_HEAT_CAP);
-            }
-        }
+        provideHeat(context);
 
         if(state.processor.getQueueSize() > 7) return;
         ItemStack inputSlot = state.inventory.getStackInSlot(0).copy();
@@ -191,6 +144,52 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             }
         }
     }
+    public void provideHeat(IMultiblockContext<State> context) {
+
+        State state = context.getState();
+        state.heatState = determineHeatState(context);
+        state.heatState.execute(context);
+        if(state.heatLevel < 0) state.heatLevel = 0;
+        context.markDirtyAndSync();
+    }
+
+    private RotaryKilnHeatState determineHeatState(IMultiblockContext<State> context)
+    {
+        State state = context.getState();
+        Level level = context.getLevel().getRawLevel();
+        boolean isActive = state.rsState.isEnabled(context);
+
+        if(!isActive) return RotaryKilnHeatState.MACHINE_OFF;
+
+        int storedEnergy = state.total_energy.getEnergyStored();
+        int avgInput = state.getAveragePower();
+        float currentHeat = state.getHeat();
+        float target_heat = state.getTargetHeat();
+
+        List<RotaryKilnRecipe> recipes = getActiveRecipes(state, level);
+        if(!recipes.isEmpty())
+        {
+            OptionalInt maxHeat = recipes.stream().mapToInt(RotaryKilnRecipe::getHeatRequired).max();
+			int recipeHeatTarget = maxHeat.getAsInt();
+            if(recipeHeatTarget != target_heat) state.targetHeat = recipeHeatTarget;
+            if(currentHeat < recipeHeatTarget) return RotaryKilnHeatState.HEATING_UP;
+            if(currentHeat > (recipeHeatTarget+7)) return RotaryKilnHeatState.COOLING_DOWN;
+            return RotaryKilnHeatState.RUNNING_RECIPE;
+		}
+
+        return RotaryKilnHeatState.MAINTAINING_HEAT;
+    }
+
+    private static List<RotaryKilnRecipe> getActiveRecipes(State state, Level level) {
+        return state.processor.getQueue().stream()
+                .map(q -> q.getRecipe(level))
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    // Constants for heating and cooling rates
+    private static final float PASSIVE_COOL_RATE = 0.05f;
+    private static final float BASE_HEAT_RATE = 0.2f;
 
     int nextPacketIndex = 0;
     private void balanceEnergy(IMultiblockContext<State> context)
@@ -269,6 +268,8 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         private boolean isActive;
         private final StoredCapability<IEnergyStorage> energyCap;
         private float heatLevel = 0;
+        private float targetHeat = 0;
+        private RotaryKilnHeatState heatState;
 
         private final MultiblockProcessor.InMachineProcessor<RotaryKilnRecipe> processor;
         Runnable markDirty;
@@ -277,6 +278,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             this.processor = new InMachineProcessor<>(7, 0, 7, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
             this.tube_rotation = 0.0f;
             this.isActive = false;
+            this.heatState = RotaryKilnHeatState.MACHINE_OFF;
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             this.markDirty = markDirty;
@@ -344,7 +346,11 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             nbt.put("inventory", inventory.serializeNBT());
             nbt.putBoolean("is_active", isActive);
 
+            nbt.putFloat("target_heat", targetHeat);
             nbt.putFloat("heat", heatLevel);
+
+            nbt.putInt("heat_state", heatState.ordinal());
+
         }
 
         @Override
@@ -357,7 +363,9 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             this.inventory.deserializeNBT(nbt.getCompound("inventory"));
             this.processor.fromNBT(nbt.get("processor"), RotaryKilnProcess::new);
             this.isActive = nbt.getBoolean("is_active");
+            this.targetHeat = nbt.getFloat("target_heat");
             this.heatLevel = nbt.getFloat("heat");
+            this.heatState = RotaryKilnHeatState.values()[nbt.getInt("heat_state")];
         }
 
         @Override
@@ -385,7 +393,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             {
                 for(double transfer : lastEnergyPackets) sum += transfer;
             }
-            return (int) Math.round(sum/lastEnergyPackets.size()) - 1;
+            return Math.max(0,(int) Math.round(sum/lastEnergyPackets.size()) - 1);
         }
 
 
@@ -423,6 +431,35 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         public boolean isActive()
         {
             return isActive;
+        }
+
+        public boolean hasRequiredHeat(int recipeHeat)
+        {
+			int lowerBound = recipeHeat-7;
+            int upperBound = recipeHeat+7;
+            boolean flag = heatLevel >= lowerBound && heatLevel <= upperBound && heatState.equals(RotaryKilnHeatState.RUNNING_RECIPE);
+            if(flag)
+            {
+                heatLevel -= 0.1f;
+            }
+			return flag;
+		}
+
+        public float getTargetHeat()
+        {
+            return targetHeat;
+        }
+
+        public void modifyHeat(float v)
+        {
+            float newHeat = this.heatLevel + v;
+            boolean invalid = newHeat < 0 || newHeat > 170;
+            if(!invalid) this.heatLevel = newHeat;
+        }
+
+        public void setHeat(float v)
+        {
+            this.heatLevel = v;
         }
     }
 }

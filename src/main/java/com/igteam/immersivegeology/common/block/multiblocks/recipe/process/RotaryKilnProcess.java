@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLev
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceLogic;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import net.minecraft.core.NonNullList;
@@ -54,6 +55,21 @@ public class RotaryKilnProcess extends MultiblockProcessInMachine<RotaryKilnReci
 		}
 	}
 
+	@Override
+	public void doProcessTick(ProcessContextInMachine<RotaryKilnRecipe> context, IMultiblockLevel level)
+	{
+		RotaryKilnRecipe recipe = getRecipe(level.getRawLevel());
+		if(context instanceof RotaryKilnLogic.State state && recipe != null)
+		{
+			int recipeHeat = recipe.getHeatRequired();
+			boolean canProcess = state.hasRequiredHeat(recipeHeat);
+			if(canProcess)
+			{
+				super.doProcessTick(context, level);
+			}
+		}
+	}
+
 	public int getSlot()
 	{
 		return slot;
@@ -61,7 +77,5 @@ public class RotaryKilnProcess extends MultiblockProcessInMachine<RotaryKilnReci
 
 	protected void processFinish(ProcessContext.ProcessContextInMachine<RotaryKilnRecipe> context, IMultiblockLevel level) {
 		super.processFinish(context, level);
-//		List<ItemStack> potentialOutputs = getRecipeItemOutputs(level.getRawLevel(), context);
-//		if(!potentialOutputs.isEmpty()) context.getInventory().setStackInSlot(slot, potentialOutputs.get(0));
 	}
 }

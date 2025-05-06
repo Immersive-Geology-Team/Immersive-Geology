@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-21T05:36:36.982568423	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-05-05T15:48:30.972671156	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -308,7 +308,7 @@ ef27e23d011ce63fe94aa304fcbf6d256d8e7951 data/forge/tags/items/material/sphaleri
 9bf5cd6b3e4f0f0b85478bf66d5d44925e4d67cf data/forge/tags/items/material/thorium.json
 4d70c77ae3f9fb6a64da288cf05f6cb9be0bb910 data/forge/tags/items/material/tin.json
 a4c587b835b4616771d5ca15826357f9e716d787 data/forge/tags/items/material/titanium.json
-f4b4d61b18c4bfad83868df682347a4cc24a1e6a data/forge/tags/items/material/tungsten.json
+cb5e8760b53d13e598ef9bc7f9a5be056001289b data/forge/tags/items/material/tungsten.json
 8911c5d37a83536ca6a29af20f54e43c918a5da6 data/forge/tags/items/material/tungstencarbide.json
 f1f44d038a4ac784be33866485c2c57fcb7fd156 data/forge/tags/items/material/unobtania.json
 39ab91acee6561bad8eae9f5e4a77b12a94707f1 data/forge/tags/items/material/unobtanium.json
@@ -320,8 +320,9 @@ a02cd2425d8ce46202f1b2509c096a18b9daea2f data/forge/tags/items/material/wolframi
 064477ddd4f8a095c12ebc49e2a0d3a73781348b data/forge/tags/items/material/zinc.json
 77015752971cb382a9d9032033d8df6e838210f4 data/forge/tags/items/material/zircon.json
 246840de51a501a625dbb56d5640312de765e99c data/forge/tags/items/material/zirconium.json
-1487bab9edb5d22f5e54451ad8aa27e493ce7588 data/forge/tags/items/mechanical_component.json
+f035edbbd907392adb6c77cf8b312e22d3077837 data/forge/tags/items/mechanical_component.json
 1487bab9edb5d22f5e54451ad8aa27e493ce7588 data/forge/tags/items/mechanical_component/hastelloy.json
+1de9cc885d9d9159e8943ee1ceb0b62e41aba007 data/forge/tags/items/mechanical_component/tungsten.json
 a2000457dda98b0cc55c0ed8c2e03a0050114119 data/forge/tags/items/metal_oxide.json
 cb80cd2f5b23451de62e3920a1a0f1da31765040 data/forge/tags/items/metal_oxide/aluminum.json
 47f0e610169b319bcb07252a5e5075245f8fe64d data/forge/tags/items/metal_oxide/calcium.json
