@@ -73,11 +73,10 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN);
             });
 
-    public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = IGRegistrationHolder.registerMetalMultiblock("pelletizer", new PelletizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"),
-            builder -> {
-                builder.redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN);
-            });
-
+    public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = metal_skinnable(new PelletizerLogic(), "pelletizer", false, PelletizerPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"))
+            .redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN)
+            .build();
 
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
     IGMultiblockBuilder<S> metal_skinnable(

@@ -19,6 +19,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLev
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
+import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
@@ -128,7 +129,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
             return;
         final PelletizerLogic.State state = ctx.getState();
         final IMultiblockLevel level = ctx.getLevel();
-        final AABB internalBB = new AABB(0, 1f, 0, 3, 3f, 6);
+        final AABB internalBB = new AABB(0.5F, 1f, 0.5f, 2.5f, 3f, 2.5f);
         final AABB pelletizerHopper = level.toAbsolute(internalBB);
         if(collided instanceof ItemEntity itemEntity)
         {
@@ -197,6 +198,7 @@ public class PelletizerLogic implements IMultiblockLogic<PelletizerLogic.State>,
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
+        if(state == null) return null;
         if(!state.tank.getFluid().getFluid().equals(ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID)))
         {
             return List.of(Component.literal("No Binding Agent Available").withStyle(ChatFormatting.RED), TextUtils.formatFluidStack(state.tank.getFluid()));

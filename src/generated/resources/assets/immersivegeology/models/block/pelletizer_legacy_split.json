@@ -6,15 +6,26 @@
     "automatic_culling": false,
     "flip_v": true,
     "loader": "forge:obj",
-    "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer_mirrored.obj",
+    "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer.obj",
     "textures": {
-      "particle": "immersivegeology:block/multiblock/pelletizer/pelletizer_base"
+      "particle": "immersivegeology:block/multiblock/pelletizer/legacy",
+      "pelletizer": "immersivegeology:block/multiblock/pelletizer/legacy"
     }
   },
   "loader": "immersiveengineering:basic_split",
   "split_parts": [
     [
-      1,
+      -1,
+      0,
+      0
+    ],
+    [
+      -1,
+      0,
+      1
+    ],
+    [
+      -1,
       0,
       2
     ],
@@ -34,31 +45,31 @@
       2
     ],
     [
-      -1,
-      0,
-      -1
-    ],
-    [
-      1,
-      1,
-      2
-    ],
-    [
-      0,
-      1,
-      0
-    ],
-    [
-      -1,
-      1,
-      2
-    ],
-    [
       1,
       0,
       -1
     ],
     [
+      -1,
+      1,
+      2
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      -1,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
       1,
       0,
       0
@@ -69,47 +80,22 @@
       1
     ],
     [
-      0,
-      0,
-      1
-    ],
-    [
-      -1,
-      0,
-      0
-    ],
-    [
-      -1,
-      0,
-      1
-    ],
-    [
-      -1,
+      1,
       0,
       2
     ],
     [
-      1,
-      1,
-      0
-    ],
-    [
       -1,
-      1,
-      0
-    ],
-    [
-      1,
       2,
       -1
     ],
     [
-      1,
+      -1,
       2,
       0
     ],
     [
-      1,
+      -1,
       2,
       1
     ],
@@ -129,17 +115,17 @@
       1
     ],
     [
-      -1,
+      1,
       2,
       -1
     ],
     [
-      -1,
+      1,
       2,
       0
     ],
     [
-      -1,
+      1,
       2,
       1
     ],
@@ -147,14 +133,9 @@
       0,
       1,
       -1
-    ],
-    [
-      -1,
-      2,
-      2
     ]
   ],
   "textures": {
-    "particle": "immersivegeology:block/multiblock/pelletizer/pelletizer_base"
+    "particle": "immersivegeology:block/multiblock/pelletizer/legacy"
   }
 }

@@ -116,7 +116,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generatePelletizerModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/pelletizer/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/pelletizer/" + id + ".obj").texture("pelletizer", new ResourceLocation(IGLib.MODID, "block/multiblock/pelletizer/default"));
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);

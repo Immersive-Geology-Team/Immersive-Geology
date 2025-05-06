@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:rotarykiln",
-  "heat": 145,
+  "heat": 120,
   "input": {
     "tag": "forge:crushed_ore/ilmenite"
   },

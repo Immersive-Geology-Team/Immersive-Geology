@@ -124,5 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer_item.obj"
+  "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer_item.obj",
+  "textures": {
+    "pelletizer": "immersivegeology:block/multiblock/pelletizer/default"
+  }
 }

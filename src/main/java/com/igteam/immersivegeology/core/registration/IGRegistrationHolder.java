@@ -474,7 +474,7 @@ public class IGRegistrationHolder {
         registerMB("trommel", IGTrommelMultiblock.INSTANCE, IGMultiblockProvider.TROMMEL);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
-        registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER);
+        registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER, IGPelletizerSkins.class);
         registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);
     }
 

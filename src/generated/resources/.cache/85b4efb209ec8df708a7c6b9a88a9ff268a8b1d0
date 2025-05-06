@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-05T15:48:30.976393925	Item models
+// 1.20.1	2025-05-06T20:48:02.891120628	Item models
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
@@ -1032,6 +1032,8 @@ b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pel
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_pyrolusite.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_smithsonite.json
 b929b0797bd0b3a6d5ac04c63fa6deb1aa5341c7 assets/immersivegeology/models/item/pellet_sphalerite.json
+48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/pelletizer_multiblock_skin_default.json
+48390c56d76bceba6c93f3030808584612cd8940 assets/immersivegeology/models/item/pelletizer_multiblock_skin_legacy.json
 b8c961f1ff5c730089b7963de44be0634a537e3c assets/immersivegeology/models/item/plate_aluminum.json
 c1b5271952bdd3d825326ce037336c71a84f17af assets/immersivegeology/models/item/plate_bronze.json
 30f24fc421721af416915e9aa6e869b461ea2fd4 assets/immersivegeology/models/item/plate_chromium.json
