@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:rotarykiln",
-  "heat": 75,
+  "heat": 120,
   "input": {
     "tag": "forge:compound_dust/calcium"
   },

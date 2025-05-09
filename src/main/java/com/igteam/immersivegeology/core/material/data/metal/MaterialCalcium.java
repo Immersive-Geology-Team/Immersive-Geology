@@ -82,7 +82,7 @@ public class MaterialCalcium extends MaterialMetal {
 
         IGRecipeNode decompose = IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                  ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST,1,
-                300, MV_HEAT_CAP).addToTree(ammonia_synthesis);
+                300).setHVHeat().addToTree(ammonia_synthesis);
 
         decompose.addChild(smelting);
     }

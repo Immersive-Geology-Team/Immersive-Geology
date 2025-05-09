@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:rotarykiln",
-  "heat": 120,
+  "heat": 75,
   "input": {
     "tag": "forge:compound_dust/sodium"
   },

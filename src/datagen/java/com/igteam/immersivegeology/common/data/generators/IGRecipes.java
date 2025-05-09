@@ -306,6 +306,15 @@ public class IGRecipes extends RecipeProvider
 				.define('P', Ingredient.of(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE)))
 				.define('I', Ingredient.of(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot)).group("ig_hastelloy_component").unlockedBy("has_hastelloy", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_hastelloy_component"));
 
+		Item tungsten_component = MetalEnum.Tungsten.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, tungsten_component)
+				.pattern("P P")
+				.pattern(" I ")
+				.pattern("P P")
+				.define('P', Ingredient.of(MetalEnum.Tungsten.getItemTag(ItemCategoryFlags.PLATE)))
+				.define('I', Ingredient.of(IETags.getTagsFor(EnumMetals.COPPER).ingot)).group("ig_tungsten_component").unlockedBy("has_tungsten", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_tungsten_component"));
+
+
 		for(MetalEnum metal : MetalEnum.values())
 		{
 			if(metal.hasFlag(ItemCategoryFlags.PLATE) && metal.hasFlag(BlockCategoryFlags.CRATE))
@@ -440,8 +449,6 @@ public class IGRecipes extends RecipeProvider
 			}
 		}
 
-		//GravitySeparatorRecipeBuilder.builder().setByproduct(Items.FLINT).setChance(0.5f).addInput(Items.GRAVEL).build(consumer, ig("wash/gravel_for_flint"));
-
 		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Hastelloy.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT))
 				.addInput(new IngredientWithSize(MetalEnum.Hastelloy.getItemTag(ItemCategoryFlags.PLATE), 2))
 				.addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.ELECTRUM).ingot))
@@ -450,6 +457,12 @@ public class IGRecipes extends RecipeProvider
 				.unlockedBy("has_hastelloy_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
 						.define('s', MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', MetalEnum.Silver.getItem(ItemCategoryFlags.INGOT))
 						.pattern("scs").pattern("coc").pattern("scs").save(consumer, ig("craft_chemical_engineering_block"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MetalEnum.Tungsten.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK), 4)
+				.unlockedBy("has_tungsten_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
+				.define('s', MetalEnum.Tungsten.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', Metals.INGOTS.get(EnumMetals.STEEL).asItem())
+				.pattern("scs").pattern("coc").pattern("scs").save(consumer, ig("craft_thermal_engineering_block"));
+
 
 		// Register bloomery fuels
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(BASE_CHARCOAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));

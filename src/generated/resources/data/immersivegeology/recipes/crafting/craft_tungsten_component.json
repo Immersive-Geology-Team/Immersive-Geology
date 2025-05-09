@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ig_tungsten_component",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/copper"
+    },
+    "P": {
+      "tag": "forge:plates/tungsten"
+    }
+  },
+  "pattern": [
+    "P P",
+    " I ",
+    "P P"
+  ],
+  "result": {
+    "item": "immersivegeology:mechanical_component_tungsten"
+  },
+  "show_notification": true
+}

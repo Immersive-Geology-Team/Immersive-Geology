@@ -57,7 +57,7 @@ public class MaterialSmithsonite extends MaterialMineral {
     {
         super.setupRecipeStages();
         IGRecipeNode slag =  IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.CRUSHED_ORE, 1,300, RotaryKilnLogic.MV_HEAT_CAP).addOptionalToTree(directBlasting);
+                ItemCategoryFlags.CRUSHED_ORE, 1,300).setLVHeat().addOptionalToTree(directBlasting);
 
         IGRecipeNode p_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG).addToTree(directBlasting, slag);

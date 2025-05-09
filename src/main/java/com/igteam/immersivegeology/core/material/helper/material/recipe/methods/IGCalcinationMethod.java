@@ -27,6 +27,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.LV_HEAT_CAP;
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.HV_HEAT_CAP;
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.EHV_HEAT_CAP;
+
 public class IGCalcinationMethod extends IGRecipeMethod
 {
 	private int time, heat;
@@ -38,41 +43,62 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	public IGCalcinationMethod(MaterialHelper parent, IGStageDesignation stage)
 	{
 		super(new IGRecipeStage(parent, stage){});
+		this.heat = MV_HEAT_CAP;
 	}
 
-	public IGCalcinationMethod create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time, int heat){
+	public IGCalcinationMethod create(String name, ItemStack output, TagKey<Item> inputTag, int itemAmount, int time){
 		this.name = name;
 		this.output = output;
 		this.input = new IngredientWithSize(inputTag, itemAmount);
 		this.time = time;
-		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time, int heat){
+	public IGCalcinationMethod create(IFlagType<?> output_form, IFlagType<?> input_form, int itemAmount, int time){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = parentMaterial.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
-		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time, int heat){
+	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, 1);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), itemAmount);
 		this.time = time;
-		this.heat = heat;
 		return this;
 	}
 
-	public IGCalcinationMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time, int heat){
+	public IGCalcinationMethod create(IFlagType<?> input_form, int input_amount, IFlagType<?> output_form, MaterialHelper output_material, int output_amount, int time){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, output_amount);
 		this.input = new IngredientWithSize(parentMaterial.getItemTag(input_form), input_amount);
 		this.time = time;
-		this.heat = heat;
+		return this;
+	}
+
+	public IGCalcinationMethod setLVHeat()
+	{
+		this.heat = LV_HEAT_CAP;
+		return this;
+	}
+
+	public IGCalcinationMethod setMVHeat()
+	{
+		this.heat = MV_HEAT_CAP;
+		return this;
+	}
+
+	public IGCalcinationMethod setHVHeat()
+	{
+		this.heat = HV_HEAT_CAP;
+		return this;
+	}
+
+	public IGCalcinationMethod setEHVHeat()
+	{
+		this.heat = EHV_HEAT_CAP;
 		return this;
 	}
 

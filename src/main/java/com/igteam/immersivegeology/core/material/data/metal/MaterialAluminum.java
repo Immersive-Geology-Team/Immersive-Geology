@@ -55,7 +55,7 @@ public class MaterialAluminum extends MaterialMetal {
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, RotaryKilnLogic.MV_HEAT_CAP).addToTree(hall_heroit_process);
+                1, 300).setHVHeat().addToTree(hall_heroit_process);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(
                         "aluminium_oxide_to_ingot",

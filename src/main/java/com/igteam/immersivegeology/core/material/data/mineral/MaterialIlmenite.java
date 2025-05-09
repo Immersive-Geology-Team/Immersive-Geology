@@ -60,7 +60,7 @@ public class MaterialIlmenite extends MaterialMineral {
 
         IGMethodBuilder.decompose(this, IGStageDesignation.PURIFICATION).create(
                 "crushed_ore_"+getName()+"_to_slag", getStack( ItemCategoryFlags.SLAG, 1),
-                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, RotaryKilnLogic.HV_HEAT_CAP).addToTree(becher_process);
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300).setHVHeat().addToTree(becher_process);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.PURIFICATION).create(
                 ItemCategoryFlags.SLAG,ItemCategoryFlags.POWDERED_SLAG).addToTree(becher_process);

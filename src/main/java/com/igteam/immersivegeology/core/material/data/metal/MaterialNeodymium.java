@@ -58,7 +58,7 @@ public class MaterialNeodymium extends MaterialMetal
                 null,200, 51200);
 
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(ItemCategoryFlags.METAL_OXIDE,
-                ItemCategoryFlags.COMPOUND_DUST, 1, 300, RotaryKilnLogic.HV_HEAT_CAP);
+                ItemCategoryFlags.COMPOUND_DUST, 1, 300).setMVHeat();
 
         IGMethodBuilder.chemical(this, IGStageDesignation.PREPARATION).create(getName()+"_metal_oxide_to_slurry",
                 ItemStack.EMPTY,

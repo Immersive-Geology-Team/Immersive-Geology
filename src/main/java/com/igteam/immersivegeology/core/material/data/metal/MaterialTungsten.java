@@ -58,9 +58,11 @@ public class MaterialTungsten extends MaterialMetal {
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 null,200, 51200);
 
+
+        // Ammonium paratungstate decomposes at ~600°C to yield WO₃ see https://en.wikipedia.org/wiki/Ammonium_paratungstate
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, RotaryKilnLogic.HV_HEAT_CAP);
+                1, 300).setMVHeat();
     }
 }

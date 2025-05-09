@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/mechanical_component"
+    "layer0": "immersivegeology:item/colored/tungsten/mechanical_component"
   }
 }

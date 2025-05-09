@@ -351,6 +351,12 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
 
             nbt.putInt("heat_state", heatState.ordinal());
 
+
+            CompoundTag data = new CompoundTag();
+            int i = 0;
+            for(Double d : lastEnergyPackets) data.putDouble("i"+i++, d);
+            nbt.put("energy_input_packets", data);
+
         }
 
         @Override
@@ -366,6 +372,14 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             this.targetHeat = nbt.getFloat("target_heat");
             this.heatLevel = nbt.getFloat("heat");
             this.heatState = RotaryKilnHeatState.values()[nbt.getInt("heat_state")];
+
+            CompoundTag data = nbt.getCompound("energy_input_packets");
+            int size = data.size();
+            lastEnergyPackets.clear();
+            for(int i = 0; i < size; i++)
+            {
+                lastEnergyPackets.add(i, data.getDouble("i"+i));
+            }
         }
 
         @Override
@@ -395,7 +409,6 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             }
             return Math.max(0,(int) Math.round(sum/lastEnergyPackets.size()) - 1);
         }
-
 
         @Override
         public AveragingEnergyStorage getEnergy()

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "c": {
+      "item": "immersivegeology:mechanical_component_tungsten"
+    },
+    "o": {
+      "item": "immersiveengineering:ingot_steel"
+    },
+    "s": {
+      "item": "immersivegeology:sheetmetal_block_tungsten"
+    }
+  },
+  "pattern": [
+    "scs",
+    "coc",
+    "scs"
+  ],
+  "result": {
+    "count": 4,
+    "item": "immersivegeology:engineering_block_tungsten"
+  },
+  "show_notification": true
+}

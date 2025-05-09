@@ -49,9 +49,11 @@ public class MaterialMolybdenum extends MaterialMetal {
                 ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Molybdenite),
                 IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400);
 
+
+        // Based on MoS2 -> MoO3 ~ Muddykat
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, RotaryKilnLogic.HV_HEAT_CAP);
+                1, 300).setMVHeat();
     }
 }

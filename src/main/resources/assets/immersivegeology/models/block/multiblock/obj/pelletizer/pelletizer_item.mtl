@@ -1,3 +1,12 @@
-# Made in Blockbench 4.11.1
+# Blender 4.2.3 LTS MTL File: 'None'
+# www.blender.org
+
 newmtl m_cf6d6d3a-91e2-34f7-1c6e-fb941afaafef
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
 map_Kd #pelletizer

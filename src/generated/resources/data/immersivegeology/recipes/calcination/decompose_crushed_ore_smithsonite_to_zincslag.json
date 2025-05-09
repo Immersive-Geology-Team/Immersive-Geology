@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:rotarykiln",
-  "heat": 75,
+  "heat": 30,
   "input": {
     "tag": "forge:crushed_ore/smithsonite"
   },

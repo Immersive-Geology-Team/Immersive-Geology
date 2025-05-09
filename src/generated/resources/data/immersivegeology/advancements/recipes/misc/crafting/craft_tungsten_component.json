@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/craft_tungsten_component"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tungsten": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:ingot_tungsten"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/craft_tungsten_component"
+    ]
+  },
+  "sends_telemetry_event": false
+}

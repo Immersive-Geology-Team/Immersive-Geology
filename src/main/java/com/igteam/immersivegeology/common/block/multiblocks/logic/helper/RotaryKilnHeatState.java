@@ -114,9 +114,9 @@ public enum RotaryKilnHeatState
 	private static final float ehv_heat_target = 165;
 
 	private static final float lv_cost_cutoff = 5f;
-	private static final float mv_cost_cutoff = 46f;
+	private static final float mv_cost_cutoff = 31;
 	private static final float hv_cost_cutoff = 76f;
-	private static final float ehv_cost_cutoff = 146;
+	private static final float ehv_cost_cutoff = 121;
 
 	public void execute(IMultiblockContext<RotaryKilnLogic.State> context){};
 
