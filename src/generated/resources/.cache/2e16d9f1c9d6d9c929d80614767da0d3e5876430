@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-08T05:20:41.495234254	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-05-12T12:35:11.4203327	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -17,6 +17,7 @@ d671a30742ffd0719955656d8b1a0d95deac2cc4 data/forge/tags/fluids/clean_brine_salt
 8ae26ec00deba8e6b5b9ab844fee0ddffa038237 data/forge/tags/fluids/clean_chemicalwaste_bauxite.json
 7487364bf966e9e5682cae9d41342302b01b3977 data/forge/tags/fluids/clean_chemicalwaste_molybdenite.json
 f301367a984c6dd999dd01247cee862c383777ff data/forge/tags/fluids/clean_chemicalwaste_monazite.json
+91698039f2e096769cdeac00586210ca847573d4 data/forge/tags/fluids/clean_chemicalwaste_uraninite.json
 6902720f4b3521148a0e45e4545927d61fb47149 data/forge/tags/fluids/clean_hydrochloricacid_acanthite.json
 ae1c580093ac158bad05e1e903f158bfac3cdad2 data/forge/tags/fluids/clean_hydrochloricacid_chalcocite.json
 41650bc0a506c811e07da7ffeafbead435559e2e data/forge/tags/fluids/clean_hydrochloricacid_chromium.json
@@ -38,7 +39,10 @@ e8b9b9792116ad340d57c587cc6fc0414ae203ff data/forge/tags/fluids/clean_hydrochlor
 fd2b1b6b853c2f77af7ce2a256d6624e834bf49e data/forge/tags/fluids/clean_hydrofluoricacid_uranium.json
 229dbce72edb5e586ec85f5dad76593548f5d9a4 data/forge/tags/fluids/clean_nitricacid_chromium.json
 041c303f93415c08d66432e1c4a18848ce4554e4 data/forge/tags/fluids/clean_nitricacid_cobalt.json
+151811dbf4e55ae8f62c7a51ebddad3909f1f6a9 data/forge/tags/fluids/clean_nitricacid_thorium.json
 d13b733761e699c917e2827aac48d330bd4377b9 data/forge/tags/fluids/clean_nitricacid_unobtanium.json
+52fdc25840d49e1aeb7429acd98bc04ccc374c22 data/forge/tags/fluids/clean_nitricacid_uraninite.json
+ed64a193d294bc4509b324553e33f42d232d1e1f data/forge/tags/fluids/clean_phosphoricacid_uraninite.json
 7ba9035992403ea4aa55a91f682ea83a1d5a4205 data/forge/tags/fluids/clean_sodiumhydroxide_bauxite.json
 0fe7acf3d5df46ac1aa4de82edb2e5014d253268 data/forge/tags/fluids/clean_sodiumhydroxide_unobtanium.json
 14971e2b5c158ca23e483e4b1d765c81049ffa5c data/forge/tags/fluids/clean_sulfuricacid_chromium.json
@@ -56,9 +60,12 @@ e520a424be1075ed565d5f5825ed0d5cb9dfba33 data/forge/tags/fluids/cloudy_brine_sal
 d36935635e8dbab5195c5ce002b71a326681dd96 data/forge/tags/fluids/cloudy_chemicalwaste_bauxite.json
 44b144574ecc3cd877609713a397905390ac59ee data/forge/tags/fluids/cloudy_chemicalwaste_molybdenite.json
 ccc81b1b7402bcf479cd4c3ba932479bcf09d2e1 data/forge/tags/fluids/cloudy_chemicalwaste_monazite.json
+6469c76724ca5c59c14cef856496bce85b08f245 data/forge/tags/fluids/cloudy_chemicalwaste_uraninite.json
 201a8cd7a36db63de9997c41ee03aefa86f85bc2 data/forge/tags/fluids/cloudy_hydrochloricacid_acanthite.json
 7533954bd7d2995d767d3d1a351d7e91e3b06eea data/forge/tags/fluids/cloudy_hydrochloricacid_chalcocite.json
 1d378971e1c2953ce52331afb02e31ccf47bfcf8 data/forge/tags/fluids/cloudy_hydrochloricacid_galena.json
+ae25c4dc27caaa32d22125bd09c2757ea2ab60c6 data/forge/tags/fluids/cloudy_nitricacid_uraninite.json
+b830bd11f3853b0e1f4300302a61d11cfb383f3e data/forge/tags/fluids/cloudy_phosphoricacid_uraninite.json
 4088f6b257ce8e074c2a2a21198c040b9c34d6e1 data/forge/tags/fluids/cloudy_sodiumhydroxide_bauxite.json
 63e9a8d039ef567badeee337efe496ee59e3a955 data/forge/tags/fluids/cloudy_sulfuricacid_millerite.json
 bf6d0176e294cdf2a7fe5f0011ab23e297be506b data/forge/tags/fluids/cloudy_sulfuricacid_pyrite.json
@@ -81,6 +88,7 @@ c1c6df8f2b6be00ed5b3908d615da37674d39610 data/forge/tags/fluids/neodymium.json
 59457eadc8ff39becabc3f2c57a4f9e788b11e75 data/forge/tags/fluids/nickel.json
 b2fe58a69b222b27fd1baaae3b70208664ba4c95 data/forge/tags/fluids/nitricacid.json
 5dfdb7d714e423a7222f513c99a8749fa54d48c2 data/forge/tags/fluids/osmium.json
+366c13d0953e9209c62b44665aa6e17db57b3db6 data/forge/tags/fluids/phosphoricacid.json
 9de866a7937ae0b2a7f888c59b043d29b58a8f99 data/forge/tags/fluids/platinum.json
 c316386cfb7aa77cafa7c9e7842acd3cf4808dd2 data/forge/tags/fluids/silver.json
 9738721dcecf3b5f5341060225cc2a6c161ad0b3 data/forge/tags/fluids/sodium.json

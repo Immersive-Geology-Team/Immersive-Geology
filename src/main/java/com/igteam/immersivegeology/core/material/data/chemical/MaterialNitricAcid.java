@@ -21,7 +21,7 @@ public class MaterialNitricAcid extends MaterialChemical
 
 	public MaterialNitricAcid()
 	{
-		super(MetalEnum.Chromium, MetalEnum.Cobalt, MetalEnum.Unobtanium, MineralEnum.Uraninite);
+		super(MetalEnum.Chromium, MetalEnum.Cobalt, MetalEnum.Unobtanium, MineralEnum.Uraninite, MetalEnum.Thorium);
 	}
 
 	@Override
