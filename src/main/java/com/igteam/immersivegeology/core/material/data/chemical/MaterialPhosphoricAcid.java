@@ -11,16 +11,14 @@ package com.igteam.immersivegeology.core.material.data.chemical;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.BiFunction;
 
-public class MaterialChemicalWaste extends MaterialChemical
+public class MaterialPhosphoricAcid extends MaterialChemical
 {
-	public MaterialChemicalWaste() {
-		super(MineralEnum.Bauxite, MineralEnum.Uraninite, MineralEnum.Molybdenite, MineralEnum.Monazite);
-
+	public MaterialPhosphoricAcid() {
+		super(MineralEnum.Uraninite);
 	}
 
 	@Override
@@ -31,6 +29,6 @@ public class MaterialChemicalWaste extends MaterialChemical
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xffCF3C27));
+		return ((p, i) -> (0xff7e87dc));
 	}
 }

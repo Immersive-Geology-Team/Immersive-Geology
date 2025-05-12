@@ -98,7 +98,6 @@ public class RotaryKilnMenu extends IEContainerMenu
 		super(ctx);
 		Level level = inventoryPlayer.player.level();
 		this.energyAverage = energyAverage;
-
 		this.packed_process_data = packed_process_data;
 
 		this.energy_lv = energy_lv;
@@ -137,7 +136,6 @@ public class RotaryKilnMenu extends IEContainerMenu
 		}
 
 		ownSlotCount = 15;
-
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 9; j++)
 				addSlot(new Slot(inventoryPlayer, j+i*9+9, 23+j*18, 109+i*18));

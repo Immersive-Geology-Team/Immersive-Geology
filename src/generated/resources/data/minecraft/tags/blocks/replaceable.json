@@ -79,7 +79,10 @@
     "immersivegeology:fluid_hydrofluoricacid_block",
     "immersivegeology:slurry_nitricacid_chromium_block",
     "immersivegeology:slurry_nitricacid_cobalt_block",
+    "immersivegeology:slurry_nitricacid_thorium_block",
     "immersivegeology:slurry_nitricacid_unobtanium_block",
+    "immersivegeology:slurry_nitricacid_uraninite_block",
+    "immersivegeology:cloudy_slurry_nitricacid_uraninite_block",
     "immersivegeology:fluid_nitricacid_block",
     "immersivegeology:slurry_sodiumhydroxide_unobtanium_block",
     "immersivegeology:slurry_sodiumhydroxide_bauxite_block",
@@ -95,9 +98,14 @@
     "immersivegeology:slurry_chemicalwaste_bauxite_block",
     "immersivegeology:slurry_chemicalwaste_molybdenite_block",
     "immersivegeology:slurry_chemicalwaste_monazite_block",
+    "immersivegeology:slurry_chemicalwaste_uraninite_block",
     "immersivegeology:cloudy_slurry_chemicalwaste_bauxite_block",
     "immersivegeology:cloudy_slurry_chemicalwaste_molybdenite_block",
     "immersivegeology:cloudy_slurry_chemicalwaste_monazite_block",
-    "immersivegeology:fluid_chemicalwaste_block"
+    "immersivegeology:cloudy_slurry_chemicalwaste_uraninite_block",
+    "immersivegeology:fluid_chemicalwaste_block",
+    "immersivegeology:slurry_phosphoricacid_uraninite_block",
+    "immersivegeology:cloudy_slurry_phosphoricacid_uraninite_block",
+    "immersivegeology:fluid_phosphoricacid_block"
   ]
 }

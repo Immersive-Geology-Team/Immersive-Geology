@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotarykiln",
+  "heat": 75,
+  "input": {
+    "tag": "forge:compound_dust/uranium"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_uranium"
+  },
+  "time": 300
+}

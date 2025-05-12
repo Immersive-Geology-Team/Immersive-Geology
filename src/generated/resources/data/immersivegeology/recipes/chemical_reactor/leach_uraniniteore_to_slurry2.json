@@ -1,0 +1,26 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "forge:cloudy_phosphoricacid_uraninite"
+  },
+  "fluidInputB": {
+    "amount": 250,
+    "tag": "forge:ammoniasolution"
+  },
+  "fluidInputC": {
+    "amount": 250,
+    "tag": "forge:nitricacid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:cloudy_slurry_nitricacid_uraninite"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "itemResult": [],
+  "time": 200
+}
