@@ -53,8 +53,8 @@ public class IGMultiblockProvider {
                     .gui(IGMenuTypes.BLOOMERY)
             .build();
 
-    public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = metal_skinnable(new GravitySeparatorLogic(), "gravityseparator", false, GravitySeparatorPart::new)
-                    .structure(() -> IGRegistrationHolder.getMBTemplate.apply("gravityseparator"))
+    public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = metal_skinnable(new GravitySeparatorLogic(), "gravity_separator", false, GravitySeparatorPart::new)
+                    .structure(() -> IGRegistrationHolder.getMBTemplate.apply("gravity_separator"))
                     .redstone(state -> state.rsState, GravitySeparatorLogic.REDSTONE_IN)
                     .build();
 

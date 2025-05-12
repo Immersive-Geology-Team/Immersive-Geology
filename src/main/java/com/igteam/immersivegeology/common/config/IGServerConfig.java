@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.electronwill.nightconfig.core.Config;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGPelletizerSkins;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -99,16 +100,19 @@ public class IGServerConfig
 
 	public static class Machines
 	{
-		public final Map<IGConfigurableMachine, MachineConfig> machines = new HashMap<>();
+		public final Map<String, MachineConfig> machines = new HashMap<>();
 
 		Machines(ForgeConfigSpec.Builder builder)
 		{
-			builder.push("machines");
+			builder.push("machines").comment("=== IG Machine Config Start ===");
 				for(TemplateMultiblock mb : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
 				{
 					if(mb instanceof IGConfigurableMachine config)
 					{
-						machines.put(config, new MachineConfig(builder, config));
+						String mb_name = config.getName().toLowerCase().replace(' ', '_');
+						builder.push(mb_name);
+						machines.put(mb_name, new MachineConfig(builder, config));
+						builder.pop();
 					}
 				}
 			builder.pop();
@@ -119,12 +123,14 @@ public class IGServerConfig
 			public final ForgeConfigSpec.IntValue input_batch_size;
 			public final ForgeConfigSpec.IntValue default_time;
 			public final ForgeConfigSpec.IntValue default_energy;
+			public final ForgeConfigSpec.IntValue default_skin_ordinal;
 
 			public MachineConfig(ForgeConfigSpec.Builder builder, IGConfigurableMachine machine)
 			{
 				this.input_batch_size = builder.comment("What should the default batch size be for this machine").defineInRange("input_batch_size", machine.getDefaultBatchInput(), 1, 64);
 				this.default_energy = builder.comment("The default Total Energy Cost for a Recipe made with this machine").defineInRange("energy", machine.getDefaultEnergy(), 0, 999999);
 				this.default_time = builder.comment("he default time for a Recipe to complete with this machine").defineInRange("time", machine.getDefaultTime(), 0, 999999);
+				this.default_skin_ordinal = builder.comment("The index number for the default skin an IG multiblock will use").defineInRange("default_skin_ordinal", machine.getDefaultSkin(), 0, 99);
 			}
 		}
 	}

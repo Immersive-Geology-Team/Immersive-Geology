@@ -129,7 +129,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
         generateMultiskinMultiblock(IGMultiblockProvider.BLOOMERY.block().get(), "bloomery", true, false, true, false);
         generateMultiskinMultiblock(IGMultiblockProvider.CRYSTALLIZER.block().get(), "crystallizer", false, false, true, true);
-        generateMultiskinMultiblock(IGMultiblockProvider.GRAVITY_SEPARATOR.block().get(), "gravityseparator", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.GRAVITY_SEPARATOR.block().get(), "gravity_separator", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.CHEMICAL_REACTOR.block().get(), "chemical_reactor", false, false,true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.REVERBERATION_FURNACE.block().get(), "reverberation_furnace", true, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.ROTARYKILN.block().get(),"rotarykiln", false, false, true, true);

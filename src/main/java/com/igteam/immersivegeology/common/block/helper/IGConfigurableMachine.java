@@ -10,6 +10,10 @@ package com.igteam.immersivegeology.common.block.helper;
 
 public interface IGConfigurableMachine
 {
+	default int getDefaultSkin() {
+		return 0;
+	};
+
 	String getName();
 	int getDefaultBatchInput();
 	int getDefaultBatchOutput();

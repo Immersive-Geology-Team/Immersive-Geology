@@ -80,7 +80,7 @@ public class GravitySeparatorRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 4;
+		return 1;
 	}
 
 	public int getTotalProcessWater()

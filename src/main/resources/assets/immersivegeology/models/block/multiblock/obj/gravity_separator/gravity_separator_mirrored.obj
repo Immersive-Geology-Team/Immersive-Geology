@@ -1,6 +1,6 @@
 # Blender 4.2.3 LTS
 # www.blender.org
-mtllib gravityseparator.mtl
+mtllib gravity_separator.mtl
 o cube_selection
 v 1.000000 1.000000 1.500000
 v 0.000000 1.000000 -0.500000

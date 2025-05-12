@@ -246,7 +246,6 @@ public class IGRegistrationHolder {
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
     public static void initialize()
     {
-        initializeMultiblocks();
 
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 128));
@@ -461,10 +460,10 @@ public class IGRegistrationHolder {
         return MB_REGISTRY_MAP.get(key);
     }
 
-    private static void initializeMultiblocks()
+    public static void initializeMultiblocks()
     {
         IGLib.IG_LOGGER.info("- Multiblocks");
-        registerMB("gravityseparator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR, IGGravitySeparatorSkins.class);
+        registerMB("gravity_separator", IGGravitySeparatorMultiblock.INSTANCE, IGMultiblockProvider.GRAVITY_SEPARATOR, IGGravitySeparatorSkins.class);
         registerMB("crystallizer", IGCrystalizerMultiblock.INSTANCE, IGMultiblockProvider.CRYSTALLIZER, IGCrystallizerSkins.class);
         registerMB("bloomery", IGBloomeryMultiblock.INSTANCE, IGMultiblockProvider.BLOOMERY, IGBloomerySkins.class);
         registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR, IGChemicalReactorSkins.class);

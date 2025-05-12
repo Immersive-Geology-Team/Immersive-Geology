@@ -16,6 +16,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.Multibloc
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMultiSkinBlock;
+import com.igteam.immersivegeology.common.config.IGServerConfig;
+import com.igteam.immersivegeology.common.config.IGServerConfig.Machines.MachineConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.StringRepresentable;
@@ -46,7 +48,6 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 		this.skinProperty = skinProperty;
 		this.skinClass    = skinClass;
 		this.textureDir   = textureDir;
-
 		this.registerDefaultState(
 				this.defaultBlockState()
 						.setValue(IEProperties.MIRRORED, false)
@@ -58,6 +59,18 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(IEProperties.MIRRORED);
+	}
+
+	@Override
+	public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston)
+	{
+		String multiblock = skinClass.getEnumConstants()[0].multiblockName();
+		MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
+		if(config != null) {
+			BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[config.default_skin_ordinal.get()]);
+			pLevel.setBlock(pPos, state, 3);
+		}
+		super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
 	}
 
 	@Override

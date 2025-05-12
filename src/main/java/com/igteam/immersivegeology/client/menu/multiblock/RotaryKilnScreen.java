@@ -13,9 +13,9 @@ import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
+import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.RotaryKilnMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot.RotarySlot;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
@@ -30,6 +30,7 @@ import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class RotaryKilnScreen extends IEContainerScreen<RotaryKilnMenu>
 {
@@ -75,20 +76,22 @@ public class RotaryKilnScreen extends IEContainerScreen<RotaryKilnMenu>
 		super.renderLabels(graphics, mouseX, mouseY);
 	}
 
+	private static int getProcessStepFromPacked(int packed, int position) {
+		if (position < 1 || position > 7)
+			throw new IllegalArgumentException("Position must be between 1 and 7");
+		return (packed >> ((position - 1) * 4)) & 0xF;
+	}
+
 	@Override
 	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
 	{
 		super.render(graphics, mouseX, mouseY, partialTicks);
+		int packedData = menu.packed_process_data.get();
 
-		List<RotarySlot> slots = this.menu.processes.get();
-		if(slots != null)
+		for(int slotID = 0; slotID < 7; slotID++)
 		{
-			for(RotarySlot slot : slots)
-			{
-				int slotID = slot.slot()-1;
-				int process = slot.processStep();
-				graphics.blit(TEXTURE, leftPos+16+(slotID * 18), topPos+50, 6, 202, 11, process);
-			}
+			int process = getProcessStepFromPacked(packedData, slotID+1);
+			graphics.blit(TEXTURE, leftPos+16+(slotID * 18), topPos+50, 6, 202, 11, process);
 		}
 
 		int fe = this.menu.energyAverage.get();

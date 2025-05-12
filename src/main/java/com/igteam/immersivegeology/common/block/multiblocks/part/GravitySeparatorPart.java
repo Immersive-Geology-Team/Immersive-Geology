@@ -24,7 +24,7 @@ public class GravitySeparatorPart extends SkinableMultiblockPart<GravitySeparato
 
 	public GravitySeparatorPart(Properties props, MultiblockRegistration<State> reg)
 	{
-		super(props, reg, GRAVITY_SEPARATOR, IGGravitySeparatorSkins.class, "block/multiblock/gravityseparator/");
+		super(props, reg, GRAVITY_SEPARATOR, IGGravitySeparatorSkins.class, "block/multiblock/gravity_separator/");
 	}
 
 	@Override

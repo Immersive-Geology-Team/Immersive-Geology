@@ -53,7 +53,7 @@ public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkin
 	@Override
 	public String multiblockName()
 	{
-		return "gravityseparator";
+		return "gravity_separator";
 	}
 
 	@Override

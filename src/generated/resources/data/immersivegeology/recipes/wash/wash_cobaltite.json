@@ -1,5 +1,5 @@
 {
-  "type": "immersivegeology:gravityseparator",
+  "type": "immersivegeology:gravity_separator",
   "byproduct": {
     "item": "minecraft:sand"
   },

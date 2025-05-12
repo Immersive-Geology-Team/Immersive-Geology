@@ -6,10 +6,10 @@
     "automatic_culling": false,
     "flip_v": true,
     "loader": "forge:obj",
-    "model": "immersivegeology:models/block/multiblock/obj/gravityseparator/gravityseparator_mirrored.obj",
+    "model": "immersivegeology:models/block/multiblock/obj/gravity_separator/gravity_separator_mirrored.obj",
     "textures": {
-      "gravityseparator": "immersivegeology:block/multiblock/gravityseparator/hazard",
-      "particle": "immersivegeology:block/multiblock/gravityseparator/hazard"
+      "gravity_separator": "immersivegeology:block/multiblock/gravity_separator/hazard",
+      "particle": "immersivegeology:block/multiblock/gravity_separator/hazard"
     }
   },
   "loader": "immersiveengineering:basic_split",
@@ -286,6 +286,6 @@
     ]
   ],
   "textures": {
-    "particle": "immersivegeology:block/multiblock/gravityseparator/hazard"
+    "particle": "immersivegeology:block/multiblock/gravity_separator/hazard"
   }
 }

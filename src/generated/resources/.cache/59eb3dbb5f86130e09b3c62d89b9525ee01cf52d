@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-19T04:59:39.885912276	Loot Tables
+// 1.20.1	2025-05-11T12:31:02.381979869	Loot Tables
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
@@ -23,7 +23,7 @@ c51c4912be6a162b6db0e8958f36e675a669effb data/immersivegeology/loot_tables/block
 ed30e470d9f07e6a468d8fb49eb79a1c59ae2f4a data/immersivegeology/loot_tables/blocks/fence_stainlesssteel.json
 0658b55227da47d11da59d21603543c47f426568 data/immersivegeology/loot_tables/blocks/fence_titanium.json
 7ce392bdecc764dedbeb6df490e612d6b37f2f28 data/immersivegeology/loot_tables/blocks/fence_tungsten.json
-159b7bfd6d2ad154248910ad51dbc9de3a949c4e data/immersivegeology/loot_tables/blocks/gravityseparator.json
+b34aa6c12bafd2f3248648113d3f9f7e8eed9e95 data/immersivegeology/loot_tables/blocks/gravity_separator.json
 d32c2bf5ab95ff932874a19ba286738907f73b14 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_acanthite_basalt.json
 95fa587d11375594fda348abc25fca41c382e478 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_acanthite_netherrack.json
 cd251e7f1c187ff1e3af3f4fcd5fcb910528cf72 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_alumina_end_stone.json

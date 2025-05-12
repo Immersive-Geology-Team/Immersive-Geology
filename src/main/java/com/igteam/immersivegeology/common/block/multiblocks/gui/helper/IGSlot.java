@@ -55,20 +55,8 @@ public abstract class IGSlot extends Slot
 
 		public static RotarySlot fromCtx(RotaryKilnProcess process, Level level) {
 			float mod = (float)process.processTick / (float)process.getMaxTicks(level);
-			int h = (int)Math.max(1.0F, mod * 23.0F);
+			int h = (int)Math.max(1.0F, mod * 16.0F);
 			return new RotarySlot(process.getSlot(), h);
-		}
-
-		public static RotarySlot from(FriendlyByteBuf buffer) {
-			return new RotarySlot(buffer.readByte(), buffer.readByte());
-		}
-
-		public static void writeTo(FriendlyByteBuf out, RotarySlot slot) {
-			out.writeByte(slot.slot).writeByte(slot.processStep);
-		}
-
-		public int slot() {
-			return this.slot;
 		}
 
 		public int processStep() {

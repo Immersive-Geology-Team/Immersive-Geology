@@ -17,18 +17,12 @@ import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
 import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
 import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot.RotarySlot;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.sync.IGGenericDataSerializers;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,16 +32,19 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class RotaryKilnMenu extends IEContainerMenu
 {
 	public final IEnergyStorage energy_lv;
 	public final IEnergyStorage energy_mv;
 	public final IEnergyStorage energy_hv;
-	public final GetterAndSetter<List<IGSlot.RotarySlot>> processes;
 	public final GetterAndSetter<Integer> energyAverage;
 	public final GetterAndSetter<Float> heat;
+	public final GetterAndSetter<Integer> packed_process_data;
+
 	public static RotaryKilnMenu makeServer(MenuType<?> type, int id, Inventory invPlayer, MultiblockMenuContext<RotaryKilnLogic.State> ctx)
 	{
 		final RotaryKilnLogic.State state = ctx.mbContext().getState();
@@ -58,13 +55,29 @@ public class RotaryKilnMenu extends IEContainerMenu
 				state.getEnergyLV(), state.getEnergyMV(), state.getEnergyHV(),
 				GetterAndSetter.getterOnly(state::getAveragePower),
 				GetterAndSetter.getterOnly(state::getHeat),
-				GetterAndSetter.getterOnly(() -> state.getProcessorQueue().stream()
-						.filter(p -> p instanceof RotaryKilnProcess)
-						.map(p -> IGSlot.RotarySlot.fromCtx((RotaryKilnProcess) p, ctx.mbContext().getLevel().getRawLevel()))
-						.toList())
+				GetterAndSetter.getterOnly(() -> getPackedProcessInt(state.getProcessorQueue(), ctx.mbContext().getLevel().getRawLevel()))
 		);
 	}
 
+	private static int getPackedProcessInt(List<MultiblockProcess<RotaryKilnRecipe, ProcessContextInMachine<RotaryKilnRecipe>>> processes, Level level)
+	{
+		int packed = 0;
+
+		for (MultiblockProcess<RotaryKilnRecipe, ProcessContextInMachine<RotaryKilnRecipe>> process : processes) {
+			IGSlot.RotarySlot slotObj = IGSlot.RotarySlot.fromCtx((RotaryKilnProcess) process, level);
+			int packedPosition = slotObj.slot(); // 1–7
+			int processStep = slotObj.processStep(); // 0–15
+
+			if (packedPosition < 1 || packedPosition > 7) {
+				throw new IllegalArgumentException("Packed position must be between 1 and 7, got: " + packedPosition);
+			}
+
+			int shift = (packedPosition - 1) * 4;
+			packed |= (processStep & 0xF) << shift;
+		}
+
+		return packed;
+	}
 
 	public static RotaryKilnMenu makeClient(MenuType<?> type, int id, Inventory invPlayer)
 	{
@@ -76,16 +89,18 @@ public class RotaryKilnMenu extends IEContainerMenu
 				new MutableEnergyStorage(RotaryKilnLogic.ENERGY_CAPACITY*4),
 				GetterAndSetter.standalone(0),
 				GetterAndSetter.standalone(0f),
-				GetterAndSetter.standalone(List.of())
+				GetterAndSetter.standalone(0)
 		);
 	}
 
-	private RotaryKilnMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, MutableEnergyStorage energy_lv, MutableEnergyStorage energy_mv, MutableEnergyStorage energy_hv,  GetterAndSetter<Integer> energyAverage, GetterAndSetter<Float> heat, GetterAndSetter<List<RotarySlot>> processes)
+	private RotaryKilnMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, MutableEnergyStorage energy_lv, MutableEnergyStorage energy_mv, MutableEnergyStorage energy_hv,  GetterAndSetter<Integer> energyAverage, GetterAndSetter<Float> heat, GetterAndSetter<Integer> packed_process_data)
 	{
 		super(ctx);
 		Level level = inventoryPlayer.player.level();
 		this.energyAverage = energyAverage;
-		this.processes = processes;
+
+		this.packed_process_data = packed_process_data;
+
 		this.energy_lv = energy_lv;
 		this.energy_mv = energy_mv;
 		this.energy_hv = energy_hv;
@@ -134,6 +149,7 @@ public class RotaryKilnMenu extends IEContainerMenu
 		this.addGenericData(GenericContainerData.energy(energy_hv));
 		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.INT32, energyAverage));
 		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, heat));
-		addGenericData(new GenericContainerData<>(IGGenericDataSerializers.ROTARYKILN_PROCESSES, processes));
+		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.INT32, packed_process_data));
+
 	}
 }

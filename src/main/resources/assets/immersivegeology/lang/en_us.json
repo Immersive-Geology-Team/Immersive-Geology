@@ -39,10 +39,10 @@
   "skin.immersivegeology.steelblue8": "SteelBlue8's",
   "skin.immersivegeology.crimsontwilight": "Crimson Twilight's",
 
-  "skin.immersivegeology.gravityseparator.default": "Old Faithful",
-  "skin.immersivegeology.gravityseparator.hazard": "Hazard",
-  "skin.immersivegeology.gravityseparator.legacy": "Legacy",
-  "skin.immersivegeology.gravityseparator.green": "Eco Friendly",
+  "skin.immersivegeology.gravity_separator.default": "Old Faithful",
+  "skin.immersivegeology.gravity_separator.hazard": "Hazard",
+  "skin.immersivegeology.gravity_separator.legacy": "Legacy",
+  "skin.immersivegeology.gravity_separator.green": "Eco Friendly",
 
   "skin.immersivegeology.chemical_reactor.default": "Old Faithful",
   "skin.immersivegeology.chemical_reactor.legacy": "Legacy",
@@ -287,7 +287,7 @@
   "block.immersivegeology.trommel": "Trommel",
   "block.immersivegeology.machine_iron_hydrojet_cutter": "Hydrojet Cutter",
   "block.immersivegeology.crystallizer" : "Crystallizer",
-  "block.immersivegeology.gravityseparator" : "Gravity Separator",
+  "block.immersivegeology.gravity_separator" : "Gravity Separator",
   "block.immersivegeology.chemical_reactor" : "Chemical Reactor",
   "block.immersivegeology.reverberation_furnace" : "Reverberation Furnace",
   "block.immersivegeology.bloomery": "Crude Bloomery",

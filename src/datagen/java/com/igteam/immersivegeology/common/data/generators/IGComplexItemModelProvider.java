@@ -47,7 +47,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Complex Item Models");
 		generateCrystallizerModel("crystallizer", IGMultiblockProvider.CRYSTALLIZER.block());
 		generateCoredrillMultiblock("coredrill_item", IGMultiblockProvider.COREDRILL.block());
-		generateSeparatorModel("gravityseparator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
+		generateSeparatorModel("gravity_separator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
 		generateRotaryKilnModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
@@ -193,7 +193,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 	private void generateSeparatorModel(String id, Supplier<? extends ItemLike> block)
 	{
 		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
-		model.texture("gravityseparator", "block/multiblock/gravityseparator/default");
+		model.texture("gravity_separator", "block/multiblock/gravity_separator/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
