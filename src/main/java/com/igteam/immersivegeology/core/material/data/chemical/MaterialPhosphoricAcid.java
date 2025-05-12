@@ -14,18 +14,21 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
-public class MaterialNitricAcid extends MaterialChemical
+public class MaterialPhosphoricAcid extends MaterialChemical
 {
+	public MaterialPhosphoricAcid() {
+		super(MineralEnum.Uraninite);
+	}
 
-	public MaterialNitricAcid()
+	@Override
+	public void setupRecipeStages()
 	{
-		super(MetalEnum.Chromium, MetalEnum.Cobalt, MetalEnum.Unobtanium, MineralEnum.Uraninite);
+		logged_recipes.add(getName());
 	}
 
 	@Override
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction() {
-		return ((p, i) -> (0xffe3ce77));
+		return ((p, i) -> (0xff7e87dc));
 	}
 }
