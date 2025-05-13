@@ -77,9 +77,9 @@ public class RotaryKilnScreen extends IEContainerScreen<RotaryKilnMenu>
 	}
 
 	private static int getProcessStepFromPacked(int packed, int position) {
-		if (position < 1 || position > 7)
-			throw new IllegalArgumentException("Position must be between 1 and 7");
-		return (packed >> ((position - 1) * 4)) & 0xF;
+		if (position < 0 || position > 6)
+			throw new IllegalArgumentException("Position must be between 0 and 6");
+		return (packed >> ((position) * 4)) & 0xF;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class RotaryKilnScreen extends IEContainerScreen<RotaryKilnMenu>
 
 		for(int slotID = 0; slotID < 7; slotID++)
 		{
-			int process = getProcessStepFromPacked(packedData, slotID+1);
+			int process = getProcessStepFromPacked(packedData, slotID);
 			graphics.blit(TEXTURE, leftPos+16+(slotID * 18), topPos+50, 6, 202, 11, process);
 		}
 
