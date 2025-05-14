@@ -199,8 +199,10 @@ tasks.register('signJar', SignJar) {
     keyStore  = project.findProperty('keyStore')
     alias     = project.findProperty('storeAlias')
     storePass = project.findProperty('storePass')
-    inputFile = tasks.shadowJar.flatMap { it.archiveFile }
-    outputFile= inputFile
+
+    inputFile = shadowJar.archiveFile
+    outputFile = shadowJar.archiveFile
+    dependsOn tasks.named('shadowJar')
 }
 
 tasks.named('build') { dependsOn tasks.named('signJar') }
@@ -254,9 +256,10 @@ tasks.withType(org.gradle.api.tasks.TaskContainer) {
     it.matching { it.name == 'runServer'      }.all    { standardInput = System.in }
 }
 
+tasks.register('genIntellijRunsDummy') {}
+
 def customGradle = rootProject.file('custom.gradle')
 if (customGradle.exists()) apply from: customGradle
-
 afterEvaluate {
     tasks.named('reobfJar').configure { enabled = true }
 }

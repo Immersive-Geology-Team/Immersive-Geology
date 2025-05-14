@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMulti
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Machines.MachineConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.Level;
@@ -64,11 +65,16 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 	@Override
 	public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston)
 	{
-		String multiblock = skinClass.getEnumConstants()[0].multiblockName();
-		MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
-		if(config != null) {
-			BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[config.default_skin_ordinal.get()]);
-			pLevel.setBlock(pPos, state, 3);
+		// Only apply default skin when first formed.
+		if(!pMovedByPiston)
+		{
+			String multiblock = skinClass.getEnumConstants()[0].multiblockName();
+			MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
+			if(config!=null)
+			{
+				BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[config.default_skin_ordinal.get()]);
+				pLevel.setBlock(pPos, state, 3);
+			}
 		}
 		super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
 	}
@@ -99,11 +105,10 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 
 		EnumProperty<T> prop = skinnable.getSkinProperty();
 		Level rawLevel = level.getRawLevel();
-
+		MutableBlockPos realPos = new MutableBlockPos();
 		for (StructureTemplate.StructureBlockInfo info : template.getStructure(level.getRawLevel())) {
 			BlockPos pos = info.pos();
 			BlockState current = level.getBlockState(pos);
-
 			if (!current.is(block)) continue;
 
 			BlockPos wpos = level.toAbsolute(pos);
@@ -112,11 +117,13 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 					wpos.getX()+0.5f, wpos.getY()+0.5f, wpos.getZ()+0.5f,
 					0, 0.0625, 0);
 
+			realPos.set(wpos);
 			if(current.getValue(prop).equals(skinValue)) return false;
 			Optional<Value<T>> value = prop.getAllValues().filter(p -> p.value().equals(skinValue)).findFirst();
 			if(value.isEmpty()) continue;
 			BlockState updated = current.setValue(prop, value.get().value());
-			level.setBlock(pos, updated);
+			// Flag designed to trip the moved by piston and perform update flags.
+			rawLevel.setBlock(realPos, updated, 67);
 		}
 		return true;
 	}
