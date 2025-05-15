@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:gravity_separator_multiblock_skin_green"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:gravity_separator_multiblock_skin_hazard"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:gravity_separator_multiblock_skin_legacy"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:chemical_reactor_multiblock_skin_rusted"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:chemical_reactor_multiblock_skin_hazard"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:chemical_reactor_multiblock_skin_legacy"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:rotarykiln_multiblock_skin_legacy"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:reverberation_furnace_multiblock_skin_default"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "immersivegeology:reverberation_furnace_multiblock_skin_legacy"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersiveengineering:chests/engineers_house"
+}

@@ -10,8 +10,11 @@ package com.igteam.immersivegeology.common.block.multiblocks.skins;
 
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.SkinCreditType;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.Locale;
 

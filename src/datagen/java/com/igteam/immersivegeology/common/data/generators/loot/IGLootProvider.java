@@ -31,7 +31,8 @@ public class IGLootProvider extends LootTableProvider
 	public List<SubProviderEntry> getTables()
 	{
 		return ImmutableList.of(
-				new SubProviderEntry(IGBlockLootProvider::new, LootContextParamSets.BLOCK)
+				new SubProviderEntry(IGBlockLootProvider::new, LootContextParamSets.BLOCK),
+				new SubProviderEntry(IGChestLootProvider::new, LootContextParamSets.CHEST)
 		);
 	}
 

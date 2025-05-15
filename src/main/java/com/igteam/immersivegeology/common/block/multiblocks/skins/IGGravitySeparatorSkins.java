@@ -10,8 +10,11 @@ package com.igteam.immersivegeology.common.block.multiblocks.skins;
 
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.SkinCreditType;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
@@ -42,7 +45,7 @@ public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkin
 		return credit;
 	}
 
-	@Override public String getSerializedName() { return name().toLowerCase(Locale.ROOT); }
+	@Override public @NotNull String getSerializedName() { return name().toLowerCase(Locale.ROOT); }
 
 	@Override
 	public ChatFormatting getColor()
@@ -66,5 +69,10 @@ public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkin
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	public Item getItem()
+	{
+		return IGRegistrationHolder.getItem.apply(multiblockName() + "_multiblock_skin_" + getSerializedName());
 	}
 }
