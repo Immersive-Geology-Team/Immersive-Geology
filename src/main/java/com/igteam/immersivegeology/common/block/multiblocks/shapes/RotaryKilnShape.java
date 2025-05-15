@@ -29,7 +29,62 @@ public class RotaryKilnShape extends GenericShape {
         final int bZ = posInMultiblock.getZ();
 
         List<AABB> main = new ArrayList<>();
-        main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1, 1.0));
+        if(bX == 6 && bY == 2)
+        {
+            if(bZ == 2)
+            {
+                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.625, 0.4375));
+            }
+            if(bZ == 0)
+            {
+                main.add(new AABB(0, 0.0, 0.5625, 1.0, 0.625, 1));
+            }
+            if(bZ == 1)
+            {
+                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.625, 1));
+            }
+        }
+        else {
+            if(bX == 5 && bY == 2)
+            {
+                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.75, 1.0));
+            }
+            else {
+                if(bX == 7)
+                {
+                    if(bY == 2 && bZ == 1)
+                    {
+                        main.add(new AABB(0.0, 0.0, 0.0, 0.4375, 0.625, 1.0));
+                    }
+                    else
+                    {
+                        if(bZ == 1)
+                        {
+                            if(bY == 1)
+                            {
+                                main.add(new AABB(0.0, 0.0, 0.0, 0.9375, 1, 1.0));
+                            }
+                            if(bY == 0)
+                            {
+                                main.add(new AABB(0.0, 0.5, 0.0, 0.9375, 1, 1.0));
+                                main.add(new AABB(0.0, 0.0, 0.0, 1, 0.5, 1.0));
+                            }
+                        }
+                        else
+                        {
+                            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1, 1.0));
+                        }
+                    }
+                }
+                else
+                {
+                    main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1, 1.0));
+                }
+            }
+
+        }
+
+
         return main;
     }
 }
