@@ -52,6 +52,7 @@ public class MaterialSulfuricAcid extends MaterialChemical
 				MetalEnum.Iron, MineralEnum.Pyrite, MineralEnum.Millerite,
 				MineralEnum.Vanadinite);
 	}
+	
 	Random rand = new Random();
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
@@ -76,6 +77,7 @@ public class MaterialSulfuricAcid extends MaterialChemical
 					);
 				}
 			}
+			if(!(living instanceof Skeleton)) living.setSecondsOnFire(40);
 		}
 
 		// Logic for items

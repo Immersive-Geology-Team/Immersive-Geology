@@ -34,22 +34,23 @@ public class IGChestLootProvider implements LootTableSubProvider
 	@Override
 	public void generate(BiConsumer<ResourceLocation, Builder> out)
 	{
-		LootPool.Builder mainPool = LootPool.lootPool();
-		mainPool.setRolls(ConstantValue.exactly(1))
-				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.GREEN.getItem()), 1))
-				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.HAZARD.getItem()), 1))
-				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.LEGACY.getItem()), 1))
-				.add(createEntry(new ItemStack(IGChemicalReactorSkins.RUSTED.getItem()), 1))
-				.add(createEntry(new ItemStack(IGChemicalReactorSkins.HAZARD.getItem()), 1))
-				.add(createEntry(new ItemStack(IGChemicalReactorSkins.LEGACY.getItem()), 1))
-				.add(createEntry(new ItemStack(IGRotaryKilnSkins.LEGACY.getItem()), 1))
-				.add(createEntry(new ItemStack(IGRevFurnaceSkins.DEFAULT.getItem()), 1))
-				.add(createEntry(new ItemStack(IGRevFurnaceSkins.LEGACY.getItem()), 1));
-
-		LootTable.Builder builder = LootTable.lootTable();
-		builder.withPool(mainPool);
-		out.accept(IEApi.ieLoc("chests/engineers_house"), builder);
+//		LootPool.Builder mainPool = LootPool.lootPool();
+//		mainPool.setRolls(ConstantValue.exactly(1))
+//				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.GREEN.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.HAZARD.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGGravitySeparatorSkins.LEGACY.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGChemicalReactorSkins.RUSTED.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGChemicalReactorSkins.HAZARD.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGChemicalReactorSkins.LEGACY.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGRotaryKilnSkins.LEGACY.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGRevFurnaceSkins.DEFAULT.getItem()), 1))
+//				.add(createEntry(new ItemStack(IGRevFurnaceSkins.LEGACY.getItem()), 1));
+//
+//		LootTable.Builder builder = LootTable.lootTable();
+//		builder.withPool(mainPool);
+//		out.accept(IEApi.ieLoc("chests/engineers_house"), builder);
 	}
+
 	private LootPoolEntryContainer.Builder<?> createEntry(ItemLike item)
 	{
 		return LootItem.lootTableItem(item);

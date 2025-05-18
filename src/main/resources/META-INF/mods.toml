@@ -25,7 +25,7 @@ credits = "Crimson Twilight, Peter"
 modId="forge"
 mandatory=true
 versionRange="[47.1.54,)"
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"
 
 [[dependencies.immersivegeology]]

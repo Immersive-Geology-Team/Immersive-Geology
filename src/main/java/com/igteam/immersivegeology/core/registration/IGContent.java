@@ -1,8 +1,12 @@
 package com.igteam.immersivegeology.core.registration;
 
+import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.ManualHelper;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler.ChemthrowerEffect;
+import blusunrize.immersiveengineering.common.fluids.IEFluid;
+import blusunrize.immersiveengineering.common.register.IEFluids;
+import blusunrize.immersiveengineering.common.register.IEPotions;
 import blusunrize.lib.manual.ManualElementItem;
 import blusunrize.lib.manual.ManualElementTable;
 import blusunrize.lib.manual.ManualEntry;
@@ -39,6 +43,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -89,6 +94,26 @@ public class IGContent {
                 {
                     level.setBlock(loc, Blocks.COARSE_DIRT.defaultBlockState(), 3);
                 }
+            }
+        });
+
+        ChemthrowerHandler.registerEffect(ChemicalEnum.SulfuricAcid.getFluidTag(), new ChemthrowerEffect()
+        {
+            @Override
+            public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            {
+                if(!(livingEntity instanceof Skeleton))
+                {
+                    livingEntity.setSecondsOnFire(5);
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 10, 0));
+                    livingEntity.addEffect(new MobEffectInstance(IEPotions.FLAMMABLE.get(), 20 * 5,0));
+                }
+            }
+
+            @Override
+            public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            {
+
             }
         });
 
