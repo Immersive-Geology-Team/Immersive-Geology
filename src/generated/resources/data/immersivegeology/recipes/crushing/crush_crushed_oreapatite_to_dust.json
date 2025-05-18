@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 10000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_apatite"
+  },
+  "result": {
+    "item": "immersivegeology:grit_apatite"
+  },
+  "secondaries": [],
+  "time": 100
+}
