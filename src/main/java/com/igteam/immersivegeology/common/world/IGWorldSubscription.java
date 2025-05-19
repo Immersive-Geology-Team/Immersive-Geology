@@ -19,12 +19,15 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.telemetry.events.WorldLoadEvent;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.data.worldgen.DimensionTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -40,6 +43,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class IGWorldSubscription
 {
@@ -83,13 +87,19 @@ public class IGWorldSubscription
 		getConfigValues();
 	}
 
+	private Set<ResourceLocation> getBlacklistedBiomes()
+	{
+		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+	}
+
 	// Okay, so, this event NEEDS to be optimized, as extra over head here, means slower chunk generation
 	@SubscribeEvent
 	public void forceRemoveVanillaVeins(ChunkEvent.Load event)
 	{
 		if(!event.isNewChunk()) return;
 		long startTime = 0;
-		if(IGServerConfig.REMOVAL.logProcess.get()) startTime = System.nanoTime();
+		boolean canLog = IGServerConfig.REMOVAL.logProcess.get();
+		if(canLog) startTime = System.nanoTime();
 
 		// Initialize Variables
 		boolean isNether = false;
@@ -110,6 +120,23 @@ public class IGWorldSubscription
 		{
 			isNether = slevel.dimension().equals(Level.NETHER);
 			replaceState = isNether ? netherStone : null;
+		}
+		Holder<Biome> holder = level.getBiome(chunk.getPos().getWorldPosition());
+		if(holder.getTagKeys().anyMatch(((b) ->
+		{
+			if(getBlacklistedBiomes().contains(b.location()))
+			{
+				if(canLog)
+				{
+					IGLib.IG_LOGGER.info("Operation not permitted within {}", b.location());
+					IGLib.IG_LOGGER.info("Change Server Configuration File if this is not desired");
+				}
+				return true;
+			}
+			return false;
+		})))
+		{
+			return;
 		}
 
 		// Loop over all sections in the chunk.
@@ -169,7 +196,7 @@ public class IGWorldSubscription
 			chunk.setUnsaved(true);
 		}
 
-		if(IGServerConfig.REMOVAL.logProcess.get())
+		if(canLog)
 		{
 			long endTime = System.nanoTime();
 			long processingTime = endTime-startTime;

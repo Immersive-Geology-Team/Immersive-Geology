@@ -12,7 +12,6 @@ import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.electronwill.nightconfig.core.Config;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.helper.IGConfigurableMachine;
-import com.igteam.immersivegeology.common.block.multiblocks.skins.IGPelletizerSkins;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -80,20 +79,27 @@ public class IGServerConfig
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIEUranium;
 		public final ForgeConfigSpec.BooleanValue shouldRemoveIENickel;
 		public final ForgeConfigSpec.BooleanValue logProcess;
+		public final ForgeConfigSpec.ConfigValue<List<? extends String>> biome_blacklist;
 
 		VanillaOreRemoval(ForgeConfigSpec.Builder builder)
 		{
-			builder.push("remove_non_ig_ore_types").comment("Settings for the configuration of default Ore Spawning for IE and Minecraft, this includes 'Raw Ore Blocks', Reload the world to apply changes");
-			shouldRemoveIron = builder.comment("Should IG remove Minecrafts Iron Ore?").define("remove_iron", true);
-			shouldRemoveCopper = builder.comment("Should IG remove Minecrafts Copper Ore?").define("remove_copper", true);
-			shouldRemoveGold = builder.comment("Should IG remove Minecraft Gold Ore?").define("remove_gold", true);
+			builder.push("remove_non_ig_ore_types").comment("Configure which default ores (from Minecraft and Immersive Engineering) should be removed during world generation. Changes require a world reload.");
+			shouldRemoveIron = builder.comment("Remove Minecraft's Iron Ore during world generation.").define("remove_iron", true);
+			shouldRemoveCopper = builder.comment("Remove Minecraft's Copper Ore during world generation.").define("remove_copper", true);
+			shouldRemoveGold = builder.comment("Remove Minecraft's Gold Ore during world generation.").define("remove_gold", true);
 
-			shouldRemoveIEBauxite = builder.comment("Should IG remove Immersive Engineering Bauxite Ore?").define("remove_ie_bauxite", true);
-			shouldRemoveIELead = builder.comment("Should IG remove Immersive Engineering Lead Ore?").define("remove_ie_lead", true);
-			shouldRemoveIESilver = builder.comment("Should IG remove Immersive Engineering Silver Ore?").define("remove_ie_silver", true);
-			shouldRemoveIEUranium = builder.comment("Should IG remove Immersive Engineering Uranium Ore?").define("remove_ie_uranium", true);
-			shouldRemoveIENickel = builder.comment("Should IG remove Immersive Engineering Nickel Ore?").define("remove_ie_nickel", true);
-			logProcess = builder.comment("Should we log the performance of the removal algorithm?").define("log_process", false);
+			shouldRemoveIEBauxite = builder.comment("Remove Immersive Engineering's Bauxite Ore.").define("remove_ie_bauxite", true);
+			shouldRemoveIELead = builder.comment("Remove Immersive Engineering's Lead Ore.").define("remove_ie_lead", true);
+			shouldRemoveIESilver = builder.comment("Remove Immersive Engineering's Silver Ore.").define("remove_ie_silver", true);
+			shouldRemoveIEUranium = builder.comment("Remove Immersive Engineering's Uranium Ore.").define("remove_ie_uranium", true);
+			shouldRemoveIENickel = builder.comment("Remove Immersive Engineering's Nickel Ore.").define("remove_ie_nickel", true);
+			logProcess = builder.comment("Enable logging of the ore removal process for debugging or performance analysis.").define("log_process", false);
+
+			builder.comment("Specify biomes where ore removal should be disabled. Useful for preserving ore generation in specific areas without disabling the system entirely.");
+			this.biome_blacklist = builder.comment("List of biome tags (e.g., 'minecraft:is_overworld', 'forge:is_sandy', 'forge:is_dry/overworld', 'minecraft:spawns_warm_variant_frogs', or 'minecraft:has_structure/mineshaft_mesa') where ore removal will be skipped. Applies to all ore types defined above.").defineListAllowEmpty("biome_blacklist",
+					List.of(),
+					obj -> obj instanceof String && ResourceLocation.isValidResourceLocation((String) obj)
+			);
 			builder.pop();
 		}
 	}
@@ -120,16 +126,10 @@ public class IGServerConfig
 
 		public static class MachineConfig
 		{
-			public final ForgeConfigSpec.IntValue input_batch_size;
-			public final ForgeConfigSpec.IntValue default_time;
-			public final ForgeConfigSpec.IntValue default_energy;
 			public final ForgeConfigSpec.IntValue default_skin_ordinal;
 
 			public MachineConfig(ForgeConfigSpec.Builder builder, IGConfigurableMachine machine)
 			{
-				this.input_batch_size = builder.comment("What should the default batch size be for this machine").defineInRange("input_batch_size", machine.getDefaultBatchInput(), 1, 64);
-				this.default_energy = builder.comment("The default Total Energy Cost for a Recipe made with this machine").defineInRange("energy", machine.getDefaultEnergy(), 0, 999999);
-				this.default_time = builder.comment("he default time for a Recipe to complete with this machine").defineInRange("time", machine.getDefaultTime(), 0, 999999);
 				this.default_skin_ordinal = builder.comment("The index number for the default skin an IG multiblock will use").defineInRange("default_skin_ordinal", machine.getDefaultSkin(), 0, 99);
 			}
 		}

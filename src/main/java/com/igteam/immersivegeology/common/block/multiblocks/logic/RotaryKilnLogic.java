@@ -166,18 +166,24 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         float currentHeat = state.getHeat();
         float target_heat = state.getTargetHeat();
 
-        List<RotaryKilnRecipe> recipes = getActiveRecipes(state, level);
-        if(!recipes.isEmpty())
+        if(avgInput > 0)
         {
-            OptionalInt maxHeat = recipes.stream().mapToInt(RotaryKilnRecipe::getHeatRequired).max();
-			int recipeHeatTarget = maxHeat.getAsInt();
-            if(recipeHeatTarget != target_heat) state.targetHeat = recipeHeatTarget;
+            int recipeHeatTarget = convertAvePowerToHeat(avgInput);
+            if(recipeHeatTarget!=target_heat) state.targetHeat = recipeHeatTarget;
             if(currentHeat < recipeHeatTarget) return RotaryKilnHeatState.HEATING_UP;
             if(currentHeat > (recipeHeatTarget+7)) return RotaryKilnHeatState.COOLING_DOWN;
             return RotaryKilnHeatState.RUNNING_RECIPE;
-		}
-
+        }
         return RotaryKilnHeatState.MAINTAINING_HEAT;
+    }
+
+    private static int convertAvePowerToHeat(int avgInput)
+    {
+        if(avgInput > 0 && avgInput < BASE_MV_ENERGY) return RotaryKilnLogic.LV_HEAT_CAP;
+        if(avgInput > BASE_MV_ENERGY && avgInput < BASE_HV_ENERGY) return RotaryKilnLogic.MV_HEAT_CAP;
+        if(avgInput > BASE_HV_ENERGY && avgInput < BASE_EHV_ENERGY) return RotaryKilnLogic.HV_HEAT_CAP;
+        if(avgInput > BASE_EHV_ENERGY) return RotaryKilnLogic.EHV_HEAT_CAP;
+        return 0;
     }
 
     private static List<RotaryKilnRecipe> getActiveRecipes(State state, Level level) {

@@ -72,7 +72,8 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 			MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
 			if(config!=null)
 			{
-				BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[config.default_skin_ordinal.get()]);
+				int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
+				BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[skin_ordinal]);
 				pLevel.setBlock(pPos, state, 3);
 			}
 		}
