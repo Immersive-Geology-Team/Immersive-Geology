@@ -53,6 +53,7 @@ import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
+import com.igteam.immersivegeology.core.material.helper.ToolTierHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -66,6 +67,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -447,6 +449,10 @@ public class IGRegistrationHolder {
                         case DRILL_HEAD ->
                         {
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericDrillHead(itemCategoryFlags, material));
+                        }
+                        case TOOL_HOE ->
+                        {
+                            registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGCustomTool(material.getToolTier(), material.getToolDamage(), material.getToolSpeed(), itemCategoryFlags, material));
                         }
                         default -> {
                             if(hasExistingImplementation) continue;

@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:item/base/ig_tool_item",
+  "textures": {
+    "layer0": "immersivegeology:palette/item/tool_hoe/type_1_pristine_unobtanium"
+  }
+}

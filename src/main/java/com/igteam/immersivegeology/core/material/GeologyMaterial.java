@@ -189,7 +189,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST ->
+                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST, TOOL_HOE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
                 }

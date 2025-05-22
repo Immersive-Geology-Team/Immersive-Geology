@@ -9,7 +9,8 @@
   "itemGroup.immersivegeology.hydrometallurgy": " Hydrometallurgy",
   "itemGroup.immersivegeology.components": " Components",
   "itemGroup.immersivegeology.structural": " Structural",
-
+  "immersivegeology.bug_bounty.ktos": "\"Farming Never Ends!\" -Ktos777",
+  "item.immersivegeology.tool_hoe_unobtanium": "Unobtanium Hoe",
   "immersivegeology.config.title": "",
   "generator.immersive": "Immersive",
 
@@ -74,6 +75,7 @@
   "skin.immersivegeology.credit.creator": "Creator Skin",
   "skin.immersivegeology.credit.bughunter": "Bug Hunter ",
   "skin.immersivegeology.credit.supporter": "Supporter Skin",
+  "skin.immersivegeology.credit.founder": "Founder Skin",
 
   "manual.immersivegeology.hall-heroit_process.subtext": "Hall-Heroit Process",
   "manual.immersivegeology.bayer_process.subtext": "Bayer Process",

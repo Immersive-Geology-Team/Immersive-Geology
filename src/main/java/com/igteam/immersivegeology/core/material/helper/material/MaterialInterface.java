@@ -13,15 +13,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
+import net.dries007.tfc.util.ToolTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -192,4 +191,18 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getItemMaterialTag();
     };
 
+    default int getToolDamage()
+    {
+        return instance().getToolDamage();
+    };
+
+    default int getToolSpeed()
+    {
+        return instance().getToolSpeed();
+    };
+
+    default Tier getToolTier()
+    {
+        return instance().getToolTier();
+    };
 }

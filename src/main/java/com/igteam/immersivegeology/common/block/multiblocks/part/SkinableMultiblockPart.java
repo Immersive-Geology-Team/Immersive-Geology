@@ -119,9 +119,20 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 					0, 0.0625, 0);
 
 			realPos.set(wpos);
-			if(current.getValue(prop).equals(skinValue)) return false;
 			Optional<Value<T>> value = prop.getAllValues().filter(p -> p.value().equals(skinValue)).findFirst();
 			if(value.isEmpty()) continue;
+
+			if(current.getValue(prop).equals(skinValue))
+			{
+				Class<T> skinClass = (Class<T>)skinValue.getDeclaringClass();
+				String multiblock = skinClass.getEnumConstants()[0].multiblockName();
+				MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
+				int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
+				if(skinClass.getEnumConstants()[skin_ordinal].equals(skinValue)) return false;
+				BlockState state = current.setValue(prop, skinClass.getEnumConstants()[skin_ordinal]);
+				rawLevel.setBlock(realPos, state, 67);
+				continue;
+			}
 			BlockState updated = current.setValue(prop, value.get().value());
 			// Flag designed to trip the moved by piston and perform update flags.
 			rawLevel.setBlock(realPos, updated, 67);

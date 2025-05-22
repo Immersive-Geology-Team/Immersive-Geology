@@ -20,7 +20,7 @@ An updated in development version of Immersive Geology.
 authors = "Muddykat-Tech and UnSchtalch"
 displayURL = "https://minecraft.curseforge.com/projects/immersive-geology/"
 logoFile = "logo.png"
-credits = "Crimson Twilight, Peter"
+credits = "Crimson Twilight, Peter, RGBoid"
 [[dependencies.immersivegeology]]
 modId="forge"
 mandatory=true

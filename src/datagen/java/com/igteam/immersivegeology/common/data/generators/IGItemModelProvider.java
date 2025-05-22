@@ -77,7 +77,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
             }
             if(item instanceof IGFlagItem i)
             {
-                if(i instanceof IGMineralTestingItem||i instanceof IGMBFormationItem)
+                if(i instanceof IGMineralTestingItem||i instanceof IGMBFormationItem || i instanceof IGCustomTool)
                 {
                     generateToolItem(i);
                     continue;

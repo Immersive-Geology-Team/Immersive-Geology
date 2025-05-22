@@ -15,9 +15,10 @@ public enum SkinCreditType
 	DEVELOPER(ChatFormatting.GOLD),
 	PETER(ChatFormatting.GRAY),
 	ARTIST(ChatFormatting.DARK_GREEN),
-	CREATOR(ChatFormatting.DARK_RED),
+	FOUNDER(ChatFormatting.LIGHT_PURPLE),
+	CREATOR(ChatFormatting.RED),
 	SUPPORTER(ChatFormatting.AQUA),
-	BUGHUNTER(ChatFormatting.LIGHT_PURPLE),
+	BUGHUNTER(ChatFormatting.YELLOW),
 	MODPACK(ChatFormatting.BLUE);
 
 	private ChatFormatting chatFormat;

@@ -124,6 +124,16 @@ public class IGRecipes extends RecipeProvider
 				.pattern("W  ").define('B', bronze_ingot).define('W', Ingredient.of(Tags.Items.RODS_WOODEN)).define('S', Ingredient.of(Tags.Items.STRING))
 				.group("ig_tools").unlockedBy("has_bronze_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(bronze_ingot)).save(consumer, ig("craft_igtoolkit_0"));
 
+		Item unobtanium_hoe = MetalEnum.Unobtanium.getItem(ItemCategoryFlags.TOOL_HOE);
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, unobtanium_hoe)
+				.pattern("uu")
+				.pattern(" s")
+				.pattern(" s")
+				.define('u', MetalEnum.Unobtanium.getItemTag(ItemCategoryFlags.INGOT))
+				.define('s', Tags.Items.RODS_WOODEN)
+				.group("ig_tools")
+				.unlockedBy("has_unobtanium_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Unobtanium.getItem(ItemCategoryFlags.INGOT))).save(consumer, ig("craft_unobtanium_hoe"));
+
 		// Stainless Steel Hammer
 		Item toolkit_1 = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, toolkit_1)

@@ -18,7 +18,7 @@ import java.util.Locale;
 public enum IGRevFurnaceSkins implements StringRepresentable, IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.ARTIST, "steelblue8"),
-	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.ARTIST, "crimsontwilight");
+	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.FOUNDER, "crimsontwilight");
 
 	private final String skin;
 	private final SkinCreditType type;
