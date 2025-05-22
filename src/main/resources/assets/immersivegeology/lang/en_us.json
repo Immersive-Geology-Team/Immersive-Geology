@@ -49,6 +49,12 @@
   "skin.immersivegeology.chemical_reactor.hazard": "Hazard",
   "skin.immersivegeology.chemical_reactor.rusted": "Rusted",
 
+  "skin.immersivegeology.rotarykiln.default": "Old Faithful",
+  "skin.immersivegeology.rotarykiln.legacy": "Legacy",
+
+  "skin.immersivegeology.pelletizer.default": "Old Faithful",
+  "skin.immersivegeology.pelletizer.legacy": "Legacy",
+
   "skin.immersivegeology.bloomery.default": "Old Faithful",
   "skin.immersivegeology.bloomery.legacy": "Legacy",
 

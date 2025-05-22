@@ -14,6 +14,7 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.Locale;
@@ -22,19 +23,30 @@ public enum IGChemicalReactorSkins implements StringRepresentable, IIGMultiSkinH
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER, "muddykat"),
-	RUSTED("rusted", ChatFormatting.YELLOW, SkinCreditType.DEVELOPER, "muddykat"),
-	HAZARD("hazard", ChatFormatting.DARK_RED, SkinCreditType.DEVELOPER, "muddykat");
+	RUSTED("rusted", ChatFormatting.YELLOW, SkinCreditType.DEVELOPER, "muddykat", Rarity.RARE),
+	HAZARD("hazard", ChatFormatting.DARK_RED, SkinCreditType.DEVELOPER, "muddykat", Rarity.UNCOMMON);
 
 	private final String skin;
 	private final SkinCreditType type;
 	private final ChatFormatting formatting;
 	private final String credit;
+	private final Rarity rarity;
 	IGChemicalReactorSkins(String s, ChatFormatting formatting, SkinCreditType type, String credit)
 	{
 		this.skin = s;
 		this.formatting = formatting;
 		this.type = type;
 		this.credit = credit;
+		this.rarity = Rarity.UNCOMMON;
+	}
+
+	IGChemicalReactorSkins(String s, ChatFormatting formatting, SkinCreditType type, String credit, Rarity rarity)
+	{
+		this.skin = s;
+		this.formatting = formatting;
+		this.type = type;
+		this.credit = credit;
+		this.rarity = rarity;
 	}
 
 	@Override public String getSkin() { return skin; }

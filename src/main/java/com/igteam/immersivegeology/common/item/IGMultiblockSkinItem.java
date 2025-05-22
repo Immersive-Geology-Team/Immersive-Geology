@@ -27,6 +27,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -45,7 +46,7 @@ public class IGMultiblockSkinItem<T extends Enum<T> & IIGMultiSkinHelper & Strin
 	private final String registryName;
 	public IGMultiblockSkinItem(ItemCategoryFlags flag, MaterialInterface<?> material, T skinEnum, String registryName)
 	{
-		super(flag, material, new Properties().stacksTo(1));
+		super(flag, material, new Properties().stacksTo(1).rarity(skinEnum.getRarity()));
 		this.skin = skinEnum;
 		this.registryName = registryName;
 	}

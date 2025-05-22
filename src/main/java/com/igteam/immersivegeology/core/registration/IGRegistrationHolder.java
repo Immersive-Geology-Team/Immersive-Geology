@@ -43,6 +43,7 @@ import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.common.item.*;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
+import com.igteam.immersivegeology.common.loot.IGLootModifier;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
@@ -55,6 +56,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -75,11 +77,13 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistries.Keys;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
@@ -98,6 +102,7 @@ public class IGRegistrationHolder {
 
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
+    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_SERIALIZER_REGISTER = DeferredRegister.create(Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, IGLib.MODID);
 
     private static final LinkedHashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new LinkedHashMap<>();
     private static final LinkedHashMap<String, RegistryObject<BlockEntityType<?>>> TE_REGISTRY_MAP = new LinkedHashMap<>();
@@ -540,9 +545,10 @@ public class IGRegistrationHolder {
         TE_REGISTER.register(eventBus);
         IGLib.IG_LOGGER.info("- Custom Creative Tab Registration");
         TAB_REGISTER.register(eventBus);
+        IGLib.IG_LOGGER.info("- Custom Global Loot Modifier");
+        LOOT_SERIALIZER_REGISTER.register(eventBus);
         IGLib.IG_LOGGER.info("- Custom Particle Type Registration");
         IGParticles.register(eventBus);
-
         IGLib.IG_LOGGER.info("- Custom Menu Type Registration");
         IGMenuTypes.REGISTER.register(eventBus);
 
@@ -602,6 +608,12 @@ public class IGRegistrationHolder {
         IGLib.getGeologyMaterials().forEach(MaterialInterface::buildRecipe);
         MaterialHelper.logRecipeStages();
         IGLib.IG_LOGGER.info("- Complete");
+    }
+    public static RegistryObject<Codec<? extends IGlobalLootModifier>> IG_LOOT_MODIFICATION;
+
+    public static void initializeLootModifications()
+    {
+        IG_LOOT_MODIFICATION = LOOT_SERIALIZER_REGISTER.register("ig_loot_modification", ()->IGLootModifier.CODEC);
     }
 
     protected static class MultiblockBuilder<S extends IMultiblockState> extends MultiblockRegistrationBuilder<S, MultiblockBuilder<S>>{

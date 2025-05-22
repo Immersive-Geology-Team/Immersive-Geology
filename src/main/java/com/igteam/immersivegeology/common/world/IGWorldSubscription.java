@@ -147,7 +147,6 @@ public class IGWorldSubscription
 			LevelChunkSection section = chunk.getSection(sectionIndex);
 
 			// Check for early exits asap
-
 			// Is this section only air blocks?
 			if(section.hasOnlyAir()) continue;
 

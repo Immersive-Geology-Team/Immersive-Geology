@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.skins.helpers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 
 import java.util.Locale;
 
@@ -30,4 +31,6 @@ public interface IIGMultiSkinHelper
 	{
 		return IGRegistrationHolder.getItem.apply(multiblockName() + "_multiblock_skin_" + name().toLowerCase(Locale.ROOT));
 	}
+
+	default Rarity getRarity() {return Rarity.UNCOMMON;};
 }
