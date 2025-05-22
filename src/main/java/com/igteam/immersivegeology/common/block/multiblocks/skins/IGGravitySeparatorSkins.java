@@ -23,6 +23,7 @@ public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkin
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "muddykat"),
 	GREEN("green", ChatFormatting.DARK_GREEN, SkinCreditType.PETER, "peter"),
 	HAZARD("hazard", ChatFormatting.DARK_RED, SkinCreditType.DEVELOPER, "muddykat"),
+	STEAMPUNK("steampunk", ChatFormatting.GOLD, SkinCreditType.CREATOR, "wanderingbeekeeper"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER,"muddykat");
 
 	private final String skin;

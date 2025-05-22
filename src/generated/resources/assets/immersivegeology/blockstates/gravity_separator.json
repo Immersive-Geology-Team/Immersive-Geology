@@ -40,6 +40,16 @@
       "uvlock": true,
       "y": 90
     },
+    "facing=east,gravity_separator=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,gravity_separator=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
     "facing=north,gravity_separator=default,mirrored=false": {
       "model": "immersivegeology:block/gravity_separator_default_split",
       "uvlock": true
@@ -70,6 +80,14 @@
     },
     "facing=north,gravity_separator=legacy,mirrored=true": {
       "model": "immersivegeology:block/gravity_separator_legacy_mirrored_split",
+      "uvlock": true
+    },
+    "facing=north,gravity_separator=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_split",
+      "uvlock": true
+    },
+    "facing=north,gravity_separator=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_mirrored_split",
       "uvlock": true
     },
     "facing=south,gravity_separator=default,mirrored=false": {
@@ -112,6 +130,16 @@
       "uvlock": true,
       "y": 180
     },
+    "facing=south,gravity_separator=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,gravity_separator=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
     "facing=west,gravity_separator=default,mirrored=false": {
       "model": "immersivegeology:block/gravity_separator_default_split",
       "uvlock": true,
@@ -149,6 +177,16 @@
     },
     "facing=west,gravity_separator=legacy,mirrored=true": {
       "model": "immersivegeology:block/gravity_separator_legacy_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,gravity_separator=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,gravity_separator=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/gravity_separator_steampunk_mirrored_split",
       "uvlock": true,
       "y": 270
     }

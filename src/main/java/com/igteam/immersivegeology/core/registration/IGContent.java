@@ -154,7 +154,7 @@ public class IGContent {
         InnerNode<ResourceLocation, ManualEntry> multiblock_category = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_multiblocks"), 0);
         multiblockEntry(instance, multiblock_category, "crystallizer");
         multiblockEntry(instance, multiblock_category, "coredrill");
-        multiblockEntry(instance, multiblock_category, "gravityseparator");
+        multiblockEntry(instance, multiblock_category, "gravity_separator");
         multiblockEntry(instance, multiblock_category, "rotarykiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
         multiblockEntry(instance, multiblock_category, "bloomery");
