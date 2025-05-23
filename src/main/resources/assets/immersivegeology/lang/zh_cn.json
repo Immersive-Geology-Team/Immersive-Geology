@@ -40,6 +40,7 @@
   "skin.immersivegeology.steelblue8": "SteelBlue8的",
   "skin.immersivegeology.crimsontwilight": "Crimson Twilight的",
   "skin.immersivegeology.wanderingbeekeeper": "WanderingBeekeeper的",
+  "skin.immersivegeology.unschtalch": "UnSchtalch的",
 
   "skin.immersivegeology.gravity_separator.default": "忠实",
   "skin.immersivegeology.gravity_separator.hazard": "警戒",
@@ -206,7 +207,7 @@
   "item.immersivegeology.empty_flask": "空%s烧瓶",
 
   "item.immersivegeology.ingot": "%s锭",
-  "item.immersivegeology.skin_component": "%s Mod Kit",
+  "item.immersivegeology.skin_component": "%s修整工具",
   "item.immersivegeology.skin_component.description": "%s%s",
   "item.immersivegeology.plate": "%s板",
   "item.immersivegeology.drill_head": "%s钻头",
@@ -311,6 +312,9 @@
   "fluid.immersivegeology.complex_slurry": "%s%s酸",
   "fluid.immersivegeology.cloudy_complex_slurry": "浑浊%s%s酸",
   "fluid.immersivegeology.cloudy_slurry": "浑浊%s%s",
+
+  "material.immersivegeology.steam": "蒸汽",
+  "material.immersivegeology.highpressuresteam": "高压蒸汽",
 
   "material.immersivegeology.millerite": "针镍矿",
   "material.immersivegeology.vanilla": "石头",
@@ -483,24 +487,6 @@
   "desc.immersiveengineering.info.multiblock.IE:HydroJetCutter": "水刀切割机",
   "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace": "反射炉",
   "desc.immersiveengineering.info.multiblock.IE:RotaryKiln": "回转窑",
-  "desc.immersivegeology.schematic_table": "示意图纸台",
-
-  "item.immersivegeology.drawing_table": "示意图纸台",
-  "item.immersivegeology.blueprint_multiblock_plans.specific": "%s示意图纸",
-  "item.immersivegeology.blueprint_multiblock_plans": "空白示意图纸",
-  "desc.immersivegeology.info.blueprint.size": "%s",
-  "desc.immersivegeology.info.blueprint.block_info": "按住[%s]查看材料信息",
-  "desc.immersivegeology.info.blueprint.no_multiblock": "空白示意图纸",
-  "desc.immersivegeology.info.blueprint.moved": "示意图已移动",
-  "desc.immersivegeology.info.blueprint.rotated": "示意图已旋转",
-  "desc.immersivegeology.info.blueprint.placed": "（仅创造模式）示意图已放置",
-  "desc.immersivegeology.info.blueprint.tier": "可使用%s建造",
-  "desc.immersivegeology.info.blueprint.ie_tier": "工程师锤",
-  "desc.immersivegeology.info.blueprint.ig_tier_0": "？？？",
-  "desc.immersivegeology.info.blueprint.ig_tier_1": "石加工锤",
-  "desc.immersivegeology.info.blueprint.ig_tier_2": "青铜加工锤",
-  "desc.immersivegeology.info.blueprint.ig_tier_3": "工程师锤",
-  "desc.immersivegeology.info.blueprint.ig_tier_4": "不锈钢加工锤",
 
   "desc.immersiveengineering.info.mineral.lead_bearing_sulfide": "含铅硫化物",
   "desc.immersiveengineering.info.mineral.copper_bearing_sulfide": "含铜硫化物",
