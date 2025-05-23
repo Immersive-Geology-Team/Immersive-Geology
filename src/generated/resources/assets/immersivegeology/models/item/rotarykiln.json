@@ -65,13 +65,13 @@
         0
       ],
       "scale": [
-        0.15,
-        0.15,
-        0.15
+        0.14,
+        0.14,
+        0.14
       ],
       "translation": [
-        -4,
-        -3,
+        2,
+        -1,
         0
       ]
     },
@@ -124,7 +124,7 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/rotarykiln/rotarykiln.obj",
+  "model": "immersivegeology:models/block/multiblock/obj/rotarykiln/rotarykiln_item.obj",
   "textures": {
     "rotarykiln": "immersivegeology:block/multiblock/rotarykiln/default"
   }

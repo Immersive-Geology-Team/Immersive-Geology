@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.ChemicalReactorTanks;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -55,6 +56,9 @@ public class ChemicalReactorRenderer extends IGBlockEntityRenderer<MultiblockBlo
     @Override
     public void render(MultiblockBlockEntityMaster<ChemicalReactorLogic.State> master, float v, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderChemicalReactor.get();
+        if(!doRendering) return;
+
         IMultiblockBEHelperMaster<State> helper = master.getHelper();
         ChemicalReactorLogic.State state = helper.getState();
         ChemicalReactorTanks tanks = state.tanks;

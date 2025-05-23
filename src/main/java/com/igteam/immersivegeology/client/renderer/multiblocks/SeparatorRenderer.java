@@ -15,6 +15,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOri
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.GravitySeparatorLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -43,6 +44,9 @@ public class SeparatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
     @Override
     public void render(MultiblockBlockEntityMaster<GravitySeparatorLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderGravitySeparator.get();
+        if(!doRendering) return;
+
         IMultiblockBEHelperMaster<GravitySeparatorLogic.State> helper = tile.getHelper();
         IMultiblockContext<GravitySeparatorLogic.State> context = helper.getContext();
         final MultiblockOrientation orientation = context.getLevel().getOrientation();

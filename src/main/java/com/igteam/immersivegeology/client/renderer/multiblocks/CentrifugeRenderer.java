@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CentrifugeLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -43,6 +44,9 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     @Override
     public void render(MultiblockBlockEntityMaster<CentrifugeLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderCentrifuge.get();
+        if(!doRendering) return;
+
         IMultiblockBEHelperMaster<CentrifugeLogic.State> helper = tile.getHelper();
         IMultiblockContext<CentrifugeLogic.State> context = helper.getContext();
 

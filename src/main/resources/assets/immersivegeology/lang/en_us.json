@@ -40,6 +40,7 @@
   "skin.immersivegeology.steelblue8": "SteelBlue8's",
   "skin.immersivegeology.crimsontwilight": "Crimson Twilight's",
   "skin.immersivegeology.wanderingbeekeeper": "WanderingBeekeeper's",
+  "skin.immersivegeology.unschtalch": "UnSchtalch's",
 
   "skin.immersivegeology.gravity_separator.default": "Old Faithful",
   "skin.immersivegeology.gravity_separator.hazard": "Hazard",
@@ -312,6 +313,9 @@
   "fluid.immersivegeology.cloudy_complex_slurry": "Cloudy %1$s%2$s Acid",
   "fluid.immersivegeology.cloudy_slurry": "Cloudy %1$s %2$s",
 
+  "material.immersivegeology.steam": "Steam",
+  "material.immersivegeology.highpressuresteam": "High Pressure Steam",
+
   "material.immersivegeology.millerite": "Millerite",
   "material.immersivegeology.vanilla": "Stone",
   "material.immersivegeology.sandstone": "Sandstone",
@@ -483,24 +487,6 @@
   "desc.immersiveengineering.info.multiblock.IE:HydroJetCutter":"Hydrojet Cutter",
   "desc.immersiveengineering.info.multiblock.IE:ReverberationFurnace":"Reverberation Furnace",
   "desc.immersiveengineering.info.multiblock.IE:RotaryKiln":"Rotary Kiln",
-  "desc.immersivegeology.schematic_table": "Schematic Table",
-
-  "item.immersivegeology.drawing_table": "Schematic Table",
-  "item.immersivegeology.blueprint_multiblock_plans.specific": "%s Schematics",
-  "item.immersivegeology.blueprint_multiblock_plans": "Blank Schematic",
-  "desc.immersivegeology.info.blueprint.size": "%s",
-  "desc.immersivegeology.info.blueprint.block_info": "Hold [%s] for Materials",
-  "desc.immersivegeology.info.blueprint.no_multiblock": "Blank Schematics",
-  "desc.immersivegeology.info.blueprint.moved": "Schematic Moved",
-  "desc.immersivegeology.info.blueprint.rotated": "Schematic Rotated",
-  "desc.immersivegeology.info.blueprint.placed": "(Creative Only) Schematic Placed",
-  "desc.immersivegeology.info.blueprint.tier": "This can be formed using the %s",
-  "desc.immersivegeology.info.blueprint.ie_tier": "Engineer's Hammer",
-  "desc.immersivegeology.info.blueprint.ig_tier_0": "???",
-  "desc.immersivegeology.info.blueprint.ig_tier_1": "Stone Work Hammer",
-  "desc.immersivegeology.info.blueprint.ig_tier_2": "Bronze Work Hammer",
-  "desc.immersivegeology.info.blueprint.ig_tier_3": "Engineer's Hammer",
-  "desc.immersivegeology.info.blueprint.ig_tier_4": "Stainless Steel Work Hammer",
 
   "desc.immersiveengineering.info.mineral.lead_bearing_sulfide" : "Lead-bearing Sulfides",
   "desc.immersiveengineering.info.mineral.copper_bearing_sulfide" : "Copper-bearing Sulfides",

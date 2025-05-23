@@ -1,0 +1,80 @@
+{
+  "variants": {
+    "facing=east,geothermal_exchanger=default,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,geothermal_exchanger=default,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,geothermal_exchanger=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,geothermal_exchanger=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north,geothermal_exchanger=default,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_split",
+      "uvlock": true
+    },
+    "facing=north,geothermal_exchanger=default,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_mirrored_split",
+      "uvlock": true
+    },
+    "facing=north,geothermal_exchanger=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_split",
+      "uvlock": true
+    },
+    "facing=north,geothermal_exchanger=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_mirrored_split",
+      "uvlock": true
+    },
+    "facing=south,geothermal_exchanger=default,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,geothermal_exchanger=default,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,geothermal_exchanger=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,geothermal_exchanger=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,geothermal_exchanger=default,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,geothermal_exchanger=default,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_default_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,geothermal_exchanger=steampunk,mirrored=false": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,geothermal_exchanger=steampunk,mirrored=true": {
+      "model": "immersivegeology:block/geothermal_exchanger_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

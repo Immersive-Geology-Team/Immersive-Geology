@@ -1,0 +1,151 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic": false,
+  "inner_model": {
+    "parent": "minecraft:block/block",
+    "automatic_culling": false,
+    "flip_v": true,
+    "loader": "forge:obj",
+    "model": "immersivegeology:models/block/multiblock/obj/geothermal_exchanger/geothermal_exchanger.obj",
+    "textures": {
+      "geothermal_exchanger": "immersivegeology:block/multiblock/geothermal_exchanger/default",
+      "particle": "immersivegeology:block/multiblock/geothermal_exchanger/default"
+    }
+  },
+  "loader": "immersiveengineering:basic_split",
+  "split_parts": [
+    [
+      1,
+      -4,
+      0
+    ],
+    [
+      0,
+      -3,
+      0
+    ],
+    [
+      2,
+      -3,
+      0
+    ],
+    [
+      0,
+      -2,
+      0
+    ],
+    [
+      2,
+      -2,
+      0
+    ],
+    [
+      0,
+      -1,
+      0
+    ],
+    [
+      2,
+      -1,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      -1
+    ],
+    [
+      2,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      2,
+      1,
+      -1
+    ],
+    [
+      0,
+      -4,
+      0
+    ],
+    [
+      2,
+      -4,
+      0
+    ],
+    [
+      -1,
+      0,
+      -1
+    ],
+    [
+      -1,
+      0,
+      0
+    ],
+    [
+      -1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      -1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      3,
+      0,
+      -1
+    ],
+    [
+      3,
+      0,
+      0
+    ],
+    [
+      3,
+      0,
+      1
+    ]
+  ],
+  "textures": {
+    "particle": "immersivegeology:block/multiblock/geothermal_exchanger/default"
+  }
+}

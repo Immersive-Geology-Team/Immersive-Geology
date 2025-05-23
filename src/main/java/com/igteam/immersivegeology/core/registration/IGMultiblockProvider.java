@@ -78,6 +78,11 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN)
             .build();
 
+    public static final MultiblockRegistration<GeothermalExchangerLogic.State> GEOTHERMAL_EXCHANGER = metal_skinnable(new GeothermalExchangerLogic(), "geothermal_exchanger", false, GeothermalPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("geothermal_exchanger"))
+            .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .build();
+
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
     IGMultiblockBuilder<S> metal_skinnable(
             IMultiblockLogic<S> logic,
