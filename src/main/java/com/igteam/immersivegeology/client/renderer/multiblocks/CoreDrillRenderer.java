@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -51,6 +52,9 @@ public class CoreDrillRenderer extends IGBlockEntityRenderer<MultiblockBlockEnti
     @Override
     public void render(MultiblockBlockEntityMaster<CoreDrillLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderCoreDrill.get();
+        if(!doRendering) return;
+
         final IMultiblockBEHelperMaster<CoreDrillLogic.State> helper = tile.getHelper();
         final IMultiblockContext<CoreDrillLogic.State> context = helper.getContext();
         final MultiblockOrientation orientation = context.getLevel().getOrientation();

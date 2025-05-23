@@ -48,45 +48,49 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		generateCrystallizerModel("crystallizer", IGMultiblockProvider.CRYSTALLIZER.block());
 		generateCoredrillMultiblock("coredrill_item", IGMultiblockProvider.COREDRILL.block());
 		generateSeparatorModel("gravity_separator", IGMultiblockProvider.GRAVITY_SEPARATOR.block());
-		generateRotaryKilnModel("rotarykiln", IGMultiblockProvider.ROTARYKILN.block());
+		generateRotaryKilnModel("rotarykiln_item", IGMultiblockProvider.ROTARYKILN.block());
 		generateReverberationFurnaceModel("reverberation_furnace", IGMultiblockProvider.REVERBERATION_FURNACE.block());
 		generateChemicalReactorModel("chemical_reactor", IGMultiblockProvider.CHEMICAL_REACTOR.block());
 		generateBloomeryModel(IGMultiblockProvider.BLOOMERY.block());
+		generateGeothermalExchanger(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.block());
 
 		generatePelletizerModel("pelletizer_item", IGMultiblockProvider.PELLETIZER.block());
 		generateBallmillModel("display_ballmill", IGMultiblockProvider.BALLMILL.block());
-		generateSluiceModel("trommel", IGMultiblockProvider.TROMMEL.block());
 		generateCentrifugeMultiblock("centrifuge", IGMultiblockProvider.CENTRIFUGE.block());
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Complex Item Models");
 	}
 
-	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale){
+	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, ItemDisplayContext type, @Nullable Vector3f translation, @Nullable Vector3f rotationAngle, float scale)
+	{
 		ModelBuilder<?>.TransformsBuilder.TransformVecBuilder trans = transform.transform(type);
-		if(translation != null)
+		if(translation!=null)
 			trans.translation(translation.x(), translation.y(), translation.z());
-		if(rotationAngle != null)
+		if(rotationAngle!=null)
 			trans.rotation(rotationAngle.x(), rotationAngle.y(), rotationAngle.z());
 		trans.scale(scale);
 		trans.end();
 	}
 
-	private TRSRModelBuilder obj(Supplier<? extends ItemLike> item, String model){
+	private TRSRModelBuilder obj(Supplier<? extends ItemLike> item, String model)
+	{
 		return obj(item.get(), model);
 	}
 
-	private TRSRModelBuilder obj(ItemLike item, String model){
+	private TRSRModelBuilder obj(ItemLike item, String model)
+	{
 		return getBuilder(name(item))
 				.customLoader(ObjModelBuilder::begin)
-				.modelLocation(modLoc("models/" + model)).flipV(true).end();
+				.modelLocation(modLoc("models/"+model)).flipV(true).end();
 	}
 
-	private String name(ItemLike item){
+	private String name(ItemLike item)
+	{
 		return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
 	}
 
 	private void generateCentrifugeMultiblock(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -94,14 +98,14 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
-		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0f,2,0), new Vector3f(30, -45, 0), 0.175F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0f, 2, 0), new Vector3f(30, -45, 0), 0.175F);
 		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
 	private void generateCoredrillMultiblock(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/coredrill/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/coredrill/"+id+".obj");
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -116,7 +120,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generatePelletizerModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/pelletizer/" + id + ".obj").texture("pelletizer", new ResourceLocation(IGLib.MODID, "block/multiblock/pelletizer/default"));
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/pelletizer/"+id+".obj").texture("pelletizer", new ResourceLocation(IGLib.MODID, "block/multiblock/pelletizer/default"));
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -131,7 +135,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generateBallmillModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/ballmill/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/ballmill/"+id+".obj");
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -141,6 +145,21 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
 		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(-1, -2f, 0), new Vector3f(30, 45, 0), 0.15F);
 		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(0, -1f, 0), null, 0.125F);
+		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
+	}
+
+	private void generateGeothermalExchanger(Supplier<? extends ItemLike> block)
+	{
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/geothermal_exchanger/geothermal_exchanger.obj").texture("geothermal_exchanger", new ResourceLocation(IGLib.MODID, "block/multiblock/geothermal_exchanger/default"));
+
+		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, new Vector3f(-1.75F, 2.5F, 1.75F), new Vector3f(0, 225, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
+		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0, -1.75f, 0), new Vector3f(20, -25, 0), 0.25F);
+		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.1875F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
@@ -154,14 +173,14 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
-		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(0, -1.75f, 0), new Vector3f(20, -25, 0), 0.25F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(-3, -2, 0), new Vector3f(30, 45, 0), 0.3F);
 		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.1875F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
 	private void generateRotaryKilnModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/rotarykiln/"+id+".obj");
 		model.texture("rotarykiln", "block/multiblock/rotarykiln/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -169,14 +188,14 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, new Vector3f(-0.75F, 0, -1.25F), new Vector3f(0, 90, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, new Vector3f(1.0F, 0, -1.75F), new Vector3f(0, 270, 0), 0.03125F);
 		doTransform(trans, ItemDisplayContext.HEAD, new Vector3f(0, 8, -8), null, 0.2F);
-		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(-4, -3f, 0), new Vector3f(30, 225, 0), 0.15F);
+		doTransform(trans, ItemDisplayContext.GUI, new Vector3f(2, -1f, 0), new Vector3f(30, 225, 0), 0.14F);
 		doTransform(trans, ItemDisplayContext.GROUND, new Vector3f(-1.5F, 3, -1.5F), null, 0.0625F);
 		doTransform(trans, ItemDisplayContext.FIXED, new Vector3f(-1, -8, -2), null, 0.0625F);
 	}
 
 	private void generateChemicalReactorModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 
 		model.texture("chemical_reactor", "block/multiblock/chemical_reactor/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
@@ -192,7 +211,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generateSeparatorModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 		model.texture("gravity_separator", "block/multiblock/gravity_separator/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -207,7 +226,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generateSluiceModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -222,7 +241,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generateCrystallizerModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 		model.texture("crystallizer", "block/multiblock/crystallizer/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);
@@ -237,7 +256,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private void generateReverberationFurnaceModel(String id, Supplier<? extends ItemLike> block)
 	{
-		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+ id + "/" + id + ".obj");
+		TRSRModelBuilder model = obj(block, "block/multiblock/obj/"+id+"/"+id+".obj");
 		model.texture("reverberation_furnace", "block/multiblock/reverberation_furnace/default");
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, new Vector3f(-1.75F, 2.5F, 1.25F), new Vector3f(0, 225, 0), 0.03125F);

@@ -66,6 +66,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
@@ -373,6 +374,8 @@ public class IGRecipes extends RecipeProvider
 				}
 			}
 		}
+
+		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 250)).addInput(FluidTags.WATER, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/water_to_steam"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium, MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);

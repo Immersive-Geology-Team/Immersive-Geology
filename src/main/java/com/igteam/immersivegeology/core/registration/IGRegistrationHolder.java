@@ -480,11 +480,12 @@ public class IGRegistrationHolder {
         registerMB("chemical_reactor", IGChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.CHEMICAL_REACTOR, IGChemicalReactorSkins.class);
         registerMB("rotarykiln", IGRotaryKilnMultiblock.INSTANCE, IGMultiblockProvider.ROTARYKILN, IGRotaryKilnSkins.class);
         registerMB("reverberation_furnace", IGReverberationFurnaceMultiblock.INSTANCE, IGMultiblockProvider.REVERBERATION_FURNACE, IGRevFurnaceSkins.class);
+        registerMB("geothermal_exchanger", IGGeothermalExchangerMultiblock.INSTANCE, IGMultiblockProvider.GEOTHERMAL_EXCHANGER, IGGeothermalSkins.class);
+        registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER, IGPelletizerSkins.class);
+
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
-        registerMB("trommel", IGTrommelMultiblock.INSTANCE, IGMultiblockProvider.TROMMEL);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
-        registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER, IGPelletizerSkins.class);
         registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);
     }
 

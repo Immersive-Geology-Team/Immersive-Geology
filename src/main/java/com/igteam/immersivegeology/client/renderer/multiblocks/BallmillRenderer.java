@@ -18,6 +18,7 @@ import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -47,6 +48,9 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
     @Override
     public void render(MultiblockBlockEntityMaster<BallmillLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderBallmill.get();
+        if(!doRendering) return;
+
         IMultiblockBEHelperMaster<BallmillLogic.State> helper = tile.getHelper();
         IMultiblockContext<BallmillLogic.State> context = helper.getContext();
 

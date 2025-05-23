@@ -42,6 +42,7 @@ public class JEIIntegration implements IModPlugin
 		IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(new IGSeparatorCategory(guiHelper));
 		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
+		registration.addRecipeCategories(new IGGeothermalExchangerCategory(guiHelper));
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
 		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
@@ -64,6 +65,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.BALLMILL, getRecipes(BallmillRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.PELLETIZER, getRecipes(PelletizerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CENTRIFUGE, getRecipes(CentrifugeRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.GEOTHERMAL_EXCHANGER, getRecipes(GeothermalExchangerRecipe.RECIPES));
 	}
 
 
@@ -78,6 +80,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BALLMILL.iconStack(), JEIRecipeTypes.BALLMILL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.PELLETIZER.iconStack(), JEIRecipeTypes.PELLETIZER);
+		registration.addRecipeCatalyst(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.iconStack(), JEIRecipeTypes.GEOTHERMAL_EXCHANGER);
 	}
 
 	@Override

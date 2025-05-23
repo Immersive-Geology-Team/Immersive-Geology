@@ -23,6 +23,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogi
 import com.igteam.immersivegeology.common.block.multiblocks.part.PelletizerPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGPelletizerSkins;
+import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -63,6 +64,9 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     @Override
     public void render(MultiblockBlockEntityMaster<PelletizerLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
+        boolean doRendering = IGClientConfig.doSpecialRenderPelletizer.get();
+        if(!doRendering) return;
+
         IMultiblockBEHelperMaster<PelletizerLogic.State> helper = tile.getHelper();
         IMultiblockContext<PelletizerLogic.State> context = helper.getContext();
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

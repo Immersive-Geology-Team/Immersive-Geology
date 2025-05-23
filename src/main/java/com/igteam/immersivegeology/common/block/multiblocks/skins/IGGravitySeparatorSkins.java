@@ -21,10 +21,10 @@ import java.util.Locale;
 public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "muddykat"),
+	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER,"muddykat"),
 	GREEN("green", ChatFormatting.DARK_GREEN, SkinCreditType.PETER, "peter"),
 	HAZARD("hazard", ChatFormatting.DARK_RED, SkinCreditType.DEVELOPER, "muddykat"),
-	STEAMPUNK("steampunk", ChatFormatting.GOLD, SkinCreditType.CREATOR, "wanderingbeekeeper"),
-	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER,"muddykat");
+	STEAMPUNK("steampunk", ChatFormatting.GOLD, SkinCreditType.CREATOR, "wanderingbeekeeper");
 
 	private final String skin;
 	private final SkinCreditType type;

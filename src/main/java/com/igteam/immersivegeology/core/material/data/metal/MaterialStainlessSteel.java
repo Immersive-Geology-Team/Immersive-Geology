@@ -45,6 +45,7 @@ public class MaterialStainlessSteel extends MaterialMetalAlloy
         validMultiblocks.add(() -> IGBallmillMultiblock.INSTANCE);
         validMultiblocks.add(() -> IGCrystalizerMultiblock.INSTANCE);
         validMultiblocks.add(() -> IGFoundryMultiblock.INSTANCE);
+        validMultiblocks.add(() -> IGGeothermalExchangerMultiblock.INSTANCE);
 
         validMultiblocks.add(() -> IEMultiblocks.BLAST_FURNACE);
         validMultiblocks.add(() -> IEMultiblocks.SILO);

@@ -134,11 +134,14 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.REVERBERATION_FURNACE.block().get(), "reverberation_furnace", true, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.ROTARYKILN.block().get(),"rotarykiln", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.PELLETIZER.block().get(), "pelletizer", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.block().get(), "geothermal_exchanger", false, false, true, true);
+
         genericmultiblock("foundry");
-        genericmultiblock("trommel");
         genericmultiblockMirror("coredrill");
         genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
+
+        //genericmultiblock("trommel");
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }
 
