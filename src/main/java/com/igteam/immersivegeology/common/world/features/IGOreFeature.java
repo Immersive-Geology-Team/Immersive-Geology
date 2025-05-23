@@ -113,7 +113,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		int veinMinY = config.entry().getMinY();
 		int veinMaxY = config.entry().getMaxY();
 		double associateChance = config.getConfig().associateChance.get();
-		boolean useFriendMaterials = associateChance > random.nextDouble();
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
@@ -139,7 +138,7 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 					// Process this section
 					processChunkSection(
 							level, random, currentChunk, sectionMinY, sectionMaxY,
-							vein, useFriendMaterials, parentMaterial, friends, centerChunk
+							vein, associateChance, config.getDensity(), parentMaterial, friends, centerChunk
 					);
 				}
 			}
@@ -147,13 +146,16 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	}
 
 	private static void processChunkSection(
-			LevelAccessor level, RandomSource random, ChunkAccess chunk, int minY, int maxY, Vein vein, boolean useFriendMaterials,
-			MaterialInterface<?> parentMaterial, Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends, ChunkPos centerChunkPos) {
+			LevelAccessor level, RandomSource random, ChunkAccess chunk, int minY, int maxY, Vein vein, double associateChance,
+			double density, MaterialInterface<?> parentMaterial,
+			Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends, ChunkPos centerChunkPos) {
 		ChunkPos chunkPos = chunk.getPos();
 
 		for (int y = minY; y < maxY; y++) {
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
+					if(density < random.nextFloat()) continue;
+					boolean useFriendMaterials = associateChance > random.nextDouble();
 					MaterialHelper reusableFriendMaterial = useFriendMaterials ? getFriendMaterial(random, y, friends) : null;
 					BlockPos pos = chunkPos.getBlockAt(x,y,z);
 					double noiseValue = IGOreGenUtils.noise(chunkPos, x,y,z, vein, centerChunkPos);

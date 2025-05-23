@@ -25,27 +25,6 @@ public class IGRenderTypes extends RenderStateShard
 	}
 
 	static final RenderStateShard.DepthTestStateShard DEPTH_ALWAYS = new RenderStateShard.DepthTestStateShard("greater", GL11.GL_LESS);
-	public static final RenderType BLUEPRINT;
-
-	static final RenderStateShard.ShaderStateShard BLUEPRINT_SHADER = new RenderStateShard.ShaderStateShard(IGShaders::getBlueprintShader);
-	static
-	{
-		BLUEPRINT = RenderType.create(
-				typeName("rendertype_blueprint"),
-				DefaultVertexFormat.BLOCK,
-				Mode.QUADS,
-				RenderType.BIG_BUFFER_SIZE,
-				true,
-				true,
-				RenderType.CompositeState.builder()
-						.setShaderState(BLUEPRINT_SHADER)
-						.setTextureState(RenderStateShard.BLOCK_SHEET_MIPPED)
-						.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-						.setOutputState(TRANSLUCENT_TARGET)
-						.setDepthTestState(DEPTH_ALWAYS)
-						.createCompositeState(false)
-				);
-	}
 
 	private static String typeName(String str){
 		return IGLib.MODID + ":" + str;

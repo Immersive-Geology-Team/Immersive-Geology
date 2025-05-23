@@ -123,21 +123,14 @@ public class ChemicalReactorRenderer extends IGBlockEntityRenderer<MultiblockBlo
             renderFluidSides(faceoffset, fluidTexture, matrix, matrix4f, matrix3f, builder, color, percent);
         }
 
-        // Top
-        if (percent != 1.0f){
-            this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
-            matrix.translate(faceoffset,0,0);
-            this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
+        this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
+        matrix.translate(faceoffset,0,0);
+        this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
 
-            matrix.translate(0,0,-faceoffset);
-            this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
-            matrix.translate(-faceoffset,0,0);
-            this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
-        }
-
-
-
-
+        matrix.translate(0,0,-faceoffset);
+        this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
+        matrix.translate(-faceoffset,0,0);
+        this.renderTopFluidFace(fluidTexture, matrix4f, matrix3f, builder, color, percent);
         matrix.popPose();
     }
 

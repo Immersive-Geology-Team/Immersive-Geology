@@ -1,0 +1,9 @@
+{
+  "entries": [
+    "immersivegeology:shipwreck_treasure_loot",
+    "immersivegeology:simple_dungeon_loot",
+    "immersivegeology:woodland_mansion_loot",
+    "immersivegeology:desert_pyramid_loot"
+  ],
+  "replace": false
+}

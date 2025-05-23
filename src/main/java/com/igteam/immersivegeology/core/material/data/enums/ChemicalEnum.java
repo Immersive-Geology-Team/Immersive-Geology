@@ -29,8 +29,8 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     SodiumHydroxide(new MaterialSodiumHydroxide()),
     AquaRegia(new MaterialAquaRegia()),
     Ammonia(new MaterialAmmoniaSolution()),
-    ChemicalWaste(new MaterialChemicalWaste());
-
+    ChemicalWaste(new MaterialChemicalWaste()),
+    PhosphoricAcid(new MaterialPhosphoricAcid());
     private final MaterialChemical material;
     ChemicalEnum(MaterialChemical m){
         this.material = m;

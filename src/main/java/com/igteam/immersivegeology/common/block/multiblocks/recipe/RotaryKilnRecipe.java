@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 public class RotaryKilnRecipe extends MultiblockRecipe
 {
@@ -32,20 +33,23 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	public final Lazy<ItemStack> itemOutput;
 	public final IngredientWithSize itemIn;
 	Lazy<Integer> totalProcessEnergy;
+	Lazy<Integer> heatRequired;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> RotaryKilnRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> output, int energy, int time)
+	public <T extends Recipe<?>> RotaryKilnRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> output, int time, int heat)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.ROTARYKILN, id);
 		this.itemOutput = output;
 		this.itemIn = input;
-		totalProcessEnergy = Lazy.of(() -> energy);
+		// Basic upkeep
+		totalProcessEnergy = Lazy.of(() -> time);
+		heatRequired = Lazy.of(() -> heat);
 		totalProcessTime = Lazy.of(() -> time);
 		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer()
+	public @NotNull RecipeSerializer<?> getSerializer()
 	{
 		return SERIALIZER.get();
 	}
@@ -54,6 +58,11 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	public int getTotalProcessEnergy()
 	{
 		return totalProcessEnergy.get();
+	}
+
+	public int getHeatRequired()
+	{
+		return heatRequired.get();
 	}
 
 	@Override
@@ -65,7 +74,7 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	public static RotaryKilnRecipe findRecipe(Level level, ItemStack input)
 	{
 		for(RotaryKilnRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(input))
+			if(recipe.itemIn.testIgnoringSize(input))
 				return recipe;
 		return null;
 	}
@@ -79,6 +88,6 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 4;
+		return 1;
 	}
 }

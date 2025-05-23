@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/apatite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_apatite"
+  },
+  "time": 200
+}

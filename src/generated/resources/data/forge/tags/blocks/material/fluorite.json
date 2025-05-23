@@ -1,40 +1,148 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_fluorite_andesite",
-    "immersivegeology:tfc_normal_ore_block_fluorite_andesite",
-    "immersivegeology:tfc_rich_ore_block_fluorite_andesite",
-    "immersivegeology:tfc_poor_ore_block_fluorite_basalt",
-    "immersivegeology:tfc_normal_ore_block_fluorite_basalt",
-    "immersivegeology:tfc_rich_ore_block_fluorite_basalt",
-    "immersivegeology:tfc_poor_ore_block_fluorite_dacite",
-    "immersivegeology:tfc_normal_ore_block_fluorite_dacite",
-    "immersivegeology:tfc_rich_ore_block_fluorite_dacite",
-    "immersivegeology:tfc_poor_ore_block_fluorite_rhyolite",
-    "immersivegeology:tfc_normal_ore_block_fluorite_rhyolite",
-    "immersivegeology:tfc_rich_ore_block_fluorite_rhyolite",
-    "immersivegeology:tfc_poor_ore_block_fluorite_diorite",
-    "immersivegeology:tfc_normal_ore_block_fluorite_diorite",
-    "immersivegeology:tfc_rich_ore_block_fluorite_diorite",
-    "immersivegeology:tfc_poor_ore_block_fluorite_gabbro",
-    "immersivegeology:tfc_normal_ore_block_fluorite_gabbro",
-    "immersivegeology:tfc_rich_ore_block_fluorite_gabbro",
-    "immersivegeology:tfc_poor_ore_block_fluorite_granite",
-    "immersivegeology:tfc_normal_ore_block_fluorite_granite",
-    "immersivegeology:tfc_rich_ore_block_fluorite_granite",
-    "immersivegeology:minecraft_poor_ore_block_fluorite_stone",
-    "immersivegeology:minecraft_normal_ore_block_fluorite_stone",
-    "immersivegeology:minecraft_rich_ore_block_fluorite_stone",
-    "immersivegeology:minecraft_poor_ore_block_fluorite_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_fluorite_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_fluorite_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_fluorite_andesite",
-    "immersivegeology:minecraft_normal_ore_block_fluorite_andesite",
-    "immersivegeology:minecraft_rich_ore_block_fluorite_andesite",
-    "immersivegeology:minecraft_poor_ore_block_fluorite_diorite",
-    "immersivegeology:minecraft_normal_ore_block_fluorite_diorite",
-    "immersivegeology:minecraft_rich_ore_block_fluorite_diorite",
-    "immersivegeology:minecraft_poor_ore_block_fluorite_granite",
-    "immersivegeology:minecraft_normal_ore_block_fluorite_granite",
-    "immersivegeology:minecraft_rich_ore_block_fluorite_granite"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_fluorite_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_fluorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_fluorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_fluorite_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_fluorite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_fluorite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_fluorite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_fluorite_granite",
+      "required": false
+    }
   ]
 }

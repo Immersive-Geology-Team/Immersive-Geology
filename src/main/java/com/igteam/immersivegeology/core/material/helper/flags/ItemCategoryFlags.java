@@ -39,6 +39,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     DRILL_HEAD(4),
     MISC(4),
     BLUEPRINT(4),
+    SKIN_COMPONENT(4),
+    TOOL_HOE(4),
     SEDIMENT(0);
 
     private final int groupOrdinal;
@@ -82,7 +84,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     {
         return switch(this)
         {
-            case INGOT, GEAR, NUGGET, PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD -> true;
+            case INGOT, GEAR, NUGGET, PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD, TOOL_HOE -> true;
             default -> false;
         };
     }

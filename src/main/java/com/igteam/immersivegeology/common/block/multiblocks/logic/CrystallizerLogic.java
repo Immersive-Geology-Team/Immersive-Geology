@@ -21,7 +21,6 @@ import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -40,6 +39,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -64,7 +64,7 @@ import java.util.function.Function;
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
 
-    private static final int ENERGY_CAPACITY = 48000;
+    public static final int ENERGY_CAPACITY = 48000;
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,1,2, RelativeBlockFace.BACK);
@@ -269,7 +269,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         }
 
         @Override
-        public IFluidTank[] getInternalTanks()
+        public FluidTank[] getInternalTanks()
         {
             return new FluidTank[]{tank, output_tank};
         }
@@ -278,6 +278,13 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         public int[] getOutputTanks()
         {
             return new int[]{1};
+        }
+
+        public float getPercentComplete(Level level)
+        {
+            if(this.processor.getQueue().isEmpty()) return 0;
+            MultiblockProcess<CrystallizerRecipe, ProcessContextInMachine<CrystallizerRecipe>> process = this.processor.getQueue().get(0);
+            return (float)process.processTick/ process.getMaxTicks(level);
         }
 
         @Override
@@ -292,5 +299,4 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
             return energy;
         }
     }
-
 }

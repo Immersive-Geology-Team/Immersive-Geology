@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:crushed_ore/apatite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_apatite"
+  },
+  "time": 800
+}

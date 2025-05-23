@@ -49,8 +49,8 @@ public class MaterialCopper extends MaterialNativeMetal {
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(
-            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xB66E3D),
-                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0x3D8B8B)));
+            List.of(MaterialColorHelper.weatheredColor(MineralWeathering.PRISTINE, 0xffB66E3D),
+                    MaterialColorHelper.weatheredColor(MineralWeathering.TARNISHED, 0xff3D8B8B)));
 
     @Override
     protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()

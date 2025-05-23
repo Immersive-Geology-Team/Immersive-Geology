@@ -9,6 +9,7 @@ M
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -48,9 +49,11 @@ public class MaterialMolybdenum extends MaterialMetal {
                 ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Molybdenite),
                 IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400);
 
+
+        // Based on MoS2 -> MoO3 ~ Muddykat
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, 153600);
+                1, 300).setMVHeat();
     }
 }

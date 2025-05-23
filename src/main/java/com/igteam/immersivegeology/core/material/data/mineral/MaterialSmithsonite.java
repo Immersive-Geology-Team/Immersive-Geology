@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -56,7 +57,7 @@ public class MaterialSmithsonite extends MaterialMineral {
     {
         super.setupRecipeStages();
         IGRecipeNode slag =  IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
-                ItemCategoryFlags.CRUSHED_ORE, 1,300, 153600).addOptionalToTree(directBlasting);
+                ItemCategoryFlags.CRUSHED_ORE, 1,300).setLVHeat().addOptionalToTree(directBlasting);
 
         IGRecipeNode p_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG).addToTree(directBlasting, slag);

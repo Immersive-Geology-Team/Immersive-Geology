@@ -36,10 +36,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
@@ -325,4 +322,10 @@ public interface MaterialHelper {
     };
 
 	default DrillHeadProps drillHeadInstance() {return new DrillHeadProps(getName(), IETags.getTagsFor(EnumMetals.STEEL).ingot, 3, 1, Tiers.DIAMOND, 10.0F, 7, 10000, () -> ImmersiveEngineering.rl("item/drill_diesel"));};
+
+	default int getToolDamage() {return 3;};
+
+    default int getToolSpeed()  {return 3;};
+
+    default Tier getToolTier() {return Tiers.IRON;};
 }

@@ -126,6 +126,6 @@
   "loader": "forge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/bloomery/bloomery.obj",
   "textures": {
-    "bloomery": "immersivegeology:block/multiblock/bloomery/bloomery"
+    "bloomery": "immersivegeology:block/multiblock/bloomery/default"
   }
 }

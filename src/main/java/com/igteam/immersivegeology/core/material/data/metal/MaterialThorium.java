@@ -52,6 +52,10 @@ public class MaterialThorium extends MaterialRadioactiveMetal
         IGMethodBuilder.crystallize(this, IGStageDesignation.REFINEMENT).create(
                 ChemicalEnum.HydrofluoricAcid,
                 ItemCategoryFlags.CRYSTAL);
+
+        IGMethodBuilder.crystallize(this, IGStageDesignation.REFINEMENT).create(
+                ChemicalEnum.NitricAcid,
+                ItemCategoryFlags.CRYSTAL);
     }
 
     @Override

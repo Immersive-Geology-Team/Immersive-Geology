@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:rotarykiln",
-  "energy": 614400,
+  "heat": 165,
   "input": {
     "tag": "forge:powders/tungstencarbide"
   },

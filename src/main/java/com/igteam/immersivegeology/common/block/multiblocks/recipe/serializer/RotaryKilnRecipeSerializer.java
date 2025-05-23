@@ -35,9 +35,9 @@ public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRec
 	{
 		Lazy<ItemStack> output = readOutput(json.get("result"));
 		IngredientWithSize input = IngredientWithSize.deserialize(GsonHelper.getAsJsonObject(json, "input"));
-		int energy = GsonHelper.getAsInt(json, "energy");
 		int time = GsonHelper.getAsInt(json, "time");
-		return new RotaryKilnRecipe(resourceLocation, input, output, energy, time);
+		int heat = GsonHelper.getAsInt(json, "heat");
+		return new RotaryKilnRecipe(resourceLocation, input, output, time, heat);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRec
 	{
 		Lazy<ItemStack> output = readLazyStack(buffer);
 		IngredientWithSize input = IngredientWithSize.read(buffer);
-		int energy = buffer.readInt();
 		int time = buffer.readInt();
-		return new RotaryKilnRecipe(resourceLocation, input, output, energy, time);
+		int heat = buffer.readInt();
+		return new RotaryKilnRecipe(resourceLocation, input, output, time, heat);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRec
 	{
 		writeLazyStack(buffer, recipe.itemOutput);
 		recipe.itemIn.write(buffer);
-		buffer.writeInt(recipe.getTotalProcessEnergy());
 		buffer.writeInt(recipe.getTotalProcessTime());
+		buffer.writeInt(recipe.getHeatRequired());
 	}
 }

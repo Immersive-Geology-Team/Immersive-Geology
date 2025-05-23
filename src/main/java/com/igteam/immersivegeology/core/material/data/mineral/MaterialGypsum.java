@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -43,7 +44,7 @@ public class MaterialGypsum extends MaterialMineral {
 
         IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                 "crushed_ore_"+getName()+"_to_metal_oxide", MetalEnum.Calcium.getStack(ItemCategoryFlags.METAL_OXIDE),
-                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300, 153600);
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1, 300).setHVHeat();
     }
 
     @Override

@@ -27,6 +27,7 @@ public class CommonProxy
 	{
 		IGMultiblockProvider.forceClassLoad();
 		IGRegistrationHolder.initialize();
+		IGRegistrationHolder.initializeLootModifications();
 		IGTags.initialize();
 		IGWorldGen.init();
 		IGRecipeTypes.init();

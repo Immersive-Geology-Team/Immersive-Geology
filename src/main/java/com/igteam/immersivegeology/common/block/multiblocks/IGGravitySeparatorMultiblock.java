@@ -21,7 +21,7 @@ public class IGGravitySeparatorMultiblock extends IGTemplateMultiblock {
     public static final IGGravitySeparatorMultiblock INSTANCE = new IGGravitySeparatorMultiblock();
 
     public IGGravitySeparatorMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/gravityseparator"), new BlockPos(1,0,1),
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/gravity_separator"), new BlockPos(1,0,1),
                 new BlockPos(1,1,2),
                 new BlockPos(3, 6, 3),
                 IGMultiblockProvider.GRAVITY_SEPARATOR);

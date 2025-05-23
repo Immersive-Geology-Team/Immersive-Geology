@@ -7,27 +7,27 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.Multibloc
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
+import com.igteam.immersivegeology.common.block.multiblocks.part.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.function.BiFunction;
+
 public class IGMultiblockProvider {
-    public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = IGRegistrationHolder.registerMetalMultiblock("crystallizer", new CrystallizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"),
-            builder -> {
-                builder.redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = metal_skinnable(new CrystallizerLogic(), "crystallizer", false, CrystallizerPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"))
+            .gui(IGMenuTypes.CRYSTALLIZER)
+            .redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN)
+            .build();
 
-    public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = IGRegistrationHolder.registerMetalMultiblock("gravityseparator", new GravitySeparatorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("gravityseparator"),
-            builder -> {
-                builder.redstone(state -> state.rsState, GravitySeparatorLogic.REDSTONE_IN);
-            });
-
-    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = IGRegistrationHolder.registerMetalMultiblock("rotarykiln", new RotaryKilnLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"),
-            builder -> {
-                builder.redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotarykiln", false, RotaryKilnPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"))
+            .redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.ROTARY_KILN)
+            .build();
 
     public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),
             builder -> {
@@ -39,7 +39,7 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);
             });
 
-    public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = mirroredStone(new RevFurnaceLogic(), "reverberation_furnace", false)
+    public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = stone_skinnable(new RevFurnaceLogic(),"reverberation_furnace", false, RevFurnacePart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"))
             .gui(IGMenuTypes.REVERBERATION_FURNACE)
             .build();
@@ -48,15 +48,20 @@ public class IGMultiblockProvider {
             builder -> {
                 builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
             });
-    public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone(new BloomeryLogic(), "bloomery", false)
-            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
-            .gui(IGMenuTypes.BLOOMERY)
+    public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
+                    .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
+                    .gui(IGMenuTypes.BLOOMERY)
             .build();
 
-    public static final MultiblockRegistration<ChemicalReactorLogic.State> CHEMICAL_REACTOR = IGRegistrationHolder.registerMetalMultiblock("chemical_reactor", new ChemicalReactorLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("chemical_reactor"),
-            builder -> {
-                builder.redstone(state -> state.rsState, ChemicalReactorLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<GravitySeparatorLogic.State> GRAVITY_SEPARATOR = metal_skinnable(new GravitySeparatorLogic(), "gravity_separator", false, GravitySeparatorPart::new)
+                    .structure(() -> IGRegistrationHolder.getMBTemplate.apply("gravity_separator"))
+                    .redstone(state -> state.rsState, GravitySeparatorLogic.REDSTONE_IN)
+                    .build();
+
+    public static final MultiblockRegistration<ChemicalReactorLogic.State> CHEMICAL_REACTOR = metal_skinnable(new ChemicalReactorLogic(), "chemical_reactor", false, ChemicalReactorPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("chemical_reactor"))
+            .gui(IGMenuTypes.CHEMICAL_REACTOR)
+            .redstone(state -> state.rsState, ChemicalReactorLogic.REDSTONE_IN).build();
 
     public static final MultiblockRegistration<CentrifugeLogic.State> CENTRIFUGE = IGRegistrationHolder.registerMetalMultiblock("centrifuge", new CentrifugeLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("centrifuge"),
             builder -> {
@@ -68,10 +73,66 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, BallmillLogic.REDSTONE_IN);
             });
 
-    public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = IGRegistrationHolder.registerMetalMultiblock("pelletizer", new PelletizerLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"),
-            builder -> {
-                builder.redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = metal_skinnable(new PelletizerLogic(), "pelletizer", false, PelletizerPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"))
+            .redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN)
+            .build();
+
+    private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
+    IGMultiblockBuilder<S> metal_skinnable(
+            IMultiblockLogic<S> logic,
+            String name,
+            boolean solid,
+            BiFunction<Properties, MultiblockRegistration<S>, B> blockCtor
+    )
+    {
+        Properties props = Properties.of()
+                .sound(SoundType.METAL)
+                .mapColor(MapColor.STONE)
+                .instrument(NoteBlockInstrument.BASEDRUM)
+                .strength(2, 20);
+        return skinnable(logic, name, solid, blockCtor, props);
+    }
+
+    private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
+    IGMultiblockBuilder<S> stone_skinnable(
+            IMultiblockLogic<S> logic,
+            String name,
+            boolean solid,
+            BiFunction<Properties, MultiblockRegistration<S>, B> blockCtor
+    )
+    {
+        Properties props = Properties.of()
+                .sound(SoundType.NETHER_BRICKS)
+                .mapColor(MapColor.STONE)
+                .instrument(NoteBlockInstrument.BASEDRUM)
+                .strength(2, 20);
+        return skinnable(logic, name, solid, blockCtor, props);
+    }
+
+    private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
+    IGMultiblockBuilder<S> skinnable(
+            IMultiblockLogic<S> logic,
+            String name,
+            boolean solid,
+            BiFunction<Properties, MultiblockRegistration<S>, B> blockCtor, Properties props
+    )
+    {
+
+        if(!solid)
+            props.noOcclusion();
+        else
+            props.forceSolidOn();
+
+        return new IGMultiblockBuilder<>(logic, name)
+                .customBlock(
+                        IGRegistrationHolder.getBlockRegister(),
+                        IGRegistrationHolder.getItemRegister(),
+                        reg -> blockCtor.apply(props, reg),
+                        MultiblockItem::new
+                )
+                .defaultBEs(IGRegistrationHolder.getTeRegister());
+    }
 
     private static <S extends IMultiblockState> IGMultiblockBuilder<S> stone(IMultiblockLogic<S> logic, String name, boolean solid)
     {
@@ -79,7 +140,6 @@ public class IGMultiblockProvider {
                 .sound(SoundType.NETHER_BRICKS)
                 .mapColor(MapColor.STONE)
                 .instrument(NoteBlockInstrument.BASEDRUM)
-                .forceSolidOn()
                 .strength(2, 20);
         if(!solid)
             properties.noOcclusion();

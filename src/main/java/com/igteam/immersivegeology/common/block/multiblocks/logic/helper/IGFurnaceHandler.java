@@ -14,18 +14,13 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +37,7 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 	private int burnTime = 0;
 	private int lastBurnTime = 0;
 
-	public final StateView stateView = new StateView();
+	public final IGFurnaceStateView stateView = new IGFurnaceStateView();
 
 	private final int fuelSlot;
 	private final List<InputSlot<R>> inputs;
@@ -251,7 +246,7 @@ public class IGFurnaceHandler<R extends IESerializableRecipe>
 		}
 	}
 
-	public class StateView implements ContainerData
+	public class IGFurnaceStateView implements ContainerData
 	{
 		public static final int LAST_BURN_TIME = 0;
 		public static final int BURN_TIME = 1;

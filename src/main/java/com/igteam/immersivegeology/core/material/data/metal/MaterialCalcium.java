@@ -30,6 +30,8 @@ import net.minecraft.world.item.Items;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
+
 public class MaterialCalcium extends MaterialMetal {
 
     //Too reactive, cannot be smelted or used in pure form
@@ -80,7 +82,7 @@ public class MaterialCalcium extends MaterialMetal {
 
         IGRecipeNode decompose = IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                  ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST,1,
-                300, 153600).addToTree(ammonia_synthesis);
+                300).setHVHeat().addToTree(ammonia_synthesis);
 
         decompose.addChild(smelting);
     }

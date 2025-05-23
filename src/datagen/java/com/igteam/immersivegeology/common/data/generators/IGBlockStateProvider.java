@@ -14,6 +14,8 @@ import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMultiSkinBlock;
 import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
 import com.igteam.immersivegeology.common.block.ore.IGWeatheringOreBlock;
@@ -47,6 +49,7 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -124,26 +127,26 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // All Multiblock Data generation code has been copied from the Immersive Engineering Codebase
         // Minor modifications have been made to allow it to generate multiblock splits and data for Immersive Geology.
         // If you're having trouble using this code yourself in attempts to generate multiblocks, I'd highly suggest looking at source code in the IE Repository.
-        genericmultiblockMirror("crystallizer");
-        generateBloomeryMultiblock();
-        genericmultiblock("gravityseparator");
-        genericmultiblock("trommel");
+        generateMultiskinMultiblock(IGMultiblockProvider.BLOOMERY.block().get(), "bloomery", true, false, true, false);
+        generateMultiskinMultiblock(IGMultiblockProvider.CRYSTALLIZER.block().get(), "crystallizer", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.GRAVITY_SEPARATOR.block().get(), "gravity_separator", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.CHEMICAL_REACTOR.block().get(), "chemical_reactor", false, false,true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.REVERBERATION_FURNACE.block().get(), "reverberation_furnace", true, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.ROTARYKILN.block().get(),"rotarykiln", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.PELLETIZER.block().get(), "pelletizer", false, false, true, true);
         genericmultiblock("foundry");
-        genericmultiblock("chemical_reactor");
-        genericmultiblockMirror("rotarykiln");
+        genericmultiblock("trommel");
         genericmultiblockMirror("coredrill");
-        genericmultiblockMirror("reverberation_furnace");
         genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
-        genericmultiblockMirror("pelletizer");
         IGLib.IG_LOGGER.info("-===== Finished Registration of Immersive Geology Block States =====-");
     }
 
     private void generateBloomeryMultiblock()
     {
-        ModelFile bloomery = bloomeryModel("bloomery", rl("block/multiblock/bloomery/bloomery"));
-        ModelFile bloomery_active = bloomeryModel("bloomery_active", rl("block/multiblock/bloomery/bloomery_burning"));
-        createMultiblock(IGMultiblockProvider.BLOOMERY.block(), bloomery, bloomery_active, IEProperties.ACTIVE);
+//        ModelFile bloomery = bloomeryModel("bloomery", rl("block/multiblock/bloomery/bloomery"));
+//        ModelFile bloomery_active = bloomeryModel("bloomery_active", rl("block/multiblock/bloomery/bloomery_burning"));
+//        createMultiblock(IGMultiblockProvider.BLOOMERY.block(), bloomery, bloomery_active, IEProperties.ACTIVE);
     }
 
     private ModelFile bloomeryModel(String name, ResourceLocation texture)
@@ -152,6 +155,104 @@ public class IGBlockStateProvider extends BlockStateProvider {
         IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply("bloomery");
         return split(m, template);
     }
+
+    private <T extends Enum<T> & IIGMultiSkinHelper & StringRepresentable> void generateMultiskinMultiblock(Block block, String multiname, boolean hasActiveForm, boolean useActiveModels, boolean hasMirrorForm, boolean useMirrorModels)
+    {
+        if (!(block instanceof IMultiSkinBlock<?> skinBlock)) {
+            throw new IllegalArgumentException("Block " + block + " does not implement IMultiSkinBlock");
+        }
+        @SuppressWarnings("unchecked")
+        IMultiSkinBlock<T> typed = (IMultiSkinBlock<T>) skinBlock;
+
+        EnumProperty<T> skinProp = typed.getSkinProperty();
+        Class<T> skinClass   = typed.getSkinClass();
+
+        IGTemplateMultiblock template = (IGTemplateMultiblock)
+                IGRegistrationHolder.getMBTemplate.apply(multiname);
+        DirectionProperty facing = IEProperties.FACING_HORIZONTAL;
+
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+
+        // Properties
+        BooleanProperty activeProp = hasActiveForm ? IEProperties.ACTIVE : null;
+        BooleanProperty mirrorProp = hasMirrorForm ? IEProperties.MIRRORED : null;
+
+        boolean[] activeStates = hasActiveForm ? new boolean[]{ false, true } : new boolean[]{ false };
+        boolean[] mirrorStates = hasMirrorForm ? new boolean[]{ false, true } : new boolean[]{ false };
+
+        // === loop skins ===
+        for (T skin : skinClass.getEnumConstants()) {
+            String skinName = skin.getSerializedName();
+
+            // === loop active states ===
+            for (boolean active : activeStates) {
+                String activeStr = (active && hasActiveForm) ? "_active" : "";
+                ResourceLocation skinTex = rl("block/multiblock/" + multiname + "/" + skinName + activeStr);
+
+                // Determine base model location based on active state and useActiveModels flag
+                String baseModelName = multiname;
+                if (active && hasActiveForm && useActiveModels) {
+                    baseModelName += "_active";
+                }
+
+                // === loop mirror states ===
+                for (boolean mirrored : mirrorStates) {
+                    // Determine full model name based on mirror state and useMirrorModels flag
+                    String mirrorStr = (mirrored && hasMirrorForm) ? "_mirrored" : "";
+                    String mirrorModelName = baseModelName;
+                    if (mirrored && hasMirrorForm && useMirrorModels) {
+                        mirrorModelName += "_mirrored";
+                    }
+
+                    NongeneratedModel modelOBJ = obj(
+                            multiname+"_"+skinName+activeStr+mirrorStr,
+                            rl("block/multiblock/obj/"+multiname+"/"+mirrorModelName+".obj"),
+                            ImmutableMap.of(multiname, skinTex),
+                            innerModels
+                    );
+
+                    //
+                    // Build the model
+                    ModelFile modelToUse = split(
+                            modelOBJ,
+                            template,
+                            mirrored
+                    );
+
+                    // === loop facing ===
+                    for (Direction dir : facing.getPossibleValues()) {
+                        // compute rotations
+                        final int angleX, angleY;
+                        if (facing.getPossibleValues().contains(Direction.UP)) {
+                            angleX = -90 * dir.getStepY();
+                            angleY = (dir.getAxis() != Axis.Y) ? getAngle(dir, 180) : 0;
+                        } else {
+                            angleX = 0;
+                            angleY = getAngle(dir, 180);
+                        }
+
+                        // build the PartialBlockstate
+                        PartialBlockstate state = builder
+                                .partialState()
+                                .with(skinProp, skin)
+                                .with(facing, dir);
+
+                        if (hasActiveForm) {
+                            state = state.with(activeProp, active);
+                        }
+
+                        if (hasMirrorForm) {
+                            state = state.with(mirrorProp, mirrored);
+                        }
+
+                        // set the model
+                        state.setModels(new ConfiguredModel(modelToUse, angleX, angleY, true));
+                    }
+                }
+            }
+        }
+    }
+
 
     private void registerSlabBlock(IGBlockType igBlock)
     {
@@ -867,7 +968,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         String suffix = name.getPath().contains(".")?"": ".json";
         Preconditions.checkState(
-                existingFileHelper.exists(name, PackType.CLIENT_RESOURCES, suffix, "models"),
+                existingFileHelper.exists(name, CLIENT_RESOURCES, suffix, "models"),
                 "Model \""+name+"\" does not exist");
     }
 

@@ -80,6 +80,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         setRenderType(IGMultiblockProvider.REVERBERATION_FURNACE.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
         setRenderType(IGMultiblockProvider.BLOOMERY.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
         setRenderType(IGMultiblockProvider.GRAVITY_SEPARATOR.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
+        setRenderType(IGMultiblockProvider.ROTARYKILN.block().get(), RenderTypeSkeleton.CUTOUT_MIPPED);
     }
 
     // Initialize the keys and mappings for render layers

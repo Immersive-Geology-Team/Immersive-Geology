@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotarykiln",
+  "heat": 120,
+  "input": {
+    "tag": "forge:metal_oxide/uranium"
+  },
+  "result": {
+    "item": "immersiveengineering:ingot_uranium"
+  },
+  "time": 300
+}

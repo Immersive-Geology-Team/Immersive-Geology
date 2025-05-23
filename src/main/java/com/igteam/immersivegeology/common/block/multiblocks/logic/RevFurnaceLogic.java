@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
@@ -22,6 +23,7 @@ import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.metal.BlastFurnacePreheaterBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.AdvBlastFurnaceLogic;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
@@ -31,6 +33,8 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IFurnaceEnvironment;
@@ -104,6 +108,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
     @Override
     public void tickServer(IMultiblockContext<RevFurnaceLogic.State> context) {
         final State state = context.getState();
+        final IMultiblockLevel level = context.getLevel();
         state.active_left = state.furnace.tickServerLeft(context);
         state.active_right = state.furnace.tickServerRight(context);
         outputItems(state);
@@ -113,6 +118,12 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
             drainOutputTank(state, context, state.fluidOutput2);
         }
 
+        final boolean anyActive = state.active_left || state.active_right;
+        final boolean wasActive = level.getBlockState(IGReverberationFurnaceMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(IEProperties.ACTIVE);
+        if(anyActive != wasActive)
+        {
+            NonMirrorableWithActiveBlock.setActive(level, IGReverberationFurnaceMultiblock.INSTANCE, anyActive);
+        }
         // Not the most optimal way to solve this issue.
         // But a sync request should be alright for this purpose for now.
         context.requestMasterBESync();

@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:phosphoricacid"
+  },
+  "fluidInputB": {
+    "amount": 250,
+    "tag": "forge:sodiumhydroxide"
+  },
+  "fluidInputC": {
+    "amount": 250,
+    "tag": "forge:ethanol"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:cloudy_slurry_phosphoricacid_uraninite"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powder_uraninite"
+  },
+  "itemResult": [],
+  "time": 200
+}

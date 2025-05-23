@@ -13,21 +13,18 @@ import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.RemoveFeaturesBiomeModifier;
 import net.minecraftforge.common.world.ModifiableBiomeInfo.BiomeInfo.Builder;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public record IGOreRemovalModifier() implements BiomeModifier
 {
@@ -37,13 +34,36 @@ public record IGOreRemovalModifier() implements BiomeModifier
 		return IGWorldGen.ORE_MODIFIER_CODEC.get();
 	}
 
+	private Set<ResourceLocation> getBlacklistedBiomes()
+	{
+		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+	}
+
+	private static final BooleanValue isDebugLogEnabled = IGServerConfig.REMOVAL.logProcess;
 	@Override
 	public void modify(Holder<Biome> holder, Phase phase, Builder builder)
 	{
 		if (phase == Phase.REMOVE)
 		{
-			List<String> oresToRemove = new ArrayList<>();
+			boolean canLog = isDebugLogEnabled.get();
+			if(holder.getTagKeys().anyMatch(((b) ->
+			{
+				if(getBlacklistedBiomes().contains(b.location()))
+				{
+					if(canLog)
+					{
+						IGLib.IG_LOGGER.info("Ore Removal Operation not permitted in Biomes with the '{}' tag", b);
+						IGLib.IG_LOGGER.info("Change Server Configuration File if this is not desired");
+					}
+					return true;
+				}
+				return false;
+			})))
+			{
+				return;
+			}
 
+			List<String> oresToRemove = new ArrayList<>();
 			if(IGServerConfig.REMOVAL.shouldRemoveIron.get())
 			{
 				oresToRemove.add("minecraft:ore_iron");

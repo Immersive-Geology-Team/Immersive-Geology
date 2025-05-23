@@ -1,5 +1,5 @@
 {
-  "type": "immersivegeology:gravityseparator",
+  "type": "immersivegeology:gravity_separator",
   "byproduct": {
     "item": "immersivegeology:metal_oxide_chromium"
   },

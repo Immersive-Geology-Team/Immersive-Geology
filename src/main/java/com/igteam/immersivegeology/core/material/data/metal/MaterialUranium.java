@@ -15,6 +15,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.function.BiFunction;
 
@@ -24,6 +26,7 @@ public class MaterialUranium extends MaterialRadioactiveMetal
         super();
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.STAIRS, BlockCategoryFlags.SLAB, BlockCategoryFlags.SHEETMETAL_SLAB);
+        addFlags(ItemCategoryFlags.COMPOUND_DUST);
     }
 
     @Override
@@ -34,5 +37,21 @@ public class MaterialUranium extends MaterialRadioactiveMetal
     @Override
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.ORTHORHOMBIC;
+    }
+
+
+    @Override
+    public void setupRecipeStages()
+    {
+        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.METAL_OXIDE,
+                ItemCategoryFlags.COMPOUND_DUST,
+                1, 300).setMVHeat();
+
+        //Fuck that, we sinter U oxides to ingot
+        IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
+                ItemCategoryFlags.INGOT,
+                ItemCategoryFlags.METAL_OXIDE,
+                1, 300).setHVHeat();
     }
 }

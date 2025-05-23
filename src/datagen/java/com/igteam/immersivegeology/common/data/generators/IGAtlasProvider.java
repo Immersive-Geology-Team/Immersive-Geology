@@ -37,8 +37,6 @@ public class IGAtlasProvider implements DataProvider {
 		setupAtlasJson();
 	}
 
-
-
 	private void setupAtlasJson() {
 		JsonObject atlasJson = new JsonObject();
 		JsonArray sourcesArray = new JsonArray();

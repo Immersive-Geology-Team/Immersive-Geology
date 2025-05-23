@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -44,7 +45,7 @@ public class MaterialSodium extends MaterialMetal
 		IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(
 				ItemCategoryFlags.METAL_OXIDE,
 				ItemCategoryFlags.COMPOUND_DUST,
-				1, 300, 153600);
+				1, 300).setMVHeat();
 
 		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(ItemCategoryFlags.METAL_OXIDE,
 				FluidTags.WATER, 64, ChemicalEnum.SodiumHydroxide.getFluid(BlockCategoryFlags.FLUID), 64);

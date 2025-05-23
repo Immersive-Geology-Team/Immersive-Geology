@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
@@ -40,20 +41,31 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.multiblocks.IGChemicalReactorMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.IGGravitySeparatorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGPositionalOverlayText;
+import com.igteam.immersivegeology.common.block.multiblocks.part.SkinableMultiblockPart;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.ChemicalReactorShape;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGChemicalReactorSkins;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGGravitySeparatorSkins;
+import com.igteam.immersivegeology.common.item.IGMultiblockSkinItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -68,7 +80,6 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -93,14 +104,14 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	private static final Set<BlockPos> TANK_RIGHT_POSITIONS;
 	private static final Set<BlockPos> TANK_FRONT_POSITIONS;
 	private static final Set<BlockPos> REACTOR_CHAMBER_POSITIONS;
-	private static final int ENERGY_CAPACITY;
+	public static final int ENERGY_CAPACITY = 64000;
 
 	static
 	{
 		ITEM_INPUT = new BlockPos(4, 5, 4);
-		ENERGY_POS = Set.of(new CapabilityPosition(6, 0, 6, RelativeBlockFace.BACK), new CapabilityPosition(6, 1, 6, RelativeBlockFace.BACK));
+		ENERGY_POS = Set.of(new CapabilityPosition(6, 1, 6, RelativeBlockFace.UP));
 		FLUID_OUTPUT = new MultiblockFace(5, 0, 8, RelativeBlockFace.BACK);
-		ITEM_OUTPUT = new MultiblockFace(3, 0, 9, RelativeBlockFace.BACK);
+		ITEM_OUTPUT = new MultiblockFace(3, 0, 8, RelativeBlockFace.BACK);
 		ITEM_INPUT_OUTPUT = new MultiblockFace(4, -1, 4, RelativeBlockFace.UP);
 		FLUID_OUTPUT_CAP = new CapabilityPosition(5, 0, 8, RelativeBlockFace.BACK);
 		FLUID_INPUT_CAPS = Set.of(new CapabilityPosition(0, 0, 5, RelativeBlockFace.RIGHT),
@@ -112,7 +123,6 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		TANK_RIGHT_POSITIONS = generateBlockPositions(new BlockPos(7,1,4), new BlockPos(8,3,5));
 		TANK_FRONT_POSITIONS = generateBlockPositions(new BlockPos(3,1,7), new BlockPos(4,3,8));
 		REACTOR_CHAMBER_POSITIONS = generateBlockPositions(new BlockPos(3,1,3), new BlockPos(5,4,5));
-		ENERGY_CAPACITY = 64000;
 	}
 
 	@Override
@@ -171,14 +181,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		ChemicalRecipe recipe = state.getRecipeForInputs(level);
 		if(recipe!=null)
 		{
-			MultiblockProcessInMachine<ChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0)
-			{
-				@Override
-				protected void outputItem(ProcessContextInMachine<ChemicalRecipe> context, ItemStack output, IMultiblockLevel level)
-				{
-					state.output.insertOrDrop(output, level);
-				}
-			};
+			MultiblockProcessInMachine<ChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0);
 			process.setInputAmounts(recipe.itemInput.getCount());
 			int size = (fluidTanks.leftInput.isEmpty()?0: 1)
 					+(fluidTanks.backInput.isEmpty()?0: 1)
@@ -266,6 +269,9 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			{
 				return state.itemInputCap.cast(ctx);
 			}
+			if(position.posInMultiblock().equals(ITEM_OUTPUT.posInMultiblock()) && position.side() == ITEM_OUTPUT.face()){
+				return state.outputHandler.cast(ctx);
+			}
 		}
 
 		return LazyOptional.empty();
@@ -340,7 +346,6 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 
 		public final SlotwiseItemHandler inventory;
 		private final StoredCapability<IItemHandler> itemInputCap;
-		private final DroppingMultiblockOutput output;
 		private final CapabilityReference<IItemHandler> input_output;
 		private final StoredCapability<IItemHandler> outputHandler;
 
@@ -358,11 +363,11 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
 			final Runnable markDirty = ctx.getMarkDirtyRunnable();
 			this.energyCap = new StoredCapability<>(this.energy);
+
 			this.inventory = new SlotwiseItemHandler(List.of(
 					new IOConstraint(true, i -> ChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),
-					IOConstraint.OUTPUT), ctx.getMarkDirtyRunnable());
-
-			this.output = new DroppingMultiblockOutput(ITEM_OUTPUT, ctx);
+					IOConstraint.OUTPUT
+			), ctx.getMarkDirtyRunnable());
 			this.input_output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_INPUT_OUTPUT);
 
 			this.outputHandler = new StoredCapability<>(new WrappingItemHandler(
@@ -370,7 +375,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			));
 
 			this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side(), FLUID_OUTPUT_CAP.posInMultiblock().south()));
-			this.processor = new InMachineProcessor<>(16, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
+			this.processor = new InMachineProcessor<>(4, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
 
 			this.inputCapLeft = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.leftInput));
 			this.inputCapBack = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.backInput));
@@ -378,7 +383,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			this.outputCap = new StoredCapability<>(ArrayFluidHandler.drainOnly(this.tanks.output, markDirty));
 			cachedRecipe = () -> ChemicalRecipe.findRecipe(getLevel.get(), tanks.leftInput.getFluid(), tanks.backInput.getFluid(), tanks.rightInput.getFluid(), inventory.getStackInSlot(0));
 			this.itemInputCap = new StoredCapability<>(this.inventory);
-			this.dummy = new InMachineProcessor<>(16, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
+			this.dummy = new InMachineProcessor<>(4, 0, 4, ctx.getMarkDirtyRunnable(), ChemicalRecipe.RECIPES::getById);
 		}
 
 		@Override
@@ -450,6 +455,11 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		public IFluidTank[] getInternalTanks()
 		{
 			return new FluidTank[]{tanks.leftInput, tanks.backInput, tanks.rightInput, tanks.output};
+		}
+
+		public ChemicalReactorTanks getChemicalReactorTanks()
+		{
+			return this.tanks;
 		}
 
 		@Override
@@ -564,5 +574,4 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			return TANK_BUFFER_CAPACITY;
 		}
 	}
-
 }

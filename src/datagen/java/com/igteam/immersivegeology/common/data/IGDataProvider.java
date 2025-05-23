@@ -1,6 +1,7 @@
 package com.igteam.immersivegeology.common.data;
 
 import com.igteam.immersivegeology.common.data.generators.*;
+import com.igteam.immersivegeology.common.data.generators.loot.IGLootModifierProvider;
 import com.igteam.immersivegeology.common.data.generators.loot.IGLootProvider;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -46,6 +47,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out));
+        generator.addProvider(runServer, new IGLootModifierProvider(out));
         generator.addProvider(runServer, new IGRecipes(out));
 
         if(ModFlags.TFC.isStrictlyLoaded()) {

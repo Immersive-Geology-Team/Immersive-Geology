@@ -19,6 +19,8 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.base.Suppliers;
+import com.igteam.immersivegeology.common.block.multiblocks.part.ChemicalReactorPart;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGChemicalReactorSkins;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -80,7 +82,6 @@ public class IGClientMultiblockProperties implements ClientMultiblocks.Multibloc
                 // Skip dummy blocks in total
                 if(info.state().hasProperty(IEProperties.MULTIBLOCKSLAVE) && info.state().getValue(IEProperties.MULTIBLOCKSLAVE))
                     continue;
-
                 ItemStack picked = Utils.getPickBlock(info.state());
                 boolean added = false;
                 for(ItemStack existing:this.materials)

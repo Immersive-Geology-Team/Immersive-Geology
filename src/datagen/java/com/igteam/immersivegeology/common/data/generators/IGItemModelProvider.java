@@ -53,6 +53,11 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
         List<? extends Item> itemList = IGRegistrationHolder.supplyDeferredItems().get();
 
         for (Item item : itemList) {
+            if(item instanceof IGMultiblockSkinItem<?> skin)
+            {
+                generateGenericSkinItem(skin);
+                continue;
+            }
             if(item instanceof IGGenericOreItem i){
                 generateGenericOreItem(i);
                 continue;
@@ -72,7 +77,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
             }
             if(item instanceof IGFlagItem i)
             {
-                if(i instanceof IGMineralTestingItem||i instanceof IGMBFormationItem)
+                if(i instanceof IGMineralTestingItem||i instanceof IGMBFormationItem || i instanceof IGCustomTool)
                 {
                     generateToolItem(i);
                     continue;
@@ -115,8 +120,29 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     private String name(ItemLike item) {
         return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
     }
+
     private void generateGenericItem(IGFlagItem item){
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+
+        try {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()));
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
+            }
+        } catch (Exception ex) {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
+            }
+        }
+    }
+
+    private void generateGenericSkinItem(IGMultiblockSkinItem<?> item){
+        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getRegistryName()).getPath();
 
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");

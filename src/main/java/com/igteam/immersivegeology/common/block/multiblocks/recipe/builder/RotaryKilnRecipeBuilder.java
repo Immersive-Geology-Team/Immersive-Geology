@@ -35,6 +35,13 @@ public class RotaryKilnRecipeBuilder extends IEFinishedRecipe<RotaryKilnRecipeBu
 		return new RotaryKilnRecipeBuilder().addResult(result);
 	}
 
+	public RotaryKilnRecipeBuilder setHeat(int heat)
+	{
+		return this.addWriter((jsonObject) -> {
+			jsonObject.addProperty("heat", heat);
+		});
+	}
+
 	public static RotaryKilnRecipeBuilder builder(TagKey<Item> result, int count)
 	{
 		return new RotaryKilnRecipeBuilder().addResult(new IngredientWithSize(result, count));

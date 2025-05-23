@@ -8,10 +8,7 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.CentrifugeRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
-import com.igteam.immersivegeology.client.renderer.multiblocks.PelletizerRenderer;
+import com.igteam.immersivegeology.client.renderer.multiblocks.*;
 import com.igteam.immersivegeology.common.data.generators.IGDynamicModelProvider.SimpleModelBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -84,6 +81,12 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 		getBuilder(CentrifugeRenderer.DRUM_NAME)
 				.customLoader(ObjModelBuilder::begin)
 				.modelLocation(rl("models/block/multiblock/obj/centrifuge/centrifuge_spinner.obj"))
+				.flipV(true)
+				.end();
+
+		getBuilder(RotaryKilnRenderer.TUBE_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/rotarykiln/rotarykiln_tube.obj"))
 				.flipV(true)
 				.end();
 

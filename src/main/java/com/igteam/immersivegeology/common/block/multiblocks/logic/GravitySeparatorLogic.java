@@ -23,7 +23,7 @@ import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GravitySeparatorShape;
@@ -34,14 +34,12 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -59,11 +57,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
+public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(1, 1, 1);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,5,1, RelativeBlockFace.UP);
-
     private static final int MAX_PROCESSES = 64;
     private static final CapabilityPosition INPUT_POS = new CapabilityPosition(0, 1, 0, RelativeBlockFace.RIGHT);
     private static final MultiblockFace OUTPUT_POS = new MultiblockFace(3,0,1, RelativeBlockFace.RIGHT);
@@ -192,6 +189,7 @@ public class GravitySeparatorLogic implements IMultiblockLogic<GravitySeparatorL
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
+        if(state == null) return List.of();
         if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
         {
             return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));

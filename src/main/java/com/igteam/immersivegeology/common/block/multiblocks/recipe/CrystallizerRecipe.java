@@ -79,6 +79,6 @@ public class CrystallizerRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 4;
+		return 1;
 	}
 }

@@ -1,37 +1,136 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_osmium_andesite",
-    "immersivegeology:tfc_normal_ore_block_osmium_andesite",
-    "immersivegeology:tfc_rich_ore_block_osmium_andesite",
-    "immersivegeology:tfc_poor_ore_block_osmium_basalt",
-    "immersivegeology:tfc_normal_ore_block_osmium_basalt",
-    "immersivegeology:tfc_rich_ore_block_osmium_basalt",
-    "immersivegeology:tfc_poor_ore_block_osmium_dacite",
-    "immersivegeology:tfc_normal_ore_block_osmium_dacite",
-    "immersivegeology:tfc_rich_ore_block_osmium_dacite",
-    "immersivegeology:tfc_poor_ore_block_osmium_rhyolite",
-    "immersivegeology:tfc_normal_ore_block_osmium_rhyolite",
-    "immersivegeology:tfc_rich_ore_block_osmium_rhyolite",
-    "immersivegeology:tfc_poor_ore_block_osmium_chalk",
-    "immersivegeology:tfc_normal_ore_block_osmium_chalk",
-    "immersivegeology:tfc_rich_ore_block_osmium_chalk",
-    "immersivegeology:tfc_poor_ore_block_osmium_chert",
-    "immersivegeology:tfc_normal_ore_block_osmium_chert",
-    "immersivegeology:tfc_rich_ore_block_osmium_chert",
-    "immersivegeology:tfc_poor_ore_block_osmium_claystone",
-    "immersivegeology:tfc_normal_ore_block_osmium_claystone",
-    "immersivegeology:tfc_rich_ore_block_osmium_claystone",
-    "immersivegeology:tfc_poor_ore_block_osmium_conglomerate",
-    "immersivegeology:tfc_normal_ore_block_osmium_conglomerate",
-    "immersivegeology:tfc_rich_ore_block_osmium_conglomerate",
-    "immersivegeology:tfc_poor_ore_block_osmium_dolomite",
-    "immersivegeology:tfc_normal_ore_block_osmium_dolomite",
-    "immersivegeology:tfc_rich_ore_block_osmium_dolomite",
-    "immersivegeology:tfc_poor_ore_block_osmium_limestone",
-    "immersivegeology:tfc_normal_ore_block_osmium_limestone",
-    "immersivegeology:tfc_rich_ore_block_osmium_limestone",
-    "immersivegeology:tfc_poor_ore_block_osmium_shale",
-    "immersivegeology:tfc_normal_ore_block_osmium_shale",
-    "immersivegeology:tfc_rich_ore_block_osmium_shale"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_chalk",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_chert",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_claystone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_conglomerate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_dolomite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_limestone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_osmium_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_osmium_shale",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_osmium_shale",
+      "required": false
+    }
   ]
 }

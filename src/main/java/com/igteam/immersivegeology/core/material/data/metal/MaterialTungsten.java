@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -29,7 +30,7 @@ public class MaterialTungsten extends MaterialMetal {
         super();
         addFlags(ItemCategoryFlags.OXIDE_PELLET, BlockCategoryFlags.SCAFFOLDING, BlockCategoryFlags.FENCE, BlockCategoryFlags.ENGINEERING_BLOCK);
         removeMaterialFlags(ItemCategoryFlags.SLAG, ItemCategoryFlags.CRYSTAL);
-        addFlags(ItemCategoryFlags.POWDER);
+        addFlags(ItemCategoryFlags.POWDER, ItemCategoryFlags.MECHANICAL_COMPONENT);
     }
 
     @Override
@@ -57,9 +58,11 @@ public class MaterialTungsten extends MaterialMetal {
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 null,200, 51200);
 
+
+        // Ammonium paratungstate decomposes at ~600°C to yield WO₃ see https://en.wikipedia.org/wiki/Ammonium_paratungstate
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(
                 ItemCategoryFlags.METAL_OXIDE,
                 ItemCategoryFlags.COMPOUND_DUST,
-                1, 300, 153600);
+                1, 300).setMVHeat();
     }
 }

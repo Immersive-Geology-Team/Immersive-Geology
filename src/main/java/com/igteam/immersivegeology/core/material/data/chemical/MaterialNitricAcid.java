@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core.material.data.chemical;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
@@ -20,7 +21,7 @@ public class MaterialNitricAcid extends MaterialChemical
 
 	public MaterialNitricAcid()
 	{
-		super(MetalEnum.Chromium, MetalEnum.Cobalt, MetalEnum.Unobtanium);
+		super(MetalEnum.Chromium, MetalEnum.Cobalt, MetalEnum.Unobtanium, MineralEnum.Uraninite, MetalEnum.Thorium);
 	}
 
 	@Override

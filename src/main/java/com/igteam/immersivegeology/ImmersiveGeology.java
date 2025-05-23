@@ -61,6 +61,10 @@ public class ImmersiveGeology {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::enqueueIMC);
+
+        IGLib.IG_LOGGER.info("- Initializing IG Multiblocks");
+        IGRegistrationHolder.initializeMultiblocks();
+
         IGLib.IG_LOGGER.info("- Recipe Serializer Registration");
         IGRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
@@ -113,7 +117,8 @@ public class ImmersiveGeology {
         }
     }
 
-    private void supplyMaterialTint(){
+    private void supplyMaterialTint()
+    {
         Minecraft minecraft = Minecraft.getInstance();
 
         // Define the BiPredicate to check if a material has a specific flag

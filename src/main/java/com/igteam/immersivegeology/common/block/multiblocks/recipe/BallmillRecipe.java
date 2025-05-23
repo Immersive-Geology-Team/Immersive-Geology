@@ -27,19 +27,19 @@ public class BallmillRecipe extends MultiblockRecipe
 {
 	public static RegistryObject<IERecipeSerializer<BallmillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BallmillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BALLMILL);
-	public final Lazy<ItemStack> itemOutput;
+	public final IngredientWithSize itemOutput;
 	public final IngredientWithSize itemIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> BallmillRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> output, int energy, int time)
+	public <T extends Recipe<?>> BallmillRecipe(ResourceLocation id, IngredientWithSize input, IngredientWithSize output, int energy, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.BALLMILL, id);
 		this.itemOutput = output;
 		this.itemIn = input;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.getRandomizedExampleStack(0)));
 	}
 
 	@Override

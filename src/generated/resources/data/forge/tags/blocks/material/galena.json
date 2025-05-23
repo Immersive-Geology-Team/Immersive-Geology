@@ -1,43 +1,160 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_galena_gneiss",
-    "immersivegeology:tfc_normal_ore_block_galena_gneiss",
-    "immersivegeology:tfc_rich_ore_block_galena_gneiss",
-    "immersivegeology:tfc_poor_ore_block_galena_marble",
-    "immersivegeology:tfc_normal_ore_block_galena_marble",
-    "immersivegeology:tfc_rich_ore_block_galena_marble",
-    "immersivegeology:tfc_poor_ore_block_galena_phyllite",
-    "immersivegeology:tfc_normal_ore_block_galena_phyllite",
-    "immersivegeology:tfc_rich_ore_block_galena_phyllite",
-    "immersivegeology:tfc_poor_ore_block_galena_quartzite",
-    "immersivegeology:tfc_normal_ore_block_galena_quartzite",
-    "immersivegeology:tfc_rich_ore_block_galena_quartzite",
-    "immersivegeology:tfc_poor_ore_block_galena_schist",
-    "immersivegeology:tfc_normal_ore_block_galena_schist",
-    "immersivegeology:tfc_rich_ore_block_galena_schist",
-    "immersivegeology:tfc_poor_ore_block_galena_slate",
-    "immersivegeology:tfc_normal_ore_block_galena_slate",
-    "immersivegeology:tfc_rich_ore_block_galena_slate",
-    "immersivegeology:minecraft_poor_ore_block_galena_stone",
-    "immersivegeology:minecraft_normal_ore_block_galena_stone",
-    "immersivegeology:minecraft_rich_ore_block_galena_stone",
-    "immersivegeology:minecraft_poor_ore_block_galena_deepslate",
-    "immersivegeology:minecraft_normal_ore_block_galena_deepslate",
-    "immersivegeology:minecraft_rich_ore_block_galena_deepslate",
-    "immersivegeology:minecraft_poor_ore_block_galena_andesite",
-    "immersivegeology:minecraft_normal_ore_block_galena_andesite",
-    "immersivegeology:minecraft_rich_ore_block_galena_andesite",
-    "immersivegeology:minecraft_poor_ore_block_galena_diorite",
-    "immersivegeology:minecraft_normal_ore_block_galena_diorite",
-    "immersivegeology:minecraft_rich_ore_block_galena_diorite",
-    "immersivegeology:minecraft_poor_ore_block_galena_granite",
-    "immersivegeology:minecraft_normal_ore_block_galena_granite",
-    "immersivegeology:minecraft_rich_ore_block_galena_granite",
-    "immersivegeology:minecraft_poor_ore_block_galena_basalt",
-    "immersivegeology:minecraft_normal_ore_block_galena_basalt",
-    "immersivegeology:minecraft_rich_ore_block_galena_basalt",
-    "immersivegeology:minecraft_poor_ore_block_galena_netherrack",
-    "immersivegeology:minecraft_normal_ore_block_galena_netherrack",
-    "immersivegeology:minecraft_rich_ore_block_galena_netherrack"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_galena_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_deepslate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_galena_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_galena_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_galena_netherrack",
+      "required": false
+    }
   ]
 }

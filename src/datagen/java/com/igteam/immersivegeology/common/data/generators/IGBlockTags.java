@@ -98,23 +98,10 @@ public class IGBlockTags extends BlockTagsProvider
 			if(block.get() instanceof IOreBlock oreBlock)
 			{
 				Block ore = block.get();
-				List<MaterialInterface<?>> materials = List.copyOf(oreBlock.getMaterials());
-
-				for(Set<IFlagType<?>> flag_sets : materials.stream().map(MaterialInterface::getFlags).collect(Collectors.toSet()))
-				{
-					for(IFlagType<?> flag : flag_sets)
-					{
-						if(flag instanceof ModFlags mod)
-						{
-							if(!(mod.equals(ModFlags.MINECRAFT) || mod.equals(ModFlags.IMMERSIVEENGINEERING))) useOptionalTag = true;
-						}
-					}
-				}
+				if(!oreBlock.getStoneMaterial().hasFlag(ModFlags.MINECRAFT) || !oreBlock.getStoneMaterial().hasFlag(ModFlags.IMMERSIVEENGINEERING)) useOptionalTag = true;
 
 				TagKey<Block> ore_material_tag = oreBlock.getOreMaterial().getBlockMaterialTag();
 				TagKey<Block> ore_block = BlockCategoryFlags.ORE_BLOCK.getCategoryTag();
-				tag(ore_material_tag).add(ore);
-				tag(ore_block).add(ore);
 
 				if(useOptionalTag) {
 					useOptionalTag = false;
@@ -123,7 +110,8 @@ public class IGBlockTags extends BlockTagsProvider
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(Tags.Blocks.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
-
+					tag(ore_material_tag).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(ore_block).addOptional(new ResourceLocation(IGLib.MODID, id));
 					if(ModFlags.TFC.isStrictlyLoaded())
 					{
 						tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -135,6 +123,8 @@ public class IGBlockTags extends BlockTagsProvider
 					continue;
 				}
 
+				tag(ore_material_tag).add(ore);
+				tag(ore_block).add(ore);
 				tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ore);
 				tag(BlockTags.NEEDS_STONE_TOOL).add(ore);
 				tag(Tags.Blocks.ORES).add(ore);

@@ -1,37 +1,136 @@
 {
   "values": [
-    "immersivegeology:tfc_poor_ore_block_cobaltite_diorite",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_diorite",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_diorite",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_gabbro",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_gabbro",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_gabbro",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_granite",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_granite",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_granite",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_gneiss",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_gneiss",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_gneiss",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_marble",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_marble",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_marble",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_phyllite",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_phyllite",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_phyllite",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_quartzite",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_quartzite",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_quartzite",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_schist",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_schist",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_schist",
-    "immersivegeology:tfc_poor_ore_block_cobaltite_slate",
-    "immersivegeology:tfc_normal_ore_block_cobaltite_slate",
-    "immersivegeology:tfc_rich_ore_block_cobaltite_slate",
-    "immersivegeology:minecraft_poor_ore_block_cobaltite_basalt",
-    "immersivegeology:minecraft_normal_ore_block_cobaltite_basalt",
-    "immersivegeology:minecraft_rich_ore_block_cobaltite_basalt",
-    "immersivegeology:minecraft_poor_ore_block_cobaltite_netherrack",
-    "immersivegeology:minecraft_normal_ore_block_cobaltite_netherrack",
-    "immersivegeology:minecraft_rich_ore_block_cobaltite_netherrack"
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_diorite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_gabbro",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_granite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_gneiss",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_marble",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_phyllite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_quartzite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_schist",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_cobaltite_slate",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cobaltite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cobaltite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cobaltite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cobaltite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cobaltite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cobaltite_netherrack",
+      "required": false
+    }
   ]
 }

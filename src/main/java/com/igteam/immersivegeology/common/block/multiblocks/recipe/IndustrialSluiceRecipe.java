@@ -90,7 +90,7 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 64;
+		return 1;
 	}
 
 	public NonNullList<StackWithChance> getByproducts()

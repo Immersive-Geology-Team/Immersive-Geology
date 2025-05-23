@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:ig_loot_modification",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/woodland_mansion"
+    },
+    {
+      "chance": 0.5,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "items": [
+    "immersivegeology:gravity_separator_multiblock_skin_green"
+  ]
+}
