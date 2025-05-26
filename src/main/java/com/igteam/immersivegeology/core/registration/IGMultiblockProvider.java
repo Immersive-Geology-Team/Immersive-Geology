@@ -81,6 +81,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<GeothermalExchangerLogic.State> GEOTHERMAL_EXCHANGER = metal_skinnable(new GeothermalExchangerLogic(), "geothermal_exchanger", false, GeothermalPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("geothermal_exchanger"))
             .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.GEOTHERMAL_EXCHANGER)
             .build();
 
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
