@@ -76,35 +76,33 @@ public class ChemicalReactorRenderer extends IGBlockEntityRenderer<MultiblockBlo
         {
             BlockPos tankPos = tanks.getLeftTankPos(mirrored);
             float fillPercent = (float) leftTank.getAmount()/ tank_capacity;
-            renderFluidInTank(master.getLevel(), tankPos, leftTank, poseStack, multiBufferSource, fillPercent);
+            renderFluidInTank(tankPos, leftTank, poseStack, multiBufferSource, fillPercent);
         }
 
         if(!rightTank.isEmpty())
         {
             BlockPos tankPos = tanks.getRightTankPos(mirrored);
             float fillPercent = (float) rightTank.getAmount() / tank_capacity;
-            renderFluidInTank(master.getLevel(), tankPos, rightTank, poseStack, multiBufferSource, fillPercent);
+            renderFluidInTank(tankPos, rightTank, poseStack, multiBufferSource, fillPercent);
         }
 
         if(!backTank.isEmpty())
         {
             BlockPos tankPos = tanks.getBackTankPos(mirrored);
             float fillPercent = (float) backTank.getAmount() / tank_capacity;
-            renderFluidInTank(master.getLevel(), tankPos, backTank, poseStack, multiBufferSource, fillPercent);
+            renderFluidInTank(tankPos, backTank, poseStack, multiBufferSource, fillPercent);
         }
 
         if(!outputTank.isEmpty())
         {
             BlockPos tankPos = tanks.getOutputTankPos(mirrored);
             float fillPercent = (float) outputTank.getAmount() / tank_capacity;
-            renderFluidInTank(master.getLevel(), tankPos, outputTank, poseStack, multiBufferSource, fillPercent);
+            renderFluidInTank(tankPos, outputTank, poseStack, multiBufferSource, fillPercent);
         }
     }
 
-
-
     // Code is Fluid Render Code is sourced from ITank by EwyBoy
-    private void renderFluidInTank(BlockAndTintGetter world, BlockPos pos, FluidStack fluidStack, PoseStack matrix, MultiBufferSource buffer, float percent) {
+    private void renderFluidInTank(BlockPos pos, FluidStack fluidStack, PoseStack matrix, MultiBufferSource buffer, float percent) {
         matrix.pushPose();
         matrix.translate(0.5d, 0.5d, 0.5d);
         // This offest ensures the tank render is aligned to the pixels of the multiblock.

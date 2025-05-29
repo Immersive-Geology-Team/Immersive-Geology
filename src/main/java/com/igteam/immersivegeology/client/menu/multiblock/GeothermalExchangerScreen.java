@@ -8,55 +8,51 @@
 
 package com.igteam.immersivegeology.client.menu.multiblock;
 
-import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
-import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import blusunrize.immersiveengineering.client.utils.IERenderTypes;
-import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.client.utils.TransformingVertexBuilder;
-import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import blusunrize.immersiveengineering.common.util.fakeworld.TemplateWorld;
 import com.google.common.collect.ImmutableList;
+import com.igteam.immersivegeology.client.helper.FluidCuboid;
+import com.igteam.immersivegeology.client.helper.IGFluidRenderHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.IGRotaryKilnMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.GeothermalExchangerMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.RotaryKilnMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Transformation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -114,7 +110,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 			pose.translate(leftPos+34, topPos+56, 0);
 			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.pushPose();
-			pose.mulPose(new Quaternionf().rotateAxis(-(this.menu.heat.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.mulPose(new Quaternionf().rotateAxis((this.menu.cooling_rate.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			graphics.blit(TEXTURE, 0, 0, 65, 187, 32, 7);
 			pose.popPose();
 		}
@@ -147,17 +143,20 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		);
 	}
 
+	FluidCuboid fluidCube = FluidCuboid.builder().face(true, 0, Direction.NORTH,Direction.EAST,Direction.SOUTH,Direction.WEST).build();
+
 	private void renderMultiblock(PoseStack pose, GuiGraphics graphics, MultiBufferSource bufferSource)
 	{
 		Level level = Minecraft.getInstance().level;
 		if(level==null)
 			return;
 
-		// TODO: Fill out these placeholder variables
 		TemplateMultiblock multiblock = IGGeothermalExchangerMultiblock.INSTANCE;
 		ClientMultiblocks.MultiblockManualData renderProperties = ClientMultiblocks.get(multiblock);
 		List<StructureTemplate.StructureBlockInfo> structure = multiblock.getStructure(level);
 		BlockRenderDispatcher blockRender = Minecraft.getInstance().getBlockRenderer();
+		ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
+		ItemStack multiblockRenderIcon = new ItemStack(multiblock.getBlock());
 		int[] structureDimensions = calculateStructureDimensions(structure);
 		int structureHeight = structureDimensions[0];
 		int structureWidth = structureDimensions[1];
@@ -165,8 +164,8 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 
 		// Placeholder pose offsets
 		float scale = multiblock.getManualScale()*0.65f;
-		float renderPosX = leftPos+116; // TODO: define leftPos
-		float renderPosY = topPos+48f;  // TODO: define topPos
+		float renderPosX = leftPos+116;
+		float renderPosY = topPos+48f;
 
 		float maxDimension = Math.max(structureHeight, Math.max(structureWidth, structureLength));
 		PoseStack.Pose lastEntryBeforeTry = pose.last();
@@ -174,7 +173,6 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		try
 		{
 			pose.pushPose();
-
 			// Setup initial translation and scaling
 			pose.translate(renderPosX, renderPosY, maxDimension);
 			pose.scale(scale, -scale, 1.0F);
@@ -193,7 +191,11 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 
 			pose.pushPose();
 			pose.translate(-1f,4,0);
-			renderProperties.renderFormedStructure(pose, bufferSource);
+			BakedModel itemModel = itemRender.getModel(multiblockRenderIcon, level, null, 0);
+			pose.translate(1.5, 0.5, 1.5);
+			itemRender.renderModelLists(itemModel, multiblockRenderIcon,
+					0xffffffff, OverlayTexture.NO_OVERLAY, pose,
+					bufferSource.getBuffer(IERenderTypes.TRANSLUCENT_FULLBRIGHT));
 			pose.popPose();
 
 			int blockIndex = 0;
@@ -204,16 +206,12 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 					for(int w = 0; w < structureWidth; ++w) {
 						BlockPos pos = new BlockPos(l, h, w);
 						BlockState state = this.structureWorld.getBlockState(pos);
-						int overlay;
-						if (pos.equals(multiblock.getTriggerOffset())) {
-							overlay = OverlayTexture.pack(0.0F, true);
-						} else {
-							overlay = OverlayTexture.NO_OVERLAY;
-						}
-						if (state.isAir()) {
+						int overlay = OverlayTexture.NO_OVERLAY;
+						if (state.isAir())
+						{
 							if(blockIndex > 65) continue;
 							int heatState = unpackHeatStateAtIndex(blockIndex);
-							Block heatBlock = heatState == 3 ? Blocks.LAVA : (heatState == 2 ? Blocks.MAGMA_BLOCK : (heatState == 1 ? Blocks.OBSIDIAN : Blocks.AIR));
+							Block heatBlock = heatState==3?Blocks.LAVA: (heatState==2?Blocks.MAGMA_BLOCK: (heatState==1?Blocks.OBSIDIAN: Blocks.AIR));
 
 							pose.pushPose();
 							pose.translate((float)l, (float)h, (float)w);
@@ -221,7 +219,26 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 							BlockState extraState = heatBlock.defaultBlockState();
 							BakedModel model = blockRender.getBlockModel(extraState);
 							modelData = model.getModelData(this.structureWorld, pos, extraState, modelData);
-							blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
+							if(heatState != 3)
+							{
+
+								pose.pushPose();
+								pose.translate(-0.5,0.5,0.5);
+								blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
+								pose.popPose();
+							}
+							if(heatState == 3)
+							{
+								pose.pushPose();
+								Fluid fluid = Fluids.LAVA;
+								IClientFluidTypeExtensions fluidAttributes = IClientFluidTypeExtensions.of(fluid);
+								TextureAtlasSprite flowing = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getFlowingTexture());
+								TextureAtlasSprite still = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getStillTexture());
+								pose.translate(-0.5,0.5,0.5);
+								IGFluidRenderHelper.renderCuboid(pose, translucentFullbright, fluidCube, still, flowing, new Vector3f(0,0,0), new Vector3f(1,1,1), 0xffffffff, 0xffffffff);
+								pose.popPose();
+							}
+
 							pose.popPose();
 							blockIndex++;
 						}
