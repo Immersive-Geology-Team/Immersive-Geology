@@ -399,9 +399,9 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         }
 
         @Override
-        public IFluidTank[] getInternalTanks()
+        public FluidTank[] getInternalTanks()
         {
-            return new IFluidTank[]{water_tank, steam_tank};
+            return new FluidTank[]{water_tank, steam_tank};
         }
 
         @Override

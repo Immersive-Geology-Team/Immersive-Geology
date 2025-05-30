@@ -64,7 +64,7 @@ public class IGTrommelMethod extends IGRecipeMethod
 	@Override
 	public ResourceLocation getLocation()
 	{
-		return toRL("pelletizer/pelletize_" + getName());
+		return toRL("trommel/wash_" + getName());
 	}
 
 	@Override

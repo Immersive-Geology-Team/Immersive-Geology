@@ -12,6 +12,7 @@ import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
+import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import blusunrize.immersiveengineering.client.utils.IERenderTypes;
 import blusunrize.immersiveengineering.client.utils.TransformingVertexBuilder;
@@ -29,6 +30,7 @@ import com.mojang.math.Transformation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -310,10 +312,10 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	@Override
 	protected List<InfoArea> makeInfoAreas()
 	{
-		IEnergyStorage lv = this.menu.getEnergyStorage();
 		return ImmutableList.of(
-				new EnergyInfoArea(this.leftPos + 157,this.topPos + 39, lv)
-		);
+				new FluidInfoArea(this.menu.tanks[0], new Rect2i(this.leftPos + 157, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
+				new FluidInfoArea(this.menu.tanks[1], new Rect2i(this.leftPos + 61, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
+				new EnergyInfoArea(this.leftPos + 206,this.topPos + 98, this.menu.energy_storage));
 	}
 
 	static class MultiblockRenderInfo implements Predicate<BlockPos>
