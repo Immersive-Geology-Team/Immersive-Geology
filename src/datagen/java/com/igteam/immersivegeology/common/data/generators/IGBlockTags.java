@@ -212,9 +212,10 @@ public class IGBlockTags extends BlockTagsProvider
 				IGMultiblockProvider.CHEMICAL_REACTOR,
 				IGMultiblockProvider.GRAVITY_SEPARATOR,
 				IGMultiblockProvider.PELLETIZER,
+				IGMultiblockProvider.GEOTHERMAL_EXCHANGER,
+				IGMultiblockProvider.FOUNDRY,
 				IGMultiblockProvider.REVERBERATION_FURNACE,
-				IGMultiblockProvider.ROTARYKILN,
-				IGMultiblockProvider.TROMMEL);
+				IGMultiblockProvider.ROTARYKILN);
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");
 	}

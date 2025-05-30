@@ -25,6 +25,27 @@ public class IGRenderTypes extends RenderStateShard
 	}
 
 	static final RenderStateShard.DepthTestStateShard DEPTH_ALWAYS = new RenderStateShard.DepthTestStateShard("greater", GL11.GL_LESS);
+	public static final RenderType GEOTHERMAL_DISPLAY;
+
+	static final RenderStateShard.ShaderStateShard GEOTHERMAL_DISPLAY_SHADER = new RenderStateShard.ShaderStateShard(IGShaders::getGeothermalDisplayShader);
+	static
+	{
+		GEOTHERMAL_DISPLAY = RenderType.create(
+				typeName("rendertype_gui_display"),
+				DefaultVertexFormat.BLOCK,
+				Mode.QUADS,
+				RenderType.BIG_BUFFER_SIZE,
+				true,
+				true,
+				RenderType.CompositeState.builder()
+						.setShaderState(GEOTHERMAL_DISPLAY_SHADER)
+						.setTextureState(RenderStateShard.BLOCK_SHEET_MIPPED)
+						.setTransparencyState(RenderStateShard.GLINT_TRANSPARENCY)
+						.setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
+						.setDepthTestState(DEPTH_ALWAYS)
+						.createCompositeState(false)
+		);
+	}
 
 	private static String typeName(String str){
 		return IGLib.MODID + ":" + str;

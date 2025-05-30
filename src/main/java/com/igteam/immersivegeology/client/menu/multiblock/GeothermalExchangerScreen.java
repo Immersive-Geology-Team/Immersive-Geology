@@ -17,8 +17,10 @@ import blusunrize.immersiveengineering.client.utils.IERenderTypes;
 import blusunrize.immersiveengineering.client.utils.TransformingVertexBuilder;
 import blusunrize.immersiveengineering.common.util.fakeworld.TemplateWorld;
 import com.google.common.collect.ImmutableList;
+import com.igteam.immersivegeology.client.IGShaders;
 import com.igteam.immersivegeology.client.helper.FluidCuboid;
 import com.igteam.immersivegeology.client.helper.IGFluidRenderHelper;
+import com.igteam.immersivegeology.client.renderer.IGRenderTypes;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.GeothermalExchangerMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -98,20 +100,26 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		pose.pushPose();
 		{
 			pose.translate(leftPos+193, topPos+56, 0);
-			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.pushPose();
+
+			pose.translate(4.5, 3.5, 0);
+			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.mulPose(new Quaternionf().rotateAxis(-(this.menu.heat.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.translate(-4.5, -3.5, 0);
 			graphics.blit(TEXTURE, 0, 0, 65, 187, 32, 7);
 			pose.popPose();
 		}
 		pose.popPose();
 		pose.pushPose();
 		{
-			pose.translate(leftPos+34, topPos+56, 0);
-			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.translate(leftPos+28, topPos+56, 0);
 			pose.pushPose();
+
+			pose.translate(4.5, 3.5, 0);
+			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.mulPose(new Quaternionf().rotateAxis((this.menu.cooling_rate.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-			graphics.blit(TEXTURE, 0, 0, 65, 187, 32, 7);
+			pose.translate(-4.5, -3.5, 0);
+			graphics.blit(TEXTURE, 0,0, 65, 187, 32, 7);
 			pose.popPose();
 		}
 		pose.popPose();
@@ -134,6 +142,12 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		renderMultiblock(pose, graphics, bufferSource);
 	}
 
+	@Override
+	public void renderBackground(@NotNull GuiGraphics graphics)
+	{
+		super.renderBackground(graphics);
+	}
+
 	private Transformation createRenderTransform() {
 		return new Transformation(
 				null,
@@ -143,7 +157,8 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		);
 	}
 
-	FluidCuboid fluidCube = FluidCuboid.builder().face(true, 0, Direction.NORTH,Direction.EAST,Direction.SOUTH,Direction.WEST).build();
+	//As the projection doesn't show the NORTH,EAST,UP faces we can ignore them here.
+	FluidCuboid fluidCube = FluidCuboid.builder().face(true, 0, Direction.SOUTH,Direction.WEST).face(false,0,Direction.UP).build();
 
 	private void renderMultiblock(PoseStack pose, GuiGraphics graphics, MultiBufferSource bufferSource)
 	{
@@ -165,7 +180,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		// Placeholder pose offsets
 		float scale = multiblock.getManualScale()*0.65f;
 		float renderPosX = leftPos+116;
-		float renderPosY = topPos+48f;
+		float renderPosY = topPos+46f;
 
 		float maxDimension = Math.max(structureHeight, Math.max(structureWidth, structureLength));
 		PoseStack.Pose lastEntryBeforeTry = pose.last();
@@ -198,8 +213,9 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 					bufferSource.getBuffer(IERenderTypes.TRANSLUCENT_FULLBRIGHT));
 			pose.popPose();
 
+			IGShaders.setGeothermalRenderData(0.8f);
 			int blockIndex = 0;
-			TransformingVertexBuilder translucentFullbright = new TransformingVertexBuilder(bufferSource, IERenderTypes.TRANSLUCENT_FULLBRIGHT);
+			TransformingVertexBuilder translucentFullbright = new TransformingVertexBuilder(bufferSource, IGRenderTypes.GEOTHERMAL_DISPLAY);
 
 			for(int h = -1; h < structureHeight; ++h) {
 				for(int l = 0; l < structureLength; ++l) {
