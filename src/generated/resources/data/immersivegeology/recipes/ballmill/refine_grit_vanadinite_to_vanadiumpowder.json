@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "forge:grits/vanadinite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_vanadinite"
+  },
+  "time": 200
+}

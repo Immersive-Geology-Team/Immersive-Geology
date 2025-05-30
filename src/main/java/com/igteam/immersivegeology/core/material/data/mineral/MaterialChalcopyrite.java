@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMineral;
@@ -82,7 +83,7 @@ public class MaterialChalcopyrite extends MaterialSulphideMineral
 
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                ItemCategoryFlags.CRUSHED_ORE, 1,
-               ItemCategoryFlags.SLAG, 1, 800, 250).addToTree(sulphideElectrowining);
+               ItemCategoryFlags.SLAG, 1, 800, IGLib.SULFUR_OUTGAS).addToTree(sulphideElectrowining);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
            ItemCategoryFlags.SLAG,

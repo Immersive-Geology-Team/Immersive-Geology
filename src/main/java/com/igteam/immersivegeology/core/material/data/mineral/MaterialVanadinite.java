@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
@@ -15,6 +16,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
@@ -31,6 +34,9 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
+        addFlags(ItemCategoryFlags.SLAG);
+        addFlags(ItemCategoryFlags.PELLET);
+        addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
         CONFIG = new MineralConfig(12,70,1,-32,140,350, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
@@ -48,20 +54,36 @@ public class MaterialVanadinite extends MaterialSulphideMineral
     @Override
     public void setupRecipeStages()
     {
-        super.setupRecipeStages();
-//        IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create("compound_dust_"+ MetalEnum.Vanadium.getName() + "_to_metal_oxide",
-//                MetalEnum.Vanadium.getStack(ItemCategoryFlags.METAL_OXIDE),
-//                MetalEnum.Vanadium.getItemTag(ItemCategoryFlags.COMPOUND_DUST),
-//                1,
-//                300,
-//                153600);
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.CRUSHED_ORE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.INGOT),
+                getStack(ItemCategoryFlags.SLAG, 1), 1800);
 
-        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(ItemCategoryFlags.POWDER, ItemCategoryFlags.COMPOUND_DUST,
-                MetalEnum.Vanadium.getStack(ItemCategoryFlags.COMPOUND_DUST, 2),
-                new FluidStack(Fluids.WATER, 250),
-                IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 250), new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(MineralEnum.Rocksalt), 250), null,
-                200, 51200);
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000);
+
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
+                getItemTag(ItemCategoryFlags.PELLET),
+                getSecondaryProduct().getStack(ItemCategoryFlags.INGOT),
+                getStack(ItemCategoryFlags.SLAG, 1), 200);
+
+
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
+                ItemCategoryFlags.SLAG,
+                ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
+                getItemTag(ItemCategoryFlags.POWDERED_SLAG),
+                getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
+                0.0075f, 200, 250);
+
+
     }
 
     @Override

@@ -2,6 +2,9 @@
   "values": [
     "immersivegeology:powder_vanadinite",
     "immersivegeology:grit_vanadinite",
+    "immersivegeology:slag_vanadinite",
+    "immersivegeology:pellet_vanadinite",
+    "immersivegeology:powdered_slag_vanadinite",
     "immersivegeology:poor_ore_vanadinite",
     "immersivegeology:normal_ore_vanadinite",
     "immersivegeology:rich_ore_vanadinite",
