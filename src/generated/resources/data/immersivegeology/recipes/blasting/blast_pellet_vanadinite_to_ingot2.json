@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:pellets/vanadinite"
+  },
+  "result": {
+    "item": "immersiveengineering:ingot_lead"
+  },
+  "slag": {
+    "item": "immersivegeology:slag_vanadinite"
+  },
+  "time": 200
+}

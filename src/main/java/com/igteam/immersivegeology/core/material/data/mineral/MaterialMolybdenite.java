@@ -64,7 +64,7 @@ public class MaterialMolybdenite extends MaterialSulphideMineral
                 ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
                 ItemCategoryFlags.SLAG, 1,         // Output
                 1000,                                          // Roasting Time
-                200                                            // Sulfur Dioxide Output Amount
+                IGLib.SULFUR_OUTGAS                                            // Sulfur Dioxide Output Amount
         ).addToTree(sulphideElectrowining);
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(

@@ -8,12 +8,18 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.BiFunction;
 
@@ -22,7 +28,6 @@ public class MaterialMagnesium extends MaterialMetal {
     public MaterialMagnesium() {
         super();
         removeMaterialFlags(ItemCategoryFlags.WIRE);
-        removeMaterialFlags(ItemCategoryFlags.METAL_OXIDE);
     }
 
     @Override
@@ -37,5 +42,14 @@ public class MaterialMagnesium extends MaterialMetal {
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(
                 ChemicalEnum.HydrochloricAcid,
                 ItemCategoryFlags.CRYSTAL);
+
+        IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
+                ItemStack.EMPTY,
+                ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Magnesium,125),
+                IngredientWithSize.of(getStack(ItemCategoryFlags.METAL_OXIDE, 1)),
+                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+                null,
+                null,
+                200, 51200);
     }
 }
