@@ -23,7 +23,7 @@ public class GeothermalPart extends SkinableMultiblockPart<GeothermalExchangerLo
 
 	public GeothermalPart(Properties props, MultiblockRegistration<GeothermalExchangerLogic.State> reg)
 	{
-		super(props, reg, GEOTHERMAL_EXCHANGER, IGGeothermalSkins.class, "block/multiblock/geothermal_exchanger/");
+		super(props.strength(60,1200), reg, GEOTHERMAL_EXCHANGER, IGGeothermalSkins.class, "block/multiblock/geothermal_exchanger/");
 	}
 	
 	@Override

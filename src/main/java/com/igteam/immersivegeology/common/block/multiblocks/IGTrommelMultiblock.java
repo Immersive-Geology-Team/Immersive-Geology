@@ -21,7 +21,7 @@ public class IGTrommelMultiblock extends IGTemplateMultiblock
 	public static final IGTrommelMultiblock INSTANCE = new IGTrommelMultiblock();
 	public IGTrommelMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/trommel"), new BlockPos(7,0,2), new BlockPos(6,1,4), new BlockPos(9,4,5), IGMultiblockProvider.TROMMEL);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/trommel"), new BlockPos(7,0,2), new BlockPos(6,1,4), new BlockPos(9,4,5), null);//_IGMultiblockProvider.TROMMEL);
 	}
 
 	@Override

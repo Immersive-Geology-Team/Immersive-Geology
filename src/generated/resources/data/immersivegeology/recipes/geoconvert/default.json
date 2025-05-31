@@ -1,0 +1,9 @@
+{
+  "type": "immersivegeology:geothermal_conversion",
+  "finalBlock": "minecraft:obsidian",
+  "finalBlockIndex": 3,
+  "startingBlock": "minecraft:lava",
+  "startingBlockIndex": 1,
+  "transitionBlock": "minecraft:magma_block",
+  "transitionBlockIndex": 2
+}

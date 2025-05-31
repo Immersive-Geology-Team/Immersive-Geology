@@ -405,6 +405,9 @@ public class IGRecipes extends RecipeProvider
 		Item bronze_work_hammer = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		Item stainless_work_hammer = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 
+		GeothermalConversionRecipeBuilder.builder(new Block[]{Blocks.LAVA, Blocks.MAGMA_BLOCK, Blocks.OBSIDIAN}, new int[]{1,2,3}).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/default"));
+		GeothermalConversionRecipeBuilder.builder(new Block[]{Blocks.BLUE_ICE, Blocks.PACKED_ICE, Blocks.WATER}, new int[]{4,5,6}).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/alternative_test"));
+
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {

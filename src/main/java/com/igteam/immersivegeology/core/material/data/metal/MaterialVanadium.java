@@ -26,6 +26,9 @@ public class MaterialVanadium extends MaterialMetal {
 
     public MaterialVanadium() {
         super();
+        removeMaterialFlags(ItemCategoryFlags.PELLET);
+        removeMaterialFlags(ItemCategoryFlags.SLAG);
+        removeMaterialFlags(ItemCategoryFlags.POWDERED_SLAG);
     }
 
     @Override

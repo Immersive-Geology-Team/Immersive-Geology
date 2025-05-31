@@ -44,10 +44,11 @@ public class IGMultiblockProvider {
             .gui(IGMenuTypes.REVERBERATION_FURNACE)
             .build();
 
-    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
-            builder -> {
-                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
-            });
+//    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
+//            builder -> {
+//                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
+//            });
+//
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
                     .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
                     .gui(IGMenuTypes.BLOOMERY)

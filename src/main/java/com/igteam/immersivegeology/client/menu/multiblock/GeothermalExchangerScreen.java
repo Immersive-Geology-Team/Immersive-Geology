@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.client.helper.IGFluidRenderHelper;
 import com.igteam.immersivegeology.client.renderer.IGRenderTypes;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.GeothermalExchangerMenu;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalConversionRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
@@ -88,7 +89,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	{
 		super.init();
 		this.inventoryLabelY = this.imageHeight - 94;
-		this.inventoryLabelX = 24;
+		this.inventoryLabelX = 38;
 	}
 
 	@Override
@@ -229,7 +230,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 						{
 							if(blockIndex > 65) continue;
 							int heatState = unpackHeatStateAtIndex(blockIndex);
-							Block heatBlock = heatState==3?Blocks.LAVA: (heatState==2?Blocks.MAGMA_BLOCK: (heatState==1?Blocks.OBSIDIAN: Blocks.AIR));
+							Block heatBlock = GeothermalConversionRecipe.getBlockFromIndex(level, heatState);
 
 							pose.pushPose();
 							pose.translate((float)l, (float)h, (float)w);
@@ -237,7 +238,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 							BlockState extraState = heatBlock.defaultBlockState();
 							BakedModel model = blockRender.getBlockModel(extraState);
 							modelData = model.getModelData(this.structureWorld, pos, extraState, modelData);
-							if(heatState != 3)
+							if(heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY))
 							{
 
 								pose.pushPose();
@@ -245,10 +246,10 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 								blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
 								pose.popPose();
 							}
-							if(heatState == 3)
+							if(!heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY))
 							{
 								pose.pushPose();
-								Fluid fluid = Fluids.LAVA;
+								Fluid fluid = heatBlock.defaultBlockState().getFluidState().getType();
 								IClientFluidTypeExtensions fluidAttributes = IClientFluidTypeExtensions.of(fluid);
 								TextureAtlasSprite flowing = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getFlowingTexture());
 								TextureAtlasSprite still = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getStillTexture());
@@ -281,11 +282,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	}
 
 	public int unpackHeatStateAtIndex(int index) {
-		int bitIndex = index * 2;
-		int byteIndex = bitIndex / 8;
-		int offset = bitIndex % 8;
-
-		return (this.menu.BLOCK_MAP_DATA.get()[byteIndex] >> offset) & 0b11;
+		return this.menu.BLOCK_MAP_DATA.get()[index];
 	}
 
 	private int[] calculateStructureDimensions(List<StructureTemplate.StructureBlockInfo> structure) {
