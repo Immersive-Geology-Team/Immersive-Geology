@@ -37,7 +37,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -45,7 +44,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -94,7 +92,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         float cooling_rate = (float) tickCounter / currentCoolrate;
         state.cooling_rate = (int)(cooling_rate * 160f);
 
-        if(coolingPlanes.isEmpty())
+        if(transitionPlanes.isEmpty())
         {
             setupCoolingMap(multiblockLevel);
             return;
@@ -125,7 +123,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     private void coolFromCurrentPlane(IMultiblockLevel multiblockLevel) {
         Level level = multiblockLevel.getRawLevel();
 
-        if (!coolingPlanes.containsKey(currentY)) return;
+        if (!transitionPlanes.containsKey(currentY)) return;
 
         List<BlockPos> currentPlane = getAbsolutePlane(multiblockLevel, currentY);
         for (BlockPos pos : currentPlane) {
@@ -187,7 +185,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     private int getCoolingScore(Level level, IMultiblockLevel multiblockLevel) {
         int score = 0;
 
-        for (Map.Entry<Integer, List<BlockPos>> entry : coolingPlanes.entrySet()) {
+        for (Map.Entry<Integer, List<BlockPos>> entry : transitionPlanes.entrySet()) {
             List<BlockPos> plane = entry.getValue();
             for (BlockPos relPos : plane) {
                 BlockPos absPos = multiblockLevel.toAbsolute(relPos);
@@ -205,7 +203,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     }
 
     private ArrayList<BlockPos> getAbsolutePlane(IMultiblockLevel multiblockLevel, int y) {
-        ArrayList<BlockPos> plane = coolingPlanes.getOrDefault(y, List.of()).stream()
+        ArrayList<BlockPos> plane = transitionPlanes.getOrDefault(y, List.of()).stream()
                 .map(multiblockLevel::toAbsolute)
                 .collect(Collectors.toCollection(ArrayList::new));
         if(!plane.isEmpty()) Collections.shuffle(plane, random);
@@ -213,7 +211,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     }
 
     private void advanceToNextPlane() {
-        NavigableMap<Integer, List<BlockPos>> tailMap = ((TreeMap<Integer, List<BlockPos>>) coolingPlanes).tailMap(currentY, false);
+        NavigableMap<Integer, List<BlockPos>> tailMap = ((TreeMap<Integer, List<BlockPos>>)transitionPlanes).tailMap(currentY, false);
         if (!tailMap.isEmpty()) {
             currentY = tailMap.firstKey();
         }
@@ -267,13 +265,13 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                     {
                         Block block = relativeState.getBlock();
                         blockSet.add(block);
+
                         GeothermalConversionRecipe recipe = GeothermalConversionRecipe.findRecipe(rawLevel, block);
-                        int heatBlockIndex = 0;
+                        int heatBlockIndex = -1;
                         if(recipe != null)
                         {
-                            if(relativeState.is(recipe.startingBlock.get()) && (relativeState.getFluidState().is(Fluids.EMPTY) || relativeState.getFluidState().isSource())) heatBlockIndex = recipe.blockIndexS;
-                            if(relativeState.is(recipe.transitionBlock.get()) && (relativeState.getFluidState().is(Fluids.EMPTY) || relativeState.getFluidState().isSource())) heatBlockIndex = recipe.blockIndexT;
-                            if(relativeState.is(recipe.finalBlock.get()) && (relativeState.getFluidState().is(Fluids.EMPTY) || relativeState.getFluidState().isSource())) heatBlockIndex = recipe.blockIndexF;
+                            List<GeothermalConversionRecipe> recipeList = GeothermalConversionRecipe.RECIPES.getRecipes(rawLevel).stream().toList();
+                            heatBlockIndex = recipeList.indexOf(recipe);
                         }
 
                         state.setHeatStateAtIndex(index, heatBlockIndex);
@@ -284,17 +282,20 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         }
     }
 
-    Map<Integer, List<BlockPos>> coolingPlanes = new TreeMap<>(Comparator.reverseOrder());
+    Map<Integer, List<BlockPos>> transitionPlanes = new TreeMap<>(Comparator.reverseOrder());
     int currentY = -256;
     private void setupCoolingMap(IMultiblockLevel multiblockLevel)
     {
-        coolingPlanes.clear();
+        transitionPlanes.clear();
+        Level rawLevel = multiblockLevel.getRawLevel();
         Vec3i size = IGGeothermalExchangerMultiblock.INSTANCE.getSize(null);
         int structureHeight = size.getY()-2;
         int structureLength = size.getX();
         int structureWidth = size.getZ();
         MutableBlockPos cursor = new MutableBlockPos();
         int index = 0;
+        List<Block> validBlocks = GeothermalConversionRecipe.RECIPES.getRecipes(rawLevel).stream().map(r -> r.transitionBlock.get()).toList();
+
         for(int h = -1; h < structureHeight; ++h)
         {
             for(int l = 0; l < structureLength; ++l)
@@ -305,19 +306,19 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                     BlockState relativeState = multiblockLevel.getBlockState(cursor);
                     if(!(relativeState.getBlock() instanceof GeothermalPart))
                     {
-                        relativeState = multiblockLevel.getRawLevel().getBlockState(multiblockLevel.toAbsolute(cursor));
-                        if(relativeState.is(Blocks.LAVA) || relativeState.is(Blocks.MAGMA_BLOCK))
+                        relativeState = rawLevel.getBlockState(multiblockLevel.toAbsolute(cursor));
+                        if(validBlocks.contains(relativeState.getBlock()))
                         {
                             int y = cursor.getY();
-                            coolingPlanes.computeIfAbsent(y, k -> new ArrayList<>()).add(cursor.immutable());
+                            transitionPlanes.computeIfAbsent(y, k -> new ArrayList<>()).add(cursor.immutable());
                         }
                         index++;
                     }
                 }
             }
         }
-        if (!coolingPlanes.isEmpty()) {
-            currentY = coolingPlanes.keySet().iterator().next(); // Highest Y
+        if (!transitionPlanes.isEmpty()) {
+            currentY = transitionPlanes.keySet().iterator().next(); // Highest Y
         }
     }
 

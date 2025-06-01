@@ -48,7 +48,7 @@ public class IGMultiblockProvider {
 //            builder -> {
 //                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
 //            });
-//
+
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
                     .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
                     .gui(IGMenuTypes.BLOOMERY)

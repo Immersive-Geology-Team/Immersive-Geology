@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalConversionRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalExchangerRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -41,17 +42,33 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 	@Override
 	public GeothermalConversionRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
-		ResourceLocation startingBlockName = new ResourceLocation(json.get("startingBlock").getAsString());
-		ResourceLocation transitionBlockName = new ResourceLocation(json.get("transitionBlock").getAsString());
-		ResourceLocation finalBlockName = new ResourceLocation(json.get("finalBlock").getAsString());
-		Block startingBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(startingBlockName));
-		Block transitionBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(transitionBlockName));
-		Block finalBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(finalBlockName));
-		int startingBlockIndex = json.get("startingBlockIndex").getAsInt();
-		int transitionBlockIndex = json.get("transitionBlockIndex").getAsInt();
-		int finalBlockIndex = json.get("finalBlockIndex").getAsInt();
 
-		return new GeothermalConversionRecipe(resourceLocation, () -> startingBlock, () -> transitionBlock, ()-> finalBlock, startingBlockIndex, transitionBlockIndex, finalBlockIndex);
+		ResourceLocation transitionBlockName = new ResourceLocation(json.get("transitionBlock").getAsString());
+		Block transitionBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(transitionBlockName));
+		int transitionBlockHeat = json.get("blockHeat").getAsInt();
+
+		boolean hasUpper = json.has("upperBoundBlock");
+		boolean hasLower = json.has("lowerBoundBlock");
+		Pair<Block, Integer> upperBound = null;
+		Pair<Block, Integer> lowerBound = null;
+
+		if(hasUpper)
+		{
+			ResourceLocation upperBoundBlockName = new ResourceLocation(json.get("upperBoundBlock").getAsString());
+			Block upperBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(upperBoundBlockName));
+			int upperHeat = json.get("upperHeat").getAsInt();
+			upperBound = Pair.of(upperBlock, upperHeat);
+		}
+
+		if(hasLower)
+		{
+			ResourceLocation lowerBoundBlockName = new ResourceLocation(json.get("lowerBoundBlock").getAsString());
+			Block lowerBoundBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(lowerBoundBlockName));
+			int upperHeat = json.get("lowerHeat").getAsInt();
+			lowerBound = Pair.of(lowerBoundBlock, upperHeat);
+		}
+
+		return new GeothermalConversionRecipe(resourceLocation, () -> transitionBlock, transitionBlockHeat, upperBound, lowerBound);
 	}
 
 	@Override
@@ -60,10 +77,29 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 		List<Block> blocks = PacketUtils.readList(buffer, (buf) -> {
 			return (Block)buf.readRegistryIdUnsafe(ForgeRegistries.BLOCKS);
 		});
-		int startingBlockIndex = buffer.readInt();
-		int transitionBlockIndex = buffer.readInt();
-		int finalBlockIndex = buffer.readInt();
-		return new GeothermalConversionRecipe(resourceLocation, () -> blocks.get(0), () -> blocks.get(1), ()-> blocks.get(2), startingBlockIndex, transitionBlockIndex, finalBlockIndex);
+
+		Block baseBlock = blocks.get(0);
+		Block upperBlock = blocks.get(1);
+		Block lowerBlock = blocks.get(2);
+
+		int transitionBlockHeat = buffer.readInt();
+		boolean hasUpper = upperBlock != Blocks.BARRIER;
+		boolean hasLower = lowerBlock != Blocks.BARRIER;
+
+		Pair<Block, Integer> upperBound = null;
+		Pair<Block, Integer> lowerBound = null;
+
+		if(hasUpper)
+		{
+			upperBound = Pair.of(upperBlock, buffer.readInt());
+		}
+
+		if(hasLower)
+		{
+			lowerBound = Pair.of(lowerBlock, buffer.readInt());
+		}
+
+		return new GeothermalConversionRecipe(resourceLocation, () -> baseBlock, transitionBlockHeat, upperBound, lowerBound);
 	}
 
 	@Override
@@ -72,8 +108,8 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 		PacketUtils.writeList(buffer, recipe.getMatchingBlocks(), (b, buf) -> {
 			buf.writeRegistryIdUnsafe(ForgeRegistries.BLOCKS, b);
 		});
-		buffer.writeInt(recipe.blockIndexS);
-		buffer.writeInt(recipe.blockIndexT);
-		buffer.writeInt(recipe.blockIndexF);
+		buffer.writeInt(recipe.blockHeat);
+		if(recipe.upperHeat != null) buffer.writeInt(recipe.upperHeat);
+		if(recipe.lowerHeat != null) buffer.writeInt(recipe.lowerHeat);
 	}
 }

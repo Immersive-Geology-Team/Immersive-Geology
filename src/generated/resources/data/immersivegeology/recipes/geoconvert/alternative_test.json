@@ -1,9 +1,0 @@
-{
-  "type": "immersivegeology:geothermal_conversion",
-  "finalBlock": "minecraft:water",
-  "finalBlockIndex": 6,
-  "startingBlock": "minecraft:blue_ice",
-  "startingBlockIndex": 4,
-  "transitionBlock": "minecraft:packed_ice",
-  "transitionBlockIndex": 5
-}

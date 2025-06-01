@@ -48,6 +48,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.datafixers.util.Pair;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.NonNullList;
@@ -405,8 +406,9 @@ public class IGRecipes extends RecipeProvider
 		Item bronze_work_hammer = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		Item stainless_work_hammer = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 
-		GeothermalConversionRecipeBuilder.builder(new Block[]{Blocks.LAVA, Blocks.MAGMA_BLOCK, Blocks.OBSIDIAN}, new int[]{1,2,3}).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/default"));
-		GeothermalConversionRecipeBuilder.builder(new Block[]{Blocks.BLUE_ICE, Blocks.PACKED_ICE, Blocks.WATER}, new int[]{4,5,6}).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/alternative_test"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1000, null, Pair.of(Blocks.MAGMA_BLOCK, 500)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 500, Pair.of(Blocks.LAVA, 1100), Pair.of(Blocks.OBSIDIAN, 21)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 21, Pair.of(Blocks.MAGMA_BLOCK, 600), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{

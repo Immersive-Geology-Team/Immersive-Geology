@@ -240,7 +240,6 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 							modelData = model.getModelData(this.structureWorld, pos, extraState, modelData);
 							if(heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY))
 							{
-
 								pose.pushPose();
 								pose.translate(-0.5,0.5,0.5);
 								blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
@@ -257,7 +256,6 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 								IGFluidRenderHelper.renderCuboid(pose, translucentFullbright, fluidCube, still, flowing, new Vector3f(0,0,0), new Vector3f(1,1,1), 0xffffffff, 0xffffffff);
 								pose.popPose();
 							}
-
 							pose.popPose();
 							blockIndex++;
 						}
