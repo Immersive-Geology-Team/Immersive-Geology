@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -64,7 +65,7 @@ public class IGTrommelMethod extends IGRecipeMethod
 	@Override
 	public ResourceLocation getLocation()
 	{
-		return toRL("pelletizer/pelletize_" + getName());
+		return toRL("trommel/wash_" + getName());
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class IGTrommelMethod extends IGRecipeMethod
 	@Override
 	public ItemStack getIconStack()
 	{
-		return IGMultiblockProvider.TROMMEL.iconStack();
+		return new ItemStack(Items.APPLE);
 	}
 
 	@Override

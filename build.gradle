@@ -1,10 +1,7 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import groovy.json.JsonParserType
 import net.minecraftforge.gradle.common.tasks.SignJar
-
-// ----------------------------------------------------------------------------
-// PLUGINS & BASIC CONFIGURATION
-// ----------------------------------------------------------------------------
 
 plugins {
     id 'net.minecraftforge.gradle'         version '[6.0,6.2)'
@@ -14,6 +11,26 @@ plugins {
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.6'
     id 'eclipse'
     id 'idea'
+}
+// Load version and build number from version.properties
+import java.util.Properties
+
+def versionProps = new Properties()
+file('version.properties').withInputStream { versionProps.load(it) }
+
+version = versionProps.getProperty('version')
+ext.version_buildnumber = versionProps.getProperty('build_number')?.toInteger() ?: 0
+
+println "-> build.gradle applying version: $version (build ${version_buildnumber})"
+
+gradle.taskGraph.whenReady { graph ->
+    // Only bump build number when doing a full build
+    if (graph.hasTask(':build')) {
+        ext.version_buildnumber = gradle.ext.nextBuildNumber
+    } else {
+        // preserve existing build number for non-build tasks
+        ext.version_buildnumber = project.findProperty('version_buildnumber') ?: 0
+    }
 }
 
 group = 'com.igteam.immersivegeology'
@@ -31,10 +48,9 @@ java {
 
 // 1) read the published version
 version = gradle.ext.nextVersion
-// 2) expose build number for resource expansion, etc.
-ext.version_buildnumber = gradle.ext.nextBuildNumber
+// 2) version_buildnumber set via taskGraph.whenReady above
 
-println "-> build.gradle applying version: $version"
+println "-> build.gradle applying version: $version (build ${version_buildnumber})"
 
 ext {
     versionReplacements = [
@@ -72,14 +88,29 @@ sourceSets {
 
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.FAIL
+
+    // Declare inputs so Gradle can track changes
+    inputs.property 'mod_version', project.version
+    inputs.property 'mod_buildNumber', version_buildnumber
     inputs.properties versionReplacements
+
     filesMatching('META-INF/mods.toml') {
         expand versionReplacements
     }
     exclude '.cache'
+
     doLast {
-        fileTree(dir: outputs.files.asPath, includes: ['**/*.json', '**/*.mcmeta']).each { File file ->
-            file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
+        def slurper = new JsonSlurper()
+        // For lenient parsing (if you ever need comments/trailing commas):
+        // slurper.setType(JsonParserType.LAX)
+
+        fileTree(dir: outputs.files.asPath, include: ['**/*.json', '**/*.mcmeta']).each { File f ->
+            try {
+                def parsed = slurper.parse(f)
+                f.text = JsonOutput.prettyPrint(JsonOutput.toJson(parsed))
+            } catch (Exception e) {
+                logger.warn("Skipping invalid JSON file ${f.name}: ${e.message}")
+            }
         }
     }
 }
@@ -167,7 +198,7 @@ dependencies {
     compileOnly          fg.deobf("mezz.jei:jei-1.20.1-forge-api:${version_jei}")
     compileOnly          fg.deobf("mezz.jei:jei-1.20.1-common-api:${version_jei}")
     implementation       fg.deobf("mezz.jei:jei-1.20.1-forge:${version_jei}")
-    implementation       fg.deobf("curse.maven:immersive-engineering-231951:6206989")
+    implementation fg.deobf("curse.maven:immersive-engineering-231951:6206989")
     datagenImplementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen"
     implementation       fg.deobf("curse.maven:terrafirmacraft-302973:6187491")
     implementation       fg.deobf("curse.maven:patchouli-306770:6164575")

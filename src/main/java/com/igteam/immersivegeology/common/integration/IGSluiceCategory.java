@@ -23,6 +23,8 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +37,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 128).setTextureSize(128,128).build();
 		setBackground(back);
-		setIcon(IGMultiblockProvider.TROMMEL.iconStack());
+		setIcon(new ItemStack(Items.APPLE));
 	}
 
 	@Override

@@ -5557,8 +5557,9 @@
     "immersivegeology:chemical_reactor",
     "immersivegeology:gravity_separator",
     "immersivegeology:pelletizer",
+    "immersivegeology:geothermal_exchanger",
+    "immersivegeology:foundry",
     "immersivegeology:reverberation_furnace",
-    "immersivegeology:rotarykiln",
-    "immersivegeology:trommel"
+    "immersivegeology:rotarykiln"
   ]
 }

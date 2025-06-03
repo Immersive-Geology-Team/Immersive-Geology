@@ -5,15 +5,15 @@
   },
   "energy": 80,
   "input0": {
-    "amount": 8,
+    "amount": 2,
     "tag": "minecraft:water"
   },
   "input1": {
-    "amount": 8,
+    "amount": 50,
     "tag": "forge:sulfurdioxide"
   },
   "result": {
-    "amount": 16,
+    "amount": 6,
     "fluid": "immersivegeology:fluid_sulfuricacid"
   },
   "time": 1

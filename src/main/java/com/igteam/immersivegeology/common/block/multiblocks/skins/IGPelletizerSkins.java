@@ -18,7 +18,7 @@ import java.util.Locale;
 public enum IGPelletizerSkins implements StringRepresentable, IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
-	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER, "muddykat");
+	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.ARTIST, "the_northern_harpy");
 
 	private final String skin;
 	private final SkinCreditType type;

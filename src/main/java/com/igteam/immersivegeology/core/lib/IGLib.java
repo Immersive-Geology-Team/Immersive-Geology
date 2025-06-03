@@ -31,6 +31,8 @@ public class IGLib {
     public static final int ACID_TO_SLURRY_AMOUNT = 250;
     public static final int SLURRY_FROM_ACID_AMOUNT = 216;
 
+    public static  final int SULFUR_OUTGAS = 25;
+
     public static final float TWO_ACID_USED_MULTIPLIER = 0.5f;
     public static final float THREE_ACID_USED_MULTIPLIER = 0.5f;
 
@@ -48,6 +50,7 @@ public class IGLib {
     public static final String GUIID_Crystallizer= "crystallizer";
     public static final String GUIID_ChemicalReactor= "chemical_reactor";
     public static final String GUIID_RotaryKiln= "rotarykiln";
+    public static final String GUIID_GeothermalExchanger= "geothermal_exchanger";
     public static final String GUIID_Crate = "crate_menu";
 	public static final int PELLETIZER_DEFAULT_TIME = 600;
 

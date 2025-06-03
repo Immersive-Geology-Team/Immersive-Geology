@@ -75,7 +75,7 @@ public class MaterialChalcocite extends MaterialSulphideMineral
                 ItemCategoryFlags.CRUSHED_ORE, 1,   // Input
                 ItemCategoryFlags.SLAG, 1,         // Output
                 1000,                                          // Roasting Time
-                200                                            // Sulfur Dioxide Output Amount
+                IGLib.SULFUR_OUTGAS                                            // Sulfur Dioxide Output Amount
         ).addToTree(sulphideElectrowining);
 
         IGRecipeNode powdered_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.EXTRACTION).create(

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "forge:slag/vanadinite"
+  },
+  "result": {
+    "item": "immersivegeology:powdered_slag_vanadinite"
+  },
+  "time": 800
+}

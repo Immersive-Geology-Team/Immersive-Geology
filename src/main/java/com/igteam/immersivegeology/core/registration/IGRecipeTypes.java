@@ -33,6 +33,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotarykiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 	public static final TypeWithClass<GeothermalExchangerRecipe> GEOTHERMAL_EXCHANGER = register("geothermal_exchanger", GeothermalExchangerRecipe.class);
+	public static final TypeWithClass<GeothermalConversionRecipe> GEOTHERMAL_EXCHANGER_CONVERTION = register("geothermal_convertion", GeothermalConversionRecipe.class);
 	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
 	public static final TypeWithClass<BallmillRecipe> BALLMILL = register("ballmill", BallmillRecipe.class);
 	public static final TypeWithClass<PelletizerRecipe> PELLETIZER = register("pelletizer",PelletizerRecipe.class);

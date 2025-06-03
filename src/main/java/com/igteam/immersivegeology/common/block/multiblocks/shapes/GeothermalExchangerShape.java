@@ -29,7 +29,31 @@ public class GeothermalExchangerShape extends GenericShape {
         final int bZ = posInMultiblock.getZ();
 
         List<AABB> main = new ArrayList<>();
-        main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        if(bY == 5 && bZ == 1 && bX == 2)
+        {
+            main.add(new AABB(0.0, 0.0, 0.5, 1.0, 1.0, 1.0));
+        }
+        else if(bY == 4)
+        {
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+            if(bZ == 1)
+            {
+                if(bX == 1 || bX == 3)
+                {
+                    main.add(new AABB(0.0, 0.5, 0.0, 1.0, 1, 1.0));
+                }
+                if(bX == 2)
+                {
+                    main.add(new AABB(0.125, 0.5, 0.5, 0.25, 1, 1.0));
+                    main.add(new AABB(0.75, 0.5, 0.5, 0.875, 1, 1.0));
+                }
+            }
+            if(bX == 3 && bZ == 0) main.add(new AABB(0.0, 0.5, 0.0, 1.0, 1, 1.0));
+        }
+        else
+        {
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
+        }
         return main;
     }
 }

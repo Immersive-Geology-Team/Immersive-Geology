@@ -83,7 +83,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                 "crushed_ore_"+getName() + "_to_oxide",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1,
-                getStack(ItemCategoryFlags.SLAG,1), 800, 250).addToTree(sulphideElectrowining);
+                getStack(ItemCategoryFlags.SLAG,1), 800, IGLib.SULFUR_OUTGAS).addToTree(sulphideElectrowining);
 
         IGRecipeNode powdered_slag = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.SLAG,

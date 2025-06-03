@@ -19,6 +19,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
 import net.minecraftforge.common.util.Lazy;
@@ -29,7 +30,7 @@ public class IndustrialSluiceRecipeSerializer extends IERecipeSerializer<Industr
 	@Override
 	public ItemStack getIcon()
 	{
-		return IGMultiblockProvider.TROMMEL.iconStack();
+		return new ItemStack(Items.APPLE);
 	}
 
 	@Override

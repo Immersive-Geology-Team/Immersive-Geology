@@ -44,10 +44,11 @@ public class IGMultiblockProvider {
             .gui(IGMenuTypes.REVERBERATION_FURNACE)
             .build();
 
-    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
-            builder -> {
-                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
-            });
+//    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
+//            builder -> {
+//                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
+//            });
+
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
                     .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
                     .gui(IGMenuTypes.BLOOMERY)
@@ -81,6 +82,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<GeothermalExchangerLogic.State> GEOTHERMAL_EXCHANGER = metal_skinnable(new GeothermalExchangerLogic(), "geothermal_exchanger", false, GeothermalPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("geothermal_exchanger"))
             .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.GEOTHERMAL_EXCHANGER)
             .build();
 
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>

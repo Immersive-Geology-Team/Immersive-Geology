@@ -54,7 +54,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServerTickableComponent<RotaryKilnLogic.State>, IClientTickableComponent<RotaryKilnLogic.State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 2);
+    public static final BlockPos REDSTONE_IN = new BlockPos(3, 1, 2);
     public static final int ENERGY_CAPACITY = 16000;
     private static final CapabilityPosition ENERGY_LEFT = new CapabilityPosition(5,2,0, RelativeBlockFace.UP);
     private static final CapabilityPosition ENERGY_MID = new CapabilityPosition(5,2,1, RelativeBlockFace.UP);
