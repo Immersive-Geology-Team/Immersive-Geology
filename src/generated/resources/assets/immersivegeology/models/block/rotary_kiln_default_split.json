@@ -6,10 +6,10 @@
     "automatic_culling": false,
     "flip_v": true,
     "loader": "forge:obj",
-    "model": "immersivegeology:models/block/multiblock/obj/rotarykiln/rotarykiln.obj",
+    "model": "immersivegeology:models/block/multiblock/obj/rotary_kiln/rotary_kiln.obj",
     "textures": {
-      "particle": "immersivegeology:block/multiblock/rotarykiln/legacy",
-      "rotarykiln": "immersivegeology:block/multiblock/rotarykiln/legacy"
+      "particle": "immersivegeology:block/multiblock/rotary_kiln/default",
+      "rotary_kiln": "immersivegeology:block/multiblock/rotary_kiln/default"
     }
   },
   "loader": "immersiveengineering:basic_split",
@@ -321,6 +321,6 @@
     ]
   ],
   "textures": {
-    "particle": "immersivegeology:block/multiblock/rotarykiln/legacy"
+    "particle": "immersivegeology:block/multiblock/rotary_kiln/default"
   }
 }

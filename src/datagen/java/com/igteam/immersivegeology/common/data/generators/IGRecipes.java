@@ -66,6 +66,7 @@ import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
@@ -111,6 +112,7 @@ public class IGRecipes extends RecipeProvider
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
+
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
@@ -377,6 +379,7 @@ public class IGRecipes extends RecipeProvider
 		}
 
 		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 250)).addInput(FluidTags.WATER, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/water_to_steam"));
+		GeothermalExchangerRecipeBuilder.builder(new FluidStack(Fluids.WATER, 250)).addInput(FluidTags.LAVA, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/lava_to_water_test"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium, MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);
@@ -406,9 +409,9 @@ public class IGRecipes extends RecipeProvider
 		Item bronze_work_hammer = MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER);
 		Item stainless_work_hammer = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 
-		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1000, null, Pair.of(Blocks.MAGMA_BLOCK, 500)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
-		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 500, Pair.of(Blocks.LAVA, 1100), Pair.of(Blocks.OBSIDIAN, 21)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
-		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 21, Pair.of(Blocks.MAGMA_BLOCK, 600), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1100, null, Pair.of(Blocks.MAGMA_BLOCK, 900)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.OBSIDIAN, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{

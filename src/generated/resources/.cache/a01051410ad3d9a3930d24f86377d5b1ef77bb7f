@@ -1,6 +1,6 @@
-// 1.20.1	2025-05-22T17:29:33.985735978	Global Loot Modifiers : immersivegeology
+// 1.20.1	2025-06-06T20:09:24.488812101	Global Loot Modifiers : immersivegeology
 d38ad6f49c457f606164a825d5f3943664e1d5c0 data/forge/loot_modifiers/global_loot_modifiers.json
 413ca5129d5bbc28461941fee7a327abd0aadc66 data/immersivegeology/loot_modifiers/desert_pyramid_loot.json
 50e834add133fe663b29ba6b9eac1950c0884896 data/immersivegeology/loot_modifiers/shipwreck_treasure_loot.json
-199a142d3602b8a5bef74c9303c461a97d60de71 data/immersivegeology/loot_modifiers/simple_dungeon_loot.json
+5979c3b6fccf6df6a27385a20b3746669885a760 data/immersivegeology/loot_modifiers/simple_dungeon_loot.json
 dcd26465181303940d74d6e11934faf1c37106f0 data/immersivegeology/loot_modifiers/woodland_mansion_loot.json

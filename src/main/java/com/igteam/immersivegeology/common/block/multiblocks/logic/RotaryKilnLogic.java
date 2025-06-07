@@ -172,7 +172,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             if(recipeHeatTarget!=target_heat) state.targetHeat = recipeHeatTarget;
             if(currentHeat < recipeHeatTarget) return RotaryKilnHeatState.HEATING_UP;
             if(currentHeat > (recipeHeatTarget+7)) return RotaryKilnHeatState.COOLING_DOWN;
-            return RotaryKilnHeatState.RUNNING_RECIPE;
+            if(!state.getProcessorQueue().isEmpty()) return RotaryKilnHeatState.RUNNING_RECIPE;
         }
         return RotaryKilnHeatState.MAINTAINING_HEAT;
     }

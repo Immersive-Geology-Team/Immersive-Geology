@@ -49,7 +49,7 @@ public class IGLib {
     public static final String GUIID_RevFurnace= "reverberation_furnace";
     public static final String GUIID_Crystallizer= "crystallizer";
     public static final String GUIID_ChemicalReactor= "chemical_reactor";
-    public static final String GUIID_RotaryKiln= "rotarykiln";
+    public static final String GUIID_RotaryKiln= "rotary_kiln";
     public static final String GUIID_GeothermalExchanger= "geothermal_exchanger";
     public static final String GUIID_Crate = "crate_menu";
 	public static final int PELLETIZER_DEFAULT_TIME = 600;

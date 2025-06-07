@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import net.minecraftforge.fluids.FluidType.Properties;
 
 import java.util.function.BiFunction;
 
@@ -31,5 +32,13 @@ public class MaterialHighPressureSteam extends MaterialMisc
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
 	{
 		return (flag, integer) -> (0x77777777);
+	}
+
+
+	@Override
+	public Properties getFluidProperties(IFlagType<?> flag)
+	{
+		// Temperature is in Kelvin, this steam is "High Pressure / Super Heated"
+		return super.getFluidProperties(flag).temperature(1200);
 	}
 }

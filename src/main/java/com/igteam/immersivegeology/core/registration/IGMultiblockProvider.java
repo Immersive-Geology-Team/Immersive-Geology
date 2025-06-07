@@ -23,8 +23,8 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN)
             .build();
 
-    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotarykiln", false, RotaryKilnPart::new)
-            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"))
+    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotary_kiln", false, RotaryKilnPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotary_kiln"))
             .redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN)
             .gui(IGMenuTypes.ROTARY_KILN)
             .build();

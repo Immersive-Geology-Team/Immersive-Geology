@@ -124,8 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/rotarykiln/rotarykiln_item.obj",
+  "model": "immersivegeology:models/block/multiblock/obj/rotary_kiln/rotary_kiln_item.obj",
   "textures": {
-    "rotarykiln": "immersivegeology:block/multiblock/rotarykiln/default"
+    "rotary_kiln": "immersivegeology:block/multiblock/rotary_kiln/default"
   }
 }

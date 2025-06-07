@@ -1,6 +1,6 @@
 # Blender 4.2.3 LTS
 # www.blender.org
-mtllib rotarykiln.mtl
+mtllib rotary_kiln.mtl
 o cube
 v 0.000000 2.000000 2.000000
 v -2.000000 2.000000 2.000000

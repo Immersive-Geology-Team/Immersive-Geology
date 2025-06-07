@@ -57,7 +57,7 @@ public enum IGRotaryKilnSkins implements StringRepresentable, IIGMultiSkinHelper
 	@Override
 	public String multiblockName()
 	{
-		return "rotarykiln";
+		return "rotary_kiln";
 	}
 
 	@Override

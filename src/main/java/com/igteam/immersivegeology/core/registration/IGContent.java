@@ -7,12 +7,9 @@ import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler.ChemthrowerEf
 import blusunrize.immersiveengineering.common.fluids.IEFluid;
 import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEPotions;
-import blusunrize.lib.manual.ManualElementItem;
-import blusunrize.lib.manual.ManualElementTable;
-import blusunrize.lib.manual.ManualEntry;
+import blusunrize.lib.manual.*;
 import blusunrize.lib.manual.ManualEntry.EntryData;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
-import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
@@ -155,7 +152,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "crystallizer");
         multiblockEntry(instance, multiblock_category, "coredrill");
         multiblockEntry(instance, multiblock_category, "gravity_separator");
-        multiblockEntry(instance, multiblock_category, "rotarykiln");
+        multiblockRotaryKilnEntry(instance, multiblock_category, "rotary_kiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
         multiblockEntry(instance, multiblock_category, "bloomery");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");
@@ -350,10 +347,50 @@ public class IGContent {
         }
         return (Component[][])list.toArray(new Component[0][]);
     }
+    static Component[][] formatBasicTable(Map<Component, String> map, String valueType) {
+        List<Map.Entry<Component, String>> sortedMapArray = new ArrayList<>(map.entrySet());
+        ArrayList<Component[]> list = new ArrayList<>();
+
+        try {
+
+            for(Entry<Component, String> entry : sortedMapArray)
+            {
+                Component item = entry.getKey();
+                if(item==null)
+                {
+                    item = Component.nullToEmpty((entry.getKey()).toString());
+                }
+
+                String bt = String.valueOf(entry.getValue());
+                Component am = Component.nullToEmpty(""+bt+" "+valueType);
+                list.add(new Component[]{item, am});
+            }
+        } catch (Exception var9) {
+        }
+        return (Component[][])list.toArray(new Component[0][]);
+    }
+
+    public static HashMap<Component, String> getEnergyRates() {
+        LinkedHashMap<Component, String> map = new LinkedHashMap<>();
+
+        map.put(Component.translatable("manual.immersivegeology.lv_heat"), "< 750");
+        map.put(Component.translatable("manual.immersivegeology.mv_heat"), "< 3000");
+        map.put(Component.translatable("manual.immersivegeology.hv_heat"), "< 12000");
+        map.put(Component.translatable("manual.immersivegeology.ehv_heat"),"> 12000");
+
+        return map;
+    }
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
         ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
         multiblock.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        instance.addEntry(category, multiblock.create());
+    }
+
+    private static void multiblockRotaryKilnEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
+        ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
+        multiblock.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        multiblock.addSpecialElement(new SpecialElementData("list", 0, new ManualElementTable(instance, formatBasicTable(getEnergyRates(), "fe/t"), true)));
         instance.addEntry(category, multiblock.create());
     }
 

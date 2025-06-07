@@ -1,6 +1,6 @@
 # Blender 4.2.3 LTS
 # www.blender.org
-mtllib rotarykiln_mirrored.mtl
+mtllib rotary_kiln_mirrored.mtl
 o cube
 v 4.000000 2.000000 2.000000
 v 6.000000 2.000000 2.000000

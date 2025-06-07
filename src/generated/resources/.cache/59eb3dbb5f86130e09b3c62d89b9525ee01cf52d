@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-22T16:56:26.976536335	Loot Tables
+// 1.20.1	2025-06-08T01:14:16.479066534	Loot Tables
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
@@ -557,7 +557,7 @@ f5adf6652216531a330bab235623df3e38392096 data/immersivegeology/loot_tables/block
 67ba0e380ddccfbe77280ba96cd7a087550fc08c data/immersivegeology/loot_tables/blocks/minecraft_rich_ore_block_zircon_stone.json
 0be35292ee945d595762d3413f5dea02f4c406cb data/immersivegeology/loot_tables/blocks/pelletizer.json
 22d891eb1c8726faefeddf0ff7973735eb3e8d40 data/immersivegeology/loot_tables/blocks/reverberation_furnace.json
-78526554b23fcbee896424eaf410ac8648583a99 data/immersivegeology/loot_tables/blocks/rotarykiln.json
+3994a2141c4206ae9fffd294340dd216367e68af data/immersivegeology/loot_tables/blocks/rotary_kiln.json
 2b80fc63494e3423aba7163b6dfc12e1718fc046 data/immersivegeology/loot_tables/blocks/scaffolding_stainlesssteel_grate_top.json
 febf42b00c3b190135ba6e46d61d911de37d5dee data/immersivegeology/loot_tables/blocks/scaffolding_stainlesssteel_standard.json
 c0006dbf0dbdb7e7873d179abb461f57a7b90d26 data/immersivegeology/loot_tables/blocks/scaffolding_stainlesssteel_wooden_top.json

@@ -14,12 +14,17 @@ import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeothermalExchangerRecipe extends MultiblockRecipe
 {
@@ -37,6 +42,14 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
 		this.fluidOutput = fluid_output;
+	}
+
+	public static List<GeothermalExchangerRecipe> findAllValidRecipes(Level level, FluidStack input)
+	{
+		List<GeothermalExchangerRecipe> valid = new ArrayList<>();
+		for(GeothermalExchangerRecipe recipe : RECIPES.getRecipes(level))
+			if(recipe.fluidIn.test(input)) valid.add(recipe);
+		return valid;
 	}
 
 	@Override
@@ -65,6 +78,23 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 		return null;
 	}
 
+	public static GeothermalExchangerRecipe findRecipe(Level level, FluidStack input, @Nullable GeothermalExchangerRecipe hint)
+	{
+		if (input.isEmpty())
+			return null;
+		if (hint != null && hint.matches(input))
+			return hint;
+		for(GeothermalExchangerRecipe recipe : RECIPES.getRecipes(level))
+			if(recipe.fluidIn.test(input))
+				return recipe;
+		return null;
+	}
+
+	private boolean matches(FluidStack input)
+	{
+		return this.fluidIn.test(input);
+	}
+
 	@Override
 	protected IERecipeSerializer<?> getIESerializer()
 	{
@@ -75,5 +105,10 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 	public int getMultipleProcessTicks()
 	{
 		return 1;
+	}
+
+	public boolean isCooling()
+	{
+		return fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature() > fluidOutput.get().getFluid().getFluidType().getTemperature();
 	}
 }

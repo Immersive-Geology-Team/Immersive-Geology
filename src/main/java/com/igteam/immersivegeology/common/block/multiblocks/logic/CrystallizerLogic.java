@@ -77,13 +77,18 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
-        final int tank_amount = state.tank.getFluidAmount();
-        state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-        tryRunRecipe(state, context.getLevel().getRawLevel());
-        if(tank_amount != state.tank.getFluidAmount()) context.requestMasterBESync();
+        boolean isActive = state.rsState.isEnabled(context);
+        if(isActive)
+        {
+            final int tank_amount = state.tank.getFluidAmount();
+            state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+            tryRunRecipe(state, context.getLevel().getRawLevel());
+            if(tank_amount!=state.tank.getFluidAmount()) context.requestMasterBESync();
+        }
         if(state.output_tank.getFluid().getAmount() > 0)
         {
             drainOutputTank(state, context, state.fluidOutput);
+            context.requestMasterBESync();
         }
     }
 

@@ -56,8 +56,8 @@ import java.util.stream.Stream;
 
 public class GeothermalExchangerMenu extends IEContainerMenu
 {
-	public final GetterAndSetter<Integer> heat;
-	public final GetterAndSetter<Integer> cooling_rate;
+	public final GetterAndSetter<Float> display_heat;
+	public final GetterAndSetter<Float> cooling_rate;
 	public final IEnergyStorage energy_storage;
 	public final GetterAndSetter<byte[]> BLOCK_MAP_DATA;
 	public final IFluidTank[] tanks;
@@ -69,7 +69,7 @@ public class GeothermalExchangerMenu extends IEContainerMenu
 		return new GeothermalExchangerMenu(multiblockCtx(type, id, ctx), invPlayer,
 				state.getInternalTanks(),
 				state.getEnergy(),
-				GetterAndSetter.getterOnly(state::getCurrentHeat), GetterAndSetter.getterOnly(state::getCoolingRate), GetterAndSetter.getterOnly(state::getHeatingStates));
+				GetterAndSetter.getterOnly(state::getDisplayHeat), GetterAndSetter.getterOnly(state::getCoolingRate), GetterAndSetter.getterOnly(state::getHeatingStates));
 	}
 
 	private static int[] calculateStructureDimensions(List<StructureTemplate.StructureBlockInfo> structure)
@@ -90,16 +90,16 @@ public class GeothermalExchangerMenu extends IEContainerMenu
 
 	public static GeothermalExchangerMenu makeClient(MenuType<?> type, int id, Inventory invPlayer)
 	{
-		return new GeothermalExchangerMenu(clientCtx(type, id), invPlayer,new FluidTank[]{new FluidTank(8000),new FluidTank(8000)}, new MutableEnergyStorage(GeothermalExchangerLogic.ENERGY_CAPACITY), GetterAndSetter.standalone(0), GetterAndSetter.standalone(0), GetterAndSetter.standalone(new byte[66]));
+		return new GeothermalExchangerMenu(clientCtx(type, id), invPlayer,new FluidTank[]{new FluidTank(8000),new FluidTank(8000)}, new MutableEnergyStorage(GeothermalExchangerLogic.ENERGY_CAPACITY), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(new byte[66]));
 	}
 
-	private GeothermalExchangerMenu(MenuContext ctx, Inventory inventoryPlayer, FluidTank[] tanks, MutableEnergyStorage energy_storage, GetterAndSetter<Integer> heat, GetterAndSetter<Integer> cooling_rate, GetterAndSetter<byte[]> blockMapData)
+	private GeothermalExchangerMenu(MenuContext ctx, Inventory inventoryPlayer, FluidTank[] tanks, MutableEnergyStorage energy_storage, GetterAndSetter<Float> heat, GetterAndSetter<Float> cooling_rate, GetterAndSetter<byte[]> blockMapData)
 	{
 		super(ctx);
 		this.tanks = tanks;
 		this.BLOCK_MAP_DATA = blockMapData;
 		this.energy_storage = energy_storage;
-		this.heat = heat;
+		this.display_heat = heat;
 		this.cooling_rate = cooling_rate;
 		ownSlotCount = 0;
 		for(int i = 0; i < 3; i++)
@@ -109,8 +109,8 @@ public class GeothermalExchangerMenu extends IEContainerMenu
 			addSlot(new Slot(inventoryPlayer, i, 36+i*18, 161));
 
 		this.addGenericData(GenericContainerData.energy(energy_storage));
-		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.INT32, heat));
-		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.INT32, cooling_rate));
+		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, heat));
+		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, cooling_rate));
 		this.addGenericData(GenericContainerData.fluid(tanks[0]));
 		this.addGenericData(GenericContainerData.fluid(tanks[1]));
 		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.BYTE_ARRAY, blockMapData));
