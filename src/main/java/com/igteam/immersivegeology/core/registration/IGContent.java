@@ -154,6 +154,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "gravity_separator");
         multiblockRotaryKilnEntry(instance, multiblock_category, "rotary_kiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
+        multiblockEntry(instance, multiblock_category, "geothermal_exchanger");
         multiblockEntry(instance, multiblock_category, "bloomery");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");
         multiblockEntry(instance, multiblock_category, "ballmill");
