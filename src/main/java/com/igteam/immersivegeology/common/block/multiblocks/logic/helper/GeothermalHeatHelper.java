@@ -8,307 +8,241 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
+
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.GeothermalExchangerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalConversionRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalExchangerRecipe;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class GeothermalHeatHelper
 {
-	// Heat exchange constants
-	private static final int HEAT_EXCHANGE_PER_TICK = 5;
-	private static final double LAYER_SWITCH_THRESHOLD = 0.75;
-	private static final int HEAT_CONVERSION_THRESHOLD = 100;
-	private static final double UPPER_LAYER_CHANCE = 0.1;
+	private static final int LAYER_COUNT = 5;
+	private static final int GRID_WIDTH = 5;
+	private static final int GRID_LENGTH = 3;
+	private static final int EMPTY_VALUE = 0;
 
-	public static class HeatData {
-		public int machineHeat;
-		public int accumulatedHeatExchange;
-		public int currentY;
+	private final boolean[][][] markedCells;
+	private final byte[][][] data;
+	private final Supplier<Level> level;
+	private List<GeothermalConversionRecipe> cachedRecipes;
+	private final Random random;
 
-		public HeatData(int machineHeat, int accumulatedHeatExchange, int currentY) {
-			this.machineHeat = machineHeat;
-			this.accumulatedHeatExchange = accumulatedHeatExchange;
-			this.currentY = currentY;
-		}
+	public GeothermalHeatHelper(Supplier<Level> level)
+	{
+		this.data = new byte[LAYER_COUNT][GRID_WIDTH][GRID_LENGTH];
+		this.markedCells = new boolean[LAYER_COUNT][GRID_WIDTH][GRID_LENGTH];
+		this.level = level;
+		this.random = new Random();
+		clear();
+		clearMarks();
 	}
 
-	public static HeatData updateMachineTemperature(
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			IMultiblockLevel multiblockLevel,
-			HeatData currentData, boolean isCooling) {
-
-		Level level = multiblockLevel.getRawLevel();
-		if (transitionPlanes.isEmpty()) {
-			int newHeat = Math.round(Mth.lerp(0.1f, currentData.machineHeat, 300));
-			return new HeatData(newHeat, currentData.accumulatedHeatExchange, currentData.currentY);
-		}
-
-		int targetTemp = getTargetTemperature(transitionPlanes, level, multiblockLevel, isCooling);
-
-		int tempDifference = targetTemp - currentData.machineHeat;
-		int newHeat = currentData.machineHeat;
-		if (Math.abs(tempDifference) > 1) {
-			newHeat += Integer.signum(tempDifference) * Math.min(Math.abs(tempDifference), 10);
-		}
-
-		return new HeatData(newHeat, currentData.accumulatedHeatExchange, currentData.currentY);
-	}
-
-	public static boolean canProcessRecipe(GeothermalExchangerRecipe recipe, int machineTemp) {
-		int inputTemp = recipe.fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature();
-		int outputTemp = recipe.fluidOutput.get().getFluid().getFluidType().getTemperature();
-
-		boolean isHeating = outputTemp > inputTemp;
-		boolean isCooling = outputTemp < inputTemp;
-
-		if (isHeating) {
-			return machineTemp >= outputTemp;
-		} else if (isCooling) {
-			return machineTemp <= outputTemp;
-		}
-
-		return true;
-	}
-
-	public static HeatData processRecipeHeatEffects(
-			GeothermalExchangerRecipe recipe,
-			HeatData currentData,
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			IMultiblockLevel multiblockLevel) {
-		Level level = multiblockLevel.getRawLevel();
-		int inputTemp = recipe.fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature();
-		int outputTemp = recipe.fluidOutput.get().getFluid().getFluidType().getTemperature();
-		int temperatureDelta = outputTemp - inputTemp;
-		int consumed = temperatureDelta / 4;
-
-		int newMachineHeat = (int)Math.max(0, currentData.machineHeat);
-		int newAccumulated = currentData.accumulatedHeatExchange - consumed;
-
-		return new HeatData(newMachineHeat, newAccumulated, currentData.currentY);
-	}
-
-	public static HeatData processBlockConversions(
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			IMultiblockLevel multiblockLevel,
-			HeatData currentData) {
-		Level level = multiblockLevel.getRawLevel();
-		if (Math.abs(currentData.accumulatedHeatExchange) < HEAT_CONVERSION_THRESHOLD) {
-			return currentData; // No changes needed
-		}
-
-		boolean needsHeat = currentData.accumulatedHeatExchange < 0;
-		boolean hasExcessHeat = currentData.accumulatedHeatExchange > 0;
-
-		HeatData resultData = currentData;
-
-		if (needsHeat) {
-			resultData = extractHeatFromBlocks(transitionPlanes, level, multiblockLevel, currentData);
-		} else if (hasExcessHeat) {
-			resultData = dumpHeatToBlocks(transitionPlanes, level, multiblockLevel, currentData);
-		}
-
-		return new HeatData(resultData.machineHeat, 0, resultData.currentY);
-	}
-
-	private static HeatData extractHeatFromBlocks(
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			Level level,
-			IMultiblockLevel multiblockLevel,
-			HeatData currentData) {
-
-		List<BlockPos> layerBelow = transitionPlanes.get(currentData.currentY-1) != null ? new ArrayList<>(transitionPlanes.get(currentData.currentY-1)) : new ArrayList<>();
-		List<BlockPos> currentLayerBlocks = new ArrayList<>(transitionPlanes.get(currentData.currentY));
-		Collections.shuffle(currentLayerBlocks);
-
-		int layerConversions = countConvertibleBlocks(currentLayerBlocks, level, multiblockLevel, true);
-		int lowerLayerConversions = countConvertibleBlocks(currentLayerBlocks, level, multiblockLevel, true);
-
-		boolean isCurrentLayerComplete = layerConversions == 0;
-		boolean isLowerLayerComplete = lowerLayerConversions == 0;
-
-		if (currentLayerBlocks.isEmpty()) {
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		}
-
-		if(isCurrentLayerComplete && lowerLayerConversions < (layerBelow.size() / 2))
-		{
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		}
-
-		if ((isLowerLayerComplete && isCurrentLayerComplete)) {
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		} else if(Math.random() < UPPER_LAYER_CHANCE &! isLowerLayerComplete)
-		{
-			currentLayerBlocks = layerBelow;
-			Collections.shuffle(currentLayerBlocks);
-		}
-
-		for (BlockPos pos : currentLayerBlocks) {
-			if (processBlockCooling(pos, level, multiblockLevel)) {
-				int newHeat = currentData.machineHeat + HEAT_EXCHANGE_PER_TICK;
-				return new HeatData(newHeat, currentData.accumulatedHeatExchange, currentData.currentY);
+	private void ensureRecipesLoaded() {
+		if (cachedRecipes == null) {
+			Level currentLevel = level.get();
+			if (currentLevel != null) {
+				cachedRecipes = new ArrayList<>(GeothermalConversionRecipe.RECIPES.getRecipes(currentLevel));
 			}
 		}
-
-		return currentData;
 	}
 
-	private static HeatData dumpHeatToBlocks(
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			Level level,
-			IMultiblockLevel multiblockLevel,
-			HeatData currentData) {
-
-		List<BlockPos> layerBelow = transitionPlanes.get(currentData.currentY-1) != null ? new ArrayList<>(transitionPlanes.get(currentData.currentY-1)) : new ArrayList<>();
-		List<BlockPos> currentLayerBlocks = new ArrayList<>(transitionPlanes.get(currentData.currentY));
-
-		Collections.shuffle(currentLayerBlocks);
-
-		int layerConversions = countConvertibleBlocks(currentLayerBlocks, level, multiblockLevel, false);
-		int lowerLayerConversions = countConvertibleBlocks(currentLayerBlocks, level, multiblockLevel, false);
-
-		boolean isCurrentLayerComplete = layerConversions == 0;
-		boolean isLowerLayerComplete = lowerLayerConversions == 0;
-
-		if (currentLayerBlocks.isEmpty()) {
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		}
-
-		if(isCurrentLayerComplete && lowerLayerConversions < (layerBelow.size() / 2))
-		{
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		}
-
-		if ((isLowerLayerComplete && isCurrentLayerComplete)) {
-			int newY = moveToNextLayer(transitionPlanes, currentData.currentY);
-			return new HeatData(currentData.machineHeat, currentData.accumulatedHeatExchange, newY);
-		} else if(Math.random() < UPPER_LAYER_CHANCE &! isLowerLayerComplete)
-		{
-			currentLayerBlocks = layerBelow;
-			Collections.shuffle(currentLayerBlocks);
-		}
-
-		for (BlockPos pos : currentLayerBlocks) {
-			if (processBlockHeating(pos, level, multiblockLevel)) {
-				int newHeat = currentData.machineHeat - HEAT_EXCHANGE_PER_TICK;
-				return new HeatData(newHeat, currentData.accumulatedHeatExchange, currentData.currentY);
-			}
-		}
-
-		return currentData;
+	public List<GeothermalConversionRecipe> getRecipes() {
+		ensureRecipesLoaded();
+		return cachedRecipes != null ? cachedRecipes : Collections.emptyList();
 	}
 
-	private static boolean processBlockCooling(BlockPos pos, Level level, IMultiblockLevel multiblockLevel) {
-		GeothermalConversionRecipe recipe = getRecipeForBlock(pos, level, multiblockLevel);
-		if (recipe == null || recipe.lowerTransition == null) {
-			return false;
-		}
-
-		BlockState newState = recipe.lowerTransition.defaultBlockState();
-		level.setBlockAndUpdate(multiblockLevel.toAbsolute(pos), newState);
-		return true;
-	}
-
-	private static boolean processBlockHeating(BlockPos pos, Level level, IMultiblockLevel multiblockLevel) {
-		GeothermalConversionRecipe recipe = getRecipeForBlock(pos, level, multiblockLevel);
-		if (recipe == null || recipe.upperTransition == null) {
-			return false;
-		}
-
-		BlockState newState = recipe.upperTransition.defaultBlockState();
-		level.setBlockAndUpdate(multiblockLevel.toAbsolute(pos), newState);
-		return true;
-	}
-
-	private static int countConvertibleBlocks(
-			List<BlockPos> blocks,
-			Level level,
-			IMultiblockLevel multiblockLevel,
-			boolean forCooling) {
-
-		int count = 0;
-		for (BlockPos pos : blocks) {
-			GeothermalConversionRecipe recipe = getRecipeForBlock(pos, level, multiblockLevel);
-			if (recipe != null) {
-				if (forCooling && recipe.lowerTransition != null) {
-					count++;
-				} else if (!forCooling && recipe.upperTransition != null) {
-					count++;
+	public void clear() {
+		for (int layer = 0; layer < LAYER_COUNT; layer++) {
+			for (int x = 0; x < GRID_WIDTH; x++) {
+				for (int y = 0; y < GRID_LENGTH; y++) {
+					data[layer][x][y] = EMPTY_VALUE;
 				}
 			}
 		}
-		return count;
 	}
 
-	private static int moveToNextLayer(Map<Integer, List<BlockPos>> transitionPlanes, int currentY) {
-		List<Integer> yLevels = new ArrayList<>(transitionPlanes.keySet());
+	public void clearMarks() {
+		for (int layer = 0; layer < LAYER_COUNT; layer++) {
+			for (int x = 0; x < GRID_WIDTH; x++) {
+				for (int y = 0; y < GRID_LENGTH; y++) {
+					markedCells[layer][x][y] = false;
+				}
+			}
+		}
+	}
 
-		int currentIndex = yLevels.indexOf(currentY);
-
-		if (currentIndex < yLevels.size() - 1) {
-			return yLevels.get(currentIndex + 1);
+	public void clearLayer(int layer) {
+		if (layer < 0 || layer >= LAYER_COUNT) {
+			return;
 		}
 
-		return currentY;
+		for (int x = 0; x < GRID_WIDTH; x++) {
+			for (int y = 0; y < GRID_LENGTH; y++) {
+				data[layer][x][y] = EMPTY_VALUE;
+			}
+		}
 	}
 
-	private static int getTargetTemperature(
-			Map<Integer, List<BlockPos>> transitionPlanes,
-			Level level,
-			IMultiblockLevel multiblockLevel, boolean isCooling) {
+	public byte[] getLayerCopy(int layer) {
+		if (layer < 0 || layer >= LAYER_COUNT) {
+			return null;
+		}
 
-		int maxTemp = isCooling ? 300 : 1;
-		for(List<BlockPos> layerBlocks : transitionPlanes.values())
-		{
-			if(layerBlocks==null||layerBlocks.isEmpty()) continue;
-			for(BlockPos pos : layerBlocks)
-			{
-				GeothermalConversionRecipe recipe = getRecipeForBlock(pos, level, multiblockLevel);
-				if(recipe!=null&& (isCooling ? recipe.blockHeat < maxTemp : recipe.blockHeat > maxTemp))
-				{
-					maxTemp = recipe.blockHeat;
+		byte[] copy = new byte[GRID_WIDTH * GRID_LENGTH];
+		int index = 0;
+		for (int x = 0; x < GRID_WIDTH; x++) {
+			for (int y = 0; y < GRID_LENGTH; y++) {
+				copy[index++] = data[layer][x][y];
+			}
+		}
+		return copy;
+	}
+
+	public byte accessDataAtLayer(int layer, int x, int z) {
+		if (layer < 0 || layer >= LAYER_COUNT ||
+				x < 0 || x >= GRID_WIDTH ||
+				z < 0 || z >= GRID_LENGTH) {
+			return EMPTY_VALUE;
+		}
+
+		return data[layer][x][z];
+	}
+	public void setDataAtLayer(int layer, int x, int z, byte value) {
+		if (layer < 0 || layer >= LAYER_COUNT ||
+				x < 0 || x >= GRID_WIDTH ||
+				z < 0 || z >= GRID_LENGTH) {
+			return;
+		}
+
+		data[layer][x][z] = value;
+	}
+
+	public byte getFastPseudoRandomCell(int layer, long seed) {
+		if (layer < 0 || layer >= 5) return 0;
+
+		// Simple hash-based coordinate generation
+		long hash = seed * 31 + layer;
+		int x = (int)((hash >>> 16) % 3);
+		int y = (int)((hash >>> 8) % 5);
+
+		return accessDataAtLayer(layer, Math.abs(x), Math.abs(y));
+	}
+
+	public byte getRandomNonEmptyCellCoords(int layer, int[] outCoords) {
+		if (layer < 0 || layer >= LAYER_COUNT || outCoords.length < 2) return -1;
+
+		// Count non-empty AND non-marked cells first
+		int availableCount = 0;
+		for (int x = 0; x < GRID_WIDTH; x++) {
+			for (int z = 0; z < GRID_LENGTH; z++) {
+				if (accessDataAtLayer(layer, x, z) != EMPTY_VALUE && !markedCells[layer][x][z]) {
+					availableCount++;
 				}
 			}
 		}
 
-		return maxTemp;
+		// If no available cells, return -1
+		if (availableCount == 0) return -1;
+
+		// Pick random index among available cells
+		int targetIndex = random.nextInt(availableCount);
+		int currentIndex = 0;
+
+		// Find the cell at that index
+		for (int x = 0; x < GRID_WIDTH; x++) {
+			for (int z = 0; z < GRID_LENGTH; z++) {
+				byte value = accessDataAtLayer(layer, x, z);
+				if (value != EMPTY_VALUE && !markedCells[layer][x][z]) {
+					if (currentIndex == targetIndex) {
+						markedCells[layer][x][z] = true;
+						outCoords[0] = x;
+						outCoords[1] = z;
+						return value;
+					}
+					currentIndex++;
+				}
+			}
+		}
+
+		return -1; // Should never reach here, but safety fallback
 	}
 
-	private static GeothermalConversionRecipe getRecipeForBlock(
-			BlockPos pos,
-			Level level,
-			IMultiblockLevel multiblockLevel) {
+	public @Nullable GeothermalConversionRecipe getRandomCellPosition(GeothermalExchangerLogic.State state, MutableBlockPos localPos)
+	{
+		int[] xz = {0,0};
+		int id = getRandomNonEmptyCellCoords(localPos.getY(), xz);
+		if(id == -1)
+		{
+			state.currentY = state.currentY-1;
+			localPos.setY(state.currentY);
+		}
+		localPos.setX(xz[0]);
+		localPos.setZ(xz[1]);
 
-		BlockState state = level.getBlockState(multiblockLevel.toAbsolute(pos));
-		Block block = state.getBlock();
-
-		return GeothermalConversionRecipe.findRecipe(level, block);
+		id = id - 1;
+		return id < 0 ? null : getRecipes().get(id);
 	}
 
-	public static HeatData syncToMachineState(HeatData heatData, GeothermalExchangerLogic.State machineState) {
-		machineState.setHeat(heatData.machineHeat);
-		machineState.setAccumulatedHeatExchange(heatData.accumulatedHeatExchange);
-		return heatData;
+	public @Nullable GeothermalConversionRecipe getRecipeFromCell(BlockPos localPosition) {
+		return getRecipeFromCell(localPosition.getY(), localPosition.getX(), localPosition.getZ());
 	}
 
-	public static HeatData fromMachineState(GeothermalExchangerLogic.State machineState, int currentY) {
-		return new HeatData(
-				machineState.getCurrentHeat(),
-				machineState.getAccumulatedHeatExchange(),
-				currentY
-		);
+	public @Nullable GeothermalConversionRecipe getRecipeFromCell(int layer, int x, int z) {
+		int id = accessDataAtLayer(layer, x, z)-1;
+		return id < 0 ? null : getRecipes().get(id);
+	}
+
+	public GeothermalConversionRecipe updateRecipeCell(IMultiblockLevel multiblockLevel, BlockPos pos) {
+		return updateRecipeCell(multiblockLevel, pos.getY(), pos.getX(), pos.getZ());
+	}
+
+	public GeothermalConversionRecipe updateRecipeCell(IMultiblockLevel multiblockLevel, int layer, int x, int z) {
+		Level rawLevel = multiblockLevel.getRawLevel();
+		MutableBlockPos localPos = new MutableBlockPos(x, layer, z);
+		BlockPos worldPos = multiblockLevel.toAbsolute(localPos);
+		BlockState block = rawLevel.getBlockState(worldPos);
+		GeothermalConversionRecipe recipe = GeothermalConversionRecipe.findRecipe(rawLevel, block.getBlock());
+		int recipeIndex = 1 + getRecipes().indexOf(recipe);
+		if(recipeIndex > 255) IGLib.IG_LOGGER.error("Could not set Recipe Marker Correctly, recipe ID exceeds 255 (Undefined Behaviour is likely to occur)");
+		setDataAtLayer(layer, x, z, (byte) recipeIndex);
+		return recipe;
+	}
+
+	public void setupRecipeData(IMultiblockLevel multiblockLevel)
+	{
+		Level rawLevel = multiblockLevel.getRawLevel();
+		MutableBlockPos localPos = new MutableBlockPos(0,0,0);
+		BlockState block;
+		for (int layer = 0; layer < LAYER_COUNT; layer++) {
+			for (int x = 0; x < GRID_WIDTH; x++) {
+				for (int z = 0; z < GRID_LENGTH; z++) {
+					localPos.set(x, layer, z);
+					block = rawLevel.getBlockState(multiblockLevel.toAbsolute(localPos).below());
+					GeothermalConversionRecipe recipe = findRecipe(block.getBlock());
+					int recipeIndex = 1 + getRecipes().indexOf(recipe);
+					data[layer][x][z] = (byte) recipeIndex;
+				}
+			}
+		}
+	}
+
+	public GeothermalConversionRecipe findRecipe(Block block)
+	{
+		for(GeothermalConversionRecipe recipe : getRecipes())
+			if(recipe.transitionBlock.get().equals(block))
+				return recipe;
+		return null;
 	}
 }

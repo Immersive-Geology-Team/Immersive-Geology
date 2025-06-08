@@ -19,7 +19,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
@@ -43,7 +42,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -56,11 +54,11 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExchangerLogic.State>, IServerTickableComponent<GeothermalExchangerLogic.State>, IClientTickableComponent<GeothermalExchangerLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2,5,1);
@@ -69,6 +67,11 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(1,4,1, RelativeBlockFace.UP);
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(3,5,0, RelativeBlockFace.UP);
     public static final int TANK_VOLUME = 8 * FluidType.BUCKET_VOLUME;
+
+    private static final int PROCESSING_INTERVAL = 20;
+    private static final int GRID_WIDTH = 5;
+    private static final int GRID_DEPTH = 3;
+    private static final float HEAT_LERP_FACTOR = 0.1f;
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -95,134 +98,120 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         }
     }
 
-    int tickCounter = 0;
-    int slowestCoolrate = 6546;
-    int currentCoolrate = slowestCoolrate;
+    int ticks = 0;
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         final State state = context.getState();
-        IMultiblockLevel multiblockLevel = context.getLevel();
-        Level rawLevel = multiblockLevel.getRawLevel();
-        Vec3i size = IGGeothermalExchangerMultiblock.INSTANCE.getSize(rawLevel);
-        boolean wasActive = state.isActive;
-        boolean isActive = state.rsState.isEnabled(context);
-        state.isActive = isActive;
+        final IMultiblockLevel multiblockLevel = context.getLevel();
+        final Level rawLevel = multiblockLevel.getRawLevel();
+        final Vec3i size = IGGeothermalExchangerMultiblock.INSTANCE.getSize(rawLevel);
 
-        if(transitionPlanes.isEmpty() || wasActive != isActive) {
-            state.display_heat = (float) convertToDisplayHeat(state.heat);
+        updateActiveState(state, context, size, multiblockLevel);
+
+        if (state.isActive) {
+            processActiveState(state, context, multiblockLevel, rawLevel);
         }
 
-        updateMultiblockHeatStates(state, size, multiblockLevel);
-        setupTransitionPlanes(multiblockLevel);
-        GeothermalHeatHelper.HeatData heatData = state.heatData;
-
-        state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
-        boolean newRecipe = tryRunRecipe(state, context.getLevel().getRawLevel());
-        if(newRecipe) updateMultiblockHeatStates(state, size, multiblockLevel);
-        boolean runningRecipe = false;
-        if(state.processor.getQueueSize() > 0 &&
-                state.cachedRecipe.get() != null &&
-                state.additionalCanProcessCheck(state.processor.getQueue().get(0), multiblockLevel.getRawLevel()))
-        {
-            heatData = GeothermalHeatHelper.processRecipeHeatEffects(state.cachedRecipe.get(), heatData, transitionPlanes, multiblockLevel);
-            runningRecipe = true;
-        }
-
-        if (isActive) {
-            tickCounter++;
-            int refresh = tickCounter % currentCoolrate;
-            if(runningRecipe)
-            {
-                float refreshPercent = (float)tickCounter/ currentCoolrate;
-                state.cooling_rate = ((Mth.lerp(0.1f, state.cooling_rate, refreshPercent)));
-                state.cooling_rate = Math.min(1, state.cooling_rate);
-                state.cooling_rate = Math.max(state.cooling_rate, 0);
-            }
-            int entropyScore = getEntropyScore(rawLevel, multiblockLevel, heatData.machineHeat);
-            boolean isCooling = false;
-            if(state.cachedRecipe.get() != null) isCooling = state.cachedRecipe.get().isCooling();
-            heatData = GeothermalHeatHelper.updateMachineTemperature(transitionPlanes, multiblockLevel, heatData, isCooling);
-            if(refresh == 0) {
-                heatData = GeothermalHeatHelper.processBlockConversions(transitionPlanes, multiblockLevel, heatData);
-                updateMultiblockHeatStates(state, size, multiblockLevel);
-
-                tickCounter = 0;
-                float t = ((float)(12 + entropyScore) / 148);
-                currentCoolrate = (int)(t * slowestCoolrate);
-
-                context.markMasterDirty();
-                context.requestMasterBESync();
-            }
-        }
-
-        state.heatData = GeothermalHeatHelper.syncToMachineState(heatData, state);
-        state.currentY = currentY;
-        state.display_heat = (float) Mth.lerp(0.1f, state.display_heat, convertToDisplayHeat(state.heat));
+        updateDisplayHeat(state);
         context.markDirtyAndSync();
     }
 
-    private double calculateTemperatureScore(double temperature) {
-        // Clamp temperature to valid range
-        temperature = Math.max(1.0, Math.min(3200.0, temperature));
+    private void updateActiveState(State state, IMultiblockContext<State> context, Vec3i size, IMultiblockLevel multiblockLevel) {
+        final boolean wasActive = state.isActive;
+        final boolean isActive = state.rsState.isEnabled(context);
+        state.isActive = isActive;
 
-        if (temperature <= 300.0) {
-            // For cold temperatures, use logarithmic scale to heavily favor extreme cold
-            // Score approaches 1.0 as temperature approaches 1K
-            double coldScore = Math.log(300.0 / temperature) / Math.log(300.0);
-            return Math.min(1.0, coldScore);
-        } else {
-            // For hot temperatures, use linear scale
-            // Score approaches 1.0 as temperature approaches 3200K
-            double hotScore = (temperature - 300.0) / (3200.0 - 300.0);
-            return Math.min(1.0, hotScore);
+        if (wasActive != isActive) {
+            syncBlockConversionData(state, size, multiblockLevel);
         }
     }
 
-    private int getEntropyScore(Level level, IMultiblockLevel multiblockLevel, int machineHeatKelvin)
-    {
-        double totalBlockHeat = 0;
-        int validBlocks = 0;
+    private void processActiveState(State state, IMultiblockContext<State> context, IMultiblockLevel multiblockLevel, Level rawLevel) {
+        state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
 
-        for (Map.Entry<Integer, List<BlockPos>> entry : transitionPlanes.entrySet()) {
-            List<BlockPos> plane = entry.getValue();
-            for (BlockPos relPos : plane) {
-                BlockPos absPos = multiblockLevel.toAbsolute(relPos);
-                BlockState state = level.getBlockState(absPos);
-                Block block = state.getBlock();
+        final boolean newRecipe = tryRunRecipe(state, multiblockLevel);
+        if (newRecipe) {
+            syncBlockConversionData(state, IGGeothermalExchangerMultiblock.INSTANCE.getSize(rawLevel), multiblockLevel);
+        }
 
-                GeothermalConversionRecipe recipe = GeothermalConversionRecipe.RECIPES.getRecipes(level).stream()
-                        .filter(r -> r.transitionBlock.get().equals(block))
-                        .findFirst()
-                        .orElse(null);
+        if (shouldProcessConversion(state, multiblockLevel)) {
+            processGeothermalConversion(state, multiblockLevel);
+        }
+    }
 
-                if (recipe != null) {
-                    totalBlockHeat += recipe.blockHeat;
-                    validBlocks++;
-                }
+    private boolean shouldProcessConversion(State state, IMultiblockLevel multiblockLevel) {
+        if (++ticks % PROCESSING_INTERVAL != 0) {
+            return false;
+        }
+        // Updates once a second (1 time every 20 ticks.)
+        ticks = 0;
+        state.heatHelper.setupRecipeData(multiblockLevel);
+        Level rawLevel = multiblockLevel.getRawLevel();
+        syncBlockConversionData(state, IGGeothermalExchangerMultiblock.INSTANCE.getSize(rawLevel), multiblockLevel);
+        final List<MultiblockProcess<GeothermalExchangerRecipe, ProcessContextInMachine<GeothermalExchangerRecipe>>> queue = state.processor.getQueue();
+        return !queue.isEmpty() &&
+                state.cachedRecipe.get() != null &&
+                state.additionalCanProcessCheck(queue.get(0), rawLevel);
+    }
+
+    private void processGeothermalConversion(State state, IMultiblockLevel multiblockLevel) {
+        final Level rawLevel = multiblockLevel.getRawLevel();
+        final GeothermalExchangerRecipe exchangerRecipe = state.cachedRecipe.get();
+        final GeothermalHeatHelper helper = state.heatHelper;
+        final MutableBlockPos localPos = new MutableBlockPos(0, state.currentY, 0);
+        int attempts = 0;
+        while(attempts < 66)
+        {
+            if(processConversionGrid(state, helper, multiblockLevel, rawLevel, localPos, exchangerRecipe))
+            {
+                syncBlockConversionData(state, IGGeothermalExchangerMultiblock.INSTANCE.getSize(rawLevel), multiblockLevel);
+                return;
             }
+            attempts++;
         }
-
-        if (validBlocks == 0) {
-            return 0;
-        }
-
-        double avgBlockTemp = totalBlockHeat / validBlocks;
-
-        double machineTempScore = calculateTemperatureScore(machineHeatKelvin);
-        double avgBlockTempScore = calculateTemperatureScore(avgBlockTemp);
-
-        double combinedTempScore = (machineTempScore + avgBlockTempScore) / 2.0;
-
-        double blockCountMultiplier = Math.min(1.0, validBlocks / 66.0);
-
-        int score = (int) Math.round(combinedTempScore * blockCountMultiplier * 148.0);
-
-        return Math.max(0, Math.min(148, score));
+        helper.clearMarks();
+        state.currentY = 4;
     }
 
-    private boolean tryRunRecipe(State state, Level rawLevel)
+    private boolean processConversionGrid(State state, GeothermalHeatHelper helper, IMultiblockLevel multiblockLevel,
+                                          Level rawLevel, MutableBlockPos localPos, GeothermalExchangerRecipe exchangerRecipe) {
+        GeothermalConversionRecipe recipe = helper.getRandomCellPosition(state, localPos);
+        if(recipe == null) return false;
+        if(!exchangerRecipe.isCooling() && recipe.blockHeat >= exchangerRecipe.fluidOutput.get().getRawFluid().getFluidType().getTemperature()) return processConversionCell(helper, multiblockLevel, rawLevel, localPos, exchangerRecipe);
+        return false;
+	}
+
+    private boolean processConversionCell(GeothermalHeatHelper helper, IMultiblockLevel multiblockLevel,
+                                          Level rawLevel, BlockPos localPos, GeothermalExchangerRecipe exchangerRecipe) {
+        GeothermalConversionRecipe conversionRecipe = helper.getRecipeFromCell(localPos);
+
+        if (conversionRecipe == null) {
+            return false;
+        }
+
+        if (exchangerRecipe.isCooling()) {
+            //TODO
+            return false;
+        }
+
+        final Block lowerTransition = conversionRecipe.lowerTransition;
+        if (lowerTransition == null) {
+            return false;
+        }
+
+        final BlockPos absolutePos = multiblockLevel.toAbsolute(localPos).below();
+        rawLevel.setBlock(absolutePos, lowerTransition.defaultBlockState(), 3);
+        helper.updateRecipeCell(multiblockLevel, localPos);
+        return true;
+    }
+
+    private void updateDisplayHeat(State state) {
+        state.display_heat = (float) Mth.lerp(HEAT_LERP_FACTOR, state.display_heat, convertToDisplayHeat(state.heat));
+    }
+
+    private boolean tryRunRecipe(State state, IMultiblockLevel multiblockLevel)
     {
-        if(transitionPlanes.isEmpty()) return false;
+        Level rawLevel = multiblockLevel.getRawLevel();
         if(state.energy_storage.getEnergyStored() <= 0 || state.processor.getQueueSize() >= state.processor.getMaxQueueSize()) return false;
 
         final FluidStack input = state.water_tank.getFluid();
@@ -235,15 +224,17 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         int drainAmount = recipe.fluidIn.getAmount();
         if(state.processor.addProcessToQueue(process, rawLevel, true) && drainSimulation == drainAmount)
         {
-            state.heatData.currentY = Collections.max(transitionPlanes.keySet());
             state.processor.addProcessToQueue(process, rawLevel, false);
             state.water_tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE).getAmount();
+            state.heatHelper.setupRecipeData(multiblockLevel);
+            state.currentY = 4;
             return true;
         }
         return false;
     }
 
-    private void updateMultiblockHeatStates(State state, Vec3i size, IMultiblockLevel multiblockLevel)
+    // Send data on the valid blocks to the GUI to show the blocks in the visualization.
+    private void syncBlockConversionData(State state, Vec3i size, IMultiblockLevel multiblockLevel)
     {
         int structureHeight = size.getY()-1;
         int structureLength = size.getX();
@@ -278,44 +269,6 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                     }
                 }
             }
-        }
-    }
-
-    Map<Integer, List<BlockPos>> transitionPlanes = new TreeMap<>(Comparator.reverseOrder());
-    int currentY = -256;
-    private void setupTransitionPlanes(IMultiblockLevel multiblockLevel)
-    {
-        transitionPlanes.clear();
-        Level rawLevel = multiblockLevel.getRawLevel();
-        Vec3i size = IGGeothermalExchangerMultiblock.INSTANCE.getSize(null);
-        int structureHeight = size.getY()-2;
-        int structureLength = size.getX();
-        int structureWidth = size.getZ();
-        MutableBlockPos cursor = new MutableBlockPos();
-        List<Block> validBlocks = GeothermalConversionRecipe.RECIPES.getRecipes(rawLevel).stream().map(r -> r.transitionBlock.get()).toList();
-
-        for(int h = -1; h < structureHeight; ++h)
-        {
-            for(int l = 0; l < structureLength; ++l)
-            {
-                for(int w = 0; w < structureWidth; ++w)
-                {
-                    cursor.set(l, h, w);
-                    BlockState relativeState = multiblockLevel.getBlockState(cursor);
-                    if(!(relativeState.getBlock() instanceof GeothermalPart))
-                    {
-                        relativeState = rawLevel.getBlockState(multiblockLevel.toAbsolute(cursor));
-                        if(validBlocks.contains(relativeState.getBlock()))
-                        {
-                            int y = cursor.getY();
-                            transitionPlanes.computeIfAbsent(y, k -> new ArrayList<>()).add(cursor.immutable());
-                        }
-                    }
-                }
-            }
-        }
-        if (!transitionPlanes.isEmpty()) {
-            currentY = transitionPlanes.keySet().iterator().next();
         }
     }
 
@@ -363,8 +316,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         private float cooling_rate;
         private float display_heat;
         private int heat;
-        private int accumulatedHeatExchange;
-        private int currentY;
+        public int currentY;
         private final StoredCapability<IFluidHandler> fInputCap;
         private final StoredCapability<IFluidHandler> fOutputCap;
         private final CapabilityReference<IFluidHandler> fluidOutput;
@@ -372,14 +324,11 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         private final Supplier<GeothermalExchangerRecipe> cachedRecipe;
 
         private final MultiblockProcessor.InMachineProcessor<GeothermalExchangerRecipe> dummy;
-        private GeothermalHeatHelper.HeatData heatData;
-
+        private final GeothermalHeatHelper heatHelper;
         public State(IInitialMultiblockContext<State> context) {
             this.energyCap = new StoredCapability<>(this.energy_storage);
-            this.heatData = GeothermalHeatHelper.fromMachineState(this, currentY);
             this.isActive = false;
-            this.accumulatedHeatExchange = 0;
-            this.currentY = 0;
+            this.currentY = 4;
             this.display_heat = 0;
             this.heat = 300;
             this.cooling_rate = 0;
@@ -392,6 +341,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(steam_tank, true, false, changedAndSync));
 
             Supplier<Level> getLevel = context.levelSupplier();
+            heatHelper = new GeothermalHeatHelper(getLevel);
             this.cachedRecipe = CachedRecipe.cached(GeothermalExchangerRecipe::findRecipe, getLevel, this.water_tank::getFluid);
             this.processor = new MultiblockProcessor<>(
                     1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById
@@ -411,7 +361,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         {
             GeothermalExchangerRecipe recipe = process.getRecipe(level);
             if(cachedRecipe != null && cachedRecipe.get() != null && !cachedRecipe.get().equals(recipe)) clearProcessor();
-			return recipe != null && (steam_tank.getFluid().isFluidEqual(recipe.fluidOutput.get()) || steam_tank.isEmpty()) && steam_tank.getSpace() >= recipe.fluidOutput.get().getAmount() && GeothermalHeatHelper.canProcessRecipe(recipe, heat);
+			return recipe != null && (steam_tank.getFluid().isFluidEqual(recipe.fluidOutput.get()) || steam_tank.isEmpty()) && steam_tank.getSpace() >= recipe.fluidOutput.get().getAmount();
         }
 
         @Override
@@ -471,7 +421,6 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                 GeothermalExchangerRecipe recipe = process.getRecipe(level);
                 if(recipe != null)
                 {
-                    heatData.machineHeat = recipe.fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature();
                     steam_tank.fill(recipe.fluidOutput.get(), FluidAction.EXECUTE);
                 }
             } catch(Exception error)
@@ -510,20 +459,9 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             this.heat = machineHeat;
         }
 
-        public void setAccumulatedHeatExchange(int accumulatedHeatExchange)
-        {
-            this.accumulatedHeatExchange = accumulatedHeatExchange;
-        }
-
-        public int getAccumulatedHeatExchange()
-        {
-            return this.accumulatedHeatExchange;
-        }
-
         public float getDisplayHeat()
         {
             return this.display_heat;
         }
     }
-
 }
