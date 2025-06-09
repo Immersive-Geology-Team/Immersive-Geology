@@ -79,6 +79,11 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN)
             .build();
 
+    public static final MultiblockRegistration<SteamTurbineLogic.State> STEAM_TURBINE = metal_skinnable(new SteamTurbineLogic(), "steam_turbine", false, SteamTurbinePart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("steam_turbine"))
+            .redstone(state -> state.rsState, SteamTurbineLogic.REDSTONE_IN)
+            .build();
+
     public static final MultiblockRegistration<GeothermalExchangerLogic.State> GEOTHERMAL_EXCHANGER = metal_skinnable(new GeothermalExchangerLogic(), "geothermal_exchanger", false, GeothermalPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("geothermal_exchanger"))
             .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)

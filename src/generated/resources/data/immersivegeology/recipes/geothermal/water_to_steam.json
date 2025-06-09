@@ -2,7 +2,7 @@
   "type": "immersivegeology:geothermal_exchanger",
   "energy": 25600,
   "fluidResult": {
-    "amount": 250,
+    "amount": 500,
     "fluid": "immersivegeology:fluid_steam"
   },
   "input": {
