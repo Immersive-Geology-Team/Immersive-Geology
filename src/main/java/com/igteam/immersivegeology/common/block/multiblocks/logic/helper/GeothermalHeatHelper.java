@@ -245,4 +245,34 @@ public class GeothermalHeatHelper
 				return recipe;
 		return null;
 	}
+
+	public @Nullable GeothermalConversionRecipe findCellWithHeat(boolean cooling, int outputTemp)
+	{
+		GeothermalConversionRecipe returnRecipe;
+		int temperature = 1;
+		for (int layer = 0; layer < LAYER_COUNT; layer++)
+		{
+			for(int x = 0; x < GRID_WIDTH; x++)
+			{
+				for(int y = 0; y < GRID_LENGTH; y++)
+				{
+					int id = data[layer][x][y]-1;
+					if(id < 0) continue;
+					returnRecipe = getRecipes().get(id);
+					if(returnRecipe==null) continue;
+					int blockHeat = returnRecipe.blockHeat;
+					if(cooling&&blockHeat <= outputTemp)
+					{
+						return returnRecipe;
+					}
+					if(!cooling&&blockHeat >= outputTemp)
+					{
+						return returnRecipe;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
 }

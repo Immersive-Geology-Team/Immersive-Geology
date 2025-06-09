@@ -378,8 +378,7 @@ public class IGRecipes extends RecipeProvider
 			}
 		}
 
-		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 250)).addInput(FluidTags.WATER, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/water_to_steam"));
-		GeothermalExchangerRecipeBuilder.builder(new FluidStack(Fluids.WATER, 250)).addInput(FluidTags.LAVA, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/lava_to_water_test"));
+		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 500)).addInput(FluidTags.WATER, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/water_to_steam"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium, MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);
