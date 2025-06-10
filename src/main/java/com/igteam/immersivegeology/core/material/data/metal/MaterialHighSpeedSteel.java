@@ -36,7 +36,7 @@ public class MaterialHighSpeedSteel extends MaterialMetalAlloy
         removeMaterialFlags(ItemCategoryFlags.values());
         removeMaterialFlags(BlockCategoryFlags.values());
         addFlags(BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_STAIRS, BlockCategoryFlags.SHEETMETAL_SLAB);
-        addFlags(ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET, BlockCategoryFlags.STORAGE_BLOCK, ItemCategoryFlags.DRILL_HEAD);
+        addFlags(ItemCategoryFlags.INGOT, ItemCategoryFlags.PLATE, ItemCategoryFlags.GEAR, ItemCategoryFlags.NUGGET, BlockCategoryFlags.STORAGE_BLOCK, ItemCategoryFlags.DRILL_HEAD);
     }
 
     @Override

@@ -57,7 +57,7 @@ public enum IGSteamTurbineSkins implements StringRepresentable, IIGMultiSkinHelp
 	@Override
 	public String multiblockName()
 	{
-		return "steam_punk";
+		return "steam_turbine";
 	}
 
 	@Override
