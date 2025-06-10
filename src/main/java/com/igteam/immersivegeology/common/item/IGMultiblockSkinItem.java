@@ -63,6 +63,14 @@ public class IGMultiblockSkinItem<T extends Enum<T> & IIGMultiSkinHelper & Strin
 	}
 
 	@Override
+	public int getColor(int index)
+	{
+		ChatFormatting col = skin.getColor();
+		if(col.getColor() == null) return 0xffffffff;
+		return index == 1 ? col.getColor() : 0xffffffff;
+	}
+
+	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
 	{
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

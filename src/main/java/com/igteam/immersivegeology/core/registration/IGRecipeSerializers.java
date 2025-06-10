@@ -38,7 +38,7 @@ public class IGRecipeSerializers
 		CrystallizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crystallizer", CrystallizerRecipeSerializer::new);
 		GravitySeparatorRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("gravity_separator", GravitySeparatorRecipeSerializer::new);
 		RevFurnaceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("reverberation_furnace", RevFurnaceRecipeSerializer::new);
-		RotaryKilnRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("rotarykiln", RotaryKilnRecipeSerializer::new);
+		RotaryKilnRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("rotary_kiln", RotaryKilnRecipeSerializer::new);
 		ChemicalRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("chemical_reactor", ChemicalRecipeSerializer::new);
 		CentrifugeRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("centrifuge", CentrifugeRecipeSerializer::new);
 		IndustrialSluiceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("industrial_sluice", IndustrialSluiceRecipeSerializer::new);

@@ -86,7 +86,7 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 
 		getBuilder(RotaryKilnRenderer.TUBE_NAME)
 				.customLoader(ObjModelBuilder::begin)
-				.modelLocation(rl("models/block/multiblock/obj/rotarykiln/rotarykiln_tube.obj"))
+				.modelLocation(rl("models/block/multiblock/obj/rotary_kiln/rotary_kiln_tube.obj"))
 				.flipV(true)
 				.end();
 

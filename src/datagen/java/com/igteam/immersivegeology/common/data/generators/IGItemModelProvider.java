@@ -143,22 +143,8 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
     private void generateGenericSkinItem(IGMultiblockSkinItem<?> item){
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getRegistryName()).getPath();
-
-        try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-            withExistingParent(itemLocation, parentLocation).texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()));
-
-            if(item.getMaterial(MaterialTexture.overlay) != null) {
-                getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
-            }
-        } catch (Exception ex) {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-            withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
-
-            if(item.getMaterial(MaterialTexture.overlay) != null) {
-                getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
-            }
-        }
+        ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/skin_component_base");
+        withExistingParent(itemLocation, parentLocation);
     }
 
     private void generateToolItem(IGFlagItem item){

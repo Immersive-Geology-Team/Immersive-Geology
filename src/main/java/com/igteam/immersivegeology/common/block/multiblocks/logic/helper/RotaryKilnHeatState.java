@@ -76,7 +76,6 @@ public enum RotaryKilnHeatState
 					float targetHeat = state.getTargetHeat();
 
 					int energyCostToRaiseHeat = (int) (energyCostForHeat(currentHeat) * 0.9f);
-
 					if(energy > energyCostToRaiseHeat)
 					{
 						state.total_energy.extractEnergy(energyCostToRaiseHeat, false);
@@ -97,7 +96,7 @@ public enum RotaryKilnHeatState
 					int energy = state.total_energy.getEnergyStored();
 					float currentHeat = state.getHeat();
 					int processing = state.getProcessorQueue().size();
-					int energyCostToRaiseHeat = (int) (energyCostForHeat(currentHeat) * 0.25f);
+					int energyCostToRaiseHeat = (int) (energyCostForHeat(currentHeat) * 0.9f);
 
 					if(energy > energyCostToRaiseHeat)
 					{

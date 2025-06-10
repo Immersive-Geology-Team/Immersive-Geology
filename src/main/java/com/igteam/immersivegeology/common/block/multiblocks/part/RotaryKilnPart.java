@@ -20,11 +20,11 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 public class RotaryKilnPart extends SkinableMultiblockPart<RotaryKilnLogic.State, IGRotaryKilnSkins>
 {
 	public static final EnumProperty<IGRotaryKilnSkins> ROTARYKILN =
-			EnumProperty.create("rotarykiln", IGRotaryKilnSkins.class);
+			EnumProperty.create("rotary_kiln", IGRotaryKilnSkins.class);
 
 	public RotaryKilnPart(Properties props, MultiblockRegistration<RotaryKilnLogic.State> reg)
 	{
-		super(props, reg, ROTARYKILN, IGRotaryKilnSkins.class, "block/multiblock/rotarykiln/");
+		super(props, reg, ROTARYKILN, IGRotaryKilnSkins.class, "block/multiblock/rotary_kiln/");
 	}
 	
 	@Override

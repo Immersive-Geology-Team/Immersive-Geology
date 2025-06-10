@@ -229,7 +229,7 @@ public abstract class IGRecipeMethod
 				case SYNTHESIS -> {return IGLib.makeTextureLocation("manual/refinery");}
 				case MIXING -> {return IGLib.makeTextureLocation("manual/mixer");}
 				case ARC_SMELTING -> {return IGLib.makeTextureLocation("manual/arc_furnace");}
-				case CALCINATION -> {return IGLib.makeTextureLocation("manual/rotarykiln");}
+				case CALCINATION -> {return IGLib.makeTextureLocation("manual/rotary_kiln");}
 				case BASIC_SMELTING -> {return IGLib.makeTextureLocation("manual/furnace");}
 				case CENTRIFUGE -> {return IGLib.makeTextureLocation("manual/centrifuge");}
 				case REFINING -> {return IGLib.makeTextureLocation("manual/ballmill");}

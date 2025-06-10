@@ -106,8 +106,8 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 			pose.pushPose();
 
 			pose.translate(4.5, 3.5, 0);
-			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-			pose.mulPose(new Quaternionf().rotateAxis(-(this.menu.heat.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.mulPose(new Quaternionf().rotateAxis(0*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.mulPose(new Quaternionf().rotateAxis(-(160 * this.menu.display_heat.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.translate(-4.5, -3.5, 0);
 			graphics.blit(TEXTURE, 0, 0, 65, 187, 32, 7);
 			pose.popPose();
@@ -115,12 +115,12 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 		pose.popPose();
 		pose.pushPose();
 		{
-			pose.translate(leftPos+28, topPos+56, 0);
+			pose.translate(leftPos+29, topPos+56, 0);
 			pose.pushPose();
 
 			pose.translate(4.5, 3.5, 0);
-			pose.mulPose(new Quaternionf().rotateAxis(75*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-			pose.mulPose(new Quaternionf().rotateAxis((this.menu.cooling_rate.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.mulPose(new Quaternionf().rotateAxis(92*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.mulPose(new Quaternionf().rotateAxis((170 * menu.cooling_rate.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 			pose.translate(-4.5, -3.5, 0);
 			graphics.blit(TEXTURE, 0,0, 65, 187, 32, 7);
 			pose.popPose();
@@ -245,7 +245,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 								blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
 								pose.popPose();
 							}
-							if(!heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY))
+							if(!heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY) && heatBlock.defaultBlockState().getFluidState().isSource())
 							{
 								pose.pushPose();
 								Fluid fluid = heatBlock.defaultBlockState().getFluidState().getType();

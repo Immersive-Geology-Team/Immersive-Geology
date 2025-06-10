@@ -1,5 +1,5 @@
 {
-  "type": "immersivegeology:rotarykiln",
+  "type": "immersivegeology:rotary_kiln",
   "heat": 75,
   "input": {
     "tag": "forge:compound_dust/uranium"

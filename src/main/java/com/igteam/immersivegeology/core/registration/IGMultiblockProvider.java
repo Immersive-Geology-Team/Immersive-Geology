@@ -23,8 +23,8 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, CrystallizerLogic.REDSTONE_IN)
             .build();
 
-    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotarykiln", false, RotaryKilnPart::new)
-            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotarykiln"))
+    public static final MultiblockRegistration<RotaryKilnLogic.State> ROTARYKILN = metal_skinnable(new RotaryKilnLogic(), "rotary_kiln", false, RotaryKilnPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("rotary_kiln"))
             .redstone(state -> state.rsState, RotaryKilnLogic.REDSTONE_IN)
             .gui(IGMenuTypes.ROTARY_KILN)
             .build();
@@ -77,6 +77,11 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<PelletizerLogic.State> PELLETIZER = metal_skinnable(new PelletizerLogic(), "pelletizer", false, PelletizerPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("pelletizer"))
             .redstone(state -> state.rsState, PelletizerLogic.REDSTONE_IN)
+            .build();
+
+    public static final MultiblockRegistration<SteamTurbineLogic.State> STEAM_TURBINE = metal_skinnable(new SteamTurbineLogic(), "steam_turbine", false, SteamTurbinePart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("steam_turbine"))
+            .redstone(state -> state.rsState, SteamTurbineLogic.REDSTONE_IN)
             .build();
 
     public static final MultiblockRegistration<GeothermalExchangerLogic.State> GEOTHERMAL_EXCHANGER = metal_skinnable(new GeothermalExchangerLogic(), "geothermal_exchanger", false, GeothermalPart::new)

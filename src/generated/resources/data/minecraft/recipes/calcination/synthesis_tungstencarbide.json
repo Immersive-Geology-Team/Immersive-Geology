@@ -1,5 +1,5 @@
 {
-  "type": "immersivegeology:rotarykiln",
+  "type": "immersivegeology:rotary_kiln",
   "heat": 165,
   "input": {
     "tag": "forge:powders/tungstencarbide"

@@ -13,8 +13,8 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraftforge.fluids.FluidType.Properties;
 
 import java.util.function.BiFunction;
 
@@ -33,5 +33,12 @@ public class MaterialSteam extends MaterialMisc
 	protected BiFunction<IFlagType<?>, Integer, Integer> materialColorFunction()
 	{
 		return (flag, integer) -> (0x77ffffff);
+	}
+
+	@Override
+	public Properties getFluidProperties(IFlagType<?> flag)
+	{
+		// Temperature is in Kelvin, this steam is "Low Pressure"
+		return super.getFluidProperties(flag).temperature(500);
 	}
 }

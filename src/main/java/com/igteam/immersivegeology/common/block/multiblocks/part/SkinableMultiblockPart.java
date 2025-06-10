@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMul
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMultiSkinBlock;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Machines.MachineConfig;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -100,43 +101,50 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 			IGTemplateMultiblock template,
 			Enum<?> skinValue
 	) {
-		Block block = template.getBlock();
-		if (!(block instanceof IMultiSkinBlock<?> raw)) return false;
-		IMultiSkinBlock<T> skinnable = (IMultiSkinBlock<T>) raw;
+		try {
+			Block block = template.getBlock();
+			if (!(block instanceof IMultiSkinBlock<?> raw)) return false;
+			IMultiSkinBlock<T> skinnable = (IMultiSkinBlock<T>) raw;
 
-		EnumProperty<T> prop = skinnable.getSkinProperty();
-		Level rawLevel = level.getRawLevel();
-		MutableBlockPos realPos = new MutableBlockPos();
-		for (StructureTemplate.StructureBlockInfo info : template.getStructure(level.getRawLevel())) {
-			BlockPos pos = info.pos();
-			BlockState current = level.getBlockState(pos);
-			if (!current.is(block)) continue;
+			EnumProperty<T> prop = skinnable.getSkinProperty();
+			Level rawLevel = level.getRawLevel();
+			MutableBlockPos realPos = new MutableBlockPos();
+			for (StructureTemplate.StructureBlockInfo info : template.getStructure(level.getRawLevel())) {
+				BlockPos pos = info.pos();
+				BlockState current = level.getBlockState(pos);
+				if (!current.is(block)) continue;
 
-			BlockPos wpos = level.toAbsolute(pos);
-			rawLevel.addParticle(
-					ParticleTypes.POOF,
-					wpos.getX()+0.5f, wpos.getY()+0.5f, wpos.getZ()+0.5f,
-					0, 0.0625, 0);
+				BlockPos wpos = level.toAbsolute(pos);
+				rawLevel.addParticle(
+						ParticleTypes.POOF,
+						wpos.getX()+0.5f, wpos.getY()+0.5f, wpos.getZ()+0.5f,
+						0, 0.0625, 0);
 
-			realPos.set(wpos);
-			Optional<Value<T>> value = prop.getAllValues().filter(p -> p.value().equals(skinValue)).findFirst();
-			if(value.isEmpty()) continue;
+				realPos.set(wpos);
+				Optional<Value<T>> value = prop.getAllValues().filter(p -> p.value().equals(skinValue)).findFirst();
+				if(value.isEmpty()) continue;
 
-			if(current.getValue(prop).equals(skinValue))
-			{
-				Class<T> skinClass = (Class<T>)skinValue.getDeclaringClass();
-				String multiblock = skinClass.getEnumConstants()[0].multiblockName();
-				MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
-				int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
-				if(skinClass.getEnumConstants()[skin_ordinal].equals(skinValue)) return false;
-				BlockState state = current.setValue(prop, skinClass.getEnumConstants()[skin_ordinal]);
-				rawLevel.setBlock(realPos, state, 67);
-				continue;
+				if(current.getValue(prop).equals(skinValue))
+				{
+					Class<T> skinClass = (Class<T>)skinValue.getDeclaringClass();
+					String multiblock = skinClass.getEnumConstants()[0].multiblockName();
+					MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
+					int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
+					if(skinClass.getEnumConstants()[skin_ordinal].equals(skinValue)) return false;
+					BlockState state = current.setValue(prop, skinClass.getEnumConstants()[skin_ordinal]);
+					rawLevel.setBlock(realPos, state, 67);
+					continue;
+				}
+				BlockState updated = current.setValue(prop, value.get().value());
+				// Flag designed to trip the moved by piston and perform update flags.
+				rawLevel.setBlock(realPos, updated, 67);
 			}
-			BlockState updated = current.setValue(prop, value.get().value());
-			// Flag designed to trip the moved by piston and perform update flags.
-			rawLevel.setBlock(realPos, updated, 67);
+		} catch(Exception error)
+		{
+			IGLib.IG_LOGGER.warn("Failed to update Multiblock Skin, please send this error report to the IG discord or IG Github Issues!");
+			IGLib.IG_LOGGER.error("Error Message: {}", error.getMessage());
 		}
+
 		return true;
 	}
 }
