@@ -17,6 +17,9 @@ The mod requires Immersive Engineering for the appropriate Minecraft Version<br/
 If you want to help us out, you can donate with Liberapay!<br>
 <noscript><a href="https://liberapay.com/Immersive-Geology/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 
+**All IG asset files (textures, models) are ALL RIGHTS RESERVED**<br>
+**Code files are under the GNU LESSER GENERAL PUBLIC LICENSE**
+
 ### Mod Authors and Contributors ###
 > [CrimsonTwilight](https://www.curseforge.com/members/crimsontwilight): Team Immersive Geology Founder, Texture Artist and Developer<br/>
 > [Muddykats](https://www.curseforge.com/members/muddykats): Lead Immersive Geology Developer <br/>
