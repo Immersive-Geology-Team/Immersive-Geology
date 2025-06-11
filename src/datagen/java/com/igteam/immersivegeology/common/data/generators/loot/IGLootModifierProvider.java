@@ -48,6 +48,7 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 				IGChemicalReactorSkins.LEGACY.getItem(),
 				IGRevFurnaceSkins.LEGACY.getItem(),
 				IGGravitySeparatorSkins.LEGACY.getItem(),
+				IGGravitySeparatorSkins.STEAMPUNK.getItem(),
 				IGRotaryKilnSkins.LEGACY.getItem(),
 				IGPelletizerSkins.LEGACY.getItem()
 		)));

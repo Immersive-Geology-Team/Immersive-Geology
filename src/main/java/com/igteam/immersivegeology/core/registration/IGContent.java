@@ -160,6 +160,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "ballmill");
         multiblockEntry(instance, multiblock_category, "centrifuge");
         multiblockEntry(instance, multiblock_category, "pelletizer");
+        multiblockEntry(instance, multiblock_category, "steam_turbine");
 
         // Build the manual entry for the contributors
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "getting_started"));

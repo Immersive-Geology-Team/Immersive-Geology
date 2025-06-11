@@ -1,6 +1,8 @@
 {
   "values": [
     "immersivegeology:ingot_highspeedsteel",
+    "immersivegeology:gear_highspeedsteel",
+    "immersivegeology:plate_highspeedsteel",
     "immersivegeology:nugget_highspeedsteel",
     "immersivegeology:drill_head_highspeedsteel"
   ]

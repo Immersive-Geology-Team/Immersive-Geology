@@ -21,7 +21,7 @@ public class IGSteamTurbineMultiblock extends IGTemplateMultiblock
 	public static final IGSteamTurbineMultiblock INSTANCE = new IGSteamTurbineMultiblock();
 	public IGSteamTurbineMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/steam_turbine"), new BlockPos(1, 0, 1), new BlockPos(1,2,5), new BlockPos(14,8,7), IGMultiblockProvider.STEAM_TURBINE);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/steam_turbine"), new BlockPos(2, 0, 2), new BlockPos(0,1,5), new BlockPos(13,8,7), IGMultiblockProvider.STEAM_TURBINE);
 	}
 
 	@Override

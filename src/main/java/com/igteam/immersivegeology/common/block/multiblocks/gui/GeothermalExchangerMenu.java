@@ -90,7 +90,7 @@ public class GeothermalExchangerMenu extends IEContainerMenu
 
 	public static GeothermalExchangerMenu makeClient(MenuType<?> type, int id, Inventory invPlayer)
 	{
-		return new GeothermalExchangerMenu(clientCtx(type, id), invPlayer,new FluidTank[]{new FluidTank(8000),new FluidTank(8000)}, new MutableEnergyStorage(GeothermalExchangerLogic.ENERGY_CAPACITY), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(new byte[66]));
+		return new GeothermalExchangerMenu(clientCtx(type, id), invPlayer,new FluidTank[]{new FluidTank(GeothermalExchangerLogic.TANK_VOLUME),new FluidTank(GeothermalExchangerLogic.TANK_VOLUME)}, new MutableEnergyStorage(GeothermalExchangerLogic.ENERGY_CAPACITY), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(0f), GetterAndSetter.standalone(new byte[66]));
 	}
 
 	private GeothermalExchangerMenu(MenuContext ctx, Inventory inventoryPlayer, FluidTank[] tanks, MutableEnergyStorage energy_storage, GetterAndSetter<Float> heat, GetterAndSetter<Float> cooling_rate, GetterAndSetter<byte[]> blockMapData)

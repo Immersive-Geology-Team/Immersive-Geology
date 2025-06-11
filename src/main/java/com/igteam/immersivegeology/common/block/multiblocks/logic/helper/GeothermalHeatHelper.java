@@ -10,20 +10,21 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.GeothermalExchangerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalConversionRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class GeothermalHeatHelper
@@ -34,7 +35,7 @@ public class GeothermalHeatHelper
 	private static final int EMPTY_VALUE = 0;
 
 	private final boolean[][][] markedCells;
-	private final byte[][][] data;
+	private byte[][][] data;
 	private final Supplier<Level> level;
 	private List<GeothermalConversionRecipe> cachedRecipes;
 	private final Random random;
@@ -274,5 +275,71 @@ public class GeothermalHeatHelper
 		}
 
 		return null;
+	}
+
+	public void fromNBT(CompoundTag tag)
+	{
+		CompoundTag nbt = tag.getCompound("helper");
+		byte[] flatData = nbt.getByteArray("data");
+		data = reconstruct3DArray(flatData, LAYER_COUNT, GRID_WIDTH, GRID_LENGTH);
+		clearMarks();
+		cachedRecipes = null;
+	}
+
+	public Tag toNBT()
+	{
+		CompoundTag tag_data = new CompoundTag();
+		byte[] flatData = flatten3DArray(data);
+		tag_data.putByteArray("data", flatData);
+
+		return tag_data;
+	}
+
+	public static byte[] flatten3DArray(byte[][][] array3D) {
+		if (array3D == null || array3D.length == 0) {
+			return new byte[0];
+		}
+
+		int dim1 = array3D.length;
+		int dim2 = array3D[0].length;
+		int dim3 = array3D[0][0].length;
+
+		int totalDataSize = dim1 * dim2 * dim3;
+		byte[] result = new byte[totalDataSize];
+
+		int index = 0;
+		for (int i = 0; i < dim1; i++) {
+			for (int j = 0; j < dim2; j++) {
+				for (int k = 0; k < dim3; k++) {
+					result[index++] = array3D[i][j][k];
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Reconstructs a 3D byte array from a flattened 1D byte array
+	 */
+	public static byte[][][] reconstruct3DArray(byte[] flatArray, int dim1, int dim2, int dim3) {
+		if (flatArray == null || dim1 == 0 || dim2 == 0 || dim3 == 0) {
+			return new byte[0][0][0];
+		}
+
+		// Create the 3D array
+		byte[][][] result = new byte[dim1][dim2][dim3];
+
+		// Fill the array
+		int index = 0;
+		for (int i = 0; i < dim1; i++) {
+			for (int j = 0; j < dim2; j++) {
+				for (int k = 0; k < dim3; k++) {
+					result[i][j][k] = flatArray[index++];
+				}
+			}
+		}
+
+		return result;
 	}
 }

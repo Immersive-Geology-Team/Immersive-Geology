@@ -378,10 +378,14 @@ public class IGRecipes extends RecipeProvider
 			}
 		}
 
-		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 500)).addInput(FluidTags.WATER, 250).setTime(200).setEnergy(25600).build(consumer, IGLib.rl("geothermal/water_to_steam"));
+		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 50)).addInput(FluidTags.WATER, 25).setTime(20).setEnergy(2560).build(consumer, IGLib.rl("geothermal/water_to_steam"));
 	}
 
-	private static final List<MetalEnum> plates_and_rods_to_register = List.of(MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium, MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium, MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);
+	private static final List<MetalEnum> plates_and_rods_to_register = List.of(
+			MetalEnum.HighSpeedSteel, MetalEnum.Thorium, MetalEnum.Titanium, MetalEnum.Hastelloy, MetalEnum.Unobtanium,
+			MetalEnum.Vanadium, MetalEnum.Zirconium, MetalEnum.TungstenCarbide, MetalEnum.Manganese, MetalEnum.Chromium,
+			MetalEnum.Magnesium, MetalEnum.Molybdenum, MetalEnum.StainlessSteel, MetalEnum.Neodymium);
+
 	private static final List<MetalEnum> wires_to_register = List.of(MetalEnum.Neodymium, MetalEnum.Titanium, MetalEnum.TungstenCarbide);
 
 	private void tfcCompatRecipes(Consumer<FinishedRecipe> consumer)
@@ -411,6 +415,7 @@ public class IGRecipes extends RecipeProvider
 		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1100, null, Pair.of(Blocks.MAGMA_BLOCK, 900)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.OBSIDIAN, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
+		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 21).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
